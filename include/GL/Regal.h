@@ -40,6 +40,8 @@
 #ifndef __REGAL_DECLARATIONS_H
 #define __REGAL_DECLARATIONS_H
 
+
+
 #if _WIN32
 # if defined(PPAPI)
 #  ifndef REGAL_SYS_PPAPI
@@ -116,6 +118,8 @@
 #define GLAPIENTRY REGAL_CALL
 #endif
 
+
+
 #ifdef _WIN32
 #  if REGAL_DECL_EXPORT
 #    define REGAL_DECL
@@ -145,13 +149,40 @@
 
 /* Skip OpenGL API if another header was included first. */
 
-#if !defined(__gl_h_) && !defined(__GL_H__) && !defined(__X_GL_H) && !defined(__gl2_h_) && !defined(__glext_h_) && !defined(__GLEXT_H_) && !defined(__gl_ATI_h_) && !defined(_OPENGL_H)
+//#ifdef __gl_h_
+//#pragma message("__gl_h already defined")
+//#endif
+//#ifdef __GL_H__
+//#pragma message("__GL_H already defined")
+//#endif
+//#ifdef __X_GL_H
+//#pragma message("__X_GL_H already defined")
+//#endif
+//#ifdef __gl2_h_
+//#pragma message("__gl2_h already defined")
+//#endif
+//#ifdef __GLEXT_H_
+//#pragma message("__GLEXT_H already defined")
+//#endif
+//#ifdef __gl_ATT_H_
+//#pragma message("__gl_ATT_H_ already defined")
+//#endif
+//#ifdef _OPENGL_H
+//#pragma message("_OPENGL_H already defined")
+//#endif
+
+//#if !defined(__gl_h_) && !defined(__GL_H__) && !defined(__X_GL_H) && !defined(__gl2_h_) && !defined(__glext_h_) && !defined(__GLEXT_H_) && !defined(__gl_ATI_h_) && !defined(_OPENGL_H)
+// temporarily removed __glext_h_, kwaak3 is defining it to avoid glext.h to be
+// included.
+#if !defined(__gl_h_) && !defined(__GL_H__) && !defined(__X_GL_H) && !defined(__gl2_h_) && !defined(__GLEXT_H_) && !defined(__gl_ATI_h_) && !defined(_OPENGL_H)
 
 #define __gl_h_
 #define __gl2_h_
 #define __GL_H__
 #define __X_GL_H
+#ifndef __glext_h_
 #define __glext_h_
+#endif
 #define __GLEXT_H_
 #define __gl_ATI_h_
 #define _OPENGL_H
@@ -35801,7 +35832,7 @@ REGAL_DECL void RegalShareContext(RegalSystemContext ctx, RegalSystemContext oth
  */
 
 #if REGAL_SYS_PPAPI
-REGAL_DECL void RegalMakeCurrent( RegalSystemContext ctx, struct PPB_OpenGLES2 *interface );
+REGAL_DECL void RegalMakeCurrent( RegalSystemContext ctx, struct PPB_OpenGLES2 *ppb_interface );
 #else
 REGAL_DECL void RegalMakeCurrent( RegalSystemContext ctx );
 #endif
