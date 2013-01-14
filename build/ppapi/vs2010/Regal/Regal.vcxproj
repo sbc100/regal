@@ -55,9 +55,9 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\Win32\Regal\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\Win32\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\Win32\Regal\</IntDir>
-    <NaClAddInVersion Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">1.0.1449</NaClAddInVersion>
+    <NaClAddInVersion Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">1</NaClAddInVersion>
     <ExecutablePath Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(VCInstallDir)bin;$(WindowsSdkDir)bin\NETFX 4.0 Tools;$(WindowsSdkDir)bin;$(VSInstallDir)Common7\Tools\bin;$(VSInstallDir)Common7\tools;$(VSInstallDir)Common7\ide;$(ProgramFiles)\HTML Help Workshop;$(FrameworkSDKDir)\bin;$(MSBuildToolsPath32);$(VSInstallDir);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
-    <NaClAddInVersion Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">1.0.1449</NaClAddInVersion>
+    <NaClAddInVersion Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">1</NaClAddInVersion>
     <ExecutablePath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VCInstallDir)bin;$(WindowsSdkDir)bin\NETFX 4.0 Tools;$(WindowsSdkDir)bin;$(VSInstallDir)Common7\Tools\bin;$(VSInstallDir)Common7\tools;$(VSInstallDir)Common7\ide;$(ProgramFiles)\HTML Help Workshop;$(FrameworkSDKDir)\bin;$(MSBuildToolsPath32);$(VSInstallDir);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">win\$(Configuration)\Regal\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">win\$(Configuration)\Regal\</IntDir>
@@ -224,6 +224,7 @@
     <ClCompile Include="..\..\..\..\src\regal\RegalMarker.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalMarker.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalObj.h" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalPixelConversions.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPpa.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPpc.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPrecompile.h" />
@@ -236,10 +237,13 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalSo.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalState.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSystem.h" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalTexC.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalThread.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalTimer.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalPixelConversions.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalShaderCache.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalSo.cpp" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalTexC.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalToken.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalToken.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalUtil.cpp" />
@@ -251,6 +255,7 @@
   <ItemGroup>
     <None Include="..\..\..\..\include\GL\Regal.h" />
     <None Include="..\..\..\..\src\lookup3\lookup3.h" />
+    <None Include="..\..\..\..\src\regal\RegalPixelConversions.inl" />
     <None Include="..\..\..\..\src\regal\RegalPPAPI.def" />
   </ItemGroup>
   <ItemGroup>
