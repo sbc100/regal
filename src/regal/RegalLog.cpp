@@ -51,7 +51,7 @@ REGAL_GLOBAL_BEGIN
 
 // Otherwise we'd need to #include <windows.h>
 
-#if REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if defined(_WIN32) && !defined(__native_client__)
 extern "C"
 {
   __declspec(dllimport) void __stdcall OutputDebugStringA( __in_opt const char* lpOutputString);
@@ -86,7 +86,10 @@ namespace Logging {
   bool enableHttp     = true;
 
   int  maxLines  = (REGAL_LOG_MAX_LINES);
+  int  maxBytes  = (REGAL_LOG_MAX_BYTES);
   bool frameTime = false;
+  bool pointers  = (REGAL_LOG_POINTERS);
+  bool thread    = false;
   bool callback  = (REGAL_LOG_CALLBACK);
 
   bool         log          = (REGAL_LOG);
@@ -143,6 +146,9 @@ namespace Logging {
     const char *ml = GetEnv("REGAL_LOG_MAX_LINES");
     if (ml) maxLines = atoi(ml);
 
+    const char *mb = GetEnv("REGAL_LOG_MAX_BYTES");
+    if (mb) maxBytes = atoi(mb);
+
 #if REGAL_LOG_ONCE
     const char *lo = GetEnv("REGAL_LOG_ONCE");
     if (lo) once = atoi(lo)!=0;
@@ -150,6 +156,16 @@ namespace Logging {
 
     const char *tmp = GetEnv("REGAL_FRAME_TIME");
     if (tmp) frameTime = atoi(tmp)!=0;
+
+#if REGAL_LOG_POINTERS
+    const char *p = GetEnv("REGAL_LOG_POINTERS");
+    if (p) pointers = atoi(p)!=0;
+#endif
+
+#if REGAL_LOG_THREAD
+    const char *t = GetEnv("REGAL_LOG_THREAD");
+    if (t) thread = atoi(t)!=0;
+#endif
 
     const char *cb = GetEnv("REGAL_LOG_CALLBACK");
     if (cb) callback = atoi(cb)!=0;
@@ -238,6 +254,18 @@ namespace Logging {
 #if REGAL_LOG_STDOUT
     Info("REGAL_LOG_STDOUT   ", stdOut         ? "enabled" : "disabled");
 #endif
+
+#if REGAL_LOG_ONCE
+    Info("REGAL_LOG_ONCE     ", once           ? "enabled" : "disabled");
+#endif
+
+#if REGAL_LOG_POINTERS
+    Info("REGAL_LOG_POINTERS ", pointers       ? "enabled" : "disabled");
+#endif
+
+#if REGAL_LOG_THREAD
+    Info("REGAL_LOG_THREAD   ", thread         ? "enabled" : "disabled");
+#endif
   }
 
   void Cleanup()
@@ -281,8 +309,12 @@ namespace Logging {
   inline string message(const char *prefix, const char *delim, const char *name, const string &str)
   {
     static const char *trimSuffix = " ...";
-    std::string trimPrefix = print_string(prefix ? prefix : "", delim ? delim : "", string(indent(),' '), name ? name : "", ' ');
-    return print_string(trim(str.c_str(),'\n',maxLines>0 ? maxLines : ~0,trimPrefix.c_str(),trimSuffix), '\n');
+    string_list trimPrefix;
+    trimPrefix << print_string(prefix ? prefix : "",delim ? delim : "");
+    if (thread)
+      trimPrefix << print_string(hex(Thread::threadId()),delim ? delim : "");
+    trimPrefix << print_string(string(indent(),' '),name ? name : "",name ? " " : "");
+    return print_string(trim(str.c_str(),'\n',maxLines>0 ? maxLines : ~0,trimPrefix.str().c_str(),trimSuffix), '\n');
   }
 
   inline string jsonObject(const char *prefix, const char *name, const string &str)
@@ -398,7 +430,10 @@ namespace Logging {
       string m = message(prefix,delim,name,str);
 
       // TODO - optional Regal source line numbers.
-#if 0
+#if 1
+      UNUSED_PARAMETER(file);
+      UNUSED_PARAMETER(line);
+#else
       m = print_string(file,":",line," ",m);
 #endif
 

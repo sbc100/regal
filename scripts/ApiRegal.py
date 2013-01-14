@@ -34,19 +34,29 @@ helperMap = {
 
 def logParameter(function, parameter):
 
-  t = parameter.type
-  n = parameter.name
+  t = parameter.type   # Type
+  n = parameter.name   # Name
+  h = None             # Helper
 
-  # Use a cast, if necessary
+  # Apply the database specified cast, if necessary
 
   if parameter.cast != None:
     t = parameter.cast
     n = 'reinterpret_cast<%s>(%s)'%(t,n)
 
+  # Extract the name of the helper function, if possible
+  
+  if parameter.size!=None and (isinstance(parameter.size, str) or isinstance(parameter.size, unicode)) and parameter.size.find('helper')==0:
+    h = parameter.size.split('(')[0]
+    if h in helperMap:
+      h = helperMap[h]
+    else:
+      h = None
+
   # Quoting for array of strings
 
   quote = ''
-  if t == 'char **' or t == 'const char **' or t == 'GLchar **' or t == 'const GLchar **' or t == 'GLcharARB *' or t == 'LPCSTR *':
+  if t in [ 'char **','const char **','GLchar **' ,'const GLchar **','GLcharARB **','const GLcharARB **','LPCSTR *']:
     quote = ',"\\\""'
 
   if parameter.regalLog != None:
@@ -59,7 +69,7 @@ def logParameter(function, parameter):
     return 'EGLenumToString(%s)'%n
   elif t == 'GLboolean' or t == 'const GLboolean':
     return 'toString(%s)'%n
-  elif t == 'char *' or t == 'const char *' or t == 'GLchar *' or t == 'const GLchar *' or t == 'GLcharARB *' or t == 'LPCSTR':
+  elif t in [ 'char *','const char *','GLchar *' ,'const GLchar *','GLcharARB *','const GLcharARB *','LPCSTR']:
     return 'boost::print::quote(%s,\'"\')'%n
   elif parameter.size!=None and (isinstance(parameter.size,int) or isinstance(parameter.size, long)) and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1:
     return 'boost::print::array(%s,%s)'%(n,parameter.size)
@@ -67,20 +77,21 @@ def logParameter(function, parameter):
     return 'boost::print::array(%s,%s%s)'%(n,parameter.size,quote)
 #   elif parameter.size!=None and (isinstance(parameter.size,int) or isinstance(parameter.size, long) or isinstance(parameter.size, str) or isinstance(parameter.size, unicode)) and t=='const GLvoid *':
 #     return 'boost::print::raw(%s,%s)'%(n,parameter.size)
-  elif parameter.size!=None and (isinstance(parameter.size, str) or isinstance(parameter.size, unicode)) and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1 and parameter.size.find('helper')==0:
-    h = parameter.size.split('(')[0]
-    if h in helperMap:
-      return 'boost::print::array(%s,%s(%s%s)'%(n,helperMap[h],parameter.size.split('(',1)[1],quote)
-    else:
-      return n
+  elif parameter.size!=None and h!=None and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1:
+    return 'boost::print::array(%s,%s(%s%s)'%(n,h,parameter.size.split('(',1)[1],quote)
   elif t.startswith('GLDEBUG'):
     return None
   elif t.startswith('GLLOGPROC'):
     return None
   elif n=='data' and (function.name=='glBufferData' or function.name=='glBufferDataARB'):
-    return 'boost::print::raw(data,data ? size : 0)'
+    return 'boost::print::raw(data,Logging::rawLimit(data ? size : 0))'
   elif n=='data' and (function.name=='glBufferSubData' or function.name=='glBufferSubDataARB'):
-    return 'boost::print::raw(data,data ? size : 0)'
+    return 'boost::print::raw(data,Logging::rawLimit(data ? size : 0))'
+  elif t in [ 'void *', 'const void *', 'GLvoid *', 'const GLvoid *', 'GLubyte *', 'const GLubyte *'] or \
+    t in [ 'int *', 'const int *', 'GLint *', 'const GLint *' ] or \
+    t in [ 'XID', 'XVisualInfo *', 'Pixmap', 'Font', 'Display *', 'GLXDrawble', 'GLXPixmap', 'GLXContext', 'GLXVideoDeviceNV', 'GLXWindow', 'GLXPbuffer', 'GLXFBConfigID'] or \
+    t in [ 'EGLNativeWindowType', 'EGLNativePixmapType', 'EGLNativeDisplayType', 'EGLConfig', 'EGLContext', 'EGLDisplay', 'EGLSurface', 'EGLClientBuffer', 'EGLSyncKHR', 'EGLImageKHR', 'EGLStreamKHR', 'EGLSyncNV']:    
+    return 'boost::print::optional(%s,Logging::pointers)'%n
 
   return n
 

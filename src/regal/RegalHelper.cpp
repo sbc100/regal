@@ -310,7 +310,7 @@ pixelImage(GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum t
   /* TODO: Review later: Does texture "level" affect size? */
   /* TODO: Review later: Properly account for effects of glPixelStore. */
 
-  size_t numComponent = 0;
+  size_t numComponent = componentsPerPixel(format);
   size_t sizeElement  = 8; /* bits */
 
   size_t dataWidth  = 0;
@@ -354,61 +354,21 @@ pixelImage(GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum t
 #endif
   }
 
-  /* Compute number of components in each element. */
-
-  switch (format)
-  {
-    case GL_COLOR_INDEX:     numComponent = 1; break;
-    case GL_STENCIL_INDEX:   numComponent = 1; break;
-    case GL_DEPTH_COMPONENT: numComponent = 1; break;
-    case GL_RED:
-    case GL_GREEN:
-    case GL_BLUE:
-    case GL_ALPHA:           numComponent = 1; break;
-    case GL_INTENSITY:       numComponent = 1; break;
-    case GL_RGB:
-    case GL_BGR:             numComponent = 3; break;
-    case GL_RGBA:
-    case GL_BGRA:            numComponent = 4; break;
-    case GL_LUMINANCE:       numComponent = 1; break;
-    case GL_LUMINANCE_ALPHA: numComponent = 2; break;
-
-    default: break;
-  }
-
   /* Compute size of each element. */
+
+  sizeElement *= bytesPerComponent(type);
 
   switch (type)
   {
-    /* Each value is one component per element. */
-
-    case GL_UNSIGNED_BYTE:               sizeElement *= sizeof(GLubyte)  * numComponent; break;
-    case GL_BYTE:                        sizeElement *= sizeof(GLbyte)   * numComponent; break;
-    case GL_BITMAP:                      sizeElement *= sizeof(GLubyte)  * numComponent; break;
-    case GL_UNSIGNED_SHORT:              sizeElement *= sizeof(GLushort) * numComponent; break;
-    case GL_SHORT:                       sizeElement *= sizeof(GLshort)  * numComponent; break;
-    case GL_UNSIGNED_INT:                sizeElement *= sizeof(GLuint)   * numComponent; break;
-    case GL_INT:                         sizeElement *= sizeof(GLint)    * numComponent; break;
-    case GL_FLOAT:                       sizeElement *= sizeof(GLfloat)  * numComponent; break;
-
-    /* Each unsigned value contains all the components per element. */
-
-    case GL_UNSIGNED_BYTE_3_3_2:
-    case GL_UNSIGNED_BYTE_2_3_3_REV:     sizeElement *= sizeof(GLbyte);   break;
-
-    case GL_UNSIGNED_SHORT_5_6_5:
-    case GL_UNSIGNED_SHORT_5_6_5_REV:
-    case GL_UNSIGNED_SHORT_4_4_4_4:
-    case GL_UNSIGNED_SHORT_4_4_4_4_REV:
-    case GL_UNSIGNED_SHORT_5_5_5_1:
-    case GL_UNSIGNED_SHORT_1_5_5_5_REV:  sizeElement *= sizeof(GLushort); break;
-
-    case GL_UNSIGNED_INT_8_8_8_8:
-    case GL_UNSIGNED_INT_8_8_8_8_REV:
-    case GL_UNSIGNED_INT_10_10_10_2:
-    case GL_UNSIGNED_INT_2_10_10_10_REV: sizeElement *= sizeof(GLuint);   break;
-
-    default: break;
+    case GL_UNSIGNED_BYTE:      
+    case GL_BYTE:               
+    case GL_BITMAP:               
+    case GL_UNSIGNED_SHORT:     
+    case GL_SHORT:             
+    case GL_UNSIGNED_INT:     
+    case GL_INT:              
+    case GL_FLOAT:           sizeElement *= numComponent; break;
+    default:                                              break;
   }
 
   /* Special case: GL_BITMAP. */
@@ -692,16 +652,16 @@ namedStringParams(const GLenum pname)
 
 }
 
-/* Convert glShaderSource parameters into NULL-terminated array of NUL-terminated strings. */
+/* Convert glShaderSource parameters into NUL-terminated string. */
 
-const GLchar **
+char *
 shaderSourceStrings(const GLsizei count, const GLchar **string,  const GLint *length)
 {
-  size_t total;   /* Total size of copy (bytes)      */
-  GLchar **tmp;   /* Copy of string array            */
-  GLsizei i;      /* Input iterator                  */
-  GLchar *j;      /* Output iterator                 */
-  size_t  k;      /* Scratch space for string length */
+  size_t total;  /* Total size of copy (bytes)      */
+  char *tmp;     /* Copy of string array            */
+  GLsizei i;     /* Input iterator                  */
+  GLchar *j;     /* Output iterator                 */
+  size_t  k;     /* Scratch space for string length */
 
   if (count<=0)
     return NULL;
@@ -713,29 +673,26 @@ shaderSourceStrings(const GLsizei count, const GLchar **string,  const GLint *le
     total += length ? length[i] : (string[i] ? strlen(string[i]) : 0);
   total += count;                        /* One NUL-terminator per string */
   total *= sizeof(GLchar);
-  total += (count + 1)*sizeof(GLchar *); /* One GLchar pointer per string, plus NULL terminator */
+  total += 1;                            /*  NULL terminator */
 
   /* Do the allocation */
 
-  tmp = (GLchar **) malloc(total);
+  tmp = (char *) malloc(total);
 
   /* Copy the strings */
 
-  j = (GLchar *) (tmp + count + 1);
+  j = tmp;
   for (i=0; i<count; ++i)
   {
     k = length ? length[i] : (string[i] ? strlen(string[i]) : 0);
-    tmp[i] = j;
     memcpy(j,string[i],k);
     j += k;
-    *(j++) = '\0';
   }
+  *(j++) = '\0';
 
-  tmp[count] = NULL;
+  RegalAssert(tmp+total == j);
 
-  RegalAssert(((GLchar *) tmp) + total == j);
-
-  return (const GLchar **) tmp;
+  return tmp;
 }
 
 }

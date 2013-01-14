@@ -14,7 +14,14 @@ REGAL_DEST ?= /usr
 BINDIR     ?= $(REGAL_DEST)/bin
 LIBDIR     ?= $(REGAL_DEST)/lib
 
+# To build in debug mode:
+#   - use MODE=debug on gmake command-line
+#
+# To build using ccache (http://ccache.samba.org/)
+#   - use CCACHE=ccache on gmake command-line
+#
 # To disable stripping of binaries either:
+#   - use MODE=debug on gmake command-line
 #   - use STRIP= on gmake command-line
 #   - edit this makefile to set STRIP to the empty string
 #
@@ -23,6 +30,7 @@ LIBDIR     ?= $(REGAL_DEST)/lib
 #
 # To specify additional compiler flags:
 #   - use CFLAGS= on gmake command-line
+#
 
 AR      ?= ar
 INSTALL ?= install
@@ -30,22 +38,31 @@ STRIP   ?= strip
 RM      ?= rm -f
 LN      ?= ln -sf
 
-ifeq ($(MODE),debug)
-OPT = -g
-STRIP :=
-else
-OPT = $(POPT)
+# Release mode is the default
+
+ifeq ($(MODE),)
+MODE := release
 endif
+
+ifeq ($(MODE),debug)
+OPT = $(CFLAGS.DEBUG)
+STRIP :=
+endif
+
+ifeq ($(MODE),release)
+OPT = $(CFLAGS.RELEASE)
+endif
+
 INCLUDE = -Iinclude
 
-override CFLAGS := $(CFLAGS) $(OPT) $(WARN) $(INCLUDE) $(CFLAGS.EXTRA)
+override CFLAGS := $(OPT) $(CFLAGS) $(WARN) $(INCLUDE) $(CFLAGS.EXTRA)
 
-all: regal.lib glew.lib glu.lib glut.lib regal.bin
+all: regal.lib glew.lib glu.lib glut.lib regal.bin bin/regaltest
 
 # REGAL shared and static libraries
 
 export:
-	scripts/Export.py --api gl 4.2 --api wgl 4.0 --api glx 4.0 --api cgl 1.4 --api egl 1.0 --outdir src/regal
+	scripts/Export.py --api gl 4.2 --api wgl 4.0 --api glx 4.0 --api cgl 1.4 --api egl 1.0 --outdir .
 
 lib:
 	mkdir lib
@@ -93,7 +110,7 @@ zlib.lib: lib/$(ZLIB.STATIC)
 
 tmp/$(SYSTEM)/zlib/static/%.o: src/zlib/src/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(ZLIB.CFLAGS) $(PICFLAG) -o $@ -c $<
+	$(CCACHE) $(CC) $(ZLIB.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
 
 lib/$(ZLIB.STATIC): lib $(ZLIB.OBJS)
 	$(CCACHE) $(AR) cr $@ $(ZLIB.OBJS)
@@ -143,7 +160,7 @@ libpng.lib: zlib.lib lib/$(LIBPNG.STATIC)
 
 tmp/$(SYSTEM)/libpng/static/%.o: src/libpng/src/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(LIBPNG.CFLAGS) $(PICFLAG) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIBPNG.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
 
 lib/$(LIBPNG.STATIC): lib $(LIBPNG.OBJS)
 	$(CCACHE) $(AR) cr $@ $(LIBPNG.OBJS)
@@ -157,6 +174,8 @@ LIB.LDFLAGS        := -lstdc++ -lpthread -ldl -lm
 LIB.LIBS           := 
 
 LIB.SRCS           :=
+LIB.SRCS           += src/regal/RegalPixelConversions.cpp
+LIB.SRCS           += src/regal/RegalTexC.cpp
 LIB.SRCS           += src/regal/RegalIff.cpp
 LIB.SRCS           += src/regal/Regal.cpp
 LIB.SRCS           += src/regal/RegalToken.cpp
@@ -199,16 +218,54 @@ ifeq ($(filter -DREGAL_NO_MD5%,$(CFLAGS)),)
 LIB.SRCS           += src/md5/src/md5.c
 endif
 
-LIB.INCLUDE        += -Isrc/zlib/include -Isrc/libpng/include
-LIB.LIBS           += -Llib -lpng -lz
+LIB.SRCS           += src/jsonsl/jsonsl.c
+LIB.CFLAGS         += -DJSONSL_STATE_GENERIC=1
 
+LIB.INCLUDE        += -Isrc/zlib/include -Isrc/libpng/include
 LIB.INCLUDE        += -Isrc/mongoose
 LIB.INCLUDE        += -Isrc/md5/include
 LIB.INCLUDE        += -Isrc/lookup3
 
-LIB.SRCS.NAMES     := $(notdir $(LIB.SRCS))
+#
+# Add debug-specific flags
+#
+
+ifeq ($(MODE),debug)
+endif
+
+#
+# In release mode we're agressive about leaving out functionality
+# in order to minimize the footprint of libRegal.so.1
+#
+
+ifeq ($(MODE),release)
+LIB.CFLAGS         += -DNDEBUG
+LIB.CFLAGS         += -DREGAL_DECL_EXPORT=1
+LIB.CFLAGS         += -DREGAL_LOG=0
+LIB.CFLAGS         += -DREGAL_LOG_ALL=0
+LIB.CFLAGS         += -DREGAL_LOG_ONCE=0
+LIB.CFLAGS         += -DREGAL_LOG_JSON=0
+LIB.CFLAGS         += -DREGAL_NO_HTTP=1
+LIB.CFLAGS         += -DREGAL_NO_ASSERT=1
+LIB.CFLAGS         += -DREGAL_NO_PNG=1
+LIB.CFLAGS         += -fomit-frame-pointer
+LIB.CFLAGS         += -DREGAL_ERROR=0
+LIB.CFLAGS         += -DREGAL_DEBUG=0
+LIB.CFLAGS         += -DREGAL_CACHE=0
+LIB.CFLAGS         += -DREGAL_EMULATION=1    # 0 for "loader only"
+LIB.CFLAGS         += -DREGAL_NO_TLS=0       # 1 for single threaded
+endif
+
+#
+# Flags for custom mode
+#
+
+ifeq ($(MODE),custom)
+endif
 
 LIB.INCLUDE        += -Isrc/boost
+
+LIB.SRCS.NAMES     := $(notdir $(LIB.SRCS))
 
 LIB.DEPS           :=
 LIB.DEPS           += include/GL/Regal.h
@@ -220,6 +277,8 @@ LIB.OBJS           := $(LIB.OBJS:.cpp=.o)
 LIB.SOBJS          := $(addprefix tmp/$(SYSTEM)/regal/shared/,$(LIB.SRCS.NAMES))
 LIB.SOBJS          := $(LIB.SOBJS:.c=.o)
 LIB.SOBJS          := $(LIB.SOBJS:.cpp=.o)
+
+LIB.LIBS           += -Llib -lpng -lz
 
 ifneq ($(filter darwin%,$(SYSTEM)),)
 LIB.LDFLAGS        += -Wl,-reexport-lGLU -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries
@@ -248,27 +307,35 @@ endif
 
 tmp/$(SYSTEM)/regal/static/%.o: src/regal/%.cpp $(LIB.DEPS)
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/shared/%.o: src/regal/%.cpp $(LIB.DEPS)
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/static/%.o: src/mongoose/%.c $(LIB.DEPS)
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/shared/%.o: src/mongoose/%.c $(LIB.DEPS)
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/static/%.o: src/md5/src/%.c $(LIB.DEPS)
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/shared/%.o: src/md5/src/%.c $(LIB.DEPS)
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+
+tmp/$(SYSTEM)/regal/static/%.o: src/jsonsl/%.c $(LIB.DEPS)
+	@mkdir -p $(dir $@)
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+
+tmp/$(SYSTEM)/regal/shared/%.o: src/jsonsl/%.c $(LIB.DEPS)
+	@mkdir -p $(dir $@)
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 #
 # RegalGLEW
@@ -287,7 +354,7 @@ glew.lib: lib/$(GLEW.SHARED)
 
 tmp/$(SYSTEM)/glew/shared/%.o: src/glew/src/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLEW.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(PICFLAG) $(GLEW.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 lib/$(GLEW.SHARED): lib $(GLEW.OBJS) lib/$(LIB.SHARED)
 	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.DYNAMIC) -o $@ $(GLEW.OBJS) $(LIB.LDFLAGS) $(GLEW.LIBS)  -lpthread
@@ -312,7 +379,7 @@ endif
 
 tmp/$(SYSTEM)/glewinfo/static/%.o: src/glew/src/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(GLEWINFO.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(GLEWINFO.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 bin/glewinfo: bin $(GLEWINFO.OBJS) lib/$(LIB.SHARED) lib/$(GLEW.SHARED)
 	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(GLEWINFO.OBJS) $(LIB.LDFLAGS) $(GLEWINFO.LIBS)
@@ -436,23 +503,23 @@ glu.lib: lib/$(GLU.SHARED)
 
 tmp/$(SYSTEM)/glu/shared/%.o: src/glu/libtess/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 tmp/$(SYSTEM)/glu/shared/%.o: src/glu/libutil/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 tmp/$(SYSTEM)/glu/shared/%.o: src/glu/libnurbs/interface/%.cc
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 tmp/$(SYSTEM)/glu/shared/%.o: src/glu/libnurbs/internals/%.cc
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 tmp/$(SYSTEM)/glu/shared/%.o: src/glu/libnurbs/nurbtess/%.cc
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(PICFLAG) $(GLU.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 lib/$(GLU.SHARED): lib $(GLU.OBJS)
 	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.DYNAMIC) $(GLU.LIBS) $(LIB.LDFLAGS) -o $@ $(GLU.OBJS)
@@ -544,7 +611,7 @@ glut.lib: lib/$(GLUT.SHARED)
 
 tmp/$(SYSTEM)/glut/shared/%.o: src/glut/src/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(PICFLAG) $(GLUT.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(GLUT.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) -o $@ -c $<
 
 lib/$(GLUT.SHARED): lib $(GLUT.OBJS) lib/$(GLU.SHARED) lib/$(LIB.SHARED)
 	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.DYNAMIC) -o $@ $(GLUT.OBJS) $(GLUT.LIBS) 
@@ -581,11 +648,11 @@ DREAMTORUS.LIBS       += -lm -lpthread
 
 tmp/$(SYSTEM)/dreamtorus/static/%.o: examples/dreamtorus/src/%.cpp
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(DREAMTORUS.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 tmp/$(SYSTEM)/dreamtorus/static/%.o: examples/dreamtorus/glut/code/%.cpp
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(DREAMTORUS.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 bin/dreamtorus: bin $(DREAMTORUS.OBJS) lib/$(LIB.SHARED) 
 	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(DREAMTORUS.OBJS) $(LIB.LDFLAGS) $(DREAMTORUS.LIBS)
@@ -603,7 +670,7 @@ NACL.LIBS       += -lpng -lz -lm -lpthread -lppapi -lppapi_gles2 -lstdc++
 
 tmp/$(SYSTEM)/nacl/static/%.o: examples/nacl/%.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(NACL.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CC) $(NACL.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 bin/nacl$(BIN_EXTENSION): bin lib/$(LIB.STATIC) $(NACL.OBJS)
 	$(CC) $(CFLAGS) -o $@ $(NACL.OBJS) $(NACL.LIBS)
@@ -641,7 +708,7 @@ TIGER.LIBS       += -lm -lpthread
 
 tmp/$(SYSTEM)/tiger/static/%.o: examples/tiger/%.c
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(TIGER.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(TIGER.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 bin/tiger: bin $(TIGER.OBJS) lib/$(GLEW.SHARED) lib/$(LIB.SHARED)
 	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(TIGER.OBJS) $(TIGER.LIBS)
@@ -679,7 +746,7 @@ GTEST.STATIC     := libgtest.a
 
 tmp/$(SYSTEM)/gtest/static/%.o: src/googletest/src/%.cc
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(GTEST.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(GTEST.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 lib/$(GTEST.STATIC): lib $(GTEST.OBJS)
 	$(CCACHE) $(AR) cr $@ $(GTEST.OBJS)
@@ -688,28 +755,31 @@ ifneq ($(STRIP),)
 endif
 
 #
-# RegalTests
+# regaltest
 #
 
-REGALTESTS.SRCS       += tests/test_main.cpp
-REGALTESTS.SRCS.NAMES := $(notdir $(REGALTESTS.SRCS))
-REGALTESTS.OBJS       := $(addprefix tmp/$(SYSTEM)/regal_tests/static/,$(REGALTESTS.SRCS.NAMES))
-REGALTESTS.OBJS       := $(REGALTESTS.OBJS:.cpp=.o)
-REGALTESTS.CFLAGS     := -Isrc/googletest/include -Isrc/regal
-REGALTESTS.LIBS       := -Llib -lgtest -lRegal
+REGALTEST.SRCS       += tests/test_main.cpp
+REGALTEST.SRCS       += tests/testRegalTexC.cpp
+REGALTEST.SRCS       += tests/testRegalPixelConversions.cpp
+REGALTEST.SRCS       += tests/testStringList.cpp
+REGALTEST.SRCS.NAMES := $(notdir $(REGALTEST.SRCS))
+REGALTEST.OBJS       := $(addprefix tmp/$(SYSTEM)/regal_tests/static/,$(REGALTEST.SRCS.NAMES))
+REGALTEST.OBJS       := $(REGALTEST.OBJS:.cpp=.o)
+REGALTEST.CFLAGS     := -Isrc/googletest/include -Isrc/regal -Isrc/boost
+REGALTEST.LIBS       := -Llib -lgtest -lRegal -lm -ldl
 
 tmp/$(SYSTEM)/regal_tests/static/%.o: tests/%.cpp
 	@mkdir -p $(dir $@)
-	$(CCACHE) $(CC) $(CFLAGS) $(REGALTESTS.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(CCACHE) $(CC) $(LIB.CFLAGS) $(REGALTEST.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-bin/RegalTests: bin $(REGALTESTS.OBJS) lib/$(GTEST.STATIC) lib/$(LIB.SHARED)
-	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(REGALTESTS.OBJS) $(LIB.LDFLAGS) $(REGALTESTS.LIBS)
+bin/regaltest: bin $(REGALTEST.OBJS) lib/$(GTEST.STATIC) lib/$(LIB.STATIC) lib/$(LIBPNG.STATIC) lib/$(ZLIB.STATIC)
+	$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(REGALTEST.OBJS) $(LIB.LDFLAGS) $(REGALTEST.LIBS) $(LIB.LIBS)
 ifneq ($(STRIP),)
 	$(STRIP) -x $@
 endif
 
-test: bin/RegalTests
-	bin/RegalTests
+test: bin/regaltest
+	bin/regaltest
 
 ######################################
 

@@ -12127,6 +12127,7 @@ gl.add(glGetPolygonStipple)
 
 glGetString = Function('glGetString')
 glGetString.ret = Return('const GLubyte *')
+glGetString.ret.cast = 'const GLchar *'
 glGetString.add( Input( 'name','GLenum' ))
 glGetString.version = '1.0'
 glGetString.category = 'GL_VERSION_1_0'
@@ -12479,7 +12480,7 @@ glTexParameterf = Function('glTexParameterf')
 glTexParameterf.ret = Return('void')
 glTexParameterf.add( Input( 'target','GLenum' ))
 glTexParameterf.add( Input( 'pname','GLenum' ))
-glTexParameterf.add( Input( 'param','GLfloat' ))
+glTexParameterf.add( Input( 'param','GLfloat' ,regalLog = 'GLTexParameterToString(pname,param)' ))
 glTexParameterf.version = '1.0'
 glTexParameterf.category = 'GL_VERSION_1_0'
 glTexParameterf.esVersions = [1.0, 1.1, 2.0]
@@ -12491,7 +12492,7 @@ glTexParameterfv = Function('glTexParameterfv')
 glTexParameterfv.ret = Return('void')
 glTexParameterfv.add( Input( 'target','GLenum' ))
 glTexParameterfv.add( Input( 'pname','GLenum' ))
-glTexParameterfv.add( Input( 'params','const GLfloat *' ,size = 'helperGLTexParametervSize(pname)' ))
+glTexParameterfv.add( Input( 'params','const GLfloat *' ,size = 'helperGLTexParametervSize(pname)' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glTexParameterfv.version = '1.0'
 glTexParameterfv.category = 'GL_VERSION_1_0'
 glTexParameterfv.esVersions = [1.1, 2.0]
@@ -12503,7 +12504,7 @@ glTexParameteri = Function('glTexParameteri')
 glTexParameteri.ret = Return('void')
 glTexParameteri.add( Input( 'target','GLenum' ))
 glTexParameteri.add( Input( 'pname','GLenum' ))
-glTexParameteri.add( Input( 'param','GLint' ))
+glTexParameteri.add( Input( 'param','GLint' ,regalLog = 'GLTexParameterToString(pname,param)' ))
 glTexParameteri.version = '1.0'
 glTexParameteri.category = 'GL_VERSION_1_0'
 glTexParameteri.esVersions = [1.1, 2.0]
@@ -12515,7 +12516,7 @@ glTexParameteriv = Function('glTexParameteriv')
 glTexParameteriv.ret = Return('void')
 glTexParameteriv.add( Input( 'target','GLenum' ))
 glTexParameteriv.add( Input( 'pname','GLenum' ))
-glTexParameteriv.add( Input( 'params','const GLint *' ,size = 'helperGLTexParametervSize(pname)' ))
+glTexParameteriv.add( Input( 'params','const GLint *' ,size = 'helperGLTexParametervSize(pname)' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glTexParameteriv.version = '1.0'
 glTexParameteriv.category = 'GL_VERSION_1_0'
 glTexParameteriv.esVersions = [1.1, 2.0]
@@ -16834,7 +16835,7 @@ glGetProgramiv = Function('glGetProgramiv')
 glGetProgramiv.ret = Return('void')
 glGetProgramiv.add( Input( 'program','GLuint' ))
 glGetProgramiv.add( Input( 'pname','GLenum' ))
-glGetProgramiv.add( Output( 'params','GLint *' ))
+glGetProgramiv.add( Output( 'params','GLint *' ,size = 1 ))
 glGetProgramiv.version = '2.0'
 glGetProgramiv.category = ''
 glGetProgramiv.esVersions = [2.0]
@@ -16905,7 +16906,7 @@ glGetShaderiv = Function('glGetShaderiv')
 glGetShaderiv.ret = Return('void')
 glGetShaderiv.add( Input( 'shader','GLuint' ))
 glGetShaderiv.add( Input( 'pname','GLenum' ))
-glGetShaderiv.add( Output( 'params','GLint *' ))
+glGetShaderiv.add( Output( 'params','GLint *' ,size = 1 ))
 glGetShaderiv.version = '2.0'
 glGetShaderiv.category = ''
 glGetShaderiv.esVersions = [2.0]
@@ -16915,6 +16916,7 @@ gl.add(glGetShaderiv)
 
 glGetStringi = Function('glGetStringi')
 glGetStringi.ret = Return('const GLubyte *')
+glGetStringi.ret.cast = 'const GLchar *'
 glGetStringi.add( Input( 'name','GLenum' ))
 glGetStringi.add( Input( 'index','GLuint' ))
 glGetStringi.version = '3.0'
@@ -17314,7 +17316,7 @@ glTexParameterIiv = Function('glTexParameterIiv')
 glTexParameterIiv.ret = Return('void')
 glTexParameterIiv.add( Input( 'target','GLenum' ))
 glTexParameterIiv.add( Input( 'pname','GLenum' ))
-glTexParameterIiv.add( Input( 'params','const GLint *' ))
+glTexParameterIiv.add( Input( 'params','const GLint *' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glTexParameterIiv.version = '3.0'
 glTexParameterIiv.category = ''
 glTexParameterIiv.trace = True
@@ -17325,7 +17327,7 @@ glTexParameterIuiv = Function('glTexParameterIuiv')
 glTexParameterIuiv.ret = Return('void')
 glTexParameterIuiv.add( Input( 'target','GLenum' ))
 glTexParameterIuiv.add( Input( 'pname','GLenum' ))
-glTexParameterIuiv.add( Input( 'params','const GLuint *' ))
+glTexParameterIuiv.add( Input( 'params','const GLuint *' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glTexParameterIuiv.version = '3.0'
 glTexParameterIuiv.category = ''
 glTexParameterIuiv.trace = True
@@ -23478,6 +23480,7 @@ gl.add(glDeleteSync)
 
 glFenceSync = Function('glFenceSync')
 glFenceSync.ret = Return('GLsync')
+glFenceSync.ret.cast = 'void *'
 glFenceSync.add( Input( 'condition','GLenum' ))
 glFenceSync.add( Input( 'flags','GLbitfield' ))
 glFenceSync.version = '3.2'
@@ -32750,7 +32753,7 @@ glTexParameterIivEXT = Function('glTexParameterIivEXT')
 glTexParameterIivEXT.ret = Return('void')
 glTexParameterIivEXT.add( Input( 'target','GLenum' ))
 glTexParameterIivEXT.add( Input( 'pname','GLenum' ))
-glTexParameterIivEXT.add( Input( 'params','const GLint *' ))
+glTexParameterIivEXT.add( Input( 'params','const GLint *' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glTexParameterIivEXT.version = '2.0'
 glTexParameterIivEXT.category = 'GL_EXT_texture_integer'
 glTexParameterIivEXT.trace = True
@@ -32761,7 +32764,7 @@ glTexParameterIuivEXT = Function('glTexParameterIuivEXT')
 glTexParameterIuivEXT.ret = Return('void')
 glTexParameterIuivEXT.add( Input( 'target','GLenum' ))
 glTexParameterIuivEXT.add( Input( 'pname','GLenum' ))
-glTexParameterIuivEXT.add( Input( 'params','const GLuint *' ))
+glTexParameterIuivEXT.add( Input( 'params','const GLuint *' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glTexParameterIuivEXT.version = '2.0'
 glTexParameterIuivEXT.category = 'GL_EXT_texture_integer'
 glTexParameterIuivEXT.trace = True

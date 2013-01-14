@@ -62,6 +62,7 @@ struct ContextInfo
 ${VERSION_DECLARE}
 
   GLuint maxVertexAttribs;
+  GLuint maxVaryings;
 };
 
 REGAL_NAMESPACE_END
@@ -102,7 +103,8 @@ using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 ContextInfo::ContextInfo()
 : regal_ext_direct_state_access(false),
 ${VERSION_INIT}
-  maxVertexAttribs(0)
+  maxVertexAttribs(0),
+  maxVaryings(0)
 {
    Internal("ContextInfo::ContextInfo","()");
 }
@@ -159,17 +161,19 @@ ContextInfo::init(const RegalContext &context)
 
   compat = !core && !gles;
 
-  #if REGAL_FORCE_CORE_PROFILE
-  compat = false;
-  core   = true;
-  gles   = false;
-  #endif
+  if (REGAL_FORCE_CORE_PROFILE || Config::forceCoreProfile)
+  {
+    compat = false;
+    core   = true;
+    gles   = false;
+  }
 
-  #if REGAL_FORCE_ES2_PROFILE
-  compat = false;
-  core   = false;
-  gles   = true;
-  #endif
+  if (REGAL_FORCE_ES2_PROFILE || Config::forceES2Profile)
+  {
+    compat = false;
+    core   = false;
+    gles   = true;
+  }
 
   // Detect driver extensions
 
@@ -281,8 +285,10 @@ ${EXT_INIT}
 
   RegalAssert(context.dispatcher.driver.glGetIntegerv);
   context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&maxVertexAttribs));
+  context.dispatcher.driver.glGetIntegerv( gles ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&maxVaryings));
 
   Info("OpenGL v attribs : ",maxVertexAttribs);
+  Info("OpenGL varyings  : ",maxVaryings);
 
   if (maxVertexAttribs > REGAL_EMU_IFF_VERTEX_ATTRIBS)
       maxVertexAttribs = REGAL_EMU_IFF_VERTEX_ATTRIBS;
@@ -512,7 +518,7 @@ def generateContextInfoHeader(apis, args):
     substitute['COPYRIGHT']       = args.copyright
     substitute['HEADER_NAME']     = "REGAL_CONTEXT_INFO"
     substitute['VERSION_DECLARE'] = versionDeclareCode(apis,args)
-    outputCode( '%s/RegalContextInfo.h' % args.outdir, contextInfoHeaderTemplate.substitute(substitute))
+    outputCode( '%s/RegalContextInfo.h' % args.srcdir, contextInfoHeaderTemplate.substitute(substitute))
 
 def generateContextInfoSource(apis, args):
 
@@ -524,4 +530,4 @@ def generateContextInfoSource(apis, args):
     substitute['VERSION_DETECT'] = versionDetectCode(apis,args)
     substitute['EXT_INIT']       = extensionStringCode(apis,args)
     substitute['EXT_CODE']       = getExtensionCode(apis,args)
-    outputCode( '%s/RegalContextInfo.cpp' % args.outdir, contextInfoSourceTemplate.substitute(substitute))
+    outputCode( '%s/RegalContextInfo.cpp' % args.srcdir, contextInfoSourceTemplate.substitute(substitute))

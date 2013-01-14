@@ -176,7 +176,12 @@ def generateDispatchCode(apis, args):
               header += '<< array<GLubyte,const char * const>(static_cast<const GLubyte *>(%s),helper::size::pixelImage(%s,\"\",\"{ \",\" }\",\",\") '%(i.name,i.size.split('(',1)[1])
               header += '<< \";\\n\";\n'
               body += '_code << \"i\" << _%sIndex;\n'%(i.name)
-                            
+
+            elif p.startswith('boost::print::optional'):
+              if i.cast != None:
+                body += '_code << reinterpret_cast<%s>(%s);\n'%(i.cast,i.name)
+              else:
+                body += '_code << %s;\n'%(i.name)                         
             else:
                 body += '_code << %s;\n'%(p)
             delim = True
@@ -204,4 +209,4 @@ def generateDispatchCode(apis, args):
   substitute['API_FUNC_DEFINE'] = code
   substitute['API_GLOBAL_DISPATCH_INIT'] = funcInit
 
-  outputCode( '%s/RegalDispatchCode.cpp' % args.outdir, dispatchCodeTemplate.substitute(substitute))
+  outputCode( '%s/RegalDispatchCode.cpp' % args.srcdir, dispatchCodeTemplate.substitute(substitute))

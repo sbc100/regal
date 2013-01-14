@@ -191,7 +191,7 @@ const char *libraryLocation(const Library &library)
 
     if (!ret)
     {
-#if REGAL_SYS_GLX
+#if REGAL_SYS_EGL || REGAL_SYS_GLX
 #if defined(__arm__)
       return "/usr/lib/libGLESv2.so";
 #elif defined(__x86_64__) || defined(__x86_64)
@@ -622,6 +622,17 @@ void fileClose(FILE **file)
 
   fclose(*file);
   *file = NULL;
+}
+
+string makePath(const string &dir, const string &filename)
+{
+  string tmp(dir);
+  const size_t len = tmp.length();
+  const char   last = len ? tmp[len-1] : '\0';
+  if (len && last!='/' && last!='\\')
+    tmp += "/";
+  tmp += filename;
+  return tmp;
 }
 
 REGAL_NAMESPACE_END

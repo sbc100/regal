@@ -4,6 +4,7 @@
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
   Copyright (c) 2012 Nigel Stewart
+  Copyright (c) 2012 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -214,10 +215,16 @@
 #define REGAL_CACHE_SHADER REGAL_CACHE
 #endif
 
-// Shader cache readback support by default
+// Cache writing supported by default
+
+#ifndef REGAL_CACHE_SHADER_WRITE
+#define REGAL_CACHE_SHADER_WRITE REGAL_CACHE_SHADER
+#endif
+
+// Cache reading supported by default
 
 #ifndef REGAL_CACHE_SHADER_READ
-#define REGAL_CACHE_SHADER_READ REGAL_CACHE
+#define REGAL_CACHE_SHADER_READ REGAL_CACHE_SHADER
 #endif
 
 //
@@ -242,6 +249,14 @@
 
 #ifndef REGAL_STATIC_EGL
 #define REGAL_STATIC_EGL 0
+#endif
+
+#ifndef REGAL_EMU_TEXC
+#if REGAL_SYS_PPAPI
+#define REGAL_EMU_TEXC 1
+#else
+#define REGAL_EMU_TEXC 0
+#endif
 #endif
 
 // AssertFunction depends on Error log, but
@@ -338,6 +353,10 @@ strndup(const char *str, size_t n)
 extern bool  fileExists(const char *filename);
 extern FILE *fileOpen  (const char *filename, const char *mode);
 extern void  fileClose (FILE **file);
+
+//
+
+std::string makePath(const std::string &dir, const std::string &filename);
 
 // ToFloat for integer -> float
 

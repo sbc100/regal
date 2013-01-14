@@ -19,6 +19,9 @@ REGAL_GLOBAL_BEGIN
 #include "RegalToken.h"
 
 #include <boost/print/string_list.hpp>
+#include <boost/print/print_string.hpp>
+
+using namespace ::boost::print;
 
 REGAL_GLOBAL_END
 
@@ -41,13 +44,149 @@ namespace Token {
   {
     const GLbitfield other = v & ~(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    boost::print::string_list<std::string> tmp;
+    string_list<std::string> tmp;
     if (v & GL_COLOR_BUFFER_BIT)   { if (tmp.size()) tmp += " | "; tmp += "GL_COLOR_BUFFER_BIT"; }
     if (v & GL_DEPTH_BUFFER_BIT)   { if (tmp.size()) tmp += " | "; tmp += "GL_DEPTH_BUFFER_BIT"; }
     if (v & GL_STENCIL_BUFFER_BIT) { if (tmp.size()) tmp += " | "; tmp += "GL_STENCIL_BUFFER_BIT"; }
     if (other || v==0)             { if (tmp.size()) tmp += " | "; tmp += size_t(other); }
 
     return tmp.str();
+  }
+
+  std::string GLTexParameterToString(GLenum pname, const GLfloat param)
+  {
+    switch (pname)
+    {
+      case GL_DEPTH_STENCIL_TEXTURE_MODE:
+      case GL_TEXTURE_COMPARE_FUNC:
+      case GL_TEXTURE_COMPARE_MODE:
+      case GL_TEXTURE_MIN_FILTER:
+      case GL_TEXTURE_MAG_FILTER:
+      case GL_TEXTURE_SWIZZLE_R:
+      case GL_TEXTURE_SWIZZLE_G:
+      case GL_TEXTURE_SWIZZLE_B:
+      case GL_TEXTURE_SWIZZLE_A:
+      case GL_TEXTURE_WRAP_S:
+      case GL_TEXTURE_WRAP_T:
+      case GL_TEXTURE_WRAP_R:
+        return GLenumToString(static_cast<GLenum>(param));
+
+      default:
+        return print_string(param);
+    }
+  }
+
+  std::string GLTexParameterToString(GLenum pname, const GLint param)
+  {
+    switch (pname)
+    {
+      case GL_DEPTH_STENCIL_TEXTURE_MODE:
+      case GL_TEXTURE_COMPARE_FUNC:
+      case GL_TEXTURE_COMPARE_MODE:
+      case GL_TEXTURE_MIN_FILTER:
+      case GL_TEXTURE_MAG_FILTER:
+      case GL_TEXTURE_SWIZZLE_R:
+      case GL_TEXTURE_SWIZZLE_G:
+      case GL_TEXTURE_SWIZZLE_B:
+      case GL_TEXTURE_SWIZZLE_A:
+      case GL_TEXTURE_WRAP_S:
+      case GL_TEXTURE_WRAP_T:
+      case GL_TEXTURE_WRAP_R:
+        return GLenumToString(static_cast<GLenum>(param));
+
+      default:
+        return print_string(param);
+    }
+  }
+
+  std::string GLTexParameterToString(GLenum pname, const GLfloat *params)
+  {
+    switch (pname)
+    {
+      case GL_DEPTH_STENCIL_TEXTURE_MODE:
+      case GL_TEXTURE_COMPARE_FUNC:
+      case GL_TEXTURE_COMPARE_MODE:
+      case GL_TEXTURE_MIN_FILTER:
+      case GL_TEXTURE_MAG_FILTER:
+      case GL_TEXTURE_SWIZZLE_R:
+      case GL_TEXTURE_SWIZZLE_G:
+      case GL_TEXTURE_SWIZZLE_B:
+      case GL_TEXTURE_SWIZZLE_A:
+      case GL_TEXTURE_WRAP_S:
+      case GL_TEXTURE_WRAP_T:
+      case GL_TEXTURE_WRAP_R:
+        return GLenumToString(static_cast<GLenum>(params[0]));
+
+      case GL_TEXTURE_SWIZZLE_RGBA:
+        return print_string(
+          GLenumToString(static_cast<GLenum>(params[0])), " ", 
+          GLenumToString(static_cast<GLenum>(params[1])), " ", 
+          GLenumToString(static_cast<GLenum>(params[2])), " ", 
+          GLenumToString(static_cast<GLenum>(params[3])));
+          
+      default:
+        return print_string(params[0]);
+    }
+  }
+
+  std::string GLTexParameterToString(GLenum pname, const GLint *params)
+  {
+    switch (pname)
+    {
+      case GL_DEPTH_STENCIL_TEXTURE_MODE:
+      case GL_TEXTURE_COMPARE_FUNC:
+      case GL_TEXTURE_COMPARE_MODE:
+      case GL_TEXTURE_MIN_FILTER:
+      case GL_TEXTURE_MAG_FILTER:
+      case GL_TEXTURE_SWIZZLE_R:
+      case GL_TEXTURE_SWIZZLE_G:
+      case GL_TEXTURE_SWIZZLE_B:
+      case GL_TEXTURE_SWIZZLE_A:
+      case GL_TEXTURE_WRAP_S:
+      case GL_TEXTURE_WRAP_T:
+      case GL_TEXTURE_WRAP_R:
+        return GLenumToString(static_cast<GLenum>(params[0]));
+
+      case GL_TEXTURE_SWIZZLE_RGBA:
+        return print_string(
+          GLenumToString(static_cast<GLenum>(params[0])), " ", 
+          GLenumToString(static_cast<GLenum>(params[1])), " ", 
+          GLenumToString(static_cast<GLenum>(params[2])), " ", 
+          GLenumToString(static_cast<GLenum>(params[3])));
+          
+      default:
+        return print_string(params[0]);
+    }
+  }
+
+  std::string GLTexParameterToString(GLenum pname, const GLuint *params)
+  {
+    switch (pname)
+    {
+      case GL_DEPTH_STENCIL_TEXTURE_MODE:
+      case GL_TEXTURE_COMPARE_FUNC:
+      case GL_TEXTURE_COMPARE_MODE:
+      case GL_TEXTURE_MIN_FILTER:
+      case GL_TEXTURE_MAG_FILTER:
+      case GL_TEXTURE_SWIZZLE_R:
+      case GL_TEXTURE_SWIZZLE_G:
+      case GL_TEXTURE_SWIZZLE_B:
+      case GL_TEXTURE_SWIZZLE_A:
+      case GL_TEXTURE_WRAP_S:
+      case GL_TEXTURE_WRAP_T:
+      case GL_TEXTURE_WRAP_R:
+        return GLenumToString(static_cast<GLenum>(params[0]));
+
+      case GL_TEXTURE_SWIZZLE_RGBA:
+        return print_string(
+          GLenumToString(static_cast<GLenum>(params[0])), " ", 
+          GLenumToString(static_cast<GLenum>(params[1])), " ", 
+          GLenumToString(static_cast<GLenum>(params[2])), " ", 
+          GLenumToString(static_cast<GLenum>(params[3])));
+          
+      default:
+        return print_string(params[0]);
+    }
   }
 
 ${CODE}
@@ -276,7 +415,7 @@ def generateTokenSource(apis, args):
   substitute['AUTOGENERATED'] = args.generated
   substitute['COPYRIGHT']     = args.copyright
   substitute['CODE']          = '\n'.join(code)
-  outputCode( '%s/RegalToken.cpp' % args.outdir, tokenSourceTemplate.substitute(substitute))
+  outputCode( '%s/RegalToken.cpp' % args.srcdir, tokenSourceTemplate.substitute(substitute))
 
 ##############################################################################################
 
@@ -307,6 +446,12 @@ namespace Token {
 
   std::string  GLclearToString       (GLbitfield v);
 
+  std::string GLTexParameterToString(GLenum pname, const GLfloat  param );
+  std::string GLTexParameterToString(GLenum pname, const GLint    param );
+  std::string GLTexParameterToString(GLenum pname, const GLfloat *params);
+  std::string GLTexParameterToString(GLenum pname, const GLint   *params);
+  std::string GLTexParameterToString(GLenum pname, const GLuint  *params);
+  
   #if REGAL_SYS_GLX
   const char * GLXenumToString       (int        v);
   #endif
@@ -331,4 +476,4 @@ def generateTokenHeader(apis, args):
   substitute['AUTOGENERATED'] = args.generated
   substitute['COPYRIGHT']     = args.copyright
   substitute['HEADER_NAME']   = "REGAL_TOKEN"
-  outputCode( '%s/RegalToken.h' % args.outdir, tokenHeaderTemplate.substitute(substitute))
+  outputCode( '%s/RegalToken.h' % args.srcdir, tokenHeaderTemplate.substitute(substitute))

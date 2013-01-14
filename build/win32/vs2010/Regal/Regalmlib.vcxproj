@@ -276,6 +276,8 @@
     <ClCompile Include="..\..\..\..\src\regal\RegalMarker.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalMarker.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalObj.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalPixelConversions.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalPixelConversions.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPpa.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPpc.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPrecompile.h" />
@@ -289,6 +291,8 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalSo.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalState.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSystem.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalTexC.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalTexC.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalThread.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalTimer.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalToken.cpp" />

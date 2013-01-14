@@ -250,7 +250,7 @@ def apiEmuFuncDefineCode(apis, args):
                 code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
                 code += '       if (_context->info->gles)\n'
                 code += '       #endif\n'
-                code += '         switch (format)\n'
+                code += '         switch (target)\n'
                 code += '         {\n'
                 for i in api.enums:
                   if i.name=='defines':
@@ -431,6 +431,7 @@ def generateEmuSource(apis, args):
 #include "RegalObj.h"
 #include "RegalDsa.h"
 #include "RegalSo.h"
+#include "RegalTexC.h"
 #include "RegalVao.h"'''
 
   # Output
@@ -447,4 +448,4 @@ def generateEmuSource(apis, args):
   substitute['IFDEF'] = '#if REGAL_EMULATION\n\n'
   substitute['ENDIF'] = '#endif\n'
 
-  outputCode( '%s/RegalDispatchEmu.cpp' % args.outdir, dispatchSourceTemplate.substitute(substitute))
+  outputCode( '%s/RegalDispatchEmu.cpp' % args.srcdir, dispatchSourceTemplate.substitute(substitute))

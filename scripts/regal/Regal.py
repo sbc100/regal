@@ -82,23 +82,14 @@ extern "C" {
 #endif
 
 #include <stddef.h>
-#if REGAL_SYS_WGL
+#if defined(_WIN32)
   typedef __int64 int64_t;
   typedef unsigned __int64 uint64_t;
-  #ifdef  REGAL_SYS_WGL_DECLARE_WGL
-    #ifndef _WINDEF_
-      struct HDC__ {int unused;};
-      typedef struct HDC__* HDC;
-      struct HGLRC__ {int unused;};
-      typedef struct HGLRC__* HGLRC;
-    #endif
-  #endif
-#elif REGAL_SYS_PPAPI
-  #if defined(__native_client__)
-    #include <inttypes.h>
-  #else
-    typedef __int64 int64_t;
-    typedef unsigned __int64 uint64_t;
+  #if defined(REGAL_SYS_WGL_DECLARE_WGL) && !defined(_WINDEF_)
+    struct HDC__ {int unused;};
+    typedef struct HDC__* HDC;
+    struct HGLRC__ {int unused;};
+    typedef struct HGLRC__* HGLRC;
   #endif
 #else
   #include <inttypes.h>
@@ -195,7 +186,7 @@ def generatePublicHeader(apis, args):
   substitute['API_ENUM']         = apiEnum
   substitute['API_FUNC_DECLARE'] = apiFuncDeclare
 
-  outputCode( 'include/GL/Regal.h', publicHeaderTemplate.substitute(substitute))
+  outputCode( '%s/Regal.h' % args.incdir, publicHeaderTemplate.substitute(substitute))
 
 def apiFuncDefineCode(apis, args):
 
@@ -624,7 +615,7 @@ def generateSource(apis, args):
   substitute['API_FUNC_DEFINE'] = apiFuncDefine
   substitute['API_GLOBAL_DISPATCH_INIT'] = globalDispatch
 
-  outputCode( '%s/Regal.cpp' % args.outdir, sourceTemplate.substitute(substitute))
+  outputCode( '%s/Regal.cpp' % args.srcdir, sourceTemplate.substitute(substitute))
 
 ##############################################################################################
 
@@ -655,6 +646,6 @@ def generateDefFile(apis, args, additional_exports):
   code2 += ['  %s' % export for export in additional_exports]
   code3 += ['_%s' % export for export in additional_exports]
 
-  outputCode( '%s/Regal.def'  % args.outdir, 'EXPORTS\n' + '\n'.join(code1))
-  outputCode( '%s/Regalm.def' % args.outdir, 'EXPORTS\n' + '\n'.join(code2))
-  outputCode( '%s/export_list_mac.txt' % args.outdir, '# File: export_list\n' + '\n'.join(code3))
+  outputCode( '%s/Regal.def'  % args.srcdir, 'EXPORTS\n' + '\n'.join(code1))
+  outputCode( '%s/Regalm.def' % args.srcdir, 'EXPORTS\n' + '\n'.join(code2))
+  outputCode( '%s/export_list_mac.txt' % args.srcdir, '# File: export_list\n' + '\n'.join(code3))

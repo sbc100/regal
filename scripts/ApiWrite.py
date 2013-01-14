@@ -134,6 +134,8 @@ def writeFunctions(file,name,functions):
     for j in i:
       print >>file, '%s = Function(\'%s\')'%(j.name,j.name)
       print >>file, '%s.ret = Return(\'%s\')'%(j.name,j.ret.type)
+      if getattr(j.ret,'cast',None) != None:
+        print >>file, '%s.ret.cast = \'%s\''%(j.name,j.ret.cast)
       for k in j.parameters:
         print >>file, '%s.add('%(j.name),
         if k.input:

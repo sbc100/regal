@@ -31,6 +31,7 @@ from EmuIff    import iffFormulae
 from EmuBin    import binFormulae
 from EmuObj    import objFormulae
 from EmuFilter import formulae as filterFormulae
+from EmuTexC   import texCFormulae
 
 # Regal.cpp emulation
 
@@ -61,9 +62,10 @@ emu = [
     { 'type' : 'RegalBin',    'include' : 'RegalBin.h',  'member' : 'bin',    'conditional' : 'Config::enableEmuBin',    'ifdef' : 'REGAL_EMU_BIN',    'formulae' : binFormulae    },
     { 'type' : 'RegalDsa',    'include' : 'RegalDsa.h',  'member' : 'dsa',    'conditional' : 'Config::enableEmuDsa',    'ifdef' : 'REGAL_EMU_DSA',    'formulae' : dsaFormulae    },
     { 'type' : 'Emu::Iff',    'include' : 'RegalIff.h',  'member' : 'iff',    'conditional' : 'Config::enableEmuIff',    'ifdef' : 'REGAL_EMU_IFF',    'formulae' : iffFormulae    },
-    { 'type' : 'RegalSo',     'include' : 'RegalSo.h',   'member' : 'so',     'conditional' : 'Config::enableEmuSo',     'ifdef' : 'REGAL_EMU_SO',     'formulae' : soFormulae     },
+    { 'type' : 'Emu::So',     'include' : 'RegalSo.h',   'member' : 'so',     'conditional' : 'Config::enableEmuSo',     'ifdef' : 'REGAL_EMU_SO',     'formulae' : soFormulae     },
     { 'type' : 'RegalVao',    'include' : 'RegalVao.h',  'member' : 'vao',    'conditional' : 'Config::enableEmuVao',    'ifdef' : 'REGAL_EMU_VAO',    'formulae' : vaoFormulae    },
     { 'type' : None,          'include' : None,          'member' : None,     'conditional' : 'Config::enableEmuFilter', 'ifdef' : 'REGAL_EMU_FILTER', 'formulae' : filterFormulae },
+    { 'type' : 'Emu::TexC',   'include' : 'RegalTexC.h', 'member' : 'texc',   'conditional' : 'Config::enableEmuTexC',   'ifdef' : 'REGAL_EMU_TEXC',   'formulae' : texCFormulae   },
     { 'type' : 'void',        'include' : None,          'member' : None,     'conditional' : None,                      'ifdef' : None,               'formulae' : None           }
 ]
 
@@ -77,6 +79,7 @@ ${LICENSE}
 
 REGAL_GLOBAL_BEGIN
 
+#include "RegalThread.h"
 #include "RegalPrivate.h"
 #include "RegalDispatcher.h"
 #include "RegalDispatchError.h"
@@ -324,6 +327,10 @@ def generateContextHeader(apis, args):
       if i.get('member')!=None:
         if i['type']=='Emu::Iff':
           emuForwardDeclare += 'namespace Emu { struct Iff; };\n'
+        elif i['type']=='Emu::So':
+          emuForwardDeclare += 'namespace Emu { struct So; };\n'
+        elif i['type']=='Emu::TexC':
+          emuForwardDeclare += 'namespace Emu { struct TexC; };\n'
         else:
           emuForwardDeclare += 'struct %s;\n' % i['type']
         emuMemberDeclare  += '  %-18s *%s;\n' % ( i['type'], i['member'] )
@@ -344,7 +351,7 @@ def generateContextHeader(apis, args):
     substitute['EMU_FORWARD_DECLARE'] = emuForwardDeclare
     substitute['EMU_MEMBER_DECLARE'] = emuMemberDeclare
 
-    outputCode( '%s/RegalContext.h' % args.outdir, contextHeaderTemplate.substitute(substitute))
+    outputCode( '%s/RegalContext.h' % args.srcdir, contextHeaderTemplate.substitute(substitute))
 
 def generateContextSource(apis, args):
 
@@ -415,4 +422,4 @@ def generateContextSource(apis, args):
     substitute['EMU_MEMBER_INIT']      = emuMemberInit
     substitute['EMU_MEMBER_CLEANUP']   = emuMemberCleanup
 
-    outputCode( '%s/RegalContext.cpp' % args.outdir, contextSourceTemplate.substitute(substitute))
+    outputCode( '%s/RegalContext.cpp' % args.srcdir, contextSourceTemplate.substitute(substitute))

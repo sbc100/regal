@@ -63,11 +63,11 @@ shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLc
     for (GLsizei i=0; i<count; ++i)
       hash = Lookup3::hashlittle(string[i], length ? length[i] : strlen(string[i]), hash);
 
-    ::std::string filename = print_string(Config::cacheDirectory,boost::print::hex(hash),".txt");
+    ::std::string filename = makePath(Config::cacheDirectory,print_string(boost::print::hex(hash),".txt"));
 
     // Cache it to disk, iff it's not there yet
 
-    if (!fileExists(filename.c_str()))
+    if (REGAL_CACHE_SHADER_WRITE && Config::cacheShaderWrite && !fileExists(filename.c_str()))
     {
       FILE *f = fopen(filename.c_str(),"wt");
       if (!f)
@@ -77,6 +77,7 @@ shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLc
       else
       {
         Internal("Regal::ShaderCache::glShaderSource","shader=",shader," hash=",boost::print::hex(hash)," filename=",filename," written.");
+        Info("Cached shader ",boost::print::hex(hash)," written: ",filename);
         for (GLsizei i=0; i<count; ++i)
           fwrite(string[i], length ? length[i] : strlen(string[i]),1,f);
         fclose(f);
@@ -98,6 +99,7 @@ shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLc
           if (!f)
           {
             Internal("Regal::ShaderCache::glShaderSource","shader=",shader," hash=",boost::print::hex(hash)," filename=",filename," not found.");
+            Info("Cached shader ",boost::print::hex(hash)," not found: ",filename);
             goto done;
           }
 
@@ -113,6 +115,7 @@ shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLc
         }
 
         Internal("Regal::ShaderCache::glShaderSource","shader=",shader," hash=",boost::print::hex(hash)," filename=",filename," read.");
+        Info("Cached shader ",boost::print::hex(hash)," read: ",filename);
 
         const GLchar *bufferPtr[2];
         bufferPtr[0] = &buffer[0];
@@ -122,7 +125,10 @@ shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLc
         return;
       }
       else
+      {
         Internal("Regal::ShaderCache::glShaderSource","shader=",shader," hash=",boost::print::hex(hash)," filename=",filename," not read.");
+        Info("Cached shader ",boost::print::hex(hash)," not read: ",filename);
+      }
     }
   }
 

@@ -36,35 +36,26 @@
 
 REGAL_GLOBAL_BEGIN
 
-#include <cstring>
-
-#include <string>
-using std::string;
-
-#include <boost/print/string_list.hpp>
-typedef boost::print::string_list<string> string_list;
-
 #include "RegalSo.h"
 #include "RegalLog.h"
 #include "RegalToken.h"
-
-#include "lookup3.h"
 
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
+namespace Emu {
+
 using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 
-typedef RegalSo RSO;
-
 void
-RSO::GenSamplers(GLsizei count, GLuint *samplers)
+So::GenSamplers(GLsizei count, GLuint *samplers)
 {
     for (GLsizei ii=0; ii<count; ii++)
     {
         SamplingState* s = new SamplingState();
+        s->name = nextSamplerObjectId;
         samplerObjects[ nextSamplerObjectId ] = s;
         *samplers = nextSamplerObjectId;
         samplers++;
@@ -73,7 +64,7 @@ RSO::GenSamplers(GLsizei count, GLuint *samplers)
 }
 
 void
-RSO::DeleteSamplers(GLsizei count, const GLuint * samplers)
+So::DeleteSamplers(GLsizei count, const GLuint * samplers)
 {
     for (GLsizei ii=0; ii<count; ii++)
     {
@@ -93,13 +84,13 @@ RSO::DeleteSamplers(GLsizei count, const GLuint * samplers)
 }
 
 GLboolean
-RSO::IsSampler(GLuint sampler)
+So::IsSampler(GLuint sampler)
 {
     return samplerObjects.count( sampler ) > 0 ? GL_TRUE : GL_FALSE;
 }
 
 void
-RSO::BindSampler(GLuint unit, GLuint so)
+So::BindSampler(GLuint unit, GLuint so)
 {
     if (unit >= REGAL_EMU_MAX_TEXTURE_UNITS)
     {
@@ -113,25 +104,27 @@ RSO::BindSampler(GLuint unit, GLuint so)
         return;
     }
 
-    textureUnits[unit].boundSamplerVersion = mainVer.Update();
-    textureUnits[unit].boundSamplerObject = samplerObjects[so];
+    SamplingState *pso = so != 0 ? samplerObjects[so] : NULL;
+
+    textureUnits[unit].boundSamplerObject = pso;
 }
 
 void
-RSO::GenTextures(RegalContext * ctx, GLsizei count, GLuint *textures)
+So::GenTextures(RegalContext &ctx, GLsizei count, GLuint *textures)
 {
-    ctx->dispatcher.emulation.glGenTextures(count, textures);
+    ctx.dispatcher.emulation.glGenTextures(count, textures);
 
     for (GLsizei ii=0; ii<count; ii++)
     {
         GLuint to = textures[ii];
         TextureState* ts = new TextureState();
+        ts->name = to;
         textureObjects[ to ] = ts;
     }
 }
 
 void
-RSO::DeleteTextures(RegalContext * ctx, GLsizei count, const GLuint * textures)
+So::DeleteTextures(RegalContext &ctx, GLsizei count, const GLuint * textures)
 {
     GLuint originallyActiveUnit = activeTextureUnit;
 
@@ -168,14 +161,16 @@ RSO::DeleteTextures(RegalContext * ctx, GLsizei count, const GLuint * textures)
 }
 
 bool
-RSO::BindTexture(RegalContext * ctx, GLenum target, GLuint to)
+So::BindTexture(RegalContext &ctx, GLenum target, GLuint to)
 {
     return BindTexture(ctx, activeTextureUnit, target, to);
 }
 
 bool
-RSO::BindTexture(RegalContext * ctx, GLuint unit, GLenum target, GLuint to)
+So::BindTexture(RegalContext &ctx, GLuint unit, GLenum target, GLuint to)
 {
+    Internal("Regal::So::BindTexture",&ctx," unit=",unit," target=",target," to=",to);
+
     if (unit >= REGAL_EMU_MAX_TEXTURE_UNITS)
     {
         Warning("Texture unit out of range: ", unit, " >= ", REGAL_EMU_MAX_TEXTURE_UNITS);
@@ -192,17 +187,22 @@ RSO::BindTexture(RegalContext * ctx, GLuint unit, GLenum target, GLuint to)
 
     TextureState* ts = NULL;
 
-    if (to && textureObjects.count(to) < 1)
-    {
+    if (to) {
+      if( textureObjects.count(to) < 1)
+      {
         ts = new TextureState();
+        ts->target = target;
         textureObjects[ to ] = ts;
-    }
-    else
-    {
-        ts = textureObjects[to];
+      } else {
+        ts = textureObjects[ to ];
+        if( ts->target == 0 ) {
+          ts->target = target;
+        }
+        RegalAssert( ts->target == target );
+      }
     }
 
-    DispatchTable &tbl = ctx->dispatcher.emulation;
+    DispatchTable &tbl = ctx.dispatcher.emulation;
 
     GLuint originallyActiveUnit = activeTextureUnit;
 
@@ -214,14 +214,13 @@ RSO::BindTexture(RegalContext * ctx, GLuint unit, GLenum target, GLuint to)
     if (activeTextureUnit != originallyActiveUnit)
         ActiveTexture(ctx, GL_TEXTURE0 + originallyActiveUnit );
 
-    textureUnits[unit].boundTextureVersions[tti] = mainVer.Update();
     textureUnits[unit].boundTextureObjects[tti] = ts;
 
     return true;
 }
 
 bool
-RSO::ActiveTexture( RegalContext * ctx, GLenum tex )
+So::ActiveTexture( RegalContext &ctx, GLenum tex )
 {
     GLuint unit = tex - GL_TEXTURE0;
     if (unit >= REGAL_EMU_MAX_TEXTURE_UNITS)
@@ -231,204 +230,233 @@ RSO::ActiveTexture( RegalContext * ctx, GLenum tex )
         return false;
     }
     activeTextureUnit = unit;
-    ctx->dispatcher.emulation.glActiveTexture( tex );
+    ctx.dispatcher.emulation.glActiveTexture( tex );
     return true;
 }
 
 void
-RSO::PreDraw( RegalContext * ctx )
+So::PreDraw( RegalContext &ctx )
 {
-    GLuint originallyActiveUnit = activeTextureUnit;
+  Internal("Regal::So::PreDraw",&ctx);
 
-    for (GLuint unit=0; unit < REGAL_EMU_MAX_TEXTURE_UNITS; unit++)
+  GLuint originallyActiveUnit = activeTextureUnit;
+
+  // ignoring sampler objects on the last unit... FIXME - cass
+  for (int unit=REGAL_EMU_MAX_TEXTURE_UNITS-1; unit >= 0; unit--)
+  {
+    TextureUnit &tu = textureUnits[unit];
+    SamplingState *pSS = tu.boundSamplerObject;
+
+    for (GLuint tt=0; tt < REGAL_NUM_TEXTURE_TARGETS; tt++)
     {
-        TextureUnit &tu = textureUnits[unit];
+      TextureState* ts = tu.boundTextureObjects[tt];
+      GLenum target = TT_Index2Enum( tt );
+      if( target != GL_TEXTURE_2D ) 
+        continue;
 
-        SamplingState *pSS = tu.boundSamplerObject;
+      //Internal( "RegalSo unit", unit, " texture ", ts ? ts->name : 0, " for sampler ", pSS ? pSS->name : 0 );
+      if( ts == NULL ) {
+        // no texture bound, don't bother trying to make samplers work with the default texture object
+        continue;
+      }
 
-        bool needToUpdate = (tu.boundSamplerVersion > tu.ver);
+      if( pSS == NULL && ts->samplerName == 0 && ts->samplerVer == ts->app.ver ) {
+        // this texture has no associated sampler
+        //Internal( "RegalSo", "no sampler association and up-to-date ", ts->samplerVer );
+        continue;
+      }
 
-        for (GLuint tt=0; tt < REGAL_NUM_TEXTURE_TARGETS; tt++)
-        {
-            SamplingState *app = pSS;
-            SamplingState *drv = NULL;
+      if( pSS && ts->samplerName == pSS->name && ts->samplerVer == pSS->ver ) {
+        // this pair is already associated and up-to-date
+        //Internal( "RegalSo", "already associated and up-to-date ", ts->samplerVer );
+        continue;
+      }
 
-            TextureState* ts = tu.boundTextureObjects[tt];
+      // otherwise, we need to send down updates
+      SamplingState *newState = pSS ? pSS : &ts->app;
 
-            if (tu.boundTextureVersions[tt] > tu.ver)
-                needToUpdate = true;
-
-            if (ts)
-            {
-                if (!app)
-                    app = &ts->app;
-                drv = &ts->drv;
-            }
-            else
-            {
-                if (!app)
-                    app = &defaultTextureObjects[tt].app;
-                drv = &defaultTextureObjects[tt].drv;
-            }
-
-            if (!app || !drv)
-                continue;
-
-            if (app->ver > tu.ver)
-                needToUpdate = true;
-
-            if (needToUpdate)
-            {
-                GLenum target = TT_Index2Enum(tt);
-                SendStateToDriver(ctx, unit, target, *app, *drv);
-            }
-        }
-        tu.ver = mainVer.Current();
+      //Internal( "RegalSo", "about to send update samplerVer=", ts->samplerVer, " newState->ver=", newState->ver );
+      if (SendStateToDriver(ctx, unit, ts->target, *newState, ts->drv)) {
+        //Internal( "RegalSo", "updated unit ", unit, " texture ", ts ? ts->name : 0, " for sampler ", pSS ? pSS->name : 0 );
+      } else {
+        //Internal( "RegalSo", "no update occurred" );
+      }
+      ts->samplerName = pSS ? pSS->name : 0;
+      ts->samplerVer = newState->ver;
     }
+  }
 
-    if (activeTextureUnit != originallyActiveUnit)
-        ActiveTexture(ctx, GL_TEXTURE0 + originallyActiveUnit );
+  if (activeTextureUnit != originallyActiveUnit)
+    ActiveTexture(ctx, GL_TEXTURE0 + originallyActiveUnit );
 
-    mainVer.Reset();
+  mainVer.Reset();
 }
 
-void
-RSO::SendStateToDriver(RegalContext * ctx, GLuint unit, GLenum target, SamplingState& app, SamplingState& drv)
+bool
+So::SendStateToDriver(RegalContext &ctx, GLuint unit, GLenum target, SamplingState& newState, SamplingState& drv)
 {
-    if (target == GL_TEXTURE_2D_MULTISAMPLE ||
-        target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY)
-        return;
+  Internal("Regal::So::SendStateToDriver",&ctx," unit=",unit," target=",target);
 
-    DispatchTable &tbl = ctx->dispatcher.emulation;
+  bool sent = false;
+  if (target == GL_TEXTURE_2D_MULTISAMPLE ||
+      target == GL_TEXTURE_2D_MULTISAMPLE_ARRAY )
+  {
+    return sent;
+  }
 
-    if (app.BorderColor[0] != drv.BorderColor[0] ||
-        app.BorderColor[1] != drv.BorderColor[1] ||
-        app.BorderColor[2] != drv.BorderColor[2] ||
-        app.BorderColor[3] != drv.BorderColor[3])
+  if (REGAL_FORCE_ES2_PROFILE || ctx.info->gles)
+  {
+    if (target != GL_TEXTURE_2D && target != GL_TEXTURE_CUBE_MAP)
     {
-        if (activeTextureUnit != unit)
-            ActiveTexture(ctx, GL_TEXTURE0 + unit );
-        tbl.glTexParameteriv( target, GL_TEXTURE_BORDER_COLOR, app.BorderColor);
-        drv.BorderColor[0] = app.BorderColor[0];
-        drv.BorderColor[1] = app.BorderColor[1];
-        drv.BorderColor[2] = app.BorderColor[2];
-        drv.BorderColor[3] = app.BorderColor[3];
+      return sent;
+    }
+  }
+
+  DispatchTable &tbl = ctx.dispatcher.emulation;
+
+  if (newState.BorderColor[0] != drv.BorderColor[0] ||
+      newState.BorderColor[1] != drv.BorderColor[1] ||
+      newState.BorderColor[2] != drv.BorderColor[2] ||
+      newState.BorderColor[3] != drv.BorderColor[3])
+  {
+    if (activeTextureUnit != unit)
+      ActiveTexture(ctx, GL_TEXTURE0 + unit );
+    tbl.glTexParameteriv( target, GL_TEXTURE_BORDER_COLOR, newState.BorderColor);
+    drv.BorderColor[0] = newState.BorderColor[0];
+    drv.BorderColor[1] = newState.BorderColor[1];
+    drv.BorderColor[2] = newState.BorderColor[2];
+    drv.BorderColor[3] = newState.BorderColor[3];
+    sent = true;
+  }
+
+  if (target != GL_TEXTURE_RECTANGLE)
+  {
+    if (newState.MinFilter != drv.MinFilter)
+    {
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameteri( target, GL_TEXTURE_MIN_FILTER, newState.MinFilter);
+      drv.MinFilter = newState.MinFilter;
+      sent = true;
     }
 
-    if (target != GL_TEXTURE_RECTANGLE)
+    if (newState.MagFilter != drv.MagFilter)
     {
-        if (app.MinFilter != drv.MinFilter)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameteri( target, GL_TEXTURE_MIN_FILTER, app.MinFilter);
-            drv.MinFilter = app.MinFilter;
-        }
-
-        if (app.MagFilter != drv.MagFilter)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameteri( target, GL_TEXTURE_MAG_FILTER, app.MagFilter);
-            drv.MagFilter = app.MagFilter;
-        }
-
-        if (app.WrapS != drv.WrapS)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameteri( target, GL_TEXTURE_WRAP_S, app.WrapS);
-            drv.WrapS = app.WrapS;
-        }
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameteri( target, GL_TEXTURE_MAG_FILTER, newState.MagFilter);
+      drv.MagFilter = newState.MagFilter;
+      sent = true;
     }
 
-    if (target == GL_TEXTURE_2D ||
-        target == GL_TEXTURE_3D ||
-        target == GL_TEXTURE_CUBE_MAP)
+    if (newState.WrapS != drv.WrapS)
     {
-        if (app.WrapT != drv.WrapT)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameteri( target, GL_TEXTURE_WRAP_T, app.WrapT);
-            drv.WrapT = app.WrapT;
-        }
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameteri( target, GL_TEXTURE_WRAP_S, newState.WrapS);
+      drv.WrapS = newState.WrapS;
+      sent = true;
     }
+  }
 
-    if (target == GL_TEXTURE_3D)
+  if (target == GL_TEXTURE_2D ||
+      target == GL_TEXTURE_3D ||
+      target == GL_TEXTURE_CUBE_MAP)
+  {
+    if (newState.WrapT != drv.WrapT)
     {
-        if (app.WrapR != drv.WrapR)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameteri( target, GL_TEXTURE_WRAP_R, app.WrapR);
-            drv.WrapR = app.WrapR;
-        }
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameteri( target, GL_TEXTURE_WRAP_T, newState.WrapT);
+      drv.WrapT = newState.WrapT;
+      sent = true;
     }
+  }
 
-    if (app.MinLod != drv.MinLod)
+  if (target == GL_TEXTURE_3D)
+  {
+    if (newState.WrapR != drv.WrapR)
     {
-        if (activeTextureUnit != unit)
-            ActiveTexture(ctx, GL_TEXTURE0 + unit );
-        tbl.glTexParameterf( target, GL_TEXTURE_MIN_LOD, app.MinLod);
-        drv.MinLod = app.MinLod;
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameteri( target, GL_TEXTURE_WRAP_R, newState.WrapR);
+      drv.WrapR = newState.WrapR;
+      sent = true;
     }
+  }
 
-    if (app.MaxLod != drv.MaxLod)
+  if (newState.MinLod != drv.MinLod)
+  {
+    if (activeTextureUnit != unit)
+      ActiveTexture(ctx, GL_TEXTURE0 + unit );
+    tbl.glTexParameterf( target, GL_TEXTURE_MIN_LOD, newState.MinLod);
+    drv.MinLod = newState.MinLod;
+    sent = true;
+  }
+
+  if (newState.MaxLod != drv.MaxLod)
+  {
+    if (activeTextureUnit != unit)
+      ActiveTexture(ctx, GL_TEXTURE0 + unit );
+    tbl.glTexParameterf( target, GL_TEXTURE_MAX_LOD, newState.MaxLod);
+    drv.MaxLod = newState.MaxLod;
+    sent = true;
+  }
+
+  if (newState.LodBias != drv.LodBias)
+  {
+    if (activeTextureUnit != unit)
+      ActiveTexture(ctx, GL_TEXTURE0 + unit );
+    tbl.glTexParameterf( target, GL_TEXTURE_LOD_BIAS, newState.LodBias);
+    drv.LodBias = newState.LodBias;
+    sent = true;
+  }
+
+  if (newState.CompareMode != drv.CompareMode)
+  {
+    if (activeTextureUnit != unit)
+      ActiveTexture(ctx, GL_TEXTURE0 + unit );
+    tbl.glTexParameteri( target, GL_TEXTURE_COMPARE_MODE, newState.CompareMode);
+    drv.CompareMode = newState.CompareMode;
+    sent = true;
+  }
+
+  if (newState.CompareFunc != drv.CompareFunc)
+  {
+    if (activeTextureUnit != unit)
+      ActiveTexture(ctx, GL_TEXTURE0 + unit );
+    tbl.glTexParameteri( target, GL_TEXTURE_COMPARE_FUNC, newState.CompareFunc);
+    drv.CompareFunc = newState.CompareFunc;
+    sent = true;
+  }
+
+  if (supportSrgb)
+  {
+    if (newState.SrgbDecodeExt != drv.SrgbDecodeExt)
     {
-        if (activeTextureUnit != unit)
-            ActiveTexture(ctx, GL_TEXTURE0 + unit );
-        tbl.glTexParameterf( target, GL_TEXTURE_MAX_LOD, app.MaxLod);
-        drv.MaxLod = app.MaxLod;
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameteri( target, GL_TEXTURE_SRGB_DECODE_EXT, newState.SrgbDecodeExt);
+      drv.SrgbDecodeExt = newState.SrgbDecodeExt;
+      sent = true;
     }
+  }
 
-    if (app.LodBias != drv.LodBias)
+  if (ctx.info->gl_ext_texture_filter_anisotropic)
+  {
+    if (newState.MaxAnisotropyExt != drv.MaxAnisotropyExt)
     {
-        if (activeTextureUnit != unit)
-            ActiveTexture(ctx, GL_TEXTURE0 + unit );
-        tbl.glTexParameterf( target, GL_TEXTURE_LOD_BIAS, app.LodBias);
-        drv.LodBias = app.LodBias;
+      if (activeTextureUnit != unit)
+        ActiveTexture(ctx, GL_TEXTURE0 + unit );
+      tbl.glTexParameterf( target, GL_TEXTURE_MAX_ANISOTROPY_EXT, newState.MaxAnisotropyExt);
+      drv.MaxAnisotropyExt = newState.MaxAnisotropyExt;
+      sent = true;
     }
+  }
 
-    if (app.CompareMode != drv.CompareMode)
-    {
-        if (activeTextureUnit != unit)
-            ActiveTexture(ctx, GL_TEXTURE0 + unit );
-        tbl.glTexParameteri( target, GL_TEXTURE_COMPARE_MODE, app.CompareMode);
-        drv.CompareMode = app.CompareMode;
-    }
+  return sent;
+}
 
-    if (app.CompareFunc != drv.CompareFunc)
-    {
-        if (activeTextureUnit != unit)
-            ActiveTexture(ctx, GL_TEXTURE0 + unit );
-        tbl.glTexParameteri( target, GL_TEXTURE_COMPARE_FUNC, app.CompareFunc);
-        drv.CompareFunc = app.CompareFunc;
-    }
-
-    if (ctx->info->gl_ext_texture_srgb_decode)
-    {
-        if (app.SrgbDecodeExt != drv.SrgbDecodeExt)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameteri( target, GL_TEXTURE_SRGB_DECODE_EXT, app.SrgbDecodeExt);
-            drv.SrgbDecodeExt = app.SrgbDecodeExt;
-        }
-    }
-
-    if (ctx->info->gl_ext_texture_filter_anisotropic)
-    {
-        if (app.MaxAnisotropyExt != drv.MaxAnisotropyExt)
-        {
-            if (activeTextureUnit != unit)
-                ActiveTexture(ctx, GL_TEXTURE0 + unit );
-            tbl.glTexParameterf( target, GL_TEXTURE_MAX_ANISOTROPY_EXT, app.MaxAnisotropyExt);
-            drv.MaxAnisotropyExt = app.MaxAnisotropyExt;
-        }
-    }
-
-    drv.ver = mainVer.Current();
 }
 
 REGAL_NAMESPACE_END

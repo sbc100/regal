@@ -50,6 +50,21 @@
 
 #define REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE      (1<<REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE_BITS)
 
+// OpenGL spec is four fixed-function texture units.
+// Regal can emulate eight, default is four
+
+#ifndef REGAL_EMU_IFF_TEXTURE_UNITS
+#define REGAL_EMU_IFF_TEXTURE_UNITS 4
+#endif
+
+#ifndef REGAL_EMU_IFF_VERTEX_ATTRIBS
+#define REGAL_EMU_IFF_VERTEX_ATTRIBS 16
+#endif
+
+#define REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH 128
+#define REGAL_FIXED_FUNCTION_MAX_LIGHTS           8
+#define REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES      8
+
 #if REGAL_EMULATION
 
 REGAL_GLOBAL_BEGIN
@@ -84,21 +99,6 @@ const GLenum texenvModeGL[] = {
   GL_BLEND,
   GL_COMBINE
 };
-
-// OpenGL spec is four fixed-function texture units.
-// Regal can emulate eight, default is four
-
-#ifndef REGAL_EMU_IFF_TEXTURE_UNITS
-#define REGAL_EMU_IFF_TEXTURE_UNITS 4
-#endif
-
-#ifndef REGAL_EMU_IFF_VERTEX_ATTRIBS
-#define REGAL_EMU_IFF_VERTEX_ATTRIBS 16
-#endif
-
-#define REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH 128
-#define REGAL_FIXED_FUNCTION_MAX_LIGHTS           8
-#define REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES      8
 
 enum RegalFFUniformEnum {
   FFU_foo = 0,
