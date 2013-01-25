@@ -59,6 +59,8 @@
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(VSNaClSDKRoot)lib\win_x86_32_host\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VSNaClSDKRoot)include;$(VSNaClSDKRoot)include\win;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VSNaClSDKRoot)lib\win_x86_32_host\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(ProjectDir)..\..\..\..\lib\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(ProjectDir)..\..\..\..\lib\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -65,6 +65,8 @@
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(VSNaClSDKRoot)lib\win_x86_32_host\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VSNaClSDKRoot)include;$(VSNaClSDKRoot)include\win;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VSNaClSDKRoot)lib\win_x86_32_host\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(ProjectDir)..\..\..\..\lib\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(ProjectDir)..\..\..\..\lib\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -149,7 +151,7 @@
       <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;ppapi_cpp.lib;ppapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
       <ModuleDefinitionFile>../../../../src/regal/RegalPPAPI.def</ModuleDefinitionFile>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>win\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -164,7 +166,7 @@
       <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;ppapi_cpp.lib;ppapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
       <ModuleDefinitionFile>../../../../src/regal/RegalPPAPI.def</ModuleDefinitionFile>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>win\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\..\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
