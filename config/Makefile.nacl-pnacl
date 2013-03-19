@@ -1,14 +1,16 @@
-include config/Makefile.nacl
+include config/nacl.inc
 
 NACL_ARCH := pnacl
 
-CC     := pnacl-clang
-CXX    := pnacl-clang++
-LD     := pnacl-clang++
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_x86_pnacl/$(NACL_LIBC)
+
+CC     := $(NACL_TOOLCHAIN)/bin/pnacl-clang
+CXX    := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
+LD     := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
+AR     := $(NACL_TOOLCHAIN)/bin/pnacl-ar
 RANLIB :=
 STRIP  ?=
 
-DISABLE_SHARED=1
 BIN_EXTENSION = .pexe
 EXT.DYNAMIC = so
 LDFLAGS.EXTRA =

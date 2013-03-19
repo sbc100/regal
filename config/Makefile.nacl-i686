@@ -1,11 +1,13 @@
-include config/Makefile.nacl
+include config/nacl.inc
 
 NACL_ARCH := i686
 
-CC     := i686-nacl-gcc
-CXX    := i686-nacl-g++
-LD     := i686-nacl-g++
-AR     := i686-nacl-ar
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_x86_$(NACL_LIBC)
+
+CC     := $(NACL_TOOLCHAIN)/bin/i686-nacl-gcc
+CXX    := $(NACL_TOOLCHAIN)/bin/i686-nacl-g++
+LD     := $(NACL_TOOLCHAIN)/bin/i686-nacl-g++
+AR     := $(NACL_TOOLCHAIN)/bin/i686-nacl-ar
 RANLIB :=
 STRIP  ?=
 

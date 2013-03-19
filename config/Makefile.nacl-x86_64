@@ -1,11 +1,13 @@
-include config/Makefile.nacl
+include config/nacl.inc
 
 NACL_ARCH := x86_64
 
-CC     := x86_64-nacl-gcc
-CXX    := x86_64-nacl-g++
-LD     := x86_64-nacl-g++
-AR     := x86_64-nacl-ar
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_x86_$(NACL_LIBC)
+
+CC     := $(NACL_TOOLCHAIN)/bin/x86_64-nacl-gcc
+CXX    := $(NACL_TOOLCHAIN)/bin/x86_64-nacl-g++
+LD     := $(NACL_TOOLCHAIN)/bin/x86_64-nacl-g++
+AR     := $(NACL_TOOLCHAIN)/bin/x86_64-nacl-ar
 RANLIB :=
 STRIP  ?=
 
