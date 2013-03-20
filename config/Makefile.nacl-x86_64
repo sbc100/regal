@@ -12,7 +12,7 @@ RANLIB :=
 STRIP  ?=
 
 WARN += -Wno-uninitialized -Wno-conversion-null
-PICFLAG = -fPIC
+PICFLAG =
 BIN_EXTENSION = _64.nexe
 EXT.DYNAMIC = so
 LDFLAGS.EXTRA =
