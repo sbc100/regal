@@ -18,6 +18,10 @@ from ApiRegal     import helperMap
 
 from RegalContextInfo import cond
 
+# Exclude some functions from the output
+
+exclude = set(['glGetString','glGetIntegerv','glGetError','glGetGraphicsResetStatusARB', 'glGetProgramInfoLog'])
+
 # Code generation for dispatch table init.
 
 def apiDispatchCodeInitCode(apis, args, dispatchName):
@@ -35,6 +39,9 @@ def apiDispatchCodeInitCode(apis, args, dispatchName):
         if getattr(function,'regalOnly',False)==True:
           continue
 
+	if function.name in exclude:
+	  continue
+	
         name = function.name
         code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
 
@@ -100,8 +107,11 @@ def generateDispatchCode(apis, args):
 
         if getattr(function,'regalOnly',False)==True:
           continue
+          
+	if function.name in exclude:
+	  continue
 
-        f = deepcopy(function)
+	f = deepcopy(function)
 
         name = f.name
         params = paramsDefaultCode(f.parameters, True)
@@ -147,6 +157,7 @@ def generateDispatchCode(apis, args):
             p = logParameter(f,i)
             if p==None:
                 body += '_code << "/* %s = ?? */";\n'%(i.name)
+ 
             elif p.startswith('boost::print::array'):
                 type = typeStrip(i.type)
                 size = i.size
@@ -155,8 +166,9 @@ def generateDispatchCode(apis, args):
                 if i.input:
                   if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
                     header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-                    header += '    _code << indent << \"const %s i\" << _%sIndex << \"[%s] = \" '%(type,i.name,size)
-                    header += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\\n\",\", \");\n'%(type,i.name,size)
+                    header += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << (%s) << \"] = \" '%(type,i.name,size)
+                    header += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\",\", \") '%(type,i.name,size)
+                    header += '<< \"\\n\";\n'
                     body += '_code << \"i\" << _%sIndex;\n'%(i.name)
                   else:
                     body += '_code << "/* %s = ?? */";\n'%(i.name)

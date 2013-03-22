@@ -5116,7 +5116,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilMaskSeparate(GLenum face, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilMaskSeparate","(", toString(face), ", ", mask, ")");
+    App("glStencilMaskSeparate","(", toString(face), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -31333,6 +31333,7 @@ extern "C" {
     {
       Driver("glXMakeContextCurrent","(", boost::print::optional(display,Logging::pointers), ", ", draw, ", ", read, ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXMakeContextCurrent(display, draw, read, ctx);
+      Init::makeCurrent(RegalSystemContext(ctx));
     }
     else
       Warning( "glXMakeContextCurrent not available." );
@@ -31403,6 +31404,7 @@ extern "C" {
   REGAL_DECL void *REGAL_CALL glXGetProcAddress(const GLubyte *procName)
   {
     App("glXGetProcAddress","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")");
+    Init::init();
     if (!dispatchTableGlobal.glXGetProcAddress)
     {
       GetProcAddress( dispatchTableGlobal.glXGetProcAddress, "glXGetProcAddress" );

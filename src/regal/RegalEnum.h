@@ -47,11 +47,8 @@ REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
 
-REGAL_GLOBAL_END
-
-REGAL_NAMESPACE_BEGIN
-
-enum Enum {
+  enum EnumValue
+  {
    RGL_2D = GL_2D,
    RGL_2_BYTES = GL_2_BYTES,
    RGL_3D = GL_3D,
@@ -4660,6 +4657,44 @@ enum Enum {
    RGL_PHONG_HINT_WIN = GL_PHONG_HINT_WIN,
    RGL_PHONG_WIN = GL_PHONG_WIN,
    RGL_FOG_SPECULAR_TEXTURE_WIN = GL_FOG_SPECULAR_TEXTURE_WIN,
+  };
+
+REGAL_GLOBAL_END
+
+REGAL_NAMESPACE_BEGIN
+
+// Wrap the EnumValue enum into a struct for the purpose
+// of overloading assignment and comparison operators for
+// GLenum interchangeability.
+
+struct Enum
+{
+  inline Enum() : v(RGL_NONE) {}
+
+  inline Enum(const GLenum v) { operator=(v); }
+
+  inline Enum &operator=(const GLenum other)
+  {
+    v = static_cast<EnumValue>(other);
+    return *this;
+  }
+
+  inline Enum &operator=(const Enum &other)
+  {
+    v = other.v;
+    return *this;
+  }
+
+  inline operator GLenum () const
+  {
+    return static_cast<GLenum>(v);
+  }
+
+  inline bool operator==(const GLenum other) const { return v==static_cast<EnumValue>(other); }
+  inline bool operator!=(const GLenum other) const { return v!=static_cast<EnumValue>(other); }
+
+  private:
+    EnumValue v;
 };
 
 REGAL_NAMESPACE_END

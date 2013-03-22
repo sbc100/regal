@@ -4957,7 +4957,7 @@ static void REGAL_CALL log_glStencilMaskSeparate(GLenum face, GLuint mask)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilMaskSeparate)(face, mask);
-    Driver("glStencilMaskSeparate","(", toString(face), ", ", mask, ")");
+    Driver("glStencilMaskSeparate","(", toString(face), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass)

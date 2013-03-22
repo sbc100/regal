@@ -5,11 +5,11 @@
 # in addition to Regal API entry points.
 #
 # eglGetDisplay is needed for apitrace eglretrace tool.
-#
+# glXGetProcAddress is needed for Linux chromium
 
 formulae = {
   'EmuInit' : {
-    'entries' : [ 'CGLChoosePixelFormat', 'eglGetDisplay' ],
+    'entries' : [ 'CGLChoosePixelFormat', 'eglGetDisplay', 'glXGetProcAddress' ],
     'prefix'  : [ 'Init::init();' ]
   }
 }
@@ -37,6 +37,11 @@ formulaeGlobal = {
 
     'glXMakeCurrent' : {
         'entries' : [ 'glXMakeCurrent' ],
+        'init' : [ 'Init::makeCurrent(RegalSystemContext(ctx));' ]
+    },
+
+    'glXMakeContextCurrent' : {
+        'entries' : [ 'glXMakeContextCurrent' ],
         'init' : [ 'Init::makeCurrent(RegalSystemContext(ctx));' ]
     },
 

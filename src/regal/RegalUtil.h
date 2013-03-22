@@ -154,7 +154,7 @@
 # if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID
 #  define REGAL_CODE 0
 # else
-#  define REGAL_CODE 0
+#  define REGAL_CODE 1
 # endif
 #endif
 

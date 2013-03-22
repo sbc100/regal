@@ -16949,7 +16949,7 @@ gl.add(glStencilFuncSeparate)
 glStencilMaskSeparate = Function('glStencilMaskSeparate')
 glStencilMaskSeparate.ret = Return('void')
 glStencilMaskSeparate.add( Input( 'face','GLenum' ))
-glStencilMaskSeparate.add( Input( 'mask','GLuint' ))
+glStencilMaskSeparate.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilMaskSeparate.version = '2.0'
 glStencilMaskSeparate.category = 'GL_VERSION_2_0'
 glStencilMaskSeparate.esVersions = [2.0]
