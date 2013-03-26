@@ -33,6 +33,7 @@ $(error "Platform '$(SYSTEM)' not supported")
 endif
 
 include build/regal.inc
+include build/regaltest.inc
 include build/zlib.inc
 include build/libpng.inc
 include build/glu.inc
@@ -663,14 +664,7 @@ endif
 # regaltest
 #
 
-REGALTEST.SRCS       += tests/test_main.cpp
-REGALTEST.SRCS       += tests/RegalDispatchGMock.cpp
-REGALTEST.SRCS       += tests/testRegalPpa.cpp
-REGALTEST.SRCS       += tests/testRegalPpca.cpp
-REGALTEST.SRCS       += tests/testRegalState.cpp
-REGALTEST.SRCS       += tests/testRegalTexC.cpp
-REGALTEST.SRCS       += tests/testRegalPixelConversions.cpp
-REGALTEST.SRCS       += tests/testStringList.cpp
+REGALTEST.SRCS       += $(REGALTEST.CXX)
 REGALTEST.SRCS.NAMES := $(notdir $(REGALTEST.SRCS))
 REGALTEST.OBJS       := $(addprefix tmp/$(SYSTEM)/regal_tests/static/,$(REGALTEST.SRCS.NAMES))
 REGALTEST.OBJS       := $(REGALTEST.OBJS:.cpp=.o)

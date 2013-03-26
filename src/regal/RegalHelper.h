@@ -125,6 +125,14 @@ namespace helper {
   }
 
    char *shaderSourceStrings(const GLsizei, const GLchar **, const GLint *);
+
+   bool getInfoLog
+   (
+    ::std::string &log,
+    void (REGAL_CALL *getInfoLog)      (GLuint,GLsizei,GLsizei *,GLchar *),
+    void (REGAL_CALL *getInfoLogLength)(GLuint,GLenum,GLint *),
+    GLuint obj
+  );
 }
 
 REGAL_NAMESPACE_END

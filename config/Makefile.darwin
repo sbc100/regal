@@ -1,6 +1,7 @@
 NAME = $(REGAL_NAME)
 CC = cc
 LD = cc
+RANLIB :=
 EXT.DYNAMIC = dylib
 CFLAGS.EXTRA = -dynamic -fno-common -Wno-constant-logical-operand
 CFLAGS.EXTRA += -MMD

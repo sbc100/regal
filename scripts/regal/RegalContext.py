@@ -167,17 +167,23 @@ ${EMU_MEMBER_DECLARE}
 
   RegalContext *groupInitializedContext();
 
+  // For RegalDispatchCode
+
+#if REGAL_CODE
+  FILE               *codeSource;
+  FILE               *codeHeader;
+  size_t              codeInputNext;
+  size_t              codeOutputNext;
+  size_t              codeShaderNext;  // glCreateShader/glCreateShaderObjectARB
+  size_t              codeProgramNext; // glCreateProgram/glCreateProgramObjectARB
+#endif
+
   // State tracked via EmuContextState.py / Regal.cpp
 
   size_t              depthBeginEnd;   // Normally zero or one
   size_t              depthPushMatrix; //
   size_t              depthPushAttrib; //
   size_t              depthNewList;    //
-
-  // For RegalDispatchCode
-
-  size_t              codeInputNext;
-  size_t              codeOutputNext;
 };
 
 REGAL_NAMESPACE_END
@@ -228,12 +234,18 @@ ${EMU_MEMBER_CONSTRUCT}#endif
   x11Drawable(0),
 #endif
   logCallback(NULL),
+#if REGAL_CODE
+  codeSource(NULL),
+  codeHeader(NULL),
+  codeInputNext(0),
+  codeOutputNext(0),
+  codeShaderNext(0),
+  codeProgramNext(0),
+#endif
   depthBeginEnd(0),
   depthPushMatrix(0),
   depthPushAttrib(0),
-  depthNewList(0),
-  codeInputNext(0),
-  codeOutputNext(0)
+  depthNewList(0)
 {
   Internal("RegalContext::RegalContext","()");
 
@@ -281,6 +293,27 @@ ${EMU_MEMBER_INIT}
   }
 #endif
 
+#if REGAL_CODE
+  if (Config::enableCode)
+  {
+    if (Config::codeSourceFile.length())
+    {
+      codeSource = fopen(Config::codeSourceFile.c_str(),"wt");      
+      if (!codeSource)
+        Warning("Failed to open file ",Config::codeSourceFile," for writing code source.");
+    }
+    if (Config::codeHeaderFile.length())
+    {
+      if (Config::codeHeaderFile==Config::codeSourceFile)
+        codeHeader = codeSource;
+      else
+        codeHeader = fopen(Config::codeHeaderFile.c_str(),"wt");
+      if (!codeHeader)
+        Warning("Failed to open file ",Config::codeHeaderFile," for writing code header.");      
+    }
+  }
+#endif
+
   initialized = true;
 }
 
@@ -296,6 +329,14 @@ RegalContext::~RegalContext()
 ${MEMBER_CLEANUP}
 #if REGAL_EMULATION
 ${EMU_MEMBER_CLEANUP}#endif
+
+#if REGAL_CODE
+  if (codeSource)
+    fclose(codeSource);
+
+  if (codeHeader)
+    fclose(codeHeader);
+#endif
 }
 
 bool

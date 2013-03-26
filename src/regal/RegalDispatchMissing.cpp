@@ -64,27 +64,27 @@ using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 
 // GL_VERSION_1_0
 
-void REGAL_CALL missing_glAccum(GLenum op, GLfloat value)
+static void REGAL_CALL missing_glAccum(GLenum op, GLfloat value)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(value);
   Warning( "glAccum not available." );
 }
 
-void REGAL_CALL missing_glAlphaFunc(GLenum func, GLclampf ref)
+static void REGAL_CALL missing_glAlphaFunc(GLenum func, GLclampf ref)
 {
   UNUSED_PARAMETER(func);
   UNUSED_PARAMETER(ref);
   Warning( "glAlphaFunc not available." );
 }
 
-void REGAL_CALL missing_glBegin(GLenum mode)
+static void REGAL_CALL missing_glBegin(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glBegin not available." );
 }
 
-void REGAL_CALL missing_glBitmap(GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap)
+static void REGAL_CALL missing_glBitmap(GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap)
 {
   UNUSED_PARAMETER(width);
   UNUSED_PARAMETER(height);
@@ -96,20 +96,20 @@ void REGAL_CALL missing_glBitmap(GLsizei width, GLsizei height, GLfloat xorig, G
   Warning( "glBitmap not available." );
 }
 
-void REGAL_CALL missing_glBlendFunc(GLenum sfactor, GLenum dfactor)
+static void REGAL_CALL missing_glBlendFunc(GLenum sfactor, GLenum dfactor)
 {
   UNUSED_PARAMETER(sfactor);
   UNUSED_PARAMETER(dfactor);
   Warning( "glBlendFunc not available." );
 }
 
-void REGAL_CALL missing_glCallList(GLuint list)
+static void REGAL_CALL missing_glCallList(GLuint list)
 {
   UNUSED_PARAMETER(list);
   Warning( "glCallList not available." );
 }
 
-void REGAL_CALL missing_glCallLists(GLsizei n, GLenum type, const GLvoid *lists)
+static void REGAL_CALL missing_glCallLists(GLsizei n, GLenum type, const GLvoid *lists)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(type);
@@ -117,13 +117,13 @@ void REGAL_CALL missing_glCallLists(GLsizei n, GLenum type, const GLvoid *lists)
   Warning( "glCallLists not available." );
 }
 
-void REGAL_CALL missing_glClear(GLbitfield mask)
+static void REGAL_CALL missing_glClear(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glClear not available." );
 }
 
-void REGAL_CALL missing_glClearAccum(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
+static void REGAL_CALL missing_glClearAccum(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -132,7 +132,7 @@ void REGAL_CALL missing_glClearAccum(GLfloat red, GLfloat green, GLfloat blue, G
   Warning( "glClearAccum not available." );
 }
 
-void REGAL_CALL missing_glClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+static void REGAL_CALL missing_glClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -141,32 +141,32 @@ void REGAL_CALL missing_glClearColor(GLclampf red, GLclampf green, GLclampf blue
   Warning( "glClearColor not available." );
 }
 
-void REGAL_CALL missing_glClearDepth(GLclampd depth)
+static void REGAL_CALL missing_glClearDepth(GLclampd depth)
 {
   UNUSED_PARAMETER(depth);
   Warning( "glClearDepth not available." );
 }
 
-void REGAL_CALL missing_glClearIndex(GLfloat c)
+static void REGAL_CALL missing_glClearIndex(GLfloat c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glClearIndex not available." );
 }
 
-void REGAL_CALL missing_glClearStencil(GLint s)
+static void REGAL_CALL missing_glClearStencil(GLint s)
 {
   UNUSED_PARAMETER(s);
   Warning( "glClearStencil not available." );
 }
 
-void REGAL_CALL missing_glClipPlane(GLenum plane, const GLdouble *equation)
+static void REGAL_CALL missing_glClipPlane(GLenum plane, const GLdouble *equation)
 {
   UNUSED_PARAMETER(plane);
   UNUSED_PARAMETER(equation);
   Warning( "glClipPlane not available." );
 }
 
-void REGAL_CALL missing_glColor3b(GLbyte red, GLbyte green, GLbyte blue)
+static void REGAL_CALL missing_glColor3b(GLbyte red, GLbyte green, GLbyte blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -174,13 +174,13 @@ void REGAL_CALL missing_glColor3b(GLbyte red, GLbyte green, GLbyte blue)
   Warning( "glColor3b not available." );
 }
 
-void REGAL_CALL missing_glColor3bv(const GLbyte *v)
+static void REGAL_CALL missing_glColor3bv(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3bv not available." );
 }
 
-void REGAL_CALL missing_glColor3d(GLdouble red, GLdouble green, GLdouble blue)
+static void REGAL_CALL missing_glColor3d(GLdouble red, GLdouble green, GLdouble blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -188,13 +188,13 @@ void REGAL_CALL missing_glColor3d(GLdouble red, GLdouble green, GLdouble blue)
   Warning( "glColor3d not available." );
 }
 
-void REGAL_CALL missing_glColor3dv(const GLdouble *v)
+static void REGAL_CALL missing_glColor3dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3dv not available." );
 }
 
-void REGAL_CALL missing_glColor3f(GLfloat red, GLfloat green, GLfloat blue)
+static void REGAL_CALL missing_glColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -202,13 +202,13 @@ void REGAL_CALL missing_glColor3f(GLfloat red, GLfloat green, GLfloat blue)
   Warning( "glColor3f not available." );
 }
 
-void REGAL_CALL missing_glColor3fv(const GLfloat *v)
+static void REGAL_CALL missing_glColor3fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3fv not available." );
 }
 
-void REGAL_CALL missing_glColor3i(GLint red, GLint green, GLint blue)
+static void REGAL_CALL missing_glColor3i(GLint red, GLint green, GLint blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -216,13 +216,13 @@ void REGAL_CALL missing_glColor3i(GLint red, GLint green, GLint blue)
   Warning( "glColor3i not available." );
 }
 
-void REGAL_CALL missing_glColor3iv(const GLint *v)
+static void REGAL_CALL missing_glColor3iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3iv not available." );
 }
 
-void REGAL_CALL missing_glColor3s(GLshort red, GLshort green, GLshort blue)
+static void REGAL_CALL missing_glColor3s(GLshort red, GLshort green, GLshort blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -230,13 +230,13 @@ void REGAL_CALL missing_glColor3s(GLshort red, GLshort green, GLshort blue)
   Warning( "glColor3s not available." );
 }
 
-void REGAL_CALL missing_glColor3sv(const GLshort *v)
+static void REGAL_CALL missing_glColor3sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3sv not available." );
 }
 
-void REGAL_CALL missing_glColor3ub(GLubyte red, GLubyte green, GLubyte blue)
+static void REGAL_CALL missing_glColor3ub(GLubyte red, GLubyte green, GLubyte blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -244,13 +244,13 @@ void REGAL_CALL missing_glColor3ub(GLubyte red, GLubyte green, GLubyte blue)
   Warning( "glColor3ub not available." );
 }
 
-void REGAL_CALL missing_glColor3ubv(const GLubyte *v)
+static void REGAL_CALL missing_glColor3ubv(const GLubyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3ubv not available." );
 }
 
-void REGAL_CALL missing_glColor3ui(GLuint red, GLuint green, GLuint blue)
+static void REGAL_CALL missing_glColor3ui(GLuint red, GLuint green, GLuint blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -258,13 +258,13 @@ void REGAL_CALL missing_glColor3ui(GLuint red, GLuint green, GLuint blue)
   Warning( "glColor3ui not available." );
 }
 
-void REGAL_CALL missing_glColor3uiv(const GLuint *v)
+static void REGAL_CALL missing_glColor3uiv(const GLuint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3uiv not available." );
 }
 
-void REGAL_CALL missing_glColor3us(GLushort red, GLushort green, GLushort blue)
+static void REGAL_CALL missing_glColor3us(GLushort red, GLushort green, GLushort blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -272,13 +272,13 @@ void REGAL_CALL missing_glColor3us(GLushort red, GLushort green, GLushort blue)
   Warning( "glColor3us not available." );
 }
 
-void REGAL_CALL missing_glColor3usv(const GLushort *v)
+static void REGAL_CALL missing_glColor3usv(const GLushort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3usv not available." );
 }
 
-void REGAL_CALL missing_glColor4b(GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha)
+static void REGAL_CALL missing_glColor4b(GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -287,13 +287,13 @@ void REGAL_CALL missing_glColor4b(GLbyte red, GLbyte green, GLbyte blue, GLbyte 
   Warning( "glColor4b not available." );
 }
 
-void REGAL_CALL missing_glColor4bv(const GLbyte *v)
+static void REGAL_CALL missing_glColor4bv(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4bv not available." );
 }
 
-void REGAL_CALL missing_glColor4d(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
+static void REGAL_CALL missing_glColor4d(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -302,13 +302,13 @@ void REGAL_CALL missing_glColor4d(GLdouble red, GLdouble green, GLdouble blue, G
   Warning( "glColor4d not available." );
 }
 
-void REGAL_CALL missing_glColor4dv(const GLdouble *v)
+static void REGAL_CALL missing_glColor4dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4dv not available." );
 }
 
-void REGAL_CALL missing_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
+static void REGAL_CALL missing_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -317,13 +317,13 @@ void REGAL_CALL missing_glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfl
   Warning( "glColor4f not available." );
 }
 
-void REGAL_CALL missing_glColor4fv(const GLfloat *v)
+static void REGAL_CALL missing_glColor4fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4fv not available." );
 }
 
-void REGAL_CALL missing_glColor4i(GLint red, GLint green, GLint blue, GLint alpha)
+static void REGAL_CALL missing_glColor4i(GLint red, GLint green, GLint blue, GLint alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -332,13 +332,13 @@ void REGAL_CALL missing_glColor4i(GLint red, GLint green, GLint blue, GLint alph
   Warning( "glColor4i not available." );
 }
 
-void REGAL_CALL missing_glColor4iv(const GLint *v)
+static void REGAL_CALL missing_glColor4iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4iv not available." );
 }
 
-void REGAL_CALL missing_glColor4s(GLshort red, GLshort green, GLshort blue, GLshort alpha)
+static void REGAL_CALL missing_glColor4s(GLshort red, GLshort green, GLshort blue, GLshort alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -347,13 +347,13 @@ void REGAL_CALL missing_glColor4s(GLshort red, GLshort green, GLshort blue, GLsh
   Warning( "glColor4s not available." );
 }
 
-void REGAL_CALL missing_glColor4sv(const GLshort *v)
+static void REGAL_CALL missing_glColor4sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4sv not available." );
 }
 
-void REGAL_CALL missing_glColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha)
+static void REGAL_CALL missing_glColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -362,13 +362,13 @@ void REGAL_CALL missing_glColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLu
   Warning( "glColor4ub not available." );
 }
 
-void REGAL_CALL missing_glColor4ubv(const GLubyte *v)
+static void REGAL_CALL missing_glColor4ubv(const GLubyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4ubv not available." );
 }
 
-void REGAL_CALL missing_glColor4ui(GLuint red, GLuint green, GLuint blue, GLuint alpha)
+static void REGAL_CALL missing_glColor4ui(GLuint red, GLuint green, GLuint blue, GLuint alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -377,13 +377,13 @@ void REGAL_CALL missing_glColor4ui(GLuint red, GLuint green, GLuint blue, GLuint
   Warning( "glColor4ui not available." );
 }
 
-void REGAL_CALL missing_glColor4uiv(const GLuint *v)
+static void REGAL_CALL missing_glColor4uiv(const GLuint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4uiv not available." );
 }
 
-void REGAL_CALL missing_glColor4us(GLushort red, GLushort green, GLushort blue, GLushort alpha)
+static void REGAL_CALL missing_glColor4us(GLushort red, GLushort green, GLushort blue, GLushort alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -392,13 +392,13 @@ void REGAL_CALL missing_glColor4us(GLushort red, GLushort green, GLushort blue, 
   Warning( "glColor4us not available." );
 }
 
-void REGAL_CALL missing_glColor4usv(const GLushort *v)
+static void REGAL_CALL missing_glColor4usv(const GLushort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4usv not available." );
 }
 
-void REGAL_CALL missing_glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
+static void REGAL_CALL missing_glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -407,14 +407,14 @@ void REGAL_CALL missing_glColorMask(GLboolean red, GLboolean green, GLboolean bl
   Warning( "glColorMask not available." );
 }
 
-void REGAL_CALL missing_glColorMaterial(GLenum face, GLenum mode)
+static void REGAL_CALL missing_glColorMaterial(GLenum face, GLenum mode)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mode);
   Warning( "glColorMaterial not available." );
 }
 
-void REGAL_CALL missing_glCopyPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum type)
+static void REGAL_CALL missing_glCopyPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum type)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -424,51 +424,51 @@ void REGAL_CALL missing_glCopyPixels(GLint x, GLint y, GLsizei width, GLsizei he
   Warning( "glCopyPixels not available." );
 }
 
-void REGAL_CALL missing_glCullFace(GLenum mode)
+static void REGAL_CALL missing_glCullFace(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glCullFace not available." );
 }
 
-void REGAL_CALL missing_glDeleteLists(GLuint list, GLsizei range)
+static void REGAL_CALL missing_glDeleteLists(GLuint list, GLsizei range)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(range);
   Warning( "glDeleteLists not available." );
 }
 
-void REGAL_CALL missing_glDepthFunc(GLenum func)
+static void REGAL_CALL missing_glDepthFunc(GLenum func)
 {
   UNUSED_PARAMETER(func);
   Warning( "glDepthFunc not available." );
 }
 
-void REGAL_CALL missing_glDepthMask(GLboolean flag)
+static void REGAL_CALL missing_glDepthMask(GLboolean flag)
 {
   UNUSED_PARAMETER(flag);
   Warning( "glDepthMask not available." );
 }
 
-void REGAL_CALL missing_glDepthRange(GLclampd zNear, GLclampd zFar)
+static void REGAL_CALL missing_glDepthRange(GLclampd zNear, GLclampd zFar)
 {
   UNUSED_PARAMETER(zNear);
   UNUSED_PARAMETER(zFar);
   Warning( "glDepthRange not available." );
 }
 
-void REGAL_CALL missing_glDisable(GLenum cap)
+static void REGAL_CALL missing_glDisable(GLenum cap)
 {
   UNUSED_PARAMETER(cap);
   Warning( "glDisable not available." );
 }
 
-void REGAL_CALL missing_glDrawBuffer(GLenum mode)
+static void REGAL_CALL missing_glDrawBuffer(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glDrawBuffer not available." );
 }
 
-void REGAL_CALL missing_glDrawPixels(GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glDrawPixels(GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(width);
   UNUSED_PARAMETER(height);
@@ -478,85 +478,85 @@ void REGAL_CALL missing_glDrawPixels(GLsizei width, GLsizei height, GLenum forma
   Warning( "glDrawPixels not available." );
 }
 
-void REGAL_CALL missing_glEdgeFlag(GLboolean flag)
+static void REGAL_CALL missing_glEdgeFlag(GLboolean flag)
 {
   UNUSED_PARAMETER(flag);
   Warning( "glEdgeFlag not available." );
 }
 
-void REGAL_CALL missing_glEdgeFlagv(const GLboolean *flag)
+static void REGAL_CALL missing_glEdgeFlagv(const GLboolean *flag)
 {
   UNUSED_PARAMETER(flag);
   Warning( "glEdgeFlagv not available." );
 }
 
-void REGAL_CALL missing_glEnable(GLenum cap)
+static void REGAL_CALL missing_glEnable(GLenum cap)
 {
   UNUSED_PARAMETER(cap);
   Warning( "glEnable not available." );
 }
 
-void REGAL_CALL missing_glEnd(void)
+static void REGAL_CALL missing_glEnd(void)
 {
   Warning( "glEnd not available." );
 }
 
-void REGAL_CALL missing_glEndList(void)
+static void REGAL_CALL missing_glEndList(void)
 {
   Warning( "glEndList not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord1d(GLdouble u)
+static void REGAL_CALL missing_glEvalCoord1d(GLdouble u)
 {
   UNUSED_PARAMETER(u);
   Warning( "glEvalCoord1d not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord1dv(const GLdouble *u)
+static void REGAL_CALL missing_glEvalCoord1dv(const GLdouble *u)
 {
   UNUSED_PARAMETER(u);
   Warning( "glEvalCoord1dv not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord1f(GLfloat u)
+static void REGAL_CALL missing_glEvalCoord1f(GLfloat u)
 {
   UNUSED_PARAMETER(u);
   Warning( "glEvalCoord1f not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord1fv(const GLfloat *u)
+static void REGAL_CALL missing_glEvalCoord1fv(const GLfloat *u)
 {
   UNUSED_PARAMETER(u);
   Warning( "glEvalCoord1fv not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord2d(GLdouble u, GLdouble v)
+static void REGAL_CALL missing_glEvalCoord2d(GLdouble u, GLdouble v)
 {
   UNUSED_PARAMETER(u);
   UNUSED_PARAMETER(v);
   Warning( "glEvalCoord2d not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord2dv(const GLdouble *u)
+static void REGAL_CALL missing_glEvalCoord2dv(const GLdouble *u)
 {
   UNUSED_PARAMETER(u);
   Warning( "glEvalCoord2dv not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord2f(GLfloat u, GLfloat v)
+static void REGAL_CALL missing_glEvalCoord2f(GLfloat u, GLfloat v)
 {
   UNUSED_PARAMETER(u);
   UNUSED_PARAMETER(v);
   Warning( "glEvalCoord2f not available." );
 }
 
-void REGAL_CALL missing_glEvalCoord2fv(const GLfloat *u)
+static void REGAL_CALL missing_glEvalCoord2fv(const GLfloat *u)
 {
   UNUSED_PARAMETER(u);
   Warning( "glEvalCoord2fv not available." );
 }
 
-void REGAL_CALL missing_glEvalMesh1(GLenum mode, GLint i1, GLint i2)
+static void REGAL_CALL missing_glEvalMesh1(GLenum mode, GLint i1, GLint i2)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(i1);
@@ -564,7 +564,7 @@ void REGAL_CALL missing_glEvalMesh1(GLenum mode, GLint i1, GLint i2)
   Warning( "glEvalMesh1 not available." );
 }
 
-void REGAL_CALL missing_glEvalMesh2(GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2)
+static void REGAL_CALL missing_glEvalMesh2(GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(i1);
@@ -574,20 +574,20 @@ void REGAL_CALL missing_glEvalMesh2(GLenum mode, GLint i1, GLint i2, GLint j1, G
   Warning( "glEvalMesh2 not available." );
 }
 
-void REGAL_CALL missing_glEvalPoint1(GLint i)
+static void REGAL_CALL missing_glEvalPoint1(GLint i)
 {
   UNUSED_PARAMETER(i);
   Warning( "glEvalPoint1 not available." );
 }
 
-void REGAL_CALL missing_glEvalPoint2(GLint i, GLint j)
+static void REGAL_CALL missing_glEvalPoint2(GLint i, GLint j)
 {
   UNUSED_PARAMETER(i);
   UNUSED_PARAMETER(j);
   Warning( "glEvalPoint2 not available." );
 }
 
-void REGAL_CALL missing_glFeedbackBuffer(GLsizei size, GLenum type, GLfloat *buffer)
+static void REGAL_CALL missing_glFeedbackBuffer(GLsizei size, GLenum type, GLfloat *buffer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -595,51 +595,51 @@ void REGAL_CALL missing_glFeedbackBuffer(GLsizei size, GLenum type, GLfloat *buf
   Warning( "glFeedbackBuffer not available." );
 }
 
-void REGAL_CALL missing_glFinish(void)
+static void REGAL_CALL missing_glFinish(void)
 {
   Warning( "glFinish not available." );
 }
 
-void REGAL_CALL missing_glFlush(void)
+static void REGAL_CALL missing_glFlush(void)
 {
   Warning( "glFlush not available." );
 }
 
-void REGAL_CALL missing_glFogf(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glFogf(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFogf not available." );
 }
 
-void REGAL_CALL missing_glFogfv(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glFogfv(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFogfv not available." );
 }
 
-void REGAL_CALL missing_glFogi(GLenum pname, GLint param)
+static void REGAL_CALL missing_glFogi(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFogi not available." );
 }
 
-void REGAL_CALL missing_glFogiv(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glFogiv(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFogiv not available." );
 }
 
-void REGAL_CALL missing_glFrontFace(GLenum mode)
+static void REGAL_CALL missing_glFrontFace(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glFrontFace not available." );
 }
 
-void REGAL_CALL missing_glFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
+static void REGAL_CALL missing_glFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
 {
   UNUSED_PARAMETER(left);
   UNUSED_PARAMETER(right);
@@ -650,55 +650,55 @@ void REGAL_CALL missing_glFrustum(GLdouble left, GLdouble right, GLdouble bottom
   Warning( "glFrustum not available." );
 }
 
-GLuint REGAL_CALL missing_glGenLists(GLsizei range)
+static GLuint REGAL_CALL missing_glGenLists(GLsizei range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenLists not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glGetBooleanv(GLenum pname, GLboolean *params)
+static void REGAL_CALL missing_glGetBooleanv(GLenum pname, GLboolean *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetBooleanv not available." );
 }
 
-void REGAL_CALL missing_glGetClipPlane(GLenum plane, GLdouble *equation)
+static void REGAL_CALL missing_glGetClipPlane(GLenum plane, GLdouble *equation)
 {
   UNUSED_PARAMETER(plane);
   UNUSED_PARAMETER(equation);
   Warning( "glGetClipPlane not available." );
 }
 
-void REGAL_CALL missing_glGetDoublev(GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetDoublev(GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetDoublev not available." );
 }
 
-GLenum REGAL_CALL missing_glGetError(void)
+static GLenum REGAL_CALL missing_glGetError(void)
 {
   Warning( "glGetError not available." );
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glGetFloatv(GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetFloatv(GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetFloatv not available." );
 }
 
-void REGAL_CALL missing_glGetIntegerv(GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetIntegerv(GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetIntegerv not available." );
 }
 
-void REGAL_CALL missing_glGetLightfv(GLenum light, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetLightfv(GLenum light, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -706,7 +706,7 @@ void REGAL_CALL missing_glGetLightfv(GLenum light, GLenum pname, GLfloat *params
   Warning( "glGetLightfv not available." );
 }
 
-void REGAL_CALL missing_glGetLightiv(GLenum light, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetLightiv(GLenum light, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -714,7 +714,7 @@ void REGAL_CALL missing_glGetLightiv(GLenum light, GLenum pname, GLint *params)
   Warning( "glGetLightiv not available." );
 }
 
-void REGAL_CALL missing_glGetMapdv(GLenum target, GLenum query, GLdouble *v)
+static void REGAL_CALL missing_glGetMapdv(GLenum target, GLenum query, GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(query);
@@ -722,7 +722,7 @@ void REGAL_CALL missing_glGetMapdv(GLenum target, GLenum query, GLdouble *v)
   Warning( "glGetMapdv not available." );
 }
 
-void REGAL_CALL missing_glGetMapfv(GLenum target, GLenum query, GLfloat *v)
+static void REGAL_CALL missing_glGetMapfv(GLenum target, GLenum query, GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(query);
@@ -730,7 +730,7 @@ void REGAL_CALL missing_glGetMapfv(GLenum target, GLenum query, GLfloat *v)
   Warning( "glGetMapfv not available." );
 }
 
-void REGAL_CALL missing_glGetMapiv(GLenum target, GLenum query, GLint *v)
+static void REGAL_CALL missing_glGetMapiv(GLenum target, GLenum query, GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(query);
@@ -738,7 +738,7 @@ void REGAL_CALL missing_glGetMapiv(GLenum target, GLenum query, GLint *v)
   Warning( "glGetMapiv not available." );
 }
 
-void REGAL_CALL missing_glGetMaterialfv(GLenum face, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMaterialfv(GLenum face, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -746,7 +746,7 @@ void REGAL_CALL missing_glGetMaterialfv(GLenum face, GLenum pname, GLfloat *para
   Warning( "glGetMaterialfv not available." );
 }
 
-void REGAL_CALL missing_glGetMaterialiv(GLenum face, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMaterialiv(GLenum face, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -754,41 +754,41 @@ void REGAL_CALL missing_glGetMaterialiv(GLenum face, GLenum pname, GLint *params
   Warning( "glGetMaterialiv not available." );
 }
 
-void REGAL_CALL missing_glGetPixelMapfv(GLenum map, GLfloat *values)
+static void REGAL_CALL missing_glGetPixelMapfv(GLenum map, GLfloat *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(values);
   Warning( "glGetPixelMapfv not available." );
 }
 
-void REGAL_CALL missing_glGetPixelMapuiv(GLenum map, GLuint *values)
+static void REGAL_CALL missing_glGetPixelMapuiv(GLenum map, GLuint *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(values);
   Warning( "glGetPixelMapuiv not available." );
 }
 
-void REGAL_CALL missing_glGetPixelMapusv(GLenum map, GLushort *values)
+static void REGAL_CALL missing_glGetPixelMapusv(GLenum map, GLushort *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(values);
   Warning( "glGetPixelMapusv not available." );
 }
 
-void REGAL_CALL missing_glGetPolygonStipple(GLubyte *mask)
+static void REGAL_CALL missing_glGetPolygonStipple(GLubyte *mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glGetPolygonStipple not available." );
 }
 
-const GLubyte *REGAL_CALL missing_glGetString(GLenum name)
+static const GLubyte *REGAL_CALL missing_glGetString(GLenum name)
 {
   UNUSED_PARAMETER(name);
   Warning( "glGetString not available." );
   return NULL;
 }
 
-void REGAL_CALL missing_glGetTexEnvfv(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTexEnvfv(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -796,7 +796,7 @@ void REGAL_CALL missing_glGetTexEnvfv(GLenum target, GLenum pname, GLfloat *para
   Warning( "glGetTexEnvfv not available." );
 }
 
-void REGAL_CALL missing_glGetTexEnviv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexEnviv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -804,7 +804,7 @@ void REGAL_CALL missing_glGetTexEnviv(GLenum target, GLenum pname, GLint *params
   Warning( "glGetTexEnviv not available." );
 }
 
-void REGAL_CALL missing_glGetTexGendv(GLenum coord, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetTexGendv(GLenum coord, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -812,7 +812,7 @@ void REGAL_CALL missing_glGetTexGendv(GLenum coord, GLenum pname, GLdouble *para
   Warning( "glGetTexGendv not available." );
 }
 
-void REGAL_CALL missing_glGetTexGenfv(GLenum coord, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTexGenfv(GLenum coord, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -820,7 +820,7 @@ void REGAL_CALL missing_glGetTexGenfv(GLenum coord, GLenum pname, GLfloat *param
   Warning( "glGetTexGenfv not available." );
 }
 
-void REGAL_CALL missing_glGetTexGeniv(GLenum coord, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexGeniv(GLenum coord, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -828,7 +828,7 @@ void REGAL_CALL missing_glGetTexGeniv(GLenum coord, GLenum pname, GLint *params)
   Warning( "glGetTexGeniv not available." );
 }
 
-void REGAL_CALL missing_glGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
+static void REGAL_CALL missing_glGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -838,7 +838,7 @@ void REGAL_CALL missing_glGetTexImage(GLenum target, GLint level, GLenum format,
   Warning( "glGetTexImage not available." );
 }
 
-void REGAL_CALL missing_glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -847,7 +847,7 @@ void REGAL_CALL missing_glGetTexLevelParameterfv(GLenum target, GLint level, GLe
   Warning( "glGetTexLevelParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -856,7 +856,7 @@ void REGAL_CALL missing_glGetTexLevelParameteriv(GLenum target, GLint level, GLe
   Warning( "glGetTexLevelParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetTexParameterfv(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTexParameterfv(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -864,7 +864,7 @@ void REGAL_CALL missing_glGetTexParameterfv(GLenum target, GLenum pname, GLfloat
   Warning( "glGetTexParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetTexParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -872,115 +872,115 @@ void REGAL_CALL missing_glGetTexParameteriv(GLenum target, GLenum pname, GLint *
   Warning( "glGetTexParameteriv not available." );
 }
 
-void REGAL_CALL missing_glHint(GLenum target, GLenum mode)
+static void REGAL_CALL missing_glHint(GLenum target, GLenum mode)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(mode);
   Warning( "glHint not available." );
 }
 
-void REGAL_CALL missing_glIndexMask(GLuint mask)
+static void REGAL_CALL missing_glIndexMask(GLuint mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glIndexMask not available." );
 }
 
-void REGAL_CALL missing_glIndexd(GLdouble c)
+static void REGAL_CALL missing_glIndexd(GLdouble c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexd not available." );
 }
 
-void REGAL_CALL missing_glIndexdv(const GLdouble *c)
+static void REGAL_CALL missing_glIndexdv(const GLdouble *c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexdv not available." );
 }
 
-void REGAL_CALL missing_glIndexf(GLfloat c)
+static void REGAL_CALL missing_glIndexf(GLfloat c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexf not available." );
 }
 
-void REGAL_CALL missing_glIndexfv(const GLfloat *c)
+static void REGAL_CALL missing_glIndexfv(const GLfloat *c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexfv not available." );
 }
 
-void REGAL_CALL missing_glIndexi(GLint c)
+static void REGAL_CALL missing_glIndexi(GLint c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexi not available." );
 }
 
-void REGAL_CALL missing_glIndexiv(const GLint *c)
+static void REGAL_CALL missing_glIndexiv(const GLint *c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexiv not available." );
 }
 
-void REGAL_CALL missing_glIndexs(GLshort c)
+static void REGAL_CALL missing_glIndexs(GLshort c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexs not available." );
 }
 
-void REGAL_CALL missing_glIndexsv(const GLshort *c)
+static void REGAL_CALL missing_glIndexsv(const GLshort *c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexsv not available." );
 }
 
-void REGAL_CALL missing_glInitNames(void)
+static void REGAL_CALL missing_glInitNames(void)
 {
   Warning( "glInitNames not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsEnabled(GLenum cap)
+static GLboolean REGAL_CALL missing_glIsEnabled(GLenum cap)
 {
   UNUSED_PARAMETER(cap);
   Warning( "glIsEnabled not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsList(GLuint list)
+static GLboolean REGAL_CALL missing_glIsList(GLuint list)
 {
   UNUSED_PARAMETER(list);
   Warning( "glIsList not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glLightModelf(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glLightModelf(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glLightModelf not available." );
 }
 
-void REGAL_CALL missing_glLightModelfv(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glLightModelfv(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glLightModelfv not available." );
 }
 
-void REGAL_CALL missing_glLightModeli(GLenum pname, GLint param)
+static void REGAL_CALL missing_glLightModeli(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glLightModeli not available." );
 }
 
-void REGAL_CALL missing_glLightModeliv(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glLightModeliv(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glLightModeliv not available." );
 }
 
-void REGAL_CALL missing_glLightf(GLenum light, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glLightf(GLenum light, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -988,7 +988,7 @@ void REGAL_CALL missing_glLightf(GLenum light, GLenum pname, GLfloat param)
   Warning( "glLightf not available." );
 }
 
-void REGAL_CALL missing_glLightfv(GLenum light, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glLightfv(GLenum light, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -996,7 +996,7 @@ void REGAL_CALL missing_glLightfv(GLenum light, GLenum pname, const GLfloat *par
   Warning( "glLightfv not available." );
 }
 
-void REGAL_CALL missing_glLighti(GLenum light, GLenum pname, GLint param)
+static void REGAL_CALL missing_glLighti(GLenum light, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -1004,7 +1004,7 @@ void REGAL_CALL missing_glLighti(GLenum light, GLenum pname, GLint param)
   Warning( "glLighti not available." );
 }
 
-void REGAL_CALL missing_glLightiv(GLenum light, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glLightiv(GLenum light, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -1012,55 +1012,55 @@ void REGAL_CALL missing_glLightiv(GLenum light, GLenum pname, const GLint *param
   Warning( "glLightiv not available." );
 }
 
-void REGAL_CALL missing_glLineStipple(GLint factor, GLushort pattern)
+static void REGAL_CALL missing_glLineStipple(GLint factor, GLushort pattern)
 {
   UNUSED_PARAMETER(factor);
   UNUSED_PARAMETER(pattern);
   Warning( "glLineStipple not available." );
 }
 
-void REGAL_CALL missing_glLineWidth(GLfloat width)
+static void REGAL_CALL missing_glLineWidth(GLfloat width)
 {
   UNUSED_PARAMETER(width);
   Warning( "glLineWidth not available." );
 }
 
-void REGAL_CALL missing_glListBase(GLuint base)
+static void REGAL_CALL missing_glListBase(GLuint base)
 {
   UNUSED_PARAMETER(base);
   Warning( "glListBase not available." );
 }
 
-void REGAL_CALL missing_glLoadIdentity(void)
+static void REGAL_CALL missing_glLoadIdentity(void)
 {
   Warning( "glLoadIdentity not available." );
 }
 
-void REGAL_CALL missing_glLoadMatrixd(const GLdouble *m)
+static void REGAL_CALL missing_glLoadMatrixd(const GLdouble *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadMatrixd not available." );
 }
 
-void REGAL_CALL missing_glLoadMatrixf(const GLfloat *m)
+static void REGAL_CALL missing_glLoadMatrixf(const GLfloat *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadMatrixf not available." );
 }
 
-void REGAL_CALL missing_glLoadName(GLuint name)
+static void REGAL_CALL missing_glLoadName(GLuint name)
 {
   UNUSED_PARAMETER(name);
   Warning( "glLoadName not available." );
 }
 
-void REGAL_CALL missing_glLogicOp(GLenum opcode)
+static void REGAL_CALL missing_glLogicOp(GLenum opcode)
 {
   UNUSED_PARAMETER(opcode);
   Warning( "glLogicOp not available." );
 }
 
-void REGAL_CALL missing_glMap1d(GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
+static void REGAL_CALL missing_glMap1d(GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(u1);
@@ -1071,7 +1071,7 @@ void REGAL_CALL missing_glMap1d(GLenum target, GLdouble u1, GLdouble u2, GLint s
   Warning( "glMap1d not available." );
 }
 
-void REGAL_CALL missing_glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points)
+static void REGAL_CALL missing_glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(u1);
@@ -1082,7 +1082,7 @@ void REGAL_CALL missing_glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint str
   Warning( "glMap1f not available." );
 }
 
-void REGAL_CALL missing_glMap2d(GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points)
+static void REGAL_CALL missing_glMap2d(GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(u1);
@@ -1097,7 +1097,7 @@ void REGAL_CALL missing_glMap2d(GLenum target, GLdouble u1, GLdouble u2, GLint u
   Warning( "glMap2d not available." );
 }
 
-void REGAL_CALL missing_glMap2f(GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points)
+static void REGAL_CALL missing_glMap2f(GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(u1);
@@ -1112,7 +1112,7 @@ void REGAL_CALL missing_glMap2f(GLenum target, GLfloat u1, GLfloat u2, GLint ust
   Warning( "glMap2f not available." );
 }
 
-void REGAL_CALL missing_glMapGrid1d(GLint un, GLdouble u1, GLdouble u2)
+static void REGAL_CALL missing_glMapGrid1d(GLint un, GLdouble u1, GLdouble u2)
 {
   UNUSED_PARAMETER(un);
   UNUSED_PARAMETER(u1);
@@ -1120,7 +1120,7 @@ void REGAL_CALL missing_glMapGrid1d(GLint un, GLdouble u1, GLdouble u2)
   Warning( "glMapGrid1d not available." );
 }
 
-void REGAL_CALL missing_glMapGrid1f(GLint un, GLfloat u1, GLfloat u2)
+static void REGAL_CALL missing_glMapGrid1f(GLint un, GLfloat u1, GLfloat u2)
 {
   UNUSED_PARAMETER(un);
   UNUSED_PARAMETER(u1);
@@ -1128,7 +1128,7 @@ void REGAL_CALL missing_glMapGrid1f(GLint un, GLfloat u1, GLfloat u2)
   Warning( "glMapGrid1f not available." );
 }
 
-void REGAL_CALL missing_glMapGrid2d(GLint un, GLdouble u1, GLdouble u2, GLint vn, GLdouble v1, GLdouble v2)
+static void REGAL_CALL missing_glMapGrid2d(GLint un, GLdouble u1, GLdouble u2, GLint vn, GLdouble v1, GLdouble v2)
 {
   UNUSED_PARAMETER(un);
   UNUSED_PARAMETER(u1);
@@ -1139,7 +1139,7 @@ void REGAL_CALL missing_glMapGrid2d(GLint un, GLdouble u1, GLdouble u2, GLint vn
   Warning( "glMapGrid2d not available." );
 }
 
-void REGAL_CALL missing_glMapGrid2f(GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2)
+static void REGAL_CALL missing_glMapGrid2f(GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2)
 {
   UNUSED_PARAMETER(un);
   UNUSED_PARAMETER(u1);
@@ -1150,7 +1150,7 @@ void REGAL_CALL missing_glMapGrid2f(GLint un, GLfloat u1, GLfloat u2, GLint vn, 
   Warning( "glMapGrid2f not available." );
 }
 
-void REGAL_CALL missing_glMaterialf(GLenum face, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glMaterialf(GLenum face, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -1158,7 +1158,7 @@ void REGAL_CALL missing_glMaterialf(GLenum face, GLenum pname, GLfloat param)
   Warning( "glMaterialf not available." );
 }
 
-void REGAL_CALL missing_glMaterialfv(GLenum face, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glMaterialfv(GLenum face, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -1166,7 +1166,7 @@ void REGAL_CALL missing_glMaterialfv(GLenum face, GLenum pname, const GLfloat *p
   Warning( "glMaterialfv not available." );
 }
 
-void REGAL_CALL missing_glMateriali(GLenum face, GLenum pname, GLint param)
+static void REGAL_CALL missing_glMateriali(GLenum face, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -1174,7 +1174,7 @@ void REGAL_CALL missing_glMateriali(GLenum face, GLenum pname, GLint param)
   Warning( "glMateriali not available." );
 }
 
-void REGAL_CALL missing_glMaterialiv(GLenum face, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glMaterialiv(GLenum face, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -1182,32 +1182,32 @@ void REGAL_CALL missing_glMaterialiv(GLenum face, GLenum pname, const GLint *par
   Warning( "glMaterialiv not available." );
 }
 
-void REGAL_CALL missing_glMatrixMode(GLenum mode)
+static void REGAL_CALL missing_glMatrixMode(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glMatrixMode not available." );
 }
 
-void REGAL_CALL missing_glMultMatrixd(const GLdouble *m)
+static void REGAL_CALL missing_glMultMatrixd(const GLdouble *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultMatrixd not available." );
 }
 
-void REGAL_CALL missing_glMultMatrixf(const GLfloat *m)
+static void REGAL_CALL missing_glMultMatrixf(const GLfloat *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultMatrixf not available." );
 }
 
-void REGAL_CALL missing_glNewList(GLuint list, GLenum mode)
+static void REGAL_CALL missing_glNewList(GLuint list, GLenum mode)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(mode);
   Warning( "glNewList not available." );
 }
 
-void REGAL_CALL missing_glNormal3b(GLbyte nx, GLbyte ny, GLbyte nz)
+static void REGAL_CALL missing_glNormal3b(GLbyte nx, GLbyte ny, GLbyte nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -1215,13 +1215,13 @@ void REGAL_CALL missing_glNormal3b(GLbyte nx, GLbyte ny, GLbyte nz)
   Warning( "glNormal3b not available." );
 }
 
-void REGAL_CALL missing_glNormal3bv(const GLbyte *v)
+static void REGAL_CALL missing_glNormal3bv(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glNormal3bv not available." );
 }
 
-void REGAL_CALL missing_glNormal3d(GLdouble nx, GLdouble ny, GLdouble nz)
+static void REGAL_CALL missing_glNormal3d(GLdouble nx, GLdouble ny, GLdouble nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -1229,13 +1229,13 @@ void REGAL_CALL missing_glNormal3d(GLdouble nx, GLdouble ny, GLdouble nz)
   Warning( "glNormal3d not available." );
 }
 
-void REGAL_CALL missing_glNormal3dv(const GLdouble *v)
+static void REGAL_CALL missing_glNormal3dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glNormal3dv not available." );
 }
 
-void REGAL_CALL missing_glNormal3f(GLfloat nx, GLfloat ny, GLfloat nz)
+static void REGAL_CALL missing_glNormal3f(GLfloat nx, GLfloat ny, GLfloat nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -1243,13 +1243,13 @@ void REGAL_CALL missing_glNormal3f(GLfloat nx, GLfloat ny, GLfloat nz)
   Warning( "glNormal3f not available." );
 }
 
-void REGAL_CALL missing_glNormal3fv(const GLfloat *v)
+static void REGAL_CALL missing_glNormal3fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glNormal3fv not available." );
 }
 
-void REGAL_CALL missing_glNormal3i(GLint nx, GLint ny, GLint nz)
+static void REGAL_CALL missing_glNormal3i(GLint nx, GLint ny, GLint nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -1257,13 +1257,13 @@ void REGAL_CALL missing_glNormal3i(GLint nx, GLint ny, GLint nz)
   Warning( "glNormal3i not available." );
 }
 
-void REGAL_CALL missing_glNormal3iv(const GLint *v)
+static void REGAL_CALL missing_glNormal3iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glNormal3iv not available." );
 }
 
-void REGAL_CALL missing_glNormal3s(GLshort nx, GLshort ny, GLshort nz)
+static void REGAL_CALL missing_glNormal3s(GLshort nx, GLshort ny, GLshort nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -1271,13 +1271,13 @@ void REGAL_CALL missing_glNormal3s(GLshort nx, GLshort ny, GLshort nz)
   Warning( "glNormal3s not available." );
 }
 
-void REGAL_CALL missing_glNormal3sv(const GLshort *v)
+static void REGAL_CALL missing_glNormal3sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glNormal3sv not available." );
 }
 
-void REGAL_CALL missing_glOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
+static void REGAL_CALL missing_glOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
 {
   UNUSED_PARAMETER(left);
   UNUSED_PARAMETER(right);
@@ -1288,13 +1288,13 @@ void REGAL_CALL missing_glOrtho(GLdouble left, GLdouble right, GLdouble bottom, 
   Warning( "glOrtho not available." );
 }
 
-void REGAL_CALL missing_glPassThrough(GLfloat token)
+static void REGAL_CALL missing_glPassThrough(GLfloat token)
 {
   UNUSED_PARAMETER(token);
   Warning( "glPassThrough not available." );
 }
 
-void REGAL_CALL missing_glPixelMapfv(GLenum map, GLsizei mapsize, const GLfloat *values)
+static void REGAL_CALL missing_glPixelMapfv(GLenum map, GLsizei mapsize, const GLfloat *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(mapsize);
@@ -1302,7 +1302,7 @@ void REGAL_CALL missing_glPixelMapfv(GLenum map, GLsizei mapsize, const GLfloat 
   Warning( "glPixelMapfv not available." );
 }
 
-void REGAL_CALL missing_glPixelMapuiv(GLenum map, GLsizei mapsize, const GLuint *values)
+static void REGAL_CALL missing_glPixelMapuiv(GLenum map, GLsizei mapsize, const GLuint *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(mapsize);
@@ -1310,7 +1310,7 @@ void REGAL_CALL missing_glPixelMapuiv(GLenum map, GLsizei mapsize, const GLuint 
   Warning( "glPixelMapuiv not available." );
 }
 
-void REGAL_CALL missing_glPixelMapusv(GLenum map, GLsizei mapsize, const GLushort *values)
+static void REGAL_CALL missing_glPixelMapusv(GLenum map, GLsizei mapsize, const GLushort *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(mapsize);
@@ -1318,145 +1318,145 @@ void REGAL_CALL missing_glPixelMapusv(GLenum map, GLsizei mapsize, const GLushor
   Warning( "glPixelMapusv not available." );
 }
 
-void REGAL_CALL missing_glPixelStoref(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPixelStoref(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPixelStoref not available." );
 }
 
-void REGAL_CALL missing_glPixelStorei(GLenum pname, GLint param)
+static void REGAL_CALL missing_glPixelStorei(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPixelStorei not available." );
 }
 
-void REGAL_CALL missing_glPixelTransferf(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPixelTransferf(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPixelTransferf not available." );
 }
 
-void REGAL_CALL missing_glPixelTransferi(GLenum pname, GLint param)
+static void REGAL_CALL missing_glPixelTransferi(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPixelTransferi not available." );
 }
 
-void REGAL_CALL missing_glPixelZoom(GLfloat xfactor, GLfloat yfactor)
+static void REGAL_CALL missing_glPixelZoom(GLfloat xfactor, GLfloat yfactor)
 {
   UNUSED_PARAMETER(xfactor);
   UNUSED_PARAMETER(yfactor);
   Warning( "glPixelZoom not available." );
 }
 
-void REGAL_CALL missing_glPointSize(GLfloat size)
+static void REGAL_CALL missing_glPointSize(GLfloat size)
 {
   UNUSED_PARAMETER(size);
   Warning( "glPointSize not available." );
 }
 
-void REGAL_CALL missing_glPolygonMode(GLenum face, GLenum mode)
+static void REGAL_CALL missing_glPolygonMode(GLenum face, GLenum mode)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mode);
   Warning( "glPolygonMode not available." );
 }
 
-void REGAL_CALL missing_glPolygonStipple(const GLubyte *mask)
+static void REGAL_CALL missing_glPolygonStipple(const GLubyte *mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glPolygonStipple not available." );
 }
 
-void REGAL_CALL missing_glPopAttrib(void)
+static void REGAL_CALL missing_glPopAttrib(void)
 {
   Warning( "glPopAttrib not available." );
 }
 
-void REGAL_CALL missing_glPopMatrix(void)
+static void REGAL_CALL missing_glPopMatrix(void)
 {
   Warning( "glPopMatrix not available." );
 }
 
-void REGAL_CALL missing_glPopName(void)
+static void REGAL_CALL missing_glPopName(void)
 {
   Warning( "glPopName not available." );
 }
 
-void REGAL_CALL missing_glPushAttrib(GLbitfield mask)
+static void REGAL_CALL missing_glPushAttrib(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glPushAttrib not available." );
 }
 
-void REGAL_CALL missing_glPushMatrix(void)
+static void REGAL_CALL missing_glPushMatrix(void)
 {
   Warning( "glPushMatrix not available." );
 }
 
-void REGAL_CALL missing_glPushName(GLuint name)
+static void REGAL_CALL missing_glPushName(GLuint name)
 {
   UNUSED_PARAMETER(name);
   Warning( "glPushName not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2d(GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glRasterPos2d(GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glRasterPos2d not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2dv(const GLdouble *v)
+static void REGAL_CALL missing_glRasterPos2dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos2dv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2f(GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glRasterPos2f(GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glRasterPos2f not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2fv(const GLfloat *v)
+static void REGAL_CALL missing_glRasterPos2fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos2fv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2i(GLint x, GLint y)
+static void REGAL_CALL missing_glRasterPos2i(GLint x, GLint y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glRasterPos2i not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2iv(const GLint *v)
+static void REGAL_CALL missing_glRasterPos2iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos2iv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2s(GLshort x, GLshort y)
+static void REGAL_CALL missing_glRasterPos2s(GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glRasterPos2s not available." );
 }
 
-void REGAL_CALL missing_glRasterPos2sv(const GLshort *v)
+static void REGAL_CALL missing_glRasterPos2sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos2sv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3d(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glRasterPos3d(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1464,13 +1464,13 @@ void REGAL_CALL missing_glRasterPos3d(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glRasterPos3d not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3dv(const GLdouble *v)
+static void REGAL_CALL missing_glRasterPos3dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos3dv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3f(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glRasterPos3f(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1478,13 +1478,13 @@ void REGAL_CALL missing_glRasterPos3f(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glRasterPos3f not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3fv(const GLfloat *v)
+static void REGAL_CALL missing_glRasterPos3fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos3fv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3i(GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glRasterPos3i(GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1492,13 +1492,13 @@ void REGAL_CALL missing_glRasterPos3i(GLint x, GLint y, GLint z)
   Warning( "glRasterPos3i not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3iv(const GLint *v)
+static void REGAL_CALL missing_glRasterPos3iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos3iv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3s(GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glRasterPos3s(GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1506,13 +1506,13 @@ void REGAL_CALL missing_glRasterPos3s(GLshort x, GLshort y, GLshort z)
   Warning( "glRasterPos3s not available." );
 }
 
-void REGAL_CALL missing_glRasterPos3sv(const GLshort *v)
+static void REGAL_CALL missing_glRasterPos3sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos3sv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glRasterPos4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1521,13 +1521,13 @@ void REGAL_CALL missing_glRasterPos4d(GLdouble x, GLdouble y, GLdouble z, GLdoub
   Warning( "glRasterPos4d not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4dv(const GLdouble *v)
+static void REGAL_CALL missing_glRasterPos4dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos4dv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glRasterPos4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1536,13 +1536,13 @@ void REGAL_CALL missing_glRasterPos4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w
   Warning( "glRasterPos4f not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4fv(const GLfloat *v)
+static void REGAL_CALL missing_glRasterPos4fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos4fv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4i(GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glRasterPos4i(GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1551,13 +1551,13 @@ void REGAL_CALL missing_glRasterPos4i(GLint x, GLint y, GLint z, GLint w)
   Warning( "glRasterPos4i not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4iv(const GLint *v)
+static void REGAL_CALL missing_glRasterPos4iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos4iv not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4s(GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glRasterPos4s(GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1566,19 +1566,19 @@ void REGAL_CALL missing_glRasterPos4s(GLshort x, GLshort y, GLshort z, GLshort w
   Warning( "glRasterPos4s not available." );
 }
 
-void REGAL_CALL missing_glRasterPos4sv(const GLshort *v)
+static void REGAL_CALL missing_glRasterPos4sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glRasterPos4sv not available." );
 }
 
-void REGAL_CALL missing_glReadBuffer(GLenum mode)
+static void REGAL_CALL missing_glReadBuffer(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glReadBuffer not available." );
 }
 
-void REGAL_CALL missing_glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels)
+static void REGAL_CALL missing_glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1590,7 +1590,7 @@ void REGAL_CALL missing_glReadPixels(GLint x, GLint y, GLsizei width, GLsizei he
   Warning( "glReadPixels not available." );
 }
 
-void REGAL_CALL missing_glRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2)
+static void REGAL_CALL missing_glRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2)
 {
   UNUSED_PARAMETER(x1);
   UNUSED_PARAMETER(y1);
@@ -1599,14 +1599,14 @@ void REGAL_CALL missing_glRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble 
   Warning( "glRectd not available." );
 }
 
-void REGAL_CALL missing_glRectdv(const GLdouble *v1, const GLdouble *v2)
+static void REGAL_CALL missing_glRectdv(const GLdouble *v1, const GLdouble *v2)
 {
   UNUSED_PARAMETER(v1);
   UNUSED_PARAMETER(v2);
   Warning( "glRectdv not available." );
 }
 
-void REGAL_CALL missing_glRectf(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
+static void REGAL_CALL missing_glRectf(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
 {
   UNUSED_PARAMETER(x1);
   UNUSED_PARAMETER(y1);
@@ -1615,14 +1615,14 @@ void REGAL_CALL missing_glRectf(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
   Warning( "glRectf not available." );
 }
 
-void REGAL_CALL missing_glRectfv(const GLfloat *v1, const GLfloat *v2)
+static void REGAL_CALL missing_glRectfv(const GLfloat *v1, const GLfloat *v2)
 {
   UNUSED_PARAMETER(v1);
   UNUSED_PARAMETER(v2);
   Warning( "glRectfv not available." );
 }
 
-void REGAL_CALL missing_glRecti(GLint x1, GLint y1, GLint x2, GLint y2)
+static void REGAL_CALL missing_glRecti(GLint x1, GLint y1, GLint x2, GLint y2)
 {
   UNUSED_PARAMETER(x1);
   UNUSED_PARAMETER(y1);
@@ -1631,14 +1631,14 @@ void REGAL_CALL missing_glRecti(GLint x1, GLint y1, GLint x2, GLint y2)
   Warning( "glRecti not available." );
 }
 
-void REGAL_CALL missing_glRectiv(const GLint *v1, const GLint *v2)
+static void REGAL_CALL missing_glRectiv(const GLint *v1, const GLint *v2)
 {
   UNUSED_PARAMETER(v1);
   UNUSED_PARAMETER(v2);
   Warning( "glRectiv not available." );
 }
 
-void REGAL_CALL missing_glRects(GLshort x1, GLshort y1, GLshort x2, GLshort y2)
+static void REGAL_CALL missing_glRects(GLshort x1, GLshort y1, GLshort x2, GLshort y2)
 {
   UNUSED_PARAMETER(x1);
   UNUSED_PARAMETER(y1);
@@ -1647,21 +1647,21 @@ void REGAL_CALL missing_glRects(GLshort x1, GLshort y1, GLshort x2, GLshort y2)
   Warning( "glRects not available." );
 }
 
-void REGAL_CALL missing_glRectsv(const GLshort *v1, const GLshort *v2)
+static void REGAL_CALL missing_glRectsv(const GLshort *v1, const GLshort *v2)
 {
   UNUSED_PARAMETER(v1);
   UNUSED_PARAMETER(v2);
   Warning( "glRectsv not available." );
 }
 
-GLint REGAL_CALL missing_glRenderMode(GLenum mode)
+static GLint REGAL_CALL missing_glRenderMode(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glRenderMode not available." );
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(angle);
   UNUSED_PARAMETER(x);
@@ -1670,7 +1670,7 @@ void REGAL_CALL missing_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdoub
   Warning( "glRotated not available." );
 }
 
-void REGAL_CALL missing_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(angle);
   UNUSED_PARAMETER(x);
@@ -1679,7 +1679,7 @@ void REGAL_CALL missing_glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z
   Warning( "glRotatef not available." );
 }
 
-void REGAL_CALL missing_glScaled(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glScaled(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1687,7 +1687,7 @@ void REGAL_CALL missing_glScaled(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glScaled not available." );
 }
 
-void REGAL_CALL missing_glScalef(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glScalef(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1695,7 +1695,7 @@ void REGAL_CALL missing_glScalef(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glScalef not available." );
 }
 
-void REGAL_CALL missing_glScissor(GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glScissor(GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -1704,20 +1704,20 @@ void REGAL_CALL missing_glScissor(GLint x, GLint y, GLsizei width, GLsizei heigh
   Warning( "glScissor not available." );
 }
 
-void REGAL_CALL missing_glSelectBuffer(GLsizei size, GLuint *buffer)
+static void REGAL_CALL missing_glSelectBuffer(GLsizei size, GLuint *buffer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(buffer);
   Warning( "glSelectBuffer not available." );
 }
 
-void REGAL_CALL missing_glShadeModel(GLenum mode)
+static void REGAL_CALL missing_glShadeModel(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glShadeModel not available." );
 }
 
-void REGAL_CALL missing_glStencilFunc(GLenum func, GLint ref, GLuint mask)
+static void REGAL_CALL missing_glStencilFunc(GLenum func, GLint ref, GLuint mask)
 {
   UNUSED_PARAMETER(func);
   UNUSED_PARAMETER(ref);
@@ -1725,13 +1725,13 @@ void REGAL_CALL missing_glStencilFunc(GLenum func, GLint ref, GLuint mask)
   Warning( "glStencilFunc not available." );
 }
 
-void REGAL_CALL missing_glStencilMask(GLuint mask)
+static void REGAL_CALL missing_glStencilMask(GLuint mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glStencilMask not available." );
 }
 
-void REGAL_CALL missing_glStencilOp(GLenum fail, GLenum zfail, GLenum zpass)
+static void REGAL_CALL missing_glStencilOp(GLenum fail, GLenum zfail, GLenum zpass)
 {
   UNUSED_PARAMETER(fail);
   UNUSED_PARAMETER(zfail);
@@ -1739,107 +1739,107 @@ void REGAL_CALL missing_glStencilOp(GLenum fail, GLenum zfail, GLenum zpass)
   Warning( "glStencilOp not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1d(GLdouble s)
+static void REGAL_CALL missing_glTexCoord1d(GLdouble s)
 {
   UNUSED_PARAMETER(s);
   Warning( "glTexCoord1d not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1dv(const GLdouble *v)
+static void REGAL_CALL missing_glTexCoord1dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord1dv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1f(GLfloat s)
+static void REGAL_CALL missing_glTexCoord1f(GLfloat s)
 {
   UNUSED_PARAMETER(s);
   Warning( "glTexCoord1f not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1fv(const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord1fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord1fv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1i(GLint s)
+static void REGAL_CALL missing_glTexCoord1i(GLint s)
 {
   UNUSED_PARAMETER(s);
   Warning( "glTexCoord1i not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1iv(const GLint *v)
+static void REGAL_CALL missing_glTexCoord1iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord1iv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1s(GLshort s)
+static void REGAL_CALL missing_glTexCoord1s(GLshort s)
 {
   UNUSED_PARAMETER(s);
   Warning( "glTexCoord1s not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1sv(const GLshort *v)
+static void REGAL_CALL missing_glTexCoord1sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord1sv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2d(GLdouble s, GLdouble t)
+static void REGAL_CALL missing_glTexCoord2d(GLdouble s, GLdouble t)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
   Warning( "glTexCoord2d not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2dv(const GLdouble *v)
+static void REGAL_CALL missing_glTexCoord2dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord2dv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2f(GLfloat s, GLfloat t)
+static void REGAL_CALL missing_glTexCoord2f(GLfloat s, GLfloat t)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
   Warning( "glTexCoord2f not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fv(const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord2fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord2fv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2i(GLint s, GLint t)
+static void REGAL_CALL missing_glTexCoord2i(GLint s, GLint t)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
   Warning( "glTexCoord2i not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2iv(const GLint *v)
+static void REGAL_CALL missing_glTexCoord2iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord2iv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2s(GLshort s, GLshort t)
+static void REGAL_CALL missing_glTexCoord2s(GLshort s, GLshort t)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
   Warning( "glTexCoord2s not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2sv(const GLshort *v)
+static void REGAL_CALL missing_glTexCoord2sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord2sv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3d(GLdouble s, GLdouble t, GLdouble r)
+static void REGAL_CALL missing_glTexCoord3d(GLdouble s, GLdouble t, GLdouble r)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1847,13 +1847,13 @@ void REGAL_CALL missing_glTexCoord3d(GLdouble s, GLdouble t, GLdouble r)
   Warning( "glTexCoord3d not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3dv(const GLdouble *v)
+static void REGAL_CALL missing_glTexCoord3dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord3dv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3f(GLfloat s, GLfloat t, GLfloat r)
+static void REGAL_CALL missing_glTexCoord3f(GLfloat s, GLfloat t, GLfloat r)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1861,13 +1861,13 @@ void REGAL_CALL missing_glTexCoord3f(GLfloat s, GLfloat t, GLfloat r)
   Warning( "glTexCoord3f not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3fv(const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord3fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord3fv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3i(GLint s, GLint t, GLint r)
+static void REGAL_CALL missing_glTexCoord3i(GLint s, GLint t, GLint r)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1875,13 +1875,13 @@ void REGAL_CALL missing_glTexCoord3i(GLint s, GLint t, GLint r)
   Warning( "glTexCoord3i not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3iv(const GLint *v)
+static void REGAL_CALL missing_glTexCoord3iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord3iv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3s(GLshort s, GLshort t, GLshort r)
+static void REGAL_CALL missing_glTexCoord3s(GLshort s, GLshort t, GLshort r)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1889,13 +1889,13 @@ void REGAL_CALL missing_glTexCoord3s(GLshort s, GLshort t, GLshort r)
   Warning( "glTexCoord3s not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3sv(const GLshort *v)
+static void REGAL_CALL missing_glTexCoord3sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord3sv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4d(GLdouble s, GLdouble t, GLdouble r, GLdouble q)
+static void REGAL_CALL missing_glTexCoord4d(GLdouble s, GLdouble t, GLdouble r, GLdouble q)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1904,13 +1904,13 @@ void REGAL_CALL missing_glTexCoord4d(GLdouble s, GLdouble t, GLdouble r, GLdoubl
   Warning( "glTexCoord4d not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4dv(const GLdouble *v)
+static void REGAL_CALL missing_glTexCoord4dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord4dv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4f(GLfloat s, GLfloat t, GLfloat r, GLfloat q)
+static void REGAL_CALL missing_glTexCoord4f(GLfloat s, GLfloat t, GLfloat r, GLfloat q)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1919,13 +1919,13 @@ void REGAL_CALL missing_glTexCoord4f(GLfloat s, GLfloat t, GLfloat r, GLfloat q)
   Warning( "glTexCoord4f not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4fv(const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord4fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord4fv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4i(GLint s, GLint t, GLint r, GLint q)
+static void REGAL_CALL missing_glTexCoord4i(GLint s, GLint t, GLint r, GLint q)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1934,13 +1934,13 @@ void REGAL_CALL missing_glTexCoord4i(GLint s, GLint t, GLint r, GLint q)
   Warning( "glTexCoord4i not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4iv(const GLint *v)
+static void REGAL_CALL missing_glTexCoord4iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord4iv not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4s(GLshort s, GLshort t, GLshort r, GLshort q)
+static void REGAL_CALL missing_glTexCoord4s(GLshort s, GLshort t, GLshort r, GLshort q)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -1949,13 +1949,13 @@ void REGAL_CALL missing_glTexCoord4s(GLshort s, GLshort t, GLshort r, GLshort q)
   Warning( "glTexCoord4s not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4sv(const GLshort *v)
+static void REGAL_CALL missing_glTexCoord4sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord4sv not available." );
 }
 
-void REGAL_CALL missing_glTexEnvf(GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glTexEnvf(GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -1963,7 +1963,7 @@ void REGAL_CALL missing_glTexEnvf(GLenum target, GLenum pname, GLfloat param)
   Warning( "glTexEnvf not available." );
 }
 
-void REGAL_CALL missing_glTexEnvfv(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glTexEnvfv(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -1971,7 +1971,7 @@ void REGAL_CALL missing_glTexEnvfv(GLenum target, GLenum pname, const GLfloat *p
   Warning( "glTexEnvfv not available." );
 }
 
-void REGAL_CALL missing_glTexEnvi(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glTexEnvi(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -1979,7 +1979,7 @@ void REGAL_CALL missing_glTexEnvi(GLenum target, GLenum pname, GLint param)
   Warning( "glTexEnvi not available." );
 }
 
-void REGAL_CALL missing_glTexEnviv(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTexEnviv(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -1987,7 +1987,7 @@ void REGAL_CALL missing_glTexEnviv(GLenum target, GLenum pname, const GLint *par
   Warning( "glTexEnviv not available." );
 }
 
-void REGAL_CALL missing_glTexGend(GLenum coord, GLenum pname, GLdouble param)
+static void REGAL_CALL missing_glTexGend(GLenum coord, GLenum pname, GLdouble param)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -1995,7 +1995,7 @@ void REGAL_CALL missing_glTexGend(GLenum coord, GLenum pname, GLdouble param)
   Warning( "glTexGend not available." );
 }
 
-void REGAL_CALL missing_glTexGendv(GLenum coord, GLenum pname, const GLdouble *params)
+static void REGAL_CALL missing_glTexGendv(GLenum coord, GLenum pname, const GLdouble *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -2003,7 +2003,7 @@ void REGAL_CALL missing_glTexGendv(GLenum coord, GLenum pname, const GLdouble *p
   Warning( "glTexGendv not available." );
 }
 
-void REGAL_CALL missing_glTexGenf(GLenum coord, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glTexGenf(GLenum coord, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -2011,7 +2011,7 @@ void REGAL_CALL missing_glTexGenf(GLenum coord, GLenum pname, GLfloat param)
   Warning( "glTexGenf not available." );
 }
 
-void REGAL_CALL missing_glTexGenfv(GLenum coord, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glTexGenfv(GLenum coord, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -2019,7 +2019,7 @@ void REGAL_CALL missing_glTexGenfv(GLenum coord, GLenum pname, const GLfloat *pa
   Warning( "glTexGenfv not available." );
 }
 
-void REGAL_CALL missing_glTexGeni(GLenum coord, GLenum pname, GLint param)
+static void REGAL_CALL missing_glTexGeni(GLenum coord, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -2027,7 +2027,7 @@ void REGAL_CALL missing_glTexGeni(GLenum coord, GLenum pname, GLint param)
   Warning( "glTexGeni not available." );
 }
 
-void REGAL_CALL missing_glTexGeniv(GLenum coord, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTexGeniv(GLenum coord, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -2035,7 +2035,7 @@ void REGAL_CALL missing_glTexGeniv(GLenum coord, GLenum pname, const GLint *para
   Warning( "glTexGeniv not available." );
 }
 
-void REGAL_CALL missing_glTexImage1D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexImage1D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2048,7 +2048,7 @@ void REGAL_CALL missing_glTexImage1D(GLenum target, GLint level, GLint internalf
   Warning( "glTexImage1D not available." );
 }
 
-void REGAL_CALL missing_glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2062,7 +2062,7 @@ void REGAL_CALL missing_glTexImage2D(GLenum target, GLint level, GLint internalf
   Warning( "glTexImage2D not available." );
 }
 
-void REGAL_CALL missing_glTexParameterf(GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glTexParameterf(GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -2070,7 +2070,7 @@ void REGAL_CALL missing_glTexParameterf(GLenum target, GLenum pname, GLfloat par
   Warning( "glTexParameterf not available." );
 }
 
-void REGAL_CALL missing_glTexParameterfv(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glTexParameterfv(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -2078,7 +2078,7 @@ void REGAL_CALL missing_glTexParameterfv(GLenum target, GLenum pname, const GLfl
   Warning( "glTexParameterfv not available." );
 }
 
-void REGAL_CALL missing_glTexParameteri(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glTexParameteri(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -2086,7 +2086,7 @@ void REGAL_CALL missing_glTexParameteri(GLenum target, GLenum pname, GLint param
   Warning( "glTexParameteri not available." );
 }
 
-void REGAL_CALL missing_glTexParameteriv(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTexParameteriv(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -2094,7 +2094,7 @@ void REGAL_CALL missing_glTexParameteriv(GLenum target, GLenum pname, const GLin
   Warning( "glTexParameteriv not available." );
 }
 
-void REGAL_CALL missing_glTranslated(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glTranslated(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2102,7 +2102,7 @@ void REGAL_CALL missing_glTranslated(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glTranslated not available." );
 }
 
-void REGAL_CALL missing_glTranslatef(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glTranslatef(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2110,59 +2110,59 @@ void REGAL_CALL missing_glTranslatef(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glTranslatef not available." );
 }
 
-void REGAL_CALL missing_glVertex2d(GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertex2d(GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glVertex2d not available." );
 }
 
-void REGAL_CALL missing_glVertex2dv(const GLdouble *v)
+static void REGAL_CALL missing_glVertex2dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex2dv not available." );
 }
 
-void REGAL_CALL missing_glVertex2f(GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glVertex2f(GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glVertex2f not available." );
 }
 
-void REGAL_CALL missing_glVertex2fv(const GLfloat *v)
+static void REGAL_CALL missing_glVertex2fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex2fv not available." );
 }
 
-void REGAL_CALL missing_glVertex2i(GLint x, GLint y)
+static void REGAL_CALL missing_glVertex2i(GLint x, GLint y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glVertex2i not available." );
 }
 
-void REGAL_CALL missing_glVertex2iv(const GLint *v)
+static void REGAL_CALL missing_glVertex2iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex2iv not available." );
 }
 
-void REGAL_CALL missing_glVertex2s(GLshort x, GLshort y)
+static void REGAL_CALL missing_glVertex2s(GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glVertex2s not available." );
 }
 
-void REGAL_CALL missing_glVertex2sv(const GLshort *v)
+static void REGAL_CALL missing_glVertex2sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex2sv not available." );
 }
 
-void REGAL_CALL missing_glVertex3d(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertex3d(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2170,13 +2170,13 @@ void REGAL_CALL missing_glVertex3d(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glVertex3d not available." );
 }
 
-void REGAL_CALL missing_glVertex3dv(const GLdouble *v)
+static void REGAL_CALL missing_glVertex3dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex3dv not available." );
 }
 
-void REGAL_CALL missing_glVertex3f(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glVertex3f(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2184,13 +2184,13 @@ void REGAL_CALL missing_glVertex3f(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glVertex3f not available." );
 }
 
-void REGAL_CALL missing_glVertex3fv(const GLfloat *v)
+static void REGAL_CALL missing_glVertex3fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex3fv not available." );
 }
 
-void REGAL_CALL missing_glVertex3i(GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glVertex3i(GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2198,13 +2198,13 @@ void REGAL_CALL missing_glVertex3i(GLint x, GLint y, GLint z)
   Warning( "glVertex3i not available." );
 }
 
-void REGAL_CALL missing_glVertex3iv(const GLint *v)
+static void REGAL_CALL missing_glVertex3iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex3iv not available." );
 }
 
-void REGAL_CALL missing_glVertex3s(GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glVertex3s(GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2212,13 +2212,13 @@ void REGAL_CALL missing_glVertex3s(GLshort x, GLshort y, GLshort z)
   Warning( "glVertex3s not available." );
 }
 
-void REGAL_CALL missing_glVertex3sv(const GLshort *v)
+static void REGAL_CALL missing_glVertex3sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex3sv not available." );
 }
 
-void REGAL_CALL missing_glVertex4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertex4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2227,13 +2227,13 @@ void REGAL_CALL missing_glVertex4d(GLdouble x, GLdouble y, GLdouble z, GLdouble 
   Warning( "glVertex4d not available." );
 }
 
-void REGAL_CALL missing_glVertex4dv(const GLdouble *v)
+static void REGAL_CALL missing_glVertex4dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex4dv not available." );
 }
 
-void REGAL_CALL missing_glVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2242,13 +2242,13 @@ void REGAL_CALL missing_glVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
   Warning( "glVertex4f not available." );
 }
 
-void REGAL_CALL missing_glVertex4fv(const GLfloat *v)
+static void REGAL_CALL missing_glVertex4fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex4fv not available." );
 }
 
-void REGAL_CALL missing_glVertex4i(GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glVertex4i(GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2257,13 +2257,13 @@ void REGAL_CALL missing_glVertex4i(GLint x, GLint y, GLint z, GLint w)
   Warning( "glVertex4i not available." );
 }
 
-void REGAL_CALL missing_glVertex4iv(const GLint *v)
+static void REGAL_CALL missing_glVertex4iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex4iv not available." );
 }
 
-void REGAL_CALL missing_glVertex4s(GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glVertex4s(GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2272,13 +2272,13 @@ void REGAL_CALL missing_glVertex4s(GLshort x, GLshort y, GLshort z, GLshort w)
   Warning( "glVertex4s not available." );
 }
 
-void REGAL_CALL missing_glVertex4sv(const GLshort *v)
+static void REGAL_CALL missing_glVertex4sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex4sv not available." );
 }
 
-void REGAL_CALL missing_glViewport(GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glViewport(GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -2289,7 +2289,7 @@ void REGAL_CALL missing_glViewport(GLint x, GLint y, GLsizei width, GLsizei heig
 
 // GL_VERSION_1_1
 
-GLboolean REGAL_CALL missing_glAreTexturesResident(GLsizei n, const GLuint *textures, GLboolean *residences)
+static GLboolean REGAL_CALL missing_glAreTexturesResident(GLsizei n, const GLuint *textures, GLboolean *residences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
@@ -2298,20 +2298,20 @@ GLboolean REGAL_CALL missing_glAreTexturesResident(GLsizei n, const GLuint *text
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glArrayElement(GLint index)
+static void REGAL_CALL missing_glArrayElement(GLint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glArrayElement not available." );
 }
 
-void REGAL_CALL missing_glBindTexture(GLenum target, GLuint texture)
+static void REGAL_CALL missing_glBindTexture(GLenum target, GLuint texture)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(texture);
   Warning( "glBindTexture not available." );
 }
 
-void REGAL_CALL missing_glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -2320,7 +2320,7 @@ void REGAL_CALL missing_glColorPointer(GLint size, GLenum type, GLsizei stride, 
   Warning( "glColorPointer not available." );
 }
 
-void REGAL_CALL missing_glCopyTexImage1D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
+static void REGAL_CALL missing_glCopyTexImage1D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2332,7 +2332,7 @@ void REGAL_CALL missing_glCopyTexImage1D(GLenum target, GLint level, GLenum inte
   Warning( "glCopyTexImage1D not available." );
 }
 
-void REGAL_CALL missing_glCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
+static void REGAL_CALL missing_glCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2345,7 +2345,7 @@ void REGAL_CALL missing_glCopyTexImage2D(GLenum target, GLint level, GLenum inte
   Warning( "glCopyTexImage2D not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2356,7 +2356,7 @@ void REGAL_CALL missing_glCopyTexSubImage1D(GLenum target, GLint level, GLint xo
   Warning( "glCopyTexSubImage1D not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2369,20 +2369,20 @@ void REGAL_CALL missing_glCopyTexSubImage2D(GLenum target, GLint level, GLint xo
   Warning( "glCopyTexSubImage2D not available." );
 }
 
-void REGAL_CALL missing_glDeleteTextures(GLsizei n, const GLuint *textures)
+static void REGAL_CALL missing_glDeleteTextures(GLsizei n, const GLuint *textures)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
   Warning( "glDeleteTextures not available." );
 }
 
-void REGAL_CALL missing_glDisableClientState(GLenum cap)
+static void REGAL_CALL missing_glDisableClientState(GLenum cap)
 {
   UNUSED_PARAMETER(cap);
   Warning( "glDisableClientState not available." );
 }
 
-void REGAL_CALL missing_glDrawArrays(GLenum mode, GLint first, GLsizei count)
+static void REGAL_CALL missing_glDrawArrays(GLenum mode, GLint first, GLsizei count)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -2390,7 +2390,7 @@ void REGAL_CALL missing_glDrawArrays(GLenum mode, GLint first, GLsizei count)
   Warning( "glDrawArrays not available." );
 }
 
-void REGAL_CALL missing_glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
+static void REGAL_CALL missing_glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -2399,34 +2399,34 @@ void REGAL_CALL missing_glDrawElements(GLenum mode, GLsizei count, GLenum type, 
   Warning( "glDrawElements not available." );
 }
 
-void REGAL_CALL missing_glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(stride);
   UNUSED_PARAMETER(pointer);
   Warning( "glEdgeFlagPointer not available." );
 }
 
-void REGAL_CALL missing_glEnableClientState(GLenum cap)
+static void REGAL_CALL missing_glEnableClientState(GLenum cap)
 {
   UNUSED_PARAMETER(cap);
   Warning( "glEnableClientState not available." );
 }
 
-void REGAL_CALL missing_glGenTextures(GLsizei n, GLuint *textures)
+static void REGAL_CALL missing_glGenTextures(GLsizei n, GLuint *textures)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
   Warning( "glGenTextures not available." );
 }
 
-void REGAL_CALL missing_glGetPointerv(GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetPointerv(GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetPointerv not available." );
 }
 
-void REGAL_CALL missing_glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -2434,19 +2434,19 @@ void REGAL_CALL missing_glIndexPointer(GLenum type, GLsizei stride, const GLvoid
   Warning( "glIndexPointer not available." );
 }
 
-void REGAL_CALL missing_glIndexub(GLubyte c)
+static void REGAL_CALL missing_glIndexub(GLubyte c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexub not available." );
 }
 
-void REGAL_CALL missing_glIndexubv(const GLubyte *c)
+static void REGAL_CALL missing_glIndexubv(const GLubyte *c)
 {
   UNUSED_PARAMETER(c);
   Warning( "glIndexubv not available." );
 }
 
-void REGAL_CALL missing_glInterleavedArrays(GLenum format, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glInterleavedArrays(GLenum format, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(format);
   UNUSED_PARAMETER(stride);
@@ -2454,14 +2454,14 @@ void REGAL_CALL missing_glInterleavedArrays(GLenum format, GLsizei stride, const
   Warning( "glInterleavedArrays not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsTexture(GLuint texture)
+static GLboolean REGAL_CALL missing_glIsTexture(GLuint texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glIsTexture not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -2469,19 +2469,19 @@ void REGAL_CALL missing_glNormalPointer(GLenum type, GLsizei stride, const GLvoi
   Warning( "glNormalPointer not available." );
 }
 
-void REGAL_CALL missing_glPolygonOffset(GLfloat factor, GLfloat units)
+static void REGAL_CALL missing_glPolygonOffset(GLfloat factor, GLfloat units)
 {
   UNUSED_PARAMETER(factor);
   UNUSED_PARAMETER(units);
   Warning( "glPolygonOffset not available." );
 }
 
-void REGAL_CALL missing_glPopClientAttrib(void)
+static void REGAL_CALL missing_glPopClientAttrib(void)
 {
   Warning( "glPopClientAttrib not available." );
 }
 
-void REGAL_CALL missing_glPrioritizeTextures(GLsizei n, const GLuint *textures, const GLclampf *priorities)
+static void REGAL_CALL missing_glPrioritizeTextures(GLsizei n, const GLuint *textures, const GLclampf *priorities)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
@@ -2489,13 +2489,13 @@ void REGAL_CALL missing_glPrioritizeTextures(GLsizei n, const GLuint *textures, 
   Warning( "glPrioritizeTextures not available." );
 }
 
-void REGAL_CALL missing_glPushClientAttrib(GLbitfield mask)
+static void REGAL_CALL missing_glPushClientAttrib(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glPushClientAttrib not available." );
 }
 
-void REGAL_CALL missing_glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -2504,7 +2504,7 @@ void REGAL_CALL missing_glTexCoordPointer(GLint size, GLenum type, GLsizei strid
   Warning( "glTexCoordPointer not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2516,7 +2516,7 @@ void REGAL_CALL missing_glTexSubImage1D(GLenum target, GLint level, GLint xoffse
   Warning( "glTexSubImage1D not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2530,7 +2530,7 @@ void REGAL_CALL missing_glTexSubImage2D(GLenum target, GLint level, GLint xoffse
   Warning( "glTexSubImage2D not available." );
 }
 
-void REGAL_CALL missing_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -2541,7 +2541,7 @@ void REGAL_CALL missing_glVertexPointer(GLint size, GLenum type, GLsizei stride,
 
 // GL_VERSION_1_2
 
-void REGAL_CALL missing_glBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+static void REGAL_CALL missing_glBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -2550,13 +2550,13 @@ void REGAL_CALL missing_glBlendColor(GLclampf red, GLclampf green, GLclampf blue
   Warning( "glBlendColor not available." );
 }
 
-void REGAL_CALL missing_glBlendEquation(GLenum mode)
+static void REGAL_CALL missing_glBlendEquation(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glBlendEquation not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2570,7 +2570,7 @@ void REGAL_CALL missing_glCopyTexSubImage3D(GLenum target, GLint level, GLint xo
   Warning( "glCopyTexSubImage3D not available." );
 }
 
-void REGAL_CALL missing_glDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices)
+static void REGAL_CALL missing_glDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -2581,7 +2581,7 @@ void REGAL_CALL missing_glDrawRangeElements(GLenum mode, GLuint start, GLuint en
   Warning( "glDrawRangeElements not available." );
 }
 
-void REGAL_CALL missing_glTexImage3D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexImage3D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2596,7 +2596,7 @@ void REGAL_CALL missing_glTexImage3D(GLenum target, GLint level, GLint internalf
   Warning( "glTexImage3D not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2614,19 +2614,19 @@ void REGAL_CALL missing_glTexSubImage3D(GLenum target, GLint level, GLint xoffse
 
 // GL_VERSION_1_3
 
-void REGAL_CALL missing_glActiveTexture(GLenum texture)
+static void REGAL_CALL missing_glActiveTexture(GLenum texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glActiveTexture not available." );
 }
 
-void REGAL_CALL missing_glClientActiveTexture(GLenum texture)
+static void REGAL_CALL missing_glClientActiveTexture(GLenum texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glClientActiveTexture not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexImage1D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage1D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2638,7 +2638,7 @@ void REGAL_CALL missing_glCompressedTexImage1D(GLenum target, GLint level, GLenu
   Warning( "glCompressedTexImage1D not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2651,7 +2651,7 @@ void REGAL_CALL missing_glCompressedTexImage2D(GLenum target, GLint level, GLenu
   Warning( "glCompressedTexImage2D not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexImage3D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage3D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2665,7 +2665,7 @@ void REGAL_CALL missing_glCompressedTexImage3D(GLenum target, GLint level, GLenu
   Warning( "glCompressedTexImage3D not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2677,7 +2677,7 @@ void REGAL_CALL missing_glCompressedTexSubImage1D(GLenum target, GLint level, GL
   Warning( "glCompressedTexSubImage1D not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2691,7 +2691,7 @@ void REGAL_CALL missing_glCompressedTexSubImage2D(GLenum target, GLint level, GL
   Warning( "glCompressedTexSubImage2D not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -2707,7 +2707,7 @@ void REGAL_CALL missing_glCompressedTexSubImage3D(GLenum target, GLint level, GL
   Warning( "glCompressedTexSubImage3D not available." );
 }
 
-void REGAL_CALL missing_glGetCompressedTexImage(GLenum target, GLint lod, GLvoid *img)
+static void REGAL_CALL missing_glGetCompressedTexImage(GLenum target, GLint lod, GLvoid *img)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(lod);
@@ -2715,87 +2715,87 @@ void REGAL_CALL missing_glGetCompressedTexImage(GLenum target, GLint lod, GLvoid
   Warning( "glGetCompressedTexImage not available." );
 }
 
-void REGAL_CALL missing_glLoadTransposeMatrixd(const GLdouble *m)
+static void REGAL_CALL missing_glLoadTransposeMatrixd(const GLdouble *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadTransposeMatrixd not available." );
 }
 
-void REGAL_CALL missing_glLoadTransposeMatrixf(const GLfloat *m)
+static void REGAL_CALL missing_glLoadTransposeMatrixf(const GLfloat *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadTransposeMatrixf not available." );
 }
 
-void REGAL_CALL missing_glMultTransposeMatrixd(const GLdouble *m)
+static void REGAL_CALL missing_glMultTransposeMatrixd(const GLdouble *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultTransposeMatrixd not available." );
 }
 
-void REGAL_CALL missing_glMultTransposeMatrixf(const GLfloat *m)
+static void REGAL_CALL missing_glMultTransposeMatrixf(const GLfloat *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultTransposeMatrixf not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1d(GLenum target, GLdouble s)
+static void REGAL_CALL missing_glMultiTexCoord1d(GLenum target, GLdouble s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1d not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1dv(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord1dv(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1dv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1f(GLenum target, GLfloat s)
+static void REGAL_CALL missing_glMultiTexCoord1f(GLenum target, GLfloat s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1f not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1fv(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord1fv(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1fv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1i(GLenum target, GLint s)
+static void REGAL_CALL missing_glMultiTexCoord1i(GLenum target, GLint s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1i not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1iv(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord1iv(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1iv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1s(GLenum target, GLshort s)
+static void REGAL_CALL missing_glMultiTexCoord1s(GLenum target, GLshort s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1s not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1sv(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord1sv(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1sv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2d(GLenum target, GLdouble s, GLdouble t)
+static void REGAL_CALL missing_glMultiTexCoord2d(GLenum target, GLdouble s, GLdouble t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2803,14 +2803,14 @@ void REGAL_CALL missing_glMultiTexCoord2d(GLenum target, GLdouble s, GLdouble t)
   Warning( "glMultiTexCoord2d not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2dv(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord2dv(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2dv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2f(GLenum target, GLfloat s, GLfloat t)
+static void REGAL_CALL missing_glMultiTexCoord2f(GLenum target, GLfloat s, GLfloat t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2818,14 +2818,14 @@ void REGAL_CALL missing_glMultiTexCoord2f(GLenum target, GLfloat s, GLfloat t)
   Warning( "glMultiTexCoord2f not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2fv(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord2fv(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2fv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2i(GLenum target, GLint s, GLint t)
+static void REGAL_CALL missing_glMultiTexCoord2i(GLenum target, GLint s, GLint t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2833,14 +2833,14 @@ void REGAL_CALL missing_glMultiTexCoord2i(GLenum target, GLint s, GLint t)
   Warning( "glMultiTexCoord2i not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2iv(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord2iv(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2iv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2s(GLenum target, GLshort s, GLshort t)
+static void REGAL_CALL missing_glMultiTexCoord2s(GLenum target, GLshort s, GLshort t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2848,14 +2848,14 @@ void REGAL_CALL missing_glMultiTexCoord2s(GLenum target, GLshort s, GLshort t)
   Warning( "glMultiTexCoord2s not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2sv(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord2sv(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2sv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3d(GLenum target, GLdouble s, GLdouble t, GLdouble r)
+static void REGAL_CALL missing_glMultiTexCoord3d(GLenum target, GLdouble s, GLdouble t, GLdouble r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2864,14 +2864,14 @@ void REGAL_CALL missing_glMultiTexCoord3d(GLenum target, GLdouble s, GLdouble t,
   Warning( "glMultiTexCoord3d not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3dv(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord3dv(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3dv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3f(GLenum target, GLfloat s, GLfloat t, GLfloat r)
+static void REGAL_CALL missing_glMultiTexCoord3f(GLenum target, GLfloat s, GLfloat t, GLfloat r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2880,14 +2880,14 @@ void REGAL_CALL missing_glMultiTexCoord3f(GLenum target, GLfloat s, GLfloat t, G
   Warning( "glMultiTexCoord3f not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3fv(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord3fv(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3fv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3i(GLenum target, GLint s, GLint t, GLint r)
+static void REGAL_CALL missing_glMultiTexCoord3i(GLenum target, GLint s, GLint t, GLint r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2896,14 +2896,14 @@ void REGAL_CALL missing_glMultiTexCoord3i(GLenum target, GLint s, GLint t, GLint
   Warning( "glMultiTexCoord3i not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3iv(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord3iv(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3iv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3s(GLenum target, GLshort s, GLshort t, GLshort r)
+static void REGAL_CALL missing_glMultiTexCoord3s(GLenum target, GLshort s, GLshort t, GLshort r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2912,14 +2912,14 @@ void REGAL_CALL missing_glMultiTexCoord3s(GLenum target, GLshort s, GLshort t, G
   Warning( "glMultiTexCoord3s not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3sv(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord3sv(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3sv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4d(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
+static void REGAL_CALL missing_glMultiTexCoord4d(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2929,14 +2929,14 @@ void REGAL_CALL missing_glMultiTexCoord4d(GLenum target, GLdouble s, GLdouble t,
   Warning( "glMultiTexCoord4d not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4dv(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord4dv(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4dv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4f(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
+static void REGAL_CALL missing_glMultiTexCoord4f(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2946,14 +2946,14 @@ void REGAL_CALL missing_glMultiTexCoord4f(GLenum target, GLfloat s, GLfloat t, G
   Warning( "glMultiTexCoord4f not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4fv(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord4fv(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4fv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4i(GLenum target, GLint s, GLint t, GLint r, GLint q)
+static void REGAL_CALL missing_glMultiTexCoord4i(GLenum target, GLint s, GLint t, GLint r, GLint q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2963,14 +2963,14 @@ void REGAL_CALL missing_glMultiTexCoord4i(GLenum target, GLint s, GLint t, GLint
   Warning( "glMultiTexCoord4i not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4iv(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord4iv(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4iv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4s(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
+static void REGAL_CALL missing_glMultiTexCoord4s(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -2980,14 +2980,14 @@ void REGAL_CALL missing_glMultiTexCoord4s(GLenum target, GLshort s, GLshort t, G
   Warning( "glMultiTexCoord4s not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4sv(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord4sv(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4sv not available." );
 }
 
-void REGAL_CALL missing_glSampleCoverage(GLclampf value, GLboolean invert)
+static void REGAL_CALL missing_glSampleCoverage(GLclampf value, GLboolean invert)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(invert);
@@ -2996,7 +2996,7 @@ void REGAL_CALL missing_glSampleCoverage(GLclampf value, GLboolean invert)
 
 // GL_VERSION_1_4
 
-void REGAL_CALL missing_glBlendFuncSeparate(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparate(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
 {
   UNUSED_PARAMETER(sfactorRGB);
   UNUSED_PARAMETER(dfactorRGB);
@@ -3005,7 +3005,7 @@ void REGAL_CALL missing_glBlendFuncSeparate(GLenum sfactorRGB, GLenum dfactorRGB
   Warning( "glBlendFuncSeparate not available." );
 }
 
-void REGAL_CALL missing_glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -3013,31 +3013,31 @@ void REGAL_CALL missing_glFogCoordPointer(GLenum type, GLsizei stride, const GLv
   Warning( "glFogCoordPointer not available." );
 }
 
-void REGAL_CALL missing_glFogCoordd(GLdouble coord)
+static void REGAL_CALL missing_glFogCoordd(GLdouble coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordd not available." );
 }
 
-void REGAL_CALL missing_glFogCoorddv(const GLdouble *coord)
+static void REGAL_CALL missing_glFogCoorddv(const GLdouble *coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoorddv not available." );
 }
 
-void REGAL_CALL missing_glFogCoordf(GLfloat coord)
+static void REGAL_CALL missing_glFogCoordf(GLfloat coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordf not available." );
 }
 
-void REGAL_CALL missing_glFogCoordfv(const GLfloat *coord)
+static void REGAL_CALL missing_glFogCoordfv(const GLfloat *coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordfv not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawArrays(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawArrays(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -3046,7 +3046,7 @@ void REGAL_CALL missing_glMultiDrawArrays(GLenum mode, const GLint *first, const
   Warning( "glMultiDrawArrays not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -3056,35 +3056,35 @@ void REGAL_CALL missing_glMultiDrawElements(GLenum mode, const GLsizei *count, G
   Warning( "glMultiDrawElements not available." );
 }
 
-void REGAL_CALL missing_glPointParameterf(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPointParameterf(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameterf not available." );
 }
 
-void REGAL_CALL missing_glPointParameterfv(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glPointParameterfv(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glPointParameterfv not available." );
 }
 
-void REGAL_CALL missing_glPointParameteri(GLenum pname, GLint param)
+static void REGAL_CALL missing_glPointParameteri(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameteri not available." );
 }
 
-void REGAL_CALL missing_glPointParameteriv(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glPointParameteriv(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glPointParameteriv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue)
+static void REGAL_CALL missing_glSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3092,13 +3092,13 @@ void REGAL_CALL missing_glSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue
   Warning( "glSecondaryColor3b not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3bv(const GLbyte *v)
+static void REGAL_CALL missing_glSecondaryColor3bv(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3bv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3d(GLdouble red, GLdouble green, GLdouble blue)
+static void REGAL_CALL missing_glSecondaryColor3d(GLdouble red, GLdouble green, GLdouble blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3106,13 +3106,13 @@ void REGAL_CALL missing_glSecondaryColor3d(GLdouble red, GLdouble green, GLdoubl
   Warning( "glSecondaryColor3d not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3dv(const GLdouble *v)
+static void REGAL_CALL missing_glSecondaryColor3dv(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3dv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3f(GLfloat red, GLfloat green, GLfloat blue)
+static void REGAL_CALL missing_glSecondaryColor3f(GLfloat red, GLfloat green, GLfloat blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3120,13 +3120,13 @@ void REGAL_CALL missing_glSecondaryColor3f(GLfloat red, GLfloat green, GLfloat b
   Warning( "glSecondaryColor3f not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3fv(const GLfloat *v)
+static void REGAL_CALL missing_glSecondaryColor3fv(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3fv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3i(GLint red, GLint green, GLint blue)
+static void REGAL_CALL missing_glSecondaryColor3i(GLint red, GLint green, GLint blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3134,13 +3134,13 @@ void REGAL_CALL missing_glSecondaryColor3i(GLint red, GLint green, GLint blue)
   Warning( "glSecondaryColor3i not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3iv(const GLint *v)
+static void REGAL_CALL missing_glSecondaryColor3iv(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3iv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3s(GLshort red, GLshort green, GLshort blue)
+static void REGAL_CALL missing_glSecondaryColor3s(GLshort red, GLshort green, GLshort blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3148,13 +3148,13 @@ void REGAL_CALL missing_glSecondaryColor3s(GLshort red, GLshort green, GLshort b
   Warning( "glSecondaryColor3s not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3sv(const GLshort *v)
+static void REGAL_CALL missing_glSecondaryColor3sv(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3sv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte blue)
+static void REGAL_CALL missing_glSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3162,13 +3162,13 @@ void REGAL_CALL missing_glSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte 
   Warning( "glSecondaryColor3ub not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3ubv(const GLubyte *v)
+static void REGAL_CALL missing_glSecondaryColor3ubv(const GLubyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3ubv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3ui(GLuint red, GLuint green, GLuint blue)
+static void REGAL_CALL missing_glSecondaryColor3ui(GLuint red, GLuint green, GLuint blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3176,13 +3176,13 @@ void REGAL_CALL missing_glSecondaryColor3ui(GLuint red, GLuint green, GLuint blu
   Warning( "glSecondaryColor3ui not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3uiv(const GLuint *v)
+static void REGAL_CALL missing_glSecondaryColor3uiv(const GLuint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3uiv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3us(GLushort red, GLushort green, GLushort blue)
+static void REGAL_CALL missing_glSecondaryColor3us(GLushort red, GLushort green, GLushort blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -3190,13 +3190,13 @@ void REGAL_CALL missing_glSecondaryColor3us(GLushort red, GLushort green, GLusho
   Warning( "glSecondaryColor3us not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3usv(const GLushort *v)
+static void REGAL_CALL missing_glSecondaryColor3usv(const GLushort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3usv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -3205,59 +3205,59 @@ void REGAL_CALL missing_glSecondaryColorPointer(GLint size, GLenum type, GLsizei
   Warning( "glSecondaryColorPointer not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2d(GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glWindowPos2d(GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2d not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2dv(const GLdouble *p)
+static void REGAL_CALL missing_glWindowPos2dv(const GLdouble *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2dv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2f(GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glWindowPos2f(GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2f not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2fv(const GLfloat *p)
+static void REGAL_CALL missing_glWindowPos2fv(const GLfloat *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2fv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2i(GLint x, GLint y)
+static void REGAL_CALL missing_glWindowPos2i(GLint x, GLint y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2i not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2iv(const GLint *p)
+static void REGAL_CALL missing_glWindowPos2iv(const GLint *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2iv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2s(GLshort x, GLshort y)
+static void REGAL_CALL missing_glWindowPos2s(GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2s not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2sv(const GLshort *p)
+static void REGAL_CALL missing_glWindowPos2sv(const GLshort *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2sv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3d(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glWindowPos3d(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -3265,13 +3265,13 @@ void REGAL_CALL missing_glWindowPos3d(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glWindowPos3d not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3dv(const GLdouble *p)
+static void REGAL_CALL missing_glWindowPos3dv(const GLdouble *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3dv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3f(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glWindowPos3f(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -3279,13 +3279,13 @@ void REGAL_CALL missing_glWindowPos3f(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glWindowPos3f not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3fv(const GLfloat *p)
+static void REGAL_CALL missing_glWindowPos3fv(const GLfloat *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3fv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3i(GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glWindowPos3i(GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -3293,13 +3293,13 @@ void REGAL_CALL missing_glWindowPos3i(GLint x, GLint y, GLint z)
   Warning( "glWindowPos3i not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3iv(const GLint *p)
+static void REGAL_CALL missing_glWindowPos3iv(const GLint *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3iv not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3s(GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glWindowPos3s(GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -3307,7 +3307,7 @@ void REGAL_CALL missing_glWindowPos3s(GLshort x, GLshort y, GLshort z)
   Warning( "glWindowPos3s not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3sv(const GLshort *p)
+static void REGAL_CALL missing_glWindowPos3sv(const GLshort *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3sv not available." );
@@ -3315,21 +3315,21 @@ void REGAL_CALL missing_glWindowPos3sv(const GLshort *p)
 
 // GL_VERSION_1_5
 
-void REGAL_CALL missing_glBeginQuery(GLenum target, GLuint id)
+static void REGAL_CALL missing_glBeginQuery(GLenum target, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
   Warning( "glBeginQuery not available." );
 }
 
-void REGAL_CALL missing_glBindBuffer(GLenum target, GLuint buffer)
+static void REGAL_CALL missing_glBindBuffer(GLenum target, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(buffer);
   Warning( "glBindBuffer not available." );
 }
 
-void REGAL_CALL missing_glBufferData(GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage)
+static void REGAL_CALL missing_glBufferData(GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(size);
@@ -3338,7 +3338,7 @@ void REGAL_CALL missing_glBufferData(GLenum target, GLsizeiptr size, const GLvoi
   Warning( "glBufferData not available." );
 }
 
-void REGAL_CALL missing_glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+static void REGAL_CALL missing_glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -3347,41 +3347,41 @@ void REGAL_CALL missing_glBufferSubData(GLenum target, GLintptr offset, GLsizeip
   Warning( "glBufferSubData not available." );
 }
 
-void REGAL_CALL missing_glDeleteBuffers(GLsizei n, const GLuint *buffers)
+static void REGAL_CALL missing_glDeleteBuffers(GLsizei n, const GLuint *buffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(buffers);
   Warning( "glDeleteBuffers not available." );
 }
 
-void REGAL_CALL missing_glDeleteQueries(GLsizei n, const GLuint *ids)
+static void REGAL_CALL missing_glDeleteQueries(GLsizei n, const GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glDeleteQueries not available." );
 }
 
-void REGAL_CALL missing_glEndQuery(GLenum target)
+static void REGAL_CALL missing_glEndQuery(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glEndQuery not available." );
 }
 
-void REGAL_CALL missing_glGenBuffers(GLsizei n, GLuint *buffers)
+static void REGAL_CALL missing_glGenBuffers(GLsizei n, GLuint *buffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(buffers);
   Warning( "glGenBuffers not available." );
 }
 
-void REGAL_CALL missing_glGenQueries(GLsizei n, GLuint *ids)
+static void REGAL_CALL missing_glGenQueries(GLsizei n, GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glGenQueries not available." );
 }
 
-void REGAL_CALL missing_glGetBufferParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetBufferParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -3389,7 +3389,7 @@ void REGAL_CALL missing_glGetBufferParameteriv(GLenum target, GLenum pname, GLin
   Warning( "glGetBufferParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetBufferPointerv(GLenum target, GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetBufferPointerv(GLenum target, GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -3397,7 +3397,7 @@ void REGAL_CALL missing_glGetBufferPointerv(GLenum target, GLenum pname, GLvoid 
   Warning( "glGetBufferPointerv not available." );
 }
 
-void REGAL_CALL missing_glGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid *data)
+static void REGAL_CALL missing_glGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -3406,7 +3406,7 @@ void REGAL_CALL missing_glGetBufferSubData(GLenum target, GLintptr offset, GLsiz
   Warning( "glGetBufferSubData not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectiv(GLuint id, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetQueryObjectiv(GLuint id, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -3414,7 +3414,7 @@ void REGAL_CALL missing_glGetQueryObjectiv(GLuint id, GLenum pname, GLint *param
   Warning( "glGetQueryObjectiv not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectuiv(GLuint id, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetQueryObjectuiv(GLuint id, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -3422,7 +3422,7 @@ void REGAL_CALL missing_glGetQueryObjectuiv(GLuint id, GLenum pname, GLuint *par
   Warning( "glGetQueryObjectuiv not available." );
 }
 
-void REGAL_CALL missing_glGetQueryiv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetQueryiv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -3430,21 +3430,21 @@ void REGAL_CALL missing_glGetQueryiv(GLenum target, GLenum pname, GLint *params)
   Warning( "glGetQueryiv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsBuffer(GLuint buffer)
+static GLboolean REGAL_CALL missing_glIsBuffer(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsBuffer not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsQuery(GLuint id)
+static GLboolean REGAL_CALL missing_glIsQuery(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsQuery not available." );
   return (GLboolean )0;
 }
 
-GLvoid *REGAL_CALL missing_glMapBuffer(GLenum target, GLenum access)
+static GLvoid *REGAL_CALL missing_glMapBuffer(GLenum target, GLenum access)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(access);
@@ -3452,7 +3452,7 @@ GLvoid *REGAL_CALL missing_glMapBuffer(GLenum target, GLenum access)
   return NULL;
 }
 
-GLboolean REGAL_CALL missing_glUnmapBuffer(GLenum target)
+static GLboolean REGAL_CALL missing_glUnmapBuffer(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glUnmapBuffer not available." );
@@ -3461,14 +3461,14 @@ GLboolean REGAL_CALL missing_glUnmapBuffer(GLenum target)
 
 // GL_VERSION_2_0
 
-void REGAL_CALL missing_glAttachShader(GLuint program, GLuint shader)
+static void REGAL_CALL missing_glAttachShader(GLuint program, GLuint shader)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shader);
   Warning( "glAttachShader not available." );
 }
 
-void REGAL_CALL missing_glBindAttribLocation(GLuint program, GLuint index, const GLchar *name)
+static void REGAL_CALL missing_glBindAttribLocation(GLuint program, GLuint index, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -3476,71 +3476,71 @@ void REGAL_CALL missing_glBindAttribLocation(GLuint program, GLuint index, const
   Warning( "glBindAttribLocation not available." );
 }
 
-void REGAL_CALL missing_glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha)
+static void REGAL_CALL missing_glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha)
 {
   UNUSED_PARAMETER(modeRGB);
   UNUSED_PARAMETER(modeAlpha);
   Warning( "glBlendEquationSeparate not available." );
 }
 
-void REGAL_CALL missing_glCompileShader(GLuint shader)
+static void REGAL_CALL missing_glCompileShader(GLuint shader)
 {
   UNUSED_PARAMETER(shader);
   Warning( "glCompileShader not available." );
 }
 
-GLuint REGAL_CALL missing_glCreateProgram(void)
+static GLuint REGAL_CALL missing_glCreateProgram(void)
 {
   Warning( "glCreateProgram not available." );
   return (GLuint )0;
 }
 
-GLuint REGAL_CALL missing_glCreateShader(GLenum type)
+static GLuint REGAL_CALL missing_glCreateShader(GLenum type)
 {
   UNUSED_PARAMETER(type);
   Warning( "glCreateShader not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glDeleteProgram(GLuint program)
+static void REGAL_CALL missing_glDeleteProgram(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glDeleteProgram not available." );
 }
 
-void REGAL_CALL missing_glDeleteShader(GLuint shader)
+static void REGAL_CALL missing_glDeleteShader(GLuint shader)
 {
   UNUSED_PARAMETER(shader);
   Warning( "glDeleteShader not available." );
 }
 
-void REGAL_CALL missing_glDetachShader(GLuint program, GLuint shader)
+static void REGAL_CALL missing_glDetachShader(GLuint program, GLuint shader)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shader);
   Warning( "glDetachShader not available." );
 }
 
-void REGAL_CALL missing_glDisableVertexAttribArray(GLuint index)
+static void REGAL_CALL missing_glDisableVertexAttribArray(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glDisableVertexAttribArray not available." );
 }
 
-void REGAL_CALL missing_glDrawBuffers(GLsizei n, const GLenum *bufs)
+static void REGAL_CALL missing_glDrawBuffers(GLsizei n, const GLenum *bufs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(bufs);
   Warning( "glDrawBuffers not available." );
 }
 
-void REGAL_CALL missing_glEnableVertexAttribArray(GLuint index)
+static void REGAL_CALL missing_glEnableVertexAttribArray(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glEnableVertexAttribArray not available." );
 }
 
-void REGAL_CALL missing_glGetActiveAttrib(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name)
+static void REGAL_CALL missing_glGetActiveAttrib(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -3552,7 +3552,7 @@ void REGAL_CALL missing_glGetActiveAttrib(GLuint program, GLuint index, GLsizei 
   Warning( "glGetActiveAttrib not available." );
 }
 
-void REGAL_CALL missing_glGetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name)
+static void REGAL_CALL missing_glGetActiveUniform(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLint *size, GLenum *type, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -3564,7 +3564,7 @@ void REGAL_CALL missing_glGetActiveUniform(GLuint program, GLuint index, GLsizei
   Warning( "glGetActiveUniform not available." );
 }
 
-void REGAL_CALL missing_glGetAttachedShaders(GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders)
+static void REGAL_CALL missing_glGetAttachedShaders(GLuint program, GLsizei maxCount, GLsizei *count, GLuint *shaders)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(maxCount);
@@ -3573,7 +3573,7 @@ void REGAL_CALL missing_glGetAttachedShaders(GLuint program, GLsizei maxCount, G
   Warning( "glGetAttachedShaders not available." );
 }
 
-GLint REGAL_CALL missing_glGetAttribLocation(GLuint program, const GLchar *name)
+static GLint REGAL_CALL missing_glGetAttribLocation(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
@@ -3581,7 +3581,7 @@ GLint REGAL_CALL missing_glGetAttribLocation(GLuint program, const GLchar *name)
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glGetProgramInfoLog(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
+static void REGAL_CALL missing_glGetProgramInfoLog(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(bufSize);
@@ -3590,7 +3590,7 @@ void REGAL_CALL missing_glGetProgramInfoLog(GLuint program, GLsizei bufSize, GLs
   Warning( "glGetProgramInfoLog not available." );
 }
 
-void REGAL_CALL missing_glGetProgramiv(GLuint program, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetProgramiv(GLuint program, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(pname);
@@ -3598,7 +3598,7 @@ void REGAL_CALL missing_glGetProgramiv(GLuint program, GLenum pname, GLint *para
   Warning( "glGetProgramiv not available." );
 }
 
-void REGAL_CALL missing_glGetShaderInfoLog(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
+static void REGAL_CALL missing_glGetShaderInfoLog(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(bufSize);
@@ -3607,7 +3607,7 @@ void REGAL_CALL missing_glGetShaderInfoLog(GLuint shader, GLsizei bufSize, GLsiz
   Warning( "glGetShaderInfoLog not available." );
 }
 
-void REGAL_CALL missing_glGetShaderSource(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source)
+static void REGAL_CALL missing_glGetShaderSource(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(bufSize);
@@ -3616,7 +3616,7 @@ void REGAL_CALL missing_glGetShaderSource(GLuint shader, GLsizei bufSize, GLsize
   Warning( "glGetShaderSource not available." );
 }
 
-void REGAL_CALL missing_glGetShaderiv(GLuint shader, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetShaderiv(GLuint shader, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(pname);
@@ -3624,7 +3624,7 @@ void REGAL_CALL missing_glGetShaderiv(GLuint shader, GLenum pname, GLint *params
   Warning( "glGetShaderiv not available." );
 }
 
-GLint REGAL_CALL missing_glGetUniformLocation(GLuint program, const GLchar *name)
+static GLint REGAL_CALL missing_glGetUniformLocation(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
@@ -3632,7 +3632,7 @@ GLint REGAL_CALL missing_glGetUniformLocation(GLuint program, const GLchar *name
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glGetUniformfv(GLuint program, GLint location, GLfloat *params)
+static void REGAL_CALL missing_glGetUniformfv(GLuint program, GLint location, GLfloat *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -3640,7 +3640,7 @@ void REGAL_CALL missing_glGetUniformfv(GLuint program, GLint location, GLfloat *
   Warning( "glGetUniformfv not available." );
 }
 
-void REGAL_CALL missing_glGetUniformiv(GLuint program, GLint location, GLint *params)
+static void REGAL_CALL missing_glGetUniformiv(GLuint program, GLint location, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -3648,7 +3648,7 @@ void REGAL_CALL missing_glGetUniformiv(GLuint program, GLint location, GLint *pa
   Warning( "glGetUniformiv not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribPointerv(GLuint index, GLenum pname, GLvoid **pointer)
+static void REGAL_CALL missing_glGetVertexAttribPointerv(GLuint index, GLenum pname, GLvoid **pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -3656,7 +3656,7 @@ void REGAL_CALL missing_glGetVertexAttribPointerv(GLuint index, GLenum pname, GL
   Warning( "glGetVertexAttribPointerv not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribdv(GLuint index, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetVertexAttribdv(GLuint index, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -3664,7 +3664,7 @@ void REGAL_CALL missing_glGetVertexAttribdv(GLuint index, GLenum pname, GLdouble
   Warning( "glGetVertexAttribdv not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -3672,7 +3672,7 @@ void REGAL_CALL missing_glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat 
   Warning( "glGetVertexAttribfv not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribiv(GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVertexAttribiv(GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -3680,27 +3680,27 @@ void REGAL_CALL missing_glGetVertexAttribiv(GLuint index, GLenum pname, GLint *p
   Warning( "glGetVertexAttribiv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsProgram(GLuint program)
+static GLboolean REGAL_CALL missing_glIsProgram(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glIsProgram not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsShader(GLuint shader)
+static GLboolean REGAL_CALL missing_glIsShader(GLuint shader)
 {
   UNUSED_PARAMETER(shader);
   Warning( "glIsShader not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glLinkProgram(GLuint program)
+static void REGAL_CALL missing_glLinkProgram(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glLinkProgram not available." );
 }
 
-void REGAL_CALL missing_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+static void REGAL_CALL missing_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(count);
@@ -3709,7 +3709,7 @@ void REGAL_CALL missing_glShaderSource(GLuint shader, GLsizei count, const GLcha
   Warning( "glShaderSource not available." );
 }
 
-void REGAL_CALL missing_glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
+static void REGAL_CALL missing_glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(func);
@@ -3718,14 +3718,14 @@ void REGAL_CALL missing_glStencilFuncSeparate(GLenum face, GLenum func, GLint re
   Warning( "glStencilFuncSeparate not available." );
 }
 
-void REGAL_CALL missing_glStencilMaskSeparate(GLenum face, GLuint mask)
+static void REGAL_CALL missing_glStencilMaskSeparate(GLenum face, GLuint mask)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mask);
   Warning( "glStencilMaskSeparate not available." );
 }
 
-void REGAL_CALL missing_glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass)
+static void REGAL_CALL missing_glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(fail);
@@ -3734,14 +3734,14 @@ void REGAL_CALL missing_glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfa
   Warning( "glStencilOpSeparate not available." );
 }
 
-void REGAL_CALL missing_glUniform1f(GLint location, GLfloat v0)
+static void REGAL_CALL missing_glUniform1f(GLint location, GLfloat v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniform1f not available." );
 }
 
-void REGAL_CALL missing_glUniform1fv(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform1fv(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3749,14 +3749,14 @@ void REGAL_CALL missing_glUniform1fv(GLint location, GLsizei count, const GLfloa
   Warning( "glUniform1fv not available." );
 }
 
-void REGAL_CALL missing_glUniform1i(GLint location, GLint v0)
+static void REGAL_CALL missing_glUniform1i(GLint location, GLint v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniform1i not available." );
 }
 
-void REGAL_CALL missing_glUniform1iv(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform1iv(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3764,7 +3764,7 @@ void REGAL_CALL missing_glUniform1iv(GLint location, GLsizei count, const GLint 
   Warning( "glUniform1iv not available." );
 }
 
-void REGAL_CALL missing_glUniform2f(GLint location, GLfloat v0, GLfloat v1)
+static void REGAL_CALL missing_glUniform2f(GLint location, GLfloat v0, GLfloat v1)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -3772,7 +3772,7 @@ void REGAL_CALL missing_glUniform2f(GLint location, GLfloat v0, GLfloat v1)
   Warning( "glUniform2f not available." );
 }
 
-void REGAL_CALL missing_glUniform2fv(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform2fv(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3780,7 +3780,7 @@ void REGAL_CALL missing_glUniform2fv(GLint location, GLsizei count, const GLfloa
   Warning( "glUniform2fv not available." );
 }
 
-void REGAL_CALL missing_glUniform2i(GLint location, GLint v0, GLint v1)
+static void REGAL_CALL missing_glUniform2i(GLint location, GLint v0, GLint v1)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -3788,7 +3788,7 @@ void REGAL_CALL missing_glUniform2i(GLint location, GLint v0, GLint v1)
   Warning( "glUniform2i not available." );
 }
 
-void REGAL_CALL missing_glUniform2iv(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform2iv(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3796,7 +3796,7 @@ void REGAL_CALL missing_glUniform2iv(GLint location, GLsizei count, const GLint 
   Warning( "glUniform2iv not available." );
 }
 
-void REGAL_CALL missing_glUniform3f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
+static void REGAL_CALL missing_glUniform3f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -3805,7 +3805,7 @@ void REGAL_CALL missing_glUniform3f(GLint location, GLfloat v0, GLfloat v1, GLfl
   Warning( "glUniform3f not available." );
 }
 
-void REGAL_CALL missing_glUniform3fv(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform3fv(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3813,7 +3813,7 @@ void REGAL_CALL missing_glUniform3fv(GLint location, GLsizei count, const GLfloa
   Warning( "glUniform3fv not available." );
 }
 
-void REGAL_CALL missing_glUniform3i(GLint location, GLint v0, GLint v1, GLint v2)
+static void REGAL_CALL missing_glUniform3i(GLint location, GLint v0, GLint v1, GLint v2)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -3822,7 +3822,7 @@ void REGAL_CALL missing_glUniform3i(GLint location, GLint v0, GLint v1, GLint v2
   Warning( "glUniform3i not available." );
 }
 
-void REGAL_CALL missing_glUniform3iv(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform3iv(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3830,7 +3830,7 @@ void REGAL_CALL missing_glUniform3iv(GLint location, GLsizei count, const GLint 
   Warning( "glUniform3iv not available." );
 }
 
-void REGAL_CALL missing_glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+static void REGAL_CALL missing_glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -3840,7 +3840,7 @@ void REGAL_CALL missing_glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfl
   Warning( "glUniform4f not available." );
 }
 
-void REGAL_CALL missing_glUniform4fv(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform4fv(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3848,7 +3848,7 @@ void REGAL_CALL missing_glUniform4fv(GLint location, GLsizei count, const GLfloa
   Warning( "glUniform4fv not available." );
 }
 
-void REGAL_CALL missing_glUniform4i(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
+static void REGAL_CALL missing_glUniform4i(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -3858,7 +3858,7 @@ void REGAL_CALL missing_glUniform4i(GLint location, GLint v0, GLint v1, GLint v2
   Warning( "glUniform4i not available." );
 }
 
-void REGAL_CALL missing_glUniform4iv(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform4iv(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3866,7 +3866,7 @@ void REGAL_CALL missing_glUniform4iv(GLint location, GLsizei count, const GLint 
   Warning( "glUniform4iv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3875,7 +3875,7 @@ void REGAL_CALL missing_glUniformMatrix2fv(GLint location, GLsizei count, GLbool
   Warning( "glUniformMatrix2fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3884,7 +3884,7 @@ void REGAL_CALL missing_glUniformMatrix3fv(GLint location, GLsizei count, GLbool
   Warning( "glUniformMatrix3fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -3893,61 +3893,61 @@ void REGAL_CALL missing_glUniformMatrix4fv(GLint location, GLsizei count, GLbool
   Warning( "glUniformMatrix4fv not available." );
 }
 
-void REGAL_CALL missing_glUseProgram(GLuint program)
+static void REGAL_CALL missing_glUseProgram(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glUseProgram not available." );
 }
 
-void REGAL_CALL missing_glValidateProgram(GLuint program)
+static void REGAL_CALL missing_glValidateProgram(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glValidateProgram not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1d(GLuint index, GLdouble x)
+static void REGAL_CALL missing_glVertexAttrib1d(GLuint index, GLdouble x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib1dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1f(GLuint index, GLfloat x)
+static void REGAL_CALL missing_glVertexAttrib1f(GLuint index, GLfloat x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1f not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1fv(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib1fv(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1fv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1s(GLuint index, GLshort x)
+static void REGAL_CALL missing_glVertexAttrib1s(GLuint index, GLshort x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1s not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1sv(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib1sv(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1sv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2d(GLuint index, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertexAttrib2d(GLuint index, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -3955,14 +3955,14 @@ void REGAL_CALL missing_glVertexAttrib2d(GLuint index, GLdouble x, GLdouble y)
   Warning( "glVertexAttrib2d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib2dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -3970,14 +3970,14 @@ void REGAL_CALL missing_glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y)
   Warning( "glVertexAttrib2f not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2fv(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib2fv(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2fv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2s(GLuint index, GLshort x, GLshort y)
+static void REGAL_CALL missing_glVertexAttrib2s(GLuint index, GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -3985,14 +3985,14 @@ void REGAL_CALL missing_glVertexAttrib2s(GLuint index, GLshort x, GLshort y)
   Warning( "glVertexAttrib2s not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2sv(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib2sv(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2sv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3d(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertexAttrib3d(GLuint index, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4001,14 +4001,14 @@ void REGAL_CALL missing_glVertexAttrib3d(GLuint index, GLdouble x, GLdouble y, G
   Warning( "glVertexAttrib3d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib3dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4017,14 +4017,14 @@ void REGAL_CALL missing_glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLf
   Warning( "glVertexAttrib3f not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3fv(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib3fv(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3fv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3s(GLuint index, GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glVertexAttrib3s(GLuint index, GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4033,35 +4033,35 @@ void REGAL_CALL missing_glVertexAttrib3s(GLuint index, GLshort x, GLshort y, GLs
   Warning( "glVertexAttrib3s not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3sv(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib3sv(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3sv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Nbv(GLuint index, const GLbyte *v)
+static void REGAL_CALL missing_glVertexAttrib4Nbv(GLuint index, const GLbyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4Nbv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Niv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttrib4Niv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4Niv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Nsv(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib4Nsv(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4Nsv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Nub(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
+static void REGAL_CALL missing_glVertexAttrib4Nub(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4071,35 +4071,35 @@ void REGAL_CALL missing_glVertexAttrib4Nub(GLuint index, GLubyte x, GLubyte y, G
   Warning( "glVertexAttrib4Nub not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Nubv(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttrib4Nubv(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4Nubv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Nuiv(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttrib4Nuiv(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4Nuiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4Nusv(GLuint index, const GLushort *v)
+static void REGAL_CALL missing_glVertexAttrib4Nusv(GLuint index, const GLushort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4Nusv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4bv(GLuint index, const GLbyte *v)
+static void REGAL_CALL missing_glVertexAttrib4bv(GLuint index, const GLbyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4bv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertexAttrib4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4109,14 +4109,14 @@ void REGAL_CALL missing_glVertexAttrib4d(GLuint index, GLdouble x, GLdouble y, G
   Warning( "glVertexAttrib4d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib4dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4126,21 +4126,21 @@ void REGAL_CALL missing_glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLf
   Warning( "glVertexAttrib4f not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4fv(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib4fv(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4fv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4iv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttrib4iv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4iv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4s(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glVertexAttrib4s(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4150,35 +4150,35 @@ void REGAL_CALL missing_glVertexAttrib4s(GLuint index, GLshort x, GLshort y, GLs
   Warning( "glVertexAttrib4s not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4sv(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib4sv(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4sv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4ubv(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttrib4ubv(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4ubv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4uiv(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttrib4uiv(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4usv(GLuint index, const GLushort *v)
+static void REGAL_CALL missing_glVertexAttrib4usv(GLuint index, const GLushort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4usv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -4191,7 +4191,7 @@ void REGAL_CALL missing_glVertexAttribPointer(GLuint index, GLint size, GLenum t
 
 // GL_VERSION_2_1
 
-void REGAL_CALL missing_glUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4200,7 +4200,7 @@ void REGAL_CALL missing_glUniformMatrix2x3fv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix2x3fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4209,7 +4209,7 @@ void REGAL_CALL missing_glUniformMatrix2x4fv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix2x4fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4218,7 +4218,7 @@ void REGAL_CALL missing_glUniformMatrix3x2fv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix3x2fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4227,7 +4227,7 @@ void REGAL_CALL missing_glUniformMatrix3x4fv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix3x4fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4236,7 +4236,7 @@ void REGAL_CALL missing_glUniformMatrix4x2fv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix4x2fv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4247,20 +4247,20 @@ void REGAL_CALL missing_glUniformMatrix4x3fv(GLint location, GLsizei count, GLbo
 
 // GL_VERSION_3_0
 
-void REGAL_CALL missing_glBeginConditionalRender(GLuint id, GLenum mode)
+static void REGAL_CALL missing_glBeginConditionalRender(GLuint id, GLenum mode)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(mode);
   Warning( "glBeginConditionalRender not available." );
 }
 
-void REGAL_CALL missing_glBeginTransformFeedback(GLenum primitiveMode)
+static void REGAL_CALL missing_glBeginTransformFeedback(GLenum primitiveMode)
 {
   UNUSED_PARAMETER(primitiveMode);
   Warning( "glBeginTransformFeedback not available." );
 }
 
-void REGAL_CALL missing_glBindFragDataLocation(GLuint program, GLuint color, const GLchar *name)
+static void REGAL_CALL missing_glBindFragDataLocation(GLuint program, GLuint color, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(color);
@@ -4268,14 +4268,14 @@ void REGAL_CALL missing_glBindFragDataLocation(GLuint program, GLuint color, con
   Warning( "glBindFragDataLocation not available." );
 }
 
-void REGAL_CALL missing_glClampColor(GLenum target, GLenum clamp)
+static void REGAL_CALL missing_glClampColor(GLenum target, GLenum clamp)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(clamp);
   Warning( "glClampColor not available." );
 }
 
-void REGAL_CALL missing_glClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil)
+static void REGAL_CALL missing_glClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(drawbuffer);
@@ -4284,7 +4284,7 @@ void REGAL_CALL missing_glClearBufferfi(GLenum buffer, GLint drawbuffer, GLfloat
   Warning( "glClearBufferfi not available." );
 }
 
-void REGAL_CALL missing_glClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat *value)
+static void REGAL_CALL missing_glClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat *value)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(drawbuffer);
@@ -4292,7 +4292,7 @@ void REGAL_CALL missing_glClearBufferfv(GLenum buffer, GLint drawbuffer, const G
   Warning( "glClearBufferfv not available." );
 }
 
-void REGAL_CALL missing_glClearBufferiv(GLenum buffer, GLint drawbuffer, const GLint *value)
+static void REGAL_CALL missing_glClearBufferiv(GLenum buffer, GLint drawbuffer, const GLint *value)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(drawbuffer);
@@ -4300,7 +4300,7 @@ void REGAL_CALL missing_glClearBufferiv(GLenum buffer, GLint drawbuffer, const G
   Warning( "glClearBufferiv not available." );
 }
 
-void REGAL_CALL missing_glClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint *value)
+static void REGAL_CALL missing_glClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint *value)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(drawbuffer);
@@ -4308,7 +4308,7 @@ void REGAL_CALL missing_glClearBufferuiv(GLenum buffer, GLint drawbuffer, const 
   Warning( "glClearBufferuiv not available." );
 }
 
-void REGAL_CALL missing_glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
+static void REGAL_CALL missing_glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(r);
@@ -4318,31 +4318,31 @@ void REGAL_CALL missing_glColorMaski(GLuint index, GLboolean r, GLboolean g, GLb
   Warning( "glColorMaski not available." );
 }
 
-void REGAL_CALL missing_glDisablei(GLenum cap, GLuint index)
+static void REGAL_CALL missing_glDisablei(GLenum cap, GLuint index)
 {
   UNUSED_PARAMETER(cap);
   UNUSED_PARAMETER(index);
   Warning( "glDisablei not available." );
 }
 
-void REGAL_CALL missing_glEnablei(GLenum cap, GLuint index)
+static void REGAL_CALL missing_glEnablei(GLenum cap, GLuint index)
 {
   UNUSED_PARAMETER(cap);
   UNUSED_PARAMETER(index);
   Warning( "glEnablei not available." );
 }
 
-void REGAL_CALL missing_glEndConditionalRender(void)
+static void REGAL_CALL missing_glEndConditionalRender(void)
 {
   Warning( "glEndConditionalRender not available." );
 }
 
-void REGAL_CALL missing_glEndTransformFeedback(void)
+static void REGAL_CALL missing_glEndTransformFeedback(void)
 {
   Warning( "glEndTransformFeedback not available." );
 }
 
-void REGAL_CALL missing_glGetBooleani_v(GLenum target, GLuint index, GLboolean *data)
+static void REGAL_CALL missing_glGetBooleani_v(GLenum target, GLuint index, GLboolean *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -4350,7 +4350,7 @@ void REGAL_CALL missing_glGetBooleani_v(GLenum target, GLuint index, GLboolean *
   Warning( "glGetBooleani_v not available." );
 }
 
-GLint REGAL_CALL missing_glGetFragDataLocation(GLuint program, const GLchar *name)
+static GLint REGAL_CALL missing_glGetFragDataLocation(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
@@ -4358,7 +4358,7 @@ GLint REGAL_CALL missing_glGetFragDataLocation(GLuint program, const GLchar *nam
   return (GLint )0;
 }
 
-const GLubyte *REGAL_CALL missing_glGetStringi(GLenum name, GLuint index)
+static const GLubyte *REGAL_CALL missing_glGetStringi(GLenum name, GLuint index)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(index);
@@ -4366,7 +4366,7 @@ const GLubyte *REGAL_CALL missing_glGetStringi(GLenum name, GLuint index)
   return NULL;
 }
 
-void REGAL_CALL missing_glGetTexParameterIiv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexParameterIiv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -4374,7 +4374,7 @@ void REGAL_CALL missing_glGetTexParameterIiv(GLenum target, GLenum pname, GLint 
   Warning( "glGetTexParameterIiv not available." );
 }
 
-void REGAL_CALL missing_glGetTexParameterIuiv(GLenum target, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetTexParameterIuiv(GLenum target, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -4382,7 +4382,7 @@ void REGAL_CALL missing_glGetTexParameterIuiv(GLenum target, GLenum pname, GLuin
   Warning( "glGetTexParameterIuiv not available." );
 }
 
-void REGAL_CALL missing_glGetTransformFeedbackVarying(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name)
+static void REGAL_CALL missing_glGetTransformFeedbackVarying(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -4394,7 +4394,7 @@ void REGAL_CALL missing_glGetTransformFeedbackVarying(GLuint program, GLuint ind
   Warning( "glGetTransformFeedbackVarying not available." );
 }
 
-void REGAL_CALL missing_glGetUniformuiv(GLuint program, GLint location, GLuint *params)
+static void REGAL_CALL missing_glGetUniformuiv(GLuint program, GLint location, GLuint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -4402,7 +4402,7 @@ void REGAL_CALL missing_glGetUniformuiv(GLuint program, GLint location, GLuint *
   Warning( "glGetUniformuiv not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribIiv(GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVertexAttribIiv(GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -4410,7 +4410,7 @@ void REGAL_CALL missing_glGetVertexAttribIiv(GLuint index, GLenum pname, GLint *
   Warning( "glGetVertexAttribIiv not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribIuiv(GLuint index, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetVertexAttribIuiv(GLuint index, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -4418,7 +4418,7 @@ void REGAL_CALL missing_glGetVertexAttribIuiv(GLuint index, GLenum pname, GLuint
   Warning( "glGetVertexAttribIuiv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsEnabledi(GLenum target, GLuint index)
+static GLboolean REGAL_CALL missing_glIsEnabledi(GLenum target, GLuint index)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -4426,7 +4426,7 @@ GLboolean REGAL_CALL missing_glIsEnabledi(GLenum target, GLuint index)
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glTexParameterIiv(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTexParameterIiv(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -4434,7 +4434,7 @@ void REGAL_CALL missing_glTexParameterIiv(GLenum target, GLenum pname, const GLi
   Warning( "glTexParameterIiv not available." );
 }
 
-void REGAL_CALL missing_glTexParameterIuiv(GLenum target, GLenum pname, const GLuint *params)
+static void REGAL_CALL missing_glTexParameterIuiv(GLenum target, GLenum pname, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -4442,7 +4442,7 @@ void REGAL_CALL missing_glTexParameterIuiv(GLenum target, GLenum pname, const GL
   Warning( "glTexParameterIuiv not available." );
 }
 
-void REGAL_CALL missing_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL missing_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(count);
@@ -4451,14 +4451,14 @@ void REGAL_CALL missing_glTransformFeedbackVaryings(GLuint program, GLsizei coun
   Warning( "glTransformFeedbackVaryings not available." );
 }
 
-void REGAL_CALL missing_glUniform1ui(GLint location, GLuint v0)
+static void REGAL_CALL missing_glUniform1ui(GLint location, GLuint v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniform1ui not available." );
 }
 
-void REGAL_CALL missing_glUniform1uiv(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform1uiv(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4466,7 +4466,7 @@ void REGAL_CALL missing_glUniform1uiv(GLint location, GLsizei count, const GLuin
   Warning( "glUniform1uiv not available." );
 }
 
-void REGAL_CALL missing_glUniform2ui(GLint location, GLuint v0, GLuint v1)
+static void REGAL_CALL missing_glUniform2ui(GLint location, GLuint v0, GLuint v1)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -4474,7 +4474,7 @@ void REGAL_CALL missing_glUniform2ui(GLint location, GLuint v0, GLuint v1)
   Warning( "glUniform2ui not available." );
 }
 
-void REGAL_CALL missing_glUniform2uiv(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform2uiv(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4482,7 +4482,7 @@ void REGAL_CALL missing_glUniform2uiv(GLint location, GLsizei count, const GLuin
   Warning( "glUniform2uiv not available." );
 }
 
-void REGAL_CALL missing_glUniform3ui(GLint location, GLuint v0, GLuint v1, GLuint v2)
+static void REGAL_CALL missing_glUniform3ui(GLint location, GLuint v0, GLuint v1, GLuint v2)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -4491,7 +4491,7 @@ void REGAL_CALL missing_glUniform3ui(GLint location, GLuint v0, GLuint v1, GLuin
   Warning( "glUniform3ui not available." );
 }
 
-void REGAL_CALL missing_glUniform3uiv(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform3uiv(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4499,7 +4499,7 @@ void REGAL_CALL missing_glUniform3uiv(GLint location, GLsizei count, const GLuin
   Warning( "glUniform3uiv not available." );
 }
 
-void REGAL_CALL missing_glUniform4ui(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
+static void REGAL_CALL missing_glUniform4ui(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -4509,7 +4509,7 @@ void REGAL_CALL missing_glUniform4ui(GLint location, GLuint v0, GLuint v1, GLuin
   Warning( "glUniform4ui not available." );
 }
 
-void REGAL_CALL missing_glUniform4uiv(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform4uiv(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -4517,35 +4517,35 @@ void REGAL_CALL missing_glUniform4uiv(GLint location, GLsizei count, const GLuin
   Warning( "glUniform4uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1i(GLuint index, GLint x)
+static void REGAL_CALL missing_glVertexAttribI1i(GLuint index, GLint x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribI1i not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1iv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI1iv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI1iv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1ui(GLuint index, GLuint x)
+static void REGAL_CALL missing_glVertexAttribI1ui(GLuint index, GLuint x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribI1ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1uiv(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI1uiv(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI1uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2i(GLuint index, GLint x, GLint y)
+static void REGAL_CALL missing_glVertexAttribI2i(GLuint index, GLint x, GLint y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4553,14 +4553,14 @@ void REGAL_CALL missing_glVertexAttribI2i(GLuint index, GLint x, GLint y)
   Warning( "glVertexAttribI2i not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2iv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI2iv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI2iv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2ui(GLuint index, GLuint x, GLuint y)
+static void REGAL_CALL missing_glVertexAttribI2ui(GLuint index, GLuint x, GLuint y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4568,14 +4568,14 @@ void REGAL_CALL missing_glVertexAttribI2ui(GLuint index, GLuint x, GLuint y)
   Warning( "glVertexAttribI2ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2uiv(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI2uiv(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI2uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3i(GLuint index, GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glVertexAttribI3i(GLuint index, GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4584,14 +4584,14 @@ void REGAL_CALL missing_glVertexAttribI3i(GLuint index, GLint x, GLint y, GLint 
   Warning( "glVertexAttribI3i not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3iv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI3iv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI3iv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3ui(GLuint index, GLuint x, GLuint y, GLuint z)
+static void REGAL_CALL missing_glVertexAttribI3ui(GLuint index, GLuint x, GLuint y, GLuint z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4600,21 +4600,21 @@ void REGAL_CALL missing_glVertexAttribI3ui(GLuint index, GLuint x, GLuint y, GLu
   Warning( "glVertexAttribI3ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3uiv(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI3uiv(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI3uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4bv(GLuint index, const GLbyte *v)
+static void REGAL_CALL missing_glVertexAttribI4bv(GLuint index, const GLbyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4bv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4i(GLuint index, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glVertexAttribI4i(GLuint index, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4624,28 +4624,28 @@ void REGAL_CALL missing_glVertexAttribI4i(GLuint index, GLint x, GLint y, GLint 
   Warning( "glVertexAttribI4i not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4iv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI4iv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4iv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4sv(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttribI4sv(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4sv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4ubv(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttribI4ubv(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4ubv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4ui(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
+static void REGAL_CALL missing_glVertexAttribI4ui(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -4655,21 +4655,21 @@ void REGAL_CALL missing_glVertexAttribI4ui(GLuint index, GLuint x, GLuint y, GLu
   Warning( "glVertexAttribI4ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4uiv(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI4uiv(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4usv(GLuint index, const GLushort *v)
+static void REGAL_CALL missing_glVertexAttribI4usv(GLuint index, const GLushort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4usv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -4681,7 +4681,7 @@ void REGAL_CALL missing_glVertexAttribIPointer(GLuint index, GLint size, GLenum 
 
 // GL_VERSION_3_1
 
-void REGAL_CALL missing_glDrawArraysInstanced(GLenum mode, GLint start, GLsizei count, GLsizei primcount)
+static void REGAL_CALL missing_glDrawArraysInstanced(GLenum mode, GLint start, GLsizei count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -4690,7 +4690,7 @@ void REGAL_CALL missing_glDrawArraysInstanced(GLenum mode, GLint start, GLsizei 
   Warning( "glDrawArraysInstanced not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
+static void REGAL_CALL missing_glDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -4700,13 +4700,13 @@ void REGAL_CALL missing_glDrawElementsInstanced(GLenum mode, GLsizei count, GLen
   Warning( "glDrawElementsInstanced not available." );
 }
 
-void REGAL_CALL missing_glPrimitiveRestartIndex(GLuint index)
+static void REGAL_CALL missing_glPrimitiveRestartIndex(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glPrimitiveRestartIndex not available." );
 }
 
-void REGAL_CALL missing_glTexBuffer(GLenum target, GLenum internalformat, GLuint buffer)
+static void REGAL_CALL missing_glTexBuffer(GLenum target, GLenum internalformat, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -4716,7 +4716,7 @@ void REGAL_CALL missing_glTexBuffer(GLenum target, GLenum internalformat, GLuint
 
 // GL_VERSION_3_2
 
-void REGAL_CALL missing_glFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -4725,7 +4725,7 @@ void REGAL_CALL missing_glFramebufferTexture(GLenum target, GLenum attachment, G
   Warning( "glFramebufferTexture not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
+static void REGAL_CALL missing_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -4735,7 +4735,7 @@ void REGAL_CALL missing_glFramebufferTextureFace(GLenum target, GLenum attachmen
   Warning( "glFramebufferTextureFace not available." );
 }
 
-void REGAL_CALL missing_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
+static void REGAL_CALL missing_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -4743,7 +4743,7 @@ void REGAL_CALL missing_glGetBufferParameteri64v(GLenum target, GLenum pname, GL
   Warning( "glGetBufferParameteri64v not available." );
 }
 
-void REGAL_CALL missing_glGetInteger64i_v(GLenum target, GLuint index, GLint64 *data)
+static void REGAL_CALL missing_glGetInteger64i_v(GLenum target, GLuint index, GLint64 *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -4753,7 +4753,7 @@ void REGAL_CALL missing_glGetInteger64i_v(GLenum target, GLuint index, GLint64 *
 
 // GL_VERSION_3_3
 
-void REGAL_CALL missing_glVertexAttribDivisor(GLuint index, GLuint divisor)
+static void REGAL_CALL missing_glVertexAttribDivisor(GLuint index, GLuint divisor)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(divisor);
@@ -4762,7 +4762,7 @@ void REGAL_CALL missing_glVertexAttribDivisor(GLuint index, GLuint divisor)
 
 // GL_VERSION_4_0
 
-void REGAL_CALL missing_glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
+static void REGAL_CALL missing_glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(modeRGB);
@@ -4770,14 +4770,14 @@ void REGAL_CALL missing_glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLe
   Warning( "glBlendEquationSeparatei not available." );
 }
 
-void REGAL_CALL missing_glBlendEquationi(GLuint buf, GLenum mode)
+static void REGAL_CALL missing_glBlendEquationi(GLuint buf, GLenum mode)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(mode);
   Warning( "glBlendEquationi not available." );
 }
 
-void REGAL_CALL missing_glBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(srcRGB);
@@ -4787,7 +4787,7 @@ void REGAL_CALL missing_glBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum d
   Warning( "glBlendFuncSeparatei not available." );
 }
 
-void REGAL_CALL missing_glBlendFunci(GLuint buf, GLenum src, GLenum dst)
+static void REGAL_CALL missing_glBlendFunci(GLuint buf, GLenum src, GLenum dst)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(src);
@@ -4797,7 +4797,7 @@ void REGAL_CALL missing_glBlendFunci(GLuint buf, GLenum src, GLenum dst)
 
 // GL_3DFX_tbuffer
 
-void REGAL_CALL missing_glTbufferMask3DFX(GLuint mask)
+static void REGAL_CALL missing_glTbufferMask3DFX(GLuint mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glTbufferMask3DFX not available." );
@@ -4805,14 +4805,14 @@ void REGAL_CALL missing_glTbufferMask3DFX(GLuint mask)
 
 // GL_AMD_debug_output
 
-void REGAL_CALL missing_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+static void REGAL_CALL missing_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
 {
   UNUSED_PARAMETER(callback);
   UNUSED_PARAMETER(userParam);
   Warning( "glDebugMessageCallbackAMD not available." );
 }
 
-void REGAL_CALL missing_glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
+static void REGAL_CALL missing_glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
 {
   UNUSED_PARAMETER(category);
   UNUSED_PARAMETER(severity);
@@ -4822,7 +4822,7 @@ void REGAL_CALL missing_glDebugMessageEnableAMD(GLenum category, GLenum severity
   Warning( "glDebugMessageEnableAMD not available." );
 }
 
-void REGAL_CALL missing_glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf)
+static void REGAL_CALL missing_glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf)
 {
   UNUSED_PARAMETER(category);
   UNUSED_PARAMETER(severity);
@@ -4832,7 +4832,7 @@ void REGAL_CALL missing_glDebugMessageInsertAMD(GLenum category, GLenum severity
   Warning( "glDebugMessageInsertAMD not available." );
 }
 
-GLuint REGAL_CALL missing_glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
+static GLuint REGAL_CALL missing_glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(bufsize);
@@ -4847,14 +4847,14 @@ GLuint REGAL_CALL missing_glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize,
 
 // GL_AMD_draw_buffers_blend
 
-void REGAL_CALL missing_glBlendEquationIndexedAMD(GLuint buf, GLenum mode)
+static void REGAL_CALL missing_glBlendEquationIndexedAMD(GLuint buf, GLenum mode)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(mode);
   Warning( "glBlendEquationIndexedAMD not available." );
 }
 
-void REGAL_CALL missing_glBlendEquationSeparateIndexedAMD(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
+static void REGAL_CALL missing_glBlendEquationSeparateIndexedAMD(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(modeRGB);
@@ -4862,7 +4862,7 @@ void REGAL_CALL missing_glBlendEquationSeparateIndexedAMD(GLuint buf, GLenum mod
   Warning( "glBlendEquationSeparateIndexedAMD not available." );
 }
 
-void REGAL_CALL missing_glBlendFuncIndexedAMD(GLuint buf, GLenum src, GLenum dst)
+static void REGAL_CALL missing_glBlendFuncIndexedAMD(GLuint buf, GLenum src, GLenum dst)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(src);
@@ -4870,7 +4870,7 @@ void REGAL_CALL missing_glBlendFuncIndexedAMD(GLuint buf, GLenum src, GLenum dst
   Warning( "glBlendFuncIndexedAMD not available." );
 }
 
-void REGAL_CALL missing_glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(srcRGB);
@@ -4882,7 +4882,7 @@ void REGAL_CALL missing_glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum srcRGB,
 
 // GL_AMD_multi_draw_indirect
 
-void REGAL_CALL missing_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
+static void REGAL_CALL missing_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(indirect);
@@ -4891,7 +4891,7 @@ void REGAL_CALL missing_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *
   Warning( "glMultiDrawArraysIndirectAMD not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawElementsIndirectAMD(GLenum mode, GLenum type, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
+static void REGAL_CALL missing_glMultiDrawElementsIndirectAMD(GLenum mode, GLenum type, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(type);
@@ -4903,7 +4903,7 @@ void REGAL_CALL missing_glMultiDrawElementsIndirectAMD(GLenum mode, GLenum type,
 
 // GL_AMD_name_gen_delete
 
-void REGAL_CALL missing_glDeleteNamesAMD(GLenum identifier, GLuint num, const GLuint *names)
+static void REGAL_CALL missing_glDeleteNamesAMD(GLenum identifier, GLuint num, const GLuint *names)
 {
   UNUSED_PARAMETER(identifier);
   UNUSED_PARAMETER(num);
@@ -4911,7 +4911,7 @@ void REGAL_CALL missing_glDeleteNamesAMD(GLenum identifier, GLuint num, const GL
   Warning( "glDeleteNamesAMD not available." );
 }
 
-void REGAL_CALL missing_glGenNamesAMD(GLenum identifier, GLuint num, GLuint *names)
+static void REGAL_CALL missing_glGenNamesAMD(GLenum identifier, GLuint num, GLuint *names)
 {
   UNUSED_PARAMETER(identifier);
   UNUSED_PARAMETER(num);
@@ -4919,7 +4919,7 @@ void REGAL_CALL missing_glGenNamesAMD(GLenum identifier, GLuint num, GLuint *nam
   Warning( "glGenNamesAMD not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsNameAMD(GLenum identifier, GLuint name)
+static GLboolean REGAL_CALL missing_glIsNameAMD(GLenum identifier, GLuint name)
 {
   UNUSED_PARAMETER(identifier);
   UNUSED_PARAMETER(name);
@@ -4929,33 +4929,33 @@ GLboolean REGAL_CALL missing_glIsNameAMD(GLenum identifier, GLuint name)
 
 // GL_AMD_performance_monitor
 
-void REGAL_CALL missing_glBeginPerfMonitorAMD(GLuint monitor)
+static void REGAL_CALL missing_glBeginPerfMonitorAMD(GLuint monitor)
 {
   UNUSED_PARAMETER(monitor);
   Warning( "glBeginPerfMonitorAMD not available." );
 }
 
-void REGAL_CALL missing_glDeletePerfMonitorsAMD(GLsizei n, GLuint *monitors)
+static void REGAL_CALL missing_glDeletePerfMonitorsAMD(GLsizei n, GLuint *monitors)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(monitors);
   Warning( "glDeletePerfMonitorsAMD not available." );
 }
 
-void REGAL_CALL missing_glEndPerfMonitorAMD(GLuint monitor)
+static void REGAL_CALL missing_glEndPerfMonitorAMD(GLuint monitor)
 {
   UNUSED_PARAMETER(monitor);
   Warning( "glEndPerfMonitorAMD not available." );
 }
 
-void REGAL_CALL missing_glGenPerfMonitorsAMD(GLsizei n, GLuint *monitors)
+static void REGAL_CALL missing_glGenPerfMonitorsAMD(GLsizei n, GLuint *monitors)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(monitors);
   Warning( "glGenPerfMonitorsAMD not available." );
 }
 
-void REGAL_CALL missing_glGetPerfMonitorCounterDataAMD(GLuint monitor, GLenum pname, GLsizei dataSize, GLuint *data, GLint *bytesWritten)
+static void REGAL_CALL missing_glGetPerfMonitorCounterDataAMD(GLuint monitor, GLenum pname, GLsizei dataSize, GLuint *data, GLint *bytesWritten)
 {
   UNUSED_PARAMETER(monitor);
   UNUSED_PARAMETER(pname);
@@ -4965,7 +4965,7 @@ void REGAL_CALL missing_glGetPerfMonitorCounterDataAMD(GLuint monitor, GLenum pn
   Warning( "glGetPerfMonitorCounterDataAMD not available." );
 }
 
-void REGAL_CALL missing_glGetPerfMonitorCounterInfoAMD(GLuint group, GLuint counter, GLenum pname, GLvoid *data)
+static void REGAL_CALL missing_glGetPerfMonitorCounterInfoAMD(GLuint group, GLuint counter, GLenum pname, GLvoid *data)
 {
   UNUSED_PARAMETER(group);
   UNUSED_PARAMETER(counter);
@@ -4974,7 +4974,7 @@ void REGAL_CALL missing_glGetPerfMonitorCounterInfoAMD(GLuint group, GLuint coun
   Warning( "glGetPerfMonitorCounterInfoAMD not available." );
 }
 
-void REGAL_CALL missing_glGetPerfMonitorCounterStringAMD(GLuint group, GLuint counter, GLsizei bufSize, GLsizei *length, GLchar *counterString)
+static void REGAL_CALL missing_glGetPerfMonitorCounterStringAMD(GLuint group, GLuint counter, GLsizei bufSize, GLsizei *length, GLchar *counterString)
 {
   UNUSED_PARAMETER(group);
   UNUSED_PARAMETER(counter);
@@ -4984,7 +4984,7 @@ void REGAL_CALL missing_glGetPerfMonitorCounterStringAMD(GLuint group, GLuint co
   Warning( "glGetPerfMonitorCounterStringAMD not available." );
 }
 
-void REGAL_CALL missing_glGetPerfMonitorCountersAMD(GLuint group, GLint *numCounters, GLint *maxActiveCounters, GLsizei countersSize, GLuint *counters)
+static void REGAL_CALL missing_glGetPerfMonitorCountersAMD(GLuint group, GLint *numCounters, GLint *maxActiveCounters, GLsizei countersSize, GLuint *counters)
 {
   UNUSED_PARAMETER(group);
   UNUSED_PARAMETER(numCounters);
@@ -4994,7 +4994,7 @@ void REGAL_CALL missing_glGetPerfMonitorCountersAMD(GLuint group, GLint *numCoun
   Warning( "glGetPerfMonitorCountersAMD not available." );
 }
 
-void REGAL_CALL missing_glGetPerfMonitorGroupStringAMD(GLuint group, GLsizei bufSize, GLsizei *length, GLchar *groupString)
+static void REGAL_CALL missing_glGetPerfMonitorGroupStringAMD(GLuint group, GLsizei bufSize, GLsizei *length, GLchar *groupString)
 {
   UNUSED_PARAMETER(group);
   UNUSED_PARAMETER(bufSize);
@@ -5003,7 +5003,7 @@ void REGAL_CALL missing_glGetPerfMonitorGroupStringAMD(GLuint group, GLsizei buf
   Warning( "glGetPerfMonitorGroupStringAMD not available." );
 }
 
-void REGAL_CALL missing_glGetPerfMonitorGroupsAMD(GLint *numGroups, GLsizei groupsSize, GLuint *groups)
+static void REGAL_CALL missing_glGetPerfMonitorGroupsAMD(GLint *numGroups, GLsizei groupsSize, GLuint *groups)
 {
   UNUSED_PARAMETER(numGroups);
   UNUSED_PARAMETER(groupsSize);
@@ -5011,7 +5011,7 @@ void REGAL_CALL missing_glGetPerfMonitorGroupsAMD(GLint *numGroups, GLsizei grou
   Warning( "glGetPerfMonitorGroupsAMD not available." );
 }
 
-void REGAL_CALL missing_glSelectPerfMonitorCountersAMD(GLuint monitor, GLboolean enable, GLuint group, GLint numCounters, GLuint *counterList)
+static void REGAL_CALL missing_glSelectPerfMonitorCountersAMD(GLuint monitor, GLboolean enable, GLuint group, GLint numCounters, GLuint *counterList)
 {
   UNUSED_PARAMETER(monitor);
   UNUSED_PARAMETER(enable);
@@ -5023,7 +5023,7 @@ void REGAL_CALL missing_glSelectPerfMonitorCountersAMD(GLuint monitor, GLboolean
 
 // GL_AMD_sample_positions
 
-void REGAL_CALL missing_glSetMultisamplefvAMD(GLenum pname, GLuint index, const GLfloat *val)
+static void REGAL_CALL missing_glSetMultisamplefvAMD(GLenum pname, GLuint index, const GLfloat *val)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(index);
@@ -5033,7 +5033,7 @@ void REGAL_CALL missing_glSetMultisamplefvAMD(GLenum pname, GLuint index, const 
 
 // GL_AMD_stencil_operation_extended
 
-void REGAL_CALL missing_glStencilOpValueAMD(GLenum face, GLuint value)
+static void REGAL_CALL missing_glStencilOpValueAMD(GLenum face, GLuint value)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(value);
@@ -5042,13 +5042,13 @@ void REGAL_CALL missing_glStencilOpValueAMD(GLenum face, GLuint value)
 
 // GL_AMD_vertex_shader_tessellator
 
-void REGAL_CALL missing_glTessellationFactorAMD(GLfloat factor)
+static void REGAL_CALL missing_glTessellationFactorAMD(GLfloat factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glTessellationFactorAMD not available." );
 }
 
-void REGAL_CALL missing_glTessellationModeAMD(GLenum mode)
+static void REGAL_CALL missing_glTessellationModeAMD(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glTessellationModeAMD not available." );
@@ -5056,7 +5056,7 @@ void REGAL_CALL missing_glTessellationModeAMD(GLenum mode)
 
 // GL_ANGLE_framebuffer_blit
 
-void REGAL_CALL missing_glBlitFramebufferANGLE(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+static void REGAL_CALL missing_glBlitFramebufferANGLE(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 {
   UNUSED_PARAMETER(srcX0);
   UNUSED_PARAMETER(srcY0);
@@ -5073,7 +5073,7 @@ void REGAL_CALL missing_glBlitFramebufferANGLE(GLint srcX0, GLint srcY0, GLint s
 
 // GL_ANGLE_framebuffer_multisample
 
-void REGAL_CALL missing_glRenderbufferStorageMultisampleANGLE(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageMultisampleANGLE(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -5085,7 +5085,7 @@ void REGAL_CALL missing_glRenderbufferStorageMultisampleANGLE(GLenum target, GLs
 
 // GL_ANGLE_instanced_arrays
 
-void REGAL_CALL missing_glDrawArraysInstancedANGLE(GLenum mode, GLint first, GLsizei count, GLsizei primcount)
+static void REGAL_CALL missing_glDrawArraysInstancedANGLE(GLenum mode, GLint first, GLsizei count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -5094,7 +5094,7 @@ void REGAL_CALL missing_glDrawArraysInstancedANGLE(GLenum mode, GLint first, GLs
   Warning( "glDrawArraysInstancedANGLE not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstancedANGLE(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
+static void REGAL_CALL missing_glDrawElementsInstancedANGLE(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5104,7 +5104,7 @@ void REGAL_CALL missing_glDrawElementsInstancedANGLE(GLenum mode, GLsizei count,
   Warning( "glDrawElementsInstancedANGLE not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribDivisorANGLE(GLuint index, GLuint divisor)
+static void REGAL_CALL missing_glVertexAttribDivisorANGLE(GLuint index, GLuint divisor)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(divisor);
@@ -5113,7 +5113,7 @@ void REGAL_CALL missing_glVertexAttribDivisorANGLE(GLuint index, GLuint divisor)
 
 // GL_ANGLE_translated_shader_source
 
-void REGAL_CALL missing_glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source)
+static void REGAL_CALL missing_glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(bufsize);
@@ -5124,7 +5124,7 @@ void REGAL_CALL missing_glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei 
 
 // GL_APPLE_copy_texture_levels
 
-void REGAL_CALL missing_glCopyTextureLevelsAPPLE(GLuint destinationTexture, GLuint sourceTexture, GLint sourceBaseLevel, GLsizei sourceLevelCount)
+static void REGAL_CALL missing_glCopyTextureLevelsAPPLE(GLuint destinationTexture, GLuint sourceTexture, GLint sourceBaseLevel, GLsizei sourceLevelCount)
 {
   UNUSED_PARAMETER(destinationTexture);
   UNUSED_PARAMETER(sourceTexture);
@@ -5135,7 +5135,7 @@ void REGAL_CALL missing_glCopyTextureLevelsAPPLE(GLuint destinationTexture, GLui
 
 // GL_APPLE_element_array
 
-void REGAL_CALL missing_glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsizei count)
+static void REGAL_CALL missing_glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsizei count)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -5143,7 +5143,7 @@ void REGAL_CALL missing_glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsize
   Warning( "glDrawElementArrayAPPLE not available." );
 }
 
-void REGAL_CALL missing_glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count)
+static void REGAL_CALL missing_glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -5153,14 +5153,14 @@ void REGAL_CALL missing_glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, 
   Warning( "glDrawRangeElementArrayAPPLE not available." );
 }
 
-void REGAL_CALL missing_glElementPointerAPPLE(GLenum type, const GLvoid *pointer)
+static void REGAL_CALL missing_glElementPointerAPPLE(GLenum type, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(pointer);
   Warning( "glElementPointerAPPLE not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawElementArrayAPPLE(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawElementArrayAPPLE(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -5169,7 +5169,7 @@ void REGAL_CALL missing_glMultiDrawElementArrayAPPLE(GLenum mode, const GLint *f
   Warning( "glMultiDrawElementArrayAPPLE not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -5182,54 +5182,54 @@ void REGAL_CALL missing_glMultiDrawRangeElementArrayAPPLE(GLenum mode, GLuint st
 
 // GL_APPLE_fence
 
-void REGAL_CALL missing_glDeleteFencesAPPLE(GLsizei n, const GLuint *fences)
+static void REGAL_CALL missing_glDeleteFencesAPPLE(GLsizei n, const GLuint *fences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(fences);
   Warning( "glDeleteFencesAPPLE not available." );
 }
 
-void REGAL_CALL missing_glFinishFenceAPPLE(GLuint fence)
+static void REGAL_CALL missing_glFinishFenceAPPLE(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glFinishFenceAPPLE not available." );
 }
 
-void REGAL_CALL missing_glFinishObjectAPPLE(GLenum object, GLint name)
+static void REGAL_CALL missing_glFinishObjectAPPLE(GLenum object, GLint name)
 {
   UNUSED_PARAMETER(object);
   UNUSED_PARAMETER(name);
   Warning( "glFinishObjectAPPLE not available." );
 }
 
-void REGAL_CALL missing_glGenFencesAPPLE(GLsizei n, GLuint *fences)
+static void REGAL_CALL missing_glGenFencesAPPLE(GLsizei n, GLuint *fences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(fences);
   Warning( "glGenFencesAPPLE not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsFenceAPPLE(GLuint fence)
+static GLboolean REGAL_CALL missing_glIsFenceAPPLE(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glIsFenceAPPLE not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glSetFenceAPPLE(GLuint fence)
+static void REGAL_CALL missing_glSetFenceAPPLE(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glSetFenceAPPLE not available." );
 }
 
-GLboolean REGAL_CALL missing_glTestFenceAPPLE(GLuint fence)
+static GLboolean REGAL_CALL missing_glTestFenceAPPLE(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glTestFenceAPPLE not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glTestObjectAPPLE(GLenum object, GLuint name)
+static GLboolean REGAL_CALL missing_glTestObjectAPPLE(GLenum object, GLuint name)
 {
   UNUSED_PARAMETER(object);
   UNUSED_PARAMETER(name);
@@ -5239,7 +5239,7 @@ GLboolean REGAL_CALL missing_glTestObjectAPPLE(GLenum object, GLuint name)
 
 // GL_APPLE_flush_buffer_range
 
-void REGAL_CALL missing_glBufferParameteriAPPLE(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glBufferParameteriAPPLE(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -5247,7 +5247,7 @@ void REGAL_CALL missing_glBufferParameteriAPPLE(GLenum target, GLenum pname, GLi
   Warning( "glBufferParameteriAPPLE not available." );
 }
 
-void REGAL_CALL missing_glFlushMappedBufferRangeAPPLE(GLenum target, GLintptr offset, GLsizeiptr size)
+static void REGAL_CALL missing_glFlushMappedBufferRangeAPPLE(GLenum target, GLintptr offset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -5257,24 +5257,24 @@ void REGAL_CALL missing_glFlushMappedBufferRangeAPPLE(GLenum target, GLintptr of
 
 // GL_APPLE_flush_render
 
-void REGAL_CALL missing_glFinishRenderAPPLE(void)
+static void REGAL_CALL missing_glFinishRenderAPPLE(void)
 {
   Warning( "glFinishRenderAPPLE not available." );
 }
 
-void REGAL_CALL missing_glFlushRenderAPPLE(void)
+static void REGAL_CALL missing_glFlushRenderAPPLE(void)
 {
   Warning( "glFlushRenderAPPLE not available." );
 }
 
-void REGAL_CALL missing_glSwapAPPLE(void)
+static void REGAL_CALL missing_glSwapAPPLE(void)
 {
   Warning( "glSwapAPPLE not available." );
 }
 
 // GL_APPLE_framebuffer_multisample
 
-void REGAL_CALL missing_glRenderbufferStorageMultisampleAPPLE(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageMultisampleAPPLE(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -5284,14 +5284,14 @@ void REGAL_CALL missing_glRenderbufferStorageMultisampleAPPLE(GLenum target, GLs
   Warning( "glRenderbufferStorageMultisampleAPPLE not available." );
 }
 
-void REGAL_CALL missing_glResolveMultisampleFramebufferAPPLE(void)
+static void REGAL_CALL missing_glResolveMultisampleFramebufferAPPLE(void)
 {
   Warning( "glResolveMultisampleFramebufferAPPLE not available." );
 }
 
 // GL_APPLE_object_purgeable
 
-void REGAL_CALL missing_glGetObjectParameterivAPPLE(GLenum objectType, GLuint name, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetObjectParameterivAPPLE(GLenum objectType, GLuint name, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(objectType);
   UNUSED_PARAMETER(name);
@@ -5300,7 +5300,7 @@ void REGAL_CALL missing_glGetObjectParameterivAPPLE(GLenum objectType, GLuint na
   Warning( "glGetObjectParameterivAPPLE not available." );
 }
 
-GLenum REGAL_CALL missing_glObjectPurgeableAPPLE(GLenum objectType, GLuint name, GLenum option)
+static GLenum REGAL_CALL missing_glObjectPurgeableAPPLE(GLenum objectType, GLuint name, GLenum option)
 {
   UNUSED_PARAMETER(objectType);
   UNUSED_PARAMETER(name);
@@ -5309,7 +5309,7 @@ GLenum REGAL_CALL missing_glObjectPurgeableAPPLE(GLenum objectType, GLuint name,
   return (GLenum )0;
 }
 
-GLenum REGAL_CALL missing_glObjectUnpurgeableAPPLE(GLenum objectType, GLuint name, GLenum option)
+static GLenum REGAL_CALL missing_glObjectUnpurgeableAPPLE(GLenum objectType, GLuint name, GLenum option)
 {
   UNUSED_PARAMETER(objectType);
   UNUSED_PARAMETER(name);
@@ -5320,7 +5320,7 @@ GLenum REGAL_CALL missing_glObjectUnpurgeableAPPLE(GLenum objectType, GLuint nam
 
 // GL_APPLE_sync
 
-GLenum REGAL_CALL missing_glClientWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout)
+static GLenum REGAL_CALL missing_glClientWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout)
 {
   UNUSED_PARAMETER(sync);
   UNUSED_PARAMETER(flags);
@@ -5329,13 +5329,13 @@ GLenum REGAL_CALL missing_glClientWaitSyncAPPLE(GLsync sync, GLbitfield flags, G
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glDeleteSyncAPPLE(GLsync sync)
+static void REGAL_CALL missing_glDeleteSyncAPPLE(GLsync sync)
 {
   UNUSED_PARAMETER(sync);
   Warning( "glDeleteSyncAPPLE not available." );
 }
 
-GLsync REGAL_CALL missing_glFenceSyncAPPLE(GLenum condition, GLbitfield flags)
+static GLsync REGAL_CALL missing_glFenceSyncAPPLE(GLenum condition, GLbitfield flags)
 {
   UNUSED_PARAMETER(condition);
   UNUSED_PARAMETER(flags);
@@ -5343,14 +5343,14 @@ GLsync REGAL_CALL missing_glFenceSyncAPPLE(GLenum condition, GLbitfield flags)
   return (GLsync )0;
 }
 
-void REGAL_CALL missing_glGetInteger64vAPPLE(GLenum pname, GLint64 *params)
+static void REGAL_CALL missing_glGetInteger64vAPPLE(GLenum pname, GLint64 *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetInteger64vAPPLE not available." );
 }
 
-void REGAL_CALL missing_glGetSyncivAPPLE(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
+static void REGAL_CALL missing_glGetSyncivAPPLE(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
 {
   UNUSED_PARAMETER(sync);
   UNUSED_PARAMETER(pname);
@@ -5360,14 +5360,14 @@ void REGAL_CALL missing_glGetSyncivAPPLE(GLsync sync, GLenum pname, GLsizei bufS
   Warning( "glGetSyncivAPPLE not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsSyncAPPLE(GLsync sync)
+static GLboolean REGAL_CALL missing_glIsSyncAPPLE(GLsync sync)
 {
   UNUSED_PARAMETER(sync);
   Warning( "glIsSyncAPPLE not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout)
+static void REGAL_CALL missing_glWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout)
 {
   UNUSED_PARAMETER(sync);
   UNUSED_PARAMETER(flags);
@@ -5377,7 +5377,7 @@ void REGAL_CALL missing_glWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 
 
 // GL_APPLE_texture_range
 
-void REGAL_CALL missing_glGetTexParameterPointervAPPLE(GLenum target, GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetTexParameterPointervAPPLE(GLenum target, GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -5385,7 +5385,7 @@ void REGAL_CALL missing_glGetTexParameterPointervAPPLE(GLenum target, GLenum pna
   Warning( "glGetTexParameterPointervAPPLE not available." );
 }
 
-void REGAL_CALL missing_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
+static void REGAL_CALL missing_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(length);
@@ -5395,27 +5395,27 @@ void REGAL_CALL missing_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoi
 
 // GL_APPLE_vertex_array_object
 
-void REGAL_CALL missing_glBindVertexArrayAPPLE(GLuint array)
+static void REGAL_CALL missing_glBindVertexArrayAPPLE(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glBindVertexArrayAPPLE not available." );
 }
 
-void REGAL_CALL missing_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL missing_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
   Warning( "glDeleteVertexArraysAPPLE not available." );
 }
 
-void REGAL_CALL missing_glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL missing_glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
   Warning( "glGenVertexArraysAPPLE not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsVertexArrayAPPLE(GLuint array)
+static GLboolean REGAL_CALL missing_glIsVertexArrayAPPLE(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glIsVertexArrayAPPLE not available." );
@@ -5424,21 +5424,21 @@ GLboolean REGAL_CALL missing_glIsVertexArrayAPPLE(GLuint array)
 
 // GL_APPLE_vertex_array_range
 
-void REGAL_CALL missing_glFlushVertexArrayRangeAPPLE(GLsizei length, GLvoid *pointer)
+static void REGAL_CALL missing_glFlushVertexArrayRangeAPPLE(GLsizei length, GLvoid *pointer)
 {
   UNUSED_PARAMETER(length);
   UNUSED_PARAMETER(pointer);
   Warning( "glFlushVertexArrayRangeAPPLE not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayParameteriAPPLE(GLenum pname, GLint param)
+static void REGAL_CALL missing_glVertexArrayParameteriAPPLE(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glVertexArrayParameteriAPPLE not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayRangeAPPLE(GLsizei length, GLvoid *pointer)
+static void REGAL_CALL missing_glVertexArrayRangeAPPLE(GLsizei length, GLvoid *pointer)
 {
   UNUSED_PARAMETER(length);
   UNUSED_PARAMETER(pointer);
@@ -5447,21 +5447,21 @@ void REGAL_CALL missing_glVertexArrayRangeAPPLE(GLsizei length, GLvoid *pointer)
 
 // GL_APPLE_vertex_program_evaluators
 
-void REGAL_CALL missing_glDisableVertexAttribAPPLE(GLuint index, GLenum pname)
+static void REGAL_CALL missing_glDisableVertexAttribAPPLE(GLuint index, GLenum pname)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
   Warning( "glDisableVertexAttribAPPLE not available." );
 }
 
-void REGAL_CALL missing_glEnableVertexAttribAPPLE(GLuint index, GLenum pname)
+static void REGAL_CALL missing_glEnableVertexAttribAPPLE(GLuint index, GLenum pname)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
   Warning( "glEnableVertexAttribAPPLE not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsVertexAttribEnabledAPPLE(GLuint index, GLenum pname)
+static GLboolean REGAL_CALL missing_glIsVertexAttribEnabledAPPLE(GLuint index, GLenum pname)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -5469,7 +5469,7 @@ GLboolean REGAL_CALL missing_glIsVertexAttribEnabledAPPLE(GLuint index, GLenum p
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
+static void REGAL_CALL missing_glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -5481,7 +5481,7 @@ void REGAL_CALL missing_glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdo
   Warning( "glMapVertexAttrib1dAPPLE not available." );
 }
 
-void REGAL_CALL missing_glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points)
+static void REGAL_CALL missing_glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -5493,7 +5493,7 @@ void REGAL_CALL missing_glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfl
   Warning( "glMapVertexAttrib1fAPPLE not available." );
 }
 
-void REGAL_CALL missing_glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points)
+static void REGAL_CALL missing_glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -5509,7 +5509,7 @@ void REGAL_CALL missing_glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdo
   Warning( "glMapVertexAttrib2dAPPLE not available." );
 }
 
-void REGAL_CALL missing_glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points)
+static void REGAL_CALL missing_glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -5527,20 +5527,20 @@ void REGAL_CALL missing_glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfl
 
 // GL_ARB_ES2_compatibility
 
-void REGAL_CALL missing_glClearDepthf(GLclampf d)
+static void REGAL_CALL missing_glClearDepthf(GLclampf d)
 {
   UNUSED_PARAMETER(d);
   Warning( "glClearDepthf not available." );
 }
 
-void REGAL_CALL missing_glDepthRangef(GLclampf n, GLclampf f)
+static void REGAL_CALL missing_glDepthRangef(GLclampf n, GLclampf f)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(f);
   Warning( "glDepthRangef not available." );
 }
 
-void REGAL_CALL missing_glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision)
+static void REGAL_CALL missing_glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint *range, GLint *precision)
 {
   UNUSED_PARAMETER(shadertype);
   UNUSED_PARAMETER(precisiontype);
@@ -5549,12 +5549,12 @@ void REGAL_CALL missing_glGetShaderPrecisionFormat(GLenum shadertype, GLenum pre
   Warning( "glGetShaderPrecisionFormat not available." );
 }
 
-void REGAL_CALL missing_glReleaseShaderCompiler(void)
+static void REGAL_CALL missing_glReleaseShaderCompiler(void)
 {
   Warning( "glReleaseShaderCompiler not available." );
 }
 
-void REGAL_CALL missing_glShaderBinary(GLsizei count, const GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLsizei length)
+static void REGAL_CALL missing_glShaderBinary(GLsizei count, const GLuint *shaders, GLenum binaryformat, const GLvoid *binary, GLsizei length)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(shaders);
@@ -5566,7 +5566,7 @@ void REGAL_CALL missing_glShaderBinary(GLsizei count, const GLuint *shaders, GLe
 
 // GL_ARB_base_instance
 
-void REGAL_CALL missing_glDrawArraysInstancedBaseInstance(GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance)
+static void REGAL_CALL missing_glDrawArraysInstancedBaseInstance(GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -5576,7 +5576,7 @@ void REGAL_CALL missing_glDrawArraysInstancedBaseInstance(GLenum mode, GLint fir
   Warning( "glDrawArraysInstancedBaseInstance not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstancedBaseInstance(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLuint baseinstance)
+static void REGAL_CALL missing_glDrawElementsInstancedBaseInstance(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLuint baseinstance)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5587,7 +5587,7 @@ void REGAL_CALL missing_glDrawElementsInstancedBaseInstance(GLenum mode, GLsizei
   Warning( "glDrawElementsInstancedBaseInstance not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstancedBaseVertexBaseInstance(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance)
+static void REGAL_CALL missing_glDrawElementsInstancedBaseVertexBaseInstance(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5601,7 +5601,7 @@ void REGAL_CALL missing_glDrawElementsInstancedBaseVertexBaseInstance(GLenum mod
 
 // GL_ARB_blend_func_extended
 
-void REGAL_CALL missing_glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name)
+static void REGAL_CALL missing_glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(colorNumber);
@@ -5610,7 +5610,7 @@ void REGAL_CALL missing_glBindFragDataLocationIndexed(GLuint program, GLuint col
   Warning( "glBindFragDataLocationIndexed not available." );
 }
 
-GLint REGAL_CALL missing_glGetFragDataIndex(GLuint program, const GLchar *name)
+static GLint REGAL_CALL missing_glGetFragDataIndex(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
@@ -5620,7 +5620,7 @@ GLint REGAL_CALL missing_glGetFragDataIndex(GLuint program, const GLchar *name)
 
 // GL_ARB_cl_event
 
-GLsync REGAL_CALL missing_glCreateSyncFromCLeventARB(cl_context context, cl_event event, GLbitfield flags)
+static GLsync REGAL_CALL missing_glCreateSyncFromCLeventARB(cl_context context, cl_event event, GLbitfield flags)
 {
   UNUSED_PARAMETER(context);
   UNUSED_PARAMETER(event);
@@ -5631,7 +5631,7 @@ GLsync REGAL_CALL missing_glCreateSyncFromCLeventARB(cl_context context, cl_even
 
 // GL_ARB_clear_buffer_object
 
-void REGAL_CALL missing_glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL missing_glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -5641,7 +5641,7 @@ void REGAL_CALL missing_glClearBufferData(GLenum target, GLenum internalformat, 
   Warning( "glClearBufferData not available." );
 }
 
-void REGAL_CALL missing_glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL missing_glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -5653,7 +5653,7 @@ void REGAL_CALL missing_glClearBufferSubData(GLenum target, GLenum internalforma
   Warning( "glClearBufferSubData not available." );
 }
 
-void REGAL_CALL missing_glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL missing_glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(internalformat);
@@ -5663,7 +5663,7 @@ void REGAL_CALL missing_glClearNamedBufferDataEXT(GLuint buffer, GLenum internal
   Warning( "glClearNamedBufferDataEXT not available." );
 }
 
-void REGAL_CALL missing_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL missing_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(internalformat);
@@ -5677,7 +5677,7 @@ void REGAL_CALL missing_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum inter
 
 // GL_ARB_color_buffer_float
 
-void REGAL_CALL missing_glClampColorARB(GLenum target, GLenum clamp)
+static void REGAL_CALL missing_glClampColorARB(GLenum target, GLenum clamp)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(clamp);
@@ -5686,7 +5686,7 @@ void REGAL_CALL missing_glClampColorARB(GLenum target, GLenum clamp)
 
 // GL_ARB_compute_shader
 
-void REGAL_CALL missing_glDispatchCompute(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z)
+static void REGAL_CALL missing_glDispatchCompute(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z)
 {
   UNUSED_PARAMETER(num_groups_x);
   UNUSED_PARAMETER(num_groups_y);
@@ -5694,7 +5694,7 @@ void REGAL_CALL missing_glDispatchCompute(GLuint num_groups_x, GLuint num_groups
   Warning( "glDispatchCompute not available." );
 }
 
-void REGAL_CALL missing_glDispatchComputeIndirect(GLintptr indirect)
+static void REGAL_CALL missing_glDispatchComputeIndirect(GLintptr indirect)
 {
   UNUSED_PARAMETER(indirect);
   Warning( "glDispatchComputeIndirect not available." );
@@ -5702,7 +5702,7 @@ void REGAL_CALL missing_glDispatchComputeIndirect(GLintptr indirect)
 
 // GL_ARB_copy_buffer
 
-void REGAL_CALL missing_glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size)
+static void REGAL_CALL missing_glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(readtarget);
   UNUSED_PARAMETER(writetarget);
@@ -5714,7 +5714,7 @@ void REGAL_CALL missing_glCopyBufferSubData(GLenum readtarget, GLenum writetarge
 
 // GL_ARB_copy_image
 
-void REGAL_CALL missing_glCopyImageSubData(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
+static void REGAL_CALL missing_glCopyImageSubData(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth)
 {
   UNUSED_PARAMETER(srcName);
   UNUSED_PARAMETER(srcTarget);
@@ -5736,14 +5736,14 @@ void REGAL_CALL missing_glCopyImageSubData(GLuint srcName, GLenum srcTarget, GLi
 
 // GL_ARB_debug_output
 
-void REGAL_CALL missing_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
+static void REGAL_CALL missing_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
 {
   UNUSED_PARAMETER(callback);
   UNUSED_PARAMETER(userParam);
   Warning( "glDebugMessageCallbackARB not available." );
 }
 
-void REGAL_CALL missing_glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
+static void REGAL_CALL missing_glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
 {
   UNUSED_PARAMETER(source);
   UNUSED_PARAMETER(type);
@@ -5754,7 +5754,7 @@ void REGAL_CALL missing_glDebugMessageControlARB(GLenum source, GLenum type, GLe
   Warning( "glDebugMessageControlARB not available." );
 }
 
-void REGAL_CALL missing_glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
+static void REGAL_CALL missing_glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
 {
   UNUSED_PARAMETER(source);
   UNUSED_PARAMETER(type);
@@ -5765,7 +5765,7 @@ void REGAL_CALL missing_glDebugMessageInsertARB(GLenum source, GLenum type, GLui
   Warning( "glDebugMessageInsertARB not available." );
 }
 
-GLuint REGAL_CALL missing_glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
+static GLuint REGAL_CALL missing_glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(bufsize);
@@ -5781,7 +5781,7 @@ GLuint REGAL_CALL missing_glGetDebugMessageLogARB(GLuint count, GLsizei bufsize,
 
 // GL_ARB_draw_buffers
 
-void REGAL_CALL missing_glDrawBuffersARB(GLsizei n, const GLenum *bufs)
+static void REGAL_CALL missing_glDrawBuffersARB(GLsizei n, const GLenum *bufs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(bufs);
@@ -5790,7 +5790,7 @@ void REGAL_CALL missing_glDrawBuffersARB(GLsizei n, const GLenum *bufs)
 
 // GL_ARB_draw_buffers_blend
 
-void REGAL_CALL missing_glBlendEquationSeparateiARB(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
+static void REGAL_CALL missing_glBlendEquationSeparateiARB(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(modeRGB);
@@ -5798,14 +5798,14 @@ void REGAL_CALL missing_glBlendEquationSeparateiARB(GLuint buf, GLenum modeRGB, 
   Warning( "glBlendEquationSeparateiARB not available." );
 }
 
-void REGAL_CALL missing_glBlendEquationiARB(GLuint buf, GLenum mode)
+static void REGAL_CALL missing_glBlendEquationiARB(GLuint buf, GLenum mode)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(mode);
   Warning( "glBlendEquationiARB not available." );
 }
 
-void REGAL_CALL missing_glBlendFuncSeparateiARB(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparateiARB(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(srcRGB);
@@ -5815,7 +5815,7 @@ void REGAL_CALL missing_glBlendFuncSeparateiARB(GLuint buf, GLenum srcRGB, GLenu
   Warning( "glBlendFuncSeparateiARB not available." );
 }
 
-void REGAL_CALL missing_glBlendFunciARB(GLuint buf, GLenum src, GLenum dst)
+static void REGAL_CALL missing_glBlendFunciARB(GLuint buf, GLenum src, GLenum dst)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(src);
@@ -5825,7 +5825,7 @@ void REGAL_CALL missing_glBlendFunciARB(GLuint buf, GLenum src, GLenum dst)
 
 // GL_ARB_draw_elements_base_vertex
 
-void REGAL_CALL missing_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL missing_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5835,7 +5835,7 @@ void REGAL_CALL missing_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLe
   Warning( "glDrawElementsBaseVertex not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex)
+static void REGAL_CALL missing_glDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5846,7 +5846,7 @@ void REGAL_CALL missing_glDrawElementsInstancedBaseVertex(GLenum mode, GLsizei c
   Warning( "glDrawElementsInstancedBaseVertex not available." );
 }
 
-void REGAL_CALL missing_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL missing_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -5858,7 +5858,7 @@ void REGAL_CALL missing_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start,
   Warning( "glDrawRangeElementsBaseVertex not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+static void REGAL_CALL missing_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5871,14 +5871,14 @@ void REGAL_CALL missing_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *coun
 
 // GL_ARB_draw_indirect
 
-void REGAL_CALL missing_glDrawArraysIndirect(GLenum mode, const GLvoid *indirect)
+static void REGAL_CALL missing_glDrawArraysIndirect(GLenum mode, const GLvoid *indirect)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(indirect);
   Warning( "glDrawArraysIndirect not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsIndirect(GLenum mode, GLenum type, const GLvoid *indirect)
+static void REGAL_CALL missing_glDrawElementsIndirect(GLenum mode, GLenum type, const GLvoid *indirect)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(type);
@@ -5888,7 +5888,7 @@ void REGAL_CALL missing_glDrawElementsIndirect(GLenum mode, GLenum type, const G
 
 // GL_ARB_draw_instanced
 
-void REGAL_CALL missing_glDrawArraysInstancedARB(GLenum mode, GLint start, GLsizei count, GLsizei primcount)
+static void REGAL_CALL missing_glDrawArraysInstancedARB(GLenum mode, GLint start, GLsizei count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -5897,7 +5897,7 @@ void REGAL_CALL missing_glDrawArraysInstancedARB(GLenum mode, GLint start, GLsiz
   Warning( "glDrawArraysInstancedARB not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstancedARB(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
+static void REGAL_CALL missing_glDrawElementsInstancedARB(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5909,7 +5909,7 @@ void REGAL_CALL missing_glDrawElementsInstancedARB(GLenum mode, GLsizei count, G
 
 // GL_ARB_framebuffer_no_attachments
 
-void REGAL_CALL missing_glFramebufferParameteri(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glFramebufferParameteri(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -5917,7 +5917,7 @@ void REGAL_CALL missing_glFramebufferParameteri(GLenum target, GLenum pname, GLi
   Warning( "glFramebufferParameteri not available." );
 }
 
-void REGAL_CALL missing_glGetFramebufferParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFramebufferParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -5925,7 +5925,7 @@ void REGAL_CALL missing_glGetFramebufferParameteriv(GLenum target, GLenum pname,
   Warning( "glGetFramebufferParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetNamedFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetNamedFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(pname);
@@ -5933,7 +5933,7 @@ void REGAL_CALL missing_glGetNamedFramebufferParameterivEXT(GLuint framebuffer, 
   Warning( "glGetNamedFramebufferParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferParameteriEXT(GLuint framebuffer, GLenum pname, GLint param)
+static void REGAL_CALL missing_glNamedFramebufferParameteriEXT(GLuint framebuffer, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(pname);
@@ -5943,21 +5943,21 @@ void REGAL_CALL missing_glNamedFramebufferParameteriEXT(GLuint framebuffer, GLen
 
 // GL_ARB_framebuffer_object
 
-void REGAL_CALL missing_glBindFramebuffer(GLenum target, GLuint framebuffer)
+static void REGAL_CALL missing_glBindFramebuffer(GLenum target, GLuint framebuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(framebuffer);
   Warning( "glBindFramebuffer not available." );
 }
 
-void REGAL_CALL missing_glBindRenderbuffer(GLenum target, GLuint renderbuffer)
+static void REGAL_CALL missing_glBindRenderbuffer(GLenum target, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glBindRenderbuffer not available." );
 }
 
-void REGAL_CALL missing_glBlitFramebuffer(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+static void REGAL_CALL missing_glBlitFramebuffer(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 {
   UNUSED_PARAMETER(srcX0);
   UNUSED_PARAMETER(srcY0);
@@ -5972,28 +5972,28 @@ void REGAL_CALL missing_glBlitFramebuffer(GLint srcX0, GLint srcY0, GLint srcX1,
   Warning( "glBlitFramebuffer not available." );
 }
 
-GLenum REGAL_CALL missing_glCheckFramebufferStatus(GLenum target)
+static GLenum REGAL_CALL missing_glCheckFramebufferStatus(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glCheckFramebufferStatus not available." );
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glDeleteFramebuffers(GLsizei n, const GLuint *framebuffers)
+static void REGAL_CALL missing_glDeleteFramebuffers(GLsizei n, const GLuint *framebuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(framebuffers);
   Warning( "glDeleteFramebuffers not available." );
 }
 
-void REGAL_CALL missing_glDeleteRenderbuffers(GLsizei n, const GLuint *renderbuffers)
+static void REGAL_CALL missing_glDeleteRenderbuffers(GLsizei n, const GLuint *renderbuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(renderbuffers);
   Warning( "glDeleteRenderbuffers not available." );
 }
 
-void REGAL_CALL missing_glFramebufferRenderbuffer(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
+static void REGAL_CALL missing_glFramebufferRenderbuffer(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6002,7 +6002,7 @@ void REGAL_CALL missing_glFramebufferRenderbuffer(GLenum target, GLenum attachme
   Warning( "glFramebufferRenderbuffer not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture1D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTexture1D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6012,7 +6012,7 @@ void REGAL_CALL missing_glFramebufferTexture1D(GLenum target, GLenum attachment,
   Warning( "glFramebufferTexture1D not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6022,7 +6022,7 @@ void REGAL_CALL missing_glFramebufferTexture2D(GLenum target, GLenum attachment,
   Warning( "glFramebufferTexture2D not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture3D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint layer)
+static void REGAL_CALL missing_glFramebufferTexture3D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint layer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6033,7 +6033,7 @@ void REGAL_CALL missing_glFramebufferTexture3D(GLenum target, GLenum attachment,
   Warning( "glFramebufferTexture3D not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTextureLayer(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
+static void REGAL_CALL missing_glFramebufferTextureLayer(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6043,27 +6043,27 @@ void REGAL_CALL missing_glFramebufferTextureLayer(GLenum target, GLenum attachme
   Warning( "glFramebufferTextureLayer not available." );
 }
 
-void REGAL_CALL missing_glGenFramebuffers(GLsizei n, GLuint *framebuffers)
+static void REGAL_CALL missing_glGenFramebuffers(GLsizei n, GLuint *framebuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(framebuffers);
   Warning( "glGenFramebuffers not available." );
 }
 
-void REGAL_CALL missing_glGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
+static void REGAL_CALL missing_glGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(renderbuffers);
   Warning( "glGenRenderbuffers not available." );
 }
 
-void REGAL_CALL missing_glGenerateMipmap(GLenum target)
+static void REGAL_CALL missing_glGenerateMipmap(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glGenerateMipmap not available." );
 }
 
-void REGAL_CALL missing_glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6072,7 +6072,7 @@ void REGAL_CALL missing_glGetFramebufferAttachmentParameteriv(GLenum target, GLe
   Warning( "glGetFramebufferAttachmentParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6080,21 +6080,21 @@ void REGAL_CALL missing_glGetRenderbufferParameteriv(GLenum target, GLenum pname
   Warning( "glGetRenderbufferParameteriv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsFramebuffer(GLuint framebuffer)
+static GLboolean REGAL_CALL missing_glIsFramebuffer(GLuint framebuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   Warning( "glIsFramebuffer not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsRenderbuffer(GLuint renderbuffer)
+static GLboolean REGAL_CALL missing_glIsRenderbuffer(GLuint renderbuffer)
 {
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glIsRenderbuffer not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6103,7 +6103,7 @@ void REGAL_CALL missing_glRenderbufferStorage(GLenum target, GLenum internalform
   Warning( "glRenderbufferStorage not available." );
 }
 
-void REGAL_CALL missing_glRenderbufferStorageMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -6115,7 +6115,7 @@ void REGAL_CALL missing_glRenderbufferStorageMultisample(GLenum target, GLsizei 
 
 // GL_ARB_geometry_shader4
 
-void REGAL_CALL missing_glFramebufferTextureARB(GLenum target, GLenum attachment, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTextureARB(GLenum target, GLenum attachment, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6124,7 +6124,7 @@ void REGAL_CALL missing_glFramebufferTextureARB(GLenum target, GLenum attachment
   Warning( "glFramebufferTextureARB not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTextureFaceARB(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
+static void REGAL_CALL missing_glFramebufferTextureFaceARB(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6134,7 +6134,7 @@ void REGAL_CALL missing_glFramebufferTextureFaceARB(GLenum target, GLenum attach
   Warning( "glFramebufferTextureFaceARB not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTextureLayerARB(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
+static void REGAL_CALL missing_glFramebufferTextureLayerARB(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -6144,7 +6144,7 @@ void REGAL_CALL missing_glFramebufferTextureLayerARB(GLenum target, GLenum attac
   Warning( "glFramebufferTextureLayerARB not available." );
 }
 
-void REGAL_CALL missing_glProgramParameteriARB(GLuint program, GLenum pname, GLint value)
+static void REGAL_CALL missing_glProgramParameteriARB(GLuint program, GLenum pname, GLint value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(pname);
@@ -6154,7 +6154,7 @@ void REGAL_CALL missing_glProgramParameteriARB(GLuint program, GLenum pname, GLi
 
 // GL_ARB_get_program_binary
 
-void REGAL_CALL missing_glGetProgramBinary(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary)
+static void REGAL_CALL missing_glGetProgramBinary(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(bufSize);
@@ -6164,7 +6164,7 @@ void REGAL_CALL missing_glGetProgramBinary(GLuint program, GLsizei bufSize, GLsi
   Warning( "glGetProgramBinary not available." );
 }
 
-void REGAL_CALL missing_glProgramBinary(GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length)
+static void REGAL_CALL missing_glProgramBinary(GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(binaryFormat);
@@ -6173,7 +6173,7 @@ void REGAL_CALL missing_glProgramBinary(GLuint program, GLenum binaryFormat, con
   Warning( "glProgramBinary not available." );
 }
 
-void REGAL_CALL missing_glProgramParameteri(GLuint program, GLenum pname, GLint value)
+static void REGAL_CALL missing_glProgramParameteri(GLuint program, GLenum pname, GLint value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(pname);
@@ -6183,7 +6183,7 @@ void REGAL_CALL missing_glProgramParameteri(GLuint program, GLenum pname, GLint 
 
 // GL_ARB_gpu_shader_fp64
 
-void REGAL_CALL missing_glGetUniformdv(GLuint program, GLint location, GLdouble *params)
+static void REGAL_CALL missing_glGetUniformdv(GLuint program, GLint location, GLdouble *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -6191,14 +6191,14 @@ void REGAL_CALL missing_glGetUniformdv(GLuint program, GLint location, GLdouble 
   Warning( "glGetUniformdv not available." );
 }
 
-void REGAL_CALL missing_glUniform1d(GLint location, GLdouble x)
+static void REGAL_CALL missing_glUniform1d(GLint location, GLdouble x)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
   Warning( "glUniform1d not available." );
 }
 
-void REGAL_CALL missing_glUniform1dv(GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glUniform1dv(GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6206,7 +6206,7 @@ void REGAL_CALL missing_glUniform1dv(GLint location, GLsizei count, const GLdoub
   Warning( "glUniform1dv not available." );
 }
 
-void REGAL_CALL missing_glUniform2d(GLint location, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glUniform2d(GLint location, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -6214,7 +6214,7 @@ void REGAL_CALL missing_glUniform2d(GLint location, GLdouble x, GLdouble y)
   Warning( "glUniform2d not available." );
 }
 
-void REGAL_CALL missing_glUniform2dv(GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glUniform2dv(GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6222,7 +6222,7 @@ void REGAL_CALL missing_glUniform2dv(GLint location, GLsizei count, const GLdoub
   Warning( "glUniform2dv not available." );
 }
 
-void REGAL_CALL missing_glUniform3d(GLint location, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glUniform3d(GLint location, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -6231,7 +6231,7 @@ void REGAL_CALL missing_glUniform3d(GLint location, GLdouble x, GLdouble y, GLdo
   Warning( "glUniform3d not available." );
 }
 
-void REGAL_CALL missing_glUniform3dv(GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glUniform3dv(GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6239,7 +6239,7 @@ void REGAL_CALL missing_glUniform3dv(GLint location, GLsizei count, const GLdoub
   Warning( "glUniform3dv not available." );
 }
 
-void REGAL_CALL missing_glUniform4d(GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glUniform4d(GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -6249,7 +6249,7 @@ void REGAL_CALL missing_glUniform4d(GLint location, GLdouble x, GLdouble y, GLdo
   Warning( "glUniform4d not available." );
 }
 
-void REGAL_CALL missing_glUniform4dv(GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glUniform4dv(GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6257,7 +6257,7 @@ void REGAL_CALL missing_glUniform4dv(GLint location, GLsizei count, const GLdoub
   Warning( "glUniform4dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6266,7 +6266,7 @@ void REGAL_CALL missing_glUniformMatrix2dv(GLint location, GLsizei count, GLbool
   Warning( "glUniformMatrix2dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix2x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix2x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6275,7 +6275,7 @@ void REGAL_CALL missing_glUniformMatrix2x3dv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix2x3dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix2x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix2x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6284,7 +6284,7 @@ void REGAL_CALL missing_glUniformMatrix2x4dv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix2x4dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6293,7 +6293,7 @@ void REGAL_CALL missing_glUniformMatrix3dv(GLint location, GLsizei count, GLbool
   Warning( "glUniformMatrix3dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix3x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6302,7 +6302,7 @@ void REGAL_CALL missing_glUniformMatrix3x2dv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix3x2dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix3x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6311,7 +6311,7 @@ void REGAL_CALL missing_glUniformMatrix3x4dv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix3x4dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6320,7 +6320,7 @@ void REGAL_CALL missing_glUniformMatrix4dv(GLint location, GLsizei count, GLbool
   Warning( "glUniformMatrix4dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix4x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6329,7 +6329,7 @@ void REGAL_CALL missing_glUniformMatrix4x2dv(GLint location, GLsizei count, GLbo
   Warning( "glUniformMatrix4x2dv not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glUniformMatrix4x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -6340,7 +6340,7 @@ void REGAL_CALL missing_glUniformMatrix4x3dv(GLint location, GLsizei count, GLbo
 
 // GL_ARB_imaging
 
-void REGAL_CALL missing_glColorSubTable(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL missing_glColorSubTable(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(start);
@@ -6351,7 +6351,7 @@ void REGAL_CALL missing_glColorSubTable(GLenum target, GLsizei start, GLsizei co
   Warning( "glColorSubTable not available." );
 }
 
-void REGAL_CALL missing_glColorTable(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table)
+static void REGAL_CALL missing_glColorTable(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6362,7 +6362,7 @@ void REGAL_CALL missing_glColorTable(GLenum target, GLenum internalformat, GLsiz
   Warning( "glColorTable not available." );
 }
 
-void REGAL_CALL missing_glColorTableParameterfv(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glColorTableParameterfv(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6370,7 +6370,7 @@ void REGAL_CALL missing_glColorTableParameterfv(GLenum target, GLenum pname, con
   Warning( "glColorTableParameterfv not available." );
 }
 
-void REGAL_CALL missing_glColorTableParameteriv(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glColorTableParameteriv(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6378,7 +6378,7 @@ void REGAL_CALL missing_glColorTableParameteriv(GLenum target, GLenum pname, con
   Warning( "glColorTableParameteriv not available." );
 }
 
-void REGAL_CALL missing_glConvolutionFilter1D(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image)
+static void REGAL_CALL missing_glConvolutionFilter1D(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6389,7 +6389,7 @@ void REGAL_CALL missing_glConvolutionFilter1D(GLenum target, GLenum internalform
   Warning( "glConvolutionFilter1D not available." );
 }
 
-void REGAL_CALL missing_glConvolutionFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image)
+static void REGAL_CALL missing_glConvolutionFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6401,7 +6401,7 @@ void REGAL_CALL missing_glConvolutionFilter2D(GLenum target, GLenum internalform
   Warning( "glConvolutionFilter2D not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameterf(GLenum target, GLenum pname, GLfloat params)
+static void REGAL_CALL missing_glConvolutionParameterf(GLenum target, GLenum pname, GLfloat params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6409,7 +6409,7 @@ void REGAL_CALL missing_glConvolutionParameterf(GLenum target, GLenum pname, GLf
   Warning( "glConvolutionParameterf not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameterfv(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glConvolutionParameterfv(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6417,7 +6417,7 @@ void REGAL_CALL missing_glConvolutionParameterfv(GLenum target, GLenum pname, co
   Warning( "glConvolutionParameterfv not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameteri(GLenum target, GLenum pname, GLint params)
+static void REGAL_CALL missing_glConvolutionParameteri(GLenum target, GLenum pname, GLint params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6425,7 +6425,7 @@ void REGAL_CALL missing_glConvolutionParameteri(GLenum target, GLenum pname, GLi
   Warning( "glConvolutionParameteri not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameteriv(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glConvolutionParameteriv(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6433,7 +6433,7 @@ void REGAL_CALL missing_glConvolutionParameteriv(GLenum target, GLenum pname, co
   Warning( "glConvolutionParameteriv not available." );
 }
 
-void REGAL_CALL missing_glCopyColorSubTable(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyColorSubTable(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(start);
@@ -6443,7 +6443,7 @@ void REGAL_CALL missing_glCopyColorSubTable(GLenum target, GLsizei start, GLint 
   Warning( "glCopyColorSubTable not available." );
 }
 
-void REGAL_CALL missing_glCopyColorTable(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyColorTable(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6453,7 +6453,7 @@ void REGAL_CALL missing_glCopyColorTable(GLenum target, GLenum internalformat, G
   Warning( "glCopyColorTable not available." );
 }
 
-void REGAL_CALL missing_glCopyConvolutionFilter1D(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyConvolutionFilter1D(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6463,7 +6463,7 @@ void REGAL_CALL missing_glCopyConvolutionFilter1D(GLenum target, GLenum internal
   Warning( "glCopyConvolutionFilter1D not available." );
 }
 
-void REGAL_CALL missing_glCopyConvolutionFilter2D(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyConvolutionFilter2D(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6474,7 +6474,7 @@ void REGAL_CALL missing_glCopyConvolutionFilter2D(GLenum target, GLenum internal
   Warning( "glCopyConvolutionFilter2D not available." );
 }
 
-void REGAL_CALL missing_glGetColorTable(GLenum target, GLenum format, GLenum type, GLvoid *table)
+static void REGAL_CALL missing_glGetColorTable(GLenum target, GLenum format, GLenum type, GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -6483,7 +6483,7 @@ void REGAL_CALL missing_glGetColorTable(GLenum target, GLenum format, GLenum typ
   Warning( "glGetColorTable not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableParameterfv(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetColorTableParameterfv(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6491,7 +6491,7 @@ void REGAL_CALL missing_glGetColorTableParameterfv(GLenum target, GLenum pname, 
   Warning( "glGetColorTableParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetColorTableParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6499,7 +6499,7 @@ void REGAL_CALL missing_glGetColorTableParameteriv(GLenum target, GLenum pname, 
   Warning( "glGetColorTableParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetConvolutionFilter(GLenum target, GLenum format, GLenum type, GLvoid *image)
+static void REGAL_CALL missing_glGetConvolutionFilter(GLenum target, GLenum format, GLenum type, GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -6508,7 +6508,7 @@ void REGAL_CALL missing_glGetConvolutionFilter(GLenum target, GLenum format, GLe
   Warning( "glGetConvolutionFilter not available." );
 }
 
-void REGAL_CALL missing_glGetConvolutionParameterfv(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetConvolutionParameterfv(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6516,7 +6516,7 @@ void REGAL_CALL missing_glGetConvolutionParameterfv(GLenum target, GLenum pname,
   Warning( "glGetConvolutionParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetConvolutionParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetConvolutionParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6524,7 +6524,7 @@ void REGAL_CALL missing_glGetConvolutionParameteriv(GLenum target, GLenum pname,
   Warning( "glGetConvolutionParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetHistogram(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values)
+static void REGAL_CALL missing_glGetHistogram(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(reset);
@@ -6534,7 +6534,7 @@ void REGAL_CALL missing_glGetHistogram(GLenum target, GLboolean reset, GLenum fo
   Warning( "glGetHistogram not available." );
 }
 
-void REGAL_CALL missing_glGetHistogramParameterfv(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetHistogramParameterfv(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6542,7 +6542,7 @@ void REGAL_CALL missing_glGetHistogramParameterfv(GLenum target, GLenum pname, G
   Warning( "glGetHistogramParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetHistogramParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetHistogramParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6550,7 +6550,7 @@ void REGAL_CALL missing_glGetHistogramParameteriv(GLenum target, GLenum pname, G
   Warning( "glGetHistogramParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetMinmax(GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values)
+static void REGAL_CALL missing_glGetMinmax(GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(reset);
@@ -6560,7 +6560,7 @@ void REGAL_CALL missing_glGetMinmax(GLenum target, GLboolean reset, GLenum forma
   Warning( "glGetMinmax not available." );
 }
 
-void REGAL_CALL missing_glGetMinmaxParameterfv(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMinmaxParameterfv(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6568,7 +6568,7 @@ void REGAL_CALL missing_glGetMinmaxParameterfv(GLenum target, GLenum pname, GLfl
   Warning( "glGetMinmaxParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetMinmaxParameteriv(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMinmaxParameteriv(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -6576,7 +6576,7 @@ void REGAL_CALL missing_glGetMinmaxParameteriv(GLenum target, GLenum pname, GLin
   Warning( "glGetMinmaxParameteriv not available." );
 }
 
-void REGAL_CALL missing_glGetSeparableFilter(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span)
+static void REGAL_CALL missing_glGetSeparableFilter(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -6587,7 +6587,7 @@ void REGAL_CALL missing_glGetSeparableFilter(GLenum target, GLenum format, GLenu
   Warning( "glGetSeparableFilter not available." );
 }
 
-void REGAL_CALL missing_glHistogram(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink)
+static void REGAL_CALL missing_glHistogram(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(width);
@@ -6596,7 +6596,7 @@ void REGAL_CALL missing_glHistogram(GLenum target, GLsizei width, GLenum interna
   Warning( "glHistogram not available." );
 }
 
-void REGAL_CALL missing_glMinmax(GLenum target, GLenum internalformat, GLboolean sink)
+static void REGAL_CALL missing_glMinmax(GLenum target, GLenum internalformat, GLboolean sink)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6604,19 +6604,19 @@ void REGAL_CALL missing_glMinmax(GLenum target, GLenum internalformat, GLboolean
   Warning( "glMinmax not available." );
 }
 
-void REGAL_CALL missing_glResetHistogram(GLenum target)
+static void REGAL_CALL missing_glResetHistogram(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glResetHistogram not available." );
 }
 
-void REGAL_CALL missing_glResetMinmax(GLenum target)
+static void REGAL_CALL missing_glResetMinmax(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glResetMinmax not available." );
 }
 
-void REGAL_CALL missing_glSeparableFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column)
+static void REGAL_CALL missing_glSeparableFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6631,7 +6631,7 @@ void REGAL_CALL missing_glSeparableFilter2D(GLenum target, GLenum internalformat
 
 // GL_ARB_instanced_arrays
 
-void REGAL_CALL missing_glVertexAttribDivisorARB(GLuint index, GLuint divisor)
+static void REGAL_CALL missing_glVertexAttribDivisorARB(GLuint index, GLuint divisor)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(divisor);
@@ -6640,7 +6640,7 @@ void REGAL_CALL missing_glVertexAttribDivisorARB(GLuint index, GLuint divisor)
 
 // GL_ARB_internalformat_query
 
-void REGAL_CALL missing_glGetInternalformativ(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params)
+static void REGAL_CALL missing_glGetInternalformativ(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6652,7 +6652,7 @@ void REGAL_CALL missing_glGetInternalformativ(GLenum target, GLenum internalform
 
 // GL_ARB_internalformat_query2
 
-void REGAL_CALL missing_glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params)
+static void REGAL_CALL missing_glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -6664,13 +6664,13 @@ void REGAL_CALL missing_glGetInternalformati64v(GLenum target, GLenum internalfo
 
 // GL_ARB_invalidate_subdata
 
-void REGAL_CALL missing_glInvalidateBufferData(GLuint buffer)
+static void REGAL_CALL missing_glInvalidateBufferData(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glInvalidateBufferData not available." );
 }
 
-void REGAL_CALL missing_glInvalidateBufferSubData(GLuint buffer, GLintptr offset, GLsizeiptr length)
+static void REGAL_CALL missing_glInvalidateBufferSubData(GLuint buffer, GLintptr offset, GLsizeiptr length)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(offset);
@@ -6678,7 +6678,7 @@ void REGAL_CALL missing_glInvalidateBufferSubData(GLuint buffer, GLintptr offset
   Warning( "glInvalidateBufferSubData not available." );
 }
 
-void REGAL_CALL missing_glInvalidateFramebuffer(GLenum target, GLsizei numAttachments, const GLenum *attachments)
+static void REGAL_CALL missing_glInvalidateFramebuffer(GLenum target, GLsizei numAttachments, const GLenum *attachments)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(numAttachments);
@@ -6686,7 +6686,7 @@ void REGAL_CALL missing_glInvalidateFramebuffer(GLenum target, GLsizei numAttach
   Warning( "glInvalidateFramebuffer not available." );
 }
 
-void REGAL_CALL missing_glInvalidateSubFramebuffer(GLenum target, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glInvalidateSubFramebuffer(GLenum target, GLsizei numAttachments, const GLenum *attachments, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(numAttachments);
@@ -6698,14 +6698,14 @@ void REGAL_CALL missing_glInvalidateSubFramebuffer(GLenum target, GLsizei numAtt
   Warning( "glInvalidateSubFramebuffer not available." );
 }
 
-void REGAL_CALL missing_glInvalidateTexImage(GLuint texture, GLint level)
+static void REGAL_CALL missing_glInvalidateTexImage(GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(level);
   Warning( "glInvalidateTexImage not available." );
 }
 
-void REGAL_CALL missing_glInvalidateTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth)
+static void REGAL_CALL missing_glInvalidateTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(level);
@@ -6720,7 +6720,7 @@ void REGAL_CALL missing_glInvalidateTexSubImage(GLuint texture, GLint level, GLi
 
 // GL_ARB_map_buffer_range
 
-void REGAL_CALL missing_glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length)
+static void REGAL_CALL missing_glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -6728,7 +6728,7 @@ void REGAL_CALL missing_glFlushMappedBufferRange(GLenum target, GLintptr offset,
   Warning( "glFlushMappedBufferRange not available." );
 }
 
-GLvoid *REGAL_CALL missing_glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
+static GLvoid *REGAL_CALL missing_glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -6740,13 +6740,13 @@ GLvoid *REGAL_CALL missing_glMapBufferRange(GLenum target, GLintptr offset, GLsi
 
 // GL_ARB_matrix_palette
 
-void REGAL_CALL missing_glCurrentPaletteMatrixARB(GLint index)
+static void REGAL_CALL missing_glCurrentPaletteMatrixARB(GLint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glCurrentPaletteMatrixARB not available." );
 }
 
-void REGAL_CALL missing_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL missing_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -6755,21 +6755,21 @@ void REGAL_CALL missing_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei
   Warning( "glMatrixIndexPointerARB not available." );
 }
 
-void REGAL_CALL missing_glMatrixIndexubvARB(GLint size, GLubyte *indices)
+static void REGAL_CALL missing_glMatrixIndexubvARB(GLint size, GLubyte *indices)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(indices);
   Warning( "glMatrixIndexubvARB not available." );
 }
 
-void REGAL_CALL missing_glMatrixIndexuivARB(GLint size, GLuint *indices)
+static void REGAL_CALL missing_glMatrixIndexuivARB(GLint size, GLuint *indices)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(indices);
   Warning( "glMatrixIndexuivARB not available." );
 }
 
-void REGAL_CALL missing_glMatrixIndexusvARB(GLint size, GLushort *indices)
+static void REGAL_CALL missing_glMatrixIndexusvARB(GLint size, GLushort *indices)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(indices);
@@ -6778,7 +6778,7 @@ void REGAL_CALL missing_glMatrixIndexusvARB(GLint size, GLushort *indices)
 
 // GL_ARB_multi_draw_indirect
 
-void REGAL_CALL missing_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
+static void REGAL_CALL missing_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(indirect);
@@ -6787,7 +6787,7 @@ void REGAL_CALL missing_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *ind
   Warning( "glMultiDrawArraysIndirect not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawElementsIndirect(GLenum mode, GLenum type, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
+static void REGAL_CALL missing_glMultiDrawElementsIndirect(GLenum mode, GLenum type, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(type);
@@ -6799,7 +6799,7 @@ void REGAL_CALL missing_glMultiDrawElementsIndirect(GLenum mode, GLenum type, co
 
 // GL_ARB_multisample
 
-void REGAL_CALL missing_glSampleCoverageARB(GLclampf value, GLboolean invert)
+static void REGAL_CALL missing_glSampleCoverageARB(GLclampf value, GLboolean invert)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(invert);
@@ -6808,75 +6808,75 @@ void REGAL_CALL missing_glSampleCoverageARB(GLclampf value, GLboolean invert)
 
 // GL_ARB_multitexture
 
-void REGAL_CALL missing_glActiveTextureARB(GLenum texture)
+static void REGAL_CALL missing_glActiveTextureARB(GLenum texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glActiveTextureARB not available." );
 }
 
-void REGAL_CALL missing_glClientActiveTextureARB(GLenum texture)
+static void REGAL_CALL missing_glClientActiveTextureARB(GLenum texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glClientActiveTextureARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1dARB(GLenum target, GLdouble s)
+static void REGAL_CALL missing_glMultiTexCoord1dARB(GLenum target, GLdouble s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1dARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1dvARB(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord1dvARB(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1dvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1fARB(GLenum target, GLfloat s)
+static void REGAL_CALL missing_glMultiTexCoord1fARB(GLenum target, GLfloat s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1fARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1fvARB(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord1fvARB(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1fvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1iARB(GLenum target, GLint s)
+static void REGAL_CALL missing_glMultiTexCoord1iARB(GLenum target, GLint s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1iARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1ivARB(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord1ivARB(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1ivARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1sARB(GLenum target, GLshort s)
+static void REGAL_CALL missing_glMultiTexCoord1sARB(GLenum target, GLshort s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1sARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1svARB(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord1svARB(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1svARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2dARB(GLenum target, GLdouble s, GLdouble t)
+static void REGAL_CALL missing_glMultiTexCoord2dARB(GLenum target, GLdouble s, GLdouble t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6884,14 +6884,14 @@ void REGAL_CALL missing_glMultiTexCoord2dARB(GLenum target, GLdouble s, GLdouble
   Warning( "glMultiTexCoord2dARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2dvARB(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord2dvARB(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2dvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t)
+static void REGAL_CALL missing_glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6899,14 +6899,14 @@ void REGAL_CALL missing_glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t
   Warning( "glMultiTexCoord2fARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2fvARB(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord2fvARB(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2fvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2iARB(GLenum target, GLint s, GLint t)
+static void REGAL_CALL missing_glMultiTexCoord2iARB(GLenum target, GLint s, GLint t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6914,14 +6914,14 @@ void REGAL_CALL missing_glMultiTexCoord2iARB(GLenum target, GLint s, GLint t)
   Warning( "glMultiTexCoord2iARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2ivARB(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord2ivARB(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2ivARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2sARB(GLenum target, GLshort s, GLshort t)
+static void REGAL_CALL missing_glMultiTexCoord2sARB(GLenum target, GLshort s, GLshort t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6929,14 +6929,14 @@ void REGAL_CALL missing_glMultiTexCoord2sARB(GLenum target, GLshort s, GLshort t
   Warning( "glMultiTexCoord2sARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2svARB(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord2svARB(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2svARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r)
+static void REGAL_CALL missing_glMultiTexCoord3dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6945,14 +6945,14 @@ void REGAL_CALL missing_glMultiTexCoord3dARB(GLenum target, GLdouble s, GLdouble
   Warning( "glMultiTexCoord3dARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3dvARB(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord3dvARB(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3dvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r)
+static void REGAL_CALL missing_glMultiTexCoord3fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6961,14 +6961,14 @@ void REGAL_CALL missing_glMultiTexCoord3fARB(GLenum target, GLfloat s, GLfloat t
   Warning( "glMultiTexCoord3fARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3fvARB(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord3fvARB(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3fvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3iARB(GLenum target, GLint s, GLint t, GLint r)
+static void REGAL_CALL missing_glMultiTexCoord3iARB(GLenum target, GLint s, GLint t, GLint r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6977,14 +6977,14 @@ void REGAL_CALL missing_glMultiTexCoord3iARB(GLenum target, GLint s, GLint t, GL
   Warning( "glMultiTexCoord3iARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3ivARB(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord3ivARB(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3ivARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3sARB(GLenum target, GLshort s, GLshort t, GLshort r)
+static void REGAL_CALL missing_glMultiTexCoord3sARB(GLenum target, GLshort s, GLshort t, GLshort r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -6993,14 +6993,14 @@ void REGAL_CALL missing_glMultiTexCoord3sARB(GLenum target, GLshort s, GLshort t
   Warning( "glMultiTexCoord3sARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3svARB(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord3svARB(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3svARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
+static void REGAL_CALL missing_glMultiTexCoord4dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -7010,14 +7010,14 @@ void REGAL_CALL missing_glMultiTexCoord4dARB(GLenum target, GLdouble s, GLdouble
   Warning( "glMultiTexCoord4dARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4dvARB(GLenum target, const GLdouble *v)
+static void REGAL_CALL missing_glMultiTexCoord4dvARB(GLenum target, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4dvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
+static void REGAL_CALL missing_glMultiTexCoord4fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -7027,14 +7027,14 @@ void REGAL_CALL missing_glMultiTexCoord4fARB(GLenum target, GLfloat s, GLfloat t
   Warning( "glMultiTexCoord4fARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4fvARB(GLenum target, const GLfloat *v)
+static void REGAL_CALL missing_glMultiTexCoord4fvARB(GLenum target, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4fvARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4iARB(GLenum target, GLint s, GLint t, GLint r, GLint q)
+static void REGAL_CALL missing_glMultiTexCoord4iARB(GLenum target, GLint s, GLint t, GLint r, GLint q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -7044,14 +7044,14 @@ void REGAL_CALL missing_glMultiTexCoord4iARB(GLenum target, GLint s, GLint t, GL
   Warning( "glMultiTexCoord4iARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4ivARB(GLenum target, const GLint *v)
+static void REGAL_CALL missing_glMultiTexCoord4ivARB(GLenum target, const GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4ivARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4sARB(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
+static void REGAL_CALL missing_glMultiTexCoord4sARB(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -7061,7 +7061,7 @@ void REGAL_CALL missing_glMultiTexCoord4sARB(GLenum target, GLshort s, GLshort t
   Warning( "glMultiTexCoord4sARB not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4svARB(GLenum target, const GLshort *v)
+static void REGAL_CALL missing_glMultiTexCoord4svARB(GLenum target, const GLshort *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
@@ -7070,34 +7070,34 @@ void REGAL_CALL missing_glMultiTexCoord4svARB(GLenum target, const GLshort *v)
 
 // GL_ARB_occlusion_query
 
-void REGAL_CALL missing_glBeginQueryARB(GLenum target, GLuint id)
+static void REGAL_CALL missing_glBeginQueryARB(GLenum target, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
   Warning( "glBeginQueryARB not available." );
 }
 
-void REGAL_CALL missing_glDeleteQueriesARB(GLsizei n, const GLuint *ids)
+static void REGAL_CALL missing_glDeleteQueriesARB(GLsizei n, const GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glDeleteQueriesARB not available." );
 }
 
-void REGAL_CALL missing_glEndQueryARB(GLenum target)
+static void REGAL_CALL missing_glEndQueryARB(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glEndQueryARB not available." );
 }
 
-void REGAL_CALL missing_glGenQueriesARB(GLsizei n, GLuint *ids)
+static void REGAL_CALL missing_glGenQueriesARB(GLsizei n, GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glGenQueriesARB not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectivARB(GLuint id, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetQueryObjectivARB(GLuint id, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -7105,7 +7105,7 @@ void REGAL_CALL missing_glGetQueryObjectivARB(GLuint id, GLenum pname, GLint *pa
   Warning( "glGetQueryObjectivARB not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectuivARB(GLuint id, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetQueryObjectuivARB(GLuint id, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -7113,7 +7113,7 @@ void REGAL_CALL missing_glGetQueryObjectuivARB(GLuint id, GLenum pname, GLuint *
   Warning( "glGetQueryObjectuivARB not available." );
 }
 
-void REGAL_CALL missing_glGetQueryivARB(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetQueryivARB(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -7121,7 +7121,7 @@ void REGAL_CALL missing_glGetQueryivARB(GLenum target, GLenum pname, GLint *para
   Warning( "glGetQueryivARB not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsQueryARB(GLuint id)
+static GLboolean REGAL_CALL missing_glIsQueryARB(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsQueryARB not available." );
@@ -7130,14 +7130,14 @@ GLboolean REGAL_CALL missing_glIsQueryARB(GLuint id)
 
 // GL_ARB_point_parameters
 
-void REGAL_CALL missing_glPointParameterfARB(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPointParameterfARB(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameterfARB not available." );
 }
 
-void REGAL_CALL missing_glPointParameterfvARB(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glPointParameterfvARB(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -7146,7 +7146,7 @@ void REGAL_CALL missing_glPointParameterfvARB(GLenum pname, const GLfloat *param
 
 // GL_ARB_program_interface_query
 
-void REGAL_CALL missing_glGetProgramInterfaceiv(GLuint program, GLenum programInterface, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetProgramInterfaceiv(GLuint program, GLenum programInterface, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(programInterface);
@@ -7155,7 +7155,7 @@ void REGAL_CALL missing_glGetProgramInterfaceiv(GLuint program, GLenum programIn
   Warning( "glGetProgramInterfaceiv not available." );
 }
 
-GLuint REGAL_CALL missing_glGetProgramResourceIndex(GLuint program, GLenum programInterface, const GLchar *name)
+static GLuint REGAL_CALL missing_glGetProgramResourceIndex(GLuint program, GLenum programInterface, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(programInterface);
@@ -7164,7 +7164,7 @@ GLuint REGAL_CALL missing_glGetProgramResourceIndex(GLuint program, GLenum progr
   return (GLuint )0;
 }
 
-GLint REGAL_CALL missing_glGetProgramResourceLocation(GLuint program, GLenum programInterface, const GLchar *name)
+static GLint REGAL_CALL missing_glGetProgramResourceLocation(GLuint program, GLenum programInterface, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(programInterface);
@@ -7173,7 +7173,7 @@ GLint REGAL_CALL missing_glGetProgramResourceLocation(GLuint program, GLenum pro
   return (GLint )0;
 }
 
-GLint REGAL_CALL missing_glGetProgramResourceLocationIndex(GLuint program, GLenum programInterface, const GLchar *name)
+static GLint REGAL_CALL missing_glGetProgramResourceLocationIndex(GLuint program, GLenum programInterface, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(programInterface);
@@ -7182,7 +7182,7 @@ GLint REGAL_CALL missing_glGetProgramResourceLocationIndex(GLuint program, GLenu
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
+static void REGAL_CALL missing_glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(programInterface);
@@ -7193,7 +7193,7 @@ void REGAL_CALL missing_glGetProgramResourceName(GLuint program, GLenum programI
   Warning( "glGetProgramResourceName not available." );
 }
 
-void REGAL_CALL missing_glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params)
+static void REGAL_CALL missing_glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(programInterface);
@@ -7208,7 +7208,7 @@ void REGAL_CALL missing_glGetProgramResourceiv(GLuint program, GLenum programInt
 
 // GL_ARB_provoking_vertex
 
-void REGAL_CALL missing_glProvokingVertex(GLenum mode)
+static void REGAL_CALL missing_glProvokingVertex(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glProvokingVertex not available." );
@@ -7216,13 +7216,13 @@ void REGAL_CALL missing_glProvokingVertex(GLenum mode)
 
 // GL_ARB_robustness
 
-GLenum REGAL_CALL missing_glGetGraphicsResetStatusARB(void)
+static GLenum REGAL_CALL missing_glGetGraphicsResetStatusARB(void)
 {
   Warning( "glGetGraphicsResetStatusARB not available." );
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glGetnColorTableARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, GLvoid *table)
+static void REGAL_CALL missing_glGetnColorTableARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -7232,7 +7232,7 @@ void REGAL_CALL missing_glGetnColorTableARB(GLenum target, GLenum format, GLenum
   Warning( "glGetnColorTableARB not available." );
 }
 
-void REGAL_CALL missing_glGetnCompressedTexImageARB(GLenum target, GLint lod, GLsizei bufSize, GLvoid *img)
+static void REGAL_CALL missing_glGetnCompressedTexImageARB(GLenum target, GLint lod, GLsizei bufSize, GLvoid *img)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(lod);
@@ -7241,7 +7241,7 @@ void REGAL_CALL missing_glGetnCompressedTexImageARB(GLenum target, GLint lod, GL
   Warning( "glGetnCompressedTexImageARB not available." );
 }
 
-void REGAL_CALL missing_glGetnConvolutionFilterARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, GLvoid *image)
+static void REGAL_CALL missing_glGetnConvolutionFilterARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -7251,7 +7251,7 @@ void REGAL_CALL missing_glGetnConvolutionFilterARB(GLenum target, GLenum format,
   Warning( "glGetnConvolutionFilterARB not available." );
 }
 
-void REGAL_CALL missing_glGetnHistogramARB(GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, GLvoid *values)
+static void REGAL_CALL missing_glGetnHistogramARB(GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, GLvoid *values)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(reset);
@@ -7262,7 +7262,7 @@ void REGAL_CALL missing_glGetnHistogramARB(GLenum target, GLboolean reset, GLenu
   Warning( "glGetnHistogramARB not available." );
 }
 
-void REGAL_CALL missing_glGetnMapdvARB(GLenum target, GLenum query, GLsizei bufSize, GLdouble *v)
+static void REGAL_CALL missing_glGetnMapdvARB(GLenum target, GLenum query, GLsizei bufSize, GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(query);
@@ -7271,7 +7271,7 @@ void REGAL_CALL missing_glGetnMapdvARB(GLenum target, GLenum query, GLsizei bufS
   Warning( "glGetnMapdvARB not available." );
 }
 
-void REGAL_CALL missing_glGetnMapfvARB(GLenum target, GLenum query, GLsizei bufSize, GLfloat *v)
+static void REGAL_CALL missing_glGetnMapfvARB(GLenum target, GLenum query, GLsizei bufSize, GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(query);
@@ -7280,7 +7280,7 @@ void REGAL_CALL missing_glGetnMapfvARB(GLenum target, GLenum query, GLsizei bufS
   Warning( "glGetnMapfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetnMapivARB(GLenum target, GLenum query, GLsizei bufSize, GLint *v)
+static void REGAL_CALL missing_glGetnMapivARB(GLenum target, GLenum query, GLsizei bufSize, GLint *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(query);
@@ -7289,7 +7289,7 @@ void REGAL_CALL missing_glGetnMapivARB(GLenum target, GLenum query, GLsizei bufS
   Warning( "glGetnMapivARB not available." );
 }
 
-void REGAL_CALL missing_glGetnMinmaxARB(GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, GLvoid *values)
+static void REGAL_CALL missing_glGetnMinmaxARB(GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, GLvoid *values)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(reset);
@@ -7300,7 +7300,7 @@ void REGAL_CALL missing_glGetnMinmaxARB(GLenum target, GLboolean reset, GLenum f
   Warning( "glGetnMinmaxARB not available." );
 }
 
-void REGAL_CALL missing_glGetnPixelMapfvARB(GLenum map, GLsizei bufSize, GLfloat *values)
+static void REGAL_CALL missing_glGetnPixelMapfvARB(GLenum map, GLsizei bufSize, GLfloat *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(bufSize);
@@ -7308,7 +7308,7 @@ void REGAL_CALL missing_glGetnPixelMapfvARB(GLenum map, GLsizei bufSize, GLfloat
   Warning( "glGetnPixelMapfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetnPixelMapuivARB(GLenum map, GLsizei bufSize, GLuint *values)
+static void REGAL_CALL missing_glGetnPixelMapuivARB(GLenum map, GLsizei bufSize, GLuint *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(bufSize);
@@ -7316,7 +7316,7 @@ void REGAL_CALL missing_glGetnPixelMapuivARB(GLenum map, GLsizei bufSize, GLuint
   Warning( "glGetnPixelMapuivARB not available." );
 }
 
-void REGAL_CALL missing_glGetnPixelMapusvARB(GLenum map, GLsizei bufSize, GLushort *values)
+static void REGAL_CALL missing_glGetnPixelMapusvARB(GLenum map, GLsizei bufSize, GLushort *values)
 {
   UNUSED_PARAMETER(map);
   UNUSED_PARAMETER(bufSize);
@@ -7324,14 +7324,14 @@ void REGAL_CALL missing_glGetnPixelMapusvARB(GLenum map, GLsizei bufSize, GLusho
   Warning( "glGetnPixelMapusvARB not available." );
 }
 
-void REGAL_CALL missing_glGetnPolygonStippleARB(GLsizei bufSize, GLubyte *pattern)
+static void REGAL_CALL missing_glGetnPolygonStippleARB(GLsizei bufSize, GLubyte *pattern)
 {
   UNUSED_PARAMETER(bufSize);
   UNUSED_PARAMETER(pattern);
   Warning( "glGetnPolygonStippleARB not available." );
 }
 
-void REGAL_CALL missing_glGetnSeparableFilterARB(GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, GLvoid *row, GLsizei columnBufSize, GLvoid *column, GLvoid *span)
+static void REGAL_CALL missing_glGetnSeparableFilterARB(GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, GLvoid *row, GLsizei columnBufSize, GLvoid *column, GLvoid *span)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -7344,7 +7344,7 @@ void REGAL_CALL missing_glGetnSeparableFilterARB(GLenum target, GLenum format, G
   Warning( "glGetnSeparableFilterARB not available." );
 }
 
-void REGAL_CALL missing_glGetnTexImageARB(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, GLvoid *img)
+static void REGAL_CALL missing_glGetnTexImageARB(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, GLvoid *img)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -7355,7 +7355,7 @@ void REGAL_CALL missing_glGetnTexImageARB(GLenum target, GLint level, GLenum for
   Warning( "glGetnTexImageARB not available." );
 }
 
-void REGAL_CALL missing_glGetnUniformdvARB(GLuint program, GLint location, GLsizei bufSize, GLdouble *params)
+static void REGAL_CALL missing_glGetnUniformdvARB(GLuint program, GLint location, GLsizei bufSize, GLdouble *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7364,7 +7364,7 @@ void REGAL_CALL missing_glGetnUniformdvARB(GLuint program, GLint location, GLsiz
   Warning( "glGetnUniformdvARB not available." );
 }
 
-void REGAL_CALL missing_glGetnUniformfvARB(GLuint program, GLint location, GLsizei bufSize, GLfloat *params)
+static void REGAL_CALL missing_glGetnUniformfvARB(GLuint program, GLint location, GLsizei bufSize, GLfloat *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7373,7 +7373,7 @@ void REGAL_CALL missing_glGetnUniformfvARB(GLuint program, GLint location, GLsiz
   Warning( "glGetnUniformfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetnUniformivARB(GLuint program, GLint location, GLsizei bufSize, GLint *params)
+static void REGAL_CALL missing_glGetnUniformivARB(GLuint program, GLint location, GLsizei bufSize, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7382,7 +7382,7 @@ void REGAL_CALL missing_glGetnUniformivARB(GLuint program, GLint location, GLsiz
   Warning( "glGetnUniformivARB not available." );
 }
 
-void REGAL_CALL missing_glGetnUniformuivARB(GLuint program, GLint location, GLsizei bufSize, GLuint *params)
+static void REGAL_CALL missing_glGetnUniformuivARB(GLuint program, GLint location, GLsizei bufSize, GLuint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7391,7 +7391,7 @@ void REGAL_CALL missing_glGetnUniformuivARB(GLuint program, GLint location, GLsi
   Warning( "glGetnUniformuivARB not available." );
 }
 
-void REGAL_CALL missing_glReadnPixelsARB(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, GLvoid *data)
+static void REGAL_CALL missing_glReadnPixelsARB(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, GLvoid *data)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -7406,13 +7406,13 @@ void REGAL_CALL missing_glReadnPixelsARB(GLint x, GLint y, GLsizei width, GLsize
 
 // GL_ARB_sample_shading
 
-void REGAL_CALL missing_glMinSampleShading(GLclampf value)
+static void REGAL_CALL missing_glMinSampleShading(GLclampf value)
 {
   UNUSED_PARAMETER(value);
   Warning( "glMinSampleShading not available." );
 }
 
-void REGAL_CALL missing_glMinSampleShadingARB(GLclampf value)
+static void REGAL_CALL missing_glMinSampleShadingARB(GLclampf value)
 {
   UNUSED_PARAMETER(value);
   Warning( "glMinSampleShadingARB not available." );
@@ -7420,28 +7420,28 @@ void REGAL_CALL missing_glMinSampleShadingARB(GLclampf value)
 
 // GL_ARB_sampler_objects
 
-void REGAL_CALL missing_glBindSampler(GLuint unit, GLuint sampler)
+static void REGAL_CALL missing_glBindSampler(GLuint unit, GLuint sampler)
 {
   UNUSED_PARAMETER(unit);
   UNUSED_PARAMETER(sampler);
   Warning( "glBindSampler not available." );
 }
 
-void REGAL_CALL missing_glDeleteSamplers(GLsizei count, const GLuint *samplers)
+static void REGAL_CALL missing_glDeleteSamplers(GLsizei count, const GLuint *samplers)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(samplers);
   Warning( "glDeleteSamplers not available." );
 }
 
-void REGAL_CALL missing_glGenSamplers(GLsizei count, GLuint *samplers)
+static void REGAL_CALL missing_glGenSamplers(GLsizei count, GLuint *samplers)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(samplers);
   Warning( "glGenSamplers not available." );
 }
 
-void REGAL_CALL missing_glGetSamplerParameterIiv(GLuint sampler, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetSamplerParameterIiv(GLuint sampler, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7449,7 +7449,7 @@ void REGAL_CALL missing_glGetSamplerParameterIiv(GLuint sampler, GLenum pname, G
   Warning( "glGetSamplerParameterIiv not available." );
 }
 
-void REGAL_CALL missing_glGetSamplerParameterIuiv(GLuint sampler, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetSamplerParameterIuiv(GLuint sampler, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7457,7 +7457,7 @@ void REGAL_CALL missing_glGetSamplerParameterIuiv(GLuint sampler, GLenum pname, 
   Warning( "glGetSamplerParameterIuiv not available." );
 }
 
-void REGAL_CALL missing_glGetSamplerParameterfv(GLuint sampler, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetSamplerParameterfv(GLuint sampler, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7465,7 +7465,7 @@ void REGAL_CALL missing_glGetSamplerParameterfv(GLuint sampler, GLenum pname, GL
   Warning( "glGetSamplerParameterfv not available." );
 }
 
-void REGAL_CALL missing_glGetSamplerParameteriv(GLuint sampler, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetSamplerParameteriv(GLuint sampler, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7473,14 +7473,14 @@ void REGAL_CALL missing_glGetSamplerParameteriv(GLuint sampler, GLenum pname, GL
   Warning( "glGetSamplerParameteriv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsSampler(GLuint sampler)
+static GLboolean REGAL_CALL missing_glIsSampler(GLuint sampler)
 {
   UNUSED_PARAMETER(sampler);
   Warning( "glIsSampler not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7488,7 +7488,7 @@ void REGAL_CALL missing_glSamplerParameterIiv(GLuint sampler, GLenum pname, cons
   Warning( "glSamplerParameterIiv not available." );
 }
 
-void REGAL_CALL missing_glSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint *params)
+static void REGAL_CALL missing_glSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7496,7 +7496,7 @@ void REGAL_CALL missing_glSamplerParameterIuiv(GLuint sampler, GLenum pname, con
   Warning( "glSamplerParameterIuiv not available." );
 }
 
-void REGAL_CALL missing_glSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7504,7 +7504,7 @@ void REGAL_CALL missing_glSamplerParameterf(GLuint sampler, GLenum pname, GLfloa
   Warning( "glSamplerParameterf not available." );
 }
 
-void REGAL_CALL missing_glSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7512,7 +7512,7 @@ void REGAL_CALL missing_glSamplerParameterfv(GLuint sampler, GLenum pname, const
   Warning( "glSamplerParameterfv not available." );
 }
 
-void REGAL_CALL missing_glSamplerParameteri(GLuint sampler, GLenum pname, GLint param)
+static void REGAL_CALL missing_glSamplerParameteri(GLuint sampler, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7520,7 +7520,7 @@ void REGAL_CALL missing_glSamplerParameteri(GLuint sampler, GLenum pname, GLint 
   Warning( "glSamplerParameteri not available." );
 }
 
-void REGAL_CALL missing_glSamplerParameteriv(GLuint sampler, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glSamplerParameteriv(GLuint sampler, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(sampler);
   UNUSED_PARAMETER(pname);
@@ -7530,20 +7530,20 @@ void REGAL_CALL missing_glSamplerParameteriv(GLuint sampler, GLenum pname, const
 
 // GL_ARB_separate_shader_objects
 
-void REGAL_CALL missing_glActiveShaderProgram(GLuint pipeline, GLuint program)
+static void REGAL_CALL missing_glActiveShaderProgram(GLuint pipeline, GLuint program)
 {
   UNUSED_PARAMETER(pipeline);
   UNUSED_PARAMETER(program);
   Warning( "glActiveShaderProgram not available." );
 }
 
-void REGAL_CALL missing_glBindProgramPipeline(GLuint pipeline)
+static void REGAL_CALL missing_glBindProgramPipeline(GLuint pipeline)
 {
   UNUSED_PARAMETER(pipeline);
   Warning( "glBindProgramPipeline not available." );
 }
 
-GLuint REGAL_CALL missing_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
+static GLuint REGAL_CALL missing_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(count);
@@ -7552,21 +7552,21 @@ GLuint REGAL_CALL missing_glCreateShaderProgramv(GLenum type, GLsizei count, con
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glDeleteProgramPipelines(GLsizei n, const GLuint *pipelines)
+static void REGAL_CALL missing_glDeleteProgramPipelines(GLsizei n, const GLuint *pipelines)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(pipelines);
   Warning( "glDeleteProgramPipelines not available." );
 }
 
-void REGAL_CALL missing_glGenProgramPipelines(GLsizei n, GLuint *pipelines)
+static void REGAL_CALL missing_glGenProgramPipelines(GLsizei n, GLuint *pipelines)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(pipelines);
   Warning( "glGenProgramPipelines not available." );
 }
 
-void REGAL_CALL missing_glGetProgramPipelineInfoLog(GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
+static void REGAL_CALL missing_glGetProgramPipelineInfoLog(GLuint pipeline, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
 {
   UNUSED_PARAMETER(pipeline);
   UNUSED_PARAMETER(bufSize);
@@ -7575,7 +7575,7 @@ void REGAL_CALL missing_glGetProgramPipelineInfoLog(GLuint pipeline, GLsizei buf
   Warning( "glGetProgramPipelineInfoLog not available." );
 }
 
-void REGAL_CALL missing_glGetProgramPipelineiv(GLuint pipeline, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetProgramPipelineiv(GLuint pipeline, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(pipeline);
   UNUSED_PARAMETER(pname);
@@ -7583,14 +7583,14 @@ void REGAL_CALL missing_glGetProgramPipelineiv(GLuint pipeline, GLenum pname, GL
   Warning( "glGetProgramPipelineiv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsProgramPipeline(GLuint pipeline)
+static GLboolean REGAL_CALL missing_glIsProgramPipeline(GLuint pipeline)
 {
   UNUSED_PARAMETER(pipeline);
   Warning( "glIsProgramPipeline not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glProgramUniform1d(GLuint program, GLint location, GLdouble x)
+static void REGAL_CALL missing_glProgramUniform1d(GLuint program, GLint location, GLdouble x)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7598,7 +7598,7 @@ void REGAL_CALL missing_glProgramUniform1d(GLuint program, GLint location, GLdou
   Warning( "glProgramUniform1d not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform1dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7607,7 +7607,7 @@ void REGAL_CALL missing_glProgramUniform1dv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform1dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1f(GLuint program, GLint location, GLfloat x)
+static void REGAL_CALL missing_glProgramUniform1f(GLuint program, GLint location, GLfloat x)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7615,7 +7615,7 @@ void REGAL_CALL missing_glProgramUniform1f(GLuint program, GLint location, GLflo
   Warning( "glProgramUniform1f not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform1fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7624,7 +7624,7 @@ void REGAL_CALL missing_glProgramUniform1fv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform1fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1i(GLuint program, GLint location, GLint x)
+static void REGAL_CALL missing_glProgramUniform1i(GLuint program, GLint location, GLint x)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7632,7 +7632,7 @@ void REGAL_CALL missing_glProgramUniform1i(GLuint program, GLint location, GLint
   Warning( "glProgramUniform1i not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1iv(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform1iv(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7641,7 +7641,7 @@ void REGAL_CALL missing_glProgramUniform1iv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform1iv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1ui(GLuint program, GLint location, GLuint v0)
+static void REGAL_CALL missing_glProgramUniform1ui(GLuint program, GLint location, GLuint v0)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7649,7 +7649,7 @@ void REGAL_CALL missing_glProgramUniform1ui(GLuint program, GLint location, GLui
   Warning( "glProgramUniform1ui not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform1uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7658,7 +7658,7 @@ void REGAL_CALL missing_glProgramUniform1uiv(GLuint program, GLint location, GLs
   Warning( "glProgramUniform1uiv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2d(GLuint program, GLint location, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glProgramUniform2d(GLuint program, GLint location, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7667,7 +7667,7 @@ void REGAL_CALL missing_glProgramUniform2d(GLuint program, GLint location, GLdou
   Warning( "glProgramUniform2d not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform2dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7676,7 +7676,7 @@ void REGAL_CALL missing_glProgramUniform2dv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform2dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2f(GLuint program, GLint location, GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glProgramUniform2f(GLuint program, GLint location, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7685,7 +7685,7 @@ void REGAL_CALL missing_glProgramUniform2f(GLuint program, GLint location, GLflo
   Warning( "glProgramUniform2f not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform2fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7694,7 +7694,7 @@ void REGAL_CALL missing_glProgramUniform2fv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform2fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2i(GLuint program, GLint location, GLint x, GLint y)
+static void REGAL_CALL missing_glProgramUniform2i(GLuint program, GLint location, GLint x, GLint y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7703,7 +7703,7 @@ void REGAL_CALL missing_glProgramUniform2i(GLuint program, GLint location, GLint
   Warning( "glProgramUniform2i not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2iv(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform2iv(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7712,7 +7712,7 @@ void REGAL_CALL missing_glProgramUniform2iv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform2iv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2ui(GLuint program, GLint location, GLuint x, GLuint y)
+static void REGAL_CALL missing_glProgramUniform2ui(GLuint program, GLint location, GLuint x, GLuint y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7721,7 +7721,7 @@ void REGAL_CALL missing_glProgramUniform2ui(GLuint program, GLint location, GLui
   Warning( "glProgramUniform2ui not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform2uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7730,7 +7730,7 @@ void REGAL_CALL missing_glProgramUniform2uiv(GLuint program, GLint location, GLs
   Warning( "glProgramUniform2uiv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3d(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glProgramUniform3d(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7740,7 +7740,7 @@ void REGAL_CALL missing_glProgramUniform3d(GLuint program, GLint location, GLdou
   Warning( "glProgramUniform3d not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform3dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7749,7 +7749,7 @@ void REGAL_CALL missing_glProgramUniform3dv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform3dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3f(GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glProgramUniform3f(GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7759,7 +7759,7 @@ void REGAL_CALL missing_glProgramUniform3f(GLuint program, GLint location, GLflo
   Warning( "glProgramUniform3f not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform3fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7768,7 +7768,7 @@ void REGAL_CALL missing_glProgramUniform3fv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform3fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3i(GLuint program, GLint location, GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glProgramUniform3i(GLuint program, GLint location, GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7778,7 +7778,7 @@ void REGAL_CALL missing_glProgramUniform3i(GLuint program, GLint location, GLint
   Warning( "glProgramUniform3i not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3iv(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform3iv(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7787,7 +7787,7 @@ void REGAL_CALL missing_glProgramUniform3iv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform3iv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3ui(GLuint program, GLint location, GLuint x, GLuint y, GLuint z)
+static void REGAL_CALL missing_glProgramUniform3ui(GLuint program, GLint location, GLuint x, GLuint y, GLuint z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7797,7 +7797,7 @@ void REGAL_CALL missing_glProgramUniform3ui(GLuint program, GLint location, GLui
   Warning( "glProgramUniform3ui not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform3uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7806,7 +7806,7 @@ void REGAL_CALL missing_glProgramUniform3uiv(GLuint program, GLint location, GLs
   Warning( "glProgramUniform3uiv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4d(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glProgramUniform4d(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7817,7 +7817,7 @@ void REGAL_CALL missing_glProgramUniform4d(GLuint program, GLint location, GLdou
   Warning( "glProgramUniform4d not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform4dv(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7826,7 +7826,7 @@ void REGAL_CALL missing_glProgramUniform4dv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform4dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4f(GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glProgramUniform4f(GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7837,7 +7837,7 @@ void REGAL_CALL missing_glProgramUniform4f(GLuint program, GLint location, GLflo
   Warning( "glProgramUniform4f not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform4fv(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7846,7 +7846,7 @@ void REGAL_CALL missing_glProgramUniform4fv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform4fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4i(GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glProgramUniform4i(GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7857,7 +7857,7 @@ void REGAL_CALL missing_glProgramUniform4i(GLuint program, GLint location, GLint
   Warning( "glProgramUniform4i not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4iv(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform4iv(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7866,7 +7866,7 @@ void REGAL_CALL missing_glProgramUniform4iv(GLuint program, GLint location, GLsi
   Warning( "glProgramUniform4iv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4ui(GLuint program, GLint location, GLuint x, GLuint y, GLuint z, GLuint w)
+static void REGAL_CALL missing_glProgramUniform4ui(GLuint program, GLint location, GLuint x, GLuint y, GLuint z, GLuint w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7877,7 +7877,7 @@ void REGAL_CALL missing_glProgramUniform4ui(GLuint program, GLint location, GLui
   Warning( "glProgramUniform4ui not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform4uiv(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7886,7 +7886,7 @@ void REGAL_CALL missing_glProgramUniform4uiv(GLuint program, GLint location, GLs
   Warning( "glProgramUniform4uiv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7896,7 +7896,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2dv(GLuint program, GLint location
   Warning( "glProgramUniformMatrix2dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7906,7 +7906,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2fv(GLuint program, GLint location
   Warning( "glProgramUniformMatrix2fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7916,7 +7916,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x3dv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix2x3dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7926,7 +7926,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x3fv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix2x3fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7936,7 +7936,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x4dv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix2x4dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7946,7 +7946,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x4fv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix2x4fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7956,7 +7956,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3dv(GLuint program, GLint location
   Warning( "glProgramUniformMatrix3dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7966,7 +7966,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3fv(GLuint program, GLint location
   Warning( "glProgramUniformMatrix3fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7976,7 +7976,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x2dv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix3x2dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7986,7 +7986,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x2fv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix3x2fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -7996,7 +7996,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x4dv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix3x4dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8006,7 +8006,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x4fv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix3x4fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8016,7 +8016,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4dv(GLuint program, GLint location
   Warning( "glProgramUniformMatrix4dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8026,7 +8026,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4fv(GLuint program, GLint location
   Warning( "glProgramUniformMatrix4fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8036,7 +8036,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x2dv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix4x2dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8046,7 +8046,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x2fv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix4x2fv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8056,7 +8056,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x3dv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix4x3dv not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -8066,7 +8066,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x3fv(GLuint program, GLint locati
   Warning( "glProgramUniformMatrix4x3fv not available." );
 }
 
-void REGAL_CALL missing_glUseProgramStages(GLuint pipeline, GLbitfield stages, GLuint program)
+static void REGAL_CALL missing_glUseProgramStages(GLuint pipeline, GLbitfield stages, GLuint program)
 {
   UNUSED_PARAMETER(pipeline);
   UNUSED_PARAMETER(stages);
@@ -8074,7 +8074,7 @@ void REGAL_CALL missing_glUseProgramStages(GLuint pipeline, GLbitfield stages, G
   Warning( "glUseProgramStages not available." );
 }
 
-void REGAL_CALL missing_glValidateProgramPipeline(GLuint pipeline)
+static void REGAL_CALL missing_glValidateProgramPipeline(GLuint pipeline)
 {
   UNUSED_PARAMETER(pipeline);
   Warning( "glValidateProgramPipeline not available." );
@@ -8082,7 +8082,7 @@ void REGAL_CALL missing_glValidateProgramPipeline(GLuint pipeline)
 
 // GL_ARB_shader_atomic_counters
 
-void REGAL_CALL missing_glGetActiveAtomicCounterBufferiv(GLuint program, GLuint bufferIndex, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetActiveAtomicCounterBufferiv(GLuint program, GLuint bufferIndex, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(bufferIndex);
@@ -8093,7 +8093,7 @@ void REGAL_CALL missing_glGetActiveAtomicCounterBufferiv(GLuint program, GLuint 
 
 // GL_ARB_shader_image_load_store
 
-void REGAL_CALL missing_glBindImageTexture(GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format)
+static void REGAL_CALL missing_glBindImageTexture(GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format)
 {
   UNUSED_PARAMETER(unit);
   UNUSED_PARAMETER(texture);
@@ -8105,7 +8105,7 @@ void REGAL_CALL missing_glBindImageTexture(GLuint unit, GLuint texture, GLint le
   Warning( "glBindImageTexture not available." );
 }
 
-void REGAL_CALL missing_glMemoryBarrier(GLbitfield barriers)
+static void REGAL_CALL missing_glMemoryBarrier(GLbitfield barriers)
 {
   UNUSED_PARAMETER(barriers);
   Warning( "glMemoryBarrier not available." );
@@ -8113,46 +8113,46 @@ void REGAL_CALL missing_glMemoryBarrier(GLbitfield barriers)
 
 // GL_ARB_shader_objects
 
-void REGAL_CALL missing_glAttachObjectARB(GLhandleARB containerObj, GLhandleARB obj)
+static void REGAL_CALL missing_glAttachObjectARB(GLhandleARB containerObj, GLhandleARB obj)
 {
   UNUSED_PARAMETER(containerObj);
   UNUSED_PARAMETER(obj);
   Warning( "glAttachObjectARB not available." );
 }
 
-void REGAL_CALL missing_glCompileShaderARB(GLhandleARB shaderObj)
+static void REGAL_CALL missing_glCompileShaderARB(GLhandleARB shaderObj)
 {
   UNUSED_PARAMETER(shaderObj);
   Warning( "glCompileShaderARB not available." );
 }
 
-GLhandleARB REGAL_CALL missing_glCreateProgramObjectARB(void)
+static GLhandleARB REGAL_CALL missing_glCreateProgramObjectARB(void)
 {
   Warning( "glCreateProgramObjectARB not available." );
   return (GLhandleARB )0;
 }
 
-GLhandleARB REGAL_CALL missing_glCreateShaderObjectARB(GLenum shaderType)
+static GLhandleARB REGAL_CALL missing_glCreateShaderObjectARB(GLenum shaderType)
 {
   UNUSED_PARAMETER(shaderType);
   Warning( "glCreateShaderObjectARB not available." );
   return (GLhandleARB )0;
 }
 
-void REGAL_CALL missing_glDeleteObjectARB(GLhandleARB obj)
+static void REGAL_CALL missing_glDeleteObjectARB(GLhandleARB obj)
 {
   UNUSED_PARAMETER(obj);
   Warning( "glDeleteObjectARB not available." );
 }
 
-void REGAL_CALL missing_glDetachObjectARB(GLhandleARB containerObj, GLhandleARB attachedObj)
+static void REGAL_CALL missing_glDetachObjectARB(GLhandleARB containerObj, GLhandleARB attachedObj)
 {
   UNUSED_PARAMETER(containerObj);
   UNUSED_PARAMETER(attachedObj);
   Warning( "glDetachObjectARB not available." );
 }
 
-void REGAL_CALL missing_glGetActiveUniformARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name)
+static void REGAL_CALL missing_glGetActiveUniformARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(index);
@@ -8164,7 +8164,7 @@ void REGAL_CALL missing_glGetActiveUniformARB(GLhandleARB programObj, GLuint ind
   Warning( "glGetActiveUniformARB not available." );
 }
 
-void REGAL_CALL missing_glGetAttachedObjectsARB(GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj)
+static void REGAL_CALL missing_glGetAttachedObjectsARB(GLhandleARB containerObj, GLsizei maxCount, GLsizei *count, GLhandleARB *obj)
 {
   UNUSED_PARAMETER(containerObj);
   UNUSED_PARAMETER(maxCount);
@@ -8173,14 +8173,14 @@ void REGAL_CALL missing_glGetAttachedObjectsARB(GLhandleARB containerObj, GLsize
   Warning( "glGetAttachedObjectsARB not available." );
 }
 
-GLhandleARB REGAL_CALL missing_glGetHandleARB(GLenum pname)
+static GLhandleARB REGAL_CALL missing_glGetHandleARB(GLenum pname)
 {
   UNUSED_PARAMETER(pname);
   Warning( "glGetHandleARB not available." );
   return (GLhandleARB )0;
 }
 
-void REGAL_CALL missing_glGetInfoLogARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog)
+static void REGAL_CALL missing_glGetInfoLogARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog)
 {
   UNUSED_PARAMETER(obj);
   UNUSED_PARAMETER(maxLength);
@@ -8189,7 +8189,7 @@ void REGAL_CALL missing_glGetInfoLogARB(GLhandleARB obj, GLsizei maxLength, GLsi
   Warning( "glGetInfoLogARB not available." );
 }
 
-void REGAL_CALL missing_glGetObjectParameterfvARB(GLhandleARB obj, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetObjectParameterfvARB(GLhandleARB obj, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(obj);
   UNUSED_PARAMETER(pname);
@@ -8197,7 +8197,7 @@ void REGAL_CALL missing_glGetObjectParameterfvARB(GLhandleARB obj, GLenum pname,
   Warning( "glGetObjectParameterfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetObjectParameterivARB(GLhandleARB obj, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetObjectParameterivARB(GLhandleARB obj, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(obj);
   UNUSED_PARAMETER(pname);
@@ -8205,7 +8205,7 @@ void REGAL_CALL missing_glGetObjectParameterivARB(GLhandleARB obj, GLenum pname,
   Warning( "glGetObjectParameterivARB not available." );
 }
 
-void REGAL_CALL missing_glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source)
+static void REGAL_CALL missing_glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *source)
 {
   UNUSED_PARAMETER(obj);
   UNUSED_PARAMETER(maxLength);
@@ -8214,7 +8214,7 @@ void REGAL_CALL missing_glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLength,
   Warning( "glGetShaderSourceARB not available." );
 }
 
-GLint REGAL_CALL missing_glGetUniformLocationARB(GLhandleARB programObj, const GLcharARB *name)
+static GLint REGAL_CALL missing_glGetUniformLocationARB(GLhandleARB programObj, const GLcharARB *name)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(name);
@@ -8222,7 +8222,7 @@ GLint REGAL_CALL missing_glGetUniformLocationARB(GLhandleARB programObj, const G
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params)
+static void REGAL_CALL missing_glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(location);
@@ -8230,7 +8230,7 @@ void REGAL_CALL missing_glGetUniformfvARB(GLhandleARB programObj, GLint location
   Warning( "glGetUniformfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetUniformivARB(GLhandleARB programObj, GLint location, GLint *params)
+static void REGAL_CALL missing_glGetUniformivARB(GLhandleARB programObj, GLint location, GLint *params)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(location);
@@ -8238,13 +8238,13 @@ void REGAL_CALL missing_glGetUniformivARB(GLhandleARB programObj, GLint location
   Warning( "glGetUniformivARB not available." );
 }
 
-void REGAL_CALL missing_glLinkProgramARB(GLhandleARB programObj)
+static void REGAL_CALL missing_glLinkProgramARB(GLhandleARB programObj)
 {
   UNUSED_PARAMETER(programObj);
   Warning( "glLinkProgramARB not available." );
 }
 
-void REGAL_CALL missing_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL missing_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
 {
   UNUSED_PARAMETER(shaderObj);
   UNUSED_PARAMETER(count);
@@ -8253,14 +8253,14 @@ void REGAL_CALL missing_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, 
   Warning( "glShaderSourceARB not available." );
 }
 
-void REGAL_CALL missing_glUniform1fARB(GLint location, GLfloat v0)
+static void REGAL_CALL missing_glUniform1fARB(GLint location, GLfloat v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniform1fARB not available." );
 }
 
-void REGAL_CALL missing_glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8268,14 +8268,14 @@ void REGAL_CALL missing_glUniform1fvARB(GLint location, GLsizei count, const GLf
   Warning( "glUniform1fvARB not available." );
 }
 
-void REGAL_CALL missing_glUniform1iARB(GLint location, GLint v0)
+static void REGAL_CALL missing_glUniform1iARB(GLint location, GLint v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniform1iARB not available." );
 }
 
-void REGAL_CALL missing_glUniform1ivARB(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform1ivARB(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8283,7 +8283,7 @@ void REGAL_CALL missing_glUniform1ivARB(GLint location, GLsizei count, const GLi
   Warning( "glUniform1ivARB not available." );
 }
 
-void REGAL_CALL missing_glUniform2fARB(GLint location, GLfloat v0, GLfloat v1)
+static void REGAL_CALL missing_glUniform2fARB(GLint location, GLfloat v0, GLfloat v1)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -8291,7 +8291,7 @@ void REGAL_CALL missing_glUniform2fARB(GLint location, GLfloat v0, GLfloat v1)
   Warning( "glUniform2fARB not available." );
 }
 
-void REGAL_CALL missing_glUniform2fvARB(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform2fvARB(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8299,7 +8299,7 @@ void REGAL_CALL missing_glUniform2fvARB(GLint location, GLsizei count, const GLf
   Warning( "glUniform2fvARB not available." );
 }
 
-void REGAL_CALL missing_glUniform2iARB(GLint location, GLint v0, GLint v1)
+static void REGAL_CALL missing_glUniform2iARB(GLint location, GLint v0, GLint v1)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -8307,7 +8307,7 @@ void REGAL_CALL missing_glUniform2iARB(GLint location, GLint v0, GLint v1)
   Warning( "glUniform2iARB not available." );
 }
 
-void REGAL_CALL missing_glUniform2ivARB(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform2ivARB(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8315,7 +8315,7 @@ void REGAL_CALL missing_glUniform2ivARB(GLint location, GLsizei count, const GLi
   Warning( "glUniform2ivARB not available." );
 }
 
-void REGAL_CALL missing_glUniform3fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
+static void REGAL_CALL missing_glUniform3fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -8324,7 +8324,7 @@ void REGAL_CALL missing_glUniform3fARB(GLint location, GLfloat v0, GLfloat v1, G
   Warning( "glUniform3fARB not available." );
 }
 
-void REGAL_CALL missing_glUniform3fvARB(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform3fvARB(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8332,7 +8332,7 @@ void REGAL_CALL missing_glUniform3fvARB(GLint location, GLsizei count, const GLf
   Warning( "glUniform3fvARB not available." );
 }
 
-void REGAL_CALL missing_glUniform3iARB(GLint location, GLint v0, GLint v1, GLint v2)
+static void REGAL_CALL missing_glUniform3iARB(GLint location, GLint v0, GLint v1, GLint v2)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -8341,7 +8341,7 @@ void REGAL_CALL missing_glUniform3iARB(GLint location, GLint v0, GLint v1, GLint
   Warning( "glUniform3iARB not available." );
 }
 
-void REGAL_CALL missing_glUniform3ivARB(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform3ivARB(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8349,7 +8349,7 @@ void REGAL_CALL missing_glUniform3ivARB(GLint location, GLsizei count, const GLi
   Warning( "glUniform3ivARB not available." );
 }
 
-void REGAL_CALL missing_glUniform4fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+static void REGAL_CALL missing_glUniform4fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -8359,7 +8359,7 @@ void REGAL_CALL missing_glUniform4fARB(GLint location, GLfloat v0, GLfloat v1, G
   Warning( "glUniform4fARB not available." );
 }
 
-void REGAL_CALL missing_glUniform4fvARB(GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glUniform4fvARB(GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8367,7 +8367,7 @@ void REGAL_CALL missing_glUniform4fvARB(GLint location, GLsizei count, const GLf
   Warning( "glUniform4fvARB not available." );
 }
 
-void REGAL_CALL missing_glUniform4iARB(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
+static void REGAL_CALL missing_glUniform4iARB(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -8377,7 +8377,7 @@ void REGAL_CALL missing_glUniform4iARB(GLint location, GLint v0, GLint v1, GLint
   Warning( "glUniform4iARB not available." );
 }
 
-void REGAL_CALL missing_glUniform4ivARB(GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glUniform4ivARB(GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8385,7 +8385,7 @@ void REGAL_CALL missing_glUniform4ivARB(GLint location, GLsizei count, const GLi
   Warning( "glUniform4ivARB not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix2fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix2fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8394,7 +8394,7 @@ void REGAL_CALL missing_glUniformMatrix2fvARB(GLint location, GLsizei count, GLb
   Warning( "glUniformMatrix2fvARB not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix3fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix3fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8403,7 +8403,7 @@ void REGAL_CALL missing_glUniformMatrix3fvARB(GLint location, GLsizei count, GLb
   Warning( "glUniformMatrix3fvARB not available." );
 }
 
-void REGAL_CALL missing_glUniformMatrix4fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glUniformMatrix4fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -8412,13 +8412,13 @@ void REGAL_CALL missing_glUniformMatrix4fvARB(GLint location, GLsizei count, GLb
   Warning( "glUniformMatrix4fvARB not available." );
 }
 
-void REGAL_CALL missing_glUseProgramObjectARB(GLhandleARB programObj)
+static void REGAL_CALL missing_glUseProgramObjectARB(GLhandleARB programObj)
 {
   UNUSED_PARAMETER(programObj);
   Warning( "glUseProgramObjectARB not available." );
 }
 
-void REGAL_CALL missing_glValidateProgramARB(GLhandleARB programObj)
+static void REGAL_CALL missing_glValidateProgramARB(GLhandleARB programObj)
 {
   UNUSED_PARAMETER(programObj);
   Warning( "glValidateProgramARB not available." );
@@ -8426,7 +8426,7 @@ void REGAL_CALL missing_glValidateProgramARB(GLhandleARB programObj)
 
 // GL_ARB_shader_storage_buffer_object
 
-void REGAL_CALL missing_glShaderStorageBlockBinding(GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding)
+static void REGAL_CALL missing_glShaderStorageBlockBinding(GLuint program, GLuint storageBlockIndex, GLuint storageBlockBinding)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(storageBlockIndex);
@@ -8436,7 +8436,7 @@ void REGAL_CALL missing_glShaderStorageBlockBinding(GLuint program, GLuint stora
 
 // GL_ARB_shader_subroutine
 
-void REGAL_CALL missing_glGetActiveSubroutineName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
+static void REGAL_CALL missing_glGetActiveSubroutineName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shaderType);
@@ -8447,7 +8447,7 @@ void REGAL_CALL missing_glGetActiveSubroutineName(GLuint program, GLenum shaderT
   Warning( "glGetActiveSubroutineName not available." );
 }
 
-void REGAL_CALL missing_glGetActiveSubroutineUniformName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
+static void REGAL_CALL missing_glGetActiveSubroutineUniformName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shaderType);
@@ -8458,7 +8458,7 @@ void REGAL_CALL missing_glGetActiveSubroutineUniformName(GLuint program, GLenum 
   Warning( "glGetActiveSubroutineUniformName not available." );
 }
 
-void REGAL_CALL missing_glGetActiveSubroutineUniformiv(GLuint program, GLenum shaderType, GLuint index, GLenum pname, GLint *values)
+static void REGAL_CALL missing_glGetActiveSubroutineUniformiv(GLuint program, GLenum shaderType, GLuint index, GLenum pname, GLint *values)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shaderType);
@@ -8468,7 +8468,7 @@ void REGAL_CALL missing_glGetActiveSubroutineUniformiv(GLuint program, GLenum sh
   Warning( "glGetActiveSubroutineUniformiv not available." );
 }
 
-void REGAL_CALL missing_glGetProgramStageiv(GLuint program, GLenum shaderType, GLenum pname, GLint *values)
+static void REGAL_CALL missing_glGetProgramStageiv(GLuint program, GLenum shaderType, GLenum pname, GLint *values)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shaderType);
@@ -8477,7 +8477,7 @@ void REGAL_CALL missing_glGetProgramStageiv(GLuint program, GLenum shaderType, G
   Warning( "glGetProgramStageiv not available." );
 }
 
-GLuint REGAL_CALL missing_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
+static GLuint REGAL_CALL missing_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shaderType);
@@ -8486,7 +8486,7 @@ GLuint REGAL_CALL missing_glGetSubroutineIndex(GLuint program, GLenum shaderType
   return (GLuint )0;
 }
 
-GLint REGAL_CALL missing_glGetSubroutineUniformLocation(GLuint program, GLenum shaderType, const GLchar *name)
+static GLint REGAL_CALL missing_glGetSubroutineUniformLocation(GLuint program, GLenum shaderType, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shaderType);
@@ -8495,7 +8495,7 @@ GLint REGAL_CALL missing_glGetSubroutineUniformLocation(GLuint program, GLenum s
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glGetUniformSubroutineuiv(GLenum shaderType, GLint location, GLuint *params)
+static void REGAL_CALL missing_glGetUniformSubroutineuiv(GLenum shaderType, GLint location, GLuint *params)
 {
   UNUSED_PARAMETER(shaderType);
   UNUSED_PARAMETER(location);
@@ -8503,7 +8503,7 @@ void REGAL_CALL missing_glGetUniformSubroutineuiv(GLenum shaderType, GLint locat
   Warning( "glGetUniformSubroutineuiv not available." );
 }
 
-void REGAL_CALL missing_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
+static void REGAL_CALL missing_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
 {
   UNUSED_PARAMETER(shaderType);
   UNUSED_PARAMETER(count);
@@ -8513,7 +8513,7 @@ void REGAL_CALL missing_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count
 
 // GL_ARB_shading_language_include
 
-void REGAL_CALL missing_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+static void REGAL_CALL missing_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(count);
@@ -8522,14 +8522,14 @@ void REGAL_CALL missing_glCompileShaderIncludeARB(GLuint shader, GLsizei count, 
   Warning( "glCompileShaderIncludeARB not available." );
 }
 
-void REGAL_CALL missing_glDeleteNamedStringARB(GLint namelen, const GLchar *name)
+static void REGAL_CALL missing_glDeleteNamedStringARB(GLint namelen, const GLchar *name)
 {
   UNUSED_PARAMETER(namelen);
   UNUSED_PARAMETER(name);
   Warning( "glDeleteNamedStringARB not available." );
 }
 
-void REGAL_CALL missing_glGetNamedStringARB(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string)
+static void REGAL_CALL missing_glGetNamedStringARB(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string)
 {
   UNUSED_PARAMETER(namelen);
   UNUSED_PARAMETER(name);
@@ -8539,7 +8539,7 @@ void REGAL_CALL missing_glGetNamedStringARB(GLint namelen, const GLchar *name, G
   Warning( "glGetNamedStringARB not available." );
 }
 
-void REGAL_CALL missing_glGetNamedStringivARB(GLint namelen, const GLchar *name, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetNamedStringivARB(GLint namelen, const GLchar *name, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(namelen);
   UNUSED_PARAMETER(name);
@@ -8548,7 +8548,7 @@ void REGAL_CALL missing_glGetNamedStringivARB(GLint namelen, const GLchar *name,
   Warning( "glGetNamedStringivARB not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsNamedStringARB(GLint namelen, const GLchar *name)
+static GLboolean REGAL_CALL missing_glIsNamedStringARB(GLint namelen, const GLchar *name)
 {
   UNUSED_PARAMETER(namelen);
   UNUSED_PARAMETER(name);
@@ -8556,7 +8556,7 @@ GLboolean REGAL_CALL missing_glIsNamedStringARB(GLint namelen, const GLchar *nam
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glNamedStringARB(GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string)
+static void REGAL_CALL missing_glNamedStringARB(GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(namelen);
@@ -8568,7 +8568,7 @@ void REGAL_CALL missing_glNamedStringARB(GLenum type, GLint namelen, const GLcha
 
 // GL_ARB_sync
 
-GLenum REGAL_CALL missing_glClientWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
+static GLenum REGAL_CALL missing_glClientWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
 {
   UNUSED_PARAMETER(sync);
   UNUSED_PARAMETER(flags);
@@ -8577,13 +8577,13 @@ GLenum REGAL_CALL missing_glClientWaitSync(GLsync sync, GLbitfield flags, GLuint
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glDeleteSync(GLsync sync)
+static void REGAL_CALL missing_glDeleteSync(GLsync sync)
 {
   UNUSED_PARAMETER(sync);
   Warning( "glDeleteSync not available." );
 }
 
-GLsync REGAL_CALL missing_glFenceSync(GLenum condition, GLbitfield flags)
+static GLsync REGAL_CALL missing_glFenceSync(GLenum condition, GLbitfield flags)
 {
   UNUSED_PARAMETER(condition);
   UNUSED_PARAMETER(flags);
@@ -8591,14 +8591,14 @@ GLsync REGAL_CALL missing_glFenceSync(GLenum condition, GLbitfield flags)
   return (GLsync )0;
 }
 
-void REGAL_CALL missing_glGetInteger64v(GLenum pname, GLint64 *params)
+static void REGAL_CALL missing_glGetInteger64v(GLenum pname, GLint64 *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetInteger64v not available." );
 }
 
-void REGAL_CALL missing_glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
+static void REGAL_CALL missing_glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
 {
   UNUSED_PARAMETER(sync);
   UNUSED_PARAMETER(pname);
@@ -8608,14 +8608,14 @@ void REGAL_CALL missing_glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSize, 
   Warning( "glGetSynciv not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsSync(GLsync sync)
+static GLboolean REGAL_CALL missing_glIsSync(GLsync sync)
 {
   UNUSED_PARAMETER(sync);
   Warning( "glIsSync not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
+static void REGAL_CALL missing_glWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
 {
   UNUSED_PARAMETER(sync);
   UNUSED_PARAMETER(flags);
@@ -8625,14 +8625,14 @@ void REGAL_CALL missing_glWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeo
 
 // GL_ARB_tessellation_shader
 
-void REGAL_CALL missing_glPatchParameterfv(GLenum pname, const GLfloat *values)
+static void REGAL_CALL missing_glPatchParameterfv(GLenum pname, const GLfloat *values)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(values);
   Warning( "glPatchParameterfv not available." );
 }
 
-void REGAL_CALL missing_glPatchParameteri(GLenum pname, GLint value)
+static void REGAL_CALL missing_glPatchParameteri(GLenum pname, GLint value)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(value);
@@ -8641,7 +8641,7 @@ void REGAL_CALL missing_glPatchParameteri(GLenum pname, GLint value)
 
 // GL_ARB_texture_buffer_object
 
-void REGAL_CALL missing_glTexBufferARB(GLenum target, GLenum internalformat, GLuint buffer)
+static void REGAL_CALL missing_glTexBufferARB(GLenum target, GLenum internalformat, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -8651,7 +8651,7 @@ void REGAL_CALL missing_glTexBufferARB(GLenum target, GLenum internalformat, GLu
 
 // GL_ARB_texture_buffer_range
 
-void REGAL_CALL missing_glTexBufferRange(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size)
+static void REGAL_CALL missing_glTexBufferRange(GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -8661,7 +8661,7 @@ void REGAL_CALL missing_glTexBufferRange(GLenum target, GLenum internalformat, G
   Warning( "glTexBufferRange not available." );
 }
 
-void REGAL_CALL missing_glTextureBufferRangeEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size)
+static void REGAL_CALL missing_glTextureBufferRangeEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8674,7 +8674,7 @@ void REGAL_CALL missing_glTextureBufferRangeEXT(GLuint texture, GLenum target, G
 
 // GL_ARB_texture_compression
 
-void REGAL_CALL missing_glCompressedTexImage1DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage1DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -8686,7 +8686,7 @@ void REGAL_CALL missing_glCompressedTexImage1DARB(GLenum target, GLint level, GL
   Warning( "glCompressedTexImage1DARB not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexImage2DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage2DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -8699,7 +8699,7 @@ void REGAL_CALL missing_glCompressedTexImage2DARB(GLenum target, GLint level, GL
   Warning( "glCompressedTexImage2DARB not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexImage3DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage3DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -8713,7 +8713,7 @@ void REGAL_CALL missing_glCompressedTexImage3DARB(GLenum target, GLint level, GL
   Warning( "glCompressedTexImage3DARB not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage1DARB(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage1DARB(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -8725,7 +8725,7 @@ void REGAL_CALL missing_glCompressedTexSubImage1DARB(GLenum target, GLint level,
   Warning( "glCompressedTexSubImage1DARB not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage2DARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage2DARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -8739,7 +8739,7 @@ void REGAL_CALL missing_glCompressedTexSubImage2DARB(GLenum target, GLint level,
   Warning( "glCompressedTexSubImage2DARB not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage3DARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage3DARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -8755,7 +8755,7 @@ void REGAL_CALL missing_glCompressedTexSubImage3DARB(GLenum target, GLint level,
   Warning( "glCompressedTexSubImage3DARB not available." );
 }
 
-void REGAL_CALL missing_glGetCompressedTexImageARB(GLenum target, GLint lod, GLvoid *img)
+static void REGAL_CALL missing_glGetCompressedTexImageARB(GLenum target, GLint lod, GLvoid *img)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(lod);
@@ -8765,7 +8765,7 @@ void REGAL_CALL missing_glGetCompressedTexImageARB(GLenum target, GLint lod, GLv
 
 // GL_ARB_texture_multisample
 
-void REGAL_CALL missing_glGetMultisamplefv(GLenum pname, GLuint index, GLfloat *val)
+static void REGAL_CALL missing_glGetMultisamplefv(GLenum pname, GLuint index, GLfloat *val)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(index);
@@ -8773,14 +8773,14 @@ void REGAL_CALL missing_glGetMultisamplefv(GLenum pname, GLuint index, GLfloat *
   Warning( "glGetMultisamplefv not available." );
 }
 
-void REGAL_CALL missing_glSampleMaski(GLuint index, GLbitfield mask)
+static void REGAL_CALL missing_glSampleMaski(GLuint index, GLbitfield mask)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(mask);
   Warning( "glSampleMaski not available." );
 }
 
-void REGAL_CALL missing_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL missing_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -8791,7 +8791,7 @@ void REGAL_CALL missing_glTexImage2DMultisample(GLenum target, GLsizei samples, 
   Warning( "glTexImage2DMultisample not available." );
 }
 
-void REGAL_CALL missing_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL missing_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -8805,7 +8805,7 @@ void REGAL_CALL missing_glTexImage3DMultisample(GLenum target, GLsizei samples, 
 
 // GL_ARB_texture_storage
 
-void REGAL_CALL missing_glTexStorage1D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
+static void REGAL_CALL missing_glTexStorage1D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(levels);
@@ -8814,7 +8814,7 @@ void REGAL_CALL missing_glTexStorage1D(GLenum target, GLsizei levels, GLenum int
   Warning( "glTexStorage1D not available." );
 }
 
-void REGAL_CALL missing_glTexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glTexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(levels);
@@ -8824,7 +8824,7 @@ void REGAL_CALL missing_glTexStorage2D(GLenum target, GLsizei levels, GLenum int
   Warning( "glTexStorage2D not available." );
 }
 
-void REGAL_CALL missing_glTexStorage3D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
+static void REGAL_CALL missing_glTexStorage3D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(levels);
@@ -8835,7 +8835,7 @@ void REGAL_CALL missing_glTexStorage3D(GLenum target, GLsizei levels, GLenum int
   Warning( "glTexStorage3D not available." );
 }
 
-void REGAL_CALL missing_glTextureStorage1DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
+static void REGAL_CALL missing_glTextureStorage1DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8845,7 +8845,7 @@ void REGAL_CALL missing_glTextureStorage1DEXT(GLuint texture, GLenum target, GLs
   Warning( "glTextureStorage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureStorage2DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glTextureStorage2DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8856,7 +8856,7 @@ void REGAL_CALL missing_glTextureStorage2DEXT(GLuint texture, GLenum target, GLs
   Warning( "glTextureStorage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureStorage3DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
+static void REGAL_CALL missing_glTextureStorage3DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8870,7 +8870,7 @@ void REGAL_CALL missing_glTextureStorage3DEXT(GLuint texture, GLenum target, GLs
 
 // GL_ARB_texture_storage_multisample
 
-void REGAL_CALL missing_glTexStorage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL missing_glTexStorage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -8881,7 +8881,7 @@ void REGAL_CALL missing_glTexStorage2DMultisample(GLenum target, GLsizei samples
   Warning( "glTexStorage2DMultisample not available." );
 }
 
-void REGAL_CALL missing_glTexStorage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL missing_glTexStorage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -8893,7 +8893,7 @@ void REGAL_CALL missing_glTexStorage3DMultisample(GLenum target, GLsizei samples
   Warning( "glTexStorage3DMultisample not available." );
 }
 
-void REGAL_CALL missing_glTextureStorage2DMultisampleEXT(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL missing_glTextureStorage2DMultisampleEXT(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8905,7 +8905,7 @@ void REGAL_CALL missing_glTextureStorage2DMultisampleEXT(GLuint texture, GLenum 
   Warning( "glTextureStorage2DMultisampleEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureStorage3DMultisampleEXT(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL missing_glTextureStorage3DMultisampleEXT(GLuint texture, GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8920,7 +8920,7 @@ void REGAL_CALL missing_glTextureStorage3DMultisampleEXT(GLuint texture, GLenum 
 
 // GL_ARB_texture_view
 
-void REGAL_CALL missing_glTextureView(GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers)
+static void REGAL_CALL missing_glTextureView(GLuint texture, GLenum target, GLuint origtexture, GLenum internalformat, GLuint minlevel, GLuint numlevels, GLuint minlayer, GLuint numlayers)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -8935,7 +8935,7 @@ void REGAL_CALL missing_glTextureView(GLuint texture, GLenum target, GLuint orig
 
 // GL_ARB_timer_query
 
-void REGAL_CALL missing_glGetQueryObjecti64v(GLuint id, GLenum pname, GLint64 *params)
+static void REGAL_CALL missing_glGetQueryObjecti64v(GLuint id, GLenum pname, GLint64 *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -8943,7 +8943,7 @@ void REGAL_CALL missing_glGetQueryObjecti64v(GLuint id, GLenum pname, GLint64 *p
   Warning( "glGetQueryObjecti64v not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64 *params)
+static void REGAL_CALL missing_glGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64 *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -8951,7 +8951,7 @@ void REGAL_CALL missing_glGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64 
   Warning( "glGetQueryObjectui64v not available." );
 }
 
-void REGAL_CALL missing_glQueryCounter(GLuint id, GLenum target)
+static void REGAL_CALL missing_glQueryCounter(GLuint id, GLenum target)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(target);
@@ -8960,54 +8960,54 @@ void REGAL_CALL missing_glQueryCounter(GLuint id, GLenum target)
 
 // GL_ARB_transform_feedback2
 
-void REGAL_CALL missing_glBindTransformFeedback(GLenum target, GLuint id)
+static void REGAL_CALL missing_glBindTransformFeedback(GLenum target, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
   Warning( "glBindTransformFeedback not available." );
 }
 
-void REGAL_CALL missing_glDeleteTransformFeedbacks(GLsizei n, const GLuint *ids)
+static void REGAL_CALL missing_glDeleteTransformFeedbacks(GLsizei n, const GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glDeleteTransformFeedbacks not available." );
 }
 
-void REGAL_CALL missing_glDrawTransformFeedback(GLenum mode, GLuint name)
+static void REGAL_CALL missing_glDrawTransformFeedback(GLenum mode, GLuint name)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(name);
   Warning( "glDrawTransformFeedback not available." );
 }
 
-void REGAL_CALL missing_glGenTransformFeedbacks(GLsizei n, GLuint *ids)
+static void REGAL_CALL missing_glGenTransformFeedbacks(GLsizei n, GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glGenTransformFeedbacks not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsTransformFeedback(GLuint id)
+static GLboolean REGAL_CALL missing_glIsTransformFeedback(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsTransformFeedback not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glPauseTransformFeedback(void)
+static void REGAL_CALL missing_glPauseTransformFeedback(void)
 {
   Warning( "glPauseTransformFeedback not available." );
 }
 
-void REGAL_CALL missing_glResumeTransformFeedback(void)
+static void REGAL_CALL missing_glResumeTransformFeedback(void)
 {
   Warning( "glResumeTransformFeedback not available." );
 }
 
 // GL_ARB_transform_feedback3
 
-void REGAL_CALL missing_glBeginQueryIndexed(GLenum target, GLuint index, GLuint id)
+static void REGAL_CALL missing_glBeginQueryIndexed(GLenum target, GLuint index, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9015,7 +9015,7 @@ void REGAL_CALL missing_glBeginQueryIndexed(GLenum target, GLuint index, GLuint 
   Warning( "glBeginQueryIndexed not available." );
 }
 
-void REGAL_CALL missing_glDrawTransformFeedbackStream(GLenum mode, GLuint id, GLuint stream)
+static void REGAL_CALL missing_glDrawTransformFeedbackStream(GLenum mode, GLuint id, GLuint stream)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(id);
@@ -9023,14 +9023,14 @@ void REGAL_CALL missing_glDrawTransformFeedbackStream(GLenum mode, GLuint id, GL
   Warning( "glDrawTransformFeedbackStream not available." );
 }
 
-void REGAL_CALL missing_glEndQueryIndexed(GLenum target, GLuint index)
+static void REGAL_CALL missing_glEndQueryIndexed(GLenum target, GLuint index)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
   Warning( "glEndQueryIndexed not available." );
 }
 
-void REGAL_CALL missing_glGetQueryIndexediv(GLenum target, GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetQueryIndexediv(GLenum target, GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9041,7 +9041,7 @@ void REGAL_CALL missing_glGetQueryIndexediv(GLenum target, GLuint index, GLenum 
 
 // GL_ARB_transform_feedback_instanced
 
-void REGAL_CALL missing_glDrawTransformFeedbackInstanced(GLenum mode, GLuint id, GLsizei primcount)
+static void REGAL_CALL missing_glDrawTransformFeedbackInstanced(GLenum mode, GLuint id, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(id);
@@ -9049,7 +9049,7 @@ void REGAL_CALL missing_glDrawTransformFeedbackInstanced(GLenum mode, GLuint id,
   Warning( "glDrawTransformFeedbackInstanced not available." );
 }
 
-void REGAL_CALL missing_glDrawTransformFeedbackStreamInstanced(GLenum mode, GLuint id, GLuint stream, GLsizei primcount)
+static void REGAL_CALL missing_glDrawTransformFeedbackStreamInstanced(GLenum mode, GLuint id, GLuint stream, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(id);
@@ -9060,25 +9060,25 @@ void REGAL_CALL missing_glDrawTransformFeedbackStreamInstanced(GLenum mode, GLui
 
 // GL_ARB_transpose_matrix
 
-void REGAL_CALL missing_glLoadTransposeMatrixdARB(const GLdouble *m)
+static void REGAL_CALL missing_glLoadTransposeMatrixdARB(const GLdouble *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadTransposeMatrixdARB not available." );
 }
 
-void REGAL_CALL missing_glLoadTransposeMatrixfARB(const GLfloat *m)
+static void REGAL_CALL missing_glLoadTransposeMatrixfARB(const GLfloat *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadTransposeMatrixfARB not available." );
 }
 
-void REGAL_CALL missing_glMultTransposeMatrixdARB(const GLdouble *m)
+static void REGAL_CALL missing_glMultTransposeMatrixdARB(const GLdouble *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultTransposeMatrixdARB not available." );
 }
 
-void REGAL_CALL missing_glMultTransposeMatrixfARB(const GLfloat *m)
+static void REGAL_CALL missing_glMultTransposeMatrixfARB(const GLfloat *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultTransposeMatrixfARB not available." );
@@ -9086,7 +9086,7 @@ void REGAL_CALL missing_glMultTransposeMatrixfARB(const GLfloat *m)
 
 // GL_ARB_uniform_buffer_object
 
-void REGAL_CALL missing_glBindBufferBase(GLenum target, GLuint index, GLuint buffer)
+static void REGAL_CALL missing_glBindBufferBase(GLenum target, GLuint index, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9094,7 +9094,7 @@ void REGAL_CALL missing_glBindBufferBase(GLenum target, GLuint index, GLuint buf
   Warning( "glBindBufferBase not available." );
 }
 
-void REGAL_CALL missing_glBindBufferRange(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
+static void REGAL_CALL missing_glBindBufferRange(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9104,7 +9104,7 @@ void REGAL_CALL missing_glBindBufferRange(GLenum target, GLuint index, GLuint bu
   Warning( "glBindBufferRange not available." );
 }
 
-void REGAL_CALL missing_glGetActiveUniformBlockName(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName)
+static void REGAL_CALL missing_glGetActiveUniformBlockName(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformBlockName)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformBlockIndex);
@@ -9114,7 +9114,7 @@ void REGAL_CALL missing_glGetActiveUniformBlockName(GLuint program, GLuint unifo
   Warning( "glGetActiveUniformBlockName not available." );
 }
 
-void REGAL_CALL missing_glGetActiveUniformBlockiv(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetActiveUniformBlockiv(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformBlockIndex);
@@ -9123,7 +9123,7 @@ void REGAL_CALL missing_glGetActiveUniformBlockiv(GLuint program, GLuint uniform
   Warning( "glGetActiveUniformBlockiv not available." );
 }
 
-void REGAL_CALL missing_glGetActiveUniformName(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName)
+static void REGAL_CALL missing_glGetActiveUniformName(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformIndex);
@@ -9133,7 +9133,7 @@ void REGAL_CALL missing_glGetActiveUniformName(GLuint program, GLuint uniformInd
   Warning( "glGetActiveUniformName not available." );
 }
 
-void REGAL_CALL missing_glGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformCount);
@@ -9143,7 +9143,7 @@ void REGAL_CALL missing_glGetActiveUniformsiv(GLuint program, GLsizei uniformCou
   Warning( "glGetActiveUniformsiv not available." );
 }
 
-void REGAL_CALL missing_glGetIntegeri_v(GLenum target, GLuint index, GLint *data)
+static void REGAL_CALL missing_glGetIntegeri_v(GLenum target, GLuint index, GLint *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9151,7 +9151,7 @@ void REGAL_CALL missing_glGetIntegeri_v(GLenum target, GLuint index, GLint *data
   Warning( "glGetIntegeri_v not available." );
 }
 
-GLuint REGAL_CALL missing_glGetUniformBlockIndex(GLuint program, const GLchar *uniformBlockName)
+static GLuint REGAL_CALL missing_glGetUniformBlockIndex(GLuint program, const GLchar *uniformBlockName)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformBlockName);
@@ -9159,7 +9159,7 @@ GLuint REGAL_CALL missing_glGetUniformBlockIndex(GLuint program, const GLchar *u
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
+static void REGAL_CALL missing_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformCount);
@@ -9168,7 +9168,7 @@ void REGAL_CALL missing_glGetUniformIndices(GLuint program, GLsizei uniformCount
   Warning( "glGetUniformIndices not available." );
 }
 
-void REGAL_CALL missing_glUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding)
+static void REGAL_CALL missing_glUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformBlockIndex);
@@ -9178,27 +9178,27 @@ void REGAL_CALL missing_glUniformBlockBinding(GLuint program, GLuint uniformBloc
 
 // GL_ARB_vertex_array_object
 
-void REGAL_CALL missing_glBindVertexArray(GLuint array)
+static void REGAL_CALL missing_glBindVertexArray(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glBindVertexArray not available." );
 }
 
-void REGAL_CALL missing_glDeleteVertexArrays(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL missing_glDeleteVertexArrays(GLsizei n, const GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
   Warning( "glDeleteVertexArrays not available." );
 }
 
-void REGAL_CALL missing_glGenVertexArrays(GLsizei n, GLuint *arrays)
+static void REGAL_CALL missing_glGenVertexArrays(GLsizei n, GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
   Warning( "glGenVertexArrays not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsVertexArray(GLuint array)
+static GLboolean REGAL_CALL missing_glIsVertexArray(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glIsVertexArray not available." );
@@ -9207,7 +9207,7 @@ GLboolean REGAL_CALL missing_glIsVertexArray(GLuint array)
 
 // GL_ARB_vertex_attrib_64bit
 
-void REGAL_CALL missing_glGetVertexAttribLdv(GLuint index, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetVertexAttribLdv(GLuint index, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -9215,21 +9215,21 @@ void REGAL_CALL missing_glGetVertexAttribLdv(GLuint index, GLenum pname, GLdoubl
   Warning( "glGetVertexAttribLdv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1d(GLuint index, GLdouble x)
+static void REGAL_CALL missing_glVertexAttribL1d(GLuint index, GLdouble x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribL1d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL1dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL1dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2d(GLuint index, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertexAttribL2d(GLuint index, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9237,14 +9237,14 @@ void REGAL_CALL missing_glVertexAttribL2d(GLuint index, GLdouble x, GLdouble y)
   Warning( "glVertexAttribL2d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL2dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL2dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3d(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertexAttribL3d(GLuint index, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9253,14 +9253,14 @@ void REGAL_CALL missing_glVertexAttribL3d(GLuint index, GLdouble x, GLdouble y, 
   Warning( "glVertexAttribL3d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL3dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL3dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertexAttribL4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9270,14 +9270,14 @@ void REGAL_CALL missing_glVertexAttribL4d(GLuint index, GLdouble x, GLdouble y, 
   Warning( "glVertexAttribL4d not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4dv(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL4dv(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL4dv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -9289,7 +9289,7 @@ void REGAL_CALL missing_glVertexAttribLPointer(GLuint index, GLint size, GLenum 
 
 // GL_ARB_vertex_attrib_binding
 
-void REGAL_CALL missing_glBindVertexBuffer(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
+static void REGAL_CALL missing_glBindVertexBuffer(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
 {
   UNUSED_PARAMETER(bindingindex);
   UNUSED_PARAMETER(buffer);
@@ -9298,14 +9298,14 @@ void REGAL_CALL missing_glBindVertexBuffer(GLuint bindingindex, GLuint buffer, G
   Warning( "glBindVertexBuffer not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribBinding(GLuint attribindex, GLuint bindingindex)
+static void REGAL_CALL missing_glVertexAttribBinding(GLuint attribindex, GLuint bindingindex)
 {
   UNUSED_PARAMETER(attribindex);
   UNUSED_PARAMETER(bindingindex);
   Warning( "glVertexAttribBinding not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribFormat(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
+static void REGAL_CALL missing_glVertexAttribFormat(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
 {
   UNUSED_PARAMETER(attribindex);
   UNUSED_PARAMETER(size);
@@ -9315,7 +9315,7 @@ void REGAL_CALL missing_glVertexAttribFormat(GLuint attribindex, GLint size, GLe
   Warning( "glVertexAttribFormat not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+static void REGAL_CALL missing_glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
 {
   UNUSED_PARAMETER(attribindex);
   UNUSED_PARAMETER(size);
@@ -9324,7 +9324,7 @@ void REGAL_CALL missing_glVertexAttribIFormat(GLuint attribindex, GLint size, GL
   Warning( "glVertexAttribIFormat not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribLFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+static void REGAL_CALL missing_glVertexAttribLFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
 {
   UNUSED_PARAMETER(attribindex);
   UNUSED_PARAMETER(size);
@@ -9333,7 +9333,7 @@ void REGAL_CALL missing_glVertexAttribLFormat(GLuint attribindex, GLint size, GL
   Warning( "glVertexAttribLFormat not available." );
 }
 
-void REGAL_CALL missing_glVertexBindingDivisor(GLuint bindingindex, GLuint divisor)
+static void REGAL_CALL missing_glVertexBindingDivisor(GLuint bindingindex, GLuint divisor)
 {
   UNUSED_PARAMETER(bindingindex);
   UNUSED_PARAMETER(divisor);
@@ -9342,13 +9342,13 @@ void REGAL_CALL missing_glVertexBindingDivisor(GLuint bindingindex, GLuint divis
 
 // GL_ARB_vertex_blend
 
-void REGAL_CALL missing_glVertexBlendARB(GLint count)
+static void REGAL_CALL missing_glVertexBlendARB(GLint count)
 {
   UNUSED_PARAMETER(count);
   Warning( "glVertexBlendARB not available." );
 }
 
-void REGAL_CALL missing_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL missing_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -9357,56 +9357,56 @@ void REGAL_CALL missing_glWeightPointerARB(GLint size, GLenum type, GLsizei stri
   Warning( "glWeightPointerARB not available." );
 }
 
-void REGAL_CALL missing_glWeightbvARB(GLint size, GLbyte *weights)
+static void REGAL_CALL missing_glWeightbvARB(GLint size, GLbyte *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightbvARB not available." );
 }
 
-void REGAL_CALL missing_glWeightdvARB(GLint size, GLdouble *weights)
+static void REGAL_CALL missing_glWeightdvARB(GLint size, GLdouble *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightdvARB not available." );
 }
 
-void REGAL_CALL missing_glWeightfvARB(GLint size, GLfloat *weights)
+static void REGAL_CALL missing_glWeightfvARB(GLint size, GLfloat *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightfvARB not available." );
 }
 
-void REGAL_CALL missing_glWeightivARB(GLint size, GLint *weights)
+static void REGAL_CALL missing_glWeightivARB(GLint size, GLint *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightivARB not available." );
 }
 
-void REGAL_CALL missing_glWeightsvARB(GLint size, GLshort *weights)
+static void REGAL_CALL missing_glWeightsvARB(GLint size, GLshort *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightsvARB not available." );
 }
 
-void REGAL_CALL missing_glWeightubvARB(GLint size, GLubyte *weights)
+static void REGAL_CALL missing_glWeightubvARB(GLint size, GLubyte *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightubvARB not available." );
 }
 
-void REGAL_CALL missing_glWeightuivARB(GLint size, GLuint *weights)
+static void REGAL_CALL missing_glWeightuivARB(GLint size, GLuint *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightuivARB not available." );
 }
 
-void REGAL_CALL missing_glWeightusvARB(GLint size, GLushort *weights)
+static void REGAL_CALL missing_glWeightusvARB(GLint size, GLushort *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
@@ -9415,14 +9415,14 @@ void REGAL_CALL missing_glWeightusvARB(GLint size, GLushort *weights)
 
 // GL_ARB_vertex_buffer_object
 
-void REGAL_CALL missing_glBindBufferARB(GLenum target, GLuint buffer)
+static void REGAL_CALL missing_glBindBufferARB(GLenum target, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(buffer);
   Warning( "glBindBufferARB not available." );
 }
 
-void REGAL_CALL missing_glBufferDataARB(GLenum target, GLsizeiptrARB size, const GLvoid *data, GLenum usage)
+static void REGAL_CALL missing_glBufferDataARB(GLenum target, GLsizeiptrARB size, const GLvoid *data, GLenum usage)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(size);
@@ -9431,7 +9431,7 @@ void REGAL_CALL missing_glBufferDataARB(GLenum target, GLsizeiptrARB size, const
   Warning( "glBufferDataARB not available." );
 }
 
-void REGAL_CALL missing_glBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid *data)
+static void REGAL_CALL missing_glBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -9440,21 +9440,21 @@ void REGAL_CALL missing_glBufferSubDataARB(GLenum target, GLintptrARB offset, GL
   Warning( "glBufferSubDataARB not available." );
 }
 
-void REGAL_CALL missing_glDeleteBuffersARB(GLsizei n, const GLuint *buffers)
+static void REGAL_CALL missing_glDeleteBuffersARB(GLsizei n, const GLuint *buffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(buffers);
   Warning( "glDeleteBuffersARB not available." );
 }
 
-void REGAL_CALL missing_glGenBuffersARB(GLsizei n, GLuint *buffers)
+static void REGAL_CALL missing_glGenBuffersARB(GLsizei n, GLuint *buffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(buffers);
   Warning( "glGenBuffersARB not available." );
 }
 
-void REGAL_CALL missing_glGetBufferParameterivARB(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetBufferParameterivARB(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -9462,7 +9462,7 @@ void REGAL_CALL missing_glGetBufferParameterivARB(GLenum target, GLenum pname, G
   Warning( "glGetBufferParameterivARB not available." );
 }
 
-void REGAL_CALL missing_glGetBufferPointervARB(GLenum target, GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetBufferPointervARB(GLenum target, GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -9470,7 +9470,7 @@ void REGAL_CALL missing_glGetBufferPointervARB(GLenum target, GLenum pname, GLvo
   Warning( "glGetBufferPointervARB not available." );
 }
 
-void REGAL_CALL missing_glGetBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid *data)
+static void REGAL_CALL missing_glGetBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -9479,14 +9479,14 @@ void REGAL_CALL missing_glGetBufferSubDataARB(GLenum target, GLintptrARB offset,
   Warning( "glGetBufferSubDataARB not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsBufferARB(GLuint buffer)
+static GLboolean REGAL_CALL missing_glIsBufferARB(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsBufferARB not available." );
   return (GLboolean )0;
 }
 
-GLvoid *REGAL_CALL missing_glMapBufferARB(GLenum target, GLenum access)
+static GLvoid *REGAL_CALL missing_glMapBufferARB(GLenum target, GLenum access)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(access);
@@ -9494,7 +9494,7 @@ GLvoid *REGAL_CALL missing_glMapBufferARB(GLenum target, GLenum access)
   return NULL;
 }
 
-GLboolean REGAL_CALL missing_glUnmapBufferARB(GLenum target)
+static GLboolean REGAL_CALL missing_glUnmapBufferARB(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glUnmapBufferARB not available." );
@@ -9503,40 +9503,40 @@ GLboolean REGAL_CALL missing_glUnmapBufferARB(GLenum target)
 
 // GL_ARB_vertex_program
 
-void REGAL_CALL missing_glBindProgramARB(GLenum target, GLuint program)
+static void REGAL_CALL missing_glBindProgramARB(GLenum target, GLuint program)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(program);
   Warning( "glBindProgramARB not available." );
 }
 
-void REGAL_CALL missing_glDeleteProgramsARB(GLsizei n, const GLuint *programs)
+static void REGAL_CALL missing_glDeleteProgramsARB(GLsizei n, const GLuint *programs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(programs);
   Warning( "glDeleteProgramsARB not available." );
 }
 
-void REGAL_CALL missing_glDisableVertexAttribArrayARB(GLuint index)
+static void REGAL_CALL missing_glDisableVertexAttribArrayARB(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glDisableVertexAttribArrayARB not available." );
 }
 
-void REGAL_CALL missing_glEnableVertexAttribArrayARB(GLuint index)
+static void REGAL_CALL missing_glEnableVertexAttribArrayARB(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glEnableVertexAttribArrayARB not available." );
 }
 
-void REGAL_CALL missing_glGenProgramsARB(GLsizei n, GLuint *programs)
+static void REGAL_CALL missing_glGenProgramsARB(GLsizei n, GLuint *programs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(programs);
   Warning( "glGenProgramsARB not available." );
 }
 
-void REGAL_CALL missing_glGetProgramEnvParameterdvARB(GLenum target, GLuint index, GLdouble *params)
+static void REGAL_CALL missing_glGetProgramEnvParameterdvARB(GLenum target, GLuint index, GLdouble *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9544,7 +9544,7 @@ void REGAL_CALL missing_glGetProgramEnvParameterdvARB(GLenum target, GLuint inde
   Warning( "glGetProgramEnvParameterdvARB not available." );
 }
 
-void REGAL_CALL missing_glGetProgramEnvParameterfvARB(GLenum target, GLuint index, GLfloat *params)
+static void REGAL_CALL missing_glGetProgramEnvParameterfvARB(GLenum target, GLuint index, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9552,7 +9552,7 @@ void REGAL_CALL missing_glGetProgramEnvParameterfvARB(GLenum target, GLuint inde
   Warning( "glGetProgramEnvParameterfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetProgramLocalParameterdvARB(GLenum target, GLuint index, GLdouble *params)
+static void REGAL_CALL missing_glGetProgramLocalParameterdvARB(GLenum target, GLuint index, GLdouble *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9560,7 +9560,7 @@ void REGAL_CALL missing_glGetProgramLocalParameterdvARB(GLenum target, GLuint in
   Warning( "glGetProgramLocalParameterdvARB not available." );
 }
 
-void REGAL_CALL missing_glGetProgramLocalParameterfvARB(GLenum target, GLuint index, GLfloat *params)
+static void REGAL_CALL missing_glGetProgramLocalParameterfvARB(GLenum target, GLuint index, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9568,7 +9568,7 @@ void REGAL_CALL missing_glGetProgramLocalParameterfvARB(GLenum target, GLuint in
   Warning( "glGetProgramLocalParameterfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetProgramStringARB(GLenum target, GLenum pname, GLvoid *string)
+static void REGAL_CALL missing_glGetProgramStringARB(GLenum target, GLenum pname, GLvoid *string)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -9576,7 +9576,7 @@ void REGAL_CALL missing_glGetProgramStringARB(GLenum target, GLenum pname, GLvoi
   Warning( "glGetProgramStringARB not available." );
 }
 
-void REGAL_CALL missing_glGetProgramivARB(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetProgramivARB(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -9584,7 +9584,7 @@ void REGAL_CALL missing_glGetProgramivARB(GLenum target, GLenum pname, GLint *pa
   Warning( "glGetProgramivARB not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer)
+static void REGAL_CALL missing_glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid **pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -9592,7 +9592,7 @@ void REGAL_CALL missing_glGetVertexAttribPointervARB(GLuint index, GLenum pname,
   Warning( "glGetVertexAttribPointervARB not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -9600,7 +9600,7 @@ void REGAL_CALL missing_glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdou
   Warning( "glGetVertexAttribdvARB not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -9608,7 +9608,7 @@ void REGAL_CALL missing_glGetVertexAttribfvARB(GLuint index, GLenum pname, GLflo
   Warning( "glGetVertexAttribfvARB not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVertexAttribivARB(GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -9616,14 +9616,14 @@ void REGAL_CALL missing_glGetVertexAttribivARB(GLuint index, GLenum pname, GLint
   Warning( "glGetVertexAttribivARB not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsProgramARB(GLuint program)
+static GLboolean REGAL_CALL missing_glIsProgramARB(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glIsProgramARB not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9634,7 +9634,7 @@ void REGAL_CALL missing_glProgramEnvParameter4dARB(GLenum target, GLuint index, 
   Warning( "glProgramEnvParameter4dARB not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameter4dvARB(GLenum target, GLuint index, const GLdouble *params)
+static void REGAL_CALL missing_glProgramEnvParameter4dvARB(GLenum target, GLuint index, const GLdouble *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9642,7 +9642,7 @@ void REGAL_CALL missing_glProgramEnvParameter4dvARB(GLenum target, GLuint index,
   Warning( "glProgramEnvParameter4dvARB not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9653,7 +9653,7 @@ void REGAL_CALL missing_glProgramEnvParameter4fARB(GLenum target, GLuint index, 
   Warning( "glProgramEnvParameter4fARB not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameter4fvARB(GLenum target, GLuint index, const GLfloat *params)
+static void REGAL_CALL missing_glProgramEnvParameter4fvARB(GLenum target, GLuint index, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9661,7 +9661,7 @@ void REGAL_CALL missing_glProgramEnvParameter4fvARB(GLenum target, GLuint index,
   Warning( "glProgramEnvParameter4fvARB not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glProgramLocalParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9672,7 +9672,7 @@ void REGAL_CALL missing_glProgramLocalParameter4dARB(GLenum target, GLuint index
   Warning( "glProgramLocalParameter4dARB not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameter4dvARB(GLenum target, GLuint index, const GLdouble *params)
+static void REGAL_CALL missing_glProgramLocalParameter4dvARB(GLenum target, GLuint index, const GLdouble *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9680,7 +9680,7 @@ void REGAL_CALL missing_glProgramLocalParameter4dvARB(GLenum target, GLuint inde
   Warning( "glProgramLocalParameter4dvARB not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glProgramLocalParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9691,7 +9691,7 @@ void REGAL_CALL missing_glProgramLocalParameter4fARB(GLenum target, GLuint index
   Warning( "glProgramLocalParameter4fARB not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameter4fvARB(GLenum target, GLuint index, const GLfloat *params)
+static void REGAL_CALL missing_glProgramLocalParameter4fvARB(GLenum target, GLuint index, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -9699,7 +9699,7 @@ void REGAL_CALL missing_glProgramLocalParameter4fvARB(GLenum target, GLuint inde
   Warning( "glProgramLocalParameter4fvARB not available." );
 }
 
-void REGAL_CALL missing_glProgramStringARB(GLenum target, GLenum format, GLsizei len, const GLvoid *string)
+static void REGAL_CALL missing_glProgramStringARB(GLenum target, GLenum format, GLsizei len, const GLvoid *string)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -9708,49 +9708,49 @@ void REGAL_CALL missing_glProgramStringARB(GLenum target, GLenum format, GLsizei
   Warning( "glProgramStringARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1dARB(GLuint index, GLdouble x)
+static void REGAL_CALL missing_glVertexAttrib1dARB(GLuint index, GLdouble x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1dARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1dvARB(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib1dvARB(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1dvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1fARB(GLuint index, GLfloat x)
+static void REGAL_CALL missing_glVertexAttrib1fARB(GLuint index, GLfloat x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1fARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1fvARB(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib1fvARB(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1fvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1sARB(GLuint index, GLshort x)
+static void REGAL_CALL missing_glVertexAttrib1sARB(GLuint index, GLshort x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1sARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1svARB(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib1svARB(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1svARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9758,14 +9758,14 @@ void REGAL_CALL missing_glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y
   Warning( "glVertexAttrib2dARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2dvARB(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib2dvARB(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2dvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9773,14 +9773,14 @@ void REGAL_CALL missing_glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y)
   Warning( "glVertexAttrib2fARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2fvARB(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib2fvARB(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2fvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y)
+static void REGAL_CALL missing_glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9788,14 +9788,14 @@ void REGAL_CALL missing_glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y)
   Warning( "glVertexAttrib2sARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2svARB(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib2svARB(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2svARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9804,14 +9804,14 @@ void REGAL_CALL missing_glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y
   Warning( "glVertexAttrib3dARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3dvARB(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib3dvARB(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3dvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9820,14 +9820,14 @@ void REGAL_CALL missing_glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, 
   Warning( "glVertexAttrib3fARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3fvARB(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib3fvARB(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3fvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9836,35 +9836,35 @@ void REGAL_CALL missing_glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, 
   Warning( "glVertexAttrib3sARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3svARB(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib3svARB(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3svARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NbvARB(GLuint index, const GLbyte *v)
+static void REGAL_CALL missing_glVertexAttrib4NbvARB(GLuint index, const GLbyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4NbvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NivARB(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttrib4NivARB(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4NivARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NsvARB(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib4NsvARB(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4NsvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
+static void REGAL_CALL missing_glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9874,35 +9874,35 @@ void REGAL_CALL missing_glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y
   Warning( "glVertexAttrib4NubARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NubvARB(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttrib4NubvARB(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4NubvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NuivARB(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttrib4NuivARB(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4NuivARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4NusvARB(GLuint index, const GLushort *v)
+static void REGAL_CALL missing_glVertexAttrib4NusvARB(GLuint index, const GLushort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4NusvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4bvARB(GLuint index, const GLbyte *v)
+static void REGAL_CALL missing_glVertexAttrib4bvARB(GLuint index, const GLbyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4bvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9912,14 +9912,14 @@ void REGAL_CALL missing_glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y
   Warning( "glVertexAttrib4dARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4dvARB(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib4dvARB(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4dvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9929,21 +9929,21 @@ void REGAL_CALL missing_glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, 
   Warning( "glVertexAttrib4fARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4fvARB(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib4fvARB(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4fvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4ivARB(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttrib4ivARB(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4ivARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -9953,35 +9953,35 @@ void REGAL_CALL missing_glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, 
   Warning( "glVertexAttrib4sARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4svARB(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib4svARB(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4svARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4ubvARB(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttrib4ubvARB(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4ubvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4uivARB(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttrib4uivARB(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4uivARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4usvARB(GLuint index, const GLushort *v)
+static void REGAL_CALL missing_glVertexAttrib4usvARB(GLuint index, const GLushort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4usvARB not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -9994,7 +9994,7 @@ void REGAL_CALL missing_glVertexAttribPointerARB(GLuint index, GLint size, GLenu
 
 // GL_ARB_vertex_shader
 
-void REGAL_CALL missing_glBindAttribLocationARB(GLhandleARB programObj, GLuint index, const GLcharARB *name)
+static void REGAL_CALL missing_glBindAttribLocationARB(GLhandleARB programObj, GLuint index, const GLcharARB *name)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(index);
@@ -10002,7 +10002,7 @@ void REGAL_CALL missing_glBindAttribLocationARB(GLhandleARB programObj, GLuint i
   Warning( "glBindAttribLocationARB not available." );
 }
 
-void REGAL_CALL missing_glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name)
+static void REGAL_CALL missing_glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei *length, GLint *size, GLenum *type, GLcharARB *name)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(index);
@@ -10014,7 +10014,7 @@ void REGAL_CALL missing_glGetActiveAttribARB(GLhandleARB programObj, GLuint inde
   Warning( "glGetActiveAttribARB not available." );
 }
 
-GLint REGAL_CALL missing_glGetAttribLocationARB(GLhandleARB programObj, const GLcharARB *name)
+static GLint REGAL_CALL missing_glGetAttribLocationARB(GLhandleARB programObj, const GLcharARB *name)
 {
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(name);
@@ -10024,35 +10024,35 @@ GLint REGAL_CALL missing_glGetAttribLocationARB(GLhandleARB programObj, const GL
 
 // GL_ARB_vertex_type_2_10_10_10_rev
 
-void REGAL_CALL missing_glColorP3ui(GLenum type, GLuint color)
+static void REGAL_CALL missing_glColorP3ui(GLenum type, GLuint color)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(color);
   Warning( "glColorP3ui not available." );
 }
 
-void REGAL_CALL missing_glColorP3uiv(GLenum type, const GLuint *color)
+static void REGAL_CALL missing_glColorP3uiv(GLenum type, const GLuint *color)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(color);
   Warning( "glColorP3uiv not available." );
 }
 
-void REGAL_CALL missing_glColorP4ui(GLenum type, GLuint color)
+static void REGAL_CALL missing_glColorP4ui(GLenum type, GLuint color)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(color);
   Warning( "glColorP4ui not available." );
 }
 
-void REGAL_CALL missing_glColorP4uiv(GLenum type, const GLuint *color)
+static void REGAL_CALL missing_glColorP4uiv(GLenum type, const GLuint *color)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(color);
   Warning( "glColorP4uiv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP1ui(GLenum texture, GLenum type, GLuint coords)
+static void REGAL_CALL missing_glMultiTexCoordP1ui(GLenum texture, GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10060,7 +10060,7 @@ void REGAL_CALL missing_glMultiTexCoordP1ui(GLenum texture, GLenum type, GLuint 
   Warning( "glMultiTexCoordP1ui not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP1uiv(GLenum texture, GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glMultiTexCoordP1uiv(GLenum texture, GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10068,7 +10068,7 @@ void REGAL_CALL missing_glMultiTexCoordP1uiv(GLenum texture, GLenum type, const 
   Warning( "glMultiTexCoordP1uiv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP2ui(GLenum texture, GLenum type, GLuint coords)
+static void REGAL_CALL missing_glMultiTexCoordP2ui(GLenum texture, GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10076,7 +10076,7 @@ void REGAL_CALL missing_glMultiTexCoordP2ui(GLenum texture, GLenum type, GLuint 
   Warning( "glMultiTexCoordP2ui not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP2uiv(GLenum texture, GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glMultiTexCoordP2uiv(GLenum texture, GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10084,7 +10084,7 @@ void REGAL_CALL missing_glMultiTexCoordP2uiv(GLenum texture, GLenum type, const 
   Warning( "glMultiTexCoordP2uiv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP3ui(GLenum texture, GLenum type, GLuint coords)
+static void REGAL_CALL missing_glMultiTexCoordP3ui(GLenum texture, GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10092,7 +10092,7 @@ void REGAL_CALL missing_glMultiTexCoordP3ui(GLenum texture, GLenum type, GLuint 
   Warning( "glMultiTexCoordP3ui not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP3uiv(GLenum texture, GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glMultiTexCoordP3uiv(GLenum texture, GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10100,7 +10100,7 @@ void REGAL_CALL missing_glMultiTexCoordP3uiv(GLenum texture, GLenum type, const 
   Warning( "glMultiTexCoordP3uiv not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP4ui(GLenum texture, GLenum type, GLuint coords)
+static void REGAL_CALL missing_glMultiTexCoordP4ui(GLenum texture, GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10108,7 +10108,7 @@ void REGAL_CALL missing_glMultiTexCoordP4ui(GLenum texture, GLenum type, GLuint 
   Warning( "glMultiTexCoordP4ui not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordP4uiv(GLenum texture, GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glMultiTexCoordP4uiv(GLenum texture, GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(type);
@@ -10116,91 +10116,91 @@ void REGAL_CALL missing_glMultiTexCoordP4uiv(GLenum texture, GLenum type, const 
   Warning( "glMultiTexCoordP4uiv not available." );
 }
 
-void REGAL_CALL missing_glNormalP3ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glNormalP3ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalP3ui not available." );
 }
 
-void REGAL_CALL missing_glNormalP3uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glNormalP3uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalP3uiv not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColorP3ui(GLenum type, GLuint color)
+static void REGAL_CALL missing_glSecondaryColorP3ui(GLenum type, GLuint color)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(color);
   Warning( "glSecondaryColorP3ui not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColorP3uiv(GLenum type, const GLuint *color)
+static void REGAL_CALL missing_glSecondaryColorP3uiv(GLenum type, const GLuint *color)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(color);
   Warning( "glSecondaryColorP3uiv not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP1ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glTexCoordP1ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP1ui not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP1uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glTexCoordP1uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP1uiv not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP2ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glTexCoordP2ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP2ui not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP2uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glTexCoordP2uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP2uiv not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP3ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glTexCoordP3ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP3ui not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP3uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glTexCoordP3uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP3uiv not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP4ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glTexCoordP4ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP4ui not available." );
 }
 
-void REGAL_CALL missing_glTexCoordP4uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glTexCoordP4uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glTexCoordP4uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP1ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
+static void REGAL_CALL missing_glVertexAttribP1ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10209,7 +10209,7 @@ void REGAL_CALL missing_glVertexAttribP1ui(GLuint index, GLenum type, GLboolean 
   Warning( "glVertexAttribP1ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP1uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
+static void REGAL_CALL missing_glVertexAttribP1uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10218,7 +10218,7 @@ void REGAL_CALL missing_glVertexAttribP1uiv(GLuint index, GLenum type, GLboolean
   Warning( "glVertexAttribP1uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP2ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
+static void REGAL_CALL missing_glVertexAttribP2ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10227,7 +10227,7 @@ void REGAL_CALL missing_glVertexAttribP2ui(GLuint index, GLenum type, GLboolean 
   Warning( "glVertexAttribP2ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP2uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
+static void REGAL_CALL missing_glVertexAttribP2uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10236,7 +10236,7 @@ void REGAL_CALL missing_glVertexAttribP2uiv(GLuint index, GLenum type, GLboolean
   Warning( "glVertexAttribP2uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP3ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
+static void REGAL_CALL missing_glVertexAttribP3ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10245,7 +10245,7 @@ void REGAL_CALL missing_glVertexAttribP3ui(GLuint index, GLenum type, GLboolean 
   Warning( "glVertexAttribP3ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP3uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
+static void REGAL_CALL missing_glVertexAttribP3uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10254,7 +10254,7 @@ void REGAL_CALL missing_glVertexAttribP3uiv(GLuint index, GLenum type, GLboolean
   Warning( "glVertexAttribP3uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP4ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
+static void REGAL_CALL missing_glVertexAttribP4ui(GLuint index, GLenum type, GLboolean normalized, GLuint value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10263,7 +10263,7 @@ void REGAL_CALL missing_glVertexAttribP4ui(GLuint index, GLenum type, GLboolean 
   Warning( "glVertexAttribP4ui not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribP4uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
+static void REGAL_CALL missing_glVertexAttribP4uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint *value)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(type);
@@ -10272,42 +10272,42 @@ void REGAL_CALL missing_glVertexAttribP4uiv(GLuint index, GLenum type, GLboolean
   Warning( "glVertexAttribP4uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexP2ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glVertexP2ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexP2ui not available." );
 }
 
-void REGAL_CALL missing_glVertexP2uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glVertexP2uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexP2uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexP3ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glVertexP3ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexP3ui not available." );
 }
 
-void REGAL_CALL missing_glVertexP3uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glVertexP3uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexP3uiv not available." );
 }
 
-void REGAL_CALL missing_glVertexP4ui(GLenum type, GLuint coords)
+static void REGAL_CALL missing_glVertexP4ui(GLenum type, GLuint coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexP4ui not available." );
 }
 
-void REGAL_CALL missing_glVertexP4uiv(GLenum type, const GLuint *coords)
+static void REGAL_CALL missing_glVertexP4uiv(GLenum type, const GLuint *coords)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(coords);
@@ -10316,7 +10316,7 @@ void REGAL_CALL missing_glVertexP4uiv(GLenum type, const GLuint *coords)
 
 // GL_ARB_viewport_array
 
-void REGAL_CALL missing_glDepthRangeArrayv(GLuint first, GLsizei count, const GLclampd *v)
+static void REGAL_CALL missing_glDepthRangeArrayv(GLuint first, GLsizei count, const GLclampd *v)
 {
   UNUSED_PARAMETER(first);
   UNUSED_PARAMETER(count);
@@ -10324,7 +10324,7 @@ void REGAL_CALL missing_glDepthRangeArrayv(GLuint first, GLsizei count, const GL
   Warning( "glDepthRangeArrayv not available." );
 }
 
-void REGAL_CALL missing_glDepthRangeIndexed(GLuint index, GLclampd n, GLclampd f)
+static void REGAL_CALL missing_glDepthRangeIndexed(GLuint index, GLclampd n, GLclampd f)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -10332,7 +10332,7 @@ void REGAL_CALL missing_glDepthRangeIndexed(GLuint index, GLclampd n, GLclampd f
   Warning( "glDepthRangeIndexed not available." );
 }
 
-void REGAL_CALL missing_glGetDoublei_v(GLenum target, GLuint index, GLdouble *v)
+static void REGAL_CALL missing_glGetDoublei_v(GLenum target, GLuint index, GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -10340,7 +10340,7 @@ void REGAL_CALL missing_glGetDoublei_v(GLenum target, GLuint index, GLdouble *v)
   Warning( "glGetDoublei_v not available." );
 }
 
-void REGAL_CALL missing_glGetFloati_v(GLenum target, GLuint index, GLfloat *v)
+static void REGAL_CALL missing_glGetFloati_v(GLenum target, GLuint index, GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -10348,7 +10348,7 @@ void REGAL_CALL missing_glGetFloati_v(GLenum target, GLuint index, GLfloat *v)
   Warning( "glGetFloati_v not available." );
 }
 
-void REGAL_CALL missing_glScissorArrayv(GLuint first, GLsizei count, const GLint *v)
+static void REGAL_CALL missing_glScissorArrayv(GLuint first, GLsizei count, const GLint *v)
 {
   UNUSED_PARAMETER(first);
   UNUSED_PARAMETER(count);
@@ -10356,7 +10356,7 @@ void REGAL_CALL missing_glScissorArrayv(GLuint first, GLsizei count, const GLint
   Warning( "glScissorArrayv not available." );
 }
 
-void REGAL_CALL missing_glScissorIndexed(GLuint index, GLint left, GLint bottom, GLint width, GLint height)
+static void REGAL_CALL missing_glScissorIndexed(GLuint index, GLint left, GLint bottom, GLint width, GLint height)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(left);
@@ -10366,14 +10366,14 @@ void REGAL_CALL missing_glScissorIndexed(GLuint index, GLint left, GLint bottom,
   Warning( "glScissorIndexed not available." );
 }
 
-void REGAL_CALL missing_glScissorIndexedv(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glScissorIndexedv(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glScissorIndexedv not available." );
 }
 
-void REGAL_CALL missing_glViewportArrayv(GLuint first, GLsizei count, const GLfloat *v)
+static void REGAL_CALL missing_glViewportArrayv(GLuint first, GLsizei count, const GLfloat *v)
 {
   UNUSED_PARAMETER(first);
   UNUSED_PARAMETER(count);
@@ -10381,7 +10381,7 @@ void REGAL_CALL missing_glViewportArrayv(GLuint first, GLsizei count, const GLfl
   Warning( "glViewportArrayv not available." );
 }
 
-void REGAL_CALL missing_glViewportIndexedf(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h)
+static void REGAL_CALL missing_glViewportIndexedf(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -10391,7 +10391,7 @@ void REGAL_CALL missing_glViewportIndexedf(GLuint index, GLfloat x, GLfloat y, G
   Warning( "glViewportIndexedf not available." );
 }
 
-void REGAL_CALL missing_glViewportIndexedfv(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glViewportIndexedfv(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
@@ -10400,59 +10400,59 @@ void REGAL_CALL missing_glViewportIndexedfv(GLuint index, const GLfloat *v)
 
 // GL_ARB_window_pos
 
-void REGAL_CALL missing_glWindowPos2dARB(GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glWindowPos2dARB(GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2dARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2dvARB(const GLdouble *p)
+static void REGAL_CALL missing_glWindowPos2dvARB(const GLdouble *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2dvARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2fARB(GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glWindowPos2fARB(GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2fARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2fvARB(const GLfloat *p)
+static void REGAL_CALL missing_glWindowPos2fvARB(const GLfloat *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2fvARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2iARB(GLint x, GLint y)
+static void REGAL_CALL missing_glWindowPos2iARB(GLint x, GLint y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2iARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2ivARB(const GLint *p)
+static void REGAL_CALL missing_glWindowPos2ivARB(const GLint *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2ivARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2sARB(GLshort x, GLshort y)
+static void REGAL_CALL missing_glWindowPos2sARB(GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2sARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2svARB(const GLshort *p)
+static void REGAL_CALL missing_glWindowPos2svARB(const GLshort *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos2svARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3dARB(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glWindowPos3dARB(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -10460,13 +10460,13 @@ void REGAL_CALL missing_glWindowPos3dARB(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glWindowPos3dARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3dvARB(const GLdouble *p)
+static void REGAL_CALL missing_glWindowPos3dvARB(const GLdouble *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3dvARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3fARB(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glWindowPos3fARB(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -10474,13 +10474,13 @@ void REGAL_CALL missing_glWindowPos3fARB(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glWindowPos3fARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3fvARB(const GLfloat *p)
+static void REGAL_CALL missing_glWindowPos3fvARB(const GLfloat *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3fvARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3iARB(GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glWindowPos3iARB(GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -10488,13 +10488,13 @@ void REGAL_CALL missing_glWindowPos3iARB(GLint x, GLint y, GLint z)
   Warning( "glWindowPos3iARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3ivARB(const GLint *p)
+static void REGAL_CALL missing_glWindowPos3ivARB(const GLint *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3ivARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3sARB(GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glWindowPos3sARB(GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -10502,7 +10502,7 @@ void REGAL_CALL missing_glWindowPos3sARB(GLshort x, GLshort y, GLshort z)
   Warning( "glWindowPos3sARB not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3svARB(const GLshort *p)
+static void REGAL_CALL missing_glWindowPos3svARB(const GLshort *p)
 {
   UNUSED_PARAMETER(p);
   Warning( "glWindowPos3svARB not available." );
@@ -10510,7 +10510,7 @@ void REGAL_CALL missing_glWindowPos3svARB(const GLshort *p)
 
 // GL_ATI_draw_buffers
 
-void REGAL_CALL missing_glDrawBuffersATI(GLsizei n, const GLenum *bufs)
+static void REGAL_CALL missing_glDrawBuffersATI(GLsizei n, const GLenum *bufs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(bufs);
@@ -10519,14 +10519,14 @@ void REGAL_CALL missing_glDrawBuffersATI(GLsizei n, const GLenum *bufs)
 
 // GL_ATI_element_array
 
-void REGAL_CALL missing_glDrawElementArrayATI(GLenum mode, GLsizei count)
+static void REGAL_CALL missing_glDrawElementArrayATI(GLenum mode, GLsizei count)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
   Warning( "glDrawElementArrayATI not available." );
 }
 
-void REGAL_CALL missing_glDrawRangeElementArrayATI(GLenum mode, GLuint start, GLuint end, GLsizei count)
+static void REGAL_CALL missing_glDrawRangeElementArrayATI(GLenum mode, GLuint start, GLuint end, GLsizei count)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -10535,7 +10535,7 @@ void REGAL_CALL missing_glDrawRangeElementArrayATI(GLenum mode, GLuint start, GL
   Warning( "glDrawRangeElementArrayATI not available." );
 }
 
-void REGAL_CALL missing_glElementPointerATI(GLenum type, const GLvoid *pointer)
+static void REGAL_CALL missing_glElementPointerATI(GLenum type, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(pointer);
@@ -10544,28 +10544,28 @@ void REGAL_CALL missing_glElementPointerATI(GLenum type, const GLvoid *pointer)
 
 // GL_ATI_envmap_bumpmap
 
-void REGAL_CALL missing_glGetTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+static void REGAL_CALL missing_glGetTexBumpParameterfvATI(GLenum pname, GLfloat *param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glGetTexBumpParameterfvATI not available." );
 }
 
-void REGAL_CALL missing_glGetTexBumpParameterivATI(GLenum pname, GLint *param)
+static void REGAL_CALL missing_glGetTexBumpParameterivATI(GLenum pname, GLint *param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glGetTexBumpParameterivATI not available." );
 }
 
-void REGAL_CALL missing_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+static void REGAL_CALL missing_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glTexBumpParameterfvATI not available." );
 }
 
-void REGAL_CALL missing_glTexBumpParameterivATI(GLenum pname, GLint *param)
+static void REGAL_CALL missing_glTexBumpParameterivATI(GLenum pname, GLint *param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
@@ -10574,7 +10574,7 @@ void REGAL_CALL missing_glTexBumpParameterivATI(GLenum pname, GLint *param)
 
 // GL_ATI_fragment_shader
 
-void REGAL_CALL missing_glAlphaFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod)
+static void REGAL_CALL missing_glAlphaFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(dst);
@@ -10585,7 +10585,7 @@ void REGAL_CALL missing_glAlphaFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstM
   Warning( "glAlphaFragmentOp1ATI not available." );
 }
 
-void REGAL_CALL missing_glAlphaFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod)
+static void REGAL_CALL missing_glAlphaFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(dst);
@@ -10599,7 +10599,7 @@ void REGAL_CALL missing_glAlphaFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstM
   Warning( "glAlphaFragmentOp2ATI not available." );
 }
 
-void REGAL_CALL missing_glAlphaFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod)
+static void REGAL_CALL missing_glAlphaFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(dst);
@@ -10616,18 +10616,18 @@ void REGAL_CALL missing_glAlphaFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstM
   Warning( "glAlphaFragmentOp3ATI not available." );
 }
 
-void REGAL_CALL missing_glBeginFragmentShaderATI(void)
+static void REGAL_CALL missing_glBeginFragmentShaderATI(void)
 {
   Warning( "glBeginFragmentShaderATI not available." );
 }
 
-void REGAL_CALL missing_glBindFragmentShaderATI(GLuint id)
+static void REGAL_CALL missing_glBindFragmentShaderATI(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glBindFragmentShaderATI not available." );
 }
 
-void REGAL_CALL missing_glColorFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod)
+static void REGAL_CALL missing_glColorFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(dst);
@@ -10639,7 +10639,7 @@ void REGAL_CALL missing_glColorFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstM
   Warning( "glColorFragmentOp1ATI not available." );
 }
 
-void REGAL_CALL missing_glColorFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod)
+static void REGAL_CALL missing_glColorFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(dst);
@@ -10654,7 +10654,7 @@ void REGAL_CALL missing_glColorFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstM
   Warning( "glColorFragmentOp2ATI not available." );
 }
 
-void REGAL_CALL missing_glColorFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod)
+static void REGAL_CALL missing_glColorFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(dst);
@@ -10672,25 +10672,25 @@ void REGAL_CALL missing_glColorFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstM
   Warning( "glColorFragmentOp3ATI not available." );
 }
 
-void REGAL_CALL missing_glDeleteFragmentShaderATI(GLuint id)
+static void REGAL_CALL missing_glDeleteFragmentShaderATI(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glDeleteFragmentShaderATI not available." );
 }
 
-void REGAL_CALL missing_glEndFragmentShaderATI(void)
+static void REGAL_CALL missing_glEndFragmentShaderATI(void)
 {
   Warning( "glEndFragmentShaderATI not available." );
 }
 
-GLuint REGAL_CALL missing_glGenFragmentShadersATI(GLuint range)
+static GLuint REGAL_CALL missing_glGenFragmentShadersATI(GLuint range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenFragmentShadersATI not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glPassTexCoordATI(GLuint dst, GLuint coord, GLenum swizzle)
+static void REGAL_CALL missing_glPassTexCoordATI(GLuint dst, GLuint coord, GLenum swizzle)
 {
   UNUSED_PARAMETER(dst);
   UNUSED_PARAMETER(coord);
@@ -10698,7 +10698,7 @@ void REGAL_CALL missing_glPassTexCoordATI(GLuint dst, GLuint coord, GLenum swizz
   Warning( "glPassTexCoordATI not available." );
 }
 
-void REGAL_CALL missing_glSampleMapATI(GLuint dst, GLuint interp, GLenum swizzle)
+static void REGAL_CALL missing_glSampleMapATI(GLuint dst, GLuint interp, GLenum swizzle)
 {
   UNUSED_PARAMETER(dst);
   UNUSED_PARAMETER(interp);
@@ -10706,7 +10706,7 @@ void REGAL_CALL missing_glSampleMapATI(GLuint dst, GLuint interp, GLenum swizzle
   Warning( "glSampleMapATI not available." );
 }
 
-void REGAL_CALL missing_glSetFragmentShaderConstantATI(GLuint dst, const GLfloat *value)
+static void REGAL_CALL missing_glSetFragmentShaderConstantATI(GLuint dst, const GLfloat *value)
 {
   UNUSED_PARAMETER(dst);
   UNUSED_PARAMETER(value);
@@ -10715,14 +10715,14 @@ void REGAL_CALL missing_glSetFragmentShaderConstantATI(GLuint dst, const GLfloat
 
 // GL_ATI_map_object_buffer
 
-GLvoid *REGAL_CALL missing_glMapObjectBufferATI(GLuint buffer)
+static GLvoid *REGAL_CALL missing_glMapObjectBufferATI(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glMapObjectBufferATI not available." );
   return NULL;
 }
 
-void REGAL_CALL missing_glUnmapObjectBufferATI(GLuint buffer)
+static void REGAL_CALL missing_glUnmapObjectBufferATI(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glUnmapObjectBufferATI not available." );
@@ -10730,14 +10730,14 @@ void REGAL_CALL missing_glUnmapObjectBufferATI(GLuint buffer)
 
 // GL_ATI_pn_triangles
 
-void REGAL_CALL missing_glPNTrianglesfATI(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPNTrianglesfATI(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPNTrianglesfATI not available." );
 }
 
-void REGAL_CALL missing_glPNTrianglesiATI(GLenum pname, GLint param)
+static void REGAL_CALL missing_glPNTrianglesiATI(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
@@ -10746,7 +10746,7 @@ void REGAL_CALL missing_glPNTrianglesiATI(GLenum pname, GLint param)
 
 // GL_ATI_separate_stencil
 
-void REGAL_CALL missing_glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask)
+static void REGAL_CALL missing_glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask)
 {
   UNUSED_PARAMETER(frontfunc);
   UNUSED_PARAMETER(backfunc);
@@ -10755,7 +10755,7 @@ void REGAL_CALL missing_glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfu
   Warning( "glStencilFuncSeparateATI not available." );
 }
 
-void REGAL_CALL missing_glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
+static void REGAL_CALL missing_glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(sfail);
@@ -10766,7 +10766,7 @@ void REGAL_CALL missing_glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum
 
 // GL_ATI_vertex_array_object
 
-void REGAL_CALL missing_glArrayObjectATI(GLenum array, GLint size, GLenum type, GLsizei stride, GLuint buffer, GLuint offset)
+static void REGAL_CALL missing_glArrayObjectATI(GLenum array, GLint size, GLenum type, GLsizei stride, GLuint buffer, GLuint offset)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(size);
@@ -10777,13 +10777,13 @@ void REGAL_CALL missing_glArrayObjectATI(GLenum array, GLint size, GLenum type, 
   Warning( "glArrayObjectATI not available." );
 }
 
-void REGAL_CALL missing_glFreeObjectBufferATI(GLuint buffer)
+static void REGAL_CALL missing_glFreeObjectBufferATI(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glFreeObjectBufferATI not available." );
 }
 
-void REGAL_CALL missing_glGetArrayObjectfvATI(GLenum array, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetArrayObjectfvATI(GLenum array, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(pname);
@@ -10791,7 +10791,7 @@ void REGAL_CALL missing_glGetArrayObjectfvATI(GLenum array, GLenum pname, GLfloa
   Warning( "glGetArrayObjectfvATI not available." );
 }
 
-void REGAL_CALL missing_glGetArrayObjectivATI(GLenum array, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetArrayObjectivATI(GLenum array, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(pname);
@@ -10799,7 +10799,7 @@ void REGAL_CALL missing_glGetArrayObjectivATI(GLenum array, GLenum pname, GLint 
   Warning( "glGetArrayObjectivATI not available." );
 }
 
-void REGAL_CALL missing_glGetObjectBufferfvATI(GLuint buffer, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetObjectBufferfvATI(GLuint buffer, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(pname);
@@ -10807,7 +10807,7 @@ void REGAL_CALL missing_glGetObjectBufferfvATI(GLuint buffer, GLenum pname, GLfl
   Warning( "glGetObjectBufferfvATI not available." );
 }
 
-void REGAL_CALL missing_glGetObjectBufferivATI(GLuint buffer, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetObjectBufferivATI(GLuint buffer, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(pname);
@@ -10815,7 +10815,7 @@ void REGAL_CALL missing_glGetObjectBufferivATI(GLuint buffer, GLenum pname, GLin
   Warning( "glGetObjectBufferivATI not available." );
 }
 
-void REGAL_CALL missing_glGetVariantArrayObjectfvATI(GLuint id, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetVariantArrayObjectfvATI(GLuint id, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -10823,7 +10823,7 @@ void REGAL_CALL missing_glGetVariantArrayObjectfvATI(GLuint id, GLenum pname, GL
   Warning( "glGetVariantArrayObjectfvATI not available." );
 }
 
-void REGAL_CALL missing_glGetVariantArrayObjectivATI(GLuint id, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVariantArrayObjectivATI(GLuint id, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -10831,14 +10831,14 @@ void REGAL_CALL missing_glGetVariantArrayObjectivATI(GLuint id, GLenum pname, GL
   Warning( "glGetVariantArrayObjectivATI not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsObjectBufferATI(GLuint buffer)
+static GLboolean REGAL_CALL missing_glIsObjectBufferATI(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsObjectBufferATI not available." );
   return (GLboolean )0;
 }
 
-GLuint REGAL_CALL missing_glNewObjectBufferATI(GLsizei size, const GLvoid *pointer, GLenum usage)
+static GLuint REGAL_CALL missing_glNewObjectBufferATI(GLsizei size, const GLvoid *pointer, GLenum usage)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(pointer);
@@ -10847,7 +10847,7 @@ GLuint REGAL_CALL missing_glNewObjectBufferATI(GLsizei size, const GLvoid *point
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glUpdateObjectBufferATI(GLuint buffer, GLuint offset, GLsizei size, const GLvoid *pointer, GLenum preserve)
+static void REGAL_CALL missing_glUpdateObjectBufferATI(GLuint buffer, GLuint offset, GLsizei size, const GLvoid *pointer, GLenum preserve)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(offset);
@@ -10857,7 +10857,7 @@ void REGAL_CALL missing_glUpdateObjectBufferATI(GLuint buffer, GLuint offset, GL
   Warning( "glUpdateObjectBufferATI not available." );
 }
 
-void REGAL_CALL missing_glVariantArrayObjectATI(GLuint id, GLenum type, GLsizei stride, GLuint buffer, GLuint offset)
+static void REGAL_CALL missing_glVariantArrayObjectATI(GLuint id, GLenum type, GLsizei stride, GLuint buffer, GLuint offset)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(type);
@@ -10869,7 +10869,7 @@ void REGAL_CALL missing_glVariantArrayObjectATI(GLuint id, GLenum type, GLsizei 
 
 // GL_ATI_vertex_attrib_array_object
 
-void REGAL_CALL missing_glGetVertexAttribArrayObjectfvATI(GLuint index, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetVertexAttribArrayObjectfvATI(GLuint index, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -10877,7 +10877,7 @@ void REGAL_CALL missing_glGetVertexAttribArrayObjectfvATI(GLuint index, GLenum p
   Warning( "glGetVertexAttribArrayObjectfvATI not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribArrayObjectivATI(GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVertexAttribArrayObjectivATI(GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -10885,7 +10885,7 @@ void REGAL_CALL missing_glGetVertexAttribArrayObjectivATI(GLuint index, GLenum p
   Warning( "glGetVertexAttribArrayObjectivATI not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribArrayObjectATI(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLuint buffer, GLuint offset)
+static void REGAL_CALL missing_glVertexAttribArrayObjectATI(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLuint buffer, GLuint offset)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -10899,13 +10899,13 @@ void REGAL_CALL missing_glVertexAttribArrayObjectATI(GLuint index, GLint size, G
 
 // GL_ATI_vertex_streams
 
-void REGAL_CALL missing_glClientActiveVertexStreamATI(GLenum stream)
+static void REGAL_CALL missing_glClientActiveVertexStreamATI(GLenum stream)
 {
   UNUSED_PARAMETER(stream);
   Warning( "glClientActiveVertexStreamATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3bATI(GLenum stream, GLbyte x, GLbyte y, GLbyte z)
+static void REGAL_CALL missing_glNormalStream3bATI(GLenum stream, GLbyte x, GLbyte y, GLbyte z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -10914,14 +10914,14 @@ void REGAL_CALL missing_glNormalStream3bATI(GLenum stream, GLbyte x, GLbyte y, G
   Warning( "glNormalStream3bATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3bvATI(GLenum stream, const GLbyte *coords)
+static void REGAL_CALL missing_glNormalStream3bvATI(GLenum stream, const GLbyte *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalStream3bvATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glNormalStream3dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -10930,14 +10930,14 @@ void REGAL_CALL missing_glNormalStream3dATI(GLenum stream, GLdouble x, GLdouble 
   Warning( "glNormalStream3dATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3dvATI(GLenum stream, const GLdouble *coords)
+static void REGAL_CALL missing_glNormalStream3dvATI(GLenum stream, const GLdouble *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalStream3dvATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glNormalStream3fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -10946,14 +10946,14 @@ void REGAL_CALL missing_glNormalStream3fATI(GLenum stream, GLfloat x, GLfloat y,
   Warning( "glNormalStream3fATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3fvATI(GLenum stream, const GLfloat *coords)
+static void REGAL_CALL missing_glNormalStream3fvATI(GLenum stream, const GLfloat *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalStream3fvATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3iATI(GLenum stream, GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glNormalStream3iATI(GLenum stream, GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -10962,14 +10962,14 @@ void REGAL_CALL missing_glNormalStream3iATI(GLenum stream, GLint x, GLint y, GLi
   Warning( "glNormalStream3iATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3ivATI(GLenum stream, const GLint *coords)
+static void REGAL_CALL missing_glNormalStream3ivATI(GLenum stream, const GLint *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalStream3ivATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3sATI(GLenum stream, GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glNormalStream3sATI(GLenum stream, GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -10978,84 +10978,84 @@ void REGAL_CALL missing_glNormalStream3sATI(GLenum stream, GLshort x, GLshort y,
   Warning( "glNormalStream3sATI not available." );
 }
 
-void REGAL_CALL missing_glNormalStream3svATI(GLenum stream, const GLshort *coords)
+static void REGAL_CALL missing_glNormalStream3svATI(GLenum stream, const GLshort *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glNormalStream3svATI not available." );
 }
 
-void REGAL_CALL missing_glVertexBlendEnvfATI(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glVertexBlendEnvfATI(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glVertexBlendEnvfATI not available." );
 }
 
-void REGAL_CALL missing_glVertexBlendEnviATI(GLenum pname, GLint param)
+static void REGAL_CALL missing_glVertexBlendEnviATI(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glVertexBlendEnviATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1dATI(GLenum stream, GLdouble x)
+static void REGAL_CALL missing_glVertexStream1dATI(GLenum stream, GLdouble x)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
   Warning( "glVertexStream1dATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1dvATI(GLenum stream, const GLdouble *coords)
+static void REGAL_CALL missing_glVertexStream1dvATI(GLenum stream, const GLdouble *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream1dvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1fATI(GLenum stream, GLfloat x)
+static void REGAL_CALL missing_glVertexStream1fATI(GLenum stream, GLfloat x)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
   Warning( "glVertexStream1fATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1fvATI(GLenum stream, const GLfloat *coords)
+static void REGAL_CALL missing_glVertexStream1fvATI(GLenum stream, const GLfloat *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream1fvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1iATI(GLenum stream, GLint x)
+static void REGAL_CALL missing_glVertexStream1iATI(GLenum stream, GLint x)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
   Warning( "glVertexStream1iATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1ivATI(GLenum stream, const GLint *coords)
+static void REGAL_CALL missing_glVertexStream1ivATI(GLenum stream, const GLint *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream1ivATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1sATI(GLenum stream, GLshort x)
+static void REGAL_CALL missing_glVertexStream1sATI(GLenum stream, GLshort x)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
   Warning( "glVertexStream1sATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream1svATI(GLenum stream, const GLshort *coords)
+static void REGAL_CALL missing_glVertexStream1svATI(GLenum stream, const GLshort *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream1svATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2dATI(GLenum stream, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertexStream2dATI(GLenum stream, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11063,14 +11063,14 @@ void REGAL_CALL missing_glVertexStream2dATI(GLenum stream, GLdouble x, GLdouble 
   Warning( "glVertexStream2dATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2dvATI(GLenum stream, const GLdouble *coords)
+static void REGAL_CALL missing_glVertexStream2dvATI(GLenum stream, const GLdouble *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream2dvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2fATI(GLenum stream, GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glVertexStream2fATI(GLenum stream, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11078,14 +11078,14 @@ void REGAL_CALL missing_glVertexStream2fATI(GLenum stream, GLfloat x, GLfloat y)
   Warning( "glVertexStream2fATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2fvATI(GLenum stream, const GLfloat *coords)
+static void REGAL_CALL missing_glVertexStream2fvATI(GLenum stream, const GLfloat *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream2fvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2iATI(GLenum stream, GLint x, GLint y)
+static void REGAL_CALL missing_glVertexStream2iATI(GLenum stream, GLint x, GLint y)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11093,14 +11093,14 @@ void REGAL_CALL missing_glVertexStream2iATI(GLenum stream, GLint x, GLint y)
   Warning( "glVertexStream2iATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2ivATI(GLenum stream, const GLint *coords)
+static void REGAL_CALL missing_glVertexStream2ivATI(GLenum stream, const GLint *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream2ivATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2sATI(GLenum stream, GLshort x, GLshort y)
+static void REGAL_CALL missing_glVertexStream2sATI(GLenum stream, GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11108,14 +11108,14 @@ void REGAL_CALL missing_glVertexStream2sATI(GLenum stream, GLshort x, GLshort y)
   Warning( "glVertexStream2sATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream2svATI(GLenum stream, const GLshort *coords)
+static void REGAL_CALL missing_glVertexStream2svATI(GLenum stream, const GLshort *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream2svATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertexStream3dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11124,14 +11124,14 @@ void REGAL_CALL missing_glVertexStream3dATI(GLenum stream, GLdouble x, GLdouble 
   Warning( "glVertexStream3dATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3dvATI(GLenum stream, const GLdouble *coords)
+static void REGAL_CALL missing_glVertexStream3dvATI(GLenum stream, const GLdouble *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream3dvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glVertexStream3fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11140,14 +11140,14 @@ void REGAL_CALL missing_glVertexStream3fATI(GLenum stream, GLfloat x, GLfloat y,
   Warning( "glVertexStream3fATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3fvATI(GLenum stream, const GLfloat *coords)
+static void REGAL_CALL missing_glVertexStream3fvATI(GLenum stream, const GLfloat *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream3fvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3iATI(GLenum stream, GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glVertexStream3iATI(GLenum stream, GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11156,14 +11156,14 @@ void REGAL_CALL missing_glVertexStream3iATI(GLenum stream, GLint x, GLint y, GLi
   Warning( "glVertexStream3iATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3ivATI(GLenum stream, const GLint *coords)
+static void REGAL_CALL missing_glVertexStream3ivATI(GLenum stream, const GLint *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream3ivATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3sATI(GLenum stream, GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glVertexStream3sATI(GLenum stream, GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11172,14 +11172,14 @@ void REGAL_CALL missing_glVertexStream3sATI(GLenum stream, GLshort x, GLshort y,
   Warning( "glVertexStream3sATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream3svATI(GLenum stream, const GLshort *coords)
+static void REGAL_CALL missing_glVertexStream3svATI(GLenum stream, const GLshort *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream3svATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertexStream4dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11189,14 +11189,14 @@ void REGAL_CALL missing_glVertexStream4dATI(GLenum stream, GLdouble x, GLdouble 
   Warning( "glVertexStream4dATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4dvATI(GLenum stream, const GLdouble *coords)
+static void REGAL_CALL missing_glVertexStream4dvATI(GLenum stream, const GLdouble *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream4dvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glVertexStream4fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11206,14 +11206,14 @@ void REGAL_CALL missing_glVertexStream4fATI(GLenum stream, GLfloat x, GLfloat y,
   Warning( "glVertexStream4fATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4fvATI(GLenum stream, const GLfloat *coords)
+static void REGAL_CALL missing_glVertexStream4fvATI(GLenum stream, const GLfloat *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream4fvATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4iATI(GLenum stream, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glVertexStream4iATI(GLenum stream, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11223,14 +11223,14 @@ void REGAL_CALL missing_glVertexStream4iATI(GLenum stream, GLint x, GLint y, GLi
   Warning( "glVertexStream4iATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4ivATI(GLenum stream, const GLint *coords)
+static void REGAL_CALL missing_glVertexStream4ivATI(GLenum stream, const GLint *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
   Warning( "glVertexStream4ivATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4sATI(GLenum stream, GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glVertexStream4sATI(GLenum stream, GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(x);
@@ -11240,7 +11240,7 @@ void REGAL_CALL missing_glVertexStream4sATI(GLenum stream, GLshort x, GLshort y,
   Warning( "glVertexStream4sATI not available." );
 }
 
-void REGAL_CALL missing_glVertexStream4svATI(GLenum stream, const GLshort *coords)
+static void REGAL_CALL missing_glVertexStream4svATI(GLenum stream, const GLshort *coords)
 {
   UNUSED_PARAMETER(stream);
   UNUSED_PARAMETER(coords);
@@ -11249,7 +11249,7 @@ void REGAL_CALL missing_glVertexStream4svATI(GLenum stream, const GLshort *coord
 
 // GL_EXT_bindable_uniform
 
-GLint REGAL_CALL missing_glGetUniformBufferSizeEXT(GLuint program, GLint location)
+static GLint REGAL_CALL missing_glGetUniformBufferSizeEXT(GLuint program, GLint location)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -11257,7 +11257,7 @@ GLint REGAL_CALL missing_glGetUniformBufferSizeEXT(GLuint program, GLint locatio
   return (GLint )0;
 }
 
-GLintptr REGAL_CALL missing_glGetUniformOffsetEXT(GLuint program, GLint location)
+static GLintptr REGAL_CALL missing_glGetUniformOffsetEXT(GLuint program, GLint location)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -11265,7 +11265,7 @@ GLintptr REGAL_CALL missing_glGetUniformOffsetEXT(GLuint program, GLint location
   return (GLintptr )0;
 }
 
-void REGAL_CALL missing_glUniformBufferEXT(GLuint program, GLint location, GLuint buffer)
+static void REGAL_CALL missing_glUniformBufferEXT(GLuint program, GLint location, GLuint buffer)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -11275,7 +11275,7 @@ void REGAL_CALL missing_glUniformBufferEXT(GLuint program, GLint location, GLuin
 
 // GL_EXT_blend_color
 
-void REGAL_CALL missing_glBlendColorEXT(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+static void REGAL_CALL missing_glBlendColorEXT(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -11286,7 +11286,7 @@ void REGAL_CALL missing_glBlendColorEXT(GLclampf red, GLclampf green, GLclampf b
 
 // GL_EXT_blend_equation_separate
 
-void REGAL_CALL missing_glBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAlpha)
+static void REGAL_CALL missing_glBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAlpha)
 {
   UNUSED_PARAMETER(modeRGB);
   UNUSED_PARAMETER(modeAlpha);
@@ -11295,7 +11295,7 @@ void REGAL_CALL missing_glBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAl
 
 // GL_EXT_blend_func_separate
 
-void REGAL_CALL missing_glBlendFuncSeparateEXT(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparateEXT(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
 {
   UNUSED_PARAMETER(sfactorRGB);
   UNUSED_PARAMETER(dfactorRGB);
@@ -11306,7 +11306,7 @@ void REGAL_CALL missing_glBlendFuncSeparateEXT(GLenum sfactorRGB, GLenum dfactor
 
 // GL_EXT_blend_minmax
 
-void REGAL_CALL missing_glBlendEquationEXT(GLenum mode)
+static void REGAL_CALL missing_glBlendEquationEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glBlendEquationEXT not available." );
@@ -11314,7 +11314,7 @@ void REGAL_CALL missing_glBlendEquationEXT(GLenum mode)
 
 // GL_EXT_color_subtable
 
-void REGAL_CALL missing_glColorSubTableEXT(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *table)
+static void REGAL_CALL missing_glColorSubTableEXT(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(start);
@@ -11325,7 +11325,7 @@ void REGAL_CALL missing_glColorSubTableEXT(GLenum target, GLsizei start, GLsizei
   Warning( "glColorSubTableEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyColorSubTableEXT(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyColorSubTableEXT(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(start);
@@ -11337,21 +11337,21 @@ void REGAL_CALL missing_glCopyColorSubTableEXT(GLenum target, GLsizei start, GLi
 
 // GL_EXT_compiled_vertex_array
 
-void REGAL_CALL missing_glLockArraysEXT(GLint first, GLsizei count)
+static void REGAL_CALL missing_glLockArraysEXT(GLint first, GLsizei count)
 {
   UNUSED_PARAMETER(first);
   UNUSED_PARAMETER(count);
   Warning( "glLockArraysEXT not available." );
 }
 
-void REGAL_CALL missing_glUnlockArraysEXT(void)
+static void REGAL_CALL missing_glUnlockArraysEXT(void)
 {
   Warning( "glUnlockArraysEXT not available." );
 }
 
 // GL_EXT_convolution
 
-void REGAL_CALL missing_glConvolutionFilter1DEXT(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image)
+static void REGAL_CALL missing_glConvolutionFilter1DEXT(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -11362,7 +11362,7 @@ void REGAL_CALL missing_glConvolutionFilter1DEXT(GLenum target, GLenum internalf
   Warning( "glConvolutionFilter1DEXT not available." );
 }
 
-void REGAL_CALL missing_glConvolutionFilter2DEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image)
+static void REGAL_CALL missing_glConvolutionFilter2DEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -11374,7 +11374,7 @@ void REGAL_CALL missing_glConvolutionFilter2DEXT(GLenum target, GLenum internalf
   Warning( "glConvolutionFilter2DEXT not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameterfEXT(GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glConvolutionParameterfEXT(GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -11382,7 +11382,7 @@ void REGAL_CALL missing_glConvolutionParameterfEXT(GLenum target, GLenum pname, 
   Warning( "glConvolutionParameterfEXT not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glConvolutionParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -11390,7 +11390,7 @@ void REGAL_CALL missing_glConvolutionParameterfvEXT(GLenum target, GLenum pname,
   Warning( "glConvolutionParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameteriEXT(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glConvolutionParameteriEXT(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -11398,7 +11398,7 @@ void REGAL_CALL missing_glConvolutionParameteriEXT(GLenum target, GLenum pname, 
   Warning( "glConvolutionParameteriEXT not available." );
 }
 
-void REGAL_CALL missing_glConvolutionParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glConvolutionParameterivEXT(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -11406,7 +11406,7 @@ void REGAL_CALL missing_glConvolutionParameterivEXT(GLenum target, GLenum pname,
   Warning( "glConvolutionParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyConvolutionFilter1DEXT(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyConvolutionFilter1DEXT(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -11416,7 +11416,7 @@ void REGAL_CALL missing_glCopyConvolutionFilter1DEXT(GLenum target, GLenum inter
   Warning( "glCopyConvolutionFilter1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyConvolutionFilter2DEXT(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyConvolutionFilter2DEXT(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -11427,7 +11427,7 @@ void REGAL_CALL missing_glCopyConvolutionFilter2DEXT(GLenum target, GLenum inter
   Warning( "glCopyConvolutionFilter2DEXT not available." );
 }
 
-void REGAL_CALL missing_glGetConvolutionFilterEXT(GLenum target, GLenum format, GLenum type, GLvoid *image)
+static void REGAL_CALL missing_glGetConvolutionFilterEXT(GLenum target, GLenum format, GLenum type, GLvoid *image)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -11436,7 +11436,7 @@ void REGAL_CALL missing_glGetConvolutionFilterEXT(GLenum target, GLenum format, 
   Warning( "glGetConvolutionFilterEXT not available." );
 }
 
-void REGAL_CALL missing_glGetConvolutionParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetConvolutionParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -11444,7 +11444,7 @@ void REGAL_CALL missing_glGetConvolutionParameterfvEXT(GLenum target, GLenum pna
   Warning( "glGetConvolutionParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetConvolutionParameterivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetConvolutionParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -11452,7 +11452,7 @@ void REGAL_CALL missing_glGetConvolutionParameterivEXT(GLenum target, GLenum pna
   Warning( "glGetConvolutionParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetSeparableFilterEXT(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span)
+static void REGAL_CALL missing_glGetSeparableFilterEXT(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -11463,7 +11463,7 @@ void REGAL_CALL missing_glGetSeparableFilterEXT(GLenum target, GLenum format, GL
   Warning( "glGetSeparableFilterEXT not available." );
 }
 
-void REGAL_CALL missing_glSeparableFilter2DEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column)
+static void REGAL_CALL missing_glSeparableFilter2DEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -11478,7 +11478,7 @@ void REGAL_CALL missing_glSeparableFilter2DEXT(GLenum target, GLenum internalfor
 
 // GL_EXT_coordinate_frame
 
-void REGAL_CALL missing_glBinormal3bEXT(GLbyte bx, GLbyte by, GLbyte bz)
+static void REGAL_CALL missing_glBinormal3bEXT(GLbyte bx, GLbyte by, GLbyte bz)
 {
   UNUSED_PARAMETER(bx);
   UNUSED_PARAMETER(by);
@@ -11486,13 +11486,13 @@ void REGAL_CALL missing_glBinormal3bEXT(GLbyte bx, GLbyte by, GLbyte bz)
   Warning( "glBinormal3bEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3bvEXT(const GLbyte *v)
+static void REGAL_CALL missing_glBinormal3bvEXT(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glBinormal3bvEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3dEXT(GLdouble bx, GLdouble by, GLdouble bz)
+static void REGAL_CALL missing_glBinormal3dEXT(GLdouble bx, GLdouble by, GLdouble bz)
 {
   UNUSED_PARAMETER(bx);
   UNUSED_PARAMETER(by);
@@ -11500,13 +11500,13 @@ void REGAL_CALL missing_glBinormal3dEXT(GLdouble bx, GLdouble by, GLdouble bz)
   Warning( "glBinormal3dEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3dvEXT(const GLdouble *v)
+static void REGAL_CALL missing_glBinormal3dvEXT(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glBinormal3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3fEXT(GLfloat bx, GLfloat by, GLfloat bz)
+static void REGAL_CALL missing_glBinormal3fEXT(GLfloat bx, GLfloat by, GLfloat bz)
 {
   UNUSED_PARAMETER(bx);
   UNUSED_PARAMETER(by);
@@ -11514,13 +11514,13 @@ void REGAL_CALL missing_glBinormal3fEXT(GLfloat bx, GLfloat by, GLfloat bz)
   Warning( "glBinormal3fEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3fvEXT(const GLfloat *v)
+static void REGAL_CALL missing_glBinormal3fvEXT(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glBinormal3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3iEXT(GLint bx, GLint by, GLint bz)
+static void REGAL_CALL missing_glBinormal3iEXT(GLint bx, GLint by, GLint bz)
 {
   UNUSED_PARAMETER(bx);
   UNUSED_PARAMETER(by);
@@ -11528,13 +11528,13 @@ void REGAL_CALL missing_glBinormal3iEXT(GLint bx, GLint by, GLint bz)
   Warning( "glBinormal3iEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3ivEXT(const GLint *v)
+static void REGAL_CALL missing_glBinormal3ivEXT(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glBinormal3ivEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3sEXT(GLshort bx, GLshort by, GLshort bz)
+static void REGAL_CALL missing_glBinormal3sEXT(GLshort bx, GLshort by, GLshort bz)
 {
   UNUSED_PARAMETER(bx);
   UNUSED_PARAMETER(by);
@@ -11542,13 +11542,13 @@ void REGAL_CALL missing_glBinormal3sEXT(GLshort bx, GLshort by, GLshort bz)
   Warning( "glBinormal3sEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormal3svEXT(const GLshort *v)
+static void REGAL_CALL missing_glBinormal3svEXT(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glBinormal3svEXT not available." );
 }
 
-void REGAL_CALL missing_glBinormalPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glBinormalPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -11556,7 +11556,7 @@ void REGAL_CALL missing_glBinormalPointerEXT(GLenum type, GLsizei stride, const 
   Warning( "glBinormalPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3bEXT(GLbyte tx, GLbyte ty, GLbyte tz)
+static void REGAL_CALL missing_glTangent3bEXT(GLbyte tx, GLbyte ty, GLbyte tz)
 {
   UNUSED_PARAMETER(tx);
   UNUSED_PARAMETER(ty);
@@ -11564,13 +11564,13 @@ void REGAL_CALL missing_glTangent3bEXT(GLbyte tx, GLbyte ty, GLbyte tz)
   Warning( "glTangent3bEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3bvEXT(const GLbyte *v)
+static void REGAL_CALL missing_glTangent3bvEXT(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTangent3bvEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3dEXT(GLdouble tx, GLdouble ty, GLdouble tz)
+static void REGAL_CALL missing_glTangent3dEXT(GLdouble tx, GLdouble ty, GLdouble tz)
 {
   UNUSED_PARAMETER(tx);
   UNUSED_PARAMETER(ty);
@@ -11578,13 +11578,13 @@ void REGAL_CALL missing_glTangent3dEXT(GLdouble tx, GLdouble ty, GLdouble tz)
   Warning( "glTangent3dEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3dvEXT(const GLdouble *v)
+static void REGAL_CALL missing_glTangent3dvEXT(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTangent3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3fEXT(GLfloat tx, GLfloat ty, GLfloat tz)
+static void REGAL_CALL missing_glTangent3fEXT(GLfloat tx, GLfloat ty, GLfloat tz)
 {
   UNUSED_PARAMETER(tx);
   UNUSED_PARAMETER(ty);
@@ -11592,13 +11592,13 @@ void REGAL_CALL missing_glTangent3fEXT(GLfloat tx, GLfloat ty, GLfloat tz)
   Warning( "glTangent3fEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3fvEXT(const GLfloat *v)
+static void REGAL_CALL missing_glTangent3fvEXT(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTangent3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3iEXT(GLint tx, GLint ty, GLint tz)
+static void REGAL_CALL missing_glTangent3iEXT(GLint tx, GLint ty, GLint tz)
 {
   UNUSED_PARAMETER(tx);
   UNUSED_PARAMETER(ty);
@@ -11606,13 +11606,13 @@ void REGAL_CALL missing_glTangent3iEXT(GLint tx, GLint ty, GLint tz)
   Warning( "glTangent3iEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3ivEXT(const GLint *v)
+static void REGAL_CALL missing_glTangent3ivEXT(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTangent3ivEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3sEXT(GLshort tx, GLshort ty, GLshort tz)
+static void REGAL_CALL missing_glTangent3sEXT(GLshort tx, GLshort ty, GLshort tz)
 {
   UNUSED_PARAMETER(tx);
   UNUSED_PARAMETER(ty);
@@ -11620,13 +11620,13 @@ void REGAL_CALL missing_glTangent3sEXT(GLshort tx, GLshort ty, GLshort tz)
   Warning( "glTangent3sEXT not available." );
 }
 
-void REGAL_CALL missing_glTangent3svEXT(const GLshort *v)
+static void REGAL_CALL missing_glTangent3svEXT(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTangent3svEXT not available." );
 }
 
-void REGAL_CALL missing_glTangentPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glTangentPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -11636,7 +11636,7 @@ void REGAL_CALL missing_glTangentPointerEXT(GLenum type, GLsizei stride, const G
 
 // GL_EXT_copy_texture
 
-void REGAL_CALL missing_glCopyTexImage1DEXT(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
+static void REGAL_CALL missing_glCopyTexImage1DEXT(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -11648,7 +11648,7 @@ void REGAL_CALL missing_glCopyTexImage1DEXT(GLenum target, GLint level, GLenum i
   Warning( "glCopyTexImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTexImage2DEXT(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
+static void REGAL_CALL missing_glCopyTexImage2DEXT(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -11661,7 +11661,7 @@ void REGAL_CALL missing_glCopyTexImage2DEXT(GLenum target, GLint level, GLenum i
   Warning( "glCopyTexImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage1DEXT(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyTexSubImage1DEXT(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -11672,7 +11672,7 @@ void REGAL_CALL missing_glCopyTexSubImage1DEXT(GLenum target, GLint level, GLint
   Warning( "glCopyTexSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -11685,7 +11685,7 @@ void REGAL_CALL missing_glCopyTexSubImage2DEXT(GLenum target, GLint level, GLint
   Warning( "glCopyTexSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -11701,14 +11701,14 @@ void REGAL_CALL missing_glCopyTexSubImage3DEXT(GLenum target, GLint level, GLint
 
 // GL_EXT_cull_vertex
 
-void REGAL_CALL missing_glCullParameterdvEXT(GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glCullParameterdvEXT(GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glCullParameterdvEXT not available." );
 }
 
-void REGAL_CALL missing_glCullParameterfvEXT(GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glCullParameterfvEXT(GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -11717,7 +11717,7 @@ void REGAL_CALL missing_glCullParameterfvEXT(GLenum pname, GLfloat *params)
 
 // GL_EXT_debug_label
 
-void REGAL_CALL missing_glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL missing_glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(object);
@@ -11727,7 +11727,7 @@ void REGAL_CALL missing_glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei 
   Warning( "glGetObjectLabelEXT not available." );
 }
 
-void REGAL_CALL missing_glLabelObjectEXT(GLenum type, GLuint object, GLsizei length, const GLchar *label)
+static void REGAL_CALL missing_glLabelObjectEXT(GLenum type, GLuint object, GLsizei length, const GLchar *label)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(object);
@@ -11738,19 +11738,19 @@ void REGAL_CALL missing_glLabelObjectEXT(GLenum type, GLuint object, GLsizei len
 
 // GL_EXT_debug_marker
 
-void REGAL_CALL missing_glInsertEventMarkerEXT(GLsizei length, const GLchar *marker)
+static void REGAL_CALL missing_glInsertEventMarkerEXT(GLsizei length, const GLchar *marker)
 {
   UNUSED_PARAMETER(length);
   UNUSED_PARAMETER(marker);
   Warning( "glInsertEventMarkerEXT not available." );
 }
 
-void REGAL_CALL missing_glPopGroupMarkerEXT(void)
+static void REGAL_CALL missing_glPopGroupMarkerEXT(void)
 {
   Warning( "glPopGroupMarkerEXT not available." );
 }
 
-void REGAL_CALL missing_glPushGroupMarkerEXT(GLsizei length, const GLchar *marker)
+static void REGAL_CALL missing_glPushGroupMarkerEXT(GLsizei length, const GLchar *marker)
 {
   UNUSED_PARAMETER(length);
   UNUSED_PARAMETER(marker);
@@ -11759,7 +11759,7 @@ void REGAL_CALL missing_glPushGroupMarkerEXT(GLsizei length, const GLchar *marke
 
 // GL_EXT_depth_bounds_test
 
-void REGAL_CALL missing_glDepthBoundsEXT(GLclampd zmin, GLclampd zmax)
+static void REGAL_CALL missing_glDepthBoundsEXT(GLclampd zmin, GLclampd zmax)
 {
   UNUSED_PARAMETER(zmin);
   UNUSED_PARAMETER(zmax);
@@ -11768,7 +11768,7 @@ void REGAL_CALL missing_glDepthBoundsEXT(GLclampd zmin, GLclampd zmax)
 
 // GL_EXT_direct_state_access
 
-void REGAL_CALL missing_glBindMultiTextureEXT(GLenum texunit, GLenum target, GLuint texture)
+static void REGAL_CALL missing_glBindMultiTextureEXT(GLenum texunit, GLenum target, GLuint texture)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11776,7 +11776,7 @@ void REGAL_CALL missing_glBindMultiTextureEXT(GLenum texunit, GLenum target, GLu
   Warning( "glBindMultiTextureEXT not available." );
 }
 
-GLenum REGAL_CALL missing_glCheckNamedFramebufferStatusEXT(GLuint framebuffer, GLenum target)
+static GLenum REGAL_CALL missing_glCheckNamedFramebufferStatusEXT(GLuint framebuffer, GLenum target)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(target);
@@ -11784,13 +11784,13 @@ GLenum REGAL_CALL missing_glCheckNamedFramebufferStatusEXT(GLuint framebuffer, G
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glClientAttribDefaultEXT(GLbitfield mask)
+static void REGAL_CALL missing_glClientAttribDefaultEXT(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glClientAttribDefaultEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11803,7 +11803,7 @@ void REGAL_CALL missing_glCompressedMultiTexImage1DEXT(GLenum texunit, GLenum ta
   Warning( "glCompressedMultiTexImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11817,7 +11817,7 @@ void REGAL_CALL missing_glCompressedMultiTexImage2DEXT(GLenum texunit, GLenum ta
   Warning( "glCompressedMultiTexImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11832,7 +11832,7 @@ void REGAL_CALL missing_glCompressedMultiTexImage3DEXT(GLenum texunit, GLenum ta
   Warning( "glCompressedMultiTexImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11845,7 +11845,7 @@ void REGAL_CALL missing_glCompressedMultiTexSubImage1DEXT(GLenum texunit, GLenum
   Warning( "glCompressedMultiTexSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11860,7 +11860,7 @@ void REGAL_CALL missing_glCompressedMultiTexSubImage2DEXT(GLenum texunit, GLenum
   Warning( "glCompressedMultiTexSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11877,7 +11877,7 @@ void REGAL_CALL missing_glCompressedMultiTexSubImage3DEXT(GLenum texunit, GLenum
   Warning( "glCompressedMultiTexSubImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -11890,7 +11890,7 @@ void REGAL_CALL missing_glCompressedTextureImage1DEXT(GLuint texture, GLenum tar
   Warning( "glCompressedTextureImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -11904,7 +11904,7 @@ void REGAL_CALL missing_glCompressedTextureImage2DEXT(GLuint texture, GLenum tar
   Warning( "glCompressedTextureImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -11919,7 +11919,7 @@ void REGAL_CALL missing_glCompressedTextureImage3DEXT(GLuint texture, GLenum tar
   Warning( "glCompressedTextureImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -11932,7 +11932,7 @@ void REGAL_CALL missing_glCompressedTextureSubImage1DEXT(GLuint texture, GLenum 
   Warning( "glCompressedTextureSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -11947,7 +11947,7 @@ void REGAL_CALL missing_glCompressedTextureSubImage2DEXT(GLuint texture, GLenum 
   Warning( "glCompressedTextureSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCompressedTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *bits)
+static void REGAL_CALL missing_glCompressedTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *bits)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -11964,7 +11964,7 @@ void REGAL_CALL missing_glCompressedTextureSubImage3DEXT(GLuint texture, GLenum 
   Warning( "glCompressedTextureSubImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
+static void REGAL_CALL missing_glCopyMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11977,7 +11977,7 @@ void REGAL_CALL missing_glCopyMultiTexImage1DEXT(GLenum texunit, GLenum target, 
   Warning( "glCopyMultiTexImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
+static void REGAL_CALL missing_glCopyMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -11991,7 +11991,7 @@ void REGAL_CALL missing_glCopyMultiTexImage2DEXT(GLenum texunit, GLenum target, 
   Warning( "glCopyMultiTexImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12003,7 +12003,7 @@ void REGAL_CALL missing_glCopyMultiTexSubImage1DEXT(GLenum texunit, GLenum targe
   Warning( "glCopyMultiTexSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12017,7 +12017,7 @@ void REGAL_CALL missing_glCopyMultiTexSubImage2DEXT(GLenum texunit, GLenum targe
   Warning( "glCopyMultiTexSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12032,7 +12032,7 @@ void REGAL_CALL missing_glCopyMultiTexSubImage3DEXT(GLenum texunit, GLenum targe
   Warning( "glCopyMultiTexSubImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
+static void REGAL_CALL missing_glCopyTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12045,7 +12045,7 @@ void REGAL_CALL missing_glCopyTextureImage1DEXT(GLuint texture, GLenum target, G
   Warning( "glCopyTextureImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
+static void REGAL_CALL missing_glCopyTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12059,7 +12059,7 @@ void REGAL_CALL missing_glCopyTextureImage2DEXT(GLuint texture, GLenum target, G
   Warning( "glCopyTextureImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12071,7 +12071,7 @@ void REGAL_CALL missing_glCopyTextureSubImage1DEXT(GLuint texture, GLenum target
   Warning( "glCopyTextureSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12085,7 +12085,7 @@ void REGAL_CALL missing_glCopyTextureSubImage2DEXT(GLuint texture, GLenum target
   Warning( "glCopyTextureSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glCopyTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12100,63 +12100,63 @@ void REGAL_CALL missing_glCopyTextureSubImage3DEXT(GLuint texture, GLenum target
   Warning( "glCopyTextureSubImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glDisableClientStateIndexedEXT(GLenum array, GLuint index)
+static void REGAL_CALL missing_glDisableClientStateIndexedEXT(GLenum array, GLuint index)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(index);
   Warning( "glDisableClientStateIndexedEXT not available." );
 }
 
-void REGAL_CALL missing_glDisableClientStateiEXT(GLenum array, GLuint index)
+static void REGAL_CALL missing_glDisableClientStateiEXT(GLenum array, GLuint index)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(index);
   Warning( "glDisableClientStateiEXT not available." );
 }
 
-void REGAL_CALL missing_glDisableVertexArrayAttribEXT(GLuint vaobj, GLenum array)
+static void REGAL_CALL missing_glDisableVertexArrayAttribEXT(GLuint vaobj, GLenum array)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(array);
   Warning( "glDisableVertexArrayAttribEXT not available." );
 }
 
-void REGAL_CALL missing_glDisableVertexArrayEXT(GLuint vaobj, GLenum array)
+static void REGAL_CALL missing_glDisableVertexArrayEXT(GLuint vaobj, GLenum array)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(array);
   Warning( "glDisableVertexArrayEXT not available." );
 }
 
-void REGAL_CALL missing_glEnableClientStateIndexedEXT(GLenum array, GLuint index)
+static void REGAL_CALL missing_glEnableClientStateIndexedEXT(GLenum array, GLuint index)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(index);
   Warning( "glEnableClientStateIndexedEXT not available." );
 }
 
-void REGAL_CALL missing_glEnableClientStateiEXT(GLenum array, GLuint index)
+static void REGAL_CALL missing_glEnableClientStateiEXT(GLenum array, GLuint index)
 {
   UNUSED_PARAMETER(array);
   UNUSED_PARAMETER(index);
   Warning( "glEnableClientStateiEXT not available." );
 }
 
-void REGAL_CALL missing_glEnableVertexArrayAttribEXT(GLuint vaobj, GLenum array)
+static void REGAL_CALL missing_glEnableVertexArrayAttribEXT(GLuint vaobj, GLenum array)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(array);
   Warning( "glEnableVertexArrayAttribEXT not available." );
 }
 
-void REGAL_CALL missing_glEnableVertexArrayEXT(GLuint vaobj, GLenum array)
+static void REGAL_CALL missing_glEnableVertexArrayEXT(GLuint vaobj, GLenum array)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(array);
   Warning( "glEnableVertexArrayEXT not available." );
 }
 
-void REGAL_CALL missing_glFlushMappedNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length)
+static void REGAL_CALL missing_glFlushMappedNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(offset);
@@ -12164,14 +12164,14 @@ void REGAL_CALL missing_glFlushMappedNamedBufferRangeEXT(GLuint buffer, GLintptr
   Warning( "glFlushMappedNamedBufferRangeEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferDrawBufferEXT(GLuint framebuffer, GLenum mode)
+static void REGAL_CALL missing_glFramebufferDrawBufferEXT(GLuint framebuffer, GLenum mode)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(mode);
   Warning( "glFramebufferDrawBufferEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferDrawBuffersEXT(GLuint framebuffer, GLsizei n, const GLenum *bufs)
+static void REGAL_CALL missing_glFramebufferDrawBuffersEXT(GLuint framebuffer, GLsizei n, const GLenum *bufs)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(n);
@@ -12179,28 +12179,28 @@ void REGAL_CALL missing_glFramebufferDrawBuffersEXT(GLuint framebuffer, GLsizei 
   Warning( "glFramebufferDrawBuffersEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferReadBufferEXT(GLuint framebuffer, GLenum mode)
+static void REGAL_CALL missing_glFramebufferReadBufferEXT(GLuint framebuffer, GLenum mode)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(mode);
   Warning( "glFramebufferReadBufferEXT not available." );
 }
 
-void REGAL_CALL missing_glGenerateMultiTexMipmapEXT(GLenum texunit, GLenum target)
+static void REGAL_CALL missing_glGenerateMultiTexMipmapEXT(GLenum texunit, GLenum target)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
   Warning( "glGenerateMultiTexMipmapEXT not available." );
 }
 
-void REGAL_CALL missing_glGenerateTextureMipmapEXT(GLuint texture, GLenum target)
+static void REGAL_CALL missing_glGenerateTextureMipmapEXT(GLuint texture, GLenum target)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
   Warning( "glGenerateTextureMipmapEXT not available." );
 }
 
-void REGAL_CALL missing_glGetCompressedMultiTexImageEXT(GLenum texunit, GLenum target, GLint lod, GLvoid *img)
+static void REGAL_CALL missing_glGetCompressedMultiTexImageEXT(GLenum texunit, GLenum target, GLint lod, GLvoid *img)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12209,7 +12209,7 @@ void REGAL_CALL missing_glGetCompressedMultiTexImageEXT(GLenum texunit, GLenum t
   Warning( "glGetCompressedMultiTexImageEXT not available." );
 }
 
-void REGAL_CALL missing_glGetCompressedTextureImageEXT(GLuint texture, GLenum target, GLint lod, GLvoid *img)
+static void REGAL_CALL missing_glGetCompressedTextureImageEXT(GLuint texture, GLenum target, GLint lod, GLvoid *img)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12218,7 +12218,7 @@ void REGAL_CALL missing_glGetCompressedTextureImageEXT(GLuint texture, GLenum ta
   Warning( "glGetCompressedTextureImageEXT not available." );
 }
 
-void REGAL_CALL missing_glGetDoubleIndexedvEXT(GLenum target, GLuint index, GLdouble *data)
+static void REGAL_CALL missing_glGetDoubleIndexedvEXT(GLenum target, GLuint index, GLdouble *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -12226,7 +12226,7 @@ void REGAL_CALL missing_glGetDoubleIndexedvEXT(GLenum target, GLuint index, GLdo
   Warning( "glGetDoubleIndexedvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetDoublei_vEXT(GLenum target, GLuint index, GLdouble *data)
+static void REGAL_CALL missing_glGetDoublei_vEXT(GLenum target, GLuint index, GLdouble *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -12234,7 +12234,7 @@ void REGAL_CALL missing_glGetDoublei_vEXT(GLenum target, GLuint index, GLdouble 
   Warning( "glGetDoublei_vEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFloatIndexedvEXT(GLenum target, GLuint index, GLfloat *data)
+static void REGAL_CALL missing_glGetFloatIndexedvEXT(GLenum target, GLuint index, GLfloat *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -12242,7 +12242,7 @@ void REGAL_CALL missing_glGetFloatIndexedvEXT(GLenum target, GLuint index, GLflo
   Warning( "glGetFloatIndexedvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFloati_vEXT(GLenum target, GLuint index, GLfloat *data)
+static void REGAL_CALL missing_glGetFloati_vEXT(GLenum target, GLuint index, GLfloat *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -12250,7 +12250,7 @@ void REGAL_CALL missing_glGetFloati_vEXT(GLenum target, GLuint index, GLfloat *d
   Warning( "glGetFloati_vEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(pname);
@@ -12258,7 +12258,7 @@ void REGAL_CALL missing_glGetFramebufferParameterivEXT(GLuint framebuffer, GLenu
   Warning( "glGetFramebufferParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12267,7 +12267,7 @@ void REGAL_CALL missing_glGetMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLe
   Warning( "glGetMultiTexEnvfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12276,7 +12276,7 @@ void REGAL_CALL missing_glGetMultiTexEnvivEXT(GLenum texunit, GLenum target, GLe
   Warning( "glGetMultiTexEnvivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12285,7 +12285,7 @@ void REGAL_CALL missing_glGetMultiTexGendvEXT(GLenum texunit, GLenum coord, GLen
   Warning( "glGetMultiTexGendvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12294,7 +12294,7 @@ void REGAL_CALL missing_glGetMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLen
   Warning( "glGetMultiTexGenfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12303,7 +12303,7 @@ void REGAL_CALL missing_glGetMultiTexGenivEXT(GLenum texunit, GLenum coord, GLen
   Warning( "glGetMultiTexGenivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexImageEXT(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
+static void REGAL_CALL missing_glGetMultiTexImageEXT(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12314,7 +12314,7 @@ void REGAL_CALL missing_glGetMultiTexImageEXT(GLenum texunit, GLenum target, GLi
   Warning( "glGetMultiTexImageEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexLevelParameterfvEXT(GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMultiTexLevelParameterfvEXT(GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12324,7 +12324,7 @@ void REGAL_CALL missing_glGetMultiTexLevelParameterfvEXT(GLenum texunit, GLenum 
   Warning( "glGetMultiTexLevelParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexLevelParameterivEXT(GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMultiTexLevelParameterivEXT(GLenum texunit, GLenum target, GLint level, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12334,7 +12334,7 @@ void REGAL_CALL missing_glGetMultiTexLevelParameterivEXT(GLenum texunit, GLenum 
   Warning( "glGetMultiTexLevelParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12343,7 +12343,7 @@ void REGAL_CALL missing_glGetMultiTexParameterIivEXT(GLenum texunit, GLenum targ
   Warning( "glGetMultiTexParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12352,7 +12352,7 @@ void REGAL_CALL missing_glGetMultiTexParameterIuivEXT(GLenum texunit, GLenum tar
   Warning( "glGetMultiTexParameterIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12361,7 +12361,7 @@ void REGAL_CALL missing_glGetMultiTexParameterfvEXT(GLenum texunit, GLenum targe
   Warning( "glGetMultiTexParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12370,7 +12370,7 @@ void REGAL_CALL missing_glGetMultiTexParameterivEXT(GLenum texunit, GLenum targe
   Warning( "glGetMultiTexParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedBufferParameterivEXT(GLuint buffer, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetNamedBufferParameterivEXT(GLuint buffer, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(pname);
@@ -12378,7 +12378,7 @@ void REGAL_CALL missing_glGetNamedBufferParameterivEXT(GLuint buffer, GLenum pna
   Warning( "glGetNamedBufferParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedBufferPointervEXT(GLuint buffer, GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetNamedBufferPointervEXT(GLuint buffer, GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(pname);
@@ -12386,7 +12386,7 @@ void REGAL_CALL missing_glGetNamedBufferPointervEXT(GLuint buffer, GLenum pname,
   Warning( "glGetNamedBufferPointervEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, GLvoid *data)
+static void REGAL_CALL missing_glGetNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, GLvoid *data)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(offset);
@@ -12395,7 +12395,7 @@ void REGAL_CALL missing_glGetNamedBufferSubDataEXT(GLuint buffer, GLintptr offse
   Warning( "glGetNamedBufferSubDataEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedFramebufferAttachmentParameterivEXT(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetNamedFramebufferAttachmentParameterivEXT(GLuint framebuffer, GLenum attachment, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -12404,7 +12404,7 @@ void REGAL_CALL missing_glGetNamedFramebufferAttachmentParameterivEXT(GLuint fra
   Warning( "glGetNamedFramebufferAttachmentParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedProgramLocalParameterIivEXT(GLuint program, GLenum target, GLuint index, GLint *params)
+static void REGAL_CALL missing_glGetNamedProgramLocalParameterIivEXT(GLuint program, GLenum target, GLuint index, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -12413,7 +12413,7 @@ void REGAL_CALL missing_glGetNamedProgramLocalParameterIivEXT(GLuint program, GL
   Warning( "glGetNamedProgramLocalParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedProgramLocalParameterIuivEXT(GLuint program, GLenum target, GLuint index, GLuint *params)
+static void REGAL_CALL missing_glGetNamedProgramLocalParameterIuivEXT(GLuint program, GLenum target, GLuint index, GLuint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -12422,7 +12422,7 @@ void REGAL_CALL missing_glGetNamedProgramLocalParameterIuivEXT(GLuint program, G
   Warning( "glGetNamedProgramLocalParameterIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedProgramLocalParameterdvEXT(GLuint program, GLenum target, GLuint index, GLdouble *params)
+static void REGAL_CALL missing_glGetNamedProgramLocalParameterdvEXT(GLuint program, GLenum target, GLuint index, GLdouble *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -12431,7 +12431,7 @@ void REGAL_CALL missing_glGetNamedProgramLocalParameterdvEXT(GLuint program, GLe
   Warning( "glGetNamedProgramLocalParameterdvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedProgramLocalParameterfvEXT(GLuint program, GLenum target, GLuint index, GLfloat *params)
+static void REGAL_CALL missing_glGetNamedProgramLocalParameterfvEXT(GLuint program, GLenum target, GLuint index, GLfloat *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -12440,7 +12440,7 @@ void REGAL_CALL missing_glGetNamedProgramLocalParameterfvEXT(GLuint program, GLe
   Warning( "glGetNamedProgramLocalParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedProgramStringEXT(GLuint program, GLenum target, GLenum pname, GLvoid *string)
+static void REGAL_CALL missing_glGetNamedProgramStringEXT(GLuint program, GLenum target, GLenum pname, GLvoid *string)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -12449,7 +12449,7 @@ void REGAL_CALL missing_glGetNamedProgramStringEXT(GLuint program, GLenum target
   Warning( "glGetNamedProgramStringEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedProgramivEXT(GLuint program, GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetNamedProgramivEXT(GLuint program, GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -12458,7 +12458,7 @@ void REGAL_CALL missing_glGetNamedProgramivEXT(GLuint program, GLenum target, GL
   Warning( "glGetNamedProgramivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetNamedRenderbufferParameterivEXT(GLuint renderbuffer, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetNamedRenderbufferParameterivEXT(GLuint renderbuffer, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(renderbuffer);
   UNUSED_PARAMETER(pname);
@@ -12466,7 +12466,7 @@ void REGAL_CALL missing_glGetNamedRenderbufferParameterivEXT(GLuint renderbuffer
   Warning( "glGetNamedRenderbufferParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetPointerIndexedvEXT(GLenum target, GLuint index, GLvoid **data)
+static void REGAL_CALL missing_glGetPointerIndexedvEXT(GLenum target, GLuint index, GLvoid **data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -12474,7 +12474,7 @@ void REGAL_CALL missing_glGetPointerIndexedvEXT(GLenum target, GLuint index, GLv
   Warning( "glGetPointerIndexedvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetPointeri_vEXT(GLenum pname, GLuint index, GLvoid **params)
+static void REGAL_CALL missing_glGetPointeri_vEXT(GLenum pname, GLuint index, GLvoid **params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(index);
@@ -12482,7 +12482,7 @@ void REGAL_CALL missing_glGetPointeri_vEXT(GLenum pname, GLuint index, GLvoid **
   Warning( "glGetPointeri_vEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureImageEXT(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
+static void REGAL_CALL missing_glGetTextureImageEXT(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12493,7 +12493,7 @@ void REGAL_CALL missing_glGetTextureImageEXT(GLuint texture, GLenum target, GLin
   Warning( "glGetTextureImageEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureLevelParameterfvEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTextureLevelParameterfvEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12503,7 +12503,7 @@ void REGAL_CALL missing_glGetTextureLevelParameterfvEXT(GLuint texture, GLenum t
   Warning( "glGetTextureLevelParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureLevelParameterivEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTextureLevelParameterivEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12513,7 +12513,7 @@ void REGAL_CALL missing_glGetTextureLevelParameterivEXT(GLuint texture, GLenum t
   Warning( "glGetTextureLevelParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12522,7 +12522,7 @@ void REGAL_CALL missing_glGetTextureParameterIivEXT(GLuint texture, GLenum targe
   Warning( "glGetTextureParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12531,7 +12531,7 @@ void REGAL_CALL missing_glGetTextureParameterIuivEXT(GLuint texture, GLenum targ
   Warning( "glGetTextureParameterIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureParameterfvEXT(GLuint texture, GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTextureParameterfvEXT(GLuint texture, GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12540,7 +12540,7 @@ void REGAL_CALL missing_glGetTextureParameterfvEXT(GLuint texture, GLenum target
   Warning( "glGetTextureParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTextureParameterivEXT(GLuint texture, GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTextureParameterivEXT(GLuint texture, GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -12549,7 +12549,7 @@ void REGAL_CALL missing_glGetTextureParameterivEXT(GLuint texture, GLenum target
   Warning( "glGetTextureParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVertexArrayIntegeri_vEXT(GLuint vaobj, GLuint index, GLenum pname, GLint *param)
+static void REGAL_CALL missing_glGetVertexArrayIntegeri_vEXT(GLuint vaobj, GLuint index, GLenum pname, GLint *param)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(index);
@@ -12558,7 +12558,7 @@ void REGAL_CALL missing_glGetVertexArrayIntegeri_vEXT(GLuint vaobj, GLuint index
   Warning( "glGetVertexArrayIntegeri_vEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVertexArrayIntegervEXT(GLuint vaobj, GLenum pname, GLint *param)
+static void REGAL_CALL missing_glGetVertexArrayIntegervEXT(GLuint vaobj, GLenum pname, GLint *param)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(pname);
@@ -12566,7 +12566,7 @@ void REGAL_CALL missing_glGetVertexArrayIntegervEXT(GLuint vaobj, GLenum pname, 
   Warning( "glGetVertexArrayIntegervEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVertexArrayPointeri_vEXT(GLuint vaobj, GLuint index, GLenum pname, GLvoid **param)
+static void REGAL_CALL missing_glGetVertexArrayPointeri_vEXT(GLuint vaobj, GLuint index, GLenum pname, GLvoid **param)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(index);
@@ -12575,7 +12575,7 @@ void REGAL_CALL missing_glGetVertexArrayPointeri_vEXT(GLuint vaobj, GLuint index
   Warning( "glGetVertexArrayPointeri_vEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVertexArrayPointervEXT(GLuint vaobj, GLenum pname, GLvoid **param)
+static void REGAL_CALL missing_glGetVertexArrayPointervEXT(GLuint vaobj, GLenum pname, GLvoid **param)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(pname);
@@ -12583,7 +12583,7 @@ void REGAL_CALL missing_glGetVertexArrayPointervEXT(GLuint vaobj, GLenum pname, 
   Warning( "glGetVertexArrayPointervEXT not available." );
 }
 
-GLvoid *REGAL_CALL missing_glMapNamedBufferEXT(GLuint buffer, GLenum access)
+static GLvoid *REGAL_CALL missing_glMapNamedBufferEXT(GLuint buffer, GLenum access)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(access);
@@ -12591,7 +12591,7 @@ GLvoid *REGAL_CALL missing_glMapNamedBufferEXT(GLuint buffer, GLenum access)
   return NULL;
 }
 
-GLvoid *REGAL_CALL missing_glMapNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
+static GLvoid *REGAL_CALL missing_glMapNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(offset);
@@ -12601,7 +12601,7 @@ GLvoid *REGAL_CALL missing_glMapNamedBufferRangeEXT(GLuint buffer, GLintptr offs
   return NULL;
 }
 
-void REGAL_CALL missing_glMatrixFrustumEXT(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
+static void REGAL_CALL missing_glMatrixFrustumEXT(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(left);
@@ -12613,69 +12613,69 @@ void REGAL_CALL missing_glMatrixFrustumEXT(GLenum mode, GLdouble left, GLdouble 
   Warning( "glMatrixFrustumEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixLoadIdentityEXT(GLenum mode)
+static void REGAL_CALL missing_glMatrixLoadIdentityEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glMatrixLoadIdentityEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixLoadTransposedEXT(GLenum mode, const GLdouble *m)
+static void REGAL_CALL missing_glMatrixLoadTransposedEXT(GLenum mode, const GLdouble *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixLoadTransposedEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixLoadTransposefEXT(GLenum mode, const GLfloat *m)
+static void REGAL_CALL missing_glMatrixLoadTransposefEXT(GLenum mode, const GLfloat *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixLoadTransposefEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixLoaddEXT(GLenum mode, const GLdouble *m)
+static void REGAL_CALL missing_glMatrixLoaddEXT(GLenum mode, const GLdouble *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixLoaddEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixLoadfEXT(GLenum mode, const GLfloat *m)
+static void REGAL_CALL missing_glMatrixLoadfEXT(GLenum mode, const GLfloat *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixLoadfEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixMultTransposedEXT(GLenum mode, const GLdouble *m)
+static void REGAL_CALL missing_glMatrixMultTransposedEXT(GLenum mode, const GLdouble *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixMultTransposedEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixMultTransposefEXT(GLenum mode, const GLfloat *m)
+static void REGAL_CALL missing_glMatrixMultTransposefEXT(GLenum mode, const GLfloat *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixMultTransposefEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixMultdEXT(GLenum mode, const GLdouble *m)
+static void REGAL_CALL missing_glMatrixMultdEXT(GLenum mode, const GLdouble *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixMultdEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixMultfEXT(GLenum mode, const GLfloat *m)
+static void REGAL_CALL missing_glMatrixMultfEXT(GLenum mode, const GLfloat *m)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(m);
   Warning( "glMatrixMultfEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixOrthoEXT(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
+static void REGAL_CALL missing_glMatrixOrthoEXT(GLenum mode, GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(left);
@@ -12687,19 +12687,19 @@ void REGAL_CALL missing_glMatrixOrthoEXT(GLenum mode, GLdouble left, GLdouble ri
   Warning( "glMatrixOrthoEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixPopEXT(GLenum mode)
+static void REGAL_CALL missing_glMatrixPopEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glMatrixPopEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixPushEXT(GLenum mode)
+static void REGAL_CALL missing_glMatrixPushEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glMatrixPushEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixRotatedEXT(GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glMatrixRotatedEXT(GLenum mode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(angle);
@@ -12709,7 +12709,7 @@ void REGAL_CALL missing_glMatrixRotatedEXT(GLenum mode, GLdouble angle, GLdouble
   Warning( "glMatrixRotatedEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixRotatefEXT(GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glMatrixRotatefEXT(GLenum mode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(angle);
@@ -12719,7 +12719,7 @@ void REGAL_CALL missing_glMatrixRotatefEXT(GLenum mode, GLfloat angle, GLfloat x
   Warning( "glMatrixRotatefEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixScaledEXT(GLenum mode, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glMatrixScaledEXT(GLenum mode, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(x);
@@ -12728,7 +12728,7 @@ void REGAL_CALL missing_glMatrixScaledEXT(GLenum mode, GLdouble x, GLdouble y, G
   Warning( "glMatrixScaledEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixScalefEXT(GLenum mode, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glMatrixScalefEXT(GLenum mode, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(x);
@@ -12737,7 +12737,7 @@ void REGAL_CALL missing_glMatrixScalefEXT(GLenum mode, GLfloat x, GLfloat y, GLf
   Warning( "glMatrixScalefEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixTranslatedEXT(GLenum mode, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glMatrixTranslatedEXT(GLenum mode, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(x);
@@ -12746,7 +12746,7 @@ void REGAL_CALL missing_glMatrixTranslatedEXT(GLenum mode, GLdouble x, GLdouble 
   Warning( "glMatrixTranslatedEXT not available." );
 }
 
-void REGAL_CALL missing_glMatrixTranslatefEXT(GLenum mode, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glMatrixTranslatefEXT(GLenum mode, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(x);
@@ -12755,7 +12755,7 @@ void REGAL_CALL missing_glMatrixTranslatefEXT(GLenum mode, GLfloat x, GLfloat y,
   Warning( "glMatrixTranslatefEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexBufferEXT(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer)
+static void REGAL_CALL missing_glMultiTexBufferEXT(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12764,7 +12764,7 @@ void REGAL_CALL missing_glMultiTexBufferEXT(GLenum texunit, GLenum target, GLenu
   Warning( "glMultiTexBufferEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoordPointerEXT(GLenum texunit, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glMultiTexCoordPointerEXT(GLenum texunit, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(size);
@@ -12774,7 +12774,7 @@ void REGAL_CALL missing_glMultiTexCoordPointerEXT(GLenum texunit, GLint size, GL
   Warning( "glMultiTexCoordPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexEnvfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glMultiTexEnvfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12783,7 +12783,7 @@ void REGAL_CALL missing_glMultiTexEnvfEXT(GLenum texunit, GLenum target, GLenum 
   Warning( "glMultiTexEnvfEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12792,7 +12792,7 @@ void REGAL_CALL missing_glMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum
   Warning( "glMultiTexEnvfvEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexEnviEXT(GLenum texunit, GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glMultiTexEnviEXT(GLenum texunit, GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12801,7 +12801,7 @@ void REGAL_CALL missing_glMultiTexEnviEXT(GLenum texunit, GLenum target, GLenum 
   Warning( "glMultiTexEnviEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12810,7 +12810,7 @@ void REGAL_CALL missing_glMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum
   Warning( "glMultiTexEnvivEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexGendEXT(GLenum texunit, GLenum coord, GLenum pname, GLdouble param)
+static void REGAL_CALL missing_glMultiTexGendEXT(GLenum texunit, GLenum coord, GLenum pname, GLdouble param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12819,7 +12819,7 @@ void REGAL_CALL missing_glMultiTexGendEXT(GLenum texunit, GLenum coord, GLenum p
   Warning( "glMultiTexGendEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params)
+static void REGAL_CALL missing_glMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12828,7 +12828,7 @@ void REGAL_CALL missing_glMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum 
   Warning( "glMultiTexGendvEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexGenfEXT(GLenum texunit, GLenum coord, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glMultiTexGenfEXT(GLenum texunit, GLenum coord, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12837,7 +12837,7 @@ void REGAL_CALL missing_glMultiTexGenfEXT(GLenum texunit, GLenum coord, GLenum p
   Warning( "glMultiTexGenfEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12846,7 +12846,7 @@ void REGAL_CALL missing_glMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum 
   Warning( "glMultiTexGenfvEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexGeniEXT(GLenum texunit, GLenum coord, GLenum pname, GLint param)
+static void REGAL_CALL missing_glMultiTexGeniEXT(GLenum texunit, GLenum coord, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12855,7 +12855,7 @@ void REGAL_CALL missing_glMultiTexGeniEXT(GLenum texunit, GLenum coord, GLenum p
   Warning( "glMultiTexGeniEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(coord);
@@ -12864,7 +12864,7 @@ void REGAL_CALL missing_glMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum 
   Warning( "glMultiTexGenivEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12878,7 +12878,7 @@ void REGAL_CALL missing_glMultiTexImage1DEXT(GLenum texunit, GLenum target, GLin
   Warning( "glMultiTexImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12893,7 +12893,7 @@ void REGAL_CALL missing_glMultiTexImage2DEXT(GLenum texunit, GLenum target, GLin
   Warning( "glMultiTexImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12909,7 +12909,7 @@ void REGAL_CALL missing_glMultiTexImage3DEXT(GLenum texunit, GLenum target, GLin
   Warning( "glMultiTexImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12918,7 +12918,7 @@ void REGAL_CALL missing_glMultiTexParameterIivEXT(GLenum texunit, GLenum target,
   Warning( "glMultiTexParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, const GLuint *params)
+static void REGAL_CALL missing_glMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, const GLuint *params)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12927,7 +12927,7 @@ void REGAL_CALL missing_glMultiTexParameterIuivEXT(GLenum texunit, GLenum target
   Warning( "glMultiTexParameterIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexParameterfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glMultiTexParameterfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12936,7 +12936,7 @@ void REGAL_CALL missing_glMultiTexParameterfEXT(GLenum texunit, GLenum target, G
   Warning( "glMultiTexParameterfEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat *param)
+static void REGAL_CALL missing_glMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat *param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12945,7 +12945,7 @@ void REGAL_CALL missing_glMultiTexParameterfvEXT(GLenum texunit, GLenum target, 
   Warning( "glMultiTexParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexParameteriEXT(GLenum texunit, GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glMultiTexParameteriEXT(GLenum texunit, GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12954,7 +12954,7 @@ void REGAL_CALL missing_glMultiTexParameteriEXT(GLenum texunit, GLenum target, G
   Warning( "glMultiTexParameteriEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *param)
+static void REGAL_CALL missing_glMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *param)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12963,7 +12963,7 @@ void REGAL_CALL missing_glMultiTexParameterivEXT(GLenum texunit, GLenum target, 
   Warning( "glMultiTexParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexRenderbufferEXT(GLenum texunit, GLenum target, GLuint renderbuffer)
+static void REGAL_CALL missing_glMultiTexRenderbufferEXT(GLenum texunit, GLenum target, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12971,7 +12971,7 @@ void REGAL_CALL missing_glMultiTexRenderbufferEXT(GLenum texunit, GLenum target,
   Warning( "glMultiTexRenderbufferEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12984,7 +12984,7 @@ void REGAL_CALL missing_glMultiTexSubImage1DEXT(GLenum texunit, GLenum target, G
   Warning( "glMultiTexSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -12999,7 +12999,7 @@ void REGAL_CALL missing_glMultiTexSubImage2DEXT(GLenum texunit, GLenum target, G
   Warning( "glMultiTexSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texunit);
   UNUSED_PARAMETER(target);
@@ -13016,7 +13016,7 @@ void REGAL_CALL missing_glMultiTexSubImage3DEXT(GLenum texunit, GLenum target, G
   Warning( "glMultiTexSubImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedBufferDataEXT(GLuint buffer, GLsizeiptr size, const GLvoid *data, GLenum usage)
+static void REGAL_CALL missing_glNamedBufferDataEXT(GLuint buffer, GLsizeiptr size, const GLvoid *data, GLenum usage)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(size);
@@ -13025,7 +13025,7 @@ void REGAL_CALL missing_glNamedBufferDataEXT(GLuint buffer, GLsizeiptr size, con
   Warning( "glNamedBufferDataEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+static void REGAL_CALL missing_glNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(offset);
@@ -13034,7 +13034,7 @@ void REGAL_CALL missing_glNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, 
   Warning( "glNamedBufferSubDataEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedCopyBufferSubDataEXT(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
+static void REGAL_CALL missing_glNamedCopyBufferSubDataEXT(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(readBuffer);
   UNUSED_PARAMETER(writeBuffer);
@@ -13044,7 +13044,7 @@ void REGAL_CALL missing_glNamedCopyBufferSubDataEXT(GLuint readBuffer, GLuint wr
   Warning( "glNamedCopyBufferSubDataEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferRenderbufferEXT(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
+static void REGAL_CALL missing_glNamedFramebufferRenderbufferEXT(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13053,7 +13053,7 @@ void REGAL_CALL missing_glNamedFramebufferRenderbufferEXT(GLuint framebuffer, GL
   Warning( "glNamedFramebufferRenderbufferEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferTexture1DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glNamedFramebufferTexture1DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13063,7 +13063,7 @@ void REGAL_CALL missing_glNamedFramebufferTexture1DEXT(GLuint framebuffer, GLenu
   Warning( "glNamedFramebufferTexture1DEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferTexture2DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glNamedFramebufferTexture2DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13073,7 +13073,7 @@ void REGAL_CALL missing_glNamedFramebufferTexture2DEXT(GLuint framebuffer, GLenu
   Warning( "glNamedFramebufferTexture2DEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferTexture3DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
+static void REGAL_CALL missing_glNamedFramebufferTexture3DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13084,7 +13084,7 @@ void REGAL_CALL missing_glNamedFramebufferTexture3DEXT(GLuint framebuffer, GLenu
   Warning( "glNamedFramebufferTexture3DEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferTextureEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level)
+static void REGAL_CALL missing_glNamedFramebufferTextureEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13093,7 +13093,7 @@ void REGAL_CALL missing_glNamedFramebufferTextureEXT(GLuint framebuffer, GLenum 
   Warning( "glNamedFramebufferTextureEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferTextureFaceEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face)
+static void REGAL_CALL missing_glNamedFramebufferTextureFaceEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13103,7 +13103,7 @@ void REGAL_CALL missing_glNamedFramebufferTextureFaceEXT(GLuint framebuffer, GLe
   Warning( "glNamedFramebufferTextureFaceEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedFramebufferTextureLayerEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer)
+static void REGAL_CALL missing_glNamedFramebufferTextureLayerEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer)
 {
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(attachment);
@@ -13113,7 +13113,7 @@ void REGAL_CALL missing_glNamedFramebufferTextureLayerEXT(GLuint framebuffer, GL
   Warning( "glNamedFramebufferTextureLayerEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameter4dEXT(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glNamedProgramLocalParameter4dEXT(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13125,7 +13125,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameter4dEXT(GLuint program, GLenum
   Warning( "glNamedProgramLocalParameter4dEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameter4dvEXT(GLuint program, GLenum target, GLuint index, const GLdouble *params)
+static void REGAL_CALL missing_glNamedProgramLocalParameter4dvEXT(GLuint program, GLenum target, GLuint index, const GLdouble *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13134,7 +13134,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameter4dvEXT(GLuint program, GLenu
   Warning( "glNamedProgramLocalParameter4dvEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameter4fEXT(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glNamedProgramLocalParameter4fEXT(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13146,7 +13146,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameter4fEXT(GLuint program, GLenum
   Warning( "glNamedProgramLocalParameter4fEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameter4fvEXT(GLuint program, GLenum target, GLuint index, const GLfloat *params)
+static void REGAL_CALL missing_glNamedProgramLocalParameter4fvEXT(GLuint program, GLenum target, GLuint index, const GLfloat *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13155,7 +13155,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameter4fvEXT(GLuint program, GLenu
   Warning( "glNamedProgramLocalParameter4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameterI4iEXT(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glNamedProgramLocalParameterI4iEXT(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13167,7 +13167,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameterI4iEXT(GLuint program, GLenu
   Warning( "glNamedProgramLocalParameterI4iEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameterI4ivEXT(GLuint program, GLenum target, GLuint index, const GLint *params)
+static void REGAL_CALL missing_glNamedProgramLocalParameterI4ivEXT(GLuint program, GLenum target, GLuint index, const GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13176,7 +13176,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameterI4ivEXT(GLuint program, GLen
   Warning( "glNamedProgramLocalParameterI4ivEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameterI4uiEXT(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
+static void REGAL_CALL missing_glNamedProgramLocalParameterI4uiEXT(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13188,7 +13188,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameterI4uiEXT(GLuint program, GLen
   Warning( "glNamedProgramLocalParameterI4uiEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameterI4uivEXT(GLuint program, GLenum target, GLuint index, const GLuint *params)
+static void REGAL_CALL missing_glNamedProgramLocalParameterI4uivEXT(GLuint program, GLenum target, GLuint index, const GLuint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13197,7 +13197,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameterI4uivEXT(GLuint program, GLe
   Warning( "glNamedProgramLocalParameterI4uivEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParameters4fvEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params)
+static void REGAL_CALL missing_glNamedProgramLocalParameters4fvEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13207,7 +13207,7 @@ void REGAL_CALL missing_glNamedProgramLocalParameters4fvEXT(GLuint program, GLen
   Warning( "glNamedProgramLocalParameters4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParametersI4ivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params)
+static void REGAL_CALL missing_glNamedProgramLocalParametersI4ivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13217,7 +13217,7 @@ void REGAL_CALL missing_glNamedProgramLocalParametersI4ivEXT(GLuint program, GLe
   Warning( "glNamedProgramLocalParametersI4ivEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramLocalParametersI4uivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params)
+static void REGAL_CALL missing_glNamedProgramLocalParametersI4uivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13227,7 +13227,7 @@ void REGAL_CALL missing_glNamedProgramLocalParametersI4uivEXT(GLuint program, GL
   Warning( "glNamedProgramLocalParametersI4uivEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedProgramStringEXT(GLuint program, GLenum target, GLenum format, GLsizei len, const GLvoid *string)
+static void REGAL_CALL missing_glNamedProgramStringEXT(GLuint program, GLenum target, GLenum format, GLsizei len, const GLvoid *string)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(target);
@@ -13237,7 +13237,7 @@ void REGAL_CALL missing_glNamedProgramStringEXT(GLuint program, GLenum target, G
   Warning( "glNamedProgramStringEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedRenderbufferStorageEXT(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glNamedRenderbufferStorageEXT(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(renderbuffer);
   UNUSED_PARAMETER(internalformat);
@@ -13246,7 +13246,7 @@ void REGAL_CALL missing_glNamedRenderbufferStorageEXT(GLuint renderbuffer, GLenu
   Warning( "glNamedRenderbufferStorageEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedRenderbufferStorageMultisampleCoverageEXT(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glNamedRenderbufferStorageMultisampleCoverageEXT(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(renderbuffer);
   UNUSED_PARAMETER(coverageSamples);
@@ -13257,7 +13257,7 @@ void REGAL_CALL missing_glNamedRenderbufferStorageMultisampleCoverageEXT(GLuint 
   Warning( "glNamedRenderbufferStorageMultisampleCoverageEXT not available." );
 }
 
-void REGAL_CALL missing_glNamedRenderbufferStorageMultisampleEXT(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glNamedRenderbufferStorageMultisampleEXT(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(renderbuffer);
   UNUSED_PARAMETER(samples);
@@ -13267,7 +13267,7 @@ void REGAL_CALL missing_glNamedRenderbufferStorageMultisampleEXT(GLuint renderbu
   Warning( "glNamedRenderbufferStorageMultisampleEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1dEXT(GLuint program, GLint location, GLdouble x)
+static void REGAL_CALL missing_glProgramUniform1dEXT(GLuint program, GLint location, GLdouble x)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13275,7 +13275,7 @@ void REGAL_CALL missing_glProgramUniform1dEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform1dEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform1dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13284,7 +13284,7 @@ void REGAL_CALL missing_glProgramUniform1dvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform1dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1fEXT(GLuint program, GLint location, GLfloat v0)
+static void REGAL_CALL missing_glProgramUniform1fEXT(GLuint program, GLint location, GLfloat v0)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13292,7 +13292,7 @@ void REGAL_CALL missing_glProgramUniform1fEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform1fEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform1fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13301,7 +13301,7 @@ void REGAL_CALL missing_glProgramUniform1fvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform1fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1iEXT(GLuint program, GLint location, GLint v0)
+static void REGAL_CALL missing_glProgramUniform1iEXT(GLuint program, GLint location, GLint v0)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13309,7 +13309,7 @@ void REGAL_CALL missing_glProgramUniform1iEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform1iEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform1ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13318,7 +13318,7 @@ void REGAL_CALL missing_glProgramUniform1ivEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform1ivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1uiEXT(GLuint program, GLint location, GLuint v0)
+static void REGAL_CALL missing_glProgramUniform1uiEXT(GLuint program, GLint location, GLuint v0)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13326,7 +13326,7 @@ void REGAL_CALL missing_glProgramUniform1uiEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform1uiEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform1uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13335,7 +13335,7 @@ void REGAL_CALL missing_glProgramUniform1uivEXT(GLuint program, GLint location, 
   Warning( "glProgramUniform1uivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2dEXT(GLuint program, GLint location, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glProgramUniform2dEXT(GLuint program, GLint location, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13344,7 +13344,7 @@ void REGAL_CALL missing_glProgramUniform2dEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform2dEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform2dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13353,7 +13353,7 @@ void REGAL_CALL missing_glProgramUniform2dvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform2dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1)
+static void REGAL_CALL missing_glProgramUniform2fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13362,7 +13362,7 @@ void REGAL_CALL missing_glProgramUniform2fEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform2fEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform2fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13371,7 +13371,7 @@ void REGAL_CALL missing_glProgramUniform2fvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform2fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2iEXT(GLuint program, GLint location, GLint v0, GLint v1)
+static void REGAL_CALL missing_glProgramUniform2iEXT(GLuint program, GLint location, GLint v0, GLint v1)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13380,7 +13380,7 @@ void REGAL_CALL missing_glProgramUniform2iEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform2iEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform2ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13389,7 +13389,7 @@ void REGAL_CALL missing_glProgramUniform2ivEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform2ivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1)
+static void REGAL_CALL missing_glProgramUniform2uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13398,7 +13398,7 @@ void REGAL_CALL missing_glProgramUniform2uiEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform2uiEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform2uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13407,7 +13407,7 @@ void REGAL_CALL missing_glProgramUniform2uivEXT(GLuint program, GLint location, 
   Warning( "glProgramUniform2uivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3dEXT(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glProgramUniform3dEXT(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13417,7 +13417,7 @@ void REGAL_CALL missing_glProgramUniform3dEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform3dEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform3dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13426,7 +13426,7 @@ void REGAL_CALL missing_glProgramUniform3dvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
+static void REGAL_CALL missing_glProgramUniform3fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13436,7 +13436,7 @@ void REGAL_CALL missing_glProgramUniform3fEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform3fEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform3fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13445,7 +13445,7 @@ void REGAL_CALL missing_glProgramUniform3fvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2)
+static void REGAL_CALL missing_glProgramUniform3iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13455,7 +13455,7 @@ void REGAL_CALL missing_glProgramUniform3iEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform3iEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform3ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13464,7 +13464,7 @@ void REGAL_CALL missing_glProgramUniform3ivEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform3ivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2)
+static void REGAL_CALL missing_glProgramUniform3uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13474,7 +13474,7 @@ void REGAL_CALL missing_glProgramUniform3uiEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform3uiEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform3uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13483,7 +13483,7 @@ void REGAL_CALL missing_glProgramUniform3uivEXT(GLuint program, GLint location, 
   Warning( "glProgramUniform3uivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4dEXT(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glProgramUniform4dEXT(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13494,7 +13494,7 @@ void REGAL_CALL missing_glProgramUniform4dEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform4dEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniform4dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13503,7 +13503,7 @@ void REGAL_CALL missing_glProgramUniform4dvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform4dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+static void REGAL_CALL missing_glProgramUniform4fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13514,7 +13514,7 @@ void REGAL_CALL missing_glProgramUniform4fEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform4fEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniform4fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13523,7 +13523,7 @@ void REGAL_CALL missing_glProgramUniform4fvEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
+static void REGAL_CALL missing_glProgramUniform4iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13534,7 +13534,7 @@ void REGAL_CALL missing_glProgramUniform4iEXT(GLuint program, GLint location, GL
   Warning( "glProgramUniform4iEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
+static void REGAL_CALL missing_glProgramUniform4ivEXT(GLuint program, GLint location, GLsizei count, const GLint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13543,7 +13543,7 @@ void REGAL_CALL missing_glProgramUniform4ivEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform4ivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
+static void REGAL_CALL missing_glProgramUniform4uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13554,7 +13554,7 @@ void REGAL_CALL missing_glProgramUniform4uiEXT(GLuint program, GLint location, G
   Warning( "glProgramUniform4uiEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glProgramUniform4uivEXT(GLuint program, GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13563,7 +13563,7 @@ void REGAL_CALL missing_glProgramUniform4uivEXT(GLuint program, GLint location, 
   Warning( "glProgramUniform4uivEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13573,7 +13573,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2dvEXT(GLuint program, GLint locat
   Warning( "glProgramUniformMatrix2dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13583,7 +13583,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2fvEXT(GLuint program, GLint locat
   Warning( "glProgramUniformMatrix2fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13593,7 +13593,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x3dvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix2x3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13603,7 +13603,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x3fvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix2x3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13613,7 +13613,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x4dvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix2x4dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix2x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix2x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13623,7 +13623,7 @@ void REGAL_CALL missing_glProgramUniformMatrix2x4fvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix2x4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13633,7 +13633,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3dvEXT(GLuint program, GLint locat
   Warning( "glProgramUniformMatrix3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13643,7 +13643,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3fvEXT(GLuint program, GLint locat
   Warning( "glProgramUniformMatrix3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13653,7 +13653,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x2dvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix3x2dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13663,7 +13663,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x2fvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix3x2fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13673,7 +13673,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x4dvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix3x4dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix3x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix3x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13683,7 +13683,7 @@ void REGAL_CALL missing_glProgramUniformMatrix3x4fvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix3x4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13693,7 +13693,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4dvEXT(GLuint program, GLint locat
   Warning( "glProgramUniformMatrix4dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13703,7 +13703,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4fvEXT(GLuint program, GLint locat
   Warning( "glProgramUniformMatrix4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13713,7 +13713,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x2dvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix4x2dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13723,7 +13723,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x2fvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix4x2fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13733,7 +13733,7 @@ void REGAL_CALL missing_glProgramUniformMatrix4x3dvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix4x3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformMatrix4x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void REGAL_CALL missing_glProgramUniformMatrix4x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -13743,13 +13743,13 @@ void REGAL_CALL missing_glProgramUniformMatrix4x3fvEXT(GLuint program, GLint loc
   Warning( "glProgramUniformMatrix4x3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glPushClientAttribDefaultEXT(GLbitfield mask)
+static void REGAL_CALL missing_glPushClientAttribDefaultEXT(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glPushClientAttribDefaultEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureBufferEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer)
+static void REGAL_CALL missing_glTextureBufferEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13758,7 +13758,7 @@ void REGAL_CALL missing_glTextureBufferEXT(GLuint texture, GLenum target, GLenum
   Warning( "glTextureBufferEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13772,7 +13772,7 @@ void REGAL_CALL missing_glTextureImage1DEXT(GLuint texture, GLenum target, GLint
   Warning( "glTextureImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13787,7 +13787,7 @@ void REGAL_CALL missing_glTextureImage2DEXT(GLuint texture, GLenum target, GLint
   Warning( "glTextureImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13803,7 +13803,7 @@ void REGAL_CALL missing_glTextureImage3DEXT(GLuint texture, GLenum target, GLint
   Warning( "glTextureImage3DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13812,7 +13812,7 @@ void REGAL_CALL missing_glTextureParameterIivEXT(GLuint texture, GLenum target, 
   Warning( "glTextureParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, const GLuint *params)
+static void REGAL_CALL missing_glTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, const GLuint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13821,7 +13821,7 @@ void REGAL_CALL missing_glTextureParameterIuivEXT(GLuint texture, GLenum target,
   Warning( "glTextureParameterIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureParameterfEXT(GLuint texture, GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glTextureParameterfEXT(GLuint texture, GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13830,7 +13830,7 @@ void REGAL_CALL missing_glTextureParameterfEXT(GLuint texture, GLenum target, GL
   Warning( "glTextureParameterfEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureParameterfvEXT(GLuint texture, GLenum target, GLenum pname, const GLfloat *param)
+static void REGAL_CALL missing_glTextureParameterfvEXT(GLuint texture, GLenum target, GLenum pname, const GLfloat *param)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13839,7 +13839,7 @@ void REGAL_CALL missing_glTextureParameterfvEXT(GLuint texture, GLenum target, G
   Warning( "glTextureParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureParameteriEXT(GLuint texture, GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glTextureParameteriEXT(GLuint texture, GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13848,7 +13848,7 @@ void REGAL_CALL missing_glTextureParameteriEXT(GLuint texture, GLenum target, GL
   Warning( "glTextureParameteriEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureParameterivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *param)
+static void REGAL_CALL missing_glTextureParameterivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *param)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13857,7 +13857,7 @@ void REGAL_CALL missing_glTextureParameterivEXT(GLuint texture, GLenum target, G
   Warning( "glTextureParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureRenderbufferEXT(GLuint texture, GLenum target, GLuint renderbuffer)
+static void REGAL_CALL missing_glTextureRenderbufferEXT(GLuint texture, GLenum target, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13865,7 +13865,7 @@ void REGAL_CALL missing_glTextureRenderbufferEXT(GLuint texture, GLenum target, 
   Warning( "glTextureRenderbufferEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13878,7 +13878,7 @@ void REGAL_CALL missing_glTextureSubImage1DEXT(GLuint texture, GLenum target, GL
   Warning( "glTextureSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13893,7 +13893,7 @@ void REGAL_CALL missing_glTextureSubImage2DEXT(GLuint texture, GLenum target, GL
   Warning( "glTextureSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -13910,14 +13910,14 @@ void REGAL_CALL missing_glTextureSubImage3DEXT(GLuint texture, GLenum target, GL
   Warning( "glTextureSubImage3DEXT not available." );
 }
 
-GLboolean REGAL_CALL missing_glUnmapNamedBufferEXT(GLuint buffer)
+static GLboolean REGAL_CALL missing_glUnmapNamedBufferEXT(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glUnmapNamedBufferEXT not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13928,7 +13928,7 @@ void REGAL_CALL missing_glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer,
   Warning( "glVertexArrayColorOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint buffer, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint buffer, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13937,7 +13937,7 @@ void REGAL_CALL missing_glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint buff
   Warning( "glVertexArrayEdgeFlagOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13947,7 +13947,7 @@ void REGAL_CALL missing_glVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint buff
   Warning( "glVertexArrayFogCoordOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13957,7 +13957,7 @@ void REGAL_CALL missing_glVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buffer,
   Warning( "glVertexArrayIndexOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13969,7 +13969,7 @@ void REGAL_CALL missing_glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint
   Warning( "glVertexArrayMultiTexCoordOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13979,7 +13979,7 @@ void REGAL_CALL missing_glVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buffer
   Warning( "glVertexArrayNormalOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -13990,7 +13990,7 @@ void REGAL_CALL missing_glVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GLuin
   Warning( "glVertexArraySecondaryColorOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -14001,7 +14001,7 @@ void REGAL_CALL missing_glVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint buff
   Warning( "glVertexArrayTexCoordOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -14013,7 +14013,7 @@ void REGAL_CALL missing_glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLuint
   Warning( "glVertexArrayVertexAttribIOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -14026,7 +14026,7 @@ void REGAL_CALL missing_glVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLuint 
   Warning( "glVertexArrayVertexAttribOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -14039,7 +14039,7 @@ void REGAL_CALL missing_glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buffer
 
 // GL_EXT_discard_framebuffer
 
-void REGAL_CALL missing_glDiscardFramebufferEXT(GLenum target, GLsizei numAttachments, const GLenum *attachments)
+static void REGAL_CALL missing_glDiscardFramebufferEXT(GLenum target, GLsizei numAttachments, const GLenum *attachments)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(numAttachments);
@@ -14049,7 +14049,7 @@ void REGAL_CALL missing_glDiscardFramebufferEXT(GLenum target, GLsizei numAttach
 
 // GL_EXT_draw_buffers2
 
-void REGAL_CALL missing_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
+static void REGAL_CALL missing_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
 {
   UNUSED_PARAMETER(buf);
   UNUSED_PARAMETER(r);
@@ -14059,21 +14059,21 @@ void REGAL_CALL missing_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean
   Warning( "glColorMaskIndexedEXT not available." );
 }
 
-void REGAL_CALL missing_glDisableIndexedEXT(GLenum target, GLuint index)
+static void REGAL_CALL missing_glDisableIndexedEXT(GLenum target, GLuint index)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
   Warning( "glDisableIndexedEXT not available." );
 }
 
-void REGAL_CALL missing_glEnableIndexedEXT(GLenum target, GLuint index)
+static void REGAL_CALL missing_glEnableIndexedEXT(GLenum target, GLuint index)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
   Warning( "glEnableIndexedEXT not available." );
 }
 
-void REGAL_CALL missing_glGetBooleanIndexedvEXT(GLenum value, GLuint index, GLboolean *data)
+static void REGAL_CALL missing_glGetBooleanIndexedvEXT(GLenum value, GLuint index, GLboolean *data)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(index);
@@ -14081,7 +14081,7 @@ void REGAL_CALL missing_glGetBooleanIndexedvEXT(GLenum value, GLuint index, GLbo
   Warning( "glGetBooleanIndexedvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetIntegerIndexedvEXT(GLenum value, GLuint index, GLint *data)
+static void REGAL_CALL missing_glGetIntegerIndexedvEXT(GLenum value, GLuint index, GLint *data)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(index);
@@ -14089,7 +14089,7 @@ void REGAL_CALL missing_glGetIntegerIndexedvEXT(GLenum value, GLuint index, GLin
   Warning( "glGetIntegerIndexedvEXT not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsEnabledIndexedEXT(GLenum target, GLuint index)
+static GLboolean REGAL_CALL missing_glIsEnabledIndexedEXT(GLenum target, GLuint index)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -14099,7 +14099,7 @@ GLboolean REGAL_CALL missing_glIsEnabledIndexedEXT(GLenum target, GLuint index)
 
 // GL_EXT_draw_instanced
 
-void REGAL_CALL missing_glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsizei primcount)
+static void REGAL_CALL missing_glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -14108,7 +14108,7 @@ void REGAL_CALL missing_glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsiz
   Warning( "glDrawArraysInstancedEXT not available." );
 }
 
-void REGAL_CALL missing_glDrawElementsInstancedEXT(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
+static void REGAL_CALL missing_glDrawElementsInstancedEXT(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -14120,7 +14120,7 @@ void REGAL_CALL missing_glDrawElementsInstancedEXT(GLenum mode, GLsizei count, G
 
 // GL_EXT_draw_range_elements
 
-void REGAL_CALL missing_glDrawRangeElementsEXT(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices)
+static void REGAL_CALL missing_glDrawRangeElementsEXT(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -14133,7 +14133,7 @@ void REGAL_CALL missing_glDrawRangeElementsEXT(GLenum mode, GLuint start, GLuint
 
 // GL_EXT_fog_coord
 
-void REGAL_CALL missing_glFogCoordPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glFogCoordPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -14141,25 +14141,25 @@ void REGAL_CALL missing_glFogCoordPointerEXT(GLenum type, GLsizei stride, const 
   Warning( "glFogCoordPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glFogCoorddEXT(GLdouble coord)
+static void REGAL_CALL missing_glFogCoorddEXT(GLdouble coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoorddEXT not available." );
 }
 
-void REGAL_CALL missing_glFogCoorddvEXT(const GLdouble *coord)
+static void REGAL_CALL missing_glFogCoorddvEXT(const GLdouble *coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoorddvEXT not available." );
 }
 
-void REGAL_CALL missing_glFogCoordfEXT(GLfloat coord)
+static void REGAL_CALL missing_glFogCoordfEXT(GLfloat coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordfEXT not available." );
 }
 
-void REGAL_CALL missing_glFogCoordfvEXT(const GLfloat *coord)
+static void REGAL_CALL missing_glFogCoordfvEXT(const GLfloat *coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordfvEXT not available." );
@@ -14167,42 +14167,42 @@ void REGAL_CALL missing_glFogCoordfvEXT(const GLfloat *coord)
 
 // GL_EXT_fragment_lighting
 
-void REGAL_CALL missing_glFragmentColorMaterialEXT(GLenum face, GLenum mode)
+static void REGAL_CALL missing_glFragmentColorMaterialEXT(GLenum face, GLenum mode)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mode);
   Warning( "glFragmentColorMaterialEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModelfEXT(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glFragmentLightModelfEXT(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFragmentLightModelfEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModelfvEXT(GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glFragmentLightModelfvEXT(GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFragmentLightModelfvEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModeliEXT(GLenum pname, GLint param)
+static void REGAL_CALL missing_glFragmentLightModeliEXT(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFragmentLightModeliEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModelivEXT(GLenum pname, GLint *params)
+static void REGAL_CALL missing_glFragmentLightModelivEXT(GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFragmentLightModelivEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightfEXT(GLenum light, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glFragmentLightfEXT(GLenum light, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -14210,7 +14210,7 @@ void REGAL_CALL missing_glFragmentLightfEXT(GLenum light, GLenum pname, GLfloat 
   Warning( "glFragmentLightfEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -14218,7 +14218,7 @@ void REGAL_CALL missing_glFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat
   Warning( "glFragmentLightfvEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightiEXT(GLenum light, GLenum pname, GLint param)
+static void REGAL_CALL missing_glFragmentLightiEXT(GLenum light, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -14226,7 +14226,7 @@ void REGAL_CALL missing_glFragmentLightiEXT(GLenum light, GLenum pname, GLint pa
   Warning( "glFragmentLightiEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightivEXT(GLenum light, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glFragmentLightivEXT(GLenum light, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -14234,7 +14234,7 @@ void REGAL_CALL missing_glFragmentLightivEXT(GLenum light, GLenum pname, GLint *
   Warning( "glFragmentLightivEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialfEXT(GLenum face, GLenum pname, const GLfloat param)
+static void REGAL_CALL missing_glFragmentMaterialfEXT(GLenum face, GLenum pname, const GLfloat param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -14242,7 +14242,7 @@ void REGAL_CALL missing_glFragmentMaterialfEXT(GLenum face, GLenum pname, const 
   Warning( "glFragmentMaterialfEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -14250,7 +14250,7 @@ void REGAL_CALL missing_glFragmentMaterialfvEXT(GLenum face, GLenum pname, const
   Warning( "glFragmentMaterialfvEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialiEXT(GLenum face, GLenum pname, const GLint param)
+static void REGAL_CALL missing_glFragmentMaterialiEXT(GLenum face, GLenum pname, const GLint param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -14258,7 +14258,7 @@ void REGAL_CALL missing_glFragmentMaterialiEXT(GLenum face, GLenum pname, const 
   Warning( "glFragmentMaterialiEXT not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialivEXT(GLenum face, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glFragmentMaterialivEXT(GLenum face, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -14266,7 +14266,7 @@ void REGAL_CALL missing_glFragmentMaterialivEXT(GLenum face, GLenum pname, const
   Warning( "glFragmentMaterialivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -14274,7 +14274,7 @@ void REGAL_CALL missing_glGetFragmentLightfvEXT(GLenum light, GLenum pname, GLfl
   Warning( "glGetFragmentLightfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentLightivEXT(GLenum light, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFragmentLightivEXT(GLenum light, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -14282,7 +14282,7 @@ void REGAL_CALL missing_glGetFragmentLightivEXT(GLenum light, GLenum pname, GLin
   Warning( "glGetFragmentLightivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glGetFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -14290,7 +14290,7 @@ void REGAL_CALL missing_glGetFragmentMaterialfvEXT(GLenum face, GLenum pname, co
   Warning( "glGetFragmentMaterialfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentMaterialivEXT(GLenum face, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glGetFragmentMaterialivEXT(GLenum face, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -14298,7 +14298,7 @@ void REGAL_CALL missing_glGetFragmentMaterialivEXT(GLenum face, GLenum pname, co
   Warning( "glGetFragmentMaterialivEXT not available." );
 }
 
-void REGAL_CALL missing_glLightEnviEXT(GLenum pname, GLint param)
+static void REGAL_CALL missing_glLightEnviEXT(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
@@ -14307,7 +14307,7 @@ void REGAL_CALL missing_glLightEnviEXT(GLenum pname, GLint param)
 
 // GL_EXT_framebuffer_blit
 
-void REGAL_CALL missing_glBlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+static void REGAL_CALL missing_glBlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 {
   UNUSED_PARAMETER(srcX0);
   UNUSED_PARAMETER(srcY0);
@@ -14324,7 +14324,7 @@ void REGAL_CALL missing_glBlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint src
 
 // GL_EXT_framebuffer_multisample
 
-void REGAL_CALL missing_glRenderbufferStorageMultisampleEXT(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageMultisampleEXT(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -14336,42 +14336,42 @@ void REGAL_CALL missing_glRenderbufferStorageMultisampleEXT(GLenum target, GLsiz
 
 // GL_EXT_framebuffer_object
 
-void REGAL_CALL missing_glBindFramebufferEXT(GLenum target, GLuint framebuffer)
+static void REGAL_CALL missing_glBindFramebufferEXT(GLenum target, GLuint framebuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(framebuffer);
   Warning( "glBindFramebufferEXT not available." );
 }
 
-void REGAL_CALL missing_glBindRenderbufferEXT(GLenum target, GLuint renderbuffer)
+static void REGAL_CALL missing_glBindRenderbufferEXT(GLenum target, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glBindRenderbufferEXT not available." );
 }
 
-GLenum REGAL_CALL missing_glCheckFramebufferStatusEXT(GLenum target)
+static GLenum REGAL_CALL missing_glCheckFramebufferStatusEXT(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glCheckFramebufferStatusEXT not available." );
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glDeleteFramebuffersEXT(GLsizei n, const GLuint *framebuffers)
+static void REGAL_CALL missing_glDeleteFramebuffersEXT(GLsizei n, const GLuint *framebuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(framebuffers);
   Warning( "glDeleteFramebuffersEXT not available." );
 }
 
-void REGAL_CALL missing_glDeleteRenderbuffersEXT(GLsizei n, const GLuint *renderbuffers)
+static void REGAL_CALL missing_glDeleteRenderbuffersEXT(GLsizei n, const GLuint *renderbuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(renderbuffers);
   Warning( "glDeleteRenderbuffersEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferRenderbufferEXT(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
+static void REGAL_CALL missing_glFramebufferRenderbufferEXT(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14380,7 +14380,7 @@ void REGAL_CALL missing_glFramebufferRenderbufferEXT(GLenum target, GLenum attac
   Warning( "glFramebufferRenderbufferEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture1DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTexture1DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14390,7 +14390,7 @@ void REGAL_CALL missing_glFramebufferTexture1DEXT(GLenum target, GLenum attachme
   Warning( "glFramebufferTexture1DEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture2DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTexture2DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14400,7 +14400,7 @@ void REGAL_CALL missing_glFramebufferTexture2DEXT(GLenum target, GLenum attachme
   Warning( "glFramebufferTexture2DEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture3DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
+static void REGAL_CALL missing_glFramebufferTexture3DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14411,27 +14411,27 @@ void REGAL_CALL missing_glFramebufferTexture3DEXT(GLenum target, GLenum attachme
   Warning( "glFramebufferTexture3DEXT not available." );
 }
 
-void REGAL_CALL missing_glGenFramebuffersEXT(GLsizei n, GLuint *framebuffers)
+static void REGAL_CALL missing_glGenFramebuffersEXT(GLsizei n, GLuint *framebuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(framebuffers);
   Warning( "glGenFramebuffersEXT not available." );
 }
 
-void REGAL_CALL missing_glGenRenderbuffersEXT(GLsizei n, GLuint *renderbuffers)
+static void REGAL_CALL missing_glGenRenderbuffersEXT(GLsizei n, GLuint *renderbuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(renderbuffers);
   Warning( "glGenRenderbuffersEXT not available." );
 }
 
-void REGAL_CALL missing_glGenerateMipmapEXT(GLenum target)
+static void REGAL_CALL missing_glGenerateMipmapEXT(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glGenerateMipmapEXT not available." );
 }
 
-void REGAL_CALL missing_glGetFramebufferAttachmentParameterivEXT(GLenum target, GLenum attachment, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFramebufferAttachmentParameterivEXT(GLenum target, GLenum attachment, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14440,7 +14440,7 @@ void REGAL_CALL missing_glGetFramebufferAttachmentParameterivEXT(GLenum target, 
   Warning( "glGetFramebufferAttachmentParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetRenderbufferParameterivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetRenderbufferParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -14448,21 +14448,21 @@ void REGAL_CALL missing_glGetRenderbufferParameterivEXT(GLenum target, GLenum pn
   Warning( "glGetRenderbufferParameterivEXT not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsFramebufferEXT(GLuint framebuffer)
+static GLboolean REGAL_CALL missing_glIsFramebufferEXT(GLuint framebuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   Warning( "glIsFramebufferEXT not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsRenderbufferEXT(GLuint renderbuffer)
+static GLboolean REGAL_CALL missing_glIsRenderbufferEXT(GLuint renderbuffer)
 {
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glIsRenderbufferEXT not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glRenderbufferStorageEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -14473,7 +14473,7 @@ void REGAL_CALL missing_glRenderbufferStorageEXT(GLenum target, GLenum internalf
 
 // GL_EXT_geometry_shader4
 
-void REGAL_CALL missing_glFramebufferTextureEXT(GLenum target, GLenum attachment, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTextureEXT(GLenum target, GLenum attachment, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14482,7 +14482,7 @@ void REGAL_CALL missing_glFramebufferTextureEXT(GLenum target, GLenum attachment
   Warning( "glFramebufferTextureEXT not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTextureFaceEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
+static void REGAL_CALL missing_glFramebufferTextureFaceEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14492,7 +14492,7 @@ void REGAL_CALL missing_glFramebufferTextureFaceEXT(GLenum target, GLenum attach
   Warning( "glFramebufferTextureFaceEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramParameteriEXT(GLuint program, GLenum pname, GLint value)
+static void REGAL_CALL missing_glProgramParameteriEXT(GLuint program, GLenum pname, GLint value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(pname);
@@ -14502,7 +14502,7 @@ void REGAL_CALL missing_glProgramParameteriEXT(GLuint program, GLenum pname, GLi
 
 // GL_EXT_gpu_program_parameters
 
-void REGAL_CALL missing_glProgramEnvParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat *params)
+static void REGAL_CALL missing_glProgramEnvParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -14511,7 +14511,7 @@ void REGAL_CALL missing_glProgramEnvParameters4fvEXT(GLenum target, GLuint index
   Warning( "glProgramEnvParameters4fvEXT not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat *params)
+static void REGAL_CALL missing_glProgramLocalParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -14522,7 +14522,7 @@ void REGAL_CALL missing_glProgramLocalParameters4fvEXT(GLenum target, GLuint ind
 
 // GL_EXT_gpu_shader4
 
-void REGAL_CALL missing_glBindFragDataLocationEXT(GLuint program, GLuint color, const GLchar *name)
+static void REGAL_CALL missing_glBindFragDataLocationEXT(GLuint program, GLuint color, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(color);
@@ -14530,7 +14530,7 @@ void REGAL_CALL missing_glBindFragDataLocationEXT(GLuint program, GLuint color, 
   Warning( "glBindFragDataLocationEXT not available." );
 }
 
-GLint REGAL_CALL missing_glGetFragDataLocationEXT(GLuint program, const GLchar *name)
+static GLint REGAL_CALL missing_glGetFragDataLocationEXT(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
@@ -14538,7 +14538,7 @@ GLint REGAL_CALL missing_glGetFragDataLocationEXT(GLuint program, const GLchar *
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glGetUniformuivEXT(GLuint program, GLint location, GLuint *params)
+static void REGAL_CALL missing_glGetUniformuivEXT(GLuint program, GLint location, GLuint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -14546,7 +14546,7 @@ void REGAL_CALL missing_glGetUniformuivEXT(GLuint program, GLint location, GLuin
   Warning( "glGetUniformuivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribIivEXT(GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVertexAttribIivEXT(GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -14554,7 +14554,7 @@ void REGAL_CALL missing_glGetVertexAttribIivEXT(GLuint index, GLenum pname, GLin
   Warning( "glGetVertexAttribIivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribIuivEXT(GLuint index, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetVertexAttribIuivEXT(GLuint index, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -14562,14 +14562,14 @@ void REGAL_CALL missing_glGetVertexAttribIuivEXT(GLuint index, GLenum pname, GLu
   Warning( "glGetVertexAttribIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform1uiEXT(GLint location, GLuint v0)
+static void REGAL_CALL missing_glUniform1uiEXT(GLint location, GLuint v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniform1uiEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform1uivEXT(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform1uivEXT(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -14577,7 +14577,7 @@ void REGAL_CALL missing_glUniform1uivEXT(GLint location, GLsizei count, const GL
   Warning( "glUniform1uivEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform2uiEXT(GLint location, GLuint v0, GLuint v1)
+static void REGAL_CALL missing_glUniform2uiEXT(GLint location, GLuint v0, GLuint v1)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -14585,7 +14585,7 @@ void REGAL_CALL missing_glUniform2uiEXT(GLint location, GLuint v0, GLuint v1)
   Warning( "glUniform2uiEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform2uivEXT(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform2uivEXT(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -14593,7 +14593,7 @@ void REGAL_CALL missing_glUniform2uivEXT(GLint location, GLsizei count, const GL
   Warning( "glUniform2uivEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform3uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2)
+static void REGAL_CALL missing_glUniform3uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -14602,7 +14602,7 @@ void REGAL_CALL missing_glUniform3uiEXT(GLint location, GLuint v0, GLuint v1, GL
   Warning( "glUniform3uiEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform3uivEXT(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform3uivEXT(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -14610,7 +14610,7 @@ void REGAL_CALL missing_glUniform3uivEXT(GLint location, GLsizei count, const GL
   Warning( "glUniform3uivEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform4uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
+static void REGAL_CALL missing_glUniform4uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
@@ -14620,7 +14620,7 @@ void REGAL_CALL missing_glUniform4uiEXT(GLint location, GLuint v0, GLuint v1, GL
   Warning( "glUniform4uiEXT not available." );
 }
 
-void REGAL_CALL missing_glUniform4uivEXT(GLint location, GLsizei count, const GLuint *value)
+static void REGAL_CALL missing_glUniform4uivEXT(GLint location, GLsizei count, const GLuint *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -14628,35 +14628,35 @@ void REGAL_CALL missing_glUniform4uivEXT(GLint location, GLsizei count, const GL
   Warning( "glUniform4uivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1iEXT(GLuint index, GLint x)
+static void REGAL_CALL missing_glVertexAttribI1iEXT(GLuint index, GLint x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribI1iEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1ivEXT(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI1ivEXT(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI1ivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1uiEXT(GLuint index, GLuint x)
+static void REGAL_CALL missing_glVertexAttribI1uiEXT(GLuint index, GLuint x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribI1uiEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI1uivEXT(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI1uivEXT(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI1uivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2iEXT(GLuint index, GLint x, GLint y)
+static void REGAL_CALL missing_glVertexAttribI2iEXT(GLuint index, GLint x, GLint y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -14664,14 +14664,14 @@ void REGAL_CALL missing_glVertexAttribI2iEXT(GLuint index, GLint x, GLint y)
   Warning( "glVertexAttribI2iEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2ivEXT(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI2ivEXT(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI2ivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2uiEXT(GLuint index, GLuint x, GLuint y)
+static void REGAL_CALL missing_glVertexAttribI2uiEXT(GLuint index, GLuint x, GLuint y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -14679,14 +14679,14 @@ void REGAL_CALL missing_glVertexAttribI2uiEXT(GLuint index, GLuint x, GLuint y)
   Warning( "glVertexAttribI2uiEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI2uivEXT(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI2uivEXT(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI2uivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3iEXT(GLuint index, GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glVertexAttribI3iEXT(GLuint index, GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -14695,14 +14695,14 @@ void REGAL_CALL missing_glVertexAttribI3iEXT(GLuint index, GLint x, GLint y, GLi
   Warning( "glVertexAttribI3iEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3ivEXT(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI3ivEXT(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI3ivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3uiEXT(GLuint index, GLuint x, GLuint y, GLuint z)
+static void REGAL_CALL missing_glVertexAttribI3uiEXT(GLuint index, GLuint x, GLuint y, GLuint z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -14711,21 +14711,21 @@ void REGAL_CALL missing_glVertexAttribI3uiEXT(GLuint index, GLuint x, GLuint y, 
   Warning( "glVertexAttribI3uiEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI3uivEXT(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI3uivEXT(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI3uivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4bvEXT(GLuint index, const GLbyte *v)
+static void REGAL_CALL missing_glVertexAttribI4bvEXT(GLuint index, const GLbyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4bvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4iEXT(GLuint index, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glVertexAttribI4iEXT(GLuint index, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -14735,28 +14735,28 @@ void REGAL_CALL missing_glVertexAttribI4iEXT(GLuint index, GLint x, GLint y, GLi
   Warning( "glVertexAttribI4iEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4ivEXT(GLuint index, const GLint *v)
+static void REGAL_CALL missing_glVertexAttribI4ivEXT(GLuint index, const GLint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4ivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4svEXT(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttribI4svEXT(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4svEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4ubvEXT(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttribI4ubvEXT(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4ubvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4uiEXT(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
+static void REGAL_CALL missing_glVertexAttribI4uiEXT(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -14766,21 +14766,21 @@ void REGAL_CALL missing_glVertexAttribI4uiEXT(GLuint index, GLuint x, GLuint y, 
   Warning( "glVertexAttribI4uiEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4uivEXT(GLuint index, const GLuint *v)
+static void REGAL_CALL missing_glVertexAttribI4uivEXT(GLuint index, const GLuint *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4uivEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribI4usvEXT(GLuint index, const GLushort *v)
+static void REGAL_CALL missing_glVertexAttribI4usvEXT(GLuint index, const GLushort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribI4usvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribIPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribIPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -14792,7 +14792,7 @@ void REGAL_CALL missing_glVertexAttribIPointerEXT(GLuint index, GLint size, GLen
 
 // GL_EXT_histogram
 
-void REGAL_CALL missing_glGetHistogramEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values)
+static void REGAL_CALL missing_glGetHistogramEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(reset);
@@ -14802,7 +14802,7 @@ void REGAL_CALL missing_glGetHistogramEXT(GLenum target, GLboolean reset, GLenum
   Warning( "glGetHistogramEXT not available." );
 }
 
-void REGAL_CALL missing_glGetHistogramParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetHistogramParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -14810,7 +14810,7 @@ void REGAL_CALL missing_glGetHistogramParameterfvEXT(GLenum target, GLenum pname
   Warning( "glGetHistogramParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetHistogramParameterivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetHistogramParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -14818,7 +14818,7 @@ void REGAL_CALL missing_glGetHistogramParameterivEXT(GLenum target, GLenum pname
   Warning( "glGetHistogramParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMinmaxEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values)
+static void REGAL_CALL missing_glGetMinmaxEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(reset);
@@ -14828,7 +14828,7 @@ void REGAL_CALL missing_glGetMinmaxEXT(GLenum target, GLboolean reset, GLenum fo
   Warning( "glGetMinmaxEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMinmaxParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMinmaxParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -14836,7 +14836,7 @@ void REGAL_CALL missing_glGetMinmaxParameterfvEXT(GLenum target, GLenum pname, G
   Warning( "glGetMinmaxParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetMinmaxParameterivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMinmaxParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -14844,7 +14844,7 @@ void REGAL_CALL missing_glGetMinmaxParameterivEXT(GLenum target, GLenum pname, G
   Warning( "glGetMinmaxParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glHistogramEXT(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink)
+static void REGAL_CALL missing_glHistogramEXT(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(width);
@@ -14853,7 +14853,7 @@ void REGAL_CALL missing_glHistogramEXT(GLenum target, GLsizei width, GLenum inte
   Warning( "glHistogramEXT not available." );
 }
 
-void REGAL_CALL missing_glMinmaxEXT(GLenum target, GLenum internalformat, GLboolean sink)
+static void REGAL_CALL missing_glMinmaxEXT(GLenum target, GLenum internalformat, GLboolean sink)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -14861,13 +14861,13 @@ void REGAL_CALL missing_glMinmaxEXT(GLenum target, GLenum internalformat, GLbool
   Warning( "glMinmaxEXT not available." );
 }
 
-void REGAL_CALL missing_glResetHistogramEXT(GLenum target)
+static void REGAL_CALL missing_glResetHistogramEXT(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glResetHistogramEXT not available." );
 }
 
-void REGAL_CALL missing_glResetMinmaxEXT(GLenum target)
+static void REGAL_CALL missing_glResetMinmaxEXT(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glResetMinmaxEXT not available." );
@@ -14875,7 +14875,7 @@ void REGAL_CALL missing_glResetMinmaxEXT(GLenum target)
 
 // GL_EXT_index_func
 
-void REGAL_CALL missing_glIndexFuncEXT(GLenum func, GLfloat ref)
+static void REGAL_CALL missing_glIndexFuncEXT(GLenum func, GLfloat ref)
 {
   UNUSED_PARAMETER(func);
   UNUSED_PARAMETER(ref);
@@ -14884,7 +14884,7 @@ void REGAL_CALL missing_glIndexFuncEXT(GLenum func, GLfloat ref)
 
 // GL_EXT_index_material
 
-void REGAL_CALL missing_glIndexMaterialEXT(GLenum face, GLenum mode)
+static void REGAL_CALL missing_glIndexMaterialEXT(GLenum face, GLenum mode)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mode);
@@ -14893,19 +14893,19 @@ void REGAL_CALL missing_glIndexMaterialEXT(GLenum face, GLenum mode)
 
 // GL_EXT_light_texture
 
-void REGAL_CALL missing_glApplyTextureEXT(GLenum mode)
+static void REGAL_CALL missing_glApplyTextureEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glApplyTextureEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureLightEXT(GLenum pname)
+static void REGAL_CALL missing_glTextureLightEXT(GLenum pname)
 {
   UNUSED_PARAMETER(pname);
   Warning( "glTextureLightEXT not available." );
 }
 
-void REGAL_CALL missing_glTextureMaterialEXT(GLenum face, GLenum mode)
+static void REGAL_CALL missing_glTextureMaterialEXT(GLenum face, GLenum mode)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mode);
@@ -14914,7 +14914,7 @@ void REGAL_CALL missing_glTextureMaterialEXT(GLenum face, GLenum mode)
 
 // GL_EXT_map_buffer_range
 
-void REGAL_CALL missing_glFlushMappedBufferRangeEXT(GLenum target, GLintptr offset, GLsizeiptr length)
+static void REGAL_CALL missing_glFlushMappedBufferRangeEXT(GLenum target, GLintptr offset, GLsizeiptr length)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -14922,7 +14922,7 @@ void REGAL_CALL missing_glFlushMappedBufferRangeEXT(GLenum target, GLintptr offs
   Warning( "glFlushMappedBufferRangeEXT not available." );
 }
 
-GLvoid *REGAL_CALL missing_glMapBufferRangeEXT(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
+static GLvoid *REGAL_CALL missing_glMapBufferRangeEXT(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(offset);
@@ -14934,7 +14934,7 @@ GLvoid *REGAL_CALL missing_glMapBufferRangeEXT(GLenum target, GLintptr offset, G
 
 // GL_EXT_multi_draw_arrays
 
-void REGAL_CALL missing_glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -14943,7 +14943,7 @@ void REGAL_CALL missing_glMultiDrawArraysEXT(GLenum mode, const GLint *first, co
   Warning( "glMultiDrawArraysEXT not available." );
 }
 
-void REGAL_CALL missing_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -14955,14 +14955,14 @@ void REGAL_CALL missing_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLen
 
 // GL_EXT_multisample
 
-void REGAL_CALL missing_glSampleMaskEXT(GLclampf value, GLboolean invert)
+static void REGAL_CALL missing_glSampleMaskEXT(GLclampf value, GLboolean invert)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(invert);
   Warning( "glSampleMaskEXT not available." );
 }
 
-void REGAL_CALL missing_glSamplePatternEXT(GLenum pattern)
+static void REGAL_CALL missing_glSamplePatternEXT(GLenum pattern)
 {
   UNUSED_PARAMETER(pattern);
   Warning( "glSamplePatternEXT not available." );
@@ -14970,7 +14970,7 @@ void REGAL_CALL missing_glSamplePatternEXT(GLenum pattern)
 
 // GL_EXT_multisampled_render_to_texture
 
-void REGAL_CALL missing_glFramebufferTexture2DMultisampleEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLsizei samples)
+static void REGAL_CALL missing_glFramebufferTexture2DMultisampleEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLsizei samples)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -14983,7 +14983,7 @@ void REGAL_CALL missing_glFramebufferTexture2DMultisampleEXT(GLenum target, GLen
 
 // GL_EXT_multiview_draw_buffers
 
-void REGAL_CALL missing_glDrawBuffersIndexedEXT(GLint n, const GLenum *location, const GLint *indices)
+static void REGAL_CALL missing_glDrawBuffersIndexedEXT(GLint n, const GLenum *location, const GLint *indices)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(location);
@@ -14991,7 +14991,7 @@ void REGAL_CALL missing_glDrawBuffersIndexedEXT(GLint n, const GLenum *location,
   Warning( "glDrawBuffersIndexedEXT not available." );
 }
 
-void REGAL_CALL missing_glGetIntegeri_vEXT(GLenum target, GLuint index, GLint *data)
+static void REGAL_CALL missing_glGetIntegeri_vEXT(GLenum target, GLuint index, GLint *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -14999,7 +14999,7 @@ void REGAL_CALL missing_glGetIntegeri_vEXT(GLenum target, GLuint index, GLint *d
   Warning( "glGetIntegeri_vEXT not available." );
 }
 
-void REGAL_CALL missing_glReadBufferIndexedEXT(GLenum src, GLint index)
+static void REGAL_CALL missing_glReadBufferIndexedEXT(GLenum src, GLint index)
 {
   UNUSED_PARAMETER(src);
   UNUSED_PARAMETER(index);
@@ -15008,34 +15008,34 @@ void REGAL_CALL missing_glReadBufferIndexedEXT(GLenum src, GLint index)
 
 // GL_EXT_occlusion_query_boolean
 
-void REGAL_CALL missing_glBeginQueryEXT(GLenum target, GLuint id)
+static void REGAL_CALL missing_glBeginQueryEXT(GLenum target, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
   Warning( "glBeginQueryEXT not available." );
 }
 
-void REGAL_CALL missing_glDeleteQueriesEXT(GLsizei n, const GLuint *ids)
+static void REGAL_CALL missing_glDeleteQueriesEXT(GLsizei n, const GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glDeleteQueriesEXT not available." );
 }
 
-void REGAL_CALL missing_glEndQueryEXT(GLenum target)
+static void REGAL_CALL missing_glEndQueryEXT(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glEndQueryEXT not available." );
 }
 
-void REGAL_CALL missing_glGenQueriesEXT(GLsizei n, GLuint *ids)
+static void REGAL_CALL missing_glGenQueriesEXT(GLsizei n, GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glGenQueriesEXT not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectuivEXT(GLuint id, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetQueryObjectuivEXT(GLuint id, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -15043,7 +15043,7 @@ void REGAL_CALL missing_glGetQueryObjectuivEXT(GLuint id, GLenum pname, GLuint *
   Warning( "glGetQueryObjectuivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetQueryivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetQueryivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15051,7 +15051,7 @@ void REGAL_CALL missing_glGetQueryivEXT(GLenum target, GLenum pname, GLint *para
   Warning( "glGetQueryivEXT not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsQueryEXT(GLuint id)
+static GLboolean REGAL_CALL missing_glIsQueryEXT(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsQueryEXT not available." );
@@ -15060,7 +15060,7 @@ GLboolean REGAL_CALL missing_glIsQueryEXT(GLuint id)
 
 // GL_EXT_paletted_texture
 
-void REGAL_CALL missing_glColorTableEXT(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid *table)
+static void REGAL_CALL missing_glColorTableEXT(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalFormat);
@@ -15071,7 +15071,7 @@ void REGAL_CALL missing_glColorTableEXT(GLenum target, GLenum internalFormat, GL
   Warning( "glColorTableEXT not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableEXT(GLenum target, GLenum format, GLenum type, GLvoid *data)
+static void REGAL_CALL missing_glGetColorTableEXT(GLenum target, GLenum format, GLenum type, GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -15080,7 +15080,7 @@ void REGAL_CALL missing_glGetColorTableEXT(GLenum target, GLenum format, GLenum 
   Warning( "glGetColorTableEXT not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetColorTableParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15088,7 +15088,7 @@ void REGAL_CALL missing_glGetColorTableParameterfvEXT(GLenum target, GLenum pnam
   Warning( "glGetColorTableParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableParameterivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetColorTableParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15098,7 +15098,7 @@ void REGAL_CALL missing_glGetColorTableParameterivEXT(GLenum target, GLenum pnam
 
 // GL_EXT_pixel_transform
 
-void REGAL_CALL missing_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15106,7 +15106,7 @@ void REGAL_CALL missing_glGetPixelTransformParameterfvEXT(GLenum target, GLenum 
   Warning( "glGetPixelTransformParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15114,7 +15114,7 @@ void REGAL_CALL missing_glGetPixelTransformParameterivEXT(GLenum target, GLenum 
   Warning( "glGetPixelTransformParameterivEXT not available." );
 }
 
-void REGAL_CALL missing_glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param)
+static void REGAL_CALL missing_glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15122,7 +15122,7 @@ void REGAL_CALL missing_glPixelTransformParameterfEXT(GLenum target, GLenum pnam
   Warning( "glPixelTransformParameterfEXT not available." );
 }
 
-void REGAL_CALL missing_glPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15130,7 +15130,7 @@ void REGAL_CALL missing_glPixelTransformParameterfvEXT(GLenum target, GLenum pna
   Warning( "glPixelTransformParameterfvEXT not available." );
 }
 
-void REGAL_CALL missing_glPixelTransformParameteriEXT(GLenum target, GLenum pname, const GLint param)
+static void REGAL_CALL missing_glPixelTransformParameteriEXT(GLenum target, GLenum pname, const GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15138,7 +15138,7 @@ void REGAL_CALL missing_glPixelTransformParameteriEXT(GLenum target, GLenum pnam
   Warning( "glPixelTransformParameteriEXT not available." );
 }
 
-void REGAL_CALL missing_glPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15148,14 +15148,14 @@ void REGAL_CALL missing_glPixelTransformParameterivEXT(GLenum target, GLenum pna
 
 // GL_EXT_point_parameters
 
-void REGAL_CALL missing_glPointParameterfEXT(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPointParameterfEXT(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameterfEXT not available." );
 }
 
-void REGAL_CALL missing_glPointParameterfvEXT(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glPointParameterfvEXT(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -15164,7 +15164,7 @@ void REGAL_CALL missing_glPointParameterfvEXT(GLenum pname, const GLfloat *param
 
 // GL_EXT_polygon_offset
 
-void REGAL_CALL missing_glPolygonOffsetEXT(GLfloat factor, GLfloat bias)
+static void REGAL_CALL missing_glPolygonOffsetEXT(GLfloat factor, GLfloat bias)
 {
   UNUSED_PARAMETER(factor);
   UNUSED_PARAMETER(bias);
@@ -15173,7 +15173,7 @@ void REGAL_CALL missing_glPolygonOffsetEXT(GLfloat factor, GLfloat bias)
 
 // GL_EXT_provoking_vertex
 
-void REGAL_CALL missing_glProvokingVertexEXT(GLenum mode)
+static void REGAL_CALL missing_glProvokingVertexEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glProvokingVertexEXT not available." );
@@ -15181,7 +15181,7 @@ void REGAL_CALL missing_glProvokingVertexEXT(GLenum mode)
 
 // GL_EXT_robustness
 
-void REGAL_CALL missing_glGetnUniformfvEXT(GLuint program, GLint location, GLsizei bufSize, GLfloat *params)
+static void REGAL_CALL missing_glGetnUniformfvEXT(GLuint program, GLint location, GLsizei bufSize, GLfloat *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -15190,7 +15190,7 @@ void REGAL_CALL missing_glGetnUniformfvEXT(GLuint program, GLint location, GLsiz
   Warning( "glGetnUniformfvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetnUniformivEXT(GLuint program, GLint location, GLsizei bufSize, GLint *params)
+static void REGAL_CALL missing_glGetnUniformivEXT(GLuint program, GLint location, GLsizei bufSize, GLint *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -15199,7 +15199,7 @@ void REGAL_CALL missing_glGetnUniformivEXT(GLuint program, GLint location, GLsiz
   Warning( "glGetnUniformivEXT not available." );
 }
 
-void REGAL_CALL missing_glReadnPixelsEXT(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, GLvoid *data)
+static void REGAL_CALL missing_glReadnPixelsEXT(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, GLvoid *data)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -15214,19 +15214,19 @@ void REGAL_CALL missing_glReadnPixelsEXT(GLint x, GLint y, GLsizei width, GLsize
 
 // GL_EXT_scene_marker
 
-void REGAL_CALL missing_glBeginSceneEXT(void)
+static void REGAL_CALL missing_glBeginSceneEXT(void)
 {
   Warning( "glBeginSceneEXT not available." );
 }
 
-void REGAL_CALL missing_glEndSceneEXT(void)
+static void REGAL_CALL missing_glEndSceneEXT(void)
 {
   Warning( "glEndSceneEXT not available." );
 }
 
 // GL_EXT_secondary_color
 
-void REGAL_CALL missing_glSecondaryColor3bEXT(GLbyte red, GLbyte green, GLbyte blue)
+static void REGAL_CALL missing_glSecondaryColor3bEXT(GLbyte red, GLbyte green, GLbyte blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15234,13 +15234,13 @@ void REGAL_CALL missing_glSecondaryColor3bEXT(GLbyte red, GLbyte green, GLbyte b
   Warning( "glSecondaryColor3bEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3bvEXT(const GLbyte *v)
+static void REGAL_CALL missing_glSecondaryColor3bvEXT(const GLbyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3bvEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3dEXT(GLdouble red, GLdouble green, GLdouble blue)
+static void REGAL_CALL missing_glSecondaryColor3dEXT(GLdouble red, GLdouble green, GLdouble blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15248,13 +15248,13 @@ void REGAL_CALL missing_glSecondaryColor3dEXT(GLdouble red, GLdouble green, GLdo
   Warning( "glSecondaryColor3dEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3dvEXT(const GLdouble *v)
+static void REGAL_CALL missing_glSecondaryColor3dvEXT(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3fEXT(GLfloat red, GLfloat green, GLfloat blue)
+static void REGAL_CALL missing_glSecondaryColor3fEXT(GLfloat red, GLfloat green, GLfloat blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15262,13 +15262,13 @@ void REGAL_CALL missing_glSecondaryColor3fEXT(GLfloat red, GLfloat green, GLfloa
   Warning( "glSecondaryColor3fEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3fvEXT(const GLfloat *v)
+static void REGAL_CALL missing_glSecondaryColor3fvEXT(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3fvEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3iEXT(GLint red, GLint green, GLint blue)
+static void REGAL_CALL missing_glSecondaryColor3iEXT(GLint red, GLint green, GLint blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15276,13 +15276,13 @@ void REGAL_CALL missing_glSecondaryColor3iEXT(GLint red, GLint green, GLint blue
   Warning( "glSecondaryColor3iEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3ivEXT(const GLint *v)
+static void REGAL_CALL missing_glSecondaryColor3ivEXT(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3ivEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3sEXT(GLshort red, GLshort green, GLshort blue)
+static void REGAL_CALL missing_glSecondaryColor3sEXT(GLshort red, GLshort green, GLshort blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15290,13 +15290,13 @@ void REGAL_CALL missing_glSecondaryColor3sEXT(GLshort red, GLshort green, GLshor
   Warning( "glSecondaryColor3sEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3svEXT(const GLshort *v)
+static void REGAL_CALL missing_glSecondaryColor3svEXT(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3svEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3ubEXT(GLubyte red, GLubyte green, GLubyte blue)
+static void REGAL_CALL missing_glSecondaryColor3ubEXT(GLubyte red, GLubyte green, GLubyte blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15304,13 +15304,13 @@ void REGAL_CALL missing_glSecondaryColor3ubEXT(GLubyte red, GLubyte green, GLuby
   Warning( "glSecondaryColor3ubEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3ubvEXT(const GLubyte *v)
+static void REGAL_CALL missing_glSecondaryColor3ubvEXT(const GLubyte *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3ubvEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3uiEXT(GLuint red, GLuint green, GLuint blue)
+static void REGAL_CALL missing_glSecondaryColor3uiEXT(GLuint red, GLuint green, GLuint blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15318,13 +15318,13 @@ void REGAL_CALL missing_glSecondaryColor3uiEXT(GLuint red, GLuint green, GLuint 
   Warning( "glSecondaryColor3uiEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3uivEXT(const GLuint *v)
+static void REGAL_CALL missing_glSecondaryColor3uivEXT(const GLuint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3uivEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3usEXT(GLushort red, GLushort green, GLushort blue)
+static void REGAL_CALL missing_glSecondaryColor3usEXT(GLushort red, GLushort green, GLushort blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15332,13 +15332,13 @@ void REGAL_CALL missing_glSecondaryColor3usEXT(GLushort red, GLushort green, GLu
   Warning( "glSecondaryColor3usEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3usvEXT(const GLushort *v)
+static void REGAL_CALL missing_glSecondaryColor3usvEXT(const GLushort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3usvEXT not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColorPointerEXT(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glSecondaryColorPointerEXT(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -15349,13 +15349,13 @@ void REGAL_CALL missing_glSecondaryColorPointerEXT(GLint size, GLenum type, GLsi
 
 // GL_EXT_separate_shader_objects
 
-void REGAL_CALL missing_glActiveProgramEXT(GLuint program)
+static void REGAL_CALL missing_glActiveProgramEXT(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glActiveProgramEXT not available." );
 }
 
-GLuint REGAL_CALL missing_glCreateShaderProgramEXT(GLenum type, const GLchar *string)
+static GLuint REGAL_CALL missing_glCreateShaderProgramEXT(GLenum type, const GLchar *string)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(string);
@@ -15363,7 +15363,7 @@ GLuint REGAL_CALL missing_glCreateShaderProgramEXT(GLenum type, const GLchar *st
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glUseShaderProgramEXT(GLenum type, GLuint program)
+static void REGAL_CALL missing_glUseShaderProgramEXT(GLenum type, GLuint program)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(program);
@@ -15372,7 +15372,7 @@ void REGAL_CALL missing_glUseShaderProgramEXT(GLenum type, GLuint program)
 
 // GL_EXT_shader_image_load_store
 
-void REGAL_CALL missing_glBindImageTextureEXT(GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format)
+static void REGAL_CALL missing_glBindImageTextureEXT(GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(texture);
@@ -15384,7 +15384,7 @@ void REGAL_CALL missing_glBindImageTextureEXT(GLuint index, GLuint texture, GLin
   Warning( "glBindImageTextureEXT not available." );
 }
 
-void REGAL_CALL missing_glMemoryBarrierEXT(GLbitfield barriers)
+static void REGAL_CALL missing_glMemoryBarrierEXT(GLbitfield barriers)
 {
   UNUSED_PARAMETER(barriers);
   Warning( "glMemoryBarrierEXT not available." );
@@ -15392,7 +15392,7 @@ void REGAL_CALL missing_glMemoryBarrierEXT(GLbitfield barriers)
 
 // GL_EXT_stencil_clear_tag
 
-void REGAL_CALL missing_glStencilClearTagEXT(GLsizei stencilTagBits, GLuint stencilClearTag)
+static void REGAL_CALL missing_glStencilClearTagEXT(GLsizei stencilTagBits, GLuint stencilClearTag)
 {
   UNUSED_PARAMETER(stencilTagBits);
   UNUSED_PARAMETER(stencilClearTag);
@@ -15401,7 +15401,7 @@ void REGAL_CALL missing_glStencilClearTagEXT(GLsizei stencilTagBits, GLuint sten
 
 // GL_EXT_stencil_two_side
 
-void REGAL_CALL missing_glActiveStencilFaceEXT(GLenum face)
+static void REGAL_CALL missing_glActiveStencilFaceEXT(GLenum face)
 {
   UNUSED_PARAMETER(face);
   Warning( "glActiveStencilFaceEXT not available." );
@@ -15409,7 +15409,7 @@ void REGAL_CALL missing_glActiveStencilFaceEXT(GLenum face)
 
 // GL_EXT_subtexture
 
-void REGAL_CALL missing_glTexSubImage1DEXT(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage1DEXT(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -15421,7 +15421,7 @@ void REGAL_CALL missing_glTexSubImage1DEXT(GLenum target, GLint level, GLint xof
   Warning( "glTexSubImage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -15435,7 +15435,7 @@ void REGAL_CALL missing_glTexSubImage2DEXT(GLenum target, GLint level, GLint xof
   Warning( "glTexSubImage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -15453,7 +15453,7 @@ void REGAL_CALL missing_glTexSubImage3DEXT(GLenum target, GLint level, GLint xof
 
 // GL_EXT_texture3D
 
-void REGAL_CALL missing_glTexImage3DEXT(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexImage3DEXT(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -15470,7 +15470,7 @@ void REGAL_CALL missing_glTexImage3DEXT(GLenum target, GLint level, GLenum inter
 
 // GL_EXT_texture_array
 
-void REGAL_CALL missing_glFramebufferTextureLayerEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
+static void REGAL_CALL missing_glFramebufferTextureLayerEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -15482,7 +15482,7 @@ void REGAL_CALL missing_glFramebufferTextureLayerEXT(GLenum target, GLenum attac
 
 // GL_EXT_texture_buffer_object
 
-void REGAL_CALL missing_glTexBufferEXT(GLenum target, GLenum internalformat, GLuint buffer)
+static void REGAL_CALL missing_glTexBufferEXT(GLenum target, GLenum internalformat, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -15492,7 +15492,7 @@ void REGAL_CALL missing_glTexBufferEXT(GLenum target, GLenum internalformat, GLu
 
 // GL_EXT_texture_integer
 
-void REGAL_CALL missing_glClearColorIiEXT(GLint red, GLint green, GLint blue, GLint alpha)
+static void REGAL_CALL missing_glClearColorIiEXT(GLint red, GLint green, GLint blue, GLint alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15501,7 +15501,7 @@ void REGAL_CALL missing_glClearColorIiEXT(GLint red, GLint green, GLint blue, GL
   Warning( "glClearColorIiEXT not available." );
 }
 
-void REGAL_CALL missing_glClearColorIuiEXT(GLuint red, GLuint green, GLuint blue, GLuint alpha)
+static void REGAL_CALL missing_glClearColorIuiEXT(GLuint red, GLuint green, GLuint blue, GLuint alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -15510,7 +15510,7 @@ void REGAL_CALL missing_glClearColorIuiEXT(GLuint red, GLuint green, GLuint blue
   Warning( "glClearColorIuiEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15518,7 +15518,7 @@ void REGAL_CALL missing_glGetTexParameterIivEXT(GLenum target, GLenum pname, GLi
   Warning( "glGetTexParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15526,7 +15526,7 @@ void REGAL_CALL missing_glGetTexParameterIuivEXT(GLenum target, GLenum pname, GL
   Warning( "glGetTexParameterIuivEXT not available." );
 }
 
-void REGAL_CALL missing_glTexParameterIivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTexParameterIivEXT(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15534,7 +15534,7 @@ void REGAL_CALL missing_glTexParameterIivEXT(GLenum target, GLenum pname, const 
   Warning( "glTexParameterIivEXT not available." );
 }
 
-void REGAL_CALL missing_glTexParameterIuivEXT(GLenum target, GLenum pname, const GLuint *params)
+static void REGAL_CALL missing_glTexParameterIuivEXT(GLenum target, GLenum pname, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -15544,7 +15544,7 @@ void REGAL_CALL missing_glTexParameterIuivEXT(GLenum target, GLenum pname, const
 
 // GL_EXT_texture_object
 
-GLboolean REGAL_CALL missing_glAreTexturesResidentEXT(GLsizei n, const GLuint *textures, GLboolean *residences)
+static GLboolean REGAL_CALL missing_glAreTexturesResidentEXT(GLsizei n, const GLuint *textures, GLboolean *residences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
@@ -15553,35 +15553,35 @@ GLboolean REGAL_CALL missing_glAreTexturesResidentEXT(GLsizei n, const GLuint *t
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glBindTextureEXT(GLenum target, GLuint texture)
+static void REGAL_CALL missing_glBindTextureEXT(GLenum target, GLuint texture)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(texture);
   Warning( "glBindTextureEXT not available." );
 }
 
-void REGAL_CALL missing_glDeleteTexturesEXT(GLsizei n, const GLuint *textures)
+static void REGAL_CALL missing_glDeleteTexturesEXT(GLsizei n, const GLuint *textures)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
   Warning( "glDeleteTexturesEXT not available." );
 }
 
-void REGAL_CALL missing_glGenTexturesEXT(GLsizei n, GLuint *textures)
+static void REGAL_CALL missing_glGenTexturesEXT(GLsizei n, GLuint *textures)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
   Warning( "glGenTexturesEXT not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsTextureEXT(GLuint texture)
+static GLboolean REGAL_CALL missing_glIsTextureEXT(GLuint texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glIsTextureEXT not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glPrioritizeTexturesEXT(GLsizei n, const GLuint *textures, const GLclampf *priorities)
+static void REGAL_CALL missing_glPrioritizeTexturesEXT(GLsizei n, const GLuint *textures, const GLclampf *priorities)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(textures);
@@ -15591,7 +15591,7 @@ void REGAL_CALL missing_glPrioritizeTexturesEXT(GLsizei n, const GLuint *texture
 
 // GL_EXT_texture_perturb_normal
 
-void REGAL_CALL missing_glTextureNormalEXT(GLenum mode)
+static void REGAL_CALL missing_glTextureNormalEXT(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glTextureNormalEXT not available." );
@@ -15599,7 +15599,7 @@ void REGAL_CALL missing_glTextureNormalEXT(GLenum mode)
 
 // GL_EXT_texture_storage
 
-void REGAL_CALL missing_glTexStorage1DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
+static void REGAL_CALL missing_glTexStorage1DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(levels);
@@ -15608,7 +15608,7 @@ void REGAL_CALL missing_glTexStorage1DEXT(GLenum target, GLsizei levels, GLenum 
   Warning( "glTexStorage1DEXT not available." );
 }
 
-void REGAL_CALL missing_glTexStorage2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glTexStorage2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(levels);
@@ -15618,7 +15618,7 @@ void REGAL_CALL missing_glTexStorage2DEXT(GLenum target, GLsizei levels, GLenum 
   Warning( "glTexStorage2DEXT not available." );
 }
 
-void REGAL_CALL missing_glTexStorage3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
+static void REGAL_CALL missing_glTexStorage3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(levels);
@@ -15631,7 +15631,7 @@ void REGAL_CALL missing_glTexStorage3DEXT(GLenum target, GLsizei levels, GLenum 
 
 // GL_EXT_timer_query
 
-void REGAL_CALL missing_glGetQueryObjecti64vEXT(GLuint id, GLenum pname, GLint64EXT *params)
+static void REGAL_CALL missing_glGetQueryObjecti64vEXT(GLuint id, GLenum pname, GLint64EXT *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -15639,7 +15639,7 @@ void REGAL_CALL missing_glGetQueryObjecti64vEXT(GLuint id, GLenum pname, GLint64
   Warning( "glGetQueryObjecti64vEXT not available." );
 }
 
-void REGAL_CALL missing_glGetQueryObjectui64vEXT(GLuint id, GLenum pname, GLuint64EXT *params)
+static void REGAL_CALL missing_glGetQueryObjectui64vEXT(GLuint id, GLenum pname, GLuint64EXT *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -15649,13 +15649,13 @@ void REGAL_CALL missing_glGetQueryObjectui64vEXT(GLuint id, GLenum pname, GLuint
 
 // GL_EXT_transform_feedback
 
-void REGAL_CALL missing_glBeginTransformFeedbackEXT(GLenum primitiveMode)
+static void REGAL_CALL missing_glBeginTransformFeedbackEXT(GLenum primitiveMode)
 {
   UNUSED_PARAMETER(primitiveMode);
   Warning( "glBeginTransformFeedbackEXT not available." );
 }
 
-void REGAL_CALL missing_glBindBufferBaseEXT(GLenum target, GLuint index, GLuint buffer)
+static void REGAL_CALL missing_glBindBufferBaseEXT(GLenum target, GLuint index, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -15663,7 +15663,7 @@ void REGAL_CALL missing_glBindBufferBaseEXT(GLenum target, GLuint index, GLuint 
   Warning( "glBindBufferBaseEXT not available." );
 }
 
-void REGAL_CALL missing_glBindBufferOffsetEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset)
+static void REGAL_CALL missing_glBindBufferOffsetEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -15672,7 +15672,7 @@ void REGAL_CALL missing_glBindBufferOffsetEXT(GLenum target, GLuint index, GLuin
   Warning( "glBindBufferOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
+static void REGAL_CALL missing_glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -15682,12 +15682,12 @@ void REGAL_CALL missing_glBindBufferRangeEXT(GLenum target, GLuint index, GLuint
   Warning( "glBindBufferRangeEXT not available." );
 }
 
-void REGAL_CALL missing_glEndTransformFeedbackEXT(void)
+static void REGAL_CALL missing_glEndTransformFeedbackEXT(void)
 {
   Warning( "glEndTransformFeedbackEXT not available." );
 }
 
-void REGAL_CALL missing_glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name)
+static void REGAL_CALL missing_glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -15699,7 +15699,7 @@ void REGAL_CALL missing_glGetTransformFeedbackVaryingEXT(GLuint program, GLuint 
   Warning( "glGetTransformFeedbackVaryingEXT not available." );
 }
 
-void REGAL_CALL missing_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL missing_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(count);
@@ -15710,13 +15710,13 @@ void REGAL_CALL missing_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei c
 
 // GL_EXT_vertex_array
 
-void REGAL_CALL missing_glArrayElementEXT(GLint i)
+static void REGAL_CALL missing_glArrayElementEXT(GLint i)
 {
   UNUSED_PARAMETER(i);
   Warning( "glArrayElementEXT not available." );
 }
 
-void REGAL_CALL missing_glColorPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
+static void REGAL_CALL missing_glColorPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -15726,7 +15726,7 @@ void REGAL_CALL missing_glColorPointerEXT(GLint size, GLenum type, GLsizei strid
   Warning( "glColorPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glDrawArraysEXT(GLenum mode, GLint first, GLsizei count)
+static void REGAL_CALL missing_glDrawArraysEXT(GLenum mode, GLint first, GLsizei count)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -15734,7 +15734,7 @@ void REGAL_CALL missing_glDrawArraysEXT(GLenum mode, GLint first, GLsizei count)
   Warning( "glDrawArraysEXT not available." );
 }
 
-void REGAL_CALL missing_glEdgeFlagPointerEXT(GLsizei stride, GLsizei count, const GLboolean *pointer)
+static void REGAL_CALL missing_glEdgeFlagPointerEXT(GLsizei stride, GLsizei count, const GLboolean *pointer)
 {
   UNUSED_PARAMETER(stride);
   UNUSED_PARAMETER(count);
@@ -15742,14 +15742,14 @@ void REGAL_CALL missing_glEdgeFlagPointerEXT(GLsizei stride, GLsizei count, cons
   Warning( "glEdgeFlagPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glGetPointervEXT(GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetPointervEXT(GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetPointervEXT not available." );
 }
 
-void REGAL_CALL missing_glIndexPointerEXT(GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
+static void REGAL_CALL missing_glIndexPointerEXT(GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -15758,7 +15758,7 @@ void REGAL_CALL missing_glIndexPointerEXT(GLenum type, GLsizei stride, GLsizei c
   Warning( "glIndexPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glNormalPointerEXT(GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
+static void REGAL_CALL missing_glNormalPointerEXT(GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -15767,7 +15767,7 @@ void REGAL_CALL missing_glNormalPointerEXT(GLenum type, GLsizei stride, GLsizei 
   Warning( "glNormalPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glTexCoordPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
+static void REGAL_CALL missing_glTexCoordPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -15777,7 +15777,7 @@ void REGAL_CALL missing_glTexCoordPointerEXT(GLint size, GLenum type, GLsizei st
   Warning( "glTexCoordPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -15789,7 +15789,7 @@ void REGAL_CALL missing_glVertexPointerEXT(GLint size, GLenum type, GLsizei stri
 
 // GL_EXT_vertex_attrib_64bit
 
-void REGAL_CALL missing_glGetVertexAttribLdvEXT(GLuint index, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetVertexAttribLdvEXT(GLuint index, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -15797,7 +15797,7 @@ void REGAL_CALL missing_glGetVertexAttribLdvEXT(GLuint index, GLenum pname, GLdo
   Warning( "glGetVertexAttribLdvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayVertexAttribLOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+static void REGAL_CALL missing_glVertexArrayVertexAttribLOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
 {
   UNUSED_PARAMETER(vaobj);
   UNUSED_PARAMETER(buffer);
@@ -15809,21 +15809,21 @@ void REGAL_CALL missing_glVertexArrayVertexAttribLOffsetEXT(GLuint vaobj, GLuint
   Warning( "glVertexArrayVertexAttribLOffsetEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1dEXT(GLuint index, GLdouble x)
+static void REGAL_CALL missing_glVertexAttribL1dEXT(GLuint index, GLdouble x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribL1dEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1dvEXT(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL1dvEXT(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL1dvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2dEXT(GLuint index, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertexAttribL2dEXT(GLuint index, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -15831,14 +15831,14 @@ void REGAL_CALL missing_glVertexAttribL2dEXT(GLuint index, GLdouble x, GLdouble 
   Warning( "glVertexAttribL2dEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2dvEXT(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL2dvEXT(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL2dvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertexAttribL3dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -15847,14 +15847,14 @@ void REGAL_CALL missing_glVertexAttribL3dEXT(GLuint index, GLdouble x, GLdouble 
   Warning( "glVertexAttribL3dEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3dvEXT(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL3dvEXT(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL3dvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertexAttribL4dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -15864,14 +15864,14 @@ void REGAL_CALL missing_glVertexAttribL4dEXT(GLuint index, GLdouble x, GLdouble 
   Warning( "glVertexAttribL4dEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4dvEXT(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribL4dvEXT(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL4dvEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribLPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribLPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -15883,12 +15883,12 @@ void REGAL_CALL missing_glVertexAttribLPointerEXT(GLuint index, GLint size, GLen
 
 // GL_EXT_vertex_shader
 
-void REGAL_CALL missing_glBeginVertexShaderEXT(void)
+static void REGAL_CALL missing_glBeginVertexShaderEXT(void)
 {
   Warning( "glBeginVertexShaderEXT not available." );
 }
 
-GLuint REGAL_CALL missing_glBindLightParameterEXT(GLenum light, GLenum value)
+static GLuint REGAL_CALL missing_glBindLightParameterEXT(GLenum light, GLenum value)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(value);
@@ -15896,7 +15896,7 @@ GLuint REGAL_CALL missing_glBindLightParameterEXT(GLenum light, GLenum value)
   return (GLuint )0;
 }
 
-GLuint REGAL_CALL missing_glBindMaterialParameterEXT(GLenum face, GLenum value)
+static GLuint REGAL_CALL missing_glBindMaterialParameterEXT(GLenum face, GLenum value)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(value);
@@ -15904,14 +15904,14 @@ GLuint REGAL_CALL missing_glBindMaterialParameterEXT(GLenum face, GLenum value)
   return (GLuint )0;
 }
 
-GLuint REGAL_CALL missing_glBindParameterEXT(GLenum value)
+static GLuint REGAL_CALL missing_glBindParameterEXT(GLenum value)
 {
   UNUSED_PARAMETER(value);
   Warning( "glBindParameterEXT not available." );
   return (GLuint )0;
 }
 
-GLuint REGAL_CALL missing_glBindTexGenParameterEXT(GLenum unit, GLenum coord, GLenum value)
+static GLuint REGAL_CALL missing_glBindTexGenParameterEXT(GLenum unit, GLenum coord, GLenum value)
 {
   UNUSED_PARAMETER(unit);
   UNUSED_PARAMETER(coord);
@@ -15920,7 +15920,7 @@ GLuint REGAL_CALL missing_glBindTexGenParameterEXT(GLenum unit, GLenum coord, GL
   return (GLuint )0;
 }
 
-GLuint REGAL_CALL missing_glBindTextureUnitParameterEXT(GLenum unit, GLenum value)
+static GLuint REGAL_CALL missing_glBindTextureUnitParameterEXT(GLenum unit, GLenum value)
 {
   UNUSED_PARAMETER(unit);
   UNUSED_PARAMETER(value);
@@ -15928,36 +15928,36 @@ GLuint REGAL_CALL missing_glBindTextureUnitParameterEXT(GLenum unit, GLenum valu
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glBindVertexShaderEXT(GLuint id)
+static void REGAL_CALL missing_glBindVertexShaderEXT(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glBindVertexShaderEXT not available." );
 }
 
-void REGAL_CALL missing_glDeleteVertexShaderEXT(GLuint id)
+static void REGAL_CALL missing_glDeleteVertexShaderEXT(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glDeleteVertexShaderEXT not available." );
 }
 
-void REGAL_CALL missing_glDisableVariantClientStateEXT(GLuint id)
+static void REGAL_CALL missing_glDisableVariantClientStateEXT(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glDisableVariantClientStateEXT not available." );
 }
 
-void REGAL_CALL missing_glEnableVariantClientStateEXT(GLuint id)
+static void REGAL_CALL missing_glEnableVariantClientStateEXT(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glEnableVariantClientStateEXT not available." );
 }
 
-void REGAL_CALL missing_glEndVertexShaderEXT(void)
+static void REGAL_CALL missing_glEndVertexShaderEXT(void)
 {
   Warning( "glEndVertexShaderEXT not available." );
 }
 
-void REGAL_CALL missing_glExtractComponentEXT(GLuint res, GLuint src, GLuint num)
+static void REGAL_CALL missing_glExtractComponentEXT(GLuint res, GLuint src, GLuint num)
 {
   UNUSED_PARAMETER(res);
   UNUSED_PARAMETER(src);
@@ -15965,7 +15965,7 @@ void REGAL_CALL missing_glExtractComponentEXT(GLuint res, GLuint src, GLuint num
   Warning( "glExtractComponentEXT not available." );
 }
 
-GLuint REGAL_CALL missing_glGenSymbolsEXT(GLenum datatype, GLenum storagetype, GLenum range, GLuint components)
+static GLuint REGAL_CALL missing_glGenSymbolsEXT(GLenum datatype, GLenum storagetype, GLenum range, GLuint components)
 {
   UNUSED_PARAMETER(datatype);
   UNUSED_PARAMETER(storagetype);
@@ -15975,14 +15975,14 @@ GLuint REGAL_CALL missing_glGenSymbolsEXT(GLenum datatype, GLenum storagetype, G
   return (GLuint )0;
 }
 
-GLuint REGAL_CALL missing_glGenVertexShadersEXT(GLuint range)
+static GLuint REGAL_CALL missing_glGenVertexShadersEXT(GLuint range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenVertexShadersEXT not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glGetInvariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
+static void REGAL_CALL missing_glGetInvariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -15990,7 +15990,7 @@ void REGAL_CALL missing_glGetInvariantBooleanvEXT(GLuint id, GLenum value, GLboo
   Warning( "glGetInvariantBooleanvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetInvariantFloatvEXT(GLuint id, GLenum value, GLfloat *data)
+static void REGAL_CALL missing_glGetInvariantFloatvEXT(GLuint id, GLenum value, GLfloat *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -15998,7 +15998,7 @@ void REGAL_CALL missing_glGetInvariantFloatvEXT(GLuint id, GLenum value, GLfloat
   Warning( "glGetInvariantFloatvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetInvariantIntegervEXT(GLuint id, GLenum value, GLint *data)
+static void REGAL_CALL missing_glGetInvariantIntegervEXT(GLuint id, GLenum value, GLint *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16006,7 +16006,7 @@ void REGAL_CALL missing_glGetInvariantIntegervEXT(GLuint id, GLenum value, GLint
   Warning( "glGetInvariantIntegervEXT not available." );
 }
 
-void REGAL_CALL missing_glGetLocalConstantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
+static void REGAL_CALL missing_glGetLocalConstantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16014,7 +16014,7 @@ void REGAL_CALL missing_glGetLocalConstantBooleanvEXT(GLuint id, GLenum value, G
   Warning( "glGetLocalConstantBooleanvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetLocalConstantFloatvEXT(GLuint id, GLenum value, GLfloat *data)
+static void REGAL_CALL missing_glGetLocalConstantFloatvEXT(GLuint id, GLenum value, GLfloat *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16022,7 +16022,7 @@ void REGAL_CALL missing_glGetLocalConstantFloatvEXT(GLuint id, GLenum value, GLf
   Warning( "glGetLocalConstantFloatvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetLocalConstantIntegervEXT(GLuint id, GLenum value, GLint *data)
+static void REGAL_CALL missing_glGetLocalConstantIntegervEXT(GLuint id, GLenum value, GLint *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16030,7 +16030,7 @@ void REGAL_CALL missing_glGetLocalConstantIntegervEXT(GLuint id, GLenum value, G
   Warning( "glGetLocalConstantIntegervEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
+static void REGAL_CALL missing_glGetVariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16038,7 +16038,7 @@ void REGAL_CALL missing_glGetVariantBooleanvEXT(GLuint id, GLenum value, GLboole
   Warning( "glGetVariantBooleanvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVariantFloatvEXT(GLuint id, GLenum value, GLfloat *data)
+static void REGAL_CALL missing_glGetVariantFloatvEXT(GLuint id, GLenum value, GLfloat *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16046,7 +16046,7 @@ void REGAL_CALL missing_glGetVariantFloatvEXT(GLuint id, GLenum value, GLfloat *
   Warning( "glGetVariantFloatvEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVariantIntegervEXT(GLuint id, GLenum value, GLint *data)
+static void REGAL_CALL missing_glGetVariantIntegervEXT(GLuint id, GLenum value, GLint *data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16054,7 +16054,7 @@ void REGAL_CALL missing_glGetVariantIntegervEXT(GLuint id, GLenum value, GLint *
   Warning( "glGetVariantIntegervEXT not available." );
 }
 
-void REGAL_CALL missing_glGetVariantPointervEXT(GLuint id, GLenum value, GLvoid **data)
+static void REGAL_CALL missing_glGetVariantPointervEXT(GLuint id, GLenum value, GLvoid **data)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(value);
@@ -16062,7 +16062,7 @@ void REGAL_CALL missing_glGetVariantPointervEXT(GLuint id, GLenum value, GLvoid 
   Warning( "glGetVariantPointervEXT not available." );
 }
 
-void REGAL_CALL missing_glInsertComponentEXT(GLuint res, GLuint src, GLuint num)
+static void REGAL_CALL missing_glInsertComponentEXT(GLuint res, GLuint src, GLuint num)
 {
   UNUSED_PARAMETER(res);
   UNUSED_PARAMETER(src);
@@ -16070,7 +16070,7 @@ void REGAL_CALL missing_glInsertComponentEXT(GLuint res, GLuint src, GLuint num)
   Warning( "glInsertComponentEXT not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsVariantEnabledEXT(GLuint id, GLenum cap)
+static GLboolean REGAL_CALL missing_glIsVariantEnabledEXT(GLuint id, GLenum cap)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(cap);
@@ -16078,7 +16078,7 @@ GLboolean REGAL_CALL missing_glIsVariantEnabledEXT(GLuint id, GLenum cap)
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glSetInvariantEXT(GLuint id, GLenum type, const GLvoid *addr)
+static void REGAL_CALL missing_glSetInvariantEXT(GLuint id, GLenum type, const GLvoid *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(type);
@@ -16086,7 +16086,7 @@ void REGAL_CALL missing_glSetInvariantEXT(GLuint id, GLenum type, const GLvoid *
   Warning( "glSetInvariantEXT not available." );
 }
 
-void REGAL_CALL missing_glSetLocalConstantEXT(GLuint id, GLenum type, const GLvoid *addr)
+static void REGAL_CALL missing_glSetLocalConstantEXT(GLuint id, GLenum type, const GLvoid *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(type);
@@ -16094,7 +16094,7 @@ void REGAL_CALL missing_glSetLocalConstantEXT(GLuint id, GLenum type, const GLvo
   Warning( "glSetLocalConstantEXT not available." );
 }
 
-void REGAL_CALL missing_glShaderOp1EXT(GLenum op, GLuint res, GLuint arg1)
+static void REGAL_CALL missing_glShaderOp1EXT(GLenum op, GLuint res, GLuint arg1)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(res);
@@ -16102,7 +16102,7 @@ void REGAL_CALL missing_glShaderOp1EXT(GLenum op, GLuint res, GLuint arg1)
   Warning( "glShaderOp1EXT not available." );
 }
 
-void REGAL_CALL missing_glShaderOp2EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2)
+static void REGAL_CALL missing_glShaderOp2EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(res);
@@ -16111,7 +16111,7 @@ void REGAL_CALL missing_glShaderOp2EXT(GLenum op, GLuint res, GLuint arg1, GLuin
   Warning( "glShaderOp2EXT not available." );
 }
 
-void REGAL_CALL missing_glShaderOp3EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2, GLuint arg3)
+static void REGAL_CALL missing_glShaderOp3EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2, GLuint arg3)
 {
   UNUSED_PARAMETER(op);
   UNUSED_PARAMETER(res);
@@ -16121,7 +16121,7 @@ void REGAL_CALL missing_glShaderOp3EXT(GLenum op, GLuint res, GLuint arg1, GLuin
   Warning( "glShaderOp3EXT not available." );
 }
 
-void REGAL_CALL missing_glSwizzleEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW)
+static void REGAL_CALL missing_glSwizzleEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW)
 {
   UNUSED_PARAMETER(res);
   UNUSED_PARAMETER(in);
@@ -16132,7 +16132,7 @@ void REGAL_CALL missing_glSwizzleEXT(GLuint res, GLuint in, GLenum outX, GLenum 
   Warning( "glSwizzleEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantPointerEXT(GLuint id, GLenum type, GLuint stride, const GLvoid *addr)
+static void REGAL_CALL missing_glVariantPointerEXT(GLuint id, GLenum type, GLuint stride, const GLvoid *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(type);
@@ -16141,63 +16141,63 @@ void REGAL_CALL missing_glVariantPointerEXT(GLuint id, GLenum type, GLuint strid
   Warning( "glVariantPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantbvEXT(GLuint id, const GLbyte *addr)
+static void REGAL_CALL missing_glVariantbvEXT(GLuint id, const GLbyte *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantbvEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantdvEXT(GLuint id, const GLdouble *addr)
+static void REGAL_CALL missing_glVariantdvEXT(GLuint id, const GLdouble *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantdvEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantfvEXT(GLuint id, const GLfloat *addr)
+static void REGAL_CALL missing_glVariantfvEXT(GLuint id, const GLfloat *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantfvEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantivEXT(GLuint id, const GLint *addr)
+static void REGAL_CALL missing_glVariantivEXT(GLuint id, const GLint *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantivEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantsvEXT(GLuint id, const GLshort *addr)
+static void REGAL_CALL missing_glVariantsvEXT(GLuint id, const GLshort *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantsvEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantubvEXT(GLuint id, const GLubyte *addr)
+static void REGAL_CALL missing_glVariantubvEXT(GLuint id, const GLubyte *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantubvEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantuivEXT(GLuint id, const GLuint *addr)
+static void REGAL_CALL missing_glVariantuivEXT(GLuint id, const GLuint *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantuivEXT not available." );
 }
 
-void REGAL_CALL missing_glVariantusvEXT(GLuint id, const GLushort *addr)
+static void REGAL_CALL missing_glVariantusvEXT(GLuint id, const GLushort *addr)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(addr);
   Warning( "glVariantusvEXT not available." );
 }
 
-void REGAL_CALL missing_glWriteMaskEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW)
+static void REGAL_CALL missing_glWriteMaskEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW)
 {
   UNUSED_PARAMETER(res);
   UNUSED_PARAMETER(in);
@@ -16210,7 +16210,7 @@ void REGAL_CALL missing_glWriteMaskEXT(GLuint res, GLuint in, GLenum outX, GLenu
 
 // GL_EXT_vertex_weighting
 
-void REGAL_CALL missing_glVertexWeightPointerEXT(GLsizei size, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexWeightPointerEXT(GLsizei size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16219,13 +16219,13 @@ void REGAL_CALL missing_glVertexWeightPointerEXT(GLsizei size, GLenum type, GLsi
   Warning( "glVertexWeightPointerEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexWeightfEXT(GLfloat weight)
+static void REGAL_CALL missing_glVertexWeightfEXT(GLfloat weight)
 {
   UNUSED_PARAMETER(weight);
   Warning( "glVertexWeightfEXT not available." );
 }
 
-void REGAL_CALL missing_glVertexWeightfvEXT(const GLfloat *weight)
+static void REGAL_CALL missing_glVertexWeightfvEXT(const GLfloat *weight)
 {
   UNUSED_PARAMETER(weight);
   Warning( "glVertexWeightfvEXT not available." );
@@ -16233,7 +16233,7 @@ void REGAL_CALL missing_glVertexWeightfvEXT(const GLfloat *weight)
 
 // GL_EXT_x11_sync_object
 
-GLsync REGAL_CALL missing_glImportSyncEXT(GLenum external_sync_type, GLintptr external_sync, GLbitfield flags)
+static GLsync REGAL_CALL missing_glImportSyncEXT(GLenum external_sync_type, GLintptr external_sync, GLbitfield flags)
 {
   UNUSED_PARAMETER(external_sync_type);
   UNUSED_PARAMETER(external_sync);
@@ -16244,14 +16244,14 @@ GLsync REGAL_CALL missing_glImportSyncEXT(GLenum external_sync_type, GLintptr ex
 
 // GL_GREMEDY_frame_terminator
 
-void REGAL_CALL missing_glFrameTerminatorGREMEDY(void)
+static void REGAL_CALL missing_glFrameTerminatorGREMEDY(void)
 {
   Warning( "glFrameTerminatorGREMEDY not available." );
 }
 
 // GL_GREMEDY_string_marker
 
-void REGAL_CALL missing_glStringMarkerGREMEDY(GLsizei len, const GLvoid *string)
+static void REGAL_CALL missing_glStringMarkerGREMEDY(GLsizei len, const GLvoid *string)
 {
   UNUSED_PARAMETER(len);
   UNUSED_PARAMETER(string);
@@ -16260,7 +16260,7 @@ void REGAL_CALL missing_glStringMarkerGREMEDY(GLsizei len, const GLvoid *string)
 
 // GL_HP_image_transform
 
-void REGAL_CALL missing_glGetImageTransformParameterfvHP(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetImageTransformParameterfvHP(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -16268,7 +16268,7 @@ void REGAL_CALL missing_glGetImageTransformParameterfvHP(GLenum target, GLenum p
   Warning( "glGetImageTransformParameterfvHP not available." );
 }
 
-void REGAL_CALL missing_glGetImageTransformParameterivHP(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetImageTransformParameterivHP(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -16276,7 +16276,7 @@ void REGAL_CALL missing_glGetImageTransformParameterivHP(GLenum target, GLenum p
   Warning( "glGetImageTransformParameterivHP not available." );
 }
 
-void REGAL_CALL missing_glImageTransformParameterfHP(GLenum target, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glImageTransformParameterfHP(GLenum target, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -16284,7 +16284,7 @@ void REGAL_CALL missing_glImageTransformParameterfHP(GLenum target, GLenum pname
   Warning( "glImageTransformParameterfHP not available." );
 }
 
-void REGAL_CALL missing_glImageTransformParameterfvHP(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glImageTransformParameterfvHP(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -16292,7 +16292,7 @@ void REGAL_CALL missing_glImageTransformParameterfvHP(GLenum target, GLenum pnam
   Warning( "glImageTransformParameterfvHP not available." );
 }
 
-void REGAL_CALL missing_glImageTransformParameteriHP(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glImageTransformParameteriHP(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -16300,7 +16300,7 @@ void REGAL_CALL missing_glImageTransformParameteriHP(GLenum target, GLenum pname
   Warning( "glImageTransformParameteriHP not available." );
 }
 
-void REGAL_CALL missing_glImageTransformParameterivHP(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glImageTransformParameterivHP(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -16310,7 +16310,7 @@ void REGAL_CALL missing_glImageTransformParameterivHP(GLenum target, GLenum pnam
 
 // GL_IBM_multimode_draw_arrays
 
-void REGAL_CALL missing_glMultiModeDrawArraysIBM(const GLenum *mode, const GLint *first, const GLsizei *count, GLsizei primcount, GLint modestride)
+static void REGAL_CALL missing_glMultiModeDrawArraysIBM(const GLenum *mode, const GLint *first, const GLsizei *count, GLsizei primcount, GLint modestride)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -16320,7 +16320,7 @@ void REGAL_CALL missing_glMultiModeDrawArraysIBM(const GLenum *mode, const GLint
   Warning( "glMultiModeDrawArraysIBM not available." );
 }
 
-void REGAL_CALL missing_glMultiModeDrawElementsIBM(const GLenum *mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, GLint modestride)
+static void REGAL_CALL missing_glMultiModeDrawElementsIBM(const GLenum *mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, GLint modestride)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -16333,7 +16333,7 @@ void REGAL_CALL missing_glMultiModeDrawElementsIBM(const GLenum *mode, const GLs
 
 // GL_IBM_vertex_array_lists
 
-void REGAL_CALL missing_glColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16343,7 +16343,7 @@ void REGAL_CALL missing_glColorPointerListIBM(GLint size, GLenum type, GLint str
   Warning( "glColorPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glEdgeFlagPointerListIBM(GLint stride, const GLboolean **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glEdgeFlagPointerListIBM(GLint stride, const GLboolean **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(stride);
   UNUSED_PARAMETER(pointer);
@@ -16351,7 +16351,7 @@ void REGAL_CALL missing_glEdgeFlagPointerListIBM(GLint stride, const GLboolean *
   Warning( "glEdgeFlagPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glFogCoordPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glFogCoordPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -16360,7 +16360,7 @@ void REGAL_CALL missing_glFogCoordPointerListIBM(GLenum type, GLint stride, cons
   Warning( "glFogCoordPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glIndexPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glIndexPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -16369,7 +16369,7 @@ void REGAL_CALL missing_glIndexPointerListIBM(GLenum type, GLint stride, const G
   Warning( "glIndexPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glNormalPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glNormalPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -16378,7 +16378,7 @@ void REGAL_CALL missing_glNormalPointerListIBM(GLenum type, GLint stride, const 
   Warning( "glNormalPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glSecondaryColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16388,7 +16388,7 @@ void REGAL_CALL missing_glSecondaryColorPointerListIBM(GLint size, GLenum type, 
   Warning( "glSecondaryColorPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glTexCoordPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glTexCoordPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16398,7 +16398,7 @@ void REGAL_CALL missing_glTexCoordPointerListIBM(GLint size, GLenum type, GLint 
   Warning( "glTexCoordPointerListIBM not available." );
 }
 
-void REGAL_CALL missing_glVertexPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
+static void REGAL_CALL missing_glVertexPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16410,7 +16410,7 @@ void REGAL_CALL missing_glVertexPointerListIBM(GLint size, GLenum type, GLint st
 
 // GL_IMG_multisampled_render_to_texture
 
-void REGAL_CALL missing_glFramebufferTexture2DMultisampleIMG(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLsizei samples)
+static void REGAL_CALL missing_glFramebufferTexture2DMultisampleIMG(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLsizei samples)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -16421,7 +16421,7 @@ void REGAL_CALL missing_glFramebufferTexture2DMultisampleIMG(GLenum target, GLen
   Warning( "glFramebufferTexture2DMultisampleIMG not available." );
 }
 
-void REGAL_CALL missing_glRenderbufferStorageMultisampleIMG(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageMultisampleIMG(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(samples);
@@ -16433,7 +16433,7 @@ void REGAL_CALL missing_glRenderbufferStorageMultisampleIMG(GLenum target, GLsiz
 
 // GL_INGR_blend_func_separate
 
-void REGAL_CALL missing_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
 {
   UNUSED_PARAMETER(sfactorRGB);
   UNUSED_PARAMETER(dfactorRGB);
@@ -16444,7 +16444,7 @@ void REGAL_CALL missing_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum dfacto
 
 // GL_INTEL_parallel_arrays
 
-void REGAL_CALL missing_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
+static void REGAL_CALL missing_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16452,14 +16452,14 @@ void REGAL_CALL missing_glColorPointervINTEL(GLint size, GLenum type, const GLvo
   Warning( "glColorPointervINTEL not available." );
 }
 
-void REGAL_CALL missing_glNormalPointervINTEL(GLenum type, const GLvoid **pointer)
+static void REGAL_CALL missing_glNormalPointervINTEL(GLenum type, const GLvoid **pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(pointer);
   Warning( "glNormalPointervINTEL not available." );
 }
 
-void REGAL_CALL missing_glTexCoordPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
+static void REGAL_CALL missing_glTexCoordPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16467,7 +16467,7 @@ void REGAL_CALL missing_glTexCoordPointervINTEL(GLint size, GLenum type, const G
   Warning( "glTexCoordPointervINTEL not available." );
 }
 
-void REGAL_CALL missing_glVertexPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
+static void REGAL_CALL missing_glVertexPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -16477,7 +16477,7 @@ void REGAL_CALL missing_glVertexPointervINTEL(GLint size, GLenum type, const GLv
 
 // GL_INTEL_texture_scissor
 
-void REGAL_CALL missing_glTexScissorFuncINTEL(GLenum target, GLenum lfunc, GLenum hfunc)
+static void REGAL_CALL missing_glTexScissorFuncINTEL(GLenum target, GLenum lfunc, GLenum hfunc)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(lfunc);
@@ -16485,7 +16485,7 @@ void REGAL_CALL missing_glTexScissorFuncINTEL(GLenum target, GLenum lfunc, GLenu
   Warning( "glTexScissorFuncINTEL not available." );
 }
 
-void REGAL_CALL missing_glTexScissorINTEL(GLenum target, GLclampf tlow, GLclampf thigh)
+static void REGAL_CALL missing_glTexScissorINTEL(GLenum target, GLclampf tlow, GLclampf thigh)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(tlow);
@@ -16495,14 +16495,14 @@ void REGAL_CALL missing_glTexScissorINTEL(GLenum target, GLclampf tlow, GLclampf
 
 // GL_KHR_debug
 
-void REGAL_CALL missing_glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
+static void REGAL_CALL missing_glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
 {
   UNUSED_PARAMETER(callback);
   UNUSED_PARAMETER(userParam);
   Warning( "glDebugMessageCallback not available." );
 }
 
-void REGAL_CALL missing_glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
+static void REGAL_CALL missing_glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
 {
   UNUSED_PARAMETER(source);
   UNUSED_PARAMETER(type);
@@ -16513,7 +16513,7 @@ void REGAL_CALL missing_glDebugMessageControl(GLenum source, GLenum type, GLenum
   Warning( "glDebugMessageControl not available." );
 }
 
-void REGAL_CALL missing_glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
+static void REGAL_CALL missing_glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
 {
   UNUSED_PARAMETER(source);
   UNUSED_PARAMETER(type);
@@ -16524,7 +16524,7 @@ void REGAL_CALL missing_glDebugMessageInsert(GLenum source, GLenum type, GLuint 
   Warning( "glDebugMessageInsert not available." );
 }
 
-GLuint REGAL_CALL missing_glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
+static GLuint REGAL_CALL missing_glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(bufsize);
@@ -16538,7 +16538,7 @@ GLuint REGAL_CALL missing_glGetDebugMessageLog(GLuint count, GLsizei bufsize, GL
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL missing_glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
   UNUSED_PARAMETER(identifier);
   UNUSED_PARAMETER(name);
@@ -16548,7 +16548,7 @@ void REGAL_CALL missing_glGetObjectLabel(GLenum identifier, GLuint name, GLsizei
   Warning( "glGetObjectLabel not available." );
 }
 
-void REGAL_CALL missing_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL missing_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
   UNUSED_PARAMETER(ptr);
   UNUSED_PARAMETER(bufSize);
@@ -16557,7 +16557,7 @@ void REGAL_CALL missing_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsize
   Warning( "glGetObjectPtrLabel not available." );
 }
 
-void REGAL_CALL missing_glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLchar *label)
+static void REGAL_CALL missing_glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLchar *label)
 {
   UNUSED_PARAMETER(identifier);
   UNUSED_PARAMETER(name);
@@ -16566,7 +16566,7 @@ void REGAL_CALL missing_glObjectLabel(GLenum identifier, GLuint name, GLsizei le
   Warning( "glObjectLabel not available." );
 }
 
-void REGAL_CALL missing_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
+static void REGAL_CALL missing_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
 {
   UNUSED_PARAMETER(ptr);
   UNUSED_PARAMETER(length);
@@ -16574,12 +16574,12 @@ void REGAL_CALL missing_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLch
   Warning( "glObjectPtrLabel not available." );
 }
 
-void REGAL_CALL missing_glPopDebugGroup(void)
+static void REGAL_CALL missing_glPopDebugGroup(void)
 {
   Warning( "glPopDebugGroup not available." );
 }
 
-void REGAL_CALL missing_glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar *message)
+static void REGAL_CALL missing_glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar *message)
 {
   UNUSED_PARAMETER(source);
   UNUSED_PARAMETER(id);
@@ -16590,19 +16590,19 @@ void REGAL_CALL missing_glPushDebugGroup(GLenum source, GLuint id, GLsizei lengt
 
 // GL_KTX_buffer_region
 
-GLuint REGAL_CALL missing_glBufferRegionEnabled(void)
+static GLuint REGAL_CALL missing_glBufferRegionEnabled(void)
 {
   Warning( "glBufferRegionEnabled not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glDeleteBufferRegion(GLenum region)
+static void REGAL_CALL missing_glDeleteBufferRegion(GLenum region)
 {
   UNUSED_PARAMETER(region);
   Warning( "glDeleteBufferRegion not available." );
 }
 
-void REGAL_CALL missing_glDrawBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height, GLint xDest, GLint yDest)
+static void REGAL_CALL missing_glDrawBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height, GLint xDest, GLint yDest)
 {
   UNUSED_PARAMETER(region);
   UNUSED_PARAMETER(x);
@@ -16614,14 +16614,14 @@ void REGAL_CALL missing_glDrawBufferRegion(GLuint region, GLint x, GLint y, GLsi
   Warning( "glDrawBufferRegion not available." );
 }
 
-GLuint REGAL_CALL missing_glNewBufferRegion(GLenum region)
+static GLuint REGAL_CALL missing_glNewBufferRegion(GLenum region)
 {
   UNUSED_PARAMETER(region);
   Warning( "glNewBufferRegion not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glReadBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glReadBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(region);
   UNUSED_PARAMETER(x);
@@ -16633,66 +16633,66 @@ void REGAL_CALL missing_glReadBufferRegion(GLuint region, GLint x, GLint y, GLsi
 
 // GL_MESA_resize_buffers
 
-void REGAL_CALL missing_glResizeBuffersMESA(void)
+static void REGAL_CALL missing_glResizeBuffersMESA(void)
 {
   Warning( "glResizeBuffersMESA not available." );
 }
 
 // GL_MESA_window_pos
 
-void REGAL_CALL missing_glWindowPos2dMESA(GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glWindowPos2dMESA(GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2dMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2dvMESA(const GLdouble *v)
+static void REGAL_CALL missing_glWindowPos2dvMESA(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos2dvMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2fMESA(GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glWindowPos2fMESA(GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2fMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2fvMESA(const GLfloat *v)
+static void REGAL_CALL missing_glWindowPos2fvMESA(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos2fvMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2iMESA(GLint x, GLint y)
+static void REGAL_CALL missing_glWindowPos2iMESA(GLint x, GLint y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2iMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2ivMESA(const GLint *v)
+static void REGAL_CALL missing_glWindowPos2ivMESA(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos2ivMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2sMESA(GLshort x, GLshort y)
+static void REGAL_CALL missing_glWindowPos2sMESA(GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glWindowPos2sMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos2svMESA(const GLshort *v)
+static void REGAL_CALL missing_glWindowPos2svMESA(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos2svMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3dMESA(GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glWindowPos3dMESA(GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16700,13 +16700,13 @@ void REGAL_CALL missing_glWindowPos3dMESA(GLdouble x, GLdouble y, GLdouble z)
   Warning( "glWindowPos3dMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3dvMESA(const GLdouble *v)
+static void REGAL_CALL missing_glWindowPos3dvMESA(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos3dvMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3fMESA(GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glWindowPos3fMESA(GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16714,13 +16714,13 @@ void REGAL_CALL missing_glWindowPos3fMESA(GLfloat x, GLfloat y, GLfloat z)
   Warning( "glWindowPos3fMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3fvMESA(const GLfloat *v)
+static void REGAL_CALL missing_glWindowPos3fvMESA(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos3fvMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3iMESA(GLint x, GLint y, GLint z)
+static void REGAL_CALL missing_glWindowPos3iMESA(GLint x, GLint y, GLint z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16728,13 +16728,13 @@ void REGAL_CALL missing_glWindowPos3iMESA(GLint x, GLint y, GLint z)
   Warning( "glWindowPos3iMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3ivMESA(const GLint *v)
+static void REGAL_CALL missing_glWindowPos3ivMESA(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos3ivMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3sMESA(GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glWindowPos3sMESA(GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16742,13 +16742,13 @@ void REGAL_CALL missing_glWindowPos3sMESA(GLshort x, GLshort y, GLshort z)
   Warning( "glWindowPos3sMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos3svMESA(const GLshort *v)
+static void REGAL_CALL missing_glWindowPos3svMESA(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos3svMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4dMESA(GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glWindowPos4dMESA(GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16757,13 +16757,13 @@ void REGAL_CALL missing_glWindowPos4dMESA(GLdouble x, GLdouble y, GLdouble z, GL
   Warning( "glWindowPos4dMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4dvMESA(const GLdouble *v)
+static void REGAL_CALL missing_glWindowPos4dvMESA(const GLdouble *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos4dvMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4fMESA(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glWindowPos4fMESA(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16772,13 +16772,13 @@ void REGAL_CALL missing_glWindowPos4fMESA(GLfloat x, GLfloat y, GLfloat z, GLflo
   Warning( "glWindowPos4fMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4fvMESA(const GLfloat *v)
+static void REGAL_CALL missing_glWindowPos4fvMESA(const GLfloat *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos4fvMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4iMESA(GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glWindowPos4iMESA(GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16787,13 +16787,13 @@ void REGAL_CALL missing_glWindowPos4iMESA(GLint x, GLint y, GLint z, GLint w)
   Warning( "glWindowPos4iMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4ivMESA(const GLint *v)
+static void REGAL_CALL missing_glWindowPos4ivMESA(const GLint *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos4ivMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4sMESA(GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glWindowPos4sMESA(GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -16802,7 +16802,7 @@ void REGAL_CALL missing_glWindowPos4sMESA(GLshort x, GLshort y, GLshort z, GLsho
   Warning( "glWindowPos4sMESA not available." );
 }
 
-void REGAL_CALL missing_glWindowPos4svMESA(const GLshort *v)
+static void REGAL_CALL missing_glWindowPos4svMESA(const GLshort *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glWindowPos4svMESA not available." );
@@ -16810,20 +16810,20 @@ void REGAL_CALL missing_glWindowPos4svMESA(const GLshort *v)
 
 // GL_NVX_conditional_render
 
-void REGAL_CALL missing_glBeginConditionalRenderNVX(GLuint id)
+static void REGAL_CALL missing_glBeginConditionalRenderNVX(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glBeginConditionalRenderNVX not available." );
 }
 
-void REGAL_CALL missing_glEndConditionalRenderNVX(void)
+static void REGAL_CALL missing_glEndConditionalRenderNVX(void)
 {
   Warning( "glEndConditionalRenderNVX not available." );
 }
 
 // GL_NV_bindless_texture
 
-GLuint64 REGAL_CALL missing_glGetImageHandleNV(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format)
+static GLuint64 REGAL_CALL missing_glGetImageHandleNV(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(level);
@@ -16834,14 +16834,14 @@ GLuint64 REGAL_CALL missing_glGetImageHandleNV(GLuint texture, GLint level, GLbo
   return (GLuint64 )0;
 }
 
-GLuint64 REGAL_CALL missing_glGetTextureHandleNV(GLuint texture)
+static GLuint64 REGAL_CALL missing_glGetTextureHandleNV(GLuint texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glGetTextureHandleNV not available." );
   return (GLuint64 )0;
 }
 
-GLuint64 REGAL_CALL missing_glGetTextureSamplerHandleNV(GLuint texture, GLuint sampler)
+static GLuint64 REGAL_CALL missing_glGetTextureSamplerHandleNV(GLuint texture, GLuint sampler)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(sampler);
@@ -16849,46 +16849,46 @@ GLuint64 REGAL_CALL missing_glGetTextureSamplerHandleNV(GLuint texture, GLuint s
   return (GLuint64 )0;
 }
 
-GLboolean REGAL_CALL missing_glIsImageHandleResidentNV(GLuint64 handle)
+static GLboolean REGAL_CALL missing_glIsImageHandleResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glIsImageHandleResidentNV not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsTextureHandleResidentNV(GLuint64 handle)
+static GLboolean REGAL_CALL missing_glIsTextureHandleResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glIsTextureHandleResidentNV not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glMakeImageHandleNonResidentNV(GLuint64 handle)
+static void REGAL_CALL missing_glMakeImageHandleNonResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glMakeImageHandleNonResidentNV not available." );
 }
 
-void REGAL_CALL missing_glMakeImageHandleResidentNV(GLuint64 handle, GLenum access)
+static void REGAL_CALL missing_glMakeImageHandleResidentNV(GLuint64 handle, GLenum access)
 {
   UNUSED_PARAMETER(handle);
   UNUSED_PARAMETER(access);
   Warning( "glMakeImageHandleResidentNV not available." );
 }
 
-void REGAL_CALL missing_glMakeTextureHandleNonResidentNV(GLuint64 handle)
+static void REGAL_CALL missing_glMakeTextureHandleNonResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glMakeTextureHandleNonResidentNV not available." );
 }
 
-void REGAL_CALL missing_glMakeTextureHandleResidentNV(GLuint64 handle)
+static void REGAL_CALL missing_glMakeTextureHandleResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glMakeTextureHandleResidentNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformHandleui64NV(GLuint program, GLint location, GLuint64 value)
+static void REGAL_CALL missing_glProgramUniformHandleui64NV(GLuint program, GLint location, GLuint64 value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -16896,7 +16896,7 @@ void REGAL_CALL missing_glProgramUniformHandleui64NV(GLuint program, GLint locat
   Warning( "glProgramUniformHandleui64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformHandleui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
+static void REGAL_CALL missing_glProgramUniformHandleui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -16905,14 +16905,14 @@ void REGAL_CALL missing_glProgramUniformHandleui64vNV(GLuint program, GLint loca
   Warning( "glProgramUniformHandleui64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniformHandleui64NV(GLint location, GLuint64 value)
+static void REGAL_CALL missing_glUniformHandleui64NV(GLint location, GLuint64 value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(value);
   Warning( "glUniformHandleui64NV not available." );
 }
 
-void REGAL_CALL missing_glUniformHandleui64vNV(GLint location, GLsizei count, const GLuint64 *value)
+static void REGAL_CALL missing_glUniformHandleui64vNV(GLint location, GLsizei count, const GLuint64 *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -16922,21 +16922,21 @@ void REGAL_CALL missing_glUniformHandleui64vNV(GLint location, GLsizei count, co
 
 // GL_NV_conditional_render
 
-void REGAL_CALL missing_glBeginConditionalRenderNV(GLuint id, GLenum mode)
+static void REGAL_CALL missing_glBeginConditionalRenderNV(GLuint id, GLenum mode)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(mode);
   Warning( "glBeginConditionalRenderNV not available." );
 }
 
-void REGAL_CALL missing_glEndConditionalRenderNV(void)
+static void REGAL_CALL missing_glEndConditionalRenderNV(void)
 {
   Warning( "glEndConditionalRenderNV not available." );
 }
 
 // GL_NV_copy_image
 
-void REGAL_CALL missing_glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+static void REGAL_CALL missing_glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
 {
   UNUSED_PARAMETER(srcName);
   UNUSED_PARAMETER(srcTarget);
@@ -16958,13 +16958,13 @@ void REGAL_CALL missing_glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, G
 
 // GL_NV_coverage_sample
 
-void REGAL_CALL missing_glCoverageMaskNV(GLboolean mask)
+static void REGAL_CALL missing_glCoverageMaskNV(GLboolean mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glCoverageMaskNV not available." );
 }
 
-void REGAL_CALL missing_glCoverageOperationNV(GLenum operation)
+static void REGAL_CALL missing_glCoverageOperationNV(GLenum operation)
 {
   UNUSED_PARAMETER(operation);
   Warning( "glCoverageOperationNV not available." );
@@ -16972,20 +16972,20 @@ void REGAL_CALL missing_glCoverageOperationNV(GLenum operation)
 
 // GL_NV_depth_buffer_float
 
-void REGAL_CALL missing_glClearDepthdNV(GLdouble depth)
+static void REGAL_CALL missing_glClearDepthdNV(GLdouble depth)
 {
   UNUSED_PARAMETER(depth);
   Warning( "glClearDepthdNV not available." );
 }
 
-void REGAL_CALL missing_glDepthBoundsdNV(GLdouble zmin, GLdouble zmax)
+static void REGAL_CALL missing_glDepthBoundsdNV(GLdouble zmin, GLdouble zmax)
 {
   UNUSED_PARAMETER(zmin);
   UNUSED_PARAMETER(zmax);
   Warning( "glDepthBoundsdNV not available." );
 }
 
-void REGAL_CALL missing_glDepthRangedNV(GLdouble zNear, GLdouble zFar)
+static void REGAL_CALL missing_glDepthRangedNV(GLdouble zNear, GLdouble zFar)
 {
   UNUSED_PARAMETER(zNear);
   UNUSED_PARAMETER(zFar);
@@ -16994,7 +16994,7 @@ void REGAL_CALL missing_glDepthRangedNV(GLdouble zNear, GLdouble zFar)
 
 // GL_NV_draw_buffers
 
-void REGAL_CALL missing_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
+static void REGAL_CALL missing_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(bufs);
@@ -17003,14 +17003,14 @@ void REGAL_CALL missing_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
 
 // GL_NV_evaluators
 
-void REGAL_CALL missing_glEvalMapsNV(GLenum target, GLenum mode)
+static void REGAL_CALL missing_glEvalMapsNV(GLenum target, GLenum mode)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(mode);
   Warning( "glEvalMapsNV not available." );
 }
 
-void REGAL_CALL missing_glGetMapAttribParameterfvNV(GLenum target, GLuint index, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMapAttribParameterfvNV(GLenum target, GLuint index, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17019,7 +17019,7 @@ void REGAL_CALL missing_glGetMapAttribParameterfvNV(GLenum target, GLuint index,
   Warning( "glGetMapAttribParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetMapAttribParameterivNV(GLenum target, GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMapAttribParameterivNV(GLenum target, GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17028,7 +17028,7 @@ void REGAL_CALL missing_glGetMapAttribParameterivNV(GLenum target, GLuint index,
   Warning( "glGetMapAttribParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glGetMapControlPointsNV(GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLboolean packed, GLvoid *points)
+static void REGAL_CALL missing_glGetMapControlPointsNV(GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLboolean packed, GLvoid *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17040,7 +17040,7 @@ void REGAL_CALL missing_glGetMapControlPointsNV(GLenum target, GLuint index, GLe
   Warning( "glGetMapControlPointsNV not available." );
 }
 
-void REGAL_CALL missing_glGetMapParameterfvNV(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetMapParameterfvNV(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -17048,7 +17048,7 @@ void REGAL_CALL missing_glGetMapParameterfvNV(GLenum target, GLenum pname, GLflo
   Warning( "glGetMapParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetMapParameterivNV(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetMapParameterivNV(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -17056,7 +17056,7 @@ void REGAL_CALL missing_glGetMapParameterivNV(GLenum target, GLenum pname, GLint
   Warning( "glGetMapParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glMapControlPointsNV(GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const GLvoid *points)
+static void REGAL_CALL missing_glMapControlPointsNV(GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const GLvoid *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17070,7 +17070,7 @@ void REGAL_CALL missing_glMapControlPointsNV(GLenum target, GLuint index, GLenum
   Warning( "glMapControlPointsNV not available." );
 }
 
-void REGAL_CALL missing_glMapParameterfvNV(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glMapParameterfvNV(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -17078,7 +17078,7 @@ void REGAL_CALL missing_glMapParameterfvNV(GLenum target, GLenum pname, const GL
   Warning( "glMapParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glMapParameterivNV(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glMapParameterivNV(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -17088,7 +17088,7 @@ void REGAL_CALL missing_glMapParameterivNV(GLenum target, GLenum pname, const GL
 
 // GL_NV_explicit_multisample
 
-void REGAL_CALL missing_glGetMultisamplefvNV(GLenum pname, GLuint index, GLfloat *val)
+static void REGAL_CALL missing_glGetMultisamplefvNV(GLenum pname, GLuint index, GLfloat *val)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(index);
@@ -17096,14 +17096,14 @@ void REGAL_CALL missing_glGetMultisamplefvNV(GLenum pname, GLuint index, GLfloat
   Warning( "glGetMultisamplefvNV not available." );
 }
 
-void REGAL_CALL missing_glSampleMaskIndexedNV(GLuint index, GLbitfield mask)
+static void REGAL_CALL missing_glSampleMaskIndexedNV(GLuint index, GLbitfield mask)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(mask);
   Warning( "glSampleMaskIndexedNV not available." );
 }
 
-void REGAL_CALL missing_glTexRenderbufferNV(GLenum target, GLuint renderbuffer)
+static void REGAL_CALL missing_glTexRenderbufferNV(GLenum target, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(renderbuffer);
@@ -17112,27 +17112,27 @@ void REGAL_CALL missing_glTexRenderbufferNV(GLenum target, GLuint renderbuffer)
 
 // GL_NV_fence
 
-void REGAL_CALL missing_glDeleteFencesNV(GLsizei n, const GLuint *fences)
+static void REGAL_CALL missing_glDeleteFencesNV(GLsizei n, const GLuint *fences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(fences);
   Warning( "glDeleteFencesNV not available." );
 }
 
-void REGAL_CALL missing_glFinishFenceNV(GLuint fence)
+static void REGAL_CALL missing_glFinishFenceNV(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glFinishFenceNV not available." );
 }
 
-void REGAL_CALL missing_glGenFencesNV(GLsizei n, GLuint *fences)
+static void REGAL_CALL missing_glGenFencesNV(GLsizei n, GLuint *fences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(fences);
   Warning( "glGenFencesNV not available." );
 }
 
-void REGAL_CALL missing_glGetFenceivNV(GLuint fence, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFenceivNV(GLuint fence, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(fence);
   UNUSED_PARAMETER(pname);
@@ -17140,21 +17140,21 @@ void REGAL_CALL missing_glGetFenceivNV(GLuint fence, GLenum pname, GLint *params
   Warning( "glGetFenceivNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsFenceNV(GLuint fence)
+static GLboolean REGAL_CALL missing_glIsFenceNV(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glIsFenceNV not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glSetFenceNV(GLuint fence, GLenum condition)
+static void REGAL_CALL missing_glSetFenceNV(GLuint fence, GLenum condition)
 {
   UNUSED_PARAMETER(fence);
   UNUSED_PARAMETER(condition);
   Warning( "glSetFenceNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glTestFenceNV(GLuint fence)
+static GLboolean REGAL_CALL missing_glTestFenceNV(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glTestFenceNV not available." );
@@ -17163,7 +17163,7 @@ GLboolean REGAL_CALL missing_glTestFenceNV(GLuint fence)
 
 // GL_NV_fragment_program
 
-void REGAL_CALL missing_glGetProgramNamedParameterdvNV(GLuint id, GLsizei len, const GLubyte *name, GLdouble *params)
+static void REGAL_CALL missing_glGetProgramNamedParameterdvNV(GLuint id, GLsizei len, const GLubyte *name, GLdouble *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(len);
@@ -17172,7 +17172,7 @@ void REGAL_CALL missing_glGetProgramNamedParameterdvNV(GLuint id, GLsizei len, c
   Warning( "glGetProgramNamedParameterdvNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramNamedParameterfvNV(GLuint id, GLsizei len, const GLubyte *name, GLfloat *params)
+static void REGAL_CALL missing_glGetProgramNamedParameterfvNV(GLuint id, GLsizei len, const GLubyte *name, GLfloat *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(len);
@@ -17181,7 +17181,7 @@ void REGAL_CALL missing_glGetProgramNamedParameterfvNV(GLuint id, GLsizei len, c
   Warning( "glGetProgramNamedParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glProgramNamedParameter4dNV(GLuint id, GLsizei len, const GLubyte *name, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glProgramNamedParameter4dNV(GLuint id, GLsizei len, const GLubyte *name, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(len);
@@ -17193,7 +17193,7 @@ void REGAL_CALL missing_glProgramNamedParameter4dNV(GLuint id, GLsizei len, cons
   Warning( "glProgramNamedParameter4dNV not available." );
 }
 
-void REGAL_CALL missing_glProgramNamedParameter4dvNV(GLuint id, GLsizei len, const GLubyte *name, const GLdouble *v)
+static void REGAL_CALL missing_glProgramNamedParameter4dvNV(GLuint id, GLsizei len, const GLubyte *name, const GLdouble *v)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(len);
@@ -17202,7 +17202,7 @@ void REGAL_CALL missing_glProgramNamedParameter4dvNV(GLuint id, GLsizei len, con
   Warning( "glProgramNamedParameter4dvNV not available." );
 }
 
-void REGAL_CALL missing_glProgramNamedParameter4fNV(GLuint id, GLsizei len, const GLubyte *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glProgramNamedParameter4fNV(GLuint id, GLsizei len, const GLubyte *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(len);
@@ -17214,7 +17214,7 @@ void REGAL_CALL missing_glProgramNamedParameter4fNV(GLuint id, GLsizei len, cons
   Warning( "glProgramNamedParameter4fNV not available." );
 }
 
-void REGAL_CALL missing_glProgramNamedParameter4fvNV(GLuint id, GLsizei len, const GLubyte *name, const GLfloat *v)
+static void REGAL_CALL missing_glProgramNamedParameter4fvNV(GLuint id, GLsizei len, const GLubyte *name, const GLfloat *v)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(len);
@@ -17225,7 +17225,7 @@ void REGAL_CALL missing_glProgramNamedParameter4fvNV(GLuint id, GLsizei len, con
 
 // GL_NV_framebuffer_blit
 
-void REGAL_CALL missing_glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+static void REGAL_CALL missing_glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
 {
   UNUSED_PARAMETER(srcX0);
   UNUSED_PARAMETER(srcY0);
@@ -17242,7 +17242,7 @@ void REGAL_CALL missing_glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX
 
 // GL_NV_framebuffer_multisample_coverage
 
-void REGAL_CALL missing_glRenderbufferStorageMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(coverageSamples);
@@ -17255,7 +17255,7 @@ void REGAL_CALL missing_glRenderbufferStorageMultisampleCoverageNV(GLenum target
 
 // GL_NV_geometry_program4
 
-void REGAL_CALL missing_glProgramVertexLimitNV(GLenum target, GLint limit)
+static void REGAL_CALL missing_glProgramVertexLimitNV(GLenum target, GLint limit)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(limit);
@@ -17264,7 +17264,7 @@ void REGAL_CALL missing_glProgramVertexLimitNV(GLenum target, GLint limit)
 
 // GL_NV_gpu_program4
 
-void REGAL_CALL missing_glGetProgramEnvParameterIivNV(GLenum target, GLuint index, GLint *params)
+static void REGAL_CALL missing_glGetProgramEnvParameterIivNV(GLenum target, GLuint index, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17272,7 +17272,7 @@ void REGAL_CALL missing_glGetProgramEnvParameterIivNV(GLenum target, GLuint inde
   Warning( "glGetProgramEnvParameterIivNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramEnvParameterIuivNV(GLenum target, GLuint index, GLuint *params)
+static void REGAL_CALL missing_glGetProgramEnvParameterIuivNV(GLenum target, GLuint index, GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17280,7 +17280,7 @@ void REGAL_CALL missing_glGetProgramEnvParameterIuivNV(GLenum target, GLuint ind
   Warning( "glGetProgramEnvParameterIuivNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramLocalParameterIivNV(GLenum target, GLuint index, GLint *params)
+static void REGAL_CALL missing_glGetProgramLocalParameterIivNV(GLenum target, GLuint index, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17288,7 +17288,7 @@ void REGAL_CALL missing_glGetProgramLocalParameterIivNV(GLenum target, GLuint in
   Warning( "glGetProgramLocalParameterIivNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramLocalParameterIuivNV(GLenum target, GLuint index, GLuint *params)
+static void REGAL_CALL missing_glGetProgramLocalParameterIuivNV(GLenum target, GLuint index, GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17296,7 +17296,7 @@ void REGAL_CALL missing_glGetProgramLocalParameterIuivNV(GLenum target, GLuint i
   Warning( "glGetProgramLocalParameterIuivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameterI4iNV(GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glProgramEnvParameterI4iNV(GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17307,7 +17307,7 @@ void REGAL_CALL missing_glProgramEnvParameterI4iNV(GLenum target, GLuint index, 
   Warning( "glProgramEnvParameterI4iNV not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameterI4ivNV(GLenum target, GLuint index, const GLint *params)
+static void REGAL_CALL missing_glProgramEnvParameterI4ivNV(GLenum target, GLuint index, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17315,7 +17315,7 @@ void REGAL_CALL missing_glProgramEnvParameterI4ivNV(GLenum target, GLuint index,
   Warning( "glProgramEnvParameterI4ivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameterI4uiNV(GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
+static void REGAL_CALL missing_glProgramEnvParameterI4uiNV(GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17326,7 +17326,7 @@ void REGAL_CALL missing_glProgramEnvParameterI4uiNV(GLenum target, GLuint index,
   Warning( "glProgramEnvParameterI4uiNV not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParameterI4uivNV(GLenum target, GLuint index, const GLuint *params)
+static void REGAL_CALL missing_glProgramEnvParameterI4uivNV(GLenum target, GLuint index, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17334,7 +17334,7 @@ void REGAL_CALL missing_glProgramEnvParameterI4uivNV(GLenum target, GLuint index
   Warning( "glProgramEnvParameterI4uivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParametersI4ivNV(GLenum target, GLuint index, GLsizei count, const GLint *params)
+static void REGAL_CALL missing_glProgramEnvParametersI4ivNV(GLenum target, GLuint index, GLsizei count, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17343,7 +17343,7 @@ void REGAL_CALL missing_glProgramEnvParametersI4ivNV(GLenum target, GLuint index
   Warning( "glProgramEnvParametersI4ivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramEnvParametersI4uivNV(GLenum target, GLuint index, GLsizei count, const GLuint *params)
+static void REGAL_CALL missing_glProgramEnvParametersI4uivNV(GLenum target, GLuint index, GLsizei count, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17352,7 +17352,7 @@ void REGAL_CALL missing_glProgramEnvParametersI4uivNV(GLenum target, GLuint inde
   Warning( "glProgramEnvParametersI4uivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameterI4iNV(GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w)
+static void REGAL_CALL missing_glProgramLocalParameterI4iNV(GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17363,7 +17363,7 @@ void REGAL_CALL missing_glProgramLocalParameterI4iNV(GLenum target, GLuint index
   Warning( "glProgramLocalParameterI4iNV not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameterI4ivNV(GLenum target, GLuint index, const GLint *params)
+static void REGAL_CALL missing_glProgramLocalParameterI4ivNV(GLenum target, GLuint index, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17371,7 +17371,7 @@ void REGAL_CALL missing_glProgramLocalParameterI4ivNV(GLenum target, GLuint inde
   Warning( "glProgramLocalParameterI4ivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameterI4uiNV(GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
+static void REGAL_CALL missing_glProgramLocalParameterI4uiNV(GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17382,7 +17382,7 @@ void REGAL_CALL missing_glProgramLocalParameterI4uiNV(GLenum target, GLuint inde
   Warning( "glProgramLocalParameterI4uiNV not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParameterI4uivNV(GLenum target, GLuint index, const GLuint *params)
+static void REGAL_CALL missing_glProgramLocalParameterI4uivNV(GLenum target, GLuint index, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17390,7 +17390,7 @@ void REGAL_CALL missing_glProgramLocalParameterI4uivNV(GLenum target, GLuint ind
   Warning( "glProgramLocalParameterI4uivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParametersI4ivNV(GLenum target, GLuint index, GLsizei count, const GLint *params)
+static void REGAL_CALL missing_glProgramLocalParametersI4ivNV(GLenum target, GLuint index, GLsizei count, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17399,7 +17399,7 @@ void REGAL_CALL missing_glProgramLocalParametersI4ivNV(GLenum target, GLuint ind
   Warning( "glProgramLocalParametersI4ivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramLocalParametersI4uivNV(GLenum target, GLuint index, GLsizei count, const GLuint *params)
+static void REGAL_CALL missing_glProgramLocalParametersI4uivNV(GLenum target, GLuint index, GLsizei count, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -17410,7 +17410,7 @@ void REGAL_CALL missing_glProgramLocalParametersI4uivNV(GLenum target, GLuint in
 
 // GL_NV_gpu_shader5
 
-void REGAL_CALL missing_glGetUniformi64vNV(GLuint program, GLint location, GLint64EXT *params)
+static void REGAL_CALL missing_glGetUniformi64vNV(GLuint program, GLint location, GLint64EXT *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17418,7 +17418,7 @@ void REGAL_CALL missing_glGetUniformi64vNV(GLuint program, GLint location, GLint
   Warning( "glGetUniformi64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1i64NV(GLuint program, GLint location, GLint64EXT x)
+static void REGAL_CALL missing_glProgramUniform1i64NV(GLuint program, GLint location, GLint64EXT x)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17426,7 +17426,7 @@ void REGAL_CALL missing_glProgramUniform1i64NV(GLuint program, GLint location, G
   Warning( "glProgramUniform1i64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform1i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17435,7 +17435,7 @@ void REGAL_CALL missing_glProgramUniform1i64vNV(GLuint program, GLint location, 
   Warning( "glProgramUniform1i64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1ui64NV(GLuint program, GLint location, GLuint64EXT x)
+static void REGAL_CALL missing_glProgramUniform1ui64NV(GLuint program, GLint location, GLuint64EXT x)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17443,7 +17443,7 @@ void REGAL_CALL missing_glProgramUniform1ui64NV(GLuint program, GLint location, 
   Warning( "glProgramUniform1ui64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform1ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform1ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17452,7 +17452,7 @@ void REGAL_CALL missing_glProgramUniform1ui64vNV(GLuint program, GLint location,
   Warning( "glProgramUniform1ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y)
+static void REGAL_CALL missing_glProgramUniform2i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17461,7 +17461,7 @@ void REGAL_CALL missing_glProgramUniform2i64NV(GLuint program, GLint location, G
   Warning( "glProgramUniform2i64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform2i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17470,7 +17470,7 @@ void REGAL_CALL missing_glProgramUniform2i64vNV(GLuint program, GLint location, 
   Warning( "glProgramUniform2i64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y)
+static void REGAL_CALL missing_glProgramUniform2ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17479,7 +17479,7 @@ void REGAL_CALL missing_glProgramUniform2ui64NV(GLuint program, GLint location, 
   Warning( "glProgramUniform2ui64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform2ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform2ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17488,7 +17488,7 @@ void REGAL_CALL missing_glProgramUniform2ui64vNV(GLuint program, GLint location,
   Warning( "glProgramUniform2ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z)
+static void REGAL_CALL missing_glProgramUniform3i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17498,7 +17498,7 @@ void REGAL_CALL missing_glProgramUniform3i64NV(GLuint program, GLint location, G
   Warning( "glProgramUniform3i64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform3i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17507,7 +17507,7 @@ void REGAL_CALL missing_glProgramUniform3i64vNV(GLuint program, GLint location, 
   Warning( "glProgramUniform3i64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z)
+static void REGAL_CALL missing_glProgramUniform3ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17517,7 +17517,7 @@ void REGAL_CALL missing_glProgramUniform3ui64NV(GLuint program, GLint location, 
   Warning( "glProgramUniform3ui64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform3ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform3ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17526,7 +17526,7 @@ void REGAL_CALL missing_glProgramUniform3ui64vNV(GLuint program, GLint location,
   Warning( "glProgramUniform3ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w)
+static void REGAL_CALL missing_glProgramUniform4i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17537,7 +17537,7 @@ void REGAL_CALL missing_glProgramUniform4i64NV(GLuint program, GLint location, G
   Warning( "glProgramUniform4i64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform4i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17546,7 +17546,7 @@ void REGAL_CALL missing_glProgramUniform4i64vNV(GLuint program, GLint location, 
   Warning( "glProgramUniform4i64vNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w)
+static void REGAL_CALL missing_glProgramUniform4ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17557,7 +17557,7 @@ void REGAL_CALL missing_glProgramUniform4ui64NV(GLuint program, GLint location, 
   Warning( "glProgramUniform4ui64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniform4ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glProgramUniform4ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -17566,14 +17566,14 @@ void REGAL_CALL missing_glProgramUniform4ui64vNV(GLuint program, GLint location,
   Warning( "glProgramUniform4ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform1i64NV(GLint location, GLint64EXT x)
+static void REGAL_CALL missing_glUniform1i64NV(GLint location, GLint64EXT x)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
   Warning( "glUniform1i64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform1i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glUniform1i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17581,14 +17581,14 @@ void REGAL_CALL missing_glUniform1i64vNV(GLint location, GLsizei count, const GL
   Warning( "glUniform1i64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform1ui64NV(GLint location, GLuint64EXT x)
+static void REGAL_CALL missing_glUniform1ui64NV(GLint location, GLuint64EXT x)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
   Warning( "glUniform1ui64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform1ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glUniform1ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17596,7 +17596,7 @@ void REGAL_CALL missing_glUniform1ui64vNV(GLint location, GLsizei count, const G
   Warning( "glUniform1ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform2i64NV(GLint location, GLint64EXT x, GLint64EXT y)
+static void REGAL_CALL missing_glUniform2i64NV(GLint location, GLint64EXT x, GLint64EXT y)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -17604,7 +17604,7 @@ void REGAL_CALL missing_glUniform2i64NV(GLint location, GLint64EXT x, GLint64EXT
   Warning( "glUniform2i64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform2i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glUniform2i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17612,7 +17612,7 @@ void REGAL_CALL missing_glUniform2i64vNV(GLint location, GLsizei count, const GL
   Warning( "glUniform2i64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform2ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y)
+static void REGAL_CALL missing_glUniform2ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -17620,7 +17620,7 @@ void REGAL_CALL missing_glUniform2ui64NV(GLint location, GLuint64EXT x, GLuint64
   Warning( "glUniform2ui64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform2ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glUniform2ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17628,7 +17628,7 @@ void REGAL_CALL missing_glUniform2ui64vNV(GLint location, GLsizei count, const G
   Warning( "glUniform2ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform3i64NV(GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z)
+static void REGAL_CALL missing_glUniform3i64NV(GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -17637,7 +17637,7 @@ void REGAL_CALL missing_glUniform3i64NV(GLint location, GLint64EXT x, GLint64EXT
   Warning( "glUniform3i64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform3i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glUniform3i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17645,7 +17645,7 @@ void REGAL_CALL missing_glUniform3i64vNV(GLint location, GLsizei count, const GL
   Warning( "glUniform3i64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform3ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z)
+static void REGAL_CALL missing_glUniform3ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -17654,7 +17654,7 @@ void REGAL_CALL missing_glUniform3ui64NV(GLint location, GLuint64EXT x, GLuint64
   Warning( "glUniform3ui64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform3ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glUniform3ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17662,7 +17662,7 @@ void REGAL_CALL missing_glUniform3ui64vNV(GLint location, GLsizei count, const G
   Warning( "glUniform3ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform4i64NV(GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w)
+static void REGAL_CALL missing_glUniform4i64NV(GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -17672,7 +17672,7 @@ void REGAL_CALL missing_glUniform4i64NV(GLint location, GLint64EXT x, GLint64EXT
   Warning( "glUniform4i64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform4i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
+static void REGAL_CALL missing_glUniform4i64vNV(GLint location, GLsizei count, const GLint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17680,7 +17680,7 @@ void REGAL_CALL missing_glUniform4i64vNV(GLint location, GLsizei count, const GL
   Warning( "glUniform4i64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniform4ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w)
+static void REGAL_CALL missing_glUniform4ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(x);
@@ -17690,7 +17690,7 @@ void REGAL_CALL missing_glUniform4ui64NV(GLint location, GLuint64EXT x, GLuint64
   Warning( "glUniform4ui64NV not available." );
 }
 
-void REGAL_CALL missing_glUniform4ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glUniform4ui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -17700,7 +17700,7 @@ void REGAL_CALL missing_glUniform4ui64vNV(GLint location, GLsizei count, const G
 
 // GL_NV_half_float
 
-void REGAL_CALL missing_glColor3hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue)
+static void REGAL_CALL missing_glColor3hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -17708,13 +17708,13 @@ void REGAL_CALL missing_glColor3hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue)
   Warning( "glColor3hNV not available." );
 }
 
-void REGAL_CALL missing_glColor3hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glColor3hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor3hvNV not available." );
 }
 
-void REGAL_CALL missing_glColor4hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue, GLhalfNV alpha)
+static void REGAL_CALL missing_glColor4hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue, GLhalfNV alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -17723,39 +17723,39 @@ void REGAL_CALL missing_glColor4hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue,
   Warning( "glColor4hNV not available." );
 }
 
-void REGAL_CALL missing_glColor4hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glColor4hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glColor4hvNV not available." );
 }
 
-void REGAL_CALL missing_glFogCoordhNV(GLhalfNV coord)
+static void REGAL_CALL missing_glFogCoordhNV(GLhalfNV coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordhNV not available." );
 }
 
-void REGAL_CALL missing_glFogCoordhvNV(const GLhalfNV *coord)
+static void REGAL_CALL missing_glFogCoordhvNV(const GLhalfNV *coord)
 {
   UNUSED_PARAMETER(coord);
   Warning( "glFogCoordhvNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1hNV(GLenum target, GLhalfNV s)
+static void REGAL_CALL missing_glMultiTexCoord1hNV(GLenum target, GLhalfNV s)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
   Warning( "glMultiTexCoord1hNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord1hvNV(GLenum target, const GLhalfNV *v)
+static void REGAL_CALL missing_glMultiTexCoord1hvNV(GLenum target, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord1hvNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2hNV(GLenum target, GLhalfNV s, GLhalfNV t)
+static void REGAL_CALL missing_glMultiTexCoord2hNV(GLenum target, GLhalfNV s, GLhalfNV t)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -17763,14 +17763,14 @@ void REGAL_CALL missing_glMultiTexCoord2hNV(GLenum target, GLhalfNV s, GLhalfNV 
   Warning( "glMultiTexCoord2hNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord2hvNV(GLenum target, const GLhalfNV *v)
+static void REGAL_CALL missing_glMultiTexCoord2hvNV(GLenum target, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord2hvNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3hNV(GLenum target, GLhalfNV s, GLhalfNV t, GLhalfNV r)
+static void REGAL_CALL missing_glMultiTexCoord3hNV(GLenum target, GLhalfNV s, GLhalfNV t, GLhalfNV r)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -17779,14 +17779,14 @@ void REGAL_CALL missing_glMultiTexCoord3hNV(GLenum target, GLhalfNV s, GLhalfNV 
   Warning( "glMultiTexCoord3hNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord3hvNV(GLenum target, const GLhalfNV *v)
+static void REGAL_CALL missing_glMultiTexCoord3hvNV(GLenum target, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord3hvNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4hNV(GLenum target, GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhalfNV q)
+static void REGAL_CALL missing_glMultiTexCoord4hNV(GLenum target, GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhalfNV q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -17796,14 +17796,14 @@ void REGAL_CALL missing_glMultiTexCoord4hNV(GLenum target, GLhalfNV s, GLhalfNV 
   Warning( "glMultiTexCoord4hNV not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4hvNV(GLenum target, const GLhalfNV *v)
+static void REGAL_CALL missing_glMultiTexCoord4hvNV(GLenum target, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(v);
   Warning( "glMultiTexCoord4hvNV not available." );
 }
 
-void REGAL_CALL missing_glNormal3hNV(GLhalfNV nx, GLhalfNV ny, GLhalfNV nz)
+static void REGAL_CALL missing_glNormal3hNV(GLhalfNV nx, GLhalfNV ny, GLhalfNV nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -17811,13 +17811,13 @@ void REGAL_CALL missing_glNormal3hNV(GLhalfNV nx, GLhalfNV ny, GLhalfNV nz)
   Warning( "glNormal3hNV not available." );
 }
 
-void REGAL_CALL missing_glNormal3hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glNormal3hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glNormal3hvNV not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue)
+static void REGAL_CALL missing_glSecondaryColor3hNV(GLhalfNV red, GLhalfNV green, GLhalfNV blue)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -17825,38 +17825,38 @@ void REGAL_CALL missing_glSecondaryColor3hNV(GLhalfNV red, GLhalfNV green, GLhal
   Warning( "glSecondaryColor3hNV not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColor3hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glSecondaryColor3hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glSecondaryColor3hvNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1hNV(GLhalfNV s)
+static void REGAL_CALL missing_glTexCoord1hNV(GLhalfNV s)
 {
   UNUSED_PARAMETER(s);
   Warning( "glTexCoord1hNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord1hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glTexCoord1hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord1hvNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2hNV(GLhalfNV s, GLhalfNV t)
+static void REGAL_CALL missing_glTexCoord2hNV(GLhalfNV s, GLhalfNV t)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
   Warning( "glTexCoord2hNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glTexCoord2hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord2hvNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3hNV(GLhalfNV s, GLhalfNV t, GLhalfNV r)
+static void REGAL_CALL missing_glTexCoord3hNV(GLhalfNV s, GLhalfNV t, GLhalfNV r)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -17864,13 +17864,13 @@ void REGAL_CALL missing_glTexCoord3hNV(GLhalfNV s, GLhalfNV t, GLhalfNV r)
   Warning( "glTexCoord3hNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord3hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glTexCoord3hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord3hvNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4hNV(GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhalfNV q)
+static void REGAL_CALL missing_glTexCoord4hNV(GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhalfNV q)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -17879,26 +17879,26 @@ void REGAL_CALL missing_glTexCoord4hNV(GLhalfNV s, GLhalfNV t, GLhalfNV r, GLhal
   Warning( "glTexCoord4hNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glTexCoord4hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord4hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertex2hNV(GLhalfNV x, GLhalfNV y)
+static void REGAL_CALL missing_glVertex2hNV(GLhalfNV x, GLhalfNV y)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glVertex2hNV not available." );
 }
 
-void REGAL_CALL missing_glVertex2hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glVertex2hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex2hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertex3hNV(GLhalfNV x, GLhalfNV y, GLhalfNV z)
+static void REGAL_CALL missing_glVertex3hNV(GLhalfNV x, GLhalfNV y, GLhalfNV z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -17906,13 +17906,13 @@ void REGAL_CALL missing_glVertex3hNV(GLhalfNV x, GLhalfNV y, GLhalfNV z)
   Warning( "glVertex3hNV not available." );
 }
 
-void REGAL_CALL missing_glVertex3hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glVertex3hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex3hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertex4hNV(GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfNV w)
+static void REGAL_CALL missing_glVertex4hNV(GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfNV w)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -17921,27 +17921,27 @@ void REGAL_CALL missing_glVertex4hNV(GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfN
   Warning( "glVertex4hNV not available." );
 }
 
-void REGAL_CALL missing_glVertex4hvNV(const GLhalfNV *v)
+static void REGAL_CALL missing_glVertex4hvNV(const GLhalfNV *v)
 {
   UNUSED_PARAMETER(v);
   Warning( "glVertex4hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1hNV(GLuint index, GLhalfNV x)
+static void REGAL_CALL missing_glVertexAttrib1hNV(GLuint index, GLhalfNV x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1hNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1hvNV(GLuint index, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttrib1hvNV(GLuint index, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2hNV(GLuint index, GLhalfNV x, GLhalfNV y)
+static void REGAL_CALL missing_glVertexAttrib2hNV(GLuint index, GLhalfNV x, GLhalfNV y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -17949,14 +17949,14 @@ void REGAL_CALL missing_glVertexAttrib2hNV(GLuint index, GLhalfNV x, GLhalfNV y)
   Warning( "glVertexAttrib2hNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2hvNV(GLuint index, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttrib2hvNV(GLuint index, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3hNV(GLuint index, GLhalfNV x, GLhalfNV y, GLhalfNV z)
+static void REGAL_CALL missing_glVertexAttrib3hNV(GLuint index, GLhalfNV x, GLhalfNV y, GLhalfNV z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -17965,14 +17965,14 @@ void REGAL_CALL missing_glVertexAttrib3hNV(GLuint index, GLhalfNV x, GLhalfNV y,
   Warning( "glVertexAttrib3hNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3hvNV(GLuint index, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttrib3hvNV(GLuint index, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4hNV(GLuint index, GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfNV w)
+static void REGAL_CALL missing_glVertexAttrib4hNV(GLuint index, GLhalfNV x, GLhalfNV y, GLhalfNV z, GLhalfNV w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -17982,14 +17982,14 @@ void REGAL_CALL missing_glVertexAttrib4hNV(GLuint index, GLhalfNV x, GLhalfNV y,
   Warning( "glVertexAttrib4hNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4hvNV(GLuint index, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttrib4hvNV(GLuint index, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs1hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttribs1hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(count);
@@ -17997,7 +17997,7 @@ void REGAL_CALL missing_glVertexAttribs1hvNV(GLuint index, GLsizei count, const 
   Warning( "glVertexAttribs1hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs2hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttribs2hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(count);
@@ -18005,7 +18005,7 @@ void REGAL_CALL missing_glVertexAttribs2hvNV(GLuint index, GLsizei count, const 
   Warning( "glVertexAttribs2hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs3hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttribs3hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(count);
@@ -18013,7 +18013,7 @@ void REGAL_CALL missing_glVertexAttribs3hvNV(GLuint index, GLsizei count, const 
   Warning( "glVertexAttribs3hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs4hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
+static void REGAL_CALL missing_glVertexAttribs4hvNV(GLuint index, GLsizei count, const GLhalfNV *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(count);
@@ -18021,13 +18021,13 @@ void REGAL_CALL missing_glVertexAttribs4hvNV(GLuint index, GLsizei count, const 
   Warning( "glVertexAttribs4hvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexWeighthNV(GLhalfNV weight)
+static void REGAL_CALL missing_glVertexWeighthNV(GLhalfNV weight)
 {
   UNUSED_PARAMETER(weight);
   Warning( "glVertexWeighthNV not available." );
 }
 
-void REGAL_CALL missing_glVertexWeighthvNV(const GLhalfNV *weight)
+static void REGAL_CALL missing_glVertexWeighthvNV(const GLhalfNV *weight)
 {
   UNUSED_PARAMETER(weight);
   Warning( "glVertexWeighthvNV not available." );
@@ -18035,32 +18035,32 @@ void REGAL_CALL missing_glVertexWeighthvNV(const GLhalfNV *weight)
 
 // GL_NV_occlusion_query
 
-void REGAL_CALL missing_glBeginOcclusionQueryNV(GLuint id)
+static void REGAL_CALL missing_glBeginOcclusionQueryNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glBeginOcclusionQueryNV not available." );
 }
 
-void REGAL_CALL missing_glDeleteOcclusionQueriesNV(GLsizei n, const GLuint *ids)
+static void REGAL_CALL missing_glDeleteOcclusionQueriesNV(GLsizei n, const GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glDeleteOcclusionQueriesNV not available." );
 }
 
-void REGAL_CALL missing_glEndOcclusionQueryNV(void)
+static void REGAL_CALL missing_glEndOcclusionQueryNV(void)
 {
   Warning( "glEndOcclusionQueryNV not available." );
 }
 
-void REGAL_CALL missing_glGenOcclusionQueriesNV(GLsizei n, GLuint *ids)
+static void REGAL_CALL missing_glGenOcclusionQueriesNV(GLsizei n, GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glGenOcclusionQueriesNV not available." );
 }
 
-void REGAL_CALL missing_glGetOcclusionQueryivNV(GLuint id, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetOcclusionQueryivNV(GLuint id, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -18068,7 +18068,7 @@ void REGAL_CALL missing_glGetOcclusionQueryivNV(GLuint id, GLenum pname, GLint *
   Warning( "glGetOcclusionQueryivNV not available." );
 }
 
-void REGAL_CALL missing_glGetOcclusionQueryuivNV(GLuint id, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetOcclusionQueryuivNV(GLuint id, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -18076,7 +18076,7 @@ void REGAL_CALL missing_glGetOcclusionQueryuivNV(GLuint id, GLenum pname, GLuint
   Warning( "glGetOcclusionQueryuivNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsOcclusionQueryNV(GLuint id)
+static GLboolean REGAL_CALL missing_glIsOcclusionQueryNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsOcclusionQueryNV not available." );
@@ -18085,7 +18085,7 @@ GLboolean REGAL_CALL missing_glIsOcclusionQueryNV(GLuint id)
 
 // GL_NV_parameter_buffer_object
 
-void REGAL_CALL missing_glProgramBufferParametersIivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLint *params)
+static void REGAL_CALL missing_glProgramBufferParametersIivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(buffer);
@@ -18095,7 +18095,7 @@ void REGAL_CALL missing_glProgramBufferParametersIivNV(GLenum target, GLuint buf
   Warning( "glProgramBufferParametersIivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramBufferParametersIuivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLuint *params)
+static void REGAL_CALL missing_glProgramBufferParametersIuivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLuint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(buffer);
@@ -18105,7 +18105,7 @@ void REGAL_CALL missing_glProgramBufferParametersIuivNV(GLenum target, GLuint bu
   Warning( "glProgramBufferParametersIuivNV not available." );
 }
 
-void REGAL_CALL missing_glProgramBufferParametersfvNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLfloat *params)
+static void REGAL_CALL missing_glProgramBufferParametersfvNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(buffer);
@@ -18117,14 +18117,14 @@ void REGAL_CALL missing_glProgramBufferParametersfvNV(GLenum target, GLuint buff
 
 // GL_NV_path_rendering
 
-void REGAL_CALL missing_glCopyPathNV(GLuint resultPath, GLuint srcPath)
+static void REGAL_CALL missing_glCopyPathNV(GLuint resultPath, GLuint srcPath)
 {
   UNUSED_PARAMETER(resultPath);
   UNUSED_PARAMETER(srcPath);
   Warning( "glCopyPathNV not available." );
 }
 
-void REGAL_CALL missing_glCoverFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
+static void REGAL_CALL missing_glCoverFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
 {
   UNUSED_PARAMETER(numPaths);
   UNUSED_PARAMETER(pathNameType);
@@ -18136,14 +18136,14 @@ void REGAL_CALL missing_glCoverFillPathInstancedNV(GLsizei numPaths, GLenum path
   Warning( "glCoverFillPathInstancedNV not available." );
 }
 
-void REGAL_CALL missing_glCoverFillPathNV(GLuint path, GLenum coverMode)
+static void REGAL_CALL missing_glCoverFillPathNV(GLuint path, GLenum coverMode)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(coverMode);
   Warning( "glCoverFillPathNV not available." );
 }
 
-void REGAL_CALL missing_glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
+static void REGAL_CALL missing_glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
 {
   UNUSED_PARAMETER(numPaths);
   UNUSED_PARAMETER(pathNameType);
@@ -18155,28 +18155,28 @@ void REGAL_CALL missing_glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pa
   Warning( "glCoverStrokePathInstancedNV not available." );
 }
 
-void REGAL_CALL missing_glCoverStrokePathNV(GLuint name, GLenum coverMode)
+static void REGAL_CALL missing_glCoverStrokePathNV(GLuint name, GLenum coverMode)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(coverMode);
   Warning( "glCoverStrokePathNV not available." );
 }
 
-void REGAL_CALL missing_glDeletePathsNV(GLuint path, GLsizei range)
+static void REGAL_CALL missing_glDeletePathsNV(GLuint path, GLsizei range)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(range);
   Warning( "glDeletePathsNV not available." );
 }
 
-GLuint REGAL_CALL missing_glGenPathsNV(GLsizei range)
+static GLuint REGAL_CALL missing_glGenPathsNV(GLsizei range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenPathsNV not available." );
   return (GLuint )0;
 }
 
-void REGAL_CALL missing_glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat *value)
+static void REGAL_CALL missing_glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat *value)
 {
   UNUSED_PARAMETER(color);
   UNUSED_PARAMETER(pname);
@@ -18184,7 +18184,7 @@ void REGAL_CALL missing_glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloa
   Warning( "glGetPathColorGenfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathColorGenivNV(GLenum color, GLenum pname, GLint *value)
+static void REGAL_CALL missing_glGetPathColorGenivNV(GLenum color, GLenum pname, GLint *value)
 {
   UNUSED_PARAMETER(color);
   UNUSED_PARAMETER(pname);
@@ -18192,28 +18192,28 @@ void REGAL_CALL missing_glGetPathColorGenivNV(GLenum color, GLenum pname, GLint 
   Warning( "glGetPathColorGenivNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathCommandsNV(GLuint name, GLubyte *commands)
+static void REGAL_CALL missing_glGetPathCommandsNV(GLuint name, GLubyte *commands)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(commands);
   Warning( "glGetPathCommandsNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathCoordsNV(GLuint name, GLfloat *coords)
+static void REGAL_CALL missing_glGetPathCoordsNV(GLuint name, GLfloat *coords)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(coords);
   Warning( "glGetPathCoordsNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathDashArrayNV(GLuint name, GLfloat *dashArray)
+static void REGAL_CALL missing_glGetPathDashArrayNV(GLuint name, GLfloat *dashArray)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(dashArray);
   Warning( "glGetPathDashArrayNV not available." );
 }
 
-GLfloat REGAL_CALL missing_glGetPathLengthNV(GLuint path, GLsizei startSegment, GLsizei numSegments)
+static GLfloat REGAL_CALL missing_glGetPathLengthNV(GLuint path, GLsizei startSegment, GLsizei numSegments)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(startSegment);
@@ -18222,7 +18222,7 @@ GLfloat REGAL_CALL missing_glGetPathLengthNV(GLuint path, GLsizei startSegment, 
   return (GLfloat )0;
 }
 
-void REGAL_CALL missing_glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics)
+static void REGAL_CALL missing_glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics)
 {
   UNUSED_PARAMETER(metricQueryMask);
   UNUSED_PARAMETER(fistPathName);
@@ -18232,7 +18232,7 @@ void REGAL_CALL missing_glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuin
   Warning( "glGetPathMetricRangeNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics)
+static void REGAL_CALL missing_glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics)
 {
   UNUSED_PARAMETER(metricQueryMask);
   UNUSED_PARAMETER(numPaths);
@@ -18244,7 +18244,7 @@ void REGAL_CALL missing_glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei n
   Warning( "glGetPathMetricsNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathParameterfvNV(GLuint name, GLenum param, GLfloat *value)
+static void REGAL_CALL missing_glGetPathParameterfvNV(GLuint name, GLenum param, GLfloat *value)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(param);
@@ -18252,7 +18252,7 @@ void REGAL_CALL missing_glGetPathParameterfvNV(GLuint name, GLenum param, GLfloa
   Warning( "glGetPathParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathParameterivNV(GLuint name, GLenum param, GLint *value)
+static void REGAL_CALL missing_glGetPathParameterivNV(GLuint name, GLenum param, GLint *value)
 {
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(param);
@@ -18260,7 +18260,7 @@ void REGAL_CALL missing_glGetPathParameterivNV(GLuint name, GLenum param, GLint 
   Warning( "glGetPathParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing)
+static void REGAL_CALL missing_glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing)
 {
   UNUSED_PARAMETER(pathListMode);
   UNUSED_PARAMETER(numPaths);
@@ -18274,7 +18274,7 @@ void REGAL_CALL missing_glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths
   Warning( "glGetPathSpacingNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GLfloat *value)
+static void REGAL_CALL missing_glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GLfloat *value)
 {
   UNUSED_PARAMETER(texCoordSet);
   UNUSED_PARAMETER(pname);
@@ -18282,7 +18282,7 @@ void REGAL_CALL missing_glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GL
   Warning( "glGetPathTexGenfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetPathTexGenivNV(GLenum texCoordSet, GLenum pname, GLint *value)
+static void REGAL_CALL missing_glGetPathTexGenivNV(GLenum texCoordSet, GLenum pname, GLint *value)
 {
   UNUSED_PARAMETER(texCoordSet);
   UNUSED_PARAMETER(pname);
@@ -18290,7 +18290,7 @@ void REGAL_CALL missing_glGetPathTexGenivNV(GLenum texCoordSet, GLenum pname, GL
   Warning( "glGetPathTexGenivNV not available." );
 }
 
-void REGAL_CALL missing_glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight)
+static void REGAL_CALL missing_glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight)
 {
   UNUSED_PARAMETER(resultPath);
   UNUSED_PARAMETER(pathA);
@@ -18299,14 +18299,14 @@ void REGAL_CALL missing_glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GL
   Warning( "glInterpolatePathsNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsPathNV(GLuint path)
+static GLboolean REGAL_CALL missing_glIsPathNV(GLuint path)
 {
   UNUSED_PARAMETER(path);
   Warning( "glIsPathNV not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y)
+static GLboolean REGAL_CALL missing_glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(mask);
@@ -18316,7 +18316,7 @@ GLboolean REGAL_CALL missing_glIsPointInFillPathNV(GLuint path, GLuint mask, GLf
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y)
+static GLboolean REGAL_CALL missing_glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(x);
@@ -18325,7 +18325,7 @@ GLboolean REGAL_CALL missing_glIsPointInStrokePathNV(GLuint path, GLfloat x, GLf
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs)
+static void REGAL_CALL missing_glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs)
 {
   UNUSED_PARAMETER(color);
   UNUSED_PARAMETER(genMode);
@@ -18334,7 +18334,7 @@ void REGAL_CALL missing_glPathColorGenNV(GLenum color, GLenum genMode, GLenum co
   Warning( "glPathColorGenNV not available." );
 }
 
-void REGAL_CALL missing_glPathCommandsNV(GLuint path, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+static void REGAL_CALL missing_glPathCommandsNV(GLuint path, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(numCommands);
@@ -18345,7 +18345,7 @@ void REGAL_CALL missing_glPathCommandsNV(GLuint path, GLsizei numCommands, const
   Warning( "glPathCommandsNV not available." );
 }
 
-void REGAL_CALL missing_glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+static void REGAL_CALL missing_glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(numCoords);
@@ -18354,13 +18354,13 @@ void REGAL_CALL missing_glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum co
   Warning( "glPathCoordsNV not available." );
 }
 
-void REGAL_CALL missing_glPathCoverDepthFuncNV(GLenum zfunc)
+static void REGAL_CALL missing_glPathCoverDepthFuncNV(GLenum zfunc)
 {
   UNUSED_PARAMETER(zfunc);
   Warning( "glPathCoverDepthFuncNV not available." );
 }
 
-void REGAL_CALL missing_glPathDashArrayNV(GLuint path, GLsizei dashCount, const GLfloat *dashArray)
+static void REGAL_CALL missing_glPathDashArrayNV(GLuint path, GLsizei dashCount, const GLfloat *dashArray)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(dashCount);
@@ -18368,13 +18368,13 @@ void REGAL_CALL missing_glPathDashArrayNV(GLuint path, GLsizei dashCount, const 
   Warning( "glPathDashArrayNV not available." );
 }
 
-void REGAL_CALL missing_glPathFogGenNV(GLenum genMode)
+static void REGAL_CALL missing_glPathFogGenNV(GLenum genMode)
 {
   UNUSED_PARAMETER(genMode);
   Warning( "glPathFogGenNV not available." );
 }
 
-void REGAL_CALL missing_glPathGlyphRangeNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
+static void REGAL_CALL missing_glPathGlyphRangeNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
 {
   UNUSED_PARAMETER(firstPathName);
   UNUSED_PARAMETER(fontTarget);
@@ -18388,7 +18388,7 @@ void REGAL_CALL missing_glPathGlyphRangeNV(GLuint firstPathName, GLenum fontTarg
   Warning( "glPathGlyphRangeNV not available." );
 }
 
-void REGAL_CALL missing_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
+static void REGAL_CALL missing_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
 {
   UNUSED_PARAMETER(firstPathName);
   UNUSED_PARAMETER(fontTarget);
@@ -18403,7 +18403,7 @@ void REGAL_CALL missing_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, 
   Warning( "glPathGlyphsNV not available." );
 }
 
-void REGAL_CALL missing_glPathParameterfNV(GLuint path, GLenum pname, GLfloat value)
+static void REGAL_CALL missing_glPathParameterfNV(GLuint path, GLenum pname, GLfloat value)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(pname);
@@ -18411,7 +18411,7 @@ void REGAL_CALL missing_glPathParameterfNV(GLuint path, GLenum pname, GLfloat va
   Warning( "glPathParameterfNV not available." );
 }
 
-void REGAL_CALL missing_glPathParameterfvNV(GLuint path, GLenum pname, const GLfloat *value)
+static void REGAL_CALL missing_glPathParameterfvNV(GLuint path, GLenum pname, const GLfloat *value)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(pname);
@@ -18419,7 +18419,7 @@ void REGAL_CALL missing_glPathParameterfvNV(GLuint path, GLenum pname, const GLf
   Warning( "glPathParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glPathParameteriNV(GLuint path, GLenum pname, GLint value)
+static void REGAL_CALL missing_glPathParameteriNV(GLuint path, GLenum pname, GLint value)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(pname);
@@ -18427,7 +18427,7 @@ void REGAL_CALL missing_glPathParameteriNV(GLuint path, GLenum pname, GLint valu
   Warning( "glPathParameteriNV not available." );
 }
 
-void REGAL_CALL missing_glPathParameterivNV(GLuint path, GLenum pname, const GLint *value)
+static void REGAL_CALL missing_glPathParameterivNV(GLuint path, GLenum pname, const GLint *value)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(pname);
@@ -18435,14 +18435,14 @@ void REGAL_CALL missing_glPathParameterivNV(GLuint path, GLenum pname, const GLi
   Warning( "glPathParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glPathStencilDepthOffsetNV(GLfloat factor, GLfloat units)
+static void REGAL_CALL missing_glPathStencilDepthOffsetNV(GLfloat factor, GLfloat units)
 {
   UNUSED_PARAMETER(factor);
   UNUSED_PARAMETER(units);
   Warning( "glPathStencilDepthOffsetNV not available." );
 }
 
-void REGAL_CALL missing_glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask)
+static void REGAL_CALL missing_glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask)
 {
   UNUSED_PARAMETER(func);
   UNUSED_PARAMETER(ref);
@@ -18450,7 +18450,7 @@ void REGAL_CALL missing_glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask)
   Warning( "glPathStencilFuncNV not available." );
 }
 
-void REGAL_CALL missing_glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString)
+static void REGAL_CALL missing_glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(format);
@@ -18459,7 +18459,7 @@ void REGAL_CALL missing_glPathStringNV(GLuint path, GLenum format, GLsizei lengt
   Warning( "glPathStringNV not available." );
 }
 
-void REGAL_CALL missing_glPathSubCommandsNV(GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+static void REGAL_CALL missing_glPathSubCommandsNV(GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(commandStart);
@@ -18472,7 +18472,7 @@ void REGAL_CALL missing_glPathSubCommandsNV(GLuint path, GLsizei commandStart, G
   Warning( "glPathSubCommandsNV not available." );
 }
 
-void REGAL_CALL missing_glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+static void REGAL_CALL missing_glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(coordStart);
@@ -18482,7 +18482,7 @@ void REGAL_CALL missing_glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsiz
   Warning( "glPathSubCoordsNV not available." );
 }
 
-void REGAL_CALL missing_glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs)
+static void REGAL_CALL missing_glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs)
 {
   UNUSED_PARAMETER(texCoordSet);
   UNUSED_PARAMETER(genMode);
@@ -18491,7 +18491,7 @@ void REGAL_CALL missing_glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint
   Warning( "glPathTexGenNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glPointAlongPathNV(GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY)
+static GLboolean REGAL_CALL missing_glPointAlongPathNV(GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(startSegment);
@@ -18505,7 +18505,7 @@ GLboolean REGAL_CALL missing_glPointAlongPathNV(GLuint path, GLsizei startSegmen
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues)
+static void REGAL_CALL missing_glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues)
 {
   UNUSED_PARAMETER(numPaths);
   UNUSED_PARAMETER(pathNameType);
@@ -18518,7 +18518,7 @@ void REGAL_CALL missing_glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pa
   Warning( "glStencilFillPathInstancedNV not available." );
 }
 
-void REGAL_CALL missing_glStencilFillPathNV(GLuint path, GLenum fillMode, GLuint mask)
+static void REGAL_CALL missing_glStencilFillPathNV(GLuint path, GLenum fillMode, GLuint mask)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(fillMode);
@@ -18526,7 +18526,7 @@ void REGAL_CALL missing_glStencilFillPathNV(GLuint path, GLenum fillMode, GLuint
   Warning( "glStencilFillPathNV not available." );
 }
 
-void REGAL_CALL missing_glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues)
+static void REGAL_CALL missing_glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues)
 {
   UNUSED_PARAMETER(numPaths);
   UNUSED_PARAMETER(pathNameType);
@@ -18539,7 +18539,7 @@ void REGAL_CALL missing_glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum 
   Warning( "glStencilStrokePathInstancedNV not available." );
 }
 
-void REGAL_CALL missing_glStencilStrokePathNV(GLuint path, GLint reference, GLuint mask)
+static void REGAL_CALL missing_glStencilStrokePathNV(GLuint path, GLint reference, GLuint mask)
 {
   UNUSED_PARAMETER(path);
   UNUSED_PARAMETER(reference);
@@ -18547,7 +18547,7 @@ void REGAL_CALL missing_glStencilStrokePathNV(GLuint path, GLint reference, GLui
   Warning( "glStencilStrokePathNV not available." );
 }
 
-void REGAL_CALL missing_glTransformPathNV(GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues)
+static void REGAL_CALL missing_glTransformPathNV(GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues)
 {
   UNUSED_PARAMETER(resultPath);
   UNUSED_PARAMETER(srcPath);
@@ -18556,7 +18556,7 @@ void REGAL_CALL missing_glTransformPathNV(GLuint resultPath, GLuint srcPath, GLe
   Warning( "glTransformPathNV not available." );
 }
 
-void REGAL_CALL missing_glWeightPathsNV(GLuint resultPath, GLsizei numPaths, const GLuint *paths, const GLfloat *weights)
+static void REGAL_CALL missing_glWeightPathsNV(GLuint resultPath, GLsizei numPaths, const GLuint *paths, const GLfloat *weights)
 {
   UNUSED_PARAMETER(resultPath);
   UNUSED_PARAMETER(numPaths);
@@ -18567,13 +18567,13 @@ void REGAL_CALL missing_glWeightPathsNV(GLuint resultPath, GLsizei numPaths, con
 
 // GL_NV_pixel_data_range
 
-void REGAL_CALL missing_glFlushPixelDataRangeNV(GLenum target)
+static void REGAL_CALL missing_glFlushPixelDataRangeNV(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glFlushPixelDataRangeNV not available." );
 }
 
-void REGAL_CALL missing_glPixelDataRangeNV(GLenum target, GLsizei size, const GLvoid *pointer)
+static void REGAL_CALL missing_glPixelDataRangeNV(GLenum target, GLsizei size, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(size);
@@ -18583,14 +18583,14 @@ void REGAL_CALL missing_glPixelDataRangeNV(GLenum target, GLsizei size, const GL
 
 // GL_NV_point_sprite
 
-void REGAL_CALL missing_glPointParameteriNV(GLenum pname, GLint param)
+static void REGAL_CALL missing_glPointParameteriNV(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameteriNV not available." );
 }
 
-void REGAL_CALL missing_glPointParameterivNV(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glPointParameterivNV(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -18599,7 +18599,7 @@ void REGAL_CALL missing_glPointParameterivNV(GLenum pname, const GLint *params)
 
 // GL_NV_present_video
 
-void REGAL_CALL missing_glGetVideoi64vNV(GLuint video_slot, GLenum pname, GLint64EXT *params)
+static void REGAL_CALL missing_glGetVideoi64vNV(GLuint video_slot, GLenum pname, GLint64EXT *params)
 {
   UNUSED_PARAMETER(video_slot);
   UNUSED_PARAMETER(pname);
@@ -18607,7 +18607,7 @@ void REGAL_CALL missing_glGetVideoi64vNV(GLuint video_slot, GLenum pname, GLint6
   Warning( "glGetVideoi64vNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideoivNV(GLuint video_slot, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVideoivNV(GLuint video_slot, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(video_slot);
   UNUSED_PARAMETER(pname);
@@ -18615,7 +18615,7 @@ void REGAL_CALL missing_glGetVideoivNV(GLuint video_slot, GLenum pname, GLint *p
   Warning( "glGetVideoivNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideoui64vNV(GLuint video_slot, GLenum pname, GLuint64EXT *params)
+static void REGAL_CALL missing_glGetVideoui64vNV(GLuint video_slot, GLenum pname, GLuint64EXT *params)
 {
   UNUSED_PARAMETER(video_slot);
   UNUSED_PARAMETER(pname);
@@ -18623,7 +18623,7 @@ void REGAL_CALL missing_glGetVideoui64vNV(GLuint video_slot, GLenum pname, GLuin
   Warning( "glGetVideoui64vNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideouivNV(GLuint video_slot, GLenum pname, GLuint *params)
+static void REGAL_CALL missing_glGetVideouivNV(GLuint video_slot, GLenum pname, GLuint *params)
 {
   UNUSED_PARAMETER(video_slot);
   UNUSED_PARAMETER(pname);
@@ -18631,7 +18631,7 @@ void REGAL_CALL missing_glGetVideouivNV(GLuint video_slot, GLenum pname, GLuint 
   Warning( "glGetVideouivNV not available." );
 }
 
-void REGAL_CALL missing_glPresentFrameDualFillNV(GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLenum target1, GLuint fill1, GLenum target2, GLuint fill2, GLenum target3, GLuint fill3)
+static void REGAL_CALL missing_glPresentFrameDualFillNV(GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLenum target1, GLuint fill1, GLenum target2, GLuint fill2, GLenum target3, GLuint fill3)
 {
   UNUSED_PARAMETER(video_slot);
   UNUSED_PARAMETER(minPresentTime);
@@ -18649,7 +18649,7 @@ void REGAL_CALL missing_glPresentFrameDualFillNV(GLuint video_slot, GLuint64EXT 
   Warning( "glPresentFrameDualFillNV not available." );
 }
 
-void REGAL_CALL missing_glPresentFrameKeyedNV(GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLuint key0, GLenum target1, GLuint fill1, GLuint key1)
+static void REGAL_CALL missing_glPresentFrameKeyedNV(GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLuint key0, GLenum target1, GLuint fill1, GLuint key1)
 {
   UNUSED_PARAMETER(video_slot);
   UNUSED_PARAMETER(minPresentTime);
@@ -18667,20 +18667,20 @@ void REGAL_CALL missing_glPresentFrameKeyedNV(GLuint video_slot, GLuint64EXT min
 
 // GL_NV_primitive_restart
 
-void REGAL_CALL missing_glPrimitiveRestartIndexNV(GLuint index)
+static void REGAL_CALL missing_glPrimitiveRestartIndexNV(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glPrimitiveRestartIndexNV not available." );
 }
 
-void REGAL_CALL missing_glPrimitiveRestartNV(void)
+static void REGAL_CALL missing_glPrimitiveRestartNV(void)
 {
   Warning( "glPrimitiveRestartNV not available." );
 }
 
 // GL_NV_read_buffer
 
-void REGAL_CALL missing_glReadBufferNV(GLenum mode)
+static void REGAL_CALL missing_glReadBufferNV(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glReadBufferNV not available." );
@@ -18688,7 +18688,7 @@ void REGAL_CALL missing_glReadBufferNV(GLenum mode)
 
 // GL_NV_register_combiners
 
-void REGAL_CALL missing_glCombinerInputNV(GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
+static void REGAL_CALL missing_glCombinerInputNV(GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(portion);
@@ -18699,7 +18699,7 @@ void REGAL_CALL missing_glCombinerInputNV(GLenum stage, GLenum portion, GLenum v
   Warning( "glCombinerInputNV not available." );
 }
 
-void REGAL_CALL missing_glCombinerOutputNV(GLenum stage, GLenum portion, GLenum abOutput, GLenum cdOutput, GLenum sumOutput, GLenum scale, GLenum bias, GLboolean abDotProduct, GLboolean cdDotProduct, GLboolean muxSum)
+static void REGAL_CALL missing_glCombinerOutputNV(GLenum stage, GLenum portion, GLenum abOutput, GLenum cdOutput, GLenum sumOutput, GLenum scale, GLenum bias, GLboolean abDotProduct, GLboolean cdDotProduct, GLboolean muxSum)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(portion);
@@ -18714,35 +18714,35 @@ void REGAL_CALL missing_glCombinerOutputNV(GLenum stage, GLenum portion, GLenum 
   Warning( "glCombinerOutputNV not available." );
 }
 
-void REGAL_CALL missing_glCombinerParameterfNV(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glCombinerParameterfNV(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glCombinerParameterfNV not available." );
 }
 
-void REGAL_CALL missing_glCombinerParameterfvNV(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glCombinerParameterfvNV(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glCombinerParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glCombinerParameteriNV(GLenum pname, GLint param)
+static void REGAL_CALL missing_glCombinerParameteriNV(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glCombinerParameteriNV not available." );
 }
 
-void REGAL_CALL missing_glCombinerParameterivNV(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glCombinerParameterivNV(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glCombinerParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glFinalCombinerInputNV(GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
+static void REGAL_CALL missing_glFinalCombinerInputNV(GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage)
 {
   UNUSED_PARAMETER(variable);
   UNUSED_PARAMETER(input);
@@ -18751,7 +18751,7 @@ void REGAL_CALL missing_glFinalCombinerInputNV(GLenum variable, GLenum input, GL
   Warning( "glFinalCombinerInputNV not available." );
 }
 
-void REGAL_CALL missing_glGetCombinerInputParameterfvNV(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetCombinerInputParameterfvNV(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(portion);
@@ -18761,7 +18761,7 @@ void REGAL_CALL missing_glGetCombinerInputParameterfvNV(GLenum stage, GLenum por
   Warning( "glGetCombinerInputParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetCombinerInputParameterivNV(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetCombinerInputParameterivNV(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(portion);
@@ -18771,7 +18771,7 @@ void REGAL_CALL missing_glGetCombinerInputParameterivNV(GLenum stage, GLenum por
   Warning( "glGetCombinerInputParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glGetCombinerOutputParameterfvNV(GLenum stage, GLenum portion, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetCombinerOutputParameterfvNV(GLenum stage, GLenum portion, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(portion);
@@ -18780,7 +18780,7 @@ void REGAL_CALL missing_glGetCombinerOutputParameterfvNV(GLenum stage, GLenum po
   Warning( "glGetCombinerOutputParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetCombinerOutputParameterivNV(GLenum stage, GLenum portion, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetCombinerOutputParameterivNV(GLenum stage, GLenum portion, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(portion);
@@ -18789,7 +18789,7 @@ void REGAL_CALL missing_glGetCombinerOutputParameterivNV(GLenum stage, GLenum po
   Warning( "glGetCombinerOutputParameterivNV not available." );
 }
 
-void REGAL_CALL missing_glGetFinalCombinerInputParameterfvNV(GLenum variable, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetFinalCombinerInputParameterfvNV(GLenum variable, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(variable);
   UNUSED_PARAMETER(pname);
@@ -18797,7 +18797,7 @@ void REGAL_CALL missing_glGetFinalCombinerInputParameterfvNV(GLenum variable, GL
   Warning( "glGetFinalCombinerInputParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetFinalCombinerInputParameterivNV(GLenum variable, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFinalCombinerInputParameterivNV(GLenum variable, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(variable);
   UNUSED_PARAMETER(pname);
@@ -18807,7 +18807,7 @@ void REGAL_CALL missing_glGetFinalCombinerInputParameterivNV(GLenum variable, GL
 
 // GL_NV_register_combiners2
 
-void REGAL_CALL missing_glCombinerStageParameterfvNV(GLenum stage, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glCombinerStageParameterfvNV(GLenum stage, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(pname);
@@ -18815,7 +18815,7 @@ void REGAL_CALL missing_glCombinerStageParameterfvNV(GLenum stage, GLenum pname,
   Warning( "glCombinerStageParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetCombinerStageParameterfvNV(GLenum stage, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetCombinerStageParameterfvNV(GLenum stage, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(stage);
   UNUSED_PARAMETER(pname);
@@ -18825,7 +18825,7 @@ void REGAL_CALL missing_glGetCombinerStageParameterfvNV(GLenum stage, GLenum pna
 
 // GL_NV_shader_buffer_load
 
-void REGAL_CALL missing_glGetBufferParameterui64vNV(GLenum target, GLenum pname, GLuint64EXT *params)
+static void REGAL_CALL missing_glGetBufferParameterui64vNV(GLenum target, GLenum pname, GLuint64EXT *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -18833,14 +18833,14 @@ void REGAL_CALL missing_glGetBufferParameterui64vNV(GLenum target, GLenum pname,
   Warning( "glGetBufferParameterui64vNV not available." );
 }
 
-void REGAL_CALL missing_glGetIntegerui64vNV(GLenum target, GLuint64EXT *data)
+static void REGAL_CALL missing_glGetIntegerui64vNV(GLenum target, GLuint64EXT *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(data);
   Warning( "glGetIntegerui64vNV not available." );
 }
 
-void REGAL_CALL missing_glGetNamedBufferParameterui64vNV(GLuint buffer, GLenum pname, GLuint64EXT *params)
+static void REGAL_CALL missing_glGetNamedBufferParameterui64vNV(GLuint buffer, GLenum pname, GLuint64EXT *params)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(pname);
@@ -18848,7 +18848,7 @@ void REGAL_CALL missing_glGetNamedBufferParameterui64vNV(GLuint buffer, GLenum p
   Warning( "glGetNamedBufferParameterui64vNV not available." );
 }
 
-void REGAL_CALL missing_glGetUniformui64vNV(GLuint program, GLint location, GLuint64EXT *params)
+static void REGAL_CALL missing_glGetUniformui64vNV(GLuint program, GLint location, GLuint64EXT *params)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -18856,47 +18856,47 @@ void REGAL_CALL missing_glGetUniformui64vNV(GLuint program, GLint location, GLui
   Warning( "glGetUniformui64vNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsBufferResidentNV(GLenum target)
+static GLboolean REGAL_CALL missing_glIsBufferResidentNV(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glIsBufferResidentNV not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsNamedBufferResidentNV(GLuint buffer)
+static GLboolean REGAL_CALL missing_glIsNamedBufferResidentNV(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsNamedBufferResidentNV not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glMakeBufferNonResidentNV(GLenum target)
+static void REGAL_CALL missing_glMakeBufferNonResidentNV(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glMakeBufferNonResidentNV not available." );
 }
 
-void REGAL_CALL missing_glMakeBufferResidentNV(GLenum target, GLenum access)
+static void REGAL_CALL missing_glMakeBufferResidentNV(GLenum target, GLenum access)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(access);
   Warning( "glMakeBufferResidentNV not available." );
 }
 
-void REGAL_CALL missing_glMakeNamedBufferNonResidentNV(GLuint buffer)
+static void REGAL_CALL missing_glMakeNamedBufferNonResidentNV(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glMakeNamedBufferNonResidentNV not available." );
 }
 
-void REGAL_CALL missing_glMakeNamedBufferResidentNV(GLuint buffer, GLenum access)
+static void REGAL_CALL missing_glMakeNamedBufferResidentNV(GLuint buffer, GLenum access)
 {
   UNUSED_PARAMETER(buffer);
   UNUSED_PARAMETER(access);
   Warning( "glMakeNamedBufferResidentNV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformui64NV(GLuint program, GLint location, GLuint64EXT v0)
+static void REGAL_CALL missing_glProgramUniformui64NV(GLuint program, GLint location, GLuint64EXT v0)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -18904,7 +18904,7 @@ void REGAL_CALL missing_glProgramUniformui64NV(GLuint program, GLint location, G
   Warning( "glProgramUniformui64NV not available." );
 }
 
-void REGAL_CALL missing_glProgramUniformui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glProgramUniformui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
@@ -18913,14 +18913,14 @@ void REGAL_CALL missing_glProgramUniformui64vNV(GLuint program, GLint location, 
   Warning( "glProgramUniformui64vNV not available." );
 }
 
-void REGAL_CALL missing_glUniformui64NV(GLint location, GLuint64EXT v0)
+static void REGAL_CALL missing_glUniformui64NV(GLint location, GLuint64EXT v0)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(v0);
   Warning( "glUniformui64NV not available." );
 }
 
-void REGAL_CALL missing_glUniformui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
+static void REGAL_CALL missing_glUniformui64vNV(GLint location, GLsizei count, const GLuint64EXT *value)
 {
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(count);
@@ -18930,14 +18930,14 @@ void REGAL_CALL missing_glUniformui64vNV(GLint location, GLsizei count, const GL
 
 // GL_NV_texture_barrier
 
-void REGAL_CALL missing_glTextureBarrierNV(void)
+static void REGAL_CALL missing_glTextureBarrierNV(void)
 {
   Warning( "glTextureBarrierNV not available." );
 }
 
 // GL_NV_texture_multisample
 
-void REGAL_CALL missing_glTexImage2DMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
+static void REGAL_CALL missing_glTexImage2DMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(coverageSamples);
@@ -18949,7 +18949,7 @@ void REGAL_CALL missing_glTexImage2DMultisampleCoverageNV(GLenum target, GLsizei
   Warning( "glTexImage2DMultisampleCoverageNV not available." );
 }
 
-void REGAL_CALL missing_glTexImage3DMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
+static void REGAL_CALL missing_glTexImage3DMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(coverageSamples);
@@ -18962,7 +18962,7 @@ void REGAL_CALL missing_glTexImage3DMultisampleCoverageNV(GLenum target, GLsizei
   Warning( "glTexImage3DMultisampleCoverageNV not available." );
 }
 
-void REGAL_CALL missing_glTextureImage2DMultisampleCoverageNV(GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
+static void REGAL_CALL missing_glTextureImage2DMultisampleCoverageNV(GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -18975,7 +18975,7 @@ void REGAL_CALL missing_glTextureImage2DMultisampleCoverageNV(GLuint texture, GL
   Warning( "glTextureImage2DMultisampleCoverageNV not available." );
 }
 
-void REGAL_CALL missing_glTextureImage2DMultisampleNV(GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
+static void REGAL_CALL missing_glTextureImage2DMultisampleNV(GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -18987,7 +18987,7 @@ void REGAL_CALL missing_glTextureImage2DMultisampleNV(GLuint texture, GLenum tar
   Warning( "glTextureImage2DMultisampleNV not available." );
 }
 
-void REGAL_CALL missing_glTextureImage3DMultisampleCoverageNV(GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
+static void REGAL_CALL missing_glTextureImage3DMultisampleCoverageNV(GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -19001,7 +19001,7 @@ void REGAL_CALL missing_glTextureImage3DMultisampleCoverageNV(GLuint texture, GL
   Warning( "glTextureImage3DMultisampleCoverageNV not available." );
 }
 
-void REGAL_CALL missing_glTextureImage3DMultisampleNV(GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
+static void REGAL_CALL missing_glTextureImage3DMultisampleNV(GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(target);
@@ -19016,20 +19016,20 @@ void REGAL_CALL missing_glTextureImage3DMultisampleNV(GLuint texture, GLenum tar
 
 // GL_NV_transform_feedback
 
-void REGAL_CALL missing_glActiveVaryingNV(GLuint program, const GLchar *name)
+static void REGAL_CALL missing_glActiveVaryingNV(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glActiveVaryingNV not available." );
 }
 
-void REGAL_CALL missing_glBeginTransformFeedbackNV(GLenum primitiveMode)
+static void REGAL_CALL missing_glBeginTransformFeedbackNV(GLenum primitiveMode)
 {
   UNUSED_PARAMETER(primitiveMode);
   Warning( "glBeginTransformFeedbackNV not available." );
 }
 
-void REGAL_CALL missing_glBindBufferBaseNV(GLenum target, GLuint index, GLuint buffer)
+static void REGAL_CALL missing_glBindBufferBaseNV(GLenum target, GLuint index, GLuint buffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19037,7 +19037,7 @@ void REGAL_CALL missing_glBindBufferBaseNV(GLenum target, GLuint index, GLuint b
   Warning( "glBindBufferBaseNV not available." );
 }
 
-void REGAL_CALL missing_glBindBufferOffsetNV(GLenum target, GLuint index, GLuint buffer, GLintptr offset)
+static void REGAL_CALL missing_glBindBufferOffsetNV(GLenum target, GLuint index, GLuint buffer, GLintptr offset)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19046,7 +19046,7 @@ void REGAL_CALL missing_glBindBufferOffsetNV(GLenum target, GLuint index, GLuint
   Warning( "glBindBufferOffsetNV not available." );
 }
 
-void REGAL_CALL missing_glBindBufferRangeNV(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
+static void REGAL_CALL missing_glBindBufferRangeNV(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19056,12 +19056,12 @@ void REGAL_CALL missing_glBindBufferRangeNV(GLenum target, GLuint index, GLuint 
   Warning( "glBindBufferRangeNV not available." );
 }
 
-void REGAL_CALL missing_glEndTransformFeedbackNV(void)
+static void REGAL_CALL missing_glEndTransformFeedbackNV(void)
 {
   Warning( "glEndTransformFeedbackNV not available." );
 }
 
-void REGAL_CALL missing_glGetActiveVaryingNV(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name)
+static void REGAL_CALL missing_glGetActiveVaryingNV(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -19073,7 +19073,7 @@ void REGAL_CALL missing_glGetActiveVaryingNV(GLuint program, GLuint index, GLsiz
   Warning( "glGetActiveVaryingNV not available." );
 }
 
-void REGAL_CALL missing_glGetTransformFeedbackVaryingNV(GLuint program, GLuint index, GLint *location)
+static void REGAL_CALL missing_glGetTransformFeedbackVaryingNV(GLuint program, GLuint index, GLint *location)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(index);
@@ -19081,7 +19081,7 @@ void REGAL_CALL missing_glGetTransformFeedbackVaryingNV(GLuint program, GLuint i
   Warning( "glGetTransformFeedbackVaryingNV not available." );
 }
 
-GLint REGAL_CALL missing_glGetVaryingLocationNV(GLuint program, const GLchar *name)
+static GLint REGAL_CALL missing_glGetVaryingLocationNV(GLuint program, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
@@ -19089,7 +19089,7 @@ GLint REGAL_CALL missing_glGetVaryingLocationNV(GLuint program, const GLchar *na
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glTransformFeedbackAttribsNV(GLuint count, const GLint *attribs, GLenum bufferMode)
+static void REGAL_CALL missing_glTransformFeedbackAttribsNV(GLuint count, const GLint *attribs, GLenum bufferMode)
 {
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(attribs);
@@ -19097,7 +19097,7 @@ void REGAL_CALL missing_glTransformFeedbackAttribsNV(GLuint count, const GLint *
   Warning( "glTransformFeedbackAttribsNV not available." );
 }
 
-void REGAL_CALL missing_glTransformFeedbackVaryingsNV(GLuint program, GLsizei count, const GLint *locations, GLenum bufferMode)
+static void REGAL_CALL missing_glTransformFeedbackVaryingsNV(GLuint program, GLsizei count, const GLint *locations, GLenum bufferMode)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(count);
@@ -19108,59 +19108,59 @@ void REGAL_CALL missing_glTransformFeedbackVaryingsNV(GLuint program, GLsizei co
 
 // GL_NV_transform_feedback2
 
-void REGAL_CALL missing_glBindTransformFeedbackNV(GLenum target, GLuint id)
+static void REGAL_CALL missing_glBindTransformFeedbackNV(GLenum target, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
   Warning( "glBindTransformFeedbackNV not available." );
 }
 
-void REGAL_CALL missing_glDeleteTransformFeedbacksNV(GLsizei n, const GLuint *ids)
+static void REGAL_CALL missing_glDeleteTransformFeedbacksNV(GLsizei n, const GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glDeleteTransformFeedbacksNV not available." );
 }
 
-void REGAL_CALL missing_glDrawTransformFeedbackNV(GLenum mode, GLuint name)
+static void REGAL_CALL missing_glDrawTransformFeedbackNV(GLenum mode, GLuint name)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(name);
   Warning( "glDrawTransformFeedbackNV not available." );
 }
 
-void REGAL_CALL missing_glGenTransformFeedbacksNV(GLsizei n, GLuint *ids)
+static void REGAL_CALL missing_glGenTransformFeedbacksNV(GLsizei n, GLuint *ids)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(ids);
   Warning( "glGenTransformFeedbacksNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsTransformFeedbackNV(GLuint id)
+static GLboolean REGAL_CALL missing_glIsTransformFeedbackNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsTransformFeedbackNV not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glPauseTransformFeedbackNV(void)
+static void REGAL_CALL missing_glPauseTransformFeedbackNV(void)
 {
   Warning( "glPauseTransformFeedbackNV not available." );
 }
 
-void REGAL_CALL missing_glResumeTransformFeedbackNV(void)
+static void REGAL_CALL missing_glResumeTransformFeedbackNV(void)
 {
   Warning( "glResumeTransformFeedbackNV not available." );
 }
 
 // GL_NV_vdpau_interop
 
-void REGAL_CALL missing_glVDPAUFiniNV(void)
+static void REGAL_CALL missing_glVDPAUFiniNV(void)
 {
   Warning( "glVDPAUFiniNV not available." );
 }
 
-void REGAL_CALL missing_glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
+static void REGAL_CALL missing_glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
 {
   UNUSED_PARAMETER(surface);
   UNUSED_PARAMETER(pname);
@@ -19170,28 +19170,28 @@ void REGAL_CALL missing_glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum p
   Warning( "glVDPAUGetSurfaceivNV not available." );
 }
 
-void REGAL_CALL missing_glVDPAUInitNV(const GLvoid *vdpDevice, const GLvoid *getProcAddress)
+static void REGAL_CALL missing_glVDPAUInitNV(const GLvoid *vdpDevice, const GLvoid *getProcAddress)
 {
   UNUSED_PARAMETER(vdpDevice);
   UNUSED_PARAMETER(getProcAddress);
   Warning( "glVDPAUInitNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface)
+static GLboolean REGAL_CALL missing_glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface)
 {
   UNUSED_PARAMETER(surface);
   Warning( "glVDPAUIsSurfaceNV not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
+static void REGAL_CALL missing_glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
 {
   UNUSED_PARAMETER(numSurfaces);
   UNUSED_PARAMETER(surfaces);
   Warning( "glVDPAUMapSurfacesNV not available." );
 }
 
-GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterOutputSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
+static GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterOutputSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
 {
   UNUSED_PARAMETER(vdpSurface);
   UNUSED_PARAMETER(target);
@@ -19201,7 +19201,7 @@ GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterOutputSurfaceNV(const GLvoid 
   return (GLvdpauSurfaceNV )0;
 }
 
-GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterVideoSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
+static GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterVideoSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
 {
   UNUSED_PARAMETER(vdpSurface);
   UNUSED_PARAMETER(target);
@@ -19211,21 +19211,21 @@ GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterVideoSurfaceNV(const GLvoid *
   return (GLvdpauSurfaceNV )0;
 }
 
-void REGAL_CALL missing_glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access)
+static void REGAL_CALL missing_glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access)
 {
   UNUSED_PARAMETER(surface);
   UNUSED_PARAMETER(access);
   Warning( "glVDPAUSurfaceAccessNV not available." );
 }
 
-void REGAL_CALL missing_glVDPAUUnmapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
+static void REGAL_CALL missing_glVDPAUUnmapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
 {
   UNUSED_PARAMETER(numSurfaces);
   UNUSED_PARAMETER(surfaces);
   Warning( "glVDPAUUnmapSurfacesNV not available." );
 }
 
-void REGAL_CALL missing_glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface)
+static void REGAL_CALL missing_glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface)
 {
   UNUSED_PARAMETER(surface);
   Warning( "glVDPAUUnregisterSurfaceNV not available." );
@@ -19233,12 +19233,12 @@ void REGAL_CALL missing_glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface)
 
 // GL_NV_vertex_array_range
 
-void REGAL_CALL missing_glFlushVertexArrayRangeNV(void)
+static void REGAL_CALL missing_glFlushVertexArrayRangeNV(void)
 {
   Warning( "glFlushVertexArrayRangeNV not available." );
 }
 
-void REGAL_CALL missing_glVertexArrayRangeNV(GLsizei size, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexArrayRangeNV(GLsizei size, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(pointer);
@@ -19247,7 +19247,7 @@ void REGAL_CALL missing_glVertexArrayRangeNV(GLsizei size, const GLvoid *pointer
 
 // GL_NV_vertex_attrib_integer_64bit
 
-void REGAL_CALL missing_glGetVertexAttribLi64vNV(GLuint index, GLenum pname, GLint64EXT *params)
+static void REGAL_CALL missing_glGetVertexAttribLi64vNV(GLuint index, GLenum pname, GLint64EXT *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -19255,7 +19255,7 @@ void REGAL_CALL missing_glGetVertexAttribLi64vNV(GLuint index, GLenum pname, GLi
   Warning( "glGetVertexAttribLi64vNV not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribLui64vNV(GLuint index, GLenum pname, GLuint64EXT *params)
+static void REGAL_CALL missing_glGetVertexAttribLui64vNV(GLuint index, GLenum pname, GLuint64EXT *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -19263,35 +19263,35 @@ void REGAL_CALL missing_glGetVertexAttribLui64vNV(GLuint index, GLenum pname, GL
   Warning( "glGetVertexAttribLui64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1i64NV(GLuint index, GLint64EXT x)
+static void REGAL_CALL missing_glVertexAttribL1i64NV(GLuint index, GLint64EXT x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribL1i64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1i64vNV(GLuint index, const GLint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL1i64vNV(GLuint index, const GLint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL1i64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1ui64NV(GLuint index, GLuint64EXT x)
+static void REGAL_CALL missing_glVertexAttribL1ui64NV(GLuint index, GLuint64EXT x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttribL1ui64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL1ui64vNV(GLuint index, const GLuint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL1ui64vNV(GLuint index, const GLuint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL1ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2i64NV(GLuint index, GLint64EXT x, GLint64EXT y)
+static void REGAL_CALL missing_glVertexAttribL2i64NV(GLuint index, GLint64EXT x, GLint64EXT y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19299,14 +19299,14 @@ void REGAL_CALL missing_glVertexAttribL2i64NV(GLuint index, GLint64EXT x, GLint6
   Warning( "glVertexAttribL2i64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2i64vNV(GLuint index, const GLint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL2i64vNV(GLuint index, const GLint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL2i64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y)
+static void REGAL_CALL missing_glVertexAttribL2ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19314,14 +19314,14 @@ void REGAL_CALL missing_glVertexAttribL2ui64NV(GLuint index, GLuint64EXT x, GLui
   Warning( "glVertexAttribL2ui64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL2ui64vNV(GLuint index, const GLuint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL2ui64vNV(GLuint index, const GLuint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL2ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3i64NV(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z)
+static void REGAL_CALL missing_glVertexAttribL3i64NV(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19330,14 +19330,14 @@ void REGAL_CALL missing_glVertexAttribL3i64NV(GLuint index, GLint64EXT x, GLint6
   Warning( "glVertexAttribL3i64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3i64vNV(GLuint index, const GLint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL3i64vNV(GLuint index, const GLint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL3i64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z)
+static void REGAL_CALL missing_glVertexAttribL3ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19346,14 +19346,14 @@ void REGAL_CALL missing_glVertexAttribL3ui64NV(GLuint index, GLuint64EXT x, GLui
   Warning( "glVertexAttribL3ui64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL3ui64vNV(GLuint index, const GLuint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL3ui64vNV(GLuint index, const GLuint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL3ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4i64NV(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w)
+static void REGAL_CALL missing_glVertexAttribL4i64NV(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19363,14 +19363,14 @@ void REGAL_CALL missing_glVertexAttribL4i64NV(GLuint index, GLint64EXT x, GLint6
   Warning( "glVertexAttribL4i64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4i64vNV(GLuint index, const GLint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL4i64vNV(GLuint index, const GLint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL4i64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w)
+static void REGAL_CALL missing_glVertexAttribL4ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19380,14 +19380,14 @@ void REGAL_CALL missing_glVertexAttribL4ui64NV(GLuint index, GLuint64EXT x, GLui
   Warning( "glVertexAttribL4ui64NV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribL4ui64vNV(GLuint index, const GLuint64EXT *v)
+static void REGAL_CALL missing_glVertexAttribL4ui64vNV(GLuint index, const GLuint64EXT *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttribL4ui64vNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribLFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glVertexAttribLFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -19398,7 +19398,7 @@ void REGAL_CALL missing_glVertexAttribLFormatNV(GLuint index, GLint size, GLenum
 
 // GL_NV_vertex_buffer_unified_memory
 
-void REGAL_CALL missing_glBufferAddressRangeNV(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length)
+static void REGAL_CALL missing_glBufferAddressRangeNV(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(index);
@@ -19407,7 +19407,7 @@ void REGAL_CALL missing_glBufferAddressRangeNV(GLenum pname, GLuint index, GLuin
   Warning( "glBufferAddressRangeNV not available." );
 }
 
-void REGAL_CALL missing_glColorFormatNV(GLint size, GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glColorFormatNV(GLint size, GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -19415,20 +19415,20 @@ void REGAL_CALL missing_glColorFormatNV(GLint size, GLenum type, GLsizei stride)
   Warning( "glColorFormatNV not available." );
 }
 
-void REGAL_CALL missing_glEdgeFlagFormatNV(GLsizei stride)
+static void REGAL_CALL missing_glEdgeFlagFormatNV(GLsizei stride)
 {
   UNUSED_PARAMETER(stride);
   Warning( "glEdgeFlagFormatNV not available." );
 }
 
-void REGAL_CALL missing_glFogCoordFormatNV(GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glFogCoordFormatNV(GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
   Warning( "glFogCoordFormatNV not available." );
 }
 
-void REGAL_CALL missing_glGetIntegerui64i_vNV(GLenum target, GLuint index, GLuint64EXT *data)
+static void REGAL_CALL missing_glGetIntegerui64i_vNV(GLenum target, GLuint index, GLuint64EXT *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19436,21 +19436,21 @@ void REGAL_CALL missing_glGetIntegerui64i_vNV(GLenum target, GLuint index, GLuin
   Warning( "glGetIntegerui64i_vNV not available." );
 }
 
-void REGAL_CALL missing_glIndexFormatNV(GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glIndexFormatNV(GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
   Warning( "glIndexFormatNV not available." );
 }
 
-void REGAL_CALL missing_glNormalFormatNV(GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glNormalFormatNV(GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
   Warning( "glNormalFormatNV not available." );
 }
 
-void REGAL_CALL missing_glSecondaryColorFormatNV(GLint size, GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glSecondaryColorFormatNV(GLint size, GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -19458,7 +19458,7 @@ void REGAL_CALL missing_glSecondaryColorFormatNV(GLint size, GLenum type, GLsize
   Warning( "glSecondaryColorFormatNV not available." );
 }
 
-void REGAL_CALL missing_glTexCoordFormatNV(GLint size, GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glTexCoordFormatNV(GLint size, GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -19466,7 +19466,7 @@ void REGAL_CALL missing_glTexCoordFormatNV(GLint size, GLenum type, GLsizei stri
   Warning( "glTexCoordFormatNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribFormatNV(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride)
+static void REGAL_CALL missing_glVertexAttribFormatNV(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -19476,7 +19476,7 @@ void REGAL_CALL missing_glVertexAttribFormatNV(GLuint index, GLint size, GLenum 
   Warning( "glVertexAttribFormatNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribIFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glVertexAttribIFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(size);
@@ -19485,7 +19485,7 @@ void REGAL_CALL missing_glVertexAttribIFormatNV(GLuint index, GLint size, GLenum
   Warning( "glVertexAttribIFormatNV not available." );
 }
 
-void REGAL_CALL missing_glVertexFormatNV(GLint size, GLenum type, GLsizei stride)
+static void REGAL_CALL missing_glVertexFormatNV(GLint size, GLenum type, GLsizei stride)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -19495,7 +19495,7 @@ void REGAL_CALL missing_glVertexFormatNV(GLint size, GLenum type, GLsizei stride
 
 // GL_NV_vertex_program
 
-GLboolean REGAL_CALL missing_glAreProgramsResidentNV(GLsizei n, const GLuint *programs, GLboolean *residences)
+static GLboolean REGAL_CALL missing_glAreProgramsResidentNV(GLsizei n, const GLuint *programs, GLboolean *residences)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(programs);
@@ -19504,21 +19504,21 @@ GLboolean REGAL_CALL missing_glAreProgramsResidentNV(GLsizei n, const GLuint *pr
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glBindProgramNV(GLenum target, GLuint id)
+static void REGAL_CALL missing_glBindProgramNV(GLenum target, GLuint id)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
   Warning( "glBindProgramNV not available." );
 }
 
-void REGAL_CALL missing_glDeleteProgramsNV(GLsizei n, const GLuint *programs)
+static void REGAL_CALL missing_glDeleteProgramsNV(GLsizei n, const GLuint *programs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(programs);
   Warning( "glDeleteProgramsNV not available." );
 }
 
-void REGAL_CALL missing_glExecuteProgramNV(GLenum target, GLuint id, const GLfloat *params)
+static void REGAL_CALL missing_glExecuteProgramNV(GLenum target, GLuint id, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
@@ -19526,14 +19526,14 @@ void REGAL_CALL missing_glExecuteProgramNV(GLenum target, GLuint id, const GLflo
   Warning( "glExecuteProgramNV not available." );
 }
 
-void REGAL_CALL missing_glGenProgramsNV(GLsizei n, GLuint *programs)
+static void REGAL_CALL missing_glGenProgramsNV(GLsizei n, GLuint *programs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(programs);
   Warning( "glGenProgramsNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramParameterdvNV(GLenum target, GLuint index, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetProgramParameterdvNV(GLenum target, GLuint index, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19542,7 +19542,7 @@ void REGAL_CALL missing_glGetProgramParameterdvNV(GLenum target, GLuint index, G
   Warning( "glGetProgramParameterdvNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramParameterfvNV(GLenum target, GLuint index, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetProgramParameterfvNV(GLenum target, GLuint index, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19551,7 +19551,7 @@ void REGAL_CALL missing_glGetProgramParameterfvNV(GLenum target, GLuint index, G
   Warning( "glGetProgramParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramStringNV(GLuint id, GLenum pname, GLubyte *program)
+static void REGAL_CALL missing_glGetProgramStringNV(GLuint id, GLenum pname, GLubyte *program)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -19559,7 +19559,7 @@ void REGAL_CALL missing_glGetProgramStringNV(GLuint id, GLenum pname, GLubyte *p
   Warning( "glGetProgramStringNV not available." );
 }
 
-void REGAL_CALL missing_glGetProgramivNV(GLuint id, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetProgramivNV(GLuint id, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(pname);
@@ -19567,7 +19567,7 @@ void REGAL_CALL missing_glGetProgramivNV(GLuint id, GLenum pname, GLint *params)
   Warning( "glGetProgramivNV not available." );
 }
 
-void REGAL_CALL missing_glGetTrackMatrixivNV(GLenum target, GLuint address, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTrackMatrixivNV(GLenum target, GLuint address, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(address);
@@ -19576,7 +19576,7 @@ void REGAL_CALL missing_glGetTrackMatrixivNV(GLenum target, GLuint address, GLen
   Warning( "glGetTrackMatrixivNV not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribPointervNV(GLuint index, GLenum pname, GLvoid **pointer)
+static void REGAL_CALL missing_glGetVertexAttribPointervNV(GLuint index, GLenum pname, GLvoid **pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -19584,7 +19584,7 @@ void REGAL_CALL missing_glGetVertexAttribPointervNV(GLuint index, GLenum pname, 
   Warning( "glGetVertexAttribPointervNV not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribdvNV(GLuint index, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetVertexAttribdvNV(GLuint index, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -19592,7 +19592,7 @@ void REGAL_CALL missing_glGetVertexAttribdvNV(GLuint index, GLenum pname, GLdoub
   Warning( "glGetVertexAttribdvNV not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribfvNV(GLuint index, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetVertexAttribfvNV(GLuint index, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -19600,7 +19600,7 @@ void REGAL_CALL missing_glGetVertexAttribfvNV(GLuint index, GLenum pname, GLfloa
   Warning( "glGetVertexAttribfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetVertexAttribivNV(GLuint index, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVertexAttribivNV(GLuint index, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
@@ -19608,14 +19608,14 @@ void REGAL_CALL missing_glGetVertexAttribivNV(GLuint index, GLenum pname, GLint 
   Warning( "glGetVertexAttribivNV not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsProgramNV(GLuint id)
+static GLboolean REGAL_CALL missing_glIsProgramNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsProgramNV not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glLoadProgramNV(GLenum target, GLuint id, GLsizei len, const GLubyte *program)
+static void REGAL_CALL missing_glLoadProgramNV(GLenum target, GLuint id, GLsizei len, const GLubyte *program)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(id);
@@ -19624,7 +19624,7 @@ void REGAL_CALL missing_glLoadProgramNV(GLenum target, GLuint id, GLsizei len, c
   Warning( "glLoadProgramNV not available." );
 }
 
-void REGAL_CALL missing_glProgramParameter4dNV(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glProgramParameter4dNV(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19635,7 +19635,7 @@ void REGAL_CALL missing_glProgramParameter4dNV(GLenum target, GLuint index, GLdo
   Warning( "glProgramParameter4dNV not available." );
 }
 
-void REGAL_CALL missing_glProgramParameter4dvNV(GLenum target, GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glProgramParameter4dvNV(GLenum target, GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19643,7 +19643,7 @@ void REGAL_CALL missing_glProgramParameter4dvNV(GLenum target, GLuint index, con
   Warning( "glProgramParameter4dvNV not available." );
 }
 
-void REGAL_CALL missing_glProgramParameter4fNV(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glProgramParameter4fNV(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19654,7 +19654,7 @@ void REGAL_CALL missing_glProgramParameter4fNV(GLenum target, GLuint index, GLfl
   Warning( "glProgramParameter4fNV not available." );
 }
 
-void REGAL_CALL missing_glProgramParameter4fvNV(GLenum target, GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glProgramParameter4fvNV(GLenum target, GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19662,7 +19662,7 @@ void REGAL_CALL missing_glProgramParameter4fvNV(GLenum target, GLuint index, con
   Warning( "glProgramParameter4fvNV not available." );
 }
 
-void REGAL_CALL missing_glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
+static void REGAL_CALL missing_glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19671,7 +19671,7 @@ void REGAL_CALL missing_glProgramParameters4dvNV(GLenum target, GLuint index, GL
   Warning( "glProgramParameters4dvNV not available." );
 }
 
-void REGAL_CALL missing_glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
+static void REGAL_CALL missing_glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19680,14 +19680,14 @@ void REGAL_CALL missing_glProgramParameters4fvNV(GLenum target, GLuint index, GL
   Warning( "glProgramParameters4fvNV not available." );
 }
 
-void REGAL_CALL missing_glRequestResidentProgramsNV(GLsizei n, const GLuint *programs)
+static void REGAL_CALL missing_glRequestResidentProgramsNV(GLsizei n, const GLuint *programs)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(programs);
   Warning( "glRequestResidentProgramsNV not available." );
 }
 
-void REGAL_CALL missing_glTrackMatrixNV(GLenum target, GLuint address, GLenum matrix, GLenum transform)
+static void REGAL_CALL missing_glTrackMatrixNV(GLenum target, GLuint address, GLenum matrix, GLenum transform)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(address);
@@ -19696,49 +19696,49 @@ void REGAL_CALL missing_glTrackMatrixNV(GLenum target, GLuint address, GLenum ma
   Warning( "glTrackMatrixNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1dNV(GLuint index, GLdouble x)
+static void REGAL_CALL missing_glVertexAttrib1dNV(GLuint index, GLdouble x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1dNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1dvNV(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib1dvNV(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1fNV(GLuint index, GLfloat x)
+static void REGAL_CALL missing_glVertexAttrib1fNV(GLuint index, GLfloat x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1fNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1fvNV(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib1fvNV(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1sNV(GLuint index, GLshort x)
+static void REGAL_CALL missing_glVertexAttrib1sNV(GLuint index, GLshort x)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
   Warning( "glVertexAttrib1sNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib1svNV(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib1svNV(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib1svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2dNV(GLuint index, GLdouble x, GLdouble y)
+static void REGAL_CALL missing_glVertexAttrib2dNV(GLuint index, GLdouble x, GLdouble y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19746,14 +19746,14 @@ void REGAL_CALL missing_glVertexAttrib2dNV(GLuint index, GLdouble x, GLdouble y)
   Warning( "glVertexAttrib2dNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2dvNV(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib2dvNV(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2fNV(GLuint index, GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glVertexAttrib2fNV(GLuint index, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19761,14 +19761,14 @@ void REGAL_CALL missing_glVertexAttrib2fNV(GLuint index, GLfloat x, GLfloat y)
   Warning( "glVertexAttrib2fNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2fvNV(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib2fvNV(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2sNV(GLuint index, GLshort x, GLshort y)
+static void REGAL_CALL missing_glVertexAttrib2sNV(GLuint index, GLshort x, GLshort y)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19776,14 +19776,14 @@ void REGAL_CALL missing_glVertexAttrib2sNV(GLuint index, GLshort x, GLshort y)
   Warning( "glVertexAttrib2sNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib2svNV(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib2svNV(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib2svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3dNV(GLuint index, GLdouble x, GLdouble y, GLdouble z)
+static void REGAL_CALL missing_glVertexAttrib3dNV(GLuint index, GLdouble x, GLdouble y, GLdouble z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19792,14 +19792,14 @@ void REGAL_CALL missing_glVertexAttrib3dNV(GLuint index, GLdouble x, GLdouble y,
   Warning( "glVertexAttrib3dNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3dvNV(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib3dvNV(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3fNV(GLuint index, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glVertexAttrib3fNV(GLuint index, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19808,14 +19808,14 @@ void REGAL_CALL missing_glVertexAttrib3fNV(GLuint index, GLfloat x, GLfloat y, G
   Warning( "glVertexAttrib3fNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3fvNV(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib3fvNV(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3sNV(GLuint index, GLshort x, GLshort y, GLshort z)
+static void REGAL_CALL missing_glVertexAttrib3sNV(GLuint index, GLshort x, GLshort y, GLshort z)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19824,14 +19824,14 @@ void REGAL_CALL missing_glVertexAttrib3sNV(GLuint index, GLshort x, GLshort y, G
   Warning( "glVertexAttrib3sNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib3svNV(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib3svNV(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib3svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4dNV(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
+static void REGAL_CALL missing_glVertexAttrib4dNV(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19841,14 +19841,14 @@ void REGAL_CALL missing_glVertexAttrib4dNV(GLuint index, GLdouble x, GLdouble y,
   Warning( "glVertexAttrib4dNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4dvNV(GLuint index, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttrib4dvNV(GLuint index, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4fNV(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glVertexAttrib4fNV(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19858,14 +19858,14 @@ void REGAL_CALL missing_glVertexAttrib4fNV(GLuint index, GLfloat x, GLfloat y, G
   Warning( "glVertexAttrib4fNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4fvNV(GLuint index, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttrib4fvNV(GLuint index, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4sNV(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
+static void REGAL_CALL missing_glVertexAttrib4sNV(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19875,14 +19875,14 @@ void REGAL_CALL missing_glVertexAttrib4sNV(GLuint index, GLshort x, GLshort y, G
   Warning( "glVertexAttrib4sNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4svNV(GLuint index, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttrib4svNV(GLuint index, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4ubNV(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
+static void REGAL_CALL missing_glVertexAttrib4ubNV(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(x);
@@ -19892,14 +19892,14 @@ void REGAL_CALL missing_glVertexAttrib4ubNV(GLuint index, GLubyte x, GLubyte y, 
   Warning( "glVertexAttrib4ubNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttrib4ubvNV(GLuint index, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttrib4ubvNV(GLuint index, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(v);
   Warning( "glVertexAttrib4ubvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribPointerNV(GLuint index, GLint fsize, GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glVertexAttribPointerNV(GLuint index, GLint fsize, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(fsize);
@@ -19909,7 +19909,7 @@ void REGAL_CALL missing_glVertexAttribPointerNV(GLuint index, GLint fsize, GLenu
   Warning( "glVertexAttribPointerNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs1dvNV(GLuint index, GLsizei n, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribs1dvNV(GLuint index, GLsizei n, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19917,7 +19917,7 @@ void REGAL_CALL missing_glVertexAttribs1dvNV(GLuint index, GLsizei n, const GLdo
   Warning( "glVertexAttribs1dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs1fvNV(GLuint index, GLsizei n, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttribs1fvNV(GLuint index, GLsizei n, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19925,7 +19925,7 @@ void REGAL_CALL missing_glVertexAttribs1fvNV(GLuint index, GLsizei n, const GLfl
   Warning( "glVertexAttribs1fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs1svNV(GLuint index, GLsizei n, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttribs1svNV(GLuint index, GLsizei n, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19933,7 +19933,7 @@ void REGAL_CALL missing_glVertexAttribs1svNV(GLuint index, GLsizei n, const GLsh
   Warning( "glVertexAttribs1svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs2dvNV(GLuint index, GLsizei n, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribs2dvNV(GLuint index, GLsizei n, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19941,7 +19941,7 @@ void REGAL_CALL missing_glVertexAttribs2dvNV(GLuint index, GLsizei n, const GLdo
   Warning( "glVertexAttribs2dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs2fvNV(GLuint index, GLsizei n, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttribs2fvNV(GLuint index, GLsizei n, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19949,7 +19949,7 @@ void REGAL_CALL missing_glVertexAttribs2fvNV(GLuint index, GLsizei n, const GLfl
   Warning( "glVertexAttribs2fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs2svNV(GLuint index, GLsizei n, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttribs2svNV(GLuint index, GLsizei n, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19957,7 +19957,7 @@ void REGAL_CALL missing_glVertexAttribs2svNV(GLuint index, GLsizei n, const GLsh
   Warning( "glVertexAttribs2svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs3dvNV(GLuint index, GLsizei n, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribs3dvNV(GLuint index, GLsizei n, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19965,7 +19965,7 @@ void REGAL_CALL missing_glVertexAttribs3dvNV(GLuint index, GLsizei n, const GLdo
   Warning( "glVertexAttribs3dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs3fvNV(GLuint index, GLsizei n, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttribs3fvNV(GLuint index, GLsizei n, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19973,7 +19973,7 @@ void REGAL_CALL missing_glVertexAttribs3fvNV(GLuint index, GLsizei n, const GLfl
   Warning( "glVertexAttribs3fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs3svNV(GLuint index, GLsizei n, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttribs3svNV(GLuint index, GLsizei n, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19981,7 +19981,7 @@ void REGAL_CALL missing_glVertexAttribs3svNV(GLuint index, GLsizei n, const GLsh
   Warning( "glVertexAttribs3svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs4dvNV(GLuint index, GLsizei n, const GLdouble *v)
+static void REGAL_CALL missing_glVertexAttribs4dvNV(GLuint index, GLsizei n, const GLdouble *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19989,7 +19989,7 @@ void REGAL_CALL missing_glVertexAttribs4dvNV(GLuint index, GLsizei n, const GLdo
   Warning( "glVertexAttribs4dvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs4fvNV(GLuint index, GLsizei n, const GLfloat *v)
+static void REGAL_CALL missing_glVertexAttribs4fvNV(GLuint index, GLsizei n, const GLfloat *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -19997,7 +19997,7 @@ void REGAL_CALL missing_glVertexAttribs4fvNV(GLuint index, GLsizei n, const GLfl
   Warning( "glVertexAttribs4fvNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs4svNV(GLuint index, GLsizei n, const GLshort *v)
+static void REGAL_CALL missing_glVertexAttribs4svNV(GLuint index, GLsizei n, const GLshort *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -20005,7 +20005,7 @@ void REGAL_CALL missing_glVertexAttribs4svNV(GLuint index, GLsizei n, const GLsh
   Warning( "glVertexAttribs4svNV not available." );
 }
 
-void REGAL_CALL missing_glVertexAttribs4ubvNV(GLuint index, GLsizei n, const GLubyte *v)
+static void REGAL_CALL missing_glVertexAttribs4ubvNV(GLuint index, GLsizei n, const GLubyte *v)
 {
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(n);
@@ -20015,13 +20015,13 @@ void REGAL_CALL missing_glVertexAttribs4ubvNV(GLuint index, GLsizei n, const GLu
 
 // GL_NV_video_capture
 
-void REGAL_CALL missing_glBeginVideoCaptureNV(GLuint video_capture_slot)
+static void REGAL_CALL missing_glBeginVideoCaptureNV(GLuint video_capture_slot)
 {
   UNUSED_PARAMETER(video_capture_slot);
   Warning( "glBeginVideoCaptureNV not available." );
 }
 
-void REGAL_CALL missing_glBindVideoCaptureStreamBufferNV(GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLintptr offset)
+static void REGAL_CALL missing_glBindVideoCaptureStreamBufferNV(GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLintptr offset)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20030,7 +20030,7 @@ void REGAL_CALL missing_glBindVideoCaptureStreamBufferNV(GLuint video_capture_sl
   Warning( "glBindVideoCaptureStreamBufferNV not available." );
 }
 
-void REGAL_CALL missing_glBindVideoCaptureStreamTextureNV(GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLenum target, GLuint texture)
+static void REGAL_CALL missing_glBindVideoCaptureStreamTextureNV(GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLenum target, GLuint texture)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20040,13 +20040,13 @@ void REGAL_CALL missing_glBindVideoCaptureStreamTextureNV(GLuint video_capture_s
   Warning( "glBindVideoCaptureStreamTextureNV not available." );
 }
 
-void REGAL_CALL missing_glEndVideoCaptureNV(GLuint video_capture_slot)
+static void REGAL_CALL missing_glEndVideoCaptureNV(GLuint video_capture_slot)
 {
   UNUSED_PARAMETER(video_capture_slot);
   Warning( "glEndVideoCaptureNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideoCaptureStreamdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLdouble *params)
+static void REGAL_CALL missing_glGetVideoCaptureStreamdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLdouble *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20055,7 +20055,7 @@ void REGAL_CALL missing_glGetVideoCaptureStreamdvNV(GLuint video_capture_slot, G
   Warning( "glGetVideoCaptureStreamdvNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideoCaptureStreamfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetVideoCaptureStreamfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20064,7 +20064,7 @@ void REGAL_CALL missing_glGetVideoCaptureStreamfvNV(GLuint video_capture_slot, G
   Warning( "glGetVideoCaptureStreamfvNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideoCaptureStreamivNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVideoCaptureStreamivNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20073,7 +20073,7 @@ void REGAL_CALL missing_glGetVideoCaptureStreamivNV(GLuint video_capture_slot, G
   Warning( "glGetVideoCaptureStreamivNV not available." );
 }
 
-void REGAL_CALL missing_glGetVideoCaptureivNV(GLuint video_capture_slot, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetVideoCaptureivNV(GLuint video_capture_slot, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(pname);
@@ -20081,7 +20081,7 @@ void REGAL_CALL missing_glGetVideoCaptureivNV(GLuint video_capture_slot, GLenum 
   Warning( "glGetVideoCaptureivNV not available." );
 }
 
-GLenum REGAL_CALL missing_glVideoCaptureNV(GLuint video_capture_slot, GLuint *sequence_num, GLuint64EXT *capture_time)
+static GLenum REGAL_CALL missing_glVideoCaptureNV(GLuint video_capture_slot, GLuint *sequence_num, GLuint64EXT *capture_time)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(sequence_num);
@@ -20090,7 +20090,7 @@ GLenum REGAL_CALL missing_glVideoCaptureNV(GLuint video_capture_slot, GLuint *se
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glVideoCaptureStreamParameterdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble *params)
+static void REGAL_CALL missing_glVideoCaptureStreamParameterdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20099,7 +20099,7 @@ void REGAL_CALL missing_glVideoCaptureStreamParameterdvNV(GLuint video_capture_s
   Warning( "glVideoCaptureStreamParameterdvNV not available." );
 }
 
-void REGAL_CALL missing_glVideoCaptureStreamParameterfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glVideoCaptureStreamParameterfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20108,7 +20108,7 @@ void REGAL_CALL missing_glVideoCaptureStreamParameterfvNV(GLuint video_capture_s
   Warning( "glVideoCaptureStreamParameterfvNV not available." );
 }
 
-void REGAL_CALL missing_glVideoCaptureStreamParameterivNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glVideoCaptureStreamParameterivNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(video_capture_slot);
   UNUSED_PARAMETER(stream);
@@ -20119,7 +20119,7 @@ void REGAL_CALL missing_glVideoCaptureStreamParameterivNV(GLuint video_capture_s
 
 // GL_OES_blend_equation_separate
 
-void REGAL_CALL missing_glBlendEquationSeparateOES(GLenum modeRGB, GLenum modeAlpha)
+static void REGAL_CALL missing_glBlendEquationSeparateOES(GLenum modeRGB, GLenum modeAlpha)
 {
   UNUSED_PARAMETER(modeRGB);
   UNUSED_PARAMETER(modeAlpha);
@@ -20128,7 +20128,7 @@ void REGAL_CALL missing_glBlendEquationSeparateOES(GLenum modeRGB, GLenum modeAl
 
 // GL_OES_blend_func_separate
 
-void REGAL_CALL missing_glBlendFuncSeparateOES(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
+static void REGAL_CALL missing_glBlendFuncSeparateOES(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha)
 {
   UNUSED_PARAMETER(sfactorRGB);
   UNUSED_PARAMETER(dfactorRGB);
@@ -20139,7 +20139,7 @@ void REGAL_CALL missing_glBlendFuncSeparateOES(GLenum sfactorRGB, GLenum dfactor
 
 // GL_OES_blend_subtract
 
-void REGAL_CALL missing_glBlendEquationOES(GLenum mode)
+static void REGAL_CALL missing_glBlendEquationOES(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glBlendEquationOES not available." );
@@ -20147,42 +20147,42 @@ void REGAL_CALL missing_glBlendEquationOES(GLenum mode)
 
 // GL_OES_framebuffer_object
 
-void REGAL_CALL missing_glBindFramebufferOES(GLenum target, GLuint framebuffer)
+static void REGAL_CALL missing_glBindFramebufferOES(GLenum target, GLuint framebuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(framebuffer);
   Warning( "glBindFramebufferOES not available." );
 }
 
-void REGAL_CALL missing_glBindRenderbufferOES(GLenum target, GLuint renderbuffer)
+static void REGAL_CALL missing_glBindRenderbufferOES(GLenum target, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glBindRenderbufferOES not available." );
 }
 
-GLenum REGAL_CALL missing_glCheckFramebufferStatusOES(GLenum target)
+static GLenum REGAL_CALL missing_glCheckFramebufferStatusOES(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glCheckFramebufferStatusOES not available." );
   return (GLenum )0;
 }
 
-void REGAL_CALL missing_glDeleteFramebuffersOES(GLsizei n, const GLuint *framebuffers)
+static void REGAL_CALL missing_glDeleteFramebuffersOES(GLsizei n, const GLuint *framebuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(framebuffers);
   Warning( "glDeleteFramebuffersOES not available." );
 }
 
-void REGAL_CALL missing_glDeleteRenderbuffersOES(GLsizei n, const GLuint *renderbuffers)
+static void REGAL_CALL missing_glDeleteRenderbuffersOES(GLsizei n, const GLuint *renderbuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(renderbuffers);
   Warning( "glDeleteRenderbuffersOES not available." );
 }
 
-void REGAL_CALL missing_glFramebufferRenderbufferOES(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
+static void REGAL_CALL missing_glFramebufferRenderbufferOES(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -20191,7 +20191,7 @@ void REGAL_CALL missing_glFramebufferRenderbufferOES(GLenum target, GLenum attac
   Warning( "glFramebufferRenderbufferOES not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture2DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+static void REGAL_CALL missing_glFramebufferTexture2DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -20201,27 +20201,27 @@ void REGAL_CALL missing_glFramebufferTexture2DOES(GLenum target, GLenum attachme
   Warning( "glFramebufferTexture2DOES not available." );
 }
 
-void REGAL_CALL missing_glGenFramebuffersOES(GLsizei n, GLuint *framebuffers)
+static void REGAL_CALL missing_glGenFramebuffersOES(GLsizei n, GLuint *framebuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(framebuffers);
   Warning( "glGenFramebuffersOES not available." );
 }
 
-void REGAL_CALL missing_glGenRenderbuffersOES(GLsizei n, GLuint *renderbuffers)
+static void REGAL_CALL missing_glGenRenderbuffersOES(GLsizei n, GLuint *renderbuffers)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(renderbuffers);
   Warning( "glGenRenderbuffersOES not available." );
 }
 
-void REGAL_CALL missing_glGenerateMipmapOES(GLenum target)
+static void REGAL_CALL missing_glGenerateMipmapOES(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glGenerateMipmapOES not available." );
 }
 
-void REGAL_CALL missing_glGetFramebufferAttachmentParameterivOES(GLenum target, GLenum attachment, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFramebufferAttachmentParameterivOES(GLenum target, GLenum attachment, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -20230,7 +20230,7 @@ void REGAL_CALL missing_glGetFramebufferAttachmentParameterivOES(GLenum target, 
   Warning( "glGetFramebufferAttachmentParameterivOES not available." );
 }
 
-void REGAL_CALL missing_glGetRenderbufferParameterivOES(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetRenderbufferParameterivOES(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -20238,21 +20238,21 @@ void REGAL_CALL missing_glGetRenderbufferParameterivOES(GLenum target, GLenum pn
   Warning( "glGetRenderbufferParameterivOES not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsFramebufferOES(GLuint framebuffer)
+static GLboolean REGAL_CALL missing_glIsFramebufferOES(GLuint framebuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   Warning( "glIsFramebufferOES not available." );
   return (GLboolean )0;
 }
 
-GLboolean REGAL_CALL missing_glIsRenderbufferOES(GLuint renderbuffer)
+static GLboolean REGAL_CALL missing_glIsRenderbufferOES(GLuint renderbuffer)
 {
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glIsRenderbufferOES not available." );
   return (GLboolean )0;
 }
 
-void REGAL_CALL missing_glRenderbufferStorageOES(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glRenderbufferStorageOES(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -20263,7 +20263,7 @@ void REGAL_CALL missing_glRenderbufferStorageOES(GLenum target, GLenum internalf
 
 // GL_OES_get_program_binary
 
-void REGAL_CALL missing_glGetProgramBinaryOES(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary)
+static void REGAL_CALL missing_glGetProgramBinaryOES(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(bufSize);
@@ -20273,7 +20273,7 @@ void REGAL_CALL missing_glGetProgramBinaryOES(GLuint program, GLsizei bufSize, G
   Warning( "glGetProgramBinaryOES not available." );
 }
 
-void REGAL_CALL missing_glProgramBinaryOES(GLuint program, GLenum binaryFormat, const GLvoid *binary, GLint length)
+static void REGAL_CALL missing_glProgramBinaryOES(GLuint program, GLenum binaryFormat, const GLvoid *binary, GLint length)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(binaryFormat);
@@ -20284,7 +20284,7 @@ void REGAL_CALL missing_glProgramBinaryOES(GLuint program, GLenum binaryFormat, 
 
 // GL_OES_mapbuffer
 
-void REGAL_CALL missing_glGetBufferPointervOES(GLenum target, GLenum pname, GLvoid **params)
+static void REGAL_CALL missing_glGetBufferPointervOES(GLenum target, GLenum pname, GLvoid **params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -20292,7 +20292,7 @@ void REGAL_CALL missing_glGetBufferPointervOES(GLenum target, GLenum pname, GLvo
   Warning( "glGetBufferPointervOES not available." );
 }
 
-GLvoid *REGAL_CALL missing_glMapBufferOES(GLenum target, GLenum access)
+static GLvoid *REGAL_CALL missing_glMapBufferOES(GLenum target, GLenum access)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(access);
@@ -20300,7 +20300,7 @@ GLvoid *REGAL_CALL missing_glMapBufferOES(GLenum target, GLenum access)
   return NULL;
 }
 
-GLboolean REGAL_CALL missing_glUnmapBufferOES(GLenum target)
+static GLboolean REGAL_CALL missing_glUnmapBufferOES(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glUnmapBufferOES not available." );
@@ -20309,13 +20309,13 @@ GLboolean REGAL_CALL missing_glUnmapBufferOES(GLenum target)
 
 // GL_OES_matrix_palette
 
-void REGAL_CALL missing_glCurrentPaletteMatrixOES(GLuint index)
+static void REGAL_CALL missing_glCurrentPaletteMatrixOES(GLuint index)
 {
   UNUSED_PARAMETER(index);
   Warning( "glCurrentPaletteMatrixOES not available." );
 }
 
-void REGAL_CALL missing_glMatrixIndexPointerOES(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL missing_glMatrixIndexPointerOES(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -20324,7 +20324,7 @@ void REGAL_CALL missing_glMatrixIndexPointerOES(GLint size, GLenum type, GLsizei
   Warning( "glMatrixIndexPointerOES not available." );
 }
 
-void REGAL_CALL missing_glWeightPointerOES(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL missing_glWeightPointerOES(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -20335,27 +20335,27 @@ void REGAL_CALL missing_glWeightPointerOES(GLint size, GLenum type, GLsizei stri
 
 // GL_OES_single_precision
 
-void REGAL_CALL missing_glClearDepthfOES(GLclampd depth)
+static void REGAL_CALL missing_glClearDepthfOES(GLclampd depth)
 {
   UNUSED_PARAMETER(depth);
   Warning( "glClearDepthfOES not available." );
 }
 
-void REGAL_CALL missing_glClipPlanefOES(GLenum plane, const GLfloat *equation)
+static void REGAL_CALL missing_glClipPlanefOES(GLenum plane, const GLfloat *equation)
 {
   UNUSED_PARAMETER(plane);
   UNUSED_PARAMETER(equation);
   Warning( "glClipPlanefOES not available." );
 }
 
-void REGAL_CALL missing_glDepthRangefOES(GLclampf n, GLclampf f)
+static void REGAL_CALL missing_glDepthRangefOES(GLclampf n, GLclampf f)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(f);
   Warning( "glDepthRangefOES not available." );
 }
 
-void REGAL_CALL missing_glFrustumfOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f)
+static void REGAL_CALL missing_glFrustumfOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f)
 {
   UNUSED_PARAMETER(l);
   UNUSED_PARAMETER(r);
@@ -20366,14 +20366,14 @@ void REGAL_CALL missing_glFrustumfOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t
   Warning( "glFrustumfOES not available." );
 }
 
-void REGAL_CALL missing_glGetClipPlanefOES(GLenum plane, GLfloat *equation)
+static void REGAL_CALL missing_glGetClipPlanefOES(GLenum plane, GLfloat *equation)
 {
   UNUSED_PARAMETER(plane);
   UNUSED_PARAMETER(equation);
   Warning( "glGetClipPlanefOES not available." );
 }
 
-void REGAL_CALL missing_glOrthofOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f)
+static void REGAL_CALL missing_glOrthofOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f)
 {
   UNUSED_PARAMETER(l);
   UNUSED_PARAMETER(r);
@@ -20386,7 +20386,7 @@ void REGAL_CALL missing_glOrthofOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, 
 
 // GL_OES_texture_3D
 
-void REGAL_CALL missing_glCompressedTexImage3DOES(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexImage3DOES(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -20400,7 +20400,7 @@ void REGAL_CALL missing_glCompressedTexImage3DOES(GLenum target, GLint level, GL
   Warning( "glCompressedTexImage3DOES not available." );
 }
 
-void REGAL_CALL missing_glCompressedTexSubImage3DOES(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
+static void REGAL_CALL missing_glCompressedTexSubImage3DOES(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -20416,7 +20416,7 @@ void REGAL_CALL missing_glCompressedTexSubImage3DOES(GLenum target, GLint level,
   Warning( "glCompressedTexSubImage3DOES not available." );
 }
 
-void REGAL_CALL missing_glCopyTexSubImage3DOES(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glCopyTexSubImage3DOES(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -20430,7 +20430,7 @@ void REGAL_CALL missing_glCopyTexSubImage3DOES(GLenum target, GLint level, GLint
   Warning( "glCopyTexSubImage3DOES not available." );
 }
 
-void REGAL_CALL missing_glFramebufferTexture3DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
+static void REGAL_CALL missing_glFramebufferTexture3DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(attachment);
@@ -20441,7 +20441,7 @@ void REGAL_CALL missing_glFramebufferTexture3DOES(GLenum target, GLenum attachme
   Warning( "glFramebufferTexture3DOES not available." );
 }
 
-void REGAL_CALL missing_glTexImage3DOES(GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexImage3DOES(GLenum target, GLint level, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -20456,7 +20456,7 @@ void REGAL_CALL missing_glTexImage3DOES(GLenum target, GLint level, GLenum inter
   Warning( "glTexImage3DOES not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage3DOES(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage3DOES(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -20474,7 +20474,7 @@ void REGAL_CALL missing_glTexSubImage3DOES(GLenum target, GLint level, GLint xof
 
 // GL_OES_texture_cube_map
 
-void REGAL_CALL missing_glGetTexGenfvOES(GLenum coord, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetTexGenfvOES(GLenum coord, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20482,7 +20482,7 @@ void REGAL_CALL missing_glGetTexGenfvOES(GLenum coord, GLenum pname, GLfloat *pa
   Warning( "glGetTexGenfvOES not available." );
 }
 
-void REGAL_CALL missing_glGetTexGenivOES(GLenum coord, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetTexGenivOES(GLenum coord, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20490,7 +20490,7 @@ void REGAL_CALL missing_glGetTexGenivOES(GLenum coord, GLenum pname, GLint *para
   Warning( "glGetTexGenivOES not available." );
 }
 
-void REGAL_CALL missing_glGetTexGenxvOES(GLenum coord, GLenum pname, GLfixed *params)
+static void REGAL_CALL missing_glGetTexGenxvOES(GLenum coord, GLenum pname, GLfixed *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20498,7 +20498,7 @@ void REGAL_CALL missing_glGetTexGenxvOES(GLenum coord, GLenum pname, GLfixed *pa
   Warning( "glGetTexGenxvOES not available." );
 }
 
-void REGAL_CALL missing_glTexGenfOES(GLenum coord, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glTexGenfOES(GLenum coord, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20506,7 +20506,7 @@ void REGAL_CALL missing_glTexGenfOES(GLenum coord, GLenum pname, GLfloat param)
   Warning( "glTexGenfOES not available." );
 }
 
-void REGAL_CALL missing_glTexGenfvOES(GLenum coord, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glTexGenfvOES(GLenum coord, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20514,7 +20514,7 @@ void REGAL_CALL missing_glTexGenfvOES(GLenum coord, GLenum pname, const GLfloat 
   Warning( "glTexGenfvOES not available." );
 }
 
-void REGAL_CALL missing_glTexGeniOES(GLenum coord, GLenum pname, GLint param)
+static void REGAL_CALL missing_glTexGeniOES(GLenum coord, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20522,7 +20522,7 @@ void REGAL_CALL missing_glTexGeniOES(GLenum coord, GLenum pname, GLint param)
   Warning( "glTexGeniOES not available." );
 }
 
-void REGAL_CALL missing_glTexGenivOES(GLenum coord, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glTexGenivOES(GLenum coord, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20530,7 +20530,7 @@ void REGAL_CALL missing_glTexGenivOES(GLenum coord, GLenum pname, const GLint *p
   Warning( "glTexGenivOES not available." );
 }
 
-void REGAL_CALL missing_glTexGenxOES(GLenum coord, GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glTexGenxOES(GLenum coord, GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20538,7 +20538,7 @@ void REGAL_CALL missing_glTexGenxOES(GLenum coord, GLenum pname, GLfixed param)
   Warning( "glTexGenxOES not available." );
 }
 
-void REGAL_CALL missing_glTexGenxvOES(GLenum coord, GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glTexGenxvOES(GLenum coord, GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(pname);
@@ -20548,27 +20548,27 @@ void REGAL_CALL missing_glTexGenxvOES(GLenum coord, GLenum pname, const GLfixed 
 
 // GL_OES_vertex_array_object
 
-void REGAL_CALL missing_glBindVertexArrayOES(GLuint array)
+static void REGAL_CALL missing_glBindVertexArrayOES(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glBindVertexArrayOES not available." );
 }
 
-void REGAL_CALL missing_glDeleteVertexArraysOES(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL missing_glDeleteVertexArraysOES(GLsizei n, const GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
   Warning( "glDeleteVertexArraysOES not available." );
 }
 
-void REGAL_CALL missing_glGenVertexArraysOES(GLsizei n, GLuint *arrays)
+static void REGAL_CALL missing_glGenVertexArraysOES(GLsizei n, GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
   Warning( "glGenVertexArraysOES not available." );
 }
 
-GLboolean REGAL_CALL missing_glIsVertexArrayOES(GLuint array)
+static GLboolean REGAL_CALL missing_glIsVertexArrayOES(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glIsVertexArrayOES not available." );
@@ -20577,7 +20577,7 @@ GLboolean REGAL_CALL missing_glIsVertexArrayOES(GLuint array)
 
 // GL_PGI_misc_hints
 
-void REGAL_CALL missing_glHintPGI(GLenum target, GLint mode)
+static void REGAL_CALL missing_glHintPGI(GLenum target, GLint mode)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(mode);
@@ -20586,7 +20586,7 @@ void REGAL_CALL missing_glHintPGI(GLenum target, GLint mode)
 
 // GL_QCOM_alpha_test
 
-void REGAL_CALL missing_glAlphaFuncQCOM(GLenum func, GLclampf ref)
+static void REGAL_CALL missing_glAlphaFuncQCOM(GLenum func, GLclampf ref)
 {
   UNUSED_PARAMETER(func);
   UNUSED_PARAMETER(ref);
@@ -20595,19 +20595,19 @@ void REGAL_CALL missing_glAlphaFuncQCOM(GLenum func, GLclampf ref)
 
 // GL_QCOM_driver_control
 
-void REGAL_CALL missing_glDisableDriverControlQCOM(GLuint driverControl)
+static void REGAL_CALL missing_glDisableDriverControlQCOM(GLuint driverControl)
 {
   UNUSED_PARAMETER(driverControl);
   Warning( "glDisableDriverControlQCOM not available." );
 }
 
-void REGAL_CALL missing_glEnableDriverControlQCOM(GLuint driverControl)
+static void REGAL_CALL missing_glEnableDriverControlQCOM(GLuint driverControl)
 {
   UNUSED_PARAMETER(driverControl);
   Warning( "glEnableDriverControlQCOM not available." );
 }
 
-void REGAL_CALL missing_glGetDriverControlStringQCOM(GLuint driverControl, GLsizei bufSize, GLsizei *length, GLchar *driverControlString)
+static void REGAL_CALL missing_glGetDriverControlStringQCOM(GLuint driverControl, GLsizei bufSize, GLsizei *length, GLchar *driverControlString)
 {
   UNUSED_PARAMETER(driverControl);
   UNUSED_PARAMETER(bufSize);
@@ -20616,7 +20616,7 @@ void REGAL_CALL missing_glGetDriverControlStringQCOM(GLuint driverControl, GLsiz
   Warning( "glGetDriverControlStringQCOM not available." );
 }
 
-void REGAL_CALL missing_glGetDriverControlsQCOM(GLint *num, GLsizei size, GLuint *driverControls)
+static void REGAL_CALL missing_glGetDriverControlsQCOM(GLint *num, GLsizei size, GLuint *driverControls)
 {
   UNUSED_PARAMETER(num);
   UNUSED_PARAMETER(size);
@@ -20626,14 +20626,14 @@ void REGAL_CALL missing_glGetDriverControlsQCOM(GLint *num, GLsizei size, GLuint
 
 // GL_QCOM_extended_get
 
-void REGAL_CALL missing_glExtGetBufferPointervQCOM(GLenum target, GLvoid **params)
+static void REGAL_CALL missing_glExtGetBufferPointervQCOM(GLenum target, GLvoid **params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(params);
   Warning( "glExtGetBufferPointervQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetBuffersQCOM(GLuint *buffers, GLint maxBuffers, GLint *numBuffers)
+static void REGAL_CALL missing_glExtGetBuffersQCOM(GLuint *buffers, GLint maxBuffers, GLint *numBuffers)
 {
   UNUSED_PARAMETER(buffers);
   UNUSED_PARAMETER(maxBuffers);
@@ -20641,7 +20641,7 @@ void REGAL_CALL missing_glExtGetBuffersQCOM(GLuint *buffers, GLint maxBuffers, G
   Warning( "glExtGetBuffersQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetFramebuffersQCOM(GLuint *framebuffers, GLint maxFramebuffers, GLint *numFramebuffers)
+static void REGAL_CALL missing_glExtGetFramebuffersQCOM(GLuint *framebuffers, GLint maxFramebuffers, GLint *numFramebuffers)
 {
   UNUSED_PARAMETER(framebuffers);
   UNUSED_PARAMETER(maxFramebuffers);
@@ -20649,7 +20649,7 @@ void REGAL_CALL missing_glExtGetFramebuffersQCOM(GLuint *framebuffers, GLint max
   Warning( "glExtGetFramebuffersQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetRenderbuffersQCOM(GLuint *renderbuffers, GLint maxRenderbuffers, GLint *numRenderbuffers)
+static void REGAL_CALL missing_glExtGetRenderbuffersQCOM(GLuint *renderbuffers, GLint maxRenderbuffers, GLint *numRenderbuffers)
 {
   UNUSED_PARAMETER(renderbuffers);
   UNUSED_PARAMETER(maxRenderbuffers);
@@ -20657,7 +20657,7 @@ void REGAL_CALL missing_glExtGetRenderbuffersQCOM(GLuint *renderbuffers, GLint m
   Warning( "glExtGetRenderbuffersQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetTexLevelParameterivQCOM(GLuint texture, GLenum face, GLint level, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glExtGetTexLevelParameterivQCOM(GLuint texture, GLenum face, GLint level, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(face);
@@ -20667,7 +20667,7 @@ void REGAL_CALL missing_glExtGetTexLevelParameterivQCOM(GLuint texture, GLenum f
   Warning( "glExtGetTexLevelParameterivQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetTexSubImageQCOM(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLvoid *texels)
+static void REGAL_CALL missing_glExtGetTexSubImageQCOM(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLvoid *texels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -20683,7 +20683,7 @@ void REGAL_CALL missing_glExtGetTexSubImageQCOM(GLenum target, GLint level, GLin
   Warning( "glExtGetTexSubImageQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetTexturesQCOM(GLuint *textures, GLint maxTextures, GLint *numTextures)
+static void REGAL_CALL missing_glExtGetTexturesQCOM(GLuint *textures, GLint maxTextures, GLint *numTextures)
 {
   UNUSED_PARAMETER(textures);
   UNUSED_PARAMETER(maxTextures);
@@ -20691,7 +20691,7 @@ void REGAL_CALL missing_glExtGetTexturesQCOM(GLuint *textures, GLint maxTextures
   Warning( "glExtGetTexturesQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtTexObjectStateOverrideiQCOM(GLenum target, GLenum pname, GLint param)
+static void REGAL_CALL missing_glExtTexObjectStateOverrideiQCOM(GLenum target, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -20701,7 +20701,7 @@ void REGAL_CALL missing_glExtTexObjectStateOverrideiQCOM(GLenum target, GLenum p
 
 // GL_QCOM_extended_get2
 
-void REGAL_CALL missing_glExtGetProgramBinarySourceQCOM(GLuint program, GLenum shadertype, GLchar *source, GLint *length)
+static void REGAL_CALL missing_glExtGetProgramBinarySourceQCOM(GLuint program, GLenum shadertype, GLchar *source, GLint *length)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(shadertype);
@@ -20710,7 +20710,7 @@ void REGAL_CALL missing_glExtGetProgramBinarySourceQCOM(GLuint program, GLenum s
   Warning( "glExtGetProgramBinarySourceQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetProgramsQCOM(GLuint *programs, GLint maxPrograms, GLint *numPrograms)
+static void REGAL_CALL missing_glExtGetProgramsQCOM(GLuint *programs, GLint maxPrograms, GLint *numPrograms)
 {
   UNUSED_PARAMETER(programs);
   UNUSED_PARAMETER(maxPrograms);
@@ -20718,7 +20718,7 @@ void REGAL_CALL missing_glExtGetProgramsQCOM(GLuint *programs, GLint maxPrograms
   Warning( "glExtGetProgramsQCOM not available." );
 }
 
-void REGAL_CALL missing_glExtGetShadersQCOM(GLuint *shaders, GLint maxShaders, GLint *numShaders)
+static void REGAL_CALL missing_glExtGetShadersQCOM(GLuint *shaders, GLint maxShaders, GLint *numShaders)
 {
   UNUSED_PARAMETER(shaders);
   UNUSED_PARAMETER(maxShaders);
@@ -20726,7 +20726,7 @@ void REGAL_CALL missing_glExtGetShadersQCOM(GLuint *shaders, GLint maxShaders, G
   Warning( "glExtGetShadersQCOM not available." );
 }
 
-GLboolean REGAL_CALL missing_glExtIsProgramBinaryQCOM(GLuint program)
+static GLboolean REGAL_CALL missing_glExtIsProgramBinaryQCOM(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glExtIsProgramBinaryQCOM not available." );
@@ -20735,13 +20735,13 @@ GLboolean REGAL_CALL missing_glExtIsProgramBinaryQCOM(GLuint program)
 
 // GL_QCOM_tiled_rendering
 
-void REGAL_CALL missing_glEndTilingQCOM(GLbitfield preserveMask)
+static void REGAL_CALL missing_glEndTilingQCOM(GLbitfield preserveMask)
 {
   UNUSED_PARAMETER(preserveMask);
   Warning( "glEndTilingQCOM not available." );
 }
 
-void REGAL_CALL missing_glStartTilingQCOM(GLuint x, GLuint y, GLuint width, GLuint height, GLbitfield preserveMask)
+static void REGAL_CALL missing_glStartTilingQCOM(GLuint x, GLuint y, GLuint width, GLuint height, GLbitfield preserveMask)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -20753,14 +20753,14 @@ void REGAL_CALL missing_glStartTilingQCOM(GLuint x, GLuint y, GLuint width, GLui
 
 // GL_REGAL_ES1_0_compatibility
 
-void REGAL_CALL missing_glAlphaFuncx(GLenum func, GLclampx ref)
+static void REGAL_CALL missing_glAlphaFuncx(GLenum func, GLclampx ref)
 {
   UNUSED_PARAMETER(func);
   UNUSED_PARAMETER(ref);
   Warning( "glAlphaFuncx not available." );
 }
 
-void REGAL_CALL missing_glClearColorx(GLclampx red, GLclampx green, GLclampx blue, GLclampx alpha)
+static void REGAL_CALL missing_glClearColorx(GLclampx red, GLclampx green, GLclampx blue, GLclampx alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -20769,13 +20769,13 @@ void REGAL_CALL missing_glClearColorx(GLclampx red, GLclampx green, GLclampx blu
   Warning( "glClearColorx not available." );
 }
 
-void REGAL_CALL missing_glClearDepthx(GLclampx depth)
+static void REGAL_CALL missing_glClearDepthx(GLclampx depth)
 {
   UNUSED_PARAMETER(depth);
   Warning( "glClearDepthx not available." );
 }
 
-void REGAL_CALL missing_glColor4x(GLfixed red, GLfixed green, GLfixed blue, GLfixed alpha)
+static void REGAL_CALL missing_glColor4x(GLfixed red, GLfixed green, GLfixed blue, GLfixed alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -20784,28 +20784,28 @@ void REGAL_CALL missing_glColor4x(GLfixed red, GLfixed green, GLfixed blue, GLfi
   Warning( "glColor4x not available." );
 }
 
-void REGAL_CALL missing_glDepthRangex(GLclampx zNear, GLclampx zFar)
+static void REGAL_CALL missing_glDepthRangex(GLclampx zNear, GLclampx zFar)
 {
   UNUSED_PARAMETER(zNear);
   UNUSED_PARAMETER(zFar);
   Warning( "glDepthRangex not available." );
 }
 
-void REGAL_CALL missing_glFogx(GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glFogx(GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFogx not available." );
 }
 
-void REGAL_CALL missing_glFogxv(GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glFogxv(GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFogxv not available." );
 }
 
-void REGAL_CALL missing_glFrustumf(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
+static void REGAL_CALL missing_glFrustumf(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
 {
   UNUSED_PARAMETER(left);
   UNUSED_PARAMETER(right);
@@ -20816,7 +20816,7 @@ void REGAL_CALL missing_glFrustumf(GLfloat left, GLfloat right, GLfloat bottom, 
   Warning( "glFrustumf not available." );
 }
 
-void REGAL_CALL missing_glFrustumx(GLfixed left, GLfixed right, GLfixed bottom, GLfixed top, GLfixed zNear, GLfixed zFar)
+static void REGAL_CALL missing_glFrustumx(GLfixed left, GLfixed right, GLfixed bottom, GLfixed top, GLfixed zNear, GLfixed zFar)
 {
   UNUSED_PARAMETER(left);
   UNUSED_PARAMETER(right);
@@ -20827,21 +20827,21 @@ void REGAL_CALL missing_glFrustumx(GLfixed left, GLfixed right, GLfixed bottom, 
   Warning( "glFrustumx not available." );
 }
 
-void REGAL_CALL missing_glLightModelx(GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glLightModelx(GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glLightModelx not available." );
 }
 
-void REGAL_CALL missing_glLightModelxv(GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glLightModelxv(GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glLightModelxv not available." );
 }
 
-void REGAL_CALL missing_glLightx(GLenum light, GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glLightx(GLenum light, GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -20849,7 +20849,7 @@ void REGAL_CALL missing_glLightx(GLenum light, GLenum pname, GLfixed param)
   Warning( "glLightx not available." );
 }
 
-void REGAL_CALL missing_glLightxv(GLenum light, GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glLightxv(GLenum light, GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -20857,19 +20857,19 @@ void REGAL_CALL missing_glLightxv(GLenum light, GLenum pname, const GLfixed *par
   Warning( "glLightxv not available." );
 }
 
-void REGAL_CALL missing_glLineWidthx(GLfixed width)
+static void REGAL_CALL missing_glLineWidthx(GLfixed width)
 {
   UNUSED_PARAMETER(width);
   Warning( "glLineWidthx not available." );
 }
 
-void REGAL_CALL missing_glLoadMatrixx(const GLfixed *m)
+static void REGAL_CALL missing_glLoadMatrixx(const GLfixed *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glLoadMatrixx not available." );
 }
 
-void REGAL_CALL missing_glMaterialx(GLenum face, GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glMaterialx(GLenum face, GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -20877,7 +20877,7 @@ void REGAL_CALL missing_glMaterialx(GLenum face, GLenum pname, GLfixed param)
   Warning( "glMaterialx not available." );
 }
 
-void REGAL_CALL missing_glMaterialxv(GLenum face, GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glMaterialxv(GLenum face, GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -20885,13 +20885,13 @@ void REGAL_CALL missing_glMaterialxv(GLenum face, GLenum pname, const GLfixed *p
   Warning( "glMaterialxv not available." );
 }
 
-void REGAL_CALL missing_glMultMatrixx(const GLfixed *m)
+static void REGAL_CALL missing_glMultMatrixx(const GLfixed *m)
 {
   UNUSED_PARAMETER(m);
   Warning( "glMultMatrixx not available." );
 }
 
-void REGAL_CALL missing_glMultiTexCoord4x(GLenum target, GLfixed s, GLfixed t, GLfixed r, GLfixed q)
+static void REGAL_CALL missing_glMultiTexCoord4x(GLenum target, GLfixed s, GLfixed t, GLfixed r, GLfixed q)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(s);
@@ -20901,7 +20901,7 @@ void REGAL_CALL missing_glMultiTexCoord4x(GLenum target, GLfixed s, GLfixed t, G
   Warning( "glMultiTexCoord4x not available." );
 }
 
-void REGAL_CALL missing_glNormal3x(GLfixed nx, GLfixed ny, GLfixed nz)
+static void REGAL_CALL missing_glNormal3x(GLfixed nx, GLfixed ny, GLfixed nz)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -20909,7 +20909,7 @@ void REGAL_CALL missing_glNormal3x(GLfixed nx, GLfixed ny, GLfixed nz)
   Warning( "glNormal3x not available." );
 }
 
-void REGAL_CALL missing_glOrthof(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
+static void REGAL_CALL missing_glOrthof(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
 {
   UNUSED_PARAMETER(left);
   UNUSED_PARAMETER(right);
@@ -20920,7 +20920,7 @@ void REGAL_CALL missing_glOrthof(GLfloat left, GLfloat right, GLfloat bottom, GL
   Warning( "glOrthof not available." );
 }
 
-void REGAL_CALL missing_glOrthox(GLfixed left, GLfixed right, GLfixed bottom, GLfixed top, GLfixed zNear, GLfixed zFar)
+static void REGAL_CALL missing_glOrthox(GLfixed left, GLfixed right, GLfixed bottom, GLfixed top, GLfixed zNear, GLfixed zFar)
 {
   UNUSED_PARAMETER(left);
   UNUSED_PARAMETER(right);
@@ -20931,20 +20931,20 @@ void REGAL_CALL missing_glOrthox(GLfixed left, GLfixed right, GLfixed bottom, GL
   Warning( "glOrthox not available." );
 }
 
-void REGAL_CALL missing_glPointSizex(GLfixed size)
+static void REGAL_CALL missing_glPointSizex(GLfixed size)
 {
   UNUSED_PARAMETER(size);
   Warning( "glPointSizex not available." );
 }
 
-void REGAL_CALL missing_glPolygonOffsetx(GLfixed factor, GLfixed units)
+static void REGAL_CALL missing_glPolygonOffsetx(GLfixed factor, GLfixed units)
 {
   UNUSED_PARAMETER(factor);
   UNUSED_PARAMETER(units);
   Warning( "glPolygonOffsetx not available." );
 }
 
-void REGAL_CALL missing_glRotatex(GLfixed angle, GLfixed x, GLfixed y, GLfixed z)
+static void REGAL_CALL missing_glRotatex(GLfixed angle, GLfixed x, GLfixed y, GLfixed z)
 {
   UNUSED_PARAMETER(angle);
   UNUSED_PARAMETER(x);
@@ -20953,14 +20953,14 @@ void REGAL_CALL missing_glRotatex(GLfixed angle, GLfixed x, GLfixed y, GLfixed z
   Warning( "glRotatex not available." );
 }
 
-void REGAL_CALL missing_glSampleCoveragex(GLclampx value, GLboolean invert)
+static void REGAL_CALL missing_glSampleCoveragex(GLclampx value, GLboolean invert)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(invert);
   Warning( "glSampleCoveragex not available." );
 }
 
-void REGAL_CALL missing_glScalex(GLfixed x, GLfixed y, GLfixed z)
+static void REGAL_CALL missing_glScalex(GLfixed x, GLfixed y, GLfixed z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -20968,7 +20968,7 @@ void REGAL_CALL missing_glScalex(GLfixed x, GLfixed y, GLfixed z)
   Warning( "glScalex not available." );
 }
 
-void REGAL_CALL missing_glTexEnvx(GLenum target, GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glTexEnvx(GLenum target, GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -20976,7 +20976,7 @@ void REGAL_CALL missing_glTexEnvx(GLenum target, GLenum pname, GLfixed param)
   Warning( "glTexEnvx not available." );
 }
 
-void REGAL_CALL missing_glTexEnvxv(GLenum target, GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glTexEnvxv(GLenum target, GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -20984,7 +20984,7 @@ void REGAL_CALL missing_glTexEnvxv(GLenum target, GLenum pname, const GLfixed *p
   Warning( "glTexEnvxv not available." );
 }
 
-void REGAL_CALL missing_glTexParameterx(GLenum target, GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glTexParameterx(GLenum target, GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -20992,7 +20992,7 @@ void REGAL_CALL missing_glTexParameterx(GLenum target, GLenum pname, GLfixed par
   Warning( "glTexParameterx not available." );
 }
 
-void REGAL_CALL missing_glTranslatex(GLfixed x, GLfixed y, GLfixed z)
+static void REGAL_CALL missing_glTranslatex(GLfixed x, GLfixed y, GLfixed z)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -21002,42 +21002,42 @@ void REGAL_CALL missing_glTranslatex(GLfixed x, GLfixed y, GLfixed z)
 
 // GL_REGAL_ES1_1_compatibility
 
-void REGAL_CALL missing_glClipPlanef(GLenum plane, const GLfloat *equation)
+static void REGAL_CALL missing_glClipPlanef(GLenum plane, const GLfloat *equation)
 {
   UNUSED_PARAMETER(plane);
   UNUSED_PARAMETER(equation);
   Warning( "glClipPlanef not available." );
 }
 
-void REGAL_CALL missing_glClipPlanex(GLenum plane, const GLfixed *equation)
+static void REGAL_CALL missing_glClipPlanex(GLenum plane, const GLfixed *equation)
 {
   UNUSED_PARAMETER(plane);
   UNUSED_PARAMETER(equation);
   Warning( "glClipPlanex not available." );
 }
 
-void REGAL_CALL missing_glGetClipPlanef(GLenum pname, GLfloat *eqn)
+static void REGAL_CALL missing_glGetClipPlanef(GLenum pname, GLfloat *eqn)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(eqn);
   Warning( "glGetClipPlanef not available." );
 }
 
-void REGAL_CALL missing_glGetClipPlanex(GLenum pname, GLfixed *eqn)
+static void REGAL_CALL missing_glGetClipPlanex(GLenum pname, GLfixed *eqn)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(eqn);
   Warning( "glGetClipPlanex not available." );
 }
 
-void REGAL_CALL missing_glGetFixedv(GLenum pname, GLfixed *params)
+static void REGAL_CALL missing_glGetFixedv(GLenum pname, GLfixed *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetFixedv not available." );
 }
 
-void REGAL_CALL missing_glGetLightxv(GLenum light, GLenum pname, GLfixed *params)
+static void REGAL_CALL missing_glGetLightxv(GLenum light, GLenum pname, GLfixed *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21045,7 +21045,7 @@ void REGAL_CALL missing_glGetLightxv(GLenum light, GLenum pname, GLfixed *params
   Warning( "glGetLightxv not available." );
 }
 
-void REGAL_CALL missing_glGetMaterialxv(GLenum face, GLenum pname, GLfixed *params)
+static void REGAL_CALL missing_glGetMaterialxv(GLenum face, GLenum pname, GLfixed *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21053,7 +21053,7 @@ void REGAL_CALL missing_glGetMaterialxv(GLenum face, GLenum pname, GLfixed *para
   Warning( "glGetMaterialxv not available." );
 }
 
-void REGAL_CALL missing_glGetTexEnvxv(GLenum env, GLenum pname, GLfixed *params)
+static void REGAL_CALL missing_glGetTexEnvxv(GLenum env, GLenum pname, GLfixed *params)
 {
   UNUSED_PARAMETER(env);
   UNUSED_PARAMETER(pname);
@@ -21061,7 +21061,7 @@ void REGAL_CALL missing_glGetTexEnvxv(GLenum env, GLenum pname, GLfixed *params)
   Warning( "glGetTexEnvxv not available." );
 }
 
-void REGAL_CALL missing_glGetTexParameterxv(GLenum target, GLenum pname, GLfixed *params)
+static void REGAL_CALL missing_glGetTexParameterxv(GLenum target, GLenum pname, GLfixed *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -21069,21 +21069,21 @@ void REGAL_CALL missing_glGetTexParameterxv(GLenum target, GLenum pname, GLfixed
   Warning( "glGetTexParameterxv not available." );
 }
 
-void REGAL_CALL missing_glPointParameterx(GLenum pname, GLfixed param)
+static void REGAL_CALL missing_glPointParameterx(GLenum pname, GLfixed param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameterx not available." );
 }
 
-void REGAL_CALL missing_glPointParameterxv(GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glPointParameterxv(GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glPointParameterxv not available." );
 }
 
-void REGAL_CALL missing_glPointSizePointerOES(GLenum type, GLsizei stride, const GLvoid *pointer)
+static void REGAL_CALL missing_glPointSizePointerOES(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -21091,7 +21091,7 @@ void REGAL_CALL missing_glPointSizePointerOES(GLenum type, GLsizei stride, const
   Warning( "glPointSizePointerOES not available." );
 }
 
-void REGAL_CALL missing_glTexParameterxv(GLenum target, GLenum pname, const GLfixed *params)
+static void REGAL_CALL missing_glTexParameterxv(GLenum target, GLenum pname, const GLfixed *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -21101,7 +21101,7 @@ void REGAL_CALL missing_glTexParameterxv(GLenum target, GLenum pname, const GLfi
 
 // GL_REGAL_log
 
-void REGAL_CALL missing_glLogMessageCallbackREGAL(GLLOGPROCREGAL callback)
+static void REGAL_CALL missing_glLogMessageCallbackREGAL(GLLOGPROCREGAL callback)
 {
   UNUSED_PARAMETER(callback);
   Warning( "glLogMessageCallbackREGAL not available." );
@@ -21109,7 +21109,7 @@ void REGAL_CALL missing_glLogMessageCallbackREGAL(GLLOGPROCREGAL callback)
 
 // GL_SGIS_detail_texture
 
-void REGAL_CALL missing_glDetailTexFuncSGIS(GLenum target, GLsizei n, const GLfloat *points)
+static void REGAL_CALL missing_glDetailTexFuncSGIS(GLenum target, GLsizei n, const GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(n);
@@ -21117,7 +21117,7 @@ void REGAL_CALL missing_glDetailTexFuncSGIS(GLenum target, GLsizei n, const GLfl
   Warning( "glDetailTexFuncSGIS not available." );
 }
 
-void REGAL_CALL missing_glGetDetailTexFuncSGIS(GLenum target, GLfloat *points)
+static void REGAL_CALL missing_glGetDetailTexFuncSGIS(GLenum target, GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(points);
@@ -21126,14 +21126,14 @@ void REGAL_CALL missing_glGetDetailTexFuncSGIS(GLenum target, GLfloat *points)
 
 // GL_SGIS_fog_function
 
-void REGAL_CALL missing_glFogFuncSGIS(GLsizei n, const GLfloat *points)
+static void REGAL_CALL missing_glFogFuncSGIS(GLsizei n, const GLfloat *points)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(points);
   Warning( "glFogFuncSGIS not available." );
 }
 
-void REGAL_CALL missing_glGetFogFuncSGIS(GLfloat *points)
+static void REGAL_CALL missing_glGetFogFuncSGIS(GLfloat *points)
 {
   UNUSED_PARAMETER(points);
   Warning( "glGetFogFuncSGIS not available." );
@@ -21141,14 +21141,14 @@ void REGAL_CALL missing_glGetFogFuncSGIS(GLfloat *points)
 
 // GL_SGIS_multisample
 
-void REGAL_CALL missing_glSampleMaskSGIS(GLclampf value, GLboolean invert)
+static void REGAL_CALL missing_glSampleMaskSGIS(GLclampf value, GLboolean invert)
 {
   UNUSED_PARAMETER(value);
   UNUSED_PARAMETER(invert);
   Warning( "glSampleMaskSGIS not available." );
 }
 
-void REGAL_CALL missing_glSamplePatternSGIS(GLenum pattern)
+static void REGAL_CALL missing_glSamplePatternSGIS(GLenum pattern)
 {
   UNUSED_PARAMETER(pattern);
   Warning( "glSamplePatternSGIS not available." );
@@ -21156,42 +21156,42 @@ void REGAL_CALL missing_glSamplePatternSGIS(GLenum pattern)
 
 // GL_SGIS_pixel_texture
 
-void REGAL_CALL missing_glGetPixelTexGenParameterfvSGIS(GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetPixelTexGenParameterfvSGIS(GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetPixelTexGenParameterfvSGIS not available." );
 }
 
-void REGAL_CALL missing_glGetPixelTexGenParameterivSGIS(GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetPixelTexGenParameterivSGIS(GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glGetPixelTexGenParameterivSGIS not available." );
 }
 
-void REGAL_CALL missing_glPixelTexGenParameterfSGIS(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPixelTexGenParameterfSGIS(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPixelTexGenParameterfSGIS not available." );
 }
 
-void REGAL_CALL missing_glPixelTexGenParameterfvSGIS(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glPixelTexGenParameterfvSGIS(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glPixelTexGenParameterfvSGIS not available." );
 }
 
-void REGAL_CALL missing_glPixelTexGenParameteriSGIS(GLenum pname, GLint param)
+static void REGAL_CALL missing_glPixelTexGenParameteriSGIS(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPixelTexGenParameteriSGIS not available." );
 }
 
-void REGAL_CALL missing_glPixelTexGenParameterivSGIS(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glPixelTexGenParameterivSGIS(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -21200,14 +21200,14 @@ void REGAL_CALL missing_glPixelTexGenParameterivSGIS(GLenum pname, const GLint *
 
 // GL_SGIS_point_parameters
 
-void REGAL_CALL missing_glPointParameterfSGIS(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glPointParameterfSGIS(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glPointParameterfSGIS not available." );
 }
 
-void REGAL_CALL missing_glPointParameterfvSGIS(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glPointParameterfvSGIS(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -21216,14 +21216,14 @@ void REGAL_CALL missing_glPointParameterfvSGIS(GLenum pname, const GLfloat *para
 
 // GL_SGIS_sharpen_texture
 
-void REGAL_CALL missing_glGetSharpenTexFuncSGIS(GLenum target, GLfloat *points)
+static void REGAL_CALL missing_glGetSharpenTexFuncSGIS(GLenum target, GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(points);
   Warning( "glGetSharpenTexFuncSGIS not available." );
 }
 
-void REGAL_CALL missing_glSharpenTexFuncSGIS(GLenum target, GLsizei n, const GLfloat *points)
+static void REGAL_CALL missing_glSharpenTexFuncSGIS(GLenum target, GLsizei n, const GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(n);
@@ -21233,7 +21233,7 @@ void REGAL_CALL missing_glSharpenTexFuncSGIS(GLenum target, GLsizei n, const GLf
 
 // GL_SGIS_texture4D
 
-void REGAL_CALL missing_glTexImage4DSGIS(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLsizei size4d, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexImage4DSGIS(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLsizei size4d, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -21249,7 +21249,7 @@ void REGAL_CALL missing_glTexImage4DSGIS(GLenum target, GLint level, GLenum inte
   Warning( "glTexImage4DSGIS not available." );
 }
 
-void REGAL_CALL missing_glTexSubImage4DSGIS(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei size4d, GLenum format, GLenum type, const GLvoid *pixels)
+static void REGAL_CALL missing_glTexSubImage4DSGIS(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei size4d, GLenum format, GLenum type, const GLvoid *pixels)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(level);
@@ -21269,7 +21269,7 @@ void REGAL_CALL missing_glTexSubImage4DSGIS(GLenum target, GLint level, GLint xo
 
 // GL_SGIS_texture_color_mask
 
-void REGAL_CALL missing_glTextureColorMaskSGIS(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
+static void REGAL_CALL missing_glTextureColorMaskSGIS(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha)
 {
   UNUSED_PARAMETER(red);
   UNUSED_PARAMETER(green);
@@ -21280,7 +21280,7 @@ void REGAL_CALL missing_glTextureColorMaskSGIS(GLboolean red, GLboolean green, G
 
 // GL_SGIS_texture_filter4
 
-void REGAL_CALL missing_glGetTexFilterFuncSGIS(GLenum target, GLenum filter, GLfloat *weights)
+static void REGAL_CALL missing_glGetTexFilterFuncSGIS(GLenum target, GLenum filter, GLfloat *weights)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(filter);
@@ -21288,7 +21288,7 @@ void REGAL_CALL missing_glGetTexFilterFuncSGIS(GLenum target, GLenum filter, GLf
   Warning( "glGetTexFilterFuncSGIS not available." );
 }
 
-void REGAL_CALL missing_glTexFilterFuncSGIS(GLenum target, GLenum filter, GLsizei n, const GLfloat *weights)
+static void REGAL_CALL missing_glTexFilterFuncSGIS(GLenum target, GLenum filter, GLsizei n, const GLfloat *weights)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(filter);
@@ -21299,41 +21299,41 @@ void REGAL_CALL missing_glTexFilterFuncSGIS(GLenum target, GLenum filter, GLsize
 
 // GL_SGIX_async
 
-void REGAL_CALL missing_glAsyncMarkerSGIX(GLuint marker)
+static void REGAL_CALL missing_glAsyncMarkerSGIX(GLuint marker)
 {
   UNUSED_PARAMETER(marker);
   Warning( "glAsyncMarkerSGIX not available." );
 }
 
-void REGAL_CALL missing_glDeleteAsyncMarkersSGIX(GLuint marker, GLsizei range)
+static void REGAL_CALL missing_glDeleteAsyncMarkersSGIX(GLuint marker, GLsizei range)
 {
   UNUSED_PARAMETER(marker);
   UNUSED_PARAMETER(range);
   Warning( "glDeleteAsyncMarkersSGIX not available." );
 }
 
-GLint REGAL_CALL missing_glFinishAsyncSGIX(GLuint *markerp)
+static GLint REGAL_CALL missing_glFinishAsyncSGIX(GLuint *markerp)
 {
   UNUSED_PARAMETER(markerp);
   Warning( "glFinishAsyncSGIX not available." );
   return (GLint )0;
 }
 
-GLuint REGAL_CALL missing_glGenAsyncMarkersSGIX(GLsizei range)
+static GLuint REGAL_CALL missing_glGenAsyncMarkersSGIX(GLsizei range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenAsyncMarkersSGIX not available." );
   return (GLuint )0;
 }
 
-GLboolean REGAL_CALL missing_glIsAsyncMarkerSGIX(GLuint marker)
+static GLboolean REGAL_CALL missing_glIsAsyncMarkerSGIX(GLuint marker)
 {
   UNUSED_PARAMETER(marker);
   Warning( "glIsAsyncMarkerSGIX not available." );
   return (GLboolean )0;
 }
 
-GLint REGAL_CALL missing_glPollAsyncSGIX(GLuint *markerp)
+static GLint REGAL_CALL missing_glPollAsyncSGIX(GLuint *markerp)
 {
   UNUSED_PARAMETER(markerp);
   Warning( "glPollAsyncSGIX not available." );
@@ -21342,14 +21342,14 @@ GLint REGAL_CALL missing_glPollAsyncSGIX(GLuint *markerp)
 
 // GL_SGIX_flush_raster
 
-void REGAL_CALL missing_glFlushRasterSGIX(void)
+static void REGAL_CALL missing_glFlushRasterSGIX(void)
 {
   Warning( "glFlushRasterSGIX not available." );
 }
 
 // GL_SGIX_fog_texture
 
-void REGAL_CALL missing_glTextureFogSGIX(GLenum pname)
+static void REGAL_CALL missing_glTextureFogSGIX(GLenum pname)
 {
   UNUSED_PARAMETER(pname);
   Warning( "glTextureFogSGIX not available." );
@@ -21357,42 +21357,42 @@ void REGAL_CALL missing_glTextureFogSGIX(GLenum pname)
 
 // GL_SGIX_fragment_lighting
 
-void REGAL_CALL missing_glFragmentColorMaterialSGIX(GLenum face, GLenum mode)
+static void REGAL_CALL missing_glFragmentColorMaterialSGIX(GLenum face, GLenum mode)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(mode);
   Warning( "glFragmentColorMaterialSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModelfSGIX(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glFragmentLightModelfSGIX(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFragmentLightModelfSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModelfvSGIX(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glFragmentLightModelfvSGIX(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFragmentLightModelfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModeliSGIX(GLenum pname, GLint param)
+static void REGAL_CALL missing_glFragmentLightModeliSGIX(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glFragmentLightModeliSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightModelivSGIX(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glFragmentLightModelivSGIX(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glFragmentLightModelivSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightfSGIX(GLenum light, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glFragmentLightfSGIX(GLenum light, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21400,7 +21400,7 @@ void REGAL_CALL missing_glFragmentLightfSGIX(GLenum light, GLenum pname, GLfloat
   Warning( "glFragmentLightfSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightfvSGIX(GLenum light, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glFragmentLightfvSGIX(GLenum light, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21408,7 +21408,7 @@ void REGAL_CALL missing_glFragmentLightfvSGIX(GLenum light, GLenum pname, const 
   Warning( "glFragmentLightfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightiSGIX(GLenum light, GLenum pname, GLint param)
+static void REGAL_CALL missing_glFragmentLightiSGIX(GLenum light, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21416,7 +21416,7 @@ void REGAL_CALL missing_glFragmentLightiSGIX(GLenum light, GLenum pname, GLint p
   Warning( "glFragmentLightiSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentLightivSGIX(GLenum light, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glFragmentLightivSGIX(GLenum light, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21424,7 +21424,7 @@ void REGAL_CALL missing_glFragmentLightivSGIX(GLenum light, GLenum pname, const 
   Warning( "glFragmentLightivSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialfSGIX(GLenum face, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glFragmentMaterialfSGIX(GLenum face, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21432,7 +21432,7 @@ void REGAL_CALL missing_glFragmentMaterialfSGIX(GLenum face, GLenum pname, GLflo
   Warning( "glFragmentMaterialfSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialfvSGIX(GLenum face, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glFragmentMaterialfvSGIX(GLenum face, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21440,7 +21440,7 @@ void REGAL_CALL missing_glFragmentMaterialfvSGIX(GLenum face, GLenum pname, cons
   Warning( "glFragmentMaterialfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialiSGIX(GLenum face, GLenum pname, GLint param)
+static void REGAL_CALL missing_glFragmentMaterialiSGIX(GLenum face, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21448,7 +21448,7 @@ void REGAL_CALL missing_glFragmentMaterialiSGIX(GLenum face, GLenum pname, GLint
   Warning( "glFragmentMaterialiSGIX not available." );
 }
 
-void REGAL_CALL missing_glFragmentMaterialivSGIX(GLenum face, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glFragmentMaterialivSGIX(GLenum face, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21456,7 +21456,7 @@ void REGAL_CALL missing_glFragmentMaterialivSGIX(GLenum face, GLenum pname, cons
   Warning( "glFragmentMaterialivSGIX not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentLightfvSGIX(GLenum light, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetFragmentLightfvSGIX(GLenum light, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21464,7 +21464,7 @@ void REGAL_CALL missing_glGetFragmentLightfvSGIX(GLenum light, GLenum pname, GLf
   Warning( "glGetFragmentLightfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentLightivSGIX(GLenum light, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFragmentLightivSGIX(GLenum light, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(pname);
@@ -21472,7 +21472,7 @@ void REGAL_CALL missing_glGetFragmentLightivSGIX(GLenum light, GLenum pname, GLi
   Warning( "glGetFragmentLightivSGIX not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentMaterialfvSGIX(GLenum face, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetFragmentMaterialfvSGIX(GLenum face, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21480,7 +21480,7 @@ void REGAL_CALL missing_glGetFragmentMaterialfvSGIX(GLenum face, GLenum pname, G
   Warning( "glGetFragmentMaterialfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glGetFragmentMaterialivSGIX(GLenum face, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetFragmentMaterialivSGIX(GLenum face, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(pname);
@@ -21488,7 +21488,7 @@ void REGAL_CALL missing_glGetFragmentMaterialivSGIX(GLenum face, GLenum pname, G
   Warning( "glGetFragmentMaterialivSGIX not available." );
 }
 
-void REGAL_CALL missing_glLightEnviSGIX(GLenum pname, GLint param)
+static void REGAL_CALL missing_glLightEnviSGIX(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
@@ -21497,7 +21497,7 @@ void REGAL_CALL missing_glLightEnviSGIX(GLenum pname, GLint param)
 
 // GL_SGIX_framezoom
 
-void REGAL_CALL missing_glFrameZoomSGIX(GLint factor)
+static void REGAL_CALL missing_glFrameZoomSGIX(GLint factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glFrameZoomSGIX not available." );
@@ -21505,7 +21505,7 @@ void REGAL_CALL missing_glFrameZoomSGIX(GLint factor)
 
 // GL_SGIX_igloo_interface
 
-void REGAL_CALL missing_glIglooInterfaceSGIX(GLenum pname, const GLvoid *params)
+static void REGAL_CALL missing_glIglooInterfaceSGIX(GLenum pname, const GLvoid *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -21514,38 +21514,38 @@ void REGAL_CALL missing_glIglooInterfaceSGIX(GLenum pname, const GLvoid *params)
 
 // GL_SGIX_instruments
 
-GLint REGAL_CALL missing_glGetInstrumentsSGIX(void)
+static GLint REGAL_CALL missing_glGetInstrumentsSGIX(void)
 {
   Warning( "glGetInstrumentsSGIX not available." );
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glInstrumentsBufferSGIX(GLsizei size, GLint *buffer)
+static void REGAL_CALL missing_glInstrumentsBufferSGIX(GLsizei size, GLint *buffer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(buffer);
   Warning( "glInstrumentsBufferSGIX not available." );
 }
 
-GLint REGAL_CALL missing_glPollInstrumentsSGIX(GLint *marker_p)
+static GLint REGAL_CALL missing_glPollInstrumentsSGIX(GLint *marker_p)
 {
   UNUSED_PARAMETER(marker_p);
   Warning( "glPollInstrumentsSGIX not available." );
   return (GLint )0;
 }
 
-void REGAL_CALL missing_glReadInstrumentsSGIX(GLint marker)
+static void REGAL_CALL missing_glReadInstrumentsSGIX(GLint marker)
 {
   UNUSED_PARAMETER(marker);
   Warning( "glReadInstrumentsSGIX not available." );
 }
 
-void REGAL_CALL missing_glStartInstrumentsSGIX(void)
+static void REGAL_CALL missing_glStartInstrumentsSGIX(void)
 {
   Warning( "glStartInstrumentsSGIX not available." );
 }
 
-void REGAL_CALL missing_glStopInstrumentsSGIX(GLint marker)
+static void REGAL_CALL missing_glStopInstrumentsSGIX(GLint marker)
 {
   UNUSED_PARAMETER(marker);
   Warning( "glStopInstrumentsSGIX not available." );
@@ -21553,7 +21553,7 @@ void REGAL_CALL missing_glStopInstrumentsSGIX(GLint marker)
 
 // GL_SGIX_list_priority
 
-void REGAL_CALL missing_glGetListParameterfvSGIX(GLuint list, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetListParameterfvSGIX(GLuint list, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(pname);
@@ -21561,7 +21561,7 @@ void REGAL_CALL missing_glGetListParameterfvSGIX(GLuint list, GLenum pname, GLfl
   Warning( "glGetListParameterfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glGetListParameterivSGIX(GLuint list, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetListParameterivSGIX(GLuint list, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(pname);
@@ -21569,7 +21569,7 @@ void REGAL_CALL missing_glGetListParameterivSGIX(GLuint list, GLenum pname, GLin
   Warning( "glGetListParameterivSGIX not available." );
 }
 
-void REGAL_CALL missing_glListParameterfSGIX(GLuint list, GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glListParameterfSGIX(GLuint list, GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(pname);
@@ -21577,7 +21577,7 @@ void REGAL_CALL missing_glListParameterfSGIX(GLuint list, GLenum pname, GLfloat 
   Warning( "glListParameterfSGIX not available." );
 }
 
-void REGAL_CALL missing_glListParameterfvSGIX(GLuint list, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glListParameterfvSGIX(GLuint list, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(pname);
@@ -21585,7 +21585,7 @@ void REGAL_CALL missing_glListParameterfvSGIX(GLuint list, GLenum pname, const G
   Warning( "glListParameterfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glListParameteriSGIX(GLuint list, GLenum pname, GLint param)
+static void REGAL_CALL missing_glListParameteriSGIX(GLuint list, GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(pname);
@@ -21593,7 +21593,7 @@ void REGAL_CALL missing_glListParameteriSGIX(GLuint list, GLenum pname, GLint pa
   Warning( "glListParameteriSGIX not available." );
 }
 
-void REGAL_CALL missing_glListParameterivSGIX(GLuint list, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glListParameterivSGIX(GLuint list, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(list);
   UNUSED_PARAMETER(pname);
@@ -21603,7 +21603,7 @@ void REGAL_CALL missing_glListParameterivSGIX(GLuint list, GLenum pname, const G
 
 // GL_SGIX_pixel_texture
 
-void REGAL_CALL missing_glPixelTexGenSGIX(GLenum mode)
+static void REGAL_CALL missing_glPixelTexGenSGIX(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glPixelTexGenSGIX not available." );
@@ -21611,13 +21611,13 @@ void REGAL_CALL missing_glPixelTexGenSGIX(GLenum mode)
 
 // GL_SGIX_polynomial_ffd
 
-void REGAL_CALL missing_glDeformSGIX(GLbitfield mask)
+static void REGAL_CALL missing_glDeformSGIX(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glDeformSGIX not available." );
 }
 
-void REGAL_CALL missing_glDeformationMap3dSGIX(GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, GLdouble w1, GLdouble w2, GLint wstride, GLint worder, const GLdouble *points)
+static void REGAL_CALL missing_glDeformationMap3dSGIX(GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, GLdouble w1, GLdouble w2, GLint wstride, GLint worder, const GLdouble *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(u1);
@@ -21636,7 +21636,7 @@ void REGAL_CALL missing_glDeformationMap3dSGIX(GLenum target, GLdouble u1, GLdou
   Warning( "glDeformationMap3dSGIX not available." );
 }
 
-void REGAL_CALL missing_glDeformationMap3fSGIX(GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, GLfloat w1, GLfloat w2, GLint wstride, GLint worder, const GLfloat *points)
+static void REGAL_CALL missing_glDeformationMap3fSGIX(GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, GLfloat w1, GLfloat w2, GLint wstride, GLint worder, const GLfloat *points)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(u1);
@@ -21655,7 +21655,7 @@ void REGAL_CALL missing_glDeformationMap3fSGIX(GLenum target, GLfloat u1, GLfloa
   Warning( "glDeformationMap3fSGIX not available." );
 }
 
-void REGAL_CALL missing_glLoadIdentityDeformationMapSGIX(GLbitfield mask)
+static void REGAL_CALL missing_glLoadIdentityDeformationMapSGIX(GLbitfield mask)
 {
   UNUSED_PARAMETER(mask);
   Warning( "glLoadIdentityDeformationMapSGIX not available." );
@@ -21663,7 +21663,7 @@ void REGAL_CALL missing_glLoadIdentityDeformationMapSGIX(GLbitfield mask)
 
 // GL_SGIX_reference_plane
 
-void REGAL_CALL missing_glReferencePlaneSGIX(const GLdouble *equation)
+static void REGAL_CALL missing_glReferencePlaneSGIX(const GLdouble *equation)
 {
   UNUSED_PARAMETER(equation);
   Warning( "glReferencePlaneSGIX not available." );
@@ -21671,28 +21671,28 @@ void REGAL_CALL missing_glReferencePlaneSGIX(const GLdouble *equation)
 
 // GL_SGIX_sprite
 
-void REGAL_CALL missing_glSpriteParameterfSGIX(GLenum pname, GLfloat param)
+static void REGAL_CALL missing_glSpriteParameterfSGIX(GLenum pname, GLfloat param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glSpriteParameterfSGIX not available." );
 }
 
-void REGAL_CALL missing_glSpriteParameterfvSGIX(GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glSpriteParameterfvSGIX(GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
   Warning( "glSpriteParameterfvSGIX not available." );
 }
 
-void REGAL_CALL missing_glSpriteParameteriSGIX(GLenum pname, GLint param)
+static void REGAL_CALL missing_glSpriteParameteriSGIX(GLenum pname, GLint param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glSpriteParameteriSGIX not available." );
 }
 
-void REGAL_CALL missing_glSpriteParameterivSGIX(GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glSpriteParameterivSGIX(GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(params);
@@ -21701,14 +21701,14 @@ void REGAL_CALL missing_glSpriteParameterivSGIX(GLenum pname, const GLint *param
 
 // GL_SGIX_tag_sample_buffer
 
-void REGAL_CALL missing_glTagSampleBufferSGIX(void)
+static void REGAL_CALL missing_glTagSampleBufferSGIX(void)
 {
   Warning( "glTagSampleBufferSGIX not available." );
 }
 
 // GL_SGI_color_table
 
-void REGAL_CALL missing_glColorTableParameterfvSGI(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL missing_glColorTableParameterfvSGI(GLenum target, GLenum pname, const GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -21716,7 +21716,7 @@ void REGAL_CALL missing_glColorTableParameterfvSGI(GLenum target, GLenum pname, 
   Warning( "glColorTableParameterfvSGI not available." );
 }
 
-void REGAL_CALL missing_glColorTableParameterivSGI(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL missing_glColorTableParameterivSGI(GLenum target, GLenum pname, const GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -21724,7 +21724,7 @@ void REGAL_CALL missing_glColorTableParameterivSGI(GLenum target, GLenum pname, 
   Warning( "glColorTableParameterivSGI not available." );
 }
 
-void REGAL_CALL missing_glColorTableSGI(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table)
+static void REGAL_CALL missing_glColorTableSGI(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -21735,7 +21735,7 @@ void REGAL_CALL missing_glColorTableSGI(GLenum target, GLenum internalformat, GL
   Warning( "glColorTableSGI not available." );
 }
 
-void REGAL_CALL missing_glCopyColorTableSGI(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
+static void REGAL_CALL missing_glCopyColorTableSGI(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(internalformat);
@@ -21745,7 +21745,7 @@ void REGAL_CALL missing_glCopyColorTableSGI(GLenum target, GLenum internalformat
   Warning( "glCopyColorTableSGI not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableParameterfvSGI(GLenum target, GLenum pname, GLfloat *params)
+static void REGAL_CALL missing_glGetColorTableParameterfvSGI(GLenum target, GLenum pname, GLfloat *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -21753,7 +21753,7 @@ void REGAL_CALL missing_glGetColorTableParameterfvSGI(GLenum target, GLenum pnam
   Warning( "glGetColorTableParameterfvSGI not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableParameterivSGI(GLenum target, GLenum pname, GLint *params)
+static void REGAL_CALL missing_glGetColorTableParameterivSGI(GLenum target, GLenum pname, GLint *params)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(pname);
@@ -21761,7 +21761,7 @@ void REGAL_CALL missing_glGetColorTableParameterivSGI(GLenum target, GLenum pnam
   Warning( "glGetColorTableParameterivSGI not available." );
 }
 
-void REGAL_CALL missing_glGetColorTableSGI(GLenum target, GLenum format, GLenum type, GLvoid *table)
+static void REGAL_CALL missing_glGetColorTableSGI(GLenum target, GLenum format, GLenum type, GLvoid *table)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(format);
@@ -21772,56 +21772,56 @@ void REGAL_CALL missing_glGetColorTableSGI(GLenum target, GLenum format, GLenum 
 
 // GL_SUNX_constant_data
 
-void REGAL_CALL missing_glFinishTextureSUNX(void)
+static void REGAL_CALL missing_glFinishTextureSUNX(void)
 {
   Warning( "glFinishTextureSUNX not available." );
 }
 
 // GL_SUN_global_alpha
 
-void REGAL_CALL missing_glGlobalAlphaFactorbSUN(GLbyte factor)
+static void REGAL_CALL missing_glGlobalAlphaFactorbSUN(GLbyte factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactorbSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactordSUN(GLdouble factor)
+static void REGAL_CALL missing_glGlobalAlphaFactordSUN(GLdouble factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactordSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactorfSUN(GLfloat factor)
+static void REGAL_CALL missing_glGlobalAlphaFactorfSUN(GLfloat factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactorfSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactoriSUN(GLint factor)
+static void REGAL_CALL missing_glGlobalAlphaFactoriSUN(GLint factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactoriSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactorsSUN(GLshort factor)
+static void REGAL_CALL missing_glGlobalAlphaFactorsSUN(GLshort factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactorsSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactorubSUN(GLubyte factor)
+static void REGAL_CALL missing_glGlobalAlphaFactorubSUN(GLubyte factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactorubSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactoruiSUN(GLuint factor)
+static void REGAL_CALL missing_glGlobalAlphaFactoruiSUN(GLuint factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactoruiSUN not available." );
 }
 
-void REGAL_CALL missing_glGlobalAlphaFactorusSUN(GLushort factor)
+static void REGAL_CALL missing_glGlobalAlphaFactorusSUN(GLushort factor)
 {
   UNUSED_PARAMETER(factor);
   Warning( "glGlobalAlphaFactorusSUN not available." );
@@ -21829,7 +21829,7 @@ void REGAL_CALL missing_glGlobalAlphaFactorusSUN(GLushort factor)
 
 // GL_SUN_mesh_array
 
-void REGAL_CALL missing_glDrawMeshArraysSUN(GLenum mode, GLint first, GLsizei count, GLsizei width)
+static void REGAL_CALL missing_glDrawMeshArraysSUN(GLenum mode, GLint first, GLsizei count, GLsizei width)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(first);
@@ -21840,7 +21840,7 @@ void REGAL_CALL missing_glDrawMeshArraysSUN(GLenum mode, GLint first, GLsizei co
 
 // GL_SUN_read_video_pixels
 
-void REGAL_CALL missing_glReadVideoPixelsSUN(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels)
+static void REGAL_CALL missing_glReadVideoPixelsSUN(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
@@ -21854,7 +21854,7 @@ void REGAL_CALL missing_glReadVideoPixelsSUN(GLint x, GLint y, GLsizei width, GL
 
 // GL_SUN_triangle_list
 
-void REGAL_CALL missing_glReplacementCodePointerSUN(GLenum type, GLsizei stride, const GLvoid **pointer)
+static void REGAL_CALL missing_glReplacementCodePointerSUN(GLenum type, GLsizei stride, const GLvoid **pointer)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(stride);
@@ -21862,37 +21862,37 @@ void REGAL_CALL missing_glReplacementCodePointerSUN(GLenum type, GLsizei stride,
   Warning( "glReplacementCodePointerSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeubSUN(GLubyte code)
+static void REGAL_CALL missing_glReplacementCodeubSUN(GLubyte code)
 {
   UNUSED_PARAMETER(code);
   Warning( "glReplacementCodeubSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeubvSUN(const GLubyte *code)
+static void REGAL_CALL missing_glReplacementCodeubvSUN(const GLubyte *code)
 {
   UNUSED_PARAMETER(code);
   Warning( "glReplacementCodeubvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiSUN(GLuint code)
+static void REGAL_CALL missing_glReplacementCodeuiSUN(GLuint code)
 {
   UNUSED_PARAMETER(code);
   Warning( "glReplacementCodeuiSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuivSUN(const GLuint *code)
+static void REGAL_CALL missing_glReplacementCodeuivSUN(const GLuint *code)
 {
   UNUSED_PARAMETER(code);
   Warning( "glReplacementCodeuivSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeusSUN(GLushort code)
+static void REGAL_CALL missing_glReplacementCodeusSUN(GLushort code)
 {
   UNUSED_PARAMETER(code);
   Warning( "glReplacementCodeusSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeusvSUN(const GLushort *code)
+static void REGAL_CALL missing_glReplacementCodeusvSUN(const GLushort *code)
 {
   UNUSED_PARAMETER(code);
   Warning( "glReplacementCodeusvSUN not available." );
@@ -21900,7 +21900,7 @@ void REGAL_CALL missing_glReplacementCodeusvSUN(const GLushort *code)
 
 // GL_SUN_vertex
 
-void REGAL_CALL missing_glColor3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glColor3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(r);
   UNUSED_PARAMETER(g);
@@ -21911,14 +21911,14 @@ void REGAL_CALL missing_glColor3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GL
   Warning( "glColor3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glColor3fVertex3fvSUN(const GLfloat *c, const GLfloat *v)
+static void REGAL_CALL missing_glColor3fVertex3fvSUN(const GLfloat *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(c);
   UNUSED_PARAMETER(v);
   Warning( "glColor3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glColor4fNormal3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glColor4fNormal3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(r);
   UNUSED_PARAMETER(g);
@@ -21933,7 +21933,7 @@ void REGAL_CALL missing_glColor4fNormal3fVertex3fSUN(GLfloat r, GLfloat g, GLflo
   Warning( "glColor4fNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glColor4fNormal3fVertex3fvSUN(const GLfloat *c, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glColor4fNormal3fVertex3fvSUN(const GLfloat *c, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(c);
   UNUSED_PARAMETER(n);
@@ -21941,7 +21941,7 @@ void REGAL_CALL missing_glColor4fNormal3fVertex3fvSUN(const GLfloat *c, const GL
   Warning( "glColor4fNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glColor4ubVertex2fSUN(GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y)
+static void REGAL_CALL missing_glColor4ubVertex2fSUN(GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y)
 {
   UNUSED_PARAMETER(r);
   UNUSED_PARAMETER(g);
@@ -21952,14 +21952,14 @@ void REGAL_CALL missing_glColor4ubVertex2fSUN(GLubyte r, GLubyte g, GLubyte b, G
   Warning( "glColor4ubVertex2fSUN not available." );
 }
 
-void REGAL_CALL missing_glColor4ubVertex2fvSUN(const GLubyte *c, const GLfloat *v)
+static void REGAL_CALL missing_glColor4ubVertex2fvSUN(const GLubyte *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(c);
   UNUSED_PARAMETER(v);
   Warning( "glColor4ubVertex2fvSUN not available." );
 }
 
-void REGAL_CALL missing_glColor4ubVertex3fSUN(GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glColor4ubVertex3fSUN(GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(r);
   UNUSED_PARAMETER(g);
@@ -21971,14 +21971,14 @@ void REGAL_CALL missing_glColor4ubVertex3fSUN(GLubyte r, GLubyte g, GLubyte b, G
   Warning( "glColor4ubVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glColor4ubVertex3fvSUN(const GLubyte *c, const GLfloat *v)
+static void REGAL_CALL missing_glColor4ubVertex3fvSUN(const GLubyte *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(c);
   UNUSED_PARAMETER(v);
   Warning( "glColor4ubVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glNormal3fVertex3fSUN(GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glNormal3fVertex3fSUN(GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(nx);
   UNUSED_PARAMETER(ny);
@@ -21989,14 +21989,14 @@ void REGAL_CALL missing_glNormal3fVertex3fSUN(GLfloat nx, GLfloat ny, GLfloat nz
   Warning( "glNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glNormal3fVertex3fvSUN(const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glNormal3fVertex3fvSUN(const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(v);
   Warning( "glNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiColor3fVertex3fSUN(GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiColor3fVertex3fSUN(GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(r);
@@ -22008,7 +22008,7 @@ void REGAL_CALL missing_glReplacementCodeuiColor3fVertex3fSUN(GLuint rc, GLfloat
   Warning( "glReplacementCodeuiColor3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiColor3fVertex3fvSUN(const GLuint *rc, const GLfloat *c, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiColor3fVertex3fvSUN(const GLuint *rc, const GLfloat *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(c);
@@ -22016,7 +22016,7 @@ void REGAL_CALL missing_glReplacementCodeuiColor3fVertex3fvSUN(const GLuint *rc,
   Warning( "glReplacementCodeuiColor3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiColor4fNormal3fVertex3fSUN(GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiColor4fNormal3fVertex3fSUN(GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(r);
@@ -22032,7 +22032,7 @@ void REGAL_CALL missing_glReplacementCodeuiColor4fNormal3fVertex3fSUN(GLuint rc,
   Warning( "glReplacementCodeuiColor4fNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiColor4fNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiColor4fNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(c);
@@ -22041,7 +22041,7 @@ void REGAL_CALL missing_glReplacementCodeuiColor4fNormal3fVertex3fvSUN(const GLu
   Warning( "glReplacementCodeuiColor4fNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiColor4ubVertex3fSUN(GLuint rc, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiColor4ubVertex3fSUN(GLuint rc, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(r);
@@ -22054,7 +22054,7 @@ void REGAL_CALL missing_glReplacementCodeuiColor4ubVertex3fSUN(GLuint rc, GLubyt
   Warning( "glReplacementCodeuiColor4ubVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiColor4ubVertex3fvSUN(const GLuint *rc, const GLubyte *c, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiColor4ubVertex3fvSUN(const GLuint *rc, const GLubyte *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(c);
@@ -22062,7 +22062,7 @@ void REGAL_CALL missing_glReplacementCodeuiColor4ubVertex3fvSUN(const GLuint *rc
   Warning( "glReplacementCodeuiColor4ubVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiNormal3fVertex3fSUN(GLuint rc, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiNormal3fVertex3fSUN(GLuint rc, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(nx);
@@ -22074,7 +22074,7 @@ void REGAL_CALL missing_glReplacementCodeuiNormal3fVertex3fSUN(GLuint rc, GLfloa
   Warning( "glReplacementCodeuiNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(n);
@@ -22082,7 +22082,7 @@ void REGAL_CALL missing_glReplacementCodeuiNormal3fVertex3fvSUN(const GLuint *rc
   Warning( "glReplacementCodeuiNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(s);
@@ -22100,7 +22100,7 @@ void REGAL_CALL missing_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(
   Warning( "glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(tc);
@@ -22110,7 +22110,7 @@ void REGAL_CALL missing_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN
   Warning( "glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(s);
@@ -22124,7 +22124,7 @@ void REGAL_CALL missing_glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(GLuint 
   Warning( "glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *tc, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(const GLuint *rc, const GLfloat *tc, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(tc);
@@ -22133,7 +22133,7 @@ void REGAL_CALL missing_glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(const 
   Warning( "glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiTexCoord2fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiTexCoord2fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(s);
@@ -22144,7 +22144,7 @@ void REGAL_CALL missing_glReplacementCodeuiTexCoord2fVertex3fSUN(GLuint rc, GLfl
   Warning( "glReplacementCodeuiTexCoord2fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiTexCoord2fVertex3fvSUN(const GLuint *rc, const GLfloat *tc, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiTexCoord2fVertex3fvSUN(const GLuint *rc, const GLfloat *tc, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(tc);
@@ -22152,7 +22152,7 @@ void REGAL_CALL missing_glReplacementCodeuiTexCoord2fVertex3fvSUN(const GLuint *
   Warning( "glReplacementCodeuiTexCoord2fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiVertex3fSUN(GLuint rc, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glReplacementCodeuiVertex3fSUN(GLuint rc, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(x);
@@ -22161,14 +22161,14 @@ void REGAL_CALL missing_glReplacementCodeuiVertex3fSUN(GLuint rc, GLfloat x, GLf
   Warning( "glReplacementCodeuiVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glReplacementCodeuiVertex3fvSUN(const GLuint *rc, const GLfloat *v)
+static void REGAL_CALL missing_glReplacementCodeuiVertex3fvSUN(const GLuint *rc, const GLfloat *v)
 {
   UNUSED_PARAMETER(rc);
   UNUSED_PARAMETER(v);
   Warning( "glReplacementCodeuiVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fColor3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glTexCoord2fColor3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22181,7 +22181,7 @@ void REGAL_CALL missing_glTexCoord2fColor3fVertex3fSUN(GLfloat s, GLfloat t, GLf
   Warning( "glTexCoord2fColor3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fColor3fVertex3fvSUN(const GLfloat *tc, const GLfloat *c, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord2fColor3fVertex3fvSUN(const GLfloat *tc, const GLfloat *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(c);
@@ -22189,7 +22189,7 @@ void REGAL_CALL missing_glTexCoord2fColor3fVertex3fvSUN(const GLfloat *tc, const
   Warning( "glTexCoord2fColor3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fColor4fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glTexCoord2fColor4fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22206,7 +22206,7 @@ void REGAL_CALL missing_glTexCoord2fColor4fNormal3fVertex3fSUN(GLfloat s, GLfloa
   Warning( "glTexCoord2fColor4fNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fColor4fNormal3fVertex3fvSUN(const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord2fColor4fNormal3fVertex3fvSUN(const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(c);
@@ -22215,7 +22215,7 @@ void REGAL_CALL missing_glTexCoord2fColor4fNormal3fVertex3fvSUN(const GLfloat *t
   Warning( "glTexCoord2fColor4fNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fColor4ubVertex3fSUN(GLfloat s, GLfloat t, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glTexCoord2fColor4ubVertex3fSUN(GLfloat s, GLfloat t, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22229,7 +22229,7 @@ void REGAL_CALL missing_glTexCoord2fColor4ubVertex3fSUN(GLfloat s, GLfloat t, GL
   Warning( "glTexCoord2fColor4ubVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fColor4ubVertex3fvSUN(const GLfloat *tc, const GLubyte *c, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord2fColor4ubVertex3fvSUN(const GLfloat *tc, const GLubyte *c, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(c);
@@ -22237,7 +22237,7 @@ void REGAL_CALL missing_glTexCoord2fColor4ubVertex3fvSUN(const GLfloat *tc, cons
   Warning( "glTexCoord2fColor4ubVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glTexCoord2fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22250,7 +22250,7 @@ void REGAL_CALL missing_glTexCoord2fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GL
   Warning( "glTexCoord2fNormal3fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fNormal3fVertex3fvSUN(const GLfloat *tc, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord2fNormal3fVertex3fvSUN(const GLfloat *tc, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(n);
@@ -22258,7 +22258,7 @@ void REGAL_CALL missing_glTexCoord2fNormal3fVertex3fvSUN(const GLfloat *tc, cons
   Warning( "glTexCoord2fNormal3fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fVertex3fSUN(GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z)
+static void REGAL_CALL missing_glTexCoord2fVertex3fSUN(GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22268,14 +22268,14 @@ void REGAL_CALL missing_glTexCoord2fVertex3fSUN(GLfloat s, GLfloat t, GLfloat x,
   Warning( "glTexCoord2fVertex3fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord2fVertex3fvSUN(const GLfloat *tc, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord2fVertex3fvSUN(const GLfloat *tc, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(v);
   Warning( "glTexCoord2fVertex3fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4fColor4fNormal3fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glTexCoord4fColor4fNormal3fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22295,7 +22295,7 @@ void REGAL_CALL missing_glTexCoord4fColor4fNormal3fVertex4fSUN(GLfloat s, GLfloa
   Warning( "glTexCoord4fColor4fNormal3fVertex4fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4fColor4fNormal3fVertex4fvSUN(const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord4fColor4fNormal3fVertex4fvSUN(const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(c);
@@ -22304,7 +22304,7 @@ void REGAL_CALL missing_glTexCoord4fColor4fNormal3fVertex4fvSUN(const GLfloat *t
   Warning( "glTexCoord4fColor4fNormal3fVertex4fvSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+static void REGAL_CALL missing_glTexCoord4fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
 {
   UNUSED_PARAMETER(s);
   UNUSED_PARAMETER(t);
@@ -22317,7 +22317,7 @@ void REGAL_CALL missing_glTexCoord4fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p,
   Warning( "glTexCoord4fVertex4fSUN not available." );
 }
 
-void REGAL_CALL missing_glTexCoord4fVertex4fvSUN(const GLfloat *tc, const GLfloat *v)
+static void REGAL_CALL missing_glTexCoord4fVertex4fvSUN(const GLfloat *tc, const GLfloat *v)
 {
   UNUSED_PARAMETER(tc);
   UNUSED_PARAMETER(v);
@@ -22326,7 +22326,7 @@ void REGAL_CALL missing_glTexCoord4fVertex4fvSUN(const GLfloat *tc, const GLfloa
 
 // GL_WIN_swap_hint
 
-void REGAL_CALL missing_glAddSwapHintRectWIN(GLint x, GLint y, GLsizei width, GLsizei height)
+static void REGAL_CALL missing_glAddSwapHintRectWIN(GLint x, GLint y, GLsizei width, GLsizei height)
 {
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);

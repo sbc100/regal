@@ -41,7 +41,7 @@ def apiDispatchCodeInitCode(apis, args, dispatchName):
 
 	if function.name in exclude:
 	  continue
-	
+
         name = function.name
         code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
 
@@ -107,7 +107,7 @@ def generateDispatchCode(apis, args):
 
         if getattr(function,'regalOnly',False)==True:
           continue
-          
+
 	if function.name in exclude:
 	  continue
 
@@ -120,87 +120,127 @@ def generateDispatchCode(apis, args):
         rType  = typeCode(f.ret.type)
 
         code += 'static %sREGAL_CALL %s%s(%s) \n{\n' % (rType, 'code_', name, params)
+
         code += '    RegalContext *_context = REGAL_GET_CONTEXT();\n'
         code += '    RegalAssert(_context);\n'
-
         code += '    DispatchTable *_next = _context->dispatcher.code._next;\n'
         code += '    RegalAssert(_next);\n'
         code += '    '
+
         if not typeIsVoid(rType):
           code += '%s _ret = '%(rType)
         code += '_next->call(&_next->%s)(%s);\n' % ( name, callParams )
 
+        # comment-out calls to functions flagged as trace = False
+
         prefix = ''
         suffix = ''
-
         if not f.trace:
           prefix += '/* '
           suffix += ' */'
 
-        header =  '    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib)*2,\' \');\n'
+        header =  '    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,\' \');\n'
         header += '    string_list< ::std::string > _code;\n'
         body   =  ''
 
+	ret = ''
+        if not typeIsVoid(rType):
+	  if   f.name in [ 'glCreateShader','glCreateShaderObjectARB' ]:
+	    header += '    size_t _retIndex = _context->codeShaderNext++;\n'
+	    ret = 'const %s shader\" << _retIndex << \" = '%typeStrip(rType)
+	  elif f.name in [ 'glCreateProgram','glCreateProgramObjectARB']:
+	    header += '    size_t _retIndex = _context->codeProgramNext++;\n'
+	    ret = 'const %s program\" << _retIndex << \" = '%typeStrip(rType)
+	  else:
+	    header += '    size_t _retIndex = _context->codeOutputNext++;\n'
+	    ret = 'const %s o\" << _retIndex << \" = '%typeStrip(rType)
+
         if len(f.parameters)==0:
-          body += '    %s_code << indent << "%s();%s\\n";\n'%(prefix,f.name,suffix)
-        if len(f.parameters)>0:
-          body += '    %s_code << indent << "%s(";\n'%(prefix,f.name)
+          body += '    %s_code << indent << "%s%s();%s\\n";\n'%(prefix,ret,f.name,suffix)
+        else:
+          body += '    %s_code << indent << "%s%s(";\n'%(prefix,ret,f.name)
 
-        if len(f.parameters)>0:
-          delim = False
-          for i in f.parameters:
-            if delim:
-              body += '    _code << ", "; '
-            else:
-              body += '                   '
-#           p = cCodeParameter(f,i)
-            p = logParameter(f,i)
-            if p==None:
-                body += '_code << "/* %s = ?? */";\n'%(i.name)
- 
-            elif p.startswith('boost::print::array'):
-                type = typeStrip(i.type)
-                size = i.size
-                if i.maxSize != None:
-                  size = i.maxSize
-                if i.input:
-                  if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
-                    header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-                    header += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << (%s) << \"] = \" '%(type,i.name,size)
-                    header += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\",\", \") '%(type,i.name,size)
-                    header += '<< \"\\n\";\n'
-                    body += '_code << \"i\" << _%sIndex;\n'%(i.name)
-                  else:
-                    body += '_code << "/* %s = ?? */";\n'%(i.name)
-                else:
-                  if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
-                    header += '    size_t _%sIndex = _context->codeOutputNext++;\n'%(i.name)
-                    header += '    _code << indent << \"%s o\" << _%sIndex << \"[\" << (%s) << \"];\\n";\n'%(type,i.name,size)
-                    body += '_code << \"o\" << _%sIndex;\n'%(i.name)
-                  else:
-                    body += '_code << "/* %s = ?? */";\n'%(i.name)
+          if f.name.startswith('glShaderSource'):
+            header += '    std::string _delim = print_string("\\\\n\\"\\n",indent,"  \\"");\n'
+            header += '    size_t _stringIndex = _context->codeInputNext++;\n'
+            header += '    _code << indent << \"const char *i\" << _stringIndex << \" =\\n\";\n'
+            header += '    _code << indent << "  \\\"" << string_list< ::std::string >(string_list< ::std::string >(count,string,length).str(),\'\\n\').join(_delim) << "\\";\\n";\n'
+            body   += '    _code << %s << ",1,&i" <<_stringIndex << ",NULL);\\n";\n'%(f.parameters[0].name)
 
-            # glTexImage2D etc
-
-            elif i.size != None and (isinstance(i.size, str) or isinstance(i.size, unicode)) and i.size.startswith('helperGLPixelImageSize'):
-              header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-              header += '    _code << indent << \"const GLubyte i\" << _%sIndex << \"[\" << helper::size::pixelImage(%s << \"] = \" '%(i.name,i.size.split('(',1)[1])
-              header += '<< array<GLubyte,const char * const>(static_cast<const GLubyte *>(%s),helper::size::pixelImage(%s,\"\",\"{ \",\" }\",\",\") '%(i.name,i.size.split('(',1)[1])
-              header += '<< \";\\n\";\n'
-              body += '_code << \"i\" << _%sIndex;\n'%(i.name)
-
-            elif p.startswith('boost::print::optional'):
-              if i.cast != None:
-                body += '_code << reinterpret_cast<%s>(%s);\n'%(i.cast,i.name)
+          else:
+            delim = False
+            for i in f.parameters:
+              if delim:
+                body += '    _code << ", "; '
+              elif len(f.parameters)>1:
+                body += '                   '
               else:
-                body += '_code << %s;\n'%(i.name)
-            else:
-                body += '_code << %s;\n'%(p)
-            delim = True
+                body += '    '
 
-          body += '    _code << ");%s\\n";\n'%(suffix)
+#             p = cCodeParameter(f,i)
+              p = logParameter(f,i)
 
-        body += '    printf("%s",_code.str().c_str());\n'
+              # For parameters not handled yet...
+
+              if p==None:
+                  body += '_code << "/* %s = ?? */";\n'%(i.name)
+
+              # Special handling for input our output arrays
+
+              elif p.startswith('boost::print::array'):
+                  type = typeStrip(i.type)
+                  size = i.size
+                  if i.maxSize != None:
+                    size = i.maxSize
+                  if i.input:
+                    if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
+                      header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
+                      header += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << (%s) << \"] = \" '%(type,i.name,size)
+                      header += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\",\", \") '%(type,i.name,size)
+                      header += '<< \"\\n\";\n'
+                      body += '_code << \"i\" << _%sIndex;\n'%(i.name)
+                    else:
+                      body += '_code << "/* %s = ?? */";\n'%(i.name)
+                  else:
+                    if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
+                      header += '    size_t _%sIndex = _context->codeOutputNext++;\n'%(i.name)
+                      header += '    _code << indent << \"%s o\" << _%sIndex << \"[\" << (%s) << \"];\\n";\n'%(type,i.name,size)
+                      body += '_code << \"o\" << _%sIndex;\n'%(i.name)
+                    else:
+                      body += '_code << "/* %s = ?? */";\n'%(i.name)
+
+              # glTexImage2D etc
+
+              elif i.size != None and (isinstance(i.size, str) or isinstance(i.size, unicode)) and i.size.startswith('helperGLPixelImageSize'):
+                header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
+                header += '    _code << indent << \"const GLubyte i\" << _%sIndex << \"[\" << helper::size::pixelImage(%s << \"] = \" '%(i.name,i.size.split('(',1)[1])
+                header += '<< array<GLubyte,const char * const>(static_cast<const GLubyte *>(%s),helper::size::pixelImage(%s,\"\",\"{ \",\" }\",\",\") '%(i.name,i.size.split('(',1)[1])
+                header += '<< \";\\n\";\n'
+                body += '_code << \"i\" << _%sIndex;\n'%(i.name)
+
+              elif p.startswith('boost::print::optional'):
+                if i.cast != None:
+                  body += '_code << reinterpret_cast<%s>(%s);\n'%(i.cast,i.name)
+                else:
+                  body += '_code << %s;\n'%(i.name)
+
+              # 0x prefix for hex output
+
+              elif p.startswith('boost::print::hex'):
+                body += '_code << \"0x\" << %s;\n'%(p)
+
+              elif p.startswith('boost::print::raw'):   # Buffer data needs better handling, revisit
+                  body += '_code << "NULL";\n'
+
+              else:
+                  body += '_code << %s;\n'%(p)
+
+              delim = True
+
+            body += '    _code << ");%s\\n";\n'%(suffix)
+
+        body += '    if (_context->codeSource)\n'
+        body += '      fprintf(_context->codeSource,"%s",_code.str().c_str());\n'
 
         code += header + body
 

@@ -122,7 +122,7 @@ namespace Emu {
     }
   }
 
-  void SubImage2D( RegalContext * ctx, GLenum target, GLint ifmt, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
+  static void SubImage2D( RegalContext * ctx, GLenum target, GLint ifmt, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
   {
     Internal("Regal::Xfer::SubImage2D","ctx=",ctx," target=",Token::GLenumToString(target)," ifmt=",Token::GLenumToString(ifmt)," level=",level," format=",Token::GLenumToString(format)," type=",Token::GLenumToString(type));
 
@@ -209,7 +209,7 @@ namespace Emu {
     }
   }
 
-  bool ShouldDecompress( RegalContext * ctx, GLenum internalFormat )
+  static bool ShouldDecompress( RegalContext * ctx, GLenum internalFormat )
   {
     if (ctx->info->gl_ext_texture_compression_s3tc)
       return false;
@@ -263,7 +263,7 @@ namespace Emu {
   // See also:
   //     [1] http://en.wikipedia.org/wiki/S3_Texture_Compression
 
-  void CompressedSubImage2D( RegalContext * ctx, GLenum target, GLint level, GLint ifmt, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data )
+  static void CompressedSubImage2D( RegalContext * ctx, GLenum target, GLint level, GLint ifmt, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data )
   {
     Internal("Regal::Xfer::CompressedSubImage2D","target=", Token::GLenumToString(target), " level=", level,
              " format=", Token::GLenumToString(format));

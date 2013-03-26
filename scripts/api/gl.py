@@ -1392,6 +1392,8 @@ GL_CLAMP_TO_EDGE = Enumerant('GL_CLAMP_TO_EDGE', 0x812f, 'GL_VERSION_1_2')
 GL_CLAMP_TO_EDGE.esVersions = [2.0]
 GL_LIGHT_MODEL_COLOR_CONTROL = Enumerant('GL_LIGHT_MODEL_COLOR_CONTROL', 0x81f8, 'GL_VERSION_1_2')
 GL_MAX_3D_TEXTURE_SIZE = Enumerant('GL_MAX_3D_TEXTURE_SIZE', 0x8073, 'GL_VERSION_1_2')
+GL_MAX_ELEMENTS_INDICES = Enumerant('GL_MAX_ELEMENTS_INDICES', 0x80e9, 'GL_VERSION_1_2')
+GL_MAX_ELEMENTS_VERTICES = Enumerant('GL_MAX_ELEMENTS_VERTICES', 0x80e8, 'GL_VERSION_1_2')
 GL_PACK_IMAGE_HEIGHT = Enumerant('GL_PACK_IMAGE_HEIGHT', 0x806c, 'GL_VERSION_1_2')
 GL_PACK_SKIP_IMAGES = Enumerant('GL_PACK_SKIP_IMAGES', 0x806b, 'GL_VERSION_1_2')
 GL_PROXY_TEXTURE_3D = Enumerant('GL_PROXY_TEXTURE_3D', 0x8070, 'GL_VERSION_1_2')
@@ -1434,6 +1436,8 @@ defines.add(GL_BGRA)
 defines.add(GL_CLAMP_TO_EDGE)
 defines.add(GL_LIGHT_MODEL_COLOR_CONTROL)
 defines.add(GL_MAX_3D_TEXTURE_SIZE)
+defines.add(GL_MAX_ELEMENTS_INDICES)
+defines.add(GL_MAX_ELEMENTS_VERTICES)
 defines.add(GL_PACK_IMAGE_HEIGHT)
 defines.add(GL_PACK_SKIP_IMAGES)
 defines.add(GL_PROXY_TEXTURE_3D)
@@ -5848,6 +5852,22 @@ GL_UNSIGNED_INT_2_10_10_10_REV = Enumerant('GL_UNSIGNED_INT_2_10_10_10_REV', 0x8
 defines.add(GL_INT_2_10_10_10_REV)
 defines.add(GL_UNSIGNED_INT_2_10_10_10_REV)
 defines.add(GL_UNSIGNED_INT_2_10_10_10_REV)
+
+# GL_ARB_viewport_array
+
+GL_LAYER_PROVOKING_VERTEX = Enumerant('GL_LAYER_PROVOKING_VERTEX', 0x825e, 'GL_ARB_viewport_array')
+GL_MAX_VIEWPORTS = Enumerant('GL_MAX_VIEWPORTS', 0x825b, 'GL_ARB_viewport_array')
+GL_UNDEFINED_VERTEX = Enumerant('GL_UNDEFINED_VERTEX', 0x8260, 'GL_ARB_viewport_array')
+GL_VIEWPORT_BOUNDS_RANGE = Enumerant('GL_VIEWPORT_BOUNDS_RANGE', 0x825d, 'GL_ARB_viewport_array')
+GL_VIEWPORT_INDEX_PROVOKING_VERTEX = Enumerant('GL_VIEWPORT_INDEX_PROVOKING_VERTEX', 0x825f, 'GL_ARB_viewport_array')
+GL_VIEWPORT_SUBPIXEL_BITS = Enumerant('GL_VIEWPORT_SUBPIXEL_BITS', 0x825c, 'GL_ARB_viewport_array')
+
+defines.add(GL_LAYER_PROVOKING_VERTEX)
+defines.add(GL_MAX_VIEWPORTS)
+defines.add(GL_UNDEFINED_VERTEX)
+defines.add(GL_VIEWPORT_BOUNDS_RANGE)
+defines.add(GL_VIEWPORT_INDEX_PROVOKING_VERTEX)
+defines.add(GL_VIEWPORT_SUBPIXEL_BITS)
 
 # GL_ARM_mali_program_binary
 
@@ -11266,6 +11286,26 @@ defines.add(GL_MIN_BLUE_SGIS)
 defines.add(GL_MIN_GREEN_SGIS)
 defines.add(GL_MIN_RED_SGIS)
 
+# GL_SGIS_detail_texture
+
+GL_DETAIL_TEXTURE_2D_BINDING_SGIS = Enumerant('GL_DETAIL_TEXTURE_2D_BINDING_SGIS', 0x8096, 'GL_SGIS_detail_texture')
+GL_DETAIL_TEXTURE_2D_SGIS = Enumerant('GL_DETAIL_TEXTURE_2D_SGIS', 0x8095, 'GL_SGIS_detail_texture')
+GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS = Enumerant('GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS', 0x809c, 'GL_SGIS_detail_texture')
+GL_DETAIL_TEXTURE_LEVEL_SGIS = Enumerant('GL_DETAIL_TEXTURE_LEVEL_SGIS', 0x809a, 'GL_SGIS_detail_texture')
+GL_DETAIL_TEXTURE_MODE_SGIS = Enumerant('GL_DETAIL_TEXTURE_MODE_SGIS', 0x809b, 'GL_SGIS_detail_texture')
+GL_LINEAR_DETAIL_ALPHA_SGIS = Enumerant('GL_LINEAR_DETAIL_ALPHA_SGIS', 0x8098, 'GL_SGIS_detail_texture')
+GL_LINEAR_DETAIL_COLOR_SGIS = Enumerant('GL_LINEAR_DETAIL_COLOR_SGIS', 0x8099, 'GL_SGIS_detail_texture')
+GL_LINEAR_DETAIL_SGIS = Enumerant('GL_LINEAR_DETAIL_SGIS', 0x8097, 'GL_SGIS_detail_texture')
+
+defines.add(GL_DETAIL_TEXTURE_2D_BINDING_SGIS)
+defines.add(GL_DETAIL_TEXTURE_2D_SGIS)
+defines.add(GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS)
+defines.add(GL_DETAIL_TEXTURE_LEVEL_SGIS)
+defines.add(GL_DETAIL_TEXTURE_MODE_SGIS)
+defines.add(GL_LINEAR_DETAIL_ALPHA_SGIS)
+defines.add(GL_LINEAR_DETAIL_COLOR_SGIS)
+defines.add(GL_LINEAR_DETAIL_SGIS)
+
 # GL_SGIS_generate_mipmap
 
 GL_GENERATE_MIPMAP_HINT_SGIS = Enumerant('GL_GENERATE_MIPMAP_HINT_SGIS', 0x8192, 'GL_SGIS_generate_mipmap')
@@ -14120,8 +14160,8 @@ gl.add(glShadeModel)
 glStencilFunc = Function('glStencilFunc')
 glStencilFunc.ret = Return('void')
 glStencilFunc.add( Input( 'func','GLenum' ))
-glStencilFunc.add( Input( 'ref','GLint' ))
-glStencilFunc.add( Input( 'mask','GLuint' ))
+glStencilFunc.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glStencilFunc.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilFunc.version = '1.0'
 glStencilFunc.category = 'GL_VERSION_1_0'
 glStencilFunc.esVersions = [1.0, 1.1, 2.0]
@@ -16937,8 +16977,8 @@ glStencilFuncSeparate = Function('glStencilFuncSeparate')
 glStencilFuncSeparate.ret = Return('void')
 glStencilFuncSeparate.add( Input( 'face','GLenum' ))
 glStencilFuncSeparate.add( Input( 'func','GLenum' ))
-glStencilFuncSeparate.add( Input( 'ref','GLint' ))
-glStencilFuncSeparate.add( Input( 'mask','GLuint' ))
+glStencilFuncSeparate.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glStencilFuncSeparate.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilFuncSeparate.version = '2.0'
 glStencilFuncSeparate.category = 'GL_VERSION_2_0'
 glStencilFuncSeparate.esVersions = [2.0]
@@ -26446,8 +26486,8 @@ glStencilFuncSeparateATI = Function('glStencilFuncSeparateATI')
 glStencilFuncSeparateATI.ret = Return('void')
 glStencilFuncSeparateATI.add( Input( 'frontfunc','GLenum' ))
 glStencilFuncSeparateATI.add( Input( 'backfunc','GLenum' ))
-glStencilFuncSeparateATI.add( Input( 'ref','GLint' ))
-glStencilFuncSeparateATI.add( Input( 'mask','GLuint' ))
+glStencilFuncSeparateATI.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glStencilFuncSeparateATI.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilFuncSeparateATI.version = '1.2'
 glStencilFuncSeparateATI.category = 'GL_ATI_separate_stencil'
 glStencilFuncSeparateATI.trace = True
@@ -36723,8 +36763,8 @@ gl.add(glPathStencilDepthOffsetNV)
 glPathStencilFuncNV = Function('glPathStencilFuncNV')
 glPathStencilFuncNV.ret = Return('void')
 glPathStencilFuncNV.add( Input( 'func','GLenum' ))
-glPathStencilFuncNV.add( Input( 'ref','GLint' ))
-glPathStencilFuncNV.add( Input( 'mask','GLuint' ))
+glPathStencilFuncNV.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glPathStencilFuncNV.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glPathStencilFuncNV.version = ''
 glPathStencilFuncNV.category = 'GL_NV_path_rendering'
 glPathStencilFuncNV.trace = True

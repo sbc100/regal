@@ -100,7 +100,7 @@ Dispatcher::Dispatcher()
 
   // Optionally move the error checking dispatch to downstream of emulation.
 
-  #if REGAL_ERROR_POST_EMU
+  #if defined(REGAL_ERROR_POST_EMU)
   if (erase(error))
     insert(cache,error);
   #endif

@@ -4,7 +4,7 @@ from string import Template, upper, replace
 
 from ApiUtil import outputCode
 
-regalSys = '''#if _WIN32
+regalSys = '''#if defined(_WIN32)
 # if defined(PPAPI)
 #  ifndef REGAL_SYS_PPAPI
 #   define REGAL_SYS_PPAPI 1
@@ -14,7 +14,7 @@ regalSys = '''#if _WIN32
 #   define REGAL_SYS_WGL 1
 #  endif
 # endif
-#elif __APPLE__
+#elif defined(__APPLE__)
 # include <TargetConditionals.h>
 # if TARGET_OS_IPHONE
 #  ifndef REGAL_SYS_IOS

@@ -1,6 +1,7 @@
 NAME = $(REGAL_NAME)
 CC = cc
 LD = cc
+RANLIB :=
 EXT.DYNAMIC = dylib
 CFLAGS.EXTRA = -arch i386 -no-cpp-precomp -dynamic -fno-common
 CFLAGS.EXTRA += -MMD

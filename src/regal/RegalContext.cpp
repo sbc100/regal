@@ -105,12 +105,18 @@ RegalContext::RegalContext()
   x11Drawable(0),
 #endif
   logCallback(NULL),
+#if REGAL_CODE
+  codeSource(NULL),
+  codeHeader(NULL),
+  codeInputNext(0),
+  codeOutputNext(0),
+  codeShaderNext(0),
+  codeProgramNext(0),
+#endif
   depthBeginEnd(0),
   depthPushMatrix(0),
   depthPushAttrib(0),
-  depthNewList(0),
-  codeInputNext(0),
-  codeOutputNext(0)
+  depthNewList(0)
 {
   Internal("RegalContext::RegalContext","()");
 
@@ -254,6 +260,27 @@ RegalContext::Init()
   }
 #endif
 
+#if REGAL_CODE
+  if (Config::enableCode)
+  {
+    if (Config::codeSourceFile.length())
+    {
+      codeSource = fopen(Config::codeSourceFile.c_str(),"wt");
+      if (!codeSource)
+        Warning("Failed to open file ",Config::codeSourceFile," for writing code source.");
+    }
+    if (Config::codeHeaderFile.length())
+    {
+      if (Config::codeHeaderFile==Config::codeSourceFile)
+        codeHeader = codeSource;
+      else
+        codeHeader = fopen(Config::codeHeaderFile.c_str(),"wt");
+      if (!codeHeader)
+        Warning("Failed to open file ",Config::codeHeaderFile," for writing code header.");
+    }
+  }
+#endif
+
   initialized = true;
 }
 
@@ -304,6 +331,14 @@ RegalContext::~RegalContext()
   #if REGAL_EMU_FILTER
   delete filt;
   #endif /* REGAL_EMU_FILTER */
+#endif
+
+#if REGAL_CODE
+  if (codeSource)
+    fclose(codeSource);
+
+  if (codeHeader)
+    fclose(codeHeader);
 #endif
 }
 

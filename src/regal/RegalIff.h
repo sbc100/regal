@@ -316,10 +316,12 @@ template <> inline GLfloat RFFToFloatN( int i, const int * p ) { return GLfloat(
 struct Iff
 {
   Iff()
+  : progcount(0)
   {
   }
 
   Iff(const Iff &other)
+  : progcount(0)
   {
     UNUSED_PARAMETER(other);
   }
@@ -336,6 +338,9 @@ struct Iff
   ~Iff()
   {
   }
+
+  // Info
+  int progcount;
 
   // Vertex arrays
   GLuint catIndex;

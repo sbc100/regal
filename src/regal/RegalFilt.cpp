@@ -201,6 +201,7 @@ namespace Emu {
     if (ctx.isCore())
     {
       filtered = true;
+#if 0
       switch (pname )
       {
           /* just a test
@@ -212,6 +213,9 @@ namespace Emu {
           filtered = false;
           break;
       }
+#else
+      filtered = false;
+#endif
       if (filtered)
       {
         Warning( "Regal does not support ", GLenumToString(pname), " as pname for glGet for core profile - skipping." );

@@ -242,9 +242,9 @@ int mg_write(struct mg_connection *, const void *buf, size_t len);
 // printf-like arguments.
 
 #undef PRINTF_FORMAT_STRING
-#if _MSC_VER >= 1400
+#if defined(_MSC_VER) && _MSC_VER >= 1400
 #include <sal.h>
-#if _MSC_VER > 1400
+#if defined(_MSC_VER) && _MSC_VER > 1400
 #define PRINTF_FORMAT_STRING(s) _Printf_format_string_ s
 #else
 #define PRINTF_FORMAT_STRING(s) __format_string s

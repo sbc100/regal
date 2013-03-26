@@ -41,7 +41,7 @@
 #ifndef __REGAL_SYSTEM_H__
 #define __REGAL_SYSTEM_H__
 
-#if _WIN32
+#if defined(_WIN32)
 # if defined(PPAPI)
 #  ifndef REGAL_SYS_PPAPI
 #   define REGAL_SYS_PPAPI 1
@@ -51,7 +51,7 @@
 #   define REGAL_SYS_WGL 1
 #  endif
 # endif
-#elif __APPLE__
+#elif defined(__APPLE__)
 # include <TargetConditionals.h>
 # if TARGET_OS_IPHONE
 #  ifndef REGAL_SYS_IOS

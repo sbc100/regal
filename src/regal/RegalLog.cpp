@@ -261,10 +261,6 @@ namespace Logging {
     Info("REGAL_LOG_CALLBACK ", callback       ? "enabled" : "disabled");
 #endif
 
-#if REGAL_LOG_STDOUT
-    Info("REGAL_LOG_STDOUT   ", stdOut         ? "enabled" : "disabled");
-#endif
-
 #if REGAL_LOG_ONCE
     Info("REGAL_LOG_ONCE     ", once           ? "enabled" : "disabled");
 #endif

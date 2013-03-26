@@ -748,10 +748,10 @@ struct DispatchTable {
       // Find the next enabled dispatch table
       for (i = i->_next; !i->_enabled; i = i->_next) { RegalAssert(i); }
 
-      // Get the function pointer
+      // Get the function pointer; extra cast through void* is to avoid -Wcast-align spew
       RegalAssert(i);
       RegalAssert(i->_enabled);
-      f = *reinterpret_cast<T *>(reinterpret_cast<char *>(i)+offset);
+      f = *reinterpret_cast<T *>(reinterpret_cast<void *>(reinterpret_cast<char *>(i)+offset));
     }
 
     return f;

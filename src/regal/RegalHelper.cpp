@@ -1079,6 +1079,33 @@ shaderSourceStrings(const GLsizei count, const GLchar **string,  const GLint *le
   return tmp;
 }
 
+bool
+getInfoLog
+(
+  ::std::string &log,
+  void (REGAL_CALL *getInfoLog)      (GLuint,GLsizei,GLsizei *,GLchar *),
+  void (REGAL_CALL *getInfoLogLength)(GLuint,GLenum,GLint *),
+  GLuint obj
+)
+{
+  RegalAssert(getInfoLog);
+  RegalAssert(getInfoLogLength);
+
+  GLint length = 0;
+  getInfoLogLength(obj,GL_INFO_LOG_LENGTH,&length);
+
+  if (length)
+  {
+    log.resize(length);
+    RegalAssert(log.length()==size_t(length));
+    getInfoLog(obj,length,NULL,&log[0]);
+  }
+  else
+    log.clear();
+
+  return true;
+}
+
 }
 
 REGAL_NAMESPACE_END

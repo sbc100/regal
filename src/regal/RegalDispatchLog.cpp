@@ -2363,7 +2363,7 @@ static void REGAL_CALL log_glStencilFunc(GLenum func, GLint ref, GLuint mask)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilFunc)(func, ref, mask);
-    Driver("glStencilFunc","(", toString(func), ", ", ref, ", ", mask, ")");
+    Driver("glStencilFunc","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilMask(GLuint mask)
@@ -4947,7 +4947,7 @@ static void REGAL_CALL log_glStencilFuncSeparate(GLenum face, GLenum func, GLint
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilFuncSeparate)(face, func, ref, mask);
-    Driver("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", ref, ", ", mask, ")");
+    Driver("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilMaskSeparate(GLenum face, GLuint mask)
@@ -13397,7 +13397,7 @@ static void REGAL_CALL log_glStencilFuncSeparateATI(GLenum frontfunc, GLenum bac
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilFuncSeparateATI)(frontfunc, backfunc, ref, mask);
-    Driver("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", ref, ", ", mask, ")");
+    Driver("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
@@ -22390,7 +22390,7 @@ static void REGAL_CALL log_glPathStencilFuncNV(GLenum func, GLint ref, GLuint ma
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glPathStencilFuncNV)(func, ref, mask);
-    Driver("glPathStencilFuncNV","(", toString(func), ", ", ref, ", ", mask, ")");
+    Driver("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString)

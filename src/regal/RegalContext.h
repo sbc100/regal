@@ -156,17 +156,23 @@ struct RegalContext
 
   RegalContext *groupInitializedContext();
 
+  // For RegalDispatchCode
+
+#if REGAL_CODE
+  FILE               *codeSource;
+  FILE               *codeHeader;
+  size_t              codeInputNext;
+  size_t              codeOutputNext;
+  size_t              codeShaderNext;  // glCreateShader/glCreateShaderObjectARB
+  size_t              codeProgramNext; // glCreateProgram/glCreateProgramObjectARB
+#endif
+
   // State tracked via EmuContextState.py / Regal.cpp
 
   size_t              depthBeginEnd;   // Normally zero or one
   size_t              depthPushMatrix; //
   size_t              depthPushAttrib; //
   size_t              depthNewList;    //
-
-  // For RegalDispatchCode
-
-  size_t              codeInputNext;
-  size_t              codeOutputNext;
 };
 
 REGAL_NAMESPACE_END

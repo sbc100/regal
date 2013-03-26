@@ -2524,7 +2524,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFunc(GLenum func, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFunc","(", toString(func), ", ", ref, ", ", mask, ")");
+    App("glStencilFunc","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -5106,7 +5106,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", ref, ", ", mask, ")");
+    App("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -13508,7 +13508,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", ref, ", ", mask, ")");
+    App("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22492,7 +22492,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPathStencilFuncNV","(", toString(func), ", ", ref, ", ", mask, ")");
+    App("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);

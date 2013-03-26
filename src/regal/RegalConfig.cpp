@@ -116,6 +116,14 @@ namespace Config {
   bool          cacheTextureWrite = false;
   ::std::string cacheDirectory("./");
 
+#if REGAL_CODE
+  ::std::string codeSourceFile("code.cpp");
+  ::std::string codeHeaderFile("code.h");
+#else
+  ::std::string codeSourceFile;
+  ::std::string codeHeaderFile;
+#endif
+
   void Init()
   {
     Internal("Config::Init","()");
@@ -406,6 +414,14 @@ namespace Config {
     if (tmp) cacheDirectory = tmp;
 #endif
 
+#if REGAL_CODE
+    tmp = GetEnv( "REGAL_CODE_SOURCE" );
+    if (tmp) codeSourceFile = tmp;
+
+    tmp = GetEnv( "REGAL_CODE_HEADER" );
+    if (tmp) codeHeaderFile = tmp;
+#endif
+
 #endif
 
     // REGAL_NO_EMULATION is deprecated, use REGAL_EMULATION=0 instead.
@@ -492,6 +508,10 @@ namespace Config {
     Info("REGAL_CACHE_TEXTURE_WRITE ", cacheTextureWrite ? "enabled" : "disabled");
 #endif
 
+#if REGAL_CODE
+    Info("REGAL_CODE_SOURCE         ", codeSourceFile                            );
+    Info("REGAL_CODE_HEADER         ", codeHeaderFile                            );
+#endif
   }
 
   void

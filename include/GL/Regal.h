@@ -41,7 +41,7 @@
 #ifndef __REGAL_DECLARATIONS_H
 #define __REGAL_DECLARATIONS_H
 
-#if _WIN32
+#if defined(_WIN32)
 # if defined(PPAPI)
 #  ifndef REGAL_SYS_PPAPI
 #   define REGAL_SYS_PPAPI 1
@@ -51,7 +51,7 @@
 #   define REGAL_SYS_WGL 1
 #  endif
 # endif
-#elif __APPLE__
+#elif defined(__APPLE__)
 # include <TargetConditionals.h>
 # if TARGET_OS_IPHONE
 #  ifndef REGAL_SYS_IOS
@@ -8579,6 +8579,15 @@ REGAL_DECL void REGAL_CALL glVertexP4uiv(GLenum type, const GLuint *coords);
 
 #ifndef GL_ARB_viewport_array
 #define GL_ARB_viewport_array 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_VIEWPORT_ARRAY
+#define GL_MAX_VIEWPORTS                   0x825b     /* 33371 */
+#define GL_VIEWPORT_SUBPIXEL_BITS          0x825c     /* 33372 */
+#define GL_VIEWPORT_BOUNDS_RANGE           0x825d     /* 33373 */
+#define GL_LAYER_PROVOKING_VERTEX          0x825e     /* 33374 */
+#define GL_VIEWPORT_INDEX_PROVOKING_VERTEX 0x825f     /* 33375 */
+#define GL_UNDEFINED_VERTEX                0x8260     /* 33376 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_VIEWPORT_ARRAY
@@ -23326,6 +23335,17 @@ REGAL_DECL void REGAL_CALL glLogMessageCallbackREGAL(GLLOGPROCREGAL callback);
 #define GL_SGIS_detail_texture 1
 #endif
 
+#ifndef REGAL_NO_ENUM_GL_SGIS_DETAIL_TEXTURE
+#define GL_DETAIL_TEXTURE_2D_SGIS          0x8095     /* 32917 */
+#define GL_DETAIL_TEXTURE_2D_BINDING_SGIS  0x8096     /* 32918 */
+#define GL_LINEAR_DETAIL_SGIS              0x8097     /* 32919 */
+#define GL_LINEAR_DETAIL_ALPHA_SGIS        0x8098     /* 32920 */
+#define GL_LINEAR_DETAIL_COLOR_SGIS        0x8099     /* 32921 */
+#define GL_DETAIL_TEXTURE_LEVEL_SGIS       0x809a     /* 32922 */
+#define GL_DETAIL_TEXTURE_MODE_SGIS        0x809b     /* 32923 */
+#define GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS 0x809c     /* 32924 */
+#endif
+
 #ifndef REGAL_NO_TYPEDEF_GL_SGIS_DETAIL_TEXTURE
 typedef void (REGAL_CALL *PFNGLDETAILTEXFUNCSGISPROC)(GLenum target, GLsizei n, const GLfloat *points);
 typedef void (REGAL_CALL *PFNGLGETDETAILTEXFUNCSGISPROC)(GLenum target, GLfloat *points);
@@ -27149,6 +27169,8 @@ REGAL_DECL void REGAL_CALL glVertexPointer(GLint size, GLenum type, GLsizei stri
 #define GL_MAX_3D_TEXTURE_SIZE           0x8073     /* 32883 */
 #define GL_BGR                           0x80e0     /* 32992 */
 #define GL_BGRA                          0x80e1     /* 32993 */
+#define GL_MAX_ELEMENTS_VERTICES         0x80e8     /* 33000 */
+#define GL_MAX_ELEMENTS_INDICES          0x80e9     /* 33001 */
 #define GL_CLAMP_TO_EDGE                 0x812f     /* 33071 */
 #define GL_TEXTURE_MIN_LOD               0x813a     /* 33082 */
 #define GL_TEXTURE_MAX_LOD               0x813b     /* 33083 */

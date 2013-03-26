@@ -850,6 +850,14 @@ namespace Token {
       case 0x00008092: return "GL_TEXTURE_COORD_ARRAY_POINTER";
       case 0x00008093: return "GL_EDGE_FLAG_ARRAY_POINTER";
       case 0x00008094: return "GL_INTERLACE_SGIX";
+      case 0x00008095: return "GL_DETAIL_TEXTURE_2D_SGIS";
+      case 0x00008096: return "GL_DETAIL_TEXTURE_2D_BINDING_SGIS";
+      case 0x00008097: return "GL_LINEAR_DETAIL_SGIS";
+      case 0x00008098: return "GL_LINEAR_DETAIL_ALPHA_SGIS";
+      case 0x00008099: return "GL_LINEAR_DETAIL_COLOR_SGIS";
+      case 0x0000809a: return "GL_DETAIL_TEXTURE_LEVEL_SGIS";
+      case 0x0000809b: return "GL_DETAIL_TEXTURE_MODE_SGIS";
+      case 0x0000809c: return "GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS";
       case 0x0000809d: return "GL_MULTISAMPLE";
       case 0x0000809e: return "GL_SAMPLE_ALPHA_TO_COVERAGE";
       case 0x0000809f: return "GL_SAMPLE_ALPHA_TO_ONE";
@@ -912,8 +920,8 @@ namespace Token {
       case 0x000080e5: return "GL_COLOR_INDEX8_EXT";
       case 0x000080e6: return "GL_COLOR_INDEX12_EXT";
       case 0x000080e7: return "GL_COLOR_INDEX16_EXT";
-      case 0x000080e8: return "GL_MAX_ELEMENTS_VERTICES_EXT";
-      case 0x000080e9: return "GL_MAX_ELEMENTS_INDICES_EXT";
+      case 0x000080e8: return "GL_MAX_ELEMENTS_VERTICES";
+      case 0x000080e9: return "GL_MAX_ELEMENTS_INDICES";
       case 0x000080ea: return "GL_PHONG_WIN";
       case 0x000080eb: return "GL_PHONG_HINT_WIN";
       case 0x000080ec: return "GL_FOG_SPECULAR_TEXTURE_WIN";
@@ -1046,6 +1054,12 @@ namespace Token {
       case 0x00008258: return "GL_PROGRAM_SEPARABLE";
       case 0x00008259: return "GL_ACTIVE_PROGRAM";
       case 0x0000825a: return "GL_PROGRAM_PIPELINE_BINDING";
+      case 0x0000825b: return "GL_MAX_VIEWPORTS";
+      case 0x0000825c: return "GL_VIEWPORT_SUBPIXEL_BITS";
+      case 0x0000825d: return "GL_VIEWPORT_BOUNDS_RANGE";
+      case 0x0000825e: return "GL_LAYER_PROVOKING_VERTEX";
+      case 0x0000825f: return "GL_VIEWPORT_INDEX_PROVOKING_VERTEX";
+      case 0x00008260: return "GL_UNDEFINED_VERTEX";
       case 0x00008261: return "GL_NO_RESET_NOTIFICATION_ARB";
       case 0x00008262: return "GL_MAX_COMPUTE_SHARED_MEMORY_SIZE";
       case 0x00008263: return "GL_MAX_COMPUTE_UNIFORM_COMPONENTS";

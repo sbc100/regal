@@ -135,6 +135,11 @@ namespace Config
   extern bool          cacheTextureRead;
   extern bool          cacheTextureWrite;
   extern ::std::string cacheDirectory;
+
+  // Code dispatch
+
+  extern ::std::string codeSourceFile;
+  extern ::std::string codeHeaderFile;
 };
 
 REGAL_NAMESPACE_END

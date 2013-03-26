@@ -47,6 +47,7 @@ typedef boost::print::string_list<string> string_list;
 #include "RegalIff.h"
 #include "RegalLog.h"
 #include "RegalToken.h"
+#include "RegalHelper.h"
 
 #include "lookup3.h"
 
@@ -60,8 +61,6 @@ namespace Emu {
 
 using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
-
-static int progcount = -1;
 
 typedef Iff::State State;
 typedef Iff::State::Texture Texture;
@@ -89,7 +88,7 @@ enum FFMaterialEl {
   ME_Elements = 5
 };
 
-Iff::TextureTargetBitfield TargetToBitfield( GLenum target ) {
+static Iff::TextureTargetBitfield TargetToBitfield( GLenum target ) {
   switch( target ) {
     case GL_TEXTURE_1D:        return Iff::TT_1D;
     case GL_TEXTURE_2D:        return Iff::TT_2D;
@@ -101,7 +100,7 @@ Iff::TextureTargetBitfield TargetToBitfield( GLenum target ) {
   return Iff::TT_None;
 }
 
-void GenerateVertexShaderSource( const Iff * rff, const Iff::State & state, string_list & src )
+static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & state, string_list & src )
 {
   Internal("Regal::Rff::GenerateVertexShaderSource",rff);
 
@@ -146,7 +145,7 @@ void GenerateVertexShaderSource( const Iff * rff, const Iff::State & state, stri
   } else {
     src << "#version 140\n";
   }
-  src << "// program number " << progcount << "\n";
+  src << "// program number " << rff->progcount << "\n";
 
   if( gles || legacy ) {
     src << "#define in attribute\n";
@@ -551,7 +550,7 @@ void GenerateVertexShaderSource( const Iff * rff, const Iff::State & state, stri
 
 
 
-void AddTexEnv( int i, Iff::TexenvMode env, GLenum fmt,  string_list & s )
+static void AddTexEnv( int i, Iff::TexenvMode env, GLenum fmt,  string_list & s )
 {
   Internal("Regal::Rff::AddTexEnv","()");
 
@@ -654,7 +653,7 @@ void AddTexEnv( int i, Iff::TexenvMode env, GLenum fmt,  string_list & s )
   }
 }
 
-void AddTexEnvCombine( Iff::TextureEnv & env, string_list & s )
+static void AddTexEnvCombine( Iff::TextureEnv & env, string_list & s )
 {
   Internal("Regal::Rff::AddTexEnvCombine","()");
 
@@ -865,7 +864,7 @@ string TexEnvFuncName( GLenum mode, GLenum format ) {
 }
 #endif
 
-string TargetSuffix( GLubyte ttb ) {
+static string TargetSuffix( GLubyte ttb ) {
   switch( ttb ) {
     case Iff::TT_1D: return "1D";
     case Iff::TT_2D: return "2D";
@@ -877,7 +876,7 @@ string TargetSuffix( GLubyte ttb ) {
   return "";
 }
 
-string TextureFetch( bool es, bool legacy, Iff::TextureTargetBitfield b ) {
+static string TextureFetch( bool es, bool legacy, Iff::TextureTargetBitfield b ) {
   if( es || legacy ) {
     switch( b ) {
       case Iff::TT_1D:      return "texture1D";
@@ -888,7 +887,7 @@ string TextureFetch( bool es, bool legacy, Iff::TextureTargetBitfield b ) {
   }
   return "texture";
 }
-string TextureFetchSwizzle( bool es, bool legacy, Iff::TextureTargetBitfield b ) {
+static string TextureFetchSwizzle( bool es, bool legacy, Iff::TextureTargetBitfield b ) {
   if( es || legacy ) {
     switch( b ) {
       case Iff::TT_1D:      return ".x";
@@ -911,7 +910,7 @@ string TextureFetchSwizzle( bool es, bool legacy, Iff::TextureTargetBitfield b )
   return "";
 }
 
-void GenerateFragmentShaderSource( Iff * rff, string_list &src )
+static void GenerateFragmentShaderSource( Iff * rff, string_list &src )
 {
   Internal("Regal::Rff::GenerateFragmentShaderSource",rff);
 
@@ -927,7 +926,7 @@ void GenerateFragmentShaderSource( Iff * rff, string_list &src )
   } else {
     src << "#version 140\n";
   }
-  src << "// program number " << progcount << "\n";
+  src << "// program number " << rff->progcount << "\n";
   if( rff->gles || rff->legacy ) {
     src << "#define in varying\n";
     src << "#define rglFragColor gl_FragColor\n";
@@ -1103,15 +1102,15 @@ void GenerateFragmentShaderSource( Iff * rff, string_list &src )
   src << "}\n";
 }
 
-void Copy( Float4 & dst, const GLfloat * src ) {
+static void Copy( Float4 & dst, const GLfloat * src ) {
   dst.x = src[0]; dst.y = src[1]; dst.z = src[2]; dst.w = src[3];
 }
 
-void Copy( GLfloat * dst, Float4 & src ) {
+static void Copy( GLfloat * dst, Float4 & src ) {
   dst[0] = src.x; dst[1] = src.y; dst[2] = src.z; dst[3] = src.w;
 }
 
-void Transform( Float4 & dst, const r3::Matrix4f & m, const GLfloat * src ) {
+static void Transform( Float4 & dst, const r3::Matrix4f & m, const GLfloat * src ) {
   r3::Vec4f v( src );
   m.MultMatrixVec( v );
   dst.x = v.x; dst.y = v.y; dst.z = v.z; dst.w = v.w;
@@ -1127,7 +1126,7 @@ void TransformDir( Float4 & dst, const r3::Matrix4f & m, const GLfloat * src ) {
 }
 #endif
 
-r3::Matrix4f RescaleNormal( const r3::Matrix4f & m ) {
+static r3::Matrix4f RescaleNormal( const r3::Matrix4f & m ) {
   r3::Matrix4f r = m;
   for( int i = 0; i < 3; i++ ) {
     r3::Vec3f v( r( i, 0 ), r( i, 1 ), r( i, 2 ) );
@@ -1136,10 +1135,6 @@ r3::Matrix4f RescaleNormal( const r3::Matrix4f & m ) {
   }
   return r;
 }
-
-// debug
-static GLchar dbgLog[1<<15];
-static GLsizei dbgLogLen;
 
 bool State::SetEnable( Iff * ffn, bool enable, GLenum cap )
 {
@@ -1388,7 +1383,7 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
 {
   Internal("Regal::Program::Init","()");
 
-  ver = -1;  // Force uniform update on first use.
+  ver = ::std::numeric_limits<GLuint64>::max();
   progcount = 0;
   RegalAssert(ctx);
   DispatchTable & tbl = ctx->dispatcher.emulation;
@@ -1398,16 +1393,17 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
   Shader( ctx, tbl, GL_FRAGMENT_SHADER, fs, fsSrc );
   Attribs( ctx );
   tbl.call(&tbl.glLinkProgram)( pg );
+
+  #ifndef NDEBUG
   GLint status = 0;
   tbl.call(&tbl.glGetProgramiv)( pg, GL_LINK_STATUS, &status );
-  if ( !status ) {
-    dbgLogLen = 0;
-    tbl.call(&tbl.glGetProgramInfoLog)( pg, (1<<15) - 2, &dbgLogLen, dbgLog );
-    dbgLog[ dbgLogLen ] = 0;
-    if( dbgLogLen > 0 ) {
-      Internal( "Program::Init", dbgLog );
-    }
+  if (!status)
+  {
+    std::string log;
+    if (helper::getInfoLog(log,tbl.call(&tbl.glGetProgramInfoLog),tbl.call(&tbl.glGetProgramiv),pg))
+      Internal( "Regal::Program::Init", log);
   }
+  #endif
 
   tbl.call(&tbl.glUseProgram)( pg );
   Samplers( ctx, tbl );
@@ -1427,16 +1423,18 @@ void Program::Shader( RegalContext * ctx, DispatchTable & tbl, GLenum type, GLui
   shader = tbl.call(&tbl.glCreateShader)(type);
   tbl.call(&tbl.glShaderSource)( shader, 1, srcs, len );
   tbl.call(&tbl.glCompileShader)( shader );
+
+  #ifndef NDEBUG
   GLint status = 0;
   tbl.call(&tbl.glGetShaderiv)( shader, GL_COMPILE_STATUS, &status );
-  if ( !status ) {
-    dbgLogLen = 0;
-    tbl.call(&tbl.glGetShaderInfoLog)( shader, (1<<15) - 2, &dbgLogLen, dbgLog );
-    dbgLog[ dbgLogLen ] = 0;
-    if( dbgLogLen > 0 ) {
-      Internal( "Program::Shader", dbgLog );
-    }
+  if (!status)
+  {
+    std::string log;
+    if (helper::getInfoLog(log,tbl.call(&tbl.glGetShaderInfoLog),tbl.call(&tbl.glGetShaderiv),pg))
+      Internal("Regal::Program::Shader", log);
   }
+  #endif
+
   tbl.call(&tbl.glAttachShader)( pg, shader );
 }
 

@@ -57,7 +57,7 @@ def apiMissingFuncDefineCode(apis, args):
 
       categoryPrev = category
 
-      code += '%sREGAL_CALL %s%s(%s) \n{\n' % (rType, 'missing_', name, params)
+      code += 'static %sREGAL_CALL %s%s(%s) \n{\n' % (rType, 'missing_', name, params)
       for param in function.parameters:
         code += '  UNUSED_PARAMETER(%s);\n' % param.name
       code += '  Warning( "%s not available." );\n' % name
