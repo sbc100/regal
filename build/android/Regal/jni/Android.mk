@@ -21,10 +21,10 @@ include $(regal_path)/build/regal.inc
 
 # src_files should not include LOCAL_PATH
 regal_src_files := $(patsubst %,$(regal_path)/%,$(REGAL.CXX))
-regal_src_files += $(regal_path)/src/mongoose/mongoose.c $(regal_path)/src/md5/src/md5.c
+regal_src_files += $(regal_path)/src/mongoose/mongoose.c $(regal_path)/src/md5/src/md5.c $(regal_path)/src/jsonsl/jsonsl.c
 regal_src_files := $(patsubst $(LOCAL_PATH)/%,%,$(regal_src_files))
 
-regal_c_includes := $(regal_path)/include $(regal_path)/src/regal $(regal_path)/src/boost $(regal_path)/src/mongoose $(regal_path)/src/md5/include $(regal_path)/src/lookup3
+regal_c_includes := $(regal_path)/include $(regal_path)/src/regal $(regal_path)/src/boost $(regal_path)/src/mongoose $(regal_path)/src/md5/include $(regal_path)/src/lookup3 $(regal_path)/src/jsonsl
 regal_c_includes := $(patsubst $(LOCAL_PATH)/../%,%,$(regal_c_includes))
 
 regal_export_c_includes := $(regal_path)/include

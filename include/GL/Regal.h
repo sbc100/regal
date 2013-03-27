@@ -35872,6 +35872,11 @@ extern "C" {
 typedef void (*RegalErrorCallback)(GLenum);
 REGAL_DECL RegalErrorCallback RegalSetErrorCallback( RegalErrorCallback callback );
 
+/*  RegalConfigure is optional.
+ */
+
+REGAL_DECL void RegalConfigure(const char *json);
+
 /*  RegalShareContext is optional.  It must be called before any call
  *  to RegalMakeCurrent.  It specifies that a context is sharing state
  *  with one already known to Regal.

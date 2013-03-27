@@ -131,9 +131,6 @@ namespace Config {
 #ifndef REGAL_NO_GETENV
     const char *tmp;
 
-    tmp = GetEnv( "REGAL_CONFIG_FILE" );
-    if (tmp) configFile = tmp;
-
 #if !REGAL_FORCE_ES1_PROFILE
     tmp = GetEnv( "REGAL_FORCE_ES1_PROFILE" );
     if (tmp) forceES1Profile = atoi(tmp)!=0;
@@ -517,6 +514,7 @@ namespace Config {
   void
   writeJSON(Json::Output &jo)
   {
+#if !REGAL_NO_JSON
     jo.object("config");
 
       jo.member("configFile", configFile);
@@ -554,8 +552,10 @@ namespace Config {
 
           jo.object("enable");
             jo.member("ppa",    enableEmuPpa);
+            jo.member("ppca",   enableEmuPpca);
             jo.member("obj",    enableEmuObj);
             jo.member("bin",    enableEmuBin);
+            jo.member("xfer",   enableEmuXfer);
             jo.member("dsa",    enableEmuDsa);
             jo.member("iff",    enableEmuIff);
             jo.member("so",     enableEmuSo);
@@ -566,8 +566,10 @@ namespace Config {
 
           jo.object("force");
             jo.member("ppa",    forceEmuPpa);
+            jo.member("ppca",   forceEmuPpca);
             jo.member("obj",    forceEmuObj);
             jo.member("bin",    forceEmuBin);
+            jo.member("xfer",   forceEmuXfer);
             jo.member("dsa",    forceEmuDsa);
             jo.member("iff",    forceEmuIff);
             jo.member("so",     forceEmuSo);
@@ -581,13 +583,22 @@ namespace Config {
       jo.end();
 
       jo.object("frame");
-        jo.member("limit",       frameLimit);
-        jo.member("md5Color",    frameMd5Color);
-        jo.member("md5Stencil",  frameMd5Stencil);
-        jo.member("md5Depth",    frameMd5Depth);
-        jo.member("saveColor",   frameSaveColor);
-        jo.member("saveStencil", frameSaveStencil);
-        jo.member("saveDepth",   frameSaveDepth);
+        jo.member("limit",     frameLimit);
+        jo.object("md5");
+          jo.member("color",   frameMd5Color);
+          jo.member("stencil", frameMd5Stencil);
+          jo.member("depth",   frameMd5Depth);
+          jo.object("mask");
+            jo.member("color",   frameMd5ColorMask);
+            jo.member("stencil", frameMd5StencilMask);
+            jo.member("depth",   frameMd5DepthMask);
+          jo.end();
+        jo.end();
+        jo.object("save");
+          jo.member("color",   frameSaveColor);
+          jo.member("stencil", frameSaveStencil);
+          jo.member("depth",   frameSaveDepth);
+        jo.end();
       jo.end();
 
       jo.object("cache");
@@ -602,6 +613,7 @@ namespace Config {
       jo.end();
 
     jo.end();
+#endif // !REGAL_NO_JSON
   }
 }
 

@@ -1,9 +1,6 @@
 /*
   Copyright (c) 2011-2013 NVIDIA Corporation
-  Copyright (c) 2011-2013 Cass Everitt
-  Copyright (c) 2012-2013 Scott Nations
-  Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2013 Nigel Stewart
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -28,17 +25,10 @@
   OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/*
-
- Convenient JSON encoding
- Nigel Stewart
-
- */
-
 #ifndef __REGAL_JSON_H__
 #define __REGAL_JSON_H__
 
-// http://www.json.org/
+#include "pch.h" /* For MS precompiled header support */
 
 #include "RegalUtil.h"
 
@@ -46,94 +36,139 @@ REGAL_GLOBAL_BEGIN
 
 #include <string>
 
-#include <boost/print/string_list.hpp>
-
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-namespace Json
+namespace Json {
+
+enum Object
 {
-  using ::std::string;
+  JSON_ROOT = 0,
 
-  using ::boost::print::string_list;
-  using ::boost::print::print_string;
-  using ::boost::print::pad;
+  JSON_REGAL,
+  JSON_REGAL_CONFIG,
+  JSON_REGAL_CONFIG_CACHE,
+  JSON_REGAL_CONFIG_CACHE_DIRECTORY,
+  JSON_REGAL_CONFIG_CACHE_ENABLE,
+  JSON_REGAL_CONFIG_CACHE_SHADER,
+  JSON_REGAL_CONFIG_CACHE_SHADERREAD,
+  JSON_REGAL_CONFIG_CACHE_SHADERWRITE,
+  JSON_REGAL_CONFIG_CACHE_TEXTURE,
+  JSON_REGAL_CONFIG_CACHE_TEXTUREREAD,
+  JSON_REGAL_CONFIG_CACHE_TEXTUREWRITE,
+  JSON_REGAL_CONFIG_CONFIGFILE,
+  JSON_REGAL_CONFIG_DISPATCH,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_BIN,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_DSA,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_FILTER,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_IFF,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_OBJ,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPA,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_SO,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXC,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_VAO,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_XFER,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_BIN,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_DSA,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_FILTER,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_IFF,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_OBJ,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPA,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_SO,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXC,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_VAO,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_XFER,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE_CODE,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE_DEBUG,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE_DRIVER,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE_EMULATION,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE_ERROR,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE_LOG,
+  JSON_REGAL_CONFIG_DISPATCH_FORCE,
+  JSON_REGAL_CONFIG_DISPATCH_FORCE_EMULATION,
+  JSON_REGAL_CONFIG_FORCE,
+  JSON_REGAL_CONFIG_FORCE_CORE,
+  JSON_REGAL_CONFIG_FORCE_ES1,
+  JSON_REGAL_CONFIG_FORCE_ES2,
+  JSON_REGAL_CONFIG_FRAME,
+  JSON_REGAL_CONFIG_FRAME_LIMIT,
+  JSON_REGAL_CONFIG_FRAME_MD5,
+  JSON_REGAL_CONFIG_FRAME_MD5_COLOR,
+  JSON_REGAL_CONFIG_FRAME_MD5_DEPTH,
+  JSON_REGAL_CONFIG_FRAME_MD5_MASK,
+  JSON_REGAL_CONFIG_FRAME_MD5_MASK_COLOR,
+  JSON_REGAL_CONFIG_FRAME_MD5_MASK_DEPTH,
+  JSON_REGAL_CONFIG_FRAME_MD5_MASK_STENCIL,
+  JSON_REGAL_CONFIG_FRAME_MD5_STENCIL,
+  JSON_REGAL_CONFIG_FRAME_SAVE,
+  JSON_REGAL_CONFIG_FRAME_SAVE_COLOR,
+  JSON_REGAL_CONFIG_FRAME_SAVE_DEPTH,
+  JSON_REGAL_CONFIG_FRAME_SAVE_STENCIL,
+  JSON_REGAL_CONFIG_SYSTEM,
+  JSON_REGAL_CONFIG_SYSTEM_EGL,
+  JSON_REGAL_CONFIG_SYSTEM_ES1,
+  JSON_REGAL_CONFIG_SYSTEM_ES2,
+  JSON_REGAL_CONFIG_SYSTEM_GL,
+  JSON_REGAL_CONFIG_SYSTEM_GLX,
+  JSON_REGAL_LOGGING,
+  JSON_REGAL_LOGGING_BUFFERLIMIT,
+  JSON_REGAL_LOGGING_CALLBACK,
+  JSON_REGAL_LOGGING_ENABLE,
+  JSON_REGAL_LOGGING_ENABLE_APP,
+  JSON_REGAL_LOGGING_ENABLE_DRIVER,
+  JSON_REGAL_LOGGING_ENABLE_ERROR,
+  JSON_REGAL_LOGGING_ENABLE_HTTP,
+  JSON_REGAL_LOGGING_ENABLE_INFO,
+  JSON_REGAL_LOGGING_ENABLE_INTERNAL,
+  JSON_REGAL_LOGGING_ENABLE_WARNING,
+  JSON_REGAL_LOGGING_FILENAME,
+  JSON_REGAL_LOGGING_FRAMETIME,
+  JSON_REGAL_LOGGING_JSON,
+  JSON_REGAL_LOGGING_JSONFILE,
+  JSON_REGAL_LOGGING_LOG,
+  JSON_REGAL_LOGGING_MAXBYTES,
+  JSON_REGAL_LOGGING_MAXLINES,
+  JSON_REGAL_LOGGING_ONCE,
+  JSON_REGAL_LOGGING_POINTERS,
+  JSON_REGAL_LOGGING_THREAD,
 
-  struct Output : public string_list< string >
-  {
-    public:
-      inline Output() : _empty(true), _nesting(0) {}
+  JSON_UNDEFINED
+};
 
-      // Each nested object must be concluded with a call to end()
+struct Parser
+{
+  Parser();
+  ~Parser();
 
-      inline void object(const char   *name);
-      inline void object(const string &name);
+  void onPush(const std::string &name);
+  void onPop();
 
-      inline void member(const char *name);                      // name : null
-      inline void member(const char *name, const char   *val);   // name : "the text"
-      inline void member(const char *name, const string &val);   // name : "the text"
+  void onValue();
+  void onValue(const bool         value);
+  void onValue(const long         value);
+  void onValue(const std::string &value);
 
-      template< typename T > void member(const char *name, const T &val);
+  //
 
-      inline void end();
+  static bool parseFile(const std::string &filename);
+  static bool parseString(const char *json);
 
-    private:
-      bool   _empty;
-      size_t _nesting;
-  };
+  //
 
-  void Output::object(const char *name)
-  {
-    string tmp = print_string(_empty ? "\n" : ",\n", pad(_nesting), name, " {");
-    push_back_swap(tmp);
-    _empty = true;
-    _nesting++;
-  }
-
-  void Output::object(const string &name)
-  {
-    object(name.c_str());
-  }
-
-  void Output::end()
-  {
-    if (_nesting--)
-    {
-      string tmp = print_string("\n", pad(_nesting), "}");
-      push_back_swap(tmp);
-    }
-  }
-
-  void Output::member(const char *name)
-  {
-    string tmp = print_string(_empty ? "\n" : ",\n", pad(_nesting), name," : null");
-    push_back_swap(tmp);
-    _empty = false;
-  }
-
-  void Output::member(const char *name, const char *val)
-  {
-    string tmp = print_string(_empty ? "\n" : ",\n", pad(_nesting), name," : \"",val,"\"");
-    push_back_swap(tmp);
-    _empty = false;
-  }
-
-  void Output::member(const char *name, const string &val)
-  {
-    member(name,val.c_str());
-  }
-
-  template<typename T>
-  void Output::member(const char *name, const T &val)
-  {
-    string tmp = print_string(_empty ? "\n" : ",\n", pad(_nesting), name," : ",val);
-    push_back_swap(tmp);
-    _empty = false;
-  }
+  std::size_t depth;
+  Object      current;
+};
 
 }
 
 REGAL_NAMESPACE_END
 
 #endif
+

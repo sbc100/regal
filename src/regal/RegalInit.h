@@ -84,6 +84,8 @@ public:
 
   static RegalErrorCallback setErrorCallback(RegalErrorCallback callback);
 
+  static void               configure(const char *json);
+
   static void               shareContext(RegalSystemContext a, RegalSystemContext b);
 
   #if REGAL_SYS_PPAPI

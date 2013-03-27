@@ -379,6 +379,10 @@
 #  define REGAL_NO_TLS 0
 #endif
 
+#ifndef REGAL_NO_JSON
+#  define REGAL_NO_JSON 0
+#endif
+
 // AssertFunction depends on Error log, but
 // ideally we wouldn't depend on RegalLog.h here
 

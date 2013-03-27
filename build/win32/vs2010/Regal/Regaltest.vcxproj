@@ -91,7 +91,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Release\Win32\regaltest.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -132,7 +132,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Release\x64\regaltest.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -170,7 +170,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Debug\Win32\regaltest.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -210,7 +210,7 @@
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Debug\x64\regaltest.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -232,11 +232,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\tests\RegalDispatchGMock.cpp" />
     <ClCompile Include="..\..\..\..\tests\testRegalHelper.cpp" />
+    <ClCompile Include="..\..\..\..\tests\testRegalJson.cpp" />
     <ClCompile Include="..\..\..\..\tests\testRegalPixelConversions.cpp" />
     <ClCompile Include="..\..\..\..\tests\testRegalPpa.cpp" />
     <ClCompile Include="..\..\..\..\tests\testRegalPpca.cpp" />
     <ClCompile Include="..\..\..\..\tests\testRegalState.cpp" />
     <ClCompile Include="..\..\..\..\tests\testRegalTexC.cpp" />
+    <ClCompile Include="..\..\..\..\tests\testRegalToken.cpp" />
     <ClCompile Include="..\..\..\..\tests\testStringList.cpp" />
     <ClCompile Include="..\..\..\..\tests\test_main.cpp" />
   </ItemGroup>

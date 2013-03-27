@@ -13,4 +13,6 @@ REGALTEST.CXX += tests/testRegalState.cpp
 REGALTEST.CXX += tests/testRegalPpa.cpp
 REGALTEST.CXX += tests/testRegalPpca.cpp
 REGALTEST.CXX += tests/testRegalHelper.cpp
+REGALTEST.CXX += tests/testRegalToken.cpp
+REGALTEST.CXX += tests/testRegalJson.cpp
 REGALTEST.CXX += tests/RegalDispatchGMock.cpp

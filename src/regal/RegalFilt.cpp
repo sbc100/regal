@@ -227,15 +227,21 @@ namespace Emu {
     #if REGAL_SYS_ES2
     if (ctx.isES2())
     {
+#if 0
       filtered = true;
       switch (pname ) {
-        case GL_PACK_ALIGNMENT:
-          retVal = 1;
-          break;
+          /* just a test
+           case GL_PACK_ALIGNMENT:
+           retVal = 1;
+           break;
+          */
         default:
           filtered = false;
           break;
       }
+#else
+      filtered = false;
+#endif
       if (filtered)
       {
         Warning( "Regal does not support ", GLenumToString(pname), " as pname for glGet for ES 2.0 profile - skipping." );

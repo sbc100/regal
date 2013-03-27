@@ -109,8 +109,9 @@ namespace Logging {
 
   bool initialized = false;
 
-#if REGAL_LOG_ONCE
   bool once      = (REGAL_LOG_ONCE);
+
+#if REGAL_LOG_ONCE
   std::set<std::string> uniqueErrors;
   std::set<std::string> uniqueWarnings;
 #endif
@@ -283,16 +284,19 @@ namespace Logging {
     if (logOutput)
       fileClose(&logOutput);
 
+#if !REGAL_NO_JSON
     if (jsonOutput)
     {
       fprintf(jsonOutput,"%s","{} ] }\n");
       fileClose(&jsonOutput);
     }
+#endif
   }
 
   void
   writeJSON(Json::Output &jo)
   {
+#if !REGAL_NO_JSON
     jo.object("logging");
 
       jo.object("enable");
@@ -308,10 +312,7 @@ namespace Logging {
       jo.member("maxLines",  maxLines);
       jo.member("maxBytes",  maxBytes);
 
-#if REGAL_LOG_ONCE
       jo.member("once",      once);
-#endif
-
       jo.member("frameTime", frameTime);
       jo.member("pointers",  pointers);
       jo.member("thread",    thread);
@@ -324,6 +325,7 @@ namespace Logging {
       jo.member("bufferLimit", bufferLimit);
 
     jo.end();
+#endif
   }
 
   inline size_t indent()
@@ -372,6 +374,9 @@ namespace Logging {
 
   inline string jsonObject(const char *prefix, const char *name, const string &str)
   {
+#if REGAL_NO_JSON
+    return string();
+#else
     //
     // http://www.altdevblogaday.com/2012/08/21/using-chrometracing-to-view-your-inline-profiling-data/
     //
@@ -463,6 +468,7 @@ namespace Logging {
     }
 
     return jo.str();
+#endif // REGAL_NO_JSON
   }
 
   // Append to the log buffer
@@ -547,7 +553,7 @@ namespace Logging {
       __android_log_write(ANDROID_LOG_INFO, REGAL_LOG_TAG, m.c_str());
 #endif
 
-#if REGAL_LOG_JSON
+#if REGAL_LOG_JSON && !REGAL_NO_JSON
       if (json && jsonOutput)
       {
         string m = jsonObject(prefix,name,str);

@@ -150,6 +150,9 @@
 		BC3209D116F3A0E600D1A9E0 /* RegalCacheShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalCacheShader.h; path = ../../../src/regal/RegalCacheShader.h; sourceTree = "<group>"; };
 		BC3209D216F3A0E600D1A9E0 /* RegalCacheTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalCacheTexture.cpp; path = ../../../src/regal/RegalCacheTexture.cpp; sourceTree = "<group>"; };
 		BC3209D316F3A0E600D1A9E0 /* RegalCacheTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalCacheTexture.h; path = ../../../src/regal/RegalCacheTexture.h; sourceTree = "<group>"; };
+		BC60A6B4170330700055437B /* RegalJson.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RegalJson.cpp; path = ../../../src/regal/RegalJson.cpp; sourceTree = "<group>"; };
+		BC60A6B5170330700055437B /* RegalJson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RegalJson.h; path = ../../../src/regal/RegalJson.h; sourceTree = "<group>"; };
+		BC60A6B6170330700055437B /* RegalJson.inl */ = {isa = PBXFileReference; lastKnownFileType = text; name = RegalJson.inl; path = ../../../src/regal/RegalJson.inl; sourceTree = "<group>"; };
 		BC640CA216554AA4007DEF69 /* RegalFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalFrame.cpp; path = ../../../src/regal/RegalFrame.cpp; sourceTree = "<group>"; };
 		BC640CA316554AA4007DEF69 /* RegalFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalFrame.h; path = ../../../src/regal/RegalFrame.h; sourceTree = "<group>"; };
 		BC6C912915EE3DC60056E4F7 /* RegalDispatchGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalDispatchGlobal.cpp; path = ../../../src/regal/RegalDispatchGlobal.cpp; sourceTree = "<group>"; };
@@ -262,6 +265,9 @@
 				43FC5F6515C4619B00D0177C /* RegalIff.h */,
 				43FC5F6615C4619B00D0177C /* RegalInit.cpp */,
 				43FC5F6715C4619B00D0177C /* RegalInit.h */,
+				BC60A6B4170330700055437B /* RegalJson.cpp */,
+				BC60A6B5170330700055437B /* RegalJson.h */,
+				BC60A6B6170330700055437B /* RegalJson.inl */,
 				43FC5F6815C4619B00D0177C /* RegalLog.cpp */,
 				43FC5F6915C4619B00D0177C /* RegalLog.h */,
 				43FC5F6A15C4619B00D0177C /* RegalLookup.cpp */,

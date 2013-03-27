@@ -186,8 +186,9 @@ namespace Logging
   extern bool pointers;         // Enabled by default, otherwise empty
   extern bool thread;           // Disabled by default
 
-#if REGAL_LOG_ONCE
   extern bool once;             // Warning and error message logged once only
+
+#if REGAL_LOG_ONCE
   extern std::set<std::string> uniqueErrors;
   extern std::set<std::string> uniqueWarnings;
 #endif

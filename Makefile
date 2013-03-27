@@ -205,12 +205,13 @@ LIB.SRCS           += src/md5/src/md5.c
 endif
 
 LIB.SRCS           += src/jsonsl/jsonsl.c
-LIB.CFLAGS         += -DJSONSL_STATE_GENERIC=1
 
-LIB.INCLUDE        += -Isrc/zlib/include -Isrc/libpng/include
+LIB.INCLUDE        += -Isrc/zlib/include
+LIB.INCLUDE        += -Isrc/libpng/include
 LIB.INCLUDE        += -Isrc/mongoose
 LIB.INCLUDE        += -Isrc/md5/include
 LIB.INCLUDE        += -Isrc/lookup3
+LIB.INCLUDE        += -Isrc/jsonsl
 
 # Optional flags
 

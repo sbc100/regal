@@ -32,8 +32,6 @@
 #include <string>
 
 #include "RegalHelper.h"
-#include "RegalDispatch.h"
-#include "RegalDispatchGMock.h"
 
 using namespace std;
 
@@ -47,8 +45,8 @@ TEST( RegalHelper, Get )
 {
   {
     //
-    // $ egrep '^[ ]+case GL_[A-Z0-9_]*:.*size =' src/regal/RegalHelper.cpp  \
-    //   | grep -v sizeof | cut -b10-70 | gsed 's/:.*size =//'  | gsed 's/;//' \
+    // $ egrep '^[ ]+case GL_[A-Z0-9_]*:.*size =' src/regal/RegalHelper.cpp
+    //   | grep -v sizeof | cut -b10-70 | gsed 's/:.*size =//'  | gsed 's/;//'
     //   | gsed 's/\([^ ]*\) \([^ ]*\)/      EXPECT_EQ(Regal::helper::size::get(\1),\2);/'
     //
 
