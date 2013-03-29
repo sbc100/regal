@@ -432,7 +432,7 @@ struct RegalGMockInterface
   MOCK_METHOD1(glIsProgram, GLboolean(GLuint));
   MOCK_METHOD1(glIsShader, GLboolean(GLuint));
   MOCK_METHOD1(glLinkProgram, void(GLuint));
-  MOCK_METHOD4(glShaderSource, void(GLuint, GLsizei, const GLchar **, const GLint *));
+  MOCK_METHOD4(glShaderSource, void(GLuint, GLsizei, const GLchar * const *, const GLint *));
   MOCK_METHOD4(glStencilFuncSeparate, void(GLenum, GLenum, GLint, GLuint));
   MOCK_METHOD2(glStencilMaskSeparate, void(GLenum, GLuint));
   MOCK_METHOD4(glStencilOpSeparate, void(GLenum, GLenum, GLenum, GLenum));

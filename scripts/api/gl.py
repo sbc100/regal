@@ -2218,6 +2218,8 @@ GL_CLIP_DISTANCE2 = Enumerant('GL_CLIP_DISTANCE2', 'GL_CLIP_PLANE2', 'GL_VERSION
 GL_CLIP_DISTANCE3 = Enumerant('GL_CLIP_DISTANCE3', 'GL_CLIP_PLANE3', 'GL_VERSION_3_0')
 GL_CLIP_DISTANCE4 = Enumerant('GL_CLIP_DISTANCE4', 'GL_CLIP_PLANE4', 'GL_VERSION_3_0')
 GL_CLIP_DISTANCE5 = Enumerant('GL_CLIP_DISTANCE5', 'GL_CLIP_PLANE5', 'GL_VERSION_3_0')
+GL_CLIP_DISTANCE6 = Enumerant('GL_CLIP_DISTANCE6', 'GL_CLIP_PLANE6', 'GL_VERSION_3_0')
+GL_CLIP_DISTANCE7 = Enumerant('GL_CLIP_DISTANCE7', 'GL_CLIP_PLANE7', 'GL_VERSION_3_0')
 GL_COMPARE_REF_TO_TEXTURE = Enumerant('GL_COMPARE_REF_TO_TEXTURE', 'GL_COMPARE_R_TO_TEXTURE_ARB', 'GL_VERSION_3_0')
 GL_CONTEXT_FLAGS = Enumerant('GL_CONTEXT_FLAGS', 0x821e, 'GL_VERSION_3_0')
 GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT = Enumerant('GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT', 0x0001, 'GL_VERSION_3_0')
@@ -2324,6 +2326,8 @@ defines.add(GL_CLIP_DISTANCE2)
 defines.add(GL_CLIP_DISTANCE3)
 defines.add(GL_CLIP_DISTANCE4)
 defines.add(GL_CLIP_DISTANCE5)
+defines.add(GL_CLIP_DISTANCE6)
+defines.add(GL_CLIP_DISTANCE7)
 defines.add(GL_COMPARE_REF_TO_TEXTURE)
 defines.add(GL_CONTEXT_FLAGS)
 defines.add(GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
@@ -16019,7 +16023,7 @@ glMultiDrawElements.ret = Return('void')
 glMultiDrawElements.add( Input( 'mode','GLenum' ))
 glMultiDrawElements.add( Input( 'count','const GLsizei *' ,size = 'primcount' ))
 glMultiDrawElements.add( Input( 'type','GLenum' ))
-glMultiDrawElements.add( Input( 'indices','const GLvoid **' ,size = 'primcount' ))
+glMultiDrawElements.add( Input( 'indices','const GLvoid * const *' ,size = 'primcount' ))
 glMultiDrawElements.add( Input( 'primcount','GLsizei' ))
 glMultiDrawElements.version = '1.4'
 glMultiDrawElements.category = 'GL_VERSION_1_4'
@@ -16964,7 +16968,7 @@ glShaderSource = Function('glShaderSource')
 glShaderSource.ret = Return('void')
 glShaderSource.add( Input( 'shader','GLuint' ))
 glShaderSource.add( Input( 'count','GLsizei' ))
-glShaderSource.add( Input( 'string','const GLchar **' ,size = 'string ? count : 0' ,cast = 'const char **' ))
+glShaderSource.add( Input( 'string','const GLchar * const *' ,size = 'string ? count : 0' ,cast = 'const char * const *' ))
 glShaderSource.add( Input( 'length','const GLint *' ,size = 'length ? count : 0' ))
 glShaderSource.version = '2.0'
 glShaderSource.category = 'GL_VERSION_2_0'
@@ -18017,7 +18021,7 @@ glTransformFeedbackVaryings = Function('glTransformFeedbackVaryings')
 glTransformFeedbackVaryings.ret = Return('void')
 glTransformFeedbackVaryings.add( Input( 'program','GLuint' ))
 glTransformFeedbackVaryings.add( Input( 'count','GLsizei' ))
-glTransformFeedbackVaryings.add( Input( 'varyings','const GLchar **' ,size = 'count' ))
+glTransformFeedbackVaryings.add( Input( 'varyings','const GLchar * const *' ,size = 'count' ))
 glTransformFeedbackVaryings.add( Input( 'bufferMode','GLenum' ))
 glTransformFeedbackVaryings.version = '3.0'
 glTransformFeedbackVaryings.category = 'GL_VERSION_3_0'
@@ -19293,7 +19297,7 @@ glTextureRangeAPPLE = Function('glTextureRangeAPPLE')
 glTextureRangeAPPLE.ret = Return('void')
 glTextureRangeAPPLE.add( Input( 'target','GLenum' ))
 glTextureRangeAPPLE.add( Input( 'length','GLsizei' ))
-glTextureRangeAPPLE.add( Input( 'pointer','GLvoid *' ))
+glTextureRangeAPPLE.add( Input( 'pointer','const GLvoid *' ))
 glTextureRangeAPPLE.version = '1.2'
 glTextureRangeAPPLE.category = 'GL_APPLE_texture_range'
 glTextureRangeAPPLE.trace = True
@@ -19324,7 +19328,7 @@ gl.add(glDeleteVertexArraysAPPLE)
 glGenVertexArraysAPPLE = Function('glGenVertexArraysAPPLE')
 glGenVertexArraysAPPLE.ret = Return('void')
 glGenVertexArraysAPPLE.add( Input( 'n','GLsizei' ))
-glGenVertexArraysAPPLE.add( Output( 'arrays','const GLuint *' ))
+glGenVertexArraysAPPLE.add( Output( 'arrays','GLuint *' ))
 glGenVertexArraysAPPLE.version = '1.2'
 glGenVertexArraysAPPLE.category = 'GL_APPLE_vertex_array_object'
 glGenVertexArraysAPPLE.trace = True
@@ -19749,7 +19753,7 @@ gl.add(glCopyImageSubData)
 glDebugMessageCallbackARB = Function('glDebugMessageCallbackARB')
 glDebugMessageCallbackARB.ret = Return('void')
 glDebugMessageCallbackARB.add( Input( 'callback','GLDEBUGPROCARB' ))
-glDebugMessageCallbackARB.add( Input( 'userParam','GLvoid *' ))
+glDebugMessageCallbackARB.add( Input( 'userParam','const GLvoid *' ))
 glDebugMessageCallbackARB.version = '4.1'
 glDebugMessageCallbackARB.category = 'GL_ARB_debug_output'
 glDebugMessageCallbackARB.trace = True
@@ -19866,7 +19870,7 @@ glDrawElementsBaseVertex.ret = Return('void')
 glDrawElementsBaseVertex.add( Input( 'mode','GLenum' ))
 glDrawElementsBaseVertex.add( Input( 'count','GLsizei' ))
 glDrawElementsBaseVertex.add( Input( 'type','GLenum' ))
-glDrawElementsBaseVertex.add( Input( 'indices','GLvoid *' ))
+glDrawElementsBaseVertex.add( Input( 'indices','const GLvoid *' ))
 glDrawElementsBaseVertex.add( Input( 'basevertex','GLint' ))
 glDrawElementsBaseVertex.version = '3.2'
 glDrawElementsBaseVertex.category = 'GL_ARB_draw_elements_base_vertex'
@@ -19895,7 +19899,7 @@ glDrawRangeElementsBaseVertex.add( Input( 'start','GLuint' ))
 glDrawRangeElementsBaseVertex.add( Input( 'end','GLuint' ))
 glDrawRangeElementsBaseVertex.add( Input( 'count','GLsizei' ))
 glDrawRangeElementsBaseVertex.add( Input( 'type','GLenum' ))
-glDrawRangeElementsBaseVertex.add( Input( 'indices','GLvoid *' ))
+glDrawRangeElementsBaseVertex.add( Input( 'indices','const GLvoid *' ))
 glDrawRangeElementsBaseVertex.add( Input( 'basevertex','GLint' ))
 glDrawRangeElementsBaseVertex.version = '3.2'
 glDrawRangeElementsBaseVertex.category = 'GL_ARB_draw_elements_base_vertex'
@@ -19906,11 +19910,11 @@ gl.add(glDrawRangeElementsBaseVertex)
 glMultiDrawElementsBaseVertex = Function('glMultiDrawElementsBaseVertex')
 glMultiDrawElementsBaseVertex.ret = Return('void')
 glMultiDrawElementsBaseVertex.add( Input( 'mode','GLenum' ))
-glMultiDrawElementsBaseVertex.add( Input( 'count','GLsizei *' ,size = 'primcount' ))
+glMultiDrawElementsBaseVertex.add( Input( 'count','const GLsizei *' ,size = 'primcount' ))
 glMultiDrawElementsBaseVertex.add( Input( 'type','GLenum' ))
-glMultiDrawElementsBaseVertex.add( Input( 'indices','GLvoid **' ,size = 'primcount' ))
+glMultiDrawElementsBaseVertex.add( Input( 'indices','const GLvoid * const *' ,size = 'primcount' ))
 glMultiDrawElementsBaseVertex.add( Input( 'primcount','GLsizei' ))
-glMultiDrawElementsBaseVertex.add( Input( 'basevertex','GLint *' ,size = 'primcount' ))
+glMultiDrawElementsBaseVertex.add( Input( 'basevertex','const GLint *' ,size = 'primcount' ))
 glMultiDrawElementsBaseVertex.version = '3.2'
 glMultiDrawElementsBaseVertex.category = 'GL_ARB_draw_elements_base_vertex'
 glMultiDrawElementsBaseVertex.trace = True
@@ -21101,7 +21105,7 @@ glMatrixIndexPointerARB.ret = Return('void')
 glMatrixIndexPointerARB.add( Input( 'size','GLint' ))
 glMatrixIndexPointerARB.add( Input( 'type','GLenum' ))
 glMatrixIndexPointerARB.add( Input( 'stride','GLsizei' ))
-glMatrixIndexPointerARB.add( Input( 'pointer','GLvoid *' ))
+glMatrixIndexPointerARB.add( Input( 'pointer','const GLvoid *' ))
 glMatrixIndexPointerARB.version = '1.1'
 glMatrixIndexPointerARB.category = 'GL_ARB_matrix_palette'
 glMatrixIndexPointerARB.trace = True
@@ -21111,7 +21115,7 @@ gl.add(glMatrixIndexPointerARB)
 glMatrixIndexubvARB = Function('glMatrixIndexubvARB')
 glMatrixIndexubvARB.ret = Return('void')
 glMatrixIndexubvARB.add( Input( 'size','GLint' ))
-glMatrixIndexubvARB.add( Input( 'indices','GLubyte *' ))
+glMatrixIndexubvARB.add( Input( 'indices','const GLubyte *' ))
 glMatrixIndexubvARB.version = '1.1'
 glMatrixIndexubvARB.category = 'GL_ARB_matrix_palette'
 glMatrixIndexubvARB.trace = True
@@ -21121,7 +21125,7 @@ gl.add(glMatrixIndexubvARB)
 glMatrixIndexuivARB = Function('glMatrixIndexuivARB')
 glMatrixIndexuivARB.ret = Return('void')
 glMatrixIndexuivARB.add( Input( 'size','GLint' ))
-glMatrixIndexuivARB.add( Input( 'indices','GLuint *' ))
+glMatrixIndexuivARB.add( Input( 'indices','const GLuint *' ))
 glMatrixIndexuivARB.version = '1.1'
 glMatrixIndexuivARB.category = 'GL_ARB_matrix_palette'
 glMatrixIndexuivARB.trace = True
@@ -21131,7 +21135,7 @@ gl.add(glMatrixIndexuivARB)
 glMatrixIndexusvARB = Function('glMatrixIndexusvARB')
 glMatrixIndexusvARB.ret = Return('void')
 glMatrixIndexusvARB.add( Input( 'size','GLint' ))
-glMatrixIndexusvARB.add( Input( 'indices','GLushort *' ))
+glMatrixIndexusvARB.add( Input( 'indices','const GLushort *' ))
 glMatrixIndexusvARB.version = '1.1'
 glMatrixIndexusvARB.category = 'GL_ARB_matrix_palette'
 glMatrixIndexusvARB.trace = True
@@ -22179,7 +22183,7 @@ glCreateShaderProgramv = Function('glCreateShaderProgramv')
 glCreateShaderProgramv.ret = Return('GLuint')
 glCreateShaderProgramv.add( Input( 'type','GLenum' ))
 glCreateShaderProgramv.add( Input( 'count','GLsizei' ))
-glCreateShaderProgramv.add( Input( 'strings','const GLchar **' ,size = 'count' ))
+glCreateShaderProgramv.add( Input( 'strings','const GLchar * const *' ,size = 'count' ))
 glCreateShaderProgramv.version = '4.1'
 glCreateShaderProgramv.category = 'GL_ARB_separate_shader_objects'
 glCreateShaderProgramv.trace = True
@@ -24313,7 +24317,7 @@ glGetUniformIndices = Function('glGetUniformIndices')
 glGetUniformIndices.ret = Return('void')
 glGetUniformIndices.add( Input( 'program','GLuint' ))
 glGetUniformIndices.add( Input( 'uniformCount','GLsizei' ))
-glGetUniformIndices.add( Input( 'uniformNames','const GLchar **' ))
+glGetUniformIndices.add( Input( 'uniformNames','const GLchar * const *' ))
 glGetUniformIndices.add( Output( 'uniformIndices','GLuint *' ))
 glGetUniformIndices.version = '3.1'
 glGetUniformIndices.category = 'GL_ARB_uniform_buffer_object'
@@ -24571,7 +24575,7 @@ glWeightPointerARB.ret = Return('void')
 glWeightPointerARB.add( Input( 'size','GLint' ))
 glWeightPointerARB.add( Input( 'type','GLenum' ))
 glWeightPointerARB.add( Input( 'stride','GLsizei' ))
-glWeightPointerARB.add( Input( 'pointer','GLvoid *' ))
+glWeightPointerARB.add( Input( 'pointer','const GLvoid *' ))
 glWeightPointerARB.version = '1.1'
 glWeightPointerARB.category = 'GL_ARB_vertex_blend'
 glWeightPointerARB.trace = True
@@ -24581,7 +24585,7 @@ gl.add(glWeightPointerARB)
 glWeightbvARB = Function('glWeightbvARB')
 glWeightbvARB.ret = Return('void')
 glWeightbvARB.add( Input( 'size','GLint' ))
-glWeightbvARB.add( Input( 'weights','GLbyte *' ))
+glWeightbvARB.add( Input( 'weights','const GLbyte *' ))
 glWeightbvARB.version = '1.1'
 glWeightbvARB.category = 'GL_ARB_vertex_blend'
 glWeightbvARB.trace = True
@@ -24591,7 +24595,7 @@ gl.add(glWeightbvARB)
 glWeightdvARB = Function('glWeightdvARB')
 glWeightdvARB.ret = Return('void')
 glWeightdvARB.add( Input( 'size','GLint' ))
-glWeightdvARB.add( Input( 'weights','GLdouble *' ))
+glWeightdvARB.add( Input( 'weights','const GLdouble *' ))
 glWeightdvARB.version = '1.1'
 glWeightdvARB.category = 'GL_ARB_vertex_blend'
 glWeightdvARB.trace = True
@@ -24601,7 +24605,7 @@ gl.add(glWeightdvARB)
 glWeightfvARB = Function('glWeightfvARB')
 glWeightfvARB.ret = Return('void')
 glWeightfvARB.add( Input( 'size','GLint' ))
-glWeightfvARB.add( Input( 'weights','GLfloat *' ))
+glWeightfvARB.add( Input( 'weights','const GLfloat *' ))
 glWeightfvARB.version = '1.1'
 glWeightfvARB.category = 'GL_ARB_vertex_blend'
 glWeightfvARB.trace = True
@@ -24611,7 +24615,7 @@ gl.add(glWeightfvARB)
 glWeightivARB = Function('glWeightivARB')
 glWeightivARB.ret = Return('void')
 glWeightivARB.add( Input( 'size','GLint' ))
-glWeightivARB.add( Input( 'weights','GLint *' ))
+glWeightivARB.add( Input( 'weights','const GLint *' ))
 glWeightivARB.version = '1.1'
 glWeightivARB.category = 'GL_ARB_vertex_blend'
 glWeightivARB.trace = True
@@ -24621,7 +24625,7 @@ gl.add(glWeightivARB)
 glWeightsvARB = Function('glWeightsvARB')
 glWeightsvARB.ret = Return('void')
 glWeightsvARB.add( Input( 'size','GLint' ))
-glWeightsvARB.add( Input( 'weights','GLshort *' ))
+glWeightsvARB.add( Input( 'weights','const GLshort *' ))
 glWeightsvARB.version = '1.1'
 glWeightsvARB.category = 'GL_ARB_vertex_blend'
 glWeightsvARB.trace = True
@@ -24631,7 +24635,7 @@ gl.add(glWeightsvARB)
 glWeightubvARB = Function('glWeightubvARB')
 glWeightubvARB.ret = Return('void')
 glWeightubvARB.add( Input( 'size','GLint' ))
-glWeightubvARB.add( Input( 'weights','GLubyte *' ))
+glWeightubvARB.add( Input( 'weights','const GLubyte *' ))
 glWeightubvARB.version = '1.1'
 glWeightubvARB.category = 'GL_ARB_vertex_blend'
 glWeightubvARB.trace = True
@@ -24641,7 +24645,7 @@ gl.add(glWeightubvARB)
 glWeightuivARB = Function('glWeightuivARB')
 glWeightuivARB.ret = Return('void')
 glWeightuivARB.add( Input( 'size','GLint' ))
-glWeightuivARB.add( Input( 'weights','GLuint *' ))
+glWeightuivARB.add( Input( 'weights','const GLuint *' ))
 glWeightuivARB.version = '1.1'
 glWeightuivARB.category = 'GL_ARB_vertex_blend'
 glWeightuivARB.trace = True
@@ -24651,7 +24655,7 @@ gl.add(glWeightuivARB)
 glWeightusvARB = Function('glWeightusvARB')
 glWeightusvARB.ret = Return('void')
 glWeightusvARB.add( Input( 'size','GLint' ))
-glWeightusvARB.add( Input( 'weights','GLushort *' ))
+glWeightusvARB.add( Input( 'weights','const GLushort *' ))
 glWeightusvARB.version = '1.1'
 glWeightusvARB.category = 'GL_ARB_vertex_blend'
 glWeightusvARB.trace = True
@@ -26239,7 +26243,7 @@ gl.add(glGetTexBumpParameterivATI)
 glTexBumpParameterfvATI = Function('glTexBumpParameterfvATI')
 glTexBumpParameterfvATI.ret = Return('void')
 glTexBumpParameterfvATI.add( Input( 'pname','GLenum' ))
-glTexBumpParameterfvATI.add( Input( 'param','GLfloat *' ))
+glTexBumpParameterfvATI.add( Input( 'param','const GLfloat *' ))
 glTexBumpParameterfvATI.version = '1.2'
 glTexBumpParameterfvATI.category = 'GL_ATI_envmap_bumpmap'
 glTexBumpParameterfvATI.trace = True
@@ -26249,7 +26253,7 @@ gl.add(glTexBumpParameterfvATI)
 glTexBumpParameterivATI = Function('glTexBumpParameterivATI')
 glTexBumpParameterivATI.ret = Return('void')
 glTexBumpParameterivATI.add( Input( 'pname','GLenum' ))
-glTexBumpParameterivATI.add( Input( 'param','GLint *' ))
+glTexBumpParameterivATI.add( Input( 'param','const GLint *' ))
 glTexBumpParameterivATI.version = '1.2'
 glTexBumpParameterivATI.category = 'GL_ATI_envmap_bumpmap'
 glTexBumpParameterivATI.trace = True
@@ -32048,7 +32052,7 @@ gl.add(glMultiDrawArraysEXT)
 glMultiDrawElementsEXT = Function('glMultiDrawElementsEXT')
 glMultiDrawElementsEXT.ret = Return('void')
 glMultiDrawElementsEXT.add( Input( 'mode','GLenum' ))
-glMultiDrawElementsEXT.add( Input( 'count','GLsizei *' ,size = 'primcount' ))
+glMultiDrawElementsEXT.add( Input( 'count','const GLsizei *' ,size = 'primcount' ))
 glMultiDrawElementsEXT.add( Input( 'type','GLenum' ))
 glMultiDrawElementsEXT.add( Input( 'indices','const GLvoid **' ,size = 'primcount' ))
 glMultiDrawElementsEXT.add( Input( 'primcount','GLsizei' ))
@@ -34130,7 +34134,7 @@ gl.add(glTexScissorINTEL)
 glDebugMessageCallback = Function('glDebugMessageCallback')
 glDebugMessageCallback.ret = Return('void')
 glDebugMessageCallback.add( Input( 'callback','GLDEBUGPROC' ))
-glDebugMessageCallback.add( Input( 'userParam','GLvoid *' ))
+glDebugMessageCallback.add( Input( 'userParam','const GLvoid *' ))
 glDebugMessageCallback.version = ''
 glDebugMessageCallback.category = 'GL_KHR_debug'
 glDebugMessageCallback.trace = True
@@ -34196,7 +34200,7 @@ gl.add(glGetObjectLabel)
 
 glGetObjectPtrLabel = Function('glGetObjectPtrLabel')
 glGetObjectPtrLabel.ret = Return('void')
-glGetObjectPtrLabel.add( Input( 'ptr','GLvoid *' ))
+glGetObjectPtrLabel.add( Input( 'ptr','const GLvoid *' ))
 glGetObjectPtrLabel.add( Input( 'bufSize','GLsizei' ))
 glGetObjectPtrLabel.add( Input( 'length','GLsizei *' ))
 glGetObjectPtrLabel.add( Input( 'label','GLchar *' ))
@@ -34220,7 +34224,7 @@ gl.add(glObjectLabel)
 
 glObjectPtrLabel = Function('glObjectPtrLabel')
 glObjectPtrLabel.ret = Return('void')
-glObjectPtrLabel.add( Input( 'ptr','GLvoid *' ))
+glObjectPtrLabel.add( Input( 'ptr','const GLvoid *' ))
 glObjectPtrLabel.add( Input( 'length','GLsizei' ))
 glObjectPtrLabel.add( Input( 'label','const GLchar *' ))
 glObjectPtrLabel.version = ''
@@ -38400,7 +38404,7 @@ glProgramParameters4dvNV = Function('glProgramParameters4dvNV')
 glProgramParameters4dvNV.ret = Return('void')
 glProgramParameters4dvNV.add( Input( 'target','GLenum' ))
 glProgramParameters4dvNV.add( Input( 'index','GLuint' ))
-glProgramParameters4dvNV.add( Input( 'count','GLuint' ))
+glProgramParameters4dvNV.add( Input( 'count','GLsizei' ))
 glProgramParameters4dvNV.add( Input( 'v','const GLdouble *' ,size = 'count * 4' ))
 glProgramParameters4dvNV.version = '1.2'
 glProgramParameters4dvNV.category = 'GL_NV_vertex_program'
@@ -38412,7 +38416,7 @@ glProgramParameters4fvNV = Function('glProgramParameters4fvNV')
 glProgramParameters4fvNV.ret = Return('void')
 glProgramParameters4fvNV.add( Input( 'target','GLenum' ))
 glProgramParameters4fvNV.add( Input( 'index','GLuint' ))
-glProgramParameters4fvNV.add( Input( 'count','GLuint' ))
+glProgramParameters4fvNV.add( Input( 'count','GLsizei' ))
 glProgramParameters4fvNV.add( Input( 'v','const GLfloat *' ,size = 'count * 4' ))
 glProgramParameters4fvNV.version = '1.2'
 glProgramParameters4fvNV.category = 'GL_NV_vertex_program'

@@ -142,6 +142,7 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_LOGGING,
   JSON_REGAL_LOGGING,
   JSON_REGAL_LOGGING,
+  JSON_REGAL_LOGGING,
 
   JSON_UNDEFINED
 };
@@ -296,6 +297,7 @@ Parser::onPush(const string &name)
       if (name=="maxLines"    ) { current = JSON_REGAL_LOGGING_MAXLINES;                       return; }
       if (name=="once"        ) { current = JSON_REGAL_LOGGING_ONCE;                           return; }
       if (name=="pointers"    ) { current = JSON_REGAL_LOGGING_POINTERS;                       return; }
+      if (name=="process"     ) { current = JSON_REGAL_LOGGING_PROCESS;                        return; }
       if (name=="thread"      ) { current = JSON_REGAL_LOGGING_THREAD;                         return; }
       break;
 
@@ -402,6 +404,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_LOGGING_LOG                            : { set_json_regal_logging_log(value);                           return; }
     case JSON_REGAL_LOGGING_ONCE                           : { set_json_regal_logging_once(value);                          return; }
     case JSON_REGAL_LOGGING_POINTERS                       : { set_json_regal_logging_pointers(value);                      return; }
+    case JSON_REGAL_LOGGING_PROCESS                        : { set_json_regal_logging_process(value);                       return; }
     case JSON_REGAL_LOGGING_THREAD                         : { set_json_regal_logging_thread(value);                        return; }
     case JSON_REGAL_LOGGING_ENABLE_APP                     : { set_json_regal_logging_enable_app(value);                    return; }
     case JSON_REGAL_LOGGING_ENABLE_DRIVER                  : { set_json_regal_logging_enable_driver(value);                 return; }

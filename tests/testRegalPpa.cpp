@@ -69,15 +69,15 @@ TEST( RegalPpa, Enable ) {
   EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.State::Depth::enable );
   EXPECT_FALSE( ppa.Disable( &ctx, GL_DEPTH_TEST ) );
   EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.State::Depth::enable );
-  
+
   EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.State::Stencil::enable );
   EXPECT_FALSE( ppa.Enable( &ctx, GL_STENCIL_TEST ) );
   EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.State::Stencil::enable );
-  
+
   EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.State::Polygon::cullEnable );
   EXPECT_FALSE( ppa.Enable( &ctx, GL_CULL_FACE ) );
   EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.State::Polygon::cullEnable );
-  
+
   EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.State::Polygon::smoothEnable );
   EXPECT_FALSE( ppa.Enable( &ctx, GL_POLYGON_SMOOTH ) );
   EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.State::Polygon::smoothEnable );
@@ -142,7 +142,6 @@ TEST( RegalPpa, PushPopAttrib ) {
 
   // Revisit - Emu::Ppa shouldn't make these calls if there
   //           is no actual state change.
-
   EXPECT_CALL( mock, glDisable(_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glCullFace(_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glFrontFace(_) ).Times(AnyNumber());

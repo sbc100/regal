@@ -3046,7 +3046,7 @@ static void REGAL_CALL missing_glMultiDrawArrays(GLenum mode, const GLint *first
   Warning( "glMultiDrawArrays not available." );
 }
 
-static void REGAL_CALL missing_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -3700,7 +3700,7 @@ static void REGAL_CALL missing_glLinkProgram(GLuint program)
   Warning( "glLinkProgram not available." );
 }
 
-static void REGAL_CALL missing_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+static void REGAL_CALL missing_glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length)
 {
   UNUSED_PARAMETER(shader);
   UNUSED_PARAMETER(count);
@@ -4442,7 +4442,7 @@ static void REGAL_CALL missing_glTexParameterIuiv(GLenum target, GLenum pname, c
   Warning( "glTexParameterIuiv not available." );
 }
 
-static void REGAL_CALL missing_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL missing_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(count);
@@ -5385,7 +5385,7 @@ static void REGAL_CALL missing_glGetTexParameterPointervAPPLE(GLenum target, GLe
   Warning( "glGetTexParameterPointervAPPLE not available." );
 }
 
-static void REGAL_CALL missing_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
+static void REGAL_CALL missing_glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(length);
@@ -5408,7 +5408,7 @@ static void REGAL_CALL missing_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint
   Warning( "glDeleteVertexArraysAPPLE not available." );
 }
 
-static void REGAL_CALL missing_glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL missing_glGenVertexArraysAPPLE(GLsizei n, GLuint *arrays)
 {
   UNUSED_PARAMETER(n);
   UNUSED_PARAMETER(arrays);
@@ -5736,7 +5736,7 @@ static void REGAL_CALL missing_glCopyImageSubData(GLuint srcName, GLenum srcTarg
 
 // GL_ARB_debug_output
 
-static void REGAL_CALL missing_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
+static void REGAL_CALL missing_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
 {
   UNUSED_PARAMETER(callback);
   UNUSED_PARAMETER(userParam);
@@ -5825,7 +5825,7 @@ static void REGAL_CALL missing_glBlendFunciARB(GLuint buf, GLenum src, GLenum ds
 
 // GL_ARB_draw_elements_base_vertex
 
-static void REGAL_CALL missing_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL missing_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -5846,7 +5846,7 @@ static void REGAL_CALL missing_glDrawElementsInstancedBaseVertex(GLenum mode, GL
   Warning( "glDrawElementsInstancedBaseVertex not available." );
 }
 
-static void REGAL_CALL missing_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL missing_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(start);
@@ -5858,7 +5858,7 @@ static void REGAL_CALL missing_glDrawRangeElementsBaseVertex(GLenum mode, GLuint
   Warning( "glDrawRangeElementsBaseVertex not available." );
 }
 
-static void REGAL_CALL missing_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+static void REGAL_CALL missing_glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -6746,7 +6746,7 @@ static void REGAL_CALL missing_glCurrentPaletteMatrixARB(GLint index)
   Warning( "glCurrentPaletteMatrixARB not available." );
 }
 
-static void REGAL_CALL missing_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL missing_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -6755,21 +6755,21 @@ static void REGAL_CALL missing_glMatrixIndexPointerARB(GLint size, GLenum type, 
   Warning( "glMatrixIndexPointerARB not available." );
 }
 
-static void REGAL_CALL missing_glMatrixIndexubvARB(GLint size, GLubyte *indices)
+static void REGAL_CALL missing_glMatrixIndexubvARB(GLint size, const GLubyte *indices)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(indices);
   Warning( "glMatrixIndexubvARB not available." );
 }
 
-static void REGAL_CALL missing_glMatrixIndexuivARB(GLint size, GLuint *indices)
+static void REGAL_CALL missing_glMatrixIndexuivARB(GLint size, const GLuint *indices)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(indices);
   Warning( "glMatrixIndexuivARB not available." );
 }
 
-static void REGAL_CALL missing_glMatrixIndexusvARB(GLint size, GLushort *indices)
+static void REGAL_CALL missing_glMatrixIndexusvARB(GLint size, const GLushort *indices)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(indices);
@@ -7543,7 +7543,7 @@ static void REGAL_CALL missing_glBindProgramPipeline(GLuint pipeline)
   Warning( "glBindProgramPipeline not available." );
 }
 
-static GLuint REGAL_CALL missing_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
+static GLuint REGAL_CALL missing_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar * const *strings)
 {
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(count);
@@ -9159,7 +9159,7 @@ static GLuint REGAL_CALL missing_glGetUniformBlockIndex(GLuint program, const GL
   return (GLuint )0;
 }
 
-static void REGAL_CALL missing_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
+static void REGAL_CALL missing_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformCount);
@@ -9348,7 +9348,7 @@ static void REGAL_CALL missing_glVertexBlendARB(GLint count)
   Warning( "glVertexBlendARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL missing_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(type);
@@ -9357,56 +9357,56 @@ static void REGAL_CALL missing_glWeightPointerARB(GLint size, GLenum type, GLsiz
   Warning( "glWeightPointerARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightbvARB(GLint size, GLbyte *weights)
+static void REGAL_CALL missing_glWeightbvARB(GLint size, const GLbyte *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightbvARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightdvARB(GLint size, GLdouble *weights)
+static void REGAL_CALL missing_glWeightdvARB(GLint size, const GLdouble *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightdvARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightfvARB(GLint size, GLfloat *weights)
+static void REGAL_CALL missing_glWeightfvARB(GLint size, const GLfloat *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightfvARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightivARB(GLint size, GLint *weights)
+static void REGAL_CALL missing_glWeightivARB(GLint size, const GLint *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightivARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightsvARB(GLint size, GLshort *weights)
+static void REGAL_CALL missing_glWeightsvARB(GLint size, const GLshort *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightsvARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightubvARB(GLint size, GLubyte *weights)
+static void REGAL_CALL missing_glWeightubvARB(GLint size, const GLubyte *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightubvARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightuivARB(GLint size, GLuint *weights)
+static void REGAL_CALL missing_glWeightuivARB(GLint size, const GLuint *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
   Warning( "glWeightuivARB not available." );
 }
 
-static void REGAL_CALL missing_glWeightusvARB(GLint size, GLushort *weights)
+static void REGAL_CALL missing_glWeightusvARB(GLint size, const GLushort *weights)
 {
   UNUSED_PARAMETER(size);
   UNUSED_PARAMETER(weights);
@@ -10558,14 +10558,14 @@ static void REGAL_CALL missing_glGetTexBumpParameterivATI(GLenum pname, GLint *p
   Warning( "glGetTexBumpParameterivATI not available." );
 }
 
-static void REGAL_CALL missing_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+static void REGAL_CALL missing_glTexBumpParameterfvATI(GLenum pname, const GLfloat *param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
   Warning( "glTexBumpParameterfvATI not available." );
 }
 
-static void REGAL_CALL missing_glTexBumpParameterivATI(GLenum pname, GLint *param)
+static void REGAL_CALL missing_glTexBumpParameterivATI(GLenum pname, const GLint *param)
 {
   UNUSED_PARAMETER(pname);
   UNUSED_PARAMETER(param);
@@ -14943,7 +14943,7 @@ static void REGAL_CALL missing_glMultiDrawArraysEXT(GLenum mode, const GLint *fi
   Warning( "glMultiDrawArraysEXT not available." );
 }
 
-static void REGAL_CALL missing_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL missing_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
 {
   UNUSED_PARAMETER(mode);
   UNUSED_PARAMETER(count);
@@ -16495,7 +16495,7 @@ static void REGAL_CALL missing_glTexScissorINTEL(GLenum target, GLclampf tlow, G
 
 // GL_KHR_debug
 
-static void REGAL_CALL missing_glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
+static void REGAL_CALL missing_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
 {
   UNUSED_PARAMETER(callback);
   UNUSED_PARAMETER(userParam);
@@ -16548,7 +16548,7 @@ static void REGAL_CALL missing_glGetObjectLabel(GLenum identifier, GLuint name, 
   Warning( "glGetObjectLabel not available." );
 }
 
-static void REGAL_CALL missing_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL missing_glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
   UNUSED_PARAMETER(ptr);
   UNUSED_PARAMETER(bufSize);
@@ -16566,7 +16566,7 @@ static void REGAL_CALL missing_glObjectLabel(GLenum identifier, GLuint name, GLs
   Warning( "glObjectLabel not available." );
 }
 
-static void REGAL_CALL missing_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
+static void REGAL_CALL missing_glObjectPtrLabel(const GLvoid *ptr, GLsizei length, const GLchar *label)
 {
   UNUSED_PARAMETER(ptr);
   UNUSED_PARAMETER(length);
@@ -19662,7 +19662,7 @@ static void REGAL_CALL missing_glProgramParameter4fvNV(GLenum target, GLuint ind
   Warning( "glProgramParameter4fvNV not available." );
 }
 
-static void REGAL_CALL missing_glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
+static void REGAL_CALL missing_glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei count, const GLdouble *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
@@ -19671,7 +19671,7 @@ static void REGAL_CALL missing_glProgramParameters4dvNV(GLenum target, GLuint in
   Warning( "glProgramParameters4dvNV not available." );
 }
 
-static void REGAL_CALL missing_glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
+static void REGAL_CALL missing_glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei count, const GLfloat *v)
 {
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);

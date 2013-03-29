@@ -50,7 +50,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Cache {
 
-  void shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+  void shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLchar * const * string, const GLint *length);
 
 };
 

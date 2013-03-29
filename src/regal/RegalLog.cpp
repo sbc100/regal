@@ -93,6 +93,7 @@ namespace Logging {
   bool frameTime = false;
   bool pointers  = (REGAL_LOG_POINTERS);
   bool thread    = false;
+  bool process   = false;
   bool callback  = (REGAL_LOG_CALLBACK);
 
   bool         log          = (REGAL_LOG);
@@ -176,6 +177,11 @@ namespace Logging {
 #if REGAL_LOG_THREAD
     tmp = GetEnv("REGAL_LOG_THREAD");
     if (tmp) thread = atoi(tmp)!=0;
+#endif
+
+#if REGAL_LOG_PROCESS
+    tmp = GetEnv("REGAL_LOG_PROCESS");
+    if (tmp) process = atoi(tmp)!=0;
 #endif
 
     tmp = GetEnv("REGAL_LOG_CALLBACK");
@@ -273,6 +279,10 @@ namespace Logging {
 #if REGAL_LOG_THREAD
     Info("REGAL_LOG_THREAD   ", thread         ? "enabled" : "disabled");
 #endif
+
+#if REGAL_LOG_PROCESS
+    Info("REGAL_LOG_PROCESS  ", process        ? "enabled" : "disabled");
+#endif
   }
 
   void Cleanup()
@@ -316,6 +326,7 @@ namespace Logging {
       jo.member("frameTime", frameTime);
       jo.member("pointers",  pointers);
       jo.member("thread",    thread);
+      jo.member("process",   process);
 
       jo.member("callback",    callback);
       jo.member("log",         log);
@@ -366,6 +377,8 @@ namespace Logging {
     static const char *trimSuffix = " ...";
     string_list trimPrefix;
     trimPrefix << print_string(prefix ? prefix : "",delim ? delim : "");
+    if (process)
+      trimPrefix << print_string(hex(Thread::procId()),delim ? delim : "");
     if (thread)
       trimPrefix << print_string(hex(Thread::threadId()),delim ? delim : "");
     trimPrefix << print_string(string(indent(),' '),name ? name : "",name ? " " : "");

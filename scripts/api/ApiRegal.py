@@ -57,7 +57,7 @@ def logParameter(function, parameter):
   # Quoting for array of strings
 
   quote = ''
-  if t in [ 'char **','const char **','GLchar **' ,'const GLchar **','GLcharARB **','const GLcharARB **','LPCSTR *']:
+  if t in [ 'char **','const char **','const char * const *','GLchar **' ,'const GLchar **','const GLchar * const *','GLcharARB **','const GLcharARB **','const GLcharARB * const *','LPCSTR *']:
     quote = ',"\\\""'
 
   if parameter.regalLog != None:

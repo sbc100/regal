@@ -117,6 +117,13 @@
   }
 #endif
 
+// Export Regal entry points by default, might want to disable
+// this for statically linking Regal: -DREGAL_DECL_EXPORT=0 
+
+#ifndef REGAL_DECL_EXPORT
+#define REGAL_DECL_EXPORT 1
+#endif
+
 // Compile-time configuration
 // - Emulation not forced by default
 // - All emulation layers enabled by default

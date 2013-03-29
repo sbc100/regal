@@ -124,8 +124,9 @@ static void REGAL_CALL code_glBitmap(GLsizei width, GLsizei height, GLfloat xori
     _next->call(&_next->glBitmap)(width, height, xorig, yorig, xmove, ymove, bitmap);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _bitmapIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _bitmapIndex << "[" << helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(bitmap),helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _bitmapIndex << "[" << helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(bitmap),helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
     _code << indent << "glBitmap(";
                    _code << width;
     _code << ", "; _code << height;
@@ -137,6 +138,8 @@ static void REGAL_CALL code_glBitmap(GLsizei width, GLsizei height, GLfloat xori
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glBlendFunc(GLenum sfactor, GLenum dfactor)
@@ -1074,8 +1077,9 @@ static void REGAL_CALL code_glDrawPixels(GLsizei width, GLsizei height, GLenum f
     _next->call(&_next->glDrawPixels)(width, height, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, 0),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, 0),"","{ "," }",",") << ";\n";
     _code << indent << "glDrawPixels(";
                    _code << width;
     _code << ", "; _code << height;
@@ -1085,6 +1089,8 @@ static void REGAL_CALL code_glDrawPixels(GLsizei width, GLsizei height, GLenum f
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glEdgeFlag(GLboolean flag)
@@ -3195,13 +3201,16 @@ static void REGAL_CALL code_glPolygonStipple(const GLubyte *mask)
     _next->call(&_next->glPolygonStipple)(mask);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _maskIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _maskIndex << "[" << helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(mask),helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _maskIndex << "[" << helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(mask),helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
     _code << indent << "glPolygonStipple(";
     _code << "i" << _maskIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glPopAttrib(void)
@@ -3749,8 +3758,9 @@ static void REGAL_CALL code_glReadPixels(GLint x, GLint y, GLsizei width, GLsize
     _next->call(&_next->glReadPixels)(x, y, width, height, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 1, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 1, 0),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 1, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 1, 0),"","{ "," }",",") << ";\n";
     _code << indent << "glReadPixels(";
                    _code << x;
     _code << ", "; _code << y;
@@ -3762,6 +3772,8 @@ static void REGAL_CALL code_glReadPixels(GLint x, GLint y, GLsizei width, GLsize
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2)
@@ -4879,8 +4891,9 @@ static void REGAL_CALL code_glTexImage1D(GLenum target, GLint level, GLint inter
     _next->call(&_next->glTexImage1D)(target, level, internalformat, width, border, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage1D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -4893,6 +4906,8 @@ static void REGAL_CALL code_glTexImage1D(GLenum target, GLint level, GLint inter
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
@@ -4904,8 +4919,9 @@ static void REGAL_CALL code_glTexImage2D(GLenum target, GLint level, GLint inter
     _next->call(&_next->glTexImage2D)(target, level, internalformat, width, height, border, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage2D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -4919,6 +4935,8 @@ static void REGAL_CALL code_glTexImage2D(GLenum target, GLint level, GLint inter
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexParameterf(GLenum target, GLenum pname, GLfloat param)
@@ -5989,8 +6007,9 @@ static void REGAL_CALL code_glTexSubImage1D(GLenum target, GLint level, GLint xo
     _next->call(&_next->glTexSubImage1D)(target, level, xoffset, width, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage1D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6002,6 +6021,8 @@ static void REGAL_CALL code_glTexSubImage1D(GLenum target, GLint level, GLint xo
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
@@ -6013,8 +6034,9 @@ static void REGAL_CALL code_glTexSubImage2D(GLenum target, GLint level, GLint xo
     _next->call(&_next->glTexSubImage2D)(target, level, xoffset, yoffset, width, height, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage2D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6028,6 +6050,8 @@ static void REGAL_CALL code_glTexSubImage2D(GLenum target, GLint level, GLint xo
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
@@ -6138,8 +6162,9 @@ static void REGAL_CALL code_glTexImage3D(GLenum target, GLint level, GLint inter
     _next->call(&_next->glTexImage3D)(target, level, internalformat, width, height, depth, border, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage3D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6154,6 +6179,8 @@ static void REGAL_CALL code_glTexImage3D(GLenum target, GLint level, GLint inter
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
@@ -6165,8 +6192,9 @@ static void REGAL_CALL code_glTexSubImage3D(GLenum target, GLint level, GLint xo
     _next->call(&_next->glTexSubImage3D)(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage3D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6182,6 +6210,8 @@ static void REGAL_CALL code_glTexSubImage3D(GLenum target, GLint level, GLint xo
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glActiveTexture(GLenum texture)
@@ -7192,7 +7222,7 @@ static void REGAL_CALL code_glMultiDrawArrays(GLenum mode, const GLint *first, c
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL code_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8786,7 +8816,7 @@ static void REGAL_CALL code_glLinkProgram(GLuint program)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+static void REGAL_CALL code_glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -10545,7 +10575,7 @@ static void REGAL_CALL code_glTexParameterIuiv(GLenum target, GLenum pname, cons
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL code_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -12586,7 +12616,7 @@ static void REGAL_CALL code_glGetTexParameterPointervAPPLE(GLenum target, GLenum
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
+static void REGAL_CALL code_glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -12637,7 +12667,7 @@ static void REGAL_CALL code_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *a
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL code_glGenVertexArraysAPPLE(GLsizei n, GLuint *arrays)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13270,7 +13300,7 @@ static void REGAL_CALL code_glCopyImageSubData(GLuint srcName, GLenum srcTarget,
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
+static void REGAL_CALL code_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13458,7 +13488,7 @@ static void REGAL_CALL code_glBlendFunciARB(GLuint buf, GLenum src, GLenum dst)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL code_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13499,7 +13529,7 @@ static void REGAL_CALL code_glDrawElementsInstancedBaseVertex(GLenum mode, GLsiz
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL code_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13521,7 +13551,7 @@ static void REGAL_CALL code_glDrawRangeElementsBaseVertex(GLenum mode, GLuint st
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+static void REGAL_CALL code_glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -15407,7 +15437,7 @@ static void REGAL_CALL code_glCurrentPaletteMatrixARB(GLint index)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL code_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -15426,7 +15456,7 @@ static void REGAL_CALL code_glMatrixIndexPointerARB(GLint size, GLenum type, GLs
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMatrixIndexubvARB(GLint size, GLubyte *indices)
+static void REGAL_CALL code_glMatrixIndexubvARB(GLint size, const GLubyte *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -15443,7 +15473,7 @@ static void REGAL_CALL code_glMatrixIndexubvARB(GLint size, GLubyte *indices)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMatrixIndexuivARB(GLint size, GLuint *indices)
+static void REGAL_CALL code_glMatrixIndexuivARB(GLint size, const GLuint *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -15460,7 +15490,7 @@ static void REGAL_CALL code_glMatrixIndexuivARB(GLint size, GLuint *indices)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMatrixIndexusvARB(GLint size, GLushort *indices)
+static void REGAL_CALL code_glMatrixIndexusvARB(GLint size, const GLushort *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -17171,7 +17201,7 @@ static void REGAL_CALL code_glBindProgramPipeline(GLuint pipeline)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static GLuint REGAL_CALL code_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
+static GLuint REGAL_CALL code_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar * const *strings)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20654,7 +20684,7 @@ static GLuint REGAL_CALL code_glGetUniformBlockIndex(GLuint program, const GLcha
     return _ret;
 }
 
-static void REGAL_CALL code_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
+static void REGAL_CALL code_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21080,7 +21110,7 @@ static void REGAL_CALL code_glVertexBlendARB(GLint count)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL code_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21099,7 +21129,7 @@ static void REGAL_CALL code_glWeightPointerARB(GLint size, GLenum type, GLsizei 
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightbvARB(GLint size, GLbyte *weights)
+static void REGAL_CALL code_glWeightbvARB(GLint size, const GLbyte *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21116,7 +21146,7 @@ static void REGAL_CALL code_glWeightbvARB(GLint size, GLbyte *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightdvARB(GLint size, GLdouble *weights)
+static void REGAL_CALL code_glWeightdvARB(GLint size, const GLdouble *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21133,7 +21163,7 @@ static void REGAL_CALL code_glWeightdvARB(GLint size, GLdouble *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightfvARB(GLint size, GLfloat *weights)
+static void REGAL_CALL code_glWeightfvARB(GLint size, const GLfloat *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21150,7 +21180,7 @@ static void REGAL_CALL code_glWeightfvARB(GLint size, GLfloat *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightivARB(GLint size, GLint *weights)
+static void REGAL_CALL code_glWeightivARB(GLint size, const GLint *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21167,7 +21197,7 @@ static void REGAL_CALL code_glWeightivARB(GLint size, GLint *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightsvARB(GLint size, GLshort *weights)
+static void REGAL_CALL code_glWeightsvARB(GLint size, const GLshort *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21184,7 +21214,7 @@ static void REGAL_CALL code_glWeightsvARB(GLint size, GLshort *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightubvARB(GLint size, GLubyte *weights)
+static void REGAL_CALL code_glWeightubvARB(GLint size, const GLubyte *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21201,7 +21231,7 @@ static void REGAL_CALL code_glWeightubvARB(GLint size, GLubyte *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightuivARB(GLint size, GLuint *weights)
+static void REGAL_CALL code_glWeightuivARB(GLint size, const GLuint *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -21218,7 +21248,7 @@ static void REGAL_CALL code_glWeightuivARB(GLint size, GLuint *weights)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glWeightusvARB(GLint size, GLushort *weights)
+static void REGAL_CALL code_glWeightusvARB(GLint size, const GLushort *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -23977,7 +24007,7 @@ static void REGAL_CALL code_glGetTexBumpParameterivATI(GLenum pname, GLint *para
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+static void REGAL_CALL code_glTexBumpParameterfvATI(GLenum pname, const GLfloat *param)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -23994,7 +24024,7 @@ static void REGAL_CALL code_glTexBumpParameterfvATI(GLenum pname, GLfloat *param
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTexBumpParameterivATI(GLenum pname, GLint *param)
+static void REGAL_CALL code_glTexBumpParameterivATI(GLenum pname, const GLint *param)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -33340,7 +33370,7 @@ static void REGAL_CALL code_glMultiDrawArraysEXT(GLenum mode, const GLint *first
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL code_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -34373,8 +34403,9 @@ static void REGAL_CALL code_glTexSubImage1DEXT(GLenum target, GLint level, GLint
     _next->call(&_next->glTexSubImage1DEXT)(target, level, xoffset, width, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage1DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34386,6 +34417,8 @@ static void REGAL_CALL code_glTexSubImage1DEXT(GLenum target, GLint level, GLint
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels)
@@ -34397,8 +34430,9 @@ static void REGAL_CALL code_glTexSubImage2DEXT(GLenum target, GLint level, GLint
     _next->call(&_next->glTexSubImage2DEXT)(target, level, xoffset, yoffset, width, height, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage2DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34412,6 +34446,8 @@ static void REGAL_CALL code_glTexSubImage2DEXT(GLenum target, GLint level, GLint
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels)
@@ -34423,8 +34459,9 @@ static void REGAL_CALL code_glTexSubImage3DEXT(GLenum target, GLint level, GLint
     _next->call(&_next->glTexSubImage3DEXT)(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage3DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34440,6 +34477,8 @@ static void REGAL_CALL code_glTexSubImage3DEXT(GLenum target, GLint level, GLint
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glTexImage3DEXT(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
@@ -34451,8 +34490,9 @@ static void REGAL_CALL code_glTexImage3DEXT(GLenum target, GLint level, GLenum i
     _next->call(&_next->glTexImage3DEXT)(target, level, internalformat, width, height, depth, border, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
+    string_list< ::std::string > _header;
     size_t _pixelsIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage3DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34467,6 +34507,8 @@ static void REGAL_CALL code_glTexImage3DEXT(GLenum target, GLint level, GLenum i
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
+    if (_context->codeHeader)
+      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glFramebufferTextureLayerEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
@@ -36687,7 +36729,7 @@ static void REGAL_CALL code_glTexScissorINTEL(GLenum target, GLclampf tlow, GLcl
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
+static void REGAL_CALL code_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -36791,7 +36833,7 @@ static void REGAL_CALL code_glGetObjectLabel(GLenum identifier, GLuint name, GLs
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL code_glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -36829,7 +36871,7 @@ static void REGAL_CALL code_glObjectLabel(GLenum identifier, GLuint name, GLsize
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
+static void REGAL_CALL code_glObjectPtrLabel(const GLvoid *ptr, GLsizei length, const GLchar *label)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -43793,7 +43835,7 @@ static void REGAL_CALL code_glProgramParameter4fvNV(GLenum target, GLuint index,
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
+static void REGAL_CALL code_glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei count, const GLdouble *v)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -43814,7 +43856,7 @@ static void REGAL_CALL code_glProgramParameters4dvNV(GLenum target, GLuint index
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
+static void REGAL_CALL code_glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei count, const GLfloat *v)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);

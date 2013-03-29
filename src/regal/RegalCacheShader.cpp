@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 namespace Cache {
 
 void
-shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+shaderSource(PFNGLSHADERSOURCEPROC proc, GLuint shader, GLsizei count, const GLchar * const * string, const GLint *length)
 {
   if (REGAL_CACHE && REGAL_CACHE_SHADER && Config::cache && Config::cacheShader)
   {

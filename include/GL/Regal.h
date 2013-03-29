@@ -258,6 +258,8 @@ typedef unsigned int UINT;
 typedef unsigned short USHORT;
 typedef void * PROC;
 typedef DWORD COLORREF;
+typedef long LONG;
+typedef unsigned long * ULONG_PTR;
 #endif
 #ifndef _WINGDI_
 typedef struct _GLYPHMETRICSFLOAT GLYPHMETRICSFLOAT;
@@ -307,8 +309,8 @@ typedef void * CGLPBufferObj;
 typedef void * CGLShareGroupObj;
 typedef struct __IOSurface * IOSurfaceRef;
 typedef void * CGSConnectionID;
-typedef void * CGSWindowID;
-typedef void * CGSSurfaceID;
+typedef long long CGSWindowID;
+typedef long long CGSSurfaceID;
 #endif // REGAL_SYS_OSX
 
 #if REGAL_SYS_EGL
@@ -375,8 +377,11 @@ typedef enum _CGLPixelFormatAttribute {
   kCGLPFANoRecovery = 72,
   kCGLPFAAccelerated = 73,
   kCGLPFAClosestPolicy = 74,
+  kCGLPFARobust = 75,
   kCGLPFABackingStore = 76,
+  kCGLPFAMPSafe = 78,
   kCGLPFAWindow = 80,
+  kCGLPFAMultiScreen = 81,
   kCGLPFACompliant = 83,
   kCGLPFADisplayMask = 84,
   kCGLPFAPBuffer = 90,
@@ -2160,7 +2165,7 @@ REGAL_DECL void REGAL_CALL glWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint
 
 #ifndef REGAL_NO_TYPEDEF_GL_APPLE_TEXTURE_RANGE
 typedef void (REGAL_CALL *PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC)(GLenum target, GLenum pname, GLvoid **params);
-typedef void (REGAL_CALL *PFNGLTEXTURERANGEAPPLEPROC)(GLenum target, GLsizei length, GLvoid *pointer);
+typedef void (REGAL_CALL *PFNGLTEXTURERANGEAPPLEPROC)(GLenum target, GLsizei length, const GLvoid *pointer);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_APPLE_TEXTURE_RANGE
@@ -2170,7 +2175,7 @@ typedef void (REGAL_CALL *PFNGLTEXTURERANGEAPPLEPROC)(GLenum target, GLsizei len
 
 #ifndef REGAL_NO_DECLARATION_GL_APPLE_TEXTURE_RANGE
 REGAL_DECL void REGAL_CALL glGetTexParameterPointervAPPLE(GLenum target, GLenum pname, GLvoid **params);
-REGAL_DECL void REGAL_CALL glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer);
+REGAL_DECL void REGAL_CALL glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer);
 #endif
 
 /**
@@ -2233,7 +2238,7 @@ REGAL_DECL void REGAL_CALL glTextureRangeAPPLE(GLenum target, GLsizei length, GL
 typedef GLboolean (REGAL_CALL *PFNGLISVERTEXARRAYAPPLEPROC)(GLuint array);
 typedef void (REGAL_CALL *PFNGLBINDVERTEXARRAYAPPLEPROC)(GLuint array);
 typedef void (REGAL_CALL *PFNGLDELETEVERTEXARRAYSAPPLEPROC)(GLsizei n, const GLuint *arrays);
-typedef void (REGAL_CALL *PFNGLGENVERTEXARRAYSAPPLEPROC)(GLsizei n, const GLuint *arrays);
+typedef void (REGAL_CALL *PFNGLGENVERTEXARRAYSAPPLEPROC)(GLsizei n, GLuint *arrays);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_APPLE_VERTEX_ARRAY_OBJECT
@@ -2247,7 +2252,7 @@ typedef void (REGAL_CALL *PFNGLGENVERTEXARRAYSAPPLEPROC)(GLsizei n, const GLuint
 REGAL_DECL GLboolean REGAL_CALL glIsVertexArrayAPPLE(GLuint array);
 REGAL_DECL void REGAL_CALL glBindVertexArrayAPPLE(GLuint array);
 REGAL_DECL void REGAL_CALL glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *arrays);
-REGAL_DECL void REGAL_CALL glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays);
+REGAL_DECL void REGAL_CALL glGenVertexArraysAPPLE(GLsizei n, GLuint *arrays);
 #endif
 
 /**
@@ -2948,7 +2953,7 @@ REGAL_DECL void REGAL_CALL glCopyImageSubData(GLuint srcName, GLenum srcTarget, 
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_DEBUG_OUTPUT
 typedef GLuint (REGAL_CALL *PFNGLGETDEBUGMESSAGELOGARBPROC)(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKARBPROC)(GLDEBUGPROCARB callback, GLvoid *userParam);
+typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKARBPROC)(GLDEBUGPROCARB callback, const GLvoid *userParam);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECONTROLARBPROC)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTARBPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 #endif
@@ -2962,7 +2967,7 @@ typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTARBPROC)(GLenum source, GLenum 
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_DEBUG_OUTPUT
 REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam);
+REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam);
 REGAL_DECL void REGAL_CALL glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 #endif
@@ -3183,10 +3188,10 @@ REGAL_DECL void REGAL_CALL glBlendFunciARB(GLuint buf, GLenum src, GLenum dst);
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_DRAW_ELEMENTS_BASE_VERTEX
-typedef void (REGAL_CALL *PFNGLDRAWELEMENTSBASEVERTEXPROC)(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex);
+typedef void (REGAL_CALL *PFNGLDRAWELEMENTSBASEVERTEXPROC)(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
 typedef void (REGAL_CALL *PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC)(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex);
-typedef void (REGAL_CALL *PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC)(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex);
-typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC)(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex);
+typedef void (REGAL_CALL *PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC)(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
+typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ARB_DRAW_ELEMENTS_BASE_VERTEX
@@ -3197,10 +3202,10 @@ typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC)(GLenum mode, GLs
 #endif
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_DRAW_ELEMENTS_BASE_VERTEX
-REGAL_DECL void REGAL_CALL glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex);
+REGAL_DECL void REGAL_CALL glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
 REGAL_DECL void REGAL_CALL glDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex);
-REGAL_DECL void REGAL_CALL glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex);
-REGAL_DECL void REGAL_CALL glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex);
+REGAL_DECL void REGAL_CALL glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
+REGAL_DECL void REGAL_CALL glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex);
 #endif
 
 /**
@@ -4557,10 +4562,10 @@ REGAL_DECL void REGAL_CALL glFlushMappedBufferRange(GLenum target, GLintptr offs
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_MATRIX_PALETTE
 typedef void (REGAL_CALL *PFNGLCURRENTPALETTEMATRIXARBPROC)(GLint index);
-typedef void (REGAL_CALL *PFNGLMATRIXINDEXPOINTERARBPROC)(GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
-typedef void (REGAL_CALL *PFNGLMATRIXINDEXUBVARBPROC)(GLint size, GLubyte *indices);
-typedef void (REGAL_CALL *PFNGLMATRIXINDEXUIVARBPROC)(GLint size, GLuint *indices);
-typedef void (REGAL_CALL *PFNGLMATRIXINDEXUSVARBPROC)(GLint size, GLushort *indices);
+typedef void (REGAL_CALL *PFNGLMATRIXINDEXPOINTERARBPROC)(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+typedef void (REGAL_CALL *PFNGLMATRIXINDEXUBVARBPROC)(GLint size, const GLubyte *indices);
+typedef void (REGAL_CALL *PFNGLMATRIXINDEXUIVARBPROC)(GLint size, const GLuint *indices);
+typedef void (REGAL_CALL *PFNGLMATRIXINDEXUSVARBPROC)(GLint size, const GLushort *indices);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ARB_MATRIX_PALETTE
@@ -4573,10 +4578,10 @@ typedef void (REGAL_CALL *PFNGLMATRIXINDEXUSVARBPROC)(GLint size, GLushort *indi
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_MATRIX_PALETTE
 REGAL_DECL void REGAL_CALL glCurrentPaletteMatrixARB(GLint index);
-REGAL_DECL void REGAL_CALL glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
-REGAL_DECL void REGAL_CALL glMatrixIndexubvARB(GLint size, GLubyte *indices);
-REGAL_DECL void REGAL_CALL glMatrixIndexuivARB(GLint size, GLuint *indices);
-REGAL_DECL void REGAL_CALL glMatrixIndexusvARB(GLint size, GLushort *indices);
+REGAL_DECL void REGAL_CALL glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+REGAL_DECL void REGAL_CALL glMatrixIndexubvARB(GLint size, const GLubyte *indices);
+REGAL_DECL void REGAL_CALL glMatrixIndexuivARB(GLint size, const GLuint *indices);
+REGAL_DECL void REGAL_CALL glMatrixIndexusvARB(GLint size, const GLushort *indices);
 #endif
 
 /**
@@ -5474,7 +5479,7 @@ REGAL_DECL void REGAL_CALL glSamplerParameteriv(GLuint sampler, GLenum pname, co
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_SEPARATE_SHADER_OBJECTS
 typedef GLboolean (REGAL_CALL *PFNGLISPROGRAMPIPELINEPROC)(GLuint pipeline);
-typedef GLuint (REGAL_CALL *PFNGLCREATESHADERPROGRAMVPROC)(GLenum type, GLsizei count, const GLchar **strings);
+typedef GLuint (REGAL_CALL *PFNGLCREATESHADERPROGRAMVPROC)(GLenum type, GLsizei count, const GLchar * const *strings);
 typedef void (REGAL_CALL *PFNGLACTIVESHADERPROGRAMPROC)(GLuint pipeline, GLuint program);
 typedef void (REGAL_CALL *PFNGLBINDPROGRAMPIPELINEPROC)(GLuint pipeline);
 typedef void (REGAL_CALL *PFNGLDELETEPROGRAMPIPELINESPROC)(GLsizei n, const GLuint *pipelines);
@@ -5600,7 +5605,7 @@ typedef void (REGAL_CALL *PFNGLVALIDATEPROGRAMPIPELINEPROC)(GLuint pipeline);
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_SEPARATE_SHADER_OBJECTS
 REGAL_DECL GLboolean REGAL_CALL glIsProgramPipeline(GLuint pipeline);
-REGAL_DECL GLuint REGAL_CALL glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings);
+REGAL_DECL GLuint REGAL_CALL glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar * const *strings);
 REGAL_DECL void REGAL_CALL glActiveShaderProgram(GLuint pipeline, GLuint program);
 REGAL_DECL void REGAL_CALL glBindProgramPipeline(GLuint pipeline);
 REGAL_DECL void REGAL_CALL glDeleteProgramPipelines(GLsizei n, const GLuint *pipelines);
@@ -7640,7 +7645,7 @@ typedef void (REGAL_CALL *PFNGLGETACTIVEUNIFORMBLOCKNAMEPROC)(GLuint program, GL
 typedef void (REGAL_CALL *PFNGLGETACTIVEUNIFORMNAMEPROC)(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName);
 typedef void (REGAL_CALL *PFNGLGETACTIVEUNIFORMSIVPROC)(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params);
 typedef void (REGAL_CALL *PFNGLGETINTEGERI_VPROC)(GLenum target, GLuint index, GLint *data);
-typedef void (REGAL_CALL *PFNGLGETUNIFORMINDICESPROC)(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices);
+typedef void (REGAL_CALL *PFNGLGETUNIFORMINDICESPROC)(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices);
 typedef void (REGAL_CALL *PFNGLUNIFORMBLOCKBINDINGPROC)(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 #endif
 
@@ -7666,7 +7671,7 @@ REGAL_DECL void REGAL_CALL glGetActiveUniformBlockiv(GLuint program, GLuint unif
 REGAL_DECL void REGAL_CALL glGetActiveUniformName(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei *length, GLchar *uniformName);
 REGAL_DECL void REGAL_CALL glGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params);
 REGAL_DECL void REGAL_CALL glGetIntegeri_v(GLenum target, GLuint index, GLint *data);
-REGAL_DECL void REGAL_CALL glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices);
+REGAL_DECL void REGAL_CALL glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices);
 REGAL_DECL void REGAL_CALL glUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 #endif
 
@@ -7914,15 +7919,15 @@ REGAL_DECL void REGAL_CALL glVertexBindingDivisor(GLuint bindingindex, GLuint di
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_VERTEX_BLEND
 typedef void (REGAL_CALL *PFNGLVERTEXBLENDARBPROC)(GLint count);
-typedef void (REGAL_CALL *PFNGLWEIGHTBVARBPROC)(GLint size, GLbyte *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTDVARBPROC)(GLint size, GLdouble *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTFVARBPROC)(GLint size, GLfloat *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTIVARBPROC)(GLint size, GLint *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTPOINTERARBPROC)(GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
-typedef void (REGAL_CALL *PFNGLWEIGHTSVARBPROC)(GLint size, GLshort *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTUBVARBPROC)(GLint size, GLubyte *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTUIVARBPROC)(GLint size, GLuint *weights);
-typedef void (REGAL_CALL *PFNGLWEIGHTUSVARBPROC)(GLint size, GLushort *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTBVARBPROC)(GLint size, const GLbyte *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTDVARBPROC)(GLint size, const GLdouble *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTFVARBPROC)(GLint size, const GLfloat *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTIVARBPROC)(GLint size, const GLint *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTPOINTERARBPROC)(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+typedef void (REGAL_CALL *PFNGLWEIGHTSVARBPROC)(GLint size, const GLshort *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTUBVARBPROC)(GLint size, const GLubyte *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTUIVARBPROC)(GLint size, const GLuint *weights);
+typedef void (REGAL_CALL *PFNGLWEIGHTUSVARBPROC)(GLint size, const GLushort *weights);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ARB_VERTEX_BLEND
@@ -7940,15 +7945,15 @@ typedef void (REGAL_CALL *PFNGLWEIGHTUSVARBPROC)(GLint size, GLushort *weights);
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_VERTEX_BLEND
 REGAL_DECL void REGAL_CALL glVertexBlendARB(GLint count);
-REGAL_DECL void REGAL_CALL glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
-REGAL_DECL void REGAL_CALL glWeightbvARB(GLint size, GLbyte *weights);
-REGAL_DECL void REGAL_CALL glWeightdvARB(GLint size, GLdouble *weights);
-REGAL_DECL void REGAL_CALL glWeightfvARB(GLint size, GLfloat *weights);
-REGAL_DECL void REGAL_CALL glWeightivARB(GLint size, GLint *weights);
-REGAL_DECL void REGAL_CALL glWeightsvARB(GLint size, GLshort *weights);
-REGAL_DECL void REGAL_CALL glWeightubvARB(GLint size, GLubyte *weights);
-REGAL_DECL void REGAL_CALL glWeightuivARB(GLint size, GLuint *weights);
-REGAL_DECL void REGAL_CALL glWeightusvARB(GLint size, GLushort *weights);
+REGAL_DECL void REGAL_CALL glWeightPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+REGAL_DECL void REGAL_CALL glWeightbvARB(GLint size, const GLbyte *weights);
+REGAL_DECL void REGAL_CALL glWeightdvARB(GLint size, const GLdouble *weights);
+REGAL_DECL void REGAL_CALL glWeightfvARB(GLint size, const GLfloat *weights);
+REGAL_DECL void REGAL_CALL glWeightivARB(GLint size, const GLint *weights);
+REGAL_DECL void REGAL_CALL glWeightsvARB(GLint size, const GLshort *weights);
+REGAL_DECL void REGAL_CALL glWeightubvARB(GLint size, const GLubyte *weights);
+REGAL_DECL void REGAL_CALL glWeightuivARB(GLint size, const GLuint *weights);
+REGAL_DECL void REGAL_CALL glWeightusvARB(GLint size, const GLushort *weights);
 #endif
 
 /**
@@ -8908,8 +8913,8 @@ REGAL_DECL void REGAL_CALL glElementPointerATI(GLenum type, const GLvoid *pointe
 #ifndef REGAL_NO_TYPEDEF_GL_ATI_ENVMAP_BUMPMAP
 typedef void (REGAL_CALL *PFNGLGETTEXBUMPPARAMETERFVATIPROC)(GLenum pname, GLfloat *param);
 typedef void (REGAL_CALL *PFNGLGETTEXBUMPPARAMETERIVATIPROC)(GLenum pname, GLint *param);
-typedef void (REGAL_CALL *PFNGLTEXBUMPPARAMETERFVATIPROC)(GLenum pname, GLfloat *param);
-typedef void (REGAL_CALL *PFNGLTEXBUMPPARAMETERIVATIPROC)(GLenum pname, GLint *param);
+typedef void (REGAL_CALL *PFNGLTEXBUMPPARAMETERFVATIPROC)(GLenum pname, const GLfloat *param);
+typedef void (REGAL_CALL *PFNGLTEXBUMPPARAMETERIVATIPROC)(GLenum pname, const GLint *param);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ATI_ENVMAP_BUMPMAP
@@ -8922,8 +8927,8 @@ typedef void (REGAL_CALL *PFNGLTEXBUMPPARAMETERIVATIPROC)(GLenum pname, GLint *p
 #ifndef REGAL_NO_DECLARATION_GL_ATI_ENVMAP_BUMPMAP
 REGAL_DECL void REGAL_CALL glGetTexBumpParameterfvATI(GLenum pname, GLfloat *param);
 REGAL_DECL void REGAL_CALL glGetTexBumpParameterivATI(GLenum pname, GLint *param);
-REGAL_DECL void REGAL_CALL glTexBumpParameterfvATI(GLenum pname, GLfloat *param);
-REGAL_DECL void REGAL_CALL glTexBumpParameterivATI(GLenum pname, GLint *param);
+REGAL_DECL void REGAL_CALL glTexBumpParameterfvATI(GLenum pname, const GLfloat *param);
+REGAL_DECL void REGAL_CALL glTexBumpParameterivATI(GLenum pname, const GLint *param);
 #endif
 
 /**
@@ -12578,7 +12583,7 @@ REGAL_DECL void REGAL_CALL glFlushMappedBufferRangeEXT(GLenum target, GLintptr o
 
 #ifndef REGAL_NO_TYPEDEF_GL_EXT_MULTI_DRAW_ARRAYS
 typedef void (REGAL_CALL *PFNGLMULTIDRAWARRAYSEXTPROC)(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSEXTPROC)(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSEXTPROC)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_EXT_MULTI_DRAW_ARRAYS
@@ -12588,7 +12593,7 @@ typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSEXTPROC)(GLenum mode, GLsizei *c
 
 #ifndef REGAL_NO_DECLARATION_GL_EXT_MULTI_DRAW_ARRAYS
 REGAL_DECL void REGAL_CALL glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
 #endif
 
 /**
@@ -16593,13 +16598,13 @@ REGAL_DECL void REGAL_CALL glTexScissorINTEL(GLenum target, GLclampf tlow, GLcla
 
 #ifndef REGAL_NO_TYPEDEF_GL_KHR_DEBUG
 typedef GLuint (REGAL_CALL *PFNGLGETDEBUGMESSAGELOGPROC)(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKPROC)(GLDEBUGPROC callback, GLvoid *userParam);
+typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKPROC)(GLDEBUGPROC callback, const GLvoid *userParam);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECONTROLPROC)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 typedef void (REGAL_CALL *PFNGLGETOBJECTLABELPROC)(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
-typedef void (REGAL_CALL *PFNGLGETOBJECTPTRLABELPROC)(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
+typedef void (REGAL_CALL *PFNGLGETOBJECTPTRLABELPROC)(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
 typedef void (REGAL_CALL *PFNGLOBJECTLABELPROC)(GLenum identifier, GLuint name, GLsizei length, const GLchar *label);
-typedef void (REGAL_CALL *PFNGLOBJECTPTRLABELPROC)(GLvoid *ptr, GLsizei length, const GLchar *label);
+typedef void (REGAL_CALL *PFNGLOBJECTPTRLABELPROC)(const GLvoid *ptr, GLsizei length, const GLchar *label);
 typedef void (REGAL_CALL *PFNGLPOPDEBUGGROUPPROC)(void);
 typedef void (REGAL_CALL *PFNGLPUSHDEBUGGROUPPROC)(GLenum source, GLuint id, GLsizei length, const GLchar *message);
 #endif
@@ -16619,13 +16624,13 @@ typedef void (REGAL_CALL *PFNGLPUSHDEBUGGROUPPROC)(GLenum source, GLuint id, GLs
 
 #ifndef REGAL_NO_DECLARATION_GL_KHR_DEBUG
 REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam);
+REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam);
 REGAL_DECL void REGAL_CALL glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 REGAL_DECL void REGAL_CALL glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
-REGAL_DECL void REGAL_CALL glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
+REGAL_DECL void REGAL_CALL glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label);
 REGAL_DECL void REGAL_CALL glObjectLabel(GLenum identifier, GLuint name, GLsizei length, const GLchar *label);
-REGAL_DECL void REGAL_CALL glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label);
+REGAL_DECL void REGAL_CALL glObjectPtrLabel(const GLvoid *ptr, GLsizei length, const GLchar *label);
 REGAL_DECL void REGAL_CALL glPopDebugGroup(void);
 REGAL_DECL void REGAL_CALL glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar *message);
 #endif
@@ -20690,8 +20695,8 @@ typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETER4DNVPROC)(GLenum target, GLuint i
 typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETER4DVNVPROC)(GLenum target, GLuint index, const GLdouble *v);
 typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETER4FNVPROC)(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETER4FVNVPROC)(GLenum target, GLuint index, const GLfloat *v);
-typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETERS4DVNVPROC)(GLenum target, GLuint index, GLuint count, const GLdouble *v);
-typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETERS4FVNVPROC)(GLenum target, GLuint index, GLuint count, const GLfloat *v);
+typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETERS4DVNVPROC)(GLenum target, GLuint index, GLsizei count, const GLdouble *v);
+typedef void (REGAL_CALL *PFNGLPROGRAMPARAMETERS4FVNVPROC)(GLenum target, GLuint index, GLsizei count, const GLfloat *v);
 typedef void (REGAL_CALL *PFNGLREQUESTRESIDENTPROGRAMSNVPROC)(GLsizei n, const GLuint *programs);
 typedef void (REGAL_CALL *PFNGLTRACKMATRIXNVPROC)(GLenum target, GLuint address, GLenum matrix, GLenum transform);
 typedef void (REGAL_CALL *PFNGLVERTEXATTRIB1DNVPROC)(GLuint index, GLdouble x);
@@ -20824,8 +20829,8 @@ REGAL_DECL void REGAL_CALL glProgramParameter4dNV(GLenum target, GLuint index, G
 REGAL_DECL void REGAL_CALL glProgramParameter4dvNV(GLenum target, GLuint index, const GLdouble *v);
 REGAL_DECL void REGAL_CALL glProgramParameter4fNV(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
 REGAL_DECL void REGAL_CALL glProgramParameter4fvNV(GLenum target, GLuint index, const GLfloat *v);
-REGAL_DECL void REGAL_CALL glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v);
-REGAL_DECL void REGAL_CALL glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v);
+REGAL_DECL void REGAL_CALL glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei count, const GLdouble *v);
+REGAL_DECL void REGAL_CALL glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei count, const GLfloat *v);
 REGAL_DECL void REGAL_CALL glRequestResidentProgramsNV(GLsizei n, const GLuint *programs);
 REGAL_DECL void REGAL_CALL glTrackMatrixNV(GLenum target, GLuint address, GLenum matrix, GLenum transform);
 REGAL_DECL void REGAL_CALL glVertexAttrib1dNV(GLuint index, GLdouble x);
@@ -27564,7 +27569,7 @@ typedef void (REGAL_CALL *PFNGLFOGCOORDFPROC)(GLfloat coord);
 typedef void (REGAL_CALL *PFNGLFOGCOORDFVPROC)(const GLfloat *coord);
 typedef void (REGAL_CALL *PFNGLFOGCOORDPOINTERPROC)(GLenum type, GLsizei stride, const GLvoid *pointer);
 typedef void (REGAL_CALL *PFNGLMULTIDRAWARRAYSPROC)(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSPROC)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSPROC)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 typedef void (REGAL_CALL *PFNGLPOINTPARAMETERFPROC)(GLenum pname, GLfloat param);
 typedef void (REGAL_CALL *PFNGLPOINTPARAMETERFVPROC)(GLenum pname, const GLfloat *params);
 typedef void (REGAL_CALL *PFNGLPOINTPARAMETERIPROC)(GLenum pname, GLint param);
@@ -27660,7 +27665,7 @@ REGAL_DECL void REGAL_CALL glFogCoorddv(const GLdouble *coord);
 REGAL_DECL void REGAL_CALL glFogCoordf(GLfloat coord);
 REGAL_DECL void REGAL_CALL glFogCoordfv(const GLfloat *coord);
 REGAL_DECL void REGAL_CALL glMultiDrawArrays(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-REGAL_DECL void REGAL_CALL glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+REGAL_DECL void REGAL_CALL glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 REGAL_DECL void REGAL_CALL glPointParameterf(GLenum pname, GLfloat param);
 REGAL_DECL void REGAL_CALL glPointParameterfv(GLenum pname, const GLfloat *params);
 REGAL_DECL void REGAL_CALL glPointParameteri(GLenum pname, GLint param);
@@ -27986,7 +27991,7 @@ typedef void (REGAL_CALL *PFNGLGETVERTEXATTRIBFVPROC)(GLuint index, GLenum pname
 typedef void (REGAL_CALL *PFNGLGETVERTEXATTRIBIVPROC)(GLuint index, GLenum pname, GLint *params);
 typedef void (REGAL_CALL *PFNGLGETVERTEXATTRIBPOINTERVPROC)(GLuint index, GLenum pname, GLvoid **pointer);
 typedef void (REGAL_CALL *PFNGLLINKPROGRAMPROC)(GLuint program);
-typedef void (REGAL_CALL *PFNGLSHADERSOURCEPROC)(GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+typedef void (REGAL_CALL *PFNGLSHADERSOURCEPROC)(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length);
 typedef void (REGAL_CALL *PFNGLSTENCILFUNCSEPARATEPROC)(GLenum face, GLenum func, GLint ref, GLuint mask);
 typedef void (REGAL_CALL *PFNGLSTENCILMASKSEPARATEPROC)(GLenum face, GLuint mask);
 typedef void (REGAL_CALL *PFNGLSTENCILOPSEPARATEPROC)(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
@@ -28178,7 +28183,7 @@ REGAL_DECL void REGAL_CALL glGetVertexAttribdv(GLuint index, GLenum pname, GLdou
 REGAL_DECL void REGAL_CALL glGetVertexAttribfv(GLuint index, GLenum pname, GLfloat *params);
 REGAL_DECL void REGAL_CALL glGetVertexAttribiv(GLuint index, GLenum pname, GLint *params);
 REGAL_DECL void REGAL_CALL glLinkProgram(GLuint program);
-REGAL_DECL void REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+REGAL_DECL void REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length);
 REGAL_DECL void REGAL_CALL glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
 REGAL_DECL void REGAL_CALL glStencilMaskSeparate(GLenum face, GLuint mask);
 REGAL_DECL void REGAL_CALL glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);
@@ -28446,6 +28451,8 @@ REGAL_DECL void REGAL_CALL glUniformMatrix4x3fv(GLint location, GLsizei count, G
 #define GL_CLIP_DISTANCE3                                GL_CLIP_PLANE3
 #define GL_CLIP_DISTANCE4                                GL_CLIP_PLANE4
 #define GL_CLIP_DISTANCE5                                GL_CLIP_PLANE5
+#define GL_CLIP_DISTANCE6                                GL_CLIP_PLANE6
+#define GL_CLIP_DISTANCE7                                GL_CLIP_PLANE7
 #define GL_COMPARE_REF_TO_TEXTURE                        GL_COMPARE_R_TO_TEXTURE_ARB
 #define GL_MAX_CLIP_DISTANCES                            GL_MAX_CLIP_PLANES
 #define GL_MAX_VARYING_COMPONENTS                        GL_MAX_VARYING_FLOATS
@@ -28477,7 +28484,7 @@ typedef void (REGAL_CALL *PFNGLGETVERTEXATTRIBIIVPROC)(GLuint index, GLenum pnam
 typedef void (REGAL_CALL *PFNGLGETVERTEXATTRIBIUIVPROC)(GLuint index, GLenum pname, GLuint *params);
 typedef void (REGAL_CALL *PFNGLTEXPARAMETERIIVPROC)(GLenum target, GLenum pname, const GLint *params);
 typedef void (REGAL_CALL *PFNGLTEXPARAMETERIUIVPROC)(GLenum target, GLenum pname, const GLuint *params);
-typedef void (REGAL_CALL *PFNGLTRANSFORMFEEDBACKVARYINGSPROC)(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+typedef void (REGAL_CALL *PFNGLTRANSFORMFEEDBACKVARYINGSPROC)(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 typedef void (REGAL_CALL *PFNGLUNIFORM1UIPROC)(GLint location, GLuint v0);
 typedef void (REGAL_CALL *PFNGLUNIFORM1UIVPROC)(GLint location, GLsizei count, const GLuint *value);
 typedef void (REGAL_CALL *PFNGLUNIFORM2UIPROC)(GLint location, GLuint v0, GLuint v1);
@@ -28593,7 +28600,7 @@ REGAL_DECL void REGAL_CALL glGetVertexAttribIiv(GLuint index, GLenum pname, GLin
 REGAL_DECL void REGAL_CALL glGetVertexAttribIuiv(GLuint index, GLenum pname, GLuint *params);
 REGAL_DECL void REGAL_CALL glTexParameterIiv(GLenum target, GLenum pname, const GLint *params);
 REGAL_DECL void REGAL_CALL glTexParameterIuiv(GLenum target, GLenum pname, const GLuint *params);
-REGAL_DECL void REGAL_CALL glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+REGAL_DECL void REGAL_CALL glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 REGAL_DECL void REGAL_CALL glUniform1ui(GLint location, GLuint v0);
 REGAL_DECL void REGAL_CALL glUniform1uiv(GLint location, GLsizei count, const GLuint *value);
 REGAL_DECL void REGAL_CALL glUniform2ui(GLint location, GLuint v0, GLuint v1);
@@ -34042,14 +34049,14 @@ typedef CGLError (REGAL_CALL *PFNCGLENABLEPROC)(CGLContextObj ctx, CGLContextEna
 typedef CGLError (REGAL_CALL *PFNCGLFLUSHDRAWABLEPROC)(CGLContextObj ctx);
 typedef CGLError (REGAL_CALL *PFNCGLGETOFFSCREENPROC)(CGLContextObj ctx, GLsizei *width, GLsizei *height, GLsizei *rowbytes, void **baseaddr);
 typedef CGLError (REGAL_CALL *PFNCGLGETOPTIONPROC)(CGLGlobalOption pname, GLint *param);
-typedef CGLError (REGAL_CALL *PFNCGLGETPARAMETERPROC)(CGLContextObj ctx, CGLContextEnable pname, GLint *params);
+typedef CGLError (REGAL_CALL *PFNCGLGETPARAMETERPROC)(CGLContextObj ctx, CGLContextParameter pname, GLint *params);
 typedef CGLError (REGAL_CALL *PFNCGLGETVIRTUALSCREENPROC)(CGLContextObj ctx, GLint *screen);
 typedef CGLError (REGAL_CALL *PFNCGLISENABLEDPROC)(CGLContextObj ctx, CGLContextEnable pname, GLint *enable);
 typedef CGLError (REGAL_CALL *PFNCGLQUERYRENDERERINFOPROC)(GLuint display_mask, CGLRendererInfoObj *rend, GLint *nrend);
 typedef CGLError (REGAL_CALL *PFNCGLSETFULLSCREENPROC)(CGLContextObj ctx);
 typedef CGLError (REGAL_CALL *PFNCGLSETOFFSCREENPROC)(CGLContextObj ctx, GLsizei width, GLsizei height, GLsizei rowbytes, void *baseaddr);
 typedef CGLError (REGAL_CALL *PFNCGLSETOPTIONPROC)(CGLGlobalOption pname, GLint param);
-typedef CGLError (REGAL_CALL *PFNCGLSETPARAMETERPROC)(CGLContextObj ctx, CGLContextEnable pname, const GLint *params);
+typedef CGLError (REGAL_CALL *PFNCGLSETPARAMETERPROC)(CGLContextObj ctx, CGLContextParameter pname, const GLint *params);
 typedef CGLError (REGAL_CALL *PFNCGLSETVIRTUALSCREENPROC)(CGLContextObj ctx, GLint screen);
 typedef const char *(REGAL_CALL *PFNCGLERRORSTRINGPROC)(CGLError error);
 typedef void (REGAL_CALL *PFNCGLGETVERSIONPROC)(GLint *majorvers, GLint *minorvers);
@@ -34098,14 +34105,14 @@ REGAL_DECL CGLError REGAL_CALL CGLEnable(CGLContextObj ctx, CGLContextEnable pna
 REGAL_DECL CGLError REGAL_CALL CGLFlushDrawable(CGLContextObj ctx);
 REGAL_DECL CGLError REGAL_CALL CGLGetOffScreen(CGLContextObj ctx, GLsizei *width, GLsizei *height, GLsizei *rowbytes, void **baseaddr);
 REGAL_DECL CGLError REGAL_CALL CGLGetOption(CGLGlobalOption pname, GLint *param);
-REGAL_DECL CGLError REGAL_CALL CGLGetParameter(CGLContextObj ctx, CGLContextEnable pname, GLint *params);
+REGAL_DECL CGLError REGAL_CALL CGLGetParameter(CGLContextObj ctx, CGLContextParameter pname, GLint *params);
 REGAL_DECL CGLError REGAL_CALL CGLGetVirtualScreen(CGLContextObj ctx, GLint *screen);
 REGAL_DECL CGLError REGAL_CALL CGLIsEnabled(CGLContextObj ctx, CGLContextEnable pname, GLint *enable);
 REGAL_DECL CGLError REGAL_CALL CGLQueryRendererInfo(GLuint display_mask, CGLRendererInfoObj *rend, GLint *nrend);
 REGAL_DECL CGLError REGAL_CALL CGLSetFullScreen(CGLContextObj ctx);
 REGAL_DECL CGLError REGAL_CALL CGLSetOffScreen(CGLContextObj ctx, GLsizei width, GLsizei height, GLsizei rowbytes, void *baseaddr);
 REGAL_DECL CGLError REGAL_CALL CGLSetOption(CGLGlobalOption pname, GLint param);
-REGAL_DECL CGLError REGAL_CALL CGLSetParameter(CGLContextObj ctx, CGLContextEnable pname, const GLint *params);
+REGAL_DECL CGLError REGAL_CALL CGLSetParameter(CGLContextObj ctx, CGLContextParameter pname, const GLint *params);
 REGAL_DECL CGLError REGAL_CALL CGLSetVirtualScreen(CGLContextObj ctx, GLint screen);
 REGAL_DECL const char *REGAL_CALL CGLErrorString(CGLError error);
 REGAL_DECL void REGAL_CALL CGLGetVersion(GLint *majorvers, GLint *minorvers);
@@ -34189,17 +34196,17 @@ REGAL_DECL CGLError REGAL_CALL CGLTexImagePBuffer(CGLContextObj ctx, CGLPBufferO
 #ifndef REGAL_NO_TYPEDEF_CGL_VERSION_1_2
 typedef CGLContextObj (REGAL_CALL *PFNCGLRETAINCONTEXTPROC)(CGLContextObj ctx);
 typedef CGLError (REGAL_CALL *PFNCGLGETGLOBALOPTIONPROC)(CGLGlobalOption pname, GLint *params);
-typedef CGLError (REGAL_CALL *PFNCGLGETPBUFFERRETAINCOUNTPROC)(CGLPBufferObj pbuffer);
 typedef CGLError (REGAL_CALL *PFNCGLLOCKCONTEXTPROC)(CGLContextObj ctx);
-typedef CGLError (REGAL_CALL *PFNCGLRELEASEPBUFFERPROC)(CGLPBufferObj pbuffer);
-typedef CGLError (REGAL_CALL *PFNCGLRETAINPBUFFERPROC)(CGLPBufferObj pbuffer);
 typedef CGLError (REGAL_CALL *PFNCGLSETGLOBALOPTIONPROC)(CGLGlobalOption pname, const GLint *params);
 typedef CGLError (REGAL_CALL *PFNCGLUNLOCKCONTEXTPROC)(CGLContextObj ctx);
+typedef CGLPBufferObj (REGAL_CALL *PFNCGLRETAINPBUFFERPROC)(CGLPBufferObj pbuffer);
 typedef CGLPixelFormatObj (REGAL_CALL *PFNCGLGETPIXELFORMATPROC)(CGLContextObj ctx);
 typedef CGLPixelFormatObj (REGAL_CALL *PFNCGLRETAINPIXELFORMATPROC)(CGLPixelFormatObj pix);
 typedef GLuint (REGAL_CALL *PFNCGLGETCONTEXTRETAINCOUNTPROC)(CGLContextObj ctx);
+typedef GLuint (REGAL_CALL *PFNCGLGETPBUFFERRETAINCOUNTPROC)(CGLPBufferObj pbuffer);
 typedef GLuint (REGAL_CALL *PFNCGLGETPIXELFORMATRETAINCOUNTPROC)(CGLPixelFormatObj pix);
 typedef void (REGAL_CALL *PFNCGLRELEASECONTEXTPROC)(CGLContextObj ctx);
+typedef void (REGAL_CALL *PFNCGLRELEASEPBUFFERPROC)(CGLPBufferObj pbuffer);
 typedef void (REGAL_CALL *PFNCGLRELEASEPIXELFORMATPROC)(CGLPixelFormatObj pix);
 #endif
 
@@ -34223,17 +34230,17 @@ typedef void (REGAL_CALL *PFNCGLRELEASEPIXELFORMATPROC)(CGLPixelFormatObj pix);
 #ifndef REGAL_NO_DECLARATION_CGL_VERSION_1_2
 REGAL_DECL CGLContextObj REGAL_CALL CGLRetainContext(CGLContextObj ctx);
 REGAL_DECL CGLError REGAL_CALL CGLGetGlobalOption(CGLGlobalOption pname, GLint *params);
-REGAL_DECL CGLError REGAL_CALL CGLGetPBufferRetainCount(CGLPBufferObj pbuffer);
 REGAL_DECL CGLError REGAL_CALL CGLLockContext(CGLContextObj ctx);
-REGAL_DECL CGLError REGAL_CALL CGLReleasePBuffer(CGLPBufferObj pbuffer);
-REGAL_DECL CGLError REGAL_CALL CGLRetainPBuffer(CGLPBufferObj pbuffer);
 REGAL_DECL CGLError REGAL_CALL CGLSetGlobalOption(CGLGlobalOption pname, const GLint *params);
 REGAL_DECL CGLError REGAL_CALL CGLUnlockContext(CGLContextObj ctx);
+REGAL_DECL CGLPBufferObj REGAL_CALL CGLRetainPBuffer(CGLPBufferObj pbuffer);
 REGAL_DECL CGLPixelFormatObj REGAL_CALL CGLGetPixelFormat(CGLContextObj ctx);
 REGAL_DECL CGLPixelFormatObj REGAL_CALL CGLRetainPixelFormat(CGLPixelFormatObj pix);
 REGAL_DECL GLuint REGAL_CALL CGLGetContextRetainCount(CGLContextObj ctx);
+REGAL_DECL GLuint REGAL_CALL CGLGetPBufferRetainCount(CGLPBufferObj pbuffer);
 REGAL_DECL GLuint REGAL_CALL CGLGetPixelFormatRetainCount(CGLPixelFormatObj pix);
 REGAL_DECL void REGAL_CALL CGLReleaseContext(CGLContextObj ctx);
+REGAL_DECL void REGAL_CALL CGLReleasePBuffer(CGLPBufferObj pbuffer);
 REGAL_DECL void REGAL_CALL CGLReleasePixelFormat(CGLPixelFormatObj pix);
 #endif
 

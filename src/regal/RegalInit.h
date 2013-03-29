@@ -76,11 +76,11 @@ private:
 
   static void checkForGLErrors(RegalContext *context);
 
+public:
+
   //
   // API methods
   //
-
-public:
 
   static RegalErrorCallback setErrorCallback(RegalErrorCallback callback);
 

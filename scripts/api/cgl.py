@@ -28,9 +28,9 @@ IOSurfaceRef.default = '0'
 
 CGSConnectionID = Typedef('CGSConnectionID','void *')
 
-CGSWindowID = Typedef('CGSWindowID','void *')
+CGSWindowID = Typedef('CGSWindowID','long long')
 
-CGSSurfaceID = Typedef('CGSSurfaceID','void *')
+CGSSurfaceID = Typedef('CGSSurfaceID','long long')
 
 cgl.add(CGLContextObj)
 cgl.add(CGLPixelFormatObj)
@@ -72,8 +72,11 @@ kCGLPFASingleRenderer = Enumerant('kCGLPFASingleRenderer', 0x0047, )
 kCGLPFANoRecovery = Enumerant('kCGLPFANoRecovery', 0x0048, )
 kCGLPFAAccelerated = Enumerant('kCGLPFAAccelerated', 0x0049, )
 kCGLPFAClosestPolicy = Enumerant('kCGLPFAClosestPolicy', 0x004a, )
+kCGLPFARobust = Enumerant('kCGLPFARobust', 0x004b, )
 kCGLPFABackingStore = Enumerant('kCGLPFABackingStore', 0x004c, )
+kCGLPFAMPSafe = Enumerant('kCGLPFAMPSafe', 0x004e, )
 kCGLPFAWindow = Enumerant('kCGLPFAWindow', 0x0050, )
+kCGLPFAMultiScreen = Enumerant('kCGLPFAMultiScreen', 0x0051, )
 kCGLPFACompliant = Enumerant('kCGLPFACompliant', 0x0053, )
 kCGLPFADisplayMask = Enumerant('kCGLPFADisplayMask', 0x0054, )
 kCGLPFAPBuffer = Enumerant('kCGLPFAPBuffer', 0x005a, )
@@ -108,8 +111,11 @@ CGLPixelFormatAttribute.add(kCGLPFASingleRenderer)
 CGLPixelFormatAttribute.add(kCGLPFANoRecovery)
 CGLPixelFormatAttribute.add(kCGLPFAAccelerated)
 CGLPixelFormatAttribute.add(kCGLPFAClosestPolicy)
+CGLPixelFormatAttribute.add(kCGLPFARobust)
 CGLPixelFormatAttribute.add(kCGLPFABackingStore)
+CGLPixelFormatAttribute.add(kCGLPFAMPSafe)
 CGLPixelFormatAttribute.add(kCGLPFAWindow)
+CGLPixelFormatAttribute.add(kCGLPFAMultiScreen)
 CGLPixelFormatAttribute.add(kCGLPFACompliant)
 CGLPixelFormatAttribute.add(kCGLPFADisplayMask)
 CGLPixelFormatAttribute.add(kCGLPFAPBuffer)
@@ -565,7 +571,7 @@ cgl.add(CGLGetOption)
 CGLGetParameter = Function('CGLGetParameter')
 CGLGetParameter.ret = Return('CGLError')
 CGLGetParameter.add( Input( 'ctx','CGLContextObj' ))
-CGLGetParameter.add( Input( 'pname','CGLContextEnable' ))
+CGLGetParameter.add( Input( 'pname','CGLContextParameter' ))
 CGLGetParameter.add( Output( 'params','GLint *' ))
 CGLGetParameter.version = ''
 CGLGetParameter.category = 'CGL_VERSION_1_0'
@@ -650,7 +656,7 @@ cgl.add(CGLSetOption)
 CGLSetParameter = Function('CGLSetParameter')
 CGLSetParameter.ret = Return('CGLError')
 CGLSetParameter.add( Input( 'ctx','CGLContextObj' ))
-CGLSetParameter.add( Input( 'pname','CGLContextEnable' ))
+CGLSetParameter.add( Input( 'pname','CGLContextParameter' ))
 CGLSetParameter.add( Input( 'params','const GLint *' ))
 CGLSetParameter.version = ''
 CGLSetParameter.category = 'CGL_VERSION_1_0'
@@ -766,7 +772,7 @@ CGLGetGlobalOption.play = True
 cgl.add(CGLGetGlobalOption)
 
 CGLGetPBufferRetainCount = Function('CGLGetPBufferRetainCount')
-CGLGetPBufferRetainCount.ret = Return('CGLError')
+CGLGetPBufferRetainCount.ret = Return('GLuint')
 CGLGetPBufferRetainCount.add( Input( 'pbuffer','CGLPBufferObj' ))
 CGLGetPBufferRetainCount.version = ''
 CGLGetPBufferRetainCount.category = 'CGL_VERSION_1_2'
@@ -811,7 +817,7 @@ CGLReleaseContext.play = True
 cgl.add(CGLReleaseContext)
 
 CGLReleasePBuffer = Function('CGLReleasePBuffer')
-CGLReleasePBuffer.ret = Return('CGLError')
+CGLReleasePBuffer.ret = Return('void')
 CGLReleasePBuffer.add( Input( 'pbuffer','CGLPBufferObj' ))
 CGLReleasePBuffer.version = ''
 CGLReleasePBuffer.category = 'CGL_VERSION_1_2'
@@ -838,7 +844,7 @@ CGLRetainContext.play = True
 cgl.add(CGLRetainContext)
 
 CGLRetainPBuffer = Function('CGLRetainPBuffer')
-CGLRetainPBuffer.ret = Return('CGLError')
+CGLRetainPBuffer.ret = Return('CGLPBufferObj')
 CGLRetainPBuffer.add( Input( 'pbuffer','CGLPBufferObj' ))
 CGLRetainPBuffer.version = ''
 CGLRetainPBuffer.category = 'CGL_VERSION_1_2'

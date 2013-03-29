@@ -294,7 +294,7 @@ extern "C"
   extern GLboolean  REGAL_CALL glIsProgram(GLuint program);
   extern GLboolean  REGAL_CALL glIsShader(GLuint shader);
   extern void  REGAL_CALL glLinkProgram(GLuint program);
-  extern void  REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+  extern void  REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length);
   extern void  REGAL_CALL glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
   extern void  REGAL_CALL glStencilMaskSeparate(GLenum face, GLuint mask);
   extern void  REGAL_CALL glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);

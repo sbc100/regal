@@ -1539,7 +1539,7 @@ void REGAL_CALL gmock_glLinkProgram(GLuint program) {
   return RegalGMockInterface::current->glLinkProgram(program);
 }
 
-void REGAL_CALL gmock_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length) {
+void REGAL_CALL gmock_glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length) {
   return RegalGMockInterface::current->glShaderSource(shader, count, string, length);
 }
 

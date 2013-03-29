@@ -34,6 +34,12 @@ def apiPpapiFuncDefineCode(apis, args):
         name   = function.name
         params = paramsDefaultCode(function.parameters, True)
         callParams = paramsNameCode(function.parameters)
+        
+        # Workaround for const difference between Regal.h and Pepper API
+
+        if function.name=='glShaderSource':
+          callParams = callParams.replace(', string,',',const_cast<const GLchar **>(string),')
+        
         rType  = typeCode(function.ret.type)
         ppapiName = name
         if ppapiName.startswith('gl'):

@@ -44,16 +44,16 @@ namespace {
 TEST( RegalToken, GLenumToString )
 {
   // Work in progress
-  
+
 #if 0
   {
     //
-    // $ egrep '#define GL_[A-Z_]+[ \t]+0x[0-9A-Fa-f]+' glext.h | sed 's/#define //' | 
-    //   sed 's/^\(GL_[A-Z0-9_]*\)[^0]*\(0x[0-9A-Fa-f]*\)/    EXPECT_EQ(Regal::Token::GLenumToString(\1,"\1");/' | 
+    // $ egrep '#define GL_[A-Z_]+[ \t]+0x[0-9A-Fa-f]+' glext.h | sed 's/#define //' |
+    //   sed 's/^\(GL_[A-Z0-9_]*\)[^0]*\(0x[0-9A-Fa-f]*\)/    EXPECT_EQ(Regal::Token::GLenumToString(\1,"\1");/' |
     //   sort
     //
     //  Excludes ..._BIT and .._BITS
-    
+
     EXPECT_EQ(std::string("GL_ABGR_EXT"),Regal::Token::GLenumToString(GL_ABGR_EXT));
     EXPECT_EQ(std::string("GL_ACCUM_ADJACENT_PAIRS_NV"),Regal::Token::GLenumToString(GL_ACCUM_ADJACENT_PAIRS_NV));
     EXPECT_EQ(std::string("GL_ACTIVE_ATOMIC_COUNTER_BUFFERS"),Regal::Token::GLenumToString(GL_ACTIVE_ATOMIC_COUNTER_BUFFERS));

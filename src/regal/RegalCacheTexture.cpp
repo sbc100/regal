@@ -167,10 +167,6 @@ bindTexture(PFNGLBINDTEXTUREPROC bindTextureProc, PFNGLGETTEXLEVELPARAMETERIVPRO
 #endif
         return;
       }
-      else
-      {
-        Info("Cached texture not read or written: ",filename);
-      }
     }
   }
 }

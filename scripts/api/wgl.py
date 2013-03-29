@@ -52,6 +52,12 @@ PROC.default = 'NULL'
 COLORREF = Typedef('COLORREF','DWORD')
 COLORREF.default = '0'
 
+LONG = Typedef('LONG','long')
+LONG.default = '0'
+
+ULONG_PTR = Typedef('ULONG_PTR','unsigned long *')
+ULONG_PTR.default = 'NULL'
+
 HDC = Typedef('HDC','HANDLE')
 HDC.default = '0'
 HDC.regal = False
@@ -105,6 +111,8 @@ wgl.add(UINT)
 wgl.add(USHORT)
 wgl.add(PROC)
 wgl.add(COLORREF)
+wgl.add(LONG)
+wgl.add(ULONG_PTR)
 wgl.add(HDC)
 wgl.add(HGLRC)
 wgl.add(GLYPHMETRICSFLOAT)

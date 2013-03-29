@@ -72,4 +72,5 @@
 #define set_json_regal_logging_maxlines(value)                           Logging::maxLines = value
 #define set_json_regal_logging_once(value)                               Logging::once = value
 #define set_json_regal_logging_pointers(value)                           Logging::pointers = value
+#define set_json_regal_logging_process(value)                            Logging::process = value
 #define set_json_regal_logging_thread(value)                             Logging::thread = value

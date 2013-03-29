@@ -139,20 +139,21 @@ def generateDispatchCode(apis, args):
           prefix += '/* '
           suffix += ' */'
 
-        header =  '    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,\' \');\n'
-        header += '    string_list< ::std::string > _code;\n'
+        h      = False	
+        h1 =  '    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,\' \');\n'
+        h2 =  ''
         body   =  ''
 
 	ret = ''
         if not typeIsVoid(rType):
 	  if   f.name in [ 'glCreateShader','glCreateShaderObjectARB' ]:
-	    header += '    size_t _retIndex = _context->codeShaderNext++;\n'
+	    h2 += '    size_t _retIndex = _context->codeShaderNext++;\n'
 	    ret = 'const %s shader\" << _retIndex << \" = '%typeStrip(rType)
 	  elif f.name in [ 'glCreateProgram','glCreateProgramObjectARB']:
-	    header += '    size_t _retIndex = _context->codeProgramNext++;\n'
+	    h2 += '    size_t _retIndex = _context->codeProgramNext++;\n'
 	    ret = 'const %s program\" << _retIndex << \" = '%typeStrip(rType)
 	  else:
-	    header += '    size_t _retIndex = _context->codeOutputNext++;\n'
+	    h2 += '    size_t _retIndex = _context->codeOutputNext++;\n'
 	    ret = 'const %s o\" << _retIndex << \" = '%typeStrip(rType)
 
         if len(f.parameters)==0:
@@ -161,10 +162,10 @@ def generateDispatchCode(apis, args):
           body += '    %s_code << indent << "%s%s(";\n'%(prefix,ret,f.name)
 
           if f.name.startswith('glShaderSource'):
-            header += '    std::string _delim = print_string("\\\\n\\"\\n",indent,"  \\"");\n'
-            header += '    size_t _stringIndex = _context->codeInputNext++;\n'
-            header += '    _code << indent << \"const char *i\" << _stringIndex << \" =\\n\";\n'
-            header += '    _code << indent << "  \\\"" << string_list< ::std::string >(string_list< ::std::string >(count,string,length).str(),\'\\n\').join(_delim) << "\\";\\n";\n'
+            h2 += '    std::string _delim = print_string("\\\\n\\"\\n",indent,"  \\"");\n'
+            h2 += '    size_t _stringIndex = _context->codeInputNext++;\n'
+            h2 += '    _code << indent << \"const char *i\" << _stringIndex << \" =\\n\";\n'
+            h2 += '    _code << indent << "  \\\"" << string_list< ::std::string >(string_list< ::std::string >(count,string,length).str(),\'\\n\').join(_delim) << "\\";\\n";\n'
             body   += '    _code << %s << ",1,&i" <<_stringIndex << ",NULL);\\n";\n'%(f.parameters[0].name)
 
           else:
@@ -194,17 +195,17 @@ def generateDispatchCode(apis, args):
                     size = i.maxSize
                   if i.input:
                     if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
-                      header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-                      header += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << (%s) << \"] = \" '%(type,i.name,size)
-                      header += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\",\", \") '%(type,i.name,size)
-                      header += '<< \"\\n\";\n'
+                      h2 += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
+                      h2 += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << (%s) << \"] = \" '%(type,i.name,size)
+                      h2 += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\",\", \") '%(type,i.name,size)
+                      h2 += '<< \"\\n\";\n'
                       body += '_code << \"i\" << _%sIndex;\n'%(i.name)
                     else:
                       body += '_code << "/* %s = ?? */";\n'%(i.name)
                   else:
                     if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
-                      header += '    size_t _%sIndex = _context->codeOutputNext++;\n'%(i.name)
-                      header += '    _code << indent << \"%s o\" << _%sIndex << \"[\" << (%s) << \"];\\n";\n'%(type,i.name,size)
+                      h2 += '    size_t _%sIndex = _context->codeOutputNext++;\n'%(i.name)
+                      h2 += '    _code << indent << \"%s o\" << _%sIndex << \"[\" << (%s) << \"];\\n";\n'%(type,i.name,size)
                       body += '_code << \"o\" << _%sIndex;\n'%(i.name)
                     else:
                       body += '_code << "/* %s = ?? */";\n'%(i.name)
@@ -212,10 +213,11 @@ def generateDispatchCode(apis, args):
               # glTexImage2D etc
 
               elif i.size != None and (isinstance(i.size, str) or isinstance(i.size, unicode)) and i.size.startswith('helperGLPixelImageSize'):
-                header += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-                header += '    _code << indent << \"const GLubyte i\" << _%sIndex << \"[\" << helper::size::pixelImage(%s << \"] = \" '%(i.name,i.size.split('(',1)[1])
-                header += '<< array<GLubyte,const char * const>(static_cast<const GLubyte *>(%s),helper::size::pixelImage(%s,\"\",\"{ \",\" }\",\",\") '%(i.name,i.size.split('(',1)[1])
-                header += '<< \";\\n\";\n'
+                h2 += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
+                h2 += '    _header << indent << \"const GLubyte i\" << _%sIndex << \"[\" << helper::size::pixelImage(%s << \"] = \" '%(i.name,i.size.split('(',1)[1])
+                h2 += '<< array<GLubyte,const char * const>(static_cast<const GLubyte *>(%s),helper::size::pixelImage(%s,\"\",\"{ \",\" }\",\",\") '%(i.name,i.size.split('(',1)[1])
+                h2 += '<< \";\\n\";\n'
+                h = True
                 body += '_code << \"i\" << _%sIndex;\n'%(i.name)
 
               elif p.startswith('boost::print::optional'):
@@ -239,10 +241,18 @@ def generateDispatchCode(apis, args):
 
             body += '    _code << ");%s\\n";\n'%(suffix)
 
+        h1 += '    string_list< ::std::string > _code;\n'
         body += '    if (_context->codeSource)\n'
         body += '      fprintf(_context->codeSource,"%s",_code.str().c_str());\n'
 
-        code += header + body
+	if h:
+          h1 += '    string_list< ::std::string > _header;\n'
+	  body += '    if (_context->codeHeader)\n'
+	  body += '      fprintf(_context->codeHeader,"%s",_header.str().c_str());\n'
+
+#        body += '    Internal("code_%s",_code);\n'%name
+
+        code += h1 + h2 + body
 
         if not typeIsVoid(rType):
           code += '    return _ret;\n'

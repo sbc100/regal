@@ -2255,7 +2255,7 @@ static void replace_ftransform(GLchar *str)
   }
 }
 
-static bool uses_string( const char * str, int count, const GLchar **srcstr, const GLint *length ) {
+static bool uses_string( const char * str, int count, const GLchar * const * srcstr, const GLint *length ) {
     for( int i = 0; i < count; i++ ) {
        const size_t len = (length && length[i] >= 0) ? length[i] : strlen(srcstr[i]);
        std::string seg(srcstr[i],len);
@@ -2266,7 +2266,7 @@ static bool uses_string( const char * str, int count, const GLchar **srcstr, con
     return false;
 }
 
-void Iff::ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar **srcstr, const GLint *length)
+void Iff::ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar * const * srcstr, const GLint *length)
 {
   bool uses_ftransform = false;
   for( int i = 0; i < count && uses_ftransform == false; i++ ) {

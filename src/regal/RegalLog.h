@@ -113,6 +113,10 @@ namespace Json { struct Output; }
 # define REGAL_LOG_THREAD 1
 #endif
 
+#ifndef REGAL_LOG_PROCESS
+# define REGAL_LOG_PROCESS 1
+#endif
+
 #ifndef REGAL_LOG_ONCE
 # define REGAL_LOG_ONCE 1
 #endif
@@ -185,6 +189,7 @@ namespace Logging
 
   extern bool pointers;         // Enabled by default, otherwise empty
   extern bool thread;           // Disabled by default
+  extern bool process;          // Disabled by default
 
   extern bool once;             // Warning and error message logged once only
 

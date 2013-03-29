@@ -460,7 +460,9 @@ namespace Config {
     Info("REGAL_FORCE_EMULATION     ", forceEmulation   ? "enabled" : "disabled");
     Info("REGAL_DEBUG               ", enableDebug      ? "enabled" : "disabled");
     Info("REGAL_ERROR               ", enableError      ? "enabled" : "disabled");
+#if REGAL_CODE
     Info("REGAL_CODE                ", enableCode       ? "enabled" : "disabled");
+#endif
     Info("REGAL_EMULATION           ", enableEmulation  ? "enabled" : "disabled");
     Info("REGAL_LOG                 ", enableLog        ? "enabled" : "disabled");
     Info("REGAL_DRIVER              ", enableDriver     ? "enabled" : "disabled");

@@ -4036,7 +4036,7 @@ static void REGAL_CALL log_glMultiDrawArrays(GLenum mode, const GLint *first, co
     Driver("glMultiDrawArrays","(", toString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
 }
 
-static void REGAL_CALL log_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL log_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -4930,14 +4930,14 @@ static void REGAL_CALL log_glLinkProgram(GLuint program)
     Driver("glLinkProgram","(", program, ")");
 }
 
-static void REGAL_CALL log_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+static void REGAL_CALL log_glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glShaderSource)(shader, count, string, length);
-    Driver("glShaderSource","(", shader, ", ", count, ", ", boost::print::array(reinterpret_cast<const char **>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
+    Driver("glShaderSource","(", shader, ", ", count, ", ", boost::print::array(reinterpret_cast<const char * const *>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
 }
 
 static void REGAL_CALL log_glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
@@ -5168,7 +5168,7 @@ static void REGAL_CALL log_glUseProgram(GLuint program)
     RegalAssert(_next);
     _next->call(&_next->glUseProgram)(program);
     Driver("glUseProgram","(", program, ")");
-    if (program && log_glIsProgram(program))
+    if (Logging::enableDriver && program && log_glIsProgram(program))
     {
       GLuint  _shaders[16];
       GLsizei _count;
@@ -5873,7 +5873,7 @@ static void REGAL_CALL log_glTexParameterIuiv(GLenum target, GLenum pname, const
     Driver("glTexParameterIuiv","(", toString(target), ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
 }
 
-static void REGAL_CALL log_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL log_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7035,7 +7035,7 @@ static void REGAL_CALL log_glGetTexParameterPointervAPPLE(GLenum target, GLenum 
     Driver("glGetTexParameterPointervAPPLE","(", toString(target), ", ", toString(pname), ", ", params, ")");
 }
 
-static void REGAL_CALL log_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
+static void REGAL_CALL log_glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7067,7 +7067,7 @@ static void REGAL_CALL log_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *ar
     Driver("glDeleteVertexArraysAPPLE","(", n, ", ", arrays, ")");
 }
 
-static void REGAL_CALL log_glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL log_glGenVertexArraysAPPLE(GLsizei n, GLuint *arrays)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7415,7 +7415,7 @@ static void REGAL_CALL log_glCopyImageSubData(GLuint srcName, GLenum srcTarget, 
 
 // GL_ARB_debug_output
 
-static void REGAL_CALL log_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
+static void REGAL_CALL log_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7512,7 +7512,7 @@ static void REGAL_CALL log_glBlendFunciARB(GLuint buf, GLenum src, GLenum dst)
 
 // GL_ARB_draw_elements_base_vertex
 
-static void REGAL_CALL log_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL log_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7532,7 +7532,7 @@ static void REGAL_CALL log_glDrawElementsInstancedBaseVertex(GLenum mode, GLsize
     Driver("glDrawElementsInstancedBaseVertex","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", basevertex, ")");
 }
 
-static void REGAL_CALL log_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL log_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7542,7 +7542,7 @@ static void REGAL_CALL log_glDrawRangeElementsBaseVertex(GLenum mode, GLuint sta
     Driver("glDrawRangeElementsBaseVertex","(", toString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
 }
 
-static void REGAL_CALL log_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+static void REGAL_CALL log_glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8554,7 +8554,7 @@ static void REGAL_CALL log_glCurrentPaletteMatrixARB(GLint index)
     Driver("glCurrentPaletteMatrixARB","(", index, ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL log_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8564,7 +8564,7 @@ static void REGAL_CALL log_glMatrixIndexPointerARB(GLint size, GLenum type, GLsi
     Driver("glMatrixIndexPointerARB","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexubvARB(GLint size, GLubyte *indices)
+static void REGAL_CALL log_glMatrixIndexubvARB(GLint size, const GLubyte *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8574,7 +8574,7 @@ static void REGAL_CALL log_glMatrixIndexubvARB(GLint size, GLubyte *indices)
     Driver("glMatrixIndexubvARB","(", size, ", ", boost::print::optional(indices,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexuivARB(GLint size, GLuint *indices)
+static void REGAL_CALL log_glMatrixIndexuivARB(GLint size, const GLuint *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8584,7 +8584,7 @@ static void REGAL_CALL log_glMatrixIndexuivARB(GLint size, GLuint *indices)
     Driver("glMatrixIndexuivARB","(", size, ", ", indices, ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexusvARB(GLint size, GLushort *indices)
+static void REGAL_CALL log_glMatrixIndexusvARB(GLint size, const GLushort *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -9542,7 +9542,7 @@ static void REGAL_CALL log_glBindProgramPipeline(GLuint pipeline)
     Driver("glBindProgramPipeline","(", pipeline, ")");
 }
 
-static GLuint REGAL_CALL log_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
+static GLuint REGAL_CALL log_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar * const *strings)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11368,7 +11368,7 @@ static GLuint REGAL_CALL log_glGetUniformBlockIndex(GLuint program, const GLchar
     return ret;
 }
 
-static void REGAL_CALL log_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
+static void REGAL_CALL log_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11607,7 +11607,7 @@ static void REGAL_CALL log_glVertexBlendARB(GLint count)
     Driver("glVertexBlendARB","(", count, ")");
 }
 
-static void REGAL_CALL log_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL log_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11617,7 +11617,7 @@ static void REGAL_CALL log_glWeightPointerARB(GLint size, GLenum type, GLsizei s
     Driver("glWeightPointerARB","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glWeightbvARB(GLint size, GLbyte *weights)
+static void REGAL_CALL log_glWeightbvARB(GLint size, const GLbyte *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11627,7 +11627,7 @@ static void REGAL_CALL log_glWeightbvARB(GLint size, GLbyte *weights)
     Driver("glWeightbvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightdvARB(GLint size, GLdouble *weights)
+static void REGAL_CALL log_glWeightdvARB(GLint size, const GLdouble *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11637,7 +11637,7 @@ static void REGAL_CALL log_glWeightdvARB(GLint size, GLdouble *weights)
     Driver("glWeightdvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightfvARB(GLint size, GLfloat *weights)
+static void REGAL_CALL log_glWeightfvARB(GLint size, const GLfloat *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11647,7 +11647,7 @@ static void REGAL_CALL log_glWeightfvARB(GLint size, GLfloat *weights)
     Driver("glWeightfvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightivARB(GLint size, GLint *weights)
+static void REGAL_CALL log_glWeightivARB(GLint size, const GLint *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11657,7 +11657,7 @@ static void REGAL_CALL log_glWeightivARB(GLint size, GLint *weights)
     Driver("glWeightivARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glWeightsvARB(GLint size, GLshort *weights)
+static void REGAL_CALL log_glWeightsvARB(GLint size, const GLshort *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11667,7 +11667,7 @@ static void REGAL_CALL log_glWeightsvARB(GLint size, GLshort *weights)
     Driver("glWeightsvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightubvARB(GLint size, GLubyte *weights)
+static void REGAL_CALL log_glWeightubvARB(GLint size, const GLubyte *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11677,7 +11677,7 @@ static void REGAL_CALL log_glWeightubvARB(GLint size, GLubyte *weights)
     Driver("glWeightubvARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glWeightuivARB(GLint size, GLuint *weights)
+static void REGAL_CALL log_glWeightuivARB(GLint size, const GLuint *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11687,7 +11687,7 @@ static void REGAL_CALL log_glWeightuivARB(GLint size, GLuint *weights)
     Driver("glWeightuivARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightusvARB(GLint size, GLushort *weights)
+static void REGAL_CALL log_glWeightusvARB(GLint size, const GLushort *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13180,7 +13180,7 @@ static void REGAL_CALL log_glGetTexBumpParameterivATI(GLenum pname, GLint *param
     Driver("glGetTexBumpParameterivATI","(", toString(pname), ", ", boost::print::optional(param,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+static void REGAL_CALL log_glTexBumpParameterfvATI(GLenum pname, const GLfloat *param)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13190,7 +13190,7 @@ static void REGAL_CALL log_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
     Driver("glTexBumpParameterfvATI","(", toString(pname), ", ", param, ")");
 }
 
-static void REGAL_CALL log_glTexBumpParameterivATI(GLenum pname, GLint *param)
+static void REGAL_CALL log_glTexBumpParameterivATI(GLenum pname, const GLint *param)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -18076,7 +18076,7 @@ static void REGAL_CALL log_glMultiDrawArraysEXT(GLenum mode, const GLint *first,
     Driver("glMultiDrawArraysEXT","(", toString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
 }
 
-static void REGAL_CALL log_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL log_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -19981,7 +19981,7 @@ static void REGAL_CALL log_glTexScissorINTEL(GLenum target, GLclampf tlow, GLcla
 
 // GL_KHR_debug
 
-static void REGAL_CALL log_glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
+static void REGAL_CALL log_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20032,7 +20032,7 @@ static void REGAL_CALL log_glGetObjectLabel(GLenum identifier, GLuint name, GLsi
     Driver("glGetObjectLabel","(", toString(identifier), ", ", name, ", ", bufSize, ", ", length, ", ", boost::print::quote(label,'"'), ")");
 }
 
-static void REGAL_CALL log_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL log_glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20052,7 +20052,7 @@ static void REGAL_CALL log_glObjectLabel(GLenum identifier, GLuint name, GLsizei
     Driver("glObjectLabel","(", toString(identifier), ", ", name, ", ", length, ", ", boost::print::quote(label,'"'), ")");
 }
 
-static void REGAL_CALL log_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
+static void REGAL_CALL log_glObjectPtrLabel(const GLvoid *ptr, GLsizei length, const GLchar *label)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -23847,7 +23847,7 @@ static void REGAL_CALL log_glProgramParameter4fvNV(GLenum target, GLuint index, 
     Driver("glProgramParameter4fvNV","(", toString(target), ", ", index, ", ", boost::print::array(v,4), ")");
 }
 
-static void REGAL_CALL log_glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
+static void REGAL_CALL log_glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei count, const GLdouble *v)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -23857,7 +23857,7 @@ static void REGAL_CALL log_glProgramParameters4dvNV(GLenum target, GLuint index,
     Driver("glProgramParameters4dvNV","(", toString(target), ", ", index, ", ", count, ", ", boost::print::array(v,count * 4), ")");
 }
 
-static void REGAL_CALL log_glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
+static void REGAL_CALL log_glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei count, const GLfloat *v)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);

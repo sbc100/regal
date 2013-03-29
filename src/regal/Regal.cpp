@@ -4204,7 +4204,7 @@ extern "C" {
     _next->call(&_next->glMultiDrawArrays)(mode, first, count, primcount);
   }
 
-  REGAL_DECL void REGAL_CALL glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+  REGAL_DECL void REGAL_CALL glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMultiDrawElements","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ")");
@@ -5088,10 +5088,10 @@ extern "C" {
     _next->call(&_next->glLinkProgram)(program);
   }
 
-  REGAL_DECL void REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+  REGAL_DECL void REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glShaderSource","(", shader, ", ", count, ", ", boost::print::array(reinterpret_cast<const char **>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
+    App("glShaderSource","(", shader, ", ", count, ", ", boost::print::array(reinterpret_cast<const char * const *>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6027,7 +6027,7 @@ extern "C" {
     _next->call(&_next->glTexParameterIuiv)(target, pname, params);
   }
 
-  REGAL_DECL void REGAL_CALL glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+  REGAL_DECL void REGAL_CALL glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTransformFeedbackVaryings","(", program, ", ", count, ", ", boost::print::array(varyings,count,"\""), ", ", toString(bufferMode), ")");
@@ -7183,7 +7183,7 @@ extern "C" {
     _next->call(&_next->glGetTexParameterPointervAPPLE)(target, pname, params);
   }
 
-  REGAL_DECL void REGAL_CALL glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
+  REGAL_DECL void REGAL_CALL glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTextureRangeAPPLE","(", toString(target), ", ", length, ", ", boost::print::optional(pointer,Logging::pointers), ")");
@@ -7215,7 +7215,7 @@ extern "C" {
     _next->call(&_next->glDeleteVertexArraysAPPLE)(n, arrays);
   }
 
-  REGAL_DECL void REGAL_CALL glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+  REGAL_DECL void REGAL_CALL glGenVertexArraysAPPLE(GLsizei n, GLuint *arrays)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenVertexArraysAPPLE","(", n, ")");
@@ -7559,7 +7559,7 @@ extern "C" {
 
   /* GL_ARB_debug_output */
 
-  REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
+  REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glDebugMessageCallbackARB","(", boost::print::optional(userParam,Logging::pointers), ")");
@@ -7659,7 +7659,7 @@ extern "C" {
 
   /* GL_ARB_draw_elements_base_vertex */
 
-  REGAL_DECL void REGAL_CALL glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+  REGAL_DECL void REGAL_CALL glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glDrawElementsBaseVertex","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
@@ -7679,7 +7679,7 @@ extern "C" {
     _next->call(&_next->glDrawElementsInstancedBaseVertex)(mode, count, type, indices, primcount, basevertex);
   }
 
-  REGAL_DECL void REGAL_CALL glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+  REGAL_DECL void REGAL_CALL glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glDrawRangeElementsBaseVertex","(", toString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
@@ -7689,7 +7689,7 @@ extern "C" {
     _next->call(&_next->glDrawRangeElementsBaseVertex)(mode, start, end, count, type, indices, basevertex);
   }
 
-  REGAL_DECL void REGAL_CALL glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+  REGAL_DECL void REGAL_CALL glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMultiDrawElementsBaseVertex","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ", ", boost::print::array(basevertex,primcount), ")");
@@ -8697,7 +8697,7 @@ extern "C" {
     _next->call(&_next->glCurrentPaletteMatrixARB)(index);
   }
 
-  REGAL_DECL void REGAL_CALL glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+  REGAL_DECL void REGAL_CALL glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMatrixIndexPointerARB","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
@@ -8707,7 +8707,7 @@ extern "C" {
     _next->call(&_next->glMatrixIndexPointerARB)(size, type, stride, pointer);
   }
 
-  REGAL_DECL void REGAL_CALL glMatrixIndexubvARB(GLint size, GLubyte *indices)
+  REGAL_DECL void REGAL_CALL glMatrixIndexubvARB(GLint size, const GLubyte *indices)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMatrixIndexubvARB","(", size, ", ", boost::print::optional(indices,Logging::pointers), ")");
@@ -8717,7 +8717,7 @@ extern "C" {
     _next->call(&_next->glMatrixIndexubvARB)(size, indices);
   }
 
-  REGAL_DECL void REGAL_CALL glMatrixIndexuivARB(GLint size, GLuint *indices)
+  REGAL_DECL void REGAL_CALL glMatrixIndexuivARB(GLint size, const GLuint *indices)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMatrixIndexuivARB","(", size, ", ", indices, ")");
@@ -8727,7 +8727,7 @@ extern "C" {
     _next->call(&_next->glMatrixIndexuivARB)(size, indices);
   }
 
-  REGAL_DECL void REGAL_CALL glMatrixIndexusvARB(GLint size, GLushort *indices)
+  REGAL_DECL void REGAL_CALL glMatrixIndexusvARB(GLint size, const GLushort *indices)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMatrixIndexusvARB","(", size, ", ", indices, ")");
@@ -9679,7 +9679,7 @@ extern "C" {
     _next->call(&_next->glBindProgramPipeline)(pipeline);
   }
 
-  REGAL_DECL GLuint REGAL_CALL glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
+  REGAL_DECL GLuint REGAL_CALL glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar * const *strings)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateShaderProgramv","(", toString(type), ", ", count, ", ", boost::print::array(strings,count,"\""), ")");
@@ -11491,7 +11491,7 @@ extern "C" {
     return _next->call(&_next->glGetUniformBlockIndex)(program, uniformBlockName);
   }
 
-  REGAL_DECL void REGAL_CALL glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
+  REGAL_DECL void REGAL_CALL glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetUniformIndices","(", program, ", ", uniformCount, ", ", uniformNames, ")");
@@ -11729,7 +11729,7 @@ extern "C" {
     _next->call(&_next->glVertexBlendARB)(count);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+  REGAL_DECL void REGAL_CALL glWeightPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightPointerARB","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
@@ -11739,7 +11739,7 @@ extern "C" {
     _next->call(&_next->glWeightPointerARB)(size, type, stride, pointer);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightbvARB(GLint size, GLbyte *weights)
+  REGAL_DECL void REGAL_CALL glWeightbvARB(GLint size, const GLbyte *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightbvARB","(", size, ", ", weights, ")");
@@ -11749,7 +11749,7 @@ extern "C" {
     _next->call(&_next->glWeightbvARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightdvARB(GLint size, GLdouble *weights)
+  REGAL_DECL void REGAL_CALL glWeightdvARB(GLint size, const GLdouble *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightdvARB","(", size, ", ", weights, ")");
@@ -11759,7 +11759,7 @@ extern "C" {
     _next->call(&_next->glWeightdvARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightfvARB(GLint size, GLfloat *weights)
+  REGAL_DECL void REGAL_CALL glWeightfvARB(GLint size, const GLfloat *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightfvARB","(", size, ", ", weights, ")");
@@ -11769,7 +11769,7 @@ extern "C" {
     _next->call(&_next->glWeightfvARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightivARB(GLint size, GLint *weights)
+  REGAL_DECL void REGAL_CALL glWeightivARB(GLint size, const GLint *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightivARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
@@ -11779,7 +11779,7 @@ extern "C" {
     _next->call(&_next->glWeightivARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightsvARB(GLint size, GLshort *weights)
+  REGAL_DECL void REGAL_CALL glWeightsvARB(GLint size, const GLshort *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightsvARB","(", size, ", ", weights, ")");
@@ -11789,7 +11789,7 @@ extern "C" {
     _next->call(&_next->glWeightsvARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightubvARB(GLint size, GLubyte *weights)
+  REGAL_DECL void REGAL_CALL glWeightubvARB(GLint size, const GLubyte *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightubvARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
@@ -11799,7 +11799,7 @@ extern "C" {
     _next->call(&_next->glWeightubvARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightuivARB(GLint size, GLuint *weights)
+  REGAL_DECL void REGAL_CALL glWeightuivARB(GLint size, const GLuint *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightuivARB","(", size, ", ", weights, ")");
@@ -11809,7 +11809,7 @@ extern "C" {
     _next->call(&_next->glWeightuivARB)(size, weights);
   }
 
-  REGAL_DECL void REGAL_CALL glWeightusvARB(GLint size, GLushort *weights)
+  REGAL_DECL void REGAL_CALL glWeightusvARB(GLint size, const GLushort *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glWeightusvARB","(", size, ", ", weights, ")");
@@ -13297,7 +13297,7 @@ extern "C" {
     _next->call(&_next->glGetTexBumpParameterivATI)(pname, param);
   }
 
-  REGAL_DECL void REGAL_CALL glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+  REGAL_DECL void REGAL_CALL glTexBumpParameterfvATI(GLenum pname, const GLfloat *param)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTexBumpParameterfvATI","(", toString(pname), ", ", param, ")");
@@ -13307,7 +13307,7 @@ extern "C" {
     _next->call(&_next->glTexBumpParameterfvATI)(pname, param);
   }
 
-  REGAL_DECL void REGAL_CALL glTexBumpParameterivATI(GLenum pname, GLint *param)
+  REGAL_DECL void REGAL_CALL glTexBumpParameterivATI(GLenum pname, const GLint *param)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTexBumpParameterivATI","(", toString(pname), ", ", boost::print::optional(param,Logging::pointers), ")");
@@ -18189,7 +18189,7 @@ extern "C" {
     _next->call(&_next->glMultiDrawArraysEXT)(mode, first, count, primcount);
   }
 
-  REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+  REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMultiDrawElementsEXT","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ")");
@@ -20091,7 +20091,7 @@ extern "C" {
 
   /* GL_KHR_debug */
 
-  REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
+  REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glDebugMessageCallback","(", boost::print::optional(userParam,Logging::pointers), ")");
@@ -20145,7 +20145,7 @@ extern "C" {
     _next->call(&_next->glGetObjectLabel)(identifier, name, bufSize, length, label);
   }
 
-  REGAL_DECL void REGAL_CALL glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
+  REGAL_DECL void REGAL_CALL glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetObjectPtrLabel","(", boost::print::optional(ptr,Logging::pointers), ", ", bufSize, ", ", length, ", ", boost::print::quote(label,'"'), ")");
@@ -20165,7 +20165,7 @@ extern "C" {
     _next->call(&_next->glObjectLabel)(identifier, name, length, label);
   }
 
-  REGAL_DECL void REGAL_CALL glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
+  REGAL_DECL void REGAL_CALL glObjectPtrLabel(const GLvoid *ptr, GLsizei length, const GLchar *label)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glObjectPtrLabel","(", boost::print::optional(ptr,Logging::pointers), ", ", length, ", ", boost::print::quote(label,'"'), ")");
@@ -23943,7 +23943,7 @@ extern "C" {
     _next->call(&_next->glProgramParameter4fvNV)(target, index, v);
   }
 
-  REGAL_DECL void REGAL_CALL glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
+  REGAL_DECL void REGAL_CALL glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei count, const GLdouble *v)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glProgramParameters4dvNV","(", toString(target), ", ", index, ", ", count, ", ", boost::print::array(v,count * 4), ")");
@@ -23953,7 +23953,7 @@ extern "C" {
     _next->call(&_next->glProgramParameters4dvNV)(target, index, count, v);
   }
 
-  REGAL_DECL void REGAL_CALL glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
+  REGAL_DECL void REGAL_CALL glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei count, const GLfloat *v)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glProgramParameters4fvNV","(", toString(target), ", ", index, ", ", count, ", ", boost::print::array(v,count * 4), ")");
@@ -33529,7 +33529,7 @@ extern "C" {
     return ret;
   }
 
-  REGAL_DECL CGLError REGAL_CALL CGLGetParameter(CGLContextObj ctx, CGLContextEnable pname, GLint *params)
+  REGAL_DECL CGLError REGAL_CALL CGLGetParameter(CGLContextObj ctx, CGLContextParameter pname, GLint *params)
   {
     App("CGLGetParameter","(", ctx, ", ", pname, ")");
     if (!dispatchTableGlobal.CGLGetParameter)
@@ -33695,7 +33695,7 @@ extern "C" {
     return ret;
   }
 
-  REGAL_DECL CGLError REGAL_CALL CGLSetParameter(CGLContextObj ctx, CGLContextEnable pname, const GLint *params)
+  REGAL_DECL CGLError REGAL_CALL CGLSetParameter(CGLContextObj ctx, CGLContextParameter pname, const GLint *params)
   {
     App("CGLSetParameter","(", ctx, ", ", pname, ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!dispatchTableGlobal.CGLSetParameter)
@@ -33909,7 +33909,7 @@ extern "C" {
     return ret;
   }
 
-  REGAL_DECL CGLError REGAL_CALL CGLGetPBufferRetainCount(CGLPBufferObj pbuffer)
+  REGAL_DECL GLuint REGAL_CALL CGLGetPBufferRetainCount(CGLPBufferObj pbuffer)
   {
     App("CGLGetPBufferRetainCount","(", pbuffer, ")");
     if (!dispatchTableGlobal.CGLGetPBufferRetainCount)
@@ -33919,7 +33919,7 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetPBufferRetainCount==CGLGetPBufferRetainCount)
         dispatchTableGlobal.CGLGetPBufferRetainCount = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    GLuint  ret = (GLuint )0;
     if (dispatchTableGlobal.CGLGetPBufferRetainCount)
     {
       Driver("CGLGetPBufferRetainCount","(", pbuffer, ")");
@@ -34012,7 +34012,7 @@ extern "C" {
       Warning( "CGLReleaseContext not available." );
   }
 
-  REGAL_DECL CGLError REGAL_CALL CGLReleasePBuffer(CGLPBufferObj pbuffer)
+  REGAL_DECL void REGAL_CALL CGLReleasePBuffer(CGLPBufferObj pbuffer)
   {
     App("CGLReleasePBuffer","(", pbuffer, ")");
     if (!dispatchTableGlobal.CGLReleasePBuffer)
@@ -34022,15 +34022,13 @@ extern "C" {
       if (dispatchTableGlobal.CGLReleasePBuffer==CGLReleasePBuffer)
         dispatchTableGlobal.CGLReleasePBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
     if (dispatchTableGlobal.CGLReleasePBuffer)
     {
       Driver("CGLReleasePBuffer","(", pbuffer, ")");
-      ret = dispatchTableGlobal.CGLReleasePBuffer(pbuffer);
+      dispatchTableGlobal.CGLReleasePBuffer(pbuffer);
     }
     else
       Warning( "CGLReleasePBuffer not available." );
-    return ret;
   }
 
   REGAL_DECL void REGAL_CALL CGLReleasePixelFormat(CGLPixelFormatObj pix)
@@ -34073,7 +34071,7 @@ extern "C" {
     return ret;
   }
 
-  REGAL_DECL CGLError REGAL_CALL CGLRetainPBuffer(CGLPBufferObj pbuffer)
+  REGAL_DECL CGLPBufferObj REGAL_CALL CGLRetainPBuffer(CGLPBufferObj pbuffer)
   {
     App("CGLRetainPBuffer","(", pbuffer, ")");
     if (!dispatchTableGlobal.CGLRetainPBuffer)
@@ -34083,7 +34081,7 @@ extern "C" {
       if (dispatchTableGlobal.CGLRetainPBuffer==CGLRetainPBuffer)
         dispatchTableGlobal.CGLRetainPBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLPBufferObj  ret = (CGLPBufferObj )0;
     if (dispatchTableGlobal.CGLRetainPBuffer)
     {
       Driver("CGLRetainPBuffer","(", pbuffer, ")");

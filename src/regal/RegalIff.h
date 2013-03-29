@@ -2268,7 +2268,7 @@ struct Iff
   void UseFixedFunctionProgram( RegalContext * ctx );
   void UseShaderProgram( RegalContext * ctx );
 
-  void ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+  void ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar * const * string, const GLint *length);
   void LinkProgram( RegalContext *ctx, GLuint program );
 
   GLuint CreateShader( RegalContext *ctx, GLenum shaderType ) {
