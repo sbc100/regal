@@ -406,6 +406,7 @@ namespace Logging {
 
     Json::Output jo;
 
+    jo.object();
     jo.member("cat",prefix);
     jo.member("pid",Thread::procId());
     jo.member("tid",Thread::threadId()%(1<<16));
@@ -480,6 +481,7 @@ namespace Logging {
       jo.end();
     }
 
+    jo.end();
     return jo.str();
 #endif // REGAL_NO_JSON
   }
@@ -569,7 +571,7 @@ namespace Logging {
 #if REGAL_LOG_JSON && !REGAL_NO_JSON
       if (json && jsonOutput)
       {
-        string m = jsonObject(prefix,name,str);
+        string m = jsonObject(prefix,name,str) + ",\n";
         fwrite(m.c_str(),m.length(),1,jsonOutput);
       }
 #endif

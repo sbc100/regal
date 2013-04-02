@@ -140,6 +140,10 @@ namespace Config
 
   extern ::std::string codeSourceFile;
   extern ::std::string codeHeaderFile;
+
+  // Thread locking
+
+  extern bool          enableThreadLocking;
 };
 
 REGAL_NAMESPACE_END

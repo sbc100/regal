@@ -558,6 +558,7 @@ ContextInfo::ContextInfo()
   gl_sgix_fog_offset(false),
   gl_sgix_fog_texture(false),
   gl_sgix_fragment_lighting(false),
+  gl_sgix_fragment_specular_lighting(false),
   gl_sgix_framezoom(false),
   gl_sgix_igloo_interface(false),
   gl_sgix_instruments(false),
@@ -1434,6 +1435,7 @@ ContextInfo::init(const RegalContext &context)
   gl_sgix_fog_offset = e.find("GL_SGIX_fog_offset")!=e.end();
   gl_sgix_fog_texture = e.find("GL_SGIX_fog_texture")!=e.end();
   gl_sgix_fragment_lighting = e.find("GL_SGIX_fragment_lighting")!=e.end();
+  gl_sgix_fragment_specular_lighting = e.find("GL_SGIX_fragment_specular_lighting")!=e.end();
   gl_sgix_framezoom = e.find("GL_SGIX_framezoom")!=e.end();
   gl_sgix_igloo_interface = e.find("GL_SGIX_igloo_interface")!=e.end();
   gl_sgix_instruments = e.find("GL_SGIX_instruments")!=e.end();
@@ -2090,6 +2092,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_SGIX_fog_offset")) return gl_sgix_fog_offset;
   if (!strcmp(ext,"GL_SGIX_fog_texture")) return gl_sgix_fog_texture;
   if (!strcmp(ext,"GL_SGIX_fragment_lighting")) return gl_sgix_fragment_lighting;
+  if (!strcmp(ext,"GL_SGIX_fragment_specular_lighting")) return gl_sgix_fragment_specular_lighting;
   if (!strcmp(ext,"GL_SGIX_framezoom")) return gl_sgix_framezoom;
   if (!strcmp(ext,"GL_SGIX_igloo_interface")) return gl_sgix_igloo_interface;
   if (!strcmp(ext,"GL_SGIX_instruments")) return gl_sgix_instruments;

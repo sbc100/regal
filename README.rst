@@ -256,6 +256,11 @@ Limitations
 .. _GL_REGAL_log:             https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_log.txt
 .. _GL_REGAL_enable:          https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_enable.txt
 
+Contact Information
+===================
+
+* Discussion of Regal is primarily via the `Issue Tracker <https://github.com/p3/regal/issues>`_ currently.
+
 Other Information
 =================
 
@@ -318,6 +323,12 @@ iOS
 
 PPAPI and NaCl
 --------------
+
+* NACL_SDK_ROOT needs to be set
+
+* NACL_LIBC=newlib is the default, specify NACL_LIBC=glibc as an alternative
+
+* regaltest requires pepper_26 or newer
 
 Questions and Answers
 =====================

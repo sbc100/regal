@@ -124,6 +124,8 @@ namespace Config {
   ::std::string codeHeaderFile;
 #endif
 
+  bool          enableThreadLocking = REGAL_THREAD_LOCKING;
+
   void Init()
   {
     Internal("Config::Init","()");
@@ -421,6 +423,13 @@ namespace Config {
 
 #endif
 
+#if REGAL_THREAD_LOCKING
+    tmp = GetEnv( "REGAL_THREAD_LOCKING" );
+    if (tmp) enableThreadLocking = atoi(tmp)!=0;
+#else
+    enableThreadLocking = false;
+#endif
+
     // REGAL_NO_EMULATION is deprecated, use REGAL_EMULATION=0 instead.
 
 #if REGAL_EMULATION && defined(REGAL_NO_EMULATION) && REGAL_NO_EMULATION
@@ -511,6 +520,8 @@ namespace Config {
     Info("REGAL_CODE_SOURCE         ", codeSourceFile                            );
     Info("REGAL_CODE_HEADER         ", codeHeaderFile                            );
 #endif
+
+    Info("REGAL_THREAD_LOCKING      ", enableThreadLocking ? "enabled" : "disabled");
   }
 
   void

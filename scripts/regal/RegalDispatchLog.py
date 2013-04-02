@@ -187,12 +187,14 @@ def generateDispatchLog(apis, args):
       # Special handling for glUseProgram - log the attached shaders.
 
       if name=='glUseProgram':
+        code += '    #if !REGAL_SYS_PPAPI\n'
         code += '    if (Logging::enableDriver && program && log_glIsProgram(program))\n'
         code += '    {\n'
         code += '      GLuint  _shaders[16];\n'
         code += '      GLsizei _count;\n'
         code += '      log_glGetAttachedShaders(program,16,&_count,_shaders);\n'
         code += '    }\n'
+        code += '    #endif // REGAL_SYS_PPAPI\n'
 
       if not typeIsVoid(rType):
         code += '    return ret;\n'
