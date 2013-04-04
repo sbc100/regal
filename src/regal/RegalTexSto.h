@@ -46,7 +46,9 @@
 REGAL_GLOBAL_BEGIN
 
 #include "RegalEmu.h"
+
 #include <utility>
+#include <cmath>
 
 REGAL_GLOBAL_END
 
@@ -86,7 +88,7 @@ namespace Emu {
       for (GLsizei i = 0; i < levels; i++)
       {
         tbl.call(&tbl.glTexImage1D)( target, i, internalformat, width, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        width = (GLsizei)std::max(1.0f, floor(width / 2.0f));
+        width = (GLsizei)std::max(1.0f, (float)floor(width / 2.0f));
       }
 
       GLint id;
@@ -110,9 +112,9 @@ namespace Emu {
         else
           tbl.call(&tbl.glTexImage2D)( target, i, internalformat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 
-        width = (GLsizei)std::max(1.0f, floor(width / 2.0f));
+        width = (GLsizei)std::max(1.0f, (float)floor(width / 2.0f));
         if (target != GL_TEXTURE_1D_ARRAY)
-          height = (GLsizei)std::max(1.0f, floor(height / 2.0f));
+          height = (GLsizei)std::max(1.0f, (float)floor(height / 2.0f));
       }
 
       GLint id;
@@ -126,10 +128,10 @@ namespace Emu {
       for (GLsizei i = 0; i < levels; i++)
       {
         tbl.call(&tbl.glTexImage3D)( target, i, internalformat, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        width = (GLsizei)std::max(1.0f, floor(width / 2.0f));
-        height = (GLsizei)std::max(1.0f, floor(height / 2.0f));
+        width = (GLsizei)std::max(1.0f, (float)floor(width / 2.0f));
+        height = (GLsizei)std::max(1.0f, (float)floor(height / 2.0f));
         if (target != GL_TEXTURE_2D_ARRAY && target != GL_TEXTURE_CUBE_MAP_ARRAY)
-          depth = (GLsizei)std::max(1.0f, floor(depth / 2.0f));
+          depth = (GLsizei)std::max(1.0f, (float)floor(depth / 2.0f));
       }
 
       GLint id;
