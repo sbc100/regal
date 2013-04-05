@@ -358,6 +358,17 @@ struct Dsa : public RegalEmu
         }
     }
     void DsaTexture( RegalContext * ctx, GLenum target, GLuint texture ) {
+        switch( target ) {
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+                target = GL_TEXTURE_CUBE_MAP;
+            default:
+                break;
+        }
         if( NotTexture( target, texture ) ) {
             dsa.textureTarget = target;
             dsa.texture = texture;
