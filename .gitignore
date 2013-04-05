@@ -35,3 +35,5 @@ examples/nacl/lib32
 examples/nacl/*.nexe
 examples/nacl/*.nmf
 build/ppapi/vs2010/Regal/win
+build/win32/vs2010/Regal/Debug
+build/win32/vs2010/Regal/Release
