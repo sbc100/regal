@@ -56,7 +56,7 @@ REGAL_GLOBAL_END
 REGAL_NAMESPACE_BEGIN
 
 #define REGAL_EMU_MAX_TEXTURE_UNITS 16
-#define REGAL_NUM_TEXTURE_TARGETS 10
+#define REGAL_NUM_TEXTURE_TARGETS 16
 
 namespace Emu {
 
@@ -110,6 +110,12 @@ struct So : public RegalEmu
             case GL_TEXTURE_CUBE_MAP_ARRAY: return 7;
             case GL_TEXTURE_2D_MULTISAMPLE: return 8;
             case GL_TEXTURE_2D_MULTISAMPLE_ARRAY: return 9;
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_X: return 10;
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_X: return 11;
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Y: return 12;
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: return 13;
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Z: return 14;
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: return 15;
             default:
                 Warning( "Unhandled texture target enum: texture = ", Token::GLenumToString(texture));
                 break;
@@ -593,7 +599,7 @@ struct So : public RegalEmu
     TextureUnit textureUnits[REGAL_EMU_MAX_TEXTURE_UNITS];
     std::map<GLuint, SamplingState*> samplerObjects;
     std::map<GLuint, TextureState*> textureObjects;
-    static const GLenum index2Enum[11];
+    static const GLenum index2Enum[17];
 };
 
 }
