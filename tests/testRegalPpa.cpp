@@ -41,7 +41,8 @@
 #include "RegalDispatch.h"
 #include "RegalPpa.h"
 
-namespace {
+namespace
+{
 
 using namespace ::Regal;
 
@@ -49,7 +50,8 @@ using ::testing::Mock;
 using ::testing::_;
 using ::testing::AnyNumber;
 
-TEST( RegalPpa, Enable ) {
+TEST( RegalPpa, Enable )
+{
   Emu::Ppa ppa;
 
   RegalContext ctx;
@@ -83,7 +85,8 @@ TEST( RegalPpa, Enable ) {
   EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.State::Polygon::smoothEnable );
 }
 
-TEST( RegalPpa, PushPopAttrib ) {
+TEST( RegalPpa, PushPopAttrib )
+{
   RegalGMockInterface mock;
 
   RegalContext ctx;
@@ -127,8 +130,8 @@ TEST( RegalPpa, PushPopAttrib ) {
   EXPECT_EQ( 1u, ppa.polygonStack.size() );
   EXPECT_EQ( 1u, ppa.transformStack.size() );
 
-  EXPECT_CALL( mock, glPushAttrib( GL_ACCUM_BUFFER_BIT )  );
-  ppa.PushAttrib( &ctx, GL_ACCUM_BUFFER_BIT );
+  EXPECT_CALL( mock, glPushAttrib( GL_TEXTURE_BIT )  );
+  ppa.PushAttrib( &ctx, GL_TEXTURE_BIT );
   Mock::VerifyAndClear( &mock );
 
   EXPECT_EQ( 1u, ppa.depthStack.size() );
@@ -142,18 +145,19 @@ TEST( RegalPpa, PushPopAttrib ) {
 
   // Revisit - Emu::Ppa shouldn't make these calls if there
   //           is no actual state change.
-  EXPECT_CALL( mock, glDisable(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glClearAccum(_,_,_,_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glClearDepth(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glClearStencil(_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glCullFace(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDepthFunc(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDepthMask(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDisable(_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glFrontFace(_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glPolygonMode(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glPolygonOffset(_,_) ).Times(AnyNumber());
-  EXPECT_CALL( mock, glClearStencil(_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glStencilFuncSeparate(_,_,_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glStencilMaskSeparate(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glStencilOpSeparate(_,_,_,_) ).Times(AnyNumber());
-  EXPECT_CALL( mock, glDepthFunc(_) ).Times(AnyNumber());
-  EXPECT_CALL( mock, glClearDepth(_) ).Times(AnyNumber());
-  EXPECT_CALL( mock, glDepthMask(_) ).Times(AnyNumber());
 
   EXPECT_EQ( 1u, ppa.depthStack.size() );
   EXPECT_EQ( 1u, ppa.stencilStack.size() );
@@ -187,6 +191,109 @@ TEST( RegalPpa, PushPopAttrib ) {
   EXPECT_EQ( 0u, ppa.stencilStack.size() );
   EXPECT_EQ( 0u, ppa.polygonStack.size() );
   EXPECT_EQ( 0u, ppa.transformStack.size() );
+}
+
+TEST( RegalPpa, PushPopDepthBufferBit )
+{
+  RegalGMockInterface mock;
+
+  RegalContext ctx;
+  ctx.info = new ContextInfo();
+  ctx.info->es2 = ctx.info->core = false;
+  InitDispatchTableMissing( ctx.dispatcher.emulation );
+  InitDispatchTableGMock( ctx.dispatcher.emulation );
+
+  Emu::Ppa ppa;
+
+  EXPECT_EQ( 0u, ppa.depthStack.size() );
+  EXPECT_EQ( 0u, ppa.stencilStack.size() );
+  EXPECT_EQ( 0u, ppa.polygonStack.size() );
+  EXPECT_EQ( 0u, ppa.transformStack.size() );
+
+  // push default state
+  ppa.PushAttrib( &ctx, GL_DEPTH_BUFFER_BIT );
+  Mock::VerifyAndClear( &mock );
+
+  EXPECT_EQ( 1u, ppa.depthStack.size() );
+  EXPECT_EQ( 0u, ppa.stencilStack.size() );
+  EXPECT_EQ( 0u, ppa.polygonStack.size() );
+  EXPECT_EQ( 0u, ppa.transformStack.size() );
+
+  // change state
+  ppa.SetEnable( &ctx, GL_DEPTH_TEST, GL_TRUE );
+  ppa.glDepthFunc( GL_NEVER );
+  ppa.glDepthMask( GL_FALSE );
+  ppa.glClearDepth( 0.0 );
+
+  // check for expected values
+  EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.Depth::enable );
+  EXPECT_EQ( static_cast<GLenum>( GL_NEVER ), ppa.Depth::func );
+  EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.Depth::mask );
+  EXPECT_EQ( static_cast<GLclampd>( 0.0 ), ppa.Depth::clear );
+
+  // push this state
+  ppa.PushAttrib( &ctx, GL_DEPTH_BUFFER_BIT );
+  Mock::VerifyAndClear( &mock );
+
+  EXPECT_EQ( 2u, ppa.depthStack.size() );
+  EXPECT_EQ( 0u, ppa.stencilStack.size() );
+  EXPECT_EQ( 0u, ppa.polygonStack.size() );
+  EXPECT_EQ( 0u, ppa.transformStack.size() );
+
+  // change state again
+  ppa.SetEnable( &ctx, GL_DEPTH_TEST, GL_FALSE );
+  ppa.glDepthFunc( GL_GREATER );
+  ppa.glDepthMask( GL_TRUE );
+  ppa.glClearDepth( 0.25 );
+
+  // check for expected values
+  EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.Depth::enable );
+  EXPECT_EQ( static_cast<GLenum>( GL_GREATER ), ppa.Depth::func );
+  EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.Depth::mask );
+  EXPECT_EQ( static_cast<GLclampd>( 0.25 ), ppa.Depth::clear );
+
+  ppa.glClearDepthf( 0.5 );
+  EXPECT_EQ( static_cast<GLclampd>( 0.5 ), ppa.Depth::clear );
+
+  // pop attrib
+  EXPECT_CALL( mock, glEnable(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDisable(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDepthFunc(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glClearDepth(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDepthMask(_) ).Times(AnyNumber());
+  ppa.PopAttrib( &ctx );
+  Mock::VerifyAndClear( &mock );
+
+  // check for expected values
+  EXPECT_EQ( 1u, ppa.depthStack.size() );
+  EXPECT_EQ( 0u, ppa.stencilStack.size() );
+  EXPECT_EQ( 0u, ppa.polygonStack.size() );
+  EXPECT_EQ( 0u, ppa.transformStack.size() );
+
+  EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.Depth::enable );
+  EXPECT_EQ( static_cast<GLenum>( GL_NEVER ), ppa.Depth::func );
+  EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.Depth::mask );
+  EXPECT_EQ( static_cast<GLclampd>( 0.0 ), ppa.Depth::clear );
+
+  // pop attrib
+  EXPECT_CALL( mock, glEnable(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDisable(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDepthFunc(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glClearDepth(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glDepthMask(_) ).Times(AnyNumber());
+  ppa.PopAttrib( &ctx );
+  Mock::VerifyAndClear( &mock );
+
+  // check for expected default values
+  EXPECT_EQ( 0u, ppa.depthStack.size() );
+  EXPECT_EQ( 0u, ppa.stencilStack.size() );
+  EXPECT_EQ( 0u, ppa.polygonStack.size() );
+  EXPECT_EQ( 0u, ppa.transformStack.size() );
+
+  EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), ppa.Depth::enable );
+  EXPECT_EQ( static_cast<GLenum>( GL_LESS ), ppa.Depth::func );
+  EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.Depth::mask );
+  EXPECT_EQ( static_cast<GLclampd>( 1.0 ), ppa.Depth::clear );
 }
 
 } // namespace

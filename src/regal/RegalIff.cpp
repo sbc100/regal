@@ -102,7 +102,7 @@ static Iff::TextureTargetBitfield TargetToBitfield( GLenum target ) {
 
 static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & state, string_list & src )
 {
-  Internal("Regal::Rff::GenerateVertexShaderSource",rff);
+  Internal("Regal::Iff::GenerateVertexShaderSource",rff);
 
   const bool gles = rff->gles;
   const bool legacy = rff->legacy;
@@ -552,7 +552,7 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
 
 static void AddTexEnv( int i, Iff::TexenvMode env, GLenum fmt,  string_list & s )
 {
-  Internal("Regal::Rff::AddTexEnv","()");
+  Internal("Regal::Iff::AddTexEnv","()");
 
   switch( env ) {
     case Iff::TEM_Replace:
@@ -655,7 +655,7 @@ static void AddTexEnv( int i, Iff::TexenvMode env, GLenum fmt,  string_list & s 
 
 static void AddTexEnvCombine( Iff::TextureEnv & env, string_list & s )
 {
-  Internal("Regal::Rff::AddTexEnvCombine","()");
+  Internal("Regal::Iff::AddTexEnvCombine","()");
 
   bool skipAlpha = env.rgb.mode == Iff::TEC_Dot3Rgba;
   int rgbSources = 0;
@@ -912,7 +912,7 @@ static string TextureFetchSwizzle( bool es, bool legacy, Iff::TextureTargetBitfi
 
 static void GenerateFragmentShaderSource( Iff * rff, string_list &src )
 {
-  Internal("Regal::Rff::GenerateFragmentShaderSource",rff);
+  Internal("Regal::Iff::GenerateFragmentShaderSource",rff);
 
   const Store & st = rff->ffstate.processed;
   if( rff->gles ) {
@@ -1527,9 +1527,43 @@ void Program::Uniforms( RegalContext * ctx, DispatchTable & tbl )
   }
 }
 
+void Iff::Cleanup()
+{
+  Internal("Regal::Iff::Cleanup","()");
+
+  RegalContext *ctx = REGAL_GET_CONTEXT();
+  if (ctx)
+  {
+    RestoreVao(ctx);
+    DispatchTable &tbl = ctx->dispatcher.emulation;
+
+    tbl.call(&tbl.glDeleteBuffers)(1, &immVbo);
+    tbl.call(&tbl.glDeleteBuffers)(1, &immQuadsVbo);
+    tbl.call(&tbl.glDeleteVertexArrays)(1, &immVao);
+  
+    for (int i = 0; i < (1 << REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE_BITS); ++i)
+    {
+      const Program &pgm = ffprogs[i];
+      if (pgm.pg)
+      {
+        tbl.call(&tbl.glDeleteShader)(pgm.vs);
+        tbl.call(&tbl.glDeleteShader)(pgm.fs);
+        tbl.call(&tbl.glDeleteProgram)(pgm.pg);
+      }
+    }
+
+    tbl.glBindBuffer(GL_ARRAY_BUFFER, 0);
+    tbl.glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    for (int i = 0; i < ctx->info->maxVertexAttribs; i++) {
+        tbl.glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+        tbl.glDisableVertexAttribArray(i);
+    }
+  }
+}
+
 void Iff::InitFixedFunction( RegalContext * ctx )
 {
-  Internal("Regal::Rff::InitFixedFunction","()");
+  Internal("Regal::Iff::InitFixedFunction","()");
 
   RegalAssert(ctx);
   RegalAssert(ctx->info);
@@ -1620,7 +1654,7 @@ void Iff::InitFixedFunction( RegalContext * ctx )
 
 void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )
 {
-  Internal("Regal::Rff::ShadowMultiTexBinding",toString(texunit)," ",toString(target)," ",obj);
+  Internal("Regal::Iff::ShadowMultiTexBinding",toString(texunit)," ",toString(target)," ",obj);
 
   activeTextureIndex = texunit - GL_TEXTURE0;
   if( activeTextureIndex > ( REGAL_EMU_MAX_TEXTURE_UNITS - 1 ) ) {
@@ -1637,7 +1671,7 @@ void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )
 
 void Iff::ShadowTextureInfo( GLuint obj, GLenum target, GLint internalFormat )
 {
-  Internal("Regal::Rff::ShadowTextureInfo",obj," ",GLenumToString(target)," ",GLenumToString(internalFormat));
+  Internal("Regal::Iff::ShadowTextureInfo",obj," ",GLenumToString(target)," ",GLenumToString(internalFormat));
 
   UNUSED_PARAMETER(target);
   // assert( target == tip->tgt );
@@ -1689,7 +1723,7 @@ void Iff::TexEnv( GLenum texunit, GLenum target, GLenum pname, const GLfloat *v 
 
 void Iff::TexEnv( GLenum texunit, GLenum target, GLenum pname, const GLint *v )
 {
-  Internal("Regal::Rff::TexEnv",GLenumToString(texunit)," ",GLenumToString(target)," ",GLenumToString(pname));
+  Internal("Regal::Iff::TexEnv",GLenumToString(texunit)," ",GLenumToString(target)," ",GLenumToString(pname));
 
   activeTextureIndex = texunit - GL_TEXTURE0;
   switch( target ) {
@@ -1914,7 +1948,7 @@ void Iff::State::Process( Iff * ffn )
 
 void Iff::UpdateUniforms( RegalContext * ctx )
 {
-  Internal("Regal::Rff::UpdateUniforms",ctx);
+  Internal("Regal::Iff::UpdateUniforms",ctx);
 
   Program & pgm = *currprog;
   DispatchTable & tbl = ctx->dispatcher.emulation;
@@ -2112,7 +2146,7 @@ std::vector<GLuint> evicthist(1 << ( REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE_BIT
 
 void Iff::UseFixedFunctionProgram( RegalContext * ctx )
 {
-  Internal("Regal::Rff::UseFixedFunctionProgram",ctx);
+  Internal("Regal::Iff::UseFixedFunctionProgram",ctx);
 
   if( currprog != NULL && currprog->ver == ver.Current() ) {
     return;
@@ -2181,7 +2215,7 @@ void Iff::UseFixedFunctionProgram( RegalContext * ctx )
 
 void Iff::UseShaderProgram( RegalContext * ctx )
 {
-  Internal("Regal::Rff::UseShaderProgram",ctx);
+  Internal("Regal::Iff::UseShaderProgram",ctx);
 
   if( currprog != NULL && currprog->ver == ver.Current() ) {
     return;

@@ -69,6 +69,15 @@ namespace Token {
     return 1<=v && v<=4 ? integer[v] : GLenumToString(v);
   }
 
+  std::string
+  GLtextureToString(GLenum v)
+  {
+    if (v>=GL_TEXTURE0 && v<=GL_TEXTURE31)
+      return GLenumToString(v);
+
+    return print_string("0x",hex(v));
+  }
+
   std::string GLclearToString(GLbitfield v)
   {
     const GLbitfield other = v & ~(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);

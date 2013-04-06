@@ -95,6 +95,8 @@ public:
   #endif
 
   static void              destroyContext(RegalSystemContext sysCtx);
+
+  static void              getContextListingHTML(std::string &text);
 };
 
 REGAL_NAMESPACE_END

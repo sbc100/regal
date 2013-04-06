@@ -50,8 +50,9 @@ REGAL_NAMESPACE_END
 
 REGAL_GLOBAL_BEGIN
 
-#include "RegalPpa.h"
 #include "RegalLog.h"
+#include "RegalInit.h"
+#include "RegalConfig.h"
 #include "RegalThread.h"
 #include "RegalFavicon.h"
 #include "RegalContextInfo.h"
@@ -71,8 +72,6 @@ using boost::print::print_string;
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
-
-extern map<Thread::Thread, RegalContext *> th2rc;
 
 namespace Http
 {
@@ -139,9 +138,7 @@ namespace Http
 
         if (!strcmp("/log",request_info->uri))
         {
-          if (Logging::buffer)
-            for (list<string>::const_iterator i = Logging::buffer->begin(); i!=Logging::buffer->end(); ++i)
-              body += print_string(*i,br);
+          Logging::getLogMessagesHTML(body);
         }
         else if (!strcmp("/glEnable",request_info->uri))
         {
@@ -189,36 +186,7 @@ namespace Http
         }
         else
         {
-          for (map<Thread::Thread, RegalContext *>::const_iterator i = th2rc.begin(); i!=th2rc.end(); ++i)
-          {
-            RegalContext *ctx = i->second;
-
-            // Need a per-context read-lock?
-
-            body += print_string("ctx = ",ctx,br);
-            body += br;
-            if (ctx)
-            {
-              if (ctx->info)
-              {
-                body += print_string("<b>Vendor     </b>:",ctx->info->regalVendor,br);
-                body += print_string("<b>Renderer   </b>:",ctx->info->regalRenderer,br);
-                body += print_string("<b>Version    </b>:",ctx->info->regalVersion,br);
-                body += print_string("<b>Extensions </b>:",ctx->info->regalExtensions,br);
-                body += br;
-              }
-
-#if REGAL_EMULATION
-              if (ctx->ppa)
-              {
-                body += print_string("<b>GL_STENCIL_BIT</b><br/>",ctx->ppa->State::Stencil::toString(br),br);
-                body += print_string("<b>GL_DEPTH_BIT</b><br/>",  ctx->ppa->State::Depth::toString(br),br);
-                body += print_string("<b>GL_POLYGON_BIT</b><br/>",ctx->ppa->State::Polygon::toString(br),br);
-                body += br;
-              }
-#endif
-            }
-          }
+          ::REGAL_NAMESPACE_INTERNAL::Init::getContextListingHTML(body);
         }
 
         string html = print_string(

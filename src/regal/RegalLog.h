@@ -152,6 +152,7 @@ namespace Logging
   extern void Cleanup();
 
   extern void writeJSON(Json::Output &jo);
+  extern void getLogMessagesHTML(std::string &text);
 
   // GL_REGAL_log
 
@@ -169,6 +170,8 @@ namespace Logging
   };
 
   extern void Output(const Mode mode, const char *file, const int line, const char *prefix, const char *delim, const char *name, const std::string &str = std::string());
+
+  extern void createLocks();
 
   // Runtime control of logging
 
@@ -193,11 +196,6 @@ namespace Logging
 
   extern bool once;             // Warning and error message logged once only
 
-#if REGAL_LOG_ONCE
-  extern std::set<std::string> uniqueErrors;
-  extern std::set<std::string> uniqueWarnings;
-#endif
-
   // Callback output
 
   extern bool callback;
@@ -216,7 +214,6 @@ namespace Logging
 
   // Buffering for HTTP query purposes
 
-  extern std::list<std::string> *buffer;
   extern std::size_t             bufferSize;
   extern std::size_t             bufferLimit;
 
