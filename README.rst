@@ -169,9 +169,13 @@ Logging
 Multi-threading support
 -----------------------
 
-  - Enabled by default.
+  - Locking and per-thread contexts enabled by default.
 
-  - Build-time configuration: **REGAL_NO_TLS**
+  - Per-thread context build-time configuration: **REGAL_NO_TLS**
+
+  - Locking build-time configuration: **REGAL_THREAD_LOCKING**
+
+  - Locking environment variable configuration: **REGAL_THREAD_LOCKING**
 
 Spoofing OpenGL vendor, renderer, version and extension strings
 ---------------------------------------------------------------

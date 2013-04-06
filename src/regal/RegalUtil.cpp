@@ -1,9 +1,9 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
-  Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2013 Scott Nations
+  Copyright (c) 2013 Mathias Schott
+  Copyright (c) 2013 Nigel Stewart
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -159,20 +159,22 @@ const char *libraryLocation(const Library &library)
 
 #if defined(__x86_64__) || defined(__x86_64)
       const char * const candidates[] = {
-        "/usr/lib/amd64/libGL.so.1",              // Solaris
-        "/usr/lib64/nvidia/libGL.so.1",           // RedHat
-        "/usr/lib64/libGL.so.1",                  // RedHat
-        "/usr/lib/nvidia-current/libGL.so.1",     // Ubuntu NVIDIA
-        "/usr/lib/libGL.so.1",                    // Ubuntu
+        "/usr/lib/amd64/libGL.so.1",                  // Solaris
+        "/usr/lib64/nvidia/libGL.so.1",               // RedHat
+        "/usr/lib64/libGL.so.1",                      // RedHat
+        "/usr/lib/nvidia-current/libGL.so.1",         // Ubuntu NVIDIA
+        "/usr/lib/libGL.so.1",                        // Ubuntu
+        "/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1",  // Ubuntu via VMWare on Windows
         NULL
       };
 #else
       const char * const candidates[] = {
-        "/usr/lib/nvidia-current-updates/libGL.so.1",   // Ubuntu 12.04 32-bit NVIDIA
-        "/usr/lib32/nvidia-current/libGL.so.1",         // Ubuntu NVIDIA
-        "/usr/lib32/libGL.so.1",                        // Ubuntu
-        "/usr/lib/fglrx/libGL.so.1",                    // Ubuntu 12.04 32-bit ATI Radeon HD 5450
-        "/usr/lib/libGL.so.1",                          // RedHat & Solaris
+        "/usr/lib/nvidia-current-updates/libGL.so.1", // Ubuntu 12.04 32-bit NVIDIA
+        "/usr/lib32/nvidia-current/libGL.so.1",       // Ubuntu NVIDIA
+        "/usr/lib32/libGL.so.1",                      // Ubuntu
+        "/usr/lib/fglrx/libGL.so.1",                  // Ubuntu 12.04 32-bit ATI Radeon HD 5450
+        "/usr/lib/libGL.so.1",                        // RedHat & Solaris
+        "/usr/lib/i386-linux-gnu/mesa/libGL.so.1",    // Ubuntu via VMWare on Windows
         NULL
       };
 #endif
