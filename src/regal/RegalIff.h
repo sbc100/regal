@@ -339,6 +339,8 @@ struct Iff
   {
   }
 
+  void Cleanup();
+
   // Info
   int progcount;
 
@@ -1524,7 +1526,8 @@ struct Iff
    // Iff::Program
 
     Program()
-    : uniforms(),
+    : pg(0),
+      uniforms(),
       store()
     {
       // Clear plain-old-data (POD) memory
@@ -1532,7 +1535,8 @@ struct Iff
     }
 
     Program(const Program &other)
-    : uniforms(other.uniforms),
+    : pg(0),
+      uniforms(other.uniforms),
       store(other.store)
     {
       // Copy plain-old-data (POD) memory

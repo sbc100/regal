@@ -390,6 +390,10 @@
 #  define REGAL_NO_JSON 0
 #endif
 
+#ifndef REGAL_THREAD_LOCKING
+#  define REGAL_THREAD_LOCKING 1
+#endif
+
 // AssertFunction depends on Error log, but
 // ideally we wouldn't depend on RegalLog.h here
 

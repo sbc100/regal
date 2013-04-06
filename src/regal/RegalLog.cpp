@@ -45,6 +45,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalMarker.h"
 #include "RegalThread.h"
 #include "RegalContext.h"
+#include "RegalMutex.h"
 
 #if !(REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__)))
 #include <pthread.h>
@@ -104,6 +105,7 @@ namespace Logging {
   std::string  jsonFilename;
   FILE        *jsonOutput   = NULL;
 
+  Thread::Mutex          *bufferMutex = NULL;
   std::list<std::string> *buffer = NULL;
   std::size_t             bufferSize  = 0;
   std::size_t             bufferLimit = 500;
@@ -113,8 +115,9 @@ namespace Logging {
   bool once      = (REGAL_LOG_ONCE);
 
 #if REGAL_LOG_ONCE
-  std::set<std::string> uniqueErrors;
-  std::set<std::string> uniqueWarnings;
+  Thread::Mutex         *uniqueMutex = NULL;
+  std::set<std::string>  uniqueErrors;
+  std::set<std::string>  uniqueWarnings;
 #endif
 
   Timer                   timer;
@@ -206,8 +209,6 @@ namespace Logging {
 #ifdef REGAL_HTTP_LOG_LIMIT
     bufferLimit = REGAL_HTTP_LOG_LIMIT;
 #endif
-
-    // TODO - clean this up at shutdown...
 
     if (bufferLimit)
       buffer = new list<string>();
@@ -301,6 +302,16 @@ namespace Logging {
       fileClose(&jsonOutput);
     }
 #endif
+
+#if REGAL_LOG_ONCE
+    delete uniqueMutex;
+    uniqueMutex = NULL;
+#endif
+
+    delete buffer;
+    delete bufferMutex;
+    buffer = NULL;
+    bufferMutex = NULL;
   }
 
   void
@@ -406,6 +417,7 @@ namespace Logging {
 
     Json::Output jo;
 
+    jo.object();
     jo.member("cat",prefix);
     jo.member("pid",Thread::procId());
     jo.member("tid",Thread::threadId()%(1<<16));
@@ -480,8 +492,21 @@ namespace Logging {
       jo.end();
     }
 
+    jo.end();
     return jo.str();
 #endif // REGAL_NO_JSON
+  }
+
+  void getLogMessagesHTML(std::string &text)
+  {
+    static const char *const br = "<br/>\n";
+
+    if (buffer)
+    {
+      Thread::ScopedLock lock(bufferMutex);
+      for (list<string>::const_iterator i = buffer->begin(); i!=buffer->end(); ++i)
+        text += print_string(*i,br);
+    }
   }
 
   // Append to the log buffer
@@ -490,6 +515,7 @@ namespace Logging {
   {
     if (buffer)
     {
+      Thread::ScopedLock lock(bufferMutex);
       buffer->push_back(string());
       buffer->back().swap(str);
       bufferSize++;
@@ -502,6 +528,14 @@ namespace Logging {
         --bufferSize;
       }
     }
+  }
+
+  void createLocks()
+  {
+    bufferMutex = new Thread::Mutex();
+#if REGAL_LOG_ONCE
+    uniqueMutex = new Thread::Mutex();
+#endif
   }
 
 #ifndef REGAL_LOG_TAG
@@ -527,16 +561,22 @@ namespace Logging {
         switch (mode)
         {
           case LOG_WARNING:
+          {
+            Thread::ScopedLock lock(uniqueMutex);
             if (uniqueWarnings.find(m)!=uniqueWarnings.end())
               return;
             uniqueWarnings.insert(m);
             break;
+          }
 
           case LOG_ERROR:
+          {
+            Thread::ScopedLock lock(uniqueMutex);
             if (uniqueErrors.find(m)!=uniqueErrors.end())
               return;
             uniqueErrors.insert(m);
             break;
+          }
 
           default:
             break;
@@ -569,7 +609,7 @@ namespace Logging {
 #if REGAL_LOG_JSON && !REGAL_NO_JSON
       if (json && jsonOutput)
       {
-        string m = jsonObject(prefix,name,str);
+        string m = jsonObject(prefix,name,str) + ",\n";
         fwrite(m.c_str(),m.length(),1,jsonOutput);
       }
 #endif

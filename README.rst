@@ -169,9 +169,13 @@ Logging
 Multi-threading support
 -----------------------
 
-  - Enabled by default.
+  - Locking and per-thread contexts enabled by default.
 
-  - Build-time configuration: **REGAL_NO_TLS**
+  - Per-thread context build-time configuration: **REGAL_NO_TLS**
+
+  - Locking build-time configuration: **REGAL_THREAD_LOCKING**
+
+  - Locking environment variable configuration: **REGAL_THREAD_LOCKING**
 
 Spoofing OpenGL vendor, renderer, version and extension strings
 ---------------------------------------------------------------
@@ -256,6 +260,11 @@ Limitations
 .. _GL_REGAL_log:             https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_log.txt
 .. _GL_REGAL_enable:          https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_enable.txt
 
+Contact Information
+===================
+
+* Discussion of Regal is primarily via the `Issue Tracker <https://github.com/p3/regal/issues>`_ currently.
+
 Other Information
 =================
 
@@ -318,6 +327,12 @@ iOS
 
 PPAPI and NaCl
 --------------
+
+* NACL_SDK_ROOT needs to be set
+
+* NACL_LIBC=newlib is the default, specify NACL_LIBC=glibc as an alternative
+
+* regaltest requires pepper_26 or newer
 
 Questions and Answers
 =====================

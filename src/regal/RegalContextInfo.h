@@ -588,6 +588,7 @@ struct ContextInfo
   GLboolean gl_sgix_fog_offset : 1;
   GLboolean gl_sgix_fog_texture : 1;
   GLboolean gl_sgix_fragment_lighting : 1;
+  GLboolean gl_sgix_fragment_specular_lighting : 1;
   GLboolean gl_sgix_framezoom : 1;
   GLboolean gl_sgix_igloo_interface : 1;
   GLboolean gl_sgix_instruments : 1;

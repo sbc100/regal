@@ -60,6 +60,10 @@ namespace Token {
   const char * GLbooleanToString     (GLboolean  v);
   const char * internalFormatToString(GLint      v);
 
+  std::string  GLtextureToString     (GLenum     v); // GL_TEXTUREi or 0xaaaa
+
+  // Bitfield strings
+
   std::string GLclearToString       (GLbitfield v);
   std::string GLbufferAccessToString(GLbitfield v);
 

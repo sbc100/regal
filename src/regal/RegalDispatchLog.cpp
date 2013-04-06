@@ -5168,12 +5168,14 @@ static void REGAL_CALL log_glUseProgram(GLuint program)
     RegalAssert(_next);
     _next->call(&_next->glUseProgram)(program);
     Driver("glUseProgram","(", program, ")");
+    #if !REGAL_SYS_PPAPI
     if (Logging::enableDriver && program && log_glIsProgram(program))
     {
       GLuint  _shaders[16];
       GLsizei _count;
       log_glGetAttachedShaders(program,16,&_count,_shaders);
     }
+    #endif // REGAL_SYS_PPAPI
 }
 
 static void REGAL_CALL log_glValidateProgram(GLuint program)

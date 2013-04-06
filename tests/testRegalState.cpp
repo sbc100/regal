@@ -43,7 +43,8 @@
 #include "RegalDispatch.h"
 #include "RegalState.h"
 
-namespace {
+namespace
+{
 
 using namespace Regal;
 
@@ -54,7 +55,18 @@ using ::testing::Mock;
 // Regal::State::Depth
 // ====================================
 
-TEST( RegalStateDepth, SetDispatchesCorrectly ) {
+TEST( RegalStateDepth, SetsDefaultsCorrectly )
+{
+  State::Depth depth;
+
+  EXPECT_EQ( static_cast<GLboolean>( GL_FALSE ), depth.enable );
+  EXPECT_EQ( static_cast<GLenum>( GL_LESS ), depth.func );
+  EXPECT_EQ( static_cast<GLclampd>( 1.0 ), depth.clear );
+  EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), depth.mask );
+}
+
+TEST( RegalStateDepth, SetDispatchesCorrectly )
+{
   // Note: This test was written to demonstrate the first use of gmock in
   // Regal.
 
@@ -90,7 +102,8 @@ TEST( RegalStateDepth, SetDispatchesCorrectly ) {
 // Regal::State::Transform
 // ====================================
 
-TEST( RegalStateTransform, WorksAsExpected ) {
+TEST( RegalStateTransform, WorksAsExpected )
+{
   State::Transform t1;
   State::Transform t2;
 
@@ -158,11 +171,13 @@ TEST( RegalStateTransform, WorksAsExpected ) {
   t2.glClipPlane( GL_CLIP_PLANE0 + 6, equation );
 }
 
-MATCHER_P4( IsDouble4, v1, v2, v3, v4, "" ) {
+MATCHER_P4( IsDouble4, v1, v2, v3, v4, "" )
+{
   return ( arg[ 0 ] == v1 ) && ( arg[ 1 ] == v2 ) && ( arg[ 2 ] == v3 ) && ( arg[ 3 ] == v4 );
 }
 
-TEST( RegalStateTransform, TransitionSetsStateCorrectly ) {
+TEST( RegalStateTransform, TransitionSetsStateCorrectly )
+{
   RegalGMockInterface mock;
 
   DispatchTable dt;
@@ -243,6 +258,24 @@ TEST( RegalStateTransform, TransitionSetsStateCorrectly ) {
 
     Mock::VerifyAndClear( &mock );
   }
+}
+
+// ====================================
+// Regal::State::Hint
+// ====================================
+
+TEST( RegalStateHint, SetsDefaultsCorrectly )
+{
+  State::Hint hint;
+
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.perspectiveCorrection );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.pointSmooth );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.lineSmooth );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.polygonSmooth );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.fog );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.generateMipmap );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.textureCompression );
+  EXPECT_EQ( static_cast<GLenum>( GL_DONT_CARE ), hint.fragmentShaderDerivative );
 }
 
 }  // namespace
