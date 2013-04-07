@@ -138,11 +138,6 @@ dsaFormulae = {
             '_context->dsa->RestoreActiveTexture( _context );',
         ],
     },
-    'TexDel' : {
-        'entries' : [ 'glDeleteTextures(EXT|)', ],
-        'prefix' : [ '_context->dsa->DeleteTextures( _context, ${arg0plus} );',
-        ],
-    },
     'TexCommands2' : {
         'entries' : [ 'glTexGen(i|iv|f|fv)', ],
         'prefix' : [ '_context->dsa->RestoreActiveTexture( _context );', ],
@@ -222,7 +217,6 @@ dsaFormulae = {
         'entries' : [
             'glUniform(1|2|3|4)(i|f|ui|d)(v|)',
             'glUniformMatrix(2|3|4)(x2|x3|x4|)(fv|dv)',
-            'glDeleteProgram',
         ],
         'prefix' : [ '_context->dsa->RestoreGlslProgram( _context );' ],
     },
@@ -249,7 +243,6 @@ dsaFormulae = {
         'entries' : [
             'gl(Get|)Program(Env|Local)Parameter(.*)(ARB|NV)',
             'gl(Get|)Program(String)(EXT)',
-            'glDeletePrograms(ARB|NV)',
         ],
         'prefix' : [ '_context->dsa->RestoreAsmProgram( _context, ${arg0} );' ],
     },
@@ -288,7 +281,6 @@ dsaFormulae = {
             'glFramebufferRenderbuffer(ARB|EXT|)',
             'glDrawBuffer(s|)(ARB|EXT|NV|)'
             'glGet(Renderbuffer|FramebufferAttachment)Parameteriv(ARB|EXT|)',
-            'glDeleteFramebuffers(EXT|OES|)',
         ],
         'prefix' : [ '_context->dsa->RestoreFramebuffer( _context );' ],
     },
@@ -364,7 +356,6 @@ dsaFormulae = {
             'gl(FlushMapped|Map|Unmap)Buffer(Range|)(ARB|EXT|)',
             'glGetBuffer(Parameteriv|Pointerv)',
             'gl(Vertex|Normal|Color|SecondaryColor)Pointer',
-            'glDeleteBuffers(ARB|)'
         ],
         'prefix' : [ '_context->dsa->RestoreBuffer( _context );' ],
     },
@@ -401,6 +392,25 @@ dsaFormulae = {
             '_context->dsa->DsaBuffer( _context, ${arg1} );',
             '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2plus} );',
         ],
-    }
+    },
+    'Delete' : {
+        'entries' : [
+          'glDelete(Buffers)(ARB|)',
+          'glDelete(Framebuffers)(EXT|OES|)',
+          'glDelete(Program)',
+          'glDelete(Programs)(ARB|NV)',
+          'glDelete(Textures)(EXT|)',
+          'glDelete(VertexArrays)(APPLE|OES|)',
+        ],
+        'subst' : {
+            'method' : {
+                '.*Program$'                 : 'GlslProgram',
+                '.*Programs(ARB|NV)'         : 'AsmPrograms',
+                '.*VertexArrays(APPLE|OES|)' : 'Vaos',
+                'default'                    : '${m1}',
+            },
+        },
+        'prefix' : [ '_context->dsa->Delete${method}( _context, ${arg0plus} );', ],
+    },
 }
 

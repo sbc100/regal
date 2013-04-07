@@ -23198,7 +23198,7 @@ static void REGAL_CALL emu_glDeleteBuffers(GLsizei n, const GLuint *buffers)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreBuffer( _context );
+        _context->dsa->DeleteBuffers( _context, n, buffers );
       }
       #endif
     case 1 :
@@ -23567,7 +23567,7 @@ static void REGAL_CALL emu_glDeleteProgram(GLuint program)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreGlslProgram( _context );
+        _context->dsa->DeleteGlslProgram( _context, program );
       }
       #endif
     case 1 :
@@ -28660,6 +28660,40 @@ static void REGAL_CALL emu_glBindVertexArrayAPPLE(GLuint array)
   _next->call(& _next->glBindVertexArrayAPPLE)(array);
 }
 
+static void REGAL_CALL emu_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->dsa->DeleteVaos( _context, n, arrays );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glDeleteVertexArraysAPPLE)(n, arrays);
+}
+
 // GL_APPLE_vertex_array_range
 
 // GL_APPLE_vertex_program_evaluators
@@ -29528,7 +29562,7 @@ static void REGAL_CALL emu_glDeleteFramebuffers(GLsizei n, const GLuint *framebu
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreFramebuffer( _context );
+        _context->dsa->DeleteFramebuffers( _context, n, framebuffers );
       }
       #endif
     case 1 :
@@ -35123,6 +35157,14 @@ static void REGAL_CALL emu_glDeleteVertexArrays(GLsizei n, const GLuint *arrays)
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->dsa->DeleteVaos( _context, n, arrays );
+      }
+      #endif
     case 5 :
       #if REGAL_EMU_IFF
       if (_context->iff) break;
@@ -35708,7 +35750,7 @@ static void REGAL_CALL emu_glDeleteBuffersARB(GLsizei n, const GLuint *buffers)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreBuffer( _context );
+        _context->dsa->DeleteBuffers( _context, n, buffers );
       }
       #endif
     case 1 :
@@ -36041,7 +36083,7 @@ static void REGAL_CALL emu_glDeleteProgramsARB(GLsizei n, const GLuint *programs
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreAsmProgram( _context, n );
+        _context->dsa->DeleteAsmPrograms( _context, n, programs );
       }
       #endif
     case 1 :
@@ -53347,7 +53389,7 @@ static void REGAL_CALL emu_glDeleteFramebuffersEXT(GLsizei n, const GLuint *fram
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreFramebuffer( _context );
+        _context->dsa->DeleteFramebuffers( _context, n, framebuffers );
       }
       #endif
     case 1 :
@@ -56640,7 +56682,7 @@ static void REGAL_CALL emu_glDeleteProgramsNV(GLsizei n, const GLuint *programs)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreAsmProgram( _context, n );
+        _context->dsa->DeleteAsmPrograms( _context, n, programs );
       }
       #endif
     case 1 :
@@ -56751,7 +56793,7 @@ static void REGAL_CALL emu_glDeleteFramebuffersOES(GLsizei n, const GLuint *fram
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreFramebuffer( _context );
+        _context->dsa->DeleteFramebuffers( _context, n, framebuffers );
       }
       #endif
     case 1 :
@@ -56811,6 +56853,40 @@ static void REGAL_CALL emu_glBindVertexArrayOES(GLuint array)
   DispatchTable *_next = _dispatch._next;
   RegalAssert(_next);
   _next->call(& _next->glBindVertexArrayOES)(array);
+}
+
+static void REGAL_CALL emu_glDeleteVertexArraysOES(GLsizei n, const GLuint *arrays)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->dsa->DeleteVaos( _context, n, arrays );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glDeleteVertexArraysOES)(n, arrays);
 }
 
 // GL_PGI_misc_hints
@@ -57653,6 +57729,7 @@ void InitDispatchTableEmu(DispatchTable &tbl)
 // GL_APPLE_vertex_array_object
 
    tbl.glBindVertexArrayAPPLE = emu_glBindVertexArrayAPPLE;
+   tbl.glDeleteVertexArraysAPPLE = emu_glDeleteVertexArraysAPPLE;
 
 // GL_ARB_ES2_compatibility
 
@@ -58308,6 +58385,7 @@ void InitDispatchTableEmu(DispatchTable &tbl)
 // GL_OES_vertex_array_object
 
    tbl.glBindVertexArrayOES = emu_glBindVertexArrayOES;
+   tbl.glDeleteVertexArraysOES = emu_glDeleteVertexArraysOES;
 
 // GL_REGAL_ES1_0_compatibility
 
