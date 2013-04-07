@@ -71,6 +71,7 @@ namespace Emu { struct Obj; };
 namespace Emu { struct Ppa; };
 namespace Emu { struct Ppca; };
 namespace Emu { struct Bin; };
+namespace Emu { struct TexSto; };
 namespace Emu { struct Xfer; };
 namespace Emu { struct Dsa; };
 namespace Emu { struct Iff; };
@@ -113,6 +114,7 @@ struct RegalContext
   Emu::Ppa           *ppa;
   Emu::Ppca          *ppca;
   Emu::Bin           *bin;
+  Emu::TexSto        *texsto;
   Emu::Xfer          *xfer;
   Emu::Dsa           *dsa;
   Emu::Iff           *iff;

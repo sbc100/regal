@@ -131,11 +131,16 @@ dsaFormulae = {
             'gl(Get|)TexParameter(Iiv|Iuiv)'
             'gl(Copy|Compressed|Get|)Tex(Sub|)Image(1|2|3)D',
             'glTex(Buffer|Renderbuffer)(NV|)',
-            'glGenerateMipmap(ARB|EXT|)'
+            'glGenerateMipmap(ARB|EXT|)',
         ],
         'prefix' : [
             '_context->dsa->RestoreTexture( _context );',
             '_context->dsa->RestoreActiveTexture( _context );',
+        ],
+    },
+    'TexDel' : {
+        'entries' : [ 'glDeleteTextures(EXT|)', ],
+        'prefix' : [ '_context->dsa->DeleteTextures( _context, ${arg0plus} );',
         ],
     },
     'TexCommands2' : {
@@ -217,6 +222,7 @@ dsaFormulae = {
         'entries' : [
             'glUniform(1|2|3|4)(i|f|ui|d)(v|)',
             'glUniformMatrix(2|3|4)(x2|x3|x4|)(fv|dv)',
+            'glDeleteProgram',
         ],
         'prefix' : [ '_context->dsa->RestoreGlslProgram( _context );' ],
     },
@@ -243,6 +249,7 @@ dsaFormulae = {
         'entries' : [
             'gl(Get|)Program(Env|Local)Parameter(.*)(ARB|NV)',
             'gl(Get|)Program(String)(EXT)',
+            'glDeletePrograms(ARB|NV)',
         ],
         'prefix' : [ '_context->dsa->RestoreAsmProgram( _context, ${arg0} );' ],
     },
@@ -281,6 +288,7 @@ dsaFormulae = {
             'glFramebufferRenderbuffer(ARB|EXT|)',
             'glDrawBuffer(s|)(ARB|EXT|NV|)'
             'glGet(Renderbuffer|FramebufferAttachment)Parameteriv(ARB|EXT|)',
+            'glDeleteFramebuffers(EXT|OES|)',
         ],
         'prefix' : [ '_context->dsa->RestoreFramebuffer( _context );' ],
     },
@@ -355,7 +363,8 @@ dsaFormulae = {
             'gl(Get|Copy|)Buffer(Sub|)Data',
             'gl(FlushMapped|Map|Unmap)Buffer(Range|)(ARB|EXT|)',
             'glGetBuffer(Parameteriv|Pointerv)',
-            'gl(Vertex|Normal|Color|SecondaryColor)Pointer'
+            'gl(Vertex|Normal|Color|SecondaryColor)Pointer',
+            'glDeleteBuffers(ARB|)'
         ],
         'prefix' : [ '_context->dsa->RestoreBuffer( _context );' ],
     },

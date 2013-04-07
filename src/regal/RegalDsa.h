@@ -358,6 +358,17 @@ struct Dsa : public RegalEmu
         }
     }
     void DsaTexture( RegalContext * ctx, GLenum target, GLuint texture ) {
+        switch( target ) {
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+                target = GL_TEXTURE_CUBE_MAP;
+            default:
+                break;
+        }
         if( NotTexture( target, texture ) ) {
             dsa.textureTarget = target;
             dsa.texture = texture;
@@ -374,6 +385,15 @@ struct Dsa : public RegalEmu
         }
     }
 
+    void DeleteTextures( RegalContext * ctx, GLsizei n, const GLuint *textures ) {
+        for( int i  = 0; i < n; i++ ) {
+            if( textures[i] == drv.texture ) {
+                drv.texture = 0;
+            }
+        }
+        RestoreTexture( ctx );
+        RestoreActiveTexture( ctx );
+    }
 
     void ClientAttribDefault( RegalContext * ctx, GLbitfield mask )
     {
