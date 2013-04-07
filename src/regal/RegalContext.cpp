@@ -56,6 +56,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPpa.h"
 #include "RegalPpca.h"
 #include "RegalBin.h"
+#include "RegalTexSto.h"
 #include "RegalXfer.h"
 #include "RegalDsa.h"
 #include "RegalIff.h"
@@ -84,6 +85,7 @@ RegalContext::RegalContext()
   ppa(NULL),
   ppca(NULL),
   bin(NULL),
+  texsto(NULL),
   xfer(NULL),
   dsa(NULL),
   iff(NULL),
@@ -162,7 +164,7 @@ RegalContext::Init()
   {
     RegalAssert(info);
     // emu
-    emuLevel = 11;
+    emuLevel = 12;
     #if REGAL_EMU_FILTER
     if (Config::enableEmuFilter || Config::forceEmuFilter || REGAL_FORCE_EMU_FILTER)
     {
@@ -223,11 +225,19 @@ RegalContext::Init()
       xfer->Init(*this);
     }
     #endif /* REGAL_EMU_XFER */
+    #if REGAL_EMU_TEXSTO
+    if (Config::enableEmuTexSto || Config::forceEmuTexSto || REGAL_FORCE_EMU_TEXSTO)
+    {
+      texsto = new Emu::TexSto;
+      emuLevel = 7;
+      texsto->Init(*this);
+    }
+    #endif /* REGAL_EMU_TEXSTO */
     #if REGAL_EMU_BIN
     if (Config::enableEmuBin || Config::forceEmuBin || REGAL_FORCE_EMU_BIN)
     {
       bin = new Emu::Bin;
-      emuLevel = 7;
+      emuLevel = 8;
       bin->Init(*this);
     }
     #endif /* REGAL_EMU_BIN */
@@ -235,7 +245,7 @@ RegalContext::Init()
     if (Config::enableEmuPpca || Config::forceEmuPpca || REGAL_FORCE_EMU_PPCA)
     {
       ppca = new Emu::Ppca;
-      emuLevel = 8;
+      emuLevel = 9;
       ppca->Init(*this);
     }
     #endif /* REGAL_EMU_PPCA */
@@ -243,7 +253,7 @@ RegalContext::Init()
     if (Config::enableEmuPpa || Config::forceEmuPpa || REGAL_FORCE_EMU_PPA)
     {
       ppa = new Emu::Ppa;
-      emuLevel = 9;
+      emuLevel = 10;
       ppa->Init(*this);
     }
     #endif /* REGAL_EMU_PPA */
@@ -251,11 +261,11 @@ RegalContext::Init()
     if (Config::enableEmuObj || Config::forceEmuObj || REGAL_FORCE_EMU_OBJ)
     {
       obj = new Emu::Obj;
-      emuLevel = 10;
+      emuLevel = 11;
       obj->Init(*this);
     }
     #endif /* REGAL_EMU_OBJ */
-    emuLevel = 11;
+    emuLevel = 12;
 
   }
 #endif
@@ -310,6 +320,9 @@ RegalContext::~RegalContext()
   #if REGAL_EMU_BIN
   delete bin;
   #endif /* REGAL_EMU_BIN */
+  #if REGAL_EMU_TEXSTO
+  delete texsto;
+  #endif /* REGAL_EMU_TEXSTO */
   #if REGAL_EMU_XFER
   delete xfer;
   #endif /* REGAL_EMU_XFER */

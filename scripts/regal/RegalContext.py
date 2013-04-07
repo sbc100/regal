@@ -34,6 +34,7 @@ from EmuBin    import binFormulae
 from EmuObj    import objFormulae
 from EmuFilter import formulae as filterFormulae
 from EmuTexC   import texCFormulae
+from EmuTextureStorage import texstoFormulae
 
 from EmuPixelTransfer import xferFormulae
 
@@ -66,6 +67,7 @@ emu = [
     { 'type' : 'Emu::Ppa',    'include' : 'RegalPpa.h',  'member' : 'ppa',    'conditional' : 'Config::enableEmuPpa               || Config::forceEmuPpa    || REGAL_FORCE_EMU_PPA',  'ifdef' : 'REGAL_EMU_PPA',    'formulae' : ppaFormulae    },
     { 'type' : 'Emu::Ppca',   'include' : 'RegalPpca.h', 'member' : 'ppca',   'conditional' : 'Config::enableEmuPpca              || Config::forceEmuPpca   || REGAL_FORCE_EMU_PPCA', 'ifdef' : 'REGAL_EMU_PPCA',   'formulae' : ppcaFormulae   },
     { 'type' : 'Emu::Bin',    'include' : 'RegalBin.h',  'member' : 'bin',    'conditional' : 'Config::enableEmuBin               || Config::forceEmuBin    || REGAL_FORCE_EMU_BIN',  'ifdef' : 'REGAL_EMU_BIN',    'formulae' : binFormulae    },
+    { 'type' : 'Emu::TexSto',    'include' : 'RegalTexSto.h',  'member' : 'texsto',    'conditional' : 'Config::enableEmuTexSto               || Config::forceEmuTexSto    || REGAL_FORCE_EMU_TEXSTO',  'ifdef' : 'REGAL_EMU_TEXSTO',    'formulae' : texstoFormulae    },
     { 'type' : 'Emu::Xfer',   'include' : 'RegalXfer.h', 'member' : 'xfer',   'conditional' : '(isES2() && Config::enableEmuXfer) || Config::forceEmuXfer   || REGAL_FORCE_EMU_XFER', 'ifdef' : 'REGAL_EMU_XFER',   'formulae' : xferFormulae   },
     { 'type' : 'Emu::Dsa',    'include' : 'RegalDsa.h',  'member' : 'dsa',    'conditional' : 'Config::enableEmuDsa               || Config::forceEmuDsa    || REGAL_FORCE_EMU_DSA',  'ifdef' : 'REGAL_EMU_DSA',    'formulae' : dsaFormulae    },
     { 'type' : 'Emu::Iff',    'include' : 'RegalIff.h',  'member' : 'iff',    'conditional' : 'Config::enableEmuIff               || Config::forceEmuIff    || REGAL_FORCE_EMU_IFF',  'ifdef' : 'REGAL_EMU_IFF',    'formulae' : iffFormulae    },
