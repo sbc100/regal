@@ -599,7 +599,7 @@ struct So : public RegalEmu
     TextureUnit textureUnits[REGAL_EMU_MAX_TEXTURE_UNITS];
     std::map<GLuint, SamplingState*> samplerObjects;
     std::map<GLuint, TextureState*> textureObjects;
-    static const GLenum index2Enum[11];
+    static const GLenum index2Enum[17];
 };
 
 }
