@@ -222,6 +222,12 @@ struct Dsa : public RegalEmu
             dsa.glslProgram = REGAL_DSA_INVALID;
         }
     }
+    void DeleteGlslProgram( RegalContext * ctx, GLuint program ) {
+        if( drv.glslProgram == program ) {
+            drv.glslProgram = 0;
+        }
+        RestoreGlslProgram( ctx );
+    }
 
     ////////////////////////////////////////////////////////////////////////
     bool NotFramebuffer( GLenum target, GLuint framebuffer ) const {
@@ -249,7 +255,26 @@ struct Dsa : public RegalEmu
             dsa.framebuffer = REGAL_DSA_INVALID;
         }
     }
+    void DeleteFramebuffers( RegalContext * ctx, GLsizei n, const GLuint * framebuffers ) {
+        for( GLsizei i = 0; i < n; i++ ) {
+            if( drv.framebuffer == framebuffers[i] ) {
+                drv.framebuffer = 0;
+            }
+        }
+        RestoreFramebuffer( ctx );
+    }
 
+#define REGAL_DSA_NUM_ASM_TARGET_INDEXES 5
+    static GLenum IndexToAsmTarget( int i ) {
+        const GLenum array[] = {
+            GL_VERTEX_PROGRAM_ARB,
+            GL_FRAGMENT_PROGRAM_ARB,
+            GL_GEOMETRY_PROGRAM_NV,
+            GL_TESS_CONTROL_PROGRAM_NV,
+            GL_TESS_EVALUATION_PROGRAM_NV
+        };
+        return array[i];
+    }
     static int AsmTargetIndex( GLenum target ) {
         switch (target) {
             case GL_VERTEX_PROGRAM_ARB: return 0;
@@ -288,6 +313,17 @@ struct Dsa : public RegalEmu
             dsa.asmProgram[idx] = REGAL_DSA_INVALID;
         }
     }
+    void DeleteAsmPrograms( RegalContext * ctx, GLsizei n, const GLuint *progs ) {
+        for( GLsizei i  = 0; i < n; i++ ) {
+            for( int j = 0; j < REGAL_DSA_NUM_ASM_TARGET_INDEXES; j++ ) {
+                if( progs[i] == drv.asmProgram[ j ] ) {
+                    drv.asmProgram[ j ] = 0;
+                    RestoreAsmProgram( ctx, IndexToAsmTarget( j ) );
+                }
+            }
+        }
+    }
+  
 
     ////////////////////////////////////////////////////////////////////////
     bool NotVao( GLuint vao ) const {
@@ -308,6 +344,14 @@ struct Dsa : public RegalEmu
             ctx->dispatcher.emulation.glBindVertexArray( drv.vao );
             dsa.vao = REGAL_DSA_INVALID;
         }
+    }
+    void DeleteVaos( RegalContext * ctx, GLsizei n, const GLuint * arrays ) {
+        for( GLsizei i = 0; i < n; i++ ) {
+            if( drv.vao == arrays[i] ) {
+                drv.vao = 0;
+            }
+        }
+        RestoreVao( ctx );
     }
 
 
@@ -334,6 +378,14 @@ struct Dsa : public RegalEmu
             ctx->dispatcher.emulation.glBindBuffer( GL_ARRAY_BUFFER, drv.buffer );
             dsa.buffer = REGAL_DSA_INVALID;
         }
+    }
+    void DeleteBuffers( RegalContext * ctx, GLsizei n, const GLuint * buffers ) {
+        for( GLsizei i = 0; i < n; i++ ) {
+            if( drv.buffer == buffers[i] ) {
+                drv.buffer = 0;
+            }
+        }
+        RestoreBuffer( ctx );
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -384,7 +436,6 @@ struct Dsa : public RegalEmu
             dsa.texture = REGAL_DSA_INVALID;
         }
     }
-
     void DeleteTextures( RegalContext * ctx, GLsizei n, const GLuint *textures ) {
         for( int i  = 0; i < n; i++ ) {
             if( textures[i] == drv.texture ) {
