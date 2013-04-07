@@ -132,11 +132,15 @@ dsaFormulae = {
             'gl(Copy|Compressed|Get|)Tex(Sub|)Image(1|2|3)D',
             'glTex(Buffer|Renderbuffer)(NV|)',
             'glGenerateMipmap(ARB|EXT|)',
-            'glDeleteTextures(EXT|)',
         ],
         'prefix' : [
             '_context->dsa->RestoreTexture( _context );',
             '_context->dsa->RestoreActiveTexture( _context );',
+        ],
+    },
+    'TexDel' : {
+        'entries' : [ 'glDeleteTextures(EXT|)', ],
+        'prefix' : [ '_context->dsa->DeleteTextures( _context, ${arg0plus} );',
         ],
     },
     'TexCommands2' : {

@@ -385,6 +385,15 @@ struct Dsa : public RegalEmu
         }
     }
 
+    void DeleteTextures( RegalContext * ctx, GLsizei n, const GLuint *textures ) {
+        for( int i  = 0; i < n; i++ ) {
+            if( textures[i] == drv.texture ) {
+                drv.texture = 0;
+            }
+        }
+        RestoreTexture( ctx );
+        RestoreActiveTexture( ctx );
+    }
 
     void ClientAttribDefault( RegalContext * ctx, GLbitfield mask )
     {

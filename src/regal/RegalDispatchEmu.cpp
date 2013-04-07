@@ -16757,8 +16757,7 @@ static void REGAL_CALL emu_glDeleteTextures(GLsizei n, const GLuint *textures)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreTexture( _context );
-        _context->dsa->RestoreActiveTexture( _context );
+        _context->dsa->DeleteTextures( _context, n, textures );
       }
       #endif
     case 5 :
@@ -55286,8 +55285,7 @@ static void REGAL_CALL emu_glDeleteTexturesEXT(GLsizei n, const GLuint *textures
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->dsa->RestoreTexture( _context );
-        _context->dsa->RestoreActiveTexture( _context );
+        _context->dsa->DeleteTextures( _context, n, textures );
       }
       #endif
     case 5 :
