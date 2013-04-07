@@ -11687,6 +11687,12 @@ REGAL_DECL void REGAL_CALL glFogCoordfvEXT(const GLfloat *coord);
 #define GL_FRAGMENT_LIGHT_MODEL_AMBIENT_EXT              0x840a     /* 33802 */
 #define GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_EXT 0x840b     /* 33803 */
 #define GL_FRAGMENT_LIGHT0_EXT                           0x840c     /* 33804 */
+#define GL_FRAGMENT_LIGHT1_EXT                           0x840d     /* 33805 */
+#define GL_FRAGMENT_LIGHT2_EXT                           0x840e     /* 33806 */
+#define GL_FRAGMENT_LIGHT3_EXT                           0x840f     /* 33807 */
+#define GL_FRAGMENT_LIGHT4_EXT                           0x8410     /* 33808 */
+#define GL_FRAGMENT_LIGHT5_EXT                           0x8411     /* 33809 */
+#define GL_FRAGMENT_LIGHT6_EXT                           0x8412     /* 33810 */
 #define GL_FRAGMENT_LIGHT7_EXT                           0x8413     /* 33811 */
 #endif
 
@@ -15822,6 +15828,24 @@ REGAL_DECL void REGAL_CALL glStringMarkerGREMEDY(GLsizei len, const GLvoid *stri
 
 #ifndef GL_HP_image_transform
 #define GL_HP_image_transform 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_HP_IMAGE_TRANSFORM
+#define GL_IMAGE_SCALE_X_HP                          0x8155     /* 33109 */
+#define GL_IMAGE_SCALE_Y_HP                          0x8156     /* 33110 */
+#define GL_IMAGE_TRANSLATE_X_HP                      0x8157     /* 33111 */
+#define GL_IMAGE_TRANSLATE_Y_HP                      0x8158     /* 33112 */
+#define GL_IMAGE_ROTATE_ANGLE_HP                     0x8159     /* 33113 */
+#define GL_IMAGE_ROTATE_ORIGIN_X_HP                  0x815a     /* 33114 */
+#define GL_IMAGE_ROTATE_ORIGIN_Y_HP                  0x815b     /* 33115 */
+#define GL_IMAGE_MAG_FILTER_HP                       0x815c     /* 33116 */
+#define GL_IMAGE_MIN_FILTER_HP                       0x815d     /* 33117 */
+#define GL_IMAGE_CUBIC_WEIGHT_HP                     0x815e     /* 33118 */
+#define GL_CUBIC_HP                                  0x815f     /* 33119 */
+#define GL_AVERAGE_HP                                0x8160     /* 33120 */
+#define GL_IMAGE_TRANSFORM_2D_HP                     0x8161     /* 33121 */
+#define GL_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP       0x8162     /* 33122 */
+#define GL_PROXY_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP 0x8163     /* 33123 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_HP_IMAGE_TRANSFORM
@@ -24253,6 +24277,53 @@ REGAL_DECL void REGAL_CALL glGetFragmentLightivSGIX(GLenum light, GLenum pname, 
 REGAL_DECL void REGAL_CALL glGetFragmentMaterialfvSGIX(GLenum face, GLenum pname, GLfloat *params);
 REGAL_DECL void REGAL_CALL glGetFragmentMaterialivSGIX(GLenum face, GLenum pname, GLint *params);
 REGAL_DECL void REGAL_CALL glLightEnviSGIX(GLenum pname, GLint param);
+#endif
+
+/**
+ ** GL_SGIX_fragment_specular_lighting
+ **/
+
+#if (defined(GL_SGIX_FRAGMENT_SPECULAR_LIGHTING) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)) && !defined(REGAL_NO_ENUM_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)
+#define REGAL_NO_ENUM_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING
+#endif
+
+#if (defined(GL_SGIX_FRAGMENT_SPECULAR_LIGHTING) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)) && !defined(REGAL_NO_TYPEDEF_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)
+#define REGAL_NO_TYPEDEF_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING
+#endif
+
+#if (defined(GL_SGIX_FRAGMENT_SPECULAR_LIGHTING) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)) && !defined(REGAL_NO_NAMESPACE_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)
+#define REGAL_NO_NAMESPACE_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING
+#endif
+
+#if (defined(GL_SGIX_FRAGMENT_SPECULAR_LIGHTING) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)) && !defined(REGAL_NO_DECLARATION_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING)
+#define REGAL_NO_DECLARATION_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING
+#endif
+
+#ifndef GL_SGIX_fragment_specular_lighting
+#define GL_SGIX_fragment_specular_lighting 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_SGIX_FRAGMENT_SPECULAR_LIGHTING
+#define GL_FRAGMENT_LIGHTING_SGIX                         0x8400     /* 33792 */
+#define GL_FRAGMENT_COLOR_MATERIAL_SGIX                   0x8401     /* 33793 */
+#define GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX              0x8402     /* 33794 */
+#define GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX         0x8403     /* 33795 */
+#define GL_MAX_FRAGMENT_LIGHTS_SGIX                       0x8404     /* 33796 */
+#define GL_MAX_ACTIVE_LIGHTS_SGIX                         0x8405     /* 33797 */
+#define GL_CURRENT_RASTER_NORMAL_SGIX                     0x8406     /* 33798 */
+#define GL_LIGHT_ENV_MODE_SGIX                            0x8407     /* 33799 */
+#define GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX         0x8408     /* 33800 */
+#define GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX             0x8409     /* 33801 */
+#define GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX              0x840a     /* 33802 */
+#define GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX 0x840b     /* 33803 */
+#define GL_FRAGMENT_LIGHT0_SGIX                           0x840c     /* 33804 */
+#define GL_FRAGMENT_LIGHT1_SGIX                           0x840d     /* 33805 */
+#define GL_FRAGMENT_LIGHT2_SGIX                           0x840e     /* 33806 */
+#define GL_FRAGMENT_LIGHT3_SGIX                           0x840f     /* 33807 */
+#define GL_FRAGMENT_LIGHT4_SGIX                           0x8410     /* 33808 */
+#define GL_FRAGMENT_LIGHT5_SGIX                           0x8411     /* 33809 */
+#define GL_FRAGMENT_LIGHT6_SGIX                           0x8412     /* 33810 */
+#define GL_FRAGMENT_LIGHT7_SGIX                           0x8413     /* 33811 */
 #endif
 
 /**

@@ -36,10 +36,24 @@ endif
 # -rwxr-xr-x  2 user  user  384 Oct  1 09:21 pepper_25/toolchain/mac_x86_glibc/bin/i686-nacl-g++
 # -rwxr-xr-x  2 user  user  384 Oct  1 09:21 pepper_25/toolchain/mac_x86_newlib/bin/i686-nacl-g++
 #
-# So we catenate the SYSTEM variable and NACL_LIBC for keeping
-# the glibc and newlib outputs separate.
+# We catenate the SYSTEM variable, NACL_LIBC and NACL_SDK_ROOT for keeping
+# the glibc and newlib outputs separate, and per-sdk-version separate.
 
-export CCACHE_COMPILERCHECK=echo $(SYSTEM)$(NACL_LIBC)
+export CCACHE_COMPILERCHECK=echo $(SYSTEM)$(NACL_LIBC)$(NACL_SDK_ROOT)
+
+ifeq ($(NACL_ARCH),i686)
+NACL_LIBTYPE=$(NACL_LIBC)_x86_32
+else
+NACL_LIBTYPE=$(NACL_LIBC)_$(NACL_ARCH)
+endif
+
+ifeq ($(MODE),debug)
+LDFLAGS.EXTRA += -L$(NACL_SDK_ROOT)/ports/lib/$(NACL_LIBTYPE)/Debug
+LDFLAGS.EXTRA += -L$(NACL_SDK_ROOT)/lib/$(NACL_LIBTYPE)/Debug
+else
+LDFLAGS.EXTRA += -L$(NACL_SDK_ROOT)/ports/lib/$(NACL_LIBTYPE)/Release
+LDFLAGS.EXTRA += -L$(NACL_SDK_ROOT)/lib/$(NACL_LIBTYPE)/Release
+endif
 
 CFLAGS.EXTRA += -I$(NACL_SDK_ROOT)/include -MMD
 WARN = -Wall -Wno-unused-parameter -Wno-char-subscripts -Wno-strict-aliasing
