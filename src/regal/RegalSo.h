@@ -151,7 +151,7 @@ struct So : public RegalEmu
         GLuint64 ver;
         GLuint name;
 
-        GLint BorderColor[4];     //  Border color
+        GLfloat BorderColor[4];   //  Border color
         GLenum MinFilter;         //  Minification function
         GLenum MagFilter;         //  Magnification function
         GLenum WrapS;             //  Texcoord s wrap mode
@@ -237,10 +237,10 @@ struct So : public RegalEmu
         switch (pname)
         {
             case GL_TEXTURE_BORDER_COLOR:
-                ss->BorderColor[0] = static_cast<GLint>(params[0]);
-                ss->BorderColor[1] = static_cast<GLint>(params[1]);
-                ss->BorderColor[2] = static_cast<GLint>(params[2]);
-                ss->BorderColor[3] = static_cast<GLint>(params[3]);
+                ss->BorderColor[0] = static_cast<GLfloat>(params[0]);
+                ss->BorderColor[1] = static_cast<GLfloat>(params[1]);
+                ss->BorderColor[2] = static_cast<GLfloat>(params[2]);
+                ss->BorderColor[3] = static_cast<GLfloat>(params[3]);
                 break;
 
             case GL_TEXTURE_COMPARE_FUNC:
@@ -422,10 +422,10 @@ struct So : public RegalEmu
         switch (pname)
         {
             case GL_TEXTURE_BORDER_COLOR:
-                as->BorderColor[0] = (GLint)(params[0]);
-                as->BorderColor[1] = (GLint)(params[1]);
-                as->BorderColor[2] = (GLint)(params[2]);
-                as->BorderColor[3] = (GLint)(params[3]);
+                as->BorderColor[0] = (GLfloat)(params[0]);
+                as->BorderColor[1] = (GLfloat)(params[1]);
+                as->BorderColor[2] = (GLfloat)(params[2]);
+                as->BorderColor[3] = (GLfloat)(params[3]);
                 break;
 
             case GL_TEXTURE_MIN_FILTER:
