@@ -89,9 +89,9 @@ struct So : public RegalEmu
 
     static GLenum TT_Index2Enum(GLuint index)
     {
-      if( index > 9 ) {
+      if( index > REGAL_NUM_TEXTURE_TARGETS ) {
         Warning( "Unhandled texture target index: index = ", index);
-        index = 10;
+        index = REGAL_NUM_TEXTURE_TARGETS;
       }
       return index2Enum[index];
     }
