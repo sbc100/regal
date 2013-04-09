@@ -118,7 +118,7 @@
 #endif
 
 // Export Regal entry points by default, might want to disable
-// this for statically linking Regal: -DREGAL_DECL_EXPORT=0 
+// this for statically linking Regal: -DREGAL_DECL_EXPORT=0
 
 #ifndef REGAL_DECL_EXPORT
 #define REGAL_DECL_EXPORT 1
@@ -163,6 +163,12 @@
 # else
 #  define REGAL_CODE 1
 # endif
+#endif
+
+// Trace dispatch unsupported
+
+#ifndef REGAL_TRACE
+#define REGAL_TRACE 0
 #endif
 
 // Emulation dispatch supported by default

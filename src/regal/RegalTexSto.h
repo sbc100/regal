@@ -36,10 +36,12 @@
 
  */
 
-#ifndef __REGAL_BIN_H__
-#define __REGAL_BIN_H__
+#ifndef __REGAL_TEX_STO_H__
+#define __REGAL_TEX_STO_H__
 
 #include "RegalUtil.h"
+
+#if REGAL_EMU_TEXSTO
 
 REGAL_GLOBAL_BEGIN
 
@@ -51,29 +53,35 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct TexSto : public RegalEmu
-{
-  void Init( RegalContext &ctx )
+  struct TexSto : public RegalEmu
   {
-    UNUSED_PARAMETER(ctx);
-  }
+    void Init( RegalContext &ctx )
+    {
+      UNUSED_PARAMETER(ctx);
+    }
 
-  void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width ) {
-    DispatchTable & tbl = ctx->dispatcher.emulation;
-    tbl.call(&tbl.glTextureStorage1D)( texture, target, levels, internalFormat, width );
-  }
-  void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height ) {
-    DispatchTable & tbl = ctx->dispatcher.emulation;
-    tbl.call(&tbl.glTextureStorage2D)( texture, target, levels, internalFormat, width, height );
-  }
-  void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth ) {
-    DispatchTable & tbl = ctx->dispatcher.emulation;
-    tbl.call(&tbl.glTextureStorage3D)( texture, target, levels, internalFormat, width, height, depth );
-  }
-};
+    void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width )
+    {
+      DispatchTable & tbl = ctx->dispatcher.emulation;
+      tbl.call(&tbl.glTextureStorage1D)( texture, target, levels, internalFormat, width );
+    }
+
+    void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height )
+    {
+      DispatchTable & tbl = ctx->dispatcher.emulation;
+      tbl.call(&tbl.glTextureStorage2D)( texture, target, levels, internalFormat, width, height );
+    }
+
+    void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth )
+    {
+      DispatchTable & tbl = ctx->dispatcher.emulation;
+      tbl.call(&tbl.glTextureStorage3D)( texture, target, levels, internalFormat, width, height, depth );
+    }
+  };
 
 }
 
 REGAL_NAMESPACE_END
 
-#endif // ! __REGAL_BIN_H__
+#endif // REGAL_EMU_TEXSTO
+#endif // ! __REGAL_TEX_STO_H__
