@@ -63,6 +63,7 @@ namespace Config {
   bool sysEGL           = REGAL_SYS_EGL && !REGAL_SYS_GLX;
   bool forceEmulation   = REGAL_FORCE_EMULATION;
   bool enableEmulation  = REGAL_EMULATION;
+  bool enableTrace      = false;
   bool enableDebug      = false;
   bool enableError      = false;
   bool enableCode       = false;
@@ -199,6 +200,11 @@ namespace Config {
 #if REGAL_DEBUG
     tmp = GetEnv( "REGAL_DEBUG" );
     if (tmp) enableDebug = atoi(tmp)!=0;
+#endif
+
+#if REGAL_TRACE
+    tmp = GetEnv( "REGAL_TRACE" );
+    if (tmp) enableTrace = atoi(tmp)!=0;
 #endif
 
 #if REGAL_ERROR
@@ -467,6 +473,7 @@ namespace Config {
 #endif
 
     Info("REGAL_FORCE_EMULATION     ", forceEmulation   ? "enabled" : "disabled");
+    Info("REGAL_TRACE               ", enableTrace      ? "enabled" : "disabled");
     Info("REGAL_DEBUG               ", enableDebug      ? "enabled" : "disabled");
     Info("REGAL_ERROR               ", enableError      ? "enabled" : "disabled");
 #if REGAL_CODE
