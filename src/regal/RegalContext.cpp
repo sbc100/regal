@@ -190,7 +190,7 @@ RegalContext::Init()
     }
     #endif /* REGAL_EMU_VAO */
     #if REGAL_EMU_SO
-    if (Config::enableEmuSo || Config::forceEmuSo || REGAL_FORCE_EMU_SO)
+    if ((Config::enableEmuSo && !info->gl_arb_sampler_objects) || Config::forceEmuSo || REGAL_FORCE_EMU_SO)
     {
       so = new Emu::So;
       emuLevel = 3;
