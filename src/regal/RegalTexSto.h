@@ -46,6 +46,7 @@
 REGAL_GLOBAL_BEGIN
 
 #include "RegalEmu.h"
+#include <utility>
 
 REGAL_GLOBAL_END
 
@@ -60,43 +61,49 @@ namespace Emu {
       UNUSED_PARAMETER(ctx); 
     }
 
-    void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width )
+    void TextureStorage( RegalContext * ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width )
     {
-      UNUSED_PARAMETER(ctx);
-      UNUSED_PARAMETER(texture);
-      UNUSED_PARAMETER(target);
-      UNUSED_PARAMETER(levels);
-      UNUSED_PARAMETER(internalformat);
-      UNUSED_PARAMETER(width);
-      //DispatchTable & tbl = ctx->dispatcher.emulation;
-      //tbl.call(&tbl.glTextureStorage1D)( texture, target, levels, internalFormat, width );
+      DispatchTable & tbl = ctx->dispatcher.emulation;
+      for (GLsizei i = 0; i < levels; i++)
+      {
+        tbl.call(&tbl.glTexImage1D)( target, i, internalformat, width, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+        width = (GLsizei)std::max(1.0f, floor(width / 2.0f));
+      }
     }
 
-    void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height )
+    void TextureStorage( RegalContext * ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height )
     {
-      UNUSED_PARAMETER(ctx);
-      UNUSED_PARAMETER(texture);
-      UNUSED_PARAMETER(target);
-      UNUSED_PARAMETER(levels);
-      UNUSED_PARAMETER(internalformat);
-      UNUSED_PARAMETER(width);
-      UNUSED_PARAMETER(height);
-      //DispatchTable & tbl = ctx->dispatcher.emulation;
-      //tbl.call(&tbl.glTextureStorage2D)( texture, target, levels, internalFormat, width, height );
+      DispatchTable & tbl = ctx->dispatcher.emulation;
+      for (GLsizei i = 0; i < levels; i++)
+      {
+        if (target == GL_TEXTURE_CUBE_MAP)
+        {
+          for (int f = 0; f < 6; f++)
+          {
+            GLenum face = GL_TEXTURE_CUBE_MAP_POSITIVE_X + f;
+            tbl.call(&tbl.glTexImage2D)( face, i, internalformat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+          }
+        }
+        else
+          tbl.call(&tbl.glTexImage2D)( target, i, internalformat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+        width = (GLsizei)std::max(1.0f, floor(width / 2.0f));
+        if (target != GL_TEXTURE_1D_ARRAY)
+          height = (GLsizei)std::max(1.0f, floor(height / 2.0f));
+      }
     }
 
-    void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth )
+    void TextureStorage( RegalContext * ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth )
     {
-      UNUSED_PARAMETER(ctx);
-      UNUSED_PARAMETER(texture);
-      UNUSED_PARAMETER(target);
-      UNUSED_PARAMETER(levels);
-      UNUSED_PARAMETER(internalformat);
-      UNUSED_PARAMETER(width);
-      UNUSED_PARAMETER(height);
-      UNUSED_PARAMETER(depth);
-      //DispatchTable & tbl = ctx->dispatcher.emulation;
-      //tbl.call(&tbl.glTextureStorage3D)( texture, target, levels, internalFormat, width, height, depth );
+      DispatchTable & tbl = ctx->dispatcher.emulation;
+      for (GLsizei i = 0; i < levels; i++)
+      {
+        tbl.call(&tbl.glTexImage3D)( target, i, internalformat, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+        width = (GLsizei)std::max(1.0f, floor(width / 2.0f));
+        height = (GLsizei)std::max(1.0f, floor(height / 2.0f));
+        if (target != GL_TEXTURE_2D_ARRAY && target != GL_TEXTURE_CUBE_MAP_ARRAY)
+          depth = (GLsizei)std::max(1.0f, floor(depth / 2.0f));
+      }
     }
   };
 

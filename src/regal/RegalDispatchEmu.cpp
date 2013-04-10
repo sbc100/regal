@@ -34747,7 +34747,7 @@ static void REGAL_CALL emu_glTexImage3DMultisample(GLenum target, GLsizei sample
 
 // GL_ARB_texture_storage
 
-static void REGAL_CALL emu_glTextureStorage1DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
+static void REGAL_CALL emu_glTexStorage1D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -34763,11 +34763,6 @@ static void REGAL_CALL emu_glTextureStorage1DEXT(GLuint texture, GLenum target, 
     case 8 :
       #if REGAL_EMU_TEXSTO
       if (_context->texsto) break;
-      #endif
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_DSA
-      if (_context->dsa) break;
       #endif
     case 1 :
     default:
@@ -34787,10 +34782,159 @@ static void REGAL_CALL emu_glTextureStorage1DEXT(GLuint texture, GLenum target, 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 7;
-        _context->texsto->TextureStorage( _context, texture, target, levels, internalformat, width );
+        _context->texsto->TextureStorage( _context, target, levels, internalformat, width );
         return;
       }
       #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glTexStorage1D)(target, levels, internalformat, width);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glTexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 7;
+        _context->texsto->TextureStorage( _context, target, levels, internalformat, width, height );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glTexStorage2D)(target, levels, internalformat, width, height);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glTexStorage3D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 7;
+        _context->texsto->TextureStorage( _context, target, levels, internalformat, width, height, depth );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glTexStorage3D)(target, levels, internalformat, width, height, depth);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glTextureStorage1DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
     case 7 :
     case 6 :
       #if REGAL_EMU_DSA
@@ -34830,9 +34974,6 @@ static void REGAL_CALL emu_glTextureStorage2DEXT(GLuint texture, GLenum target, 
     case 10 :
     case 9 :
     case 8 :
-      #if REGAL_EMU_TEXSTO
-      if (_context->texsto) break;
-      #endif
     case 7 :
     case 6 :
       #if REGAL_EMU_DSA
@@ -34851,15 +34992,6 @@ static void REGAL_CALL emu_glTextureStorage2DEXT(GLuint texture, GLenum target, 
     case 10 :
     case 9 :
     case 8 :
-      #if REGAL_EMU_TEXSTO
-      if (_context->texsto)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 7;
-        _context->texsto->TextureStorage( _context, texture, target, levels, internalformat, width, height );
-        return;
-      }
-      #endif
     case 7 :
     case 6 :
       #if REGAL_EMU_DSA
@@ -34899,9 +35031,6 @@ static void REGAL_CALL emu_glTextureStorage3DEXT(GLuint texture, GLenum target, 
     case 10 :
     case 9 :
     case 8 :
-      #if REGAL_EMU_TEXSTO
-      if (_context->texsto) break;
-      #endif
     case 7 :
     case 6 :
       #if REGAL_EMU_DSA
@@ -34920,15 +35049,6 @@ static void REGAL_CALL emu_glTextureStorage3DEXT(GLuint texture, GLenum target, 
     case 10 :
     case 9 :
     case 8 :
-      #if REGAL_EMU_TEXSTO
-      if (_context->texsto)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 7;
-        _context->texsto->TextureStorage( _context, texture, target, levels, internalformat, width, height, depth );
-        return;
-      }
-      #endif
     case 7 :
     case 6 :
       #if REGAL_EMU_DSA
@@ -55752,6 +55872,162 @@ static void REGAL_CALL emu_glGenTexturesEXT(GLsizei n, GLuint *textures)
 
 // GL_EXT_texture_storage
 
+static void REGAL_CALL emu_glTexStorage1DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 7;
+        _context->texsto->TextureStorage( _context, target, levels, internalformat, width );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glTexStorage1DEXT)(target, levels, internalformat, width);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glTexStorage2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 7;
+        _context->texsto->TextureStorage( _context, target, levels, internalformat, width, height );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glTexStorage2DEXT)(target, levels, internalformat, width, height);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glTexStorage3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 7;
+        _context->texsto->TextureStorage( _context, target, levels, internalformat, width, height, depth );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glTexStorage3DEXT)(target, levels, internalformat, width, height, depth);
+      break;
+    }
+
+  }
+
+}
+
 // GL_EXT_timer_query
 
 // GL_EXT_transform_feedback
@@ -58234,6 +58510,9 @@ void InitDispatchTableEmu(DispatchTable &tbl)
 
 // GL_ARB_texture_storage
 
+   tbl.glTexStorage1D = emu_glTexStorage1D;
+   tbl.glTexStorage2D = emu_glTexStorage2D;
+   tbl.glTexStorage3D = emu_glTexStorage3D;
    tbl.glTextureStorage1DEXT = emu_glTextureStorage1DEXT;
    tbl.glTextureStorage2DEXT = emu_glTextureStorage2DEXT;
    tbl.glTextureStorage3DEXT = emu_glTextureStorage3DEXT;
@@ -58675,6 +58954,12 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glBindTextureEXT = emu_glBindTextureEXT;
    tbl.glDeleteTexturesEXT = emu_glDeleteTexturesEXT;
    tbl.glGenTexturesEXT = emu_glGenTexturesEXT;
+
+// GL_EXT_texture_storage
+
+   tbl.glTexStorage1DEXT = emu_glTexStorage1DEXT;
+   tbl.glTexStorage2DEXT = emu_glTexStorage2DEXT;
+   tbl.glTexStorage3DEXT = emu_glTexStorage3DEXT;
 
 // GL_EXT_vertex_array
 
