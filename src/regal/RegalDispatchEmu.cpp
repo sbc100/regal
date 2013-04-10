@@ -59,6 +59,7 @@ using namespace std;
 
 #include "RegalBreak.h"
 #include "RegalBin.h"
+#include "RegalTexSto.h"
 #include "RegalXfer.h"
 #include "RegalEmu.h"
 #include "RegalPpa.h"
@@ -34763,6 +34764,11 @@ static void REGAL_CALL emu_glTextureStorage1DEXT(GLuint texture, GLenum target, 
       #if REGAL_EMU_TEXSTO
       if (_context->texsto) break;
       #endif
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
     case 1 :
     default:
       break;
@@ -34782,6 +34788,18 @@ static void REGAL_CALL emu_glTextureStorage1DEXT(GLuint texture, GLenum target, 
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 7;
         _context->texsto->TextureStorage( _context, texture, target, levels, internalformat, width );
+        return;
+      }
+      #endif
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->dsa->DsaTexture( _context, target, texture );
+        _dispatch.call(&_dispatch.glTexStorage1D)( target, levels, internalformat, width );
         return;
       }
       #endif
@@ -34815,6 +34833,11 @@ static void REGAL_CALL emu_glTextureStorage2DEXT(GLuint texture, GLenum target, 
       #if REGAL_EMU_TEXSTO
       if (_context->texsto) break;
       #endif
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
     case 1 :
     default:
       break;
@@ -34834,6 +34857,18 @@ static void REGAL_CALL emu_glTextureStorage2DEXT(GLuint texture, GLenum target, 
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 7;
         _context->texsto->TextureStorage( _context, texture, target, levels, internalformat, width, height );
+        return;
+      }
+      #endif
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->dsa->DsaTexture( _context, target, texture );
+        _dispatch.call(&_dispatch.glTexStorage2D)( target, levels, internalformat, width, height );
         return;
       }
       #endif
@@ -34867,6 +34902,11 @@ static void REGAL_CALL emu_glTextureStorage3DEXT(GLuint texture, GLenum target, 
       #if REGAL_EMU_TEXSTO
       if (_context->texsto) break;
       #endif
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
     case 1 :
     default:
       break;
@@ -34886,6 +34926,18 @@ static void REGAL_CALL emu_glTextureStorage3DEXT(GLuint texture, GLenum target, 
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 7;
         _context->texsto->TextureStorage( _context, texture, target, levels, internalformat, width, height, depth );
+        return;
+      }
+      #endif
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->dsa->DsaTexture( _context, target, texture );
+        _dispatch.call(&_dispatch.glTexStorage3D)( target, levels, internalformat, width, height, depth );
         return;
       }
       #endif

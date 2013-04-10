@@ -57,25 +57,46 @@ namespace Emu {
   {
     void Init( RegalContext &ctx )
     {
-      UNUSED_PARAMETER(ctx);
+      UNUSED_PARAMETER(ctx); 
     }
 
     void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width )
     {
-      DispatchTable & tbl = ctx->dispatcher.emulation;
-      tbl.call(&tbl.glTextureStorage1D)( texture, target, levels, internalFormat, width );
+      UNUSED_PARAMETER(ctx);
+      UNUSED_PARAMETER(texture);
+      UNUSED_PARAMETER(target);
+      UNUSED_PARAMETER(levels);
+      UNUSED_PARAMETER(internalformat);
+      UNUSED_PARAMETER(width);
+      //DispatchTable & tbl = ctx->dispatcher.emulation;
+      //tbl.call(&tbl.glTextureStorage1D)( texture, target, levels, internalFormat, width );
     }
 
     void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height )
     {
-      DispatchTable & tbl = ctx->dispatcher.emulation;
-      tbl.call(&tbl.glTextureStorage2D)( texture, target, levels, internalFormat, width, height );
+      UNUSED_PARAMETER(ctx);
+      UNUSED_PARAMETER(texture);
+      UNUSED_PARAMETER(target);
+      UNUSED_PARAMETER(levels);
+      UNUSED_PARAMETER(internalformat);
+      UNUSED_PARAMETER(width);
+      UNUSED_PARAMETER(height);
+      //DispatchTable & tbl = ctx->dispatcher.emulation;
+      //tbl.call(&tbl.glTextureStorage2D)( texture, target, levels, internalFormat, width, height );
     }
 
     void TextureStorage( RegalContext * ctx, GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth )
     {
-      DispatchTable & tbl = ctx->dispatcher.emulation;
-      tbl.call(&tbl.glTextureStorage3D)( texture, target, levels, internalFormat, width, height, depth );
+      UNUSED_PARAMETER(ctx);
+      UNUSED_PARAMETER(texture);
+      UNUSED_PARAMETER(target);
+      UNUSED_PARAMETER(levels);
+      UNUSED_PARAMETER(internalformat);
+      UNUSED_PARAMETER(width);
+      UNUSED_PARAMETER(height);
+      UNUSED_PARAMETER(depth);
+      //DispatchTable & tbl = ctx->dispatcher.emulation;
+      //tbl.call(&tbl.glTextureStorage3D)( texture, target, levels, internalFormat, width, height, depth );
     }
   };
 
