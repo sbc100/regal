@@ -77,6 +77,11 @@ ${REGAL_SYS}
 typedef XID GLXDrawable;
 #endif
 
+#if REGAL_SYS_EGL && REGAL_SYS_X11
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -137,6 +142,11 @@ extern "C" {
 
 typedef void (*RegalErrorCallback)(GLenum);
 REGAL_DECL RegalErrorCallback RegalSetErrorCallback( RegalErrorCallback callback );
+
+/*  RegalConfigure is optional.
+ */
+
+REGAL_DECL void RegalConfigure(const char *json);
 
 /*  RegalShareContext is optional.  It must be called before any call
  *  to RegalMakeCurrent.  It specifies that a context is sharing state
@@ -229,6 +239,25 @@ def apiFuncDefineCode(apis, args):
         c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
 
         if getattr(function,'regalRemap',None)!=None and (isinstance(function.regalRemap, list) or isinstance(function.regalRemap, str) or isinstance(function.regalRemap, unicode)):
+
+          # For an ES1 context, pass the call into the dispatch layers...
+
+          if function.category in ['GL_REGAL_ES1_0_compatibility','GL_REGAL_ES1_1_compatibility']:
+            c += '  #if REGAL_SYS_ES1\n'
+            c += '  if (_context->isES1()) // Pass-through for ES1 only\n'
+            c += '  {\n'
+            c += '    DispatchTable *_next = &_context->dispatcher.front();\n'
+            c += '    RegalAssert(_next);\n    '
+            if not typeIsVoid(rType):
+              c += 'return '
+            c += '_next->call(&_next->%s)(%s);\n' % ( name, callParams )
+            if typeIsVoid(rType):
+              c += '    return;\n'
+            c += '  }\n'
+            c += '  #endif\n'
+
+          # For ES2 or GL context, remap the ES1 call
+
           c += '  '
           if not typeIsVoid(rType):
             c += 'return '
@@ -282,22 +311,9 @@ def apiFuncDefineCode(apis, args):
         if not typeIsVoid(rType):
           c += 'ret = '
         c += 'dispatchTableGlobal.%s(%s);\n' % ( name, callParams )
-        if name == 'wglMakeCurrent':
-          c += '    Init::makeCurrent(RegalSystemContext(hglrc));\n'
-        elif name == 'CGLSetCurrentContext':
-          c += '    Init::makeCurrent( ctx );\n'
-        elif name == 'glXMakeCurrent':
-          c += '    Init::makeCurrent( RegalSystemContext(ctx) );\n'
-        elif name == 'eglMakeCurrent':
-          c += '    Init::makeCurrent( ctx );\n'
-        elif name == 'wglDeleteContext':
-          c += '    Init::destroyContext( RegalSystemContext(hglrc) );\n'
-        elif name == 'CGLDestroyContext':
-          c += '    Init::destroyContext( RegalSystemContext(ctx) );\n'
-        elif name == 'glXDestroyContext':
-          c += '    Init::destroyContext( RegalSystemContext(ctx) );\n'
-        elif name == 'eglDestroyContext':
-          c += '    Init::destroyContext( RegalSystemContext(ctx) );\n'
+
+        c += listToString(indent(emuCodeGen(emue,'init'),'    '))
+
         c += '  }\n'
         c += '  else\n'
         c += '    Warning( "%s not available." );\n' % name
@@ -572,6 +588,7 @@ ${LICENSE}
 REGAL_GLOBAL_BEGIN
 
 #include "RegalLog.h"
+#include "RegalMac.h"
 #include "RegalInit.h"
 #include "RegalIff.h"
 #include "RegalPush.h"
@@ -581,8 +598,9 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPrivate.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
-#include "RegalShaderCache.h"
-
+#include "RegalCacheShader.h"
+#include "RegalCacheTexture.h"
+#include "RegalScopedPtr.h"
 #include "RegalFrame.h"
 #include "RegalMarker.h"
 

@@ -1,9 +1,9 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
-  Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
+  Copyright (c) 2012-2013 Mathias Schott
+  Copyright (c) 2012-2013 Nigel Stewart
   Copyright (c) 2012 Google Inc.
   All rights reserved.
 
@@ -39,6 +39,10 @@
 
 #include "RegalSystem.h"
 
+#if REGAL_SYS_X11
+#include <X11/Xlib.h>
+#endif
+
 // Visual Studio with /W4 complains about unused function
 // parameters.
 
@@ -47,6 +51,14 @@
 #define UNUSED_PARAMETER(p) (p)
 #else
 #define UNUSED_PARAMETER(p)
+#endif
+#endif
+
+#ifndef REGAL_UNUSED
+#if defined(__GNUC__) && !defined(__clang__)
+#define REGAL_UNUSED __attribute__(unused)
+#else
+#define REGAL_UNUSED
 #endif
 #endif
 
@@ -62,6 +74,7 @@
 // VC10      - C4512:
 // VC9, VC10 - C4996: 'vsprintf': This function or variable may be unsafe
 // VC10      - C4127: conditional expression is constant
+// VC10      - C4706: assignment within conditional expression
 
 #ifdef _MSC_VER
 # define REGAL_GLOBAL_BEGIN         \
@@ -70,7 +83,8 @@
   __pragma(warning(push))           \
   __pragma(warning(disable : 4127)) \
   __pragma(warning(disable : 4512)) \
-  __pragma(warning(disable : 4996))
+  __pragma(warning(disable : 4996)) \
+  __pragma(warning(disable : 4706))
 # define REGAL_GLOBAL_END           \
   __pragma(warning(pop))            \
   __pragma(pack(pop))
@@ -88,6 +102,7 @@
   __pragma(warning(push))              \
   __pragma(warning(disable : 4996))    \
   __pragma(warning(disable : 4127))    \
+  __pragma(warning(disable : 4706))    \
   namespace REGAL_NAMESPACE_INTERNAL   \
   {
 # define REGAL_NAMESPACE_END           \
@@ -102,6 +117,13 @@
   }
 #endif
 
+// Export Regal entry points by default, might want to disable
+// this for statically linking Regal: -DREGAL_DECL_EXPORT=0
+
+#ifndef REGAL_DECL_EXPORT
+#define REGAL_DECL_EXPORT 1
+#endif
+
 // Compile-time configuration
 // - Emulation not forced by default
 // - All emulation layers enabled by default
@@ -110,7 +132,7 @@
 #define REGAL_FORCE_EMULATION 0
 #endif
 
-// Debug dispatch disabled by default in
+// Debug dispatch unsupported by default in
 // release mode
 
 #ifndef REGAL_DEBUG
@@ -121,7 +143,7 @@
 #endif
 #endif
 
-// Error dispatch disabled by default in
+// Error dispatch unsupported by default in
 // release mode
 
 #ifndef REGAL_ERROR
@@ -132,39 +154,47 @@
 #endif
 #endif
 
-// Code logging disabled by default in
+// Code logging unsupported by default in
 // release mode, or embedded
 
 #ifndef REGAL_CODE
 # if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID
 #  define REGAL_CODE 0
 # else
-#  define REGAL_CODE 0
+#  define REGAL_CODE 1
 # endif
 #endif
 
-// Emulation dispatch enabled by default
+// Trace dispatch unsupported
+
+#ifndef REGAL_TRACE
+#define REGAL_TRACE 0
+#endif
+
+// Emulation dispatch supported by default
 
 #ifndef REGAL_EMULATION
 #define REGAL_EMULATION 1
 #endif
 
-// Driver dispatch enabled by default
+// Driver dispatch supported by default
 
 #ifndef REGAL_DRIVER
 #define REGAL_DRIVER 1
 #endif
 
 #ifndef REGAL_LOG
-#ifdef NDEBUG
-#define REGAL_LOG 0
-#else
 #define REGAL_LOG 1
 #endif
-#endif
+
+// Emulation layers supported by default
 
 #ifndef REGAL_EMU_PPA
 #define REGAL_EMU_PPA 1
+#endif
+
+#ifndef REGAL_EMU_PPCA
+#define REGAL_EMU_PPCA 1
 #endif
 
 #ifndef REGAL_EMU_OBJ
@@ -173,6 +203,10 @@
 
 #ifndef REGAL_EMU_BIN
 #define REGAL_EMU_BIN 1
+#endif
+
+#ifndef REGAL_EMU_XFER
+#define REGAL_EMU_XFER 1
 #endif
 
 #ifndef REGAL_EMU_DSA
@@ -195,9 +229,71 @@
 #define REGAL_EMU_FILTER 1
 #endif
 
-//
+#ifndef REGAL_EMU_TEXC
+#if REGAL_SYS_PPAPI
+#define REGAL_EMU_TEXC 1
+#else
+#define REGAL_EMU_TEXC 0
+#endif
+#endif
 
-// Caching enabled by default
+// Emulation layer forcing disabled by default
+
+#ifndef REGAL_FORCE_EMU_PPA
+#define REGAL_FORCE_EMU_PPA 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_PPCA
+#define REGAL_FORCE_EMU_PPCA 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_OBJ
+#define REGAL_FORCE_EMU_OBJ 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_BIN
+#define REGAL_FORCE_EMU_BIN 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_XFER
+#define REGAL_FORCE_EMU_XFER 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_DSA
+#define REGAL_FORCE_EMU_DSA 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_IFF
+#define REGAL_FORCE_EMU_IFF 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_SO
+#define REGAL_FORCE_EMU_SO 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_VAO
+#define REGAL_FORCE_EMU_VAO 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_FILTER
+#define REGAL_FORCE_EMU_FILTER 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_TEXC
+#define REGAL_FORCE_EMU_TEXC 0
+#endif
+
+// RegalBreak callbacks supported by default, except in release mode
+
+#ifndef REGAL_BREAK
+# if defined(NDEBUG)
+#  define REGAL_BREAK 0
+# else
+#  define REGAL_BREAK 1
+# endif
+#endif
+
+// Caching supported by default
 // ... except for release-mode and embedded platforms
 
 #ifndef REGAL_CACHE
@@ -208,23 +304,36 @@
 # endif
 #endif
 
-
-// Shader caching support by default
+// Shader caching supported by default
 
 #ifndef REGAL_CACHE_SHADER
 #define REGAL_CACHE_SHADER REGAL_CACHE
 #endif
 
-// Cache writing supported by default
-
 #ifndef REGAL_CACHE_SHADER_WRITE
 #define REGAL_CACHE_SHADER_WRITE REGAL_CACHE_SHADER
 #endif
 
-// Cache reading supported by default
-
 #ifndef REGAL_CACHE_SHADER_READ
 #define REGAL_CACHE_SHADER_READ REGAL_CACHE_SHADER
+#endif
+
+// Texture caching supported by default
+
+#ifndef REGAL_CACHE_TEXTURE
+#define REGAL_CACHE_TEXTURE REGAL_CACHE
+#endif
+
+// Cache writing supported by default
+
+#ifndef REGAL_CACHE_TEXTURE_WRITE
+#define REGAL_CACHE_TEXTURE_WRITE REGAL_CACHE_TEXTURE
+#endif
+
+// Cache reading supported by default
+
+#ifndef REGAL_CACHE_TEXTURE_READ
+#define REGAL_CACHE_TEXTURE_READ REGAL_CACHE_TEXTURE
 #endif
 
 //
@@ -233,12 +342,22 @@
 #define REGAL_FORCE_CORE_PROFILE 0
 #endif
 
+#ifndef REGAL_FORCE_ES1_PROFILE
+#define REGAL_FORCE_ES1_PROFILE 0
+#endif
+
 #ifndef REGAL_FORCE_ES2_PROFILE
 #define REGAL_FORCE_ES2_PROFILE 0
 #endif
 
-#if REGAL_FORCE_CORE_PROFILE && REGAL_FORCE_ES2_PROFILE
-#error Both core and ES2 profiles can not be forced: REGAL_FORCE_CORE_PROFILE && REGAL_FORCE_ES2_PROFILE
+#if (REGAL_FORCE_CORE_PROFILE + REGAL_FORCE_ES1_PROFILE + REGAL_FORCE_ES2_PROFILE) > 1
+#error Can not force more than one mode: REGAL_FORCE_CORE_PROFILE, REGAL_FORCE_ES1_PROFILE, REGAL_FORCE_ES2_PROFILE
+#endif
+
+//
+
+#ifndef REGAL_FORCE_DESKTOP_GLSL
+#define REGAL_FORCE_DESKTOP_GLSL 0
 #endif
 
 //
@@ -251,12 +370,34 @@
 #define REGAL_STATIC_EGL 0
 #endif
 
-#ifndef REGAL_EMU_TEXC
-#if REGAL_SYS_PPAPI
-#define REGAL_EMU_TEXC 1
-#else
-#define REGAL_EMU_TEXC 0
+// Defaults for REGAL_NO_...
+
+#ifndef REGAL_NO_ASSERT
+#  if defined(NDEBUG)
+#    define REGAL_NO_ASSERT 1
+#  else
+#    define REGAL_NO_ASSERT 0
+#  endif
 #endif
+
+#ifndef REGAL_NO_PNG
+#  define REGAL_NO_PNG 0
+#endif
+
+#ifndef REGAL_NO_SQUISH
+#  define REGAL_NO_SQUISH 1
+#endif
+
+#ifndef REGAL_NO_TLS
+#  define REGAL_NO_TLS 0
+#endif
+
+#ifndef REGAL_NO_JSON
+#  define REGAL_NO_JSON 0
+#endif
+
+#ifndef REGAL_THREAD_LOCKING
+#  define REGAL_THREAD_LOCKING 1
 #endif
 
 // AssertFunction depends on Error log, but
@@ -300,17 +441,13 @@ inline const char * GetEnv(const char * const varname)
 // RegalAssert
 //
 
-#if defined(NDEBUG) && !defined(REGAL_NO_ASSERT)
-#  define REGAL_NO_ASSERT
-#endif
-
-#ifdef REGAL_NO_ASSERT
+#if REGAL_NO_ASSERT
 #  define RegalAssert( foo )
 #else
 #  define RegalAssert( foo ) if (!(foo)) ::REGAL_NAMESPACE_INTERNAL::AssertFunction( __FILE__ , __LINE__ , #foo);
 #endif
 
-#ifndef REGAL_NO_ASSERT
+#if !REGAL_NO_ASSERT
 void AssertFunction(const char *file, const std::size_t line, const char *expr);
 #endif
 
@@ -356,44 +493,92 @@ extern void  fileClose (FILE **file);
 
 //
 
-std::string makePath(const std::string &dir, const std::string &filename);
+extern std::string fileRead(FILE *file);
+
+//
+
+extern std::string makePath(const std::string &dir, const std::string &filename);
+
+// X11 stuff
+
+#if REGAL_SYS_X11
+extern std::string windowManagerStateDescription(Display *display, Window w);
+#endif
 
 // ToFloat for integer -> float
 
-template <typename T> inline float ToFloat(const bool normalize, const T v ) {
-  UNUSED_PARAMETER(normalize); return float(v);
+template <bool Norm, typename T> inline float ToFloat(const T v ) {
+  return float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const signed char v ) {
-  return normalize ? float(v)/float(std::numeric_limits<signed char>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const signed char v ) {
+  return Norm ? float(v)/float(std::numeric_limits<signed char>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const unsigned char v ) {
-  return normalize ? float(v)/float(std::numeric_limits<unsigned char>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const unsigned char v ) {
+  return Norm ? float(v)/float(std::numeric_limits<unsigned char>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const signed short v ) {
-  return normalize ? float(v)/float(std::numeric_limits<signed short>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const signed short v ) {
+  return Norm ? float(v)/float(std::numeric_limits<signed short>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const unsigned short v ) {
-  return normalize ? float(v)/float(std::numeric_limits<unsigned short>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const unsigned short v ) {
+  return Norm ? float(v)/float(std::numeric_limits<unsigned short>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const signed int v ) {
-  return normalize ? float(v)/float(std::numeric_limits<signed int>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const signed int v ) {
+  return Norm ? float(v)/float(std::numeric_limits<signed int>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const unsigned int v ) {
-  return normalize ? float(v)/float(std::numeric_limits<unsigned int>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const unsigned int v ) {
+  return Norm ? float(v)/float(std::numeric_limits<unsigned int>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const signed long int v ) {
-  return normalize ? float(v)/float(std::numeric_limits<signed long int>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const signed long int v ) {
+  return Norm ? float(v)/float(std::numeric_limits<signed long int>::max()) : float(v);
 }
 
-template <> inline float ToFloat(const bool normalize, const unsigned long int v ) {
-  return normalize ? float(v)/float(std::numeric_limits<unsigned long int>::max()) : float(v);
+template <bool Norm> inline float ToFloat(const unsigned long int v ) {
+  return Norm ? float(v)/float(std::numeric_limits<unsigned long int>::max()) : float(v);
+}
+
+// ToDouble for integer -> double
+
+template <bool Norm, typename T> inline double ToDouble(const T v ) {
+  return double(v);
+}
+
+template <bool Norm> inline double ToDouble(const signed char v ) {
+  return Norm ? double(v)/double(std::numeric_limits<signed char>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const unsigned char v ) {
+  return Norm ? double(v)/double(std::numeric_limits<unsigned char>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const signed short v ) {
+  return Norm ? double(v)/double(std::numeric_limits<signed short>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const unsigned short v ) {
+  return Norm ? double(v)/double(std::numeric_limits<unsigned short>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const signed int v ) {
+  return Norm ? double(v)/double(std::numeric_limits<signed int>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const unsigned int v ) {
+  return Norm ? double(v)/double(std::numeric_limits<unsigned int>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const signed long int v ) {
+  return Norm ? double(v)/double(std::numeric_limits<signed long int>::max()) : double(v);
+}
+
+template <bool Norm> inline double ToDouble(const unsigned long int v ) {
+  return Norm ? double(v)/double(std::numeric_limits<unsigned long int>::max()) : double(v);
 }
 
 REGAL_NAMESPACE_END

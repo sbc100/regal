@@ -70,6 +70,10 @@ public:
    DispatchTable logging;
 #endif
 
+#if REGAL_TRACE
+   DispatchTable trace;
+#endif
+
    DispatchTable driver;      // Underlying OpenGL/ES implementation
 
    DispatchTable missing;     // Must have this last
@@ -78,7 +82,9 @@ public:
   Dispatcher();
   ~Dispatcher();
 
-  void push_back(DispatchTable &table, bool enable);
+  void push_back(DispatchTable &table, bool enable);           // Push to the back of the stack
+  bool erase    (DispatchTable &table);                        // Remove from dispatch stack
+  bool insert   (DispatchTable &other, DispatchTable &table);  // Insert before the other
 
   inline void
   enable(DispatchTable &table)
@@ -125,6 +131,20 @@ private:
   DispatchTable                *_front;
   std::size_t                   _size;
 };
+
+//
+
+extern void InitDispatchTableCode     (DispatchTable &tbl);
+extern void InitDispatchTableDebug    (DispatchTable &tbl);
+extern void InitDispatchTableError    (DispatchTable &tbl);
+extern void InitDispatchTableEmu      (DispatchTable &tbl);
+extern void InitDispatchTableLog      (DispatchTable &tbl);
+extern void InitDispatchTableLoader   (DispatchTable &tbl);
+extern void InitDispatchTablePpapi    (DispatchTable &tbl);
+extern void InitDispatchTableStaticES2(DispatchTable &tbl);
+extern void InitDispatchTableMissing  (DispatchTable &tbl);
+extern void InitDispatchTableCache    (DispatchTable &tbl);
+extern void InitDispatchTableTrace    (DispatchTable &tbl);
 
 REGAL_NAMESPACE_END
 

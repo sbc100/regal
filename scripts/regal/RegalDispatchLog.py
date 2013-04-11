@@ -156,6 +156,22 @@ def generateDispatchLog(apis, args):
         code += '    Push<size_t> pushDepth(_context->depthBeginEnd);\n'
         code += '    _context->depthBeginEnd--;\n'
 
+      # Temporarily adjust the context push/pop matrix depth for proper indentation
+      # of the glPushMatrix call
+
+      if name=='glPushMatrix':
+        code += '    RegalAssert(_context->depthPushMatrix>0);\n'
+        code += '    Push<size_t> pushDepth(_context->depthPushMatrix);\n'
+        code += '    _context->depthPushMatrix--;\n'
+
+      # Temporarily adjust the depth for proper indentation
+      # of the glNewList call
+
+      if name=='glNewList':
+        code += '    RegalAssert(_context->depthNewList>0);\n'
+        code += '    Push<size_t> pushDepth(_context->depthNewList);\n'
+        code += '    _context->depthNewList--;\n'
+
       code += '    DispatchTable *_next = _context->dispatcher.logging._next;\n'
       code += '    RegalAssert(_next);\n'
       code += '    '
@@ -171,12 +187,14 @@ def generateDispatchLog(apis, args):
       # Special handling for glUseProgram - log the attached shaders.
 
       if name=='glUseProgram':
-        code += '    if (program && log_glIsProgram(program))\n'
+        code += '    #if !REGAL_SYS_PPAPI\n'
+        code += '    if (Logging::enableDriver && program && log_glIsProgram(program))\n'
         code += '    {\n'
         code += '      GLuint  _shaders[16];\n'
         code += '      GLsizei _count;\n'
         code += '      log_glGetAttachedShaders(program,16,&_count,_shaders);\n'
         code += '    }\n'
+        code += '    #endif // REGAL_SYS_PPAPI\n'
 
       if not typeIsVoid(rType):
         code += '    return ret;\n'

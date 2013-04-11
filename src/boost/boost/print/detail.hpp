@@ -146,7 +146,7 @@ private:
   quote<T,C> &operator=(const quote<T,C> &other);
 };
 
-// Optional 
+// Optional
 
 template<typename T>
 struct optional

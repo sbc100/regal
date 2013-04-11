@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -59,21 +59,21 @@ inline int NameCmp(const void *a, const void *b)
   return std::strcmp(*(const char **) a, *(const char **) b);
 }
 
-extern const char * const gl_Name[2632];
-extern const void *gl_Value[2632];
-extern const size_t gl_Offset[2632];
+extern const char * const gl_Name[2633];
+extern const void *gl_Value[2633];
+extern const size_t gl_Offset[2633];
 
 template<typename T>
 T
 gl_Lookup(const char *name, T def = NULL)
 {
-  const char **res = (const char **) std::bsearch(&name, gl_Name, 2631, sizeof(const char *), NameCmp);
+  const char **res = (const char **) std::bsearch(&name, gl_Name, 2632, sizeof(const char *), NameCmp);
   return res ? reinterpret_cast<T>(const_cast<void *>(gl_Value[(size_t) (res - gl_Name)])) : def;
 }
 
 inline size_t gl_LookupOffset(const char *name)
 {
-  const char **res = (const char **) std::bsearch(&name, gl_Name, 2631, sizeof(const char *), NameCmp);
+  const char **res = (const char **) std::bsearch(&name, gl_Name, 2632, sizeof(const char *), NameCmp);
   return res ? gl_Offset[(size_t) (res - gl_Name)] : 0;
 }
 

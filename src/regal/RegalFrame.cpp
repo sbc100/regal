@@ -36,7 +36,7 @@ REGAL_GLOBAL_BEGIN
 
 #include "md5.h"
 
-#ifndef REGAL_NO_PNG
+#if !REGAL_NO_PNG
 #include <zlib.h>
 #include <png.h>
 #include <string>
@@ -59,9 +59,14 @@ void Frame::capture(RegalContext &context)
 
   if (Logging::frameTime)
   {
-    Timer::Value elapsed = frameTimer.restart();
+    Timer::Value REGAL_UNUSED elapsed = frameTimer.restart();
     UNUSED_PARAMETER(elapsed); // Unused if info logging disabled at compile-time
     Info("Frame ",frame,' ',elapsed/1000," msec, ",1000000.0/elapsed," FPS.");
+
+#if REGAL_SYS_X11 && REGAL_SYS_GLX
+    if (context.x11Display && context.x11Drawable)
+      Info("X11 window manager state: ",windowManagerStateDescription(context.x11Display,context.x11Drawable));
+#endif
   }
 
   if
@@ -100,7 +105,7 @@ void Frame::capture(RegalContext &context)
         // Do once we have the pixels, could we do the rest in another
         // thread?
 
-#ifndef REGAL_NO_PNG
+#if !REGAL_NO_PNG
         if (Config::frameSaveColor)
         {
           static png_color_8 pngSBIT = {8, 8, 8, 0, 8};
@@ -141,7 +146,7 @@ void Frame::capture(RegalContext &context)
         if (Config::frameMd5Color)
         {
           // Apply masking
-          
+
           for (GLint i=0; i<bufferSize; ++i)
             buffer[i] &= Config::frameMd5ColorMask;
 

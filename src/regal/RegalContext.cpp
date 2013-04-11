@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -54,12 +54,16 @@ REGAL_GLOBAL_BEGIN
 #if REGAL_EMULATION
 #include "RegalObj.h"
 #include "RegalPpa.h"
+#include "RegalPpca.h"
 #include "RegalBin.h"
+#include "RegalTexSto.h"
+#include "RegalXfer.h"
 #include "RegalDsa.h"
 #include "RegalIff.h"
 #include "RegalSo.h"
 #include "RegalVao.h"
 #include "RegalTexC.h"
+#include "RegalFilt.h"
 #endif
 
 REGAL_GLOBAL_END
@@ -79,12 +83,16 @@ RegalContext::RegalContext()
   emuLevel(0),
   obj(NULL),
   ppa(NULL),
+  ppca(NULL),
   bin(NULL),
+  texsto(NULL),
+  xfer(NULL),
   dsa(NULL),
   iff(NULL),
   so(NULL),
   vao(NULL),
   texc(NULL),
+  filt(NULL),
 #endif
 #if REGAL_SYS_PPAPI
   ppapiES2(NULL),
@@ -92,11 +100,25 @@ RegalContext::RegalContext()
 #endif
   sysCtx(NULL),
   thread(0),
+#if REGAL_SYS_X11
+  x11Display(NULL),
+#endif
+#if REGAL_SYS_GLX
+  x11Drawable(0),
+#endif
   logCallback(NULL),
-  depthBeginEnd(0),
-  depthPushAttrib(0),
+#if REGAL_CODE
+  codeSource(NULL),
+  codeHeader(NULL),
   codeInputNext(0),
-  codeOutputNext(0)
+  codeOutputNext(0),
+  codeShaderNext(0),
+  codeProgramNext(0),
+#endif
+  depthBeginEnd(0),
+  depthPushMatrix(0),
+  depthPushAttrib(0),
+  depthNewList(0)
 {
   Internal("RegalContext::RegalContext","()");
 
@@ -133,7 +155,7 @@ RegalContext::Init()
       Config::enableEmulation &&
       (
         info->core ||
-        info->gles ||
+        info->es2  ||
         ( info->compat && !info->gl_ext_direct_state_access )
       )
     )
@@ -142,25 +164,33 @@ RegalContext::Init()
   {
     RegalAssert(info);
     // emu
-    emuLevel = 9;
+    emuLevel = 12;
+    #if REGAL_EMU_FILTER
+    if (Config::enableEmuFilter || Config::forceEmuFilter || REGAL_FORCE_EMU_FILTER)
+    {
+      filt = new Emu::Filt;
+      emuLevel = 0;
+      filt->Init(*this);
+    }
+    #endif /* REGAL_EMU_FILTER */
     #if REGAL_EMU_TEXC
-    if (Config::enableEmuTexC)
+    if ((isES2() && Config::enableEmuTexC) || Config::forceEmuTexC || REGAL_FORCE_EMU_TEXC)
     {
       texc = new Emu::TexC;
-      emuLevel = 0;
+      emuLevel = 1;
       texc->Init(*this);
     }
     #endif /* REGAL_EMU_TEXC */
     #if REGAL_EMU_VAO
-    if (Config::enableEmuVao)
+    if ((Config::enableEmuVao || Config::enableEmuVao || REGAL_FORCE_EMU_VAO) && (Config::enableEmuIff || Config::forceEmuIff || REGAL_FORCE_EMU_IFF))
     {
-      vao = new RegalVao;
+      vao = new Emu::Vao;
       emuLevel = 2;
       vao->Init(*this);
     }
     #endif /* REGAL_EMU_VAO */
     #if REGAL_EMU_SO
-    if (Config::enableEmuSo)
+    if (Config::enableEmuSo || Config::forceEmuSo || REGAL_FORCE_EMU_SO)
     {
       so = new Emu::So;
       emuLevel = 3;
@@ -168,7 +198,7 @@ RegalContext::Init()
     }
     #endif /* REGAL_EMU_SO */
     #if REGAL_EMU_IFF
-    if (Config::enableEmuIff)
+    if (Config::enableEmuIff || Config::forceEmuIff || REGAL_FORCE_EMU_IFF)
     {
       iff = new Emu::Iff;
       emuLevel = 4;
@@ -176,43 +206,88 @@ RegalContext::Init()
     }
     #endif /* REGAL_EMU_IFF */
     #if REGAL_EMU_DSA
-    if (Config::enableEmuDsa)
+    if (Config::enableEmuDsa || Config::forceEmuDsa || REGAL_FORCE_EMU_DSA)
     {
       Internal("RegalContext::Init ","GL_EXT_direct_state_access");
       info->regal_ext_direct_state_access = true;
       info->regalExtensionsSet.insert("GL_EXT_direct_state_access");
       info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
-      dsa = new RegalDsa;
+      dsa = new Emu::Dsa;
       emuLevel = 5;
       dsa->Init(*this);
     }
     #endif /* REGAL_EMU_DSA */
-    #if REGAL_EMU_BIN
-    if (Config::enableEmuBin)
+    #if REGAL_EMU_XFER
+    if ((isES2() && Config::enableEmuXfer) || Config::forceEmuXfer || REGAL_FORCE_EMU_XFER)
     {
-      bin = new RegalBin;
+      xfer = new Emu::Xfer;
       emuLevel = 6;
+      xfer->Init(*this);
+    }
+    #endif /* REGAL_EMU_XFER */
+    #if REGAL_EMU_TEXSTO
+    if (Config::enableEmuTexSto || Config::forceEmuTexSto || REGAL_FORCE_EMU_TEXSTO)
+    {
+      texsto = new Emu::TexSto;
+      emuLevel = 7;
+      texsto->Init(*this);
+    }
+    #endif /* REGAL_EMU_TEXSTO */
+    #if REGAL_EMU_BIN
+    if (Config::enableEmuBin || Config::forceEmuBin || REGAL_FORCE_EMU_BIN)
+    {
+      bin = new Emu::Bin;
+      emuLevel = 8;
       bin->Init(*this);
     }
     #endif /* REGAL_EMU_BIN */
-    #if REGAL_EMU_PPA
-    if (Config::enableEmuPpa)
+    #if REGAL_EMU_PPCA
+    if (Config::enableEmuPpca || Config::forceEmuPpca || REGAL_FORCE_EMU_PPCA)
     {
-      ppa = new RegalPpa;
-      emuLevel = 7;
+      ppca = new Emu::Ppca;
+      emuLevel = 9;
+      ppca->Init(*this);
+    }
+    #endif /* REGAL_EMU_PPCA */
+    #if REGAL_EMU_PPA
+    if (Config::enableEmuPpa || Config::forceEmuPpa || REGAL_FORCE_EMU_PPA)
+    {
+      ppa = new Emu::Ppa;
+      emuLevel = 10;
       ppa->Init(*this);
     }
     #endif /* REGAL_EMU_PPA */
     #if REGAL_EMU_OBJ
-    if (Config::enableEmuObj)
+    if (Config::enableEmuObj || Config::forceEmuObj || REGAL_FORCE_EMU_OBJ)
     {
-      obj = new RegalObj;
-      emuLevel = 8;
+      obj = new Emu::Obj;
+      emuLevel = 11;
       obj->Init(*this);
     }
     #endif /* REGAL_EMU_OBJ */
-    emuLevel = 9;
+    emuLevel = 12;
 
+  }
+#endif
+
+#if REGAL_CODE
+  if (Config::enableCode)
+  {
+    if (Config::codeSourceFile.length())
+    {
+      codeSource = fopen(Config::codeSourceFile.c_str(),"wt");
+      if (!codeSource)
+        Warning("Failed to open file ",Config::codeSourceFile," for writing code source.");
+    }
+    if (Config::codeHeaderFile.length())
+    {
+      if (Config::codeHeaderFile==Config::codeSourceFile)
+        codeHeader = codeSource;
+      else
+        codeHeader = fopen(Config::codeHeaderFile.c_str(),"wt");
+      if (!codeHeader)
+        Warning("Failed to open file ",Config::codeHeaderFile," for writing code header.");
+    }
   }
 #endif
 
@@ -239,9 +314,18 @@ RegalContext::~RegalContext()
   #if REGAL_EMU_PPA
   delete ppa;
   #endif /* REGAL_EMU_PPA */
+  #if REGAL_EMU_PPCA
+  delete ppca;
+  #endif /* REGAL_EMU_PPCA */
   #if REGAL_EMU_BIN
   delete bin;
   #endif /* REGAL_EMU_BIN */
+  #if REGAL_EMU_TEXSTO
+  delete texsto;
+  #endif /* REGAL_EMU_TEXSTO */
+  #if REGAL_EMU_XFER
+  delete xfer;
+  #endif /* REGAL_EMU_XFER */
   #if REGAL_EMU_DSA
   delete dsa;
   #endif /* REGAL_EMU_DSA */
@@ -257,6 +341,17 @@ RegalContext::~RegalContext()
   #if REGAL_EMU_TEXC
   delete texc;
   #endif /* REGAL_EMU_TEXC */
+  #if REGAL_EMU_FILTER
+  delete filt;
+  #endif /* REGAL_EMU_FILTER */
+#endif
+
+#if REGAL_CODE
+  if (codeSource)
+    fclose(codeSource);
+
+  if (codeHeader)
+    fclose(codeHeader);
 #endif
 }
 

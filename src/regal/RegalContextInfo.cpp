@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -69,7 +69,8 @@ ContextInfo::ContextInfo()
 : regal_ext_direct_state_access(false),
   compat(false),
   core(false),
-  gles(false),
+  es1(false),
+  es2(false),
   gl_version_major(-1),
   gl_version_minor(-1),
   gl_version_1_0(false),
@@ -434,6 +435,7 @@ ContextInfo::ContextInfo()
   gl_nv_fog_distance(false),
   gl_nv_fragment_program(false),
   gl_nv_fragment_program2(false),
+  gl_nv_framebuffer_blit(false),
   gl_nv_framebuffer_multisample_coverage(false),
   gl_nv_geometry_program4(false),
   gl_nv_gpu_program4(false),
@@ -556,6 +558,7 @@ ContextInfo::ContextInfo()
   gl_sgix_fog_offset(false),
   gl_sgix_fog_texture(false),
   gl_sgix_fragment_lighting(false),
+  gl_sgix_fragment_specular_lighting(false),
   gl_sgix_framezoom(false),
   gl_sgix_igloo_interface(false),
   gl_sgix_instruments(false),
@@ -770,15 +773,44 @@ ContextInfo::init(const RegalContext &context)
 
   // Detect GL context version
 
-  gles = starts_with(version,"OpenGL ES ");
-  if (gles)
-    sscanf(version.c_str(), "OpenGL ES %d.%d", &gles_version_major, &gles_version_minor);
+  #if REGAL_SYS_ES1
+  es1 = starts_with(version, "OpenGL ES-CM");
+  if (es1)
+  {
+    sscanf(version.c_str(), "OpenGL ES-CM %d.%d", &gles_version_major, &gles_version_minor);
+  }
   else
-    sscanf(version.c_str(), "%d.%d", &gl_version_major, &gl_version_minor);
+  #endif
+  {
+    #if REGAL_SYS_ES2
+    es2 = starts_with(version,"OpenGL ES ");
+    if (es2)
+    {
+      sscanf(version.c_str(), "OpenGL ES %d.%d", &gles_version_major, &gles_version_minor);
+    }
+    else
+    #endif
+    {
+      sscanf(version.c_str(), "%d.%d", &gl_version_major, &gl_version_minor);
+    }
+  }
+
+  // For Mesa3D EGL/ES 2.0 on desktop Linux the version string doesn't start with
+  // "OpenGL ES" Is that a Mesa3D bug? Perhaps...
+
+  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID
+  if (Regal::Config::sysEGL)
+  {
+    es1 = false;
+    es2 = true;
+    gles_version_major = 2;
+    gles_version_minor = 0;
+  }
+  #endif
 
   // Detect core context
 
-  if (!gles && gl_version_major>=3)
+  if (!es1 && !es2 && gl_version_major>=3)
   {
     GLint flags = 0;
     RegalAssert(context.dispatcher.driver.glGetIntegerv);
@@ -786,21 +818,35 @@ ContextInfo::init(const RegalContext &context)
     core = flags & GL_CONTEXT_CORE_PROFILE_BIT ? GL_TRUE : GL_FALSE;
   }
 
-  compat = !core && !gles;
+  compat = !core && !es1 && !es2;
 
   if (REGAL_FORCE_CORE_PROFILE || Config::forceCoreProfile)
   {
     compat = false;
     core   = true;
-    gles   = false;
+    es1    = false;
+    es2    = false;
   }
 
+  #if REGAL_SYS_ES1
+  if (REGAL_FORCE_ES1_PROFILE || Config::forceES1Profile)
+  {
+    compat = false;
+    core   = false;
+    es1    = true;
+    es2    = false;
+  }
+  #endif
+
+  #if REGAL_SYS_ES2
   if (REGAL_FORCE_ES2_PROFILE || Config::forceES2Profile)
   {
     compat = false;
     core   = false;
-    gles   = true;
+    es1    = false;
+    es2    = true;
   }
+  #endif
 
   // Detect driver extensions
 
@@ -901,7 +947,7 @@ ContextInfo::init(const RegalContext &context)
   Info("Regal version    : ",regalVersion);
   Info("Regal extensions : ",regalExtensions);
 
-  if (!gles)
+  if (!es1 && !es2)
   {
     gl_version_4_2 = gl_version_major > 4 || (gl_version_major == 4 && gl_version_minor >= 2);
     gl_version_4_1 = gl_version_4_2 || (gl_version_major == 4 && gl_version_minor == 1);
@@ -1266,6 +1312,7 @@ ContextInfo::init(const RegalContext &context)
   gl_nv_fog_distance = e.find("GL_NV_fog_distance")!=e.end();
   gl_nv_fragment_program = e.find("GL_NV_fragment_program")!=e.end();
   gl_nv_fragment_program2 = e.find("GL_NV_fragment_program2")!=e.end();
+  gl_nv_framebuffer_blit = e.find("GL_NV_framebuffer_blit")!=e.end();
   gl_nv_framebuffer_multisample_coverage = e.find("GL_NV_framebuffer_multisample_coverage")!=e.end();
   gl_nv_geometry_program4 = e.find("GL_NV_geometry_program4")!=e.end();
   gl_nv_gpu_program4 = e.find("GL_NV_gpu_program4")!=e.end();
@@ -1388,6 +1435,7 @@ ContextInfo::init(const RegalContext &context)
   gl_sgix_fog_offset = e.find("GL_SGIX_fog_offset")!=e.end();
   gl_sgix_fog_texture = e.find("GL_SGIX_fog_texture")!=e.end();
   gl_sgix_fragment_lighting = e.find("GL_SGIX_fragment_lighting")!=e.end();
+  gl_sgix_fragment_specular_lighting = e.find("GL_SGIX_fragment_specular_lighting")!=e.end();
   gl_sgix_framezoom = e.find("GL_SGIX_framezoom")!=e.end();
   gl_sgix_igloo_interface = e.find("GL_SGIX_igloo_interface")!=e.end();
   gl_sgix_instruments = e.find("GL_SGIX_instruments")!=e.end();
@@ -1566,8 +1614,11 @@ ContextInfo::init(const RegalContext &context)
 #endif
 
   RegalAssert(context.dispatcher.driver.glGetIntegerv);
-  context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&maxVertexAttribs));
-  context.dispatcher.driver.glGetIntegerv( gles ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&maxVaryings));
+  if (!es1)
+  {
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&maxVertexAttribs));
+    context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&maxVaryings));
+  }
 
   Info("OpenGL v attribs : ",maxVertexAttribs);
   Info("OpenGL varyings  : ",maxVaryings);
@@ -1918,6 +1969,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_fog_distance")) return gl_nv_fog_distance;
   if (!strcmp(ext,"GL_NV_fragment_program")) return gl_nv_fragment_program;
   if (!strcmp(ext,"GL_NV_fragment_program2")) return gl_nv_fragment_program2;
+  if (!strcmp(ext,"GL_NV_framebuffer_blit")) return gl_nv_framebuffer_blit;
   if (!strcmp(ext,"GL_NV_framebuffer_multisample_coverage")) return gl_nv_framebuffer_multisample_coverage;
   if (!strcmp(ext,"GL_NV_geometry_program4")) return gl_nv_geometry_program4;
   if (!strcmp(ext,"GL_NV_gpu_program4")) return gl_nv_gpu_program4;
@@ -2040,6 +2092,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_SGIX_fog_offset")) return gl_sgix_fog_offset;
   if (!strcmp(ext,"GL_SGIX_fog_texture")) return gl_sgix_fog_texture;
   if (!strcmp(ext,"GL_SGIX_fragment_lighting")) return gl_sgix_fragment_lighting;
+  if (!strcmp(ext,"GL_SGIX_fragment_specular_lighting")) return gl_sgix_fragment_specular_lighting;
   if (!strcmp(ext,"GL_SGIX_framezoom")) return gl_sgix_framezoom;
   if (!strcmp(ext,"GL_SGIX_igloo_interface")) return gl_sgix_igloo_interface;
   if (!strcmp(ext,"GL_SGIX_instruments")) return gl_sgix_instruments;

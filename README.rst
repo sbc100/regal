@@ -169,9 +169,13 @@ Logging
 Multi-threading support
 -----------------------
 
-  - Enabled by default.
+  - Locking and per-thread contexts enabled by default.
 
-  - Build-time configuration: **REGAL_NO_TLS**
+  - Per-thread context build-time configuration: **REGAL_NO_TLS**
+
+  - Locking build-time configuration: **REGAL_THREAD_LOCKING**
+
+  - Locking environment variable configuration: **REGAL_THREAD_LOCKING**
 
 Spoofing OpenGL vendor, renderer, version and extension strings
 ---------------------------------------------------------------
@@ -256,6 +260,11 @@ Limitations
 .. _GL_REGAL_log:             https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_log.txt
 .. _GL_REGAL_enable:          https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_enable.txt
 
+Contact Information
+===================
+
+* Discussion of Regal is primarily via the `Issue Tracker <https://github.com/p3/regal/issues>`_ currently.
+
 Other Information
 =================
 
@@ -289,7 +298,7 @@ Linux
 
 * Ubuntu/Debian/Mint recommended packages:
 
- ``$ apt-get install libxmu-dev``
+ ``$ apt-get install libxmu-dev libxi-dev``
 
 * Use GNU make with Makefile
 
@@ -317,7 +326,13 @@ iOS
 ---
 
 PPAPI and NaCl
-----
+--------------
+
+* NACL_SDK_ROOT needs to be set
+
+* NACL_LIBC=newlib is the default, specify NACL_LIBC=glibc as an alternative
+
+* regaltest requires pepper_26 or newer
 
 Questions and Answers
 =====================
@@ -335,6 +350,11 @@ Alternatives for OpenGL Loading
 * `GLEW <http://glew.sourceforge.net/>`_.
 
 * `OpenGL Loader Generator <https://bitbucket.org/alfonse/glloadgen/wiki/Home>`_.
+
+Related Efforts
+---------------
+
+* Mesa3D mail thread: `Mesa as part of OpenGL-on-OpenGL ES 2.0 <http://lists.freedesktop.org/archives/mesa-dev/2012-March/019692.html>`_
 
 License and Credits
 ===================

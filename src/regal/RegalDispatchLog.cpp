@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -953,7 +953,7 @@ static void REGAL_CALL log_glGetFloatv(GLenum pname, GLfloat *params)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glGetFloatv)(pname, params);
-    Driver("glGetFloatv","(", toString(pname), ", ", params, ")");
+    Driver("glGetFloatv","(", toString(pname), ", ", boost::print::array(params,helper::size::get(pname)), ")");
 }
 
 static void REGAL_CALL log_glGetIntegerv(GLenum pname, GLint *params)
@@ -963,7 +963,7 @@ static void REGAL_CALL log_glGetIntegerv(GLenum pname, GLint *params)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glGetIntegerv)(pname, params);
-    Driver("glGetIntegerv","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+    Driver("glGetIntegerv","(", toString(pname), ", ", boost::print::array(params,helper::size::get(pname)), ")");
 }
 
 static void REGAL_CALL log_glGetLightfv(GLenum light, GLenum pname, GLfloat *params)
@@ -1633,6 +1633,9 @@ static void REGAL_CALL log_glNewList(GLuint list, GLenum mode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
+    RegalAssert(_context->depthNewList>0);
+    Push<size_t> pushDepth(_context->depthNewList);
+    _context->depthNewList--;
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glNewList)(list, mode);
@@ -1913,6 +1916,9 @@ static void REGAL_CALL log_glPushMatrix(void)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
+    RegalAssert(_context->depthPushMatrix>0);
+    Push<size_t> pushDepth(_context->depthPushMatrix);
+    _context->depthPushMatrix--;
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glPushMatrix)();
@@ -2357,7 +2363,7 @@ static void REGAL_CALL log_glStencilFunc(GLenum func, GLint ref, GLuint mask)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilFunc)(func, ref, mask);
-    Driver("glStencilFunc","(", toString(func), ", ", ref, ", ", mask, ")");
+    Driver("glStencilFunc","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilMask(GLuint mask)
@@ -4030,7 +4036,7 @@ static void REGAL_CALL log_glMultiDrawArrays(GLenum mode, const GLint *first, co
     Driver("glMultiDrawArrays","(", toString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
 }
 
-static void REGAL_CALL log_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL log_glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -4924,14 +4930,14 @@ static void REGAL_CALL log_glLinkProgram(GLuint program)
     Driver("glLinkProgram","(", program, ")");
 }
 
-static void REGAL_CALL log_glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length)
+static void REGAL_CALL log_glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glShaderSource)(shader, count, string, length);
-    Driver("glShaderSource","(", shader, ", ", count, ", ", boost::print::array(reinterpret_cast<const char **>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
+    Driver("glShaderSource","(", shader, ", ", count, ", ", boost::print::array(reinterpret_cast<const char * const *>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
 }
 
 static void REGAL_CALL log_glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
@@ -4941,7 +4947,7 @@ static void REGAL_CALL log_glStencilFuncSeparate(GLenum face, GLenum func, GLint
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilFuncSeparate)(face, func, ref, mask);
-    Driver("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", ref, ", ", mask, ")");
+    Driver("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilMaskSeparate(GLenum face, GLuint mask)
@@ -4951,7 +4957,7 @@ static void REGAL_CALL log_glStencilMaskSeparate(GLenum face, GLuint mask)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilMaskSeparate)(face, mask);
-    Driver("glStencilMaskSeparate","(", toString(face), ", ", mask, ")");
+    Driver("glStencilMaskSeparate","(", toString(face), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass)
@@ -5162,12 +5168,14 @@ static void REGAL_CALL log_glUseProgram(GLuint program)
     RegalAssert(_next);
     _next->call(&_next->glUseProgram)(program);
     Driver("glUseProgram","(", program, ")");
-    if (program && log_glIsProgram(program))
+    #if !REGAL_SYS_PPAPI
+    if (Logging::enableDriver && program && log_glIsProgram(program))
     {
       GLuint  _shaders[16];
       GLsizei _count;
       log_glGetAttachedShaders(program,16,&_count,_shaders);
     }
+    #endif // REGAL_SYS_PPAPI
 }
 
 static void REGAL_CALL log_glValidateProgram(GLuint program)
@@ -5867,7 +5875,7 @@ static void REGAL_CALL log_glTexParameterIuiv(GLenum target, GLenum pname, const
     Driver("glTexParameterIuiv","(", toString(target), ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
 }
 
-static void REGAL_CALL log_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL log_glTransformFeedbackVaryings(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7029,7 +7037,7 @@ static void REGAL_CALL log_glGetTexParameterPointervAPPLE(GLenum target, GLenum 
     Driver("glGetTexParameterPointervAPPLE","(", toString(target), ", ", toString(pname), ", ", params, ")");
 }
 
-static void REGAL_CALL log_glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer)
+static void REGAL_CALL log_glTextureRangeAPPLE(GLenum target, GLsizei length, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7061,7 +7069,7 @@ static void REGAL_CALL log_glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *ar
     Driver("glDeleteVertexArraysAPPLE","(", n, ", ", arrays, ")");
 }
 
-static void REGAL_CALL log_glGenVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
+static void REGAL_CALL log_glGenVertexArraysAPPLE(GLsizei n, GLuint *arrays)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7409,7 +7417,7 @@ static void REGAL_CALL log_glCopyImageSubData(GLuint srcName, GLenum srcTarget, 
 
 // GL_ARB_debug_output
 
-static void REGAL_CALL log_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, GLvoid *userParam)
+static void REGAL_CALL log_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7506,7 +7514,7 @@ static void REGAL_CALL log_glBlendFunciARB(GLuint buf, GLenum src, GLenum dst)
 
 // GL_ARB_draw_elements_base_vertex
 
-static void REGAL_CALL log_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL log_glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7526,7 +7534,7 @@ static void REGAL_CALL log_glDrawElementsInstancedBaseVertex(GLenum mode, GLsize
     Driver("glDrawElementsInstancedBaseVertex","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", basevertex, ")");
 }
 
-static void REGAL_CALL log_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+static void REGAL_CALL log_glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -7536,7 +7544,7 @@ static void REGAL_CALL log_glDrawRangeElementsBaseVertex(GLenum mode, GLuint sta
     Driver("glDrawRangeElementsBaseVertex","(", toString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
 }
 
-static void REGAL_CALL log_glMultiDrawElementsBaseVertex(GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+static void REGAL_CALL log_glMultiDrawElementsBaseVertex(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, const GLint *basevertex)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8532,7 +8540,7 @@ static GLvoid *REGAL_CALL log_glMapBufferRange(GLenum target, GLintptr offset, G
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     GLvoid * ret = _next->call(&_next->glMapBufferRange)(target, offset, length, access);
-    Driver("glMapBufferRange","(", toString(target), ", ", offset, ", ", length, ", ", access, ")", " returned ", boost::print::optional(ret,Logging::pointers));
+    Driver("glMapBufferRange","(", toString(target), ", ", offset, ", ", length, ", ", GLbufferAccessToString(access), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     return ret;
 }
 
@@ -8548,7 +8556,7 @@ static void REGAL_CALL log_glCurrentPaletteMatrixARB(GLint index)
     Driver("glCurrentPaletteMatrixARB","(", index, ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL log_glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8558,7 +8566,7 @@ static void REGAL_CALL log_glMatrixIndexPointerARB(GLint size, GLenum type, GLsi
     Driver("glMatrixIndexPointerARB","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexubvARB(GLint size, GLubyte *indices)
+static void REGAL_CALL log_glMatrixIndexubvARB(GLint size, const GLubyte *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8568,7 +8576,7 @@ static void REGAL_CALL log_glMatrixIndexubvARB(GLint size, GLubyte *indices)
     Driver("glMatrixIndexubvARB","(", size, ", ", boost::print::optional(indices,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexuivARB(GLint size, GLuint *indices)
+static void REGAL_CALL log_glMatrixIndexuivARB(GLint size, const GLuint *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -8578,7 +8586,7 @@ static void REGAL_CALL log_glMatrixIndexuivARB(GLint size, GLuint *indices)
     Driver("glMatrixIndexuivARB","(", size, ", ", indices, ")");
 }
 
-static void REGAL_CALL log_glMatrixIndexusvARB(GLint size, GLushort *indices)
+static void REGAL_CALL log_glMatrixIndexusvARB(GLint size, const GLushort *indices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -9536,7 +9544,7 @@ static void REGAL_CALL log_glBindProgramPipeline(GLuint pipeline)
     Driver("glBindProgramPipeline","(", pipeline, ")");
 }
 
-static GLuint REGAL_CALL log_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar **strings)
+static GLuint REGAL_CALL log_glCreateShaderProgramv(GLenum type, GLsizei count, const GLchar * const *strings)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11362,7 +11370,7 @@ static GLuint REGAL_CALL log_glGetUniformBlockIndex(GLuint program, const GLchar
     return ret;
 }
 
-static void REGAL_CALL log_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar **uniformNames, GLuint *uniformIndices)
+static void REGAL_CALL log_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11601,7 +11609,7 @@ static void REGAL_CALL log_glVertexBlendARB(GLint count)
     Driver("glVertexBlendARB","(", count, ")");
 }
 
-static void REGAL_CALL log_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer)
+static void REGAL_CALL log_glWeightPointerARB(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11611,7 +11619,7 @@ static void REGAL_CALL log_glWeightPointerARB(GLint size, GLenum type, GLsizei s
     Driver("glWeightPointerARB","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glWeightbvARB(GLint size, GLbyte *weights)
+static void REGAL_CALL log_glWeightbvARB(GLint size, const GLbyte *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11621,7 +11629,7 @@ static void REGAL_CALL log_glWeightbvARB(GLint size, GLbyte *weights)
     Driver("glWeightbvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightdvARB(GLint size, GLdouble *weights)
+static void REGAL_CALL log_glWeightdvARB(GLint size, const GLdouble *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11631,7 +11639,7 @@ static void REGAL_CALL log_glWeightdvARB(GLint size, GLdouble *weights)
     Driver("glWeightdvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightfvARB(GLint size, GLfloat *weights)
+static void REGAL_CALL log_glWeightfvARB(GLint size, const GLfloat *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11641,7 +11649,7 @@ static void REGAL_CALL log_glWeightfvARB(GLint size, GLfloat *weights)
     Driver("glWeightfvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightivARB(GLint size, GLint *weights)
+static void REGAL_CALL log_glWeightivARB(GLint size, const GLint *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11651,7 +11659,7 @@ static void REGAL_CALL log_glWeightivARB(GLint size, GLint *weights)
     Driver("glWeightivARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glWeightsvARB(GLint size, GLshort *weights)
+static void REGAL_CALL log_glWeightsvARB(GLint size, const GLshort *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11661,7 +11669,7 @@ static void REGAL_CALL log_glWeightsvARB(GLint size, GLshort *weights)
     Driver("glWeightsvARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightubvARB(GLint size, GLubyte *weights)
+static void REGAL_CALL log_glWeightubvARB(GLint size, const GLubyte *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11671,7 +11679,7 @@ static void REGAL_CALL log_glWeightubvARB(GLint size, GLubyte *weights)
     Driver("glWeightubvARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glWeightuivARB(GLint size, GLuint *weights)
+static void REGAL_CALL log_glWeightuivARB(GLint size, const GLuint *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -11681,7 +11689,7 @@ static void REGAL_CALL log_glWeightuivARB(GLint size, GLuint *weights)
     Driver("glWeightuivARB","(", size, ", ", weights, ")");
 }
 
-static void REGAL_CALL log_glWeightusvARB(GLint size, GLushort *weights)
+static void REGAL_CALL log_glWeightusvARB(GLint size, const GLushort *weights)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13174,7 +13182,7 @@ static void REGAL_CALL log_glGetTexBumpParameterivATI(GLenum pname, GLint *param
     Driver("glGetTexBumpParameterivATI","(", toString(pname), ", ", boost::print::optional(param,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
+static void REGAL_CALL log_glTexBumpParameterfvATI(GLenum pname, const GLfloat *param)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13184,7 +13192,7 @@ static void REGAL_CALL log_glTexBumpParameterfvATI(GLenum pname, GLfloat *param)
     Driver("glTexBumpParameterfvATI","(", toString(pname), ", ", param, ")");
 }
 
-static void REGAL_CALL log_glTexBumpParameterivATI(GLenum pname, GLint *param)
+static void REGAL_CALL log_glTexBumpParameterivATI(GLenum pname, const GLint *param)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13391,7 +13399,7 @@ static void REGAL_CALL log_glStencilFuncSeparateATI(GLenum frontfunc, GLenum bac
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glStencilFuncSeparateATI)(frontfunc, backfunc, ref, mask);
-    Driver("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", ref, ", ", mask, ")");
+    Driver("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
@@ -18054,7 +18062,7 @@ static GLvoid *REGAL_CALL log_glMapBufferRangeEXT(GLenum target, GLintptr offset
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     GLvoid * ret = _next->call(&_next->glMapBufferRangeEXT)(target, offset, length, access);
-    Driver("glMapBufferRangeEXT","(", toString(target), ", ", offset, ", ", length, ", ", access, ")", " returned ", boost::print::optional(ret,Logging::pointers));
+    Driver("glMapBufferRangeEXT","(", toString(target), ", ", offset, ", ", length, ", ", GLbufferAccessToString(access), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     return ret;
 }
 
@@ -18070,7 +18078,7 @@ static void REGAL_CALL log_glMultiDrawArraysEXT(GLenum mode, const GLint *first,
     Driver("glMultiDrawArraysEXT","(", toString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
 }
 
-static void REGAL_CALL log_glMultiDrawElementsEXT(GLenum mode, GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL log_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -19975,7 +19983,7 @@ static void REGAL_CALL log_glTexScissorINTEL(GLenum target, GLclampf tlow, GLcla
 
 // GL_KHR_debug
 
-static void REGAL_CALL log_glDebugMessageCallback(GLDEBUGPROC callback, GLvoid *userParam)
+static void REGAL_CALL log_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20026,7 +20034,7 @@ static void REGAL_CALL log_glGetObjectLabel(GLenum identifier, GLuint name, GLsi
     Driver("glGetObjectLabel","(", toString(identifier), ", ", name, ", ", bufSize, ", ", length, ", ", boost::print::quote(label,'"'), ")");
 }
 
-static void REGAL_CALL log_glGetObjectPtrLabel(GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
+static void REGAL_CALL log_glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20046,7 +20054,7 @@ static void REGAL_CALL log_glObjectLabel(GLenum identifier, GLuint name, GLsizei
     Driver("glObjectLabel","(", toString(identifier), ", ", name, ", ", length, ", ", boost::print::quote(label,'"'), ")");
 }
 
-static void REGAL_CALL log_glObjectPtrLabel(GLvoid *ptr, GLsizei length, const GLchar *label)
+static void REGAL_CALL log_glObjectPtrLabel(const GLvoid *ptr, GLsizei length, const GLchar *label)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20901,6 +20909,18 @@ static void REGAL_CALL log_glProgramNamedParameter4fvNV(GLuint id, GLsizei len, 
     RegalAssert(_next);
     _next->call(&_next->glProgramNamedParameter4fvNV)(id, len, name, v);
     Driver("glProgramNamedParameter4fvNV","(", id, ", ", len, ", ", boost::print::array(name,1), ", ", boost::print::array(v,4), ")");
+}
+
+// GL_NV_framebuffer_blit
+
+static void REGAL_CALL log_glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glBlitFramebufferNV)(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+    Driver("glBlitFramebufferNV","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", mask, ")");
 }
 
 // GL_NV_framebuffer_multisample_coverage
@@ -22372,7 +22392,7 @@ static void REGAL_CALL log_glPathStencilFuncNV(GLenum func, GLint ref, GLuint ma
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glPathStencilFuncNV)(func, ref, mask);
-    Driver("glPathStencilFuncNV","(", toString(func), ", ", ref, ", ", mask, ")");
+    Driver("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString)
@@ -23829,7 +23849,7 @@ static void REGAL_CALL log_glProgramParameter4fvNV(GLenum target, GLuint index, 
     Driver("glProgramParameter4fvNV","(", toString(target), ", ", index, ", ", boost::print::array(v,4), ")");
 }
 
-static void REGAL_CALL log_glProgramParameters4dvNV(GLenum target, GLuint index, GLuint count, const GLdouble *v)
+static void REGAL_CALL log_glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei count, const GLdouble *v)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -23839,7 +23859,7 @@ static void REGAL_CALL log_glProgramParameters4dvNV(GLenum target, GLuint index,
     Driver("glProgramParameters4dvNV","(", toString(target), ", ", index, ", ", count, ", ", boost::print::array(v,count * 4), ")");
 }
 
-static void REGAL_CALL log_glProgramParameters4fvNV(GLenum target, GLuint index, GLuint count, const GLfloat *v)
+static void REGAL_CALL log_glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei count, const GLfloat *v)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -25143,7 +25163,429 @@ static void REGAL_CALL log_glStartTilingQCOM(GLuint x, GLuint y, GLuint width, G
     Driver("glStartTilingQCOM","(", x, ", ", y, ", ", width, ", ", height, ", ", preserveMask, ")");
 }
 
+// GL_REGAL_ES1_0_compatibility
+
+static void REGAL_CALL log_glAlphaFuncx(GLenum func, GLclampx ref)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glAlphaFuncx)(func, ref);
+    Driver("glAlphaFuncx","(", toString(func), ", ", ref, ")");
+}
+
+static void REGAL_CALL log_glClearColorx(GLclampx red, GLclampx green, GLclampx blue, GLclampx alpha)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glClearColorx)(red, green, blue, alpha);
+    Driver("glClearColorx","(", red, ", ", green, ", ", blue, ", ", alpha, ")");
+}
+
+static void REGAL_CALL log_glClearDepthx(GLclampx depth)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glClearDepthx)(depth);
+    Driver("glClearDepthx","(", depth, ")");
+}
+
+static void REGAL_CALL log_glColor4x(GLfixed red, GLfixed green, GLfixed blue, GLfixed alpha)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glColor4x)(red, green, blue, alpha);
+    Driver("glColor4x","(", red, ", ", green, ", ", blue, ", ", alpha, ")");
+}
+
+static void REGAL_CALL log_glDepthRangex(GLclampx zNear, GLclampx zFar)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glDepthRangex)(zNear, zFar);
+    Driver("glDepthRangex","(", zNear, ", ", zFar, ")");
+}
+
+static void REGAL_CALL log_glFogx(GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glFogx)(pname, param);
+    Driver("glFogx","(", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glFogxv(GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glFogxv)(pname, params);
+    Driver("glFogxv","(", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glFrustumf(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glFrustumf)(left, right, bottom, top, zNear, zFar);
+    Driver("glFrustumf","(", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
+}
+
+static void REGAL_CALL log_glFrustumx(GLfixed left, GLfixed right, GLfixed bottom, GLfixed top, GLfixed zNear, GLfixed zFar)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glFrustumx)(left, right, bottom, top, zNear, zFar);
+    Driver("glFrustumx","(", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
+}
+
+static void REGAL_CALL log_glLightModelx(GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glLightModelx)(pname, param);
+    Driver("glLightModelx","(", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glLightModelxv(GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glLightModelxv)(pname, params);
+    Driver("glLightModelxv","(", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glLightx(GLenum light, GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glLightx)(light, pname, param);
+    Driver("glLightx","(", toString(light), ", ", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glLightxv(GLenum light, GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glLightxv)(light, pname, params);
+    Driver("glLightxv","(", toString(light), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glLineWidthx(GLfixed width)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glLineWidthx)(width);
+    Driver("glLineWidthx","(", width, ")");
+}
+
+static void REGAL_CALL log_glLoadMatrixx(const GLfixed *m)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glLoadMatrixx)(m);
+    Driver("glLoadMatrixx","(", m, ")");
+}
+
+static void REGAL_CALL log_glMaterialx(GLenum face, GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glMaterialx)(face, pname, param);
+    Driver("glMaterialx","(", toString(face), ", ", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glMaterialxv(GLenum face, GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glMaterialxv)(face, pname, params);
+    Driver("glMaterialxv","(", toString(face), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glMultMatrixx(const GLfixed *m)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glMultMatrixx)(m);
+    Driver("glMultMatrixx","(", m, ")");
+}
+
+static void REGAL_CALL log_glMultiTexCoord4x(GLenum target, GLfixed s, GLfixed t, GLfixed r, GLfixed q)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glMultiTexCoord4x)(target, s, t, r, q);
+    Driver("glMultiTexCoord4x","(", toString(target), ", ", s, ", ", t, ", ", r, ", ", q, ")");
+}
+
+static void REGAL_CALL log_glNormal3x(GLfixed nx, GLfixed ny, GLfixed nz)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glNormal3x)(nx, ny, nz);
+    Driver("glNormal3x","(", nx, ", ", ny, ", ", nz, ")");
+}
+
+static void REGAL_CALL log_glOrthof(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glOrthof)(left, right, bottom, top, zNear, zFar);
+    Driver("glOrthof","(", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
+}
+
+static void REGAL_CALL log_glOrthox(GLfixed left, GLfixed right, GLfixed bottom, GLfixed top, GLfixed zNear, GLfixed zFar)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glOrthox)(left, right, bottom, top, zNear, zFar);
+    Driver("glOrthox","(", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
+}
+
+static void REGAL_CALL log_glPointSizex(GLfixed size)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glPointSizex)(size);
+    Driver("glPointSizex","(", size, ")");
+}
+
+static void REGAL_CALL log_glPolygonOffsetx(GLfixed factor, GLfixed units)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glPolygonOffsetx)(factor, units);
+    Driver("glPolygonOffsetx","(", factor, ", ", units, ")");
+}
+
+static void REGAL_CALL log_glRotatex(GLfixed angle, GLfixed x, GLfixed y, GLfixed z)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glRotatex)(angle, x, y, z);
+    Driver("glRotatex","(", angle, ", ", x, ", ", y, ", ", z, ")");
+}
+
+static void REGAL_CALL log_glSampleCoveragex(GLclampx value, GLboolean invert)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glSampleCoveragex)(value, invert);
+    Driver("glSampleCoveragex","(", value, ", ", toString(invert), ")");
+}
+
+static void REGAL_CALL log_glScalex(GLfixed x, GLfixed y, GLfixed z)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glScalex)(x, y, z);
+    Driver("glScalex","(", x, ", ", y, ", ", z, ")");
+}
+
+static void REGAL_CALL log_glTexEnvx(GLenum target, GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glTexEnvx)(target, pname, param);
+    Driver("glTexEnvx","(", toString(target), ", ", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glTexEnvxv(GLenum target, GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glTexEnvxv)(target, pname, params);
+    Driver("glTexEnvxv","(", toString(target), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glTexParameterx(GLenum target, GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glTexParameterx)(target, pname, param);
+    Driver("glTexParameterx","(", toString(target), ", ", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glTranslatex(GLfixed x, GLfixed y, GLfixed z)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glTranslatex)(x, y, z);
+    Driver("glTranslatex","(", x, ", ", y, ", ", z, ")");
+}
+
 // GL_REGAL_ES1_1_compatibility
+
+static void REGAL_CALL log_glClipPlanef(GLenum plane, const GLfloat *equation)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glClipPlanef)(plane, equation);
+    Driver("glClipPlanef","(", toString(plane), ", ", equation, ")");
+}
+
+static void REGAL_CALL log_glClipPlanex(GLenum plane, const GLfixed *equation)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glClipPlanex)(plane, equation);
+    Driver("glClipPlanex","(", toString(plane), ", ", equation, ")");
+}
+
+static void REGAL_CALL log_glGetClipPlanef(GLenum pname, GLfloat *eqn)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetClipPlanef)(pname, eqn);
+    Driver("glGetClipPlanef","(", toString(pname), ", ", eqn, ")");
+}
+
+static void REGAL_CALL log_glGetClipPlanex(GLenum pname, GLfixed *eqn)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetClipPlanex)(pname, eqn);
+    Driver("glGetClipPlanex","(", toString(pname), ", ", eqn, ")");
+}
+
+static void REGAL_CALL log_glGetFixedv(GLenum pname, GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetFixedv)(pname, params);
+    Driver("glGetFixedv","(", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glGetLightxv(GLenum light, GLenum pname, GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetLightxv)(light, pname, params);
+    Driver("glGetLightxv","(", toString(light), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glGetMaterialxv(GLenum face, GLenum pname, GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetMaterialxv)(face, pname, params);
+    Driver("glGetMaterialxv","(", toString(face), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glGetTexEnvxv(GLenum env, GLenum pname, GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetTexEnvxv)(env, pname, params);
+    Driver("glGetTexEnvxv","(", toString(env), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glGetTexParameterxv(GLenum target, GLenum pname, GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetTexParameterxv)(target, pname, params);
+    Driver("glGetTexParameterxv","(", toString(target), ", ", toString(pname), ", ", params, ")");
+}
+
+static void REGAL_CALL log_glPointParameterx(GLenum pname, GLfixed param)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glPointParameterx)(pname, param);
+    Driver("glPointParameterx","(", toString(pname), ", ", param, ")");
+}
+
+static void REGAL_CALL log_glPointParameterxv(GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glPointParameterxv)(pname, params);
+    Driver("glPointParameterxv","(", toString(pname), ", ", params, ")");
+}
 
 static void REGAL_CALL log_glPointSizePointerOES(GLenum type, GLsizei stride, const GLvoid *pointer)
 {
@@ -25153,6 +25595,16 @@ static void REGAL_CALL log_glPointSizePointerOES(GLenum type, GLsizei stride, co
     RegalAssert(_next);
     _next->call(&_next->glPointSizePointerOES)(type, stride, pointer);
     Driver("glPointSizePointerOES","(", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glTexParameterxv(GLenum target, GLenum pname, const GLfixed *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glTexParameterxv)(target, pname, params);
+    Driver("glTexParameterxv","(", toString(target), ", ", toString(pname), ", ", params, ")");
 }
 
 // GL_REGAL_log
@@ -29263,6 +29715,10 @@ void InitDispatchTableLog(DispatchTable &tbl)
   tbl.glProgramNamedParameter4fNV = log_glProgramNamedParameter4fNV;
   tbl.glProgramNamedParameter4fvNV = log_glProgramNamedParameter4fvNV;
 
+  // GL_NV_framebuffer_blit
+
+  tbl.glBlitFramebufferNV = log_glBlitFramebufferNV;
+
   // GL_NV_framebuffer_multisample_coverage
 
   tbl.glRenderbufferStorageMultisampleCoverageNV = log_glRenderbufferStorageMultisampleCoverageNV;
@@ -29805,9 +30261,55 @@ void InitDispatchTableLog(DispatchTable &tbl)
   tbl.glEndTilingQCOM = log_glEndTilingQCOM;
   tbl.glStartTilingQCOM = log_glStartTilingQCOM;
 
+  // GL_REGAL_ES1_0_compatibility
+
+  tbl.glAlphaFuncx = log_glAlphaFuncx;
+  tbl.glClearColorx = log_glClearColorx;
+  tbl.glClearDepthx = log_glClearDepthx;
+  tbl.glColor4x = log_glColor4x;
+  tbl.glDepthRangex = log_glDepthRangex;
+  tbl.glFogx = log_glFogx;
+  tbl.glFogxv = log_glFogxv;
+  tbl.glFrustumf = log_glFrustumf;
+  tbl.glFrustumx = log_glFrustumx;
+  tbl.glLightModelx = log_glLightModelx;
+  tbl.glLightModelxv = log_glLightModelxv;
+  tbl.glLightx = log_glLightx;
+  tbl.glLightxv = log_glLightxv;
+  tbl.glLineWidthx = log_glLineWidthx;
+  tbl.glLoadMatrixx = log_glLoadMatrixx;
+  tbl.glMaterialx = log_glMaterialx;
+  tbl.glMaterialxv = log_glMaterialxv;
+  tbl.glMultMatrixx = log_glMultMatrixx;
+  tbl.glMultiTexCoord4x = log_glMultiTexCoord4x;
+  tbl.glNormal3x = log_glNormal3x;
+  tbl.glOrthof = log_glOrthof;
+  tbl.glOrthox = log_glOrthox;
+  tbl.glPointSizex = log_glPointSizex;
+  tbl.glPolygonOffsetx = log_glPolygonOffsetx;
+  tbl.glRotatex = log_glRotatex;
+  tbl.glSampleCoveragex = log_glSampleCoveragex;
+  tbl.glScalex = log_glScalex;
+  tbl.glTexEnvx = log_glTexEnvx;
+  tbl.glTexEnvxv = log_glTexEnvxv;
+  tbl.glTexParameterx = log_glTexParameterx;
+  tbl.glTranslatex = log_glTranslatex;
+
   // GL_REGAL_ES1_1_compatibility
 
+  tbl.glClipPlanef = log_glClipPlanef;
+  tbl.glClipPlanex = log_glClipPlanex;
+  tbl.glGetClipPlanef = log_glGetClipPlanef;
+  tbl.glGetClipPlanex = log_glGetClipPlanex;
+  tbl.glGetFixedv = log_glGetFixedv;
+  tbl.glGetLightxv = log_glGetLightxv;
+  tbl.glGetMaterialxv = log_glGetMaterialxv;
+  tbl.glGetTexEnvxv = log_glGetTexEnvxv;
+  tbl.glGetTexParameterxv = log_glGetTexParameterxv;
+  tbl.glPointParameterx = log_glPointParameterx;
+  tbl.glPointParameterxv = log_glPointParameterxv;
   tbl.glPointSizePointerOES = log_glPointSizePointerOES;
+  tbl.glTexParameterxv = log_glTexParameterxv;
 
   // GL_REGAL_log
 

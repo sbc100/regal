@@ -316,10 +316,12 @@ template <> inline GLfloat RFFToFloatN( int i, const int * p ) { return GLfloat(
 struct Iff
 {
   Iff()
+  : progcount(0)
   {
   }
 
   Iff(const Iff &other)
+  : progcount(0)
   {
     UNUSED_PARAMETER(other);
   }
@@ -336,6 +338,11 @@ struct Iff
   ~Iff()
   {
   }
+
+  void Cleanup();
+
+  // Info
+  int progcount;
 
   // Vertex arrays
   GLuint catIndex;
@@ -810,10 +817,25 @@ struct Iff
     if (immCurrent>0) {  // Do nothing for empty buffer
       DispatchTable &tbl = ctx->dispatcher.emulation;
       tbl.glBufferData( GL_ARRAY_BUFFER, immCurrent * sizeof( Attributes ), immArray, GL_DYNAMIC_DRAW );
-      if( ( ctx->info->core == true || ctx->info->gles ) && immPrim == GL_QUADS ) {
-        tbl.glDrawElements( GL_TRIANGLES, immCurrent * 3 / 2, GL_UNSIGNED_SHORT, 0 );
+      if( ( ctx->info->core == true || ctx->info->es2 ) && immPrim == GL_QUADS ) {
+        tbl.glDrawElements( GL_TRIANGLES, ( immCurrent / 4 ) * 6, GL_UNSIGNED_SHORT, 0 );
       } else {
-        tbl.glDrawArrays( immPrim, 0, immCurrent );
+        GLenum derivedPrim = immPrim;
+        GLsizei derivedCount = immCurrent;
+        if( ( ctx->info->core == true || ctx->info->es2 ) ) {
+          switch( immPrim ) {
+            case GL_POLYGON:
+              derivedPrim = GL_TRIANGLE_FAN;
+              break;
+            case GL_QUAD_STRIP:
+              derivedPrim = GL_TRIANGLE_STRIP;
+              derivedCount = derivedCount & ~GLsizei(1);
+              break;
+            default:
+              break;
+          }
+        }
+        tbl.glDrawArrays( derivedPrim, 0, derivedCount );
       }
     }
   }
@@ -865,16 +887,16 @@ struct Iff
     }
   }
 
-  template <int N, typename T> void Attribute( RegalContext * ctx, GLuint idx, const bool normalize, const T * v ) {
+  template <int N, bool Norm, typename T> void Attribute( RegalContext * ctx, GLuint idx, const T * v ) {
     if( idx >= maxVertexAttribs ) {
       // FIXME: set an error
       return;
     }
     Float4 & a = immVab.attr[ idx ];
-    a.x = ToFloat( normalize, v[0] );
-    a.y = N > 1 ? ToFloat( normalize, v[1] ) : 0.0f;
-    a.z = N > 2 ? ToFloat( normalize, v[2] ) : 0.0f;
-    a.w = N > 3 ? ToFloat( normalize, v[3] ) : 1.0f;
+    a.x = ToFloat<Norm>( v[0] );
+    a.y = N > 1 ? ToFloat<Norm>( v[1] ) : 0.0f;
+    a.z = N > 2 ? ToFloat<Norm>( v[2] ) : 0.0f;
+    a.w = N > 3 ? ToFloat<Norm>( v[3] ) : 1.0f;
     ffstate.uniform.vabVer = ver.Update();
     if( idx == immProvoking ) {
       Provoke( ctx );
@@ -884,19 +906,19 @@ struct Iff
 
   template <int N, typename T> void Attr( RegalContext *ctx, GLuint idx, T x, T y = 0, T z = 0, T w = 1 ) {
     T v[4] = { x, y, z, w };
-    Attribute<N>( ctx, idx, false, v );
+    Attribute<N,false>( ctx, idx,v );
   }
 
   template <int N, typename T> void AttrN( RegalContext *ctx, GLuint idx, T x, T y = 0, T z = 0, T w = 1 ) {
     T v[4] = { x, y, z, w };
-    Attribute<N>( ctx, idx, true, v );
+    Attribute<N,true>( ctx, idx, v );
   }
   template <int N, typename T> void Attr( RegalContext *ctx, GLuint idx, const T * v ) {
-    Attribute<N>( ctx, idx, false, v );
+    Attribute<N,false>( ctx, idx, v );
   }
 
   template <int N, typename T> void AttrN( RegalContext *ctx, GLuint idx, const T * v ) {
-    Attribute<N>( ctx, idx, true, v );
+    Attribute<N,true>( ctx, idx, v );
   }
 
   GLuint AttrIndex( RegalFixedFunctionAttrib attr, int cat = -1 ) const {
@@ -1504,7 +1526,8 @@ struct Iff
    // Iff::Program
 
     Program()
-    : uniforms(),
+    : pg(0),
+      uniforms(),
       store()
     {
       // Clear plain-old-data (POD) memory
@@ -1512,7 +1535,8 @@ struct Iff
     }
 
     Program(const Program &other)
-    : uniforms(other.uniforms),
+    : pg(0),
+      uniforms(other.uniforms),
       store(other.store)
     {
       // Copy plain-old-data (POD) memory
@@ -1544,9 +1568,9 @@ struct Iff
     State::Store store;
 
     void Init( RegalContext * ctx, const State::Store & sstore, const GLchar *vsSrc, const GLchar *fsSrc );
-    void Init( RegalContext * ctx, const State::Store & sstore );
     void Shader( RegalContext * ctx, DispatchTable & tbl, GLenum type, GLuint & shader, const GLchar *src );
     void Attribs( RegalContext * ctx );
+    void UserShaderModeAttribs( RegalContext * ctx );
     void Samplers( RegalContext * ctx, DispatchTable & tbl );
     void Uniforms( RegalContext * ctx, DispatchTable & tbl );
   };
@@ -1583,7 +1607,7 @@ struct Iff
   GLuint currVao;
   std::map<GLuint, GLuint> vaoAttrMap;
 
-  bool gles;
+  bool gles;   // what about ES1?
   bool legacy; // 2.x mac
 
   void InitFixedFunction( RegalContext * ctx );
@@ -2085,6 +2109,7 @@ struct Iff
   void MatrixPop( GLenum mode ) {
     SetCurrentMatrixStack( mode );
     currMatrixStack->Pop();
+    UpdateMatrixVer();
   }
 
   void UpdateMatrixVer() {
@@ -2168,6 +2193,61 @@ struct Iff
   template <typename T> void Ortho( T left, T right, T bottom, T top, T zNear, T zFar ) { MatrixOrtho( shadowMatrixMode, left, right, bottom, top, zNear, zFar ); }
 
 
+  // cache viewport
+  struct Viewport {
+    Viewport() : zn( 0.0f ), zf( 1.0f ) {}
+    GLint x, y;
+    GLsizei w, h;
+    GLfloat zn, zf;
+  };
+  Viewport viewport;
+
+  void Viewport( GLint x, GLint y, GLsizei w, GLsizei h ) {
+    viewport.x = x;
+    viewport.y = y;
+    viewport.w = w;
+    viewport.h = h;
+  }
+
+  void DepthRange( GLfloat znear, GLfloat zfar ) {
+    viewport.zn = znear;
+    viewport.zf = zfar;
+  }
+
+  template <typename T> void RasterPosition( RegalContext * ctx, T x, T y, T z = 0 ) {
+    const GLdouble xd = ToDouble<true>(x);
+    const GLdouble yd = ToDouble<true>(y);
+    const GLdouble zd = ToDouble<true>(z);
+    RasterPos( ctx, xd, yd, zd );
+  }
+
+  template <typename T> void WindowPosition( RegalContext * ctx, T x, T y, T z = 0 ) {
+    const GLdouble xd = ToDouble<true>(x);
+    const GLdouble yd = ToDouble<true>(y);
+    const GLdouble zd = ToDouble<true>(z);
+    WindowPos( ctx, xd, yd, zd );
+  }
+
+  void RasterPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z ) {
+    r3::Vec3f pos( x, y, z );
+    r3::Vec3f s( 0.5f * GLfloat(viewport.w), 0.5f * GLfloat(viewport.h), 0.5f * GLfloat( viewport.zf - viewport.zn ) );
+    r3::Vec3f b( GLfloat(viewport.x), GLfloat(viewport.y), 0.5f + GLfloat(viewport.zn) );
+    r3::Matrix4f sb;
+    sb.SetScale( s );
+    sb.SetTranslate( s + b );
+    r3::Matrix4f m = sb * projection.Top() * modelview.Top();
+    m.MultMatrixVec( pos );
+    WindowPos( ctx, pos.x, pos.y, pos.z );
+  }
+
+  void WindowPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z ) {
+    if( ctx->isCore() || ctx->isCompat() ) {
+      // todo - cache rasterpos and implement glDrawPixels and glBitmap
+      return;
+    }
+    ctx->dispatcher.emulation.glWindowPos3d( x, y, z );
+  }
+
   void BindVertexArray( RegalContext * ctx, GLuint vao ) {
     UNUSED_PARAMETER(ctx);
     vaoAttrMap[ currVao ] = ffstate.raw.attrArrayFlags;
@@ -2192,7 +2272,7 @@ struct Iff
   void UseFixedFunctionProgram( RegalContext * ctx );
   void UseShaderProgram( RegalContext * ctx );
 
-  void ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+  void ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar * const * string, const GLint *length);
   void LinkProgram( RegalContext *ctx, GLuint program );
 
   GLuint CreateShader( RegalContext *ctx, GLenum shaderType ) {

@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -47,6 +47,7 @@ REGAL_GLOBAL_BEGIN
 
 #include "RegalThread.h"
 #include "RegalPrivate.h"
+#include "RegalContextInfo.h"
 #include "RegalDispatcher.h"
 #include "RegalDispatchError.h"
 #include "RegalSharedList.h"
@@ -62,19 +63,22 @@ REGAL_GLOBAL_END
 REGAL_NAMESPACE_BEGIN
 
 struct DebugInfo;
-struct ContextInfo;
 
 struct Marker;
 struct Frame;
 #if REGAL_EMULATION
-struct RegalObj;
-struct RegalPpa;
-struct RegalBin;
-struct RegalDsa;
+namespace Emu { struct Obj; };
+namespace Emu { struct Ppa; };
+namespace Emu { struct Ppca; };
+namespace Emu { struct Bin; };
+namespace Emu { struct TexSto; };
+namespace Emu { struct Xfer; };
+namespace Emu { struct Dsa; };
 namespace Emu { struct Iff; };
 namespace Emu { struct So; };
-struct RegalVao;
+namespace Emu { struct Vao; };
 namespace Emu { struct TexC; };
+namespace Emu { struct Filt; };
 #endif
 
 struct RegalContext
@@ -83,6 +87,13 @@ struct RegalContext
   ~RegalContext();
 
   void Init();
+
+  // If profile is forced at build-time, no need to check runtime flag
+
+  inline bool isES1()    const { RegalAssert(info); return REGAL_SYS_ES1 && ( REGAL_FORCE_ES1_PROFILE  || info->es1  ); }
+  inline bool isES2()    const { RegalAssert(info); return REGAL_SYS_ES2 && ( REGAL_FORCE_ES2_PROFILE  || info->es2  ); }
+  inline bool isCore()   const { RegalAssert(info); return REGAL_SYS_GL  && ( REGAL_FORCE_CORE_PROFILE || info->core ); }
+  inline bool isCompat() const { RegalAssert(info); return REGAL_SYS_GL  &&                               info->compat; }
 
   bool                initialized;
   Dispatcher          dispatcher;
@@ -99,14 +110,18 @@ struct RegalContext
 #if REGAL_EMULATION
   // Fixed function emulation
   int emuLevel;
-  RegalObj           *obj;
-  RegalPpa           *ppa;
-  RegalBin           *bin;
-  RegalDsa           *dsa;
+  Emu::Obj           *obj;
+  Emu::Ppa           *ppa;
+  Emu::Ppca          *ppca;
+  Emu::Bin           *bin;
+  Emu::TexSto        *texsto;
+  Emu::Xfer          *xfer;
+  Emu::Dsa           *dsa;
   Emu::Iff           *iff;
   Emu::So            *so;
-  RegalVao           *vao;
+  Emu::Vao           *vao;
   Emu::TexC          *texc;
+  Emu::Filt          *filt;
 #endif
 
   #if REGAL_SYS_PPAPI
@@ -116,6 +131,14 @@ struct RegalContext
 
   RegalSystemContext  sysCtx;
   Thread::Thread      thread;
+
+  #if REGAL_SYS_X11
+  Display            *x11Display;
+  #endif
+
+  #if REGAL_SYS_GLX
+  GLXDrawable         x11Drawable;
+  #endif
 
   GLLOGPROCREGAL      logCallback;
 
@@ -135,15 +158,23 @@ struct RegalContext
 
   RegalContext *groupInitializedContext();
 
+  // For RegalDispatchCode
+
+#if REGAL_CODE
+  FILE               *codeSource;
+  FILE               *codeHeader;
+  size_t              codeInputNext;
+  size_t              codeOutputNext;
+  size_t              codeShaderNext;  // glCreateShader/glCreateShaderObjectARB
+  size_t              codeProgramNext; // glCreateProgram/glCreateProgramObjectARB
+#endif
+
   // State tracked via EmuContextState.py / Regal.cpp
 
   size_t              depthBeginEnd;   // Normally zero or one
+  size_t              depthPushMatrix; //
   size_t              depthPushAttrib; //
-
-  // For RegalDispatchCode
-
-  size_t              codeInputNext;
-  size_t              codeOutputNext;
+  size_t              depthNewList;    //
 };
 
 REGAL_NAMESPACE_END

@@ -50,15 +50,15 @@ soFormulae = {
     'GenTextures' : {
         'entries' : [ 'glGenTextures' ],
         'impl' : [
-          'RegalAssert(_context);', 
+          'RegalAssert(_context);',
           '_context->so->GenTextures( *_context, ${arg0plus} );'
         ],
     },
     'DeleteTextures' : {
         'entries' : [ 'glDeleteTextures' ],
-        'prefix' : [ 
+        'prefix' : [
           'RegalAssert(_context);',
-          '_context->so->DeleteTextures( *_context, ${arg0plus} );' 
+          '_context->so->DeleteTextures( *_context, ${arg0plus} );'
         ],
     },
     'BindTexture' : {
@@ -90,9 +90,9 @@ soFormulae = {
     },
     'PreDraw' : {
         'entries' : [ 'gl(Multi|)Draw(Range|)(Arrays|Element|Elements)(Instanced|Indirect|BaseVertex|InstancedBaseVertex|Array|)(ARB|EXT|AMD|ATI|APPLE|)' ],
-        'prefix' : [ 
+        'prefix' : [
           'RegalAssert(_context);',
-          '_context->so->PreDraw( *_context );', 
+          '_context->so->PreDraw( *_context );',
         ],
     },
 }

@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -60,7 +60,12 @@ namespace Token {
   const char * GLbooleanToString     (GLboolean  v);
   const char * internalFormatToString(GLint      v);
 
-  std::string  GLclearToString       (GLbitfield v);
+  std::string  GLtextureToString     (GLenum     v); // GL_TEXTUREi or 0xaaaa
+
+  // Bitfield strings
+
+  std::string GLclearToString       (GLbitfield v);
+  std::string GLbufferAccessToString(GLbitfield v);
 
   std::string GLTexParameterToString(GLenum pname, const GLfloat  param );
   std::string GLTexParameterToString(GLenum pname, const GLint    param );

@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -41,7 +41,7 @@
 #ifndef __REGAL_SYSTEM_H__
 #define __REGAL_SYSTEM_H__
 
-#if _WIN32
+#if defined(_WIN32)
 # if defined(PPAPI)
 #  ifndef REGAL_SYS_PPAPI
 #   define REGAL_SYS_PPAPI 1
@@ -51,7 +51,7 @@
 #   define REGAL_SYS_WGL 1
 #  endif
 # endif
-#elif __APPLE__
+#elif defined(__APPLE__)
 # include <TargetConditionals.h>
 # if TARGET_OS_IPHONE
 #  ifndef REGAL_SYS_IOS
@@ -73,9 +73,12 @@
 # ifndef REGAL_SYS_EGL
 #  define REGAL_SYS_EGL 1
 # endif
-#elif !defined(_WIN32) && !defined(__APPLE__) && !REGAL_SYS_PPAPI
+#elif !REGAL_SYS_PPAPI
+# ifndef REGAL_SYS_X11
+#  define REGAL_SYS_X11 1
+# endif
 # ifndef REGAL_SYS_GLX
-#  define REGAL_SYS_GLX 1
+#  define REGAL_SYS_GLX REGAL_SYS_X11
 # endif
 #endif
 
@@ -105,6 +108,22 @@
 
 #ifndef REGAL_SYS_GLX
 # define REGAL_SYS_GLX 0
+#endif
+
+#ifndef REGAL_SYS_X11
+# define REGAL_SYS_X11 0
+#endif
+
+#ifndef REGAL_SYS_ES1
+#define REGAL_SYS_ES1 0
+#endif
+
+#ifndef REGAL_SYS_ES2
+#define REGAL_SYS_ES2 (REGAL_SYS_PPAPI || REGAL_SYS_IOS || REGAL_SYS_ANDROID || REGAL_SYS_EGL)
+#endif
+
+#ifndef REGAL_SYS_GL
+#define REGAL_SYS_GL (REGAL_SYS_WGL || (!REGAL_SYS_PPAPI && !REGAL_SYS_IOS && !REGAL_SYS_ANDROID))
 #endif
 
 #endif // __REGAL_SYSTEM_H__

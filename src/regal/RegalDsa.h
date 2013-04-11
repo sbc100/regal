@@ -52,12 +52,15 @@ REGAL_NAMESPACE_BEGIN
 #define REGAL_DSA_NUM_BUFFER_TYPES 2
 #define REGAL_DSA_INVALID 0xffffffff
 
+namespace Emu {
+
 template<typename T> inline void DsaGetv( DispatchTable & tbl, GLenum pname, T * params ) { UNUSED_PARAMETER(tbl); UNUSED_PARAMETER(pname); UNUSED_PARAMETER(params);}
 template<> inline void DsaGetv( DispatchTable & tbl, GLenum pname, GLfloat * params ) { tbl.glGetFloatv( pname, params ); }
 template<> inline void DsaGetv( DispatchTable & tbl, GLenum pname, GLdouble * params ) { tbl.glGetDoublev( pname, params ); }
 
 
-struct RegalDsa : public RegalEmu {
+struct Dsa : public RegalEmu
+{
     int callDepth;
     struct Cache {
         GLenum matrixMode;
@@ -71,6 +74,8 @@ struct RegalDsa : public RegalEmu {
         GLuint glslProgram;
         GLuint framebuffer;
         GLuint framebufferTarget;
+        GLuint renderbuffer;
+        GLuint renderbufferTarget;
     };
     Cache drv;
     Cache dsa;
@@ -93,6 +98,8 @@ struct RegalDsa : public RegalEmu {
         drv.glslProgram = 0;
         drv.framebuffer = 0;
         drv.framebufferTarget = 0;
+        drv.renderbuffer = 0;
+        drv.renderbufferTarget = 0;
 
         dsa.matrixMode = REGAL_DSA_INVALID;
         dsa.activeTexture = REGAL_DSA_INVALID;
@@ -107,6 +114,8 @@ struct RegalDsa : public RegalEmu {
         dsa.glslProgram = REGAL_DSA_INVALID;
         dsa.framebuffer = REGAL_DSA_INVALID;
         dsa.framebufferTarget = REGAL_DSA_INVALID;
+        dsa.renderbuffer = REGAL_DSA_INVALID;
+        dsa.renderbufferTarget = REGAL_DSA_INVALID;
     }
 
     void Restore( RegalContext * ctx ) {
@@ -219,6 +228,12 @@ struct RegalDsa : public RegalEmu {
             dsa.glslProgram = REGAL_DSA_INVALID;
         }
     }
+    void DeleteGlslProgram( RegalContext * ctx, GLuint program ) {
+        if( drv.glslProgram == program ) {
+            drv.glslProgram = 0;
+        }
+        RestoreGlslProgram( ctx );
+    }
 
     ////////////////////////////////////////////////////////////////////////
     bool NotFramebuffer( GLenum target, GLuint framebuffer ) const {
@@ -246,7 +261,60 @@ struct RegalDsa : public RegalEmu {
             dsa.framebuffer = REGAL_DSA_INVALID;
         }
     }
+    void DeleteFramebuffers( RegalContext * ctx, GLsizei n, const GLuint * framebuffers ) {
+        for( GLsizei i = 0; i < n; i++ ) {
+            if( drv.framebuffer == framebuffers[i] ) {
+                drv.framebuffer = 0;
+            }
+        }
+        RestoreFramebuffer( ctx );
+    }
+    ////////////////////////////////////////////////////////////////////////
+    bool NotRenderbuffer( GLenum target, GLuint renderbuffer ) const {
+        return dsa.renderbuffer != REGAL_DSA_INVALID ?
+        ( ( target != dsa.renderbufferTarget ) || ( renderbuffer != dsa.renderbuffer ) ) :
+        ( ( target != drv.renderbufferTarget ) || ( renderbuffer != drv.renderbuffer ) ) ;
 
+    }
+    bool ShadowRenderbuffer( GLenum realRenderbufferTarget, GLuint realRenderbuffer ) {
+        drv.renderbufferTarget = realRenderbufferTarget;
+        drv.renderbuffer = realRenderbuffer;
+        return dsa.renderbuffer != REGAL_DSA_INVALID;
+    }
+    void DsaRenderbuffer( RegalContext * ctx, GLenum target, GLuint renderbuffer ) {
+        if( NotRenderbuffer( target, renderbuffer ) ) {
+            dsa.renderbufferTarget = target;
+            dsa.renderbuffer = renderbuffer;
+            ctx->dispatcher.emulation.glBindRenderbuffer( dsa.renderbufferTarget, dsa.renderbuffer );
+        }
+    }
+    void RestoreRenderbuffer( RegalContext * ctx ) {
+        if( dsa.renderbuffer != REGAL_DSA_INVALID ) {
+            ctx->dispatcher.emulation.glBindRenderbuffer( drv.renderbufferTarget, drv.renderbuffer );
+            dsa.renderbufferTarget = REGAL_DSA_INVALID;
+            dsa.renderbuffer = REGAL_DSA_INVALID;
+        }
+    }
+    void DeleteRenderbuffers( RegalContext * ctx, GLsizei n, const GLuint *renderbuffers ) {
+        for( int i  = 0; i < n; i++ ) {
+            if( renderbuffers[i] == drv.renderbuffer ) {
+                drv.renderbuffer = 0;
+            }
+        }
+        RestoreRenderbuffer( ctx );
+    }
+
+#define REGAL_DSA_NUM_ASM_TARGET_INDEXES 5
+    static GLenum IndexToAsmTarget( int i ) {
+        const GLenum array[] = {
+            GL_VERTEX_PROGRAM_ARB,
+            GL_FRAGMENT_PROGRAM_ARB,
+            GL_GEOMETRY_PROGRAM_NV,
+            GL_TESS_CONTROL_PROGRAM_NV,
+            GL_TESS_EVALUATION_PROGRAM_NV
+        };
+        return array[i];
+    }
     static int AsmTargetIndex( GLenum target ) {
         switch (target) {
             case GL_VERTEX_PROGRAM_ARB: return 0;
@@ -285,6 +353,17 @@ struct RegalDsa : public RegalEmu {
             dsa.asmProgram[idx] = REGAL_DSA_INVALID;
         }
     }
+    void DeleteAsmPrograms( RegalContext * ctx, GLsizei n, const GLuint *progs ) {
+        for( GLsizei i  = 0; i < n; i++ ) {
+            for( int j = 0; j < REGAL_DSA_NUM_ASM_TARGET_INDEXES; j++ ) {
+                if( progs[i] == drv.asmProgram[ j ] ) {
+                    drv.asmProgram[ j ] = 0;
+                    RestoreAsmProgram( ctx, IndexToAsmTarget( j ) );
+                }
+            }
+        }
+    }
+  
 
     ////////////////////////////////////////////////////////////////////////
     bool NotVao( GLuint vao ) const {
@@ -305,6 +384,14 @@ struct RegalDsa : public RegalEmu {
             ctx->dispatcher.emulation.glBindVertexArray( drv.vao );
             dsa.vao = REGAL_DSA_INVALID;
         }
+    }
+    void DeleteVaos( RegalContext * ctx, GLsizei n, const GLuint * arrays ) {
+        for( GLsizei i = 0; i < n; i++ ) {
+            if( drv.vao == arrays[i] ) {
+                drv.vao = 0;
+            }
+        }
+        RestoreVao( ctx );
     }
 
 
@@ -332,6 +419,14 @@ struct RegalDsa : public RegalEmu {
             dsa.buffer = REGAL_DSA_INVALID;
         }
     }
+    void DeleteBuffers( RegalContext * ctx, GLsizei n, const GLuint * buffers ) {
+        for( GLsizei i = 0; i < n; i++ ) {
+            if( drv.buffer == buffers[i] ) {
+                drv.buffer = 0;
+            }
+        }
+        RestoreBuffer( ctx );
+    }
 
     ////////////////////////////////////////////////////////////////////////
     bool NotTexture( GLenum target, GLuint texture ) const {
@@ -355,6 +450,17 @@ struct RegalDsa : public RegalEmu {
         }
     }
     void DsaTexture( RegalContext * ctx, GLenum target, GLuint texture ) {
+        switch( target ) {
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+            case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+                target = GL_TEXTURE_CUBE_MAP;
+            default:
+                break;
+        }
         if( NotTexture( target, texture ) ) {
             dsa.textureTarget = target;
             dsa.texture = texture;
@@ -370,69 +476,89 @@ struct RegalDsa : public RegalEmu {
             dsa.texture = REGAL_DSA_INVALID;
         }
     }
-
-
-    void ClientAttribDefault( RegalContext * ctx, GLbitfield mask ) {
-        DispatchTable &tbl = ctx->dispatcher.emulation;
-        if( mask & GL_CLIENT_PIXEL_STORE_BIT ) {
-            tbl.glPixelStorei( GL_UNPACK_SWAP_BYTES, 0 );
-            tbl.glPixelStorei( GL_UNPACK_LSB_FIRST, 0 );
-            tbl.glPixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
-            tbl.glPixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
-            tbl.glPixelStorei( GL_UNPACK_SKIP_PIXELS, 0 );
-            tbl.glPixelStorei( GL_UNPACK_ALIGNMENT, 4 );
-            tbl.glPixelStorei( GL_UNPACK_IMAGE_HEIGHT, 0 );
-            tbl.glPixelStorei( GL_UNPACK_SKIP_IMAGES, 0 );
-            tbl.glPixelStorei( GL_PACK_SWAP_BYTES, 0 );
-            tbl.glPixelStorei( GL_PACK_LSB_FIRST, 0 );
-            tbl.glPixelStorei( GL_PACK_IMAGE_HEIGHT, 0 );
-            tbl.glPixelStorei( GL_PACK_SKIP_IMAGES, 0 );
-            tbl.glPixelStorei( GL_PACK_ROW_LENGTH, 0 );
-            tbl.glPixelStorei( GL_PACK_SKIP_ROWS, 0 );
-            tbl.glPixelStorei( GL_PACK_SKIP_PIXELS, 0 );
-            tbl.glPixelStorei( GL_PACK_ALIGNMENT, 4 );
-            tbl.glPixelStorei( GL_PIXEL_PACK_BUFFER_BINDING, 0 );
-            tbl.glPixelStorei( GL_PIXEL_UNPACK_BUFFER_BINDING, 0 );
-            tbl.glPixelStorei( GL_MAP_COLOR, 0 );
-            tbl.glPixelStorei( GL_MAP_STENCIL, 0 );
-            tbl.glPixelStorei( GL_INDEX_SHIFT, 0 );
-            tbl.glPixelStorei( GL_INDEX_OFFSET, 0 );
-            tbl.glPixelStoref( GL_RED_SCALE, 1.0f );
-            tbl.glPixelStoref( GL_GREEN_SCALE, 1.0f );
-            tbl.glPixelStoref( GL_BLUE_SCALE, 1.0f );
-            tbl.glPixelStoref( GL_ALPHA_SCALE, 1.0f );
-            tbl.glPixelStoref( GL_DEPTH_SCALE, 1.0f );
-            tbl.glPixelStoref( GL_RED_BIAS, 0.0f );
-            tbl.glPixelStoref( GL_GREEN_BIAS, 0.0f );
-            tbl.glPixelStoref( GL_BLUE_BIAS, 0.0f );
-            tbl.glPixelStoref( GL_ALPHA_BIAS, 0.0f );
-            tbl.glPixelStoref( GL_DEPTH_BIAS, 0.0f );
+    void DeleteTextures( RegalContext * ctx, GLsizei n, const GLuint *textures ) {
+        for( int i  = 0; i < n; i++ ) {
+            if( textures[i] == drv.texture ) {
+                drv.texture = 0;
+            }
         }
-        if( mask & GL_CLIENT_VERTEX_ARRAY_BIT ) {
+        RestoreTexture( ctx );
+        RestoreActiveTexture( ctx );
+    }
+
+    void ClientAttribDefault( RegalContext * ctx, GLbitfield mask )
+    {
+        DispatchTable &tbl = ctx->dispatcher.emulation;
+
+        if (mask&GL_CLIENT_PIXEL_STORE_BIT)
+        {
+            PFNGLPIXELSTOREIPROC pixelStorei = tbl.call(&tbl.glPixelStorei);
+            PFNGLPIXELSTOREFPROC pixelStoref = tbl.call(&tbl.glPixelStoref);
+
+            RegalAssert(pixelStorei);
+            RegalAssert(pixelStoref);
+
+            pixelStorei( GL_UNPACK_SWAP_BYTES, 0 );
+            pixelStorei( GL_UNPACK_LSB_FIRST, 0 );
+            pixelStorei( GL_UNPACK_ROW_LENGTH, 0 );
+            pixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
+            pixelStorei( GL_UNPACK_SKIP_PIXELS, 0 );
+            pixelStorei( GL_UNPACK_ALIGNMENT, 4 );
+            pixelStorei( GL_UNPACK_IMAGE_HEIGHT, 0 );
+            pixelStorei( GL_UNPACK_SKIP_IMAGES, 0 );
+            pixelStorei( GL_PACK_SWAP_BYTES, 0 );
+            pixelStorei( GL_PACK_LSB_FIRST, 0 );
+            pixelStorei( GL_PACK_IMAGE_HEIGHT, 0 );
+            pixelStorei( GL_PACK_SKIP_IMAGES, 0 );
+            pixelStorei( GL_PACK_ROW_LENGTH, 0 );
+            pixelStorei( GL_PACK_SKIP_ROWS, 0 );
+            pixelStorei( GL_PACK_SKIP_PIXELS, 0 );
+            pixelStorei( GL_PACK_ALIGNMENT, 4 );
+            pixelStorei( GL_PIXEL_PACK_BUFFER_BINDING, 0 );
+            pixelStorei( GL_PIXEL_UNPACK_BUFFER_BINDING, 0 );
+            pixelStorei( GL_MAP_COLOR, 0 );
+            pixelStorei( GL_MAP_STENCIL, 0 );
+            pixelStorei( GL_INDEX_SHIFT, 0 );
+            pixelStorei( GL_INDEX_OFFSET, 0 );
+
+            pixelStoref( GL_RED_SCALE, 1.0f );
+            pixelStoref( GL_GREEN_SCALE, 1.0f );
+            pixelStoref( GL_BLUE_SCALE, 1.0f );
+            pixelStoref( GL_ALPHA_SCALE, 1.0f );
+            pixelStoref( GL_DEPTH_SCALE, 1.0f );
+            pixelStoref( GL_RED_BIAS, 0.0f );
+            pixelStoref( GL_GREEN_BIAS, 0.0f );
+            pixelStoref( GL_BLUE_BIAS, 0.0f );
+            pixelStoref( GL_ALPHA_BIAS, 0.0f );
+            pixelStoref( GL_DEPTH_BIAS, 0.0f );
+        }
+
+        if (mask&GL_CLIENT_VERTEX_ARRAY_BIT)
+        {
             // FIXME: need number of texture units
             int maxTextureUnit = 7;
             for( int i = maxTextureUnit; i >= 0; i-- ) {
-                tbl.glClientActiveTexture( GL_TEXTURE0 + i );
-                tbl.glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+                tbl.call(&tbl.glClientActiveTexture)( GL_TEXTURE0 + i );
+                tbl.call(&tbl.glDisableClientState) ( GL_TEXTURE_COORD_ARRAY );
 
             }
             for( int i = 0; i < 16; i++ ) {
-                tbl.glDisableVertexAttribArray( i );
-                tbl.glVertexAttribPointer( i, 4, GL_FLOAT, GL_FALSE, 0, NULL );
+                tbl.call(&tbl.glDisableVertexAttribArray)( i );
+                tbl.call(&tbl.glVertexAttribPointer)     ( i, 4, GL_FLOAT, GL_FALSE, 0, NULL );
             }
-            tbl.glDisableClientState( GL_VERTEX_ARRAY );
-            tbl.glDisableClientState( GL_NORMAL_ARRAY );
-            tbl.glDisableClientState( GL_FOG_COORD_ARRAY );
-            tbl.glDisableClientState( GL_COLOR_ARRAY );
-            tbl.glDisableClientState( GL_SECONDARY_COLOR_ARRAY );
-            tbl.glDisableClientState( GL_INDEX_ARRAY );
-            tbl.glDisableClientState( GL_EDGE_FLAG_ARRAY );
-            tbl.glVertexPointer( 4, GL_FLOAT, 0, NULL );
-            tbl.glNormalPointer( GL_FLOAT, 0, NULL );
-            tbl.glFogCoordPointer( GL_FLOAT, 0, NULL );
-            tbl.glColorPointer( 4, GL_FLOAT, 0, NULL );
-            tbl.glSecondaryColorPointer( 3, GL_FLOAT, 0, NULL );
-            tbl.glIndexPointer( GL_FLOAT, 0, NULL );
+            tbl.call(&tbl.glDisableClientState)   ( GL_VERTEX_ARRAY );
+            tbl.call(&tbl.glDisableClientState)   ( GL_NORMAL_ARRAY );
+            tbl.call(&tbl.glDisableClientState)   ( GL_FOG_COORD_ARRAY );
+            tbl.call(&tbl.glDisableClientState)   ( GL_COLOR_ARRAY );
+            tbl.call(&tbl.glDisableClientState)   ( GL_SECONDARY_COLOR_ARRAY );
+            tbl.call(&tbl.glDisableClientState)   ( GL_INDEX_ARRAY );
+            tbl.call(&tbl.glDisableClientState)   ( GL_EDGE_FLAG_ARRAY );
+            tbl.call(&tbl.glVertexPointer)        ( 4, GL_FLOAT, 0, NULL );
+            tbl.call(&tbl.glNormalPointer)        ( GL_FLOAT, 0, NULL );
+            tbl.call(&tbl.glFogCoordPointer)      ( GL_FLOAT, 0, NULL );
+            tbl.call(&tbl.glColorPointer)         ( 4, GL_FLOAT, 0, NULL );
+            tbl.call(&tbl.glSecondaryColorPointer)( 3, GL_FLOAT, 0, NULL );
+            tbl.call(&tbl.glIndexPointer)         ( GL_FLOAT, 0, NULL );
         }
     }
 
@@ -619,6 +745,8 @@ struct RegalDsa : public RegalEmu {
     }
 
 };
+
+}
 
 REGAL_NAMESPACE_END
 

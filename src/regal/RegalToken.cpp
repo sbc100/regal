@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -69,6 +69,15 @@ namespace Token {
     return 1<=v && v<=4 ? integer[v] : GLenumToString(v);
   }
 
+  std::string
+  GLtextureToString(GLenum v)
+  {
+    if (v>=GL_TEXTURE0 && v<=GL_TEXTURE31)
+      return GLenumToString(v);
+
+    return print_string("0x",hex(v));
+  }
+
   std::string GLclearToString(GLbitfield v)
   {
     const GLbitfield other = v & ~(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -78,6 +87,24 @@ namespace Token {
     if (v & GL_DEPTH_BUFFER_BIT)   { if (tmp.size()) tmp += " | "; tmp += "GL_DEPTH_BUFFER_BIT"; }
     if (v & GL_STENCIL_BUFFER_BIT) { if (tmp.size()) tmp += " | "; tmp += "GL_STENCIL_BUFFER_BIT"; }
     if (other || v==0)             { if (tmp.size()) tmp += " | "; tmp += size_t(other); }
+
+    return tmp.str();
+  }
+
+  // http://www.opengl.org/sdk/docs/man3/xhtml/glMapBufferRange.xml
+
+  std::string GLbufferAccessToString(GLbitfield v)
+  {
+    const GLbitfield other = v & ~(GL_MAP_READ_BIT | GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT | GL_MAP_FLUSH_EXPLICIT_BIT | GL_MAP_UNSYNCHRONIZED_BIT);
+
+    string_list<std::string> tmp;
+    if (v & GL_MAP_READ_BIT)              { if (tmp.size()) tmp += " | "; tmp += "GL_MAP_READ_BIT"; }
+    if (v & GL_MAP_WRITE_BIT)             { if (tmp.size()) tmp += " | "; tmp += "GL_MAP_WRITE_BIT"; }
+    if (v & GL_MAP_INVALIDATE_RANGE_BIT)  { if (tmp.size()) tmp += " | "; tmp += "GL_MAP_INVALIDATE_RANGE_BIT"; }
+    if (v & GL_MAP_INVALIDATE_BUFFER_BIT) { if (tmp.size()) tmp += " | "; tmp += "GL_MAP_INVALIDATE_BUFFER_BIT"; }
+    if (v & GL_MAP_FLUSH_EXPLICIT_BIT)    { if (tmp.size()) tmp += " | "; tmp += "GL_MAP_FLUSH_EXPLICIT_BIT"; }
+    if (v & GL_MAP_UNSYNCHRONIZED_BIT)    { if (tmp.size()) tmp += " | "; tmp += "GL_MAP_UNSYNCHRONIZED_BIT"; }
+    if (other || v==0)                    { if (tmp.size()) tmp += " | "; tmp += size_t(other); }
 
     return tmp.str();
   }
@@ -670,6 +697,8 @@ namespace Token {
       case 0x00003003: return "GL_CLIP_PLANE3";
       case 0x00003004: return "GL_CLIP_PLANE4";
       case 0x00003005: return "GL_CLIP_PLANE5";
+      case 0x00003006: return "GL_CLIP_PLANE6";
+      case 0x00003007: return "GL_CLIP_PLANE7";
       case 0x000030e0: return "GL_EGL_COVERAGE_BUFFERS_NV";
       case 0x000030e1: return "GL_EGL_COVERAGE_SAMPLES_NV";
       case 0x000030e2: return "GL_EGL_DEPTH_ENCODING_NV";
@@ -830,6 +859,14 @@ namespace Token {
       case 0x00008092: return "GL_TEXTURE_COORD_ARRAY_POINTER";
       case 0x00008093: return "GL_EDGE_FLAG_ARRAY_POINTER";
       case 0x00008094: return "GL_INTERLACE_SGIX";
+      case 0x00008095: return "GL_DETAIL_TEXTURE_2D_SGIS";
+      case 0x00008096: return "GL_DETAIL_TEXTURE_2D_BINDING_SGIS";
+      case 0x00008097: return "GL_LINEAR_DETAIL_SGIS";
+      case 0x00008098: return "GL_LINEAR_DETAIL_ALPHA_SGIS";
+      case 0x00008099: return "GL_LINEAR_DETAIL_COLOR_SGIS";
+      case 0x0000809a: return "GL_DETAIL_TEXTURE_LEVEL_SGIS";
+      case 0x0000809b: return "GL_DETAIL_TEXTURE_MODE_SGIS";
+      case 0x0000809c: return "GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS";
       case 0x0000809d: return "GL_MULTISAMPLE";
       case 0x0000809e: return "GL_SAMPLE_ALPHA_TO_COVERAGE";
       case 0x0000809f: return "GL_SAMPLE_ALPHA_TO_ONE";
@@ -892,8 +929,8 @@ namespace Token {
       case 0x000080e5: return "GL_COLOR_INDEX8_EXT";
       case 0x000080e6: return "GL_COLOR_INDEX12_EXT";
       case 0x000080e7: return "GL_COLOR_INDEX16_EXT";
-      case 0x000080e8: return "GL_MAX_ELEMENTS_VERTICES_EXT";
-      case 0x000080e9: return "GL_MAX_ELEMENTS_INDICES_EXT";
+      case 0x000080e8: return "GL_MAX_ELEMENTS_VERTICES";
+      case 0x000080e9: return "GL_MAX_ELEMENTS_INDICES";
       case 0x000080ea: return "GL_PHONG_WIN";
       case 0x000080eb: return "GL_PHONG_HINT_WIN";
       case 0x000080ec: return "GL_FOG_SPECULAR_TEXTURE_WIN";
@@ -915,6 +952,21 @@ namespace Token {
       case 0x00008152: return "GL_WRAP_BORDER";
       case 0x00008153: return "GL_REPLICATE_BORDER";
       case 0x00008154: return "GL_CONVOLUTION_BORDER_COLOR";
+      case 0x00008155: return "GL_IMAGE_SCALE_X_HP";
+      case 0x00008156: return "GL_IMAGE_SCALE_Y_HP";
+      case 0x00008157: return "GL_IMAGE_TRANSLATE_X_HP";
+      case 0x00008158: return "GL_IMAGE_TRANSLATE_Y_HP";
+      case 0x00008159: return "GL_IMAGE_ROTATE_ANGLE_HP";
+      case 0x0000815a: return "GL_IMAGE_ROTATE_ORIGIN_X_HP";
+      case 0x0000815b: return "GL_IMAGE_ROTATE_ORIGIN_Y_HP";
+      case 0x0000815c: return "GL_IMAGE_MAG_FILTER_HP";
+      case 0x0000815d: return "GL_IMAGE_MIN_FILTER_HP";
+      case 0x0000815e: return "GL_IMAGE_CUBIC_WEIGHT_HP";
+      case 0x0000815f: return "GL_CUBIC_HP";
+      case 0x00008160: return "GL_AVERAGE_HP";
+      case 0x00008161: return "GL_IMAGE_TRANSFORM_2D_HP";
+      case 0x00008162: return "GL_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP";
+      case 0x00008163: return "GL_PROXY_POST_IMAGE_TRANSFORM_COLOR_TABLE_HP";
       case 0x00008165: return "GL_OCCLUSION_TEST_HP";
       case 0x00008166: return "GL_OCCLUSION_TEST_RESULT_HP";
       case 0x00008179: return "GL_POST_TEXTURE_FILTER_BIAS_SGIX";
@@ -1026,6 +1078,12 @@ namespace Token {
       case 0x00008258: return "GL_PROGRAM_SEPARABLE";
       case 0x00008259: return "GL_ACTIVE_PROGRAM";
       case 0x0000825a: return "GL_PROGRAM_PIPELINE_BINDING";
+      case 0x0000825b: return "GL_MAX_VIEWPORTS";
+      case 0x0000825c: return "GL_VIEWPORT_SUBPIXEL_BITS";
+      case 0x0000825d: return "GL_VIEWPORT_BOUNDS_RANGE";
+      case 0x0000825e: return "GL_LAYER_PROVOKING_VERTEX";
+      case 0x0000825f: return "GL_VIEWPORT_INDEX_PROVOKING_VERTEX";
+      case 0x00008260: return "GL_UNDEFINED_VERTEX";
       case 0x00008261: return "GL_NO_RESET_NOTIFICATION_ARB";
       case 0x00008262: return "GL_MAX_COMPUTE_SHARED_MEMORY_SIZE";
       case 0x00008263: return "GL_MAX_COMPUTE_UNIFORM_COMPONENTS";
@@ -1231,6 +1289,12 @@ namespace Token {
       case 0x0000840a: return "GL_FRAGMENT_LIGHT_MODEL_AMBIENT_EXT";
       case 0x0000840b: return "GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_EXT";
       case 0x0000840c: return "GL_FRAGMENT_LIGHT0_EXT";
+      case 0x0000840d: return "GL_FRAGMENT_LIGHT1_EXT";
+      case 0x0000840e: return "GL_FRAGMENT_LIGHT2_EXT";
+      case 0x0000840f: return "GL_FRAGMENT_LIGHT3_EXT";
+      case 0x00008410: return "GL_FRAGMENT_LIGHT4_EXT";
+      case 0x00008411: return "GL_FRAGMENT_LIGHT5_EXT";
+      case 0x00008412: return "GL_FRAGMENT_LIGHT6_EXT";
       case 0x00008413: return "GL_FRAGMENT_LIGHT7_EXT";
       case 0x0000842e: return "GL_PACK_RESAMPLE_SGIX";
       case 0x0000842f: return "GL_UNPACK_RESAMPLE_SGIX";

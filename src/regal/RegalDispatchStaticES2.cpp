@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -50,6 +50,7 @@ REGAL_GLOBAL_BEGIN
 using namespace std;
 
 #include "RegalLog.h"
+#include "RegalBreak.h"
 #include "RegalPush.h"
 #include "RegalToken.h"
 #include "RegalHelper.h"
@@ -293,7 +294,7 @@ extern "C"
   extern GLboolean  REGAL_CALL glIsProgram(GLuint program);
   extern GLboolean  REGAL_CALL glIsShader(GLuint shader);
   extern void  REGAL_CALL glLinkProgram(GLuint program);
-  extern void  REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar **string, const GLint *length);
+  extern void  REGAL_CALL glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, const GLint *length);
   extern void  REGAL_CALL glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
   extern void  REGAL_CALL glStencilMaskSeparate(GLenum face, GLuint mask);
   extern void  REGAL_CALL glStencilOpSeparate(GLenum face, GLenum fail, GLenum zfail, GLenum zpass);

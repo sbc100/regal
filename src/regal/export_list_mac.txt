@@ -177,6 +177,7 @@ _glBlendFunciARB
 _glBlitFramebuffer
 _glBlitFramebufferANGLE
 _glBlitFramebufferEXT
+_glBlitFramebufferNV
 _glBufferAddressRangeNV
 _glBufferData
 _glBufferDataARB

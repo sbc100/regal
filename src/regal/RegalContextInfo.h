@@ -3,12 +3,12 @@
 */
 
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
-  Copyright (c) 2012 Google Inc.
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -90,7 +90,8 @@ struct ContextInfo
 
   GLboolean compat : 1;
   GLboolean core   : 1;
-  GLboolean gles   : 1;
+  GLboolean es1    : 1;
+  GLboolean es2    : 1;
 
   GLint     gl_version_major;
   GLint     gl_version_minor;
@@ -464,6 +465,7 @@ struct ContextInfo
   GLboolean gl_nv_fog_distance : 1;
   GLboolean gl_nv_fragment_program : 1;
   GLboolean gl_nv_fragment_program2 : 1;
+  GLboolean gl_nv_framebuffer_blit : 1;
   GLboolean gl_nv_framebuffer_multisample_coverage : 1;
   GLboolean gl_nv_geometry_program4 : 1;
   GLboolean gl_nv_gpu_program4 : 1;
@@ -586,6 +588,7 @@ struct ContextInfo
   GLboolean gl_sgix_fog_offset : 1;
   GLboolean gl_sgix_fog_texture : 1;
   GLboolean gl_sgix_fragment_lighting : 1;
+  GLboolean gl_sgix_fragment_specular_lighting : 1;
   GLboolean gl_sgix_framezoom : 1;
   GLboolean gl_sgix_igloo_interface : 1;
   GLboolean gl_sgix_instruments : 1;

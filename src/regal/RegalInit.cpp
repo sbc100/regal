@@ -34,24 +34,33 @@
 
 REGAL_GLOBAL_BEGIN
 
+#include <boost/print/json.hpp>
+#include <boost/print/print_string.hpp>
+using boost::print::print_string;
+
 #include <map>
 using namespace std;
 
 #include "RegalLog.h"
 #include "RegalInit.h"
 #include "RegalHttp.h"
+#include "RegalJson.h"
 #include "RegalToken.h"
 #include "RegalConfig.h"
 #include "RegalContext.h"
 #include "RegalThread.h"
 #include "RegalDispatcher.h"
 #include "RegalContextInfo.h"
+#include "RegalPpa.h"
+#include "RegalMutex.h"
 
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
 using Token::toString;
+
+namespace Json { struct Output : public ::boost::print::json::output<std::string> {}; }
 
 static ::REGAL_NAMESPACE_INTERNAL::Init *_init = NULL;
 
@@ -67,6 +76,14 @@ extern "C" { static void (__stdcall * myDeleteDC   )(void *) = DeleteDC;    }
 extern "C" { static void (__stdcall * myGetFocus   )(void  ) = GetFocus;    }
 #endif
 
+typedef map<RegalSystemContext, RegalContext *> SC2RC;
+typedef map<Thread::Thread,     RegalContext *> TH2RC;
+
+SC2RC sc2rc;
+TH2RC th2rc;
+Thread::Mutex *sc2rcMutex = NULL;
+Thread::Mutex *th2rcMutex = NULL;
+
 Init::Init()
 {
   atexit(atExit);
@@ -80,8 +97,36 @@ Init::Init()
     return;
 #endif
 
+  // If a JSON config file is to be used, parse it first
+
+#ifndef REGAL_NO_GETENV
+  const char *tmp = GetEnv( "REGAL_CONFIG_FILE" );
+  if (tmp) Config::configFile = tmp;
+#endif
+
+#ifdef REGAL_CONFIG_FILE
+  Config::configFile = REGAL_EQUOTE(REGAL_CONFIG_FILE);
+#endif
+
+  if (Config::configFile.length())
+  {
+    bool ok = Json::Parser::parseFile(Config::configFile);
+    if (!ok)
+      Warning("Failed to parse configuration from ",Config::configFile);
+  }
+
+  //
+
   Logging::Init();
   Config::Init();
+
+  if (Config::enableThreadLocking)
+  {
+    sc2rcMutex = new Thread::Mutex();
+    th2rcMutex = new Thread::Mutex();
+    Logging::createLocks();
+  }
+
   Http::Init();
 
   Http::Start();
@@ -89,8 +134,45 @@ Init::Init()
 
 Init::~Init()
 {
+  //
+  // Write out the Regal configuration file as JSON
+  //
+
+  if (Config::configFile.length())
+  {
+    Json::Output jo;
+    jo.object();
+      jo.object("regal");
+        Config::writeJSON(jo);
+        Logging::writeJSON(jo);
+      jo.end();
+    jo.end();
+
+    FILE *f = fopen(Config::configFile.c_str(),"wt");
+    if (f)
+    {
+      string tmp = jo.str();
+      fwrite(tmp.c_str(),1,tmp.length(),f);
+      fclose(f);
+      Info("Regal configuration written to ",Config::configFile);
+    }
+    else
+    {
+      Warning("Regal configuration could not be written to ",Config::configFile);
+    }
+  }
+
+  //
+  // Shutdown...
+  //
+
   Http::Stop();
   Logging::Cleanup();
+
+  delete sc2rcMutex;
+  delete th2rcMutex;
+  sc2rcMutex = NULL;
+  th2rcMutex = NULL;
 }
 
 void
@@ -112,20 +194,12 @@ Init::atExit()
 
 //
 
-typedef map<RegalSystemContext, RegalContext *> SC2RC;
-typedef map<Thread::Thread,     RegalContext *> TH2RC;
-
-SC2RC sc2rc;
-TH2RC th2rc;
-
-// NOTE: Access to sc2rc and other parts of the function (including
-// various one-time-init in RegalMakeCurrent) are not thread-safe.
-
 RegalContext *
 Init::getContext(RegalSystemContext sysCtx)
 {
   RegalAssert(sysCtx);
 
+  Thread::ScopedLock lock(sc2rcMutex);
   SC2RC::iterator i = sc2rc.find(sysCtx);
   if (i!=sc2rc.end())
   {
@@ -152,9 +226,10 @@ Init::setContext(RegalContext *context)
 
   // std::map lookup
 
+  Thread::ScopedLock lock(th2rcMutex);
   TH2RC::iterator i = th2rc.find(thread);
-  
-  // Associate this thread with the Regal context  
+
+  // Associate this thread with the Regal context
 
   if (i!=th2rc.end())
   {
@@ -163,12 +238,12 @@ Init::setContext(RegalContext *context)
 
     if (i->second!=context)
     {
-      if (i->second)      
+      if (i->second)
       {
         RegalAssert(i->second->thread==thread);
         i->second->thread = 0;
       }
-      
+
       i->second = context;
     }
   }
@@ -180,7 +255,7 @@ Init::setContext(RegalContext *context)
     // If some other thread is associated
     // with this context, disassociate it.
 
-    th2rc.erase(context->thread);  
+    th2rc.erase(context->thread);
 
     // Associate the context with this thread.
 
@@ -241,7 +316,7 @@ TlsInit tlsInit;
 
 }
 
-void 
+void
 Init::setContextTLS(RegalContext *context)
 {
   Internal("Init::setContextTLS","thread=",::boost::print::hex(Thread::threadId())," context=",context);
@@ -300,6 +375,14 @@ Init::setErrorCallback(RegalErrorCallback callback)
 }
 
 void
+Init::configure(const char *json)
+{
+  bool ok = Json::Parser::parseString(json);
+  if (!ok)
+    Warning("Failed to parse configuration from RegalConfigure call.");
+}
+
+void
 Init::shareContext(RegalSystemContext a, RegalSystemContext b)
 {
   init();
@@ -309,7 +392,7 @@ Init::shareContext(RegalSystemContext a, RegalSystemContext b)
 
   RegalAssert(contextA);
   RegalAssert(contextB);
-  
+
   // Either of the groups of contexts needs to be uninitialized.
   // In principle Regal might be able to merge the shared
   // containers together, but that's not currently implemented.
@@ -372,7 +455,7 @@ Init::makeCurrent(RegalSystemContext sysCtx)
     }
 
     setContext(context);
-    
+
     return;
   }
 
@@ -386,9 +469,7 @@ Init::makeCurrent(RegalSystemContext sysCtx)
 void
 Init::destroyContext(RegalSystemContext sysCtx)
 {
-  init();
-
-  if (sysCtx)
+  if (_init && sysCtx)
   {
     RegalContext *context = getContext(sysCtx);
 
@@ -396,15 +477,60 @@ Init::destroyContext(RegalSystemContext sysCtx)
     {
       RegalAssert(context->sysCtx==sysCtx);
 
+      Thread::ScopedLock thLock(th2rcMutex);
+      Thread::ScopedLock scLock(sc2rcMutex);
+
       th2rc.erase(context->thread);
       sc2rc.erase(sysCtx);
-      
+
       // TODO - clear TLS for other threads too?
-      
+
       if (context==Thread::CurrentContext())
+      {
         setContextTLS(NULL);
+      }
 
       delete context;
+    }
+  }
+}
+
+// Output listing of current contexts in HTML; for use by HTTP server
+
+void
+Init::getContextListingHTML(std::string &text)
+{
+  static const char *const br = "<br/>\n";
+
+  Thread::ScopedLock lock(th2rcMutex);
+  for (TH2RC::const_iterator i = th2rc.begin(); i!=th2rc.end(); ++i)
+  {
+    RegalContext *ctx = i->second;
+
+    // Need a per-context read-lock?
+
+    text += print_string("ctx = ",ctx,br);
+    text += br;
+    if (ctx)
+    {
+      if (ctx->info)
+      {
+        text += print_string("<b>Vendor     </b>:",ctx->info->regalVendor,br);
+        text += print_string("<b>Renderer   </b>:",ctx->info->regalRenderer,br);
+        text += print_string("<b>Version    </b>:",ctx->info->regalVersion,br);
+        text += print_string("<b>Extensions </b>:",ctx->info->regalExtensions,br);
+        text += br;
+      }
+
+#if REGAL_EMULATION
+      if (ctx->ppa)
+      {
+        text += print_string("<b>GL_STENCIL_BIT</b><br/>",ctx->ppa->State::Stencil::toString(br),br);
+        text += print_string("<b>GL_DEPTH_BIT</b><br/>",  ctx->ppa->State::Depth::toString(br),br);
+        text += print_string("<b>GL_POLYGON_BIT</b><br/>",ctx->ppa->State::Polygon::toString(br),br);
+        text += br;
+      }
+#endif
     }
   }
 }
@@ -422,6 +548,11 @@ REGAL_GLOBAL_BEGIN
 RegalErrorCallback RegalSetErrorCallback(RegalErrorCallback callback)
 {
   return ::REGAL_NAMESPACE_INTERNAL::Init::setErrorCallback(callback);
+}
+
+void RegalConfigure(const char *json)
+{
+  ::REGAL_NAMESPACE_INTERNAL::Init::configure(json);
 }
 
 REGAL_DECL void RegalShareContext(RegalSystemContext a, RegalSystemContext b)

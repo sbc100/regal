@@ -62,7 +62,7 @@ struct Timer
   Timer::Value _start;    /* Zero by default */
 };
 
-#if _WIN32 && !defined(__native_client__)
+#if defined(_WIN32) && !defined(__native_client__)
 
 inline
 Timer::Timer()

@@ -27,6 +27,7 @@ ${IFDEF}REGAL_GLOBAL_BEGIN
 using namespace std;
 
 #include "RegalLog.h"
+#include "RegalBreak.h"
 #include "RegalPush.h"
 #include "RegalToken.h"
 #include "RegalHelper.h"
@@ -103,6 +104,7 @@ def apiEmuFuncDefineCode(apis, args):
             code += '\nstatic %sREGAL_CALL %s%s(%s) \n{\n' % (rType, 'emu_', name, params)
             code += '  RegalContext *_context = REGAL_GET_CONTEXT();\n'
             code += '  RegalAssert(_context);\n'
+            code += '  DispatchTable &_dispatch = _context->dispatcher.emulation;\n'
             code += '\n'
 
             level = [ (emu[i], emuFindEntry( function, emu[i]['formulae'], emu[i]['member'] )) for i in range( len( emue ) - 1 ) ]
@@ -137,7 +139,7 @@ def apiEmuFuncDefineCode(apis, args):
             # Remap, as necessary
             remap = getattr(function, 'regalRemap', None)
             es2Name = None
-            if remap != None:
+            if remap!=None and isinstance(remap, dict):
               es2Name = remap.get('ES2.0',None)
               es2Params = callParams
               if es2Name != None:
@@ -164,7 +166,7 @@ def apiEmuFuncDefineCode(apis, args):
                       for j in e['impl'] :
                           code += '        %s\n' % j
                       if l['member'] :
-                          if typeIsVoid(rType):
+                          if l['member'] != "filt" and typeIsVoid(rType):
                               code += '        return;\n'
                           code += '      }\n'
                   if l['ifdef']:
@@ -177,7 +179,7 @@ def apiEmuFuncDefineCode(apis, args):
 
               if name=='glEnable' or name=='glDisable' or name=='glIsEnabled':
                 code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->gles)\n'
+                code += '       if (_context->info->es2)\n'
                 code += '       #endif\n'
                 code += '         switch (cap)\n'
                 code += '         {\n'
@@ -200,7 +202,7 @@ def apiEmuFuncDefineCode(apis, args):
 
               if name=='glHint':
                 code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->gles)\n'
+                code += '       if (_context->info->es2)\n'
                 code += '       #endif\n'
                 code += '         switch (target)\n'
                 code += '         {\n'
@@ -224,7 +226,7 @@ def apiEmuFuncDefineCode(apis, args):
 
               if name=='glBindTexture':
                 code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->gles)\n'
+                code += '       if (_context->info->es2)\n'
                 code += '       #endif\n'
                 code += '         switch (target)\n'
                 code += '         {\n'
@@ -248,7 +250,7 @@ def apiEmuFuncDefineCode(apis, args):
 
               if name=='glTexSubImage2D':
                 code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->gles)\n'
+                code += '       if (_context->info->es2)\n'
                 code += '       #endif\n'
                 code += '         switch (target)\n'
                 code += '         {\n'
@@ -257,22 +259,22 @@ def apiEmuFuncDefineCode(apis, args):
                     for j in i.enumerants:
                       if getattr(j,'esVersions',None)==None:
                         continue
-                      if getattr(j,'bindTexture',None)==None:
+                      if getattr(j,'texImage',None)==None:
                         continue
-                      if 2.0 in j.esVersions and j.bindTexture == True:
+                      if 2.0 in j.esVersions and j.texImage:
                         code += '           case %s:\n'%(j.name)
                 code += '             break;\n'
                 code += '           default:\n'
-                code += '             Warning("%s does not support ",GLenumToString(format)," for ES 2.0.");\n'%(name)
+                code += '             Warning("%s does not support ",GLenumToString(target)," for ES 2.0.");\n'%(name)
                 code += '             return;\n'
                 code += '         }\n'
 
-              code += '      DispatchTable *_next = _context->dispatcher.emulation._next;\n'
+              code += '      DispatchTable *_next = _dispatch._next;\n'
               code += '      RegalAssert(_next);\n'
 
               if es2Name != None:
                 code += '      '
-                code += 'if (_context->info->gles)\n'
+                code += 'if (_context->info->es2)\n'
                 code += '        '
                 if not typeIsVoid(rType):
                     code += 'return '
@@ -294,7 +296,7 @@ def apiEmuFuncDefineCode(apis, args):
 
               if name=='glTexImage2D':
                 code += '  #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '  if (_context->info->gles)\n'
+                code += '  if (_context->info->es2)\n'
                 code += '  #endif\n'
                 code += '  {\n'
                 code += '    switch (internalformat)\n'
@@ -320,12 +322,12 @@ def apiEmuFuncDefineCode(apis, args):
                 code += '    }\n'
                 code += '  }\n'
 
-              code += '  DispatchTable *_next = _context->dispatcher.emulation._next;\n'
+              code += '  DispatchTable *_next = _dispatch._next;\n'
               code += '  RegalAssert(_next);\n'
               code += '  '
 
               if es2Name != None:
-                code += 'if (_context->info->gles)\n'
+                code += 'if (_context->info->es2)\n'
                 code += '    '
                 if not typeIsVoid(rType):
                     code += 'return '
@@ -423,16 +425,20 @@ def generateEmuSource(apis, args):
 
   emuLocalInclude = '''
 
+#include "RegalBreak.h"
 #include "RegalBin.h"
+#include "RegalXfer.h"
 #include "RegalEmu.h"
 #include "RegalPpa.h"
+#include "RegalPpca.h"
 #include "RegalIff.h"
 #include "RegalMarker.h"
 #include "RegalObj.h"
 #include "RegalDsa.h"
 #include "RegalSo.h"
 #include "RegalTexC.h"
-#include "RegalVao.h"'''
+#include "RegalVao.h"
+#include "RegalFilt.h"'''
 
   # Output
 
