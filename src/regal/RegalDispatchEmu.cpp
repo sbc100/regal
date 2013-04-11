@@ -5770,6 +5770,9 @@ static void REGAL_CALL emu_glGetTexParameterfv(GLenum target, GLenum pname, GLfl
       }
       #endif
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -5790,6 +5793,18 @@ static void REGAL_CALL emu_glGetTexParameterfv(GLenum target, GLenum pname, GLfl
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        RegalAssert(_context);
+        if ( !_context->texsto->GetTexParameterv( _context, target, pname, params ) ) {
+           _context->dispatcher.emulation.glGetTexParameterfv( target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -5842,6 +5857,9 @@ static void REGAL_CALL emu_glGetTexParameteriv(GLenum target, GLenum pname, GLin
       }
       #endif
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -5862,6 +5880,18 @@ static void REGAL_CALL emu_glGetTexParameteriv(GLenum target, GLenum pname, GLin
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        RegalAssert(_context);
+        if ( !_context->texsto->GetTexParameterv( _context, target, pname, params ) ) {
+           _context->dispatcher.emulation.glGetTexParameteriv( target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -16761,6 +16791,15 @@ static void REGAL_CALL emu_glDeleteTextures(GLsizei n, const GLuint *textures)
       }
       #endif
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        RegalAssert(_context);
+        _context->texsto->DeleteTextures( _context, n, textures );
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -27330,6 +27369,9 @@ static void REGAL_CALL emu_glGetTexParameterIiv(GLenum target, GLenum pname, GLi
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -27350,6 +27392,18 @@ static void REGAL_CALL emu_glGetTexParameterIiv(GLenum target, GLenum pname, GLi
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        RegalAssert(_context);
+        if ( !_context->texsto->GetTexParameterv( _context, target, pname, params ) ) {
+           _context->dispatcher.emulation.glGetTexParameterIiv( target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -27393,6 +27447,9 @@ static void REGAL_CALL emu_glGetTexParameterIuiv(GLenum target, GLenum pname, GL
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto) break;
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
@@ -27413,6 +27470,18 @@ static void REGAL_CALL emu_glGetTexParameterIuiv(GLenum target, GLenum pname, GL
     case 8 :
     case 7 :
     case 6 :
+      #if REGAL_EMU_TEXSTO
+      if (_context->texsto)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        RegalAssert(_context);
+        if ( !_context->texsto->GetTexParameterv( _context, target, pname, params ) ) {
+           _context->dispatcher.emulation.glGetTexParameterIuiv( target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_SO
