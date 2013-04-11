@@ -1562,15 +1562,14 @@ void Iff::Cleanup()
   }
 }
 
-void Iff::InitFixedFunction( RegalContext * ctx )
+void Iff::InitFixedFunction(RegalContext &ctx)
 {
   Internal("Regal::Iff::InitFixedFunction","()");
 
-  RegalAssert(ctx);
-  RegalAssert(ctx->info);
+  RegalAssert(ctx.info);
 
-  gles   = ctx->info->es2;
-  legacy = ctx->info->compat && ctx->info->gl_version_major<=2;
+  gles   = ctx.info->es2;
+  legacy = ctx.info->compat && ctx.info->gl_version_major<=2;
 
   shadowMatrixMode = GL_MODELVIEW;
   currMatrixStack = &modelview;

@@ -473,7 +473,9 @@ namespace Config {
 #endif
 
     Info("REGAL_FORCE_EMULATION     ", forceEmulation   ? "enabled" : "disabled");
+#if REGAL_TRACE
     Info("REGAL_TRACE               ", enableTrace      ? "enabled" : "disabled");
+#endif
     Info("REGAL_DEBUG               ", enableDebug      ? "enabled" : "disabled");
     Info("REGAL_ERROR               ", enableError      ? "enabled" : "disabled");
 #if REGAL_CODE
@@ -560,6 +562,7 @@ namespace Config {
           jo.member("error",     enableError);
           jo.member("code",      enableCode);
           jo.member("emulation", enableEmulation);
+          jo.member("trace",     enableTrace);
           jo.member("log",       enableLog);
           jo.member("driver",    enableDriver);
         jo.end();

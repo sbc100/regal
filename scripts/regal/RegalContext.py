@@ -7,6 +7,7 @@ from ApiCodeGen import *
 
 from EmuInit           import formulae       as initFormulae
 from EmuInit           import formulaeGlobal as initFormulaeGlobal
+from EmuContextShare   import formulae       as contextShareFormulae
 from EmuContextState   import formulae       as contextStateFormulae
 from EmuGetString      import formulae       as getStringFormulae
 from EmuForceCore      import formulae       as forceCoreFormulae
@@ -43,6 +44,7 @@ from EmuPixelTransfer import xferFormulae
 emuRegal = [
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : initFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : initFormulaeGlobal },
+    { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : contextShareFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : contextStateFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : getStringFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : forceCoreFormulae },
@@ -71,7 +73,7 @@ emu = [
     { 'type' : 'Emu::Xfer',   'include' : 'RegalXfer.h',   'member' : 'xfer',   'conditional' : '(isES2() && Config::enableEmuXfer) || Config::forceEmuXfer   || REGAL_FORCE_EMU_XFER',   'ifdef' : 'REGAL_EMU_XFER',   'formulae' : xferFormulae   },
     { 'type' : 'Emu::Dsa',    'include' : 'RegalDsa.h',    'member' : 'dsa',    'conditional' : 'Config::enableEmuDsa               || Config::forceEmuDsa    || REGAL_FORCE_EMU_DSA',    'ifdef' : 'REGAL_EMU_DSA',    'formulae' : dsaFormulae    },
     { 'type' : 'Emu::Iff',    'include' : 'RegalIff.h',    'member' : 'iff',    'conditional' : 'Config::enableEmuIff               || Config::forceEmuIff    || REGAL_FORCE_EMU_IFF',    'ifdef' : 'REGAL_EMU_IFF',    'formulae' : iffFormulae    },
-    { 'type' : 'Emu::So',     'include' : 'RegalSo.h',     'member' : 'so',     'conditional' : '(Config::enableEmuSo && !info->gl_arb_sampler_objects) || Config::forceEmuSo || REGAL_FORCE_EMU_SO',                                                           'ifdef' : 'REGAL_EMU_SO',  'formulae' : soFormulae  },
+    { 'type' : 'Emu::So',     'include' : 'RegalSo.h',     'member' : 'so',     'conditional' : '(Config::enableEmuSo && !info->gl_arb_sampler_objects) || Config::forceEmuSo || REGAL_FORCE_EMU_SO',                                                           'ifdef' : 'REGAL_EMU_SO',     'formulae' : soFormulae     },
     { 'type' : 'Emu::Vao',    'include' : 'RegalVao.h',    'member' : 'vao',    'conditional' : '(Config::enableEmuVao              || Config::enableEmuVao   || REGAL_FORCE_EMU_VAO) && (Config::enableEmuIff || Config::forceEmuIff || REGAL_FORCE_EMU_IFF)', 'ifdef' : 'REGAL_EMU_VAO', 'formulae' : vaoFormulae },
     { 'type' : 'Emu::TexC',   'include' : 'RegalTexC.h',   'member' : 'texc',   'conditional' : '(isES2() && Config::enableEmuTexC) || Config::forceEmuTexC   || REGAL_FORCE_EMU_TEXC',   'ifdef' : 'REGAL_EMU_TEXC',   'formulae' : texCFormulae   },
     { 'type' : 'Emu::Filt',   'include' : 'RegalFilt.h',   'member' : 'filt',   'conditional' : 'Config::enableEmuFilter            || Config::forceEmuFilter || REGAL_FORCE_EMU_FILTER', 'ifdef' : 'REGAL_EMU_FILTER', 'formulae' : filterFormulae },

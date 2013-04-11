@@ -487,6 +487,8 @@ Init::destroyContext(RegalSystemContext sysCtx)
 
       if (context==Thread::CurrentContext())
       {
+        if (context->iff)
+          context->iff->Cleanup();
         setContextTLS(NULL);
       }
 

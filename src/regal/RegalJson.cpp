@@ -95,6 +95,7 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_DISPATCH_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH,
   JSON_REGAL_CONFIG_DISPATCH_FORCE,
   JSON_REGAL_CONFIG,
@@ -239,6 +240,7 @@ Parser::onPush(const string &name)
       if (name=="emulation"   ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_EMULATION;       return; }
       if (name=="error"       ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_ERROR;           return; }
       if (name=="log"         ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_LOG;             return; }
+      if (name=="trace"       ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_TRACE;           return; }
       break;
 
     case JSON_REGAL_CONFIG_DISPATCH_FORCE:
@@ -383,6 +385,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_EMULATION       : { set_json_regal_config_dispatch_enable_emulation(value);      return; }
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_ERROR           : { set_json_regal_config_dispatch_enable_error(value);          return; }
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_LOG             : { set_json_regal_config_dispatch_enable_log(value);            return; }
+    case JSON_REGAL_CONFIG_DISPATCH_ENABLE_TRACE           : { set_json_regal_config_dispatch_enable_trace(value);          return; }
     case JSON_REGAL_CONFIG_DISPATCH_FORCE_EMULATION        : { set_json_regal_config_dispatch_force_emulation(value);       return; }
     case JSON_REGAL_CONFIG_FORCE_CORE                      : { set_json_regal_config_force_core(value);                     return; }
     case JSON_REGAL_CONFIG_FORCE_ES1                       : { set_json_regal_config_force_es1(value);                      return; }
@@ -511,7 +514,7 @@ jsonslAction(jsonsl_t jsn, jsonsl_action_t action, struct jsonsl_state_st *state
 static int
 jsonslError(jsonsl_t jsn, jsonsl_error_t err, struct jsonsl_state_st *state, char *at)
 {
-  Parser REGAL_UNUSED * parser = reinterpret_cast<Parser *>(jsn->data);
+  Parser *parser = reinterpret_cast<Parser *>(jsn->data);
   RegalAssert(parser);
   UNUSED_PARAMETER(parser);
   UNUSED_PARAMETER(err);

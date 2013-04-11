@@ -18,16 +18,16 @@ ppaFormulae = {
     ],
   },
   'Enable'    : {
-    'entries' : [ 'gl(Enable|Disable)' ],
+    'entries' : [ 'gl(Enable|Disable)(i|)' ],
     'impl'    : [
-      'if( ! _context->ppa->${m1}( _context, ${arg0} ) ) {',
-      '  _context->dispatcher.emulation.gl${m1}( ${arg0} );',
+      'if( ! _context->ppa->${m1}${m2}( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.gl${m1}${m2}( ${arg0plus} );',
       '}',
     ],
   },
   'TrackDepth' : {
-    'entries'    : [ '(glClearDepth|glDepthFunc|glDepthMask)' ],
-    'prefix'     : [ '_context->ppa->${m1}( ${arg0plus} );', ],
+    'entries'    : [ '(glClearDepth|glDepthFunc|glDepthMask)(f|)' ],
+    'prefix'     : [ '_context->ppa->${m1}${m2}( ${arg0plus} );', ],
   },
   'TrackStencil' : {
     'entries'    : [ '(glClearStencil|glStencilFunc|glStencilFuncSeparate|glStencilMask|glStencilMaskSeparate|glStencilOp|glStencilOpSeparate)' ],
@@ -53,4 +53,50 @@ ppaFormulae = {
     'entries'    : [ 'glClipPlane' ],
     'prefix'     : [ '_context->ppa->glClipPlane( ${arg0plus} );', ],
   },
+  'TrackHint' : {
+    'entries'    : [ 'glHint' ],
+    'prefix'     : [ '_context->ppa->glHint( ${arg0plus} );', ],
+  },
+  'TrackClampColor': {
+    'entries'    : [ 'glClampColor' ],
+    'prefix'     : [ '_context->ppa->glClampColor( ${arg0plus} );',
+    ],
+  },
+  'TrackActiveTexture' : {
+    'entries'    : [ 'glActiveTexture(ARB|)' ],
+    'prefix'     : [ '_context->ppa->glActiveTexture( ${arg0plus} );', ],
+  },
+  'TrackListBase' : {
+    'entries'    : [ 'glListBase' ],
+    'prefix'     : [ '_context->ppa->glListBase( ${arg0plus} );', ],
+  },
+  'TrackClearAccum' : {
+    'entries'    : [ 'glClearAccum' ],
+    'prefix'     : [ '_context->ppa->glClearAccum( ${arg0plus} );', ],
+  },
+  'TrackScissor' : {
+    'entries'    : [ 'glScissor(Array|Indexed|)(v|)' ],
+    'prefix'     : [ '_context->ppa->glScissor${m1}${m2}( ${arg0plus} );', ],
+  },
+  'TrackViewport' : {
+    'entries'    : [ 'glViewport(Array|Indexedf|)(v|)' ],
+    'prefix'     : [ '_context->ppa->glViewport${m1}${m2}( ${arg0plus} );', ],
+  },
+  'TrackDepthRange' : {
+    'entries'    : [ 'glDepthRange(Array|Indexed|)(f|v|)' ],
+    'prefix'     : [ '_context->ppa->glDepthRange${m1}${m2}( ${arg0plus} );', ],
+  },
+  'TrackLine' : {
+    'entries'    : [ 'glLine(Width|Stipple|)' ],
+    'prefix'     : [ '_context->ppa->glLine${m1}( ${arg0plus} );', ],
+  },
+  'TrackSampleCoverage' : {
+    'entries'    : [ 'glSampleCoverage' ],
+    'prefix'     : [ '_context->ppa->glSampleCoverage( ${arg0plus} );', ],
+  },
+  'TrackMinSampleShading' : {
+    'entries'    : [ 'glMinSampleShading' ],
+    'prefix'     : [ '_context->ppa->glMinSampleShading( ${arg0plus} );', ],
+  },
+
 }

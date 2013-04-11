@@ -35,6 +35,7 @@
 #define set_json_regal_config_dispatch_enable_emulation(value)           Config::enableEmulation = value
 #define set_json_regal_config_dispatch_enable_error(value)               Config::enableError = value
 #define set_json_regal_config_dispatch_enable_log(value)                 Config::enableLog = value
+#define set_json_regal_config_dispatch_enable_trace(value)               Config::enableTrace = value
 #define set_json_regal_config_dispatch_force_emulation(value)            Config::forceEmulation = value
 #define set_json_regal_config_force_core(value)                          Config::forceCoreProfile = value
 #define set_json_regal_config_force_es1(value)                           Config::forceES1Profile = value

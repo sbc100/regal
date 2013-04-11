@@ -2070,7 +2070,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPushAttrib(GLbitfield mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPushAttrib","(", mask, ")");
+    App("glPushAttrib","(", GLpushAttribToString(mask), ")");
     if (!_context) return;
     RegalAssert(_context);
     _context->depthPushAttrib++;
@@ -30659,6 +30659,8 @@ extern "C" {
     }
     else
       Warning( "glXCreateContext not available." );
+    if (ret && shareList)
+      Init::shareContext(ret,shareList);
     return ret;
   }
 
@@ -31092,6 +31094,8 @@ extern "C" {
     }
     else
       Warning( "glXCreateNewContext not available." );
+    if (ret && share_list)
+      Init::shareContext(ret,share_list);
     return ret;
   }
 
@@ -31638,6 +31642,8 @@ extern "C" {
     }
     else
       Warning( "glXCreateContextAttribsARB not available." );
+    if (ret && share_context)
+      Init::shareContext(ret,share_context);
     return ret;
   }
 

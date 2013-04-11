@@ -1909,7 +1909,7 @@ static void REGAL_CALL log_glPushAttrib(GLbitfield mask)
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glPushAttrib)(mask);
-    Driver("glPushAttrib","(", mask, ")");
+    Driver("glPushAttrib","(", GLpushAttribToString(mask), ")");
 }
 
 static void REGAL_CALL log_glPushMatrix(void)
