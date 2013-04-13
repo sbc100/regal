@@ -84,6 +84,9 @@ namespace Token {
 
   std::string GLpushAttribToString(GLbitfield v)
   {
+    if (v == GL_ALL_ATTRIB_BITS)
+      return std::string("GL_ALL_ATTRIB_BITS");
+
     const GLbitfield other = v & ~(GL_ACCUM_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT | GL_DEPTH_BUFFER_BIT | GL_ENABLE_BIT | GL_EVAL_BIT | GL_FOG_BIT | GL_HINT_BIT | GL_LIGHTING_BIT | GL_LINE_BIT | GL_LIST_BIT | GL_MULTISAMPLE_BIT | GL_PIXEL_MODE_BIT | GL_POINT_BIT | GL_POLYGON_BIT | GL_POLYGON_STIPPLE_BIT | GL_SCISSOR_BIT | GL_STENCIL_BUFFER_BIT | GL_TEXTURE_BIT | GL_TRANSFORM_BIT | GL_VIEWPORT_BIT);
 
     string_list<std::string> tmp;
@@ -91,7 +94,6 @@ namespace Token {
     if (v & GL_COLOR_BUFFER_BIT)          { if (tmp.size()) tmp += " | "; tmp += "GL_COLOR_BUFFER_BIT"; }
     if (v & GL_CURRENT_BIT)               { if (tmp.size()) tmp += " | "; tmp += "GL_CURRENT_BIT"; }
     if (v & GL_DEPTH_BUFFER_BIT)          { if (tmp.size()) tmp += " | "; tmp += "GL_DEPTH_BUFFER_BIT"; }
-    if (v & GL_ENABLE_BIT)                { if (tmp.size()) tmp += " | "; tmp += "GL_ENABLE_BIT"; }
     if (v & GL_ENABLE_BIT)                { if (tmp.size()) tmp += " | "; tmp += "GL_ENABLE_BIT"; }
     if (v & GL_EVAL_BIT)                  { if (tmp.size()) tmp += " | "; tmp += "GL_EVAL_BIT"; }
     if (v & GL_FOG_BIT)                   { if (tmp.size()) tmp += " | "; tmp += "GL_FOG_BIT"; }

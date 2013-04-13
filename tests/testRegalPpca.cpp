@@ -166,6 +166,8 @@ TEST( RegalClientStatePixelStore, Transition ) {
   RegalGMockInterface mock;
 
   DispatchTable dt;
+  ::memset(&dt,0,sizeof(DispatchTable));
+  dt._enabled = true;
   InitDispatchTableGMock( dt );
 
   State current;
@@ -334,6 +336,8 @@ TEST( RegalClientStateVertexArrayFixedState, Transition ) {
   RegalGMockInterface mock;
 
   DispatchTable dt;
+  ::memset(&dt,0,sizeof(DispatchTable));
+  dt._enabled = true;
   InitDispatchTableGMock( dt );
 
   State current;
@@ -599,6 +603,8 @@ TEST( RegalClientStateVertexArrayGenericState, Transition ) {
   RegalGMockInterface mock;
 
   DispatchTable dt;
+  ::memset(&dt,0,sizeof(DispatchTable));
+  dt._enabled = true;
   InitDispatchTableGMock( dt );
 
   State current;
@@ -730,6 +736,8 @@ TEST( RegalClientStateVertexArrayState, Transition ) {
   RegalGMockInterface mock;
 
   DispatchTable dt;
+  ::memset(&dt,0,sizeof(DispatchTable));
+  dt._enabled = true;
   InitDispatchTableGMock( dt );
 
   State current;

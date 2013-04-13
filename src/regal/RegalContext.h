@@ -87,6 +87,7 @@ struct RegalContext
   ~RegalContext();
 
   void Init();
+  void Cleanup();
 
   // If profile is forced at build-time, no need to check runtime flag
 

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -59,7 +59,7 @@ template<> inline void DsaGetv( DispatchTable & tbl, GLenum pname, GLfloat * par
 template<> inline void DsaGetv( DispatchTable & tbl, GLenum pname, GLdouble * params ) { tbl.glGetDoublev( pname, params ); }
 
 
-struct Dsa : public RegalEmu
+struct Dsa
 {
     int callDepth;
     struct Cache {
@@ -116,6 +116,11 @@ struct Dsa : public RegalEmu
         dsa.framebufferTarget = REGAL_DSA_INVALID;
         dsa.renderbuffer = REGAL_DSA_INVALID;
         dsa.renderbufferTarget = REGAL_DSA_INVALID;
+    }
+
+    void Cleanup( RegalContext &ctx )
+    {
+        UNUSED_PARAMETER(ctx);
     }
 
     void Restore( RegalContext * ctx ) {

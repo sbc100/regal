@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -45,6 +45,7 @@ REGAL_GLOBAL_BEGIN
 #include <string>
 
 #include "RegalEmu.h"
+#include "RegalContext.h"
 #include "RegalContextInfo.h"
 #include "RegalSharedMap.h"
 
@@ -56,7 +57,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct Vao : public RegalEmu {
+struct Vao {
 
     struct Array {
 
@@ -159,6 +160,11 @@ struct Vao : public RegalEmu {
         current = 9999999; // this is only to force the bind...
         currObject = NULL;
         BindVertexArray( &ctx, 0 );
+    }
+
+    void Cleanup( RegalContext &ctx )
+    {
+        UNUSED_PARAMETER(ctx);
     }
 
     void ShadowBufferBinding( GLenum target, GLuint bufferBinding ) {

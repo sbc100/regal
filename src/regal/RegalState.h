@@ -81,6 +81,18 @@ REGAL_NAMESPACE_BEGIN
 //    http://graphics.stanford.edu/papers/cr/
 //
 
+#ifndef REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES
+#define REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES 8
+#endif
+
+#ifndef REGAL_MAX_VIEWPORTS
+#define REGAL_MAX_VIEWPORTS 16
+#endif
+
+#ifndef REGAL_MAX_DRAW_BUFFERS
+#define REGAL_MAX_DRAW_BUFFERS 8
+#endif
+
 namespace State {
 
   using   ::boost::print::hex;
@@ -89,32 +101,26 @@ namespace State {
 
   inline static void setEnable(DispatchTable &dt, const GLenum cap, const GLboolean enable)
   {
-    RegalAssert(dt.glEnable);
-    RegalAssert(dt.glDisable);
     if (enable)
-      dt.glEnable(cap);
+      dt.call(&dt.glEnable)(cap);
     else
-      dt.glDisable(cap);
+      dt.call(&dt.glDisable)(cap);
   }
 
   inline static void setEnableIndexedEXT(DispatchTable &dt, const GLenum cap, const GLuint index, const GLboolean enable)
   {
-    RegalAssert(dt.glEnable);
-    RegalAssert(dt.glDisable);
     if (enable)
-      dt.glEnableIndexedEXT(cap,index);
+      dt.call(&dt.glEnableIndexedEXT)(cap,index);
     else
-      dt.glDisableIndexedEXT(cap,index);
+      dt.call(&dt.glDisableIndexedEXT)(cap,index);
   }
 
   inline static void setEnablei(DispatchTable &dt, const GLenum cap, const GLuint index, const GLboolean enable)
   {
-    RegalAssert(dt.glEnablei);
-    RegalAssert(dt.glDisablei);
     if (enable)
-      dt.glEnablei(cap,index);
+      dt.call(&dt.glEnablei)(cap,index);
     else
-      dt.glDisablei(cap,index);
+      dt.call(&dt.glDisablei)(cap,index);
   }
 
   inline static void enableToString(string_list& tmp, const GLboolean b, const char* bEnum, const char *delim = "\n")
@@ -158,8 +164,24 @@ namespace State {
     GLboolean   lighting;                  // GL_LIGHTING
     GLboolean   lineSmooth;                // GL_LINE_SMOOTH
     GLboolean   lineStipple;               // GL_LINE_STIPPLE
-                                           // TODO: GL_MAP1_x where x is a map type (9 x B) (GL_FALSE)
-                                           // TODO: GL_MAP2_x where x is a map type (9 x B) (GL_FALSE)
+    GLboolean   map1Color4;                // GL_MAP1_COLOR_4
+    GLboolean   map1Index;                 // GL_MAP1_INDEX
+    GLboolean   map1Normal;                // GL_MAP1_NORMAL
+    GLboolean   map1TextureCoord1;         // GL_MAP1_TEXTURE_COORD_1
+    GLboolean   map1TextureCoord2;         // GL_MAP1_TEXTURE_COORD_2
+    GLboolean   map1TextureCoord3;         // GL_MAP1_TEXTURE_COORD_3
+    GLboolean   map1TextureCoord4;         // GL_MAP1_TEXTURE_COORD_4
+    GLboolean   map1Vertex3;               // GL_MAP1_VERTEX_3
+    GLboolean   map1Vertex4;               // GL_MAP1_VERTEX_4
+    GLboolean   map2Color4;                // GL_MAP2_COLOR_4
+    GLboolean   map2Index;                 // GL_MAP2_INDEX
+    GLboolean   map2Normal;                // GL_MAP2_NORMAL
+    GLboolean   map2TextureCoord1;         // GL_MAP2_TEXTURE_COORD_1
+    GLboolean   map2TextureCoord2;         // GL_MAP2_TEXTURE_COORD_2
+    GLboolean   map2TextureCoord3;         // GL_MAP2_TEXTURE_COORD_3
+    GLboolean   map2TextureCoord4;         // GL_MAP2_TEXTURE_COORD_4
+    GLboolean   map2Vertex3;               // GL_MAP2_VERTEX_3
+    GLboolean   map2Vertex4;               // GL_MAP2_VERTEX_4
     GLboolean   minmax;                    // GL_MINMAX
     GLboolean   multisample;               // GL_MULTISAMPLE
     GLboolean   normalize;                 // GL_NORMALIZE
@@ -214,6 +236,24 @@ namespace State {
     , lighting(GL_FALSE)
     , lineSmooth(GL_FALSE)
     , lineStipple(GL_FALSE)
+    , map1Color4(GL_FALSE)
+    , map1Index(GL_FALSE)
+    , map1Normal(GL_FALSE)
+    , map1TextureCoord1(GL_FALSE)
+    , map1TextureCoord2(GL_FALSE)
+    , map1TextureCoord3(GL_FALSE)
+    , map1TextureCoord4(GL_FALSE)
+    , map1Vertex3(GL_FALSE)
+    , map1Vertex4(GL_FALSE)
+    , map2Color4(GL_FALSE)
+    , map2Index(GL_FALSE)
+    , map2Normal(GL_FALSE)
+    , map2TextureCoord1(GL_FALSE)
+    , map2TextureCoord2(GL_FALSE)
+    , map2TextureCoord3(GL_FALSE)
+    , map2TextureCoord4(GL_FALSE)
+    , map2Vertex3(GL_FALSE)
+    , map2Vertex4(GL_FALSE)
     , minmax(GL_FALSE)
     , multisample(GL_TRUE)
     , normalize(GL_FALSE)
@@ -248,9 +288,6 @@ namespace State {
       std::memset(textureGenR,GL_FALSE,sizeof(textureGenR));
       std::memset(textureGenS,GL_FALSE,sizeof(textureGenS));
       std::memset(textureGenT,GL_FALSE,sizeof(textureGenT));
-
-      // TODO: GL_MAP1_x where x is a map type (9 x B) (GL_FALSE)
-      // TODO: GL_MAP2_x where x is a map type (9 x B) (GL_FALSE)
     }
 
     inline Enable(const Enable &other)
@@ -259,86 +296,166 @@ namespace State {
         std::memcpy(this,&other,sizeof(Enable));
     }
 
-    inline Enable &operator=(const Enable &other)
-    {
-      if (this!=&other)
-        std::memcpy(this,&other,sizeof(Enable));
-      return *this;
-    }
-
     inline Enable &swap(Enable &other)
     {
-      *this = other;
+      std::swap(alphaTest,other.alphaTest);
+      std::swap(autoNormal,other.autoNormal);
+      std::swap_ranges(blend,blend+REGAL_MAX_DRAW_BUFFERS,other.blend);
+      std::swap(clampFragmentColor,other.clampFragmentColor);
+      std::swap(clampReadColor,other.clampReadColor);
+      std::swap(clampVertexColor,other.clampVertexColor);
+      std::swap_ranges(clipDistance,clipDistance+REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES,other.clipDistance);
+      std::swap(colorLogicOp,other.colorLogicOp);
+      std::swap(colorMaterial,other.colorMaterial);
+      std::swap(colorSum,other.colorSum);
+      std::swap(colorTable,other.colorTable);
+      std::swap(convolution1d,other.convolution1d);
+      std::swap(convolution2d,other.convolution2d);
+      std::swap(cullFace,other.cullFace);
+      std::swap(depthClamp,other.depthClamp);
+      std::swap(depthTest,other.depthTest);
+      std::swap(dither,other.dither);
+      std::swap(fog,other.fog);
+      std::swap(framebufferSRGB,other.framebufferSRGB);
+      std::swap(histogram,other.histogram);
+      std::swap(indexLogicOp,other.indexLogicOp);
+      std::swap_ranges(light,light+REGAL_FIXED_FUNCTION_MAX_LIGHTS,other.light);
+      std::swap(lighting,other.lighting);
+      std::swap(lineSmooth,other.lineSmooth);
+      std::swap(lineStipple,other.lineStipple);
+      std::swap(map1Color4,other.map1Color4);
+      std::swap(map1Index,other.map1Index);
+      std::swap(map1Normal,other.map1Normal);
+      std::swap(map1TextureCoord1,other.map1TextureCoord1);
+      std::swap(map1TextureCoord2,other.map1TextureCoord2);
+      std::swap(map1TextureCoord3,other.map1TextureCoord3);
+      std::swap(map1TextureCoord4,other.map1TextureCoord4);
+      std::swap(map1Vertex3,other.map1Vertex3);
+      std::swap(map1Vertex4,other.map1Vertex4);
+      std::swap(map2Color4,other.map2Color4);
+      std::swap(map2Index,other.map2Index);
+      std::swap(map2Normal,other.map2Normal);
+      std::swap(map2TextureCoord1,other.map2TextureCoord1);
+      std::swap(map2TextureCoord2,other.map2TextureCoord2);
+      std::swap(map2TextureCoord3,other.map2TextureCoord3);
+      std::swap(map2TextureCoord4,other.map2TextureCoord4);
+      std::swap(map2Vertex3,other.map2Vertex3);
+      std::swap(map2Vertex4,other.map2Vertex4);
+      std::swap(minmax,other.minmax);
+      std::swap(multisample,other.multisample);
+      std::swap(normalize,other.normalize);
+      std::swap(pointSmooth,other.pointSmooth);
+      std::swap(pointSprite,other.pointSprite);
+      std::swap(polygonOffsetFill,other.polygonOffsetFill);
+      std::swap(polygonOffsetLine,other.polygonOffsetLine);
+      std::swap(polygonOffsetPoint,other.polygonOffsetPoint);
+      std::swap(polygonSmooth,other.polygonSmooth);
+      std::swap(polygonStipple,other.polygonStipple);
+      std::swap(postColorMatrixColorTable,other.postColorMatrixColorTable);
+      std::swap(postConvolutionColorTable,other.postConvolutionColorTable);
+      std::swap(programPointSize,other.programPointSize);
+      std::swap(rescaleNormal,other.rescaleNormal);
+      std::swap(sampleAlphaToCoverage,other.sampleAlphaToCoverage);
+      std::swap(sampleAlphaToOne,other.sampleAlphaToOne);
+      std::swap(sampleCoverage,other.sampleCoverage);
+      std::swap(sampleShading,other.sampleShading);
+      std::swap_ranges(scissorTest,scissorTest+REGAL_MAX_VIEWPORTS,other.scissorTest);
+      std::swap(separable2d,other.separable2d);
+      std::swap(stencilTest,other.stencilTest);
+      std::swap_ranges(texture1d,texture1d+REGAL_EMU_MAX_TEXTURE_UNITS,other.texture1d);
+      std::swap_ranges(texture2d,texture2d+REGAL_EMU_MAX_TEXTURE_UNITS,other.texture2d);
+      std::swap_ranges(texture3d,texture3d+REGAL_EMU_MAX_TEXTURE_UNITS,other.texture3d);
+      std::swap_ranges(textureCubeMap,textureCubeMap+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureCubeMap);
+      std::swap_ranges(textureGenQ,textureGenQ+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenQ);
+      std::swap_ranges(textureGenR,textureGenR+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenR);
+      std::swap_ranges(textureGenS,textureGenS+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenS);
+      std::swap_ranges(textureGenT,textureGenT+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenT);
+      std::swap(vertexProgramTwoSide,other.vertexProgramTwoSide);
       return *this;
     }
 
     inline Enable &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glIsEnabled);
-      RegalAssert(dt.glIsEnabledIndexedEXT);
-      RegalAssert(dt.glClampColor);
-      alphaTest = dt.glIsEnabled(GL_ALPHA_TEST);
-      autoNormal = dt.glIsEnabled(GL_AUTO_NORMAL);
+      alphaTest = dt.call(&dt.glIsEnabled)(GL_ALPHA_TEST);
+      autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
       for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
-        blend[ii] = dt.glIsEnabledi(GL_BLEND, ii);
-      dt.glGetIntegerv(GL_CLAMP_FRAGMENT_COLOR,reinterpret_cast<GLint*>(&clampFragmentColor));
-      dt.glGetIntegerv(GL_CLAMP_READ_COLOR,reinterpret_cast<GLint*>(&clampReadColor));
-      dt.glGetIntegerv(GL_CLAMP_VERTEX_COLOR,reinterpret_cast<GLint*>(&clampVertexColor));
+        blend[ii] = dt.call(&dt.glIsEnabledi)(GL_BLEND, ii);
+      dt.call(&dt.glGetIntegerv)(GL_CLAMP_FRAGMENT_COLOR,reinterpret_cast<GLint*>(&clampFragmentColor));
+      dt.call(&dt.glGetIntegerv)(GL_CLAMP_READ_COLOR,reinterpret_cast<GLint*>(&clampReadColor));
+      dt.call(&dt.glGetIntegerv)(GL_CLAMP_VERTEX_COLOR,reinterpret_cast<GLint*>(&clampVertexColor));
       for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
-        clipDistance[ii] = dt.glIsEnabled(GL_CLIP_DISTANCE0+ii);
-      colorLogicOp  = dt.glIsEnabled(GL_COLOR_LOGIC_OP);
-      colorMaterial = dt.glIsEnabled(GL_COLOR_MATERIAL);
-      colorMaterial = dt.glIsEnabled(GL_COLOR_MATERIAL);
-      colorSum = dt.glIsEnabled(GL_COLOR_SUM);
-      colorTable = dt.glIsEnabled(GL_COLOR_TABLE);
-      convolution1d = dt.glIsEnabled(GL_CONVOLUTION_1D);
-      convolution2d = dt.glIsEnabled(GL_CONVOLUTION_2D);
-      cullFace = dt.glIsEnabled(GL_CULL_FACE);
-      depthClamp = dt.glIsEnabled(GL_DEPTH_CLAMP);
-      depthTest = dt.glIsEnabled(GL_DEPTH_TEST);
-      dither = dt.glIsEnabled(GL_DITHER);
-      fog = dt.glIsEnabled(GL_FOG);
-      framebufferSRGB = dt.glIsEnabled(GL_FRAMEBUFFER_SRGB);
-      histogram = dt.glIsEnabled(GL_HISTOGRAM);
-      indexLogicOp = dt.glIsEnabled(GL_INDEX_LOGIC_OP);
+        clipDistance[ii] = dt.call(&dt.glIsEnabled)(GL_CLIP_DISTANCE0+ii);
+      colorLogicOp  = dt.call(&dt.glIsEnabled)(GL_COLOR_LOGIC_OP);
+      colorMaterial = dt.call(&dt.glIsEnabled)(GL_COLOR_MATERIAL);
+      colorMaterial = dt.call(&dt.glIsEnabled)(GL_COLOR_MATERIAL);
+      colorSum = dt.call(&dt.glIsEnabled)(GL_COLOR_SUM);
+      colorTable = dt.call(&dt.glIsEnabled)(GL_COLOR_TABLE);
+      convolution1d = dt.call(&dt.glIsEnabled)(GL_CONVOLUTION_1D);
+      convolution2d = dt.call(&dt.glIsEnabled)(GL_CONVOLUTION_2D);
+      cullFace = dt.call(&dt.glIsEnabled)(GL_CULL_FACE);
+      depthClamp = dt.call(&dt.glIsEnabled)(GL_DEPTH_CLAMP);
+      depthTest = dt.call(&dt.glIsEnabled)(GL_DEPTH_TEST);
+      dither = dt.call(&dt.glIsEnabled)(GL_DITHER);
+      fog = dt.call(&dt.glIsEnabled)(GL_FOG);
+      framebufferSRGB = dt.call(&dt.glIsEnabled)(GL_FRAMEBUFFER_SRGB);
+      histogram = dt.call(&dt.glIsEnabled)(GL_HISTOGRAM);
+      indexLogicOp = dt.call(&dt.glIsEnabled)(GL_INDEX_LOGIC_OP);
       for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
-        light[ii] = dt.glIsEnabled(GL_LIGHT0+ii);
-      lighting = dt.glIsEnabled(GL_LIGHTING);
-      lineSmooth = dt.glIsEnabled(GL_LINE_SMOOTH);
-      lineStipple = dt.glIsEnabled(GL_LINE_STIPPLE);
-      minmax = dt.glIsEnabled(GL_MINMAX);
-      multisample = dt.glIsEnabled(GL_MULTISAMPLE);
-      normalize = dt.glIsEnabled(GL_NORMALIZE);
-      pointSmooth = dt.glIsEnabled(GL_POINT_SMOOTH);
-      pointSprite = dt.glIsEnabled(GL_POINT_SPRITE);
-      polygonOffsetFill = dt.glIsEnabled(GL_POLYGON_OFFSET_FILL);
-      polygonOffsetLine = dt.glIsEnabled(GL_POLYGON_OFFSET_LINE);
-      polygonOffsetPoint = dt.glIsEnabled(GL_POLYGON_OFFSET_POINT);
-      polygonSmooth = dt.glIsEnabled(GL_POLYGON_SMOOTH);
-      polygonStipple = dt.glIsEnabled(GL_POLYGON_STIPPLE);
-      postColorMatrixColorTable = dt.glIsEnabled(GL_POST_COLOR_MATRIX_COLOR_TABLE);
-      postConvolutionColorTable = dt.glIsEnabled(GL_POST_CONVOLUTION_COLOR_TABLE);
-      programPointSize = dt.glIsEnabled(GL_PROGRAM_POINT_SIZE);
-      rescaleNormal = dt.glIsEnabled(GL_RESCALE_NORMAL);
-      sampleAlphaToCoverage = dt.glIsEnabled(GL_SAMPLE_ALPHA_TO_COVERAGE);
-      sampleAlphaToOne = dt.glIsEnabled(GL_SAMPLE_ALPHA_TO_ONE);
-      sampleCoverage = dt.glIsEnabled(GL_SAMPLE_COVERAGE);
-      sampleShading = dt.glIsEnabled(GL_SAMPLE_SHADING);
-      separable2d = dt.glIsEnabled(GL_SEPARABLE_2D);
-      stencilTest = dt.glIsEnabled(GL_STENCIL_TEST);
+        light[ii] = dt.call(&dt.glIsEnabled)(GL_LIGHT0+ii);
+      lighting = dt.call(&dt.glIsEnabled)(GL_LIGHTING);
+      lineSmooth = dt.call(&dt.glIsEnabled)(GL_LINE_SMOOTH);
+      lineStipple = dt.call(&dt.glIsEnabled)(GL_LINE_STIPPLE);
+      map1Color4 = dt.call(&dt.glIsEnabled)(GL_MAP1_COLOR_4);
+      map1Index = dt.call(&dt.glIsEnabled)(GL_MAP1_INDEX);
+      map1Normal = dt.call(&dt.glIsEnabled)(GL_MAP1_NORMAL);
+      map1TextureCoord1 = dt.call(&dt.glIsEnabled)(GL_MAP1_TEXTURE_COORD_1);
+      map1TextureCoord2 = dt.call(&dt.glIsEnabled)(GL_MAP1_TEXTURE_COORD_2);
+      map1TextureCoord3 = dt.call(&dt.glIsEnabled)(GL_MAP1_TEXTURE_COORD_3);
+      map1TextureCoord4 = dt.call(&dt.glIsEnabled)(GL_MAP1_TEXTURE_COORD_4);
+      map1Vertex3 = dt.call(&dt.glIsEnabled)(GL_MAP1_VERTEX_3);
+      map1Vertex4 = dt.call(&dt.glIsEnabled)(GL_MAP1_VERTEX_4);
+      map2Color4 = dt.call(&dt.glIsEnabled)(GL_MAP2_COLOR_4);
+      map2Index = dt.call(&dt.glIsEnabled)(GL_MAP2_INDEX);
+      map2Normal = dt.call(&dt.glIsEnabled)(GL_MAP2_NORMAL);
+      map2TextureCoord1 = dt.call(&dt.glIsEnabled)(GL_MAP2_TEXTURE_COORD_1);
+      map2TextureCoord2 = dt.call(&dt.glIsEnabled)(GL_MAP2_TEXTURE_COORD_2);
+      map2TextureCoord3 = dt.call(&dt.glIsEnabled)(GL_MAP2_TEXTURE_COORD_3);
+      map2TextureCoord4 = dt.call(&dt.glIsEnabled)(GL_MAP2_TEXTURE_COORD_4);
+      map2Vertex3 = dt.call(&dt.glIsEnabled)(GL_MAP2_VERTEX_3);
+      map2Vertex4 = dt.call(&dt.glIsEnabled)(GL_MAP2_VERTEX_4);
+      minmax = dt.call(&dt.glIsEnabled)(GL_MINMAX);
+      multisample = dt.call(&dt.glIsEnabled)(GL_MULTISAMPLE);
+      normalize = dt.call(&dt.glIsEnabled)(GL_NORMALIZE);
+      pointSmooth = dt.call(&dt.glIsEnabled)(GL_POINT_SMOOTH);
+      pointSprite = dt.call(&dt.glIsEnabled)(GL_POINT_SPRITE);
+      polygonOffsetFill = dt.call(&dt.glIsEnabled)(GL_POLYGON_OFFSET_FILL);
+      polygonOffsetLine = dt.call(&dt.glIsEnabled)(GL_POLYGON_OFFSET_LINE);
+      polygonOffsetPoint = dt.call(&dt.glIsEnabled)(GL_POLYGON_OFFSET_POINT);
+      polygonSmooth = dt.call(&dt.glIsEnabled)(GL_POLYGON_SMOOTH);
+      polygonStipple = dt.call(&dt.glIsEnabled)(GL_POLYGON_STIPPLE);
+      postColorMatrixColorTable = dt.call(&dt.glIsEnabled)(GL_POST_COLOR_MATRIX_COLOR_TABLE);
+      postConvolutionColorTable = dt.call(&dt.glIsEnabled)(GL_POST_CONVOLUTION_COLOR_TABLE);
+      programPointSize = dt.call(&dt.glIsEnabled)(GL_PROGRAM_POINT_SIZE);
+      rescaleNormal = dt.call(&dt.glIsEnabled)(GL_RESCALE_NORMAL);
+      sampleAlphaToCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_COVERAGE);
+      sampleAlphaToOne = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_ONE);
+      sampleCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE);
+      sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
+      separable2d = dt.call(&dt.glIsEnabled)(GL_SEPARABLE_2D);
+      stencilTest = dt.call(&dt.glIsEnabled)(GL_STENCIL_TEST);
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
-        scissorTest[ii] = dt.glIsEnabledi(GL_SCISSOR_TEST,ii);
+        scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,ii);
       {
         for (int ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
         {
-          texture1d[ii]      = dt.glIsEnabledIndexedEXT(GL_TEXTURE_1D,ii);
-          texture2d[ii]      = dt.glIsEnabledIndexedEXT(GL_TEXTURE_2D,ii);
-          texture3d[ii]      = dt.glIsEnabledIndexedEXT(GL_TEXTURE_3D,ii);
-          textureCubeMap[ii] = dt.glIsEnabledIndexedEXT(GL_TEXTURE_CUBE_MAP,ii);
-          textureGenS[ii]    = dt.glIsEnabledIndexedEXT(GL_TEXTURE_GEN_S,ii);
-          textureGenT[ii]    = dt.glIsEnabledIndexedEXT(GL_TEXTURE_GEN_T,ii);
-          textureGenR[ii]    = dt.glIsEnabledIndexedEXT(GL_TEXTURE_GEN_R,ii);
-          textureGenQ[ii]    = dt.glIsEnabledIndexedEXT(GL_TEXTURE_GEN_Q,ii);
+          texture1d[ii]      = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_1D,ii);
+          texture2d[ii]      = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_2D,ii);
+          texture3d[ii]      = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_3D,ii);
+          textureCubeMap[ii] = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_CUBE_MAP,ii);
+          textureGenS[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_S,ii);
+          textureGenT[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_T,ii);
+          textureGenR[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_R,ii);
+          textureGenQ[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_Q,ii);
         }
       }
 
@@ -346,16 +463,15 @@ namespace State {
     }
     inline const Enable &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glClampColor);
       setEnable(dt,GL_ALPHA_TEST,alphaTest);
       setEnable(dt,GL_AUTO_NORMAL,autoNormal);
       for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
         setEnablei(dt,GL_BLEND,ii,blend[ii]);
       setEnable(dt,GL_COLOR_LOGIC_OP,colorLogicOp);
       setEnable(dt,GL_COLOR_MATERIAL,colorMaterial);
-      dt.glClampColor(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
-      dt.glClampColor(GL_CLAMP_READ_COLOR,clampReadColor);
-      dt.glClampColor(GL_CLAMP_VERTEX_COLOR,clampVertexColor);
+      dt.call(&dt.glClampColor)(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
+      dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
+      dt.call(&dt.glClampColor)(GL_CLAMP_VERTEX_COLOR,clampVertexColor);
       for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
         setEnable(dt,GL_CLIP_DISTANCE0+ii,clipDistance[ii]);
       setEnable(dt,GL_COLOR_MATERIAL,colorMaterial);
@@ -376,6 +492,24 @@ namespace State {
       setEnable(dt,GL_LIGHTING,lighting);
       setEnable(dt,GL_LINE_SMOOTH,lineSmooth);
       setEnable(dt,GL_LINE_STIPPLE,lineStipple);
+      setEnable(dt,GL_MAP1_COLOR_4,map1Color4);
+      setEnable(dt,GL_MAP1_INDEX,map1Index);
+      setEnable(dt,GL_MAP1_NORMAL,map1Normal);
+      setEnable(dt,GL_MAP1_TEXTURE_COORD_1,map1TextureCoord1);
+      setEnable(dt,GL_MAP1_TEXTURE_COORD_2,map1TextureCoord2);
+      setEnable(dt,GL_MAP1_TEXTURE_COORD_3,map1TextureCoord3);
+      setEnable(dt,GL_MAP1_TEXTURE_COORD_4,map1TextureCoord4);
+      setEnable(dt,GL_MAP1_VERTEX_3,map1Vertex3);
+      setEnable(dt,GL_MAP1_VERTEX_4,map1Vertex4);
+      setEnable(dt,GL_MAP2_COLOR_4,map2Color4);
+      setEnable(dt,GL_MAP2_INDEX,map2Index);
+      setEnable(dt,GL_MAP2_NORMAL,map2Normal);
+      setEnable(dt,GL_MAP2_TEXTURE_COORD_1,map2TextureCoord1);
+      setEnable(dt,GL_MAP2_TEXTURE_COORD_2,map2TextureCoord2);
+      setEnable(dt,GL_MAP2_TEXTURE_COORD_3,map2TextureCoord3);
+      setEnable(dt,GL_MAP2_TEXTURE_COORD_4,map2TextureCoord4);
+      setEnable(dt,GL_MAP2_VERTEX_3,map2Vertex3);
+      setEnable(dt,GL_MAP2_VERTEX_4,map2Vertex4);
       setEnable(dt,GL_MINMAX,minmax);
       setEnable(dt,GL_MULTISAMPLE,multisample);
       setEnable(dt,GL_NORMALIZE,normalize);
@@ -446,6 +580,24 @@ namespace State {
       enableToString(tmp, lineSmooth, "GL_LINE_SMOOTH",delim);
       enableToString(tmp, lineStipple, "GL_LINE_STIPPLE",delim);
       enableToString(tmp, indexLogicOp, "GL_INDEX_LOGIC_OP",delim);
+      enableToString(tmp, map1Color4, "GL_MAP1_COLOR_4",delim);
+      enableToString(tmp, map1Index, "GL_MAP1_INDEX",delim);
+      enableToString(tmp, map1Normal, "GL_MAP1_NORMAL",delim);
+      enableToString(tmp, map1TextureCoord1, "GL_MAP1_TEXTURE_COORD_1",delim);
+      enableToString(tmp, map1TextureCoord2, "GL_MAP1_TEXTURE_COORD_2",delim);
+      enableToString(tmp, map1TextureCoord3, "GL_MAP1_TEXTURE_COORD_3",delim);
+      enableToString(tmp, map1TextureCoord4, "GL_MAP1_TEXTURE_COORD_4",delim);
+      enableToString(tmp, map1Vertex3, "GL_MAP1_VERTEX_3",delim);
+      enableToString(tmp, map1Vertex4, "GL_MAP1_VERTEX_4",delim);
+      enableToString(tmp, map2Color4, "GL_MAP2_COLOR_4",delim);
+      enableToString(tmp, map2Index, "GL_MAP2_INDEX",delim);
+      enableToString(tmp, map2Normal, "GL_MAP2_NORMAL",delim);
+      enableToString(tmp, map2TextureCoord1, "GL_MAP2_TEXTURE_COORD_1",delim);
+      enableToString(tmp, map2TextureCoord2, "GL_MAP2_TEXTURE_COORD_2",delim);
+      enableToString(tmp, map2TextureCoord3, "GL_MAP2_TEXTURE_COORD_3",delim);
+      enableToString(tmp, map2TextureCoord4, "GL_MAP2_TEXTURE_COORD_4",delim);
+      enableToString(tmp, map2Vertex3, "GL_MAP2_VERTEX_3",delim);
+      enableToString(tmp, map2Vertex4, "GL_MAP2_VERTEX_4",delim);
       enableToString(tmp, minmax, "GL_MINMAX",delim);
       enableToString(tmp, multisample, "GL_MULTISAMPLE",delim);
       enableToString(tmp, normalize, "GL_NORMALIZE",delim);
@@ -484,8 +636,6 @@ namespace State {
           tmp << print_string("Texture unit ",ii,": ",textureGenQ[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_GEN_Q);",delim);
         }
       }
-      // TODO: GL_MAP1_x where x is a map type (9 x B) (GL_FALSE)
-      // TODO: GL_MAP2_x where x is a map type (9 x B) (GL_FALSE)
       return tmp;
     }
   };
@@ -537,38 +687,22 @@ namespace State {
 
     inline Depth &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glIsEnabled);
-      enable = dt.glIsEnabled(GL_DEPTH_TEST);
-
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetIntegerv(GL_DEPTH_FUNC,reinterpret_cast<GLint *>(&func));
-
-      RegalAssert(dt.glGetFloatv);
-      dt.glGetFloatv(GL_DEPTH_CLEAR_VALUE,reinterpret_cast<GLfloat *>(&clear));
-
-      RegalAssert(dt.glGetBooleanv);
-      dt.glGetBooleanv(GL_DEPTH_WRITEMASK,&mask);
-
+      enable = dt.call(&dt.glIsEnabled)(GL_DEPTH_TEST);
+      dt.call(&dt.glGetIntegerv)(GL_DEPTH_FUNC,reinterpret_cast<GLint *>(&func));
+      dt.call(&dt.glGetFloatv)(GL_DEPTH_CLEAR_VALUE,reinterpret_cast<GLfloat *>(&clear));
+      dt.call(&dt.glGetBooleanv)(GL_DEPTH_WRITEMASK,&mask);
       return *this;
     }
 
     inline const Depth &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glEnable);
-      RegalAssert(dt.glDisable);
       if (enable)
-        dt.glEnable(GL_DEPTH_TEST);
+        dt.call(&dt.glEnable)(GL_DEPTH_TEST);
       else
-        dt.glDisable(GL_DEPTH_TEST);
-
-      RegalAssert(dt.glDepthFunc);
-      dt.glDepthFunc(func);
-
-      RegalAssert(dt.glClearDepth);
-      dt.glClearDepth(clear);
-
-      RegalAssert(dt.glDepthMask);
-      dt.glDepthMask(mask);
+        dt.call(&dt.glDisable)(GL_DEPTH_TEST);
+      dt.call(&dt.glDepthFunc)(func);
+      dt.call(&dt.glClearDepth)(clear);
+      dt.call(&dt.glDepthMask)(mask);
 
       return *this;
     }
@@ -619,28 +753,21 @@ namespace State {
 
     inline StencilFace &get(DispatchTable &dt, GLenum face)
     {
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_FUNC            : GL_STENCIL_BACK_FUNC,            reinterpret_cast<GLint *>(&func)     );
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_REF             : GL_STENCIL_BACK_REF,             &ref                                 );
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_VALUE_MASK      : GL_STENCIL_BACK_VALUE_MASK,      reinterpret_cast<GLint *>(&valueMask));
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_WRITEMASK       : GL_STENCIL_BACK_WRITEMASK,       reinterpret_cast<GLint *>(&writeMask));
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_FAIL            : GL_STENCIL_BACK_FAIL,            reinterpret_cast<GLint *>(&fail)     );
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_PASS_DEPTH_FAIL : GL_STENCIL_BACK_PASS_DEPTH_FAIL, reinterpret_cast<GLint *>(&zfail)    );
-      dt.glGetIntegerv(face==GL_FRONT ? GL_STENCIL_PASS_DEPTH_PASS : GL_STENCIL_BACK_PASS_DEPTH_PASS, reinterpret_cast<GLint *>(&zpass)    );
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_FUNC            : GL_STENCIL_BACK_FUNC,            reinterpret_cast<GLint *>(&func)     );
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_REF             : GL_STENCIL_BACK_REF,             &ref                                 );
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_VALUE_MASK      : GL_STENCIL_BACK_VALUE_MASK,      reinterpret_cast<GLint *>(&valueMask));
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_WRITEMASK       : GL_STENCIL_BACK_WRITEMASK,       reinterpret_cast<GLint *>(&writeMask));
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_FAIL            : GL_STENCIL_BACK_FAIL,            reinterpret_cast<GLint *>(&fail)     );
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_PASS_DEPTH_FAIL : GL_STENCIL_BACK_PASS_DEPTH_FAIL, reinterpret_cast<GLint *>(&zfail)    );
+      dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_PASS_DEPTH_PASS : GL_STENCIL_BACK_PASS_DEPTH_PASS, reinterpret_cast<GLint *>(&zpass)    );
       return *this;
     }
 
     inline const StencilFace &set(DispatchTable &dt, GLenum face) const
     {
-      RegalAssert(dt.glStencilFuncSeparate);
-      dt.glStencilFuncSeparate(face,func,ref,valueMask);
-
-      RegalAssert(dt.glStencilMaskSeparate);
-      dt.glStencilMaskSeparate(face,writeMask);
-
-      RegalAssert(dt.glStencilOpSeparate);
-      dt.glStencilOpSeparate(face,fail,zfail,zpass);
-
+      dt.call(&dt.glStencilFuncSeparate)(face,func,ref,valueMask);
+      dt.call(&dt.glStencilMaskSeparate)(face,writeMask);
+      dt.call(&dt.glStencilOpSeparate)(face,fail,zfail,zpass);
       return *this;
     }
 
@@ -768,29 +895,22 @@ namespace State {
 
     inline Stencil &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glIsEnabled);
-      enable = dt.glIsEnabled(GL_STENCIL_TEST);
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetIntegerv(GL_STENCIL_CLEAR_VALUE,&clear);
+      enable = dt.call(&dt.glIsEnabled)(GL_STENCIL_TEST);
+      dt.call(&dt.glGetIntegerv)(GL_STENCIL_CLEAR_VALUE,&clear);
       front.get(dt,GL_FRONT);
-      back .get(dt,GL_BACK );   // What about GL < 2.0 ?
+      back.get(dt,GL_BACK );   // What about GL < 2.0 ?
       return *this;
     }
 
     inline const Stencil &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glEnable);
-      RegalAssert(dt.glDisable);
       if (enable)
-        dt.glEnable(GL_STENCIL_TEST);
+        dt.call(&dt.glEnable)(GL_STENCIL_TEST);
       else
-        dt.glDisable(GL_STENCIL_TEST);
-
-      RegalAssert(dt.glClearStencil);
-      dt.glClearStencil(clear);
-
+        dt.call(&dt.glDisable)(GL_STENCIL_TEST);
+      dt.call(&dt.glClearStencil)(clear);
       front.set(dt,GL_FRONT);
-      back .set(dt,GL_BACK);
+      back.set(dt,GL_BACK);
       return *this;
     }
 
@@ -877,74 +997,62 @@ namespace State {
 
     inline Polygon &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glIsEnabled);
-      cullEnable = dt.glIsEnabled(GL_CULL_FACE);
+      cullEnable = dt.call(&dt.glIsEnabled)(GL_CULL_FACE);
+      dt.call(&dt.glGetIntegerv)(GL_CULL_FACE_MODE,reinterpret_cast<GLint *>(&cull));
+      dt.call(&dt.glGetIntegerv)(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
+      dt.call(&dt.glGetIntegerv)(GL_POLYGON_MODE,reinterpret_cast<GLint *>(&frontMode));
+      dt.call(&dt.glGetIntegerv)(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
 
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetIntegerv(GL_CULL_FACE_MODE,reinterpret_cast<GLint *>(&cull));
-      dt.glGetIntegerv(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
-      dt.glGetIntegerv(GL_POLYGON_MODE,reinterpret_cast<GLint *>(&frontMode));
-      dt.glGetIntegerv(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
-
-      smoothEnable  = dt.glIsEnabled(GL_POLYGON_SMOOTH);
-      stippleEnable = dt.glIsEnabled(GL_POLYGON_STIPPLE);
-      offsetFill    = dt.glIsEnabled(GL_POLYGON_OFFSET_FILL);
-      offsetLine    = dt.glIsEnabled(GL_POLYGON_OFFSET_LINE);
-      offsetPoint   = dt.glIsEnabled(GL_POLYGON_OFFSET_POINT);
-
-      RegalAssert(dt.glGetFloatv);
-      dt.glGetFloatv(GL_POLYGON_OFFSET_FACTOR,&factor);
-      dt.glGetFloatv(GL_POLYGON_OFFSET_UNITS,&units);
-
+      smoothEnable  = dt.call(&dt.glIsEnabled)(GL_POLYGON_SMOOTH);
+      stippleEnable = dt.call(&dt.glIsEnabled)(GL_POLYGON_STIPPLE);
+      offsetFill    = dt.call(&dt.glIsEnabled)(GL_POLYGON_OFFSET_FILL);
+      offsetLine    = dt.call(&dt.glIsEnabled)(GL_POLYGON_OFFSET_LINE);
+      offsetPoint   = dt.call(&dt.glIsEnabled)(GL_POLYGON_OFFSET_POINT);
+      dt.call(&dt.glGetFloatv)(GL_POLYGON_OFFSET_FACTOR,&factor);
+      dt.call(&dt.glGetFloatv)(GL_POLYGON_OFFSET_UNITS,&units);
       return *this;
     }
 
     inline const Polygon &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glEnable);
-      RegalAssert(dt.glDisable);
       if (cullEnable)
-        dt.glEnable(GL_CULL_FACE);
+        dt.call(&dt.glEnable)(GL_CULL_FACE);
       else
-        dt.glDisable(GL_CULL_FACE);
+        dt.call(&dt.glDisable)(GL_CULL_FACE);
 
-      RegalAssert(dt.glCullFace);
-      dt.glCullFace(cull);
+      dt.call(&dt.glCullFace)(cull);
 
-      RegalAssert(dt.glFrontFace);
-      dt.glFrontFace(frontFace);
+      dt.call(&dt.glFrontFace)(frontFace);
 
-      RegalAssert(dt.glPolygonMode);
-      dt.glPolygonMode(GL_FRONT,frontMode);
-      dt.glPolygonMode(GL_BACK,backMode);
+      dt.call(&dt.glPolygonMode)(GL_FRONT,frontMode);
+      dt.call(&dt.glPolygonMode)(GL_BACK,backMode);
 
       if (smoothEnable)
-        dt.glEnable(GL_POLYGON_SMOOTH);
+        dt.call(&dt.glEnable)(GL_POLYGON_SMOOTH);
       else
-        dt.glDisable(GL_POLYGON_SMOOTH);
+        dt.call(&dt.glDisable)(GL_POLYGON_SMOOTH);
 
       if (stippleEnable)
-        dt.glEnable(GL_POLYGON_STIPPLE);
+        dt.call(&dt.glEnable)(GL_POLYGON_STIPPLE);
       else
-        dt.glDisable(GL_POLYGON_STIPPLE);
+        dt.call(&dt.glDisable)(GL_POLYGON_STIPPLE);
 
       if (offsetFill)
-        dt.glEnable(GL_POLYGON_OFFSET_FILL);
+        dt.call(&dt.glEnable)(GL_POLYGON_OFFSET_FILL);
       else
-        dt.glDisable(GL_POLYGON_OFFSET_FILL);
+        dt.call(&dt.glDisable)(GL_POLYGON_OFFSET_FILL);
 
       if (offsetLine)
-        dt.glEnable(GL_POLYGON_OFFSET_LINE);
+        dt.call(&dt.glEnable)(GL_POLYGON_OFFSET_LINE);
       else
-        dt.glDisable(GL_POLYGON_OFFSET_LINE);
+        dt.call(&dt.glDisable)(GL_POLYGON_OFFSET_LINE);
 
       if (offsetPoint)
-        dt.glEnable(GL_POLYGON_OFFSET_POINT);
+        dt.call(&dt.glEnable)(GL_POLYGON_OFFSET_POINT);
       else
-        dt.glDisable(GL_POLYGON_OFFSET_POINT);
+        dt.call(&dt.glDisable)(GL_POLYGON_OFFSET_POINT);
 
-      RegalAssert(dt.glPolygonOffset);
-      dt.glPolygonOffset(factor,units);
+      dt.call(&dt.glPolygonOffset)(factor,units);
 
       return *this;
     }
@@ -1054,22 +1162,17 @@ namespace State {
 
     inline const Transform &transition(DispatchTable &dt, Transform& current) const
     {
-      RegalAssert(dt.glEnable);
-      RegalAssert(dt.glDisable);
-      RegalAssert(dt.glMatrixMode);
-      RegalAssert(dt.glClipPlane);
-
       for (GLint i = 0; i < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES; i++)
       {
         if (current.clipPlane[i].enabled != clipPlane[i].enabled)
           setEnable(dt, GL_CLIP_PLANE0 + i, clipPlane[i].enabled);
 
         if (current.clipPlane[i].equation != clipPlane[i].equation)
-          dt.glClipPlane(GL_CLIP_PLANE0 + i, clipPlane[i].equation.data);
+          dt.call(&dt.glClipPlane)(GL_CLIP_PLANE0 + i, clipPlane[i].equation.data);
       }
 
       if (current.matrixMode != matrixMode)
-        dt.glMatrixMode(matrixMode);
+        dt.call(&dt.glMatrixMode)(matrixMode);
 
       if (current.normalize != normalize)
         setEnable(dt, GL_NORMALIZE, normalize);
@@ -1154,29 +1257,27 @@ namespace State {
 
     inline Hint &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetIntegerv(GL_PERSPECTIVE_CORRECTION_HINT,reinterpret_cast<GLint *>(&perspectiveCorrection));
-      dt.glGetIntegerv(GL_POINT_SMOOTH_HINT,reinterpret_cast<GLint *>(&pointSmooth));
-      dt.glGetIntegerv(GL_LINE_SMOOTH_HINT,reinterpret_cast<GLint *>(&lineSmooth));
-      dt.glGetIntegerv(GL_POLYGON_SMOOTH_HINT,reinterpret_cast<GLint *>(&polygonSmooth));
-      dt.glGetIntegerv(GL_FOG_HINT,reinterpret_cast<GLint *>(&fog));
-      dt.glGetIntegerv(GL_GENERATE_MIPMAP_HINT,reinterpret_cast<GLint *>(&generateMipmap));
-      dt.glGetIntegerv(GL_TEXTURE_COMPRESSION_HINT,reinterpret_cast<GLint *>(&textureCompression));
-      dt.glGetIntegerv(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,reinterpret_cast<GLint *>(&fragmentShaderDerivative));
+      dt.call(&dt.glGetIntegerv)(GL_PERSPECTIVE_CORRECTION_HINT,reinterpret_cast<GLint *>(&perspectiveCorrection));
+      dt.call(&dt.glGetIntegerv)(GL_POINT_SMOOTH_HINT,reinterpret_cast<GLint *>(&pointSmooth));
+      dt.call(&dt.glGetIntegerv)(GL_LINE_SMOOTH_HINT,reinterpret_cast<GLint *>(&lineSmooth));
+      dt.call(&dt.glGetIntegerv)(GL_POLYGON_SMOOTH_HINT,reinterpret_cast<GLint *>(&polygonSmooth));
+      dt.call(&dt.glGetIntegerv)(GL_FOG_HINT,reinterpret_cast<GLint *>(&fog));
+      dt.call(&dt.glGetIntegerv)(GL_GENERATE_MIPMAP_HINT,reinterpret_cast<GLint *>(&generateMipmap));
+      dt.call(&dt.glGetIntegerv)(GL_TEXTURE_COMPRESSION_HINT,reinterpret_cast<GLint *>(&textureCompression));
+      dt.call(&dt.glGetIntegerv)(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,reinterpret_cast<GLint *>(&fragmentShaderDerivative));
       return *this;
     }
 
     inline const Hint &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glHint);
-      dt.glHint(GL_PERSPECTIVE_CORRECTION_HINT, perspectiveCorrection);
-      dt.glHint(GL_POINT_SMOOTH_HINT, pointSmooth);
-      dt.glHint(GL_LINE_SMOOTH_HINT, lineSmooth);
-      dt.glHint(GL_POLYGON_SMOOTH_HINT, polygonSmooth);
-      dt.glHint(GL_FOG_HINT, fog);
-      dt.glHint(GL_GENERATE_MIPMAP_HINT, generateMipmap);
-      dt.glHint(GL_TEXTURE_COMPRESSION_HINT, textureCompression);
-      dt.glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT, fragmentShaderDerivative);
+      dt.call(&dt.glHint)(GL_PERSPECTIVE_CORRECTION_HINT, perspectiveCorrection);
+      dt.call(&dt.glHint)(GL_POINT_SMOOTH_HINT, pointSmooth);
+      dt.call(&dt.glHint)(GL_LINE_SMOOTH_HINT, lineSmooth);
+      dt.call(&dt.glHint)(GL_POLYGON_SMOOTH_HINT, polygonSmooth);
+      dt.call(&dt.glHint)(GL_FOG_HINT, fog);
+      dt.call(&dt.glHint)(GL_GENERATE_MIPMAP_HINT, generateMipmap);
+      dt.call(&dt.glHint)(GL_TEXTURE_COMPRESSION_HINT, textureCompression);
+      dt.call(&dt.glHint)(GL_FRAGMENT_SHADER_DERIVATIVE_HINT, fragmentShaderDerivative);
       return *this;
     }
 
@@ -1217,15 +1318,13 @@ namespace State {
 
     inline List &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetIntegerv(GL_LIST_BASE,reinterpret_cast<GLint *>(&base));
+      dt.call(&dt.glGetIntegerv)(GL_LIST_BASE,reinterpret_cast<GLint *>(&base));
       return *this;
     }
 
     inline const List &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glStencilFuncSeparate);
-      dt.glListBase(base);
+      dt.call(&dt.glListBase)(base);
       return *this;
     }
 
@@ -1262,15 +1361,13 @@ namespace State {
 
     inline AccumBuffer &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glGetFloatv);
-      dt.glGetFloatv(GL_ACCUM_CLEAR_VALUE,&(clear[0]));
+      dt.call(&dt.glGetFloatv)(GL_ACCUM_CLEAR_VALUE,&(clear[0]));
       return *this;
     }
 
     inline const AccumBuffer &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glClearAccum);
-      dt.glClearAccum(clear[0],clear[1],clear[2],clear[3]);
+      dt.call(&dt.glClearAccum)(clear[0],clear[1],clear[2],clear[3]);
       return *this;
     }
 
@@ -1286,11 +1383,13 @@ namespace State {
   {
     GLboolean   scissorTest[REGAL_MAX_VIEWPORTS];   // GL_SCISSOR_TEST
     GLint       scissorBox[REGAL_MAX_VIEWPORTS][4]; // GL_SCISSOR_BOX
+    bool        valid[REGAL_MAX_VIEWPORTS];
 
     inline Scissor()
     {
       std::memset(scissorTest,GL_FALSE,sizeof(scissorTest));
       std::memset(scissorBox,0,sizeof(scissorBox));
+      std::memset(valid,false,sizeof(valid));
     }
 
     inline Scissor(const Scissor &other)
@@ -1299,17 +1398,34 @@ namespace State {
         std::memcpy(this,&other,sizeof(Scissor));
     }
 
-    inline Scissor &operator=(const Scissor &other)
+    inline Scissor &swap(Scissor &other)
     {
-      if (this!=&other)
-        std::memcpy(this,&other,sizeof(Scissor));
+      std::swap_ranges(scissorTest,scissorTest+REGAL_MAX_VIEWPORTS,other.scissorTest);
+      std::swap_ranges(&scissorBox[0][0],&scissorBox[0][0]+(REGAL_MAX_VIEWPORTS*4),&other.scissorBox[0][0]);
+      std::swap_ranges(valid,valid+REGAL_MAX_VIEWPORTS,other.valid);
       return *this;
     }
 
-    inline Scissor &swap(Scissor &other)
+    bool defined() const
     {
-      *this = other;
-      return *this;
+      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      {
+        if (!valid[ii])
+          return false;
+      }
+      return true;
+    }
+
+    void define(DispatchTable &dt)
+    {
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      {
+        if (!valid[ii])
+        {
+          dt.call(&dt.glGetIntegeri_v)(GL_SCISSOR_BOX, ii, &scissorBox[ii][0]);
+          valid[ii] = true;
+        }
+      }
     }
 
     void glScissorArrayv( GLuint first, GLsizei count, const GLint *v )
@@ -1323,6 +1439,7 @@ namespace State {
         scissorBox[ii][1] = v[1];
         scissorBox[ii][2] = v[2];
         scissorBox[ii][3] = v[3];
+        valid[ii] = true;
         v += 4;
       }
     }
@@ -1335,6 +1452,7 @@ namespace State {
         scissorBox[index][1] = bottom;
         scissorBox[index][2] = width;
         scissorBox[index][3] = height;
+        valid[index] = true;
       }
     }
 
@@ -1346,6 +1464,7 @@ namespace State {
         scissorBox[index][1] = v[1];
         scissorBox[index][2] = v[2];
         scissorBox[index][3] = v[3];
+        valid[index] = true;
       }
     }
 
@@ -1357,32 +1476,33 @@ namespace State {
         scissorBox[ii][1] = bottom;
         scissorBox[ii][2] = width;
         scissorBox[ii][3] = height;
+        valid[ii] = true;
       }
     }
 
     inline Scissor &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glIsEnabledi);
-      RegalAssert(dt.glGetIntegeri_v);
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
-        scissorTest[ii] = dt.glIsEnabledi(GL_SCISSOR_TEST,ii);
-        dt.glGetIntegeri_v(GL_SCISSOR_BOX, ii, &scissorBox[ii][0]);
+        scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,ii);
+        dt.call(&dt.glGetIntegeri_v)(GL_SCISSOR_BOX, ii, &scissorBox[ii][0]);
+        valid[ii] = true;
       }
       return *this;
     }
 
     inline const Scissor &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glScissorArrayv);
+      RegalAssert(defined());
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
         setEnablei(dt,GL_SCISSOR_TEST,ii,scissorTest[ii]);
-      dt.glScissorArrayv(0, REGAL_MAX_VIEWPORTS, &scissorBox[0][0]);
+      dt.call(&dt.glScissorArrayv)(0, REGAL_MAX_VIEWPORTS, &scissorBox[0][0]);
       return *this;
     }
 
     inline std::string toString(const char *delim = "\n") const
     {
+      RegalAssert(defined());
       string_list tmp;
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
         enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", ii, delim);
@@ -1396,18 +1516,44 @@ namespace State {
   {
     GLfloat  viewport[REGAL_MAX_VIEWPORTS][4]; // GL_VIEWPORT
     GLclampd depthRange[REGAL_MAX_VIEWPORTS][2]; // GL_DEPTH_RANGE
+    bool     valid[REGAL_MAX_VIEWPORTS];
 
     inline Viewport()
     {
       std::memset(viewport,0,sizeof(viewport));
-      std::memset(depthRange,0,sizeof(depthRange));
+      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      {
+        depthRange[ii][0] = 0;
+        depthRange[ii][1] = 1;
+      }
+      std::memset(valid,false,sizeof(valid));
     }
 
     inline Viewport &swap(Viewport &other)
     {
       std::swap_ranges(&viewport[0][0],&viewport[0][0]+(REGAL_MAX_VIEWPORTS*4),&other.viewport[0][0]);
       std::swap_ranges(&depthRange[0][0],&depthRange[0][0]+(REGAL_MAX_VIEWPORTS*2),&other.depthRange[0][0]);
+      std::swap_ranges(valid,valid+REGAL_MAX_VIEWPORTS,other.valid);
       return *this;
+    }
+
+    bool defined() const
+    {
+      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      {
+        if (!valid[ii])
+          return false;
+      }
+      return true;
+    }
+
+    inline void define(DispatchTable &dt)
+    {
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      {
+        dt.call(&dt.glGetFloati_v)(GL_VIEWPORT, ii, &viewport[ii][0]);
+        valid[ii] = true;
+      }
     }
 
     void glViewportArrayv( GLuint first, GLsizei count, const GLfloat *v )
@@ -1421,6 +1567,7 @@ namespace State {
         viewport[ii][1] = v[1];
         viewport[ii][2] = v[2];
         viewport[ii][3] = v[3];
+        valid[ii] = true;
         v += 4;
       }
     }
@@ -1433,6 +1580,7 @@ namespace State {
         viewport[index][1] = y;
         viewport[index][2] = w;
         viewport[index][3] = h;
+        valid[index] = true;
       }
     }
 
@@ -1444,17 +1592,20 @@ namespace State {
         viewport[index][1] = v[1];
         viewport[index][2] = v[2];
         viewport[index][3] = v[3];
+        valid[index] = true;
       }
     }
 
     void glViewport( GLint x, GLint y, GLsizei w, GLsizei h )
     {
+      Internal("Regal::State::Viewport::glViewport [ ",x,", ",y,", ",w,", ",h,", "," ]");
       for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
       {
         viewport[ii][0] = static_cast<GLfloat>(x);
         viewport[ii][1] = static_cast<GLfloat>(y);
         viewport[ii][2] = static_cast<GLfloat>(w);
         viewport[ii][3] = static_cast<GLfloat>(h);
+        valid[ii] = true;
       }
     }
 
@@ -1496,27 +1647,26 @@ namespace State {
 
     inline Viewport &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glGetFloati_v);
-      RegalAssert(dt.glGetDoublei_v);
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
-        dt.glGetFloati_v(GL_VIEWPORT, ii, &viewport[ii][0]);
-        dt.glGetDoublei_v(GL_DEPTH_RANGE, ii, &depthRange[ii][0]);
+        dt.call(&dt.glGetFloati_v)(GL_VIEWPORT, ii, &viewport[ii][0]);
+        dt.call(&dt.glGetDoublei_v)(GL_DEPTH_RANGE, ii, &depthRange[ii][0]);
+        valid[ii] = true;
       }
       return *this;
     }
 
     inline const Viewport &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glDepthRangeArrayv);
-      RegalAssert(dt.glViewportArrayv);
-      dt.glDepthRangeArrayv(0, REGAL_MAX_VIEWPORTS, &depthRange[0][0] );
-      dt.glViewportArrayv(0, REGAL_MAX_VIEWPORTS, &viewport[0][0] );
+      RegalAssert(defined());
+      dt.call(&dt.glDepthRangeArrayv)(0, REGAL_MAX_VIEWPORTS, &depthRange[0][0] );
+      dt.call(&dt.glViewportArrayv)(0, REGAL_MAX_VIEWPORTS, &viewport[0][0] );
       return *this;
     }
 
     inline std::string toString(const char *delim = "\n") const
     {
+      RegalAssert(defined());
       string_list tmp;
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
         tmp << print_string("glViewportIndexedf(",ii,",",viewport[ii][0],",",viewport[ii][1],",",viewport[ii][2],",",viewport[ii][3],");",delim);
@@ -1566,26 +1716,21 @@ namespace State {
 
     inline Line &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glGetFloatv);
-      RegalAssert(dt.glIsEnabled);
-      RegalAssert(dt.glGetIntegerv);
-      dt.glGetFloatv(GL_LINE_WIDTH,&width);
-      smooth = dt.glIsEnabled(GL_LINE_SMOOTH);
-      stipple = dt.glIsEnabled(GL_LINE_STIPPLE);
-      dt.glGetIntegerv(GL_LINE_STIPPLE_PATTERN,&stippleRepeat);
+      dt.call(&dt.glGetFloatv)(GL_LINE_WIDTH,&width);
+      smooth = dt.call(&dt.glIsEnabled)(GL_LINE_SMOOTH);
+      stipple = dt.call(&dt.glIsEnabled)(GL_LINE_STIPPLE);
+      dt.call(&dt.glGetIntegerv)(GL_LINE_STIPPLE_PATTERN,&stippleRepeat);
       stipplePattern = static_cast<GLushort>(stippleRepeat);
-      dt.glGetIntegerv(GL_LINE_STIPPLE_REPEAT,&stippleRepeat);
+      dt.call(&dt.glGetIntegerv)(GL_LINE_STIPPLE_REPEAT,&stippleRepeat);
       return *this;
     }
 
     inline const Line &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glLineWidth);
-      RegalAssert(dt.glLineStipple);
-      dt.glLineWidth(width);
+      dt.call(&dt.glLineWidth)(width);
       setEnable(dt,GL_LINE_SMOOTH,smooth);
       setEnable(dt,GL_LINE_STIPPLE,stipple);
-      dt.glLineStipple(stippleRepeat, stipplePattern);
+      dt.call(&dt.glLineStipple)(stippleRepeat, stipplePattern);
       return *this;
     }
 
@@ -1649,30 +1794,26 @@ namespace State {
 
     inline Multisample &get(DispatchTable &dt)
     {
-      RegalAssert(dt.glIsEnabled);
-      RegalAssert(dt.glGetFloatv);
-      multisample = dt.glIsEnabled(GL_MULTISAMPLE);
-      sampleAlphaToCoverage = dt.glIsEnabled(GL_SAMPLE_ALPHA_TO_COVERAGE);
-      sampleAlphaToOne = dt.glIsEnabled(GL_SAMPLE_ALPHA_TO_ONE);
-      sampleCoverage = dt.glIsEnabled(GL_SAMPLE_COVERAGE);
-      dt.glGetFloatv(GL_SAMPLE_COVERAGE_VALUE,&sampleCoverageValue);
-      sampleCoverageInvert = dt.glIsEnabled(GL_SAMPLE_COVERAGE_INVERT);
-      sampleShading = dt.glIsEnabled(GL_SAMPLE_SHADING);
-      dt.glGetFloatv(GL_MIN_SAMPLE_SHADING_VALUE,&minSampleShadingValue);
+      multisample = dt.call(&dt.glIsEnabled)(GL_MULTISAMPLE);
+      sampleAlphaToCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_COVERAGE);
+      sampleAlphaToOne = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_ONE);
+      sampleCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE);
+      dt.call(&dt.glGetFloatv)(GL_SAMPLE_COVERAGE_VALUE,&sampleCoverageValue);
+      sampleCoverageInvert = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE_INVERT);
+      sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
+      dt.call(&dt.glGetFloatv)(GL_MIN_SAMPLE_SHADING_VALUE,&minSampleShadingValue);
       return *this;
     }
 
     inline const Multisample &set(DispatchTable &dt) const
     {
-      RegalAssert(dt.glSampleCoverage);
-      RegalAssert(dt.glMinSampleShading);
       setEnable(dt,GL_MULTISAMPLE,multisample);
       setEnable(dt,GL_SAMPLE_ALPHA_TO_COVERAGE,sampleAlphaToCoverage);
       setEnable(dt,GL_SAMPLE_ALPHA_TO_ONE,sampleAlphaToOne);
       setEnable(dt,GL_SAMPLE_COVERAGE,sampleCoverage);
-      dt.glSampleCoverage(sampleCoverageValue, sampleCoverageInvert);
+      dt.call(&dt.glSampleCoverage)(sampleCoverageValue, sampleCoverageInvert);
       setEnable(dt,GL_SAMPLE_SHADING,sampleShading);
-      dt.glMinSampleShading(minSampleShadingValue);
+      dt.call(&dt.glMinSampleShading)(minSampleShadingValue);
       return *this;
     }
 
@@ -1686,6 +1827,106 @@ namespace State {
       tmp << print_string("glSampleCoverage(",sampleCoverageValue,",",sampleCoverageInvert,");",delim);
       enableToString(tmp, sampleShading, "GL_SAMPLE_SHADING", delim);
       tmp << print_string("glMinSampleShading(",minSampleShadingValue,");",delim);
+      return tmp;
+    }
+  };
+
+  struct Eval
+  {
+    GLboolean   autoNormal;                // GL_AUTO_NORMAL
+    GLboolean   map1dEnables[9];           // GL_MAP1_x
+    GLboolean   map2dEnables[9];           // GL_MAP2_x
+    GLdouble    map1GridDomain[2];         // GL_MAP1_GRID_DOMAIN
+    GLdouble    map2GridDomain[4];         // GL_MAP2_GRID_DOMAIN
+    GLuint      map1GridSegments;          // GL_MAP1_GRID_SEGMENTS
+    GLuint      map2GridSegments[2];       // GL_MAP2_GRID_SEGMENTS
+
+    inline Eval()
+    : autoNormal(GL_FALSE)
+    , map1GridSegments(1)
+    {
+      RegalAssert(static_cast<int>(GL_MAP1_VERTEX_4-GL_MAP1_COLOR_4) == 8);
+      RegalAssert(static_cast<int>(GL_MAP2_VERTEX_4-GL_MAP2_COLOR_4) == 8);
+      std::memset(map1dEnables,GL_FALSE,sizeof(map1dEnables));
+      std::memset(map2dEnables,GL_FALSE,sizeof(map2dEnables));
+      map1GridSegments = 1;
+      map1GridDomain[0] = 0;
+      map1GridDomain[1] = 1;
+      map2GridSegments[0] = 1;
+      map2GridSegments[1] = 1;
+      map2GridDomain[0] = 0;
+      map2GridDomain[1] = 1;
+      map2GridDomain[2] = 0;
+      map2GridDomain[3] = 1;
+    }
+
+    inline Eval &swap(Eval &other)
+    {
+      std::swap(autoNormal,other.autoNormal);
+      std::swap_ranges(map1dEnables,map1dEnables+9,other.map1dEnables);
+      std::swap_ranges(map2dEnables,map2dEnables+9,other.map2dEnables);
+      std::swap_ranges(map1GridDomain,map1GridDomain+2,other.map1GridDomain);
+      std::swap_ranges(map2GridDomain,map2GridDomain+4,other.map2GridDomain);
+      std::swap(map1GridSegments,other.map1GridSegments);
+      std::swap_ranges(map2GridSegments,map2GridSegments+2,other.map2GridSegments);
+      return *this;
+    }
+
+    template <typename T> void glMapGrid1( GLint n, T u1, T u2 )
+    {
+      map1GridSegments = n;
+      map1GridDomain[0] = static_cast<GLdouble>(u1);
+      map1GridDomain[1] = static_cast<GLdouble>(u2);
+    }
+
+    template <typename T> void glMapGrid2( GLint un, T u1, T u2, GLint vn, T v1, T v2 )
+    {
+      map2GridSegments[0] = un;
+      map2GridDomain[0] = static_cast<GLdouble>(u1);
+      map2GridDomain[1] = static_cast<GLdouble>(u2);
+      map2GridSegments[1] = vn;
+      map2GridDomain[2] = static_cast<GLdouble>(v1);
+      map2GridDomain[3] = static_cast<GLdouble>(v2);
+    }
+
+    inline Eval &get(DispatchTable &dt)
+    {
+      autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
+      for (GLuint ii=0; ii<9; ii++)
+        map1dEnables[ii] = dt.call(&dt.glIsEnabled)(GL_MAP1_COLOR_4+ii);
+      for (GLuint ii=0; ii<9; ii++)
+        map2dEnables[ii] = dt.call(&dt.glIsEnabled)(GL_MAP2_COLOR_4+ii);
+      dt.call(&dt.glGetDoublev)(GL_MAP1_GRID_DOMAIN, map1GridDomain);
+      dt.call(&dt.glGetDoublev)(GL_MAP2_GRID_DOMAIN, map2GridDomain);
+      dt.call(&dt.glGetIntegerv)(GL_MAP1_GRID_SEGMENTS,reinterpret_cast<GLint*>(&map1GridSegments));
+      dt.call(&dt.glGetIntegerv)(GL_MAP2_GRID_SEGMENTS,reinterpret_cast<GLint*>(&map2GridSegments));
+      return *this;
+    }
+
+    inline const Eval &set(DispatchTable &dt) const
+    {
+      setEnable(dt,GL_AUTO_NORMAL,autoNormal);
+      for (GLuint ii=0; ii<9; ii++)
+        setEnable(dt,GL_MAP1_COLOR_4+ii,map1dEnables[ii]);
+      for (GLuint ii=0; ii<9; ii++)
+        setEnable(dt,GL_MAP2_COLOR_4+ii,map1dEnables[ii]);
+      dt.call(&dt.glMapGrid1d)(map1GridSegments, map1GridDomain[0], map1GridDomain[1]);
+      dt.call(&dt.glMapGrid2d)(map2GridSegments[0], map2GridDomain[0], map2GridDomain[1],
+                               map2GridSegments[1], map2GridDomain[2], map2GridDomain[3]);
+      return *this;
+    }
+
+    inline std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      enableToString(tmp, autoNormal, "GL_AUTO_NORMAL",delim);
+      for (GLuint ii=0; ii<9; ii++)
+        enableToString(tmp,map1dEnables[ii],Token::toString(GL_MAP1_COLOR_4+ii),delim);
+      for (GLuint ii=0; ii<9; ii++)
+        enableToString(tmp,map2dEnables[ii],Token::toString(GL_MAP2_COLOR_4+ii),delim);
+      tmp << print_string("glMapGrid1d(",map1GridSegments,",",map1GridDomain[0],",",map1GridDomain[1],");",delim);
+      tmp << print_string("glMapGrid2d(",map2GridSegments[0],",",map2GridDomain[0],",",map2GridDomain[1],
+                                         map2GridSegments[1],",",map2GridDomain[2],",",map2GridDomain[3],");",delim);
       return tmp;
     }
   };

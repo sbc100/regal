@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -82,6 +82,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
 #include "RegalSharedMap.h"
+#include "RegalFloat4.h"
 #include "linear.h"
 
 REGAL_GLOBAL_END
@@ -339,7 +340,7 @@ struct Iff
   {
   }
 
-  void Cleanup();
+  void Cleanup( RegalContext &ctx );
 
   // Info
   int progcount;

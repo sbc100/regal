@@ -138,13 +138,22 @@ RegalContext::Init()
 
   RegalAssert(!initialized);
 
-  info = new ContextInfo();
   RegalAssert(this);
-  RegalAssert(info);
-  info->init(*this);
+  if (!info)
+  {
+    info = new ContextInfo();
+    RegalAssert(info);
+    info->init(*this);
+  }
 
-  marker = new Marker;
-  frame = new Frame;
+  if (!marker)
+  {
+    marker = new Marker;
+  }
+  if (!frame)
+  {
+    frame = new Frame;
+  }
 
 #if REGAL_EMULATION
 #if !REGAL_FORCE_EMULATION
@@ -275,7 +284,7 @@ RegalContext::Init()
 #endif
 
 #if REGAL_CODE
-  if (Config::enableCode)
+  if (Config::enableCode && !codeSource && !codeHeader)
   {
     if (Config::codeSourceFile.length())
     {
@@ -298,6 +307,7 @@ RegalContext::Init()
   initialized = true;
 }
 
+// Note that Cleanup() may or may not have been called prior to destruction
 RegalContext::~RegalContext()
 {
   Internal("RegalContext::~RegalContext","()");
@@ -357,6 +367,130 @@ RegalContext::~RegalContext()
   if (codeHeader)
     fclose(codeHeader);
 #endif
+}
+
+// Called prior to deletion, if this context is still set for this thread.
+// Need to:
+// 1) clean up GL state we've modified
+// 2) leave the RegalContext in a state where Init() could be called again
+void
+RegalContext::Cleanup()
+{
+  Internal("RegalContext::Cleanup","()");
+
+#if REGAL_EMULATION
+  // emu
+  #if REGAL_EMU_OBJ
+  if (obj)
+  {
+    emuLevel = 11;
+    obj->Cleanup(*this);
+    delete obj;
+    obj = NULL;
+  }
+  #endif /* REGAL_EMU_OBJ */
+  #if REGAL_EMU_PPA
+  if (ppa)
+  {
+    emuLevel = 10;
+    ppa->Cleanup(*this);
+    delete ppa;
+    ppa = NULL;
+  }
+  #endif /* REGAL_EMU_PPA */
+  #if REGAL_EMU_PPCA
+  if (ppca)
+  {
+    emuLevel = 9;
+    ppca->Cleanup(*this);
+    delete ppca;
+    ppca = NULL;
+  }
+  #endif /* REGAL_EMU_PPCA */
+  #if REGAL_EMU_BIN
+  if (bin)
+  {
+    emuLevel = 8;
+    bin->Cleanup(*this);
+    delete bin;
+    bin = NULL;
+  }
+  #endif /* REGAL_EMU_BIN */
+  #if REGAL_EMU_XFER
+  if (xfer)
+  {
+    emuLevel = 7;
+    xfer->Cleanup(*this);
+    delete xfer;
+    xfer = NULL;
+  }
+  #endif /* REGAL_EMU_XFER */
+  #if REGAL_EMU_DSA
+  if (dsa)
+  {
+    emuLevel = 6;
+    dsa->Cleanup(*this);
+    delete dsa;
+    dsa = NULL;
+  }
+  #endif /* REGAL_EMU_DSA */
+  #if REGAL_EMU_TEXSTO
+  if (texsto)
+  {
+    emuLevel = 5;
+    texsto->Cleanup(*this);
+    delete texsto;
+    texsto = NULL;
+  }
+  #endif /* REGAL_EMU_TEXSTO */
+  #if REGAL_EMU_IFF
+  if (iff)
+  {
+    emuLevel = 4;
+    iff->Cleanup(*this);
+    delete iff;
+    iff = NULL;
+  }
+  #endif /* REGAL_EMU_IFF */
+  #if REGAL_EMU_SO
+  if (so)
+  {
+    emuLevel = 3;
+    so->Cleanup(*this);
+    delete so;
+    so = NULL;
+  }
+  #endif /* REGAL_EMU_SO */
+  #if REGAL_EMU_VAO
+  if (vao)
+  {
+    emuLevel = 2;
+    vao->Cleanup(*this);
+    delete vao;
+    vao = NULL;
+  }
+  #endif /* REGAL_EMU_VAO */
+  #if REGAL_EMU_TEXC
+  if (texc)
+  {
+    emuLevel = 1;
+    texc->Cleanup(*this);
+    delete texc;
+    texc = NULL;
+  }
+  #endif /* REGAL_EMU_TEXC */
+  #if REGAL_EMU_FILTER
+  if (filt)
+  {
+    emuLevel = 0;
+    filt->Cleanup(*this);
+    delete filt;
+    filt = NULL;
+  }
+  #endif /* REGAL_EMU_FILTER */
+#endif
+
+  initialized = false;
 }
 
 bool

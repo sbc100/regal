@@ -59,7 +59,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct So : public RegalEmu
+struct So
 {
     So()
     : activeTextureUnit(0),
@@ -84,6 +84,11 @@ struct So : public RegalEmu
 
         supportSrgb = ctx.info->gl_ext_texture_srgb_decode || ctx.info->gl_ext_srgb;
         noSamplersInUse = true;
+    }
+
+    void Cleanup( RegalContext &ctx )
+    {
+        UNUSED_PARAMETER(ctx);
     }
 
     static GLenum TT_Index2Enum(GLuint index)

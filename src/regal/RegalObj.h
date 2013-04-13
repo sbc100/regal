@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -133,7 +133,7 @@ struct NameTranslator
   }
 };
 
-struct Obj : public RegalEmu
+struct Obj
 {
   NameTranslator bufferNames;
   NameTranslator vaoNames;
@@ -158,6 +158,11 @@ struct Obj : public RegalEmu
     vaoNames.del     = ctx.dispatcher.emulation.glDeleteVertexArrays;
     textureNames.gen = ctx.dispatcher.emulation.glGenTextures;
     textureNames.del = ctx.dispatcher.emulation.glDeleteTextures;
+  }
+
+  void Cleanup(RegalContext &ctx)
+  {
+    UNUSED_PARAMETER(ctx);
   }
 
   void BindBuffer(RegalContext &ctx, GLenum target, GLuint bufferBinding)

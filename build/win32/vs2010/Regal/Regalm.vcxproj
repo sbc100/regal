@@ -311,6 +311,7 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalSystem.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalTexC.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalTexC.h" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalTexSto.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalThread.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalTimer.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalToken.cpp" />

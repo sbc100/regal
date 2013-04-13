@@ -7254,6 +7254,14 @@ static void REGAL_CALL emu_glMapGrid1d(GLint un, GLdouble u1, GLdouble u2)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMapGrid1( un, u1, u2 );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7324,6 +7332,14 @@ static void REGAL_CALL emu_glMapGrid1f(GLint un, GLfloat u1, GLfloat u2)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMapGrid1( un, u1, u2 );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7394,6 +7410,14 @@ static void REGAL_CALL emu_glMapGrid2d(GLint un, GLdouble u1, GLdouble u2, GLint
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMapGrid2( un, u1, u2, vn, v1, v2 );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7464,6 +7488,14 @@ static void REGAL_CALL emu_glMapGrid2f(GLint un, GLfloat u1, GLfloat u2, GLint v
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMapGrid2( un, u1, u2, vn, v1, v2 );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :

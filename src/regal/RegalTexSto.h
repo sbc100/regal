@@ -47,8 +47,10 @@ REGAL_GLOBAL_BEGIN
 
 #include "RegalEmu.h"
 
-#include <utility>
 #include <cmath>
+
+#include <set>
+#include <algorithm>
 
 REGAL_GLOBAL_END
 
@@ -56,7 +58,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-  struct TexSto : public RegalEmu
+  struct TexSto
   {
     void Init( RegalContext &ctx )
     {
@@ -88,12 +90,17 @@ namespace Emu {
       for (GLsizei i = 0; i < levels; i++)
       {
         tbl.call(&tbl.glTexImage1D)( target, i, internalformat, width, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        width = (GLsizei)std::max(1.0f, (float)floor(width / 2.0f));
+        width = std::max<GLsizei>(1, width/2);
       }
 
       GLint id;
       tbl.call(&tbl.glGetIntegerv)( BindingFromTarget(target), &id );
       immutableTextures.insert( id );
+    }
+
+    void Cleanup(RegalContext &ctx)
+    {
+      UNUSED_PARAMETER(ctx);
     }
 
     void TextureStorage( RegalContext * ctx, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height )
@@ -112,9 +119,9 @@ namespace Emu {
         else
           tbl.call(&tbl.glTexImage2D)( target, i, internalformat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 
-        width = (GLsizei)std::max(1.0f, (float)floor(width / 2.0f));
+        width = std::max<GLsizei>(1, width/2);
         if (target != GL_TEXTURE_1D_ARRAY)
-          height = (GLsizei)std::max(1.0f, (float)floor(height / 2.0f));
+          height = std::max<GLsizei>(1, height/2);
       }
 
       GLint id;
@@ -128,10 +135,10 @@ namespace Emu {
       for (GLsizei i = 0; i < levels; i++)
       {
         tbl.call(&tbl.glTexImage3D)( target, i, internalformat, width, height, depth, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-        width = (GLsizei)std::max(1.0f, (float)floor(width / 2.0f));
-        height = (GLsizei)std::max(1.0f, (float)floor(height / 2.0f));
+        width = std::max<GLsizei>(1, width/2);
+        height = std::max<GLsizei>(1, height/2);
         if (target != GL_TEXTURE_2D_ARRAY && target != GL_TEXTURE_CUBE_MAP_ARRAY)
-          depth = (GLsizei)std::max(1.0f, (float)floor(depth / 2.0f));
+          depth = std::max<GLsizei>(1, depth/2);
       }
 
       GLint id;

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -487,8 +487,7 @@ Init::destroyContext(RegalSystemContext sysCtx)
 
       if (context==Thread::CurrentContext())
       {
-        if (context->iff)
-          context->iff->Cleanup();
+        context->Cleanup();
         setContextTLS(NULL);
       }
 

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -63,14 +63,19 @@ namespace Emu {
 
 // Work in progress...
 
-struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, State::Transform, State::Hint,
+struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transform, State::Hint,
              State::Enable, State::List, State::AccumBuffer, State::Scissor, State::Viewport, State::Line,
-             State::Multisample
+             State::Multisample, State::Eval
 {
   void Init(RegalContext &ctx)
   {
     UNUSED_PARAMETER(ctx);
     activeTextureUnit = 0;
+  }
+
+  void Cleanup(RegalContext &ctx)
+  {
+    UNUSED_PARAMETER(ctx);
   }
 
   void PushAttrib(RegalContext *ctx, GLbitfield mask)
@@ -79,6 +84,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_DEPTH_BUFFER_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_DEPTH_BUFFER_BIT ",State::Depth::toString());
       depthStack.push_back(State::Depth());
       depthStack.back() = *this;
       mask &= ~GL_DEPTH_BUFFER_BIT;
@@ -86,6 +92,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_STENCIL_BUFFER_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_STENCIL_BUFFER_BIT ",State::Stencil::toString());
       stencilStack.push_back(State::Stencil());
       stencilStack.back() = *this;
       mask &= ~GL_STENCIL_BUFFER_BIT;
@@ -93,6 +100,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_POLYGON_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_POLYGON_BIT ",State::Polygon::toString());
       polygonStack.push_back(State::Polygon());
       polygonStack.back() = *this;
       mask &= ~GL_POLYGON_BIT;
@@ -100,6 +108,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_TRANSFORM_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_TRANSFORM_BIT ",State::Transform::toString());
       transformStack.push_back(State::Transform());
       transformStack.back() = *this;
       mask &= ~GL_TRANSFORM_BIT;
@@ -107,6 +116,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_HINT_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_HINT_BIT ",State::Hint::toString());
       hintStack.push_back(State::Hint());
       hintStack.back() = *this;
       mask &= ~GL_HINT_BIT;
@@ -114,6 +124,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_ENABLE_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_ENABLE_BIT ",State::Enable::toString());
       enableStack.push_back(State::Enable());
       enableStack.back() = *this;
       mask &= ~GL_ENABLE_BIT;
@@ -121,6 +132,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_LIST_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_LIST_BIT ",State::List::toString());
       listStack.push_back(State::List());
       listStack.back() = *this;
       mask &= ~GL_LIST_BIT;
@@ -128,14 +140,17 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_ACCUM_BUFFER_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_ACCUM_BUFFER_BIT ",State::AccumBuffer::toString());
       accumBufferStack.push_back(State::AccumBuffer());
       accumBufferStack.back() = *this;
       mask &= ~GL_ACCUM_BUFFER_BIT;
     }
 
-#if 0
     if (mask&GL_SCISSOR_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_SCISSOR_BIT ",State::Scissor::toString());
+      if (!State::Scissor::defined())
+        State::Scissor::define(ctx->dispatcher.emulation);
       scissorStack.push_back(State::Scissor());
       scissorStack.back() = *this;
       mask &= ~GL_SCISSOR_BIT;
@@ -143,14 +158,17 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_VIEWPORT_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_VIEWPORT_BIT ",State::Viewport::toString());
+      if (!State::Viewport::defined())
+        State::Viewport::define(ctx->dispatcher.emulation);
       viewportStack.push_back(State::Viewport());
       viewportStack.back() = *this;
       mask &= ~GL_VIEWPORT_BIT;
     }
-#endif
 
     if (mask&GL_LINE_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_LINE_BIT ",State::Line::toString());
       lineStack.push_back(State::Line());
       lineStack.back() = *this;
       mask &= ~GL_LINE_BIT;
@@ -158,9 +176,18 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
 
     if (mask&GL_MULTISAMPLE_BIT)
     {
+      Internal("Regal::Ppa::PushAttrib GL_MULTISAMPLE_BIT ",State::Multisample::toString());
       multisampleStack.push_back(State::Multisample());
       multisampleStack.back() = *this;
       mask &= ~GL_MULTISAMPLE_BIT;
+    }
+
+    if (mask&GL_EVAL_BIT)
+    {
+      Internal("Regal::Ppa::PushAttrib GL_EVAL_BIT ",State::Eval::toString());
+      evalStack.push_back(State::Eval());
+      evalStack.back() = *this;
+      mask &= ~GL_EVAL_BIT;
     }
 
     // Pass the rest through, for now
@@ -309,7 +336,6 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
         mask &= ~GL_ACCUM_BUFFER_BIT;
       }
 
-#if 0
       if (mask&GL_SCISSOR_BIT)
       {
         RegalAssert(scissorStack.size());
@@ -321,6 +347,8 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
         // Ideally we'd only set the state that has changed
         // since the glPushAttrib() - revisit
 
+        if (!State::Scissor::defined())
+          State::Scissor::define(ctx->dispatcher.emulation);
         State::Scissor::set(ctx->dispatcher.emulation);
 
         mask &= ~GL_SCISSOR_BIT;
@@ -337,11 +365,12 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
         // Ideally we'd only set the state that has changed
         // since the glPushAttrib() - revisit
 
+        if (!State::Viewport::defined())
+          State::Viewport::define(ctx->dispatcher.emulation);
         State::Viewport::set(ctx->dispatcher.emulation);
 
         mask &= ~GL_VIEWPORT_BIT;
       }
-#endif
 
       if (mask&GL_LINE_BIT)
       {
@@ -373,6 +402,22 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
         State::Multisample::set(ctx->dispatcher.emulation);
 
         mask &= ~GL_MULTISAMPLE_BIT;
+      }
+
+      if (mask&GL_EVAL_BIT)
+      {
+        RegalAssert(evalStack.size());
+        State::Eval::swap(evalStack.back());
+        evalStack.pop_back();
+
+        Internal("Regal::Ppa::PopAttrib GL_EVAL_BIT ",State::Eval::toString());
+
+        // Ideally we'd only set the state that has changed
+        // since the glPushAttrib() - revisit
+
+        State::Eval::set(ctx->dispatcher.emulation);
+
+        mask &= ~GL_EVAL_BIT;
       }
 
       // Pass the rest through, for now
@@ -480,10 +525,24 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
       case GL_LIGHTING:            State::Enable::lighting             = enabled; break;
       case GL_LINE_SMOOTH:         State::Enable::lineSmooth  = State::Line::smooth  = enabled; break;
       case GL_LINE_STIPPLE:        State::Enable::lineStipple = State::Line::stipple = enabled; break;
-
-      // TODO: GL_MAP1_x where x is a map type (9 x B) (GL_FALSE)
-      // TODO: GL_MAP2_x where x is a map type (9 x B) (GL_FALSE)
-
+      case GL_MAP1_COLOR_4:         State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_INDEX:           State::Enable::map1Index         = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_NORMAL:          State::Enable::map1Normal        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_TEXTURE_COORD_1: State::Enable::map1TextureCoord1 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_TEXTURE_COORD_2: State::Enable::map1TextureCoord2 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_TEXTURE_COORD_3: State::Enable::map1TextureCoord3 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_TEXTURE_COORD_4: State::Enable::map1TextureCoord4 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_VERTEX_3:        State::Enable::map1Vertex3       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP1_VERTEX_4:        State::Enable::map1Vertex4       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
+      case GL_MAP2_COLOR_4:         State::Enable::map2Color4        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_INDEX:           State::Enable::map2Index         = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_NORMAL:          State::Enable::map2Normal        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_TEXTURE_COORD_1: State::Enable::map2TextureCoord1 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_TEXTURE_COORD_2: State::Enable::map2TextureCoord2 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_TEXTURE_COORD_3: State::Enable::map2TextureCoord3 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_TEXTURE_COORD_4: State::Enable::map2TextureCoord4 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_VERTEX_3:        State::Enable::map2Vertex3       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
+      case GL_MAP2_VERTEX_4:        State::Enable::map2Vertex4       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
       case GL_MINMAX:              State::Enable::minmax            = enabled; break;
       case GL_MULTISAMPLE:         State::Enable::multisample       = enabled; break;
       case GL_NORMALIZE:           State::Enable::normalize         = enabled;
@@ -494,7 +553,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
                                    State::Polygon::offsetFill       = enabled; break;
       case GL_POLYGON_OFFSET_LINE: State::Enable::polygonOffsetLine = enabled;
                                    State::Polygon::offsetLine       = enabled; break;
-      case GL_POLYGON_OFFSET_POINT:State::Enable::polygonOffsetPoint = enabled;
+      case GL_POLYGON_OFFSET_POINT: State::Enable::polygonOffsetPoint = enabled;
                                    State::Polygon::offsetPoint       = enabled; break;
       case GL_POLYGON_SMOOTH:      State::Enable::polygonSmooth      = enabled;
                                    State::Polygon::smoothEnable      = enabled; break;
@@ -628,6 +687,7 @@ struct Ppa : public RegalEmu, State::Stencil, State::Depth, State::Polygon, Stat
   std::vector<State::Viewport>    viewportStack;
   std::vector<State::Line>        lineStack;
   std::vector<State::Multisample> multisampleStack;
+  std::vector<State::Eval>        evalStack;
 
   GLuint activeTextureUnit;
 };

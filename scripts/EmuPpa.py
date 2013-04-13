@@ -98,5 +98,9 @@ ppaFormulae = {
     'entries'    : [ 'glMinSampleShading' ],
     'prefix'     : [ '_context->ppa->glMinSampleShading( ${arg0plus} );', ],
   },
+  'TrackMapGrid' : {
+    'entries'    : [ 'glMapGrid(1|2)(f|d)' ],
+    'prefix'     : [ '_context->ppa->glMapGrid${m1}( ${arg0plus} );', ],
+  },
 
 }

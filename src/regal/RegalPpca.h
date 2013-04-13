@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -53,6 +53,7 @@ REGAL_GLOBAL_BEGIN
 #include <GL/Regal.h>
 
 #include "RegalEmu.h"
+#include "RegalContext.h"
 
 REGAL_GLOBAL_END
 
@@ -243,7 +244,7 @@ void Transition( const DispatchTable& dt, const State& current, const State& tar
 
 namespace Emu {
 
-struct Ppca : public RegalEmu {
+struct Ppca {
   typedef std::vector<GLbitfield> ClientAttribMaskStack;
   typedef std::vector<ClientState::PixelStore::State> PixelStoreStateStack;
   typedef std::vector<ClientState::VertexArray::State> VertexArrayStateStack;
@@ -251,6 +252,10 @@ struct Ppca : public RegalEmu {
   Ppca();
 
   void Init( RegalContext &ctx );
+  void Cleanup( RegalContext &ctx )
+  {
+    UNUSED_PARAMETER(ctx);
+  }
 
   void Reset();
 

@@ -117,6 +117,7 @@ struct RegalContext
   ~RegalContext();
 
   void Init();
+  void Cleanup();
 
   // If profile is forced at build-time, no need to check runtime flag
 
@@ -269,10 +270,13 @@ RegalContext::Init()
 
   RegalAssert(!initialized);
 
-  info = new ContextInfo();
   RegalAssert(this);
-  RegalAssert(info);
-  info->init(*this);
+  if (!info)
+  {
+    info = new ContextInfo();
+    RegalAssert(info);
+    info->init(*this);
+  }
 
 ${MEMBER_INIT}
 
@@ -298,7 +302,7 @@ ${EMU_MEMBER_INIT}
 #endif
 
 #if REGAL_CODE
-  if (Config::enableCode)
+  if (Config::enableCode && !codeSource && !codeHeader)
   {
     if (Config::codeSourceFile.length())
     {
@@ -321,6 +325,7 @@ ${EMU_MEMBER_INIT}
   initialized = true;
 }
 
+// Note that Cleanup() may or may not have been called prior to destruction
 RegalContext::~RegalContext()
 {
   Internal("RegalContext::~RegalContext","()");
@@ -332,7 +337,7 @@ RegalContext::~RegalContext()
   delete info;
 ${MEMBER_CLEANUP}
 #if REGAL_EMULATION
-${EMU_MEMBER_CLEANUP}#endif
+${EMU_MEMBER_DESTRUCT}#endif
 
 #if REGAL_CODE
   if (codeSource)
@@ -341,6 +346,21 @@ ${EMU_MEMBER_CLEANUP}#endif
   if (codeHeader)
     fclose(codeHeader);
 #endif
+}
+
+// Called prior to deletion, if this context is still set for this thread.
+// Need to:
+// 1) clean up GL state we've modified
+// 2) leave the RegalContext in a state where Init() could be called again
+void
+RegalContext::Cleanup()
+{
+  Internal("RegalContext::Cleanup","()");
+
+#if REGAL_EMULATION
+${EMU_MEMBER_CLEANUP}#endif
+
+  initialized = false;
 }
 
 bool
@@ -436,20 +456,22 @@ def generateContextSource(apis, args):
     emuMemberConstruct = ''
     emuMemberInit      = ''
     emuMemberCleanup   = ''
+    emuMemberDestruct  = ''
 
     for i in emuRegal:
       if i['include']:
         includes        += '#include "%s"\n' % i['include']
       if i['member']:
         memberConstruct += '  %s(NULL),\n' % ( i['member'] )
-        memberInit      += '  %s = new %s;\n'%(i['member'],i['type'])
+        memberInit      += indent(wrapCIf('!%s' % i['member'],'%s = new %s;\n'%(i['member'],i['type'])),'  ')
         memberCleanup   += indent(wrapIf(i['ifdef'],'delete %s;\n' % i['member']),'  ')
 
     emuMemberConstruct += '  emuLevel(0),\n'
 
     emuMemberInit += '    // emu\n'
     emuMemberInit += '    emuLevel = %d;\n' % ( len( emu ) - 1 )
-    emuMemberCleanup += '  // emu\n'
+    emuMemberCleanup  += '  // emu\n'
+    emuMemberDestruct += '  // emu\n'
 
     for i in range( len( emu ) - 1 ) :
       if emu[i]['member']:
@@ -459,7 +481,14 @@ def generateContextSource(apis, args):
         if emu[i]['include']:
             emuIncludes += '#include "%s"\n' % emu[i]['include']
         if emu[i]['member']:
-            emuMemberCleanup += indent(wrapIf(emu[i]['ifdef'],'delete %s;\n' % emu[i]['member']),'  ')
+            emuMemberDestruct += indent(wrapIf(emu[i]['ifdef'],'delete %s;\n' % emu[i]['member']),'  ')
+            cleanup = ''
+            cleanup += 'emuLevel = %d;\n' % ( int(emu[i]['level']) - 1)
+            cleanup += '%s->Cleanup(*this);\n' % emu[i]['member']
+            cleanup += 'delete %s;\n' % emu[i]['member']
+            cleanup += '%s = NULL;\n' % emu[i]['member']
+            emuMemberCleanup += indent(wrapIf(emu[i]['ifdef'],wrapCIf(emu[i]['member'],cleanup)),'  ')
+
         revi = len( emu ) - 2 - i;
         if emu[revi]['member']:
             init = ''
@@ -497,5 +526,6 @@ def generateContextSource(apis, args):
     substitute['EMU_MEMBER_CONSTRUCT'] = emuMemberConstruct
     substitute['EMU_MEMBER_INIT']      = emuMemberInit
     substitute['EMU_MEMBER_CLEANUP']   = emuMemberCleanup
+    substitute['EMU_MEMBER_DESTRUCT']  = emuMemberDestruct
 
     outputCode( '%s/RegalContext.cpp' % args.srcdir, contextSourceTemplate.substitute(substitute))
