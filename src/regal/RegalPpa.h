@@ -65,7 +65,7 @@ namespace Emu {
 
 struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transform, State::Hint,
              State::Enable, State::List, State::AccumBuffer, State::Scissor, State::Viewport, State::Line,
-             State::Multisample, State::Eval
+             State::Multisample, State::Eval, State::Fog, State::Point, State::PolygonStipple
 {
   void Init(RegalContext &ctx)
   {
@@ -188,6 +188,30 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       evalStack.push_back(State::Eval());
       evalStack.back() = *this;
       mask &= ~GL_EVAL_BIT;
+    }
+
+    if (mask&GL_FOG_BIT)
+    {
+      Internal("Regal::Ppa::PushAttrib GL_FOG_BIT ",State::Fog::toString());
+      fogStack.push_back(State::Fog());
+      fogStack.back() = *this;
+      mask &= ~GL_FOG_BIT;
+    }
+
+    if (mask&GL_POINT_BIT)
+    {
+      Internal("Regal::Ppa::PushAttrib GL_POINT_BIT ",State::Point::toString());
+      pointStack.push_back(State::Point());
+      pointStack.back() = *this;
+      mask &= ~GL_POINT_BIT;
+    }
+
+    if (mask&GL_POLYGON_STIPPLE_BIT)
+    {
+      Internal("Regal::Ppa::PushAttrib GL_POLYGON_STIPPLE_BIT ",State::PolygonStipple::toString());
+      polygonStippleStack.push_back(State::PolygonStipple());
+      polygonStippleStack.back() = *this;
+      mask &= ~GL_POLYGON_STIPPLE_BIT;
     }
 
     // Pass the rest through, for now
@@ -420,6 +444,54 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         mask &= ~GL_EVAL_BIT;
       }
 
+      if (mask&GL_FOG_BIT)
+      {
+        RegalAssert(fogStack.size());
+        State::Fog::swap(fogStack.back());
+        fogStack.pop_back();
+
+        Internal("Regal::Ppa::PopAttrib GL_FOG_BIT ",State::Fog::toString());
+
+        // Ideally we'd only set the state that has changed
+        // since the glPushAttrib() - revisit
+
+        State::Fog::set(ctx->dispatcher.emulation);
+
+        mask &= ~GL_FOG_BIT;
+      }
+
+      if (mask&GL_POINT_BIT)
+      {
+        RegalAssert(pointStack.size());
+        State::Point::swap(pointStack.back());
+        pointStack.pop_back();
+
+        Internal("Regal::Ppa::PopAttrib GL_POINT_BIT ",State::Point::toString());
+
+        // Ideally we'd only set the state that has changed
+        // since the glPushAttrib() - revisit
+
+        State::Point::set(ctx->dispatcher.emulation);
+
+        mask &= ~GL_POINT_BIT;
+      }
+
+      if (mask&GL_POLYGON_STIPPLE_BIT)
+      {
+        RegalAssert(polygonStippleStack.size());
+        State::PolygonStipple::swap(polygonStippleStack.back());
+        polygonStippleStack.pop_back();
+
+        Internal("Regal::Ppa::PopAttrib GL_POLYGON_STIPPLE_BIT ",State::PolygonStipple::toString());
+
+        // Ideally we'd only set the state that has changed
+        // since the glPushAttrib() - revisit
+
+        State::PolygonStipple::set(ctx->dispatcher.emulation);
+
+        mask &= ~GL_POLYGON_STIPPLE_BIT;
+      }
+
       // Pass the rest through, for now
 
       if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
@@ -547,8 +619,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_MULTISAMPLE:         State::Enable::multisample       = enabled; break;
       case GL_NORMALIZE:           State::Enable::normalize         = enabled;
                                    State::Transform::normalize      = enabled; break;
-      case GL_POINT_SMOOTH:        State::Enable::pointSmooth       = enabled; break;
-      case GL_POINT_SPRITE:        State::Enable::pointSprite       = enabled; break;
+      case GL_POINT_SMOOTH:        State::Enable::pointSmooth = State::Point::smooth = enabled; break;
+      case GL_POINT_SPRITE:        State::Enable::pointSprite = State::Point::sprite = enabled; break;
       case GL_POLYGON_OFFSET_FILL: State::Enable::polygonOffsetFill = enabled;
                                    State::Polygon::offsetFill       = enabled; break;
       case GL_POLYGON_OFFSET_LINE: State::Enable::polygonOffsetLine = enabled;
@@ -674,20 +746,35 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     }
   }
 
-  std::vector<GLbitfield>         maskStack;
-  std::vector<State::Depth>       depthStack;
-  std::vector<State::Stencil>     stencilStack;
-  std::vector<State::Polygon>     polygonStack;
-  std::vector<State::Transform>   transformStack;
-  std::vector<State::Hint>        hintStack;
-  std::vector<State::Enable>      enableStack;
-  std::vector<State::List>        listStack;
-  std::vector<State::AccumBuffer> accumBufferStack;
-  std::vector<State::Scissor>     scissorStack;
-  std::vector<State::Viewport>    viewportStack;
-  std::vector<State::Line>        lineStack;
-  std::vector<State::Multisample> multisampleStack;
-  std::vector<State::Eval>        evalStack;
+  template <typename T> void glTexEnv(GLenum target, GLenum pname, T param)
+  {
+    if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
+      glMultiTexEnv(static_cast<GLenum>(GL_TEXTURE0+activeTextureUnit),target,pname,param);
+  }
+
+  template <typename T> void glTexEnvv(GLenum target, GLenum pname, const T *params)
+  {
+    if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
+      glMultiTexEnvv(static_cast<GLenum>(GL_TEXTURE0+activeTextureUnit),target,pname,params);
+  }
+
+  std::vector<GLbitfield>            maskStack;
+  std::vector<State::Depth>          depthStack;
+  std::vector<State::Stencil>        stencilStack;
+  std::vector<State::Polygon>        polygonStack;
+  std::vector<State::Transform>      transformStack;
+  std::vector<State::Hint>           hintStack;
+  std::vector<State::Enable>         enableStack;
+  std::vector<State::List>           listStack;
+  std::vector<State::AccumBuffer>    accumBufferStack;
+  std::vector<State::Scissor>        scissorStack;
+  std::vector<State::Viewport>       viewportStack;
+  std::vector<State::Line>           lineStack;
+  std::vector<State::Multisample>    multisampleStack;
+  std::vector<State::Eval>           evalStack;
+  std::vector<State::Fog>            fogStack;
+  std::vector<State::Point>          pointStack;
+  std::vector<State::PolygonStipple> polygonStippleStack;
 
   GLuint activeTextureUnit;
 };

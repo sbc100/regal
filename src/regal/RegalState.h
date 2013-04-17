@@ -1284,14 +1284,14 @@ namespace State {
     inline std::string toString(const char *delim = "\n") const
     {
       string_list tmp;
-      tmp << print_string("glHint(GL_PERSPECTIVE_CORRECTION_HINT,",perspectiveCorrection,");",delim);
-      tmp << print_string("glHint(GL_POINT_SMOOTH_HINT,",pointSmooth,");",delim);
-      tmp << print_string("glHint(GL_LINE_SMOOTH_HINT,",lineSmooth,");",delim);
-      tmp << print_string("glHint(GL_POLYGON_SMOOTH_HINT,",polygonSmooth,");",delim);
-      tmp << print_string("glHint(GL_FOG_HINT,",fog,");",delim);
-      tmp << print_string("glHint(GL_GENERATE_MIPMAP_HINT,",generateMipmap,");",delim);
-      tmp << print_string("glHint(GL_TEXTURE_COMPRESSION_HINT,",textureCompression,");",delim);
-      tmp << print_string("glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,",fragmentShaderDerivative,");",delim);
+      tmp << print_string("glHint(GL_PERSPECTIVE_CORRECTION_HINT,",Token::toString(perspectiveCorrection),");",delim);
+      tmp << print_string("glHint(GL_POINT_SMOOTH_HINT,",Token::toString(pointSmooth),");",delim);
+      tmp << print_string("glHint(GL_LINE_SMOOTH_HINT,",Token::toString(lineSmooth),");",delim);
+      tmp << print_string("glHint(GL_POLYGON_SMOOTH_HINT,",Token::toString(polygonSmooth),");",delim);
+      tmp << print_string("glHint(GL_FOG_HINT,",Token::toString(fog),");",delim);
+      tmp << print_string("glHint(GL_GENERATE_MIPMAP_HINT,",Token::toString(generateMipmap),");",delim);
+      tmp << print_string("glHint(GL_TEXTURE_COMPRESSION_HINT,",Token::toString(textureCompression),");",delim);
+      tmp << print_string("glHint(GL_FRAGMENT_SHADER_DERIVATIVE_HINT,",Token::toString(fragmentShaderDerivative),");",delim);
       return tmp;
     }
   };
@@ -1927,6 +1927,283 @@ namespace State {
       tmp << print_string("glMapGrid1d(",map1GridSegments,",",map1GridDomain[0],",",map1GridDomain[1],");",delim);
       tmp << print_string("glMapGrid2d(",map2GridSegments[0],",",map2GridDomain[0],",",map2GridDomain[1],
                                          map2GridSegments[1],",",map2GridDomain[2],",",map2GridDomain[3],");",delim);
+      return tmp;
+    }
+  };
+
+  struct Fog
+  {
+    GLfloat   color[4]; // GL_FOG_COLOR
+    GLfloat   index;    // GL_FOG_INDEX
+    GLfloat   density;  // GL_FOG_DENSITY
+    GLfloat   start;    // GL_FOG_START
+    GLfloat   end;      // GL_FOG_END
+    GLenum    mode;     // GL_FOG_MODE
+    GLboolean enable;   // GL_FOG
+    GLenum    coordSrc; // GL_FOG_COORD_SRC
+    GLboolean colorSum; // GL_COLOR_SUM
+
+    inline Fog()
+    : index(0)
+    , density(1)
+    , start(1)
+    , end(1)
+    , mode(GL_EXP)
+    , enable(GL_FALSE)
+    , coordSrc(GL_FRAGMENT_DEPTH)
+    , colorSum(GL_FALSE)
+    {
+      std::memset(color,0,sizeof(color));
+    }
+
+    inline Fog &swap(Fog &other)
+    {
+      std::swap_ranges(color,color+4,other.color);
+      std::swap(index,other.index);
+      std::swap(density,other.density);
+      std::swap(start,other.start);
+      std::swap(end,other.end);
+      std::swap(mode,other.mode);
+      std::swap(enable,other.enable);
+      std::swap(coordSrc,other.coordSrc);
+      std::swap(colorSum,other.colorSum);
+      return *this;
+    }
+
+    inline Fog &get(DispatchTable &dt)
+    {
+      dt.call(&dt.glGetFloatv)(GL_FOG_COLOR,color);
+      dt.call(&dt.glGetFloatv)(GL_FOG_INDEX,&index);
+      dt.call(&dt.glGetFloatv)(GL_FOG_DENSITY,&density);
+      dt.call(&dt.glGetFloatv)(GL_FOG_START,&start);
+      dt.call(&dt.glGetFloatv)(GL_FOG_END,&end);
+      dt.call(&dt.glGetIntegerv)(GL_FOG_MODE,reinterpret_cast<GLint*>(&mode));
+      enable = dt.call(&dt.glIsEnabled)(GL_FOG);
+      dt.call(&dt.glGetIntegerv)(GL_FOG_COORD_SRC,reinterpret_cast<GLint*>(&coordSrc));
+      colorSum = dt.call(&dt.glIsEnabled)(GL_COLOR_SUM);
+      return *this;
+    }
+
+    inline const Fog &set(DispatchTable &dt) const
+    {
+      dt.call(&dt.glFogfv)(GL_FOG_COLOR,color);
+      dt.call(&dt.glFogf)(GL_FOG_INDEX,index);
+      dt.call(&dt.glFogf)(GL_FOG_DENSITY,density);
+      dt.call(&dt.glFogf)(GL_FOG_START,start);
+      dt.call(&dt.glFogf)(GL_FOG_END,end);
+      dt.call(&dt.glFogi)(GL_FOG_MODE,mode);
+      setEnable(dt,GL_FOG,enable);
+      dt.call(&dt.glFogi)(GL_FOG_COORD_SRC,coordSrc);
+      setEnable(dt,GL_COLOR_SUM,colorSum);
+      return *this;
+    }
+
+    inline std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glFogfv(GL_FOG_COLOR,[",color[0],",",color[1],",",color[2],",",color[3],",","] );",delim);
+      tmp << print_string("glFogf(GL_FOG_INDEX,",index,");",delim);
+      tmp << print_string("glFogf(GL_FOG_DENSITY,",density,");",delim);
+      tmp << print_string("glFogf(GL_FOG_START,",start,");",delim);
+      tmp << print_string("glFogf(GL_FOG_END,",end,");",delim);
+      tmp << print_string("glFogi(GL_FOG_MODE,",Token::toString(mode),");",delim);
+      enableToString(tmp, enable, "GL_FOG",delim);
+      tmp << print_string("glFogi(GL_FOG_COORD_SRC,",Token::toString(coordSrc),");",delim);
+      enableToString(tmp, colorSum, "GL_COLOR_SUM",delim);
+      return tmp;
+    }
+  };
+
+  struct Point
+  {
+    GLfloat    size;                                      // GL_POINT_SIZE
+    GLboolean  smooth;                                    // GL_POINT_SMOOTH
+    GLboolean  sprite;                                    // GL_POINT_SPRITE
+    GLfloat    sizeMin;                                   // GL_POINT_SIZE_MIN
+    GLfloat    sizeMax;                                   // GL_POINT_SIZE_MAX
+    GLfloat    fadeThresholdSize;                         // GL_POINT_FADE_THRESHOLD_SIZE
+    GLfloat    distanceAttenuation[3];                    // GL_POINT_DISTANCE_ATTENUATION
+    GLenum     spriteCoordOrigin;                         // GL_POINT_SPRITE_COORD_ORIGIN
+    GLboolean  coordReplace[REGAL_EMU_MAX_TEXTURE_UNITS]; // GL_COORD_REPLACE
+
+    inline Point()
+    : size(1)
+    , smooth(GL_FALSE)
+    , sprite(GL_FALSE)
+    , sizeMin(0)
+    , sizeMax(1)        // Max of the impl. dependent max. aliased and smooth point sizes.
+    , fadeThresholdSize(1)
+    , spriteCoordOrigin(GL_UPPER_LEFT)
+    {
+      distanceAttenuation[0] = 1;
+      distanceAttenuation[1] = 0;
+      distanceAttenuation[2] = 0;
+      std::memset(coordReplace,GL_FALSE,sizeof(coordReplace));
+    }
+
+    inline Point &swap(Point &other)
+    {
+      std::swap(size,other.size);
+      std::swap(smooth,other.smooth);
+      std::swap(sprite,other.sprite);
+      std::swap(sizeMin,other.sizeMin);
+      std::swap(sizeMax,other.sizeMax);
+      std::swap(fadeThresholdSize,other.fadeThresholdSize);
+      std::swap_ranges(distanceAttenuation,distanceAttenuation+3,other.distanceAttenuation);
+      std::swap(spriteCoordOrigin,other.spriteCoordOrigin);
+      std::swap_ranges(coordReplace,coordReplace+REGAL_EMU_MAX_TEXTURE_UNITS,other.coordReplace);
+      return *this;
+    }
+
+    void glPointSize(GLfloat s)
+    {
+      size = s;
+    }
+
+    template <typename T> void glPointParameter( GLenum pname, T param )
+    {
+      switch (pname)
+      {
+        case GL_POINT_SIZE_MIN:
+          sizeMin = static_cast<GLfloat>(param);
+          break;
+        case GL_POINT_SIZE_MAX:
+          sizeMax = static_cast<GLfloat>(param);
+          break;
+        case GL_POINT_FADE_THRESHOLD_SIZE:
+          fadeThresholdSize = static_cast<GLfloat>(param);
+          break;
+        case GL_POINT_SPRITE_COORD_ORIGIN:
+          spriteCoordOrigin = static_cast<GLenum>(param);
+          break;
+        default:
+          break;
+      }
+    }
+
+    template <typename T> void glPointParameterv( GLenum pname, const T *params )
+    {
+      switch (pname)
+      {
+        case GL_POINT_DISTANCE_ATTENUATION:
+          distanceAttenuation[0] = static_cast<GLfloat>(params[0]);
+          distanceAttenuation[1] = static_cast<GLfloat>(params[1]);
+          distanceAttenuation[2] = static_cast<GLfloat>(params[2]);
+          break;
+        default:
+          break;
+      }
+    }
+
+    template <typename T> void glMultiTexEnv(GLenum texunit, GLenum target, GLenum pname, T param)
+    {
+      if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
+      {
+        GLint unit = texunit = GL_TEXTURE0;
+        if ((unit >= 0) && (unit<REGAL_EMU_MAX_TEXTURE_UNITS))
+          coordReplace[unit] = static_cast<GLboolean>(param);
+      }
+    }
+
+    template <typename T> void glMultiTexEnvv(GLenum texunit, GLenum target, GLenum pname, const T *params)
+    {
+      if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
+      {
+        GLint unit = texunit = GL_TEXTURE0;
+        if ((unit >= 0) && (unit<REGAL_EMU_MAX_TEXTURE_UNITS))
+          coordReplace[unit] = static_cast<GLboolean>(params[0]);
+      }
+    }
+
+    inline Point &get(DispatchTable &dt)
+    {
+      dt.call(&dt.glGetFloatv)(GL_POINT_SIZE,&size);
+      smooth = dt.call(&dt.glIsEnabled)(GL_POINT_SMOOTH);
+      sprite = dt.call(&dt.glIsEnabled)(GL_POINT_SPRITE);
+      dt.call(&dt.glGetFloatv)(GL_POINT_SIZE_MIN,&sizeMin);
+      dt.call(&dt.glGetFloatv)(GL_POINT_SIZE_MAX,&sizeMin);
+      dt.call(&dt.glGetFloatv)(GL_POINT_FADE_THRESHOLD_SIZE,&fadeThresholdSize);
+      dt.call(&dt.glGetFloatv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
+      dt.call(&dt.glGetIntegerv)(GL_POINT_SPRITE_COORD_ORIGIN,reinterpret_cast<GLint*>(&spriteCoordOrigin));
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+        dt.call(&dt.glGetMultiTexEnvivEXT)(ii,GL_POINT_SPRITE,GL_COORD_REPLACE,reinterpret_cast<GLint*>(&coordReplace[ii]));
+      return *this;
+    }
+
+    inline const Point &set(DispatchTable &dt) const
+    {
+      dt.call(&dt.glPointSize)(size);
+      setEnable(dt,GL_POINT_SMOOTH,smooth);
+      setEnable(dt,GL_POINT_SPRITE,sprite);
+      dt.call(&dt.glPointParameterf)(GL_POINT_SIZE_MIN,sizeMin);
+      dt.call(&dt.glPointParameterf)(GL_POINT_SIZE_MAX,sizeMax);
+      dt.call(&dt.glPointParameterf)(GL_POINT_FADE_THRESHOLD_SIZE,fadeThresholdSize);
+      dt.call(&dt.glPointParameterfv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
+      dt.call(&dt.glPointParameteri)(GL_POINT_SPRITE_COORD_ORIGIN,spriteCoordOrigin);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+        dt.call(&dt.glMultiTexEnviEXT)(ii,GL_POINT_SPRITE,GL_COORD_REPLACE,coordReplace[ii]);
+      return *this;
+    }
+
+    inline std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glPointSize(",size,");",delim);
+      enableToString(tmp, smooth, "GL_POINT_SMOOTH",delim);
+      enableToString(tmp, sprite, "GL_POINT_SPRITE",delim);
+      tmp << print_string("glPointParameterf(GL_POINT_SIZE_MIN",sizeMin,");",delim);
+      tmp << print_string("glPointParameterf(GL_POINT_SIZE_MAX",sizeMax,");",delim);
+      tmp << print_string("glPointParameterf(GL_POINT_FADE_THRESHOLD_SIZE",fadeThresholdSize,");",delim);
+      tmp << print_string("glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, [ ",distanceAttenuation[0],", ",
+                                                                                 distanceAttenuation[1],", ",
+                                                                                 distanceAttenuation[2]," ]);",delim);
+      tmp << print_string("glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN",Token::toString(spriteCoordOrigin),");",delim);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+        tmp << print_string("glMultiTexEnviEXT(",ii,",GL_POINT_SPRITE,GL_COORD_REPLACE,",coordReplace[ii],");",delim);
+      return tmp;
+    }
+  };
+
+  struct PolygonStipple
+  {
+    GLubyte pattern[32*4];
+
+    inline PolygonStipple()
+    {
+      std::memset(pattern,0xff,sizeof(pattern));
+    }
+
+    inline PolygonStipple &swap(PolygonStipple &other)
+    {
+      std::swap_ranges(pattern,pattern+(32*4),other.pattern);
+      return *this;
+    }
+
+    void glPolygonStipple( const GLubyte *p )
+    {
+      for (int ii=0; ii<(32*4); ii++)
+        pattern[ii] = p[ii];
+    }
+
+    inline PolygonStipple &get(DispatchTable &dt)
+    {
+      dt.call(&dt.glGetPolygonStipple)(pattern);
+      return *this;
+    }
+
+    inline const PolygonStipple &set(DispatchTable &dt) const
+    {
+      dt.call(&dt.glPolygonStipple)(pattern);
+      return *this;
+    }
+
+    inline std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glPolygonStipple([");
+      for (int ii=0; ii<(32*4)-1; ii++)
+        tmp << print_string(" ",hex(pattern[ii]),",");
+      tmp << print_string(" ",hex(pattern[(32*4)-1]),"]);",delim);
       return tmp;
     }
   };

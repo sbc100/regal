@@ -102,5 +102,21 @@ ppaFormulae = {
     'entries'    : [ 'glMapGrid(1|2)(f|d)' ],
     'prefix'     : [ '_context->ppa->glMapGrid${m1}( ${arg0plus} );', ],
   },
+  'TrackPointSize' : {
+    'entries'    : [ 'glPointSize' ],
+    'prefix'     : [ '_context->ppa->glPointSize( ${arg0plus} );', ],
+  },
+  'TrackPointParameter' : {
+    'entries'    : [ 'glPointParameter(i|f)(v|)' ],
+    'prefix'     : [ '_context->ppa->glPointParameter${m2}( ${arg0plus} );', ],
+  },
+  'TrackTexEnv' : {
+    'entries'    : [ 'gl(Multi|)TexEnv(i|f)(v|)(EXT|)' ],
+    'prefix'     : [ '_context->ppa->gl${m1}TexEnv${m3}( ${arg0plus} );', ],
+  },
+  'TrackPolygonStipple' : {
+    'entries'    : [ 'glPolygonStipple' ],
+    'prefix'     : [ '_context->ppa->glPolygonStipple( ${arg0plus} );', ],
+  },
 
 }

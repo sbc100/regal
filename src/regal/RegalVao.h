@@ -157,6 +157,9 @@ struct Vao {
             RegalAssert( coreVao != 0 );
             ctx.dispatcher.driver.glBindVertexArray( coreVao );
         }
+        else
+            coreVao = 0;
+
         current = 9999999; // this is only to force the bind...
         currObject = NULL;
         BindVertexArray( &ctx, 0 );

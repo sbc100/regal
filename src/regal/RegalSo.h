@@ -595,6 +595,77 @@ struct So
         return true;
     }
 
+    template <typename T> bool Get( GLenum pname, T * params )
+    {
+        GLint tti = -1;
+
+        switch (pname)
+        {
+            case GL_ACTIVE_TEXTURE:
+                *params = static_cast<T>(GL_TEXTURE0+activeTextureUnit);
+                return true;
+
+            case GL_SAMPLER_BINDING:
+                {
+                    SamplingState *pso = textureUnits[activeTextureUnit].boundSamplerObject;
+                    *params = static_cast<T>(pso ? pso->name : 0);
+                }
+                return true;
+
+            case GL_TEXTURE_BINDING_1D:
+                tti = TT_Enum2Index(GL_TEXTURE_1D);
+                break;
+
+            case GL_TEXTURE_BINDING_1D_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_1D_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_2D:
+                tti = TT_Enum2Index(GL_TEXTURE_2D);
+                break;
+
+            case GL_TEXTURE_BINDING_2D_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_2D_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+                tti = TT_Enum2Index(GL_TEXTURE_2D_MULTISAMPLE);
+                break;
+
+            case GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_2D_MULTISAMPLE_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_3D:
+                tti = TT_Enum2Index(GL_TEXTURE_3D);
+                break;
+
+            case GL_TEXTURE_BINDING_CUBE_MAP:
+                tti = TT_Enum2Index(GL_TEXTURE_CUBE_MAP);
+                break;
+
+            case GL_TEXTURE_CUBE_MAP_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_CUBE_MAP_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_RECTANGLE:
+                tti = TT_Enum2Index(GL_TEXTURE_RECTANGLE);
+                break;
+
+            default:
+                return false;
+        }
+
+        if (tti >= REGAL_NUM_TEXTURE_TARGETS)
+            return false;
+
+        TextureUnit &tu = textureUnits[activeTextureUnit];
+        TextureState* ts = tu.boundTextureObjects[tti];
+        *params = static_cast<T>(ts ? ts->name : 0);
+
+        return true;
+    }
+
     void GenTextures(RegalContext &ctx, GLsizei count, GLuint *textures);
     void DeleteTextures(RegalContext &ctx, GLsizei count, const GLuint * textures);
     bool BindTexture(RegalContext &ctx, GLuint unit, GLenum target, GLuint texture);

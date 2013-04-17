@@ -4759,6 +4759,9 @@ static void REGAL_CALL emu_glGetDoublev(GLenum pname, GLdouble *params)
       if (_context->iff) break;
       #endif
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so) break;
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao) break;
@@ -4807,6 +4810,17 @@ static void REGAL_CALL emu_glGetDoublev(GLenum pname, GLdouble *params)
       }
       #endif
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 3;
+        if ( !_context->so->Get( pname, params ) ) {
+           _context->dispatcher.emulation.glGetDoublev( pname, params );
+        }
+        return;
+      }
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao)
@@ -4883,6 +4897,9 @@ static void REGAL_CALL emu_glGetFloatv(GLenum pname, GLfloat *params)
       if (_context->iff) break;
       #endif
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so) break;
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao) break;
@@ -4942,6 +4959,17 @@ static void REGAL_CALL emu_glGetFloatv(GLenum pname, GLfloat *params)
       }
       #endif
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 3;
+        if ( !_context->so->Get( pname, params ) ) {
+           _context->dispatcher.emulation.glGetFloatv( pname, params );
+        }
+        return;
+      }
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao)
@@ -5018,6 +5046,9 @@ static void REGAL_CALL emu_glGetIntegerv(GLenum pname, GLint *params)
       if (_context->iff) break;
       #endif
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so) break;
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao) break;
@@ -5077,6 +5108,17 @@ static void REGAL_CALL emu_glGetIntegerv(GLenum pname, GLint *params)
       }
       #endif
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 3;
+        if ( !_context->so->Get( pname, params ) ) {
+           _context->dispatcher.emulation.glGetIntegerv( pname, params );
+        }
+        return;
+      }
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao)
@@ -9104,6 +9146,35 @@ static void REGAL_CALL emu_glPixelZoom(GLfloat xfactor, GLfloat yfactor)
 
 }
 
+static void REGAL_CALL emu_glPointSize(GLfloat size)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPointSize( size );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glPointSize)(size);
+}
+
 static void REGAL_CALL emu_glPolygonMode(GLenum face, GLenum mode)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -9180,6 +9251,35 @@ static void REGAL_CALL emu_glPolygonMode(GLenum face, GLenum mode)
 
   }
 
+}
+
+static void REGAL_CALL emu_glPolygonStipple(const GLubyte *mask)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPolygonStipple( mask );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glPolygonStipple)(mask);
 }
 
 static void REGAL_CALL emu_glPopAttrib(void)
@@ -13932,6 +14032,14 @@ static void REGAL_CALL emu_glTexEnvf(GLenum target, GLenum pname, GLfloat param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glTexEnv( target, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -13999,6 +14107,14 @@ static void REGAL_CALL emu_glTexEnvfv(GLenum target, GLenum pname, const GLfloat
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glTexEnvv( target, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -14066,6 +14182,14 @@ static void REGAL_CALL emu_glTexEnvi(GLenum target, GLenum pname, GLint param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glTexEnv( target, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -14133,6 +14257,14 @@ static void REGAL_CALL emu_glTexEnviv(GLenum target, GLenum pname, const GLint *
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glTexEnvv( target, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -20974,6 +21106,122 @@ static void REGAL_CALL emu_glMultiDrawElements(GLenum mode, const GLsizei *count
   DispatchTable *_next = _dispatch._next;
   RegalAssert(_next);
   _next->call(& _next->glMultiDrawElements)(mode, count, type, indices, primcount);
+}
+
+static void REGAL_CALL emu_glPointParameterf(GLenum pname, GLfloat param)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPointParameter( pname, param );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glPointParameterf)(pname, param);
+}
+
+static void REGAL_CALL emu_glPointParameterfv(GLenum pname, const GLfloat *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPointParameterv( pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glPointParameterfv)(pname, params);
+}
+
+static void REGAL_CALL emu_glPointParameteri(GLenum pname, GLint param)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPointParameter( pname, param );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glPointParameteri)(pname, param);
+}
+
+static void REGAL_CALL emu_glPointParameteriv(GLenum pname, const GLint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPointParameterv( pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glPointParameteriv)(pname, params);
 }
 
 static void REGAL_CALL emu_glSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue)
@@ -34790,6 +35038,9 @@ static void REGAL_CALL emu_glGetInteger64v(GLenum pname, GLint64 *params)
     case 6 :
     case 5 :
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so) break;
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao) break;
@@ -34826,6 +35077,17 @@ static void REGAL_CALL emu_glGetInteger64v(GLenum pname, GLint64 *params)
     case 6 :
     case 5 :
     case 4 :
+      #if REGAL_EMU_SO
+      if (_context->so)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 3;
+        if ( !_context->so->Get( pname, params ) ) {
+           _context->dispatcher.emulation.glGetInteger64v( pname, params );
+        }
+        return;
+      }
+      #endif
     case 3 :
       #if REGAL_EMU_VAO
       if (_context->vao)
@@ -46171,6 +46433,14 @@ static void REGAL_CALL emu_glMultiTexEnvfEXT(GLenum texunit, GLenum target, GLen
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMultiTexEnv( texunit, target, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -46242,6 +46512,14 @@ static void REGAL_CALL emu_glMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLe
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMultiTexEnvv( texunit, target, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -46313,6 +46591,14 @@ static void REGAL_CALL emu_glMultiTexEnviEXT(GLenum texunit, GLenum target, GLen
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMultiTexEnv( texunit, target, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -46384,6 +46670,14 @@ static void REGAL_CALL emu_glMultiTexEnvivEXT(GLenum texunit, GLenum target, GLe
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMultiTexEnvv( texunit, target, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -58103,7 +58397,9 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glPixelTransferf = emu_glPixelTransferf;
    tbl.glPixelTransferi = emu_glPixelTransferi;
    tbl.glPixelZoom = emu_glPixelZoom;
+   tbl.glPointSize = emu_glPointSize;
    tbl.glPolygonMode = emu_glPolygonMode;
+   tbl.glPolygonStipple = emu_glPolygonStipple;
    tbl.glPopAttrib = emu_glPopAttrib;
    tbl.glPopMatrix = emu_glPopMatrix;
    tbl.glPushAttrib = emu_glPushAttrib;
@@ -58300,6 +58596,10 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glFogCoordPointer = emu_glFogCoordPointer;
    tbl.glMultiDrawArrays = emu_glMultiDrawArrays;
    tbl.glMultiDrawElements = emu_glMultiDrawElements;
+   tbl.glPointParameterf = emu_glPointParameterf;
+   tbl.glPointParameterfv = emu_glPointParameterfv;
+   tbl.glPointParameteri = emu_glPointParameteri;
+   tbl.glPointParameteriv = emu_glPointParameteriv;
    tbl.glSecondaryColor3b = emu_glSecondaryColor3b;
    tbl.glSecondaryColor3bv = emu_glSecondaryColor3bv;
    tbl.glSecondaryColor3d = emu_glSecondaryColor3d;

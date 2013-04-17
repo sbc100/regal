@@ -88,6 +88,14 @@ soFormulae = {
             '}',
         ]
     },
+    'Get' : {
+        'entries' : [ 'glGet(Double|Float|Integer|Integer64)v' ],
+        'impl' : [
+            'if ( !_context->so->Get( ${arg0plus} ) ) {',
+            '   _context->dispatcher.emulation.glGet${m1}v( ${arg0plus} );',
+            '}',
+        ]
+    },
     'PreDraw' : {
         'entries' : [ 'gl(Multi|)Draw(Range|)(Arrays|Element|Elements)(Instanced|Indirect|BaseVertex|InstancedBaseVertex|Array|)(ARB|EXT|AMD|ATI|APPLE|)' ],
         'prefix' : [

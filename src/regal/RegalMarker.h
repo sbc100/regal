@@ -104,7 +104,7 @@ struct Marker {
     std::string
     toString(GLsizei length, const char *marker)
     {
-      if (length==0 || !marker)
+      if (length==0 || length == -1 || !marker)
         return std::string(marker ? marker : "");
       else
         return std::string(marker,length);
