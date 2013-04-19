@@ -76,6 +76,7 @@ REGAL.H += src/regal/RegalLog.h
 REGAL.H += src/regal/RegalLookup.h
 REGAL.H += src/regal/RegalMarker.h
 REGAL.H += src/regal/RegalTexC.h
+REGAL.H += src/regal/RegalTexSto.h
 REGAL.H += src/regal/RegalMac.h
 REGAL.H += src/regal/RegalObj.h
 REGAL.H += src/regal/RegalPpa.h

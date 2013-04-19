@@ -71,9 +71,9 @@ namespace Emu { struct Obj; };
 namespace Emu { struct Ppa; };
 namespace Emu { struct Ppca; };
 namespace Emu { struct Bin; };
-namespace Emu { struct TexSto; };
 namespace Emu { struct Xfer; };
 namespace Emu { struct Dsa; };
+namespace Emu { struct TexSto; };
 namespace Emu { struct Iff; };
 namespace Emu { struct So; };
 namespace Emu { struct Vao; };
@@ -87,6 +87,7 @@ struct RegalContext
   ~RegalContext();
 
   void Init();
+  void Cleanup();
 
   // If profile is forced at build-time, no need to check runtime flag
 
@@ -114,9 +115,9 @@ struct RegalContext
   Emu::Ppa           *ppa;
   Emu::Ppca          *ppca;
   Emu::Bin           *bin;
-  Emu::TexSto        *texsto;
   Emu::Xfer          *xfer;
   Emu::Dsa           *dsa;
+  Emu::TexSto        *texsto;
   Emu::Iff           *iff;
   Emu::So            *so;
   Emu::Vao           *vao;

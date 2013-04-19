@@ -59,7 +59,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct So : public RegalEmu
+struct So
 {
     So()
     : activeTextureUnit(0),
@@ -86,11 +86,16 @@ struct So : public RegalEmu
         noSamplersInUse = true;
     }
 
+    void Cleanup( RegalContext &ctx )
+    {
+        UNUSED_PARAMETER(ctx);
+    }
+
     static GLenum TT_Index2Enum(GLuint index)
     {
-      if( index > 9 ) {
+      if( index > REGAL_NUM_TEXTURE_TARGETS ) {
         Warning( "Unhandled texture target index: index = ", index);
-        index = 10;
+        index = REGAL_NUM_TEXTURE_TARGETS;
       }
       return index2Enum[index];
     }
@@ -496,8 +501,22 @@ struct So : public RegalEmu
         return !passthru;
     }
 
-    template <typename T> bool GetTexParameterv( RegalContext &ctx, GLuint tex, GLenum pname, T * params )
+    template <typename T> bool GetTexParameterv( RegalContext &ctx, GLenum target, GLenum pname, T * params )
     {
+        GLuint tti = TT_Enum2Index(target);
+
+        if (tti >= REGAL_NUM_TEXTURE_TARGETS)
+            return false;
+
+        TextureUnit &tu = textureUnits[activeTextureUnit];
+
+        TextureState* txs = tu.boundTextureObjects[tti];
+
+        if (!txs)
+            return false;
+
+        GLuint tex = txs->name;
+
         if (!tex || textureObjects.count(tex) < 1)
             return false;
 
@@ -573,6 +592,77 @@ struct So : public RegalEmu
             default:
                 return false;
         }
+        return true;
+    }
+
+    template <typename T> bool Get( GLenum pname, T * params )
+    {
+        GLint tti = -1;
+
+        switch (pname)
+        {
+            case GL_ACTIVE_TEXTURE:
+                *params = static_cast<T>(GL_TEXTURE0+activeTextureUnit);
+                return true;
+
+            case GL_SAMPLER_BINDING:
+                {
+                    SamplingState *pso = textureUnits[activeTextureUnit].boundSamplerObject;
+                    *params = static_cast<T>(pso ? pso->name : 0);
+                }
+                return true;
+
+            case GL_TEXTURE_BINDING_1D:
+                tti = TT_Enum2Index(GL_TEXTURE_1D);
+                break;
+
+            case GL_TEXTURE_BINDING_1D_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_1D_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_2D:
+                tti = TT_Enum2Index(GL_TEXTURE_2D);
+                break;
+
+            case GL_TEXTURE_BINDING_2D_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_2D_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_2D_MULTISAMPLE:
+                tti = TT_Enum2Index(GL_TEXTURE_2D_MULTISAMPLE);
+                break;
+
+            case GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_2D_MULTISAMPLE_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_3D:
+                tti = TT_Enum2Index(GL_TEXTURE_3D);
+                break;
+
+            case GL_TEXTURE_BINDING_CUBE_MAP:
+                tti = TT_Enum2Index(GL_TEXTURE_CUBE_MAP);
+                break;
+
+            case GL_TEXTURE_CUBE_MAP_ARRAY:
+                tti = TT_Enum2Index(GL_TEXTURE_CUBE_MAP_ARRAY);
+                break;
+
+            case GL_TEXTURE_BINDING_RECTANGLE:
+                tti = TT_Enum2Index(GL_TEXTURE_RECTANGLE);
+                break;
+
+            default:
+                return false;
+        }
+
+        if (tti >= REGAL_NUM_TEXTURE_TARGETS)
+            return false;
+
+        TextureUnit &tu = textureUnits[activeTextureUnit];
+        TextureState* ts = tu.boundTextureObjects[tti];
+        *params = static_cast<T>(ts ? ts->name : 0);
+
         return true;
     }
 

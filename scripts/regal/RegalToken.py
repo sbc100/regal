@@ -80,6 +80,42 @@ namespace Token {
     return tmp.str();
   }
 
+  // http://www.opengl.org/sdk/docs/man2/xhtml/glPushAttrib.xml
+
+  std::string GLpushAttribToString(GLbitfield v)
+  {
+    if (v == GL_ALL_ATTRIB_BITS)
+      return std::string("GL_ALL_ATTRIB_BITS");
+
+    const GLbitfield other = v & ~(GL_ACCUM_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT | GL_DEPTH_BUFFER_BIT | GL_ENABLE_BIT | GL_EVAL_BIT | GL_FOG_BIT | GL_HINT_BIT | GL_LIGHTING_BIT | GL_LINE_BIT | GL_LIST_BIT | GL_MULTISAMPLE_BIT | GL_PIXEL_MODE_BIT | GL_POINT_BIT | GL_POLYGON_BIT | GL_POLYGON_STIPPLE_BIT | GL_SCISSOR_BIT | GL_STENCIL_BUFFER_BIT | GL_TEXTURE_BIT | GL_TRANSFORM_BIT | GL_VIEWPORT_BIT);
+
+    string_list<std::string> tmp;
+    if (v & GL_ACCUM_BUFFER_BIT)          { if (tmp.size()) tmp += " | "; tmp += "GL_ACCUM_BUFFER_BIT"; }
+    if (v & GL_COLOR_BUFFER_BIT)          { if (tmp.size()) tmp += " | "; tmp += "GL_COLOR_BUFFER_BIT"; }
+    if (v & GL_CURRENT_BIT)               { if (tmp.size()) tmp += " | "; tmp += "GL_CURRENT_BIT"; }
+    if (v & GL_DEPTH_BUFFER_BIT)          { if (tmp.size()) tmp += " | "; tmp += "GL_DEPTH_BUFFER_BIT"; }
+    if (v & GL_ENABLE_BIT)                { if (tmp.size()) tmp += " | "; tmp += "GL_ENABLE_BIT"; }
+    if (v & GL_EVAL_BIT)                  { if (tmp.size()) tmp += " | "; tmp += "GL_EVAL_BIT"; }
+    if (v & GL_FOG_BIT)                   { if (tmp.size()) tmp += " | "; tmp += "GL_FOG_BIT"; }
+    if (v & GL_HINT_BIT)                  { if (tmp.size()) tmp += " | "; tmp += "GL_HINT_BIT"; }
+    if (v & GL_LIGHTING_BIT)              { if (tmp.size()) tmp += " | "; tmp += "GL_LIGHTING_BIT"; }
+    if (v & GL_LINE_BIT)                  { if (tmp.size()) tmp += " | "; tmp += "GL_LINE_BIT"; }
+    if (v & GL_LIST_BIT)                  { if (tmp.size()) tmp += " | "; tmp += "GL_LIST_BIT"; }
+    if (v & GL_MULTISAMPLE_BIT)           { if (tmp.size()) tmp += " | "; tmp += "GL_MULTISAMPLE_BIT"; }
+    if (v & GL_PIXEL_MODE_BIT)            { if (tmp.size()) tmp += " | "; tmp += "GL_PIXEL_MODE_BIT"; }
+    if (v & GL_POINT_BIT)                 { if (tmp.size()) tmp += " | "; tmp += "GL_POINT_BIT"; }
+    if (v & GL_POLYGON_BIT)               { if (tmp.size()) tmp += " | "; tmp += "GL_POLYGON_BIT"; }
+    if (v & GL_POLYGON_STIPPLE_BIT)       { if (tmp.size()) tmp += " | "; tmp += "GL_POLYGON_STIPPLE_BIT"; }
+    if (v & GL_SCISSOR_BIT)               { if (tmp.size()) tmp += " | "; tmp += "GL_SCISSOR_BIT"; }
+    if (v & GL_STENCIL_BUFFER_BIT)        { if (tmp.size()) tmp += " | "; tmp += "GL_STENCIL_BUFFER_BIT"; }
+    if (v & GL_TEXTURE_BIT)               { if (tmp.size()) tmp += " | "; tmp += "GL_TEXTURE_BIT"; }
+    if (v & GL_TRANSFORM_BIT)             { if (tmp.size()) tmp += " | "; tmp += "GL_TRANSFORM_BIT"; }
+    if (v & GL_VIEWPORT_BIT)              { if (tmp.size()) tmp += " | "; tmp += "GL_VIEWPORT_BIT"; }
+    if (other || v==0)                    { if (tmp.size()) tmp += " | "; tmp += size_t(other); }
+
+    return tmp.str();
+  }
+
   std::string GLTexParameterToString(GLenum pname, const GLfloat param)
   {
     switch (pname)
@@ -477,6 +513,7 @@ namespace Token {
 
   std::string GLclearToString       (GLbitfield v);
   std::string GLbufferAccessToString(GLbitfield v);
+  std::string GLpushAttribToString  (GLbitfield v);
 
   std::string GLTexParameterToString(GLenum pname, const GLfloat  param );
   std::string GLTexParameterToString(GLenum pname, const GLint    param );

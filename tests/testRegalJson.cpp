@@ -140,4 +140,23 @@ TEST( RegalJson, Subset )
   EXPECT_EQ(state0,json());
 }
 
+TEST( RegalJson, Trace )
+{
+  const string state0 = json();
+
+  const char *traceTrue  = "{ \"regal\" : { \"config\" : { \"dispatch\" : { \"enable\" : { \"trace\" : true } } } } }";
+  const char *traceFalse = "{ \"regal\" : { \"config\" : { \"dispatch\" : { \"enable\" : { \"trace\" : false } } } } }";
+
+  RegalConfigure(traceTrue);
+  EXPECT_EQ(Config::enableTrace,true);
+
+  RegalConfigure(traceFalse);
+  EXPECT_EQ(Config::enableTrace,false);
+
+  // Reset to state0
+
+  RegalConfigure(state0.c_str());
+  EXPECT_EQ(state0,json());
+}
+
 }

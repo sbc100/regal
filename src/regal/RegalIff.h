@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -82,6 +82,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
 #include "RegalSharedMap.h"
+#include "RegalFloat4.h"
 #include "linear.h"
 
 REGAL_GLOBAL_END
@@ -339,7 +340,7 @@ struct Iff
   {
   }
 
-  void Cleanup();
+  void Cleanup( RegalContext &ctx );
 
   // Info
   int progcount;
@@ -353,9 +354,9 @@ struct Iff
   GLuint ffAttrNumTex;
   GLuint maxVertexAttribs;
 
-  void InitVertexArray( RegalContext * ctx )
+  void InitVertexArray(RegalContext &ctx)
   {
-    maxVertexAttribs = ctx->info->maxVertexAttribs;
+    maxVertexAttribs = ctx.info->maxVertexAttribs;
 
     if( maxVertexAttribs >= 16 ) {
       RegalAssert( REGAL_EMU_IFF_VERTEX_ATTRIBS == 16);
@@ -690,7 +691,7 @@ struct Iff
   GLuint immQuadsVbo;
   GLuint immShadowVao;
 
-  void InitImmediate( RegalContext * ctx )
+  void InitImmediate(RegalContext &ctx)
   {
     immActive = false;
     immProvoking = 0;
@@ -706,15 +707,15 @@ struct Iff
 
     immShadowVao = 0;
 
-    DispatchTable &tbl = ctx->dispatcher.emulation;
+    DispatchTable &tbl = ctx.dispatcher.emulation;
     tbl.glGenVertexArrays( 1, & immVao );
     tbl.glBindVertexArray( immVao );
-    BindVertexArray( ctx, immVao ); // to keep ffn current
+    BindVertexArray( &ctx, immVao ); // to keep ffn current
     tbl.glGenBuffers( 1, & immVbo );
     tbl.glGenBuffers( 1, & immQuadsVbo );
     tbl.glBindBuffer( GL_ARRAY_BUFFER, immVbo );
     for( GLuint i = 0; i < maxVertexAttribs; i++ ) {
-      EnableArray( ctx, i ); // to keep ffn current
+      EnableArray( &ctx, i ); // to keep ffn current
       tbl.glEnableVertexAttribArray( i );
       tbl.glVertexAttribPointer( i, 4, GL_FLOAT, GL_FALSE, maxVertexAttribs * 16, (GLubyte *)NULL + i * 16 );
     }
@@ -730,25 +731,25 @@ struct Iff
     }
     tbl.glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( quadIndexes ), quadIndexes, GL_STATIC_DRAW );
     tbl.glBindVertexArray( 0 );
-    BindVertexArray( ctx, 0 ); // to keep ffn current
+    BindVertexArray( &ctx, 0 ); // to keep ffn current
 
     // The initial texture coordinates are (s; t; r; q) = (0; 0; 0; 1)
     // for each texture coordinate set.
 
     for( catIndex = 0; catIndex < REGAL_EMU_MAX_TEXTURE_UNITS; catIndex++ ) {
-      Attr<4>( ctx, AttrIndex( RFF2A_TexCoord ), 0, 0, 0, 1 );
+      Attr<4>( &ctx, AttrIndex( RFF2A_TexCoord ), 0, 0, 0, 1 );
     }
     catIndex = 0;
 
     // The initial current normal has coordinates (0; 0; 1).
 
-    Attr<3>( ctx, AttrIndex( RFF2A_Normal ), 0, 0, 1 );
+    Attr<3>( &ctx, AttrIndex( RFF2A_Normal ), 0, 0, 1 );
 
     // The initial RGBA color is (R;G;B;A) = (1; 1; 1; 1) and
     // the initial RGBA secondary color is (0; 0; 0; 1).
 
-    Attr<4>( ctx, AttrIndex( RFF2A_Color ), 1, 1, 1, 1 );
-    Attr<4>( ctx, AttrIndex( RFF2A_SecondaryColor ), 0, 0, 0, 1 );
+    Attr<4>( &ctx, AttrIndex( RFF2A_Color ), 1, 1, 1, 1 );
+    Attr<4>( &ctx, AttrIndex( RFF2A_SecondaryColor ), 0, 0, 0, 1 );
 
     // The initial fog coordinate is zero.
 
@@ -1610,7 +1611,7 @@ struct Iff
   bool gles;   // what about ES1?
   bool legacy; // 2.x mac
 
-  void InitFixedFunction( RegalContext * ctx );
+  void InitFixedFunction(RegalContext &ctx);
 
   void PreDraw( RegalContext * ctx ) {
     ver.Reset();
@@ -2297,9 +2298,9 @@ struct Iff
     if (sharingWith)
       textureObjToFmt = sharingWith->iff->textureObjToFmt;
 
-    InitVertexArray( &ctx );
-    InitFixedFunction( &ctx );
-    InitImmediate( &ctx );
+    InitVertexArray(ctx);
+    InitFixedFunction(ctx);
+    InitImmediate(ctx);
   }
 };
 

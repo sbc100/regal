@@ -3265,7 +3265,7 @@ static void REGAL_CALL code_glPushAttrib(GLbitfield mask)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     _code << indent << "glPushAttrib(";
-    _code << mask;
+    _code << GLpushAttribToString(mask);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());

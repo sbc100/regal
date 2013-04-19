@@ -66,6 +66,7 @@ namespace Token {
 
   std::string GLclearToString       (GLbitfield v);
   std::string GLbufferAccessToString(GLbitfield v);
+  std::string GLpushAttribToString  (GLbitfield v);
 
   std::string GLTexParameterToString(GLenum pname, const GLfloat  param );
   std::string GLTexParameterToString(GLenum pname, const GLint    param );

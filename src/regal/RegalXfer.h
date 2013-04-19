@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -57,7 +57,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct Xfer : public RegalEmu
+struct Xfer
 {
   void Init( RegalContext &ctx )
   {
@@ -69,6 +69,11 @@ struct Xfer : public RegalEmu
     unpackRowLength = 0;
     unpackSkipRows = 0;
     unpackSkipPixels = 0;
+  }
+
+  void Cleanup( RegalContext &ctx )
+  {
+    UNUSED_PARAMETER(ctx);
   }
 
   void PixelStore( RegalContext * ctx, GLenum pname, GLint param );

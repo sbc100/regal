@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -50,9 +50,14 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct Bin : public RegalEmu
+struct Bin
 {
   void Init( RegalContext &ctx )
+  {
+    UNUSED_PARAMETER(ctx);
+  }
+
+  void Cleanup( RegalContext &ctx )
   {
     UNUSED_PARAMETER(ctx);
   }

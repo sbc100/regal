@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
+  Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
@@ -1430,7 +1430,7 @@ void Program::Shader( RegalContext * ctx, DispatchTable & tbl, GLenum type, GLui
   if (!status)
   {
     std::string log;
-    if (helper::getInfoLog(log,tbl.call(&tbl.glGetShaderInfoLog),tbl.call(&tbl.glGetShaderiv),pg))
+    if (helper::getInfoLog(log,tbl.call(&tbl.glGetShaderInfoLog),tbl.call(&tbl.glGetShaderiv),shader))
       Internal("Regal::Program::Shader", log);
   }
   #endif
@@ -1527,50 +1527,45 @@ void Program::Uniforms( RegalContext * ctx, DispatchTable & tbl )
   }
 }
 
-void Iff::Cleanup()
+void Iff::Cleanup( RegalContext &ctx )
 {
   Internal("Regal::Iff::Cleanup","()");
 
-  RegalContext *ctx = REGAL_GET_CONTEXT();
-  if (ctx)
+  RestoreVao(&ctx);
+  DispatchTable &tbl = ctx.dispatcher.emulation;
+
+  tbl.call(&tbl.glDeleteBuffers)(1, &immVbo);
+  tbl.call(&tbl.glDeleteBuffers)(1, &immQuadsVbo);
+  tbl.call(&tbl.glDeleteVertexArrays)(1, &immVao);
+
+  for (int i = 0; i < (1 << REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE_BITS); ++i)
   {
-    RestoreVao(ctx);
-    DispatchTable &tbl = ctx->dispatcher.emulation;
-
-    tbl.call(&tbl.glDeleteBuffers)(1, &immVbo);
-    tbl.call(&tbl.glDeleteBuffers)(1, &immQuadsVbo);
-    tbl.call(&tbl.glDeleteVertexArrays)(1, &immVao);
-
-    for (int i = 0; i < (1 << REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE_BITS); ++i)
+    const Program &pgm = ffprogs[i];
+    if (pgm.pg)
     {
-      const Program &pgm = ffprogs[i];
-      if (pgm.pg)
-      {
-        tbl.call(&tbl.glDeleteShader)(pgm.vs);
-        tbl.call(&tbl.glDeleteShader)(pgm.fs);
-        tbl.call(&tbl.glDeleteProgram)(pgm.pg);
-      }
+      tbl.call(&tbl.glDeleteShader)(pgm.vs);
+      tbl.call(&tbl.glDeleteShader)(pgm.fs);
+      tbl.call(&tbl.glDeleteProgram)(pgm.pg);
     }
+  }
 
-    tbl.glBindBuffer(GL_ARRAY_BUFFER, 0);
-    tbl.glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    for (GLuint i=0; i<ctx->info->maxVertexAttribs; ++i)
-    {
-        tbl.glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, 0, NULL);
-        tbl.glDisableVertexAttribArray(i);
-    }
+  tbl.glBindBuffer(GL_ARRAY_BUFFER, 0);
+  tbl.glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  for (GLuint i=0; i<ctx.info->maxVertexAttribs; ++i)
+  {
+    tbl.glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, 0, NULL);
+    tbl.glDisableVertexAttribArray(i);
   }
 }
 
-void Iff::InitFixedFunction( RegalContext * ctx )
+void Iff::InitFixedFunction(RegalContext &ctx)
 {
   Internal("Regal::Iff::InitFixedFunction","()");
 
-  RegalAssert(ctx);
-  RegalAssert(ctx->info);
+  RegalAssert(ctx.info);
 
-  gles   = ctx->info->es2;
-  legacy = ctx->info->compat && ctx->info->gl_version_major<=2;
+  gles   = ctx.info->es2;
+  legacy = ctx.info->compat && ctx.info->gl_version_major<=2;
 
   shadowMatrixMode = GL_MODELVIEW;
   currMatrixStack = &modelview;

@@ -76,6 +76,7 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
@@ -88,7 +89,9 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH,
+  JSON_REGAL_CONFIG_DISPATCH_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_ENABLE,
@@ -214,6 +217,7 @@ Parser::onPush(const string &name)
       if (name=="ppca"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA;  return; }
       if (name=="so"          ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_SO;    return; }
       if (name=="texc"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXC;  return; }
+      if (name=="texsto"      ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXSTO; return; }
       if (name=="vao"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_VAO;   return; }
       if (name=="xfer"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_XFER;  return; }
       break;
@@ -228,6 +232,7 @@ Parser::onPush(const string &name)
       if (name=="ppca"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA;   return; }
       if (name=="so"          ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_SO;     return; }
       if (name=="texc"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXC;   return; }
+      if (name=="texsto"      ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXSTO; return; }
       if (name=="vao"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_VAO;    return; }
       if (name=="xfer"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_XFER;   return; }
       break;
@@ -239,6 +244,7 @@ Parser::onPush(const string &name)
       if (name=="emulation"   ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_EMULATION;       return; }
       if (name=="error"       ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_ERROR;           return; }
       if (name=="log"         ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_LOG;             return; }
+      if (name=="trace"       ) { current = JSON_REGAL_CONFIG_DISPATCH_ENABLE_TRACE;           return; }
       break;
 
     case JSON_REGAL_CONFIG_DISPATCH_FORCE:
@@ -364,6 +370,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA  : { set_json_regal_config_dispatch_emulation_enable_ppca(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_SO    : { set_json_regal_config_dispatch_emulation_enable_so(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXC  : { set_json_regal_config_dispatch_emulation_enable_texc(value); return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXSTO: { set_json_regal_config_dispatch_emulation_enable_texsto(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_VAO   : { set_json_regal_config_dispatch_emulation_enable_vao(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_XFER  : { set_json_regal_config_dispatch_emulation_enable_xfer(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_BIN    : { set_json_regal_config_dispatch_emulation_force_bin(value);   return; }
@@ -375,6 +382,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA   : { set_json_regal_config_dispatch_emulation_force_ppca(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_SO     : { set_json_regal_config_dispatch_emulation_force_so(value);    return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXC   : { set_json_regal_config_dispatch_emulation_force_texc(value);  return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXSTO : { set_json_regal_config_dispatch_emulation_force_texsto(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_VAO    : { set_json_regal_config_dispatch_emulation_force_vao(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_XFER   : { set_json_regal_config_dispatch_emulation_force_xfer(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_CODE            : { set_json_regal_config_dispatch_enable_code(value);           return; }
@@ -383,6 +391,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_EMULATION       : { set_json_regal_config_dispatch_enable_emulation(value);      return; }
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_ERROR           : { set_json_regal_config_dispatch_enable_error(value);          return; }
     case JSON_REGAL_CONFIG_DISPATCH_ENABLE_LOG             : { set_json_regal_config_dispatch_enable_log(value);            return; }
+    case JSON_REGAL_CONFIG_DISPATCH_ENABLE_TRACE           : { set_json_regal_config_dispatch_enable_trace(value);          return; }
     case JSON_REGAL_CONFIG_DISPATCH_FORCE_EMULATION        : { set_json_regal_config_dispatch_force_emulation(value);       return; }
     case JSON_REGAL_CONFIG_FORCE_CORE                      : { set_json_regal_config_force_core(value);                     return; }
     case JSON_REGAL_CONFIG_FORCE_ES1                       : { set_json_regal_config_force_es1(value);                      return; }
@@ -511,7 +520,7 @@ jsonslAction(jsonsl_t jsn, jsonsl_action_t action, struct jsonsl_state_st *state
 static int
 jsonslError(jsonsl_t jsn, jsonsl_error_t err, struct jsonsl_state_st *state, char *at)
 {
-  Parser REGAL_UNUSED * parser = reinterpret_cast<Parser *>(jsn->data);
+  Parser REGAL_UNUSED *parser = reinterpret_cast<Parser *>(jsn->data);
   RegalAssert(parser);
   UNUSED_PARAMETER(parser);
   UNUSED_PARAMETER(err);

@@ -1,9 +1,6 @@
 /*
   Copyright (c) 2011-2013 NVIDIA Corporation
-  Copyright (c) 2011-2013 Cass Everitt
-  Copyright (c) 2012-2013 Scott Nations
-  Copyright (c) 2012-2013 Mathias Schott
-  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2011-2012 Cass Everitt
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -30,76 +27,70 @@
 
 /*
 
- Regal API filtering support for ES 2.0 and Core GL contexts.
+ Regal Float4 class.
  Cass Everitt
 
  */
 
-#ifndef __REGAL_FILT_H__
-#define __REGAL_FILT_H__
+#ifndef __REGAL_FLOAT4_H__
+#define __REGAL_FLOAT4_H__
 
 #include "RegalUtil.h"
 
-#if REGAL_EMULATION
-
 REGAL_GLOBAL_BEGIN
 
-#include "RegalEmu.h"
-#include "RegalContext.h"
-#include "RegalContextInfo.h"
+#include <GL/Regal.h>
 
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-namespace Emu {
-
-  struct Filt
-  {
-    Filt()
-    : filtered(false)
+struct Float4
+{
+    Float4()
+    : x(0.f),
+      y(0.f),
+      z(0.f),
+      w(1.f)
     {
     }
 
-    void
-    Init(RegalContext &ctx)
+    Float4( const GLfloat X, const GLfloat Y, const GLfloat Z, const GLfloat W )
+    : x(X),
+      y(Y),
+      z(Z),
+      w(W)
     {
-      UNUSED_PARAMETER(ctx);
     }
 
-    void
-    Cleanup(RegalContext &ctx)
+    Float4( const GLdouble X, const GLdouble Y, const GLdouble Z, const GLdouble W )
+    : x(static_cast<GLfloat>(X)),
+      y(static_cast<GLfloat>(Y)),
+      z(static_cast<GLfloat>(Z)),
+      w(static_cast<GLfloat>(W))
     {
-      UNUSED_PARAMETER(ctx);
     }
 
-    void BindTexture(const RegalContext &ctx, GLenum target, GLuint name );
-
-    template <typename T> void Get(const RegalContext &ctx, GLenum pname, T *params)
+    Float4( const GLint X, const GLint Y, const GLint Z, const GLint W )
+    : x(static_cast<GLfloat>(X)),
+      y(static_cast<GLfloat>(Y)),
+      z(static_cast<GLfloat>(Z)),
+      w(static_cast<GLfloat>(W))
     {
-      FilterGet(ctx,pname);
-      if (filtered)
-        params[0] = T(retVal);
     }
 
-    void PolygonMode (const RegalContext &ctx, GLenum face, GLenum mode);
-    void RenderMode  (const RegalContext &ctx, GLenum mode);
-    void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLint   param);
-    void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param);
+    Float4( const GLuint X, const GLuint Y, const GLuint Z, const GLuint W )
+    : x(static_cast<GLfloat>(X)),
+      y(static_cast<GLfloat>(Y)),
+      z(static_cast<GLfloat>(Z)),
+      w(static_cast<GLfloat>(W))
+    {
+    }
 
-    void FilterGet   (const RegalContext &ctx, GLenum pname);
+    GLfloat x, y, z, w;
+};
 
-    bool Filtered() { bool f = filtered; filtered = false; return f; }
-
-  private:
-    bool filtered;
-    int  retVal;
-  };
-
-}
 
 REGAL_NAMESPACE_END
 
-#endif // REGAL_EMULATION
-
-#endif // __REGAL_FILT_H__
+#endif // ! __REGAL_FLOAT4_H__

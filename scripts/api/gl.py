@@ -13783,7 +13783,7 @@ gl.add(glPopName)
 
 glPushAttrib = Function('glPushAttrib')
 glPushAttrib.ret = Return('void')
-glPushAttrib.add( Input( 'mask','GLbitfield' ))
+glPushAttrib.add( Input( 'mask','GLbitfield' ,regalLog = 'GLpushAttribToString(mask)' ))
 glPushAttrib.version = '1.0'
 glPushAttrib.category = 'GL_VERSION_1_0'
 glPushAttrib.trace = True
