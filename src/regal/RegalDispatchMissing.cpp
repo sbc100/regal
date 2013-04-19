@@ -8477,6 +8477,14 @@ static void REGAL_CALL missing_glGetProgramStageiv(GLuint program, GLenum shader
   Warning( "glGetProgramStageiv not available." );
 }
 
+static void REGAL_CALL missing_glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(index);
+  UNUSED_PARAMETER(params);
+  Warning( "glGetProgramSubroutineParameteruivNV not available." );
+}
+
 static GLuint REGAL_CALL missing_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
   UNUSED_PARAMETER(program);
@@ -8501,6 +8509,14 @@ static void REGAL_CALL missing_glGetUniformSubroutineuiv(GLenum shaderType, GLin
   UNUSED_PARAMETER(location);
   UNUSED_PARAMETER(params);
   Warning( "glGetUniformSubroutineuiv not available." );
+}
+
+static void REGAL_CALL missing_glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(params);
+  Warning( "glProgramSubroutineParametersuivNV not available." );
 }
 
 static void REGAL_CALL missing_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
@@ -23612,9 +23628,11 @@ void InitDispatchTableMissing(DispatchTable &tbl)
   tbl.glGetActiveSubroutineUniformName = missing_glGetActiveSubroutineUniformName;
   tbl.glGetActiveSubroutineUniformiv = missing_glGetActiveSubroutineUniformiv;
   tbl.glGetProgramStageiv = missing_glGetProgramStageiv;
+  tbl.glGetProgramSubroutineParameteruivNV = missing_glGetProgramSubroutineParameteruivNV;
   tbl.glGetSubroutineIndex = missing_glGetSubroutineIndex;
   tbl.glGetSubroutineUniformLocation = missing_glGetSubroutineUniformLocation;
   tbl.glGetUniformSubroutineuiv = missing_glGetUniformSubroutineuiv;
+  tbl.glProgramSubroutineParametersuivNV = missing_glProgramSubroutineParametersuivNV;
   tbl.glUniformSubroutinesuiv = missing_glUniformSubroutinesuiv;
 
   // GL_ARB_shading_language_include

@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2633] = {
+const char * const gl_Name[2635] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -970,6 +970,7 @@ const char * const gl_Name[2633] = {
   "glGetProgramStageiv",
   "glGetProgramStringARB",
   "glGetProgramStringNV",
+  "glGetProgramSubroutineParameteruivNV",
   "glGetProgramiv",
   "glGetProgramivARB",
   "glGetProgramivNV",
@@ -1641,6 +1642,7 @@ const char * const gl_Name[2633] = {
   "glProgramParameters4dvNV",
   "glProgramParameters4fvNV",
   "glProgramStringARB",
+  "glProgramSubroutineParametersuivNV",
   "glProgramUniform1d",
   "glProgramUniform1dEXT",
   "glProgramUniform1dv",
@@ -2689,7 +2691,7 @@ const char * const gl_Name[2633] = {
   NULL
 };
 
-const void *gl_Value[2633] = {
+const void *gl_Value[2635] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -3606,6 +3608,7 @@ const void *gl_Value[2633] = {
   (void *)(glGetProgramStageiv),
   (void *)(glGetProgramStringARB),
   (void *)(glGetProgramStringNV),
+  (void *)(glGetProgramSubroutineParameteruivNV),
   (void *)(glGetProgramiv),
   (void *)(glGetProgramivARB),
   (void *)(glGetProgramivNV),
@@ -4277,6 +4280,7 @@ const void *gl_Value[2633] = {
   (void *)(glProgramParameters4dvNV),
   (void *)(glProgramParameters4fvNV),
   (void *)(glProgramStringARB),
+  (void *)(glProgramSubroutineParametersuivNV),
   (void *)(glProgramUniform1d),
   (void *)(glProgramUniform1dEXT),
   (void *)(glProgramUniform1dv),
@@ -5325,7 +5329,7 @@ const void *gl_Value[2633] = {
   NULL
 };
 
-const size_t gl_Offset[2633] = {
+const size_t gl_Offset[2635] = {
   offsetof(DispatchTable,glAccum)/sizeof(void *),
   offsetof(DispatchTable,glActiveProgramEXT)/sizeof(void *),
   offsetof(DispatchTable,glActiveShaderProgram)/sizeof(void *),
@@ -6242,6 +6246,7 @@ const size_t gl_Offset[2633] = {
   offsetof(DispatchTable,glGetProgramStageiv)/sizeof(void *),
   offsetof(DispatchTable,glGetProgramStringARB)/sizeof(void *),
   offsetof(DispatchTable,glGetProgramStringNV)/sizeof(void *),
+  offsetof(DispatchTable,glGetProgramSubroutineParameteruivNV)/sizeof(void *),
   offsetof(DispatchTable,glGetProgramiv)/sizeof(void *),
   offsetof(DispatchTable,glGetProgramivARB)/sizeof(void *),
   offsetof(DispatchTable,glGetProgramivNV)/sizeof(void *),
@@ -6913,6 +6918,7 @@ const size_t gl_Offset[2633] = {
   offsetof(DispatchTable,glProgramParameters4dvNV)/sizeof(void *),
   offsetof(DispatchTable,glProgramParameters4fvNV)/sizeof(void *),
   offsetof(DispatchTable,glProgramStringARB)/sizeof(void *),
+  offsetof(DispatchTable,glProgramSubroutineParametersuivNV)/sizeof(void *),
   offsetof(DispatchTable,glProgramUniform1d)/sizeof(void *),
   offsetof(DispatchTable,glProgramUniform1dEXT)/sizeof(void *),
   offsetof(DispatchTable,glProgramUniform1dv)/sizeof(void *),

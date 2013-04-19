@@ -40,12 +40,12 @@ namespace Token {
     return 1<=v && v<=4 ? integer[v] : GLenumToString(v);
   }
 
-  std::string 
+  std::string
   GLtextureToString(GLenum v)
   {
     if (v>=GL_TEXTURE0 && v<=GL_TEXTURE31)
       return GLenumToString(v);
-      
+
     return print_string("0x",hex(v));
   }
 

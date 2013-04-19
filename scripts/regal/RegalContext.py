@@ -306,7 +306,7 @@ ${EMU_MEMBER_INIT}
   {
     if (Config::codeSourceFile.length())
     {
-      codeSource = fopen(Config::codeSourceFile.c_str(),"wt");      
+      codeSource = fopen(Config::codeSourceFile.c_str(),"wt");
       if (!codeSource)
         Warning("Failed to open file ",Config::codeSourceFile," for writing code source.");
     }
@@ -317,7 +317,7 @@ ${EMU_MEMBER_INIT}
       else
         codeHeader = fopen(Config::codeHeaderFile.c_str(),"wt");
       if (!codeHeader)
-        Warning("Failed to open file ",Config::codeHeaderFile," for writing code header.");      
+        Warning("Failed to open file ",Config::codeHeaderFile," for writing code header.");
     }
   }
 #endif
@@ -502,6 +502,19 @@ def generateContextSource(apis, args):
               init += 'info->regal_arb_texture_storage = true;\n'
               init += 'info->regalExtensionsSet.insert("GL_ARB_texture_storage");\n'
               init += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
+            if emu[revi]['member']=='filt':
+              es2_exts = ''
+              es2_exts += 'Internal("RegalContext::Init ","GL_EXT_blend_color");\n'
+              es2_exts += 'Internal("RegalContext::Init ","GL_EXT_blend_subtract");\n'
+              es2_exts += 'Internal("RegalContext::Init ","GL_NV_blend_square");\n'
+              es2_exts += 'info->regal_ext_blend_color = true;\n'
+              es2_exts += 'info->regal_ext_blend_subtract = true;\n'
+              es2_exts += 'info->regal_nv_blend_square = true;\n'
+              es2_exts += 'info->regalExtensionsSet.insert("GL_EXT_blend_color");\n'
+              es2_exts += 'info->regalExtensionsSet.insert("GL_EXT_blend_subtract");\n'
+              es2_exts += 'info->regalExtensionsSet.insert("GL_NV_blend_square");\n'
+              es2_exts += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
+              init += wrapCIf('info->es2',es2_exts)
 
             init += '%s = new %s;\n' % ( emu[revi]['member'], emu[revi]['type'] )
             init += 'emuLevel = %d;\n' % ( int(emu[revi]['level']) - 1)

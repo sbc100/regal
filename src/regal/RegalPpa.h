@@ -65,7 +65,7 @@ namespace Emu {
 
 struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transform, State::Hint,
              State::Enable, State::List, State::AccumBuffer, State::Scissor, State::Viewport, State::Line,
-             State::Multisample, State::Eval, State::Fog, State::Point, State::PolygonStipple
+             State::Multisample, State::Eval, State::Fog, State::Point, State::PolygonStipple, State::ColorBuffer
 {
   void Init(RegalContext &ctx)
   {
@@ -212,6 +212,16 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       polygonStippleStack.push_back(State::PolygonStipple());
       polygonStippleStack.back() = *this;
       mask &= ~GL_POLYGON_STIPPLE_BIT;
+    }
+
+    if (mask&GL_COLOR_BUFFER_BIT)
+    {
+      Internal("Regal::Ppa::PushAttrib GL_COLOR_BUFFER_BIT ",State::ColorBuffer::toString());
+      if (!State::ColorBuffer::defined())
+        State::ColorBuffer::define(ctx->dispatcher.emulation);
+      colorBufferStack.push_back(State::ColorBuffer());
+      colorBufferStack.back() = *this;
+      mask &= ~GL_COLOR_BUFFER_BIT;
     }
 
     // Pass the rest through, for now
@@ -492,6 +502,24 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         mask &= ~GL_POLYGON_STIPPLE_BIT;
       }
 
+      if (mask&GL_COLOR_BUFFER_BIT)
+      {
+        RegalAssert(colorBufferStack.size());
+        State::ColorBuffer::swap(colorBufferStack.back());
+        colorBufferStack.pop_back();
+
+        Internal("Regal::Ppa::PopAttrib GL_COLOR_BUFFER_BIT ",State::ColorBuffer::toString());
+
+        // Ideally we'd only set the state that has changed
+        // since the glPushAttrib() - revisit
+
+        if (!State::ColorBuffer::defined())
+          State::ColorBuffer::define(ctx->dispatcher.emulation);
+        State::ColorBuffer::set(ctx->dispatcher.emulation);
+
+        mask &= ~GL_COLOR_BUFFER_BIT;
+      }
+
       // Pass the rest through, for now
 
       if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
@@ -559,7 +587,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   {
     switch (cap)
     {
-      case GL_ALPHA_TEST:          State::Enable::alphaTest = enabled; break;
+      case GL_ALPHA_TEST:          State::Enable::alphaTest = State::ColorBuffer::alphaTest = enabled; break;
       case GL_AUTO_NORMAL:         State::Enable::autoNormal = enabled; break;
       case GL_CLIP_DISTANCE0:
       case GL_CLIP_DISTANCE1:
@@ -569,7 +597,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
       case GL_CLIP_DISTANCE7:      State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = enabled; break;
-      case GL_COLOR_LOGIC_OP:      State::Enable::colorLogicOp    = enabled; break;
+      case GL_COLOR_LOGIC_OP:      State::Enable::colorLogicOp    = State::ColorBuffer::colorLogicOp = enabled; break;
       case GL_COLOR_MATERIAL:      State::Enable::colorMaterial   = enabled; break;
       case GL_COLOR_SUM:           State::Enable::colorSum        = enabled; break;
       case GL_COLOR_TABLE:         State::Enable::colorTable      = enabled; break;
@@ -581,11 +609,11 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
                                    State::Transform::depthClamp   = enabled; break;
       case GL_DEPTH_TEST:          State::Depth::enable           = enabled;
                                    State::Enable::depthTest       = enabled; break;
-      case GL_DITHER:              State::Enable::dither          = enabled; break;
+      case GL_DITHER:              State::Enable::dither          = State::ColorBuffer::dither = enabled; break;
       case GL_FOG:                 State::Enable::fog             = enabled; break;
-      case GL_FRAMEBUFFER_SRGB:    State::Enable::framebufferSRGB = enabled; break;
+      case GL_FRAMEBUFFER_SRGB:    State::Enable::framebufferSRGB = State::ColorBuffer::framebufferSRGB = enabled; break;
       case GL_HISTOGRAM:           State::Enable::histogram       = enabled; break;
-      case GL_INDEX_LOGIC_OP:      State::Enable::indexLogicOp    = enabled; break;
+      case GL_INDEX_LOGIC_OP:      State::Enable::indexLogicOp    = State::ColorBuffer::indexLogicOp = enabled; break;
       case GL_LIGHT0:
       case GL_LIGHT1:
       case GL_LIGHT2:
@@ -684,7 +712,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     {
       case GL_BLEND:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-          State::Enable::blend[index] = enabled;
+          State::Enable::blend[index] = State::ColorBuffer::blend[index] = enabled;
         break;
       case GL_SCISSOR_TEST:
         if (index < REGAL_MAX_VIEWPORTS)
@@ -723,17 +751,6 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return SetEnablei(ctx, cap, index, GL_FALSE);
   }
 
-  inline void glClampColor( GLenum target, GLenum clamp )
-  {
-    switch (target)
-    {
-      case GL_CLAMP_FRAGMENT_COLOR: State::Enable::clampFragmentColor = clamp; break;
-      case GL_CLAMP_READ_COLOR:     State::Enable::clampReadColor     = clamp; break;
-      case GL_CLAMP_VERTEX_COLOR:   State::Enable::clampVertexColor   = clamp; break;
-      default: break;
-    }
-  }
-
   void glActiveTexture( GLenum tex )
   {
     GLuint unit = tex - GL_TEXTURE0;
@@ -743,6 +760,90 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     {
       Warning( "Active texture out of range: ", Token::GLtextureToString(tex), " > ", Token::GLtextureToString(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_UNITS - 1));
       return;
+    }
+  }
+
+  void glAlphaFunc(GLenum func, GLclampf ref)
+  {
+    State::ColorBuffer::alphaTestFunc = func;
+    State::ColorBuffer::alphaTestRef = ref;
+  }
+
+  void glBlendFunc(GLenum src, GLenum dst)
+  {
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
+      glBlendFunci(buf, src, dst);
+  }
+
+  void glBlendFunci(GLuint buf, GLenum src, GLenum dst)
+  {
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
+    {
+      State::ColorBuffer::blendSrcRgb[buf] = State::ColorBuffer::blendSrcAlpha[buf] = src;
+      State::ColorBuffer::blendDstRgb[buf] = State::ColorBuffer::blendDstAlpha[buf] = dst;
+    }
+  }
+
+  void glBlendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
+  {
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
+      glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
+  }
+
+  void glBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
+  {
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
+    {
+      State::ColorBuffer::blendSrcRgb[buf]   = srcRGB;
+      State::ColorBuffer::blendDstRgb[buf]   = dstRGB;
+      State::ColorBuffer::blendSrcAlpha[buf] = srcAlpha;
+      State::ColorBuffer::blendDstAlpha[buf] = dstAlpha;
+    }
+  }
+
+  void glBlendEquation(GLenum mode)
+  {
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
+      glBlendEquationi(buf, mode);
+  }
+
+  void glBlendEquationi(GLuint buf, GLenum mode)
+  {
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
+      State::ColorBuffer::blendEquationRgb[buf] = State::ColorBuffer::blendEquationAlpha[buf] = mode;
+  }
+
+  void glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha)
+  {
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
+      glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
+  }
+
+  void glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
+  {
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
+    {
+      State::ColorBuffer::blendEquationRgb[buf]   = modeRGB;
+      State::ColorBuffer::blendEquationAlpha[buf] = modeAlpha;
+    }
+  }
+
+  void glBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+  {
+    State::ColorBuffer::blendColor[0] = red;
+    State::ColorBuffer::blendColor[1] = green;
+    State::ColorBuffer::blendColor[2] = blue;
+    State::ColorBuffer::blendColor[3] = alpha;
+  }
+
+  inline void glClampColor( GLenum target, GLenum clamp )
+  {
+    switch (target)
+    {
+      case GL_CLAMP_FRAGMENT_COLOR: State::Enable::clampFragmentColor = State::ColorBuffer::clampFragmentColor = clamp; break;
+      case GL_CLAMP_READ_COLOR:     State::Enable::clampReadColor     = State::ColorBuffer::clampReadColor = clamp; break;
+      case GL_CLAMP_VERTEX_COLOR:   State::Enable::clampVertexColor   = clamp; break;
+      default: break;
     }
   }
 
@@ -756,6 +857,62 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   {
     if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
       glMultiTexEnvv(static_cast<GLenum>(GL_TEXTURE0+activeTextureUnit),target,pname,params);
+  }
+
+  void glLogicOp(GLenum op)
+  {
+    State::ColorBuffer::logicOpMode = op;
+  }
+
+  void glIndexMask(GLuint mask)
+  {
+    State::ColorBuffer::indexWritemask = mask;
+  }
+
+  void glColorMask(GLboolean r, GLboolean g, GLboolean b, GLboolean a)
+  {
+    for (int index=0; index<REGAL_MAX_DRAW_BUFFERS; index++)
+      glColorMaski(index, r, g, b, a);
+  }
+
+  void glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
+  {
+    if (index < REGAL_MAX_DRAW_BUFFERS)
+    {
+      State::ColorBuffer::colorWritemask[index][0] = r;
+      State::ColorBuffer::colorWritemask[index][1] = g;
+      State::ColorBuffer::colorWritemask[index][2] = b;
+      State::ColorBuffer::colorWritemask[index][3] = a;
+    }
+  }
+
+  void glClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
+  {
+    State::ColorBuffer::colorClearValue[0] = red;
+    State::ColorBuffer::colorClearValue[1] = green;
+    State::ColorBuffer::colorClearValue[2] = blue;
+    State::ColorBuffer::colorClearValue[3] = alpha;
+  }
+
+  void glClearIndex(GLfloat c)
+  {
+    State::ColorBuffer::indexClearValue = c;
+  }
+
+  void glDrawBuffer(GLenum buf)
+  {
+    std::memset(State::ColorBuffer::drawBuffers,GL_NONE,sizeof(State::ColorBuffer::drawBuffers));
+    State::ColorBuffer::drawBuffers[0] = buf;
+  }
+
+  void glDrawBuffers(GLsizei n, const GLenum *bufs)
+  {
+    if (n < REGAL_MAX_DRAW_BUFFERS)
+    {
+      std::memset(State::ColorBuffer::drawBuffers,GL_NONE,sizeof(State::ColorBuffer::drawBuffers));
+      for (int ii=0; ii<n; ii++)
+        State::ColorBuffer::drawBuffers[ii] = bufs[ii];
+    }
   }
 
   std::vector<GLbitfield>            maskStack;
@@ -775,6 +932,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   std::vector<State::Fog>            fogStack;
   std::vector<State::Point>          pointStack;
   std::vector<State::PolygonStipple> polygonStippleStack;
+  std::vector<State::ColorBuffer>    colorBufferStack;
 
   GLuint activeTextureUnit;
 };

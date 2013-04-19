@@ -350,6 +350,36 @@ formulae = {
      ]
   },
 
+  # Remap glBlendEquationEXT for ES 2.0
+
+  'glBlendEquationEXT' : {
+    'entries' : [ 'glBlendEquationEXT' ],
+    'impl' : [
+       'if (_context->isES2())',
+       '{',
+       '  DispatchTable *_next = _context->dispatcher.emulation._next;',
+       '  RegalAssert(_next);',
+       '  _next->call(&_next->glBlendEquation)(${arg0plus});',
+       '  return;',
+       '}'
+     ]
+  },
+
+  # Remap glBlendColorEXT for ES 2.0
+
+  'glBlendColorEXT' : {
+    'entries' : [ 'glBlendColorEXT' ],
+    'impl' : [
+       'if (_context->isES2())',
+       '{',
+       '  DispatchTable *_next = _context->dispatcher.emulation._next;',
+       '  RegalAssert(_next);',
+       '  _next->call(&_next->glBlendColor)(${arg0plus});',
+       '  return;',
+       '}'
+     ]
+  },
+
 # http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt
 # Map to GL_OES_mapbuffer for ES 2.0
 

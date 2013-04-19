@@ -10610,6 +10610,16 @@ static void REGAL_CALL log_glGetProgramStageiv(GLuint program, GLenum shaderType
     Driver("glGetProgramStageiv","(", program, ", ", toString(shaderType), ", ", toString(pname), ", ", boost::print::array(values,1), ")");
 }
 
+static void REGAL_CALL log_glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetProgramSubroutineParameteruivNV)(target, index, params);
+    Driver("glGetProgramSubroutineParameteruivNV","(", toString(target), ", ", index, ", ", boost::print::array(params,1), ")");
+}
+
 static GLuint REGAL_CALL log_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -10640,6 +10650,16 @@ static void REGAL_CALL log_glGetUniformSubroutineuiv(GLenum shaderType, GLint lo
     RegalAssert(_next);
     _next->call(&_next->glGetUniformSubroutineuiv)(shaderType, location, params);
     Driver("glGetUniformSubroutineuiv","(", toString(shaderType), ", ", location, ", ", boost::print::array(params,1), ")");
+}
+
+static void REGAL_CALL log_glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glProgramSubroutineParametersuivNV)(target, count, params);
+    Driver("glProgramSubroutineParametersuivNV","(", toString(target), ", ", count, ", ", boost::print::array(params,count), ")");
 }
 
 static void REGAL_CALL log_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
@@ -28342,9 +28362,11 @@ void InitDispatchTableLog(DispatchTable &tbl)
   tbl.glGetActiveSubroutineUniformName = log_glGetActiveSubroutineUniformName;
   tbl.glGetActiveSubroutineUniformiv = log_glGetActiveSubroutineUniformiv;
   tbl.glGetProgramStageiv = log_glGetProgramStageiv;
+  tbl.glGetProgramSubroutineParameteruivNV = log_glGetProgramSubroutineParameteruivNV;
   tbl.glGetSubroutineIndex = log_glGetSubroutineIndex;
   tbl.glGetSubroutineUniformLocation = log_glGetSubroutineUniformLocation;
   tbl.glGetUniformSubroutineuiv = log_glGetUniformSubroutineuiv;
+  tbl.glProgramSubroutineParametersuivNV = log_glProgramSubroutineParametersuivNV;
   tbl.glUniformSubroutinesuiv = log_glUniformSubroutinesuiv;
 
   // GL_ARB_shading_language_include

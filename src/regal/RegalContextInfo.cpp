@@ -68,6 +68,9 @@ using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 ContextInfo::ContextInfo()
 : regal_ext_direct_state_access(false),
   regal_arb_texture_storage(false),
+  regal_ext_blend_color(false),
+  regal_ext_blend_subtract(false),
+  regal_nv_blend_square(false),
   compat(false),
   core(false),
   es1(false),
@@ -417,6 +420,7 @@ ContextInfo::ContextInfo()
   gl_nvx_conditional_render(false),
   gl_nvx_gpu_memory_info(false),
   gl_nv_bindless_texture(false),
+  gl_nv_blend_square(false),
   gl_nv_compute_program5(false),
   gl_nv_conditional_render(false),
   gl_nv_copy_depth_to_color(false),
@@ -1294,6 +1298,7 @@ ContextInfo::init(const RegalContext &context)
   gl_nvx_conditional_render = e.find("GL_NVX_conditional_render")!=e.end();
   gl_nvx_gpu_memory_info = e.find("GL_NVX_gpu_memory_info")!=e.end();
   gl_nv_bindless_texture = e.find("GL_NV_bindless_texture")!=e.end();
+  gl_nv_blend_square = e.find("GL_NV_blend_square")!=e.end();
   gl_nv_compute_program5 = e.find("GL_NV_compute_program5")!=e.end();
   gl_nv_conditional_render = e.find("GL_NV_conditional_render")!=e.end();
   gl_nv_copy_depth_to_color = e.find("GL_NV_copy_depth_to_color")!=e.end();
@@ -1815,11 +1820,11 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_abgr")) return gl_ext_abgr;
   if (!strcmp(ext,"GL_EXT_bgra")) return gl_ext_bgra;
   if (!strcmp(ext,"GL_EXT_bindable_uniform")) return gl_ext_bindable_uniform;
-  if (!strcmp(ext,"GL_EXT_blend_color")) return gl_ext_blend_color;
+  if (!strcmp(ext,"GL_EXT_blend_color")) return regal_ext_blend_color || gl_ext_blend_color;
   if (!strcmp(ext,"GL_EXT_blend_equation_separate")) return gl_ext_blend_equation_separate;
   if (!strcmp(ext,"GL_EXT_blend_func_separate")) return gl_ext_blend_func_separate;
   if (!strcmp(ext,"GL_EXT_blend_minmax")) return gl_ext_blend_minmax;
-  if (!strcmp(ext,"GL_EXT_blend_subtract")) return gl_ext_blend_subtract;
+  if (!strcmp(ext,"GL_EXT_blend_subtract")) return regal_ext_blend_subtract || gl_ext_blend_subtract;
   if (!strcmp(ext,"GL_EXT_clip_volume_hint")) return gl_ext_clip_volume_hint;
   if (!strcmp(ext,"GL_EXT_cmyka")) return gl_ext_cmyka;
   if (!strcmp(ext,"GL_EXT_color_buffer_half_float")) return gl_ext_color_buffer_half_float;
@@ -1951,6 +1956,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NVX_conditional_render")) return gl_nvx_conditional_render;
   if (!strcmp(ext,"GL_NVX_gpu_memory_info")) return gl_nvx_gpu_memory_info;
   if (!strcmp(ext,"GL_NV_bindless_texture")) return gl_nv_bindless_texture;
+  if (!strcmp(ext,"GL_NV_blend_square")) return regal_nv_blend_square || gl_nv_blend_square;
   if (!strcmp(ext,"GL_NV_compute_program5")) return gl_nv_compute_program5;
   if (!strcmp(ext,"GL_NV_conditional_render")) return gl_nv_conditional_render;
   if (!strcmp(ext,"GL_NV_copy_depth_to_color")) return gl_nv_copy_depth_to_color;

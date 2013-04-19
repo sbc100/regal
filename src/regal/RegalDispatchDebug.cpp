@@ -9571,6 +9571,15 @@ static void REGAL_CALL debug_glGetProgramStageiv(GLuint program, GLenum shaderTy
   _next->call(&_next->glGetProgramStageiv)(program, shaderType, pname, values);
 }
 
+static void REGAL_CALL debug_glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.debug._next;
+  RegalAssert(_next);
+  _next->call(&_next->glGetProgramSubroutineParameteruivNV)(target, index, params);
+}
+
 static GLuint REGAL_CALL debug_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -9598,6 +9607,15 @@ static void REGAL_CALL debug_glGetUniformSubroutineuiv(GLenum shaderType, GLint 
   DispatchTable *_next = _context->dispatcher.debug._next;
   RegalAssert(_next);
   _next->call(&_next->glGetUniformSubroutineuiv)(shaderType, location, params);
+}
+
+static void REGAL_CALL debug_glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.debug._next;
+  RegalAssert(_next);
+  _next->call(&_next->glProgramSubroutineParametersuivNV)(target, count, params);
 }
 
 static void REGAL_CALL debug_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
@@ -25706,9 +25724,11 @@ void InitDispatchTableDebug(DispatchTable &tbl)
   tbl.glGetActiveSubroutineUniformName = debug_glGetActiveSubroutineUniformName;
   tbl.glGetActiveSubroutineUniformiv = debug_glGetActiveSubroutineUniformiv;
   tbl.glGetProgramStageiv = debug_glGetProgramStageiv;
+  tbl.glGetProgramSubroutineParameteruivNV = debug_glGetProgramSubroutineParameteruivNV;
   tbl.glGetSubroutineIndex = debug_glGetSubroutineIndex;
   tbl.glGetSubroutineUniformLocation = debug_glGetSubroutineUniformLocation;
   tbl.glGetUniformSubroutineuiv = debug_glGetUniformSubroutineuiv;
+  tbl.glProgramSubroutineParametersuivNV = debug_glProgramSubroutineParametersuivNV;
   tbl.glUniformSubroutinesuiv = debug_glUniformSubroutinesuiv;
 
   // GL_ARB_shading_language_include

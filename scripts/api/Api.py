@@ -38,6 +38,7 @@ class Extension:
 
     self.name       = name
     self.url        = url
+    self.category   = ''
     self.functions  = []        # function names
     self.enumerants = []        # enumerant names
 

@@ -967,6 +967,7 @@ _glGetProgramResourceiv
 _glGetProgramStageiv
 _glGetProgramStringARB
 _glGetProgramStringNV
+_glGetProgramSubroutineParameteruivNV
 _glGetProgramiv
 _glGetProgramivARB
 _glGetProgramivNV
@@ -1638,6 +1639,7 @@ _glProgramParameteriEXT
 _glProgramParameters4dvNV
 _glProgramParameters4fvNV
 _glProgramStringARB
+_glProgramSubroutineParametersuivNV
 _glProgramUniform1d
 _glProgramUniform1dEXT
 _glProgramUniform1dv

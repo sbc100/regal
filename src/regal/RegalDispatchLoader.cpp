@@ -15654,6 +15654,21 @@ static void REGAL_CALL loader_glGetProgramStageiv(GLuint program, GLenum shaderT
   _next->call(&_next->glGetProgramStageiv)(program, shaderType, pname, values);
 }
 
+static void REGAL_CALL loader_glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glGetProgramSubroutineParameteruivNV, "glGetProgramSubroutineParameteruivNV");
+  if (_driver.glGetProgramSubroutineParameteruivNV) {
+    _driver.glGetProgramSubroutineParameteruivNV(target, index, params);
+    return;
+  }
+  DispatchTable *_next = _driver._next;
+  RegalAssert(_next);
+  _next->call(&_next->glGetProgramSubroutineParameteruivNV)(target, index, params);
+}
+
 static GLuint REGAL_CALL loader_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
   RegalContext * _context = REGAL_GET_CONTEXT();
@@ -15695,6 +15710,21 @@ static void REGAL_CALL loader_glGetUniformSubroutineuiv(GLenum shaderType, GLint
   DispatchTable *_next = _driver._next;
   RegalAssert(_next);
   _next->call(&_next->glGetUniformSubroutineuiv)(shaderType, location, params);
+}
+
+static void REGAL_CALL loader_glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glProgramSubroutineParametersuivNV, "glProgramSubroutineParametersuivNV");
+  if (_driver.glProgramSubroutineParametersuivNV) {
+    _driver.glProgramSubroutineParametersuivNV(target, count, params);
+    return;
+  }
+  DispatchTable *_next = _driver._next;
+  RegalAssert(_next);
+  _next->call(&_next->glProgramSubroutineParametersuivNV)(target, count, params);
 }
 
 static void REGAL_CALL loader_glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
@@ -41205,9 +41235,11 @@ void InitDispatchTableLoader(DispatchTable &tbl)
   tbl.glGetActiveSubroutineUniformName = loader_glGetActiveSubroutineUniformName;
   tbl.glGetActiveSubroutineUniformiv = loader_glGetActiveSubroutineUniformiv;
   tbl.glGetProgramStageiv = loader_glGetProgramStageiv;
+  tbl.glGetProgramSubroutineParameteruivNV = loader_glGetProgramSubroutineParameteruivNV;
   tbl.glGetSubroutineIndex = loader_glGetSubroutineIndex;
   tbl.glGetSubroutineUniformLocation = loader_glGetSubroutineUniformLocation;
   tbl.glGetUniformSubroutineuiv = loader_glGetUniformSubroutineuiv;
+  tbl.glProgramSubroutineParametersuivNV = loader_glProgramSubroutineParametersuivNV;
   tbl.glUniformSubroutinesuiv = loader_glUniformSubroutinesuiv;
 
   // GL_ARB_shading_language_include

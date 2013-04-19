@@ -769,10 +769,10 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glEnd(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context)
+      _context->depthBeginEnd--;
     App("glEnd","()");
     if (!_context) return;
-    RegalAssert(_context);
-    _context->depthBeginEnd--;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glEnd)();
@@ -781,10 +781,10 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glEndList(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context)
+      _context->depthNewList--;
     App("glEndList","()");
     if (!_context) return;
-    RegalAssert(_context);
-    _context->depthNewList--;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glEndList)();
@@ -1004,7 +1004,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenLists","(", range, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGenLists)(range);
@@ -1044,7 +1044,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetError","()");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetError)();
@@ -1415,7 +1415,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsEnabled","(", toString(cap), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     switch(cap)
     {
       case GL_LOG_ERROR_REGAL:    return Logging::enableError    ? GL_TRUE : GL_FALSE;
@@ -1475,7 +1475,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsList","(", list, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsList)(list);
@@ -2036,10 +2036,10 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPopAttrib(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context)
+      _context->depthPushAttrib--;
     App("glPopAttrib","()");
     if (!_context) return;
-    RegalAssert(_context);
-    _context->depthPushAttrib--;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glPopAttrib)();
@@ -2048,10 +2048,10 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPopMatrix(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context)
+      _context->depthPushMatrix--;
     App("glPopMatrix","()");
     if (!_context) return;
-    RegalAssert(_context);
-    _context->depthPushMatrix--;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glPopMatrix)();
@@ -2445,7 +2445,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glRenderMode","(", toString(mode), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glRenderMode)(mode);
@@ -3307,7 +3307,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glAreTexturesResident","(", n, ", ", boost::print::array(textures,n), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glAreTexturesResident)(n, textures, residences);
@@ -3512,7 +3512,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsTexture","(", texture, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsTexture)(texture);
@@ -4740,7 +4740,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsBuffer","(", buffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsBuffer)(buffer);
@@ -4750,7 +4750,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsQuery","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsQuery)(id);
@@ -4770,7 +4770,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glUnmapBuffer","(", toString(target), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glUnmapBuffer)(target);
@@ -4822,7 +4822,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateProgram","()");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateProgram)();
@@ -4832,7 +4832,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateShader","(", toString(type), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateShader)(type);
@@ -4932,7 +4932,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetAttribLocation","(", program, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetAttribLocation)(program, name);
@@ -4992,7 +4992,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetUniformLocation","(", program, ", ", boost::print::quote(reinterpret_cast<const char *>(name),'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetUniformLocation)(program, name);
@@ -5062,7 +5062,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsProgram","(", program, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsProgram)(program);
@@ -5072,7 +5072,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsShader","(", shader, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsShader)(shader);
@@ -5921,7 +5921,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetFragDataLocation","(", program, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetFragDataLocation)(program, name);
@@ -6001,7 +6001,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsEnabledi","(", toString(target), ", ", index, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsEnabledi)(target, index);
@@ -6502,22 +6502,25 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringEXT(length, buf);
     App("glDebugMessageInsertAMD","(", toString(category), ", ", toString(severity), ", ", id, ", ", length, ", ", boost::print::quote(buf,'"'), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->InsertEventMarker( *_context,length,buf );
+    if (_context->marker)
+      _context->marker->InsertEventMarker(*_context, _message);
     RegalAssert(_context->info);
-    if (!_context->info->gl_amd_debug_output) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glDebugMessageInsertAMD)(category, severity, id, length, buf);
+    if (_context->info->gl_amd_debug_output)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glDebugMessageInsertAMD)(category, severity, id, length, buf);
+    }
   }
 
   REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetDebugMessageLogAMD","(", count, ", ", bufsize, ", ", categories, ", ", severities, ", ", ids, ", ", lengths, ", ", boost::print::quote(message,'"'), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetDebugMessageLogAMD)(count, bufsize, categories, severities, ids, lengths, message);
@@ -6613,7 +6616,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsNameAMD","(", toString(identifier), ", ", name, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsNameAMD)(identifier, name);
@@ -6955,7 +6958,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsFenceAPPLE","(", fence, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsFenceAPPLE)(fence);
@@ -6975,7 +6978,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTestFenceAPPLE","(", fence, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glTestFenceAPPLE)(fence);
@@ -6985,7 +6988,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTestObjectAPPLE","(", toString(object), ", ", name, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glTestObjectAPPLE)(object, name);
@@ -7083,7 +7086,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glObjectPurgeableAPPLE","(", toString(objectType), ", ", name, ", ", toString(option), ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glObjectPurgeableAPPLE)(objectType, name, option);
@@ -7093,7 +7096,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glObjectUnpurgeableAPPLE","(", toString(objectType), ", ", name, ", ", toString(option), ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glObjectUnpurgeableAPPLE)(objectType, name, option);
@@ -7105,7 +7108,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glClientWaitSyncAPPLE","(", sync, ", ", flags, ", ", timeout, ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glClientWaitSyncAPPLE)(sync, flags, timeout);
@@ -7125,7 +7128,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glFenceSyncAPPLE","(", toString(condition), ", ", flags, ")");
-    if (!_context) return (GLsync )0;
+    if (!_context) return NULL;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glFenceSyncAPPLE)(condition, flags);
@@ -7155,7 +7158,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsSyncAPPLE","(", sync, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsSyncAPPLE)(sync);
@@ -7229,7 +7232,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsVertexArrayAPPLE","(", array, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsVertexArrayAPPLE)(array);
@@ -7293,7 +7296,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsVertexAttribEnabledAPPLE","(", index, ", ", toString(pname), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsVertexAttribEnabledAPPLE)(index, pname);
@@ -7439,7 +7442,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetFragDataIndex","(", program, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetFragDataIndex)(program, name);
@@ -7451,7 +7454,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateSyncFromCLeventARB","(", context, ", ", event, ", ", flags, ")");
-    if (!_context) return (GLsync )0;
+    if (!_context) return NULL;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateSyncFromCLeventARB)(context, event, flags);
@@ -7582,22 +7585,25 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringEXT(length, buf);
     App("glDebugMessageInsertARB","(", toString(source), ", ", toString(type), ", ", id, ", ", toString(severity), ", ", length, ", ", boost::print::quote(buf,'"'), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->InsertEventMarker( *_context,length,buf );
+    if (_context->marker)
+      _context->marker->InsertEventMarker(*_context, _message);
     RegalAssert(_context->info);
-    if (!_context->info->gl_arb_debug_output) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glDebugMessageInsertARB)(source, type, id, severity, length, buf);
+    if (_context->info->gl_arb_debug_output)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glDebugMessageInsertARB)(source, type, id, severity, length, buf);
+    }
   }
 
   REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetDebugMessageLogARB","(", count, ", ", bufsize, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetDebugMessageLogARB)(count, bufsize, sources, types, ids, severities, lengths, messageLog);
@@ -7821,7 +7827,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCheckFramebufferStatus","(", toString(target), ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCheckFramebufferStatus)(target);
@@ -7951,7 +7957,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsFramebuffer","(", framebuffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsFramebuffer)(framebuffer);
@@ -7961,7 +7967,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsRenderbuffer","(", renderbuffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsRenderbuffer)(renderbuffer);
@@ -9189,7 +9195,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsQueryARB","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsQueryARB)(id);
@@ -9233,7 +9239,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetProgramResourceIndex","(", program, ", ", toString(programInterface), ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetProgramResourceIndex)(program, programInterface, name);
@@ -9243,7 +9249,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetProgramResourceLocation","(", program, ", ", toString(programInterface), ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetProgramResourceLocation)(program, programInterface, name);
@@ -9253,7 +9259,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetProgramResourceLocationIndex","(", program, ", ", toString(programInterface), ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetProgramResourceLocationIndex)(program, programInterface, name);
@@ -9297,7 +9303,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetGraphicsResetStatusARB","()");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetGraphicsResetStatusARB)();
@@ -9591,7 +9597,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsSampler","(", sampler, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsSampler)(sampler);
@@ -9683,7 +9689,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateShaderProgramv","(", toString(type), ", ", count, ", ", boost::print::array(strings,count,"\""), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateShaderProgramv)(type, count, strings);
@@ -9733,7 +9739,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsProgramPipeline","(", pipeline, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsProgramPipeline)(pipeline);
@@ -10319,7 +10325,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateProgramObjectARB","()");
-    if (!_context) return (GLhandleARB )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateProgramObjectARB)();
@@ -10329,7 +10335,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateShaderObjectARB","(", toString(shaderType), ")");
-    if (!_context) return (GLhandleARB )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateShaderObjectARB)(shaderType);
@@ -10379,7 +10385,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetHandleARB","(", toString(pname), ")");
-    if (!_context) return (GLhandleARB )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetHandleARB)(pname);
@@ -10429,7 +10435,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetUniformLocationARB","(", programObj, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetUniformLocationARB)(programObj, name);
@@ -10739,11 +10745,21 @@ extern "C" {
     _next->call(&_next->glGetProgramStageiv)(program, shaderType, pname, values);
   }
 
+  REGAL_DECL void REGAL_CALL glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glGetProgramSubroutineParameteruivNV","(", toString(target), ", ", index, ")");
+    if (!_context) return;
+    DispatchTable *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glGetProgramSubroutineParameteruivNV)(target, index, params);
+  }
+
   REGAL_DECL GLuint REGAL_CALL glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetSubroutineIndex","(", program, ", ", toString(shaderType), ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetSubroutineIndex)(program, shaderType, name);
@@ -10753,7 +10769,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetSubroutineUniformLocation","(", program, ", ", toString(shaderType), ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetSubroutineUniformLocation)(program, shaderType, name);
@@ -10767,6 +10783,16 @@ extern "C" {
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetUniformSubroutineuiv)(shaderType, location, params);
+  }
+
+  REGAL_DECL void REGAL_CALL glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glProgramSubroutineParametersuivNV","(", toString(target), ", ", count, ", ", boost::print::array(params,count), ")");
+    if (!_context) return;
+    DispatchTable *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glProgramSubroutineParametersuivNV)(target, count, params);
   }
 
   REGAL_DECL void REGAL_CALL glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices)
@@ -10825,7 +10851,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsNamedStringARB","(", namelen, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsNamedStringARB)(namelen, name);
@@ -10847,7 +10873,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glClientWaitSync","(", boost::print::optional(reinterpret_cast<void *>(sync),Logging::pointers), ", ", flags, ", ", timeout, ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glClientWaitSync)(sync, flags, timeout);
@@ -10867,7 +10893,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glFenceSync","(", toString(condition), ", ", flags, ")");
-    if (!_context) return (GLsync )0;
+    if (!_context) return NULL;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glFenceSync)(condition, flags);
@@ -10897,7 +10923,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsSync","(", boost::print::optional(reinterpret_cast<void *>(sync),Logging::pointers), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsSync)(sync);
@@ -11277,7 +11303,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsTransformFeedback","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsTransformFeedback)(id);
@@ -11485,7 +11511,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetUniformBlockIndex","(", program, ", ", boost::print::quote(uniformBlockName,'"'), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetUniformBlockIndex)(program, uniformBlockName);
@@ -11547,7 +11573,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsVertexArray","(", array, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsVertexArray)(array);
@@ -11905,7 +11931,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsBufferARB","(", buffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsBufferARB)(buffer);
@@ -11925,7 +11951,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glUnmapBufferARB","(", toString(target), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glUnmapBufferARB)(target);
@@ -12087,7 +12113,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsProgramARB","(", program, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsProgramARB)(program);
@@ -12579,7 +12605,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetAttribLocationARB","(", programObj, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetAttribLocationARB)(programObj, name);
@@ -13423,7 +13449,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenFragmentShadersATI","(", range, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGenFragmentShadersATI)(range);
@@ -13611,7 +13637,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsObjectBufferATI","(", buffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsObjectBufferATI)(buffer);
@@ -13621,7 +13647,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glNewObjectBufferATI","(", size, ", ", boost::print::optional(pointer,Logging::pointers), ", ", toString(usage), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glNewObjectBufferATI)(size, pointer, usage);
@@ -14137,7 +14163,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetUniformBufferSizeEXT","(", program, ", ", location, ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetUniformBufferSizeEXT)(program, location);
@@ -14147,7 +14173,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetUniformOffsetEXT","(", program, ", ", location, ")");
-    if (!_context) return (GLintptr )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetUniformOffsetEXT)(program, location);
@@ -14710,43 +14736,51 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glInsertEventMarkerEXT(GLsizei length, const GLchar *marker)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringEXT(length, marker);
     App("glInsertEventMarkerEXT","(", length, ", ", boost::print::quote(marker,'"'), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->InsertEventMarker( *_context, length, marker );
+    if (_context->marker)
+      _context->marker->InsertEventMarker(*_context, _message);
     RegalAssert(_context->info);
-    if (!_context->info->gl_ext_debug_marker) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glInsertEventMarkerEXT)(length, marker);
+    if (_context->info->gl_ext_debug_marker)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glInsertEventMarkerEXT)(length, marker);
+    }
   }
 
   REGAL_DECL void REGAL_CALL glPopGroupMarkerEXT(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context->marker)
+      _context->marker->PopGroupMarker(*_context);
     App("glPopGroupMarkerEXT","()");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->PopGroupMarker( *_context );
     RegalAssert(_context->info);
-    if (!_context->info->gl_ext_debug_marker) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glPopGroupMarkerEXT)();
+    if (_context->info->gl_ext_debug_marker)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glPopGroupMarkerEXT)();
+    }
   }
 
   REGAL_DECL void REGAL_CALL glPushGroupMarkerEXT(GLsizei length, const GLchar *marker)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringEXT(length, marker);
     App("glPushGroupMarkerEXT","(", length, ", ", boost::print::quote(marker,'"'), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->PushGroupMarker( *_context, length, marker );
     RegalAssert(_context->info);
-    if (!_context->info->gl_ext_debug_marker) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glPushGroupMarkerEXT)(length, marker);
+    if (_context->info->gl_ext_debug_marker)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glPushGroupMarkerEXT)(length, marker);
+    }
+    if (_context->marker)
+      _context->marker->PushGroupMarker(*_context, _message);
   }
 
   /* GL_EXT_depth_bounds_test */
@@ -14777,7 +14811,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCheckNamedFramebufferStatusEXT","(", framebuffer, ", ", toString(target), ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCheckNamedFramebufferStatusEXT)(framebuffer, target);
@@ -15716,6 +15750,8 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMatrixPopEXT(GLenum mode)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context)
+      _context->depthPushMatrix--;
     App("glMatrixPopEXT","(", toString(mode), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
@@ -15728,6 +15764,8 @@ extern "C" {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glMatrixPushEXT","(", toString(mode), ")");
     if (!_context) return;
+    RegalAssert(_context);
+    _context->depthPushMatrix++;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glMatrixPushEXT)(mode);
@@ -16947,7 +16985,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glUnmapNamedBufferEXT","(", buffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glUnmapNamedBufferEXT)(buffer);
@@ -17131,7 +17169,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsEnabledIndexedEXT","(", toString(target), ", ", index, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsEnabledIndexedEXT)(target, index);
@@ -17455,7 +17493,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCheckFramebufferStatusEXT","(", toString(target), ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCheckFramebufferStatusEXT)(target);
@@ -17575,7 +17613,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsFramebufferEXT","(", framebuffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsFramebufferEXT)(framebuffer);
@@ -17585,7 +17623,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsRenderbufferEXT","(", renderbuffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsRenderbufferEXT)(renderbuffer);
@@ -17671,7 +17709,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetFragDataLocationEXT","(", program, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetFragDataLocationEXT)(program, name);
@@ -18331,7 +18369,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsQueryEXT","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsQueryEXT)(id);
@@ -18729,7 +18767,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCreateShaderProgramEXT","(", toString(type), ", ", boost::print::quote(string,'"'), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCreateShaderProgramEXT)(type, string);
@@ -18927,7 +18965,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glAreTexturesResidentEXT","(", n, ", ", boost::print::array(textures,n), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glAreTexturesResidentEXT)(n, textures, residences);
@@ -18967,7 +19005,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsTextureEXT","(", texture, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsTextureEXT)(texture);
@@ -19341,7 +19379,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glBindLightParameterEXT","(", toString(light), ", ", toString(value), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glBindLightParameterEXT)(light, value);
@@ -19351,7 +19389,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glBindMaterialParameterEXT","(", toString(face), ", ", toString(value), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glBindMaterialParameterEXT)(face, value);
@@ -19361,7 +19399,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glBindParameterEXT","(", toString(value), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glBindParameterEXT)(value);
@@ -19371,7 +19409,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glBindTexGenParameterEXT","(", toString(unit), ", ", toString(coord), ", ", toString(value), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glBindTexGenParameterEXT)(unit, coord, value);
@@ -19381,7 +19419,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glBindTextureUnitParameterEXT","(", toString(unit), ", ", toString(value), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glBindTextureUnitParameterEXT)(unit, value);
@@ -19451,7 +19489,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenSymbolsEXT","(", toString(datatype), ", ", toString(storagetype), ", ", toString(range), ", ", components, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGenSymbolsEXT)(datatype, storagetype, range, components);
@@ -19461,7 +19499,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenVertexShadersEXT","(", range, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGenVertexShadersEXT)(range);
@@ -19581,7 +19619,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsVariantEnabledEXT","(", id, ", ", toString(cap), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsVariantEnabledEXT)(id, cap);
@@ -19785,7 +19823,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glImportSyncEXT","(", toString(external_sync_type), ", ", external_sync, ", ", flags, ")");
-    if (!_context) return (GLsync )0;
+    if (!_context) return NULL;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glImportSyncEXT)(external_sync_type, external_sync, flags);
@@ -19814,15 +19852,18 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStringMarkerGREMEDY(GLsizei len, const GLvoid *string)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringEXT(len, static_cast<const char *>(string));
     App("glStringMarkerGREMEDY","(", len, ", ", boost::print::optional(string,Logging::pointers), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->InsertEventMarker( *_context, len, string );
+    if (_context->marker)
+      _context->marker->InsertEventMarker(*_context, _message);
     RegalAssert(_context->info);
-    if (!_context->info->gl_gremedy_string_marker) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glStringMarkerGREMEDY)(len, string);
+    if (_context->info->gl_gremedy_string_marker)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glStringMarkerGREMEDY)(len, string);
+    }
   }
 
   /* GL_HP_image_transform */
@@ -20114,22 +20155,25 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringKHR(length, buf);
     App("glDebugMessageInsert","(", toString(source), ", ", toString(type), ", ", id, ", ", toString(severity), ", ", length, ", ", boost::print::quote(buf,'"'), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->InsertEventMarker( *_context,length,buf );
+    if (_context->marker)
+      _context->marker->InsertEventMarker(*_context, _message);
     RegalAssert(_context->info);
-    if (!_context->info->gl_khr_debug) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glDebugMessageInsert)(source, type, id, severity, length, buf);
+    if (_context->info->gl_khr_debug)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glDebugMessageInsert)(source, type, id, severity, length, buf);
+    }
   }
 
   REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetDebugMessageLog","(", count, ", ", bufsize, ", ", sources, ", ", types, ", ", ids, ", ", severities, ", ", lengths, ", ", boost::print::quote(messageLog,'"'), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetDebugMessageLog)(count, bufsize, sources, types, ids, severities, lengths, messageLog);
@@ -20178,29 +20222,34 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPopDebugGroup(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    if (_context->marker)
+      _context->marker->PopGroupMarker(*_context);
     App("glPopDebugGroup","()");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->PopGroupMarker( *_context );
     RegalAssert(_context->info);
-    if (!_context->info->gl_khr_debug) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glPopDebugGroup)();
+    if (_context->info->gl_khr_debug)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glPopDebugGroup)();
+    }
   }
 
   REGAL_DECL void REGAL_CALL glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar *message)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
+    std::string _message = Marker::toStringKHR(length, message);
     App("glPushDebugGroup","(", toString(source), ", ", id, ", ", length, ", ", boost::print::quote(message,'"'), ")");
     if (!_context) return;
-    if (_context && _context->marker)
-      _context->marker->PushGroupMarker( *_context, length, message );
     RegalAssert(_context->info);
-    if (!_context->info->gl_khr_debug) return;
-    DispatchTable *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glPushDebugGroup)(source, id, length, message);
+    if (_context->info->gl_khr_debug)
+    {
+        DispatchTable *_next = &_context->dispatcher.front();
+        RegalAssert(_next);
+        _next->call(&_next->glPushDebugGroup)(source, id, length, message);
+    }
+    if (_context->marker)
+      _context->marker->PushGroupMarker(*_context, _message);
   }
 
   /* GL_KTX_buffer_region */
@@ -20209,7 +20258,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glBufferRegionEnabled","()");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glBufferRegionEnabled)();
@@ -20239,7 +20288,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glNewBufferRegion","(", toString(region), ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glNewBufferRegion)(region);
@@ -20537,7 +20586,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetImageHandleNV","(", texture, ", ", level, ", ", toString(layered), ", ", layer, ", ", toString(format), ")");
-    if (!_context) return (GLuint64 )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetImageHandleNV)(texture, level, layered, layer, format);
@@ -20547,7 +20596,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetTextureHandleNV","(", texture, ")");
-    if (!_context) return (GLuint64 )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetTextureHandleNV)(texture);
@@ -20557,7 +20606,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetTextureSamplerHandleNV","(", texture, ", ", sampler, ")");
-    if (!_context) return (GLuint64 )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetTextureSamplerHandleNV)(texture, sampler);
@@ -20567,7 +20616,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsImageHandleResidentNV","(", handle, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsImageHandleResidentNV)(handle);
@@ -20577,7 +20626,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsTextureHandleResidentNV","(", handle, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsTextureHandleResidentNV)(handle);
@@ -20933,7 +20982,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsFenceNV","(", fence, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsFenceNV)(fence);
@@ -20953,7 +21002,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glTestFenceNV","(", fence, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glTestFenceNV)(fence);
@@ -22079,7 +22128,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsOcclusionQueryNV","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsOcclusionQueryNV)(id);
@@ -22183,7 +22232,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenPathsNV","(", range, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGenPathsNV)(range);
@@ -22243,7 +22292,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetPathLengthNV","(", path, ", ", startSegment, ", ", numSegments, ")");
-    if (!_context) return (GLfloat )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetPathLengthNV)(path, startSegment, numSegments);
@@ -22333,7 +22382,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsPathNV","(", path, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsPathNV)(path);
@@ -22343,7 +22392,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsPointInFillPathNV","(", path, ", ", mask, ", ", x, ", ", y, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsPointInFillPathNV)(path, mask, x, y);
@@ -22353,7 +22402,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsPointInStrokePathNV","(", path, ", ", x, ", ", y, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsPointInStrokePathNV)(path, x, y);
@@ -22543,7 +22592,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glPointAlongPathNV","(", path, ", ", startSegment, ", ", numSegments, ", ", distance, ", ", x, ", ", y, ", ", tangentX, ", ", tangentY, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glPointAlongPathNV)(path, startSegment, numSegments, distance, x, y, tangentX, tangentY);
@@ -22949,7 +22998,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsBufferResidentNV","(", toString(target), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsBufferResidentNV)(target);
@@ -22959,7 +23008,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsNamedBufferResidentNV","(", buffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsNamedBufferResidentNV)(buffer);
@@ -23205,7 +23254,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetVaryingLocationNV","(", program, ", ", boost::print::quote(name,'"'), ")");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetVaryingLocationNV)(program, name);
@@ -23277,7 +23326,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsTransformFeedbackNV","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsTransformFeedbackNV)(id);
@@ -23339,7 +23388,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glVDPAUIsSurfaceNV","(", surface, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glVDPAUIsSurfaceNV)(surface);
@@ -23359,7 +23408,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glVDPAURegisterOutputSurfaceNV","(", boost::print::optional(vdpSurface,Logging::pointers), ", ", toString(target), ", ", numTextureNames, ", ", boost::print::array(textureNames,numTextureNames), ")");
-    if (!_context) return (GLvdpauSurfaceNV )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glVDPAURegisterOutputSurfaceNV)(vdpSurface, target, numTextureNames, textureNames);
@@ -23369,7 +23418,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glVDPAURegisterVideoSurfaceNV","(", boost::print::optional(vdpSurface,Logging::pointers), ", ", toString(target), ", ", numTextureNames, ", ", boost::print::array(textureNames,numTextureNames), ")");
-    if (!_context) return (GLvdpauSurfaceNV )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glVDPAURegisterVideoSurfaceNV)(vdpSurface, target, numTextureNames, textureNames);
@@ -23747,7 +23796,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glAreProgramsResidentNV","(", n, ", ", boost::print::array(programs,n), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glAreProgramsResidentNV)(n, programs, residences);
@@ -23887,7 +23936,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsProgramNV","(", id, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsProgramNV)(id);
@@ -24469,7 +24518,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glVideoCaptureNV","(", video_capture_slot, ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glVideoCaptureNV)(video_capture_slot, sequence_num, capture_time);
@@ -24567,7 +24616,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glCheckFramebufferStatusOES","(", toString(target), ")");
-    if (!_context) return (GLenum )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glCheckFramebufferStatusOES)(target);
@@ -24667,7 +24716,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsFramebufferOES","(", framebuffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsFramebufferOES)(framebuffer);
@@ -24677,7 +24726,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsRenderbufferOES","(", renderbuffer, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsRenderbufferOES)(renderbuffer);
@@ -24741,7 +24790,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glUnmapBufferOES","(", toString(target), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glUnmapBufferOES)(target);
@@ -25031,7 +25080,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsVertexArrayOES","(", array, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsVertexArrayOES)(array);
@@ -25221,7 +25270,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glExtIsProgramBinaryQCOM","(", program, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glExtIsProgramBinaryQCOM)(program);
@@ -26047,7 +26096,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetExtensionREGAL","(", boost::print::quote(ext,'"'), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     RegalAssert(_context->info);
     return _context->info->getExtension(ext) ? GL_TRUE : GL_FALSE;
   }
@@ -26056,7 +26105,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsSupportedREGAL","(", boost::print::quote(ext,'"'), ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     RegalAssert(_context->info);
     return _context->info->isSupported(ext) ? GL_TRUE : GL_FALSE;
   }
@@ -26333,7 +26382,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glFinishAsyncSGIX","()");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glFinishAsyncSGIX)(markerp);
@@ -26343,7 +26392,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGenAsyncMarkersSGIX","(", range, ")");
-    if (!_context) return (GLuint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGenAsyncMarkersSGIX)(range);
@@ -26353,7 +26402,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsAsyncMarkerSGIX","(", marker, ")");
-    if (!_context) return (GLboolean )0;
+    if (!_context) return GL_FALSE;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glIsAsyncMarkerSGIX)(marker);
@@ -26363,7 +26412,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glPollAsyncSGIX","()");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glPollAsyncSGIX)(markerp);
@@ -26605,7 +26654,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetInstrumentsSGIX","()");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetInstrumentsSGIX)();
@@ -26625,7 +26674,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glPollInstrumentsSGIX","()");
-    if (!_context) return (GLint )0;
+    if (!_context) return 0;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glPollInstrumentsSGIX)(marker_p);
@@ -27533,11 +27582,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetStereoEmitterState3DL==wglSetStereoEmitterState3DL)
         dispatchTableGlobal.wglSetStereoEmitterState3DL = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSetStereoEmitterState3DL)
     {
-      Driver("wglSetStereoEmitterState3DL","(", boost::print::optional(hDC,Logging::pointers), ", ", uState, ")");
       ret = dispatchTableGlobal.wglSetStereoEmitterState3DL(hDC, uState);
+      Driver("wglSetStereoEmitterState3DL","(", boost::print::optional(hDC,Logging::pointers), ", ", uState, ")", " returned ", ret);
     }
     else
       Warning( "wglSetStereoEmitterState3DL not available." );
@@ -27558,8 +27607,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.wglBlitContextFramebufferAMD)
     {
-      Driver("wglBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ")");
       dispatchTableGlobal.wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+      Driver("wglBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ")");
     }
     else
       Warning( "wglBlitContextFramebufferAMD not available." );
@@ -27575,11 +27624,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateAssociatedContextAMD==wglCreateAssociatedContextAMD)
         dispatchTableGlobal.wglCreateAssociatedContextAMD = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglCreateAssociatedContextAMD)
     {
-      Driver("wglCreateAssociatedContextAMD","(", id, ")");
       ret = dispatchTableGlobal.wglCreateAssociatedContextAMD(id);
+      Driver("wglCreateAssociatedContextAMD","(", id, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateAssociatedContextAMD not available." );
@@ -27596,11 +27645,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateAssociatedContextAttribsAMD==wglCreateAssociatedContextAttribsAMD)
         dispatchTableGlobal.wglCreateAssociatedContextAttribsAMD = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglCreateAssociatedContextAttribsAMD)
     {
-      Driver("wglCreateAssociatedContextAttribsAMD","(", id, ", ", boost::print::optional(hShareContext,Logging::pointers), ", ", boost::print::optional(attribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
+      Driver("wglCreateAssociatedContextAttribsAMD","(", id, ", ", boost::print::optional(hShareContext,Logging::pointers), ", ", boost::print::optional(attribList,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateAssociatedContextAttribsAMD not available." );
@@ -27617,11 +27666,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDeleteAssociatedContextAMD==wglDeleteAssociatedContextAMD)
         dispatchTableGlobal.wglDeleteAssociatedContextAMD = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDeleteAssociatedContextAMD)
     {
-      Driver("wglDeleteAssociatedContextAMD","(", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDeleteAssociatedContextAMD(hglrc);
+      Driver("wglDeleteAssociatedContextAMD","(", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDeleteAssociatedContextAMD not available." );
@@ -27638,11 +27687,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetContextGPUIDAMD==wglGetContextGPUIDAMD)
         dispatchTableGlobal.wglGetContextGPUIDAMD = NULL;
     }
-    UINT  ret = (UINT )0;
+    UINT ret = 0;
     if (dispatchTableGlobal.wglGetContextGPUIDAMD)
     {
-      Driver("wglGetContextGPUIDAMD","(", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetContextGPUIDAMD(hglrc);
+      Driver("wglGetContextGPUIDAMD","(", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetContextGPUIDAMD not available." );
@@ -27659,11 +27708,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetCurrentAssociatedContextAMD==wglGetCurrentAssociatedContextAMD)
         dispatchTableGlobal.wglGetCurrentAssociatedContextAMD = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglGetCurrentAssociatedContextAMD)
     {
-      Driver("wglGetCurrentAssociatedContextAMD","()");
       ret = dispatchTableGlobal.wglGetCurrentAssociatedContextAMD();
+      Driver("wglGetCurrentAssociatedContextAMD","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetCurrentAssociatedContextAMD not available." );
@@ -27680,11 +27729,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGPUIDsAMD==wglGetGPUIDsAMD)
         dispatchTableGlobal.wglGetGPUIDsAMD = NULL;
     }
-    UINT  ret = (UINT )0;
+    UINT ret = 0;
     if (dispatchTableGlobal.wglGetGPUIDsAMD)
     {
-      Driver("wglGetGPUIDsAMD","(", maxCount, ")");
       ret = dispatchTableGlobal.wglGetGPUIDsAMD(maxCount, ids);
+      Driver("wglGetGPUIDsAMD","(", maxCount, ")", " returned ", ret);
     }
     else
       Warning( "wglGetGPUIDsAMD not available." );
@@ -27701,11 +27750,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGPUInfoAMD==wglGetGPUInfoAMD)
         dispatchTableGlobal.wglGetGPUInfoAMD = NULL;
     }
-    INT  ret = (INT )0;
+    INT ret = 0;
     if (dispatchTableGlobal.wglGetGPUInfoAMD)
     {
-      Driver("wglGetGPUInfoAMD","(", id, ", ", property, ", ", toString(dataType), ", ", size, ")");
       ret = dispatchTableGlobal.wglGetGPUInfoAMD(id, property, dataType, size, data);
+      Driver("wglGetGPUInfoAMD","(", id, ", ", property, ", ", toString(dataType), ", ", size, ")", " returned ", ret);
     }
     else
       Warning( "wglGetGPUInfoAMD not available." );
@@ -27722,11 +27771,11 @@ extern "C" {
       if (dispatchTableGlobal.wglMakeAssociatedContextCurrentAMD==wglMakeAssociatedContextCurrentAMD)
         dispatchTableGlobal.wglMakeAssociatedContextCurrentAMD = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglMakeAssociatedContextCurrentAMD)
     {
-      Driver("wglMakeAssociatedContextCurrentAMD","(", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglMakeAssociatedContextCurrentAMD(hglrc);
+      Driver("wglMakeAssociatedContextCurrentAMD","(", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglMakeAssociatedContextCurrentAMD not available." );
@@ -27745,11 +27794,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateBufferRegionARB==wglCreateBufferRegionARB)
         dispatchTableGlobal.wglCreateBufferRegionARB = NULL;
     }
-    HANDLE  ret = (HANDLE )0;
+    HANDLE ret = 0;
     if (dispatchTableGlobal.wglCreateBufferRegionARB)
     {
-      Driver("wglCreateBufferRegionARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", uType, ")");
       ret = dispatchTableGlobal.wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
+      Driver("wglCreateBufferRegionARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", uType, ")", " returned ", ret);
     }
     else
       Warning( "wglCreateBufferRegionARB not available." );
@@ -27768,8 +27817,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.wglDeleteBufferRegionARB)
     {
-      Driver("wglDeleteBufferRegionARB","(", hRegion, ")");
       dispatchTableGlobal.wglDeleteBufferRegionARB(hRegion);
+      Driver("wglDeleteBufferRegionARB","(", hRegion, ")");
     }
     else
       Warning( "wglDeleteBufferRegionARB not available." );
@@ -27785,11 +27834,11 @@ extern "C" {
       if (dispatchTableGlobal.wglRestoreBufferRegionARB==wglRestoreBufferRegionARB)
         dispatchTableGlobal.wglRestoreBufferRegionARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglRestoreBufferRegionARB)
     {
-      Driver("wglRestoreBufferRegionARB","(", hRegion, ", ", x, ", ", y, ", ", width, ", ", height, ", ", xSrc, ", ", ySrc, ")");
       ret = dispatchTableGlobal.wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
+      Driver("wglRestoreBufferRegionARB","(", hRegion, ", ", x, ", ", y, ", ", width, ", ", height, ", ", xSrc, ", ", ySrc, ")", " returned ", ret);
     }
     else
       Warning( "wglRestoreBufferRegionARB not available." );
@@ -27806,11 +27855,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSaveBufferRegionARB==wglSaveBufferRegionARB)
         dispatchTableGlobal.wglSaveBufferRegionARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSaveBufferRegionARB)
     {
-      Driver("wglSaveBufferRegionARB","(", hRegion, ", ", x, ", ", y, ", ", width, ", ", height, ")");
       ret = dispatchTableGlobal.wglSaveBufferRegionARB(hRegion, x, y, width, height);
+      Driver("wglSaveBufferRegionARB","(", hRegion, ", ", x, ", ", y, ", ", width, ", ", height, ")", " returned ", ret);
     }
     else
       Warning( "wglSaveBufferRegionARB not available." );
@@ -27829,14 +27878,16 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateContextAttribsARB==wglCreateContextAttribsARB)
         dispatchTableGlobal.wglCreateContextAttribsARB = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglCreateContextAttribsARB)
     {
-      Driver("wglCreateContextAttribsARB","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hShareContext,Logging::pointers), ", ", boost::print::optional(piAttribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglCreateContextAttribsARB(hDC, hShareContext, piAttribList);
+      Driver("wglCreateContextAttribsARB","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hShareContext,Logging::pointers), ", ", boost::print::optional(piAttribList,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateContextAttribsARB not available." );
+    if (ret && hShareContext)
+      Init::shareContext(ret,hShareContext);
     return ret;
   }
 
@@ -27855,8 +27906,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.wglGetExtensionsStringARB)
     {
-      Driver("wglGetExtensionsStringARB","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetExtensionsStringARB(hDC);
+      Driver("wglGetExtensionsStringARB","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "wglGetExtensionsStringARB not available." );
@@ -27875,11 +27926,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetCurrentReadDCARB==wglGetCurrentReadDCARB)
         dispatchTableGlobal.wglGetCurrentReadDCARB = NULL;
     }
-    HDC  ret = (HDC )0;
+    HDC ret = NULL;
     if (dispatchTableGlobal.wglGetCurrentReadDCARB)
     {
-      Driver("wglGetCurrentReadDCARB","()");
       ret = dispatchTableGlobal.wglGetCurrentReadDCARB();
+      Driver("wglGetCurrentReadDCARB","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetCurrentReadDCARB not available." );
@@ -27896,11 +27947,11 @@ extern "C" {
       if (dispatchTableGlobal.wglMakeContextCurrentARB==wglMakeContextCurrentARB)
         dispatchTableGlobal.wglMakeContextCurrentARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglMakeContextCurrentARB)
     {
-      Driver("wglMakeContextCurrentARB","(", boost::print::optional(hDrawDC,Logging::pointers), ", ", boost::print::optional(hReadDC,Logging::pointers), ", ", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
+      Driver("wglMakeContextCurrentARB","(", boost::print::optional(hDrawDC,Logging::pointers), ", ", boost::print::optional(hReadDC,Logging::pointers), ", ", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglMakeContextCurrentARB not available." );
@@ -27919,11 +27970,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreatePbufferARB==wglCreatePbufferARB)
         dispatchTableGlobal.wglCreatePbufferARB = NULL;
     }
-    HPBUFFERARB  ret = (HPBUFFERARB )0;
+    HPBUFFERARB ret = (HPBUFFERARB) 0;
     if (dispatchTableGlobal.wglCreatePbufferARB)
     {
-      Driver("wglCreatePbufferARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iWidth, ", ", iHeight, ", ", boost::print::optional(piAttribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+      Driver("wglCreatePbufferARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iWidth, ", ", iHeight, ", ", boost::print::optional(piAttribList,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreatePbufferARB not available." );
@@ -27940,11 +27991,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDestroyPbufferARB==wglDestroyPbufferARB)
         dispatchTableGlobal.wglDestroyPbufferARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDestroyPbufferARB)
     {
-      Driver("wglDestroyPbufferARB","(", boost::print::optional(hPbuffer,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDestroyPbufferARB(hPbuffer);
+      Driver("wglDestroyPbufferARB","(", boost::print::optional(hPbuffer,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDestroyPbufferARB not available." );
@@ -27961,11 +28012,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPbufferDCARB==wglGetPbufferDCARB)
         dispatchTableGlobal.wglGetPbufferDCARB = NULL;
     }
-    HDC  ret = (HDC )0;
+    HDC ret = NULL;
     if (dispatchTableGlobal.wglGetPbufferDCARB)
     {
-      Driver("wglGetPbufferDCARB","(", boost::print::optional(hPbuffer,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetPbufferDCARB(hPbuffer);
+      Driver("wglGetPbufferDCARB","(", boost::print::optional(hPbuffer,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetPbufferDCARB not available." );
@@ -27982,11 +28033,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryPbufferARB==wglQueryPbufferARB)
         dispatchTableGlobal.wglQueryPbufferARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryPbufferARB)
     {
-      Driver("wglQueryPbufferARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iAttribute, ")");
       ret = dispatchTableGlobal.wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
+      Driver("wglQueryPbufferARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iAttribute, ")", " returned ", ret);
     }
     else
       Warning( "wglQueryPbufferARB not available." );
@@ -28003,11 +28054,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleasePbufferDCARB==wglReleasePbufferDCARB)
         dispatchTableGlobal.wglReleasePbufferDCARB = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglReleasePbufferDCARB)
     {
-      Driver("wglReleasePbufferDCARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglReleasePbufferDCARB(hPbuffer, hDC);
+      Driver("wglReleasePbufferDCARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglReleasePbufferDCARB not available." );
@@ -28026,11 +28077,11 @@ extern "C" {
       if (dispatchTableGlobal.wglChoosePixelFormatARB==wglChoosePixelFormatARB)
         dispatchTableGlobal.wglChoosePixelFormatARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglChoosePixelFormatARB)
     {
-      Driver("wglChoosePixelFormatARB","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(piAttribIList,Logging::pointers), ", ", pfAttribFList, ", ", nMaxFormats, ")");
       ret = dispatchTableGlobal.wglChoosePixelFormatARB(hDC, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+      Driver("wglChoosePixelFormatARB","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(piAttribIList,Logging::pointers), ", ", pfAttribFList, ", ", nMaxFormats, ")", " returned ", ret);
     }
     else
       Warning( "wglChoosePixelFormatARB not available." );
@@ -28047,11 +28098,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPixelFormatAttribfvARB==wglGetPixelFormatAttribfvARB)
         dispatchTableGlobal.wglGetPixelFormatAttribfvARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetPixelFormatAttribfvARB)
     {
-      Driver("wglGetPixelFormatAttribfvARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")");
       ret = dispatchTableGlobal.wglGetPixelFormatAttribfvARB(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+      Driver("wglGetPixelFormatAttribfvARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")", " returned ", ret);
     }
     else
       Warning( "wglGetPixelFormatAttribfvARB not available." );
@@ -28068,11 +28119,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPixelFormatAttribivARB==wglGetPixelFormatAttribivARB)
         dispatchTableGlobal.wglGetPixelFormatAttribivARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetPixelFormatAttribivARB)
     {
-      Driver("wglGetPixelFormatAttribivARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")");
       ret = dispatchTableGlobal.wglGetPixelFormatAttribivARB(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+      Driver("wglGetPixelFormatAttribivARB","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")", " returned ", ret);
     }
     else
       Warning( "wglGetPixelFormatAttribivARB not available." );
@@ -28091,11 +28142,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBindTexImageARB==wglBindTexImageARB)
         dispatchTableGlobal.wglBindTexImageARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglBindTexImageARB)
     {
-      Driver("wglBindTexImageARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iBuffer, ")");
       ret = dispatchTableGlobal.wglBindTexImageARB(hPbuffer, iBuffer);
+      Driver("wglBindTexImageARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iBuffer, ")", " returned ", ret);
     }
     else
       Warning( "wglBindTexImageARB not available." );
@@ -28112,11 +28163,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleaseTexImageARB==wglReleaseTexImageARB)
         dispatchTableGlobal.wglReleaseTexImageARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglReleaseTexImageARB)
     {
-      Driver("wglReleaseTexImageARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iBuffer, ")");
       ret = dispatchTableGlobal.wglReleaseTexImageARB(hPbuffer, iBuffer);
+      Driver("wglReleaseTexImageARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iBuffer, ")", " returned ", ret);
     }
     else
       Warning( "wglReleaseTexImageARB not available." );
@@ -28133,11 +28184,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetPbufferAttribARB==wglSetPbufferAttribARB)
         dispatchTableGlobal.wglSetPbufferAttribARB = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSetPbufferAttribARB)
     {
-      Driver("wglSetPbufferAttribARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", boost::print::optional(piAttribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglSetPbufferAttribARB(hPbuffer, piAttribList);
+      Driver("wglSetPbufferAttribARB","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", boost::print::optional(piAttribList,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglSetPbufferAttribARB not available." );
@@ -28156,11 +28207,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBindDisplayColorTableEXT==wglBindDisplayColorTableEXT)
         dispatchTableGlobal.wglBindDisplayColorTableEXT = NULL;
     }
-    GLboolean  ret = (GLboolean )0;
+    GLboolean ret = GL_FALSE;
     if (dispatchTableGlobal.wglBindDisplayColorTableEXT)
     {
-      Driver("wglBindDisplayColorTableEXT","(", id, ")");
       ret = dispatchTableGlobal.wglBindDisplayColorTableEXT(id);
+      Driver("wglBindDisplayColorTableEXT","(", id, ")", " returned ", toString(ret));
     }
     else
       Warning( "wglBindDisplayColorTableEXT not available." );
@@ -28177,11 +28228,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateDisplayColorTableEXT==wglCreateDisplayColorTableEXT)
         dispatchTableGlobal.wglCreateDisplayColorTableEXT = NULL;
     }
-    GLboolean  ret = (GLboolean )0;
+    GLboolean ret = GL_FALSE;
     if (dispatchTableGlobal.wglCreateDisplayColorTableEXT)
     {
-      Driver("wglCreateDisplayColorTableEXT","(", id, ")");
       ret = dispatchTableGlobal.wglCreateDisplayColorTableEXT(id);
+      Driver("wglCreateDisplayColorTableEXT","(", id, ")", " returned ", toString(ret));
     }
     else
       Warning( "wglCreateDisplayColorTableEXT not available." );
@@ -28200,8 +28251,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.wglDestroyDisplayColorTableEXT)
     {
-      Driver("wglDestroyDisplayColorTableEXT","(", id, ")");
       dispatchTableGlobal.wglDestroyDisplayColorTableEXT(id);
+      Driver("wglDestroyDisplayColorTableEXT","(", id, ")");
     }
     else
       Warning( "wglDestroyDisplayColorTableEXT not available." );
@@ -28217,11 +28268,11 @@ extern "C" {
       if (dispatchTableGlobal.wglLoadDisplayColorTableEXT==wglLoadDisplayColorTableEXT)
         dispatchTableGlobal.wglLoadDisplayColorTableEXT = NULL;
     }
-    GLboolean  ret = (GLboolean )0;
+    GLboolean ret = GL_FALSE;
     if (dispatchTableGlobal.wglLoadDisplayColorTableEXT)
     {
-      Driver("wglLoadDisplayColorTableEXT","(", boost::print::array(table,length), ", ", length, ")");
       ret = dispatchTableGlobal.wglLoadDisplayColorTableEXT(table, length);
+      Driver("wglLoadDisplayColorTableEXT","(", boost::print::array(table,length), ", ", length, ")", " returned ", toString(ret));
     }
     else
       Warning( "wglLoadDisplayColorTableEXT not available." );
@@ -28243,8 +28294,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.wglGetExtensionsStringEXT)
     {
-      Driver("wglGetExtensionsStringEXT","()");
       ret = dispatchTableGlobal.wglGetExtensionsStringEXT();
+      Driver("wglGetExtensionsStringEXT","()", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "wglGetExtensionsStringEXT not available." );
@@ -28263,11 +28314,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetCurrentReadDCEXT==wglGetCurrentReadDCEXT)
         dispatchTableGlobal.wglGetCurrentReadDCEXT = NULL;
     }
-    HDC  ret = (HDC )0;
+    HDC ret = NULL;
     if (dispatchTableGlobal.wglGetCurrentReadDCEXT)
     {
-      Driver("wglGetCurrentReadDCEXT","()");
       ret = dispatchTableGlobal.wglGetCurrentReadDCEXT();
+      Driver("wglGetCurrentReadDCEXT","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetCurrentReadDCEXT not available." );
@@ -28284,11 +28335,11 @@ extern "C" {
       if (dispatchTableGlobal.wglMakeContextCurrentEXT==wglMakeContextCurrentEXT)
         dispatchTableGlobal.wglMakeContextCurrentEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglMakeContextCurrentEXT)
     {
-      Driver("wglMakeContextCurrentEXT","(", boost::print::optional(hDrawDC,Logging::pointers), ", ", boost::print::optional(hReadDC,Logging::pointers), ", ", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
+      Driver("wglMakeContextCurrentEXT","(", boost::print::optional(hDrawDC,Logging::pointers), ", ", boost::print::optional(hReadDC,Logging::pointers), ", ", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglMakeContextCurrentEXT not available." );
@@ -28307,11 +28358,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreatePbufferEXT==wglCreatePbufferEXT)
         dispatchTableGlobal.wglCreatePbufferEXT = NULL;
     }
-    HPBUFFEREXT  ret = (HPBUFFEREXT )0;
+    HPBUFFEREXT ret = (HPBUFFEREXT) 0;
     if (dispatchTableGlobal.wglCreatePbufferEXT)
     {
-      Driver("wglCreatePbufferEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iWidth, ", ", iHeight, ", ", boost::print::optional(piAttribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+      Driver("wglCreatePbufferEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iWidth, ", ", iHeight, ", ", boost::print::optional(piAttribList,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreatePbufferEXT not available." );
@@ -28328,11 +28379,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDestroyPbufferEXT==wglDestroyPbufferEXT)
         dispatchTableGlobal.wglDestroyPbufferEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDestroyPbufferEXT)
     {
-      Driver("wglDestroyPbufferEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDestroyPbufferEXT(hPbuffer);
+      Driver("wglDestroyPbufferEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDestroyPbufferEXT not available." );
@@ -28349,11 +28400,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPbufferDCEXT==wglGetPbufferDCEXT)
         dispatchTableGlobal.wglGetPbufferDCEXT = NULL;
     }
-    HDC  ret = (HDC )0;
+    HDC ret = NULL;
     if (dispatchTableGlobal.wglGetPbufferDCEXT)
     {
-      Driver("wglGetPbufferDCEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetPbufferDCEXT(hPbuffer);
+      Driver("wglGetPbufferDCEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetPbufferDCEXT not available." );
@@ -28370,11 +28421,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryPbufferEXT==wglQueryPbufferEXT)
         dispatchTableGlobal.wglQueryPbufferEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryPbufferEXT)
     {
-      Driver("wglQueryPbufferEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iAttribute, ")");
       ret = dispatchTableGlobal.wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
+      Driver("wglQueryPbufferEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iAttribute, ")", " returned ", ret);
     }
     else
       Warning( "wglQueryPbufferEXT not available." );
@@ -28391,11 +28442,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleasePbufferDCEXT==wglReleasePbufferDCEXT)
         dispatchTableGlobal.wglReleasePbufferDCEXT = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglReleasePbufferDCEXT)
     {
-      Driver("wglReleasePbufferDCEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglReleasePbufferDCEXT(hPbuffer, hDC);
+      Driver("wglReleasePbufferDCEXT","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglReleasePbufferDCEXT not available." );
@@ -28414,11 +28465,11 @@ extern "C" {
       if (dispatchTableGlobal.wglChoosePixelFormatEXT==wglChoosePixelFormatEXT)
         dispatchTableGlobal.wglChoosePixelFormatEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglChoosePixelFormatEXT)
     {
-      Driver("wglChoosePixelFormatEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(piAttribIList,Logging::pointers), ", ", pfAttribFList, ", ", nMaxFormats, ")");
       ret = dispatchTableGlobal.wglChoosePixelFormatEXT(hDC, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
+      Driver("wglChoosePixelFormatEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(piAttribIList,Logging::pointers), ", ", pfAttribFList, ", ", nMaxFormats, ")", " returned ", ret);
     }
     else
       Warning( "wglChoosePixelFormatEXT not available." );
@@ -28435,11 +28486,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPixelFormatAttribfvEXT==wglGetPixelFormatAttribfvEXT)
         dispatchTableGlobal.wglGetPixelFormatAttribfvEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetPixelFormatAttribfvEXT)
     {
-      Driver("wglGetPixelFormatAttribfvEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")");
       ret = dispatchTableGlobal.wglGetPixelFormatAttribfvEXT(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
+      Driver("wglGetPixelFormatAttribfvEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")", " returned ", ret);
     }
     else
       Warning( "wglGetPixelFormatAttribfvEXT not available." );
@@ -28456,11 +28507,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPixelFormatAttribivEXT==wglGetPixelFormatAttribivEXT)
         dispatchTableGlobal.wglGetPixelFormatAttribivEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetPixelFormatAttribivEXT)
     {
-      Driver("wglGetPixelFormatAttribivEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")");
       ret = dispatchTableGlobal.wglGetPixelFormatAttribivEXT(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
+      Driver("wglGetPixelFormatAttribivEXT","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nAttributes, ", ", boost::print::array(piAttributes,nAttributes), ")", " returned ", ret);
     }
     else
       Warning( "wglGetPixelFormatAttribivEXT not available." );
@@ -28479,11 +28530,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetSwapIntervalEXT==wglGetSwapIntervalEXT)
         dispatchTableGlobal.wglGetSwapIntervalEXT = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglGetSwapIntervalEXT)
     {
-      Driver("wglGetSwapIntervalEXT","()");
       ret = dispatchTableGlobal.wglGetSwapIntervalEXT();
+      Driver("wglGetSwapIntervalEXT","()", " returned ", ret);
     }
     else
       Warning( "wglGetSwapIntervalEXT not available." );
@@ -28500,11 +28551,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSwapIntervalEXT==wglSwapIntervalEXT)
         dispatchTableGlobal.wglSwapIntervalEXT = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSwapIntervalEXT)
     {
-      Driver("wglSwapIntervalEXT","(", interval, ")");
       ret = dispatchTableGlobal.wglSwapIntervalEXT(interval);
+      Driver("wglSwapIntervalEXT","(", interval, ")", " returned ", ret);
     }
     else
       Warning( "wglSwapIntervalEXT not available." );
@@ -28523,11 +28574,11 @@ extern "C" {
       if (dispatchTableGlobal.wglChoosePixelFormat==wglChoosePixelFormat)
         dispatchTableGlobal.wglChoosePixelFormat = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglChoosePixelFormat)
     {
-      Driver("wglChoosePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", ppfd, ")");
       ret = dispatchTableGlobal.wglChoosePixelFormat(hDC, ppfd);
+      Driver("wglChoosePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", ppfd, ")", " returned ", ret);
     }
     else
       Warning( "wglChoosePixelFormat not available." );
@@ -28544,11 +28595,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDescribePixelFormat==wglDescribePixelFormat)
         dispatchTableGlobal.wglDescribePixelFormat = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglDescribePixelFormat)
     {
-      Driver("wglDescribePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", nBytes, ")");
       ret = dispatchTableGlobal.wglDescribePixelFormat(hDC, iPixelFormat, nBytes, ppfd);
+      Driver("wglDescribePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", nBytes, ")", " returned ", ret);
     }
     else
       Warning( "wglDescribePixelFormat not available." );
@@ -28565,11 +28616,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetPixelFormat==wglGetPixelFormat)
         dispatchTableGlobal.wglGetPixelFormat = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglGetPixelFormat)
     {
-      Driver("wglGetPixelFormat","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetPixelFormat(hDC);
+      Driver("wglGetPixelFormat","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetPixelFormat not available." );
@@ -28586,11 +28637,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetPixelFormat==wglSetPixelFormat)
         dispatchTableGlobal.wglSetPixelFormat = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSetPixelFormat)
     {
-      Driver("wglSetPixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", ppfd, ")");
       ret = dispatchTableGlobal.wglSetPixelFormat(hDC, iPixelFormat, ppfd);
+      Driver("wglSetPixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", ppfd, ")", " returned ", ret);
     }
     else
       Warning( "wglSetPixelFormat not available." );
@@ -28607,15 +28658,15 @@ extern "C" {
       if (dispatchTableGlobal.wglSwapBuffers==wglSwapBuffers)
         dispatchTableGlobal.wglSwapBuffers = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     RegalContext *_context = REGAL_GET_CONTEXT();
     // Notify Regal::Frame about the swap buffers event.
     if (_context && _context->frame)
         _context->frame->wglSwapBuffers(*_context);
     if (dispatchTableGlobal.wglSwapBuffers)
     {
-      Driver("wglSwapBuffers","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglSwapBuffers(hDC);
+      Driver("wglSwapBuffers","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglSwapBuffers not available." );
@@ -28634,11 +28685,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetDigitalVideoParametersI3D==wglGetDigitalVideoParametersI3D)
         dispatchTableGlobal.wglGetDigitalVideoParametersI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetDigitalVideoParametersI3D)
     {
-      Driver("wglGetDigitalVideoParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ")");
       ret = dispatchTableGlobal.wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+      Driver("wglGetDigitalVideoParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ")", " returned ", ret);
     }
     else
       Warning( "wglGetDigitalVideoParametersI3D not available." );
@@ -28655,11 +28706,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetDigitalVideoParametersI3D==wglSetDigitalVideoParametersI3D)
         dispatchTableGlobal.wglSetDigitalVideoParametersI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSetDigitalVideoParametersI3D)
     {
-      Driver("wglSetDigitalVideoParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ", ", boost::print::optional(piValue,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+      Driver("wglSetDigitalVideoParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ", ", boost::print::optional(piValue,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglSetDigitalVideoParametersI3D not available." );
@@ -28678,11 +28729,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGammaTableI3D==wglGetGammaTableI3D)
         dispatchTableGlobal.wglGetGammaTableI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetGammaTableI3D)
     {
-      Driver("wglGetGammaTableI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+      Driver("wglGetGammaTableI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetGammaTableI3D not available." );
@@ -28699,11 +28750,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGammaTableParametersI3D==wglGetGammaTableParametersI3D)
         dispatchTableGlobal.wglGetGammaTableParametersI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetGammaTableParametersI3D)
     {
-      Driver("wglGetGammaTableParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ")");
       ret = dispatchTableGlobal.wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
+      Driver("wglGetGammaTableParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ")", " returned ", ret);
     }
     else
       Warning( "wglGetGammaTableParametersI3D not available." );
@@ -28720,11 +28771,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetGammaTableI3D==wglSetGammaTableI3D)
         dispatchTableGlobal.wglSetGammaTableI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSetGammaTableI3D)
     {
-      Driver("wglSetGammaTableI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iEntries, ", ", boost::print::array(puRed,iEntries), ", ", boost::print::array(puGreen,iEntries), ", ", boost::print::array(puBlue,iEntries), ")");
       ret = dispatchTableGlobal.wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+      Driver("wglSetGammaTableI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iEntries, ", ", boost::print::array(puRed,iEntries), ", ", boost::print::array(puGreen,iEntries), ", ", boost::print::array(puBlue,iEntries), ")", " returned ", ret);
     }
     else
       Warning( "wglSetGammaTableI3D not available." );
@@ -28741,11 +28792,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetGammaTableParametersI3D==wglSetGammaTableParametersI3D)
         dispatchTableGlobal.wglSetGammaTableParametersI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSetGammaTableParametersI3D)
     {
-      Driver("wglSetGammaTableParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ", ", boost::print::optional(piValue,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
+      Driver("wglSetGammaTableParametersI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", iAttribute, ", ", boost::print::optional(piValue,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglSetGammaTableParametersI3D not available." );
@@ -28764,11 +28815,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDisableGenlockI3D==wglDisableGenlockI3D)
         dispatchTableGlobal.wglDisableGenlockI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDisableGenlockI3D)
     {
-      Driver("wglDisableGenlockI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDisableGenlockI3D(hDC);
+      Driver("wglDisableGenlockI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDisableGenlockI3D not available." );
@@ -28785,11 +28836,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnableGenlockI3D==wglEnableGenlockI3D)
         dispatchTableGlobal.wglEnableGenlockI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglEnableGenlockI3D)
     {
-      Driver("wglEnableGenlockI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglEnableGenlockI3D(hDC);
+      Driver("wglEnableGenlockI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglEnableGenlockI3D not available." );
@@ -28806,11 +28857,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGenlockSampleRateI3D==wglGenlockSampleRateI3D)
         dispatchTableGlobal.wglGenlockSampleRateI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGenlockSampleRateI3D)
     {
-      Driver("wglGenlockSampleRateI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uRate, ")");
       ret = dispatchTableGlobal.wglGenlockSampleRateI3D(hDC, uRate);
+      Driver("wglGenlockSampleRateI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uRate, ")", " returned ", ret);
     }
     else
       Warning( "wglGenlockSampleRateI3D not available." );
@@ -28827,11 +28878,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGenlockSourceDelayI3D==wglGenlockSourceDelayI3D)
         dispatchTableGlobal.wglGenlockSourceDelayI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGenlockSourceDelayI3D)
     {
-      Driver("wglGenlockSourceDelayI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uDelay, ")");
       ret = dispatchTableGlobal.wglGenlockSourceDelayI3D(hDC, uDelay);
+      Driver("wglGenlockSourceDelayI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uDelay, ")", " returned ", ret);
     }
     else
       Warning( "wglGenlockSourceDelayI3D not available." );
@@ -28848,11 +28899,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGenlockSourceEdgeI3D==wglGenlockSourceEdgeI3D)
         dispatchTableGlobal.wglGenlockSourceEdgeI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGenlockSourceEdgeI3D)
     {
-      Driver("wglGenlockSourceEdgeI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uEdge, ")");
       ret = dispatchTableGlobal.wglGenlockSourceEdgeI3D(hDC, uEdge);
+      Driver("wglGenlockSourceEdgeI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uEdge, ")", " returned ", ret);
     }
     else
       Warning( "wglGenlockSourceEdgeI3D not available." );
@@ -28869,11 +28920,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGenlockSourceI3D==wglGenlockSourceI3D)
         dispatchTableGlobal.wglGenlockSourceI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGenlockSourceI3D)
     {
-      Driver("wglGenlockSourceI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uSource, ")");
       ret = dispatchTableGlobal.wglGenlockSourceI3D(hDC, uSource);
+      Driver("wglGenlockSourceI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", uSource, ")", " returned ", ret);
     }
     else
       Warning( "wglGenlockSourceI3D not available." );
@@ -28890,11 +28941,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGenlockSampleRateI3D==wglGetGenlockSampleRateI3D)
         dispatchTableGlobal.wglGetGenlockSampleRateI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetGenlockSampleRateI3D)
     {
-      Driver("wglGetGenlockSampleRateI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetGenlockSampleRateI3D(hDC, uRate);
+      Driver("wglGetGenlockSampleRateI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetGenlockSampleRateI3D not available." );
@@ -28911,11 +28962,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGenlockSourceDelayI3D==wglGetGenlockSourceDelayI3D)
         dispatchTableGlobal.wglGetGenlockSourceDelayI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetGenlockSourceDelayI3D)
     {
-      Driver("wglGetGenlockSourceDelayI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetGenlockSourceDelayI3D(hDC, uDelay);
+      Driver("wglGetGenlockSourceDelayI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetGenlockSourceDelayI3D not available." );
@@ -28932,11 +28983,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGenlockSourceEdgeI3D==wglGetGenlockSourceEdgeI3D)
         dispatchTableGlobal.wglGetGenlockSourceEdgeI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetGenlockSourceEdgeI3D)
     {
-      Driver("wglGetGenlockSourceEdgeI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetGenlockSourceEdgeI3D(hDC, uEdge);
+      Driver("wglGetGenlockSourceEdgeI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetGenlockSourceEdgeI3D not available." );
@@ -28953,11 +29004,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetGenlockSourceI3D==wglGetGenlockSourceI3D)
         dispatchTableGlobal.wglGetGenlockSourceI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetGenlockSourceI3D)
     {
-      Driver("wglGetGenlockSourceI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetGenlockSourceI3D(hDC, uSource);
+      Driver("wglGetGenlockSourceI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetGenlockSourceI3D not available." );
@@ -28974,11 +29025,11 @@ extern "C" {
       if (dispatchTableGlobal.wglIsEnabledGenlockI3D==wglIsEnabledGenlockI3D)
         dispatchTableGlobal.wglIsEnabledGenlockI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglIsEnabledGenlockI3D)
     {
-      Driver("wglIsEnabledGenlockI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglIsEnabledGenlockI3D(hDC, pFlag);
+      Driver("wglIsEnabledGenlockI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglIsEnabledGenlockI3D not available." );
@@ -28995,11 +29046,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryGenlockMaxSourceDelayI3D==wglQueryGenlockMaxSourceDelayI3D)
         dispatchTableGlobal.wglQueryGenlockMaxSourceDelayI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryGenlockMaxSourceDelayI3D)
     {
-      Driver("wglQueryGenlockMaxSourceDelayI3D","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
+      Driver("wglQueryGenlockMaxSourceDelayI3D","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglQueryGenlockMaxSourceDelayI3D not available." );
@@ -29018,11 +29069,11 @@ extern "C" {
       if (dispatchTableGlobal.wglAssociateImageBufferEventsI3D==wglAssociateImageBufferEventsI3D)
         dispatchTableGlobal.wglAssociateImageBufferEventsI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglAssociateImageBufferEventsI3D)
     {
-      Driver("wglAssociateImageBufferEventsI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::array(pEvent,count), ", ", boost::print::array(pAddress,count), ", ", boost::print::array(pSize,count), ", ", count, ")");
       ret = dispatchTableGlobal.wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
+      Driver("wglAssociateImageBufferEventsI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::array(pEvent,count), ", ", boost::print::array(pAddress,count), ", ", boost::print::array(pSize,count), ", ", count, ")", " returned ", ret);
     }
     else
       Warning( "wglAssociateImageBufferEventsI3D not available." );
@@ -29039,11 +29090,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateImageBufferI3D==wglCreateImageBufferI3D)
         dispatchTableGlobal.wglCreateImageBufferI3D = NULL;
     }
-    LPVOID  ret = (LPVOID )0;
+    LPVOID ret = 0;
     if (dispatchTableGlobal.wglCreateImageBufferI3D)
     {
-      Driver("wglCreateImageBufferI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", dwSize, ", ", uFlags, ")");
       ret = dispatchTableGlobal.wglCreateImageBufferI3D(hDC, dwSize, uFlags);
+      Driver("wglCreateImageBufferI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", dwSize, ", ", uFlags, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateImageBufferI3D not available." );
@@ -29060,11 +29111,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDestroyImageBufferI3D==wglDestroyImageBufferI3D)
         dispatchTableGlobal.wglDestroyImageBufferI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDestroyImageBufferI3D)
     {
-      Driver("wglDestroyImageBufferI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(pAddress,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDestroyImageBufferI3D(hDC, pAddress);
+      Driver("wglDestroyImageBufferI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(pAddress,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDestroyImageBufferI3D not available." );
@@ -29081,11 +29132,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleaseImageBufferEventsI3D==wglReleaseImageBufferEventsI3D)
         dispatchTableGlobal.wglReleaseImageBufferEventsI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglReleaseImageBufferEventsI3D)
     {
-      Driver("wglReleaseImageBufferEventsI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::array(pAddress,count), ", ", count, ")");
       ret = dispatchTableGlobal.wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
+      Driver("wglReleaseImageBufferEventsI3D","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::array(pAddress,count), ", ", count, ")", " returned ", ret);
     }
     else
       Warning( "wglReleaseImageBufferEventsI3D not available." );
@@ -29104,11 +29155,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDisableFrameLockI3D==wglDisableFrameLockI3D)
         dispatchTableGlobal.wglDisableFrameLockI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDisableFrameLockI3D)
     {
-      Driver("wglDisableFrameLockI3D","()");
       ret = dispatchTableGlobal.wglDisableFrameLockI3D();
+      Driver("wglDisableFrameLockI3D","()", " returned ", ret);
     }
     else
       Warning( "wglDisableFrameLockI3D not available." );
@@ -29125,11 +29176,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnableFrameLockI3D==wglEnableFrameLockI3D)
         dispatchTableGlobal.wglEnableFrameLockI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglEnableFrameLockI3D)
     {
-      Driver("wglEnableFrameLockI3D","()");
       ret = dispatchTableGlobal.wglEnableFrameLockI3D();
+      Driver("wglEnableFrameLockI3D","()", " returned ", ret);
     }
     else
       Warning( "wglEnableFrameLockI3D not available." );
@@ -29146,11 +29197,11 @@ extern "C" {
       if (dispatchTableGlobal.wglIsEnabledFrameLockI3D==wglIsEnabledFrameLockI3D)
         dispatchTableGlobal.wglIsEnabledFrameLockI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglIsEnabledFrameLockI3D)
     {
-      Driver("wglIsEnabledFrameLockI3D","()");
       ret = dispatchTableGlobal.wglIsEnabledFrameLockI3D(pFlag);
+      Driver("wglIsEnabledFrameLockI3D","()", " returned ", ret);
     }
     else
       Warning( "wglIsEnabledFrameLockI3D not available." );
@@ -29167,11 +29218,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryFrameLockMasterI3D==wglQueryFrameLockMasterI3D)
         dispatchTableGlobal.wglQueryFrameLockMasterI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryFrameLockMasterI3D)
     {
-      Driver("wglQueryFrameLockMasterI3D","()");
       ret = dispatchTableGlobal.wglQueryFrameLockMasterI3D(pFlag);
+      Driver("wglQueryFrameLockMasterI3D","()", " returned ", ret);
     }
     else
       Warning( "wglQueryFrameLockMasterI3D not available." );
@@ -29190,11 +29241,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBeginFrameTrackingI3D==wglBeginFrameTrackingI3D)
         dispatchTableGlobal.wglBeginFrameTrackingI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglBeginFrameTrackingI3D)
     {
-      Driver("wglBeginFrameTrackingI3D","()");
       ret = dispatchTableGlobal.wglBeginFrameTrackingI3D();
+      Driver("wglBeginFrameTrackingI3D","()", " returned ", ret);
     }
     else
       Warning( "wglBeginFrameTrackingI3D not available." );
@@ -29211,11 +29262,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEndFrameTrackingI3D==wglEndFrameTrackingI3D)
         dispatchTableGlobal.wglEndFrameTrackingI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglEndFrameTrackingI3D)
     {
-      Driver("wglEndFrameTrackingI3D","()");
       ret = dispatchTableGlobal.wglEndFrameTrackingI3D();
+      Driver("wglEndFrameTrackingI3D","()", " returned ", ret);
     }
     else
       Warning( "wglEndFrameTrackingI3D not available." );
@@ -29232,11 +29283,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetFrameUsageI3D==wglGetFrameUsageI3D)
         dispatchTableGlobal.wglGetFrameUsageI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetFrameUsageI3D)
     {
-      Driver("wglGetFrameUsageI3D","()");
       ret = dispatchTableGlobal.wglGetFrameUsageI3D(pUsage);
+      Driver("wglGetFrameUsageI3D","()", " returned ", ret);
     }
     else
       Warning( "wglGetFrameUsageI3D not available." );
@@ -29253,11 +29304,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryFrameTrackingI3D==wglQueryFrameTrackingI3D)
         dispatchTableGlobal.wglQueryFrameTrackingI3D = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryFrameTrackingI3D)
     {
-      Driver("wglQueryFrameTrackingI3D","()");
       ret = dispatchTableGlobal.wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
+      Driver("wglQueryFrameTrackingI3D","()", " returned ", ret);
     }
     else
       Warning( "wglQueryFrameTrackingI3D not available." );
@@ -29276,11 +29327,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXCloseDeviceNV==wglDXCloseDeviceNV)
         dispatchTableGlobal.wglDXCloseDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDXCloseDeviceNV)
     {
-      Driver("wglDXCloseDeviceNV","(", hDevice, ")");
       ret = dispatchTableGlobal.wglDXCloseDeviceNV(hDevice);
+      Driver("wglDXCloseDeviceNV","(", hDevice, ")", " returned ", ret);
     }
     else
       Warning( "wglDXCloseDeviceNV not available." );
@@ -29297,11 +29348,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXLockObjectsNV==wglDXLockObjectsNV)
         dispatchTableGlobal.wglDXLockObjectsNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDXLockObjectsNV)
     {
-      Driver("wglDXLockObjectsNV","(", hDevice, ", ", count, ", ", hObjects, ")");
       ret = dispatchTableGlobal.wglDXLockObjectsNV(hDevice, count, hObjects);
+      Driver("wglDXLockObjectsNV","(", hDevice, ", ", count, ", ", hObjects, ")", " returned ", ret);
     }
     else
       Warning( "wglDXLockObjectsNV not available." );
@@ -29318,11 +29369,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXObjectAccessNV==wglDXObjectAccessNV)
         dispatchTableGlobal.wglDXObjectAccessNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDXObjectAccessNV)
     {
-      Driver("wglDXObjectAccessNV","(", hObject, ", ", toString(access), ")");
       ret = dispatchTableGlobal.wglDXObjectAccessNV(hObject, access);
+      Driver("wglDXObjectAccessNV","(", hObject, ", ", toString(access), ")", " returned ", ret);
     }
     else
       Warning( "wglDXObjectAccessNV not available." );
@@ -29339,11 +29390,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXOpenDeviceNV==wglDXOpenDeviceNV)
         dispatchTableGlobal.wglDXOpenDeviceNV = NULL;
     }
-    HANDLE  ret = (HANDLE )0;
+    HANDLE ret = 0;
     if (dispatchTableGlobal.wglDXOpenDeviceNV)
     {
-      Driver("wglDXOpenDeviceNV","(", boost::print::optional(dxDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDXOpenDeviceNV(dxDevice);
+      Driver("wglDXOpenDeviceNV","(", boost::print::optional(dxDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDXOpenDeviceNV not available." );
@@ -29360,11 +29411,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXRegisterObjectNV==wglDXRegisterObjectNV)
         dispatchTableGlobal.wglDXRegisterObjectNV = NULL;
     }
-    HANDLE  ret = (HANDLE )0;
+    HANDLE ret = 0;
     if (dispatchTableGlobal.wglDXRegisterObjectNV)
     {
-      Driver("wglDXRegisterObjectNV","(", hDevice, ", ", boost::print::optional(dxObject,Logging::pointers), ", ", name, ", ", toString(type), ", ", toString(access), ")");
       ret = dispatchTableGlobal.wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
+      Driver("wglDXRegisterObjectNV","(", hDevice, ", ", boost::print::optional(dxObject,Logging::pointers), ", ", name, ", ", toString(type), ", ", toString(access), ")", " returned ", ret);
     }
     else
       Warning( "wglDXRegisterObjectNV not available." );
@@ -29381,11 +29432,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXSetResourceShareHandleNV==wglDXSetResourceShareHandleNV)
         dispatchTableGlobal.wglDXSetResourceShareHandleNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDXSetResourceShareHandleNV)
     {
-      Driver("wglDXSetResourceShareHandleNV","(", boost::print::optional(dxObject,Logging::pointers), ", ", shareHandle, ")");
       ret = dispatchTableGlobal.wglDXSetResourceShareHandleNV(dxObject, shareHandle);
+      Driver("wglDXSetResourceShareHandleNV","(", boost::print::optional(dxObject,Logging::pointers), ", ", shareHandle, ")", " returned ", ret);
     }
     else
       Warning( "wglDXSetResourceShareHandleNV not available." );
@@ -29402,11 +29453,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXUnlockObjectsNV==wglDXUnlockObjectsNV)
         dispatchTableGlobal.wglDXUnlockObjectsNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDXUnlockObjectsNV)
     {
-      Driver("wglDXUnlockObjectsNV","(", hDevice, ", ", count, ", ", hObjects, ")");
       ret = dispatchTableGlobal.wglDXUnlockObjectsNV(hDevice, count, hObjects);
+      Driver("wglDXUnlockObjectsNV","(", hDevice, ", ", count, ", ", hObjects, ")", " returned ", ret);
     }
     else
       Warning( "wglDXUnlockObjectsNV not available." );
@@ -29423,11 +29474,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDXUnregisterObjectNV==wglDXUnregisterObjectNV)
         dispatchTableGlobal.wglDXUnregisterObjectNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDXUnregisterObjectNV)
     {
-      Driver("wglDXUnregisterObjectNV","(", hDevice, ", ", hObject, ")");
       ret = dispatchTableGlobal.wglDXUnregisterObjectNV(hDevice, hObject);
+      Driver("wglDXUnregisterObjectNV","(", hDevice, ", ", hObject, ")", " returned ", ret);
     }
     else
       Warning( "wglDXUnregisterObjectNV not available." );
@@ -29446,11 +29497,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCopyImageSubDataNV==wglCopyImageSubDataNV)
         dispatchTableGlobal.wglCopyImageSubDataNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglCopyImageSubDataNV)
     {
-      Driver("wglCopyImageSubDataNV","(", boost::print::optional(hSrcRC,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(hDstRC,Logging::pointers), ", ", dstName, ")");
       ret = dispatchTableGlobal.wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+      Driver("wglCopyImageSubDataNV","(", boost::print::optional(hSrcRC,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(hDstRC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglCopyImageSubDataNV not available." );
@@ -29469,11 +29520,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateAffinityDCNV==wglCreateAffinityDCNV)
         dispatchTableGlobal.wglCreateAffinityDCNV = NULL;
     }
-    HDC  ret = (HDC )0;
+    HDC ret = NULL;
     if (dispatchTableGlobal.wglCreateAffinityDCNV)
     {
-      Driver("wglCreateAffinityDCNV","(", phGpuList, ")");
       ret = dispatchTableGlobal.wglCreateAffinityDCNV(phGpuList);
+      Driver("wglCreateAffinityDCNV","(", phGpuList, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateAffinityDCNV not available." );
@@ -29490,11 +29541,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDeleteDCNV==wglDeleteDCNV)
         dispatchTableGlobal.wglDeleteDCNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDeleteDCNV)
     {
-      Driver("wglDeleteDCNV","(", boost::print::optional(hAffinityDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDeleteDCNV(hAffinityDC);
+      Driver("wglDeleteDCNV","(", boost::print::optional(hAffinityDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglDeleteDCNV not available." );
@@ -29511,11 +29562,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnumGpuDevicesNV==wglEnumGpuDevicesNV)
         dispatchTableGlobal.wglEnumGpuDevicesNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglEnumGpuDevicesNV)
     {
-      Driver("wglEnumGpuDevicesNV","(", boost::print::optional(hGpu,Logging::pointers), ", ", iDeviceIndex, ")");
       ret = dispatchTableGlobal.wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
+      Driver("wglEnumGpuDevicesNV","(", boost::print::optional(hGpu,Logging::pointers), ", ", iDeviceIndex, ")", " returned ", ret);
     }
     else
       Warning( "wglEnumGpuDevicesNV not available." );
@@ -29532,11 +29583,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnumGpusFromAffinityDCNV==wglEnumGpusFromAffinityDCNV)
         dispatchTableGlobal.wglEnumGpusFromAffinityDCNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglEnumGpusFromAffinityDCNV)
     {
-      Driver("wglEnumGpusFromAffinityDCNV","(", boost::print::optional(hAffinityDC,Logging::pointers), ", ", iGpuIndex, ")");
       ret = dispatchTableGlobal.wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
+      Driver("wglEnumGpusFromAffinityDCNV","(", boost::print::optional(hAffinityDC,Logging::pointers), ", ", iGpuIndex, ")", " returned ", ret);
     }
     else
       Warning( "wglEnumGpusFromAffinityDCNV not available." );
@@ -29553,11 +29604,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnumGpusNV==wglEnumGpusNV)
         dispatchTableGlobal.wglEnumGpusNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglEnumGpusNV)
     {
-      Driver("wglEnumGpusNV","(", iGpuIndex, ")");
       ret = dispatchTableGlobal.wglEnumGpusNV(iGpuIndex, phGpu);
+      Driver("wglEnumGpusNV","(", iGpuIndex, ")", " returned ", ret);
     }
     else
       Warning( "wglEnumGpusNV not available." );
@@ -29576,11 +29627,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBindVideoDeviceNV==wglBindVideoDeviceNV)
         dispatchTableGlobal.wglBindVideoDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglBindVideoDeviceNV)
     {
-      Driver("wglBindVideoDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", uVideoSlot, ", ", boost::print::optional(hVideoDevice,Logging::pointers), ", ", boost::print::optional(piAttribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
+      Driver("wglBindVideoDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", uVideoSlot, ", ", boost::print::optional(hVideoDevice,Logging::pointers), ", ", boost::print::optional(piAttribList,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglBindVideoDeviceNV not available." );
@@ -29597,11 +29648,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnumerateVideoDevicesNV==wglEnumerateVideoDevicesNV)
         dispatchTableGlobal.wglEnumerateVideoDevicesNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglEnumerateVideoDevicesNV)
     {
-      Driver("wglEnumerateVideoDevicesNV","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglEnumerateVideoDevicesNV(hDC, phDeviceList);
+      Driver("wglEnumerateVideoDevicesNV","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglEnumerateVideoDevicesNV not available." );
@@ -29618,11 +29669,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryCurrentContextNV==wglQueryCurrentContextNV)
         dispatchTableGlobal.wglQueryCurrentContextNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryCurrentContextNV)
     {
-      Driver("wglQueryCurrentContextNV","(", iAttribute, ")");
       ret = dispatchTableGlobal.wglQueryCurrentContextNV(iAttribute, piValue);
+      Driver("wglQueryCurrentContextNV","(", iAttribute, ")", " returned ", ret);
     }
     else
       Warning( "wglQueryCurrentContextNV not available." );
@@ -29641,11 +29692,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBindSwapBarrierNV==wglBindSwapBarrierNV)
         dispatchTableGlobal.wglBindSwapBarrierNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglBindSwapBarrierNV)
     {
-      Driver("wglBindSwapBarrierNV","(", group, ", ", barrier, ")");
       ret = dispatchTableGlobal.wglBindSwapBarrierNV(group, barrier);
+      Driver("wglBindSwapBarrierNV","(", group, ", ", barrier, ")", " returned ", ret);
     }
     else
       Warning( "wglBindSwapBarrierNV not available." );
@@ -29662,11 +29713,11 @@ extern "C" {
       if (dispatchTableGlobal.wglJoinSwapGroupNV==wglJoinSwapGroupNV)
         dispatchTableGlobal.wglJoinSwapGroupNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglJoinSwapGroupNV)
     {
-      Driver("wglJoinSwapGroupNV","(", boost::print::optional(hDC,Logging::pointers), ", ", group, ")");
       ret = dispatchTableGlobal.wglJoinSwapGroupNV(hDC, group);
+      Driver("wglJoinSwapGroupNV","(", boost::print::optional(hDC,Logging::pointers), ", ", group, ")", " returned ", ret);
     }
     else
       Warning( "wglJoinSwapGroupNV not available." );
@@ -29683,11 +29734,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryFrameCountNV==wglQueryFrameCountNV)
         dispatchTableGlobal.wglQueryFrameCountNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryFrameCountNV)
     {
-      Driver("wglQueryFrameCountNV","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglQueryFrameCountNV(hDC, count);
+      Driver("wglQueryFrameCountNV","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglQueryFrameCountNV not available." );
@@ -29704,11 +29755,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryMaxSwapGroupsNV==wglQueryMaxSwapGroupsNV)
         dispatchTableGlobal.wglQueryMaxSwapGroupsNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryMaxSwapGroupsNV)
     {
-      Driver("wglQueryMaxSwapGroupsNV","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
+      Driver("wglQueryMaxSwapGroupsNV","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglQueryMaxSwapGroupsNV not available." );
@@ -29725,11 +29776,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQuerySwapGroupNV==wglQuerySwapGroupNV)
         dispatchTableGlobal.wglQuerySwapGroupNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQuerySwapGroupNV)
     {
-      Driver("wglQuerySwapGroupNV","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglQuerySwapGroupNV(hDC, group, barrier);
+      Driver("wglQuerySwapGroupNV","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglQuerySwapGroupNV not available." );
@@ -29746,11 +29797,11 @@ extern "C" {
       if (dispatchTableGlobal.wglResetFrameCountNV==wglResetFrameCountNV)
         dispatchTableGlobal.wglResetFrameCountNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglResetFrameCountNV)
     {
-      Driver("wglResetFrameCountNV","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglResetFrameCountNV(hDC);
+      Driver("wglResetFrameCountNV","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglResetFrameCountNV not available." );
@@ -29772,8 +29823,8 @@ extern "C" {
     void * ret = NULL;
     if (dispatchTableGlobal.wglAllocateMemoryNV)
     {
-      Driver("wglAllocateMemoryNV","(", size, ", ", readfreq, ", ", writefreq, ", ", priority, ")");
       ret = dispatchTableGlobal.wglAllocateMemoryNV(size, readfreq, writefreq, priority);
+      Driver("wglAllocateMemoryNV","(", size, ", ", readfreq, ", ", writefreq, ", ", priority, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglAllocateMemoryNV not available." );
@@ -29792,8 +29843,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.wglFreeMemoryNV)
     {
-      Driver("wglFreeMemoryNV","(", boost::print::optional(pointer,Logging::pointers), ")");
       dispatchTableGlobal.wglFreeMemoryNV(pointer);
+      Driver("wglFreeMemoryNV","(", boost::print::optional(pointer,Logging::pointers), ")");
     }
     else
       Warning( "wglFreeMemoryNV not available." );
@@ -29811,11 +29862,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBindVideoCaptureDeviceNV==wglBindVideoCaptureDeviceNV)
         dispatchTableGlobal.wglBindVideoCaptureDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglBindVideoCaptureDeviceNV)
     {
-      Driver("wglBindVideoCaptureDeviceNV","(", uVideoSlot, ", ", boost::print::optional(hDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
+      Driver("wglBindVideoCaptureDeviceNV","(", uVideoSlot, ", ", boost::print::optional(hDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglBindVideoCaptureDeviceNV not available." );
@@ -29832,11 +29883,11 @@ extern "C" {
       if (dispatchTableGlobal.wglEnumerateVideoCaptureDevicesNV==wglEnumerateVideoCaptureDevicesNV)
         dispatchTableGlobal.wglEnumerateVideoCaptureDevicesNV = NULL;
     }
-    UINT  ret = (UINT )0;
+    UINT ret = 0;
     if (dispatchTableGlobal.wglEnumerateVideoCaptureDevicesNV)
     {
-      Driver("wglEnumerateVideoCaptureDevicesNV","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglEnumerateVideoCaptureDevicesNV(hDC, phDeviceList);
+      Driver("wglEnumerateVideoCaptureDevicesNV","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglEnumerateVideoCaptureDevicesNV not available." );
@@ -29853,11 +29904,11 @@ extern "C" {
       if (dispatchTableGlobal.wglLockVideoCaptureDeviceNV==wglLockVideoCaptureDeviceNV)
         dispatchTableGlobal.wglLockVideoCaptureDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglLockVideoCaptureDeviceNV)
     {
-      Driver("wglLockVideoCaptureDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglLockVideoCaptureDeviceNV(hDC, hDevice);
+      Driver("wglLockVideoCaptureDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglLockVideoCaptureDeviceNV not available." );
@@ -29874,11 +29925,11 @@ extern "C" {
       if (dispatchTableGlobal.wglQueryVideoCaptureDeviceNV==wglQueryVideoCaptureDeviceNV)
         dispatchTableGlobal.wglQueryVideoCaptureDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglQueryVideoCaptureDeviceNV)
     {
-      Driver("wglQueryVideoCaptureDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hDevice,Logging::pointers), ", ", iAttribute, ")");
       ret = dispatchTableGlobal.wglQueryVideoCaptureDeviceNV(hDC, hDevice, iAttribute, piValue);
+      Driver("wglQueryVideoCaptureDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hDevice,Logging::pointers), ", ", iAttribute, ")", " returned ", ret);
     }
     else
       Warning( "wglQueryVideoCaptureDeviceNV not available." );
@@ -29895,11 +29946,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleaseVideoCaptureDeviceNV==wglReleaseVideoCaptureDeviceNV)
         dispatchTableGlobal.wglReleaseVideoCaptureDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglReleaseVideoCaptureDeviceNV)
     {
-      Driver("wglReleaseVideoCaptureDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglReleaseVideoCaptureDeviceNV(hDC, hDevice);
+      Driver("wglReleaseVideoCaptureDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglReleaseVideoCaptureDeviceNV not available." );
@@ -29918,11 +29969,11 @@ extern "C" {
       if (dispatchTableGlobal.wglBindVideoImageNV==wglBindVideoImageNV)
         dispatchTableGlobal.wglBindVideoImageNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglBindVideoImageNV)
     {
-      Driver("wglBindVideoImageNV","(", boost::print::optional(hVideoDevice,Logging::pointers), ", ", boost::print::optional(hPbuffer,Logging::pointers), ", ", iVideoBuffer, ")");
       ret = dispatchTableGlobal.wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
+      Driver("wglBindVideoImageNV","(", boost::print::optional(hVideoDevice,Logging::pointers), ", ", boost::print::optional(hPbuffer,Logging::pointers), ", ", iVideoBuffer, ")", " returned ", ret);
     }
     else
       Warning( "wglBindVideoImageNV not available." );
@@ -29939,11 +29990,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetVideoDeviceNV==wglGetVideoDeviceNV)
         dispatchTableGlobal.wglGetVideoDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetVideoDeviceNV)
     {
-      Driver("wglGetVideoDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", numDevices, ")");
       ret = dispatchTableGlobal.wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
+      Driver("wglGetVideoDeviceNV","(", boost::print::optional(hDC,Logging::pointers), ", ", numDevices, ")", " returned ", ret);
     }
     else
       Warning( "wglGetVideoDeviceNV not available." );
@@ -29960,11 +30011,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetVideoInfoNV==wglGetVideoInfoNV)
         dispatchTableGlobal.wglGetVideoInfoNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetVideoInfoNV)
     {
-      Driver("wglGetVideoInfoNV","(", boost::print::optional(hpVideoDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+      Driver("wglGetVideoInfoNV","(", boost::print::optional(hpVideoDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetVideoInfoNV not available." );
@@ -29981,11 +30032,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleaseVideoDeviceNV==wglReleaseVideoDeviceNV)
         dispatchTableGlobal.wglReleaseVideoDeviceNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglReleaseVideoDeviceNV)
     {
-      Driver("wglReleaseVideoDeviceNV","(", boost::print::optional(hVideoDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglReleaseVideoDeviceNV(hVideoDevice);
+      Driver("wglReleaseVideoDeviceNV","(", boost::print::optional(hVideoDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglReleaseVideoDeviceNV not available." );
@@ -30002,11 +30053,11 @@ extern "C" {
       if (dispatchTableGlobal.wglReleaseVideoImageNV==wglReleaseVideoImageNV)
         dispatchTableGlobal.wglReleaseVideoImageNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglReleaseVideoImageNV)
     {
-      Driver("wglReleaseVideoImageNV","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iVideoBuffer, ")");
       ret = dispatchTableGlobal.wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
+      Driver("wglReleaseVideoImageNV","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iVideoBuffer, ")", " returned ", ret);
     }
     else
       Warning( "wglReleaseVideoImageNV not available." );
@@ -30023,11 +30074,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSendPbufferToVideoNV==wglSendPbufferToVideoNV)
         dispatchTableGlobal.wglSendPbufferToVideoNV = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSendPbufferToVideoNV)
     {
-      Driver("wglSendPbufferToVideoNV","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iBufferType, ", ", bBlock, ")");
       ret = dispatchTableGlobal.wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
+      Driver("wglSendPbufferToVideoNV","(", boost::print::optional(hPbuffer,Logging::pointers), ", ", iBufferType, ", ", bBlock, ")", " returned ", ret);
     }
     else
       Warning( "wglSendPbufferToVideoNV not available." );
@@ -30046,11 +30097,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetMscRateOML==wglGetMscRateOML)
         dispatchTableGlobal.wglGetMscRateOML = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetMscRateOML)
     {
-      Driver("wglGetMscRateOML","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetMscRateOML(hDC, numerator, denominator);
+      Driver("wglGetMscRateOML","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetMscRateOML not available." );
@@ -30067,11 +30118,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetSyncValuesOML==wglGetSyncValuesOML)
         dispatchTableGlobal.wglGetSyncValuesOML = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglGetSyncValuesOML)
     {
-      Driver("wglGetSyncValuesOML","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglGetSyncValuesOML(hDC, ust, msc, sbc);
+      Driver("wglGetSyncValuesOML","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglGetSyncValuesOML not available." );
@@ -30088,11 +30139,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSwapBuffersMscOML==wglSwapBuffersMscOML)
         dispatchTableGlobal.wglSwapBuffersMscOML = NULL;
     }
-    INT64  ret = (INT64 )0;
+    INT64 ret = 0;
     if (dispatchTableGlobal.wglSwapBuffersMscOML)
     {
-      Driver("wglSwapBuffersMscOML","(", boost::print::optional(hDC,Logging::pointers), ", ", target_msc, ", ", divisor, ", ", remainder, ")");
       ret = dispatchTableGlobal.wglSwapBuffersMscOML(hDC, target_msc, divisor, remainder);
+      Driver("wglSwapBuffersMscOML","(", boost::print::optional(hDC,Logging::pointers), ", ", target_msc, ", ", divisor, ", ", remainder, ")", " returned ", ret);
     }
     else
       Warning( "wglSwapBuffersMscOML not available." );
@@ -30109,11 +30160,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSwapLayerBuffersMscOML==wglSwapLayerBuffersMscOML)
         dispatchTableGlobal.wglSwapLayerBuffersMscOML = NULL;
     }
-    INT64  ret = (INT64 )0;
+    INT64 ret = 0;
     if (dispatchTableGlobal.wglSwapLayerBuffersMscOML)
     {
-      Driver("wglSwapLayerBuffersMscOML","(", boost::print::optional(hDC,Logging::pointers), ", ", fuPlanes, ", ", target_msc, ", ", divisor, ", ", remainder, ")");
       ret = dispatchTableGlobal.wglSwapLayerBuffersMscOML(hDC, fuPlanes, target_msc, divisor, remainder);
+      Driver("wglSwapLayerBuffersMscOML","(", boost::print::optional(hDC,Logging::pointers), ", ", fuPlanes, ", ", target_msc, ", ", divisor, ", ", remainder, ")", " returned ", ret);
     }
     else
       Warning( "wglSwapLayerBuffersMscOML not available." );
@@ -30130,11 +30181,11 @@ extern "C" {
       if (dispatchTableGlobal.wglWaitForMscOML==wglWaitForMscOML)
         dispatchTableGlobal.wglWaitForMscOML = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglWaitForMscOML)
     {
-      Driver("wglWaitForMscOML","(", boost::print::optional(hDC,Logging::pointers), ", ", target_msc, ", ", divisor, ", ", remainder, ")");
       ret = dispatchTableGlobal.wglWaitForMscOML(hDC, target_msc, divisor, remainder, ust, msc, sbc);
+      Driver("wglWaitForMscOML","(", boost::print::optional(hDC,Logging::pointers), ", ", target_msc, ", ", divisor, ", ", remainder, ")", " returned ", ret);
     }
     else
       Warning( "wglWaitForMscOML not available." );
@@ -30151,11 +30202,11 @@ extern "C" {
       if (dispatchTableGlobal.wglWaitForSbcOML==wglWaitForSbcOML)
         dispatchTableGlobal.wglWaitForSbcOML = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglWaitForSbcOML)
     {
-      Driver("wglWaitForSbcOML","(", boost::print::optional(hDC,Logging::pointers), ", ", target_sbc, ")");
       ret = dispatchTableGlobal.wglWaitForSbcOML(hDC, target_sbc, ust, msc, sbc);
+      Driver("wglWaitForSbcOML","(", boost::print::optional(hDC,Logging::pointers), ", ", target_sbc, ")", " returned ", ret);
     }
     else
       Warning( "wglWaitForSbcOML not available." );
@@ -30174,11 +30225,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCopyContext==wglCopyContext)
         dispatchTableGlobal.wglCopyContext = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglCopyContext)
     {
-      Driver("wglCopyContext","(", boost::print::optional(hglrcSrc,Logging::pointers), ", ", boost::print::optional(hglrcDst,Logging::pointers), ", ", mask, ")");
       ret = dispatchTableGlobal.wglCopyContext(hglrcSrc, hglrcDst, mask);
+      Driver("wglCopyContext","(", boost::print::optional(hglrcSrc,Logging::pointers), ", ", boost::print::optional(hglrcDst,Logging::pointers), ", ", mask, ")", " returned ", ret);
     }
     else
       Warning( "wglCopyContext not available." );
@@ -30195,11 +30246,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateContext==wglCreateContext)
         dispatchTableGlobal.wglCreateContext = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglCreateContext)
     {
-      Driver("wglCreateContext","(", boost::print::optional(hDC,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglCreateContext(hDC);
+      Driver("wglCreateContext","(", boost::print::optional(hDC,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateContext not available." );
@@ -30216,11 +30267,11 @@ extern "C" {
       if (dispatchTableGlobal.wglCreateLayerContext==wglCreateLayerContext)
         dispatchTableGlobal.wglCreateLayerContext = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglCreateLayerContext)
     {
-      Driver("wglCreateLayerContext","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ")");
       ret = dispatchTableGlobal.wglCreateLayerContext(hDC, iLayerPlane);
+      Driver("wglCreateLayerContext","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglCreateLayerContext not available." );
@@ -30237,11 +30288,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDeleteContext==wglDeleteContext)
         dispatchTableGlobal.wglDeleteContext = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDeleteContext)
     {
-      Driver("wglDeleteContext","(", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglDeleteContext(hglrc);
+      Driver("wglDeleteContext","(", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
       Init::destroyContext(RegalSystemContext(hglrc));
     }
     else
@@ -30259,11 +30310,11 @@ extern "C" {
       if (dispatchTableGlobal.wglDescribeLayerPlane==wglDescribeLayerPlane)
         dispatchTableGlobal.wglDescribeLayerPlane = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglDescribeLayerPlane)
     {
-      Driver("wglDescribeLayerPlane","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nBytes, ")");
       ret = dispatchTableGlobal.wglDescribeLayerPlane(hDC, iPixelFormat, iLayerPlane, nBytes, plpd);
+      Driver("wglDescribeLayerPlane","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", iLayerPlane, ", ", nBytes, ")", " returned ", ret);
     }
     else
       Warning( "wglDescribeLayerPlane not available." );
@@ -30280,11 +30331,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetCurrentContext==wglGetCurrentContext)
         dispatchTableGlobal.wglGetCurrentContext = NULL;
     }
-    HGLRC  ret = (HGLRC )0;
+    HGLRC ret = NULL;
     if (dispatchTableGlobal.wglGetCurrentContext)
     {
-      Driver("wglGetCurrentContext","()");
       ret = dispatchTableGlobal.wglGetCurrentContext();
+      Driver("wglGetCurrentContext","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetCurrentContext not available." );
@@ -30301,11 +30352,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetCurrentDC==wglGetCurrentDC)
         dispatchTableGlobal.wglGetCurrentDC = NULL;
     }
-    HDC  ret = (HDC )0;
+    HDC ret = NULL;
     if (dispatchTableGlobal.wglGetCurrentDC)
     {
-      Driver("wglGetCurrentDC","()");
       ret = dispatchTableGlobal.wglGetCurrentDC();
+      Driver("wglGetCurrentDC","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "wglGetCurrentDC not available." );
@@ -30322,11 +30373,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetDefaultProcAddress==wglGetDefaultProcAddress)
         dispatchTableGlobal.wglGetDefaultProcAddress = NULL;
     }
-    PROC  ret = (PROC )0;
+    PROC ret = NULL;
     if (dispatchTableGlobal.wglGetDefaultProcAddress)
     {
-      Driver("wglGetDefaultProcAddress","(", boost::print::quote(lpszProc,'"'), ")");
       ret = dispatchTableGlobal.wglGetDefaultProcAddress(lpszProc);
+      Driver("wglGetDefaultProcAddress","(", boost::print::quote(lpszProc,'"'), ")", " returned ", ret);
     }
     else
       Warning( "wglGetDefaultProcAddress not available." );
@@ -30343,11 +30394,11 @@ extern "C" {
       if (dispatchTableGlobal.wglGetLayerPaletteEntries==wglGetLayerPaletteEntries)
         dispatchTableGlobal.wglGetLayerPaletteEntries = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglGetLayerPaletteEntries)
     {
-      Driver("wglGetLayerPaletteEntries","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", iStart, ", ", nEntries, ")");
       ret = dispatchTableGlobal.wglGetLayerPaletteEntries(hDC, iLayerPlane, iStart, nEntries, pcr);
+      Driver("wglGetLayerPaletteEntries","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", iStart, ", ", nEntries, ")", " returned ", ret);
     }
     else
       Warning( "wglGetLayerPaletteEntries not available." );
@@ -30364,7 +30415,7 @@ extern "C" {
       if (dispatchTableGlobal.wglGetProcAddress==wglGetProcAddress)
         dispatchTableGlobal.wglGetProcAddress = NULL;
     }
-    PROC  ret = (PROC )0;
+    PROC ret = NULL;
     RegalAssert(dispatchTableGlobal.wglGetProcAddress);
     PROC drvproc = ret = dispatchTableGlobal.wglGetProcAddress(lpszProc);
     if (!ret)
@@ -30374,8 +30425,8 @@ extern "C" {
       return ret;
     if (dispatchTableGlobal.wglGetProcAddress)
     {
-      Driver("wglGetProcAddress","(", boost::print::quote(lpszProc,'"'), ")");
       ret = dispatchTableGlobal.wglGetProcAddress(lpszProc);
+      Driver("wglGetProcAddress","(", boost::print::quote(lpszProc,'"'), ")", " returned ", ret);
     }
     else
       Warning( "wglGetProcAddress not available." );
@@ -30395,11 +30446,11 @@ extern "C" {
       if (dispatchTableGlobal.wglMakeCurrent==wglMakeCurrent)
         dispatchTableGlobal.wglMakeCurrent = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglMakeCurrent)
     {
-      Driver("wglMakeCurrent","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hglrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglMakeCurrent(hDC, hglrc);
+      Driver("wglMakeCurrent","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(hglrc,Logging::pointers), ")", " returned ", ret);
       Init::makeCurrent(RegalSystemContext(hglrc));
     }
     else
@@ -30417,11 +30468,11 @@ extern "C" {
       if (dispatchTableGlobal.wglRealizeLayerPalette==wglRealizeLayerPalette)
         dispatchTableGlobal.wglRealizeLayerPalette = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglRealizeLayerPalette)
     {
-      Driver("wglRealizeLayerPalette","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", bRealize, ")");
       ret = dispatchTableGlobal.wglRealizeLayerPalette(hDC, iLayerPlane, bRealize);
+      Driver("wglRealizeLayerPalette","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", bRealize, ")", " returned ", ret);
     }
     else
       Warning( "wglRealizeLayerPalette not available." );
@@ -30438,11 +30489,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSetLayerPaletteEntries==wglSetLayerPaletteEntries)
         dispatchTableGlobal.wglSetLayerPaletteEntries = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.wglSetLayerPaletteEntries)
     {
-      Driver("wglSetLayerPaletteEntries","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", iStart, ", ", nEntries, ", ", boost::print::array(pcr,nEntries), ")");
       ret = dispatchTableGlobal.wglSetLayerPaletteEntries(hDC, iLayerPlane, iStart, nEntries, pcr);
+      Driver("wglSetLayerPaletteEntries","(", boost::print::optional(hDC,Logging::pointers), ", ", iLayerPlane, ", ", iStart, ", ", nEntries, ", ", boost::print::array(pcr,nEntries), ")", " returned ", ret);
     }
     else
       Warning( "wglSetLayerPaletteEntries not available." );
@@ -30459,14 +30510,16 @@ extern "C" {
       if (dispatchTableGlobal.wglShareLists==wglShareLists)
         dispatchTableGlobal.wglShareLists = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglShareLists)
     {
-      Driver("wglShareLists","(", boost::print::optional(hglrcShare,Logging::pointers), ", ", boost::print::optional(hglrcSrc,Logging::pointers), ")");
       ret = dispatchTableGlobal.wglShareLists(hglrcShare, hglrcSrc);
+      Driver("wglShareLists","(", boost::print::optional(hglrcShare,Logging::pointers), ", ", boost::print::optional(hglrcSrc,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "wglShareLists not available." );
+    if (ret && hglrcShare && hglrcSrc)
+      Init::shareContext(hglrcShare,hglrcSrc);
     return ret;
   }
 
@@ -30480,11 +30533,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSwapLayerBuffers==wglSwapLayerBuffers)
         dispatchTableGlobal.wglSwapLayerBuffers = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglSwapLayerBuffers)
     {
-      Driver("wglSwapLayerBuffers","(", boost::print::optional(hDC,Logging::pointers), ", ", fuPlanes, ")");
       ret = dispatchTableGlobal.wglSwapLayerBuffers(hDC, fuPlanes);
+      Driver("wglSwapLayerBuffers","(", boost::print::optional(hDC,Logging::pointers), ", ", fuPlanes, ")", " returned ", ret);
     }
     else
       Warning( "wglSwapLayerBuffers not available." );
@@ -30501,11 +30554,11 @@ extern "C" {
       if (dispatchTableGlobal.wglSwapMultipleBuffers==wglSwapMultipleBuffers)
         dispatchTableGlobal.wglSwapMultipleBuffers = NULL;
     }
-    DWORD  ret = (DWORD )0;
+    DWORD ret = 0;
     if (dispatchTableGlobal.wglSwapMultipleBuffers)
     {
-      Driver("wglSwapMultipleBuffers","(", n, ", ", ps, ")");
       ret = dispatchTableGlobal.wglSwapMultipleBuffers(n, ps);
+      Driver("wglSwapMultipleBuffers","(", n, ", ", ps, ")", " returned ", ret);
     }
     else
       Warning( "wglSwapMultipleBuffers not available." );
@@ -30522,11 +30575,11 @@ extern "C" {
       if (dispatchTableGlobal.wglUseFontBitmapsA==wglUseFontBitmapsA)
         dispatchTableGlobal.wglUseFontBitmapsA = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglUseFontBitmapsA)
     {
-      Driver("wglUseFontBitmapsA","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ")");
       ret = dispatchTableGlobal.wglUseFontBitmapsA(hDC, first, count, listBase);
+      Driver("wglUseFontBitmapsA","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ")", " returned ", ret);
     }
     else
       Warning( "wglUseFontBitmapsA not available." );
@@ -30543,11 +30596,11 @@ extern "C" {
       if (dispatchTableGlobal.wglUseFontBitmapsW==wglUseFontBitmapsW)
         dispatchTableGlobal.wglUseFontBitmapsW = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglUseFontBitmapsW)
     {
-      Driver("wglUseFontBitmapsW","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ")");
       ret = dispatchTableGlobal.wglUseFontBitmapsW(hDC, first, count, listBase);
+      Driver("wglUseFontBitmapsW","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ")", " returned ", ret);
     }
     else
       Warning( "wglUseFontBitmapsW not available." );
@@ -30564,11 +30617,11 @@ extern "C" {
       if (dispatchTableGlobal.wglUseFontOutlinesA==wglUseFontOutlinesA)
         dispatchTableGlobal.wglUseFontOutlinesA = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglUseFontOutlinesA)
     {
-      Driver("wglUseFontOutlinesA","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ")");
       ret = dispatchTableGlobal.wglUseFontOutlinesA(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+      Driver("wglUseFontOutlinesA","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ")", " returned ", ret);
     }
     else
       Warning( "wglUseFontOutlinesA not available." );
@@ -30585,11 +30638,11 @@ extern "C" {
       if (dispatchTableGlobal.wglUseFontOutlinesW==wglUseFontOutlinesW)
         dispatchTableGlobal.wglUseFontOutlinesW = NULL;
     }
-    BOOL  ret = (BOOL )0;
+    BOOL ret = 0;
     if (dispatchTableGlobal.wglUseFontOutlinesW)
     {
-      Driver("wglUseFontOutlinesW","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ")");
       ret = dispatchTableGlobal.wglUseFontOutlinesW(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+      Driver("wglUseFontOutlinesW","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ")", " returned ", ret);
     }
     else
       Warning( "wglUseFontOutlinesW not available." );
@@ -30614,8 +30667,8 @@ extern "C" {
     XVisualInfo * ret = NULL;
     if (dispatchTableGlobal.glXChooseVisual)
     {
-      Driver("glXChooseVisual","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXChooseVisual(dpy, screen, attribList);
+      Driver("glXChooseVisual","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attribList,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXChooseVisual not available." );
@@ -30634,8 +30687,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXCopyContext)
     {
-      Driver("glXCopyContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(src,Logging::pointers), ", ", boost::print::optional(dst,Logging::pointers), ", ", mask, ")");
       dispatchTableGlobal.glXCopyContext(dpy, src, dst, mask);
+      Driver("glXCopyContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(src,Logging::pointers), ", ", boost::print::optional(dst,Logging::pointers), ", ", mask, ")");
     }
     else
       Warning( "glXCopyContext not available." );
@@ -30651,11 +30704,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateContext==glXCreateContext)
         dispatchTableGlobal.glXCreateContext = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXCreateContext)
     {
-      Driver("glXCreateContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ", ", boost::print::optional(shareList,Logging::pointers), ", ", direct, ")");
       ret = dispatchTableGlobal.glXCreateContext(dpy, vis, shareList, direct);
+      Driver("glXCreateContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ", ", boost::print::optional(shareList,Logging::pointers), ", ", direct, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateContext not available." );
@@ -30674,11 +30727,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateGLXPixmap==glXCreateGLXPixmap)
         dispatchTableGlobal.glXCreateGLXPixmap = NULL;
     }
-    GLXPixmap  ret = (GLXPixmap )0;
+    GLXPixmap ret = 0;
     if (dispatchTableGlobal.glXCreateGLXPixmap)
     {
-      Driver("glXCreateGLXPixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateGLXPixmap(dpy, vis, pixmap);
+      Driver("glXCreateGLXPixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateGLXPixmap not available." );
@@ -30697,8 +30750,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDestroyContext)
     {
-      Driver("glXDestroyContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")");
       dispatchTableGlobal.glXDestroyContext(dpy, ctx);
+      Driver("glXDestroyContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")");
       Init::destroyContext(RegalSystemContext(ctx));
     }
     else
@@ -30717,8 +30770,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDestroyGLXPixmap)
     {
-      Driver("glXDestroyGLXPixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pix,Logging::pointers), ")");
       dispatchTableGlobal.glXDestroyGLXPixmap(dpy, pix);
+      Driver("glXDestroyGLXPixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pix,Logging::pointers), ")");
     }
     else
       Warning( "glXDestroyGLXPixmap not available." );
@@ -30734,11 +30787,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetConfig==glXGetConfig)
         dispatchTableGlobal.glXGetConfig = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetConfig)
     {
-      Driver("glXGetConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ", ", attrib, ")");
       ret = dispatchTableGlobal.glXGetConfig(dpy, vis, attrib, value);
+      Driver("glXGetConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ", ", attrib, ")", " returned ", ret);
     }
     else
       Warning( "glXGetConfig not available." );
@@ -30755,11 +30808,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetCurrentContext==glXGetCurrentContext)
         dispatchTableGlobal.glXGetCurrentContext = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXGetCurrentContext)
     {
-      Driver("glXGetCurrentContext","()");
       ret = dispatchTableGlobal.glXGetCurrentContext();
+      Driver("glXGetCurrentContext","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetCurrentContext not available." );
@@ -30776,11 +30829,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetCurrentDrawable==glXGetCurrentDrawable)
         dispatchTableGlobal.glXGetCurrentDrawable = NULL;
     }
-    GLXDrawable  ret = (GLXDrawable )0;
+    GLXDrawable ret = (GLXDrawable) 0;
     if (dispatchTableGlobal.glXGetCurrentDrawable)
     {
-      Driver("glXGetCurrentDrawable","()");
       ret = dispatchTableGlobal.glXGetCurrentDrawable();
+      Driver("glXGetCurrentDrawable","()", " returned ", ret);
     }
     else
       Warning( "glXGetCurrentDrawable not available." );
@@ -30797,11 +30850,11 @@ extern "C" {
       if (dispatchTableGlobal.glXIsDirect==glXIsDirect)
         dispatchTableGlobal.glXIsDirect = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXIsDirect)
     {
-      Driver("glXIsDirect","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXIsDirect(dpy, ctx);
+      Driver("glXIsDirect","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXIsDirect not available." );
@@ -30818,7 +30871,7 @@ extern "C" {
       if (dispatchTableGlobal.glXMakeCurrent==glXMakeCurrent)
         dispatchTableGlobal.glXMakeCurrent = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     // Keep track of X11 Display and GLXDrawable for logging purposes.
     RegalContext *_context = REGAL_GET_CONTEXT();
     if (_context)
@@ -30828,8 +30881,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXMakeCurrent)
     {
-      Driver("glXMakeCurrent","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXMakeCurrent(dpy, drawable, ctx);
+      Driver("glXMakeCurrent","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
       Init::makeCurrent(RegalSystemContext(ctx));
     }
     else
@@ -30847,11 +30900,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryExtension==glXQueryExtension)
         dispatchTableGlobal.glXQueryExtension = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXQueryExtension)
     {
-      Driver("glXQueryExtension","(", boost::print::optional(dpy,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXQueryExtension(dpy, errorBase, eventBase);
+      Driver("glXQueryExtension","(", boost::print::optional(dpy,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXQueryExtension not available." );
@@ -30868,11 +30921,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryVersion==glXQueryVersion)
         dispatchTableGlobal.glXQueryVersion = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXQueryVersion)
     {
-      Driver("glXQueryVersion","(", boost::print::optional(dpy,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXQueryVersion(dpy, major, minor);
+      Driver("glXQueryVersion","(", boost::print::optional(dpy,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXQueryVersion not available." );
@@ -30901,8 +30954,8 @@ extern "C" {
         _context->frame->glXSwapBuffers(*_context);
     if (dispatchTableGlobal.glXSwapBuffers)
     {
-      Driver("glXSwapBuffers","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")");
       dispatchTableGlobal.glXSwapBuffers(dpy, drawable);
+      Driver("glXSwapBuffers","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")");
     }
     else
       Warning( "glXSwapBuffers not available." );
@@ -30920,8 +30973,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXUseXFont)
     {
-      Driver("glXUseXFont","(", boost::print::optional(font,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ")");
       dispatchTableGlobal.glXUseXFont(font, first, count, listBase);
+      Driver("glXUseXFont","(", boost::print::optional(font,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ")");
     }
     else
       Warning( "glXUseXFont not available." );
@@ -30939,8 +30992,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXWaitGL)
     {
-      Driver("glXWaitGL","()");
       dispatchTableGlobal.glXWaitGL();
+      Driver("glXWaitGL","()");
     }
     else
       Warning( "glXWaitGL not available." );
@@ -30958,8 +31011,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXWaitX)
     {
-      Driver("glXWaitX","()");
       dispatchTableGlobal.glXWaitX();
+      Driver("glXWaitX","()");
     }
     else
       Warning( "glXWaitX not available." );
@@ -30980,8 +31033,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.glXGetClientString)
     {
-      Driver("glXGetClientString","(", boost::print::optional(dpy,Logging::pointers), ", ", name, ")");
       ret = dispatchTableGlobal.glXGetClientString(dpy, name);
+      Driver("glXGetClientString","(", boost::print::optional(dpy,Logging::pointers), ", ", name, ")", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "glXGetClientString not available." );
@@ -31001,8 +31054,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.glXQueryExtensionsString)
     {
-      Driver("glXQueryExtensionsString","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXQueryExtensionsString(dpy, screen);
+      Driver("glXQueryExtensionsString","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "glXQueryExtensionsString not available." );
@@ -31022,8 +31075,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.glXQueryServerString)
     {
-      Driver("glXQueryServerString","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", name, ")");
       ret = dispatchTableGlobal.glXQueryServerString(dpy, screen, name);
+      Driver("glXQueryServerString","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", name, ")", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "glXQueryServerString not available." );
@@ -31045,8 +31098,8 @@ extern "C" {
     Display * ret = NULL;
     if (dispatchTableGlobal.glXGetCurrentDisplay)
     {
-      Driver("glXGetCurrentDisplay","()");
       ret = dispatchTableGlobal.glXGetCurrentDisplay();
+      Driver("glXGetCurrentDisplay","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetCurrentDisplay not available." );
@@ -31068,8 +31121,8 @@ extern "C" {
     GLXFBConfig * ret = NULL;
     if (dispatchTableGlobal.glXChooseFBConfig)
     {
-      Driver("glXChooseFBConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXChooseFBConfig(dpy, screen, attrib_list, nelements);
+      Driver("glXChooseFBConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXChooseFBConfig not available." );
@@ -31086,11 +31139,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateNewContext==glXCreateNewContext)
         dispatchTableGlobal.glXCreateNewContext = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXCreateNewContext)
     {
-      Driver("glXCreateNewContext","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", render_type, ", ", boost::print::optional(share_list,Logging::pointers), ", ", direct, ")");
       ret = dispatchTableGlobal.glXCreateNewContext(dpy, config, render_type, share_list, direct);
+      Driver("glXCreateNewContext","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", render_type, ", ", boost::print::optional(share_list,Logging::pointers), ", ", direct, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateNewContext not available." );
@@ -31109,11 +31162,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreatePbuffer==glXCreatePbuffer)
         dispatchTableGlobal.glXCreatePbuffer = NULL;
     }
-    GLXPbuffer  ret = (GLXPbuffer )0;
+    GLXPbuffer ret = 0;
     if (dispatchTableGlobal.glXCreatePbuffer)
     {
-      Driver("glXCreatePbuffer","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreatePbuffer(dpy, config, attrib_list);
+      Driver("glXCreatePbuffer","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreatePbuffer not available." );
@@ -31130,11 +31183,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreatePixmap==glXCreatePixmap)
         dispatchTableGlobal.glXCreatePixmap = NULL;
     }
-    GLXPixmap  ret = (GLXPixmap )0;
+    GLXPixmap ret = 0;
     if (dispatchTableGlobal.glXCreatePixmap)
     {
-      Driver("glXCreatePixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(pixmap,Logging::pointers), ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreatePixmap(dpy, config, pixmap, attrib_list);
+      Driver("glXCreatePixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(pixmap,Logging::pointers), ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreatePixmap not available." );
@@ -31151,11 +31204,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateWindow==glXCreateWindow)
         dispatchTableGlobal.glXCreateWindow = NULL;
     }
-    GLXWindow  ret = (GLXWindow )0;
+    GLXWindow ret = 0;
     if (dispatchTableGlobal.glXCreateWindow)
     {
-      Driver("glXCreateWindow","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", win, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateWindow(dpy, config, win, attrib_list);
+      Driver("glXCreateWindow","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", win, ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateWindow not available." );
@@ -31174,8 +31227,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDestroyPbuffer)
     {
-      Driver("glXDestroyPbuffer","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ")");
       dispatchTableGlobal.glXDestroyPbuffer(dpy, pbuf);
+      Driver("glXDestroyPbuffer","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ")");
     }
     else
       Warning( "glXDestroyPbuffer not available." );
@@ -31193,8 +31246,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDestroyPixmap)
     {
-      Driver("glXDestroyPixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ")");
       dispatchTableGlobal.glXDestroyPixmap(dpy, pixmap);
+      Driver("glXDestroyPixmap","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ")");
     }
     else
       Warning( "glXDestroyPixmap not available." );
@@ -31212,8 +31265,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDestroyWindow)
     {
-      Driver("glXDestroyWindow","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(win,Logging::pointers), ")");
       dispatchTableGlobal.glXDestroyWindow(dpy, win);
+      Driver("glXDestroyWindow","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(win,Logging::pointers), ")");
     }
     else
       Warning( "glXDestroyWindow not available." );
@@ -31229,11 +31282,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetCurrentReadDrawable==glXGetCurrentReadDrawable)
         dispatchTableGlobal.glXGetCurrentReadDrawable = NULL;
     }
-    GLXDrawable  ret = (GLXDrawable )0;
+    GLXDrawable ret = (GLXDrawable) 0;
     if (dispatchTableGlobal.glXGetCurrentReadDrawable)
     {
-      Driver("glXGetCurrentReadDrawable","()");
       ret = dispatchTableGlobal.glXGetCurrentReadDrawable();
+      Driver("glXGetCurrentReadDrawable","()", " returned ", ret);
     }
     else
       Warning( "glXGetCurrentReadDrawable not available." );
@@ -31250,11 +31303,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetFBConfigAttrib==glXGetFBConfigAttrib)
         dispatchTableGlobal.glXGetFBConfigAttrib = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetFBConfigAttrib)
     {
-      Driver("glXGetFBConfigAttrib","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", attribute, ")");
       ret = dispatchTableGlobal.glXGetFBConfigAttrib(dpy, config, attribute, value);
+      Driver("glXGetFBConfigAttrib","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", attribute, ")", " returned ", ret);
     }
     else
       Warning( "glXGetFBConfigAttrib not available." );
@@ -31274,8 +31327,8 @@ extern "C" {
     GLXFBConfig * ret = NULL;
     if (dispatchTableGlobal.glXGetFBConfigs)
     {
-      Driver("glXGetFBConfigs","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXGetFBConfigs(dpy, screen, nelements);
+      Driver("glXGetFBConfigs","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "glXGetFBConfigs not available." );
@@ -31294,8 +31347,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXGetSelectedEvent)
     {
-      Driver("glXGetSelectedEvent","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ")");
       dispatchTableGlobal.glXGetSelectedEvent(dpy, draw, event_mask);
+      Driver("glXGetSelectedEvent","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ")");
     }
     else
       Warning( "glXGetSelectedEvent not available." );
@@ -31314,8 +31367,8 @@ extern "C" {
     XVisualInfo * ret = NULL;
     if (dispatchTableGlobal.glXGetVisualFromFBConfig)
     {
-      Driver("glXGetVisualFromFBConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ")");
       ret = dispatchTableGlobal.glXGetVisualFromFBConfig(dpy, config);
+      Driver("glXGetVisualFromFBConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetVisualFromFBConfig not available." );
@@ -31332,11 +31385,11 @@ extern "C" {
       if (dispatchTableGlobal.glXMakeContextCurrent==glXMakeContextCurrent)
         dispatchTableGlobal.glXMakeContextCurrent = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXMakeContextCurrent)
     {
-      Driver("glXMakeContextCurrent","(", boost::print::optional(display,Logging::pointers), ", ", draw, ", ", read, ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXMakeContextCurrent(display, draw, read, ctx);
+      Driver("glXMakeContextCurrent","(", boost::print::optional(display,Logging::pointers), ", ", draw, ", ", read, ", ", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
       Init::makeCurrent(RegalSystemContext(ctx));
     }
     else
@@ -31354,11 +31407,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryContext==glXQueryContext)
         dispatchTableGlobal.glXQueryContext = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXQueryContext)
     {
-      Driver("glXQueryContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ", ", GLXenumToString(attribute), ")");
       ret = dispatchTableGlobal.glXQueryContext(dpy, ctx, attribute, value);
+      Driver("glXQueryContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ", ", GLXenumToString(attribute), ")", " returned ", ret);
     }
     else
       Warning( "glXQueryContext not available." );
@@ -31377,8 +31430,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXQueryDrawable)
     {
-      Driver("glXQueryDrawable","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", attribute, ")");
       dispatchTableGlobal.glXQueryDrawable(dpy, draw, attribute, value);
+      Driver("glXQueryDrawable","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", attribute, ")");
     }
     else
       Warning( "glXQueryDrawable not available." );
@@ -31396,8 +31449,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXSelectEvent)
     {
-      Driver("glXSelectEvent","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", event_mask, ")");
       dispatchTableGlobal.glXSelectEvent(dpy, draw, event_mask);
+      Driver("glXSelectEvent","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", event_mask, ")");
     }
     else
       Warning( "glXSelectEvent not available." );
@@ -31425,8 +31478,8 @@ extern "C" {
       return ret;
     if (dispatchTableGlobal.glXGetProcAddress)
     {
-      Driver("glXGetProcAddress","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")");
       ret = dispatchTableGlobal.glXGetProcAddress(procName);
+      Driver("glXGetProcAddress","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetProcAddress not available." );
@@ -31447,8 +31500,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXBlitContextFramebufferAMD)
     {
-      Driver("glXBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ")");
       dispatchTableGlobal.glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+      Driver("glXBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ")");
     }
     else
       Warning( "glXBlitContextFramebufferAMD not available." );
@@ -31464,11 +31517,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateAssociatedContextAMD==glXCreateAssociatedContextAMD)
         dispatchTableGlobal.glXCreateAssociatedContextAMD = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXCreateAssociatedContextAMD)
     {
-      Driver("glXCreateAssociatedContextAMD","(", id, ", ", boost::print::optional(share_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateAssociatedContextAMD(id, share_list);
+      Driver("glXCreateAssociatedContextAMD","(", id, ", ", boost::print::optional(share_list,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateAssociatedContextAMD not available." );
@@ -31485,11 +31538,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateAssociatedContextAttribsAMD==glXCreateAssociatedContextAttribsAMD)
         dispatchTableGlobal.glXCreateAssociatedContextAttribsAMD = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXCreateAssociatedContextAttribsAMD)
     {
-      Driver("glXCreateAssociatedContextAttribsAMD","(", id, ", ", boost::print::optional(share_context,Logging::pointers), ", ", boost::print::optional(attribList,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateAssociatedContextAttribsAMD(id, share_context, attribList);
+      Driver("glXCreateAssociatedContextAttribsAMD","(", id, ", ", boost::print::optional(share_context,Logging::pointers), ", ", boost::print::optional(attribList,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateAssociatedContextAttribsAMD not available." );
@@ -31506,11 +31559,11 @@ extern "C" {
       if (dispatchTableGlobal.glXDeleteAssociatedContextAMD==glXDeleteAssociatedContextAMD)
         dispatchTableGlobal.glXDeleteAssociatedContextAMD = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXDeleteAssociatedContextAMD)
     {
-      Driver("glXDeleteAssociatedContextAMD","(", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXDeleteAssociatedContextAMD(ctx);
+      Driver("glXDeleteAssociatedContextAMD","(", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXDeleteAssociatedContextAMD not available." );
@@ -31527,11 +31580,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetContextGPUIDAMD==glXGetContextGPUIDAMD)
         dispatchTableGlobal.glXGetContextGPUIDAMD = NULL;
     }
-    unsigned int  ret = (unsigned int )0;
+    unsigned int ret = (unsigned int) 0;
     if (dispatchTableGlobal.glXGetContextGPUIDAMD)
     {
-      Driver("glXGetContextGPUIDAMD","(", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXGetContextGPUIDAMD(ctx);
+      Driver("glXGetContextGPUIDAMD","(", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXGetContextGPUIDAMD not available." );
@@ -31548,11 +31601,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetCurrentAssociatedContextAMD==glXGetCurrentAssociatedContextAMD)
         dispatchTableGlobal.glXGetCurrentAssociatedContextAMD = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXGetCurrentAssociatedContextAMD)
     {
-      Driver("glXGetCurrentAssociatedContextAMD","()");
       ret = dispatchTableGlobal.glXGetCurrentAssociatedContextAMD();
+      Driver("glXGetCurrentAssociatedContextAMD","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetCurrentAssociatedContextAMD not available." );
@@ -31569,11 +31622,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetGPUIDsAMD==glXGetGPUIDsAMD)
         dispatchTableGlobal.glXGetGPUIDsAMD = NULL;
     }
-    unsigned int  ret = (unsigned int )0;
+    unsigned int ret = (unsigned int) 0;
     if (dispatchTableGlobal.glXGetGPUIDsAMD)
     {
-      Driver("glXGetGPUIDsAMD","(", maxCount, ", ", ids, ")");
       ret = dispatchTableGlobal.glXGetGPUIDsAMD(maxCount, ids);
+      Driver("glXGetGPUIDsAMD","(", maxCount, ", ", ids, ")", " returned ", ret);
     }
     else
       Warning( "glXGetGPUIDsAMD not available." );
@@ -31590,11 +31643,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetGPUInfoAMD==glXGetGPUInfoAMD)
         dispatchTableGlobal.glXGetGPUInfoAMD = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetGPUInfoAMD)
     {
-      Driver("glXGetGPUInfoAMD","(", id, ", ", property, ", ", toString(dataType), ", ", size, ", ", boost::print::optional(data,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXGetGPUInfoAMD(id, property, dataType, size, data);
+      Driver("glXGetGPUInfoAMD","(", id, ", ", property, ", ", toString(dataType), ", ", size, ", ", boost::print::optional(data,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXGetGPUInfoAMD not available." );
@@ -31611,11 +31664,11 @@ extern "C" {
       if (dispatchTableGlobal.glXMakeAssociatedContextCurrentAMD==glXMakeAssociatedContextCurrentAMD)
         dispatchTableGlobal.glXMakeAssociatedContextCurrentAMD = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXMakeAssociatedContextCurrentAMD)
     {
-      Driver("glXMakeAssociatedContextCurrentAMD","(", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXMakeAssociatedContextCurrentAMD(ctx);
+      Driver("glXMakeAssociatedContextCurrentAMD","(", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXMakeAssociatedContextCurrentAMD not available." );
@@ -31634,11 +31687,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateContextAttribsARB==glXCreateContextAttribsARB)
         dispatchTableGlobal.glXCreateContextAttribsARB = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXCreateContextAttribsARB)
     {
-      Driver("glXCreateContextAttribsARB","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(share_context,Logging::pointers), ", ", direct, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list);
+      Driver("glXCreateContextAttribsARB","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(share_context,Logging::pointers), ", ", direct, ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateContextAttribsARB not available." );
@@ -31668,8 +31721,8 @@ extern "C" {
       return ret;
     if (dispatchTableGlobal.glXGetProcAddressARB)
     {
-      Driver("glXGetProcAddressARB","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")");
       ret = dispatchTableGlobal.glXGetProcAddressARB(procName);
+      Driver("glXGetProcAddressARB","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetProcAddressARB not available." );
@@ -31690,8 +31743,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXBindTexImageATI)
     {
-      Driver("glXBindTexImageATI","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", buffer, ")");
       dispatchTableGlobal.glXBindTexImageATI(dpy, pbuf, buffer);
+      Driver("glXBindTexImageATI","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", buffer, ")");
     }
     else
       Warning( "glXBindTexImageATI not available." );
@@ -31709,8 +31762,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDrawableAttribATI)
     {
-      Driver("glXDrawableAttribATI","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       dispatchTableGlobal.glXDrawableAttribATI(dpy, draw, attrib_list);
+      Driver("glXDrawableAttribATI","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
     }
     else
       Warning( "glXDrawableAttribATI not available." );
@@ -31728,8 +31781,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXReleaseTexImageATI)
     {
-      Driver("glXReleaseTexImageATI","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", buffer, ")");
       dispatchTableGlobal.glXReleaseTexImageATI(dpy, pbuf, buffer);
+      Driver("glXReleaseTexImageATI","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", buffer, ")");
     }
     else
       Warning( "glXReleaseTexImageATI not available." );
@@ -31749,8 +31802,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXFreeContextEXT)
     {
-      Driver("glXFreeContextEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(context,Logging::pointers), ")");
       dispatchTableGlobal.glXFreeContextEXT(dpy, context);
+      Driver("glXFreeContextEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(context,Logging::pointers), ")");
     }
     else
       Warning( "glXFreeContextEXT not available." );
@@ -31766,11 +31819,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetContextIDEXT==glXGetContextIDEXT)
         dispatchTableGlobal.glXGetContextIDEXT = NULL;
     }
-    GLXContextID  ret = (GLXContextID )0;
+    GLXContextID ret = 0;
     if (dispatchTableGlobal.glXGetContextIDEXT)
     {
-      Driver("glXGetContextIDEXT","(", context, ")");
       ret = dispatchTableGlobal.glXGetContextIDEXT(context);
+      Driver("glXGetContextIDEXT","(", context, ")", " returned ", ret);
     }
     else
       Warning( "glXGetContextIDEXT not available." );
@@ -31787,11 +31840,11 @@ extern "C" {
       if (dispatchTableGlobal.glXImportContextEXT==glXImportContextEXT)
         dispatchTableGlobal.glXImportContextEXT = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXImportContextEXT)
     {
-      Driver("glXImportContextEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", contextID, ")");
       ret = dispatchTableGlobal.glXImportContextEXT(dpy, contextID);
+      Driver("glXImportContextEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", contextID, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXImportContextEXT not available." );
@@ -31808,11 +31861,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryContextInfoEXT==glXQueryContextInfoEXT)
         dispatchTableGlobal.glXQueryContextInfoEXT = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXQueryContextInfoEXT)
     {
-      Driver("glXQueryContextInfoEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(context,Logging::pointers), ", ", attribute, ")");
       ret = dispatchTableGlobal.glXQueryContextInfoEXT(dpy, context, attribute, value);
+      Driver("glXQueryContextInfoEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(context,Logging::pointers), ", ", attribute, ")", " returned ", ret);
     }
     else
       Warning( "glXQueryContextInfoEXT not available." );
@@ -31833,8 +31886,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXSwapIntervalEXT)
     {
-      Driver("glXSwapIntervalEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", interval, ")");
       dispatchTableGlobal.glXSwapIntervalEXT(dpy, drawable, interval);
+      Driver("glXSwapIntervalEXT","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", interval, ")");
     }
     else
       Warning( "glXSwapIntervalEXT not available." );
@@ -31854,8 +31907,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXBindTexImageEXT)
     {
-      Driver("glXBindTexImageEXT","(", boost::print::optional(display,Logging::pointers), ", ", drawable, ", ", buffer, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       dispatchTableGlobal.glXBindTexImageEXT(display, drawable, buffer, attrib_list);
+      Driver("glXBindTexImageEXT","(", boost::print::optional(display,Logging::pointers), ", ", drawable, ", ", buffer, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
     }
     else
       Warning( "glXBindTexImageEXT not available." );
@@ -31873,8 +31926,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXReleaseTexImageEXT)
     {
-      Driver("glXReleaseTexImageEXT","(", boost::print::optional(display,Logging::pointers), ", ", drawable, ", ", buffer, ")");
       dispatchTableGlobal.glXReleaseTexImageEXT(display, drawable, buffer);
+      Driver("glXReleaseTexImageEXT","(", boost::print::optional(display,Logging::pointers), ", ", drawable, ", ", buffer, ")");
     }
     else
       Warning( "glXReleaseTexImageEXT not available." );
@@ -31892,11 +31945,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetAGPOffsetMESA==glXGetAGPOffsetMESA)
         dispatchTableGlobal.glXGetAGPOffsetMESA = NULL;
     }
-    unsigned int  ret = (unsigned int )0;
+    unsigned int ret = (unsigned int) 0;
     if (dispatchTableGlobal.glXGetAGPOffsetMESA)
     {
-      Driver("glXGetAGPOffsetMESA","(", boost::print::optional(pointer,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXGetAGPOffsetMESA(pointer);
+      Driver("glXGetAGPOffsetMESA","(", boost::print::optional(pointer,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXGetAGPOffsetMESA not available." );
@@ -31917,8 +31970,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXCopySubBufferMESA)
     {
-      Driver("glXCopySubBufferMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", x, ", ", y, ", ", width, ", ", height, ")");
       dispatchTableGlobal.glXCopySubBufferMESA(dpy, drawable, x, y, width, height);
+      Driver("glXCopySubBufferMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", x, ", ", y, ", ", width, ", ", height, ")");
     }
     else
       Warning( "glXCopySubBufferMESA not available." );
@@ -31936,11 +31989,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateGLXPixmapMESA==glXCreateGLXPixmapMESA)
         dispatchTableGlobal.glXCreateGLXPixmapMESA = NULL;
     }
-    GLXPixmap  ret = (GLXPixmap )0;
+    GLXPixmap ret = 0;
     if (dispatchTableGlobal.glXCreateGLXPixmapMESA)
     {
-      Driver("glXCreateGLXPixmapMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(visual,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ", ", cmap, ")");
       ret = dispatchTableGlobal.glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap);
+      Driver("glXCreateGLXPixmapMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(visual,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ", ", cmap, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateGLXPixmapMESA not available." );
@@ -31959,11 +32012,11 @@ extern "C" {
       if (dispatchTableGlobal.glXReleaseBuffersMESA==glXReleaseBuffersMESA)
         dispatchTableGlobal.glXReleaseBuffersMESA = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXReleaseBuffersMESA)
     {
-      Driver("glXReleaseBuffersMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", d, ")");
       ret = dispatchTableGlobal.glXReleaseBuffersMESA(dpy, d);
+      Driver("glXReleaseBuffersMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", d, ")", " returned ", ret);
     }
     else
       Warning( "glXReleaseBuffersMESA not available." );
@@ -31982,11 +32035,11 @@ extern "C" {
       if (dispatchTableGlobal.glXSet3DfxModeMESA==glXSet3DfxModeMESA)
         dispatchTableGlobal.glXSet3DfxModeMESA = NULL;
     }
-    GLboolean  ret = (GLboolean )0;
+    GLboolean ret = GL_FALSE;
     if (dispatchTableGlobal.glXSet3DfxModeMESA)
     {
-      Driver("glXSet3DfxModeMESA","(", mode, ")");
       ret = dispatchTableGlobal.glXSet3DfxModeMESA(mode);
+      Driver("glXSet3DfxModeMESA","(", mode, ")", " returned ", toString(ret));
     }
     else
       Warning( "glXSet3DfxModeMESA not available." );
@@ -32005,11 +32058,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetSwapIntervalMESA==glXGetSwapIntervalMESA)
         dispatchTableGlobal.glXGetSwapIntervalMESA = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetSwapIntervalMESA)
     {
-      Driver("glXGetSwapIntervalMESA","()");
       ret = dispatchTableGlobal.glXGetSwapIntervalMESA();
+      Driver("glXGetSwapIntervalMESA","()", " returned ", ret);
     }
     else
       Warning( "glXGetSwapIntervalMESA not available." );
@@ -32026,11 +32079,11 @@ extern "C" {
       if (dispatchTableGlobal.glXSwapIntervalMESA==glXSwapIntervalMESA)
         dispatchTableGlobal.glXSwapIntervalMESA = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXSwapIntervalMESA)
     {
-      Driver("glXSwapIntervalMESA","(", interval, ")");
       ret = dispatchTableGlobal.glXSwapIntervalMESA(interval);
+      Driver("glXSwapIntervalMESA","(", interval, ")", " returned ", ret);
     }
     else
       Warning( "glXSwapIntervalMESA not available." );
@@ -32051,8 +32104,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXCopyImageSubDataNV)
     {
-      Driver("glXCopyImageSubDataNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(srcCtx,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(dstCtx,Logging::pointers), ")");
       dispatchTableGlobal.glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+      Driver("glXCopyImageSubDataNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(srcCtx,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(dstCtx,Logging::pointers), ")");
     }
     else
       Warning( "glXCopyImageSubDataNV not available." );
@@ -32070,11 +32123,11 @@ extern "C" {
       if (dispatchTableGlobal.glXBindVideoDeviceNV==glXBindVideoDeviceNV)
         dispatchTableGlobal.glXBindVideoDeviceNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXBindVideoDeviceNV)
     {
-      Driver("glXBindVideoDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", video_slot, ", ", video_device, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list);
+      Driver("glXBindVideoDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", video_slot, ", ", video_device, ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXBindVideoDeviceNV not available." );
@@ -32094,8 +32147,8 @@ extern "C" {
     unsigned int * ret = NULL;
     if (dispatchTableGlobal.glXEnumerateVideoDevicesNV)
     {
-      Driver("glXEnumerateVideoDevicesNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXEnumerateVideoDevicesNV(dpy, screen, nelements);
+      Driver("glXEnumerateVideoDevicesNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "glXEnumerateVideoDevicesNV not available." );
@@ -32114,11 +32167,11 @@ extern "C" {
       if (dispatchTableGlobal.glXBindSwapBarrierNV==glXBindSwapBarrierNV)
         dispatchTableGlobal.glXBindSwapBarrierNV = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXBindSwapBarrierNV)
     {
-      Driver("glXBindSwapBarrierNV","(", boost::print::optional(dpy,Logging::pointers), ", ", group, ", ", barrier, ")");
       ret = dispatchTableGlobal.glXBindSwapBarrierNV(dpy, group, barrier);
+      Driver("glXBindSwapBarrierNV","(", boost::print::optional(dpy,Logging::pointers), ", ", group, ", ", barrier, ")", " returned ", ret);
     }
     else
       Warning( "glXBindSwapBarrierNV not available." );
@@ -32135,11 +32188,11 @@ extern "C" {
       if (dispatchTableGlobal.glXJoinSwapGroupNV==glXJoinSwapGroupNV)
         dispatchTableGlobal.glXJoinSwapGroupNV = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXJoinSwapGroupNV)
     {
-      Driver("glXJoinSwapGroupNV","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", group, ")");
       ret = dispatchTableGlobal.glXJoinSwapGroupNV(dpy, drawable, group);
+      Driver("glXJoinSwapGroupNV","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", group, ")", " returned ", ret);
     }
     else
       Warning( "glXJoinSwapGroupNV not available." );
@@ -32156,11 +32209,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryFrameCountNV==glXQueryFrameCountNV)
         dispatchTableGlobal.glXQueryFrameCountNV = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXQueryFrameCountNV)
     {
-      Driver("glXQueryFrameCountNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXQueryFrameCountNV(dpy, screen, count);
+      Driver("glXQueryFrameCountNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "glXQueryFrameCountNV not available." );
@@ -32177,11 +32230,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryMaxSwapGroupsNV==glXQueryMaxSwapGroupsNV)
         dispatchTableGlobal.glXQueryMaxSwapGroupsNV = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXQueryMaxSwapGroupsNV)
     {
-      Driver("glXQueryMaxSwapGroupsNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers);
+      Driver("glXQueryMaxSwapGroupsNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "glXQueryMaxSwapGroupsNV not available." );
@@ -32198,11 +32251,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQuerySwapGroupNV==glXQuerySwapGroupNV)
         dispatchTableGlobal.glXQuerySwapGroupNV = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXQuerySwapGroupNV)
     {
-      Driver("glXQuerySwapGroupNV","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")");
       ret = dispatchTableGlobal.glXQuerySwapGroupNV(dpy, drawable, group, barrier);
+      Driver("glXQuerySwapGroupNV","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")", " returned ", ret);
     }
     else
       Warning( "glXQuerySwapGroupNV not available." );
@@ -32219,11 +32272,11 @@ extern "C" {
       if (dispatchTableGlobal.glXResetFrameCountNV==glXResetFrameCountNV)
         dispatchTableGlobal.glXResetFrameCountNV = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXResetFrameCountNV)
     {
-      Driver("glXResetFrameCountNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXResetFrameCountNV(dpy, screen);
+      Driver("glXResetFrameCountNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "glXResetFrameCountNV not available." );
@@ -32245,8 +32298,8 @@ extern "C" {
     void * ret = NULL;
     if (dispatchTableGlobal.glXAllocateMemoryNV)
     {
-      Driver("glXAllocateMemoryNV","(", size, ", ", readFrequency, ", ", writeFrequency, ", ", priority, ")");
       ret = dispatchTableGlobal.glXAllocateMemoryNV(size, readFrequency, writeFrequency, priority);
+      Driver("glXAllocateMemoryNV","(", size, ", ", readFrequency, ", ", writeFrequency, ", ", priority, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXAllocateMemoryNV not available." );
@@ -32265,8 +32318,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXFreeMemoryNV)
     {
-      Driver("glXFreeMemoryNV","(", boost::print::optional(pointer,Logging::pointers), ")");
       dispatchTableGlobal.glXFreeMemoryNV(pointer);
+      Driver("glXFreeMemoryNV","(", boost::print::optional(pointer,Logging::pointers), ")");
     }
     else
       Warning( "glXFreeMemoryNV not available." );
@@ -32284,11 +32337,11 @@ extern "C" {
       if (dispatchTableGlobal.glXBindVideoCaptureDeviceNV==glXBindVideoCaptureDeviceNV)
         dispatchTableGlobal.glXBindVideoCaptureDeviceNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXBindVideoCaptureDeviceNV)
     {
-      Driver("glXBindVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", video_capture_slot, ", ", device, ")");
       ret = dispatchTableGlobal.glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device);
+      Driver("glXBindVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", video_capture_slot, ", ", device, ")", " returned ", ret);
     }
     else
       Warning( "glXBindVideoCaptureDeviceNV not available." );
@@ -32308,8 +32361,8 @@ extern "C" {
     GLXVideoCaptureDeviceNV * ret = NULL;
     if (dispatchTableGlobal.glXEnumerateVideoCaptureDevicesNV)
     {
-      Driver("glXEnumerateVideoCaptureDevicesNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(nelements,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXEnumerateVideoCaptureDevicesNV(dpy, screen, nelements);
+      Driver("glXEnumerateVideoCaptureDevicesNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(nelements,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXEnumerateVideoCaptureDevicesNV not available." );
@@ -32328,8 +32381,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXLockVideoCaptureDeviceNV)
     {
-      Driver("glXLockVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", device, ")");
       dispatchTableGlobal.glXLockVideoCaptureDeviceNV(dpy, device);
+      Driver("glXLockVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", device, ")");
     }
     else
       Warning( "glXLockVideoCaptureDeviceNV not available." );
@@ -32345,11 +32398,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryVideoCaptureDeviceNV==glXQueryVideoCaptureDeviceNV)
         dispatchTableGlobal.glXQueryVideoCaptureDeviceNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXQueryVideoCaptureDeviceNV)
     {
-      Driver("glXQueryVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", device, ", ", attribute, ", ", boost::print::optional(value,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value);
+      Driver("glXQueryVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", device, ", ", attribute, ", ", boost::print::optional(value,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXQueryVideoCaptureDeviceNV not available." );
@@ -32368,8 +32421,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXReleaseVideoCaptureDeviceNV)
     {
-      Driver("glXReleaseVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", device, ")");
       dispatchTableGlobal.glXReleaseVideoCaptureDeviceNV(dpy, device);
+      Driver("glXReleaseVideoCaptureDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", device, ")");
     }
     else
       Warning( "glXReleaseVideoCaptureDeviceNV not available." );
@@ -32387,11 +32440,11 @@ extern "C" {
       if (dispatchTableGlobal.glXBindVideoImageNV==glXBindVideoImageNV)
         dispatchTableGlobal.glXBindVideoImageNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXBindVideoImageNV)
     {
-      Driver("glXBindVideoImageNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(VideoDevice,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", iVideoBuffer, ")");
       ret = dispatchTableGlobal.glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer);
+      Driver("glXBindVideoImageNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(VideoDevice,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", iVideoBuffer, ")", " returned ", ret);
     }
     else
       Warning( "glXBindVideoImageNV not available." );
@@ -32408,11 +32461,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetVideoDeviceNV==glXGetVideoDeviceNV)
         dispatchTableGlobal.glXGetVideoDeviceNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetVideoDeviceNV)
     {
-      Driver("glXGetVideoDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", numVideoDevices, ")");
       ret = dispatchTableGlobal.glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice);
+      Driver("glXGetVideoDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", numVideoDevices, ")", " returned ", ret);
     }
     else
       Warning( "glXGetVideoDeviceNV not available." );
@@ -32429,11 +32482,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetVideoInfoNV==glXGetVideoInfoNV)
         dispatchTableGlobal.glXGetVideoInfoNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetVideoInfoNV)
     {
-      Driver("glXGetVideoInfoNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(VideoDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+      Driver("glXGetVideoInfoNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(VideoDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXGetVideoInfoNV not available." );
@@ -32450,11 +32503,11 @@ extern "C" {
       if (dispatchTableGlobal.glXReleaseVideoDeviceNV==glXReleaseVideoDeviceNV)
         dispatchTableGlobal.glXReleaseVideoDeviceNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXReleaseVideoDeviceNV)
     {
-      Driver("glXReleaseVideoDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(VideoDevice,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXReleaseVideoDeviceNV(dpy, screen, VideoDevice);
+      Driver("glXReleaseVideoDeviceNV","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(VideoDevice,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXReleaseVideoDeviceNV not available." );
@@ -32471,11 +32524,11 @@ extern "C" {
       if (dispatchTableGlobal.glXReleaseVideoImageNV==glXReleaseVideoImageNV)
         dispatchTableGlobal.glXReleaseVideoImageNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXReleaseVideoImageNV)
     {
-      Driver("glXReleaseVideoImageNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXReleaseVideoImageNV(dpy, pbuf);
+      Driver("glXReleaseVideoImageNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXReleaseVideoImageNV not available." );
@@ -32492,11 +32545,11 @@ extern "C" {
       if (dispatchTableGlobal.glXSendPbufferToVideoNV==glXSendPbufferToVideoNV)
         dispatchTableGlobal.glXSendPbufferToVideoNV = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXSendPbufferToVideoNV)
     {
-      Driver("glXSendPbufferToVideoNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", iBufferType, ", ", toString(bBlock), ")");
       ret = dispatchTableGlobal.glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock);
+      Driver("glXSendPbufferToVideoNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", iBufferType, ", ", toString(bBlock), ")", " returned ", ret);
     }
     else
       Warning( "glXSendPbufferToVideoNV not available." );
@@ -32515,11 +32568,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetMscRateOML==glXGetMscRateOML)
         dispatchTableGlobal.glXGetMscRateOML = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXGetMscRateOML)
     {
-      Driver("glXGetMscRateOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")");
       ret = dispatchTableGlobal.glXGetMscRateOML(dpy, drawable, numerator, denominator);
+      Driver("glXGetMscRateOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")", " returned ", ret);
     }
     else
       Warning( "glXGetMscRateOML not available." );
@@ -32536,11 +32589,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetSyncValuesOML==glXGetSyncValuesOML)
         dispatchTableGlobal.glXGetSyncValuesOML = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXGetSyncValuesOML)
     {
-      Driver("glXGetSyncValuesOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")");
       ret = dispatchTableGlobal.glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc);
+      Driver("glXGetSyncValuesOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ")", " returned ", ret);
     }
     else
       Warning( "glXGetSyncValuesOML not available." );
@@ -32557,11 +32610,11 @@ extern "C" {
       if (dispatchTableGlobal.glXSwapBuffersMscOML==glXSwapBuffersMscOML)
         dispatchTableGlobal.glXSwapBuffersMscOML = NULL;
     }
-    int64_t  ret = (int64_t )0;
+    int64_t ret = (int64_t) 0;
     if (dispatchTableGlobal.glXSwapBuffersMscOML)
     {
-      Driver("glXSwapBuffersMscOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", target_msc, ", ", divisor, ", ", remainder, ")");
       ret = dispatchTableGlobal.glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder);
+      Driver("glXSwapBuffersMscOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", target_msc, ", ", divisor, ", ", remainder, ")", " returned ", ret);
     }
     else
       Warning( "glXSwapBuffersMscOML not available." );
@@ -32578,11 +32631,11 @@ extern "C" {
       if (dispatchTableGlobal.glXWaitForMscOML==glXWaitForMscOML)
         dispatchTableGlobal.glXWaitForMscOML = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXWaitForMscOML)
     {
-      Driver("glXWaitForMscOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", target_msc, ", ", divisor, ", ", remainder, ")");
       ret = dispatchTableGlobal.glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc);
+      Driver("glXWaitForMscOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", target_msc, ", ", divisor, ", ", remainder, ")", " returned ", ret);
     }
     else
       Warning( "glXWaitForMscOML not available." );
@@ -32599,11 +32652,11 @@ extern "C" {
       if (dispatchTableGlobal.glXWaitForSbcOML==glXWaitForSbcOML)
         dispatchTableGlobal.glXWaitForSbcOML = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXWaitForSbcOML)
     {
-      Driver("glXWaitForSbcOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", target_sbc, ", ", boost::print::array(ust,1), ", ", boost::print::array(msc,1), ", ", boost::print::array(sbc,1), ")");
       ret = dispatchTableGlobal.glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc);
+      Driver("glXWaitForSbcOML","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", target_sbc, ", ", boost::print::array(ust,1), ", ", boost::print::array(msc,1), ", ", boost::print::array(sbc,1), ")", " returned ", ret);
     }
     else
       Warning( "glXWaitForSbcOML not available." );
@@ -32625,8 +32678,8 @@ extern "C" {
     GLXFBConfigSGIX * ret = NULL;
     if (dispatchTableGlobal.glXChooseFBConfigSGIX)
     {
-      Driver("glXChooseFBConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attrib_list,Logging::pointers), ", ", boost::print::optional(nelements,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXChooseFBConfigSGIX(dpy, screen, attrib_list, nelements);
+      Driver("glXChooseFBConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attrib_list,Logging::pointers), ", ", boost::print::optional(nelements,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXChooseFBConfigSGIX not available." );
@@ -32643,11 +32696,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateContextWithConfigSGIX==glXCreateContextWithConfigSGIX)
         dispatchTableGlobal.glXCreateContextWithConfigSGIX = NULL;
     }
-    GLXContext  ret = (GLXContext )0;
+    GLXContext ret = 0;
     if (dispatchTableGlobal.glXCreateContextWithConfigSGIX)
     {
-      Driver("glXCreateContextWithConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", render_type, ", ", boost::print::optional(share_list,Logging::pointers), ", ", direct, ")");
       ret = dispatchTableGlobal.glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct);
+      Driver("glXCreateContextWithConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", render_type, ", ", boost::print::optional(share_list,Logging::pointers), ", ", direct, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateContextWithConfigSGIX not available." );
@@ -32664,11 +32717,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateGLXPixmapWithConfigSGIX==glXCreateGLXPixmapWithConfigSGIX)
         dispatchTableGlobal.glXCreateGLXPixmapWithConfigSGIX = NULL;
     }
-    GLXPixmap  ret = (GLXPixmap )0;
+    GLXPixmap ret = 0;
     if (dispatchTableGlobal.glXCreateGLXPixmapWithConfigSGIX)
     {
-      Driver("glXCreateGLXPixmapWithConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(pixmap,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap);
+      Driver("glXCreateGLXPixmapWithConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", boost::print::optional(pixmap,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateGLXPixmapWithConfigSGIX not available." );
@@ -32685,11 +32738,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetFBConfigAttribSGIX==glXGetFBConfigAttribSGIX)
         dispatchTableGlobal.glXGetFBConfigAttribSGIX = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetFBConfigAttribSGIX)
     {
-      Driver("glXGetFBConfigAttribSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", attribute, ", ", boost::print::array(value,1), ")");
       ret = dispatchTableGlobal.glXGetFBConfigAttribSGIX(dpy, config, attribute, value);
+      Driver("glXGetFBConfigAttribSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", attribute, ", ", boost::print::array(value,1), ")", " returned ", ret);
     }
     else
       Warning( "glXGetFBConfigAttribSGIX not available." );
@@ -32706,11 +32759,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetFBConfigFromVisualSGIX==glXGetFBConfigFromVisualSGIX)
         dispatchTableGlobal.glXGetFBConfigFromVisualSGIX = NULL;
     }
-    GLXFBConfigSGIX  ret = (GLXFBConfigSGIX )0;
+    GLXFBConfigSGIX ret = 0;
     if (dispatchTableGlobal.glXGetFBConfigFromVisualSGIX)
     {
-      Driver("glXGetFBConfigFromVisualSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXGetFBConfigFromVisualSGIX(dpy, vis);
+      Driver("glXGetFBConfigFromVisualSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(vis,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXGetFBConfigFromVisualSGIX not available." );
@@ -32730,8 +32783,8 @@ extern "C" {
     XVisualInfo * ret = NULL;
     if (dispatchTableGlobal.glXGetVisualFromFBConfigSGIX)
     {
-      Driver("glXGetVisualFromFBConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ")");
       ret = dispatchTableGlobal.glXGetVisualFromFBConfigSGIX(dpy, config);
+      Driver("glXGetVisualFromFBConfigSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXGetVisualFromFBConfigSGIX not available." );
@@ -32750,11 +32803,11 @@ extern "C" {
       if (dispatchTableGlobal.glXCreateGLXPbufferSGIX==glXCreateGLXPbufferSGIX)
         dispatchTableGlobal.glXCreateGLXPbufferSGIX = NULL;
     }
-    GLXPbuffer  ret = (GLXPbuffer )0;
+    GLXPbuffer ret = 0;
     if (dispatchTableGlobal.glXCreateGLXPbufferSGIX)
     {
-      Driver("glXCreateGLXPbufferSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", width, ", ", height, ", ", boost::print::optional(attrib_list,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list);
+      Driver("glXCreateGLXPbufferSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", config, ", ", width, ", ", height, ", ", boost::print::optional(attrib_list,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "glXCreateGLXPbufferSGIX not available." );
@@ -32773,8 +32826,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXDestroyGLXPbufferSGIX)
     {
-      Driver("glXDestroyGLXPbufferSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ")");
       dispatchTableGlobal.glXDestroyGLXPbufferSGIX(dpy, pbuf);
+      Driver("glXDestroyGLXPbufferSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ")");
     }
     else
       Warning( "glXDestroyGLXPbufferSGIX not available." );
@@ -32792,8 +32845,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXGetSelectedEventSGIX)
     {
-      Driver("glXGetSelectedEventSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", boost::print::array(mask,1), ")");
       dispatchTableGlobal.glXGetSelectedEventSGIX(dpy, drawable, mask);
+      Driver("glXGetSelectedEventSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", boost::print::array(mask,1), ")");
     }
     else
       Warning( "glXGetSelectedEventSGIX not available." );
@@ -32811,8 +32864,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXQueryGLXPbufferSGIX)
     {
-      Driver("glXQueryGLXPbufferSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", attribute, ", ", boost::print::array(value,1), ")");
       dispatchTableGlobal.glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value);
+      Driver("glXQueryGLXPbufferSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(pbuf,Logging::pointers), ", ", attribute, ", ", boost::print::array(value,1), ")");
     }
     else
       Warning( "glXQueryGLXPbufferSGIX not available." );
@@ -32830,8 +32883,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXSelectEventSGIX)
     {
-      Driver("glXSelectEventSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", mask, ")");
       dispatchTableGlobal.glXSelectEventSGIX(dpy, drawable, mask);
+      Driver("glXSelectEventSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", mask, ")");
     }
     else
       Warning( "glXSelectEventSGIX not available." );
@@ -32851,8 +32904,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXBindSwapBarrierSGIX)
     {
-      Driver("glXBindSwapBarrierSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", barrier, ")");
       dispatchTableGlobal.glXBindSwapBarrierSGIX(dpy, drawable, barrier);
+      Driver("glXBindSwapBarrierSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", barrier, ")");
     }
     else
       Warning( "glXBindSwapBarrierSGIX not available." );
@@ -32868,11 +32921,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryMaxSwapBarriersSGIX==glXQueryMaxSwapBarriersSGIX)
         dispatchTableGlobal.glXQueryMaxSwapBarriersSGIX = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXQueryMaxSwapBarriersSGIX)
     {
-      Driver("glXQueryMaxSwapBarriersSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")");
       ret = dispatchTableGlobal.glXQueryMaxSwapBarriersSGIX(dpy, screen, max);
+      Driver("glXQueryMaxSwapBarriersSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "glXQueryMaxSwapBarriersSGIX not available." );
@@ -32893,8 +32946,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXJoinSwapGroupSGIX)
     {
-      Driver("glXJoinSwapGroupSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", member, ")");
       dispatchTableGlobal.glXJoinSwapGroupSGIX(dpy, drawable, member);
+      Driver("glXJoinSwapGroupSGIX","(", boost::print::optional(dpy,Logging::pointers), ", ", drawable, ", ", member, ")");
     }
     else
       Warning( "glXJoinSwapGroupSGIX not available." );
@@ -32912,11 +32965,11 @@ extern "C" {
       if (dispatchTableGlobal.glXBindChannelToWindowSGIX==glXBindChannelToWindowSGIX)
         dispatchTableGlobal.glXBindChannelToWindowSGIX = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXBindChannelToWindowSGIX)
     {
-      Driver("glXBindChannelToWindowSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", window, ")");
       ret = dispatchTableGlobal.glXBindChannelToWindowSGIX(display, screen, channel, window);
+      Driver("glXBindChannelToWindowSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", window, ")", " returned ", ret);
     }
     else
       Warning( "glXBindChannelToWindowSGIX not available." );
@@ -32933,11 +32986,11 @@ extern "C" {
       if (dispatchTableGlobal.glXChannelRectSGIX==glXChannelRectSGIX)
         dispatchTableGlobal.glXChannelRectSGIX = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXChannelRectSGIX)
     {
-      Driver("glXChannelRectSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", x, ", ", y, ", ", w, ", ", h, ")");
       ret = dispatchTableGlobal.glXChannelRectSGIX(display, screen, channel, x, y, w, h);
+      Driver("glXChannelRectSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", x, ", ", y, ", ", w, ", ", h, ")", " returned ", ret);
     }
     else
       Warning( "glXChannelRectSGIX not available." );
@@ -32954,11 +33007,11 @@ extern "C" {
       if (dispatchTableGlobal.glXChannelRectSyncSGIX==glXChannelRectSyncSGIX)
         dispatchTableGlobal.glXChannelRectSyncSGIX = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXChannelRectSyncSGIX)
     {
-      Driver("glXChannelRectSyncSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", toString(synctype), ")");
       ret = dispatchTableGlobal.glXChannelRectSyncSGIX(display, screen, channel, synctype);
+      Driver("glXChannelRectSyncSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", toString(synctype), ")", " returned ", ret);
     }
     else
       Warning( "glXChannelRectSyncSGIX not available." );
@@ -32975,11 +33028,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryChannelDeltasSGIX==glXQueryChannelDeltasSGIX)
         dispatchTableGlobal.glXQueryChannelDeltasSGIX = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXQueryChannelDeltasSGIX)
     {
-      Driver("glXQueryChannelDeltasSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", boost::print::array(x,1), ", ", boost::print::array(y,1), ", ", boost::print::array(w,1), ", ", boost::print::array(h,1), ")");
       ret = dispatchTableGlobal.glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h);
+      Driver("glXQueryChannelDeltasSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", boost::print::array(x,1), ", ", boost::print::array(y,1), ", ", boost::print::array(w,1), ", ", boost::print::array(h,1), ")", " returned ", ret);
     }
     else
       Warning( "glXQueryChannelDeltasSGIX not available." );
@@ -32996,11 +33049,11 @@ extern "C" {
       if (dispatchTableGlobal.glXQueryChannelRectSGIX==glXQueryChannelRectSGIX)
         dispatchTableGlobal.glXQueryChannelRectSGIX = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXQueryChannelRectSGIX)
     {
-      Driver("glXQueryChannelRectSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", boost::print::array(dx,1), ", ", boost::print::array(dy,1), ", ", boost::print::array(dw,1), ", ", boost::print::array(dh,1), ")");
       ret = dispatchTableGlobal.glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh);
+      Driver("glXQueryChannelRectSGIX","(", boost::print::optional(display,Logging::pointers), ", ", screen, ", ", channel, ", ", boost::print::array(dx,1), ", ", boost::print::array(dy,1), ", ", boost::print::array(dw,1), ", ", boost::print::array(dh,1), ")", " returned ", ret);
     }
     else
       Warning( "glXQueryChannelRectSGIX not available." );
@@ -33021,8 +33074,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.glXCushionSGI)
     {
-      Driver("glXCushionSGI","(", boost::print::optional(dpy,Logging::pointers), ", ", window, ", ", cushion, ")");
       dispatchTableGlobal.glXCushionSGI(dpy, window, cushion);
+      Driver("glXCushionSGI","(", boost::print::optional(dpy,Logging::pointers), ", ", window, ", ", cushion, ")");
     }
     else
       Warning( "glXCushionSGI not available." );
@@ -33040,11 +33093,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetCurrentReadDrawableSGI==glXGetCurrentReadDrawableSGI)
         dispatchTableGlobal.glXGetCurrentReadDrawableSGI = NULL;
     }
-    GLXDrawable  ret = (GLXDrawable )0;
+    GLXDrawable ret = (GLXDrawable) 0;
     if (dispatchTableGlobal.glXGetCurrentReadDrawableSGI)
     {
-      Driver("glXGetCurrentReadDrawableSGI","()");
       ret = dispatchTableGlobal.glXGetCurrentReadDrawableSGI();
+      Driver("glXGetCurrentReadDrawableSGI","()", " returned ", ret);
     }
     else
       Warning( "glXGetCurrentReadDrawableSGI not available." );
@@ -33061,11 +33114,11 @@ extern "C" {
       if (dispatchTableGlobal.glXMakeCurrentReadSGI==glXMakeCurrentReadSGI)
         dispatchTableGlobal.glXMakeCurrentReadSGI = NULL;
     }
-    Bool  ret = (Bool )0;
+    Bool ret = (Bool) 0;
     if (dispatchTableGlobal.glXMakeCurrentReadSGI)
     {
-      Driver("glXMakeCurrentReadSGI","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", read, ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.glXMakeCurrentReadSGI(dpy, draw, read, ctx);
+      Driver("glXMakeCurrentReadSGI","(", boost::print::optional(dpy,Logging::pointers), ", ", draw, ", ", read, ", ", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "glXMakeCurrentReadSGI not available." );
@@ -33084,11 +33137,11 @@ extern "C" {
       if (dispatchTableGlobal.glXSwapIntervalSGI==glXSwapIntervalSGI)
         dispatchTableGlobal.glXSwapIntervalSGI = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXSwapIntervalSGI)
     {
-      Driver("glXSwapIntervalSGI","(", interval, ")");
       ret = dispatchTableGlobal.glXSwapIntervalSGI(interval);
+      Driver("glXSwapIntervalSGI","(", interval, ")", " returned ", ret);
     }
     else
       Warning( "glXSwapIntervalSGI not available." );
@@ -33107,11 +33160,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetVideoSyncSGI==glXGetVideoSyncSGI)
         dispatchTableGlobal.glXGetVideoSyncSGI = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetVideoSyncSGI)
     {
-      Driver("glXGetVideoSyncSGI","()");
       ret = dispatchTableGlobal.glXGetVideoSyncSGI(count);
+      Driver("glXGetVideoSyncSGI","()", " returned ", ret);
     }
     else
       Warning( "glXGetVideoSyncSGI not available." );
@@ -33128,11 +33181,11 @@ extern "C" {
       if (dispatchTableGlobal.glXWaitVideoSyncSGI==glXWaitVideoSyncSGI)
         dispatchTableGlobal.glXWaitVideoSyncSGI = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXWaitVideoSyncSGI)
     {
-      Driver("glXWaitVideoSyncSGI","(", divisor, ", ", remainder, ")");
       ret = dispatchTableGlobal.glXWaitVideoSyncSGI(divisor, remainder, count);
+      Driver("glXWaitVideoSyncSGI","(", divisor, ", ", remainder, ")", " returned ", ret);
     }
     else
       Warning( "glXWaitVideoSyncSGI not available." );
@@ -33151,11 +33204,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetTransparentIndexSUN==glXGetTransparentIndexSUN)
         dispatchTableGlobal.glXGetTransparentIndexSUN = NULL;
     }
-    Status  ret = (Status )0;
+    Status ret = (Status) 0;
     if (dispatchTableGlobal.glXGetTransparentIndexSUN)
     {
-      Driver("glXGetTransparentIndexSUN","(", boost::print::optional(dpy,Logging::pointers), ", ", overlay, ", ", underlay, ", ", boost::print::array(pTransparentIndex,1), ")");
       ret = dispatchTableGlobal.glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex);
+      Driver("glXGetTransparentIndexSUN","(", boost::print::optional(dpy,Logging::pointers), ", ", overlay, ", ", underlay, ", ", boost::print::array(pTransparentIndex,1), ")", " returned ", ret);
     }
     else
       Warning( "glXGetTransparentIndexSUN not available." );
@@ -33174,11 +33227,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetVideoResizeSUN==glXGetVideoResizeSUN)
         dispatchTableGlobal.glXGetVideoResizeSUN = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXGetVideoResizeSUN)
     {
-      Driver("glXGetVideoResizeSUN","(", boost::print::optional(display,Logging::pointers), ", ", window, ")");
       ret = dispatchTableGlobal.glXGetVideoResizeSUN(display, window, factor);
+      Driver("glXGetVideoResizeSUN","(", boost::print::optional(display,Logging::pointers), ", ", window, ")", " returned ", ret);
     }
     else
       Warning( "glXGetVideoResizeSUN not available." );
@@ -33195,11 +33248,11 @@ extern "C" {
       if (dispatchTableGlobal.glXVideoResizeSUN==glXVideoResizeSUN)
         dispatchTableGlobal.glXVideoResizeSUN = NULL;
     }
-    int  ret = (int )0;
+    int ret = 0;
     if (dispatchTableGlobal.glXVideoResizeSUN)
     {
-      Driver("glXVideoResizeSUN","(", boost::print::optional(display,Logging::pointers), ", ", window, ", ", factor, ")");
       ret = dispatchTableGlobal.glXVideoResizeSUN(display, window, factor);
+      Driver("glXVideoResizeSUN","(", boost::print::optional(display,Logging::pointers), ", ", window, ", ", factor, ")", " returned ", ret);
     }
     else
       Warning( "glXVideoResizeSUN not available." );
@@ -33222,14 +33275,14 @@ extern "C" {
       if (dispatchTableGlobal.CGLChoosePixelFormat==CGLChoosePixelFormat)
         dispatchTableGlobal.CGLChoosePixelFormat = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     scoped_array<CGLPixelFormatAttribute> nattribs;
     if (Config::forceCoreProfile)
       attribs = nattribs = Mac::forceCoreAttribs(attribs);
     if (dispatchTableGlobal.CGLChoosePixelFormat)
     {
-      Driver("CGLChoosePixelFormat","(", attribs, ")");
       ret = dispatchTableGlobal.CGLChoosePixelFormat(attribs, pix, npix);
+      Driver("CGLChoosePixelFormat","(", attribs, ")", " returned ", ret);
     }
     else
       Warning( "CGLChoosePixelFormat not available." );
@@ -33246,11 +33299,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLClearDrawable==CGLClearDrawable)
         dispatchTableGlobal.CGLClearDrawable = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLClearDrawable)
     {
-      Driver("CGLClearDrawable","(", ctx, ")");
       ret = dispatchTableGlobal.CGLClearDrawable(ctx);
+      Driver("CGLClearDrawable","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLClearDrawable not available." );
@@ -33267,11 +33320,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLCopyContext==CGLCopyContext)
         dispatchTableGlobal.CGLCopyContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLCopyContext)
     {
-      Driver("CGLCopyContext","(", src, ", ", dst, ", ", mask, ")");
       ret = dispatchTableGlobal.CGLCopyContext(src, dst, mask);
+      Driver("CGLCopyContext","(", src, ", ", dst, ", ", mask, ")", " returned ", ret);
     }
     else
       Warning( "CGLCopyContext not available." );
@@ -33288,11 +33341,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLCreateContext==CGLCreateContext)
         dispatchTableGlobal.CGLCreateContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLCreateContext)
     {
-      Driver("CGLCreateContext","(", pix, ", ", share, ")");
       ret = dispatchTableGlobal.CGLCreateContext(pix, share, ctx);
+      Driver("CGLCreateContext","(", pix, ", ", share, ")", " returned ", ret);
     }
     else
       Warning( "CGLCreateContext not available." );
@@ -33309,11 +33362,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDescribePixelFormat==CGLDescribePixelFormat)
         dispatchTableGlobal.CGLDescribePixelFormat = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDescribePixelFormat)
     {
-      Driver("CGLDescribePixelFormat","(", pix, ", ", pix_num, ", ", attrib, ")");
       ret = dispatchTableGlobal.CGLDescribePixelFormat(pix, pix_num, attrib, value);
+      Driver("CGLDescribePixelFormat","(", pix, ", ", pix_num, ", ", attrib, ")", " returned ", ret);
     }
     else
       Warning( "CGLDescribePixelFormat not available." );
@@ -33330,11 +33383,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDescribeRenderer==CGLDescribeRenderer)
         dispatchTableGlobal.CGLDescribeRenderer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDescribeRenderer)
     {
-      Driver("CGLDescribeRenderer","(", rend, ", ", rend_num, ", ", prop, ")");
       ret = dispatchTableGlobal.CGLDescribeRenderer(rend, rend_num, prop, value);
+      Driver("CGLDescribeRenderer","(", rend, ", ", rend_num, ", ", prop, ")", " returned ", ret);
     }
     else
       Warning( "CGLDescribeRenderer not available." );
@@ -33351,11 +33404,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDestroyContext==CGLDestroyContext)
         dispatchTableGlobal.CGLDestroyContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDestroyContext)
     {
-      Driver("CGLDestroyContext","(", ctx, ")");
       ret = dispatchTableGlobal.CGLDestroyContext(ctx);
+      Driver("CGLDestroyContext","(", ctx, ")", " returned ", ret);
       Init::destroyContext(RegalSystemContext(ctx));
     }
     else
@@ -33373,11 +33426,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDestroyPixelFormat==CGLDestroyPixelFormat)
         dispatchTableGlobal.CGLDestroyPixelFormat = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDestroyPixelFormat)
     {
-      Driver("CGLDestroyPixelFormat","(", pix, ")");
       ret = dispatchTableGlobal.CGLDestroyPixelFormat(pix);
+      Driver("CGLDestroyPixelFormat","(", pix, ")", " returned ", ret);
     }
     else
       Warning( "CGLDestroyPixelFormat not available." );
@@ -33394,11 +33447,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDestroyRendererInfo==CGLDestroyRendererInfo)
         dispatchTableGlobal.CGLDestroyRendererInfo = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDestroyRendererInfo)
     {
-      Driver("CGLDestroyRendererInfo","(", rend, ")");
       ret = dispatchTableGlobal.CGLDestroyRendererInfo(rend);
+      Driver("CGLDestroyRendererInfo","(", rend, ")", " returned ", ret);
     }
     else
       Warning( "CGLDestroyRendererInfo not available." );
@@ -33415,11 +33468,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDisable==CGLDisable)
         dispatchTableGlobal.CGLDisable = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDisable)
     {
-      Driver("CGLDisable","(", ctx, ", ", pname, ")");
       ret = dispatchTableGlobal.CGLDisable(ctx, pname);
+      Driver("CGLDisable","(", ctx, ", ", pname, ")", " returned ", ret);
     }
     else
       Warning( "CGLDisable not available." );
@@ -33436,11 +33489,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLEnable==CGLEnable)
         dispatchTableGlobal.CGLEnable = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLEnable)
     {
-      Driver("CGLEnable","(", ctx, ", ", pname, ")");
       ret = dispatchTableGlobal.CGLEnable(ctx, pname);
+      Driver("CGLEnable","(", ctx, ", ", pname, ")", " returned ", ret);
     }
     else
       Warning( "CGLEnable not available." );
@@ -33460,8 +33513,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.CGLErrorString)
     {
-      Driver("CGLErrorString","(", error, ")");
       ret = dispatchTableGlobal.CGLErrorString(error);
+      Driver("CGLErrorString","(", error, ")", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "CGLErrorString not available." );
@@ -33478,15 +33531,15 @@ extern "C" {
       if (dispatchTableGlobal.CGLFlushDrawable==CGLFlushDrawable)
         dispatchTableGlobal.CGLFlushDrawable = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     RegalContext *_context = REGAL_GET_CONTEXT();
     // Notify Regal::Frame about the flush drawable event.
     if (_context && _context->frame)
         _context->frame->CGLFlushDrawable(*_context);
     if (dispatchTableGlobal.CGLFlushDrawable)
     {
-      Driver("CGLFlushDrawable","(", ctx, ")");
       ret = dispatchTableGlobal.CGLFlushDrawable(ctx);
+      Driver("CGLFlushDrawable","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLFlushDrawable not available." );
@@ -33503,11 +33556,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetOffScreen==CGLGetOffScreen)
         dispatchTableGlobal.CGLGetOffScreen = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetOffScreen)
     {
-      Driver("CGLGetOffScreen","(", ctx, ", ", width, ", ", height, ", ", rowbytes, ", ", baseaddr, ")");
       ret = dispatchTableGlobal.CGLGetOffScreen(ctx, width, height, rowbytes, baseaddr);
+      Driver("CGLGetOffScreen","(", ctx, ", ", width, ", ", height, ", ", rowbytes, ", ", baseaddr, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetOffScreen not available." );
@@ -33524,11 +33577,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetOption==CGLGetOption)
         dispatchTableGlobal.CGLGetOption = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetOption)
     {
-      Driver("CGLGetOption","(", pname, ", ", boost::print::optional(param,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLGetOption(pname, param);
+      Driver("CGLGetOption","(", pname, ", ", boost::print::optional(param,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLGetOption not available." );
@@ -33545,11 +33598,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetParameter==CGLGetParameter)
         dispatchTableGlobal.CGLGetParameter = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetParameter)
     {
-      Driver("CGLGetParameter","(", ctx, ", ", pname, ")");
       ret = dispatchTableGlobal.CGLGetParameter(ctx, pname, params);
+      Driver("CGLGetParameter","(", ctx, ", ", pname, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetParameter not available." );
@@ -33568,8 +33621,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.CGLGetVersion)
     {
-      Driver("CGLGetVersion","()");
       dispatchTableGlobal.CGLGetVersion(majorvers, minorvers);
+      Driver("CGLGetVersion","()");
     }
     else
       Warning( "CGLGetVersion not available." );
@@ -33585,11 +33638,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetVirtualScreen==CGLGetVirtualScreen)
         dispatchTableGlobal.CGLGetVirtualScreen = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetVirtualScreen)
     {
-      Driver("CGLGetVirtualScreen","(", ctx, ")");
       ret = dispatchTableGlobal.CGLGetVirtualScreen(ctx, screen);
+      Driver("CGLGetVirtualScreen","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetVirtualScreen not available." );
@@ -33606,11 +33659,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLIsEnabled==CGLIsEnabled)
         dispatchTableGlobal.CGLIsEnabled = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLIsEnabled)
     {
-      Driver("CGLIsEnabled","(", ctx, ", ", pname, ")");
       ret = dispatchTableGlobal.CGLIsEnabled(ctx, pname, enable);
+      Driver("CGLIsEnabled","(", ctx, ", ", pname, ")", " returned ", ret);
     }
     else
       Warning( "CGLIsEnabled not available." );
@@ -33627,11 +33680,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLQueryRendererInfo==CGLQueryRendererInfo)
         dispatchTableGlobal.CGLQueryRendererInfo = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLQueryRendererInfo)
     {
-      Driver("CGLQueryRendererInfo","(", display_mask, ")");
       ret = dispatchTableGlobal.CGLQueryRendererInfo(display_mask, rend, nrend);
+      Driver("CGLQueryRendererInfo","(", display_mask, ")", " returned ", ret);
     }
     else
       Warning( "CGLQueryRendererInfo not available." );
@@ -33648,11 +33701,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetFullScreen==CGLSetFullScreen)
         dispatchTableGlobal.CGLSetFullScreen = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetFullScreen)
     {
-      Driver("CGLSetFullScreen","(", ctx, ")");
       ret = dispatchTableGlobal.CGLSetFullScreen(ctx);
+      Driver("CGLSetFullScreen","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLSetFullScreen not available." );
@@ -33669,11 +33722,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetOffScreen==CGLSetOffScreen)
         dispatchTableGlobal.CGLSetOffScreen = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetOffScreen)
     {
-      Driver("CGLSetOffScreen","(", ctx, ", ", width, ", ", height, ", ", rowbytes, ", ", boost::print::optional(baseaddr,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLSetOffScreen(ctx, width, height, rowbytes, baseaddr);
+      Driver("CGLSetOffScreen","(", ctx, ", ", width, ", ", height, ", ", rowbytes, ", ", boost::print::optional(baseaddr,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLSetOffScreen not available." );
@@ -33690,11 +33743,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetOption==CGLSetOption)
         dispatchTableGlobal.CGLSetOption = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetOption)
     {
-      Driver("CGLSetOption","(", pname, ", ", param, ")");
       ret = dispatchTableGlobal.CGLSetOption(pname, param);
+      Driver("CGLSetOption","(", pname, ", ", param, ")", " returned ", ret);
     }
     else
       Warning( "CGLSetOption not available." );
@@ -33711,11 +33764,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetParameter==CGLSetParameter)
         dispatchTableGlobal.CGLSetParameter = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetParameter)
     {
-      Driver("CGLSetParameter","(", ctx, ", ", pname, ", ", boost::print::optional(params,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLSetParameter(ctx, pname, params);
+      Driver("CGLSetParameter","(", ctx, ", ", pname, ", ", boost::print::optional(params,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLSetParameter not available." );
@@ -33732,11 +33785,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetVirtualScreen==CGLSetVirtualScreen)
         dispatchTableGlobal.CGLSetVirtualScreen = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetVirtualScreen)
     {
-      Driver("CGLSetVirtualScreen","(", ctx, ", ", screen, ")");
       ret = dispatchTableGlobal.CGLSetVirtualScreen(ctx, screen);
+      Driver("CGLSetVirtualScreen","(", ctx, ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "CGLSetVirtualScreen not available." );
@@ -33755,11 +33808,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLCreatePBuffer==CGLCreatePBuffer)
         dispatchTableGlobal.CGLCreatePBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLCreatePBuffer)
     {
-      Driver("CGLCreatePBuffer","(", width, ", ", height, ", ", toString(target), ", ", toString(internalFormat), ", ", max_level, ", ", pbuffer, ")");
       ret = dispatchTableGlobal.CGLCreatePBuffer(width, height, target, internalFormat, max_level, pbuffer);
+      Driver("CGLCreatePBuffer","(", width, ", ", height, ", ", toString(target), ", ", toString(internalFormat), ", ", max_level, ", ", pbuffer, ")", " returned ", ret);
     }
     else
       Warning( "CGLCreatePBuffer not available." );
@@ -33776,11 +33829,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDescribePBuffer==CGLDescribePBuffer)
         dispatchTableGlobal.CGLDescribePBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDescribePBuffer)
     {
-      Driver("CGLDescribePBuffer","(", pbuffer, ", ", width, ", ", height, ", ", target, ", ", internalFormat, ", ", boost::print::optional(mipmap,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLDescribePBuffer(pbuffer, width, height, target, internalFormat, mipmap);
+      Driver("CGLDescribePBuffer","(", pbuffer, ", ", width, ", ", height, ", ", target, ", ", internalFormat, ", ", boost::print::optional(mipmap,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLDescribePBuffer not available." );
@@ -33797,11 +33850,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLDestroyPBuffer==CGLDestroyPBuffer)
         dispatchTableGlobal.CGLDestroyPBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLDestroyPBuffer)
     {
-      Driver("CGLDestroyPBuffer","(", pbuffer, ")");
       ret = dispatchTableGlobal.CGLDestroyPBuffer(pbuffer);
+      Driver("CGLDestroyPBuffer","(", pbuffer, ")", " returned ", ret);
     }
     else
       Warning( "CGLDestroyPBuffer not available." );
@@ -33818,11 +33871,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetPBuffer==CGLGetPBuffer)
         dispatchTableGlobal.CGLGetPBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetPBuffer)
     {
-      Driver("CGLGetPBuffer","(", ctx, ", ", pbuffer, ", ", face, ", ", boost::print::optional(level,Logging::pointers), ", ", boost::print::optional(screen,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLGetPBuffer(ctx, pbuffer, face, level, screen);
+      Driver("CGLGetPBuffer","(", ctx, ", ", pbuffer, ", ", face, ", ", boost::print::optional(level,Logging::pointers), ", ", boost::print::optional(screen,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLGetPBuffer not available." );
@@ -33839,11 +33892,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetPBuffer==CGLSetPBuffer)
         dispatchTableGlobal.CGLSetPBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetPBuffer)
     {
-      Driver("CGLSetPBuffer","(", ctx, ", ", pbuffer, ", ", toString(face), ", ", level, ", ", screen, ")");
       ret = dispatchTableGlobal.CGLSetPBuffer(ctx, pbuffer, face, level, screen);
+      Driver("CGLSetPBuffer","(", ctx, ", ", pbuffer, ", ", toString(face), ", ", level, ", ", screen, ")", " returned ", ret);
     }
     else
       Warning( "CGLSetPBuffer not available." );
@@ -33860,11 +33913,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLTexImagePBuffer==CGLTexImagePBuffer)
         dispatchTableGlobal.CGLTexImagePBuffer = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLTexImagePBuffer)
     {
-      Driver("CGLTexImagePBuffer","(", ctx, ", ", pbuffer, ", ", toString(source), ")");
       ret = dispatchTableGlobal.CGLTexImagePBuffer(ctx, pbuffer, source);
+      Driver("CGLTexImagePBuffer","(", ctx, ", ", pbuffer, ", ", toString(source), ")", " returned ", ret);
     }
     else
       Warning( "CGLTexImagePBuffer not available." );
@@ -33883,11 +33936,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetContextRetainCount==CGLGetContextRetainCount)
         dispatchTableGlobal.CGLGetContextRetainCount = NULL;
     }
-    GLuint  ret = (GLuint )0;
+    GLuint ret = 0;
     if (dispatchTableGlobal.CGLGetContextRetainCount)
     {
-      Driver("CGLGetContextRetainCount","(", ctx, ")");
       ret = dispatchTableGlobal.CGLGetContextRetainCount(ctx);
+      Driver("CGLGetContextRetainCount","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetContextRetainCount not available." );
@@ -33904,11 +33957,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetGlobalOption==CGLGetGlobalOption)
         dispatchTableGlobal.CGLGetGlobalOption = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetGlobalOption)
     {
-      Driver("CGLGetGlobalOption","(", pname, ", ", boost::print::optional(params,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLGetGlobalOption(pname, params);
+      Driver("CGLGetGlobalOption","(", pname, ", ", boost::print::optional(params,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLGetGlobalOption not available." );
@@ -33925,11 +33978,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetPBufferRetainCount==CGLGetPBufferRetainCount)
         dispatchTableGlobal.CGLGetPBufferRetainCount = NULL;
     }
-    GLuint  ret = (GLuint )0;
+    GLuint ret = 0;
     if (dispatchTableGlobal.CGLGetPBufferRetainCount)
     {
-      Driver("CGLGetPBufferRetainCount","(", pbuffer, ")");
       ret = dispatchTableGlobal.CGLGetPBufferRetainCount(pbuffer);
+      Driver("CGLGetPBufferRetainCount","(", pbuffer, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetPBufferRetainCount not available." );
@@ -33946,11 +33999,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetPixelFormat==CGLGetPixelFormat)
         dispatchTableGlobal.CGLGetPixelFormat = NULL;
     }
-    CGLPixelFormatObj  ret = (CGLPixelFormatObj )0;
+    CGLPixelFormatObj ret = 0;
     if (dispatchTableGlobal.CGLGetPixelFormat)
     {
-      Driver("CGLGetPixelFormat","(", ctx, ")");
       ret = dispatchTableGlobal.CGLGetPixelFormat(ctx);
+      Driver("CGLGetPixelFormat","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetPixelFormat not available." );
@@ -33967,11 +34020,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetPixelFormatRetainCount==CGLGetPixelFormatRetainCount)
         dispatchTableGlobal.CGLGetPixelFormatRetainCount = NULL;
     }
-    GLuint  ret = (GLuint )0;
+    GLuint ret = 0;
     if (dispatchTableGlobal.CGLGetPixelFormatRetainCount)
     {
-      Driver("CGLGetPixelFormatRetainCount","(", pix, ")");
       ret = dispatchTableGlobal.CGLGetPixelFormatRetainCount(pix);
+      Driver("CGLGetPixelFormatRetainCount","(", pix, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetPixelFormatRetainCount not available." );
@@ -33988,11 +34041,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLLockContext==CGLLockContext)
         dispatchTableGlobal.CGLLockContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLLockContext)
     {
-      Driver("CGLLockContext","(", ctx, ")");
       ret = dispatchTableGlobal.CGLLockContext(ctx);
+      Driver("CGLLockContext","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLLockContext not available." );
@@ -34011,8 +34064,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.CGLReleaseContext)
     {
-      Driver("CGLReleaseContext","(", ctx, ")");
       dispatchTableGlobal.CGLReleaseContext(ctx);
+      Driver("CGLReleaseContext","(", ctx, ")");
     }
     else
       Warning( "CGLReleaseContext not available." );
@@ -34030,8 +34083,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.CGLReleasePBuffer)
     {
-      Driver("CGLReleasePBuffer","(", pbuffer, ")");
       dispatchTableGlobal.CGLReleasePBuffer(pbuffer);
+      Driver("CGLReleasePBuffer","(", pbuffer, ")");
     }
     else
       Warning( "CGLReleasePBuffer not available." );
@@ -34049,8 +34102,8 @@ extern "C" {
     }
     if (dispatchTableGlobal.CGLReleasePixelFormat)
     {
-      Driver("CGLReleasePixelFormat","(", pix, ")");
       dispatchTableGlobal.CGLReleasePixelFormat(pix);
+      Driver("CGLReleasePixelFormat","(", pix, ")");
     }
     else
       Warning( "CGLReleasePixelFormat not available." );
@@ -34066,11 +34119,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLRetainContext==CGLRetainContext)
         dispatchTableGlobal.CGLRetainContext = NULL;
     }
-    CGLContextObj  ret = (CGLContextObj )0;
+    CGLContextObj ret = 0;
     if (dispatchTableGlobal.CGLRetainContext)
     {
-      Driver("CGLRetainContext","(", ctx, ")");
       ret = dispatchTableGlobal.CGLRetainContext(ctx);
+      Driver("CGLRetainContext","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLRetainContext not available." );
@@ -34087,11 +34140,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLRetainPBuffer==CGLRetainPBuffer)
         dispatchTableGlobal.CGLRetainPBuffer = NULL;
     }
-    CGLPBufferObj  ret = (CGLPBufferObj )0;
+    CGLPBufferObj ret = 0;
     if (dispatchTableGlobal.CGLRetainPBuffer)
     {
-      Driver("CGLRetainPBuffer","(", pbuffer, ")");
       ret = dispatchTableGlobal.CGLRetainPBuffer(pbuffer);
+      Driver("CGLRetainPBuffer","(", pbuffer, ")", " returned ", ret);
     }
     else
       Warning( "CGLRetainPBuffer not available." );
@@ -34108,11 +34161,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLRetainPixelFormat==CGLRetainPixelFormat)
         dispatchTableGlobal.CGLRetainPixelFormat = NULL;
     }
-    CGLPixelFormatObj  ret = (CGLPixelFormatObj )0;
+    CGLPixelFormatObj ret = 0;
     if (dispatchTableGlobal.CGLRetainPixelFormat)
     {
-      Driver("CGLRetainPixelFormat","(", pix, ")");
       ret = dispatchTableGlobal.CGLRetainPixelFormat(pix);
+      Driver("CGLRetainPixelFormat","(", pix, ")", " returned ", ret);
     }
     else
       Warning( "CGLRetainPixelFormat not available." );
@@ -34129,11 +34182,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetGlobalOption==CGLSetGlobalOption)
         dispatchTableGlobal.CGLSetGlobalOption = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetGlobalOption)
     {
-      Driver("CGLSetGlobalOption","(", pname, ", ", boost::print::optional(params,Logging::pointers), ")");
       ret = dispatchTableGlobal.CGLSetGlobalOption(pname, params);
+      Driver("CGLSetGlobalOption","(", pname, ", ", boost::print::optional(params,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "CGLSetGlobalOption not available." );
@@ -34150,11 +34203,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLUnlockContext==CGLUnlockContext)
         dispatchTableGlobal.CGLUnlockContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLUnlockContext)
     {
-      Driver("CGLUnlockContext","(", ctx, ")");
       ret = dispatchTableGlobal.CGLUnlockContext(ctx);
+      Driver("CGLUnlockContext","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLUnlockContext not available." );
@@ -34173,11 +34226,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetCurrentContext==CGLGetCurrentContext)
         dispatchTableGlobal.CGLGetCurrentContext = NULL;
     }
-    CGLContextObj  ret = (CGLContextObj )0;
+    CGLContextObj ret = 0;
     if (dispatchTableGlobal.CGLGetCurrentContext)
     {
-      Driver("CGLGetCurrentContext","()");
       ret = dispatchTableGlobal.CGLGetCurrentContext();
+      Driver("CGLGetCurrentContext","()", " returned ", ret);
     }
     else
       Warning( "CGLGetCurrentContext not available." );
@@ -34194,11 +34247,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetShareGroup==CGLGetShareGroup)
         dispatchTableGlobal.CGLGetShareGroup = NULL;
     }
-    CGLShareGroupObj  ret = (CGLShareGroupObj )0;
+    CGLShareGroupObj ret = 0;
     if (dispatchTableGlobal.CGLGetShareGroup)
     {
-      Driver("CGLGetShareGroup","(", ctx, ")");
       ret = dispatchTableGlobal.CGLGetShareGroup(ctx);
+      Driver("CGLGetShareGroup","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetShareGroup not available." );
@@ -34215,11 +34268,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLGetSurface==CGLGetSurface)
         dispatchTableGlobal.CGLGetSurface = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLGetSurface)
     {
-      Driver("CGLGetSurface","(", ctx, ", ", conn, ", ", win, ", ", srf, ")");
       ret = dispatchTableGlobal.CGLGetSurface(ctx, conn, win, srf);
+      Driver("CGLGetSurface","(", ctx, ", ", conn, ", ", win, ", ", srf, ")", " returned ", ret);
     }
     else
       Warning( "CGLGetSurface not available." );
@@ -34236,11 +34289,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetCurrentContext==CGLSetCurrentContext)
         dispatchTableGlobal.CGLSetCurrentContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetCurrentContext)
     {
-      Driver("CGLSetCurrentContext","(", ctx, ")");
       ret = dispatchTableGlobal.CGLSetCurrentContext(ctx);
+      Driver("CGLSetCurrentContext","(", ctx, ")", " returned ", ret);
       Init::makeCurrent(ctx);
     }
     else
@@ -34258,11 +34311,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLSetSurface==CGLSetSurface)
         dispatchTableGlobal.CGLSetSurface = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLSetSurface)
     {
-      Driver("CGLSetSurface","(", ctx, ", ", conn, ", ", win, ", ", srf, ")");
       ret = dispatchTableGlobal.CGLSetSurface(ctx, conn, win, srf);
+      Driver("CGLSetSurface","(", ctx, ", ", conn, ", ", win, ", ", srf, ")", " returned ", ret);
     }
     else
       Warning( "CGLSetSurface not available." );
@@ -34279,11 +34332,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLTexImageIOSurface2D==CGLTexImageIOSurface2D)
         dispatchTableGlobal.CGLTexImageIOSurface2D = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLTexImageIOSurface2D)
     {
-      Driver("CGLTexImageIOSurface2D","(", ctx, ", ", toString(target), ", ", toString(internal_format), ", ", width, ", ", height, ", ", toString(format), ", ", toString(type), ", ", ioSurface, ", ", plane, ")");
       ret = dispatchTableGlobal.CGLTexImageIOSurface2D(ctx, target, internal_format, width, height, format, type, ioSurface, plane);
+      Driver("CGLTexImageIOSurface2D","(", ctx, ", ", toString(target), ", ", toString(internal_format), ", ", width, ", ", height, ", ", toString(format), ", ", toString(type), ", ", ioSurface, ")", " returned ", ret);
     }
     else
       Warning( "CGLTexImageIOSurface2D not available." );
@@ -34300,11 +34353,11 @@ extern "C" {
       if (dispatchTableGlobal.CGLUpdateContext==CGLUpdateContext)
         dispatchTableGlobal.CGLUpdateContext = NULL;
     }
-    CGLError  ret = (CGLError )0;
+    CGLError ret = (CGLError) 0;
     if (dispatchTableGlobal.CGLUpdateContext)
     {
-      Driver("CGLUpdateContext","(", ctx, ")");
       ret = dispatchTableGlobal.CGLUpdateContext(ctx);
+      Driver("CGLUpdateContext","(", ctx, ")", " returned ", ret);
     }
     else
       Warning( "CGLUpdateContext not available." );
@@ -34330,11 +34383,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglQuerySurfacePointerANGLE)
     {
-      Driver("eglQuerySurfacePointerANGLE","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ", ", value, ")");
       ret = dispatchTableGlobal.eglQuerySurfacePointerANGLE(dpy, surface, attribute, value);
+      Driver("eglQuerySurfacePointerANGLE","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ", ", value, ")", " returned ", ret);
     }
     else
       Warning( "eglQuerySurfacePointerANGLE not available." );
@@ -34357,11 +34410,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLint  ret = (EGLint )0;
+    EGLint ret = 0;
     if (dispatchTableGlobal.eglClientWaitSyncKHR)
     {
-      Driver("eglClientWaitSyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ", ", flags, ", ", timeout, ")");
       ret = dispatchTableGlobal.eglClientWaitSyncKHR(dpy, GLsync, flags, timeout);
+      Driver("eglClientWaitSyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ", ", flags, ", ", timeout, ")", " returned ", ret);
     }
     else
       Warning( "eglClientWaitSyncKHR not available." );
@@ -34382,11 +34435,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSyncKHR  ret = (EGLSyncKHR )0;
+    EGLSyncKHR ret = 0;
     if (dispatchTableGlobal.eglCreateSyncKHR)
     {
-      Driver("eglCreateSyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", EGLenumToString(type), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateSyncKHR(dpy, type, attrib_list);
+      Driver("eglCreateSyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", EGLenumToString(type), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateSyncKHR not available." );
@@ -34407,11 +34460,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglDestroySyncKHR)
     {
-      Driver("eglDestroySyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglDestroySyncKHR(dpy, GLsync);
+      Driver("eglDestroySyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglDestroySyncKHR not available." );
@@ -34432,11 +34485,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglGetSyncAttribKHR)
     {
-      Driver("eglGetSyncAttribKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ", ", attribute, ", ", value, ")");
       ret = dispatchTableGlobal.eglGetSyncAttribKHR(dpy, GLsync, attribute, value);
+      Driver("eglGetSyncAttribKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ", ", attribute, ", ", value, ")", " returned ", ret);
     }
     else
       Warning( "eglGetSyncAttribKHR not available." );
@@ -34459,11 +34512,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLImageKHR  ret = (EGLImageKHR )0;
+    EGLImageKHR ret = 0;
     if (dispatchTableGlobal.eglCreateImageKHR)
     {
-      Driver("eglCreateImageKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ", ", EGLenumToString(target), ", ", boost::print::optional(buffer,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list);
+      Driver("eglCreateImageKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ", ", EGLenumToString(target), ", ", boost::print::optional(buffer,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateImageKHR not available." );
@@ -34484,11 +34537,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglDestroyImageKHR)
     {
-      Driver("eglDestroyImageKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(image,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglDestroyImageKHR(dpy, image);
+      Driver("eglDestroyImageKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(image,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglDestroyImageKHR not available." );
@@ -34511,11 +34564,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglLockSurfaceKHR)
     {
-      Driver("eglLockSurfaceKHR","(", boost::print::optional(display,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglLockSurfaceKHR(display, surface, attrib_list);
+      Driver("eglLockSurfaceKHR","(", boost::print::optional(display,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attrib_list, ")", " returned ", ret);
     }
     else
       Warning( "eglLockSurfaceKHR not available." );
@@ -34536,11 +34589,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglUnlockSurfaceKHR)
     {
-      Driver("eglUnlockSurfaceKHR","(", boost::print::optional(display,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglUnlockSurfaceKHR(display, surface);
+      Driver("eglUnlockSurfaceKHR","(", boost::print::optional(display,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglUnlockSurfaceKHR not available." );
@@ -34563,11 +34616,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglStreamConsumerAcquireKHR)
     {
-      Driver("eglStreamConsumerAcquireKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglStreamConsumerAcquireKHR(dpy, stream);
+      Driver("eglStreamConsumerAcquireKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglStreamConsumerAcquireKHR not available." );
@@ -34588,11 +34641,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglStreamConsumerGLTextureExternalKHR)
     {
-      Driver("eglStreamConsumerGLTextureExternalKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglStreamConsumerGLTextureExternalKHR(dpy, stream);
+      Driver("eglStreamConsumerGLTextureExternalKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglStreamConsumerGLTextureExternalKHR not available." );
@@ -34613,11 +34666,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglStreamConsumerReleaseKHR)
     {
-      Driver("eglStreamConsumerReleaseKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglStreamConsumerReleaseKHR(dpy, stream);
+      Driver("eglStreamConsumerReleaseKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglStreamConsumerReleaseKHR not available." );
@@ -34640,11 +34693,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLStreamKHR  ret = (EGLStreamKHR )0;
+    EGLStreamKHR ret = 0;
     if (dispatchTableGlobal.eglCreateStreamFromFileDescriptorKHR)
     {
-      Driver("eglCreateStreamFromFileDescriptorKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", file_descriptor, ")");
       ret = dispatchTableGlobal.eglCreateStreamFromFileDescriptorKHR(dpy, file_descriptor);
+      Driver("eglCreateStreamFromFileDescriptorKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", file_descriptor, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateStreamFromFileDescriptorKHR not available." );
@@ -34665,11 +34718,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLNativeFileDescriptorKHR  ret = (EGLNativeFileDescriptorKHR )0;
+    EGLNativeFileDescriptorKHR ret = 0;
     if (dispatchTableGlobal.eglGetStreamFileDescriptorKHR)
     {
-      Driver("eglGetStreamFileDescriptorKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglGetStreamFileDescriptorKHR(dpy, stream);
+      Driver("eglGetStreamFileDescriptorKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglGetStreamFileDescriptorKHR not available." );
@@ -34692,11 +34745,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSurface  ret = (EGLSurface )0;
+    EGLSurface ret = 0;
     if (dispatchTableGlobal.eglCreateStreamProducerSurfaceKHR)
     {
-      Driver("eglCreateStreamProducerSurfaceKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateStreamProducerSurfaceKHR(dpy, config, stream, attrib_list);
+      Driver("eglCreateStreamProducerSurfaceKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(stream,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateStreamProducerSurfaceKHR not available." );
@@ -34719,11 +34772,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLint  ret = (EGLint )0;
+    EGLint ret = 0;
     if (dispatchTableGlobal.eglWaitSyncKHR)
     {
-      Driver("eglWaitSyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ", ", flags, ")");
       ret = dispatchTableGlobal.eglWaitSyncKHR(dpy, GLsync, flags);
+      Driver("eglWaitSyncKHR","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(GLsync,Logging::pointers), ", ", flags, ")", " returned ", ret);
     }
     else
       Warning( "eglWaitSyncKHR not available." );
@@ -34746,11 +34799,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLImageKHR  ret = (EGLImageKHR )0;
+    EGLImageKHR ret = 0;
     if (dispatchTableGlobal.eglCreateDRMImageMESA)
     {
-      Driver("eglCreateDRMImageMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateDRMImageMESA(dpy, attrib_list);
+      Driver("eglCreateDRMImageMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateDRMImageMESA not available." );
@@ -34771,11 +34824,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglExportDRMImageMESA)
     {
-      Driver("eglExportDRMImageMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(image,Logging::pointers), ", ", name, ", ", handle, ", ", stride, ")");
       ret = dispatchTableGlobal.eglExportDRMImageMESA(dpy, image, name, handle, stride);
+      Driver("eglExportDRMImageMESA","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(image,Logging::pointers), ", ", name, ", ", handle, ", ", stride, ")", " returned ", ret);
     }
     else
       Warning( "eglExportDRMImageMESA not available." );
@@ -34800,8 +34853,8 @@ extern "C" {
 
     if (dispatchTableGlobal.eglCoverageMaskNV)
     {
-      Driver("eglCoverageMaskNV","(", toString(mask), ")");
       dispatchTableGlobal.eglCoverageMaskNV(mask);
+      Driver("eglCoverageMaskNV","(", toString(mask), ")");
     }
     else
       Warning( "eglCoverageMaskNV not available." );
@@ -34823,8 +34876,8 @@ extern "C" {
 
     if (dispatchTableGlobal.eglCoverageOperationNV)
     {
-      Driver("eglCoverageOperationNV","(", toString(operation), ")");
       dispatchTableGlobal.eglCoverageOperationNV(operation);
+      Driver("eglCoverageOperationNV","(", toString(operation), ")");
     }
     else
       Warning( "eglCoverageOperationNV not available." );
@@ -34846,11 +34899,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglPostSubBufferNV)
     {
-      Driver("eglPostSubBufferNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", x, ", ", y, ", ", width, ", ", height, ")");
       ret = dispatchTableGlobal.eglPostSubBufferNV(dpy, surface, x, y, width, height);
+      Driver("eglPostSubBufferNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", x, ", ", y, ", ", width, ", ", height, ")", " returned ", ret);
     }
     else
       Warning( "eglPostSubBufferNV not available." );
@@ -34873,11 +34926,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLint  ret = (EGLint )0;
+    EGLint ret = 0;
     if (dispatchTableGlobal.eglClientWaitSyncNV)
     {
-      Driver("eglClientWaitSyncNV","(", boost::print::optional(GLsync,Logging::pointers), ", ", flags, ", ", timeout, ")");
       ret = dispatchTableGlobal.eglClientWaitSyncNV(GLsync, flags, timeout);
+      Driver("eglClientWaitSyncNV","(", boost::print::optional(GLsync,Logging::pointers), ", ", flags, ", ", timeout, ")", " returned ", ret);
     }
     else
       Warning( "eglClientWaitSyncNV not available." );
@@ -34898,11 +34951,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSyncNV  ret = (EGLSyncNV )0;
+    EGLSyncNV ret = 0;
     if (dispatchTableGlobal.eglCreateFenceSyncNV)
     {
-      Driver("eglCreateFenceSyncNV","(", boost::print::optional(dpy,Logging::pointers), ", ", EGLenumToString(condition), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateFenceSyncNV(dpy, condition, attrib_list);
+      Driver("eglCreateFenceSyncNV","(", boost::print::optional(dpy,Logging::pointers), ", ", EGLenumToString(condition), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateFenceSyncNV not available." );
@@ -34923,11 +34976,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglDestroySyncNV)
     {
-      Driver("eglDestroySyncNV","(", boost::print::optional(GLsync,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglDestroySyncNV(GLsync);
+      Driver("eglDestroySyncNV","(", boost::print::optional(GLsync,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglDestroySyncNV not available." );
@@ -34948,11 +35001,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglFenceNV)
     {
-      Driver("eglFenceNV","(", boost::print::optional(GLsync,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglFenceNV(GLsync);
+      Driver("eglFenceNV","(", boost::print::optional(GLsync,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglFenceNV not available." );
@@ -34973,11 +35026,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglGetSyncAttribNV)
     {
-      Driver("eglGetSyncAttribNV","(", boost::print::optional(GLsync,Logging::pointers), ", ", attribute, ", ", value, ")");
       ret = dispatchTableGlobal.eglGetSyncAttribNV(GLsync, attribute, value);
+      Driver("eglGetSyncAttribNV","(", boost::print::optional(GLsync,Logging::pointers), ", ", attribute, ", ", value, ")", " returned ", ret);
     }
     else
       Warning( "eglGetSyncAttribNV not available." );
@@ -34998,11 +35051,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglSignalSyncNV)
     {
-      Driver("eglSignalSyncNV","(", boost::print::optional(GLsync,Logging::pointers), ", ", EGLenumToString(mode), ")");
       ret = dispatchTableGlobal.eglSignalSyncNV(GLsync, mode);
+      Driver("eglSignalSyncNV","(", boost::print::optional(GLsync,Logging::pointers), ", ", EGLenumToString(mode), ")", " returned ", ret);
     }
     else
       Warning( "eglSignalSyncNV not available." );
@@ -35025,11 +35078,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLuint64NV  ret = (EGLuint64NV )0;
+    EGLuint64NV ret = 0;
     if (dispatchTableGlobal.eglGetSystemTimeFrequencyNV)
     {
-      Driver("eglGetSystemTimeFrequencyNV","()");
       ret = dispatchTableGlobal.eglGetSystemTimeFrequencyNV();
+      Driver("eglGetSystemTimeFrequencyNV","()", " returned ", ret);
     }
     else
       Warning( "eglGetSystemTimeFrequencyNV not available." );
@@ -35050,11 +35103,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLuint64NV  ret = (EGLuint64NV )0;
+    EGLuint64NV ret = 0;
     if (dispatchTableGlobal.eglGetSystemTimeNV)
     {
-      Driver("eglGetSystemTimeNV","()");
       ret = dispatchTableGlobal.eglGetSystemTimeNV();
+      Driver("eglGetSystemTimeNV","()", " returned ", ret);
     }
     else
       Warning( "eglGetSystemTimeNV not available." );
@@ -35077,11 +35130,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglChooseConfig)
     {
-      Driver("eglChooseConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", attrib_list, ", ", configs, ", ", config_size, ", ", num_config, ")");
       ret = dispatchTableGlobal.eglChooseConfig(dpy, attrib_list, configs, config_size, num_config);
+      Driver("eglChooseConfig","(", boost::print::optional(dpy,Logging::pointers), ", ", attrib_list, ", ", configs, ", ", config_size, ", ", num_config, ")", " returned ", ret);
     }
     else
       Warning( "eglChooseConfig not available." );
@@ -35102,11 +35155,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglCopyBuffers)
     {
-      Driver("eglCopyBuffers","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", boost::print::optional(target,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglCopyBuffers(dpy, surface, target);
+      Driver("eglCopyBuffers","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", boost::print::optional(target,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglCopyBuffers not available." );
@@ -35127,11 +35180,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLContext  ret = (EGLContext )0;
+    EGLContext ret = 0;
     if (dispatchTableGlobal.eglCreateContext)
     {
-      Driver("eglCreateContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(share_context,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateContext(dpy, config, share_context, attrib_list);
+      Driver("eglCreateContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(share_context,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateContext not available." );
@@ -35152,11 +35205,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSurface  ret = (EGLSurface )0;
+    EGLSurface ret = 0;
     if (dispatchTableGlobal.eglCreatePbufferSurface)
     {
-      Driver("eglCreatePbufferSurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreatePbufferSurface(dpy, config, attrib_list);
+      Driver("eglCreatePbufferSurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreatePbufferSurface not available." );
@@ -35177,11 +35230,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSurface  ret = (EGLSurface )0;
+    EGLSurface ret = 0;
     if (dispatchTableGlobal.eglCreatePixmapSurface)
     {
-      Driver("eglCreatePixmapSurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreatePixmapSurface(dpy, config, pixmap, attrib_list);
+      Driver("eglCreatePixmapSurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(pixmap,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreatePixmapSurface not available." );
@@ -35202,11 +35255,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSurface  ret = (EGLSurface )0;
+    EGLSurface ret = 0;
     if (dispatchTableGlobal.eglCreateWindowSurface)
     {
-      Driver("eglCreateWindowSurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(win,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreateWindowSurface(dpy, config, win, attrib_list);
+      Driver("eglCreateWindowSurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", boost::print::optional(win,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreateWindowSurface not available." );
@@ -35227,11 +35280,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglDestroyContext)
     {
-      Driver("eglDestroyContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglDestroyContext(dpy, ctx);
+      Driver("eglDestroyContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
       Init::destroyContext(RegalSystemContext(ctx));
     }
     else
@@ -35253,11 +35306,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglDestroySurface)
     {
-      Driver("eglDestroySurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglDestroySurface(dpy, surface);
+      Driver("eglDestroySurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglDestroySurface not available." );
@@ -35278,11 +35331,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglGetConfigAttrib)
     {
-      Driver("eglGetConfigAttrib","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", attribute, ", ", value, ")");
       ret = dispatchTableGlobal.eglGetConfigAttrib(dpy, config, attribute, value);
+      Driver("eglGetConfigAttrib","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", attribute, ", ", value, ")", " returned ", ret);
     }
     else
       Warning( "eglGetConfigAttrib not available." );
@@ -35303,11 +35356,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglGetConfigs)
     {
-      Driver("eglGetConfigs","(", boost::print::optional(dpy,Logging::pointers), ", ", configs, ", ", config_size, ", ", num_config, ")");
       ret = dispatchTableGlobal.eglGetConfigs(dpy, configs, config_size, num_config);
+      Driver("eglGetConfigs","(", boost::print::optional(dpy,Logging::pointers), ", ", configs, ", ", config_size, ", ", num_config, ")", " returned ", ret);
     }
     else
       Warning( "eglGetConfigs not available." );
@@ -35328,11 +35381,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLContext  ret = (EGLContext )0;
+    EGLContext ret = 0;
     if (dispatchTableGlobal.eglGetCurrentContext)
     {
-      Driver("eglGetCurrentContext","()");
       ret = dispatchTableGlobal.eglGetCurrentContext();
+      Driver("eglGetCurrentContext","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglGetCurrentContext not available." );
@@ -35353,11 +35406,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLDisplay  ret = (EGLDisplay )0;
+    EGLDisplay ret = 0;
     if (dispatchTableGlobal.eglGetCurrentDisplay)
     {
-      Driver("eglGetCurrentDisplay","()");
       ret = dispatchTableGlobal.eglGetCurrentDisplay();
+      Driver("eglGetCurrentDisplay","()", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglGetCurrentDisplay not available." );
@@ -35378,11 +35431,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSurface  ret = (EGLSurface )0;
+    EGLSurface ret = 0;
     if (dispatchTableGlobal.eglGetCurrentSurface)
     {
-      Driver("eglGetCurrentSurface","(", readdraw, ")");
       ret = dispatchTableGlobal.eglGetCurrentSurface(readdraw);
+      Driver("eglGetCurrentSurface","(", readdraw, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglGetCurrentSurface not available." );
@@ -35404,11 +35457,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLDisplay  ret = (EGLDisplay )0;
+    EGLDisplay ret = 0;
     if (dispatchTableGlobal.eglGetDisplay)
     {
-      Driver("eglGetDisplay","(", boost::print::optional(display_id,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglGetDisplay(display_id);
+      Driver("eglGetDisplay","(", boost::print::optional(display_id,Logging::pointers), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglGetDisplay not available." );
@@ -35429,11 +35482,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLint  ret = (EGLint )0;
+    EGLint ret = 0;
     if (dispatchTableGlobal.eglGetError)
     {
-      Driver("eglGetError","()");
       ret = dispatchTableGlobal.eglGetError();
+      Driver("eglGetError","()", " returned ", ret);
     }
     else
       Warning( "eglGetError not available." );
@@ -35454,7 +35507,7 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    __eglMustCastToProperFunctionPointerType  ret = (__eglMustCastToProperFunctionPointerType )0;
+    __eglMustCastToProperFunctionPointerType ret = 0;
     ret = Lookup::gl_Lookup<__eglMustCastToProperFunctionPointerType>(reinterpret_cast<const char *>(procname));
     if (ret)
       return ret;
@@ -35463,8 +35516,8 @@ extern "C" {
       return ret;
     if (dispatchTableGlobal.eglGetProcAddress)
     {
-      Driver("eglGetProcAddress","(", boost::print::quote(procname,'"'), ")");
       ret = dispatchTableGlobal.eglGetProcAddress(procname);
+      Driver("eglGetProcAddress","(", boost::print::quote(procname,'"'), ")", " returned ", ret);
     }
     else
       Warning( "eglGetProcAddress not available." );
@@ -35485,11 +35538,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglInitialize)
     {
-      Driver("eglInitialize","(", boost::print::optional(dpy,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglInitialize(dpy, major, minor);
+      Driver("eglInitialize","(", boost::print::optional(dpy,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglInitialize not available." );
@@ -35510,11 +35563,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglMakeCurrent)
     {
-      Driver("eglMakeCurrent","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(draw,Logging::pointers), ", ", boost::print::optional(read,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglMakeCurrent(dpy, draw, read, ctx);
+      Driver("eglMakeCurrent","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(draw,Logging::pointers), ", ", boost::print::optional(read,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ")", " returned ", ret);
       Init::makeCurrent(ctx);
     }
     else
@@ -35536,11 +35589,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglQueryContext)
     {
-      Driver("eglQueryContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ", ", attribute, ")");
       ret = dispatchTableGlobal.eglQueryContext(dpy, ctx, attribute, value);
+      Driver("eglQueryContext","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(ctx,Logging::pointers), ", ", attribute, ")", " returned ", ret);
     }
     else
       Warning( "eglQueryContext not available." );
@@ -35564,8 +35617,8 @@ extern "C" {
     const char * ret = NULL;
     if (dispatchTableGlobal.eglQueryString)
     {
-      Driver("eglQueryString","(", boost::print::optional(dpy,Logging::pointers), ", ", EGLenumToString(name), ")");
       ret = dispatchTableGlobal.eglQueryString(dpy, name);
+      Driver("eglQueryString","(", boost::print::optional(dpy,Logging::pointers), ", ", EGLenumToString(name), ")", " returned ", boost::print::quote(ret,'"'));
     }
     else
       Warning( "eglQueryString not available." );
@@ -35586,11 +35639,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglQuerySurface)
     {
-      Driver("eglQuerySurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ")");
       ret = dispatchTableGlobal.eglQuerySurface(dpy, surface, attribute, value);
+      Driver("eglQuerySurface","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ")", " returned ", ret);
     }
     else
       Warning( "eglQuerySurface not available." );
@@ -35611,15 +35664,15 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     RegalContext *_context = REGAL_GET_CONTEXT();
     // Notify Regal::Frame about the swap buffers event.
     if (_context && _context->frame)
         _context->frame->eglSwapBuffers(*_context);
     if (dispatchTableGlobal.eglSwapBuffers)
     {
-      Driver("eglSwapBuffers","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglSwapBuffers(dpy, surface);
+      Driver("eglSwapBuffers","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglSwapBuffers not available." );
@@ -35640,11 +35693,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglTerminate)
     {
-      Driver("eglTerminate","(", boost::print::optional(dpy,Logging::pointers), ")");
       ret = dispatchTableGlobal.eglTerminate(dpy);
+      Driver("eglTerminate","(", boost::print::optional(dpy,Logging::pointers), ")", " returned ", ret);
     }
     else
       Warning( "eglTerminate not available." );
@@ -35665,11 +35718,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglWaitGL)
     {
-      Driver("eglWaitGL","()");
       ret = dispatchTableGlobal.eglWaitGL();
+      Driver("eglWaitGL","()", " returned ", ret);
     }
     else
       Warning( "eglWaitGL not available." );
@@ -35690,11 +35743,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglWaitNative)
     {
-      Driver("eglWaitNative","(", engine, ")");
       ret = dispatchTableGlobal.eglWaitNative(engine);
+      Driver("eglWaitNative","(", engine, ")", " returned ", ret);
     }
     else
       Warning( "eglWaitNative not available." );
@@ -35717,11 +35770,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglBindTexImage)
     {
-      Driver("eglBindTexImage","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", buffer, ")");
       ret = dispatchTableGlobal.eglBindTexImage(dpy, surface, buffer);
+      Driver("eglBindTexImage","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", buffer, ")", " returned ", ret);
     }
     else
       Warning( "eglBindTexImage not available." );
@@ -35742,11 +35795,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglReleaseTexImage)
     {
-      Driver("eglReleaseTexImage","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", buffer, ")");
       ret = dispatchTableGlobal.eglReleaseTexImage(dpy, surface, buffer);
+      Driver("eglReleaseTexImage","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", buffer, ")", " returned ", ret);
     }
     else
       Warning( "eglReleaseTexImage not available." );
@@ -35769,11 +35822,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglBindAPI)
     {
-      Driver("eglBindAPI","(", EGLenumToString(api), ")");
       ret = dispatchTableGlobal.eglBindAPI(api);
+      Driver("eglBindAPI","(", EGLenumToString(api), ")", " returned ", ret);
     }
     else
       Warning( "eglBindAPI not available." );
@@ -35794,11 +35847,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLSurface  ret = (EGLSurface )0;
+    EGLSurface ret = 0;
     if (dispatchTableGlobal.eglCreatePbufferFromClientBuffer)
     {
-      Driver("eglCreatePbufferFromClientBuffer","(", dpy, ", ", EGLenumToString(buftype), ", ", boost::print::optional(buffer,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", attrib_list, ")");
       ret = dispatchTableGlobal.eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list);
+      Driver("eglCreatePbufferFromClientBuffer","(", dpy, ", ", EGLenumToString(buftype), ", ", boost::print::optional(buffer,Logging::pointers), ", ", boost::print::optional(config,Logging::pointers), ", ", attrib_list, ")", " returned ", boost::print::optional(ret,Logging::pointers));
     }
     else
       Warning( "eglCreatePbufferFromClientBuffer not available." );
@@ -35819,11 +35872,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLenum  ret = (EGLenum )0;
+    EGLenum ret = 0;
     if (dispatchTableGlobal.eglQueryAPI)
     {
-      Driver("eglQueryAPI","()");
       ret = dispatchTableGlobal.eglQueryAPI();
+      Driver("eglQueryAPI","()", " returned ", EGLenumToString(ret));
     }
     else
       Warning( "eglQueryAPI not available." );
@@ -35844,11 +35897,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglReleaseThread)
     {
-      Driver("eglReleaseThread","()");
       ret = dispatchTableGlobal.eglReleaseThread();
+      Driver("eglReleaseThread","()", " returned ", ret);
     }
     else
       Warning( "eglReleaseThread not available." );
@@ -35869,11 +35922,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglSurfaceAttrib)
     {
-      Driver("eglSurfaceAttrib","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ", ", value, ")");
       ret = dispatchTableGlobal.eglSurfaceAttrib(dpy, surface, attribute, value);
+      Driver("eglSurfaceAttrib","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ", ", value, ")", " returned ", ret);
     }
     else
       Warning( "eglSurfaceAttrib not available." );
@@ -35894,11 +35947,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglSwapInterval)
     {
-      Driver("eglSwapInterval","(", boost::print::optional(dpy,Logging::pointers), ", ", interval, ")");
       ret = dispatchTableGlobal.eglSwapInterval(dpy, interval);
+      Driver("eglSwapInterval","(", boost::print::optional(dpy,Logging::pointers), ", ", interval, ")", " returned ", ret);
     }
     else
       Warning( "eglSwapInterval not available." );
@@ -35919,11 +35972,11 @@ extern "C" {
     }
     #endif // !REGAL_STATIC_EGL
 
-    EGLBoolean  ret = (EGLBoolean )0;
+    EGLBoolean ret = 0;
     if (dispatchTableGlobal.eglWaitClient)
     {
-      Driver("eglWaitClient","()");
       ret = dispatchTableGlobal.eglWaitClient();
+      Driver("eglWaitClient","()", " returned ", ret);
     }
     else
       Warning( "eglWaitClient not available." );

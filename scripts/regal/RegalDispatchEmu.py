@@ -178,9 +178,7 @@ def apiEmuFuncDefineCode(apis, args):
               # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml
 
               if name=='glEnable' or name=='glDisable' or name=='glIsEnabled':
-                code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->es2)\n'
-                code += '       #endif\n'
+                code += '       if (_context->isES2())\n'
                 code += '         switch (cap)\n'
                 code += '         {\n'
                 for i in api.enums:
@@ -201,9 +199,7 @@ def apiEmuFuncDefineCode(apis, args):
               # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml
 
               if name=='glHint':
-                code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->es2)\n'
-                code += '       #endif\n'
+                code += '       if (_context->isES2())\n'
                 code += '         switch (target)\n'
                 code += '         {\n'
                 for i in api.enums:
@@ -225,9 +221,7 @@ def apiEmuFuncDefineCode(apis, args):
               # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
 
               if name=='glBindTexture':
-                code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->es2)\n'
-                code += '       #endif\n'
+                code += '       if (_context->isES2())\n'
                 code += '         switch (target)\n'
                 code += '         {\n'
                 for i in api.enums:
@@ -249,9 +243,7 @@ def apiEmuFuncDefineCode(apis, args):
               # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml
 
               if name=='glTexSubImage2D':
-                code += '       #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '       if (_context->info->es2)\n'
-                code += '       #endif\n'
+                code += '       if (_context->isES2())\n'
                 code += '         switch (target)\n'
                 code += '         {\n'
                 for i in api.enums:
@@ -274,7 +266,7 @@ def apiEmuFuncDefineCode(apis, args):
 
               if es2Name != None:
                 code += '      '
-                code += 'if (_context->info->es2)\n'
+                code += 'if (_context->isES2())\n'
                 code += '        '
                 if not typeIsVoid(rType):
                     code += 'return '
@@ -295,9 +287,7 @@ def apiEmuFuncDefineCode(apis, args):
               # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml
 
               if name=='glTexImage2D':
-                code += '  #if !REGAL_FORCE_ES2_PROFILE\n'
-                code += '  if (_context->info->es2)\n'
-                code += '  #endif\n'
+                code += '  if (_context->isES2())\n'
                 code += '  {\n'
                 code += '    switch (internalformat)\n'
                 code += '    {\n'
@@ -327,7 +317,7 @@ def apiEmuFuncDefineCode(apis, args):
               code += '  '
 
               if es2Name != None:
-                code += 'if (_context->info->es2)\n'
+                code += 'if (_context->isES2())\n'
                 code += '    '
                 if not typeIsVoid(rType):
                     code += 'return '

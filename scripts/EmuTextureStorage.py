@@ -1,7 +1,7 @@
 #!/usr/bin/python -B
 
 texstoFormulae = {
-    'TextureStorage' : { 
+    'TextureStorage' : {
         'entries' : [ 'glTexStorage(1|2|3)D(EXT|)' ],
         'impl' : [ '_context->texsto->TextureStorage( _context, ${arg0plus} );', ],
     },

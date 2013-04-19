@@ -38,9 +38,10 @@ ppaFormulae = {
     'prefix'     : [ '_context->ppa->${m1}( ${arg0plus} );', ],
   },
   'TrackDrawBuffer' : {
-    'entries'    : [ 'glDrawBuffer(s|)(ARB|)' ],
+    'entries'    : [ 'glDrawBuffer(s|)(ARB|EXT|NV|)' ],
     'impl'    : [
-      'if( !_context->info->es2 ) {',
+      'if( !_context->isES2() ) {',
+      '  _context->ppa->glDrawBuffer${m1}( ${arg0plus} );',
       '  _context->dispatcher.emulation.glDrawBuffer${m1}( ${arg0plus} );',
       '}',
     ],
@@ -118,5 +119,24 @@ ppaFormulae = {
     'entries'    : [ 'glPolygonStipple' ],
     'prefix'     : [ '_context->ppa->glPolygonStipple( ${arg0plus} );', ],
   },
-
+  'TrackAlphaFunc' : {
+    'entries'    : [ 'glAlphaFunc' ],
+    'prefix'     : [ '_context->ppa->glAlphaFunc( ${arg0plus} );', ],
+  },
+  'TrackBlend' : {
+    'entries'    : [ 'glBlend(Func|Equation|Color)(Separate|)(i|)' ],
+    'prefix'     : [ '_context->ppa->glBlend${m1}${m2}${m3}( ${arg0plus} );', ],
+  },
+  'TrackLogicOp' : {
+    'entries'    : [ 'glLogicOp' ],
+    'prefix'     : [ '_context->ppa->glLogicOp( ${arg0plus} );', ],
+  },
+  'TrackMask' : {
+    'entries'    : [ 'gl(Index|Color)Mask(i|)' ],
+    'prefix'     : [ '_context->ppa->gl${m1}Mask${m2}( ${arg0plus} );', ],
+  },
+  'TrackClear' : {
+    'entries'    : [ 'glClear(Index|Color)' ],
+    'prefix'     : [ '_context->ppa->glClear${m1}( ${arg0plus} );', ],
+  },
 }

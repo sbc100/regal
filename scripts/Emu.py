@@ -165,16 +165,23 @@ def emuFindEntry(func, emuFormulae, member):
     subs['name'] = name
     subs['dummyretval'] = dummyRetVal
     addSubstitution( name, formula, subs )
-    substitute( emue, formula, 'impl', subs )
-    substitute( emue, formula, 'init', subs )
+    substitute( emue, formula, 'impl',   subs )
+    substitute( emue, formula, 'init',   subs )
+    substitute( emue, formula, 'cond',   subs )
     substitute( emue, formula, 'prefix', subs )
     substitute( emue, formula, 'suffix', subs )
+    substitute( emue, formula, 'pre',    subs )
+    substitute( emue, formula, 'post',   subs )
+    emue['cond'] = None
+    if 'cond' in formula:
+      emue['cond'] = formula['cond']
+
     return emue
 
   return None
 
 #
-# Generate code for prefix, init, impl or suffix
+# Generate code for prefix, init, cond, impl or suffix
 #
 
 def emuCodeGen(emue,section):

@@ -84,6 +84,9 @@ struct ContextInfo
 
   bool        regal_ext_direct_state_access;
   bool        regal_arb_texture_storage;
+  bool        regal_ext_blend_color;
+  bool        regal_ext_blend_subtract;
+  bool        regal_nv_blend_square;
 
   std::set<std::string> regalExtensionsSet;
 
@@ -447,6 +450,7 @@ struct ContextInfo
   GLboolean gl_nvx_conditional_render : 1;
   GLboolean gl_nvx_gpu_memory_info : 1;
   GLboolean gl_nv_bindless_texture : 1;
+  GLboolean gl_nv_blend_square : 1;
   GLboolean gl_nv_compute_program5 : 1;
   GLboolean gl_nv_conditional_render : 1;
   GLboolean gl_nv_copy_depth_to_color : 1;

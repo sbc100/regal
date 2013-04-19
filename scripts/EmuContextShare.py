@@ -28,4 +28,21 @@ formulae = {
     ]
   },
 
+  # WGL
+  
+  'wglCreateContextAttribsARB' : {
+    'entries' : [ 'wglCreateContextAttribsARB' ],
+    'suffix' : [
+      'if (ret && hShareContext)',
+      '  Init::shareContext(ret,hShareContext);'
+    ]
+  },
+
+  'wglShareLists' : {
+    'entries' : [ 'wglShareLists' ],
+    'suffix' : [
+      'if (ret && hglrcShare && hglrcSrc)',
+      '  Init::shareContext(hglrcShare,hglrcSrc);'
+    ]
+  },  
 }

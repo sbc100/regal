@@ -19278,6 +19278,26 @@ static void REGAL_CALL code_glGetProgramStageiv(GLuint program, GLenum shaderTyp
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static void REGAL_CALL code_glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.code._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetProgramSubroutineParameteruivNV)(target, index, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    size_t _paramsIndex = _context->codeOutputNext++;
+    _code << indent << "GLuint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "glGetProgramSubroutineParameteruivNV(";
+                   _code << toString(target);
+    _code << ", "; _code << index;
+    _code << ", "; _code << "o" << _paramsIndex;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static GLuint REGAL_CALL code_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -19333,6 +19353,26 @@ static void REGAL_CALL code_glGetUniformSubroutineuiv(GLenum shaderType, GLint l
                    _code << toString(shaderType);
     _code << ", "; _code << location;
     _code << ", "; _code << "o" << _paramsIndex;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.code._next;
+    RegalAssert(_next);
+    _next->call(&_next->glProgramSubroutineParametersuivNV)(target, count, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    size_t _paramsIndex = _context->codeInputNext++;
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(params,count,"","{ "," };",", ") << "\n";
+    _code << indent << "glProgramSubroutineParametersuivNV(";
+                   _code << toString(target);
+    _code << ", "; _code << count;
+    _code << ", "; _code << "i" << _paramsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -50732,9 +50772,11 @@ void InitDispatchTableCode(DispatchTable &tbl)
   tbl.glGetActiveSubroutineUniformName = code_glGetActiveSubroutineUniformName;
   tbl.glGetActiveSubroutineUniformiv = code_glGetActiveSubroutineUniformiv;
   tbl.glGetProgramStageiv = code_glGetProgramStageiv;
+  tbl.glGetProgramSubroutineParameteruivNV = code_glGetProgramSubroutineParameteruivNV;
   tbl.glGetSubroutineIndex = code_glGetSubroutineIndex;
   tbl.glGetSubroutineUniformLocation = code_glGetSubroutineUniformLocation;
   tbl.glGetUniformSubroutineuiv = code_glGetUniformSubroutineuiv;
+  tbl.glProgramSubroutineParametersuivNV = code_glProgramSubroutineParametersuivNV;
   tbl.glUniformSubroutinesuiv = code_glUniformSubroutinesuiv;
   tbl.glCompileShaderIncludeARB = code_glCompileShaderIncludeARB;
   tbl.glDeleteNamedStringARB = code_glDeleteNamedStringARB;

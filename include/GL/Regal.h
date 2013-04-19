@@ -6123,7 +6123,9 @@ typedef void (REGAL_CALL *PFNGLGETACTIVESUBROUTINENAMEPROC)(GLuint program, GLen
 typedef void (REGAL_CALL *PFNGLGETACTIVESUBROUTINEUNIFORMIVPROC)(GLuint program, GLenum shaderType, GLuint index, GLenum pname, GLint *values);
 typedef void (REGAL_CALL *PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC)(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name);
 typedef void (REGAL_CALL *PFNGLGETPROGRAMSTAGEIVPROC)(GLuint program, GLenum shaderType, GLenum pname, GLint *values);
+typedef void (REGAL_CALL *PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROC)(GLenum target, GLuint index, GLuint *params);
 typedef void (REGAL_CALL *PFNGLGETUNIFORMSUBROUTINEUIVPROC)(GLenum shaderType, GLint location, GLuint *params);
+typedef void (REGAL_CALL *PFNGLPROGRAMSUBROUTINEPARAMETERSUIVNVPROC)(GLenum target, GLsizei count, const GLuint *params);
 typedef void (REGAL_CALL *PFNGLUNIFORMSUBROUTINESUIVPROC)(GLenum shaderType, GLsizei count, const GLuint *indices);
 #endif
 
@@ -6132,9 +6134,11 @@ typedef void (REGAL_CALL *PFNGLUNIFORMSUBROUTINESUIVPROC)(GLenum shaderType, GLs
 #define glGetActiveSubroutineUniformName    rglGetActiveSubroutineUniformName
 #define glGetActiveSubroutineUniformiv      rglGetActiveSubroutineUniformiv
 #define glGetProgramStageiv                 rglGetProgramStageiv
+#define glGetProgramSubroutineParameteruivNV rglGetProgramSubroutineParameteruivNV
 #define glGetSubroutineIndex                rglGetSubroutineIndex
 #define glGetSubroutineUniformLocation      rglGetSubroutineUniformLocation
 #define glGetUniformSubroutineuiv           rglGetUniformSubroutineuiv
+#define glProgramSubroutineParametersuivNV  rglProgramSubroutineParametersuivNV
 #define glUniformSubroutinesuiv             rglUniformSubroutinesuiv
 #endif
 
@@ -6145,7 +6149,9 @@ REGAL_DECL void REGAL_CALL glGetActiveSubroutineName(GLuint program, GLenum shad
 REGAL_DECL void REGAL_CALL glGetActiveSubroutineUniformName(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name);
 REGAL_DECL void REGAL_CALL glGetActiveSubroutineUniformiv(GLuint program, GLenum shaderType, GLuint index, GLenum pname, GLint *values);
 REGAL_DECL void REGAL_CALL glGetProgramStageiv(GLuint program, GLenum shaderType, GLenum pname, GLint *values);
+REGAL_DECL void REGAL_CALL glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params);
 REGAL_DECL void REGAL_CALL glGetUniformSubroutineuiv(GLenum shaderType, GLint location, GLuint *params);
+REGAL_DECL void REGAL_CALL glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params);
 REGAL_DECL void REGAL_CALL glUniformSubroutinesuiv(GLenum shaderType, GLsizei count, const GLuint *indices);
 #endif
 

@@ -23512,6 +23512,17 @@ glGetProgramStageiv.trace = True
 glGetProgramStageiv.play = True
 gl.add(glGetProgramStageiv)
 
+glGetProgramSubroutineParameteruivNV = Function('glGetProgramSubroutineParameteruivNV')
+glGetProgramSubroutineParameteruivNV.ret = Return('void')
+glGetProgramSubroutineParameteruivNV.add( Input( 'target','GLenum' ))
+glGetProgramSubroutineParameteruivNV.add( Input( 'index','GLuint' ))
+glGetProgramSubroutineParameteruivNV.add( Output( 'params','GLuint *' ,size = 1 ))
+glGetProgramSubroutineParameteruivNV.version = '4.0'
+glGetProgramSubroutineParameteruivNV.category = 'GL_ARB_shader_subroutine'
+glGetProgramSubroutineParameteruivNV.trace = True
+glGetProgramSubroutineParameteruivNV.play = True
+gl.add(glGetProgramSubroutineParameteruivNV)
+
 glGetSubroutineIndex = Function('glGetSubroutineIndex')
 glGetSubroutineIndex.ret = Return('GLuint')
 glGetSubroutineIndex.add( Input( 'program','GLuint' ))
@@ -23544,6 +23555,17 @@ glGetUniformSubroutineuiv.category = 'GL_ARB_shader_subroutine'
 glGetUniformSubroutineuiv.trace = True
 glGetUniformSubroutineuiv.play = True
 gl.add(glGetUniformSubroutineuiv)
+
+glProgramSubroutineParametersuivNV = Function('glProgramSubroutineParametersuivNV')
+glProgramSubroutineParametersuivNV.ret = Return('void')
+glProgramSubroutineParametersuivNV.add( Input( 'target','GLenum' ))
+glProgramSubroutineParametersuivNV.add( Input( 'count','GLsizei' ))
+glProgramSubroutineParametersuivNV.add( Input( 'params','const GLuint *' ,size = 'count' ))
+glProgramSubroutineParametersuivNV.version = '4.0'
+glProgramSubroutineParametersuivNV.category = 'GL_ARB_shader_subroutine'
+glProgramSubroutineParametersuivNV.trace = True
+glProgramSubroutineParametersuivNV.play = True
+gl.add(glProgramSubroutineParametersuivNV)
 
 glUniformSubroutinesuiv = Function('glUniformSubroutinesuiv')
 glUniformSubroutinesuiv.ret = Return('void')
@@ -42201,143 +42223,143 @@ glAddSwapHintRectWIN.play = True
 gl.add(glAddSwapHintRectWIN)
 
 GL_3DFX_multisample = Extension('GL_3DFX_multisample')
-GL_3DFX_multisample.url = 'http://www.opengl.org/registry/specs/gl/3DFX/3dfx_multisample.txt'
+GL_3DFX_multisample.url = 'http://www.opengl.org/registry/specs/3DFX/3dfx_multisample.txt'
 GL_3DFX_multisample.enumerants = ['GL_MULTISAMPLE_3DFX','GL_MULTISAMPLE_BIT_3DFX','GL_SAMPLES_3DFX','GL_SAMPLE_BUFFERS_3DFX']
 gl.add(GL_3DFX_multisample)
 
 GL_3DFX_tbuffer = Extension('GL_3DFX_tbuffer')
-GL_3DFX_tbuffer.url = 'http://www.opengl.org/registry/specs/gl/3DFX/tbuffer.txt'
+GL_3DFX_tbuffer.url = 'http://www.opengl.org/registry/specs/3DFX/tbuffer.txt'
 GL_3DFX_tbuffer.functions = ['glTbufferMask3DFX']
 gl.add(GL_3DFX_tbuffer)
 
 GL_3DFX_texture_compression_FXT1 = Extension('GL_3DFX_texture_compression_FXT1')
-GL_3DFX_texture_compression_FXT1.url = 'http://www.opengl.org/registry/specs/gl/3DFX/texture_compression_FXT1.txt'
+GL_3DFX_texture_compression_FXT1.url = 'http://www.opengl.org/registry/specs/3DFX/texture_compression_FXT1.txt'
 GL_3DFX_texture_compression_FXT1.enumerants = ['GL_COMPRESSED_RGBA_FXT1_3DFX','GL_COMPRESSED_RGB_FXT1_3DFX']
 gl.add(GL_3DFX_texture_compression_FXT1)
 
 GL_AMD_blend_minmax_factor = Extension('GL_AMD_blend_minmax_factor')
-GL_AMD_blend_minmax_factor.url = 'http://www.opengl.org/registry/specs/gl/AMD/blend_minmax_factor.txt'
+GL_AMD_blend_minmax_factor.url = 'http://www.opengl.org/registry/specs/AMD/blend_minmax_factor.txt'
 GL_AMD_blend_minmax_factor.enumerants = ['GL_FACTOR_MAX_AMD','GL_FACTOR_MIN_AMD']
 gl.add(GL_AMD_blend_minmax_factor)
 
 GL_AMD_conservative_depth = Extension('GL_AMD_conservative_depth')
-GL_AMD_conservative_depth.url = 'http://www.opengl.org/registry/specs/gl/AMD/conservative_depth.txt'
+GL_AMD_conservative_depth.url = 'http://www.opengl.org/registry/specs/AMD/conservative_depth.txt'
 gl.add(GL_AMD_conservative_depth)
 
 GL_AMD_debug_output = Extension('GL_AMD_debug_output')
-GL_AMD_debug_output.url = 'http://www.opengl.org/registry/specs/gl/AMD/debug_output.txt'
+GL_AMD_debug_output.url = 'http://www.opengl.org/registry/specs/AMD/debug_output.txt'
 GL_AMD_debug_output.enumerants = ['GL_DEBUG_CATEGORY_API_ERROR_AMD','GL_DEBUG_CATEGORY_APPLICATION_AMD','GL_DEBUG_CATEGORY_DEPRECATION_AMD','GL_DEBUG_CATEGORY_OTHER_AMD','GL_DEBUG_CATEGORY_PERFORMANCE_AMD','GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD','GL_DEBUG_CATEGORY_UNDEFINED_BEHAVIOR_AMD','GL_DEBUG_CATEGORY_WINDOW_SYSTEM_AMD','GL_DEBUG_LOGGED_MESSAGES_AMD','GL_DEBUG_SEVERITY_HIGH_AMD','GL_DEBUG_SEVERITY_LOW_AMD','GL_DEBUG_SEVERITY_MEDIUM_AMD','GL_MAX_DEBUG_LOGGED_MESSAGES_AMD','GL_MAX_DEBUG_MESSAGE_LENGTH_AMD']
 GL_AMD_debug_output.functions = ['glGetDebugMessageLogAMD','glDebugMessageCallbackAMD','glDebugMessageEnableAMD','glDebugMessageInsertAMD']
 gl.add(GL_AMD_debug_output)
 
 GL_AMD_depth_clamp_separate = Extension('GL_AMD_depth_clamp_separate')
-GL_AMD_depth_clamp_separate.url = 'http://www.opengl.org/registry/specs/gl/AMD/depth_clamp_separate.txt'
+GL_AMD_depth_clamp_separate.url = 'http://www.opengl.org/registry/specs/AMD/depth_clamp_separate.txt'
 GL_AMD_depth_clamp_separate.enumerants = ['GL_DEPTH_CLAMP_FAR_AMD','GL_DEPTH_CLAMP_NEAR_AMD']
 gl.add(GL_AMD_depth_clamp_separate)
 
 GL_AMD_draw_buffers_blend = Extension('GL_AMD_draw_buffers_blend')
-GL_AMD_draw_buffers_blend.url = 'http://www.opengl.org/registry/specs/gl/AMD/draw_buffers_blend.txt'
+GL_AMD_draw_buffers_blend.url = 'http://www.opengl.org/registry/specs/AMD/draw_buffers_blend.txt'
 GL_AMD_draw_buffers_blend.functions = ['glBlendEquationIndexedAMD','glBlendEquationSeparateIndexedAMD','glBlendFuncIndexedAMD','glBlendFuncSeparateIndexedAMD']
 gl.add(GL_AMD_draw_buffers_blend)
 
 GL_AMD_multi_draw_indirect = Extension('GL_AMD_multi_draw_indirect')
-GL_AMD_multi_draw_indirect.url = 'http://www.opengl.org/registry/specs/gl/AMD/multi_draw_indirect.txt'
+GL_AMD_multi_draw_indirect.url = 'http://www.opengl.org/registry/specs/AMD/multi_draw_indirect.txt'
 GL_AMD_multi_draw_indirect.functions = ['glMultiDrawArraysIndirectAMD','glMultiDrawElementsIndirectAMD']
 gl.add(GL_AMD_multi_draw_indirect)
 
 GL_AMD_name_gen_delete = Extension('GL_AMD_name_gen_delete')
-GL_AMD_name_gen_delete.url = 'http://www.opengl.org/registry/specs/gl/AMD/name_gen_delete.txt'
+GL_AMD_name_gen_delete.url = 'http://www.opengl.org/registry/specs/AMD/name_gen_delete.txt'
 GL_AMD_name_gen_delete.enumerants = ['GL_DATA_BUFFER_AMD','GL_PERFORMANCE_MONITOR_AMD','GL_QUERY_OBJECT_AMD','GL_SAMPLER_OBJECT_AMD','GL_VERTEX_ARRAY_OBJECT_AMD']
 GL_AMD_name_gen_delete.functions = ['glIsNameAMD','glDeleteNamesAMD','glGenNamesAMD']
 gl.add(GL_AMD_name_gen_delete)
 
 GL_AMD_performance_monitor = Extension('GL_AMD_performance_monitor')
-GL_AMD_performance_monitor.url = 'http://www.opengl.org/registry/specs/gl/AMD/performance_monitor.txt'
+GL_AMD_performance_monitor.url = 'http://www.opengl.org/registry/specs/AMD/performance_monitor.txt'
 GL_AMD_performance_monitor.enumerants = ['GL_COUNTER_RANGE_AMD','GL_COUNTER_TYPE_AMD','GL_PERCENTAGE_AMD','GL_PERFMON_RESULT_AMD','GL_PERFMON_RESULT_AVAILABLE_AMD','GL_PERFMON_RESULT_SIZE_AMD','GL_UNSIGNED_INT64_AMD']
 GL_AMD_performance_monitor.functions = ['glBeginPerfMonitorAMD','glDeletePerfMonitorsAMD','glEndPerfMonitorAMD','glGenPerfMonitorsAMD','glGetPerfMonitorCounterDataAMD','glGetPerfMonitorCounterInfoAMD','glGetPerfMonitorCounterStringAMD','glGetPerfMonitorCountersAMD','glGetPerfMonitorGroupStringAMD','glGetPerfMonitorGroupsAMD','glSelectPerfMonitorCountersAMD']
 gl.add(GL_AMD_performance_monitor)
 
 GL_AMD_pinned_memory = Extension('GL_AMD_pinned_memory')
-GL_AMD_pinned_memory.url = 'http://www.opengl.org/registry/specs/gl/AMD/pinned_memory.txt'
+GL_AMD_pinned_memory.url = 'http://www.opengl.org/registry/specs/AMD/pinned_memory.txt'
 GL_AMD_pinned_memory.enumerants = ['GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD']
 gl.add(GL_AMD_pinned_memory)
 
 GL_AMD_query_buffer_object = Extension('GL_AMD_query_buffer_object')
-GL_AMD_query_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/AMD/query_buffer_object.txt'
+GL_AMD_query_buffer_object.url = 'http://www.opengl.org/registry/specs/AMD/query_buffer_object.txt'
 GL_AMD_query_buffer_object.enumerants = ['GL_QUERY_BUFFER_AMD','GL_QUERY_BUFFER_BINDING_AMD','GL_QUERY_RESULT_NO_WAIT_AMD']
 gl.add(GL_AMD_query_buffer_object)
 
 GL_AMD_sample_positions = Extension('GL_AMD_sample_positions')
-GL_AMD_sample_positions.url = 'http://www.opengl.org/registry/specs/gl/AMD/sample_positions.txt'
+GL_AMD_sample_positions.url = 'http://www.opengl.org/registry/specs/AMD/sample_positions.txt'
 GL_AMD_sample_positions.enumerants = ['GL_SUBSAMPLE_DISTANCE_AMD']
 GL_AMD_sample_positions.functions = ['glSetMultisamplefvAMD']
 gl.add(GL_AMD_sample_positions)
 
 GL_AMD_seamless_cubemap_per_texture = Extension('GL_AMD_seamless_cubemap_per_texture')
-GL_AMD_seamless_cubemap_per_texture.url = 'http://www.opengl.org/registry/specs/gl/AMD/seamless_cubemap_per_texture.txt'
+GL_AMD_seamless_cubemap_per_texture.url = 'http://www.opengl.org/registry/specs/AMD/seamless_cubemap_per_texture.txt'
 GL_AMD_seamless_cubemap_per_texture.enumerants = ['GL_TEXTURE_CUBE_MAP_SEAMLESS_ARB']
 gl.add(GL_AMD_seamless_cubemap_per_texture)
 
 GL_AMD_shader_stencil_export = Extension('GL_AMD_shader_stencil_export')
-GL_AMD_shader_stencil_export.url = 'http://www.opengl.org/registry/specs/gl/AMD/shader_stencil_export.txt'
+GL_AMD_shader_stencil_export.url = 'http://www.opengl.org/registry/specs/AMD/shader_stencil_export.txt'
 gl.add(GL_AMD_shader_stencil_export)
 
 GL_AMD_shader_trinary_minmax = Extension('GL_AMD_shader_trinary_minmax')
-GL_AMD_shader_trinary_minmax.url = 'http://www.opengl.org/registry/specs/gl/AMD/shader_trinary_minmax.txt'
+GL_AMD_shader_trinary_minmax.url = 'http://www.opengl.org/registry/specs/AMD/shader_trinary_minmax.txt'
 gl.add(GL_AMD_shader_trinary_minmax)
 
 GL_AMD_sparse_texture = Extension('GL_AMD_sparse_texture')
-GL_AMD_sparse_texture.url = 'http://www.opengl.org/registry/specs/gl/AMD/sparse_texture.txt'
+GL_AMD_sparse_texture.url = 'http://www.opengl.org/registry/specs/AMD/sparse_texture.txt'
 GL_AMD_sparse_texture.enumerants = ['GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD','GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS','GL_MAX_SPARSE_TEXTURE_SIZE_AMD','GL_MIN_LOD_WARNING_AMD','GL_MIN_SPARSE_LEVEL_AMD','GL_TEXTURE_STORAGE_SPARSE_BIT_AMD','GL_VIRTUAL_PAGE_SIZE_X_AMD','GL_VIRTUAL_PAGE_SIZE_Y_AMD','GL_VIRTUAL_PAGE_SIZE_Z_AMD']
 GL_AMD_sparse_texture.functions = ['glTexStorageSparseAMD','glTextureStorageSparseAMD']
 gl.add(GL_AMD_sparse_texture)
 
 GL_AMD_stencil_operation_extended = Extension('GL_AMD_stencil_operation_extended')
-GL_AMD_stencil_operation_extended.url = 'http://www.opengl.org/registry/specs/gl/AMD/stencil_operation_extended.txt'
+GL_AMD_stencil_operation_extended.url = 'http://www.opengl.org/registry/specs/AMD/stencil_operation_extended.txt'
 GL_AMD_stencil_operation_extended.enumerants = ['GL_REPLACE_VALUE_AMD','GL_SET_AMD','GL_STENCIL_BACK_OP_VALUE_AMD','GL_STENCIL_OP_VALUE_AMD']
 GL_AMD_stencil_operation_extended.functions = ['glStencilOpValueAMD']
 gl.add(GL_AMD_stencil_operation_extended)
 
 GL_AMD_texture_texture4 = Extension('GL_AMD_texture_texture4')
-GL_AMD_texture_texture4.url = 'http://www.opengl.org/registry/specs/gl/AMD/texture_texture4.txt'
+GL_AMD_texture_texture4.url = 'http://www.opengl.org/registry/specs/AMD/texture_texture4.txt'
 gl.add(GL_AMD_texture_texture4)
 
 GL_AMD_transform_feedback3_lines_triangles = Extension('GL_AMD_transform_feedback3_lines_triangles')
-GL_AMD_transform_feedback3_lines_triangles.url = 'http://www.opengl.org/registry/specs/gl/AMD/transform_feedback3_lines_triangles.txt'
+GL_AMD_transform_feedback3_lines_triangles.url = 'http://www.opengl.org/registry/specs/AMD/transform_feedback3_lines_triangles.txt'
 gl.add(GL_AMD_transform_feedback3_lines_triangles)
 
 GL_AMD_vertex_shader_layer = Extension('GL_AMD_vertex_shader_layer')
-GL_AMD_vertex_shader_layer.url = 'http://www.opengl.org/registry/specs/gl/AMD/vertex_shader_layer.txt'
+GL_AMD_vertex_shader_layer.url = 'http://www.opengl.org/registry/specs/AMD/vertex_shader_layer.txt'
 gl.add(GL_AMD_vertex_shader_layer)
 
 GL_AMD_vertex_shader_tessellator = Extension('GL_AMD_vertex_shader_tessellator')
-GL_AMD_vertex_shader_tessellator.url = 'http://www.opengl.org/registry/specs/gl/AMD/vertex_shader_tessellator.txt'
+GL_AMD_vertex_shader_tessellator.url = 'http://www.opengl.org/registry/specs/AMD/vertex_shader_tessellator.txt'
 GL_AMD_vertex_shader_tessellator.enumerants = ['GL_CONTINUOUS_AMD','GL_DISCRETE_AMD','GL_INT_SAMPLER_BUFFER_AMD','GL_SAMPLER_BUFFER_AMD','GL_TESSELLATION_FACTOR_AMD','GL_TESSELLATION_MODE_AMD','GL_UNSIGNED_INT_SAMPLER_BUFFER_AMD']
 GL_AMD_vertex_shader_tessellator.functions = ['glTessellationFactorAMD','glTessellationModeAMD']
 gl.add(GL_AMD_vertex_shader_tessellator)
 
 GL_AMD_vertex_shader_viewport_index = Extension('GL_AMD_vertex_shader_viewport_index')
-GL_AMD_vertex_shader_viewport_index.url = 'http://www.opengl.org/registry/specs/gl/AMD/vertex_shader_viewport_index.txt'
+GL_AMD_vertex_shader_viewport_index.url = 'http://www.opengl.org/registry/specs/AMD/vertex_shader_viewport_index.txt'
 gl.add(GL_AMD_vertex_shader_viewport_index)
 
 GL_APPLE_aux_depth_stencil = Extension('GL_APPLE_aux_depth_stencil')
-GL_APPLE_aux_depth_stencil.url = 'http://www.opengl.org/registry/specs/gl/APPLE/aux_depth_stencil.txt'
+GL_APPLE_aux_depth_stencil.url = 'http://www.opengl.org/registry/specs/APPLE/aux_depth_stencil.txt'
 GL_APPLE_aux_depth_stencil.enumerants = ['GL_AUX_DEPTH_STENCIL_APPLE']
 gl.add(GL_APPLE_aux_depth_stencil)
 
 GL_APPLE_client_storage = Extension('GL_APPLE_client_storage')
-GL_APPLE_client_storage.url = 'http://www.opengl.org/registry/specs/gl/APPLE/client_storage.txt'
+GL_APPLE_client_storage.url = 'http://www.opengl.org/registry/specs/APPLE/client_storage.txt'
 GL_APPLE_client_storage.enumerants = ['GL_UNPACK_CLIENT_STORAGE_APPLE']
 gl.add(GL_APPLE_client_storage)
 
 GL_APPLE_element_array = Extension('GL_APPLE_element_array')
-GL_APPLE_element_array.url = 'http://www.opengl.org/registry/specs/gl/APPLE/element_array.txt'
+GL_APPLE_element_array.url = 'http://www.opengl.org/registry/specs/APPLE/element_array.txt'
 GL_APPLE_element_array.enumerants = ['GL_ELEMENT_ARRAY_APPLE','GL_ELEMENT_ARRAY_POINTER_APPLE','GL_ELEMENT_ARRAY_TYPE_APPLE']
 GL_APPLE_element_array.functions = ['glDrawElementArrayAPPLE','glDrawRangeElementArrayAPPLE','glElementPointerAPPLE','glMultiDrawElementArrayAPPLE','glMultiDrawRangeElementArrayAPPLE']
 gl.add(GL_APPLE_element_array)
 
 GL_APPLE_fence = Extension('GL_APPLE_fence')
-GL_APPLE_fence.url = 'http://www.opengl.org/registry/specs/gl/APPLE/fence.txt'
+GL_APPLE_fence.url = 'http://www.opengl.org/registry/specs/APPLE/fence.txt'
 GL_APPLE_fence.enumerants = ['GL_DRAW_PIXELS_APPLE','GL_FENCE_APPLE']
 GL_APPLE_fence.functions = ['glIsFenceAPPLE','glTestFenceAPPLE','glTestObjectAPPLE','glDeleteFencesAPPLE','glFinishFenceAPPLE','glFinishObjectAPPLE','glGenFencesAPPLE','glSetFenceAPPLE']
 gl.add(GL_APPLE_fence)
@@ -42348,13 +42370,13 @@ GL_APPLE_float_pixels.enumerants = ['GL_ALPHA_FLOAT16_APPLE','GL_ALPHA_FLOAT32_A
 gl.add(GL_APPLE_float_pixels)
 
 GL_APPLE_flush_buffer_range = Extension('GL_APPLE_flush_buffer_range')
-GL_APPLE_flush_buffer_range.url = 'http://www.opengl.org/registry/specs/gl/APPLE/flush_buffer_range.txt'
+GL_APPLE_flush_buffer_range.url = 'http://www.opengl.org/registry/specs/APPLE/flush_buffer_range.txt'
 GL_APPLE_flush_buffer_range.enumerants = ['GL_BUFFER_FLUSHING_UNMAP_APPLE','GL_BUFFER_SERIALIZED_MODIFY_APPLE']
 GL_APPLE_flush_buffer_range.functions = ['glBufferParameteriAPPLE','glFlushMappedBufferRangeAPPLE']
 gl.add(GL_APPLE_flush_buffer_range)
 
 GL_APPLE_object_purgeable = Extension('GL_APPLE_object_purgeable')
-GL_APPLE_object_purgeable.url = 'http://www.opengl.org/registry/specs/gl/APPLE/object_purgeable.txt'
+GL_APPLE_object_purgeable.url = 'http://www.opengl.org/registry/specs/APPLE/object_purgeable.txt'
 GL_APPLE_object_purgeable.enumerants = ['GL_BUFFER_OBJECT_APPLE','GL_PURGEABLE_APPLE','GL_RELEASED_APPLE','GL_RETAINED_APPLE','GL_UNDEFINED_APPLE','GL_VOLATILE_APPLE']
 GL_APPLE_object_purgeable.functions = ['glObjectPurgeableAPPLE','glObjectUnpurgeableAPPLE','glGetObjectParameterivAPPLE']
 gl.add(GL_APPLE_object_purgeable)
@@ -42364,17 +42386,17 @@ GL_APPLE_pixel_buffer.enumerants = ['GL_MIN_PBUFFER_VIEWPORT_DIMS_APPLE']
 gl.add(GL_APPLE_pixel_buffer)
 
 GL_APPLE_rgb_422 = Extension('GL_APPLE_rgb_422')
-GL_APPLE_rgb_422.url = 'http://www.opengl.org/registry/specs/gl/APPLE/rgb_422.txt'
+GL_APPLE_rgb_422.url = 'http://www.opengl.org/registry/specs/APPLE/rgb_422.txt'
 GL_APPLE_rgb_422.enumerants = ['GL_RGB_422_APPLE','GL_UNSIGNED_SHORT_8_8_APPLE','GL_UNSIGNED_SHORT_8_8_REV_APPLE']
 gl.add(GL_APPLE_rgb_422)
 
 GL_APPLE_row_bytes = Extension('GL_APPLE_row_bytes')
-GL_APPLE_row_bytes.url = 'http://www.opengl.org/registry/specs/gl/APPLE/row_bytes.txt'
+GL_APPLE_row_bytes.url = 'http://www.opengl.org/registry/specs/APPLE/row_bytes.txt'
 GL_APPLE_row_bytes.enumerants = ['GL_PACK_ROW_BYTES_APPLE','GL_UNPACK_ROW_BYTES_APPLE']
 gl.add(GL_APPLE_row_bytes)
 
 GL_APPLE_specular_vector = Extension('GL_APPLE_specular_vector')
-GL_APPLE_specular_vector.url = 'http://www.opengl.org/registry/specs/gl/APPLE/specular_vector.txt'
+GL_APPLE_specular_vector.url = 'http://www.opengl.org/registry/specs/APPLE/specular_vector.txt'
 GL_APPLE_specular_vector.enumerants = ['GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE']
 gl.add(GL_APPLE_specular_vector)
 
@@ -42385,145 +42407,145 @@ GL_APPLE_texture_range.functions = ['glGetTexParameterPointervAPPLE','glTextureR
 gl.add(GL_APPLE_texture_range)
 
 GL_APPLE_transform_hint = Extension('GL_APPLE_transform_hint')
-GL_APPLE_transform_hint.url = 'http://www.opengl.org/registry/specs/gl/APPLE/transform_hint.txt'
+GL_APPLE_transform_hint.url = 'http://www.opengl.org/registry/specs/APPLE/transform_hint.txt'
 GL_APPLE_transform_hint.enumerants = ['GL_TRANSFORM_HINT_APPLE']
 gl.add(GL_APPLE_transform_hint)
 
 GL_APPLE_vertex_array_object = Extension('GL_APPLE_vertex_array_object')
-GL_APPLE_vertex_array_object.url = 'http://www.opengl.org/registry/specs/gl/APPLE/vertex_array_object.txt'
+GL_APPLE_vertex_array_object.url = 'http://www.opengl.org/registry/specs/APPLE/vertex_array_object.txt'
 GL_APPLE_vertex_array_object.enumerants = ['GL_VERTEX_ARRAY_BINDING_APPLE']
 GL_APPLE_vertex_array_object.functions = ['glIsVertexArrayAPPLE','glBindVertexArrayAPPLE','glDeleteVertexArraysAPPLE','glGenVertexArraysAPPLE']
 gl.add(GL_APPLE_vertex_array_object)
 
 GL_APPLE_vertex_array_range = Extension('GL_APPLE_vertex_array_range')
-GL_APPLE_vertex_array_range.url = 'http://www.opengl.org/registry/specs/gl/APPLE/vertex_array_range.txt'
+GL_APPLE_vertex_array_range.url = 'http://www.opengl.org/registry/specs/APPLE/vertex_array_range.txt'
 GL_APPLE_vertex_array_range.enumerants = ['GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_APPLE','GL_STORAGE_CACHED_APPLE','GL_STORAGE_CLIENT_APPLE','GL_STORAGE_SHARED_APPLE','GL_VERTEX_ARRAY_RANGE_APPLE','GL_VERTEX_ARRAY_RANGE_LENGTH_APPLE','GL_VERTEX_ARRAY_RANGE_POINTER_APPLE','GL_VERTEX_ARRAY_STORAGE_HINT_APPLE']
 GL_APPLE_vertex_array_range.functions = ['glFlushVertexArrayRangeAPPLE','glVertexArrayParameteriAPPLE','glVertexArrayRangeAPPLE']
 gl.add(GL_APPLE_vertex_array_range)
 
 GL_APPLE_vertex_program_evaluators = Extension('GL_APPLE_vertex_program_evaluators')
-GL_APPLE_vertex_program_evaluators.url = 'http://www.opengl.org/registry/specs/gl/APPLE/vertex_program_evaluators.txt'
+GL_APPLE_vertex_program_evaluators.url = 'http://www.opengl.org/registry/specs/APPLE/vertex_program_evaluators.txt'
 GL_APPLE_vertex_program_evaluators.enumerants = ['GL_VERTEX_ATTRIB_MAP1_APPLE','GL_VERTEX_ATTRIB_MAP1_COEFF_APPLE','GL_VERTEX_ATTRIB_MAP1_DOMAIN_APPLE','GL_VERTEX_ATTRIB_MAP1_ORDER_APPLE','GL_VERTEX_ATTRIB_MAP1_SIZE_APPLE','GL_VERTEX_ATTRIB_MAP2_APPLE','GL_VERTEX_ATTRIB_MAP2_COEFF_APPLE','GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE','GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE','GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE']
 GL_APPLE_vertex_program_evaluators.functions = ['glIsVertexAttribEnabledAPPLE','glDisableVertexAttribAPPLE','glEnableVertexAttribAPPLE','glMapVertexAttrib1dAPPLE','glMapVertexAttrib1fAPPLE','glMapVertexAttrib2dAPPLE','glMapVertexAttrib2fAPPLE']
 gl.add(GL_APPLE_vertex_program_evaluators)
 
 GL_APPLE_ycbcr_422 = Extension('GL_APPLE_ycbcr_422')
-GL_APPLE_ycbcr_422.url = 'http://www.opengl.org/registry/specs/gl/APPLE/ycbcr_422.txt'
+GL_APPLE_ycbcr_422.url = 'http://www.opengl.org/registry/specs/APPLE/ycbcr_422.txt'
 GL_APPLE_ycbcr_422.enumerants = ['GL_YCBCR_422_APPLE']
 gl.add(GL_APPLE_ycbcr_422)
 
 GL_ARB_ES2_compatibility = Extension('GL_ARB_ES2_compatibility')
-GL_ARB_ES2_compatibility.url = 'http://www.opengl.org/registry/specs/gl/ARB/ES2_compatibility.txt'
+GL_ARB_ES2_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/ES2_compatibility.txt'
 GL_ARB_ES2_compatibility.enumerants = ['GL_FIXED','GL_HIGH_FLOAT','GL_HIGH_INT','GL_IMPLEMENTATION_COLOR_READ_FORMAT','GL_IMPLEMENTATION_COLOR_READ_TYPE','GL_LOW_FLOAT','GL_LOW_INT','GL_MAX_FRAGMENT_UNIFORM_VECTORS','GL_MAX_VARYING_VECTORS','GL_MAX_VERTEX_UNIFORM_VECTORS','GL_MEDIUM_FLOAT','GL_MEDIUM_INT','GL_NUM_SHADER_BINARY_FORMATS','GL_RGB565','GL_SHADER_BINARY_FORMATS','GL_SHADER_COMPILER']
 GL_ARB_ES2_compatibility.functions = ['glClearDepthf','glDepthRangef','glGetShaderPrecisionFormat','glReleaseShaderCompiler','glShaderBinary']
 gl.add(GL_ARB_ES2_compatibility)
 
 GL_ARB_ES3_compatibility = Extension('GL_ARB_ES3_compatibility')
-GL_ARB_ES3_compatibility.url = 'http://www.opengl.org/registry/specs/gl/ARB/ES3_compatibility.txt'
+GL_ARB_ES3_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/ES3_compatibility.txt'
 GL_ARB_ES3_compatibility.enumerants = ['GL_ANY_SAMPLES_PASSED_CONSERVATIVE','GL_COMPRESSED_R11_EAC','GL_COMPRESSED_RG11_EAC','GL_COMPRESSED_RGB8_ETC2','GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2','GL_COMPRESSED_RGBA8_ETC2_EAC','GL_COMPRESSED_SIGNED_R11_EAC','GL_COMPRESSED_SIGNED_RG11_EAC','GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC','GL_COMPRESSED_SRGB8_ETC2','GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2','GL_MAX_ELEMENT_INDEX','GL_PRIMITIVE_RESTART_FIXED_INDEX','GL_TEXTURE_IMMUTABLE_LEVELS']
 gl.add(GL_ARB_ES3_compatibility)
 
 GL_ARB_arrays_of_arrays = Extension('GL_ARB_arrays_of_arrays')
-GL_ARB_arrays_of_arrays.url = 'http://www.opengl.org/registry/specs/gl/ARB/arrays_of_arrays.txt'
+GL_ARB_arrays_of_arrays.url = 'http://www.opengl.org/registry/specs/ARB/arrays_of_arrays.txt'
 gl.add(GL_ARB_arrays_of_arrays)
 
 GL_ARB_base_instance = Extension('GL_ARB_base_instance')
-GL_ARB_base_instance.url = 'http://www.opengl.org/registry/specs/gl/ARB/base_instance.txt'
+GL_ARB_base_instance.url = 'http://www.opengl.org/registry/specs/ARB/base_instance.txt'
 GL_ARB_base_instance.functions = ['glDrawArraysInstancedBaseInstance','glDrawElementsInstancedBaseInstance','glDrawElementsInstancedBaseVertexBaseInstance']
 gl.add(GL_ARB_base_instance)
 
 GL_ARB_blend_func_extended = Extension('GL_ARB_blend_func_extended')
-GL_ARB_blend_func_extended.url = 'http://www.opengl.org/registry/specs/gl/ARB/blend_func_extended.txt'
+GL_ARB_blend_func_extended.url = 'http://www.opengl.org/registry/specs/ARB/blend_func_extended.txt'
 GL_ARB_blend_func_extended.enumerants = ['GL_MAX_DUAL_SOURCE_DRAW_BUFFERS','GL_ONE_MINUS_SRC1_ALPHA','GL_ONE_MINUS_SRC1_COLOR','GL_SRC1_COLOR']
 GL_ARB_blend_func_extended.functions = ['glGetFragDataIndex','glBindFragDataLocationIndexed']
 gl.add(GL_ARB_blend_func_extended)
 
 GL_ARB_cl_event = Extension('GL_ARB_cl_event')
-GL_ARB_cl_event.url = 'http://www.opengl.org/registry/specs/gl/ARB/cl_event.txt'
+GL_ARB_cl_event.url = 'http://www.opengl.org/registry/specs/ARB/cl_event.txt'
 GL_ARB_cl_event.enumerants = ['GL_SYNC_CL_EVENT_ARB','GL_SYNC_CL_EVENT_COMPLETE_ARB']
 GL_ARB_cl_event.functions = ['glCreateSyncFromCLeventARB']
 gl.add(GL_ARB_cl_event)
 
 GL_ARB_clear_buffer_object = Extension('GL_ARB_clear_buffer_object')
-GL_ARB_clear_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/clear_buffer_object.txt'
+GL_ARB_clear_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/clear_buffer_object.txt'
 GL_ARB_clear_buffer_object.functions = ['glClearBufferData','glClearBufferSubData','glClearNamedBufferDataEXT','glClearNamedBufferSubDataEXT']
 gl.add(GL_ARB_clear_buffer_object)
 
 GL_ARB_color_buffer_float = Extension('GL_ARB_color_buffer_float')
-GL_ARB_color_buffer_float.url = 'http://www.opengl.org/registry/specs/gl/ARB/color_buffer_float.txt'
+GL_ARB_color_buffer_float.url = 'http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt'
 GL_ARB_color_buffer_float.enumerants = ['GL_CLAMP_FRAGMENT_COLOR_ARB','GL_CLAMP_READ_COLOR_ARB','GL_CLAMP_VERTEX_COLOR_ARB','GL_FIXED_ONLY_ARB','GL_RGBA_FLOAT_MODE_ARB']
 GL_ARB_color_buffer_float.functions = ['glClampColorARB']
 gl.add(GL_ARB_color_buffer_float)
 
 GL_ARB_compatibility = Extension('GL_ARB_compatibility')
-GL_ARB_compatibility.url = 'http://www.opengl.org/registry/specs/gl/ARB/compatibility.txt'
+GL_ARB_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/compatibility.txt'
 gl.add(GL_ARB_compatibility)
 
 GL_ARB_compressed_texture_pixel_storage = Extension('GL_ARB_compressed_texture_pixel_storage')
-GL_ARB_compressed_texture_pixel_storage.url = 'http://www.opengl.org/registry/specs/gl/ARB/compressed_texture_pixel_storage.txt'
+GL_ARB_compressed_texture_pixel_storage.url = 'http://www.opengl.org/registry/specs/ARB/compressed_texture_pixel_storage.txt'
 GL_ARB_compressed_texture_pixel_storage.enumerants = ['GL_PACK_COMPRESSED_BLOCK_DEPTH','GL_PACK_COMPRESSED_BLOCK_HEIGHT','GL_PACK_COMPRESSED_BLOCK_SIZE','GL_PACK_COMPRESSED_BLOCK_WIDTH','GL_UNPACK_COMPRESSED_BLOCK_DEPTH','GL_UNPACK_COMPRESSED_BLOCK_HEIGHT','GL_UNPACK_COMPRESSED_BLOCK_SIZE','GL_UNPACK_COMPRESSED_BLOCK_WIDTH']
 gl.add(GL_ARB_compressed_texture_pixel_storage)
 
 GL_ARB_compute_shader = Extension('GL_ARB_compute_shader')
-GL_ARB_compute_shader.url = 'http://www.opengl.org/registry/specs/gl/ARB/compute_shader.txt'
+GL_ARB_compute_shader.url = 'http://www.opengl.org/registry/specs/ARB/compute_shader.txt'
 GL_ARB_compute_shader.enumerants = ['GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER','GL_COMPUTE_SHADER','GL_COMPUTE_SHADER_BIT','GL_COMPUTE_WORK_GROUP_SIZE','GL_DISPATCH_INDIRECT_BUFFER','GL_DISPATCH_INDIRECT_BUFFER_BINDING','GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS','GL_MAX_COMPUTE_ATOMIC_COUNTERS','GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS','GL_MAX_COMPUTE_IMAGE_UNIFORMS','GL_MAX_COMPUTE_SHARED_MEMORY_SIZE','GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS','GL_MAX_COMPUTE_UNIFORM_BLOCKS','GL_MAX_COMPUTE_UNIFORM_COMPONENTS','GL_MAX_COMPUTE_WORK_GROUP_COUNT','GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS','GL_MAX_COMPUTE_WORK_GROUP_SIZE','GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER']
 GL_ARB_compute_shader.functions = ['glDispatchCompute','glDispatchComputeIndirect']
 gl.add(GL_ARB_compute_shader)
 
 GL_ARB_conservative_depth = Extension('GL_ARB_conservative_depth')
-GL_ARB_conservative_depth.url = 'http://www.opengl.org/registry/specs/gl/ARB/conservative_depth.txt'
+GL_ARB_conservative_depth.url = 'http://www.opengl.org/registry/specs/ARB/conservative_depth.txt'
 gl.add(GL_ARB_conservative_depth)
 
 GL_ARB_copy_buffer = Extension('GL_ARB_copy_buffer')
-GL_ARB_copy_buffer.url = 'http://www.opengl.org/registry/specs/gl/ARB/copy_buffer.txt'
+GL_ARB_copy_buffer.url = 'http://www.opengl.org/registry/specs/ARB/copy_buffer.txt'
 GL_ARB_copy_buffer.enumerants = ['GL_COPY_READ_BUFFER','GL_COPY_WRITE_BUFFER']
 GL_ARB_copy_buffer.functions = ['glCopyBufferSubData']
 gl.add(GL_ARB_copy_buffer)
 
 GL_ARB_copy_image = Extension('GL_ARB_copy_image')
-GL_ARB_copy_image.url = 'http://www.opengl.org/registry/specs/gl/ARB/copy_image.txt'
+GL_ARB_copy_image.url = 'http://www.opengl.org/registry/specs/ARB/copy_image.txt'
 GL_ARB_copy_image.functions = ['glCopyImageSubData']
 gl.add(GL_ARB_copy_image)
 
 GL_ARB_debug_output = Extension('GL_ARB_debug_output')
-GL_ARB_debug_output.url = 'http://www.opengl.org/registry/specs/gl/ARB/debug_output.txt'
+GL_ARB_debug_output.url = 'http://www.opengl.org/registry/specs/ARB/debug_output.txt'
 GL_ARB_debug_output.enumerants = ['GL_DEBUG_CALLBACK_FUNCTION_ARB','GL_DEBUG_CALLBACK_USER_PARAM_ARB','GL_DEBUG_LOGGED_MESSAGES_ARB','GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB','GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB','GL_DEBUG_SEVERITY_HIGH_ARB','GL_DEBUG_SEVERITY_LOW_ARB','GL_DEBUG_SEVERITY_MEDIUM_ARB','GL_DEBUG_SOURCE_API_ARB','GL_DEBUG_SOURCE_APPLICATION_ARB','GL_DEBUG_SOURCE_OTHER_ARB','GL_DEBUG_SOURCE_SHADER_COMPILER_ARB','GL_DEBUG_SOURCE_THIRD_PARTY_ARB','GL_DEBUG_SOURCE_WINDOW_SYSTEM_ARB','GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB','GL_DEBUG_TYPE_ERROR_ARB','GL_DEBUG_TYPE_OTHER_ARB','GL_DEBUG_TYPE_PERFORMANCE_ARB','GL_DEBUG_TYPE_PORTABILITY_ARB','GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB','GL_MAX_DEBUG_LOGGED_MESSAGES_ARB','GL_MAX_DEBUG_MESSAGE_LENGTH_ARB']
 GL_ARB_debug_output.functions = ['glGetDebugMessageLogARB','glDebugMessageCallbackARB','glDebugMessageControlARB','glDebugMessageInsertARB']
 gl.add(GL_ARB_debug_output)
 
 GL_ARB_depth_buffer_float = Extension('GL_ARB_depth_buffer_float')
-GL_ARB_depth_buffer_float.url = 'http://www.opengl.org/registry/specs/gl/ARB/depth_buffer_float.txt'
+GL_ARB_depth_buffer_float.url = 'http://www.opengl.org/registry/specs/ARB/depth_buffer_float.txt'
 GL_ARB_depth_buffer_float.enumerants = ['GL_DEPTH32F_STENCIL8','GL_DEPTH_COMPONENT32F','GL_FLOAT_32_UNSIGNED_INT_24_8_REV']
 gl.add(GL_ARB_depth_buffer_float)
 
 GL_ARB_depth_clamp = Extension('GL_ARB_depth_clamp')
-GL_ARB_depth_clamp.url = 'http://www.opengl.org/registry/specs/gl/ARB/depth_clamp.txt'
+GL_ARB_depth_clamp.url = 'http://www.opengl.org/registry/specs/ARB/depth_clamp.txt'
 GL_ARB_depth_clamp.enumerants = ['GL_DEPTH_CLAMP']
 gl.add(GL_ARB_depth_clamp)
 
 GL_ARB_depth_texture = Extension('GL_ARB_depth_texture')
-GL_ARB_depth_texture.url = 'http://www.opengl.org/registry/specs/gl/ARB/depth_texture.txt'
+GL_ARB_depth_texture.url = 'http://www.opengl.org/registry/specs/ARB/depth_texture.txt'
 GL_ARB_depth_texture.enumerants = ['GL_DEPTH_COMPONENT16_ARB','GL_DEPTH_COMPONENT24_ARB','GL_DEPTH_COMPONENT32_ARB','GL_DEPTH_TEXTURE_MODE_ARB','GL_TEXTURE_DEPTH_SIZE_ARB']
 gl.add(GL_ARB_depth_texture)
 
 GL_ARB_draw_buffers = Extension('GL_ARB_draw_buffers')
-GL_ARB_draw_buffers.url = 'http://www.opengl.org/registry/specs/gl/ARB/draw_buffers.txt'
+GL_ARB_draw_buffers.url = 'http://www.opengl.org/registry/specs/ARB/draw_buffers.txt'
 GL_ARB_draw_buffers.enumerants = ['GL_DRAW_BUFFER0_ARB','GL_DRAW_BUFFER10_ARB','GL_DRAW_BUFFER11_ARB','GL_DRAW_BUFFER12_ARB','GL_DRAW_BUFFER13_ARB','GL_DRAW_BUFFER14_ARB','GL_DRAW_BUFFER15_ARB','GL_DRAW_BUFFER1_ARB','GL_DRAW_BUFFER2_ARB','GL_DRAW_BUFFER3_ARB','GL_DRAW_BUFFER4_ARB','GL_DRAW_BUFFER5_ARB','GL_DRAW_BUFFER6_ARB','GL_DRAW_BUFFER7_ARB','GL_DRAW_BUFFER8_ARB','GL_DRAW_BUFFER9_ARB','GL_MAX_DRAW_BUFFERS_ARB']
 GL_ARB_draw_buffers.functions = ['glDrawBuffersARB']
 gl.add(GL_ARB_draw_buffers)
 
 GL_ARB_draw_buffers_blend = Extension('GL_ARB_draw_buffers_blend')
-GL_ARB_draw_buffers_blend.url = 'http://www.opengl.org/registry/specs/gl/ARB/draw_buffers_blend.txt'
+GL_ARB_draw_buffers_blend.url = 'http://www.opengl.org/registry/specs/ARB/draw_buffers_blend.txt'
 GL_ARB_draw_buffers_blend.functions = ['glBlendEquationSeparateiARB','glBlendEquationiARB','glBlendFuncSeparateiARB','glBlendFunciARB']
 gl.add(GL_ARB_draw_buffers_blend)
 
 GL_ARB_draw_elements_base_vertex = Extension('GL_ARB_draw_elements_base_vertex')
-GL_ARB_draw_elements_base_vertex.url = 'http://www.opengl.org/registry/specs/gl/ARB/draw_elements_base_vertex.txt'
+GL_ARB_draw_elements_base_vertex.url = 'http://www.opengl.org/registry/specs/ARB/draw_elements_base_vertex.txt'
 GL_ARB_draw_elements_base_vertex.functions = ['glDrawElementsBaseVertex','glDrawElementsInstancedBaseVertex','glDrawRangeElementsBaseVertex','glMultiDrawElementsBaseVertex']
 gl.add(GL_ARB_draw_elements_base_vertex)
 
 GL_ARB_draw_indirect = Extension('GL_ARB_draw_indirect')
-GL_ARB_draw_indirect.url = 'http://www.opengl.org/registry/specs/gl/ARB/draw_indirect.txt'
+GL_ARB_draw_indirect.url = 'http://www.opengl.org/registry/specs/ARB/draw_indirect.txt'
 GL_ARB_draw_indirect.enumerants = ['GL_DRAW_INDIRECT_BUFFER','GL_DRAW_INDIRECT_BUFFER_BINDING']
 GL_ARB_draw_indirect.functions = ['glDrawArraysIndirect','glDrawElementsIndirect']
 gl.add(GL_ARB_draw_indirect)
@@ -42533,83 +42555,83 @@ GL_ARB_draw_instanced.url = 'http://www.opengl.org/registry/specs/ARB/draw_insta
 gl.add(GL_ARB_draw_instanced)
 
 GL_ARB_explicit_attrib_location = Extension('GL_ARB_explicit_attrib_location')
-GL_ARB_explicit_attrib_location.url = 'http://www.opengl.org/registry/specs/gl/ARB/explicit_attrib_location.txt'
+GL_ARB_explicit_attrib_location.url = 'http://www.opengl.org/registry/specs/ARB/explicit_attrib_location.txt'
 gl.add(GL_ARB_explicit_attrib_location)
 
 GL_ARB_explicit_uniform_location = Extension('GL_ARB_explicit_uniform_location')
-GL_ARB_explicit_uniform_location.url = 'http://www.opengl.org/registry/specs/gl/ARB/explicit_uniform_location.txt'
+GL_ARB_explicit_uniform_location.url = 'http://www.opengl.org/registry/specs/ARB/explicit_uniform_location.txt'
 GL_ARB_explicit_uniform_location.enumerants = ['GL_MAX_UNIFORM_LOCATIONS']
 gl.add(GL_ARB_explicit_uniform_location)
 
 GL_ARB_fragment_coord_conventions = Extension('GL_ARB_fragment_coord_conventions')
-GL_ARB_fragment_coord_conventions.url = 'http://www.opengl.org/registry/specs/gl/ARB/fragment_coord_conventions.txt'
+GL_ARB_fragment_coord_conventions.url = 'http://www.opengl.org/registry/specs/ARB/fragment_coord_conventions.txt'
 gl.add(GL_ARB_fragment_coord_conventions)
 
 GL_ARB_fragment_layer_viewport = Extension('GL_ARB_fragment_layer_viewport')
-GL_ARB_fragment_layer_viewport.url = 'http://www.opengl.org/registry/specs/gl/ARB/fragment_layer_viewport.txt'
+GL_ARB_fragment_layer_viewport.url = 'http://www.opengl.org/registry/specs/ARB/fragment_layer_viewport.txt'
 gl.add(GL_ARB_fragment_layer_viewport)
 
 GL_ARB_fragment_program = Extension('GL_ARB_fragment_program')
-GL_ARB_fragment_program.url = 'http://www.opengl.org/registry/specs/gl/ARB/fragment_program.txt'
+GL_ARB_fragment_program.url = 'http://www.opengl.org/registry/specs/ARB/fragment_program.txt'
 GL_ARB_fragment_program.enumerants = ['GL_FRAGMENT_PROGRAM_ARB','GL_MAX_PROGRAM_ALU_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB','GL_MAX_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_TEX_INDIRECTIONS_ARB','GL_MAX_PROGRAM_TEX_INSTRUCTIONS_ARB','GL_MAX_TEXTURE_COORDS_ARB','GL_MAX_TEXTURE_IMAGE_UNITS_ARB','GL_PROGRAM_ALU_INSTRUCTIONS_ARB','GL_PROGRAM_NATIVE_ALU_INSTRUCTIONS_ARB','GL_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB','GL_PROGRAM_NATIVE_TEX_INSTRUCTIONS_ARB','GL_PROGRAM_TEX_INDIRECTIONS_ARB','GL_PROGRAM_TEX_INSTRUCTIONS_ARB']
 gl.add(GL_ARB_fragment_program)
 
 GL_ARB_fragment_program_shadow = Extension('GL_ARB_fragment_program_shadow')
-GL_ARB_fragment_program_shadow.url = 'http://www.opengl.org/registry/specs/gl/ARB/fragment_program_shadow.txt'
+GL_ARB_fragment_program_shadow.url = 'http://www.opengl.org/registry/specs/ARB/fragment_program_shadow.txt'
 gl.add(GL_ARB_fragment_program_shadow)
 
 GL_ARB_fragment_shader = Extension('GL_ARB_fragment_shader')
-GL_ARB_fragment_shader.url = 'http://www.opengl.org/registry/specs/gl/ARB/fragment_shader.txt'
+GL_ARB_fragment_shader.url = 'http://www.opengl.org/registry/specs/ARB/fragment_shader.txt'
 GL_ARB_fragment_shader.enumerants = ['GL_FRAGMENT_SHADER_ARB','GL_FRAGMENT_SHADER_DERIVATIVE_HINT_ARB','GL_MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB']
 gl.add(GL_ARB_fragment_shader)
 
 GL_ARB_framebuffer_no_attachments = Extension('GL_ARB_framebuffer_no_attachments')
-GL_ARB_framebuffer_no_attachments.url = 'http://www.opengl.org/registry/specs/gl/ARB/framebuffer_no_attachments.txt'
+GL_ARB_framebuffer_no_attachments.url = 'http://www.opengl.org/registry/specs/ARB/framebuffer_no_attachments.txt'
 GL_ARB_framebuffer_no_attachments.enumerants = ['GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS','GL_FRAMEBUFFER_DEFAULT_HEIGHT','GL_FRAMEBUFFER_DEFAULT_LAYERS','GL_FRAMEBUFFER_DEFAULT_SAMPLES','GL_FRAMEBUFFER_DEFAULT_WIDTH','GL_MAX_FRAMEBUFFER_HEIGHT','GL_MAX_FRAMEBUFFER_LAYERS','GL_MAX_FRAMEBUFFER_SAMPLES','GL_MAX_FRAMEBUFFER_WIDTH']
 GL_ARB_framebuffer_no_attachments.functions = ['glFramebufferParameteri','glGetFramebufferParameteriv','glGetNamedFramebufferParameterivEXT','glNamedFramebufferParameteriEXT']
 gl.add(GL_ARB_framebuffer_no_attachments)
 
 GL_ARB_framebuffer_object = Extension('GL_ARB_framebuffer_object')
-GL_ARB_framebuffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/framebuffer_object.txt'
+GL_ARB_framebuffer_object.url = 'http://www.opengl.org/registry/specs/ARB/framebuffer_object.txt'
 GL_ARB_framebuffer_object.enumerants = ['GL_COLOR_ATTACHMENT0','GL_COLOR_ATTACHMENT1','GL_COLOR_ATTACHMENT10','GL_COLOR_ATTACHMENT11','GL_COLOR_ATTACHMENT12','GL_COLOR_ATTACHMENT13','GL_COLOR_ATTACHMENT14','GL_COLOR_ATTACHMENT15','GL_COLOR_ATTACHMENT2','GL_COLOR_ATTACHMENT3','GL_COLOR_ATTACHMENT4','GL_COLOR_ATTACHMENT5','GL_COLOR_ATTACHMENT6','GL_COLOR_ATTACHMENT7','GL_COLOR_ATTACHMENT8','GL_COLOR_ATTACHMENT9','GL_DEPTH24_STENCIL8','GL_DEPTH_ATTACHMENT','GL_DEPTH_STENCIL','GL_DEPTH_STENCIL_ATTACHMENT','GL_DRAW_FRAMEBUFFER','GL_DRAW_FRAMEBUFFER_BINDING','GL_FRAMEBUFFER','GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE','GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE','GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING','GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE','GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE','GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE','GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE','GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL','GL_FRAMEBUFFER_BINDING','GL_FRAMEBUFFER_COMPLETE','GL_FRAMEBUFFER_DEFAULT','GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT','GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER','GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT','GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE','GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER','GL_FRAMEBUFFER_UNDEFINED','GL_FRAMEBUFFER_UNSUPPORTED','GL_INDEX','GL_INVALID_FRAMEBUFFER_OPERATION','GL_MAX_COLOR_ATTACHMENTS','GL_MAX_RENDERBUFFER_SIZE','GL_MAX_SAMPLES','GL_READ_FRAMEBUFFER','GL_READ_FRAMEBUFFER_BINDING','GL_RENDERBUFFER','GL_RENDERBUFFER_ALPHA_SIZE','GL_RENDERBUFFER_BINDING','GL_RENDERBUFFER_BLUE_SIZE','GL_RENDERBUFFER_DEPTH_SIZE','GL_RENDERBUFFER_GREEN_SIZE','GL_RENDERBUFFER_HEIGHT','GL_RENDERBUFFER_INTERNAL_FORMAT','GL_RENDERBUFFER_RED_SIZE','GL_RENDERBUFFER_SAMPLES','GL_RENDERBUFFER_STENCIL_SIZE','GL_RENDERBUFFER_WIDTH','GL_SRGB','GL_STENCIL_ATTACHMENT','GL_STENCIL_INDEX1','GL_STENCIL_INDEX16','GL_STENCIL_INDEX4','GL_STENCIL_INDEX8','GL_TEXTURE_STENCIL_SIZE','GL_UNSIGNED_INT_24_8','GL_UNSIGNED_NORMALIZED']
 GL_ARB_framebuffer_object.functions = ['glIsFramebuffer','glIsRenderbuffer','glCheckFramebufferStatus','glBindFramebuffer','glBindRenderbuffer','glBlitFramebuffer','glDeleteFramebuffers','glDeleteRenderbuffers','glFramebufferRenderbuffer','glFramebufferTexture1D','glFramebufferTexture2D','glFramebufferTexture3D','glFramebufferTextureLayer','glGenFramebuffers','glGenRenderbuffers','glGenerateMipmap','glGetFramebufferAttachmentParameteriv','glGetRenderbufferParameteriv','glRenderbufferStorage','glRenderbufferStorageMultisample']
 gl.add(GL_ARB_framebuffer_object)
 
 GL_ARB_framebuffer_sRGB = Extension('GL_ARB_framebuffer_sRGB')
-GL_ARB_framebuffer_sRGB.url = 'http://www.opengl.org/registry/specs/gl/ARB/framebuffer_sRGB.txt'
+GL_ARB_framebuffer_sRGB.url = 'http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt'
 GL_ARB_framebuffer_sRGB.enumerants = ['GL_FRAMEBUFFER_SRGB']
 gl.add(GL_ARB_framebuffer_sRGB)
 
 GL_ARB_geometry_shader4 = Extension('GL_ARB_geometry_shader4')
-GL_ARB_geometry_shader4.url = 'http://www.opengl.org/registry/specs/gl/ARB/geometry_shader4.txt'
+GL_ARB_geometry_shader4.url = 'http://www.opengl.org/registry/specs/ARB/geometry_shader4.txt'
 GL_ARB_geometry_shader4.enumerants = ['GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER','GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_ARB','GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB','GL_GEOMETRY_INPUT_TYPE_ARB','GL_GEOMETRY_OUTPUT_TYPE_ARB','GL_GEOMETRY_SHADER_ARB','GL_GEOMETRY_VERTICES_OUT_ARB','GL_LINES_ADJACENCY_ARB','GL_LINE_STRIP_ADJACENCY_ARB','GL_MAX_GEOMETRY_OUTPUT_VERTICES_ARB','GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_ARB','GL_MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB','GL_MAX_GEOMETRY_UNIFORM_COMPONENTS_ARB','GL_MAX_GEOMETRY_VARYING_COMPONENTS_ARB','GL_MAX_VERTEX_VARYING_COMPONENTS_ARB','GL_PROGRAM_POINT_SIZE_ARB','GL_TRIANGLES_ADJACENCY_ARB','GL_TRIANGLE_STRIP_ADJACENCY_ARB']
 GL_ARB_geometry_shader4.functions = ['glFramebufferTextureARB','glFramebufferTextureFaceARB','glFramebufferTextureLayerARB','glProgramParameteriARB']
 gl.add(GL_ARB_geometry_shader4)
 
 GL_ARB_get_program_binary = Extension('GL_ARB_get_program_binary')
-GL_ARB_get_program_binary.url = 'http://www.opengl.org/registry/specs/gl/ARB/get_program_binary.txt'
+GL_ARB_get_program_binary.url = 'http://www.opengl.org/registry/specs/ARB/get_program_binary.txt'
 GL_ARB_get_program_binary.enumerants = ['GL_NUM_PROGRAM_BINARY_FORMATS','GL_PROGRAM_BINARY_FORMATS','GL_PROGRAM_BINARY_LENGTH','GL_PROGRAM_BINARY_RETRIEVABLE_HINT']
 GL_ARB_get_program_binary.functions = ['glGetProgramBinary','glProgramBinary','glProgramParameteri']
 gl.add(GL_ARB_get_program_binary)
 
 GL_ARB_gpu_shader5 = Extension('GL_ARB_gpu_shader5')
-GL_ARB_gpu_shader5.url = 'http://www.opengl.org/registry/specs/gl/ARB/gpu_shader5.txt'
+GL_ARB_gpu_shader5.url = 'http://www.opengl.org/registry/specs/ARB/gpu_shader5.txt'
 GL_ARB_gpu_shader5.enumerants = ['GL_FRAGMENT_INTERPOLATION_OFFSET_BITS','GL_GEOMETRY_SHADER_INVOCATIONS','GL_MAX_FRAGMENT_INTERPOLATION_OFFSET','GL_MAX_GEOMETRY_SHADER_INVOCATIONS','GL_MAX_VERTEX_STREAMS','GL_MIN_FRAGMENT_INTERPOLATION_OFFSET']
 gl.add(GL_ARB_gpu_shader5)
 
 GL_ARB_gpu_shader_fp64 = Extension('GL_ARB_gpu_shader_fp64')
-GL_ARB_gpu_shader_fp64.url = 'http://www.opengl.org/registry/specs/gl/ARB/gpu_shader_fp64.txt'
+GL_ARB_gpu_shader_fp64.url = 'http://www.opengl.org/registry/specs/ARB/gpu_shader_fp64.txt'
 GL_ARB_gpu_shader_fp64.enumerants = ['GL_DOUBLE_MAT2','GL_DOUBLE_MAT2x3','GL_DOUBLE_MAT2x4','GL_DOUBLE_MAT3','GL_DOUBLE_MAT3x2','GL_DOUBLE_MAT3x4','GL_DOUBLE_MAT4','GL_DOUBLE_MAT4x2','GL_DOUBLE_MAT4x3','GL_DOUBLE_VEC2','GL_DOUBLE_VEC3','GL_DOUBLE_VEC4']
 GL_ARB_gpu_shader_fp64.functions = ['glGetUniformdv','glUniform1d','glUniform1dv','glUniform2d','glUniform2dv','glUniform3d','glUniform3dv','glUniform4d','glUniform4dv','glUniformMatrix2dv','glUniformMatrix2x3dv','glUniformMatrix2x4dv','glUniformMatrix3dv','glUniformMatrix3x2dv','glUniformMatrix3x4dv','glUniformMatrix4dv','glUniformMatrix4x2dv','glUniformMatrix4x3dv']
 gl.add(GL_ARB_gpu_shader_fp64)
 
 GL_ARB_half_float_pixel = Extension('GL_ARB_half_float_pixel')
-GL_ARB_half_float_pixel.url = 'http://www.opengl.org/registry/specs/gl/ARB/half_float_pixel.txt'
+GL_ARB_half_float_pixel.url = 'http://www.opengl.org/registry/specs/ARB/half_float_pixel.txt'
 GL_ARB_half_float_pixel.enumerants = ['GL_HALF_FLOAT_ARB']
 gl.add(GL_ARB_half_float_pixel)
 
 GL_ARB_half_float_vertex = Extension('GL_ARB_half_float_vertex')
-GL_ARB_half_float_vertex.url = 'http://www.opengl.org/registry/specs/gl/ARB/half_float_vertex.txt'
+GL_ARB_half_float_vertex.url = 'http://www.opengl.org/registry/specs/ARB/half_float_vertex.txt'
 GL_ARB_half_float_vertex.enumerants = ['GL_HALF_FLOAT']
 gl.add(GL_ARB_half_float_vertex)
 
@@ -42625,7 +42647,7 @@ GL_ARB_instanced_arrays.functions = ['glDrawArraysInstancedARB','glDrawElementsI
 gl.add(GL_ARB_instanced_arrays)
 
 GL_ARB_internalformat_query = Extension('GL_ARB_internalformat_query')
-GL_ARB_internalformat_query.url = 'http://www.opengl.org/registry/specs/gl/ARB/internalformat_query.txt'
+GL_ARB_internalformat_query.url = 'http://www.opengl.org/registry/specs/ARB/internalformat_query.txt'
 GL_ARB_internalformat_query.enumerants = ['GL_NUM_SAMPLE_COUNTS']
 GL_ARB_internalformat_query.functions = ['glGetInternalformativ']
 gl.add(GL_ARB_internalformat_query)
@@ -42637,17 +42659,17 @@ GL_ARB_internalformat_query2.functions = ['glGetInternalformati64v']
 gl.add(GL_ARB_internalformat_query2)
 
 GL_ARB_invalidate_subdata = Extension('GL_ARB_invalidate_subdata')
-GL_ARB_invalidate_subdata.url = 'http://www.opengl.org/registry/specs/gl/ARB/invalidate_subdata.txt'
+GL_ARB_invalidate_subdata.url = 'http://www.opengl.org/registry/specs/ARB/invalidate_subdata.txt'
 GL_ARB_invalidate_subdata.functions = ['glInvalidateBufferData','glInvalidateBufferSubData','glInvalidateFramebuffer','glInvalidateSubFramebuffer','glInvalidateTexImage','glInvalidateTexSubImage']
 gl.add(GL_ARB_invalidate_subdata)
 
 GL_ARB_map_buffer_alignment = Extension('GL_ARB_map_buffer_alignment')
-GL_ARB_map_buffer_alignment.url = 'http://www.opengl.org/registry/specs/gl/ARB/map_buffer_alignment.txt'
+GL_ARB_map_buffer_alignment.url = 'http://www.opengl.org/registry/specs/ARB/map_buffer_alignment.txt'
 GL_ARB_map_buffer_alignment.enumerants = ['GL_MIN_MAP_BUFFER_ALIGNMENT']
 gl.add(GL_ARB_map_buffer_alignment)
 
 GL_ARB_map_buffer_range = Extension('GL_ARB_map_buffer_range')
-GL_ARB_map_buffer_range.url = 'http://www.opengl.org/registry/specs/gl/ARB/map_buffer_range.txt'
+GL_ARB_map_buffer_range.url = 'http://www.opengl.org/registry/specs/ARB/map_buffer_range.txt'
 GL_ARB_map_buffer_range.enumerants = ['GL_MAP_FLUSH_EXPLICIT_BIT','GL_MAP_INVALIDATE_BUFFER_BIT','GL_MAP_INVALIDATE_RANGE_BIT','GL_MAP_READ_BIT','GL_MAP_UNSYNCHRONIZED_BIT','GL_MAP_WRITE_BIT']
 GL_ARB_map_buffer_range.functions = ['*','glFlushMappedBufferRange']
 gl.add(GL_ARB_map_buffer_range)
@@ -42659,12 +42681,12 @@ GL_ARB_matrix_palette.functions = ['glCurrentPaletteMatrixARB','glMatrixIndexPoi
 gl.add(GL_ARB_matrix_palette)
 
 GL_ARB_multi_draw_indirect = Extension('GL_ARB_multi_draw_indirect')
-GL_ARB_multi_draw_indirect.url = 'http://www.opengl.org/registry/specs/gl/ARB/multi_draw_indirect.txt'
+GL_ARB_multi_draw_indirect.url = 'http://www.opengl.org/registry/specs/ARB/multi_draw_indirect.txt'
 GL_ARB_multi_draw_indirect.functions = ['glMultiDrawArraysIndirect','glMultiDrawElementsIndirect']
 gl.add(GL_ARB_multi_draw_indirect)
 
 GL_ARB_multisample = Extension('GL_ARB_multisample')
-GL_ARB_multisample.url = 'http://www.opengl.org/registry/specs/gl/ARB/multisample.txt'
+GL_ARB_multisample.url = 'http://www.opengl.org/registry/specs/ARB/multisample.txt'
 GL_ARB_multisample.enumerants = ['GL_MULTISAMPLE_ARB','GL_MULTISAMPLE_BIT_ARB','GL_SAMPLES_ARB','GL_SAMPLE_ALPHA_TO_COVERAGE_ARB','GL_SAMPLE_ALPHA_TO_ONE_ARB','GL_SAMPLE_BUFFERS_ARB','GL_SAMPLE_COVERAGE_ARB','GL_SAMPLE_COVERAGE_INVERT_ARB','GL_SAMPLE_COVERAGE_VALUE_ARB']
 GL_ARB_multisample.functions = ['glSampleCoverageARB']
 gl.add(GL_ARB_multisample)
@@ -42676,46 +42698,46 @@ GL_ARB_multitexture.functions = ['glActiveTextureARB','glClientActiveTextureARB'
 gl.add(GL_ARB_multitexture)
 
 GL_ARB_occlusion_query = Extension('GL_ARB_occlusion_query')
-GL_ARB_occlusion_query.url = 'http://www.opengl.org/registry/specs/gl/ARB/occlusion_query.txt'
+GL_ARB_occlusion_query.url = 'http://www.opengl.org/registry/specs/ARB/occlusion_query.txt'
 GL_ARB_occlusion_query.enumerants = ['GL_CURRENT_QUERY_ARB','GL_QUERY_COUNTER_BITS_ARB','GL_QUERY_RESULT_ARB','GL_QUERY_RESULT_AVAILABLE_ARB','GL_SAMPLES_PASSED_ARB']
 GL_ARB_occlusion_query.functions = ['glIsQueryARB','glBeginQueryARB','glDeleteQueriesARB','glEndQueryARB','glGenQueriesARB','glGetQueryObjectivARB','glGetQueryObjectuivARB','glGetQueryivARB']
 gl.add(GL_ARB_occlusion_query)
 
 GL_ARB_occlusion_query2 = Extension('GL_ARB_occlusion_query2')
-GL_ARB_occlusion_query2.url = 'http://www.opengl.org/registry/specs/gl/ARB/occlusion_query2.txt'
+GL_ARB_occlusion_query2.url = 'http://www.opengl.org/registry/specs/ARB/occlusion_query2.txt'
 GL_ARB_occlusion_query2.enumerants = ['GL_ANY_SAMPLES_PASSED']
 gl.add(GL_ARB_occlusion_query2)
 
 GL_ARB_pixel_buffer_object = Extension('GL_ARB_pixel_buffer_object')
-GL_ARB_pixel_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/pixel_buffer_object.txt'
+GL_ARB_pixel_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/pixel_buffer_object.txt'
 GL_ARB_pixel_buffer_object.enumerants = ['GL_PIXEL_PACK_BUFFER_ARB','GL_PIXEL_PACK_BUFFER_BINDING_ARB','GL_PIXEL_UNPACK_BUFFER_ARB','GL_PIXEL_UNPACK_BUFFER_BINDING_ARB']
 gl.add(GL_ARB_pixel_buffer_object)
 
 GL_ARB_point_parameters = Extension('GL_ARB_point_parameters')
-GL_ARB_point_parameters.url = 'http://www.opengl.org/registry/specs/gl/ARB/point_parameters.txt'
+GL_ARB_point_parameters.url = 'http://www.opengl.org/registry/specs/ARB/point_parameters.txt'
 GL_ARB_point_parameters.enumerants = ['GL_POINT_DISTANCE_ATTENUATION_ARB','GL_POINT_FADE_THRESHOLD_SIZE_ARB','GL_POINT_SIZE_MAX_ARB','GL_POINT_SIZE_MIN_ARB']
 GL_ARB_point_parameters.functions = ['glPointParameterfARB','glPointParameterfvARB']
 gl.add(GL_ARB_point_parameters)
 
 GL_ARB_point_sprite = Extension('GL_ARB_point_sprite')
-GL_ARB_point_sprite.url = 'http://www.opengl.org/registry/specs/gl/ARB/point_sprite.txt'
+GL_ARB_point_sprite.url = 'http://www.opengl.org/registry/specs/ARB/point_sprite.txt'
 GL_ARB_point_sprite.enumerants = ['GL_COORD_REPLACE_ARB','GL_POINT_SPRITE_ARB']
 gl.add(GL_ARB_point_sprite)
 
 GL_ARB_program_interface_query = Extension('GL_ARB_program_interface_query')
-GL_ARB_program_interface_query.url = 'http://www.opengl.org/registry/specs/gl/ARB/program_interface_query.txt'
+GL_ARB_program_interface_query.url = 'http://www.opengl.org/registry/specs/ARB/program_interface_query.txt'
 GL_ARB_program_interface_query.enumerants = ['GL_ACTIVE_RESOURCES','GL_ACTIVE_VARIABLES','GL_ARRAY_SIZE','GL_ARRAY_STRIDE','GL_ATOMIC_COUNTER_BUFFER_INDEX','GL_BLOCK_INDEX','GL_BUFFER_BINDING','GL_BUFFER_DATA_SIZE','GL_BUFFER_VARIABLE','GL_COMPUTE_SUBROUTINE','GL_COMPUTE_SUBROUTINE_UNIFORM','GL_FRAGMENT_SUBROUTINE','GL_FRAGMENT_SUBROUTINE_UNIFORM','GL_GEOMETRY_SUBROUTINE','GL_GEOMETRY_SUBROUTINE_UNIFORM','GL_IS_PER_PATCH','GL_IS_ROW_MAJOR','GL_LOCATION','GL_LOCATION_INDEX','GL_MATRIX_STRIDE','GL_MAX_NAME_LENGTH','GL_MAX_NUM_ACTIVE_VARIABLES','GL_MAX_NUM_COMPATIBLE_SUBROUTINES','GL_NAME_LENGTH','GL_NUM_ACTIVE_VARIABLES','GL_OFFSET','GL_PROGRAM_INPUT','GL_PROGRAM_OUTPUT','GL_REFERENCED_BY_COMPUTE_SHADER','GL_REFERENCED_BY_FRAGMENT_SHADER','GL_REFERENCED_BY_GEOMETRY_SHADER','GL_REFERENCED_BY_TESS_CONTROL_SHADER','GL_REFERENCED_BY_TESS_EVALUATION_SHADER','GL_REFERENCED_BY_VERTEX_SHADER','GL_SHADER_STORAGE_BLOCK','GL_TESS_CONTROL_SUBROUTINE','GL_TESS_CONTROL_SUBROUTINE_UNIFORM','GL_TESS_EVALUATION_SUBROUTINE','GL_TESS_EVALUATION_SUBROUTINE_UNIFORM','GL_TOP_LEVEL_ARRAY_SIZE','GL_TOP_LEVEL_ARRAY_STRIDE','GL_TRANSFORM_FEEDBACK_VARYING','GL_TYPE','GL_UNIFORM','GL_UNIFORM_BLOCK','GL_VERTEX_SUBROUTINE','GL_VERTEX_SUBROUTINE_UNIFORM']
 GL_ARB_program_interface_query.functions = ['glGetProgramResourceLocation','glGetProgramResourceLocationIndex','glGetProgramResourceIndex','glGetProgramInterfaceiv','glGetProgramResourceName','glGetProgramResourceiv']
 gl.add(GL_ARB_program_interface_query)
 
 GL_ARB_provoking_vertex = Extension('GL_ARB_provoking_vertex')
-GL_ARB_provoking_vertex.url = 'http://www.opengl.org/registry/specs/gl/ARB/provoking_vertex.txt'
+GL_ARB_provoking_vertex.url = 'http://www.opengl.org/registry/specs/ARB/provoking_vertex.txt'
 GL_ARB_provoking_vertex.enumerants = ['GL_FIRST_VERTEX_CONVENTION','GL_LAST_VERTEX_CONVENTION','GL_PROVOKING_VERTEX','GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION']
 GL_ARB_provoking_vertex.functions = ['glProvokingVertex']
 gl.add(GL_ARB_provoking_vertex)
 
 GL_ARB_robust_buffer_access_behavior = Extension('GL_ARB_robust_buffer_access_behavior')
-GL_ARB_robust_buffer_access_behavior.url = 'http://www.opengl.org/registry/specs/gl/ARB/robust_buffer_access_behavior.txt'
+GL_ARB_robust_buffer_access_behavior.url = 'http://www.opengl.org/registry/specs/ARB/robust_buffer_access_behavior.txt'
 gl.add(GL_ARB_robust_buffer_access_behavior)
 
 GL_ARB_robustness = Extension('GL_ARB_robustness')
@@ -42725,27 +42747,27 @@ GL_ARB_robustness.functions = ['glGetGraphicsResetStatusARB','glGetnColorTableAR
 gl.add(GL_ARB_robustness)
 
 GL_ARB_robustness_application_isolation = Extension('GL_ARB_robustness_application_isolation')
-GL_ARB_robustness_application_isolation.url = 'http://www.opengl.org/registry/specs/gl/ARB/robustness_isolation.txt'
+GL_ARB_robustness_application_isolation.url = 'http://www.opengl.org/registry/specs/ARB/robustness_isolation.txt'
 gl.add(GL_ARB_robustness_application_isolation)
 
 GL_ARB_robustness_share_group_isolation = Extension('GL_ARB_robustness_share_group_isolation')
-GL_ARB_robustness_share_group_isolation.url = 'http://www.opengl.org/registry/specs/gl/ARB/robustness_isolation.txt'
+GL_ARB_robustness_share_group_isolation.url = 'http://www.opengl.org/registry/specs/ARB/robustness_isolation.txt'
 gl.add(GL_ARB_robustness_share_group_isolation)
 
 GL_ARB_sample_shading = Extension('GL_ARB_sample_shading')
-GL_ARB_sample_shading.url = 'http://www.opengl.org/registry/specs/gl/ARB/sample_shading.txt'
+GL_ARB_sample_shading.url = 'http://www.opengl.org/registry/specs/ARB/sample_shading.txt'
 GL_ARB_sample_shading.enumerants = ['GL_MIN_SAMPLE_SHADING_VALUE_ARB','GL_SAMPLE_SHADING_ARB']
 GL_ARB_sample_shading.functions = ['glMinSampleShadingARB']
 gl.add(GL_ARB_sample_shading)
 
 GL_ARB_sampler_objects = Extension('GL_ARB_sampler_objects')
-GL_ARB_sampler_objects.url = 'http://www.opengl.org/registry/specs/gl/ARB/sampler_objects.txt'
+GL_ARB_sampler_objects.url = 'http://www.opengl.org/registry/specs/ARB/sampler_objects.txt'
 GL_ARB_sampler_objects.enumerants = ['GL_SAMPLER_BINDING']
 GL_ARB_sampler_objects.functions = ['glIsSampler','glBindSampler','glDeleteSamplers','glGenSamplers','glGetSamplerParameterIiv','glGetSamplerParameterIuiv','glGetSamplerParameterfv','glGetSamplerParameteriv','glSamplerParameterIiv','glSamplerParameterIuiv','glSamplerParameterf','glSamplerParameterfv','glSamplerParameteri','glSamplerParameteriv']
 gl.add(GL_ARB_sampler_objects)
 
 GL_ARB_seamless_cube_map = Extension('GL_ARB_seamless_cube_map')
-GL_ARB_seamless_cube_map.url = 'http://www.opengl.org/registry/specs/gl/ARB/seamless_cube_map.txt'
+GL_ARB_seamless_cube_map.url = 'http://www.opengl.org/registry/specs/ARB/seamless_cube_map.txt'
 GL_ARB_seamless_cube_map.enumerants = ['GL_TEXTURE_CUBE_MAP_SEAMLESS']
 gl.add(GL_ARB_seamless_cube_map)
 
@@ -42756,278 +42778,278 @@ GL_ARB_separate_shader_objects.functions = ['glIsProgramPipeline','glCreateShade
 gl.add(GL_ARB_separate_shader_objects)
 
 GL_ARB_shader_atomic_counters = Extension('GL_ARB_shader_atomic_counters')
-GL_ARB_shader_atomic_counters.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_atomic_counters.txt'
+GL_ARB_shader_atomic_counters.url = 'http://www.opengl.org/registry/specs/ARB/shader_atomic_counters.txt'
 GL_ARB_shader_atomic_counters.enumerants = ['GL_ACTIVE_ATOMIC_COUNTER_BUFFERS','GL_ATOMIC_COUNTER_BUFFER','GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS','GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTER_INDICES','GL_ATOMIC_COUNTER_BUFFER_BINDING','GL_ATOMIC_COUNTER_BUFFER_DATA_SIZE','GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER','GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER','GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER','GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER','GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER','GL_ATOMIC_COUNTER_BUFFER_SIZE','GL_ATOMIC_COUNTER_BUFFER_START','GL_MAX_ATOMIC_COUNTER_BUFFER_BINDINGS','GL_MAX_ATOMIC_COUNTER_BUFFER_SIZE','GL_MAX_COMBINED_ATOMIC_COUNTERS','GL_MAX_COMBINED_ATOMIC_COUNTER_BUFFERS','GL_MAX_FRAGMENT_ATOMIC_COUNTERS','GL_MAX_FRAGMENT_ATOMIC_COUNTER_BUFFERS','GL_MAX_GEOMETRY_ATOMIC_COUNTERS','GL_MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS','GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS','GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS','GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS','GL_MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS','GL_MAX_VERTEX_ATOMIC_COUNTERS','GL_MAX_VERTEX_ATOMIC_COUNTER_BUFFERS','GL_UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX','GL_UNSIGNED_INT_ATOMIC_COUNTER']
 GL_ARB_shader_atomic_counters.functions = ['glGetActiveAtomicCounterBufferiv']
 gl.add(GL_ARB_shader_atomic_counters)
 
 GL_ARB_shader_bit_encoding = Extension('GL_ARB_shader_bit_encoding')
-GL_ARB_shader_bit_encoding.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_bit_encoding.txt'
+GL_ARB_shader_bit_encoding.url = 'http://www.opengl.org/registry/specs/ARB/shader_bit_encoding.txt'
 gl.add(GL_ARB_shader_bit_encoding)
 
 GL_ARB_shader_image_load_store = Extension('GL_ARB_shader_image_load_store')
-GL_ARB_shader_image_load_store.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_image_load_store.txt'
+GL_ARB_shader_image_load_store.url = 'http://www.opengl.org/registry/specs/ARB/shader_image_load_store.txt'
 GL_ARB_shader_image_load_store.enumerants = ['GL_ALL_BARRIER_BITS','GL_ATOMIC_COUNTER_BARRIER_BIT','GL_BUFFER_UPDATE_BARRIER_BIT','GL_COMMAND_BARRIER_BIT','GL_ELEMENT_ARRAY_BARRIER_BIT','GL_FRAMEBUFFER_BARRIER_BIT','GL_IMAGE_1D','GL_IMAGE_1D_ARRAY','GL_IMAGE_2D','GL_IMAGE_2D_ARRAY','GL_IMAGE_2D_MULTISAMPLE','GL_IMAGE_2D_MULTISAMPLE_ARRAY','GL_IMAGE_2D_RECT','GL_IMAGE_3D','GL_IMAGE_BINDING_ACCESS','GL_IMAGE_BINDING_FORMAT','GL_IMAGE_BINDING_LAYER','GL_IMAGE_BINDING_LAYERED','GL_IMAGE_BINDING_LEVEL','GL_IMAGE_BINDING_NAME','GL_IMAGE_BUFFER','GL_IMAGE_CUBE','GL_IMAGE_CUBE_MAP_ARRAY','GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS','GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE','GL_IMAGE_FORMAT_COMPATIBILITY_TYPE','GL_INT_IMAGE_1D','GL_INT_IMAGE_1D_ARRAY','GL_INT_IMAGE_2D','GL_INT_IMAGE_2D_ARRAY','GL_INT_IMAGE_2D_MULTISAMPLE','GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY','GL_INT_IMAGE_2D_RECT','GL_INT_IMAGE_3D','GL_INT_IMAGE_BUFFER','GL_INT_IMAGE_CUBE','GL_INT_IMAGE_CUBE_MAP_ARRAY','GL_MAX_COMBINED_IMAGE_UNIFORMS','GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS','GL_MAX_FRAGMENT_IMAGE_UNIFORMS','GL_MAX_GEOMETRY_IMAGE_UNIFORMS','GL_MAX_IMAGE_SAMPLES','GL_MAX_IMAGE_UNITS','GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS','GL_MAX_TESS_EVALUATION_IMAGE_UNIFORMS','GL_MAX_VERTEX_IMAGE_UNIFORMS','GL_PIXEL_BUFFER_BARRIER_BIT','GL_SHADER_IMAGE_ACCESS_BARRIER_BIT','GL_TEXTURE_FETCH_BARRIER_BIT','GL_TEXTURE_UPDATE_BARRIER_BIT','GL_TRANSFORM_FEEDBACK_BARRIER_BIT','GL_UNIFORM_BARRIER_BIT','GL_UNSIGNED_INT_IMAGE_1D','GL_UNSIGNED_INT_IMAGE_1D_ARRAY','GL_UNSIGNED_INT_IMAGE_2D','GL_UNSIGNED_INT_IMAGE_2D_ARRAY','GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE','GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY','GL_UNSIGNED_INT_IMAGE_2D_RECT','GL_UNSIGNED_INT_IMAGE_3D','GL_UNSIGNED_INT_IMAGE_BUFFER','GL_UNSIGNED_INT_IMAGE_CUBE','GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY','GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT']
 GL_ARB_shader_image_load_store.functions = ['glBindImageTexture','glMemoryBarrier']
 gl.add(GL_ARB_shader_image_load_store)
 
 GL_ARB_shader_image_size = Extension('GL_ARB_shader_image_size')
-GL_ARB_shader_image_size.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_image_size.txt'
+GL_ARB_shader_image_size.url = 'http://www.opengl.org/registry/specs/ARB/shader_image_size.txt'
 gl.add(GL_ARB_shader_image_size)
 
 GL_ARB_shader_objects = Extension('GL_ARB_shader_objects')
-GL_ARB_shader_objects.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_objects.txt'
+GL_ARB_shader_objects.url = 'http://www.opengl.org/registry/specs/ARB/shader_objects.txt'
 GL_ARB_shader_objects.enumerants = ['GL_BOOL_ARB','GL_BOOL_VEC2_ARB','GL_BOOL_VEC3_ARB','GL_BOOL_VEC4_ARB','GL_FLOAT_MAT2_ARB','GL_FLOAT_MAT3_ARB','GL_FLOAT_MAT4_ARB','GL_FLOAT_VEC2_ARB','GL_FLOAT_VEC3_ARB','GL_FLOAT_VEC4_ARB','GL_INT_VEC2_ARB','GL_INT_VEC3_ARB','GL_INT_VEC4_ARB','GL_OBJECT_ACTIVE_UNIFORMS_ARB','GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB','GL_OBJECT_ATTACHED_OBJECTS_ARB','GL_OBJECT_COMPILE_STATUS_ARB','GL_OBJECT_DELETE_STATUS_ARB','GL_OBJECT_INFO_LOG_LENGTH_ARB','GL_OBJECT_LINK_STATUS_ARB','GL_OBJECT_SHADER_SOURCE_LENGTH_ARB','GL_OBJECT_SUBTYPE_ARB','GL_OBJECT_TYPE_ARB','GL_OBJECT_VALIDATE_STATUS_ARB','GL_PROGRAM_OBJECT_ARB','GL_SAMPLER_1D_ARB','GL_SAMPLER_1D_SHADOW_ARB','GL_SAMPLER_2D_ARB','GL_SAMPLER_2D_RECT_ARB','GL_SAMPLER_2D_RECT_SHADOW_ARB','GL_SAMPLER_2D_SHADOW_ARB','GL_SAMPLER_3D_ARB','GL_SAMPLER_CUBE_ARB','GL_SHADER_OBJECT_ARB']
 GL_ARB_shader_objects.functions = ['glCreateProgramObjectARB','glCreateShaderObjectARB','glGetHandleARB','glGetUniformLocationARB','glAttachObjectARB','glCompileShaderARB','glDeleteObjectARB','glDetachObjectARB','glGetActiveUniformARB','glGetAttachedObjectsARB','glGetInfoLogARB','glGetObjectParameterfvARB','glGetObjectParameterivARB','glGetShaderSourceARB','glGetUniformfvARB','glGetUniformivARB','glLinkProgramARB','glShaderSourceARB','glUniform1fARB','glUniform1fvARB','glUniform1iARB','glUniform1ivARB','glUniform2fARB','glUniform2fvARB','glUniform2iARB','glUniform2ivARB','glUniform3fARB','glUniform3fvARB','glUniform3iARB','glUniform3ivARB','glUniform4fARB','glUniform4fvARB','glUniform4iARB','glUniform4ivARB','glUniformMatrix2fvARB','glUniformMatrix3fvARB','glUniformMatrix4fvARB','glUseProgramObjectARB','glValidateProgramARB']
 gl.add(GL_ARB_shader_objects)
 
 GL_ARB_shader_precision = Extension('GL_ARB_shader_precision')
-GL_ARB_shader_precision.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_precision.txt'
+GL_ARB_shader_precision.url = 'http://www.opengl.org/registry/specs/ARB/shader_precision.txt'
 gl.add(GL_ARB_shader_precision)
 
 GL_ARB_shader_stencil_export = Extension('GL_ARB_shader_stencil_export')
-GL_ARB_shader_stencil_export.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_stencil_export.txt'
+GL_ARB_shader_stencil_export.url = 'http://www.opengl.org/registry/specs/ARB/shader_stencil_export.txt'
 gl.add(GL_ARB_shader_stencil_export)
 
 GL_ARB_shader_storage_buffer_object = Extension('GL_ARB_shader_storage_buffer_object')
-GL_ARB_shader_storage_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_storage_buffer_object.txt'
+GL_ARB_shader_storage_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/shader_storage_buffer_object.txt'
 GL_ARB_shader_storage_buffer_object.enumerants = ['GL_MAX_COMBINED_SHADER_OUTPUT_RESOURCES','GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS','GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS','GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS','GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS','GL_MAX_SHADER_STORAGE_BLOCK_SIZE','GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS','GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS','GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS','GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS','GL_SHADER_STORAGE_BARRIER_BIT','GL_SHADER_STORAGE_BUFFER','GL_SHADER_STORAGE_BUFFER_BINDING','GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT','GL_SHADER_STORAGE_BUFFER_SIZE','GL_SHADER_STORAGE_BUFFER_START']
 GL_ARB_shader_storage_buffer_object.functions = ['glShaderStorageBlockBinding']
 gl.add(GL_ARB_shader_storage_buffer_object)
 
 GL_ARB_shader_subroutine = Extension('GL_ARB_shader_subroutine')
-GL_ARB_shader_subroutine.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_subroutine.txt'
+GL_ARB_shader_subroutine.url = 'http://www.opengl.org/registry/specs/ARB/shader_subroutine.txt'
 GL_ARB_shader_subroutine.enumerants = ['GL_ACTIVE_SUBROUTINES','GL_ACTIVE_SUBROUTINE_MAX_LENGTH','GL_ACTIVE_SUBROUTINE_UNIFORMS','GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS','GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH','GL_COMPATIBLE_SUBROUTINES','GL_MAX_SUBROUTINES','GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS','GL_NUM_COMPATIBLE_SUBROUTINES']
 GL_ARB_shader_subroutine.functions = ['glGetSubroutineUniformLocation','glGetSubroutineIndex','glGetActiveSubroutineName','glGetActiveSubroutineUniformName','glGetActiveSubroutineUniformiv','glGetProgramStageiv','glGetUniformSubroutineuiv','glUniformSubroutinesuiv']
 gl.add(GL_ARB_shader_subroutine)
 
 GL_ARB_shader_texture_lod = Extension('GL_ARB_shader_texture_lod')
-GL_ARB_shader_texture_lod.url = 'http://www.opengl.org/registry/specs/gl/ARB/shader_texture_lod.txt'
+GL_ARB_shader_texture_lod.url = 'http://www.opengl.org/registry/specs/ARB/shader_texture_lod.txt'
 gl.add(GL_ARB_shader_texture_lod)
 
 GL_ARB_shading_language_100 = Extension('GL_ARB_shading_language_100')
-GL_ARB_shading_language_100.url = 'http://www.opengl.org/registry/specs/gl/ARB/shading_language_100.txt'
+GL_ARB_shading_language_100.url = 'http://www.opengl.org/registry/specs/ARB/shading_language_100.txt'
 GL_ARB_shading_language_100.enumerants = ['GL_SHADING_LANGUAGE_VERSION_ARB']
 gl.add(GL_ARB_shading_language_100)
 
 GL_ARB_shading_language_420pack = Extension('GL_ARB_shading_language_420pack')
-GL_ARB_shading_language_420pack.url = 'http://www.opengl.org/registry/specs/gl/ARB/shading_language_420pack.txt'
+GL_ARB_shading_language_420pack.url = 'http://www.opengl.org/registry/specs/ARB/shading_language_420pack.txt'
 gl.add(GL_ARB_shading_language_420pack)
 
 GL_ARB_shading_language_include = Extension('GL_ARB_shading_language_include')
-GL_ARB_shading_language_include.url = 'http://www.opengl.org/registry/specs/gl/ARB/shading_language_include.txt'
+GL_ARB_shading_language_include.url = 'http://www.opengl.org/registry/specs/ARB/shading_language_include.txt'
 GL_ARB_shading_language_include.enumerants = ['GL_NAMED_STRING_LENGTH_ARB','GL_NAMED_STRING_TYPE_ARB','GL_SHADER_INCLUDE_ARB']
 GL_ARB_shading_language_include.functions = ['glIsNamedStringARB','glCompileShaderIncludeARB','glDeleteNamedStringARB','glGetNamedStringARB','glGetNamedStringivARB','glNamedStringARB']
 gl.add(GL_ARB_shading_language_include)
 
 GL_ARB_shading_language_packing = Extension('GL_ARB_shading_language_packing')
-GL_ARB_shading_language_packing.url = 'http://www.opengl.org/registry/specs/gl/ARB/shading_language_packing.txt'
+GL_ARB_shading_language_packing.url = 'http://www.opengl.org/registry/specs/ARB/shading_language_packing.txt'
 gl.add(GL_ARB_shading_language_packing)
 
 GL_ARB_shadow = Extension('GL_ARB_shadow')
-GL_ARB_shadow.url = 'http://www.opengl.org/registry/specs/gl/ARB/shadow.txt'
+GL_ARB_shadow.url = 'http://www.opengl.org/registry/specs/ARB/shadow.txt'
 GL_ARB_shadow.enumerants = ['GL_COMPARE_R_TO_TEXTURE_ARB','GL_TEXTURE_COMPARE_FUNC_ARB','GL_TEXTURE_COMPARE_MODE_ARB']
 gl.add(GL_ARB_shadow)
 
 GL_ARB_shadow_ambient = Extension('GL_ARB_shadow_ambient')
-GL_ARB_shadow_ambient.url = 'http://www.opengl.org/registry/specs/gl/ARB/shadow_ambient.txt'
+GL_ARB_shadow_ambient.url = 'http://www.opengl.org/registry/specs/ARB/shadow_ambient.txt'
 GL_ARB_shadow_ambient.enumerants = ['GL_TEXTURE_COMPARE_FAIL_VALUE_ARB']
 gl.add(GL_ARB_shadow_ambient)
 
 GL_ARB_stencil_texturing = Extension('GL_ARB_stencil_texturing')
-GL_ARB_stencil_texturing.url = 'http://www.opengl.org/registry/specs/gl/ARB/stencil_texturing.txt'
+GL_ARB_stencil_texturing.url = 'http://www.opengl.org/registry/specs/ARB/stencil_texturing.txt'
 GL_ARB_stencil_texturing.enumerants = ['GL_DEPTH_STENCIL_TEXTURE_MODE']
 gl.add(GL_ARB_stencil_texturing)
 
 GL_ARB_sync = Extension('GL_ARB_sync')
-GL_ARB_sync.url = 'http://www.opengl.org/registry/specs/gl/ARB/sync.txt'
+GL_ARB_sync.url = 'http://www.opengl.org/registry/specs/ARB/sync.txt'
 GL_ARB_sync.enumerants = ['GL_ALREADY_SIGNALED','GL_CONDITION_SATISFIED','GL_MAX_SERVER_WAIT_TIMEOUT','GL_OBJECT_TYPE','GL_SIGNALED','GL_SYNC_CONDITION','GL_SYNC_FENCE','GL_SYNC_FLAGS','GL_SYNC_FLUSH_COMMANDS_BIT','GL_SYNC_GPU_COMMANDS_COMPLETE','GL_SYNC_STATUS','GL_TIMEOUT_EXPIRED','GL_TIMEOUT_IGNORED','GL_UNSIGNALED','GL_WAIT_FAILED']
 GL_ARB_sync.functions = ['glIsSync','glClientWaitSync','glFenceSync','glDeleteSync','glGetInteger64v','glGetSynciv','glWaitSync']
 gl.add(GL_ARB_sync)
 
 GL_ARB_tessellation_shader = Extension('GL_ARB_tessellation_shader')
-GL_ARB_tessellation_shader.url = 'http://www.opengl.org/registry/specs/gl/ARB/tessellation_shader.txt'
+GL_ARB_tessellation_shader.url = 'http://www.opengl.org/registry/specs/ARB/tessellation_shader.txt'
 GL_ARB_tessellation_shader.enumerants = ['GL_FRACTIONAL_EVEN','GL_FRACTIONAL_ODD','GL_ISOLINES','GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS','GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS','GL_MAX_PATCH_VERTICES','GL_MAX_TESS_CONTROL_INPUT_COMPONENTS','GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS','GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS','GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS','GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS','GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS','GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS','GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS','GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS','GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS','GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS','GL_MAX_TESS_GEN_LEVEL','GL_MAX_TESS_PATCH_COMPONENTS','GL_PATCHES','GL_PATCH_DEFAULT_INNER_LEVEL','GL_PATCH_DEFAULT_OUTER_LEVEL','GL_PATCH_VERTICES','GL_TESS_CONTROL_OUTPUT_VERTICES','GL_TESS_CONTROL_SHADER','GL_TESS_EVALUATION_SHADER','GL_TESS_GEN_MODE','GL_TESS_GEN_POINT_MODE','GL_TESS_GEN_SPACING','GL_TESS_GEN_VERTEX_ORDER','GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER','GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER']
 GL_ARB_tessellation_shader.functions = ['glPatchParameterfv','glPatchParameteri']
 gl.add(GL_ARB_tessellation_shader)
 
 GL_ARB_texture_border_clamp = Extension('GL_ARB_texture_border_clamp')
-GL_ARB_texture_border_clamp.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_border_clamp.txt'
+GL_ARB_texture_border_clamp.url = 'http://www.opengl.org/registry/specs/ARB/texture_border_clamp.txt'
 GL_ARB_texture_border_clamp.enumerants = ['GL_CLAMP_TO_BORDER_ARB']
 gl.add(GL_ARB_texture_border_clamp)
 
 GL_ARB_texture_buffer_object = Extension('GL_ARB_texture_buffer_object')
-GL_ARB_texture_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_buffer_object.txt'
+GL_ARB_texture_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/texture_buffer_object.txt'
 GL_ARB_texture_buffer_object.enumerants = ['GL_MAX_TEXTURE_BUFFER_SIZE_ARB','GL_TEXTURE_BINDING_BUFFER_ARB','GL_TEXTURE_BUFFER_ARB','GL_TEXTURE_BUFFER_DATA_STORE_BINDING_ARB','GL_TEXTURE_BUFFER_FORMAT_ARB']
 GL_ARB_texture_buffer_object.functions = ['glTexBufferARB']
 gl.add(GL_ARB_texture_buffer_object)
 
 GL_ARB_texture_buffer_object_rgb32 = Extension('GL_ARB_texture_buffer_object_rgb32')
-GL_ARB_texture_buffer_object_rgb32.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_buffer_object_rgb32.txt'
+GL_ARB_texture_buffer_object_rgb32.url = 'http://www.opengl.org/registry/specs/ARB/texture_buffer_object_rgb32.txt'
 gl.add(GL_ARB_texture_buffer_object_rgb32)
 
 GL_ARB_texture_buffer_range = Extension('GL_ARB_texture_buffer_range')
-GL_ARB_texture_buffer_range.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_buffer_range.txt'
+GL_ARB_texture_buffer_range.url = 'http://www.opengl.org/registry/specs/ARB/texture_buffer_range.txt'
 GL_ARB_texture_buffer_range.enumerants = ['GL_TEXTURE_BUFFER_OFFSET','GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT','GL_TEXTURE_BUFFER_SIZE']
 GL_ARB_texture_buffer_range.functions = ['glTexBufferRange','glTextureBufferRangeEXT']
 gl.add(GL_ARB_texture_buffer_range)
 
 GL_ARB_texture_compression = Extension('GL_ARB_texture_compression')
-GL_ARB_texture_compression.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_compression.txt'
+GL_ARB_texture_compression.url = 'http://www.opengl.org/registry/specs/ARB/texture_compression.txt'
 GL_ARB_texture_compression.enumerants = ['GL_COMPRESSED_ALPHA_ARB','GL_COMPRESSED_INTENSITY_ARB','GL_COMPRESSED_LUMINANCE_ALPHA_ARB','GL_COMPRESSED_LUMINANCE_ARB','GL_COMPRESSED_RGBA_ARB','GL_COMPRESSED_RGB_ARB','GL_COMPRESSED_TEXTURE_FORMATS_ARB','GL_NUM_COMPRESSED_TEXTURE_FORMATS_ARB','GL_TEXTURE_COMPRESSED_ARB','GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB','GL_TEXTURE_COMPRESSION_HINT_ARB']
 GL_ARB_texture_compression.functions = ['glCompressedTexImage1DARB','glCompressedTexImage2DARB','glCompressedTexImage3DARB','glCompressedTexSubImage1DARB','glCompressedTexSubImage2DARB','glCompressedTexSubImage3DARB','glGetCompressedTexImageARB']
 gl.add(GL_ARB_texture_compression)
 
 GL_ARB_texture_compression_bptc = Extension('GL_ARB_texture_compression_bptc')
-GL_ARB_texture_compression_bptc.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_compression_bptc.txt'
+GL_ARB_texture_compression_bptc.url = 'http://www.opengl.org/registry/specs/ARB/texture_compression_bptc.txt'
 GL_ARB_texture_compression_bptc.enumerants = ['GL_COMPRESSED_RGBA_BPTC_UNORM_ARB','GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT_ARB','GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_ARB','GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_ARB']
 gl.add(GL_ARB_texture_compression_bptc)
 
 GL_ARB_texture_compression_rgtc = Extension('GL_ARB_texture_compression_rgtc')
-GL_ARB_texture_compression_rgtc.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_compression_rgtc.txt'
+GL_ARB_texture_compression_rgtc.url = 'http://www.opengl.org/registry/specs/ARB/texture_compression_rgtc.txt'
 GL_ARB_texture_compression_rgtc.enumerants = ['GL_COMPRESSED_RED_RGTC1','GL_COMPRESSED_RG_RGTC2','GL_COMPRESSED_SIGNED_RED_RGTC1','GL_COMPRESSED_SIGNED_RG_RGTC2']
 gl.add(GL_ARB_texture_compression_rgtc)
 
 GL_ARB_texture_cube_map = Extension('GL_ARB_texture_cube_map')
-GL_ARB_texture_cube_map.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_cube_map.txt'
+GL_ARB_texture_cube_map.url = 'http://www.opengl.org/registry/specs/ARB/texture_cube_map.txt'
 GL_ARB_texture_cube_map.enumerants = ['GL_MAX_CUBE_MAP_TEXTURE_SIZE_ARB','GL_NORMAL_MAP_ARB','GL_PROXY_TEXTURE_CUBE_MAP_ARB','GL_REFLECTION_MAP_ARB','GL_TEXTURE_BINDING_CUBE_MAP_ARB','GL_TEXTURE_CUBE_MAP_ARB','GL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB','GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB','GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB','GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB','GL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB','GL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB']
 gl.add(GL_ARB_texture_cube_map)
 
 GL_ARB_texture_cube_map_array = Extension('GL_ARB_texture_cube_map_array')
-GL_ARB_texture_cube_map_array.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_cube_map_array.txt'
+GL_ARB_texture_cube_map_array.url = 'http://www.opengl.org/registry/specs/ARB/texture_cube_map_array.txt'
 GL_ARB_texture_cube_map_array.enumerants = ['GL_INT_SAMPLER_CUBE_MAP_ARRAY_ARB','GL_PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB','GL_SAMPLER_CUBE_MAP_ARRAY_ARB','GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW_ARB','GL_TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB','GL_TEXTURE_CUBE_MAP_ARRAY_ARB','GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB']
 gl.add(GL_ARB_texture_cube_map_array)
 
 GL_ARB_texture_env_add = Extension('GL_ARB_texture_env_add')
-GL_ARB_texture_env_add.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_env_add.txt'
+GL_ARB_texture_env_add.url = 'http://www.opengl.org/registry/specs/ARB/texture_env_add.txt'
 gl.add(GL_ARB_texture_env_add)
 
 GL_ARB_texture_env_combine = Extension('GL_ARB_texture_env_combine')
-GL_ARB_texture_env_combine.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_env_combine.txt'
+GL_ARB_texture_env_combine.url = 'http://www.opengl.org/registry/specs/ARB/texture_env_combine.txt'
 GL_ARB_texture_env_combine.enumerants = ['GL_ADD_SIGNED_ARB','GL_COMBINE_ALPHA_ARB','GL_COMBINE_ARB','GL_COMBINE_RGB_ARB','GL_CONSTANT_ARB','GL_INTERPOLATE_ARB','GL_OPERAND0_ALPHA_ARB','GL_OPERAND0_RGB_ARB','GL_OPERAND1_ALPHA_ARB','GL_OPERAND1_RGB_ARB','GL_OPERAND2_ALPHA_ARB','GL_OPERAND2_RGB_ARB','GL_PREVIOUS_ARB','GL_PRIMARY_COLOR_ARB','GL_RGB_SCALE_ARB','GL_SOURCE0_ALPHA_ARB','GL_SOURCE0_RGB_ARB','GL_SOURCE1_ALPHA_ARB','GL_SOURCE1_RGB_ARB','GL_SOURCE2_ALPHA_ARB','GL_SOURCE2_RGB_ARB','GL_SUBTRACT_ARB']
 gl.add(GL_ARB_texture_env_combine)
 
 GL_ARB_texture_env_crossbar = Extension('GL_ARB_texture_env_crossbar')
-GL_ARB_texture_env_crossbar.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_env_crossbar.txt'
+GL_ARB_texture_env_crossbar.url = 'http://www.opengl.org/registry/specs/ARB/texture_env_crossbar.txt'
 gl.add(GL_ARB_texture_env_crossbar)
 
 GL_ARB_texture_env_dot3 = Extension('GL_ARB_texture_env_dot3')
-GL_ARB_texture_env_dot3.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_env_dot3.txt'
+GL_ARB_texture_env_dot3.url = 'http://www.opengl.org/registry/specs/ARB/texture_env_dot3.txt'
 GL_ARB_texture_env_dot3.enumerants = ['GL_DOT3_RGBA_ARB','GL_DOT3_RGB_ARB']
 gl.add(GL_ARB_texture_env_dot3)
 
 GL_ARB_texture_float = Extension('GL_ARB_texture_float')
-GL_ARB_texture_float.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_float.txt'
+GL_ARB_texture_float.url = 'http://www.opengl.org/registry/specs/ARB/texture_float.txt'
 GL_ARB_texture_float.enumerants = ['GL_ALPHA16F_ARB','GL_ALPHA32F_ARB','GL_INTENSITY16F_ARB','GL_INTENSITY32F_ARB','GL_LUMINANCE16F_ARB','GL_LUMINANCE32F_ARB','GL_LUMINANCE_ALPHA16F_ARB','GL_LUMINANCE_ALPHA32F_ARB','GL_RGB16F_ARB','GL_RGB32F_ARB','GL_RGBA16F_ARB','GL_RGBA32F_ARB','GL_TEXTURE_ALPHA_TYPE_ARB','GL_TEXTURE_BLUE_TYPE_ARB','GL_TEXTURE_DEPTH_TYPE_ARB','GL_TEXTURE_GREEN_TYPE_ARB','GL_TEXTURE_INTENSITY_TYPE_ARB','GL_TEXTURE_LUMINANCE_TYPE_ARB','GL_TEXTURE_RED_TYPE_ARB','GL_UNSIGNED_NORMALIZED_ARB']
 gl.add(GL_ARB_texture_float)
 
 GL_ARB_texture_gather = Extension('GL_ARB_texture_gather')
-GL_ARB_texture_gather.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_gather.txt'
+GL_ARB_texture_gather.url = 'http://www.opengl.org/registry/specs/ARB/texture_gather.txt'
 GL_ARB_texture_gather.enumerants = ['GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB','GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB','GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB']
 gl.add(GL_ARB_texture_gather)
 
 GL_ARB_texture_mirrored_repeat = Extension('GL_ARB_texture_mirrored_repeat')
-GL_ARB_texture_mirrored_repeat.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_mirrored_repeat.txt'
+GL_ARB_texture_mirrored_repeat.url = 'http://www.opengl.org/registry/specs/ARB/texture_mirrored_repeat.txt'
 GL_ARB_texture_mirrored_repeat.enumerants = ['GL_MIRRORED_REPEAT_ARB']
 gl.add(GL_ARB_texture_mirrored_repeat)
 
 GL_ARB_texture_multisample = Extension('GL_ARB_texture_multisample')
-GL_ARB_texture_multisample.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_multisample.txt'
+GL_ARB_texture_multisample.url = 'http://www.opengl.org/registry/specs/ARB/texture_multisample.txt'
 GL_ARB_texture_multisample.enumerants = ['GL_INT_SAMPLER_2D_MULTISAMPLE','GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY','GL_MAX_COLOR_TEXTURE_SAMPLES','GL_MAX_DEPTH_TEXTURE_SAMPLES','GL_MAX_INTEGER_SAMPLES','GL_MAX_SAMPLE_MASK_WORDS','GL_PROXY_TEXTURE_2D_MULTISAMPLE','GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY','GL_SAMPLER_2D_MULTISAMPLE','GL_SAMPLER_2D_MULTISAMPLE_ARRAY','GL_SAMPLE_MASK','GL_SAMPLE_MASK_VALUE','GL_SAMPLE_POSITION','GL_TEXTURE_2D_MULTISAMPLE','GL_TEXTURE_2D_MULTISAMPLE_ARRAY','GL_TEXTURE_BINDING_2D_MULTISAMPLE','GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY','GL_TEXTURE_FIXED_SAMPLE_LOCATIONS','GL_TEXTURE_SAMPLES','GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE','GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY']
 GL_ARB_texture_multisample.functions = ['glGetMultisamplefv','glSampleMaski','glTexImage2DMultisample','glTexImage3DMultisample']
 gl.add(GL_ARB_texture_multisample)
 
 GL_ARB_texture_non_power_of_two = Extension('GL_ARB_texture_non_power_of_two')
-GL_ARB_texture_non_power_of_two.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_non_power_of_two.txt'
+GL_ARB_texture_non_power_of_two.url = 'http://www.opengl.org/registry/specs/ARB/texture_non_power_of_two.txt'
 gl.add(GL_ARB_texture_non_power_of_two)
 
 GL_ARB_texture_query_levels = Extension('GL_ARB_texture_query_levels')
-GL_ARB_texture_query_levels.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_query_levels.txt'
+GL_ARB_texture_query_levels.url = 'http://www.opengl.org/registry/specs/ARB/texture_query_levels.txt'
 gl.add(GL_ARB_texture_query_levels)
 
 GL_ARB_texture_query_lod = Extension('GL_ARB_texture_query_lod')
-GL_ARB_texture_query_lod.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_query_lod.txt'
+GL_ARB_texture_query_lod.url = 'http://www.opengl.org/registry/specs/ARB/texture_query_lod.txt'
 gl.add(GL_ARB_texture_query_lod)
 
 GL_ARB_texture_rectangle = Extension('GL_ARB_texture_rectangle')
-GL_ARB_texture_rectangle.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_rectangle.txt'
+GL_ARB_texture_rectangle.url = 'http://www.opengl.org/registry/specs/ARB/texture_rectangle.txt'
 GL_ARB_texture_rectangle.enumerants = ['GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB','GL_PROXY_TEXTURE_RECTANGLE_ARB','GL_SAMPLER_2D_RECT_ARB','GL_SAMPLER_2D_RECT_SHADOW_ARB','GL_TEXTURE_BINDING_RECTANGLE_ARB','GL_TEXTURE_RECTANGLE_ARB']
 gl.add(GL_ARB_texture_rectangle)
 
 GL_ARB_texture_rg = Extension('GL_ARB_texture_rg')
-GL_ARB_texture_rg.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_rg.txt'
+GL_ARB_texture_rg.url = 'http://www.opengl.org/registry/specs/ARB/texture_rg.txt'
 GL_ARB_texture_rg.enumerants = ['GL_COMPRESSED_RED','GL_COMPRESSED_RG','GL_R16','GL_R16F','GL_R16I','GL_R16UI','GL_R32F','GL_R32I','GL_R32UI','GL_R8','GL_R8I','GL_R8UI','GL_RG','GL_RG16','GL_RG16F','GL_RG16I','GL_RG16UI','GL_RG32F','GL_RG32I','GL_RG32UI','GL_RG8','GL_RG8I','GL_RG8UI','GL_RG_INTEGER']
 gl.add(GL_ARB_texture_rg)
 
 GL_ARB_texture_rgb10_a2ui = Extension('GL_ARB_texture_rgb10_a2ui')
-GL_ARB_texture_rgb10_a2ui.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_rgb10_a2ui.txt'
+GL_ARB_texture_rgb10_a2ui.url = 'http://www.opengl.org/registry/specs/ARB/texture_rgb10_a2ui.txt'
 GL_ARB_texture_rgb10_a2ui.enumerants = ['GL_RGB10_A2UI']
 gl.add(GL_ARB_texture_rgb10_a2ui)
 
 GL_ARB_texture_storage = Extension('GL_ARB_texture_storage')
-GL_ARB_texture_storage.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_storage.txt'
+GL_ARB_texture_storage.url = 'http://www.opengl.org/registry/specs/ARB/texture_storage.txt'
 GL_ARB_texture_storage.enumerants = ['GL_TEXTURE_IMMUTABLE_FORMAT']
 GL_ARB_texture_storage.functions = ['glTexStorage1D','glTexStorage2D','glTexStorage3D','glTextureStorage1DEXT','glTextureStorage2DEXT','glTextureStorage3DEXT']
 gl.add(GL_ARB_texture_storage)
 
 GL_ARB_texture_storage_multisample = Extension('GL_ARB_texture_storage_multisample')
-GL_ARB_texture_storage_multisample.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_storage_multisample.txt'
+GL_ARB_texture_storage_multisample.url = 'http://www.opengl.org/registry/specs/ARB/texture_storage_multisample.txt'
 GL_ARB_texture_storage_multisample.functions = ['glTexStorage2DMultisample','glTexStorage3DMultisample','glTextureStorage2DMultisampleEXT','glTextureStorage3DMultisampleEXT']
 gl.add(GL_ARB_texture_storage_multisample)
 
 GL_ARB_texture_swizzle = Extension('GL_ARB_texture_swizzle')
-GL_ARB_texture_swizzle.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_swizzle.txt'
+GL_ARB_texture_swizzle.url = 'http://www.opengl.org/registry/specs/ARB/texture_swizzle.txt'
 GL_ARB_texture_swizzle.enumerants = ['GL_TEXTURE_SWIZZLE_A','GL_TEXTURE_SWIZZLE_B','GL_TEXTURE_SWIZZLE_G','GL_TEXTURE_SWIZZLE_R','GL_TEXTURE_SWIZZLE_RGBA']
 gl.add(GL_ARB_texture_swizzle)
 
 GL_ARB_texture_view = Extension('GL_ARB_texture_view')
-GL_ARB_texture_view.url = 'http://www.opengl.org/registry/specs/gl/ARB/texture_view.txt'
+GL_ARB_texture_view.url = 'http://www.opengl.org/registry/specs/ARB/texture_view.txt'
 GL_ARB_texture_view.enumerants = ['GL_TEXTURE_IMMUTABLE_LEVELS','GL_TEXTURE_VIEW_MIN_LAYER','GL_TEXTURE_VIEW_MIN_LEVEL','GL_TEXTURE_VIEW_NUM_LAYERS','GL_TEXTURE_VIEW_NUM_LEVELS']
 GL_ARB_texture_view.functions = ['glTextureView']
 gl.add(GL_ARB_texture_view)
 
 GL_ARB_timer_query = Extension('GL_ARB_timer_query')
-GL_ARB_timer_query.url = 'http://www.opengl.org/registry/specs/gl/ARB/timer_query.txt'
+GL_ARB_timer_query.url = 'http://www.opengl.org/registry/specs/ARB/timer_query.txt'
 GL_ARB_timer_query.enumerants = ['GL_TIMESTAMP','GL_TIME_ELAPSED']
 GL_ARB_timer_query.functions = ['glGetQueryObjecti64v','glGetQueryObjectui64v','glQueryCounter']
 gl.add(GL_ARB_timer_query)
 
 GL_ARB_transform_feedback2 = Extension('GL_ARB_transform_feedback2')
-GL_ARB_transform_feedback2.url = 'http://www.opengl.org/registry/specs/gl/ARB/transform_feedback2.txt'
+GL_ARB_transform_feedback2.url = 'http://www.opengl.org/registry/specs/ARB/transform_feedback2.txt'
 GL_ARB_transform_feedback2.enumerants = ['GL_TRANSFORM_FEEDBACK','GL_TRANSFORM_FEEDBACK_BINDING','GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE','GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED']
 GL_ARB_transform_feedback2.functions = ['glIsTransformFeedback','glBindTransformFeedback','glDeleteTransformFeedbacks','glDrawTransformFeedback','glGenTransformFeedbacks','glPauseTransformFeedback','glResumeTransformFeedback']
 gl.add(GL_ARB_transform_feedback2)
 
 GL_ARB_transform_feedback3 = Extension('GL_ARB_transform_feedback3')
-GL_ARB_transform_feedback3.url = 'http://www.opengl.org/registry/specs/gl/ARB/transform_feedback3.txt'
+GL_ARB_transform_feedback3.url = 'http://www.opengl.org/registry/specs/ARB/transform_feedback3.txt'
 GL_ARB_transform_feedback3.enumerants = ['GL_MAX_TRANSFORM_FEEDBACK_BUFFERS','GL_MAX_VERTEX_STREAMS']
 GL_ARB_transform_feedback3.functions = ['glBeginQueryIndexed','glDrawTransformFeedbackStream','glEndQueryIndexed','glGetQueryIndexediv']
 gl.add(GL_ARB_transform_feedback3)
 
 GL_ARB_transform_feedback_instanced = Extension('GL_ARB_transform_feedback_instanced')
-GL_ARB_transform_feedback_instanced.url = 'http://www.opengl.org/registry/specs/gl/ARB/transform_feedback_instanced.txt'
+GL_ARB_transform_feedback_instanced.url = 'http://www.opengl.org/registry/specs/ARB/transform_feedback_instanced.txt'
 GL_ARB_transform_feedback_instanced.functions = ['glDrawTransformFeedbackInstanced','glDrawTransformFeedbackStreamInstanced']
 gl.add(GL_ARB_transform_feedback_instanced)
 
 GL_ARB_transpose_matrix = Extension('GL_ARB_transpose_matrix')
-GL_ARB_transpose_matrix.url = 'http://www.opengl.org/registry/specs/gl/ARB/transpose_matrix.txt'
+GL_ARB_transpose_matrix.url = 'http://www.opengl.org/registry/specs/ARB/transpose_matrix.txt'
 GL_ARB_transpose_matrix.enumerants = ['GL_TRANSPOSE_COLOR_MATRIX_ARB','GL_TRANSPOSE_MODELVIEW_MATRIX_ARB','GL_TRANSPOSE_PROJECTION_MATRIX_ARB','GL_TRANSPOSE_TEXTURE_MATRIX_ARB']
 GL_ARB_transpose_matrix.functions = ['glLoadTransposeMatrixdARB','glLoadTransposeMatrixfARB','glMultTransposeMatrixdARB','glMultTransposeMatrixfARB']
 gl.add(GL_ARB_transpose_matrix)
 
 GL_ARB_uniform_buffer_object = Extension('GL_ARB_uniform_buffer_object')
-GL_ARB_uniform_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/uniform_buffer_object.txt'
+GL_ARB_uniform_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/uniform_buffer_object.txt'
 GL_ARB_uniform_buffer_object.enumerants = ['GL_ACTIVE_UNIFORM_BLOCKS','GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH','GL_INVALID_INDEX','GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS','GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS','GL_MAX_COMBINED_UNIFORM_BLOCKS','GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS','GL_MAX_FRAGMENT_UNIFORM_BLOCKS','GL_MAX_GEOMETRY_UNIFORM_BLOCKS','GL_MAX_UNIFORM_BLOCK_SIZE','GL_MAX_UNIFORM_BUFFER_BINDINGS','GL_MAX_VERTEX_UNIFORM_BLOCKS','GL_UNIFORM_ARRAY_STRIDE','GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS','GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES','GL_UNIFORM_BLOCK_BINDING','GL_UNIFORM_BLOCK_DATA_SIZE','GL_UNIFORM_BLOCK_INDEX','GL_UNIFORM_BLOCK_NAME_LENGTH','GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER','GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER','GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER','GL_UNIFORM_BUFFER','GL_UNIFORM_BUFFER_BINDING','GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT','GL_UNIFORM_BUFFER_SIZE','GL_UNIFORM_BUFFER_START','GL_UNIFORM_IS_ROW_MAJOR','GL_UNIFORM_MATRIX_STRIDE','GL_UNIFORM_NAME_LENGTH','GL_UNIFORM_OFFSET','GL_UNIFORM_SIZE','GL_UNIFORM_TYPE']
 GL_ARB_uniform_buffer_object.functions = ['glGetUniformBlockIndex','glBindBufferBase','glBindBufferRange','glGetActiveUniformBlockName','glGetActiveUniformBlockiv','glGetActiveUniformName','glGetActiveUniformsiv','glGetIntegeri_v','glGetUniformIndices','glUniformBlockBinding']
 gl.add(GL_ARB_uniform_buffer_object)
 
 GL_ARB_vertex_array_bgra = Extension('GL_ARB_vertex_array_bgra')
-GL_ARB_vertex_array_bgra.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_array_bgra.txt'
+GL_ARB_vertex_array_bgra.url = 'http://www.opengl.org/registry/specs/ARB/vertex_array_bgra.txt'
 GL_ARB_vertex_array_bgra.enumerants = ['GL_BGRA']
 gl.add(GL_ARB_vertex_array_bgra)
 
 GL_ARB_vertex_array_object = Extension('GL_ARB_vertex_array_object')
-GL_ARB_vertex_array_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_array_object.txt'
+GL_ARB_vertex_array_object.url = 'http://www.opengl.org/registry/specs/ARB/vertex_array_object.txt'
 GL_ARB_vertex_array_object.enumerants = ['GL_VERTEX_ARRAY_BINDING']
 GL_ARB_vertex_array_object.functions = ['glIsVertexArray','glBindVertexArray','glDeleteVertexArrays','glGenVertexArrays']
 gl.add(GL_ARB_vertex_array_object)
@@ -43038,7 +43060,7 @@ GL_ARB_vertex_attrib_64bit.functions = ['glGetVertexAttribLdv','glVertexAttribL1
 gl.add(GL_ARB_vertex_attrib_64bit)
 
 GL_ARB_vertex_attrib_binding = Extension('GL_ARB_vertex_attrib_binding')
-GL_ARB_vertex_attrib_binding.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_attrib_binding.txt'
+GL_ARB_vertex_attrib_binding.url = 'http://www.opengl.org/registry/specs/ARB/vertex_attrib_binding.txt'
 GL_ARB_vertex_attrib_binding.enumerants = ['GL_MAX_VERTEX_ATTRIB_BINDINGS','GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET','GL_VERTEX_ATTRIB_BINDING','GL_VERTEX_ATTRIB_RELATIVE_OFFSET','GL_VERTEX_BINDING_DIVISOR','GL_VERTEX_BINDING_OFFSET','GL_VERTEX_BINDING_STRIDE']
 GL_ARB_vertex_attrib_binding.functions = ['glBindVertexBuffer','glVertexAttribBinding','glVertexAttribFormat','glVertexAttribIFormat','glVertexAttribLFormat','glVertexBindingDivisor']
 gl.add(GL_ARB_vertex_attrib_binding)
@@ -43050,37 +43072,37 @@ GL_ARB_vertex_blend.functions = ['glVertexBlendARB','glWeightPointerARB','glWeig
 gl.add(GL_ARB_vertex_blend)
 
 GL_ARB_vertex_buffer_object = Extension('GL_ARB_vertex_buffer_object')
-GL_ARB_vertex_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_buffer_object.txt'
+GL_ARB_vertex_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt'
 GL_ARB_vertex_buffer_object.enumerants = ['GL_ARRAY_BUFFER_ARB','GL_ARRAY_BUFFER_BINDING_ARB','GL_BUFFER_ACCESS_ARB','GL_BUFFER_MAPPED_ARB','GL_BUFFER_MAP_POINTER_ARB','GL_BUFFER_SIZE_ARB','GL_BUFFER_USAGE_ARB','GL_COLOR_ARRAY_BUFFER_BINDING_ARB','GL_DYNAMIC_COPY_ARB','GL_DYNAMIC_DRAW_ARB','GL_DYNAMIC_READ_ARB','GL_EDGE_FLAG_ARRAY_BUFFER_BINDING_ARB','GL_ELEMENT_ARRAY_BUFFER_ARB','GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB','GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB','GL_INDEX_ARRAY_BUFFER_BINDING_ARB','GL_NORMAL_ARRAY_BUFFER_BINDING_ARB','GL_READ_ONLY_ARB','GL_READ_WRITE_ARB','GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB','GL_STATIC_COPY_ARB','GL_STATIC_DRAW_ARB','GL_STATIC_READ_ARB','GL_STREAM_COPY_ARB','GL_STREAM_DRAW_ARB','GL_STREAM_READ_ARB','GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB','GL_VERTEX_ARRAY_BUFFER_BINDING_ARB','GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB','GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB','GL_WRITE_ONLY_ARB']
 GL_ARB_vertex_buffer_object.functions = ['glIsBufferARB','glUnmapBufferARB','*','glBindBufferARB','glBufferDataARB','glBufferSubDataARB','glDeleteBuffersARB','glGenBuffersARB','glGetBufferParameterivARB','glGetBufferPointervARB','glGetBufferSubDataARB']
 gl.add(GL_ARB_vertex_buffer_object)
 
 GL_ARB_vertex_program = Extension('GL_ARB_vertex_program')
-GL_ARB_vertex_program.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_program.txt'
+GL_ARB_vertex_program.url = 'http://www.opengl.org/registry/specs/ARB/vertex_program.txt'
 GL_ARB_vertex_program.enumerants = ['GL_COLOR_SUM_ARB','GL_CURRENT_MATRIX_ARB','GL_CURRENT_MATRIX_STACK_DEPTH_ARB','GL_CURRENT_VERTEX_ATTRIB_ARB','GL_MATRIX0_ARB','GL_MATRIX10_ARB','GL_MATRIX11_ARB','GL_MATRIX12_ARB','GL_MATRIX13_ARB','GL_MATRIX14_ARB','GL_MATRIX15_ARB','GL_MATRIX16_ARB','GL_MATRIX17_ARB','GL_MATRIX18_ARB','GL_MATRIX19_ARB','GL_MATRIX1_ARB','GL_MATRIX20_ARB','GL_MATRIX21_ARB','GL_MATRIX22_ARB','GL_MATRIX23_ARB','GL_MATRIX24_ARB','GL_MATRIX25_ARB','GL_MATRIX26_ARB','GL_MATRIX27_ARB','GL_MATRIX28_ARB','GL_MATRIX29_ARB','GL_MATRIX2_ARB','GL_MATRIX30_ARB','GL_MATRIX31_ARB','GL_MATRIX3_ARB','GL_MATRIX4_ARB','GL_MATRIX5_ARB','GL_MATRIX6_ARB','GL_MATRIX7_ARB','GL_MATRIX8_ARB','GL_MATRIX9_ARB','GL_MAX_PROGRAM_ADDRESS_REGISTERS_ARB','GL_MAX_PROGRAM_ATTRIBS_ARB','GL_MAX_PROGRAM_ENV_PARAMETERS_ARB','GL_MAX_PROGRAM_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_LOCAL_PARAMETERS_ARB','GL_MAX_PROGRAM_MATRICES_ARB','GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB','GL_MAX_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB','GL_MAX_PROGRAM_NATIVE_ATTRIBS_ARB','GL_MAX_PROGRAM_NATIVE_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_NATIVE_PARAMETERS_ARB','GL_MAX_PROGRAM_NATIVE_TEMPORARIES_ARB','GL_MAX_PROGRAM_PARAMETERS_ARB','GL_MAX_PROGRAM_TEMPORARIES_ARB','GL_MAX_VERTEX_ATTRIBS_ARB','GL_PROGRAM_ADDRESS_REGISTERS_ARB','GL_PROGRAM_ATTRIBS_ARB','GL_PROGRAM_BINDING_ARB','GL_PROGRAM_ERROR_POSITION_ARB','GL_PROGRAM_ERROR_STRING_ARB','GL_PROGRAM_FORMAT_ARB','GL_PROGRAM_FORMAT_ASCII_ARB','GL_PROGRAM_INSTRUCTIONS_ARB','GL_PROGRAM_LENGTH_ARB','GL_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB','GL_PROGRAM_NATIVE_ATTRIBS_ARB','GL_PROGRAM_NATIVE_INSTRUCTIONS_ARB','GL_PROGRAM_NATIVE_PARAMETERS_ARB','GL_PROGRAM_NATIVE_TEMPORARIES_ARB','GL_PROGRAM_PARAMETERS_ARB','GL_PROGRAM_STRING_ARB','GL_PROGRAM_TEMPORARIES_ARB','GL_PROGRAM_UNDER_NATIVE_LIMITS_ARB','GL_TRANSPOSE_CURRENT_MATRIX_ARB','GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB','GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB','GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB','GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB','GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB','GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB','GL_VERTEX_PROGRAM_ARB','GL_VERTEX_PROGRAM_POINT_SIZE_ARB','GL_VERTEX_PROGRAM_TWO_SIDE_ARB']
 GL_ARB_vertex_program.functions = ['glIsProgramARB','glBindProgramARB','glDeleteProgramsARB','glDisableVertexAttribArrayARB','glEnableVertexAttribArrayARB','glGenProgramsARB','glGetProgramEnvParameterdvARB','glGetProgramEnvParameterfvARB','glGetProgramLocalParameterdvARB','glGetProgramLocalParameterfvARB','glGetProgramStringARB','glGetProgramivARB','glGetVertexAttribPointervARB','glGetVertexAttribdvARB','glGetVertexAttribfvARB','glGetVertexAttribivARB','glProgramEnvParameter4dARB','glProgramEnvParameter4dvARB','glProgramEnvParameter4fARB','glProgramEnvParameter4fvARB','glProgramLocalParameter4dARB','glProgramLocalParameter4dvARB','glProgramLocalParameter4fARB','glProgramLocalParameter4fvARB','glProgramStringARB','glVertexAttrib1dARB','glVertexAttrib1dvARB','glVertexAttrib1fARB','glVertexAttrib1fvARB','glVertexAttrib1sARB','glVertexAttrib1svARB','glVertexAttrib2dARB','glVertexAttrib2dvARB','glVertexAttrib2fARB','glVertexAttrib2fvARB','glVertexAttrib2sARB','glVertexAttrib2svARB','glVertexAttrib3dARB','glVertexAttrib3dvARB','glVertexAttrib3fARB','glVertexAttrib3fvARB','glVertexAttrib3sARB','glVertexAttrib3svARB','glVertexAttrib4NbvARB','glVertexAttrib4NivARB','glVertexAttrib4NsvARB','glVertexAttrib4NubARB','glVertexAttrib4NubvARB','glVertexAttrib4NuivARB','glVertexAttrib4NusvARB','glVertexAttrib4bvARB','glVertexAttrib4dARB','glVertexAttrib4dvARB','glVertexAttrib4fARB','glVertexAttrib4fvARB','glVertexAttrib4ivARB','glVertexAttrib4sARB','glVertexAttrib4svARB','glVertexAttrib4ubvARB','glVertexAttrib4uivARB','glVertexAttrib4usvARB','glVertexAttribPointerARB']
 gl.add(GL_ARB_vertex_program)
 
 GL_ARB_vertex_shader = Extension('GL_ARB_vertex_shader')
-GL_ARB_vertex_shader.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_shader.txt'
+GL_ARB_vertex_shader.url = 'http://www.opengl.org/registry/specs/ARB/vertex_shader.txt'
 GL_ARB_vertex_shader.enumerants = ['GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB','GL_MAX_VARYING_FLOATS_ARB','GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB','GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB','GL_OBJECT_ACTIVE_ATTRIBUTES_ARB','GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB','GL_VERTEX_SHADER_ARB']
 GL_ARB_vertex_shader.functions = ['glGetAttribLocationARB','glBindAttribLocationARB','glGetActiveAttribARB']
 gl.add(GL_ARB_vertex_shader)
 
 GL_ARB_vertex_type_2_10_10_10_rev = Extension('GL_ARB_vertex_type_2_10_10_10_rev')
-GL_ARB_vertex_type_2_10_10_10_rev.url = 'http://www.opengl.org/registry/specs/gl/ARB/vertex_type_2_10_10_10_rev.txt'
+GL_ARB_vertex_type_2_10_10_10_rev.url = 'http://www.opengl.org/registry/specs/ARB/vertex_type_2_10_10_10_rev.txt'
 GL_ARB_vertex_type_2_10_10_10_rev.enumerants = ['GL_INT_2_10_10_10_REV','GL_UNSIGNED_INT_2_10_10_10_REV']
 GL_ARB_vertex_type_2_10_10_10_rev.functions = ['glColorP3ui','glColorP3uiv','glColorP4ui','glColorP4uiv','glMultiTexCoordP1ui','glMultiTexCoordP1uiv','glMultiTexCoordP2ui','glMultiTexCoordP2uiv','glMultiTexCoordP3ui','glMultiTexCoordP3uiv','glMultiTexCoordP4ui','glMultiTexCoordP4uiv','glNormalP3ui','glNormalP3uiv','glSecondaryColorP3ui','glSecondaryColorP3uiv','glTexCoordP1ui','glTexCoordP1uiv','glTexCoordP2ui','glTexCoordP2uiv','glTexCoordP3ui','glTexCoordP3uiv','glTexCoordP4ui','glTexCoordP4uiv','glVertexAttribP1ui','glVertexAttribP1uiv','glVertexAttribP2ui','glVertexAttribP2uiv','glVertexAttribP3ui','glVertexAttribP3uiv','glVertexAttribP4ui','glVertexAttribP4uiv','glVertexP2ui','glVertexP2uiv','glVertexP3ui','glVertexP3uiv','glVertexP4ui','glVertexP4uiv']
 gl.add(GL_ARB_vertex_type_2_10_10_10_rev)
 
 GL_ARB_viewport_array = Extension('GL_ARB_viewport_array')
-GL_ARB_viewport_array.url = 'http://www.opengl.org/registry/specs/gl/ARB/viewport_array.txt'
+GL_ARB_viewport_array.url = 'http://www.opengl.org/registry/specs/ARB/viewport_array.txt'
 GL_ARB_viewport_array.enumerants = ['GL_DEPTH_RANGE','GL_FIRST_VERTEX_CONVENTION','GL_LAST_VERTEX_CONVENTION','GL_LAYER_PROVOKING_VERTEX','GL_MAX_VIEWPORTS','GL_PROVOKING_VERTEX','GL_SCISSOR_BOX','GL_SCISSOR_TEST','GL_UNDEFINED_VERTEX','GL_VIEWPORT','GL_VIEWPORT_BOUNDS_RANGE','GL_VIEWPORT_INDEX_PROVOKING_VERTEX','GL_VIEWPORT_SUBPIXEL_BITS']
 GL_ARB_viewport_array.functions = ['glDepthRangeArrayv','glDepthRangeIndexed','glGetDoublei_v','glGetFloati_v','glScissorArrayv','glScissorIndexed','glScissorIndexedv','glViewportArrayv','glViewportIndexedf','glViewportIndexedfv']
 gl.add(GL_ARB_viewport_array)
 
 GL_ARB_window_pos = Extension('GL_ARB_window_pos')
-GL_ARB_window_pos.url = 'http://www.opengl.org/registry/specs/gl/ARB/window_pos.txt'
+GL_ARB_window_pos.url = 'http://www.opengl.org/registry/specs/ARB/window_pos.txt'
 GL_ARB_window_pos.functions = ['glWindowPos2dARB','glWindowPos2dvARB','glWindowPos2fARB','glWindowPos2fvARB','glWindowPos2iARB','glWindowPos2ivARB','glWindowPos2sARB','glWindowPos2svARB','glWindowPos3dARB','glWindowPos3dvARB','glWindowPos3fARB','glWindowPos3fvARB','glWindowPos3iARB','glWindowPos3ivARB','glWindowPos3sARB','glWindowPos3svARB']
 gl.add(GL_ARB_window_pos)
 
@@ -43105,13 +43127,13 @@ GL_ATIX_vertex_shader_output_point_size.enumerants = ['GL_OUTPUT_POINT_SIZE_ATIX
 gl.add(GL_ATIX_vertex_shader_output_point_size)
 
 GL_ATI_draw_buffers = Extension('GL_ATI_draw_buffers')
-GL_ATI_draw_buffers.url = 'http://www.opengl.org/registry/specs/gl/ATI/draw_buffers.txt'
+GL_ATI_draw_buffers.url = 'http://www.opengl.org/registry/specs/ATI/draw_buffers.txt'
 GL_ATI_draw_buffers.enumerants = ['GL_DRAW_BUFFER0_ATI','GL_DRAW_BUFFER10_ATI','GL_DRAW_BUFFER11_ATI','GL_DRAW_BUFFER12_ATI','GL_DRAW_BUFFER13_ATI','GL_DRAW_BUFFER14_ATI','GL_DRAW_BUFFER15_ATI','GL_DRAW_BUFFER1_ATI','GL_DRAW_BUFFER2_ATI','GL_DRAW_BUFFER3_ATI','GL_DRAW_BUFFER4_ATI','GL_DRAW_BUFFER5_ATI','GL_DRAW_BUFFER6_ATI','GL_DRAW_BUFFER7_ATI','GL_DRAW_BUFFER8_ATI','GL_DRAW_BUFFER9_ATI','GL_MAX_DRAW_BUFFERS_ATI']
 GL_ATI_draw_buffers.functions = ['glDrawBuffersATI']
 gl.add(GL_ATI_draw_buffers)
 
 GL_ATI_element_array = Extension('GL_ATI_element_array')
-GL_ATI_element_array.url = 'http://www.opengl.org/registry/specs/gl/ATI/element_array.txt'
+GL_ATI_element_array.url = 'http://www.opengl.org/registry/specs/ATI/element_array.txt'
 GL_ATI_element_array.enumerants = ['GL_ELEMENT_ARRAY_ATI','GL_ELEMENT_ARRAY_POINTER_ATI','GL_ELEMENT_ARRAY_TYPE_ATI']
 GL_ATI_element_array.functions = ['glDrawElementArrayATI','glDrawRangeElementArrayATI','glElementPointerATI']
 gl.add(GL_ATI_element_array)
@@ -43123,7 +43145,7 @@ GL_ATI_envmap_bumpmap.functions = ['glGetTexBumpParameterfvATI','glGetTexBumpPar
 gl.add(GL_ATI_envmap_bumpmap)
 
 GL_ATI_fragment_shader = Extension('GL_ATI_fragment_shader')
-GL_ATI_fragment_shader.url = 'http://www.opengl.org/registry/specs/gl/ATI/fragment_shader.txt'
+GL_ATI_fragment_shader.url = 'http://www.opengl.org/registry/specs/ATI/fragment_shader.txt'
 GL_ATI_fragment_shader.enumerants = ['GL_2X_BIT_ATI','GL_4X_BIT_ATI','GL_8X_BIT_ATI','GL_ADD_ATI','GL_BIAS_BIT_ATI','GL_BLUE_BIT_ATI','GL_CND0_ATI','GL_CND_ATI','GL_COLOR_ALPHA_PAIRING_ATI','GL_COMP_BIT_ATI','GL_CON_0_ATI','GL_CON_1_ATI','GL_CON_2_ATI','GL_CON_3_ATI','GL_CON_4_ATI','GL_CON_5_ATI','GL_CON_6_ATI','GL_CON_7_ATI','GL_DOT2_ADD_ATI','GL_DOT3_ATI','GL_DOT4_ATI','GL_EIGHTH_BIT_ATI','GL_FRAGMENT_SHADER_ATI','GL_GREEN_BIT_ATI','GL_HALF_BIT_ATI','GL_LERP_ATI','GL_MAD_ATI','GL_MOV_ATI','GL_MUL_ATI','GL_NEGATE_BIT_ATI','GL_NUM_FRAGMENT_CONSTANTS_ATI','GL_NUM_FRAGMENT_REGISTERS_ATI','GL_NUM_INPUT_INTERPOLATOR_COMPONENTS_ATI','GL_NUM_INSTRUCTIONS_PER_PASS_ATI','GL_NUM_INSTRUCTIONS_TOTAL_ATI','GL_NUM_LOOPBACK_COMPONENTS_ATI','GL_NUM_PASSES_ATI','GL_QUARTER_BIT_ATI','GL_RED_BIT_ATI','GL_REG_0_ATI','GL_REG_1_ATI','GL_REG_2_ATI','GL_REG_3_ATI','GL_REG_4_ATI','GL_REG_5_ATI','GL_SATURATE_BIT_ATI','GL_SECONDARY_INTERPOLATOR_ATI','GL_SUB_ATI','GL_SWIZZLE_STQ_ATI','GL_SWIZZLE_STQ_DQ_ATI','GL_SWIZZLE_STRQ_ATI','GL_SWIZZLE_STRQ_DQ_ATI','GL_SWIZZLE_STR_ATI','GL_SWIZZLE_STR_DR_ATI']
 GL_ATI_fragment_shader.functions = ['glGenFragmentShadersATI','glAlphaFragmentOp1ATI','glAlphaFragmentOp2ATI','glAlphaFragmentOp3ATI','glBeginFragmentShaderATI','glBindFragmentShaderATI','glColorFragmentOp1ATI','glColorFragmentOp2ATI','glColorFragmentOp3ATI','glDeleteFragmentShaderATI','glEndFragmentShaderATI','glPassTexCoordATI','glSampleMapATI','glSetFragmentShaderConstantATI']
 gl.add(GL_ATI_fragment_shader)
@@ -43134,7 +43156,7 @@ GL_ATI_map_object_buffer.functions = ['*','glUnmapObjectBufferATI']
 gl.add(GL_ATI_map_object_buffer)
 
 GL_ATI_meminfo = Extension('GL_ATI_meminfo')
-GL_ATI_meminfo.url = 'http://www.opengl.org/registry/specs/gl/ATI/meminfo.txt'
+GL_ATI_meminfo.url = 'http://www.opengl.org/registry/specs/ATI/meminfo.txt'
 GL_ATI_meminfo.enumerants = ['GL_RENDERBUFFER_FREE_MEMORY_ATI','GL_TEXTURE_FREE_MEMORY_ATI','GL_VBO_FREE_MEMORY_ATI']
 gl.add(GL_ATI_meminfo)
 
@@ -43154,7 +43176,7 @@ GL_ATI_shader_texture_lod = Extension('GL_ATI_shader_texture_lod')
 gl.add(GL_ATI_shader_texture_lod)
 
 GL_ATI_text_fragment_shader = Extension('GL_ATI_text_fragment_shader')
-GL_ATI_text_fragment_shader.url = 'http://www.opengl.org/registry/specs/gl/ATI/text_fragment_shader.txt'
+GL_ATI_text_fragment_shader.url = 'http://www.opengl.org/registry/specs/ATI/text_fragment_shader.txt'
 GL_ATI_text_fragment_shader.enumerants = ['GL_TEXT_FRAGMENT_SHADER_ATI']
 gl.add(GL_ATI_text_fragment_shader)
 
@@ -43163,28 +43185,28 @@ GL_ATI_texture_compression_3dc.enumerants = ['GL_COMPRESSED_LUMINANCE_ALPHA_3DC_
 gl.add(GL_ATI_texture_compression_3dc)
 
 GL_ATI_texture_env_combine3 = Extension('GL_ATI_texture_env_combine3')
-GL_ATI_texture_env_combine3.url = 'http://www.opengl.org/registry/specs/gl/ATI/texture_env_combine3.txt'
+GL_ATI_texture_env_combine3.url = 'http://www.opengl.org/registry/specs/ATI/texture_env_combine3.txt'
 GL_ATI_texture_env_combine3.enumerants = ['GL_MODULATE_ADD_ATI','GL_MODULATE_SIGNED_ADD_ATI','GL_MODULATE_SUBTRACT_ATI']
 gl.add(GL_ATI_texture_env_combine3)
 
 GL_ATI_texture_float = Extension('GL_ATI_texture_float')
-GL_ATI_texture_float.url = 'http://www.opengl.org/registry/specs/gl/ATI/texture_float.txt'
+GL_ATI_texture_float.url = 'http://www.opengl.org/registry/specs/ATI/texture_float.txt'
 GL_ATI_texture_float.enumerants = ['GL_ALPHA_FLOAT16_ATI','GL_ALPHA_FLOAT32_ATI','GL_INTENSITY_FLOAT16_ATI','GL_INTENSITY_FLOAT32_ATI','GL_LUMINANCE_ALPHA_FLOAT16_ATI','GL_LUMINANCE_ALPHA_FLOAT32_ATI','GL_LUMINANCE_FLOAT16_ATI','GL_LUMINANCE_FLOAT32_ATI','GL_RGBA_FLOAT16_ATI','GL_RGBA_FLOAT32_ATI','GL_RGB_FLOAT16_ATI','GL_RGB_FLOAT32_ATI']
 gl.add(GL_ATI_texture_float)
 
 GL_ATI_texture_mirror_once = Extension('GL_ATI_texture_mirror_once')
-GL_ATI_texture_mirror_once.url = 'http://www.opengl.org/registry/specs/gl/ATI/texture_mirror_once.txt'
+GL_ATI_texture_mirror_once.url = 'http://www.opengl.org/registry/specs/ATI/texture_mirror_once.txt'
 GL_ATI_texture_mirror_once.enumerants = ['GL_MIRROR_CLAMP_ATI','GL_MIRROR_CLAMP_TO_EDGE_ATI']
 gl.add(GL_ATI_texture_mirror_once)
 
 GL_ATI_vertex_array_object = Extension('GL_ATI_vertex_array_object')
-GL_ATI_vertex_array_object.url = 'http://www.opengl.org/registry/specs/gl/ATI/vertex_array_object.txt'
+GL_ATI_vertex_array_object.url = 'http://www.opengl.org/registry/specs/ATI/vertex_array_object.txt'
 GL_ATI_vertex_array_object.enumerants = ['GL_ARRAY_OBJECT_BUFFER_ATI','GL_ARRAY_OBJECT_OFFSET_ATI','GL_DISCARD_ATI','GL_DYNAMIC_ATI','GL_OBJECT_BUFFER_SIZE_ATI','GL_OBJECT_BUFFER_USAGE_ATI','GL_PRESERVE_ATI','GL_STATIC_ATI']
 GL_ATI_vertex_array_object.functions = ['glIsObjectBufferATI','glNewObjectBufferATI','glArrayObjectATI','glFreeObjectBufferATI','glGetArrayObjectfvATI','glGetArrayObjectivATI','glGetObjectBufferfvATI','glGetObjectBufferivATI','glGetVariantArrayObjectfvATI','glGetVariantArrayObjectivATI','glUpdateObjectBufferATI','glVariantArrayObjectATI']
 gl.add(GL_ATI_vertex_array_object)
 
 GL_ATI_vertex_attrib_array_object = Extension('GL_ATI_vertex_attrib_array_object')
-GL_ATI_vertex_attrib_array_object.url = 'http://www.opengl.org/registry/specs/gl/ATI/vertex_attrib_array_object.txt'
+GL_ATI_vertex_attrib_array_object.url = 'http://www.opengl.org/registry/specs/ATI/vertex_attrib_array_object.txt'
 GL_ATI_vertex_attrib_array_object.functions = ['glGetVertexAttribArrayObjectfvATI','glGetVertexAttribArrayObjectivATI','glVertexAttribArrayObjectATI']
 gl.add(GL_ATI_vertex_attrib_array_object)
 
@@ -43195,7 +43217,7 @@ GL_ATI_vertex_streams.functions = ['glClientActiveVertexStreamATI','glNormalStre
 gl.add(GL_ATI_vertex_streams)
 
 GL_EXT_422_pixels = Extension('GL_EXT_422_pixels')
-GL_EXT_422_pixels.url = 'http://www.opengl.org/registry/specs/gl/EXT/422_pixels.txt'
+GL_EXT_422_pixels.url = 'http://www.opengl.org/registry/specs/EXT/422_pixels.txt'
 GL_EXT_422_pixels.enumerants = ['GL_422_AVERAGE_EXT','GL_422_EXT','GL_422_REV_AVERAGE_EXT','GL_422_REV_EXT']
 gl.add(GL_EXT_422_pixels)
 
@@ -43205,12 +43227,12 @@ GL_EXT_Cg_shader.enumerants = ['GL_CG_FRAGMENT_SHADER_EXT','GL_CG_VERTEX_SHADER_
 gl.add(GL_EXT_Cg_shader)
 
 GL_EXT_abgr = Extension('GL_EXT_abgr')
-GL_EXT_abgr.url = 'http://www.opengl.org/registry/specs/gl/EXT/abgr.txt'
+GL_EXT_abgr.url = 'http://www.opengl.org/registry/specs/EXT/abgr.txt'
 GL_EXT_abgr.enumerants = ['GL_ABGR_EXT']
 gl.add(GL_EXT_abgr)
 
 GL_EXT_bgra = Extension('GL_EXT_bgra')
-GL_EXT_bgra.url = 'http://www.opengl.org/registry/specs/gl/EXT/bgra.txt'
+GL_EXT_bgra.url = 'http://www.opengl.org/registry/specs/EXT/bgra.txt'
 GL_EXT_bgra.enumerants = ['GL_BGRA_EXT','GL_BGR_EXT']
 gl.add(GL_EXT_bgra)
 
@@ -43221,78 +43243,78 @@ GL_EXT_bindable_uniform.functions = ['glGetUniformBufferSizeEXT','glGetUniformOf
 gl.add(GL_EXT_bindable_uniform)
 
 GL_EXT_blend_color = Extension('GL_EXT_blend_color')
-GL_EXT_blend_color.url = 'http://www.opengl.org/registry/specs/gl/EXT/blend_color.txt'
+GL_EXT_blend_color.url = 'http://www.opengl.org/registry/specs/EXT/blend_color.txt'
 GL_EXT_blend_color.enumerants = ['GL_BLEND_COLOR_EXT','GL_CONSTANT_ALPHA_EXT','GL_CONSTANT_COLOR_EXT','GL_ONE_MINUS_CONSTANT_ALPHA_EXT','GL_ONE_MINUS_CONSTANT_COLOR_EXT']
 GL_EXT_blend_color.functions = ['glBlendColorEXT']
 gl.add(GL_EXT_blend_color)
 
 GL_EXT_blend_equation_separate = Extension('GL_EXT_blend_equation_separate')
-GL_EXT_blend_equation_separate.url = 'http://www.opengl.org/registry/specs/gl/EXT/blend_equation_separate.txt'
+GL_EXT_blend_equation_separate.url = 'http://www.opengl.org/registry/specs/EXT/blend_equation_separate.txt'
 GL_EXT_blend_equation_separate.enumerants = ['GL_BLEND_EQUATION_ALPHA_EXT','GL_BLEND_EQUATION_RGB_EXT']
 GL_EXT_blend_equation_separate.functions = ['glBlendEquationSeparateEXT']
 gl.add(GL_EXT_blend_equation_separate)
 
 GL_EXT_blend_func_separate = Extension('GL_EXT_blend_func_separate')
-GL_EXT_blend_func_separate.url = 'http://www.opengl.org/registry/specs/gl/EXT/blend_func_separate.txt'
+GL_EXT_blend_func_separate.url = 'http://www.opengl.org/registry/specs/EXT/blend_func_separate.txt'
 GL_EXT_blend_func_separate.enumerants = ['GL_BLEND_DST_ALPHA_EXT','GL_BLEND_DST_RGB_EXT','GL_BLEND_SRC_ALPHA_EXT','GL_BLEND_SRC_RGB_EXT']
 GL_EXT_blend_func_separate.functions = ['glBlendFuncSeparateEXT']
 gl.add(GL_EXT_blend_func_separate)
 
 GL_EXT_blend_logic_op = Extension('GL_EXT_blend_logic_op')
-GL_EXT_blend_logic_op.url = 'http://www.opengl.org/registry/specs/gl/EXT/blend_logic_op.txt'
+GL_EXT_blend_logic_op.url = 'http://www.opengl.org/registry/specs/EXT/blend_logic_op.txt'
 gl.add(GL_EXT_blend_logic_op)
 
 GL_EXT_blend_minmax = Extension('GL_EXT_blend_minmax')
-GL_EXT_blend_minmax.url = 'http://www.opengl.org/registry/specs/gl/EXT/blend_minmax.txt'
+GL_EXT_blend_minmax.url = 'http://www.opengl.org/registry/specs/EXT/blend_minmax.txt'
 GL_EXT_blend_minmax.enumerants = ['GL_BLEND_EQUATION_EXT','GL_FUNC_ADD_EXT','GL_MAX_EXT','GL_MIN_EXT']
 GL_EXT_blend_minmax.functions = ['glBlendEquationEXT']
 gl.add(GL_EXT_blend_minmax)
 
 GL_EXT_blend_subtract = Extension('GL_EXT_blend_subtract')
-GL_EXT_blend_subtract.url = 'http://www.opengl.org/registry/specs/gl/EXT/blend_subtract.txt'
+GL_EXT_blend_subtract.url = 'http://www.opengl.org/registry/specs/EXT/blend_subtract.txt'
 GL_EXT_blend_subtract.enumerants = ['GL_FUNC_REVERSE_SUBTRACT_EXT','GL_FUNC_SUBTRACT_EXT']
 gl.add(GL_EXT_blend_subtract)
 
 GL_EXT_clip_volume_hint = Extension('GL_EXT_clip_volume_hint')
-GL_EXT_clip_volume_hint.url = 'http://www.opengl.org/registry/specs/gl/EXT/clip_volume_hint.txt'
+GL_EXT_clip_volume_hint.url = 'http://www.opengl.org/registry/specs/EXT/clip_volume_hint.txt'
 GL_EXT_clip_volume_hint.enumerants = ['GL_CLIP_VOLUME_CLIPPING_HINT_EXT']
 gl.add(GL_EXT_clip_volume_hint)
 
 GL_EXT_cmyka = Extension('GL_EXT_cmyka')
-GL_EXT_cmyka.url = 'http://www.opengl.org/registry/specs/gl/EXT/cmyka.txt'
+GL_EXT_cmyka.url = 'http://www.opengl.org/registry/specs/EXT/cmyka.txt'
 GL_EXT_cmyka.enumerants = ['GL_CMYKA_EXT','GL_CMYK_EXT','GL_PACK_CMYK_HINT_EXT','GL_UNPACK_CMYK_HINT_EXT']
 gl.add(GL_EXT_cmyka)
 
 GL_EXT_color_subtable = Extension('GL_EXT_color_subtable')
-GL_EXT_color_subtable.url = 'http://www.opengl.org/registry/specs/gl/EXT/color_subtable.txt'
+GL_EXT_color_subtable.url = 'http://www.opengl.org/registry/specs/EXT/color_subtable.txt'
 GL_EXT_color_subtable.functions = ['glColorSubTableEXT','glCopyColorSubTableEXT']
 gl.add(GL_EXT_color_subtable)
 
 GL_EXT_compiled_vertex_array = Extension('GL_EXT_compiled_vertex_array')
-GL_EXT_compiled_vertex_array.url = 'http://www.opengl.org/registry/specs/gl/EXT/compiled_vertex_array.txt'
+GL_EXT_compiled_vertex_array.url = 'http://www.opengl.org/registry/specs/EXT/compiled_vertex_array.txt'
 GL_EXT_compiled_vertex_array.enumerants = ['GL_ARRAY_ELEMENT_LOCK_COUNT_EXT','GL_ARRAY_ELEMENT_LOCK_FIRST_EXT']
 GL_EXT_compiled_vertex_array.functions = ['glLockArraysEXT','glUnlockArraysEXT']
 gl.add(GL_EXT_compiled_vertex_array)
 
 GL_EXT_convolution = Extension('GL_EXT_convolution')
-GL_EXT_convolution.url = 'http://www.opengl.org/registry/specs/gl/EXT/convolution.txt'
+GL_EXT_convolution.url = 'http://www.opengl.org/registry/specs/EXT/convolution.txt'
 GL_EXT_convolution.enumerants = ['GL_CONVOLUTION_1D_EXT','GL_CONVOLUTION_2D_EXT','GL_CONVOLUTION_BORDER_MODE_EXT','GL_CONVOLUTION_FILTER_BIAS_EXT','GL_CONVOLUTION_FILTER_SCALE_EXT','GL_CONVOLUTION_FORMAT_EXT','GL_CONVOLUTION_HEIGHT_EXT','GL_CONVOLUTION_WIDTH_EXT','GL_MAX_CONVOLUTION_HEIGHT_EXT','GL_MAX_CONVOLUTION_WIDTH_EXT','GL_POST_CONVOLUTION_ALPHA_BIAS_EXT','GL_POST_CONVOLUTION_ALPHA_SCALE_EXT','GL_POST_CONVOLUTION_BLUE_BIAS_EXT','GL_POST_CONVOLUTION_BLUE_SCALE_EXT','GL_POST_CONVOLUTION_GREEN_BIAS_EXT','GL_POST_CONVOLUTION_GREEN_SCALE_EXT','GL_POST_CONVOLUTION_RED_BIAS_EXT','GL_POST_CONVOLUTION_RED_SCALE_EXT','GL_REDUCE_EXT','GL_SEPARABLE_2D_EXT']
 GL_EXT_convolution.functions = ['glConvolutionFilter1DEXT','glConvolutionFilter2DEXT','glConvolutionParameterfEXT','glConvolutionParameterfvEXT','glConvolutionParameteriEXT','glConvolutionParameterivEXT','glCopyConvolutionFilter1DEXT','glCopyConvolutionFilter2DEXT','glGetConvolutionFilterEXT','glGetConvolutionParameterfvEXT','glGetConvolutionParameterivEXT','glGetSeparableFilterEXT','glSeparableFilter2DEXT']
 gl.add(GL_EXT_convolution)
 
 GL_EXT_coordinate_frame = Extension('GL_EXT_coordinate_frame')
-GL_EXT_coordinate_frame.url = 'http://www.opengl.org/registry/specs/gl/EXT/coordinate_frame.txt'
+GL_EXT_coordinate_frame.url = 'http://www.opengl.org/registry/specs/EXT/coordinate_frame.txt'
 GL_EXT_coordinate_frame.enumerants = ['GL_BINORMAL_ARRAY_EXT','GL_BINORMAL_ARRAY_POINTER_EXT','GL_BINORMAL_ARRAY_STRIDE_EXT','GL_BINORMAL_ARRAY_TYPE_EXT','GL_CURRENT_BINORMAL_EXT','GL_CURRENT_TANGENT_EXT','GL_MAP1_BINORMAL_EXT','GL_MAP1_TANGENT_EXT','GL_MAP2_BINORMAL_EXT','GL_MAP2_TANGENT_EXT','GL_TANGENT_ARRAY_EXT','GL_TANGENT_ARRAY_POINTER_EXT','GL_TANGENT_ARRAY_STRIDE_EXT','GL_TANGENT_ARRAY_TYPE_EXT']
 GL_EXT_coordinate_frame.functions = ['glBinormalPointerEXT','glTangentPointerEXT']
 gl.add(GL_EXT_coordinate_frame)
 
 GL_EXT_copy_texture = Extension('GL_EXT_copy_texture')
-GL_EXT_copy_texture.url = 'http://www.opengl.org/registry/specs/gl/EXT/copy_texture.txt'
+GL_EXT_copy_texture.url = 'http://www.opengl.org/registry/specs/EXT/copy_texture.txt'
 GL_EXT_copy_texture.functions = ['glCopyTexImage1DEXT','glCopyTexImage2DEXT','glCopyTexSubImage1DEXT','glCopyTexSubImage2DEXT','glCopyTexSubImage3DEXT']
 gl.add(GL_EXT_copy_texture)
 
 GL_EXT_cull_vertex = Extension('GL_EXT_cull_vertex')
-GL_EXT_cull_vertex.url = 'http://www.opengl.org/registry/specs/gl/EXT/cull_vertex.txt'
+GL_EXT_cull_vertex.url = 'http://www.opengl.org/registry/specs/EXT/cull_vertex.txt'
 GL_EXT_cull_vertex.enumerants = ['GL_CULL_VERTEX_EXT','GL_CULL_VERTEX_EYE_POSITION_EXT','GL_CULL_VERTEX_OBJECT_POSITION_EXT']
 GL_EXT_cull_vertex.functions = ['glCullParameterdvEXT','glCullParameterfvEXT']
 gl.add(GL_EXT_cull_vertex)
@@ -43309,13 +43331,13 @@ GL_EXT_depth_bounds_test.functions = ['glDepthBoundsEXT']
 gl.add(GL_EXT_depth_bounds_test)
 
 GL_EXT_direct_state_access = Extension('GL_EXT_direct_state_access')
-GL_EXT_direct_state_access.url = 'http://www.opengl.org/registry/specs/gl/EXT/direct_state_access.txt'
+GL_EXT_direct_state_access.url = 'http://www.opengl.org/registry/specs/EXT/direct_state_access.txt'
 GL_EXT_direct_state_access.enumerants = ['GL_PROGRAM_MATRIX_EXT','GL_PROGRAM_MATRIX_STACK_DEPTH_EXT','GL_TRANSPOSE_PROGRAM_MATRIX_EXT']
 GL_EXT_direct_state_access.functions = ['glUnmapNamedBufferEXT','glCheckNamedFramebufferStatusEXT','*','*','glBindMultiTextureEXT','glClientAttribDefaultEXT','glCompressedMultiTexImage1DEXT','glCompressedMultiTexImage2DEXT','glCompressedMultiTexImage3DEXT','glCompressedMultiTexSubImage1DEXT','glCompressedMultiTexSubImage2DEXT','glCompressedMultiTexSubImage3DEXT','glCompressedTextureImage1DEXT','glCompressedTextureImage2DEXT','glCompressedTextureImage3DEXT','glCompressedTextureSubImage1DEXT','glCompressedTextureSubImage2DEXT','glCompressedTextureSubImage3DEXT','glCopyMultiTexImage1DEXT','glCopyMultiTexImage2DEXT','glCopyMultiTexSubImage1DEXT','glCopyMultiTexSubImage2DEXT','glCopyMultiTexSubImage3DEXT','glCopyTextureImage1DEXT','glCopyTextureImage2DEXT','glCopyTextureSubImage1DEXT','glCopyTextureSubImage2DEXT','glCopyTextureSubImage3DEXT','glDisableClientStateIndexedEXT','glDisableClientStateiEXT','glDisableVertexArrayAttribEXT','glDisableVertexArrayEXT','glEnableClientStateIndexedEXT','glEnableClientStateiEXT','glEnableVertexArrayAttribEXT','glEnableVertexArrayEXT','glFlushMappedNamedBufferRangeEXT','glFramebufferDrawBufferEXT','glFramebufferDrawBuffersEXT','glFramebufferReadBufferEXT','glGenerateMultiTexMipmapEXT','glGenerateTextureMipmapEXT','glGetCompressedMultiTexImageEXT','glGetCompressedTextureImageEXT','glGetDoubleIndexedvEXT','glGetDoublei_vEXT','glGetFloatIndexedvEXT','glGetFloati_vEXT','glGetFramebufferParameterivEXT','glGetMultiTexEnvfvEXT','glGetMultiTexEnvivEXT','glGetMultiTexGendvEXT','glGetMultiTexGenfvEXT','glGetMultiTexGenivEXT','glGetMultiTexImageEXT','glGetMultiTexLevelParameterfvEXT','glGetMultiTexLevelParameterivEXT','glGetMultiTexParameterIivEXT','glGetMultiTexParameterIuivEXT','glGetMultiTexParameterfvEXT','glGetMultiTexParameterivEXT','glGetNamedBufferParameterivEXT','glGetNamedBufferPointervEXT','glGetNamedBufferSubDataEXT','glGetNamedFramebufferAttachmentParameterivEXT','glGetNamedProgramLocalParameterIivEXT','glGetNamedProgramLocalParameterIuivEXT','glGetNamedProgramLocalParameterdvEXT','glGetNamedProgramLocalParameterfvEXT','glGetNamedProgramStringEXT','glGetNamedProgramivEXT','glGetNamedRenderbufferParameterivEXT','glGetPointerIndexedvEXT','glGetPointeri_vEXT','glGetTextureImageEXT','glGetTextureLevelParameterfvEXT','glGetTextureLevelParameterivEXT','glGetTextureParameterIivEXT','glGetTextureParameterIuivEXT','glGetTextureParameterfvEXT','glGetTextureParameterivEXT','glGetVertexArrayIntegeri_vEXT','glGetVertexArrayIntegervEXT','glGetVertexArrayPointeri_vEXT','glGetVertexArrayPointervEXT','glMatrixFrustumEXT','glMatrixLoadIdentityEXT','glMatrixLoadTransposedEXT','glMatrixLoadTransposefEXT','glMatrixLoaddEXT','glMatrixLoadfEXT','glMatrixMultTransposedEXT','glMatrixMultTransposefEXT','glMatrixMultdEXT','glMatrixMultfEXT','glMatrixOrthoEXT','glMatrixPopEXT','glMatrixPushEXT','glMatrixRotatedEXT','glMatrixRotatefEXT','glMatrixScaledEXT','glMatrixScalefEXT','glMatrixTranslatedEXT','glMatrixTranslatefEXT','glMultiTexBufferEXT','glMultiTexCoordPointerEXT','glMultiTexEnvfEXT','glMultiTexEnvfvEXT','glMultiTexEnviEXT','glMultiTexEnvivEXT','glMultiTexGendEXT','glMultiTexGendvEXT','glMultiTexGenfEXT','glMultiTexGenfvEXT','glMultiTexGeniEXT','glMultiTexGenivEXT','glMultiTexImage1DEXT','glMultiTexImage2DEXT','glMultiTexImage3DEXT','glMultiTexParameterIivEXT','glMultiTexParameterIuivEXT','glMultiTexParameterfEXT','glMultiTexParameterfvEXT','glMultiTexParameteriEXT','glMultiTexParameterivEXT','glMultiTexRenderbufferEXT','glMultiTexSubImage1DEXT','glMultiTexSubImage2DEXT','glMultiTexSubImage3DEXT','glNamedBufferDataEXT','glNamedBufferSubDataEXT','glNamedCopyBufferSubDataEXT','glNamedFramebufferRenderbufferEXT','glNamedFramebufferTexture1DEXT','glNamedFramebufferTexture2DEXT','glNamedFramebufferTexture3DEXT','glNamedFramebufferTextureEXT','glNamedFramebufferTextureFaceEXT','glNamedFramebufferTextureLayerEXT','glNamedProgramLocalParameter4dEXT','glNamedProgramLocalParameter4dvEXT','glNamedProgramLocalParameter4fEXT','glNamedProgramLocalParameter4fvEXT','glNamedProgramLocalParameterI4iEXT','glNamedProgramLocalParameterI4ivEXT','glNamedProgramLocalParameterI4uiEXT','glNamedProgramLocalParameterI4uivEXT','glNamedProgramLocalParameters4fvEXT','glNamedProgramLocalParametersI4ivEXT','glNamedProgramLocalParametersI4uivEXT','glNamedProgramStringEXT','glNamedRenderbufferStorageEXT','glNamedRenderbufferStorageMultisampleCoverageEXT','glNamedRenderbufferStorageMultisampleEXT','glProgramUniform1dEXT','glProgramUniform1dvEXT','glProgramUniform1fEXT','glProgramUniform1fvEXT','glProgramUniform1iEXT','glProgramUniform1ivEXT','glProgramUniform1uiEXT','glProgramUniform1uivEXT','glProgramUniform2dEXT','glProgramUniform2dvEXT','glProgramUniform2fEXT','glProgramUniform2fvEXT','glProgramUniform2iEXT','glProgramUniform2ivEXT','glProgramUniform2uiEXT','glProgramUniform2uivEXT','glProgramUniform3dEXT','glProgramUniform3dvEXT','glProgramUniform3fEXT','glProgramUniform3fvEXT','glProgramUniform3iEXT','glProgramUniform3ivEXT','glProgramUniform3uiEXT','glProgramUniform3uivEXT','glProgramUniform4dEXT','glProgramUniform4dvEXT','glProgramUniform4fEXT','glProgramUniform4fvEXT','glProgramUniform4iEXT','glProgramUniform4ivEXT','glProgramUniform4uiEXT','glProgramUniform4uivEXT','glProgramUniformMatrix2dvEXT','glProgramUniformMatrix2fvEXT','glProgramUniformMatrix2x3dvEXT','glProgramUniformMatrix2x3fvEXT','glProgramUniformMatrix2x4dvEXT','glProgramUniformMatrix2x4fvEXT','glProgramUniformMatrix3dvEXT','glProgramUniformMatrix3fvEXT','glProgramUniformMatrix3x2dvEXT','glProgramUniformMatrix3x2fvEXT','glProgramUniformMatrix3x4dvEXT','glProgramUniformMatrix3x4fvEXT','glProgramUniformMatrix4dvEXT','glProgramUniformMatrix4fvEXT','glProgramUniformMatrix4x2dvEXT','glProgramUniformMatrix4x2fvEXT','glProgramUniformMatrix4x3dvEXT','glProgramUniformMatrix4x3fvEXT','glPushClientAttribDefaultEXT','glTextureBufferEXT','glTextureImage1DEXT','glTextureImage2DEXT','glTextureImage3DEXT','glTextureParameterIivEXT','glTextureParameterIuivEXT','glTextureParameterfEXT','glTextureParameterfvEXT','glTextureParameteriEXT','glTextureParameterivEXT','glTextureRenderbufferEXT','glTextureSubImage1DEXT','glTextureSubImage2DEXT','glTextureSubImage3DEXT','glVertexArrayColorOffsetEXT','glVertexArrayEdgeFlagOffsetEXT','glVertexArrayFogCoordOffsetEXT','glVertexArrayIndexOffsetEXT','glVertexArrayMultiTexCoordOffsetEXT','glVertexArrayNormalOffsetEXT','glVertexArraySecondaryColorOffsetEXT','glVertexArrayTexCoordOffsetEXT','glVertexArrayVertexAttribIOffsetEXT','glVertexArrayVertexAttribOffsetEXT','glVertexArrayVertexOffsetEXT']
 gl.add(GL_EXT_direct_state_access)
 
 GL_EXT_draw_buffers2 = Extension('GL_EXT_draw_buffers2')
-GL_EXT_draw_buffers2.url = 'http://www.opengl.org/registry/specs/gl/EXT/draw_buffers2.txt'
+GL_EXT_draw_buffers2.url = 'http://www.opengl.org/registry/specs/EXT/draw_buffers2.txt'
 GL_EXT_draw_buffers2.functions = ['glIsEnabledIndexedEXT','glColorMaskIndexedEXT','glDisableIndexedEXT','glEnableIndexedEXT','glGetBooleanIndexedvEXT','glGetIntegerIndexedvEXT']
 gl.add(GL_EXT_draw_buffers2)
 
@@ -43337,30 +43359,30 @@ GL_EXT_fog_coord.functions = ['glFogCoordPointerEXT','glFogCoorddEXT','glFogCoor
 gl.add(GL_EXT_fog_coord)
 
 GL_EXT_fragment_lighting = Extension('GL_EXT_fragment_lighting')
-GL_EXT_fragment_lighting.url = 'http://www.opengl.org/registry/specs/gl/EXT/fragment_lighting.txt'
+GL_EXT_fragment_lighting.url = 'http://www.opengl.org/registry/specs/EXT/fragment_lighting.txt'
 GL_EXT_fragment_lighting.enumerants = ['GL_CURRENT_RASTER_NORMAL_EXT','GL_FRAGMENT_COLOR_MATERIAL_EXT','GL_FRAGMENT_COLOR_MATERIAL_FACE_EXT','GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_EXT','GL_FRAGMENT_LIGHT0_EXT','GL_FRAGMENT_LIGHT7_EXT','GL_FRAGMENT_LIGHTING_EXT','GL_FRAGMENT_LIGHT_MODEL_AMBIENT_EXT','GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_EXT','GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_EXT','GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_EXT','GL_LIGHT_ENV_MODE_EXT','GL_MAX_ACTIVE_LIGHTS_EXT','GL_MAX_FRAGMENT_LIGHTS_EXT']
 GL_EXT_fragment_lighting.functions = ['glFragmentColorMaterialEXT','glFragmentLightModelfEXT','glFragmentLightModelfvEXT','glFragmentLightModeliEXT','glFragmentLightModelivEXT','glFragmentLightfEXT','glFragmentLightfvEXT','glFragmentLightiEXT','glFragmentLightivEXT','glFragmentMaterialfEXT','glFragmentMaterialfvEXT','glFragmentMaterialiEXT','glFragmentMaterialivEXT','glGetFragmentLightfvEXT','glGetFragmentLightivEXT','glGetFragmentMaterialfvEXT','glGetFragmentMaterialivEXT','glLightEnviEXT']
 gl.add(GL_EXT_fragment_lighting)
 
 GL_EXT_framebuffer_blit = Extension('GL_EXT_framebuffer_blit')
-GL_EXT_framebuffer_blit.url = 'http://www.opengl.org/registry/specs/gl/EXT/framebuffer_blit.txt'
+GL_EXT_framebuffer_blit.url = 'http://www.opengl.org/registry/specs/EXT/framebuffer_blit.txt'
 GL_EXT_framebuffer_blit.enumerants = ['GL_DRAW_FRAMEBUFFER_BINDING_EXT','GL_DRAW_FRAMEBUFFER_EXT','GL_READ_FRAMEBUFFER_BINDING_EXT','GL_READ_FRAMEBUFFER_EXT']
 GL_EXT_framebuffer_blit.functions = ['glBlitFramebufferEXT']
 gl.add(GL_EXT_framebuffer_blit)
 
 GL_EXT_framebuffer_multisample = Extension('GL_EXT_framebuffer_multisample')
-GL_EXT_framebuffer_multisample.url = 'http://www.opengl.org/registry/specs/gl/EXT/framebuffer_multisample.txt'
+GL_EXT_framebuffer_multisample.url = 'http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt'
 GL_EXT_framebuffer_multisample.enumerants = ['GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT','GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT','GL_MAX_SAMPLES_EXT','GL_MAX_SAMPLES_EXT','GL_RENDERBUFFER_SAMPLES_EXT']
 GL_EXT_framebuffer_multisample.functions = ['glRenderbufferStorageMultisampleEXT']
 gl.add(GL_EXT_framebuffer_multisample)
 
 GL_EXT_framebuffer_multisample_blit_scaled = Extension('GL_EXT_framebuffer_multisample_blit_scaled')
-GL_EXT_framebuffer_multisample_blit_scaled.url = 'http://www.opengl.org/registry/specs/gl/EXT/framebuffer_multisample_blit_scaled.txt'
+GL_EXT_framebuffer_multisample_blit_scaled.url = 'http://www.opengl.org/registry/specs/EXT/framebuffer_multisample_blit_scaled.txt'
 GL_EXT_framebuffer_multisample_blit_scaled.enumerants = ['GL_SCALED_RESOLVE_FASTEST_EXT','GL_SCALED_RESOLVE_NICEST_EXT']
 gl.add(GL_EXT_framebuffer_multisample_blit_scaled)
 
 GL_EXT_framebuffer_object = Extension('GL_EXT_framebuffer_object')
-GL_EXT_framebuffer_object.url = 'http://www.opengl.org/registry/specs/gl/EXT/framebuffer_object.txt'
+GL_EXT_framebuffer_object.url = 'http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt'
 GL_EXT_framebuffer_object.enumerants = ['GL_COLOR_ATTACHMENT0_EXT','GL_COLOR_ATTACHMENT10_EXT','GL_COLOR_ATTACHMENT11_EXT','GL_COLOR_ATTACHMENT12_EXT','GL_COLOR_ATTACHMENT13_EXT','GL_COLOR_ATTACHMENT14_EXT','GL_COLOR_ATTACHMENT15_EXT','GL_COLOR_ATTACHMENT1_EXT','GL_COLOR_ATTACHMENT2_EXT','GL_COLOR_ATTACHMENT3_EXT','GL_COLOR_ATTACHMENT4_EXT','GL_COLOR_ATTACHMENT5_EXT','GL_COLOR_ATTACHMENT6_EXT','GL_COLOR_ATTACHMENT7_EXT','GL_COLOR_ATTACHMENT8_EXT','GL_COLOR_ATTACHMENT9_EXT','GL_DEPTH_ATTACHMENT_EXT','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT','GL_FRAMEBUFFER_BINDING_EXT','GL_FRAMEBUFFER_COMPLETE_EXT','GL_FRAMEBUFFER_EXT','GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT','GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT','GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT','GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT','GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT','GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT','GL_FRAMEBUFFER_UNSUPPORTED_EXT','GL_INVALID_FRAMEBUFFER_OPERATION_EXT','GL_MAX_COLOR_ATTACHMENTS_EXT','GL_MAX_RENDERBUFFER_SIZE_EXT','GL_RENDERBUFFER_ALPHA_SIZE_EXT','GL_RENDERBUFFER_BINDING_EXT','GL_RENDERBUFFER_BLUE_SIZE_EXT','GL_RENDERBUFFER_DEPTH_SIZE_EXT','GL_RENDERBUFFER_EXT','GL_RENDERBUFFER_GREEN_SIZE_EXT','GL_RENDERBUFFER_HEIGHT_EXT','GL_RENDERBUFFER_INTERNAL_FORMAT_EXT','GL_RENDERBUFFER_RED_SIZE_EXT','GL_RENDERBUFFER_STENCIL_SIZE_EXT','GL_RENDERBUFFER_WIDTH_EXT','GL_STENCIL_ATTACHMENT_EXT','GL_STENCIL_INDEX16_EXT','GL_STENCIL_INDEX1_EXT','GL_STENCIL_INDEX4_EXT','GL_STENCIL_INDEX8_EXT']
 GL_EXT_framebuffer_object.functions = ['glIsFramebufferEXT','glIsRenderbufferEXT','glCheckFramebufferStatusEXT','glBindFramebufferEXT','glBindRenderbufferEXT','glDeleteFramebuffersEXT','glDeleteRenderbuffersEXT','glFramebufferRenderbufferEXT','glFramebufferTexture1DEXT','glFramebufferTexture2DEXT','glFramebufferTexture3DEXT','glGenFramebuffersEXT','glGenRenderbuffersEXT','glGenerateMipmapEXT','glGetFramebufferAttachmentParameterivEXT','glGetRenderbufferParameterivEXT','glRenderbufferStorageEXT']
 gl.add(GL_EXT_framebuffer_object)
@@ -43388,52 +43410,52 @@ GL_EXT_gpu_shader4.functions = ['glGetFragDataLocationEXT','glBindFragDataLocati
 gl.add(GL_EXT_gpu_shader4)
 
 GL_EXT_histogram = Extension('GL_EXT_histogram')
-GL_EXT_histogram.url = 'http://www.opengl.org/registry/specs/gl/EXT/histogram.txt'
+GL_EXT_histogram.url = 'http://www.opengl.org/registry/specs/EXT/histogram.txt'
 GL_EXT_histogram.enumerants = ['GL_HISTOGRAM_ALPHA_SIZE_EXT','GL_HISTOGRAM_BLUE_SIZE_EXT','GL_HISTOGRAM_EXT','GL_HISTOGRAM_FORMAT_EXT','GL_HISTOGRAM_GREEN_SIZE_EXT','GL_HISTOGRAM_LUMINANCE_SIZE_EXT','GL_HISTOGRAM_RED_SIZE_EXT','GL_HISTOGRAM_SINK_EXT','GL_HISTOGRAM_WIDTH_EXT','GL_MINMAX_EXT','GL_MINMAX_FORMAT_EXT','GL_MINMAX_SINK_EXT','GL_PROXY_HISTOGRAM_EXT']
 GL_EXT_histogram.functions = ['glGetHistogramEXT','glGetHistogramParameterfvEXT','glGetHistogramParameterivEXT','glGetMinmaxEXT','glGetMinmaxParameterfvEXT','glGetMinmaxParameterivEXT','glHistogramEXT','glMinmaxEXT','glResetHistogramEXT','glResetMinmaxEXT']
 gl.add(GL_EXT_histogram)
 
 GL_EXT_index_array_formats = Extension('GL_EXT_index_array_formats')
-GL_EXT_index_array_formats.url = 'http://www.opengl.org/registry/specs/gl/EXT/index_array_formats.txt'
+GL_EXT_index_array_formats.url = 'http://www.opengl.org/registry/specs/EXT/index_array_formats.txt'
 gl.add(GL_EXT_index_array_formats)
 
 GL_EXT_index_func = Extension('GL_EXT_index_func')
-GL_EXT_index_func.url = 'http://www.opengl.org/registry/specs/gl/EXT/index_func.txt'
+GL_EXT_index_func.url = 'http://www.opengl.org/registry/specs/EXT/index_func.txt'
 GL_EXT_index_func.functions = ['glIndexFuncEXT']
 gl.add(GL_EXT_index_func)
 
 GL_EXT_index_material = Extension('GL_EXT_index_material')
-GL_EXT_index_material.url = 'http://www.opengl.org/registry/specs/gl/EXT/index_material.txt'
+GL_EXT_index_material.url = 'http://www.opengl.org/registry/specs/EXT/index_material.txt'
 GL_EXT_index_material.functions = ['glIndexMaterialEXT']
 gl.add(GL_EXT_index_material)
 
 GL_EXT_index_texture = Extension('GL_EXT_index_texture')
-GL_EXT_index_texture.url = 'http://www.opengl.org/registry/specs/gl/EXT/index_texture.txt'
+GL_EXT_index_texture.url = 'http://www.opengl.org/registry/specs/EXT/index_texture.txt'
 gl.add(GL_EXT_index_texture)
 
 GL_EXT_light_texture = Extension('GL_EXT_light_texture')
-GL_EXT_light_texture.url = 'http://www.opengl.org/registry/specs/gl/EXT/light_texture.txt'
+GL_EXT_light_texture.url = 'http://www.opengl.org/registry/specs/EXT/light_texture.txt'
 GL_EXT_light_texture.enumerants = ['GL_ATTENUATION_EXT','GL_FRAGMENT_COLOR_EXT','GL_FRAGMENT_MATERIAL_EXT','GL_FRAGMENT_NORMAL_EXT','GL_SHADOW_ATTENUATION_EXT','GL_TEXTURE_APPLICATION_MODE_EXT','GL_TEXTURE_LIGHT_EXT','GL_TEXTURE_MATERIAL_FACE_EXT','GL_TEXTURE_MATERIAL_PARAMETER_EXT']
 GL_EXT_light_texture.functions = ['glApplyTextureEXT','glTextureLightEXT','glTextureMaterialEXT']
 gl.add(GL_EXT_light_texture)
 
 GL_EXT_misc_attribute = Extension('GL_EXT_misc_attribute')
-GL_EXT_misc_attribute.url = 'http://www.opengl.org/registry/specs/gl/EXT/misc_attribute.txt'
+GL_EXT_misc_attribute.url = 'http://www.opengl.org/registry/specs/EXT/misc_attribute.txt'
 gl.add(GL_EXT_misc_attribute)
 
 GL_EXT_multi_draw_arrays = Extension('GL_EXT_multi_draw_arrays')
-GL_EXT_multi_draw_arrays.url = 'http://www.opengl.org/registry/specs/gl/EXT/multi_draw_arrays.txt'
+GL_EXT_multi_draw_arrays.url = 'http://www.opengl.org/registry/specs/EXT/multi_draw_arrays.txt'
 GL_EXT_multi_draw_arrays.functions = ['glMultiDrawArraysEXT','glMultiDrawElementsEXT']
 gl.add(GL_EXT_multi_draw_arrays)
 
 GL_EXT_multisample = Extension('GL_EXT_multisample')
-GL_EXT_multisample.url = 'http://www.opengl.org/registry/specs/gl/EXT/wgl_multisample.txt'
+GL_EXT_multisample.url = 'http://www.opengl.org/registry/specs/EXT/wgl_multisample.txt'
 GL_EXT_multisample.enumerants = ['GL_1PASS_EXT','GL_2PASS_0_EXT','GL_2PASS_1_EXT','GL_4PASS_0_EXT','GL_4PASS_1_EXT','GL_4PASS_2_EXT','GL_4PASS_3_EXT','GL_MULTISAMPLE_BIT_EXT','GL_MULTISAMPLE_EXT','GL_SAMPLES_EXT','GL_SAMPLE_ALPHA_TO_MASK_EXT','GL_SAMPLE_ALPHA_TO_ONE_EXT','GL_SAMPLE_BUFFERS_EXT','GL_SAMPLE_MASK_EXT','GL_SAMPLE_MASK_INVERT_EXT','GL_SAMPLE_MASK_VALUE_EXT','GL_SAMPLE_PATTERN_EXT']
 GL_EXT_multisample.functions = ['glSampleMaskEXT','glSamplePatternEXT']
 gl.add(GL_EXT_multisample)
 
 GL_EXT_packed_depth_stencil = Extension('GL_EXT_packed_depth_stencil')
-GL_EXT_packed_depth_stencil.url = 'http://www.opengl.org/registry/specs/gl/EXT/packed_depth_stencil.txt'
+GL_EXT_packed_depth_stencil.url = 'http://www.opengl.org/registry/specs/EXT/packed_depth_stencil.txt'
 GL_EXT_packed_depth_stencil.enumerants = ['GL_DEPTH24_STENCIL8_EXT','GL_DEPTH_STENCIL_EXT','GL_TEXTURE_STENCIL_SIZE_EXT','GL_UNSIGNED_INT_24_8_EXT']
 gl.add(GL_EXT_packed_depth_stencil)
 
@@ -43443,12 +43465,12 @@ GL_EXT_packed_float.enumerants = ['GL_R11F_G11F_B10F_EXT','GL_RGBA_SIGNED_COMPON
 gl.add(GL_EXT_packed_float)
 
 GL_EXT_packed_pixels = Extension('GL_EXT_packed_pixels')
-GL_EXT_packed_pixels.url = 'http://www.opengl.org/registry/specs/gl/EXT/packed_pixels.txt'
+GL_EXT_packed_pixels.url = 'http://www.opengl.org/registry/specs/EXT/packed_pixels.txt'
 GL_EXT_packed_pixels.enumerants = ['GL_UNSIGNED_BYTE_3_3_2_EXT','GL_UNSIGNED_INT_10_10_10_2_EXT','GL_UNSIGNED_INT_8_8_8_8_EXT','GL_UNSIGNED_SHORT_4_4_4_4_EXT','GL_UNSIGNED_SHORT_5_5_5_1_EXT']
 gl.add(GL_EXT_packed_pixels)
 
 GL_EXT_paletted_texture = Extension('GL_EXT_paletted_texture')
-GL_EXT_paletted_texture.url = 'http://www.opengl.org/registry/specs/gl/EXT/paletted_texture.txt'
+GL_EXT_paletted_texture.url = 'http://www.opengl.org/registry/specs/EXT/paletted_texture.txt'
 GL_EXT_paletted_texture.enumerants = ['GL_COLOR_INDEX12_EXT','GL_COLOR_INDEX16_EXT','GL_COLOR_INDEX1_EXT','GL_COLOR_INDEX2_EXT','GL_COLOR_INDEX4_EXT','GL_COLOR_INDEX8_EXT','GL_COLOR_TABLE_ALPHA_SIZE_EXT','GL_COLOR_TABLE_BLUE_SIZE_EXT','GL_COLOR_TABLE_FORMAT_EXT','GL_COLOR_TABLE_GREEN_SIZE_EXT','GL_COLOR_TABLE_INTENSITY_SIZE_EXT','GL_COLOR_TABLE_LUMINANCE_SIZE_EXT','GL_COLOR_TABLE_RED_SIZE_EXT','GL_COLOR_TABLE_WIDTH_EXT','GL_PROXY_TEXTURE_1D','GL_PROXY_TEXTURE_2D','GL_PROXY_TEXTURE_CUBE_MAP_ARB','GL_TEXTURE_1D','GL_TEXTURE_2D','GL_TEXTURE_CUBE_MAP_ARB','GL_TEXTURE_INDEX_SIZE_EXT']
 GL_EXT_paletted_texture.functions = ['glColorTableEXT','glGetColorTableEXT','glGetColorTableParameterfvEXT','glGetColorTableParameterivEXT']
 gl.add(GL_EXT_paletted_texture)
@@ -43459,40 +43481,40 @@ GL_EXT_pixel_buffer_object.enumerants = ['GL_PIXEL_PACK_BUFFER_BINDING_EXT','GL_
 gl.add(GL_EXT_pixel_buffer_object)
 
 GL_EXT_pixel_transform = Extension('GL_EXT_pixel_transform')
-GL_EXT_pixel_transform.url = 'http://www.opengl.org/registry/specs/gl/EXT/pixel_transform.txt'
+GL_EXT_pixel_transform.url = 'http://www.opengl.org/registry/specs/EXT/pixel_transform.txt'
 GL_EXT_pixel_transform.enumerants = ['GL_AVERAGE_EXT','GL_CUBIC_EXT','GL_MAX_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT','GL_PIXEL_CUBIC_WEIGHT_EXT','GL_PIXEL_MAG_FILTER_EXT','GL_PIXEL_MIN_FILTER_EXT','GL_PIXEL_TRANSFORM_2D_EXT','GL_PIXEL_TRANSFORM_2D_MATRIX_EXT','GL_PIXEL_TRANSFORM_2D_STACK_DEPTH_EXT']
 GL_EXT_pixel_transform.functions = ['glGetPixelTransformParameterfvEXT','glGetPixelTransformParameterivEXT','glPixelTransformParameterfEXT','glPixelTransformParameterfvEXT','glPixelTransformParameteriEXT','glPixelTransformParameterivEXT']
 gl.add(GL_EXT_pixel_transform)
 
 GL_EXT_pixel_transform_color_table = Extension('GL_EXT_pixel_transform_color_table')
-GL_EXT_pixel_transform_color_table.url = 'http://www.opengl.org/registry/specs/gl/EXT/pixel_transform_color_table.txt'
+GL_EXT_pixel_transform_color_table.url = 'http://www.opengl.org/registry/specs/EXT/pixel_transform_color_table.txt'
 gl.add(GL_EXT_pixel_transform_color_table)
 
 GL_EXT_point_parameters = Extension('GL_EXT_point_parameters')
-GL_EXT_point_parameters.url = 'http://www.opengl.org/registry/specs/gl/EXT/point_parameters.txt'
+GL_EXT_point_parameters.url = 'http://www.opengl.org/registry/specs/EXT/point_parameters.txt'
 GL_EXT_point_parameters.enumerants = ['GL_DISTANCE_ATTENUATION_EXT','GL_POINT_FADE_THRESHOLD_SIZE_EXT','GL_POINT_SIZE_MAX_EXT','GL_POINT_SIZE_MIN_EXT']
 GL_EXT_point_parameters.functions = ['glPointParameterfEXT','glPointParameterfvEXT']
 gl.add(GL_EXT_point_parameters)
 
 GL_EXT_polygon_offset = Extension('GL_EXT_polygon_offset')
-GL_EXT_polygon_offset.url = 'http://www.opengl.org/registry/specs/gl/EXT/polygon_offset.txt'
+GL_EXT_polygon_offset.url = 'http://www.opengl.org/registry/specs/EXT/polygon_offset.txt'
 GL_EXT_polygon_offset.enumerants = ['GL_POLYGON_OFFSET_BIAS_EXT','GL_POLYGON_OFFSET_EXT','GL_POLYGON_OFFSET_FACTOR_EXT']
 GL_EXT_polygon_offset.functions = ['glPolygonOffsetEXT']
 gl.add(GL_EXT_polygon_offset)
 
 GL_EXT_provoking_vertex = Extension('GL_EXT_provoking_vertex')
-GL_EXT_provoking_vertex.url = 'http://www.opengl.org/registry/specs/gl/EXT/provoking_vertex.txt'
+GL_EXT_provoking_vertex.url = 'http://www.opengl.org/registry/specs/EXT/provoking_vertex.txt'
 GL_EXT_provoking_vertex.enumerants = ['GL_FIRST_VERTEX_CONVENTION_EXT','GL_LAST_VERTEX_CONVENTION_EXT','GL_PROVOKING_VERTEX_EXT','GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT']
 GL_EXT_provoking_vertex.functions = ['glProvokingVertexEXT']
 gl.add(GL_EXT_provoking_vertex)
 
 GL_EXT_rescale_normal = Extension('GL_EXT_rescale_normal')
-GL_EXT_rescale_normal.url = 'http://www.opengl.org/registry/specs/gl/EXT/rescale_normal.txt'
+GL_EXT_rescale_normal.url = 'http://www.opengl.org/registry/specs/EXT/rescale_normal.txt'
 GL_EXT_rescale_normal.enumerants = ['GL_RESCALE_NORMAL_EXT']
 gl.add(GL_EXT_rescale_normal)
 
 GL_EXT_scene_marker = Extension('GL_EXT_scene_marker')
-GL_EXT_scene_marker.url = 'http://www.opengl.org/registry/specs/gl/EXT/scene_marker.txt'
+GL_EXT_scene_marker.url = 'http://www.opengl.org/registry/specs/EXT/scene_marker.txt'
 GL_EXT_scene_marker.functions = ['glBeginSceneEXT','glEndSceneEXT']
 gl.add(GL_EXT_scene_marker)
 
@@ -43503,59 +43525,59 @@ GL_EXT_secondary_color.functions = ['glSecondaryColor3bEXT','glSecondaryColor3bv
 gl.add(GL_EXT_secondary_color)
 
 GL_EXT_separate_shader_objects = Extension('GL_EXT_separate_shader_objects')
-GL_EXT_separate_shader_objects.url = 'http://www.opengl.org/registry/specs/gl/EXT/separate_shader_objects.txt'
+GL_EXT_separate_shader_objects.url = 'http://www.opengl.org/registry/specs/EXT/separate_shader_objects.txt'
 GL_EXT_separate_shader_objects.enumerants = ['GL_ACTIVE_PROGRAM_EXT']
 GL_EXT_separate_shader_objects.functions = ['glCreateShaderProgramEXT','glActiveProgramEXT','glUseShaderProgramEXT']
 gl.add(GL_EXT_separate_shader_objects)
 
 GL_EXT_separate_specular_color = Extension('GL_EXT_separate_specular_color')
-GL_EXT_separate_specular_color.url = 'http://www.opengl.org/registry/specs/gl/EXT/separate_specular_color.txt'
+GL_EXT_separate_specular_color.url = 'http://www.opengl.org/registry/specs/EXT/separate_specular_color.txt'
 GL_EXT_separate_specular_color.enumerants = ['GL_LIGHT_MODEL_COLOR_CONTROL_EXT','GL_SEPARATE_SPECULAR_COLOR_EXT','GL_SINGLE_COLOR_EXT']
 gl.add(GL_EXT_separate_specular_color)
 
 GL_EXT_shader_image_load_store = Extension('GL_EXT_shader_image_load_store')
-GL_EXT_shader_image_load_store.url = 'http://www.opengl.org/registry/specs/gl/EXT/shader_image_load_store.txt'
+GL_EXT_shader_image_load_store.url = 'http://www.opengl.org/registry/specs/EXT/shader_image_load_store.txt'
 GL_EXT_shader_image_load_store.enumerants = ['GL_ALL_BARRIER_BITS_EXT','GL_ATOMIC_COUNTER_BARRIER_BIT_EXT','GL_BUFFER_UPDATE_BARRIER_BIT_EXT','GL_COMMAND_BARRIER_BIT_EXT','GL_ELEMENT_ARRAY_BARRIER_BIT_EXT','GL_FRAMEBUFFER_BARRIER_BIT_EXT','GL_IMAGE_1D_ARRAY_EXT','GL_IMAGE_1D_EXT','GL_IMAGE_2D_ARRAY_EXT','GL_IMAGE_2D_EXT','GL_IMAGE_2D_MULTISAMPLE_ARRAY_EXT','GL_IMAGE_2D_MULTISAMPLE_EXT','GL_IMAGE_2D_RECT_EXT','GL_IMAGE_3D_EXT','GL_IMAGE_BINDING_ACCESS_EXT','GL_IMAGE_BINDING_FORMAT_EXT','GL_IMAGE_BINDING_LAYERED_EXT','GL_IMAGE_BINDING_LAYER_EXT','GL_IMAGE_BINDING_LEVEL_EXT','GL_IMAGE_BINDING_NAME_EXT','GL_IMAGE_BUFFER_EXT','GL_IMAGE_CUBE_EXT','GL_IMAGE_CUBE_MAP_ARRAY_EXT','GL_INT_IMAGE_1D_ARRAY_EXT','GL_INT_IMAGE_1D_EXT','GL_INT_IMAGE_2D_ARRAY_EXT','GL_INT_IMAGE_2D_EXT','GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT','GL_INT_IMAGE_2D_MULTISAMPLE_EXT','GL_INT_IMAGE_2D_RECT_EXT','GL_INT_IMAGE_3D_EXT','GL_INT_IMAGE_BUFFER_EXT','GL_INT_IMAGE_CUBE_EXT','GL_INT_IMAGE_CUBE_MAP_ARRAY_EXT','GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT','GL_MAX_IMAGE_SAMPLES_EXT','GL_MAX_IMAGE_UNITS_EXT','GL_PIXEL_BUFFER_BARRIER_BIT_EXT','GL_SHADER_IMAGE_ACCESS_BARRIER_BIT_EXT','GL_TEXTURE_FETCH_BARRIER_BIT_EXT','GL_TEXTURE_UPDATE_BARRIER_BIT_EXT','GL_TRANSFORM_FEEDBACK_BARRIER_BIT_EXT','GL_UNIFORM_BARRIER_BIT_EXT','GL_UNSIGNED_INT_IMAGE_1D_ARRAY_EXT','GL_UNSIGNED_INT_IMAGE_1D_EXT','GL_UNSIGNED_INT_IMAGE_2D_ARRAY_EXT','GL_UNSIGNED_INT_IMAGE_2D_EXT','GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT','GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_EXT','GL_UNSIGNED_INT_IMAGE_2D_RECT_EXT','GL_UNSIGNED_INT_IMAGE_3D_EXT','GL_UNSIGNED_INT_IMAGE_BUFFER_EXT','GL_UNSIGNED_INT_IMAGE_CUBE_EXT','GL_UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT','GL_VERTEX_ATTRIB_ARRAY_BARRIER_BIT_EXT']
 GL_EXT_shader_image_load_store.functions = ['glBindImageTextureEXT','glMemoryBarrierEXT']
 gl.add(GL_EXT_shader_image_load_store)
 
 GL_EXT_shadow_funcs = Extension('GL_EXT_shadow_funcs')
-GL_EXT_shadow_funcs.url = 'http://www.opengl.org/registry/specs/gl/EXT/shadow_funcs.txt'
+GL_EXT_shadow_funcs.url = 'http://www.opengl.org/registry/specs/EXT/shadow_funcs.txt'
 gl.add(GL_EXT_shadow_funcs)
 
 GL_EXT_shared_texture_palette = Extension('GL_EXT_shared_texture_palette')
-GL_EXT_shared_texture_palette.url = 'http://www.opengl.org/registry/specs/gl/EXT/shared_texture_palette.txt'
+GL_EXT_shared_texture_palette.url = 'http://www.opengl.org/registry/specs/EXT/shared_texture_palette.txt'
 GL_EXT_shared_texture_palette.enumerants = ['GL_SHARED_TEXTURE_PALETTE_EXT']
 gl.add(GL_EXT_shared_texture_palette)
 
 GL_EXT_stencil_clear_tag = Extension('GL_EXT_stencil_clear_tag')
-GL_EXT_stencil_clear_tag.url = 'http://www.opengl.org/registry/specs/gl/EXT/stencil_clear_tag.txt'
+GL_EXT_stencil_clear_tag.url = 'http://www.opengl.org/registry/specs/EXT/stencil_clear_tag.txt'
 GL_EXT_stencil_clear_tag.enumerants = ['GL_STENCIL_CLEAR_TAG_VALUE_EXT','GL_STENCIL_TAG_BITS_EXT']
 gl.add(GL_EXT_stencil_clear_tag)
 
 GL_EXT_stencil_two_side = Extension('GL_EXT_stencil_two_side')
-GL_EXT_stencil_two_side.url = 'http://www.opengl.org/registry/specs/gl/EXT/stencil_two_side.txt'
+GL_EXT_stencil_two_side.url = 'http://www.opengl.org/registry/specs/EXT/stencil_two_side.txt'
 GL_EXT_stencil_two_side.enumerants = ['GL_ACTIVE_STENCIL_FACE_EXT','GL_STENCIL_TEST_TWO_SIDE_EXT']
 GL_EXT_stencil_two_side.functions = ['glActiveStencilFaceEXT']
 gl.add(GL_EXT_stencil_two_side)
 
 GL_EXT_stencil_wrap = Extension('GL_EXT_stencil_wrap')
-GL_EXT_stencil_wrap.url = 'http://www.opengl.org/registry/specs/gl/EXT/stencil_wrap.txt'
+GL_EXT_stencil_wrap.url = 'http://www.opengl.org/registry/specs/EXT/stencil_wrap.txt'
 GL_EXT_stencil_wrap.enumerants = ['GL_DECR_WRAP_EXT','GL_INCR_WRAP_EXT']
 gl.add(GL_EXT_stencil_wrap)
 
 GL_EXT_subtexture = Extension('GL_EXT_subtexture')
-GL_EXT_subtexture.url = 'http://www.opengl.org/registry/specs/gl/EXT/subtexture.txt'
+GL_EXT_subtexture.url = 'http://www.opengl.org/registry/specs/EXT/subtexture.txt'
 GL_EXT_subtexture.functions = ['glTexSubImage1DEXT','glTexSubImage2DEXT','glTexSubImage3DEXT']
 gl.add(GL_EXT_subtexture)
 
 GL_EXT_texture = Extension('GL_EXT_texture')
-GL_EXT_texture.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture.txt'
+GL_EXT_texture.url = 'http://www.opengl.org/registry/specs/EXT/texture.txt'
 GL_EXT_texture.enumerants = ['GL_ALPHA12_EXT','GL_ALPHA16_EXT','GL_ALPHA4_EXT','GL_ALPHA8_EXT','GL_INTENSITY12_EXT','GL_INTENSITY16_EXT','GL_INTENSITY4_EXT','GL_INTENSITY8_EXT','GL_INTENSITY_EXT','GL_LUMINANCE12_ALPHA12_EXT','GL_LUMINANCE12_ALPHA4_EXT','GL_LUMINANCE12_EXT','GL_LUMINANCE16_ALPHA16_EXT','GL_LUMINANCE16_EXT','GL_LUMINANCE4_ALPHA4_EXT','GL_LUMINANCE4_EXT','GL_LUMINANCE6_ALPHA2_EXT','GL_LUMINANCE8_ALPHA8_EXT','GL_LUMINANCE8_EXT','GL_PROXY_TEXTURE_1D_EXT','GL_PROXY_TEXTURE_2D_EXT','GL_REPLACE_EXT','GL_RGB10_A2_EXT','GL_RGB10_EXT','GL_RGB12_EXT','GL_RGB16_EXT','GL_RGB2_EXT','GL_RGB4_EXT','GL_RGB5_A1_EXT','GL_RGB5_EXT','GL_RGB8_EXT','GL_RGBA12_EXT','GL_RGBA16_EXT','GL_RGBA2_EXT','GL_RGBA4_EXT','GL_RGBA8_EXT','GL_TEXTURE_ALPHA_SIZE_EXT','GL_TEXTURE_BLUE_SIZE_EXT','GL_TEXTURE_GREEN_SIZE_EXT','GL_TEXTURE_INTENSITY_SIZE_EXT','GL_TEXTURE_LUMINANCE_SIZE_EXT','GL_TEXTURE_RED_SIZE_EXT']
 gl.add(GL_EXT_texture)
 
 GL_EXT_texture3D = Extension('GL_EXT_texture3D')
-GL_EXT_texture3D.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture3D.txt'
+GL_EXT_texture3D.url = 'http://www.opengl.org/registry/specs/EXT/texture3D.txt'
 GL_EXT_texture3D.enumerants = ['GL_MAX_3D_TEXTURE_SIZE_EXT','GL_PACK_IMAGE_HEIGHT_EXT','GL_PACK_SKIP_IMAGES_EXT','GL_PROXY_TEXTURE_3D_EXT','GL_TEXTURE_3D_EXT','GL_TEXTURE_DEPTH_EXT','GL_TEXTURE_WRAP_R_EXT','GL_UNPACK_IMAGE_HEIGHT_EXT','GL_UNPACK_SKIP_IMAGES_EXT']
 GL_EXT_texture3D.functions = ['glTexImage3DEXT']
 gl.add(GL_EXT_texture3D)
@@ -43573,7 +43595,7 @@ GL_EXT_texture_buffer_object.functions = ['glTexBufferEXT']
 gl.add(GL_EXT_texture_buffer_object)
 
 GL_EXT_texture_compression_dxt1 = Extension('GL_EXT_texture_compression_dxt1')
-GL_EXT_texture_compression_dxt1.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_compression_dxt1.txt'
+GL_EXT_texture_compression_dxt1.url = 'http://www.opengl.org/registry/specs/EXT/texture_compression_dxt1.txt'
 gl.add(GL_EXT_texture_compression_dxt1)
 
 GL_EXT_texture_compression_latc = Extension('GL_EXT_texture_compression_latc')
@@ -43587,7 +43609,7 @@ GL_EXT_texture_compression_rgtc.enumerants = ['GL_COMPRESSED_RED_GREEN_RGTC2_EXT
 gl.add(GL_EXT_texture_compression_rgtc)
 
 GL_EXT_texture_compression_s3tc = Extension('GL_EXT_texture_compression_s3tc')
-GL_EXT_texture_compression_s3tc.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_compression_s3tc.txt'
+GL_EXT_texture_compression_s3tc.url = 'http://www.opengl.org/registry/specs/EXT/texture_compression_s3tc.txt'
 GL_EXT_texture_compression_s3tc.enumerants = ['GL_COMPRESSED_RGBA_S3TC_DXT1_EXT','GL_COMPRESSED_RGBA_S3TC_DXT3_EXT','GL_COMPRESSED_RGBA_S3TC_DXT5_EXT','GL_COMPRESSED_RGB_S3TC_DXT1_EXT']
 gl.add(GL_EXT_texture_compression_s3tc)
 
@@ -43602,25 +43624,25 @@ GL_EXT_texture_edge_clamp.enumerants = ['GL_CLAMP_TO_EDGE_EXT']
 gl.add(GL_EXT_texture_edge_clamp)
 
 GL_EXT_texture_env = Extension('GL_EXT_texture_env')
-GL_EXT_texture_env.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_env.txt'
+GL_EXT_texture_env.url = 'http://www.opengl.org/registry/specs/EXT/texture_env.txt'
 gl.add(GL_EXT_texture_env)
 
 GL_EXT_texture_env_add = Extension('GL_EXT_texture_env_add')
-GL_EXT_texture_env_add.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_env_add.txt'
+GL_EXT_texture_env_add.url = 'http://www.opengl.org/registry/specs/EXT/texture_env_add.txt'
 gl.add(GL_EXT_texture_env_add)
 
 GL_EXT_texture_env_combine = Extension('GL_EXT_texture_env_combine')
-GL_EXT_texture_env_combine.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_env_combine.txt'
+GL_EXT_texture_env_combine.url = 'http://www.opengl.org/registry/specs/EXT/texture_env_combine.txt'
 GL_EXT_texture_env_combine.enumerants = ['GL_ADD_SIGNED_EXT','GL_COMBINE_ALPHA_EXT','GL_COMBINE_EXT','GL_COMBINE_RGB_EXT','GL_CONSTANT_EXT','GL_INTERPOLATE_EXT','GL_OPERAND0_ALPHA_EXT','GL_OPERAND0_RGB_EXT','GL_OPERAND1_ALPHA_EXT','GL_OPERAND1_RGB_EXT','GL_OPERAND2_ALPHA_EXT','GL_OPERAND2_RGB_EXT','GL_PREVIOUS_EXT','GL_PRIMARY_COLOR_EXT','GL_RGB_SCALE_EXT','GL_SOURCE0_ALPHA_EXT','GL_SOURCE0_RGB_EXT','GL_SOURCE1_ALPHA_EXT','GL_SOURCE1_RGB_EXT','GL_SOURCE2_ALPHA_EXT','GL_SOURCE2_RGB_EXT']
 gl.add(GL_EXT_texture_env_combine)
 
 GL_EXT_texture_env_dot3 = Extension('GL_EXT_texture_env_dot3')
-GL_EXT_texture_env_dot3.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_env_dot3.txt'
+GL_EXT_texture_env_dot3.url = 'http://www.opengl.org/registry/specs/EXT/texture_env_dot3.txt'
 GL_EXT_texture_env_dot3.enumerants = ['GL_DOT3_RGBA_EXT','GL_DOT3_RGB_EXT']
 gl.add(GL_EXT_texture_env_dot3)
 
 GL_EXT_texture_filter_anisotropic = Extension('GL_EXT_texture_filter_anisotropic')
-GL_EXT_texture_filter_anisotropic.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_filter_anisotropic.txt'
+GL_EXT_texture_filter_anisotropic.url = 'http://www.opengl.org/registry/specs/EXT/texture_filter_anisotropic.txt'
 GL_EXT_texture_filter_anisotropic.enumerants = ['GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT','GL_TEXTURE_MAX_ANISOTROPY_EXT']
 gl.add(GL_EXT_texture_filter_anisotropic)
 
@@ -43631,23 +43653,23 @@ GL_EXT_texture_integer.functions = ['glClearColorIiEXT','glClearColorIuiEXT','gl
 gl.add(GL_EXT_texture_integer)
 
 GL_EXT_texture_lod_bias = Extension('GL_EXT_texture_lod_bias')
-GL_EXT_texture_lod_bias.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_lod_bias.txt'
+GL_EXT_texture_lod_bias.url = 'http://www.opengl.org/registry/specs/EXT/texture_lod_bias.txt'
 GL_EXT_texture_lod_bias.enumerants = ['GL_MAX_TEXTURE_LOD_BIAS_EXT','GL_TEXTURE_FILTER_CONTROL_EXT','GL_TEXTURE_LOD_BIAS_EXT']
 gl.add(GL_EXT_texture_lod_bias)
 
 GL_EXT_texture_mirror_clamp = Extension('GL_EXT_texture_mirror_clamp')
-GL_EXT_texture_mirror_clamp.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_mirror_clamp.txt'
+GL_EXT_texture_mirror_clamp.url = 'http://www.opengl.org/registry/specs/EXT/texture_mirror_clamp.txt'
 GL_EXT_texture_mirror_clamp.enumerants = ['GL_MIRROR_CLAMP_EXT','GL_MIRROR_CLAMP_TO_BORDER_EXT','GL_MIRROR_CLAMP_TO_EDGE_EXT']
 gl.add(GL_EXT_texture_mirror_clamp)
 
 GL_EXT_texture_object = Extension('GL_EXT_texture_object')
-GL_EXT_texture_object.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_object.txt'
+GL_EXT_texture_object.url = 'http://www.opengl.org/registry/specs/EXT/texture_object.txt'
 GL_EXT_texture_object.enumerants = ['GL_TEXTURE_1D_BINDING_EXT','GL_TEXTURE_2D_BINDING_EXT','GL_TEXTURE_3D_BINDING_EXT','GL_TEXTURE_PRIORITY_EXT','GL_TEXTURE_RESIDENT_EXT']
 GL_EXT_texture_object.functions = ['glAreTexturesResidentEXT','glIsTextureEXT','glBindTextureEXT','glDeleteTexturesEXT','glGenTexturesEXT','glPrioritizeTexturesEXT']
 gl.add(GL_EXT_texture_object)
 
 GL_EXT_texture_perturb_normal = Extension('GL_EXT_texture_perturb_normal')
-GL_EXT_texture_perturb_normal.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_perturb_normal.txt'
+GL_EXT_texture_perturb_normal.url = 'http://www.opengl.org/registry/specs/EXT/texture_perturb_normal.txt'
 GL_EXT_texture_perturb_normal.enumerants = ['GL_PERTURB_EXT','GL_TEXTURE_NORMAL_EXT']
 GL_EXT_texture_perturb_normal.functions = ['glTextureNormalEXT']
 gl.add(GL_EXT_texture_perturb_normal)
@@ -43658,12 +43680,12 @@ GL_EXT_texture_rectangle.enumerants = ['GL_MAX_RECTANGLE_TEXTURE_SIZE_EXT','GL_P
 gl.add(GL_EXT_texture_rectangle)
 
 GL_EXT_texture_sRGB = Extension('GL_EXT_texture_sRGB')
-GL_EXT_texture_sRGB.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_sRGB.txt'
+GL_EXT_texture_sRGB.url = 'http://www.opengl.org/registry/specs/EXT/texture_sRGB.txt'
 GL_EXT_texture_sRGB.enumerants = ['GL_COMPRESSED_SLUMINANCE_ALPHA_EXT','GL_COMPRESSED_SLUMINANCE_EXT','GL_COMPRESSED_SRGB_ALPHA_EXT','GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT','GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT','GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT','GL_COMPRESSED_SRGB_EXT','GL_COMPRESSED_SRGB_S3TC_DXT1_EXT','GL_SLUMINANCE8_ALPHA8_EXT','GL_SLUMINANCE8_EXT','GL_SLUMINANCE_ALPHA_EXT','GL_SLUMINANCE_EXT','GL_SRGB8_ALPHA8_EXT','GL_SRGB8_EXT','GL_SRGB_ALPHA_EXT','GL_SRGB_EXT']
 gl.add(GL_EXT_texture_sRGB)
 
 GL_EXT_texture_sRGB_decode = Extension('GL_EXT_texture_sRGB_decode')
-GL_EXT_texture_sRGB_decode.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_sRGB_decode.txt'
+GL_EXT_texture_sRGB_decode.url = 'http://www.opengl.org/registry/specs/EXT/texture_sRGB_decode.txt'
 GL_EXT_texture_sRGB_decode.enumerants = ['GL_DECODE_EXT','GL_SKIP_DECODE_EXT','GL_TEXTURE_SRGB_DECODE_EXT']
 gl.add(GL_EXT_texture_sRGB_decode)
 
@@ -43673,12 +43695,12 @@ GL_EXT_texture_shared_exponent.enumerants = ['GL_RGB9_E5_EXT','GL_TEXTURE_SHARED
 gl.add(GL_EXT_texture_shared_exponent)
 
 GL_EXT_texture_snorm = Extension('GL_EXT_texture_snorm')
-GL_EXT_texture_snorm.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_snorm.txt'
+GL_EXT_texture_snorm.url = 'http://www.opengl.org/registry/specs/EXT/texture_snorm.txt'
 GL_EXT_texture_snorm.enumerants = ['GL_ALPHA16_SNORM','GL_ALPHA8_SNORM','GL_ALPHA_SNORM','GL_INTENSITY16_SNORM','GL_INTENSITY8_SNORM','GL_INTENSITY_SNORM','GL_LUMINANCE16_ALPHA16_SNORM','GL_LUMINANCE16_SNORM','GL_LUMINANCE8_ALPHA8_SNORM','GL_LUMINANCE8_SNORM','GL_LUMINANCE_ALPHA_SNORM','GL_LUMINANCE_SNORM','GL_R16_SNORM','GL_R8_SNORM','GL_RED_SNORM','GL_RG16_SNORM','GL_RG8_SNORM','GL_RGB16_SNORM','GL_RGB8_SNORM','GL_RGBA16_SNORM','GL_RGBA8_SNORM','GL_RGBA_SNORM','GL_RGB_SNORM','GL_RG_SNORM','GL_SIGNED_NORMALIZED']
 gl.add(GL_EXT_texture_snorm)
 
 GL_EXT_texture_swizzle = Extension('GL_EXT_texture_swizzle')
-GL_EXT_texture_swizzle.url = 'http://www.opengl.org/registry/specs/gl/EXT/texture_swizzle.txt'
+GL_EXT_texture_swizzle.url = 'http://www.opengl.org/registry/specs/EXT/texture_swizzle.txt'
 GL_EXT_texture_swizzle.enumerants = ['GL_TEXTURE_SWIZZLE_A_EXT','GL_TEXTURE_SWIZZLE_B_EXT','GL_TEXTURE_SWIZZLE_G_EXT','GL_TEXTURE_SWIZZLE_RGBA_EXT','GL_TEXTURE_SWIZZLE_R_EXT']
 gl.add(GL_EXT_texture_swizzle)
 
@@ -43689,24 +43711,24 @@ GL_EXT_timer_query.functions = ['glGetQueryObjecti64vEXT','glGetQueryObjectui64v
 gl.add(GL_EXT_timer_query)
 
 GL_EXT_transform_feedback = Extension('GL_EXT_transform_feedback')
-GL_EXT_transform_feedback.url = 'http://www.opengl.org/registry/specs/gl/EXT/transform_feedback.txt'
+GL_EXT_transform_feedback.url = 'http://www.opengl.org/registry/specs/EXT/transform_feedback.txt'
 GL_EXT_transform_feedback.enumerants = ['GL_INTERLEAVED_ATTRIBS_EXT','GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT','GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT','GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT','GL_PRIMITIVES_GENERATED_EXT','GL_RASTERIZER_DISCARD_EXT','GL_SEPARATE_ATTRIBS_EXT','GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT','GL_TRANSFORM_FEEDBACK_BUFFER_EXT','GL_TRANSFORM_FEEDBACK_BUFFER_MODE_EXT','GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT','GL_TRANSFORM_FEEDBACK_BUFFER_START_EXT','GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT','GL_TRANSFORM_FEEDBACK_VARYINGS_EXT','GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT']
 GL_EXT_transform_feedback.functions = ['glBeginTransformFeedbackEXT','glBindBufferBaseEXT','glBindBufferOffsetEXT','glBindBufferRangeEXT','glEndTransformFeedbackEXT','glGetTransformFeedbackVaryingEXT','glTransformFeedbackVaryingsEXT']
 gl.add(GL_EXT_transform_feedback)
 
 GL_EXT_vertex_array = Extension('GL_EXT_vertex_array')
-GL_EXT_vertex_array.url = 'http://www.opengl.org/registry/specs/gl/EXT/vertex_array.txt'
+GL_EXT_vertex_array.url = 'http://www.opengl.org/registry/specs/EXT/vertex_array.txt'
 GL_EXT_vertex_array.enumerants = ['GL_COLOR_ARRAY_COUNT_EXT','GL_COLOR_ARRAY_EXT','GL_COLOR_ARRAY_POINTER_EXT','GL_COLOR_ARRAY_SIZE_EXT','GL_COLOR_ARRAY_STRIDE_EXT','GL_COLOR_ARRAY_TYPE_EXT','GL_DOUBLE_EXT','GL_EDGE_FLAG_ARRAY_COUNT_EXT','GL_EDGE_FLAG_ARRAY_EXT','GL_EDGE_FLAG_ARRAY_POINTER_EXT','GL_EDGE_FLAG_ARRAY_STRIDE_EXT','GL_INDEX_ARRAY_COUNT_EXT','GL_INDEX_ARRAY_EXT','GL_INDEX_ARRAY_POINTER_EXT','GL_INDEX_ARRAY_STRIDE_EXT','GL_INDEX_ARRAY_TYPE_EXT','GL_NORMAL_ARRAY_COUNT_EXT','GL_NORMAL_ARRAY_EXT','GL_NORMAL_ARRAY_POINTER_EXT','GL_NORMAL_ARRAY_STRIDE_EXT','GL_NORMAL_ARRAY_TYPE_EXT','GL_TEXTURE_COORD_ARRAY_COUNT_EXT','GL_TEXTURE_COORD_ARRAY_EXT','GL_TEXTURE_COORD_ARRAY_POINTER_EXT','GL_TEXTURE_COORD_ARRAY_SIZE_EXT','GL_TEXTURE_COORD_ARRAY_STRIDE_EXT','GL_TEXTURE_COORD_ARRAY_TYPE_EXT','GL_VERTEX_ARRAY_COUNT_EXT','GL_VERTEX_ARRAY_EXT','GL_VERTEX_ARRAY_POINTER_EXT','GL_VERTEX_ARRAY_SIZE_EXT','GL_VERTEX_ARRAY_STRIDE_EXT','GL_VERTEX_ARRAY_TYPE_EXT']
 GL_EXT_vertex_array.functions = ['glArrayElementEXT','glColorPointerEXT','glDrawArraysEXT','glEdgeFlagPointerEXT','glIndexPointerEXT','glNormalPointerEXT','glTexCoordPointerEXT','glVertexPointerEXT']
 gl.add(GL_EXT_vertex_array)
 
 GL_EXT_vertex_array_bgra = Extension('GL_EXT_vertex_array_bgra')
-GL_EXT_vertex_array_bgra.url = 'http://www.opengl.org/registry/specs/gl/EXT/vertex_array_bgra.txt'
+GL_EXT_vertex_array_bgra.url = 'http://www.opengl.org/registry/specs/EXT/vertex_array_bgra.txt'
 GL_EXT_vertex_array_bgra.enumerants = ['GL_BGRA']
 gl.add(GL_EXT_vertex_array_bgra)
 
 GL_EXT_vertex_attrib_64bit = Extension('GL_EXT_vertex_attrib_64bit')
-GL_EXT_vertex_attrib_64bit.url = 'http://www.opengl.org/registry/specs/gl/EXT/vertex_attrib_64bit.txt'
+GL_EXT_vertex_attrib_64bit.url = 'http://www.opengl.org/registry/specs/EXT/vertex_attrib_64bit.txt'
 GL_EXT_vertex_attrib_64bit.enumerants = ['GL_DOUBLE_MAT2_EXT','GL_DOUBLE_MAT2x3_EXT','GL_DOUBLE_MAT2x4_EXT','GL_DOUBLE_MAT3_EXT','GL_DOUBLE_MAT3x2_EXT','GL_DOUBLE_MAT3x4_EXT','GL_DOUBLE_MAT4_EXT','GL_DOUBLE_MAT4x2_EXT','GL_DOUBLE_MAT4x3_EXT','GL_DOUBLE_VEC2_EXT','GL_DOUBLE_VEC3_EXT','GL_DOUBLE_VEC4_EXT']
 GL_EXT_vertex_attrib_64bit.functions = ['glGetVertexAttribLdvEXT','glVertexArrayVertexAttribLOffsetEXT','glVertexAttribL1dEXT','glVertexAttribL1dvEXT','glVertexAttribL2dEXT','glVertexAttribL2dvEXT','glVertexAttribL3dEXT','glVertexAttribL3dvEXT','glVertexAttribL4dEXT','glVertexAttribL4dvEXT','glVertexAttribLPointerEXT']
 gl.add(GL_EXT_vertex_attrib_64bit)
@@ -43718,110 +43740,110 @@ GL_EXT_vertex_shader.functions = ['glIsVariantEnabledEXT','glBindLightParameterE
 gl.add(GL_EXT_vertex_shader)
 
 GL_EXT_vertex_weighting = Extension('GL_EXT_vertex_weighting')
-GL_EXT_vertex_weighting.url = 'http://www.opengl.org/registry/specs/gl/EXT/vertex_weighting.txt'
+GL_EXT_vertex_weighting.url = 'http://www.opengl.org/registry/specs/EXT/vertex_weighting.txt'
 GL_EXT_vertex_weighting.enumerants = ['GL_CURRENT_VERTEX_WEIGHT_EXT','GL_MODELVIEW0_EXT','GL_MODELVIEW0_MATRIX_EXT','GL_MODELVIEW0_STACK_DEPTH_EXT','GL_MODELVIEW1_EXT','GL_MODELVIEW1_MATRIX_EXT','GL_MODELVIEW1_STACK_DEPTH_EXT','GL_VERTEX_WEIGHTING_EXT','GL_VERTEX_WEIGHT_ARRAY_EXT','GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT','GL_VERTEX_WEIGHT_ARRAY_SIZE_EXT','GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT','GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT']
 GL_EXT_vertex_weighting.functions = ['glVertexWeightPointerEXT','glVertexWeightfEXT','glVertexWeightfvEXT']
 gl.add(GL_EXT_vertex_weighting)
 
 GL_EXT_x11_sync_object = Extension('GL_EXT_x11_sync_object')
-GL_EXT_x11_sync_object.url = 'http://www.opengl.org/registry/specs/gl/EXT/x11_sync_object.txt'
+GL_EXT_x11_sync_object.url = 'http://www.opengl.org/registry/specs/EXT/x11_sync_object.txt'
 GL_EXT_x11_sync_object.enumerants = ['GL_SYNC_X11_FENCE_EXT']
 GL_EXT_x11_sync_object.functions = ['glImportSyncEXT']
 gl.add(GL_EXT_x11_sync_object)
 
 GL_GREMEDY_frame_terminator = Extension('GL_GREMEDY_frame_terminator')
-GL_GREMEDY_frame_terminator.url = 'http://www.opengl.org/registry/specs/gl/GREMEDY/frame_terminator.txt'
+GL_GREMEDY_frame_terminator.url = 'http://www.opengl.org/registry/specs/GREMEDY/frame_terminator.txt'
 GL_GREMEDY_frame_terminator.functions = ['glFrameTerminatorGREMEDY']
 gl.add(GL_GREMEDY_frame_terminator)
 
 GL_GREMEDY_string_marker = Extension('GL_GREMEDY_string_marker')
-GL_GREMEDY_string_marker.url = 'http://www.opengl.org/registry/specs/gl/GREMEDY/string_marker.txt'
+GL_GREMEDY_string_marker.url = 'http://www.opengl.org/registry/specs/GREMEDY/string_marker.txt'
 GL_GREMEDY_string_marker.functions = ['glStringMarkerGREMEDY']
 gl.add(GL_GREMEDY_string_marker)
 
 GL_HP_convolution_border_modes = Extension('GL_HP_convolution_border_modes')
-GL_HP_convolution_border_modes.url = 'http://www.opengl.org/registry/specs/gl/HP/convolution_border_modes.txt'
+GL_HP_convolution_border_modes.url = 'http://www.opengl.org/registry/specs/HP/convolution_border_modes.txt'
 gl.add(GL_HP_convolution_border_modes)
 
 GL_HP_image_transform = Extension('GL_HP_image_transform')
-GL_HP_image_transform.url = 'http://www.opengl.org/registry/specs/gl/HP/image_transform.txt'
+GL_HP_image_transform.url = 'http://www.opengl.org/registry/specs/HP/image_transform.txt'
 GL_HP_image_transform.functions = ['glGetImageTransformParameterfvHP','glGetImageTransformParameterivHP','glImageTransformParameterfHP','glImageTransformParameterfvHP','glImageTransformParameteriHP','glImageTransformParameterivHP']
 gl.add(GL_HP_image_transform)
 
 GL_HP_occlusion_test = Extension('GL_HP_occlusion_test')
-GL_HP_occlusion_test.url = 'http://www.opengl.org/registry/specs/gl/HP/occlusion_test.txt'
+GL_HP_occlusion_test.url = 'http://www.opengl.org/registry/specs/HP/occlusion_test.txt'
 gl.add(GL_HP_occlusion_test)
 
 GL_HP_texture_lighting = Extension('GL_HP_texture_lighting')
-GL_HP_texture_lighting.url = 'http://www.opengl.org/registry/specs/gl/HP/texture_lighting.txt'
+GL_HP_texture_lighting.url = 'http://www.opengl.org/registry/specs/HP/texture_lighting.txt'
 gl.add(GL_HP_texture_lighting)
 
 GL_IBM_cull_vertex = Extension('GL_IBM_cull_vertex')
-GL_IBM_cull_vertex.url = 'http://www.opengl.org/registry/specs/gl/IBM/cull_vertex.txt'
+GL_IBM_cull_vertex.url = 'http://www.opengl.org/registry/specs/IBM/cull_vertex.txt'
 GL_IBM_cull_vertex.enumerants = ['GL_CULL_VERTEX_IBM']
 gl.add(GL_IBM_cull_vertex)
 
 GL_IBM_multimode_draw_arrays = Extension('GL_IBM_multimode_draw_arrays')
-GL_IBM_multimode_draw_arrays.url = 'http://www.opengl.org/registry/specs/gl/IBM/multimode_draw_arrays.txt'
+GL_IBM_multimode_draw_arrays.url = 'http://www.opengl.org/registry/specs/IBM/multimode_draw_arrays.txt'
 GL_IBM_multimode_draw_arrays.functions = ['glMultiModeDrawArraysIBM','glMultiModeDrawElementsIBM']
 gl.add(GL_IBM_multimode_draw_arrays)
 
 GL_IBM_rasterpos_clip = Extension('GL_IBM_rasterpos_clip')
-GL_IBM_rasterpos_clip.url = 'http://www.opengl.org/registry/specs/gl/IBM/rasterpos_clip.txt'
+GL_IBM_rasterpos_clip.url = 'http://www.opengl.org/registry/specs/IBM/rasterpos_clip.txt'
 GL_IBM_rasterpos_clip.enumerants = ['GL_RASTER_POSITION_UNCLIPPED_IBM']
 gl.add(GL_IBM_rasterpos_clip)
 
 GL_IBM_static_data = Extension('GL_IBM_static_data')
-GL_IBM_static_data.url = 'http://www.opengl.org/registry/specs/gl/IBM/static_data.txt'
+GL_IBM_static_data.url = 'http://www.opengl.org/registry/specs/IBM/static_data.txt'
 GL_IBM_static_data.enumerants = ['GL_ALL_STATIC_DATA_IBM','GL_STATIC_VERTEX_ARRAY_IBM']
 gl.add(GL_IBM_static_data)
 
 GL_IBM_texture_mirrored_repeat = Extension('GL_IBM_texture_mirrored_repeat')
-GL_IBM_texture_mirrored_repeat.url = 'http://www.opengl.org/registry/specs/gl/IBM/texture_mirrored_repeat.txt'
+GL_IBM_texture_mirrored_repeat.url = 'http://www.opengl.org/registry/specs/IBM/texture_mirrored_repeat.txt'
 GL_IBM_texture_mirrored_repeat.enumerants = ['GL_MIRRORED_REPEAT_IBM']
 gl.add(GL_IBM_texture_mirrored_repeat)
 
 GL_IBM_vertex_array_lists = Extension('GL_IBM_vertex_array_lists')
-GL_IBM_vertex_array_lists.url = 'http://www.opengl.org/registry/specs/gl/IBM/vertex_array_lists.txt'
+GL_IBM_vertex_array_lists.url = 'http://www.opengl.org/registry/specs/IBM/vertex_array_lists.txt'
 GL_IBM_vertex_array_lists.enumerants = ['GL_COLOR_ARRAY_LIST_IBM','GL_COLOR_ARRAY_LIST_STRIDE_IBM','GL_EDGE_FLAG_ARRAY_LIST_IBM','GL_EDGE_FLAG_ARRAY_LIST_STRIDE_IBM','GL_FOG_COORDINATE_ARRAY_LIST_IBM','GL_FOG_COORDINATE_ARRAY_LIST_STRIDE_IBM','GL_INDEX_ARRAY_LIST_IBM','GL_INDEX_ARRAY_LIST_STRIDE_IBM','GL_NORMAL_ARRAY_LIST_IBM','GL_NORMAL_ARRAY_LIST_STRIDE_IBM','GL_SECONDARY_COLOR_ARRAY_LIST_IBM','GL_SECONDARY_COLOR_ARRAY_LIST_STRIDE_IBM','GL_TEXTURE_COORD_ARRAY_LIST_IBM','GL_TEXTURE_COORD_ARRAY_LIST_STRIDE_IBM','GL_VERTEX_ARRAY_LIST_IBM','GL_VERTEX_ARRAY_LIST_STRIDE_IBM']
 GL_IBM_vertex_array_lists.functions = ['glColorPointerListIBM','glEdgeFlagPointerListIBM','glFogCoordPointerListIBM','glIndexPointerListIBM','glNormalPointerListIBM','glSecondaryColorPointerListIBM','glTexCoordPointerListIBM','glVertexPointerListIBM']
 gl.add(GL_IBM_vertex_array_lists)
 
 GL_INGR_color_clamp = Extension('GL_INGR_color_clamp')
-GL_INGR_color_clamp.url = 'http://www.opengl.org/registry/specs/gl/INGR/color_clamp.txt'
+GL_INGR_color_clamp.url = 'http://www.opengl.org/registry/specs/INGR/color_clamp.txt'
 GL_INGR_color_clamp.enumerants = ['GL_ALPHA_MAX_CLAMP_INGR','GL_ALPHA_MIN_CLAMP_INGR','GL_BLUE_MAX_CLAMP_INGR','GL_BLUE_MIN_CLAMP_INGR','GL_GREEN_MAX_CLAMP_INGR','GL_GREEN_MIN_CLAMP_INGR','GL_RED_MAX_CLAMP_INGR','GL_RED_MIN_CLAMP_INGR']
 gl.add(GL_INGR_color_clamp)
 
 GL_INGR_interlace_read = Extension('GL_INGR_interlace_read')
-GL_INGR_interlace_read.url = 'http://www.opengl.org/registry/specs/gl/INGR/interlace_read.txt'
+GL_INGR_interlace_read.url = 'http://www.opengl.org/registry/specs/INGR/interlace_read.txt'
 GL_INGR_interlace_read.enumerants = ['GL_INTERLACE_READ_INGR']
 gl.add(GL_INGR_interlace_read)
 
 GL_INTEL_map_texture = Extension('GL_INTEL_map_texture')
-GL_INTEL_map_texture.url = 'http://www.opengl.org/registry/specs/gl/INTEL/map_texture.txt'
+GL_INTEL_map_texture.url = 'http://www.opengl.org/registry/specs/INTEL/map_texture.txt'
 GL_INTEL_map_texture.enumerants = ['GL_LAYOUT_DEFAULT_INTEL','GL_LAYOUT_LINEAR_CPU_CACHED_INTEL','GL_LAYOUT_LINEAR_INTEL','GL_TEXTURE_MEMORY_LAYOUT_INTEL']
 GL_INTEL_map_texture.functions = ['*','glSyncTextureINTEL','glUnmapTexture2DINTEL']
 gl.add(GL_INTEL_map_texture)
 
 GL_INTEL_parallel_arrays = Extension('GL_INTEL_parallel_arrays')
-GL_INTEL_parallel_arrays.url = 'http://www.opengl.org/registry/specs/gl/INTEL/parallel_arrays.txt'
+GL_INTEL_parallel_arrays.url = 'http://www.opengl.org/registry/specs/INTEL/parallel_arrays.txt'
 GL_INTEL_parallel_arrays.enumerants = ['GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL','GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL','GL_PARALLEL_ARRAYS_INTEL','GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL','GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL']
 GL_INTEL_parallel_arrays.functions = ['glColorPointervINTEL','glNormalPointervINTEL','glTexCoordPointervINTEL','glVertexPointervINTEL']
 gl.add(GL_INTEL_parallel_arrays)
 
 GL_INTEL_texture_scissor = Extension('GL_INTEL_texture_scissor')
-GL_INTEL_texture_scissor.url = 'http://www.opengl.org/registry/specs/gl/INTEL/texture_scissor.txt'
+GL_INTEL_texture_scissor.url = 'http://www.opengl.org/registry/specs/INTEL/texture_scissor.txt'
 GL_INTEL_texture_scissor.functions = ['glTexScissorFuncINTEL','glTexScissorINTEL']
 gl.add(GL_INTEL_texture_scissor)
 
 GL_KHR_debug = Extension('GL_KHR_debug')
-GL_KHR_debug.url = 'http://www.opengl.org/registry/specs/gl/KHR/debug.txt'
+GL_KHR_debug.url = 'http://www.opengl.org/registry/specs/KHR/debug.txt'
 GL_KHR_debug.enumerants = ['GL_BUFFER','GL_CONTEXT_FLAG_DEBUG_BIT','GL_DEBUG_CALLBACK_FUNCTION','GL_DEBUG_CALLBACK_USER_PARAM','GL_DEBUG_GROUP_STACK_DEPTH','GL_DEBUG_LOGGED_MESSAGES','GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH','GL_DEBUG_OUTPUT','GL_DEBUG_OUTPUT_SYNCHRONOUS','GL_DEBUG_SEVERITY_HIGH','GL_DEBUG_SEVERITY_LOW','GL_DEBUG_SEVERITY_MEDIUM','GL_DEBUG_SEVERITY_NOTIFICATION','GL_DEBUG_SOURCE_API','GL_DEBUG_SOURCE_APPLICATION','GL_DEBUG_SOURCE_OTHER','GL_DEBUG_SOURCE_SHADER_COMPILER','GL_DEBUG_SOURCE_THIRD_PARTY','GL_DEBUG_SOURCE_WINDOW_SYSTEM','GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR','GL_DEBUG_TYPE_ERROR','GL_DEBUG_TYPE_MARKER','GL_DEBUG_TYPE_OTHER','GL_DEBUG_TYPE_PERFORMANCE','GL_DEBUG_TYPE_POP_GROUP','GL_DEBUG_TYPE_PORTABILITY','GL_DEBUG_TYPE_PUSH_GROUP','GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR','GL_DISPLAY_LIST','GL_MAX_DEBUG_GROUP_STACK_DEPTH','GL_MAX_DEBUG_LOGGED_MESSAGES','GL_MAX_DEBUG_MESSAGE_LENGTH','GL_MAX_LABEL_LENGTH','GL_PROGRAM','GL_PROGRAM_PIPELINE','GL_QUERY','GL_SAMPLER','GL_SHADER','GL_STACK_OVERFLOW','GL_STACK_UNDERFLOW']
 GL_KHR_debug.functions = ['glGetDebugMessageLog','glDebugMessageCallback','glDebugMessageControl','glDebugMessageInsert','glGetObjectLabel','glGetObjectPtrLabel','glObjectLabel','glObjectPtrLabel','glPopDebugGroup','glPushDebugGroup']
 gl.add(GL_KHR_debug)
 
 GL_KHR_texture_compression_astc_ldr = Extension('GL_KHR_texture_compression_astc_ldr')
-GL_KHR_texture_compression_astc_ldr.url = 'http://www.opengl.org/registry/specs/gl/KHR/texture_compression_astc_ldr.txt'
+GL_KHR_texture_compression_astc_ldr.url = 'http://www.opengl.org/registry/specs/KHR/texture_compression_astc_ldr.txt'
 GL_KHR_texture_compression_astc_ldr.enumerants = ['GL_COMPRESSED_RGBA_ASTC_10x10_KHR','GL_COMPRESSED_RGBA_ASTC_10x5_KHR','GL_COMPRESSED_RGBA_ASTC_10x6_KHR','GL_COMPRESSED_RGBA_ASTC_10x8_KHR','GL_COMPRESSED_RGBA_ASTC_12x10_KHR','GL_COMPRESSED_RGBA_ASTC_12x12_KHR','GL_COMPRESSED_RGBA_ASTC_4x4_KHR','GL_COMPRESSED_RGBA_ASTC_5x4_KHR','GL_COMPRESSED_RGBA_ASTC_5x5_KHR','GL_COMPRESSED_RGBA_ASTC_6x5_KHR','GL_COMPRESSED_RGBA_ASTC_6x6_KHR','GL_COMPRESSED_RGBA_ASTC_8x5_KHR','GL_COMPRESSED_RGBA_ASTC_8x6_KHR','GL_COMPRESSED_RGBA_ASTC_8x8_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR','GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR']
 gl.add(GL_KHR_texture_compression_astc_ldr)
 
@@ -43831,32 +43853,32 @@ GL_KTX_buffer_region.functions = ['glBufferRegionEnabled','glNewBufferRegion','g
 gl.add(GL_KTX_buffer_region)
 
 GL_MESAX_texture_stack = Extension('GL_MESAX_texture_stack')
-GL_MESAX_texture_stack.url = 'http://www.opengl.org/registry/specs/gl/MESAX/texture_stack.txt'
+GL_MESAX_texture_stack.url = 'http://www.opengl.org/registry/specs/MESAX/texture_stack.txt'
 GL_MESAX_texture_stack.enumerants = ['GL_PROXY_TEXTURE_1D_STACK_MESAX','GL_PROXY_TEXTURE_2D_STACK_MESAX','GL_TEXTURE_1D_STACK_BINDING_MESAX','GL_TEXTURE_1D_STACK_MESAX','GL_TEXTURE_2D_STACK_BINDING_MESAX','GL_TEXTURE_2D_STACK_MESAX']
 gl.add(GL_MESAX_texture_stack)
 
 GL_MESA_pack_invert = Extension('GL_MESA_pack_invert')
-GL_MESA_pack_invert.url = 'http://www.opengl.org/registry/specs/gl/MESA/pack_invert.txt'
+GL_MESA_pack_invert.url = 'http://www.opengl.org/registry/specs/MESA/pack_invert.txt'
 GL_MESA_pack_invert.enumerants = ['GL_PACK_INVERT_MESA']
 gl.add(GL_MESA_pack_invert)
 
 GL_MESA_resize_buffers = Extension('GL_MESA_resize_buffers')
-GL_MESA_resize_buffers.url = 'http://www.opengl.org/registry/specs/gl/MESA/resize_buffers.txt'
+GL_MESA_resize_buffers.url = 'http://www.opengl.org/registry/specs/MESA/resize_buffers.txt'
 GL_MESA_resize_buffers.functions = ['glResizeBuffersMESA']
 gl.add(GL_MESA_resize_buffers)
 
 GL_MESA_window_pos = Extension('GL_MESA_window_pos')
-GL_MESA_window_pos.url = 'http://www.opengl.org/registry/specs/gl/MESA/window_pos.txt'
+GL_MESA_window_pos.url = 'http://www.opengl.org/registry/specs/MESA/window_pos.txt'
 GL_MESA_window_pos.functions = ['glWindowPos2dMESA','glWindowPos2dvMESA','glWindowPos2fMESA','glWindowPos2fvMESA','glWindowPos2iMESA','glWindowPos2ivMESA','glWindowPos2sMESA','glWindowPos2svMESA','glWindowPos3dMESA','glWindowPos3dvMESA','glWindowPos3fMESA','glWindowPos3fvMESA','glWindowPos3iMESA','glWindowPos3ivMESA','glWindowPos3sMESA','glWindowPos3svMESA','glWindowPos4dMESA','glWindowPos4dvMESA','glWindowPos4fMESA','glWindowPos4fvMESA','glWindowPos4iMESA','glWindowPos4ivMESA','glWindowPos4sMESA','glWindowPos4svMESA']
 gl.add(GL_MESA_window_pos)
 
 GL_MESA_ycbcr_texture = Extension('GL_MESA_ycbcr_texture')
-GL_MESA_ycbcr_texture.url = 'http://www.opengl.org/registry/specs/gl/MESA/ycbcr_texture.txt'
+GL_MESA_ycbcr_texture.url = 'http://www.opengl.org/registry/specs/MESA/ycbcr_texture.txt'
 GL_MESA_ycbcr_texture.enumerants = ['GL_UNSIGNED_SHORT_8_8_MESA','GL_UNSIGNED_SHORT_8_8_REV_MESA','GL_YCBCR_MESA']
 gl.add(GL_MESA_ycbcr_texture)
 
 GL_NVX_conditional_render = Extension('GL_NVX_conditional_render')
-GL_NVX_conditional_render.url = 'http://www.opengl.org/registry/specs/gl/NV/nvx_conditional_render.txt'
+GL_NVX_conditional_render.url = 'http://www.opengl.org/registry/specs/NV/nvx_conditional_render.txt'
 GL_NVX_conditional_render.functions = ['glBeginConditionalRenderNVX','glEndConditionalRenderNVX']
 gl.add(GL_NVX_conditional_render)
 
@@ -43866,37 +43888,38 @@ GL_NVX_gpu_memory_info.enumerants = ['GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDME
 gl.add(GL_NVX_gpu_memory_info)
 
 GL_NV_bindless_texture = Extension('GL_NV_bindless_texture')
-GL_NV_bindless_texture.url = 'http://www.opengl.org/registry/specs/gl/NV/bindless_texture.txt'
+GL_NV_bindless_texture.url = 'http://www.opengl.org/registry/specs/NV/bindless_texture.txt'
 GL_NV_bindless_texture.functions = ['glIsImageHandleResidentNV','glIsTextureHandleResidentNV','glGetImageHandleNV','glGetTextureHandleNV','glGetTextureSamplerHandleNV','glMakeImageHandleNonResidentNV','glMakeImageHandleResidentNV','glMakeTextureHandleNonResidentNV','glMakeTextureHandleResidentNV','glProgramUniformHandleui64NV','glProgramUniformHandleui64vNV','glUniformHandleui64NV','glUniformHandleui64vNV']
 gl.add(GL_NV_bindless_texture)
 
 GL_NV_blend_square = Extension('GL_NV_blend_square')
-GL_NV_blend_square.url = 'http://www.opengl.org/registry/specs/gl/NV/blend_square.txt'
+GL_NV_blend_square.url = 'http://www.opengl.org/registry/specs/NV/blend_square.txt'
+GL_NV_blend_square.category = 'GL_NV_blend_square'
 gl.add(GL_NV_blend_square)
 
 GL_NV_compute_program5 = Extension('GL_NV_compute_program5')
-GL_NV_compute_program5.url = 'http://www.opengl.org/registry/specs/gl/NV/compute_program5.txt'
+GL_NV_compute_program5.url = 'http://www.opengl.org/registry/specs/NV/compute_program5.txt'
 GL_NV_compute_program5.enumerants = ['GL_COMPUTE_PROGRAM_NV','GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV']
 gl.add(GL_NV_compute_program5)
 
 GL_NV_conditional_render = Extension('GL_NV_conditional_render')
-GL_NV_conditional_render.url = 'http://www.opengl.org/registry/specs/gl/NV/conditional_render.txt'
+GL_NV_conditional_render.url = 'http://www.opengl.org/registry/specs/NV/conditional_render.txt'
 GL_NV_conditional_render.enumerants = ['GL_QUERY_BY_REGION_NO_WAIT_NV','GL_QUERY_BY_REGION_WAIT_NV','GL_QUERY_NO_WAIT_NV','GL_QUERY_WAIT_NV']
 GL_NV_conditional_render.functions = ['glBeginConditionalRenderNV','glEndConditionalRenderNV']
 gl.add(GL_NV_conditional_render)
 
 GL_NV_copy_depth_to_color = Extension('GL_NV_copy_depth_to_color')
-GL_NV_copy_depth_to_color.url = 'http://www.opengl.org/registry/specs/gl/NV/copy_depth_to_color.txt'
+GL_NV_copy_depth_to_color.url = 'http://www.opengl.org/registry/specs/NV/copy_depth_to_color.txt'
 GL_NV_copy_depth_to_color.enumerants = ['GL_DEPTH_STENCIL_TO_BGRA_NV','GL_DEPTH_STENCIL_TO_RGBA_NV']
 gl.add(GL_NV_copy_depth_to_color)
 
 GL_NV_copy_image = Extension('GL_NV_copy_image')
-GL_NV_copy_image.url = 'http://www.opengl.org/registry/specs/gl/NV/copy_image.txt'
+GL_NV_copy_image.url = 'http://www.opengl.org/registry/specs/NV/copy_image.txt'
 GL_NV_copy_image.functions = ['glCopyImageSubDataNV']
 gl.add(GL_NV_copy_image)
 
 GL_NV_deep_texture3D = Extension('GL_NV_deep_texture3D')
-GL_NV_deep_texture3D.url = 'http://www.opengl.org/registry/specs/gl/NV/deep_texture3D.txt'
+GL_NV_deep_texture3D.url = 'http://www.opengl.org/registry/specs/NV/deep_texture3D.txt'
 GL_NV_deep_texture3D.enumerants = ['GL_MAX_DEEP_3D_TEXTURE_DEPTH_NV','GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV']
 gl.add(GL_NV_deep_texture3D)
 
@@ -43907,7 +43930,7 @@ GL_NV_depth_buffer_float.functions = ['glClearDepthdNV','glDepthBoundsdNV','glDe
 gl.add(GL_NV_depth_buffer_float)
 
 GL_NV_depth_clamp = Extension('GL_NV_depth_clamp')
-GL_NV_depth_clamp.url = 'http://www.opengl.org/registry/specs/gl/NV/depth_clamp.txt'
+GL_NV_depth_clamp.url = 'http://www.opengl.org/registry/specs/NV/depth_clamp.txt'
 GL_NV_depth_clamp.enumerants = ['GL_DEPTH_CLAMP_NV']
 gl.add(GL_NV_depth_clamp)
 
@@ -43916,40 +43939,40 @@ GL_NV_depth_range_unclamped.enumerants = ['GL_CURRENT_SAMPLE_COUNT_QUERY_NV','GL
 gl.add(GL_NV_depth_range_unclamped)
 
 GL_NV_draw_texture = Extension('GL_NV_draw_texture')
-GL_NV_draw_texture.url = 'http://www.opengl.org/registry/specs/gl/NV/draw_texture.txt'
+GL_NV_draw_texture.url = 'http://www.opengl.org/registry/specs/NV/draw_texture.txt'
 GL_NV_draw_texture.functions = ['glDrawTextureNV']
 gl.add(GL_NV_draw_texture)
 
 GL_NV_evaluators = Extension('GL_NV_evaluators')
-GL_NV_evaluators.url = 'http://www.opengl.org/registry/specs/gl/NV/evaluators.txt'
+GL_NV_evaluators.url = 'http://www.opengl.org/registry/specs/NV/evaluators.txt'
 GL_NV_evaluators.enumerants = ['GL_EVAL_2D_NV','GL_EVAL_FRACTIONAL_TESSELLATION_NV','GL_EVAL_TRIANGULAR_2D_NV','GL_EVAL_VERTEX_ATTRIB0_NV','GL_EVAL_VERTEX_ATTRIB10_NV','GL_EVAL_VERTEX_ATTRIB11_NV','GL_EVAL_VERTEX_ATTRIB12_NV','GL_EVAL_VERTEX_ATTRIB13_NV','GL_EVAL_VERTEX_ATTRIB14_NV','GL_EVAL_VERTEX_ATTRIB15_NV','GL_EVAL_VERTEX_ATTRIB1_NV','GL_EVAL_VERTEX_ATTRIB2_NV','GL_EVAL_VERTEX_ATTRIB3_NV','GL_EVAL_VERTEX_ATTRIB4_NV','GL_EVAL_VERTEX_ATTRIB5_NV','GL_EVAL_VERTEX_ATTRIB6_NV','GL_EVAL_VERTEX_ATTRIB7_NV','GL_EVAL_VERTEX_ATTRIB8_NV','GL_EVAL_VERTEX_ATTRIB9_NV','GL_MAP_ATTRIB_U_ORDER_NV','GL_MAP_ATTRIB_V_ORDER_NV','GL_MAP_TESSELLATION_NV','GL_MAX_MAP_TESSELLATION_NV','GL_MAX_RATIONAL_EVAL_ORDER_NV']
 GL_NV_evaluators.functions = ['glEvalMapsNV','glGetMapAttribParameterfvNV','glGetMapAttribParameterivNV','glGetMapControlPointsNV','glGetMapParameterfvNV','glGetMapParameterivNV','glMapControlPointsNV','glMapParameterfvNV','glMapParameterivNV']
 gl.add(GL_NV_evaluators)
 
 GL_NV_explicit_multisample = Extension('GL_NV_explicit_multisample')
-GL_NV_explicit_multisample.url = 'http://www.opengl.org/registry/specs/gl/NV/explicit_multisample.txt'
+GL_NV_explicit_multisample.url = 'http://www.opengl.org/registry/specs/NV/explicit_multisample.txt'
 GL_NV_explicit_multisample.enumerants = ['GL_INT_SAMPLER_RENDERBUFFER_NV','GL_MAX_SAMPLE_MASK_WORDS_NV','GL_SAMPLER_RENDERBUFFER_NV','GL_SAMPLE_MASK_NV','GL_SAMPLE_MASK_VALUE_NV','GL_SAMPLE_POSITION_NV','GL_TEXTURE_BINDING_RENDERBUFFER_NV','GL_TEXTURE_RENDERBUFFER_DATA_STORE_BINDING_NV','GL_TEXTURE_RENDERBUFFER_NV','GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV']
 GL_NV_explicit_multisample.functions = ['glGetMultisamplefvNV','glSampleMaskIndexedNV','glTexRenderbufferNV']
 gl.add(GL_NV_explicit_multisample)
 
 GL_NV_fence = Extension('GL_NV_fence')
-GL_NV_fence.url = 'http://www.opengl.org/registry/specs/gl/NV/fence.txt'
+GL_NV_fence.url = 'http://www.opengl.org/registry/specs/NV/fence.txt'
 GL_NV_fence.enumerants = ['GL_ALL_COMPLETED_NV','GL_FENCE_CONDITION_NV','GL_FENCE_STATUS_NV']
 GL_NV_fence.functions = ['glIsFenceNV','glTestFenceNV','glDeleteFencesNV','glFinishFenceNV','glGenFencesNV','glGetFenceivNV','glSetFenceNV']
 gl.add(GL_NV_fence)
 
 GL_NV_float_buffer = Extension('GL_NV_float_buffer')
-GL_NV_float_buffer.url = 'http://www.opengl.org/registry/specs/gl/NV/float_buffer.txt'
+GL_NV_float_buffer.url = 'http://www.opengl.org/registry/specs/NV/float_buffer.txt'
 GL_NV_float_buffer.enumerants = ['GL_FLOAT_CLEAR_COLOR_VALUE_NV','GL_FLOAT_R16_NV','GL_FLOAT_R32_NV','GL_FLOAT_RG16_NV','GL_FLOAT_RG32_NV','GL_FLOAT_RGB16_NV','GL_FLOAT_RGB32_NV','GL_FLOAT_RGBA16_NV','GL_FLOAT_RGBA32_NV','GL_FLOAT_RGBA_MODE_NV','GL_FLOAT_RGBA_NV','GL_FLOAT_RGB_NV','GL_FLOAT_RG_NV','GL_FLOAT_R_NV','GL_TEXTURE_FLOAT_COMPONENTS_NV']
 gl.add(GL_NV_float_buffer)
 
 GL_NV_fog_distance = Extension('GL_NV_fog_distance')
-GL_NV_fog_distance.url = 'http://www.opengl.org/registry/specs/gl/NV/fog_distance.txt'
+GL_NV_fog_distance.url = 'http://www.opengl.org/registry/specs/NV/fog_distance.txt'
 GL_NV_fog_distance.enumerants = ['GL_EYE_PLANE_ABSOLUTE_NV','GL_EYE_RADIAL_NV','GL_FOG_DISTANCE_MODE_NV']
 gl.add(GL_NV_fog_distance)
 
 GL_NV_fragment_program = Extension('GL_NV_fragment_program')
-GL_NV_fragment_program.url = 'http://www.opengl.org/registry/specs/gl/NV/fragment_program.txt'
+GL_NV_fragment_program.url = 'http://www.opengl.org/registry/specs/NV/fragment_program.txt'
 GL_NV_fragment_program.enumerants = ['GL_FRAGMENT_PROGRAM_BINDING_NV','GL_FRAGMENT_PROGRAM_NV','GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV','GL_MAX_TEXTURE_COORDS_NV','GL_MAX_TEXTURE_IMAGE_UNITS_NV','GL_PROGRAM_ERROR_STRING_NV']
 GL_NV_fragment_program.functions = ['glGetProgramNamedParameterdvNV','glGetProgramNamedParameterfvNV','glProgramNamedParameter4dNV','glProgramNamedParameter4dvNV','glProgramNamedParameter4fNV','glProgramNamedParameter4fvNV']
 gl.add(GL_NV_fragment_program)
@@ -43995,44 +44018,44 @@ GL_NV_gpu_program5.enumerants = ['GL_FRAGMENT_PROGRAM_INTERPOLATION_OFFSET_BITS_
 gl.add(GL_NV_gpu_program5)
 
 GL_NV_gpu_program_fp64 = Extension('GL_NV_gpu_program_fp64')
-GL_NV_gpu_program_fp64.url = 'http://www.opengl.org/registry/specs/gl/NV/gpu_program5.txt'
+GL_NV_gpu_program_fp64.url = 'http://www.opengl.org/registry/specs/NV/gpu_program5.txt'
 gl.add(GL_NV_gpu_program_fp64)
 
 GL_NV_gpu_shader5 = Extension('GL_NV_gpu_shader5')
-GL_NV_gpu_shader5.url = 'http://www.opengl.org/registry/specs/gl/NV/gpu_shader5.txt'
+GL_NV_gpu_shader5.url = 'http://www.opengl.org/registry/specs/NV/gpu_shader5.txt'
 GL_NV_gpu_shader5.enumerants = ['GL_FLOAT16_NV','GL_FLOAT16_VEC2_NV','GL_FLOAT16_VEC3_NV','GL_FLOAT16_VEC4_NV','GL_INT16_NV','GL_INT16_VEC2_NV','GL_INT16_VEC3_NV','GL_INT16_VEC4_NV','GL_INT64_NV','GL_INT64_VEC2_NV','GL_INT64_VEC3_NV','GL_INT64_VEC4_NV','GL_INT8_NV','GL_INT8_VEC2_NV','GL_INT8_VEC3_NV','GL_INT8_VEC4_NV','GL_UNSIGNED_INT16_NV','GL_UNSIGNED_INT16_VEC2_NV','GL_UNSIGNED_INT16_VEC3_NV','GL_UNSIGNED_INT16_VEC4_NV','GL_UNSIGNED_INT64_NV','GL_UNSIGNED_INT64_VEC2_NV','GL_UNSIGNED_INT64_VEC3_NV','GL_UNSIGNED_INT64_VEC4_NV','GL_UNSIGNED_INT8_NV','GL_UNSIGNED_INT8_VEC2_NV','GL_UNSIGNED_INT8_VEC3_NV','GL_UNSIGNED_INT8_VEC4_NV']
 GL_NV_gpu_shader5.functions = ['glGetUniformi64vNV','glGetUniformui64vNV','glProgramUniform1i64NV','glProgramUniform1i64vNV','glProgramUniform1ui64NV','glProgramUniform1ui64vNV','glProgramUniform2i64NV','glProgramUniform2i64vNV','glProgramUniform2ui64NV','glProgramUniform2ui64vNV','glProgramUniform3i64NV','glProgramUniform3i64vNV','glProgramUniform3ui64NV','glProgramUniform3ui64vNV','glProgramUniform4i64NV','glProgramUniform4i64vNV','glProgramUniform4ui64NV','glProgramUniform4ui64vNV','glUniform1i64NV','glUniform1i64vNV','glUniform1ui64NV','glUniform1ui64vNV','glUniform2i64NV','glUniform2i64vNV','glUniform2ui64NV','glUniform2ui64vNV','glUniform3i64NV','glUniform3i64vNV','glUniform3ui64NV','glUniform3ui64vNV','glUniform4i64NV','glUniform4i64vNV','glUniform4ui64NV','glUniform4ui64vNV']
 gl.add(GL_NV_gpu_shader5)
 
 GL_NV_half_float = Extension('GL_NV_half_float')
-GL_NV_half_float.url = 'http://www.opengl.org/registry/specs/gl/NV/half_float.txt'
+GL_NV_half_float.url = 'http://www.opengl.org/registry/specs/NV/half_float.txt'
 GL_NV_half_float.enumerants = ['GL_HALF_FLOAT_NV']
 GL_NV_half_float.functions = ['glColor3hNV','glColor3hvNV','glColor4hNV','glColor4hvNV','glFogCoordhNV','glFogCoordhvNV','glMultiTexCoord1hNV','glMultiTexCoord1hvNV','glMultiTexCoord2hNV','glMultiTexCoord2hvNV','glMultiTexCoord3hNV','glMultiTexCoord3hvNV','glMultiTexCoord4hNV','glMultiTexCoord4hvNV','glNormal3hNV','glNormal3hvNV','glSecondaryColor3hNV','glSecondaryColor3hvNV','glTexCoord1hNV','glTexCoord1hvNV','glTexCoord2hNV','glTexCoord2hvNV','glTexCoord3hNV','glTexCoord3hvNV','glTexCoord4hNV','glTexCoord4hvNV','glVertex2hNV','glVertex2hvNV','glVertex3hNV','glVertex3hvNV','glVertex4hNV','glVertex4hvNV','glVertexAttrib1hNV','glVertexAttrib1hvNV','glVertexAttrib2hNV','glVertexAttrib2hvNV','glVertexAttrib3hNV','glVertexAttrib3hvNV','glVertexAttrib4hNV','glVertexAttrib4hvNV','glVertexAttribs1hvNV','glVertexAttribs2hvNV','glVertexAttribs3hvNV','glVertexAttribs4hvNV','glVertexWeighthNV','glVertexWeighthvNV']
 gl.add(GL_NV_half_float)
 
 GL_NV_light_max_exponent = Extension('GL_NV_light_max_exponent')
-GL_NV_light_max_exponent.url = 'http://www.opengl.org/registry/specs/gl/NV/light_max_exponent.txt'
+GL_NV_light_max_exponent.url = 'http://www.opengl.org/registry/specs/NV/light_max_exponent.txt'
 GL_NV_light_max_exponent.enumerants = ['GL_MAX_SHININESS_NV','GL_MAX_SPOT_EXPONENT_NV']
 gl.add(GL_NV_light_max_exponent)
 
 GL_NV_multisample_coverage = Extension('GL_NV_multisample_coverage')
-GL_NV_multisample_coverage.url = 'http://www.opengl.org/registry/specs/gl/NV/multisample_coverage.txt'
+GL_NV_multisample_coverage.url = 'http://www.opengl.org/registry/specs/NV/multisample_coverage.txt'
 GL_NV_multisample_coverage.enumerants = ['GL_COLOR_SAMPLES_NV','GL_COVERAGE_SAMPLES_NV']
 gl.add(GL_NV_multisample_coverage)
 
 GL_NV_multisample_filter_hint = Extension('GL_NV_multisample_filter_hint')
-GL_NV_multisample_filter_hint.url = 'http://www.opengl.org/registry/specs/gl/NV/multisample_filter_hint.txt'
+GL_NV_multisample_filter_hint.url = 'http://www.opengl.org/registry/specs/NV/multisample_filter_hint.txt'
 GL_NV_multisample_filter_hint.enumerants = ['GL_MULTISAMPLE_FILTER_HINT_NV']
 gl.add(GL_NV_multisample_filter_hint)
 
 GL_NV_occlusion_query = Extension('GL_NV_occlusion_query')
-GL_NV_occlusion_query.url = 'http://www.opengl.org/registry/specs/gl/NV/occlusion_query.txt'
+GL_NV_occlusion_query.url = 'http://www.opengl.org/registry/specs/NV/occlusion_query.txt'
 GL_NV_occlusion_query.enumerants = ['GL_CURRENT_OCCLUSION_QUERY_ID_NV','GL_PIXEL_COUNTER_BITS_NV','GL_PIXEL_COUNT_AVAILABLE_NV','GL_PIXEL_COUNT_NV']
 GL_NV_occlusion_query.functions = ['glIsOcclusionQueryNV','glBeginOcclusionQueryNV','glDeleteOcclusionQueriesNV','glEndOcclusionQueryNV','glGenOcclusionQueriesNV','glGetOcclusionQueryivNV','glGetOcclusionQueryuivNV']
 gl.add(GL_NV_occlusion_query)
 
 GL_NV_packed_depth_stencil = Extension('GL_NV_packed_depth_stencil')
-GL_NV_packed_depth_stencil.url = 'http://www.opengl.org/registry/specs/gl/NV/packed_depth_stencil.txt'
+GL_NV_packed_depth_stencil.url = 'http://www.opengl.org/registry/specs/NV/packed_depth_stencil.txt'
 GL_NV_packed_depth_stencil.enumerants = ['GL_DEPTH_STENCIL_NV','GL_UNSIGNED_INT_24_8_NV']
 gl.add(GL_NV_packed_depth_stencil)
 
@@ -44043,7 +44066,7 @@ GL_NV_parameter_buffer_object.functions = ['glProgramBufferParametersIivNV','glP
 gl.add(GL_NV_parameter_buffer_object)
 
 GL_NV_parameter_buffer_object2 = Extension('GL_NV_parameter_buffer_object2')
-GL_NV_parameter_buffer_object2.url = 'http://www.opengl.org/registry/specs/gl/NV/parameter_buffer_object2.txt'
+GL_NV_parameter_buffer_object2.url = 'http://www.opengl.org/registry/specs/NV/parameter_buffer_object2.txt'
 gl.add(GL_NV_parameter_buffer_object2)
 
 GL_NV_path_rendering = Extension('GL_NV_path_rendering')
@@ -44053,13 +44076,13 @@ GL_NV_path_rendering.functions = ['glIsPathNV','glIsPointInFillPathNV','glIsPoin
 gl.add(GL_NV_path_rendering)
 
 GL_NV_pixel_data_range = Extension('GL_NV_pixel_data_range')
-GL_NV_pixel_data_range.url = 'http://www.opengl.org/registry/specs/gl/NV/pixel_data_range.txt'
+GL_NV_pixel_data_range.url = 'http://www.opengl.org/registry/specs/NV/pixel_data_range.txt'
 GL_NV_pixel_data_range.enumerants = ['GL_READ_PIXEL_DATA_RANGE_LENGTH_NV','GL_READ_PIXEL_DATA_RANGE_NV','GL_READ_PIXEL_DATA_RANGE_POINTER_NV','GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV','GL_WRITE_PIXEL_DATA_RANGE_NV','GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV']
 GL_NV_pixel_data_range.functions = ['glFlushPixelDataRangeNV','glPixelDataRangeNV']
 gl.add(GL_NV_pixel_data_range)
 
 GL_NV_point_sprite = Extension('GL_NV_point_sprite')
-GL_NV_point_sprite.url = 'http://www.opengl.org/registry/specs/gl/NV/point_sprite.txt'
+GL_NV_point_sprite.url = 'http://www.opengl.org/registry/specs/NV/point_sprite.txt'
 GL_NV_point_sprite.enumerants = ['GL_COORD_REPLACE_NV','GL_POINT_SPRITE_NV','GL_POINT_SPRITE_R_MODE_NV']
 GL_NV_point_sprite.functions = ['glPointParameteriNV','glPointParameterivNV']
 gl.add(GL_NV_point_sprite)
@@ -44071,39 +44094,39 @@ GL_NV_present_video.functions = ['glGetVideoi64vNV','glGetVideoivNV','glGetVideo
 gl.add(GL_NV_present_video)
 
 GL_NV_primitive_restart = Extension('GL_NV_primitive_restart')
-GL_NV_primitive_restart.url = 'http://www.opengl.org/registry/specs/gl/NV/primitive_restart.txt'
+GL_NV_primitive_restart.url = 'http://www.opengl.org/registry/specs/NV/primitive_restart.txt'
 GL_NV_primitive_restart.enumerants = ['GL_PRIMITIVE_RESTART_INDEX_NV','GL_PRIMITIVE_RESTART_NV']
 GL_NV_primitive_restart.functions = ['glPrimitiveRestartIndexNV','glPrimitiveRestartNV']
 gl.add(GL_NV_primitive_restart)
 
 GL_NV_register_combiners = Extension('GL_NV_register_combiners')
-GL_NV_register_combiners.url = 'http://www.opengl.org/registry/specs/gl/NV/register_combiners.txt'
+GL_NV_register_combiners.url = 'http://www.opengl.org/registry/specs/NV/register_combiners.txt'
 GL_NV_register_combiners.enumerants = ['GL_BIAS_BY_NEGATIVE_ONE_HALF_NV','GL_COLOR_SUM_CLAMP_NV','GL_COMBINER0_NV','GL_COMBINER1_NV','GL_COMBINER2_NV','GL_COMBINER3_NV','GL_COMBINER4_NV','GL_COMBINER5_NV','GL_COMBINER6_NV','GL_COMBINER7_NV','GL_COMBINER_AB_DOT_PRODUCT_NV','GL_COMBINER_AB_OUTPUT_NV','GL_COMBINER_BIAS_NV','GL_COMBINER_CD_DOT_PRODUCT_NV','GL_COMBINER_CD_OUTPUT_NV','GL_COMBINER_COMPONENT_USAGE_NV','GL_COMBINER_INPUT_NV','GL_COMBINER_MAPPING_NV','GL_COMBINER_MUX_SUM_NV','GL_COMBINER_SCALE_NV','GL_COMBINER_SUM_OUTPUT_NV','GL_CONSTANT_COLOR0_NV','GL_CONSTANT_COLOR1_NV','GL_DISCARD_NV','GL_EXPAND_NEGATE_NV','GL_EXPAND_NORMAL_NV','GL_E_TIMES_F_NV','GL_HALF_BIAS_NEGATE_NV','GL_HALF_BIAS_NORMAL_NV','GL_MAX_GENERAL_COMBINERS_NV','GL_NUM_GENERAL_COMBINERS_NV','GL_PRIMARY_COLOR_NV','GL_REGISTER_COMBINERS_NV','GL_SCALE_BY_FOUR_NV','GL_SCALE_BY_ONE_HALF_NV','GL_SCALE_BY_TWO_NV','GL_SECONDARY_COLOR_NV','GL_SIGNED_IDENTITY_NV','GL_SIGNED_NEGATE_NV','GL_SPARE0_NV','GL_SPARE0_PLUS_SECONDARY_COLOR_NV','GL_SPARE1_NV','GL_UNSIGNED_IDENTITY_NV','GL_UNSIGNED_INVERT_NV','GL_VARIABLE_A_NV','GL_VARIABLE_B_NV','GL_VARIABLE_C_NV','GL_VARIABLE_D_NV','GL_VARIABLE_E_NV','GL_VARIABLE_F_NV','GL_VARIABLE_G_NV']
 GL_NV_register_combiners.functions = ['glCombinerInputNV','glCombinerOutputNV','glCombinerParameterfNV','glCombinerParameterfvNV','glCombinerParameteriNV','glCombinerParameterivNV','glFinalCombinerInputNV','glGetCombinerInputParameterfvNV','glGetCombinerInputParameterivNV','glGetCombinerOutputParameterfvNV','glGetCombinerOutputParameterivNV','glGetFinalCombinerInputParameterfvNV','glGetFinalCombinerInputParameterivNV']
 gl.add(GL_NV_register_combiners)
 
 GL_NV_register_combiners2 = Extension('GL_NV_register_combiners2')
-GL_NV_register_combiners2.url = 'http://www.opengl.org/registry/specs/gl/NV/register_combiners2.txt'
+GL_NV_register_combiners2.url = 'http://www.opengl.org/registry/specs/NV/register_combiners2.txt'
 GL_NV_register_combiners2.enumerants = ['GL_PER_STAGE_CONSTANTS_NV']
 GL_NV_register_combiners2.functions = ['glCombinerStageParameterfvNV','glGetCombinerStageParameterfvNV']
 gl.add(GL_NV_register_combiners2)
 
 GL_NV_shader_atomic_counters = Extension('GL_NV_shader_atomic_counters')
-GL_NV_shader_atomic_counters.url = 'http://www.opengl.org/registry/specs/gl/NV/shader_atomic_counters.txt'
+GL_NV_shader_atomic_counters.url = 'http://www.opengl.org/registry/specs/NV/shader_atomic_counters.txt'
 gl.add(GL_NV_shader_atomic_counters)
 
 GL_NV_shader_atomic_float = Extension('GL_NV_shader_atomic_float')
-GL_NV_shader_atomic_float.url = 'http://www.opengl.org/registry/specs/gl/NV/shader_atomic_float.txt'
+GL_NV_shader_atomic_float.url = 'http://www.opengl.org/registry/specs/NV/shader_atomic_float.txt'
 gl.add(GL_NV_shader_atomic_float)
 
 GL_NV_shader_buffer_load = Extension('GL_NV_shader_buffer_load')
-GL_NV_shader_buffer_load.url = 'http://www.opengl.org/registry/specs/gl/NV/shader_buffer_load.txt'
+GL_NV_shader_buffer_load.url = 'http://www.opengl.org/registry/specs/NV/shader_buffer_load.txt'
 GL_NV_shader_buffer_load.enumerants = ['GL_BUFFER_GPU_ADDRESS_NV','GL_GPU_ADDRESS_NV','GL_MAX_SHADER_BUFFER_ADDRESS_NV']
 GL_NV_shader_buffer_load.functions = ['glIsBufferResidentNV','glIsNamedBufferResidentNV','glGetBufferParameterui64vNV','glGetIntegerui64vNV','glGetNamedBufferParameterui64vNV','glMakeBufferNonResidentNV','glMakeBufferResidentNV','glMakeNamedBufferNonResidentNV','glMakeNamedBufferResidentNV','glProgramUniformui64NV','glProgramUniformui64vNV','glUniformui64NV','glUniformui64vNV']
 gl.add(GL_NV_shader_buffer_load)
 
 GL_NV_shader_storage_buffer_object = Extension('GL_NV_shader_storage_buffer_object')
-GL_NV_shader_storage_buffer_object.url = 'http://www.opengl.org/registry/specs/gl/NV/shader_storage_buffer_object.txt'
+GL_NV_shader_storage_buffer_object.url = 'http://www.opengl.org/registry/specs/NV/shader_storage_buffer_object.txt'
 gl.add(GL_NV_shader_storage_buffer_object)
 
 GL_NV_tessellation_program5 = Extension('GL_NV_tessellation_program5')
@@ -44112,57 +44135,57 @@ GL_NV_tessellation_program5.enumerants = ['GL_MAX_PROGRAM_PATCH_ATTRIBS_NV','GL_
 gl.add(GL_NV_tessellation_program5)
 
 GL_NV_texgen_emboss = Extension('GL_NV_texgen_emboss')
-GL_NV_texgen_emboss.url = 'http://www.opengl.org/registry/specs/gl/NV/texgen_emboss.txt'
+GL_NV_texgen_emboss.url = 'http://www.opengl.org/registry/specs/NV/texgen_emboss.txt'
 GL_NV_texgen_emboss.enumerants = ['GL_EMBOSS_CONSTANT_NV','GL_EMBOSS_LIGHT_NV','GL_EMBOSS_MAP_NV']
 gl.add(GL_NV_texgen_emboss)
 
 GL_NV_texgen_reflection = Extension('GL_NV_texgen_reflection')
-GL_NV_texgen_reflection.url = 'http://www.opengl.org/registry/specs/gl/NV/texgen_reflection.txt'
+GL_NV_texgen_reflection.url = 'http://www.opengl.org/registry/specs/NV/texgen_reflection.txt'
 GL_NV_texgen_reflection.enumerants = ['GL_NORMAL_MAP_NV','GL_REFLECTION_MAP_NV']
 gl.add(GL_NV_texgen_reflection)
 
 GL_NV_texture_barrier = Extension('GL_NV_texture_barrier')
-GL_NV_texture_barrier.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_barrier.txt'
+GL_NV_texture_barrier.url = 'http://www.opengl.org/registry/specs/NV/texture_barrier.txt'
 GL_NV_texture_barrier.functions = ['glTextureBarrierNV']
 gl.add(GL_NV_texture_barrier)
 
 GL_NV_texture_compression_vtc = Extension('GL_NV_texture_compression_vtc')
-GL_NV_texture_compression_vtc.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_compression_vtc.txt'
+GL_NV_texture_compression_vtc.url = 'http://www.opengl.org/registry/specs/NV/texture_compression_vtc.txt'
 gl.add(GL_NV_texture_compression_vtc)
 
 GL_NV_texture_env_combine4 = Extension('GL_NV_texture_env_combine4')
-GL_NV_texture_env_combine4.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_env_combine4.txt'
+GL_NV_texture_env_combine4.url = 'http://www.opengl.org/registry/specs/NV/texture_env_combine4.txt'
 GL_NV_texture_env_combine4.enumerants = ['GL_COMBINE4_NV','GL_OPERAND3_ALPHA_NV','GL_OPERAND3_RGB_NV','GL_SOURCE3_ALPHA_NV','GL_SOURCE3_RGB_NV']
 gl.add(GL_NV_texture_env_combine4)
 
 GL_NV_texture_expand_normal = Extension('GL_NV_texture_expand_normal')
-GL_NV_texture_expand_normal.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_expand_normal.txt'
+GL_NV_texture_expand_normal.url = 'http://www.opengl.org/registry/specs/NV/texture_expand_normal.txt'
 GL_NV_texture_expand_normal.enumerants = ['GL_TEXTURE_UNSIGNED_REMAP_MODE_NV']
 gl.add(GL_NV_texture_expand_normal)
 
 GL_NV_texture_multisample = Extension('GL_NV_texture_multisample')
-GL_NV_texture_multisample.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_multisample.txt'
+GL_NV_texture_multisample.url = 'http://www.opengl.org/registry/specs/NV/texture_multisample.txt'
 GL_NV_texture_multisample.enumerants = ['GL_TEXTURE_COLOR_SAMPLES_NV','GL_TEXTURE_COVERAGE_SAMPLES_NV']
 GL_NV_texture_multisample.functions = ['glTexImage2DMultisampleCoverageNV','glTexImage3DMultisampleCoverageNV','glTextureImage2DMultisampleCoverageNV','glTextureImage2DMultisampleNV','glTextureImage3DMultisampleCoverageNV','glTextureImage3DMultisampleNV']
 gl.add(GL_NV_texture_multisample)
 
 GL_NV_texture_rectangle = Extension('GL_NV_texture_rectangle')
-GL_NV_texture_rectangle.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_rectangle.txt'
+GL_NV_texture_rectangle.url = 'http://www.opengl.org/registry/specs/NV/texture_rectangle.txt'
 GL_NV_texture_rectangle.enumerants = ['GL_MAX_RECTANGLE_TEXTURE_SIZE_NV','GL_PROXY_TEXTURE_RECTANGLE_NV','GL_TEXTURE_BINDING_RECTANGLE_NV','GL_TEXTURE_RECTANGLE_NV']
 gl.add(GL_NV_texture_rectangle)
 
 GL_NV_texture_shader = Extension('GL_NV_texture_shader')
-GL_NV_texture_shader.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_shader.txt'
+GL_NV_texture_shader.url = 'http://www.opengl.org/registry/specs/NV/texture_shader.txt'
 GL_NV_texture_shader.enumerants = ['GL_CONST_EYE_NV','GL_CULL_FRAGMENT_NV','GL_CULL_MODES_NV','GL_DEPENDENT_AR_TEXTURE_2D_NV','GL_DEPENDENT_GB_TEXTURE_2D_NV','GL_DOT_PRODUCT_CONST_EYE_REFLECT_CUBE_MAP_NV','GL_DOT_PRODUCT_DEPTH_REPLACE_NV','GL_DOT_PRODUCT_DIFFUSE_CUBE_MAP_NV','GL_DOT_PRODUCT_NV','GL_DOT_PRODUCT_REFLECT_CUBE_MAP_NV','GL_DOT_PRODUCT_TEXTURE_2D_NV','GL_DOT_PRODUCT_TEXTURE_CUBE_MAP_NV','GL_DOT_PRODUCT_TEXTURE_RECTANGLE_NV','GL_DSDT8_MAG8_INTENSITY8_NV','GL_DSDT8_MAG8_NV','GL_DSDT8_NV','GL_DSDT_MAG_INTENSITY_NV','GL_DSDT_MAG_NV','GL_DSDT_MAG_VIB_NV','GL_DSDT_NV','GL_DS_BIAS_NV','GL_DS_SCALE_NV','GL_DT_BIAS_NV','GL_DT_SCALE_NV','GL_HILO16_NV','GL_HILO_NV','GL_HI_BIAS_NV','GL_HI_SCALE_NV','GL_LO_BIAS_NV','GL_LO_SCALE_NV','GL_MAGNITUDE_BIAS_NV','GL_MAGNITUDE_SCALE_NV','GL_OFFSET_TEXTURE_2D_BIAS_NV','GL_OFFSET_TEXTURE_2D_MATRIX_NV','GL_OFFSET_TEXTURE_2D_NV','GL_OFFSET_TEXTURE_2D_SCALE_NV','GL_OFFSET_TEXTURE_BIAS_NV','GL_OFFSET_TEXTURE_MATRIX_NV','GL_OFFSET_TEXTURE_RECTANGLE_NV','GL_OFFSET_TEXTURE_RECTANGLE_SCALE_NV','GL_OFFSET_TEXTURE_SCALE_NV','GL_PASS_THROUGH_NV','GL_PREVIOUS_TEXTURE_INPUT_NV','GL_RGBA_UNSIGNED_DOT_PRODUCT_MAPPING_NV','GL_SHADER_CONSISTENT_NV','GL_SHADER_OPERATION_NV','GL_SIGNED_ALPHA8_NV','GL_SIGNED_ALPHA_NV','GL_SIGNED_HILO16_NV','GL_SIGNED_HILO_NV','GL_SIGNED_INTENSITY8_NV','GL_SIGNED_INTENSITY_NV','GL_SIGNED_LUMINANCE8_ALPHA8_NV','GL_SIGNED_LUMINANCE8_NV','GL_SIGNED_LUMINANCE_ALPHA_NV','GL_SIGNED_LUMINANCE_NV','GL_SIGNED_RGB8_NV','GL_SIGNED_RGB8_UNSIGNED_ALPHA8_NV','GL_SIGNED_RGBA8_NV','GL_SIGNED_RGBA_NV','GL_SIGNED_RGB_NV','GL_SIGNED_RGB_UNSIGNED_ALPHA_NV','GL_TEXTURE_BORDER_VALUES_NV','GL_TEXTURE_DS_SIZE_NV','GL_TEXTURE_DT_SIZE_NV','GL_TEXTURE_HI_SIZE_NV','GL_TEXTURE_LO_SIZE_NV','GL_TEXTURE_MAG_SIZE_NV','GL_TEXTURE_SHADER_NV','GL_UNSIGNED_INT_8_8_S8_S8_REV_NV','GL_UNSIGNED_INT_S8_S8_8_8_NV','GL_VIBRANCE_BIAS_NV','GL_VIBRANCE_SCALE_NV']
 gl.add(GL_NV_texture_shader)
 
 GL_NV_texture_shader2 = Extension('GL_NV_texture_shader2')
-GL_NV_texture_shader2.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_shader2.txt'
+GL_NV_texture_shader2.url = 'http://www.opengl.org/registry/specs/NV/texture_shader2.txt'
 GL_NV_texture_shader2.enumerants = ['GL_DOT_PRODUCT_TEXTURE_3D_NV','GL_DSDT8_MAG8_INTENSITY8_NV','GL_DSDT8_MAG8_NV','GL_DSDT8_NV','GL_DSDT_MAG_INTENSITY_NV','GL_DSDT_MAG_NV','GL_DSDT_MAG_VIB_NV','GL_DSDT_NV','GL_HILO16_NV','GL_HILO_NV','GL_SIGNED_ALPHA8_NV','GL_SIGNED_ALPHA_NV','GL_SIGNED_HILO16_NV','GL_SIGNED_HILO_NV','GL_SIGNED_INTENSITY8_NV','GL_SIGNED_INTENSITY_NV','GL_SIGNED_LUMINANCE8_ALPHA8_NV','GL_SIGNED_LUMINANCE8_NV','GL_SIGNED_LUMINANCE_ALPHA_NV','GL_SIGNED_LUMINANCE_NV','GL_SIGNED_RGB8_NV','GL_SIGNED_RGB8_UNSIGNED_ALPHA8_NV','GL_SIGNED_RGBA8_NV','GL_SIGNED_RGBA_NV','GL_SIGNED_RGB_NV','GL_SIGNED_RGB_UNSIGNED_ALPHA_NV','GL_UNSIGNED_INT_8_8_S8_S8_REV_NV','GL_UNSIGNED_INT_S8_S8_8_8_NV']
 gl.add(GL_NV_texture_shader2)
 
 GL_NV_texture_shader3 = Extension('GL_NV_texture_shader3')
-GL_NV_texture_shader3.url = 'http://www.opengl.org/registry/specs/gl/NV/texture_shader3.txt'
+GL_NV_texture_shader3.url = 'http://www.opengl.org/registry/specs/NV/texture_shader3.txt'
 GL_NV_texture_shader3.enumerants = ['GL_DEPENDENT_HILO_TEXTURE_2D_NV','GL_DEPENDENT_RGB_TEXTURE_3D_NV','GL_DEPENDENT_RGB_TEXTURE_CUBE_MAP_NV','GL_DOT_PRODUCT_AFFINE_DEPTH_REPLACE_NV','GL_DOT_PRODUCT_PASS_THROUGH_NV','GL_DOT_PRODUCT_TEXTURE_1D_NV','GL_FORCE_BLUE_TO_ONE_NV','GL_HILO8_NV','GL_OFFSET_HILO_PROJECTIVE_TEXTURE_2D_NV','GL_OFFSET_HILO_PROJECTIVE_TEXTURE_RECTANGLE_NV','GL_OFFSET_HILO_TEXTURE_2D_NV','GL_OFFSET_HILO_TEXTURE_RECTANGLE_NV','GL_OFFSET_PROJECTIVE_TEXTURE_2D_NV','GL_OFFSET_PROJECTIVE_TEXTURE_2D_SCALE_NV','GL_OFFSET_PROJECTIVE_TEXTURE_RECTANGLE_NV','GL_OFFSET_PROJECTIVE_TEXTURE_RECTANGLE_SCALE_NV','GL_SIGNED_HILO8_NV']
 gl.add(GL_NV_texture_shader3)
 
@@ -44173,7 +44196,7 @@ GL_NV_transform_feedback.functions = ['glGetVaryingLocationNV','glActiveVaryingN
 gl.add(GL_NV_transform_feedback)
 
 GL_NV_transform_feedback2 = Extension('GL_NV_transform_feedback2')
-GL_NV_transform_feedback2.url = 'http://www.opengl.org/registry/specs/gl/NV/transform_feedback2.txt'
+GL_NV_transform_feedback2.url = 'http://www.opengl.org/registry/specs/NV/transform_feedback2.txt'
 GL_NV_transform_feedback2.enumerants = ['GL_TRANSFORM_FEEDBACK_BINDING_NV','GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV','GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV','GL_TRANSFORM_FEEDBACK_NV']
 GL_NV_transform_feedback2.functions = ['glIsTransformFeedbackNV','glBindTransformFeedbackNV','glDeleteTransformFeedbacksNV','glDrawTransformFeedbackNV','glGenTransformFeedbacksNV','glPauseTransformFeedbackNV','glResumeTransformFeedbackNV']
 gl.add(GL_NV_transform_feedback2)
@@ -44185,40 +44208,40 @@ GL_NV_vdpau_interop.functions = ['glVDPAURegisterOutputSurfaceNV','glVDPAURegist
 gl.add(GL_NV_vdpau_interop)
 
 GL_NV_vertex_array_range = Extension('GL_NV_vertex_array_range')
-GL_NV_vertex_array_range.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_array_range.txt'
+GL_NV_vertex_array_range.url = 'http://www.opengl.org/registry/specs/NV/vertex_array_range.txt'
 GL_NV_vertex_array_range.enumerants = ['GL_MAX_VERTEX_ARRAY_RANGE_ELEMENT_NV','GL_VERTEX_ARRAY_RANGE_LENGTH_NV','GL_VERTEX_ARRAY_RANGE_NV','GL_VERTEX_ARRAY_RANGE_POINTER_NV','GL_VERTEX_ARRAY_RANGE_VALID_NV']
 GL_NV_vertex_array_range.functions = ['glFlushVertexArrayRangeNV','glVertexArrayRangeNV']
 gl.add(GL_NV_vertex_array_range)
 
 GL_NV_vertex_array_range2 = Extension('GL_NV_vertex_array_range2')
-GL_NV_vertex_array_range2.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_array_range2.txt'
+GL_NV_vertex_array_range2.url = 'http://www.opengl.org/registry/specs/NV/vertex_array_range2.txt'
 GL_NV_vertex_array_range2.enumerants = ['GL_VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV']
 gl.add(GL_NV_vertex_array_range2)
 
 GL_NV_vertex_attrib_integer_64bit = Extension('GL_NV_vertex_attrib_integer_64bit')
-GL_NV_vertex_attrib_integer_64bit.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_attrib_integer_64bit.txt'
+GL_NV_vertex_attrib_integer_64bit.url = 'http://www.opengl.org/registry/specs/NV/vertex_attrib_integer_64bit.txt'
 GL_NV_vertex_attrib_integer_64bit.enumerants = ['GL_INT64_NV','GL_UNSIGNED_INT64_NV']
 GL_NV_vertex_attrib_integer_64bit.functions = ['glGetVertexAttribLi64vNV','glGetVertexAttribLui64vNV','glVertexAttribL1i64NV','glVertexAttribL1i64vNV','glVertexAttribL1ui64NV','glVertexAttribL1ui64vNV','glVertexAttribL2i64NV','glVertexAttribL2i64vNV','glVertexAttribL2ui64NV','glVertexAttribL2ui64vNV','glVertexAttribL3i64NV','glVertexAttribL3i64vNV','glVertexAttribL3ui64NV','glVertexAttribL3ui64vNV','glVertexAttribL4i64NV','glVertexAttribL4i64vNV','glVertexAttribL4ui64NV','glVertexAttribL4ui64vNV','glVertexAttribLFormatNV']
 gl.add(GL_NV_vertex_attrib_integer_64bit)
 
 GL_NV_vertex_buffer_unified_memory = Extension('GL_NV_vertex_buffer_unified_memory')
-GL_NV_vertex_buffer_unified_memory.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_buffer_unified_memory.txt'
+GL_NV_vertex_buffer_unified_memory.url = 'http://www.opengl.org/registry/specs/NV/vertex_buffer_unified_memory.txt'
 GL_NV_vertex_buffer_unified_memory.enumerants = ['GL_COLOR_ARRAY_ADDRESS_NV','GL_COLOR_ARRAY_LENGTH_NV','GL_DRAW_INDIRECT_ADDRESS_NV','GL_DRAW_INDIRECT_LENGTH_NV','GL_DRAW_INDIRECT_UNIFIED_NV','GL_EDGE_FLAG_ARRAY_ADDRESS_NV','GL_EDGE_FLAG_ARRAY_LENGTH_NV','GL_ELEMENT_ARRAY_ADDRESS_NV','GL_ELEMENT_ARRAY_LENGTH_NV','GL_ELEMENT_ARRAY_UNIFIED_NV','GL_FOG_COORD_ARRAY_ADDRESS_NV','GL_FOG_COORD_ARRAY_LENGTH_NV','GL_INDEX_ARRAY_ADDRESS_NV','GL_INDEX_ARRAY_LENGTH_NV','GL_NORMAL_ARRAY_ADDRESS_NV','GL_NORMAL_ARRAY_LENGTH_NV','GL_SECONDARY_COLOR_ARRAY_ADDRESS_NV','GL_SECONDARY_COLOR_ARRAY_LENGTH_NV','GL_TEXTURE_COORD_ARRAY_ADDRESS_NV','GL_TEXTURE_COORD_ARRAY_LENGTH_NV','GL_VERTEX_ARRAY_ADDRESS_NV','GL_VERTEX_ARRAY_LENGTH_NV','GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV','GL_VERTEX_ATTRIB_ARRAY_LENGTH_NV','GL_VERTEX_ATTRIB_ARRAY_UNIFIED_NV']
 GL_NV_vertex_buffer_unified_memory.functions = ['glBufferAddressRangeNV','glColorFormatNV','glEdgeFlagFormatNV','glFogCoordFormatNV','glGetIntegerui64i_vNV','glIndexFormatNV','glNormalFormatNV','glSecondaryColorFormatNV','glTexCoordFormatNV','glVertexAttribFormatNV','glVertexAttribIFormatNV','glVertexFormatNV']
 gl.add(GL_NV_vertex_buffer_unified_memory)
 
 GL_NV_vertex_program = Extension('GL_NV_vertex_program')
-GL_NV_vertex_program.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_program.txt'
+GL_NV_vertex_program.url = 'http://www.opengl.org/registry/specs/NV/vertex_program.txt'
 GL_NV_vertex_program.enumerants = ['GL_ATTRIB_ARRAY_POINTER_NV','GL_ATTRIB_ARRAY_SIZE_NV','GL_ATTRIB_ARRAY_STRIDE_NV','GL_ATTRIB_ARRAY_TYPE_NV','GL_CURRENT_ATTRIB_NV','GL_CURRENT_MATRIX_NV','GL_CURRENT_MATRIX_STACK_DEPTH_NV','GL_IDENTITY_NV','GL_INVERSE_NV','GL_INVERSE_TRANSPOSE_NV','GL_MAP1_VERTEX_ATTRIB0_4_NV','GL_MAP1_VERTEX_ATTRIB10_4_NV','GL_MAP1_VERTEX_ATTRIB11_4_NV','GL_MAP1_VERTEX_ATTRIB12_4_NV','GL_MAP1_VERTEX_ATTRIB13_4_NV','GL_MAP1_VERTEX_ATTRIB14_4_NV','GL_MAP1_VERTEX_ATTRIB15_4_NV','GL_MAP1_VERTEX_ATTRIB1_4_NV','GL_MAP1_VERTEX_ATTRIB2_4_NV','GL_MAP1_VERTEX_ATTRIB3_4_NV','GL_MAP1_VERTEX_ATTRIB4_4_NV','GL_MAP1_VERTEX_ATTRIB5_4_NV','GL_MAP1_VERTEX_ATTRIB6_4_NV','GL_MAP1_VERTEX_ATTRIB7_4_NV','GL_MAP1_VERTEX_ATTRIB8_4_NV','GL_MAP1_VERTEX_ATTRIB9_4_NV','GL_MAP2_VERTEX_ATTRIB0_4_NV','GL_MAP2_VERTEX_ATTRIB10_4_NV','GL_MAP2_VERTEX_ATTRIB11_4_NV','GL_MAP2_VERTEX_ATTRIB12_4_NV','GL_MAP2_VERTEX_ATTRIB13_4_NV','GL_MAP2_VERTEX_ATTRIB14_4_NV','GL_MAP2_VERTEX_ATTRIB15_4_NV','GL_MAP2_VERTEX_ATTRIB1_4_NV','GL_MAP2_VERTEX_ATTRIB2_4_NV','GL_MAP2_VERTEX_ATTRIB3_4_NV','GL_MAP2_VERTEX_ATTRIB4_4_NV','GL_MAP2_VERTEX_ATTRIB5_4_NV','GL_MAP2_VERTEX_ATTRIB6_4_NV','GL_MAP2_VERTEX_ATTRIB7_4_NV','GL_MAP2_VERTEX_ATTRIB8_4_NV','GL_MAP2_VERTEX_ATTRIB9_4_NV','GL_MATRIX0_NV','GL_MATRIX1_NV','GL_MATRIX2_NV','GL_MATRIX3_NV','GL_MATRIX4_NV','GL_MATRIX5_NV','GL_MATRIX6_NV','GL_MATRIX7_NV','GL_MAX_TRACK_MATRICES_NV','GL_MAX_TRACK_MATRIX_STACK_DEPTH_NV','GL_MODELVIEW_PROJECTION_NV','GL_PROGRAM_ERROR_POSITION_NV','GL_PROGRAM_LENGTH_NV','GL_PROGRAM_PARAMETER_NV','GL_PROGRAM_RESIDENT_NV','GL_PROGRAM_STRING_NV','GL_PROGRAM_TARGET_NV','GL_TRACK_MATRIX_NV','GL_TRACK_MATRIX_TRANSFORM_NV','GL_TRANSPOSE_NV','GL_VERTEX_ATTRIB_ARRAY0_NV','GL_VERTEX_ATTRIB_ARRAY10_NV','GL_VERTEX_ATTRIB_ARRAY11_NV','GL_VERTEX_ATTRIB_ARRAY12_NV','GL_VERTEX_ATTRIB_ARRAY13_NV','GL_VERTEX_ATTRIB_ARRAY14_NV','GL_VERTEX_ATTRIB_ARRAY15_NV','GL_VERTEX_ATTRIB_ARRAY1_NV','GL_VERTEX_ATTRIB_ARRAY2_NV','GL_VERTEX_ATTRIB_ARRAY3_NV','GL_VERTEX_ATTRIB_ARRAY4_NV','GL_VERTEX_ATTRIB_ARRAY5_NV','GL_VERTEX_ATTRIB_ARRAY6_NV','GL_VERTEX_ATTRIB_ARRAY7_NV','GL_VERTEX_ATTRIB_ARRAY8_NV','GL_VERTEX_ATTRIB_ARRAY9_NV','GL_VERTEX_PROGRAM_BINDING_NV','GL_VERTEX_PROGRAM_NV','GL_VERTEX_PROGRAM_POINT_SIZE_NV','GL_VERTEX_PROGRAM_TWO_SIDE_NV','GL_VERTEX_STATE_PROGRAM_NV']
 GL_NV_vertex_program.functions = ['glAreProgramsResidentNV','glIsProgramNV','glBindProgramNV','glDeleteProgramsNV','glExecuteProgramNV','glGenProgramsNV','glGetProgramParameterdvNV','glGetProgramParameterfvNV','glGetProgramStringNV','glGetProgramivNV','glGetTrackMatrixivNV','glGetVertexAttribPointervNV','glGetVertexAttribdvNV','glGetVertexAttribfvNV','glGetVertexAttribivNV','glLoadProgramNV','glProgramParameter4dNV','glProgramParameter4dvNV','glProgramParameter4fNV','glProgramParameter4fvNV','glProgramParameters4dvNV','glProgramParameters4fvNV','glRequestResidentProgramsNV','glTrackMatrixNV','glVertexAttrib1dNV','glVertexAttrib1dvNV','glVertexAttrib1fNV','glVertexAttrib1fvNV','glVertexAttrib1sNV','glVertexAttrib1svNV','glVertexAttrib2dNV','glVertexAttrib2dvNV','glVertexAttrib2fNV','glVertexAttrib2fvNV','glVertexAttrib2sNV','glVertexAttrib2svNV','glVertexAttrib3dNV','glVertexAttrib3dvNV','glVertexAttrib3fNV','glVertexAttrib3fvNV','glVertexAttrib3sNV','glVertexAttrib3svNV','glVertexAttrib4dNV','glVertexAttrib4dvNV','glVertexAttrib4fNV','glVertexAttrib4fvNV','glVertexAttrib4sNV','glVertexAttrib4svNV','glVertexAttrib4ubNV','glVertexAttrib4ubvNV','glVertexAttribPointerNV','glVertexAttribs1dvNV','glVertexAttribs1fvNV','glVertexAttribs1svNV','glVertexAttribs2dvNV','glVertexAttribs2fvNV','glVertexAttribs2svNV','glVertexAttribs3dvNV','glVertexAttribs3fvNV','glVertexAttribs3svNV','glVertexAttribs4dvNV','glVertexAttribs4fvNV','glVertexAttribs4svNV','glVertexAttribs4ubvNV']
 gl.add(GL_NV_vertex_program)
 
 GL_NV_vertex_program1_1 = Extension('GL_NV_vertex_program1_1')
-GL_NV_vertex_program1_1.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_program1_1.txt'
+GL_NV_vertex_program1_1.url = 'http://www.opengl.org/registry/specs/NV/vertex_program1_1.txt'
 gl.add(GL_NV_vertex_program1_1)
 
 GL_NV_vertex_program2 = Extension('GL_NV_vertex_program2')
-GL_NV_vertex_program2.url = 'http://www.opengl.org/registry/specs/gl/NV/vertex_program2.txt'
+GL_NV_vertex_program2.url = 'http://www.opengl.org/registry/specs/NV/vertex_program2.txt'
 gl.add(GL_NV_vertex_program2)
 
 GL_NV_vertex_program2_option = Extension('GL_NV_vertex_program2_option')
@@ -44237,52 +44260,52 @@ GL_NV_vertex_program4.enumerants = ['GL_VERTEX_ATTRIB_ARRAY_INTEGER_NV']
 gl.add(GL_NV_vertex_program4)
 
 GL_NV_video_capture = Extension('GL_NV_video_capture')
-GL_NV_video_capture.url = 'http://www.opengl.org/registry/specs/gl/NV/video_capture.txt'
+GL_NV_video_capture.url = 'http://www.opengl.org/registry/specs/NV/video_capture.txt'
 GL_NV_video_capture.enumerants = ['GL_FAILURE_NV','GL_FIELD_LOWER_NV','GL_FIELD_UPPER_NV','GL_LAST_VIDEO_CAPTURE_STATUS_NV','GL_NEXT_VIDEO_CAPTURE_BUFFER_STATUS_NV','GL_NUM_VIDEO_CAPTURE_STREAMS_NV','GL_PARTIAL_SUCCESS_NV','GL_SUCCESS_NV','GL_VIDEO_BUFFER_BINDING_NV','GL_VIDEO_BUFFER_INTERNAL_FORMAT_NV','GL_VIDEO_BUFFER_NV','GL_VIDEO_BUFFER_PITCH_NV','GL_VIDEO_CAPTURE_FIELD_LOWER_HEIGHT_NV','GL_VIDEO_CAPTURE_FIELD_UPPER_HEIGHT_NV','GL_VIDEO_CAPTURE_FRAME_HEIGHT_NV','GL_VIDEO_CAPTURE_FRAME_WIDTH_NV','GL_VIDEO_CAPTURE_SURFACE_ORIGIN_NV','GL_VIDEO_CAPTURE_TO_422_SUPPORTED_NV','GL_VIDEO_COLOR_CONVERSION_MATRIX_NV','GL_VIDEO_COLOR_CONVERSION_MAX_NV','GL_VIDEO_COLOR_CONVERSION_MIN_NV','GL_VIDEO_COLOR_CONVERSION_OFFSET_NV','GL_YCBAYCR8A_4224_NV','GL_YCBYCR8_422_NV','GL_Z4Y12Z4CB12Z4A12Z4Y12Z4CR12Z4A12_4224_NV','GL_Z4Y12Z4CB12Z4CR12_444_NV','GL_Z4Y12Z4CB12Z4Y12Z4CR12_422_NV','GL_Z6Y10Z6CB10Z6A10Z6Y10Z6CR10Z6A10_4224_NV','GL_Z6Y10Z6CB10Z6Y10Z6CR10_422_NV']
 GL_NV_video_capture.functions = ['glVideoCaptureNV','glBeginVideoCaptureNV','glBindVideoCaptureStreamBufferNV','glBindVideoCaptureStreamTextureNV','glEndVideoCaptureNV','glGetVideoCaptureStreamdvNV','glGetVideoCaptureStreamfvNV','glGetVideoCaptureStreamivNV','glGetVideoCaptureivNV','glVideoCaptureStreamParameterdvNV','glVideoCaptureStreamParameterfvNV','glVideoCaptureStreamParameterivNV']
 gl.add(GL_NV_video_capture)
 
 GL_OES_byte_coordinates = Extension('GL_OES_byte_coordinates')
-GL_OES_byte_coordinates.url = 'http://www.opengl.org/registry/specs/gl/OES/OES_byte_coordinates.txt'
+GL_OES_byte_coordinates.url = 'http://www.opengl.org/registry/specs/OES/OES_byte_coordinates.txt'
 gl.add(GL_OES_byte_coordinates)
 
 GL_OES_compressed_paletted_texture = Extension('GL_OES_compressed_paletted_texture')
-GL_OES_compressed_paletted_texture.url = 'http://www.opengl.org/registry/specs/gl/OES/OES_compressed_paletted_texture.txt'
+GL_OES_compressed_paletted_texture.url = 'http://www.opengl.org/registry/specs/OES/OES_compressed_paletted_texture.txt'
 GL_OES_compressed_paletted_texture.enumerants = ['GL_PALETTE4_R5_G6_B5_OES','GL_PALETTE4_RGB5_A1_OES','GL_PALETTE4_RGB8_OES','GL_PALETTE4_RGBA4_OES','GL_PALETTE4_RGBA8_OES','GL_PALETTE8_R5_G6_B5_OES','GL_PALETTE8_RGB5_A1_OES','GL_PALETTE8_RGB8_OES','GL_PALETTE8_RGBA4_OES','GL_PALETTE8_RGBA8_OES']
 gl.add(GL_OES_compressed_paletted_texture)
 
 GL_OES_read_format = Extension('GL_OES_read_format')
-GL_OES_read_format.url = 'http://www.opengl.org/registry/specs/gl/OES/OES_read_format.txt'
+GL_OES_read_format.url = 'http://www.opengl.org/registry/specs/OES/OES_read_format.txt'
 GL_OES_read_format.enumerants = ['GL_IMPLEMENTATION_COLOR_READ_FORMAT_OES','GL_IMPLEMENTATION_COLOR_READ_TYPE_OES']
 gl.add(GL_OES_read_format)
 
 GL_OES_single_precision = Extension('GL_OES_single_precision')
-GL_OES_single_precision.url = 'http://www.opengl.org/registry/specs/gl/OES/OES_single_precision.txt'
+GL_OES_single_precision.url = 'http://www.opengl.org/registry/specs/OES/OES_single_precision.txt'
 GL_OES_single_precision.functions = ['glClearDepthfOES','glClipPlanefOES','glDepthRangefOES','glFrustumfOES','glGetClipPlanefOES','glOrthofOES']
 gl.add(GL_OES_single_precision)
 
 GL_OML_interlace = Extension('GL_OML_interlace')
-GL_OML_interlace.url = 'http://www.opengl.org/registry/specs/gl/OML/interlace.txt'
+GL_OML_interlace.url = 'http://www.opengl.org/registry/specs/OML/interlace.txt'
 GL_OML_interlace.enumerants = ['GL_INTERLACE_OML','GL_INTERLACE_READ_OML']
 gl.add(GL_OML_interlace)
 
 GL_OML_resample = Extension('GL_OML_resample')
-GL_OML_resample.url = 'http://www.opengl.org/registry/specs/gl/OML/resample.txt'
+GL_OML_resample.url = 'http://www.opengl.org/registry/specs/OML/resample.txt'
 GL_OML_resample.enumerants = ['GL_PACK_RESAMPLE_OML','GL_RESAMPLE_AVERAGE_OML','GL_RESAMPLE_DECIMATE_OML','GL_RESAMPLE_REPLICATE_OML','GL_RESAMPLE_ZERO_FILL_OML','GL_UNPACK_RESAMPLE_OML']
 gl.add(GL_OML_resample)
 
 GL_OML_subsample = Extension('GL_OML_subsample')
-GL_OML_subsample.url = 'http://www.opengl.org/registry/specs/gl/OML/subsample.txt'
+GL_OML_subsample.url = 'http://www.opengl.org/registry/specs/OML/subsample.txt'
 GL_OML_subsample.enumerants = ['GL_FORMAT_SUBSAMPLE_244_244_OML','GL_FORMAT_SUBSAMPLE_24_24_OML']
 gl.add(GL_OML_subsample)
 
 GL_PGI_misc_hints = Extension('GL_PGI_misc_hints')
-GL_PGI_misc_hints.url = 'http://www.opengl.org/registry/specs/gl/PGI/misc_hints.txt'
+GL_PGI_misc_hints.url = 'http://www.opengl.org/registry/specs/PGI/misc_hints.txt'
 GL_PGI_misc_hints.enumerants = ['GL_ALLOW_DRAW_FRG_HINT_PGI','GL_ALLOW_DRAW_MEM_HINT_PGI','GL_ALLOW_DRAW_OBJ_HINT_PGI','GL_ALLOW_DRAW_WIN_HINT_PGI','GL_ALWAYS_FAST_HINT_PGI','GL_ALWAYS_SOFT_HINT_PGI','GL_BACK_NORMALS_HINT_PGI','GL_CLIP_FAR_HINT_PGI','GL_CLIP_NEAR_HINT_PGI','GL_CONSERVE_MEMORY_HINT_PGI','GL_FULL_STIPPLE_HINT_PGI','GL_NATIVE_GRAPHICS_BEGIN_HINT_PGI','GL_NATIVE_GRAPHICS_END_HINT_PGI','GL_NATIVE_GRAPHICS_HANDLE_PGI','GL_PREFER_DOUBLEBUFFER_HINT_PGI','GL_RECLAIM_MEMORY_HINT_PGI','GL_STRICT_DEPTHFUNC_HINT_PGI','GL_STRICT_LIGHTING_HINT_PGI','GL_STRICT_SCISSOR_HINT_PGI','GL_WIDE_LINE_HINT_PGI']
 gl.add(GL_PGI_misc_hints)
 
 GL_PGI_vertex_hints = Extension('GL_PGI_vertex_hints')
-GL_PGI_vertex_hints.url = 'http://www.opengl.org/registry/specs/gl/PGI/vertex_hints.txt'
+GL_PGI_vertex_hints.url = 'http://www.opengl.org/registry/specs/PGI/vertex_hints.txt'
 GL_PGI_vertex_hints.enumerants = ['GL_COLOR3_BIT_PGI','GL_COLOR4_BIT_PGI','GL_EDGEFLAG_BIT_PGI','GL_INDEX_BIT_PGI','GL_MATERIAL_SIDE_HINT_PGI','GL_MAT_AMBIENT_AND_DIFFUSE_BIT_PGI','GL_MAT_AMBIENT_BIT_PGI','GL_MAT_COLOR_INDEXES_BIT_PGI','GL_MAT_DIFFUSE_BIT_PGI','GL_MAT_EMISSION_BIT_PGI','GL_MAT_SHININESS_BIT_PGI','GL_MAT_SPECULAR_BIT_PGI','GL_MAX_VERTEX_HINT_PGI','GL_NORMAL_BIT_PGI','GL_TEXCOORD1_BIT_PGI','GL_TEXCOORD2_BIT_PGI','GL_TEXCOORD3_BIT_PGI','GL_TEXCOORD4_BIT_PGI','GL_VERTEX23_BIT_PGI','GL_VERTEX4_BIT_PGI','GL_VERTEX_CONSISTENT_HINT_PGI','GL_VERTEX_DATA_HINT_PGI']
 gl.add(GL_PGI_vertex_hints)
 
@@ -44318,174 +44341,174 @@ GL_REGAL_log.functions = ['glLogMessageCallbackREGAL']
 gl.add(GL_REGAL_log)
 
 GL_REND_screen_coordinates = Extension('GL_REND_screen_coordinates')
-GL_REND_screen_coordinates.url = 'http://www.opengl.org/registry/specs/gl/REND/screen_coordinates.txt'
+GL_REND_screen_coordinates.url = 'http://www.opengl.org/registry/specs/REND/screen_coordinates.txt'
 GL_REND_screen_coordinates.enumerants = ['GL_INVERTED_SCREEN_W_REND','GL_SCREEN_COORDINATES_REND']
 gl.add(GL_REND_screen_coordinates)
 
 GL_S3_s3tc = Extension('GL_S3_s3tc')
-GL_S3_s3tc.url = 'http://www.opengl.org/registry/specs/gl/S3/s3tc.txt'
+GL_S3_s3tc.url = 'http://www.opengl.org/registry/specs/S3/s3tc.txt'
 GL_S3_s3tc.enumerants = ['GL_RGB4_S3TC','GL_RGBA4_DXT5_S3TC','GL_RGBA4_S3TC','GL_RGBA_DXT5_S3TC','GL_RGBA_S3TC','GL_RGB_S3TC']
 gl.add(GL_S3_s3tc)
 
 GL_SGIS_color_range = Extension('GL_SGIS_color_range')
-GL_SGIS_color_range.url = 'http://www.opengl.org/registry/specs/gl/SGIS/color_range.txt'
+GL_SGIS_color_range.url = 'http://www.opengl.org/registry/specs/SGIS/color_range.txt'
 GL_SGIS_color_range.enumerants = ['GL_EXTENDED_RANGE_SGIS','GL_MAX_ALPHA_SGIS','GL_MAX_BLUE_SGIS','GL_MAX_GREEN_SGIS','GL_MAX_RED_SGIS','GL_MIN_ALPHA_SGIS','GL_MIN_BLUE_SGIS','GL_MIN_GREEN_SGIS','GL_MIN_RED_SGIS']
 gl.add(GL_SGIS_color_range)
 
 GL_SGIS_detail_texture = Extension('GL_SGIS_detail_texture')
-GL_SGIS_detail_texture.url = 'http://www.opengl.org/registry/specs/gl/SGIS/detail_texture.txt'
+GL_SGIS_detail_texture.url = 'http://www.opengl.org/registry/specs/SGIS/detail_texture.txt'
 GL_SGIS_detail_texture.functions = ['glDetailTexFuncSGIS','glGetDetailTexFuncSGIS']
 gl.add(GL_SGIS_detail_texture)
 
 GL_SGIS_fog_function = Extension('GL_SGIS_fog_function')
-GL_SGIS_fog_function.url = 'http://www.opengl.org/registry/specs/gl/SGIS/fog_func.txt'
+GL_SGIS_fog_function.url = 'http://www.opengl.org/registry/specs/SGIS/fog_func.txt'
 GL_SGIS_fog_function.functions = ['glFogFuncSGIS','glGetFogFuncSGIS']
 gl.add(GL_SGIS_fog_function)
 
 GL_SGIS_generate_mipmap = Extension('GL_SGIS_generate_mipmap')
-GL_SGIS_generate_mipmap.url = 'http://www.opengl.org/registry/specs/gl/SGIS/generate_mipmap.txt'
+GL_SGIS_generate_mipmap.url = 'http://www.opengl.org/registry/specs/SGIS/generate_mipmap.txt'
 GL_SGIS_generate_mipmap.enumerants = ['GL_GENERATE_MIPMAP_HINT_SGIS','GL_GENERATE_MIPMAP_SGIS']
 gl.add(GL_SGIS_generate_mipmap)
 
 GL_SGIS_multisample = Extension('GL_SGIS_multisample')
-GL_SGIS_multisample.url = 'http://www.opengl.org/registry/specs/gl/SGIS/multisample.txt'
+GL_SGIS_multisample.url = 'http://www.opengl.org/registry/specs/SGIS/multisample.txt'
 GL_SGIS_multisample.enumerants = ['GL_1PASS_SGIS','GL_2PASS_0_SGIS','GL_2PASS_1_SGIS','GL_4PASS_0_SGIS','GL_4PASS_1_SGIS','GL_4PASS_2_SGIS','GL_4PASS_3_SGIS','GL_MULTISAMPLE_SGIS','GL_SAMPLES_SGIS','GL_SAMPLE_ALPHA_TO_MASK_SGIS','GL_SAMPLE_ALPHA_TO_ONE_SGIS','GL_SAMPLE_BUFFERS_SGIS','GL_SAMPLE_MASK_INVERT_SGIS','GL_SAMPLE_MASK_SGIS','GL_SAMPLE_MASK_VALUE_SGIS','GL_SAMPLE_PATTERN_SGIS']
 GL_SGIS_multisample.functions = ['glSampleMaskSGIS','glSamplePatternSGIS']
 gl.add(GL_SGIS_multisample)
 
 GL_SGIS_pixel_texture = Extension('GL_SGIS_pixel_texture')
-GL_SGIS_pixel_texture.url = 'http://www.opengl.org/registry/specs/gl/SGIS/pixel_texture.txt'
+GL_SGIS_pixel_texture.url = 'http://www.opengl.org/registry/specs/SGIS/pixel_texture.txt'
 gl.add(GL_SGIS_pixel_texture)
 
 GL_SGIS_point_line_texgen = Extension('GL_SGIS_point_line_texgen')
-GL_SGIS_point_line_texgen.url = 'http://www.opengl.org/registry/specs/gl/SGIS/point_line_texgen.txt'
+GL_SGIS_point_line_texgen.url = 'http://www.opengl.org/registry/specs/SGIS/point_line_texgen.txt'
 GL_SGIS_point_line_texgen.enumerants = ['GL_EYE_DISTANCE_TO_LINE_SGIS','GL_EYE_DISTANCE_TO_POINT_SGIS','GL_EYE_LINE_SGIS','GL_EYE_POINT_SGIS','GL_OBJECT_DISTANCE_TO_LINE_SGIS','GL_OBJECT_DISTANCE_TO_POINT_SGIS','GL_OBJECT_LINE_SGIS','GL_OBJECT_POINT_SGIS']
 gl.add(GL_SGIS_point_line_texgen)
 
 GL_SGIS_sharpen_texture = Extension('GL_SGIS_sharpen_texture')
-GL_SGIS_sharpen_texture.url = 'http://www.opengl.org/registry/specs/gl/SGIS/sharpen_texture.txt'
+GL_SGIS_sharpen_texture.url = 'http://www.opengl.org/registry/specs/SGIS/sharpen_texture.txt'
 GL_SGIS_sharpen_texture.functions = ['glGetSharpenTexFuncSGIS','glSharpenTexFuncSGIS']
 gl.add(GL_SGIS_sharpen_texture)
 
 GL_SGIS_texture4D = Extension('GL_SGIS_texture4D')
-GL_SGIS_texture4D.url = 'http://www.opengl.org/registry/specs/gl/SGIS/texture4D.txt'
+GL_SGIS_texture4D.url = 'http://www.opengl.org/registry/specs/SGIS/texture4D.txt'
 GL_SGIS_texture4D.functions = ['glTexImage4DSGIS','glTexSubImage4DSGIS']
 gl.add(GL_SGIS_texture4D)
 
 GL_SGIS_texture_border_clamp = Extension('GL_SGIS_texture_border_clamp')
-GL_SGIS_texture_border_clamp.url = 'http://www.opengl.org/registry/specs/gl/SGIS/texture_border_clamp.txt'
+GL_SGIS_texture_border_clamp.url = 'http://www.opengl.org/registry/specs/SGIS/texture_border_clamp.txt'
 GL_SGIS_texture_border_clamp.enumerants = ['GL_CLAMP_TO_BORDER_SGIS']
 gl.add(GL_SGIS_texture_border_clamp)
 
 GL_SGIS_texture_edge_clamp = Extension('GL_SGIS_texture_edge_clamp')
-GL_SGIS_texture_edge_clamp.url = 'http://www.opengl.org/registry/specs/gl/SGIS/texture_edge_clamp.txt'
+GL_SGIS_texture_edge_clamp.url = 'http://www.opengl.org/registry/specs/SGIS/texture_edge_clamp.txt'
 GL_SGIS_texture_edge_clamp.enumerants = ['GL_CLAMP_TO_EDGE_SGIS']
 gl.add(GL_SGIS_texture_edge_clamp)
 
 GL_SGIS_texture_filter4 = Extension('GL_SGIS_texture_filter4')
-GL_SGIS_texture_filter4.url = 'http://www.opengl.org/registry/specs/gl/SGIS/texture_filter4.txt'
+GL_SGIS_texture_filter4.url = 'http://www.opengl.org/registry/specs/SGIS/texture_filter4.txt'
 GL_SGIS_texture_filter4.functions = ['glGetTexFilterFuncSGIS','glTexFilterFuncSGIS']
 gl.add(GL_SGIS_texture_filter4)
 
 GL_SGIS_texture_lod = Extension('GL_SGIS_texture_lod')
-GL_SGIS_texture_lod.url = 'http://www.opengl.org/registry/specs/gl/SGIS/texture_lod.txt'
+GL_SGIS_texture_lod.url = 'http://www.opengl.org/registry/specs/SGIS/texture_lod.txt'
 GL_SGIS_texture_lod.enumerants = ['GL_TEXTURE_BASE_LEVEL_SGIS','GL_TEXTURE_MAX_LEVEL_SGIS','GL_TEXTURE_MAX_LOD_SGIS','GL_TEXTURE_MIN_LOD_SGIS']
 gl.add(GL_SGIS_texture_lod)
 
 GL_SGIS_texture_select = Extension('GL_SGIS_texture_select')
-GL_SGIS_texture_select.url = 'http://www.opengl.org/registry/specs/gl/SGIS/texture_select.txt'
+GL_SGIS_texture_select.url = 'http://www.opengl.org/registry/specs/SGIS/texture_select.txt'
 gl.add(GL_SGIS_texture_select)
 
 GL_SGIX_async = Extension('GL_SGIX_async')
-GL_SGIX_async.url = 'http://www.opengl.org/registry/specs/gl/SGIX/async.txt'
+GL_SGIX_async.url = 'http://www.opengl.org/registry/specs/SGIX/async.txt'
 GL_SGIX_async.enumerants = ['GL_ASYNC_MARKER_SGIX']
 GL_SGIX_async.functions = ['glIsAsyncMarkerSGIX','glFinishAsyncSGIX','glPollAsyncSGIX','glGenAsyncMarkersSGIX','glAsyncMarkerSGIX','glDeleteAsyncMarkersSGIX']
 gl.add(GL_SGIX_async)
 
 GL_SGIX_async_histogram = Extension('GL_SGIX_async_histogram')
-GL_SGIX_async_histogram.url = 'http://www.opengl.org/registry/specs/gl/SGIX/async_histogram.txt'
+GL_SGIX_async_histogram.url = 'http://www.opengl.org/registry/specs/SGIX/async_histogram.txt'
 GL_SGIX_async_histogram.enumerants = ['GL_ASYNC_HISTOGRAM_SGIX','GL_MAX_ASYNC_HISTOGRAM_SGIX']
 gl.add(GL_SGIX_async_histogram)
 
 GL_SGIX_async_pixel = Extension('GL_SGIX_async_pixel')
-GL_SGIX_async_pixel.url = 'http://www.opengl.org/registry/specs/gl/SGIX/async_pixel.txt'
+GL_SGIX_async_pixel.url = 'http://www.opengl.org/registry/specs/SGIX/async_pixel.txt'
 GL_SGIX_async_pixel.enumerants = ['GL_ASYNC_DRAW_PIXELS_SGIX','GL_ASYNC_READ_PIXELS_SGIX','GL_ASYNC_TEX_IMAGE_SGIX','GL_MAX_ASYNC_DRAW_PIXELS_SGIX','GL_MAX_ASYNC_READ_PIXELS_SGIX','GL_MAX_ASYNC_TEX_IMAGE_SGIX']
 gl.add(GL_SGIX_async_pixel)
 
 GL_SGIX_blend_alpha_minmax = Extension('GL_SGIX_blend_alpha_minmax')
-GL_SGIX_blend_alpha_minmax.url = 'http://www.opengl.org/registry/specs/gl/SGIX/blend_alpha_minmax.txt'
+GL_SGIX_blend_alpha_minmax.url = 'http://www.opengl.org/registry/specs/SGIX/blend_alpha_minmax.txt'
 GL_SGIX_blend_alpha_minmax.enumerants = ['GL_ALPHA_MAX_SGIX','GL_ALPHA_MIN_SGIX']
 gl.add(GL_SGIX_blend_alpha_minmax)
 
 GL_SGIX_clipmap = Extension('GL_SGIX_clipmap')
-GL_SGIX_clipmap.url = 'http://www.opengl.org/registry/specs/gl/SGIX/clipmap.txt'
+GL_SGIX_clipmap.url = 'http://www.opengl.org/registry/specs/SGIX/clipmap.txt'
 gl.add(GL_SGIX_clipmap)
 
 GL_SGIX_convolution_accuracy = Extension('GL_SGIX_convolution_accuracy')
-GL_SGIX_convolution_accuracy.url = 'http://www.opengl.org/registry/specs/gl/SGIX/convolution_accuracy.txt'
+GL_SGIX_convolution_accuracy.url = 'http://www.opengl.org/registry/specs/SGIX/convolution_accuracy.txt'
 GL_SGIX_convolution_accuracy.enumerants = ['GL_CONVOLUTION_HINT_SGIX']
 gl.add(GL_SGIX_convolution_accuracy)
 
 GL_SGIX_depth_texture = Extension('GL_SGIX_depth_texture')
-GL_SGIX_depth_texture.url = 'http://www.opengl.org/registry/specs/gl/SGIX/depth_texture.txt'
+GL_SGIX_depth_texture.url = 'http://www.opengl.org/registry/specs/SGIX/depth_texture.txt'
 GL_SGIX_depth_texture.enumerants = ['GL_DEPTH_COMPONENT16_SGIX','GL_DEPTH_COMPONENT24_SGIX','GL_DEPTH_COMPONENT32_SGIX']
 gl.add(GL_SGIX_depth_texture)
 
 GL_SGIX_flush_raster = Extension('GL_SGIX_flush_raster')
-GL_SGIX_flush_raster.url = 'http://www.opengl.org/registry/specs/gl/SGIX/flush_raster.txt'
+GL_SGIX_flush_raster.url = 'http://www.opengl.org/registry/specs/SGIX/flush_raster.txt'
 GL_SGIX_flush_raster.functions = ['glFlushRasterSGIX']
 gl.add(GL_SGIX_flush_raster)
 
 GL_SGIX_fog_offset = Extension('GL_SGIX_fog_offset')
-GL_SGIX_fog_offset.url = 'http://www.opengl.org/registry/specs/gl/SGIX/fog_offset.txt'
+GL_SGIX_fog_offset.url = 'http://www.opengl.org/registry/specs/SGIX/fog_offset.txt'
 GL_SGIX_fog_offset.enumerants = ['GL_FOG_OFFSET_SGIX','GL_FOG_OFFSET_VALUE_SGIX']
 gl.add(GL_SGIX_fog_offset)
 
 GL_SGIX_fog_texture = Extension('GL_SGIX_fog_texture')
-GL_SGIX_fog_texture.url = 'http://www.opengl.org/registry/specs/gl/SGIX/fog_texture.txt'
+GL_SGIX_fog_texture.url = 'http://www.opengl.org/registry/specs/SGIX/fog_texture.txt'
 GL_SGIX_fog_texture.enumerants = ['GL_FOG_PATCHY_FACTOR_SGIX','GL_FRAGMENT_FOG_SGIX','GL_TEXTURE_FOG_SGIX']
 GL_SGIX_fog_texture.functions = ['glTextureFogSGIX']
 gl.add(GL_SGIX_fog_texture)
 
 GL_SGIX_fragment_specular_lighting = Extension('GL_SGIX_fragment_specular_lighting')
-GL_SGIX_fragment_specular_lighting.url = 'http://www.opengl.org/registry/specs/gl/SGIX/fragment_specular_lighting.txt'
+GL_SGIX_fragment_specular_lighting.url = 'http://www.opengl.org/registry/specs/SGIX/fragment_specular_lighting.txt'
 GL_SGIX_fragment_specular_lighting.functions = ['glFragmentColorMaterialSGIX','glFragmentLightModelfSGIX','glFragmentLightModelfvSGIX','glFragmentLightModeliSGIX','glFragmentLightModelivSGIX','glFragmentLightfSGIX','glFragmentLightfvSGIX','glFragmentLightiSGIX','glFragmentLightivSGIX','glFragmentMaterialfSGIX','glFragmentMaterialfvSGIX','glFragmentMaterialiSGIX','glFragmentMaterialivSGIX','glGetFragmentLightfvSGIX','glGetFragmentLightivSGIX','glGetFragmentMaterialfvSGIX','glGetFragmentMaterialivSGIX']
 gl.add(GL_SGIX_fragment_specular_lighting)
 
 GL_SGIX_framezoom = Extension('GL_SGIX_framezoom')
-GL_SGIX_framezoom.url = 'http://www.opengl.org/registry/specs/gl/SGIX/framezoom.txt'
+GL_SGIX_framezoom.url = 'http://www.opengl.org/registry/specs/SGIX/framezoom.txt'
 GL_SGIX_framezoom.functions = ['glFrameZoomSGIX']
 gl.add(GL_SGIX_framezoom)
 
 GL_SGIX_interlace = Extension('GL_SGIX_interlace')
-GL_SGIX_interlace.url = 'http://www.opengl.org/registry/specs/gl/SGIX/interlace.txt'
+GL_SGIX_interlace.url = 'http://www.opengl.org/registry/specs/SGIX/interlace.txt'
 GL_SGIX_interlace.enumerants = ['GL_INTERLACE_SGIX']
 gl.add(GL_SGIX_interlace)
 
 GL_SGIX_ir_instrument1 = Extension('GL_SGIX_ir_instrument1')
-GL_SGIX_ir_instrument1.url = 'http://www.opengl.org/registry/specs/gl/SGIX/ir_instrument1.txt'
+GL_SGIX_ir_instrument1.url = 'http://www.opengl.org/registry/specs/SGIX/ir_instrument1.txt'
 gl.add(GL_SGIX_ir_instrument1)
 
 GL_SGIX_list_priority = Extension('GL_SGIX_list_priority')
-GL_SGIX_list_priority.url = 'http://www.opengl.org/registry/specs/gl/SGIX/list_priority.txt'
+GL_SGIX_list_priority.url = 'http://www.opengl.org/registry/specs/SGIX/list_priority.txt'
 gl.add(GL_SGIX_list_priority)
 
 GL_SGIX_pixel_texture = Extension('GL_SGIX_pixel_texture')
-GL_SGIX_pixel_texture.url = 'http://www.opengl.org/registry/specs/gl/SGIX/sgix_pixel_texture.txt'
+GL_SGIX_pixel_texture.url = 'http://www.opengl.org/registry/specs/SGIX/sgix_pixel_texture.txt'
 GL_SGIX_pixel_texture.functions = ['glPixelTexGenSGIX']
 gl.add(GL_SGIX_pixel_texture)
 
 GL_SGIX_pixel_texture_bits = Extension('GL_SGIX_pixel_texture_bits')
-GL_SGIX_pixel_texture_bits.url = 'http://www.opengl.org/registry/specs/gl/SGIX/pixel_texture_bits.txt'
+GL_SGIX_pixel_texture_bits.url = 'http://www.opengl.org/registry/specs/SGIX/pixel_texture_bits.txt'
 gl.add(GL_SGIX_pixel_texture_bits)
 
 GL_SGIX_reference_plane = Extension('GL_SGIX_reference_plane')
-GL_SGIX_reference_plane.url = 'http://www.opengl.org/registry/specs/gl/SGIX/reference_plane.txt'
+GL_SGIX_reference_plane.url = 'http://www.opengl.org/registry/specs/SGIX/reference_plane.txt'
 GL_SGIX_reference_plane.functions = ['glReferencePlaneSGIX']
 gl.add(GL_SGIX_reference_plane)
 
 GL_SGIX_resample = Extension('GL_SGIX_resample')
-GL_SGIX_resample.url = 'http://www.opengl.org/registry/specs/gl/SGIX/resample.txt'
+GL_SGIX_resample.url = 'http://www.opengl.org/registry/specs/SGIX/resample.txt'
 GL_SGIX_resample.enumerants = ['GL_PACK_RESAMPLE_SGIX','GL_RESAMPLE_DECIMATE_SGIX','GL_RESAMPLE_REPLICATE_SGIX','GL_RESAMPLE_ZERO_FILL_SGIX','GL_UNPACK_RESAMPLE_SGIX']
 gl.add(GL_SGIX_resample)
 
@@ -44495,97 +44518,97 @@ GL_SGIX_shadow.enumerants = ['GL_TEXTURE_COMPARE_OPERATOR_SGIX','GL_TEXTURE_COMP
 gl.add(GL_SGIX_shadow)
 
 GL_SGIX_shadow_ambient = Extension('GL_SGIX_shadow_ambient')
-GL_SGIX_shadow_ambient.url = 'http://www.opengl.org/registry/specs/gl/SGIX/shadow_ambient.txt'
+GL_SGIX_shadow_ambient.url = 'http://www.opengl.org/registry/specs/SGIX/shadow_ambient.txt'
 GL_SGIX_shadow_ambient.enumerants = ['GL_SHADOW_AMBIENT_SGIX']
 gl.add(GL_SGIX_shadow_ambient)
 
 GL_SGIX_sprite = Extension('GL_SGIX_sprite')
-GL_SGIX_sprite.url = 'http://www.opengl.org/registry/specs/gl/SGIX/sprite.txt'
+GL_SGIX_sprite.url = 'http://www.opengl.org/registry/specs/SGIX/sprite.txt'
 GL_SGIX_sprite.functions = ['glSpriteParameterfSGIX','glSpriteParameterfvSGIX','glSpriteParameteriSGIX','glSpriteParameterivSGIX']
 gl.add(GL_SGIX_sprite)
 
 GL_SGIX_tag_sample_buffer = Extension('GL_SGIX_tag_sample_buffer')
-GL_SGIX_tag_sample_buffer.url = 'http://www.opengl.org/registry/specs/gl/SGIX/tag_sample_buffer.txt'
+GL_SGIX_tag_sample_buffer.url = 'http://www.opengl.org/registry/specs/SGIX/tag_sample_buffer.txt'
 GL_SGIX_tag_sample_buffer.functions = ['glTagSampleBufferSGIX']
 gl.add(GL_SGIX_tag_sample_buffer)
 
 GL_SGIX_texture_add_env = Extension('GL_SGIX_texture_add_env')
-GL_SGIX_texture_add_env.url = 'http://www.opengl.org/registry/specs/gl/SGIX/texture_env_add.txt'
+GL_SGIX_texture_add_env.url = 'http://www.opengl.org/registry/specs/SGIX/texture_env_add.txt'
 gl.add(GL_SGIX_texture_add_env)
 
 GL_SGIX_texture_coordinate_clamp = Extension('GL_SGIX_texture_coordinate_clamp')
-GL_SGIX_texture_coordinate_clamp.url = 'http://www.opengl.org/registry/specs/gl/SGIX/texture_coordinate_clamp.txt'
+GL_SGIX_texture_coordinate_clamp.url = 'http://www.opengl.org/registry/specs/SGIX/texture_coordinate_clamp.txt'
 GL_SGIX_texture_coordinate_clamp.enumerants = ['GL_TEXTURE_MAX_CLAMP_R_SGIX','GL_TEXTURE_MAX_CLAMP_S_SGIX','GL_TEXTURE_MAX_CLAMP_T_SGIX']
 gl.add(GL_SGIX_texture_coordinate_clamp)
 
 GL_SGIX_texture_lod_bias = Extension('GL_SGIX_texture_lod_bias')
-GL_SGIX_texture_lod_bias.url = 'http://www.opengl.org/registry/specs/gl/SGIX/texture_lod_bias.txt'
+GL_SGIX_texture_lod_bias.url = 'http://www.opengl.org/registry/specs/SGIX/texture_lod_bias.txt'
 gl.add(GL_SGIX_texture_lod_bias)
 
 GL_SGIX_texture_multi_buffer = Extension('GL_SGIX_texture_multi_buffer')
-GL_SGIX_texture_multi_buffer.url = 'http://www.opengl.org/registry/specs/gl/SGIX/texture_multi_buffer.txt'
+GL_SGIX_texture_multi_buffer.url = 'http://www.opengl.org/registry/specs/SGIX/texture_multi_buffer.txt'
 GL_SGIX_texture_multi_buffer.enumerants = ['GL_TEXTURE_MULTI_BUFFER_HINT_SGIX']
 gl.add(GL_SGIX_texture_multi_buffer)
 
 GL_SGIX_texture_range = Extension('GL_SGIX_texture_range')
-GL_SGIX_texture_range.url = 'http://www.opengl.org/registry/specs/gl/SGIX/texture_range.txt'
+GL_SGIX_texture_range.url = 'http://www.opengl.org/registry/specs/SGIX/texture_range.txt'
 GL_SGIX_texture_range.enumerants = ['GL_ALPHA16_EXTENDED_RANGE_SGIX','GL_ALPHA16_SIGNED_SGIX','GL_ALPHA_EXTENDED_RANGE_SGIX','GL_ALPHA_SIGNED_SGIX','GL_INTENSITY16_EXTENDED_RANGE_SGIX','GL_INTENSITY16_SIGNED_SGIX','GL_INTENSITY_EXTENDED_RANGE_SGIX','GL_INTENSITY_SIGNED_SGIX','GL_LUMINANCE16_ALPHA16_EXTENDED_RANGE_SGIX','GL_LUMINANCE16_ALPHA16_SIGNED_SGIX','GL_LUMINANCE16_EXTENDED_RANGE_SGIX','GL_LUMINANCE16_SIGNED_SGIX','GL_LUMINANCE_ALPHA_EXTENDED_RANGE_SGIX','GL_LUMINANCE_ALPHA_SIGNED_SGIX','GL_LUMINANCE_EXTENDED_RANGE_SGIX','GL_LUMINANCE_SIGNED_SGIX','GL_MAX_INTENSITY_SGIS','GL_MAX_LUMINANCE_SGIS','GL_MIN_INTENSITY_SGIS','GL_MIN_LUMINANCE_SGIS','GL_RGB16_EXTENDED_RANGE_SGIX','GL_RGB16_SIGNED_SGIX','GL_RGBA16_EXTENDED_RANGE_SGIX','GL_RGBA16_SIGNED_SGIX','GL_RGBA_EXTENDED_RANGE_SGIX','GL_RGBA_SIGNED_SGIX','GL_RGB_EXTENDED_RANGE_SGIX','GL_RGB_SIGNED_SGIX']
 gl.add(GL_SGIX_texture_range)
 
 GL_SGIX_texture_scale_bias = Extension('GL_SGIX_texture_scale_bias')
-GL_SGIX_texture_scale_bias.url = 'http://www.opengl.org/registry/specs/gl/SGIX/texture_scale_bias.txt'
+GL_SGIX_texture_scale_bias.url = 'http://www.opengl.org/registry/specs/SGIX/texture_scale_bias.txt'
 GL_SGIX_texture_scale_bias.enumerants = ['GL_POST_TEXTURE_FILTER_BIAS_RANGE_SGIX','GL_POST_TEXTURE_FILTER_BIAS_SGIX','GL_POST_TEXTURE_FILTER_SCALE_RANGE_SGIX','GL_POST_TEXTURE_FILTER_SCALE_SGIX']
 gl.add(GL_SGIX_texture_scale_bias)
 
 GL_SGIX_vertex_preclip = Extension('GL_SGIX_vertex_preclip')
-GL_SGIX_vertex_preclip.url = 'http://www.opengl.org/registry/specs/gl/SGIX/vertex_preclip.txt'
+GL_SGIX_vertex_preclip.url = 'http://www.opengl.org/registry/specs/SGIX/vertex_preclip.txt'
 GL_SGIX_vertex_preclip.enumerants = ['GL_VERTEX_PRECLIP_HINT_SGIX','GL_VERTEX_PRECLIP_SGIX']
 gl.add(GL_SGIX_vertex_preclip)
 
 GL_SGIX_vertex_preclip_hint = Extension('GL_SGIX_vertex_preclip_hint')
-GL_SGIX_vertex_preclip_hint.url = 'http://www.opengl.org/registry/specs/gl/SGIX/vertex_preclip.txt'
+GL_SGIX_vertex_preclip_hint.url = 'http://www.opengl.org/registry/specs/SGIX/vertex_preclip.txt'
 GL_SGIX_vertex_preclip_hint.enumerants = ['GL_VERTEX_PRECLIP_HINT_SGIX','GL_VERTEX_PRECLIP_SGIX']
 gl.add(GL_SGIX_vertex_preclip_hint)
 
 GL_SGIX_ycrcb = Extension('GL_SGIX_ycrcb')
-GL_SGIX_ycrcb.url = 'http://www.opengl.org/registry/specs/gl/SGIX/ycrcb.txt'
+GL_SGIX_ycrcb.url = 'http://www.opengl.org/registry/specs/SGIX/ycrcb.txt'
 gl.add(GL_SGIX_ycrcb)
 
 GL_SGI_color_matrix = Extension('GL_SGI_color_matrix')
-GL_SGI_color_matrix.url = 'http://www.opengl.org/registry/specs/gl/SGI/color_matrix.txt'
+GL_SGI_color_matrix.url = 'http://www.opengl.org/registry/specs/SGI/color_matrix.txt'
 GL_SGI_color_matrix.enumerants = ['GL_COLOR_MATRIX_SGI','GL_COLOR_MATRIX_STACK_DEPTH_SGI','GL_MAX_COLOR_MATRIX_STACK_DEPTH_SGI','GL_POST_COLOR_MATRIX_ALPHA_BIAS_SGI','GL_POST_COLOR_MATRIX_ALPHA_SCALE_SGI','GL_POST_COLOR_MATRIX_BLUE_BIAS_SGI','GL_POST_COLOR_MATRIX_BLUE_SCALE_SGI','GL_POST_COLOR_MATRIX_GREEN_BIAS_SGI','GL_POST_COLOR_MATRIX_GREEN_SCALE_SGI','GL_POST_COLOR_MATRIX_RED_BIAS_SGI','GL_POST_COLOR_MATRIX_RED_SCALE_SGI']
 gl.add(GL_SGI_color_matrix)
 
 GL_SGI_color_table = Extension('GL_SGI_color_table')
-GL_SGI_color_table.url = 'http://www.opengl.org/registry/specs/gl/SGI/color_table.txt'
+GL_SGI_color_table.url = 'http://www.opengl.org/registry/specs/SGI/color_table.txt'
 GL_SGI_color_table.enumerants = ['GL_COLOR_TABLE_ALPHA_SIZE_SGI','GL_COLOR_TABLE_BIAS_SGI','GL_COLOR_TABLE_BLUE_SIZE_SGI','GL_COLOR_TABLE_FORMAT_SGI','GL_COLOR_TABLE_GREEN_SIZE_SGI','GL_COLOR_TABLE_INTENSITY_SIZE_SGI','GL_COLOR_TABLE_LUMINANCE_SIZE_SGI','GL_COLOR_TABLE_RED_SIZE_SGI','GL_COLOR_TABLE_SCALE_SGI','GL_COLOR_TABLE_SGI','GL_COLOR_TABLE_WIDTH_SGI','GL_POST_COLOR_MATRIX_COLOR_TABLE_SGI','GL_POST_CONVOLUTION_COLOR_TABLE_SGI','GL_PROXY_COLOR_TABLE_SGI','GL_PROXY_POST_COLOR_MATRIX_COLOR_TABLE_SGI','GL_PROXY_POST_CONVOLUTION_COLOR_TABLE_SGI']
 GL_SGI_color_table.functions = ['glColorTableParameterfvSGI','glColorTableParameterivSGI','glColorTableSGI','glCopyColorTableSGI','glGetColorTableParameterfvSGI','glGetColorTableParameterivSGI','glGetColorTableSGI']
 gl.add(GL_SGI_color_table)
 
 GL_SGI_texture_color_table = Extension('GL_SGI_texture_color_table')
-GL_SGI_texture_color_table.url = 'http://www.opengl.org/registry/specs/gl/SGI/texture_color_table.txt'
+GL_SGI_texture_color_table.url = 'http://www.opengl.org/registry/specs/SGI/texture_color_table.txt'
 GL_SGI_texture_color_table.enumerants = ['GL_PROXY_TEXTURE_COLOR_TABLE_SGI','GL_TEXTURE_COLOR_TABLE_SGI']
 gl.add(GL_SGI_texture_color_table)
 
 GL_SUNX_constant_data = Extension('GL_SUNX_constant_data')
-GL_SUNX_constant_data.url = 'http://www.opengl.org/registry/specs/gl/SUNX/constant_data.txt'
+GL_SUNX_constant_data.url = 'http://www.opengl.org/registry/specs/SUNX/constant_data.txt'
 GL_SUNX_constant_data.enumerants = ['GL_TEXTURE_CONSTANT_DATA_SUNX','GL_UNPACK_CONSTANT_DATA_SUNX']
 GL_SUNX_constant_data.functions = ['glFinishTextureSUNX']
 gl.add(GL_SUNX_constant_data)
 
 GL_SUN_convolution_border_modes = Extension('GL_SUN_convolution_border_modes')
-GL_SUN_convolution_border_modes.url = 'http://www.opengl.org/registry/specs/gl/SUN/convolution_border_modes.txt'
+GL_SUN_convolution_border_modes.url = 'http://www.opengl.org/registry/specs/SUN/convolution_border_modes.txt'
 GL_SUN_convolution_border_modes.enumerants = ['GL_WRAP_BORDER_SUN']
 gl.add(GL_SUN_convolution_border_modes)
 
 GL_SUN_global_alpha = Extension('GL_SUN_global_alpha')
-GL_SUN_global_alpha.url = 'http://www.opengl.org/registry/specs/gl/SUN/global_alpha.txt'
+GL_SUN_global_alpha.url = 'http://www.opengl.org/registry/specs/SUN/global_alpha.txt'
 GL_SUN_global_alpha.enumerants = ['GL_GLOBAL_ALPHA_FACTOR_SUN','GL_GLOBAL_ALPHA_SUN']
 GL_SUN_global_alpha.functions = ['glGlobalAlphaFactorbSUN','glGlobalAlphaFactordSUN','glGlobalAlphaFactorfSUN','glGlobalAlphaFactoriSUN','glGlobalAlphaFactorsSUN','glGlobalAlphaFactorubSUN','glGlobalAlphaFactoruiSUN','glGlobalAlphaFactorusSUN']
 gl.add(GL_SUN_global_alpha)
 
 GL_SUN_mesh_array = Extension('GL_SUN_mesh_array')
-GL_SUN_mesh_array.url = 'http://www.opengl.org/registry/specs/gl/SUN/mesh_array.txt'
+GL_SUN_mesh_array.url = 'http://www.opengl.org/registry/specs/SUN/mesh_array.txt'
 GL_SUN_mesh_array.enumerants = ['GL_QUAD_MESH_SUN','GL_TRIANGLE_MESH_SUN']
 gl.add(GL_SUN_mesh_array)
 
@@ -44595,28 +44618,28 @@ GL_SUN_read_video_pixels.functions = ['glReadVideoPixelsSUN']
 gl.add(GL_SUN_read_video_pixels)
 
 GL_SUN_slice_accum = Extension('GL_SUN_slice_accum')
-GL_SUN_slice_accum.url = 'http://www.opengl.org/registry/specs/gl/SUN/slice_accum.txt'
+GL_SUN_slice_accum.url = 'http://www.opengl.org/registry/specs/SUN/slice_accum.txt'
 GL_SUN_slice_accum.enumerants = ['GL_SLICE_ACCUM_SUN']
 gl.add(GL_SUN_slice_accum)
 
 GL_SUN_triangle_list = Extension('GL_SUN_triangle_list')
-GL_SUN_triangle_list.url = 'http://www.opengl.org/registry/specs/gl/SUN/triangle_list.txt'
+GL_SUN_triangle_list.url = 'http://www.opengl.org/registry/specs/SUN/triangle_list.txt'
 GL_SUN_triangle_list.enumerants = ['GL_R1UI_C3F_V3F_SUN','GL_R1UI_C4F_N3F_V3F_SUN','GL_R1UI_C4UB_V3F_SUN','GL_R1UI_N3F_V3F_SUN','GL_R1UI_T2F_C4F_N3F_V3F_SUN','GL_R1UI_T2F_N3F_V3F_SUN','GL_R1UI_T2F_V3F_SUN','GL_R1UI_V3F_SUN','GL_REPLACEMENT_CODE_ARRAY_POINTER_SUN','GL_REPLACEMENT_CODE_ARRAY_STRIDE_SUN','GL_REPLACEMENT_CODE_ARRAY_SUN','GL_REPLACEMENT_CODE_ARRAY_TYPE_SUN','GL_REPLACEMENT_CODE_SUN','GL_REPLACE_MIDDLE_SUN','GL_REPLACE_OLDEST_SUN','GL_RESTART_SUN','GL_TRIANGLE_LIST_SUN']
 GL_SUN_triangle_list.functions = ['glReplacementCodePointerSUN','glReplacementCodeubSUN','glReplacementCodeubvSUN','glReplacementCodeuiSUN','glReplacementCodeuivSUN','glReplacementCodeusSUN','glReplacementCodeusvSUN']
 gl.add(GL_SUN_triangle_list)
 
 GL_SUN_vertex = Extension('GL_SUN_vertex')
-GL_SUN_vertex.url = 'http://www.opengl.org/registry/specs/gl/SUN/vertex.txt'
+GL_SUN_vertex.url = 'http://www.opengl.org/registry/specs/SUN/vertex.txt'
 GL_SUN_vertex.functions = ['glColor3fVertex3fSUN','glColor3fVertex3fvSUN','glColor4fNormal3fVertex3fSUN','glColor4fNormal3fVertex3fvSUN','glColor4ubVertex2fSUN','glColor4ubVertex2fvSUN','glColor4ubVertex3fSUN','glColor4ubVertex3fvSUN','glNormal3fVertex3fSUN','glNormal3fVertex3fvSUN','glReplacementCodeuiColor3fVertex3fSUN','glReplacementCodeuiColor3fVertex3fvSUN','glReplacementCodeuiColor4fNormal3fVertex3fSUN','glReplacementCodeuiColor4fNormal3fVertex3fvSUN','glReplacementCodeuiColor4ubVertex3fSUN','glReplacementCodeuiColor4ubVertex3fvSUN','glReplacementCodeuiNormal3fVertex3fSUN','glReplacementCodeuiNormal3fVertex3fvSUN','glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN','glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN','glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN','glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN','glReplacementCodeuiTexCoord2fVertex3fSUN','glReplacementCodeuiTexCoord2fVertex3fvSUN','glReplacementCodeuiVertex3fSUN','glReplacementCodeuiVertex3fvSUN','glTexCoord2fColor3fVertex3fSUN','glTexCoord2fColor3fVertex3fvSUN','glTexCoord2fColor4fNormal3fVertex3fSUN','glTexCoord2fColor4fNormal3fVertex3fvSUN','glTexCoord2fColor4ubVertex3fSUN','glTexCoord2fColor4ubVertex3fvSUN','glTexCoord2fNormal3fVertex3fSUN','glTexCoord2fNormal3fVertex3fvSUN','glTexCoord2fVertex3fSUN','glTexCoord2fVertex3fvSUN','glTexCoord4fColor4fNormal3fVertex4fSUN','glTexCoord4fColor4fNormal3fVertex4fvSUN','glTexCoord4fVertex4fSUN','glTexCoord4fVertex4fvSUN']
 gl.add(GL_SUN_vertex)
 
 GL_WIN_phong_shading = Extension('GL_WIN_phong_shading')
-GL_WIN_phong_shading.url = 'http://www.opengl.org/registry/specs/gl/WIN/phong_shading.txt'
+GL_WIN_phong_shading.url = 'http://www.opengl.org/registry/specs/WIN/phong_shading.txt'
 GL_WIN_phong_shading.enumerants = ['GL_PHONG_HINT_WIN','GL_PHONG_WIN']
 gl.add(GL_WIN_phong_shading)
 
 GL_WIN_specular_fog = Extension('GL_WIN_specular_fog')
-GL_WIN_specular_fog.url = 'http://www.opengl.org/registry/specs/gl/WIN/specular_fog.txt'
+GL_WIN_specular_fog.url = 'http://www.opengl.org/registry/specs/WIN/specular_fog.txt'
 GL_WIN_specular_fog.enumerants = ['GL_FOG_SPECULAR_TEXTURE_WIN']
 gl.add(GL_WIN_specular_fog)
 

@@ -1203,6 +1203,10 @@ namespace State {
     }
   };
 
+  //
+  // glPushAttrib(GL_HINT_BIT)
+  //
+
   struct Hint
   {
     GLenum perspectiveCorrection;
@@ -1296,6 +1300,10 @@ namespace State {
     }
   };
 
+  //
+  // glPushAttrib(GL_LIST_BIT)
+  //
+
   struct List
   {
     GLuint base;
@@ -1335,6 +1343,10 @@ namespace State {
       return tmp;
     }
   };
+
+  //
+  // glPushAttrib(GL_ACCUM_BUFFER_BIT)
+  //
 
   struct AccumBuffer
   {
@@ -1378,6 +1390,10 @@ namespace State {
       return tmp;
     }
   };
+
+  //
+  // glPushAttrib(GL_SCISSOR_BIT)
+  //
 
   struct Scissor
   {
@@ -1511,6 +1527,10 @@ namespace State {
       return tmp;
     }
   };
+
+  //
+  // glPushAttrib(GL_VIEWPORT_BIT)
+  //
 
   struct Viewport
   {
@@ -1676,6 +1696,10 @@ namespace State {
     }
   };
 
+  //
+  // glPushAttrib(GL_LINE_BIT)
+  //
+
   struct Line
   {
     GLfloat     width;          // GL_LINE_WIDTH
@@ -1744,6 +1768,10 @@ namespace State {
       return tmp;
     }
   };
+
+  //
+  // glPushAttrib(GL_MULTISAMPLE_BIT)
+  //
 
   struct Multisample
   {
@@ -1830,6 +1858,10 @@ namespace State {
       return tmp;
     }
   };
+
+  //
+  // glPushAttrib(GL_EVAL_BIT)
+  //
 
   struct Eval
   {
@@ -1931,6 +1963,10 @@ namespace State {
     }
   };
 
+  //
+  // glPushAttrib(GL_FOG_BIT)
+  //
+
   struct Fog
   {
     GLfloat   color[4]; // GL_FOG_COLOR
@@ -2013,6 +2049,10 @@ namespace State {
       return tmp;
     }
   };
+
+  //
+  // glPushAttrib(GL_POINT_BIT)
+  //
 
   struct Point
   {
@@ -2164,6 +2204,10 @@ namespace State {
     }
   };
 
+  //
+  // glPushAttrib(GL_POLYGON_STIPPLE_BIT)
+  //
+
   struct PolygonStipple
   {
     GLubyte pattern[32*4];
@@ -2202,8 +2246,206 @@ namespace State {
       string_list tmp;
       tmp << print_string("glPolygonStipple([");
       for (int ii=0; ii<(32*4)-1; ii++)
-        tmp << print_string(" ",hex(pattern[ii]),",");
-      tmp << print_string(" ",hex(pattern[(32*4)-1]),"]);",delim);
+        tmp << print_string(" 0x",hex(pattern[ii]),",");
+      tmp << print_string(" 0x",hex(pattern[(32*4)-1]),"]);",delim);
+      return tmp;
+    }
+  };
+
+  //
+  // glPushAttrib(GL_COLOR_BUFFER_BIT)
+  //
+
+  struct ColorBuffer
+  {
+    GLenum      clampFragmentColor;                         // GL_CLAMP_FRAGMENT_COLOR
+    GLenum      clampReadColor;                             // GL_CLAMP_READ_COLOR
+    GLboolean   alphaTest;                                  // GL_ALPHA_TEST
+    GLenum      alphaTestFunc;                              // GL_ALPHA_TEST_FUNC
+    GLclampf    alphaTestRef;                               // GL_ALPHA_TEST_REF
+    GLboolean   blend[REGAL_MAX_DRAW_BUFFERS];              // GL_BLEND
+    GLenum      blendSrcRgb[REGAL_MAX_DRAW_BUFFERS];        // GL_BLEND_SRC_RGB
+    GLenum      blendSrcAlpha[REGAL_MAX_DRAW_BUFFERS];      // GL_BLEND_SRC_ALPHA
+    GLenum      blendDstRgb[REGAL_MAX_DRAW_BUFFERS];        // GL_BLEND_DST_RGB
+    GLenum      blendDstAlpha[REGAL_MAX_DRAW_BUFFERS];      // GL_BLEND_DST_ALPHA
+    GLenum      blendEquationRgb[REGAL_MAX_DRAW_BUFFERS];   // GL_BLEND_EQUATION_RGB
+    GLenum      blendEquationAlpha[REGAL_MAX_DRAW_BUFFERS]; // GL_BLEND_EQUATION_ALPHA
+    GLclampf    blendColor[4];                              // GL_BLEND_COLOR
+    GLboolean   framebufferSRGB;                            // GL_FRAMEBUFFER_SRGB
+    GLboolean   dither;                                     // GL_DITHER
+    GLboolean   indexLogicOp;                               // GL_INDEX_LOGIC_OP
+    GLboolean   colorLogicOp;                               // GL_COLOR_LOGIC_OP
+    GLenum      logicOpMode;                                // GL_LOGIC_OP_MODE
+    GLuint      indexWritemask;                             // GL_INDEX_WRITEMASK
+    GLboolean   colorWritemask[REGAL_MAX_DRAW_BUFFERS][4];  // GL_COLOR_WRITEMASK
+    GLclampf    colorClearValue[4];                         // GL_COLOR_CLEAR_VALUE
+    GLfloat     indexClearValue;                            // GL_INDEX_CLEAR_VALUE
+    GLenum      drawBuffers[REGAL_MAX_DRAW_BUFFERS];        // GL_DRAW_BUFERi
+    bool        valid;
+
+    inline ColorBuffer()
+    : clampFragmentColor(GL_FIXED_ONLY)
+    , clampReadColor(GL_FIXED_ONLY)
+    , alphaTest(GL_FALSE)
+    , alphaTestFunc(GL_ALWAYS)
+    , alphaTestRef(0)
+    , framebufferSRGB(GL_FALSE)
+    , dither(GL_TRUE)
+    , indexLogicOp(GL_FALSE)
+    , colorLogicOp(GL_FALSE)
+    , logicOpMode(GL_COPY)
+    , indexWritemask(static_cast<GLuint>(~0))
+    , indexClearValue(0)
+    , valid(false)
+    {
+      std::memset(blend,GL_FALSE,sizeof(blend));
+      std::memset(blendSrcRgb,GL_ONE,sizeof(blendSrcRgb));
+      std::memset(blendSrcAlpha,GL_ONE,sizeof(blendSrcAlpha));
+      std::memset(blendDstRgb,GL_ZERO,sizeof(blendDstRgb));
+      std::memset(blendDstAlpha,GL_ZERO,sizeof(blendDstAlpha));
+      std::memset(blendEquationRgb,GL_FUNC_ADD,sizeof(blendEquationRgb));
+      std::memset(blendEquationAlpha,GL_FUNC_ADD,sizeof(blendEquationAlpha));
+      std::memset(blendColor,0,sizeof(blendColor));
+      std::memset(colorWritemask,GL_TRUE,sizeof(colorWritemask));
+      std::memset(colorClearValue,0,sizeof(colorClearValue));
+      std::memset(drawBuffers,GL_NONE,sizeof(drawBuffers));
+    }
+
+    bool defined() const
+    {
+      return valid;
+    }
+
+    void define(DispatchTable &dt)
+    {
+      if (!valid)
+      {
+        for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegerv)(GL_DRAW_BUFFER0+ii, reinterpret_cast<GLint*>(&drawBuffers[ii]));
+        valid = true;
+      }
+    }
+
+    inline ColorBuffer &swap(ColorBuffer &other)
+    {
+      std::swap(clampFragmentColor,other.clampFragmentColor);
+      std::swap(clampReadColor,other.clampReadColor);
+      std::swap(alphaTest,other.alphaTest);
+      std::swap(alphaTestFunc,other.alphaTestFunc);
+      std::swap(alphaTestRef,other.alphaTestRef);
+      std::swap_ranges(blend,blend+REGAL_MAX_DRAW_BUFFERS,other.blend);
+      std::swap_ranges(blendSrcRgb,blendSrcRgb+REGAL_MAX_DRAW_BUFFERS,other.blendSrcRgb);
+      std::swap_ranges(blendSrcAlpha,blendSrcAlpha+REGAL_MAX_DRAW_BUFFERS,other.blendSrcAlpha);
+      std::swap_ranges(blendDstRgb,blendDstRgb+REGAL_MAX_DRAW_BUFFERS,other.blendDstRgb);
+      std::swap_ranges(blendDstAlpha,blendDstAlpha+REGAL_MAX_DRAW_BUFFERS,other.blendDstAlpha);
+      std::swap_ranges(blendEquationRgb,blendEquationRgb+REGAL_MAX_DRAW_BUFFERS,other.blendEquationRgb);
+      std::swap_ranges(blendEquationAlpha,blendEquationAlpha+REGAL_MAX_DRAW_BUFFERS,other.blendEquationAlpha);
+      std::swap_ranges(blendColor,blendColor+4,other.blendColor);
+      std::swap(framebufferSRGB,other.framebufferSRGB);
+      std::swap(dither,other.dither);
+      std::swap(indexLogicOp,other.indexLogicOp);
+      std::swap(colorLogicOp,other.colorLogicOp);
+      std::swap(logicOpMode,other.logicOpMode);
+      std::swap(indexWritemask,other.indexWritemask);
+      std::swap_ranges(&colorWritemask[0][0],&colorWritemask[0][0]+(REGAL_MAX_DRAW_BUFFERS*4),&other.colorWritemask[0][0]);
+      std::swap_ranges(colorClearValue,colorClearValue+4,other.colorClearValue);
+      std::swap(indexClearValue,other.indexClearValue);
+      std::swap_ranges(drawBuffers,drawBuffers+REGAL_MAX_DRAW_BUFFERS,other.drawBuffers);
+      return *this;
+    }
+
+    inline ColorBuffer &get(DispatchTable &dt)
+    {
+      dt.call(&dt.glGetIntegerv)(GL_CLAMP_FRAGMENT_COLOR,reinterpret_cast<GLint*>(&clampFragmentColor));
+      dt.call(&dt.glGetIntegerv)(GL_CLAMP_READ_COLOR,reinterpret_cast<GLint*>(&clampReadColor));
+      alphaTest = dt.call(&dt.glIsEnabled)(GL_ALPHA_TEST);
+      dt.call(&dt.glGetIntegerv)(GL_ALPHA_TEST_FUNC,reinterpret_cast<GLint*>(&alphaTestFunc));
+      dt.call(&dt.glGetFloatv)(GL_ALPHA_TEST_REF,&alphaTestRef);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        blend[ii] = dt.call(&dt.glIsEnabledi)(GL_BLEND, ii);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegeri_v)(GL_BLEND_SRC_RGB, ii, reinterpret_cast<GLint*>(&blendSrcRgb[ii]));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegeri_v)(GL_BLEND_SRC_ALPHA, ii, reinterpret_cast<GLint*>(&blendSrcAlpha[ii]));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegeri_v)(GL_BLEND_DST_RGB, ii, reinterpret_cast<GLint*>(&blendDstRgb[ii]));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegeri_v)(GL_BLEND_DST_ALPHA, ii, reinterpret_cast<GLint*>(&blendDstAlpha[ii]));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegeri_v)(GL_BLEND_EQUATION_RGB, ii, reinterpret_cast<GLint*>(&blendEquationRgb[ii]));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          dt.call(&dt.glGetIntegeri_v)(GL_BLEND_EQUATION_ALPHA, ii, reinterpret_cast<GLint*>(&blendEquationAlpha[ii]));
+      dt.call(&dt.glGetFloatv)(GL_BLEND_COLOR,blendColor);
+      framebufferSRGB = dt.call(&dt.glIsEnabled)(GL_FRAMEBUFFER_SRGB);
+      dither = dt.call(&dt.glIsEnabled)(GL_DITHER);
+      indexLogicOp = dt.call(&dt.glIsEnabled)(GL_INDEX_LOGIC_OP);
+      colorLogicOp  = dt.call(&dt.glIsEnabled)(GL_COLOR_LOGIC_OP);
+      dt.call(&dt.glGetIntegerv)(GL_LOGIC_OP_MODE, reinterpret_cast<GLint*>(&logicOpMode));
+      dt.call(&dt.glGetIntegerv)(GL_INDEX_WRITEMASK, reinterpret_cast<GLint*>(&indexWritemask));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        dt.call(&dt.glGetBooleani_v)(GL_COLOR_WRITEMASK, ii, &colorWritemask[ii][0]);
+      dt.call(&dt.glGetFloatv)(GL_COLOR_CLEAR_VALUE,colorClearValue);
+      dt.call(&dt.glGetFloatv)(GL_INDEX_CLEAR_VALUE,&indexClearValue);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        dt.call(&dt.glGetIntegerv)(GL_DRAW_BUFFER0+ii, reinterpret_cast<GLint*>(&drawBuffers[ii]));
+      return *this;
+    }
+
+    inline const ColorBuffer &set(DispatchTable &dt) const
+    {
+      dt.call(&dt.glClampColor)(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
+      dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
+      setEnable(dt,GL_ALPHA_TEST,alphaTest);
+      dt.call(&dt.glAlphaFunc)(alphaTestFunc,alphaTestRef);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        setEnablei(dt,GL_BLEND,ii,blend[ii]);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        dt.call(&dt.glBlendFuncSeparatei)(ii,blendSrcRgb[ii],blendSrcAlpha[ii],blendDstRgb[ii],blendDstAlpha[ii]);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        dt.call(&dt.glBlendEquationSeparatei)(ii,blendEquationRgb[ii],blendEquationAlpha[ii]);
+      dt.call(&dt.glBlendColor)(blendColor[0],blendColor[1],blendColor[2],blendColor[3]);
+      setEnable(dt,GL_FRAMEBUFFER_SRGB,framebufferSRGB);
+      setEnable(dt,GL_DITHER,dither);
+      setEnable(dt,GL_INDEX_LOGIC_OP,indexLogicOp);
+      setEnable(dt,GL_COLOR_LOGIC_OP,colorLogicOp);
+      dt.call(&dt.glLogicOp)(logicOpMode);
+      dt.call(&dt.glIndexMask)(indexWritemask);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        dt.call(&dt.glColorMaski)(ii, colorWritemask[ii][0], colorWritemask[ii][1], colorWritemask[ii][2], colorWritemask[ii][3]);
+      dt.call(&dt.glClearColor)(colorClearValue[0],colorClearValue[1],colorClearValue[2],colorClearValue[3]);
+      dt.call(&dt.glClearIndex)(indexClearValue);
+      dt.call(&dt.glDrawBuffers)(REGAL_MAX_DRAW_BUFFERS, drawBuffers);
+      return *this;
+    }
+
+    inline std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glClampColor(GL_CLAMP_FRAGMENT_COLOR",Token::toString(clampFragmentColor),");",delim);
+      tmp << print_string("glClampColor(GL_CLAMP_READ_COLOR",Token::toString(clampReadColor),");",delim);
+      enableToString(tmp, alphaTest, "GL_ALPHA_TEST",delim);
+      tmp << print_string("glAlphaFunc(Token::toString(alphaTestFunc),",alphaTestRef,");",delim);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        enableiToString(tmp, blend[ii], "GL_BLEND", ii,delim);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        tmp << print_string("glBlendFuncSeparatei(",ii,",",Token::toString(blendSrcRgb[ii]),",",Token::toString(blendSrcAlpha[ii]),",",Token::toString(blendDstRgb[ii]),",",Token::toString(blendDstAlpha[ii]),delim);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        tmp << print_string("glBlendEquationSeparatei(",ii,",",Token::toString(blendEquationRgb[ii]),",",Token::toString(blendEquationAlpha[ii]),delim);
+      tmp << print_string("glBlendColor(",blendColor[0],",",blendColor[1],",",blendColor[2],",",blendColor[3],");",delim);
+      enableToString(tmp, framebufferSRGB, "GL_FRAMEBUFFER_SRGB",delim);
+      enableToString(tmp, dither, "GL_DITHER",delim);
+      enableToString(tmp, indexLogicOp, "GL_INDEX_LOGIC_OP",delim);
+      enableToString(tmp, colorLogicOp, "GL_COLOR_LOGIC_OP",delim);
+      tmp << print_string("glLogicOp(",Token::toString(logicOpMode),");",delim);
+      tmp << print_string("glIndexMask(0x",hex(indexWritemask),");",delim);
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        tmp << print_string("glColorMaski(",ii,",", colorWritemask[ii][0],",",colorWritemask[ii][1],",",colorWritemask[ii][2],",",colorWritemask[ii][3],");",delim);
+      tmp << print_string("glClearColor(",colorClearValue[0],",",colorClearValue[1],",",colorClearValue[2],",",colorClearValue[3],");",delim);
+      tmp << print_string("glClearIndex(",indexClearValue,");",delim);
+      tmp << print_string("glDrawBuffers(",REGAL_MAX_DRAW_BUFFERS,", [");
+      for (int ii=0; ii<REGAL_MAX_DRAW_BUFFERS-1; ii++)
+        tmp << print_string(" ",Token::toString(drawBuffers[ii]),",");
+      tmp << print_string(" ",Token::toString(drawBuffers[REGAL_MAX_DRAW_BUFFERS-1]),"]);",delim);
       return tmp;
     }
   };

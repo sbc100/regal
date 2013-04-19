@@ -139,7 +139,7 @@ def generateDispatchCode(apis, args):
           prefix += '/* '
           suffix += ' */'
 
-        h      = False	
+        h      = False
         h1 =  '    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,\' \');\n'
         h2 =  ''
         body   =  ''

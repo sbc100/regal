@@ -2031,9 +2031,11 @@ struct DispatchTable {
     void (REGAL_CALL *glGetActiveSubroutineUniformName)(GLuint program, GLenum shaderType, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name);
     void (REGAL_CALL *glGetActiveSubroutineUniformiv)(GLuint program, GLenum shaderType, GLuint index, GLenum pname, GLint *values);
     void (REGAL_CALL *glGetProgramStageiv)(GLuint program, GLenum shaderType, GLenum pname, GLint *values);
+    void (REGAL_CALL *glGetProgramSubroutineParameteruivNV)(GLenum target, GLuint index, GLuint *params);
     GLuint (REGAL_CALL *glGetSubroutineIndex)(GLuint program, GLenum shaderType, const GLchar *name);
     GLint (REGAL_CALL *glGetSubroutineUniformLocation)(GLuint program, GLenum shaderType, const GLchar *name);
     void (REGAL_CALL *glGetUniformSubroutineuiv)(GLenum shaderType, GLint location, GLuint *params);
+    void (REGAL_CALL *glProgramSubroutineParametersuivNV)(GLenum target, GLsizei count, const GLuint *params);
     void (REGAL_CALL *glUniformSubroutinesuiv)(GLenum shaderType, GLsizei count, const GLuint *indices);
 
     // GL_ARB_shading_language_include

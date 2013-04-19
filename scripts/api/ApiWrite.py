@@ -201,6 +201,8 @@ def writeExtensions(file,name,extensions):
     print >>file, '%s = Extension(\'%s\')'%(i.name,i.name)
     if len(i.url):
       print >>file, '%s.url = \'%s\''%(i.name,i.url)
+    if getattr(i,'category') != None and len(i.category):
+      print >>file, '%s.category = \'%s\''%(i.name,i.category)
     if len(i.enumerants):
       print >>file, '%s.enumerants = [\'%s\']'%(i.name,'\',\''.join(i.enumerants))
     if len(i.functions):

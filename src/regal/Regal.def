@@ -916,6 +916,7 @@ EXPORTS
   glGetProgramStageiv
   glGetProgramStringARB
   glGetProgramStringNV
+  glGetProgramSubroutineParameteruivNV
   glGetProgramiv
   glGetProgramivARB
   glGetProgramivNV
@@ -1587,6 +1588,7 @@ EXPORTS
   glProgramParameters4dvNV
   glProgramParameters4fvNV
   glProgramStringARB
+  glProgramSubroutineParametersuivNV
   glProgramUniform1d
   glProgramUniform1dEXT
   glProgramUniform1dv

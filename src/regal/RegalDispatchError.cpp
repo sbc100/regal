@@ -26065,6 +26065,31 @@ static void REGAL_CALL error_glGetProgramStageiv(GLuint program, GLenum shaderTy
   }
 }
 
+static void REGAL_CALL error_glGetProgramSubroutineParameteruivNV(GLenum target, GLuint index, GLuint *params)
+{
+  Internal("error_glGetProgramSubroutineParameteruivNV","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.error._next;
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glGetProgramSubroutineParameteruivNV)(target, index, params);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glGetProgramSubroutineParameteruivNV : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 static GLuint REGAL_CALL error_glGetSubroutineIndex(GLuint program, GLenum shaderType, const GLchar *name)
 {
   Internal("error_glGetSubroutineIndex","()");
@@ -26133,6 +26158,31 @@ static void REGAL_CALL error_glGetUniformSubroutineuiv(GLenum shaderType, GLint 
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {
       Error("glGetUniformSubroutineuiv : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glProgramSubroutineParametersuivNV(GLenum target, GLsizei count, const GLuint *params)
+{
+  Internal("error_glProgramSubroutineParametersuivNV","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.error._next;
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glProgramSubroutineParametersuivNV)(target, count, params);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glProgramSubroutineParametersuivNV : ",Token::GLerrorToString(_error));
       #if REGAL_BREAK
       Break::ErrorCB(_error);
       #endif
@@ -67752,9 +67802,11 @@ void InitDispatchTableError(DispatchTable &tbl)
   tbl.glGetActiveSubroutineUniformName = error_glGetActiveSubroutineUniformName;
   tbl.glGetActiveSubroutineUniformiv = error_glGetActiveSubroutineUniformiv;
   tbl.glGetProgramStageiv = error_glGetProgramStageiv;
+  tbl.glGetProgramSubroutineParameteruivNV = error_glGetProgramSubroutineParameteruivNV;
   tbl.glGetSubroutineIndex = error_glGetSubroutineIndex;
   tbl.glGetSubroutineUniformLocation = error_glGetSubroutineUniformLocation;
   tbl.glGetUniformSubroutineuiv = error_glGetUniformSubroutineuiv;
+  tbl.glProgramSubroutineParametersuivNV = error_glProgramSubroutineParametersuivNV;
   tbl.glUniformSubroutinesuiv = error_glUniformSubroutinesuiv;
 
   // GL_ARB_shading_language_include

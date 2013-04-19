@@ -916,6 +916,7 @@ EXPORTS
   rglGetProgramStageiv
   rglGetProgramStringARB
   rglGetProgramStringNV
+  rglGetProgramSubroutineParameteruivNV
   rglGetProgramiv
   rglGetProgramivARB
   rglGetProgramivNV
@@ -1587,6 +1588,7 @@ EXPORTS
   rglProgramParameters4dvNV
   rglProgramParameters4fvNV
   rglProgramStringARB
+  rglProgramSubroutineParametersuivNV
   rglProgramUniform1d
   rglProgramUniform1dEXT
   rglProgramUniform1dv
