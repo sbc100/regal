@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2635] = {
+const char * const gl_Name[2636] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -513,6 +513,7 @@ const char * const gl_Name[2635] = {
   "glDrawRangeElements",
   "glDrawRangeElementsBaseVertex",
   "glDrawRangeElementsEXT",
+  "glDrawTextureNV",
   "glDrawTransformFeedback",
   "glDrawTransformFeedbackInstanced",
   "glDrawTransformFeedbackNV",
@@ -2691,7 +2692,7 @@ const char * const gl_Name[2635] = {
   NULL
 };
 
-const void *gl_Value[2635] = {
+const void *gl_Value[2636] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -3151,6 +3152,7 @@ const void *gl_Value[2635] = {
   (void *)(glDrawRangeElements),
   (void *)(glDrawRangeElementsBaseVertex),
   (void *)(glDrawRangeElementsEXT),
+  (void *)(glDrawTextureNV),
   (void *)(glDrawTransformFeedback),
   (void *)(glDrawTransformFeedbackInstanced),
   (void *)(glDrawTransformFeedbackNV),
@@ -5329,7 +5331,7 @@ const void *gl_Value[2635] = {
   NULL
 };
 
-const size_t gl_Offset[2635] = {
+const size_t gl_Offset[2636] = {
   offsetof(DispatchTable,glAccum)/sizeof(void *),
   offsetof(DispatchTable,glActiveProgramEXT)/sizeof(void *),
   offsetof(DispatchTable,glActiveShaderProgram)/sizeof(void *),
@@ -5789,6 +5791,7 @@ const size_t gl_Offset[2635] = {
   offsetof(DispatchTable,glDrawRangeElements)/sizeof(void *),
   offsetof(DispatchTable,glDrawRangeElementsBaseVertex)/sizeof(void *),
   offsetof(DispatchTable,glDrawRangeElementsEXT)/sizeof(void *),
+  offsetof(DispatchTable,glDrawTextureNV)/sizeof(void *),
   offsetof(DispatchTable,glDrawTransformFeedback)/sizeof(void *),
   offsetof(DispatchTable,glDrawTransformFeedbackInstanced)/sizeof(void *),
   offsetof(DispatchTable,glDrawTransformFeedbackNV)/sizeof(void *),

@@ -51,6 +51,9 @@
 #   define REGAL_SYS_WGL 1
 #  endif
 # endif
+# ifndef REGAL_SYS_WIN32
+#  define REGAL_SYS_WIN32 1
+# endif
 #elif defined(__APPLE__)
 # include <TargetConditionals.h>
 # if TARGET_OS_IPHONE
@@ -112,6 +115,10 @@
 
 #ifndef REGAL_SYS_X11
 # define REGAL_SYS_X11 0
+#endif
+
+#ifndef REGAL_SYS_WIN32
+# define REGAL_SYS_WIN32 0
 #endif
 
 #ifndef REGAL_SYS_ES1

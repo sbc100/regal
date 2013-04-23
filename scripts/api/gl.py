@@ -34933,6 +34933,27 @@ glDrawBuffersNV.trace = True
 glDrawBuffersNV.play = True
 gl.add(glDrawBuffersNV)
 
+# GL_NV_draw_texture
+
+glDrawTextureNV = Function('glDrawTextureNV')
+glDrawTextureNV.ret = Return('void')
+glDrawTextureNV.add( Input( 'texture','GLuint' ))
+glDrawTextureNV.add( Input( 'sampler','GLuint' ))
+glDrawTextureNV.add( Input( 'x0','GLfloat' ))
+glDrawTextureNV.add( Input( 'y0','GLfloat' ))
+glDrawTextureNV.add( Input( 'x1','GLfloat' ))
+glDrawTextureNV.add( Input( 'y1','GLfloat' ))
+glDrawTextureNV.add( Input( 'z','GLfloat' ))
+glDrawTextureNV.add( Input( 's0','GLfloat' ))
+glDrawTextureNV.add( Input( 't0','GLfloat' ))
+glDrawTextureNV.add( Input( 's1','GLfloat' ))
+glDrawTextureNV.add( Input( 't1','GLfloat' ))
+glDrawTextureNV.version = ''
+glDrawTextureNV.category = 'GL_NV_draw_texture'
+glDrawTextureNV.trace = True
+glDrawTextureNV.play = True
+gl.add(glDrawTextureNV)
+
 # GL_NV_evaluators
 
 glEvalMapsNV = Function('glEvalMapsNV')

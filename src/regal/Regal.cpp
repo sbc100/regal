@@ -20812,6 +20812,18 @@ extern "C" {
     _next->call(&_next->glDrawBuffersNV)(n, bufs);
   }
 
+  /* GL_NV_draw_texture */
+
+  REGAL_DECL void REGAL_CALL glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glDrawTextureNV","(", texture, ", ", sampler, ", ", x0, ", ", y0, ", ", x1, ", ", y1, ", ", z, ", ", s0, ", ", t0, ")");
+    if (!_context) return;
+    DispatchTable *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glDrawTextureNV)(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
+  }
+
   /* GL_NV_evaluators */
 
   REGAL_DECL void REGAL_CALL glEvalMapsNV(GLenum target, GLenum mode)

@@ -65,13 +65,16 @@ struct Marker {
   void InsertEventMarker(RegalContext &ctx, const std::string &marker)
   {
     UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(marker);
     Internal("Regal::Marker::InsertEventMarker","marker=",marker);
+    Info("// ",marker);
   }
 
   void PushGroupMarker(RegalContext &ctx, const std::string &marker)
   {
     UNUSED_PARAMETER(ctx);
     Internal("Regal::Marker::PushGroupMarker","marker=",marker);
+    Info("// ",marker," ...");
     markerStack.push_back(marker);
   }
 
@@ -79,7 +82,11 @@ struct Marker {
   {
     UNUSED_PARAMETER(ctx);
     Internal("Regal::Marker::PopGroupMarker","()");
+    std::string marker;
+    if (markerStack.size())
+      marker.swap(markerStack.back());
     markerStack.pop_back();
+    Info("// ... ",marker);
   }
 
   void FrameTerminator(RegalContext &ctx);

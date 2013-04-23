@@ -510,6 +510,7 @@ _glDrawRangeElementArrayATI
 _glDrawRangeElements
 _glDrawRangeElementsBaseVertex
 _glDrawRangeElementsEXT
+_glDrawTextureNV
 _glDrawTransformFeedback
 _glDrawTransformFeedbackInstanced
 _glDrawTransformFeedbackNV

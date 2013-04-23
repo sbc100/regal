@@ -252,7 +252,7 @@ TEST( RegalPpa, PushPopDepthBufferBit )
   EXPECT_EQ( static_cast<GLboolean>( GL_TRUE ), ppa.Depth::mask );
   EXPECT_EQ( static_cast<GLclampd>( 0.25 ), ppa.Depth::clear );
 
-  ppa.glClearDepthf( 0.5 );
+  ppa.glClearDepth( 0.5f );
   EXPECT_EQ( static_cast<GLclampd>( 0.5 ), ppa.Depth::clear );
 
   // pop attrib

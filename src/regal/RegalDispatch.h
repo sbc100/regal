@@ -3369,6 +3369,10 @@ struct DispatchTable {
 
     void (REGAL_CALL *glDrawBuffersNV)(GLsizei n, const GLenum *bufs);
 
+    // GL_NV_draw_texture
+
+    void (REGAL_CALL *glDrawTextureNV)(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1);
+
     // GL_NV_evaluators
 
     void (REGAL_CALL *glEvalMapsNV)(GLenum target, GLenum mode);

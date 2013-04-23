@@ -42,13 +42,13 @@ REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
 
-#if !REGAL_SYS_WGL && !(REGAL_SYS_PPAPI && !defined(__native_client__))
+#if !REGAL_SYS_WIN32
 #include <pthread.h>
 #endif
 
-#if (REGAL_SYS_WGL && defined(REGAL_SYS_WGL_DECLARE_WGL)) || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if (REGAL_SYS_WGL && defined(REGAL_SYS_WGL_DECLARE_WGL)) || (REGAL_SYS_PPAPI && REGAL_SYS_WIN32)
 
-#if (REGAL_SYS_PPAPI && !defined(__native_client__)) // windows PPAPI build
+#if REGAL_SYS_PPAPI && REGAL_SYS_WIN32
 typedef long LONG;
 typedef unsigned long * ULONG_PTR;
 typedef void VOID;
@@ -88,7 +88,7 @@ namespace Thread
   public:
     inline Mutex()
     {
-#if REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if REGAL_SYS_WIN32
       InitializeCriticalSection(&_cs);
 #else
       pthread_mutexattr_init(&_mutexattr);
@@ -99,7 +99,7 @@ namespace Thread
 
     inline ~Mutex()
     {
-#if REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if REGAL_SYS_WIN32
       DeleteCriticalSection(&_cs);
 #else
       pthread_mutex_destroy(&_mutex);
@@ -109,7 +109,7 @@ namespace Thread
 
     inline void acquire()
     {
-#if REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if REGAL_SYS_WIN32
       EnterCriticalSection(&_cs);
 #else
       pthread_mutex_lock(&_mutex);
@@ -118,7 +118,7 @@ namespace Thread
 
     inline void release()
     {
-#if REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if REGAL_SYS_WIN32
       LeaveCriticalSection(&_cs);
 #else
       pthread_mutex_unlock(&_mutex);
@@ -127,7 +127,7 @@ namespace Thread
 
   private:
 
-#if REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__))
+#if REGAL_SYS_WIN32
     CRITICAL_SECTION _cs;
 #else
     pthread_mutex_t _mutex;

@@ -51,6 +51,9 @@
 #   define REGAL_SYS_WGL 1
 #  endif
 # endif
+# ifndef REGAL_SYS_WIN32
+#  define REGAL_SYS_WIN32 1
+# endif
 #elif defined(__APPLE__)
 # include <TargetConditionals.h>
 # if TARGET_OS_IPHONE
@@ -114,6 +117,10 @@
 # define REGAL_SYS_X11 0
 #endif
 
+#ifndef REGAL_SYS_WIN32
+# define REGAL_SYS_WIN32 0
+#endif
+
 #ifndef REGAL_SYS_ES1
 #define REGAL_SYS_ES1 0
 #endif
@@ -135,8 +142,6 @@
 #ifndef GLAPIENTRY
 #define GLAPIENTRY REGAL_CALL
 #endif
-
-
 
 #ifdef _WIN32
 #  if REGAL_DECL_EXPORT
@@ -166,6 +171,7 @@
 #define __REGAL_H__
 
 /* Skip OpenGL API if another header was included first. */
+
 #if !defined(__gl_h_) && !defined(__GL_H__) && !defined(__X_GL_H) && !defined(__gl2_h_) && !defined(__glext_h_) && !defined(__GLEXT_H_) && !defined(__gl_ATI_h_) && !defined(_OPENGL_H)
 
 #define __gl_h_
@@ -17566,6 +17572,42 @@ typedef void (REGAL_CALL *PFNGLDRAWBUFFERSNVPROC)(GLsizei n, const GLenum *bufs)
 
 #ifndef REGAL_NO_DECLARATION_GL_NV_DRAW_BUFFERS
 REGAL_DECL void REGAL_CALL glDrawBuffersNV(GLsizei n, const GLenum *bufs);
+#endif
+
+/**
+ ** GL_NV_draw_texture
+ **/
+
+#if (defined(GL_NV_DRAW_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_NV_DRAW_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_NV_DRAW_TEXTURE)
+#define REGAL_NO_ENUM_GL_NV_DRAW_TEXTURE
+#endif
+
+#if (defined(GL_NV_DRAW_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_NV_DRAW_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_NV_DRAW_TEXTURE)
+#define REGAL_NO_TYPEDEF_GL_NV_DRAW_TEXTURE
+#endif
+
+#if (defined(GL_NV_DRAW_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_NV_DRAW_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_NV_DRAW_TEXTURE)
+#define REGAL_NO_NAMESPACE_GL_NV_DRAW_TEXTURE
+#endif
+
+#if (defined(GL_NV_DRAW_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_NV_DRAW_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_NV_DRAW_TEXTURE)
+#define REGAL_NO_DECLARATION_GL_NV_DRAW_TEXTURE
+#endif
+
+#ifndef GL_NV_draw_texture
+#define GL_NV_draw_texture 1
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_NV_DRAW_TEXTURE
+typedef void (REGAL_CALL *PFNGLDRAWTEXTURENVPROC)(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_NV_DRAW_TEXTURE
+#define glDrawTextureNV                     rglDrawTextureNV
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_NV_DRAW_TEXTURE
+REGAL_DECL void REGAL_CALL glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1);
 #endif
 
 /**

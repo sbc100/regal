@@ -160,7 +160,7 @@ REGAL_DECL void RegalShareContext(RegalSystemContext ctx, RegalSystemContext oth
  */
 
 #if REGAL_SYS_PPAPI
-REGAL_DECL void RegalMakeCurrent( RegalSystemContext ctx, struct PPB_OpenGLES2 *interface );
+REGAL_DECL void RegalMakeCurrent( RegalSystemContext ctx, struct PPB_OpenGLES2 *ppb_interface );
 #else
 REGAL_DECL void RegalMakeCurrent( RegalSystemContext ctx );
 #endif

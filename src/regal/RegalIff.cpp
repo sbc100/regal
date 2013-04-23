@@ -1401,7 +1401,7 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
   {
     std::string log;
     if (helper::getInfoLog(log,tbl.call(&tbl.glGetProgramInfoLog),tbl.call(&tbl.glGetProgramiv),pg))
-      Internal( "Regal::Program::Init", log);
+      Warning( "Regal::Program::Init", log);
   }
   #endif
 
@@ -1431,7 +1431,7 @@ void Program::Shader( RegalContext * ctx, DispatchTable & tbl, GLenum type, GLui
   {
     std::string log;
     if (helper::getInfoLog(log,tbl.call(&tbl.glGetShaderInfoLog),tbl.call(&tbl.glGetShaderiv),shader))
-      Internal("Regal::Program::Shader", log);
+      Warning("Regal::Program::Shader", log);
   }
   #endif
 

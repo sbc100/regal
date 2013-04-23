@@ -17017,6 +17017,24 @@ static void REGAL_CALL missing_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
   Warning( "glDrawBuffersNV not available." );
 }
 
+// GL_NV_draw_texture
+
+static void REGAL_CALL missing_glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(sampler);
+  UNUSED_PARAMETER(x0);
+  UNUSED_PARAMETER(y0);
+  UNUSED_PARAMETER(x1);
+  UNUSED_PARAMETER(y1);
+  UNUSED_PARAMETER(z);
+  UNUSED_PARAMETER(s0);
+  UNUSED_PARAMETER(t0);
+  UNUSED_PARAMETER(s1);
+  UNUSED_PARAMETER(t1);
+  Warning( "glDrawTextureNV not available." );
+}
+
 // GL_NV_evaluators
 
 static void REGAL_CALL missing_glEvalMapsNV(GLenum target, GLenum mode)
@@ -24965,6 +24983,10 @@ void InitDispatchTableMissing(DispatchTable &tbl)
   // GL_NV_draw_buffers
 
   tbl.glDrawBuffersNV = missing_glDrawBuffersNV;
+
+  // GL_NV_draw_texture
+
+  tbl.glDrawTextureNV = missing_glDrawTextureNV;
 
   // GL_NV_evaluators
 

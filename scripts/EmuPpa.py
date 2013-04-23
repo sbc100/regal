@@ -27,7 +27,7 @@ ppaFormulae = {
   },
   'TrackDepth' : {
     'entries'    : [ '(glClearDepth|glDepthFunc|glDepthMask)(f|)' ],
-    'prefix'     : [ '_context->ppa->${m1}${m2}( ${arg0plus} );', ],
+    'prefix'     : [ '_context->ppa->${m1}( ${arg0plus} );', ],
   },
   'TrackStencil' : {
     'entries'    : [ '(glClearStencil|glStencilFunc|glStencilFuncSeparate|glStencilMask|glStencilMaskSeparate|glStencilOp|glStencilOpSeparate)' ],
@@ -84,8 +84,8 @@ ppaFormulae = {
     'prefix'     : [ '_context->ppa->glViewport${m1}${m2}( ${arg0plus} );', ],
   },
   'TrackDepthRange' : {
-    'entries'    : [ 'glDepthRange(Array|Indexed|)(f|v|)' ],
-    'prefix'     : [ '_context->ppa->glDepthRange${m1}${m2}( ${arg0plus} );', ],
+    'entries'    : [ 'glDepthRange(Array|Indexed|)(f|)(v|)' ],
+    'prefix'     : [ '_context->ppa->glDepthRange${m1}${m3}( ${arg0plus} );', ],
   },
   'TrackLine' : {
     'entries'    : [ 'glLine(Width|Stipple|)' ],
@@ -138,5 +138,25 @@ ppaFormulae = {
   'TrackClear' : {
     'entries'    : [ 'glClear(Index|Color)' ],
     'prefix'     : [ '_context->ppa->glClear${m1}( ${arg0plus} );', ],
+  },
+  'TrackPixelZoom' : {
+    'entries'    : [ 'glPixelZoom' ],
+    'prefix'     : [ '_context->ppa->glPixelZoom( ${arg0plus} );', ],
+  },
+  'TrackColorTableParameterv' : {
+    'entries'    : [ 'glColorTableParameter(i|f)v' ],
+    'prefix'     : [ '_context->ppa->glColorTableParameterv( ${arg0plus} );', ],
+  },
+  'TrackConvolutionParameter' : {
+    'entries'    : [ 'glConvolutionParameter(i|f)(v|)' ],
+    'prefix'     : [ '_context->ppa->glConvolutionParameter${m2}( ${arg0plus} );', ],
+  },
+  'TrackPixelTransfer' : {
+    'entries'    : [ 'glPixelTransfer(i|f)' ],
+    'prefix'     : [ '_context->ppa->glPixelTransfer( ${arg0plus} );', ],
+  },
+  'TrackReadBuffer' : {
+    'entries'    : [ 'glReadBuffer' ],
+    'prefix'     : [ '_context->ppa->glReadBuffer( ${arg0plus} );', ],
   },
 }

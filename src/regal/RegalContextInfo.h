@@ -462,6 +462,7 @@ struct ContextInfo
   GLboolean gl_nv_depth_nonlinear : 1;
   GLboolean gl_nv_depth_range_unclamped : 1;
   GLboolean gl_nv_draw_buffers : 1;
+  GLboolean gl_nv_draw_texture : 1;
   GLboolean gl_nv_evaluators : 1;
   GLboolean gl_nv_explicit_multisample : 1;
   GLboolean gl_nv_fbo_color_attachments : 1;

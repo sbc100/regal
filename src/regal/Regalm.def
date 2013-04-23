@@ -459,6 +459,7 @@ EXPORTS
   rglDrawRangeElements
   rglDrawRangeElementsBaseVertex
   rglDrawRangeElementsEXT
+  rglDrawTextureNV
   rglDrawTransformFeedback
   rglDrawTransformFeedbackInstanced
   rglDrawTransformFeedbackNV

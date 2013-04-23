@@ -432,6 +432,7 @@ ContextInfo::ContextInfo()
   gl_nv_depth_nonlinear(false),
   gl_nv_depth_range_unclamped(false),
   gl_nv_draw_buffers(false),
+  gl_nv_draw_texture(false),
   gl_nv_evaluators(false),
   gl_nv_explicit_multisample(false),
   gl_nv_fbo_color_attachments(false),
@@ -1310,6 +1311,7 @@ ContextInfo::init(const RegalContext &context)
   gl_nv_depth_nonlinear = e.find("GL_NV_depth_nonlinear")!=e.end();
   gl_nv_depth_range_unclamped = e.find("GL_NV_depth_range_unclamped")!=e.end();
   gl_nv_draw_buffers = e.find("GL_NV_draw_buffers")!=e.end();
+  gl_nv_draw_texture = e.find("GL_NV_draw_texture")!=e.end();
   gl_nv_evaluators = e.find("GL_NV_evaluators")!=e.end();
   gl_nv_explicit_multisample = e.find("GL_NV_explicit_multisample")!=e.end();
   gl_nv_fbo_color_attachments = e.find("GL_NV_fbo_color_attachments")!=e.end();
@@ -1968,6 +1970,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_depth_nonlinear")) return gl_nv_depth_nonlinear;
   if (!strcmp(ext,"GL_NV_depth_range_unclamped")) return gl_nv_depth_range_unclamped;
   if (!strcmp(ext,"GL_NV_draw_buffers")) return gl_nv_draw_buffers;
+  if (!strcmp(ext,"GL_NV_draw_texture")) return gl_nv_draw_texture;
   if (!strcmp(ext,"GL_NV_evaluators")) return gl_nv_evaluators;
   if (!strcmp(ext,"GL_NV_explicit_multisample")) return gl_nv_explicit_multisample;
   if (!strcmp(ext,"GL_NV_fbo_color_attachments")) return gl_nv_fbo_color_attachments;

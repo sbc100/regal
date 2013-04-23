@@ -37922,6 +37922,32 @@ static void REGAL_CALL code_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static void REGAL_CALL code_glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.code._next;
+    RegalAssert(_next);
+    _next->call(&_next->glDrawTextureNV)(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glDrawTextureNV(";
+                   _code << texture;
+    _code << ", "; _code << sampler;
+    _code << ", "; _code << x0;
+    _code << ", "; _code << y0;
+    _code << ", "; _code << x1;
+    _code << ", "; _code << y1;
+    _code << ", "; _code << z;
+    _code << ", "; _code << s0;
+    _code << ", "; _code << t0;
+    _code << ", "; _code << s1;
+    _code << ", "; _code << t1;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static void REGAL_CALL code_glEvalMapsNV(GLenum target, GLenum mode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -51749,6 +51775,7 @@ void InitDispatchTableCode(DispatchTable &tbl)
   tbl.glDepthBoundsdNV = code_glDepthBoundsdNV;
   tbl.glDepthRangedNV = code_glDepthRangedNV;
   tbl.glDrawBuffersNV = code_glDrawBuffersNV;
+  tbl.glDrawTextureNV = code_glDrawTextureNV;
   tbl.glEvalMapsNV = code_glEvalMapsNV;
   tbl.glGetMapAttribParameterfvNV = code_glGetMapAttribParameterfvNV;
   tbl.glGetMapAttribParameterivNV = code_glGetMapAttribParameterivNV;

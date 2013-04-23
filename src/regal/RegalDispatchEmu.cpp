@@ -9122,6 +9122,14 @@ static void REGAL_CALL emu_glPixelTransferf(GLenum pname, GLfloat param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPixelTransfer( pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -9192,6 +9200,14 @@ static void REGAL_CALL emu_glPixelTransferi(GLenum pname, GLint param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPixelTransfer( pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -9262,6 +9278,14 @@ static void REGAL_CALL emu_glPixelZoom(GLfloat xfactor, GLfloat yfactor)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glPixelZoom( xfactor, yfactor );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -11468,6 +11492,14 @@ static void REGAL_CALL emu_glReadBuffer(GLenum mode)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glReadBuffer( mode );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -29648,7 +29680,7 @@ static void REGAL_CALL emu_glClearDepthf(GLclampf d)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 10;
-        _context->ppa->glClearDepthf( d );
+        _context->ppa->glClearDepth( d );
       }
       #endif
     case 1 :
@@ -29677,7 +29709,7 @@ static void REGAL_CALL emu_glDepthRangef(GLclampf n, GLclampf f)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 10;
-        _context->ppa->glDepthRangef( n, f );
+        _context->ppa->glDepthRange( n, f );
       }
       #endif
     case 1 :
@@ -31658,6 +31690,180 @@ static void REGAL_CALL emu_glUniformMatrix4x3dv(GLint location, GLsizei count, G
 }
 
 // GL_ARB_imaging
+
+static void REGAL_CALL emu_glColorTableParameterfv(GLenum target, GLenum pname, const GLfloat *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glColorTableParameterv( target, pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glColorTableParameterfv)(target, pname, params);
+}
+
+static void REGAL_CALL emu_glColorTableParameteriv(GLenum target, GLenum pname, const GLint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glColorTableParameterv( target, pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glColorTableParameteriv)(target, pname, params);
+}
+
+static void REGAL_CALL emu_glConvolutionParameterf(GLenum target, GLenum pname, GLfloat params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glConvolutionParameter( target, pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glConvolutionParameterf)(target, pname, params);
+}
+
+static void REGAL_CALL emu_glConvolutionParameterfv(GLenum target, GLenum pname, const GLfloat *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glConvolutionParameterv( target, pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glConvolutionParameterfv)(target, pname, params);
+}
+
+static void REGAL_CALL emu_glConvolutionParameteri(GLenum target, GLenum pname, GLint params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glConvolutionParameter( target, pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glConvolutionParameteri)(target, pname, params);
+}
+
+static void REGAL_CALL emu_glConvolutionParameteriv(GLenum target, GLenum pname, const GLint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glConvolutionParameterv( target, pname, params );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glConvolutionParameteriv)(target, pname, params);
+}
 
 // GL_ARB_instanced_arrays
 
@@ -57570,6 +57776,8 @@ static void REGAL_CALL emu_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
 
 }
 
+// GL_NV_draw_texture
+
 // GL_NV_evaluators
 
 // GL_NV_explicit_multisample
@@ -59496,6 +59704,15 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glUniformMatrix4dv = emu_glUniformMatrix4dv;
    tbl.glUniformMatrix4x2dv = emu_glUniformMatrix4x2dv;
    tbl.glUniformMatrix4x3dv = emu_glUniformMatrix4x3dv;
+
+// GL_ARB_imaging
+
+   tbl.glColorTableParameterfv = emu_glColorTableParameterfv;
+   tbl.glColorTableParameteriv = emu_glColorTableParameteriv;
+   tbl.glConvolutionParameterf = emu_glConvolutionParameterf;
+   tbl.glConvolutionParameterfv = emu_glConvolutionParameterfv;
+   tbl.glConvolutionParameteri = emu_glConvolutionParameteri;
+   tbl.glConvolutionParameteriv = emu_glConvolutionParameteriv;
 
 // GL_ARB_map_buffer_range
 

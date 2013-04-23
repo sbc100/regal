@@ -18655,6 +18655,17 @@ static void REGAL_CALL debug_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
   _next->call(&_next->glDrawBuffersNV)(n, bufs);
 }
 
+// GL_NV_draw_texture
+
+static void REGAL_CALL debug_glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.debug._next;
+  RegalAssert(_next);
+  _next->call(&_next->glDrawTextureNV)(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
+}
+
 // GL_NV_evaluators
 
 static void REGAL_CALL debug_glEvalMapsNV(GLenum target, GLenum mode)
@@ -27061,6 +27072,10 @@ void InitDispatchTableDebug(DispatchTable &tbl)
   // GL_NV_draw_buffers
 
   tbl.glDrawBuffersNV = debug_glDrawBuffersNV;
+
+  // GL_NV_draw_texture
+
+  tbl.glDrawTextureNV = debug_glDrawTextureNV;
 
   // GL_NV_evaluators
 

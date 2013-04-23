@@ -47,13 +47,13 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalMutex.h"
 
-#if !(REGAL_SYS_WGL || (REGAL_SYS_PPAPI && !defined(__native_client__)))
+#if !REGAL_SYS_WIN32
 #include <pthread.h>
 #endif
 
 // Otherwise we'd need to #include <windows.h>
 
-#if defined(_WIN32) && !defined(__native_client__)
+#if REGAL_SYS_WIN32
 extern "C"
 {
   __declspec(dllimport) void __stdcall OutputDebugStringA( __in_opt const char* lpOutputString);
@@ -600,10 +600,19 @@ namespace Logging {
 #if REGAL_SYS_WGL
       OutputDebugStringA(m.c_str());
 #elif REGAL_SYS_ANDROID
-      // ANDROID_LOG_INFO
-      // ANDROID_LOG_WARN
-      // ANDROID_LOG_ERROR
-      __android_log_write(ANDROID_LOG_INFO, REGAL_LOG_TAG, m.c_str());
+      {
+        android_LogPriority adrLog;
+
+        switch(mode)
+        {
+          case LOG_ERROR:   adrLog = ANDROID_LOG_ERROR; break;
+          case LOG_WARNING: adrLog = ANDROID_LOG_WARN;  break;
+          case LOG_INFO:    adrLog = ANDROID_LOG_INFO;  break;
+          default:          adrLog = ANDROID_LOG_DEBUG; break;
+        }
+
+        __android_log_write(adrLog, REGAL_LOG_TAG, m.c_str());
+      }
 #endif
 
 #if REGAL_LOG_JSON && !REGAL_NO_JSON

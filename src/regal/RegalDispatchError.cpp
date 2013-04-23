@@ -50781,6 +50781,33 @@ static void REGAL_CALL error_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
   }
 }
 
+// GL_NV_draw_texture
+
+static void REGAL_CALL error_glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1)
+{
+  Internal("error_glDrawTextureNV","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.error._next;
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glDrawTextureNV)(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glDrawTextureNV : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_NV_evaluators
 
 static void REGAL_CALL error_glEvalMapsNV(GLenum target, GLenum mode)
@@ -69139,6 +69166,10 @@ void InitDispatchTableError(DispatchTable &tbl)
   // GL_NV_draw_buffers
 
   tbl.glDrawBuffersNV = error_glDrawBuffersNV;
+
+  // GL_NV_draw_texture
+
+  tbl.glDrawTextureNV = error_glDrawTextureNV;
 
   // GL_NV_evaluators
 

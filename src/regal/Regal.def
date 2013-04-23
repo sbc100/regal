@@ -459,6 +459,7 @@ EXPORTS
   glDrawRangeElements
   glDrawRangeElementsBaseVertex
   glDrawRangeElementsEXT
+  glDrawTextureNV
   glDrawTransformFeedback
   glDrawTransformFeedbackInstanced
   glDrawTransformFeedbackNV
