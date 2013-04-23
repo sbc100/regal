@@ -97,9 +97,9 @@ struct Dsa
         drv.buffer = 0;
         drv.glslProgram = 0;
         drv.framebuffer = 0;
-        drv.framebufferTarget = 0;
+        drv.framebufferTarget = GL_FRAMEBUFFER;
         drv.renderbuffer = 0;
-        drv.renderbufferTarget = 0;
+        drv.renderbufferTarget = GL_RENDERBUFFER;
 
         dsa.matrixMode = REGAL_DSA_INVALID;
         dsa.activeTexture = REGAL_DSA_INVALID;
