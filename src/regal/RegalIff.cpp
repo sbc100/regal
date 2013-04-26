@@ -300,7 +300,8 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
 
   src << "void main() {\n";
   src << "    gl_Position = rglProjection * rglModelview * rglVertex;\n";
-  if( st.lighting || hasEyeLinearTexGen || hasClipPlanes || ( st.fog.enable && st.fog.useDepth ) ) {
+  if( st.lighting || hasNormalMap || hasReflectionMap || hasEyeLinearTexGen ||
+      hasClipPlanes || ( st.fog.enable && st.fog.useDepth ) ) {
     src << "    vec4 eh = rglModelview * rglVertex;\n";
   }
 

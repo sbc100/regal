@@ -501,6 +501,7 @@ jsonslAction(jsonsl_t jsn, jsonsl_action_t action, struct jsonsl_state_st *state
             else
               parser->onValue((long)strtoul(jsn->base+state->pos_begin,NULL,0));
           }
+          break;
 
         case JSONSL_T_STRING:
           parser->onValue(std::string(jsn->base+state->pos_begin+1,state->pos_cur-state->pos_begin-1));

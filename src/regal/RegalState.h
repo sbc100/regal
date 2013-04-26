@@ -276,18 +276,25 @@ namespace State {
     , stencilTest(GL_FALSE)
     , vertexProgramTwoSide(GL_FALSE)
     {
-      std::memset(blend,GL_FALSE,sizeof(blend));
-      std::memset(clipDistance,GL_FALSE,sizeof(clipDistance));
-      std::memset(light,GL_FALSE,sizeof(light));
-      std::memset(scissorTest,GL_FALSE,sizeof(scissorTest));
-      std::memset(texture1d,GL_FALSE,sizeof(texture1d));
-      std::memset(texture2d,GL_FALSE,sizeof(texture2d));
-      std::memset(texture3d,GL_FALSE,sizeof(texture3d));
-      std::memset(textureCubeMap,GL_FALSE,sizeof(textureCubeMap));
-      std::memset(textureGenQ,GL_FALSE,sizeof(textureGenQ));
-      std::memset(textureGenR,GL_FALSE,sizeof(textureGenR));
-      std::memset(textureGenS,GL_FALSE,sizeof(textureGenS));
-      std::memset(textureGenT,GL_FALSE,sizeof(textureGenT));
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        blend[ii] = GL_FALSE;
+      for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
+        clipDistance[ii] = GL_FALSE;
+      for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+        light[ii] = GL_FALSE;
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+        scissorTest[ii] = GL_FALSE;
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+      {
+        texture1d[ii] = GL_FALSE;
+        texture2d[ii] = GL_FALSE;
+        texture3d[ii] = GL_FALSE;
+        textureCubeMap[ii] = GL_FALSE;
+        textureGenQ[ii] = GL_FALSE;
+        textureGenR[ii] = GL_FALSE;
+        textureGenS[ii] = GL_FALSE;
+        textureGenT[ii] = GL_FALSE;
+      }
     }
 
     inline Enable(const Enable &other)
@@ -387,7 +394,6 @@ namespace State {
         clipDistance[ii] = dt.call(&dt.glIsEnabled)(GL_CLIP_DISTANCE0+ii);
       colorLogicOp  = dt.call(&dt.glIsEnabled)(GL_COLOR_LOGIC_OP);
       colorMaterial = dt.call(&dt.glIsEnabled)(GL_COLOR_MATERIAL);
-      colorMaterial = dt.call(&dt.glIsEnabled)(GL_COLOR_MATERIAL);
       colorSum = dt.call(&dt.glIsEnabled)(GL_COLOR_SUM);
       colorTable = dt.call(&dt.glIsEnabled)(GL_COLOR_TABLE);
       convolution1d = dt.call(&dt.glIsEnabled)(GL_CONVOLUTION_1D);
@@ -466,7 +472,6 @@ namespace State {
       for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
         setEnablei(dt,GL_BLEND,ii,blend[ii]);
       setEnable(dt,GL_COLOR_LOGIC_OP,colorLogicOp);
-      setEnable(dt,GL_COLOR_MATERIAL,colorMaterial);
       dt.call(&dt.glClampColor)(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
       dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
       dt.call(&dt.glClampColor)(GL_CLAMP_VERTEX_COLOR,clampVertexColor);
@@ -1034,7 +1039,7 @@ namespace State {
 
     inline ClipPlaneEquation()
     {
-      data[0] = data[1] = data[2] = data[3] = 0;
+      data[0] = data[1] = data[2] = data[3] = 0.0f;
     }
 
     bool operator!= (const ClipPlaneEquation& other) const
@@ -1304,7 +1309,7 @@ namespace State {
 
     inline AccumBuffer()
     {
-      clear[0] = clear[1] = clear[2] = clear[3] = 0;
+      clear[0] = clear[1] = clear[2] = clear[3] = 0.0f;
     }
 
     inline AccumBuffer &swap(AccumBuffer &other)
@@ -1353,9 +1358,15 @@ namespace State {
 
     inline Scissor()
     {
-      std::memset(scissorTest,GL_FALSE,sizeof(scissorTest));
-      std::memset(scissorBox,0,sizeof(scissorBox));
-      std::memset(valid,false,sizeof(valid));
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      {
+        scissorTest[ii] = GL_FALSE;
+        scissorBox[ii][0] = 0;
+        scissorBox[ii][1] = 0;
+        scissorBox[ii][2] = 0;
+        scissorBox[ii][3] = 0;
+        valid[ii] = false;
+      }
     }
 
     inline Scissor(const Scissor &other)
@@ -1366,7 +1377,7 @@ namespace State {
 
     bool defined() const
     {
-      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
         if (!valid[ii])
           return false;
@@ -1427,7 +1438,7 @@ namespace State {
 
     void glScissor( GLint left, GLint bottom, GLsizei width, GLsizei height )
     {
-      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
         scissorBox[ii][0] = left;
         scissorBox[ii][1] = bottom;
@@ -1490,18 +1501,21 @@ namespace State {
 
     inline Viewport()
     {
-      std::memset(viewport,0,sizeof(viewport));
-      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
-        depthRange[ii][0] = 0;
-        depthRange[ii][1] = 1;
+        viewport[ii][0] = 0.0f;
+        viewport[ii][1] = 0.0f;
+        viewport[ii][2] = 0.0f;
+        viewport[ii][3] = 0.0f;
+        depthRange[ii][0] = 0.0f;
+        depthRange[ii][1] = 1.0f;
+        valid[ii] = false;
       }
-      std::memset(valid,false,sizeof(valid));
     }
 
     bool defined() const
     {
-      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
         if (!valid[ii])
           return false;
@@ -1558,7 +1572,7 @@ namespace State {
 
     template <typename T> void glDepthRange( T n, T f )
     {
-      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
         depthRange[ii][0] = static_cast<GLdouble>(n);
         depthRange[ii][1] = static_cast<GLdouble>(f);
@@ -1590,7 +1604,7 @@ namespace State {
     void glViewport( GLint x, GLint y, GLsizei w, GLsizei h )
     {
       Internal("Regal::State::Viewport::glViewport( ",x,", ",y,", ",w,", ",h," )");
-      for (GLuint ii = 0; ii < REGAL_MAX_VIEWPORTS; ii++)
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
         viewport[ii][0] = static_cast<GLfloat>(x);
         viewport[ii][1] = static_cast<GLfloat>(y);
@@ -1824,17 +1838,19 @@ namespace State {
     {
       RegalAssert(static_cast<int>(GL_MAP1_VERTEX_4-GL_MAP1_COLOR_4) == 8);
       RegalAssert(static_cast<int>(GL_MAP2_VERTEX_4-GL_MAP2_COLOR_4) == 8);
-      std::memset(map1dEnables,GL_FALSE,sizeof(map1dEnables));
-      std::memset(map2dEnables,GL_FALSE,sizeof(map2dEnables));
-      map1GridSegments = 1;
-      map1GridDomain[0] = 0;
-      map1GridDomain[1] = 1;
+      for (GLuint ii=0; ii<9; ii++)
+      {
+        map1dEnables[ii] = GL_FALSE;
+        map2dEnables[ii] = GL_FALSE;
+      }
+      map1GridDomain[0] = 0.0;
+      map1GridDomain[1] = 1.0;
       map2GridSegments[0] = 1;
       map2GridSegments[1] = 1;
-      map2GridDomain[0] = 0;
-      map2GridDomain[1] = 1;
-      map2GridDomain[2] = 0;
-      map2GridDomain[3] = 1;
+      map2GridDomain[0] = 0.0;
+      map2GridDomain[1] = 1.0;
+      map2GridDomain[2] = 0.0;
+      map2GridDomain[3] = 1.0;
     }
 
     inline Eval &swap(Eval &other)
@@ -1934,7 +1950,10 @@ namespace State {
     , coordSrc(GL_FRAGMENT_DEPTH)
     , colorSum(GL_FALSE)
     {
-      std::memset(color,0,sizeof(color));
+      color[0] = 0.0f;
+      color[1] = 0.0f;
+      color[2] = 0.0f;
+      color[3] = 0.0f;
     }
 
     inline Fog &swap(Fog &other)
@@ -2020,10 +2039,11 @@ namespace State {
     , fadeThresholdSize(1)
     , spriteCoordOrigin(GL_UPPER_LEFT)
     {
-      distanceAttenuation[0] = 1;
-      distanceAttenuation[1] = 0;
-      distanceAttenuation[2] = 0;
-      std::memset(coordReplace,GL_FALSE,sizeof(coordReplace));
+      distanceAttenuation[0] = 1.0f;
+      distanceAttenuation[1] = 0.0f;
+      distanceAttenuation[2] = 0.0f;
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+        coordReplace[ii] = GL_FALSE;
     }
 
     inline Point &swap(Point &other)
@@ -2243,17 +2263,31 @@ namespace State {
     , indexClearValue(0)
     , valid(false)
     {
-      std::memset(blend,GL_FALSE,sizeof(blend));
-      std::memset(blendSrcRgb,GL_ONE,sizeof(blendSrcRgb));
-      std::memset(blendSrcAlpha,GL_ONE,sizeof(blendSrcAlpha));
-      std::memset(blendDstRgb,GL_ZERO,sizeof(blendDstRgb));
-      std::memset(blendDstAlpha,GL_ZERO,sizeof(blendDstAlpha));
-      std::memset(blendEquationRgb,GL_FUNC_ADD,sizeof(blendEquationRgb));
-      std::memset(blendEquationAlpha,GL_FUNC_ADD,sizeof(blendEquationAlpha));
-      std::memset(blendColor,0,sizeof(blendColor));
-      std::memset(colorWritemask,GL_TRUE,sizeof(colorWritemask));
-      std::memset(colorClearValue,0,sizeof(colorClearValue));
-      std::memset(drawBuffers,GL_NONE,sizeof(drawBuffers));
+      blendColor[0] = 0.0f;
+      blendColor[1] = 0.0f;
+      blendColor[2] = 0.0f;
+      blendColor[3] = 0.0f;
+
+      colorClearValue[0] = 0.0f;
+      colorClearValue[1] = 0.0f;
+      colorClearValue[2] = 0.0f;
+      colorClearValue[3] = 0.0f;
+
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+      {
+        blend[ii] = GL_FALSE;
+        blendSrcRgb[ii] = GL_ONE;
+        blendSrcAlpha[ii] = GL_ONE;
+        blendDstRgb[ii] = GL_ZERO;
+        blendDstAlpha[ii] = GL_ZERO;
+        blendEquationRgb[ii]   = GL_FUNC_ADD;
+        blendEquationAlpha[ii] = GL_FUNC_ADD;
+        colorWritemask[ii][0] = GL_TRUE;
+        colorWritemask[ii][1] = GL_TRUE;
+        colorWritemask[ii][2] = GL_TRUE;
+        colorWritemask[ii][3] = GL_TRUE;
+        drawBuffers[ii] = GL_NONE;
+      }
     }
 
     inline bool defined() const
@@ -2500,17 +2534,19 @@ namespace State {
 
     void glDrawBuffer(GLenum buf)
     {
-      std::memset(drawBuffers,GL_NONE,sizeof(drawBuffers));
       drawBuffers[0] = buf;
+      for (GLuint ii=1; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        drawBuffers[ii] = GL_NONE;
     }
 
     void glDrawBuffers(GLsizei n, const GLenum *bufs)
     {
       if (n < REGAL_MAX_DRAW_BUFFERS)
       {
-        std::memset(drawBuffers,GL_NONE,sizeof(drawBuffers));
         for (int ii=0; ii<n; ii++)
           drawBuffers[ii] = bufs[ii];
+        for (int ii=n; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          drawBuffers[ii] = GL_NONE;
       }
     }
 
@@ -2620,12 +2656,28 @@ namespace State {
     , zoomY(1)
     , valid(false)
     {
-      std::memset(colorTableScale,1,sizeof(colorTableScale));
-      std::memset(colorTableBias,0,sizeof(colorTableBias));
-      std::memset(convolutionBorderColor,0,sizeof(convolutionBorderColor));
-      std::memset(convolutionBorderMode,GL_REDUCE,sizeof(convolutionBorderMode));
-      std::memset(convolutionFilterScale,1,sizeof(convolutionFilterScale));
-      std::memset(convolutionFilterBias,0,sizeof(convolutionFilterBias));
+      for (int ii=0; ii<4; ii++)
+      {
+        colorTableScale[0][ii] = 1.0f;
+        colorTableScale[1][ii] = 1.0f;
+        colorTableScale[2][ii] = 1.0f;
+        colorTableBias[0][ii] = 0.0f;
+        colorTableBias[1][ii] = 0.0f;
+        colorTableBias[2][ii] = 0.0f;
+        convolutionBorderColor[0][ii] = 0.0f;
+        convolutionBorderColor[1][ii] = 0.0f;
+        convolutionBorderColor[2][ii] = 0.0f;
+        convolutionFilterScale[0][ii] = 1.0f;
+        convolutionFilterScale[1][ii] = 1.0f;
+        convolutionFilterScale[2][ii] = 1.0f;
+        convolutionFilterBias[0][ii] = 0.0f;
+        convolutionFilterBias[1][ii] = 0.0f;
+        convolutionFilterBias[2][ii] = 0.0f;
+      }
+
+      convolutionBorderMode[0] = GL_REDUCE;
+      convolutionBorderMode[1] = GL_REDUCE;
+      convolutionBorderMode[2] = GL_REDUCE;
     }
 
     inline bool defined() const
@@ -3017,6 +3069,479 @@ namespace State {
     void glReadBuffer( GLenum src )
     {
       readBuffer = src;
+    }
+  };
+
+  //
+  // glPushAttrib(GL_LIGHTING_BIT)
+  //
+  struct LightingFace
+  {
+    GLfloat ambient[4];      // glMaterialfv GL_AMBIENT
+    GLfloat diffuse[4];      // glMaterialfv GL_DIFFUSE
+    GLfloat specular[4];     // glMaterialfv GL_SPECULAR
+    GLfloat emission[4];     // glMaterialfv GL_EMISSION
+    GLfloat shininess;       // glMaterialf  GL_SHININESS
+    GLfloat colorIndexes[3]; // glMaterialfv GL_COLOR_INDEXES
+
+    inline LightingFace()
+    : shininess(0)
+    {
+      ambient[0] = 0.2f;
+      ambient[1] = 0.2f;
+      ambient[2] = 0.2f;
+      ambient[3] = 1.0f;
+
+      diffuse[0] = 0.8f;
+      diffuse[1] = 0.8f;
+      diffuse[2] = 0.8f;
+      diffuse[3] = 1.0f;
+
+      specular[0] = 0.0f;
+      specular[1] = 0.0f;
+      specular[2] = 0.0f;
+      specular[3] = 1.0f;
+
+      emission[0] = 0.0f;
+      emission[1] = 0.0f;
+      emission[2] = 0.0f;
+      emission[3] = 1.0f;
+
+      colorIndexes[0] = 0.0f;
+      colorIndexes[1] = 1.0f;
+      colorIndexes[2] = 1.0f;
+    }
+
+    inline LightingFace &swap(LightingFace &other)
+    {
+      std::swap_ranges(ambient,ambient+4,other.ambient);
+      std::swap_ranges(diffuse,diffuse+4,other.diffuse);
+      std::swap_ranges(specular,specular+4,other.specular);
+      std::swap_ranges(emission,emission+4,other.emission);
+      std::swap(shininess,other.shininess);
+      std::swap_ranges(colorIndexes,colorIndexes+3,other.colorIndexes);
+      return *this;
+    }
+
+    inline LightingFace &get(DispatchTable &dt, GLenum face)
+    {
+      dt.call(&dt.glGetMaterialfv)(face, GL_AMBIENT,       ambient);
+      dt.call(&dt.glGetMaterialfv)(face, GL_DIFFUSE,       diffuse);
+      dt.call(&dt.glGetMaterialfv)(face, GL_SPECULAR,      specular);
+      dt.call(&dt.glGetMaterialfv)(face, GL_EMISSION,      emission);
+      dt.call(&dt.glGetMaterialfv)(face, GL_SHININESS,     &shininess);
+      dt.call(&dt.glGetMaterialfv)(face, GL_COLOR_INDEXES, colorIndexes);
+      return *this;
+    }
+
+    inline const LightingFace &set(DispatchTable &dt, GLenum face) const
+    {
+      dt.call(&dt.glMaterialfv)(face, GL_AMBIENT,       ambient);
+      dt.call(&dt.glMaterialfv)(face, GL_DIFFUSE,       diffuse);
+      dt.call(&dt.glMaterialfv)(face, GL_SPECULAR,      specular);
+      dt.call(&dt.glMaterialfv)(face, GL_EMISSION,      emission);
+      dt.call(&dt.glMaterialf )(face, GL_SHININESS,     shininess);
+      dt.call(&dt.glMaterialfv)(face, GL_COLOR_INDEXES, colorIndexes);
+      return *this;
+    }
+
+    inline std::string toString(GLenum face,const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glMaterialfv(",Token::toString(face),",GL_AMBIENT,[",
+                                          ambient[0],",", ambient[1],",", ambient[2],",", ambient[3],"]);",delim);
+      tmp << print_string("glMaterialfv(",Token::toString(face),",GL_DIFFUSE,[",
+                                          diffuse[0],",", diffuse[1],",", diffuse[2],",", diffuse[3],"]);",delim);
+      tmp << print_string("glMaterialfv(",Token::toString(face),",GL_SPECULAR,[",
+                                          specular[0],",", specular[1],",", specular[2],",", specular[3],"]);",delim);
+      tmp << print_string("glMaterialfv(",Token::toString(face),",GL_EMISSION,[",
+                                          emission[0],",", emission[1],",", emission[2],",", emission[3],"]);",delim);
+      tmp << print_string("glMaterialf(",Token::toString(face),",GL_SHININESS,",shininess,");",delim);
+      tmp << print_string("glMaterialfv(",Token::toString(face),",GL_COLOR_INDEXES,[",
+                                          colorIndexes[0],",", colorIndexes[1],",", colorIndexes[2],"]);",delim);
+      return tmp;
+    }
+  };
+
+  struct LightingLight
+  {
+    GLboolean     enabled;              // GL_LIGHTi enabled
+    GLfloat       ambient[4];           // glLightfv GL_AMBIENT
+    GLfloat       diffuse[4];           // glLightfv GL_DIFFUSE
+    GLfloat       specular[4];          // glLightfv GL_SPECULAR
+    GLfloat       position[4];          // glLightfv GL_POSITION
+    GLfloat       constantAttenuation;  // glLightf  GL_CONSTANT_ATTENUATION
+    GLfloat       linearAttenuation;    // glLightf  GL_LINEAR_ATTENUATION
+    GLfloat       quadraticAttenuation; // glLightf  GL_QUADRATIC_ATTENUATION
+    GLfloat       spotDirection[3];     // glLightfv GL_SPOT_DIRECTION
+    GLfloat       spotExponent;         // glLightf  GL_SPOT_EXPONENT
+    GLfloat       spotCutoff;           // glLightf  GL_SPOT_CUTOFF
+
+    LightingLight()
+    : enabled(GL_FALSE)
+    , constantAttenuation(1)
+    , linearAttenuation(0)
+    , quadraticAttenuation(0)
+    , spotExponent(0)
+    , spotCutoff(180)
+    {
+      ambient[0] = 0.0f;
+      ambient[1] = 0.0f;
+      ambient[2] = 0.0f;
+      ambient[3] = 1.0f;
+
+      diffuse[0] = 0.0f;
+      diffuse[1] = 0.0f;
+      diffuse[2] = 0.0f;
+      diffuse[3] = 1.0f;
+
+      specular[0] = 0.0f;
+      specular[1] = 0.0f;
+      specular[2] = 0.0f;
+      specular[3] = 1.0f;
+
+      position[0] = 0.0f;
+      position[1] = 0.0f;
+      position[2] = 1.0f;
+      position[3] = 0.0f;
+ 
+      spotDirection[0] =  0.0f;
+      spotDirection[1] =  0.0f;
+      spotDirection[2] = -1.0f;
+    }
+
+    inline LightingLight &swap(LightingLight &other)
+    {
+      std::swap(enabled,other.enabled);
+      std::swap_ranges(ambient,ambient+4,other.ambient);
+      std::swap_ranges(diffuse,diffuse+4,other.diffuse);
+      std::swap_ranges(specular,specular+4,other.specular);
+      std::swap_ranges(position,position+4,other.position);
+      std::swap(constantAttenuation,other.constantAttenuation);
+      std::swap(linearAttenuation,other.linearAttenuation);
+      std::swap(quadraticAttenuation,other.quadraticAttenuation);
+      std::swap_ranges(spotDirection,spotDirection+3,other.spotDirection);
+      std::swap(spotExponent,other.spotExponent);
+      std::swap(spotCutoff,other.spotCutoff);
+      return *this;
+    }
+
+    inline LightingLight &get(DispatchTable &dt, GLenum light)
+    {
+      enabled = dt.call(&dt.glIsEnabled)(light);
+      dt.call(&dt.glGetLightfv)(light, GL_AMBIENT,               ambient);
+      dt.call(&dt.glGetLightfv)(light, GL_DIFFUSE,               diffuse);
+      dt.call(&dt.glGetLightfv)(light, GL_SPECULAR,              specular);
+      dt.call(&dt.glGetLightfv)(light, GL_POSITION,              position);
+      dt.call(&dt.glGetLightfv)(light, GL_CONSTANT_ATTENUATION,  &constantAttenuation);
+      dt.call(&dt.glGetLightfv)(light, GL_LINEAR_ATTENUATION,    &linearAttenuation);
+      dt.call(&dt.glGetLightfv)(light, GL_QUADRATIC_ATTENUATION, &quadraticAttenuation);
+      dt.call(&dt.glGetLightfv)(light, GL_SPOT_DIRECTION,        spotDirection);
+      dt.call(&dt.glGetLightfv)(light, GL_SPOT_EXPONENT,         &spotExponent);
+      dt.call(&dt.glGetLightfv)(light, GL_SPOT_CUTOFF,           &spotCutoff);
+      return *this;
+    }
+
+    inline const LightingLight &set(DispatchTable &dt, GLenum light) const
+    {
+      setEnable(dt,light,enabled);
+      dt.call(&dt.glLightfv)(light, GL_AMBIENT,               ambient);
+      dt.call(&dt.glLightfv)(light, GL_DIFFUSE,               diffuse);
+      dt.call(&dt.glLightfv)(light, GL_SPECULAR,              specular);
+      dt.call(&dt.glLightfv)(light, GL_POSITION,              position);
+      dt.call(&dt.glLightf )(light, GL_CONSTANT_ATTENUATION,  constantAttenuation);
+      dt.call(&dt.glLightf )(light, GL_LINEAR_ATTENUATION,    linearAttenuation);
+      dt.call(&dt.glLightf )(light, GL_QUADRATIC_ATTENUATION, quadraticAttenuation);
+      dt.call(&dt.glLightfv)(light, GL_SPOT_DIRECTION,        spotDirection);
+      dt.call(&dt.glLightf )(light, GL_SPOT_EXPONENT,         spotExponent);
+      dt.call(&dt.glLightf )(light, GL_SPOT_CUTOFF,           spotCutoff);
+      return *this;
+    }
+
+    void toString(string_list &tmp, GLenum light, const char *delim = "\n") const
+    {
+      tmp << print_string(enabled ? "glEnable(" : "glDisable(",Token::toString(light),");",delim);
+      tmp << print_string("glLightfv(",Token::toString(light),",GL_AMBIENT,[",
+                                       ambient[0],",", ambient[1],",", ambient[2],",", ambient[3],"]);",delim);
+      tmp << print_string("glLightfv(",Token::toString(light),",GL_DIFFUSE,[",
+                                       diffuse[0],",", diffuse[1],",", diffuse[2],",", diffuse[3],"]);",delim);
+      tmp << print_string("glLightfv(",Token::toString(light),",GL_SPECULAR,[",
+                                       specular[0],",", specular[1],",", specular[2],",", specular[3],"]);",delim);
+      tmp << print_string("glLightfv(",Token::toString(light),",GL_POSITION,[",
+                                       position[0],",", position[1],",", position[2],",", position[3],"]);",delim);
+      tmp << print_string("glLightf(",Token::toString(light),",GL_CONSTANT_ATTENUATION,",constantAttenuation,");",delim);
+      tmp << print_string("glLightf(",Token::toString(light),",GL_LINEAR_ATTENUATION,",linearAttenuation,");",delim);
+      tmp << print_string("glLightf(",Token::toString(light),",GL_QUADRATIC_ATTENUATION,",quadraticAttenuation,");",delim);
+      tmp << print_string("glLightfv(",Token::toString(light),",GL_SPOT_DIRECTION,[",
+                                       spotDirection[0],",", spotDirection[1],",", spotDirection[2],"]);",delim);
+      tmp << print_string("glLightf(",Token::toString(light),",GL_SPOT_EXPONENT,",spotExponent,");",delim);
+      tmp << print_string("glLightf(",Token::toString(light),",GL_SPOT_CUTOFF,",spotCutoff,");",delim);
+    }
+  };
+
+  struct Lighting
+  {
+    GLenum        shadeModel;                              // GL_SHADE_MODEL
+    GLenum        clampVertexColor;                        // GL_CLAMP_VERTEX_COLOR
+    GLenum        provokingVertex;                         // GL_CLAMP_VERTEX_COLOR
+    GLboolean     lighting;                                // GL_LIGHTING
+    GLboolean     colorMaterial;                           // GL_COLOR_MATERIAL
+    GLenum        colorMaterialParameter;                  // GL_COLOR_MATERIAL_PARAMETER
+    GLenum        colorMaterialFace;                       // GL_COLOR_MATERIAL_FACE
+    LightingFace  front;                                   // GL_FRONT
+    LightingFace  back;                                    // GL_BACK
+    GLfloat       lightModelAmbient[4];                    // GL_LIGHT_MODEL_AMBIENT
+    GLboolean     lightModelLocalViewer;                   // GL_LIGHT_MODEL_LOCAL_VIEWER
+    GLboolean     lightModelTwoSide;                       // GL_LIGHT_MODEL_TWO_SIDE
+    GLenum        lightModelColorControl;                  // GL_LIGHT_MODEL_COLOR_CONTROL
+    LightingLight lights[REGAL_FIXED_FUNCTION_MAX_LIGHTS]; // GL_LIGHTi
+
+    Lighting()
+    : shadeModel(GL_SMOOTH)
+    , clampVertexColor(GL_TRUE)
+    , provokingVertex(GL_LAST_VERTEX_CONVENTION)
+    , lighting(GL_FALSE)
+    , colorMaterial(GL_FALSE)
+    , colorMaterialParameter(GL_AMBIENT_AND_DIFFUSE)
+    , colorMaterialFace(GL_FRONT_AND_BACK)
+    , lightModelLocalViewer(GL_FALSE)
+    , lightModelTwoSide(GL_FALSE)
+    , lightModelColorControl(GL_SINGLE_COLOR)
+    {
+      lightModelAmbient[0] = 0.2f;
+      lightModelAmbient[1] = 0.2f;
+      lightModelAmbient[2] = 0.2f;
+      lightModelAmbient[3] = 1.0f;
+
+      lights[0].diffuse[0] = 1.0f;
+      lights[0].diffuse[1] = 1.0f;
+      lights[0].diffuse[2] = 1.0f;
+
+      lights[0].specular[0] = 1.0f;
+      lights[0].specular[1] = 1.0f;
+      lights[0].specular[2] = 1.0f;
+    }
+
+    Lighting &swap(Lighting &other)
+    {
+      std::swap(shadeModel,other.shadeModel);
+      std::swap(clampVertexColor,other.clampVertexColor);
+      std::swap(provokingVertex,other.provokingVertex);
+      std::swap(lighting,other.lighting);
+      std::swap(colorMaterial,other.colorMaterial);
+      std::swap(colorMaterialParameter,other.colorMaterialParameter);
+      std::swap(colorMaterialFace,other.colorMaterialFace);
+      front.swap(other.front);
+      back.swap(other.back);
+      std::swap_ranges(lightModelAmbient,lightModelAmbient+4,other.lightModelAmbient);
+      std::swap(lightModelLocalViewer,other.lightModelLocalViewer);
+      std::swap(lightModelTwoSide,other.lightModelTwoSide);
+      std::swap(lightModelColorControl,other.lightModelColorControl);
+      for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+        lights[ii].swap(other.lights[ii]);
+      return *this;
+    }
+
+    Lighting &get(DispatchTable &dt)
+    {
+      dt.call(&dt.glGetIntegerv)(GL_SHADE_MODEL,reinterpret_cast<GLint*>(&shadeModel));
+      dt.call(&dt.glGetIntegerv)(GL_CLAMP_VERTEX_COLOR,reinterpret_cast<GLint*>(&clampVertexColor));
+      dt.call(&dt.glGetIntegerv)(GL_PROVOKING_VERTEX,reinterpret_cast<GLint*>(&provokingVertex));
+      lighting = dt.call(&dt.glIsEnabled)(GL_LIGHTING);
+      colorMaterial = dt.call(&dt.glIsEnabled)(GL_COLOR_MATERIAL);
+      dt.call(&dt.glGetIntegerv)(GL_COLOR_MATERIAL_PARAMETER,reinterpret_cast<GLint*>(&colorMaterialParameter));
+      dt.call(&dt.glGetIntegerv)(GL_COLOR_MATERIAL_FACE,reinterpret_cast<GLint*>(&colorMaterialFace));
+      front.get(dt,GL_FRONT);
+      back.get(dt,GL_BACK);
+      dt.call(&dt.glGetFloatv)(GL_LIGHT_MODEL_AMBIENT,lightModelAmbient);
+      lightModelLocalViewer = dt.call(&dt.glIsEnabled)(GL_LIGHT_MODEL_LOCAL_VIEWER);
+      lightModelTwoSide = dt.call(&dt.glIsEnabled)(GL_LIGHT_MODEL_TWO_SIDE);
+      dt.call(&dt.glGetIntegerv)(GL_LIGHT_MODEL_COLOR_CONTROL,reinterpret_cast<GLint*>(&lightModelColorControl));
+      for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+        lights[ii].get(dt,static_cast<GLenum>(GL_LIGHT0+ii));
+      return *this;
+    }
+
+    const Lighting &set(DispatchTable &dt) const
+    {
+      dt.call(&dt.glShadeModel)(shadeModel);
+      dt.call(&dt.glClampColor)(GL_CLAMP_VERTEX_COLOR,clampVertexColor);
+      dt.call(&dt.glProvokingVertex)(provokingVertex);
+      setEnable(dt,GL_LIGHTING,lighting);
+      setEnable(dt,GL_COLOR_MATERIAL,colorMaterial);
+      dt.call(&dt.glColorMaterial)(colorMaterialFace,colorMaterialParameter);
+      front.set(dt,GL_FRONT);
+      back.set(dt,GL_BACK);
+      dt.call(&dt.glLightModelfv)(GL_LIGHT_MODEL_AMBIENT,lightModelAmbient);
+      dt.call(&dt.glLightModelf)(GL_LIGHT_MODEL_LOCAL_VIEWER,lightModelLocalViewer);
+      dt.call(&dt.glLightModelf)(GL_LIGHT_MODEL_TWO_SIDE,lightModelTwoSide);
+      dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_COLOR_CONTROL,lightModelColorControl);
+      for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+        lights[ii].set(dt,static_cast<GLenum>(GL_LIGHT0+ii));
+      return *this;
+    }
+
+    std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glShadeModel(",Token::toString(shadeModel),");",delim);
+      tmp << print_string("glClampColor(GL_CLAMP_VERTEX_COLOR,",Token::toString(clampVertexColor),");",delim);
+      tmp << print_string("glProvokingVertex(",Token::toString(provokingVertex),");",delim);
+      enableToString(tmp, lighting, "GL_LIGHTING",delim);
+      enableToString(tmp, colorMaterial, "GL_COLOR_MATERIAL",delim);
+      tmp << print_string("glColorMaterial(",Token::toString(colorMaterialFace),",",Token::toString(colorMaterialParameter),");",delim);
+      tmp << front.toString(GL_FRONT,delim);
+      tmp << front.toString(GL_BACK,delim);
+      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_AMBIENT,[ ",
+                                       lightModelAmbient[0],", ",lightModelAmbient[1],", ",
+                                       lightModelAmbient[2],", ",lightModelAmbient[3]," ]);",delim);
+      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_LOCAL_VIEWER,",lightModelLocalViewer,");",delim);
+      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE,",lightModelTwoSide,");",delim);
+      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_COLOR_CONTROL,",Token::toString(lightModelColorControl),");",delim);
+      for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+        lights[ii].toString(tmp,static_cast<GLenum>(GL_LIGHT0+ii),delim);
+      return tmp;
+    }
+
+    inline void glColorMaterial( GLenum face, GLenum mode )
+    {
+      colorMaterialFace = face;
+      colorMaterialParameter = mode;
+    }
+
+    template <typename T> void glLight( GLenum light, GLenum pname, T param )
+    {
+      GLint ii = static_cast<int>(light-GL_LIGHT0);
+
+      if (ii < 0 || ii >= REGAL_FIXED_FUNCTION_MAX_LIGHTS)
+        return;
+
+      LightingLight& ll = State::Lighting::lights[ii];
+
+      switch (pname)
+      {
+        case GL_CONSTANT_ATTENUATION:  ll.constantAttenuation  = static_cast<GLfloat>(param); break;
+        case GL_LINEAR_ATTENUATION:    ll.linearAttenuation    = static_cast<GLfloat>(param); break;
+        case GL_QUADRATIC_ATTENUATION: ll.quadraticAttenuation = static_cast<GLfloat>(param); break;
+        case GL_SPOT_EXPONENT:         ll.spotExponent         = static_cast<GLfloat>(param); break;
+        case GL_SPOT_CUTOFF:           ll.spotCutoff           = static_cast<GLfloat>(param); break;
+        default:                                                                              break;
+      }
+    }
+
+    template <typename T> void glLightv( GLenum light, GLenum pname, const T *params )
+    {
+      GLint ii = static_cast<int>(light-GL_LIGHT0);
+
+      if (ii < 0 || ii >= REGAL_FIXED_FUNCTION_MAX_LIGHTS)
+        return;
+
+      LightingLight& ll = State::Lighting::lights[ii];
+
+      GLfloat *p = NULL;
+      switch (pname)
+      {
+        case GL_AMBIENT:        p = ll.ambient;       break;
+        case GL_DIFFUSE:        p = ll.diffuse;       break;
+        case GL_SPECULAR:       p = ll.specular;      break;
+        case GL_POSITION:       p = ll.position;      break;
+        case GL_SPOT_DIRECTION: p = ll.spotDirection; break;
+        default:                                      return;
+      }
+
+      GLuint stop = (pname == GL_SPOT_DIRECTION) ? 3 : 4;
+      for (GLuint ii=0; ii<stop; ii++)
+        p[ii] = static_cast<GLfloat>(params[ii]);
+    }
+
+    template <typename T> void glLightModel( GLenum pname, T param )
+    {
+      switch (pname)
+      {
+        case GL_LIGHT_MODEL_LOCAL_VIEWER:  lightModelLocalViewer  = static_cast<GLboolean>(param); break;
+        case GL_LIGHT_MODEL_TWO_SIDE:      lightModelTwoSide      = static_cast<GLboolean>(param); break;
+        case GL_LIGHT_MODEL_COLOR_CONTROL: lightModelColorControl = static_cast<GLenum>(param);    break;
+        default: break;
+      }
+    }
+
+    template <typename T> void glLightModelv( GLenum pname, const T *params )
+    {
+      if (pname==GL_LIGHT_MODEL_AMBIENT)
+      {
+        lightModelAmbient[0] = static_cast<GLfloat>(params[0]);
+        lightModelAmbient[1] = static_cast<GLfloat>(params[1]);
+        lightModelAmbient[2] = static_cast<GLfloat>(params[2]);
+        lightModelAmbient[3] = static_cast<GLfloat>(params[3]);
+      }
+    }
+
+    template <typename T> void glMaterial( GLenum face, GLenum pname, T param )
+    {
+      if (pname == GL_SHININESS)
+      {
+        switch (face)
+        {
+          case GL_FRONT:          State::Lighting::front.shininess = static_cast<GLboolean>(param); break;
+          case GL_BACK:           State::Lighting::back.shininess  = static_cast<GLboolean>(param); break;
+          case GL_FRONT_AND_BACK: State::Lighting::front.shininess = State::Lighting::back.shininess = static_cast<GLboolean>(param); break;
+          default: break;
+        }
+      }
+    }
+
+    template <typename T> void glMaterialv( GLenum face, GLenum pname, const T *params )
+    {
+      LightingFace *f[] = { NULL, NULL };
+
+      switch (face)
+      {
+        case GL_FRONT:
+          f[0] = &front;
+          break;
+        case GL_BACK:
+          f[1] = &back;
+          break;
+        case GL_FRONT_AND_BACK:
+          f[0] = &front;
+          f[1] = &back;
+          break;
+        default:
+          return;
+      }
+
+      for (GLuint ii=0; ii<2; ii++)
+      {
+        if (f[ii])
+        {
+          GLfloat *p = NULL;
+          GLuint   n = 0;
+          switch (pname)
+          {
+            case GL_AMBIENT:        p = f[ii]->ambient;      n = 4; break;
+            case GL_DIFFUSE:        p = f[ii]->diffuse;      n = 4; break;
+            case GL_SPECULAR:       p = f[ii]->specular;     n = 4; break;
+            case GL_EMISSION:       p = f[ii]->emission;     n = 4; break;
+            case GL_SHININESS:      p = &f[ii]->shininess;   n = 1; break;
+            case GL_COLOR_INDEXES:  p = f[ii]->colorIndexes; n = 3; break;
+            default:                                                break;
+          }
+
+          if (p)
+            for (GLuint jj=0; jj<n; jj++)
+              p[jj] = static_cast<GLfloat>(params[jj]);
+        }
+      }
+    }
+
+    inline void glProvokingVertex(GLenum provokeMode)
+    {
+      provokingVertex = provokeMode;
+    }
+
+    inline void glShadeModel(GLenum mode)
+    {
+      shadeModel = mode;
     }
   };
 }

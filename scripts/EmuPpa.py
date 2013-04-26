@@ -159,4 +159,20 @@ ppaFormulae = {
     'entries'    : [ 'glReadBuffer' ],
     'prefix'     : [ '_context->ppa->glReadBuffer( ${arg0plus} );', ],
   },
+  'TrackShadeModel' : {
+    'entries'    : [ 'glShadeModel' ],
+    'prefix'     : [ '_context->ppa->glShadeModel( ${arg0plus} );', ],
+  },
+  'TrackProvokingVertex' : {
+    'entries'    : [ 'glProvokingVertex' ],
+    'prefix'     : [ '_context->ppa->glProvokingVertex( ${arg0plus} );', ],
+  },
+  'TrackColorMaterial' : {
+    'entries'    : [ 'glColorMaterial' ],
+    'prefix'     : [ '_context->ppa->glColorMaterial( ${arg0plus} );', ],
+  },
+  'TrackMaterialLight' : {
+    'entries'    : [ 'gl(Material|Light)(Model|)(i|f)(v|)' ],
+    'prefix'     : [ '_context->ppa->gl${m1}${m2}${m4}( ${arg0plus} );', ],
+  },
 }

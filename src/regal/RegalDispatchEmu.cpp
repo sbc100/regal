@@ -2612,6 +2612,14 @@ static void REGAL_CALL emu_glColorMaterial(GLenum face, GLenum mode)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glColorMaterial( face, mode );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6315,6 +6323,14 @@ static void REGAL_CALL emu_glLightModelf(GLenum pname, GLfloat param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLightModel( pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6373,6 +6389,14 @@ static void REGAL_CALL emu_glLightModelfv(GLenum pname, const GLfloat *params)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLightModelv( pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6431,6 +6455,14 @@ static void REGAL_CALL emu_glLightModeli(GLenum pname, GLint param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLightModel( pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6489,6 +6521,14 @@ static void REGAL_CALL emu_glLightModeliv(GLenum pname, const GLint *params)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLightModelv( pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6547,6 +6587,14 @@ static void REGAL_CALL emu_glLightf(GLenum light, GLenum pname, GLfloat param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLight( light, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6605,6 +6653,14 @@ static void REGAL_CALL emu_glLightfv(GLenum light, GLenum pname, const GLfloat *
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLightv( light, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6663,6 +6719,14 @@ static void REGAL_CALL emu_glLighti(GLenum light, GLenum pname, GLint param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLight( light, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -6721,6 +6785,14 @@ static void REGAL_CALL emu_glLightiv(GLenum light, GLenum pname, const GLint *pa
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glLightv( light, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7783,6 +7855,14 @@ static void REGAL_CALL emu_glMaterialf(GLenum face, GLenum pname, GLfloat param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMaterial( face, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7841,6 +7921,14 @@ static void REGAL_CALL emu_glMaterialfv(GLenum face, GLenum pname, const GLfloat
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMaterialv( face, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7899,6 +7987,14 @@ static void REGAL_CALL emu_glMateriali(GLenum face, GLenum pname, GLint param)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMaterial( face, pname, param );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -7957,6 +8053,14 @@ static void REGAL_CALL emu_glMaterialiv(GLenum face, GLenum pname, const GLint *
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glMaterialv( face, pname, params );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -12211,6 +12315,14 @@ static void REGAL_CALL emu_glShadeModel(GLenum mode)
   {
     case 12 :
     case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glShadeModel( mode );
+      }
+      #endif
     case 10 :
     case 9 :
     case 8 :
@@ -34058,6 +34170,35 @@ static void REGAL_CALL emu_glMultiTexCoord4svARB(GLenum target, const GLshort *v
 // GL_ARB_program_interface_query
 
 // GL_ARB_provoking_vertex
+
+static void REGAL_CALL emu_glProvokingVertex(GLenum mode)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 10;
+        _context->ppa->glProvokingVertex( mode );
+      }
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  DispatchTable *_next = _dispatch._next;
+  RegalAssert(_next);
+  _next->call(& _next->glProvokingVertex)(mode);
+}
 
 // GL_ARB_robustness
 
@@ -59760,6 +59901,10 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glMultiTexCoord4ivARB = emu_glMultiTexCoord4ivARB;
    tbl.glMultiTexCoord4sARB = emu_glMultiTexCoord4sARB;
    tbl.glMultiTexCoord4svARB = emu_glMultiTexCoord4svARB;
+
+// GL_ARB_provoking_vertex
+
+   tbl.glProvokingVertex = emu_glProvokingVertex;
 
 // GL_ARB_sample_shading
 

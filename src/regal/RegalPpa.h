@@ -66,7 +66,7 @@ namespace Emu {
 struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transform, State::Hint,
              State::Enable, State::List, State::AccumBuffer, State::Scissor, State::Viewport, State::Line,
              State::Multisample, State::Eval, State::Fog, State::Point, State::PolygonStipple, State::ColorBuffer,
-             State::PixelMode
+             State::PixelMode, State::Lighting
 {
   void Init(RegalContext &ctx)
   {
@@ -233,6 +233,14 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       pixelModeStack.push_back(State::PixelMode());
       pixelModeStack.back() = *this;
       mask &= ~GL_PIXEL_MODE_BIT;
+    }
+
+    if (mask&GL_LIGHTING_BIT)
+    {
+      Internal("Regal::Ppa::PushAttrib GL_LIGHTING_BIT ",State::Lighting::toString());
+      lightingStack.push_back(State::Lighting());
+      lightingStack.back() = *this;
+      mask &= ~GL_LIGHTING_BIT;
     }
 
     // Pass the rest through, for now
@@ -549,6 +557,22 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         mask &= ~GL_PIXEL_MODE_BIT;
       }
 
+      if (mask&GL_LIGHTING_BIT)
+      {
+        RegalAssert(lightingStack.size());
+        State::Lighting::swap(lightingStack.back());
+        lightingStack.pop_back();
+
+        Internal("Regal::Ppa::PopAttrib GL_LIGHTING_BIT ",State::Lighting::toString());
+
+        // Ideally we'd only set the state that has changed
+        // since the glPushAttrib() - revisit
+
+        State::Lighting::set(ctx->dispatcher.emulation);
+
+        mask &= ~GL_LIGHTING_BIT;
+      }
+
       // Pass the rest through, for now
 
       if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
@@ -627,7 +651,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE6:
       case GL_CLIP_DISTANCE7:      State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = enabled; break;
       case GL_COLOR_LOGIC_OP:      State::Enable::colorLogicOp    = State::ColorBuffer::colorLogicOp = enabled; break;
-      case GL_COLOR_MATERIAL:      State::Enable::colorMaterial   = enabled; break;
+      case GL_COLOR_MATERIAL:      State::Enable::colorMaterial   = State::Lighting::colorMaterial = enabled; break;
       case GL_COLOR_SUM:           State::Enable::colorSum        = enabled; break;
       case GL_COLOR_TABLE:         State::Enable::colorTable      = State::PixelMode::colorTable = enabled; break;
       case GL_CONVOLUTION_1D:      State::Enable::convolution1d   = State::PixelMode::convolution1d = enabled; break;
@@ -650,8 +674,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT4:
       case GL_LIGHT5:
       case GL_LIGHT6:
-      case GL_LIGHT7:              State::Enable::light[cap-GL_LIGHT0] = enabled; break;
-      case GL_LIGHTING:            State::Enable::lighting             = enabled; break;
+      case GL_LIGHT7:              State::Enable::light[cap-GL_LIGHT0] = State::Lighting::lights[cap-GL_LIGHT0].enabled = enabled; break;
+      case GL_LIGHTING:            State::Enable::lighting = State::Lighting::lighting = enabled; break;
       case GL_LINE_SMOOTH:         State::Enable::lineSmooth  = State::Line::smooth  = enabled; break;
       case GL_LINE_STIPPLE:        State::Enable::lineStipple = State::Line::stipple = enabled; break;
       case GL_MAP1_COLOR_4:         State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
@@ -798,7 +822,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     {
       case GL_CLAMP_FRAGMENT_COLOR: State::Enable::clampFragmentColor = State::ColorBuffer::clampFragmentColor = clamp; break;
       case GL_CLAMP_READ_COLOR:     State::Enable::clampReadColor     = State::ColorBuffer::clampReadColor = clamp; break;
-      case GL_CLAMP_VERTEX_COLOR:   State::Enable::clampVertexColor   = clamp; break;
+      case GL_CLAMP_VERTEX_COLOR:   State::Enable::clampVertexColor   = State::Lighting::clampVertexColor = clamp; break;
       default: break;
     }
   }
@@ -834,6 +858,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   std::vector<State::PolygonStipple> polygonStippleStack;
   std::vector<State::ColorBuffer>    colorBufferStack;
   std::vector<State::PixelMode>      pixelModeStack;
+  std::vector<State::Lighting>       lightingStack;
 
   GLuint activeTextureUnit;
 };
