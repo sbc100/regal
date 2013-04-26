@@ -1,5 +1,6 @@
 NAME    = $(REGAL_NAME)
 CC      = arm-linux-gnueabihf-gcc-4.6
+CXX     = arm-linux-gnueabihf-g++-4.6
 LD      = arm-linux-gnueabihf-gcc-4.6
 AR      = arm-linux-gnueabihf-ar
 RANLIB :=

@@ -1,5 +1,6 @@
 NAME = $(REGAL_NAME)
 CC = cc
+CXX = c++
 LD = cc
 RANLIB :=
 EXT.DYNAMIC = so

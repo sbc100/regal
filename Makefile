@@ -49,6 +49,7 @@ RANLIB  ?= ranlib
 STRIP   ?= strip
 RM      ?= rm -f
 LN      ?= ln -sf
+CXX     ?= $(CC)
 
 # Release mode is the default
 
@@ -311,11 +312,11 @@ endif
 
 tmp/$(SYSTEM)/regal/static/%.o: src/regal/%.cpp $(LIB.HEADERS)
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(LIB.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/shared/%.o: src/regal/%.cpp $(LIB.HEADERS)
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CC) $(LIB.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(LIB.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(LIB.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/static/%.o: src/mongoose/%.c $(LIB.HEADERS)
 	@mkdir -p $(dir $@)
@@ -542,11 +543,11 @@ DREAMTORUS.LIBS       += -lm -pthread
 
 tmp/$(SYSTEM)/dreamtorus/static/%.o: examples/dreamtorus/src/%.cpp
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CC) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 tmp/$(SYSTEM)/dreamtorus/static/%.o: examples/dreamtorus/glut/code/%.cpp
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CC) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 bin/$(SYSTEM)/dreamtorus: $(DREAMTORUS.OBJS) lib/$(SYSTEM)/$(LIB.SHARED)
 	@mkdir -p $(dir $@)
@@ -683,7 +684,7 @@ endif
 
 tmp/$(SYSTEM)/regal_tests/static/%.o: tests/%.cpp
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CC) $(LIB.CFLAGS) $(REGALTEST.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(LIB.CFLAGS) $(REGALTEST.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 bin/$(SYSTEM)/regaltest$(BIN_EXTENSION): $(REGALTEST.OBJS) lib/$(SYSTEM)/$(GTEST.STATIC) lib/$(SYSTEM)/$(LIB.STATIC) lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC)
 	@mkdir -p $(dir $@)
