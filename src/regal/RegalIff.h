@@ -1587,6 +1587,7 @@ struct Iff
   GLuint textureBinding[ REGAL_EMU_MAX_TEXTURE_UNITS];
   GLuint shadowActiveTextureIndex;
   GLuint activeTextureIndex;
+  GLuint programPipeline;
   GLuint program;
   Program * currprog;
 
@@ -1614,6 +1615,10 @@ struct Iff
   void InitFixedFunction(RegalContext &ctx);
 
   void PreDraw( RegalContext * ctx ) {
+    if( programPipeline != 0 ) {
+      // FIXME: Eventually will need to handle empty or partially populated PPO
+      return;
+    }
     ver.Reset();
     if( program != 0 ) {
       UseShaderProgram( ctx );
@@ -1682,6 +1687,11 @@ struct Iff
   bool ShadowUseProgram( GLuint prog ) {
     program = prog;
     return prog == 0;  // pass the call along only if it's non-zero
+  }
+  
+  bool ShadowBindProgramPipeline( GLuint progPipeline ) {
+    programPipeline = progPipeline;
+    return false;  // always pass this through since we're not emulating it
   }
 
   void ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj );
@@ -2289,6 +2299,7 @@ struct Iff
     shadowActiveTextureIndex = 0;
     activeTextureIndex = 0;
     program = 0;
+    programPipeline = 0;
     currprog = NULL;
     currVao = 0;
     gles = false;

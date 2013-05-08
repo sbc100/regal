@@ -35127,6 +35127,66 @@ static void REGAL_CALL emu_glSamplerParameteriv(GLuint sampler, GLenum pname, co
 
 // GL_ARB_separate_shader_objects
 
+static void REGAL_CALL emu_glBindProgramPipeline(GLuint pipeline)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 4;
+        if( ! _context->iff->ShadowBindProgramPipeline( pipeline ) ) {
+            _context->dispatcher.emulation.glBindProgramPipeline( pipeline );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glBindProgramPipeline)(pipeline);
+      break;
+    }
+
+  }
+
+}
+
 // GL_ARB_shader_atomic_counters
 
 // GL_ARB_shader_image_load_store
@@ -59926,6 +59986,10 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glSamplerParameterfv = emu_glSamplerParameterfv;
    tbl.glSamplerParameteri = emu_glSamplerParameteri;
    tbl.glSamplerParameteriv = emu_glSamplerParameteriv;
+
+// GL_ARB_separate_shader_objects
+
+   tbl.glBindProgramPipeline = emu_glBindProgramPipeline;
 
 // GL_ARB_shader_objects
 

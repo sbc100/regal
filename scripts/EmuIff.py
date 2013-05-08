@@ -115,7 +115,7 @@ iffFormulae = {
           ],
     },
     'FfnShadow' : {
-        'entries' : [ 'gl(MatrixMode|UseProgram|Enable|Disable)' ],
+        'entries' : [ 'gl(MatrixMode|BindProgramPipeline|UseProgram|Enable|Disable)' ],
         'impl' : [
             'if( ! _context->iff->Shadow${m1}( ${arg0plus} ) ) {',
             '    _context->dispatcher.emulation.gl${m1}( ${arg0plus} );',
