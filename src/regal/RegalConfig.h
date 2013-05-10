@@ -91,6 +91,7 @@ namespace Config
   extern bool enableEmuTexSto;
   extern bool enableEmuXfer;
   extern bool enableEmuDsa;
+  extern bool enableEmuRect;
   extern bool enableEmuIff;
   extern bool enableEmuSo;
   extern bool enableEmuVao;
@@ -106,6 +107,7 @@ namespace Config
   extern bool forceEmuTexSto;
   extern bool forceEmuXfer;
   extern bool forceEmuDsa;
+  extern bool forceEmuRect;
   extern bool forceEmuIff;
   extern bool forceEmuSo;
   extern bool forceEmuVao;

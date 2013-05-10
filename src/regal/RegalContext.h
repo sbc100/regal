@@ -74,6 +74,8 @@ namespace Emu { struct Bin; };
 namespace Emu { struct Xfer; };
 namespace Emu { struct Dsa; };
 namespace Emu { struct TexSto; };
+namespace Emu { struct BaseVertex; };
+namespace Emu { struct Rect; };
 namespace Emu { struct Iff; };
 namespace Emu { struct So; };
 namespace Emu { struct Vao; };
@@ -118,6 +120,8 @@ struct RegalContext
   Emu::Xfer          *xfer;
   Emu::Dsa           *dsa;
   Emu::TexSto        *texsto;
+  Emu::BaseVertex    *bv;
+  Emu::Rect          *rect;
   Emu::Iff           *iff;
   Emu::So            *so;
   Emu::Vao           *vao;

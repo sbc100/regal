@@ -36,6 +36,8 @@ from EmuObj    import objFormulae
 from EmuFilter import formulae as filterFormulae
 from EmuTexC   import texCFormulae
 from EmuTextureStorage import texstoFormulae
+from EmuBaseVertex import baseVertexFormulae
+from EmuRect   import rectFormulae
 
 from EmuPixelTransfer import xferFormulae
 
@@ -72,6 +74,8 @@ emu = [
     { 'type' : 'Emu::Xfer',   'include' : 'RegalXfer.h',   'member' : 'xfer',   'conditional' : '(isES2() && Config::enableEmuXfer) || Config::forceEmuXfer   || REGAL_FORCE_EMU_XFER',   'ifdef' : 'REGAL_EMU_XFER',   'formulae' : xferFormulae   },
     { 'type' : 'Emu::Dsa',    'include' : 'RegalDsa.h',    'member' : 'dsa',    'conditional' : 'Config::enableEmuDsa               || Config::forceEmuDsa    || REGAL_FORCE_EMU_DSA',    'ifdef' : 'REGAL_EMU_DSA',    'formulae' : dsaFormulae    },
     { 'type' : 'Emu::TexSto', 'include' : 'RegalTexSto.h', 'member' : 'texsto', 'conditional' : 'Config::enableEmuTexSto            || Config::forceEmuTexSto || REGAL_FORCE_EMU_TEXSTO', 'ifdef' : 'REGAL_EMU_TEXSTO', 'formulae' : texstoFormulae },
+    { 'type' : 'Emu::BaseVertex',    'include' : 'RegalBaseVertex.h',    'member' : 'bv',    'conditional' : 'Config::enableEmuBaseVertex               || Config::forceEmuBaseVertex    || REGAL_FORCE_EMU_BASEVERTEX',    'ifdef' : 'REGAL_EMU_BASEVERTEX',    'formulae' : baseVertexFormulae    },
+    { 'type' : 'Emu::Rect',   'include' : 'RegalRect.h',   'member' : 'rect',   'conditional' : 'Config::enableEmuRect              || Config::forceEmuRect   || REGAL_FORCE_EMU_RECT',   'ifdef' : 'REGAL_EMU_RECT',   'formulae' : rectFormulae    },
     { 'type' : 'Emu::Iff',    'include' : 'RegalIff.h',    'member' : 'iff',    'conditional' : 'Config::enableEmuIff               || Config::forceEmuIff    || REGAL_FORCE_EMU_IFF',    'ifdef' : 'REGAL_EMU_IFF',    'formulae' : iffFormulae    },
     { 'type' : 'Emu::So',     'include' : 'RegalSo.h',     'member' : 'so',     'conditional' : '(Config::enableEmuSo && !info->gl_arb_sampler_objects) || Config::forceEmuSo || REGAL_FORCE_EMU_SO',                                                           'ifdef' : 'REGAL_EMU_SO',     'formulae' : soFormulae     },
     { 'type' : 'Emu::Vao',    'include' : 'RegalVao.h',    'member' : 'vao',    'conditional' : '(Config::enableEmuVao              || Config::enableEmuVao   || REGAL_FORCE_EMU_VAO) && (Config::enableEmuIff || Config::forceEmuIff || REGAL_FORCE_EMU_IFF)', 'ifdef' : 'REGAL_EMU_VAO', 'formulae' : vaoFormulae },

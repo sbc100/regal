@@ -147,7 +147,9 @@ size_t PNameToIndex( GLenum pname ) {
   }
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target ) {
+void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target )
+{
+  UNUSED_PARAMETER(cap);
   RegalAssert( dt.glPixelStorei );
 
   for ( size_t i = 0; i < STATE_COUNT; ++i ) {
@@ -417,7 +419,10 @@ void ApplyVertexAttribArrayEnable( const DispatchTable& dt, GLuint index, bool e
   ( enable ? dt.glEnableVertexAttribArray : dt.glDisableVertexAttribArray )( index );
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Attrib& current, const State::Attrib& target, GLuint index ) {
+void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Attrib& current, const State::Attrib& target, GLuint index )
+{
+  UNUSED_PARAMETER(cap);
+
   if ( target.enabled != current.enabled ) {
     ApplyVertexAttribArrayEnable( dt, index, target.enabled );
   }
@@ -435,7 +440,10 @@ void Transition( const Capabilities& cap, const DispatchTable& dt, const State::
   }
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Buffer& current, const State::Buffer& target, GLuint index ) {
+void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Buffer& current, const State::Buffer& target, GLuint index )
+{
+  UNUSED_PARAMETER(cap);
+
   if ( ( target.buffer != current.buffer ) || ( target.offset != current.offset ) || ( target.stride != current.stride ) ) {
     dt.glBindVertexBuffer( index, target.buffer, target.offset, target.stride );
   }

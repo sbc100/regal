@@ -59,6 +59,8 @@ REGAL_GLOBAL_BEGIN
 #include "RegalXfer.h"
 #include "RegalDsa.h"
 #include "RegalTexSto.h"
+#include "RegalBaseVertex.h"
+#include "RegalRect.h"
 #include "RegalIff.h"
 #include "RegalSo.h"
 #include "RegalVao.h"
@@ -88,6 +90,8 @@ RegalContext::RegalContext()
   xfer(NULL),
   dsa(NULL),
   texsto(NULL),
+  bv(NULL),
+  rect(NULL),
   iff(NULL),
   so(NULL),
   vao(NULL),
@@ -173,7 +177,7 @@ RegalContext::Init()
   {
     RegalAssert(info);
     // emu
-    emuLevel = 12;
+    emuLevel = 14;
     #if REGAL_EMU_FILTER
     if (Config::enableEmuFilter || Config::forceEmuFilter || REGAL_FORCE_EMU_FILTER)
     {
@@ -227,6 +231,22 @@ RegalContext::Init()
       iff->Init(*this);
     }
     #endif /* REGAL_EMU_IFF */
+    #if REGAL_EMU_RECT
+    if (Config::enableEmuRect || Config::forceEmuRect || REGAL_FORCE_EMU_RECT)
+    {
+      rect = new Emu::Rect;
+      emuLevel = 5;
+      rect->Init(*this);
+    }
+    #endif /* REGAL_EMU_RECT */
+    #if REGAL_EMU_BASEVERTEX
+    if (Config::enableEmuBaseVertex || Config::forceEmuBaseVertex || REGAL_FORCE_EMU_BASEVERTEX)
+    {
+      bv = new Emu::BaseVertex;
+      emuLevel = 6;
+      bv->Init(*this);
+    }
+    #endif /* REGAL_EMU_BASEVERTEX */
     #if REGAL_EMU_TEXSTO
     if (Config::enableEmuTexSto || Config::forceEmuTexSto || REGAL_FORCE_EMU_TEXSTO)
     {
@@ -235,7 +255,7 @@ RegalContext::Init()
       info->regalExtensionsSet.insert("GL_ARB_texture_storage");
       info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       texsto = new Emu::TexSto;
-      emuLevel = 5;
+      emuLevel = 7;
       texsto->Init(*this);
     }
     #endif /* REGAL_EMU_TEXSTO */
@@ -247,7 +267,7 @@ RegalContext::Init()
       info->regalExtensionsSet.insert("GL_EXT_direct_state_access");
       info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       dsa = new Emu::Dsa;
-      emuLevel = 6;
+      emuLevel = 8;
       dsa->Init(*this);
     }
     #endif /* REGAL_EMU_DSA */
@@ -255,7 +275,7 @@ RegalContext::Init()
     if ((isES2() && Config::enableEmuXfer) || Config::forceEmuXfer || REGAL_FORCE_EMU_XFER)
     {
       xfer = new Emu::Xfer;
-      emuLevel = 7;
+      emuLevel = 9;
       xfer->Init(*this);
     }
     #endif /* REGAL_EMU_XFER */
@@ -263,7 +283,7 @@ RegalContext::Init()
     if (Config::enableEmuBin || Config::forceEmuBin || REGAL_FORCE_EMU_BIN)
     {
       bin = new Emu::Bin;
-      emuLevel = 8;
+      emuLevel = 10;
       bin->Init(*this);
     }
     #endif /* REGAL_EMU_BIN */
@@ -271,7 +291,7 @@ RegalContext::Init()
     if (Config::enableEmuPpca || Config::forceEmuPpca || REGAL_FORCE_EMU_PPCA)
     {
       ppca = new Emu::Ppca;
-      emuLevel = 9;
+      emuLevel = 11;
       ppca->Init(*this);
     }
     #endif /* REGAL_EMU_PPCA */
@@ -279,7 +299,7 @@ RegalContext::Init()
     if (Config::enableEmuPpa || Config::forceEmuPpa || REGAL_FORCE_EMU_PPA)
     {
       ppa = new Emu::Ppa;
-      emuLevel = 10;
+      emuLevel = 12;
       ppa->Init(*this);
     }
     #endif /* REGAL_EMU_PPA */
@@ -287,11 +307,11 @@ RegalContext::Init()
     if (Config::enableEmuObj || Config::forceEmuObj || REGAL_FORCE_EMU_OBJ)
     {
       obj = new Emu::Obj;
-      emuLevel = 11;
+      emuLevel = 13;
       obj->Init(*this);
     }
     #endif /* REGAL_EMU_OBJ */
-    emuLevel = 12;
+    emuLevel = 14;
 
   }
 #endif
@@ -356,6 +376,12 @@ RegalContext::~RegalContext()
   #if REGAL_EMU_TEXSTO
   delete texsto;
   #endif /* REGAL_EMU_TEXSTO */
+  #if REGAL_EMU_BASEVERTEX
+  delete bv;
+  #endif /* REGAL_EMU_BASEVERTEX */
+  #if REGAL_EMU_RECT
+  delete rect;
+  #endif /* REGAL_EMU_RECT */
   #if REGAL_EMU_IFF
   delete iff;
   #endif /* REGAL_EMU_IFF */
@@ -396,7 +422,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_OBJ
   if (obj)
   {
-    emuLevel = 11;
+    emuLevel = 13;
     obj->Cleanup(*this);
     delete obj;
     obj = NULL;
@@ -405,7 +431,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_PPA
   if (ppa)
   {
-    emuLevel = 10;
+    emuLevel = 12;
     ppa->Cleanup(*this);
     delete ppa;
     ppa = NULL;
@@ -414,7 +440,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_PPCA
   if (ppca)
   {
-    emuLevel = 9;
+    emuLevel = 11;
     ppca->Cleanup(*this);
     delete ppca;
     ppca = NULL;
@@ -423,7 +449,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_BIN
   if (bin)
   {
-    emuLevel = 8;
+    emuLevel = 10;
     bin->Cleanup(*this);
     delete bin;
     bin = NULL;
@@ -432,7 +458,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_XFER
   if (xfer)
   {
-    emuLevel = 7;
+    emuLevel = 9;
     xfer->Cleanup(*this);
     delete xfer;
     xfer = NULL;
@@ -441,7 +467,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_DSA
   if (dsa)
   {
-    emuLevel = 6;
+    emuLevel = 8;
     dsa->Cleanup(*this);
     delete dsa;
     dsa = NULL;
@@ -450,12 +476,30 @@ RegalContext::Cleanup()
   #if REGAL_EMU_TEXSTO
   if (texsto)
   {
-    emuLevel = 5;
+    emuLevel = 7;
     texsto->Cleanup(*this);
     delete texsto;
     texsto = NULL;
   }
   #endif /* REGAL_EMU_TEXSTO */
+  #if REGAL_EMU_BASEVERTEX
+  if (bv)
+  {
+    emuLevel = 6;
+    bv->Cleanup(*this);
+    delete bv;
+    bv = NULL;
+  }
+  #endif /* REGAL_EMU_BASEVERTEX */
+  #if REGAL_EMU_RECT
+  if (rect)
+  {
+    emuLevel = 5;
+    rect->Cleanup(*this);
+    delete rect;
+    rect = NULL;
+  }
+  #endif /* REGAL_EMU_RECT */
   #if REGAL_EMU_IFF
   if (iff)
   {

@@ -217,6 +217,10 @@
 #define REGAL_EMU_DSA 1
 #endif
 
+#ifndef REGAL_EMU_RECT
+#define REGAL_EMU_RECT 1
+#endif
+
 #ifndef REGAL_EMU_IFF
 #define REGAL_EMU_IFF 1
 #endif
@@ -269,6 +273,10 @@
 
 #ifndef REGAL_FORCE_EMU_DSA
 #define REGAL_FORCE_EMU_DSA 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_RECT
+#define REGAL_FORCE_EMU_RECT 0
 #endif
 
 #ifndef REGAL_FORCE_EMU_IFF

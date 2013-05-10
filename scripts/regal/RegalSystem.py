@@ -39,7 +39,7 @@ regalSys = '''#if defined(_WIN32)
 # ifndef REGAL_SYS_EGL
 #  define REGAL_SYS_EGL 1
 # endif
-#elif !REGAL_SYS_PPAPI
+#elif !defined(REGAL_SYS_PPAPI) || !REGAL_SYS_PPAPI
 # ifndef REGAL_SYS_X11
 #  define REGAL_SYS_X11 1
 # endif

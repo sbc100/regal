@@ -293,7 +293,7 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   if( hasSphereMap ) {
     src << "vec4 ComputeSphereMap( vec3 i, vec3 n ) {\n";
     src << "    vec3 r = reflect( i, n );\n";
-    src << "    float minv = 1.0 / sqrt( 2 * r.x + 2 * r.y + 2 * (r.z + 1 ) );\n";
+    src << "    float minv = 1.0 / sqrt( 2.0 * r.x + 2.0 * r.y + 2.0 * (r.z + 1.0 ) );\n";
     src << "    return vec4( r.x * minv + 0.5 , r.y * minv + 0.5, 0.0, 0.0 );\n";
     src << "}\n";
   }
@@ -301,11 +301,11 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   src << "void main() {\n";
   src << "    gl_Position = rglProjection * rglModelview * rglVertex;\n";
   if( st.lighting || hasNormalMap || hasReflectionMap || hasEyeLinearTexGen ||
-      hasClipPlanes || ( st.fog.enable && st.fog.useDepth ) ) {
+      hasClipPlanes || ( st.fog.enable && st.fog.useDepth ) || hasSphereMap ) {
     src << "    vec4 eh = rglModelview * rglVertex;\n";
   }
 
-  if( st.lighting || hasNormalMap || hasReflectionMap ) {
+  if( st.lighting || hasNormalMap || hasReflectionMap || hasSphereMap ) {
     src << "    vec4 ep = eh / eh.w;\n";
     src << "    vec3 ev = -normalize( ep.xyz );\n";
     src << "    vec3 en = mat3( rglModelviewInverseTranspose ) * rglNormal;\n";
@@ -934,7 +934,7 @@ static void GenerateFragmentShaderSource( Iff * rff, string_list &src )
   } else {
     src << "out vec4 rglFragColor;\n";
   }
-  if( st.shadeModelFlat & ! rff->legacy & ! rff->gles ) {
+  if( st.shadeModelFlat && ! rff->legacy && ! rff->gles ) {
     src << "#define FLAT flat\n";
   } else {
     src << "#define FLAT  \n";
@@ -1342,7 +1342,7 @@ void State::SetTexgen( Iff * ffn, int coord, GLenum space, const GLfloat * param
 
 void State::GetTexgen( Iff * ffn, int coord, GLenum space, GLfloat * params )
 {
-  Internal("State::GetTexgen ",ffn,coord,toString(space));
+  Internal("State::GetTexgen ",ffn," ",coord," ",toString(space));
 
   TexgenUniform & tgu = uniform.tex[ ffn->activeTextureIndex ].texgen[ coord ];
   switch( space ) {

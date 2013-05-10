@@ -77,6 +77,7 @@ namespace Config {
   bool enableEmuTexSto  = REGAL_EMU_TEXSTO;
   bool enableEmuXfer    = REGAL_EMU_XFER;
   bool enableEmuDsa     = REGAL_EMU_DSA;
+  bool enableEmuRect    = REGAL_EMU_RECT;
   bool enableEmuIff     = REGAL_EMU_IFF;
   bool enableEmuSo      = REGAL_EMU_SO;
   bool enableEmuVao     = REGAL_EMU_VAO;
@@ -90,6 +91,7 @@ namespace Config {
   bool forceEmuTexSto   = REGAL_FORCE_EMU_TEXSTO;
   bool forceEmuXfer     = REGAL_FORCE_EMU_XFER;
   bool forceEmuDsa      = REGAL_FORCE_EMU_DSA;
+  bool forceEmuRect     = REGAL_FORCE_EMU_RECT;
   bool forceEmuIff      = REGAL_FORCE_EMU_IFF;
   bool forceEmuSo       = REGAL_FORCE_EMU_SO;
   bool forceEmuVao      = REGAL_FORCE_EMU_VAO;
@@ -264,6 +266,11 @@ namespace Config {
     if (tmp) enableEmuDsa = atoi(tmp)!=0;
 #endif
 
+#if REGAL_EMU_RECT
+    tmp = GetEnv( "REGAL_EMU_RECT" );
+    if (tmp) enableEmuRect = atoi(tmp)!=0;
+#endif
+
 #if REGAL_EMU_IFF
     tmp = GetEnv( "REGAL_EMU_IFF" );
     if (tmp) enableEmuIff = atoi(tmp)!=0;
@@ -324,6 +331,11 @@ namespace Config {
 #if REGAL_EMU_DSA
     tmp = GetEnv( "REGAL_FORCE_EMU_DSA" );
     if (tmp) forceEmuDsa = atoi(tmp)!=0;
+#endif
+
+#if REGAL_EMU_RECT
+    tmp = GetEnv( "REGAL_FORCE_EMU_RECT" );
+    if (tmp) forceEmuRect = atoi(tmp)!=0;
 #endif
 
 #if REGAL_EMU_IFF
@@ -504,6 +516,7 @@ namespace Config {
     Info("REGAL_EMU_TEXSTO          ", enableEmuTexSto  ? "enabled" : "disabled");
     Info("REGAL_EMU_XFER            ", enableEmuXfer    ? "enabled" : "disabled");
     Info("REGAL_EMU_DSA             ", enableEmuDsa     ? "enabled" : "disabled");
+    Info("REGAL_EMU_RECT            ", enableEmuRect    ? "enabled" : "disabled");
     Info("REGAL_EMU_IFF             ", enableEmuIff     ? "enabled" : "disabled");
     Info("REGAL_EMU_SO              ", enableEmuSo      ? "enabled" : "disabled");
     Info("REGAL_EMU_VAO             ", enableEmuVao     ? "enabled" : "disabled");
@@ -517,6 +530,7 @@ namespace Config {
     Info("REGAL_FORCE_EMU_TEXSTO    ", forceEmuTexSto   ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_XFER      ", forceEmuXfer     ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_DSA       ", forceEmuDsa      ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_RECT      ", forceEmuRect     ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_IFF       ", forceEmuIff      ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_SO        ", forceEmuSo       ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_VAO       ", forceEmuVao      ? "enabled" : "disabled");
@@ -595,6 +609,7 @@ namespace Config {
             jo.member("texsto", enableEmuTexSto);
             jo.member("xfer",   enableEmuXfer);
             jo.member("dsa",    enableEmuDsa);
+            jo.member("rect",   enableEmuRect);
             jo.member("iff",    enableEmuIff);
             jo.member("so",     enableEmuSo);
             jo.member("vao",    enableEmuVao);
@@ -610,6 +625,7 @@ namespace Config {
             jo.member("texsto", forceEmuTexSto);
             jo.member("xfer",   forceEmuXfer);
             jo.member("dsa",    forceEmuDsa);
+            jo.member("rect",   forceEmuRect);
             jo.member("iff",    forceEmuIff);
             jo.member("so",     forceEmuSo);
             jo.member("vao",    forceEmuVao);

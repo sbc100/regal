@@ -107,14 +107,6 @@ namespace State {
       dt.call(&dt.glDisable)(cap);
   }
 
-  inline static void setEnableIndexedEXT(DispatchTable &dt, const GLenum cap, const GLuint index, const GLboolean enable)
-  {
-    if (enable)
-      dt.call(&dt.glEnableIndexedEXT)(cap,index);
-    else
-      dt.call(&dt.glDisableIndexedEXT)(cap,index);
-  }
-
   inline static void setEnablei(DispatchTable &dt, const GLenum cap, const GLuint index, const GLboolean enable)
   {
     if (enable)
@@ -453,15 +445,16 @@ namespace State {
         scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,ii);
       for (int ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
       {
-        texture1d[ii]      = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_1D,ii);
-        texture2d[ii]      = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_2D,ii);
-        texture3d[ii]      = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_3D,ii);
-        textureCubeMap[ii] = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_CUBE_MAP,ii);
-        textureGenS[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_S,ii);
-        textureGenT[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_T,ii);
-        textureGenR[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_R,ii);
-        textureGenQ[ii]    = dt.call(&dt.glIsEnabledIndexedEXT)(GL_TEXTURE_GEN_Q,ii);
+        texture1d[ii]      = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_1D,ii);
+        texture2d[ii]      = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_2D,ii);
+        texture3d[ii]      = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_3D,ii);
+        textureCubeMap[ii] = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_CUBE_MAP,ii);
+        textureGenS[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_S,ii);
+        textureGenT[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_T,ii);
+        textureGenR[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_R,ii);
+        textureGenQ[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_Q,ii);
       }
+      vertexProgramTwoSide = dt.call(&dt.glIsEnabled)(GL_VERTEX_PROGRAM_TWO_SIDE);
       return *this;
     }
 
@@ -537,15 +530,16 @@ namespace State {
         setEnablei(dt,GL_SCISSOR_TEST,ii,scissorTest[ii]);
       for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
       {
-        setEnableIndexedEXT(dt,GL_TEXTURE_1D,ii,texture1d[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_2D,ii,texture2d[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_3D,ii,texture3d[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_CUBE_MAP,ii,textureCubeMap[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_GEN_S,ii,textureGenS[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_GEN_T,ii,textureGenT[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_GEN_R,ii,textureGenR[ii]);
-        setEnableIndexedEXT(dt,GL_TEXTURE_GEN_Q,ii,textureGenQ[ii]);
+        setEnablei(dt,GL_TEXTURE_1D,ii,texture1d[ii]);
+        setEnablei(dt,GL_TEXTURE_2D,ii,texture2d[ii]);
+        setEnablei(dt,GL_TEXTURE_3D,ii,texture3d[ii]);
+        setEnablei(dt,GL_TEXTURE_CUBE_MAP,ii,textureCubeMap[ii]);
+        setEnablei(dt,GL_TEXTURE_GEN_S,ii,textureGenS[ii]);
+        setEnablei(dt,GL_TEXTURE_GEN_T,ii,textureGenT[ii]);
+        setEnablei(dt,GL_TEXTURE_GEN_R,ii,textureGenR[ii]);
+        setEnablei(dt,GL_TEXTURE_GEN_Q,ii,textureGenQ[ii]);
       }
+      setEnable(dt,GL_VERTEX_PROGRAM_TWO_SIDE,vertexProgramTwoSide);
       return *this;
     }
 
@@ -560,7 +554,7 @@ namespace State {
       tmp << print_string("glClampColor(GL_CLAMP_READ_COLOR",Token::toString(clampReadColor),");",delim);
       tmp << print_string("glClampColor(GL_CLAMP_VERTEX_COLOR",Token::toString(clampVertexColor),");",delim);
       for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
-        tmp << print_string(clipDistance[ii] ? "glEnable" : "glDisable","(GL_CLIP_DISTANCE",ii,");",delim);
+        enableiToString(tmp, clipDistance[ii], "GL_CLIP_DISTANCE", ii, delim);
       enableToString(tmp, colorLogicOp, "GL_COLOR_LOGIC_OP",delim);
       enableToString(tmp, colorMaterial, "GL_COLOR_MATERIAL",delim);
       enableToString(tmp, colorSum, "GL_COLOR_SUM",delim);
@@ -575,7 +569,10 @@ namespace State {
       enableToString(tmp, framebufferSRGB, "GL_FRAMEBUFFER_SRGB",delim);
       enableToString(tmp, histogram, "GL_HISTOGRAM",delim);
       for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
-        tmp << print_string(light[ii] ? "glEnable" : "glDisable","(GL_LIGHT",ii,");",delim);
+      {
+        GLenum lightx = GL_LIGHT0 + ii;
+        tmp << print_string(light[ii] ? "glEnable(" : "glDisable(",Token::toString(lightx),");",delim);
+      }
       enableToString(tmp, lighting, "GL_LIGHTING",delim);
       enableToString(tmp, lineSmooth, "GL_LINE_SMOOTH",delim);
       enableToString(tmp, lineStipple, "GL_LINE_STIPPLE",delim);
@@ -618,20 +615,20 @@ namespace State {
       enableToString(tmp, sampleShading, "GL_SAMPLE_SHADING",delim);
       enableToString(tmp, separable2d, "GL_SEPARABLE_2D",delim);
       enableToString(tmp, stencilTest, "GL_STENCIL_TEST",delim);
-      enableToString(tmp, vertexProgramTwoSide, "GL_VERTEX_PROGRAM_TWO_SIDE",delim);
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
         enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", ii,delim);
       for (int ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
       {
-        tmp << print_string("Texture unit ",ii,": ",texture1d[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_1D);",delim);
-        tmp << print_string("Texture unit ",ii,": ",texture2d[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_2D);",delim);
-        tmp << print_string("Texture unit ",ii,": ",texture3d[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_3D);",delim);
-        tmp << print_string("Texture unit ",ii,": ",textureCubeMap[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_CUBE_MAP);",delim);
-        tmp << print_string("Texture unit ",ii,": ",textureGenS[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_GEN_S);",delim);
-        tmp << print_string("Texture unit ",ii,": ",textureGenT[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_GEN_T);",delim);
-        tmp << print_string("Texture unit ",ii,": ",textureGenR[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_GEN_R);",delim);
-        tmp << print_string("Texture unit ",ii,": ",textureGenQ[ii] ? "glEnable" : "glDisable","(GL_TEXTURE_GEN_Q);",delim);
+        enableiToString(tmp, texture1d[ii], "GL_TEXTURE_1D", ii, delim);
+        enableiToString(tmp, texture2d[ii], "GL_TEXTURE_2D", ii, delim);
+        enableiToString(tmp, texture3d[ii], "GL_TEXTURE_3D", ii, delim);
+        enableiToString(tmp, textureCubeMap[ii], "GL_TEXTURE_CUBE_MAP", ii, delim);
+        enableiToString(tmp, textureGenS[ii], "GL_TEXTURE_GEN_S", ii, delim);
+        enableiToString(tmp, textureGenT[ii], "GL_TEXTURE_GEN_T", ii, delim);
+        enableiToString(tmp, textureGenR[ii], "GL_TEXTURE_GEN_R", ii, delim);
+        enableiToString(tmp, textureGenQ[ii], "GL_TEXTURE_GEN_Q", ii, delim);
       }
+      enableToString(tmp, vertexProgramTwoSide, "GL_VERTEX_PROGRAM_TWO_SIDE",delim);
       return tmp;
     }
   };
@@ -916,10 +913,9 @@ namespace State {
   struct Polygon
   {
     GLboolean   cullEnable;
-    GLenum      cull;
+    GLenum      cullFaceMode;
     GLenum      frontFace;
-    GLenum      frontMode;
-    GLenum      backMode;
+    GLenum      mode[2];
     GLboolean   smoothEnable;
     GLboolean   stippleEnable;
     GLboolean   offsetFill;
@@ -929,19 +925,26 @@ namespace State {
     GLfloat     units;
 
     inline Polygon()
-    : cullEnable(GL_FALSE), cull(GL_BACK), frontFace(GL_CCW), frontMode(GL_FILL), backMode(GL_FILL),
-      smoothEnable(GL_FALSE), stippleEnable(GL_FALSE), offsetFill(GL_FALSE), offsetLine(GL_FALSE), offsetPoint(GL_FALSE),
-      factor(0), units(0)
+    : cullEnable(GL_FALSE)
+    , cullFaceMode(GL_BACK)
+    , frontFace(GL_CCW)
+    , smoothEnable(GL_FALSE)
+    , stippleEnable(GL_FALSE)
+    , offsetFill(GL_FALSE)
+    , offsetLine(GL_FALSE)
+    , offsetPoint(GL_FALSE)
+    , factor(0)
+    , units(0)
     {
+      mode[0] = mode[1] = GL_FILL;
     }
 
     inline Polygon &swap(Polygon &other)
     {
       std::swap(cullEnable,other.cullEnable);
-      std::swap(cull,other.cull);
+      std::swap(cullFaceMode,other.cullFaceMode);
       std::swap(frontFace,other.frontFace);
-      std::swap(frontMode,other.frontMode);
-      std::swap(backMode,other.backMode);
+      std::swap_ranges(mode,mode+2,other.mode);
       std::swap(smoothEnable,other.smoothEnable);
       std::swap(stippleEnable,other.stippleEnable);
       std::swap(offsetFill,other.offsetFill);
@@ -955,9 +958,9 @@ namespace State {
     inline Polygon &get(DispatchTable &dt)
     {
       cullEnable = dt.call(&dt.glIsEnabled)(GL_CULL_FACE);
-      dt.call(&dt.glGetIntegerv)(GL_CULL_FACE_MODE,reinterpret_cast<GLint *>(&cull));
+      dt.call(&dt.glGetIntegerv)(GL_CULL_FACE_MODE,reinterpret_cast<GLint *>(&cullFaceMode));
       dt.call(&dt.glGetIntegerv)(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
-      dt.call(&dt.glGetIntegerv)(GL_POLYGON_MODE,reinterpret_cast<GLint *>(&frontMode));
+      dt.call(&dt.glGetIntegerv)(GL_POLYGON_MODE,reinterpret_cast<GLint *>(&mode));
       dt.call(&dt.glGetIntegerv)(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
       smoothEnable  = dt.call(&dt.glIsEnabled)(GL_POLYGON_SMOOTH);
       stippleEnable = dt.call(&dt.glIsEnabled)(GL_POLYGON_STIPPLE);
@@ -972,10 +975,10 @@ namespace State {
     inline const Polygon &set(DispatchTable &dt) const
     {
       setEnable(dt,GL_CULL_FACE,cullEnable);
-      dt.call(&dt.glCullFace)(cull);
+      dt.call(&dt.glCullFace)(cullFaceMode);
       dt.call(&dt.glFrontFace)(frontFace);
-      dt.call(&dt.glPolygonMode)(GL_FRONT,frontMode);
-      dt.call(&dt.glPolygonMode)(GL_BACK,backMode);
+      dt.call(&dt.glPolygonMode)(GL_FRONT,mode[0]);
+      dt.call(&dt.glPolygonMode)(GL_BACK,mode[1]);
       setEnable(dt,GL_POLYGON_SMOOTH,smoothEnable);
       setEnable(dt,GL_POLYGON_STIPPLE,stippleEnable);
       setEnable(dt,GL_POLYGON_OFFSET_FILL,offsetFill);
@@ -989,21 +992,22 @@ namespace State {
     {
       string_list tmp;
       enableToString(tmp, cullEnable, "GL_CULL_FACE", delim);
-      tmp << print_string("glCullFace(",Token::toString(cull),");",delim);
+      tmp << print_string("glCullFace(",Token::toString(cullFaceMode),");",delim);
       tmp << print_string("glFrontFace(",Token::toString(frontFace),");",delim);
-      tmp << print_string("glPolygonMode(GL_FRONT,",Token::toString(frontMode),");",delim);
-      tmp << print_string("glPolygonMode(GL_BACK,",Token::toString(backMode),");",delim);
+      tmp << print_string("glPolygonMode(GL_FRONT,",Token::toString(mode[0]),");",delim);
+      tmp << print_string("glPolygonMode(GL_BACK,",Token::toString(mode[1]),");",delim);
       enableToString(tmp, smoothEnable, "GL_POLYGON_SMOOTH", delim);
       enableToString(tmp, stippleEnable, "GL_POLYGON_STIPPLE", delim);
       enableToString(tmp, offsetFill, "GL_POLYGON_OFFSET_FILL", delim);
       enableToString(tmp, offsetLine, "GL_POLYGON_OFFSET_LINE", delim);
       enableToString(tmp, offsetPoint, "GL_POLYGON_OFFSET_POINT", delim);
+      tmp << print_string("glPolygonOffset(",factor,",",units,");",delim);
       return tmp;
     }
 
     inline void glCullFace(GLenum mode)
     {
-      cull = mode;
+      cullFaceMode = mode;
     }
 
     inline void glFrontFace(GLenum mode)
@@ -1011,14 +1015,14 @@ namespace State {
       frontFace = mode;
     }
 
-    inline void glPolygonMode(GLenum f, GLenum mode)
+    inline void glPolygonMode(GLenum f, GLenum m)
     {
       switch (f)
       {
-        case GL_FRONT:          frontMode = mode;            break;
-        case GL_BACK:           backMode  = mode;            break;
-        case GL_FRONT_AND_BACK: frontMode = backMode = mode; break;
-        default:                                             break;
+        case GL_FRONT:          mode[0] = m;           break;
+        case GL_BACK:           mode[1] = m;           break;
+        case GL_FRONT_AND_BACK: mode[0] = mode[1] = m; break;
+        default:                                       break;
       }
     }
 
@@ -1129,8 +1133,11 @@ namespace State {
       for (GLint i = 0; i < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES; i++)
       {
         GLenum plane = GL_CLIP_PLANE0 + i;
-        tmp << print_string(clipPlane[i].enabled ? "glEnable(" : "glDisable(",Token::toString(plane),")",delim);
-        tmp << print_string("glClipPlane(",Token::toString(plane),clipPlane[i].equation.data[0],clipPlane[i].equation.data[1],clipPlane[i].equation.data[2],clipPlane[i].equation.data[3],")",delim);
+        enableToString(tmp, clipPlane[i].enabled, Token::toString(plane), delim);
+        tmp << print_string("glClipPlane(",Token::toString(plane),", [ ", clipPlane[i].equation.data[0],
+                                                                    ", ", clipPlane[i].equation.data[1],
+                                                                    ", ", clipPlane[i].equation.data[2],
+                                                                    ", ", clipPlane[i].equation.data[3]," ]);",delim);
       }
       tmp << print_string("glMatrixMode(",Token::toString(matrixMode),");",delim);
       enableToString(tmp, normalize, "GL_NORMALIZE", delim);
@@ -1375,7 +1382,7 @@ namespace State {
         std::memcpy(this,&other,sizeof(Scissor));
     }
 
-    bool defined() const
+    bool fullyDefined() const
     {
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
@@ -1385,7 +1392,7 @@ namespace State {
       return true;
     }
 
-    void define(DispatchTable &dt)
+    void getUndefined(DispatchTable &dt)
     {
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
@@ -1418,21 +1425,25 @@ namespace State {
 
     inline const Scissor &set(DispatchTable &dt) const
     {
-      RegalAssert(defined());
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      {
         setEnablei(dt,GL_SCISSOR_TEST,ii,scissorTest[ii]);
-      dt.call(&dt.glScissorArrayv)(0, REGAL_MAX_VIEWPORTS, &scissorBox[0][0]);
+        if (valid[ii])
+          dt.call(&dt.glScissorIndexedv)(ii, &scissorBox[ii][0]);
+      }
       return *this;
     }
 
     inline std::string toString(const char *delim = "\n") const
     {
-      RegalAssert(defined());
       string_list tmp;
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
         enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", ii, delim);
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
-        tmp << print_string("glScissorIndexed(",ii,",",scissorBox[ii][0],",",scissorBox[ii][1],",",scissorBox[ii][2],",",scissorBox[ii][3],");",delim);
+        if (valid[ii])
+          tmp << print_string("glScissorIndexedv(",ii,", [ ",scissorBox[ii][0],",",scissorBox[ii][1],",",scissorBox[ii][2],",",scissorBox[ii][3]," ] );",delim);
+        else
+          tmp << print_string("glScissorIndexedv(",ii,", [ *not valid* ] );",delim);
       return tmp;
     }
 
@@ -1513,7 +1524,7 @@ namespace State {
       }
     }
 
-    bool defined() const
+    bool fullyDefined() const
     {
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
@@ -1523,7 +1534,7 @@ namespace State {
       return true;
     }
 
-    inline void define(DispatchTable &dt)
+    inline void getUndefined(DispatchTable &dt)
     {
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       {
@@ -1553,18 +1564,21 @@ namespace State {
 
     inline const Viewport &set(DispatchTable &dt) const
     {
-      RegalAssert(defined());
       dt.call(&dt.glDepthRangeArrayv)(0, REGAL_MAX_VIEWPORTS, &depthRange[0][0] );
-      dt.call(&dt.glViewportArrayv)(0, REGAL_MAX_VIEWPORTS, &viewport[0][0] );
+      for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+        if (valid[ii])
+          dt.call(&dt.glViewportIndexedfv)(ii, &viewport[ii][0] );
       return *this;
     }
 
     inline std::string toString(const char *delim = "\n") const
     {
-      RegalAssert(defined());
       string_list tmp;
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
-        tmp << print_string("glViewportIndexedf(",ii,",",viewport[ii][0],",",viewport[ii][1],",",viewport[ii][2],",",viewport[ii][3],");",delim);
+        if (valid[ii])
+          tmp << print_string("glViewportIndexedfv(",ii,", [ ",viewport[ii][0],",",viewport[ii][1],",",viewport[ii][2],",",viewport[ii][3]," ] );",delim);
+        else
+          tmp << print_string("glViewportIndexedfv(",ii,", [ *not valid* ] );",delim);
       for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
         tmp << print_string("glDepthRangeIndexed(",ii,",",depthRange[ii][0],",",depthRange[ii][1],");",delim);
       return tmp;
@@ -1775,7 +1789,7 @@ namespace State {
       sampleAlphaToOne = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_ONE);
       sampleCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE);
       dt.call(&dt.glGetFloatv)(GL_SAMPLE_COVERAGE_VALUE,&sampleCoverageValue);
-      sampleCoverageInvert = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE_INVERT);
+      dt.call(&dt.glGetBooleanv)(GL_SAMPLE_COVERAGE_INVERT,&sampleCoverageInvert);
       sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
       dt.call(&dt.glGetFloatv)(GL_MIN_SAMPLE_SHADING_VALUE,&minSampleShadingValue);
       return *this;
@@ -2086,7 +2100,7 @@ namespace State {
       dt.call(&dt.glPointParameterfv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
       dt.call(&dt.glPointParameteri)(GL_POINT_SPRITE_COORD_ORIGIN,spriteCoordOrigin);
       for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
-        dt.call(&dt.glMultiTexEnviEXT)(ii,GL_POINT_SPRITE,GL_COORD_REPLACE,coordReplace[ii]);
+        dt.call(&dt.glMultiTexEnviEXT)(GL_TEXTURE0+ii,GL_POINT_SPRITE,GL_COORD_REPLACE,coordReplace[ii]);
       return *this;
     }
 
@@ -2104,7 +2118,7 @@ namespace State {
                                                                                  distanceAttenuation[2]," ]);",delim);
       tmp << print_string("glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN",Token::toString(spriteCoordOrigin),");",delim);
       for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
-        tmp << print_string("glMultiTexEnviEXT(",ii,",GL_POINT_SPRITE,GL_COORD_REPLACE,",coordReplace[ii],");",delim);
+        tmp << print_string("glMultiTexEnviEXT(",Token::toString(GL_TEXTURE0+ii),",GL_POINT_SPRITE,GL_COORD_REPLACE,",coordReplace[ii],");",delim);
       return tmp;
     }
 
@@ -2290,12 +2304,12 @@ namespace State {
       }
     }
 
-    inline bool defined() const
+    inline bool fullyDefined() const
     {
       return valid;
     }
 
-    void define(DispatchTable &dt)
+    void getUndefined(DispatchTable &dt)
     {
       if (!valid)
       {
@@ -2372,7 +2386,6 @@ namespace State {
 
     inline const ColorBuffer &set(DispatchTable &dt) const
     {
-      RegalAssert(defined());
       dt.call(&dt.glClampColor)(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
       dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
       setEnable(dt,GL_ALPHA_TEST,alphaTest);
@@ -2394,24 +2407,24 @@ namespace State {
         dt.call(&dt.glColorMaski)(ii, colorWritemask[ii][0], colorWritemask[ii][1], colorWritemask[ii][2], colorWritemask[ii][3]);
       dt.call(&dt.glClearColor)(colorClearValue[0],colorClearValue[1],colorClearValue[2],colorClearValue[3]);
       dt.call(&dt.glClearIndex)(indexClearValue);
-      dt.call(&dt.glDrawBuffers)(REGAL_MAX_DRAW_BUFFERS, drawBuffers);
+      if (valid)
+        dt.call(&dt.glDrawBuffers)(REGAL_MAX_DRAW_BUFFERS, drawBuffers);
       return *this;
     }
 
     inline std::string toString(const char *delim = "\n") const
     {
-      RegalAssert(defined());
       string_list tmp;
-      tmp << print_string("glClampColor(GL_CLAMP_FRAGMENT_COLOR",Token::toString(clampFragmentColor),");",delim);
-      tmp << print_string("glClampColor(GL_CLAMP_READ_COLOR",Token::toString(clampReadColor),");",delim);
+      tmp << print_string("glClampColor(GL_CLAMP_FRAGMENT_COLOR",",",Token::toString(clampFragmentColor),");",delim);
+      tmp << print_string("glClampColor(GL_CLAMP_READ_COLOR",",",Token::toString(clampReadColor),");",delim);
       enableToString(tmp, alphaTest, "GL_ALPHA_TEST",delim);
-      tmp << print_string("glAlphaFunc(Token::toString(alphaTestFunc),",alphaTestRef,");",delim);
+      tmp << print_string("glAlphaFunc(",Token::toString(alphaTestFunc),",",alphaTestRef,");",delim);
       for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
         enableiToString(tmp, blend[ii], "GL_BLEND", ii,delim);
       for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
-        tmp << print_string("glBlendFuncSeparatei(",ii,",",Token::toString(blendSrcRgb[ii]),",",Token::toString(blendSrcAlpha[ii]),",",Token::toString(blendDstRgb[ii]),",",Token::toString(blendDstAlpha[ii]),delim);
+        tmp << print_string("glBlendFuncSeparatei(",ii,",",Token::toString(blendSrcRgb[ii]),",",Token::toString(blendSrcAlpha[ii]),",",Token::toString(blendDstRgb[ii]),",",Token::toString(blendDstAlpha[ii]),");",delim);
       for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
-        tmp << print_string("glBlendEquationSeparatei(",ii,",",Token::toString(blendEquationRgb[ii]),",",Token::toString(blendEquationAlpha[ii]),delim);
+        tmp << print_string("glBlendEquationSeparatei(",ii,",",Token::toString(blendEquationRgb[ii]),",",Token::toString(blendEquationAlpha[ii]),");",delim);
       tmp << print_string("glBlendColor(",blendColor[0],",",blendColor[1],",",blendColor[2],",",blendColor[3],");",delim);
       enableToString(tmp, framebufferSRGB, "GL_FRAMEBUFFER_SRGB",delim);
       enableToString(tmp, dither, "GL_DITHER",delim);
@@ -2423,10 +2436,15 @@ namespace State {
         tmp << print_string("glColorMaski(",ii,",", colorWritemask[ii][0],",",colorWritemask[ii][1],",",colorWritemask[ii][2],",",colorWritemask[ii][3],");",delim);
       tmp << print_string("glClearColor(",colorClearValue[0],",",colorClearValue[1],",",colorClearValue[2],",",colorClearValue[3],");",delim);
       tmp << print_string("glClearIndex(",indexClearValue,");",delim);
-      tmp << print_string("glDrawBuffers(",REGAL_MAX_DRAW_BUFFERS,", [");
-      for (int ii=0; ii<REGAL_MAX_DRAW_BUFFERS-1; ii++)
-        tmp << print_string(" ",Token::toString(drawBuffers[ii]),",");
-      tmp << print_string(" ",Token::toString(drawBuffers[REGAL_MAX_DRAW_BUFFERS-1]),"]);",delim);
+      if (valid)
+      {
+        tmp << print_string("glDrawBuffers(",REGAL_MAX_DRAW_BUFFERS,", [");
+        for (int ii=0; ii<REGAL_MAX_DRAW_BUFFERS-1; ii++)
+          tmp << print_string(" ",Token::toString(drawBuffers[ii]),",");
+        tmp << print_string(" ",Token::toString(drawBuffers[REGAL_MAX_DRAW_BUFFERS-1]),"]);",delim);
+      }
+      else
+        tmp << print_string("glDrawBuffers(",REGAL_MAX_DRAW_BUFFERS,", [ *not valid* ]);",delim);
       return tmp;
     }
 
@@ -2680,12 +2698,12 @@ namespace State {
       convolutionBorderMode[2] = GL_REDUCE;
     }
 
-    inline bool defined() const
+    inline bool fullyDefined() const
     {
       return valid;
     }
 
-    void define(DispatchTable &dt)
+    void getUndefined(DispatchTable &dt)
     {
       if (!valid)
       {
@@ -2773,7 +2791,6 @@ namespace State {
       separable2d = dt.call(&dt.glIsEnabled)(GL_SEPARABLE_2D);
       dt.call(&dt.glGetConvolutionParameterfv)(GL_CONVOLUTION_1D, GL_CONVOLUTION_BORDER_COLOR, &convolutionBorderColor[0][0]);
       dt.call(&dt.glGetConvolutionParameteriv)(GL_CONVOLUTION_1D, GL_CONVOLUTION_BORDER_MODE,  reinterpret_cast<GLint*>(&convolutionBorderMode[0]));
-      dt.call(&dt.glGetIntegerv)(GL_READ_BUFFER,reinterpret_cast<GLint*>(&readBuffer));
       dt.call(&dt.glGetConvolutionParameterfv)(GL_CONVOLUTION_1D, GL_CONVOLUTION_FILTER_SCALE, &convolutionFilterScale[0][0]);
       dt.call(&dt.glGetConvolutionParameterfv)(GL_CONVOLUTION_1D, GL_CONVOLUTION_FILTER_BIAS,  &convolutionFilterBias [0][0]);
       dt.call(&dt.glGetConvolutionParameterfv)(GL_CONVOLUTION_2D, GL_CONVOLUTION_BORDER_COLOR, &convolutionBorderColor[1][0]);
@@ -2809,8 +2826,8 @@ namespace State {
 
     inline const PixelMode &set(DispatchTable &dt) const
     {
-      RegalAssert(defined());
-      dt.call(&dt.glReadBuffer)(readBuffer);
+      if (valid)
+        dt.call(&dt.glReadBuffer)(readBuffer);
       dt.call(&dt.glPixelTransferi)(GL_MAP_COLOR, mapColor);
       dt.call(&dt.glPixelTransferi)(GL_MAP_STENCIL,mapStencil);
       dt.call(&dt.glPixelTransferi)(GL_INDEX_SHIFT,indexShift);
@@ -2871,9 +2888,11 @@ namespace State {
 
     inline std::string toString(const char *delim = "\n") const
     {
-      RegalAssert(defined());
       string_list tmp;
-      tmp << print_string("glReadBuffer(",Token::toString(readBuffer),");",delim);
+      if (valid)
+        tmp << print_string("glReadBuffer(",Token::toString(readBuffer),");",delim);
+      else
+        tmp << print_string("glReadBuffer( *not valid* );",delim);
       tmp << print_string("glPixelTransferi(GL_MAP_COLOR,   ",mapColor,   ");",delim);
       tmp << print_string("glPixelTransferi(GL_MAP_STENCIL, ",mapStencil, ");",delim);
       tmp << print_string("glPixelTransferi(GL_INDEX_SHIFT, ",indexShift, ");",delim);
@@ -2887,7 +2906,7 @@ namespace State {
       tmp << print_string("glPixelTransferf(GL_ALPHA_SCALE, ",alphaScale, ");",delim);
       tmp << print_string("glPixelTransferf(GL_ALPHA_BIAS,  ",alphaBias,  ");",delim);
       enableToString(tmp, colorTable, "GL_COLOR_TABLE",delim);
-      enableToString(tmp, postColorMatrixColorTable, "GL_POST_COLOR_MATRIX_COLOR_TABLE",delim);
+      enableToString(tmp, postConvolutionColorTable, "GL_POST_CONVOLUTION_COLOR_TABLE",delim);
       enableToString(tmp, postColorMatrixColorTable, "GL_POST_COLOR_MATRIX_COLOR_TABLE",delim);
       tmp << print_string("glColorTableParameterfv(GL_COLOR_TABLE,                   GL_COLOR_TABLE_SCALE, [",
                                                    colorTableScale[0][0],",", colorTableScale[0][1],",",
@@ -3283,7 +3302,7 @@ namespace State {
   {
     GLenum        shadeModel;                              // GL_SHADE_MODEL
     GLenum        clampVertexColor;                        // GL_CLAMP_VERTEX_COLOR
-    GLenum        provokingVertex;                         // GL_CLAMP_VERTEX_COLOR
+    GLenum        provokingVertex;                         // GL_PROVOKING_VERTEX
     GLboolean     lighting;                                // GL_LIGHTING
     GLboolean     colorMaterial;                           // GL_COLOR_MATERIAL
     GLenum        colorMaterialParameter;                  // GL_COLOR_MATERIAL_PARAMETER
@@ -3354,8 +3373,8 @@ namespace State {
       front.get(dt,GL_FRONT);
       back.get(dt,GL_BACK);
       dt.call(&dt.glGetFloatv)(GL_LIGHT_MODEL_AMBIENT,lightModelAmbient);
-      lightModelLocalViewer = dt.call(&dt.glIsEnabled)(GL_LIGHT_MODEL_LOCAL_VIEWER);
-      lightModelTwoSide = dt.call(&dt.glIsEnabled)(GL_LIGHT_MODEL_TWO_SIDE);
+      dt.call(&dt.glGetBooleanv)(GL_LIGHT_MODEL_LOCAL_VIEWER,&lightModelLocalViewer);
+      dt.call(&dt.glGetBooleanv)(GL_LIGHT_MODEL_TWO_SIDE,&lightModelTwoSide);
       dt.call(&dt.glGetIntegerv)(GL_LIGHT_MODEL_COLOR_CONTROL,reinterpret_cast<GLint*>(&lightModelColorControl));
       for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
         lights[ii].get(dt,static_cast<GLenum>(GL_LIGHT0+ii));
@@ -3373,8 +3392,8 @@ namespace State {
       front.set(dt,GL_FRONT);
       back.set(dt,GL_BACK);
       dt.call(&dt.glLightModelfv)(GL_LIGHT_MODEL_AMBIENT,lightModelAmbient);
-      dt.call(&dt.glLightModelf)(GL_LIGHT_MODEL_LOCAL_VIEWER,lightModelLocalViewer);
-      dt.call(&dt.glLightModelf)(GL_LIGHT_MODEL_TWO_SIDE,lightModelTwoSide);
+      dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_LOCAL_VIEWER,lightModelLocalViewer);
+      dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_TWO_SIDE,lightModelTwoSide);
       dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_COLOR_CONTROL,lightModelColorControl);
       for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
         lights[ii].set(dt,static_cast<GLenum>(GL_LIGHT0+ii));
@@ -3395,9 +3414,9 @@ namespace State {
       tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_AMBIENT,[ ",
                                        lightModelAmbient[0],", ",lightModelAmbient[1],", ",
                                        lightModelAmbient[2],", ",lightModelAmbient[3]," ]);",delim);
-      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_LOCAL_VIEWER,",lightModelLocalViewer,");",delim);
-      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_TWO_SIDE,",lightModelTwoSide,");",delim);
-      tmp << print_string("glLightModelfv(GL_LIGHT_MODEL_COLOR_CONTROL,",Token::toString(lightModelColorControl),");",delim);
+      tmp << print_string("glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,",lightModelLocalViewer,");",delim);
+      tmp << print_string("glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,",lightModelTwoSide,");",delim);
+      tmp << print_string("glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL,",Token::toString(lightModelColorControl),");",delim);
       for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
         lights[ii].toString(tmp,static_cast<GLenum>(GL_LIGHT0+ii),delim);
       return tmp;

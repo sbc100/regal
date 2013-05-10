@@ -10,10 +10,53 @@ ppaFormulae = {
     'impl'    : [ '_context->ppa->PopAttrib( _context );', ],
   },
   'Get'       : {
-    'entries' : [ 'glGet(Integer|Float|Boolean)v' ],
+    'entries' : [ 'glGet(Integer|Float|Double|Boolean)(i_|)v(EXT|)' ],
     'impl'    : [
-      'if( ! _context->ppa->Get( _context, ${arg0plus} ) ) {',
-      '  _context->dispatcher.emulation.glGet${m1}v( ${arg0plus} );',
+      'if( ! _context->ppa->glGet${m2}v( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGet${m1}${m2}v${m3}( ${arg0plus} );',
+      '}',
+    ],
+  },
+  'GetPolygonStipple'       : {
+    'entries' : [ 'glGetPolygonStipple' ],
+    'impl'    : [
+      'if( ! _context->ppa->glGetPolygonStipple( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGetPolygonStipple( ${arg0plus} );',
+      '}',
+    ],
+  },
+  'glGetColorTableOrConvolutionParameterv'       : {
+    'entries' : [ 'glGet(ColorTable|Convolution)Parameter(i|f)v' ],
+    'impl'    : [
+      'if( ! _context->ppa->glGet${m1}Parameterv( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGet${m1}Parameter${m2}v( ${arg0plus} );',
+      '}',
+    ],
+  },
+  'GetLightOrMaterialv'       : {
+    'entries' : [ 'glGet(Light|Material)(f|i|x)v' ],
+    'impl'    : [
+      'if( ! _context->ppa->glGet${m1}v( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGet${m1}${m2}v( ${arg0plus} );',
+      '}',
+    ],
+  },
+  'GetTexEnviv'       : {
+    'entries' : [ 'glGet(Multi|)TexEnv(f|i)v(EXT|)' ],
+    'impl'    : [
+      'if( ! _context->ppa->glGet${m1}TexEnvv( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGet${m1}TexEnv${m2}v${m3}( ${arg0plus} );',
+      '}',
+    ],
+  },
+  'IsEnabled'       : {
+    'entries' : [ 'glIsEnabled(i|)' ],
+    'impl'    : [
+      '{',
+      '  GLboolean enabled;',
+      '  if( ! _context->ppa->glIsEnabled${m1}( _context, enabled, ${arg0plus} ) )',
+      '    return _context->dispatcher.emulation.glIsEnabled${m1}( ${arg0plus} );',
+      '  return enabled;',
       '}',
     ],
   },

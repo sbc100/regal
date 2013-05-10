@@ -7,12 +7,13 @@
 Regal
 =====
 
-.. image:: https://travis-ci.org/sbc100/regal.png?branch=add_travis
-   :target: https://travis-ci.org/sbc100/regal
-   :alt: Build Status
-
 | https://github.com/p3/regal
 | `Downloads <https://bitbucket.org/nigels_com/regal/downloads>`_
+| Status: |status|
+
+.. |status| image:: https://travis-ci.org/nigels-com/regal.png?branch=master
+   :target: https://travis-ci.org/nigels-com/regal
+   :alt: Build Status
 
 .. contents::
 

@@ -422,6 +422,7 @@ def generateEmuSource(apis, args):
 #include "RegalEmu.h"
 #include "RegalPpa.h"
 #include "RegalPpca.h"
+#include "RegalRect.h"
 #include "RegalIff.h"
 #include "RegalMarker.h"
 #include "RegalObj.h"
@@ -429,6 +430,7 @@ def generateEmuSource(apis, args):
 #include "RegalSo.h"
 #include "RegalTexC.h"
 #include "RegalVao.h"
+#include "RegalBaseVertex.h"
 #include "RegalFilt.h"'''
 
   # Output

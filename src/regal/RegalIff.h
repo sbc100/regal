@@ -1688,7 +1688,7 @@ struct Iff
     program = prog;
     return prog == 0;  // pass the call along only if it's non-zero
   }
-  
+
   bool ShadowBindProgramPipeline( GLuint progPipeline ) {
     programPipeline = progPipeline;
     return false;  // always pass this through since we're not emulating it

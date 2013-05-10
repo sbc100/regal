@@ -526,24 +526,25 @@ Init::getContextListingHTML(std::string &text)
 #if REGAL_EMULATION
       if (ctx->ppa)
       {
-        text += print_string("<b>GL_STENCIL_BIT</b><br/>",        ctx->ppa->State::Stencil::toString(br),br);
-        text += print_string("<b>GL_DEPTH_BIT</b><br/>",          ctx->ppa->State::Depth::toString(br),br);
-        text += print_string("<b>GL_POLYGON_BIT</b><br/>",        ctx->ppa->State::Polygon::toString(br),br);
-        text += print_string("<b>GL_TRANSFORM_BIT</b><br/>",      ctx->ppa->State::Transform::toString(br),br);
-        text += print_string("<b>GL_HINT_BIT</b><br/>",           ctx->ppa->State::Hint::toString(br),br);
-        text += print_string("<b>GL_ENABLE_BIT</b><br/>",         ctx->ppa->State::Enable::toString(br),br);
-        text += print_string("<b>GL_LIST_BIT</b><br/>",           ctx->ppa->State::List::toString(br),br);
         text += print_string("<b>GL_ACCUM_BUFFER_BIT</b><br/>",   ctx->ppa->State::AccumBuffer::toString(br),br);
-        text += print_string("<b>GL_VIEWPORT_BIT</b><br/>",       ctx->ppa->State::Viewport::toString(br),br);
-        text += print_string("<b>GL_LINE_BIT</b><br/>",           ctx->ppa->State::Line::toString(br),br);
-        text += print_string("<b>GL_MULTISAMPLE_BIT</b><br/>",    ctx->ppa->State::Multisample::toString(br),br);
+        text += print_string("<b>GL_COLOR_BUFFER_BIT</b><br/>",   ctx->ppa->State::ColorBuffer::toString(br),br);
+        text += print_string("<b>GL_DEPTH_BIT</b><br/>",          ctx->ppa->State::Depth::toString(br),br);
+        text += print_string("<b>GL_ENABLE_BIT</b><br/>",         ctx->ppa->State::Enable::toString(br),br);
         text += print_string("<b>GL_EVAL_BIT</b><br/>",           ctx->ppa->State::Eval::toString(br),br);
         text += print_string("<b>GL_FOG_BIT</b><br/>",            ctx->ppa->State::Fog::toString(br),br);
-        text += print_string("<b>GL_POINT_BIT</b><br/>",          ctx->ppa->State::Point::toString(br),br);
-        text += print_string("<b>GL_POLYGON_STIPPLE_BIT</b><br/>",ctx->ppa->State::PolygonStipple::toString(br),br);
-        text += print_string("<b>GL_COLOR_BUFFER_BIT</b><br/>",   ctx->ppa->State::ColorBuffer::toString(br),br);
-        text += print_string("<b>GL_PIXEL_MODE_BIT</b><br/>",     ctx->ppa->State::PixelMode::toString(br),br);
+        text += print_string("<b>GL_HINT_BIT</b><br/>",           ctx->ppa->State::Hint::toString(br),br);
         text += print_string("<b>GL_LIGHTING_BIT</b><br/>",       ctx->ppa->State::Lighting::toString(br),br);
+        text += print_string("<b>GL_LINE_BIT</b><br/>",           ctx->ppa->State::Line::toString(br),br);
+        text += print_string("<b>GL_LIST_BIT</b><br/>",           ctx->ppa->State::List::toString(br),br);
+        text += print_string("<b>GL_MULTISAMPLE_BIT</b><br/>",    ctx->ppa->State::Multisample::toString(br),br);
+        text += print_string("<b>GL_PIXEL_MODE_BIT</b><br/>",     ctx->ppa->State::PixelMode::toString(br),br);
+        text += print_string("<b>GL_POINT_BIT</b><br/>",          ctx->ppa->State::Point::toString(br),br);
+        text += print_string("<b>GL_POLYGON_BIT</b><br/>",        ctx->ppa->State::Polygon::toString(br),br);
+        text += print_string("<b>GL_POLYGON_STIPPLE_BIT</b><br/>",ctx->ppa->State::PolygonStipple::toString(br),br);
+        text += print_string("<b>GL_SCISSOR_BIT</b><br/>",        ctx->ppa->State::Scissor::toString(br),br);
+        text += print_string("<b>GL_STENCIL_BUFFER_BIT</b><br/>", ctx->ppa->State::Stencil::toString(br),br);
+        text += print_string("<b>GL_TRANSFORM_BIT</b><br/>",      ctx->ppa->State::Transform::toString(br),br);
+        text += print_string("<b>GL_VIEWPORT_BIT</b><br/>",       ctx->ppa->State::Viewport::toString(br),br);
         text += br;
       }
 #endif
