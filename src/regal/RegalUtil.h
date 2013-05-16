@@ -201,6 +201,10 @@
 #define REGAL_EMU_OBJ 1
 #endif
 
+#ifndef REGAL_EMU_BASEVERTEX
+#define REGAL_EMU_BASEVERTEX 0
+#endif
+
 #ifndef REGAL_EMU_BIN
 #define REGAL_EMU_BIN 1
 #endif

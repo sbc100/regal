@@ -33,6 +33,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_EMULATION
+
 REGAL_GLOBAL_BEGIN
 
 #include <cstring>    // For memset, memcpy
@@ -2085,7 +2087,12 @@ namespace State {
       dt.call(&dt.glGetFloatv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
       dt.call(&dt.glGetIntegerv)(GL_POINT_SPRITE_COORD_ORIGIN,reinterpret_cast<GLint*>(&spriteCoordOrigin));
       for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
-        dt.call(&dt.glGetMultiTexEnvivEXT)(ii,GL_POINT_SPRITE,GL_COORD_REPLACE,reinterpret_cast<GLint*>(&coordReplace[ii]));
+      {
+        GLint coord;
+
+        dt.call(&dt.glGetMultiTexEnvivEXT)(ii,GL_POINT_SPRITE,GL_COORD_REPLACE,&coord);
+        coordReplace[ii] = static_cast<GLboolean>(coord);
+      }
       return *this;
     }
 
@@ -3566,5 +3573,7 @@ namespace State {
 }
 
 REGAL_NAMESPACE_END
+
+#endif // REGAL_EMULATION
 
 #endif

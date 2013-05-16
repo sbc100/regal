@@ -9935,13 +9935,13 @@ static void REGAL_CALL emu_glPixelStorei(GLenum pname, GLint param)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        if (_context->isES2() || _context->isCore())
+        _context->filt->PixelStorei(*_context, pname, param);
+        if (_context->filt->Filtered())
         {
-           Warning("Regal does not support glPixelStorei for core or ES2 profiles - skipping.");
-           #if REGAL_BREAK
-           Break::Filter();
-           #endif
-           return ;
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
         }
       }
       #endif
@@ -57409,6 +57409,8 @@ static void REGAL_CALL emu_glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buf
 }
 
 // GL_EXT_discard_framebuffer
+
+// GL_EXT_disjoint_timer_query
 
 // GL_EXT_draw_buffers2
 

@@ -2812,6 +2812,11 @@ struct DispatchTable {
 
     void (REGAL_CALL *glDiscardFramebufferEXT)(GLenum target, GLsizei numAttachments, const GLenum *attachments);
 
+    // GL_EXT_disjoint_timer_query
+
+    void (REGAL_CALL *glGetQueryObjectivEXT)(GLuint id, GLenum pname, GLint *params);
+    void (REGAL_CALL *glQueryCounterEXT)(GLuint id, GLenum target);
+
     // GL_EXT_draw_buffers2
 
     void (REGAL_CALL *glColorMaskIndexedEXT)(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a);

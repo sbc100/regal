@@ -14063,6 +14063,23 @@ static void REGAL_CALL missing_glDiscardFramebufferEXT(GLenum target, GLsizei nu
   Warning( "glDiscardFramebufferEXT not available." );
 }
 
+// GL_EXT_disjoint_timer_query
+
+static void REGAL_CALL missing_glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(params);
+  Warning( "glGetQueryObjectivEXT not available." );
+}
+
+static void REGAL_CALL missing_glQueryCounterEXT(GLuint id, GLenum target)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(target);
+  Warning( "glQueryCounterEXT not available." );
+}
+
 // GL_EXT_draw_buffers2
 
 static void REGAL_CALL missing_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
@@ -24426,6 +24443,11 @@ void InitDispatchTableMissing(DispatchTable &tbl)
   // GL_EXT_discard_framebuffer
 
   tbl.glDiscardFramebufferEXT = missing_glDiscardFramebufferEXT;
+
+  // GL_EXT_disjoint_timer_query
+
+  tbl.glGetQueryObjectivEXT = missing_glGetQueryObjectivEXT;
+  tbl.glQueryCounterEXT = missing_glQueryCounterEXT;
 
   // GL_EXT_draw_buffers2
 

@@ -1546,6 +1546,11 @@ void Iff::Cleanup( RegalContext &ctx )
     const Program &pgm = ffprogs[i];
     if (pgm.pg)
     {
+      if (&pgm == currprog)
+      {
+        tbl.call(&tbl.glUseProgram)(0);
+        currprog = NULL;
+      }
       tbl.call(&tbl.glDeleteShader)(pgm.vs);
       tbl.call(&tbl.glDeleteShader)(pgm.fs);
       tbl.call(&tbl.glDeleteProgram)(pgm.pg);

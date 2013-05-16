@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2636] = {
+const char * const gl_Name[2638] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -980,6 +980,7 @@ const char * const gl_Name[2636] = {
   "glGetQueryObjecti64vEXT",
   "glGetQueryObjectiv",
   "glGetQueryObjectivARB",
+  "glGetQueryObjectivEXT",
   "glGetQueryObjectui64v",
   "glGetQueryObjectui64vEXT",
   "glGetQueryObjectuiv",
@@ -1775,6 +1776,7 @@ const char * const gl_Name[2636] = {
   "glPushMatrix",
   "glPushName",
   "glQueryCounter",
+  "glQueryCounterEXT",
   "glRasterPos2d",
   "glRasterPos2dv",
   "glRasterPos2f",
@@ -2692,7 +2694,7 @@ const char * const gl_Name[2636] = {
   NULL
 };
 
-const void *gl_Value[2636] = {
+const void *gl_Value[2638] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -3619,6 +3621,7 @@ const void *gl_Value[2636] = {
   (void *)(glGetQueryObjecti64vEXT),
   (void *)(glGetQueryObjectiv),
   (void *)(glGetQueryObjectivARB),
+  (void *)(glGetQueryObjectivEXT),
   (void *)(glGetQueryObjectui64v),
   (void *)(glGetQueryObjectui64vEXT),
   (void *)(glGetQueryObjectuiv),
@@ -4414,6 +4417,7 @@ const void *gl_Value[2636] = {
   (void *)(glPushMatrix),
   (void *)(glPushName),
   (void *)(glQueryCounter),
+  (void *)(glQueryCounterEXT),
   (void *)(glRasterPos2d),
   (void *)(glRasterPos2dv),
   (void *)(glRasterPos2f),
@@ -5331,7 +5335,7 @@ const void *gl_Value[2636] = {
   NULL
 };
 
-const size_t gl_Offset[2636] = {
+const size_t gl_Offset[2638] = {
   offsetof(DispatchTable,glAccum)/sizeof(void *),
   offsetof(DispatchTable,glActiveProgramEXT)/sizeof(void *),
   offsetof(DispatchTable,glActiveShaderProgram)/sizeof(void *),
@@ -6258,6 +6262,7 @@ const size_t gl_Offset[2636] = {
   offsetof(DispatchTable,glGetQueryObjecti64vEXT)/sizeof(void *),
   offsetof(DispatchTable,glGetQueryObjectiv)/sizeof(void *),
   offsetof(DispatchTable,glGetQueryObjectivARB)/sizeof(void *),
+  offsetof(DispatchTable,glGetQueryObjectivEXT)/sizeof(void *),
   offsetof(DispatchTable,glGetQueryObjectui64v)/sizeof(void *),
   offsetof(DispatchTable,glGetQueryObjectui64vEXT)/sizeof(void *),
   offsetof(DispatchTable,glGetQueryObjectuiv)/sizeof(void *),
@@ -7053,6 +7058,7 @@ const size_t gl_Offset[2636] = {
   offsetof(DispatchTable,glPushMatrix)/sizeof(void *),
   offsetof(DispatchTable,glPushName)/sizeof(void *),
   offsetof(DispatchTable,glQueryCounter)/sizeof(void *),
+  offsetof(DispatchTable,glQueryCounterEXT)/sizeof(void *),
   offsetof(DispatchTable,glRasterPos2d)/sizeof(void *),
   offsetof(DispatchTable,glRasterPos2dv)/sizeof(void *),
   offsetof(DispatchTable,glRasterPos2f)/sizeof(void *),

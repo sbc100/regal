@@ -926,6 +926,7 @@ EXPORTS
   glGetQueryObjecti64vEXT
   glGetQueryObjectiv
   glGetQueryObjectivARB
+  glGetQueryObjectivEXT
   glGetQueryObjectui64v
   glGetQueryObjectui64vEXT
   glGetQueryObjectuiv
@@ -1721,6 +1722,7 @@ EXPORTS
   glPushMatrix
   glPushName
   glQueryCounter
+  glQueryCounterEXT
   glRasterPos2d
   glRasterPos2dv
   glRasterPos2f

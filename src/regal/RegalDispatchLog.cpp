@@ -9469,7 +9469,7 @@ static void REGAL_CALL log_glSamplerParameterIiv(GLuint sampler, GLenum pname, c
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glSamplerParameterIiv)(sampler, pname, params);
-    Driver("glSamplerParameterIiv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    Driver("glSamplerParameterIiv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
 }
 
 static void REGAL_CALL log_glSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint *params)
@@ -9479,7 +9479,7 @@ static void REGAL_CALL log_glSamplerParameterIuiv(GLuint sampler, GLenum pname, 
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glSamplerParameterIuiv)(sampler, pname, params);
-    Driver("glSamplerParameterIuiv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    Driver("glSamplerParameterIuiv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
 }
 
 static void REGAL_CALL log_glSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param)
@@ -9489,7 +9489,7 @@ static void REGAL_CALL log_glSamplerParameterf(GLuint sampler, GLenum pname, GLf
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glSamplerParameterf)(sampler, pname, param);
-    Driver("glSamplerParameterf","(", sampler, ", ", toString(pname), ", ", param, ")");
+    Driver("glSamplerParameterf","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,param), ")");
 }
 
 static void REGAL_CALL log_glSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat *params)
@@ -9499,7 +9499,7 @@ static void REGAL_CALL log_glSamplerParameterfv(GLuint sampler, GLenum pname, co
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glSamplerParameterfv)(sampler, pname, params);
-    Driver("glSamplerParameterfv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    Driver("glSamplerParameterfv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
 }
 
 static void REGAL_CALL log_glSamplerParameteri(GLuint sampler, GLenum pname, GLint param)
@@ -9509,7 +9509,7 @@ static void REGAL_CALL log_glSamplerParameteri(GLuint sampler, GLenum pname, GLi
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glSamplerParameteri)(sampler, pname, param);
-    Driver("glSamplerParameteri","(", sampler, ", ", toString(pname), ", ", param, ")");
+    Driver("glSamplerParameteri","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,param), ")");
 }
 
 static void REGAL_CALL log_glSamplerParameteriv(GLuint sampler, GLenum pname, const GLint *params)
@@ -9519,7 +9519,7 @@ static void REGAL_CALL log_glSamplerParameteriv(GLuint sampler, GLenum pname, co
     DispatchTable *_next = _context->dispatcher.logging._next;
     RegalAssert(_next);
     _next->call(&_next->glSamplerParameteriv)(sampler, pname, params);
-    Driver("glSamplerParameteriv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    Driver("glSamplerParameteriv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
 }
 
 // GL_ARB_separate_shader_objects
@@ -16976,6 +16976,28 @@ static void REGAL_CALL log_glDiscardFramebufferEXT(GLenum target, GLsizei numAtt
     RegalAssert(_next);
     _next->call(&_next->glDiscardFramebufferEXT)(target, numAttachments, attachments);
     Driver("glDiscardFramebufferEXT","(", toString(target), ", ", numAttachments, ", ", attachments, ")");
+}
+
+// GL_EXT_disjoint_timer_query
+
+static void REGAL_CALL log_glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectivEXT)(id, pname, params);
+    Driver("glGetQueryObjectivEXT","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glQueryCounterEXT(GLuint id, GLenum target)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.logging._next;
+    RegalAssert(_next);
+    _next->call(&_next->glQueryCounterEXT)(id, target);
+    Driver("glQueryCounterEXT","(", id, ", ", toString(target), ")");
 }
 
 // GL_EXT_draw_buffers2
@@ -29154,6 +29176,11 @@ void InitDispatchTableLog(DispatchTable &tbl)
   // GL_EXT_discard_framebuffer
 
   tbl.glDiscardFramebufferEXT = log_glDiscardFramebufferEXT;
+
+  // GL_EXT_disjoint_timer_query
+
+  tbl.glGetQueryObjectivEXT = log_glGetQueryObjectivEXT;
+  tbl.glQueryCounterEXT = log_glQueryCounterEXT;
 
   // GL_EXT_draw_buffers2
 

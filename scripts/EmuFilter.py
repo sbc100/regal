@@ -82,7 +82,7 @@ formulae = {
       'glMap(1|2)(d|f)',
       'glMapGrid(1|2)(d|f)',
       'glNewList',
-      'glPixelStore(f|i)',
+      'glPixelStoref',
       'glPixelTransfer(f|i)',
       'glPixelZoom',
       'glRasterPos(2|3|4)(d|f|i|s)(v|)',
@@ -107,6 +107,7 @@ formulae = {
     'entries' : [
       'gl(BindTexture)',
       'gl(Get)(Boolean|Double|Float|Integer|Integer64)v',
+      'gl(PixelStorei)',
       'gl(PolygonMode)',
       'gl(RenderMode)',
       'gl(TexParameter)(i|f)',

@@ -926,6 +926,7 @@ EXPORTS
   rglGetQueryObjecti64vEXT
   rglGetQueryObjectiv
   rglGetQueryObjectivARB
+  rglGetQueryObjectivEXT
   rglGetQueryObjectui64v
   rglGetQueryObjectui64vEXT
   rglGetQueryObjectuiv
@@ -1721,6 +1722,7 @@ EXPORTS
   rglPushMatrix
   rglPushName
   rglQueryCounter
+  rglQueryCounterEXT
   rglRasterPos2d
   rglRasterPos2dv
   rglRasterPos2f

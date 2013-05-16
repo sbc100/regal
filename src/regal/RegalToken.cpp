@@ -2263,6 +2263,7 @@ namespace Token {
       case 0x000088eb: return "GL_PIXEL_PACK_BUFFER";
       case 0x000088ec: return "GL_PIXEL_UNPACK_BUFFER";
       case 0x000088ed: return "GL_PIXEL_PACK_BUFFER_BINDING";
+      case 0x000088ee: return "GL_ETC1_SRGB8_NV";
       case 0x000088ef: return "GL_PIXEL_UNPACK_BUFFER_BINDING";
       case 0x000088f0: return "GL_DEPTH24_STENCIL8";
       case 0x000088f1: return "GL_TEXTURE_STENCIL_SIZE";
@@ -2286,6 +2287,7 @@ namespace Token {
       case 0x00008907: return "GL_PROGRAM_RESULT_COMPONENTS_NV";
       case 0x00008908: return "GL_MAX_PROGRAM_ATTRIB_COMPONENTS_NV";
       case 0x00008909: return "GL_MAX_PROGRAM_RESULT_COMPONENTS_NV";
+      case 0x0000890b: return "GL_NVIDIA_PLATFORM_BINARY_NV";
       case 0x0000890e: return "GL_CG_VERTEX_SHADER_EXT";
       case 0x0000890f: return "GL_CG_FRAGMENT_SHADER_EXT";
       case 0x00008910: return "GL_STENCIL_TEST_TWO_SIDE_EXT";
@@ -2964,6 +2966,7 @@ namespace Token {
       case 0x00008fb1: return "GL_CPU_OPTIMIZED_QCOM";
       case 0x00008fb2: return "GL_GPU_OPTIMIZED_QCOM";
       case 0x00008fb3: return "GL_RENDER_DIRECT_TO_FRAMEBUFFER_QCOM";
+      case 0x00008fbb: return "GL_GPU_DISJOINT_EXT";
       case 0x00008fc4: return "GL_SHADER_BINARY_VIV";
       case 0x00008fe0: return "GL_INT8_NV";
       case 0x00008fe1: return "GL_INT8_VEC2_NV";
@@ -3204,6 +3207,13 @@ namespace Token {
       case 0x000090f1: return "GL_MULTIVIEW_EXT";
       case 0x000090f2: return "GL_MAX_MULTIVIEW_BUFFERS_EXT";
       case 0x000090f3: return "GL_CONTEXT_ROBUST_ACCESS_EXT";
+      case 0x000090f4: return "GL_3DVISION_STEREO_NV";
+      case 0x000090f5: return "GL_STEREO_SEPARATION_NV";
+      case 0x000090f6: return "GL_STEREO_CONVERGENCE_NV";
+      case 0x000090f7: return "GL_STEREO_CUTOFF_NV";
+      case 0x000090f8: return "GL_STEREO_PROJECTION_NV";
+      case 0x000090f9: return "GL_STEREO_PROJECTION_PERSPECTIVE_NV";
+      case 0x000090fa: return "GL_STEREO_PROJECTION_ORTHO_NV";
       case 0x000090fb: return "GL_COMPUTE_PROGRAM_NV";
       case 0x000090fc: return "GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV";
       case 0x00009100: return "GL_TEXTURE_2D_MULTISAMPLE";
@@ -3258,6 +3268,8 @@ namespace Token {
       case 0x00009134: return "GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG";
       case 0x00009135: return "GL_MAX_SAMPLES_IMG";
       case 0x00009136: return "GL_TEXTURE_SAMPLES_IMG";
+      case 0x00009137: return "GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG";
+      case 0x00009138: return "GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG";
       case 0x00009143: return "GL_MAX_DEBUG_MESSAGE_LENGTH";
       case 0x00009144: return "GL_MAX_DEBUG_LOGGED_MESSAGES";
       case 0x00009145: return "GL_DEBUG_LOGGED_MESSAGES";
@@ -3408,6 +3420,7 @@ namespace Token {
       case 0x000093a2: return "GL_TEXTURE_USAGE_ANGLE";
       case 0x000093a3: return "GL_FRAMEBUFFER_ATTACHMENT_ANGLE";
       case 0x000093a4: return "GL_PACK_REVERSE_ROW_ORDER_ANGLE";
+      case 0x000093a6: return "GL_PROGRAM_BINARY_ANGLE";
       case 0x000093b0: return "GL_COMPRESSED_RGBA_ASTC_4x4_KHR";
       case 0x000093b1: return "GL_COMPRESSED_RGBA_ASTC_5x4_KHR";
       case 0x000093b2: return "GL_COMPRESSED_RGBA_ASTC_5x5_KHR";

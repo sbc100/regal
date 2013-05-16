@@ -17072,7 +17072,7 @@ static void REGAL_CALL code_glSamplerParameterIiv(GLuint sampler, GLenum pname, 
     _code << indent << "glSamplerParameterIiv(";
                    _code << sampler;
     _code << ", "; _code << toString(pname);
-    _code << ", "; _code << "/* params = ?? */";
+    _code << ", "; _code << GLTexParameterToString(pname,params);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -17090,7 +17090,7 @@ static void REGAL_CALL code_glSamplerParameterIuiv(GLuint sampler, GLenum pname,
     _code << indent << "glSamplerParameterIuiv(";
                    _code << sampler;
     _code << ", "; _code << toString(pname);
-    _code << ", "; _code << "/* params = ?? */";
+    _code << ", "; _code << GLTexParameterToString(pname,params);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -17108,7 +17108,7 @@ static void REGAL_CALL code_glSamplerParameterf(GLuint sampler, GLenum pname, GL
     _code << indent << "glSamplerParameterf(";
                    _code << sampler;
     _code << ", "; _code << toString(pname);
-    _code << ", "; _code << param;
+    _code << ", "; _code << GLTexParameterToString(pname,param);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -17126,7 +17126,7 @@ static void REGAL_CALL code_glSamplerParameterfv(GLuint sampler, GLenum pname, c
     _code << indent << "glSamplerParameterfv(";
                    _code << sampler;
     _code << ", "; _code << toString(pname);
-    _code << ", "; _code << "/* params = ?? */";
+    _code << ", "; _code << GLTexParameterToString(pname,params);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -17144,7 +17144,7 @@ static void REGAL_CALL code_glSamplerParameteri(GLuint sampler, GLenum pname, GL
     _code << indent << "glSamplerParameteri(";
                    _code << sampler;
     _code << ", "; _code << toString(pname);
-    _code << ", "; _code << param;
+    _code << ", "; _code << GLTexParameterToString(pname,param);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -17162,7 +17162,7 @@ static void REGAL_CALL code_glSamplerParameteriv(GLuint sampler, GLenum pname, c
     _code << indent << "glSamplerParameteriv(";
                    _code << sampler;
     _code << ", "; _code << toString(pname);
-    _code << ", "; _code << "/* params = ?? */";
+    _code << ", "; _code << GLTexParameterToString(pname,params);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -31401,6 +31401,41 @@ static void REGAL_CALL code_glDiscardFramebufferEXT(GLenum target, GLsizei numAt
                    _code << toString(target);
     _code << ", "; _code << numAttachments;
     _code << ", "; _code << attachments;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.code._next;
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectivEXT)(id, pname, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGetQueryObjectivEXT(";
+                   _code << id;
+    _code << ", "; _code << toString(pname);
+    _code << ", "; _code << params;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glQueryCounterEXT(GLuint id, GLenum target)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTable *_next = _context->dispatcher.code._next;
+    RegalAssert(_next);
+    _next->call(&_next->glQueryCounterEXT)(id, target);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glQueryCounterEXT(";
+                   _code << id;
+    _code << ", "; _code << toString(target);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -51422,6 +51457,8 @@ void InitDispatchTableCode(DispatchTable &tbl)
   tbl.glVertexArrayVertexAttribOffsetEXT = code_glVertexArrayVertexAttribOffsetEXT;
   tbl.glVertexArrayVertexOffsetEXT = code_glVertexArrayVertexOffsetEXT;
   tbl.glDiscardFramebufferEXT = code_glDiscardFramebufferEXT;
+  tbl.glGetQueryObjectivEXT = code_glGetQueryObjectivEXT;
+  tbl.glQueryCounterEXT = code_glQueryCounterEXT;
   tbl.glColorMaskIndexedEXT = code_glColorMaskIndexedEXT;
   tbl.glDisableIndexedEXT = code_glDisableIndexedEXT;
   tbl.glEnableIndexedEXT = code_glEnableIndexedEXT;

@@ -131,6 +131,9 @@ ContextInfo::ContextInfo()
   gl_angle_framebuffer_multisample(false),
   gl_angle_instanced_arrays(false),
   gl_angle_pack_reverse_row_order(false),
+  gl_angle_program_binary(false),
+  gl_angle_texture_compression_dxt1(false),
+  gl_angle_texture_compression_dxt3(false),
   gl_angle_texture_compression_dxt5(false),
   gl_angle_texture_usage(false),
   gl_angle_translated_shader_source(false),
@@ -303,6 +306,7 @@ ContextInfo::ContextInfo()
   gl_ext_depth_bounds_test(false),
   gl_ext_direct_state_access(false),
   gl_ext_discard_framebuffer(false),
+  gl_ext_disjoint_timer_query(false),
   gl_ext_draw_buffers2(false),
   gl_ext_draw_instanced(false),
   gl_ext_draw_range_elements(false),
@@ -402,6 +406,7 @@ ContextInfo::ContextInfo()
   gl_img_read_format(false),
   gl_img_shader_binary(false),
   gl_img_texture_compression_pvrtc(false),
+  gl_img_texture_compression_pvrtc2(false),
   gl_img_texture_env_enhanced_fixed_function(false),
   gl_img_user_clip_plane(false),
   gl_ingr_blend_func_separate(false),
@@ -419,6 +424,8 @@ ContextInfo::ContextInfo()
   gl_mesa_ycbcr_texture(false),
   gl_nvx_conditional_render(false),
   gl_nvx_gpu_memory_info(false),
+  gl_nv_3dvision_settings(false),
+  gl_nv_bgr(false),
   gl_nv_bindless_texture(false),
   gl_nv_blend_square(false),
   gl_nv_compute_program5(false),
@@ -442,20 +449,26 @@ ContextInfo::ContextInfo()
   gl_nv_fragment_program(false),
   gl_nv_fragment_program2(false),
   gl_nv_framebuffer_blit(false),
+  gl_nv_framebuffer_multisample(false),
   gl_nv_framebuffer_multisample_coverage(false),
   gl_nv_geometry_program4(false),
   gl_nv_gpu_program4(false),
   gl_nv_gpu_program5(false),
   gl_nv_gpu_shader5(false),
   gl_nv_half_float(false),
+  gl_nv_instanced_arrays(false),
   gl_nv_light_max_exponent(false),
   gl_nv_multisample_coverage(false),
   gl_nv_multisample_filter_hint(false),
   gl_nv_occlusion_query(false),
+  gl_nv_pack_subimage(false),
   gl_nv_packed_depth_stencil(false),
+  gl_nv_packed_float_linear(false),
   gl_nv_parameter_buffer_object(false),
   gl_nv_path_rendering(false),
+  gl_nv_pixel_buffer_object(false),
   gl_nv_pixel_data_range(false),
+  gl_nv_platform_binary(false),
   gl_nv_point_sprite(false),
   gl_nv_present_video(false),
   gl_nv_primitive_restart(false),
@@ -463,11 +476,18 @@ ContextInfo::ContextInfo()
   gl_nv_read_buffer_front(false),
   gl_nv_register_combiners(false),
   gl_nv_register_combiners2(false),
+  gl_nv_srgb_formats(false),
   gl_nv_shader_buffer_load(false),
+  gl_nv_shadow_samplers_array(false),
+  gl_nv_shadow_samplers_cube(false),
   gl_nv_tessellation_program5(false),
   gl_nv_texgen_emboss(false),
   gl_nv_texgen_reflection(false),
+  gl_nv_texture_array(false),
   gl_nv_texture_barrier(false),
+  gl_nv_texture_border_clamp(false),
+  gl_nv_texture_compression_latc(false),
+  gl_nv_texture_compression_s3tc(false),
   gl_nv_texture_env_combine4(false),
   gl_nv_texture_expand_normal(false),
   gl_nv_texture_multisample(false),
@@ -1010,6 +1030,9 @@ ContextInfo::init(const RegalContext &context)
   gl_angle_framebuffer_multisample = e.find("GL_ANGLE_framebuffer_multisample")!=e.end();
   gl_angle_instanced_arrays = e.find("GL_ANGLE_instanced_arrays")!=e.end();
   gl_angle_pack_reverse_row_order = e.find("GL_ANGLE_pack_reverse_row_order")!=e.end();
+  gl_angle_program_binary = e.find("GL_ANGLE_program_binary")!=e.end();
+  gl_angle_texture_compression_dxt1 = e.find("GL_ANGLE_texture_compression_dxt1")!=e.end();
+  gl_angle_texture_compression_dxt3 = e.find("GL_ANGLE_texture_compression_dxt3")!=e.end();
   gl_angle_texture_compression_dxt5 = e.find("GL_ANGLE_texture_compression_dxt5")!=e.end();
   gl_angle_texture_usage = e.find("GL_ANGLE_texture_usage")!=e.end();
   gl_angle_translated_shader_source = e.find("GL_ANGLE_translated_shader_source")!=e.end();
@@ -1182,6 +1205,7 @@ ContextInfo::init(const RegalContext &context)
   gl_ext_depth_bounds_test = e.find("GL_EXT_depth_bounds_test")!=e.end();
   gl_ext_direct_state_access = e.find("GL_EXT_direct_state_access")!=e.end();
   gl_ext_discard_framebuffer = e.find("GL_EXT_discard_framebuffer")!=e.end();
+  gl_ext_disjoint_timer_query = e.find("GL_EXT_disjoint_timer_query")!=e.end();
   gl_ext_draw_buffers2 = e.find("GL_EXT_draw_buffers2")!=e.end();
   gl_ext_draw_instanced = e.find("GL_EXT_draw_instanced")!=e.end();
   gl_ext_draw_range_elements = e.find("GL_EXT_draw_range_elements")!=e.end();
@@ -1281,6 +1305,7 @@ ContextInfo::init(const RegalContext &context)
   gl_img_read_format = e.find("GL_IMG_read_format")!=e.end();
   gl_img_shader_binary = e.find("GL_IMG_shader_binary")!=e.end();
   gl_img_texture_compression_pvrtc = e.find("GL_IMG_texture_compression_pvrtc")!=e.end();
+  gl_img_texture_compression_pvrtc2 = e.find("GL_IMG_texture_compression_pvrtc2")!=e.end();
   gl_img_texture_env_enhanced_fixed_function = e.find("GL_IMG_texture_env_enhanced_fixed_function")!=e.end();
   gl_img_user_clip_plane = e.find("GL_IMG_user_clip_plane")!=e.end();
   gl_ingr_blend_func_separate = e.find("GL_INGR_blend_func_separate")!=e.end();
@@ -1298,6 +1323,8 @@ ContextInfo::init(const RegalContext &context)
   gl_mesa_ycbcr_texture = e.find("GL_MESA_ycbcr_texture")!=e.end();
   gl_nvx_conditional_render = e.find("GL_NVX_conditional_render")!=e.end();
   gl_nvx_gpu_memory_info = e.find("GL_NVX_gpu_memory_info")!=e.end();
+  gl_nv_3dvision_settings = e.find("GL_NV_3dvision_settings")!=e.end();
+  gl_nv_bgr = e.find("GL_NV_bgr")!=e.end();
   gl_nv_bindless_texture = e.find("GL_NV_bindless_texture")!=e.end();
   gl_nv_blend_square = e.find("GL_NV_blend_square")!=e.end();
   gl_nv_compute_program5 = e.find("GL_NV_compute_program5")!=e.end();
@@ -1321,20 +1348,26 @@ ContextInfo::init(const RegalContext &context)
   gl_nv_fragment_program = e.find("GL_NV_fragment_program")!=e.end();
   gl_nv_fragment_program2 = e.find("GL_NV_fragment_program2")!=e.end();
   gl_nv_framebuffer_blit = e.find("GL_NV_framebuffer_blit")!=e.end();
+  gl_nv_framebuffer_multisample = e.find("GL_NV_framebuffer_multisample")!=e.end();
   gl_nv_framebuffer_multisample_coverage = e.find("GL_NV_framebuffer_multisample_coverage")!=e.end();
   gl_nv_geometry_program4 = e.find("GL_NV_geometry_program4")!=e.end();
   gl_nv_gpu_program4 = e.find("GL_NV_gpu_program4")!=e.end();
   gl_nv_gpu_program5 = e.find("GL_NV_gpu_program5")!=e.end();
   gl_nv_gpu_shader5 = e.find("GL_NV_gpu_shader5")!=e.end();
   gl_nv_half_float = e.find("GL_NV_half_float")!=e.end();
+  gl_nv_instanced_arrays = e.find("GL_NV_instanced_arrays")!=e.end();
   gl_nv_light_max_exponent = e.find("GL_NV_light_max_exponent")!=e.end();
   gl_nv_multisample_coverage = e.find("GL_NV_multisample_coverage")!=e.end();
   gl_nv_multisample_filter_hint = e.find("GL_NV_multisample_filter_hint")!=e.end();
   gl_nv_occlusion_query = e.find("GL_NV_occlusion_query")!=e.end();
+  gl_nv_pack_subimage = e.find("GL_NV_pack_subimage")!=e.end();
   gl_nv_packed_depth_stencil = e.find("GL_NV_packed_depth_stencil")!=e.end();
+  gl_nv_packed_float_linear = e.find("GL_NV_packed_float_linear")!=e.end();
   gl_nv_parameter_buffer_object = e.find("GL_NV_parameter_buffer_object")!=e.end();
   gl_nv_path_rendering = e.find("GL_NV_path_rendering")!=e.end();
+  gl_nv_pixel_buffer_object = e.find("GL_NV_pixel_buffer_object")!=e.end();
   gl_nv_pixel_data_range = e.find("GL_NV_pixel_data_range")!=e.end();
+  gl_nv_platform_binary = e.find("GL_NV_platform_binary")!=e.end();
   gl_nv_point_sprite = e.find("GL_NV_point_sprite")!=e.end();
   gl_nv_present_video = e.find("GL_NV_present_video")!=e.end();
   gl_nv_primitive_restart = e.find("GL_NV_primitive_restart")!=e.end();
@@ -1342,11 +1375,18 @@ ContextInfo::init(const RegalContext &context)
   gl_nv_read_buffer_front = e.find("GL_NV_read_buffer_front")!=e.end();
   gl_nv_register_combiners = e.find("GL_NV_register_combiners")!=e.end();
   gl_nv_register_combiners2 = e.find("GL_NV_register_combiners2")!=e.end();
+  gl_nv_srgb_formats = e.find("GL_NV_sRGB_formats")!=e.end();
   gl_nv_shader_buffer_load = e.find("GL_NV_shader_buffer_load")!=e.end();
+  gl_nv_shadow_samplers_array = e.find("GL_NV_shadow_samplers_array")!=e.end();
+  gl_nv_shadow_samplers_cube = e.find("GL_NV_shadow_samplers_cube")!=e.end();
   gl_nv_tessellation_program5 = e.find("GL_NV_tessellation_program5")!=e.end();
   gl_nv_texgen_emboss = e.find("GL_NV_texgen_emboss")!=e.end();
   gl_nv_texgen_reflection = e.find("GL_NV_texgen_reflection")!=e.end();
+  gl_nv_texture_array = e.find("GL_NV_texture_array")!=e.end();
   gl_nv_texture_barrier = e.find("GL_NV_texture_barrier")!=e.end();
+  gl_nv_texture_border_clamp = e.find("GL_NV_texture_border_clamp")!=e.end();
+  gl_nv_texture_compression_latc = e.find("GL_NV_texture_compression_latc")!=e.end();
+  gl_nv_texture_compression_s3tc = e.find("GL_NV_texture_compression_s3tc")!=e.end();
   gl_nv_texture_env_combine4 = e.find("GL_NV_texture_env_combine4")!=e.end();
   gl_nv_texture_expand_normal = e.find("GL_NV_texture_expand_normal")!=e.end();
   gl_nv_texture_multisample = e.find("GL_NV_texture_multisample")!=e.end();
@@ -1669,6 +1709,9 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ANGLE_framebuffer_multisample")) return gl_angle_framebuffer_multisample;
   if (!strcmp(ext,"GL_ANGLE_instanced_arrays")) return gl_angle_instanced_arrays;
   if (!strcmp(ext,"GL_ANGLE_pack_reverse_row_order")) return gl_angle_pack_reverse_row_order;
+  if (!strcmp(ext,"GL_ANGLE_program_binary")) return gl_angle_program_binary;
+  if (!strcmp(ext,"GL_ANGLE_texture_compression_dxt1")) return gl_angle_texture_compression_dxt1;
+  if (!strcmp(ext,"GL_ANGLE_texture_compression_dxt3")) return gl_angle_texture_compression_dxt3;
   if (!strcmp(ext,"GL_ANGLE_texture_compression_dxt5")) return gl_angle_texture_compression_dxt5;
   if (!strcmp(ext,"GL_ANGLE_texture_usage")) return gl_angle_texture_usage;
   if (!strcmp(ext,"GL_ANGLE_translated_shader_source")) return gl_angle_translated_shader_source;
@@ -1841,6 +1884,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_depth_bounds_test")) return gl_ext_depth_bounds_test;
   if (!strcmp(ext,"GL_EXT_direct_state_access")) return regal_ext_direct_state_access || gl_ext_direct_state_access;
   if (!strcmp(ext,"GL_EXT_discard_framebuffer")) return gl_ext_discard_framebuffer;
+  if (!strcmp(ext,"GL_EXT_disjoint_timer_query")) return gl_ext_disjoint_timer_query;
   if (!strcmp(ext,"GL_EXT_draw_buffers2")) return gl_ext_draw_buffers2;
   if (!strcmp(ext,"GL_EXT_draw_instanced")) return gl_ext_draw_instanced;
   if (!strcmp(ext,"GL_EXT_draw_range_elements")) return gl_ext_draw_range_elements;
@@ -1940,6 +1984,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_IMG_read_format")) return gl_img_read_format;
   if (!strcmp(ext,"GL_IMG_shader_binary")) return gl_img_shader_binary;
   if (!strcmp(ext,"GL_IMG_texture_compression_pvrtc")) return gl_img_texture_compression_pvrtc;
+  if (!strcmp(ext,"GL_IMG_texture_compression_pvrtc2")) return gl_img_texture_compression_pvrtc2;
   if (!strcmp(ext,"GL_IMG_texture_env_enhanced_fixed_function")) return gl_img_texture_env_enhanced_fixed_function;
   if (!strcmp(ext,"GL_IMG_user_clip_plane")) return gl_img_user_clip_plane;
   if (!strcmp(ext,"GL_INGR_blend_func_separate")) return gl_ingr_blend_func_separate;
@@ -1957,6 +2002,8 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_MESA_ycbcr_texture")) return gl_mesa_ycbcr_texture;
   if (!strcmp(ext,"GL_NVX_conditional_render")) return gl_nvx_conditional_render;
   if (!strcmp(ext,"GL_NVX_gpu_memory_info")) return gl_nvx_gpu_memory_info;
+  if (!strcmp(ext,"GL_NV_3dvision_settings")) return gl_nv_3dvision_settings;
+  if (!strcmp(ext,"GL_NV_bgr")) return gl_nv_bgr;
   if (!strcmp(ext,"GL_NV_bindless_texture")) return gl_nv_bindless_texture;
   if (!strcmp(ext,"GL_NV_blend_square")) return regal_nv_blend_square || gl_nv_blend_square;
   if (!strcmp(ext,"GL_NV_compute_program5")) return gl_nv_compute_program5;
@@ -1980,20 +2027,26 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_fragment_program")) return gl_nv_fragment_program;
   if (!strcmp(ext,"GL_NV_fragment_program2")) return gl_nv_fragment_program2;
   if (!strcmp(ext,"GL_NV_framebuffer_blit")) return gl_nv_framebuffer_blit;
+  if (!strcmp(ext,"GL_NV_framebuffer_multisample")) return gl_nv_framebuffer_multisample;
   if (!strcmp(ext,"GL_NV_framebuffer_multisample_coverage")) return gl_nv_framebuffer_multisample_coverage;
   if (!strcmp(ext,"GL_NV_geometry_program4")) return gl_nv_geometry_program4;
   if (!strcmp(ext,"GL_NV_gpu_program4")) return gl_nv_gpu_program4;
   if (!strcmp(ext,"GL_NV_gpu_program5")) return gl_nv_gpu_program5;
   if (!strcmp(ext,"GL_NV_gpu_shader5")) return gl_nv_gpu_shader5;
   if (!strcmp(ext,"GL_NV_half_float")) return gl_nv_half_float;
+  if (!strcmp(ext,"GL_NV_instanced_arrays")) return gl_nv_instanced_arrays;
   if (!strcmp(ext,"GL_NV_light_max_exponent")) return gl_nv_light_max_exponent;
   if (!strcmp(ext,"GL_NV_multisample_coverage")) return gl_nv_multisample_coverage;
   if (!strcmp(ext,"GL_NV_multisample_filter_hint")) return gl_nv_multisample_filter_hint;
   if (!strcmp(ext,"GL_NV_occlusion_query")) return gl_nv_occlusion_query;
+  if (!strcmp(ext,"GL_NV_pack_subimage")) return gl_nv_pack_subimage;
   if (!strcmp(ext,"GL_NV_packed_depth_stencil")) return gl_nv_packed_depth_stencil;
+  if (!strcmp(ext,"GL_NV_packed_float_linear")) return gl_nv_packed_float_linear;
   if (!strcmp(ext,"GL_NV_parameter_buffer_object")) return gl_nv_parameter_buffer_object;
   if (!strcmp(ext,"GL_NV_path_rendering")) return gl_nv_path_rendering;
+  if (!strcmp(ext,"GL_NV_pixel_buffer_object")) return gl_nv_pixel_buffer_object;
   if (!strcmp(ext,"GL_NV_pixel_data_range")) return gl_nv_pixel_data_range;
+  if (!strcmp(ext,"GL_NV_platform_binary")) return gl_nv_platform_binary;
   if (!strcmp(ext,"GL_NV_point_sprite")) return gl_nv_point_sprite;
   if (!strcmp(ext,"GL_NV_present_video")) return gl_nv_present_video;
   if (!strcmp(ext,"GL_NV_primitive_restart")) return gl_nv_primitive_restart;
@@ -2001,11 +2054,18 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_read_buffer_front")) return gl_nv_read_buffer_front;
   if (!strcmp(ext,"GL_NV_register_combiners")) return gl_nv_register_combiners;
   if (!strcmp(ext,"GL_NV_register_combiners2")) return gl_nv_register_combiners2;
+  if (!strcmp(ext,"GL_NV_sRGB_formats")) return gl_nv_srgb_formats;
   if (!strcmp(ext,"GL_NV_shader_buffer_load")) return gl_nv_shader_buffer_load;
+  if (!strcmp(ext,"GL_NV_shadow_samplers_array")) return gl_nv_shadow_samplers_array;
+  if (!strcmp(ext,"GL_NV_shadow_samplers_cube")) return gl_nv_shadow_samplers_cube;
   if (!strcmp(ext,"GL_NV_tessellation_program5")) return gl_nv_tessellation_program5;
   if (!strcmp(ext,"GL_NV_texgen_emboss")) return gl_nv_texgen_emboss;
   if (!strcmp(ext,"GL_NV_texgen_reflection")) return gl_nv_texgen_reflection;
+  if (!strcmp(ext,"GL_NV_texture_array")) return gl_nv_texture_array;
   if (!strcmp(ext,"GL_NV_texture_barrier")) return gl_nv_texture_barrier;
+  if (!strcmp(ext,"GL_NV_texture_border_clamp")) return gl_nv_texture_border_clamp;
+  if (!strcmp(ext,"GL_NV_texture_compression_latc")) return gl_nv_texture_compression_latc;
+  if (!strcmp(ext,"GL_NV_texture_compression_s3tc")) return gl_nv_texture_compression_s3tc;
   if (!strcmp(ext,"GL_NV_texture_env_combine4")) return gl_nv_texture_env_combine4;
   if (!strcmp(ext,"GL_NV_texture_expand_normal")) return gl_nv_texture_expand_normal;
   if (!strcmp(ext,"GL_NV_texture_multisample")) return gl_nv_texture_multisample;

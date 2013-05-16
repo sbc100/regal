@@ -15315,6 +15315,26 @@ static void REGAL_CALL debug_glDiscardFramebufferEXT(GLenum target, GLsizei numA
   _next->call(&_next->glDiscardFramebufferEXT)(target, numAttachments, attachments);
 }
 
+// GL_EXT_disjoint_timer_query
+
+static void REGAL_CALL debug_glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.debug._next;
+  RegalAssert(_next);
+  _next->call(&_next->glGetQueryObjectivEXT)(id, pname, params);
+}
+
+static void REGAL_CALL debug_glQueryCounterEXT(GLuint id, GLenum target)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.debug._next;
+  RegalAssert(_next);
+  _next->call(&_next->glQueryCounterEXT)(id, target);
+}
+
 // GL_EXT_draw_buffers2
 
 static void REGAL_CALL debug_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
@@ -26515,6 +26535,11 @@ void InitDispatchTableDebug(DispatchTable &tbl)
   // GL_EXT_discard_framebuffer
 
   tbl.glDiscardFramebufferEXT = debug_glDiscardFramebufferEXT;
+
+  // GL_EXT_disjoint_timer_query
+
+  tbl.glGetQueryObjectivEXT = debug_glGetQueryObjectivEXT;
+  tbl.glQueryCounterEXT = debug_glQueryCounterEXT;
 
   // GL_EXT_draw_buffers2
 

@@ -65,14 +65,11 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Cache {
 
-void
-bindTexture(PFNGLBINDTEXTUREPROC bindTextureProc, PFNGLGETTEXLEVELPARAMETERIVPROC getTexLevelProc, PFNGLGETTEXIMAGEPROC getTexImageProc, GLenum target, GLuint texture)
+static void
+cacheTextureTarget(PFNGLGETTEXLEVELPARAMETERIVPROC getTexLevelProc, PFNGLGETTEXIMAGEPROC getTexImageProc, GLenum target)
 {
-  RegalAssert(bindTextureProc);
   RegalAssert(getTexLevelProc);
   RegalAssert(getTexImageProc);
-
-  bindTextureProc(target,texture);
 
   if (REGAL_CACHE && REGAL_CACHE_TEXTURE && Config::cache && Config::cacheTexture)
   {
@@ -107,7 +104,7 @@ bindTexture(PFNGLBINDTEXTUREPROC bindTextureProc, PFNGLGETTEXLEVELPARAMETERIVPRO
 
     string filename = makePath(Config::cacheDirectory,print_string(boost::print::hex(hash),".png"));
 
-    Info("glBindTexture(",Token::GLenumToString(target),",",texture,") width=",width," height=",height," hash=",boost::print::hex(hash));
+    Info("glBindTexture(",Token::GLenumToString(target),") width=",width," height=",height," hash=",boost::print::hex(hash));
 
     // Cache it to disk, iff it's not there yet
     // export REGAL_CACHE_TEXTURE_WRITE=1
@@ -168,6 +165,36 @@ bindTexture(PFNGLBINDTEXTUREPROC bindTextureProc, PFNGLGETTEXLEVELPARAMETERIVPRO
         return;
       }
     }
+  }
+}
+
+void
+bindTexture(PFNGLBINDTEXTUREPROC bindTextureProc, PFNGLGETTEXLEVELPARAMETERIVPROC getTexLevelProc, PFNGLGETTEXIMAGEPROC getTexImageProc, GLenum target, GLuint texture)
+{
+  RegalAssert(bindTextureProc);
+  RegalAssert(getTexLevelProc);
+  RegalAssert(getTexImageProc);
+
+  bindTextureProc(target,texture);
+
+  Internal("Cache::BindTexture(",Token::GLenumToString(target),",",texture,")");
+
+  switch (target)
+  {
+    case GL_TEXTURE_CUBE_MAP:
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+      break;
+
+    // TODO - arrays, etc
+
+    default:
+      cacheTextureTarget(getTexLevelProc,getTexImageProc,target);
+      break;
   }
 }
 

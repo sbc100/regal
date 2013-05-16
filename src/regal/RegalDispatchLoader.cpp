@@ -25094,6 +25094,38 @@ static void REGAL_CALL loader_glDiscardFramebufferEXT(GLenum target, GLsizei num
   _next->call(&_next->glDiscardFramebufferEXT)(target, numAttachments, attachments);
 }
 
+// GL_EXT_disjoint_timer_query
+
+static void REGAL_CALL loader_glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glGetQueryObjectivEXT, "glGetQueryObjectivEXT");
+  if (_driver.glGetQueryObjectivEXT) {
+    _driver.glGetQueryObjectivEXT(id, pname, params);
+    return;
+  }
+  DispatchTable *_next = _driver._next;
+  RegalAssert(_next);
+  _next->call(&_next->glGetQueryObjectivEXT)(id, pname, params);
+}
+
+static void REGAL_CALL loader_glQueryCounterEXT(GLuint id, GLenum target)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glQueryCounterEXT, "glQueryCounterEXT");
+  if (_driver.glQueryCounterEXT) {
+    _driver.glQueryCounterEXT(id, target);
+    return;
+  }
+  DispatchTable *_next = _driver._next;
+  RegalAssert(_next);
+  _next->call(&_next->glQueryCounterEXT)(id, target);
+}
+
 // GL_EXT_draw_buffers2
 
 static void REGAL_CALL loader_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
@@ -42032,6 +42064,11 @@ void InitDispatchTableLoader(DispatchTable &tbl)
   // GL_EXT_discard_framebuffer
 
   tbl.glDiscardFramebufferEXT = loader_glDiscardFramebufferEXT;
+
+  // GL_EXT_disjoint_timer_query
+
+  tbl.glGetQueryObjectivEXT = loader_glGetQueryObjectivEXT;
+  tbl.glQueryCounterEXT = loader_glQueryCounterEXT;
 
   // GL_EXT_draw_buffers2
 

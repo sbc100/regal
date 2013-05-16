@@ -41793,6 +41793,58 @@ static void REGAL_CALL error_glDiscardFramebufferEXT(GLenum target, GLsizei numA
   }
 }
 
+// GL_EXT_disjoint_timer_query
+
+static void REGAL_CALL error_glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+{
+  Internal("error_glGetQueryObjectivEXT","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.error._next;
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glGetQueryObjectivEXT)(id, pname, params);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glGetQueryObjectivEXT : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glQueryCounterEXT(GLuint id, GLenum target)
+{
+  Internal("error_glQueryCounterEXT","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable *_next = _context->dispatcher.error._next;
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glQueryCounterEXT)(id, target);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glQueryCounterEXT : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_EXT_draw_buffers2
 
 static void REGAL_CALL error_glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
@@ -68609,6 +68661,11 @@ void InitDispatchTableError(DispatchTable &tbl)
   // GL_EXT_discard_framebuffer
 
   tbl.glDiscardFramebufferEXT = error_glDiscardFramebufferEXT;
+
+  // GL_EXT_disjoint_timer_query
+
+  tbl.glGetQueryObjectivEXT = error_glGetQueryObjectivEXT;
+  tbl.glQueryCounterEXT = error_glQueryCounterEXT;
 
   // GL_EXT_draw_buffers2
 

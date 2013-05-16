@@ -977,6 +977,7 @@ _glGetQueryObjecti64v
 _glGetQueryObjecti64vEXT
 _glGetQueryObjectiv
 _glGetQueryObjectivARB
+_glGetQueryObjectivEXT
 _glGetQueryObjectui64v
 _glGetQueryObjectui64vEXT
 _glGetQueryObjectuiv
@@ -1772,6 +1773,7 @@ _glPushGroupMarkerEXT
 _glPushMatrix
 _glPushName
 _glQueryCounter
+_glQueryCounterEXT
 _glRasterPos2d
 _glRasterPos2dv
 _glRasterPos2f

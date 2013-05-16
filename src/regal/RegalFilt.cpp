@@ -55,7 +55,6 @@ namespace Emu {
     UNUSED_PARAMETER(target);
     UNUSED_PARAMETER(name);
 
-    #if REGAL_SYS_ES2
     if (ctx.isES2())
     {
       switch( target )
@@ -68,7 +67,6 @@ namespace Emu {
           break;
       }
     }
-    #endif
   }
 
   void Filt::RenderMode(const RegalContext &ctx, GLenum mode)
@@ -76,14 +74,12 @@ namespace Emu {
     UNUSED_PARAMETER(ctx);
     UNUSED_PARAMETER(mode);
 
-    #if REGAL_SYS_ES2 || REGAL_SYS_GL
     if (ctx.isCore() || ctx.isES2())
       if (mode!=GL_RENDER)
       {
         Warning("Regal does not support ", GLenumToString(mode), " render mode for core or ES 2.0 profiles, only GL_RENDER is supported in those profiles - skipping.");
         filtered = true;
       }
-    #endif
   }
 
   void Filt::TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLint param)
@@ -98,7 +94,6 @@ namespace Emu {
     UNUSED_PARAMETER(pname);
     UNUSED_PARAMETER(param);
 
-    #if REGAL_SYS_ES2 || REGAL_SYS_GL
     if (ctx.isCore() || ctx.isES2())
       switch(pname)
       {
@@ -114,7 +109,70 @@ namespace Emu {
           }
         default: break;
       }
-    #endif
+  }
+
+  void Filt::PixelStorei(const RegalContext &ctx, GLenum pname, GLint param)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(param);
+
+    if (ctx.isES2())
+    {
+      switch(pname)
+      {
+        case GL_PACK_ALIGNMENT:
+        case GL_UNPACK_ALIGNMENT:
+          break;
+
+        case GL_UNPACK_ROW_LENGTH_EXT:
+        case GL_UNPACK_SKIP_ROWS_EXT:
+        case GL_UNPACK_SKIP_PIXELS_EXT:
+          if (!ctx.info->gl_ext_unpack_subimage)
+          {
+            Warning("glPixelStorei ", GLenumToString(pname),
+                    " not supported for ES 2.0 without EXT_unpack_subimage.");
+            filtered = true;
+          }
+          break;
+
+        case GL_UNPACK_SKIP_IMAGES_NV:
+        case GL_UNPACK_IMAGE_HEIGHT_NV:
+          if (!ctx.info->gl_ext_unpack_subimage || !ctx.info->gl_nv_texture_array)
+          {
+            Warning("glPixelStorei ", GLenumToString(pname),
+                    " not supported for ES 2.0 without EXT_unpack_subimage and NV_texture_array.");
+            filtered = true;
+          }
+          break;
+
+        case GL_PACK_ROW_LENGTH_NV:
+        case GL_PACK_SKIP_ROWS_NV:
+        case GL_PACK_SKIP_PIXELS_NV:
+          if (!ctx.info->gl_nv_pack_subimage)
+          {
+            Warning("glPixelStorei ", GLenumToString(pname),
+                    " not supported for ES 2.0 without NV_pack_subimage.");
+            filtered = true;
+          }
+          break;
+
+        case GL_PACK_IMAGE_HEIGHT:
+        case GL_PACK_SKIP_IMAGES:
+          if (!ctx.info->gl_nv_pack_subimage || !ctx.info->gl_nv_texture_array)
+          {
+            Warning("glPixelStorei ", GLenumToString(pname),
+                    " not supported for ES 2.0 without NV_pack_subimage and NV_texture_array.");
+            filtered = true;
+          }
+          break;
+
+        default:
+          Warning("glPixelStorei ", GLenumToString(pname), " not supported for ES 2.0.");
+          filtered = true;
+          break;
+      }
+    }
   }
 
   void Filt::PolygonMode(const RegalContext &ctx, GLenum face, GLenum mode)
@@ -123,7 +181,6 @@ namespace Emu {
     UNUSED_PARAMETER(face);
     UNUSED_PARAMETER(mode);
 
-    #if REGAL_SYS_GL
     if (ctx.isCore())
     {
       if (face!=GL_FRONT_AND_BACK)
@@ -132,15 +189,12 @@ namespace Emu {
         filtered = true;
       }
     }
-    #endif
 
-    #if REGAL_SYS_ES2
     if (ctx.isES2())
     {
       Warning("Regal does not support glPolygonMode for ES 2.0 - skipping.");
       filtered = true;
     }
-    #endif
   }
 
   void Filt::FilterGet(const RegalContext &ctx, GLenum pname)
@@ -148,13 +202,11 @@ namespace Emu {
     UNUSED_PARAMETER(ctx);
     UNUSED_PARAMETER(pname);
 
-    #if REGAL_SYS_ES2 || REGAL_SYS_GL
     if (ctx.isCore() || ctx.isES2())
     {
       filtered = true;
       switch (pname )
       {
-        case GL_MAX_TEXTURE_SIZE:              retVal = 1024; break;
         case GL_MAX_PIXEL_MAP_TABLE:           retVal = 256;  break;
         case GL_MAX_NAME_STACK_DEPTH:          retVal = 128;  break;
         case GL_MAX_LIST_NESTING:              retVal = 64;   break;
@@ -168,19 +220,12 @@ namespace Emu {
         case GL_BLUE_BITS:
         case GL_ALPHA_BITS:
         case GL_STENCIL_BITS:
-        case GL_SUBPIXEL_BITS:
           retVal = 8;
           break;
 
         case GL_INDEX_MODE:
-        case GL_UNPACK_ROW_LENGTH:
-        case GL_UNPACK_SKIP_ROWS:
-        case GL_UNPACK_SKIP_PIXELS:
         case GL_UNPACK_LSB_FIRST:
         case GL_UNPACK_SWAP_BYTES:
-        case GL_PACK_ROW_LENGTH:
-        case GL_PACK_SKIP_ROWS:
-        case GL_PACK_SKIP_PIXELS:
         case GL_PACK_LSB_FIRST:
         case GL_PACK_SWAP_BYTES:
           retVal = 0;
@@ -195,9 +240,7 @@ namespace Emu {
         return;
       }
     }
-    #endif
 
-    #if REGAL_SYS_GL
     if (ctx.isCore())
     {
       filtered = true;
@@ -222,33 +265,55 @@ namespace Emu {
         return;
       }
     }
-    #endif
 
-    #if REGAL_SYS_ES2
     if (ctx.isES2())
     {
-#if 0
       filtered = true;
-      switch (pname ) {
-          /* just a test
-           case GL_PACK_ALIGNMENT:
-           retVal = 1;
-           break;
-          */
+      switch (pname) {
+        case GL_PACK_ROW_LENGTH_NV:
+        case GL_PACK_SKIP_ROWS_NV:
+        case GL_PACK_SKIP_PIXELS_NV:
+          if (ctx.info->gl_nv_pack_subimage)
+            filtered = false;
+          else
+            retVal = 0;
+          break;
+
+        case GL_PACK_IMAGE_HEIGHT:
+        case GL_PACK_SKIP_IMAGES:
+          if (ctx.info->gl_nv_pack_subimage && ctx.info->gl_nv_texture_array)
+            filtered = false;
+          else
+            retVal = 0;
+          break;
+
+        case GL_UNPACK_ROW_LENGTH_EXT:
+        case GL_UNPACK_SKIP_ROWS_EXT:
+        case GL_UNPACK_SKIP_PIXELS_EXT:
+          if (ctx.info->gl_ext_unpack_subimage)
+            filtered = false;
+          else
+            retVal = 0;
+          break;
+
+        case GL_UNPACK_IMAGE_HEIGHT_NV:
+        case GL_UNPACK_SKIP_IMAGES_NV:
+          if (ctx.info->gl_ext_unpack_subimage && ctx.info->gl_nv_texture_array)
+            filtered = false;
+          else
+            retVal = 0;
+          break;
+
         default:
           filtered = false;
           break;
       }
-#else
-      filtered = false;
-#endif
       if (filtered)
       {
         Warning( "Regal does not support ", GLenumToString(pname), " as pname for glGet for ES 2.0 profile - skipping." );
         return;
       }
     }
-    #endif
   }
 }
 

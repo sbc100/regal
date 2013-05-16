@@ -86,6 +86,7 @@ namespace Emu {
     void RenderMode  (const RegalContext &ctx, GLenum mode);
     void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLint   param);
     void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param);
+    void PixelStorei (const RegalContext &ctx, GLenum pname, GLint param);
 
     void FilterGet   (const RegalContext &ctx, GLenum pname);
 

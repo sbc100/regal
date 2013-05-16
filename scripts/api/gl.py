@@ -2785,16 +2785,30 @@ GL_PACK_REVERSE_ROW_ORDER_ANGLE = Enumerant('GL_PACK_REVERSE_ROW_ORDER_ANGLE', 0
 
 defines.add(GL_PACK_REVERSE_ROW_ORDER_ANGLE)
 
+# GL_ANGLE_program_binary
+
+GL_PROGRAM_BINARY_ANGLE = Enumerant('GL_PROGRAM_BINARY_ANGLE', 0x93a6, 'GL_ANGLE_program_binary')
+
+defines.add(GL_PROGRAM_BINARY_ANGLE)
+
+# GL_ANGLE_texture_compression_dxt1
+
+GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE', 0x83f1, 'GL_ANGLE_texture_compression_dxt1')
+GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE = Enumerant('GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE', 0x83f0, 'GL_ANGLE_texture_compression_dxt1')
+
+defines.add(GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE)
+defines.add(GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE)
+
+# GL_ANGLE_texture_compression_dxt3
+
+GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE', 0x83f2, 'GL_ANGLE_texture_compression_dxt3')
+
+defines.add(GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE)
+
 # GL_ANGLE_texture_compression_dxt5
 
-GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE', 0x83f2, 'GL_ANGLE_texture_compression_dxt5')
-GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE', 0x83f2, 'GL_ANGLE_texture_compression_dxt5')
-GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE', 0x83f3, 'GL_ANGLE_texture_compression_dxt5')
 GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE', 0x83f3, 'GL_ANGLE_texture_compression_dxt5')
 
-defines.add(GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE)
-defines.add(GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE)
-defines.add(GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE)
 defines.add(GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE)
 
 # GL_ANGLE_texture_usage
@@ -6485,6 +6499,18 @@ defines.add(GL_COLOR_EXT)
 defines.add(GL_DEPTH_EXT)
 defines.add(GL_STENCIL_EXT)
 
+# GL_EXT_disjoint_timer_query
+
+GL_GPU_DISJOINT_EXT = Enumerant('GL_GPU_DISJOINT_EXT', 0x8fbb, 'GL_EXT_disjoint_timer_query')
+GL_QUERY_COUNTER_BITS_EXT = Enumerant('GL_QUERY_COUNTER_BITS_EXT', 0x8864, 'GL_EXT_disjoint_timer_query')
+GL_TIMESTAMP_EXT = Enumerant('GL_TIMESTAMP_EXT', 0x8e28, 'GL_EXT_disjoint_timer_query')
+GL_TIME_ELAPSED_EXT = Enumerant('GL_TIME_ELAPSED_EXT', 0x88bf, 'GL_EXT_disjoint_timer_query')
+
+defines.add(GL_GPU_DISJOINT_EXT)
+defines.add(GL_QUERY_COUNTER_BITS_EXT)
+defines.add(GL_TIMESTAMP_EXT)
+defines.add(GL_TIME_ELAPSED_EXT)
+
 # GL_EXT_draw_range_elements
 
 GL_MAX_ELEMENTS_INDICES_EXT = Enumerant('GL_MAX_ELEMENTS_INDICES_EXT', 0x80e9, 'GL_EXT_draw_range_elements')
@@ -8044,13 +8070,13 @@ defines.add(GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)
 
 # GL_EXT_unpack_subimage
 
-GL_UNPACK_ROW_LENGTH = Enumerant('GL_UNPACK_ROW_LENGTH', 0x0cf2, 'GL_EXT_unpack_subimage')
-GL_UNPACK_SKIP_PIXELS = Enumerant('GL_UNPACK_SKIP_PIXELS', 0x0cf4, 'GL_EXT_unpack_subimage')
-GL_UNPACK_SKIP_ROWS = Enumerant('GL_UNPACK_SKIP_ROWS', 0x0cf3, 'GL_EXT_unpack_subimage')
+GL_UNPACK_ROW_LENGTH_EXT = Enumerant('GL_UNPACK_ROW_LENGTH_EXT', 0x0cf2, 'GL_EXT_unpack_subimage')
+GL_UNPACK_SKIP_PIXELS_EXT = Enumerant('GL_UNPACK_SKIP_PIXELS_EXT', 0x0cf4, 'GL_EXT_unpack_subimage')
+GL_UNPACK_SKIP_ROWS_EXT = Enumerant('GL_UNPACK_SKIP_ROWS_EXT', 0x0cf3, 'GL_EXT_unpack_subimage')
 
-defines.add(GL_UNPACK_ROW_LENGTH)
-defines.add(GL_UNPACK_SKIP_PIXELS)
-defines.add(GL_UNPACK_SKIP_ROWS)
+defines.add(GL_UNPACK_ROW_LENGTH_EXT)
+defines.add(GL_UNPACK_SKIP_PIXELS_EXT)
+defines.add(GL_UNPACK_SKIP_ROWS_EXT)
 
 # GL_EXT_vertex_array
 
@@ -8564,6 +8590,14 @@ defines.add(GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG)
 defines.add(GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG)
 defines.add(GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG)
 
+# GL_IMG_texture_compression_pvrtc2
+
+GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG = Enumerant('GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG', 0x9137, 'GL_IMG_texture_compression_pvrtc2')
+GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG = Enumerant('GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG', 0x9138, 'GL_IMG_texture_compression_pvrtc2')
+
+defines.add(GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG)
+defines.add(GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG)
+
 # GL_IMG_texture_env_enhanced_fixed_function
 
 GL_ADD_BLEND_IMG = Enumerant('GL_ADD_BLEND_IMG', 0x8c09, 'GL_IMG_texture_env_enhanced_fixed_function')
@@ -8843,6 +8877,30 @@ defines.add(GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX)
 defines.add(GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX)
 defines.add(GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX)
 defines.add(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX)
+
+# GL_NV_3dvision_settings
+
+GL_3DVISION_STEREO_NV = Enumerant('GL_3DVISION_STEREO_NV', 0x90f4, 'GL_NV_3dvision_settings')
+GL_STEREO_CONVERGENCE_NV = Enumerant('GL_STEREO_CONVERGENCE_NV', 0x90f6, 'GL_NV_3dvision_settings')
+GL_STEREO_CUTOFF_NV = Enumerant('GL_STEREO_CUTOFF_NV', 0x90f7, 'GL_NV_3dvision_settings')
+GL_STEREO_PROJECTION_NV = Enumerant('GL_STEREO_PROJECTION_NV', 0x90f8, 'GL_NV_3dvision_settings')
+GL_STEREO_PROJECTION_ORTHO_NV = Enumerant('GL_STEREO_PROJECTION_ORTHO_NV', 0x90fa, 'GL_NV_3dvision_settings')
+GL_STEREO_PROJECTION_PERSPECTIVE_NV = Enumerant('GL_STEREO_PROJECTION_PERSPECTIVE_NV', 0x90f9, 'GL_NV_3dvision_settings')
+GL_STEREO_SEPARATION_NV = Enumerant('GL_STEREO_SEPARATION_NV', 0x90f5, 'GL_NV_3dvision_settings')
+
+defines.add(GL_3DVISION_STEREO_NV)
+defines.add(GL_STEREO_CONVERGENCE_NV)
+defines.add(GL_STEREO_CUTOFF_NV)
+defines.add(GL_STEREO_PROJECTION_NV)
+defines.add(GL_STEREO_PROJECTION_ORTHO_NV)
+defines.add(GL_STEREO_PROJECTION_PERSPECTIVE_NV)
+defines.add(GL_STEREO_SEPARATION_NV)
+
+# GL_NV_bgr
+
+GL_BGR_NV = Enumerant('GL_BGR_NV', 0x80e0, 'GL_NV_bgr')
+
+defines.add(GL_BGR_NV)
 
 # GL_NV_compute_program5
 
@@ -9224,6 +9282,16 @@ defines.add(GL_DRAW_FRAMEBUFFER_NV)
 defines.add(GL_READ_FRAMEBUFFER_BINDING_NV)
 defines.add(GL_READ_FRAMEBUFFER_NV)
 
+# GL_NV_framebuffer_multisample
+
+GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV = Enumerant('GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV', 0x8d56, 'GL_NV_framebuffer_multisample')
+GL_MAX_SAMPLES_NV = Enumerant('GL_MAX_SAMPLES_NV', 0x8d57, 'GL_NV_framebuffer_multisample')
+GL_RENDERBUFFER_SAMPLES_NV = Enumerant('GL_RENDERBUFFER_SAMPLES_NV', 0x8cab, 'GL_NV_framebuffer_multisample')
+
+defines.add(GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV)
+defines.add(GL_MAX_SAMPLES_NV)
+defines.add(GL_RENDERBUFFER_SAMPLES_NV)
+
 # GL_NV_framebuffer_multisample_coverage
 
 GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV = Enumerant('GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV', 0x8e11, 'GL_NV_framebuffer_multisample_coverage')
@@ -9340,6 +9408,12 @@ GL_HALF_FLOAT_NV = Enumerant('GL_HALF_FLOAT_NV', 0x140b, 'GL_NV_half_float')
 
 defines.add(GL_HALF_FLOAT_NV)
 
+# GL_NV_instanced_arrays
+
+GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV = Enumerant('GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV', 0x88fe, 'GL_NV_instanced_arrays')
+
+defines.add(GL_VERTEX_ATTRIB_ARRAY_DIVISOR_NV)
+
 # GL_NV_light_max_exponent
 
 GL_MAX_SHININESS_NV = Enumerant('GL_MAX_SHININESS_NV', 0x8504, 'GL_NV_light_max_exponent')
@@ -9376,6 +9450,16 @@ defines.add(GL_PIXEL_COUNTER_BITS_NV)
 defines.add(GL_PIXEL_COUNT_AVAILABLE_NV)
 defines.add(GL_PIXEL_COUNT_NV)
 
+# GL_NV_pack_subimage
+
+GL_PACK_ROW_LENGTH_NV = Enumerant('GL_PACK_ROW_LENGTH_NV', 0x0d02, 'GL_NV_pack_subimage')
+GL_PACK_SKIP_PIXELS_NV = Enumerant('GL_PACK_SKIP_PIXELS_NV', 0x0d04, 'GL_NV_pack_subimage')
+GL_PACK_SKIP_ROWS_NV = Enumerant('GL_PACK_SKIP_ROWS_NV', 0x0d03, 'GL_NV_pack_subimage')
+
+defines.add(GL_PACK_ROW_LENGTH_NV)
+defines.add(GL_PACK_SKIP_PIXELS_NV)
+defines.add(GL_PACK_SKIP_ROWS_NV)
+
 # GL_NV_packed_depth_stencil
 
 GL_DEPTH_STENCIL_NV = Enumerant('GL_DEPTH_STENCIL_NV', 0x84f9, 'GL_NV_packed_depth_stencil')
@@ -9383,6 +9467,14 @@ GL_UNSIGNED_INT_24_8_NV = Enumerant('GL_UNSIGNED_INT_24_8_NV', 0x84fa, 'GL_NV_pa
 
 defines.add(GL_DEPTH_STENCIL_NV)
 defines.add(GL_UNSIGNED_INT_24_8_NV)
+
+# GL_NV_packed_float_linear
+
+GL_R11F_G11F_B10F_NV = Enumerant('GL_R11F_G11F_B10F_NV', 0x8c3a, 'GL_NV_packed_float_linear')
+GL_UNSIGNED_INT_10F_11F_11F_REV_NV = Enumerant('GL_UNSIGNED_INT_10F_11F_11F_REV_NV', 0x8c3b, 'GL_NV_packed_float_linear')
+
+defines.add(GL_R11F_G11F_B10F_NV)
+defines.add(GL_UNSIGNED_INT_10F_11F_11F_REV_NV)
 
 # GL_NV_parameter_buffer_object
 
@@ -9656,6 +9748,18 @@ defines.add(GL_UTF16_NV)
 defines.add(GL_UTF8_NV)
 defines.add(GL_VERTICAL_LINE_TO_NV)
 
+# GL_NV_pixel_buffer_object
+
+GL_PIXEL_PACK_BUFFER_BINDING_NV = Enumerant('GL_PIXEL_PACK_BUFFER_BINDING_NV', 0x88ed, 'GL_NV_pixel_buffer_object')
+GL_PIXEL_PACK_BUFFER_NV = Enumerant('GL_PIXEL_PACK_BUFFER_NV', 0x88eb, 'GL_NV_pixel_buffer_object')
+GL_PIXEL_UNPACK_BUFFER_BINDING_NV = Enumerant('GL_PIXEL_UNPACK_BUFFER_BINDING_NV', 0x88ef, 'GL_NV_pixel_buffer_object')
+GL_PIXEL_UNPACK_BUFFER_NV = Enumerant('GL_PIXEL_UNPACK_BUFFER_NV', 0x88ec, 'GL_NV_pixel_buffer_object')
+
+defines.add(GL_PIXEL_PACK_BUFFER_BINDING_NV)
+defines.add(GL_PIXEL_PACK_BUFFER_NV)
+defines.add(GL_PIXEL_UNPACK_BUFFER_BINDING_NV)
+defines.add(GL_PIXEL_UNPACK_BUFFER_NV)
+
 # GL_NV_pixel_data_range
 
 GL_READ_PIXEL_DATA_RANGE_LENGTH_NV = Enumerant('GL_READ_PIXEL_DATA_RANGE_LENGTH_NV', 0x887b, 'GL_NV_pixel_data_range')
@@ -9671,6 +9775,12 @@ defines.add(GL_READ_PIXEL_DATA_RANGE_POINTER_NV)
 defines.add(GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV)
 defines.add(GL_WRITE_PIXEL_DATA_RANGE_NV)
 defines.add(GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV)
+
+# GL_NV_platform_binary
+
+GL_NVIDIA_PLATFORM_BINARY_NV = Enumerant('GL_NVIDIA_PLATFORM_BINARY_NV', 0x890b, 'GL_NV_platform_binary')
+
+defines.add(GL_NVIDIA_PLATFORM_BINARY_NV)
 
 # GL_NV_point_sprite
 
@@ -9826,6 +9936,30 @@ GL_PER_STAGE_CONSTANTS_NV = Enumerant('GL_PER_STAGE_CONSTANTS_NV', 0x8535, 'GL_N
 
 defines.add(GL_PER_STAGE_CONSTANTS_NV)
 
+# GL_NV_sRGB_formats
+
+GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV = Enumerant('GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV', 0x8c4d, 'GL_NV_sRGB_formats')
+GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV = Enumerant('GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV', 0x8c4e, 'GL_NV_sRGB_formats')
+GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV = Enumerant('GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV', 0x8c4f, 'GL_NV_sRGB_formats')
+GL_COMPRESSED_SRGB_S3TC_DXT1_NV = Enumerant('GL_COMPRESSED_SRGB_S3TC_DXT1_NV', 0x8c4c, 'GL_NV_sRGB_formats')
+GL_ETC1_SRGB8_NV = Enumerant('GL_ETC1_SRGB8_NV', 0x88ee, 'GL_NV_sRGB_formats')
+GL_SLUMINANCE8_ALPHA8_NV = Enumerant('GL_SLUMINANCE8_ALPHA8_NV', 0x8c45, 'GL_NV_sRGB_formats')
+GL_SLUMINANCE8_NV = Enumerant('GL_SLUMINANCE8_NV', 0x8c47, 'GL_NV_sRGB_formats')
+GL_SLUMINANCE_ALPHA_NV = Enumerant('GL_SLUMINANCE_ALPHA_NV', 0x8c44, 'GL_NV_sRGB_formats')
+GL_SLUMINANCE_NV = Enumerant('GL_SLUMINANCE_NV', 0x8c46, 'GL_NV_sRGB_formats')
+GL_SRGB8_NV = Enumerant('GL_SRGB8_NV', 0x8c41, 'GL_NV_sRGB_formats')
+
+defines.add(GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_NV)
+defines.add(GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_NV)
+defines.add(GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_NV)
+defines.add(GL_COMPRESSED_SRGB_S3TC_DXT1_NV)
+defines.add(GL_ETC1_SRGB8_NV)
+defines.add(GL_SLUMINANCE8_ALPHA8_NV)
+defines.add(GL_SLUMINANCE8_NV)
+defines.add(GL_SLUMINANCE_ALPHA_NV)
+defines.add(GL_SLUMINANCE_NV)
+defines.add(GL_SRGB8_NV)
+
 # GL_NV_shader_buffer_load
 
 GL_BUFFER_GPU_ADDRESS_NV = Enumerant('GL_BUFFER_GPU_ADDRESS_NV', 0x8f1d, 'GL_NV_shader_buffer_load')
@@ -9835,6 +9969,18 @@ GL_MAX_SHADER_BUFFER_ADDRESS_NV = Enumerant('GL_MAX_SHADER_BUFFER_ADDRESS_NV', 0
 defines.add(GL_BUFFER_GPU_ADDRESS_NV)
 defines.add(GL_GPU_ADDRESS_NV)
 defines.add(GL_MAX_SHADER_BUFFER_ADDRESS_NV)
+
+# GL_NV_shadow_samplers_array
+
+GL_SAMPLER_2D_ARRAY_SHADOW_NV = Enumerant('GL_SAMPLER_2D_ARRAY_SHADOW_NV', 0x8dc4, 'GL_NV_shadow_samplers_array')
+
+defines.add(GL_SAMPLER_2D_ARRAY_SHADOW_NV)
+
+# GL_NV_shadow_samplers_cube
+
+GL_SAMPLER_CUBE_SHADOW_NV = Enumerant('GL_SAMPLER_CUBE_SHADOW_NV', 0x8dc5, 'GL_NV_shadow_samplers_cube')
+
+defines.add(GL_SAMPLER_CUBE_SHADOW_NV)
 
 # GL_NV_tessellation_program5
 
@@ -9867,6 +10013,56 @@ GL_REFLECTION_MAP_NV = Enumerant('GL_REFLECTION_MAP_NV', 0x8512, 'GL_NV_texgen_r
 
 defines.add(GL_NORMAL_MAP_NV)
 defines.add(GL_REFLECTION_MAP_NV)
+
+# GL_NV_texture_array
+
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_NV = Enumerant('GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_NV', 0x8cd4, 'GL_NV_texture_array')
+GL_MAX_ARRAY_TEXTURE_LAYERS_NV = Enumerant('GL_MAX_ARRAY_TEXTURE_LAYERS_NV', 0x88ff, 'GL_NV_texture_array')
+GL_SAMPLER_2D_ARRAY_NV = Enumerant('GL_SAMPLER_2D_ARRAY_NV', 0x8dc1, 'GL_NV_texture_array')
+GL_TEXTURE_2D_ARRAY_NV = Enumerant('GL_TEXTURE_2D_ARRAY_NV', 0x8c1a, 'GL_NV_texture_array')
+GL_TEXTURE_BINDING_2D_ARRAY_NV = Enumerant('GL_TEXTURE_BINDING_2D_ARRAY_NV', 0x8c1d, 'GL_NV_texture_array')
+GL_UNPACK_IMAGE_HEIGHT_NV = Enumerant('GL_UNPACK_IMAGE_HEIGHT_NV', 0x806e, 'GL_NV_texture_array')
+GL_UNPACK_SKIP_IMAGES_NV = Enumerant('GL_UNPACK_SKIP_IMAGES_NV', 0x806d, 'GL_NV_texture_array')
+
+defines.add(GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_NV)
+defines.add(GL_MAX_ARRAY_TEXTURE_LAYERS_NV)
+defines.add(GL_SAMPLER_2D_ARRAY_NV)
+defines.add(GL_TEXTURE_2D_ARRAY_NV)
+defines.add(GL_TEXTURE_BINDING_2D_ARRAY_NV)
+defines.add(GL_UNPACK_IMAGE_HEIGHT_NV)
+defines.add(GL_UNPACK_SKIP_IMAGES_NV)
+
+# GL_NV_texture_border_clamp
+
+GL_CLAMP_TO_BORDER_NV = Enumerant('GL_CLAMP_TO_BORDER_NV', 0x812d, 'GL_NV_texture_border_clamp')
+GL_TEXTURE_BORDER_COLOR_NV = Enumerant('GL_TEXTURE_BORDER_COLOR_NV', 0x1004, 'GL_NV_texture_border_clamp')
+
+defines.add(GL_CLAMP_TO_BORDER_NV)
+defines.add(GL_TEXTURE_BORDER_COLOR_NV)
+
+# GL_NV_texture_compression_latc
+
+GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV = Enumerant('GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV', 0x8c72, 'GL_NV_texture_compression_latc')
+GL_COMPRESSED_LUMINANCE_LATC1_NV = Enumerant('GL_COMPRESSED_LUMINANCE_LATC1_NV', 0x8c70, 'GL_NV_texture_compression_latc')
+GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV = Enumerant('GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV', 0x8c73, 'GL_NV_texture_compression_latc')
+GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV = Enumerant('GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV', 0x8c71, 'GL_NV_texture_compression_latc')
+
+defines.add(GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_NV)
+defines.add(GL_COMPRESSED_LUMINANCE_LATC1_NV)
+defines.add(GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_NV)
+defines.add(GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_NV)
+
+# GL_NV_texture_compression_s3tc
+
+GL_COMPRESSED_RGBA_S3TC_DXT1_NV = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT1_NV', 0x83f1, 'GL_NV_texture_compression_s3tc')
+GL_COMPRESSED_RGBA_S3TC_DXT3_NV = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT3_NV', 0x83f2, 'GL_NV_texture_compression_s3tc')
+GL_COMPRESSED_RGBA_S3TC_DXT5_NV = Enumerant('GL_COMPRESSED_RGBA_S3TC_DXT5_NV', 0x83f3, 'GL_NV_texture_compression_s3tc')
+GL_COMPRESSED_RGB_S3TC_DXT1_NV = Enumerant('GL_COMPRESSED_RGB_S3TC_DXT1_NV', 0x83f0, 'GL_NV_texture_compression_s3tc')
+
+defines.add(GL_COMPRESSED_RGBA_S3TC_DXT1_NV)
+defines.add(GL_COMPRESSED_RGBA_S3TC_DXT3_NV)
+defines.add(GL_COMPRESSED_RGBA_S3TC_DXT5_NV)
+defines.add(GL_COMPRESSED_RGB_S3TC_DXT1_NV)
 
 # GL_NV_texture_env_combine4
 
@@ -22186,7 +22382,7 @@ glSamplerParameterIiv = Function('glSamplerParameterIiv')
 glSamplerParameterIiv.ret = Return('void')
 glSamplerParameterIiv.add( Input( 'sampler','GLuint' ))
 glSamplerParameterIiv.add( Input( 'pname','GLenum' ))
-glSamplerParameterIiv.add( Input( 'params','const GLint *' ,size = 'helperGLSamplerParametervSize(pname)' ))
+glSamplerParameterIiv.add( Input( 'params','const GLint *' ,size = 'helperGLSamplerParametervSize(pname)' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glSamplerParameterIiv.version = '3.3'
 glSamplerParameterIiv.category = 'GL_ARB_sampler_objects'
 glSamplerParameterIiv.trace = True
@@ -22197,7 +22393,7 @@ glSamplerParameterIuiv = Function('glSamplerParameterIuiv')
 glSamplerParameterIuiv.ret = Return('void')
 glSamplerParameterIuiv.add( Input( 'sampler','GLuint' ))
 glSamplerParameterIuiv.add( Input( 'pname','GLenum' ))
-glSamplerParameterIuiv.add( Input( 'params','const GLuint *' ,size = 'helperGLSamplerParametervSize(pname)' ))
+glSamplerParameterIuiv.add( Input( 'params','const GLuint *' ,size = 'helperGLSamplerParametervSize(pname)' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glSamplerParameterIuiv.version = '3.3'
 glSamplerParameterIuiv.category = 'GL_ARB_sampler_objects'
 glSamplerParameterIuiv.trace = True
@@ -22208,7 +22404,7 @@ glSamplerParameterf = Function('glSamplerParameterf')
 glSamplerParameterf.ret = Return('void')
 glSamplerParameterf.add( Input( 'sampler','GLuint' ))
 glSamplerParameterf.add( Input( 'pname','GLenum' ))
-glSamplerParameterf.add( Input( 'param','GLfloat' ))
+glSamplerParameterf.add( Input( 'param','GLfloat' ,regalLog = 'GLTexParameterToString(pname,param)' ))
 glSamplerParameterf.version = '3.3'
 glSamplerParameterf.category = 'GL_ARB_sampler_objects'
 glSamplerParameterf.trace = True
@@ -22219,7 +22415,7 @@ glSamplerParameterfv = Function('glSamplerParameterfv')
 glSamplerParameterfv.ret = Return('void')
 glSamplerParameterfv.add( Input( 'sampler','GLuint' ))
 glSamplerParameterfv.add( Input( 'pname','GLenum' ))
-glSamplerParameterfv.add( Input( 'params','const GLfloat *' ,size = 'helperGLSamplerParametervSize(pname)' ))
+glSamplerParameterfv.add( Input( 'params','const GLfloat *' ,size = 'helperGLSamplerParametervSize(pname)' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glSamplerParameterfv.version = '3.3'
 glSamplerParameterfv.category = 'GL_ARB_sampler_objects'
 glSamplerParameterfv.trace = True
@@ -22230,7 +22426,7 @@ glSamplerParameteri = Function('glSamplerParameteri')
 glSamplerParameteri.ret = Return('void')
 glSamplerParameteri.add( Input( 'sampler','GLuint' ))
 glSamplerParameteri.add( Input( 'pname','GLenum' ))
-glSamplerParameteri.add( Input( 'param','GLint' ))
+glSamplerParameteri.add( Input( 'param','GLint' ,regalLog = 'GLTexParameterToString(pname,param)' ))
 glSamplerParameteri.version = '3.3'
 glSamplerParameteri.category = 'GL_ARB_sampler_objects'
 glSamplerParameteri.trace = True
@@ -22241,7 +22437,7 @@ glSamplerParameteriv = Function('glSamplerParameteriv')
 glSamplerParameteriv.ret = Return('void')
 glSamplerParameteriv.add( Input( 'sampler','GLuint' ))
 glSamplerParameteriv.add( Input( 'pname','GLenum' ))
-glSamplerParameteriv.add( Input( 'params','const GLint *' ,size = 'helperGLSamplerParametervSize(pname)' ))
+glSamplerParameteriv.add( Input( 'params','const GLint *' ,size = 'helperGLSamplerParametervSize(pname)' ,regalLog = 'GLTexParameterToString(pname,params)' ))
 glSamplerParameteriv.version = '3.3'
 glSamplerParameteriv.category = 'GL_ARB_sampler_objects'
 glSamplerParameteriv.trace = True
@@ -30946,6 +31142,29 @@ glDiscardFramebufferEXT.category = 'GL_EXT_discard_framebuffer'
 glDiscardFramebufferEXT.trace = True
 glDiscardFramebufferEXT.play = True
 gl.add(glDiscardFramebufferEXT)
+
+# GL_EXT_disjoint_timer_query
+
+glGetQueryObjectivEXT = Function('glGetQueryObjectivEXT')
+glGetQueryObjectivEXT.ret = Return('void')
+glGetQueryObjectivEXT.add( Input( 'id','GLuint' ))
+glGetQueryObjectivEXT.add( Input( 'pname','GLenum' ))
+glGetQueryObjectivEXT.add( Input( 'params','GLint *' ))
+glGetQueryObjectivEXT.version = ''
+glGetQueryObjectivEXT.category = 'GL_EXT_disjoint_timer_query'
+glGetQueryObjectivEXT.trace = True
+glGetQueryObjectivEXT.play = True
+gl.add(glGetQueryObjectivEXT)
+
+glQueryCounterEXT = Function('glQueryCounterEXT')
+glQueryCounterEXT.ret = Return('void')
+glQueryCounterEXT.add( Input( 'id','GLuint' ))
+glQueryCounterEXT.add( Input( 'target','GLenum' ))
+glQueryCounterEXT.version = ''
+glQueryCounterEXT.category = 'GL_EXT_disjoint_timer_query'
+glQueryCounterEXT.trace = True
+glQueryCounterEXT.play = True
+gl.add(glQueryCounterEXT)
 
 # GL_EXT_draw_buffers2
 

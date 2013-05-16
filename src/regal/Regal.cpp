@@ -9606,7 +9606,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSamplerParameterIiv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    App("glSamplerParameterIiv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9616,7 +9616,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSamplerParameterIuiv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    App("glSamplerParameterIuiv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9626,7 +9626,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSamplerParameterf","(", sampler, ", ", toString(pname), ", ", param, ")");
+    App("glSamplerParameterf","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,param), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9636,7 +9636,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSamplerParameterfv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    App("glSamplerParameterfv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9646,7 +9646,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSamplerParameteri(GLuint sampler, GLenum pname, GLint param)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSamplerParameteri","(", sampler, ", ", toString(pname), ", ", param, ")");
+    App("glSamplerParameteri","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,param), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9656,7 +9656,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSamplerParameteriv(GLuint sampler, GLenum pname, const GLint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSamplerParameteriv","(", sampler, ", ", toString(pname), ", ", boost::print::array(params,helper::size::samplerParameterv(pname)), ")");
+    App("glSamplerParameteriv","(", sampler, ", ", toString(pname), ", ", GLTexParameterToString(pname,params), ")");
     if (!_context) return;
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17111,6 +17111,28 @@ extern "C" {
     DispatchTable *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glDiscardFramebufferEXT)(target, numAttachments, attachments);
+  }
+
+  /* GL_EXT_disjoint_timer_query */
+
+  REGAL_DECL void REGAL_CALL glGetQueryObjectivEXT(GLuint id, GLenum pname, GLint *params)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glGetQueryObjectivEXT","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+    if (!_context) return;
+    DispatchTable *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectivEXT)(id, pname, params);
+  }
+
+  REGAL_DECL void REGAL_CALL glQueryCounterEXT(GLuint id, GLenum target)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glQueryCounterEXT","(", id, ", ", toString(target), ")");
+    if (!_context) return;
+    DispatchTable *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glQueryCounterEXT)(id, target);
   }
 
   /* GL_EXT_draw_buffers2 */
