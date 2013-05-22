@@ -351,7 +351,7 @@ struct DispatchTableGlobal {
 
     // GLX_VERSION_1_4
 
-    void *(REGAL_CALL *glXGetProcAddress)(const GLubyte *procName);
+    __GLXextFuncPtr (REGAL_CALL *glXGetProcAddress)(const GLubyte *procName);
 
     // GLX_AMD_gpu_association
 
@@ -371,7 +371,7 @@ struct DispatchTableGlobal {
 
     // GLX_ARB_get_proc_address
 
-    void *(REGAL_CALL *glXGetProcAddressARB)(const GLubyte *procName);
+    __GLXextFuncPtr (REGAL_CALL *glXGetProcAddressARB)(const GLubyte *procName);
 
     // GLX_ATI_render_texture
 

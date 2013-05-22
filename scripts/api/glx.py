@@ -997,7 +997,7 @@ glx.add(glXCreateContextAttribsARB)
 # GLX_ARB_get_proc_address
 
 glXGetProcAddressARB = Function('glXGetProcAddressARB')
-glXGetProcAddressARB.ret = Return('void *')
+glXGetProcAddressARB.ret = Return('__GLXextFuncPtr')
 glXGetProcAddressARB.add( Input( 'procName','const GLubyte *' ,cast = 'const char *' ))
 glXGetProcAddressARB.version = ''
 glXGetProcAddressARB.category = 'GLX_ARB_get_proc_address'
@@ -2409,7 +2409,7 @@ glx.add(glXSelectEvent)
 # GLX_VERSION_1_4
 
 glXGetProcAddress = Function('glXGetProcAddress')
-glXGetProcAddress.ret = Return('void *')
+glXGetProcAddress.ret = Return('__GLXextFuncPtr')
 glXGetProcAddress.add( Input( 'procName','const GLubyte *' ,cast = 'const char *' ))
 glXGetProcAddress.version = '1.4'
 glXGetProcAddress.category = 'GLX_VERSION_1_4'

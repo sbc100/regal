@@ -22,6 +22,8 @@ from RegalContextInfo import cond
 
 exclude = set(['glGetString','glGetIntegerv','glGetError','glGetGraphicsResetStatusARB', 'glGetProgramInfoLog'])
 
+exclude.update(['glGetTexLevelParameteriv','glGetTexImage'])
+
 # Code generation for dispatch table init.
 
 def apiDispatchCodeInitCode(apis, args, dispatchName):
@@ -39,8 +41,8 @@ def apiDispatchCodeInitCode(apis, args, dispatchName):
         if getattr(function,'regalOnly',False)==True:
           continue
 
-	if function.name in exclude:
-	  continue
+        if function.name in exclude:
+          continue
 
         name = function.name
         code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
@@ -108,10 +110,10 @@ def generateDispatchCode(apis, args):
         if getattr(function,'regalOnly',False)==True:
           continue
 
-	if function.name in exclude:
-	  continue
-
-	f = deepcopy(function)
+        if function.name in exclude:
+          continue
+      
+        f = deepcopy(function)
 
         name = f.name
         params = paramsDefaultCode(f.parameters, True)
@@ -144,17 +146,17 @@ def generateDispatchCode(apis, args):
         h2 =  ''
         body   =  ''
 
-	ret = ''
+        ret = ''
         if not typeIsVoid(rType):
-	  if   f.name in [ 'glCreateShader','glCreateShaderObjectARB' ]:
-	    h2 += '    size_t _retIndex = _context->codeShaderNext++;\n'
-	    ret = 'const %s shader\" << _retIndex << \" = '%typeStrip(rType)
-	  elif f.name in [ 'glCreateProgram','glCreateProgramObjectARB']:
-	    h2 += '    size_t _retIndex = _context->codeProgramNext++;\n'
-	    ret = 'const %s program\" << _retIndex << \" = '%typeStrip(rType)
-	  else:
-	    h2 += '    size_t _retIndex = _context->codeOutputNext++;\n'
-	    ret = 'const %s o\" << _retIndex << \" = '%typeStrip(rType)
+          if   f.name in [ 'glCreateShader','glCreateShaderObjectARB' ]:
+            h2 += '    size_t _retIndex = _context->codeShaderNext++;\n'
+            ret = 'const %s shader\" << _retIndex << \" = '%typeStrip(rType)
+          elif f.name in [ 'glCreateProgram','glCreateProgramObjectARB']:
+            h2 += '    size_t _retIndex = _context->codeProgramNext++;\n'
+            ret = 'const %s program\" << _retIndex << \" = '%typeStrip(rType)
+          else:
+            h2 += '    size_t _retIndex = _context->codeOutputNext++;\n'
+            ret = 'const %s o\" << _retIndex << \" = '%typeStrip(rType)
 
         if len(f.parameters)==0:
           body += '    %s_code << indent << "%s%s();%s\\n";\n'%(prefix,ret,f.name,suffix)
@@ -186,7 +188,7 @@ def generateDispatchCode(apis, args):
               if p==None:
                   body += '_code << "/* %s = ?? */";\n'%(i.name)
 
-              # Special handling for input our output arrays
+              # Special handling for input or output arrays
 
               elif p.startswith('boost::print::array'):
                   type = typeStrip(i.type)
@@ -196,7 +198,7 @@ def generateDispatchCode(apis, args):
                   if i.input:
                     if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
                       h2 += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-                      h2 += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << (%s) << \"] = \" '%(type,i.name,size)
+                      h2 += '    _code << indent << \"const %s i\" << _%sIndex << \"[\" << %s << \"] = \" '%(type,i.name,expressionSimplify('(%s)'%size))
                       h2 += '<< array<%s,const char * const>(%s,%s,\"\",\"{ \",\" };\",\", \") '%(type,i.name,size)
                       h2 += '<< \"\\n\";\n'
                       body += '_code << \"i\" << _%sIndex;\n'%(i.name)
@@ -205,20 +207,20 @@ def generateDispatchCode(apis, args):
                   else:
                     if p.find('helper')==-1 and type!='GLchar' and type!='GLcharARB':
                       h2 += '    size_t _%sIndex = _context->codeOutputNext++;\n'%(i.name)
-                      h2 += '    _code << indent << \"%s o\" << _%sIndex << \"[\" << (%s) << \"];\\n";\n'%(type,i.name,size)
+                      h2 += '    _code << indent << \"%s o\" << _%sIndex << \"[\" << %s << \"];\\n";\n'%(type,i.name,expressionSimplify('(%s)'%size))
                       body += '_code << \"o\" << _%sIndex;\n'%(i.name)
                     else:
                       body += '_code << "/* %s = ?? */";\n'%(i.name)
 
               # glTexImage2D etc
 
-              elif i.size != None and (isinstance(i.size, str) or isinstance(i.size, unicode)) and i.size.startswith('helperGLPixelImageSize'):
-                h2 += '    size_t _%sIndex = _context->codeInputNext++;\n'%(i.name)
-                h2 += '    _header << indent << \"const GLubyte i\" << _%sIndex << \"[\" << helper::size::pixelImage(%s << \"] = \" '%(i.name,i.size.split('(',1)[1])
+              elif i.input and i.size != None and (isinstance(i.size, str) or isinstance(i.size, unicode)) and i.size.startswith('helperGLPixelImageSize'):
+                h2 += '    size_t _%sIndex = _context->codeTextureNext++;\n'%(i.name)
+                h2 += '    _header << indent << \"const GLubyte texture\" << _%sIndex << \"[\" << helper::size::pixelImage(%s << \"] = \" '%(i.name,i.size.split('(',1)[1])
                 h2 += '<< array<GLubyte,const char * const>(static_cast<const GLubyte *>(%s),helper::size::pixelImage(%s,\"\",\"{ \",\" }\",\",\") '%(i.name,i.size.split('(',1)[1])
                 h2 += '<< \";\\n\";\n'
                 h = True
-                body += '_code << \"i\" << _%sIndex;\n'%(i.name)
+                body += '_code << \"texture\" << _%sIndex;\n'%(i.name)
 
               elif p.startswith('boost::print::optional'):
                 if i.cast != None:
@@ -245,12 +247,12 @@ def generateDispatchCode(apis, args):
         body += '    if (_context->codeSource)\n'
         body += '      fprintf(_context->codeSource,"%s",_code.str().c_str());\n'
 
-	if h:
+        if h:
           h1 += '    string_list< ::std::string > _header;\n'
-	  body += '    if (_context->codeHeader)\n'
-	  body += '      fprintf(_context->codeHeader,"%s",_header.str().c_str());\n'
+          body += '    if (_context->codeHeader)\n'
+          body += '      fprintf(_context->codeHeader,"%s",_header.str().c_str());\n'
 
-#        body += '    Internal("code_%s",_code);\n'%name
+#         body += '    Internal("code_%s",_code);\n'%name
 
         code += h1 + h2 + body
 

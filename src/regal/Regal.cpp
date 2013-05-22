@@ -31492,7 +31492,7 @@ extern "C" {
 
   /* GLX_VERSION_1_4 */
 
-  REGAL_DECL void *REGAL_CALL glXGetProcAddress(const GLubyte *procName)
+  REGAL_DECL __GLXextFuncPtr REGAL_CALL glXGetProcAddress(const GLubyte *procName)
   {
     App("glXGetProcAddress","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")");
     Init::init();
@@ -31503,11 +31503,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetProcAddress==glXGetProcAddress)
         dispatchTableGlobal.glXGetProcAddress = NULL;
     }
-    void * ret = NULL;
-    ret = Lookup::gl_Lookup<void *>(reinterpret_cast<const char *>(procName));
+    __GLXextFuncPtr ret = NULL;
+    ret = Lookup::gl_Lookup<__GLXextFuncPtr>(reinterpret_cast<const char *>(procName));
     if (ret)
       return ret;
-    ret = Lookup::glx_Lookup<void *>(reinterpret_cast<const char *>(procName));
+    ret = Lookup::glx_Lookup<__GLXextFuncPtr>(reinterpret_cast<const char *>(procName));
     if (ret)
       return ret;
     if (dispatchTableGlobal.glXGetProcAddress)
@@ -31736,7 +31736,7 @@ extern "C" {
 
   /* GLX_ARB_get_proc_address */
 
-  REGAL_DECL void *REGAL_CALL glXGetProcAddressARB(const GLubyte *procName)
+  REGAL_DECL __GLXextFuncPtr REGAL_CALL glXGetProcAddressARB(const GLubyte *procName)
   {
     App("glXGetProcAddressARB","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")");
     if (!dispatchTableGlobal.glXGetProcAddressARB)
@@ -31746,11 +31746,11 @@ extern "C" {
       if (dispatchTableGlobal.glXGetProcAddressARB==glXGetProcAddressARB)
         dispatchTableGlobal.glXGetProcAddressARB = NULL;
     }
-    void * ret = NULL;
-    ret = Lookup::gl_Lookup<void *>(reinterpret_cast<const char *>(procName));
+    __GLXextFuncPtr ret = NULL;
+    ret = Lookup::gl_Lookup<__GLXextFuncPtr>(reinterpret_cast<const char *>(procName));
     if (ret)
       return ret;
-    ret = Lookup::glx_Lookup<void *>(reinterpret_cast<const char *>(procName));
+    ret = Lookup::glx_Lookup<__GLXextFuncPtr>(reinterpret_cast<const char *>(procName));
     if (ret)
       return ret;
     if (dispatchTableGlobal.glXGetProcAddressARB)

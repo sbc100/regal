@@ -620,3 +620,16 @@ def listToString(code):
     return ''
   else:
     return '\n'.join(code) + '\n'
+
+#
+# CodeGen for simplifying expression in << sequence
+#
+#   '(4)' -> '4'
+#
+
+def expressionSimplify(code):
+  if code.find('<')!=-1 or code.find('?')!=-1:
+    return code
+  if code[0]=='(' and code[-1]==')':
+    return code[1:-1]
+  return code

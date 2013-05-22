@@ -4,6 +4,7 @@ from string import Template, upper, replace
 
 from ApiUtil import outputCode
 from ApiUtil import typeIsVoid
+from ApiUtil import typeIsVoidPointer
 
 from ApiCodeGen import *
 
@@ -62,10 +63,10 @@ def apiMissingFuncDefineCode(apis, args):
         code += '  UNUSED_PARAMETER(%s);\n' % param.name
       code += '  Warning( "%s not available." );\n' % name
       if not typeIsVoid(rType):
-        if rType[-1] != '*':
-          code += '  return (%s)0;\n' % ( rType )
-        else:
+        if rType[-1]=='*' or typeIsVoidPointer(rType):
           code += '  return NULL;\n'
+        else:
+          code += '  return (%s)0;\n'%(rType)
       code += '}\n\n'
 
     if api.name in cond:

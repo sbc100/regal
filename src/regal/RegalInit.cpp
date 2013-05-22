@@ -108,12 +108,14 @@ Init::Init()
   Config::configFile = REGAL_EQUOTE(REGAL_CONFIG_FILE);
 #endif
 
+#if !REGAL_NO_JSON
   if (Config::configFile.length())
   {
     bool ok = Json::Parser::parseFile(Config::configFile);
     if (!ok)
       Warning("Failed to parse configuration from ",Config::configFile);
   }
+#endif
 
   //
 
@@ -138,6 +140,7 @@ Init::~Init()
   // Write out the Regal configuration file as JSON
   //
 
+#if !REGAL_NO_JSON
   if (Config::configFile.length())
   {
     Json::Output jo;
@@ -161,6 +164,7 @@ Init::~Init()
       Warning("Regal configuration could not be written to ",Config::configFile);
     }
   }
+#endif
 
   //
   // Shutdown...
@@ -377,9 +381,11 @@ Init::setErrorCallback(RegalErrorCallback callback)
 void
 Init::configure(const char *json)
 {
+#if !REGAL_NO_JSON
   bool ok = Json::Parser::parseString(json);
   if (!ok)
     Warning("Failed to parse configuration from RegalConfigure call.");
+#endif
 }
 
 void

@@ -152,3 +152,7 @@ def toLong(value):
 def typeIsVoid(t):
   t = t.strip()
   return t=='void' or t=='VOID'
+
+def typeIsVoidPointer(t):
+  t = t.strip()
+  return t=='void *' or t=='VOID *' or t=='__GLXextFuncPtr'

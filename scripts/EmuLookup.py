@@ -22,10 +22,10 @@ formulae = {
     'glXGetProcAddress' : {
         'entries' : [ 'glXGetProcAddress','glXGetProcAddressARB' ],
         'impl' : [
-                  'ret = Lookup::gl_Lookup<void *>(reinterpret_cast<const char *>(procName));',
+                  'ret = Lookup::gl_Lookup<__GLXextFuncPtr>(reinterpret_cast<const char *>(procName));',
                   'if (ret)',
                   '  return ret;',
-                  'ret = Lookup::glx_Lookup<void *>(reinterpret_cast<const char *>(procName));',
+                  'ret = Lookup::glx_Lookup<__GLXextFuncPtr>(reinterpret_cast<const char *>(procName));',
                   'if (ret)',
                   '  return ret;',
                    ]

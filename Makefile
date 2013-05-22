@@ -36,6 +36,7 @@ include build/regal.inc
 include build/regaltest.inc
 include build/zlib.inc
 include build/libpng.inc
+include build/snappy.inc
 include build/glu.inc
 include build/glut.inc
 
@@ -185,6 +186,53 @@ ifneq ($(STRIP),)
 endif
 
 #
+# snappy
+#
+
+SNAPPY.SRCS       := $(SNAPPY.CXX)
+SNAPPY.SRCS.NAMES := $(notdir $(SNAPPY.SRCS))
+SNAPPY.OBJS       := $(addprefix tmp/$(SYSTEM)/snappy/static/,$(SNAPPY.SRCS.NAMES))
+SNAPPY.OBJS       := $(SNAPPY.OBJS:.c=.o)
+SNAPPY.OBJS       := $(SNAPPY.OBJS:.cc=.o)
+SNAPPY.DEPS       := $(SNAPPY.DEPS:.o=.d)
+SNAPPY.CFLAGS     := -Isrc/snappy
+SNAPPY.STATIC     := libsnappy.a
+
+-include $(SNAPPY.DEPS)
+
+ifneq ($(filter linux%,$(SYSTEM)),)
+SNAPPY.CFLAGS     += -DHAVE_UNISTD_H
+endif
+
+ifneq ($(filter darwin%,$(SYSTEM)),)
+SNAPPY.CFLAGS     += -DHAVE_UNISTD_H
+endif
+
+ifneq ($(filter nacl%,$(SYSTEM)),)
+SNAPPY.CFLAGS     += -DHAVE_UNISTD_H
+endif
+
+snappy.lib: lib/$(SYSTEM)/$(SNAPPY.STATIC)
+
+tmp/$(SYSTEM)/snappy/static/%.o: src/snappy/%.c
+	@mkdir -p $(dir $@)
+	$(LOG_CC)$(CCACHE) $(CC) $(SNAPPY.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+tmp/$(SYSTEM)/snappy/static/%.o: src/snappy/%.cc
+	@mkdir -p $(dir $@)
+	$(LOG_CC)$(CCACHE) $(CXX) $(SNAPPY.CFLAGS) $(CXXFLAGS) $(PICFLAG) -o $@ -c $<
+
+lib/$(SYSTEM)/$(SNAPPY.STATIC): $(SNAPPY.OBJS)
+	@mkdir -p $(dir $@)
+	$(LOG_AR)$(CCACHE) $(AR) cr $@ $(SNAPPY.OBJS)
+ifneq ($(RANLIB),)
+	$(LOG_RANLIB)$(RANLIB) $@
+endif
+ifneq ($(STRIP),)
+	$(LOG_STRIP)$(STRIP) -x $@
+endif
+
+#
 
 LIB.LDFLAGS        := -lstdc++ -pthread -lm
 LIB.LIBS           :=
@@ -291,7 +339,7 @@ regal.lib: lib/$(SYSTEM)/$(LIB.SHARED)
 endif
 endif
 
-lib/$(SYSTEM)/$(LIB.STATIC): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(LIB.OBJS)
+lib/$(SYSTEM)/$(LIB.STATIC): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC) $(LIB.OBJS)
 	@mkdir -p $(dir $@)
 	$(LOG_AR)$(CCACHE) $(AR) cr $@ $(LIB.OBJS)
 ifneq ($(RANLIB),)
@@ -301,7 +349,7 @@ ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif
 
-lib/$(SYSTEM)/$(LIB.SHARED): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(LIB.SOBJS)
+lib/$(SYSTEM)/$(LIB.SHARED): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC) $(LIB.SOBJS)
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.SO) -o $@ $(LIB.SOBJS) $(LIB.LIBS) $(LIB.LDFLAGS)
 ifneq ($(LN),)
 	$(LN) $(LIB.SHARED) lib/$(SYSTEM)/$(LIB.SONAME)
@@ -721,5 +769,5 @@ clobber:
 
 .PHONY: export test all
 .PHONY: regal.lib regal.bin
-.PHONY: zlib.lib libpng.lib glew.lib glu.lib glut.lib
+.PHONY: zlib.lib libpng.lib snappy.lib glew.lib glu.lib glut.lib
 .PHONY: clean clobber

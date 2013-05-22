@@ -185,6 +185,7 @@ ${EMU_MEMBER_DECLARE}
   size_t              codeOutputNext;
   size_t              codeShaderNext;  // glCreateShader/glCreateShaderObjectARB
   size_t              codeProgramNext; // glCreateProgram/glCreateProgramObjectARB
+  size_t              codeTextureNext; // glTexImage2D etc.
 #endif
 
   // State tracked via EmuContextState.py / Regal.cpp
@@ -232,9 +233,11 @@ ${MEMBER_CONSTRUCT}#if REGAL_EMULATION
 ${EMU_MEMBER_CONSTRUCT}#endif
 #if REGAL_SYS_PPAPI
   ppapiES2(NULL),
-  ppapiResource(NULL),
-#endif
+  ppapiResource(0),
+  sysCtx(0),
+#else
   sysCtx(NULL),
+#endif
   thread(0),
 #if REGAL_SYS_X11
   x11Display(NULL),
@@ -250,6 +253,7 @@ ${EMU_MEMBER_CONSTRUCT}#endif
   codeOutputNext(0),
   codeShaderNext(0),
   codeProgramNext(0),
+  codeTextureNext(0),
 #endif
   depthBeginEnd(0),
   depthPushMatrix(0),

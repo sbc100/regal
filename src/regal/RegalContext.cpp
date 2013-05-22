@@ -120,6 +120,7 @@ RegalContext::RegalContext()
   codeOutputNext(0),
   codeShaderNext(0),
   codeProgramNext(0),
+  codeTextureNext(0),
 #endif
   depthBeginEnd(0),
   depthPushMatrix(0),

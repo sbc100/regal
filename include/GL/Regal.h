@@ -355,6 +355,10 @@ typedef void (*GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severi
 
 typedef void (*GLLOGPROCREGAL)(GLenum stream, GLsizei length, const GLchar *message, GLvoid *context);
 
+#if REGAL_SYS_GLX
+typedef void (*__GLXextFuncPtr)(void);
+#endif
+
 #if REGAL_SYS_OSX
 
 typedef enum _CGLPixelFormatAttribute {
@@ -32365,7 +32369,7 @@ REGAL_DECL GLXContext REGAL_CALL glXCreateContextAttribsARB(Display *dpy, GLXFBC
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GLX_ARB_GET_PROC_ADDRESS
-typedef void *(REGAL_CALL *PFNGLXGETPROCADDRESSARBPROC)(const GLubyte *procName);
+typedef __GLXextFuncPtr (REGAL_CALL *PFNGLXGETPROCADDRESSARBPROC)(const GLubyte *procName);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GLX_ARB_GET_PROC_ADDRESS
@@ -32373,7 +32377,7 @@ typedef void *(REGAL_CALL *PFNGLXGETPROCADDRESSARBPROC)(const GLubyte *procName)
 #endif
 
 #ifndef REGAL_NO_DECLARATION_GLX_ARB_GET_PROC_ADDRESS
-REGAL_DECL void *REGAL_CALL glXGetProcAddressARB(const GLubyte *procName);
+REGAL_DECL __GLXextFuncPtr REGAL_CALL glXGetProcAddressARB(const GLubyte *procName);
 #endif
 
 /**
@@ -34680,7 +34684,7 @@ REGAL_DECL void REGAL_CALL glXSelectEvent(Display *dpy, GLXDrawable draw, unsign
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GLX_VERSION_1_4
-typedef void *(REGAL_CALL *PFNGLXGETPROCADDRESSPROC)(const GLubyte *procName);
+typedef __GLXextFuncPtr (REGAL_CALL *PFNGLXGETPROCADDRESSPROC)(const GLubyte *procName);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GLX_VERSION_1_4
@@ -34688,7 +34692,7 @@ typedef void *(REGAL_CALL *PFNGLXGETPROCADDRESSPROC)(const GLubyte *procName);
 #endif
 
 #ifndef REGAL_NO_DECLARATION_GLX_VERSION_1_4
-REGAL_DECL void *REGAL_CALL glXGetProcAddress(const GLubyte *procName);
+REGAL_DECL __GLXextFuncPtr REGAL_CALL glXGetProcAddress(const GLubyte *procName);
 #endif
 
 #endif /* REGAL_SYS_GLX */

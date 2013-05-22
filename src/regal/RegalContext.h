@@ -172,6 +172,7 @@ struct RegalContext
   size_t              codeOutputNext;
   size_t              codeShaderNext;  // glCreateShader/glCreateShaderObjectARB
   size_t              codeProgramNext; // glCreateProgram/glCreateProgramObjectARB
+  size_t              codeTextureNext; // glTexImage2D etc.
 #endif
 
   // State tracked via EmuContextState.py / Regal.cpp

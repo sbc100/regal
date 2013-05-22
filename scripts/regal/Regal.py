@@ -3,6 +3,7 @@
 from string       import Template, upper, replace
 from ApiUtil      import outputCode
 from ApiUtil      import typeIsVoid
+from ApiUtil      import typeIsVoidPointer
 from ApiUtil      import toLong
 from ApiUtil      import hexValue
 from ApiCodeGen   import *
@@ -109,6 +110,10 @@ typedef void (*GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum sev
 typedef void (*GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, GLvoid *userParam);
 
 typedef void (*GLLOGPROCREGAL)(GLenum stream, GLsizei length, const GLchar *message, GLvoid *context);
+
+#if REGAL_SYS_GLX
+typedef void (*__GLXextFuncPtr)(void);
+#endif
 
 ${API_ENUM}
 
@@ -250,11 +255,11 @@ def apiFuncDefineCode(apis, args):
           if rTypes in defaults:
             c += ' %s;\n' % ( defaults[rTypes] )
           else:
-            if rType[-1] != '*':
-              c += ' (%s) 0;\n' % ( rTypes )
-            else:
+            if rType[-1]=='*' or typeIsVoidPointer(rType):
               c += ' NULL;\n'
-
+            else:
+              c += ' (%s) 0;\n' % ( rTypes )
+ 
         c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
 
         if getattr(function,'regalRemap',None)!=None and (isinstance(function.regalRemap, list) or isinstance(function.regalRemap, str) or isinstance(function.regalRemap, unicode)):
@@ -330,10 +335,10 @@ def apiFuncDefineCode(apis, args):
           if rTypes in defaults:
             c += '  %s ret = %s;\n' % ( rTypes, defaults[rTypes] )
           else:
-            if rType[-1] != '*':
-              c += '  %s ret = (%s) 0;\n' % ( rTypes, rTypes )
-            else:
+            if rType[-1]=='*' or typeIsVoidPointer(rType):
               c += '  %s ret = NULL;\n' % rTypes
+            else:
+              c += '  %s ret = (%s) 0;\n' % ( rTypes, rTypes )
 
         c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
 

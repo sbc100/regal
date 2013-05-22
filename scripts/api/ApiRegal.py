@@ -90,7 +90,8 @@ def logParameter(function, parameter):
     return 'boost::print::raw(data,Logging::rawLimit(data ? size : 0))'
   elif t in [ 'void *', 'const void *', 'GLvoid *', 'const GLvoid *', 'GLubyte *', 'const GLubyte *'] or \
     t in [ 'int *', 'const int *', 'GLint *', 'const GLint *' ] or \
-    t in [ 'XID', 'XVisualInfo *', 'Pixmap', 'Font', 'Display *', 'GLXDrawble', 'GLXPixmap', 'GLXContext', 'GLXVideoDeviceNV', 'GLXWindow', 'GLXPbuffer', 'GLXFBConfigID'] or \
+    t in [ 'XID', 'XVisualInfo *', 'Pixmap', 'Font', 'Display *'] or \
+    t in [ 'GLXDrawble', 'GLXPixmap', 'GLXContext', 'GLXVideoDeviceNV', 'GLXWindow', 'GLXPbuffer', 'GLXFBConfigID', '__GLXextFuncPtr'] or \
     t in [ 'PVOID', 'LPVOID', 'HDC', 'HGLRC', 'HPBUFFERARB', 'HPBUFFEREXT', 'HGPUNV', 'HPVIDEODEV', 'HVIDEOINPUTDEVICENV', 'HVIDEOOUTPUTDEVICENV', 'PGPU_DEVICE' ] or \
     t in [ 'EGLNativeWindowType', 'EGLNativePixmapType', 'EGLNativeDisplayType', 'EGLConfig', 'EGLContext', 'EGLDisplay', 'EGLSurface', 'EGLClientBuffer', 'EGLSyncKHR', 'EGLImageKHR', 'EGLStreamKHR', 'EGLSyncNV']:
     return 'boost::print::optional(%s,Logging::pointers)'%n

@@ -125,8 +125,8 @@ static void REGAL_CALL code_glBitmap(GLsizei width, GLsizei height, GLfloat xori
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _bitmapIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _bitmapIndex << "[" << helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(bitmap),helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
+    size_t _bitmapIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _bitmapIndex << "[" << helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(bitmap),helper::size::pixelImage(width, height, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
     _code << indent << "glBitmap(";
                    _code << width;
     _code << ", "; _code << height;
@@ -134,7 +134,7 @@ static void REGAL_CALL code_glBitmap(GLsizei width, GLsizei height, GLfloat xori
     _code << ", "; _code << yorig;
     _code << ", "; _code << xmove;
     _code << ", "; _code << ymove;
-    _code << ", "; _code << "i" << _bitmapIndex;
+    _code << ", "; _code << "texture" << _bitmapIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -305,7 +305,7 @@ static void REGAL_CALL code_glClipPlane(GLenum plane, const GLdouble *equation)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _equationIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _equationIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(equation,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _equationIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(equation,4,"","{ "," };",", ") << "\n";
     _code << indent << "glClipPlane(";
                    _code << toString(plane);
     _code << ", "; _code << "i" << _equationIndex;
@@ -342,7 +342,7 @@ static void REGAL_CALL code_glColor3bv(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3bv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -378,7 +378,7 @@ static void REGAL_CALL code_glColor3dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -414,7 +414,7 @@ static void REGAL_CALL code_glColor3fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -450,7 +450,7 @@ static void REGAL_CALL code_glColor3iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -486,7 +486,7 @@ static void REGAL_CALL code_glColor3sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -522,7 +522,7 @@ static void REGAL_CALL code_glColor3ubv(const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (3) << "] = " << array<GLubyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 3 << "] = " << array<GLubyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3ubv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -558,7 +558,7 @@ static void REGAL_CALL code_glColor3uiv(const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (3) << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 3 << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3uiv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -594,7 +594,7 @@ static void REGAL_CALL code_glColor3usv(const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (3) << "] = " << array<GLushort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 3 << "] = " << array<GLushort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3usv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -631,7 +631,7 @@ static void REGAL_CALL code_glColor4bv(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4bv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -668,7 +668,7 @@ static void REGAL_CALL code_glColor4dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -705,7 +705,7 @@ static void REGAL_CALL code_glColor4fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -742,7 +742,7 @@ static void REGAL_CALL code_glColor4iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -779,7 +779,7 @@ static void REGAL_CALL code_glColor4sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -816,7 +816,7 @@ static void REGAL_CALL code_glColor4ubv(const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4ubv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -853,7 +853,7 @@ static void REGAL_CALL code_glColor4uiv(const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4uiv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -890,7 +890,7 @@ static void REGAL_CALL code_glColor4usv(const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4usv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -1078,14 +1078,14 @@ static void REGAL_CALL code_glDrawPixels(GLsizei width, GLsizei height, GLenum f
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, 0),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, 0),"","{ "," }",",") << ";\n";
     _code << indent << "glDrawPixels(";
                    _code << width;
     _code << ", "; _code << height;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -1119,7 +1119,7 @@ static void REGAL_CALL code_glEdgeFlagv(const GLboolean *flag)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _flagIndex = _context->codeInputNext++;
-    _code << indent << "const GLboolean i" << _flagIndex << "[" << (1) << "] = " << array<GLboolean,const char * const>(flag,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLboolean i" << _flagIndex << "[" << 1 << "] = " << array<GLboolean,const char * const>(flag,1,"","{ "," };",", ") << "\n";
     _code << indent << "glEdgeFlagv(";
     _code << "i" << _flagIndex;
     _code << ");\n";
@@ -1197,7 +1197,7 @@ static void REGAL_CALL code_glEvalCoord1dv(const GLdouble *u)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _uIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _uIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(u,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _uIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(u,1,"","{ "," };",", ") << "\n";
     _code << indent << "glEvalCoord1dv(";
     _code << "i" << _uIndex;
     _code << ");\n";
@@ -1231,7 +1231,7 @@ static void REGAL_CALL code_glEvalCoord1fv(const GLfloat *u)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _uIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _uIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(u,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _uIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(u,1,"","{ "," };",", ") << "\n";
     _code << indent << "glEvalCoord1fv(";
     _code << "i" << _uIndex;
     _code << ");\n";
@@ -1266,7 +1266,7 @@ static void REGAL_CALL code_glEvalCoord2dv(const GLdouble *u)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _uIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _uIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(u,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _uIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(u,2,"","{ "," };",", ") << "\n";
     _code << indent << "glEvalCoord2dv(";
     _code << "i" << _uIndex;
     _code << ");\n";
@@ -1301,7 +1301,7 @@ static void REGAL_CALL code_glEvalCoord2fv(const GLfloat *u)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _uIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _uIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(u,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _uIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(u,2,"","{ "," };",", ") << "\n";
     _code << indent << "glEvalCoord2fv(";
     _code << "i" << _uIndex;
     _code << ");\n";
@@ -1576,7 +1576,7 @@ static void REGAL_CALL code_glGetClipPlane(GLenum plane, GLdouble *equation)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _equationIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _equationIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _equationIndex << "[" << 4 << "];\n";
     _code << indent << "glGetClipPlane(";
                    _code << toString(plane);
     _code << ", "; _code << "o" << _equationIndex;
@@ -1902,26 +1902,6 @@ static void REGAL_CALL code_glGetTexGeniv(GLenum coord, GLenum pname, GLint *par
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
-{
-    RegalContext *_context = REGAL_GET_CONTEXT();
-    RegalAssert(_context);
-    DispatchTable *_next = _context->dispatcher.code._next;
-    RegalAssert(_next);
-    _next->call(&_next->glGetTexImage)(target, level, format, type, pixels);
-    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
-    string_list< ::std::string > _code;
-    _code << indent << "glGetTexImage(";
-                   _code << toString(target);
-    _code << ", "; _code << level;
-    _code << ", "; _code << toString(format);
-    _code << ", "; _code << toString(type);
-    _code << ", "; _code << pixels;
-    _code << ");\n";
-    if (_context->codeSource)
-      fprintf(_context->codeSource,"%s",_code.str().c_str());
-}
-
 static void REGAL_CALL code_glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -1932,25 +1912,6 @@ static void REGAL_CALL code_glGetTexLevelParameterfv(GLenum target, GLint level,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     _code << indent << "glGetTexLevelParameterfv(";
-                   _code << toString(target);
-    _code << ", "; _code << level;
-    _code << ", "; _code << toString(pname);
-    _code << ", "; _code << params;
-    _code << ");\n";
-    if (_context->codeSource)
-      fprintf(_context->codeSource,"%s",_code.str().c_str());
-}
-
-static void REGAL_CALL code_glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint *params)
-{
-    RegalContext *_context = REGAL_GET_CONTEXT();
-    RegalAssert(_context);
-    DispatchTable *_next = _context->dispatcher.code._next;
-    RegalAssert(_next);
-    _next->call(&_next->glGetTexLevelParameteriv)(target, level, pname, params);
-    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
-    string_list< ::std::string > _code;
-    _code << indent << "glGetTexLevelParameteriv(";
                    _code << toString(target);
     _code << ", "; _code << level;
     _code << ", "; _code << toString(pname);
@@ -2055,7 +2016,7 @@ static void REGAL_CALL code_glIndexdv(const GLdouble *c)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _cIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(c,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _cIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(c,1,"","{ "," };",", ") << "\n";
     _code << indent << "glIndexdv(";
     _code << "i" << _cIndex;
     _code << ");\n";
@@ -2089,7 +2050,7 @@ static void REGAL_CALL code_glIndexfv(const GLfloat *c)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(c,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(c,1,"","{ "," };",", ") << "\n";
     _code << indent << "glIndexfv(";
     _code << "i" << _cIndex;
     _code << ");\n";
@@ -2123,7 +2084,7 @@ static void REGAL_CALL code_glIndexiv(const GLint *c)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _cIndex << "[" << (1) << "] = " << array<GLint,const char * const>(c,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _cIndex << "[" << 1 << "] = " << array<GLint,const char * const>(c,1,"","{ "," };",", ") << "\n";
     _code << indent << "glIndexiv(";
     _code << "i" << _cIndex;
     _code << ");\n";
@@ -2157,7 +2118,7 @@ static void REGAL_CALL code_glIndexsv(const GLshort *c)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _cIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(c,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _cIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(c,1,"","{ "," };",", ") << "\n";
     _code << indent << "glIndexsv(";
     _code << "i" << _cIndex;
     _code << ");\n";
@@ -2428,7 +2389,7 @@ static void REGAL_CALL code_glLoadMatrixd(const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadMatrixd(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -2446,7 +2407,7 @@ static void REGAL_CALL code_glLoadMatrixf(const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadMatrixf(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -2754,7 +2715,7 @@ static void REGAL_CALL code_glMultMatrixd(const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMultMatrixd(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -2772,7 +2733,7 @@ static void REGAL_CALL code_glMultMatrixf(const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMultMatrixf(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -2825,7 +2786,7 @@ static void REGAL_CALL code_glNormal3bv(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3bv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -2861,7 +2822,7 @@ static void REGAL_CALL code_glNormal3dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -2897,7 +2858,7 @@ static void REGAL_CALL code_glNormal3fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -2933,7 +2894,7 @@ static void REGAL_CALL code_glNormal3iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -2969,7 +2930,7 @@ static void REGAL_CALL code_glNormal3sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3024,7 +2985,7 @@ static void REGAL_CALL code_glPixelMapfv(GLenum map, GLsizei mapsize, const GLfl
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valuesIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valuesIndex << "[" << (mapsize) << "] = " << array<GLfloat,const char * const>(values,mapsize,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valuesIndex << "[" << mapsize << "] = " << array<GLfloat,const char * const>(values,mapsize,"","{ "," };",", ") << "\n";
     _code << indent << "glPixelMapfv(";
                    _code << toString(map);
     _code << ", "; _code << mapsize;
@@ -3044,7 +3005,7 @@ static void REGAL_CALL code_glPixelMapuiv(GLenum map, GLsizei mapsize, const GLu
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valuesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valuesIndex << "[" << (mapsize) << "] = " << array<GLuint,const char * const>(values,mapsize,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valuesIndex << "[" << mapsize << "] = " << array<GLuint,const char * const>(values,mapsize,"","{ "," };",", ") << "\n";
     _code << indent << "glPixelMapuiv(";
                    _code << toString(map);
     _code << ", "; _code << mapsize;
@@ -3064,7 +3025,7 @@ static void REGAL_CALL code_glPixelMapusv(GLenum map, GLsizei mapsize, const GLu
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valuesIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _valuesIndex << "[" << (mapsize) << "] = " << array<GLushort,const char * const>(values,mapsize,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _valuesIndex << "[" << mapsize << "] = " << array<GLushort,const char * const>(values,mapsize,"","{ "," };",", ") << "\n";
     _code << indent << "glPixelMapusv(";
                    _code << toString(map);
     _code << ", "; _code << mapsize;
@@ -3202,10 +3163,10 @@ static void REGAL_CALL code_glPolygonStipple(const GLubyte *mask)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _maskIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _maskIndex << "[" << helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(mask),helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
+    size_t _maskIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _maskIndex << "[" << helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(mask),helper::size::pixelImage(32, 32, 0, GL_COLOR_INDEX, GL_BITMAP, 0, GL_BITMAP),"","{ "," }",",") << ";\n";
     _code << indent << "glPolygonStipple(";
-    _code << "i" << _maskIndex;
+    _code << "texture" << _maskIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -3328,7 +3289,7 @@ static void REGAL_CALL code_glRasterPos2dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos2dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3363,7 +3324,7 @@ static void REGAL_CALL code_glRasterPos2fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos2fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3398,7 +3359,7 @@ static void REGAL_CALL code_glRasterPos2iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos2iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3433,7 +3394,7 @@ static void REGAL_CALL code_glRasterPos2sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos2sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3469,7 +3430,7 @@ static void REGAL_CALL code_glRasterPos3dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos3dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3505,7 +3466,7 @@ static void REGAL_CALL code_glRasterPos3fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos3fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3541,7 +3502,7 @@ static void REGAL_CALL code_glRasterPos3iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos3iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3577,7 +3538,7 @@ static void REGAL_CALL code_glRasterPos3sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos3sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3614,7 +3575,7 @@ static void REGAL_CALL code_glRasterPos4dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos4dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3651,7 +3612,7 @@ static void REGAL_CALL code_glRasterPos4fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos4fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3688,7 +3649,7 @@ static void REGAL_CALL code_glRasterPos4iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos4iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3725,7 +3686,7 @@ static void REGAL_CALL code_glRasterPos4sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glRasterPos4sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -3758,9 +3719,6 @@ static void REGAL_CALL code_glReadPixels(GLint x, GLint y, GLsizei width, GLsize
     _next->call(&_next->glReadPixels)(x, y, width, height, format, type, pixels);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
-    string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 1, 0) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 1, 0),"","{ "," }",",") << ";\n";
     _code << indent << "glReadPixels(";
                    _code << x;
     _code << ", "; _code << y;
@@ -3768,12 +3726,10 @@ static void REGAL_CALL code_glReadPixels(GLint x, GLint y, GLsizei width, GLsize
     _code << ", "; _code << height;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << reinterpret_cast<GLubyte *>(pixels);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
-    if (_context->codeHeader)
-      fprintf(_context->codeHeader,"%s",_header.str().c_str());
 }
 
 static void REGAL_CALL code_glRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2)
@@ -3805,9 +3761,9 @@ static void REGAL_CALL code_glRectdv(const GLdouble *v1, const GLdouble *v2)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _v1Index = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _v1Index << "[" << (2) << "] = " << array<GLdouble,const char * const>(v1,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _v1Index << "[" << 2 << "] = " << array<GLdouble,const char * const>(v1,2,"","{ "," };",", ") << "\n";
     size_t _v2Index = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _v2Index << "[" << (2) << "] = " << array<GLdouble,const char * const>(v2,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _v2Index << "[" << 2 << "] = " << array<GLdouble,const char * const>(v2,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRectdv(";
                    _code << "i" << _v1Index;
     _code << ", "; _code << "i" << _v2Index;
@@ -3845,9 +3801,9 @@ static void REGAL_CALL code_glRectfv(const GLfloat *v1, const GLfloat *v2)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _v1Index = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _v1Index << "[" << (2) << "] = " << array<GLfloat,const char * const>(v1,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _v1Index << "[" << 2 << "] = " << array<GLfloat,const char * const>(v1,2,"","{ "," };",", ") << "\n";
     size_t _v2Index = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _v2Index << "[" << (2) << "] = " << array<GLfloat,const char * const>(v2,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _v2Index << "[" << 2 << "] = " << array<GLfloat,const char * const>(v2,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRectfv(";
                    _code << "i" << _v1Index;
     _code << ", "; _code << "i" << _v2Index;
@@ -3885,9 +3841,9 @@ static void REGAL_CALL code_glRectiv(const GLint *v1, const GLint *v2)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _v1Index = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _v1Index << "[" << (2) << "] = " << array<GLint,const char * const>(v1,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _v1Index << "[" << 2 << "] = " << array<GLint,const char * const>(v1,2,"","{ "," };",", ") << "\n";
     size_t _v2Index = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _v2Index << "[" << (2) << "] = " << array<GLint,const char * const>(v2,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _v2Index << "[" << 2 << "] = " << array<GLint,const char * const>(v2,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRectiv(";
                    _code << "i" << _v1Index;
     _code << ", "; _code << "i" << _v2Index;
@@ -3925,9 +3881,9 @@ static void REGAL_CALL code_glRectsv(const GLshort *v1, const GLshort *v2)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _v1Index = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _v1Index << "[" << (2) << "] = " << array<GLshort,const char * const>(v1,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _v1Index << "[" << 2 << "] = " << array<GLshort,const char * const>(v1,2,"","{ "," };",", ") << "\n";
     size_t _v2Index = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _v2Index << "[" << (2) << "] = " << array<GLshort,const char * const>(v2,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _v2Index << "[" << 2 << "] = " << array<GLshort,const char * const>(v2,2,"","{ "," };",", ") << "\n";
     _code << indent << "glRectsv(";
                    _code << "i" << _v1Index;
     _code << ", "; _code << "i" << _v2Index;
@@ -4057,7 +4013,7 @@ static void REGAL_CALL code_glSelectBuffer(GLsizei size, GLuint *buffer)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _bufferIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _bufferIndex << "[" << (size) << "];\n";
+    _code << indent << "GLuint o" << _bufferIndex << "[" << size << "];\n";
     _code << indent << "glSelectBuffer(";
                    _code << size;
     _code << ", "; _code << "o" << _bufferIndex;
@@ -4160,7 +4116,7 @@ static void REGAL_CALL code_glTexCoord1dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord1dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4194,7 +4150,7 @@ static void REGAL_CALL code_glTexCoord1fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord1fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4228,7 +4184,7 @@ static void REGAL_CALL code_glTexCoord1iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (1) << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 1 << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord1iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4262,7 +4218,7 @@ static void REGAL_CALL code_glTexCoord1sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord1sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4297,7 +4253,7 @@ static void REGAL_CALL code_glTexCoord2dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4332,7 +4288,7 @@ static void REGAL_CALL code_glTexCoord2fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4367,7 +4323,7 @@ static void REGAL_CALL code_glTexCoord2iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4402,7 +4358,7 @@ static void REGAL_CALL code_glTexCoord2sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4438,7 +4394,7 @@ static void REGAL_CALL code_glTexCoord3dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord3dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4474,7 +4430,7 @@ static void REGAL_CALL code_glTexCoord3fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord3fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4510,7 +4466,7 @@ static void REGAL_CALL code_glTexCoord3iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord3iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4546,7 +4502,7 @@ static void REGAL_CALL code_glTexCoord3sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord3sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4583,7 +4539,7 @@ static void REGAL_CALL code_glTexCoord4dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4620,7 +4576,7 @@ static void REGAL_CALL code_glTexCoord4fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4657,7 +4613,7 @@ static void REGAL_CALL code_glTexCoord4iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4694,7 +4650,7 @@ static void REGAL_CALL code_glTexCoord4sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -4892,8 +4848,8 @@ static void REGAL_CALL code_glTexImage1D(GLenum target, GLint level, GLint inter
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage1D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -4902,7 +4858,7 @@ static void REGAL_CALL code_glTexImage1D(GLenum target, GLint level, GLint inter
     _code << ", "; _code << border;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -4920,8 +4876,8 @@ static void REGAL_CALL code_glTexImage2D(GLenum target, GLint level, GLint inter
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage2D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -4931,7 +4887,7 @@ static void REGAL_CALL code_glTexImage2D(GLenum target, GLint level, GLint inter
     _code << ", "; _code << border;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -5074,7 +5030,7 @@ static void REGAL_CALL code_glVertex2dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex2dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5109,7 +5065,7 @@ static void REGAL_CALL code_glVertex2fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex2fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5144,7 +5100,7 @@ static void REGAL_CALL code_glVertex2iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex2iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5179,7 +5135,7 @@ static void REGAL_CALL code_glVertex2sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex2sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5215,7 +5171,7 @@ static void REGAL_CALL code_glVertex3dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex3dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5251,7 +5207,7 @@ static void REGAL_CALL code_glVertex3fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex3fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5287,7 +5243,7 @@ static void REGAL_CALL code_glVertex3iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex3iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5323,7 +5279,7 @@ static void REGAL_CALL code_glVertex3sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex3sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5360,7 +5316,7 @@ static void REGAL_CALL code_glVertex4dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex4dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5397,7 +5353,7 @@ static void REGAL_CALL code_glVertex4fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex4fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5434,7 +5390,7 @@ static void REGAL_CALL code_glVertex4iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex4iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5471,7 +5427,7 @@ static void REGAL_CALL code_glVertex4sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex4sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -5509,9 +5465,9 @@ static GLboolean REGAL_CALL code_glAreTexturesResident(GLsizei n, const GLuint *
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _texturesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _texturesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _texturesIndex << "[" << n << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
     size_t _residencesIndex = _context->codeOutputNext++;
-    _code << indent << "GLboolean o" << _residencesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLboolean o" << _residencesIndex << "[" << n << "];\n";
     _code << indent << "const GLboolean o" << _retIndex << " = glAreTexturesResident(";
                    _code << n;
     _code << ", "; _code << "i" << _texturesIndex;
@@ -5673,7 +5629,7 @@ static void REGAL_CALL code_glDeleteTextures(GLsizei n, const GLuint *textures)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _texturesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _texturesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _texturesIndex << "[" << n << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteTextures(";
                    _code << n;
     _code << ", "; _code << "i" << _texturesIndex;
@@ -5778,7 +5734,7 @@ static void REGAL_CALL code_glGenTextures(GLsizei n, GLuint *textures)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _texturesIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _texturesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _texturesIndex << "[" << n << "];\n";
     _code << indent << "glGenTextures(";
                    _code << n;
     _code << ", "; _code << "o" << _texturesIndex;
@@ -5848,7 +5804,7 @@ static void REGAL_CALL code_glIndexubv(const GLubyte *c)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _cIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(c,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _cIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(c,1,"","{ "," };",", ") << "\n";
     _code << indent << "glIndexubv(";
     _code << "i" << _cIndex;
     _code << ");\n";
@@ -5951,9 +5907,9 @@ static void REGAL_CALL code_glPrioritizeTextures(GLsizei n, const GLuint *textur
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _texturesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _texturesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _texturesIndex << "[" << n << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
     size_t _prioritiesIndex = _context->codeInputNext++;
-    _code << indent << "const GLclampf i" << _prioritiesIndex << "[" << (n) << "] = " << array<GLclampf,const char * const>(priorities,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLclampf i" << _prioritiesIndex << "[" << n << "] = " << array<GLclampf,const char * const>(priorities,n,"","{ "," };",", ") << "\n";
     _code << indent << "glPrioritizeTextures(";
                    _code << n;
     _code << ", "; _code << "i" << _texturesIndex;
@@ -6008,8 +5964,8 @@ static void REGAL_CALL code_glTexSubImage1D(GLenum target, GLint level, GLint xo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage1D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6017,7 +5973,7 @@ static void REGAL_CALL code_glTexSubImage1D(GLenum target, GLint level, GLint xo
     _code << ", "; _code << width;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -6035,8 +5991,8 @@ static void REGAL_CALL code_glTexSubImage2D(GLenum target, GLint level, GLint xo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage2D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6046,7 +6002,7 @@ static void REGAL_CALL code_glTexSubImage2D(GLenum target, GLint level, GLint xo
     _code << ", "; _code << height;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -6163,8 +6119,8 @@ static void REGAL_CALL code_glTexImage3D(GLenum target, GLint level, GLint inter
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage3D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6175,7 +6131,7 @@ static void REGAL_CALL code_glTexImage3D(GLenum target, GLint level, GLint inter
     _code << ", "; _code << border;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -6193,8 +6149,8 @@ static void REGAL_CALL code_glTexSubImage3D(GLenum target, GLint level, GLint xo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage3D(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -6206,7 +6162,7 @@ static void REGAL_CALL code_glTexSubImage3D(GLenum target, GLint level, GLint xo
     _code << ", "; _code << depth;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -6415,7 +6371,7 @@ static void REGAL_CALL code_glLoadTransposeMatrixd(const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadTransposeMatrixd(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -6433,7 +6389,7 @@ static void REGAL_CALL code_glLoadTransposeMatrixf(const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadTransposeMatrixf(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -6451,7 +6407,7 @@ static void REGAL_CALL code_glMultTransposeMatrixd(const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMultTransposeMatrixd(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -6469,7 +6425,7 @@ static void REGAL_CALL code_glMultTransposeMatrixf(const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMultTransposeMatrixf(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -6504,7 +6460,7 @@ static void REGAL_CALL code_glMultiTexCoord1dv(GLenum target, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1dv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6540,7 +6496,7 @@ static void REGAL_CALL code_glMultiTexCoord1fv(GLenum target, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1fv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6576,7 +6532,7 @@ static void REGAL_CALL code_glMultiTexCoord1iv(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (1) << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 1 << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1iv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6612,7 +6568,7 @@ static void REGAL_CALL code_glMultiTexCoord1sv(GLenum target, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1sv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6649,7 +6605,7 @@ static void REGAL_CALL code_glMultiTexCoord2dv(GLenum target, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2dv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6686,7 +6642,7 @@ static void REGAL_CALL code_glMultiTexCoord2fv(GLenum target, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2fv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6723,7 +6679,7 @@ static void REGAL_CALL code_glMultiTexCoord2iv(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2iv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6760,7 +6716,7 @@ static void REGAL_CALL code_glMultiTexCoord2sv(GLenum target, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2sv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6798,7 +6754,7 @@ static void REGAL_CALL code_glMultiTexCoord3dv(GLenum target, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3dv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6836,7 +6792,7 @@ static void REGAL_CALL code_glMultiTexCoord3fv(GLenum target, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3fv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6874,7 +6830,7 @@ static void REGAL_CALL code_glMultiTexCoord3iv(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3iv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6912,7 +6868,7 @@ static void REGAL_CALL code_glMultiTexCoord3sv(GLenum target, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3sv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6951,7 +6907,7 @@ static void REGAL_CALL code_glMultiTexCoord4dv(GLenum target, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4dv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -6990,7 +6946,7 @@ static void REGAL_CALL code_glMultiTexCoord4fv(GLenum target, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4fv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -7029,7 +6985,7 @@ static void REGAL_CALL code_glMultiTexCoord4iv(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4iv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -7068,7 +7024,7 @@ static void REGAL_CALL code_glMultiTexCoord4sv(GLenum target, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4sv(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -7157,7 +7113,7 @@ static void REGAL_CALL code_glFogCoorddv(const GLdouble *coord)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(coord,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(coord,1,"","{ "," };",", ") << "\n";
     _code << indent << "glFogCoorddv(";
     _code << "i" << _coordIndex;
     _code << ");\n";
@@ -7191,7 +7147,7 @@ static void REGAL_CALL code_glFogCoordfv(const GLfloat *coord)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(coord,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(coord,1,"","{ "," };",", ") << "\n";
     _code << indent << "glFogCoordfv(";
     _code << "i" << _coordIndex;
     _code << ");\n";
@@ -7209,9 +7165,9 @@ static void REGAL_CALL code_glMultiDrawArrays(GLenum mode, const GLint *first, c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _firstIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _firstIndex << "[" << (primcount) << "] = " << array<GLint,const char * const>(first,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _firstIndex << "[" << primcount << "] = " << array<GLint,const char * const>(first,primcount,"","{ "," };",", ") << "\n";
     size_t _countIndex = _context->codeInputNext++;
-    _code << indent << "const GLsizei i" << _countIndex << "[" << (primcount) << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLsizei i" << _countIndex << "[" << primcount << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiDrawArrays(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _firstIndex;
@@ -7232,7 +7188,7 @@ static void REGAL_CALL code_glMultiDrawElements(GLenum mode, const GLsizei *coun
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _countIndex = _context->codeInputNext++;
-    _code << indent << "const GLsizei i" << _countIndex << "[" << (primcount) << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLsizei i" << _countIndex << "[" << primcount << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiDrawElements(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _countIndex;
@@ -7340,7 +7296,7 @@ static void REGAL_CALL code_glSecondaryColor3bv(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3bv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7376,7 +7332,7 @@ static void REGAL_CALL code_glSecondaryColor3dv(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3dv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7412,7 +7368,7 @@ static void REGAL_CALL code_glSecondaryColor3fv(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3fv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7448,7 +7404,7 @@ static void REGAL_CALL code_glSecondaryColor3iv(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3iv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7484,7 +7440,7 @@ static void REGAL_CALL code_glSecondaryColor3sv(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3sv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7520,7 +7476,7 @@ static void REGAL_CALL code_glSecondaryColor3ubv(const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (3) << "] = " << array<GLubyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 3 << "] = " << array<GLubyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3ubv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7556,7 +7512,7 @@ static void REGAL_CALL code_glSecondaryColor3uiv(const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (3) << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 3 << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3uiv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7592,7 +7548,7 @@ static void REGAL_CALL code_glSecondaryColor3usv(const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (3) << "] = " << array<GLushort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 3 << "] = " << array<GLushort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3usv(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -7646,7 +7602,7 @@ static void REGAL_CALL code_glWindowPos2dv(const GLdouble *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _pIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _pIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2dv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7681,7 +7637,7 @@ static void REGAL_CALL code_glWindowPos2fv(const GLfloat *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _pIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _pIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2fv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7716,7 +7672,7 @@ static void REGAL_CALL code_glWindowPos2iv(const GLint *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _pIndex << "[" << (2) << "] = " << array<GLint,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _pIndex << "[" << 2 << "] = " << array<GLint,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2iv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7751,7 +7707,7 @@ static void REGAL_CALL code_glWindowPos2sv(const GLshort *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _pIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _pIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2sv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7787,7 +7743,7 @@ static void REGAL_CALL code_glWindowPos3dv(const GLdouble *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _pIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _pIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3dv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7823,7 +7779,7 @@ static void REGAL_CALL code_glWindowPos3fv(const GLfloat *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _pIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _pIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3fv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7859,7 +7815,7 @@ static void REGAL_CALL code_glWindowPos3iv(const GLint *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _pIndex << "[" << (3) << "] = " << array<GLint,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _pIndex << "[" << 3 << "] = " << array<GLint,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3iv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7895,7 +7851,7 @@ static void REGAL_CALL code_glWindowPos3sv(const GLshort *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _pIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _pIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3sv(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -7985,7 +7941,7 @@ static void REGAL_CALL code_glDeleteBuffers(GLsizei n, const GLuint *buffers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _buffersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _buffersIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(buffers,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _buffersIndex << "[" << n << "] = " << array<GLuint,const char * const>(buffers,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteBuffers(";
                    _code << n;
     _code << ", "; _code << "i" << _buffersIndex;
@@ -8004,7 +7960,7 @@ static void REGAL_CALL code_glDeleteQueries(GLsizei n, const GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _idsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _idsIndex << "[" << n << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteQueries(";
                    _code << n;
     _code << ", "; _code << "i" << _idsIndex;
@@ -8039,7 +7995,7 @@ static void REGAL_CALL code_glGenBuffers(GLsizei n, GLuint *buffers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _buffersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _buffersIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _buffersIndex << "[" << n << "];\n";
     _code << indent << "glGenBuffers(";
                    _code << n;
     _code << ", "; _code << "o" << _buffersIndex;
@@ -8058,7 +8014,7 @@ static void REGAL_CALL code_glGenQueries(GLsizei n, GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _idsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _idsIndex << "[" << n << "];\n";
     _code << indent << "glGenQueries(";
                    _code << n;
     _code << ", "; _code << "o" << _idsIndex;
@@ -8426,7 +8382,7 @@ static void REGAL_CALL code_glDrawBuffers(GLsizei n, const GLenum *bufs)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _bufsIndex = _context->codeInputNext++;
-    _code << indent << "const GLenum i" << _bufsIndex << "[" << (n) << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLenum i" << _bufsIndex << "[" << n << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDrawBuffers(";
                    _code << n;
     _code << ", "; _code << "i" << _bufsIndex;
@@ -8461,11 +8417,11 @@ static void REGAL_CALL code_glGetActiveAttrib(GLuint program, GLuint index, GLsi
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveAttrib(";
                    _code << program;
     _code << ", "; _code << index;
@@ -8489,11 +8445,11 @@ static void REGAL_CALL code_glGetActiveUniform(GLuint program, GLuint index, GLs
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveUniform(";
                    _code << program;
     _code << ", "; _code << index;
@@ -8517,7 +8473,7 @@ static void REGAL_CALL code_glGetAttachedShaders(GLuint program, GLsizei maxCoun
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _countIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _countIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _countIndex << "[" << 1 << "];\n";
     size_t _shadersIndex = _context->codeOutputNext++;
     _code << indent << "GLuint o" << _shadersIndex << "[" << (count ? *count : 0) << "];\n";
     _code << indent << "glGetAttachedShaders(";
@@ -8559,7 +8515,7 @@ static void REGAL_CALL code_glGetProgramiv(GLuint program, GLenum pname, GLint *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetProgramiv(";
                    _code << program;
     _code << ", "; _code << toString(pname);
@@ -8621,7 +8577,7 @@ static void REGAL_CALL code_glGetShaderiv(GLuint shader, GLenum pname, GLint *pa
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetShaderiv(";
                    _code << shader;
     _code << ", "; _code << toString(pname);
@@ -8714,7 +8670,7 @@ static void REGAL_CALL code_glGetVertexAttribdv(GLuint index, GLenum pname, GLdo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetVertexAttribdv(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -8734,7 +8690,7 @@ static void REGAL_CALL code_glGetVertexAttribfv(GLuint index, GLenum pname, GLfl
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetVertexAttribfv(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -8754,7 +8710,7 @@ static void REGAL_CALL code_glGetVertexAttribiv(GLuint index, GLenum pname, GLin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetVertexAttribiv(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -8917,7 +8873,7 @@ static void REGAL_CALL code_glUniform1fv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (1 * count) << "] = " << array<GLfloat,const char * const>(value,1 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 1 * count << "] = " << array<GLfloat,const char * const>(value,1 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -8954,7 +8910,7 @@ static void REGAL_CALL code_glUniform1iv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count) << "] = " << array<GLint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count << "] = " << array<GLint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1iv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -8992,7 +8948,7 @@ static void REGAL_CALL code_glUniform2fv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count) << "] = " << array<GLfloat,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count << "] = " << array<GLfloat,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9030,7 +8986,7 @@ static void REGAL_CALL code_glUniform2iv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (2 * count) << "] = " << array<GLint,const char * const>(value,2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << 2 * count << "] = " << array<GLint,const char * const>(value,2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2iv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9069,7 +9025,7 @@ static void REGAL_CALL code_glUniform3fv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (3 * count) << "] = " << array<GLfloat,const char * const>(value,3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 3 * count << "] = " << array<GLfloat,const char * const>(value,3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9108,7 +9064,7 @@ static void REGAL_CALL code_glUniform3iv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (3 * count) << "] = " << array<GLint,const char * const>(value,3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << 3 * count << "] = " << array<GLint,const char * const>(value,3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3iv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9148,7 +9104,7 @@ static void REGAL_CALL code_glUniform4fv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (4 * count) << "] = " << array<GLfloat,const char * const>(value,4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 4 * count << "] = " << array<GLfloat,const char * const>(value,4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9188,7 +9144,7 @@ static void REGAL_CALL code_glUniform4iv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (4 * count) << "] = " << array<GLint,const char * const>(value,4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << 4 * count << "] = " << array<GLint,const char * const>(value,4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4iv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9208,7 +9164,7 @@ static void REGAL_CALL code_glUniformMatrix2fv(GLint location, GLsizei count, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (2 * 2 * count) << "] = " << array<GLfloat,const char * const>(value,2 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 2 * 2 * count << "] = " << array<GLfloat,const char * const>(value,2 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9229,7 +9185,7 @@ static void REGAL_CALL code_glUniformMatrix3fv(GLint location, GLsizei count, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (3 * 3 * count) << "] = " << array<GLfloat,const char * const>(value,3 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 3 * 3 * count << "] = " << array<GLfloat,const char * const>(value,3 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9250,7 +9206,7 @@ static void REGAL_CALL code_glUniformMatrix4fv(GLint location, GLsizei count, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (4 * 4 * count) << "] = " << array<GLfloat,const char * const>(value,4 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 4 * 4 * count << "] = " << array<GLfloat,const char * const>(value,4 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -9320,7 +9276,7 @@ static void REGAL_CALL code_glVertexAttrib1dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9356,7 +9312,7 @@ static void REGAL_CALL code_glVertexAttrib1fv(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1fv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9392,7 +9348,7 @@ static void REGAL_CALL code_glVertexAttrib1sv(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1sv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9429,7 +9385,7 @@ static void REGAL_CALL code_glVertexAttrib2dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9466,7 +9422,7 @@ static void REGAL_CALL code_glVertexAttrib2fv(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2fv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9503,7 +9459,7 @@ static void REGAL_CALL code_glVertexAttrib2sv(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2sv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9541,7 +9497,7 @@ static void REGAL_CALL code_glVertexAttrib3dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9579,7 +9535,7 @@ static void REGAL_CALL code_glVertexAttrib3fv(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3fv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9617,7 +9573,7 @@ static void REGAL_CALL code_glVertexAttrib3sv(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3sv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9636,7 +9592,7 @@ static void REGAL_CALL code_glVertexAttrib4Nbv(GLuint index, const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4Nbv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9655,7 +9611,7 @@ static void REGAL_CALL code_glVertexAttrib4Niv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4Niv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9674,7 +9630,7 @@ static void REGAL_CALL code_glVertexAttrib4Nsv(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4Nsv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9713,7 +9669,7 @@ static void REGAL_CALL code_glVertexAttrib4Nubv(GLuint index, const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4Nubv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9732,7 +9688,7 @@ static void REGAL_CALL code_glVertexAttrib4Nuiv(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4Nuiv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9751,7 +9707,7 @@ static void REGAL_CALL code_glVertexAttrib4Nusv(GLuint index, const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4Nusv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9770,7 +9726,7 @@ static void REGAL_CALL code_glVertexAttrib4bv(GLuint index, const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4bv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9809,7 +9765,7 @@ static void REGAL_CALL code_glVertexAttrib4dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9848,7 +9804,7 @@ static void REGAL_CALL code_glVertexAttrib4fv(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4fv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9867,7 +9823,7 @@ static void REGAL_CALL code_glVertexAttrib4iv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4iv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9906,7 +9862,7 @@ static void REGAL_CALL code_glVertexAttrib4sv(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4sv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9925,7 +9881,7 @@ static void REGAL_CALL code_glVertexAttrib4ubv(GLuint index, const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4ubv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9944,7 +9900,7 @@ static void REGAL_CALL code_glVertexAttrib4uiv(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4uiv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -9963,7 +9919,7 @@ static void REGAL_CALL code_glVertexAttrib4usv(GLuint index, const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4usv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10003,7 +9959,7 @@ static void REGAL_CALL code_glUniformMatrix2x3fv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (2 * 3 * count) << "] = " << array<GLfloat,const char * const>(value,2 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 2 * 3 * count << "] = " << array<GLfloat,const char * const>(value,2 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2x3fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10024,7 +9980,7 @@ static void REGAL_CALL code_glUniformMatrix2x4fv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (2 * 4 * count) << "] = " << array<GLfloat,const char * const>(value,2 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 2 * 4 * count << "] = " << array<GLfloat,const char * const>(value,2 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2x4fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10045,7 +10001,7 @@ static void REGAL_CALL code_glUniformMatrix3x2fv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (3 * 2 * count) << "] = " << array<GLfloat,const char * const>(value,3 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 3 * 2 * count << "] = " << array<GLfloat,const char * const>(value,3 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3x2fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10066,7 +10022,7 @@ static void REGAL_CALL code_glUniformMatrix3x4fv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (3 * 4 * count) << "] = " << array<GLfloat,const char * const>(value,3 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 3 * 4 * count << "] = " << array<GLfloat,const char * const>(value,3 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3x4fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10087,7 +10043,7 @@ static void REGAL_CALL code_glUniformMatrix4x2fv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (4 * 2 * count) << "] = " << array<GLfloat,const char * const>(value,4 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 4 * 2 * count << "] = " << array<GLfloat,const char * const>(value,4 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4x2fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10108,7 +10064,7 @@ static void REGAL_CALL code_glUniformMatrix4x3fv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (4 * 3 * count) << "] = " << array<GLfloat,const char * const>(value,4 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 4 * 3 * count << "] = " << array<GLfloat,const char * const>(value,4 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4x3fv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10444,11 +10400,11 @@ static void REGAL_CALL code_glGetTransformFeedbackVarying(GLuint program, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetTransformFeedbackVarying(";
                    _code << program;
     _code << ", "; _code << index;
@@ -10490,7 +10446,7 @@ static void REGAL_CALL code_glGetVertexAttribIiv(GLuint index, GLenum pname, GLi
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribIiv(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -10510,7 +10466,7 @@ static void REGAL_CALL code_glGetVertexAttribIuiv(GLuint index, GLenum pname, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribIuiv(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -10621,7 +10577,7 @@ static void REGAL_CALL code_glUniform1uiv(GLint location, GLsizei count, const G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1uiv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10659,7 +10615,7 @@ static void REGAL_CALL code_glUniform2uiv(GLint location, GLsizei count, const G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 2 << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2uiv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10698,7 +10654,7 @@ static void REGAL_CALL code_glUniform3uiv(GLint location, GLsizei count, const G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 3 << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3uiv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10738,7 +10694,7 @@ static void REGAL_CALL code_glUniform4uiv(GLint location, GLsizei count, const G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4uiv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -10775,7 +10731,7 @@ static void REGAL_CALL code_glVertexAttribI1iv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (1) << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 1 << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI1iv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10811,7 +10767,7 @@ static void REGAL_CALL code_glVertexAttribI1uiv(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI1uiv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10848,7 +10804,7 @@ static void REGAL_CALL code_glVertexAttribI2iv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI2iv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10885,7 +10841,7 @@ static void REGAL_CALL code_glVertexAttribI2uiv(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (2) << "] = " << array<GLuint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 2 << "] = " << array<GLuint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI2uiv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10923,7 +10879,7 @@ static void REGAL_CALL code_glVertexAttribI3iv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI3iv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10961,7 +10917,7 @@ static void REGAL_CALL code_glVertexAttribI3uiv(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (3) << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 3 << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI3uiv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -10980,7 +10936,7 @@ static void REGAL_CALL code_glVertexAttribI4bv(GLuint index, const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4bv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -11019,7 +10975,7 @@ static void REGAL_CALL code_glVertexAttribI4iv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4iv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -11038,7 +10994,7 @@ static void REGAL_CALL code_glVertexAttribI4sv(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4sv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -11057,7 +11013,7 @@ static void REGAL_CALL code_glVertexAttribI4ubv(GLuint index, const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4ubv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -11096,7 +11052,7 @@ static void REGAL_CALL code_glVertexAttribI4uiv(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4uiv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -11115,7 +11071,7 @@ static void REGAL_CALL code_glVertexAttribI4usv(GLuint index, const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4usv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -11722,7 +11678,7 @@ static void REGAL_CALL code_glGetPerfMonitorCounterDataAMD(GLuint monitor, GLenu
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _bytesWrittenIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _bytesWrittenIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _bytesWrittenIndex << "[" << 1 << "];\n";
     _code << indent << "glGetPerfMonitorCounterDataAMD(";
                    _code << monitor;
     _code << ", "; _code << toString(pname);
@@ -11763,7 +11719,7 @@ static void REGAL_CALL code_glGetPerfMonitorCounterStringAMD(GLuint group, GLuin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetPerfMonitorCounterStringAMD(";
                    _code << group;
     _code << ", "; _code << counter;
@@ -11785,9 +11741,9 @@ static void REGAL_CALL code_glGetPerfMonitorCountersAMD(GLuint group, GLint *num
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _numCountersIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _numCountersIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _numCountersIndex << "[" << 1 << "];\n";
     size_t _maxActiveCountersIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _maxActiveCountersIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _maxActiveCountersIndex << "[" << 1 << "];\n";
     _code << indent << "glGetPerfMonitorCountersAMD(";
                    _code << group;
     _code << ", "; _code << "o" << _numCountersIndex;
@@ -11809,7 +11765,7 @@ static void REGAL_CALL code_glGetPerfMonitorGroupStringAMD(GLuint group, GLsizei
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetPerfMonitorGroupStringAMD(";
                    _code << group;
     _code << ", "; _code << bufSize;
@@ -11830,7 +11786,7 @@ static void REGAL_CALL code_glGetPerfMonitorGroupsAMD(GLint *numGroups, GLsizei 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _numGroupsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _numGroupsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _numGroupsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetPerfMonitorGroupsAMD(";
                    _code << "o" << _numGroupsIndex;
     _code << ", "; _code << groupsSize;
@@ -12945,9 +12901,9 @@ static void REGAL_CALL code_glGetShaderPrecisionFormat(GLenum shadertype, GLenum
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rangeIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _rangeIndex << "[" << (2) << "];\n";
+    _code << indent << "GLint o" << _rangeIndex << "[" << 2 << "];\n";
     size_t _precisionIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _precisionIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _precisionIndex << "[" << 1 << "];\n";
     _code << indent << "glGetShaderPrecisionFormat(";
                    _code << toString(shadertype);
     _code << ", "; _code << toString(precisiontype);
@@ -12982,7 +12938,7 @@ static void REGAL_CALL code_glShaderBinary(GLsizei count, const GLuint *shaders,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _shadersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _shadersIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(shaders,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _shadersIndex << "[" << count << "] = " << array<GLuint,const char * const>(shaders,count,"","{ "," };",", ") << "\n";
     _code << indent << "glShaderBinary(";
                    _code << count;
     _code << ", "; _code << "i" << _shadersIndex;
@@ -13372,15 +13328,15 @@ static GLuint REGAL_CALL code_glGetDebugMessageLogARB(GLuint count, GLsizei bufs
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _sourcesIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _sourcesIndex << "[" << (count) << "];\n";
+    _code << indent << "GLenum o" << _sourcesIndex << "[" << count << "];\n";
     size_t _typesIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typesIndex << "[" << (count) << "];\n";
+    _code << indent << "GLenum o" << _typesIndex << "[" << count << "];\n";
     size_t _idsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _idsIndex << "[" << (count) << "];\n";
+    _code << indent << "GLuint o" << _idsIndex << "[" << count << "];\n";
     size_t _severitiesIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _severitiesIndex << "[" << (count) << "];\n";
+    _code << indent << "GLenum o" << _severitiesIndex << "[" << count << "];\n";
     size_t _lengthsIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthsIndex << "[" << (count) << "];\n";
+    _code << indent << "GLsizei o" << _lengthsIndex << "[" << count << "];\n";
     _code << indent << "const GLuint o" << _retIndex << " = glGetDebugMessageLogARB(";
                    _code << count;
     _code << ", "; _code << bufsize;
@@ -13406,7 +13362,7 @@ static void REGAL_CALL code_glDrawBuffersARB(GLsizei n, const GLenum *bufs)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _bufsIndex = _context->codeInputNext++;
-    _code << indent << "const GLenum i" << _bufsIndex << "[" << (n) << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLenum i" << _bufsIndex << "[" << n << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDrawBuffersARB(";
                    _code << n;
     _code << ", "; _code << "i" << _bufsIndex;
@@ -13561,9 +13517,9 @@ static void REGAL_CALL code_glMultiDrawElementsBaseVertex(GLenum mode, const GLs
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _countIndex = _context->codeInputNext++;
-    _code << indent << "const GLsizei i" << _countIndex << "[" << (primcount) << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLsizei i" << _countIndex << "[" << primcount << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
     size_t _basevertexIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _basevertexIndex << "[" << (primcount) << "] = " << array<GLint,const char * const>(basevertex,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _basevertexIndex << "[" << primcount << "] = " << array<GLint,const char * const>(basevertex,primcount,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiDrawElementsBaseVertex(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _countIndex;
@@ -13809,7 +13765,7 @@ static void REGAL_CALL code_glDeleteFramebuffers(GLsizei n, const GLuint *frameb
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _framebuffersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _framebuffersIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(framebuffers,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _framebuffersIndex << "[" << n << "] = " << array<GLuint,const char * const>(framebuffers,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteFramebuffers(";
                    _code << n;
     _code << ", "; _code << "i" << _framebuffersIndex;
@@ -13828,7 +13784,7 @@ static void REGAL_CALL code_glDeleteRenderbuffers(GLsizei n, const GLuint *rende
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _renderbuffersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _renderbuffersIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(renderbuffers,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _renderbuffersIndex << "[" << n << "] = " << array<GLuint,const char * const>(renderbuffers,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteRenderbuffers(";
                    _code << n;
     _code << ", "; _code << "i" << _renderbuffersIndex;
@@ -13947,7 +13903,7 @@ static void REGAL_CALL code_glGenFramebuffers(GLsizei n, GLuint *framebuffers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _framebuffersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _framebuffersIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _framebuffersIndex << "[" << n << "];\n";
     _code << indent << "glGenFramebuffers(";
                    _code << n;
     _code << ", "; _code << "o" << _framebuffersIndex;
@@ -13966,7 +13922,7 @@ static void REGAL_CALL code_glGenRenderbuffers(GLsizei n, GLuint *renderbuffers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _renderbuffersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _renderbuffersIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _renderbuffersIndex << "[" << n << "];\n";
     _code << indent << "glGenRenderbuffers(";
                    _code << n;
     _code << ", "; _code << "o" << _renderbuffersIndex;
@@ -14190,9 +14146,9 @@ static void REGAL_CALL code_glGetProgramBinary(GLuint program, GLsizei bufSize, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _binaryFormatIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _binaryFormatIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _binaryFormatIndex << "[" << 1 << "];\n";
     _code << indent << "glGetProgramBinary(";
                    _code << program;
     _code << ", "; _code << bufSize;
@@ -14286,7 +14242,7 @@ static void REGAL_CALL code_glUniform1dv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count) << "] = " << array<GLdouble,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count << "] = " << array<GLdouble,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14324,7 +14280,7 @@ static void REGAL_CALL code_glUniform2dv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLdouble,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 2 << "] = " << array<GLdouble,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14363,7 +14319,7 @@ static void REGAL_CALL code_glUniform3dv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLdouble,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 3 << "] = " << array<GLdouble,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14403,7 +14359,7 @@ static void REGAL_CALL code_glUniform4dv(GLint location, GLsizei count, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 4 << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14423,7 +14379,7 @@ static void REGAL_CALL code_glUniformMatrix2dv(GLint location, GLsizei count, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (2 * 2 * count) << "] = " << array<GLdouble,const char * const>(value,2 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 2 * 2 * count << "] = " << array<GLdouble,const char * const>(value,2 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14444,7 +14400,7 @@ static void REGAL_CALL code_glUniformMatrix2x3dv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (2 * 3 * count) << "] = " << array<GLdouble,const char * const>(value,2 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 2 * 3 * count << "] = " << array<GLdouble,const char * const>(value,2 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2x3dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14465,7 +14421,7 @@ static void REGAL_CALL code_glUniformMatrix2x4dv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (2 * 4 * count) << "] = " << array<GLdouble,const char * const>(value,2 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 2 * 4 * count << "] = " << array<GLdouble,const char * const>(value,2 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2x4dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14486,7 +14442,7 @@ static void REGAL_CALL code_glUniformMatrix3dv(GLint location, GLsizei count, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (3 * 3 * count) << "] = " << array<GLdouble,const char * const>(value,3 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 3 * 3 * count << "] = " << array<GLdouble,const char * const>(value,3 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14507,7 +14463,7 @@ static void REGAL_CALL code_glUniformMatrix3x2dv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (3 * 2 * count) << "] = " << array<GLdouble,const char * const>(value,3 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 3 * 2 * count << "] = " << array<GLdouble,const char * const>(value,3 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3x2dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14528,7 +14484,7 @@ static void REGAL_CALL code_glUniformMatrix3x4dv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (3 * 4 * count) << "] = " << array<GLdouble,const char * const>(value,3 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 3 * 4 * count << "] = " << array<GLdouble,const char * const>(value,3 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3x4dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14549,7 +14505,7 @@ static void REGAL_CALL code_glUniformMatrix4dv(GLint location, GLsizei count, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (4 * 4 * count) << "] = " << array<GLdouble,const char * const>(value,4 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 4 * 4 * count << "] = " << array<GLdouble,const char * const>(value,4 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14570,7 +14526,7 @@ static void REGAL_CALL code_glUniformMatrix4x2dv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (4 * 2 * count) << "] = " << array<GLdouble,const char * const>(value,4 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 4 * 2 * count << "] = " << array<GLdouble,const char * const>(value,4 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4x2dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -14591,7 +14547,7 @@ static void REGAL_CALL code_glUniformMatrix4x3dv(GLint location, GLsizei count, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (4 * 3 * count) << "] = " << array<GLdouble,const char * const>(value,4 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << 4 * 3 * count << "] = " << array<GLdouble,const char * const>(value,4 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4x3dv(";
                    _code << location;
     _code << ", "; _code << count;
@@ -15622,7 +15578,7 @@ static void REGAL_CALL code_glMultiTexCoord1dvARB(GLenum target, const GLdouble 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1dvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15658,7 +15614,7 @@ static void REGAL_CALL code_glMultiTexCoord1fvARB(GLenum target, const GLfloat *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1fvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15694,7 +15650,7 @@ static void REGAL_CALL code_glMultiTexCoord1ivARB(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (1) << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 1 << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1ivARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15730,7 +15686,7 @@ static void REGAL_CALL code_glMultiTexCoord1svARB(GLenum target, const GLshort *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1svARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15767,7 +15723,7 @@ static void REGAL_CALL code_glMultiTexCoord2dvARB(GLenum target, const GLdouble 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2dvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15804,7 +15760,7 @@ static void REGAL_CALL code_glMultiTexCoord2fvARB(GLenum target, const GLfloat *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2fvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15841,7 +15797,7 @@ static void REGAL_CALL code_glMultiTexCoord2ivARB(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2ivARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15878,7 +15834,7 @@ static void REGAL_CALL code_glMultiTexCoord2svARB(GLenum target, const GLshort *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2svARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15916,7 +15872,7 @@ static void REGAL_CALL code_glMultiTexCoord3dvARB(GLenum target, const GLdouble 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3dvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15954,7 +15910,7 @@ static void REGAL_CALL code_glMultiTexCoord3fvARB(GLenum target, const GLfloat *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3fvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -15992,7 +15948,7 @@ static void REGAL_CALL code_glMultiTexCoord3ivARB(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3ivARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -16030,7 +15986,7 @@ static void REGAL_CALL code_glMultiTexCoord3svARB(GLenum target, const GLshort *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3svARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -16069,7 +16025,7 @@ static void REGAL_CALL code_glMultiTexCoord4dvARB(GLenum target, const GLdouble 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4dvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -16108,7 +16064,7 @@ static void REGAL_CALL code_glMultiTexCoord4fvARB(GLenum target, const GLfloat *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4fvARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -16147,7 +16103,7 @@ static void REGAL_CALL code_glMultiTexCoord4ivARB(GLenum target, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4ivARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -16186,7 +16142,7 @@ static void REGAL_CALL code_glMultiTexCoord4svARB(GLenum target, const GLshort *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4svARB(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -16222,7 +16178,7 @@ static void REGAL_CALL code_glDeleteQueriesARB(GLsizei n, const GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _idsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _idsIndex << "[" << n << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteQueriesARB(";
                    _code << n;
     _code << ", "; _code << "i" << _idsIndex;
@@ -16257,7 +16213,7 @@ static void REGAL_CALL code_glGenQueriesARB(GLsizei n, GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _idsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _idsIndex << "[" << n << "];\n";
     _code << indent << "glGenQueriesARB(";
                    _code << n;
     _code << ", "; _code << "o" << _idsIndex;
@@ -16942,7 +16898,7 @@ static void REGAL_CALL code_glDeleteSamplers(GLsizei count, const GLuint *sample
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _samplersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _samplersIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(samplers,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _samplersIndex << "[" << count << "] = " << array<GLuint,const char * const>(samplers,count,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteSamplers(";
                    _code << count;
     _code << ", "; _code << "i" << _samplersIndex;
@@ -16961,7 +16917,7 @@ static void REGAL_CALL code_glGenSamplers(GLsizei count, GLuint *samplers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _samplersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _samplersIndex << "[" << (count) << "];\n";
+    _code << indent << "GLuint o" << _samplersIndex << "[" << count << "];\n";
     _code << indent << "glGenSamplers(";
                    _code << count;
     _code << ", "; _code << "o" << _samplersIndex;
@@ -17231,7 +17187,7 @@ static void REGAL_CALL code_glDeleteProgramPipelines(GLsizei n, const GLuint *pi
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pipelinesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _pipelinesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(pipelines,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _pipelinesIndex << "[" << n << "] = " << array<GLuint,const char * const>(pipelines,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteProgramPipelines(";
                    _code << n;
     _code << ", "; _code << "i" << _pipelinesIndex;
@@ -17250,7 +17206,7 @@ static void REGAL_CALL code_glGenProgramPipelines(GLsizei n, GLuint *pipelines)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pipelinesIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _pipelinesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _pipelinesIndex << "[" << n << "];\n";
     _code << indent << "glGenProgramPipelines(";
                    _code << n;
     _code << ", "; _code << "o" << _pipelinesIndex;
@@ -17269,7 +17225,7 @@ static void REGAL_CALL code_glGetProgramPipelineInfoLog(GLuint pipeline, GLsizei
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetProgramPipelineInfoLog(";
                    _code << pipeline;
     _code << ", "; _code << bufSize;
@@ -17344,7 +17300,7 @@ static void REGAL_CALL code_glProgramUniform1dv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count) << "] = " << array<GLdouble,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count << "] = " << array<GLdouble,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17383,7 +17339,7 @@ static void REGAL_CALL code_glProgramUniform1fv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count) << "] = " << array<GLfloat,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count << "] = " << array<GLfloat,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17422,7 +17378,7 @@ static void REGAL_CALL code_glProgramUniform1iv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count) << "] = " << array<GLint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count << "] = " << array<GLint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1iv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17461,7 +17417,7 @@ static void REGAL_CALL code_glProgramUniform1uiv(GLuint program, GLint location,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1uiv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17501,7 +17457,7 @@ static void REGAL_CALL code_glProgramUniform2dv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLdouble,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 2 << "] = " << array<GLdouble,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17541,7 +17497,7 @@ static void REGAL_CALL code_glProgramUniform2fv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLfloat,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 2 << "] = " << array<GLfloat,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17581,7 +17537,7 @@ static void REGAL_CALL code_glProgramUniform2iv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count * 2 << "] = " << array<GLint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2iv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17621,7 +17577,7 @@ static void REGAL_CALL code_glProgramUniform2uiv(GLuint program, GLint location,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 2 << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2uiv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17662,7 +17618,7 @@ static void REGAL_CALL code_glProgramUniform3dv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLdouble,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 3 << "] = " << array<GLdouble,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17703,7 +17659,7 @@ static void REGAL_CALL code_glProgramUniform3fv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLfloat,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 3 << "] = " << array<GLfloat,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17744,7 +17700,7 @@ static void REGAL_CALL code_glProgramUniform3iv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count * 3 << "] = " << array<GLint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3iv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17785,7 +17741,7 @@ static void REGAL_CALL code_glProgramUniform3uiv(GLuint program, GLint location,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 3 << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3uiv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17827,7 +17783,7 @@ static void REGAL_CALL code_glProgramUniform4dv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 4 << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17869,7 +17825,7 @@ static void REGAL_CALL code_glProgramUniform4fv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17911,7 +17867,7 @@ static void REGAL_CALL code_glProgramUniform4iv(GLuint program, GLint location, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count * 4 << "] = " << array<GLint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4iv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17953,7 +17909,7 @@ static void REGAL_CALL code_glProgramUniform4uiv(GLuint program, GLint location,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4uiv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17974,7 +17930,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2dv(GLuint program, GLint loca
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 4 << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -17996,7 +17952,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2fv(GLuint program, GLint loca
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18018,7 +17974,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x3dv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 6 << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x3dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18040,7 +17996,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x3fv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 6 << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x3fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18062,7 +18018,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x4dv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 8 << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x4dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18084,7 +18040,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x4fv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 8 << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x4fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18106,7 +18062,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3dv(GLuint program, GLint loca
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 9) << "] = " << array<GLdouble,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 9 << "] = " << array<GLdouble,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18128,7 +18084,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3fv(GLuint program, GLint loca
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 9) << "] = " << array<GLfloat,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 9 << "] = " << array<GLfloat,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18150,7 +18106,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x2dv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 6 << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x2dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18172,7 +18128,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x2fv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 6 << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x2fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18194,7 +18150,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x4dv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 12 << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x4dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18216,7 +18172,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x4fv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 12 << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x4fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18238,7 +18194,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4dv(GLuint program, GLint loca
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 16) << "] = " << array<GLdouble,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 16 << "] = " << array<GLdouble,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18260,7 +18216,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4fv(GLuint program, GLint loca
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 16) << "] = " << array<GLfloat,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 16 << "] = " << array<GLfloat,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18282,7 +18238,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x2dv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 8 << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x2dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18304,7 +18260,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x2fv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 8 << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x2fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18326,7 +18282,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x3dv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 12 << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x3dv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18348,7 +18304,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x3fv(GLuint program, GLint lo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 12 << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x3fv(";
                    _code << program;
     _code << ", "; _code << location;
@@ -18561,11 +18517,11 @@ static void REGAL_CALL code_glGetActiveUniformARB(GLhandleARB programObj, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveUniformARB(";
                    _code << programObj;
     _code << ", "; _code << index;
@@ -18589,7 +18545,7 @@ static void REGAL_CALL code_glGetAttachedObjectsARB(GLhandleARB containerObj, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _countIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _countIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _countIndex << "[" << 1 << "];\n";
     _code << indent << "glGetAttachedObjectsARB(";
                    _code << containerObj;
     _code << ", "; _code << maxCount;
@@ -18685,7 +18641,7 @@ static void REGAL_CALL code_glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLen
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetShaderSourceARB(";
                    _code << obj;
     _code << ", "; _code << maxLength;
@@ -19088,7 +19044,7 @@ static void REGAL_CALL code_glUniformMatrix2fvARB(GLint location, GLsizei count,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (2 * 2 * count) << "] = " << array<GLfloat,const char * const>(value,2 * 2 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 2 * 2 * count << "] = " << array<GLfloat,const char * const>(value,2 * 2 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix2fvARB(";
                    _code << location;
     _code << ", "; _code << count;
@@ -19109,7 +19065,7 @@ static void REGAL_CALL code_glUniformMatrix3fvARB(GLint location, GLsizei count,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (3 * 3 * count) << "] = " << array<GLfloat,const char * const>(value,3 * 3 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 3 * 3 * count << "] = " << array<GLfloat,const char * const>(value,3 * 3 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix3fvARB(";
                    _code << location;
     _code << ", "; _code << count;
@@ -19130,7 +19086,7 @@ static void REGAL_CALL code_glUniformMatrix4fvARB(GLint location, GLsizei count,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (4 * 4 * count) << "] = " << array<GLfloat,const char * const>(value,4 * 4 * count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 4 * 4 * count << "] = " << array<GLfloat,const char * const>(value,4 * 4 * count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformMatrix4fvARB(";
                    _code << location;
     _code << ", "; _code << count;
@@ -19201,7 +19157,7 @@ static void REGAL_CALL code_glGetActiveSubroutineName(GLuint program, GLenum sha
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveSubroutineName(";
                    _code << program;
     _code << ", "; _code << toString(shaderType);
@@ -19224,7 +19180,7 @@ static void REGAL_CALL code_glGetActiveSubroutineUniformName(GLuint program, GLe
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveSubroutineUniformName(";
                    _code << program;
     _code << ", "; _code << toString(shaderType);
@@ -19267,7 +19223,7 @@ static void REGAL_CALL code_glGetProgramStageiv(GLuint program, GLenum shaderTyp
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valuesIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _valuesIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _valuesIndex << "[" << 1 << "];\n";
     _code << indent << "glGetProgramStageiv(";
                    _code << program;
     _code << ", "; _code << toString(shaderType);
@@ -19288,7 +19244,7 @@ static void REGAL_CALL code_glGetProgramSubroutineParameteruivNV(GLenum target, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetProgramSubroutineParameteruivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -19348,7 +19304,7 @@ static void REGAL_CALL code_glGetUniformSubroutineuiv(GLenum shaderType, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetUniformSubroutineuiv(";
                    _code << toString(shaderType);
     _code << ", "; _code << location;
@@ -19368,7 +19324,7 @@ static void REGAL_CALL code_glProgramSubroutineParametersuivNV(GLenum target, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(params,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << count << "] = " << array<GLuint,const char * const>(params,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramSubroutineParametersuivNV(";
                    _code << toString(target);
     _code << ", "; _code << count;
@@ -19388,7 +19344,7 @@ static void REGAL_CALL code_glUniformSubroutinesuiv(GLenum shaderType, GLsizei c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _indicesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _indicesIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(indices,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _indicesIndex << "[" << count << "] = " << array<GLuint,const char * const>(indices,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformSubroutinesuiv(";
                    _code << toString(shaderType);
     _code << ", "; _code << count;
@@ -19408,7 +19364,7 @@ static void REGAL_CALL code_glCompileShaderIncludeARB(GLuint shader, GLsizei cou
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _lengthIndex << "[" << (count) << "] = " << array<GLint,const char * const>(length,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _lengthIndex << "[" << count << "] = " << array<GLint,const char * const>(length,count,"","{ "," };",", ") << "\n";
     _code << indent << "glCompileShaderIncludeARB(";
                    _code << shader;
     _code << ", "; _code << count;
@@ -19446,7 +19402,7 @@ static void REGAL_CALL code_glGetNamedStringARB(GLint namelen, const GLchar *nam
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _stringlenIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _stringlenIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _stringlenIndex << "[" << 1 << "];\n";
     _code << indent << "glGetNamedStringARB(";
                    _code << namelen;
     _code << ", "; _code << boost::print::quote(name,'"');
@@ -19598,9 +19554,9 @@ static void REGAL_CALL code_glGetSynciv(GLsync sync, GLenum pname, GLsizei bufSi
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _valuesIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _valuesIndex << "[" << (bufSize) << "];\n";
+    _code << indent << "GLint o" << _valuesIndex << "[" << bufSize << "];\n";
     _code << indent << "glGetSynciv(";
                    _code << reinterpret_cast<void *>(sync);
     _code << ", "; _code << toString(pname);
@@ -19658,7 +19614,7 @@ static void REGAL_CALL code_glPatchParameterfv(GLenum pname, const GLfloat *valu
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valuesIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valuesIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(values,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valuesIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(values,1,"","{ "," };",", ") << "\n";
     _code << indent << "glPatchParameterfv(";
                    _code << toString(pname);
     _code << ", "; _code << "i" << _valuesIndex;
@@ -20294,7 +20250,7 @@ static void REGAL_CALL code_glDeleteTransformFeedbacks(GLsizei n, const GLuint *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _idsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _idsIndex << "[" << n << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteTransformFeedbacks(";
                    _code << n;
     _code << ", "; _code << "i" << _idsIndex;
@@ -20330,7 +20286,7 @@ static void REGAL_CALL code_glGenTransformFeedbacks(GLsizei n, GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _idsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _idsIndex << "[" << n << "];\n";
     _code << indent << "glGenTransformFeedbacks(";
                    _code << n;
     _code << ", "; _code << "o" << _idsIndex;
@@ -20504,7 +20460,7 @@ static void REGAL_CALL code_glLoadTransposeMatrixdARB(const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadTransposeMatrixdARB(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -20522,7 +20478,7 @@ static void REGAL_CALL code_glLoadTransposeMatrixfARB(const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadTransposeMatrixfARB(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -20540,7 +20496,7 @@ static void REGAL_CALL code_glMultTransposeMatrixdARB(const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMultTransposeMatrixdARB(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -20558,7 +20514,7 @@ static void REGAL_CALL code_glMultTransposeMatrixfARB(const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMultTransposeMatrixfARB(";
     _code << "i" << _mIndex;
     _code << ");\n";
@@ -20614,7 +20570,7 @@ static void REGAL_CALL code_glGetActiveUniformBlockName(GLuint program, GLuint u
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveUniformBlockName(";
                    _code << program;
     _code << ", "; _code << uniformBlockIndex;
@@ -20655,7 +20611,7 @@ static void REGAL_CALL code_glGetActiveUniformName(GLuint program, GLuint unifor
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveUniformName(";
                    _code << program;
     _code << ", "; _code << uniformIndex;
@@ -20787,7 +20743,7 @@ static void REGAL_CALL code_glDeleteVertexArrays(GLsizei n, const GLuint *arrays
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _arraysIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _arraysIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(arrays,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _arraysIndex << "[" << n << "] = " << array<GLuint,const char * const>(arrays,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteVertexArrays(";
                    _code << n;
     _code << ", "; _code << "i" << _arraysIndex;
@@ -20806,7 +20762,7 @@ static void REGAL_CALL code_glGenVertexArrays(GLsizei n, GLuint *arrays)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _arraysIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _arraysIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _arraysIndex << "[" << n << "];\n";
     _code << indent << "glGenVertexArrays(";
                    _code << n;
     _code << ", "; _code << "o" << _arraysIndex;
@@ -20843,7 +20799,7 @@ static void REGAL_CALL code_glGetVertexAttribLdv(GLuint index, GLenum pname, GLd
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribLdv(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -20880,7 +20836,7 @@ static void REGAL_CALL code_glVertexAttribL1dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL1dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -20917,7 +20873,7 @@ static void REGAL_CALL code_glVertexAttribL2dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL2dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -20955,7 +20911,7 @@ static void REGAL_CALL code_glVertexAttribL3dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL3dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -20994,7 +20950,7 @@ static void REGAL_CALL code_glVertexAttribL4dv(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL4dv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -21370,7 +21326,7 @@ static void REGAL_CALL code_glDeleteBuffersARB(GLsizei n, const GLuint *buffers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _buffersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _buffersIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(buffers,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _buffersIndex << "[" << n << "] = " << array<GLuint,const char * const>(buffers,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteBuffersARB(";
                    _code << n;
     _code << ", "; _code << "i" << _buffersIndex;
@@ -21389,7 +21345,7 @@ static void REGAL_CALL code_glGenBuffersARB(GLsizei n, GLuint *buffers)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _buffersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _buffersIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _buffersIndex << "[" << n << "];\n";
     _code << indent << "glGenBuffersARB(";
                    _code << n;
     _code << ", "; _code << "o" << _buffersIndex;
@@ -21535,7 +21491,7 @@ static void REGAL_CALL code_glDeleteProgramsARB(GLsizei n, const GLuint *program
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _programsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _programsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _programsIndex << "[" << n << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteProgramsARB(";
                    _code << n;
     _code << ", "; _code << "i" << _programsIndex;
@@ -21586,7 +21542,7 @@ static void REGAL_CALL code_glGenProgramsARB(GLsizei n, GLuint *programs)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _programsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _programsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _programsIndex << "[" << n << "];\n";
     _code << indent << "glGenProgramsARB(";
                    _code << n;
     _code << ", "; _code << "o" << _programsIndex;
@@ -21605,7 +21561,7 @@ static void REGAL_CALL code_glGetProgramEnvParameterdvARB(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramEnvParameterdvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21625,7 +21581,7 @@ static void REGAL_CALL code_glGetProgramEnvParameterfvARB(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramEnvParameterfvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21645,7 +21601,7 @@ static void REGAL_CALL code_glGetProgramLocalParameterdvARB(GLenum target, GLuin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramLocalParameterdvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21665,7 +21621,7 @@ static void REGAL_CALL code_glGetProgramLocalParameterfvARB(GLenum target, GLuin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramLocalParameterfvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21703,7 +21659,7 @@ static void REGAL_CALL code_glGetProgramivARB(GLenum target, GLenum pname, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetProgramivARB(";
                    _code << toString(target);
     _code << ", "; _code << toString(pname);
@@ -21741,7 +21697,7 @@ static void REGAL_CALL code_glGetVertexAttribdvARB(GLuint index, GLenum pname, G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetVertexAttribdvARB(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -21761,7 +21717,7 @@ static void REGAL_CALL code_glGetVertexAttribfvARB(GLuint index, GLenum pname, G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetVertexAttribfvARB(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -21781,7 +21737,7 @@ static void REGAL_CALL code_glGetVertexAttribivARB(GLuint index, GLenum pname, G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetVertexAttribivARB(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -21840,7 +21796,7 @@ static void REGAL_CALL code_glProgramEnvParameter4dvARB(GLenum target, GLuint in
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _paramsIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _paramsIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParameter4dvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21881,7 +21837,7 @@ static void REGAL_CALL code_glProgramEnvParameter4fvARB(GLenum target, GLuint in
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParameter4fvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21922,7 +21878,7 @@ static void REGAL_CALL code_glProgramLocalParameter4dvARB(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _paramsIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _paramsIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParameter4dvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -21963,7 +21919,7 @@ static void REGAL_CALL code_glProgramLocalParameter4fvARB(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParameter4fvARB(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -22019,7 +21975,7 @@ static void REGAL_CALL code_glVertexAttrib1dvARB(GLuint index, const GLdouble *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1dvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22055,7 +22011,7 @@ static void REGAL_CALL code_glVertexAttrib1fvARB(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1fvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22091,7 +22047,7 @@ static void REGAL_CALL code_glVertexAttrib1svARB(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1svARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22128,7 +22084,7 @@ static void REGAL_CALL code_glVertexAttrib2dvARB(GLuint index, const GLdouble *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2dvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22165,7 +22121,7 @@ static void REGAL_CALL code_glVertexAttrib2fvARB(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2fvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22202,7 +22158,7 @@ static void REGAL_CALL code_glVertexAttrib2svARB(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2svARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22240,7 +22196,7 @@ static void REGAL_CALL code_glVertexAttrib3dvARB(GLuint index, const GLdouble *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3dvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22278,7 +22234,7 @@ static void REGAL_CALL code_glVertexAttrib3fvARB(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3fvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22316,7 +22272,7 @@ static void REGAL_CALL code_glVertexAttrib3svARB(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3svARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22335,7 +22291,7 @@ static void REGAL_CALL code_glVertexAttrib4NbvARB(GLuint index, const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4NbvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22354,7 +22310,7 @@ static void REGAL_CALL code_glVertexAttrib4NivARB(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4NivARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22373,7 +22329,7 @@ static void REGAL_CALL code_glVertexAttrib4NsvARB(GLuint index, const GLshort *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4NsvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22412,7 +22368,7 @@ static void REGAL_CALL code_glVertexAttrib4NubvARB(GLuint index, const GLubyte *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4NubvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22431,7 +22387,7 @@ static void REGAL_CALL code_glVertexAttrib4NuivARB(GLuint index, const GLuint *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4NuivARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22450,7 +22406,7 @@ static void REGAL_CALL code_glVertexAttrib4NusvARB(GLuint index, const GLushort 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4NusvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22469,7 +22425,7 @@ static void REGAL_CALL code_glVertexAttrib4bvARB(GLuint index, const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4bvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22508,7 +22464,7 @@ static void REGAL_CALL code_glVertexAttrib4dvARB(GLuint index, const GLdouble *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4dvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22547,7 +22503,7 @@ static void REGAL_CALL code_glVertexAttrib4fvARB(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4fvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22566,7 +22522,7 @@ static void REGAL_CALL code_glVertexAttrib4ivARB(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4ivARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22605,7 +22561,7 @@ static void REGAL_CALL code_glVertexAttrib4svARB(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4svARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22624,7 +22580,7 @@ static void REGAL_CALL code_glVertexAttrib4ubvARB(GLuint index, const GLubyte *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4ubvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22643,7 +22599,7 @@ static void REGAL_CALL code_glVertexAttrib4uivARB(GLuint index, const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4uivARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22662,7 +22618,7 @@ static void REGAL_CALL code_glVertexAttrib4usvARB(GLuint index, const GLushort *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4usvARB(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -22720,11 +22676,11 @@ static void REGAL_CALL code_glGetActiveAttribARB(GLhandleARB programObj, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveAttribARB(";
                    _code << programObj;
     _code << ", "; _code << index;
@@ -22784,7 +22740,7 @@ static void REGAL_CALL code_glColorP3uiv(GLenum type, const GLuint *color)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _colorIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _colorIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(color,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _colorIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(color,1,"","{ "," };",", ") << "\n";
     _code << indent << "glColorP3uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _colorIndex;
@@ -22820,7 +22776,7 @@ static void REGAL_CALL code_glColorP4uiv(GLenum type, const GLuint *color)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _colorIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _colorIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(color,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _colorIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(color,1,"","{ "," };",", ") << "\n";
     _code << indent << "glColorP4uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _colorIndex;
@@ -22857,7 +22813,7 @@ static void REGAL_CALL code_glMultiTexCoordP1uiv(GLenum texture, GLenum type, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoordP1uiv(";
                    _code << toString(texture);
     _code << ", "; _code << toString(type);
@@ -22895,7 +22851,7 @@ static void REGAL_CALL code_glMultiTexCoordP2uiv(GLenum texture, GLenum type, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoordP2uiv(";
                    _code << toString(texture);
     _code << ", "; _code << toString(type);
@@ -22933,7 +22889,7 @@ static void REGAL_CALL code_glMultiTexCoordP3uiv(GLenum texture, GLenum type, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoordP3uiv(";
                    _code << toString(texture);
     _code << ", "; _code << toString(type);
@@ -22971,7 +22927,7 @@ static void REGAL_CALL code_glMultiTexCoordP4uiv(GLenum texture, GLenum type, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoordP4uiv(";
                    _code << toString(texture);
     _code << ", "; _code << toString(type);
@@ -23008,7 +22964,7 @@ static void REGAL_CALL code_glNormalP3uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glNormalP3uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23044,7 +23000,7 @@ static void REGAL_CALL code_glSecondaryColorP3uiv(GLenum type, const GLuint *col
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _colorIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _colorIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(color,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _colorIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(color,1,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColorP3uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _colorIndex;
@@ -23080,7 +23036,7 @@ static void REGAL_CALL code_glTexCoordP1uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoordP1uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23116,7 +23072,7 @@ static void REGAL_CALL code_glTexCoordP2uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoordP2uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23152,7 +23108,7 @@ static void REGAL_CALL code_glTexCoordP3uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoordP3uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23188,7 +23144,7 @@ static void REGAL_CALL code_glTexCoordP4uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoordP4uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23226,7 +23182,7 @@ static void REGAL_CALL code_glVertexAttribP1uiv(GLuint index, GLenum type, GLboo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribP1uiv(";
                    _code << index;
     _code << ", "; _code << toString(type);
@@ -23266,7 +23222,7 @@ static void REGAL_CALL code_glVertexAttribP2uiv(GLuint index, GLenum type, GLboo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribP2uiv(";
                    _code << index;
     _code << ", "; _code << toString(type);
@@ -23306,7 +23262,7 @@ static void REGAL_CALL code_glVertexAttribP3uiv(GLuint index, GLenum type, GLboo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribP3uiv(";
                    _code << index;
     _code << ", "; _code << toString(type);
@@ -23346,7 +23302,7 @@ static void REGAL_CALL code_glVertexAttribP4uiv(GLuint index, GLenum type, GLboo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(value,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribP4uiv(";
                    _code << index;
     _code << ", "; _code << toString(type);
@@ -23384,7 +23340,7 @@ static void REGAL_CALL code_glVertexP2uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexP2uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23420,7 +23376,7 @@ static void REGAL_CALL code_glVertexP3uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexP3uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23456,7 +23412,7 @@ static void REGAL_CALL code_glVertexP4uiv(GLenum type, const GLuint *coords)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _coordsIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _coordsIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexP4uiv(";
                    _code << toString(type);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -23475,7 +23431,7 @@ static void REGAL_CALL code_glDepthRangeArrayv(GLuint first, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLclampd i" << _vIndex << "[" << (count * 2) << "] = " << array<GLclampd,const char * const>(v,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLclampd i" << _vIndex << "[" << count * 2 << "] = " << array<GLclampd,const char * const>(v,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glDepthRangeArrayv(";
                    _code << first;
     _code << ", "; _code << count;
@@ -23549,7 +23505,7 @@ static void REGAL_CALL code_glScissorArrayv(GLuint first, GLsizei count, const G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (count * 4) << "] = " << array<GLint,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << count * 4 << "] = " << array<GLint,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glScissorArrayv(";
                    _code << first;
     _code << ", "; _code << count;
@@ -23589,7 +23545,7 @@ static void REGAL_CALL code_glScissorIndexedv(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glScissorIndexedv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -23608,7 +23564,7 @@ static void REGAL_CALL code_glViewportArrayv(GLuint first, GLsizei count, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glViewportArrayv(";
                    _code << first;
     _code << ", "; _code << count;
@@ -23648,7 +23604,7 @@ static void REGAL_CALL code_glViewportIndexedfv(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glViewportIndexedfv(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -23684,7 +23640,7 @@ static void REGAL_CALL code_glWindowPos2dvARB(const GLdouble *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _pIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _pIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2dvARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23719,7 +23675,7 @@ static void REGAL_CALL code_glWindowPos2fvARB(const GLfloat *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _pIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _pIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2fvARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23754,7 +23710,7 @@ static void REGAL_CALL code_glWindowPos2ivARB(const GLint *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _pIndex << "[" << (2) << "] = " << array<GLint,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _pIndex << "[" << 2 << "] = " << array<GLint,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2ivARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23789,7 +23745,7 @@ static void REGAL_CALL code_glWindowPos2svARB(const GLshort *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _pIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(p,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _pIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(p,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2svARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23825,7 +23781,7 @@ static void REGAL_CALL code_glWindowPos3dvARB(const GLdouble *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _pIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _pIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3dvARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23861,7 +23817,7 @@ static void REGAL_CALL code_glWindowPos3fvARB(const GLfloat *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _pIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _pIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3fvARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23897,7 +23853,7 @@ static void REGAL_CALL code_glWindowPos3ivARB(const GLint *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _pIndex << "[" << (3) << "] = " << array<GLint,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _pIndex << "[" << 3 << "] = " << array<GLint,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3ivARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23933,7 +23889,7 @@ static void REGAL_CALL code_glWindowPos3svARB(const GLshort *p)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _pIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _pIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(p,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _pIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(p,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3svARB(";
     _code << "i" << _pIndex;
     _code << ");\n";
@@ -23951,7 +23907,7 @@ static void REGAL_CALL code_glDrawBuffersATI(GLsizei n, const GLenum *bufs)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _bufsIndex = _context->codeInputNext++;
-    _code << indent << "const GLenum i" << _bufsIndex << "[" << (n) << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLenum i" << _bufsIndex << "[" << n << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDrawBuffersATI(";
                    _code << n;
     _code << ", "; _code << "i" << _bufsIndex;
@@ -24352,7 +24308,7 @@ static void REGAL_CALL code_glSetFragmentShaderConstantATI(GLuint dst, const GLf
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(value,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(value,4,"","{ "," };",", ") << "\n";
     _code << indent << "glSetFragmentShaderConstantATI(";
                    _code << dst;
     _code << ", "; _code << "i" << _valueIndex;
@@ -24514,7 +24470,7 @@ static void REGAL_CALL code_glGetArrayObjectfvATI(GLenum array, GLenum pname, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetArrayObjectfvATI(";
                    _code << toString(array);
     _code << ", "; _code << toString(pname);
@@ -24534,7 +24490,7 @@ static void REGAL_CALL code_glGetArrayObjectivATI(GLenum array, GLenum pname, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetArrayObjectivATI(";
                    _code << toString(array);
     _code << ", "; _code << toString(pname);
@@ -24554,7 +24510,7 @@ static void REGAL_CALL code_glGetObjectBufferfvATI(GLuint buffer, GLenum pname, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetObjectBufferfvATI(";
                    _code << buffer;
     _code << ", "; _code << toString(pname);
@@ -24574,7 +24530,7 @@ static void REGAL_CALL code_glGetObjectBufferivATI(GLuint buffer, GLenum pname, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetObjectBufferivATI(";
                    _code << buffer;
     _code << ", "; _code << toString(pname);
@@ -24594,7 +24550,7 @@ static void REGAL_CALL code_glGetVariantArrayObjectfvATI(GLuint id, GLenum pname
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVariantArrayObjectfvATI(";
                    _code << id;
     _code << ", "; _code << toString(pname);
@@ -24614,7 +24570,7 @@ static void REGAL_CALL code_glGetVariantArrayObjectivATI(GLuint id, GLenum pname
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVariantArrayObjectivATI(";
                    _code << id;
     _code << ", "; _code << toString(pname);
@@ -24805,7 +24761,7 @@ static void REGAL_CALL code_glNormalStream3bvATI(GLenum stream, const GLbyte *co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _coordsIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _coordsIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormalStream3bvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -24843,7 +24799,7 @@ static void REGAL_CALL code_glNormalStream3dvATI(GLenum stream, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordsIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordsIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormalStream3dvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -24881,7 +24837,7 @@ static void REGAL_CALL code_glNormalStream3fvATI(GLenum stream, const GLfloat *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordsIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordsIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormalStream3fvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -24919,7 +24875,7 @@ static void REGAL_CALL code_glNormalStream3ivATI(GLenum stream, const GLint *coo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _coordsIndex << "[" << (3) << "] = " << array<GLint,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _coordsIndex << "[" << 3 << "] = " << array<GLint,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormalStream3ivATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -24957,7 +24913,7 @@ static void REGAL_CALL code_glNormalStream3svATI(GLenum stream, const GLshort *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _coordsIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _coordsIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormalStream3svATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25027,7 +24983,7 @@ static void REGAL_CALL code_glVertexStream1dvATI(GLenum stream, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordsIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordsIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream1dvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25063,7 +25019,7 @@ static void REGAL_CALL code_glVertexStream1fvATI(GLenum stream, const GLfloat *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordsIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordsIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream1fvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25099,7 +25055,7 @@ static void REGAL_CALL code_glVertexStream1ivATI(GLenum stream, const GLint *coo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _coordsIndex << "[" << (1) << "] = " << array<GLint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _coordsIndex << "[" << 1 << "] = " << array<GLint,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream1ivATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25135,7 +25091,7 @@ static void REGAL_CALL code_glVertexStream1svATI(GLenum stream, const GLshort *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _coordsIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(coords,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _coordsIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(coords,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream1svATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25172,7 +25128,7 @@ static void REGAL_CALL code_glVertexStream2dvATI(GLenum stream, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordsIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(coords,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordsIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(coords,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream2dvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25209,7 +25165,7 @@ static void REGAL_CALL code_glVertexStream2fvATI(GLenum stream, const GLfloat *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordsIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(coords,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordsIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(coords,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream2fvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25246,7 +25202,7 @@ static void REGAL_CALL code_glVertexStream2ivATI(GLenum stream, const GLint *coo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _coordsIndex << "[" << (2) << "] = " << array<GLint,const char * const>(coords,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _coordsIndex << "[" << 2 << "] = " << array<GLint,const char * const>(coords,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream2ivATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25283,7 +25239,7 @@ static void REGAL_CALL code_glVertexStream2svATI(GLenum stream, const GLshort *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _coordsIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(coords,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _coordsIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(coords,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream2svATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25321,7 +25277,7 @@ static void REGAL_CALL code_glVertexStream3dvATI(GLenum stream, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordsIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordsIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream3dvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25359,7 +25315,7 @@ static void REGAL_CALL code_glVertexStream3fvATI(GLenum stream, const GLfloat *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordsIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordsIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream3fvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25397,7 +25353,7 @@ static void REGAL_CALL code_glVertexStream3ivATI(GLenum stream, const GLint *coo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _coordsIndex << "[" << (3) << "] = " << array<GLint,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _coordsIndex << "[" << 3 << "] = " << array<GLint,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream3ivATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25435,7 +25391,7 @@ static void REGAL_CALL code_glVertexStream3svATI(GLenum stream, const GLshort *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _coordsIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(coords,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _coordsIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(coords,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream3svATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25474,7 +25430,7 @@ static void REGAL_CALL code_glVertexStream4dvATI(GLenum stream, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordsIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(coords,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordsIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(coords,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream4dvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25513,7 +25469,7 @@ static void REGAL_CALL code_glVertexStream4fvATI(GLenum stream, const GLfloat *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordsIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(coords,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordsIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(coords,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream4fvATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25552,7 +25508,7 @@ static void REGAL_CALL code_glVertexStream4ivATI(GLenum stream, const GLint *coo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _coordsIndex << "[" << (4) << "] = " << array<GLint,const char * const>(coords,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _coordsIndex << "[" << 4 << "] = " << array<GLint,const char * const>(coords,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream4ivATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -25591,7 +25547,7 @@ static void REGAL_CALL code_glVertexStream4svATI(GLenum stream, const GLshort *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordsIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _coordsIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(coords,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _coordsIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(coords,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexStream4svATI(";
                    _code << toString(stream);
     _code << ", "; _code << "i" << _coordsIndex;
@@ -26082,7 +26038,7 @@ static void REGAL_CALL code_glBinormal3bvEXT(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glBinormal3bvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26118,7 +26074,7 @@ static void REGAL_CALL code_glBinormal3dvEXT(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glBinormal3dvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26154,7 +26110,7 @@ static void REGAL_CALL code_glBinormal3fvEXT(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glBinormal3fvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26190,7 +26146,7 @@ static void REGAL_CALL code_glBinormal3ivEXT(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glBinormal3ivEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26226,7 +26182,7 @@ static void REGAL_CALL code_glBinormal3svEXT(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glBinormal3svEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26280,7 +26236,7 @@ static void REGAL_CALL code_glTangent3bvEXT(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTangent3bvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26316,7 +26272,7 @@ static void REGAL_CALL code_glTangent3dvEXT(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTangent3dvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26352,7 +26308,7 @@ static void REGAL_CALL code_glTangent3fvEXT(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTangent3fvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26388,7 +26344,7 @@ static void REGAL_CALL code_glTangent3ivEXT(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTangent3ivEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26424,7 +26380,7 @@ static void REGAL_CALL code_glTangent3svEXT(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTangent3svEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -26573,7 +26529,7 @@ static void REGAL_CALL code_glCullParameterdvEXT(GLenum pname, GLdouble *params)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glCullParameterdvEXT(";
                    _code << toString(pname);
     _code << ", "; _code << "o" << _paramsIndex;
@@ -26592,7 +26548,7 @@ static void REGAL_CALL code_glCullParameterfvEXT(GLenum pname, GLfloat *params)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glCullParameterfvEXT(";
                    _code << toString(pname);
     _code << ", "; _code << "o" << _paramsIndex;
@@ -27469,7 +27425,7 @@ static void REGAL_CALL code_glFramebufferDrawBuffersEXT(GLuint framebuffer, GLsi
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _bufsIndex = _context->codeInputNext++;
-    _code << indent << "const GLenum i" << _bufsIndex << "[" << (n) << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLenum i" << _bufsIndex << "[" << n << "] = " << array<GLenum,const char * const>(bufs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glFramebufferDrawBuffersEXT(";
                    _code << framebuffer;
     _code << ", "; _code << n;
@@ -27974,7 +27930,7 @@ static void REGAL_CALL code_glGetNamedProgramLocalParameterIivEXT(GLuint program
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetNamedProgramLocalParameterIivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -27995,7 +27951,7 @@ static void REGAL_CALL code_glGetNamedProgramLocalParameterIuivEXT(GLuint progra
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetNamedProgramLocalParameterIuivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -28016,7 +27972,7 @@ static void REGAL_CALL code_glGetNamedProgramLocalParameterdvEXT(GLuint program,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetNamedProgramLocalParameterdvEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -28037,7 +27993,7 @@ static void REGAL_CALL code_glGetNamedProgramLocalParameterfvEXT(GLuint program,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetNamedProgramLocalParameterfvEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -28077,7 +28033,7 @@ static void REGAL_CALL code_glGetNamedProgramivEXT(GLuint program, GLenum target
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetNamedProgramivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -28441,7 +28397,7 @@ static void REGAL_CALL code_glMatrixLoadTransposedEXT(GLenum mode, const GLdoubl
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixLoadTransposedEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28460,7 +28416,7 @@ static void REGAL_CALL code_glMatrixLoadTransposefEXT(GLenum mode, const GLfloat
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixLoadTransposefEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28479,7 +28435,7 @@ static void REGAL_CALL code_glMatrixLoaddEXT(GLenum mode, const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixLoaddEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28498,7 +28454,7 @@ static void REGAL_CALL code_glMatrixLoadfEXT(GLenum mode, const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixLoadfEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28517,7 +28473,7 @@ static void REGAL_CALL code_glMatrixMultTransposedEXT(GLenum mode, const GLdoubl
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixMultTransposedEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28536,7 +28492,7 @@ static void REGAL_CALL code_glMatrixMultTransposefEXT(GLenum mode, const GLfloat
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixMultTransposefEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28555,7 +28511,7 @@ static void REGAL_CALL code_glMatrixMultdEXT(GLenum mode, const GLdouble *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _mIndex << "[" << (16) << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _mIndex << "[" << 16 << "] = " << array<GLdouble,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixMultdEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -28574,7 +28530,7 @@ static void REGAL_CALL code_glMatrixMultfEXT(GLenum mode, const GLfloat *m)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _mIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _mIndex << "[" << (16) << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _mIndex << "[" << 16 << "] = " << array<GLfloat,const char * const>(m,16,"","{ "," };",", ") << "\n";
     _code << indent << "glMatrixMultfEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _mIndex;
@@ -29493,7 +29449,7 @@ static void REGAL_CALL code_glNamedProgramLocalParameter4dvEXT(GLuint program, G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _paramsIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _paramsIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParameter4dvEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29536,7 +29492,7 @@ static void REGAL_CALL code_glNamedProgramLocalParameter4fvEXT(GLuint program, G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParameter4fvEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29579,7 +29535,7 @@ static void REGAL_CALL code_glNamedProgramLocalParameterI4ivEXT(GLuint program, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (4) << "] = " << array<GLint,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << 4 << "] = " << array<GLint,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParameterI4ivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29622,7 +29578,7 @@ static void REGAL_CALL code_glNamedProgramLocalParameterI4uivEXT(GLuint program,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParameterI4uivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29643,7 +29599,7 @@ static void REGAL_CALL code_glNamedProgramLocalParameters4fvEXT(GLuint program, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParameters4fvEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29665,7 +29621,7 @@ static void REGAL_CALL code_glNamedProgramLocalParametersI4ivEXT(GLuint program,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParametersI4ivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29687,7 +29643,7 @@ static void REGAL_CALL code_glNamedProgramLocalParametersI4uivEXT(GLuint program
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glNamedProgramLocalParametersI4uivEXT(";
                    _code << program;
     _code << ", "; _code << toString(target);
@@ -29807,7 +29763,7 @@ static void REGAL_CALL code_glProgramUniform1dvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count) << "] = " << array<GLdouble,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count << "] = " << array<GLdouble,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -29846,7 +29802,7 @@ static void REGAL_CALL code_glProgramUniform1fvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count) << "] = " << array<GLfloat,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count << "] = " << array<GLfloat,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -29885,7 +29841,7 @@ static void REGAL_CALL code_glProgramUniform1ivEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count) << "] = " << array<GLint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count << "] = " << array<GLint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1ivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -29924,7 +29880,7 @@ static void REGAL_CALL code_glProgramUniform1uivEXT(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1uivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -29964,7 +29920,7 @@ static void REGAL_CALL code_glProgramUniform2dvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLdouble,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 2 << "] = " << array<GLdouble,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30004,7 +29960,7 @@ static void REGAL_CALL code_glProgramUniform2fvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLfloat,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 2 << "] = " << array<GLfloat,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30044,7 +30000,7 @@ static void REGAL_CALL code_glProgramUniform2ivEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count * 2 << "] = " << array<GLint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2ivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30084,7 +30040,7 @@ static void REGAL_CALL code_glProgramUniform2uivEXT(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 2 << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2uivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30125,7 +30081,7 @@ static void REGAL_CALL code_glProgramUniform3dvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLdouble,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 3 << "] = " << array<GLdouble,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30166,7 +30122,7 @@ static void REGAL_CALL code_glProgramUniform3fvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLfloat,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 3 << "] = " << array<GLfloat,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30207,7 +30163,7 @@ static void REGAL_CALL code_glProgramUniform3ivEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count * 3 << "] = " << array<GLint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3ivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30248,7 +30204,7 @@ static void REGAL_CALL code_glProgramUniform3uivEXT(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 3 << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3uivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30290,7 +30246,7 @@ static void REGAL_CALL code_glProgramUniform4dvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 4 << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30332,7 +30288,7 @@ static void REGAL_CALL code_glProgramUniform4fvEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30374,7 +30330,7 @@ static void REGAL_CALL code_glProgramUniform4ivEXT(GLuint program, GLint locatio
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _valueIndex << "[" << count * 4 << "] = " << array<GLint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4ivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30416,7 +30372,7 @@ static void REGAL_CALL code_glProgramUniform4uivEXT(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4uivEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30437,7 +30393,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2dvEXT(GLuint program, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 4 << "] = " << array<GLdouble,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30459,7 +30415,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2fvEXT(GLuint program, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30481,7 +30437,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x3dvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 6 << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x3dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30503,7 +30459,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x3fvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 6 << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x3fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30525,7 +30481,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x4dvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 8 << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x4dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30547,7 +30503,7 @@ static void REGAL_CALL code_glProgramUniformMatrix2x4fvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 8 << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix2x4fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30569,7 +30525,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3dvEXT(GLuint program, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 9) << "] = " << array<GLdouble,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 9 << "] = " << array<GLdouble,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30591,7 +30547,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3fvEXT(GLuint program, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 9) << "] = " << array<GLfloat,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 9 << "] = " << array<GLfloat,const char * const>(value,count * 9,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30613,7 +30569,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x2dvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 6 << "] = " << array<GLdouble,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x2dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30635,7 +30591,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x2fvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 6) << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 6 << "] = " << array<GLfloat,const char * const>(value,count * 6,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x2fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30657,7 +30613,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x4dvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 12 << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x4dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30679,7 +30635,7 @@ static void REGAL_CALL code_glProgramUniformMatrix3x4fvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 12 << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix3x4fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30701,7 +30657,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4dvEXT(GLuint program, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 16) << "] = " << array<GLdouble,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 16 << "] = " << array<GLdouble,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30723,7 +30679,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4fvEXT(GLuint program, GLint l
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 16) << "] = " << array<GLfloat,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 16 << "] = " << array<GLfloat,const char * const>(value,count * 16,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30745,7 +30701,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x2dvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 8 << "] = " << array<GLdouble,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x2dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30767,7 +30723,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x2fvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 8) << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 8 << "] = " << array<GLfloat,const char * const>(value,count * 8,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x2fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30789,7 +30745,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x3dvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _valueIndex << "[" << count * 12 << "] = " << array<GLdouble,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x3dvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -30811,7 +30767,7 @@ static void REGAL_CALL code_glProgramUniformMatrix4x3fvEXT(GLuint program, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _valueIndex << "[" << (count * 12) << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _valueIndex << "[" << count * 12 << "] = " << array<GLfloat,const char * const>(value,count * 12,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformMatrix4x3fvEXT(";
                    _code << program;
     _code << ", "; _code << location;
@@ -31654,7 +31610,7 @@ static void REGAL_CALL code_glFogCoorddvEXT(const GLdouble *coord)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _coordIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(coord,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _coordIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(coord,1,"","{ "," };",", ") << "\n";
     _code << indent << "glFogCoorddvEXT(";
     _code << "i" << _coordIndex;
     _code << ");\n";
@@ -31688,7 +31644,7 @@ static void REGAL_CALL code_glFogCoordfvEXT(const GLfloat *coord)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _coordIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(coord,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _coordIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(coord,1,"","{ "," };",", ") << "\n";
     _code << indent << "glFogCoordfvEXT(";
     _code << "i" << _coordIndex;
     _code << ");\n";
@@ -32121,7 +32077,7 @@ static void REGAL_CALL code_glDeleteFramebuffersEXT(GLsizei n, const GLuint *fra
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _framebuffersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _framebuffersIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(framebuffers,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _framebuffersIndex << "[" << n << "] = " << array<GLuint,const char * const>(framebuffers,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteFramebuffersEXT(";
                    _code << n;
     _code << ", "; _code << "i" << _framebuffersIndex;
@@ -32140,7 +32096,7 @@ static void REGAL_CALL code_glDeleteRenderbuffersEXT(GLsizei n, const GLuint *re
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _renderbuffersIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _renderbuffersIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(renderbuffers,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _renderbuffersIndex << "[" << n << "] = " << array<GLuint,const char * const>(renderbuffers,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteRenderbuffersEXT(";
                    _code << n;
     _code << ", "; _code << "i" << _renderbuffersIndex;
@@ -32239,7 +32195,7 @@ static void REGAL_CALL code_glGenFramebuffersEXT(GLsizei n, GLuint *framebuffers
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _framebuffersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _framebuffersIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _framebuffersIndex << "[" << n << "];\n";
     _code << indent << "glGenFramebuffersEXT(";
                    _code << n;
     _code << ", "; _code << "o" << _framebuffersIndex;
@@ -32258,7 +32214,7 @@ static void REGAL_CALL code_glGenRenderbuffersEXT(GLsizei n, GLuint *renderbuffe
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _renderbuffersIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _renderbuffersIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _renderbuffersIndex << "[" << n << "];\n";
     _code << indent << "glGenRenderbuffersEXT(";
                    _code << n;
     _code << ", "; _code << "o" << _renderbuffersIndex;
@@ -32442,7 +32398,7 @@ static void REGAL_CALL code_glProgramEnvParameters4fvEXT(GLenum target, GLuint i
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParameters4fvEXT(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -32463,7 +32419,7 @@ static void REGAL_CALL code_glProgramLocalParameters4fvEXT(GLenum target, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParameters4fvEXT(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -32539,7 +32495,7 @@ static void REGAL_CALL code_glGetVertexAttribIivEXT(GLuint index, GLenum pname, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribIivEXT(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -32559,7 +32515,7 @@ static void REGAL_CALL code_glGetVertexAttribIuivEXT(GLuint index, GLenum pname,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribIuivEXT(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -32596,7 +32552,7 @@ static void REGAL_CALL code_glUniform1uivEXT(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count << "] = " << array<GLuint,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1uivEXT(";
                    _code << location;
     _code << ", "; _code << count;
@@ -32634,7 +32590,7 @@ static void REGAL_CALL code_glUniform2uivEXT(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 2 << "] = " << array<GLuint,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2uivEXT(";
                    _code << location;
     _code << ", "; _code << count;
@@ -32673,7 +32629,7 @@ static void REGAL_CALL code_glUniform3uivEXT(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 3 << "] = " << array<GLuint,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3uivEXT(";
                    _code << location;
     _code << ", "; _code << count;
@@ -32713,7 +32669,7 @@ static void REGAL_CALL code_glUniform4uivEXT(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _valueIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4uivEXT(";
                    _code << location;
     _code << ", "; _code << count;
@@ -32750,7 +32706,7 @@ static void REGAL_CALL code_glVertexAttribI1ivEXT(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (1) << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 1 << "] = " << array<GLint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI1ivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32786,7 +32742,7 @@ static void REGAL_CALL code_glVertexAttribI1uivEXT(GLuint index, const GLuint *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI1uivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32823,7 +32779,7 @@ static void REGAL_CALL code_glVertexAttribI2ivEXT(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI2ivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32860,7 +32816,7 @@ static void REGAL_CALL code_glVertexAttribI2uivEXT(GLuint index, const GLuint *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (2) << "] = " << array<GLuint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 2 << "] = " << array<GLuint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI2uivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32898,7 +32854,7 @@ static void REGAL_CALL code_glVertexAttribI3ivEXT(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI3ivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32936,7 +32892,7 @@ static void REGAL_CALL code_glVertexAttribI3uivEXT(GLuint index, const GLuint *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (3) << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 3 << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI3uivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32955,7 +32911,7 @@ static void REGAL_CALL code_glVertexAttribI4bvEXT(GLuint index, const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (4) << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 4 << "] = " << array<GLbyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4bvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -32994,7 +32950,7 @@ static void REGAL_CALL code_glVertexAttribI4ivEXT(GLuint index, const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4ivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -33013,7 +32969,7 @@ static void REGAL_CALL code_glVertexAttribI4svEXT(GLuint index, const GLshort *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4svEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -33032,7 +32988,7 @@ static void REGAL_CALL code_glVertexAttribI4ubvEXT(GLuint index, const GLubyte *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4ubvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -33071,7 +33027,7 @@ static void REGAL_CALL code_glVertexAttribI4uivEXT(GLuint index, const GLuint *v
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4uivEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -33090,7 +33046,7 @@ static void REGAL_CALL code_glVertexAttribI4usvEXT(GLuint index, const GLushort 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (4) << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 4 << "] = " << array<GLushort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribI4usvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -33432,9 +33388,9 @@ static void REGAL_CALL code_glMultiDrawArraysEXT(GLenum mode, const GLint *first
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _firstIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _firstIndex << "[" << (primcount) << "] = " << array<GLint,const char * const>(first,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _firstIndex << "[" << primcount << "] = " << array<GLint,const char * const>(first,primcount,"","{ "," };",", ") << "\n";
     size_t _countIndex = _context->codeInputNext++;
-    _code << indent << "const GLsizei i" << _countIndex << "[" << (primcount) << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLsizei i" << _countIndex << "[" << primcount << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiDrawArraysEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _firstIndex;
@@ -33455,7 +33411,7 @@ static void REGAL_CALL code_glMultiDrawElementsEXT(GLenum mode, const GLsizei *c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _countIndex = _context->codeInputNext++;
-    _code << indent << "const GLsizei i" << _countIndex << "[" << (primcount) << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLsizei i" << _countIndex << "[" << primcount << "] = " << array<GLsizei,const char * const>(count,primcount,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiDrawElementsEXT(";
                    _code << toString(mode);
     _code << ", "; _code << "i" << _countIndex;
@@ -33835,7 +33791,7 @@ static void REGAL_CALL code_glPixelTransformParameterfvEXT(GLenum target, GLenum
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(params,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(params,1,"","{ "," };",", ") << "\n";
     _code << indent << "glPixelTransformParameterfvEXT(";
                    _code << toString(target);
     _code << ", "; _code << toString(pname);
@@ -33873,7 +33829,7 @@ static void REGAL_CALL code_glPixelTransformParameterivEXT(GLenum target, GLenum
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (1) << "] = " << array<GLint,const char * const>(params,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << 1 << "] = " << array<GLint,const char * const>(params,1,"","{ "," };",", ") << "\n";
     _code << indent << "glPixelTransformParameterivEXT(";
                    _code << toString(target);
     _code << ", "; _code << toString(pname);
@@ -34067,7 +34023,7 @@ static void REGAL_CALL code_glSecondaryColor3bvEXT(const GLbyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLbyte i" << _vIndex << "[" << (3) << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLbyte i" << _vIndex << "[" << 3 << "] = " << array<GLbyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3bvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34103,7 +34059,7 @@ static void REGAL_CALL code_glSecondaryColor3dvEXT(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3dvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34139,7 +34095,7 @@ static void REGAL_CALL code_glSecondaryColor3fvEXT(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3fvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34175,7 +34131,7 @@ static void REGAL_CALL code_glSecondaryColor3ivEXT(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3ivEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34211,7 +34167,7 @@ static void REGAL_CALL code_glSecondaryColor3svEXT(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3svEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34247,7 +34203,7 @@ static void REGAL_CALL code_glSecondaryColor3ubvEXT(const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (3) << "] = " << array<GLubyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 3 << "] = " << array<GLubyte,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3ubvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34283,7 +34239,7 @@ static void REGAL_CALL code_glSecondaryColor3uivEXT(const GLuint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _vIndex << "[" << (3) << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _vIndex << "[" << 3 << "] = " << array<GLuint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3uivEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34319,7 +34275,7 @@ static void REGAL_CALL code_glSecondaryColor3usvEXT(const GLushort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLushort i" << _vIndex << "[" << (3) << "] = " << array<GLushort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLushort i" << _vIndex << "[" << 3 << "] = " << array<GLushort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3usvEXT(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -34479,8 +34435,8 @@ static void REGAL_CALL code_glTexSubImage1DEXT(GLenum target, GLint level, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, 0, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, 0, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage1DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34488,7 +34444,7 @@ static void REGAL_CALL code_glTexSubImage1DEXT(GLenum target, GLint level, GLint
     _code << ", "; _code << width;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -34506,8 +34462,8 @@ static void REGAL_CALL code_glTexSubImage2DEXT(GLenum target, GLint level, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, 0, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, 0, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage2DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34517,7 +34473,7 @@ static void REGAL_CALL code_glTexSubImage2DEXT(GLenum target, GLint level, GLint
     _code << ", "; _code << height;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -34535,8 +34491,8 @@ static void REGAL_CALL code_glTexSubImage3DEXT(GLenum target, GLint level, GLint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexSubImage3DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34548,7 +34504,7 @@ static void REGAL_CALL code_glTexSubImage3DEXT(GLenum target, GLint level, GLint
     _code << ", "; _code << depth;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -34566,8 +34522,8 @@ static void REGAL_CALL code_glTexImage3DEXT(GLenum target, GLint level, GLenum i
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     string_list< ::std::string > _header;
-    size_t _pixelsIndex = _context->codeInputNext++;
-    _header << indent << "const GLubyte i" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
+    size_t _pixelsIndex = _context->codeTextureNext++;
+    _header << indent << "const GLubyte texture" << _pixelsIndex << "[" << helper::size::pixelImage(width, height, depth, format, type, 0, target) << "] = " << array<GLubyte,const char * const>(static_cast<const GLubyte *>(pixels),helper::size::pixelImage(width, height, depth, format, type, 0, target),"","{ "," }",",") << ";\n";
     _code << indent << "glTexImage3DEXT(";
                    _code << toString(target);
     _code << ", "; _code << level;
@@ -34578,7 +34534,7 @@ static void REGAL_CALL code_glTexImage3DEXT(GLenum target, GLint level, GLenum i
     _code << ", "; _code << border;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
-    _code << ", "; _code << "i" << _pixelsIndex;
+    _code << ", "; _code << "texture" << _pixelsIndex;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -34745,9 +34701,9 @@ static GLboolean REGAL_CALL code_glAreTexturesResidentEXT(GLsizei n, const GLuin
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _texturesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _texturesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _texturesIndex << "[" << n << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
     size_t _residencesIndex = _context->codeOutputNext++;
-    _code << indent << "GLboolean o" << _residencesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLboolean o" << _residencesIndex << "[" << n << "];\n";
     _code << indent << "const GLboolean o" << _retIndex << " = glAreTexturesResidentEXT(";
                    _code << n;
     _code << ", "; _code << "i" << _texturesIndex;
@@ -34785,7 +34741,7 @@ static void REGAL_CALL code_glDeleteTexturesEXT(GLsizei n, const GLuint *texture
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _texturesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _texturesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _texturesIndex << "[" << n << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteTexturesEXT(";
                    _code << n;
     _code << ", "; _code << "i" << _texturesIndex;
@@ -34804,7 +34760,7 @@ static void REGAL_CALL code_glGenTexturesEXT(GLsizei n, GLuint *textures)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _texturesIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _texturesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _texturesIndex << "[" << n << "];\n";
     _code << indent << "glGenTexturesEXT(";
                    _code << n;
     _code << ", "; _code << "o" << _texturesIndex;
@@ -34841,9 +34797,9 @@ static void REGAL_CALL code_glPrioritizeTexturesEXT(GLsizei n, const GLuint *tex
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _texturesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _texturesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _texturesIndex << "[" << n << "] = " << array<GLuint,const char * const>(textures,n,"","{ "," };",", ") << "\n";
     size_t _prioritiesIndex = _context->codeInputNext++;
-    _code << indent << "const GLclampf i" << _prioritiesIndex << "[" << (n) << "] = " << array<GLclampf,const char * const>(priorities,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLclampf i" << _prioritiesIndex << "[" << n << "] = " << array<GLclampf,const char * const>(priorities,n,"","{ "," };",", ") << "\n";
     _code << indent << "glPrioritizeTexturesEXT(";
                    _code << n;
     _code << ", "; _code << "i" << _texturesIndex;
@@ -35062,11 +35018,11 @@ static void REGAL_CALL code_glGetTransformFeedbackVaryingEXT(GLuint program, GLu
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetTransformFeedbackVaryingEXT(";
                    _code << program;
     _code << ", "; _code << index;
@@ -35276,7 +35232,7 @@ static void REGAL_CALL code_glGetVertexAttribLdvEXT(GLuint index, GLenum pname, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribLdvEXT(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -35335,7 +35291,7 @@ static void REGAL_CALL code_glVertexAttribL1dvEXT(GLuint index, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL1dvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -35372,7 +35328,7 @@ static void REGAL_CALL code_glVertexAttribL2dvEXT(GLuint index, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL2dvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -35410,7 +35366,7 @@ static void REGAL_CALL code_glVertexAttribL3dvEXT(GLuint index, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL3dvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -35449,7 +35405,7 @@ static void REGAL_CALL code_glVertexAttribL4dvEXT(GLuint index, const GLdouble *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL4dvEXT(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -36274,7 +36230,7 @@ static void REGAL_CALL code_glVertexWeightfvEXT(const GLfloat *weight)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _weightIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _weightIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(weight,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _weightIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(weight,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexWeightfvEXT(";
     _code << "i" << _weightIndex;
     _code << ");\n";
@@ -37130,7 +37086,7 @@ static void REGAL_CALL code_glWindowPos2dvMESA(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2dvMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37165,7 +37121,7 @@ static void REGAL_CALL code_glWindowPos2fvMESA(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2fvMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37200,7 +37156,7 @@ static void REGAL_CALL code_glWindowPos2ivMESA(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (2) << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 2 << "] = " << array<GLint,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2ivMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37235,7 +37191,7 @@ static void REGAL_CALL code_glWindowPos2svMESA(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos2svMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37271,7 +37227,7 @@ static void REGAL_CALL code_glWindowPos3dvMESA(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3dvMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37307,7 +37263,7 @@ static void REGAL_CALL code_glWindowPos3fvMESA(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3fvMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37343,7 +37299,7 @@ static void REGAL_CALL code_glWindowPos3ivMESA(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (3) << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 3 << "] = " << array<GLint,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3ivMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37379,7 +37335,7 @@ static void REGAL_CALL code_glWindowPos3svMESA(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos3svMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37416,7 +37372,7 @@ static void REGAL_CALL code_glWindowPos4dvMESA(const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos4dvMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37453,7 +37409,7 @@ static void REGAL_CALL code_glWindowPos4fvMESA(const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos4fvMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37490,7 +37446,7 @@ static void REGAL_CALL code_glWindowPos4ivMESA(const GLint *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _vIndex << "[" << (4) << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _vIndex << "[" << 4 << "] = " << array<GLint,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos4ivMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -37527,7 +37483,7 @@ static void REGAL_CALL code_glWindowPos4svMESA(const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glWindowPos4svMESA(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -38166,7 +38122,7 @@ static void REGAL_CALL code_glGetMultisamplefvNV(GLenum pname, GLuint index, GLf
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _valIndex << "[" << (2) << "];\n";
+    _code << indent << "GLfloat o" << _valIndex << "[" << 2 << "];\n";
     _code << indent << "glGetMultisamplefvNV(";
                    _code << toString(pname);
     _code << ", "; _code << index;
@@ -38220,7 +38176,7 @@ static void REGAL_CALL code_glDeleteFencesNV(GLsizei n, const GLuint *fences)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _fencesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _fencesIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(fences,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _fencesIndex << "[" << n << "] = " << array<GLuint,const char * const>(fences,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteFencesNV(";
                    _code << n;
     _code << ", "; _code << "i" << _fencesIndex;
@@ -38255,7 +38211,7 @@ static void REGAL_CALL code_glGenFencesNV(GLsizei n, GLuint *fences)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _fencesIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _fencesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _fencesIndex << "[" << n << "];\n";
     _code << indent << "glGenFencesNV(";
                    _code << n;
     _code << ", "; _code << "o" << _fencesIndex;
@@ -38345,9 +38301,9 @@ static void REGAL_CALL code_glGetProgramNamedParameterdvNV(GLuint id, GLsizei le
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nameIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _nameIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _nameIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramNamedParameterdvNV(";
                    _code << id;
     _code << ", "; _code << len;
@@ -38368,9 +38324,9 @@ static void REGAL_CALL code_glGetProgramNamedParameterfvNV(GLuint id, GLsizei le
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nameIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _nameIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _nameIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramNamedParameterfvNV(";
                    _code << id;
     _code << ", "; _code << len;
@@ -38391,7 +38347,7 @@ static void REGAL_CALL code_glProgramNamedParameter4dNV(GLuint id, GLsizei len, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nameIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _nameIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _nameIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramNamedParameter4dNV(";
                    _code << id;
     _code << ", "; _code << len;
@@ -38415,9 +38371,9 @@ static void REGAL_CALL code_glProgramNamedParameter4dvNV(GLuint id, GLsizei len,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nameIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _nameIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _nameIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramNamedParameter4dvNV(";
                    _code << id;
     _code << ", "; _code << len;
@@ -38438,7 +38394,7 @@ static void REGAL_CALL code_glProgramNamedParameter4fNV(GLuint id, GLsizei len, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nameIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _nameIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _nameIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramNamedParameter4fNV(";
                    _code << id;
     _code << ", "; _code << len;
@@ -38462,9 +38418,9 @@ static void REGAL_CALL code_glProgramNamedParameter4fvNV(GLuint id, GLsizei len,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nameIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _nameIndex << "[" << (1) << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _nameIndex << "[" << 1 << "] = " << array<GLubyte,const char * const>(name,1,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramNamedParameter4fvNV(";
                    _code << id;
     _code << ", "; _code << len;
@@ -38548,7 +38504,7 @@ static void REGAL_CALL code_glGetProgramEnvParameterIivNV(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramEnvParameterIivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38568,7 +38524,7 @@ static void REGAL_CALL code_glGetProgramEnvParameterIuivNV(GLenum target, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramEnvParameterIuivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38588,7 +38544,7 @@ static void REGAL_CALL code_glGetProgramLocalParameterIivNV(GLenum target, GLuin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramLocalParameterIivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38608,7 +38564,7 @@ static void REGAL_CALL code_glGetProgramLocalParameterIuivNV(GLenum target, GLui
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLuint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramLocalParameterIuivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38649,7 +38605,7 @@ static void REGAL_CALL code_glProgramEnvParameterI4ivNV(GLenum target, GLuint in
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (4) << "] = " << array<GLint,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << 4 << "] = " << array<GLint,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParameterI4ivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38690,7 +38646,7 @@ static void REGAL_CALL code_glProgramEnvParameterI4uivNV(GLenum target, GLuint i
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParameterI4uivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38710,7 +38666,7 @@ static void REGAL_CALL code_glProgramEnvParametersI4ivNV(GLenum target, GLuint i
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParametersI4ivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38731,7 +38687,7 @@ static void REGAL_CALL code_glProgramEnvParametersI4uivNV(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramEnvParametersI4uivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38773,7 +38729,7 @@ static void REGAL_CALL code_glProgramLocalParameterI4ivNV(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (4) << "] = " << array<GLint,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << 4 << "] = " << array<GLint,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParameterI4ivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38814,7 +38770,7 @@ static void REGAL_CALL code_glProgramLocalParameterI4uivNV(GLenum target, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (4) << "] = " << array<GLuint,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << 4 << "] = " << array<GLuint,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParameterI4uivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38834,7 +38790,7 @@ static void REGAL_CALL code_glProgramLocalParametersI4ivNV(GLenum target, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParametersI4ivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38855,7 +38811,7 @@ static void REGAL_CALL code_glProgramLocalParametersI4uivNV(GLenum target, GLuin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (count * 4) << "] = " << array<GLuint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << count * 4 << "] = " << array<GLuint,const char * const>(params,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramLocalParametersI4uivNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -38912,7 +38868,7 @@ static void REGAL_CALL code_glProgramUniform1i64vNV(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count) << "] = " << array<GLint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count << "] = " << array<GLint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1i64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -38951,7 +38907,7 @@ static void REGAL_CALL code_glProgramUniform1ui64vNV(GLuint program, GLint locat
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count) << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform1ui64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -38991,7 +38947,7 @@ static void REGAL_CALL code_glProgramUniform2i64vNV(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count * 2 << "] = " << array<GLint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2i64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -39031,7 +38987,7 @@ static void REGAL_CALL code_glProgramUniform2ui64vNV(GLuint program, GLint locat
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLuint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count * 2 << "] = " << array<GLuint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform2ui64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -39072,7 +39028,7 @@ static void REGAL_CALL code_glProgramUniform3i64vNV(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count * 3 << "] = " << array<GLint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3i64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -39113,7 +39069,7 @@ static void REGAL_CALL code_glProgramUniform3ui64vNV(GLuint program, GLint locat
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLuint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count * 3 << "] = " << array<GLuint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform3ui64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -39155,7 +39111,7 @@ static void REGAL_CALL code_glProgramUniform4i64vNV(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count * 4 << "] = " << array<GLint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4i64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -39197,7 +39153,7 @@ static void REGAL_CALL code_glProgramUniform4ui64vNV(GLuint program, GLint locat
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLuint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count * 4 << "] = " << array<GLuint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniform4ui64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -39235,7 +39191,7 @@ static void REGAL_CALL code_glUniform1i64vNV(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count) << "] = " << array<GLint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count << "] = " << array<GLint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1i64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39272,7 +39228,7 @@ static void REGAL_CALL code_glUniform1ui64vNV(GLint location, GLsizei count, con
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count) << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform1ui64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39310,7 +39266,7 @@ static void REGAL_CALL code_glUniform2i64vNV(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count * 2 << "] = " << array<GLint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2i64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39348,7 +39304,7 @@ static void REGAL_CALL code_glUniform2ui64vNV(GLint location, GLsizei count, con
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count * 2) << "] = " << array<GLuint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count * 2 << "] = " << array<GLuint64EXT,const char * const>(value,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform2ui64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39387,7 +39343,7 @@ static void REGAL_CALL code_glUniform3i64vNV(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count * 3 << "] = " << array<GLint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3i64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39426,7 +39382,7 @@ static void REGAL_CALL code_glUniform3ui64vNV(GLint location, GLsizei count, con
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count * 3) << "] = " << array<GLuint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count * 3 << "] = " << array<GLuint64EXT,const char * const>(value,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform3ui64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39466,7 +39422,7 @@ static void REGAL_CALL code_glUniform4i64vNV(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _valueIndex << "[" << count * 4 << "] = " << array<GLint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4i64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39506,7 +39462,7 @@ static void REGAL_CALL code_glUniform4ui64vNV(GLint location, GLsizei count, con
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count * 4) << "] = " << array<GLuint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count * 4 << "] = " << array<GLuint64EXT,const char * const>(value,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glUniform4ui64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -39544,7 +39500,7 @@ static void REGAL_CALL code_glColor3hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39581,7 +39537,7 @@ static void REGAL_CALL code_glColor4hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (4) << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 4 << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39615,7 +39571,7 @@ static void REGAL_CALL code_glFogCoordhvNV(const GLhalfNV *coord)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _coordIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _coordIndex << "[" << (1) << "] = " << array<GLhalfNV,const char * const>(coord,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _coordIndex << "[" << 1 << "] = " << array<GLhalfNV,const char * const>(coord,1,"","{ "," };",", ") << "\n";
     _code << indent << "glFogCoordhvNV(";
     _code << "i" << _coordIndex;
     _code << ");\n";
@@ -39650,7 +39606,7 @@ static void REGAL_CALL code_glMultiTexCoord1hvNV(GLenum target, const GLhalfNV *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (1) << "] = " << array<GLhalfNV,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 1 << "] = " << array<GLhalfNV,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord1hvNV(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -39687,7 +39643,7 @@ static void REGAL_CALL code_glMultiTexCoord2hvNV(GLenum target, const GLhalfNV *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (2) << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 2 << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord2hvNV(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -39725,7 +39681,7 @@ static void REGAL_CALL code_glMultiTexCoord3hvNV(GLenum target, const GLhalfNV *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord3hvNV(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -39764,7 +39720,7 @@ static void REGAL_CALL code_glMultiTexCoord4hvNV(GLenum target, const GLhalfNV *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (4) << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 4 << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glMultiTexCoord4hvNV(";
                    _code << toString(target);
     _code << ", "; _code << "i" << _vIndex;
@@ -39801,7 +39757,7 @@ static void REGAL_CALL code_glNormal3hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39837,7 +39793,7 @@ static void REGAL_CALL code_glSecondaryColor3hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glSecondaryColor3hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39871,7 +39827,7 @@ static void REGAL_CALL code_glTexCoord1hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (1) << "] = " << array<GLhalfNV,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 1 << "] = " << array<GLhalfNV,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord1hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39906,7 +39862,7 @@ static void REGAL_CALL code_glTexCoord2hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (2) << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 2 << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39942,7 +39898,7 @@ static void REGAL_CALL code_glTexCoord3hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord3hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -39979,7 +39935,7 @@ static void REGAL_CALL code_glTexCoord4hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (4) << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 4 << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -40014,7 +39970,7 @@ static void REGAL_CALL code_glVertex2hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (2) << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 2 << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex2hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -40050,7 +40006,7 @@ static void REGAL_CALL code_glVertex3hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex3hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -40087,7 +40043,7 @@ static void REGAL_CALL code_glVertex4hvNV(const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (4) << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 4 << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertex4hvNV(";
     _code << "i" << _vIndex;
     _code << ");\n";
@@ -40122,7 +40078,7 @@ static void REGAL_CALL code_glVertexAttrib1hvNV(GLuint index, const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (1) << "] = " << array<GLhalfNV,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 1 << "] = " << array<GLhalfNV,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1hvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -40159,7 +40115,7 @@ static void REGAL_CALL code_glVertexAttrib2hvNV(GLuint index, const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (2) << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 2 << "] = " << array<GLhalfNV,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2hvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -40197,7 +40153,7 @@ static void REGAL_CALL code_glVertexAttrib3hvNV(GLuint index, const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (3) << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 3 << "] = " << array<GLhalfNV,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3hvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -40236,7 +40192,7 @@ static void REGAL_CALL code_glVertexAttrib4hvNV(GLuint index, const GLhalfNV *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (4) << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << 4 << "] = " << array<GLhalfNV,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4hvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -40255,7 +40211,7 @@ static void REGAL_CALL code_glVertexAttribs1hvNV(GLuint index, GLsizei count, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (count) << "] = " << array<GLhalfNV,const char * const>(v,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << count << "] = " << array<GLhalfNV,const char * const>(v,count,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs1hvNV(";
                    _code << index;
     _code << ", "; _code << count;
@@ -40275,7 +40231,7 @@ static void REGAL_CALL code_glVertexAttribs2hvNV(GLuint index, GLsizei count, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (count * 2) << "] = " << array<GLhalfNV,const char * const>(v,count * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << count * 2 << "] = " << array<GLhalfNV,const char * const>(v,count * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs2hvNV(";
                    _code << index;
     _code << ", "; _code << count;
@@ -40295,7 +40251,7 @@ static void REGAL_CALL code_glVertexAttribs3hvNV(GLuint index, GLsizei count, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (count * 3) << "] = " << array<GLhalfNV,const char * const>(v,count * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << count * 3 << "] = " << array<GLhalfNV,const char * const>(v,count * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs3hvNV(";
                    _code << index;
     _code << ", "; _code << count;
@@ -40315,7 +40271,7 @@ static void REGAL_CALL code_glVertexAttribs4hvNV(GLuint index, GLsizei count, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _vIndex << "[" << (count * 4) << "] = " << array<GLhalfNV,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _vIndex << "[" << count * 4 << "] = " << array<GLhalfNV,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs4hvNV(";
                    _code << index;
     _code << ", "; _code << count;
@@ -40351,7 +40307,7 @@ static void REGAL_CALL code_glVertexWeighthvNV(const GLhalfNV *weight)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _weightIndex = _context->codeInputNext++;
-    _code << indent << "const GLhalfNV i" << _weightIndex << "[" << (1) << "] = " << array<GLhalfNV,const char * const>(weight,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLhalfNV i" << _weightIndex << "[" << 1 << "] = " << array<GLhalfNV,const char * const>(weight,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexWeighthvNV(";
     _code << "i" << _weightIndex;
     _code << ");\n";
@@ -40385,7 +40341,7 @@ static void REGAL_CALL code_glDeleteOcclusionQueriesNV(GLsizei n, const GLuint *
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _idsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _idsIndex << "[" << n << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteOcclusionQueriesNV(";
                    _code << n;
     _code << ", "; _code << "i" << _idsIndex;
@@ -40418,7 +40374,7 @@ static void REGAL_CALL code_glGenOcclusionQueriesNV(GLsizei n, GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _idsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _idsIndex << "[" << n << "];\n";
     _code << indent << "glGenOcclusionQueriesNV(";
                    _code << n;
     _code << ", "; _code << "o" << _idsIndex;
@@ -40491,7 +40447,7 @@ static void REGAL_CALL code_glProgramBufferParametersIivNV(GLenum target, GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _paramsIndex << "[" << (count) << "] = " << array<GLint,const char * const>(params,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _paramsIndex << "[" << count << "] = " << array<GLint,const char * const>(params,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramBufferParametersIivNV(";
                    _code << toString(target);
     _code << ", "; _code << buffer;
@@ -40513,7 +40469,7 @@ static void REGAL_CALL code_glProgramBufferParametersIuivNV(GLenum target, GLuin
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _paramsIndex << "[" << (count) << "] = " << array<GLuint,const char * const>(params,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _paramsIndex << "[" << count << "] = " << array<GLuint,const char * const>(params,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramBufferParametersIuivNV(";
                    _code << toString(target);
     _code << ", "; _code << buffer;
@@ -40535,7 +40491,7 @@ static void REGAL_CALL code_glProgramBufferParametersfvNV(GLenum target, GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (count) << "] = " << array<GLfloat,const char * const>(params,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << count << "] = " << array<GLfloat,const char * const>(params,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramBufferParametersfvNV(";
                    _code << toString(target);
     _code << ", "; _code << buffer;
@@ -42215,7 +42171,7 @@ static void REGAL_CALL code_glProgramUniformui64vNV(GLuint program, GLint locati
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count) << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramUniformui64vNV(";
                    _code << program;
     _code << ", "; _code << location;
@@ -42253,7 +42209,7 @@ static void REGAL_CALL code_glUniformui64vNV(GLint location, GLsizei count, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _valueIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << (count) << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _valueIndex << "[" << count << "] = " << array<GLuint64EXT,const char * const>(value,count,"","{ "," };",", ") << "\n";
     _code << indent << "glUniformui64vNV(";
                    _code << location;
     _code << ", "; _code << count;
@@ -42528,11 +42484,11 @@ static void REGAL_CALL code_glGetActiveVaryingNV(GLuint program, GLuint index, G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _sizeIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _sizeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _sizeIndex << "[" << 1 << "];\n";
     size_t _typeIndex = _context->codeOutputNext++;
-    _code << indent << "GLenum o" << _typeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLenum o" << _typeIndex << "[" << 1 << "];\n";
     _code << indent << "glGetActiveVaryingNV(";
                    _code << program;
     _code << ", "; _code << index;
@@ -42556,7 +42512,7 @@ static void REGAL_CALL code_glGetTransformFeedbackVaryingNV(GLuint program, GLui
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _locationIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _locationIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _locationIndex << "[" << 1 << "];\n";
     _code << indent << "glGetTransformFeedbackVaryingNV(";
                    _code << program;
     _code << ", "; _code << index;
@@ -42613,7 +42569,7 @@ static void REGAL_CALL code_glTransformFeedbackVaryingsNV(GLuint program, GLsize
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _locationsIndex = _context->codeInputNext++;
-    _code << indent << "const GLint i" << _locationsIndex << "[" << (count) << "] = " << array<GLint,const char * const>(locations,count,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint i" << _locationsIndex << "[" << count << "] = " << array<GLint,const char * const>(locations,count,"","{ "," };",", ") << "\n";
     _code << indent << "glTransformFeedbackVaryingsNV(";
                    _code << program;
     _code << ", "; _code << count;
@@ -42651,7 +42607,7 @@ static void REGAL_CALL code_glDeleteTransformFeedbacksNV(GLsizei n, const GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _idsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _idsIndex << "[" << n << "] = " << array<GLuint,const char * const>(ids,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteTransformFeedbacksNV(";
                    _code << n;
     _code << ", "; _code << "i" << _idsIndex;
@@ -42687,7 +42643,7 @@ static void REGAL_CALL code_glGenTransformFeedbacksNV(GLsizei n, GLuint *ids)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _idsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _idsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _idsIndex << "[" << n << "];\n";
     _code << indent << "glGenTransformFeedbacksNV(";
                    _code << n;
     _code << ", "; _code << "o" << _idsIndex;
@@ -42766,9 +42722,9 @@ static void REGAL_CALL code_glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLen
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _lengthIndex = _context->codeOutputNext++;
-    _code << indent << "GLsizei o" << _lengthIndex << "[" << (1) << "];\n";
+    _code << indent << "GLsizei o" << _lengthIndex << "[" << 1 << "];\n";
     size_t _valuesIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _valuesIndex << "[" << (bufSize) << "];\n";
+    _code << indent << "GLint o" << _valuesIndex << "[" << bufSize << "];\n";
     _code << indent << "glVDPAUGetSurfaceivNV(";
                    _code << surface;
     _code << ", "; _code << toString(pname);
@@ -42825,7 +42781,7 @@ static void REGAL_CALL code_glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvd
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _surfacesIndex = _context->codeInputNext++;
-    _code << indent << "const GLvdpauSurfaceNV i" << _surfacesIndex << "[" << (numSurfaces) << "] = " << array<GLvdpauSurfaceNV,const char * const>(surfaces,numSurfaces,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLvdpauSurfaceNV i" << _surfacesIndex << "[" << numSurfaces << "] = " << array<GLvdpauSurfaceNV,const char * const>(surfaces,numSurfaces,"","{ "," };",", ") << "\n";
     _code << indent << "glVDPAUMapSurfacesNV(";
                    _code << numSurfaces;
     _code << ", "; _code << "i" << _surfacesIndex;
@@ -42845,7 +42801,7 @@ static GLvdpauSurfaceNV REGAL_CALL code_glVDPAURegisterOutputSurfaceNV(const GLv
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _textureNamesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _textureNamesIndex << "[" << (numTextureNames) << "] = " << array<GLuint,const char * const>(textureNames,numTextureNames,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _textureNamesIndex << "[" << numTextureNames << "] = " << array<GLuint,const char * const>(textureNames,numTextureNames,"","{ "," };",", ") << "\n";
     _code << indent << "const GLvdpauSurfaceNV o" << _retIndex << " = glVDPAURegisterOutputSurfaceNV(";
                    _code << vdpSurface;
     _code << ", "; _code << toString(target);
@@ -42868,7 +42824,7 @@ static GLvdpauSurfaceNV REGAL_CALL code_glVDPAURegisterVideoSurfaceNV(const GLvo
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _textureNamesIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _textureNamesIndex << "[" << (numTextureNames) << "] = " << array<GLuint,const char * const>(textureNames,numTextureNames,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _textureNamesIndex << "[" << numTextureNames << "] = " << array<GLuint,const char * const>(textureNames,numTextureNames,"","{ "," };",", ") << "\n";
     _code << indent << "const GLvdpauSurfaceNV o" << _retIndex << " = glVDPAURegisterVideoSurfaceNV(";
                    _code << vdpSurface;
     _code << ", "; _code << toString(target);
@@ -42907,7 +42863,7 @@ static void REGAL_CALL code_glVDPAUUnmapSurfacesNV(GLsizei numSurfaces, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _surfacesIndex = _context->codeInputNext++;
-    _code << indent << "const GLvdpauSurfaceNV i" << _surfacesIndex << "[" << (numSurfaces) << "] = " << array<GLvdpauSurfaceNV,const char * const>(surfaces,numSurfaces,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLvdpauSurfaceNV i" << _surfacesIndex << "[" << numSurfaces << "] = " << array<GLvdpauSurfaceNV,const char * const>(surfaces,numSurfaces,"","{ "," };",", ") << "\n";
     _code << indent << "glVDPAUUnmapSurfacesNV(";
                    _code << numSurfaces;
     _code << ", "; _code << "i" << _surfacesIndex;
@@ -42973,7 +42929,7 @@ static void REGAL_CALL code_glGetVertexAttribLi64vNV(GLuint index, GLenum pname,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint64EXT o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint64EXT o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribLi64vNV(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -42993,7 +42949,7 @@ static void REGAL_CALL code_glGetVertexAttribLui64vNV(GLuint index, GLenum pname
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint64EXT o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint64EXT o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribLui64vNV(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -43030,7 +42986,7 @@ static void REGAL_CALL code_glVertexAttribL1i64vNV(GLuint index, const GLint64EX
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _vIndex << "[" << (1) << "] = " << array<GLint64EXT,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _vIndex << "[" << 1 << "] = " << array<GLint64EXT,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL1i64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43066,7 +43022,7 @@ static void REGAL_CALL code_glVertexAttribL1ui64vNV(GLuint index, const GLuint64
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << (1) << "] = " << array<GLuint64EXT,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << 1 << "] = " << array<GLuint64EXT,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL1ui64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43103,7 +43059,7 @@ static void REGAL_CALL code_glVertexAttribL2i64vNV(GLuint index, const GLint64EX
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _vIndex << "[" << (2) << "] = " << array<GLint64EXT,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _vIndex << "[" << 2 << "] = " << array<GLint64EXT,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL2i64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43140,7 +43096,7 @@ static void REGAL_CALL code_glVertexAttribL2ui64vNV(GLuint index, const GLuint64
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << (2) << "] = " << array<GLuint64EXT,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << 2 << "] = " << array<GLuint64EXT,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL2ui64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43178,7 +43134,7 @@ static void REGAL_CALL code_glVertexAttribL3i64vNV(GLuint index, const GLint64EX
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _vIndex << "[" << (3) << "] = " << array<GLint64EXT,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _vIndex << "[" << 3 << "] = " << array<GLint64EXT,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL3i64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43216,7 +43172,7 @@ static void REGAL_CALL code_glVertexAttribL3ui64vNV(GLuint index, const GLuint64
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << (3) << "] = " << array<GLuint64EXT,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << 3 << "] = " << array<GLuint64EXT,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL3ui64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43255,7 +43211,7 @@ static void REGAL_CALL code_glVertexAttribL4i64vNV(GLuint index, const GLint64EX
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLint64EXT i" << _vIndex << "[" << (4) << "] = " << array<GLint64EXT,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLint64EXT i" << _vIndex << "[" << 4 << "] = " << array<GLint64EXT,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL4i64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43294,7 +43250,7 @@ static void REGAL_CALL code_glVertexAttribL4ui64vNV(GLuint index, const GLuint64
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << (4) << "] = " << array<GLuint64EXT,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint64EXT i" << _vIndex << "[" << 4 << "] = " << array<GLuint64EXT,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribL4ui64vNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -43548,9 +43504,9 @@ static GLboolean REGAL_CALL code_glAreProgramsResidentNV(GLsizei n, const GLuint
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _programsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _programsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _programsIndex << "[" << n << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
     size_t _residencesIndex = _context->codeOutputNext++;
-    _code << indent << "GLboolean o" << _residencesIndex << "[" << (n) << "];\n";
+    _code << indent << "GLboolean o" << _residencesIndex << "[" << n << "];\n";
     _code << indent << "const GLboolean o" << _retIndex << " = glAreProgramsResidentNV(";
                    _code << n;
     _code << ", "; _code << "i" << _programsIndex;
@@ -43588,7 +43544,7 @@ static void REGAL_CALL code_glDeleteProgramsNV(GLsizei n, const GLuint *programs
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _programsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _programsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _programsIndex << "[" << n << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glDeleteProgramsNV(";
                    _code << n;
     _code << ", "; _code << "i" << _programsIndex;
@@ -43607,7 +43563,7 @@ static void REGAL_CALL code_glExecuteProgramNV(GLenum target, GLuint id, const G
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _paramsIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _paramsIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(params,4,"","{ "," };",", ") << "\n";
     _code << indent << "glExecuteProgramNV(";
                    _code << toString(target);
     _code << ", "; _code << id;
@@ -43627,7 +43583,7 @@ static void REGAL_CALL code_glGenProgramsNV(GLsizei n, GLuint *programs)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _programsIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _programsIndex << "[" << (n) << "];\n";
+    _code << indent << "GLuint o" << _programsIndex << "[" << n << "];\n";
     _code << indent << "glGenProgramsNV(";
                    _code << n;
     _code << ", "; _code << "o" << _programsIndex;
@@ -43646,7 +43602,7 @@ static void REGAL_CALL code_glGetProgramParameterdvNV(GLenum target, GLuint inde
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramParameterdvNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -43667,7 +43623,7 @@ static void REGAL_CALL code_glGetProgramParameterfvNV(GLenum target, GLuint inde
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramParameterfvNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -43706,7 +43662,7 @@ static void REGAL_CALL code_glGetProgramivNV(GLuint id, GLenum pname, GLint *par
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (4) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 4 << "];\n";
     _code << indent << "glGetProgramivNV(";
                    _code << id;
     _code << ", "; _code << toString(pname);
@@ -43726,7 +43682,7 @@ static void REGAL_CALL code_glGetTrackMatrixivNV(GLenum target, GLuint address, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetTrackMatrixivNV(";
                    _code << toString(target);
     _code << ", "; _code << address;
@@ -43765,7 +43721,7 @@ static void REGAL_CALL code_glGetVertexAttribdvNV(GLuint index, GLenum pname, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLdouble o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLdouble o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribdvNV(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -43785,7 +43741,7 @@ static void REGAL_CALL code_glGetVertexAttribfvNV(GLuint index, GLenum pname, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLfloat o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLfloat o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribfvNV(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -43805,7 +43761,7 @@ static void REGAL_CALL code_glGetVertexAttribivNV(GLuint index, GLenum pname, GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _paramsIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _paramsIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _paramsIndex << "[" << 1 << "];\n";
     _code << indent << "glGetVertexAttribivNV(";
                    _code << index;
     _code << ", "; _code << toString(pname);
@@ -43843,7 +43799,7 @@ static void REGAL_CALL code_glLoadProgramNV(GLenum target, GLuint id, GLsizei le
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _programIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _programIndex << "[" << (len) << "] = " << array<GLubyte,const char * const>(program,len,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _programIndex << "[" << len << "] = " << array<GLubyte,const char * const>(program,len,"","{ "," };",", ") << "\n";
     _code << indent << "glLoadProgramNV(";
                    _code << toString(target);
     _code << ", "; _code << id;
@@ -43885,7 +43841,7 @@ static void REGAL_CALL code_glProgramParameter4dvNV(GLenum target, GLuint index,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramParameter4dvNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -43926,7 +43882,7 @@ static void REGAL_CALL code_glProgramParameter4fvNV(GLenum target, GLuint index,
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramParameter4fvNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -43946,7 +43902,7 @@ static void REGAL_CALL code_glProgramParameters4dvNV(GLenum target, GLuint index
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (count * 4) << "] = " << array<GLdouble,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << count * 4 << "] = " << array<GLdouble,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramParameters4dvNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -43967,7 +43923,7 @@ static void REGAL_CALL code_glProgramParameters4fvNV(GLenum target, GLuint index
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (count * 4) << "] = " << array<GLfloat,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << count * 4 << "] = " << array<GLfloat,const char * const>(v,count * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glProgramParameters4fvNV(";
                    _code << toString(target);
     _code << ", "; _code << index;
@@ -43988,7 +43944,7 @@ static void REGAL_CALL code_glRequestResidentProgramsNV(GLsizei n, const GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _programsIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _programsIndex << "[" << (n) << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _programsIndex << "[" << n << "] = " << array<GLuint,const char * const>(programs,n,"","{ "," };",", ") << "\n";
     _code << indent << "glRequestResidentProgramsNV(";
                    _code << n;
     _code << ", "; _code << "i" << _programsIndex;
@@ -44043,7 +43999,7 @@ static void REGAL_CALL code_glVertexAttrib1dvNV(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (1) << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 1 << "] = " << array<GLdouble,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1dvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44079,7 +44035,7 @@ static void REGAL_CALL code_glVertexAttrib1fvNV(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (1) << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 1 << "] = " << array<GLfloat,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1fvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44115,7 +44071,7 @@ static void REGAL_CALL code_glVertexAttrib1svNV(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (1) << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 1 << "] = " << array<GLshort,const char * const>(v,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib1svNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44152,7 +44108,7 @@ static void REGAL_CALL code_glVertexAttrib2dvNV(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (2) << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 2 << "] = " << array<GLdouble,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2dvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44189,7 +44145,7 @@ static void REGAL_CALL code_glVertexAttrib2fvNV(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2fvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44226,7 +44182,7 @@ static void REGAL_CALL code_glVertexAttrib2svNV(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (2) << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 2 << "] = " << array<GLshort,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib2svNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44264,7 +44220,7 @@ static void REGAL_CALL code_glVertexAttrib3dvNV(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (3) << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 3 << "] = " << array<GLdouble,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3dvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44302,7 +44258,7 @@ static void REGAL_CALL code_glVertexAttrib3fvNV(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3fvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44340,7 +44296,7 @@ static void REGAL_CALL code_glVertexAttrib3svNV(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (3) << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 3 << "] = " << array<GLshort,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib3svNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44379,7 +44335,7 @@ static void REGAL_CALL code_glVertexAttrib4dvNV(GLuint index, const GLdouble *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4dvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44418,7 +44374,7 @@ static void REGAL_CALL code_glVertexAttrib4fvNV(GLuint index, const GLfloat *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4fvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44457,7 +44413,7 @@ static void REGAL_CALL code_glVertexAttrib4svNV(GLuint index, const GLshort *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (4) << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << 4 << "] = " << array<GLshort,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4svNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44496,7 +44452,7 @@ static void REGAL_CALL code_glVertexAttrib4ubvNV(GLuint index, const GLubyte *v)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttrib4ubvNV(";
                    _code << index;
     _code << ", "; _code << "i" << _vIndex;
@@ -44535,7 +44491,7 @@ static void REGAL_CALL code_glVertexAttribs1dvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (n) << "] = " << array<GLdouble,const char * const>(v,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << n << "] = " << array<GLdouble,const char * const>(v,n,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs1dvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44555,7 +44511,7 @@ static void REGAL_CALL code_glVertexAttribs1fvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (n) << "] = " << array<GLfloat,const char * const>(v,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << n << "] = " << array<GLfloat,const char * const>(v,n,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs1fvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44575,7 +44531,7 @@ static void REGAL_CALL code_glVertexAttribs1svNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (n) << "] = " << array<GLshort,const char * const>(v,n,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << n << "] = " << array<GLshort,const char * const>(v,n,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs1svNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44595,7 +44551,7 @@ static void REGAL_CALL code_glVertexAttribs2dvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (n * 2) << "] = " << array<GLdouble,const char * const>(v,n * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << n * 2 << "] = " << array<GLdouble,const char * const>(v,n * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs2dvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44615,7 +44571,7 @@ static void REGAL_CALL code_glVertexAttribs2fvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (n * 2) << "] = " << array<GLfloat,const char * const>(v,n * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << n * 2 << "] = " << array<GLfloat,const char * const>(v,n * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs2fvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44635,7 +44591,7 @@ static void REGAL_CALL code_glVertexAttribs2svNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (n * 2) << "] = " << array<GLshort,const char * const>(v,n * 2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << n * 2 << "] = " << array<GLshort,const char * const>(v,n * 2,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs2svNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44655,7 +44611,7 @@ static void REGAL_CALL code_glVertexAttribs3dvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (n * 3) << "] = " << array<GLdouble,const char * const>(v,n * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << n * 3 << "] = " << array<GLdouble,const char * const>(v,n * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs3dvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44675,7 +44631,7 @@ static void REGAL_CALL code_glVertexAttribs3fvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (n * 3) << "] = " << array<GLfloat,const char * const>(v,n * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << n * 3 << "] = " << array<GLfloat,const char * const>(v,n * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs3fvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44695,7 +44651,7 @@ static void REGAL_CALL code_glVertexAttribs3svNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (n * 3) << "] = " << array<GLshort,const char * const>(v,n * 3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << n * 3 << "] = " << array<GLshort,const char * const>(v,n * 3,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs3svNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44715,7 +44671,7 @@ static void REGAL_CALL code_glVertexAttribs4dvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _vIndex << "[" << (n * 4) << "] = " << array<GLdouble,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _vIndex << "[" << n * 4 << "] = " << array<GLdouble,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs4dvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44735,7 +44691,7 @@ static void REGAL_CALL code_glVertexAttribs4fvNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (n * 4) << "] = " << array<GLfloat,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << n * 4 << "] = " << array<GLfloat,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs4fvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44755,7 +44711,7 @@ static void REGAL_CALL code_glVertexAttribs4svNV(GLuint index, GLsizei n, const 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLshort i" << _vIndex << "[" << (n * 4) << "] = " << array<GLshort,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLshort i" << _vIndex << "[" << n * 4 << "] = " << array<GLshort,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs4svNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44775,7 +44731,7 @@ static void REGAL_CALL code_glVertexAttribs4ubvNV(GLuint index, GLsizei n, const
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _vIndex << "[" << (n * 4) << "] = " << array<GLubyte,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _vIndex << "[" << n * 4 << "] = " << array<GLubyte,const char * const>(v,n * 4,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexAttribs4ubvNV(";
                    _code << index;
     _code << ", "; _code << n;
@@ -44942,9 +44898,9 @@ static GLenum REGAL_CALL code_glVideoCaptureNV(GLuint video_capture_slot, GLuint
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _sequence_numIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _sequence_numIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _sequence_numIndex << "[" << 1 << "];\n";
     size_t _capture_timeIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint64EXT o" << _capture_timeIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint64EXT o" << _capture_timeIndex << "[" << 1 << "];\n";
     _code << indent << "const GLenum o" << _retIndex << " = glVideoCaptureNV(";
                    _code << video_capture_slot;
     _code << ", "; _code << "o" << _sequence_numIndex;
@@ -47555,7 +47511,7 @@ static GLint REGAL_CALL code_glFinishAsyncSGIX(GLuint *markerp)
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _markerpIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _markerpIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _markerpIndex << "[" << 1 << "];\n";
     _code << indent << "const GLint o" << _retIndex << " = glFinishAsyncSGIX(";
     _code << "o" << _markerpIndex;
     _code << ");\n";
@@ -47611,7 +47567,7 @@ static GLint REGAL_CALL code_glPollAsyncSGIX(GLuint *markerp)
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _markerpIndex = _context->codeOutputNext++;
-    _code << indent << "GLuint o" << _markerpIndex << "[" << (1) << "];\n";
+    _code << indent << "GLuint o" << _markerpIndex << "[" << 1 << "];\n";
     _code << indent << "const GLint o" << _retIndex << " = glPollAsyncSGIX(";
     _code << "o" << _markerpIndex;
     _code << ");\n";
@@ -48045,7 +48001,7 @@ static GLint REGAL_CALL code_glPollInstrumentsSGIX(GLint *marker_p)
     string_list< ::std::string > _code;
     size_t _retIndex = _context->codeOutputNext++;
     size_t _marker_pIndex = _context->codeOutputNext++;
-    _code << indent << "GLint o" << _marker_pIndex << "[" << (1) << "];\n";
+    _code << indent << "GLint o" << _marker_pIndex << "[" << 1 << "];\n";
     _code << indent << "const GLint o" << _retIndex << " = glPollInstrumentsSGIX(";
     _code << "o" << _marker_pIndex;
     _code << ");\n";
@@ -48324,7 +48280,7 @@ static void REGAL_CALL code_glReferencePlaneSGIX(const GLdouble *equation)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _equationIndex = _context->codeInputNext++;
-    _code << indent << "const GLdouble i" << _equationIndex << "[" << (4) << "] = " << array<GLdouble,const char * const>(equation,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLdouble i" << _equationIndex << "[" << 4 << "] = " << array<GLdouble,const char * const>(equation,4,"","{ "," };",", ") << "\n";
     _code << indent << "glReferencePlaneSGIX(";
     _code << "i" << _equationIndex;
     _code << ");\n";
@@ -48874,9 +48830,9 @@ static void REGAL_CALL code_glColor3fVertex3fvSUN(const GLfloat *c, const GLfloa
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(c,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(c,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor3fVertex3fvSUN(";
                    _code << "i" << _cIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -48920,11 +48876,11 @@ static void REGAL_CALL code_glColor4fNormal3fVertex3fvSUN(const GLfloat *c, cons
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4fNormal3fVertex3fvSUN(";
                    _code << "i" << _cIndex;
     _code << ", "; _code << "i" << _nIndex;
@@ -48965,9 +48921,9 @@ static void REGAL_CALL code_glColor4ubVertex2fvSUN(const GLubyte *c, const GLflo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _cIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _cIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(v,2,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4ubVertex2fvSUN(";
                    _code << "i" << _cIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -49008,9 +48964,9 @@ static void REGAL_CALL code_glColor4ubVertex3fvSUN(const GLubyte *c, const GLflo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _cIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _cIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glColor4ubVertex3fvSUN(";
                    _code << "i" << _cIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -49050,9 +49006,9 @@ static void REGAL_CALL code_glNormal3fVertex3fvSUN(const GLfloat *n, const GLflo
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glNormal3fVertex3fvSUN(";
                    _code << "i" << _nIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -49093,11 +49049,11 @@ static void REGAL_CALL code_glReplacementCodeuiColor3fVertex3fvSUN(const GLuint 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(c,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(c,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiColor3fVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49143,13 +49099,13 @@ static void REGAL_CALL code_glReplacementCodeuiColor4fNormal3fVertex3fvSUN(const
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiColor4fNormal3fVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49193,11 +49149,11 @@ static void REGAL_CALL code_glReplacementCodeuiColor4ubVertex3fvSUN(const GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _cIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _cIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiColor4ubVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49239,11 +49195,11 @@ static void REGAL_CALL code_glReplacementCodeuiNormal3fVertex3fvSUN(const GLuint
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiNormal3fVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _nIndex;
@@ -49291,15 +49247,15 @@ static void REGAL_CALL code_glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3f
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _tcIndex;
@@ -49345,13 +49301,13 @@ static void REGAL_CALL code_glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _tcIndex;
@@ -49393,11 +49349,11 @@ static void REGAL_CALL code_glReplacementCodeuiTexCoord2fVertex3fvSUN(const GLui
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiTexCoord2fVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _tcIndex;
@@ -49436,9 +49392,9 @@ static void REGAL_CALL code_glReplacementCodeuiVertex3fvSUN(const GLuint *rc, co
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _rcIndex = _context->codeInputNext++;
-    _code << indent << "const GLuint i" << _rcIndex << "[" << (1) << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLuint i" << _rcIndex << "[" << 1 << "] = " << array<GLuint,const char * const>(rc,1,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glReplacementCodeuiVertex3fvSUN(";
                    _code << "i" << _rcIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -49480,11 +49436,11 @@ static void REGAL_CALL code_glTexCoord2fColor3fVertex3fvSUN(const GLfloat *tc, c
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(c,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(c,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2fColor3fVertex3fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49531,13 +49487,13 @@ static void REGAL_CALL code_glTexCoord2fColor4fNormal3fVertex3fvSUN(const GLfloa
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2fColor4fNormal3fVertex3fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49582,11 +49538,11 @@ static void REGAL_CALL code_glTexCoord2fColor4ubVertex3fvSUN(const GLfloat *tc, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLubyte i" << _cIndex << "[" << (4) << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLubyte i" << _cIndex << "[" << 4 << "] = " << array<GLubyte,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2fColor4ubVertex3fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49629,11 +49585,11 @@ static void REGAL_CALL code_glTexCoord2fNormal3fVertex3fvSUN(const GLfloat *tc, 
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2fNormal3fVertex3fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _nIndex;
@@ -49673,9 +49629,9 @@ static void REGAL_CALL code_glTexCoord2fVertex3fvSUN(const GLfloat *tc, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (2) << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 2 << "] = " << array<GLfloat,const char * const>(tc,2,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(v,3,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord2fVertex3fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -49724,13 +49680,13 @@ static void REGAL_CALL code_glTexCoord4fColor4fNormal3fVertex4fvSUN(const GLfloa
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(tc,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(tc,4,"","{ "," };",", ") << "\n";
     size_t _cIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _cIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _cIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(c,4,"","{ "," };",", ") << "\n";
     size_t _nIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _nIndex << "[" << (3) << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _nIndex << "[" << 3 << "] = " << array<GLfloat,const char * const>(n,3,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4fColor4fNormal3fVertex4fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _cIndex;
@@ -49774,9 +49730,9 @@ static void REGAL_CALL code_glTexCoord4fVertex4fvSUN(const GLfloat *tc, const GL
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     size_t _tcIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _tcIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(tc,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _tcIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(tc,4,"","{ "," };",", ") << "\n";
     size_t _vIndex = _context->codeInputNext++;
-    _code << indent << "const GLfloat i" << _vIndex << "[" << (4) << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
+    _code << indent << "const GLfloat i" << _vIndex << "[" << 4 << "] = " << array<GLfloat,const char * const>(v,4,"","{ "," };",", ") << "\n";
     _code << indent << "glTexCoord4fVertex4fvSUN(";
                    _code << "i" << _tcIndex;
     _code << ", "; _code << "i" << _vIndex;
@@ -49910,9 +49866,7 @@ void InitDispatchTableCode(DispatchTable &tbl)
   tbl.glGetTexGendv = code_glGetTexGendv;
   tbl.glGetTexGenfv = code_glGetTexGenfv;
   tbl.glGetTexGeniv = code_glGetTexGeniv;
-  tbl.glGetTexImage = code_glGetTexImage;
   tbl.glGetTexLevelParameterfv = code_glGetTexLevelParameterfv;
-  tbl.glGetTexLevelParameteriv = code_glGetTexLevelParameteriv;
   tbl.glGetTexParameterfv = code_glGetTexParameterfv;
   tbl.glGetTexParameteriv = code_glGetTexParameteriv;
   tbl.glHint = code_glHint;
