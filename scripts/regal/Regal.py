@@ -54,6 +54,13 @@ ${REGAL_SYS}
 #  define REGAL_DECL
 #endif
 
+/* Plugins need the GL API as externs with plugin_ prefix */
+
+#ifdef REGAL_PLUGIN_MODE
+#undef  REGAL_DECL
+#define REGAL_DECL extern
+#endif
+
 #endif /* __REGAL_DECLARATIONS_H */
 
 #ifndef __${HEADER_NAME}_H__
@@ -206,7 +213,7 @@ def generatePublicHeader(apis, args):
 def apiFuncDefineCode(apis, args):
 
   # Build a dict of default typedef values
-  
+
   defaults = {}
   for api in apis:
     for typedef in api.typedefs:
@@ -218,7 +225,7 @@ def apiFuncDefineCode(apis, args):
   defaults['HGLRC'] = 'NULL';
 
   #
-  
+
   code = ''
   for api in apis:
 
@@ -259,7 +266,7 @@ def apiFuncDefineCode(apis, args):
               c += ' NULL;\n'
             else:
               c += ' (%s) 0;\n' % ( rTypes )
- 
+
         c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
 
         if getattr(function,'regalRemap',None)!=None and (isinstance(function.regalRemap, list) or isinstance(function.regalRemap, str) or isinstance(function.regalRemap, unicode)):
@@ -443,6 +450,7 @@ def apiFuncDeclareCode(apis, args):
     t = [] # function pointer typedefs
     m = [] # mangled names for REGAL_NAMESPACE support
     f = [] # gl names
+    p = [] # plugin names for REGAL_PLUGIN_MODE support
 
     for enum in api.enums:
       if enum.name == 'defines':
@@ -474,6 +482,7 @@ def apiFuncDeclareCode(apis, args):
       t.append((category,funcProtoCode(function, version, 'REGAL_CALL', True)))
       m.append((category,'#define %-35s r%-35s' % (name, name) ))
       f.append((category,'REGAL_DECL %sREGAL_CALL %s(%s);' % (rType, name, params) ))
+      p.append((category,'REGAL_DECL %sREGAL_CALL plugin_%s(%s);' % (rType, name, params) ))
 
     def cmpEnum(a,b):
       if a[0]==b[0]:
@@ -494,6 +503,9 @@ def apiFuncDeclareCode(apis, args):
     def namespaceIfDef(category):
       return '#ifndef REGAL_NO_NAMESPACE_%s'%(upper(category).replace(' ','_'))
 
+    def pluginIfDef(category):
+      return '#ifndef REGAL_NO_PLUGIN_%s'%(upper(category).replace(' ','_'))
+
     def declarationIfDef(category):
       return '#ifndef REGAL_NO_DECLARATION_%s'%(upper(category).replace(' ','_'))
 
@@ -501,6 +513,7 @@ def apiFuncDeclareCode(apis, args):
     categories.update([ i[0] for i in e ])
     categories.update([ i[0] for i in t ])
     categories.update([ i[0] for i in m ])
+    categories.update([ i[0] for i in p ])
     categories.update([ i[0] for i in f ])
 
     for i in categories:
@@ -519,6 +532,11 @@ def apiFuncDeclareCode(apis, args):
 
         d.append((i,'#if (defined(%s) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_%s)) && !defined(REGAL_NO_NAMESPACE_%s)'%(cat,cat,cat)))
         d.append((i,'#define REGAL_NO_NAMESPACE_%s'%(cat)))
+        d.append((i,'#endif'))
+        d.append((i,''))
+
+        d.append((i,'#if (defined(%s) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_%s)) && !defined(REGAL_NO_PLUGIN_%s)'%(cat,cat,cat)))
+        d.append((i,'#define REGAL_NO_PLUGIN_%s'%(cat)))
         d.append((i,'#endif'))
         d.append((i,''))
 
@@ -549,10 +567,15 @@ def apiFuncDeclareCode(apis, args):
     f = ifCategory(f,declarationIfDef)
     f = spaceCategory(f)
 
+    p.sort()
+    p = ifCategory(p,pluginIfDef)
+    p = spaceCategory(p)
+
     d.extend(e)
     d.extend(t)
     d.extend(m)
     d.extend(f)
+    d.extend(p)
 
     tmp = listToString(unfoldCategory(d,'/**\n ** %s\n **/',lambda x,y: cmp(x[0], y[0])))
 
@@ -632,6 +655,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPush.h"
 #include "RegalToken.h"
 #include "RegalState.h"
+#include "RegalClientState.h"
 #include "RegalHelper.h"
 #include "RegalPrivate.h"
 #include "RegalDebugInfo.h"

@@ -184,19 +184,31 @@ RegalContext::Init()
     #if REGAL_EMU_FILTER
     if (Config::enableEmuFilter || Config::forceEmuFilter || REGAL_FORCE_EMU_FILTER)
     {
-      if (info->es2)
+      if (!info->gl_ext_blend_color)
       {
         Internal("RegalContext::Init ","GL_EXT_blend_color");
-        Internal("RegalContext::Init ","GL_EXT_blend_subtract");
-        Internal("RegalContext::Init ","GL_NV_blend_square");
         info->regal_ext_blend_color = true;
-        info->regal_ext_blend_subtract = true;
-        info->regal_nv_blend_square = true;
         info->regalExtensionsSet.insert("GL_EXT_blend_color");
-        info->regalExtensionsSet.insert("GL_EXT_blend_subtract");
-        info->regalExtensionsSet.insert("GL_NV_blend_square");
-        info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       }
+      if (!info->gl_ext_blend_subtract)
+      {
+        Internal("RegalContext::Init ","GL_EXT_blend_subtract");
+        info->regal_ext_blend_subtract = true;
+        info->regalExtensionsSet.insert("GL_EXT_blend_subtract");
+      }
+      if (!info->gl_ext_framebuffer_object)
+      {
+        Internal("RegalContext::Init ","GL_EXT_framebuffer_object");
+        info->regal_ext_framebuffer_object = true;
+        info->regalExtensionsSet.insert("GL_EXT_framebuffer_object");
+      }
+      if (!info->gl_nv_blend_square)
+      {
+        Internal("RegalContext::Init ","GL_NV_blend_square");
+        info->regal_nv_blend_square = true;
+        info->regalExtensionsSet.insert("GL_NV_blend_square");
+      }
+      info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       filt = new Emu::Filt;
       emuLevel = 0;
       filt->Init(*this);
@@ -253,9 +265,12 @@ RegalContext::Init()
     #if REGAL_EMU_TEXSTO
     if (Config::enableEmuTexSto || Config::forceEmuTexSto || REGAL_FORCE_EMU_TEXSTO)
     {
-      Internal("RegalContext::Init ","GL_ARB_texture_storage");
-      info->regal_arb_texture_storage = true;
-      info->regalExtensionsSet.insert("GL_ARB_texture_storage");
+      if (!info->gl_arb_texture_storage)
+      {
+        Internal("RegalContext::Init ","GL_ARB_texture_storage");
+        info->regal_arb_texture_storage = true;
+        info->regalExtensionsSet.insert("GL_ARB_texture_storage");
+      }
       info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       texsto = new Emu::TexSto;
       emuLevel = 7;
@@ -265,9 +280,12 @@ RegalContext::Init()
     #if REGAL_EMU_DSA
     if (Config::enableEmuDsa || Config::forceEmuDsa || REGAL_FORCE_EMU_DSA)
     {
-      Internal("RegalContext::Init ","GL_EXT_direct_state_access");
-      info->regal_ext_direct_state_access = true;
-      info->regalExtensionsSet.insert("GL_EXT_direct_state_access");
+      if (!info->gl_ext_direct_state_access)
+      {
+        Internal("RegalContext::Init ","GL_EXT_direct_state_access");
+        info->regal_ext_direct_state_access = true;
+        info->regalExtensionsSet.insert("GL_EXT_direct_state_access");
+      }
       info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       dsa = new Emu::Dsa;
       emuLevel = 8;

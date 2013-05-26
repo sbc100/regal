@@ -29,7 +29,7 @@ formulae = {
   },
 
   # WGL
-  
+
   'wglCreateContextAttribsARB' : {
     'entries' : [ 'wglCreateContextAttribsARB' ],
     'suffix' : [
@@ -44,5 +44,5 @@ formulae = {
       'if (ret && hglrcShare && hglrcSrc)',
       '  Init::shareContext(hglrcShare,hglrcSrc);'
     ]
-  },  
+  },
 }

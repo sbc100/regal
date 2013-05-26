@@ -41,6 +41,7 @@ class Extension:
     self.category   = ''
     self.functions  = []        # function names
     self.enumerants = []        # enumerant names
+    self.emulatedBy = ''        # Regal emulation layer that adds support for this extension
 
 class Function:
 

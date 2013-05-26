@@ -108,7 +108,7 @@ struct BaseVertex
     return false;
   }
 
-  bool glMultiDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei *count, GLenum type, GLvoid **indices, GLsizei primcount, GLint *basevertex)
+  bool glMultiDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const* indices, GLsizei primcount, const GLint *basevertex)
   {
     UNUSED_PARAMETER(ctx);
     UNUSED_PARAMETER(mode);

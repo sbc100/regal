@@ -124,6 +124,13 @@
 #define REGAL_DECL_EXPORT 1
 #endif
 
+// Support for "plugin" dispatch or emulation layers by default.
+// Some features require this, otherwise: -DREGAL_PLUGIN=0
+
+#ifndef REGAL_PLUGIN
+#define REGAL_PLUGIN 1
+#endif
+
 // Compile-time configuration
 // - Emulation not forced by default
 // - All emulation layers enabled by default
@@ -225,6 +232,10 @@
 #define REGAL_EMU_RECT 1
 #endif
 
+#ifndef REGAL_EMU_BASEVERTEX
+#define REGAL_EMU_BASEVERTEX 1
+#endif
+
 #ifndef REGAL_EMU_IFF
 #define REGAL_EMU_IFF 1
 #endif
@@ -281,6 +292,10 @@
 
 #ifndef REGAL_FORCE_EMU_RECT
 #define REGAL_FORCE_EMU_RECT 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_BASEVERTEX
+#define REGAL_FORCE_EMU_BASEVERTEX 0
 #endif
 
 #ifndef REGAL_FORCE_EMU_IFF

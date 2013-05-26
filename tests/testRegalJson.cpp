@@ -159,4 +159,23 @@ TEST( RegalJson, Trace )
   EXPECT_EQ(state0,json());
 }
 
+TEST( RegalJson, BaseVertex )
+{
+  const string state0 = json();
+
+  const char *baseVertexTrue  = "{ \"regal\" : { \"config\" : { \"dispatch\" : { \"emulation\" : { \"enable\" : { \"bv\" : true } } } } } }";
+  const char *baseVertexFalse = "{ \"regal\" : { \"config\" : { \"dispatch\" : { \"emulation\" : { \"enable\" : { \"bv\" : false } } } } } }";
+
+  RegalConfigure(baseVertexTrue);
+  EXPECT_EQ(Config::enableEmuBaseVertex,true);
+
+  RegalConfigure(baseVertexFalse);
+  EXPECT_EQ(Config::enableEmuBaseVertex,false);
+
+  // Reset to state0
+
+  RegalConfigure(state0.c_str());
+  EXPECT_EQ(state0,json());
+}
+
 }

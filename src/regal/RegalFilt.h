@@ -82,11 +82,15 @@ namespace Emu {
         params[0] = T(retVal);
     }
 
+    void FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment,
+                              GLenum textarget, GLuint texture, GLint level);
+    void GenerateMipmap(const RegalContext &ctx, GLenum target);
     void PolygonMode (const RegalContext &ctx, GLenum face, GLenum mode);
     void RenderMode  (const RegalContext &ctx, GLenum mode);
     void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLint   param);
     void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param);
     void PixelStorei (const RegalContext &ctx, GLenum pname, GLint param);
+    bool FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment);
 
     void FilterGet   (const RegalContext &ctx, GLenum pname);
 

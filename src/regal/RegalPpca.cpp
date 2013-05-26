@@ -738,22 +738,23 @@ void Ppca::Init( RegalContext& ctx )
 {
   Reset();
 
-  RegalAssert( ctx.dispatcher.driver.glGetIntegerv );
+  PFNGLGETINTEGERVPROC getIntegerv = ctx.dispatcher.emulation.call(&ctx.dispatcher.emulation.glGetIntegerv);
+  RegalAssert(getIntegerv);
 
-  if ( !ctx.info->es2 ) {
-    ctx.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, reinterpret_cast<GLint *>( &capabilities.maxVertexAttribRelativeOffset ) );
+  if ( ctx.info->gl_arb_vertex_attrib_binding && !ctx.info->es2)
+  {
+    getIntegerv( GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, reinterpret_cast<GLint *>( &capabilities.maxVertexAttribRelativeOffset ) );
+    getIntegerv( GL_MAX_VERTEX_ATTRIB_BINDINGS, reinterpret_cast<GLint *>( &capabilities.maxVertexAttribBindings ) );
   }
-  if ( !ctx.info->es2 && !ctx.info->core ) {
-    ctx.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, reinterpret_cast<GLint *>( &capabilities.maxVertexTextureImageUnits ) );
-  }
+
+  if ( !ctx.info->es2 && !ctx.info->core )
+    getIntegerv( GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS, reinterpret_cast<GLint *>( &capabilities.maxVertexTextureImageUnits ) );
+
   capabilities.maxVertexAttribs = 0;
-  ctx.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>( &capabilities.maxVertexAttribs ) );
-  if ( !ctx.info->es2 ) {
-    ctx.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIB_BINDINGS, reinterpret_cast<GLint *>( &capabilities.maxVertexAttribBindings ) );
-  }
-  if ( !ctx.info->es2 && !ctx.info->core ) {
-    ctx.dispatcher.driver.glGetIntegerv( GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>( &capabilities.maxClientAttribStackDepth ) );
-  }
+  getIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>( &capabilities.maxVertexAttribs ) );
+
+  if ( !ctx.info->es2 && !ctx.info->core )
+    getIntegerv( GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>( &capabilities.maxClientAttribStackDepth ) );
 
   capabilities.maxVertexTextureImageUnits = std::min ( capabilities.maxVertexTextureImageUnits, static_cast<GLuint>( ClientState::VertexArray::Fixed::COUNT_TEXTURE_COORD_ATTRIBS ) );
   capabilities.maxVertexAttribs           = std::min ( capabilities.maxVertexAttribs,           static_cast<GLuint>( ClientState::VertexArray::Generic::COUNT_ATTRIBS ) );

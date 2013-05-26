@@ -33,6 +33,7 @@ from RegalSystem          import *
 from RegalContext         import *
 from RegalContextInfo     import *
 from RegalLookup          import *
+from RegalPlugin          import *
 from RegalToken           import *
 from RegalDispatch        import *
 from RegalDispatchCode    import *
@@ -153,6 +154,7 @@ def traverse(apis, args):
 def generate(apis, args):
 
   traverse(apis, args)
+  generatePluginHeader(apis,args)
   generateSource(apis, args)
   generateSystemHeader(apis, args)
   generateEmuSource( apis, args )

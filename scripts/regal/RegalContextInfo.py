@@ -53,12 +53,6 @@ struct ContextInfo
   std::string regalVersion;
   std::string regalExtensions;
 
-  bool        regal_ext_direct_state_access;
-  bool        regal_arb_texture_storage;
-  bool        regal_ext_blend_color;
-  bool        regal_ext_blend_subtract;
-  bool        regal_nv_blend_square;
-
   std::set<std::string> regalExtensionsSet;
 
   // As supported by the OpenGL implementation
@@ -105,11 +99,7 @@ using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 
 ContextInfo::ContextInfo()
-: regal_ext_direct_state_access(false),
-  regal_arb_texture_storage(false),
-  regal_ext_blend_color(false),
-  regal_ext_blend_subtract(false),
-  regal_nv_blend_square(false),
+:
 ${VERSION_INIT}
   maxVertexAttribs(0),
   maxVaryings(0)
@@ -425,6 +415,9 @@ def versionDeclareCode(apis, args):
       code += '  GLboolean %s : 1;\n' % (c.lower())
     if name in cond:
       code += '#endif\n'
+    for ext in api.extensions:
+      if len(ext.emulatedBy):
+        code += '  GLboolean regal_%s : 1;\n' % (ext.name.lower()[3:])
     code += '\n'
 
   return code
@@ -463,6 +456,9 @@ def versionInitCode(apis, args):
       code += '  %s(false),\n' % (c.lower())
     if name in cond:
       code += '#endif\n'
+    for ext in api.extensions:
+      if len(ext.emulatedBy):
+        code += '  regal_%s(false),\n' % (ext.name.lower()[3:])
 
   return code
 
@@ -536,22 +532,20 @@ def getExtensionCode(apis, args):
   code += '\n'
 
   for api in apis:
+    emulatedExtensions = []
+
+    for extension in api.extensions:
+      if len(extension.emulatedBy):
+        emulatedExtensions.append(extension.name)
+
     name = api.name.lower()
     if name in cond:
       code += '#if %s\n'%cond[name]
     for c in sorted(api.categories):
       if c.startswith('GL_REGAL_') or c=='GL_EXT_debug_marker':
         code += '  if (!strcmp(ext,"%s")) return true;\n' % (c)
-      elif c=='GL_EXT_direct_state_access':
-        code += '  if (!strcmp(ext,"%s")) return regal_ext_direct_state_access || %s;\n' % (c,c.lower())
-      elif c=='GL_ARB_texture_storage':
-        code += '  if (!strcmp(ext,"%s")) return regal_arb_texture_storage || %s;\n' % (c,c.lower())
-      elif c=='GL_EXT_blend_color':
-        code += '  if (!strcmp(ext,"%s")) return regal_ext_blend_color || %s;\n' % (c,c.lower())
-      elif c=='GL_EXT_blend_subtract':
-        code += '  if (!strcmp(ext,"%s")) return regal_ext_blend_subtract || %s;\n' % (c,c.lower())
-      elif c=='GL_NV_blend_square':
-        code += '  if (!strcmp(ext,"%s")) return regal_nv_blend_square || %s;\n' % (c,c.lower())
+      elif c in emulatedExtensions:
+        code += '  if (!strcmp(ext,"%s")) return regal_%s || %s;\n' % (c,c.lower()[3:],c.lower())
       else:
         code += '  if (!strcmp(ext,"%s")) return %s;\n' % (c,c.lower())
     if name in cond:

@@ -112,7 +112,7 @@ def generateDispatchCode(apis, args):
 
         if function.name in exclude:
           continue
-      
+
         f = deepcopy(function)
 
         name = f.name

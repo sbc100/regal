@@ -106,6 +106,8 @@ formulae = {
   'filterArgs' : {
     'entries' : [
       'gl(BindTexture)',
+      'gl(FramebufferTexture2D)',
+      'gl(GenerateMipmap)',
       'gl(Get)(Boolean|Double|Float|Integer|Integer64)v',
       'gl(PixelStorei)',
       'gl(PolygonMode)',
@@ -413,12 +415,78 @@ formulae = {
 # Force target = GL_FRAMEBUFFER for ES 2.0
 
   'glBindFramebuffer' : {
-    'entries' : [ 'glBindFramebuffer','glBindFramebufferEXT','glBindFramebufferOES' ],
+    'entries' : [ 'glBindFramebuffer','glBindFramebufferOES' ],
     'impl' : [
        'if (_context->isES2())',
        '{',
        '  const bool hasFBBlit = _context->info->gl_ext_framebuffer_blit || _context->info->gl_nv_framebuffer_blit || _context->info->gl_version_major >= 3;',
        '  if (!hasFBBlit && (target==GL_DRAW_FRAMEBUFFER || target==GL_READ_FRAMEBUFFER)) target = GL_FRAMEBUFFER;',
+       '}'
+     ]
+  },
+
+# Check for unsupported GL_COLOR_ATTACHMENT1+ on ES 2.0
+
+  'framebuffer_object_attachment' : {
+    'entries' : [ 'glFramebuffer(Texture1D|Texture3D|Renderbuffer)' ],
+    'impl' : [
+       'DispatchTable *_next = _context->dispatcher.emulation._next;',
+       'RegalAssert(_next);',
+       'if (_context->filt->FramebufferAttachmentSupported(*_context, ${arg1}))',
+       '  _next->call(&_next->glFramebuffer${m1})(${arg0plus});',
+       'return;'
+     ]
+  },
+
+# Check for unsupported GL_COLOR_ATTACHMENT1+ on ES 2.0
+# FIXME - also filter out FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET?
+
+  'glGetFramebufferAttachmentParameteriv' : {
+    'entries' : [ 'glGetFramebufferAttachmentParameteriv' ],
+    'impl' : [
+       'DispatchTable *_next = _context->dispatcher.emulation._next;',
+       'RegalAssert(_next);',
+       'if (!_context->filt->FramebufferAttachmentSupported(*_context, ${arg1}))',
+       '  *${arg3} = 0;',
+       'else',
+       '  _next->call(&_next->glGetFramebufferAttachmentParameteriv)(${arg0plus});',
+       'return;'
+     ]
+  },
+
+# http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt
+#
+# Note we deliberately call the target (non-extension) functions at the same
+# emulation level so that we can do any necessary parameter filtering in
+# fewer places.
+
+  'EXT_framebuffer_object' : {
+    'entries' : [ 'gl(BindRenderbuffer|DeleteRenderbuffers|GenRenderbuffers)EXT',
+                  'gl(GetRenderbufferParameteriv|RenderbufferStorage)EXT',
+                  'gl(DeleteFramebuffers|GenFramebuffers|BindFramebuffer)EXT',
+                  'gl(GenerateMipmap|GetFramebufferAttachmentParameteriv)EXT',
+                  'gl(FramebufferTexture1D|FramebufferTexture2D|FramebufferTexture3D)EXT',
+                  'gl(FramebufferRenderbuffer)EXT'
+    ],
+    'impl' : [
+       'if (!_context->info->gl_ext_framebuffer_object)',
+       '{',
+       '  DispatchTable &_table = _context->dispatcher.emulation;',
+       '  _context->emuLevel++;',
+       '  _table.call(&_table.gl${m1})(${arg0plus});',
+       '  return;',
+       '}'
+     ]
+  },
+
+  'EXT_framebuffer_object_returning' : {
+    'entries' : [ 'gl(CheckFramebufferStatus|IsFramebuffer|IsRenderbuffer)EXT' ],
+    'impl' : [
+       'if (!_context->info->gl_ext_framebuffer_object)',
+       '{',
+       '  DispatchTable &_table = _context->dispatcher.emulation;',
+       '  _context->emuLevel++;',
+       '  return _table.call(&_table.gl${m1})(${arg0plus});',
        '}'
      ]
   },

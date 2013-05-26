@@ -1,6 +1,6 @@
 /*
-  Copyright (c) 2011-2012 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
   Copyright (c) 2012 Nigel Stewart
@@ -53,64 +53,66 @@ namespace Config {
 
   ::std::string configFile("");  // Don't read/write configuration by default
 
-  bool forceES1Profile  = REGAL_FORCE_ES1_PROFILE;
-  bool forceES2Profile  = REGAL_FORCE_ES2_PROFILE;
-  bool forceCoreProfile = REGAL_FORCE_CORE_PROFILE;
-  bool sysES1           = REGAL_SYS_ES1;
-  bool sysES2           = REGAL_SYS_ES2;
-  bool sysGL            = REGAL_SYS_GL;
-  bool sysGLX           = REGAL_SYS_GLX;
-  bool sysEGL           = REGAL_SYS_EGL && !REGAL_SYS_GLX;
-  bool forceEmulation   = REGAL_FORCE_EMULATION;
-  bool enableEmulation  = REGAL_EMULATION;
-  bool enableTrace      = false;
-  bool enableDebug      = false;
-  bool enableError      = false;
-  bool enableCode       = false;
-  bool enableLog        = REGAL_LOG;
-  bool enableDriver     = REGAL_DRIVER;
+  bool forceES1Profile     = REGAL_FORCE_ES1_PROFILE;
+  bool forceES2Profile     = REGAL_FORCE_ES2_PROFILE;
+  bool forceCoreProfile    = REGAL_FORCE_CORE_PROFILE;
+  bool sysES1              = REGAL_SYS_ES1;
+  bool sysES2              = REGAL_SYS_ES2;
+  bool sysGL               = REGAL_SYS_GL;
+  bool sysGLX              = REGAL_SYS_GLX;
+  bool sysEGL              = REGAL_SYS_EGL && !REGAL_SYS_GLX;
+  bool forceEmulation      = REGAL_FORCE_EMULATION;
+  bool enableEmulation     = REGAL_EMULATION;
+  bool enableTrace         = false;
+  bool enableDebug         = false;
+  bool enableError         = false;
+  bool enableCode          = false;
+  bool enableLog           = REGAL_LOG;
+  bool enableDriver        = REGAL_DRIVER;
 
-  bool enableEmuPpa     = REGAL_EMU_PPA;
-  bool enableEmuPpca    = REGAL_EMU_PPCA;
-  bool enableEmuObj     = REGAL_EMU_OBJ;
-  bool enableEmuBin     = REGAL_EMU_BIN;
-  bool enableEmuTexSto  = REGAL_EMU_TEXSTO;
-  bool enableEmuXfer    = REGAL_EMU_XFER;
-  bool enableEmuDsa     = REGAL_EMU_DSA;
-  bool enableEmuRect    = REGAL_EMU_RECT;
-  bool enableEmuIff     = REGAL_EMU_IFF;
-  bool enableEmuSo      = REGAL_EMU_SO;
-  bool enableEmuVao     = REGAL_EMU_VAO;
-  bool enableEmuFilter  = REGAL_EMU_FILTER;
-  bool enableEmuTexC    = REGAL_EMU_TEXC;
+  bool enableEmuPpa        = REGAL_EMU_PPA;
+  bool enableEmuPpca       = REGAL_EMU_PPCA;
+  bool enableEmuObj        = REGAL_EMU_OBJ;
+  bool enableEmuBin        = REGAL_EMU_BIN;
+  bool enableEmuTexSto     = REGAL_EMU_TEXSTO;
+  bool enableEmuXfer       = REGAL_EMU_XFER;
+  bool enableEmuDsa        = REGAL_EMU_DSA;
+  bool enableEmuRect       = REGAL_EMU_RECT;
+  bool enableEmuBaseVertex = REGAL_EMU_BASEVERTEX;
+  bool enableEmuIff        = REGAL_EMU_IFF;
+  bool enableEmuSo         = REGAL_EMU_SO;
+  bool enableEmuVao        = REGAL_EMU_VAO;
+  bool enableEmuFilter     = REGAL_EMU_FILTER;
+  bool enableEmuTexC       = REGAL_EMU_TEXC;
 
-  bool forceEmuPpa      = REGAL_FORCE_EMU_PPA;
-  bool forceEmuPpca     = REGAL_FORCE_EMU_PPCA;
-  bool forceEmuObj      = REGAL_FORCE_EMU_OBJ;
-  bool forceEmuBin      = REGAL_FORCE_EMU_BIN;
-  bool forceEmuTexSto   = REGAL_FORCE_EMU_TEXSTO;
-  bool forceEmuXfer     = REGAL_FORCE_EMU_XFER;
-  bool forceEmuDsa      = REGAL_FORCE_EMU_DSA;
-  bool forceEmuRect     = REGAL_FORCE_EMU_RECT;
-  bool forceEmuIff      = REGAL_FORCE_EMU_IFF;
-  bool forceEmuSo       = REGAL_FORCE_EMU_SO;
-  bool forceEmuVao      = REGAL_FORCE_EMU_VAO;
-  bool forceEmuFilter   = REGAL_FORCE_EMU_FILTER;
-  bool forceEmuTexC     = REGAL_FORCE_EMU_TEXC;
+  bool forceEmuPpa         = REGAL_FORCE_EMU_PPA;
+  bool forceEmuPpca        = REGAL_FORCE_EMU_PPCA;
+  bool forceEmuObj         = REGAL_FORCE_EMU_OBJ;
+  bool forceEmuBin         = REGAL_FORCE_EMU_BIN;
+  bool forceEmuTexSto      = REGAL_FORCE_EMU_TEXSTO;
+  bool forceEmuXfer        = REGAL_FORCE_EMU_XFER;
+  bool forceEmuDsa         = REGAL_FORCE_EMU_DSA;
+  bool forceEmuRect        = REGAL_FORCE_EMU_RECT;
+  bool forceEmuBaseVertex  = REGAL_FORCE_EMU_BASEVERTEX;
+  bool forceEmuIff         = REGAL_FORCE_EMU_IFF;
+  bool forceEmuSo          = REGAL_FORCE_EMU_SO;
+  bool forceEmuVao         = REGAL_FORCE_EMU_VAO;
+  bool forceEmuFilter      = REGAL_FORCE_EMU_FILTER;
+  bool forceEmuTexC        = REGAL_FORCE_EMU_TEXC;
 
-  int  frameLimit       = 0;  // Unlimited
+  int  frameLimit          = 0;  // Unlimited
 
-  bool frameMd5Color    = false;
-  bool frameMd5Stencil  = false;
-  bool frameMd5Depth    = false;
+  bool frameMd5Color       = false;
+  bool frameMd5Stencil     = false;
+  bool frameMd5Depth       = false;
 
   unsigned char frameMd5ColorMask   = std::numeric_limits<unsigned char>::max();
   unsigned char frameMd5StencilMask = std::numeric_limits<unsigned char>::max();
   size_t        frameMd5DepthMask   = std::numeric_limits<size_t       >::max();
 
-  bool frameSaveColor   = false;
-  bool frameSaveStencil = false;
-  bool frameSaveDepth   = false;
+  bool frameSaveColor             = false;
+  bool frameSaveStencil           = false;
+  bool frameSaveDepth             = false;
 
   bool          cache             = REGAL_CACHE;
   bool          cacheShader       = false;
@@ -271,6 +273,11 @@ namespace Config {
     if (tmp) enableEmuRect = atoi(tmp)!=0;
 #endif
 
+#if REGAL_EMU_BASEVERTEX
+    tmp = GetEnv( "REGAL_EMU_BASEVERTEX" );
+    if (tmp) enableEmuBaseVertex = atoi(tmp)!=0;
+#endif
+
 #if REGAL_EMU_IFF
     tmp = GetEnv( "REGAL_EMU_IFF" );
     if (tmp) enableEmuIff = atoi(tmp)!=0;
@@ -336,6 +343,11 @@ namespace Config {
 #if REGAL_EMU_RECT
     tmp = GetEnv( "REGAL_FORCE_EMU_RECT" );
     if (tmp) forceEmuRect = atoi(tmp)!=0;
+#endif
+
+#if REGAL_EMU_BASEVERTEX
+    tmp = GetEnv( "REGAL_FORCE_EMU_BASEVERTEX" );
+    if (tmp) forceEmuBaseVertex = atoi(tmp)!=0;
 #endif
 
 #if REGAL_EMU_IFF
@@ -467,95 +479,97 @@ namespace Config {
 #endif
 
 #if REGAL_SYS_ES1
-    Info("REGAL_FORCE_ES1_PROFILE   ", forceES1Profile  ? "enabled" : "disabled");
+    Info("REGAL_FORCE_ES1_PROFILE   ", forceES1Profile     ? "enabled" : "disabled");
 #endif
 
 #if REGAL_SYS_ES2
-    Info("REGAL_FORCE_ES2_PROFILE   ", forceES2Profile  ? "enabled" : "disabled");
+    Info("REGAL_FORCE_ES2_PROFILE   ", forceES2Profile     ? "enabled" : "disabled");
 #endif
 
-    Info("REGAL_FORCE_CORE_PROFILE  ", forceCoreProfile ? "enabled" : "disabled");
+    Info("REGAL_FORCE_CORE_PROFILE  ", forceCoreProfile    ? "enabled" : "disabled");
 
 #if REGAL_SYS_ES1
-    Info("REGAL_SYS_ES1             ", sysES1           ? "enabled" : "disabled");
+    Info("REGAL_SYS_ES1             ", sysES1              ? "enabled" : "disabled");
 #endif
 
 #if REGAL_SYS_ES2
-    Info("REGAL_SYS_ES2             ", sysES2           ? "enabled" : "disabled");
+    Info("REGAL_SYS_ES2             ", sysES2              ? "enabled" : "disabled");
 #endif
 
 #if REGAL_SYS_GL
-    Info("REGAL_SYS_GL              ", sysGL            ? "enabled" : "disabled");
+    Info("REGAL_SYS_GL              ", sysGL               ? "enabled" : "disabled");
 #endif
 
 #if REGAL_SYS_GLX
-    Info("REGAL_SYS_GLX             ", sysGLX           ? "enabled" : "disabled");
+    Info("REGAL_SYS_GLX             ", sysGLX              ? "enabled" : "disabled");
 #endif
 
 #if REGAL_SYS_EGL
-    Info("REGAL_SYS_EGL             ", sysEGL           ? "enabled" : "disabled");
+    Info("REGAL_SYS_EGL             ", sysEGL              ? "enabled" : "disabled");
 #endif
 
-    Info("REGAL_FORCE_EMULATION     ", forceEmulation   ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMULATION     ", forceEmulation      ? "enabled" : "disabled");
 #if REGAL_TRACE
-    Info("REGAL_TRACE               ", enableTrace      ? "enabled" : "disabled");
+    Info("REGAL_TRACE               ", enableTrace         ? "enabled" : "disabled");
 #endif
-    Info("REGAL_DEBUG               ", enableDebug      ? "enabled" : "disabled");
-    Info("REGAL_ERROR               ", enableError      ? "enabled" : "disabled");
+    Info("REGAL_DEBUG               ", enableDebug         ? "enabled" : "disabled");
+    Info("REGAL_ERROR               ", enableError         ? "enabled" : "disabled");
 #if REGAL_CODE
-    Info("REGAL_CODE                ", enableCode       ? "enabled" : "disabled");
+    Info("REGAL_CODE                ", enableCode          ? "enabled" : "disabled");
 #endif
-    Info("REGAL_EMULATION           ", enableEmulation  ? "enabled" : "disabled");
-    Info("REGAL_LOG                 ", enableLog        ? "enabled" : "disabled");
-    Info("REGAL_DRIVER              ", enableDriver     ? "enabled" : "disabled");
+    Info("REGAL_EMULATION           ", enableEmulation     ? "enabled" : "disabled");
+    Info("REGAL_LOG                 ", enableLog           ? "enabled" : "disabled");
+    Info("REGAL_DRIVER              ", enableDriver        ? "enabled" : "disabled");
 
-    Info("REGAL_EMU_PPA             ", enableEmuPpa     ? "enabled" : "disabled");
-    Info("REGAL_EMU_PPCA            ", enableEmuPpca    ? "enabled" : "disabled");
-    Info("REGAL_EMU_OBJ             ", enableEmuObj     ? "enabled" : "disabled");
-    Info("REGAL_EMU_BIN             ", enableEmuBin     ? "enabled" : "disabled");
-    Info("REGAL_EMU_TEXSTO          ", enableEmuTexSto  ? "enabled" : "disabled");
-    Info("REGAL_EMU_XFER            ", enableEmuXfer    ? "enabled" : "disabled");
-    Info("REGAL_EMU_DSA             ", enableEmuDsa     ? "enabled" : "disabled");
-    Info("REGAL_EMU_RECT            ", enableEmuRect    ? "enabled" : "disabled");
-    Info("REGAL_EMU_IFF             ", enableEmuIff     ? "enabled" : "disabled");
-    Info("REGAL_EMU_SO              ", enableEmuSo      ? "enabled" : "disabled");
-    Info("REGAL_EMU_VAO             ", enableEmuVao     ? "enabled" : "disabled");
-    Info("REGAL_EMU_FILTER          ", enableEmuFilter  ? "enabled" : "disabled");
-    Info("REGAL_EMU_TEXC            ", enableEmuTexC    ? "enabled" : "disabled");
+    Info("REGAL_EMU_PPA             ", enableEmuPpa        ? "enabled" : "disabled");
+    Info("REGAL_EMU_PPCA            ", enableEmuPpca       ? "enabled" : "disabled");
+    Info("REGAL_EMU_OBJ             ", enableEmuObj        ? "enabled" : "disabled");
+    Info("REGAL_EMU_BIN             ", enableEmuBin        ? "enabled" : "disabled");
+    Info("REGAL_EMU_TEXSTO          ", enableEmuTexSto     ? "enabled" : "disabled");
+    Info("REGAL_EMU_XFER            ", enableEmuXfer       ? "enabled" : "disabled");
+    Info("REGAL_EMU_DSA             ", enableEmuDsa        ? "enabled" : "disabled");
+    Info("REGAL_EMU_RECT            ", enableEmuRect       ? "enabled" : "disabled");
+    Info("REGAL_EMU_BASEVERTEX      ", enableEmuBaseVertex ? "enabled" : "disabled");
+    Info("REGAL_EMU_IFF             ", enableEmuIff        ? "enabled" : "disabled");
+    Info("REGAL_EMU_SO              ", enableEmuSo         ? "enabled" : "disabled");
+    Info("REGAL_EMU_VAO             ", enableEmuVao        ? "enabled" : "disabled");
+    Info("REGAL_EMU_FILTER          ", enableEmuFilter     ? "enabled" : "disabled");
+    Info("REGAL_EMU_TEXC            ", enableEmuTexC       ? "enabled" : "disabled");
 
-    Info("REGAL_FORCE_EMU_PPA       ", forceEmuPpa      ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_PPCA      ", forceEmuPpca     ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_OBJ       ", forceEmuObj      ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_BIN       ", forceEmuBin      ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_TEXSTO    ", forceEmuTexSto   ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_XFER      ", forceEmuXfer     ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_DSA       ", forceEmuDsa      ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_RECT      ", forceEmuRect     ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_IFF       ", forceEmuIff      ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_SO        ", forceEmuSo       ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_VAO       ", forceEmuVao      ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_FILTER    ", forceEmuFilter   ? "enabled" : "disabled");
-    Info("REGAL_FORCE_EMU_TEXC      ", forceEmuTexC     ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_PPA       ", forceEmuPpa         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_PPCA      ", forceEmuPpca        ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_OBJ       ", forceEmuObj         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_BIN       ", forceEmuBin         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_TEXSTO    ", forceEmuTexSto      ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_XFER      ", forceEmuXfer        ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_DSA       ", forceEmuDsa         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_RECT      ", forceEmuRect        ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_BASEVERTEX", forceEmuBaseVertex  ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_IFF       ", forceEmuIff         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_SO        ", forceEmuSo          ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_VAO       ", forceEmuVao         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_FILTER    ", forceEmuFilter      ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_TEXC      ", forceEmuTexC        ? "enabled" : "disabled");
 
-    Info("REGAL_FRAME_LIMIT         ", frameLimit                               );
+    Info("REGAL_FRAME_LIMIT         ", frameLimit                                  );
 
-    Info("REGAL_MD5_COLOR           ", frameMd5Color    ? "enabled" : "disabled");
-    Info("REGAL_MD5_STENCIL         ", frameMd5Stencil  ? "enabled" : "disabled");
-    Info("REGAL_MD5_DEPTH           ", frameMd5Depth    ? "enabled" : "disabled");
+    Info("REGAL_MD5_COLOR           ", frameMd5Color       ? "enabled" : "disabled");
+    Info("REGAL_MD5_STENCIL         ", frameMd5Stencil     ? "enabled" : "disabled");
+    Info("REGAL_MD5_DEPTH           ", frameMd5Depth       ? "enabled" : "disabled");
 
-    Info("REGAL_SAVE_COLOR          ", frameSaveColor   ? "enabled" : "disabled");
-    Info("REGAL_SAVE_STENCIL        ", frameSaveStencil ? "enabled" : "disabled");
-    Info("REGAL_SAVE_DEPTH          ", frameSaveDepth   ? "enabled" : "disabled");
+    Info("REGAL_SAVE_COLOR          ", frameSaveColor      ? "enabled" : "disabled");
+    Info("REGAL_SAVE_STENCIL        ", frameSaveStencil    ? "enabled" : "disabled");
+    Info("REGAL_SAVE_DEPTH          ", frameSaveDepth      ? "enabled" : "disabled");
 
 #if REGAL_CACHE
-    Info("REGAL_CACHE               ", cache             ? "enabled" : "disabled");
-    Info("REGAL_CACHE_TEXTURE       ", cacheTexture      ? "enabled" : "disabled");
-    Info("REGAL_CACHE_TEXTURE_WRITE ", cacheTextureWrite ? "enabled" : "disabled");
+    Info("REGAL_CACHE               ", cache               ? "enabled" : "disabled");
+    Info("REGAL_CACHE_TEXTURE       ", cacheTexture        ? "enabled" : "disabled");
+    Info("REGAL_CACHE_TEXTURE_WRITE ", cacheTextureWrite   ? "enabled" : "disabled");
 #endif
 
 #if REGAL_CODE
-    Info("REGAL_CODE_SOURCE         ", codeSourceFile                            );
-    Info("REGAL_CODE_HEADER         ", codeHeaderFile                            );
+    Info("REGAL_CODE_SOURCE         ", codeSourceFile                              );
+    Info("REGAL_CODE_HEADER         ", codeHeaderFile                              );
 #endif
 
     Info("REGAL_THREAD_LOCKING      ", enableThreadLocking ? "enabled" : "disabled");
@@ -610,6 +624,7 @@ namespace Config {
             jo.member("xfer",   enableEmuXfer);
             jo.member("dsa",    enableEmuDsa);
             jo.member("rect",   enableEmuRect);
+            jo.member("bv",     enableEmuBaseVertex);
             jo.member("iff",    enableEmuIff);
             jo.member("so",     enableEmuSo);
             jo.member("vao",    enableEmuVao);
@@ -626,6 +641,7 @@ namespace Config {
             jo.member("xfer",   forceEmuXfer);
             jo.member("dsa",    forceEmuDsa);
             jo.member("rect",   forceEmuRect);
+            jo.member("bv",     forceEmuBaseVertex);
             jo.member("iff",    forceEmuIff);
             jo.member("so",     forceEmuSo);
             jo.member("vao",    forceEmuVao);

@@ -294,6 +294,7 @@
     <ClCompile Include="..\..\..\..\src\regal\RegalPixelConversions.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPixelConversions.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPixelConversions.inl" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalPlugin.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPpa.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPpc.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalPpca.cpp" />

@@ -104,6 +104,7 @@ Dispatcher::Dispatcher()
   push_back(missing,true);
 
   // Optionally move the error checking dispatch to downstream of emulation.
+  // This can be helpful for debugging Regal emulation
 
   #if defined(REGAL_ERROR_POST_EMU)
   if (erase(error))

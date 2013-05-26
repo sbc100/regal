@@ -78,7 +78,9 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
@@ -211,6 +213,7 @@ Parser::onPush(const string &name)
 
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE:
       if (name=="bin"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_BIN;   return; }
+      if (name=="bv"          ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_BV;    return; }
       if (name=="dsa"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_DSA;   return; }
       if (name=="filter"      ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_FILTER; return; }
       if (name=="iff"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_IFF;   return; }
@@ -227,6 +230,7 @@ Parser::onPush(const string &name)
 
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE:
       if (name=="bin"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_BIN;    return; }
+      if (name=="bv"          ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_BV;     return; }
       if (name=="dsa"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_DSA;    return; }
       if (name=="filter"      ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_FILTER; return; }
       if (name=="iff"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_IFF;    return; }
@@ -366,6 +370,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_CACHE_TEXTUREREAD               : { set_json_regal_config_cache_textureread(value);              return; }
     case JSON_REGAL_CONFIG_CACHE_TEXTUREWRITE              : { set_json_regal_config_cache_texturewrite(value);             return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_BIN   : { set_json_regal_config_dispatch_emulation_enable_bin(value);  return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_BV    : { set_json_regal_config_dispatch_emulation_enable_bv(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_DSA   : { set_json_regal_config_dispatch_emulation_enable_dsa(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_FILTER: { set_json_regal_config_dispatch_emulation_enable_filter(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_IFF   : { set_json_regal_config_dispatch_emulation_enable_iff(value);  return; }
@@ -379,6 +384,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_VAO   : { set_json_regal_config_dispatch_emulation_enable_vao(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_XFER  : { set_json_regal_config_dispatch_emulation_enable_xfer(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_BIN    : { set_json_regal_config_dispatch_emulation_force_bin(value);   return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_BV     : { set_json_regal_config_dispatch_emulation_force_bv(value);    return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_DSA    : { set_json_regal_config_dispatch_emulation_force_dsa(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_FILTER : { set_json_regal_config_dispatch_emulation_force_filter(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_IFF    : { set_json_regal_config_dispatch_emulation_force_iff(value);   return; }

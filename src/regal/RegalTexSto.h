@@ -62,7 +62,7 @@ namespace Emu {
   {
     void Init( RegalContext &ctx )
     {
-      UNUSED_PARAMETER(ctx); 
+      UNUSED_PARAMETER(ctx);
     }
 
     GLenum BindingFromTarget(GLenum target)
@@ -156,7 +156,7 @@ namespace Emu {
 
       GLint id;
       tbl.call(&tbl.glGetIntegerv)( BindingFromTarget(target), &id );
-      
+
       if (immutableTextures.find( id ) != immutableTextures.end())
         *params = static_cast<T>(GL_TRUE);
       else

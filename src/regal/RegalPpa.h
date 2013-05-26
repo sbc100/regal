@@ -59,14 +59,15 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-namespace Emu {
+namespace Emu
+{
 
 // Work in progress...
 
 struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transform, State::Hint,
-             State::Enable, State::List, State::AccumBuffer, State::Scissor, State::Viewport, State::Line,
-             State::Multisample, State::Eval, State::Fog, State::Point, State::PolygonStipple, State::ColorBuffer,
-             State::PixelMode, State::Lighting
+    State::Enable, State::List, State::AccumBuffer, State::Scissor, State::Viewport, State::Line,
+    State::Multisample, State::Eval, State::Fog, State::Point, State::PolygonStipple, State::ColorBuffer,
+    State::PixelMode, State::Lighting
 {
   void Init(RegalContext &ctx)
   {
@@ -595,7 +596,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         case GL_ACCUM_GREEN_BITS:
         case GL_ACCUM_BLUE_BITS:
         case GL_ACCUM_ALPHA_BITS:
-          if (params) {
+          if (params)
+          {
             params[0] = 32;
           }
           break;
@@ -606,13 +608,15 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         case GL_ALPHA_BITS:
         case GL_INDEX_BITS:
         case GL_STENCIL_BITS:
-          if (params) {
+          if (params)
+          {
             params[0] = 8;
           }
           break;
 
         case GL_DEPTH_BITS:
-          if (params) {
+          if (params)
+          {
             params[0] = 24;
           }
           break;
@@ -636,33 +640,69 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
 
     switch (pname)
     {
-      case GL_ACCUM_CLEAR_VALUE:               params[0] = static_cast<T>(State::AccumBuffer::clear[0]);
-                                               params[1] = static_cast<T>(State::AccumBuffer::clear[1]);
-                                               params[2] = static_cast<T>(State::AccumBuffer::clear[2]);
-                                               params[3] = static_cast<T>(State::AccumBuffer::clear[3]); break;
-      case GL_ALPHA_BIAS:                      params[0] = static_cast<T>(State::PixelMode::alphaBias); break;
-      case GL_ALPHA_SCALE:                     params[0] = static_cast<T>(State::PixelMode::alphaScale); break;
-      case GL_ALPHA_TEST_FUNC:                 params[0] = static_cast<T>(State::ColorBuffer::alphaTestFunc); break;
-      case GL_ALPHA_TEST_REF:                  params[0] = static_cast<T>(State::ColorBuffer::alphaTestRef); break;
-      case GL_BLEND_COLOR:                     params[0] = static_cast<T>(State::ColorBuffer::blendColor[0]);
-                                               params[1] = static_cast<T>(State::ColorBuffer::blendColor[1]);
-                                               params[2] = static_cast<T>(State::ColorBuffer::blendColor[2]);
-                                               params[3] = static_cast<T>(State::ColorBuffer::blendColor[3]); break;
-      case GL_BLUE_BIAS:                       params[0] = static_cast<T>(State::PixelMode::blueBias); break;
-      case GL_BLUE_SCALE:                      params[0] = static_cast<T>(State::PixelMode::blueScale); break;
-      case GL_CLAMP_FRAGMENT_COLOR:            params[0] = static_cast<T>(State::Enable::clampFragmentColor); break;
-      case GL_CLAMP_READ_COLOR:                params[0] = static_cast<T>(State::Enable::clampReadColor); break;
-      case GL_CLAMP_VERTEX_COLOR:              params[0] = static_cast<T>(State::Enable::clampVertexColor); break;
-      case GL_COLOR_CLEAR_VALUE:               params[0] = static_cast<T>(State::ColorBuffer::colorClearValue[0]);
-                                               params[1] = static_cast<T>(State::ColorBuffer::colorClearValue[1]);
-                                               params[2] = static_cast<T>(State::ColorBuffer::colorClearValue[2]);
-                                               params[3] = static_cast<T>(State::ColorBuffer::colorClearValue[3]); break;
-      case GL_COLOR_MATERIAL_FACE:             params[0] = static_cast<T>(State::Lighting::colorMaterialFace); break;
-      case GL_COLOR_MATERIAL_PARAMETER:        params[0] = static_cast<T>(State::Lighting::colorMaterialParameter); break;
-      case GL_CULL_FACE_MODE:                  params[0] = static_cast<T>(State::Polygon::cullFaceMode); break;
-      case GL_DEPTH_CLEAR_VALUE:               params[0] = static_cast<T>(State::Depth::clear); break;
-      case GL_DEPTH_FUNC:                      params[0] = static_cast<T>(State::Depth::func); break;
-      case GL_DEPTH_WRITEMASK:                 params[0] = static_cast<T>(State::Depth::mask); break;
+      case GL_ACCUM_CLEAR_VALUE:
+        params[0] = static_cast<T>(State::AccumBuffer::clear[0]);
+        params[1] = static_cast<T>(State::AccumBuffer::clear[1]);
+        params[2] = static_cast<T>(State::AccumBuffer::clear[2]);
+        params[3] = static_cast<T>(State::AccumBuffer::clear[3]);
+        break;
+      case GL_ALPHA_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::alphaBias);
+        break;
+      case GL_ALPHA_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::alphaScale);
+        break;
+      case GL_ALPHA_TEST_FUNC:
+        params[0] = static_cast<T>(State::ColorBuffer::alphaTestFunc);
+        break;
+      case GL_ALPHA_TEST_REF:
+        params[0] = static_cast<T>(State::ColorBuffer::alphaTestRef);
+        break;
+      case GL_BLEND_COLOR:
+        params[0] = static_cast<T>(State::ColorBuffer::blendColor[0]);
+        params[1] = static_cast<T>(State::ColorBuffer::blendColor[1]);
+        params[2] = static_cast<T>(State::ColorBuffer::blendColor[2]);
+        params[3] = static_cast<T>(State::ColorBuffer::blendColor[3]);
+        break;
+      case GL_BLUE_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::blueBias);
+        break;
+      case GL_BLUE_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::blueScale);
+        break;
+      case GL_CLAMP_FRAGMENT_COLOR:
+        params[0] = static_cast<T>(State::Enable::clampFragmentColor);
+        break;
+      case GL_CLAMP_READ_COLOR:
+        params[0] = static_cast<T>(State::Enable::clampReadColor);
+        break;
+      case GL_CLAMP_VERTEX_COLOR:
+        params[0] = static_cast<T>(State::Enable::clampVertexColor);
+        break;
+      case GL_COLOR_CLEAR_VALUE:
+        params[0] = static_cast<T>(State::ColorBuffer::colorClearValue[0]);
+        params[1] = static_cast<T>(State::ColorBuffer::colorClearValue[1]);
+        params[2] = static_cast<T>(State::ColorBuffer::colorClearValue[2]);
+        params[3] = static_cast<T>(State::ColorBuffer::colorClearValue[3]);
+        break;
+      case GL_COLOR_MATERIAL_FACE:
+        params[0] = static_cast<T>(State::Lighting::colorMaterialFace);
+        break;
+      case GL_COLOR_MATERIAL_PARAMETER:
+        params[0] = static_cast<T>(State::Lighting::colorMaterialParameter);
+        break;
+      case GL_CULL_FACE_MODE:
+        params[0] = static_cast<T>(State::Polygon::cullFaceMode);
+        break;
+      case GL_DEPTH_CLEAR_VALUE:
+        params[0] = static_cast<T>(State::Depth::clear);
+        break;
+      case GL_DEPTH_FUNC:
+        params[0] = static_cast<T>(State::Depth::func);
+        break;
+      case GL_DEPTH_WRITEMASK:
+        params[0] = static_cast<T>(State::Depth::mask);
+        break;
       case GL_DRAW_BUFFER0:
       case GL_DRAW_BUFFER1:
       case GL_DRAW_BUFFER2:
@@ -679,119 +719,291 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_DRAW_BUFFER13:
       case GL_DRAW_BUFFER14:
       case GL_DRAW_BUFFER15:
-        {
-          if (!State::ColorBuffer::fullyDefined())
-            State::ColorBuffer::getUndefined(ctx->dispatcher.emulation);
-          params[0] = static_cast<T>(State::ColorBuffer::drawBuffers[pname-GL_DRAW_BUFFER0]);
-        }
+      {
+        if (!State::ColorBuffer::fullyDefined())
+          State::ColorBuffer::getUndefined(ctx->dispatcher.emulation);
+        params[0] = static_cast<T>(State::ColorBuffer::drawBuffers[pname-GL_DRAW_BUFFER0]);
+      }
+      break;
+      case GL_FOG_COLOR:
+        params[0] = static_cast<T>(State::Fog::color[0]);
+        params[1] = static_cast<T>(State::Fog::color[1]);
+        params[2] = static_cast<T>(State::Fog::color[2]);
+        params[3] = static_cast<T>(State::Fog::color[3]);
         break;
-      case GL_FOG_COLOR:                       params[0] = static_cast<T>(State::Fog::color[0]);
-                                               params[1] = static_cast<T>(State::Fog::color[1]);
-                                               params[2] = static_cast<T>(State::Fog::color[2]);
-                                               params[3] = static_cast<T>(State::Fog::color[3]); break;
-      case GL_FOG_COORD_SRC:                   params[0] = static_cast<T>(State::Fog::coordSrc); break;
-      case GL_FOG_DENSITY:                     params[0] = static_cast<T>(State::Fog::density); break;
-      case GL_FOG_END:                         params[0] = static_cast<T>(State::Fog::end); break;
-      case GL_FOG_HINT:                        params[0] = static_cast<T>(State::Hint::fog); break;
-      case GL_FOG_INDEX:                       params[0] = static_cast<T>(State::Fog::index); break;
-      case GL_FOG_MODE:                        params[0] = static_cast<T>(State::Fog::mode); break;
-      case GL_FOG_START:                       params[0] = static_cast<T>(State::Fog::start); break;
-      case GL_FRAGMENT_SHADER_DERIVATIVE_HINT: params[0] = static_cast<T>(State::Hint::fragmentShaderDerivative); break;
-      case GL_FRONT_FACE:                      params[0] = static_cast<T>(State::Polygon::frontFace); break;
-      case GL_GENERATE_MIPMAP_HINT:            params[0] = static_cast<T>(State::Hint::generateMipmap); break;
-      case GL_GREEN_BIAS:                      params[0] = static_cast<T>(State::PixelMode::greenBias); break;
-      case GL_GREEN_SCALE:                     params[0] = static_cast<T>(State::PixelMode::greenScale); break;
-      case GL_INDEX_CLEAR_VALUE:               params[0] = static_cast<T>(State::ColorBuffer::indexClearValue); break;
-      case GL_INDEX_OFFSET:                    params[0] = static_cast<T>(State::PixelMode::indexOffset); break;
-      case GL_INDEX_SHIFT:                     params[0] = static_cast<T>(State::PixelMode::indexShift); break;
-      case GL_INDEX_WRITEMASK:                 params[0] = static_cast<T>(State::ColorBuffer::indexWritemask); break;
-      case GL_LIGHT_MODEL_AMBIENT:             params[0] = static_cast<T>(State::Lighting::lightModelAmbient[0]);
-                                               params[1] = static_cast<T>(State::Lighting::lightModelAmbient[1]);
-                                               params[2] = static_cast<T>(State::Lighting::lightModelAmbient[2]);
-                                               params[3] = static_cast<T>(State::Lighting::lightModelAmbient[3]); break;
-      case GL_LIGHT_MODEL_COLOR_CONTROL:       params[0] = static_cast<T>(State::Lighting::lightModelColorControl); break;
-      case GL_LIGHT_MODEL_LOCAL_VIEWER:        params[0] = static_cast<T>(State::Lighting::lightModelLocalViewer); break;
-      case GL_LIGHT_MODEL_TWO_SIDE:            params[0] = static_cast<T>(State::Lighting::lightModelTwoSide); break;
-      case GL_LINE_SMOOTH_HINT:                params[0] = static_cast<T>(State::Hint::lineSmooth); break;
-      case GL_LINE_STIPPLE_PATTERN:            params[0] = static_cast<T>(State::Line::stipplePattern); break;
-      case GL_LINE_STIPPLE_REPEAT:             params[0] = static_cast<T>(State::Line::stippleRepeat); break;
-      case GL_LINE_WIDTH:                      params[0] = static_cast<T>(State::Line::width); break;
-      case GL_LIST_BASE:                       params[0] = static_cast<T>(State::List::base); break;
-      case GL_LOGIC_OP_MODE:                   params[0] = static_cast<T>(State::ColorBuffer::logicOpMode); break;
-      case GL_MAP1_GRID_DOMAIN:                params[0] = static_cast<T>(State::Eval::map1GridDomain[0]);
-                                               params[1] = static_cast<T>(State::Eval::map1GridDomain[1]); break;
-      case GL_MAP1_GRID_SEGMENTS:              params[0] = static_cast<T>(State::Eval::map1GridSegments); break;
-      case GL_MAP2_GRID_DOMAIN:                params[0] = static_cast<T>(State::Eval::map2GridDomain[0]);
-                                               params[1] = static_cast<T>(State::Eval::map2GridDomain[1]);
-                                               params[2] = static_cast<T>(State::Eval::map2GridDomain[2]);
-                                               params[3] = static_cast<T>(State::Eval::map2GridDomain[3]); break;
-      case GL_MAP2_GRID_SEGMENTS:              params[0] = static_cast<T>(State::Eval::map2GridSegments[0]);
-                                               params[1] = static_cast<T>(State::Eval::map2GridSegments[1]); break;
-      case GL_MAP_COLOR:                       params[0] = static_cast<T>(State::PixelMode::mapColor); break;
-      case GL_MAP_STENCIL:                     params[0] = static_cast<T>(State::PixelMode::mapStencil); break;
-      case GL_MIN_SAMPLE_SHADING_VALUE:        params[0] = static_cast<T>(State::Multisample::minSampleShadingValue); break;
-      case GL_PERSPECTIVE_CORRECTION_HINT:     params[0] = static_cast<T>(State::Hint::perspectiveCorrection); break;
-      case GL_POINT_DISTANCE_ATTENUATION:      params[0] = static_cast<T>(State::Point::distanceAttenuation[0]);
-                                               params[1] = static_cast<T>(State::Point::distanceAttenuation[1]);
-                                               params[2] = static_cast<T>(State::Point::distanceAttenuation[2]); break;
-      case GL_POINT_FADE_THRESHOLD_SIZE:       params[0] = static_cast<T>(State::Point::fadeThresholdSize); break;
-      case GL_POINT_SIZE_MAX:                  params[0] = static_cast<T>(State::Point::sizeMax); break;
-      case GL_POINT_SIZE_MIN:                  params[0] = static_cast<T>(State::Point::sizeMin); break;
-      case GL_POINT_SIZE:                      params[0] = static_cast<T>(State::Point::size); break;
-      case GL_POINT_SMOOTH_HINT:               params[0] = static_cast<T>(State::Hint::pointSmooth); break;
-      case GL_POINT_SPRITE_COORD_ORIGIN:       params[0] = static_cast<T>(State::Point::spriteCoordOrigin); break;
-      case GL_POLYGON_MODE:                    params[0] = static_cast<T>(State::Polygon::mode[0]);
-                                               params[1] = static_cast<T>(State::Polygon::mode[1]); break;
-      case GL_POLYGON_OFFSET_FACTOR:           params[0] = static_cast<T>(State::Polygon::factor); break;
-      case GL_POLYGON_OFFSET_UNITS:            params[0] = static_cast<T>(State::Polygon::units); break;
-      case GL_POLYGON_SMOOTH_HINT:             params[0] = static_cast<T>(State::Hint::polygonSmooth); break;
-      case GL_POST_COLOR_MATRIX_ALPHA_BIAS:    params[0] = static_cast<T>(State::PixelMode::postColorMatrixAlphaBias); break;
-      case GL_POST_COLOR_MATRIX_ALPHA_SCALE:   params[0] = static_cast<T>(State::PixelMode::postColorMatrixAlphaScale); break;
-      case GL_POST_COLOR_MATRIX_BLUE_BIAS:     params[0] = static_cast<T>(State::PixelMode::postColorMatrixBlueBias); break;
-      case GL_POST_COLOR_MATRIX_BLUE_SCALE:    params[0] = static_cast<T>(State::PixelMode::postColorMatrixBlueScale); break;
-      case GL_POST_COLOR_MATRIX_GREEN_BIAS:    params[0] = static_cast<T>(State::PixelMode::postColorMatrixGreenBias); break;
-      case GL_POST_COLOR_MATRIX_GREEN_SCALE:   params[0] = static_cast<T>(State::PixelMode::postColorMatrixGreenScale); break;
-      case GL_POST_COLOR_MATRIX_RED_BIAS:      params[0] = static_cast<T>(State::PixelMode::postColorMatrixRedBias); break;
-      case GL_POST_COLOR_MATRIX_RED_SCALE:     params[0] = static_cast<T>(State::PixelMode::postColorMatrixRedScale); break;
-      case GL_POST_CONVOLUTION_ALPHA_BIAS:     params[0] = static_cast<T>(State::PixelMode::postConvolutionAlphaBias); break;
-      case GL_POST_CONVOLUTION_ALPHA_SCALE:    params[0] = static_cast<T>(State::PixelMode::postConvolutionAlphaScale); break;
-      case GL_POST_CONVOLUTION_BLUE_BIAS:      params[0] = static_cast<T>(State::PixelMode::postConvolutionBlueBias); break;
-      case GL_POST_CONVOLUTION_BLUE_SCALE:     params[0] = static_cast<T>(State::PixelMode::postConvolutionBlueScale); break;
-      case GL_POST_CONVOLUTION_GREEN_BIAS:     params[0] = static_cast<T>(State::PixelMode::postConvolutionGreenBias); break;
-      case GL_POST_CONVOLUTION_GREEN_SCALE:    params[0] = static_cast<T>(State::PixelMode::postConvolutionGreenScale); break;
-      case GL_POST_CONVOLUTION_RED_BIAS:       params[0] = static_cast<T>(State::PixelMode::postConvolutionRedBias); break;
-      case GL_POST_CONVOLUTION_RED_SCALE:      params[0] = static_cast<T>(State::PixelMode::postConvolutionRedScale); break;
-      case GL_PROVOKING_VERTEX:                params[0] = static_cast<T>(State::Lighting::provokingVertex); break;
+      case GL_FOG_COORD_SRC:
+        params[0] = static_cast<T>(State::Fog::coordSrc);
+        break;
+      case GL_FOG_DENSITY:
+        params[0] = static_cast<T>(State::Fog::density);
+        break;
+      case GL_FOG_END:
+        params[0] = static_cast<T>(State::Fog::end);
+        break;
+      case GL_FOG_HINT:
+        params[0] = static_cast<T>(State::Hint::fog);
+        break;
+      case GL_FOG_INDEX:
+        params[0] = static_cast<T>(State::Fog::index);
+        break;
+      case GL_FOG_MODE:
+        params[0] = static_cast<T>(State::Fog::mode);
+        break;
+      case GL_FOG_START:
+        params[0] = static_cast<T>(State::Fog::start);
+        break;
+      case GL_FRAGMENT_SHADER_DERIVATIVE_HINT:
+        params[0] = static_cast<T>(State::Hint::fragmentShaderDerivative);
+        break;
+      case GL_FRONT_FACE:
+        params[0] = static_cast<T>(State::Polygon::frontFace);
+        break;
+      case GL_GENERATE_MIPMAP_HINT:
+        params[0] = static_cast<T>(State::Hint::generateMipmap);
+        break;
+      case GL_GREEN_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::greenBias);
+        break;
+      case GL_GREEN_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::greenScale);
+        break;
+      case GL_INDEX_CLEAR_VALUE:
+        params[0] = static_cast<T>(State::ColorBuffer::indexClearValue);
+        break;
+      case GL_INDEX_OFFSET:
+        params[0] = static_cast<T>(State::PixelMode::indexOffset);
+        break;
+      case GL_INDEX_SHIFT:
+        params[0] = static_cast<T>(State::PixelMode::indexShift);
+        break;
+      case GL_INDEX_WRITEMASK:
+        params[0] = static_cast<T>(State::ColorBuffer::indexWritemask);
+        break;
+      case GL_LIGHT_MODEL_AMBIENT:
+        params[0] = static_cast<T>(State::Lighting::lightModelAmbient[0]);
+        params[1] = static_cast<T>(State::Lighting::lightModelAmbient[1]);
+        params[2] = static_cast<T>(State::Lighting::lightModelAmbient[2]);
+        params[3] = static_cast<T>(State::Lighting::lightModelAmbient[3]);
+        break;
+      case GL_LIGHT_MODEL_COLOR_CONTROL:
+        params[0] = static_cast<T>(State::Lighting::lightModelColorControl);
+        break;
+      case GL_LIGHT_MODEL_LOCAL_VIEWER:
+        params[0] = static_cast<T>(State::Lighting::lightModelLocalViewer);
+        break;
+      case GL_LIGHT_MODEL_TWO_SIDE:
+        params[0] = static_cast<T>(State::Lighting::lightModelTwoSide);
+        break;
+      case GL_LINE_SMOOTH_HINT:
+        params[0] = static_cast<T>(State::Hint::lineSmooth);
+        break;
+      case GL_LINE_STIPPLE_PATTERN:
+        params[0] = static_cast<T>(State::Line::stipplePattern);
+        break;
+      case GL_LINE_STIPPLE_REPEAT:
+        params[0] = static_cast<T>(State::Line::stippleRepeat);
+        break;
+      case GL_LINE_WIDTH:
+        params[0] = static_cast<T>(State::Line::width);
+        break;
+      case GL_LIST_BASE:
+        params[0] = static_cast<T>(State::List::base);
+        break;
+      case GL_LOGIC_OP_MODE:
+        params[0] = static_cast<T>(State::ColorBuffer::logicOpMode);
+        break;
+      case GL_MAP1_GRID_DOMAIN:
+        params[0] = static_cast<T>(State::Eval::map1GridDomain[0]);
+        params[1] = static_cast<T>(State::Eval::map1GridDomain[1]);
+        break;
+      case GL_MAP1_GRID_SEGMENTS:
+        params[0] = static_cast<T>(State::Eval::map1GridSegments);
+        break;
+      case GL_MAP2_GRID_DOMAIN:
+        params[0] = static_cast<T>(State::Eval::map2GridDomain[0]);
+        params[1] = static_cast<T>(State::Eval::map2GridDomain[1]);
+        params[2] = static_cast<T>(State::Eval::map2GridDomain[2]);
+        params[3] = static_cast<T>(State::Eval::map2GridDomain[3]);
+        break;
+      case GL_MAP2_GRID_SEGMENTS:
+        params[0] = static_cast<T>(State::Eval::map2GridSegments[0]);
+        params[1] = static_cast<T>(State::Eval::map2GridSegments[1]);
+        break;
+      case GL_MAP_COLOR:
+        params[0] = static_cast<T>(State::PixelMode::mapColor);
+        break;
+      case GL_MAP_STENCIL:
+        params[0] = static_cast<T>(State::PixelMode::mapStencil);
+        break;
+      case GL_MIN_SAMPLE_SHADING_VALUE:
+        params[0] = static_cast<T>(State::Multisample::minSampleShadingValue);
+        break;
+      case GL_PERSPECTIVE_CORRECTION_HINT:
+        params[0] = static_cast<T>(State::Hint::perspectiveCorrection);
+        break;
+      case GL_POINT_DISTANCE_ATTENUATION:
+        params[0] = static_cast<T>(State::Point::distanceAttenuation[0]);
+        params[1] = static_cast<T>(State::Point::distanceAttenuation[1]);
+        params[2] = static_cast<T>(State::Point::distanceAttenuation[2]);
+        break;
+      case GL_POINT_FADE_THRESHOLD_SIZE:
+        params[0] = static_cast<T>(State::Point::fadeThresholdSize);
+        break;
+      case GL_POINT_SIZE_MAX:
+        params[0] = static_cast<T>(State::Point::sizeMax);
+        break;
+      case GL_POINT_SIZE_MIN:
+        params[0] = static_cast<T>(State::Point::sizeMin);
+        break;
+      case GL_POINT_SIZE:
+        params[0] = static_cast<T>(State::Point::size);
+        break;
+      case GL_POINT_SMOOTH_HINT:
+        params[0] = static_cast<T>(State::Hint::pointSmooth);
+        break;
+      case GL_POINT_SPRITE_COORD_ORIGIN:
+        params[0] = static_cast<T>(State::Point::spriteCoordOrigin);
+        break;
+      case GL_POLYGON_MODE:
+        params[0] = static_cast<T>(State::Polygon::mode[0]);
+        params[1] = static_cast<T>(State::Polygon::mode[1]);
+        break;
+      case GL_POLYGON_OFFSET_FACTOR:
+        params[0] = static_cast<T>(State::Polygon::factor);
+        break;
+      case GL_POLYGON_OFFSET_UNITS:
+        params[0] = static_cast<T>(State::Polygon::units);
+        break;
+      case GL_POLYGON_SMOOTH_HINT:
+        params[0] = static_cast<T>(State::Hint::polygonSmooth);
+        break;
+      case GL_POST_COLOR_MATRIX_ALPHA_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixAlphaBias);
+        break;
+      case GL_POST_COLOR_MATRIX_ALPHA_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixAlphaScale);
+        break;
+      case GL_POST_COLOR_MATRIX_BLUE_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixBlueBias);
+        break;
+      case GL_POST_COLOR_MATRIX_BLUE_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixBlueScale);
+        break;
+      case GL_POST_COLOR_MATRIX_GREEN_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixGreenBias);
+        break;
+      case GL_POST_COLOR_MATRIX_GREEN_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixGreenScale);
+        break;
+      case GL_POST_COLOR_MATRIX_RED_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixRedBias);
+        break;
+      case GL_POST_COLOR_MATRIX_RED_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postColorMatrixRedScale);
+        break;
+      case GL_POST_CONVOLUTION_ALPHA_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionAlphaBias);
+        break;
+      case GL_POST_CONVOLUTION_ALPHA_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionAlphaScale);
+        break;
+      case GL_POST_CONVOLUTION_BLUE_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionBlueBias);
+        break;
+      case GL_POST_CONVOLUTION_BLUE_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionBlueScale);
+        break;
+      case GL_POST_CONVOLUTION_GREEN_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionGreenBias);
+        break;
+      case GL_POST_CONVOLUTION_GREEN_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionGreenScale);
+        break;
+      case GL_POST_CONVOLUTION_RED_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionRedBias);
+        break;
+      case GL_POST_CONVOLUTION_RED_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::postConvolutionRedScale);
+        break;
+      case GL_PROVOKING_VERTEX:
+        params[0] = static_cast<T>(State::Lighting::provokingVertex);
+        break;
       case GL_READ_BUFFER:
-        {
-          if (!State::PixelMode::fullyDefined())
-            State::PixelMode::getUndefined(ctx->dispatcher.emulation);
-          params[0] = static_cast<T>(State::PixelMode::readBuffer);
-        }
+      {
+        if (!State::PixelMode::fullyDefined())
+          State::PixelMode::getUndefined(ctx->dispatcher.emulation);
+        params[0] = static_cast<T>(State::PixelMode::readBuffer);
+      }
+      break;
+      case GL_RED_BIAS:
+        params[0] = static_cast<T>(State::PixelMode::redBias);
         break;
-      case GL_RED_BIAS:                        params[0] = static_cast<T>(State::PixelMode::redBias); break;
-      case GL_RED_SCALE:                       params[0] = static_cast<T>(State::PixelMode::redScale); break;
-      case GL_SAMPLE_COVERAGE_INVERT:          params[0] = static_cast<T>(State::Multisample::sampleCoverageInvert); break;
-      case GL_SAMPLE_COVERAGE_VALUE:           params[0] = static_cast<T>(State::Multisample::sampleCoverageValue); break;
-      case GL_SHADE_MODEL:                     params[0] = static_cast<T>(State::Lighting::shadeModel); break;
-      case GL_STENCIL_BACK_FAIL:               params[0] = static_cast<T>(State::Stencil::back.fail); break;
-      case GL_STENCIL_BACK_FUNC:               params[0] = static_cast<T>(State::Stencil::back.func); break;
-      case GL_STENCIL_BACK_PASS_DEPTH_FAIL:    params[0] = static_cast<T>(State::Stencil::back.zfail); break;
-      case GL_STENCIL_BACK_PASS_DEPTH_PASS:    params[0] = static_cast<T>(State::Stencil::back.zpass); break;
-      case GL_STENCIL_BACK_REF:                params[0] = static_cast<T>(State::Stencil::back.ref); break;
-      case GL_STENCIL_BACK_VALUE_MASK:         params[0] = static_cast<T>(State::Stencil::back.valueMask); break;
-      case GL_STENCIL_BACK_WRITEMASK:          params[0] = static_cast<T>(State::Stencil::back.writeMask); break;
-      case GL_STENCIL_CLEAR_VALUE:             params[0] = static_cast<T>(State::Stencil::clear); break;
-      case GL_STENCIL_FAIL:                    params[0] = static_cast<T>(State::Stencil::front.fail); break;
-      case GL_STENCIL_FUNC:                    params[0] = static_cast<T>(State::Stencil::front.func); break;
-      case GL_STENCIL_PASS_DEPTH_FAIL:         params[0] = static_cast<T>(State::Stencil::front.zfail); break;
-      case GL_STENCIL_PASS_DEPTH_PASS:         params[0] = static_cast<T>(State::Stencil::front.zpass); break;
-      case GL_STENCIL_REF:                     params[0] = static_cast<T>(State::Stencil::front.ref); break;
-      case GL_STENCIL_VALUE_MASK:              params[0] = static_cast<T>(State::Stencil::front.valueMask); break;
-      case GL_STENCIL_WRITEMASK:               params[0] = static_cast<T>(State::Stencil::front.writeMask); break;
-      case GL_TEXTURE_COMPRESSION_HINT:        params[0] = static_cast<T>(State::Hint::textureCompression); break;
-      case GL_ZOOM_X:                          params[0] = static_cast<T>(State::PixelMode::zoomX); break;
-      case GL_ZOOM_Y:                          params[0] = static_cast<T>(State::PixelMode::zoomY); break;
+      case GL_RED_SCALE:
+        params[0] = static_cast<T>(State::PixelMode::redScale);
+        break;
+      case GL_SAMPLE_COVERAGE_INVERT:
+        params[0] = static_cast<T>(State::Multisample::sampleCoverageInvert);
+        break;
+      case GL_SAMPLE_COVERAGE_VALUE:
+        params[0] = static_cast<T>(State::Multisample::sampleCoverageValue);
+        break;
+      case GL_SHADE_MODEL:
+        params[0] = static_cast<T>(State::Lighting::shadeModel);
+        break;
+      case GL_STENCIL_BACK_FAIL:
+        params[0] = static_cast<T>(State::Stencil::back.fail);
+        break;
+      case GL_STENCIL_BACK_FUNC:
+        params[0] = static_cast<T>(State::Stencil::back.func);
+        break;
+      case GL_STENCIL_BACK_PASS_DEPTH_FAIL:
+        params[0] = static_cast<T>(State::Stencil::back.zfail);
+        break;
+      case GL_STENCIL_BACK_PASS_DEPTH_PASS:
+        params[0] = static_cast<T>(State::Stencil::back.zpass);
+        break;
+      case GL_STENCIL_BACK_REF:
+        params[0] = static_cast<T>(State::Stencil::back.ref);
+        break;
+      case GL_STENCIL_BACK_VALUE_MASK:
+        params[0] = static_cast<T>(State::Stencil::back.valueMask);
+        break;
+      case GL_STENCIL_BACK_WRITEMASK:
+        params[0] = static_cast<T>(State::Stencil::back.writeMask);
+        break;
+      case GL_STENCIL_CLEAR_VALUE:
+        params[0] = static_cast<T>(State::Stencil::clear);
+        break;
+      case GL_STENCIL_FAIL:
+        params[0] = static_cast<T>(State::Stencil::front.fail);
+        break;
+      case GL_STENCIL_FUNC:
+        params[0] = static_cast<T>(State::Stencil::front.func);
+        break;
+      case GL_STENCIL_PASS_DEPTH_FAIL:
+        params[0] = static_cast<T>(State::Stencil::front.zfail);
+        break;
+      case GL_STENCIL_PASS_DEPTH_PASS:
+        params[0] = static_cast<T>(State::Stencil::front.zpass);
+        break;
+      case GL_STENCIL_REF:
+        params[0] = static_cast<T>(State::Stencil::front.ref);
+        break;
+      case GL_STENCIL_VALUE_MASK:
+        params[0] = static_cast<T>(State::Stencil::front.valueMask);
+        break;
+      case GL_STENCIL_WRITEMASK:
+        params[0] = static_cast<T>(State::Stencil::front.writeMask);
+        break;
+      case GL_TEXTURE_COMPRESSION_HINT:
+        params[0] = static_cast<T>(State::Hint::textureCompression);
+        break;
+      case GL_ZOOM_X:
+        params[0] = static_cast<T>(State::PixelMode::zoomX);
+        break;
+      case GL_ZOOM_Y:
+        params[0] = static_cast<T>(State::PixelMode::zoomY);
+        break;
 
       default:
         return false;
@@ -806,64 +1018,64 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     {
       case GL_BLEND_DST_ALPHA:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-           params[0] = static_cast<T>(State::ColorBuffer::blendDstAlpha[index]);
+          params[0] = static_cast<T>(State::ColorBuffer::blendDstAlpha[index]);
         break;
       case GL_BLEND_DST_RGB:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-           params[0] = static_cast<T>(State::ColorBuffer::blendDstRgb[index]);
+          params[0] = static_cast<T>(State::ColorBuffer::blendDstRgb[index]);
         break;
       case GL_BLEND_EQUATION_ALPHA:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-           params[0] = static_cast<T>(State::ColorBuffer::blendEquationAlpha[index]);
+          params[0] = static_cast<T>(State::ColorBuffer::blendEquationAlpha[index]);
         break;
       case GL_BLEND_EQUATION_RGB:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-           params[0] = static_cast<T>(State::ColorBuffer::blendEquationRgb[index]);
+          params[0] = static_cast<T>(State::ColorBuffer::blendEquationRgb[index]);
         break;
       case GL_BLEND_SRC_ALPHA:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-           params[0] = static_cast<T>(State::ColorBuffer::blendSrcAlpha[index]);
+          params[0] = static_cast<T>(State::ColorBuffer::blendSrcAlpha[index]);
         break;
       case GL_BLEND_SRC_RGB:
         if (index < REGAL_MAX_DRAW_BUFFERS)
-           params[0] = static_cast<T>(State::ColorBuffer::blendSrcRgb[index]);
+          params[0] = static_cast<T>(State::ColorBuffer::blendSrcRgb[index]);
         break;
       case GL_COLOR_WRITEMASK:
         if (index < REGAL_MAX_DRAW_BUFFERS)
         {
-           params[0] = static_cast<T>(State::ColorBuffer::colorWritemask[index][0]);
-           params[1] = static_cast<T>(State::ColorBuffer::colorWritemask[index][1]);
-           params[2] = static_cast<T>(State::ColorBuffer::colorWritemask[index][2]);
-           params[3] = static_cast<T>(State::ColorBuffer::colorWritemask[index][3]);
+          params[0] = static_cast<T>(State::ColorBuffer::colorWritemask[index][0]);
+          params[1] = static_cast<T>(State::ColorBuffer::colorWritemask[index][1]);
+          params[2] = static_cast<T>(State::ColorBuffer::colorWritemask[index][2]);
+          params[3] = static_cast<T>(State::ColorBuffer::colorWritemask[index][3]);
         }
         break;
       case GL_DEPTH_RANGE:
         if (index < REGAL_MAX_VIEWPORTS)
         {
-           params[0] = static_cast<T>(State::Viewport::depthRange[index][0]);
-           params[1] = static_cast<T>(State::Viewport::depthRange[index][1]);
+          params[0] = static_cast<T>(State::Viewport::depthRange[index][0]);
+          params[1] = static_cast<T>(State::Viewport::depthRange[index][1]);
         }
         break;
       case GL_SCISSOR_BOX:
         if (index < REGAL_MAX_VIEWPORTS)
         {
-           if (!State::Scissor::fullyDefined())
-             State::Scissor::getUndefined(ctx->dispatcher.emulation);
-           params[0] = static_cast<T>(State::Scissor::scissorBox[index][0]);
-           params[1] = static_cast<T>(State::Scissor::scissorBox[index][1]);
-           params[2] = static_cast<T>(State::Scissor::scissorBox[index][2]);
-           params[3] = static_cast<T>(State::Scissor::scissorBox[index][3]);
+          if (!State::Scissor::fullyDefined())
+            State::Scissor::getUndefined(ctx->dispatcher.emulation);
+          params[0] = static_cast<T>(State::Scissor::scissorBox[index][0]);
+          params[1] = static_cast<T>(State::Scissor::scissorBox[index][1]);
+          params[2] = static_cast<T>(State::Scissor::scissorBox[index][2]);
+          params[3] = static_cast<T>(State::Scissor::scissorBox[index][3]);
         }
         break;
       case GL_VIEWPORT:
         if (index < REGAL_MAX_VIEWPORTS)
         {
-           if (!State::Viewport::fullyDefined())
-             State::Viewport::getUndefined(ctx->dispatcher.emulation);
-           params[0] = static_cast<T>(State::Viewport::viewport[index][0]);
-           params[1] = static_cast<T>(State::Viewport::viewport[index][1]);
-           params[2] = static_cast<T>(State::Viewport::viewport[index][2]);
-           params[3] = static_cast<T>(State::Viewport::viewport[index][3]);
+          if (!State::Viewport::fullyDefined())
+            State::Viewport::getUndefined(ctx->dispatcher.emulation);
+          params[0] = static_cast<T>(State::Viewport::viewport[index][0]);
+          params[1] = static_cast<T>(State::Viewport::viewport[index][1]);
+          params[2] = static_cast<T>(State::Viewport::viewport[index][2]);
+          params[3] = static_cast<T>(State::Viewport::viewport[index][3]);
         }
         break;
       default:
@@ -872,7 +1084,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return true;
   }
 
-  bool glGetPolygonStipple(RegalContext *ctx, GLubyte * pattern)
+  bool glGetPolygonStipple(RegalContext *ctx, GLubyte *pattern)
   {
     UNUSED_PARAMETER(ctx);
 
@@ -894,18 +1106,30 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     GLuint index = 0;
     switch (pname)
     {
-      case GL_COLOR_TABLE:                   index = 0; break;
-      case GL_POST_CONVOLUTION_COLOR_TABLE:  index = 1; break;
-      case GL_POST_COLOR_MATRIX_COLOR_TABLE: index = 2; break;
-      default:                               return false;
+      case GL_COLOR_TABLE:
+        index = 0;
+        break;
+      case GL_POST_CONVOLUTION_COLOR_TABLE:
+        index = 1;
+        break;
+      case GL_POST_COLOR_MATRIX_COLOR_TABLE:
+        index = 2;
+        break;
+      default:
+        return false;
     }
 
     GLfloat *p = NULL;
     switch (target)
     {
-      case GL_COLOR_TABLE_SCALE: p = &State::PixelMode::colorTableScale[index][0]; break;
-      case GL_COLOR_TABLE_BIAS:  p = &State::PixelMode::colorTableBias[index][0];  break;
-      default:                   return false;
+      case GL_COLOR_TABLE_SCALE:
+        p = &State::PixelMode::colorTableScale[index][0];
+        break;
+      case GL_COLOR_TABLE_BIAS:
+        p = &State::PixelMode::colorTableBias[index][0];
+        break;
+      default:
+        return false;
     }
 
     params[0] = static_cast<T>(p[0]);
@@ -923,10 +1147,17 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     GLuint index = 0;
     switch (pname)
     {
-      case GL_CONVOLUTION_1D: index = 0; break;
-      case GL_CONVOLUTION_2D: index = 1; break;
-      case GL_SEPARABLE_2D:   index = 2; break;
-      default:                return false;
+      case GL_CONVOLUTION_1D:
+        index = 0;
+        break;
+      case GL_CONVOLUTION_2D:
+        index = 1;
+        break;
+      case GL_SEPARABLE_2D:
+        index = 2;
+        break;
+      default:
+        return false;
     }
 
     if (target == GL_CONVOLUTION_BORDER_MODE)
@@ -938,10 +1169,17 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     GLfloat *p = NULL;
     switch (target)
     {
-      case GL_CONVOLUTION_BORDER_COLOR: p = &State::PixelMode::convolutionBorderColor[index][0]; break;
-      case GL_CONVOLUTION_FILTER_SCALE: p = &State::PixelMode::convolutionFilterScale[index][0]; break;
-      case GL_CONVOLUTION_FILTER_BIAS:  p = &State::PixelMode::convolutionFilterBias[index][0];  break;
-      default:                          return false;
+      case GL_CONVOLUTION_BORDER_COLOR:
+        p = &State::PixelMode::convolutionBorderColor[index][0];
+        break;
+      case GL_CONVOLUTION_FILTER_SCALE:
+        p = &State::PixelMode::convolutionFilterScale[index][0];
+        break;
+      case GL_CONVOLUTION_FILTER_BIAS:
+        p = &State::PixelMode::convolutionFilterBias[index][0];
+        break;
+      default:
+        return false;
     }
 
     params[0] = static_cast<T>(p[0]);
@@ -952,7 +1190,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return true;
   }
 
-  template <typename T> bool glGetLightv(RegalContext *ctx, GLenum light, GLenum pname, T * params)
+  template <typename T> bool glGetLightv(RegalContext *ctx, GLenum light, GLenum pname, T *params)
   {
     UNUSED_PARAMETER(ctx);
 
@@ -966,17 +1204,48 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     GLfloat *p = NULL;
     switch (pname)
     {
-      case GL_AMBIENT:               num = 4; p = &l.ambient[0];           break;
-      case GL_DIFFUSE:               num = 4; p = &l.diffuse[0];           break;
-      case GL_SPECULAR:              num = 4; p = &l.specular[0];          break;
-      case GL_POSITION:              num = 4; p = &l.position[0];          break;
-      case GL_CONSTANT_ATTENUATION:  num = 1; p = &l.constantAttenuation;  break;
-      case GL_LINEAR_ATTENUATION:    num = 1; p = &l.linearAttenuation;    break;
-      case GL_QUADRATIC_ATTENUATION: num = 1; p = &l.quadraticAttenuation; break;
-      case GL_SPOT_DIRECTION:        num = 3; p = &l.spotDirection[0];     break;
-      case GL_SPOT_EXPONENT:         num = 1; p = &l.spotExponent;         break;
-      case GL_SPOT_CUTOFF:           num = 1; p = &l.spotCutoff;           break;
-      default:                       return false;
+      case GL_AMBIENT:
+        num = 4;
+        p = &l.ambient[0];
+        break;
+      case GL_DIFFUSE:
+        num = 4;
+        p = &l.diffuse[0];
+        break;
+      case GL_SPECULAR:
+        num = 4;
+        p = &l.specular[0];
+        break;
+      case GL_POSITION:
+        num = 4;
+        p = &l.position[0];
+        break;
+      case GL_CONSTANT_ATTENUATION:
+        num = 1;
+        p = &l.constantAttenuation;
+        break;
+      case GL_LINEAR_ATTENUATION:
+        num = 1;
+        p = &l.linearAttenuation;
+        break;
+      case GL_QUADRATIC_ATTENUATION:
+        num = 1;
+        p = &l.quadraticAttenuation;
+        break;
+      case GL_SPOT_DIRECTION:
+        num = 3;
+        p = &l.spotDirection[0];
+        break;
+      case GL_SPOT_EXPONENT:
+        num = 1;
+        p = &l.spotExponent;
+        break;
+      case GL_SPOT_CUTOFF:
+        num = 1;
+        p = &l.spotCutoff;
+        break;
+      default:
+        return false;
     }
 
     for (GLuint ii = 0; ii < num; ii++)
@@ -985,7 +1254,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return true;
   }
 
-  template <typename T> bool glGetMaterialv(RegalContext *ctx, GLenum face, GLenum pname, T * params)
+  template <typename T> bool glGetMaterialv(RegalContext *ctx, GLenum face, GLenum pname, T *params)
   {
     UNUSED_PARAMETER(ctx);
 
@@ -998,13 +1267,32 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     GLfloat *p = NULL;
     switch (pname)
     {
-      case GL_AMBIENT:       num = 4; p = &f.ambient[0];      break;
-      case GL_DIFFUSE:       num = 4; p = &f.diffuse[0];      break;
-      case GL_SPECULAR:      num = 4; p = &f.specular[0];     break;
-      case GL_EMISSION:      num = 4; p = &f.emission[0];     break;
-      case GL_SHININESS:     num = 1; p = &f.shininess;       break;
-      case GL_COLOR_INDEXES: num = 3; p = &f.colorIndexes[0]; break;
-      default:               return false;
+      case GL_AMBIENT:
+        num = 4;
+        p = &f.ambient[0];
+        break;
+      case GL_DIFFUSE:
+        num = 4;
+        p = &f.diffuse[0];
+        break;
+      case GL_SPECULAR:
+        num = 4;
+        p = &f.specular[0];
+        break;
+      case GL_EMISSION:
+        num = 4;
+        p = &f.emission[0];
+        break;
+      case GL_SHININESS:
+        num = 1;
+        p = &f.shininess;
+        break;
+      case GL_COLOR_INDEXES:
+        num = 3;
+        p = &f.colorIndexes[0];
+        break;
+      default:
+        return false;
     }
 
     for (GLuint ii = 0; ii < num; ii++)
@@ -1040,9 +1328,15 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
 
     switch (pname)
     {
-      case GL_ALPHA_TEST:           enabled = State::Enable::alphaTest; break;
-      case GL_BLEND:                enabled = State::Enable::blend[0]; break;
-      case GL_AUTO_NORMAL:          enabled = State::Enable::autoNormal; break;
+      case GL_ALPHA_TEST:
+        enabled = State::Enable::alphaTest;
+        break;
+      case GL_BLEND:
+        enabled = State::Enable::blend[0];
+        break;
+      case GL_AUTO_NORMAL:
+        enabled = State::Enable::autoNormal;
+        break;
       case GL_CLIP_DISTANCE0:
       case GL_CLIP_DISTANCE1:
       case GL_CLIP_DISTANCE2:
@@ -1050,21 +1344,51 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE4:
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
-      case GL_CLIP_DISTANCE7:      enabled = State::Enable::clipDistance[pname-GL_CLIP_DISTANCE0]; break;
-      case GL_COLOR_LOGIC_OP:      enabled = State::Enable::colorLogicOp; break;
-      case GL_COLOR_MATERIAL:      enabled = State::Enable::colorMaterial; break;
-      case GL_COLOR_SUM:           enabled = State::Enable::colorSum; break;
-      case GL_COLOR_TABLE:         enabled = State::Enable::colorTable; break;
-      case GL_CONVOLUTION_1D:      enabled = State::Enable::convolution1d; break;
-      case GL_CONVOLUTION_2D:      enabled = State::Enable::convolution2d; break;
-      case GL_CULL_FACE:           enabled = State::Enable::cullFace; break;
-      case GL_DEPTH_CLAMP:         enabled = State::Enable::depthClamp; break;
-      case GL_DEPTH_TEST:          enabled = State::Enable::depthTest; break;
-      case GL_DITHER:              enabled = State::Enable::dither; break;
-      case GL_FOG:                 enabled = State::Enable::fog; break;
-      case GL_FRAMEBUFFER_SRGB:    enabled = State::Enable::framebufferSRGB; break;
-      case GL_HISTOGRAM:           enabled = State::Enable::histogram; break;
-      case GL_INDEX_LOGIC_OP:      enabled = State::Enable::indexLogicOp; break;
+      case GL_CLIP_DISTANCE7:
+        enabled = State::Enable::clipDistance[pname-GL_CLIP_DISTANCE0];
+        break;
+      case GL_COLOR_LOGIC_OP:
+        enabled = State::Enable::colorLogicOp;
+        break;
+      case GL_COLOR_MATERIAL:
+        enabled = State::Enable::colorMaterial;
+        break;
+      case GL_COLOR_SUM:
+        enabled = State::Enable::colorSum;
+        break;
+      case GL_COLOR_TABLE:
+        enabled = State::Enable::colorTable;
+        break;
+      case GL_CONVOLUTION_1D:
+        enabled = State::Enable::convolution1d;
+        break;
+      case GL_CONVOLUTION_2D:
+        enabled = State::Enable::convolution2d;
+        break;
+      case GL_CULL_FACE:
+        enabled = State::Enable::cullFace;
+        break;
+      case GL_DEPTH_CLAMP:
+        enabled = State::Enable::depthClamp;
+        break;
+      case GL_DEPTH_TEST:
+        enabled = State::Enable::depthTest;
+        break;
+      case GL_DITHER:
+        enabled = State::Enable::dither;
+        break;
+      case GL_FOG:
+        enabled = State::Enable::fog;
+        break;
+      case GL_FRAMEBUFFER_SRGB:
+        enabled = State::Enable::framebufferSRGB;
+        break;
+      case GL_HISTOGRAM:
+        enabled = State::Enable::histogram;
+        break;
+      case GL_INDEX_LOGIC_OP:
+        enabled = State::Enable::indexLogicOp;
+        break;
       case GL_LIGHT0:
       case GL_LIGHT1:
       case GL_LIGHT2:
@@ -1072,58 +1396,162 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT4:
       case GL_LIGHT5:
       case GL_LIGHT6:
-      case GL_LIGHT7:               enabled = State::Enable::light[pname-GL_LIGHT0]; break;
-      case GL_LIGHTING:             enabled = State::Enable::lighting; break;
-      case GL_LINE_SMOOTH:          enabled = State::Enable::lineSmooth; break;
-      case GL_LINE_STIPPLE:         enabled = State::Enable::lineStipple; break;
-      case GL_MAP1_COLOR_4:         enabled = State::Enable::map1Color4; break;
-      case GL_MAP1_INDEX:           enabled = State::Enable::map1Index; break;
-      case GL_MAP1_NORMAL:          enabled = State::Enable::map1Normal; break;
-      case GL_MAP1_TEXTURE_COORD_1: enabled = State::Enable::map1TextureCoord1; break;
-      case GL_MAP1_TEXTURE_COORD_2: enabled = State::Enable::map1TextureCoord2; break;
-      case GL_MAP1_TEXTURE_COORD_3: enabled = State::Enable::map1TextureCoord3; break;
-      case GL_MAP1_TEXTURE_COORD_4: enabled = State::Enable::map1TextureCoord4; break;
-      case GL_MAP1_VERTEX_3:        enabled = State::Enable::map1Vertex3; break;
-      case GL_MAP1_VERTEX_4:        enabled = State::Enable::map1Vertex4; break;
-      case GL_MAP2_COLOR_4:         enabled = State::Enable::map2Color4; break;
-      case GL_MAP2_INDEX:           enabled = State::Enable::map2Index; break;
-      case GL_MAP2_NORMAL:          enabled = State::Enable::map2Normal; break;
-      case GL_MAP2_TEXTURE_COORD_1: enabled = State::Enable::map2TextureCoord1; break;
-      case GL_MAP2_TEXTURE_COORD_2: enabled = State::Enable::map2TextureCoord2; break;
-      case GL_MAP2_TEXTURE_COORD_3: enabled = State::Enable::map2TextureCoord3; break;
-      case GL_MAP2_TEXTURE_COORD_4: enabled = State::Enable::map2TextureCoord4; break;
-      case GL_MAP2_VERTEX_3:        enabled = State::Enable::map2Vertex3; break;
-      case GL_MAP2_VERTEX_4:        enabled = State::Enable::map2Vertex4; break;
-      case GL_MINMAX:               enabled = State::Enable::minmax; break;
-      case GL_MULTISAMPLE:          enabled = State::Enable::multisample; break;
-      case GL_NORMALIZE:            enabled = State::Enable::normalize; break;
-      case GL_POINT_SMOOTH:         enabled = State::Enable::pointSmooth; break;
-      case GL_POINT_SPRITE:         enabled = State::Enable::pointSprite; break;
-      case GL_POLYGON_OFFSET_FILL:  enabled = State::Enable::polygonOffsetFill; break;
-      case GL_POLYGON_OFFSET_LINE:  enabled = State::Enable::polygonOffsetLine; break;
-      case GL_POLYGON_OFFSET_POINT: enabled = State::Enable::polygonOffsetPoint; break;
-      case GL_POLYGON_SMOOTH:       enabled = State::Enable::polygonSmooth; break;
-      case GL_POLYGON_STIPPLE:      enabled = State::Enable::polygonStipple; break;
-      case GL_POST_COLOR_MATRIX_COLOR_TABLE: enabled = State::Enable::postColorMatrixColorTable; break;
-      case GL_POST_CONVOLUTION_COLOR_TABLE: enabled = State::Enable::postConvolutionColorTable; break;
-      case GL_PROGRAM_POINT_SIZE:   enabled = State::Enable::programPointSize; break;
-      case GL_RESCALE_NORMAL:       enabled = State::Enable::rescaleNormal; break;
-      case GL_SAMPLE_ALPHA_TO_COVERAGE: enabled = State::Enable::sampleAlphaToCoverage; break;
-      case GL_SAMPLE_ALPHA_TO_ONE:  enabled = State::Enable::sampleAlphaToOne; break;
-      case GL_SAMPLE_COVERAGE:      enabled = State::Enable::sampleCoverage; break;
-      case GL_SAMPLE_SHADING:       enabled = State::Enable::sampleShading; break;
-      case GL_SCISSOR_TEST:         enabled = State::Enable::scissorTest[0]; break;
-      case GL_SEPARABLE_2D:      enabled = State::Enable::separable2d; break;
-      case GL_STENCIL_TEST:      enabled = State::Enable::stencilTest; break;
-      case GL_TEXTURE_1D:        enabled = State::Enable::texture1d[activeTextureUnit]; break;
-      case GL_TEXTURE_2D:        enabled = State::Enable::texture2d[activeTextureUnit]; break;
-      case GL_TEXTURE_3D:        enabled = State::Enable::texture3d[activeTextureUnit]; break;
-      case GL_TEXTURE_CUBE_MAP:  enabled = State::Enable::textureCubeMap[activeTextureUnit]; break;
-      case GL_TEXTURE_GEN_S:     enabled = State::Enable::textureGenS[activeTextureUnit]; break;
-      case GL_TEXTURE_GEN_T:     enabled = State::Enable::textureGenT[activeTextureUnit]; break;
-      case GL_TEXTURE_GEN_R:     enabled = State::Enable::textureGenR[activeTextureUnit]; break;
-      case GL_TEXTURE_GEN_Q:     enabled = State::Enable::textureGenQ[activeTextureUnit]; break;
-      case GL_VERTEX_PROGRAM_TWO_SIDE: enabled = State::Enable::vertexProgramTwoSide; break;
+      case GL_LIGHT7:
+        enabled = State::Enable::light[pname-GL_LIGHT0];
+        break;
+      case GL_LIGHTING:
+        enabled = State::Enable::lighting;
+        break;
+      case GL_LINE_SMOOTH:
+        enabled = State::Enable::lineSmooth;
+        break;
+      case GL_LINE_STIPPLE:
+        enabled = State::Enable::lineStipple;
+        break;
+      case GL_MAP1_COLOR_4:
+        enabled = State::Enable::map1Color4;
+        break;
+      case GL_MAP1_INDEX:
+        enabled = State::Enable::map1Index;
+        break;
+      case GL_MAP1_NORMAL:
+        enabled = State::Enable::map1Normal;
+        break;
+      case GL_MAP1_TEXTURE_COORD_1:
+        enabled = State::Enable::map1TextureCoord1;
+        break;
+      case GL_MAP1_TEXTURE_COORD_2:
+        enabled = State::Enable::map1TextureCoord2;
+        break;
+      case GL_MAP1_TEXTURE_COORD_3:
+        enabled = State::Enable::map1TextureCoord3;
+        break;
+      case GL_MAP1_TEXTURE_COORD_4:
+        enabled = State::Enable::map1TextureCoord4;
+        break;
+      case GL_MAP1_VERTEX_3:
+        enabled = State::Enable::map1Vertex3;
+        break;
+      case GL_MAP1_VERTEX_4:
+        enabled = State::Enable::map1Vertex4;
+        break;
+      case GL_MAP2_COLOR_4:
+        enabled = State::Enable::map2Color4;
+        break;
+      case GL_MAP2_INDEX:
+        enabled = State::Enable::map2Index;
+        break;
+      case GL_MAP2_NORMAL:
+        enabled = State::Enable::map2Normal;
+        break;
+      case GL_MAP2_TEXTURE_COORD_1:
+        enabled = State::Enable::map2TextureCoord1;
+        break;
+      case GL_MAP2_TEXTURE_COORD_2:
+        enabled = State::Enable::map2TextureCoord2;
+        break;
+      case GL_MAP2_TEXTURE_COORD_3:
+        enabled = State::Enable::map2TextureCoord3;
+        break;
+      case GL_MAP2_TEXTURE_COORD_4:
+        enabled = State::Enable::map2TextureCoord4;
+        break;
+      case GL_MAP2_VERTEX_3:
+        enabled = State::Enable::map2Vertex3;
+        break;
+      case GL_MAP2_VERTEX_4:
+        enabled = State::Enable::map2Vertex4;
+        break;
+      case GL_MINMAX:
+        enabled = State::Enable::minmax;
+        break;
+      case GL_MULTISAMPLE:
+        enabled = State::Enable::multisample;
+        break;
+      case GL_NORMALIZE:
+        enabled = State::Enable::normalize;
+        break;
+      case GL_POINT_SMOOTH:
+        enabled = State::Enable::pointSmooth;
+        break;
+      case GL_POINT_SPRITE:
+        enabled = State::Enable::pointSprite;
+        break;
+      case GL_POLYGON_OFFSET_FILL:
+        enabled = State::Enable::polygonOffsetFill;
+        break;
+      case GL_POLYGON_OFFSET_LINE:
+        enabled = State::Enable::polygonOffsetLine;
+        break;
+      case GL_POLYGON_OFFSET_POINT:
+        enabled = State::Enable::polygonOffsetPoint;
+        break;
+      case GL_POLYGON_SMOOTH:
+        enabled = State::Enable::polygonSmooth;
+        break;
+      case GL_POLYGON_STIPPLE:
+        enabled = State::Enable::polygonStipple;
+        break;
+      case GL_POST_COLOR_MATRIX_COLOR_TABLE:
+        enabled = State::Enable::postColorMatrixColorTable;
+        break;
+      case GL_POST_CONVOLUTION_COLOR_TABLE:
+        enabled = State::Enable::postConvolutionColorTable;
+        break;
+      case GL_PROGRAM_POINT_SIZE:
+        enabled = State::Enable::programPointSize;
+        break;
+      case GL_RESCALE_NORMAL:
+        enabled = State::Enable::rescaleNormal;
+        break;
+      case GL_SAMPLE_ALPHA_TO_COVERAGE:
+        enabled = State::Enable::sampleAlphaToCoverage;
+        break;
+      case GL_SAMPLE_ALPHA_TO_ONE:
+        enabled = State::Enable::sampleAlphaToOne;
+        break;
+      case GL_SAMPLE_COVERAGE:
+        enabled = State::Enable::sampleCoverage;
+        break;
+      case GL_SAMPLE_SHADING:
+        enabled = State::Enable::sampleShading;
+        break;
+      case GL_SCISSOR_TEST:
+        enabled = State::Enable::scissorTest[0];
+        break;
+      case GL_SEPARABLE_2D:
+        enabled = State::Enable::separable2d;
+        break;
+      case GL_STENCIL_TEST:
+        enabled = State::Enable::stencilTest;
+        break;
+      case GL_TEXTURE_1D:
+        enabled = State::Enable::texture1d[activeTextureUnit];
+        break;
+      case GL_TEXTURE_2D:
+        enabled = State::Enable::texture2d[activeTextureUnit];
+        break;
+      case GL_TEXTURE_3D:
+        enabled = State::Enable::texture3d[activeTextureUnit];
+        break;
+      case GL_TEXTURE_CUBE_MAP:
+        enabled = State::Enable::textureCubeMap[activeTextureUnit];
+        break;
+      case GL_TEXTURE_GEN_S:
+        enabled = State::Enable::textureGenS[activeTextureUnit];
+        break;
+      case GL_TEXTURE_GEN_T:
+        enabled = State::Enable::textureGenT[activeTextureUnit];
+        break;
+      case GL_TEXTURE_GEN_R:
+        enabled = State::Enable::textureGenR[activeTextureUnit];
+        break;
+      case GL_TEXTURE_GEN_Q:
+        enabled = State::Enable::textureGenQ[activeTextureUnit];
+        break;
+      case GL_VERTEX_PROGRAM_TWO_SIDE:
+        enabled = State::Enable::vertexProgramTwoSide;
+        break;
 
       default:
         return false;
@@ -1138,16 +1566,16 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     switch (pname)
     {
       case GL_BLEND:
-          if (index >= REGAL_MAX_DRAW_BUFFERS)
-            return false;
-          enabled = State::Enable::blend[index];
-          break;
+        if (index >= REGAL_MAX_DRAW_BUFFERS)
+          return false;
+        enabled = State::Enable::blend[index];
+        break;
 
       case GL_SCISSOR_TEST:
-          if (index >= REGAL_MAX_VIEWPORTS)
-            return false;
-          enabled = State::Enable::scissorTest[index];
-          break;
+        if (index >= REGAL_MAX_VIEWPORTS)
+          return false;
+        enabled = State::Enable::scissorTest[index];
+        break;
 
       default:
         return false;
@@ -1159,14 +1587,18 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   {
     switch (cap)
     {
-      case GL_ALPHA_TEST:          State::Enable::alphaTest = State::ColorBuffer::alphaTest = enabled; break;
-      case GL_BLEND:
-        {
-          for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
-            State::Enable::blend[ii] = State::ColorBuffer::blend[ii] = enabled;
-        }
+      case GL_ALPHA_TEST:
+        State::Enable::alphaTest = State::ColorBuffer::alphaTest = enabled;
         break;
-      case GL_AUTO_NORMAL:         State::Enable::autoNormal = State::Eval::autoNormal = enabled; break;
+      case GL_BLEND:
+      {
+        for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+          State::Enable::blend[ii] = State::ColorBuffer::blend[ii] = enabled;
+      }
+      break;
+      case GL_AUTO_NORMAL:
+        State::Enable::autoNormal = State::Eval::autoNormal = enabled;
+        break;
       case GL_CLIP_DISTANCE0:
       case GL_CLIP_DISTANCE1:
       case GL_CLIP_DISTANCE2:
@@ -1174,21 +1606,51 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE4:
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
-      case GL_CLIP_DISTANCE7:      State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = State::Transform::clipPlane[cap-GL_CLIP_DISTANCE0].enabled = enabled; break;
-      case GL_COLOR_LOGIC_OP:      State::Enable::colorLogicOp    = State::ColorBuffer::colorLogicOp = enabled; break;
-      case GL_COLOR_MATERIAL:      State::Enable::colorMaterial   = State::Lighting::colorMaterial = enabled; break;
-      case GL_COLOR_SUM:           State::Enable::colorSum        = State::Fog::colorSum = enabled; break;
-      case GL_COLOR_TABLE:         State::Enable::colorTable      = State::PixelMode::colorTable = enabled; break;
-      case GL_CONVOLUTION_1D:      State::Enable::convolution1d   = State::PixelMode::convolution1d = enabled; break;
-      case GL_CONVOLUTION_2D:      State::Enable::convolution2d   = State::PixelMode::convolution2d = enabled; break;
-      case GL_CULL_FACE:           State::Enable::cullFace        = State::Polygon::cullEnable     = enabled; break;
-      case GL_DEPTH_CLAMP:         State::Enable::depthClamp      = State::Transform::depthClamp   = enabled; break;
-      case GL_DEPTH_TEST:          State::Enable::depthTest       = State::Depth::enable           = enabled; break;
-      case GL_DITHER:              State::Enable::dither          = State::ColorBuffer::dither = enabled; break;
-      case GL_FOG:                 State::Enable::fog             = State::Fog::enable = enabled; break;
-      case GL_FRAMEBUFFER_SRGB:    State::Enable::framebufferSRGB = State::ColorBuffer::framebufferSRGB = enabled; break;
-      case GL_HISTOGRAM:           State::Enable::histogram       = State::PixelMode::histogram = enabled; break;
-      case GL_INDEX_LOGIC_OP:      State::Enable::indexLogicOp    = State::ColorBuffer::indexLogicOp = enabled; break;
+      case GL_CLIP_DISTANCE7:
+        State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = State::Transform::clipPlane[cap-GL_CLIP_DISTANCE0].enabled = enabled;
+        break;
+      case GL_COLOR_LOGIC_OP:
+        State::Enable::colorLogicOp    = State::ColorBuffer::colorLogicOp = enabled;
+        break;
+      case GL_COLOR_MATERIAL:
+        State::Enable::colorMaterial   = State::Lighting::colorMaterial = enabled;
+        break;
+      case GL_COLOR_SUM:
+        State::Enable::colorSum        = State::Fog::colorSum = enabled;
+        break;
+      case GL_COLOR_TABLE:
+        State::Enable::colorTable      = State::PixelMode::colorTable = enabled;
+        break;
+      case GL_CONVOLUTION_1D:
+        State::Enable::convolution1d   = State::PixelMode::convolution1d = enabled;
+        break;
+      case GL_CONVOLUTION_2D:
+        State::Enable::convolution2d   = State::PixelMode::convolution2d = enabled;
+        break;
+      case GL_CULL_FACE:
+        State::Enable::cullFace        = State::Polygon::cullEnable     = enabled;
+        break;
+      case GL_DEPTH_CLAMP:
+        State::Enable::depthClamp      = State::Transform::depthClamp   = enabled;
+        break;
+      case GL_DEPTH_TEST:
+        State::Enable::depthTest       = State::Depth::enable           = enabled;
+        break;
+      case GL_DITHER:
+        State::Enable::dither          = State::ColorBuffer::dither = enabled;
+        break;
+      case GL_FOG:
+        State::Enable::fog             = State::Fog::enable = enabled;
+        break;
+      case GL_FRAMEBUFFER_SRGB:
+        State::Enable::framebufferSRGB = State::ColorBuffer::framebufferSRGB = enabled;
+        break;
+      case GL_HISTOGRAM:
+        State::Enable::histogram       = State::PixelMode::histogram = enabled;
+        break;
+      case GL_INDEX_LOGIC_OP:
+        State::Enable::indexLogicOp    = State::ColorBuffer::indexLogicOp = enabled;
+        break;
       case GL_LIGHT0:
       case GL_LIGHT1:
       case GL_LIGHT2:
@@ -1196,65 +1658,168 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT4:
       case GL_LIGHT5:
       case GL_LIGHT6:
-      case GL_LIGHT7:              State::Enable::light[cap-GL_LIGHT0] = State::Lighting::lights[cap-GL_LIGHT0].enabled = enabled; break;
-      case GL_LIGHTING:            State::Enable::lighting = State::Lighting::lighting = enabled; break;
-      case GL_LINE_SMOOTH:         State::Enable::lineSmooth  = State::Line::smooth  = enabled; break;
-      case GL_LINE_STIPPLE:        State::Enable::lineStipple = State::Line::stipple = enabled; break;
-      case GL_MAP1_COLOR_4:         State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_INDEX:           State::Enable::map1Index         = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_NORMAL:          State::Enable::map1Normal        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_TEXTURE_COORD_1: State::Enable::map1TextureCoord1 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_TEXTURE_COORD_2: State::Enable::map1TextureCoord2 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_TEXTURE_COORD_3: State::Enable::map1TextureCoord3 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_TEXTURE_COORD_4: State::Enable::map1TextureCoord4 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_VERTEX_3:        State::Enable::map1Vertex3       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP1_VERTEX_4:        State::Enable::map1Vertex4       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled; break;
-      case GL_MAP2_COLOR_4:         State::Enable::map2Color4        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_INDEX:           State::Enable::map2Index         = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_NORMAL:          State::Enable::map2Normal        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_TEXTURE_COORD_1: State::Enable::map2TextureCoord1 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_TEXTURE_COORD_2: State::Enable::map2TextureCoord2 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_TEXTURE_COORD_3: State::Enable::map2TextureCoord3 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_TEXTURE_COORD_4: State::Enable::map2TextureCoord4 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_VERTEX_3:        State::Enable::map2Vertex3       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MAP2_VERTEX_4:        State::Enable::map2Vertex4       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled; break;
-      case GL_MINMAX:               State::Enable::minmax = State::PixelMode::minmax = enabled; break;
-      case GL_MULTISAMPLE:          State::Enable::multisample = State::Multisample::multisample = enabled; break;
-      case GL_NORMALIZE:            State::Enable::normalize = State::Transform::normalize = enabled; break;
-      case GL_POINT_SMOOTH:         State::Enable::pointSmooth = State::Point::smooth = enabled; break;
-      case GL_POINT_SPRITE:         State::Enable::pointSprite = State::Point::sprite = enabled; break;
-      case GL_POLYGON_OFFSET_FILL:  State::Enable::polygonOffsetFill = State::Polygon::offsetFill = enabled; break;
-      case GL_POLYGON_OFFSET_LINE:  State::Enable::polygonOffsetLine = State::Polygon::offsetLine = enabled; break;
-      case GL_POLYGON_OFFSET_POINT: State::Enable::polygonOffsetPoint = State::Polygon::offsetPoint = enabled; break;
-      case GL_POLYGON_SMOOTH:       State::Enable::polygonSmooth     = State::Polygon::smoothEnable = enabled; break;
-      case GL_POLYGON_STIPPLE:      State::Enable::polygonStipple    = State::Polygon::stippleEnable = enabled; break;
-      case GL_POST_COLOR_MATRIX_COLOR_TABLE: State::Enable::postColorMatrixColorTable = State::PixelMode::postColorMatrixColorTable = enabled; break;
-      case GL_POST_CONVOLUTION_COLOR_TABLE: State::Enable::postConvolutionColorTable  = State::PixelMode::postConvolutionColorTable = enabled; break;
-      case GL_PROGRAM_POINT_SIZE:  State::Enable::programPointSize   = enabled; break;
-      case GL_RESCALE_NORMAL:      State::Enable::rescaleNormal = State::Transform::rescaleNormal   = enabled; break;
-      case GL_SAMPLE_ALPHA_TO_COVERAGE: State::Enable::sampleAlphaToCoverage = State::Multisample::sampleAlphaToCoverage = enabled; break;
-      case GL_SAMPLE_ALPHA_TO_ONE: State::Enable::sampleAlphaToOne = State::Multisample::sampleAlphaToOne = enabled; break;
-      case GL_SAMPLE_COVERAGE:     State::Enable::sampleCoverage = State::Multisample::sampleCoverage = enabled; break;
-      case GL_SAMPLE_SHADING:      State::Enable::sampleShading = State::Multisample::sampleShading = enabled; break;
+      case GL_LIGHT7:
+        State::Enable::light[cap-GL_LIGHT0] = State::Lighting::lights[cap-GL_LIGHT0].enabled = enabled;
+        break;
+      case GL_LIGHTING:
+        State::Enable::lighting = State::Lighting::lighting = enabled;
+        break;
+      case GL_LINE_SMOOTH:
+        State::Enable::lineSmooth  = State::Line::smooth  = enabled;
+        break;
+      case GL_LINE_STIPPLE:
+        State::Enable::lineStipple = State::Line::stipple = enabled;
+        break;
+      case GL_MAP1_COLOR_4:
+        State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_INDEX:
+        State::Enable::map1Index         = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_NORMAL:
+        State::Enable::map1Normal        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_TEXTURE_COORD_1:
+        State::Enable::map1TextureCoord1 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_TEXTURE_COORD_2:
+        State::Enable::map1TextureCoord2 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_TEXTURE_COORD_3:
+        State::Enable::map1TextureCoord3 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_TEXTURE_COORD_4:
+        State::Enable::map1TextureCoord4 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_VERTEX_3:
+        State::Enable::map1Vertex3       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP1_VERTEX_4:
+        State::Enable::map1Vertex4       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_COLOR_4:
+        State::Enable::map2Color4        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_INDEX:
+        State::Enable::map2Index         = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_NORMAL:
+        State::Enable::map2Normal        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_TEXTURE_COORD_1:
+        State::Enable::map2TextureCoord1 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_TEXTURE_COORD_2:
+        State::Enable::map2TextureCoord2 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_TEXTURE_COORD_3:
+        State::Enable::map2TextureCoord3 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_TEXTURE_COORD_4:
+        State::Enable::map2TextureCoord4 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_VERTEX_3:
+        State::Enable::map2Vertex3       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MAP2_VERTEX_4:
+        State::Enable::map2Vertex4       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        break;
+      case GL_MINMAX:
+        State::Enable::minmax = State::PixelMode::minmax = enabled;
+        break;
+      case GL_MULTISAMPLE:
+        State::Enable::multisample = State::Multisample::multisample = enabled;
+        break;
+      case GL_NORMALIZE:
+        State::Enable::normalize = State::Transform::normalize = enabled;
+        break;
+      case GL_POINT_SMOOTH:
+        State::Enable::pointSmooth = State::Point::smooth = enabled;
+        break;
+      case GL_POINT_SPRITE:
+        State::Enable::pointSprite = State::Point::sprite = enabled;
+        break;
+      case GL_POLYGON_OFFSET_FILL:
+        State::Enable::polygonOffsetFill = State::Polygon::offsetFill = enabled;
+        break;
+      case GL_POLYGON_OFFSET_LINE:
+        State::Enable::polygonOffsetLine = State::Polygon::offsetLine = enabled;
+        break;
+      case GL_POLYGON_OFFSET_POINT:
+        State::Enable::polygonOffsetPoint = State::Polygon::offsetPoint = enabled;
+        break;
+      case GL_POLYGON_SMOOTH:
+        State::Enable::polygonSmooth     = State::Polygon::smoothEnable = enabled;
+        break;
+      case GL_POLYGON_STIPPLE:
+        State::Enable::polygonStipple    = State::Polygon::stippleEnable = enabled;
+        break;
+      case GL_POST_COLOR_MATRIX_COLOR_TABLE:
+        State::Enable::postColorMatrixColorTable = State::PixelMode::postColorMatrixColorTable = enabled;
+        break;
+      case GL_POST_CONVOLUTION_COLOR_TABLE:
+        State::Enable::postConvolutionColorTable  = State::PixelMode::postConvolutionColorTable = enabled;
+        break;
+      case GL_PROGRAM_POINT_SIZE:
+        State::Enable::programPointSize   = enabled;
+        break;
+      case GL_RESCALE_NORMAL:
+        State::Enable::rescaleNormal = State::Transform::rescaleNormal   = enabled;
+        break;
+      case GL_SAMPLE_ALPHA_TO_COVERAGE:
+        State::Enable::sampleAlphaToCoverage = State::Multisample::sampleAlphaToCoverage = enabled;
+        break;
+      case GL_SAMPLE_ALPHA_TO_ONE:
+        State::Enable::sampleAlphaToOne = State::Multisample::sampleAlphaToOne = enabled;
+        break;
+      case GL_SAMPLE_COVERAGE:
+        State::Enable::sampleCoverage = State::Multisample::sampleCoverage = enabled;
+        break;
+      case GL_SAMPLE_SHADING:
+        State::Enable::sampleShading = State::Multisample::sampleShading = enabled;
+        break;
       case GL_SCISSOR_TEST:
-          {
-            for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
-              State::Enable::scissorTest[ii] = State::Scissor::scissorTest[ii] = enabled;
-          }
-          break;
-      case GL_SEPARABLE_2D:      State::Enable::separable2d = State::PixelMode::separable2d = enabled; break;
-      case GL_STENCIL_TEST:      State::Enable::stencilTest = State::Stencil::enable = enabled; break;
-      case GL_TEXTURE_1D:        State::Enable::texture1d[activeTextureUnit]      = enabled; break;
-      case GL_TEXTURE_2D:        State::Enable::texture2d[activeTextureUnit]      = enabled; break;
-      case GL_TEXTURE_3D:        State::Enable::texture3d[activeTextureUnit]      = enabled; break;
-      case GL_TEXTURE_CUBE_MAP:  State::Enable::textureCubeMap[activeTextureUnit] = enabled; break;
-      case GL_TEXTURE_GEN_S:     State::Enable::textureGenS[activeTextureUnit]    = enabled; break;
-      case GL_TEXTURE_GEN_T:     State::Enable::textureGenT[activeTextureUnit]    = enabled; break;
-      case GL_TEXTURE_GEN_R:     State::Enable::textureGenR[activeTextureUnit]    = enabled; break;
-      case GL_TEXTURE_GEN_Q:     State::Enable::textureGenQ[activeTextureUnit]    = enabled; break;
-      case GL_VERTEX_PROGRAM_TWO_SIDE: State::Enable::vertexProgramTwoSide        = enabled; break;
+      {
+        for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+          State::Enable::scissorTest[ii] = State::Scissor::scissorTest[ii] = enabled;
+      }
+      break;
+      case GL_SEPARABLE_2D:
+        State::Enable::separable2d = State::PixelMode::separable2d = enabled;
+        break;
+      case GL_STENCIL_TEST:
+        State::Enable::stencilTest = State::Stencil::enable = enabled;
+        break;
+      case GL_TEXTURE_1D:
+        State::Enable::texture1d[activeTextureUnit]      = enabled;
+        break;
+      case GL_TEXTURE_2D:
+        State::Enable::texture2d[activeTextureUnit]      = enabled;
+        break;
+      case GL_TEXTURE_3D:
+        State::Enable::texture3d[activeTextureUnit]      = enabled;
+        break;
+      case GL_TEXTURE_CUBE_MAP:
+        State::Enable::textureCubeMap[activeTextureUnit] = enabled;
+        break;
+      case GL_TEXTURE_GEN_S:
+        State::Enable::textureGenS[activeTextureUnit]    = enabled;
+        break;
+      case GL_TEXTURE_GEN_T:
+        State::Enable::textureGenT[activeTextureUnit]    = enabled;
+        break;
+      case GL_TEXTURE_GEN_R:
+        State::Enable::textureGenR[activeTextureUnit]    = enabled;
+        break;
+      case GL_TEXTURE_GEN_Q:
+        State::Enable::textureGenQ[activeTextureUnit]    = enabled;
+        break;
+      case GL_VERTEX_PROGRAM_TWO_SIDE:
+        State::Enable::vertexProgramTwoSide        = enabled;
+        break;
 
-      default: break;
+      default:
+        break;
     }
 
     if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
@@ -1298,7 +1863,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return SetEnable(ctx, cap, GL_TRUE);
   }
 
-  bool Disable(RegalContext * ctx, GLenum cap)
+  bool Disable(RegalContext *ctx, GLenum cap)
   {
     Internal("Regal::Ppa::Disable ",Token::toString(cap));
     return SetEnable(ctx, cap, GL_FALSE);
@@ -1310,7 +1875,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return SetEnablei(ctx, cap, index, GL_TRUE);
   }
 
-  bool Disablei(RegalContext * ctx, GLenum cap, GLuint index)
+  bool Disablei(RegalContext *ctx, GLenum cap, GLuint index)
   {
     Internal("Regal::Ppa::Disablei ",Token::toString(cap),index);
     return SetEnablei(ctx, cap, index, GL_FALSE);
@@ -1332,10 +1897,17 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   {
     switch (target)
     {
-      case GL_CLAMP_FRAGMENT_COLOR: State::Enable::clampFragmentColor = State::ColorBuffer::clampFragmentColor = clamp; break;
-      case GL_CLAMP_READ_COLOR:     State::Enable::clampReadColor     = State::ColorBuffer::clampReadColor = clamp; break;
-      case GL_CLAMP_VERTEX_COLOR:   State::Enable::clampVertexColor   = State::Lighting::clampVertexColor = clamp; break;
-      default: break;
+      case GL_CLAMP_FRAGMENT_COLOR:
+        State::Enable::clampFragmentColor = State::ColorBuffer::clampFragmentColor = clamp;
+        break;
+      case GL_CLAMP_READ_COLOR:
+        State::Enable::clampReadColor     = State::ColorBuffer::clampReadColor = clamp;
+        break;
+      case GL_CLAMP_VERTEX_COLOR:
+        State::Enable::clampVertexColor   = State::Lighting::clampVertexColor = clamp;
+        break;
+      default:
+        break;
     }
   }
 

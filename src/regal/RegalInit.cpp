@@ -281,42 +281,48 @@ namespace Thread
 {
 
 #if REGAL_NO_TLS
-RegalContext *currentContext = NULL;
+ThreadLocal ThreadLocal::_instance;
 #else
+  #if REGAL_SYS_WGL
+    #if REGAL_WIN_TLS
+      DWORD ThreadLocal::_instanceIndex(DWORD(~0));
+    #else
+      __declspec(thread) ThreadLocal ThreadLocal::_instance;
+    #endif
+  #else
+    pthread_key_t ThreadLocal::_instanceKey(~0);
+  #endif
+#endif
 
-#if REGAL_SYS_WGL
-#if REGAL_WIN_TLS
-DWORD currentContextIndex = DWORD(~0);
-struct TlsInit
+struct ThreadLocalInit
 {
-  TlsInit()
+  ThreadLocalInit()
   {
-    currentContextIndex = TlsAlloc();
+    #if !REGAL_NO_TLS
+      #if REGAL_SYS_WGL
+        #if REGAL_WIN_TLS
+          ThreadLocal::_instanceIndex = TlsAlloc();
+        #endif
+      #else
+        pthread_key_create(&ThreadLocal::_instanceKey, NULL);
+      #endif
+    #endif
   }
-  ~TlsInit()
+  ~ThreadLocalInit()
   {
-    TlsFree( currentContextIndex );
+    #if !REGAL_NO_TLS
+      #if REGAL_SYS_WGL
+        #if REGAL_WIN_TLS
+          TlsFree(ThreadLocal::_instanceIndex);
+        #endif
+      #else
+        // TODO ThreadLocal::_instanceKey
+      #endif
+    #endif
   }
 };
-TlsInit tlsInit;
-#else
-__declspec( thread ) void * currentContext = NULL;
-#endif
 
-#else
-pthread_key_t currentContextKey = 0;
-
-struct TlsInit
-{
-  TlsInit()
-  {
-    pthread_key_create( &currentContextKey, NULL );
-  }
-};
-
-TlsInit tlsInit;
-#endif
-#endif
+ThreadLocalInit threadLocalInit;
 
 }
 
@@ -325,32 +331,8 @@ Init::setContextTLS(RegalContext *context)
 {
   Internal("Init::setContextTLS","thread=",::boost::print::hex(Thread::threadId())," context=",context);
 
-  // Without thread local storage, simply set the
-  // current Regal context
-
-#if REGAL_NO_TLS
-  Thread::currentContext = context;
-#else
-
-  // For Windows....
-
-# if REGAL_SYS_WGL
-#  if REGAL_WIN_TLS
-  if (Thread::currentContextIndex == ~0)
-    Thread::currentContextIndex = TlsAlloc();
-  TlsSetValue( Thread::currentContextIndex, context );
-#  else
-  Thread::currentContext = context;
-#  endif
-# else
-
-  // For Linux and Mac...
-
-  if (!Thread::currentContextKey)
-    pthread_key_create( &Thread::currentContextKey, NULL );
-  pthread_setspecific( Thread::currentContextKey, context );
-# endif
-#endif
+  Thread::ThreadLocal &instance = Thread::ThreadLocal::instance();
+  instance.currentContext = context;
 }
 
 void

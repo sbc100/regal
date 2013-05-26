@@ -51,6 +51,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPush.h"
 #include "RegalToken.h"
 #include "RegalState.h"
+#include "RegalClientState.h"
 #include "RegalHelper.h"
 #include "RegalPrivate.h"
 #include "RegalDebugInfo.h"

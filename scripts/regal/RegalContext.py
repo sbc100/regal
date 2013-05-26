@@ -454,6 +454,27 @@ def generateContextHeader(apis, args):
 
     outputCode( '%s/RegalContext.h' % args.srcdir, contextHeaderTemplate.substitute(substitute))
 
+def addEmulatedExtensions(extensions, emuLayer):
+    str = ''
+
+    for extension in extensions:
+      if extension.emulatedBy == emuLayer:
+        emuStr = ''
+
+        # Strip 'GL_' prefix
+        name = extension.name[3:]
+
+        emuStr += 'Internal("RegalContext::Init ","GL_%s");\n' % name
+        emuStr += 'info->regal_%s = true;\n' % name.lower()
+        emuStr += 'info->regalExtensionsSet.insert("GL_%s");\n' % name
+
+        str += wrapCIf('!info->gl_%s' % name.lower(), emuStr)
+
+    if str != '':
+      str += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
+
+    return str
+
 def generateContextSource(apis, args):
 
     includes           = ''
@@ -465,6 +486,7 @@ def generateContextSource(apis, args):
     emuMemberInit      = ''
     emuMemberCleanup   = ''
     emuMemberDestruct  = ''
+    emulatedExtensions = []
 
     for i in emuRegal:
       if i['include']:
@@ -480,6 +502,11 @@ def generateContextSource(apis, args):
     emuMemberInit += '    emuLevel = %d;\n' % ( len( emu ) - 1 )
     emuMemberCleanup  += '  // emu\n'
     emuMemberDestruct += '  // emu\n'
+
+    for api in apis:
+      for extension in api.extensions:
+        if len(extension.emulatedBy):
+          emulatedExtensions.append(extension)
 
     for i in range( len( emu ) - 1 ) :
       if emu[i]['member']:
@@ -500,29 +527,8 @@ def generateContextSource(apis, args):
         revi = len( emu ) - 2 - i;
         if emu[revi]['member']:
             init = ''
-            if emu[revi]['member']=='dsa':
-              init += 'Internal("RegalContext::Init ","GL_EXT_direct_state_access");\n'
-              init += 'info->regal_ext_direct_state_access = true;\n'
-              init += 'info->regalExtensionsSet.insert("GL_EXT_direct_state_access");\n'
-              init += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
-            if emu[revi]['member']=='texsto':
-              init += 'Internal("RegalContext::Init ","GL_ARB_texture_storage");\n'
-              init += 'info->regal_arb_texture_storage = true;\n'
-              init += 'info->regalExtensionsSet.insert("GL_ARB_texture_storage");\n'
-              init += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
-            if emu[revi]['member']=='filt':
-              es2_exts = ''
-              es2_exts += 'Internal("RegalContext::Init ","GL_EXT_blend_color");\n'
-              es2_exts += 'Internal("RegalContext::Init ","GL_EXT_blend_subtract");\n'
-              es2_exts += 'Internal("RegalContext::Init ","GL_NV_blend_square");\n'
-              es2_exts += 'info->regal_ext_blend_color = true;\n'
-              es2_exts += 'info->regal_ext_blend_subtract = true;\n'
-              es2_exts += 'info->regal_nv_blend_square = true;\n'
-              es2_exts += 'info->regalExtensionsSet.insert("GL_EXT_blend_color");\n'
-              es2_exts += 'info->regalExtensionsSet.insert("GL_EXT_blend_subtract");\n'
-              es2_exts += 'info->regalExtensionsSet.insert("GL_NV_blend_square");\n'
-              es2_exts += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
-              init += wrapCIf('info->es2',es2_exts)
+
+            init += addEmulatedExtensions(emulatedExtensions, emu[revi]['member'])
 
             init += '%s = new %s;\n' % ( emu[revi]['member'], emu[revi]['type'] )
             init += 'emuLevel = %d;\n' % ( int(emu[revi]['level']) - 1)

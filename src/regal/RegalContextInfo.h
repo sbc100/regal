@@ -82,12 +82,6 @@ struct ContextInfo
   std::string regalVersion;
   std::string regalExtensions;
 
-  bool        regal_ext_direct_state_access;
-  bool        regal_arb_texture_storage;
-  bool        regal_ext_blend_color;
-  bool        regal_ext_blend_subtract;
-  bool        regal_nv_blend_square;
-
   std::set<std::string> regalExtensionsSet;
 
   // As supported by the OpenGL implementation
@@ -545,6 +539,7 @@ struct ContextInfo
   GLboolean gl_oes_depth_texture : 1;
   GLboolean gl_oes_draw_texture : 1;
   GLboolean gl_oes_element_index_uint : 1;
+  GLboolean gl_oes_fbo_render_mipmap : 1;
   GLboolean gl_oes_framebuffer_object : 1;
   GLboolean gl_oes_get_program_binary : 1;
   GLboolean gl_oes_mapbuffer : 1;
@@ -648,6 +643,12 @@ struct ContextInfo
   GLboolean gl_win_phong_shading : 1;
   GLboolean gl_win_specular_fog : 1;
   GLboolean gl_win_swap_hint : 1;
+  GLboolean regal_arb_texture_storage : 1;
+  GLboolean regal_ext_blend_color : 1;
+  GLboolean regal_ext_blend_subtract : 1;
+  GLboolean regal_ext_direct_state_access : 1;
+  GLboolean regal_ext_framebuffer_object : 1;
+  GLboolean regal_nv_blend_square : 1;
 
 #if REGAL_SYS_WGL
   GLboolean wgl_3dl_stereo_control : 1;

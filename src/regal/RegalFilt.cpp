@@ -69,6 +69,82 @@ namespace Emu {
     }
   }
 
+  void Filt::FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment,
+                                  GLenum textarget, GLuint texture, GLint level)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(attachment);
+    UNUSED_PARAMETER(textarget);
+    UNUSED_PARAMETER(texture);
+    UNUSED_PARAMETER(level);
+
+    if (!FramebufferAttachmentSupported(ctx, attachment))
+    {
+      filtered = true;
+      return;
+    }
+
+    if (!ctx.isES2())
+      return;
+
+    if ((level > 0) && !ctx.info->gl_oes_fbo_render_mipmap)
+    {
+      Warning("glFramebufferTexture2D with level > 0 not supported for ES 2.0 without OES_fbo_render_mipmap.");
+      filtered = true;
+      return;
+    }
+
+    if (texture > 0)
+    {
+      switch (textarget)
+      {
+        case GL_TEXTURE_2D:
+        case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
+        case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
+        case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
+        case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
+        case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
+        case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
+          break;
+
+        default:
+          Warning("glFramebufferTexture2D with ", GLenumToString(target), ") not supported for ES 2.0.");
+          filtered = true;
+          break;
+      }
+    }
+  }
+
+  void Filt::GenerateMipmap(const RegalContext &ctx, GLenum target)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(target);
+
+    if (!ctx.isES2())
+      return;
+
+    switch(target)
+    {
+      case GL_TEXTURE_2D:
+      case GL_TEXTURE_CUBE_MAP:
+        break;
+
+      case GL_TEXTURE_2D_ARRAY:
+        if (!ctx.info->gl_nv_texture_array)
+        {
+          Warning("glGenerateMipmap(GL_TEXTURE_2D_ARRAY) not supported for ES 2.0 without NV_texture_array.");
+          filtered = true;
+        }
+        break;
+
+      default:
+        Warning("glGenerateMipmap(", GLenumToString(target), ") not supported for ES 2.0.");
+        filtered = true;
+        break;
+    }
+  }
+
   void Filt::RenderMode(const RegalContext &ctx, GLenum mode)
   {
     UNUSED_PARAMETER(ctx);
@@ -109,6 +185,29 @@ namespace Emu {
           }
         default: break;
       }
+  }
+
+  bool Filt::FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(attachment);
+
+    // If we're running on a non-ES context, then all attachments from EXT_framebuffer_object
+    // are supported
+    if (!ctx.isES2())
+      return true;
+
+    // COLOR_ATTACHMENT1 and up not supported in base ES 2.0. Need either
+    // NV_fbo_color_attachments, or EXT_draw_buffers (not yet checked by Regal)
+    if ((attachment > GL_COLOR_ATTACHMENT0) &&
+        (attachment <= GL_COLOR_ATTACHMENT15) &&
+        !(ctx.info->gl_nv_fbo_color_attachments /*|| ctx.info->gl_ext_draw_buffers*/))
+    {
+      Warning("GL_COLOR_ATTACHMENT1+ not supported for ES 2.0 without NV_fbo_color_attachments or EXT_draw_buffers.");
+      return false;
+    }
+
+    return true;
   }
 
   void Filt::PixelStorei(const RegalContext &ctx, GLenum pname, GLint param)
@@ -270,6 +369,13 @@ namespace Emu {
     {
       filtered = true;
       switch (pname) {
+        case GL_MAX_COLOR_ATTACHMENTS:
+          if (ctx.info->gl_nv_fbo_color_attachments)
+            filtered = false;
+          else
+            retVal = 1;
+          break;
+
         case GL_PACK_ROW_LENGTH_NV:
         case GL_PACK_SKIP_ROWS_NV:
         case GL_PACK_SKIP_PIXELS_NV:

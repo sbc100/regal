@@ -123,7 +123,7 @@ def emuFindEntry(func, emuFormulae, member):
 
   # ... and mappings from arg0plus to lists of function parameters
 
-  for i in range(0,4):
+  for i in range(0,5):
     label = 'arg%dplus' % i;
     if len(arglist) > 0 :
       arg[label] = ', '.join(arglist)

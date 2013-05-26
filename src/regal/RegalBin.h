@@ -48,7 +48,8 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-namespace Emu {
+namespace Emu
+{
 
 struct Bin
 {
@@ -62,9 +63,9 @@ struct Bin
     UNUSED_PARAMETER(ctx);
   }
 
-  void ShaderBinary( RegalContext * ctx, GLsizei count, const GLuint *shaders, GLenum binaryFormat, const void * binary, GLsizei length)
+  void ShaderBinary( RegalContext *ctx, GLsizei count, const GLuint *shaders, GLenum binaryFormat, const void *binary, GLsizei length)
   {
-    DispatchTable & tbl = ctx->dispatcher.emulation;
+    DispatchTable &tbl = ctx->dispatcher.emulation;
     tbl.glShaderBinary( count, shaders, binaryFormat, binary, length );
   }
 };

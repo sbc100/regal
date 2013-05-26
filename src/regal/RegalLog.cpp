@@ -357,7 +357,7 @@ namespace Logging {
     // (recursive) logging.
 
 #if !REGAL_SYS_WGL && !REGAL_NO_TLS
-    if (!Thread::currentContextKey || !pthread_getspecific(Thread::currentContextKey))
+    if (!Thread::ThreadLocal::_instanceKey || !pthread_getspecific(Thread::ThreadLocal::_instanceKey))
       return 0;
 #endif
 
@@ -586,7 +586,7 @@ namespace Logging {
       RegalContext *rCtx = NULL;
 
 #if !REGAL_SYS_WGL && !REGAL_NO_TLS
-      if (Thread::currentContextKey && pthread_getspecific(Thread::currentContextKey))
+      if (Thread::ThreadLocal::_instanceKey && pthread_getspecific(Thread::ThreadLocal::_instanceKey))
         rCtx = REGAL_GET_CONTEXT();
 #else
       rCtx = REGAL_GET_CONTEXT();

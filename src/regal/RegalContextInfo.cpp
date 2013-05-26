@@ -66,11 +66,7 @@ using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 
 ContextInfo::ContextInfo()
-: regal_ext_direct_state_access(false),
-  regal_arb_texture_storage(false),
-  regal_ext_blend_color(false),
-  regal_ext_blend_subtract(false),
-  regal_nv_blend_square(false),
+:
   compat(false),
   core(false),
   es1(false),
@@ -515,6 +511,7 @@ ContextInfo::ContextInfo()
   gl_oes_depth_texture(false),
   gl_oes_draw_texture(false),
   gl_oes_element_index_uint(false),
+  gl_oes_fbo_render_mipmap(false),
   gl_oes_framebuffer_object(false),
   gl_oes_get_program_binary(false),
   gl_oes_mapbuffer(false),
@@ -618,6 +615,12 @@ ContextInfo::ContextInfo()
   gl_win_phong_shading(false),
   gl_win_specular_fog(false),
   gl_win_swap_hint(false),
+  regal_arb_texture_storage(false),
+  regal_ext_blend_color(false),
+  regal_ext_blend_subtract(false),
+  regal_ext_direct_state_access(false),
+  regal_ext_framebuffer_object(false),
+  regal_nv_blend_square(false),
 #if REGAL_SYS_WGL
   wgl_3dl_stereo_control(false),
   wgl_amd_gpu_association(false),
@@ -1414,6 +1417,7 @@ ContextInfo::init(const RegalContext &context)
   gl_oes_depth_texture = e.find("GL_OES_depth_texture")!=e.end();
   gl_oes_draw_texture = e.find("GL_OES_draw_texture")!=e.end();
   gl_oes_element_index_uint = e.find("GL_OES_element_index_uint")!=e.end();
+  gl_oes_fbo_render_mipmap = e.find("GL_OES_fbo_render_mipmap")!=e.end();
   gl_oes_framebuffer_object = e.find("GL_OES_framebuffer_object")!=e.end();
   gl_oes_get_program_binary = e.find("GL_OES_get_program_binary")!=e.end();
   gl_oes_mapbuffer = e.find("GL_OES_mapbuffer")!=e.end();
@@ -1893,7 +1897,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_framebuffer_blit")) return gl_ext_framebuffer_blit;
   if (!strcmp(ext,"GL_EXT_framebuffer_multisample")) return gl_ext_framebuffer_multisample;
   if (!strcmp(ext,"GL_EXT_framebuffer_multisample_blit_scaled")) return gl_ext_framebuffer_multisample_blit_scaled;
-  if (!strcmp(ext,"GL_EXT_framebuffer_object")) return gl_ext_framebuffer_object;
+  if (!strcmp(ext,"GL_EXT_framebuffer_object")) return regal_ext_framebuffer_object || gl_ext_framebuffer_object;
   if (!strcmp(ext,"GL_EXT_framebuffer_sRGB")) return gl_ext_framebuffer_srgb;
   if (!strcmp(ext,"GL_EXT_geometry_shader4")) return gl_ext_geometry_shader4;
   if (!strcmp(ext,"GL_EXT_gpu_program_parameters")) return gl_ext_gpu_program_parameters;
@@ -2093,6 +2097,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_OES_depth_texture")) return gl_oes_depth_texture;
   if (!strcmp(ext,"GL_OES_draw_texture")) return gl_oes_draw_texture;
   if (!strcmp(ext,"GL_OES_element_index_uint")) return gl_oes_element_index_uint;
+  if (!strcmp(ext,"GL_OES_fbo_render_mipmap")) return gl_oes_fbo_render_mipmap;
   if (!strcmp(ext,"GL_OES_framebuffer_object")) return gl_oes_framebuffer_object;
   if (!strcmp(ext,"GL_OES_get_program_binary")) return gl_oes_get_program_binary;
   if (!strcmp(ext,"GL_OES_mapbuffer")) return gl_oes_mapbuffer;

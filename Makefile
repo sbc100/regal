@@ -304,6 +304,10 @@ endif
 ifeq ($(MODE),custom)
 endif
 
+#
+
+LIB.CFLAGS         += -fvisibility=hidden
+
 LIB.INCLUDE        += -Isrc/boost
 
 LIB.SRCS.NAMES     := $(notdir $(LIB.SRCS))

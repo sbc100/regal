@@ -207,6 +207,8 @@ def writeExtensions(file,name,extensions):
       print >>file, '%s.enumerants = [\'%s\']'%(i.name,'\',\''.join(i.enumerants))
     if len(i.functions):
       print >>file, '%s.functions = [\'%s\']'%(i.name,'\',\''.join(i.functions))
+    if len(i.emulatedBy):
+      print >>file, '%s.emulatedBy = \'%s\''%(i.name,i.emulatedBy)
     print >>file, '%s.add(%s)'%(name,i.name)
     print >>file, ''
 

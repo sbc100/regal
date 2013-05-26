@@ -3208,6 +3208,7 @@ static void REGAL_CALL emu_glDisable(GLenum cap)
            case GL_STENCIL_TEST:
            case GL_SAMPLE_ALPHA_TO_COVERAGE:
            case GL_SAMPLE_COVERAGE:
+           case GL_FRAMEBUFFER_SRGB:
            case GL_TEXTURE_2D:
              break;
            default:
@@ -3556,6 +3557,7 @@ static void REGAL_CALL emu_glEnable(GLenum cap)
            case GL_STENCIL_TEST:
            case GL_SAMPLE_ALPHA_TO_COVERAGE:
            case GL_SAMPLE_COVERAGE:
+           case GL_FRAMEBUFFER_SRGB:
            case GL_TEXTURE_2D:
              break;
            default:
@@ -6871,6 +6873,7 @@ static GLboolean REGAL_CALL emu_glIsEnabled(GLenum cap)
            case GL_STENCIL_TEST:
            case GL_SAMPLE_ALPHA_TO_COVERAGE:
            case GL_SAMPLE_COVERAGE:
+           case GL_FRAMEBUFFER_SRGB:
            case GL_TEXTURE_2D:
              break;
            default:
@@ -32239,7 +32242,7 @@ static void REGAL_CALL emu_glDrawElementsBaseVertex(GLenum mode, GLsizei count, 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        if( ! _context->bv->glDrawElementsBaseVertex( _context, mode, count, type, indices, basevertex ) ) {
+        if( ! _context->bv->glDrawElementsBaseVertex( *_context, mode, count, type, indices, basevertex ) ) {
           _context->dispatcher.emulation.glDrawElementsBaseVertex( mode, count, type, indices, basevertex );
         }
         return;
@@ -32336,7 +32339,7 @@ static void REGAL_CALL emu_glDrawElementsInstancedBaseVertex(GLenum mode, GLsize
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        if( ! _context->bv->glDrawElementsInstancedBaseVertex( _context, mode, count, type, indices, primcount, basevertex ) ) {
+        if( ! _context->bv->glDrawElementsInstancedBaseVertex( *_context, mode, count, type, indices, primcount, basevertex ) ) {
           _context->dispatcher.emulation.glDrawElementsInstancedBaseVertex( mode, count, type, indices, primcount, basevertex );
         }
         return;
@@ -32421,7 +32424,7 @@ static void REGAL_CALL emu_glDrawRangeElementsBaseVertex(GLenum mode, GLuint sta
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        if( ! _context->bv->glDrawRangeElementsBaseVertex( _context, mode, start, end, count, type, indices, basevertex ) ) {
+        if( ! _context->bv->glDrawRangeElementsBaseVertex( *_context, mode, start, end, count, type, indices, basevertex ) ) {
           _context->dispatcher.emulation.glDrawRangeElementsBaseVertex( mode, start, end, count, type, indices, basevertex );
         }
         return;
@@ -32544,7 +32547,7 @@ static void REGAL_CALL emu_glMultiDrawElementsBaseVertex(GLenum mode, const GLsi
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        if( ! _context->bv->glMultiDrawElementsBaseVertex( _context, mode, count, type, indices, primcount, basevertex ) ) {
+        if( ! _context->bv->glMultiDrawElementsBaseVertex( *_context, mode, count, type, indices, primcount, basevertex ) ) {
           _context->dispatcher.emulation.glMultiDrawElementsBaseVertex( mode, count, type, indices, primcount, basevertex );
         }
         return;
@@ -33130,14 +33133,60 @@ static void REGAL_CALL emu_glFramebufferRenderbuffer(GLenum target, GLenum attac
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferRenderbuffer)(target, attachment, renderbuffertarget, renderbuffer);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        DispatchTable *_next = _context->dispatcher.emulation._next;
+        RegalAssert(_next);
+        if (_context->filt->FramebufferAttachmentSupported(*_context, attachment))
+          _next->call(&_next->glFramebufferRenderbuffer)(target, attachment, renderbuffertarget, renderbuffer);
+        return;
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferRenderbuffer)(target, attachment, renderbuffertarget, renderbuffer);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTexture1D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
@@ -33150,6 +33199,9 @@ static void REGAL_CALL emu_glFramebufferTexture1D(GLenum target, GLenum attachme
   switch( _context->emuLevel )
   {
     case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -33163,14 +33215,69 @@ static void REGAL_CALL emu_glFramebufferTexture1D(GLenum target, GLenum attachme
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTexture1D)(target, attachment, textarget, texture, level);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture1D)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level);
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        DispatchTable *_next = _context->dispatcher.emulation._next;
+        RegalAssert(_next);
+        if (_context->filt->FramebufferAttachmentSupported(*_context, attachment))
+          _next->call(&_next->glFramebufferTexture1D)(target, attachment, textarget, texture, level);
+        return;
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture1D)(target, attachment, textarget, texture, level);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
@@ -33183,6 +33290,9 @@ static void REGAL_CALL emu_glFramebufferTexture2D(GLenum target, GLenum attachme
   switch( _context->emuLevel )
   {
     case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -33196,14 +33306,72 @@ static void REGAL_CALL emu_glFramebufferTexture2D(GLenum target, GLenum attachme
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTexture2D)(target, attachment, textarget, texture, level);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture2D)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level);
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        _context->filt->FramebufferTexture2D(*_context, target, attachment, textarget, texture, level);
+        if (_context->filt->Filtered())
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture2D)(target, attachment, textarget, texture, level);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTexture3D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint layer)
@@ -33229,14 +33397,60 @@ static void REGAL_CALL emu_glFramebufferTexture3D(GLenum target, GLenum attachme
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTexture3D)(target, attachment, textarget, texture, level, layer);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        DispatchTable *_next = _context->dispatcher.emulation._next;
+        RegalAssert(_next);
+        if (_context->filt->FramebufferAttachmentSupported(*_context, attachment))
+          _next->call(&_next->glFramebufferTexture3D)(target, attachment, textarget, texture, level, layer);
+        return;
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture3D)(target, attachment, textarget, texture, level, layer);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTextureLayer(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer)
@@ -33307,6 +33521,9 @@ static void REGAL_CALL emu_glGenerateMipmap(GLenum target)
       if (_context->texc) break;
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -33338,11 +33555,118 @@ static void REGAL_CALL emu_glGenerateMipmap(GLenum target)
       }
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        _context->filt->GenerateMipmap(*_context, target);
+        if (_context->filt->Filtered())
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
+        }
+      }
+      #endif
     default:
     {
       DispatchTable *_next = _dispatch._next;
       RegalAssert(_next);
       _next->call(&_next->glGenerateMipmap)(target);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glGetFramebufferAttachmentParameteriv)(target, attachment, pname, params);
+        if (pname == GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME)
+        {
+          GLint attachType = GL_RENDERBUFFER;
+          _dispatch.call(&_dispatch.glGetFramebufferAttachmentParameteriv)(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &attachType);
+          if (attachType == GL_TEXTURE)
+            *params = _context->obj->textureNames.ToAppName(*params);
+        }
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        DispatchTable *_next = _context->dispatcher.emulation._next;
+        RegalAssert(_next);
+        if (!_context->filt->FramebufferAttachmentSupported(*_context, attachment))
+          *params = 0;
+        else
+          _next->call(&_next->glGetFramebufferAttachmentParameteriv)(target, attachment, pname, params);
+        return;
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glGetFramebufferAttachmentParameteriv)(target, attachment, pname, params);
       break;
     }
 
@@ -58366,10 +58690,12 @@ static void REGAL_CALL emu_glBindFramebufferEXT(GLenum target, GLuint framebuffe
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        if (_context->isES2())
+        if (!_context->info->gl_ext_framebuffer_object)
         {
-          const bool hasFBBlit = _context->info->gl_ext_framebuffer_blit || _context->info->gl_nv_framebuffer_blit || _context->info->gl_version_major >= 3;
-          if (!hasFBBlit && (target==GL_DRAW_FRAMEBUFFER || target==GL_READ_FRAMEBUFFER)) target = GL_FRAMEBUFFER;
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glBindFramebuffer)(target, framebuffer);
+          return;
         }
       }
       #endif
@@ -58403,7 +58729,17 @@ static void REGAL_CALL emu_glBindRenderbufferEXT(GLenum target, GLuint renderbuf
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -58428,13 +58764,105 @@ static void REGAL_CALL emu_glBindRenderbufferEXT(GLenum target, GLuint renderbuf
         return;
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glBindRenderbuffer)(target, renderbuffer);
+          return;
+        }
+      }
+      #endif
     default:
     {
       DispatchTable *_next = _dispatch._next;
       RegalAssert(_next);
       _next->call(&_next->glBindRenderbufferEXT)(target, renderbuffer);
       break;
+    }
+
+  }
+
+}
+
+static GLenum REGAL_CALL emu_glCheckFramebufferStatusEXT(GLenum target)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          return _table.call(&_table.glCheckFramebufferStatus)(target);
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      return _next->call(&_next->glCheckFramebufferStatusEXT)(target);
     }
 
   }
@@ -58464,14 +58892,62 @@ static void REGAL_CALL emu_glDeleteFramebuffersEXT(GLsizei n, const GLuint *fram
         _context->dsa->DeleteFramebuffers( _context, n, framebuffers );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glDeleteFramebuffersEXT)(n, framebuffers);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glDeleteFramebuffers)(n, framebuffers);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glDeleteFramebuffersEXT)(n, framebuffers);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glDeleteRenderbuffersEXT(GLsizei n, const GLuint *renderbuffers)
@@ -58497,14 +58973,62 @@ static void REGAL_CALL emu_glDeleteRenderbuffersEXT(GLsizei n, const GLuint *ren
         _context->dsa->DeleteRenderbuffers( _context, n, renderbuffers );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glDeleteRenderbuffersEXT)(n, renderbuffers);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glDeleteRenderbuffers)(n, renderbuffers);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glDeleteRenderbuffersEXT)(n, renderbuffers);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferRenderbufferEXT(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
@@ -58530,14 +59054,62 @@ static void REGAL_CALL emu_glFramebufferRenderbufferEXT(GLenum target, GLenum at
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferRenderbufferEXT)(target, attachment, renderbuffertarget, renderbuffer);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glFramebufferRenderbuffer)(target, attachment, renderbuffertarget, renderbuffer);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferRenderbufferEXT)(target, attachment, renderbuffertarget, renderbuffer);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTexture1DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
@@ -58550,6 +59122,9 @@ static void REGAL_CALL emu_glFramebufferTexture1DEXT(GLenum target, GLenum attac
   switch( _context->emuLevel )
   {
     case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -58563,14 +59138,71 @@ static void REGAL_CALL emu_glFramebufferTexture1DEXT(GLenum target, GLenum attac
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTexture1DEXT)(target, attachment, textarget, texture, level);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture1DEXT)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level);
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glFramebufferTexture1D)(target, attachment, textarget, texture, level);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture1DEXT)(target, attachment, textarget, texture, level);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTexture2DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
@@ -58583,6 +59215,9 @@ static void REGAL_CALL emu_glFramebufferTexture2DEXT(GLenum target, GLenum attac
   switch( _context->emuLevel )
   {
     case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -58596,17 +59231,167 @@ static void REGAL_CALL emu_glFramebufferTexture2DEXT(GLenum target, GLenum attac
         _context->dsa->RestoreFramebuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTexture2DEXT)(target, attachment, textarget, texture, level);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture2DEXT)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level);
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glFramebufferTexture2D)(target, attachment, textarget, texture, level);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture2DEXT)(target, attachment, textarget, texture, level);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glFramebufferTexture3DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 8;
+        _context->dsa->RestoreFramebuffer( _context );
+      }
+      #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture3DEXT)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level, zoffset);
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glFramebufferTexture3D)(target, attachment, textarget, texture, level, zoffset);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture3DEXT)(target, attachment, textarget, texture, level, zoffset);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glGenFramebuffersEXT(GLsizei n, GLuint *framebuffers)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -58621,22 +59406,135 @@ static void REGAL_CALL emu_glFramebufferTexture3DEXT(GLenum target, GLenum attac
     case 11 :
     case 10 :
     case 9 :
-      #if REGAL_EMU_DSA
-      if (_context->dsa)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 8;
-        _context->dsa->RestoreFramebuffer( _context );
-      }
-      #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTexture3DEXT)(target, attachment, textarget, texture, level, zoffset);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glGenFramebuffers)(n, framebuffers);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glGenFramebuffersEXT)(n, framebuffers);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glGenRenderbuffersEXT(GLsizei n, GLuint *renderbuffers)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glGenRenderbuffers)(n, renderbuffers);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glGenRenderbuffersEXT)(n, renderbuffers);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glGenerateMipmapEXT(GLenum target)
@@ -58674,6 +59572,9 @@ static void REGAL_CALL emu_glGenerateMipmapEXT(GLenum target)
       if (_context->texc) break;
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -58705,11 +59606,117 @@ static void REGAL_CALL emu_glGenerateMipmapEXT(GLenum target)
       }
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glGenerateMipmap)(target);
+          return;
+        }
+      }
+      #endif
     default:
     {
       DispatchTable *_next = _dispatch._next;
       RegalAssert(_next);
       _next->call(&_next->glGenerateMipmapEXT)(target);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glGetFramebufferAttachmentParameterivEXT(GLenum target, GLenum attachment, GLenum pname, GLint *params)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glGetFramebufferAttachmentParameterivEXT)(target, attachment, pname, params);
+        if (pname == GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME)
+        {
+          GLint attachType = GL_RENDERBUFFER;
+          _dispatch.call(&_dispatch.glGetFramebufferAttachmentParameterivEXT)(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &attachType);
+          if (attachType == GL_TEXTURE)
+            *params = _context->obj->textureNames.ToAppName(*params);
+        }
+        return;
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glGetFramebufferAttachmentParameteriv)(target, attachment, pname, params);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glGetFramebufferAttachmentParameterivEXT)(target, attachment, pname, params);
       break;
     }
 
@@ -58740,14 +59747,204 @@ static void REGAL_CALL emu_glGetRenderbufferParameterivEXT(GLenum target, GLenum
         _context->dsa->RestoreRenderbuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glGetRenderbufferParameterivEXT)(target, pname, params);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glGetRenderbufferParameteriv)(target, pname, params);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glGetRenderbufferParameterivEXT)(target, pname, params);
+      break;
+    }
+
+  }
+
+}
+
+static GLboolean REGAL_CALL emu_glIsFramebufferEXT(GLuint framebuffer)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          return _table.call(&_table.glIsFramebuffer)(framebuffer);
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      return _next->call(&_next->glIsFramebufferEXT)(framebuffer);
+    }
+
+  }
+
+}
+
+static GLboolean REGAL_CALL emu_glIsRenderbufferEXT(GLuint renderbuffer)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          return _table.call(&_table.glIsRenderbuffer)(renderbuffer);
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      return _next->call(&_next->glIsRenderbufferEXT)(renderbuffer);
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glRenderbufferStorageEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
@@ -58773,14 +59970,62 @@ static void REGAL_CALL emu_glRenderbufferStorageEXT(GLenum target, GLenum intern
         _context->dsa->RestoreRenderbuffer( _context );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTable *_next = _dispatch._next;
-  RegalAssert(_next);
-  _next->call(& _next->glRenderbufferStorageEXT)(target, internalformat, width, height);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ext_framebuffer_object)
+        {
+          DispatchTable &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glRenderbufferStorage)(target, internalformat, width, height);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glRenderbufferStorageEXT)(target, internalformat, width, height);
+      break;
+    }
+
+  }
+
 }
 
 // GL_EXT_geometry_shader4
@@ -59064,6 +60309,50 @@ static void REGAL_CALL emu_glMultiDrawElementsEXT(GLenum mode, const GLsizei *co
 // GL_EXT_multisample
 
 // GL_EXT_multisampled_render_to_texture
+
+static void REGAL_CALL emu_glFramebufferTexture2DMultisampleEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLsizei samples)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture2DMultisampleEXT)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level, samples);
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture2DMultisampleEXT)(target, attachment, textarget, texture, level, samples);
+      break;
+    }
+
+  }
+
+}
 
 // GL_EXT_multiview_draw_buffers
 
@@ -62340,6 +63629,50 @@ static void REGAL_CALL emu_glDeleteRenderbuffersOES(GLsizei n, const GLuint *ren
   _next->call(& _next->glDeleteRenderbuffersOES)(n, renderbuffers);
 }
 
+static void REGAL_CALL emu_glFramebufferTexture2DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture2DOES)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level);
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture2DOES)(target, attachment, textarget, texture, level);
+      break;
+    }
+
+  }
+
+}
+
 // GL_OES_get_program_binary
 
 // GL_OES_mapbuffer
@@ -62349,6 +63682,50 @@ static void REGAL_CALL emu_glDeleteRenderbuffersOES(GLsizei n, const GLuint *ren
 // GL_OES_single_precision
 
 // GL_OES_texture_3D
+
+static void REGAL_CALL emu_glFramebufferTexture3DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTable &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+      #if REGAL_EMU_OBJ
+      if (_context->obj)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        _dispatch.call(&_dispatch.glFramebufferTexture3DOES)(target, attachment, textarget, _context->obj->textureNames.ToDriverName(texture), level, zoffset);
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTable *_next = _dispatch._next;
+      RegalAssert(_next);
+      _next->call(&_next->glFramebufferTexture3DOES)(target, attachment, textarget, texture, level, zoffset);
+      break;
+    }
+
+  }
+
+}
 
 // GL_OES_texture_cube_map
 
@@ -63423,6 +64800,7 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glFramebufferTexture3D = emu_glFramebufferTexture3D;
    tbl.glFramebufferTextureLayer = emu_glFramebufferTextureLayer;
    tbl.glGenerateMipmap = emu_glGenerateMipmap;
+   tbl.glGetFramebufferAttachmentParameteriv = emu_glGetFramebufferAttachmentParameteriv;
    tbl.glGetRenderbufferParameteriv = emu_glGetRenderbufferParameteriv;
    tbl.glRenderbufferStorage = emu_glRenderbufferStorage;
    tbl.glRenderbufferStorageMultisample = emu_glRenderbufferStorageMultisample;
@@ -63968,14 +65346,20 @@ void InitDispatchTableEmu(DispatchTable &tbl)
 
    tbl.glBindFramebufferEXT = emu_glBindFramebufferEXT;
    tbl.glBindRenderbufferEXT = emu_glBindRenderbufferEXT;
+   tbl.glCheckFramebufferStatusEXT = emu_glCheckFramebufferStatusEXT;
    tbl.glDeleteFramebuffersEXT = emu_glDeleteFramebuffersEXT;
    tbl.glDeleteRenderbuffersEXT = emu_glDeleteRenderbuffersEXT;
    tbl.glFramebufferRenderbufferEXT = emu_glFramebufferRenderbufferEXT;
    tbl.glFramebufferTexture1DEXT = emu_glFramebufferTexture1DEXT;
    tbl.glFramebufferTexture2DEXT = emu_glFramebufferTexture2DEXT;
    tbl.glFramebufferTexture3DEXT = emu_glFramebufferTexture3DEXT;
+   tbl.glGenFramebuffersEXT = emu_glGenFramebuffersEXT;
+   tbl.glGenRenderbuffersEXT = emu_glGenRenderbuffersEXT;
    tbl.glGenerateMipmapEXT = emu_glGenerateMipmapEXT;
+   tbl.glGetFramebufferAttachmentParameterivEXT = emu_glGetFramebufferAttachmentParameterivEXT;
    tbl.glGetRenderbufferParameterivEXT = emu_glGetRenderbufferParameterivEXT;
+   tbl.glIsFramebufferEXT = emu_glIsFramebufferEXT;
+   tbl.glIsRenderbufferEXT = emu_glIsRenderbufferEXT;
    tbl.glRenderbufferStorageEXT = emu_glRenderbufferStorageEXT;
 
 // GL_EXT_geometry_shader4
@@ -63992,6 +65376,10 @@ void InitDispatchTableEmu(DispatchTable &tbl)
 
    tbl.glMultiDrawArraysEXT = emu_glMultiDrawArraysEXT;
    tbl.glMultiDrawElementsEXT = emu_glMultiDrawElementsEXT;
+
+// GL_EXT_multisampled_render_to_texture
+
+   tbl.glFramebufferTexture2DMultisampleEXT = emu_glFramebufferTexture2DMultisampleEXT;
 
 // GL_EXT_multiview_draw_buffers
 
@@ -64100,6 +65488,11 @@ void InitDispatchTableEmu(DispatchTable &tbl)
    tbl.glBindFramebufferOES = emu_glBindFramebufferOES;
    tbl.glDeleteFramebuffersOES = emu_glDeleteFramebuffersOES;
    tbl.glDeleteRenderbuffersOES = emu_glDeleteRenderbuffersOES;
+   tbl.glFramebufferTexture2DOES = emu_glFramebufferTexture2DOES;
+
+// GL_OES_texture_3D
+
+   tbl.glFramebufferTexture3DOES = emu_glFramebufferTexture3DOES;
 
 // GL_OES_vertex_array_object
 
