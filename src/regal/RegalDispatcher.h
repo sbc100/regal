@@ -1,17 +1,19 @@
 /*
-Copyright (c) 2011 NVIDIA Corporation
-Copyright (c) 2011-2012 Cass Everitt
-Copyright (c) 2012 Scott Nations
-Copyright (c) 2012 Mathias Schott
-Copyright (c) 2012 Nigel Stewart
-All rights reserved.
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
+  Copyright (c) 2012 Mathias Schott
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
+  All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
+  Redistribution and use in source and binary forms, with or without modification,
+  are permitted provided that the following conditions are met:
 
-  Redistributions of source code must retain the above copyright notice, this
+    Redistributions of source code must retain the above copyright notice, this
     list of conditions and the following disclaimer.
-  Redistributions in binary form must reproduce the above copyright notice,
+
+    Redistributions in binary form must reproduce the above copyright notice,
     this list of conditions and the following disclaimer in the documentation
     and/or other materials provided with the distribution.
 
@@ -64,6 +66,10 @@ public:
 
 #if REGAL_CODE
    DispatchTable code;
+#endif
+
+#if REGAL_STATISTICS
+   DispatchTable statistics;
 #endif
 
 #if REGAL_LOG
@@ -134,17 +140,18 @@ private:
 
 //
 
-extern void InitDispatchTableCode     (DispatchTable &tbl);
-extern void InitDispatchTableDebug    (DispatchTable &tbl);
-extern void InitDispatchTableError    (DispatchTable &tbl);
-extern void InitDispatchTableEmu      (DispatchTable &tbl);
-extern void InitDispatchTableLog      (DispatchTable &tbl);
-extern void InitDispatchTableLoader   (DispatchTable &tbl);
-extern void InitDispatchTablePpapi    (DispatchTable &tbl);
-extern void InitDispatchTableStaticES2(DispatchTable &tbl);
-extern void InitDispatchTableMissing  (DispatchTable &tbl);
-extern void InitDispatchTableCache    (DispatchTable &tbl);
-extern void InitDispatchTableTrace    (DispatchTable &tbl);
+extern void InitDispatchTableCode      (DispatchTable &tbl);
+extern void InitDispatchTableDebug     (DispatchTable &tbl);
+extern void InitDispatchTableError     (DispatchTable &tbl);
+extern void InitDispatchTableEmu       (DispatchTable &tbl);
+extern void InitDispatchTableLog       (DispatchTable &tbl);
+extern void InitDispatchTableLoader    (DispatchTable &tbl);
+extern void InitDispatchTablePpapi     (DispatchTable &tbl);
+extern void InitDispatchTableStatistics(DispatchTable &tbl);
+extern void InitDispatchTableStaticES2 (DispatchTable &tbl);
+extern void InitDispatchTableMissing   (DispatchTable &tbl);
+extern void InitDispatchTableCache     (DispatchTable &tbl);
+extern void InitDispatchTableTrace     (DispatchTable &tbl);
 
 REGAL_NAMESPACE_END
 

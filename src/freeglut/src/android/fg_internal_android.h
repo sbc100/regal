@@ -31,6 +31,8 @@
 /* Android OpenGL ES is accessed through EGL */
 #include "egl/fg_internal_egl.h"
 
+#include <stdbool.h>
+
 /* -- GLOBAL TYPE DEFINITIONS ---------------------------------------------- */
 /* The structure used by display initialization in freeglut_init.c */
 typedef struct tagSFG_PlatformDisplay SFG_PlatformDisplay;
@@ -108,5 +110,13 @@ struct tagSFG_PlatformWindowState
 {
     char unused;
 };
+
+/* Menu font and color definitions */
+#define  FREEGLUT_MENU_FONT    NULL
+
+#define  FREEGLUT_MENU_PEN_FORE_COLORS   {0.0f,  0.0f,  0.0f,  1.0f}
+#define  FREEGLUT_MENU_PEN_BACK_COLORS   {0.70f, 0.70f, 0.70f, 1.0f}
+#define  FREEGLUT_MENU_PEN_HFORE_COLORS  {0.0f,  0.0f,  0.0f,  1.0f}
+#define  FREEGLUT_MENU_PEN_HBACK_COLORS  {1.0f,  1.0f,  1.0f,  1.0f}
 
 #endif  /* FREEGLUT_INTERNAL_ANDROID_H */

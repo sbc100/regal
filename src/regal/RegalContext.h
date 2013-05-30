@@ -63,6 +63,7 @@ REGAL_GLOBAL_END
 REGAL_NAMESPACE_BEGIN
 
 struct DebugInfo;
+struct Statistics;
 
 struct Marker;
 struct Frame;
@@ -103,6 +104,10 @@ struct RegalContext
   DispatchErrorState  err;
   DebugInfo          *dbg;
   ContextInfo        *info;
+
+#if REGAL_STATISTICS
+  Statistics         *statistics;
+#endif
 
   //
   // Emulation

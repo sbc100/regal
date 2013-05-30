@@ -112,6 +112,7 @@ REGAL_GLOBAL_END
 REGAL_NAMESPACE_BEGIN
 
 struct DebugInfo;
+struct Statistics;
 
 ${EMU_FORWARD_DECLARE}
 
@@ -135,6 +136,10 @@ struct RegalContext
   DispatchErrorState  err;
   DebugInfo          *dbg;
   ContextInfo        *info;
+
+#if REGAL_STATISTICS
+  Statistics         *statistics;
+#endif
 
   //
   // Emulation
@@ -214,6 +219,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
+#include "RegalStatistics.h"
 
 ${INCLUDES}#if REGAL_EMULATION
 ${EMU_INCLUDES}#endif
@@ -229,6 +235,9 @@ RegalContext::RegalContext()
   dispatcher(),
   dbg(NULL),
   info(NULL),
+#if REGAL_STATISTICS
+  statistics(new Statistics()),
+#endif
 ${MEMBER_CONSTRUCT}#if REGAL_EMULATION
 ${EMU_MEMBER_CONSTRUCT}#endif
 #if REGAL_SYS_PPAPI

@@ -6,10 +6,11 @@
 #
 # eglGetDisplay is needed for apitrace eglretrace tool.
 # glXGetProcAddress is needed for Linux chromium
+# glXQueryExtension is needed for freeglut X11
 
 formulae = {
   'EmuInit' : {
-    'entries' : [ 'CGLChoosePixelFormat', 'eglGetDisplay', 'glXGetProcAddress' ],
+    'entries' : [ 'CGLChoosePixelFormat', 'eglGetDisplay', 'glXGetProcAddress', 'glXQueryExtension' ],
     'prefix'  : [ 'Init::init();' ]
   }
 }

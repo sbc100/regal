@@ -46,6 +46,7 @@ using ::boost::print::print_string;
 #endif
 
 #include "RegalFrame.h"
+#include "RegalStatistics.h"
 
 REGAL_GLOBAL_END
 
@@ -67,6 +68,17 @@ void Frame::capture(RegalContext &context)
     if (context.x11Display && context.x11Drawable)
       Info("X11 window manager state: ",windowManagerStateDescription(context.x11Display,context.x11Drawable));
 #endif
+  }
+
+  if (Logging::frameStatistics)
+  {
+    #if REGAL_STATISTICS
+    if (context.statistics)
+    {
+      context.statistics->log();
+      context.statistics->reset();
+    }
+    #endif
   }
 
   if

@@ -48,6 +48,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
+#include "RegalStatistics.h"
 
 #include "RegalMarker.h"
 #include "RegalFrame.h"
@@ -79,6 +80,9 @@ RegalContext::RegalContext()
   dispatcher(),
   dbg(NULL),
   info(NULL),
+#if REGAL_STATISTICS
+  statistics(new Statistics()),
+#endif
   marker(NULL),
   frame(NULL),
 #if REGAL_EMULATION

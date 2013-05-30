@@ -189,6 +189,7 @@ namespace Logging
   extern int  maxBytes;
 
   extern bool frameTime;        // Per-frame elapsed time to info log
+  extern bool frameStatistics;  // Per-frame call statistics
 
   extern bool pointers;         // Enabled by default, otherwise empty
   extern bool thread;           // Disabled by default

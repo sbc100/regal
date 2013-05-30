@@ -56,7 +56,7 @@
 # endif
 #elif defined(__APPLE__)
 # include <TargetConditionals.h>
-# if TARGET_OS_IPHONE
+# if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
 #  ifndef REGAL_SYS_IOS
 #   define REGAL_SYS_IOS 1
 #  endif

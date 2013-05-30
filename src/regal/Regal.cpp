@@ -30928,6 +30928,7 @@ extern "C" {
   REGAL_DECL Bool REGAL_CALL glXQueryExtension(Display *dpy, int *errorBase, int *eventBase)
   {
     App("glXQueryExtension","(", boost::print::optional(dpy,Logging::pointers), ")");
+    Init::init();
     if (!dispatchTableGlobal.glXQueryExtension)
     {
       GetProcAddress( dispatchTableGlobal.glXQueryExtension, "glXQueryExtension" );

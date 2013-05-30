@@ -89,13 +89,14 @@ namespace Logging {
   bool enableInternal = false;
   bool enableHttp     = true;
 
-  int  maxLines  = (REGAL_LOG_MAX_LINES);
-  int  maxBytes  = (REGAL_LOG_MAX_BYTES);
-  bool frameTime = false;
-  bool pointers  = (REGAL_LOG_POINTERS);
-  bool thread    = false;
-  bool process   = false;
-  bool callback  = (REGAL_LOG_CALLBACK);
+  int  maxLines        = (REGAL_LOG_MAX_LINES);
+  int  maxBytes        = (REGAL_LOG_MAX_BYTES);
+  bool frameTime       = false;
+  bool frameStatistics = false;
+  bool pointers        = (REGAL_LOG_POINTERS);
+  bool thread          = false;
+  bool process         = false;
+  bool callback        = (REGAL_LOG_CALLBACK);
 
   bool         log          = (REGAL_LOG);
   std::string  logFilename  = "stdout";
@@ -172,6 +173,9 @@ namespace Logging {
     tmp = GetEnv("REGAL_FRAME_TIME");
     if (tmp) frameTime = atoi(tmp)!=0;
 
+    tmp = GetEnv("REGAL_FRAME_STATISTICS");
+    if (tmp) frameStatistics = atoi(tmp)!=0;
+
 #if REGAL_LOG_POINTERS
     tmp = GetEnv("REGAL_LOG_POINTERS");
     if (tmp) pointers = atoi(tmp)!=0;
@@ -230,60 +234,63 @@ namespace Logging {
     initialized = true;
 
 #if REGAL_LOG
-    Info("REGAL_LOG          ", log            ? "enabled" : "disabled");
+    Info("REGAL_LOG                 ", log             ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_ERROR
-    Info("REGAL_LOG_ERROR    ", enableError    ? "enabled" : "disabled");
+    Info("REGAL_LOG_ERROR           ", enableError     ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_WARNING
-    Info("REGAL_LOG_WARNING  ", enableWarning  ? "enabled" : "disabled");
+    Info("REGAL_LOG_WARNING         ", enableWarning   ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_INFO
-    Info("REGAL_LOG_INFO     ", enableInfo     ? "enabled" : "disabled");
+    Info("REGAL_LOG_INFO            ", enableInfo      ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_APP
-    Info("REGAL_LOG_APP      ", enableApp      ? "enabled" : "disabled");
+    Info("REGAL_LOG_APP             ", enableApp       ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_DRIVER
-    Info("REGAL_LOG_DRIVER   ", enableDriver   ? "enabled" : "disabled");
+    Info("REGAL_LOG_DRIVER          ", enableDriver    ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_INTERNAL
-    Info("REGAL_LOG_INTERNAL ", enableInternal ? "enabled" : "disabled");
+    Info("REGAL_LOG_INTERNAL        ", enableInternal  ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_HTTP
-    Info("REGAL_LOG_HTTP     ", enableHttp     ? "enabled" : "disabled");
+    Info("REGAL_LOG_HTTP            ", enableHttp      ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_JSON
-    Info("REGAL_LOG_JSON     ", json           ? "enabled" : "disabled");
+    Info("REGAL_LOG_JSON            ", json            ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_CALLBACK
-    Info("REGAL_LOG_CALLBACK ", callback       ? "enabled" : "disabled");
+    Info("REGAL_LOG_CALLBACK        ", callback        ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_ONCE
-    Info("REGAL_LOG_ONCE     ", once           ? "enabled" : "disabled");
+    Info("REGAL_LOG_ONCE            ", once            ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_POINTERS
-    Info("REGAL_LOG_POINTERS ", pointers       ? "enabled" : "disabled");
+    Info("REGAL_LOG_POINTERS        ", pointers        ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_THREAD
-    Info("REGAL_LOG_THREAD   ", thread         ? "enabled" : "disabled");
+    Info("REGAL_LOG_THREAD          ", thread          ? "enabled" : "disabled");
 #endif
 
 #if REGAL_LOG_PROCESS
-    Info("REGAL_LOG_PROCESS  ", process        ? "enabled" : "disabled");
+    Info("REGAL_LOG_PROCESS         ", process         ? "enabled" : "disabled");
 #endif
+
+    Info("REGAL_FRAME_TIME          ", frameTime       ? "enabled" : "disabled");
+    Info("REGAL_FRAME_STATISTICS    ", frameStatistics ? "enabled" : "disabled");
   }
 
   void Cleanup()
@@ -333,11 +340,12 @@ namespace Logging {
       jo.member("maxLines",  maxLines);
       jo.member("maxBytes",  maxBytes);
 
-      jo.member("once",      once);
-      jo.member("frameTime", frameTime);
-      jo.member("pointers",  pointers);
-      jo.member("thread",    thread);
-      jo.member("process",   process);
+      jo.member("once",            once);
+      jo.member("frameTime",       frameTime);
+      jo.member("frameStatistics", frameStatistics);
+      jo.member("pointers",        pointers);
+      jo.member("thread",          thread);
+      jo.member("process",         process);
 
       jo.member("callback",    callback);
       jo.member("log",         log);

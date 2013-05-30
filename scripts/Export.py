@@ -27,26 +27,28 @@ from ApiUtil import typeIsVoid
 
 from ApiCodeGen import *
 
-from Regal                import *
-from RegalEnum            import *
-from RegalSystem          import *
-from RegalContext         import *
-from RegalContextInfo     import *
-from RegalLookup          import *
-from RegalPlugin          import *
-from RegalToken           import *
-from RegalDispatch        import *
-from RegalDispatchCode    import *
-from RegalDispatchDebug   import *
-from RegalDispatchError   import *
-from RegalDispatchEmu     import *
-from RegalDispatchGMock   import *
-from RegalDispatchLog     import *
-from RegalDispatchLoader  import *
-from RegalDispatchMissing import *
-from RegalDispatchPpapi   import *
-from RegalDispatchStaticEGL import *
-from RegalDispatchStaticES2 import *
+from Regal                   import *
+from RegalEnum               import *
+from RegalSystem             import *
+from RegalContext            import *
+from RegalContextInfo        import *
+from RegalStatistics         import *
+from RegalLookup             import *
+from RegalPlugin             import *
+from RegalToken              import *
+from RegalDispatch           import *
+from RegalDispatchCode       import *
+from RegalDispatchDebug      import *
+from RegalDispatchError      import *
+from RegalDispatchEmu        import *
+from RegalDispatchGMock      import *
+from RegalDispatchLog        import *
+from RegalDispatchLoader     import *
+from RegalDispatchMissing    import *
+from RegalDispatchPpapi      import *
+from RegalDispatchStatistics import *
+from RegalDispatchStaticEGL  import *
+from RegalDispatchStaticES2  import *
 
 regalLicense = '''
 /*
@@ -154,6 +156,9 @@ def traverse(apis, args):
 def generate(apis, args):
 
   traverse(apis, args)
+  generateDispatchStatistics( apis, args )
+  generateStatisticsHeader(apis, args)
+  generateStatisticsSource(apis, args)
   generatePluginHeader(apis,args)
   generateSource(apis, args)
   generateSystemHeader(apis, args)

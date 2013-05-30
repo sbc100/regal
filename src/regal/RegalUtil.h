@@ -184,6 +184,16 @@
 #define REGAL_EMULATION 1
 #endif
 
+// Statistics gathering disabled in release mode, or embedded
+
+#ifndef REGAL_STATISTICS
+# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID
+#  define REGAL_STATISTICS 0
+# else
+#  define REGAL_STATISTICS 1
+# endif
+#endif
+
 // Driver dispatch supported by default
 
 #ifndef REGAL_DRIVER

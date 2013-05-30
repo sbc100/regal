@@ -40,6 +40,8 @@
 
 #include "pch.h" /* For MS precompiled header support */
 
+#define REGAL_PLUGIN_MODE 1
+
 #include "RegalUtil.h"
 
 REGAL_GLOBAL_BEGIN

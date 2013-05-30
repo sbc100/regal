@@ -408,13 +408,19 @@ namespace ClientState
       RegalAssert(index < REGAL_EMU_MAX_VERTEX_ATTRIBS);
       if (index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
       {
-        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_ENABLED,reinterpret_cast<GLint*>(&enabled));
+        GLint val;
+
+        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_ENABLED,&val);
+        enabled = static_cast<GLboolean>(val);
         dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_SIZE,&size);
         dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_TYPE,reinterpret_cast<GLint*>(&type));
         dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_RELATIVE_OFFSET,reinterpret_cast<GLint*>(&relativeOffset));
-        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_NORMALIZED,reinterpret_cast<GLint*>(&normalized));
-        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_INTEGER,reinterpret_cast<GLint*>(&isInteger));
-        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_LONG,reinterpret_cast<GLint*>(&isLong));
+        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_NORMALIZED,&val);
+        normalized = static_cast<GLboolean>(val);
+        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_INTEGER,&val);
+        isInteger = static_cast<GLboolean>(val);
+        dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_LONG,&val);
+        isLong = static_cast<GLboolean>(val);
         dt.call(&dt.glGetVertexAttribiv)(index,GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING,reinterpret_cast<GLint*>(&bindingIndex));
       }
       return *this;
@@ -589,8 +595,7 @@ namespace ClientState
 
     void SetEnablei(GLenum cap, GLuint index, GLboolean enabled)
     {
-      // these two are not in Vertex Array objects, so always handle them
-
+      UNUSED_PARAMETER(index);
       switch (cap)
       {
         case GL_PRIMITIVE_RESTART_FIXED_INDEX:
@@ -602,8 +607,31 @@ namespace ClientState
         default:
           break;
       }
+    }
 
-      // only handle the rest if no VAO is bound
+    inline void glEnable(GLenum cap)
+    {
+      SetEnablei(cap, 0, GL_TRUE);
+    }
+
+    inline void glDisable(GLenum cap)
+    {
+      SetEnablei(cap, 0, GL_FALSE);
+    }
+
+    inline void glEnablei(GLenum cap, GLuint index)
+    {
+      SetEnablei(cap, index, GL_TRUE);
+    }
+
+    inline void glDisablei(GLenum cap, GLuint index)
+    {
+      SetEnablei(cap, index, GL_FALSE);
+    }
+
+    void SetEnableClientStatei(GLenum cap, GLuint index, GLboolean enabled)
+    {
+      // only handle these if no VAO is bound
 
       if (vertexArrayBinding)
         return;
@@ -639,37 +667,24 @@ namespace ClientState
       }
     }
 
-    inline void glEnable(GLenum cap)
+    inline void glEnableClientState(GLenum cap)
     {
-      SetEnablei(cap, 0, GL_TRUE);
+      SetEnableClientStatei(cap, 0, GL_TRUE);
     }
 
-    inline void glDisable(GLenum cap)
+    inline void glDisableClientState(GLenum cap)
     {
-      SetEnablei(cap, 0, GL_FALSE);
+      SetEnableClientStatei(cap, 0, GL_FALSE);
     }
 
-    inline void glEnablei(GLenum cap, GLuint index)
+    inline void glEnableClientStatei(GLenum cap, GLuint index)
     {
-      SetEnablei(cap, index, GL_TRUE);
+      SetEnableClientStatei(cap, index, GL_TRUE);
     }
 
-    inline void glDisablei(GLenum cap, GLuint index)
+    inline void glDisableClientStatei(GLenum cap, GLuint index)
     {
-      SetEnablei(cap, index, GL_FALSE);
-    }
-
-    inline void glEnableVertexAttribArray(GLuint index)
-    {
-      if (!vertexArrayBinding)
-        generic[index].enabled = GL_TRUE;
-    }
-
-    inline void glDisableVertexAttribArray(GLenum cap, GLuint index)
-    {
-      UNUSED_PARAMETER(cap);
-      if (!vertexArrayBinding)
-        generic[index].enabled = GL_FALSE;
+      SetEnableClientStatei(cap, index, GL_FALSE);
     }
 
     void BindBuffer( GLenum target, GLuint buffer )
@@ -688,7 +703,7 @@ namespace ClientState
       }
     }
 
-    void glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+    void glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -700,7 +715,7 @@ namespace ClientState
       }
     }
 
-    void glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer )
+    void glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -711,7 +726,7 @@ namespace ClientState
       }
     }
 
-    void glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+    void glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -723,7 +738,7 @@ namespace ClientState
       }
     }
 
-    void glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+    void glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -735,7 +750,7 @@ namespace ClientState
       }
     }
 
-    void glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer )
+    void glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -746,7 +761,7 @@ namespace ClientState
       }
     }
 
-    void glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer )
+    void glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -756,7 +771,7 @@ namespace ClientState
       }
     }
 
-    void glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer )
+    void glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
       {
@@ -767,8 +782,23 @@ namespace ClientState
       }
     }
 
-    //<> void glTexCoordPointer(GLint size,GLenum type,GLsizei stride, const GLvoid *pointer )
-    //<> named[index+7].enabled = enabled;
+    void glMultiTexCoordPointerEXT(GLenum index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+    {
+      if (!vertexArrayBinding)
+      {
+        GLuint ii = 7 + (index - GL_TEXTURE0);
+        named[ii].buffer = arrayBufferBinding;
+        named[ii].size = size;
+        named[ii].type = type;
+        named[ii].stride = stride;
+        named[ii].pointer = pointer;
+      }
+    }
+
+    inline void glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+    {
+      glMultiTexCoordPointerEXT(clientActiveTexture,size,type,stride,pointer);
+    }
 
     void glBindVertexBuffer(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
     {
@@ -786,14 +816,61 @@ namespace ClientState
         bindings[bindingindex].divisor = divisor;
     }
 
-    //<> glVertexAttribIFormat(index,size,type,relativeOffset);
-    //<> glVertexAttribLFormat(index,size,type,relativeOffset);
-    //<> glVertexAttribFormat(index,size,type,normalized,relativeOffset);
+    inline void glEnableVertexAttribArray(GLuint index)
+    {
+      if (!vertexArrayBinding)
+        generic[index].enabled = GL_TRUE;
+    }
+
+    inline void glDisableVertexAttribArray(GLuint index)
+    {
+      if (!vertexArrayBinding)
+        generic[index].enabled = GL_FALSE;
+    }
 
     inline void glVertexAttribBinding(GLuint attribindex, GLuint bindingindex)
     {
       if (!vertexArrayBinding)
         generic[attribindex].bindingIndex = bindingindex;
+    }
+
+    inline void glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+    {
+      if (!vertexArrayBinding)
+      {
+        generic[attribindex].size = size;
+        generic[attribindex].type = type;
+        generic[attribindex].relativeOffset = relativeoffset;
+        generic[attribindex].normalized = GL_FALSE;
+        generic[attribindex].isInteger = GL_TRUE;
+        generic[attribindex].isLong = GL_FALSE;
+      }
+    }
+
+    inline void glVertexAttribLFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+    {
+      if (!vertexArrayBinding)
+      {
+        generic[attribindex].size = size;
+        generic[attribindex].type = type;
+        generic[attribindex].relativeOffset = relativeoffset;
+        generic[attribindex].normalized = GL_FALSE;
+        generic[attribindex].isInteger = GL_FALSE;
+        generic[attribindex].isLong = GL_TRUE;
+      }
+    }
+
+    inline void glVertexAttribFormat(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
+    {
+      if (!vertexArrayBinding)
+      {
+        generic[attribindex].size = size;
+        generic[attribindex].type = type;
+        generic[attribindex].relativeOffset = relativeoffset;
+        generic[attribindex].normalized = normalized;
+        generic[attribindex].isInteger = GL_FALSE;
+        generic[attribindex].isLong = GL_FALSE;
+      }
     }
 
     inline void glClientActiveTexture(GLenum texture)
@@ -810,9 +887,6 @@ namespace ClientState
     {
       vertexArrayBinding = array;
     }
-
-    //<> also need to handle appropriate DSA entrypoints
-    //<> glMultiTexCoordPointerEXT(GL_TEXTURE0+index,size,type,stride,pointer);
   };
 }
 

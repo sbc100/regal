@@ -41,6 +41,7 @@
 #define set_json_regal_config_dispatch_enable_emulation(value)           Config::enableEmulation = value
 #define set_json_regal_config_dispatch_enable_error(value)               Config::enableError = value
 #define set_json_regal_config_dispatch_enable_log(value)                 Config::enableLog = value
+#define set_json_regal_config_dispatch_enable_statistics(value)          Config::enableStatistics = value
 #define set_json_regal_config_dispatch_enable_trace(value)               Config::enableTrace = value
 #define set_json_regal_config_dispatch_force_emulation(value)            Config::forceEmulation = value
 #define set_json_regal_config_force_core(value)                          Config::forceCoreProfile = value
@@ -71,6 +72,7 @@
 #define set_json_regal_logging_enable_internal(value)                    Logging::enableInternal = value
 #define set_json_regal_logging_enable_warning(value)                     Logging::enableError = value
 #define set_json_regal_logging_filename(value)                           Logging::logFilename = value
+#define set_json_regal_logging_framestatistics(value)                    Logging::frameStatistics = value
 #define set_json_regal_logging_frametime(value)                          Logging::frameTime = value
 #define set_json_regal_logging_json(value)                               Logging::json = value
 #define set_json_regal_logging_jsonfile(value)                           Logging::jsonFilename = value

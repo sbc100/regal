@@ -1,9 +1,10 @@
 /*
-  Copyright (c) 2011 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
-  Copyright (c) 2012 Scott Nations
+  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2013 Cass Everitt
+  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
+  Copyright (c) 2012-2013 Nigel Stewart
+  Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -80,6 +81,12 @@ Dispatcher::Dispatcher()
   ::memset(&code,0,sizeof(DispatchTable));
   InitDispatchTableCode(code);
   push_back(code,Config::enableCode);
+  #endif
+
+  #if REGAL_STATISTICS
+  ::memset(&code,0,sizeof(DispatchTable));
+  InitDispatchTableStatistics(statistics);
+  push_back(statistics,Config::enableStatistics);
   #endif
 
   #if REGAL_LOG

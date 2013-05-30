@@ -67,6 +67,7 @@ namespace Config {
   bool enableDebug         = false;
   bool enableError         = false;
   bool enableCode          = false;
+  bool enableStatistics    = false;
   bool enableLog           = REGAL_LOG;
   bool enableDriver        = REGAL_DRIVER;
 
@@ -188,6 +189,13 @@ namespace Config {
       sysEGL = false;
 #endif
 
+    // Default to GL, if necessary
+
+#if REGAL_SYS_GL && REGAL_SYS_ES2
+    if (sysGL && sysES2)
+      sysES2 = false;
+#endif
+
 #if !REGAL_FORCE_EMULATION
     tmp = GetEnv( "REGAL_FORCE_EMULATION" );
     if (tmp) forceEmulation = atoi(tmp)!=0;
@@ -221,6 +229,11 @@ namespace Config {
 #if REGAL_CODE
     tmp = GetEnv( "REGAL_CODE" );
     if (tmp) enableCode = atoi(tmp)!=0;
+#endif
+
+#if REGAL_STATISTICS
+    tmp = GetEnv( "REGAL_STATISTICS" );
+    if (tmp) enableStatistics = atoi(tmp)!=0;
 #endif
 
 #if REGAL_LOG
@@ -517,6 +530,9 @@ namespace Config {
 #if REGAL_CODE
     Info("REGAL_CODE                ", enableCode          ? "enabled" : "disabled");
 #endif
+#if REGAL_STATISTICS
+    Info("REGAL_STATISTICS          ", enableStatistics    ? "enabled" : "disabled");
+#endif
     Info("REGAL_EMULATION           ", enableEmulation     ? "enabled" : "disabled");
     Info("REGAL_LOG                 ", enableLog           ? "enabled" : "disabled");
     Info("REGAL_DRIVER              ", enableDriver        ? "enabled" : "disabled");
@@ -600,13 +616,14 @@ namespace Config {
       jo.object("dispatch");
 
         jo.object("enable");
-          jo.member("debug",     enableDebug);
-          jo.member("error",     enableError);
-          jo.member("code",      enableCode);
-          jo.member("emulation", enableEmulation);
-          jo.member("trace",     enableTrace);
-          jo.member("log",       enableLog);
-          jo.member("driver",    enableDriver);
+          jo.member("debug",      enableDebug);
+          jo.member("error",      enableError);
+          jo.member("code",       enableCode);
+          jo.member("statistics", enableStatistics);
+          jo.member("emulation",  enableEmulation);
+          jo.member("trace",      enableTrace);
+          jo.member("log",        enableLog);
+          jo.member("driver",     enableDriver);
         jo.end();
 
         jo.object("force");
