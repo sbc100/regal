@@ -48,7 +48,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalThread.h"
 #include "RegalPrivate.h"
 #include "RegalContextInfo.h"
-#include "RegalDispatcher.h"
+#include "RegalDispatcherGL.h"
 #include "RegalDispatchError.h"
 #include "RegalSharedList.h"
 
@@ -100,7 +100,7 @@ struct RegalContext
   inline bool isCompat() const { RegalAssert(info); return REGAL_SYS_GL  &&                               info->compat; }
 
   bool                initialized;
-  Dispatcher          dispatcher;
+  DispatcherGL        dispatcher;
   DispatchErrorState  err;
   DebugInfo          *dbg;
   ContextInfo        *info;

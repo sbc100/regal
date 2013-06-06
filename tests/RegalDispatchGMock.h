@@ -53,7 +53,7 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-struct DispatchTable;
+struct DispatchTableGL;
 
 struct RegalGMockInterface
 {
@@ -504,7 +504,7 @@ struct RegalGMockInterface
   MOCK_METHOD1(glClientAttribDefaultEXT, void(GLbitfield));
 };
 
-void InitDispatchTableGMock(DispatchTable &tbl);
+void InitDispatchTableGMock(DispatchTableGL &tbl);
 
 REGAL_NAMESPACE_END
 

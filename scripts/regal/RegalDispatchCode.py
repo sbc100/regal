@@ -83,7 +83,7 @@ using namespace ::boost::print;
 
 ${API_FUNC_DEFINE}
 
-void InitDispatchTableCode(DispatchTable &tbl)
+void InitDispatchTableCode(DispatchTableGL &tbl)
 {
 ${API_GLOBAL_DISPATCH_INIT}
 }
@@ -125,7 +125,7 @@ def generateDispatchCode(apis, args):
 
         code += '    RegalContext *_context = REGAL_GET_CONTEXT();\n'
         code += '    RegalAssert(_context);\n'
-        code += '    DispatchTable *_next = _context->dispatcher.code._next;\n'
+        code += '    DispatchTableGL *_next = _context->dispatcher.code.next();\n'
         code += '    RegalAssert(_next);\n'
         code += '    '
 

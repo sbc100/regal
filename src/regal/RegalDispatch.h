@@ -51,10 +51,16 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-struct DispatchTableGlobal {
+namespace Dispatch
+{
 
-  DispatchTableGlobal();
-  ~DispatchTableGlobal();
+  struct Global
+  {
+    inline void setFunction(const size_t offset, void *func)
+    {
+      RegalAssert((offset*sizeof(void *))<sizeof(this));
+      ((void **)(this))[offset] = func;
+    }
 
 #if REGAL_SYS_WGL
     // WGL_3DL_stereo_control
@@ -298,7 +304,6 @@ struct DispatchTableGlobal {
 #endif // REGAL_SYS_WGL
 
 #if REGAL_SYS_GLX
-
     // GLX_VERSION_1_0
 
     XVisualInfo *(REGAL_CALL *glXChooseVisual)(Display *dpy, int screen, int *attribList);
@@ -531,7 +536,6 @@ struct DispatchTableGlobal {
 #endif // REGAL_SYS_GLX
 
 #if REGAL_SYS_OSX
-
     // CGL_VERSION_1_0
 
     CGLError (REGAL_CALL *CGLChoosePixelFormat)(const CGLPixelFormatAttribute *attribs, CGLPixelFormatObj *pix, GLint *npix);
@@ -598,7 +602,6 @@ struct DispatchTableGlobal {
 #endif // REGAL_SYS_OSX
 
 #if REGAL_SYS_EGL
-
     // EGL_ANGLE_query_surface_pointer
 
     EGLBoolean (REGAL_CALL *eglQuerySurfacePointerANGLE)(EGLDisplay dpy, EGLSurface surface, EGLint attribute, GLvoid **value);
@@ -711,51 +714,15 @@ struct DispatchTableGlobal {
     EGLBoolean (REGAL_CALL *eglWaitClient)(void);
 #endif // REGAL_SYS_EGL
 
-};
+  };
 
-extern DispatchTableGlobal dispatchTableGlobal;
-
-struct DispatchTable {
-
-  bool           _enabled;
-  DispatchTable *_prev;
-  DispatchTable *_next;
-
-  // Lookup a function pointer from the table,
-  // or deeper in the stack as necessary.
-
-  template<typename T>
-  T call(T *func)
+  struct GL
   {
-    RegalAssert(func);
-    if (_enabled && *func)
-      return *func;
-
-    DispatchTable *i = this;
-    RegalAssert(i);
-
-    RegalAssert(reinterpret_cast<void *>(func)>=reinterpret_cast<void *>(i));
-    RegalAssert(reinterpret_cast<void *>(func)< reinterpret_cast<void *>(i+1));
-
-    const std::size_t offset = reinterpret_cast<char *>(func) - reinterpret_cast<char *>(i);
-
-    T f = *func;
-
-    // Step down the stack for the first available function in an enabled table
-
-    while (!f || !i->_enabled)
+    inline void setFunction(const size_t offset, void *func)
     {
-      // Find the next enabled dispatch table
-      for (i = i->_next; !i->_enabled; i = i->_next) { RegalAssert(i); }
-
-      // Get the function pointer; extra cast through void* is to avoid -Wcast-align spew
-      RegalAssert(i);
-      RegalAssert(i->_enabled);
-      f = *reinterpret_cast<T *>(reinterpret_cast<void *>(reinterpret_cast<char *>(i)+offset));
+      RegalAssert((offset*sizeof(void *))<sizeof(this));
+      ((void **)(this))[offset] = func;
     }
-
-    return f;
-  }
 
     // GL_VERSION_1_0
 
@@ -4243,8 +4210,69 @@ struct DispatchTable {
 
     void (REGAL_CALL *glAddSwapHintRectWIN)(GLint x, GLint y, GLsizei width, GLsizei height);
 
+  };
+
+  // Lookup a function pointer from the table,
+  // or deeper in the stack as necessary.
+
+  template<typename T, typename F>
+  F call(T &table, F *func)
+  {
+    RegalAssert(func);
+    if (table._enabled && *func)
+      return *func;
+
+    T *i = &table;
+    RegalAssert(i);
+
+    RegalAssert(reinterpret_cast<void *>(func)>=reinterpret_cast<void *>(i));
+    RegalAssert(reinterpret_cast<void *>(func)< reinterpret_cast<void *>(i+1));
+
+    const std::size_t offset = reinterpret_cast<char *>(func) - reinterpret_cast<char *>(i);
+
+    F f = *func;
+
+    // Step down the stack for the first available function in an enabled table
+
+    while (!f || !i->_enabled)
+    {
+      // Find the next enabled dispatch table
+      for (i = i->next(); !i->_enabled; i = i->next()) { RegalAssert(i); }
+
+      // Get the function pointer; extra cast through void* is to avoid -Wcast-align spew
+      RegalAssert(i);
+      RegalAssert(i->_enabled);
+      f = *reinterpret_cast<F *>(reinterpret_cast<void *>(reinterpret_cast<char *>(i)+offset));
+    }
+
+    return f;
+  }
+
+}
+
+struct DispatchTable
+{
+  bool           _enabled;
+  DispatchTable *_prev;
+  DispatchTable *_next;
 };
 
+struct DispatchTableGL : public DispatchTable, Dispatch::GL
+{
+  template<typename T> T call(T *func) { return Dispatch::call(*this,func);                                }
+  inline DispatchTableGL *next()       { return reinterpret_cast<DispatchTableGL *>(DispatchTable::_next); }
+};
+
+struct DispatchTableGlobal : public DispatchTable, Dispatch::Global
+{
+  DispatchTableGlobal();
+  ~DispatchTableGlobal();
+
+  template<typename T> T call(T *func) { return Dispatch::call(*this,func);                                    }
+  inline DispatchTableGlobal *next()   { return reinterpret_cast<DispatchTableGlobal *>(DispatchTable::_next); }
+};
+
+extern DispatchTableGlobal dispatchTableGlobal;
 REGAL_NAMESPACE_END
 
 #endif // __REGAL_DISPATCH_H__

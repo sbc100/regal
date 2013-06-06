@@ -260,8 +260,13 @@
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchStaticEGL.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchStaticES2.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchStatistics.cpp" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatchTrace.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatcher.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalDispatcher.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatcherGL.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalDispatcherGL.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatcherGlobal.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalDispatcherGlobal.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDllMain.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalDsa.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalEmu.h" />

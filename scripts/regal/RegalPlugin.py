@@ -33,7 +33,6 @@ REGAL_GLOBAL_BEGIN
 #if REGAL_PLUGIN
 
 #include "RegalContext.h"
-#include "RegalDispatch.h"
 #include "RegalDispatcher.h"
 
 extern "C" {
@@ -76,22 +75,17 @@ def generatePluginHeader(apis, args):
       c = ''
       c += '%sREGAL_CALL plugin_%s(%s) \n{\n' % (rType, name, params)
 
+      c += '  ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();\n'
       if function.needsContext:
-        c += '  ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();\n'
-        c += '  ::REGAL_NAMESPACE_INTERNAL::DispatchTable *_next = _instance.nextDispatchTable;\n'
-        c += '  RegalAssert(_next);\n'
-        if not typeIsVoid(rType):
-          c += '  return '
-        else:
-          c += '  '
-        c += '_next->call(&_next->%s)(%s);\n}\n' % ( name, callParams )
+        c += '  ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;\n'
       else:
-#       c += '  ::REGAL_NAMESPACE_INTERNAL::DispatchTableGlobal *_next = _instance.nextDispatchTableGlobal;\n'
-        if not typeIsVoid(rType):
-          c += '  return '
-        else:
-          c += ' '
-        c += '::REGAL_NAMESPACE_INTERNAL::dispatchTableGlobal.%s(%s);\n}\n' % ( name, callParams )
+        c += '  ::REGAL_NAMESPACE_INTERNAL::DispatchTableGlobal *_next = _instance.nextDispatchTableGlobal;\n'
+      c += '  RegalAssert(_next);\n'
+      if not typeIsVoid(rType):
+        c += '  return '
+      else:
+        c += '  '
+      c += '_next->call(&_next->%s)(%s);\n}\n' % ( name, callParams )
 
       tmp.append( (category, indent(c,'  ') ) )
 

@@ -72,13 +72,13 @@ def logParameter(function, parameter):
     return 'toString(%s)'%n
   elif t in [ 'char *','const char *','GLchar *' ,'const GLchar *','GLcharARB *','const GLcharARB *','LPCSTR']:
     return 'boost::print::quote(%s,\'"\')'%n
-  elif parameter.size!=None and (isinstance(parameter.size,int) or isinstance(parameter.size, long)) and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1:
+  elif parameter.size!=None and (isinstance(parameter.size,int) or isinstance(parameter.size, long)) and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1 and t.find('LAYERPLANEDESCRIPTOR')==-1 and t.find('GLYPHMETRICSFLOAT')==-1:
     return 'boost::print::array(%s,%s)'%(n,parameter.size)
-  elif parameter.size!=None and (isinstance(parameter.size, str) or isinstance(parameter.size, unicode)) and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1 and parameter.size.find('helper')==-1:
+  elif parameter.size!=None and (isinstance(parameter.size, str) or isinstance(parameter.size, unicode)) and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1 and t.find('LAYERPLANEDESCRIPTOR')==-1 and t.find('GLYPHMETRICSFLOAT')==-1 and parameter.size.find('helper')==-1:
     return 'boost::print::array(%s,%s%s)'%(n,parameter.size,quote)
 #   elif parameter.size!=None and (isinstance(parameter.size,int) or isinstance(parameter.size, long) or isinstance(parameter.size, str) or isinstance(parameter.size, unicode)) and t=='const GLvoid *':
 #     return 'boost::print::raw(%s,%s)'%(n,parameter.size)
-  elif parameter.size!=None and h!=None and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1:
+  elif parameter.size!=None and h!=None and t.find('void')==-1 and t.find('PIXELFORMATDESCRIPTOR')==-1 and t.find('LAYERPLANEDESCRIPTOR')==-1 and t.find('GLYPHMETRICSFLOAT')==-1:
     return 'boost::print::array(%s,%s(%s%s)'%(n,h,parameter.size.split('(',1)[1],quote)
   elif t.startswith('GLDEBUG'):
     return None

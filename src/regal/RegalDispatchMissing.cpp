@@ -654,7 +654,7 @@ static GLuint REGAL_CALL missing_glGenLists(GLsizei range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenLists not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetBooleanv(GLenum pname, GLboolean *params)
@@ -681,7 +681,7 @@ static void REGAL_CALL missing_glGetDoublev(GLenum pname, GLdouble *params)
 static GLenum REGAL_CALL missing_glGetError(void)
 {
   Warning( "glGetError not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetFloatv(GLenum pname, GLfloat *params)
@@ -942,14 +942,14 @@ static GLboolean REGAL_CALL missing_glIsEnabled(GLenum cap)
 {
   UNUSED_PARAMETER(cap);
   Warning( "glIsEnabled not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsList(GLuint list)
 {
   UNUSED_PARAMETER(list);
   Warning( "glIsList not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glLightModelf(GLenum pname, GLfloat param)
@@ -1658,7 +1658,7 @@ static GLint REGAL_CALL missing_glRenderMode(GLenum mode)
 {
   UNUSED_PARAMETER(mode);
   Warning( "glRenderMode not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z)
@@ -2295,7 +2295,7 @@ static GLboolean REGAL_CALL missing_glAreTexturesResident(GLsizei n, const GLuin
   UNUSED_PARAMETER(textures);
   UNUSED_PARAMETER(residences);
   Warning( "glAreTexturesResident not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glArrayElement(GLint index)
@@ -2458,7 +2458,7 @@ static GLboolean REGAL_CALL missing_glIsTexture(GLuint texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glIsTexture not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
@@ -3434,14 +3434,14 @@ static GLboolean REGAL_CALL missing_glIsBuffer(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsBuffer not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsQuery(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsQuery not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLvoid *REGAL_CALL missing_glMapBuffer(GLenum target, GLenum access)
@@ -3456,7 +3456,7 @@ static GLboolean REGAL_CALL missing_glUnmapBuffer(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glUnmapBuffer not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_VERSION_2_0
@@ -3492,14 +3492,14 @@ static void REGAL_CALL missing_glCompileShader(GLuint shader)
 static GLuint REGAL_CALL missing_glCreateProgram(void)
 {
   Warning( "glCreateProgram not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glCreateShader(GLenum type)
 {
   UNUSED_PARAMETER(type);
   Warning( "glCreateShader not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteProgram(GLuint program)
@@ -3578,7 +3578,7 @@ static GLint REGAL_CALL missing_glGetAttribLocation(GLuint program, const GLchar
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glGetAttribLocation not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetProgramInfoLog(GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
@@ -3629,7 +3629,7 @@ static GLint REGAL_CALL missing_glGetUniformLocation(GLuint program, const GLcha
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glGetUniformLocation not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetUniformfv(GLuint program, GLint location, GLfloat *params)
@@ -3684,14 +3684,14 @@ static GLboolean REGAL_CALL missing_glIsProgram(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glIsProgram not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsShader(GLuint shader)
 {
   UNUSED_PARAMETER(shader);
   Warning( "glIsShader not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glLinkProgram(GLuint program)
@@ -4355,7 +4355,7 @@ static GLint REGAL_CALL missing_glGetFragDataLocation(GLuint program, const GLch
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glGetFragDataLocation not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static const GLubyte *REGAL_CALL missing_glGetStringi(GLenum name, GLuint index)
@@ -4423,7 +4423,7 @@ static GLboolean REGAL_CALL missing_glIsEnabledi(GLenum target, GLuint index)
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
   Warning( "glIsEnabledi not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glTexParameterIiv(GLenum target, GLenum pname, const GLint *params)
@@ -4842,7 +4842,7 @@ static GLuint REGAL_CALL missing_glGetDebugMessageLogAMD(GLuint count, GLsizei b
   UNUSED_PARAMETER(lengths);
   UNUSED_PARAMETER(message);
   Warning( "glGetDebugMessageLogAMD not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 // GL_AMD_draw_buffers_blend
@@ -4924,7 +4924,7 @@ static GLboolean REGAL_CALL missing_glIsNameAMD(GLenum identifier, GLuint name)
   UNUSED_PARAMETER(identifier);
   UNUSED_PARAMETER(name);
   Warning( "glIsNameAMD not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_AMD_performance_monitor
@@ -5213,7 +5213,7 @@ static GLboolean REGAL_CALL missing_glIsFenceAPPLE(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glIsFenceAPPLE not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glSetFenceAPPLE(GLuint fence)
@@ -5226,7 +5226,7 @@ static GLboolean REGAL_CALL missing_glTestFenceAPPLE(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glTestFenceAPPLE not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glTestObjectAPPLE(GLenum object, GLuint name)
@@ -5234,7 +5234,7 @@ static GLboolean REGAL_CALL missing_glTestObjectAPPLE(GLenum object, GLuint name
   UNUSED_PARAMETER(object);
   UNUSED_PARAMETER(name);
   Warning( "glTestObjectAPPLE not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_APPLE_flush_buffer_range
@@ -5306,7 +5306,7 @@ static GLenum REGAL_CALL missing_glObjectPurgeableAPPLE(GLenum objectType, GLuin
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(option);
   Warning( "glObjectPurgeableAPPLE not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static GLenum REGAL_CALL missing_glObjectUnpurgeableAPPLE(GLenum objectType, GLuint name, GLenum option)
@@ -5315,7 +5315,7 @@ static GLenum REGAL_CALL missing_glObjectUnpurgeableAPPLE(GLenum objectType, GLu
   UNUSED_PARAMETER(name);
   UNUSED_PARAMETER(option);
   Warning( "glObjectUnpurgeableAPPLE not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 // GL_APPLE_sync
@@ -5326,7 +5326,7 @@ static GLenum REGAL_CALL missing_glClientWaitSyncAPPLE(GLsync sync, GLbitfield f
   UNUSED_PARAMETER(flags);
   UNUSED_PARAMETER(timeout);
   Warning( "glClientWaitSyncAPPLE not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteSyncAPPLE(GLsync sync)
@@ -5340,7 +5340,7 @@ static GLsync REGAL_CALL missing_glFenceSyncAPPLE(GLenum condition, GLbitfield f
   UNUSED_PARAMETER(condition);
   UNUSED_PARAMETER(flags);
   Warning( "glFenceSyncAPPLE not available." );
-  return (GLsync )0;
+  return NULL;
 }
 
 static void REGAL_CALL missing_glGetInteger64vAPPLE(GLenum pname, GLint64 *params)
@@ -5364,7 +5364,7 @@ static GLboolean REGAL_CALL missing_glIsSyncAPPLE(GLsync sync)
 {
   UNUSED_PARAMETER(sync);
   Warning( "glIsSyncAPPLE not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glWaitSyncAPPLE(GLsync sync, GLbitfield flags, GLuint64 timeout)
@@ -5419,7 +5419,7 @@ static GLboolean REGAL_CALL missing_glIsVertexArrayAPPLE(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glIsVertexArrayAPPLE not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_APPLE_vertex_array_range
@@ -5466,7 +5466,7 @@ static GLboolean REGAL_CALL missing_glIsVertexAttribEnabledAPPLE(GLuint index, G
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(pname);
   Warning( "glIsVertexAttribEnabledAPPLE not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
@@ -5615,7 +5615,7 @@ static GLint REGAL_CALL missing_glGetFragDataIndex(GLuint program, const GLchar 
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glGetFragDataIndex not available." );
-  return (GLint )0;
+  return 0;
 }
 
 // GL_ARB_cl_event
@@ -5626,7 +5626,7 @@ static GLsync REGAL_CALL missing_glCreateSyncFromCLeventARB(cl_context context, 
   UNUSED_PARAMETER(event);
   UNUSED_PARAMETER(flags);
   Warning( "glCreateSyncFromCLeventARB not available." );
-  return (GLsync )0;
+  return NULL;
 }
 
 // GL_ARB_clear_buffer_object
@@ -5776,7 +5776,7 @@ static GLuint REGAL_CALL missing_glGetDebugMessageLogARB(GLuint count, GLsizei b
   UNUSED_PARAMETER(lengths);
   UNUSED_PARAMETER(messageLog);
   Warning( "glGetDebugMessageLogARB not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 // GL_ARB_draw_buffers
@@ -5976,7 +5976,7 @@ static GLenum REGAL_CALL missing_glCheckFramebufferStatus(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glCheckFramebufferStatus not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteFramebuffers(GLsizei n, const GLuint *framebuffers)
@@ -6084,14 +6084,14 @@ static GLboolean REGAL_CALL missing_glIsFramebuffer(GLuint framebuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   Warning( "glIsFramebuffer not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsRenderbuffer(GLuint renderbuffer)
 {
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glIsRenderbuffer not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
@@ -7125,7 +7125,7 @@ static GLboolean REGAL_CALL missing_glIsQueryARB(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsQueryARB not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_ARB_point_parameters
@@ -7161,7 +7161,7 @@ static GLuint REGAL_CALL missing_glGetProgramResourceIndex(GLuint program, GLenu
   UNUSED_PARAMETER(programInterface);
   UNUSED_PARAMETER(name);
   Warning( "glGetProgramResourceIndex not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLint REGAL_CALL missing_glGetProgramResourceLocation(GLuint program, GLenum programInterface, const GLchar *name)
@@ -7170,7 +7170,7 @@ static GLint REGAL_CALL missing_glGetProgramResourceLocation(GLuint program, GLe
   UNUSED_PARAMETER(programInterface);
   UNUSED_PARAMETER(name);
   Warning( "glGetProgramResourceLocation not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static GLint REGAL_CALL missing_glGetProgramResourceLocationIndex(GLuint program, GLenum programInterface, const GLchar *name)
@@ -7179,7 +7179,7 @@ static GLint REGAL_CALL missing_glGetProgramResourceLocationIndex(GLuint program
   UNUSED_PARAMETER(programInterface);
   UNUSED_PARAMETER(name);
   Warning( "glGetProgramResourceLocationIndex not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
@@ -7219,7 +7219,7 @@ static void REGAL_CALL missing_glProvokingVertex(GLenum mode)
 static GLenum REGAL_CALL missing_glGetGraphicsResetStatusARB(void)
 {
   Warning( "glGetGraphicsResetStatusARB not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetnColorTableARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, GLvoid *table)
@@ -7477,7 +7477,7 @@ static GLboolean REGAL_CALL missing_glIsSampler(GLuint sampler)
 {
   UNUSED_PARAMETER(sampler);
   Warning( "glIsSampler not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint *params)
@@ -7549,7 +7549,7 @@ static GLuint REGAL_CALL missing_glCreateShaderProgramv(GLenum type, GLsizei cou
   UNUSED_PARAMETER(count);
   UNUSED_PARAMETER(strings);
   Warning( "glCreateShaderProgramv not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteProgramPipelines(GLsizei n, const GLuint *pipelines)
@@ -7587,7 +7587,7 @@ static GLboolean REGAL_CALL missing_glIsProgramPipeline(GLuint pipeline)
 {
   UNUSED_PARAMETER(pipeline);
   Warning( "glIsProgramPipeline not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glProgramUniform1d(GLuint program, GLint location, GLdouble x)
@@ -8129,14 +8129,14 @@ static void REGAL_CALL missing_glCompileShaderARB(GLhandleARB shaderObj)
 static GLhandleARB REGAL_CALL missing_glCreateProgramObjectARB(void)
 {
   Warning( "glCreateProgramObjectARB not available." );
-  return (GLhandleARB )0;
+  return 0;
 }
 
 static GLhandleARB REGAL_CALL missing_glCreateShaderObjectARB(GLenum shaderType)
 {
   UNUSED_PARAMETER(shaderType);
   Warning( "glCreateShaderObjectARB not available." );
-  return (GLhandleARB )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteObjectARB(GLhandleARB obj)
@@ -8177,7 +8177,7 @@ static GLhandleARB REGAL_CALL missing_glGetHandleARB(GLenum pname)
 {
   UNUSED_PARAMETER(pname);
   Warning( "glGetHandleARB not available." );
-  return (GLhandleARB )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetInfoLogARB(GLhandleARB obj, GLsizei maxLength, GLsizei *length, GLcharARB *infoLog)
@@ -8219,7 +8219,7 @@ static GLint REGAL_CALL missing_glGetUniformLocationARB(GLhandleARB programObj, 
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(name);
   Warning( "glGetUniformLocationARB not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params)
@@ -8491,7 +8491,7 @@ static GLuint REGAL_CALL missing_glGetSubroutineIndex(GLuint program, GLenum sha
   UNUSED_PARAMETER(shaderType);
   UNUSED_PARAMETER(name);
   Warning( "glGetSubroutineIndex not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLint REGAL_CALL missing_glGetSubroutineUniformLocation(GLuint program, GLenum shaderType, const GLchar *name)
@@ -8500,7 +8500,7 @@ static GLint REGAL_CALL missing_glGetSubroutineUniformLocation(GLuint program, G
   UNUSED_PARAMETER(shaderType);
   UNUSED_PARAMETER(name);
   Warning( "glGetSubroutineUniformLocation not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetUniformSubroutineuiv(GLenum shaderType, GLint location, GLuint *params)
@@ -8569,7 +8569,7 @@ static GLboolean REGAL_CALL missing_glIsNamedStringARB(GLint namelen, const GLch
   UNUSED_PARAMETER(namelen);
   UNUSED_PARAMETER(name);
   Warning( "glIsNamedStringARB not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glNamedStringARB(GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string)
@@ -8590,7 +8590,7 @@ static GLenum REGAL_CALL missing_glClientWaitSync(GLsync sync, GLbitfield flags,
   UNUSED_PARAMETER(flags);
   UNUSED_PARAMETER(timeout);
   Warning( "glClientWaitSync not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteSync(GLsync sync)
@@ -8604,7 +8604,7 @@ static GLsync REGAL_CALL missing_glFenceSync(GLenum condition, GLbitfield flags)
   UNUSED_PARAMETER(condition);
   UNUSED_PARAMETER(flags);
   Warning( "glFenceSync not available." );
-  return (GLsync )0;
+  return NULL;
 }
 
 static void REGAL_CALL missing_glGetInteger64v(GLenum pname, GLint64 *params)
@@ -8628,7 +8628,7 @@ static GLboolean REGAL_CALL missing_glIsSync(GLsync sync)
 {
   UNUSED_PARAMETER(sync);
   Warning( "glIsSync not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glWaitSync(GLsync sync, GLbitfield flags, GLuint64 timeout)
@@ -9008,7 +9008,7 @@ static GLboolean REGAL_CALL missing_glIsTransformFeedback(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsTransformFeedback not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glPauseTransformFeedback(void)
@@ -9172,7 +9172,7 @@ static GLuint REGAL_CALL missing_glGetUniformBlockIndex(GLuint program, const GL
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(uniformBlockName);
   Warning( "glGetUniformBlockIndex not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar * const *uniformNames, GLuint *uniformIndices)
@@ -9218,7 +9218,7 @@ static GLboolean REGAL_CALL missing_glIsVertexArray(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glIsVertexArray not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_ARB_vertex_attrib_64bit
@@ -9499,7 +9499,7 @@ static GLboolean REGAL_CALL missing_glIsBufferARB(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsBufferARB not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLvoid *REGAL_CALL missing_glMapBufferARB(GLenum target, GLenum access)
@@ -9514,7 +9514,7 @@ static GLboolean REGAL_CALL missing_glUnmapBufferARB(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glUnmapBufferARB not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_ARB_vertex_program
@@ -9636,7 +9636,7 @@ static GLboolean REGAL_CALL missing_glIsProgramARB(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glIsProgramARB not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
@@ -10035,7 +10035,7 @@ static GLint REGAL_CALL missing_glGetAttribLocationARB(GLhandleARB programObj, c
   UNUSED_PARAMETER(programObj);
   UNUSED_PARAMETER(name);
   Warning( "glGetAttribLocationARB not available." );
-  return (GLint )0;
+  return 0;
 }
 
 // GL_ARB_vertex_type_2_10_10_10_rev
@@ -10703,7 +10703,7 @@ static GLuint REGAL_CALL missing_glGenFragmentShadersATI(GLuint range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenFragmentShadersATI not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glPassTexCoordATI(GLuint dst, GLuint coord, GLenum swizzle)
@@ -10851,7 +10851,7 @@ static GLboolean REGAL_CALL missing_glIsObjectBufferATI(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsObjectBufferATI not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLuint REGAL_CALL missing_glNewObjectBufferATI(GLsizei size, const GLvoid *pointer, GLenum usage)
@@ -10860,7 +10860,7 @@ static GLuint REGAL_CALL missing_glNewObjectBufferATI(GLsizei size, const GLvoid
   UNUSED_PARAMETER(pointer);
   UNUSED_PARAMETER(usage);
   Warning( "glNewObjectBufferATI not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glUpdateObjectBufferATI(GLuint buffer, GLuint offset, GLsizei size, const GLvoid *pointer, GLenum preserve)
@@ -11270,7 +11270,7 @@ static GLint REGAL_CALL missing_glGetUniformBufferSizeEXT(GLuint program, GLint 
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
   Warning( "glGetUniformBufferSizeEXT not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static GLintptr REGAL_CALL missing_glGetUniformOffsetEXT(GLuint program, GLint location)
@@ -11278,7 +11278,7 @@ static GLintptr REGAL_CALL missing_glGetUniformOffsetEXT(GLuint program, GLint l
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(location);
   Warning( "glGetUniformOffsetEXT not available." );
-  return (GLintptr )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glUniformBufferEXT(GLuint program, GLint location, GLuint buffer)
@@ -11797,7 +11797,7 @@ static GLenum REGAL_CALL missing_glCheckNamedFramebufferStatusEXT(GLuint framebu
   UNUSED_PARAMETER(framebuffer);
   UNUSED_PARAMETER(target);
   Warning( "glCheckNamedFramebufferStatusEXT not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glClientAttribDefaultEXT(GLbitfield mask)
@@ -13930,7 +13930,7 @@ static GLboolean REGAL_CALL missing_glUnmapNamedBufferEXT(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glUnmapNamedBufferEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, const GLintptr offset)
@@ -14127,7 +14127,7 @@ static GLboolean REGAL_CALL missing_glIsEnabledIndexedEXT(GLenum target, GLuint 
   UNUSED_PARAMETER(target);
   UNUSED_PARAMETER(index);
   Warning( "glIsEnabledIndexedEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_EXT_draw_instanced
@@ -14387,7 +14387,7 @@ static GLenum REGAL_CALL missing_glCheckFramebufferStatusEXT(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glCheckFramebufferStatusEXT not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteFramebuffersEXT(GLsizei n, const GLuint *framebuffers)
@@ -14485,14 +14485,14 @@ static GLboolean REGAL_CALL missing_glIsFramebufferEXT(GLuint framebuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   Warning( "glIsFramebufferEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsRenderbufferEXT(GLuint renderbuffer)
 {
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glIsRenderbufferEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glRenderbufferStorageEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
@@ -14568,7 +14568,7 @@ static GLint REGAL_CALL missing_glGetFragDataLocationEXT(GLuint program, const G
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glGetFragDataLocationEXT not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetUniformuivEXT(GLuint program, GLint location, GLuint *params)
@@ -15088,7 +15088,7 @@ static GLboolean REGAL_CALL missing_glIsQueryEXT(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsQueryEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_EXT_paletted_texture
@@ -15393,7 +15393,7 @@ static GLuint REGAL_CALL missing_glCreateShaderProgramEXT(GLenum type, const GLc
   UNUSED_PARAMETER(type);
   UNUSED_PARAMETER(string);
   Warning( "glCreateShaderProgramEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glUseShaderProgramEXT(GLenum type, GLuint program)
@@ -15583,7 +15583,7 @@ static GLboolean REGAL_CALL missing_glAreTexturesResidentEXT(GLsizei n, const GL
   UNUSED_PARAMETER(textures);
   UNUSED_PARAMETER(residences);
   Warning( "glAreTexturesResidentEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glBindTextureEXT(GLenum target, GLuint texture)
@@ -15611,7 +15611,7 @@ static GLboolean REGAL_CALL missing_glIsTextureEXT(GLuint texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glIsTextureEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glPrioritizeTexturesEXT(GLsizei n, const GLuint *textures, const GLclampf *priorities)
@@ -15926,7 +15926,7 @@ static GLuint REGAL_CALL missing_glBindLightParameterEXT(GLenum light, GLenum va
   UNUSED_PARAMETER(light);
   UNUSED_PARAMETER(value);
   Warning( "glBindLightParameterEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glBindMaterialParameterEXT(GLenum face, GLenum value)
@@ -15934,14 +15934,14 @@ static GLuint REGAL_CALL missing_glBindMaterialParameterEXT(GLenum face, GLenum 
   UNUSED_PARAMETER(face);
   UNUSED_PARAMETER(value);
   Warning( "glBindMaterialParameterEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glBindParameterEXT(GLenum value)
 {
   UNUSED_PARAMETER(value);
   Warning( "glBindParameterEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glBindTexGenParameterEXT(GLenum unit, GLenum coord, GLenum value)
@@ -15950,7 +15950,7 @@ static GLuint REGAL_CALL missing_glBindTexGenParameterEXT(GLenum unit, GLenum co
   UNUSED_PARAMETER(coord);
   UNUSED_PARAMETER(value);
   Warning( "glBindTexGenParameterEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glBindTextureUnitParameterEXT(GLenum unit, GLenum value)
@@ -15958,7 +15958,7 @@ static GLuint REGAL_CALL missing_glBindTextureUnitParameterEXT(GLenum unit, GLen
   UNUSED_PARAMETER(unit);
   UNUSED_PARAMETER(value);
   Warning( "glBindTextureUnitParameterEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glBindVertexShaderEXT(GLuint id)
@@ -16005,14 +16005,14 @@ static GLuint REGAL_CALL missing_glGenSymbolsEXT(GLenum datatype, GLenum storage
   UNUSED_PARAMETER(range);
   UNUSED_PARAMETER(components);
   Warning( "glGenSymbolsEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glGenVertexShadersEXT(GLuint range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenVertexShadersEXT not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetInvariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data)
@@ -16108,7 +16108,7 @@ static GLboolean REGAL_CALL missing_glIsVariantEnabledEXT(GLuint id, GLenum cap)
   UNUSED_PARAMETER(id);
   UNUSED_PARAMETER(cap);
   Warning( "glIsVariantEnabledEXT not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glSetInvariantEXT(GLuint id, GLenum type, const GLvoid *addr)
@@ -16272,7 +16272,7 @@ static GLsync REGAL_CALL missing_glImportSyncEXT(GLenum external_sync_type, GLin
   UNUSED_PARAMETER(external_sync);
   UNUSED_PARAMETER(flags);
   Warning( "glImportSyncEXT not available." );
-  return (GLsync )0;
+  return NULL;
 }
 
 // GL_GREMEDY_frame_terminator
@@ -16568,7 +16568,7 @@ static GLuint REGAL_CALL missing_glGetDebugMessageLog(GLuint count, GLsizei bufs
   UNUSED_PARAMETER(lengths);
   UNUSED_PARAMETER(messageLog);
   Warning( "glGetDebugMessageLog not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label)
@@ -16626,7 +16626,7 @@ static void REGAL_CALL missing_glPushDebugGroup(GLenum source, GLuint id, GLsize
 static GLuint REGAL_CALL missing_glBufferRegionEnabled(void)
 {
   Warning( "glBufferRegionEnabled not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteBufferRegion(GLenum region)
@@ -16651,7 +16651,7 @@ static GLuint REGAL_CALL missing_glNewBufferRegion(GLenum region)
 {
   UNUSED_PARAMETER(region);
   Warning( "glNewBufferRegion not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glReadBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height)
@@ -16864,14 +16864,14 @@ static GLuint64 REGAL_CALL missing_glGetImageHandleNV(GLuint texture, GLint leve
   UNUSED_PARAMETER(layer);
   UNUSED_PARAMETER(format);
   Warning( "glGetImageHandleNV not available." );
-  return (GLuint64 )0;
+  return 0;
 }
 
 static GLuint64 REGAL_CALL missing_glGetTextureHandleNV(GLuint texture)
 {
   UNUSED_PARAMETER(texture);
   Warning( "glGetTextureHandleNV not available." );
-  return (GLuint64 )0;
+  return 0;
 }
 
 static GLuint64 REGAL_CALL missing_glGetTextureSamplerHandleNV(GLuint texture, GLuint sampler)
@@ -16879,21 +16879,21 @@ static GLuint64 REGAL_CALL missing_glGetTextureSamplerHandleNV(GLuint texture, G
   UNUSED_PARAMETER(texture);
   UNUSED_PARAMETER(sampler);
   Warning( "glGetTextureSamplerHandleNV not available." );
-  return (GLuint64 )0;
+  return 0;
 }
 
 static GLboolean REGAL_CALL missing_glIsImageHandleResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glIsImageHandleResidentNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsTextureHandleResidentNV(GLuint64 handle)
 {
   UNUSED_PARAMETER(handle);
   Warning( "glIsTextureHandleResidentNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glMakeImageHandleNonResidentNV(GLuint64 handle)
@@ -17195,7 +17195,7 @@ static GLboolean REGAL_CALL missing_glIsFenceNV(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glIsFenceNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glSetFenceNV(GLuint fence, GLenum condition)
@@ -17209,7 +17209,7 @@ static GLboolean REGAL_CALL missing_glTestFenceNV(GLuint fence)
 {
   UNUSED_PARAMETER(fence);
   Warning( "glTestFenceNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_NV_fragment_program
@@ -18131,7 +18131,7 @@ static GLboolean REGAL_CALL missing_glIsOcclusionQueryNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsOcclusionQueryNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_NV_parameter_buffer_object
@@ -18224,7 +18224,7 @@ static GLuint REGAL_CALL missing_glGenPathsNV(GLsizei range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenPathsNV not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat *value)
@@ -18270,7 +18270,7 @@ static GLfloat REGAL_CALL missing_glGetPathLengthNV(GLuint path, GLsizei startSe
   UNUSED_PARAMETER(startSegment);
   UNUSED_PARAMETER(numSegments);
   Warning( "glGetPathLengthNV not available." );
-  return (GLfloat )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics)
@@ -18354,7 +18354,7 @@ static GLboolean REGAL_CALL missing_glIsPathNV(GLuint path)
 {
   UNUSED_PARAMETER(path);
   Warning( "glIsPathNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y)
@@ -18364,7 +18364,7 @@ static GLboolean REGAL_CALL missing_glIsPointInFillPathNV(GLuint path, GLuint ma
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glIsPointInFillPathNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y)
@@ -18373,7 +18373,7 @@ static GLboolean REGAL_CALL missing_glIsPointInStrokePathNV(GLuint path, GLfloat
   UNUSED_PARAMETER(x);
   UNUSED_PARAMETER(y);
   Warning( "glIsPointInStrokePathNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs)
@@ -18553,7 +18553,7 @@ static GLboolean REGAL_CALL missing_glPointAlongPathNV(GLuint path, GLsizei star
   UNUSED_PARAMETER(tangentX);
   UNUSED_PARAMETER(tangentY);
   Warning( "glPointAlongPathNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues)
@@ -18911,14 +18911,14 @@ static GLboolean REGAL_CALL missing_glIsBufferResidentNV(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glIsBufferResidentNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsNamedBufferResidentNV(GLuint buffer)
 {
   UNUSED_PARAMETER(buffer);
   Warning( "glIsNamedBufferResidentNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glMakeBufferNonResidentNV(GLenum target)
@@ -19137,7 +19137,7 @@ static GLint REGAL_CALL missing_glGetVaryingLocationNV(GLuint program, const GLc
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(name);
   Warning( "glGetVaryingLocationNV not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glTransformFeedbackAttribsNV(GLuint count, const GLint *attribs, GLenum bufferMode)
@@ -19191,7 +19191,7 @@ static GLboolean REGAL_CALL missing_glIsTransformFeedbackNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsTransformFeedbackNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glPauseTransformFeedbackNV(void)
@@ -19232,7 +19232,7 @@ static GLboolean REGAL_CALL missing_glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface)
 {
   UNUSED_PARAMETER(surface);
   Warning( "glVDPAUIsSurfaceNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
@@ -19249,7 +19249,7 @@ static GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterOutputSurfaceNV(const 
   UNUSED_PARAMETER(numTextureNames);
   UNUSED_PARAMETER(textureNames);
   Warning( "glVDPAURegisterOutputSurfaceNV not available." );
-  return (GLvdpauSurfaceNV )0;
+  return 0;
 }
 
 static GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterVideoSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
@@ -19259,7 +19259,7 @@ static GLvdpauSurfaceNV REGAL_CALL missing_glVDPAURegisterVideoSurfaceNV(const G
   UNUSED_PARAMETER(numTextureNames);
   UNUSED_PARAMETER(textureNames);
   Warning( "glVDPAURegisterVideoSurfaceNV not available." );
-  return (GLvdpauSurfaceNV )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access)
@@ -19552,7 +19552,7 @@ static GLboolean REGAL_CALL missing_glAreProgramsResidentNV(GLsizei n, const GLu
   UNUSED_PARAMETER(programs);
   UNUSED_PARAMETER(residences);
   Warning( "glAreProgramsResidentNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glBindProgramNV(GLenum target, GLuint id)
@@ -19663,7 +19663,7 @@ static GLboolean REGAL_CALL missing_glIsProgramNV(GLuint id)
 {
   UNUSED_PARAMETER(id);
   Warning( "glIsProgramNV not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glLoadProgramNV(GLenum target, GLuint id, GLsizei len, const GLubyte *program)
@@ -20138,7 +20138,7 @@ static GLenum REGAL_CALL missing_glVideoCaptureNV(GLuint video_capture_slot, GLu
   UNUSED_PARAMETER(sequence_num);
   UNUSED_PARAMETER(capture_time);
   Warning( "glVideoCaptureNV not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glVideoCaptureStreamParameterdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble *params)
@@ -20216,7 +20216,7 @@ static GLenum REGAL_CALL missing_glCheckFramebufferStatusOES(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glCheckFramebufferStatusOES not available." );
-  return (GLenum )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glDeleteFramebuffersOES(GLsizei n, const GLuint *framebuffers)
@@ -20293,14 +20293,14 @@ static GLboolean REGAL_CALL missing_glIsFramebufferOES(GLuint framebuffer)
 {
   UNUSED_PARAMETER(framebuffer);
   Warning( "glIsFramebufferOES not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLboolean REGAL_CALL missing_glIsRenderbufferOES(GLuint renderbuffer)
 {
   UNUSED_PARAMETER(renderbuffer);
   Warning( "glIsRenderbufferOES not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static void REGAL_CALL missing_glRenderbufferStorageOES(GLenum target, GLenum internalformat, GLsizei width, GLsizei height)
@@ -20355,7 +20355,7 @@ static GLboolean REGAL_CALL missing_glUnmapBufferOES(GLenum target)
 {
   UNUSED_PARAMETER(target);
   Warning( "glUnmapBufferOES not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_OES_matrix_palette
@@ -20623,7 +20623,7 @@ static GLboolean REGAL_CALL missing_glIsVertexArrayOES(GLuint array)
 {
   UNUSED_PARAMETER(array);
   Warning( "glIsVertexArrayOES not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_PGI_misc_hints
@@ -20781,7 +20781,7 @@ static GLboolean REGAL_CALL missing_glExtIsProgramBinaryQCOM(GLuint program)
 {
   UNUSED_PARAMETER(program);
   Warning( "glExtIsProgramBinaryQCOM not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 // GL_QCOM_tiled_rendering
@@ -21367,28 +21367,28 @@ static GLint REGAL_CALL missing_glFinishAsyncSGIX(GLuint *markerp)
 {
   UNUSED_PARAMETER(markerp);
   Warning( "glFinishAsyncSGIX not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static GLuint REGAL_CALL missing_glGenAsyncMarkersSGIX(GLsizei range)
 {
   UNUSED_PARAMETER(range);
   Warning( "glGenAsyncMarkersSGIX not available." );
-  return (GLuint )0;
+  return 0;
 }
 
 static GLboolean REGAL_CALL missing_glIsAsyncMarkerSGIX(GLuint marker)
 {
   UNUSED_PARAMETER(marker);
   Warning( "glIsAsyncMarkerSGIX not available." );
-  return (GLboolean )0;
+  return GL_FALSE;
 }
 
 static GLint REGAL_CALL missing_glPollAsyncSGIX(GLuint *markerp)
 {
   UNUSED_PARAMETER(markerp);
   Warning( "glPollAsyncSGIX not available." );
-  return (GLint )0;
+  return 0;
 }
 
 // GL_SGIX_flush_raster
@@ -21568,7 +21568,7 @@ static void REGAL_CALL missing_glIglooInterfaceSGIX(GLenum pname, const GLvoid *
 static GLint REGAL_CALL missing_glGetInstrumentsSGIX(void)
 {
   Warning( "glGetInstrumentsSGIX not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glInstrumentsBufferSGIX(GLsizei size, GLint *buffer)
@@ -21582,7 +21582,7 @@ static GLint REGAL_CALL missing_glPollInstrumentsSGIX(GLint *marker_p)
 {
   UNUSED_PARAMETER(marker_p);
   Warning( "glPollInstrumentsSGIX not available." );
-  return (GLint )0;
+  return 0;
 }
 
 static void REGAL_CALL missing_glReadInstrumentsSGIX(GLint marker)
@@ -22386,7 +22386,3482 @@ static void REGAL_CALL missing_glAddSwapHintRectWIN(GLint x, GLint y, GLsizei wi
   Warning( "glAddSwapHintRectWIN not available." );
 }
 
-void InitDispatchTableMissing(DispatchTable &tbl)
+#if REGAL_SYS_WGL
+
+// WGL_3DL_stereo_control
+
+static BOOL REGAL_CALL missing_wglSetStereoEmitterState3DL(HDC hDC, UINT uState)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uState);
+  Warning( "wglSetStereoEmitterState3DL not available." );
+  return 0;
+}
+
+// WGL_AMD_gpu_association
+
+static VOID REGAL_CALL missing_wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+{
+  UNUSED_PARAMETER(dstCtx);
+  UNUSED_PARAMETER(srcX0);
+  UNUSED_PARAMETER(srcY0);
+  UNUSED_PARAMETER(srcX1);
+  UNUSED_PARAMETER(srcY1);
+  UNUSED_PARAMETER(dstX0);
+  UNUSED_PARAMETER(dstY0);
+  UNUSED_PARAMETER(dstX1);
+  UNUSED_PARAMETER(dstY1);
+  UNUSED_PARAMETER(mask);
+  UNUSED_PARAMETER(filter);
+  Warning( "wglBlitContextFramebufferAMD not available." );
+}
+
+static HGLRC REGAL_CALL missing_wglCreateAssociatedContextAMD(UINT id)
+{
+  UNUSED_PARAMETER(id);
+  Warning( "wglCreateAssociatedContextAMD not available." );
+  return NULL;
+}
+
+static HGLRC REGAL_CALL missing_wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int *attribList)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(hShareContext);
+  UNUSED_PARAMETER(attribList);
+  Warning( "wglCreateAssociatedContextAttribsAMD not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglDeleteAssociatedContextAMD(HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglDeleteAssociatedContextAMD not available." );
+  return 0;
+}
+
+static UINT REGAL_CALL missing_wglGetContextGPUIDAMD(HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglGetContextGPUIDAMD not available." );
+  return 0;
+}
+
+static HGLRC REGAL_CALL missing_wglGetCurrentAssociatedContextAMD(void)
+{
+  Warning( "wglGetCurrentAssociatedContextAMD not available." );
+  return NULL;
+}
+
+static UINT REGAL_CALL missing_wglGetGPUIDsAMD(UINT maxCount, UINT *ids)
+{
+  UNUSED_PARAMETER(maxCount);
+  UNUSED_PARAMETER(ids);
+  Warning( "wglGetGPUIDsAMD not available." );
+  return 0;
+}
+
+static INT REGAL_CALL missing_wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void *data)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(property);
+  UNUSED_PARAMETER(dataType);
+  UNUSED_PARAMETER(size);
+  UNUSED_PARAMETER(data);
+  Warning( "wglGetGPUInfoAMD not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglMakeAssociatedContextCurrentAMD not available." );
+  return 0;
+}
+
+// WGL_ARB_buffer_region
+
+static HANDLE REGAL_CALL missing_wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(uType);
+  Warning( "wglCreateBufferRegionARB not available." );
+  return 0;
+}
+
+static VOID REGAL_CALL missing_wglDeleteBufferRegionARB(HANDLE hRegion)
+{
+  UNUSED_PARAMETER(hRegion);
+  Warning( "wglDeleteBufferRegionARB not available." );
+}
+
+static BOOL REGAL_CALL missing_wglRestoreBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height, int xSrc, int ySrc)
+{
+  UNUSED_PARAMETER(hRegion);
+  UNUSED_PARAMETER(x);
+  UNUSED_PARAMETER(y);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(xSrc);
+  UNUSED_PARAMETER(ySrc);
+  Warning( "wglRestoreBufferRegionARB not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSaveBufferRegionARB(HANDLE hRegion, int x, int y, int width, int height)
+{
+  UNUSED_PARAMETER(hRegion);
+  UNUSED_PARAMETER(x);
+  UNUSED_PARAMETER(y);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  Warning( "wglSaveBufferRegionARB not available." );
+  return 0;
+}
+
+// WGL_ARB_create_context
+
+static HGLRC REGAL_CALL missing_wglCreateContextAttribsARB(HDC hDC, HGLRC hShareContext, const int *piAttribList)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(hShareContext);
+  UNUSED_PARAMETER(piAttribList);
+  Warning( "wglCreateContextAttribsARB not available." );
+  return NULL;
+}
+
+// WGL_ARB_extensions_string
+
+static const char *REGAL_CALL missing_wglGetExtensionsStringARB(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglGetExtensionsStringARB not available." );
+  return NULL;
+}
+
+// WGL_ARB_make_current_read
+
+static HDC REGAL_CALL missing_wglGetCurrentReadDCARB(void)
+{
+  Warning( "wglGetCurrentReadDCARB not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hDrawDC);
+  UNUSED_PARAMETER(hReadDC);
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglMakeContextCurrentARB not available." );
+  return 0;
+}
+
+// WGL_ARB_pbuffer
+
+static HPBUFFERARB REGAL_CALL missing_wglCreatePbufferARB(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iWidth);
+  UNUSED_PARAMETER(iHeight);
+  UNUSED_PARAMETER(piAttribList);
+  Warning( "wglCreatePbufferARB not available." );
+  return (HPBUFFERARB) 0;
+}
+
+static BOOL REGAL_CALL missing_wglDestroyPbufferARB(HPBUFFERARB hPbuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  Warning( "wglDestroyPbufferARB not available." );
+  return 0;
+}
+
+static HDC REGAL_CALL missing_wglGetPbufferDCARB(HPBUFFERARB hPbuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  Warning( "wglGetPbufferDCARB not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int *piValue)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglQueryPbufferARB not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_wglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglReleasePbufferDCARB not available." );
+  return 0;
+}
+
+// WGL_ARB_pixel_format
+
+static BOOL REGAL_CALL missing_wglChoosePixelFormatARB(HDC hDC, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(piAttribIList);
+  UNUSED_PARAMETER(pfAttribFList);
+  UNUSED_PARAMETER(nMaxFormats);
+  UNUSED_PARAMETER(piFormats);
+  UNUSED_PARAMETER(nNumFormats);
+  Warning( "wglChoosePixelFormatARB not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetPixelFormatAttribfvARB(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(nAttributes);
+  UNUSED_PARAMETER(piAttributes);
+  UNUSED_PARAMETER(pfValues);
+  Warning( "wglGetPixelFormatAttribfvARB not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetPixelFormatAttribivARB(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(nAttributes);
+  UNUSED_PARAMETER(piAttributes);
+  UNUSED_PARAMETER(piValues);
+  Warning( "wglGetPixelFormatAttribivARB not available." );
+  return 0;
+}
+
+// WGL_ARB_render_texture
+
+static BOOL REGAL_CALL missing_wglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iBuffer);
+  Warning( "wglBindTexImageARB not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iBuffer);
+  Warning( "wglReleaseTexImageARB not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int *piAttribList)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(piAttribList);
+  Warning( "wglSetPbufferAttribARB not available." );
+  return 0;
+}
+
+// WGL_EXT_display_color_table
+
+static GLboolean REGAL_CALL missing_wglBindDisplayColorTableEXT(GLushort id)
+{
+  UNUSED_PARAMETER(id);
+  Warning( "wglBindDisplayColorTableEXT not available." );
+  return GL_FALSE;
+}
+
+static GLboolean REGAL_CALL missing_wglCreateDisplayColorTableEXT(GLushort id)
+{
+  UNUSED_PARAMETER(id);
+  Warning( "wglCreateDisplayColorTableEXT not available." );
+  return GL_FALSE;
+}
+
+static VOID REGAL_CALL missing_wglDestroyDisplayColorTableEXT(GLushort id)
+{
+  UNUSED_PARAMETER(id);
+  Warning( "wglDestroyDisplayColorTableEXT not available." );
+}
+
+static GLboolean REGAL_CALL missing_wglLoadDisplayColorTableEXT(const GLushort *table, GLuint length)
+{
+  UNUSED_PARAMETER(table);
+  UNUSED_PARAMETER(length);
+  Warning( "wglLoadDisplayColorTableEXT not available." );
+  return GL_FALSE;
+}
+
+// WGL_EXT_extensions_string
+
+static const char *REGAL_CALL missing_wglGetExtensionsStringEXT(void)
+{
+  Warning( "wglGetExtensionsStringEXT not available." );
+  return NULL;
+}
+
+// WGL_EXT_make_current_read
+
+static HDC REGAL_CALL missing_wglGetCurrentReadDCEXT(void)
+{
+  Warning( "wglGetCurrentReadDCEXT not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hDrawDC);
+  UNUSED_PARAMETER(hReadDC);
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglMakeContextCurrentEXT not available." );
+  return 0;
+}
+
+// WGL_EXT_pbuffer
+
+static HPBUFFEREXT REGAL_CALL missing_wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iWidth);
+  UNUSED_PARAMETER(iHeight);
+  UNUSED_PARAMETER(piAttribList);
+  Warning( "wglCreatePbufferEXT not available." );
+  return (HPBUFFEREXT) 0;
+}
+
+static BOOL REGAL_CALL missing_wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  Warning( "wglDestroyPbufferEXT not available." );
+  return 0;
+}
+
+static HDC REGAL_CALL missing_wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  Warning( "wglGetPbufferDCEXT not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglQueryPbufferEXT not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglReleasePbufferDCEXT not available." );
+  return 0;
+}
+
+// WGL_EXT_pixel_format
+
+static BOOL REGAL_CALL missing_wglChoosePixelFormatEXT(HDC hDC, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(piAttribIList);
+  UNUSED_PARAMETER(pfAttribFList);
+  UNUSED_PARAMETER(nMaxFormats);
+  UNUSED_PARAMETER(piFormats);
+  UNUSED_PARAMETER(nNumFormats);
+  Warning( "wglChoosePixelFormatEXT not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetPixelFormatAttribfvEXT(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(nAttributes);
+  UNUSED_PARAMETER(piAttributes);
+  UNUSED_PARAMETER(pfValues);
+  Warning( "wglGetPixelFormatAttribfvEXT not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetPixelFormatAttribivEXT(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(nAttributes);
+  UNUSED_PARAMETER(piAttributes);
+  UNUSED_PARAMETER(piValues);
+  Warning( "wglGetPixelFormatAttribivEXT not available." );
+  return 0;
+}
+
+// WGL_EXT_swap_control
+
+static int REGAL_CALL missing_wglGetSwapIntervalEXT(void)
+{
+  Warning( "wglGetSwapIntervalEXT not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSwapIntervalEXT(int interval)
+{
+  UNUSED_PARAMETER(interval);
+  Warning( "wglSwapIntervalEXT not available." );
+  return 0;
+}
+
+// WGL_GDI
+
+static int REGAL_CALL missing_wglChoosePixelFormat(HDC hDC, const PIXELFORMATDESCRIPTOR *ppfd)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(ppfd);
+  Warning( "wglChoosePixelFormat not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_wglDescribePixelFormat(HDC hDC, int iPixelFormat, UINT nBytes, LPPIXELFORMATDESCRIPTOR ppfd)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(nBytes);
+  UNUSED_PARAMETER(ppfd);
+  Warning( "wglDescribePixelFormat not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_wglGetPixelFormat(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglGetPixelFormat not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSetPixelFormat(HDC hDC, int iPixelFormat, const PIXELFORMATDESCRIPTOR *ppfd)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(ppfd);
+  Warning( "wglSetPixelFormat not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSwapBuffers(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglSwapBuffers not available." );
+  return 0;
+}
+
+// WGL_I3D_digital_video_control
+
+static BOOL REGAL_CALL missing_wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int *piValue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglGetDigitalVideoParametersI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int *piValue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglSetDigitalVideoParametersI3D not available." );
+  return 0;
+}
+
+// WGL_I3D_gamma
+
+static BOOL REGAL_CALL missing_wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iEntries);
+  UNUSED_PARAMETER(puRed);
+  UNUSED_PARAMETER(puGreen);
+  UNUSED_PARAMETER(puBlue);
+  Warning( "wglGetGammaTableI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int *piValue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglGetGammaTableParametersI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iEntries);
+  UNUSED_PARAMETER(puRed);
+  UNUSED_PARAMETER(puGreen);
+  UNUSED_PARAMETER(puBlue);
+  Warning( "wglSetGammaTableI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int *piValue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglSetGammaTableParametersI3D not available." );
+  return 0;
+}
+
+// WGL_I3D_genlock
+
+static BOOL REGAL_CALL missing_wglDisableGenlockI3D(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglDisableGenlockI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglEnableGenlockI3D(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglEnableGenlockI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGenlockSampleRateI3D(HDC hDC, UINT uRate)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uRate);
+  Warning( "wglGenlockSampleRateI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uDelay);
+  Warning( "wglGenlockSourceDelayI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uEdge);
+  Warning( "wglGenlockSourceEdgeI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGenlockSourceI3D(HDC hDC, UINT uSource)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uSource);
+  Warning( "wglGenlockSourceI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetGenlockSampleRateI3D(HDC hDC, UINT *uRate)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uRate);
+  Warning( "wglGetGenlockSampleRateI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetGenlockSourceDelayI3D(HDC hDC, UINT *uDelay)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uDelay);
+  Warning( "wglGetGenlockSourceDelayI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetGenlockSourceEdgeI3D(HDC hDC, UINT *uEdge)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uEdge);
+  Warning( "wglGetGenlockSourceEdgeI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetGenlockSourceI3D(HDC hDC, UINT *uSource)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uSource);
+  Warning( "wglGetGenlockSourceI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglIsEnabledGenlockI3D(HDC hDC, BOOL *pFlag)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(pFlag);
+  Warning( "wglIsEnabledGenlockI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uMaxLineDelay);
+  UNUSED_PARAMETER(uMaxPixelDelay);
+  Warning( "wglQueryGenlockMaxSourceDelayI3D not available." );
+  return 0;
+}
+
+// WGL_I3D_image_buffer
+
+static BOOL REGAL_CALL missing_wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(pEvent);
+  UNUSED_PARAMETER(pAddress);
+  UNUSED_PARAMETER(pSize);
+  UNUSED_PARAMETER(count);
+  Warning( "wglAssociateImageBufferEventsI3D not available." );
+  return 0;
+}
+
+static LPVOID REGAL_CALL missing_wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(dwSize);
+  UNUSED_PARAMETER(uFlags);
+  Warning( "wglCreateImageBufferI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDestroyImageBufferI3D(HDC hDC, LPVOID pAddress)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(pAddress);
+  Warning( "wglDestroyImageBufferI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglReleaseImageBufferEventsI3D(HDC hDC, const LPVOID *pAddress, UINT count)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(pAddress);
+  UNUSED_PARAMETER(count);
+  Warning( "wglReleaseImageBufferEventsI3D not available." );
+  return 0;
+}
+
+// WGL_I3D_swap_frame_lock
+
+static BOOL REGAL_CALL missing_wglDisableFrameLockI3D(void)
+{
+  Warning( "wglDisableFrameLockI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglEnableFrameLockI3D(void)
+{
+  Warning( "wglEnableFrameLockI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglIsEnabledFrameLockI3D(BOOL *pFlag)
+{
+  UNUSED_PARAMETER(pFlag);
+  Warning( "wglIsEnabledFrameLockI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryFrameLockMasterI3D(BOOL *pFlag)
+{
+  UNUSED_PARAMETER(pFlag);
+  Warning( "wglQueryFrameLockMasterI3D not available." );
+  return 0;
+}
+
+// WGL_I3D_swap_frame_usage
+
+static BOOL REGAL_CALL missing_wglBeginFrameTrackingI3D(void)
+{
+  Warning( "wglBeginFrameTrackingI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglEndFrameTrackingI3D(void)
+{
+  Warning( "wglEndFrameTrackingI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetFrameUsageI3D(float *pUsage)
+{
+  UNUSED_PARAMETER(pUsage);
+  Warning( "wglGetFrameUsageI3D not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryFrameTrackingI3D(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage)
+{
+  UNUSED_PARAMETER(pFrameCount);
+  UNUSED_PARAMETER(pMissedFrames);
+  UNUSED_PARAMETER(pLastMissedUsage);
+  Warning( "wglQueryFrameTrackingI3D not available." );
+  return 0;
+}
+
+// WGL_NV_DX_interop
+
+static BOOL REGAL_CALL missing_wglDXCloseDeviceNV(HANDLE hDevice)
+{
+  UNUSED_PARAMETER(hDevice);
+  Warning( "wglDXCloseDeviceNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects)
+{
+  UNUSED_PARAMETER(hDevice);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(hObjects);
+  Warning( "wglDXLockObjectsNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDXObjectAccessNV(HANDLE hObject, GLenum access)
+{
+  UNUSED_PARAMETER(hObject);
+  UNUSED_PARAMETER(access);
+  Warning( "wglDXObjectAccessNV not available." );
+  return 0;
+}
+
+static HANDLE REGAL_CALL missing_wglDXOpenDeviceNV(GLvoid *dxDevice)
+{
+  UNUSED_PARAMETER(dxDevice);
+  Warning( "wglDXOpenDeviceNV not available." );
+  return 0;
+}
+
+static HANDLE REGAL_CALL missing_wglDXRegisterObjectNV(HANDLE hDevice, GLvoid *dxObject, GLuint name, GLenum type, GLenum access)
+{
+  UNUSED_PARAMETER(hDevice);
+  UNUSED_PARAMETER(dxObject);
+  UNUSED_PARAMETER(name);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(access);
+  Warning( "wglDXRegisterObjectNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDXSetResourceShareHandleNV(GLvoid *dxObject, HANDLE shareHandle)
+{
+  UNUSED_PARAMETER(dxObject);
+  UNUSED_PARAMETER(shareHandle);
+  Warning( "wglDXSetResourceShareHandleNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects)
+{
+  UNUSED_PARAMETER(hDevice);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(hObjects);
+  Warning( "wglDXUnlockObjectsNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
+{
+  UNUSED_PARAMETER(hDevice);
+  UNUSED_PARAMETER(hObject);
+  Warning( "wglDXUnregisterObjectNV not available." );
+  return 0;
+}
+
+// WGL_NV_copy_image
+
+static BOOL REGAL_CALL missing_wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+{
+  UNUSED_PARAMETER(hSrcRC);
+  UNUSED_PARAMETER(srcName);
+  UNUSED_PARAMETER(srcTarget);
+  UNUSED_PARAMETER(srcLevel);
+  UNUSED_PARAMETER(srcX);
+  UNUSED_PARAMETER(srcY);
+  UNUSED_PARAMETER(srcZ);
+  UNUSED_PARAMETER(hDstRC);
+  UNUSED_PARAMETER(dstName);
+  UNUSED_PARAMETER(dstTarget);
+  UNUSED_PARAMETER(dstLevel);
+  UNUSED_PARAMETER(dstX);
+  UNUSED_PARAMETER(dstY);
+  UNUSED_PARAMETER(dstZ);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  Warning( "wglCopyImageSubDataNV not available." );
+  return 0;
+}
+
+// WGL_NV_gpu_affinity
+
+static HDC REGAL_CALL missing_wglCreateAffinityDCNV(const HGPUNV *phGpuList)
+{
+  UNUSED_PARAMETER(phGpuList);
+  Warning( "wglCreateAffinityDCNV not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglDeleteDCNV(HDC hAffinityDC)
+{
+  UNUSED_PARAMETER(hAffinityDC);
+  Warning( "wglDeleteDCNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVICE lpGpuDevice)
+{
+  UNUSED_PARAMETER(hGpu);
+  UNUSED_PARAMETER(iDeviceIndex);
+  UNUSED_PARAMETER(lpGpuDevice);
+  Warning( "wglEnumGpuDevicesNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu)
+{
+  UNUSED_PARAMETER(hAffinityDC);
+  UNUSED_PARAMETER(iGpuIndex);
+  UNUSED_PARAMETER(hGpu);
+  Warning( "wglEnumGpusFromAffinityDCNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglEnumGpusNV(UINT iGpuIndex, HGPUNV *phGpu)
+{
+  UNUSED_PARAMETER(iGpuIndex);
+  UNUSED_PARAMETER(phGpu);
+  Warning( "wglEnumGpusNV not available." );
+  return 0;
+}
+
+// WGL_NV_present_video
+
+static BOOL REGAL_CALL missing_wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(uVideoSlot);
+  UNUSED_PARAMETER(hVideoDevice);
+  UNUSED_PARAMETER(piAttribList);
+  Warning( "wglBindVideoDeviceNV not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(phDeviceList);
+  Warning( "wglEnumerateVideoDevicesNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryCurrentContextNV(int iAttribute, int *piValue)
+{
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglQueryCurrentContextNV not available." );
+  return 0;
+}
+
+// WGL_NV_swap_group
+
+static BOOL REGAL_CALL missing_wglBindSwapBarrierNV(GLuint group, GLuint barrier)
+{
+  UNUSED_PARAMETER(group);
+  UNUSED_PARAMETER(barrier);
+  Warning( "wglBindSwapBarrierNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglJoinSwapGroupNV(HDC hDC, GLuint group)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(group);
+  Warning( "wglJoinSwapGroupNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryFrameCountNV(HDC hDC, GLuint *count)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(count);
+  Warning( "wglQueryFrameCountNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryMaxSwapGroupsNV(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(maxGroups);
+  UNUSED_PARAMETER(maxBarriers);
+  Warning( "wglQueryMaxSwapGroupsNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQuerySwapGroupNV(HDC hDC, GLuint *group, GLuint *barrier)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(group);
+  UNUSED_PARAMETER(barrier);
+  Warning( "wglQuerySwapGroupNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglResetFrameCountNV(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglResetFrameCountNV not available." );
+  return 0;
+}
+
+// WGL_NV_vertex_array_range
+
+static void *REGAL_CALL missing_wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)
+{
+  UNUSED_PARAMETER(size);
+  UNUSED_PARAMETER(readfreq);
+  UNUSED_PARAMETER(writefreq);
+  UNUSED_PARAMETER(priority);
+  Warning( "wglAllocateMemoryNV not available." );
+  return NULL;
+}
+
+static void REGAL_CALL missing_wglFreeMemoryNV(void *pointer)
+{
+  UNUSED_PARAMETER(pointer);
+  Warning( "wglFreeMemoryNV not available." );
+}
+
+// WGL_NV_video_capture
+
+static BOOL REGAL_CALL missing_wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice)
+{
+  UNUSED_PARAMETER(uVideoSlot);
+  UNUSED_PARAMETER(hDevice);
+  Warning( "wglBindVideoCaptureDeviceNV not available." );
+  return 0;
+}
+
+static UINT REGAL_CALL missing_wglEnumerateVideoCaptureDevicesNV(HDC hDC, HVIDEOINPUTDEVICENV *phDeviceList)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(phDeviceList);
+  Warning( "wglEnumerateVideoCaptureDevicesNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglLockVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(hDevice);
+  Warning( "wglLockVideoCaptureDeviceNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglQueryVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(hDevice);
+  UNUSED_PARAMETER(iAttribute);
+  UNUSED_PARAMETER(piValue);
+  Warning( "wglQueryVideoCaptureDeviceNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglReleaseVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(hDevice);
+  Warning( "wglReleaseVideoCaptureDeviceNV not available." );
+  return 0;
+}
+
+// WGL_NV_video_output
+
+static BOOL REGAL_CALL missing_wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer)
+{
+  UNUSED_PARAMETER(hVideoDevice);
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iVideoBuffer);
+  Warning( "wglBindVideoImageNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(numDevices);
+  UNUSED_PARAMETER(hVideoDevice);
+  Warning( "wglGetVideoDeviceNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo)
+{
+  UNUSED_PARAMETER(hpVideoDevice);
+  UNUSED_PARAMETER(pulCounterOutputPbuffer);
+  UNUSED_PARAMETER(pulCounterOutputVideo);
+  Warning( "wglGetVideoInfoNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
+{
+  UNUSED_PARAMETER(hVideoDevice);
+  Warning( "wglReleaseVideoDeviceNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iVideoBuffer);
+  Warning( "wglReleaseVideoImageNV not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock)
+{
+  UNUSED_PARAMETER(hPbuffer);
+  UNUSED_PARAMETER(iBufferType);
+  UNUSED_PARAMETER(pulCounterPbuffer);
+  UNUSED_PARAMETER(bBlock);
+  Warning( "wglSendPbufferToVideoNV not available." );
+  return 0;
+}
+
+// WGL_OML_sync_control
+
+static BOOL REGAL_CALL missing_wglGetMscRateOML(HDC hDC, INT32 *numerator, INT32 *denominator)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(numerator);
+  UNUSED_PARAMETER(denominator);
+  Warning( "wglGetMscRateOML not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglGetSyncValuesOML(HDC hDC, INT64 *ust, INT64 *msc, INT64 *sbc)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(ust);
+  UNUSED_PARAMETER(msc);
+  UNUSED_PARAMETER(sbc);
+  Warning( "wglGetSyncValuesOML not available." );
+  return 0;
+}
+
+static INT64 REGAL_CALL missing_wglSwapBuffersMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(target_msc);
+  UNUSED_PARAMETER(divisor);
+  UNUSED_PARAMETER(remainder);
+  Warning( "wglSwapBuffersMscOML not available." );
+  return 0;
+}
+
+static INT64 REGAL_CALL missing_wglSwapLayerBuffersMscOML(HDC hDC, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(fuPlanes);
+  UNUSED_PARAMETER(target_msc);
+  UNUSED_PARAMETER(divisor);
+  UNUSED_PARAMETER(remainder);
+  Warning( "wglSwapLayerBuffersMscOML not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglWaitForMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(target_msc);
+  UNUSED_PARAMETER(divisor);
+  UNUSED_PARAMETER(remainder);
+  UNUSED_PARAMETER(ust);
+  UNUSED_PARAMETER(msc);
+  UNUSED_PARAMETER(sbc);
+  Warning( "wglWaitForMscOML not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglWaitForSbcOML(HDC hDC, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(target_sbc);
+  UNUSED_PARAMETER(ust);
+  UNUSED_PARAMETER(msc);
+  UNUSED_PARAMETER(sbc);
+  Warning( "wglWaitForSbcOML not available." );
+  return 0;
+}
+
+// WGL_core
+
+static BOOL REGAL_CALL missing_wglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT mask)
+{
+  UNUSED_PARAMETER(hglrcSrc);
+  UNUSED_PARAMETER(hglrcDst);
+  UNUSED_PARAMETER(mask);
+  Warning( "wglCopyContext not available." );
+  return 0;
+}
+
+static HGLRC REGAL_CALL missing_wglCreateContext(HDC hDC)
+{
+  UNUSED_PARAMETER(hDC);
+  Warning( "wglCreateContext not available." );
+  return NULL;
+}
+
+static HGLRC REGAL_CALL missing_wglCreateLayerContext(HDC hDC, int iLayerPlane)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iLayerPlane);
+  Warning( "wglCreateLayerContext not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglDeleteContext(HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglDeleteContext not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglDescribeLayerPlane(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nBytes, LPLAYERPLANEDESCRIPTOR plpd)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iPixelFormat);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(nBytes);
+  UNUSED_PARAMETER(plpd);
+  Warning( "wglDescribeLayerPlane not available." );
+  return 0;
+}
+
+static HGLRC REGAL_CALL missing_wglGetCurrentContext(void)
+{
+  Warning( "wglGetCurrentContext not available." );
+  return NULL;
+}
+
+static HDC REGAL_CALL missing_wglGetCurrentDC(void)
+{
+  Warning( "wglGetCurrentDC not available." );
+  return NULL;
+}
+
+static PROC REGAL_CALL missing_wglGetDefaultProcAddress(LPCSTR lpszProc)
+{
+  UNUSED_PARAMETER(lpszProc);
+  Warning( "wglGetDefaultProcAddress not available." );
+  return NULL;
+}
+
+static int REGAL_CALL missing_wglGetLayerPaletteEntries(HDC hDC, int iLayerPlane, int iStart, int nEntries, COLORREF *pcr)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(iStart);
+  UNUSED_PARAMETER(nEntries);
+  UNUSED_PARAMETER(pcr);
+  Warning( "wglGetLayerPaletteEntries not available." );
+  return 0;
+}
+
+static PROC REGAL_CALL missing_wglGetProcAddress(LPCSTR lpszProc)
+{
+  UNUSED_PARAMETER(lpszProc);
+  Warning( "wglGetProcAddress not available." );
+  return NULL;
+}
+
+static BOOL REGAL_CALL missing_wglMakeCurrent(HDC hDC, HGLRC hglrc)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(hglrc);
+  Warning( "wglMakeCurrent not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglRealizeLayerPalette(HDC hDC, int iLayerPlane, BOOL bRealize)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(bRealize);
+  Warning( "wglRealizeLayerPalette not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_wglSetLayerPaletteEntries(HDC hDC, int iLayerPlane, int iStart, int nEntries, const COLORREF *pcr)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(iLayerPlane);
+  UNUSED_PARAMETER(iStart);
+  UNUSED_PARAMETER(nEntries);
+  UNUSED_PARAMETER(pcr);
+  Warning( "wglSetLayerPaletteEntries not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglShareLists(HGLRC hglrcShare, HGLRC hglrcSrc)
+{
+  UNUSED_PARAMETER(hglrcShare);
+  UNUSED_PARAMETER(hglrcSrc);
+  Warning( "wglShareLists not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglSwapLayerBuffers(HDC hDC, UINT fuPlanes)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(fuPlanes);
+  Warning( "wglSwapLayerBuffers not available." );
+  return 0;
+}
+
+static DWORD REGAL_CALL missing_wglSwapMultipleBuffers(UINT n, const WGLSWAP *ps)
+{
+  UNUSED_PARAMETER(n);
+  UNUSED_PARAMETER(ps);
+  Warning( "wglSwapMultipleBuffers not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglUseFontBitmapsA(HDC hDC, DWORD first, DWORD count, DWORD listBase)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(listBase);
+  Warning( "wglUseFontBitmapsA not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglUseFontBitmapsW(HDC hDC, DWORD first, DWORD count, DWORD listBase)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(listBase);
+  Warning( "wglUseFontBitmapsW not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglUseFontOutlinesA(HDC hDC, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, LPGLYPHMETRICSFLOAT lpgmf)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(listBase);
+  UNUSED_PARAMETER(deviation);
+  UNUSED_PARAMETER(extrusion);
+  UNUSED_PARAMETER(format);
+  UNUSED_PARAMETER(lpgmf);
+  Warning( "wglUseFontOutlinesA not available." );
+  return 0;
+}
+
+static BOOL REGAL_CALL missing_wglUseFontOutlinesW(HDC hDC, DWORD first, DWORD count, DWORD listBase, FLOAT deviation, FLOAT extrusion, int format, LPGLYPHMETRICSFLOAT lpgmf)
+{
+  UNUSED_PARAMETER(hDC);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(listBase);
+  UNUSED_PARAMETER(deviation);
+  UNUSED_PARAMETER(extrusion);
+  UNUSED_PARAMETER(format);
+  UNUSED_PARAMETER(lpgmf);
+  Warning( "wglUseFontOutlinesW not available." );
+  return 0;
+}
+
+#endif // REGAL_SYS_WGL
+
+#if REGAL_SYS_GLX
+
+// GLX_VERSION_1_0
+
+static XVisualInfo *REGAL_CALL missing_glXChooseVisual(Display *dpy, int screen, int *attribList)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(attribList);
+  Warning( "glXChooseVisual not available." );
+  return NULL;
+}
+
+static void REGAL_CALL missing_glXCopyContext(Display *dpy, GLXContext src, GLXContext dst, unsigned long mask)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(src);
+  UNUSED_PARAMETER(dst);
+  UNUSED_PARAMETER(mask);
+  Warning( "glXCopyContext not available." );
+}
+
+static GLXContext REGAL_CALL missing_glXCreateContext(Display *dpy, XVisualInfo *vis, GLXContext shareList, Bool direct)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(vis);
+  UNUSED_PARAMETER(shareList);
+  UNUSED_PARAMETER(direct);
+  Warning( "glXCreateContext not available." );
+  return 0;
+}
+
+static GLXPixmap REGAL_CALL missing_glXCreateGLXPixmap(Display *dpy, XVisualInfo *vis, Pixmap pixmap)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(vis);
+  UNUSED_PARAMETER(pixmap);
+  Warning( "glXCreateGLXPixmap not available." );
+  return 0;
+}
+
+static void REGAL_CALL missing_glXDestroyContext(Display *dpy, GLXContext ctx)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXDestroyContext not available." );
+}
+
+static void REGAL_CALL missing_glXDestroyGLXPixmap(Display *dpy, GLXPixmap pix)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pix);
+  Warning( "glXDestroyGLXPixmap not available." );
+}
+
+static int REGAL_CALL missing_glXGetConfig(Display *dpy, XVisualInfo *vis, int attrib, int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(vis);
+  UNUSED_PARAMETER(attrib);
+  UNUSED_PARAMETER(value);
+  Warning( "glXGetConfig not available." );
+  return 0;
+}
+
+static GLXContext REGAL_CALL missing_glXGetCurrentContext(void)
+{
+  Warning( "glXGetCurrentContext not available." );
+  return 0;
+}
+
+static GLXDrawable REGAL_CALL missing_glXGetCurrentDrawable(void)
+{
+  Warning( "glXGetCurrentDrawable not available." );
+  return (GLXDrawable) 0;
+}
+
+static Bool REGAL_CALL missing_glXIsDirect(Display *dpy, GLXContext ctx)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXIsDirect not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXMakeCurrent(Display *dpy, GLXDrawable drawable, GLXContext ctx)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXMakeCurrent not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXQueryExtension(Display *dpy, int *errorBase, int *eventBase)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(errorBase);
+  UNUSED_PARAMETER(eventBase);
+  Warning( "glXQueryExtension not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXQueryVersion(Display *dpy, int *major, int *minor)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(major);
+  UNUSED_PARAMETER(minor);
+  Warning( "glXQueryVersion not available." );
+  return (Bool) 0;
+}
+
+static void REGAL_CALL missing_glXSwapBuffers(Display *dpy, GLXDrawable drawable)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  Warning( "glXSwapBuffers not available." );
+}
+
+static void REGAL_CALL missing_glXUseXFont(Font font, int first, int count, int listBase)
+{
+  UNUSED_PARAMETER(font);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(listBase);
+  Warning( "glXUseXFont not available." );
+}
+
+static void REGAL_CALL missing_glXWaitGL(void)
+{
+  Warning( "glXWaitGL not available." );
+}
+
+static void REGAL_CALL missing_glXWaitX(void)
+{
+  Warning( "glXWaitX not available." );
+}
+
+// GLX_VERSION_1_1
+
+static const char *REGAL_CALL missing_glXGetClientString(Display *dpy, int name)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(name);
+  Warning( "glXGetClientString not available." );
+  return NULL;
+}
+
+static const char *REGAL_CALL missing_glXQueryExtensionsString(Display *dpy, int screen)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  Warning( "glXQueryExtensionsString not available." );
+  return NULL;
+}
+
+static const char *REGAL_CALL missing_glXQueryServerString(Display *dpy, int screen, int name)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(name);
+  Warning( "glXQueryServerString not available." );
+  return NULL;
+}
+
+// GLX_VERSION_1_2
+
+static Display *REGAL_CALL missing_glXGetCurrentDisplay(void)
+{
+  Warning( "glXGetCurrentDisplay not available." );
+  return NULL;
+}
+
+// GLX_VERSION_1_3
+
+static GLXFBConfig *REGAL_CALL missing_glXChooseFBConfig(Display *dpy, int screen, const int *attrib_list, int *nelements)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(attrib_list);
+  UNUSED_PARAMETER(nelements);
+  Warning( "glXChooseFBConfig not available." );
+  return NULL;
+}
+
+static GLXContext REGAL_CALL missing_glXCreateNewContext(Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(render_type);
+  UNUSED_PARAMETER(share_list);
+  UNUSED_PARAMETER(direct);
+  Warning( "glXCreateNewContext not available." );
+  return 0;
+}
+
+static GLXPbuffer REGAL_CALL missing_glXCreatePbuffer(Display *dpy, GLXFBConfig config, const int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXCreatePbuffer not available." );
+  return 0;
+}
+
+static GLXPixmap REGAL_CALL missing_glXCreatePixmap(Display *dpy, GLXFBConfig config, Pixmap pixmap, const int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(pixmap);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXCreatePixmap not available." );
+  return 0;
+}
+
+static GLXWindow REGAL_CALL missing_glXCreateWindow(Display *dpy, GLXFBConfig config, Window win, const int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(win);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXCreateWindow not available." );
+  return 0;
+}
+
+static void REGAL_CALL missing_glXDestroyPbuffer(Display *dpy, GLXPbuffer pbuf)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  Warning( "glXDestroyPbuffer not available." );
+}
+
+static void REGAL_CALL missing_glXDestroyPixmap(Display *dpy, GLXPixmap pixmap)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pixmap);
+  Warning( "glXDestroyPixmap not available." );
+}
+
+static void REGAL_CALL missing_glXDestroyWindow(Display *dpy, GLXWindow win)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(win);
+  Warning( "glXDestroyWindow not available." );
+}
+
+static GLXDrawable REGAL_CALL missing_glXGetCurrentReadDrawable(void)
+{
+  Warning( "glXGetCurrentReadDrawable not available." );
+  return (GLXDrawable) 0;
+}
+
+static int REGAL_CALL missing_glXGetFBConfigAttrib(Display *dpy, GLXFBConfig config, int attribute, int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXGetFBConfigAttrib not available." );
+  return 0;
+}
+
+static GLXFBConfig *REGAL_CALL missing_glXGetFBConfigs(Display *dpy, int screen, int *nelements)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(nelements);
+  Warning( "glXGetFBConfigs not available." );
+  return NULL;
+}
+
+static void REGAL_CALL missing_glXGetSelectedEvent(Display *dpy, GLXDrawable draw, unsigned long *event_mask)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(event_mask);
+  Warning( "glXGetSelectedEvent not available." );
+}
+
+static XVisualInfo *REGAL_CALL missing_glXGetVisualFromFBConfig(Display *dpy, GLXFBConfig config)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  Warning( "glXGetVisualFromFBConfig not available." );
+  return NULL;
+}
+
+static Bool REGAL_CALL missing_glXMakeContextCurrent(Display *display, GLXDrawable draw, GLXDrawable read, GLXContext ctx)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(read);
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXMakeContextCurrent not available." );
+  return (Bool) 0;
+}
+
+static int REGAL_CALL missing_glXQueryContext(Display *dpy, GLXContext ctx, int attribute, int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXQueryContext not available." );
+  return 0;
+}
+
+static void REGAL_CALL missing_glXQueryDrawable(Display *dpy, GLXDrawable draw, int attribute, unsigned int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXQueryDrawable not available." );
+}
+
+static void REGAL_CALL missing_glXSelectEvent(Display *dpy, GLXDrawable draw, unsigned long event_mask)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(event_mask);
+  Warning( "glXSelectEvent not available." );
+}
+
+// GLX_VERSION_1_4
+
+static __GLXextFuncPtr REGAL_CALL missing_glXGetProcAddress(const GLubyte *procName)
+{
+  UNUSED_PARAMETER(procName);
+  Warning( "glXGetProcAddress not available." );
+  return NULL;
+}
+
+// GLX_AMD_gpu_association
+
+static void REGAL_CALL missing_glXBlitContextFramebufferAMD(GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+{
+  UNUSED_PARAMETER(dstCtx);
+  UNUSED_PARAMETER(srcX0);
+  UNUSED_PARAMETER(srcY0);
+  UNUSED_PARAMETER(srcX1);
+  UNUSED_PARAMETER(srcY1);
+  UNUSED_PARAMETER(dstX0);
+  UNUSED_PARAMETER(dstY0);
+  UNUSED_PARAMETER(dstX1);
+  UNUSED_PARAMETER(dstY1);
+  UNUSED_PARAMETER(mask);
+  UNUSED_PARAMETER(filter);
+  Warning( "glXBlitContextFramebufferAMD not available." );
+}
+
+static GLXContext REGAL_CALL missing_glXCreateAssociatedContextAMD(unsigned int id, GLXContext share_list)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(share_list);
+  Warning( "glXCreateAssociatedContextAMD not available." );
+  return 0;
+}
+
+static GLXContext REGAL_CALL missing_glXCreateAssociatedContextAttribsAMD(unsigned int id, GLXContext share_context, const int *attribList)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(share_context);
+  UNUSED_PARAMETER(attribList);
+  Warning( "glXCreateAssociatedContextAttribsAMD not available." );
+  return 0;
+}
+
+static Bool REGAL_CALL missing_glXDeleteAssociatedContextAMD(GLXContext ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXDeleteAssociatedContextAMD not available." );
+  return (Bool) 0;
+}
+
+static unsigned int REGAL_CALL missing_glXGetContextGPUIDAMD(GLXContext ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXGetContextGPUIDAMD not available." );
+  return (unsigned int) 0;
+}
+
+static GLXContext REGAL_CALL missing_glXGetCurrentAssociatedContextAMD(void)
+{
+  Warning( "glXGetCurrentAssociatedContextAMD not available." );
+  return 0;
+}
+
+static unsigned int REGAL_CALL missing_glXGetGPUIDsAMD(unsigned int maxCount, unsigned int *ids)
+{
+  UNUSED_PARAMETER(maxCount);
+  UNUSED_PARAMETER(ids);
+  Warning( "glXGetGPUIDsAMD not available." );
+  return (unsigned int) 0;
+}
+
+static int REGAL_CALL missing_glXGetGPUInfoAMD(unsigned int id, int property, GLenum dataType, unsigned int size, GLvoid *data)
+{
+  UNUSED_PARAMETER(id);
+  UNUSED_PARAMETER(property);
+  UNUSED_PARAMETER(dataType);
+  UNUSED_PARAMETER(size);
+  UNUSED_PARAMETER(data);
+  Warning( "glXGetGPUInfoAMD not available." );
+  return 0;
+}
+
+static Bool REGAL_CALL missing_glXMakeAssociatedContextCurrentAMD(GLXContext ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXMakeAssociatedContextCurrentAMD not available." );
+  return (Bool) 0;
+}
+
+// GLX_ARB_create_context
+
+static GLXContext REGAL_CALL missing_glXCreateContextAttribsARB(Display *dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(share_context);
+  UNUSED_PARAMETER(direct);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXCreateContextAttribsARB not available." );
+  return 0;
+}
+
+// GLX_ARB_get_proc_address
+
+static __GLXextFuncPtr REGAL_CALL missing_glXGetProcAddressARB(const GLubyte *procName)
+{
+  UNUSED_PARAMETER(procName);
+  Warning( "glXGetProcAddressARB not available." );
+  return NULL;
+}
+
+// GLX_ATI_render_texture
+
+static void REGAL_CALL missing_glXBindTexImageATI(Display *dpy, GLXPbuffer pbuf, int buffer)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  UNUSED_PARAMETER(buffer);
+  Warning( "glXBindTexImageATI not available." );
+}
+
+static void REGAL_CALL missing_glXDrawableAttribATI(Display *dpy, GLXDrawable draw, const int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXDrawableAttribATI not available." );
+}
+
+static void REGAL_CALL missing_glXReleaseTexImageATI(Display *dpy, GLXPbuffer pbuf, int buffer)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  UNUSED_PARAMETER(buffer);
+  Warning( "glXReleaseTexImageATI not available." );
+}
+
+// GLX_EXT_import_context
+
+static void REGAL_CALL missing_glXFreeContextEXT(Display *dpy, GLXContext context)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(context);
+  Warning( "glXFreeContextEXT not available." );
+}
+
+static GLXContextID REGAL_CALL missing_glXGetContextIDEXT(const GLXContext context)
+{
+  UNUSED_PARAMETER(context);
+  Warning( "glXGetContextIDEXT not available." );
+  return 0;
+}
+
+static GLXContext REGAL_CALL missing_glXImportContextEXT(Display *dpy, GLXContextID contextID)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(contextID);
+  Warning( "glXImportContextEXT not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXQueryContextInfoEXT(Display *dpy, GLXContext context, int attribute, int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(context);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXQueryContextInfoEXT not available." );
+  return 0;
+}
+
+// GLX_EXT_swap_control
+
+static void REGAL_CALL missing_glXSwapIntervalEXT(Display *dpy, GLXDrawable drawable, int interval)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(interval);
+  Warning( "glXSwapIntervalEXT not available." );
+}
+
+// GLX_EXT_texture_from_pixmap
+
+static void REGAL_CALL missing_glXBindTexImageEXT(Display *display, GLXDrawable drawable, int buffer, const int *attrib_list)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(buffer);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXBindTexImageEXT not available." );
+}
+
+static void REGAL_CALL missing_glXReleaseTexImageEXT(Display *display, GLXDrawable drawable, int buffer)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(buffer);
+  Warning( "glXReleaseTexImageEXT not available." );
+}
+
+// GLX_MESA_agp_offset
+
+static unsigned int REGAL_CALL missing_glXGetAGPOffsetMESA(const void *pointer)
+{
+  UNUSED_PARAMETER(pointer);
+  Warning( "glXGetAGPOffsetMESA not available." );
+  return (unsigned int) 0;
+}
+
+// GLX_MESA_copy_sub_buffer
+
+static void REGAL_CALL missing_glXCopySubBufferMESA(Display *dpy, GLXDrawable drawable, int x, int y, int width, int height)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(x);
+  UNUSED_PARAMETER(y);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  Warning( "glXCopySubBufferMESA not available." );
+}
+
+// GLX_MESA_pixmap_colormap
+
+static GLXPixmap REGAL_CALL missing_glXCreateGLXPixmapMESA(Display *dpy, XVisualInfo *visual, Pixmap pixmap, Colormap cmap)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(visual);
+  UNUSED_PARAMETER(pixmap);
+  UNUSED_PARAMETER(cmap);
+  Warning( "glXCreateGLXPixmapMESA not available." );
+  return 0;
+}
+
+// GLX_MESA_release_buffers
+
+static Bool REGAL_CALL missing_glXReleaseBuffersMESA(Display *dpy, GLXDrawable d)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(d);
+  Warning( "glXReleaseBuffersMESA not available." );
+  return (Bool) 0;
+}
+
+// GLX_MESA_set_3dfx_mode
+
+static GLboolean REGAL_CALL missing_glXSet3DfxModeMESA(GLint mode)
+{
+  UNUSED_PARAMETER(mode);
+  Warning( "glXSet3DfxModeMESA not available." );
+  return GL_FALSE;
+}
+
+// GLX_MESA_swap_control
+
+static int REGAL_CALL missing_glXGetSwapIntervalMESA(void)
+{
+  Warning( "glXGetSwapIntervalMESA not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXSwapIntervalMESA(unsigned int interval)
+{
+  UNUSED_PARAMETER(interval);
+  Warning( "glXSwapIntervalMESA not available." );
+  return 0;
+}
+
+// GLX_NV_copy_image
+
+static void REGAL_CALL missing_glXCopyImageSubDataNV(Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(srcCtx);
+  UNUSED_PARAMETER(srcName);
+  UNUSED_PARAMETER(srcTarget);
+  UNUSED_PARAMETER(srcLevel);
+  UNUSED_PARAMETER(srcX);
+  UNUSED_PARAMETER(srcY);
+  UNUSED_PARAMETER(srcZ);
+  UNUSED_PARAMETER(dstCtx);
+  UNUSED_PARAMETER(dstName);
+  UNUSED_PARAMETER(dstTarget);
+  UNUSED_PARAMETER(dstLevel);
+  UNUSED_PARAMETER(dstX);
+  UNUSED_PARAMETER(dstY);
+  UNUSED_PARAMETER(dstZ);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  Warning( "glXCopyImageSubDataNV not available." );
+}
+
+// GLX_NV_present_video
+
+static int REGAL_CALL missing_glXBindVideoDeviceNV(Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(video_slot);
+  UNUSED_PARAMETER(video_device);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXBindVideoDeviceNV not available." );
+  return 0;
+}
+
+static unsigned int *REGAL_CALL missing_glXEnumerateVideoDevicesNV(Display *dpy, int screen, int *nelements)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(nelements);
+  Warning( "glXEnumerateVideoDevicesNV not available." );
+  return NULL;
+}
+
+// GLX_NV_swap_group
+
+static Bool REGAL_CALL missing_glXBindSwapBarrierNV(Display *dpy, GLuint group, GLuint barrier)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(group);
+  UNUSED_PARAMETER(barrier);
+  Warning( "glXBindSwapBarrierNV not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXJoinSwapGroupNV(Display *dpy, GLXDrawable drawable, GLuint group)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(group);
+  Warning( "glXJoinSwapGroupNV not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXQueryFrameCountNV(Display *dpy, int screen, GLuint *count)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(count);
+  Warning( "glXQueryFrameCountNV not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXQueryMaxSwapGroupsNV(Display *dpy, int screen, GLuint *maxGroups, GLuint *maxBarriers)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(maxGroups);
+  UNUSED_PARAMETER(maxBarriers);
+  Warning( "glXQueryMaxSwapGroupsNV not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXQuerySwapGroupNV(Display *dpy, GLXDrawable drawable, GLuint *group, GLuint *barrier)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(group);
+  UNUSED_PARAMETER(barrier);
+  Warning( "glXQuerySwapGroupNV not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXResetFrameCountNV(Display *dpy, int screen)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  Warning( "glXResetFrameCountNV not available." );
+  return (Bool) 0;
+}
+
+// GLX_NV_vertex_array_range
+
+static void *REGAL_CALL missing_glXAllocateMemoryNV(GLsizei size, GLfloat readFrequency, GLfloat writeFrequency, GLfloat priority)
+{
+  UNUSED_PARAMETER(size);
+  UNUSED_PARAMETER(readFrequency);
+  UNUSED_PARAMETER(writeFrequency);
+  UNUSED_PARAMETER(priority);
+  Warning( "glXAllocateMemoryNV not available." );
+  return NULL;
+}
+
+static void REGAL_CALL missing_glXFreeMemoryNV(void *pointer)
+{
+  UNUSED_PARAMETER(pointer);
+  Warning( "glXFreeMemoryNV not available." );
+}
+
+// GLX_NV_video_capture
+
+static int REGAL_CALL missing_glXBindVideoCaptureDeviceNV(Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(video_capture_slot);
+  UNUSED_PARAMETER(device);
+  Warning( "glXBindVideoCaptureDeviceNV not available." );
+  return 0;
+}
+
+static GLXVideoCaptureDeviceNV *REGAL_CALL missing_glXEnumerateVideoCaptureDevicesNV(Display *dpy, int screen, int *nelements)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(nelements);
+  Warning( "glXEnumerateVideoCaptureDevicesNV not available." );
+  return NULL;
+}
+
+static void REGAL_CALL missing_glXLockVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(device);
+  Warning( "glXLockVideoCaptureDeviceNV not available." );
+}
+
+static int REGAL_CALL missing_glXQueryVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device, int attribute, int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(device);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXQueryVideoCaptureDeviceNV not available." );
+  return 0;
+}
+
+static void REGAL_CALL missing_glXReleaseVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(device);
+  Warning( "glXReleaseVideoCaptureDeviceNV not available." );
+}
+
+// GLX_NV_video_output
+
+static int REGAL_CALL missing_glXBindVideoImageNV(Display *dpy, GLXVideoDeviceNV VideoDevice, GLXPbuffer pbuf, int iVideoBuffer)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(VideoDevice);
+  UNUSED_PARAMETER(pbuf);
+  UNUSED_PARAMETER(iVideoBuffer);
+  Warning( "glXBindVideoImageNV not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXGetVideoDeviceNV(Display *dpy, int screen, int numVideoDevices, GLXVideoDeviceNV *pVideoDevice)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(numVideoDevices);
+  UNUSED_PARAMETER(pVideoDevice);
+  Warning( "glXGetVideoDeviceNV not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXGetVideoInfoNV(Display *dpy, int screen, GLXVideoDeviceNV VideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(VideoDevice);
+  UNUSED_PARAMETER(pulCounterOutputPbuffer);
+  UNUSED_PARAMETER(pulCounterOutputVideo);
+  Warning( "glXGetVideoInfoNV not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXReleaseVideoDeviceNV(Display *dpy, int screen, GLXVideoDeviceNV VideoDevice)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(VideoDevice);
+  Warning( "glXReleaseVideoDeviceNV not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXReleaseVideoImageNV(Display *dpy, GLXPbuffer pbuf)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  Warning( "glXReleaseVideoImageNV not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXSendPbufferToVideoNV(Display *dpy, GLXPbuffer pbuf, int iBufferType, unsigned long *pulCounterPbuffer, GLboolean bBlock)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  UNUSED_PARAMETER(iBufferType);
+  UNUSED_PARAMETER(pulCounterPbuffer);
+  UNUSED_PARAMETER(bBlock);
+  Warning( "glXSendPbufferToVideoNV not available." );
+  return 0;
+}
+
+// GLX_OML_sync_control
+
+static Bool REGAL_CALL missing_glXGetMscRateOML(Display *dpy, GLXDrawable drawable, int32_t *numerator, int32_t *denominator)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(numerator);
+  UNUSED_PARAMETER(denominator);
+  Warning( "glXGetMscRateOML not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXGetSyncValuesOML(Display *dpy, GLXDrawable drawable, int64_t *ust, int64_t *msc, int64_t *sbc)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(ust);
+  UNUSED_PARAMETER(msc);
+  UNUSED_PARAMETER(sbc);
+  Warning( "glXGetSyncValuesOML not available." );
+  return (Bool) 0;
+}
+
+static int64_t REGAL_CALL missing_glXSwapBuffersMscOML(Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(target_msc);
+  UNUSED_PARAMETER(divisor);
+  UNUSED_PARAMETER(remainder);
+  Warning( "glXSwapBuffersMscOML not available." );
+  return (int64_t) 0;
+}
+
+static Bool REGAL_CALL missing_glXWaitForMscOML(Display *dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, int64_t *ust, int64_t *msc, int64_t *sbc)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(target_msc);
+  UNUSED_PARAMETER(divisor);
+  UNUSED_PARAMETER(remainder);
+  UNUSED_PARAMETER(ust);
+  UNUSED_PARAMETER(msc);
+  UNUSED_PARAMETER(sbc);
+  Warning( "glXWaitForMscOML not available." );
+  return (Bool) 0;
+}
+
+static Bool REGAL_CALL missing_glXWaitForSbcOML(Display *dpy, GLXDrawable drawable, int64_t target_sbc, int64_t *ust, int64_t *msc, int64_t *sbc)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(target_sbc);
+  UNUSED_PARAMETER(ust);
+  UNUSED_PARAMETER(msc);
+  UNUSED_PARAMETER(sbc);
+  Warning( "glXWaitForSbcOML not available." );
+  return (Bool) 0;
+}
+
+// GLX_SGIX_fbconfig
+
+static GLXFBConfigSGIX *REGAL_CALL missing_glXChooseFBConfigSGIX(Display *dpy, int screen, const int *attrib_list, int *nelements)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(attrib_list);
+  UNUSED_PARAMETER(nelements);
+  Warning( "glXChooseFBConfigSGIX not available." );
+  return NULL;
+}
+
+static GLXContext REGAL_CALL missing_glXCreateContextWithConfigSGIX(Display *dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(render_type);
+  UNUSED_PARAMETER(share_list);
+  UNUSED_PARAMETER(direct);
+  Warning( "glXCreateContextWithConfigSGIX not available." );
+  return 0;
+}
+
+static GLXPixmap REGAL_CALL missing_glXCreateGLXPixmapWithConfigSGIX(Display *dpy, GLXFBConfig config, Pixmap pixmap)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(pixmap);
+  Warning( "glXCreateGLXPixmapWithConfigSGIX not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXGetFBConfigAttribSGIX(Display *dpy, GLXFBConfigSGIX config, int attribute, int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXGetFBConfigAttribSGIX not available." );
+  return 0;
+}
+
+static GLXFBConfigSGIX REGAL_CALL missing_glXGetFBConfigFromVisualSGIX(Display *dpy, XVisualInfo *vis)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(vis);
+  Warning( "glXGetFBConfigFromVisualSGIX not available." );
+  return 0;
+}
+
+static XVisualInfo *REGAL_CALL missing_glXGetVisualFromFBConfigSGIX(Display *dpy, GLXFBConfig config)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  Warning( "glXGetVisualFromFBConfigSGIX not available." );
+  return NULL;
+}
+
+// GLX_SGIX_pbuffer
+
+static GLXPbuffer REGAL_CALL missing_glXCreateGLXPbufferSGIX(Display *dpy, GLXFBConfig config, unsigned int width, unsigned int height, int *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "glXCreateGLXPbufferSGIX not available." );
+  return 0;
+}
+
+static void REGAL_CALL missing_glXDestroyGLXPbufferSGIX(Display *dpy, GLXPbuffer pbuf)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  Warning( "glXDestroyGLXPbufferSGIX not available." );
+}
+
+static void REGAL_CALL missing_glXGetSelectedEventSGIX(Display *dpy, GLXDrawable drawable, unsigned long *mask)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(mask);
+  Warning( "glXGetSelectedEventSGIX not available." );
+}
+
+static void REGAL_CALL missing_glXQueryGLXPbufferSGIX(Display *dpy, GLXPbuffer pbuf, int attribute, unsigned int *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(pbuf);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "glXQueryGLXPbufferSGIX not available." );
+}
+
+static void REGAL_CALL missing_glXSelectEventSGIX(Display *dpy, GLXDrawable drawable, unsigned long mask)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(mask);
+  Warning( "glXSelectEventSGIX not available." );
+}
+
+// GLX_SGIX_swap_barrier
+
+static void REGAL_CALL missing_glXBindSwapBarrierSGIX(Display *dpy, GLXDrawable drawable, int barrier)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(barrier);
+  Warning( "glXBindSwapBarrierSGIX not available." );
+}
+
+static Bool REGAL_CALL missing_glXQueryMaxSwapBarriersSGIX(Display *dpy, int screen, int *max)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(max);
+  Warning( "glXQueryMaxSwapBarriersSGIX not available." );
+  return (Bool) 0;
+}
+
+// GLX_SGIX_swap_group
+
+static void REGAL_CALL missing_glXJoinSwapGroupSGIX(Display *dpy, GLXDrawable drawable, GLXDrawable member)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(drawable);
+  UNUSED_PARAMETER(member);
+  Warning( "glXJoinSwapGroupSGIX not available." );
+}
+
+// GLX_SGIX_video_resize
+
+static int REGAL_CALL missing_glXBindChannelToWindowSGIX(Display *display, int screen, int channel, Window window)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(channel);
+  UNUSED_PARAMETER(window);
+  Warning( "glXBindChannelToWindowSGIX not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXChannelRectSGIX(Display *display, int screen, int channel, int x, int y, int w, int h)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(channel);
+  UNUSED_PARAMETER(x);
+  UNUSED_PARAMETER(y);
+  UNUSED_PARAMETER(w);
+  UNUSED_PARAMETER(h);
+  Warning( "glXChannelRectSGIX not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXChannelRectSyncSGIX(Display *display, int screen, int channel, GLenum synctype)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(channel);
+  UNUSED_PARAMETER(synctype);
+  Warning( "glXChannelRectSyncSGIX not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXQueryChannelDeltasSGIX(Display *display, int screen, int channel, int *x, int *y, int *w, int *h)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(channel);
+  UNUSED_PARAMETER(x);
+  UNUSED_PARAMETER(y);
+  UNUSED_PARAMETER(w);
+  UNUSED_PARAMETER(h);
+  Warning( "glXQueryChannelDeltasSGIX not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXQueryChannelRectSGIX(Display *display, int screen, int channel, int *dx, int *dy, int *dw, int *dh)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(screen);
+  UNUSED_PARAMETER(channel);
+  UNUSED_PARAMETER(dx);
+  UNUSED_PARAMETER(dy);
+  UNUSED_PARAMETER(dw);
+  UNUSED_PARAMETER(dh);
+  Warning( "glXQueryChannelRectSGIX not available." );
+  return 0;
+}
+
+// GLX_SGI_cushion
+
+static void REGAL_CALL missing_glXCushionSGI(Display *dpy, Window window, float cushion)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(window);
+  UNUSED_PARAMETER(cushion);
+  Warning( "glXCushionSGI not available." );
+}
+
+// GLX_SGI_make_current_read
+
+static GLXDrawable REGAL_CALL missing_glXGetCurrentReadDrawableSGI(void)
+{
+  Warning( "glXGetCurrentReadDrawableSGI not available." );
+  return (GLXDrawable) 0;
+}
+
+static Bool REGAL_CALL missing_glXMakeCurrentReadSGI(Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(read);
+  UNUSED_PARAMETER(ctx);
+  Warning( "glXMakeCurrentReadSGI not available." );
+  return (Bool) 0;
+}
+
+// GLX_SGI_swap_control
+
+static int REGAL_CALL missing_glXSwapIntervalSGI(int interval)
+{
+  UNUSED_PARAMETER(interval);
+  Warning( "glXSwapIntervalSGI not available." );
+  return 0;
+}
+
+// GLX_SGI_video_sync
+
+static int REGAL_CALL missing_glXGetVideoSyncSGI(unsigned int *count)
+{
+  UNUSED_PARAMETER(count);
+  Warning( "glXGetVideoSyncSGI not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXWaitVideoSyncSGI(int divisor, int remainder, unsigned int *count)
+{
+  UNUSED_PARAMETER(divisor);
+  UNUSED_PARAMETER(remainder);
+  UNUSED_PARAMETER(count);
+  Warning( "glXWaitVideoSyncSGI not available." );
+  return 0;
+}
+
+// GLX_SUN_get_transparent_index
+
+static Status REGAL_CALL missing_glXGetTransparentIndexSUN(Display *dpy, Window overlay, Window underlay, unsigned long *pTransparentIndex)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(overlay);
+  UNUSED_PARAMETER(underlay);
+  UNUSED_PARAMETER(pTransparentIndex);
+  Warning( "glXGetTransparentIndexSUN not available." );
+  return (Status) 0;
+}
+
+// GLX_SUN_video_resize
+
+static int REGAL_CALL missing_glXGetVideoResizeSUN(Display *display, GLXDrawable window, float *factor)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(window);
+  UNUSED_PARAMETER(factor);
+  Warning( "glXGetVideoResizeSUN not available." );
+  return 0;
+}
+
+static int REGAL_CALL missing_glXVideoResizeSUN(Display *display, GLXDrawable window, float factor)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(window);
+  UNUSED_PARAMETER(factor);
+  Warning( "glXVideoResizeSUN not available." );
+  return 0;
+}
+
+#endif // REGAL_SYS_GLX
+
+#if REGAL_SYS_OSX
+
+// CGL_VERSION_1_0
+
+static CGLError REGAL_CALL missing_CGLChoosePixelFormat(const CGLPixelFormatAttribute *attribs, CGLPixelFormatObj *pix, GLint *npix)
+{
+  UNUSED_PARAMETER(attribs);
+  UNUSED_PARAMETER(pix);
+  UNUSED_PARAMETER(npix);
+  Warning( "CGLChoosePixelFormat not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLClearDrawable(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLClearDrawable not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLCopyContext(CGLContextObj src, CGLContextObj dst, GLbitfield mask)
+{
+  UNUSED_PARAMETER(src);
+  UNUSED_PARAMETER(dst);
+  UNUSED_PARAMETER(mask);
+  Warning( "CGLCopyContext not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj *ctx)
+{
+  UNUSED_PARAMETER(pix);
+  UNUSED_PARAMETER(share);
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLCreateContext not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDescribePixelFormat(CGLPixelFormatObj pix, GLint pix_num, CGLPixelFormatAttribute attrib, GLint *value)
+{
+  UNUSED_PARAMETER(pix);
+  UNUSED_PARAMETER(pix_num);
+  UNUSED_PARAMETER(attrib);
+  UNUSED_PARAMETER(value);
+  Warning( "CGLDescribePixelFormat not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDescribeRenderer(CGLRendererInfoObj rend, GLint rend_num, CGLRendererProperty prop, GLint *value)
+{
+  UNUSED_PARAMETER(rend);
+  UNUSED_PARAMETER(rend_num);
+  UNUSED_PARAMETER(prop);
+  UNUSED_PARAMETER(value);
+  Warning( "CGLDescribeRenderer not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDestroyContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLDestroyContext not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDestroyPixelFormat(CGLPixelFormatObj pix)
+{
+  UNUSED_PARAMETER(pix);
+  Warning( "CGLDestroyPixelFormat not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDestroyRendererInfo(CGLRendererInfoObj rend)
+{
+  UNUSED_PARAMETER(rend);
+  Warning( "CGLDestroyRendererInfo not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDisable(CGLContextObj ctx, CGLContextEnable pname)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pname);
+  Warning( "CGLDisable not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLEnable(CGLContextObj ctx, CGLContextEnable pname)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pname);
+  Warning( "CGLEnable not available." );
+  return (CGLError) 0;
+}
+
+static const char *REGAL_CALL missing_CGLErrorString(CGLError error)
+{
+  UNUSED_PARAMETER(error);
+  Warning( "CGLErrorString not available." );
+  return NULL;
+}
+
+static CGLError REGAL_CALL missing_CGLFlushDrawable(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLFlushDrawable not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLGetOffScreen(CGLContextObj ctx, GLsizei *width, GLsizei *height, GLsizei *rowbytes, void **baseaddr)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(rowbytes);
+  UNUSED_PARAMETER(baseaddr);
+  Warning( "CGLGetOffScreen not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLGetOption(CGLGlobalOption pname, GLint *param)
+{
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(param);
+  Warning( "CGLGetOption not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLGetParameter(CGLContextObj ctx, CGLContextParameter pname, GLint *params)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(params);
+  Warning( "CGLGetParameter not available." );
+  return (CGLError) 0;
+}
+
+static void REGAL_CALL missing_CGLGetVersion(GLint *majorvers, GLint *minorvers)
+{
+  UNUSED_PARAMETER(majorvers);
+  UNUSED_PARAMETER(minorvers);
+  Warning( "CGLGetVersion not available." );
+}
+
+static CGLError REGAL_CALL missing_CGLGetVirtualScreen(CGLContextObj ctx, GLint *screen)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(screen);
+  Warning( "CGLGetVirtualScreen not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLIsEnabled(CGLContextObj ctx, CGLContextEnable pname, GLint *enable)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(enable);
+  Warning( "CGLIsEnabled not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLQueryRendererInfo(GLuint display_mask, CGLRendererInfoObj *rend, GLint *nrend)
+{
+  UNUSED_PARAMETER(display_mask);
+  UNUSED_PARAMETER(rend);
+  UNUSED_PARAMETER(nrend);
+  Warning( "CGLQueryRendererInfo not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetFullScreen(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLSetFullScreen not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetOffScreen(CGLContextObj ctx, GLsizei width, GLsizei height, GLsizei rowbytes, void *baseaddr)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(rowbytes);
+  UNUSED_PARAMETER(baseaddr);
+  Warning( "CGLSetOffScreen not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetOption(CGLGlobalOption pname, GLint param)
+{
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(param);
+  Warning( "CGLSetOption not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetParameter(CGLContextObj ctx, CGLContextParameter pname, const GLint *params)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(params);
+  Warning( "CGLSetParameter not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetVirtualScreen(CGLContextObj ctx, GLint screen)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(screen);
+  Warning( "CGLSetVirtualScreen not available." );
+  return (CGLError) 0;
+}
+
+// CGL_VERSION_1_1
+
+static CGLError REGAL_CALL missing_CGLCreatePBuffer(GLsizei width, GLsizei height, GLenum target, GLenum internalFormat, GLint max_level, CGLPBufferObj *pbuffer)
+{
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(internalFormat);
+  UNUSED_PARAMETER(max_level);
+  UNUSED_PARAMETER(pbuffer);
+  Warning( "CGLCreatePBuffer not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDescribePBuffer(CGLPBufferObj pbuffer, GLsizei *width, GLsizei *height, GLenum *target, GLenum *internalFormat, GLint *mipmap)
+{
+  UNUSED_PARAMETER(pbuffer);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(internalFormat);
+  UNUSED_PARAMETER(mipmap);
+  Warning( "CGLDescribePBuffer not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLDestroyPBuffer(CGLPBufferObj pbuffer)
+{
+  UNUSED_PARAMETER(pbuffer);
+  Warning( "CGLDestroyPBuffer not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLGetPBuffer(CGLContextObj ctx, CGLPBufferObj *pbuffer, GLenum *face, GLint *level, GLint *screen)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pbuffer);
+  UNUSED_PARAMETER(face);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(screen);
+  Warning( "CGLGetPBuffer not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetPBuffer(CGLContextObj ctx, CGLPBufferObj pbuffer, GLenum face, GLint level, GLint screen)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pbuffer);
+  UNUSED_PARAMETER(face);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(screen);
+  Warning( "CGLSetPBuffer not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLTexImagePBuffer(CGLContextObj ctx, CGLPBufferObj pbuffer, GLenum source)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(pbuffer);
+  UNUSED_PARAMETER(source);
+  Warning( "CGLTexImagePBuffer not available." );
+  return (CGLError) 0;
+}
+
+// CGL_VERSION_1_2
+
+static GLuint REGAL_CALL missing_CGLGetContextRetainCount(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLGetContextRetainCount not available." );
+  return 0;
+}
+
+static CGLError REGAL_CALL missing_CGLGetGlobalOption(CGLGlobalOption pname, GLint *params)
+{
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(params);
+  Warning( "CGLGetGlobalOption not available." );
+  return (CGLError) 0;
+}
+
+static GLuint REGAL_CALL missing_CGLGetPBufferRetainCount(CGLPBufferObj pbuffer)
+{
+  UNUSED_PARAMETER(pbuffer);
+  Warning( "CGLGetPBufferRetainCount not available." );
+  return 0;
+}
+
+static CGLPixelFormatObj REGAL_CALL missing_CGLGetPixelFormat(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLGetPixelFormat not available." );
+  return 0;
+}
+
+static GLuint REGAL_CALL missing_CGLGetPixelFormatRetainCount(CGLPixelFormatObj pix)
+{
+  UNUSED_PARAMETER(pix);
+  Warning( "CGLGetPixelFormatRetainCount not available." );
+  return 0;
+}
+
+static CGLError REGAL_CALL missing_CGLLockContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLLockContext not available." );
+  return (CGLError) 0;
+}
+
+static void REGAL_CALL missing_CGLReleaseContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLReleaseContext not available." );
+}
+
+static void REGAL_CALL missing_CGLReleasePBuffer(CGLPBufferObj pbuffer)
+{
+  UNUSED_PARAMETER(pbuffer);
+  Warning( "CGLReleasePBuffer not available." );
+}
+
+static void REGAL_CALL missing_CGLReleasePixelFormat(CGLPixelFormatObj pix)
+{
+  UNUSED_PARAMETER(pix);
+  Warning( "CGLReleasePixelFormat not available." );
+}
+
+static CGLContextObj REGAL_CALL missing_CGLRetainContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLRetainContext not available." );
+  return 0;
+}
+
+static CGLPBufferObj REGAL_CALL missing_CGLRetainPBuffer(CGLPBufferObj pbuffer)
+{
+  UNUSED_PARAMETER(pbuffer);
+  Warning( "CGLRetainPBuffer not available." );
+  return 0;
+}
+
+static CGLPixelFormatObj REGAL_CALL missing_CGLRetainPixelFormat(CGLPixelFormatObj pix)
+{
+  UNUSED_PARAMETER(pix);
+  Warning( "CGLRetainPixelFormat not available." );
+  return 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetGlobalOption(CGLGlobalOption pname, const GLint *params)
+{
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(params);
+  Warning( "CGLSetGlobalOption not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLUnlockContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLUnlockContext not available." );
+  return (CGLError) 0;
+}
+
+// CGL_VERSION_1_3
+
+static CGLContextObj REGAL_CALL missing_CGLGetCurrentContext(void)
+{
+  Warning( "CGLGetCurrentContext not available." );
+  return 0;
+}
+
+static CGLShareGroupObj REGAL_CALL missing_CGLGetShareGroup(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLGetShareGroup not available." );
+  return 0;
+}
+
+static CGLError REGAL_CALL missing_CGLGetSurface(CGLContextObj ctx, CGSConnectionID *conn, CGSWindowID *win, CGSSurfaceID *srf)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(conn);
+  UNUSED_PARAMETER(win);
+  UNUSED_PARAMETER(srf);
+  Warning( "CGLGetSurface not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetCurrentContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLSetCurrentContext not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLSetSurface(CGLContextObj ctx, CGSConnectionID conn, CGSWindowID win, CGSSurfaceID srf)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(conn);
+  UNUSED_PARAMETER(win);
+  UNUSED_PARAMETER(srf);
+  Warning( "CGLSetSurface not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLTexImageIOSurface2D(CGLContextObj ctx, GLenum target, GLenum internal_format, GLsizei width, GLsizei height, GLenum format, GLenum type, IOSurfaceRef ioSurface, GLuint plane)
+{
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(internal_format);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(format);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(ioSurface);
+  UNUSED_PARAMETER(plane);
+  Warning( "CGLTexImageIOSurface2D not available." );
+  return (CGLError) 0;
+}
+
+static CGLError REGAL_CALL missing_CGLUpdateContext(CGLContextObj ctx)
+{
+  UNUSED_PARAMETER(ctx);
+  Warning( "CGLUpdateContext not available." );
+  return (CGLError) 0;
+}
+
+#endif // REGAL_SYS_OSX
+
+#if REGAL_SYS_EGL
+
+// EGL_ANGLE_query_surface_pointer
+
+static EGLBoolean REGAL_CALL missing_eglQuerySurfacePointerANGLE(EGLDisplay dpy, EGLSurface surface, EGLint attribute, GLvoid **value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglQuerySurfacePointerANGLE not available." );
+  return 0;
+}
+
+// EGL_KHR_fence_sync
+
+static EGLint REGAL_CALL missing_eglClientWaitSyncKHR(EGLDisplay dpy, EGLSyncKHR GLsync, EGLint flags, EGLTimeKHR timeout)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(GLsync);
+  UNUSED_PARAMETER(flags);
+  UNUSED_PARAMETER(timeout);
+  Warning( "eglClientWaitSyncKHR not available." );
+  return 0;
+}
+
+static EGLSyncKHR REGAL_CALL missing_eglCreateSyncKHR(EGLDisplay dpy, EGLenum type, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateSyncKHR not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglDestroySyncKHR(EGLDisplay dpy, EGLSyncKHR GLsync)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(GLsync);
+  Warning( "eglDestroySyncKHR not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglGetSyncAttribKHR(EGLDisplay dpy, EGLSyncKHR GLsync, EGLint attribute, EGLint *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(GLsync);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglGetSyncAttribKHR not available." );
+  return 0;
+}
+
+// EGL_KHR_image_base
+
+static EGLImageKHR REGAL_CALL missing_eglCreateImageKHR(EGLDisplay dpy, EGLContext ctx, EGLenum target, EGLClientBuffer buffer, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(buffer);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateImageKHR not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglDestroyImageKHR(EGLDisplay dpy, EGLImageKHR image)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(image);
+  Warning( "eglDestroyImageKHR not available." );
+  return 0;
+}
+
+// EGL_KHR_lock_surface
+
+static EGLBoolean REGAL_CALL missing_eglLockSurfaceKHR(EGLDisplay display, EGLSurface surface, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglLockSurfaceKHR not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglUnlockSurfaceKHR(EGLDisplay display, EGLSurface surface)
+{
+  UNUSED_PARAMETER(display);
+  UNUSED_PARAMETER(surface);
+  Warning( "eglUnlockSurfaceKHR not available." );
+  return 0;
+}
+
+// EGL_KHR_stream_consumer_gltexture
+
+static EGLBoolean REGAL_CALL missing_eglStreamConsumerAcquireKHR(EGLDisplay dpy, EGLStreamKHR stream)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(stream);
+  Warning( "eglStreamConsumerAcquireKHR not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglStreamConsumerGLTextureExternalKHR(EGLDisplay dpy, EGLStreamKHR stream)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(stream);
+  Warning( "eglStreamConsumerGLTextureExternalKHR not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglStreamConsumerReleaseKHR(EGLDisplay dpy, EGLStreamKHR stream)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(stream);
+  Warning( "eglStreamConsumerReleaseKHR not available." );
+  return 0;
+}
+
+// EGL_KHR_stream_cross_process_fd
+
+static EGLStreamKHR REGAL_CALL missing_eglCreateStreamFromFileDescriptorKHR(EGLDisplay dpy, EGLNativeFileDescriptorKHR file_descriptor)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(file_descriptor);
+  Warning( "eglCreateStreamFromFileDescriptorKHR not available." );
+  return 0;
+}
+
+static EGLNativeFileDescriptorKHR REGAL_CALL missing_eglGetStreamFileDescriptorKHR(EGLDisplay dpy, EGLStreamKHR stream)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(stream);
+  Warning( "eglGetStreamFileDescriptorKHR not available." );
+  return 0;
+}
+
+// EGL_KHR_stream_producer_eglsurface
+
+static EGLSurface REGAL_CALL missing_eglCreateStreamProducerSurfaceKHR(EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(stream);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateStreamProducerSurfaceKHR not available." );
+  return 0;
+}
+
+// EGL_KHR_wait_sync
+
+static EGLint REGAL_CALL missing_eglWaitSyncKHR(EGLDisplay dpy, EGLSyncKHR GLsync, EGLint flags)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(GLsync);
+  UNUSED_PARAMETER(flags);
+  Warning( "eglWaitSyncKHR not available." );
+  return 0;
+}
+
+// EGL_MESA_drm_image
+
+static EGLImageKHR REGAL_CALL missing_eglCreateDRMImageMESA(EGLDisplay dpy, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateDRMImageMESA not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglExportDRMImageMESA(EGLDisplay dpy, EGLImageKHR image, EGLint *name, EGLint *handle, EGLint *stride)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(image);
+  UNUSED_PARAMETER(name);
+  UNUSED_PARAMETER(handle);
+  UNUSED_PARAMETER(stride);
+  Warning( "eglExportDRMImageMESA not available." );
+  return 0;
+}
+
+// EGL_NV_coverage_sample
+
+static void REGAL_CALL missing_eglCoverageMaskNV(GLboolean mask)
+{
+  UNUSED_PARAMETER(mask);
+  Warning( "eglCoverageMaskNV not available." );
+}
+
+static void REGAL_CALL missing_eglCoverageOperationNV(GLenum operation)
+{
+  UNUSED_PARAMETER(operation);
+  Warning( "eglCoverageOperationNV not available." );
+}
+
+// EGL_NV_post_sub_buffer
+
+static EGLBoolean REGAL_CALL missing_eglPostSubBufferNV(EGLDisplay dpy, EGLSurface surface, EGLint x, EGLint y, EGLint width, EGLint height)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(x);
+  UNUSED_PARAMETER(y);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  Warning( "eglPostSubBufferNV not available." );
+  return 0;
+}
+
+// EGL_NV_sync
+
+static EGLint REGAL_CALL missing_eglClientWaitSyncNV(EGLSyncNV GLsync, EGLint flags, EGLTimeNV timeout)
+{
+  UNUSED_PARAMETER(GLsync);
+  UNUSED_PARAMETER(flags);
+  UNUSED_PARAMETER(timeout);
+  Warning( "eglClientWaitSyncNV not available." );
+  return 0;
+}
+
+static EGLSyncNV REGAL_CALL missing_eglCreateFenceSyncNV(EGLDisplay dpy, EGLenum condition, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(condition);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateFenceSyncNV not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglDestroySyncNV(EGLSyncNV GLsync)
+{
+  UNUSED_PARAMETER(GLsync);
+  Warning( "eglDestroySyncNV not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglFenceNV(EGLSyncNV GLsync)
+{
+  UNUSED_PARAMETER(GLsync);
+  Warning( "eglFenceNV not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglGetSyncAttribNV(EGLSyncNV GLsync, EGLint attribute, EGLint *value)
+{
+  UNUSED_PARAMETER(GLsync);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglGetSyncAttribNV not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglSignalSyncNV(EGLSyncNV GLsync, EGLenum mode)
+{
+  UNUSED_PARAMETER(GLsync);
+  UNUSED_PARAMETER(mode);
+  Warning( "eglSignalSyncNV not available." );
+  return 0;
+}
+
+// EGL_NV_system_time
+
+static EGLuint64NV REGAL_CALL missing_eglGetSystemTimeFrequencyNV(void)
+{
+  Warning( "eglGetSystemTimeFrequencyNV not available." );
+  return 0;
+}
+
+static EGLuint64NV REGAL_CALL missing_eglGetSystemTimeNV(void)
+{
+  Warning( "eglGetSystemTimeNV not available." );
+  return 0;
+}
+
+// EGL_VERSION_1_0
+
+static EGLBoolean REGAL_CALL missing_eglChooseConfig(EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(attrib_list);
+  UNUSED_PARAMETER(configs);
+  UNUSED_PARAMETER(config_size);
+  UNUSED_PARAMETER(num_config);
+  Warning( "eglChooseConfig not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglCopyBuffers(EGLDisplay dpy, EGLSurface surface, EGLNativePixmapType target)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(target);
+  Warning( "eglCopyBuffers not available." );
+  return 0;
+}
+
+static EGLContext REGAL_CALL missing_eglCreateContext(EGLDisplay dpy, EGLConfig config, EGLContext share_context, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(share_context);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateContext not available." );
+  return 0;
+}
+
+static EGLSurface REGAL_CALL missing_eglCreatePbufferSurface(EGLDisplay dpy, EGLConfig config, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreatePbufferSurface not available." );
+  return 0;
+}
+
+static EGLSurface REGAL_CALL missing_eglCreatePixmapSurface(EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(pixmap);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreatePixmapSurface not available." );
+  return 0;
+}
+
+static EGLSurface REGAL_CALL missing_eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(win);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreateWindowSurface not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglDestroyContext(EGLDisplay dpy, EGLContext ctx)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(ctx);
+  Warning( "eglDestroyContext not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglDestroySurface(EGLDisplay dpy, EGLSurface surface)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  Warning( "eglDestroySurface not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglGetConfigAttrib not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglGetConfigs(EGLDisplay dpy, EGLConfig *configs, EGLint config_size, EGLint *num_config)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(configs);
+  UNUSED_PARAMETER(config_size);
+  UNUSED_PARAMETER(num_config);
+  Warning( "eglGetConfigs not available." );
+  return 0;
+}
+
+static EGLContext REGAL_CALL missing_eglGetCurrentContext(void)
+{
+  Warning( "eglGetCurrentContext not available." );
+  return 0;
+}
+
+static EGLDisplay REGAL_CALL missing_eglGetCurrentDisplay(void)
+{
+  Warning( "eglGetCurrentDisplay not available." );
+  return 0;
+}
+
+static EGLSurface REGAL_CALL missing_eglGetCurrentSurface(EGLint readdraw)
+{
+  UNUSED_PARAMETER(readdraw);
+  Warning( "eglGetCurrentSurface not available." );
+  return 0;
+}
+
+static EGLDisplay REGAL_CALL missing_eglGetDisplay(EGLNativeDisplayType display_id)
+{
+  UNUSED_PARAMETER(display_id);
+  Warning( "eglGetDisplay not available." );
+  return 0;
+}
+
+static EGLint REGAL_CALL missing_eglGetError(void)
+{
+  Warning( "eglGetError not available." );
+  return 0;
+}
+
+static __eglMustCastToProperFunctionPointerType REGAL_CALL missing_eglGetProcAddress(const char *procname)
+{
+  UNUSED_PARAMETER(procname);
+  Warning( "eglGetProcAddress not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglInitialize(EGLDisplay dpy, EGLint *major, EGLint *minor)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(major);
+  UNUSED_PARAMETER(minor);
+  Warning( "eglInitialize not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglMakeCurrent(EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(draw);
+  UNUSED_PARAMETER(read);
+  UNUSED_PARAMETER(ctx);
+  Warning( "eglMakeCurrent not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglQueryContext(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglQueryContext not available." );
+  return 0;
+}
+
+static const char *REGAL_CALL missing_eglQueryString(EGLDisplay dpy, EGLint name)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(name);
+  Warning( "eglQueryString not available." );
+  return NULL;
+}
+
+static EGLBoolean REGAL_CALL missing_eglQuerySurface(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint *value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglQuerySurface not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglSwapBuffers(EGLDisplay dpy, EGLSurface surface)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  Warning( "eglSwapBuffers not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglTerminate(EGLDisplay dpy)
+{
+  UNUSED_PARAMETER(dpy);
+  Warning( "eglTerminate not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglWaitGL(void)
+{
+  Warning( "eglWaitGL not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglWaitNative(EGLint engine)
+{
+  UNUSED_PARAMETER(engine);
+  Warning( "eglWaitNative not available." );
+  return 0;
+}
+
+// EGL_VERSION_1_1
+
+static EGLBoolean REGAL_CALL missing_eglBindTexImage(EGLDisplay dpy, EGLSurface surface, EGLint buffer)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(buffer);
+  Warning( "eglBindTexImage not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglReleaseTexImage(EGLDisplay dpy, EGLSurface surface, EGLint buffer)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(buffer);
+  Warning( "eglReleaseTexImage not available." );
+  return 0;
+}
+
+// EGL_VERSION_1_2
+
+static EGLBoolean REGAL_CALL missing_eglBindAPI(EGLenum api)
+{
+  UNUSED_PARAMETER(api);
+  Warning( "eglBindAPI not available." );
+  return 0;
+}
+
+static EGLSurface REGAL_CALL missing_eglCreatePbufferFromClientBuffer(EGLDisplay dpy, EGLenum buftype, EGLClientBuffer buffer, EGLConfig config, const EGLint *attrib_list)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(buftype);
+  UNUSED_PARAMETER(buffer);
+  UNUSED_PARAMETER(config);
+  UNUSED_PARAMETER(attrib_list);
+  Warning( "eglCreatePbufferFromClientBuffer not available." );
+  return 0;
+}
+
+static EGLenum REGAL_CALL missing_eglQueryAPI(void)
+{
+  Warning( "eglQueryAPI not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglReleaseThread(void)
+{
+  Warning( "eglReleaseThread not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglSurfaceAttrib(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint value)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(surface);
+  UNUSED_PARAMETER(attribute);
+  UNUSED_PARAMETER(value);
+  Warning( "eglSurfaceAttrib not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglSwapInterval(EGLDisplay dpy, EGLint interval)
+{
+  UNUSED_PARAMETER(dpy);
+  UNUSED_PARAMETER(interval);
+  Warning( "eglSwapInterval not available." );
+  return 0;
+}
+
+static EGLBoolean REGAL_CALL missing_eglWaitClient(void)
+{
+  Warning( "eglWaitClient not available." );
+  return 0;
+}
+
+#endif // REGAL_SYS_EGL
+
+void InitDispatchTableMissing(DispatchTableGL &tbl)
 {
 
   // GL_VERSION_1_0
@@ -25874,6 +29349,666 @@ void InitDispatchTableMissing(DispatchTable &tbl)
   // GL_WIN_swap_hint
 
   tbl.glAddSwapHintRectWIN = missing_glAddSwapHintRectWIN;
+
+}
+
+void InitDispatchTableGlobalMissing(DispatchTableGlobal &tbl)
+{
+
+#if REGAL_SYS_WGL
+  // WGL_3DL_stereo_control
+
+  tbl.wglSetStereoEmitterState3DL = missing_wglSetStereoEmitterState3DL;
+
+  // WGL_AMD_gpu_association
+
+  tbl.wglBlitContextFramebufferAMD = missing_wglBlitContextFramebufferAMD;
+  tbl.wglCreateAssociatedContextAMD = missing_wglCreateAssociatedContextAMD;
+  tbl.wglCreateAssociatedContextAttribsAMD = missing_wglCreateAssociatedContextAttribsAMD;
+  tbl.wglDeleteAssociatedContextAMD = missing_wglDeleteAssociatedContextAMD;
+  tbl.wglGetContextGPUIDAMD = missing_wglGetContextGPUIDAMD;
+  tbl.wglGetCurrentAssociatedContextAMD = missing_wglGetCurrentAssociatedContextAMD;
+  tbl.wglGetGPUIDsAMD = missing_wglGetGPUIDsAMD;
+  tbl.wglGetGPUInfoAMD = missing_wglGetGPUInfoAMD;
+  tbl.wglMakeAssociatedContextCurrentAMD = missing_wglMakeAssociatedContextCurrentAMD;
+
+  // WGL_ARB_buffer_region
+
+  tbl.wglCreateBufferRegionARB = missing_wglCreateBufferRegionARB;
+  tbl.wglDeleteBufferRegionARB = missing_wglDeleteBufferRegionARB;
+  tbl.wglRestoreBufferRegionARB = missing_wglRestoreBufferRegionARB;
+  tbl.wglSaveBufferRegionARB = missing_wglSaveBufferRegionARB;
+
+  // WGL_ARB_create_context
+
+  tbl.wglCreateContextAttribsARB = missing_wglCreateContextAttribsARB;
+
+  // WGL_ARB_extensions_string
+
+  tbl.wglGetExtensionsStringARB = missing_wglGetExtensionsStringARB;
+
+  // WGL_ARB_make_current_read
+
+  tbl.wglGetCurrentReadDCARB = missing_wglGetCurrentReadDCARB;
+  tbl.wglMakeContextCurrentARB = missing_wglMakeContextCurrentARB;
+
+  // WGL_ARB_pbuffer
+
+  tbl.wglCreatePbufferARB = missing_wglCreatePbufferARB;
+  tbl.wglDestroyPbufferARB = missing_wglDestroyPbufferARB;
+  tbl.wglGetPbufferDCARB = missing_wglGetPbufferDCARB;
+  tbl.wglQueryPbufferARB = missing_wglQueryPbufferARB;
+  tbl.wglReleasePbufferDCARB = missing_wglReleasePbufferDCARB;
+
+  // WGL_ARB_pixel_format
+
+  tbl.wglChoosePixelFormatARB = missing_wglChoosePixelFormatARB;
+  tbl.wglGetPixelFormatAttribfvARB = missing_wglGetPixelFormatAttribfvARB;
+  tbl.wglGetPixelFormatAttribivARB = missing_wglGetPixelFormatAttribivARB;
+
+  // WGL_ARB_render_texture
+
+  tbl.wglBindTexImageARB = missing_wglBindTexImageARB;
+  tbl.wglReleaseTexImageARB = missing_wglReleaseTexImageARB;
+  tbl.wglSetPbufferAttribARB = missing_wglSetPbufferAttribARB;
+
+  // WGL_EXT_display_color_table
+
+  tbl.wglBindDisplayColorTableEXT = missing_wglBindDisplayColorTableEXT;
+  tbl.wglCreateDisplayColorTableEXT = missing_wglCreateDisplayColorTableEXT;
+  tbl.wglDestroyDisplayColorTableEXT = missing_wglDestroyDisplayColorTableEXT;
+  tbl.wglLoadDisplayColorTableEXT = missing_wglLoadDisplayColorTableEXT;
+
+  // WGL_EXT_extensions_string
+
+  tbl.wglGetExtensionsStringEXT = missing_wglGetExtensionsStringEXT;
+
+  // WGL_EXT_make_current_read
+
+  tbl.wglGetCurrentReadDCEXT = missing_wglGetCurrentReadDCEXT;
+  tbl.wglMakeContextCurrentEXT = missing_wglMakeContextCurrentEXT;
+
+  // WGL_EXT_pbuffer
+
+  tbl.wglCreatePbufferEXT = missing_wglCreatePbufferEXT;
+  tbl.wglDestroyPbufferEXT = missing_wglDestroyPbufferEXT;
+  tbl.wglGetPbufferDCEXT = missing_wglGetPbufferDCEXT;
+  tbl.wglQueryPbufferEXT = missing_wglQueryPbufferEXT;
+  tbl.wglReleasePbufferDCEXT = missing_wglReleasePbufferDCEXT;
+
+  // WGL_EXT_pixel_format
+
+  tbl.wglChoosePixelFormatEXT = missing_wglChoosePixelFormatEXT;
+  tbl.wglGetPixelFormatAttribfvEXT = missing_wglGetPixelFormatAttribfvEXT;
+  tbl.wglGetPixelFormatAttribivEXT = missing_wglGetPixelFormatAttribivEXT;
+
+  // WGL_EXT_swap_control
+
+  tbl.wglGetSwapIntervalEXT = missing_wglGetSwapIntervalEXT;
+  tbl.wglSwapIntervalEXT = missing_wglSwapIntervalEXT;
+
+  // WGL_GDI
+
+  tbl.wglChoosePixelFormat = missing_wglChoosePixelFormat;
+  tbl.wglDescribePixelFormat = missing_wglDescribePixelFormat;
+  tbl.wglGetPixelFormat = missing_wglGetPixelFormat;
+  tbl.wglSetPixelFormat = missing_wglSetPixelFormat;
+  tbl.wglSwapBuffers = missing_wglSwapBuffers;
+
+  // WGL_I3D_digital_video_control
+
+  tbl.wglGetDigitalVideoParametersI3D = missing_wglGetDigitalVideoParametersI3D;
+  tbl.wglSetDigitalVideoParametersI3D = missing_wglSetDigitalVideoParametersI3D;
+
+  // WGL_I3D_gamma
+
+  tbl.wglGetGammaTableI3D = missing_wglGetGammaTableI3D;
+  tbl.wglGetGammaTableParametersI3D = missing_wglGetGammaTableParametersI3D;
+  tbl.wglSetGammaTableI3D = missing_wglSetGammaTableI3D;
+  tbl.wglSetGammaTableParametersI3D = missing_wglSetGammaTableParametersI3D;
+
+  // WGL_I3D_genlock
+
+  tbl.wglDisableGenlockI3D = missing_wglDisableGenlockI3D;
+  tbl.wglEnableGenlockI3D = missing_wglEnableGenlockI3D;
+  tbl.wglGenlockSampleRateI3D = missing_wglGenlockSampleRateI3D;
+  tbl.wglGenlockSourceDelayI3D = missing_wglGenlockSourceDelayI3D;
+  tbl.wglGenlockSourceEdgeI3D = missing_wglGenlockSourceEdgeI3D;
+  tbl.wglGenlockSourceI3D = missing_wglGenlockSourceI3D;
+  tbl.wglGetGenlockSampleRateI3D = missing_wglGetGenlockSampleRateI3D;
+  tbl.wglGetGenlockSourceDelayI3D = missing_wglGetGenlockSourceDelayI3D;
+  tbl.wglGetGenlockSourceEdgeI3D = missing_wglGetGenlockSourceEdgeI3D;
+  tbl.wglGetGenlockSourceI3D = missing_wglGetGenlockSourceI3D;
+  tbl.wglIsEnabledGenlockI3D = missing_wglIsEnabledGenlockI3D;
+  tbl.wglQueryGenlockMaxSourceDelayI3D = missing_wglQueryGenlockMaxSourceDelayI3D;
+
+  // WGL_I3D_image_buffer
+
+  tbl.wglAssociateImageBufferEventsI3D = missing_wglAssociateImageBufferEventsI3D;
+  tbl.wglCreateImageBufferI3D = missing_wglCreateImageBufferI3D;
+  tbl.wglDestroyImageBufferI3D = missing_wglDestroyImageBufferI3D;
+  tbl.wglReleaseImageBufferEventsI3D = missing_wglReleaseImageBufferEventsI3D;
+
+  // WGL_I3D_swap_frame_lock
+
+  tbl.wglDisableFrameLockI3D = missing_wglDisableFrameLockI3D;
+  tbl.wglEnableFrameLockI3D = missing_wglEnableFrameLockI3D;
+  tbl.wglIsEnabledFrameLockI3D = missing_wglIsEnabledFrameLockI3D;
+  tbl.wglQueryFrameLockMasterI3D = missing_wglQueryFrameLockMasterI3D;
+
+  // WGL_I3D_swap_frame_usage
+
+  tbl.wglBeginFrameTrackingI3D = missing_wglBeginFrameTrackingI3D;
+  tbl.wglEndFrameTrackingI3D = missing_wglEndFrameTrackingI3D;
+  tbl.wglGetFrameUsageI3D = missing_wglGetFrameUsageI3D;
+  tbl.wglQueryFrameTrackingI3D = missing_wglQueryFrameTrackingI3D;
+
+  // WGL_NV_DX_interop
+
+  tbl.wglDXCloseDeviceNV = missing_wglDXCloseDeviceNV;
+  tbl.wglDXLockObjectsNV = missing_wglDXLockObjectsNV;
+  tbl.wglDXObjectAccessNV = missing_wglDXObjectAccessNV;
+  tbl.wglDXOpenDeviceNV = missing_wglDXOpenDeviceNV;
+  tbl.wglDXRegisterObjectNV = missing_wglDXRegisterObjectNV;
+  tbl.wglDXSetResourceShareHandleNV = missing_wglDXSetResourceShareHandleNV;
+  tbl.wglDXUnlockObjectsNV = missing_wglDXUnlockObjectsNV;
+  tbl.wglDXUnregisterObjectNV = missing_wglDXUnregisterObjectNV;
+
+  // WGL_NV_copy_image
+
+  tbl.wglCopyImageSubDataNV = missing_wglCopyImageSubDataNV;
+
+  // WGL_NV_gpu_affinity
+
+  tbl.wglCreateAffinityDCNV = missing_wglCreateAffinityDCNV;
+  tbl.wglDeleteDCNV = missing_wglDeleteDCNV;
+  tbl.wglEnumGpuDevicesNV = missing_wglEnumGpuDevicesNV;
+  tbl.wglEnumGpusFromAffinityDCNV = missing_wglEnumGpusFromAffinityDCNV;
+  tbl.wglEnumGpusNV = missing_wglEnumGpusNV;
+
+  // WGL_NV_present_video
+
+  tbl.wglBindVideoDeviceNV = missing_wglBindVideoDeviceNV;
+  tbl.wglEnumerateVideoDevicesNV = missing_wglEnumerateVideoDevicesNV;
+  tbl.wglQueryCurrentContextNV = missing_wglQueryCurrentContextNV;
+
+  // WGL_NV_swap_group
+
+  tbl.wglBindSwapBarrierNV = missing_wglBindSwapBarrierNV;
+  tbl.wglJoinSwapGroupNV = missing_wglJoinSwapGroupNV;
+  tbl.wglQueryFrameCountNV = missing_wglQueryFrameCountNV;
+  tbl.wglQueryMaxSwapGroupsNV = missing_wglQueryMaxSwapGroupsNV;
+  tbl.wglQuerySwapGroupNV = missing_wglQuerySwapGroupNV;
+  tbl.wglResetFrameCountNV = missing_wglResetFrameCountNV;
+
+  // WGL_NV_vertex_array_range
+
+  tbl.wglAllocateMemoryNV = missing_wglAllocateMemoryNV;
+  tbl.wglFreeMemoryNV = missing_wglFreeMemoryNV;
+
+  // WGL_NV_video_capture
+
+  tbl.wglBindVideoCaptureDeviceNV = missing_wglBindVideoCaptureDeviceNV;
+  tbl.wglEnumerateVideoCaptureDevicesNV = missing_wglEnumerateVideoCaptureDevicesNV;
+  tbl.wglLockVideoCaptureDeviceNV = missing_wglLockVideoCaptureDeviceNV;
+  tbl.wglQueryVideoCaptureDeviceNV = missing_wglQueryVideoCaptureDeviceNV;
+  tbl.wglReleaseVideoCaptureDeviceNV = missing_wglReleaseVideoCaptureDeviceNV;
+
+  // WGL_NV_video_output
+
+  tbl.wglBindVideoImageNV = missing_wglBindVideoImageNV;
+  tbl.wglGetVideoDeviceNV = missing_wglGetVideoDeviceNV;
+  tbl.wglGetVideoInfoNV = missing_wglGetVideoInfoNV;
+  tbl.wglReleaseVideoDeviceNV = missing_wglReleaseVideoDeviceNV;
+  tbl.wglReleaseVideoImageNV = missing_wglReleaseVideoImageNV;
+  tbl.wglSendPbufferToVideoNV = missing_wglSendPbufferToVideoNV;
+
+  // WGL_OML_sync_control
+
+  tbl.wglGetMscRateOML = missing_wglGetMscRateOML;
+  tbl.wglGetSyncValuesOML = missing_wglGetSyncValuesOML;
+  tbl.wglSwapBuffersMscOML = missing_wglSwapBuffersMscOML;
+  tbl.wglSwapLayerBuffersMscOML = missing_wglSwapLayerBuffersMscOML;
+  tbl.wglWaitForMscOML = missing_wglWaitForMscOML;
+  tbl.wglWaitForSbcOML = missing_wglWaitForSbcOML;
+
+  // WGL_core
+
+  tbl.wglCopyContext = missing_wglCopyContext;
+  tbl.wglCreateContext = missing_wglCreateContext;
+  tbl.wglCreateLayerContext = missing_wglCreateLayerContext;
+  tbl.wglDeleteContext = missing_wglDeleteContext;
+  tbl.wglDescribeLayerPlane = missing_wglDescribeLayerPlane;
+  tbl.wglGetCurrentContext = missing_wglGetCurrentContext;
+  tbl.wglGetCurrentDC = missing_wglGetCurrentDC;
+  tbl.wglGetDefaultProcAddress = missing_wglGetDefaultProcAddress;
+  tbl.wglGetLayerPaletteEntries = missing_wglGetLayerPaletteEntries;
+  tbl.wglGetProcAddress = missing_wglGetProcAddress;
+  tbl.wglMakeCurrent = missing_wglMakeCurrent;
+  tbl.wglRealizeLayerPalette = missing_wglRealizeLayerPalette;
+  tbl.wglSetLayerPaletteEntries = missing_wglSetLayerPaletteEntries;
+  tbl.wglShareLists = missing_wglShareLists;
+  tbl.wglSwapLayerBuffers = missing_wglSwapLayerBuffers;
+  tbl.wglSwapMultipleBuffers = missing_wglSwapMultipleBuffers;
+  tbl.wglUseFontBitmapsA = missing_wglUseFontBitmapsA;
+  tbl.wglUseFontBitmapsW = missing_wglUseFontBitmapsW;
+  tbl.wglUseFontOutlinesA = missing_wglUseFontOutlinesA;
+  tbl.wglUseFontOutlinesW = missing_wglUseFontOutlinesW;
+#endif // REGAL_SYS_WGL
+
+#if REGAL_SYS_GLX
+
+  // GLX_VERSION_1_0
+
+  tbl.glXChooseVisual = missing_glXChooseVisual;
+  tbl.glXCopyContext = missing_glXCopyContext;
+  tbl.glXCreateContext = missing_glXCreateContext;
+  tbl.glXCreateGLXPixmap = missing_glXCreateGLXPixmap;
+  tbl.glXDestroyContext = missing_glXDestroyContext;
+  tbl.glXDestroyGLXPixmap = missing_glXDestroyGLXPixmap;
+  tbl.glXGetConfig = missing_glXGetConfig;
+  tbl.glXGetCurrentContext = missing_glXGetCurrentContext;
+  tbl.glXGetCurrentDrawable = missing_glXGetCurrentDrawable;
+  tbl.glXIsDirect = missing_glXIsDirect;
+  tbl.glXMakeCurrent = missing_glXMakeCurrent;
+  tbl.glXQueryExtension = missing_glXQueryExtension;
+  tbl.glXQueryVersion = missing_glXQueryVersion;
+  tbl.glXSwapBuffers = missing_glXSwapBuffers;
+  tbl.glXUseXFont = missing_glXUseXFont;
+  tbl.glXWaitGL = missing_glXWaitGL;
+  tbl.glXWaitX = missing_glXWaitX;
+
+  // GLX_VERSION_1_1
+
+  tbl.glXGetClientString = missing_glXGetClientString;
+  tbl.glXQueryExtensionsString = missing_glXQueryExtensionsString;
+  tbl.glXQueryServerString = missing_glXQueryServerString;
+
+  // GLX_VERSION_1_2
+
+  tbl.glXGetCurrentDisplay = missing_glXGetCurrentDisplay;
+
+  // GLX_VERSION_1_3
+
+  tbl.glXChooseFBConfig = missing_glXChooseFBConfig;
+  tbl.glXCreateNewContext = missing_glXCreateNewContext;
+  tbl.glXCreatePbuffer = missing_glXCreatePbuffer;
+  tbl.glXCreatePixmap = missing_glXCreatePixmap;
+  tbl.glXCreateWindow = missing_glXCreateWindow;
+  tbl.glXDestroyPbuffer = missing_glXDestroyPbuffer;
+  tbl.glXDestroyPixmap = missing_glXDestroyPixmap;
+  tbl.glXDestroyWindow = missing_glXDestroyWindow;
+  tbl.glXGetCurrentReadDrawable = missing_glXGetCurrentReadDrawable;
+  tbl.glXGetFBConfigAttrib = missing_glXGetFBConfigAttrib;
+  tbl.glXGetFBConfigs = missing_glXGetFBConfigs;
+  tbl.glXGetSelectedEvent = missing_glXGetSelectedEvent;
+  tbl.glXGetVisualFromFBConfig = missing_glXGetVisualFromFBConfig;
+  tbl.glXMakeContextCurrent = missing_glXMakeContextCurrent;
+  tbl.glXQueryContext = missing_glXQueryContext;
+  tbl.glXQueryDrawable = missing_glXQueryDrawable;
+  tbl.glXSelectEvent = missing_glXSelectEvent;
+
+  // GLX_VERSION_1_4
+
+  tbl.glXGetProcAddress = missing_glXGetProcAddress;
+
+  // GLX_AMD_gpu_association
+
+  tbl.glXBlitContextFramebufferAMD = missing_glXBlitContextFramebufferAMD;
+  tbl.glXCreateAssociatedContextAMD = missing_glXCreateAssociatedContextAMD;
+  tbl.glXCreateAssociatedContextAttribsAMD = missing_glXCreateAssociatedContextAttribsAMD;
+  tbl.glXDeleteAssociatedContextAMD = missing_glXDeleteAssociatedContextAMD;
+  tbl.glXGetContextGPUIDAMD = missing_glXGetContextGPUIDAMD;
+  tbl.glXGetCurrentAssociatedContextAMD = missing_glXGetCurrentAssociatedContextAMD;
+  tbl.glXGetGPUIDsAMD = missing_glXGetGPUIDsAMD;
+  tbl.glXGetGPUInfoAMD = missing_glXGetGPUInfoAMD;
+  tbl.glXMakeAssociatedContextCurrentAMD = missing_glXMakeAssociatedContextCurrentAMD;
+
+  // GLX_ARB_create_context
+
+  tbl.glXCreateContextAttribsARB = missing_glXCreateContextAttribsARB;
+
+  // GLX_ARB_get_proc_address
+
+  tbl.glXGetProcAddressARB = missing_glXGetProcAddressARB;
+
+  // GLX_ATI_render_texture
+
+  tbl.glXBindTexImageATI = missing_glXBindTexImageATI;
+  tbl.glXDrawableAttribATI = missing_glXDrawableAttribATI;
+  tbl.glXReleaseTexImageATI = missing_glXReleaseTexImageATI;
+
+  // GLX_EXT_import_context
+
+  tbl.glXFreeContextEXT = missing_glXFreeContextEXT;
+  tbl.glXGetContextIDEXT = missing_glXGetContextIDEXT;
+  tbl.glXImportContextEXT = missing_glXImportContextEXT;
+  tbl.glXQueryContextInfoEXT = missing_glXQueryContextInfoEXT;
+
+  // GLX_EXT_swap_control
+
+  tbl.glXSwapIntervalEXT = missing_glXSwapIntervalEXT;
+
+  // GLX_EXT_texture_from_pixmap
+
+  tbl.glXBindTexImageEXT = missing_glXBindTexImageEXT;
+  tbl.glXReleaseTexImageEXT = missing_glXReleaseTexImageEXT;
+
+  // GLX_MESA_agp_offset
+
+  tbl.glXGetAGPOffsetMESA = missing_glXGetAGPOffsetMESA;
+
+  // GLX_MESA_copy_sub_buffer
+
+  tbl.glXCopySubBufferMESA = missing_glXCopySubBufferMESA;
+
+  // GLX_MESA_pixmap_colormap
+
+  tbl.glXCreateGLXPixmapMESA = missing_glXCreateGLXPixmapMESA;
+
+  // GLX_MESA_release_buffers
+
+  tbl.glXReleaseBuffersMESA = missing_glXReleaseBuffersMESA;
+
+  // GLX_MESA_set_3dfx_mode
+
+  tbl.glXSet3DfxModeMESA = missing_glXSet3DfxModeMESA;
+
+  // GLX_MESA_swap_control
+
+  tbl.glXGetSwapIntervalMESA = missing_glXGetSwapIntervalMESA;
+  tbl.glXSwapIntervalMESA = missing_glXSwapIntervalMESA;
+
+  // GLX_NV_copy_image
+
+  tbl.glXCopyImageSubDataNV = missing_glXCopyImageSubDataNV;
+
+  // GLX_NV_present_video
+
+  tbl.glXBindVideoDeviceNV = missing_glXBindVideoDeviceNV;
+  tbl.glXEnumerateVideoDevicesNV = missing_glXEnumerateVideoDevicesNV;
+
+  // GLX_NV_swap_group
+
+  tbl.glXBindSwapBarrierNV = missing_glXBindSwapBarrierNV;
+  tbl.glXJoinSwapGroupNV = missing_glXJoinSwapGroupNV;
+  tbl.glXQueryFrameCountNV = missing_glXQueryFrameCountNV;
+  tbl.glXQueryMaxSwapGroupsNV = missing_glXQueryMaxSwapGroupsNV;
+  tbl.glXQuerySwapGroupNV = missing_glXQuerySwapGroupNV;
+  tbl.glXResetFrameCountNV = missing_glXResetFrameCountNV;
+
+  // GLX_NV_vertex_array_range
+
+  tbl.glXAllocateMemoryNV = missing_glXAllocateMemoryNV;
+  tbl.glXFreeMemoryNV = missing_glXFreeMemoryNV;
+
+  // GLX_NV_video_capture
+
+  tbl.glXBindVideoCaptureDeviceNV = missing_glXBindVideoCaptureDeviceNV;
+  tbl.glXEnumerateVideoCaptureDevicesNV = missing_glXEnumerateVideoCaptureDevicesNV;
+  tbl.glXLockVideoCaptureDeviceNV = missing_glXLockVideoCaptureDeviceNV;
+  tbl.glXQueryVideoCaptureDeviceNV = missing_glXQueryVideoCaptureDeviceNV;
+  tbl.glXReleaseVideoCaptureDeviceNV = missing_glXReleaseVideoCaptureDeviceNV;
+
+  // GLX_NV_video_output
+
+  tbl.glXBindVideoImageNV = missing_glXBindVideoImageNV;
+  tbl.glXGetVideoDeviceNV = missing_glXGetVideoDeviceNV;
+  tbl.glXGetVideoInfoNV = missing_glXGetVideoInfoNV;
+  tbl.glXReleaseVideoDeviceNV = missing_glXReleaseVideoDeviceNV;
+  tbl.glXReleaseVideoImageNV = missing_glXReleaseVideoImageNV;
+  tbl.glXSendPbufferToVideoNV = missing_glXSendPbufferToVideoNV;
+
+  // GLX_OML_sync_control
+
+  tbl.glXGetMscRateOML = missing_glXGetMscRateOML;
+  tbl.glXGetSyncValuesOML = missing_glXGetSyncValuesOML;
+  tbl.glXSwapBuffersMscOML = missing_glXSwapBuffersMscOML;
+  tbl.glXWaitForMscOML = missing_glXWaitForMscOML;
+  tbl.glXWaitForSbcOML = missing_glXWaitForSbcOML;
+
+  // GLX_SGIX_fbconfig
+
+  tbl.glXChooseFBConfigSGIX = missing_glXChooseFBConfigSGIX;
+  tbl.glXCreateContextWithConfigSGIX = missing_glXCreateContextWithConfigSGIX;
+  tbl.glXCreateGLXPixmapWithConfigSGIX = missing_glXCreateGLXPixmapWithConfigSGIX;
+  tbl.glXGetFBConfigAttribSGIX = missing_glXGetFBConfigAttribSGIX;
+  tbl.glXGetFBConfigFromVisualSGIX = missing_glXGetFBConfigFromVisualSGIX;
+  tbl.glXGetVisualFromFBConfigSGIX = missing_glXGetVisualFromFBConfigSGIX;
+
+  // GLX_SGIX_pbuffer
+
+  tbl.glXCreateGLXPbufferSGIX = missing_glXCreateGLXPbufferSGIX;
+  tbl.glXDestroyGLXPbufferSGIX = missing_glXDestroyGLXPbufferSGIX;
+  tbl.glXGetSelectedEventSGIX = missing_glXGetSelectedEventSGIX;
+  tbl.glXQueryGLXPbufferSGIX = missing_glXQueryGLXPbufferSGIX;
+  tbl.glXSelectEventSGIX = missing_glXSelectEventSGIX;
+
+  // GLX_SGIX_swap_barrier
+
+  tbl.glXBindSwapBarrierSGIX = missing_glXBindSwapBarrierSGIX;
+  tbl.glXQueryMaxSwapBarriersSGIX = missing_glXQueryMaxSwapBarriersSGIX;
+
+  // GLX_SGIX_swap_group
+
+  tbl.glXJoinSwapGroupSGIX = missing_glXJoinSwapGroupSGIX;
+
+  // GLX_SGIX_video_resize
+
+  tbl.glXBindChannelToWindowSGIX = missing_glXBindChannelToWindowSGIX;
+  tbl.glXChannelRectSGIX = missing_glXChannelRectSGIX;
+  tbl.glXChannelRectSyncSGIX = missing_glXChannelRectSyncSGIX;
+  tbl.glXQueryChannelDeltasSGIX = missing_glXQueryChannelDeltasSGIX;
+  tbl.glXQueryChannelRectSGIX = missing_glXQueryChannelRectSGIX;
+
+  // GLX_SGI_cushion
+
+  tbl.glXCushionSGI = missing_glXCushionSGI;
+
+  // GLX_SGI_make_current_read
+
+  tbl.glXGetCurrentReadDrawableSGI = missing_glXGetCurrentReadDrawableSGI;
+  tbl.glXMakeCurrentReadSGI = missing_glXMakeCurrentReadSGI;
+
+  // GLX_SGI_swap_control
+
+  tbl.glXSwapIntervalSGI = missing_glXSwapIntervalSGI;
+
+  // GLX_SGI_video_sync
+
+  tbl.glXGetVideoSyncSGI = missing_glXGetVideoSyncSGI;
+  tbl.glXWaitVideoSyncSGI = missing_glXWaitVideoSyncSGI;
+
+  // GLX_SUN_get_transparent_index
+
+  tbl.glXGetTransparentIndexSUN = missing_glXGetTransparentIndexSUN;
+
+  // GLX_SUN_video_resize
+
+  tbl.glXGetVideoResizeSUN = missing_glXGetVideoResizeSUN;
+  tbl.glXVideoResizeSUN = missing_glXVideoResizeSUN;
+#endif // REGAL_SYS_GLX
+
+#if REGAL_SYS_OSX
+
+  // CGL_VERSION_1_0
+
+  tbl.CGLChoosePixelFormat = missing_CGLChoosePixelFormat;
+  tbl.CGLClearDrawable = missing_CGLClearDrawable;
+  tbl.CGLCopyContext = missing_CGLCopyContext;
+  tbl.CGLCreateContext = missing_CGLCreateContext;
+  tbl.CGLDescribePixelFormat = missing_CGLDescribePixelFormat;
+  tbl.CGLDescribeRenderer = missing_CGLDescribeRenderer;
+  tbl.CGLDestroyContext = missing_CGLDestroyContext;
+  tbl.CGLDestroyPixelFormat = missing_CGLDestroyPixelFormat;
+  tbl.CGLDestroyRendererInfo = missing_CGLDestroyRendererInfo;
+  tbl.CGLDisable = missing_CGLDisable;
+  tbl.CGLEnable = missing_CGLEnable;
+  tbl.CGLErrorString = missing_CGLErrorString;
+  tbl.CGLFlushDrawable = missing_CGLFlushDrawable;
+  tbl.CGLGetOffScreen = missing_CGLGetOffScreen;
+  tbl.CGLGetOption = missing_CGLGetOption;
+  tbl.CGLGetParameter = missing_CGLGetParameter;
+  tbl.CGLGetVersion = missing_CGLGetVersion;
+  tbl.CGLGetVirtualScreen = missing_CGLGetVirtualScreen;
+  tbl.CGLIsEnabled = missing_CGLIsEnabled;
+  tbl.CGLQueryRendererInfo = missing_CGLQueryRendererInfo;
+  tbl.CGLSetFullScreen = missing_CGLSetFullScreen;
+  tbl.CGLSetOffScreen = missing_CGLSetOffScreen;
+  tbl.CGLSetOption = missing_CGLSetOption;
+  tbl.CGLSetParameter = missing_CGLSetParameter;
+  tbl.CGLSetVirtualScreen = missing_CGLSetVirtualScreen;
+
+  // CGL_VERSION_1_1
+
+  tbl.CGLCreatePBuffer = missing_CGLCreatePBuffer;
+  tbl.CGLDescribePBuffer = missing_CGLDescribePBuffer;
+  tbl.CGLDestroyPBuffer = missing_CGLDestroyPBuffer;
+  tbl.CGLGetPBuffer = missing_CGLGetPBuffer;
+  tbl.CGLSetPBuffer = missing_CGLSetPBuffer;
+  tbl.CGLTexImagePBuffer = missing_CGLTexImagePBuffer;
+
+  // CGL_VERSION_1_2
+
+  tbl.CGLGetContextRetainCount = missing_CGLGetContextRetainCount;
+  tbl.CGLGetGlobalOption = missing_CGLGetGlobalOption;
+  tbl.CGLGetPBufferRetainCount = missing_CGLGetPBufferRetainCount;
+  tbl.CGLGetPixelFormat = missing_CGLGetPixelFormat;
+  tbl.CGLGetPixelFormatRetainCount = missing_CGLGetPixelFormatRetainCount;
+  tbl.CGLLockContext = missing_CGLLockContext;
+  tbl.CGLReleaseContext = missing_CGLReleaseContext;
+  tbl.CGLReleasePBuffer = missing_CGLReleasePBuffer;
+  tbl.CGLReleasePixelFormat = missing_CGLReleasePixelFormat;
+  tbl.CGLRetainContext = missing_CGLRetainContext;
+  tbl.CGLRetainPBuffer = missing_CGLRetainPBuffer;
+  tbl.CGLRetainPixelFormat = missing_CGLRetainPixelFormat;
+  tbl.CGLSetGlobalOption = missing_CGLSetGlobalOption;
+  tbl.CGLUnlockContext = missing_CGLUnlockContext;
+
+  // CGL_VERSION_1_3
+
+  tbl.CGLGetCurrentContext = missing_CGLGetCurrentContext;
+  tbl.CGLGetShareGroup = missing_CGLGetShareGroup;
+  tbl.CGLGetSurface = missing_CGLGetSurface;
+  tbl.CGLSetCurrentContext = missing_CGLSetCurrentContext;
+  tbl.CGLSetSurface = missing_CGLSetSurface;
+  tbl.CGLTexImageIOSurface2D = missing_CGLTexImageIOSurface2D;
+  tbl.CGLUpdateContext = missing_CGLUpdateContext;
+#endif // REGAL_SYS_OSX
+
+#if REGAL_SYS_EGL
+
+  // EGL_ANGLE_query_surface_pointer
+
+  tbl.eglQuerySurfacePointerANGLE = missing_eglQuerySurfacePointerANGLE;
+
+  // EGL_KHR_fence_sync
+
+  tbl.eglClientWaitSyncKHR = missing_eglClientWaitSyncKHR;
+  tbl.eglCreateSyncKHR = missing_eglCreateSyncKHR;
+  tbl.eglDestroySyncKHR = missing_eglDestroySyncKHR;
+  tbl.eglGetSyncAttribKHR = missing_eglGetSyncAttribKHR;
+
+  // EGL_KHR_image_base
+
+  tbl.eglCreateImageKHR = missing_eglCreateImageKHR;
+  tbl.eglDestroyImageKHR = missing_eglDestroyImageKHR;
+
+  // EGL_KHR_lock_surface
+
+  tbl.eglLockSurfaceKHR = missing_eglLockSurfaceKHR;
+  tbl.eglUnlockSurfaceKHR = missing_eglUnlockSurfaceKHR;
+
+  // EGL_KHR_stream_consumer_gltexture
+
+  tbl.eglStreamConsumerAcquireKHR = missing_eglStreamConsumerAcquireKHR;
+  tbl.eglStreamConsumerGLTextureExternalKHR = missing_eglStreamConsumerGLTextureExternalKHR;
+  tbl.eglStreamConsumerReleaseKHR = missing_eglStreamConsumerReleaseKHR;
+
+  // EGL_KHR_stream_cross_process_fd
+
+  tbl.eglCreateStreamFromFileDescriptorKHR = missing_eglCreateStreamFromFileDescriptorKHR;
+  tbl.eglGetStreamFileDescriptorKHR = missing_eglGetStreamFileDescriptorKHR;
+
+  // EGL_KHR_stream_producer_eglsurface
+
+  tbl.eglCreateStreamProducerSurfaceKHR = missing_eglCreateStreamProducerSurfaceKHR;
+
+  // EGL_KHR_wait_sync
+
+  tbl.eglWaitSyncKHR = missing_eglWaitSyncKHR;
+
+  // EGL_MESA_drm_image
+
+  tbl.eglCreateDRMImageMESA = missing_eglCreateDRMImageMESA;
+  tbl.eglExportDRMImageMESA = missing_eglExportDRMImageMESA;
+
+  // EGL_NV_coverage_sample
+
+  tbl.eglCoverageMaskNV = missing_eglCoverageMaskNV;
+  tbl.eglCoverageOperationNV = missing_eglCoverageOperationNV;
+
+  // EGL_NV_post_sub_buffer
+
+  tbl.eglPostSubBufferNV = missing_eglPostSubBufferNV;
+
+  // EGL_NV_sync
+
+  tbl.eglClientWaitSyncNV = missing_eglClientWaitSyncNV;
+  tbl.eglCreateFenceSyncNV = missing_eglCreateFenceSyncNV;
+  tbl.eglDestroySyncNV = missing_eglDestroySyncNV;
+  tbl.eglFenceNV = missing_eglFenceNV;
+  tbl.eglGetSyncAttribNV = missing_eglGetSyncAttribNV;
+  tbl.eglSignalSyncNV = missing_eglSignalSyncNV;
+
+  // EGL_NV_system_time
+
+  tbl.eglGetSystemTimeFrequencyNV = missing_eglGetSystemTimeFrequencyNV;
+  tbl.eglGetSystemTimeNV = missing_eglGetSystemTimeNV;
+
+  // EGL_VERSION_1_0
+
+  tbl.eglChooseConfig = missing_eglChooseConfig;
+  tbl.eglCopyBuffers = missing_eglCopyBuffers;
+  tbl.eglCreateContext = missing_eglCreateContext;
+  tbl.eglCreatePbufferSurface = missing_eglCreatePbufferSurface;
+  tbl.eglCreatePixmapSurface = missing_eglCreatePixmapSurface;
+  tbl.eglCreateWindowSurface = missing_eglCreateWindowSurface;
+  tbl.eglDestroyContext = missing_eglDestroyContext;
+  tbl.eglDestroySurface = missing_eglDestroySurface;
+  tbl.eglGetConfigAttrib = missing_eglGetConfigAttrib;
+  tbl.eglGetConfigs = missing_eglGetConfigs;
+  tbl.eglGetCurrentContext = missing_eglGetCurrentContext;
+  tbl.eglGetCurrentDisplay = missing_eglGetCurrentDisplay;
+  tbl.eglGetCurrentSurface = missing_eglGetCurrentSurface;
+  tbl.eglGetDisplay = missing_eglGetDisplay;
+  tbl.eglGetError = missing_eglGetError;
+  tbl.eglGetProcAddress = missing_eglGetProcAddress;
+  tbl.eglInitialize = missing_eglInitialize;
+  tbl.eglMakeCurrent = missing_eglMakeCurrent;
+  tbl.eglQueryContext = missing_eglQueryContext;
+  tbl.eglQueryString = missing_eglQueryString;
+  tbl.eglQuerySurface = missing_eglQuerySurface;
+  tbl.eglSwapBuffers = missing_eglSwapBuffers;
+  tbl.eglTerminate = missing_eglTerminate;
+  tbl.eglWaitGL = missing_eglWaitGL;
+  tbl.eglWaitNative = missing_eglWaitNative;
+
+  // EGL_VERSION_1_1
+
+  tbl.eglBindTexImage = missing_eglBindTexImage;
+  tbl.eglReleaseTexImage = missing_eglReleaseTexImage;
+
+  // EGL_VERSION_1_2
+
+  tbl.eglBindAPI = missing_eglBindAPI;
+  tbl.eglCreatePbufferFromClientBuffer = missing_eglCreatePbufferFromClientBuffer;
+  tbl.eglQueryAPI = missing_eglQueryAPI;
+  tbl.eglReleaseThread = missing_eglReleaseThread;
+  tbl.eglSurfaceAttrib = missing_eglSurfaceAttrib;
+  tbl.eglSwapInterval = missing_eglSwapInterval;
+  tbl.eglWaitClient = missing_eglWaitClient;
+#endif // REGAL_SYS_EGL
 
 }
 

@@ -172,11 +172,13 @@
 # endif
 #endif
 
-// Trace dispatch unsupported
+// Trace dispatch unsupported by default in
+// release mode - TODO revisit
 
 #ifndef REGAL_TRACE
 #define REGAL_TRACE 0
 #endif
+
 
 // Emulation dispatch supported by default
 

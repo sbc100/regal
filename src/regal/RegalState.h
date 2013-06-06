@@ -102,7 +102,7 @@ using   ::boost::print::hex;
 using   ::boost::print::print_string;
 typedef ::boost::print::string_list<std::string> string_list;
 
-inline static void setEnable(DispatchTable &dt, const GLenum cap, const GLboolean enable)
+inline static void setEnable(DispatchTableGL &dt, const GLenum cap, const GLboolean enable)
 {
   if (enable)
     dt.call(&dt.glEnable)(cap);
@@ -110,7 +110,7 @@ inline static void setEnable(DispatchTable &dt, const GLenum cap, const GLboolea
     dt.call(&dt.glDisable)(cap);
 }
 
-inline static void setEnablei(DispatchTable &dt, const GLenum cap, const GLuint index, const GLboolean enable)
+inline static void setEnablei(DispatchTableGL &dt, const GLenum cap, const GLuint index, const GLboolean enable)
 {
   if (enable)
     dt.call(&dt.glEnablei)(cap,index);
@@ -376,7 +376,7 @@ struct Enable
     return *this;
   }
 
-  inline Enable &get(DispatchTable &dt)
+  inline Enable &get(DispatchTableGL &dt)
   {
     alphaTest = dt.call(&dt.glIsEnabled)(GL_ALPHA_TEST);
     autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
@@ -461,7 +461,7 @@ struct Enable
     return *this;
   }
 
-  inline const Enable &set(DispatchTable &dt) const
+  inline const Enable &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_ALPHA_TEST,alphaTest);
     setEnable(dt,GL_AUTO_NORMAL,autoNormal);
@@ -661,7 +661,7 @@ struct Depth
     return *this;
   }
 
-  inline Depth &get(DispatchTable &dt)
+  inline Depth &get(DispatchTableGL &dt)
   {
     enable = dt.call(&dt.glIsEnabled)(GL_DEPTH_TEST);
     dt.call(&dt.glGetIntegerv)(GL_DEPTH_FUNC,reinterpret_cast<GLint *>(&func));
@@ -670,7 +670,7 @@ struct Depth
     return *this;
   }
 
-  inline const Depth &set(DispatchTable &dt) const
+  inline const Depth &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_DEPTH_TEST,enable);
     dt.call(&dt.glDepthFunc)(func);
@@ -738,7 +738,7 @@ struct StencilFace
     return *this;
   }
 
-  inline StencilFace &get(DispatchTable &dt, GLenum face)
+  inline StencilFace &get(DispatchTableGL &dt, GLenum face)
   {
     dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_FUNC            : GL_STENCIL_BACK_FUNC,            reinterpret_cast<GLint *>(&func)     );
     dt.call(&dt.glGetIntegerv)(face==GL_FRONT ? GL_STENCIL_REF             : GL_STENCIL_BACK_REF,             &ref                                 );
@@ -750,7 +750,7 @@ struct StencilFace
     return *this;
   }
 
-  inline const StencilFace &set(DispatchTable &dt, GLenum face) const
+  inline const StencilFace &set(DispatchTableGL &dt, GLenum face) const
   {
     dt.call(&dt.glStencilFuncSeparate)(face,func,ref,valueMask);
     dt.call(&dt.glStencilMaskSeparate)(face,writeMask);
@@ -793,7 +793,7 @@ struct Stencil
     return *this;
   }
 
-  inline Stencil &get(DispatchTable &dt)
+  inline Stencil &get(DispatchTableGL &dt)
   {
     enable = dt.call(&dt.glIsEnabled)(GL_STENCIL_TEST);
     dt.call(&dt.glGetIntegerv)(GL_STENCIL_CLEAR_VALUE,&clear);
@@ -802,7 +802,7 @@ struct Stencil
     return *this;
   }
 
-  inline const Stencil &set(DispatchTable &dt) const
+  inline const Stencil &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_STENCIL_TEST,enable);
     dt.call(&dt.glClearStencil)(clear);
@@ -964,7 +964,7 @@ struct Polygon
     return *this;
   }
 
-  inline Polygon &get(DispatchTable &dt)
+  inline Polygon &get(DispatchTableGL &dt)
   {
     cullEnable = dt.call(&dt.glIsEnabled)(GL_CULL_FACE);
     dt.call(&dt.glGetIntegerv)(GL_CULL_FACE_MODE,reinterpret_cast<GLint *>(&cullFaceMode));
@@ -981,7 +981,7 @@ struct Polygon
     return *this;
   }
 
-  inline const Polygon &set(DispatchTable &dt) const
+  inline const Polygon &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_CULL_FACE,cullEnable);
     dt.call(&dt.glCullFace)(cullFaceMode);
@@ -1117,7 +1117,7 @@ struct Transform
     return *this;
   }
 
-  inline const Transform &transition(DispatchTable &dt, Transform &current) const
+  inline const Transform &transition(DispatchTableGL &dt, Transform &current) const
   {
     for (GLint i = 0; i < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES; i++)
     {
@@ -1221,7 +1221,7 @@ struct Hint
     return *this;
   }
 
-  inline Hint &get(DispatchTable &dt)
+  inline Hint &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetIntegerv)(GL_PERSPECTIVE_CORRECTION_HINT,reinterpret_cast<GLint *>(&perspectiveCorrection));
     dt.call(&dt.glGetIntegerv)(GL_POINT_SMOOTH_HINT,reinterpret_cast<GLint *>(&pointSmooth));
@@ -1234,7 +1234,7 @@ struct Hint
     return *this;
   }
 
-  inline const Hint &set(DispatchTable &dt) const
+  inline const Hint &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glHint)(GL_PERSPECTIVE_CORRECTION_HINT, perspectiveCorrection);
     dt.call(&dt.glHint)(GL_POINT_SMOOTH_HINT, pointSmooth);
@@ -1314,13 +1314,13 @@ struct List
     return *this;
   }
 
-  inline List &get(DispatchTable &dt)
+  inline List &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetIntegerv)(GL_LIST_BASE,reinterpret_cast<GLint *>(&base));
     return *this;
   }
 
-  inline const List &set(DispatchTable &dt) const
+  inline const List &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glListBase)(base);
     return *this;
@@ -1358,13 +1358,13 @@ struct AccumBuffer
     return *this;
   }
 
-  inline AccumBuffer &get(DispatchTable &dt)
+  inline AccumBuffer &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetFloatv)(GL_ACCUM_CLEAR_VALUE,&(clear[0]));
     return *this;
   }
 
-  inline const AccumBuffer &set(DispatchTable &dt) const
+  inline const AccumBuffer &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glClearAccum)(clear[0],clear[1],clear[2],clear[3]);
     return *this;
@@ -1425,7 +1425,7 @@ struct Scissor
     return true;
   }
 
-  void getUndefined(DispatchTable &dt)
+  void getUndefined(DispatchTableGL &dt)
   {
     for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
@@ -1445,7 +1445,7 @@ struct Scissor
     return *this;
   }
 
-  inline Scissor &get(DispatchTable &dt)
+  inline Scissor &get(DispatchTableGL &dt)
   {
     for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
@@ -1456,7 +1456,7 @@ struct Scissor
     return *this;
   }
 
-  inline const Scissor &set(DispatchTable &dt) const
+  inline const Scissor &set(DispatchTableGL &dt) const
   {
     for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
@@ -1567,7 +1567,7 @@ struct Viewport
     return true;
   }
 
-  inline void getUndefined(DispatchTable &dt)
+  inline void getUndefined(DispatchTableGL &dt)
   {
     for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
@@ -1584,7 +1584,7 @@ struct Viewport
     return *this;
   }
 
-  inline Viewport &get(DispatchTable &dt)
+  inline Viewport &get(DispatchTableGL &dt)
   {
     for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
@@ -1595,7 +1595,7 @@ struct Viewport
     return *this;
   }
 
-  inline const Viewport &set(DispatchTable &dt) const
+  inline const Viewport &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glDepthRangeArrayv)(0, REGAL_MAX_VIEWPORTS, &depthRange[0][0] );
     for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
@@ -1733,7 +1733,7 @@ struct Line
     return *this;
   }
 
-  inline Line &get(DispatchTable &dt)
+  inline Line &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetFloatv)(GL_LINE_WIDTH,&width);
     smooth = dt.call(&dt.glIsEnabled)(GL_LINE_SMOOTH);
@@ -1744,7 +1744,7 @@ struct Line
     return *this;
   }
 
-  inline const Line &set(DispatchTable &dt) const
+  inline const Line &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glLineWidth)(width);
     setEnable(dt,GL_LINE_SMOOTH,smooth);
@@ -1815,7 +1815,7 @@ struct Multisample
     return *this;
   }
 
-  inline Multisample &get(DispatchTable &dt)
+  inline Multisample &get(DispatchTableGL &dt)
   {
     multisample = dt.call(&dt.glIsEnabled)(GL_MULTISAMPLE);
     sampleAlphaToCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_COVERAGE);
@@ -1828,7 +1828,7 @@ struct Multisample
     return *this;
   }
 
-  inline const Multisample &set(DispatchTable &dt) const
+  inline const Multisample &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_MULTISAMPLE,multisample);
     setEnable(dt,GL_SAMPLE_ALPHA_TO_COVERAGE,sampleAlphaToCoverage);
@@ -1912,7 +1912,7 @@ struct Eval
     return *this;
   }
 
-  inline Eval &get(DispatchTable &dt)
+  inline Eval &get(DispatchTableGL &dt)
   {
     autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
     for (GLuint ii=0; ii<9; ii++)
@@ -1926,7 +1926,7 @@ struct Eval
     return *this;
   }
 
-  inline const Eval &set(DispatchTable &dt) const
+  inline const Eval &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_AUTO_NORMAL,autoNormal);
     for (GLuint ii=0; ii<9; ii++)
@@ -2017,7 +2017,7 @@ struct Fog
     return *this;
   }
 
-  inline Fog &get(DispatchTable &dt)
+  inline Fog &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetFloatv)(GL_FOG_COLOR,color);
     dt.call(&dt.glGetFloatv)(GL_FOG_INDEX,&index);
@@ -2031,7 +2031,7 @@ struct Fog
     return *this;
   }
 
-  inline const Fog &set(DispatchTable &dt) const
+  inline const Fog &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glFogfv)(GL_FOG_COLOR,color);
     dt.call(&dt.glFogf)(GL_FOG_INDEX,index);
@@ -2107,7 +2107,7 @@ struct Point
     return *this;
   }
 
-  inline Point &get(DispatchTable &dt)
+  inline Point &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetFloatv)(GL_POINT_SIZE,&size);
     smooth = dt.call(&dt.glIsEnabled)(GL_POINT_SMOOTH);
@@ -2127,7 +2127,7 @@ struct Point
     return *this;
   }
 
-  inline const Point &set(DispatchTable &dt) const
+  inline const Point &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glPointSize)(size);
     setEnable(dt,GL_POINT_SMOOTH,smooth);
@@ -2240,13 +2240,13 @@ struct PolygonStipple
     return *this;
   }
 
-  inline PolygonStipple &get(DispatchTable &dt)
+  inline PolygonStipple &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetPolygonStipple)(pattern);
     return *this;
   }
 
-  inline const PolygonStipple &set(DispatchTable &dt) const
+  inline const PolygonStipple &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glPolygonStipple)(pattern);
     return *this;
@@ -2347,7 +2347,7 @@ struct ColorBuffer
     return valid;
   }
 
-  void getUndefined(DispatchTable &dt)
+  void getUndefined(DispatchTableGL &dt)
   {
     if (!valid)
     {
@@ -2385,7 +2385,7 @@ struct ColorBuffer
     return *this;
   }
 
-  inline ColorBuffer &get(DispatchTable &dt)
+  inline ColorBuffer &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetIntegerv)(GL_CLAMP_FRAGMENT_COLOR,reinterpret_cast<GLint *>(&clampFragmentColor));
     dt.call(&dt.glGetIntegerv)(GL_CLAMP_READ_COLOR,reinterpret_cast<GLint *>(&clampReadColor));
@@ -2422,7 +2422,7 @@ struct ColorBuffer
     return *this;
   }
 
-  inline const ColorBuffer &set(DispatchTable &dt) const
+  inline const ColorBuffer &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glClampColor)(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
     dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
@@ -2741,7 +2741,7 @@ struct PixelMode
     return valid;
   }
 
-  void getUndefined(DispatchTable &dt)
+  void getUndefined(DispatchTableGL &dt)
   {
     if (!valid)
     {
@@ -2800,7 +2800,7 @@ struct PixelMode
     return *this;
   }
 
-  inline PixelMode &get(DispatchTable &dt)
+  inline PixelMode &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetIntegerv)(GL_READ_BUFFER,reinterpret_cast<GLint *>(&readBuffer));
     dt.call(&dt.glGetBooleanv)(GL_MAP_COLOR,&mapColor);
@@ -2862,7 +2862,7 @@ struct PixelMode
     return *this;
   }
 
-  inline const PixelMode &set(DispatchTable &dt) const
+  inline const PixelMode &set(DispatchTableGL &dt) const
   {
     if (valid)
       dt.call(&dt.glReadBuffer)(readBuffer);
@@ -3270,7 +3270,7 @@ struct LightingFace
     return *this;
   }
 
-  inline LightingFace &get(DispatchTable &dt, GLenum face)
+  inline LightingFace &get(DispatchTableGL &dt, GLenum face)
   {
     dt.call(&dt.glGetMaterialfv)(face, GL_AMBIENT,       ambient);
     dt.call(&dt.glGetMaterialfv)(face, GL_DIFFUSE,       diffuse);
@@ -3281,7 +3281,7 @@ struct LightingFace
     return *this;
   }
 
-  inline const LightingFace &set(DispatchTable &dt, GLenum face) const
+  inline const LightingFace &set(DispatchTableGL &dt, GLenum face) const
   {
     dt.call(&dt.glMaterialfv)(face, GL_AMBIENT,       ambient);
     dt.call(&dt.glMaterialfv)(face, GL_DIFFUSE,       diffuse);
@@ -3373,7 +3373,7 @@ struct LightingLight
     return *this;
   }
 
-  inline LightingLight &get(DispatchTable &dt, GLenum light)
+  inline LightingLight &get(DispatchTableGL &dt, GLenum light)
   {
     enabled = dt.call(&dt.glIsEnabled)(light);
     dt.call(&dt.glGetLightfv)(light, GL_AMBIENT,               ambient);
@@ -3389,7 +3389,7 @@ struct LightingLight
     return *this;
   }
 
-  inline const LightingLight &set(DispatchTable &dt, GLenum light) const
+  inline const LightingLight &set(DispatchTableGL &dt, GLenum light) const
   {
     setEnable(dt,light,enabled);
     dt.call(&dt.glLightfv)(light, GL_AMBIENT,               ambient);
@@ -3489,7 +3489,7 @@ struct Lighting
     return *this;
   }
 
-  Lighting &get(DispatchTable &dt)
+  Lighting &get(DispatchTableGL &dt)
   {
     dt.call(&dt.glGetIntegerv)(GL_SHADE_MODEL,reinterpret_cast<GLint *>(&shadeModel));
     dt.call(&dt.glGetIntegerv)(GL_CLAMP_VERTEX_COLOR,reinterpret_cast<GLint *>(&clampVertexColor));
@@ -3509,7 +3509,7 @@ struct Lighting
     return *this;
   }
 
-  const Lighting &set(DispatchTable &dt) const
+  const Lighting &set(DispatchTableGL &dt) const
   {
     dt.call(&dt.glShadeModel)(shadeModel);
     dt.call(&dt.glClampColor)(GL_CLAMP_VERTEX_COLOR,clampVertexColor);

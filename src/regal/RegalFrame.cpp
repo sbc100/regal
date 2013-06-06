@@ -91,7 +91,7 @@ void Frame::capture(RegalContext &context)
     Config::frameSaveDepth
   )
   {
-    DispatchTable *_next = &context.dispatcher.front();
+    DispatchTableGL *_next = &context.dispatcher.front();
     RegalAssert(_next);
 
     // Get the current viewport

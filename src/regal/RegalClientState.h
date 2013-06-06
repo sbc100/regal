@@ -90,7 +90,7 @@ namespace ClientState
   using   ::boost::print::print_string;
   typedef ::boost::print::string_list<std::string> string_list;
 
-  inline static void enable(DispatchTable &dt, const GLenum cap, const GLboolean enable)
+  inline static void enable(DispatchTableGL &dt, const GLenum cap, const GLboolean enable)
   {
     if (enable)
       dt.call(&dt.glEnableClientState)(cap);
@@ -98,7 +98,7 @@ namespace ClientState
       dt.call(&dt.glDisableClientState)(cap);
   }
 
-  inline static void enablei(DispatchTable &dt, const GLenum cap, const GLuint index, const GLboolean enable)
+  inline static void enablei(DispatchTableGL &dt, const GLenum cap, const GLuint index, const GLboolean enable)
   {
     if (enable)
       dt.call(&dt.glEnableClientStateiEXT)(cap,index);
@@ -176,7 +176,7 @@ namespace ClientState
       return *this;
     }
 
-    NamedVertexArray &get(DispatchTable &dt, vaName va)
+    NamedVertexArray &get(DispatchTableGL &dt, vaName va)
     {
       GLint vaInt = static_cast<GLint>(va);
       RegalAssert(vaInt >= 0 && vaInt < static_cast<GLint>(nNamedArrays));
@@ -207,7 +207,7 @@ namespace ClientState
       return *this;
     }
 
-    const NamedVertexArray &set(DispatchTable &dt, vaName va) const
+    const NamedVertexArray &set(DispatchTableGL &dt, vaName va) const
     {
       GLint vaInt = static_cast<GLint>(va);
       RegalAssert(vaInt >= 0 && vaInt < static_cast<GLint>(nNamedArrays));
@@ -330,7 +330,7 @@ namespace ClientState
       return *this;
     }
 
-    VertexBufferBindPoint &get(DispatchTable &dt, GLuint index)
+    VertexBufferBindPoint &get(DispatchTableGL &dt, GLuint index)
     {
       RegalAssert(index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS);
       if (index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
@@ -343,7 +343,7 @@ namespace ClientState
       return *this;
     }
 
-    const VertexBufferBindPoint &set(DispatchTable &dt, GLuint index) const
+    const VertexBufferBindPoint &set(DispatchTableGL &dt, GLuint index) const
     {
       RegalAssert(index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS);
       if (index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
@@ -403,7 +403,7 @@ namespace ClientState
       return *this;
     }
 
-    GenericVertexArray &get(DispatchTable &dt, GLuint index)
+    GenericVertexArray &get(DispatchTableGL &dt, GLuint index)
     {
       RegalAssert(index < REGAL_EMU_MAX_VERTEX_ATTRIBS);
       if (index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
@@ -426,7 +426,7 @@ namespace ClientState
       return *this;
     }
 
-    const GenericVertexArray &set(DispatchTable &dt, GLuint index) const
+    const GenericVertexArray &set(DispatchTableGL &dt, GLuint index) const
     {
       RegalAssert(index < REGAL_EMU_MAX_VERTEX_ATTRIBS);
       if (index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
@@ -532,7 +532,7 @@ namespace ClientState
       return *this;
     }
 
-    inline VertexArray &get(DispatchTable &dt)
+    inline VertexArray &get(DispatchTableGL &dt)
     {
       dt.call(&dt.glGetIntegerv)(GL_VERTEX_ARRAY_BINDING,reinterpret_cast<GLint*>(&vertexArrayBinding));
       if (vertexArrayBinding)
@@ -554,7 +554,7 @@ namespace ClientState
       return *this;
     }
 
-    inline const VertexArray &set(DispatchTable &dt) const
+    inline const VertexArray &set(DispatchTableGL &dt) const
     {
       dt.call(&dt.glBindVertexArray)(0);
       for (GLuint ii=0; ii<nNamedArrays; ii++)

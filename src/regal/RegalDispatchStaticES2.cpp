@@ -357,7 +357,7 @@ REGAL_NAMESPACE_BEGIN
 using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 
-void InitDispatchTableStaticES2(DispatchTable &tbl)
+void InitDispatchTableStaticES2(DispatchTableGL &tbl)
 {
   // OpenGL ES 2.0 only
 

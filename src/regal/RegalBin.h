@@ -65,7 +65,7 @@ struct Bin
 
   void ShaderBinary( RegalContext *ctx, GLsizei count, const GLuint *shaders, GLenum binaryFormat, const void *binary, GLsizei length)
   {
-    DispatchTable &tbl = ctx->dispatcher.emulation;
+    DispatchTableGL &tbl = ctx->dispatcher.emulation;
     tbl.glShaderBinary( count, shaders, binaryFormat, binary, length );
   }
 };

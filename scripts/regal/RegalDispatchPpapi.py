@@ -7,9 +7,9 @@ from ApiUtil import typeIsVoid
 
 from ApiCodeGen import *
 
-from RegalDispatchLog import apiDispatchFuncInitCode
-from RegalDispatchEmu import dispatchSourceTemplate
 from RegalContextInfo import cond
+
+from RegalDispatchShared import dispatchSourceTemplate, apiDispatchFuncInitCode
 
 ##############################################################################################
 
@@ -107,6 +107,7 @@ def generatePpapiSource(apis, args):
   substitute['LOCAL_CODE']    = ''
   substitute['API_DISPATCH_FUNC_DEFINE'] = funcDefine
   substitute['API_DISPATCH_FUNC_INIT'] = funcInit
+  substitute['API_DISPATCH_GLOBAL_FUNC_INIT'] = ''
   substitute['IFDEF'] = '#if REGAL_DRIVER && REGAL_SYS_PPAPI\n'
   substitute['ENDIF'] = '#endif\n'
 

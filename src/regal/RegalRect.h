@@ -58,27 +58,27 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-template <typename T> inline void glVertex2(DispatchTable &dt, T x1, T y1)
+template <typename T> inline void glVertex2(DispatchTableGL &dt, T x1, T y1)
 {
   dt.call(&dt.glVertex2f)(static_cast<GLfloat>(x1), static_cast<GLfloat>(y1));
 }
 
-template <> inline void glVertex2(DispatchTable &dt, GLfloat x1, GLfloat y1)
+template <> inline void glVertex2(DispatchTableGL &dt, GLfloat x1, GLfloat y1)
 {
   dt.call(&dt.glVertex2f)(x1, y1);
 }
 
-template <> inline void glVertex2(DispatchTable &dt, GLdouble x1, GLdouble y1)
+template <> inline void glVertex2(DispatchTableGL &dt, GLdouble x1, GLdouble y1)
 {
   dt.call(&dt.glVertex2d)(x1, y1);
 }
 
-template <> inline void glVertex2(DispatchTable &dt, GLint x1, GLint y1)
+template <> inline void glVertex2(DispatchTableGL &dt, GLint x1, GLint y1)
 {
   dt.call(&dt.glVertex2i)(x1, y1);
 }
 
-template <> inline void glVertex2(DispatchTable &dt, GLshort x1, GLshort y1)
+template <> inline void glVertex2(DispatchTableGL &dt, GLshort x1, GLshort y1)
 {
   dt.call(&dt.glVertex2s)(x1, y1);
 }
@@ -102,7 +102,7 @@ struct Rect
     if (ctx->depthBeginEnd)
       return;
 
-    DispatchTable &dt = ctx->dispatcher.emulation;
+    DispatchTableGL &dt = ctx->dispatcher.emulation;
 
     // incrementing context->depthBeginEnd here avoids an assert in log_glBegin and
     // also keeps the log indentation as it should be

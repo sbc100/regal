@@ -7,9 +7,9 @@ from ApiUtil import typeIsVoid
 
 from ApiCodeGen import *
 
-from RegalDispatchLog import apiDispatchFuncInitCode
-from RegalDispatchEmu import dispatchSourceTemplate
 from RegalContextInfo import cond
+
+from RegalDispatchShared import dispatchSourceTemplate, apiDispatchFuncInitCode
 
 ##############################################################################################
 
@@ -95,6 +95,7 @@ def generateStaticEGLSource(apis, args):
   substitute['LOCAL_CODE']    = ''
   substitute['API_DISPATCH_FUNC_DEFINE'] = ''
   substitute['API_DISPATCH_FUNC_INIT'] = apiStaticEGLFuncInitCode( apis, args )
+  substitute['API_DISPATCH_GLOBAL_FUNC_INIT'] = ''
   substitute['IFDEF'] = '#if REGAL_SYS_EGL && REGAL_DRIVER && REGAL_STATIC_EGL\n\n'
   substitute['ENDIF'] = '#endif\n'
 

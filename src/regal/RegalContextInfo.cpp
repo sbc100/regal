@@ -619,6 +619,7 @@ ContextInfo::ContextInfo()
   regal_ext_blend_color(false),
   regal_ext_blend_subtract(false),
   regal_ext_direct_state_access(false),
+  regal_ext_framebuffer_blit(false),
   regal_ext_framebuffer_object(false),
   regal_nv_blend_square(false),
 #if REGAL_SYS_WGL
@@ -1894,7 +1895,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_draw_range_elements")) return gl_ext_draw_range_elements;
   if (!strcmp(ext,"GL_EXT_fog_coord")) return gl_ext_fog_coord;
   if (!strcmp(ext,"GL_EXT_fragment_lighting")) return gl_ext_fragment_lighting;
-  if (!strcmp(ext,"GL_EXT_framebuffer_blit")) return gl_ext_framebuffer_blit;
+  if (!strcmp(ext,"GL_EXT_framebuffer_blit")) return regal_ext_framebuffer_blit || gl_ext_framebuffer_blit;
   if (!strcmp(ext,"GL_EXT_framebuffer_multisample")) return gl_ext_framebuffer_multisample;
   if (!strcmp(ext,"GL_EXT_framebuffer_multisample_blit_scaled")) return gl_ext_framebuffer_multisample_blit_scaled;
   if (!strcmp(ext,"GL_EXT_framebuffer_object")) return regal_ext_framebuffer_object || gl_ext_framebuffer_object;

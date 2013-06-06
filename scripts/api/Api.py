@@ -42,6 +42,7 @@ class Extension:
     self.functions  = []        # function names
     self.enumerants = []        # enumerant names
     self.emulatedBy = ''        # Regal emulation layer that adds support for this extension
+    self.emulatedIf = ''        # optional condition determing if extension can be emulated
 
 class Function:
 

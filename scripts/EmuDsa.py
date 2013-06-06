@@ -358,7 +358,7 @@ dsaFormulae = {
     'PushClientAttribDefault' : {
         'entries' : ['glPushClientAttribDefaultEXT'],
         'impl' : [
-            'DispatchTable &tbl = _context->dispatcher.emulation;',
+            'DispatchTableGL &tbl = _context->dispatcher.emulation;',
             'tbl.call(&tbl.glPushClientAttrib)(${arg0});',
             '_context->dsa->ClientAttribDefault(_context, ${arg0});',
         ],

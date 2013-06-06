@@ -208,7 +208,7 @@ struct Vao
     {
       maxName = current;
     }
-    DispatchTable &tbl = ctx->dispatcher.emulation;
+    DispatchTableGL &tbl = ctx->dispatcher.emulation;
     tbl.glBindBuffer( GL_ARRAY_BUFFER, vao.vertexBuffer );
     tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, vao.indexBuffer );
     GLuint lastBuffer = vao.vertexBuffer;
@@ -282,7 +282,7 @@ struct Vao
   void EnableDisableVertexAttribArray( RegalContext *ctx, GLboolean enable, GLuint index )
   {
     RegalAssert( index < maxVertexAttribs );
-    DispatchTable &tbl = ctx->dispatcher.emulation;
+    DispatchTableGL &tbl = ctx->dispatcher.emulation;
     Array &a = objects[current].a[index];
     a.enabled = enable;
     if( a.enabled == GL_TRUE )

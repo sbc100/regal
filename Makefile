@@ -37,6 +37,7 @@ include build/regaltest.inc
 include build/zlib.inc
 include build/libpng.inc
 include build/snappy.inc
+include build/apitrace.inc
 include build/glu.inc
 include build/glut.inc
 
@@ -220,11 +221,64 @@ tmp/$(SYSTEM)/snappy/static/%.o: src/snappy/%.c
 
 tmp/$(SYSTEM)/snappy/static/%.o: src/snappy/%.cc
 	@mkdir -p $(dir $@)
-	$(LOG_CC)$(CCACHE) $(CXX) $(SNAPPY.CFLAGS) $(CXXFLAGS) $(PICFLAG) -o $@ -c $<
+	$(LOG_CC)$(CCACHE) $(CXX) $(SNAPPY.CFLAGS) $(CFLAGS) $(CXXFLAGS) $(PICFLAG) -o $@ -c $<
 
 lib/$(SYSTEM)/$(SNAPPY.STATIC): $(SNAPPY.OBJS)
 	@mkdir -p $(dir $@)
 	$(LOG_AR)$(CCACHE) $(AR) cr $@ $(SNAPPY.OBJS)
+
+#
+# apitrace
+#
+
+APITRACE.SRCS       := $(APITRACE.CXX)
+APITRACE.SRCS       := $(filter %.c,$(APITRACE.SRCS)) $(filter %.cc,$(APITRACE.SRCS)) $(filter %.cpp,$(APITRACE.SRCS))
+APITRACE.SRCS.NAMES := $(notdir $(APITRACE.SRCS))
+APITRACE.OBJS       := $(addprefix tmp/$(SYSTEM)/apitrace/static/,$(APITRACE.SRCS.NAMES))
+APITRACE.OBJS       := $(APITRACE.OBJS:.c=.o) $(APITRACE.OBJS:.cc=.o) $(APITRACE.OBJS:.cpp=.o)
+APITRACE.OBJS       := $(filter %.o,$(APITRACE.OBJS))
+APITRACE.DEPS       := $(APITRACE.OBJS:.o=.d)
+APITRACE.CFLAGS     := -Isrc/apitrace/common -Isrc/apitrace/gen/dispatch -Isrc/apitrace/dispatch -Isrc/apitrace/helpers -Isrc/apitrace/wrappers -Isrc/apitrace -Isrc/regal -Isrc/snappy -Isrc/zlib/include -Isrc/zlib/src -Isrc/boost
+APITRACE.STATIC     := libapitrace.a
+
+APITRACE.CFLAGS     += -DREGAL_PLUGIN_MODE=1
+
+ifeq ($(MODE),release)
+APITRACE.CFLAGS         += -DNDEBUG
+APITRACE.CFLAGS         += -DREGAL_NO_ASSERT=1
+endif
+
+-include $(APITRACE.DEPS)
+
+apitrace.lib: lib/$(SYSTEM)/$(APITRACE.STATIC)
+
+tmp/$(SYSTEM)/apitrace/static/%.o: src/apitrace/common/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(APITRACE.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+tmp/$(SYSTEM)/apitrace/static/%.o: src/apitrace/gen/wrapper/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(APITRACE.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+tmp/$(SYSTEM)/apitrace/static/%.o: src/apitrace/dispatch/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(APITRACE.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+tmp/$(SYSTEM)/apitrace/static/%.o: src/apitrace/helpers/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(APITRACE.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+tmp/$(SYSTEM)/apitrace/static/%.o: src/apitrace/gen/wrappers/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(APITRACE.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+tmp/$(SYSTEM)/apitrace/static/%.o: src/apitrace/wrappers/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(APITRACE.CFLAGS) $(CFLAGS) $(PICFLAG) -o $@ -c $<
+
+lib/$(SYSTEM)/$(APITRACE.STATIC): $(APITRACE.OBJS)
+	@mkdir -p $(dir $@)
+	$(LOG_AR)$(CCACHE) $(AR) cr $@ $(APITRACE.OBJS)
 ifneq ($(RANLIB),)
 	$(LOG_RANLIB)$(RANLIB) $@
 endif
@@ -327,7 +381,9 @@ LIB.SDEPS          := $(LIBS.SOBJS:.o=.d)
 
 -include $(LIB.DEPS) $(LIB.SDEPS)
 
-LIB.LIBS           += -Llib/$(SYSTEM) -lpng -lz
+LIB.LIBS           += -Llib/$(SYSTEM)
+# LIB.LIBS           += -lapitrace -lsnappy
+LIB.LIBS           += -lpng -lz $(LDFLAGS.X11)
 
 ifneq ($(filter darwin%,$(SYSTEM)),)
 LIB.LDFLAGS        += -Wl,-reexport-lGLU -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries
@@ -773,5 +829,6 @@ clobber:
 
 .PHONY: export test all
 .PHONY: regal.lib regal.bin
+.PHONY: apitrace.lib
 .PHONY: zlib.lib libpng.lib snappy.lib glew.lib glu.lib glut.lib
 .PHONY: clean clobber

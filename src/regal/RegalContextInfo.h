@@ -647,6 +647,7 @@ struct ContextInfo
   GLboolean regal_ext_blend_color : 1;
   GLboolean regal_ext_blend_subtract : 1;
   GLboolean regal_ext_direct_state_access : 1;
+  GLboolean regal_ext_framebuffer_blit : 1;
   GLboolean regal_ext_framebuffer_object : 1;
   GLboolean regal_nv_blend_square : 1;
 

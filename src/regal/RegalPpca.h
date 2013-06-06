@@ -59,7 +59,7 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-struct DispatchTable;
+struct DispatchTableGL;
 
 // ====================================
 // ClientState::Capabilities
@@ -106,7 +106,7 @@ void swap( State& lhs, State& rhs );
 
 size_t PNameToIndex( GLenum pname );
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target );
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target );
 
 } // namespace PixelStore
 } // namespace ClientState
@@ -156,7 +156,7 @@ void swap( State& lhs, State& rhs );
 size_t ArrayNameToAttribIndex( GLenum array, GLenum texunit=GL_TEXTURE0 );
 size_t IndexedArrayNameToAttribIndex( GLenum array, GLuint index );
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target, GLenum& inoutClientActiveTexture, GLuint& inoutArrayBufferBinding );
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target, GLenum& inoutClientActiveTexture, GLuint& inoutArrayBufferBinding );
 
 } // namespace Fixed
 } // namespace VertexArray
@@ -211,7 +211,7 @@ struct State
 
 void swap( State& lhs, State& rhs );
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target );
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target );
 
 } // namespace Generic
 } // namespace VertexArray
@@ -251,7 +251,7 @@ struct State {
 
 void swap( State& lhs, State& rhs );
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target );
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target );
 
 } // namespace VertexArray
 } // namespace ClientState

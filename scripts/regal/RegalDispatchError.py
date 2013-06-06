@@ -7,9 +7,9 @@ from ApiUtil import typeIsVoid
 
 from ApiCodeGen import *
 
-from RegalDispatchLog import apiDispatchFuncInitCode
-from RegalDispatchEmu import dispatchSourceTemplate
 from RegalContextInfo import cond
+
+from RegalDispatchShared import dispatchSourceTemplate, apiDispatchFuncInitCode
 
 ##############################################################################################
 
@@ -58,7 +58,7 @@ def apiErrorFuncDefineCode(apis, args):
       code += '  Internal("error_%s","()");\n' % name
       code += '  RegalContext *_context = REGAL_GET_CONTEXT();\n'
       code += '  RegalAssert(_context);\n'
-      code += '  DispatchTable *_next = _context->dispatcher.error._next;\n'
+      code += '  DispatchTableGL *_next = _context->dispatcher.error.next();\n'
       code += '  RegalAssert(_next);\n'
       if name != 'glGetError':
         code += '  GLenum _error = GL_NO_ERROR;\n'
@@ -115,6 +115,7 @@ def generateErrorSource(apis, args):
   substitute['LOCAL_CODE']    = ''
   substitute['API_DISPATCH_FUNC_DEFINE'] = funcDefine
   substitute['API_DISPATCH_FUNC_INIT'] = funcInit
+  substitute['API_DISPATCH_GLOBAL_FUNC_INIT'] = ''
   substitute['IFDEF'] = '#if REGAL_ERROR\n\n'
   substitute['ENDIF'] = '#endif\n'
   outputCode( '%s/RegalDispatchError.cpp' % args.srcdir, dispatchSourceTemplate.substitute(substitute))

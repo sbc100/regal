@@ -72,8 +72,8 @@ TEST( RegalStateDepth, SetDispatchesCorrectly )
 
   RegalGMockInterface mock;
 
-  DispatchTable dt;
-  ::memset(&dt,0,sizeof(DispatchTable));
+  DispatchTableGL dt;
+  ::memset(&dt,0,sizeof(DispatchTableGL));
   dt._enabled = true;
   InitDispatchTableGMock( dt );
 
@@ -182,8 +182,8 @@ TEST( RegalStateTransform, TransitionSetsStateCorrectly )
 {
   RegalGMockInterface mock;
 
-  DispatchTable dt;
-  ::memset(&dt,0,sizeof(DispatchTable));
+  DispatchTableGL dt;
+  ::memset(&dt,0,sizeof(DispatchTableGL));
   dt._enabled = true;
   InitDispatchTableGMock( dt );
 

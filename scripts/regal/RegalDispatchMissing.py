@@ -8,9 +8,11 @@ from ApiUtil import typeIsVoidPointer
 
 from ApiCodeGen import *
 
-from RegalDispatchLog import apiDispatchFuncInitCode
-from RegalDispatchEmu import dispatchSourceTemplate
 from RegalContextInfo import cond
+
+from RegalDispatchShared import dispatchSourceTemplate
+from RegalDispatchShared import apiDispatchFuncInitCode
+from RegalDispatchShared import apiDispatchGlobalFuncInitCode
 
 ##############################################################################################
 
@@ -29,16 +31,14 @@ def apiMissingFuncDefineCode(apis, args):
 
     for function in api.functions:
 
-      if not function.needsContext:
-        continue
-
       if getattr(function,'regalOnly',False)==True:
         continue
 
       name   = function.name
       params = paramsDefaultCode(function.parameters, True)
       callParams = paramsNameCode(function.parameters)
-      rType  = typeCode(function.ret.type)
+      rType     = typeCode(function.ret.type)
+      rTypes    = rType.strip()
       category  = getattr(function, 'category', None)
       version   = getattr(function, 'version', None)
 
@@ -62,11 +62,16 @@ def apiMissingFuncDefineCode(apis, args):
       for param in function.parameters:
         code += '  UNUSED_PARAMETER(%s);\n' % param.name
       code += '  Warning( "%s not available." );\n' % name
+
       if not typeIsVoid(rType):
-        if rType[-1]=='*' or typeIsVoidPointer(rType):
-          code += '  return NULL;\n'
+        if rTypes in api.defaults:
+          code += '  return %s;\n' % ( api.defaults[rTypes] )
         else:
-          code += '  return (%s)0;\n'%(rType)
+          if rType[-1]=='*' or typeIsVoidPointer(rType):
+            code += '  return NULL;\n'
+          else:
+            code += '  return (%s) 0;\n' % ( rTypes )
+
       code += '}\n\n'
 
     if api.name in cond:
@@ -89,6 +94,7 @@ def generateMissingSource(apis, args):
   substitute['LOCAL_CODE']    = ''
   substitute['API_DISPATCH_FUNC_DEFINE'] = apiMissingFuncDefineCode( apis, args )
   substitute['API_DISPATCH_FUNC_INIT']   = apiDispatchFuncInitCode( apis, args, 'missing' )
+  substitute['API_DISPATCH_GLOBAL_FUNC_INIT']   = apiDispatchGlobalFuncInitCode( apis, args, 'missing' )
   substitute['IFDEF'] = ''
   substitute['ENDIF'] = ''
 

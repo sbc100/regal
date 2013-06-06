@@ -172,9 +172,16 @@ def emuFindEntry(func, emuFormulae, member):
     substitute( emue, formula, 'suffix', subs )
     substitute( emue, formula, 'pre',    subs )
     substitute( emue, formula, 'post',   subs )
+
     emue['cond'] = None
     if 'cond' in formula:
       emue['cond'] = formula['cond']
+
+    # plugin is optional, default to False
+
+    emue['plugin'] = False
+    if 'plugin' in formula:
+      emue['plugin'] = formula['plugin']
 
     return emue
 

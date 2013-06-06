@@ -1640,7 +1640,7 @@ static void REGAL_CALL ppapi_glRenderbufferStorage(GLenum target, GLenum interna
   rCtx->ppapiES2->RenderbufferStorage(rCtx->ppapiResource, target, internalformat, width, height);
 }
 
-void InitDispatchTablePpapi(DispatchTable &tbl)
+void InitDispatchTablePpapi(DispatchTableGL &tbl)
 {
   // OpenGL ES 2.0 only
   tbl.glBlendFunc = ppapi_glBlendFunc;

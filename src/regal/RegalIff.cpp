@@ -1387,7 +1387,7 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
   ver = ::std::numeric_limits<GLuint64>::max();
   progcount = 0;
   RegalAssert(ctx);
-  DispatchTable & tbl = ctx->dispatcher.emulation;
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
   store = sstore;
   pg = tbl.call(&tbl.glCreateProgram)();
   Shader( ctx, tbl, GL_VERTEX_SHADER, vs, vsSrc );
@@ -1412,7 +1412,7 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
   tbl.call(&tbl.glUseProgram)( ctx->iff->program );
 }
 
-void Program::Shader( RegalContext * ctx, DispatchTable & tbl, GLenum type, GLuint & shader, const GLchar *src )
+void Program::Shader( RegalContext * ctx, DispatchTableGL & tbl, GLenum type, GLuint & shader, const GLchar *src )
 {
   Internal("Regal::Program::Shader","()");
 
@@ -1443,7 +1443,7 @@ void Program::Attribs( RegalContext * ctx )
 {
   Internal("Regal::Program::Attribs","()");
 
-  DispatchTable & tbl = ctx->dispatcher.emulation;
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
 
   tbl.call(&tbl.glBindAttribLocation)( pg, ctx->iff->ffAttrMap[ RFF2A_Vertex ], "rglVertex" );
   //tbl.call(&tbl.glBindAttribLocation)( pg, 1, "rglWeight" );
@@ -1477,7 +1477,7 @@ void Program::UserShaderModeAttribs( RegalContext * ctx )
 {
   Internal("Regal::Program::UserShaderModeAttribs","()");
 
-  DispatchTable & tbl = ctx->dispatcher.emulation;
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
 
   tbl.call(&tbl.glBindAttribLocation)( pg, ctx->iff->ffAttrMap[ RFF2A_Vertex ], "rglVertex" );
   tbl.call(&tbl.glBindAttribLocation)( pg, ctx->iff->ffAttrMap[ RFF2A_Normal ], "rglNormal" );
@@ -1498,7 +1498,7 @@ void Program::UserShaderModeAttribs( RegalContext * ctx )
 }
 
 
-void Program::Samplers( RegalContext * ctx, DispatchTable & tbl )
+void Program::Samplers( RegalContext * ctx, DispatchTableGL & tbl )
 {
   Internal("Regal::Program::Samplers","()");
 
@@ -1516,7 +1516,7 @@ void Program::Samplers( RegalContext * ctx, DispatchTable & tbl )
   }
 }
 
-void Program::Uniforms( RegalContext * ctx, DispatchTable & tbl )
+void Program::Uniforms( RegalContext * ctx, DispatchTableGL & tbl )
 {
   Internal("Regal::Program::Uniforms","()");
 
@@ -1535,7 +1535,7 @@ void Iff::Cleanup( RegalContext &ctx )
   Internal("Regal::Iff::Cleanup","()");
 
   RestoreVao(&ctx);
-  DispatchTable &tbl = ctx.dispatcher.emulation;
+  DispatchTableGL &tbl = ctx.dispatcher.emulation;
 
   tbl.call(&tbl.glDeleteBuffers)(1, &immVbo);
   tbl.call(&tbl.glDeleteBuffers)(1, &immQuadsVbo);
@@ -1962,7 +1962,7 @@ void Iff::UpdateUniforms( RegalContext * ctx )
   Internal("Regal::Iff::UpdateUniforms",ctx);
 
   Program & pgm = *currprog;
-  DispatchTable & tbl = ctx->dispatcher.emulation;
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
   if( pgm.ver != ffstate.Ver() ) {
     pgm.ver = ffstate.Ver();
     const State::Store & p = ffstate.processed;
@@ -2195,7 +2195,7 @@ void Iff::UseFixedFunctionProgram( RegalContext * ctx )
     p = & ffprogs[ base + match ];
     // delete this program
     if( p->pg != 0 ) {
-      DispatchTable & tbl = ctx->dispatcher.emulation;
+      DispatchTableGL & tbl = ctx->dispatcher.emulation;
       tbl.call(&tbl.glDeleteShader)( p->vs );
       tbl.call(&tbl.glDeleteShader)( p->fs );
       tbl.call(&tbl.glDeleteProgram)( p->pg );
@@ -2520,7 +2520,7 @@ void Iff::LinkProgram( RegalContext *ctx, GLuint program ) {
   }
   ctx->dispatcher.emulation.glLinkProgram( program );
   Program & p = shprogmap[ program ];
-  DispatchTable & tbl = ctx->dispatcher.emulation;
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
   p.Samplers( ctx, tbl );
   p.Uniforms( ctx, tbl );
 }

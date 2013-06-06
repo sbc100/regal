@@ -147,7 +147,7 @@ size_t PNameToIndex( GLenum pname ) {
   }
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target )
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target )
 {
   UNUSED_PARAMETER(cap);
   RegalAssert( dt.glPixelStorei );
@@ -195,12 +195,12 @@ void ApplyAttribPointer( const State::Source& target, void (REGAL_CALL *dispatch
   dispatchAttribPointer( target.stride, reinterpret_cast<const GLvoid*>( target.offset ) );
 }
 
-void ApplyClientStateEnable( const DispatchTable& dt, GLenum array, bool enable ) {
+void ApplyClientStateEnable( const DispatchTableGL& dt, GLenum array, bool enable ) {
   ( enable ? dt.glEnableClientState : dt.glDisableClientState )( array );
 }
 
 template <typename T>
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Attrib& current, const State::Attrib& target, GLenum array, T dispatchAttribPointer, GLuint& inoutArrayBufferBinding ) {
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State::Attrib& current, const State::Attrib& target, GLenum array, T dispatchAttribPointer, GLuint& inoutArrayBufferBinding ) {
   if ( target.enabled != current.enabled ) {
     ApplyClientStateEnable( dt, array, target.enabled );
   }
@@ -216,7 +216,7 @@ void Transition( const Capabilities& cap, const DispatchTable& dt, const State::
   }
 }
 
-void TransitionTextureCoords( const Capabilities& cap, const DispatchTable& dt, const State::Attrib& current, const State::Attrib& target, GLenum texture, GLenum& inoutClientActiveTexture, GLuint& inoutArrayBufferBinding ) {
+void TransitionTextureCoords( const Capabilities& cap, const DispatchTableGL& dt, const State::Attrib& current, const State::Attrib& target, GLenum texture, GLenum& inoutClientActiveTexture, GLuint& inoutArrayBufferBinding ) {
   bool sourceDelta = target.source != current.source;
 
   if ( ( current.enabled != target.enabled ) || sourceDelta ) {
@@ -346,7 +346,7 @@ size_t IndexedArrayNameToAttribIndex( GLenum array, GLuint index ) {
   }
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target, GLenum& inoutClientActiveTexture, GLuint& inoutArrayBufferBinding ) {
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target, GLenum& inoutClientActiveTexture, GLuint& inoutArrayBufferBinding ) {
   RegalAssert( dt.glEnableClientState );
   RegalAssert( dt.glDisableClientState );
 
@@ -415,11 +415,11 @@ void swap( State::Buffer& lhs, State::Buffer& rhs ) {
   swap( lhs.divisor, rhs.divisor );
 }
 
-void ApplyVertexAttribArrayEnable( const DispatchTable& dt, GLuint index, bool enable ) {
+void ApplyVertexAttribArrayEnable( const DispatchTableGL& dt, GLuint index, bool enable ) {
   ( enable ? dt.glEnableVertexAttribArray : dt.glDisableVertexAttribArray )( index );
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Attrib& current, const State::Attrib& target, GLuint index )
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State::Attrib& current, const State::Attrib& target, GLuint index )
 {
   UNUSED_PARAMETER(cap);
 
@@ -440,7 +440,7 @@ void Transition( const Capabilities& cap, const DispatchTable& dt, const State::
   }
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State::Buffer& current, const State::Buffer& target, GLuint index )
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State::Buffer& current, const State::Buffer& target, GLuint index )
 {
   UNUSED_PARAMETER(cap);
 
@@ -531,7 +531,7 @@ void swap( State& lhs, State& rhs ) {
   swap_array( lhs.buffer, rhs.buffer );
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target ) {
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target ) {
   for ( GLuint i = 0; i < COUNT_ATTRIBS; ++i ) {
     Transition( cap, dt, current.attrib[ i ], target.attrib[ i ], i );
   }
@@ -613,7 +613,7 @@ void swap( State& lhs, State& rhs ) {
   swap( lhs.primitiveRestartIndex, rhs.primitiveRestartIndex );
 }
 
-void Transition( const Capabilities& cap, const DispatchTable& dt, const State& current, const State& target ) {
+void Transition( const Capabilities& cap, const DispatchTableGL& dt, const State& current, const State& target ) {
   RegalAssert( dt.glBindVertexArray );
   RegalAssert( dt.glClientActiveTexture );
   RegalAssert( dt.glBindBuffer );

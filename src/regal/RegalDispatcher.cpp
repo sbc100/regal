@@ -37,7 +37,6 @@ REGAL_GLOBAL_BEGIN
 
 #include <algorithm>
 
-#include "RegalConfig.h"
 #include "RegalDispatcher.h"
 
 using namespace ::std;
@@ -50,73 +49,6 @@ Dispatcher::Dispatcher()
 : _front(NULL),
   _size(0)
 {
-  #if REGAL_TRACE
-  InitDispatchTableTrace(trace);
-  push_back(trace,Config::enableTrace);
-  #endif
-
-  #if REGAL_DEBUG
-  InitDispatchTableDebug(debug);
-  push_back(debug,Config::enableDebug);
-  #endif
-
-  #if REGAL_ERROR
-  InitDispatchTableError(error);
-  push_back(error,Config::enableError);
-  #endif
-
-  #if REGAL_EMULATION
-  ::memset(&emulation,0,sizeof(DispatchTable));
-  InitDispatchTableEmu(emulation);               // emulated functions only
-  push_back(emulation,Config::enableEmulation || Config::forceEmulation);
-  #endif
-
-  #if REGAL_CACHE
-  ::memset(&cache,0,sizeof(DispatchTable));
-  InitDispatchTableCache(cache);
-  push_back(cache,true);
-  #endif
-
-  #if REGAL_CODE
-  ::memset(&code,0,sizeof(DispatchTable));
-  InitDispatchTableCode(code);
-  push_back(code,Config::enableCode);
-  #endif
-
-  #if REGAL_STATISTICS
-  ::memset(&code,0,sizeof(DispatchTable));
-  InitDispatchTableStatistics(statistics);
-  push_back(statistics,Config::enableStatistics);
-  #endif
-
-  #if REGAL_LOG
-  InitDispatchTableLog(logging);
-  push_back(logging,Config::enableLog);
-  #endif
-
-  #if REGAL_DRIVER
-  #if REGAL_STATIC_ES2
-  ::memset(&driver,0,sizeof(DispatchTable));
-  InitDispatchTableStaticES2(driver);           // ES 2.0 functions only
-  #elif REGAL_SYS_PPAPI
-  ::memset(&driver,0,sizeof(DispatchTable));
-  InitDispatchTablePpapi(driver);               // ES 2.0 functions only
-  #else
-  InitDispatchTableLoader(driver);              // Desktop/ES2.0 lazy loader
-  #endif
-  push_back(driver,Config::enableDriver);
-  #endif
-
-  InitDispatchTableMissing(missing);
-  push_back(missing,true);
-
-  // Optionally move the error checking dispatch to downstream of emulation.
-  // This can be helpful for debugging Regal emulation
-
-  #if defined(REGAL_ERROR_POST_EMU)
-  if (erase(error))
-    insert(cache,error);
-  #endif
 }
 
 Dispatcher::~Dispatcher()
@@ -126,9 +58,6 @@ Dispatcher::~Dispatcher()
 void
 Dispatcher::push_back(DispatchTable &table, bool enabled)
 {
-  // Disabling the missing table would be bad!
-  RegalAssert(&table!=&missing || enabled==true);
-
   table._enabled = enabled;
   table._next = NULL;
   table._prev = NULL;

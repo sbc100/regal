@@ -127,7 +127,7 @@ namespace Emu {
     Internal("Regal::Xfer::SubImage2D","ctx=",ctx," target=",Token::GLenumToString(target)," internalFormat=",Token::GLenumToString(internalFormat)," level=",level," format=",Token::GLenumToString(format)," type=",Token::GLenumToString(type));
     RegalAssert(ctx);
 
-    DispatchTable & tbl = ctx->dispatcher.emulation;
+    DispatchTableGL & tbl = ctx->dispatcher.emulation;
     int complex = 0;
     int tgttype = 0;
     if ( format == GL_RGBA8 ) {
@@ -269,7 +269,7 @@ namespace Emu {
     Internal("Regal::Xfer::CompressedSubImage2D","target=", Token::GLenumToString(target), " level=", level,
              " format=", Token::GLenumToString(format));
     RegalAssert(ctx);
-    DispatchTable & tbl = ctx->dispatcher.emulation;
+    DispatchTableGL & tbl = ctx->dispatcher.emulation;
 
 #if !REGAL_NO_SQUISH
     if( ShouldDecompress( ctx, format ) )
@@ -339,7 +339,7 @@ void Xfer::TexImage2D( RegalContext * ctx, GLenum target, GLint level, GLint int
 {
   Internal("Regal::Xfer::TexImage2D","ctx=",ctx," target=",Token::GLenumToString(target)," level=",level," internalFormat=",Token::GLenumToString(internalFormat));
   RegalAssert(ctx);
-  DispatchTable &tbl = ctx->dispatcher.emulation;
+  DispatchTableGL &tbl = ctx->dispatcher.emulation;
 
   if (ctx->isCore() || ctx->isES2())
   {
@@ -422,7 +422,7 @@ void Xfer::CompressedTexImage2D( RegalContext * ctx, GLenum target, GLint level,
            " format=", Token::GLenumToString(internalFormat));
 
   RegalAssert(ctx);
-  DispatchTable & tbl = ctx->dispatcher.emulation;
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
   if( ShouldDecompress( ctx, internalFormat ) ) {
     Internal("Regal::Xfer::CompressedTexImage2D","decompressing texture data");
     GLenum ifmt = GL_RGBA;

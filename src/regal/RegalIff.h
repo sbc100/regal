@@ -707,7 +707,7 @@ struct Iff
 
     immShadowVao = 0;
 
-    DispatchTable &tbl = ctx.dispatcher.emulation;
+    DispatchTableGL &tbl = ctx.dispatcher.emulation;
     tbl.glGenVertexArrays( 1, & immVao );
     tbl.glBindVertexArray( immVao );
     BindVertexArray( &ctx, immVao ); // to keep ffn current
@@ -816,7 +816,7 @@ struct Iff
   void Flush( RegalContext * ctx )
   {
     if (immCurrent>0) {  // Do nothing for empty buffer
-      DispatchTable &tbl = ctx->dispatcher.emulation;
+      DispatchTableGL &tbl = ctx->dispatcher.emulation;
       tbl.glBufferData( GL_ARRAY_BUFFER, immCurrent * sizeof( Attributes ), immArray, GL_DYNAMIC_DRAW );
       if( ( ctx->info->core == true || ctx->info->es2 ) && immPrim == GL_QUADS ) {
         tbl.glDrawElements( GL_TRIANGLES, ( immCurrent / 4 ) * 6, GL_UNSIGNED_SHORT, 0 );
@@ -1569,11 +1569,11 @@ struct Iff
     State::Store store;
 
     void Init( RegalContext * ctx, const State::Store & sstore, const GLchar *vsSrc, const GLchar *fsSrc );
-    void Shader( RegalContext * ctx, DispatchTable & tbl, GLenum type, GLuint & shader, const GLchar *src );
+    void Shader( RegalContext * ctx, DispatchTableGL & tbl, GLenum type, GLuint & shader, const GLchar *src );
     void Attribs( RegalContext * ctx );
     void UserShaderModeAttribs( RegalContext * ctx );
-    void Samplers( RegalContext * ctx, DispatchTable & tbl );
-    void Uniforms( RegalContext * ctx, DispatchTable & tbl );
+    void Samplers( RegalContext * ctx, DispatchTableGL & tbl );
+    void Uniforms( RegalContext * ctx, DispatchTableGL & tbl );
   };
 
   MatrixStack modelview;

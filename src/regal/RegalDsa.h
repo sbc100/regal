@@ -54,9 +54,9 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-template<typename T> inline void DsaGetv( DispatchTable & tbl, GLenum pname, T * params ) { UNUSED_PARAMETER(tbl); UNUSED_PARAMETER(pname); UNUSED_PARAMETER(params);}
-template<> inline void DsaGetv( DispatchTable & tbl, GLenum pname, GLfloat * params ) { tbl.glGetFloatv( pname, params ); }
-template<> inline void DsaGetv( DispatchTable & tbl, GLenum pname, GLdouble * params ) { tbl.glGetDoublev( pname, params ); }
+template<typename T> inline void DsaGetv( DispatchTableGL & tbl, GLenum pname, T * params ) { UNUSED_PARAMETER(tbl); UNUSED_PARAMETER(pname); UNUSED_PARAMETER(params);}
+template<> inline void DsaGetv( DispatchTableGL & tbl, GLenum pname, GLfloat * params ) { tbl.glGetFloatv( pname, params ); }
+template<> inline void DsaGetv( DispatchTableGL & tbl, GLenum pname, GLdouble * params ) { tbl.glGetDoublev( pname, params ); }
 
 
 struct Dsa
@@ -493,7 +493,7 @@ struct Dsa
 
     void ClientAttribDefault( RegalContext * ctx, GLbitfield mask )
     {
-        DispatchTable &tbl = ctx->dispatcher.emulation;
+        DispatchTableGL &tbl = ctx->dispatcher.emulation;
 
         if (mask&GL_CLIENT_PIXEL_STORE_BIT)
         {
@@ -569,7 +569,7 @@ struct Dsa
 
     template< typename T >
     bool GetIndexedv( RegalContext * ctx, GLenum pname, GLuint index, T * params ) {
-        DispatchTable &tbl = ctx->dispatcher.emulation;
+        DispatchTableGL &tbl = ctx->dispatcher.emulation;
         switch( pname ) {
             case GL_PROGRAM_MATRIX_EXT:
                 ctx->dsa->DsaMatrixMode( ctx, GL_MATRIX0_ARB + index );
@@ -706,7 +706,7 @@ struct Dsa
     }
 
     GLboolean IsEnabledIndexed( RegalContext * ctx, GLenum pname, GLuint index ) {
-        DispatchTable &tbl = ctx->dispatcher.emulation;
+        DispatchTableGL &tbl = ctx->dispatcher.emulation;
         switch( pname ) {
             case GL_TEXTURE_1D:
             case GL_TEXTURE_2D:

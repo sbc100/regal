@@ -200,6 +200,12 @@ RegalContext::Init()
         info->regal_ext_blend_subtract = true;
         info->regalExtensionsSet.insert("GL_EXT_blend_subtract");
       }
+      if (!info->gl_ext_framebuffer_blit && ((info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit))
+      {
+        Internal("RegalContext::Init ","GL_EXT_framebuffer_blit");
+        info->regal_ext_framebuffer_blit = true;
+        info->regalExtensionsSet.insert("GL_EXT_framebuffer_blit");
+      }
       if (!info->gl_ext_framebuffer_object)
       {
         Internal("RegalContext::Init ","GL_EXT_framebuffer_object");

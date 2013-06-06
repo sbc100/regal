@@ -49,6 +49,7 @@ from RegalDispatchPpapi      import *
 from RegalDispatchStatistics import *
 from RegalDispatchStaticEGL  import *
 from RegalDispatchStaticES2  import *
+from RegalDispatchTrace      import *
 
 regalLicense = '''
 /*
@@ -88,6 +89,17 @@ regalLicense = '''
 */
 '''
 
+emulatedExts = {
+  'GL_ARB_texture_storage':     { 'emulatedBy' : 'texsto', 'emulatedIf' : '' },
+  'GL_EXT_blend_color':         { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_blend_subtract':      { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_direct_state_access': { 'emulatedBy' : 'dsa',    'emulatedIf' : '' },
+  'GL_EXT_framebuffer_blit':    { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit' },
+  'GL_EXT_framebuffer_object':  { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_NV_blend_square':         { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+}
+
+
 def cmpCategoryName(a,b):
   if a.category==b.category:
     return cmp(a.name,b.name)
@@ -124,6 +136,11 @@ def traverse(apis, args):
             if i.name=='defines':
               i.enumerants.sort(cmpCategoryName)
 
+        for e in api.extensions:
+          if e.name in emulatedExts:
+            e.emulatedBy = emulatedExts[e.name]['emulatedBy']
+            e.emulatedIf = emulatedExts[e.name]['emulatedIf']
+
         apiHasCtx = api.name == 'gl';
         toRemove = set()
 
@@ -151,6 +168,18 @@ def traverse(apis, args):
         for typedef in toRemove:
           api.typedefs.remove(typedef)
 
+				# Build a dict of default typedef values
+
+        api.defaults = {}
+        for i in apis:
+					for typedef in i.typedefs:
+						if getattr(typedef,'default',None)!=None:
+							api.defaults[typedef.name] = typedef.default
+
+        api.defaults['int']   = '0';
+        api.defaults['HDC']   = 'NULL';
+        api.defaults['HGLRC'] = 'NULL';
+
     traverseContextInfo(apis,args)
 
 def generate(apis, args):
@@ -172,6 +201,7 @@ def generate(apis, args):
   generatePpapiSource( apis, args )
   generateStaticES2Source( apis, args )
   generateStaticEGLSource( apis, args )
+  generateTraceSource( apis, args )
   generatePublicHeader(apis, args)
   generateDispatchHeader(apis, args)
   generateContextHeader(apis, args)

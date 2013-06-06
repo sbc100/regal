@@ -168,8 +168,8 @@ TEST( RegalClientStatePixelStore, Transition ) {
 
   Capabilities cap;
 
-  DispatchTable dt;
-  ::memset(&dt,0,sizeof(DispatchTable));
+  DispatchTableGL dt;
+  ::memset(&dt,0,sizeof(DispatchTableGL));
   dt._enabled = true;
   InitDispatchTableGMock( dt );
 
@@ -342,8 +342,8 @@ TEST( RegalClientStateVertexArrayFixedState, Transition ) {
   Capabilities cap;
   cap.driverAllowsVertexAttributeArraysWithoutBoundBuffer = true;
 
-  DispatchTable dt;
-  ::memset(&dt,0,sizeof(DispatchTable));
+  DispatchTableGL dt;
+  ::memset(&dt,0,sizeof(DispatchTableGL));
   dt._enabled = true;
   InitDispatchTableGMock( dt );
 
@@ -636,8 +636,8 @@ TEST( RegalClientStateVertexArrayGenericState, Transition ) {
 
   Capabilities cap;
 
-  DispatchTable dt;
-  ::memset(&dt,0,sizeof(DispatchTable));
+  DispatchTableGL dt;
+  ::memset(&dt,0,sizeof(DispatchTableGL));
   dt._enabled = true;
   InitDispatchTableGMock( dt );
 
@@ -772,8 +772,8 @@ TEST( RegalClientStateVertexArrayState, Transition ) {
 
   Capabilities cap;
 
-  DispatchTable dt;
-  ::memset(&dt,0,sizeof(DispatchTable));
+  DispatchTableGL dt;
+  ::memset(&dt,0,sizeof(DispatchTableGL));
   dt._enabled = true;
   InitDispatchTableGMock( dt );
 

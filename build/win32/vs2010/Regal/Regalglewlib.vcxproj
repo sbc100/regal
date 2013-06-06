@@ -69,10 +69,10 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Debug\x64\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\Win32\Regalglewlib\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Debug\x64\Regalglewlib\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">regalglewlib</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">regalglewlib</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">regalglewlib</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">regalglewlib</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">rglewlib</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">rglewlib</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">rglewlib</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">rglewlib</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -87,7 +87,7 @@
       </PrecompiledHeader>
       <AssemblerListingLocation>Release\Win32\Regalglewlib\</AssemblerListingLocation>
       <ObjectFileName>Release\Win32\Regalglewlib\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\Win32\regalglewlib.pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>Release\Win32\rglewlib.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
@@ -99,10 +99,10 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
-      <ProgramDatabaseFile>Release\Win32\regalglewlib.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>Release\Win32\rglewlib.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <ImportLibrary>Release\Win32\regalglewlib.lib</ImportLibrary>
+      <ImportLibrary>Release\Win32\rglewlib.lib</ImportLibrary>
     </Link>
     <Midl>
       <HeaderFileName>
@@ -126,7 +126,7 @@
       </PrecompiledHeader>
       <AssemblerListingLocation>Release\x64\Regalglewlib\</AssemblerListingLocation>
       <ObjectFileName>Release\x64\Regalglewlib\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\x64\regalglewlib.pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>Release\x64\rglewlib.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
@@ -139,9 +139,9 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
-      <ProgramDatabaseFile>Release\x64\regalglewlib.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>Release\x64\rglewlib.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>Release\x64\regalglewlib.lib</ImportLibrary>
+      <ImportLibrary>Release\x64\rglewlib.lib</ImportLibrary>
     </Link>
     <Midl>
       <HeaderFileName>
@@ -163,7 +163,7 @@
       </PrecompiledHeader>
       <AssemblerListingLocation>Debug\Win32\Regalglewlib\</AssemblerListingLocation>
       <ObjectFileName>Debug\Win32\Regalglewlib\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\Win32\regalglewlib.pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>Debug\Win32\rglewlib.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -177,10 +177,10 @@
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>Debug\Win32\regalglewlib.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>Debug\Win32\rglewlib.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <ImportLibrary>Debug\Win32\regalglewlib.lib</ImportLibrary>
+      <ImportLibrary>Debug\Win32\rglewlib.lib</ImportLibrary>
     </Link>
     <Midl>
       <HeaderFileName>
@@ -202,7 +202,7 @@
       </PrecompiledHeader>
       <AssemblerListingLocation>Debug\x64\Regalglewlib\</AssemblerListingLocation>
       <ObjectFileName>Debug\x64\Regalglewlib\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\x64\regalglewlib.pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>Debug\x64\rglewlib.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
@@ -216,9 +216,9 @@
       <AdditionalLibraryDirectories>Debug\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>Debug\x64\regalglewlib.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>Debug\x64\rglewlib.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
-      <ImportLibrary>Debug\x64\regalglewlib.lib</ImportLibrary>
+      <ImportLibrary>Debug\x64\rglewlib.lib</ImportLibrary>
     </Link>
     <Midl>
       <HeaderFileName>

@@ -62,7 +62,8 @@ REGAL_GLOBAL_END
 REGAL_NAMESPACE_BEGIN
 
 struct RegalContext;
-struct DispatchTable;
+struct DispatchTableGL;
+struct DispatchTableGlobal;
 
 namespace Thread
 {
@@ -102,12 +103,14 @@ struct ThreadLocal
 {
   inline ThreadLocal()
   : currentContext(NULL),
-    nextDispatchTable(NULL)
+    nextDispatchTable(NULL),
+    nextDispatchTableGlobal(NULL)
   {
   }
 
   RegalContext        *currentContext;
-  DispatchTable       *nextDispatchTable;
+  DispatchTableGL     *nextDispatchTable;
+  DispatchTableGlobal *nextDispatchTableGlobal;
 
   // Platform-specifics for thread-local storage
 

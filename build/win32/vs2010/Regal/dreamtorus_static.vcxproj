@@ -95,7 +95,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;regalglutlib.lib;regalglulib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>rglutlib.lib;rglulib.lib;regallib.lib;winmm.lib;ws2_32.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;snappylib.lib;pnglib.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -135,7 +135,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;regalglutlib.lib;regalglulib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>rglutlib.lib;rglulib.lib;regallib.lib;winmm.lib;ws2_32.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;snappylib.lib;pnglib.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -172,7 +172,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;regalglutlib.lib;regalglulib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>rglutlib.lib;rglulib.lib;regallib.lib;winmm.lib;ws2_32.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;snappylib.lib;pnglib.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -211,7 +211,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;regalglutlib.lib;regalglulib.lib;regallib.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>rglutlib.lib;rglulib.lib;regallib.lib;winmm.lib;ws2_32.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;snappylib.lib;pnglib.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>

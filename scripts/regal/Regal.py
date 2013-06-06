@@ -212,18 +212,6 @@ def generatePublicHeader(apis, args):
 
 def apiFuncDefineCode(apis, args):
 
-  # Build a dict of default typedef values
-
-  defaults = {}
-  for api in apis:
-    for typedef in api.typedefs:
-      if getattr(typedef,'default',None)!=None:
-        defaults[typedef.name] = typedef.default
-
-  defaults['int']   = '0';
-  defaults['HDC']   = 'NULL';
-  defaults['HGLRC'] = 'NULL';
-
   #
 
   code = ''
@@ -259,8 +247,8 @@ def apiFuncDefineCode(apis, args):
         if typeIsVoid(rType):
           c += ';\n'
         else:
-          if rTypes in defaults:
-            c += ' %s;\n' % ( defaults[rTypes] )
+          if rTypes in api.defaults:
+            c += ' %s;\n' % ( api.defaults[rTypes] )
           else:
             if rType[-1]=='*' or typeIsVoidPointer(rType):
               c += ' NULL;\n'
@@ -277,7 +265,7 @@ def apiFuncDefineCode(apis, args):
             c += '  #if REGAL_SYS_ES1\n'
             c += '  if (_context->isES1()) // Pass-through for ES1 only\n'
             c += '  {\n'
-            c += '    DispatchTable *_next = &_context->dispatcher.front();\n'
+            c += '    DispatchTableGL *_next = &_context->dispatcher.front();\n'
             c += '    RegalAssert(_next);\n    '
             if not typeIsVoid(rType):
               c += 'return '
@@ -299,7 +287,7 @@ def apiFuncDefineCode(apis, args):
         else:
           if getattr(function,'regalOnly',False)==False:
             t = ''
-            t += 'DispatchTable *_next = &_context->dispatcher.front();\n'
+            t += 'DispatchTableGL *_next = &_context->dispatcher.front();\n'
             t += 'RegalAssert(_next);\n'
 
             t += listToString(indent(emuCodeGen(emue,'pre'),''))
@@ -320,51 +308,30 @@ def apiFuncDefineCode(apis, args):
 
       else:
         c += '  %s\n' % logFunction(function, 'App' )
-
         c += listToString(indent(emuCodeGen(emue,'prefix'),'  '))
 
-        if api.name=='egl':
-          c += '\n'
-          c += '  #if !REGAL_STATIC_EGL\n'
+        if getattr(function,'regalOnly',False)==False:
+          c += '  DispatchTableGlobal *_next = &dispatcherGlobal.front();\n'
+          c += '  RegalAssert(_next);\n'
 
-        c += '  if (!dispatchTableGlobal.%s)\n' % name
-        c += '  {\n'
-        c += '    GetProcAddress( dispatchTableGlobal.%s, "%s" );\n' % ( name, name )
-        c += '    RegalAssert(dispatchTableGlobal.%s!=%s);\n' % ( name, name )
-        c += '    if (dispatchTableGlobal.%s==%s)\n' % ( name, name )
-        c += '      dispatchTableGlobal.%s = NULL;\n' % ( name )
-        c += '  }\n'
-
-        if api.name=='egl':
-          c += '  #endif // !REGAL_STATIC_EGL\n\n'
-
-        if not typeIsVoid(rType):
-          if rTypes in defaults:
-            c += '  %s ret = %s;\n' % ( rTypes, defaults[rTypes] )
-          else:
-            if rType[-1]=='*' or typeIsVoidPointer(rType):
-              c += '  %s ret = NULL;\n' % rTypes
+          if not typeIsVoid(rType):
+            if rTypes in api.defaults:
+              c += '  %s ret = %s;\n' % ( rTypes, api.defaults[rTypes] )
             else:
-              c += '  %s ret = (%s) 0;\n' % ( rTypes, rTypes )
+              if rType[-1]=='*' or typeIsVoidPointer(rType):
+                c += '  %s ret = NULL;\n' % rTypes
+              else:
+                c += '  %s ret = (%s) 0;\n' % ( rTypes, rTypes )
 
-        c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
+          c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
+          c += '  '
+          if not typeIsVoid(rType):
+            c += 'ret = '
+          c += '_next->call(&_next->%s)(%s);\n' % ( name, callParams )
 
-        c += '  if (dispatchTableGlobal.%s)\n' % name
-        c += '  {\n'
-        c += '    '
-        if not typeIsVoid(rType):
-          c += 'ret = '
-        c += 'dispatchTableGlobal.%s(%s);\n' % ( name, callParams )
-        c += '    %s\n' % logFunction( function, 'Driver', ret=not typeIsVoid(rType) )
-
-        c += listToString(indent(emuCodeGen(emue,'init'),'    '))
-
-        c += '  }\n'
-        c += '  else\n'
-        c += '    Warning( "%s not available." );\n' % name
+        c += listToString(indent(emuCodeGen(emue,'init'),'  '))
 
         c += listToString(indent(emuCodeGen(emue,'suffix'),'  '))
-
         if not typeIsVoid(rType):
           c += '  return ret;\n'
       c += '}\n\n'
@@ -665,6 +632,8 @@ REGAL_GLOBAL_BEGIN
 #include "RegalScopedPtr.h"
 #include "RegalFrame.h"
 #include "RegalMarker.h"
+#include "RegalDispatcherGL.h"
+#include "RegalDispatcherGlobal.h"
 
 using namespace REGAL_NAMESPACE_INTERNAL;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;

@@ -95,7 +95,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>../../../../src/regal/Regal.def</ModuleDefinitionFile>
@@ -135,7 +135,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>../../../../src/regal/Regal.def</ModuleDefinitionFile>
@@ -172,7 +172,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>../../../../src/regal/Regal.def</ModuleDefinitionFile>
@@ -211,7 +211,7 @@
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>../../../../src/regal/Regal.def</ModuleDefinitionFile>
@@ -260,8 +260,13 @@
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchStaticEGL.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchStaticES2.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchStatistics.cpp" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatchTrace.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatcher.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalDispatcher.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatcherGL.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalDispatcherGL.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatcherGlobal.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalDispatcherGlobal.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDllMain.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalDsa.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalEmu.h" />

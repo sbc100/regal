@@ -167,7 +167,7 @@ struct Obj
 
   void BindBuffer(RegalContext &ctx, GLenum target, GLuint bufferBinding)
   {
-    DispatchTable &tbl = ctx.dispatcher.emulation;
+    DispatchTableGL &tbl = ctx.dispatcher.emulation;
     tbl.glBindBuffer( target, bufferNames.ToDriverName( bufferBinding ) );
   }
 
@@ -195,7 +195,7 @@ struct Obj
 
   void BindVertexArray(RegalContext &ctx, GLuint vao)
   {
-    DispatchTable &tbl = ctx.dispatcher.emulation;
+    DispatchTableGL &tbl = ctx.dispatcher.emulation;
     tbl.glBindVertexArray( vaoNames.ToDriverName( vao ) );
   }
 
@@ -223,7 +223,7 @@ struct Obj
 
   void BindTexture(RegalContext &ctx, GLenum target, GLuint name)
   {
-    DispatchTable &tbl = ctx.dispatcher.emulation;
+    DispatchTableGL &tbl = ctx.dispatcher.emulation;
     tbl.glBindTexture( target, textureNames.ToDriverName( name ) );
   }
 

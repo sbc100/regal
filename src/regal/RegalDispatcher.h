@@ -47,47 +47,15 @@ REGAL_NAMESPACE_BEGIN
 struct Dispatcher
 {
 public:
-
-#if REGAL_DEBUG
-   DispatchTable debug;
-#endif
-
-#if REGAL_ERROR
-   DispatchTable error;
-#endif
-
-#if REGAL_EMULATION
-   DispatchTable emulation;
-#endif
-
-#if REGAL_CACHE
-   DispatchTable cache;
-#endif
-
-#if REGAL_CODE
-   DispatchTable code;
-#endif
-
-#if REGAL_STATISTICS
-   DispatchTable statistics;
-#endif
-
-#if REGAL_LOG
-   DispatchTable logging;
-#endif
-
-#if REGAL_TRACE
-   DispatchTable trace;
-#endif
-
-   DispatchTable driver;      // Underlying OpenGL/ES implementation
-
-   DispatchTable missing;     // Must have this last
-
-public:
   Dispatcher();
   ~Dispatcher();
 
+  inline std::size_t size() const
+  {
+    return _size;
+  }
+
+protected:
   void push_back(DispatchTable &table, bool enable);           // Push to the back of the stack
   bool erase    (DispatchTable &table);                        // Remove from dispatch stack
   bool insert   (DispatchTable &other, DispatchTable &table);  // Insert before the other
@@ -107,11 +75,6 @@ public:
   inline bool isEnabled(DispatchTable &table) const
   {
     return table._enabled;
-  }
-
-  inline std::size_t size() const
-  {
-    return _size;
   }
 
   inline DispatchTable &operator[](const std::size_t i)
@@ -137,21 +100,6 @@ private:
   DispatchTable                *_front;
   std::size_t                   _size;
 };
-
-//
-
-extern void InitDispatchTableCode      (DispatchTable &tbl);
-extern void InitDispatchTableDebug     (DispatchTable &tbl);
-extern void InitDispatchTableError     (DispatchTable &tbl);
-extern void InitDispatchTableEmu       (DispatchTable &tbl);
-extern void InitDispatchTableLog       (DispatchTable &tbl);
-extern void InitDispatchTableLoader    (DispatchTable &tbl);
-extern void InitDispatchTablePpapi     (DispatchTable &tbl);
-extern void InitDispatchTableStatistics(DispatchTable &tbl);
-extern void InitDispatchTableStaticES2 (DispatchTable &tbl);
-extern void InitDispatchTableMissing   (DispatchTable &tbl);
-extern void InitDispatchTableCache     (DispatchTable &tbl);
-extern void InitDispatchTableTrace     (DispatchTable &tbl);
 
 REGAL_NAMESPACE_END
 
