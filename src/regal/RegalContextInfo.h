@@ -649,6 +649,7 @@ struct ContextInfo
   GLboolean regal_ext_direct_state_access : 1;
   GLboolean regal_ext_framebuffer_blit : 1;
   GLboolean regal_ext_framebuffer_object : 1;
+  GLboolean regal_ibm_texture_mirrored_repeat : 1;
   GLboolean regal_nv_blend_square : 1;
 
 #if REGAL_SYS_WGL

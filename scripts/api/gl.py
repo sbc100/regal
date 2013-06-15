@@ -1403,6 +1403,7 @@ GL_PACK_IMAGE_HEIGHT = Enumerant('GL_PACK_IMAGE_HEIGHT', 0x806c, 'GL_VERSION_1_2
 GL_PACK_SKIP_IMAGES = Enumerant('GL_PACK_SKIP_IMAGES', 0x806b, 'GL_VERSION_1_2')
 GL_PROXY_TEXTURE_3D = Enumerant('GL_PROXY_TEXTURE_3D', 0x8070, 'GL_VERSION_1_2')
 GL_RESCALE_NORMAL = Enumerant('GL_RESCALE_NORMAL', 0x803a, 'GL_VERSION_1_2')
+GL_RESCALE_NORMAL.enableCap = True
 GL_SEPARATE_SPECULAR_COLOR = Enumerant('GL_SEPARATE_SPECULAR_COLOR', 0x81fa, 'GL_VERSION_1_2')
 GL_SINGLE_COLOR = Enumerant('GL_SINGLE_COLOR', 0x81f9, 'GL_VERSION_1_2')
 GL_SMOOTH_LINE_WIDTH_GRANULARITY = Enumerant('GL_SMOOTH_LINE_WIDTH_GRANULARITY', 0x0b23, 'GL_VERSION_1_2')
@@ -14475,7 +14476,7 @@ gl.add(glShadeModel)
 glStencilFunc = Function('glStencilFunc')
 glStencilFunc.ret = Return('void')
 glStencilFunc.add( Input( 'func','GLenum' ))
-glStencilFunc.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glStencilFunc.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(ref)' ))
 glStencilFunc.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilFunc.version = '1.0'
 glStencilFunc.category = 'GL_VERSION_1_0'
@@ -17292,7 +17293,7 @@ glStencilFuncSeparate = Function('glStencilFuncSeparate')
 glStencilFuncSeparate.ret = Return('void')
 glStencilFuncSeparate.add( Input( 'face','GLenum' ))
 glStencilFuncSeparate.add( Input( 'func','GLenum' ))
-glStencilFuncSeparate.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glStencilFuncSeparate.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(ref)' ))
 glStencilFuncSeparate.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilFuncSeparate.version = '2.0'
 glStencilFuncSeparate.category = 'GL_VERSION_2_0'
@@ -26823,7 +26824,7 @@ glStencilFuncSeparateATI = Function('glStencilFuncSeparateATI')
 glStencilFuncSeparateATI.ret = Return('void')
 glStencilFuncSeparateATI.add( Input( 'frontfunc','GLenum' ))
 glStencilFuncSeparateATI.add( Input( 'backfunc','GLenum' ))
-glStencilFuncSeparateATI.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glStencilFuncSeparateATI.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(ref)' ))
 glStencilFuncSeparateATI.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glStencilFuncSeparateATI.version = '1.2'
 glStencilFuncSeparateATI.category = 'GL_ATI_separate_stencil'
@@ -30109,7 +30110,7 @@ glNamedProgramStringEXT.add( Input( 'program','GLuint' ))
 glNamedProgramStringEXT.add( Input( 'target','GLenum' ))
 glNamedProgramStringEXT.add( Input( 'format','GLenum' ))
 glNamedProgramStringEXT.add( Input( 'len','GLsizei' ))
-glNamedProgramStringEXT.add( Input( 'string','const GLvoid *' ,size = 'len' ))
+glNamedProgramStringEXT.add( Input( 'string','const GLvoid *' ,size = 'len' ,cast = 'const char *' ))
 glNamedProgramStringEXT.version = '1.3'
 glNamedProgramStringEXT.category = 'GL_EXT_direct_state_access'
 glNamedProgramStringEXT.trace = True
@@ -37144,7 +37145,7 @@ gl.add(glPathStencilDepthOffsetNV)
 glPathStencilFuncNV = Function('glPathStencilFuncNV')
 glPathStencilFuncNV.ret = Return('void')
 glPathStencilFuncNV.add( Input( 'func','GLenum' ))
-glPathStencilFuncNV.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(mask)' ))
+glPathStencilFuncNV.add( Input( 'ref','GLint' ,regalLog = 'boost::print::hex(ref)' ))
 glPathStencilFuncNV.add( Input( 'mask','GLuint' ,regalLog = 'boost::print::hex(mask)' ))
 glPathStencilFuncNV.version = ''
 glPathStencilFuncNV.category = 'GL_NV_path_rendering'

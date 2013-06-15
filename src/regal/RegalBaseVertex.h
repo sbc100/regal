@@ -33,6 +33,10 @@
  Regal Draw Elements Base Vertex emu layer
  Nigel Stewart, Scott Nations
 
+ TODO:
+
+   - add logic to handle aliasing of named arrays onto generic arrays
+
  */
 
 #ifndef __REGAL_BASEVERTEX_H__
@@ -48,6 +52,7 @@ REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
 
+#include "RegalClientState.h"
 #include "RegalEmu.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
@@ -58,9 +63,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-// Work in progress...
-
-struct BaseVertex
+struct BaseVertex : public Client::State::VertexArray
 {
   void Init(RegalContext &ctx)
   {
@@ -72,54 +75,144 @@ struct BaseVertex
     UNUSED_PARAMETER(ctx);
   }
 
-  bool glDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+  void adjust(RegalContext &ctx, DispatchTableGL &dt, GLint basevertex)
   {
     UNUSED_PARAMETER(ctx);
-    UNUSED_PARAMETER(mode);
-    UNUSED_PARAMETER(count);
-    UNUSED_PARAMETER(type);
-    UNUSED_PARAMETER(indices);
-    UNUSED_PARAMETER(basevertex);
-    return false;
+
+    GLuint currentVBO = Client::State::VertexArray::arrayBufferBinding;
+
+    for (GLuint ii=0; ii<Client::State::nNamedArrays; ii++)
+    {
+      Client::State::NamedVertexArray &n = Client::State::VertexArray::named[ii];
+      if (n.enabled)
+      {
+        if (currentVBO != n.buffer)
+        {
+          currentVBO = n.buffer;
+          dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, currentVBO);
+        }
+
+        if (ii < 7)
+        {
+          switch (ii)
+          {
+            case Client::State::VERTEX:
+              dt.call(&dt.glVertexPointer)(n.size, n.type, n.stride, n.pointer);
+              break;
+            case Client::State::NORMAL:
+              dt.call(&dt.glNormalPointer)(n.type, n.stride, n.pointer);
+              break;
+            case Client::State::FOG_COORD:
+              dt.call(&dt.glFogCoordPointer)(n.type, n.stride, n.pointer);
+              break;
+            case Client::State::COLOR:
+              dt.call(&dt.glColorPointer)(n.size, n.type, n.stride, n.pointer);
+              break;
+            case Client::State::SECONDARY_COLOR:
+              dt.call(&dt.glSecondaryColorPointer)(n.size, n.type, n.stride, n.pointer);
+              break;
+            case Client::State::INDEX:
+              dt.call(&dt.glIndexPointer)(n.type, n.stride, n.pointer);
+              break;
+            case Client::State::EDGE_FLAG:
+              dt.call(&dt.glEdgeFlagPointer)(n.stride, n.pointer);
+              break;
+            default:
+              break;
+          }
+        }
+        else
+        {
+          GLuint index = static_cast<GLuint>(ii - 7);
+          dt.call(&dt.glMultiTexCoordPointerEXT)(GL_TEXTURE0+index, n.size, n.type, n.stride, n.pointer);
+        }
+      }
+    }
+
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
+    {
+      Client::State::GenericVertexArray &g = Client::State::VertexArray::generic[ii];
+      if (g.enabled)
+      {
+        Client::State::VertexBufferBindPoint &b = Client::State::VertexArray::bindings[g.bindingIndex];
+        GLvoid *p = reinterpret_cast<GLvoid *>(b.offset + (b.stride*basevertex));
+
+        if (currentVBO != b.buffer)
+        {
+          currentVBO = b.buffer;
+          dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, currentVBO);
+        }
+
+        if (g.isInteger)
+          dt.call(&dt.glVertexAttribIPointer)(ii, g.size, g.type, b.stride, p);
+        else if (g.isLong)
+          dt.call(&dt.glVertexAttribLPointer)(ii, g.size, g.type, b.stride, p);
+        else
+          dt.call(&dt.glVertexAttribPointer)(ii, g.size, g.type, g.normalized, b.stride, p);
+      }
+    }
+
+    if (currentVBO != Client::State::VertexArray::arrayBufferBinding)
+      dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, Client::State::VertexArray::arrayBufferBinding);
+  }
+
+  bool glDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+  {
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
+    if (basevertex)
+      adjust(ctx, dt, basevertex);
+    dt.call(&dt.glDrawElements)(mode, count, type, indices);
+    if (basevertex)
+      adjust(ctx, dt, 0);
+    return true;
   }
 
   bool glDrawRangeElementsBaseVertex(RegalContext &ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
   {
-    UNUSED_PARAMETER(ctx);
-    UNUSED_PARAMETER(mode);
-    UNUSED_PARAMETER(start);
-    UNUSED_PARAMETER(end);
-    UNUSED_PARAMETER(count);
-    UNUSED_PARAMETER(type);
-    UNUSED_PARAMETER(indices);
-    UNUSED_PARAMETER(basevertex);
-    return false;
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
+    if (basevertex)
+      adjust(ctx, dt, basevertex);
+    dt.call(&dt.glDrawRangeElements)(mode, start, end, count, type, indices);
+    if (basevertex)
+      adjust(ctx, dt, 0);
+    return true;
   }
 
   bool glDrawElementsInstancedBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex)
   {
-    UNUSED_PARAMETER(ctx);
-    UNUSED_PARAMETER(mode);
-    UNUSED_PARAMETER(count);
-    UNUSED_PARAMETER(type);
-    UNUSED_PARAMETER(indices);
-    UNUSED_PARAMETER(primcount);
-    UNUSED_PARAMETER(basevertex);
-    return false;
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
+    if (basevertex)
+      adjust(ctx, dt, basevertex);
+    dt.call(&dt.glDrawElementsInstanced)(mode, count, type, indices, primcount);
+    if (basevertex)
+      adjust(ctx, dt, 0);
+    return true;
+  }
+
+  bool glDrawElementsInstancedBaseVertexBaseInstance(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance)
+  {
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
+    if (basevertex)
+      adjust(ctx, dt, basevertex);
+    dt.call(&dt.glDrawElementsInstancedBaseInstance)(mode, count, type, indices, primcount, baseinstance);
+    if (basevertex)
+      adjust(ctx, dt, 0);
+    return true;
   }
 
   bool glMultiDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const* indices, GLsizei primcount, const GLint *basevertex)
   {
-    UNUSED_PARAMETER(ctx);
-    UNUSED_PARAMETER(mode);
-    UNUSED_PARAMETER(count);
-    UNUSED_PARAMETER(type);
-    UNUSED_PARAMETER(indices);
-    UNUSED_PARAMETER(primcount);
-    UNUSED_PARAMETER(basevertex);
-    return false;
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
+    for (GLsizei ii=0; ii<primcount; ii++)
+    {
+      if (basevertex[ii])
+        adjust(ctx, dt, basevertex[ii]);
+      dt.call(&dt.glDrawElements)(mode, count[ii], type, indices[ii]);
+      if (basevertex[ii])
+        adjust(ctx, dt, 0);
+    }
+    return true;
   }
-
 };
 
 }

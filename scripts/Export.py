@@ -90,13 +90,14 @@ regalLicense = '''
 '''
 
 emulatedExts = {
-  'GL_ARB_texture_storage':     { 'emulatedBy' : 'texsto', 'emulatedIf' : '' },
-  'GL_EXT_blend_color':         { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
-  'GL_EXT_blend_subtract':      { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
-  'GL_EXT_direct_state_access': { 'emulatedBy' : 'dsa',    'emulatedIf' : '' },
-  'GL_EXT_framebuffer_blit':    { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit' },
-  'GL_EXT_framebuffer_object':  { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
-  'GL_NV_blend_square':         { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_ARB_texture_storage':           { 'emulatedBy' : 'texsto', 'emulatedIf' : '' },
+  'GL_EXT_blend_color':               { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_blend_subtract':            { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_direct_state_access':       { 'emulatedBy' : 'dsa',    'emulatedIf' : '' },
+  'GL_EXT_framebuffer_blit':          { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit' },
+  'GL_EXT_framebuffer_object':        { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_IBM_texture_mirrored_repeat':   { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_NV_blend_square':               { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
 }
 
 

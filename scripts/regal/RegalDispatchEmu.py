@@ -92,7 +92,7 @@ def apiEmuFuncDefineCode(apis, args):
                       if l['plugin']:
                         code += '        #if REGAL_PLUGIN\n'
                         code += '        Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();\n'
-                        code += '        Push<DispatchTable *> pushDispatchTable(_instance.nextDispatchTable);\n'
+                        code += '        Push<DispatchTableGL *> pushDispatchTable(_instance.nextDispatchTable);\n'
                         code += '        _instance.nextDispatchTable = &_context->dispatcher.emulation;\n'
                         code += '        #endif\n'
 
@@ -142,7 +142,7 @@ def apiEmuFuncDefineCode(apis, args):
                       if l['plugin']:
                         code += '        #if REGAL_PLUGIN\n'
                         code += '        Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();\n'
-                        code += '        Push<DispatchTable *> pushDispatchTable(_instance.nextDispatchTable);\n'
+                        code += '        Push<DispatchTableGL *> pushDispatchTable(_instance.nextDispatchTable);\n'
                         code += '        _instance.nextDispatchTable = &_context->dispatcher.emulation;\n'
                         code += '        #endif\n'
 

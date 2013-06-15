@@ -4896,6 +4896,7 @@ struct Statistics
   GLuint enable_GL_POLYGON_SMOOTH;
   GLuint enable_GL_SCISSOR_TEST;
   GLuint enable_GL_STENCIL_TEST;
+  GLuint enable_GL_RESCALE_NORMAL;
   GLuint enable_GL_MULTISAMPLE;
   GLuint enable_GL_SAMPLE_ALPHA_TO_COVERAGE;
   GLuint enable_GL_SAMPLE_ALPHA_TO_ONE;
@@ -4931,6 +4932,7 @@ struct Statistics
   GLuint disable_GL_POLYGON_SMOOTH;
   GLuint disable_GL_SCISSOR_TEST;
   GLuint disable_GL_STENCIL_TEST;
+  GLuint disable_GL_RESCALE_NORMAL;
   GLuint disable_GL_MULTISAMPLE;
   GLuint disable_GL_SAMPLE_ALPHA_TO_COVERAGE;
   GLuint disable_GL_SAMPLE_ALPHA_TO_ONE;

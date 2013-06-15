@@ -846,6 +846,7 @@ static void REGAL_CALL statistics_glDisable(GLenum cap)
     case GL_POLYGON_SMOOTH:                       statistics.disable_GL_POLYGON_SMOOTH++;                      break;
     case GL_SCISSOR_TEST:                         statistics.disable_GL_SCISSOR_TEST++;                        break;
     case GL_STENCIL_TEST:                         statistics.disable_GL_STENCIL_TEST++;                        break;
+    case GL_RESCALE_NORMAL:                       statistics.disable_GL_RESCALE_NORMAL++;                      break;
     case GL_MULTISAMPLE:                          statistics.disable_GL_MULTISAMPLE++;                         break;
     case GL_SAMPLE_ALPHA_TO_COVERAGE:             statistics.disable_GL_SAMPLE_ALPHA_TO_COVERAGE++;            break;
     case GL_SAMPLE_ALPHA_TO_ONE:                  statistics.disable_GL_SAMPLE_ALPHA_TO_ONE++;                 break;
@@ -955,6 +956,7 @@ static void REGAL_CALL statistics_glEnable(GLenum cap)
     case GL_POLYGON_SMOOTH:                       statistics.enable_GL_POLYGON_SMOOTH++;                       break;
     case GL_SCISSOR_TEST:                         statistics.enable_GL_SCISSOR_TEST++;                         break;
     case GL_STENCIL_TEST:                         statistics.enable_GL_STENCIL_TEST++;                         break;
+    case GL_RESCALE_NORMAL:                       statistics.enable_GL_RESCALE_NORMAL++;                       break;
     case GL_MULTISAMPLE:                          statistics.enable_GL_MULTISAMPLE++;                          break;
     case GL_SAMPLE_ALPHA_TO_COVERAGE:             statistics.enable_GL_SAMPLE_ALPHA_TO_COVERAGE++;             break;
     case GL_SAMPLE_ALPHA_TO_ONE:                  statistics.enable_GL_SAMPLE_ALPHA_TO_ONE++;                  break;

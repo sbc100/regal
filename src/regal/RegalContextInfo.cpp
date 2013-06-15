@@ -621,6 +621,7 @@ ContextInfo::ContextInfo()
   regal_ext_direct_state_access(false),
   regal_ext_framebuffer_blit(false),
   regal_ext_framebuffer_object(false),
+  regal_ibm_texture_mirrored_repeat(false),
   regal_nv_blend_square(false),
 #if REGAL_SYS_WGL
   wgl_3dl_stereo_control(false),
@@ -1982,7 +1983,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_IBM_multimode_draw_arrays")) return gl_ibm_multimode_draw_arrays;
   if (!strcmp(ext,"GL_IBM_rasterpos_clip")) return gl_ibm_rasterpos_clip;
   if (!strcmp(ext,"GL_IBM_static_data")) return gl_ibm_static_data;
-  if (!strcmp(ext,"GL_IBM_texture_mirrored_repeat")) return gl_ibm_texture_mirrored_repeat;
+  if (!strcmp(ext,"GL_IBM_texture_mirrored_repeat")) return regal_ibm_texture_mirrored_repeat || gl_ibm_texture_mirrored_repeat;
   if (!strcmp(ext,"GL_IBM_vertex_array_lists")) return gl_ibm_vertex_array_lists;
   if (!strcmp(ext,"GL_IMG_multisampled_render_to_texture")) return gl_img_multisampled_render_to_texture;
   if (!strcmp(ext,"GL_IMG_program_binary")) return gl_img_program_binary;

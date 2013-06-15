@@ -418,13 +418,52 @@ dsaFormulae = {
             'return _dispatch.call(&_dispatch.glUnmapBuffer)( GL_ARRAY_BUFFER );',
         ],
     },
-    'DsaBufferPointerCommands' : {
-        'entries' : [ ],
-#       'entries' : [ 'glVertexArray(Vertex|Color|EdgeFlag|Index|Normal|TexCoord|MultiTexCoord|FogCoord|SecondaryColor|VertexAttrib|VertexAttribI)OffsetEXT' ],
+    'DsaVertexArrayOffsetCommands3' : {
+        'entries' : [ 'glVertexArray(EdgeFlag)OffsetEXT' ],
         'impl' : [
             '_context->dsa->DsaVao( _context, ${arg0} );'
             '_context->dsa->DsaBuffer( _context, ${arg1} );',
-            '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2plus} );',
+            '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2}, reinterpret_cast<const GLvoid *>(${arg3}) );',
+        ],
+    },
+    'DsaVertexArrayPointerOffsets4' : {
+        'entries' : [ 'glVertexArray(Index|Normal|FogCoord)OffsetEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );'
+            '_context->dsa->DsaBuffer( _context, ${arg1} );',
+            '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2}, ${arg3}, reinterpret_cast<const GLvoid *>(${arg4}) );',
+        ],
+    },
+    'DsaVertexArrayOffsetCommands5' : {
+        'entries' : [ 'glVertexArray(Vertex|Color|TexCoord|SecondaryColor)OffsetEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );'
+            '_context->dsa->DsaBuffer( _context, ${arg1} );',
+            '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2}, ${arg3}, ${arg4}, reinterpret_cast<const GLvoid *>(${arg5}) );',
+        ],
+    },
+    'DsaVertexArrayOffsetCommands6' : {
+        'entries' : [ 'glVertexArray(VertexAttribI)OffsetEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );'
+            '_context->dsa->DsaBuffer( _context, ${arg1} );',
+            '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2}, ${arg3}, ${arg4}, ${arg5}, reinterpret_cast<const GLvoid *>(${arg6}) );',
+        ],
+    },
+    'DsaVertexArrayOffsetCommands6EXT' : {
+        'entries' : [ 'glVertexArray(MultiTexCoord)OffsetEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );'
+            '_context->dsa->DsaBuffer( _context, ${arg1} );',
+            '_dispatch.call(&_dispatch.gl${m1}PointerEXT)( ${arg2}, ${arg3}, ${arg4}, ${arg5}, reinterpret_cast<const GLvoid *>(${arg6}) );',
+        ],
+    },
+    'DsaVertexArrayOffsetCommands7' : {
+        'entries' : [ 'glVertexArray(VertexAttrib)OffsetEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );'
+            '_context->dsa->DsaBuffer( _context, ${arg1} );',
+            '_dispatch.call(&_dispatch.gl${m1}Pointer)( ${arg2}, ${arg3}, ${arg4}, ${arg5}, ${arg6}, reinterpret_cast<const GLvoid *>(${arg7}) );',
         ],
     },
     'Delete' : {
@@ -446,6 +485,18 @@ dsaFormulae = {
             },
         },
         'prefix' : [ '_context->dsa->Delete${method}( _context, ${arg0plus} );', ],
+    },
+    'VertexArrayEnable' : {
+        'entries' : [ 'gl(Enable|Disable)VertexArrayEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );',
+            'if ( ${arg1} >= GL_TEXTURE0 && ${arg1} <= GL_TEXTURE31) {',
+            '  _context->dsa->DsaClientActiveTexture( _context, ${arg1} );',
+            '  _dispatch.call(&_dispatch.gl${m1}ClientState)( GL_TEXTURE_COORD_ARRAY );',
+            '} else {',
+            '  _dispatch.call(&_dispatch.gl${m1}ClientState)( ${arg1} );',
+            '}'
+        ],
     },
 }
 

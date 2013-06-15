@@ -2366,7 +2366,7 @@ static void REGAL_CALL log_glStencilFunc(GLenum func, GLint ref, GLuint mask)
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glStencilFunc)(func, ref, mask);
-    Driver("glStencilFunc","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    Driver("glStencilFunc","(", toString(func), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilMask(GLuint mask)
@@ -4950,7 +4950,7 @@ static void REGAL_CALL log_glStencilFuncSeparate(GLenum face, GLenum func, GLint
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glStencilFuncSeparate)(face, func, ref, mask);
-    Driver("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    Driver("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilMaskSeparate(GLenum face, GLuint mask)
@@ -13422,7 +13422,7 @@ static void REGAL_CALL log_glStencilFuncSeparateATI(GLenum frontfunc, GLenum bac
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glStencilFuncSeparateATI)(frontfunc, backfunc, ref, mask);
-    Driver("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    Driver("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass)
@@ -16165,7 +16165,7 @@ static void REGAL_CALL log_glNamedProgramStringEXT(GLuint program, GLenum target
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glNamedProgramStringEXT)(program, target, format, len, string);
-    Driver("glNamedProgramStringEXT","(", program, ", ", toString(target), ", ", toString(format), ", ", len, ", ", boost::print::optional(string,Logging::pointers), ")");
+    Driver("glNamedProgramStringEXT","(", program, ", ", toString(target), ", ", toString(format), ", ", len, ", ", boost::print::quote(reinterpret_cast<const char *>(string),'"'), ")");
 }
 
 static void REGAL_CALL log_glNamedRenderbufferStorageEXT(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height)
@@ -22449,7 +22449,7 @@ static void REGAL_CALL log_glPathStencilFuncNV(GLenum func, GLint ref, GLuint ma
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPathStencilFuncNV)(func, ref, mask);
-    Driver("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    Driver("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
 }
 
 static void REGAL_CALL log_glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString)
@@ -28458,7 +28458,7 @@ static BOOL REGAL_CALL log_wglUseFontOutlinesA(HDC hDC, DWORD first, DWORD count
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     BOOL  ret = _next->call(&_next->wglUseFontOutlinesA)(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
-    Driver("wglUseFontOutlinesA","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ", ", lpgmf, ")", " returned ", ret);
+    Driver("wglUseFontOutlinesA","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ", ", boost::print::optional(lpgmf,Logging::pointers), ")", " returned ", ret);
     return ret;
 }
 
@@ -28467,7 +28467,7 @@ static BOOL REGAL_CALL log_wglUseFontOutlinesW(HDC hDC, DWORD first, DWORD count
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     BOOL  ret = _next->call(&_next->wglUseFontOutlinesW)(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
-    Driver("wglUseFontOutlinesW","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ", ", lpgmf, ")", " returned ", ret);
+    Driver("wglUseFontOutlinesW","(", boost::print::optional(hDC,Logging::pointers), ", ", first, ", ", count, ", ", listBase, ", ", deviation, ", ", extrusion, ", ", format, ", ", boost::print::optional(lpgmf,Logging::pointers), ")", " returned ", ret);
     return ret;
 }
 

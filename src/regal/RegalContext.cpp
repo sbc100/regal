@@ -212,6 +212,12 @@ RegalContext::Init()
         info->regal_ext_framebuffer_object = true;
         info->regalExtensionsSet.insert("GL_EXT_framebuffer_object");
       }
+      if (!info->gl_ibm_texture_mirrored_repeat)
+      {
+        Internal("RegalContext::Init ","GL_IBM_texture_mirrored_repeat");
+        info->regal_ibm_texture_mirrored_repeat = true;
+        info->regalExtensionsSet.insert("GL_IBM_texture_mirrored_repeat");
+      }
       if (!info->gl_nv_blend_square)
       {
         Internal("RegalContext::Init ","GL_NV_blend_square");

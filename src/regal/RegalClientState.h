@@ -82,8 +82,16 @@ REGAL_NAMESPACE_BEGIN
 //    SIGGRAPH 2002
 //    http://graphics.stanford.edu/papers/cr/
 //
+// TODO:
+//
+//  - handle glInterleavedArrays
+//  - handle DSA VertexArray*OffsetEXT (maybe)
+//
 
-namespace ClientState
+namespace Client
+{
+
+namespace State
 {
 
   using   ::boost::print::hex;
@@ -134,7 +142,7 @@ namespace ClientState
     TEX_COORD       = 7
   } vaName;
 
-  GLenum vaEnum[][6] =
+  const GLenum vaEnum[][6] =
   {
     { GL_VERTEX_ARRAY,          GL_VERTEX_ARRAY_POINTER,          GL_VERTEX_ARRAY_BUFFER_BINDING,          GL_VERTEX_ARRAY_SIZE,          GL_VERTEX_ARRAY_TYPE,          GL_VERTEX_ARRAY_STRIDE          },
     { GL_NORMAL_ARRAY,          GL_NORMAL_ARRAY_POINTER,          GL_NORMAL_ARRAY_BUFFER_BINDING,          GL_ZERO,                       GL_NORMAL_ARRAY_TYPE,          GL_NORMAL_ARRAY_STRIDE          },
@@ -629,6 +637,16 @@ namespace ClientState
       SetEnablei(cap, index, GL_FALSE);
     }
 
+    inline void glEnableIndexedEXT(GLenum cap, GLuint index)
+    {
+      SetEnablei(cap, index, GL_TRUE);
+    }
+
+    inline void glDisableIndexedEXT(GLenum cap, GLuint index)
+    {
+      SetEnablei(cap, index, GL_FALSE);
+    }
+
     void SetEnableClientStatei(GLenum cap, GLuint index, GLboolean enabled)
     {
       // only handle these if no VAO is bound
@@ -677,17 +695,27 @@ namespace ClientState
       SetEnableClientStatei(cap, 0, GL_FALSE);
     }
 
-    inline void glEnableClientStatei(GLenum cap, GLuint index)
+    inline void glEnableClientStateiEXT(GLenum cap, GLuint index)
     {
       SetEnableClientStatei(cap, index, GL_TRUE);
     }
 
-    inline void glDisableClientStatei(GLenum cap, GLuint index)
+    inline void glDisableClientStateiEXT(GLenum cap, GLuint index)
     {
       SetEnableClientStatei(cap, index, GL_FALSE);
     }
 
-    void BindBuffer( GLenum target, GLuint buffer )
+    inline void glEnableClientStateIndexedEXT(GLenum cap, GLuint index)
+    {
+      SetEnableClientStatei(cap, index, GL_TRUE);
+    }
+
+    inline void glDisableClientStateIndexedEXT(GLenum cap, GLuint index)
+    {
+      SetEnableClientStatei(cap, index, GL_FALSE);
+    }
+
+    void glBindBuffer( GLenum target, GLuint buffer )
     {
       switch (target)
       {
@@ -800,6 +828,80 @@ namespace ClientState
       glMultiTexCoordPointerEXT(clientActiveTexture,size,type,stride,pointer);
     }
 
+    GLsizei computeEffectiveStride(GLsizei stride, GLint size, GLenum type)
+    {
+      if (stride != 0)
+        return stride;
+
+      // when stride == 0, compute effectiveStride based on size and type
+
+      if (size == GL_BGRA)
+        return 4;
+
+      switch (type)
+      {
+        case GL_BYTE:
+        case GL_UNSIGNED_BYTE:
+          break;
+        case GL_INT_2_10_10_10_REV:
+        case GL_UNSIGNED_INT_2_10_10_10_REV:
+          // size must be 4 for these. Just return that.
+          break;
+        case GL_SHORT:
+        case GL_UNSIGNED_SHORT:
+        case GL_HALF_FLOAT:
+          size *= 2;
+          break;
+        case GL_INT:
+        case GL_UNSIGNED_INT:
+        case GL_FLOAT:
+        case GL_FIXED:
+          size *= 4;
+          break;
+        case GL_DOUBLE:
+          size *= 8;
+          break;
+        default:
+          size = 0;
+          break;
+      }
+
+      return size;
+    }
+
+    void glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer)
+    {
+      if (!vertexArrayBinding)
+      {
+        glVertexAttribFormat(index, size, type, normalized, 0);
+        glVertexAttribBinding(index, index);
+        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
+        glBindVertexBuffer(index, arrayBufferBinding, (char *)pointer - (char *)NULL, effectiveStride);
+      }
+    }
+
+    void glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
+    {
+      if (!vertexArrayBinding)
+      {
+        glVertexAttribIFormat(index, size, type, 0);
+        glVertexAttribBinding(index, index);
+        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
+        glBindVertexBuffer(index, arrayBufferBinding, (char *)pointer - (char *)NULL, effectiveStride);
+      }
+    }
+
+    void glVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
+    {
+      if (!vertexArrayBinding)
+      {
+        glVertexAttribLFormat(index, size, type, 0);
+        glVertexAttribBinding(index, index);
+        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
+        glBindVertexBuffer(index, arrayBufferBinding, (char *)pointer - (char *)NULL, effectiveStride);
+      }
+    }
+
     void glBindVertexBuffer(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
     {
       if (!vertexArrayBinding)
@@ -807,6 +909,15 @@ namespace ClientState
         bindings[bindingindex].buffer = buffer;
         bindings[bindingindex].offset = offset;
         bindings[bindingindex].stride = stride;
+      }
+    }
+
+    inline void glVertexAttribDivisor(GLuint index, GLuint divisor)
+    {
+      if (!vertexArrayBinding)
+      {
+        generic[index].bindingIndex = index;
+        bindings[index].divisor = divisor;
       }
     }
 
@@ -888,6 +999,8 @@ namespace ClientState
       vertexArrayBinding = array;
     }
   };
+}
+
 }
 
 REGAL_NAMESPACE_END

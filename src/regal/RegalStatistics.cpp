@@ -4911,6 +4911,7 @@ Statistics::log() const
   log("glEnable(GL_POLYGON_SMOOTH)",enable_GL_POLYGON_SMOOTH);
   log("glEnable(GL_SCISSOR_TEST)",enable_GL_SCISSOR_TEST);
   log("glEnable(GL_STENCIL_TEST)",enable_GL_STENCIL_TEST);
+  log("glEnable(GL_RESCALE_NORMAL)",enable_GL_RESCALE_NORMAL);
   log("glEnable(GL_MULTISAMPLE)",enable_GL_MULTISAMPLE);
   log("glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE)",enable_GL_SAMPLE_ALPHA_TO_COVERAGE);
   log("glEnable(GL_SAMPLE_ALPHA_TO_ONE)",enable_GL_SAMPLE_ALPHA_TO_ONE);
@@ -4946,6 +4947,7 @@ Statistics::log() const
   log("glDisable(GL_POLYGON_SMOOTH)",disable_GL_POLYGON_SMOOTH);
   log("glDisable(GL_SCISSOR_TEST)",disable_GL_SCISSOR_TEST);
   log("glDisable(GL_STENCIL_TEST)",disable_GL_STENCIL_TEST);
+  log("glDisable(GL_RESCALE_NORMAL)",disable_GL_RESCALE_NORMAL);
   log("glDisable(GL_MULTISAMPLE)",disable_GL_MULTISAMPLE);
   log("glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE)",disable_GL_SAMPLE_ALPHA_TO_COVERAGE);
   log("glDisable(GL_SAMPLE_ALPHA_TO_ONE)",disable_GL_SAMPLE_ALPHA_TO_ONE);

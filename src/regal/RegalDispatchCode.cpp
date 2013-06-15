@@ -4049,7 +4049,7 @@ static void REGAL_CALL code_glStencilFunc(GLenum func, GLint ref, GLuint mask)
     string_list< ::std::string > _code;
     _code << indent << "glStencilFunc(";
                    _code << toString(func);
-    _code << ", "; _code << "0x" << boost::print::hex(mask);
+    _code << ", "; _code << "0x" << boost::print::hex(ref);
     _code << ", "; _code << "0x" << boost::print::hex(mask);
     _code << ");\n";
     if (_context->codeSource)
@@ -8803,7 +8803,7 @@ static void REGAL_CALL code_glStencilFuncSeparate(GLenum face, GLenum func, GLin
     _code << indent << "glStencilFuncSeparate(";
                    _code << toString(face);
     _code << ", "; _code << toString(func);
-    _code << ", "; _code << "0x" << boost::print::hex(mask);
+    _code << ", "; _code << "0x" << boost::print::hex(ref);
     _code << ", "; _code << "0x" << boost::print::hex(mask);
     _code << ");\n";
     if (_context->codeSource)
@@ -24397,7 +24397,7 @@ static void REGAL_CALL code_glStencilFuncSeparateATI(GLenum frontfunc, GLenum ba
     _code << indent << "glStencilFuncSeparateATI(";
                    _code << toString(frontfunc);
     _code << ", "; _code << toString(backfunc);
-    _code << ", "; _code << "0x" << boost::print::hex(mask);
+    _code << ", "; _code << "0x" << boost::print::hex(ref);
     _code << ", "; _code << "0x" << boost::print::hex(mask);
     _code << ");\n";
     if (_context->codeSource)
@@ -29669,7 +29669,7 @@ static void REGAL_CALL code_glNamedProgramStringEXT(GLuint program, GLenum targe
     _code << ", "; _code << toString(target);
     _code << ", "; _code << toString(format);
     _code << ", "; _code << len;
-    _code << ", "; _code << string;
+    _code << ", "; _code << boost::print::quote(reinterpret_cast<const char *>(string),'"');
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -41214,7 +41214,7 @@ static void REGAL_CALL code_glPathStencilFuncNV(GLenum func, GLint ref, GLuint m
     string_list< ::std::string > _code;
     _code << indent << "glPathStencilFuncNV(";
                    _code << toString(func);
-    _code << ", "; _code << "0x" << boost::print::hex(mask);
+    _code << ", "; _code << "0x" << boost::print::hex(ref);
     _code << ", "; _code << "0x" << boost::print::hex(mask);
     _code << ");\n";
     if (_context->codeSource)

@@ -2527,7 +2527,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFunc(GLenum func, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFunc","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    App("glStencilFunc","(", toString(func), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -5109,7 +5109,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    App("glStencilFuncSeparate","(", toString(face), ", ", toString(func), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -13537,7 +13537,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    App("glStencilFuncSeparateATI","(", toString(frontfunc), ", ", toString(backfunc), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16297,7 +16297,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glNamedProgramStringEXT(GLuint program, GLenum target, GLenum format, GLsizei len, const GLvoid *string)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glNamedProgramStringEXT","(", program, ", ", toString(target), ", ", toString(format), ", ", len, ", ", boost::print::optional(string,Logging::pointers), ")");
+    App("glNamedProgramStringEXT","(", program, ", ", toString(target), ", ", toString(format), ", ", len, ", ", boost::print::quote(reinterpret_cast<const char *>(string),'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22578,7 +22578,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(mask), ", ", boost::print::hex(mask), ")");
+    App("glPathStencilFuncNV","(", toString(func), ", ", boost::print::hex(ref), ", ", boost::print::hex(mask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
