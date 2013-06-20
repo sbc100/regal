@@ -87,8 +87,7 @@ namespace Emu {
     void GenerateMipmap(const RegalContext &ctx, GLenum target);
     void PolygonMode (const RegalContext &ctx, GLenum face, GLenum mode);
     void RenderMode  (const RegalContext &ctx, GLenum mode);
-    void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLint   param);
-    void TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param);
+    bool FilterTexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam);
     void PixelStorei (const RegalContext &ctx, GLenum pname, GLint param);
     bool FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment);
 

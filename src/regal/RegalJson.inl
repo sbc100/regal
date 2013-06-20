@@ -13,6 +13,7 @@
 #define set_json_regal_config_dispatch_emulation_enable_filter(value)    Config::enableEmuFilter = value
 #define set_json_regal_config_dispatch_emulation_enable_iff(value)       Config::enableEmuIff = value
 #define set_json_regal_config_dispatch_emulation_enable_obj(value)       Config::enableEmuObj = value
+#define set_json_regal_config_dispatch_emulation_enable_path(value)      Config::enableEmuPath = value
 #define set_json_regal_config_dispatch_emulation_enable_ppa(value)       Config::enableEmuPpa = value
 #define set_json_regal_config_dispatch_emulation_enable_ppca(value)      Config::enableEmuPpca = value
 #define set_json_regal_config_dispatch_emulation_enable_rect(value)      Config::enableEmuRect = value
@@ -27,6 +28,7 @@
 #define set_json_regal_config_dispatch_emulation_force_filter(value)     Config::forceEmuFilter = value
 #define set_json_regal_config_dispatch_emulation_force_iff(value)        Config::forceEmuIff = value
 #define set_json_regal_config_dispatch_emulation_force_obj(value)        Config::forceEmuObj = value
+#define set_json_regal_config_dispatch_emulation_force_path(value)       Config::forceEmuPath = value
 #define set_json_regal_config_dispatch_emulation_force_ppa(value)        Config::forceEmuPpa = value
 #define set_json_regal_config_dispatch_emulation_force_ppca(value)       Config::forceEmuPpca = value
 #define set_json_regal_config_dispatch_emulation_force_rect(value)       Config::forceEmuRect = value
@@ -54,9 +56,12 @@
 #define set_json_regal_config_frame_md5_mask_depth(value)                Config::frameMd5DepthMask = (size_t)(value)
 #define set_json_regal_config_frame_md5_mask_stencil(value)              Config::frameMd5StencilMask = (unsigned char)(value)
 #define set_json_regal_config_frame_md5_stencil(value)                   Config::frameMd5Stencil = value
-#define set_json_regal_config_frame_save_color(value)                    Config::frameSaveColor = value
-#define set_json_regal_config_frame_save_depth(value)                    Config::frameSaveStencil = value
-#define set_json_regal_config_frame_save_stencil(value)                  Config::frameSaveStencil = value
+#define set_json_regal_config_frame_save_enable_color(value)             Config::frameSaveColor = value
+#define set_json_regal_config_frame_save_enable_depth(value)             Config::frameSaveDepth = value
+#define set_json_regal_config_frame_save_enable_stencil(value)           Config::frameSaveStencil = value
+#define set_json_regal_config_frame_save_prefix_color(value)             Config::frameSaveColorPrefix = value
+#define set_json_regal_config_frame_save_prefix_depth(value)             Config::frameSaveDepthPrefix = value
+#define set_json_regal_config_frame_save_prefix_stencil(value)           Config::frameSaveStencilPrefix = value
 #define set_json_regal_config_system_egl(value)                          Config::sysEGL = value
 #define set_json_regal_config_system_es1(value)                          Config::sysES1 = value
 #define set_json_regal_config_system_es2(value)                          Config::sysES2 = value

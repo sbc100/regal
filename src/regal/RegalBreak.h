@@ -54,8 +54,10 @@ namespace Break {
 
   // debug breakpoint functions
 
-  extern void ErrorCB(GLenum e);    // Error dispatch
-  extern void Filter();             // Filter emulation layer
+  extern void ErrorCB(GLenum e);    ///< Error dispatch
+  extern void logError();           ///< Error log event
+  extern void logWarning();         ///< Warning log event
+  extern void Filter();             ///< Filter emulation layer
 
 }
 

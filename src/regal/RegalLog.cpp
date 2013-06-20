@@ -42,6 +42,7 @@ REGAL_GLOBAL_BEGIN
 
 #include "RegalLog.h"
 #include "RegalTimer.h"
+#include "RegalBreak.h"
 #include "RegalMarker.h"
 #include "RegalThread.h"
 #include "RegalContext.h"
@@ -562,6 +563,15 @@ namespace Logging {
       UNUSED_PARAMETER(line);
 #else
       m = print_string(file,":",line," ",m);
+#endif
+
+#if REGAL_BREAK
+      switch (mode)
+      {
+        case LOG_WARNING: Break::logWarning(); break;
+        case LOG_ERROR:   Break::logError();   break;
+        default:                               break;
+      }
 #endif
 
 #if REGAL_LOG_ONCE

@@ -78,6 +78,7 @@ namespace Config {
   bool enableEmuTexSto     = REGAL_EMU_TEXSTO;
   bool enableEmuXfer       = REGAL_EMU_XFER;
   bool enableEmuDsa        = REGAL_EMU_DSA;
+  bool enableEmuPath       = REGAL_EMU_PATH;
   bool enableEmuRect       = REGAL_EMU_RECT;
   bool enableEmuBaseVertex = REGAL_EMU_BASEVERTEX;
   bool enableEmuIff        = REGAL_EMU_IFF;
@@ -93,6 +94,7 @@ namespace Config {
   bool forceEmuTexSto      = REGAL_FORCE_EMU_TEXSTO;
   bool forceEmuXfer        = REGAL_FORCE_EMU_XFER;
   bool forceEmuDsa         = REGAL_FORCE_EMU_DSA;
+  bool forceEmuPath        = REGAL_FORCE_EMU_PATH;
   bool forceEmuRect        = REGAL_FORCE_EMU_RECT;
   bool forceEmuBaseVertex  = REGAL_FORCE_EMU_BASEVERTEX;
   bool forceEmuIff         = REGAL_FORCE_EMU_IFF;
@@ -114,6 +116,10 @@ namespace Config {
   bool frameSaveColor             = false;
   bool frameSaveStencil           = false;
   bool frameSaveDepth             = false;
+
+  ::std::string frameSaveColorPrefix  ("color_");
+  ::std::string frameSaveStencilPrefix("stencil_");
+  ::std::string frameSaveDepthPrefix  ("depth_");
 
   bool          cache             = REGAL_CACHE;
   bool          cacheShader       = false;
@@ -281,6 +287,11 @@ namespace Config {
     if (tmp) enableEmuDsa = atoi(tmp)!=0;
 #endif
 
+#if REGAL_EMU_PATH
+    tmp = GetEnv( "REGAL_EMU_PATH" );
+    if (tmp) enableEmuPath = atoi(tmp)!=0;
+#endif
+
 #if REGAL_EMU_RECT
     tmp = GetEnv( "REGAL_EMU_RECT" );
     if (tmp) enableEmuRect = atoi(tmp)!=0;
@@ -351,6 +362,11 @@ namespace Config {
 #if REGAL_EMU_DSA
     tmp = GetEnv( "REGAL_FORCE_EMU_DSA" );
     if (tmp) forceEmuDsa = atoi(tmp)!=0;
+#endif
+
+#if REGAL_EMU_PATH
+    tmp = GetEnv( "REGAL_FORCE_EMU_PATH" );
+    if (tmp) forceEmuPath = atoi(tmp)!=0;
 #endif
 
 #if REGAL_EMU_RECT
@@ -544,6 +560,7 @@ namespace Config {
     Info("REGAL_EMU_TEXSTO          ", enableEmuTexSto     ? "enabled" : "disabled");
     Info("REGAL_EMU_XFER            ", enableEmuXfer       ? "enabled" : "disabled");
     Info("REGAL_EMU_DSA             ", enableEmuDsa        ? "enabled" : "disabled");
+    Info("REGAL_EMU_PATH            ", enableEmuPath       ? "enabled" : "disabled");
     Info("REGAL_EMU_RECT            ", enableEmuRect       ? "enabled" : "disabled");
     Info("REGAL_EMU_BASEVERTEX      ", enableEmuBaseVertex ? "enabled" : "disabled");
     Info("REGAL_EMU_IFF             ", enableEmuIff        ? "enabled" : "disabled");
@@ -559,6 +576,7 @@ namespace Config {
     Info("REGAL_FORCE_EMU_TEXSTO    ", forceEmuTexSto      ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_XFER      ", forceEmuXfer        ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_DSA       ", forceEmuDsa         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_PATH      ", forceEmuPath        ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_RECT      ", forceEmuRect        ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_BASEVERTEX", forceEmuBaseVertex  ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_IFF       ", forceEmuIff         ? "enabled" : "disabled");
@@ -640,6 +658,7 @@ namespace Config {
             jo.member("texsto", enableEmuTexSto);
             jo.member("xfer",   enableEmuXfer);
             jo.member("dsa",    enableEmuDsa);
+            jo.member("path",   enableEmuPath);
             jo.member("rect",   enableEmuRect);
             jo.member("bv",     enableEmuBaseVertex);
             jo.member("iff",    enableEmuIff);
@@ -657,6 +676,7 @@ namespace Config {
             jo.member("texsto", forceEmuTexSto);
             jo.member("xfer",   forceEmuXfer);
             jo.member("dsa",    forceEmuDsa);
+            jo.member("path",   forceEmuPath);
             jo.member("rect",   forceEmuRect);
             jo.member("bv",     forceEmuBaseVertex);
             jo.member("iff",    forceEmuIff);
@@ -683,9 +703,16 @@ namespace Config {
           jo.end();
         jo.end();
         jo.object("save");
-          jo.member("color",   frameSaveColor);
-          jo.member("stencil", frameSaveStencil);
-          jo.member("depth",   frameSaveDepth);
+          jo.object("enable");
+            jo.member("color",   frameSaveColor);
+            jo.member("stencil", frameSaveStencil);
+            jo.member("depth",   frameSaveDepth);
+          jo.end();
+          jo.object("prefix");
+            jo.member("color",   frameSaveColorPrefix);
+            jo.member("stencil", frameSaveStencilPrefix);
+            jo.member("depth",   frameSaveDepthPrefix);
+          jo.end();
         jo.end();
       jo.end();
 

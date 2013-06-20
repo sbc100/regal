@@ -300,6 +300,7 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalMac.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalMarker.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalMarker.h" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalNamespace.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalObj.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalPixelConversions.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPixelConversions.h" />

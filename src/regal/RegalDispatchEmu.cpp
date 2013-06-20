@@ -16648,14 +16648,14 @@ static void REGAL_CALL emu_glTexParameterf(GLenum target, GLenum pname, GLfloat 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        _context->filt->TexParameter(*_context, target, pname, param);
-        if (_context->filt->Filtered())
-        {
-          #if REGAL_BREAK
-          Break::Filter();
-          #endif
-          return ;
-        }
+        DispatchTableGL *_next = _context->dispatcher.emulation.next();
+        RegalAssert(_next);
+        GLfloat newparam;
+        if (_context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(param), newparam))
+          _next->call(&_next->glTexParameterf)(target, pname, newparam);
+        else
+          _next->call(&_next->glTexParameterf)(target, pname, param);
+        return;
       }
       #endif
     default:
@@ -16702,7 +16702,12 @@ static void REGAL_CALL emu_glTexParameterfv(GLenum target, GLenum pname, const G
       #if REGAL_EMU_SO
       if (_context->so) break;
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -16733,7 +16738,24 @@ static void REGAL_CALL emu_glTexParameterfv(GLenum target, GLenum pname, const G
         return;
       }
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        DispatchTableGL *_next = _context->dispatcher.emulation.next();
+        RegalAssert(_next);
+        GLfloat newparam;
+        if (params && _context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(params[0]), newparam))
+          _next->call(&_next->glTexParameterf)(target, pname, newparam);
+        else
+          _next->call(&_next->glTexParameterfv)(target, pname, params);
+        return;
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();
@@ -16822,14 +16844,14 @@ static void REGAL_CALL emu_glTexParameteri(GLenum target, GLenum pname, GLint pa
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        _context->filt->TexParameter(*_context, target, pname, param);
-        if (_context->filt->Filtered())
-        {
-          #if REGAL_BREAK
-          Break::Filter();
-          #endif
-          return ;
-        }
+        DispatchTableGL *_next = _context->dispatcher.emulation.next();
+        RegalAssert(_next);
+        GLfloat newparam;
+        if (_context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(param), newparam))
+          _next->call(&_next->glTexParameteri)(target, pname, newparam);
+        else
+          _next->call(&_next->glTexParameteri)(target, pname, param);
+        return;
       }
       #endif
     default:
@@ -16876,7 +16898,12 @@ static void REGAL_CALL emu_glTexParameteriv(GLenum target, GLenum pname, const G
       #if REGAL_EMU_SO
       if (_context->so) break;
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -16907,7 +16934,24 @@ static void REGAL_CALL emu_glTexParameteriv(GLenum target, GLenum pname, const G
         return;
       }
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        DispatchTableGL *_next = _context->dispatcher.emulation.next();
+        RegalAssert(_next);
+        GLfloat newparam;
+        if (params && _context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(params[0]), newparam))
+          _next->call(&_next->glTexParameteri)(target, pname, newparam);
+        else
+          _next->call(&_next->glTexParameteriv)(target, pname, params);
+        return;
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();
@@ -19561,6 +19605,14 @@ static void REGAL_CALL emu_glInterleavedArrays(GLenum format, GLsizei stride, co
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glInterleavedArrays( format, stride, pointer );
+      }
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -32320,7 +32372,7 @@ static void REGAL_CALL emu_glDrawElementsInstancedBaseVertexBaseInstance(GLenum 
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
         if( ! _context->bv->glDrawElementsInstancedBaseVertexBaseInstance( *_context, mode, count, type, indices, primcount, basevertex, baseinstance ) ) {
-          _context->dispatcher.emulation.glDrawElementsInstancedBaseVertex( mode, count, type, indices, primcount, basevertex, baseinstance );
+          _context->dispatcher.emulation.glDrawElementsInstancedBaseVertexBaseInstance( mode, count, type, indices, primcount, basevertex, baseinstance );
         }
         return;
       }
@@ -46931,14 +46983,57 @@ static void REGAL_CALL emu_glDisableVertexArrayAttribEXT(GLuint vaobj, GLenum ar
         _context->ppca->ShadowDisableVertexArrayAttribDSA( vaobj, array );
       }
       #endif
+    case 11 :
+    case 10 :
+    case 9 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glDisableVertexArrayAttribEXT( vaobj, array );
+      }
+      #endif
     case 1 :
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glDisableVertexArrayAttribEXT)(vaobj, array);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 8;
+        _context->dsa->DsaVao( _context, vaobj );
+        _dispatch.call(&_dispatch.glDisableVertexAttribArray)( array );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glDisableVertexArrayAttribEXT)(vaobj, array);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glDisableVertexArrayEXT(GLuint vaobj, GLenum array)
@@ -46966,6 +47061,16 @@ static void REGAL_CALL emu_glDisableVertexArrayEXT(GLuint vaobj, GLenum array)
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glDisableVertexArrayEXT( vaobj, array );
+      }
       #endif
     case 1 :
     default:
@@ -47175,14 +47280,57 @@ static void REGAL_CALL emu_glEnableVertexArrayAttribEXT(GLuint vaobj, GLenum arr
         _context->ppca->ShadowEnableVertexArrayAttribDSA( vaobj, array );
       }
       #endif
+    case 11 :
+    case 10 :
+    case 9 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glEnableVertexArrayAttribEXT( vaobj, array );
+      }
+      #endif
     case 1 :
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glEnableVertexArrayAttribEXT)(vaobj, array);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 8;
+        _context->dsa->DsaVao( _context, vaobj );
+        _dispatch.call(&_dispatch.glEnableVertexAttribArray)( array );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glEnableVertexArrayAttribEXT)(vaobj, array);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glEnableVertexArrayEXT(GLuint vaobj, GLenum array)
@@ -47210,6 +47358,16 @@ static void REGAL_CALL emu_glEnableVertexArrayEXT(GLuint vaobj, GLenum array)
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glEnableVertexArrayEXT( vaobj, array );
+      }
       #endif
     case 1 :
     default:
@@ -57953,6 +58111,16 @@ static void REGAL_CALL emu_glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buff
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayColorOffsetEXT( vaobj, buffer, size, type, stride, offset );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -58015,6 +58183,16 @@ static void REGAL_CALL emu_glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint b
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayEdgeFlagOffsetEXT( vaobj, buffer, stride, offset );
+      }
       #endif
     case 1 :
     default:
@@ -58079,6 +58257,16 @@ static void REGAL_CALL emu_glVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint b
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayFogCoordOffsetEXT( vaobj, buffer, type, stride, offset );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -58141,6 +58329,16 @@ static void REGAL_CALL emu_glVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buff
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayIndexOffsetEXT( vaobj, buffer, type, stride, offset );
+      }
       #endif
     case 1 :
     default:
@@ -58205,6 +58403,16 @@ static void REGAL_CALL emu_glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLu
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayMultiTexCoordOffsetEXT( vaobj, buffer, texunit, size, type, stride, offset );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -58267,6 +58475,16 @@ static void REGAL_CALL emu_glVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buf
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayNormalOffsetEXT( vaobj, buffer, type, stride, offset );
+      }
       #endif
     case 1 :
     default:
@@ -58331,6 +58549,16 @@ static void REGAL_CALL emu_glVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GL
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArraySecondaryColorOffsetEXT( vaobj, buffer, size, type, stride, offset );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -58393,6 +58621,16 @@ static void REGAL_CALL emu_glVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint b
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayTexCoordOffsetEXT( vaobj, buffer, size, type, stride, offset );
+      }
       #endif
     case 1 :
     default:
@@ -58457,6 +58695,16 @@ static void REGAL_CALL emu_glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLu
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayVertexAttribIOffsetEXT( vaobj, buffer, index, size, type, stride, offset );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -58520,6 +58768,16 @@ static void REGAL_CALL emu_glVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLui
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
       #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayVertexAttribOffsetEXT( vaobj, buffer, index, size, type, normalized, stride, offset );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -58582,6 +58840,16 @@ static void REGAL_CALL emu_glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buf
     case 9 :
       #if REGAL_EMU_DSA
       if (_context->dsa) break;
+      #endif
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->bv->glVertexArrayVertexOffsetEXT( vaobj, buffer, size, type, stride, offset );
+      }
       #endif
     case 1 :
     default:

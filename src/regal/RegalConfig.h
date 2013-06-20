@@ -92,6 +92,7 @@ namespace Config
   extern bool enableEmuTexSto;
   extern bool enableEmuXfer;
   extern bool enableEmuDsa;
+  extern bool enableEmuPath;
   extern bool enableEmuRect;
   extern bool enableEmuBaseVertex;
   extern bool enableEmuIff;
@@ -109,6 +110,7 @@ namespace Config
   extern bool forceEmuTexSto;
   extern bool forceEmuXfer;
   extern bool forceEmuDsa;
+  extern bool forceEmuPath;
   extern bool forceEmuRect;
   extern bool forceEmuBaseVertex;
   extern bool forceEmuIff;
@@ -132,6 +134,10 @@ namespace Config
   extern bool frameSaveColor;    // Save color buffer to PNG file
   extern bool frameSaveStencil;
   extern bool frameSaveDepth;
+
+  extern ::std::string frameSaveColorPrefix;	// Filename prefix for saved PNGs
+  extern ::std::string frameSaveStencilPrefix;
+  extern ::std::string frameSaveDepthPrefix;
 
   // Caching
 

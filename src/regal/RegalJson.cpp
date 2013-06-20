@@ -79,7 +79,9 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
@@ -121,8 +123,13 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_FRAME_MD5,
   JSON_REGAL_CONFIG_FRAME,
   JSON_REGAL_CONFIG_FRAME_SAVE,
+  JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE,
+  JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE,
+  JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE,
   JSON_REGAL_CONFIG_FRAME_SAVE,
-  JSON_REGAL_CONFIG_FRAME_SAVE,
+  JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX,
+  JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX,
+  JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX,
   JSON_REGAL_CONFIG,
   JSON_REGAL_CONFIG_SYSTEM,
   JSON_REGAL_CONFIG_SYSTEM,
@@ -220,6 +227,7 @@ Parser::onPush(const string &name)
       if (name=="filter"      ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_FILTER; return; }
       if (name=="iff"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_IFF;   return; }
       if (name=="obj"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_OBJ;   return; }
+      if (name=="path"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PATH;  return; }
       if (name=="ppa"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPA;   return; }
       if (name=="ppca"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA;  return; }
       if (name=="rect"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_RECT;  return; }
@@ -237,6 +245,7 @@ Parser::onPush(const string &name)
       if (name=="filter"      ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_FILTER; return; }
       if (name=="iff"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_IFF;    return; }
       if (name=="obj"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_OBJ;    return; }
+      if (name=="path"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PATH;   return; }
       if (name=="ppa"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPA;    return; }
       if (name=="ppca"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA;   return; }
       if (name=="rect"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_RECT;   return; }
@@ -288,9 +297,20 @@ Parser::onPush(const string &name)
       break;
 
     case JSON_REGAL_CONFIG_FRAME_SAVE:
-      if (name=="color"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_COLOR;                return; }
-      if (name=="depth"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_DEPTH;                return; }
-      if (name=="stencil"     ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_STENCIL;              return; }
+      if (name=="enable"      ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE;               return; }
+      if (name=="prefix"      ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX;               return; }
+      break;
+
+    case JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE:
+      if (name=="color"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE_COLOR;         return; }
+      if (name=="depth"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE_DEPTH;         return; }
+      if (name=="stencil"     ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE_STENCIL;       return; }
+      break;
+
+    case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX:
+      if (name=="color"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_COLOR;         return; }
+      if (name=="depth"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_DEPTH;         return; }
+      if (name=="stencil"     ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_STENCIL;       return; }
       break;
 
     case JSON_REGAL_CONFIG_SYSTEM:
@@ -379,6 +399,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_FILTER: { set_json_regal_config_dispatch_emulation_enable_filter(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_IFF   : { set_json_regal_config_dispatch_emulation_enable_iff(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_OBJ   : { set_json_regal_config_dispatch_emulation_enable_obj(value);  return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PATH  : { set_json_regal_config_dispatch_emulation_enable_path(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPA   : { set_json_regal_config_dispatch_emulation_enable_ppa(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA  : { set_json_regal_config_dispatch_emulation_enable_ppca(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_RECT  : { set_json_regal_config_dispatch_emulation_enable_rect(value); return; }
@@ -393,6 +414,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_FILTER : { set_json_regal_config_dispatch_emulation_force_filter(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_IFF    : { set_json_regal_config_dispatch_emulation_force_iff(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_OBJ    : { set_json_regal_config_dispatch_emulation_force_obj(value);   return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PATH   : { set_json_regal_config_dispatch_emulation_force_path(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPA    : { set_json_regal_config_dispatch_emulation_force_ppa(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA   : { set_json_regal_config_dispatch_emulation_force_ppca(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_RECT   : { set_json_regal_config_dispatch_emulation_force_rect(value);  return; }
@@ -416,9 +438,9 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_FRAME_MD5_COLOR                 : { set_json_regal_config_frame_md5_color(value);                return; }
     case JSON_REGAL_CONFIG_FRAME_MD5_DEPTH                 : { set_json_regal_config_frame_md5_depth(value);                return; }
     case JSON_REGAL_CONFIG_FRAME_MD5_STENCIL               : { set_json_regal_config_frame_md5_stencil(value);              return; }
-    case JSON_REGAL_CONFIG_FRAME_SAVE_COLOR                : { set_json_regal_config_frame_save_color(value);               return; }
-    case JSON_REGAL_CONFIG_FRAME_SAVE_DEPTH                : { set_json_regal_config_frame_save_depth(value);               return; }
-    case JSON_REGAL_CONFIG_FRAME_SAVE_STENCIL              : { set_json_regal_config_frame_save_stencil(value);             return; }
+    case JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE_COLOR         : { set_json_regal_config_frame_save_enable_color(value);        return; }
+    case JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE_DEPTH         : { set_json_regal_config_frame_save_enable_depth(value);        return; }
+    case JSON_REGAL_CONFIG_FRAME_SAVE_ENABLE_STENCIL       : { set_json_regal_config_frame_save_enable_stencil(value);      return; }
     case JSON_REGAL_CONFIG_SYSTEM_EGL                      : { set_json_regal_config_system_egl(value);                     return; }
     case JSON_REGAL_CONFIG_SYSTEM_ES1                      : { set_json_regal_config_system_es1(value);                     return; }
     case JSON_REGAL_CONFIG_SYSTEM_ES2                      : { set_json_regal_config_system_es2(value);                     return; }
@@ -475,6 +497,9 @@ Parser::onValue(const string &value)
   {
     case JSON_REGAL_CONFIG_CONFIGFILE                      : { set_json_regal_config_configfile(value);                     return; }
     case JSON_REGAL_CONFIG_CACHE_DIRECTORY                 : { set_json_regal_config_cache_directory(value);                return; }
+    case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_COLOR         : { set_json_regal_config_frame_save_prefix_color(value);        return; }
+    case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_DEPTH         : { set_json_regal_config_frame_save_prefix_depth(value);        return; }
+    case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_STENCIL       : { set_json_regal_config_frame_save_prefix_stencil(value);      return; }
     case JSON_REGAL_LOGGING_FILENAME                       : { set_json_regal_logging_filename(value);                      return; }
     case JSON_REGAL_LOGGING_JSONFILE                       : { set_json_regal_logging_jsonfile(value);                      return; }
     default:

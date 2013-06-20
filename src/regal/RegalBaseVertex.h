@@ -156,7 +156,7 @@ struct BaseVertex : public Client::State::VertexArray
       dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, Client::State::VertexArray::arrayBufferBinding);
   }
 
-  bool glDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+  bool glDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
   {
     DispatchTableGL &dt = ctx.dispatcher.emulation;
     if (basevertex)
@@ -167,7 +167,7 @@ struct BaseVertex : public Client::State::VertexArray
     return true;
   }
 
-  bool glDrawRangeElementsBaseVertex(RegalContext &ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex)
+  bool glDrawRangeElementsBaseVertex(RegalContext &ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
   {
     DispatchTableGL &dt = ctx.dispatcher.emulation;
     if (basevertex)

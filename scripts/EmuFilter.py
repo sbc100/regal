@@ -112,7 +112,6 @@ formulae = {
       'gl(PixelStorei)',
       'gl(PolygonMode)',
       'gl(RenderMode)',
-      'gl(TexParameter)(i|f)',
       ],
     'impl' : [
        '_context->filt->${m1}(*_context, ${arg0plus});',
@@ -123,6 +122,38 @@ formulae = {
        '  #endif',
        '  return ${dummyretval};',
        '}'
+     ]
+  },
+
+  'texParameter' : {
+    'entries' : [
+      'glTexParameter(i|f)',
+      ],
+    'impl' : [
+       'DispatchTableGL *_next = _context->dispatcher.emulation.next();',
+       'RegalAssert(_next);',
+       'GLfloat newparam;',
+       'if (_context->filt->FilterTexParameter(*_context, ${arg0}, ${arg1}, static_cast<GLfloat>(${arg2}), newparam))',
+       '  _next->call(&_next->glTexParameter${m1})(${arg0}, ${arg1}, newparam);',
+       'else',
+       '  _next->call(&_next->glTexParameter${m1})(${arg0plus});',
+       'return;',
+     ]
+  },
+
+  'texParameterv' : {
+    'entries' : [
+      'glTexParameter(i|f)v',
+      ],
+    'impl' : [
+       'DispatchTableGL *_next = _context->dispatcher.emulation.next();',
+       'RegalAssert(_next);',
+       'GLfloat newparam;',
+       'if (${arg2} && _context->filt->FilterTexParameter(*_context, ${arg0}, ${arg1}, static_cast<GLfloat>(${arg2}[0]), newparam))',
+       '  _next->call(&_next->glTexParameter${m1})(${arg0}, ${arg1}, newparam);',
+       'else',
+       '  _next->call(&_next->glTexParameter${m1}v)(${arg0plus});',
+       'return;',
      ]
   },
 

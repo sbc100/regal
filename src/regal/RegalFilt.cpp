@@ -158,33 +158,28 @@ namespace Emu {
       }
   }
 
-  void Filt::TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLint param)
+  bool Filt::FilterTexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam)
   {
-    TexParameter(ctx,target,pname,GLfloat(param));
-  }
+    if (!ctx.isES2() && !ctx.isCore())
+      return false;
 
-  void Filt::TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param)
-  {
-    UNUSED_PARAMETER(ctx);
-    UNUSED_PARAMETER(target);
-    UNUSED_PARAMETER(pname);
-    UNUSED_PARAMETER(param);
+    switch(pname)
+    {
+      case GL_TEXTURE_WRAP_S:
+      case GL_TEXTURE_WRAP_T:
+      case GL_TEXTURE_WRAP_R:
+        switch(int(param))
+        {
+          case GL_CLAMP:
+            Warning("Regal does not support GL_CLAMP wrap mode for core or ES 2.0 profiles - remapping to equivalent GL_CLAMP_TO_EDGE");
+            newParam = GL_CLAMP_TO_EDGE;
+            return true;
+          default: break;
+        }
+      default: break;
+    }
 
-    if (ctx.isCore() || ctx.isES2())
-      switch(pname)
-      {
-        case GL_TEXTURE_WRAP_S:
-        case GL_TEXTURE_WRAP_T:
-        case GL_TEXTURE_WRAP_R:
-          switch(int(param))
-          {
-            case GL_CLAMP:
-              Warning("Regal does not support GL_CLAMP wrap mode for core or ES 2.0 profiles - skipping.");
-              filtered = true;
-            default: break;
-          }
-        default: break;
-      }
+    return false;
   }
 
   bool Filt::FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment)

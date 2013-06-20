@@ -58,6 +58,16 @@ namespace Break {
     UNUSED_PARAMETER(e);
   }
 
+  extern void logError()
+  {
+    ;
+  }
+
+  extern void logWarning()
+  {
+    ;
+  }
+
   extern void Filter()
   {
     ;

@@ -5,7 +5,7 @@ baseVertexFormulae = {
     'entries' : [ 'gl(Multi|)Draw(Range|)Elements(Instanced|)BaseVertex(BaseInstance|)' ],
     'impl'    : [
       'if( ! _context->bv->gl${m1}Draw${m2}Elements${m3}BaseVertex${m4}( *_context, ${arg0plus} ) ) {',
-      '  _context->dispatcher.emulation.gl${m1}Draw${m2}Elements${m3}BaseVertex( ${arg0plus} );',
+      '  _context->dispatcher.emulation.gl${m1}Draw${m2}Elements${m3}BaseVertex${m4}( ${arg0plus} );',
       '}',
     ],
   },
@@ -44,5 +44,21 @@ baseVertexFormulae = {
   'VertexAttribPointer' : {
     'entries' : [ 'glVertexAttrib(I|L|)Pointer' ],
     'prefix'  : [ '_context->bv->glVertexAttrib${m1}Pointer( ${arg0plus} );', ],
+  },
+  'VertexArrayEnable' : {
+      'entries' : [ 'gl(Enable|Disable)VertexArrayEXT' ],
+      'prefix'  : [ '_context->bv->gl${m1}VertexArrayEXT( ${arg0plus} );', ],
+  },
+  'VertexArrayAttribEnable' : {
+      'entries' : [ 'gl(Enable|Disable)VertexArrayAttribEXT' ],
+      'prefix'  : [ '_context->bv->gl${m1}VertexArrayAttribEXT( ${arg0plus} );', ],
+  },
+  'DsaVertexArrayOffsetCommands' : {
+      'entries' : [ 'glVertexArray(EdgeFlag|Index|Normal|FogCoord|Vertex|Color|TexCoord|SecondaryColor|VertexAttribI|MultiTexCoord|VertexAttrib)OffsetEXT' ],
+      'prefix'  : [ '_context->bv->glVertexArray${m1}OffsetEXT( ${arg0plus} );', ],
+  },
+  'InterleavedArrays ' : {
+      'entries' : [ 'glInterleavedArrays' ],
+      'prefix'  : [ '_context->bv->glInterleavedArrays( ${arg0plus} );', ],
   },
 }

@@ -82,11 +82,6 @@ REGAL_NAMESPACE_BEGIN
 //    SIGGRAPH 2002
 //    http://graphics.stanford.edu/papers/cr/
 //
-// TODO:
-//
-//  - handle glInterleavedArrays
-//  - handle DSA VertexArray*OffsetEXT (maybe)
-//
 
 namespace Client
 {
@@ -647,11 +642,11 @@ namespace State
       SetEnablei(cap, index, GL_FALSE);
     }
 
-    void SetEnableClientStatei(GLenum cap, GLuint index, GLboolean enabled)
+    void SetEnableClientStatei(GLuint vao, GLenum cap, GLuint index, GLboolean enabled)
     {
       // only handle these if no VAO is bound
 
-      if (vertexArrayBinding)
+      if (vao)
         return;
 
       switch (cap)
@@ -687,32 +682,32 @@ namespace State
 
     inline void glEnableClientState(GLenum cap)
     {
-      SetEnableClientStatei(cap, 0, GL_TRUE);
+      SetEnableClientStatei(vertexArrayBinding, cap, 0, GL_TRUE);
     }
 
     inline void glDisableClientState(GLenum cap)
     {
-      SetEnableClientStatei(cap, 0, GL_FALSE);
+      SetEnableClientStatei(vertexArrayBinding, cap, 0, GL_FALSE);
     }
 
     inline void glEnableClientStateiEXT(GLenum cap, GLuint index)
     {
-      SetEnableClientStatei(cap, index, GL_TRUE);
+      SetEnableClientStatei(vertexArrayBinding, cap, index, GL_TRUE);
     }
 
     inline void glDisableClientStateiEXT(GLenum cap, GLuint index)
     {
-      SetEnableClientStatei(cap, index, GL_FALSE);
+      SetEnableClientStatei(vertexArrayBinding, cap, index, GL_FALSE);
     }
 
     inline void glEnableClientStateIndexedEXT(GLenum cap, GLuint index)
     {
-      SetEnableClientStatei(cap, index, GL_TRUE);
+      SetEnableClientStatei(vertexArrayBinding, cap, index, GL_TRUE);
     }
 
     inline void glDisableClientStateIndexedEXT(GLenum cap, GLuint index)
     {
-      SetEnableClientStatei(cap, index, GL_FALSE);
+      SetEnableClientStatei(vertexArrayBinding, cap, index, GL_FALSE);
     }
 
     void glBindBuffer( GLenum target, GLuint buffer )
@@ -731,101 +726,58 @@ namespace State
       }
     }
 
-    void glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[VERTEX].buffer = arrayBufferBinding;
-        named[VERTEX].size = size;
-        named[VERTEX].type = type;
-        named[VERTEX].stride = stride;
-        named[VERTEX].pointer = pointer;
-      }
+        glVertexArrayVertexOffsetEXT(vertexArrayBinding, arrayBufferBinding, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[NORMAL].buffer = arrayBufferBinding;
-        named[NORMAL].type = type;
-        named[NORMAL].stride = stride;
-        named[NORMAL].pointer = pointer;
-      }
+        glVertexArrayNormalOffsetEXT(vertexArrayBinding, arrayBufferBinding, type, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[COLOR].buffer = arrayBufferBinding;
-        named[COLOR].size = size;
-        named[COLOR].type = type;
-        named[COLOR].stride = stride;
-        named[COLOR].pointer = pointer;
-      }
+        glVertexArrayColorOffsetEXT(vertexArrayBinding, arrayBufferBinding, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[SECONDARY_COLOR].buffer = arrayBufferBinding;
-        named[SECONDARY_COLOR].size = size;
-        named[SECONDARY_COLOR].type = type;
-        named[SECONDARY_COLOR].stride = stride;
-        named[SECONDARY_COLOR].pointer = pointer;
-      }
+        glVertexArraySecondaryColorOffsetEXT(vertexArrayBinding, arrayBufferBinding, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[INDEX].buffer = arrayBufferBinding;
-        named[INDEX].type = type;
-        named[INDEX].stride = stride;
-        named[INDEX].pointer = pointer;
-      }
+        glVertexArrayIndexOffsetEXT(vertexArrayBinding, arrayBufferBinding, type, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer)
+    inline void glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[EDGE_FLAG].buffer = arrayBufferBinding;
-        named[EDGE_FLAG].stride = stride;
-        named[EDGE_FLAG].pointer = pointer;
-      }
+        glVertexArrayEdgeFlagOffsetEXT(vertexArrayBinding, arrayBufferBinding, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        named[FOG_COORD].buffer = arrayBufferBinding;
-        named[FOG_COORD].type = type;
-        named[FOG_COORD].stride = stride;
-        named[FOG_COORD].pointer = pointer;
-      }
+        glVertexArrayFogCoordOffsetEXT(vertexArrayBinding, arrayBufferBinding, type, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glMultiTexCoordPointerEXT(GLenum index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+    inline void glMultiTexCoordPointerEXT(GLenum index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
       if (!vertexArrayBinding)
-      {
-        GLuint ii = 7 + (index - GL_TEXTURE0);
-        named[ii].buffer = arrayBufferBinding;
-        named[ii].size = size;
-        named[ii].type = type;
-        named[ii].stride = stride;
-        named[ii].pointer = pointer;
-      }
+        glVertexArrayMultiTexCoordOffsetEXT(vertexArrayBinding, arrayBufferBinding, index, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
     inline void glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
     {
-      glMultiTexCoordPointerEXT(clientActiveTexture,size,type,stride,pointer);
+      if (!vertexArrayBinding)
+        glVertexArrayMultiTexCoordOffsetEXT(vertexArrayBinding, arrayBufferBinding, clientActiveTexture, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
     GLsizei computeEffectiveStride(GLsizei stride, GLint size, GLenum type)
@@ -869,26 +821,16 @@ namespace State
       return size;
     }
 
-    void glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer)
+    inline void glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer)
     {
       if (!vertexArrayBinding)
-      {
-        glVertexAttribFormat(index, size, type, normalized, 0);
-        glVertexAttribBinding(index, index);
-        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
-        glBindVertexBuffer(index, arrayBufferBinding, (char *)pointer - (char *)NULL, effectiveStride);
-      }
+        glVertexArrayVertexAttribOffsetEXT(vertexArrayBinding, arrayBufferBinding, index, size, type, normalized, stride, ((char *)pointer - (char *)NULL));
     }
 
-    void glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
+    inline void glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
     {
       if (!vertexArrayBinding)
-      {
-        glVertexAttribIFormat(index, size, type, 0);
-        glVertexAttribBinding(index, index);
-        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
-        glBindVertexBuffer(index, arrayBufferBinding, (char *)pointer - (char *)NULL, effectiveStride);
-      }
+        glVertexArrayVertexAttribIOffsetEXT(vertexArrayBinding, arrayBufferBinding, index, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
     void glVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
@@ -997,6 +939,397 @@ namespace State
     inline void glBindVertexArray(GLuint array)
     {
       vertexArrayBinding = array;
+    }
+
+    inline void glEnableVertexArrayEXT(GLuint vaobj, GLenum array)
+    {
+      if (!vaobj)
+        SetEnableClientStatei(vaobj, array, 0, GL_TRUE);
+    }
+
+    inline void glDisableVertexArrayEXT(GLuint vaobj, GLenum array)
+    {
+      if (!vaobj)
+        SetEnableClientStatei(vaobj, array, 0, GL_FALSE);
+    }
+
+    inline void glEnableVertexArrayAttribEXT(GLuint vaobj, GLuint index)
+    {
+      if (!vaobj)
+        generic[index].enabled = GL_TRUE;
+    }
+
+    inline void glDisableVertexArrayAttribEXT(GLuint vaobj, GLuint index)
+    {
+      if (!vaobj)
+        generic[index].enabled = GL_FALSE;
+    }
+
+    void glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[VERTEX].buffer = buffer;
+        named[VERTEX].size = size;
+        named[VERTEX].type = type;
+        named[VERTEX].stride = stride;
+        named[VERTEX].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[NORMAL].buffer = buffer;
+        named[NORMAL].type = type;
+        named[NORMAL].stride = stride;
+        named[NORMAL].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[COLOR].buffer = buffer;
+        named[COLOR].size = size;
+        named[COLOR].type = type;
+        named[COLOR].stride = stride;
+        named[COLOR].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[SECONDARY_COLOR].buffer = buffer;
+        named[SECONDARY_COLOR].size = size;
+        named[SECONDARY_COLOR].type = type;
+        named[SECONDARY_COLOR].stride = stride;
+        named[SECONDARY_COLOR].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[INDEX].buffer = buffer;
+        named[INDEX].type = type;
+        named[INDEX].stride = stride;
+        named[INDEX].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[EDGE_FLAG].buffer = buffer;
+        named[EDGE_FLAG].stride = stride;
+        named[EDGE_FLAG].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        named[FOG_COORD].buffer = buffer;
+        named[FOG_COORD].type = type;
+        named[FOG_COORD].stride = stride;
+        named[FOG_COORD].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    void glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        GLuint ii = 7 + (index - GL_TEXTURE0);
+        named[ii].buffer = buffer;
+        named[ii].size = size;
+        named[ii].type = type;
+        named[ii].stride = stride;
+        named[ii].pointer = reinterpret_cast<const GLvoid *>(offset);
+      }
+    }
+
+    inline void glVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      glVertexArrayMultiTexCoordOffsetEXT(vaobj, buffer, clientActiveTexture, size, type, stride, offset);
+    }
+
+    void glVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        glVertexAttribFormat(index, size, type, normalized, 0);
+        glVertexAttribBinding(index, index);
+        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
+        glBindVertexBuffer(index, buffer, offset, effectiveStride);
+      }
+    }
+
+    void glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset)
+    {
+      if (!vaobj)
+      {
+        glVertexAttribIFormat(index, size, type, 0);
+        glVertexAttribBinding(index, index);
+        GLsizei effectiveStride = computeEffectiveStride(stride, size, type);
+        glBindVertexBuffer(index, buffer, offset, effectiveStride);
+      }
+    }
+
+    void glInterleavedArrays(GLenum format, GLsizei stride, const GLvoid *pointer)
+    {
+      if (vertexArrayBinding)
+        return;
+
+      // from glspec43.compatibility.20130214.withchanges.pdf
+      // p. 365, section 10.5.1 "Interleaved Arrays"
+      //
+      // set et; ec; en; st; sc; sv; tc; pc; pn; pv; and s as a function
+      // of table 10.6 and the value of format.
+
+      GLboolean et, ec, en;
+      GLenum    tc;
+      GLsizei   st, sc, sv;
+      GLsizei   pc, pn, pv;
+      GLsizei   s;
+
+      const int f = sizeof(GL_FLOAT);
+      const int c = 4 * sizeof(GL_UNSIGNED_BYTE);
+
+      switch(format)
+      {
+        case GL_V2F:
+          et = GL_FALSE;
+          ec = GL_FALSE;
+          en = GL_FALSE;
+          tc = GL_FLOAT;
+          st = 0;
+          sc = 0;
+          sv = 2;
+          pc = 0;
+          pn = 0;
+          pv = 0;
+          pv = 0;
+          s  = 2 * f;
+          break;
+        case GL_V3F:
+          et = GL_FALSE;
+          ec = GL_FALSE;
+          en = GL_FALSE;
+          tc = GL_FLOAT;
+          st = 0;
+          sc = 0;
+          sv = 3;
+          pc = 0;
+          pn = 0;
+          pv = 0;
+          s  = 3 * f;
+          break;
+        case GL_C4UB_V2F:
+          et = GL_FALSE;
+          ec = GL_TRUE;
+          en = GL_FALSE;
+          tc = GL_UNSIGNED_BYTE;
+          st = 0;
+          sc = 4;
+          sv = 2;
+          pc = 0;
+          pn = 0;
+          pv = c;
+          s  = c + 2 * f;
+          break;
+        case GL_C4UB_V3F:
+          et = GL_FALSE;
+          ec = GL_TRUE;
+          en = GL_FALSE;
+          tc = GL_UNSIGNED_BYTE;
+          st = 0;
+          sc = 4;
+          sv = 3;
+          pc = 0;
+          pn = 0;
+          pv = c;
+          s  = c + 3 * f;
+          break;
+        case GL_C3F_V3F:
+          et = GL_FALSE;
+          ec = GL_TRUE;
+          en = GL_FALSE;
+          tc = GL_FLOAT;
+          st = 0;
+          sc = 3;
+          sv = 3;
+          pc = 0;
+          pn = 0;
+          pv = 3 * f;
+          s  = 6 * f;
+          break;
+        case GL_N3F_V3F:
+          et = GL_FALSE;
+          ec = GL_FALSE;
+          en = GL_TRUE;
+          tc = GL_FLOAT;
+          st = 0;
+          sc = 0;
+          sv = 3;
+          pc = 0;
+          pn = 0;
+          pv = 3 * f;
+          s  = 6 * f;
+          break;
+        case GL_C4F_N3F_V3F:
+          et = GL_FALSE;
+          ec = GL_TRUE;
+          en = GL_TRUE;
+          tc = GL_FLOAT;
+          st = 0;
+          sc = 4;
+          sv = 3;
+          pc = 0;
+          pn = 4 * f;
+          pv = 7 * f;
+          s  = 10 * f;
+          break;
+        case GL_T2F_V3F:
+          et = GL_TRUE;
+          ec = GL_FALSE;
+          en = GL_FALSE;
+          tc = GL_FLOAT;
+          st = 2;
+          sc = 0;
+          sv = 3;
+          pc = 0;
+          pn = 0;
+          pv = 2 * f;
+          s  = 5 * f;
+          break;
+        case GL_T4F_V4F:
+          et = GL_TRUE;
+          ec = GL_FALSE;
+          en = GL_FALSE;
+          tc = GL_FLOAT;
+          st = 4;
+          sc = 0;
+          sv = 4;
+          pc = 0;
+          pn = 0;
+          pv = 4 * f;
+          s  = 8 * f;
+          break;
+        case GL_T2F_C4UB_V3F:
+          et = GL_TRUE;
+          ec = GL_TRUE;
+          en = GL_FALSE;
+          tc = GL_UNSIGNED_BYTE;
+          st = 2;
+          sc = 4;
+          sv = 3;
+          pc = 2 * f;
+          pn = 0;
+          pv = c + 2 * f;
+          s  = c + 5 * f;
+          break;
+        case GL_T2F_C3F_V3F:
+          et = GL_TRUE;
+          ec = GL_TRUE;
+          en = GL_FALSE;
+          tc = GL_FLOAT;
+          st = 2;
+          sc = 3;
+          sv = 3;
+          pc = 2 * f;
+          pn = 0;
+          pv = 5 * f;
+          s  = 8 * f;
+          break;
+        case GL_T2F_N3F_V3F:
+          et = GL_TRUE;
+          ec = GL_FALSE;
+          en = GL_TRUE;
+          tc = GL_FLOAT;
+          st = 2;
+          sc = 0;
+          sv = 3;
+          pc = 0;
+          pn = 2 * f;
+          pv = 5 * f;
+          s  = 8 * f;
+          break;
+        case GL_T2F_C4F_N3F_V3F:
+          et = GL_TRUE;
+          ec = GL_TRUE;
+          en = GL_TRUE;
+          tc = GL_FLOAT;
+          st = 2;
+          sc = 4;
+          sv = 3;
+          pc = 2 * f;
+          pn = 6 * f;
+          pv = 9 * f;
+          s  = 12 * f;
+          break;
+        case GL_T4F_C4F_N3F_V4F:
+          et = GL_TRUE;
+          ec = GL_TRUE;
+          en = GL_TRUE;
+          tc = GL_FLOAT;
+          st = 4;
+          sc = 4;
+          sv = 4;
+          pc = 4 * f;
+          pn = 8 * f;
+          pv = 11 * f;
+          s  = 15 * f;
+          break;
+        default:
+          RegalAssert( !"unhandled format value" );
+          return;
+      }
+
+      if ( stride == 0 )
+        stride = s;
+
+      glDisableClientState(GL_EDGE_FLAG_ARRAY);
+      glDisableClientState(GL_INDEX_ARRAY);
+      glDisableClientState(GL_SECONDARY_COLOR_ARRAY);
+      glDisableClientState(GL_FOG_COORD_ARRAY);
+
+      GLubyte *p = static_cast<GLubyte *>( const_cast<GLvoid *>(pointer) );
+
+      if (et)
+      {
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glTexCoordPointer(st, GL_FLOAT, stride, p);
+      }
+      else
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+      if (ec)
+      {
+        glEnableClientState(GL_COLOR_ARRAY);
+        glColorPointer(sc, tc, stride, p + pc);
+      }
+      else
+        glDisableClientState(GL_COLOR_ARRAY);
+
+      if (en)
+      {
+        glEnableClientState(GL_NORMAL_ARRAY);
+        glNormalPointer(GL_FLOAT, stride, p + pn);
+      }
+      else
+        glDisableClientState(GL_NORMAL_ARRAY);
+
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glVertexPointer(sv, GL_FLOAT, stride, p + pv);
     }
   };
 }

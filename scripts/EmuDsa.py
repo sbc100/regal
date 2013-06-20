@@ -498,5 +498,12 @@ dsaFormulae = {
             '}'
         ],
     },
+    'VertexArrayAttribEnable' : {
+        'entries' : [ 'gl(Enable|Disable)VertexArrayAttribEXT' ],
+        'impl' : [
+            '_context->dsa->DsaVao( _context, ${arg0} );',
+            '_dispatch.call(&_dispatch.gl${m1}VertexAttribArray)( ${arg1} );'
+        ],
+    },
 }
 

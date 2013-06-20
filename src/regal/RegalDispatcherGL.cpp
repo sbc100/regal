@@ -50,6 +50,7 @@ DispatcherGL::DispatcherGL()
 : Dispatcher()
 {
   #if REGAL_TRACE
+  ::memset(&trace,0,sizeof(DispatchTableGL));
   InitDispatchTableTrace(trace);
   push_back(trace,Config::enableTrace);
   #endif
