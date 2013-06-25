@@ -601,6 +601,7 @@ Statistics::log() const
   log("GL_SGIX_TEXTURE_RANGE",gl_sgix_texture_range);
   log("GL_SGIX_TEXTURE_SCALE_BIAS",gl_sgix_texture_scale_bias);
   log("GL_SGIX_VERTEX_PRECLIP_HINT",gl_sgix_vertex_preclip_hint);
+  log("GL_SGIX_YCRCB",gl_sgix_ycrcb);
   log("GL_SGI_COLOR_MATRIX",gl_sgi_color_matrix);
   log("GL_SGI_COLOR_TABLE",gl_sgi_color_table);
   log("GL_SGI_TEXTURE_COLOR_TABLE",gl_sgi_texture_color_table);

@@ -15155,7 +15155,7 @@ static void REGAL_CALL statistics_glLinkProgramARB(GLhandleARB programObj)
   _next->call(&_next->glLinkProgramARB)(programObj);
 }
 
-static void REGAL_CALL statistics_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL statistics_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -28851,7 +28851,7 @@ static void REGAL_CALL statistics_glGetTransformFeedbackVaryingEXT(GLuint progra
   _next->call(&_next->glGetTransformFeedbackVaryingEXT)(program, index, bufSize, length, size, type, name);
 }
 
-static void REGAL_CALL statistics_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL statistics_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);

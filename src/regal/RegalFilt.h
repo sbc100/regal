@@ -57,7 +57,6 @@ namespace Emu {
   struct Filt
   {
     Filt()
-    : filtered(false)
     {
     }
 
@@ -73,31 +72,28 @@ namespace Emu {
       UNUSED_PARAMETER(ctx);
     }
 
-    void BindTexture(const RegalContext &ctx, GLenum target, GLuint name );
+    bool BindTexture(const RegalContext &ctx, GLenum target, GLuint name );
 
-    template <typename T> void Get(const RegalContext &ctx, GLenum pname, T *params)
+    template <typename T> bool Get(const RegalContext &ctx, GLenum pname, T *params)
     {
-      FilterGet(ctx,pname);
-      if (filtered)
+      int retVal;
+      if (FilterGet(ctx,pname,retVal)) {
         params[0] = T(retVal);
+        return true;
+      }
+      return false;
     }
 
-    void FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment,
+    bool FilterTexParameter (const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam);
+    bool FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment,
                               GLenum textarget, GLuint texture, GLint level);
-    void GenerateMipmap(const RegalContext &ctx, GLenum target);
-    void PolygonMode (const RegalContext &ctx, GLenum face, GLenum mode);
-    void RenderMode  (const RegalContext &ctx, GLenum mode);
-    bool FilterTexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam);
-    void PixelStorei (const RegalContext &ctx, GLenum pname, GLint param);
+    bool GenerateMipmap(const RegalContext &ctx, GLenum target);
+    bool PolygonMode (const RegalContext &ctx, GLenum face, GLenum mode);
+    bool RenderMode  (const RegalContext &ctx, GLenum mode);
+    bool PixelStorei (const RegalContext &ctx, GLenum pname, GLint param);
     bool FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment);
 
-    void FilterGet   (const RegalContext &ctx, GLenum pname);
-
-    bool Filtered() { bool f = filtered; filtered = false; return f; }
-
-  private:
-    bool filtered;
-    int  retVal;
+    bool FilterGet   (const RegalContext &ctx, GLenum pname, int &retVal);
   };
 
 }

@@ -11478,17 +11478,27 @@ defines.add(GL_WRITEONLY_RENDERING_QCOM)
 
 # GL_REGAL_enable
 
+GL_CACHE_REGAL = Enumerant('GL_CACHE_REGAL', 0x9362, 'GL_REGAL_enable')
+GL_CODE_REGAL = Enumerant('GL_CODE_REGAL', 0x9363, 'GL_REGAL_enable')
 GL_DEBUG_REGAL = Enumerant('GL_DEBUG_REGAL', 0x9323, 'GL_REGAL_enable')
 GL_DRIVER_REGAL = Enumerant('GL_DRIVER_REGAL', 0x9326, 'GL_REGAL_enable')
 GL_EMULATION_REGAL = Enumerant('GL_EMULATION_REGAL', 0x9325, 'GL_REGAL_enable')
 GL_ERROR_REGAL = Enumerant('GL_ERROR_REGAL', 0x9322, 'GL_REGAL_enable')
 GL_LOG_REGAL = Enumerant('GL_LOG_REGAL', 0x9324, 'GL_REGAL_enable')
+GL_MISSING_REGAL = Enumerant('GL_MISSING_REGAL', 0x9360, 'GL_REGAL_enable')
+GL_STATISTICS_REGAL = Enumerant('GL_STATISTICS_REGAL', 0x9364, 'GL_REGAL_enable')
+GL_TRACE_REGAL = Enumerant('GL_TRACE_REGAL', 0x9361, 'GL_REGAL_enable')
 
+defines.add(GL_CACHE_REGAL)
+defines.add(GL_CODE_REGAL)
 defines.add(GL_DEBUG_REGAL)
 defines.add(GL_DRIVER_REGAL)
 defines.add(GL_EMULATION_REGAL)
 defines.add(GL_ERROR_REGAL)
 defines.add(GL_LOG_REGAL)
+defines.add(GL_MISSING_REGAL)
+defines.add(GL_STATISTICS_REGAL)
+defines.add(GL_TRACE_REGAL)
 
 # GL_REGAL_log
 
@@ -11919,6 +11929,14 @@ defines.add(GL_VERTEX_PRECLIP_HINT_SGIX)
 defines.add(GL_VERTEX_PRECLIP_HINT_SGIX)
 defines.add(GL_VERTEX_PRECLIP_SGIX)
 defines.add(GL_VERTEX_PRECLIP_SGIX)
+
+# GL_SGIX_ycrcb
+
+GL_YCRCB_422_SGIX = Enumerant('GL_YCRCB_422_SGIX', 0x81bb, 'GL_SGIX_ycrcb')
+GL_YCRCB_444_SGIX = Enumerant('GL_YCRCB_444_SGIX', 0x81bc, 'GL_SGIX_ycrcb')
+
+defines.add(GL_YCRCB_422_SGIX)
+defines.add(GL_YCRCB_444_SGIX)
 
 # GL_SGI_color_matrix
 
@@ -23424,7 +23442,7 @@ glShaderSourceARB = Function('glShaderSourceARB')
 glShaderSourceARB.ret = Return('void')
 glShaderSourceARB.add( Input( 'shaderObj','GLhandleARB' ))
 glShaderSourceARB.add( Input( 'count','GLsizei' ))
-glShaderSourceARB.add( Input( 'string','const GLcharARB **' ,size = 'string ? count : 0' ,cast = 'const char **' ))
+glShaderSourceARB.add( Input( 'string','const GLcharARB ** const' ,size = 'string ? count : 0' ,cast = 'const char ** const' ))
 glShaderSourceARB.add( Input( 'length','const GLint *' ,size = 'length ? count : 0' ))
 glShaderSourceARB.version = '1.1'
 glShaderSourceARB.category = 'GL_ARB_shader_objects'
@@ -33423,7 +33441,7 @@ glTransformFeedbackVaryingsEXT = Function('glTransformFeedbackVaryingsEXT')
 glTransformFeedbackVaryingsEXT.ret = Return('void')
 glTransformFeedbackVaryingsEXT.add( Input( 'program','GLuint' ))
 glTransformFeedbackVaryingsEXT.add( Input( 'count','GLsizei' ))
-glTransformFeedbackVaryingsEXT.add( Input( 'varyings','const GLchar **' ,size = 'count' ))
+glTransformFeedbackVaryingsEXT.add( Input( 'varyings','const GLchar ** const' ,size = 'count' ))
 glTransformFeedbackVaryingsEXT.add( Input( 'bufferMode','GLenum' ))
 glTransformFeedbackVaryingsEXT.version = '2.0'
 glTransformFeedbackVaryingsEXT.category = 'GL_EXT_transform_feedback'

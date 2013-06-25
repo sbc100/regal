@@ -623,6 +623,17 @@ static void _glewInfo_GL_AMD_draw_buffers_blend (void)
 
 #endif /* GL_AMD_draw_buffers_blend */
 
+#ifdef GL_AMD_interleaved_elements
+
+static void _glewInfo_GL_AMD_interleaved_elements (void)
+{
+  glewPrintExt("GL_AMD_interleaved_elements", GLEW_AMD_interleaved_elements, glewIsSupported("GL_AMD_interleaved_elements"), glewGetExtension("GL_AMD_interleaved_elements"));
+
+  glewInfoFunc("glVertexAttribParameteriAMD", glVertexAttribParameteriAMD == NULL);
+}
+
+#endif /* GL_AMD_interleaved_elements */
+
 #ifdef GL_AMD_multi_draw_indirect
 
 static void _glewInfo_GL_AMD_multi_draw_indirect (void)
@@ -8199,6 +8210,9 @@ static void glewInfo (void)
 #ifdef GL_AMD_draw_buffers_blend
   _glewInfo_GL_AMD_draw_buffers_blend();
 #endif /* GL_AMD_draw_buffers_blend */
+#ifdef GL_AMD_interleaved_elements
+  _glewInfo_GL_AMD_interleaved_elements();
+#endif /* GL_AMD_interleaved_elements */
 #ifdef GL_AMD_multi_draw_indirect
   _glewInfo_GL_AMD_multi_draw_indirect();
 #endif /* GL_AMD_multi_draw_indirect */

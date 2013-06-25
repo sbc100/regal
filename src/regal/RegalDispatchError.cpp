@@ -25386,7 +25386,7 @@ static void REGAL_CALL error_glLinkProgramARB(GLhandleARB programObj)
   }
 }
 
-static void REGAL_CALL error_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL error_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
 {
   Internal("error_glShaderSourceARB","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -46816,7 +46816,7 @@ static void REGAL_CALL error_glGetTransformFeedbackVaryingEXT(GLuint program, GL
   }
 }
 
-static void REGAL_CALL error_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL error_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
 {
   Internal("error_glTransformFeedbackVaryingsEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();

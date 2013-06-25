@@ -4,13 +4,14 @@
 # Selectively initialize Regal for known initialization calls
 # in addition to Regal API entry points.
 #
+# CGLGetCurrentContext is needed for Mac OS X/GLUT
 # eglGetDisplay is needed for apitrace eglretrace tool.
 # glXGetProcAddress is needed for Linux chromium
 # glXQueryExtension is needed for freeglut X11
 
 formulae = {
   'EmuInit' : {
-    'entries' : [ 'CGLChoosePixelFormat', 'eglGetDisplay', 'glXGetProcAddress', 'glXQueryExtension' ],
+    'entries' : [ 'CGLChoosePixelFormat', 'CGLGetCurrentContext', 'eglGetDisplay', 'glXGetProcAddress', 'glXQueryExtension' ],
     'prefix'  : [ 'Init::init();' ]
   }
 }

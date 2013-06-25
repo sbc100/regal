@@ -600,6 +600,7 @@ ContextInfo::ContextInfo()
   gl_sgix_texture_range(false),
   gl_sgix_texture_scale_bias(false),
   gl_sgix_vertex_preclip_hint(false),
+  gl_sgix_ycrcb(false),
   gl_sgi_color_matrix(false),
   gl_sgi_color_table(false),
   gl_sgi_texture_color_table(false),
@@ -1508,6 +1509,7 @@ ContextInfo::init(const RegalContext &context)
   gl_sgix_texture_range = e.find("GL_SGIX_texture_range")!=e.end();
   gl_sgix_texture_scale_bias = e.find("GL_SGIX_texture_scale_bias")!=e.end();
   gl_sgix_vertex_preclip_hint = e.find("GL_SGIX_vertex_preclip_hint")!=e.end();
+  gl_sgix_ycrcb = e.find("GL_SGIX_ycrcb")!=e.end();
   gl_sgi_color_matrix = e.find("GL_SGI_color_matrix")!=e.end();
   gl_sgi_color_table = e.find("GL_SGI_color_table")!=e.end();
   gl_sgi_texture_color_table = e.find("GL_SGI_texture_color_table")!=e.end();
@@ -2188,6 +2190,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_SGIX_texture_range")) return gl_sgix_texture_range;
   if (!strcmp(ext,"GL_SGIX_texture_scale_bias")) return gl_sgix_texture_scale_bias;
   if (!strcmp(ext,"GL_SGIX_vertex_preclip_hint")) return gl_sgix_vertex_preclip_hint;
+  if (!strcmp(ext,"GL_SGIX_ycrcb")) return gl_sgix_ycrcb;
   if (!strcmp(ext,"GL_SGI_color_matrix")) return gl_sgi_color_matrix;
   if (!strcmp(ext,"GL_SGI_color_table")) return gl_sgi_color_table;
   if (!strcmp(ext,"GL_SGI_texture_color_table")) return gl_sgi_texture_color_table;

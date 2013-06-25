@@ -157,6 +157,10 @@
 
 // Emulation layers supported by default
 
+#ifndef REGAL_EMU_HINT
+#define REGAL_EMU_HINT 1
+#endif
+
 #ifndef REGAL_EMU_PPA
 #define REGAL_EMU_PPA 1
 #endif
@@ -222,6 +226,10 @@
 #endif
 
 // Emulation layer forcing disabled by default
+
+#ifndef REGAL_FORCE_EMU_HINT
+#define REGAL_FORCE_EMU_HINT 0
+#endif
 
 #ifndef REGAL_FORCE_EMU_PPA
 #define REGAL_FORCE_EMU_PPA 0

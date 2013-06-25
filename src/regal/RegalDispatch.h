@@ -1965,7 +1965,7 @@ namespace Dispatch
     void (REGAL_CALL *glGetUniformfvARB)(GLhandleARB programObj, GLint location, GLfloat *params);
     void (REGAL_CALL *glGetUniformivARB)(GLhandleARB programObj, GLint location, GLint *params);
     void (REGAL_CALL *glLinkProgramARB)(GLhandleARB programObj);
-    void (REGAL_CALL *glShaderSourceARB)(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+    void (REGAL_CALL *glShaderSourceARB)(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length);
     void (REGAL_CALL *glUniform1fARB)(GLint location, GLfloat v0);
     void (REGAL_CALL *glUniform1fvARB)(GLint location, GLsizei count, const GLfloat *value);
     void (REGAL_CALL *glUniform1iARB)(GLint location, GLint v0);
@@ -3107,7 +3107,7 @@ namespace Dispatch
     void (REGAL_CALL *glBindBufferRangeEXT)(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
     void (REGAL_CALL *glEndTransformFeedbackEXT)(void);
     void (REGAL_CALL *glGetTransformFeedbackVaryingEXT)(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-    void (REGAL_CALL *glTransformFeedbackVaryingsEXT)(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+    void (REGAL_CALL *glTransformFeedbackVaryingsEXT)(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
 
     // GL_EXT_vertex_array
 

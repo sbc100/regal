@@ -644,11 +644,8 @@ namespace Logging {
 #if REGAL_LOG
       if (log && logOutput)
       {
-#if REGAL_SYS_ANDROID
-#else
         fprintf(logOutput, "%s", m.c_str());
         fflush(logOutput);
-#endif
       }
 #endif
 

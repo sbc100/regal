@@ -136,6 +136,8 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_SYSTEM,
   JSON_REGAL_CONFIG_SYSTEM,
   JSON_REGAL_CONFIG_SYSTEM,
+  JSON_REGAL_CONFIG,
+  JSON_REGAL_CONFIG_TRACE,
   JSON_REGAL,
   JSON_REGAL_LOGGING,
   JSON_REGAL_LOGGING,
@@ -196,6 +198,7 @@ Parser::onPush(const string &name)
       if (name=="force"       ) { current = JSON_REGAL_CONFIG_FORCE;                           return; }
       if (name=="frame"       ) { current = JSON_REGAL_CONFIG_FRAME;                           return; }
       if (name=="system"      ) { current = JSON_REGAL_CONFIG_SYSTEM;                          return; }
+      if (name=="trace"       ) { current = JSON_REGAL_CONFIG_TRACE;                           return; }
       break;
 
     case JSON_REGAL_CONFIG_CACHE:
@@ -319,6 +322,10 @@ Parser::onPush(const string &name)
       if (name=="ES2"         ) { current = JSON_REGAL_CONFIG_SYSTEM_ES2;                      return; }
       if (name=="GL"          ) { current = JSON_REGAL_CONFIG_SYSTEM_GL;                       return; }
       if (name=="GLX"         ) { current = JSON_REGAL_CONFIG_SYSTEM_GLX;                      return; }
+      break;
+
+    case JSON_REGAL_CONFIG_TRACE:
+      if (name=="file"        ) { current = JSON_REGAL_CONFIG_TRACE_FILE;                      return; }
       break;
 
     case JSON_REGAL_LOGGING:
@@ -500,6 +507,7 @@ Parser::onValue(const string &value)
     case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_COLOR         : { set_json_regal_config_frame_save_prefix_color(value);        return; }
     case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_DEPTH         : { set_json_regal_config_frame_save_prefix_depth(value);        return; }
     case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_STENCIL       : { set_json_regal_config_frame_save_prefix_stencil(value);      return; }
+    case JSON_REGAL_CONFIG_TRACE_FILE                      : { set_json_regal_config_trace_file(value);                     return; }
     case JSON_REGAL_LOGGING_FILENAME                       : { set_json_regal_logging_filename(value);                      return; }
     case JSON_REGAL_LOGGING_JSONFILE                       : { set_json_regal_logging_jsonfile(value);                      return; }
     default:

@@ -10339,14 +10339,14 @@ static void REGAL_CALL log_glLinkProgramARB(GLhandleARB programObj)
     Driver("glLinkProgramARB","(", programObj, ")");
 }
 
-static void REGAL_CALL log_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL log_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glShaderSourceARB)(shaderObj, count, string, length);
-    Driver("glShaderSourceARB","(", shaderObj, ", ", count, ", ", boost::print::array(reinterpret_cast<const char **>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
+    Driver("glShaderSourceARB","(", shaderObj, ", ", count, ", ", boost::print::array(reinterpret_cast<const char ** const>(string),string ? count : 0), ", ", boost::print::array(length,length ? count : 0), ")");
 }
 
 static void REGAL_CALL log_glUniform1fARB(GLint location, GLfloat v0)
@@ -19049,14 +19049,14 @@ static void REGAL_CALL log_glGetTransformFeedbackVaryingEXT(GLuint program, GLui
     Driver("glGetTransformFeedbackVaryingEXT","(", program, ", ", index, ", ", bufSize, ", ", boost::print::array(length,1), ", ", boost::print::array(size,1), ", ", boost::print::array(type,1), ", ", boost::print::quote(name,'"'), ")");
 }
 
-static void REGAL_CALL log_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL log_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glTransformFeedbackVaryingsEXT)(program, count, varyings, bufferMode);
-    Driver("glTransformFeedbackVaryingsEXT","(", program, ", ", count, ", ", boost::print::array(varyings,count,"\""), ", ", toString(bufferMode), ")");
+    Driver("glTransformFeedbackVaryingsEXT","(", program, ", ", count, ", ", boost::print::array(varyings,count), ", ", toString(bufferMode), ")");
 }
 
 // GL_EXT_vertex_array

@@ -85,6 +85,7 @@ namespace Config
 
   // Initial emulation layer enable/disable
 
+  extern bool enableEmuHint;
   extern bool enableEmuPpa;
   extern bool enableEmuPpca;
   extern bool enableEmuObj;
@@ -103,6 +104,7 @@ namespace Config
 
   // Force emulation layer enable/disable
 
+  extern bool forceEmuHint;
   extern bool forceEmuPpa;
   extern bool forceEmuPpca;
   extern bool forceEmuObj;
@@ -154,6 +156,10 @@ namespace Config
 
   extern ::std::string codeSourceFile;
   extern ::std::string codeHeaderFile;
+
+  // Trace
+
+  extern ::std::string traceFile;
 
   // Thread locking
 

@@ -8244,7 +8244,7 @@ static void REGAL_CALL missing_glLinkProgramARB(GLhandleARB programObj)
   Warning( "glLinkProgramARB not available." );
 }
 
-static void REGAL_CALL missing_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL missing_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
 {
   UNUSED_PARAMETER(shaderObj);
   UNUSED_PARAMETER(count);
@@ -15732,7 +15732,7 @@ static void REGAL_CALL missing_glGetTransformFeedbackVaryingEXT(GLuint program, 
   Warning( "glGetTransformFeedbackVaryingEXT not available." );
 }
 
-static void REGAL_CALL missing_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL missing_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
 {
   UNUSED_PARAMETER(program);
   UNUSED_PARAMETER(count);

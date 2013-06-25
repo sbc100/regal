@@ -69,16 +69,17 @@ struct Marker;
 struct Frame;
 #if REGAL_EMULATION
 namespace Emu { struct Obj; };
+namespace Emu { struct Hint; };
 namespace Emu { struct Ppa; };
 namespace Emu { struct Ppca; };
 namespace Emu { struct Bin; };
 namespace Emu { struct Xfer; };
-namespace Emu { struct Dsa; };
 namespace Emu { struct TexSto; };
 namespace Emu { struct BaseVertex; };
 namespace Emu { struct Rect; };
 namespace Emu { struct Iff; };
 namespace Emu { struct So; };
+namespace Emu { struct Dsa; };
 namespace Emu { struct Vao; };
 namespace Emu { struct TexC; };
 namespace Emu { struct Filt; };
@@ -119,16 +120,17 @@ struct RegalContext
   // Fixed function emulation
   int emuLevel;
   Emu::Obj           *obj;
+  Emu::Hint          *hint;
   Emu::Ppa           *ppa;
   Emu::Ppca          *ppca;
   Emu::Bin           *bin;
   Emu::Xfer          *xfer;
-  Emu::Dsa           *dsa;
   Emu::TexSto        *texsto;
   Emu::BaseVertex    *bv;
   Emu::Rect          *rect;
   Emu::Iff           *iff;
   Emu::So            *so;
+  Emu::Dsa           *dsa;
   Emu::Vao           *vao;
   Emu::TexC          *texc;
   Emu::Filt          *filt;

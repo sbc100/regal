@@ -7017,7 +7017,7 @@ typedef void (REGAL_CALL *PFNGLGETSHADERSOURCEARBPROC)(GLhandleARB obj, GLsizei 
 typedef void (REGAL_CALL *PFNGLGETUNIFORMFVARBPROC)(GLhandleARB programObj, GLint location, GLfloat *params);
 typedef void (REGAL_CALL *PFNGLGETUNIFORMIVARBPROC)(GLhandleARB programObj, GLint location, GLint *params);
 typedef void (REGAL_CALL *PFNGLLINKPROGRAMARBPROC)(GLhandleARB programObj);
-typedef void (REGAL_CALL *PFNGLSHADERSOURCEARBPROC)(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+typedef void (REGAL_CALL *PFNGLSHADERSOURCEARBPROC)(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length);
 typedef void (REGAL_CALL *PFNGLUNIFORM1FARBPROC)(GLint location, GLfloat v0);
 typedef void (REGAL_CALL *PFNGLUNIFORM1FVARBPROC)(GLint location, GLsizei count, const GLfloat *value);
 typedef void (REGAL_CALL *PFNGLUNIFORM1IARBPROC)(GLint location, GLint v0);
@@ -7101,7 +7101,7 @@ REGAL_DECL void REGAL_CALL glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLeng
 REGAL_DECL void REGAL_CALL glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params);
 REGAL_DECL void REGAL_CALL glGetUniformivARB(GLhandleARB programObj, GLint location, GLint *params);
 REGAL_DECL void REGAL_CALL glLinkProgramARB(GLhandleARB programObj);
-REGAL_DECL void REGAL_CALL glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+REGAL_DECL void REGAL_CALL glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length);
 REGAL_DECL void REGAL_CALL glUniform1fARB(GLint location, GLfloat v0);
 REGAL_DECL void REGAL_CALL glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value);
 REGAL_DECL void REGAL_CALL glUniform1iARB(GLint location, GLint v0);
@@ -7143,7 +7143,7 @@ REGAL_DECL void REGAL_CALL plugin_glGetShaderSourceARB(GLhandleARB obj, GLsizei 
 REGAL_DECL void REGAL_CALL plugin_glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params);
 REGAL_DECL void REGAL_CALL plugin_glGetUniformivARB(GLhandleARB programObj, GLint location, GLint *params);
 REGAL_DECL void REGAL_CALL plugin_glLinkProgramARB(GLhandleARB programObj);
-REGAL_DECL void REGAL_CALL plugin_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+REGAL_DECL void REGAL_CALL plugin_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length);
 REGAL_DECL void REGAL_CALL plugin_glUniform1fARB(GLint location, GLfloat v0);
 REGAL_DECL void REGAL_CALL plugin_glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value);
 REGAL_DECL void REGAL_CALL plugin_glUniform1iARB(GLint location, GLint v0);
@@ -18079,7 +18079,7 @@ typedef void (REGAL_CALL *PFNGLBINDBUFFEROFFSETEXTPROC)(GLenum target, GLuint in
 typedef void (REGAL_CALL *PFNGLBINDBUFFERRANGEEXTPROC)(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 typedef void (REGAL_CALL *PFNGLENDTRANSFORMFEEDBACKEXTPROC)(void);
 typedef void (REGAL_CALL *PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC)(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-typedef void (REGAL_CALL *PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC)(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+typedef void (REGAL_CALL *PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC)(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_EXT_TRANSFORM_FEEDBACK
@@ -18099,7 +18099,7 @@ REGAL_DECL void REGAL_CALL glBindBufferOffsetEXT(GLenum target, GLuint index, GL
 REGAL_DECL void REGAL_CALL glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 REGAL_DECL void REGAL_CALL glEndTransformFeedbackEXT(void);
 REGAL_DECL void REGAL_CALL glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_EXT_TRANSFORM_FEEDBACK
@@ -18109,7 +18109,7 @@ REGAL_DECL void REGAL_CALL plugin_glBindBufferOffsetEXT(GLenum target, GLuint in
 REGAL_DECL void REGAL_CALL plugin_glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 REGAL_DECL void REGAL_CALL plugin_glEndTransformFeedbackEXT(void);
 REGAL_DECL void REGAL_CALL plugin_glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-REGAL_DECL void REGAL_CALL plugin_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+REGAL_DECL void REGAL_CALL plugin_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
 #endif
 
 /**
@@ -28161,11 +28161,16 @@ REGAL_DECL void REGAL_CALL plugin_glTexParameterxv(GLenum target, GLenum pname, 
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_REGAL_ENABLE
-#define GL_ERROR_REGAL     0x9322     /* 37666 */
-#define GL_DEBUG_REGAL     0x9323     /* 37667 */
-#define GL_LOG_REGAL       0x9324     /* 37668 */
-#define GL_EMULATION_REGAL 0x9325     /* 37669 */
-#define GL_DRIVER_REGAL    0x9326     /* 37670 */
+#define GL_ERROR_REGAL      0x9322     /* 37666 */
+#define GL_DEBUG_REGAL      0x9323     /* 37667 */
+#define GL_LOG_REGAL        0x9324     /* 37668 */
+#define GL_EMULATION_REGAL  0x9325     /* 37669 */
+#define GL_DRIVER_REGAL     0x9326     /* 37670 */
+#define GL_MISSING_REGAL    0x9360     /* 37728 */
+#define GL_TRACE_REGAL      0x9361     /* 37729 */
+#define GL_CACHE_REGAL      0x9362     /* 37730 */
+#define GL_CODE_REGAL       0x9363     /* 37731 */
+#define GL_STATISTICS_REGAL 0x9364     /* 37732 */
 #endif
 
 /**
@@ -30386,6 +30391,39 @@ REGAL_DECL void REGAL_CALL plugin_glTagSampleBufferSGIX(void);
 #define GL_VERTEX_PRECLIP_SGIX      0x83ee     /* 33774 */
 #define GL_VERTEX_PRECLIP_HINT_SGIX 0x83ef     /* 33775 */
 #define GL_VERTEX_PRECLIP_HINT_SGIX 0x83ef     /* 33775 */
+#endif
+
+/**
+ ** GL_SGIX_ycrcb
+ **/
+
+#if (defined(GL_SGIX_YCRCB) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_SGIX_YCRCB)) && !defined(REGAL_NO_ENUM_GL_SGIX_YCRCB)
+#define REGAL_NO_ENUM_GL_SGIX_YCRCB
+#endif
+
+#if (defined(GL_SGIX_YCRCB) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_SGIX_YCRCB)) && !defined(REGAL_NO_TYPEDEF_GL_SGIX_YCRCB)
+#define REGAL_NO_TYPEDEF_GL_SGIX_YCRCB
+#endif
+
+#if (defined(GL_SGIX_YCRCB) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_SGIX_YCRCB)) && !defined(REGAL_NO_NAMESPACE_GL_SGIX_YCRCB)
+#define REGAL_NO_NAMESPACE_GL_SGIX_YCRCB
+#endif
+
+#if (defined(GL_SGIX_YCRCB) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_SGIX_YCRCB)) && !defined(REGAL_NO_PLUGIN_GL_SGIX_YCRCB)
+#define REGAL_NO_PLUGIN_GL_SGIX_YCRCB
+#endif
+
+#if (defined(GL_SGIX_YCRCB) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_SGIX_YCRCB)) && !defined(REGAL_NO_DECLARATION_GL_SGIX_YCRCB)
+#define REGAL_NO_DECLARATION_GL_SGIX_YCRCB
+#endif
+
+#ifndef GL_SGIX_ycrcb
+#define GL_SGIX_ycrcb 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_SGIX_YCRCB
+#define GL_YCRCB_422_SGIX 0x81bb     /* 33211 */
+#define GL_YCRCB_444_SGIX 0x81bc     /* 33212 */
 #endif
 
 /**

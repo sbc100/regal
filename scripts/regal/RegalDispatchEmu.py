@@ -178,28 +178,6 @@ def apiEmuFuncDefineCode(apis, args):
                   code += '             return;\n'
                 code += '         }\n'
 
-              # glHint constraints for ES 2.0
-              # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml
-
-              if name=='glHint':
-                code += '       if (_context->isES2())\n'
-                code += '         switch (target)\n'
-                code += '         {\n'
-                for i in api.enums:
-                  if i.name=='defines':
-                    for j in i.enumerants:
-                      if getattr(j,'esVersions',None)==None:
-                        continue
-                      if getattr(j,'hint',None)==None:
-                        continue
-                      if 2.0 in j.esVersions and j.hint == True:
-                        code += '           case %s:\n'%(j.name)
-                code += '             break;\n'
-                code += '           default:\n'
-                code += '             Warning("%s does not support ",GLenumToString(target)," for ES 2.0.");\n'%(name)
-                code += '             return;\n'
-                code += '         }\n'
-
               # glBindTexture constraints for ES 2.0
               # http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
 
@@ -406,6 +384,7 @@ def generateEmuSource(apis, args):
 #include "RegalPpa.h"
 #include "RegalPpca.h"
 #include "RegalRect.h"
+#include "RegalHint.h"
 #include "RegalIff.h"
 #include "RegalMarker.h"
 #include "RegalObj.h"

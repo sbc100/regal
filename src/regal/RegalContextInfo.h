@@ -628,6 +628,7 @@ struct ContextInfo
   GLboolean gl_sgix_texture_range : 1;
   GLboolean gl_sgix_texture_scale_bias : 1;
   GLboolean gl_sgix_vertex_preclip_hint : 1;
+  GLboolean gl_sgix_ycrcb : 1;
   GLboolean gl_sgi_color_matrix : 1;
   GLboolean gl_sgi_color_table : 1;
   GLboolean gl_sgi_texture_color_table : 1;

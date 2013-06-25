@@ -18723,7 +18723,7 @@ static void REGAL_CALL code_glLinkProgramARB(GLhandleARB programObj)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL code_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -35036,7 +35036,7 @@ static void REGAL_CALL code_glGetTransformFeedbackVaryingEXT(GLuint program, GLu
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL code_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);

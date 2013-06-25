@@ -67,6 +67,7 @@
 #define set_json_regal_config_system_es2(value)                          Config::sysES2 = value
 #define set_json_regal_config_system_gl(value)                           Config::sysGL = value
 #define set_json_regal_config_system_glx(value)                          Config::sysGLX = value
+#define set_json_regal_config_trace_file(value)                          Config::traceFile = value
 #define set_json_regal_logging_bufferlimit(value)                        Logging::bufferLimit = value
 #define set_json_regal_logging_callback(value)                           Logging::callback = value
 #define set_json_regal_logging_enable_app(value)                         Logging::enableApp = value

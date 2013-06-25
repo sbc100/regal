@@ -226,6 +226,8 @@ def typeStrip(typeFormat):
 
   # Replace const, *, & with spaces.
   pType = typeFormat.replace('const ', ' ').replace('&', ' ').replace('*', ' ')
+  if pType.endswith('const'):
+    pType = pType[:-5]
 
   # Remove extraneous spaces.
   pType = pType.replace('  ', ' ').strip()

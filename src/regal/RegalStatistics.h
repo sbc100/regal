@@ -583,6 +583,7 @@ struct Statistics
   GLuint gl_sgix_texture_range;
   GLuint gl_sgix_texture_scale_bias;
   GLuint gl_sgix_vertex_preclip_hint;
+  GLuint gl_sgix_ycrcb;
   GLuint gl_sgi_color_matrix;
   GLuint gl_sgi_color_table;
   GLuint gl_sgi_texture_color_table;

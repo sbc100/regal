@@ -630,6 +630,7 @@ extern "C" {
       case GL_LOG_HTTP_REGAL:     Logging::enableHttp     = false; return;
       default: break;
     }
+
     switch(cap)
     {
       case GL_ERROR_REGAL:
@@ -659,6 +660,34 @@ extern "C" {
       case GL_DRIVER_REGAL:
         #if REGAL_DRIVER
         _context->dispatcher.disable(_context->dispatcher.driver);
+        #endif
+        return;
+
+      case GL_MISSING_REGAL:
+        _context->dispatcher.disable(_context->dispatcher.missing);
+        return;
+
+      case GL_TRACE_REGAL:
+        #if REGAL_TRACE
+        _context->dispatcher.disable(_context->dispatcher.trace);
+        #endif
+        return;
+
+      case GL_CACHE_REGAL:
+        #if REGAL_CACHE
+        _context->dispatcher.disable(_context->dispatcher.cache);
+        #endif
+        return;
+
+      case GL_CODE_REGAL:
+        #if REGAL_CODE
+        _context->dispatcher.disable(_context->dispatcher.code);
+        #endif
+        return;
+
+      case GL_STATISTICS_REGAL:
+        #if REGAL_STATISTICS
+        _context->dispatcher.disable(_context->dispatcher.statistics);
         #endif
         return;
 
@@ -725,6 +754,7 @@ extern "C" {
       case GL_LOG_HTTP_REGAL:     Logging::enableHttp     = true; return;
       default: break;
     }
+
     switch(cap)
     {
       case GL_ERROR_REGAL:
@@ -759,6 +789,34 @@ extern "C" {
       case GL_DRIVER_REGAL:
         #if REGAL_DRIVER
         _context->dispatcher.enable(_context->dispatcher.driver);
+        #endif
+        return;
+
+      case GL_MISSING_REGAL:
+        _context->dispatcher.enable(_context->dispatcher.missing);
+        return;
+
+      case GL_TRACE_REGAL:
+        #if REGAL_TRACE
+        _context->dispatcher.enable(_context->dispatcher.trace);
+        #endif
+        return;
+
+      case GL_CACHE_REGAL:
+        #if REGAL_CACHE
+        _context->dispatcher.enable(_context->dispatcher.cache);
+        #endif
+        return;
+
+      case GL_CODE_REGAL:
+        #if REGAL_CODE
+        _context->dispatcher.enable(_context->dispatcher.code);
+        #endif
+        return;
+
+      case GL_STATISTICS_REGAL:
+        #if REGAL_STATISTICS
+        _context->dispatcher.enable(_context->dispatcher.statistics);
         #endif
         return;
 
@@ -1430,6 +1488,7 @@ extern "C" {
       case GL_LOG_HTTP_REGAL:     return Logging::enableHttp     ? GL_TRUE : GL_FALSE;
       default: break;
     }
+
     switch(cap)
     {
       case GL_ERROR_REGAL:
@@ -1463,6 +1522,37 @@ extern "C" {
       case GL_DRIVER_REGAL:
         #if REGAL_DRIVER
         return _context->dispatcher.isEnabled(_context->dispatcher.driver) ? GL_TRUE : GL_FALSE;
+        #else
+        return GL_FALSE;
+        #endif
+
+      case GL_MISSING_REGAL:
+        return _context->dispatcher.isEnabled(_context->dispatcher.missing) ? GL_TRUE : GL_FALSE;
+
+      case GL_TRACE_REGAL:
+        #if REGAL_TRACE
+        return _context->dispatcher.isEnabled(_context->dispatcher.trace) ? GL_TRUE : GL_FALSE;
+        #else
+        return GL_FALSE;
+        #endif
+
+      case GL_CACHE_REGAL:
+        #if REGAL_CACHE
+        return _context->dispatcher.isEnabled(_context->dispatcher.cache) ? GL_TRUE : GL_FALSE;
+        #else
+        return GL_FALSE;
+        #endif
+
+      case GL_CODE_REGAL:
+        #if REGAL_CODE
+        return _context->dispatcher.isEnabled(_context->dispatcher.code) ? GL_TRUE : GL_FALSE;
+        #else
+        return GL_FALSE;
+        #endif
+
+      case GL_STATISTICS_REGAL:
+        #if REGAL_STATISTICS
+        return _context->dispatcher.isEnabled(_context->dispatcher.statistics) ? GL_TRUE : GL_FALSE;
         #else
         return GL_FALSE;
         #endif
@@ -10474,10 +10564,10 @@ extern "C" {
     _next->call(&_next->glLinkProgramARB)(programObj);
   }
 
-  REGAL_DECL void REGAL_CALL glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+  REGAL_DECL void REGAL_CALL glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glShaderSourceARB","(", shaderObj, ", ", count, ", ", boost::print::array(reinterpret_cast<const char **>(string),string ? count : 0,"\""), ", ", boost::print::array(length,length ? count : 0), ")");
+    App("glShaderSourceARB","(", shaderObj, ", ", count, ", ", boost::print::array(reinterpret_cast<const char ** const>(string),string ? count : 0), ", ", boost::print::array(length,length ? count : 0), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19174,10 +19264,10 @@ extern "C" {
     _next->call(&_next->glGetTransformFeedbackVaryingEXT)(program, index, bufSize, length, size, type, name);
   }
 
-  REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+  REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTransformFeedbackVaryingsEXT","(", program, ", ", count, ", ", boost::print::array(varyings,count,"\""), ", ", toString(bufferMode), ")");
+    App("glTransformFeedbackVaryingsEXT","(", program, ", ", count, ", ", boost::print::array(varyings,count), ", ", toString(bufferMode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30846,6 +30936,7 @@ extern "C" {
   REGAL_DECL CGLContextObj REGAL_CALL CGLGetCurrentContext(void)
   {
     App("CGLGetCurrentContext","()");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     CGLContextObj ret = 0;

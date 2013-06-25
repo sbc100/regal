@@ -1275,7 +1275,7 @@ namespace Trace
   void  glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat *params);
   void  glGetUniformivARB(GLhandleARB programObj, GLint location, GLint *params);
   void  glLinkProgramARB(GLhandleARB programObj);
-  void  glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length);
+  void  glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length);
   void  glUniform1fARB(GLint location, GLfloat v0);
   void  glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value);
   void  glUniform1iARB(GLint location, GLint v0);
@@ -2349,7 +2349,7 @@ namespace Trace
   void  glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
   void  glEndTransformFeedbackEXT(void);
   void  glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-  void  glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode);
+  void  glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
 
 // GL_EXT_vertex_array
 
@@ -3298,22 +3298,6 @@ namespace Trace
 
 #if REGAL_SYS_WGL
 
-// WGL_3DL_stereo_control
-
-  BOOL  wglSetStereoEmitterState3DL(HDC hDC, UINT uState);
-
-// WGL_AMD_gpu_association
-
-  VOID  wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
-  HGLRC  wglCreateAssociatedContextAMD(UINT id);
-  HGLRC  wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int *attribList);
-  BOOL  wglDeleteAssociatedContextAMD(HGLRC hglrc);
-  UINT  wglGetContextGPUIDAMD(HGLRC hglrc);
-  HGLRC  wglGetCurrentAssociatedContextAMD(void);
-  UINT  wglGetGPUIDsAMD(UINT maxCount, UINT *ids);
-  INT  wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void *data);
-  BOOL  wglMakeAssociatedContextCurrentAMD(HGLRC hglrc);
-
 // WGL_ARB_buffer_region
 
   HANDLE  wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType);
@@ -3342,24 +3326,11 @@ namespace Trace
   BOOL  wglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttribute, int *piValue);
   int  wglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC);
 
-// WGL_ARB_pixel_format
-
-  BOOL  wglChoosePixelFormatARB(HDC hDC, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
-  BOOL  wglGetPixelFormatAttribfvARB(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues);
-  BOOL  wglGetPixelFormatAttribivARB(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues);
-
 // WGL_ARB_render_texture
 
   BOOL  wglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffer);
   BOOL  wglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer);
   BOOL  wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int *piAttribList);
-
-// WGL_EXT_display_color_table
-
-  GLboolean  wglBindDisplayColorTableEXT(GLushort id);
-  GLboolean  wglCreateDisplayColorTableEXT(GLushort id);
-  VOID  wglDestroyDisplayColorTableEXT(GLushort id);
-  GLboolean  wglLoadDisplayColorTableEXT(const GLushort *table, GLuint length);
 
 // WGL_EXT_extensions_string
 
@@ -3370,19 +3341,9 @@ namespace Trace
   HDC  wglGetCurrentReadDCEXT(void);
   BOOL  wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc);
 
-// WGL_EXT_pbuffer
-
-  HPBUFFEREXT  wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList);
-  BOOL  wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer);
-  HDC  wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer);
-  BOOL  wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue);
-  int  wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC);
-
 // WGL_EXT_pixel_format
 
   BOOL  wglChoosePixelFormatEXT(HDC hDC, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats);
-  BOOL  wglGetPixelFormatAttribfvEXT(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues);
-  BOOL  wglGetPixelFormatAttribivEXT(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues);
 
 // WGL_EXT_swap_control
 
@@ -3397,122 +3358,10 @@ namespace Trace
   BOOL  wglSetPixelFormat(HDC hDC, int iPixelFormat, const PIXELFORMATDESCRIPTOR *ppfd);
   BOOL  wglSwapBuffers(HDC hDC);
 
-// WGL_I3D_digital_video_control
-
-  BOOL  wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int *piValue);
-  BOOL  wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int *piValue);
-
-// WGL_I3D_gamma
-
-  BOOL  wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue);
-  BOOL  wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int *piValue);
-  BOOL  wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue);
-  BOOL  wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int *piValue);
-
-// WGL_I3D_genlock
-
-  BOOL  wglDisableGenlockI3D(HDC hDC);
-  BOOL  wglEnableGenlockI3D(HDC hDC);
-  BOOL  wglGenlockSampleRateI3D(HDC hDC, UINT uRate);
-  BOOL  wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay);
-  BOOL  wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge);
-  BOOL  wglGenlockSourceI3D(HDC hDC, UINT uSource);
-  BOOL  wglGetGenlockSampleRateI3D(HDC hDC, UINT *uRate);
-  BOOL  wglGetGenlockSourceDelayI3D(HDC hDC, UINT *uDelay);
-  BOOL  wglGetGenlockSourceEdgeI3D(HDC hDC, UINT *uEdge);
-  BOOL  wglGetGenlockSourceI3D(HDC hDC, UINT *uSource);
-  BOOL  wglIsEnabledGenlockI3D(HDC hDC, BOOL *pFlag);
-  BOOL  wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay);
-
-// WGL_I3D_image_buffer
-
-  BOOL  wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count);
-  LPVOID  wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags);
-  BOOL  wglDestroyImageBufferI3D(HDC hDC, LPVOID pAddress);
-  BOOL  wglReleaseImageBufferEventsI3D(HDC hDC, const LPVOID *pAddress, UINT count);
-
-// WGL_I3D_swap_frame_lock
-
-  BOOL  wglDisableFrameLockI3D(void);
-  BOOL  wglEnableFrameLockI3D(void);
-  BOOL  wglIsEnabledFrameLockI3D(BOOL *pFlag);
-  BOOL  wglQueryFrameLockMasterI3D(BOOL *pFlag);
-
-// WGL_I3D_swap_frame_usage
-
-  BOOL  wglBeginFrameTrackingI3D(void);
-  BOOL  wglEndFrameTrackingI3D(void);
-  BOOL  wglGetFrameUsageI3D(float *pUsage);
-  BOOL  wglQueryFrameTrackingI3D(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage);
-
-// WGL_NV_DX_interop
-
-  BOOL  wglDXCloseDeviceNV(HANDLE hDevice);
-  BOOL  wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects);
-  BOOL  wglDXObjectAccessNV(HANDLE hObject, GLenum access);
-  HANDLE  wglDXOpenDeviceNV(GLvoid *dxDevice);
-  HANDLE  wglDXRegisterObjectNV(HANDLE hDevice, GLvoid *dxObject, GLuint name, GLenum type, GLenum access);
-  BOOL  wglDXSetResourceShareHandleNV(GLvoid *dxObject, HANDLE shareHandle);
-  BOOL  wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects);
-  BOOL  wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject);
-
-// WGL_NV_copy_image
-
-  BOOL  wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
-
-// WGL_NV_gpu_affinity
-
-  HDC  wglCreateAffinityDCNV(const HGPUNV *phGpuList);
-  BOOL  wglDeleteDCNV(HDC hAffinityDC);
-  BOOL  wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVICE lpGpuDevice);
-  BOOL  wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu);
-  BOOL  wglEnumGpusNV(UINT iGpuIndex, HGPUNV *phGpu);
-
-// WGL_NV_present_video
-
-  BOOL  wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList);
-  int  wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList);
-  BOOL  wglQueryCurrentContextNV(int iAttribute, int *piValue);
-
-// WGL_NV_swap_group
-
-  BOOL  wglBindSwapBarrierNV(GLuint group, GLuint barrier);
-  BOOL  wglJoinSwapGroupNV(HDC hDC, GLuint group);
-  BOOL  wglQueryFrameCountNV(HDC hDC, GLuint *count);
-  BOOL  wglQueryMaxSwapGroupsNV(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers);
-  BOOL  wglQuerySwapGroupNV(HDC hDC, GLuint *group, GLuint *barrier);
-  BOOL  wglResetFrameCountNV(HDC hDC);
-
 // WGL_NV_vertex_array_range
 
   void * wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority);
   void  wglFreeMemoryNV(void *pointer);
-
-// WGL_NV_video_capture
-
-  BOOL  wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice);
-  UINT  wglEnumerateVideoCaptureDevicesNV(HDC hDC, HVIDEOINPUTDEVICENV *phDeviceList);
-  BOOL  wglLockVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice);
-  BOOL  wglQueryVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue);
-  BOOL  wglReleaseVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice);
-
-// WGL_NV_video_output
-
-  BOOL  wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer);
-  BOOL  wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice);
-  BOOL  wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo);
-  BOOL  wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice);
-  BOOL  wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer);
-  BOOL  wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock);
-
-// WGL_OML_sync_control
-
-  BOOL  wglGetMscRateOML(HDC hDC, INT32 *numerator, INT32 *denominator);
-  BOOL  wglGetSyncValuesOML(HDC hDC, INT64 *ust, INT64 *msc, INT64 *sbc);
-  INT64  wglSwapBuffersMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder);
-  INT64  wglSwapLayerBuffersMscOML(HDC hDC, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder);
-  BOOL  wglWaitForMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc);
-  BOOL  wglWaitForSbcOML(HDC hDC, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc);
 
 // WGL_core
 
@@ -13964,7 +13813,7 @@ static void REGAL_CALL trace_glLinkProgramARB(GLhandleARB programObj)
   Trace::glLinkProgramARB(programObj);
 }
 
-static void REGAL_CALL trace_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
+static void REGAL_CALL trace_glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** const string, const GLint *length)
 {
   Internal("trace_glShaderSourceARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -22217,7 +22066,7 @@ static void REGAL_CALL trace_glGetTransformFeedbackVaryingEXT(GLuint program, GL
   Trace::glGetTransformFeedbackVaryingEXT(program, index, bufSize, length, size, type, name);
 }
 
-static void REGAL_CALL trace_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar **varyings, GLenum bufferMode)
+static void REGAL_CALL trace_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
 {
   Internal("trace_glTransformFeedbackVaryingsEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -29165,126 +29014,12 @@ static void REGAL_CALL trace_glAddSwapHintRectWIN(GLint x, GLint y, GLsizei widt
 
 #if REGAL_SYS_WGL
 
-// WGL_3DL_stereo_control
-
-static BOOL REGAL_CALL trace_wglSetStereoEmitterState3DL(HDC hDC, UINT uState)
-{
-  Internal("trace_wglSetStereoEmitterState3DL","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglSetStereoEmitterState3DL(hDC, uState);
-  return ret;
-}
-
-// WGL_AMD_gpu_association
-
-static VOID REGAL_CALL trace_wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
-{
-  Internal("trace_wglBlitContextFramebufferAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  Trace::wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
-}
-
-static HGLRC REGAL_CALL trace_wglCreateAssociatedContextAMD(UINT id)
-{
-  Internal("trace_wglCreateAssociatedContextAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HGLRC  ret = Trace::wglCreateAssociatedContextAMD(id);
-  return ret;
-}
-
-static HGLRC REGAL_CALL trace_wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int *attribList)
-{
-  Internal("trace_wglCreateAssociatedContextAttribsAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HGLRC  ret = Trace::wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDeleteAssociatedContextAMD(HGLRC hglrc)
-{
-  Internal("trace_wglDeleteAssociatedContextAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDeleteAssociatedContextAMD(hglrc);
-  return ret;
-}
-
-static UINT REGAL_CALL trace_wglGetContextGPUIDAMD(HGLRC hglrc)
-{
-  Internal("trace_wglGetContextGPUIDAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  UINT  ret = Trace::wglGetContextGPUIDAMD(hglrc);
-  return ret;
-}
-
-static HGLRC REGAL_CALL trace_wglGetCurrentAssociatedContextAMD(void)
-{
-  Internal("trace_wglGetCurrentAssociatedContextAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HGLRC  ret = Trace::wglGetCurrentAssociatedContextAMD();
-  return ret;
-}
-
-static UINT REGAL_CALL trace_wglGetGPUIDsAMD(UINT maxCount, UINT *ids)
-{
-  Internal("trace_wglGetGPUIDsAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  UINT  ret = Trace::wglGetGPUIDsAMD(maxCount, ids);
-  return ret;
-}
-
-static INT REGAL_CALL trace_wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void *data)
-{
-  Internal("trace_wglGetGPUInfoAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  INT  ret = Trace::wglGetGPUInfoAMD(id, property, dataType, size, data);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
-{
-  Internal("trace_wglMakeAssociatedContextCurrentAMD","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglMakeAssociatedContextCurrentAMD(hglrc);
-  return ret;
-}
-
 // WGL_ARB_buffer_region
 
 static HANDLE REGAL_CALL trace_wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType)
 {
   Internal("trace_wglCreateBufferRegionARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HANDLE  ret = Trace::wglCreateBufferRegionARB(hDC, iLayerPlane, uType);
@@ -29295,7 +29030,6 @@ static VOID REGAL_CALL trace_wglDeleteBufferRegionARB(HANDLE hRegion)
 {
   Internal("trace_wglDeleteBufferRegionARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::wglDeleteBufferRegionARB(hRegion);
@@ -29305,7 +29039,6 @@ static BOOL REGAL_CALL trace_wglRestoreBufferRegionARB(HANDLE hRegion, int x, in
 {
   Internal("trace_wglRestoreBufferRegionARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc);
@@ -29316,7 +29049,6 @@ static BOOL REGAL_CALL trace_wglSaveBufferRegionARB(HANDLE hRegion, int x, int y
 {
   Internal("trace_wglSaveBufferRegionARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglSaveBufferRegionARB(hRegion, x, y, width, height);
@@ -29329,7 +29061,6 @@ static HGLRC REGAL_CALL trace_wglCreateContextAttribsARB(HDC hDC, HGLRC hShareCo
 {
   Internal("trace_wglCreateContextAttribsARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HGLRC  ret = Trace::wglCreateContextAttribsARB(hDC, hShareContext, piAttribList);
@@ -29342,7 +29073,6 @@ static const char *REGAL_CALL trace_wglGetExtensionsStringARB(HDC hDC)
 {
   Internal("trace_wglGetExtensionsStringARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::wglGetExtensionsStringARB(hDC);
@@ -29355,7 +29085,6 @@ static HDC REGAL_CALL trace_wglGetCurrentReadDCARB(void)
 {
   Internal("trace_wglGetCurrentReadDCARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HDC  ret = Trace::wglGetCurrentReadDCARB();
@@ -29366,7 +29095,6 @@ static BOOL REGAL_CALL trace_wglMakeContextCurrentARB(HDC hDrawDC, HDC hReadDC, 
 {
   Internal("trace_wglMakeContextCurrentARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc);
@@ -29379,7 +29107,6 @@ static HPBUFFERARB REGAL_CALL trace_wglCreatePbufferARB(HDC hDC, int iPixelForma
 {
   Internal("trace_wglCreatePbufferARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HPBUFFERARB  ret = Trace::wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
@@ -29390,7 +29117,6 @@ static BOOL REGAL_CALL trace_wglDestroyPbufferARB(HPBUFFERARB hPbuffer)
 {
   Internal("trace_wglDestroyPbufferARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglDestroyPbufferARB(hPbuffer);
@@ -29401,7 +29127,6 @@ static HDC REGAL_CALL trace_wglGetPbufferDCARB(HPBUFFERARB hPbuffer)
 {
   Internal("trace_wglGetPbufferDCARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HDC  ret = Trace::wglGetPbufferDCARB(hPbuffer);
@@ -29412,7 +29137,6 @@ static BOOL REGAL_CALL trace_wglQueryPbufferARB(HPBUFFERARB hPbuffer, int iAttri
 {
   Internal("trace_wglQueryPbufferARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
@@ -29423,45 +29147,9 @@ static int REGAL_CALL trace_wglReleasePbufferDCARB(HPBUFFERARB hPbuffer, HDC hDC
 {
   Internal("trace_wglReleasePbufferDCARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglReleasePbufferDCARB(hPbuffer, hDC);
-  return ret;
-}
-
-// WGL_ARB_pixel_format
-
-static BOOL REGAL_CALL trace_wglChoosePixelFormatARB(HDC hDC, const int *piAttribIList, const FLOAT *pfAttribFList, UINT nMaxFormats, int *piFormats, UINT *nNumFormats)
-{
-  Internal("trace_wglChoosePixelFormatARB","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglChoosePixelFormatARB(hDC, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetPixelFormatAttribfvARB(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues)
-{
-  Internal("trace_wglGetPixelFormatAttribfvARB","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetPixelFormatAttribfvARB(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetPixelFormatAttribivARB(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues)
-{
-  Internal("trace_wglGetPixelFormatAttribivARB","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetPixelFormatAttribivARB(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
   return ret;
 }
 
@@ -29471,7 +29159,6 @@ static BOOL REGAL_CALL trace_wglBindTexImageARB(HPBUFFERARB hPbuffer, int iBuffe
 {
   Internal("trace_wglBindTexImageARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglBindTexImageARB(hPbuffer, iBuffer);
@@ -29482,7 +29169,6 @@ static BOOL REGAL_CALL trace_wglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBu
 {
   Internal("trace_wglReleaseTexImageARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglReleaseTexImageARB(hPbuffer, iBuffer);
@@ -29493,55 +29179,9 @@ static BOOL REGAL_CALL trace_wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const 
 {
   Internal("trace_wglSetPbufferAttribARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglSetPbufferAttribARB(hPbuffer, piAttribList);
-  return ret;
-}
-
-// WGL_EXT_display_color_table
-
-static GLboolean REGAL_CALL trace_wglBindDisplayColorTableEXT(GLushort id)
-{
-  Internal("trace_wglBindDisplayColorTableEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  GLboolean  ret = Trace::wglBindDisplayColorTableEXT(id);
-  return ret;
-}
-
-static GLboolean REGAL_CALL trace_wglCreateDisplayColorTableEXT(GLushort id)
-{
-  Internal("trace_wglCreateDisplayColorTableEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  GLboolean  ret = Trace::wglCreateDisplayColorTableEXT(id);
-  return ret;
-}
-
-static VOID REGAL_CALL trace_wglDestroyDisplayColorTableEXT(GLushort id)
-{
-  Internal("trace_wglDestroyDisplayColorTableEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  Trace::wglDestroyDisplayColorTableEXT(id);
-}
-
-static GLboolean REGAL_CALL trace_wglLoadDisplayColorTableEXT(const GLushort *table, GLuint length)
-{
-  Internal("trace_wglLoadDisplayColorTableEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  GLboolean  ret = Trace::wglLoadDisplayColorTableEXT(table, length);
   return ret;
 }
 
@@ -29551,7 +29191,6 @@ static const char *REGAL_CALL trace_wglGetExtensionsStringEXT(void)
 {
   Internal("trace_wglGetExtensionsStringEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::wglGetExtensionsStringEXT();
@@ -29564,7 +29203,6 @@ static HDC REGAL_CALL trace_wglGetCurrentReadDCEXT(void)
 {
   Internal("trace_wglGetCurrentReadDCEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HDC  ret = Trace::wglGetCurrentReadDCEXT();
@@ -29575,67 +29213,9 @@ static BOOL REGAL_CALL trace_wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, 
 {
   Internal("trace_wglMakeContextCurrentEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
-  return ret;
-}
-
-// WGL_EXT_pbuffer
-
-static HPBUFFEREXT REGAL_CALL trace_wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList)
-{
-  Internal("trace_wglCreatePbufferEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HPBUFFEREXT  ret = Trace::wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
-{
-  Internal("trace_wglDestroyPbufferEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDestroyPbufferEXT(hPbuffer);
-  return ret;
-}
-
-static HDC REGAL_CALL trace_wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
-{
-  Internal("trace_wglGetPbufferDCEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HDC  ret = Trace::wglGetPbufferDCEXT(hPbuffer);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue)
-{
-  Internal("trace_wglQueryPbufferEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
-  return ret;
-}
-
-static int REGAL_CALL trace_wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
-{
-  Internal("trace_wglReleasePbufferDCEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  int  ret = Trace::wglReleasePbufferDCEXT(hPbuffer, hDC);
   return ret;
 }
 
@@ -29645,32 +29225,9 @@ static BOOL REGAL_CALL trace_wglChoosePixelFormatEXT(HDC hDC, const int *piAttri
 {
   Internal("trace_wglChoosePixelFormatEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglChoosePixelFormatEXT(hDC, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetPixelFormatAttribfvEXT(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, FLOAT *pfValues)
-{
-  Internal("trace_wglGetPixelFormatAttribfvEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetPixelFormatAttribfvEXT(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetPixelFormatAttribivEXT(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nAttributes, const int *piAttributes, int *piValues)
-{
-  Internal("trace_wglGetPixelFormatAttribivEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetPixelFormatAttribivEXT(hDC, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues);
   return ret;
 }
 
@@ -29680,7 +29237,6 @@ static int REGAL_CALL trace_wglGetSwapIntervalEXT(void)
 {
   Internal("trace_wglGetSwapIntervalEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglGetSwapIntervalEXT();
@@ -29691,7 +29247,6 @@ static BOOL REGAL_CALL trace_wglSwapIntervalEXT(int interval)
 {
   Internal("trace_wglSwapIntervalEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglSwapIntervalEXT(interval);
@@ -29704,7 +29259,6 @@ static int REGAL_CALL trace_wglChoosePixelFormat(HDC hDC, const PIXELFORMATDESCR
 {
   Internal("trace_wglChoosePixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglChoosePixelFormat(hDC, ppfd);
@@ -29715,7 +29269,6 @@ static int REGAL_CALL trace_wglDescribePixelFormat(HDC hDC, int iPixelFormat, UI
 {
   Internal("trace_wglDescribePixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglDescribePixelFormat(hDC, iPixelFormat, nBytes, ppfd);
@@ -29726,7 +29279,6 @@ static int REGAL_CALL trace_wglGetPixelFormat(HDC hDC)
 {
   Internal("trace_wglGetPixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglGetPixelFormat(hDC);
@@ -29737,7 +29289,6 @@ static BOOL REGAL_CALL trace_wglSetPixelFormat(HDC hDC, int iPixelFormat, const 
 {
   Internal("trace_wglSetPixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglSetPixelFormat(hDC, iPixelFormat, ppfd);
@@ -29748,615 +29299,9 @@ static BOOL REGAL_CALL trace_wglSwapBuffers(HDC hDC)
 {
   Internal("trace_wglSwapBuffers","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglSwapBuffers(hDC);
-  return ret;
-}
-
-// WGL_I3D_digital_video_control
-
-static BOOL REGAL_CALL trace_wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int *piValue)
-{
-  Internal("trace_wglGetDigitalVideoParametersI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int *piValue)
-{
-  Internal("trace_wglSetDigitalVideoParametersI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
-  return ret;
-}
-
-// WGL_I3D_gamma
-
-static BOOL REGAL_CALL trace_wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue)
-{
-  Internal("trace_wglGetGammaTableI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int *piValue)
-{
-  Internal("trace_wglGetGammaTableParametersI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue)
-{
-  Internal("trace_wglSetGammaTableI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int *piValue)
-{
-  Internal("trace_wglSetGammaTableParametersI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
-  return ret;
-}
-
-// WGL_I3D_genlock
-
-static BOOL REGAL_CALL trace_wglDisableGenlockI3D(HDC hDC)
-{
-  Internal("trace_wglDisableGenlockI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDisableGenlockI3D(hDC);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglEnableGenlockI3D(HDC hDC)
-{
-  Internal("trace_wglEnableGenlockI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglEnableGenlockI3D(hDC);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGenlockSampleRateI3D(HDC hDC, UINT uRate)
-{
-  Internal("trace_wglGenlockSampleRateI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGenlockSampleRateI3D(hDC, uRate);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
-{
-  Internal("trace_wglGenlockSourceDelayI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGenlockSourceDelayI3D(hDC, uDelay);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
-{
-  Internal("trace_wglGenlockSourceEdgeI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGenlockSourceEdgeI3D(hDC, uEdge);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGenlockSourceI3D(HDC hDC, UINT uSource)
-{
-  Internal("trace_wglGenlockSourceI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGenlockSourceI3D(hDC, uSource);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetGenlockSampleRateI3D(HDC hDC, UINT *uRate)
-{
-  Internal("trace_wglGetGenlockSampleRateI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetGenlockSampleRateI3D(hDC, uRate);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetGenlockSourceDelayI3D(HDC hDC, UINT *uDelay)
-{
-  Internal("trace_wglGetGenlockSourceDelayI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetGenlockSourceDelayI3D(hDC, uDelay);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetGenlockSourceEdgeI3D(HDC hDC, UINT *uEdge)
-{
-  Internal("trace_wglGetGenlockSourceEdgeI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetGenlockSourceEdgeI3D(hDC, uEdge);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetGenlockSourceI3D(HDC hDC, UINT *uSource)
-{
-  Internal("trace_wglGetGenlockSourceI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetGenlockSourceI3D(hDC, uSource);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglIsEnabledGenlockI3D(HDC hDC, BOOL *pFlag)
-{
-  Internal("trace_wglIsEnabledGenlockI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglIsEnabledGenlockI3D(hDC, pFlag);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay)
-{
-  Internal("trace_wglQueryGenlockMaxSourceDelayI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
-  return ret;
-}
-
-// WGL_I3D_image_buffer
-
-static BOOL REGAL_CALL trace_wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count)
-{
-  Internal("trace_wglAssociateImageBufferEventsI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
-  return ret;
-}
-
-static LPVOID REGAL_CALL trace_wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags)
-{
-  Internal("trace_wglCreateImageBufferI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  LPVOID  ret = Trace::wglCreateImageBufferI3D(hDC, dwSize, uFlags);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDestroyImageBufferI3D(HDC hDC, LPVOID pAddress)
-{
-  Internal("trace_wglDestroyImageBufferI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDestroyImageBufferI3D(hDC, pAddress);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglReleaseImageBufferEventsI3D(HDC hDC, const LPVOID *pAddress, UINT count)
-{
-  Internal("trace_wglReleaseImageBufferEventsI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
-  return ret;
-}
-
-// WGL_I3D_swap_frame_lock
-
-static BOOL REGAL_CALL trace_wglDisableFrameLockI3D(void)
-{
-  Internal("trace_wglDisableFrameLockI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDisableFrameLockI3D();
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglEnableFrameLockI3D(void)
-{
-  Internal("trace_wglEnableFrameLockI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglEnableFrameLockI3D();
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglIsEnabledFrameLockI3D(BOOL *pFlag)
-{
-  Internal("trace_wglIsEnabledFrameLockI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglIsEnabledFrameLockI3D(pFlag);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryFrameLockMasterI3D(BOOL *pFlag)
-{
-  Internal("trace_wglQueryFrameLockMasterI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryFrameLockMasterI3D(pFlag);
-  return ret;
-}
-
-// WGL_I3D_swap_frame_usage
-
-static BOOL REGAL_CALL trace_wglBeginFrameTrackingI3D(void)
-{
-  Internal("trace_wglBeginFrameTrackingI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglBeginFrameTrackingI3D();
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglEndFrameTrackingI3D(void)
-{
-  Internal("trace_wglEndFrameTrackingI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglEndFrameTrackingI3D();
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetFrameUsageI3D(float *pUsage)
-{
-  Internal("trace_wglGetFrameUsageI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetFrameUsageI3D(pUsage);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryFrameTrackingI3D(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage)
-{
-  Internal("trace_wglQueryFrameTrackingI3D","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
-  return ret;
-}
-
-// WGL_NV_DX_interop
-
-static BOOL REGAL_CALL trace_wglDXCloseDeviceNV(HANDLE hDevice)
-{
-  Internal("trace_wglDXCloseDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDXCloseDeviceNV(hDevice);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects)
-{
-  Internal("trace_wglDXLockObjectsNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDXLockObjectsNV(hDevice, count, hObjects);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDXObjectAccessNV(HANDLE hObject, GLenum access)
-{
-  Internal("trace_wglDXObjectAccessNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDXObjectAccessNV(hObject, access);
-  return ret;
-}
-
-static HANDLE REGAL_CALL trace_wglDXOpenDeviceNV(GLvoid *dxDevice)
-{
-  Internal("trace_wglDXOpenDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HANDLE  ret = Trace::wglDXOpenDeviceNV(dxDevice);
-  return ret;
-}
-
-static HANDLE REGAL_CALL trace_wglDXRegisterObjectNV(HANDLE hDevice, GLvoid *dxObject, GLuint name, GLenum type, GLenum access)
-{
-  Internal("trace_wglDXRegisterObjectNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HANDLE  ret = Trace::wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDXSetResourceShareHandleNV(GLvoid *dxObject, HANDLE shareHandle)
-{
-  Internal("trace_wglDXSetResourceShareHandleNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDXSetResourceShareHandleNV(dxObject, shareHandle);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects)
-{
-  Internal("trace_wglDXUnlockObjectsNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDXUnlockObjectsNV(hDevice, count, hObjects);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
-{
-  Internal("trace_wglDXUnregisterObjectNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDXUnregisterObjectNV(hDevice, hObject);
-  return ret;
-}
-
-// WGL_NV_copy_image
-
-static BOOL REGAL_CALL trace_wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
-{
-  Internal("trace_wglCopyImageSubDataNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
-  return ret;
-}
-
-// WGL_NV_gpu_affinity
-
-static HDC REGAL_CALL trace_wglCreateAffinityDCNV(const HGPUNV *phGpuList)
-{
-  Internal("trace_wglCreateAffinityDCNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  HDC  ret = Trace::wglCreateAffinityDCNV(phGpuList);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglDeleteDCNV(HDC hAffinityDC)
-{
-  Internal("trace_wglDeleteDCNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglDeleteDCNV(hAffinityDC);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, PGPU_DEVICE lpGpuDevice)
-{
-  Internal("trace_wglEnumGpuDevicesNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu)
-{
-  Internal("trace_wglEnumGpusFromAffinityDCNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglEnumGpusNV(UINT iGpuIndex, HGPUNV *phGpu)
-{
-  Internal("trace_wglEnumGpusNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglEnumGpusNV(iGpuIndex, phGpu);
-  return ret;
-}
-
-// WGL_NV_present_video
-
-static BOOL REGAL_CALL trace_wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList)
-{
-  Internal("trace_wglBindVideoDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
-  return ret;
-}
-
-static int REGAL_CALL trace_wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList)
-{
-  Internal("trace_wglEnumerateVideoDevicesNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  int  ret = Trace::wglEnumerateVideoDevicesNV(hDC, phDeviceList);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryCurrentContextNV(int iAttribute, int *piValue)
-{
-  Internal("trace_wglQueryCurrentContextNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryCurrentContextNV(iAttribute, piValue);
-  return ret;
-}
-
-// WGL_NV_swap_group
-
-static BOOL REGAL_CALL trace_wglBindSwapBarrierNV(GLuint group, GLuint barrier)
-{
-  Internal("trace_wglBindSwapBarrierNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglBindSwapBarrierNV(group, barrier);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglJoinSwapGroupNV(HDC hDC, GLuint group)
-{
-  Internal("trace_wglJoinSwapGroupNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglJoinSwapGroupNV(hDC, group);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryFrameCountNV(HDC hDC, GLuint *count)
-{
-  Internal("trace_wglQueryFrameCountNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryFrameCountNV(hDC, count);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryMaxSwapGroupsNV(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers)
-{
-  Internal("trace_wglQueryMaxSwapGroupsNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQuerySwapGroupNV(HDC hDC, GLuint *group, GLuint *barrier)
-{
-  Internal("trace_wglQuerySwapGroupNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQuerySwapGroupNV(hDC, group, barrier);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglResetFrameCountNV(HDC hDC)
-{
-  Internal("trace_wglResetFrameCountNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglResetFrameCountNV(hDC);
   return ret;
 }
 
@@ -30366,7 +29311,6 @@ static void *REGAL_CALL trace_wglAllocateMemoryNV(GLsizei size, GLfloat readfreq
 {
   Internal("trace_wglAllocateMemoryNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   void * ret = Trace::wglAllocateMemoryNV(size, readfreq, writefreq, priority);
@@ -30377,203 +29321,9 @@ static void REGAL_CALL trace_wglFreeMemoryNV(void *pointer)
 {
   Internal("trace_wglFreeMemoryNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::wglFreeMemoryNV(pointer);
-}
-
-// WGL_NV_video_capture
-
-static BOOL REGAL_CALL trace_wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice)
-{
-  Internal("trace_wglBindVideoCaptureDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
-  return ret;
-}
-
-static UINT REGAL_CALL trace_wglEnumerateVideoCaptureDevicesNV(HDC hDC, HVIDEOINPUTDEVICENV *phDeviceList)
-{
-  Internal("trace_wglEnumerateVideoCaptureDevicesNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  UINT  ret = Trace::wglEnumerateVideoCaptureDevicesNV(hDC, phDeviceList);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglLockVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice)
-{
-  Internal("trace_wglLockVideoCaptureDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglLockVideoCaptureDeviceNV(hDC, hDevice);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglQueryVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue)
-{
-  Internal("trace_wglQueryVideoCaptureDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglQueryVideoCaptureDeviceNV(hDC, hDevice, iAttribute, piValue);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglReleaseVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice)
-{
-  Internal("trace_wglReleaseVideoCaptureDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglReleaseVideoCaptureDeviceNV(hDC, hDevice);
-  return ret;
-}
-
-// WGL_NV_video_output
-
-static BOOL REGAL_CALL trace_wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer)
-{
-  Internal("trace_wglBindVideoImageNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice)
-{
-  Internal("trace_wglGetVideoDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo)
-{
-  Internal("trace_wglGetVideoInfoNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
-{
-  Internal("trace_wglReleaseVideoDeviceNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglReleaseVideoDeviceNV(hVideoDevice);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer)
-{
-  Internal("trace_wglReleaseVideoImageNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock)
-{
-  Internal("trace_wglSendPbufferToVideoNV","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
-  return ret;
-}
-
-// WGL_OML_sync_control
-
-static BOOL REGAL_CALL trace_wglGetMscRateOML(HDC hDC, INT32 *numerator, INT32 *denominator)
-{
-  Internal("trace_wglGetMscRateOML","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetMscRateOML(hDC, numerator, denominator);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglGetSyncValuesOML(HDC hDC, INT64 *ust, INT64 *msc, INT64 *sbc)
-{
-  Internal("trace_wglGetSyncValuesOML","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglGetSyncValuesOML(hDC, ust, msc, sbc);
-  return ret;
-}
-
-static INT64 REGAL_CALL trace_wglSwapBuffersMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder)
-{
-  Internal("trace_wglSwapBuffersMscOML","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  INT64  ret = Trace::wglSwapBuffersMscOML(hDC, target_msc, divisor, remainder);
-  return ret;
-}
-
-static INT64 REGAL_CALL trace_wglSwapLayerBuffersMscOML(HDC hDC, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder)
-{
-  Internal("trace_wglSwapLayerBuffersMscOML","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  INT64  ret = Trace::wglSwapLayerBuffersMscOML(hDC, fuPlanes, target_msc, divisor, remainder);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglWaitForMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc)
-{
-  Internal("trace_wglWaitForMscOML","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglWaitForMscOML(hDC, target_msc, divisor, remainder, ust, msc, sbc);
-  return ret;
-}
-
-static BOOL REGAL_CALL trace_wglWaitForSbcOML(HDC hDC, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc)
-{
-  Internal("trace_wglWaitForSbcOML","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  BOOL  ret = Trace::wglWaitForSbcOML(hDC, target_sbc, ust, msc, sbc);
-  return ret;
 }
 
 // WGL_core
@@ -30582,7 +29332,6 @@ static BOOL REGAL_CALL trace_wglCopyContext(HGLRC hglrcSrc, HGLRC hglrcDst, UINT
 {
   Internal("trace_wglCopyContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglCopyContext(hglrcSrc, hglrcDst, mask);
@@ -30593,7 +29342,6 @@ static HGLRC REGAL_CALL trace_wglCreateContext(HDC hDC)
 {
   Internal("trace_wglCreateContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HGLRC  ret = Trace::wglCreateContext(hDC);
@@ -30604,7 +29352,6 @@ static HGLRC REGAL_CALL trace_wglCreateLayerContext(HDC hDC, int iLayerPlane)
 {
   Internal("trace_wglCreateLayerContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HGLRC  ret = Trace::wglCreateLayerContext(hDC, iLayerPlane);
@@ -30615,7 +29362,6 @@ static BOOL REGAL_CALL trace_wglDeleteContext(HGLRC hglrc)
 {
   Internal("trace_wglDeleteContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglDeleteContext(hglrc);
@@ -30626,7 +29372,6 @@ static BOOL REGAL_CALL trace_wglDescribeLayerPlane(HDC hDC, int iPixelFormat, in
 {
   Internal("trace_wglDescribeLayerPlane","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglDescribeLayerPlane(hDC, iPixelFormat, iLayerPlane, nBytes, plpd);
@@ -30637,7 +29382,6 @@ static HGLRC REGAL_CALL trace_wglGetCurrentContext(void)
 {
   Internal("trace_wglGetCurrentContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HGLRC  ret = Trace::wglGetCurrentContext();
@@ -30648,7 +29392,6 @@ static HDC REGAL_CALL trace_wglGetCurrentDC(void)
 {
   Internal("trace_wglGetCurrentDC","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   HDC  ret = Trace::wglGetCurrentDC();
@@ -30659,7 +29402,6 @@ static PROC REGAL_CALL trace_wglGetDefaultProcAddress(LPCSTR lpszProc)
 {
   Internal("trace_wglGetDefaultProcAddress","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   PROC  ret = Trace::wglGetDefaultProcAddress(lpszProc);
@@ -30670,7 +29412,6 @@ static int REGAL_CALL trace_wglGetLayerPaletteEntries(HDC hDC, int iLayerPlane, 
 {
   Internal("trace_wglGetLayerPaletteEntries","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglGetLayerPaletteEntries(hDC, iLayerPlane, iStart, nEntries, pcr);
@@ -30681,7 +29422,6 @@ static PROC REGAL_CALL trace_wglGetProcAddress(LPCSTR lpszProc)
 {
   Internal("trace_wglGetProcAddress","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   PROC  ret = Trace::wglGetProcAddress(lpszProc);
@@ -30692,7 +29432,6 @@ static BOOL REGAL_CALL trace_wglMakeCurrent(HDC hDC, HGLRC hglrc)
 {
   Internal("trace_wglMakeCurrent","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglMakeCurrent(hDC, hglrc);
@@ -30703,7 +29442,6 @@ static BOOL REGAL_CALL trace_wglRealizeLayerPalette(HDC hDC, int iLayerPlane, BO
 {
   Internal("trace_wglRealizeLayerPalette","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglRealizeLayerPalette(hDC, iLayerPlane, bRealize);
@@ -30714,7 +29452,6 @@ static int REGAL_CALL trace_wglSetLayerPaletteEntries(HDC hDC, int iLayerPlane, 
 {
   Internal("trace_wglSetLayerPaletteEntries","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglSetLayerPaletteEntries(hDC, iLayerPlane, iStart, nEntries, pcr);
@@ -30725,7 +29462,6 @@ static BOOL REGAL_CALL trace_wglShareLists(HGLRC hglrcShare, HGLRC hglrcSrc)
 {
   Internal("trace_wglShareLists","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglShareLists(hglrcShare, hglrcSrc);
@@ -30736,7 +29472,6 @@ static BOOL REGAL_CALL trace_wglSwapLayerBuffers(HDC hDC, UINT fuPlanes)
 {
   Internal("trace_wglSwapLayerBuffers","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglSwapLayerBuffers(hDC, fuPlanes);
@@ -30747,7 +29482,6 @@ static DWORD REGAL_CALL trace_wglSwapMultipleBuffers(UINT n, const WGLSWAP *ps)
 {
   Internal("trace_wglSwapMultipleBuffers","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   DWORD  ret = Trace::wglSwapMultipleBuffers(n, ps);
@@ -30758,7 +29492,6 @@ static BOOL REGAL_CALL trace_wglUseFontBitmapsA(HDC hDC, DWORD first, DWORD coun
 {
   Internal("trace_wglUseFontBitmapsA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglUseFontBitmapsA(hDC, first, count, listBase);
@@ -30769,7 +29502,6 @@ static BOOL REGAL_CALL trace_wglUseFontBitmapsW(HDC hDC, DWORD first, DWORD coun
 {
   Internal("trace_wglUseFontBitmapsW","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglUseFontBitmapsW(hDC, first, count, listBase);
@@ -30780,7 +29512,6 @@ static BOOL REGAL_CALL trace_wglUseFontOutlinesA(HDC hDC, DWORD first, DWORD cou
 {
   Internal("trace_wglUseFontOutlinesA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglUseFontOutlinesA(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
@@ -30791,7 +29522,6 @@ static BOOL REGAL_CALL trace_wglUseFontOutlinesW(HDC hDC, DWORD first, DWORD cou
 {
   Internal("trace_wglUseFontOutlinesW","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglUseFontOutlinesW(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
@@ -30808,7 +29538,6 @@ static XVisualInfo *REGAL_CALL trace_glXChooseVisual(Display *dpy, int screen, i
 {
   Internal("trace_glXChooseVisual","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   XVisualInfo * ret = Trace::glXChooseVisual(dpy, screen, attribList);
@@ -30819,7 +29548,6 @@ static void REGAL_CALL trace_glXCopyContext(Display *dpy, GLXContext src, GLXCon
 {
   Internal("trace_glXCopyContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXCopyContext(dpy, src, dst, mask);
@@ -30829,7 +29557,6 @@ static GLXContext REGAL_CALL trace_glXCreateContext(Display *dpy, XVisualInfo *v
 {
   Internal("trace_glXCreateContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContext  ret = Trace::glXCreateContext(dpy, vis, shareList, direct);
@@ -30840,7 +29567,6 @@ static GLXPixmap REGAL_CALL trace_glXCreateGLXPixmap(Display *dpy, XVisualInfo *
 {
   Internal("trace_glXCreateGLXPixmap","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXPixmap  ret = Trace::glXCreateGLXPixmap(dpy, vis, pixmap);
@@ -30851,7 +29577,6 @@ static void REGAL_CALL trace_glXDestroyContext(Display *dpy, GLXContext ctx)
 {
   Internal("trace_glXDestroyContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXDestroyContext(dpy, ctx);
@@ -30861,7 +29586,6 @@ static void REGAL_CALL trace_glXDestroyGLXPixmap(Display *dpy, GLXPixmap pix)
 {
   Internal("trace_glXDestroyGLXPixmap","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXDestroyGLXPixmap(dpy, pix);
@@ -30871,7 +29595,6 @@ static int REGAL_CALL trace_glXGetConfig(Display *dpy, XVisualInfo *vis, int att
 {
   Internal("trace_glXGetConfig","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXGetConfig(dpy, vis, attrib, value);
@@ -30882,7 +29605,6 @@ static GLXContext REGAL_CALL trace_glXGetCurrentContext(void)
 {
   Internal("trace_glXGetCurrentContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContext  ret = Trace::glXGetCurrentContext();
@@ -30893,7 +29615,6 @@ static GLXDrawable REGAL_CALL trace_glXGetCurrentDrawable(void)
 {
   Internal("trace_glXGetCurrentDrawable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXDrawable  ret = Trace::glXGetCurrentDrawable();
@@ -30904,7 +29625,6 @@ static Bool REGAL_CALL trace_glXIsDirect(Display *dpy, GLXContext ctx)
 {
   Internal("trace_glXIsDirect","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXIsDirect(dpy, ctx);
@@ -30915,7 +29635,6 @@ static Bool REGAL_CALL trace_glXMakeCurrent(Display *dpy, GLXDrawable drawable, 
 {
   Internal("trace_glXMakeCurrent","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXMakeCurrent(dpy, drawable, ctx);
@@ -30926,7 +29645,6 @@ static Bool REGAL_CALL trace_glXQueryExtension(Display *dpy, int *errorBase, int
 {
   Internal("trace_glXQueryExtension","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXQueryExtension(dpy, errorBase, eventBase);
@@ -30937,7 +29655,6 @@ static Bool REGAL_CALL trace_glXQueryVersion(Display *dpy, int *major, int *mino
 {
   Internal("trace_glXQueryVersion","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXQueryVersion(dpy, major, minor);
@@ -30948,7 +29665,6 @@ static void REGAL_CALL trace_glXSwapBuffers(Display *dpy, GLXDrawable drawable)
 {
   Internal("trace_glXSwapBuffers","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXSwapBuffers(dpy, drawable);
@@ -30958,7 +29674,6 @@ static void REGAL_CALL trace_glXUseXFont(Font font, int first, int count, int li
 {
   Internal("trace_glXUseXFont","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXUseXFont(font, first, count, listBase);
@@ -30968,7 +29683,6 @@ static void REGAL_CALL trace_glXWaitGL(void)
 {
   Internal("trace_glXWaitGL","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXWaitGL();
@@ -30978,7 +29692,6 @@ static void REGAL_CALL trace_glXWaitX(void)
 {
   Internal("trace_glXWaitX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXWaitX();
@@ -30990,7 +29703,6 @@ static const char *REGAL_CALL trace_glXGetClientString(Display *dpy, int name)
 {
   Internal("trace_glXGetClientString","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::glXGetClientString(dpy, name);
@@ -31001,7 +29713,6 @@ static const char *REGAL_CALL trace_glXQueryExtensionsString(Display *dpy, int s
 {
   Internal("trace_glXQueryExtensionsString","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::glXQueryExtensionsString(dpy, screen);
@@ -31012,7 +29723,6 @@ static const char *REGAL_CALL trace_glXQueryServerString(Display *dpy, int scree
 {
   Internal("trace_glXQueryServerString","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::glXQueryServerString(dpy, screen, name);
@@ -31025,7 +29735,6 @@ static Display *REGAL_CALL trace_glXGetCurrentDisplay(void)
 {
   Internal("trace_glXGetCurrentDisplay","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Display * ret = Trace::glXGetCurrentDisplay();
@@ -31038,7 +29747,6 @@ static GLXFBConfig *REGAL_CALL trace_glXChooseFBConfig(Display *dpy, int screen,
 {
   Internal("trace_glXChooseFBConfig","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXFBConfig * ret = Trace::glXChooseFBConfig(dpy, screen, attrib_list, nelements);
@@ -31049,7 +29757,6 @@ static GLXContext REGAL_CALL trace_glXCreateNewContext(Display *dpy, GLXFBConfig
 {
   Internal("trace_glXCreateNewContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContext  ret = Trace::glXCreateNewContext(dpy, config, render_type, share_list, direct);
@@ -31060,7 +29767,6 @@ static GLXPbuffer REGAL_CALL trace_glXCreatePbuffer(Display *dpy, GLXFBConfig co
 {
   Internal("trace_glXCreatePbuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXPbuffer  ret = Trace::glXCreatePbuffer(dpy, config, attrib_list);
@@ -31071,7 +29777,6 @@ static GLXPixmap REGAL_CALL trace_glXCreatePixmap(Display *dpy, GLXFBConfig conf
 {
   Internal("trace_glXCreatePixmap","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXPixmap  ret = Trace::glXCreatePixmap(dpy, config, pixmap, attrib_list);
@@ -31082,7 +29787,6 @@ static GLXWindow REGAL_CALL trace_glXCreateWindow(Display *dpy, GLXFBConfig conf
 {
   Internal("trace_glXCreateWindow","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXWindow  ret = Trace::glXCreateWindow(dpy, config, win, attrib_list);
@@ -31093,7 +29797,6 @@ static void REGAL_CALL trace_glXDestroyPbuffer(Display *dpy, GLXPbuffer pbuf)
 {
   Internal("trace_glXDestroyPbuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXDestroyPbuffer(dpy, pbuf);
@@ -31103,7 +29806,6 @@ static void REGAL_CALL trace_glXDestroyPixmap(Display *dpy, GLXPixmap pixmap)
 {
   Internal("trace_glXDestroyPixmap","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXDestroyPixmap(dpy, pixmap);
@@ -31113,7 +29815,6 @@ static void REGAL_CALL trace_glXDestroyWindow(Display *dpy, GLXWindow win)
 {
   Internal("trace_glXDestroyWindow","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXDestroyWindow(dpy, win);
@@ -31123,7 +29824,6 @@ static GLXDrawable REGAL_CALL trace_glXGetCurrentReadDrawable(void)
 {
   Internal("trace_glXGetCurrentReadDrawable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXDrawable  ret = Trace::glXGetCurrentReadDrawable();
@@ -31134,7 +29834,6 @@ static int REGAL_CALL trace_glXGetFBConfigAttrib(Display *dpy, GLXFBConfig confi
 {
   Internal("trace_glXGetFBConfigAttrib","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXGetFBConfigAttrib(dpy, config, attribute, value);
@@ -31145,7 +29844,6 @@ static GLXFBConfig *REGAL_CALL trace_glXGetFBConfigs(Display *dpy, int screen, i
 {
   Internal("trace_glXGetFBConfigs","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXFBConfig * ret = Trace::glXGetFBConfigs(dpy, screen, nelements);
@@ -31156,7 +29854,6 @@ static void REGAL_CALL trace_glXGetSelectedEvent(Display *dpy, GLXDrawable draw,
 {
   Internal("trace_glXGetSelectedEvent","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXGetSelectedEvent(dpy, draw, event_mask);
@@ -31166,7 +29863,6 @@ static XVisualInfo *REGAL_CALL trace_glXGetVisualFromFBConfig(Display *dpy, GLXF
 {
   Internal("trace_glXGetVisualFromFBConfig","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   XVisualInfo * ret = Trace::glXGetVisualFromFBConfig(dpy, config);
@@ -31177,7 +29873,6 @@ static Bool REGAL_CALL trace_glXMakeContextCurrent(Display *display, GLXDrawable
 {
   Internal("trace_glXMakeContextCurrent","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXMakeContextCurrent(display, draw, read, ctx);
@@ -31188,7 +29883,6 @@ static int REGAL_CALL trace_glXQueryContext(Display *dpy, GLXContext ctx, int at
 {
   Internal("trace_glXQueryContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXQueryContext(dpy, ctx, attribute, value);
@@ -31199,7 +29893,6 @@ static void REGAL_CALL trace_glXQueryDrawable(Display *dpy, GLXDrawable draw, in
 {
   Internal("trace_glXQueryDrawable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXQueryDrawable(dpy, draw, attribute, value);
@@ -31209,7 +29902,6 @@ static void REGAL_CALL trace_glXSelectEvent(Display *dpy, GLXDrawable draw, unsi
 {
   Internal("trace_glXSelectEvent","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXSelectEvent(dpy, draw, event_mask);
@@ -31221,7 +29913,6 @@ static __GLXextFuncPtr REGAL_CALL trace_glXGetProcAddress(const GLubyte *procNam
 {
   Internal("trace_glXGetProcAddress","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   __GLXextFuncPtr  ret = Trace::glXGetProcAddress(procName);
@@ -31234,7 +29925,6 @@ static GLXContext REGAL_CALL trace_glXCreateContextAttribsARB(Display *dpy, GLXF
 {
   Internal("trace_glXCreateContextAttribsARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContext  ret = Trace::glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list);
@@ -31247,7 +29937,6 @@ static __GLXextFuncPtr REGAL_CALL trace_glXGetProcAddressARB(const GLubyte *proc
 {
   Internal("trace_glXGetProcAddressARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   __GLXextFuncPtr  ret = Trace::glXGetProcAddressARB(procName);
@@ -31260,7 +29949,6 @@ static void REGAL_CALL trace_glXFreeContextEXT(Display *dpy, GLXContext context)
 {
   Internal("trace_glXFreeContextEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXFreeContextEXT(dpy, context);
@@ -31270,7 +29958,6 @@ static GLXContextID REGAL_CALL trace_glXGetContextIDEXT(const GLXContext context
 {
   Internal("trace_glXGetContextIDEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContextID  ret = Trace::glXGetContextIDEXT(context);
@@ -31281,7 +29968,6 @@ static GLXContext REGAL_CALL trace_glXImportContextEXT(Display *dpy, GLXContextI
 {
   Internal("trace_glXImportContextEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContext  ret = Trace::glXImportContextEXT(dpy, contextID);
@@ -31292,7 +29978,6 @@ static int REGAL_CALL trace_glXQueryContextInfoEXT(Display *dpy, GLXContext cont
 {
   Internal("trace_glXQueryContextInfoEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXQueryContextInfoEXT(dpy, context, attribute, value);
@@ -31305,7 +29990,6 @@ static void REGAL_CALL trace_glXSwapIntervalEXT(Display *dpy, GLXDrawable drawab
 {
   Internal("trace_glXSwapIntervalEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXSwapIntervalEXT(dpy, drawable, interval);
@@ -31317,7 +30001,6 @@ static void REGAL_CALL trace_glXBindTexImageEXT(Display *display, GLXDrawable dr
 {
   Internal("trace_glXBindTexImageEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXBindTexImageEXT(display, drawable, buffer, attrib_list);
@@ -31327,7 +30010,6 @@ static void REGAL_CALL trace_glXReleaseTexImageEXT(Display *display, GLXDrawable
 {
   Internal("trace_glXReleaseTexImageEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXReleaseTexImageEXT(display, drawable, buffer);
@@ -31339,7 +30021,6 @@ static unsigned int REGAL_CALL trace_glXGetAGPOffsetMESA(const void *pointer)
 {
   Internal("trace_glXGetAGPOffsetMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   unsigned int  ret = Trace::glXGetAGPOffsetMESA(pointer);
@@ -31352,7 +30033,6 @@ static void REGAL_CALL trace_glXCopySubBufferMESA(Display *dpy, GLXDrawable draw
 {
   Internal("trace_glXCopySubBufferMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXCopySubBufferMESA(dpy, drawable, x, y, width, height);
@@ -31364,7 +30044,6 @@ static GLXPixmap REGAL_CALL trace_glXCreateGLXPixmapMESA(Display *dpy, XVisualIn
 {
   Internal("trace_glXCreateGLXPixmapMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXPixmap  ret = Trace::glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap);
@@ -31377,7 +30056,6 @@ static Bool REGAL_CALL trace_glXReleaseBuffersMESA(Display *dpy, GLXDrawable d)
 {
   Internal("trace_glXReleaseBuffersMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXReleaseBuffersMESA(dpy, d);
@@ -31390,7 +30068,6 @@ static GLboolean REGAL_CALL trace_glXSet3DfxModeMESA(GLint mode)
 {
   Internal("trace_glXSet3DfxModeMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLboolean  ret = Trace::glXSet3DfxModeMESA(mode);
@@ -31403,7 +30080,6 @@ static int REGAL_CALL trace_glXGetSwapIntervalMESA(void)
 {
   Internal("trace_glXGetSwapIntervalMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXGetSwapIntervalMESA();
@@ -31414,7 +30090,6 @@ static int REGAL_CALL trace_glXSwapIntervalMESA(unsigned int interval)
 {
   Internal("trace_glXSwapIntervalMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXSwapIntervalMESA(interval);
@@ -31427,7 +30102,6 @@ static void REGAL_CALL trace_glXCopyImageSubDataNV(Display *dpy, GLXContext srcC
 {
   Internal("trace_glXCopyImageSubDataNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
@@ -31439,7 +30113,6 @@ static Bool REGAL_CALL trace_glXBindSwapBarrierNV(Display *dpy, GLuint group, GL
 {
   Internal("trace_glXBindSwapBarrierNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXBindSwapBarrierNV(dpy, group, barrier);
@@ -31450,7 +30123,6 @@ static Bool REGAL_CALL trace_glXJoinSwapGroupNV(Display *dpy, GLXDrawable drawab
 {
   Internal("trace_glXJoinSwapGroupNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXJoinSwapGroupNV(dpy, drawable, group);
@@ -31461,7 +30133,6 @@ static Bool REGAL_CALL trace_glXQueryFrameCountNV(Display *dpy, int screen, GLui
 {
   Internal("trace_glXQueryFrameCountNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXQueryFrameCountNV(dpy, screen, count);
@@ -31472,7 +30143,6 @@ static Bool REGAL_CALL trace_glXQueryMaxSwapGroupsNV(Display *dpy, int screen, G
 {
   Internal("trace_glXQueryMaxSwapGroupsNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers);
@@ -31483,7 +30153,6 @@ static Bool REGAL_CALL trace_glXQuerySwapGroupNV(Display *dpy, GLXDrawable drawa
 {
   Internal("trace_glXQuerySwapGroupNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXQuerySwapGroupNV(dpy, drawable, group, barrier);
@@ -31494,7 +30163,6 @@ static Bool REGAL_CALL trace_glXResetFrameCountNV(Display *dpy, int screen)
 {
   Internal("trace_glXResetFrameCountNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXResetFrameCountNV(dpy, screen);
@@ -31507,7 +30175,6 @@ static void *REGAL_CALL trace_glXAllocateMemoryNV(GLsizei size, GLfloat readFreq
 {
   Internal("trace_glXAllocateMemoryNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   void * ret = Trace::glXAllocateMemoryNV(size, readFrequency, writeFrequency, priority);
@@ -31518,7 +30185,6 @@ static void REGAL_CALL trace_glXFreeMemoryNV(void *pointer)
 {
   Internal("trace_glXFreeMemoryNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXFreeMemoryNV(pointer);
@@ -31530,7 +30196,6 @@ static Bool REGAL_CALL trace_glXGetMscRateOML(Display *dpy, GLXDrawable drawable
 {
   Internal("trace_glXGetMscRateOML","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXGetMscRateOML(dpy, drawable, numerator, denominator);
@@ -31541,7 +30206,6 @@ static Bool REGAL_CALL trace_glXGetSyncValuesOML(Display *dpy, GLXDrawable drawa
 {
   Internal("trace_glXGetSyncValuesOML","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc);
@@ -31552,7 +30216,6 @@ static int64_t REGAL_CALL trace_glXSwapBuffersMscOML(Display *dpy, GLXDrawable d
 {
   Internal("trace_glXSwapBuffersMscOML","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int64_t  ret = Trace::glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder);
@@ -31563,7 +30226,6 @@ static Bool REGAL_CALL trace_glXWaitForMscOML(Display *dpy, GLXDrawable drawable
 {
   Internal("trace_glXWaitForMscOML","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc);
@@ -31574,7 +30236,6 @@ static Bool REGAL_CALL trace_glXWaitForSbcOML(Display *dpy, GLXDrawable drawable
 {
   Internal("trace_glXWaitForSbcOML","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc);
@@ -31587,7 +30248,6 @@ static GLXContext REGAL_CALL trace_glXCreateContextWithConfigSGIX(Display *dpy, 
 {
   Internal("trace_glXCreateContextWithConfigSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXContext  ret = Trace::glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct);
@@ -31598,7 +30258,6 @@ static GLXPixmap REGAL_CALL trace_glXCreateGLXPixmapWithConfigSGIX(Display *dpy,
 {
   Internal("trace_glXCreateGLXPixmapWithConfigSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXPixmap  ret = Trace::glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap);
@@ -31609,7 +30268,6 @@ static int REGAL_CALL trace_glXGetFBConfigAttribSGIX(Display *dpy, GLXFBConfigSG
 {
   Internal("trace_glXGetFBConfigAttribSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXGetFBConfigAttribSGIX(dpy, config, attribute, value);
@@ -31620,7 +30278,6 @@ static GLXFBConfigSGIX REGAL_CALL trace_glXGetFBConfigFromVisualSGIX(Display *dp
 {
   Internal("trace_glXGetFBConfigFromVisualSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXFBConfigSGIX  ret = Trace::glXGetFBConfigFromVisualSGIX(dpy, vis);
@@ -31631,7 +30288,6 @@ static XVisualInfo *REGAL_CALL trace_glXGetVisualFromFBConfigSGIX(Display *dpy, 
 {
   Internal("trace_glXGetVisualFromFBConfigSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   XVisualInfo * ret = Trace::glXGetVisualFromFBConfigSGIX(dpy, config);
@@ -31644,7 +30300,6 @@ static GLXPbuffer REGAL_CALL trace_glXCreateGLXPbufferSGIX(Display *dpy, GLXFBCo
 {
   Internal("trace_glXCreateGLXPbufferSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXPbuffer  ret = Trace::glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list);
@@ -31655,7 +30310,6 @@ static void REGAL_CALL trace_glXDestroyGLXPbufferSGIX(Display *dpy, GLXPbuffer p
 {
   Internal("trace_glXDestroyGLXPbufferSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXDestroyGLXPbufferSGIX(dpy, pbuf);
@@ -31665,7 +30319,6 @@ static void REGAL_CALL trace_glXGetSelectedEventSGIX(Display *dpy, GLXDrawable d
 {
   Internal("trace_glXGetSelectedEventSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXGetSelectedEventSGIX(dpy, drawable, mask);
@@ -31675,7 +30328,6 @@ static void REGAL_CALL trace_glXQueryGLXPbufferSGIX(Display *dpy, GLXPbuffer pbu
 {
   Internal("trace_glXQueryGLXPbufferSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value);
@@ -31685,7 +30337,6 @@ static void REGAL_CALL trace_glXSelectEventSGIX(Display *dpy, GLXDrawable drawab
 {
   Internal("trace_glXSelectEventSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXSelectEventSGIX(dpy, drawable, mask);
@@ -31697,7 +30348,6 @@ static void REGAL_CALL trace_glXBindSwapBarrierSGIX(Display *dpy, GLXDrawable dr
 {
   Internal("trace_glXBindSwapBarrierSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXBindSwapBarrierSGIX(dpy, drawable, barrier);
@@ -31707,7 +30357,6 @@ static Bool REGAL_CALL trace_glXQueryMaxSwapBarriersSGIX(Display *dpy, int scree
 {
   Internal("trace_glXQueryMaxSwapBarriersSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXQueryMaxSwapBarriersSGIX(dpy, screen, max);
@@ -31720,7 +30369,6 @@ static void REGAL_CALL trace_glXJoinSwapGroupSGIX(Display *dpy, GLXDrawable draw
 {
   Internal("trace_glXJoinSwapGroupSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXJoinSwapGroupSGIX(dpy, drawable, member);
@@ -31732,7 +30380,6 @@ static int REGAL_CALL trace_glXBindChannelToWindowSGIX(Display *display, int scr
 {
   Internal("trace_glXBindChannelToWindowSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXBindChannelToWindowSGIX(display, screen, channel, window);
@@ -31743,7 +30390,6 @@ static int REGAL_CALL trace_glXChannelRectSGIX(Display *display, int screen, int
 {
   Internal("trace_glXChannelRectSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXChannelRectSGIX(display, screen, channel, x, y, w, h);
@@ -31754,7 +30400,6 @@ static int REGAL_CALL trace_glXChannelRectSyncSGIX(Display *display, int screen,
 {
   Internal("trace_glXChannelRectSyncSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXChannelRectSyncSGIX(display, screen, channel, synctype);
@@ -31765,7 +30410,6 @@ static int REGAL_CALL trace_glXQueryChannelDeltasSGIX(Display *display, int scre
 {
   Internal("trace_glXQueryChannelDeltasSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h);
@@ -31776,7 +30420,6 @@ static int REGAL_CALL trace_glXQueryChannelRectSGIX(Display *display, int screen
 {
   Internal("trace_glXQueryChannelRectSGIX","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh);
@@ -31789,7 +30432,6 @@ static void REGAL_CALL trace_glXCushionSGI(Display *dpy, Window window, float cu
 {
   Internal("trace_glXCushionSGI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXCushionSGI(dpy, window, cushion);
@@ -31801,7 +30443,6 @@ static GLXDrawable REGAL_CALL trace_glXGetCurrentReadDrawableSGI(void)
 {
   Internal("trace_glXGetCurrentReadDrawableSGI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLXDrawable  ret = Trace::glXGetCurrentReadDrawableSGI();
@@ -31812,7 +30453,6 @@ static Bool REGAL_CALL trace_glXMakeCurrentReadSGI(Display *dpy, GLXDrawable dra
 {
   Internal("trace_glXMakeCurrentReadSGI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Bool  ret = Trace::glXMakeCurrentReadSGI(dpy, draw, read, ctx);
@@ -31825,7 +30465,6 @@ static int REGAL_CALL trace_glXSwapIntervalSGI(int interval)
 {
   Internal("trace_glXSwapIntervalSGI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXSwapIntervalSGI(interval);
@@ -31838,7 +30477,6 @@ static int REGAL_CALL trace_glXGetVideoSyncSGI(unsigned int *count)
 {
   Internal("trace_glXGetVideoSyncSGI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXGetVideoSyncSGI(count);
@@ -31849,7 +30487,6 @@ static int REGAL_CALL trace_glXWaitVideoSyncSGI(int divisor, int remainder, unsi
 {
   Internal("trace_glXWaitVideoSyncSGI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::glXWaitVideoSyncSGI(divisor, remainder, count);
@@ -31866,7 +30503,6 @@ static CGLError REGAL_CALL trace_CGLChoosePixelFormat(const CGLPixelFormatAttrib
 {
   Internal("trace_CGLChoosePixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLChoosePixelFormat(attribs, pix, npix);
@@ -31877,7 +30513,6 @@ static CGLError REGAL_CALL trace_CGLClearDrawable(CGLContextObj ctx)
 {
   Internal("trace_CGLClearDrawable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLClearDrawable(ctx);
@@ -31888,7 +30523,6 @@ static CGLError REGAL_CALL trace_CGLCopyContext(CGLContextObj src, CGLContextObj
 {
   Internal("trace_CGLCopyContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLCopyContext(src, dst, mask);
@@ -31899,7 +30533,6 @@ static CGLError REGAL_CALL trace_CGLCreateContext(CGLPixelFormatObj pix, CGLCont
 {
   Internal("trace_CGLCreateContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLCreateContext(pix, share, ctx);
@@ -31910,7 +30543,6 @@ static CGLError REGAL_CALL trace_CGLDescribePixelFormat(CGLPixelFormatObj pix, G
 {
   Internal("trace_CGLDescribePixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDescribePixelFormat(pix, pix_num, attrib, value);
@@ -31921,7 +30553,6 @@ static CGLError REGAL_CALL trace_CGLDescribeRenderer(CGLRendererInfoObj rend, GL
 {
   Internal("trace_CGLDescribeRenderer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDescribeRenderer(rend, rend_num, prop, value);
@@ -31932,7 +30563,6 @@ static CGLError REGAL_CALL trace_CGLDestroyContext(CGLContextObj ctx)
 {
   Internal("trace_CGLDestroyContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDestroyContext(ctx);
@@ -31943,7 +30573,6 @@ static CGLError REGAL_CALL trace_CGLDestroyPixelFormat(CGLPixelFormatObj pix)
 {
   Internal("trace_CGLDestroyPixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDestroyPixelFormat(pix);
@@ -31954,7 +30583,6 @@ static CGLError REGAL_CALL trace_CGLDestroyRendererInfo(CGLRendererInfoObj rend)
 {
   Internal("trace_CGLDestroyRendererInfo","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDestroyRendererInfo(rend);
@@ -31965,7 +30593,6 @@ static CGLError REGAL_CALL trace_CGLDisable(CGLContextObj ctx, CGLContextEnable 
 {
   Internal("trace_CGLDisable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDisable(ctx, pname);
@@ -31976,7 +30603,6 @@ static CGLError REGAL_CALL trace_CGLEnable(CGLContextObj ctx, CGLContextEnable p
 {
   Internal("trace_CGLEnable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLEnable(ctx, pname);
@@ -31987,7 +30613,6 @@ static const char *REGAL_CALL trace_CGLErrorString(CGLError error)
 {
   Internal("trace_CGLErrorString","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::CGLErrorString(error);
@@ -31998,7 +30623,6 @@ static CGLError REGAL_CALL trace_CGLFlushDrawable(CGLContextObj ctx)
 {
   Internal("trace_CGLFlushDrawable","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLFlushDrawable(ctx);
@@ -32009,7 +30633,6 @@ static CGLError REGAL_CALL trace_CGLGetOffScreen(CGLContextObj ctx, GLsizei *wid
 {
   Internal("trace_CGLGetOffScreen","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetOffScreen(ctx, width, height, rowbytes, baseaddr);
@@ -32020,7 +30643,6 @@ static CGLError REGAL_CALL trace_CGLGetOption(CGLGlobalOption pname, GLint *para
 {
   Internal("trace_CGLGetOption","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetOption(pname, param);
@@ -32031,7 +30653,6 @@ static CGLError REGAL_CALL trace_CGLGetParameter(CGLContextObj ctx, CGLContextPa
 {
   Internal("trace_CGLGetParameter","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetParameter(ctx, pname, params);
@@ -32042,7 +30663,6 @@ static void REGAL_CALL trace_CGLGetVersion(GLint *majorvers, GLint *minorvers)
 {
   Internal("trace_CGLGetVersion","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::CGLGetVersion(majorvers, minorvers);
@@ -32052,7 +30672,6 @@ static CGLError REGAL_CALL trace_CGLGetVirtualScreen(CGLContextObj ctx, GLint *s
 {
   Internal("trace_CGLGetVirtualScreen","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetVirtualScreen(ctx, screen);
@@ -32063,7 +30682,6 @@ static CGLError REGAL_CALL trace_CGLIsEnabled(CGLContextObj ctx, CGLContextEnabl
 {
   Internal("trace_CGLIsEnabled","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLIsEnabled(ctx, pname, enable);
@@ -32074,7 +30692,6 @@ static CGLError REGAL_CALL trace_CGLQueryRendererInfo(GLuint display_mask, CGLRe
 {
   Internal("trace_CGLQueryRendererInfo","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLQueryRendererInfo(display_mask, rend, nrend);
@@ -32085,7 +30702,6 @@ static CGLError REGAL_CALL trace_CGLSetFullScreen(CGLContextObj ctx)
 {
   Internal("trace_CGLSetFullScreen","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetFullScreen(ctx);
@@ -32096,7 +30712,6 @@ static CGLError REGAL_CALL trace_CGLSetOffScreen(CGLContextObj ctx, GLsizei widt
 {
   Internal("trace_CGLSetOffScreen","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetOffScreen(ctx, width, height, rowbytes, baseaddr);
@@ -32107,7 +30722,6 @@ static CGLError REGAL_CALL trace_CGLSetOption(CGLGlobalOption pname, GLint param
 {
   Internal("trace_CGLSetOption","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetOption(pname, param);
@@ -32118,7 +30732,6 @@ static CGLError REGAL_CALL trace_CGLSetParameter(CGLContextObj ctx, CGLContextPa
 {
   Internal("trace_CGLSetParameter","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetParameter(ctx, pname, params);
@@ -32129,7 +30742,6 @@ static CGLError REGAL_CALL trace_CGLSetVirtualScreen(CGLContextObj ctx, GLint sc
 {
   Internal("trace_CGLSetVirtualScreen","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetVirtualScreen(ctx, screen);
@@ -32142,7 +30754,6 @@ static CGLError REGAL_CALL trace_CGLCreatePBuffer(GLsizei width, GLsizei height,
 {
   Internal("trace_CGLCreatePBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLCreatePBuffer(width, height, target, internalFormat, max_level, pbuffer);
@@ -32153,7 +30764,6 @@ static CGLError REGAL_CALL trace_CGLDescribePBuffer(CGLPBufferObj pbuffer, GLsiz
 {
   Internal("trace_CGLDescribePBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDescribePBuffer(pbuffer, width, height, target, internalFormat, mipmap);
@@ -32164,7 +30774,6 @@ static CGLError REGAL_CALL trace_CGLDestroyPBuffer(CGLPBufferObj pbuffer)
 {
   Internal("trace_CGLDestroyPBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLDestroyPBuffer(pbuffer);
@@ -32175,7 +30784,6 @@ static CGLError REGAL_CALL trace_CGLGetPBuffer(CGLContextObj ctx, CGLPBufferObj 
 {
   Internal("trace_CGLGetPBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetPBuffer(ctx, pbuffer, face, level, screen);
@@ -32186,7 +30794,6 @@ static CGLError REGAL_CALL trace_CGLSetPBuffer(CGLContextObj ctx, CGLPBufferObj 
 {
   Internal("trace_CGLSetPBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetPBuffer(ctx, pbuffer, face, level, screen);
@@ -32197,7 +30804,6 @@ static CGLError REGAL_CALL trace_CGLTexImagePBuffer(CGLContextObj ctx, CGLPBuffe
 {
   Internal("trace_CGLTexImagePBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLTexImagePBuffer(ctx, pbuffer, source);
@@ -32210,7 +30816,6 @@ static GLuint REGAL_CALL trace_CGLGetContextRetainCount(CGLContextObj ctx)
 {
   Internal("trace_CGLGetContextRetainCount","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLuint  ret = Trace::CGLGetContextRetainCount(ctx);
@@ -32221,7 +30826,6 @@ static CGLError REGAL_CALL trace_CGLGetGlobalOption(CGLGlobalOption pname, GLint
 {
   Internal("trace_CGLGetGlobalOption","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetGlobalOption(pname, params);
@@ -32232,7 +30836,6 @@ static GLuint REGAL_CALL trace_CGLGetPBufferRetainCount(CGLPBufferObj pbuffer)
 {
   Internal("trace_CGLGetPBufferRetainCount","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLuint  ret = Trace::CGLGetPBufferRetainCount(pbuffer);
@@ -32243,7 +30846,6 @@ static CGLPixelFormatObj REGAL_CALL trace_CGLGetPixelFormat(CGLContextObj ctx)
 {
   Internal("trace_CGLGetPixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLPixelFormatObj  ret = Trace::CGLGetPixelFormat(ctx);
@@ -32254,7 +30856,6 @@ static GLuint REGAL_CALL trace_CGLGetPixelFormatRetainCount(CGLPixelFormatObj pi
 {
   Internal("trace_CGLGetPixelFormatRetainCount","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   GLuint  ret = Trace::CGLGetPixelFormatRetainCount(pix);
@@ -32265,7 +30866,6 @@ static CGLError REGAL_CALL trace_CGLLockContext(CGLContextObj ctx)
 {
   Internal("trace_CGLLockContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLLockContext(ctx);
@@ -32276,7 +30876,6 @@ static void REGAL_CALL trace_CGLReleaseContext(CGLContextObj ctx)
 {
   Internal("trace_CGLReleaseContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::CGLReleaseContext(ctx);
@@ -32286,7 +30885,6 @@ static void REGAL_CALL trace_CGLReleasePBuffer(CGLPBufferObj pbuffer)
 {
   Internal("trace_CGLReleasePBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::CGLReleasePBuffer(pbuffer);
@@ -32296,7 +30894,6 @@ static void REGAL_CALL trace_CGLReleasePixelFormat(CGLPixelFormatObj pix)
 {
   Internal("trace_CGLReleasePixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::CGLReleasePixelFormat(pix);
@@ -32306,7 +30903,6 @@ static CGLContextObj REGAL_CALL trace_CGLRetainContext(CGLContextObj ctx)
 {
   Internal("trace_CGLRetainContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLContextObj  ret = Trace::CGLRetainContext(ctx);
@@ -32317,7 +30913,6 @@ static CGLPBufferObj REGAL_CALL trace_CGLRetainPBuffer(CGLPBufferObj pbuffer)
 {
   Internal("trace_CGLRetainPBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLPBufferObj  ret = Trace::CGLRetainPBuffer(pbuffer);
@@ -32328,7 +30923,6 @@ static CGLPixelFormatObj REGAL_CALL trace_CGLRetainPixelFormat(CGLPixelFormatObj
 {
   Internal("trace_CGLRetainPixelFormat","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLPixelFormatObj  ret = Trace::CGLRetainPixelFormat(pix);
@@ -32339,7 +30933,6 @@ static CGLError REGAL_CALL trace_CGLSetGlobalOption(CGLGlobalOption pname, const
 {
   Internal("trace_CGLSetGlobalOption","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetGlobalOption(pname, params);
@@ -32350,7 +30943,6 @@ static CGLError REGAL_CALL trace_CGLUnlockContext(CGLContextObj ctx)
 {
   Internal("trace_CGLUnlockContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLUnlockContext(ctx);
@@ -32363,7 +30955,6 @@ static CGLContextObj REGAL_CALL trace_CGLGetCurrentContext(void)
 {
   Internal("trace_CGLGetCurrentContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLContextObj  ret = Trace::CGLGetCurrentContext();
@@ -32374,7 +30965,6 @@ static CGLShareGroupObj REGAL_CALL trace_CGLGetShareGroup(CGLContextObj ctx)
 {
   Internal("trace_CGLGetShareGroup","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLShareGroupObj  ret = Trace::CGLGetShareGroup(ctx);
@@ -32385,7 +30975,6 @@ static CGLError REGAL_CALL trace_CGLGetSurface(CGLContextObj ctx, CGSConnectionI
 {
   Internal("trace_CGLGetSurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLGetSurface(ctx, conn, win, srf);
@@ -32396,7 +30985,6 @@ static CGLError REGAL_CALL trace_CGLSetCurrentContext(CGLContextObj ctx)
 {
   Internal("trace_CGLSetCurrentContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetCurrentContext(ctx);
@@ -32407,7 +30995,6 @@ static CGLError REGAL_CALL trace_CGLSetSurface(CGLContextObj ctx, CGSConnectionI
 {
   Internal("trace_CGLSetSurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLSetSurface(ctx, conn, win, srf);
@@ -32418,7 +31005,6 @@ static CGLError REGAL_CALL trace_CGLTexImageIOSurface2D(CGLContextObj ctx, GLenu
 {
   Internal("trace_CGLTexImageIOSurface2D","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLTexImageIOSurface2D(ctx, target, internal_format, width, height, format, type, ioSurface, plane);
@@ -32429,7 +31015,6 @@ static CGLError REGAL_CALL trace_CGLUpdateContext(CGLContextObj ctx)
 {
   Internal("trace_CGLUpdateContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   CGLError  ret = Trace::CGLUpdateContext(ctx);
@@ -32446,7 +31031,6 @@ static EGLBoolean REGAL_CALL trace_eglQuerySurfacePointerANGLE(EGLDisplay dpy, E
 {
   Internal("trace_eglQuerySurfacePointerANGLE","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglQuerySurfacePointerANGLE(dpy, surface, attribute, value);
@@ -32459,7 +31043,6 @@ static EGLint REGAL_CALL trace_eglClientWaitSyncKHR(EGLDisplay dpy, EGLSyncKHR G
 {
   Internal("trace_eglClientWaitSyncKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLint  ret = Trace::eglClientWaitSyncKHR(dpy, GLsync, flags, timeout);
@@ -32470,7 +31053,6 @@ static EGLSyncKHR REGAL_CALL trace_eglCreateSyncKHR(EGLDisplay dpy, EGLenum type
 {
   Internal("trace_eglCreateSyncKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSyncKHR  ret = Trace::eglCreateSyncKHR(dpy, type, attrib_list);
@@ -32481,7 +31063,6 @@ static EGLBoolean REGAL_CALL trace_eglDestroySyncKHR(EGLDisplay dpy, EGLSyncKHR 
 {
   Internal("trace_eglDestroySyncKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglDestroySyncKHR(dpy, GLsync);
@@ -32492,7 +31073,6 @@ static EGLBoolean REGAL_CALL trace_eglGetSyncAttribKHR(EGLDisplay dpy, EGLSyncKH
 {
   Internal("trace_eglGetSyncAttribKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglGetSyncAttribKHR(dpy, GLsync, attribute, value);
@@ -32505,7 +31085,6 @@ static EGLImageKHR REGAL_CALL trace_eglCreateImageKHR(EGLDisplay dpy, EGLContext
 {
   Internal("trace_eglCreateImageKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLImageKHR  ret = Trace::eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list);
@@ -32516,7 +31095,6 @@ static EGLBoolean REGAL_CALL trace_eglDestroyImageKHR(EGLDisplay dpy, EGLImageKH
 {
   Internal("trace_eglDestroyImageKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglDestroyImageKHR(dpy, image);
@@ -32529,7 +31107,6 @@ static EGLBoolean REGAL_CALL trace_eglLockSurfaceKHR(EGLDisplay display, EGLSurf
 {
   Internal("trace_eglLockSurfaceKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglLockSurfaceKHR(display, surface, attrib_list);
@@ -32540,7 +31117,6 @@ static EGLBoolean REGAL_CALL trace_eglUnlockSurfaceKHR(EGLDisplay display, EGLSu
 {
   Internal("trace_eglUnlockSurfaceKHR","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglUnlockSurfaceKHR(display, surface);
@@ -32553,7 +31129,6 @@ static EGLImageKHR REGAL_CALL trace_eglCreateDRMImageMESA(EGLDisplay dpy, const 
 {
   Internal("trace_eglCreateDRMImageMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLImageKHR  ret = Trace::eglCreateDRMImageMESA(dpy, attrib_list);
@@ -32564,7 +31139,6 @@ static EGLBoolean REGAL_CALL trace_eglExportDRMImageMESA(EGLDisplay dpy, EGLImag
 {
   Internal("trace_eglExportDRMImageMESA","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglExportDRMImageMESA(dpy, image, name, handle, stride);
@@ -32577,7 +31151,6 @@ static EGLBoolean REGAL_CALL trace_eglPostSubBufferNV(EGLDisplay dpy, EGLSurface
 {
   Internal("trace_eglPostSubBufferNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglPostSubBufferNV(dpy, surface, x, y, width, height);
@@ -32590,7 +31163,6 @@ static EGLint REGAL_CALL trace_eglClientWaitSyncNV(EGLSyncNV GLsync, EGLint flag
 {
   Internal("trace_eglClientWaitSyncNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLint  ret = Trace::eglClientWaitSyncNV(GLsync, flags, timeout);
@@ -32601,7 +31173,6 @@ static EGLSyncNV REGAL_CALL trace_eglCreateFenceSyncNV(EGLDisplay dpy, EGLenum c
 {
   Internal("trace_eglCreateFenceSyncNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSyncNV  ret = Trace::eglCreateFenceSyncNV(dpy, condition, attrib_list);
@@ -32612,7 +31183,6 @@ static EGLBoolean REGAL_CALL trace_eglDestroySyncNV(EGLSyncNV GLsync)
 {
   Internal("trace_eglDestroySyncNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglDestroySyncNV(GLsync);
@@ -32623,7 +31193,6 @@ static EGLBoolean REGAL_CALL trace_eglFenceNV(EGLSyncNV GLsync)
 {
   Internal("trace_eglFenceNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglFenceNV(GLsync);
@@ -32634,7 +31203,6 @@ static EGLBoolean REGAL_CALL trace_eglGetSyncAttribNV(EGLSyncNV GLsync, EGLint a
 {
   Internal("trace_eglGetSyncAttribNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglGetSyncAttribNV(GLsync, attribute, value);
@@ -32645,7 +31213,6 @@ static EGLBoolean REGAL_CALL trace_eglSignalSyncNV(EGLSyncNV GLsync, EGLenum mod
 {
   Internal("trace_eglSignalSyncNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglSignalSyncNV(GLsync, mode);
@@ -32658,7 +31225,6 @@ static EGLuint64NV REGAL_CALL trace_eglGetSystemTimeFrequencyNV(void)
 {
   Internal("trace_eglGetSystemTimeFrequencyNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLuint64NV  ret = Trace::eglGetSystemTimeFrequencyNV();
@@ -32669,7 +31235,6 @@ static EGLuint64NV REGAL_CALL trace_eglGetSystemTimeNV(void)
 {
   Internal("trace_eglGetSystemTimeNV","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLuint64NV  ret = Trace::eglGetSystemTimeNV();
@@ -32682,7 +31247,6 @@ static EGLBoolean REGAL_CALL trace_eglChooseConfig(EGLDisplay dpy, const EGLint 
 {
   Internal("trace_eglChooseConfig","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglChooseConfig(dpy, attrib_list, configs, config_size, num_config);
@@ -32693,7 +31257,6 @@ static EGLBoolean REGAL_CALL trace_eglCopyBuffers(EGLDisplay dpy, EGLSurface sur
 {
   Internal("trace_eglCopyBuffers","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglCopyBuffers(dpy, surface, target);
@@ -32704,7 +31267,6 @@ static EGLContext REGAL_CALL trace_eglCreateContext(EGLDisplay dpy, EGLConfig co
 {
   Internal("trace_eglCreateContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLContext  ret = Trace::eglCreateContext(dpy, config, share_context, attrib_list);
@@ -32715,7 +31277,6 @@ static EGLSurface REGAL_CALL trace_eglCreatePbufferSurface(EGLDisplay dpy, EGLCo
 {
   Internal("trace_eglCreatePbufferSurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSurface  ret = Trace::eglCreatePbufferSurface(dpy, config, attrib_list);
@@ -32726,7 +31287,6 @@ static EGLSurface REGAL_CALL trace_eglCreatePixmapSurface(EGLDisplay dpy, EGLCon
 {
   Internal("trace_eglCreatePixmapSurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSurface  ret = Trace::eglCreatePixmapSurface(dpy, config, pixmap, attrib_list);
@@ -32737,7 +31297,6 @@ static EGLSurface REGAL_CALL trace_eglCreateWindowSurface(EGLDisplay dpy, EGLCon
 {
   Internal("trace_eglCreateWindowSurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSurface  ret = Trace::eglCreateWindowSurface(dpy, config, win, attrib_list);
@@ -32748,7 +31307,6 @@ static EGLBoolean REGAL_CALL trace_eglDestroyContext(EGLDisplay dpy, EGLContext 
 {
   Internal("trace_eglDestroyContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglDestroyContext(dpy, ctx);
@@ -32759,7 +31317,6 @@ static EGLBoolean REGAL_CALL trace_eglDestroySurface(EGLDisplay dpy, EGLSurface 
 {
   Internal("trace_eglDestroySurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglDestroySurface(dpy, surface);
@@ -32770,7 +31327,6 @@ static EGLBoolean REGAL_CALL trace_eglGetConfigAttrib(EGLDisplay dpy, EGLConfig 
 {
   Internal("trace_eglGetConfigAttrib","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglGetConfigAttrib(dpy, config, attribute, value);
@@ -32781,7 +31337,6 @@ static EGLBoolean REGAL_CALL trace_eglGetConfigs(EGLDisplay dpy, EGLConfig *conf
 {
   Internal("trace_eglGetConfigs","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglGetConfigs(dpy, configs, config_size, num_config);
@@ -32792,7 +31347,6 @@ static EGLContext REGAL_CALL trace_eglGetCurrentContext(void)
 {
   Internal("trace_eglGetCurrentContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLContext  ret = Trace::eglGetCurrentContext();
@@ -32803,7 +31357,6 @@ static EGLDisplay REGAL_CALL trace_eglGetCurrentDisplay(void)
 {
   Internal("trace_eglGetCurrentDisplay","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLDisplay  ret = Trace::eglGetCurrentDisplay();
@@ -32814,7 +31367,6 @@ static EGLSurface REGAL_CALL trace_eglGetCurrentSurface(EGLint readdraw)
 {
   Internal("trace_eglGetCurrentSurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSurface  ret = Trace::eglGetCurrentSurface(readdraw);
@@ -32825,7 +31377,6 @@ static EGLDisplay REGAL_CALL trace_eglGetDisplay(EGLNativeDisplayType display_id
 {
   Internal("trace_eglGetDisplay","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLDisplay  ret = Trace::eglGetDisplay(display_id);
@@ -32836,7 +31387,6 @@ static EGLint REGAL_CALL trace_eglGetError(void)
 {
   Internal("trace_eglGetError","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLint  ret = Trace::eglGetError();
@@ -32847,7 +31397,6 @@ static __eglMustCastToProperFunctionPointerType REGAL_CALL trace_eglGetProcAddre
 {
   Internal("trace_eglGetProcAddress","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   __eglMustCastToProperFunctionPointerType  ret = Trace::eglGetProcAddress(procname);
@@ -32858,7 +31407,6 @@ static EGLBoolean REGAL_CALL trace_eglInitialize(EGLDisplay dpy, EGLint *major, 
 {
   Internal("trace_eglInitialize","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglInitialize(dpy, major, minor);
@@ -32869,7 +31417,6 @@ static EGLBoolean REGAL_CALL trace_eglMakeCurrent(EGLDisplay dpy, EGLSurface dra
 {
   Internal("trace_eglMakeCurrent","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglMakeCurrent(dpy, draw, read, ctx);
@@ -32880,7 +31427,6 @@ static EGLBoolean REGAL_CALL trace_eglQueryContext(EGLDisplay dpy, EGLContext ct
 {
   Internal("trace_eglQueryContext","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglQueryContext(dpy, ctx, attribute, value);
@@ -32891,7 +31437,6 @@ static const char *REGAL_CALL trace_eglQueryString(EGLDisplay dpy, EGLint name)
 {
   Internal("trace_eglQueryString","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   const char * ret = Trace::eglQueryString(dpy, name);
@@ -32902,7 +31447,6 @@ static EGLBoolean REGAL_CALL trace_eglQuerySurface(EGLDisplay dpy, EGLSurface su
 {
   Internal("trace_eglQuerySurface","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglQuerySurface(dpy, surface, attribute, value);
@@ -32913,7 +31457,6 @@ static EGLBoolean REGAL_CALL trace_eglSwapBuffers(EGLDisplay dpy, EGLSurface sur
 {
   Internal("trace_eglSwapBuffers","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglSwapBuffers(dpy, surface);
@@ -32924,7 +31467,6 @@ static EGLBoolean REGAL_CALL trace_eglTerminate(EGLDisplay dpy)
 {
   Internal("trace_eglTerminate","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglTerminate(dpy);
@@ -32935,7 +31477,6 @@ static EGLBoolean REGAL_CALL trace_eglWaitGL(void)
 {
   Internal("trace_eglWaitGL","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglWaitGL();
@@ -32946,7 +31487,6 @@ static EGLBoolean REGAL_CALL trace_eglWaitNative(EGLint engine)
 {
   Internal("trace_eglWaitNative","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglWaitNative(engine);
@@ -32959,7 +31499,6 @@ static EGLBoolean REGAL_CALL trace_eglBindTexImage(EGLDisplay dpy, EGLSurface su
 {
   Internal("trace_eglBindTexImage","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglBindTexImage(dpy, surface, buffer);
@@ -32970,7 +31509,6 @@ static EGLBoolean REGAL_CALL trace_eglReleaseTexImage(EGLDisplay dpy, EGLSurface
 {
   Internal("trace_eglReleaseTexImage","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglReleaseTexImage(dpy, surface, buffer);
@@ -32983,7 +31521,6 @@ static EGLBoolean REGAL_CALL trace_eglBindAPI(EGLenum api)
 {
   Internal("trace_eglBindAPI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglBindAPI(api);
@@ -32994,7 +31531,6 @@ static EGLSurface REGAL_CALL trace_eglCreatePbufferFromClientBuffer(EGLDisplay d
 {
   Internal("trace_eglCreatePbufferFromClientBuffer","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLSurface  ret = Trace::eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list);
@@ -33005,7 +31541,6 @@ static EGLenum REGAL_CALL trace_eglQueryAPI(void)
 {
   Internal("trace_eglQueryAPI","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLenum  ret = Trace::eglQueryAPI();
@@ -33016,7 +31551,6 @@ static EGLBoolean REGAL_CALL trace_eglReleaseThread(void)
 {
   Internal("trace_eglReleaseThread","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglReleaseThread();
@@ -33027,7 +31561,6 @@ static EGLBoolean REGAL_CALL trace_eglSurfaceAttrib(EGLDisplay dpy, EGLSurface s
 {
   Internal("trace_eglSurfaceAttrib","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglSurfaceAttrib(dpy, surface, attribute, value);
@@ -33038,7 +31571,6 @@ static EGLBoolean REGAL_CALL trace_eglSwapInterval(EGLDisplay dpy, EGLint interv
 {
   Internal("trace_eglSwapInterval","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglSwapInterval(dpy, interval);
@@ -33049,7 +31581,6 @@ static EGLBoolean REGAL_CALL trace_eglWaitClient(void)
 {
   Internal("trace_eglWaitClient","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   EGLBoolean  ret = Trace::eglWaitClient();
@@ -36295,22 +34826,6 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
 {
 
 #if REGAL_SYS_WGL
-  // WGL_3DL_stereo_control
-
-  tbl.wglSetStereoEmitterState3DL = trace_wglSetStereoEmitterState3DL;
-
-  // WGL_AMD_gpu_association
-
-  tbl.wglBlitContextFramebufferAMD = trace_wglBlitContextFramebufferAMD;
-  tbl.wglCreateAssociatedContextAMD = trace_wglCreateAssociatedContextAMD;
-  tbl.wglCreateAssociatedContextAttribsAMD = trace_wglCreateAssociatedContextAttribsAMD;
-  tbl.wglDeleteAssociatedContextAMD = trace_wglDeleteAssociatedContextAMD;
-  tbl.wglGetContextGPUIDAMD = trace_wglGetContextGPUIDAMD;
-  tbl.wglGetCurrentAssociatedContextAMD = trace_wglGetCurrentAssociatedContextAMD;
-  tbl.wglGetGPUIDsAMD = trace_wglGetGPUIDsAMD;
-  tbl.wglGetGPUInfoAMD = trace_wglGetGPUInfoAMD;
-  tbl.wglMakeAssociatedContextCurrentAMD = trace_wglMakeAssociatedContextCurrentAMD;
-
   // WGL_ARB_buffer_region
 
   tbl.wglCreateBufferRegionARB = trace_wglCreateBufferRegionARB;
@@ -36339,24 +34854,11 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
   tbl.wglQueryPbufferARB = trace_wglQueryPbufferARB;
   tbl.wglReleasePbufferDCARB = trace_wglReleasePbufferDCARB;
 
-  // WGL_ARB_pixel_format
-
-  tbl.wglChoosePixelFormatARB = trace_wglChoosePixelFormatARB;
-  tbl.wglGetPixelFormatAttribfvARB = trace_wglGetPixelFormatAttribfvARB;
-  tbl.wglGetPixelFormatAttribivARB = trace_wglGetPixelFormatAttribivARB;
-
   // WGL_ARB_render_texture
 
   tbl.wglBindTexImageARB = trace_wglBindTexImageARB;
   tbl.wglReleaseTexImageARB = trace_wglReleaseTexImageARB;
   tbl.wglSetPbufferAttribARB = trace_wglSetPbufferAttribARB;
-
-  // WGL_EXT_display_color_table
-
-  tbl.wglBindDisplayColorTableEXT = trace_wglBindDisplayColorTableEXT;
-  tbl.wglCreateDisplayColorTableEXT = trace_wglCreateDisplayColorTableEXT;
-  tbl.wglDestroyDisplayColorTableEXT = trace_wglDestroyDisplayColorTableEXT;
-  tbl.wglLoadDisplayColorTableEXT = trace_wglLoadDisplayColorTableEXT;
 
   // WGL_EXT_extensions_string
 
@@ -36367,19 +34869,9 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
   tbl.wglGetCurrentReadDCEXT = trace_wglGetCurrentReadDCEXT;
   tbl.wglMakeContextCurrentEXT = trace_wglMakeContextCurrentEXT;
 
-  // WGL_EXT_pbuffer
-
-  tbl.wglCreatePbufferEXT = trace_wglCreatePbufferEXT;
-  tbl.wglDestroyPbufferEXT = trace_wglDestroyPbufferEXT;
-  tbl.wglGetPbufferDCEXT = trace_wglGetPbufferDCEXT;
-  tbl.wglQueryPbufferEXT = trace_wglQueryPbufferEXT;
-  tbl.wglReleasePbufferDCEXT = trace_wglReleasePbufferDCEXT;
-
   // WGL_EXT_pixel_format
 
   tbl.wglChoosePixelFormatEXT = trace_wglChoosePixelFormatEXT;
-  tbl.wglGetPixelFormatAttribfvEXT = trace_wglGetPixelFormatAttribfvEXT;
-  tbl.wglGetPixelFormatAttribivEXT = trace_wglGetPixelFormatAttribivEXT;
 
   // WGL_EXT_swap_control
 
@@ -36394,122 +34886,10 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
   tbl.wglSetPixelFormat = trace_wglSetPixelFormat;
   tbl.wglSwapBuffers = trace_wglSwapBuffers;
 
-  // WGL_I3D_digital_video_control
-
-  tbl.wglGetDigitalVideoParametersI3D = trace_wglGetDigitalVideoParametersI3D;
-  tbl.wglSetDigitalVideoParametersI3D = trace_wglSetDigitalVideoParametersI3D;
-
-  // WGL_I3D_gamma
-
-  tbl.wglGetGammaTableI3D = trace_wglGetGammaTableI3D;
-  tbl.wglGetGammaTableParametersI3D = trace_wglGetGammaTableParametersI3D;
-  tbl.wglSetGammaTableI3D = trace_wglSetGammaTableI3D;
-  tbl.wglSetGammaTableParametersI3D = trace_wglSetGammaTableParametersI3D;
-
-  // WGL_I3D_genlock
-
-  tbl.wglDisableGenlockI3D = trace_wglDisableGenlockI3D;
-  tbl.wglEnableGenlockI3D = trace_wglEnableGenlockI3D;
-  tbl.wglGenlockSampleRateI3D = trace_wglGenlockSampleRateI3D;
-  tbl.wglGenlockSourceDelayI3D = trace_wglGenlockSourceDelayI3D;
-  tbl.wglGenlockSourceEdgeI3D = trace_wglGenlockSourceEdgeI3D;
-  tbl.wglGenlockSourceI3D = trace_wglGenlockSourceI3D;
-  tbl.wglGetGenlockSampleRateI3D = trace_wglGetGenlockSampleRateI3D;
-  tbl.wglGetGenlockSourceDelayI3D = trace_wglGetGenlockSourceDelayI3D;
-  tbl.wglGetGenlockSourceEdgeI3D = trace_wglGetGenlockSourceEdgeI3D;
-  tbl.wglGetGenlockSourceI3D = trace_wglGetGenlockSourceI3D;
-  tbl.wglIsEnabledGenlockI3D = trace_wglIsEnabledGenlockI3D;
-  tbl.wglQueryGenlockMaxSourceDelayI3D = trace_wglQueryGenlockMaxSourceDelayI3D;
-
-  // WGL_I3D_image_buffer
-
-  tbl.wglAssociateImageBufferEventsI3D = trace_wglAssociateImageBufferEventsI3D;
-  tbl.wglCreateImageBufferI3D = trace_wglCreateImageBufferI3D;
-  tbl.wglDestroyImageBufferI3D = trace_wglDestroyImageBufferI3D;
-  tbl.wglReleaseImageBufferEventsI3D = trace_wglReleaseImageBufferEventsI3D;
-
-  // WGL_I3D_swap_frame_lock
-
-  tbl.wglDisableFrameLockI3D = trace_wglDisableFrameLockI3D;
-  tbl.wglEnableFrameLockI3D = trace_wglEnableFrameLockI3D;
-  tbl.wglIsEnabledFrameLockI3D = trace_wglIsEnabledFrameLockI3D;
-  tbl.wglQueryFrameLockMasterI3D = trace_wglQueryFrameLockMasterI3D;
-
-  // WGL_I3D_swap_frame_usage
-
-  tbl.wglBeginFrameTrackingI3D = trace_wglBeginFrameTrackingI3D;
-  tbl.wglEndFrameTrackingI3D = trace_wglEndFrameTrackingI3D;
-  tbl.wglGetFrameUsageI3D = trace_wglGetFrameUsageI3D;
-  tbl.wglQueryFrameTrackingI3D = trace_wglQueryFrameTrackingI3D;
-
-  // WGL_NV_DX_interop
-
-  tbl.wglDXCloseDeviceNV = trace_wglDXCloseDeviceNV;
-  tbl.wglDXLockObjectsNV = trace_wglDXLockObjectsNV;
-  tbl.wglDXObjectAccessNV = trace_wglDXObjectAccessNV;
-  tbl.wglDXOpenDeviceNV = trace_wglDXOpenDeviceNV;
-  tbl.wglDXRegisterObjectNV = trace_wglDXRegisterObjectNV;
-  tbl.wglDXSetResourceShareHandleNV = trace_wglDXSetResourceShareHandleNV;
-  tbl.wglDXUnlockObjectsNV = trace_wglDXUnlockObjectsNV;
-  tbl.wglDXUnregisterObjectNV = trace_wglDXUnregisterObjectNV;
-
-  // WGL_NV_copy_image
-
-  tbl.wglCopyImageSubDataNV = trace_wglCopyImageSubDataNV;
-
-  // WGL_NV_gpu_affinity
-
-  tbl.wglCreateAffinityDCNV = trace_wglCreateAffinityDCNV;
-  tbl.wglDeleteDCNV = trace_wglDeleteDCNV;
-  tbl.wglEnumGpuDevicesNV = trace_wglEnumGpuDevicesNV;
-  tbl.wglEnumGpusFromAffinityDCNV = trace_wglEnumGpusFromAffinityDCNV;
-  tbl.wglEnumGpusNV = trace_wglEnumGpusNV;
-
-  // WGL_NV_present_video
-
-  tbl.wglBindVideoDeviceNV = trace_wglBindVideoDeviceNV;
-  tbl.wglEnumerateVideoDevicesNV = trace_wglEnumerateVideoDevicesNV;
-  tbl.wglQueryCurrentContextNV = trace_wglQueryCurrentContextNV;
-
-  // WGL_NV_swap_group
-
-  tbl.wglBindSwapBarrierNV = trace_wglBindSwapBarrierNV;
-  tbl.wglJoinSwapGroupNV = trace_wglJoinSwapGroupNV;
-  tbl.wglQueryFrameCountNV = trace_wglQueryFrameCountNV;
-  tbl.wglQueryMaxSwapGroupsNV = trace_wglQueryMaxSwapGroupsNV;
-  tbl.wglQuerySwapGroupNV = trace_wglQuerySwapGroupNV;
-  tbl.wglResetFrameCountNV = trace_wglResetFrameCountNV;
-
   // WGL_NV_vertex_array_range
 
   tbl.wglAllocateMemoryNV = trace_wglAllocateMemoryNV;
   tbl.wglFreeMemoryNV = trace_wglFreeMemoryNV;
-
-  // WGL_NV_video_capture
-
-  tbl.wglBindVideoCaptureDeviceNV = trace_wglBindVideoCaptureDeviceNV;
-  tbl.wglEnumerateVideoCaptureDevicesNV = trace_wglEnumerateVideoCaptureDevicesNV;
-  tbl.wglLockVideoCaptureDeviceNV = trace_wglLockVideoCaptureDeviceNV;
-  tbl.wglQueryVideoCaptureDeviceNV = trace_wglQueryVideoCaptureDeviceNV;
-  tbl.wglReleaseVideoCaptureDeviceNV = trace_wglReleaseVideoCaptureDeviceNV;
-
-  // WGL_NV_video_output
-
-  tbl.wglBindVideoImageNV = trace_wglBindVideoImageNV;
-  tbl.wglGetVideoDeviceNV = trace_wglGetVideoDeviceNV;
-  tbl.wglGetVideoInfoNV = trace_wglGetVideoInfoNV;
-  tbl.wglReleaseVideoDeviceNV = trace_wglReleaseVideoDeviceNV;
-  tbl.wglReleaseVideoImageNV = trace_wglReleaseVideoImageNV;
-  tbl.wglSendPbufferToVideoNV = trace_wglSendPbufferToVideoNV;
-
-  // WGL_OML_sync_control
-
-  tbl.wglGetMscRateOML = trace_wglGetMscRateOML;
-  tbl.wglGetSyncValuesOML = trace_wglGetSyncValuesOML;
-  tbl.wglSwapBuffersMscOML = trace_wglSwapBuffersMscOML;
-  tbl.wglSwapLayerBuffersMscOML = trace_wglSwapLayerBuffersMscOML;
-  tbl.wglWaitForMscOML = trace_wglWaitForMscOML;
-  tbl.wglWaitForSbcOML = trace_wglWaitForSbcOML;
 
   // WGL_core
 

@@ -71,6 +71,7 @@ namespace Config {
   bool enableLog           = REGAL_LOG;
   bool enableDriver        = REGAL_DRIVER;
 
+  bool enableEmuHint       = REGAL_EMU_HINT;
   bool enableEmuPpa        = REGAL_EMU_PPA;
   bool enableEmuPpca       = REGAL_EMU_PPCA;
   bool enableEmuObj        = REGAL_EMU_OBJ;
@@ -87,6 +88,7 @@ namespace Config {
   bool enableEmuFilter     = REGAL_EMU_FILTER;
   bool enableEmuTexC       = REGAL_EMU_TEXC;
 
+  bool forceEmuHint        = REGAL_FORCE_EMU_HINT;
   bool forceEmuPpa         = REGAL_FORCE_EMU_PPA;
   bool forceEmuPpca        = REGAL_FORCE_EMU_PPCA;
   bool forceEmuObj         = REGAL_FORCE_EMU_OBJ;
@@ -137,6 +139,8 @@ namespace Config {
   ::std::string codeSourceFile;
   ::std::string codeHeaderFile;
 #endif
+
+  ::std::string traceFile;
 
   bool          enableThreadLocking = REGAL_THREAD_LOCKING;
 
@@ -252,6 +256,11 @@ namespace Config {
     if (tmp) enableDriver = atoi(tmp)!=0;
 #endif
 
+#if REGAL_EMU_HINT
+    tmp = GetEnv( "REGAL_EMU_HINT" );
+    if (tmp) enableEmuHint = atoi(tmp)!=0;
+#endif
+
 #if REGAL_EMU_PPA
     tmp = GetEnv( "REGAL_EMU_PPA" );
     if (tmp) enableEmuPpa = atoi(tmp)!=0;
@@ -328,6 +337,11 @@ namespace Config {
 #endif
 
     //
+
+#if REGAL_EMU_HINT
+    tmp = GetEnv( "REGAL_FORCE_EMU_HINT" );
+    if (tmp) forceEmuHint = atoi(tmp)!=0;
+#endif
 
 #if REGAL_EMU_PPA
     tmp = GetEnv( "REGAL_FORCE_EMU_PPA" );
@@ -492,6 +506,9 @@ namespace Config {
     if (tmp) codeHeaderFile = tmp;
 #endif
 
+#if REGAL_TRACE
+    tmp = GetEnv( "REGAL_TRACE_FILE" );
+    if (tmp) traceFile = tmp;
 #endif
 
 #if REGAL_THREAD_LOCKING
@@ -499,6 +516,8 @@ namespace Config {
     if (tmp) enableThreadLocking = atoi(tmp)!=0;
 #else
     enableThreadLocking = false;
+#endif
+
 #endif
 
     // REGAL_NO_EMULATION is deprecated, use REGAL_EMULATION=0 instead.
@@ -553,6 +572,7 @@ namespace Config {
     Info("REGAL_LOG                 ", enableLog           ? "enabled" : "disabled");
     Info("REGAL_DRIVER              ", enableDriver        ? "enabled" : "disabled");
 
+    Info("REGAL_EMU_HINT            ", enableEmuHint       ? "enabled" : "disabled");
     Info("REGAL_EMU_PPA             ", enableEmuPpa        ? "enabled" : "disabled");
     Info("REGAL_EMU_PPCA            ", enableEmuPpca       ? "enabled" : "disabled");
     Info("REGAL_EMU_OBJ             ", enableEmuObj        ? "enabled" : "disabled");
@@ -569,6 +589,7 @@ namespace Config {
     Info("REGAL_EMU_FILTER          ", enableEmuFilter     ? "enabled" : "disabled");
     Info("REGAL_EMU_TEXC            ", enableEmuTexC       ? "enabled" : "disabled");
 
+    Info("REGAL_FORCE_EMU_HINT      ", forceEmuHint        ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_PPA       ", forceEmuPpa         ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_PPCA      ", forceEmuPpca        ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_OBJ       ", forceEmuObj         ? "enabled" : "disabled");
@@ -604,6 +625,10 @@ namespace Config {
 #if REGAL_CODE
     Info("REGAL_CODE_SOURCE         ", codeSourceFile                              );
     Info("REGAL_CODE_HEADER         ", codeHeaderFile                              );
+#endif
+
+#if REGAL_TRACE
+    Info("REGAL_TRACE_FILE          ", traceFile                                   );
 #endif
 
     Info("REGAL_THREAD_LOCKING      ", enableThreadLocking ? "enabled" : "disabled");
@@ -651,6 +676,7 @@ namespace Config {
         jo.object("emulation");
 
           jo.object("enable");
+            jo.member("hint",   enableEmuHint);
             jo.member("ppa",    enableEmuPpa);
             jo.member("ppca",   enableEmuPpca);
             jo.member("obj",    enableEmuObj);
@@ -669,6 +695,7 @@ namespace Config {
           jo.end();
 
           jo.object("force");
+            jo.member("hint",   forceEmuHint);
             jo.member("ppa",    forceEmuPpa);
             jo.member("ppca",   forceEmuPpca);
             jo.member("obj",    forceEmuObj);
@@ -725,6 +752,10 @@ namespace Config {
         jo.member("textureWrite", cacheShaderWrite);
         jo.member("textureRead",  cacheShaderRead);
         jo.member("directory",    cacheDirectory);
+      jo.end();
+
+      jo.object("trace");
+        jo.member("file",         traceFile);
       jo.end();
 
     jo.end();

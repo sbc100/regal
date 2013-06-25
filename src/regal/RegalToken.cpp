@@ -1025,6 +1025,8 @@ namespace Token {
       case 0x000081aa: return "GL_CULL_VERTEX_EXT";
       case 0x000081ab: return "GL_CULL_VERTEX_EYE_POSITION_EXT";
       case 0x000081ac: return "GL_CULL_VERTEX_OBJECT_POSITION_EXT";
+      case 0x000081bb: return "GL_YCRCB_422_SGIX";
+      case 0x000081bc: return "GL_YCRCB_444_SGIX";
       case 0x000081d4: return "GL_WRAP_BORDER_SUN";
       case 0x000081d5: return "GL_UNPACK_CONSTANT_DATA_SUNX";
       case 0x000081d6: return "GL_TEXTURE_CONSTANT_DATA_SUNX";
@@ -3414,6 +3416,11 @@ namespace Token {
       case 0x00009324: return "GL_LOG_REGAL";
       case 0x00009325: return "GL_EMULATION_REGAL";
       case 0x00009326: return "GL_DRIVER_REGAL";
+      case 0x00009360: return "GL_MISSING_REGAL";
+      case 0x00009361: return "GL_TRACE_REGAL";
+      case 0x00009362: return "GL_CACHE_REGAL";
+      case 0x00009363: return "GL_CODE_REGAL";
+      case 0x00009364: return "GL_STATISTICS_REGAL";
       case 0x00009380: return "GL_NUM_SAMPLE_COUNTS";
       case 0x000093a0: return "GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE";
       case 0x000093a1: return "GL_BGRA8_EXT";
