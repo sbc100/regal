@@ -644,7 +644,9 @@ struct ContextInfo
   GLboolean gl_win_phong_shading : 1;
   GLboolean gl_win_specular_fog : 1;
   GLboolean gl_win_swap_hint : 1;
+  GLboolean regal_arb_draw_buffers : 1;
   GLboolean regal_arb_texture_storage : 1;
+  GLboolean regal_ati_draw_buffers : 1;
   GLboolean regal_ext_blend_color : 1;
   GLboolean regal_ext_blend_subtract : 1;
   GLboolean regal_ext_direct_state_access : 1;

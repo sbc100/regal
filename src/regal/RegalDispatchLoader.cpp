@@ -42,7 +42,7 @@
 
 #include "RegalUtil.h"
 
-#if REGAL_DRIVER && !REGAL_SYS_PPAPI
+#if REGAL_DRIVER
 
 REGAL_GLOBAL_BEGIN
 

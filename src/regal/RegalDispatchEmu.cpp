@@ -12751,13 +12751,20 @@ static void REGAL_CALL emu_glReadBuffer(GLenum mode)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        if (_context->isES2())
+        DispatchTableGL *_next = _context->dispatcher.emulation.next();
+        RegalAssert(_next);
+        if (_context->filt->ReadBuffer(*_context, mode))
         {
-          DispatchTableGL *_next = _context->dispatcher.emulation.next();
-          RegalAssert(_next);
-          if (_context->info->gl_nv_framebuffer_blit || _context->info->gl_ext_framebuffer_blit)
-            return _next->call(&_next->glReadBuffer)(mode);
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
         }
+        if (_context->isES2() && _context->info->gl_nv_read_buffer)
+          _next->call(&_next->glReadBufferNV)(mode);
+        else
+          _next->call(&_next->glReadBuffer)(mode);
+        return;
       }
       #endif
     default:
@@ -27027,7 +27034,21 @@ static void REGAL_CALL emu_glDrawBuffers(GLsizei n, const GLenum *bufs)
       #if REGAL_EMU_PPA
       if (_context->ppa) break;
       #endif
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -27050,7 +27071,42 @@ static void REGAL_CALL emu_glDrawBuffers(GLsizei n, const GLenum *bufs)
         return;
       }
       #endif
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (_context->filt->DrawBuffers(*_context, n, bufs))
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
+        }
+        if (_context->isES2())
+        {
+          DispatchTableGL *_next = _context->dispatcher.emulation.next();
+          RegalAssert(_next);
+          if (_context->info->gl_nv_draw_buffers)
+          {
+            _next->call(&_next->glDrawBuffersNV)(n, bufs);
+            return;
+          }
+        }
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();
@@ -33165,7 +33221,21 @@ static void REGAL_CALL emu_glDrawBuffersARB(GLsizei n, const GLenum *bufs)
       #if REGAL_EMU_PPA
       if (_context->ppa) break;
       #endif
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -33188,7 +33258,32 @@ static void REGAL_CALL emu_glDrawBuffersARB(GLsizei n, const GLenum *bufs)
         return;
       }
       #endif
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_arb_draw_buffers)
+        {
+          DispatchTableGL &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glDrawBuffers)(n, bufs);
+          return;
+        }
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();
@@ -33952,6 +34047,13 @@ static void REGAL_CALL emu_glBindFramebuffer(GLenum target, GLuint framebuffer)
         {
           const bool hasFBBlit = _context->info->gl_ext_framebuffer_blit || _context->info->gl_nv_framebuffer_blit || _context->info->gl_version_major >= 3;
           if (!hasFBBlit && (target==GL_DRAW_FRAMEBUFFER || target==GL_READ_FRAMEBUFFER)) target = GL_FRAMEBUFFER;
+        }
+        if (_context->filt->BindFramebuffer(*_context, target, framebuffer))
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
         }
       }
       #endif
@@ -46272,6 +46374,81 @@ static void REGAL_CALL emu_glViewportIndexedfv(GLuint index, const GLfloat *v)
 // GL_ARB_window_pos
 
 // GL_ATI_draw_buffers
+
+static void REGAL_CALL emu_glDrawBuffersATI(GLsizei n, const GLenum *bufs)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_ati_draw_buffers)
+        {
+          DispatchTableGL &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glDrawBuffers)(n, bufs);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glDrawBuffersATI)(n, bufs);
+      break;
+    }
+
+  }
+
+}
 
 // GL_ATI_element_array
 
@@ -68536,6 +68713,13 @@ static void REGAL_CALL emu_glBindFramebufferOES(GLenum target, GLuint framebuffe
           const bool hasFBBlit = _context->info->gl_ext_framebuffer_blit || _context->info->gl_nv_framebuffer_blit || _context->info->gl_version_major >= 3;
           if (!hasFBBlit && (target==GL_DRAW_FRAMEBUFFER || target==GL_READ_FRAMEBUFFER)) target = GL_FRAMEBUFFER;
         }
+        if (_context->filt->BindFramebuffer(*_context, target, framebuffer))
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
+        }
       }
       #endif
     default:
@@ -70088,6 +70272,10 @@ void InitDispatchTableEmu(DispatchTableGL &tbl)
    tbl.glViewportArrayv = emu_glViewportArrayv;
    tbl.glViewportIndexedf = emu_glViewportIndexedf;
    tbl.glViewportIndexedfv = emu_glViewportIndexedfv;
+
+// GL_ATI_draw_buffers
+
+   tbl.glDrawBuffersATI = emu_glDrawBuffersATI;
 
 // GL_ATI_element_array
 

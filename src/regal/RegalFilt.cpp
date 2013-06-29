@@ -71,6 +71,36 @@ namespace Emu {
     return false;
   }
 
+  bool Filt::BindFramebuffer(const RegalContext &ctx, GLenum target, GLuint framebuffer)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(framebuffer);
+
+    fboID = framebuffer;
+
+    return false;
+  }
+
+  bool Filt::DrawBuffers(const RegalContext &ctx, GLsizei n, const GLenum *bufs)
+  {
+    UNUSED_PARAMETER(ctx);
+
+    if (!ctx.isES2())
+      return false;
+
+    for (GLsizei i = 0; i < n; ++i)
+    {
+      if (bufs[i] == GL_NONE || (bufs[i] >= GL_COLOR_ATTACHMENT0 && bufs[i] <= GL_COLOR_ATTACHMENT15))
+        continue;
+
+      Warning( "Regal does not support ", GLenumToString( bufs[i] ), " as target for glDrawBuffers for ES 2.0 profile - skipping." );
+      return true;
+    }
+
+    return false;
+  }
+
   bool Filt::FilterTexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam)
   {
     UNUSED_PARAMETER(ctx);
@@ -168,6 +198,58 @@ namespace Emu {
 
       default:
         Warning("glGenerateMipmap(", GLenumToString(target), ") not supported for ES 2.0.");
+        return true;
+    }
+
+    return false;
+  }
+
+  bool Filt::ReadBuffer(const RegalContext &ctx, GLenum src)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(src);
+
+    if (!ctx.isES2() || !ctx.info->gl_nv_read_buffer)
+      return false;
+
+    switch(src)
+    {
+      // These two should always be supported w/o additional extensions
+      case GL_COLOR_ATTACHMENT0:
+      case GL_BACK:
+        break;
+
+      // GL_FRONT may require NV_read_buffer_front, depending whether the context is
+      // double buffered. Let's output a warning but still pass it through
+      case GL_FRONT:
+        if (!ctx.info->gl_nv_read_buffer_front)
+          Warning("glReadBuffer(GL_FRONT) may not work on ES 2 without NV_read_buffer_front, depending on context buffering.");
+        break;
+
+      case GL_COLOR_ATTACHMENT1:
+      case GL_COLOR_ATTACHMENT2:
+      case GL_COLOR_ATTACHMENT3:
+      case GL_COLOR_ATTACHMENT4:
+      case GL_COLOR_ATTACHMENT5:
+      case GL_COLOR_ATTACHMENT6:
+      case GL_COLOR_ATTACHMENT7:
+      case GL_COLOR_ATTACHMENT8:
+      case GL_COLOR_ATTACHMENT9:
+      case GL_COLOR_ATTACHMENT10:
+      case GL_COLOR_ATTACHMENT11:
+      case GL_COLOR_ATTACHMENT12:
+      case GL_COLOR_ATTACHMENT13:
+      case GL_COLOR_ATTACHMENT14:
+      case GL_COLOR_ATTACHMENT15:
+        if (!ctx.info->gl_nv_draw_buffers)
+        {
+          Warning("glReadBuffer(GL_COLOR_ATTACHMENT1+) not supported for ES 2 without NV_draw_buffers.");
+          return true;
+        }
+        break;
+
+      default:
+        Warning("glReadBuffer(", GLenumToString(src), ") not supported for ES 2.\n");
         return true;
     }
 
@@ -414,6 +496,35 @@ namespace Emu {
             filtered = false;
           else
             retVal = 0;
+          break;
+
+        // need to filter on ES2.0 since this query returns an
+        // INVALID_ENUM if no FBO is currently active
+        case GL_DRAW_BUFFER0:
+        case GL_DRAW_BUFFER1:
+        case GL_DRAW_BUFFER2:
+        case GL_DRAW_BUFFER3:
+        case GL_DRAW_BUFFER4:
+        case GL_DRAW_BUFFER5:
+        case GL_DRAW_BUFFER6:
+        case GL_DRAW_BUFFER7:
+        case GL_DRAW_BUFFER8:
+        case GL_DRAW_BUFFER9:
+        case GL_DRAW_BUFFER10:
+        case GL_DRAW_BUFFER11:
+        case GL_DRAW_BUFFER12:
+        case GL_DRAW_BUFFER13:
+        case GL_DRAW_BUFFER14:
+        case GL_DRAW_BUFFER15:
+          if (ctx.info->gl_nv_draw_buffers)
+          {
+            if (fboID == 0)
+              retVal = GL_NONE;
+            else
+              filtered = false;
+          }
+          else
+            retVal = GL_NONE;
           break;
 
         default:

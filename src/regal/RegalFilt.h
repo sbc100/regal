@@ -57,6 +57,7 @@ namespace Emu {
   struct Filt
   {
     Filt()
+    : fboID(0)
     {
     }
 
@@ -73,6 +74,8 @@ namespace Emu {
     }
 
     bool BindTexture(const RegalContext &ctx, GLenum target, GLuint name );
+    bool BindFramebuffer(const RegalContext &ctx, GLenum target, GLuint framebuffer);
+    bool DrawBuffers(const RegalContext &ctx, GLsizei n, const GLenum *bufs);
 
     template <typename T> bool Get(const RegalContext &ctx, GLenum pname, T *params)
     {
@@ -89,11 +92,15 @@ namespace Emu {
                               GLenum textarget, GLuint texture, GLint level);
     bool GenerateMipmap(const RegalContext &ctx, GLenum target);
     bool PolygonMode (const RegalContext &ctx, GLenum face, GLenum mode);
+    bool ReadBuffer  (const RegalContext &ctx, GLenum src);
     bool RenderMode  (const RegalContext &ctx, GLenum mode);
     bool PixelStorei (const RegalContext &ctx, GLenum pname, GLint param);
     bool FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment);
 
     bool FilterGet   (const RegalContext &ctx, GLenum pname, int &retVal);
+
+  private:
+    GLuint fboID;
   };
 
 }

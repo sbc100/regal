@@ -616,7 +616,9 @@ ContextInfo::ContextInfo()
   gl_win_phong_shading(false),
   gl_win_specular_fog(false),
   gl_win_swap_hint(false),
+  regal_arb_draw_buffers(false),
   regal_arb_texture_storage(false),
+  regal_ati_draw_buffers(false),
   regal_ext_blend_color(false),
   regal_ext_blend_subtract(false),
   regal_ext_direct_state_access(false),
@@ -1760,7 +1762,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_depth_buffer_float")) return gl_arb_depth_buffer_float;
   if (!strcmp(ext,"GL_ARB_depth_clamp")) return gl_arb_depth_clamp;
   if (!strcmp(ext,"GL_ARB_depth_texture")) return gl_arb_depth_texture;
-  if (!strcmp(ext,"GL_ARB_draw_buffers")) return gl_arb_draw_buffers;
+  if (!strcmp(ext,"GL_ARB_draw_buffers")) return regal_arb_draw_buffers || gl_arb_draw_buffers;
   if (!strcmp(ext,"GL_ARB_draw_buffers_blend")) return gl_arb_draw_buffers_blend;
   if (!strcmp(ext,"GL_ARB_draw_elements_base_vertex")) return gl_arb_draw_elements_base_vertex;
   if (!strcmp(ext,"GL_ARB_draw_indirect")) return gl_arb_draw_indirect;
@@ -1851,7 +1853,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_window_pos")) return gl_arb_window_pos;
   if (!strcmp(ext,"GL_ARM_mali_program_binary")) return gl_arm_mali_program_binary;
   if (!strcmp(ext,"GL_ARM_mali_shader_binary")) return gl_arm_mali_shader_binary;
-  if (!strcmp(ext,"GL_ATI_draw_buffers")) return gl_ati_draw_buffers;
+  if (!strcmp(ext,"GL_ATI_draw_buffers")) return regal_ati_draw_buffers || gl_ati_draw_buffers;
   if (!strcmp(ext,"GL_ATI_element_array")) return gl_ati_element_array;
   if (!strcmp(ext,"GL_ATI_envmap_bumpmap")) return gl_ati_envmap_bumpmap;
   if (!strcmp(ext,"GL_ATI_fragment_shader")) return gl_ati_fragment_shader;

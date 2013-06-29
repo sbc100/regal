@@ -190,6 +190,18 @@ RegalContext::Init()
     #if REGAL_EMU_FILTER
     if (Config::enableEmuFilter || Config::forceEmuFilter || REGAL_FORCE_EMU_FILTER)
     {
+      if (!info->gl_arb_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
+      {
+        Internal("RegalContext::Init ","GL_ARB_draw_buffers");
+        info->regal_arb_draw_buffers = true;
+        info->regalExtensionsSet.insert("GL_ARB_draw_buffers");
+      }
+      if (!info->gl_ati_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
+      {
+        Internal("RegalContext::Init ","GL_ATI_draw_buffers");
+        info->regal_ati_draw_buffers = true;
+        info->regalExtensionsSet.insert("GL_ATI_draw_buffers");
+      }
       if (!info->gl_ext_blend_color)
       {
         Internal("RegalContext::Init ","GL_EXT_blend_color");

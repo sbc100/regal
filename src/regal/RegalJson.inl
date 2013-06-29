@@ -11,6 +11,7 @@
 #define set_json_regal_config_dispatch_emulation_enable_bv(value)        Config::enableEmuBaseVertex = value
 #define set_json_regal_config_dispatch_emulation_enable_dsa(value)       Config::enableEmuDsa = value
 #define set_json_regal_config_dispatch_emulation_enable_filter(value)    Config::enableEmuFilter = value
+#define set_json_regal_config_dispatch_emulation_enable_hint(value)      Config::enableEmuHint = value
 #define set_json_regal_config_dispatch_emulation_enable_iff(value)       Config::enableEmuIff = value
 #define set_json_regal_config_dispatch_emulation_enable_obj(value)       Config::enableEmuObj = value
 #define set_json_regal_config_dispatch_emulation_enable_path(value)      Config::enableEmuPath = value
@@ -26,6 +27,7 @@
 #define set_json_regal_config_dispatch_emulation_force_bv(value)         Config::forceEmuBaseVertex = value
 #define set_json_regal_config_dispatch_emulation_force_dsa(value)        Config::forceEmuDsa = value
 #define set_json_regal_config_dispatch_emulation_force_filter(value)     Config::forceEmuFilter = value
+#define set_json_regal_config_dispatch_emulation_force_hint(value)       Config::forceEmuHint = value
 #define set_json_regal_config_dispatch_emulation_force_iff(value)        Config::forceEmuIff = value
 #define set_json_regal_config_dispatch_emulation_force_obj(value)        Config::forceEmuObj = value
 #define set_json_regal_config_dispatch_emulation_force_path(value)       Config::forceEmuPath = value

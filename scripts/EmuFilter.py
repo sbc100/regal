@@ -171,11 +171,11 @@ formulae = {
      ]
   },
 
-  # Filter out glDrawBuffer, glReadBuffer unless GL_NV_framebuffer_blit
+  # Filter out glDrawBuffer unless GL_NV_framebuffer_blit
   # or GL_EXT_framebuffer_blit is available
 
   'blitDrawRead' : {
-    'entries' : [ 'glDrawBuffer', 'glReadBuffer' ],
+    'entries' : [ 'glDrawBuffer' ],
     'impl' : [
        'if (_context->isES2())',
        '{',
@@ -225,6 +225,56 @@ formulae = {
      ]
   },
 
+  'glDrawBuffers' : {
+    'entries' : [ 'glDrawBuffers' ],
+    'impl' : [
+       'if (_context->filt->DrawBuffers(*_context, ${arg0plus}))',
+       '{',
+       '  #if REGAL_BREAK',
+       '  Break::Filter();',
+       '  #endif',
+       '  return ${dummyretval};',
+       '}',
+       'if (_context->isES2())',
+       '{',
+       '  DispatchTableGL *_next = _context->dispatcher.emulation.next();',
+       '  RegalAssert(_next);',
+       '  if (_context->info->gl_nv_draw_buffers)',
+       '  {',
+       '    _next->call(&_next->${name}NV)(${arg0plus});',
+       '    return;',
+       '  }',
+       '}'
+     ]
+  },
+
+  # http://www.opengl.org/registry/specs/ATI/draw_buffers.txt
+  'GL_ATI_draw_buffers' : {
+    'entries' : [ 'glDrawBuffersATI' ],
+    'impl' : [
+       'if (!_context->info->gl_ati_draw_buffers)',
+       '{',
+       '  DispatchTableGL &_table = _context->dispatcher.emulation;',
+       '  _context->emuLevel++;',
+       '  _table.call(&_table.glDrawBuffers)(${arg0plus});',
+       '  return;',
+       '}'
+     ]
+  },
+
+  # http://www.opengl.org/registry/specs/ARB/draw_buffers.txt
+  'GL_ARB_draw_buffers' : {
+    'entries' : [ 'glDrawBuffersARB'],
+    'impl' : [
+       'if (!_context->info->gl_arb_draw_buffers)',
+       '{',
+       '  DispatchTableGL &_table = _context->dispatcher.emulation;',
+       '  _context->emuLevel++;',
+       '  _table.call(&_table.glDrawBuffers)(${arg0plus});',
+       '  return;',
+       '}'
+     ]
+  },
 
   # http://www.opengl.org/registry/specs/ARB/vertex_program.txt
   # ARB assembly programs not supported or emulated for ES 2.0 (yet)
@@ -450,6 +500,13 @@ formulae = {
        '{',
        '  const bool hasFBBlit = _context->info->gl_ext_framebuffer_blit || _context->info->gl_nv_framebuffer_blit || _context->info->gl_version_major >= 3;',
        '  if (!hasFBBlit && (target==GL_DRAW_FRAMEBUFFER || target==GL_READ_FRAMEBUFFER)) target = GL_FRAMEBUFFER;',
+       '}',
+       'if (_context->filt->BindFramebuffer(*_context, ${arg0plus}))',
+       '{',
+       '  #if REGAL_BREAK',
+       '  Break::Filter();',
+       '  #endif',
+       '  return ${dummyretval};',
        '}'
      ]
   },
@@ -534,6 +591,30 @@ formulae = {
        '}'
      ]
   },
+
+# glReadBuffer
+
+  'glReadBuffer' : {
+    'entries' : [ 'glReadBuffer' ],
+    'impl' : [
+       'DispatchTableGL *_next = _context->dispatcher.emulation.next();',
+       'RegalAssert(_next);',
+       'if (_context->filt->ReadBuffer(*_context, ${arg0plus}))',
+       '{',
+       '  #if REGAL_BREAK',
+       '  Break::Filter();',
+       '  #endif',
+       '  return ${dummyretval};',
+       '}',
+       'if (_context->isES2() && _context->info->gl_nv_read_buffer)',
+       '  _next->call(&_next->glReadBufferNV)(${arg0plus});',
+       'else',
+       '  _next->call(&_next->glReadBuffer)(${arg0plus});',
+       'return;'
+     ]
+  },
+
+
 
 #
 # http://www.opengl.org/registry/specs/ARB/draw_buffers.txt
