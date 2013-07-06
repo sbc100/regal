@@ -209,6 +209,8 @@ exclude = [
   "glXGetTransparentIndexSUN",
   "glXReleaseVideoDeviceNV",
   
+  "wglGetProcAddress",
+  "wglGetDefaultProcAddress",
   "wglSetStereoEmitterState3DL",
   "wglBlitContextFramebufferAMD",
   "wglCreateAssociatedContextAMD",
@@ -328,5 +330,11 @@ exclude = [
   "wglSwapBuffersMscOML",
   "wglSwapLayerBuffersMscOML",
   "wglWaitForMscOML",
-  "wglWaitForSbcOML"
+  "wglWaitForSbcOML",
+  
+  # https://github.com/apitrace/apitrace/pull/130
+
+  'glTextureImage1DEXT',
+  'glTextureImage2DEXT',
+  'glTextureImage3DEXT'
 ]

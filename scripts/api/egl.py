@@ -8,13 +8,13 @@ from Api import StateType, State
 
 egl = Api()
 
-EGLNativeWindowType = Typedef('EGLNativeWindowType','struct ANativeWindow*')
+EGLNativeWindowType = Typedef('EGLNativeWindowType',{'': 'void *', 'win32': 'HWND', 'android': 'struct ANativeWindow *', 'x11': 'Window'})
 EGLNativeWindowType.default = '0'
 
-EGLNativePixmapType = Typedef('EGLNativePixmapType','struct egl_native_pixmap_t*')
+EGLNativePixmapType = Typedef('EGLNativePixmapType',{'': 'void *', 'win32': 'HBITMAP', 'android': 'struct egl_native_pixmap_t *', 'x11': 'Pixmap'})
 EGLNativePixmapType.default = '0'
 
-EGLNativeDisplayType = Typedef('EGLNativeDisplayType','void*')
+EGLNativeDisplayType = Typedef('EGLNativeDisplayType',{'': 'int', 'win32': 'HDC', 'android': 'void *', 'x11': 'Display *'})
 EGLNativeDisplayType.default = '0'
 
 NativeDisplayType = Typedef('NativeDisplayType','EGLNativeDisplayType')

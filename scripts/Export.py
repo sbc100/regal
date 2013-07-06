@@ -188,10 +188,11 @@ def traverse(apis, args):
 def generate(apis, args):
 
   traverse(apis, args)
+  generatePublicHeader(apis, args)
+  generatePluginSource(apis,args)
   generateDispatchStatistics( apis, args )
   generateStatisticsHeader(apis, args)
   generateStatisticsSource(apis, args)
-  generatePluginHeader(apis,args)
   generateSource(apis, args)
   generateSystemHeader(apis, args)
   generateEmuSource( apis, args )
@@ -205,7 +206,6 @@ def generate(apis, args):
   generateStaticES2Source( apis, args )
   generateStaticEGLSource( apis, args )
   generateTraceSource( apis, args )
-  generatePublicHeader(apis, args)
   generateDispatchHeader(apis, args)
   generateContextHeader(apis, args)
   generateContextSource(apis, args)

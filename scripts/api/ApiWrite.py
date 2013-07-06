@@ -27,7 +27,10 @@ from Api import StateType, State'''
 
 def writeTypedefs(file,name,typedefs):
   for j in typedefs:
-    print >>file, '%s = Typedef(\'%s\',\'%s\')\n'%(j.name,j.name,j.type),
+    if isinstance(j.type, str) or isinstance(j.type, unicode):
+      print >>file, '%s = Typedef(\'%s\',\'%s\')'%(j.name,j.name,j.type)
+    else:
+      print >>file, '%s = Typedef(\'%s\',%s)'%(j.name,j.name,j.type)
     if getattr(j,'category') != None and len(j.category):
       print >>file, '%s.category = \'%s\''%(j.name,j.category)
     if getattr(j,'default',None) != None:

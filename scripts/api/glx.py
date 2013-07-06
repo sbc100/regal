@@ -32,7 +32,7 @@ GLXPixmap = Typedef('GLXPixmap','XID')
 GLXPixmap.category = 'GLX_VERSION_1_0'
 GLXPixmap.default = '0'
 
-GLXContext = Typedef('GLXContext','struct __GLXContextRec *')
+GLXContext = Typedef('GLXContext','struct __GLXcontextRec *')
 GLXContext.category = 'GLX_VERSION_1_0'
 GLXContext.default = '0'
 

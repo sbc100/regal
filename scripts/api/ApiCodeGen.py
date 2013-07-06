@@ -393,6 +393,24 @@ def wrapIf(exp, a, b = None):
       tmp.extend(a)
     return tmp
 
+  if isinstance(exp,dict):
+    tmp = []
+    first = True
+    for i in sorted([i for i in exp if len(i)]):      
+      if first:
+        tmp.append('#if %s'%(i))
+      else:
+        tmp.append('#elif %s'%(i))
+      tmp.append(exp[i])
+      first = False
+    if '' in exp:
+      if not first:
+        tmp.append('#else')
+      tmp.append(exp[''])
+    if not first:
+      tmp.append('#endif')      
+    return tmp
+
   tmp = ''
   if exp:
     tmp += '#if %s\n'%(exp)

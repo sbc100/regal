@@ -44,6 +44,10 @@
 
 #if REGAL_TRACE
 
+#ifdef REGAL_NAMESPACE
+#undef REGAL_NAMESPACE
+#endif
+
 REGAL_GLOBAL_BEGIN
 
 #include <string>
@@ -2051,9 +2055,6 @@ namespace Trace
   void  glProgramUniformMatrix4x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
   void  glPushClientAttribDefaultEXT(GLbitfield mask);
   void  glTextureBufferEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer);
-  void  glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-  void  glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-  void  glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
   void  glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *params);
   void  glTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, const GLuint *params);
   void  glTextureParameterfEXT(GLuint texture, GLenum target, GLenum pname, GLfloat param);
@@ -3372,9 +3373,7 @@ namespace Trace
   BOOL  wglDescribeLayerPlane(HDC hDC, int iPixelFormat, int iLayerPlane, UINT nBytes, LPLAYERPLANEDESCRIPTOR plpd);
   HGLRC  wglGetCurrentContext(void);
   HDC  wglGetCurrentDC(void);
-  PROC  wglGetDefaultProcAddress(LPCSTR lpszProc);
   int  wglGetLayerPaletteEntries(HDC hDC, int iLayerPlane, int iStart, int nEntries, COLORREF *pcr);
-  PROC  wglGetProcAddress(LPCSTR lpszProc);
   BOOL  wglMakeCurrent(HDC hDC, HGLRC hglrc);
   BOOL  wglRealizeLayerPalette(HDC hDC, int iLayerPlane, BOOL bRealize);
   int  wglSetLayerPaletteEntries(HDC hDC, int iLayerPlane, int iStart, int nEntries, const COLORREF *pcr);
@@ -20112,36 +20111,6 @@ static void REGAL_CALL trace_glTextureBufferEXT(GLuint texture, GLenum target, G
   Trace::glTextureBufferEXT(texture, target, internalformat, buffer);
 }
 
-static void REGAL_CALL trace_glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
-{
-  Internal("trace_glTextureImage1DEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
-  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glTextureImage1DEXT(texture, target, level, internalformat, width, border, format, type, pixels);
-}
-
-static void REGAL_CALL trace_glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
-{
-  Internal("trace_glTextureImage2DEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
-  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glTextureImage2DEXT(texture, target, level, internalformat, width, height, border, format, type, pixels);
-}
-
-static void REGAL_CALL trace_glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
-{
-  Internal("trace_glTextureImage3DEXT","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
-  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glTextureImage3DEXT(texture, target, level, internalformat, width, height, depth, border, format, type, pixels);
-}
-
 static void REGAL_CALL trace_glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *params)
 {
   Internal("trace_glTextureParameterIivEXT","()");
@@ -29398,16 +29367,6 @@ static HDC REGAL_CALL trace_wglGetCurrentDC(void)
   return ret;
 }
 
-static PROC REGAL_CALL trace_wglGetDefaultProcAddress(LPCSTR lpszProc)
-{
-  Internal("trace_wglGetDefaultProcAddress","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  PROC  ret = Trace::wglGetDefaultProcAddress(lpszProc);
-  return ret;
-}
-
 static int REGAL_CALL trace_wglGetLayerPaletteEntries(HDC hDC, int iLayerPlane, int iStart, int nEntries, COLORREF *pcr)
 {
   Internal("trace_wglGetLayerPaletteEntries","()");
@@ -29415,16 +29374,6 @@ static int REGAL_CALL trace_wglGetLayerPaletteEntries(HDC hDC, int iLayerPlane, 
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   int  ret = Trace::wglGetLayerPaletteEntries(hDC, iLayerPlane, iStart, nEntries, pcr);
-  return ret;
-}
-
-static PROC REGAL_CALL trace_wglGetProcAddress(LPCSTR lpszProc)
-{
-  Internal("trace_wglGetProcAddress","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
-  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
-  PROC  ret = Trace::wglGetProcAddress(lpszProc);
   return ret;
 }
 
@@ -33575,9 +33524,6 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glProgramUniformMatrix4x3fvEXT = trace_glProgramUniformMatrix4x3fvEXT;
   tbl.glPushClientAttribDefaultEXT = trace_glPushClientAttribDefaultEXT;
   tbl.glTextureBufferEXT = trace_glTextureBufferEXT;
-  tbl.glTextureImage1DEXT = trace_glTextureImage1DEXT;
-  tbl.glTextureImage2DEXT = trace_glTextureImage2DEXT;
-  tbl.glTextureImage3DEXT = trace_glTextureImage3DEXT;
   tbl.glTextureParameterIivEXT = trace_glTextureParameterIivEXT;
   tbl.glTextureParameterIuivEXT = trace_glTextureParameterIuivEXT;
   tbl.glTextureParameterfEXT = trace_glTextureParameterfEXT;
@@ -34900,9 +34846,7 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
   tbl.wglDescribeLayerPlane = trace_wglDescribeLayerPlane;
   tbl.wglGetCurrentContext = trace_wglGetCurrentContext;
   tbl.wglGetCurrentDC = trace_wglGetCurrentDC;
-  tbl.wglGetDefaultProcAddress = trace_wglGetDefaultProcAddress;
   tbl.wglGetLayerPaletteEntries = trace_wglGetLayerPaletteEntries;
-  tbl.wglGetProcAddress = trace_wglGetProcAddress;
   tbl.wglMakeCurrent = trace_wglMakeCurrent;
   tbl.wglRealizeLayerPalette = trace_wglRealizeLayerPalette;
   tbl.wglSetLayerPaletteEntries = trace_wglSetLayerPaletteEntries;

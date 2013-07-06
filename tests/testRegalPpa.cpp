@@ -1,4 +1,3 @@
-
 /*
   Copyright (c) 2011-2012 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
@@ -37,9 +36,10 @@
 
 #include <GL/Regal.h>
 
-#include "RegalDispatchGMock.h"
-#include "RegalDispatch.h"
 #include "RegalPpa.h"
+#include "RegalDispatch.h"
+#include "RegalDispatchGMock.h"
+#include "RegalContextInfo.h"
 
 namespace
 {

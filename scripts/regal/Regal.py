@@ -349,14 +349,22 @@ def apiFuncDefineCode(apis, args):
 
 def apiTypedefCode( apis, args ):
 
+  def printTypedef( name, type ):
+    if re.search( '\(\s*\*\s*\)', type ):
+      return 'typedef %s;' % ( re.sub( '\(\s*\*\s*\)', '(*%s)' % name, type ) )
+    else:
+      return'typedef %s %s;' % ( type, name )
+    
   code = ''
   for api in apis:
     code += '\n'
     if api.name in cond:
       code += '#if %s\n' % cond[api.name]
+
     if api.name == 'wgl':
       code += '#ifdef  REGAL_SYS_WGL_DECLARE_WGL\n'
       code += '#ifndef _WINDEF_\n'
+
     for typedef in api.typedefs:
 
       if api.name == 'wgl' and typedef.name=='GLYPHMETRICSFLOAT':
@@ -364,14 +372,18 @@ def apiTypedefCode( apis, args ):
         code += '#ifndef _WINGDI_\n'
       if api.name == 'wgl' and typedef.name=='HPBUFFERARB':
         code += '#endif\n'
+        code += '#endif // REGAL_SYS_WGL_DECLARE_WGL\n'
 
-      if re.search( '\(\s*\*\s*\)', typedef.type ):
-        code += 'typedef %s;\n' % ( re.sub( '\(\s*\*\s*\)', '(*%s)' % typedef.name, typedef.type ) )
+      if isinstance(typedef.type, str) or isinstance(typedef.type, unicode):
+        code += printTypedef( typedef.name, typedef.type ) + '\n'
       else:
-        code += 'typedef %s %s;\n' % ( typedef.type, typedef.name )
+        type = {}
+        mapping = { 'osx' : 'REGAL_SYS_OSX', 'win32' : 'REGAL_SYS_WIN32', 'x11' : 'REGAL_SYS_X11', 'android' : 'REGAL_SYS_ANDROID', '' : '' }
+        for i in typedef.type:
+          if i in mapping:
+            type[mapping[i]] = printTypedef( typedef.name, typedef.type[i] )
+        code += '\n'.join(wrapIf(type,None)) + '\n'
 
-    if api.name == 'wgl':
-      code += '#endif // REGAL_SYS_WGL_DECLARE_WGL\n'
     if api.name in cond:
       code += '#endif // %s\n' % cond[api.name]
     code += '\n'

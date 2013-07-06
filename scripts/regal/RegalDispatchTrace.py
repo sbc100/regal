@@ -137,9 +137,9 @@ def apiTraceFuncDefineCode(apis, args):
 
 def generateTraceSource(apis, args):
 
-  funcDefine = apiTraceFuncDefineCode( apis, args )
-  funcInit   = apiDispatchFuncInitCode( apis, args, 'trace', exclude )
-  globalFuncInit   = apiDispatchGlobalFuncInitCode( apis, args, 'trace', exclude )
+  funcDefine     = apiTraceFuncDefineCode( apis, args )
+  funcInit       = apiDispatchFuncInitCode( apis, args, 'trace', exclude )
+  globalFuncInit = apiDispatchGlobalFuncInitCode( apis, args, 'trace', exclude )
 
   substitute = {}
   substitute['LICENSE']         = args.license
@@ -151,6 +151,6 @@ def generateTraceSource(apis, args):
   substitute['API_DISPATCH_FUNC_DEFINE'] = funcDefine
   substitute['API_DISPATCH_FUNC_INIT'] = funcInit
   substitute['API_DISPATCH_GLOBAL_FUNC_INIT'] = globalFuncInit
-  substitute['IFDEF'] = '#if REGAL_TRACE\n\n'
+  substitute['IFDEF'] = '#if REGAL_TRACE\n\n#ifdef REGAL_NAMESPACE\n#undef REGAL_NAMESPACE\n#endif\n\n'
   substitute['ENDIF'] = '#endif\n'
   outputCode( '%s/RegalDispatchTrace.cpp' % args.srcdir, dispatchSourceTemplate.substitute(substitute))

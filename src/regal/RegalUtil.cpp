@@ -36,6 +36,7 @@ REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
 
+#include <cerrno>
 #include <string>
 using namespace std;
 
@@ -629,6 +630,8 @@ bool fileExists(const char *filename)
 
 FILE *fileOpen(const char *filename, const char *mode)
 {
+  // Return NULL for NULL or zero-length filename
+
   if (filename && *filename)
   {
     if (!strcmp(filename,"stdout"))
@@ -637,7 +640,16 @@ FILE *fileOpen(const char *filename, const char *mode)
     if (!strcmp(filename,"stderr"))
       return stderr;
 
-    return fopen(filename,mode);
+    if (!strcmp(filename,"/dev/null"))
+      return NULL;
+
+    FILE *f = fopen(filename,mode);
+    if (!f)
+    {
+      string message = print_string("Failed to open ",filename," due to errno ",errno," : ",strerror(errno));
+      Warning(message);
+    }
+    return f;
   }
 
   return NULL;

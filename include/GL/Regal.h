@@ -237,15 +237,19 @@ typedef void GLvoid;
 typedef ptrdiff_t GLintptr;
 typedef ptrdiff_t GLsizeiptr;
 typedef char GLchar;
-typedef signed long long GLint64;
-typedef unsigned long long GLuint64;
+typedef int64_t GLint64;
+typedef uint64_t GLuint64;
 typedef struct __GLsync * GLsync;
 typedef struct _cl_context * cl_context;
 typedef struct _cl_event * cl_event;
 typedef ptrdiff_t GLintptrARB;
 typedef ptrdiff_t GLsizeiptrARB;
 typedef char GLcharARB;
+#if REGAL_SYS_OSX
+typedef unsigned long GLhandleARB;
+#else
 typedef unsigned int GLhandleARB;
+#endif
 typedef unsigned short GLhalfARB;
 typedef unsigned short GLhalfNV;
 typedef int64_t GLint64EXT;
@@ -285,6 +289,7 @@ typedef PIXELFORMATDESCRIPTOR * LPPIXELFORMATDESCRIPTOR;
 typedef struct _POINTFLOAT POINTFLOAT;
 typedef struct _WGLSWAP WGLSWAP;
 #endif
+#endif // REGAL_SYS_WGL_DECLARE_WGL
 typedef struct HPBUFFERARB__ * HPBUFFERARB;
 typedef struct HPBUFFEREXT__ * HPBUFFEREXT;
 typedef struct HGPUNV__ * HGPUNV;
@@ -292,7 +297,6 @@ typedef struct HPVIDEODEV__ * HPVIDEODEV;
 typedef struct HVIDEOINPUTDEVICENV__ * HVIDEOINPUTDEVICENV;
 typedef struct HVIDEOOUTPUTDEVICENV__ * HVIDEOOUTPUTDEVICENV;
 typedef struct GPU_DEVICE * PGPU_DEVICE;
-#endif // REGAL_SYS_WGL_DECLARE_WGL
 #endif // REGAL_SYS_WGL
 
 #if REGAL_SYS_GLX
@@ -303,7 +307,7 @@ typedef XID Font;
 typedef struct _XDisplay Display;
 typedef XID GLXDrawble;
 typedef XID GLXPixmap;
-typedef struct __GLXContextRec * GLXContext;
+typedef struct __GLXcontextRec * GLXContext;
 typedef unsigned int GLXVideoDeviceNV;
 typedef XID GLXWindow;
 typedef XID GLXPbuffer;
@@ -316,21 +320,45 @@ typedef XID GLXPbufferSGIX;
 #endif // REGAL_SYS_GLX
 
 #if REGAL_SYS_OSX
-typedef void * CGLContextObj;
-typedef void * CGLPixelFormatObj;
-typedef void * CGLRendererInfoObj;
-typedef void * CGLPBufferObj;
+typedef struct _CGLContextObject * CGLContextObj;
+typedef struct _CGLPixelFormatObject * CGLPixelFormatObj;
+typedef struct _CGLRendererInfoObject * CGLRendererInfoObj;
+typedef struct _CGLPBufferObject * CGLPBufferObj;
 typedef void * CGLShareGroupObj;
 typedef struct __IOSurface * IOSurfaceRef;
 typedef void * CGSConnectionID;
-typedef long long CGSWindowID;
-typedef long long CGSSurfaceID;
+typedef int CGSWindowID;
+typedef int CGSSurfaceID;
 #endif // REGAL_SYS_OSX
 
 #if REGAL_SYS_EGL
-typedef struct ANativeWindow* EGLNativeWindowType;
-typedef struct egl_native_pixmap_t* EGLNativePixmapType;
-typedef void* EGLNativeDisplayType;
+#if REGAL_SYS_ANDROID
+typedef struct ANativeWindow * EGLNativeWindowType;
+#elif REGAL_SYS_WIN32
+typedef HWND EGLNativeWindowType;
+#elif REGAL_SYS_X11
+typedef Window EGLNativeWindowType;
+#else
+typedef void * EGLNativeWindowType;
+#endif
+#if REGAL_SYS_ANDROID
+typedef struct egl_native_pixmap_t * EGLNativePixmapType;
+#elif REGAL_SYS_WIN32
+typedef HBITMAP EGLNativePixmapType;
+#elif REGAL_SYS_X11
+typedef Pixmap EGLNativePixmapType;
+#else
+typedef void * EGLNativePixmapType;
+#endif
+#if REGAL_SYS_ANDROID
+typedef void * EGLNativeDisplayType;
+#elif REGAL_SYS_WIN32
+typedef HDC EGLNativeDisplayType;
+#elif REGAL_SYS_X11
+typedef Display * EGLNativeDisplayType;
+#else
+typedef int EGLNativeDisplayType;
+#endif
 typedef EGLNativeDisplayType NativeDisplayType;
 typedef EGLNativePixmapType  NativePixmapType;
 typedef EGLNativeWindowType  NativeWindowType;

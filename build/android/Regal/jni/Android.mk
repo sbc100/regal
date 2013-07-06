@@ -54,7 +54,10 @@ apitrace_src_files := $(patsubst %,$(regal_path)/%,$(APITRACE.CXX))
 apitrace_src_files := $(subst glproc_gl,glproc_egl,$(apitrace_src_files))
 apitrace_src_files := $(patsubst $(LOCAL_PATH)/%,%,$(apitrace_src_files))
 
-apitrace_c_includes := $(regal_path)/include $(regal_path)/src/squish $(regal_path)/src/apitrace/common $(regal_path)/src/mongoose $(regal_path)/src/apitrace/gen/dispatch $(regal_path)/src/apitrace/dispatch $(regal_path)/src/apitrace/helpers $(regal_path)/src/apitrace/wrappers $(regal_path)/src/apitrace $(regal_path)/src/zlib/include $(regal_path)/src/snappy
+apitrace_c_includes := $(regal_path)/include $(regal_path)/src/apitrace/common $(regal_path)/src/apitrace/gen/dispatch $(regal_path)/src/apitrace/dispatch $(regal_path)/src/apitrace/helpers $(regal_path)/src/apitrace/wrappers $(regal_path)/src/apitrace
+apitrace_c_includes += $(regal_path)/src/zlib/include $(regal_path)/src/zlib/src $(regal_path)/src/snappy
+apitrace_c_includes += $(regal_path)/src/apitrace/thirdparty/khronos
+apitrace_c_includes += $(regal_path)/src/regal $(regal_path)/src/mongoose $(regal_path)/src/squish
 apitrace_c_includes := $(patsubst $(LOCAL_PATH)/../%,%,$(apitrace_c_includes))
 
 apitrace_export_c_includes := $(regal_path)/include
@@ -115,7 +118,7 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE := apitrace
 LOCAL_SRC_FILES := $(apitrace_src_files)
-LOCAL_CFLAGS := $(regal_cflags) -DREGAL_PLUGIN_MODE=1
+LOCAL_CFLAGS := $(regal_cflags) -DAPITRACE_TLS=0
 LOCAL_C_INCLUDES := $(apitrace_c_includes)
 LOCAL_EXPORT_C_INCLUDES := $(apitrace_export_c_includes)
 LOCAL_EXPORT_LDLIBS :=

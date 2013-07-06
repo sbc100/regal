@@ -8,16 +8,16 @@ from Api import StateType, State
 
 cgl = Api()
 
-CGLContextObj = Typedef('CGLContextObj','void *')
+CGLContextObj = Typedef('CGLContextObj','struct _CGLContextObject *')
 CGLContextObj.default = '0'
 
-CGLPixelFormatObj = Typedef('CGLPixelFormatObj','void *')
+CGLPixelFormatObj = Typedef('CGLPixelFormatObj','struct _CGLPixelFormatObject *')
 CGLPixelFormatObj.default = '0'
 
-CGLRendererInfoObj = Typedef('CGLRendererInfoObj','void *')
+CGLRendererInfoObj = Typedef('CGLRendererInfoObj','struct _CGLRendererInfoObject *')
 CGLRendererInfoObj.default = '0'
 
-CGLPBufferObj = Typedef('CGLPBufferObj','void *')
+CGLPBufferObj = Typedef('CGLPBufferObj','struct _CGLPBufferObject *')
 CGLPBufferObj.default = '0'
 
 CGLShareGroupObj = Typedef('CGLShareGroupObj','void *')
@@ -28,9 +28,9 @@ IOSurfaceRef.default = '0'
 
 CGSConnectionID = Typedef('CGSConnectionID','void *')
 
-CGSWindowID = Typedef('CGSWindowID','long long')
+CGSWindowID = Typedef('CGSWindowID','int')
 
-CGSSurfaceID = Typedef('CGSSurfaceID','long long')
+CGSSurfaceID = Typedef('CGSSurfaceID','int')
 
 cgl.add(CGLContextObj)
 cgl.add(CGLPixelFormatObj)

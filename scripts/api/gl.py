@@ -64,11 +64,11 @@ GLchar = Typedef('GLchar','char')
 GLchar.category = 'GL_VERSION_2_0'
 GLchar.default = '0'
 
-GLint64 = Typedef('GLint64','signed long long')
+GLint64 = Typedef('GLint64','int64_t')
 GLint64.category = 'GL_ARB_sync'
 GLint64.default = '0'
 
-GLuint64 = Typedef('GLuint64','unsigned long long')
+GLuint64 = Typedef('GLuint64','uint64_t')
 GLuint64.category = 'GL_ARB_sync'
 GLuint64.default = '0'
 
@@ -96,7 +96,7 @@ GLcharARB = Typedef('GLcharARB','char')
 GLcharARB.category = 'GL_ARB_shader_objects'
 GLcharARB.default = '0'
 
-GLhandleARB = Typedef('GLhandleARB','unsigned int')
+GLhandleARB = Typedef('GLhandleARB',{'': 'unsigned int', 'osx': 'unsigned long'})
 GLhandleARB.category = 'GL_ARB_shader_objects'
 GLhandleARB.default = '0'
 
