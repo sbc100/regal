@@ -349,6 +349,32 @@ formulae = {
     ]
   },
 
+  'glActiveTextureARB' : {
+    'entries' : [ 'glActiveTextureARB' ],
+    'impl' : [
+      'if (!_context->info->gl_arb_multitexture)',
+      '{',
+      '  DispatchTableGL *_next = _context->dispatcher.emulation.next();',
+      '  RegalAssert(_next);',
+      '  _next->call(&_next->glActiveTexture)(${arg0plus});',
+      '  return;',
+      '}'
+    ]
+  },
+
+  'glClientActiveTextureARB' : {
+    'entries' : [ 'glClientActiveTextureARB' ],
+    'impl' : [
+      'if (!_context->info->gl_arb_multitexture)',
+      '{',
+      '  DispatchTableGL &_table = _context->dispatcher.emulation;',
+      '  _context->emuLevel++;',
+      '  _table.call(&_table.glClientActiveTexture)(${arg0plus});',
+      '  return;',
+      '}'
+    ]
+  },
+
   'glAttachObjectARB' : {
     'entries' : [ 'glAttachObjectARB' ],
     'impl' : [

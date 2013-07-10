@@ -36419,6 +36419,9 @@ static void REGAL_CALL emu_glActiveTextureARB(GLenum texture)
       if (_context->texc) break;
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -36462,6 +36465,20 @@ static void REGAL_CALL emu_glActiveTextureARB(GLenum texture)
       }
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_arb_multitexture)
+        {
+          DispatchTableGL *_next = _context->dispatcher.emulation.next();
+          RegalAssert(_next);
+          _next->call(&_next->glActiveTexture)(texture);
+          return;
+        }
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();
@@ -36501,14 +36518,60 @@ static void REGAL_CALL emu_glClientActiveTextureARB(GLenum texture)
         _context->iff->ShadowClientActiveTexture( texture );
       }
       #endif
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glClientActiveTextureARB)(texture);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (!_context->info->gl_arb_multitexture)
+        {
+          DispatchTableGL &_table = _context->dispatcher.emulation;
+          _context->emuLevel++;
+          _table.call(&_table.glClientActiveTexture)(texture);
+          return;
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glClientActiveTextureARB)(texture);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glMultiTexCoord1dARB(GLenum target, GLdouble s)

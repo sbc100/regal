@@ -1660,7 +1660,35 @@ void Iff::InitFixedFunction(RegalContext &ctx)
 
   // GL_ARB_ES2_compatibility
 
-  fmtmap[ GL_RGB565 ]           = GL_RGB;
+  fmtmap[ GL_RGB565      ] = GL_RGB;
+
+  // ARB_texture_rg and EXT_texture_rg
+
+  fmtmap[ GL_RED         ] = GL_RED;
+  fmtmap[ GL_RED_INTEGER ] = GL_RED;
+  fmtmap[ GL_R8          ] = GL_RED;
+  fmtmap[ GL_R16         ] = GL_RED;
+  fmtmap[ GL_R16F        ] = GL_RED;
+  fmtmap[ GL_R32F        ] = GL_RED;
+  fmtmap[ GL_R8I         ] = GL_RED;
+  fmtmap[ GL_R8UI        ] = GL_RED;
+  fmtmap[ GL_R16I        ] = GL_RED;
+  fmtmap[ GL_R16UI       ] = GL_RED;
+  fmtmap[ GL_R32I        ] = GL_RED;
+  fmtmap[ GL_R32UI       ] = GL_RED;
+
+  fmtmap[ GL_RG          ] = GL_RG;
+  fmtmap[ GL_RG_INTEGER  ] = GL_RG;
+  fmtmap[ GL_RG8         ] = GL_RG;
+  fmtmap[ GL_RG16        ] = GL_RG;
+  fmtmap[ GL_RG16F       ] = GL_RG;
+  fmtmap[ GL_RG32F       ] = GL_RG;
+  fmtmap[ GL_RG8I        ] = GL_RG;
+  fmtmap[ GL_RG8UI       ] = GL_RG;
+  fmtmap[ GL_RG16I       ] = GL_RG;
+  fmtmap[ GL_RG16UI      ] = GL_RG;
+  fmtmap[ GL_RG32I       ] = GL_RG;
+  fmtmap[ GL_RG32UI      ] = GL_RG;
 }
 
 void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )

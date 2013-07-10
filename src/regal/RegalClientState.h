@@ -1332,6 +1332,184 @@ namespace State
       glVertexPointer(sv, GL_FLOAT, stride, p + pv);
     }
   };
+
+  struct PixelStore
+  {
+    GLboolean  unpackSwapBytes;           // GL_UNPACK_SWAP_BYTES
+    GLboolean  unpackLsbFirst;            // GL_UNPACK_LSB_FIRST
+    GLint      unpackImageHeight;         // GL_UNPACK_IMAGE_HEIGHT
+    GLint      unpackSkipImages;          // GL_UNPACK_SKIP_IMAGES
+    GLint      unpackRowLength;           // GL_UNPACK_ROW_LENGTH
+    GLint      unpackSkipRows;            // GL_UNPACK_SKIP_ROWS
+    GLint      unpackSkipPixels;          // GL_UNPACK_SKIP_PIXELS
+    GLint      unpackAlignment;           // GL_UNPACK_ALIGNMENT
+    GLboolean  packSwapBytes;             // GL_PACK_SWAP_BYTES
+    GLboolean  packLsbFirst;              // GL_PACK_LSB_FIRST
+    GLint      packImageHeight;           // GL_PACK_IMAGE_HEIGHT
+    GLint      packSkipImages;            // GL_PACK_SKIP_IMAGES
+    GLint      packRowLength;             // GL_PACK_ROW_LENGTH
+    GLint      packSkipRows;              // GL_PACK_SKIP_ROWS
+    GLint      packSkipPixels;            // GL_PACK_SKIP_PIXELS
+    GLint      packAlignment;             // GL_PACK_ALIGNMENT
+    GLint      pixelUnpackBufferBinding;  // GL_PIXEL_UNPACK_BUFFER_BINDING
+    GLint      pixelPackBufferBinding;    // GL_PIXEL_PACK_BUFFER_BINDING
+
+    inline PixelStore()
+      : unpackSwapBytes(GL_FALSE)
+      , unpackLsbFirst(GL_FALSE)
+      , unpackImageHeight(0)
+      , unpackSkipImages(0)
+      , unpackRowLength(0)
+      , unpackSkipRows(0)
+      , unpackSkipPixels(0)
+      , unpackAlignment(4)
+      , packSwapBytes(GL_FALSE)
+      , packLsbFirst(GL_FALSE)
+      , packImageHeight(0)
+      , packSkipImages(0)
+      , packRowLength(0)
+      , packSkipRows(0)
+      , packSkipPixels(0)
+      , packAlignment(4)
+      , pixelUnpackBufferBinding(0)
+      , pixelPackBufferBinding(0)
+    {
+    }
+
+    inline PixelStore &swap(PixelStore &other)
+    {
+      std::swap(unpackSwapBytes,other.unpackSwapBytes);
+      std::swap(unpackLsbFirst,other.unpackLsbFirst);
+      std::swap(unpackImageHeight,other.unpackImageHeight);
+      std::swap(unpackSkipImages,other.unpackSkipImages);
+      std::swap(unpackRowLength,other.unpackRowLength);
+      std::swap(unpackSkipRows,other.unpackSkipRows);
+      std::swap(unpackSkipPixels,other.unpackSkipPixels);
+      std::swap(unpackAlignment,other.unpackAlignment);
+      std::swap(packSwapBytes,other.packSwapBytes);
+      std::swap(packLsbFirst,other.packLsbFirst);
+      std::swap(packImageHeight,other.packImageHeight);
+      std::swap(packSkipImages,other.packSkipImages);
+      std::swap(packRowLength,other.packRowLength);
+      std::swap(packSkipRows,other.packSkipRows);
+      std::swap(packSkipPixels,other.packSkipPixels);
+      std::swap(packAlignment,other.packAlignment);
+      std::swap(pixelUnpackBufferBinding,other.pixelUnpackBufferBinding);
+      std::swap(pixelPackBufferBinding,other.pixelPackBufferBinding);
+      return *this;
+    }
+
+    inline PixelStore &get(DispatchTableGL &dt)
+    {
+      dt.call(&dt.glGetBooleanv)(GL_UNPACK_SWAP_BYTES,&unpackSwapBytes);
+      dt.call(&dt.glGetBooleanv)(GL_UNPACK_LSB_FIRST,&unpackLsbFirst);
+      dt.call(&dt.glGetIntegerv)(GL_UNPACK_IMAGE_HEIGHT,&unpackImageHeight);
+      dt.call(&dt.glGetIntegerv)(GL_UNPACK_SKIP_IMAGES,&unpackSkipImages);
+      dt.call(&dt.glGetIntegerv)(GL_UNPACK_ROW_LENGTH,&unpackRowLength);
+      dt.call(&dt.glGetIntegerv)(GL_UNPACK_SKIP_ROWS,&unpackSkipRows);
+      dt.call(&dt.glGetIntegerv)(GL_UNPACK_SKIP_PIXELS,&unpackSkipPixels);
+      dt.call(&dt.glGetIntegerv)(GL_UNPACK_ALIGNMENT,&unpackAlignment);
+      dt.call(&dt.glGetBooleanv)(GL_PACK_SWAP_BYTES,&packSwapBytes);
+      dt.call(&dt.glGetBooleanv)(GL_PACK_LSB_FIRST,&packLsbFirst);
+      dt.call(&dt.glGetIntegerv)(GL_PACK_IMAGE_HEIGHT,&packImageHeight);
+      dt.call(&dt.glGetIntegerv)(GL_PACK_SKIP_IMAGES,&packSkipImages);
+      dt.call(&dt.glGetIntegerv)(GL_PACK_ROW_LENGTH,&packRowLength);
+      dt.call(&dt.glGetIntegerv)(GL_PACK_SKIP_ROWS,&packSkipRows);
+      dt.call(&dt.glGetIntegerv)(GL_PACK_SKIP_PIXELS,&packSkipPixels);
+      dt.call(&dt.glGetIntegerv)(GL_PACK_ALIGNMENT,&packAlignment);
+      dt.call(&dt.glGetIntegerv)(GL_PIXEL_UNPACK_BUFFER_BINDING,&pixelUnpackBufferBinding);
+      dt.call(&dt.glGetIntegerv)(GL_PIXEL_PACK_BUFFER_BINDING,&pixelPackBufferBinding);
+      return *this;
+    }
+
+    inline const PixelStore &set(DispatchTableGL &dt) const
+    {
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_SWAP_BYTES,unpackSwapBytes);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_LSB_FIRST,unpackLsbFirst);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_IMAGE_HEIGHT,unpackImageHeight);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_SKIP_IMAGES,unpackSkipImages);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_ROW_LENGTH,unpackRowLength);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_SKIP_ROWS,unpackSkipRows);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_SKIP_PIXELS,unpackSkipPixels);
+      dt.call(&dt.glPixelStorei)(GL_UNPACK_ALIGNMENT,unpackAlignment);
+      dt.call(&dt.glPixelStorei)(GL_PACK_SWAP_BYTES,packSwapBytes);
+      dt.call(&dt.glPixelStorei)(GL_PACK_LSB_FIRST,packLsbFirst);
+      dt.call(&dt.glPixelStorei)(GL_PACK_IMAGE_HEIGHT,packImageHeight);
+      dt.call(&dt.glPixelStorei)(GL_PACK_SKIP_IMAGES,packSkipImages);
+      dt.call(&dt.glPixelStorei)(GL_PACK_ROW_LENGTH,packRowLength);
+      dt.call(&dt.glPixelStorei)(GL_PACK_SKIP_ROWS,packSkipRows);
+      dt.call(&dt.glPixelStorei)(GL_PACK_SKIP_PIXELS,packSkipPixels);
+      dt.call(&dt.glPixelStorei)(GL_PACK_ALIGNMENT,packAlignment);
+      dt.call(&dt.glBindBuffer)(GL_PIXEL_UNPACK_BUFFER_BINDING,pixelUnpackBufferBinding);
+      dt.call(&dt.glBindBuffer)(GL_PIXEL_PACK_BUFFER_BINDING,pixelPackBufferBinding);
+      return *this;
+    }
+
+    inline std::string toString(const char *delim = "\n") const
+    {
+      string_list tmp;
+      tmp << print_string("glPixelStorei(GL_UNPACK_SWAP_BYTES,",unpackSwapBytes,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_LSB_FIRST,",unpackLsbFirst,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_IMAGE_HEIGHT,",unpackImageHeight,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_SKIP_IMAGES,",unpackSkipImages,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_ROW_LENGTH,",unpackRowLength,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_SKIP_ROWS,",unpackSkipRows,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_SKIP_PIXELS,",unpackSkipPixels,");",delim);
+      tmp << print_string("glPixelStorei(GL_UNPACK_ALIGNMENT,",unpackAlignment,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_SWAP_BYTES,",packSwapBytes,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_LSB_FIRST,",packLsbFirst,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_IMAGE_HEIGHT,",packImageHeight,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_SKIP_IMAGES,",packSkipImages,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_ROW_LENGTH,",packRowLength,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_SKIP_ROWS,",packSkipRows,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_SKIP_PIXELS,",packSkipPixels,");",delim);
+      tmp << print_string("glPixelStorei(GL_PACK_ALIGNMENT,",packAlignment,");",delim);
+      tmp << print_string("glBindBuffer(GL_PIXEL_UNPACK_BUFFER_BINDING,",pixelUnpackBufferBinding,");",delim);
+      tmp << print_string("glBindBuffer(GL_PIXEL_PACK_BUFFER_BINDING,",pixelPackBufferBinding,");",delim);
+      return tmp;
+    }
+
+    template <typename T> void glPixelStore( GLenum pname, T param )
+    {
+      switch (pname)
+      {
+        case GL_UNPACK_SWAP_BYTES:   unpackSwapBytes   = param; break;
+        case GL_UNPACK_LSB_FIRST:    unpackLsbFirst    = param; break;
+        case GL_UNPACK_IMAGE_HEIGHT: unpackImageHeight = param; break;
+        case GL_UNPACK_SKIP_IMAGES:  unpackSkipImages  = param; break;
+        case GL_UNPACK_ROW_LENGTH:   unpackRowLength   = param; break;
+        case GL_UNPACK_SKIP_ROWS:    unpackSkipRows    = param; break;
+        case GL_UNPACK_SKIP_PIXELS:  unpackSkipPixels  = param; break;
+        case GL_UNPACK_ALIGNMENT:    unpackAlignment   = param; break;
+        case GL_PACK_SWAP_BYTES:     packSwapBytes     = param; break;
+        case GL_PACK_LSB_FIRST:      packLsbFirst      = param; break;
+        case GL_PACK_IMAGE_HEIGHT:   packImageHeight   = param; break;
+        case GL_PACK_SKIP_IMAGES:    packSkipImages    = param; break;
+        case GL_PACK_ROW_LENGTH:     packRowLength     = param; break;
+        case GL_PACK_SKIP_ROWS:      packSkipRows      = param; break;
+        case GL_PACK_SKIP_PIXELS:    packSkipPixels    = param; break;
+        case GL_PACK_ALIGNMENT:      packAlignment     = param; break;
+        default:
+          break;
+      }
+    }
+
+    void glBindBuffer( GLenum target, GLuint buffer )
+    {
+      switch (target)
+      {
+        case GL_PIXEL_UNPACK_BUFFER_BINDING:
+          pixelUnpackBufferBinding = buffer;
+          break;
+        case GL_PIXEL_PACK_BUFFER_BINDING:
+          pixelPackBufferBinding = buffer;
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
 }
 
 }

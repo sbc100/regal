@@ -196,6 +196,12 @@ RegalContext::Init()
         info->regal_arb_draw_buffers = true;
         info->regalExtensionsSet.insert("GL_ARB_draw_buffers");
       }
+      if (!info->gl_arb_multitexture)
+      {
+        Internal("RegalContext::Init ","GL_ARB_multitexture");
+        info->regal_arb_multitexture = true;
+        info->regalExtensionsSet.insert("GL_ARB_multitexture");
+      }
       if (!info->gl_ati_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
       {
         Internal("RegalContext::Init ","GL_ATI_draw_buffers");

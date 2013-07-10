@@ -617,6 +617,7 @@ ContextInfo::ContextInfo()
   gl_win_specular_fog(false),
   gl_win_swap_hint(false),
   regal_arb_draw_buffers(false),
+  regal_arb_multitexture(false),
   regal_arb_texture_storage(false),
   regal_ati_draw_buffers(false),
   regal_ext_blend_color(false),
@@ -1789,7 +1790,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_matrix_palette")) return gl_arb_matrix_palette;
   if (!strcmp(ext,"GL_ARB_multi_draw_indirect")) return gl_arb_multi_draw_indirect;
   if (!strcmp(ext,"GL_ARB_multisample")) return gl_arb_multisample;
-  if (!strcmp(ext,"GL_ARB_multitexture")) return gl_arb_multitexture;
+  if (!strcmp(ext,"GL_ARB_multitexture")) return regal_arb_multitexture || gl_arb_multitexture;
   if (!strcmp(ext,"GL_ARB_occlusion_query")) return gl_arb_occlusion_query;
   if (!strcmp(ext,"GL_ARB_occlusion_query2")) return gl_arb_occlusion_query2;
   if (!strcmp(ext,"GL_ARB_pixel_buffer_object")) return gl_arb_pixel_buffer_object;

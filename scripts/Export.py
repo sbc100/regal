@@ -91,6 +91,7 @@ regalLicense = '''
 
 emulatedExts = {
   'GL_ARB_draw_buffers':              { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 2) || info->gl_nv_draw_buffers'},
+  'GL_ARB_multitexture':              { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
   'GL_ARB_texture_storage':           { 'emulatedBy' : 'texsto', 'emulatedIf' : '' },
   'GL_ATI_draw_buffers':              { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 2) || info->gl_nv_draw_buffers'},
   'GL_EXT_blend_color':               { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
