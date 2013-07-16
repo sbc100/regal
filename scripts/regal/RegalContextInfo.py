@@ -179,7 +179,7 @@ ContextInfo::init(const RegalContext &context)
   // For Mesa3D EGL/ES 2.0 on desktop Linux the version string doesn't start with
   // "OpenGL ES" Is that a Mesa3D bug? Perhaps...
 
-  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID
+  #if (REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID) || REGAL_SYS_EMSCRIPTEN
   if (Regal::Config::sysEGL)
   {
     es1 = false;
@@ -350,8 +350,9 @@ ${EXT_INIT}
   if (maxVertexAttribs > REGAL_EMU_IFF_VERTEX_ATTRIBS)
       maxVertexAttribs = REGAL_EMU_IFF_VERTEX_ATTRIBS;
 
-  // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs
-  if (vendor == "Qualcomm" || vendor == "Chromium")
+  // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs (n*16 is used
+  // as the stride in RegalIFF).  WebGL (and Pepper) explicitly disallows stride > 255 as well.
+  if (vendor == "Qualcomm" || vendor == "Chromium" || version.find("WebGL") == 0)
     maxVertexAttribs = 8;
 
   Info("Regal  v attribs : ",maxVertexAttribs);
