@@ -18011,6 +18011,36 @@ static void REGAL_CALL debug_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum d
   _next->call(&_next->glBlendFuncSeparateINGR)(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL debug_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.debug.next();
+  RegalAssert(_next);
+  GLvoid * ret = _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+  return ret;
+}
+
+static void REGAL_CALL debug_glSyncTextureINTEL(GLuint texture)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.debug.next();
+  RegalAssert(_next);
+  _next->call(&_next->glSyncTextureINTEL)(texture);
+}
+
+static void REGAL_CALL debug_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.debug.next();
+  RegalAssert(_next);
+  _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL debug_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -26988,6 +27018,12 @@ void InitDispatchTableDebug(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = debug_glBlendFuncSeparateINGR;
+
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = debug_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = debug_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = debug_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

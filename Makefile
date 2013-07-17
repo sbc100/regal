@@ -780,7 +780,7 @@ endif
 
 REGALTEST.SRCS       += $(REGALTEST.CXX)
 REGALTEST.SRCS.NAMES := $(notdir $(REGALTEST.SRCS))
-REGALTEST.OBJS       := $(addprefix tmp/$(SYSTEM)/regal_tests/static/,$(REGALTEST.SRCS.NAMES))
+REGALTEST.OBJS       := $(addprefix tmp/$(SYSTEM)/regaltest/static/,$(REGALTEST.SRCS.NAMES))
 REGALTEST.OBJS       := $(REGALTEST.OBJS:.cpp=.o)
 REGALTEST.DEPS       := $(REGALTEST.DEPS:.o=.d)
 REGALTEST.CFLAGS     := -Isrc/googletest/include -Isrc/googlemock/include -Isrc/regal -Isrc/boost
@@ -794,7 +794,7 @@ endif
 
 -include $(REGALTEST.DEPS)
 
-tmp/$(SYSTEM)/regal_tests/static/%.o: tests/%.cpp
+tmp/$(SYSTEM)/regaltest/static/%.o: tests/%.cpp
 	@mkdir -p $(dir $@)
 	$(LOG_CXX)$(CCACHE) $(CXX) $(LIB.CFLAGS) $(REGALTEST.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 

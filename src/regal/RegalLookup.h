@@ -59,21 +59,21 @@ inline int NameCmp(const void *a, const void *b)
   return std::strcmp(*(const char **) a, *(const char **) b);
 }
 
-extern const char * const gl_Name[2638];
-extern const void *gl_Value[2638];
-extern const size_t gl_Offset[2638];
+extern const char * const gl_Name[2641];
+extern const void *gl_Value[2641];
+extern const size_t gl_Offset[2641];
 
 template<typename T>
 T
 gl_Lookup(const char *name, T def = NULL)
 {
-  const char **res = (const char **) std::bsearch(&name, gl_Name, 2637, sizeof(const char *), NameCmp);
+  const char **res = (const char **) std::bsearch(&name, gl_Name, 2640, sizeof(const char *), NameCmp);
   return res ? reinterpret_cast<T>(const_cast<void *>(gl_Value[(size_t) (res - gl_Name)])) : def;
 }
 
 inline size_t gl_LookupOffset(const char *name)
 {
-  const char **res = (const char **) std::bsearch(&name, gl_Name, 2637, sizeof(const char *), NameCmp);
+  const char **res = (const char **) std::bsearch(&name, gl_Name, 2640, sizeof(const char *), NameCmp);
   return res ? gl_Offset[(size_t) (res - gl_Name)] : 0;
 }
 

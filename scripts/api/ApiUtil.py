@@ -156,3 +156,15 @@ def typeIsVoid(t):
 def typeIsVoidPointer(t):
   t = t.strip()
   return t=='void *' or t=='VOID *' or t=='__GLXextFuncPtr'
+
+# Unique list of named objects
+
+def unique(l):
+  ret = []
+  seen = set()
+  for i in l:
+    if i.name not in seen:
+      ret.append(i)
+      seen.add(i.name)
+  return ret
+

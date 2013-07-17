@@ -245,7 +245,9 @@ typedef struct _cl_event * cl_event;
 typedef ptrdiff_t GLintptrARB;
 typedef ptrdiff_t GLsizeiptrARB;
 typedef char GLcharARB;
-#if REGAL_SYS_OSX
+#if REGAL_SYS_IOS
+typedef unsigned long GLhandleARB;
+#elif REGAL_SYS_OSX
 typedef unsigned long GLhandleARB;
 #else
 typedef unsigned int GLhandleARB;
@@ -1751,6 +1753,43 @@ REGAL_DECL void REGAL_CALL plugin_glVertexAttribDivisorANGLE(GLuint index, GLuin
 #define GL_NONE                         0x0
 #define GL_TEXTURE_USAGE_ANGLE          0x93a2     /* 37794 */
 #define GL_FRAMEBUFFER_ATTACHMENT_ANGLE 0x93a3     /* 37795 */
+#endif
+
+/**
+ ** GL_ANGLE_timer_query
+ **/
+
+#if (defined(GL_ANGLE_TIMER_QUERY) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ANGLE_TIMER_QUERY)) && !defined(REGAL_NO_ENUM_GL_ANGLE_TIMER_QUERY)
+#define REGAL_NO_ENUM_GL_ANGLE_TIMER_QUERY
+#endif
+
+#if (defined(GL_ANGLE_TIMER_QUERY) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ANGLE_TIMER_QUERY)) && !defined(REGAL_NO_TYPEDEF_GL_ANGLE_TIMER_QUERY)
+#define REGAL_NO_TYPEDEF_GL_ANGLE_TIMER_QUERY
+#endif
+
+#if (defined(GL_ANGLE_TIMER_QUERY) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ANGLE_TIMER_QUERY)) && !defined(REGAL_NO_NAMESPACE_GL_ANGLE_TIMER_QUERY)
+#define REGAL_NO_NAMESPACE_GL_ANGLE_TIMER_QUERY
+#endif
+
+#if (defined(GL_ANGLE_TIMER_QUERY) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ANGLE_TIMER_QUERY)) && !defined(REGAL_NO_PLUGIN_GL_ANGLE_TIMER_QUERY)
+#define REGAL_NO_PLUGIN_GL_ANGLE_TIMER_QUERY
+#endif
+
+#if (defined(GL_ANGLE_TIMER_QUERY) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ANGLE_TIMER_QUERY)) && !defined(REGAL_NO_DECLARATION_GL_ANGLE_TIMER_QUERY)
+#define REGAL_NO_DECLARATION_GL_ANGLE_TIMER_QUERY
+#endif
+
+#ifndef GL_ANGLE_timer_query
+#define GL_ANGLE_timer_query 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ANGLE_TIMER_QUERY
+#define GL_QUERY_COUNTER_BITS_ANGLE     0x8864     /* 34916 */
+#define GL_CURRENT_QUERY_ANGLE          0x8865     /* 34917 */
+#define GL_QUERY_RESULT_ANGLE           0x8866     /* 34918 */
+#define GL_QUERY_RESULT_AVAILABLE_ANGLE 0x8867     /* 34919 */
+#define GL_TIME_ELAPSED_ANGLE           0x88bf     /* 35007 */
+#define GL_TIMESTAMP_ANGLE              0x8e28     /* 36392 */
 #endif
 
 /**
@@ -19734,6 +19773,65 @@ REGAL_DECL void REGAL_CALL plugin_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLe
 
 #ifndef REGAL_NO_ENUM_GL_INGR_INTERLACE_READ
 #define GL_INTERLACE_READ_INGR 0x8568 /* 34152 */
+#endif
+
+/**
+ ** GL_INTEL_map_texture
+ **/
+
+#if (defined(GL_INTEL_MAP_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_INTEL_MAP_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_INTEL_MAP_TEXTURE)
+#define REGAL_NO_ENUM_GL_INTEL_MAP_TEXTURE
+#endif
+
+#if (defined(GL_INTEL_MAP_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_INTEL_MAP_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_INTEL_MAP_TEXTURE)
+#define REGAL_NO_TYPEDEF_GL_INTEL_MAP_TEXTURE
+#endif
+
+#if (defined(GL_INTEL_MAP_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_INTEL_MAP_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_INTEL_MAP_TEXTURE)
+#define REGAL_NO_NAMESPACE_GL_INTEL_MAP_TEXTURE
+#endif
+
+#if (defined(GL_INTEL_MAP_TEXTURE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_INTEL_MAP_TEXTURE)) && !defined(REGAL_NO_PLUGIN_GL_INTEL_MAP_TEXTURE)
+#define REGAL_NO_PLUGIN_GL_INTEL_MAP_TEXTURE
+#endif
+
+#if (defined(GL_INTEL_MAP_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_INTEL_MAP_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_INTEL_MAP_TEXTURE)
+#define REGAL_NO_DECLARATION_GL_INTEL_MAP_TEXTURE
+#endif
+
+#ifndef GL_INTEL_map_texture
+#define GL_INTEL_map_texture 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_INTEL_MAP_TEXTURE
+#define GL_LAYOUT_DEFAULT_INTEL           0x0
+#define GL_LAYOUT_LINEAR_INTEL            0x1
+#define GL_LAYOUT_LINEAR_CPU_CACHED_INTEL 0x2
+#define GL_TEXTURE_MEMORY_LAYOUT_INTEL    0x83ff     /* 33791 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_INTEL_MAP_TEXTURE
+typedef GLvoid *(REGAL_CALL *PFNGLMAPTEXTURE2DINTELPROC)(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
+typedef void (REGAL_CALL *PFNGLSYNCTEXTUREINTELPROC)(GLuint texture);
+typedef void (REGAL_CALL *PFNGLUNMAPTEXTURE2DINTELPROC)(GLuint texture, GLint level);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_INTEL_MAP_TEXTURE
+#define glMapTexture2DINTEL                 rglMapTexture2DINTEL
+#define glSyncTextureINTEL                  rglSyncTextureINTEL
+#define glUnmapTexture2DINTEL               rglUnmapTexture2DINTEL
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_INTEL_MAP_TEXTURE
+REGAL_DECL GLvoid *REGAL_CALL glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
+REGAL_DECL void REGAL_CALL glSyncTextureINTEL(GLuint texture);
+REGAL_DECL void REGAL_CALL glUnmapTexture2DINTEL(GLuint texture, GLint level);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_INTEL_MAP_TEXTURE
+REGAL_DECL GLvoid *REGAL_CALL plugin_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
+REGAL_DECL void REGAL_CALL plugin_glSyncTextureINTEL(GLuint texture);
+REGAL_DECL void REGAL_CALL plugin_glUnmapTexture2DINTEL(GLuint texture, GLint level);
 #endif
 
 /**

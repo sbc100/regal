@@ -160,6 +160,7 @@ struct ContextInfo
   GLboolean gl_angle_texture_compression_dxt3 : 1;
   GLboolean gl_angle_texture_compression_dxt5 : 1;
   GLboolean gl_angle_texture_usage : 1;
+  GLboolean gl_angle_timer_query : 1;
   GLboolean gl_angle_translated_shader_source : 1;
   GLboolean gl_apple_aux_depth_stencil : 1;
   GLboolean gl_apple_client_storage : 1;
@@ -436,6 +437,7 @@ struct ContextInfo
   GLboolean gl_ingr_blend_func_separate : 1;
   GLboolean gl_ingr_color_clamp : 1;
   GLboolean gl_ingr_interlace_read : 1;
+  GLboolean gl_intel_map_texture : 1;
   GLboolean gl_intel_parallel_arrays : 1;
   GLboolean gl_intel_texture_scissor : 1;
   GLboolean gl_khr_debug : 1;
@@ -646,6 +648,8 @@ struct ContextInfo
   GLboolean gl_win_swap_hint : 1;
   GLboolean regal_arb_draw_buffers : 1;
   GLboolean regal_arb_multitexture : 1;
+  GLboolean regal_arb_texture_env_combine : 1;
+  GLboolean regal_arb_texture_env_dot3 : 1;
   GLboolean regal_arb_texture_storage : 1;
   GLboolean regal_ati_draw_buffers : 1;
   GLboolean regal_ext_blend_color : 1;
@@ -653,6 +657,9 @@ struct ContextInfo
   GLboolean regal_ext_direct_state_access : 1;
   GLboolean regal_ext_framebuffer_blit : 1;
   GLboolean regal_ext_framebuffer_object : 1;
+  GLboolean regal_ext_texture_edge_clamp : 1;
+  GLboolean regal_ext_texture_env_combine : 1;
+  GLboolean regal_ext_texture_env_dot3 : 1;
   GLboolean regal_ibm_texture_mirrored_repeat : 1;
   GLboolean regal_nv_blend_square : 1;
 

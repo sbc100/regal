@@ -83,7 +83,7 @@ def apiStatisticsFuncDefineCode(apis, args):
         code += '  {\n'
         for i in api.enums:
           if i.name=='defines':
-            for j in i.enumerants:
+            for j in i.enumerantsByName:
               if getattr(j,'enableCap',False) == True:
                 code += '    case %-40s %-60s break;\n'%(j.name+':','statistics.enable_%s++;'%j.name)
         code += '    default: break;\n'
@@ -96,7 +96,7 @@ def apiStatisticsFuncDefineCode(apis, args):
         code += '  {\n'
         for i in api.enums:
           if i.name=='defines':
-            for j in i.enumerants:
+            for j in i.enumerantsByName:
               if getattr(j,'enableCap',False) == True:
                 code += '    case %-40s %-60s break;\n'%(j.name+':','statistics.disable_%s++;'%j.name)
         code += '    default: break;\n'

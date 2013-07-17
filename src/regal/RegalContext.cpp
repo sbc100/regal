@@ -232,6 +232,12 @@ RegalContext::Init()
         info->regal_ext_framebuffer_object = true;
         info->regalExtensionsSet.insert("GL_EXT_framebuffer_object");
       }
+      if (!info->gl_ext_texture_edge_clamp)
+      {
+        Internal("RegalContext::Init ","GL_EXT_texture_edge_clamp");
+        info->regal_ext_texture_edge_clamp = true;
+        info->regalExtensionsSet.insert("GL_EXT_texture_edge_clamp");
+      }
       if (!info->gl_ibm_texture_mirrored_repeat)
       {
         Internal("RegalContext::Init ","GL_IBM_texture_mirrored_repeat");
@@ -292,6 +298,31 @@ RegalContext::Init()
     #if REGAL_EMU_IFF
     if (Config::enableEmuIff || Config::forceEmuIff || REGAL_FORCE_EMU_IFF)
     {
+      if (!info->gl_arb_texture_env_combine)
+      {
+        Internal("RegalContext::Init ","GL_ARB_texture_env_combine");
+        info->regal_arb_texture_env_combine = true;
+        info->regalExtensionsSet.insert("GL_ARB_texture_env_combine");
+      }
+      if (!info->gl_arb_texture_env_dot3)
+      {
+        Internal("RegalContext::Init ","GL_ARB_texture_env_dot3");
+        info->regal_arb_texture_env_dot3 = true;
+        info->regalExtensionsSet.insert("GL_ARB_texture_env_dot3");
+      }
+      if (!info->gl_ext_texture_env_combine)
+      {
+        Internal("RegalContext::Init ","GL_EXT_texture_env_combine");
+        info->regal_ext_texture_env_combine = true;
+        info->regalExtensionsSet.insert("GL_EXT_texture_env_combine");
+      }
+      if (!info->gl_ext_texture_env_dot3)
+      {
+        Internal("RegalContext::Init ","GL_EXT_texture_env_dot3");
+        info->regal_ext_texture_env_dot3 = true;
+        info->regalExtensionsSet.insert("GL_EXT_texture_env_dot3");
+      }
+      info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
       iff = new Emu::Iff;
       emuLevel = 5;
       iff->Init(*this);

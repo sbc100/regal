@@ -807,6 +807,136 @@ static void _glewInfo_GL_AMD_vertex_shader_viewport_index (void)
 
 #endif /* GL_AMD_vertex_shader_viewport_index */
 
+#ifdef GL_ANGLE_depth_texture
+
+static void _glewInfo_GL_ANGLE_depth_texture (void)
+{
+  glewPrintExt("GL_ANGLE_depth_texture", GLEW_ANGLE_depth_texture, glewIsSupported("GL_ANGLE_depth_texture"), glewGetExtension("GL_ANGLE_depth_texture"));
+}
+
+#endif /* GL_ANGLE_depth_texture */
+
+#ifdef GL_ANGLE_framebuffer_blit
+
+static void _glewInfo_GL_ANGLE_framebuffer_blit (void)
+{
+  glewPrintExt("GL_ANGLE_framebuffer_blit", GLEW_ANGLE_framebuffer_blit, glewIsSupported("GL_ANGLE_framebuffer_blit"), glewGetExtension("GL_ANGLE_framebuffer_blit"));
+
+  glewInfoFunc("glBlitFramebufferANGLE", glBlitFramebufferANGLE == NULL);
+}
+
+#endif /* GL_ANGLE_framebuffer_blit */
+
+#ifdef GL_ANGLE_framebuffer_multisample
+
+static void _glewInfo_GL_ANGLE_framebuffer_multisample (void)
+{
+  glewPrintExt("GL_ANGLE_framebuffer_multisample", GLEW_ANGLE_framebuffer_multisample, glewIsSupported("GL_ANGLE_framebuffer_multisample"), glewGetExtension("GL_ANGLE_framebuffer_multisample"));
+
+  glewInfoFunc("glRenderbufferStorageMultisampleANGLE", glRenderbufferStorageMultisampleANGLE == NULL);
+}
+
+#endif /* GL_ANGLE_framebuffer_multisample */
+
+#ifdef GL_ANGLE_instanced_arrays
+
+static void _glewInfo_GL_ANGLE_instanced_arrays (void)
+{
+  glewPrintExt("GL_ANGLE_instanced_arrays", GLEW_ANGLE_instanced_arrays, glewIsSupported("GL_ANGLE_instanced_arrays"), glewGetExtension("GL_ANGLE_instanced_arrays"));
+
+  glewInfoFunc("glDrawArraysInstancedANGLE", glDrawArraysInstancedANGLE == NULL);
+  glewInfoFunc("glDrawElementsInstancedANGLE", glDrawElementsInstancedANGLE == NULL);
+  glewInfoFunc("glVertexAttribDivisorANGLE", glVertexAttribDivisorANGLE == NULL);
+}
+
+#endif /* GL_ANGLE_instanced_arrays */
+
+#ifdef GL_ANGLE_pack_reverse_row_order
+
+static void _glewInfo_GL_ANGLE_pack_reverse_row_order (void)
+{
+  glewPrintExt("GL_ANGLE_pack_reverse_row_order", GLEW_ANGLE_pack_reverse_row_order, glewIsSupported("GL_ANGLE_pack_reverse_row_order"), glewGetExtension("GL_ANGLE_pack_reverse_row_order"));
+}
+
+#endif /* GL_ANGLE_pack_reverse_row_order */
+
+#ifdef GL_ANGLE_program_binary
+
+static void _glewInfo_GL_ANGLE_program_binary (void)
+{
+  glewPrintExt("GL_ANGLE_program_binary", GLEW_ANGLE_program_binary, glewIsSupported("GL_ANGLE_program_binary"), glewGetExtension("GL_ANGLE_program_binary"));
+}
+
+#endif /* GL_ANGLE_program_binary */
+
+#ifdef GL_ANGLE_texture_compression_dxt1
+
+static void _glewInfo_GL_ANGLE_texture_compression_dxt1 (void)
+{
+  glewPrintExt("GL_ANGLE_texture_compression_dxt1", GLEW_ANGLE_texture_compression_dxt1, glewIsSupported("GL_ANGLE_texture_compression_dxt1"), glewGetExtension("GL_ANGLE_texture_compression_dxt1"));
+}
+
+#endif /* GL_ANGLE_texture_compression_dxt1 */
+
+#ifdef GL_ANGLE_texture_compression_dxt3
+
+static void _glewInfo_GL_ANGLE_texture_compression_dxt3 (void)
+{
+  glewPrintExt("GL_ANGLE_texture_compression_dxt3", GLEW_ANGLE_texture_compression_dxt3, glewIsSupported("GL_ANGLE_texture_compression_dxt3"), glewGetExtension("GL_ANGLE_texture_compression_dxt3"));
+}
+
+#endif /* GL_ANGLE_texture_compression_dxt3 */
+
+#ifdef GL_ANGLE_texture_compression_dxt5
+
+static void _glewInfo_GL_ANGLE_texture_compression_dxt5 (void)
+{
+  glewPrintExt("GL_ANGLE_texture_compression_dxt5", GLEW_ANGLE_texture_compression_dxt5, glewIsSupported("GL_ANGLE_texture_compression_dxt5"), glewGetExtension("GL_ANGLE_texture_compression_dxt5"));
+}
+
+#endif /* GL_ANGLE_texture_compression_dxt5 */
+
+#ifdef GL_ANGLE_texture_usage
+
+static void _glewInfo_GL_ANGLE_texture_usage (void)
+{
+  glewPrintExt("GL_ANGLE_texture_usage", GLEW_ANGLE_texture_usage, glewIsSupported("GL_ANGLE_texture_usage"), glewGetExtension("GL_ANGLE_texture_usage"));
+}
+
+#endif /* GL_ANGLE_texture_usage */
+
+#ifdef GL_ANGLE_timer_query
+
+static void _glewInfo_GL_ANGLE_timer_query (void)
+{
+  glewPrintExt("GL_ANGLE_timer_query", GLEW_ANGLE_timer_query, glewIsSupported("GL_ANGLE_timer_query"), glewGetExtension("GL_ANGLE_timer_query"));
+
+  glewInfoFunc("glBeginQueryANGLE", glBeginQueryANGLE == NULL);
+  glewInfoFunc("glDeleteQueriesANGLE", glDeleteQueriesANGLE == NULL);
+  glewInfoFunc("glEndQueryANGLE", glEndQueryANGLE == NULL);
+  glewInfoFunc("glGenQueriesANGLE", glGenQueriesANGLE == NULL);
+  glewInfoFunc("glGetQueryObjecti64vANGLE", glGetQueryObjecti64vANGLE == NULL);
+  glewInfoFunc("glGetQueryObjectivANGLE", glGetQueryObjectivANGLE == NULL);
+  glewInfoFunc("glGetQueryObjectui64vANGLE", glGetQueryObjectui64vANGLE == NULL);
+  glewInfoFunc("glGetQueryObjectuivANGLE", glGetQueryObjectuivANGLE == NULL);
+  glewInfoFunc("glGetQueryivANGLE", glGetQueryivANGLE == NULL);
+  glewInfoFunc("glIsQueryANGLE", glIsQueryANGLE == NULL);
+  glewInfoFunc("glQueryCounterANGLE", glQueryCounterANGLE == NULL);
+}
+
+#endif /* GL_ANGLE_timer_query */
+
+#ifdef GL_ANGLE_translated_shader_source
+
+static void _glewInfo_GL_ANGLE_translated_shader_source (void)
+{
+  glewPrintExt("GL_ANGLE_translated_shader_source", GLEW_ANGLE_translated_shader_source, glewIsSupported("GL_ANGLE_translated_shader_source"), glewGetExtension("GL_ANGLE_translated_shader_source"));
+
+  glewInfoFunc("glGetTranslatedShaderSourceANGLE", glGetTranslatedShaderSourceANGLE == NULL);
+}
+
+#endif /* GL_ANGLE_translated_shader_source */
+
 #ifdef GL_APPLE_aux_depth_stencil
 
 static void _glewInfo_GL_APPLE_aux_depth_stencil (void)
@@ -8261,6 +8391,42 @@ static void glewInfo (void)
 #ifdef GL_AMD_vertex_shader_viewport_index
   _glewInfo_GL_AMD_vertex_shader_viewport_index();
 #endif /* GL_AMD_vertex_shader_viewport_index */
+#ifdef GL_ANGLE_depth_texture
+  _glewInfo_GL_ANGLE_depth_texture();
+#endif /* GL_ANGLE_depth_texture */
+#ifdef GL_ANGLE_framebuffer_blit
+  _glewInfo_GL_ANGLE_framebuffer_blit();
+#endif /* GL_ANGLE_framebuffer_blit */
+#ifdef GL_ANGLE_framebuffer_multisample
+  _glewInfo_GL_ANGLE_framebuffer_multisample();
+#endif /* GL_ANGLE_framebuffer_multisample */
+#ifdef GL_ANGLE_instanced_arrays
+  _glewInfo_GL_ANGLE_instanced_arrays();
+#endif /* GL_ANGLE_instanced_arrays */
+#ifdef GL_ANGLE_pack_reverse_row_order
+  _glewInfo_GL_ANGLE_pack_reverse_row_order();
+#endif /* GL_ANGLE_pack_reverse_row_order */
+#ifdef GL_ANGLE_program_binary
+  _glewInfo_GL_ANGLE_program_binary();
+#endif /* GL_ANGLE_program_binary */
+#ifdef GL_ANGLE_texture_compression_dxt1
+  _glewInfo_GL_ANGLE_texture_compression_dxt1();
+#endif /* GL_ANGLE_texture_compression_dxt1 */
+#ifdef GL_ANGLE_texture_compression_dxt3
+  _glewInfo_GL_ANGLE_texture_compression_dxt3();
+#endif /* GL_ANGLE_texture_compression_dxt3 */
+#ifdef GL_ANGLE_texture_compression_dxt5
+  _glewInfo_GL_ANGLE_texture_compression_dxt5();
+#endif /* GL_ANGLE_texture_compression_dxt5 */
+#ifdef GL_ANGLE_texture_usage
+  _glewInfo_GL_ANGLE_texture_usage();
+#endif /* GL_ANGLE_texture_usage */
+#ifdef GL_ANGLE_timer_query
+  _glewInfo_GL_ANGLE_timer_query();
+#endif /* GL_ANGLE_timer_query */
+#ifdef GL_ANGLE_translated_shader_source
+  _glewInfo_GL_ANGLE_translated_shader_source();
+#endif /* GL_ANGLE_translated_shader_source */
 #ifdef GL_APPLE_aux_depth_stencil
   _glewInfo_GL_APPLE_aux_depth_stencil();
 #endif /* GL_APPLE_aux_depth_stencil */

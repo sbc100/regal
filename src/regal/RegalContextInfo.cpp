@@ -132,6 +132,7 @@ ContextInfo::ContextInfo()
   gl_angle_texture_compression_dxt3(false),
   gl_angle_texture_compression_dxt5(false),
   gl_angle_texture_usage(false),
+  gl_angle_timer_query(false),
   gl_angle_translated_shader_source(false),
   gl_apple_aux_depth_stencil(false),
   gl_apple_client_storage(false),
@@ -408,6 +409,7 @@ ContextInfo::ContextInfo()
   gl_ingr_blend_func_separate(false),
   gl_ingr_color_clamp(false),
   gl_ingr_interlace_read(false),
+  gl_intel_map_texture(false),
   gl_intel_parallel_arrays(false),
   gl_intel_texture_scissor(false),
   gl_khr_debug(false),
@@ -618,6 +620,8 @@ ContextInfo::ContextInfo()
   gl_win_swap_hint(false),
   regal_arb_draw_buffers(false),
   regal_arb_multitexture(false),
+  regal_arb_texture_env_combine(false),
+  regal_arb_texture_env_dot3(false),
   regal_arb_texture_storage(false),
   regal_ati_draw_buffers(false),
   regal_ext_blend_color(false),
@@ -625,6 +629,9 @@ ContextInfo::ContextInfo()
   regal_ext_direct_state_access(false),
   regal_ext_framebuffer_blit(false),
   regal_ext_framebuffer_object(false),
+  regal_ext_texture_edge_clamp(false),
+  regal_ext_texture_env_combine(false),
+  regal_ext_texture_env_dot3(false),
   regal_ibm_texture_mirrored_repeat(false),
   regal_nv_blend_square(false),
 #if REGAL_SYS_WGL
@@ -1044,6 +1051,7 @@ ContextInfo::init(const RegalContext &context)
   gl_angle_texture_compression_dxt3 = e.find("GL_ANGLE_texture_compression_dxt3")!=e.end();
   gl_angle_texture_compression_dxt5 = e.find("GL_ANGLE_texture_compression_dxt5")!=e.end();
   gl_angle_texture_usage = e.find("GL_ANGLE_texture_usage")!=e.end();
+  gl_angle_timer_query = e.find("GL_ANGLE_timer_query")!=e.end();
   gl_angle_translated_shader_source = e.find("GL_ANGLE_translated_shader_source")!=e.end();
   gl_apple_aux_depth_stencil = e.find("GL_APPLE_aux_depth_stencil")!=e.end();
   gl_apple_client_storage = e.find("GL_APPLE_client_storage")!=e.end();
@@ -1320,6 +1328,7 @@ ContextInfo::init(const RegalContext &context)
   gl_ingr_blend_func_separate = e.find("GL_INGR_blend_func_separate")!=e.end();
   gl_ingr_color_clamp = e.find("GL_INGR_color_clamp")!=e.end();
   gl_ingr_interlace_read = e.find("GL_INGR_interlace_read")!=e.end();
+  gl_intel_map_texture = e.find("GL_INTEL_map_texture")!=e.end();
   gl_intel_parallel_arrays = e.find("GL_INTEL_parallel_arrays")!=e.end();
   gl_intel_texture_scissor = e.find("GL_INTEL_texture_scissor")!=e.end();
   gl_khr_debug = e.find("GL_KHR_debug")!=e.end();
@@ -1725,6 +1734,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ANGLE_texture_compression_dxt3")) return gl_angle_texture_compression_dxt3;
   if (!strcmp(ext,"GL_ANGLE_texture_compression_dxt5")) return gl_angle_texture_compression_dxt5;
   if (!strcmp(ext,"GL_ANGLE_texture_usage")) return gl_angle_texture_usage;
+  if (!strcmp(ext,"GL_ANGLE_timer_query")) return gl_angle_timer_query;
   if (!strcmp(ext,"GL_ANGLE_translated_shader_source")) return gl_angle_translated_shader_source;
   if (!strcmp(ext,"GL_APPLE_aux_depth_stencil")) return gl_apple_aux_depth_stencil;
   if (!strcmp(ext,"GL_APPLE_client_storage")) return gl_apple_client_storage;
@@ -1823,8 +1833,8 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_texture_compression_rgtc")) return gl_arb_texture_compression_rgtc;
   if (!strcmp(ext,"GL_ARB_texture_cube_map")) return gl_arb_texture_cube_map;
   if (!strcmp(ext,"GL_ARB_texture_cube_map_array")) return gl_arb_texture_cube_map_array;
-  if (!strcmp(ext,"GL_ARB_texture_env_combine")) return gl_arb_texture_env_combine;
-  if (!strcmp(ext,"GL_ARB_texture_env_dot3")) return gl_arb_texture_env_dot3;
+  if (!strcmp(ext,"GL_ARB_texture_env_combine")) return regal_arb_texture_env_combine || gl_arb_texture_env_combine;
+  if (!strcmp(ext,"GL_ARB_texture_env_dot3")) return regal_arb_texture_env_dot3 || gl_arb_texture_env_dot3;
   if (!strcmp(ext,"GL_ARB_texture_float")) return gl_arb_texture_float;
   if (!strcmp(ext,"GL_ARB_texture_gather")) return gl_arb_texture_gather;
   if (!strcmp(ext,"GL_ARB_texture_mirrored_repeat")) return gl_arb_texture_mirrored_repeat;
@@ -1952,9 +1962,9 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_texture_compression_rgtc")) return gl_ext_texture_compression_rgtc;
   if (!strcmp(ext,"GL_EXT_texture_compression_s3tc")) return gl_ext_texture_compression_s3tc;
   if (!strcmp(ext,"GL_EXT_texture_cube_map")) return gl_ext_texture_cube_map;
-  if (!strcmp(ext,"GL_EXT_texture_edge_clamp")) return gl_ext_texture_edge_clamp;
-  if (!strcmp(ext,"GL_EXT_texture_env_combine")) return gl_ext_texture_env_combine;
-  if (!strcmp(ext,"GL_EXT_texture_env_dot3")) return gl_ext_texture_env_dot3;
+  if (!strcmp(ext,"GL_EXT_texture_edge_clamp")) return regal_ext_texture_edge_clamp || gl_ext_texture_edge_clamp;
+  if (!strcmp(ext,"GL_EXT_texture_env_combine")) return regal_ext_texture_env_combine || gl_ext_texture_env_combine;
+  if (!strcmp(ext,"GL_EXT_texture_env_dot3")) return regal_ext_texture_env_dot3 || gl_ext_texture_env_dot3;
   if (!strcmp(ext,"GL_EXT_texture_filter_anisotropic")) return gl_ext_texture_filter_anisotropic;
   if (!strcmp(ext,"GL_EXT_texture_format_BGRA8888")) return gl_ext_texture_format_bgra8888;
   if (!strcmp(ext,"GL_EXT_texture_integer")) return gl_ext_texture_integer;
@@ -2001,6 +2011,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_INGR_blend_func_separate")) return gl_ingr_blend_func_separate;
   if (!strcmp(ext,"GL_INGR_color_clamp")) return gl_ingr_color_clamp;
   if (!strcmp(ext,"GL_INGR_interlace_read")) return gl_ingr_interlace_read;
+  if (!strcmp(ext,"GL_INTEL_map_texture")) return gl_intel_map_texture;
   if (!strcmp(ext,"GL_INTEL_parallel_arrays")) return gl_intel_parallel_arrays;
   if (!strcmp(ext,"GL_INTEL_texture_scissor")) return gl_intel_texture_scissor;
   if (!strcmp(ext,"GL_KHR_debug")) return gl_khr_debug;

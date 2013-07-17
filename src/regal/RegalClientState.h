@@ -33,6 +33,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_EMULATION
+
 REGAL_GLOBAL_BEGIN
 
 #include <cstring>    // For memset, memcpy
@@ -44,7 +46,6 @@ REGAL_GLOBAL_BEGIN
 #include <boost/print/string_list.hpp>
 
 #include "RegalEmu.h"
-#include "RegalIff.h"
 #include "RegalToken.h"
 #include "RegalDispatch.h"
 
@@ -1515,5 +1516,7 @@ namespace State
 }
 
 REGAL_NAMESPACE_END
+
+#endif
 
 #endif

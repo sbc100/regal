@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2638] = {
+const char * const gl_Name[2641] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -1284,6 +1284,7 @@ const char * const gl_Name[2638] = {
   "glMapObjectBufferATI",
   "glMapParameterfvNV",
   "glMapParameterivNV",
+  "glMapTexture2DINTEL",
   "glMapVertexAttrib1dAPPLE",
   "glMapVertexAttrib1fAPPLE",
   "glMapVertexAttrib2dAPPLE",
@@ -1971,6 +1972,7 @@ const char * const gl_Name[2638] = {
   "glStringMarkerGREMEDY",
   "glSwapAPPLE",
   "glSwizzleEXT",
+  "glSyncTextureINTEL",
   "glTagSampleBufferSGIX",
   "glTangent3bEXT",
   "glTangent3bvEXT",
@@ -2267,6 +2269,7 @@ const char * const gl_Name[2638] = {
   "glUnmapBufferOES",
   "glUnmapNamedBufferEXT",
   "glUnmapObjectBufferATI",
+  "glUnmapTexture2DINTEL",
   "glUpdateObjectBufferATI",
   "glUseProgram",
   "glUseProgramObjectARB",
@@ -2694,7 +2697,7 @@ const char * const gl_Name[2638] = {
   NULL
 };
 
-const void *gl_Value[2638] = {
+const void *gl_Value[2641] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -3925,6 +3928,7 @@ const void *gl_Value[2638] = {
   (void *)(glMapObjectBufferATI),
   (void *)(glMapParameterfvNV),
   (void *)(glMapParameterivNV),
+  (void *)(glMapTexture2DINTEL),
   (void *)(glMapVertexAttrib1dAPPLE),
   (void *)(glMapVertexAttrib1fAPPLE),
   (void *)(glMapVertexAttrib2dAPPLE),
@@ -4612,6 +4616,7 @@ const void *gl_Value[2638] = {
   (void *)(glStringMarkerGREMEDY),
   (void *)(glSwapAPPLE),
   (void *)(glSwizzleEXT),
+  (void *)(glSyncTextureINTEL),
   (void *)(glTagSampleBufferSGIX),
   (void *)(glTangent3bEXT),
   (void *)(glTangent3bvEXT),
@@ -4908,6 +4913,7 @@ const void *gl_Value[2638] = {
   (void *)(glUnmapBufferOES),
   (void *)(glUnmapNamedBufferEXT),
   (void *)(glUnmapObjectBufferATI),
+  (void *)(glUnmapTexture2DINTEL),
   (void *)(glUpdateObjectBufferATI),
   (void *)(glUseProgram),
   (void *)(glUseProgramObjectARB),
@@ -5335,7 +5341,7 @@ const void *gl_Value[2638] = {
   NULL
 };
 
-const size_t gl_Offset[2638] = {
+const size_t gl_Offset[2641] = {
   offsetof(Dispatch::GL,glAccum)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveProgramEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveShaderProgram)/sizeof(void *),
@@ -6566,6 +6572,7 @@ const size_t gl_Offset[2638] = {
   offsetof(Dispatch::GL,glMapObjectBufferATI)/sizeof(void *),
   offsetof(Dispatch::GL,glMapParameterfvNV)/sizeof(void *),
   offsetof(Dispatch::GL,glMapParameterivNV)/sizeof(void *),
+  offsetof(Dispatch::GL,glMapTexture2DINTEL)/sizeof(void *),
   offsetof(Dispatch::GL,glMapVertexAttrib1dAPPLE)/sizeof(void *),
   offsetof(Dispatch::GL,glMapVertexAttrib1fAPPLE)/sizeof(void *),
   offsetof(Dispatch::GL,glMapVertexAttrib2dAPPLE)/sizeof(void *),
@@ -7253,6 +7260,7 @@ const size_t gl_Offset[2638] = {
   offsetof(Dispatch::GL,glStringMarkerGREMEDY)/sizeof(void *),
   offsetof(Dispatch::GL,glSwapAPPLE)/sizeof(void *),
   offsetof(Dispatch::GL,glSwizzleEXT)/sizeof(void *),
+  offsetof(Dispatch::GL,glSyncTextureINTEL)/sizeof(void *),
   offsetof(Dispatch::GL,glTagSampleBufferSGIX)/sizeof(void *),
   offsetof(Dispatch::GL,glTangent3bEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glTangent3bvEXT)/sizeof(void *),
@@ -7549,6 +7557,7 @@ const size_t gl_Offset[2638] = {
   offsetof(Dispatch::GL,glUnmapBufferOES)/sizeof(void *),
   offsetof(Dispatch::GL,glUnmapNamedBufferEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glUnmapObjectBufferATI)/sizeof(void *),
+  offsetof(Dispatch::GL,glUnmapTexture2DINTEL)/sizeof(void *),
   offsetof(Dispatch::GL,glUpdateObjectBufferATI)/sizeof(void *),
   offsetof(Dispatch::GL,glUseProgram)/sizeof(void *),
   offsetof(Dispatch::GL,glUseProgramObjectARB)/sizeof(void *),

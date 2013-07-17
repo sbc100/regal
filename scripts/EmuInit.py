@@ -8,10 +8,16 @@
 # eglGetDisplay is needed for apitrace eglretrace tool.
 # glXGetProcAddress is needed for Linux chromium
 # glXQueryExtension is needed for freeglut X11
+# glXGetProcAddressARB is needed for Linux Minecraft 1.6.1
 
 formulae = {
   'EmuInit' : {
-    'entries' : [ 'CGLChoosePixelFormat', 'CGLGetCurrentContext', 'eglGetDisplay', 'glXGetProcAddress', 'glXQueryExtension' ],
+    'entries' : [ 
+      'CGLChoosePixelFormat', 'CGLGetCurrentContext', 
+      'eglGetDisplay', 
+      'glXGetProcAddress', 'glXQueryExtension', 'glXGetProcAddressARB'
+ #     'glX.*' 
+    ],
     'prefix'  : [ 'Init::init();' ]
   }
 }

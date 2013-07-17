@@ -96,7 +96,7 @@ GLcharARB = Typedef('GLcharARB','char')
 GLcharARB.category = 'GL_ARB_shader_objects'
 GLcharARB.default = '0'
 
-GLhandleARB = Typedef('GLhandleARB',{'': 'unsigned int', 'osx': 'unsigned long'})
+GLhandleARB = Typedef('GLhandleARB',{'': 'unsigned int', 'osx': 'unsigned long', 'ios': 'unsigned long'})
 GLhandleARB.category = 'GL_ARB_shader_objects'
 GLhandleARB.default = '0'
 
@@ -2837,6 +2837,22 @@ GL_TEXTURE_USAGE_ANGLE = Enumerant('GL_TEXTURE_USAGE_ANGLE', 0x93a2, 'GL_ANGLE_t
 defines.add(GL_FRAMEBUFFER_ATTACHMENT_ANGLE)
 defines.add(GL_NONE)
 defines.add(GL_TEXTURE_USAGE_ANGLE)
+
+# GL_ANGLE_timer_query
+
+GL_CURRENT_QUERY_ANGLE = Enumerant('GL_CURRENT_QUERY_ANGLE', 0x8865, 'GL_ANGLE_timer_query')
+GL_QUERY_COUNTER_BITS_ANGLE = Enumerant('GL_QUERY_COUNTER_BITS_ANGLE', 0x8864, 'GL_ANGLE_timer_query')
+GL_QUERY_RESULT_ANGLE = Enumerant('GL_QUERY_RESULT_ANGLE', 0x8866, 'GL_ANGLE_timer_query')
+GL_QUERY_RESULT_AVAILABLE_ANGLE = Enumerant('GL_QUERY_RESULT_AVAILABLE_ANGLE', 0x8867, 'GL_ANGLE_timer_query')
+GL_TIMESTAMP_ANGLE = Enumerant('GL_TIMESTAMP_ANGLE', 0x8e28, 'GL_ANGLE_timer_query')
+GL_TIME_ELAPSED_ANGLE = Enumerant('GL_TIME_ELAPSED_ANGLE', 0x88bf, 'GL_ANGLE_timer_query')
+
+defines.add(GL_CURRENT_QUERY_ANGLE)
+defines.add(GL_QUERY_COUNTER_BITS_ANGLE)
+defines.add(GL_QUERY_RESULT_ANGLE)
+defines.add(GL_QUERY_RESULT_AVAILABLE_ANGLE)
+defines.add(GL_TIMESTAMP_ANGLE)
+defines.add(GL_TIME_ELAPSED_ANGLE)
 
 # GL_ANGLE_translated_shader_source
 
@@ -8682,6 +8698,18 @@ defines.add(GL_RED_MIN_CLAMP_INGR)
 GL_INTERLACE_READ_INGR = Enumerant('GL_INTERLACE_READ_INGR', 0x8568, 'GL_INGR_interlace_read')
 
 defines.add(GL_INTERLACE_READ_INGR)
+
+# GL_INTEL_map_texture
+
+GL_LAYOUT_DEFAULT_INTEL = Enumerant('GL_LAYOUT_DEFAULT_INTEL', 0x0000, 'GL_INTEL_map_texture')
+GL_LAYOUT_LINEAR_CPU_CACHED_INTEL = Enumerant('GL_LAYOUT_LINEAR_CPU_CACHED_INTEL', 0x0002, 'GL_INTEL_map_texture')
+GL_LAYOUT_LINEAR_INTEL = Enumerant('GL_LAYOUT_LINEAR_INTEL', 0x0001, 'GL_INTEL_map_texture')
+GL_TEXTURE_MEMORY_LAYOUT_INTEL = Enumerant('GL_TEXTURE_MEMORY_LAYOUT_INTEL', 0x83ff, 'GL_INTEL_map_texture')
+
+defines.add(GL_LAYOUT_DEFAULT_INTEL)
+defines.add(GL_LAYOUT_LINEAR_CPU_CACHED_INTEL)
+defines.add(GL_LAYOUT_LINEAR_INTEL)
+defines.add(GL_TEXTURE_MEMORY_LAYOUT_INTEL)
 
 # GL_INTEL_parallel_arrays
 
@@ -34434,6 +34462,40 @@ glBlendFuncSeparateINGR.trace = True
 glBlendFuncSeparateINGR.play = True
 gl.add(glBlendFuncSeparateINGR)
 
+# GL_INTEL_map_texture
+
+glMapTexture2DINTEL = Function('glMapTexture2DINTEL')
+glMapTexture2DINTEL.ret = Return('GLvoid *')
+glMapTexture2DINTEL.add( Input( 'texture','GLuint' ))
+glMapTexture2DINTEL.add( Input( 'level','GLint' ))
+glMapTexture2DINTEL.add( Input( 'access','GLbitfield' ))
+glMapTexture2DINTEL.add( Input( 'stride','GLint *' ))
+glMapTexture2DINTEL.add( Input( 'layout','GLenum *' ))
+glMapTexture2DINTEL.version = ''
+glMapTexture2DINTEL.category = 'GL_INTEL_map_texture'
+glMapTexture2DINTEL.trace = True
+glMapTexture2DINTEL.play = True
+gl.add(glMapTexture2DINTEL)
+
+glSyncTextureINTEL = Function('glSyncTextureINTEL')
+glSyncTextureINTEL.ret = Return('void')
+glSyncTextureINTEL.add( Input( 'texture','GLuint' ))
+glSyncTextureINTEL.version = ''
+glSyncTextureINTEL.category = 'GL_INTEL_map_texture'
+glSyncTextureINTEL.trace = True
+glSyncTextureINTEL.play = True
+gl.add(glSyncTextureINTEL)
+
+glUnmapTexture2DINTEL = Function('glUnmapTexture2DINTEL')
+glUnmapTexture2DINTEL.ret = Return('void')
+glUnmapTexture2DINTEL.add( Input( 'texture','GLuint' ))
+glUnmapTexture2DINTEL.add( Input( 'level','GLint' ))
+glUnmapTexture2DINTEL.version = ''
+glUnmapTexture2DINTEL.category = 'GL_INTEL_map_texture'
+glUnmapTexture2DINTEL.trace = True
+glUnmapTexture2DINTEL.play = True
+gl.add(glUnmapTexture2DINTEL)
+
 # GL_INTEL_parallel_arrays
 
 glColorPointervINTEL = Function('glColorPointervINTEL')
@@ -44106,6 +44168,12 @@ GL_INTEL_map_texture = Extension('GL_INTEL_map_texture')
 GL_INTEL_map_texture.url = 'http://www.opengl.org/registry/specs/INTEL/map_texture.txt'
 GL_INTEL_map_texture.enumerants = ['GL_LAYOUT_DEFAULT_INTEL','GL_LAYOUT_LINEAR_CPU_CACHED_INTEL','GL_LAYOUT_LINEAR_INTEL','GL_TEXTURE_MEMORY_LAYOUT_INTEL']
 GL_INTEL_map_texture.functions = ['*','glSyncTextureINTEL','glUnmapTexture2DINTEL']
+gl.add(GL_INTEL_map_texture)
+
+GL_INTEL_map_texture = Extension('GL_INTEL_map_texture')
+GL_INTEL_map_texture.url = 'http://www.opengl.org/registry/specs/INTEL/map_texture.txt'
+GL_INTEL_map_texture.enumerants = ['GL_LAYOUT_DEFAULT_INTEL','GL_LAYOUT_LINEAR_CPU_CACHED_INTEL','GL_LAYOUT_LINEAR_INTEL','GL_TEXTURE_MEMORY_LAYOUT_INTEL']
+GL_INTEL_map_texture.functions = ['glMapTexture2DINTEL','glSyncTextureINTEL','glUnmapTexture2DINTEL']
 gl.add(GL_INTEL_map_texture)
 
 GL_INTEL_parallel_arrays = Extension('GL_INTEL_parallel_arrays')

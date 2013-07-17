@@ -3232,6 +3232,12 @@ namespace Dispatch
 
     void (REGAL_CALL *glBlendFuncSeparateINGR)(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
 
+    // GL_INTEL_map_texture
+
+    GLvoid *(REGAL_CALL *glMapTexture2DINTEL)(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
+    void (REGAL_CALL *glSyncTextureINTEL)(GLuint texture);
+    void (REGAL_CALL *glUnmapTexture2DINTEL)(GLuint texture, GLint level);
+
     // GL_INTEL_parallel_arrays
 
     void (REGAL_CALL *glColorPointervINTEL)(GLint size, GLenum type, const GLvoid **pointer);

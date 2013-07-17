@@ -1314,6 +1314,7 @@ namespace Token {
       case 0x000083f6: return "GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL";
       case 0x000083f7: return "GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL";
       case 0x000083f8: return "GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL";
+      case 0x000083ff: return "GL_TEXTURE_MEMORY_LAYOUT_INTEL";
       case 0x00008400: return "GL_FRAGMENT_LIGHTING_EXT";
       case 0x00008401: return "GL_FRAGMENT_COLOR_MATERIAL_EXT";
       case 0x00008402: return "GL_FRAGMENT_COLOR_MATERIAL_FACE_EXT";
@@ -3526,14 +3527,14 @@ namespace Token {
   const char * GLerrorToString( GLenum e ) {
     switch( e ) {
       case GL_INVALID_ENUM: return "invalid enumerant";
+      case GL_INVALID_FRAMEBUFFER_OPERATION_EXT: return "invalid framebuffer operation";
       case GL_INVALID_OPERATION: return "invalid operation";
       case GL_INVALID_VALUE: return "invalid value";
       case GL_NO_ERROR: return "no error";
       case GL_OUT_OF_MEMORY: return "out of memory";
-      case GL_TABLE_TOO_LARGE: return "table too large";
-      case GL_INVALID_FRAMEBUFFER_OPERATION_EXT: return "invalid framebuffer operation";
       case GL_STACK_OVERFLOW: return "stack overflow";
       case GL_STACK_UNDERFLOW: return "stack underflow";
+      case GL_TABLE_TOO_LARGE: return "table too large";
       default: break;
     }
   return NULL;

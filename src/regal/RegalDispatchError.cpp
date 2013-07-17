@@ -49049,6 +49049,84 @@ static void REGAL_CALL error_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum d
   }
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL error_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+  Internal("error_glMapTexture2DINTEL","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  GLvoid * ret = _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMapTexture2DINTEL : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+return ret;
+}
+
+static void REGAL_CALL error_glSyncTextureINTEL(GLuint texture)
+{
+  Internal("error_glSyncTextureINTEL","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glSyncTextureINTEL)(texture);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glSyncTextureINTEL : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+  Internal("error_glUnmapTexture2DINTEL","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glUnmapTexture2DINTEL : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL error_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -69114,6 +69192,12 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = error_glBlendFuncSeparateINGR;
+
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = error_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = error_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = error_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

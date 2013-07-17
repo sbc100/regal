@@ -166,7 +166,7 @@ def apiEmuFuncDefineCode(apis, args):
                 code += '         {\n'
                 for i in api.enums:
                   if i.name=='defines':
-                    for j in i.enumerants:
+                    for j in i.enumerantsByName:
                       if getattr(j,'esVersions',None) != None and getattr(j,'enableCap',None) != None and 2.0 in j.esVersions and j.enableCap == True:
                         code += '           case %s:\n'%(j.name)
                 code += '             break;\n'
@@ -187,7 +187,7 @@ def apiEmuFuncDefineCode(apis, args):
                 code += '         {\n'
                 for i in api.enums:
                   if i.name=='defines':
-                    for j in i.enumerants:
+                    for j in i.enumerantsByName:
                       if getattr(j,'esVersions',None)==None:
                         continue
                       if getattr(j,'bindTexture',None)==None:
@@ -209,7 +209,7 @@ def apiEmuFuncDefineCode(apis, args):
                 code += '         {\n'
                 for i in api.enums:
                   if i.name=='defines':
-                    for j in i.enumerants:
+                    for j in i.enumerantsByName:
                       if getattr(j,'esVersions',None)==None:
                         continue
                       if getattr(j,'texImage',None)==None:
@@ -254,7 +254,7 @@ def apiEmuFuncDefineCode(apis, args):
                 code += '    {\n'
                 for i in api.enums:
                   if i.name=='defines':
-                    for j in i.enumerants:
+                    for j in i.enumerantsByName:
                       if getattr(j,'esVersions',None)==None:
                         continue
                       if getattr(j,'internalformat',None)==None:

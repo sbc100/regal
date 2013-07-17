@@ -78,7 +78,7 @@ def generateEnumHeader(apis, args):
     if i.name == 'gl':
       for enum in i.enums:
         if enum.name == 'defines':
-          for enumerant in enum.enumerants:
+          for enumerant in enum.enumerantsByName:
             if not enumerant.name in regalEnumSet:
               regalEnumSet.add(enumerant.name)
               regalEnum.append(enumerant.name)

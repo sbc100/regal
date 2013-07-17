@@ -33,7 +33,7 @@ def apiTraceFuncDefineCode(apis, args):
     for function in api.functions:
       if getattr(function,'regalOnly',False)==True:
         continue
-      if function.name in exclude:
+      if function.name in exclude or function.category in exclude:
         continue
 
       name   = function.name
@@ -80,7 +80,7 @@ def apiTraceFuncDefineCode(apis, args):
     for function in api.functions:
       if getattr(function,'regalOnly',False)==True:
         continue
-      if function.name in exclude:
+      if function.name in exclude or function.category in exclude:
         continue
 
       name   = function.name

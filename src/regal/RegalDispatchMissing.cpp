@@ -16475,6 +16475,32 @@ static void REGAL_CALL missing_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum
   Warning( "glBlendFuncSeparateINGR not available." );
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL missing_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(access);
+  UNUSED_PARAMETER(stride);
+  UNUSED_PARAMETER(layout);
+  Warning( "glMapTexture2DINTEL not available." );
+  return NULL;
+}
+
+static void REGAL_CALL missing_glSyncTextureINTEL(GLuint texture)
+{
+  UNUSED_PARAMETER(texture);
+  Warning( "glSyncTextureINTEL not available." );
+}
+
+static void REGAL_CALL missing_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(level);
+  Warning( "glUnmapTexture2DINTEL not available." );
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL missing_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -28371,6 +28397,12 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = missing_glBlendFuncSeparateINGR;
+
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = missing_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = missing_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = missing_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

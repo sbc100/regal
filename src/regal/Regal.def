@@ -1230,6 +1230,7 @@ EXPORTS
   glMapObjectBufferATI
   glMapParameterfvNV
   glMapParameterivNV
+  glMapTexture2DINTEL
   glMapVertexAttrib1dAPPLE
   glMapVertexAttrib1fAPPLE
   glMapVertexAttrib2dAPPLE
@@ -1917,6 +1918,7 @@ EXPORTS
   glStringMarkerGREMEDY
   glSwapAPPLE
   glSwizzleEXT
+  glSyncTextureINTEL
   glTagSampleBufferSGIX
   glTangent3bEXT
   glTangent3bvEXT
@@ -2213,6 +2215,7 @@ EXPORTS
   glUnmapBufferOES
   glUnmapNamedBufferEXT
   glUnmapObjectBufferATI
+  glUnmapTexture2DINTEL
   glUpdateObjectBufferATI
   glUseProgram
   glUseProgramObjectARB

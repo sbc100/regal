@@ -264,7 +264,7 @@ REGAL_NAMESPACE_END
 
 def filterTokens(tokens):
 
-  suffixes  = ['_ARB','_KHR','_EXT','_NV','_ATI','_PGI','_OES','_IBM','_SUN','_SGI','_SGIX','_SGIS','_APPLE','_QCOM','_ANGLE']
+  suffixes  = ['_ARB','_KHR','_EXT','_NV','_ATI','_PGI','_OES','_IBM','_SUN','_SGI','_SGIX','_SGIS','_APPLE','_QCOM','_ANGLE','INTEL']
   suffixes2 = ['_BIT','_BITS','_BIT_NV','_BITS_NV','_BIT_PGI','_BITS_PGI','_BIT_EXT','_BITS_EXT','_BIT_SGIX','_BITS_SGIX']
 
   def suffixCompare(i,j):
@@ -339,7 +339,7 @@ def generateTokenSource(apis, args):
     for j in i.enums:
       if j.name != 'defines':
         continue
-      for k in j.enumerants:
+      for k in j.enumerantsByName:
         value = toLong(k.value)
         if value != None:
           if not value in e:
@@ -380,7 +380,7 @@ def generateTokenSource(apis, args):
     for j in i.enums:
       if j.name != 'defines':
         continue
-      for k in j.enumerants:
+      for k in j.enumerantsByName:
         if getattr(k,'gluErrorString',None):
           code.append('      case %s: return "%s";'%(k.name,k.gluErrorString))
   code.append('      default: break;')
@@ -442,7 +442,7 @@ def generateTokenSource(apis, args):
     for j in i.enums:
       if j.name != 'defines':
         continue
-      for k in j.enumerants:
+      for k in j.enumerantsByName:
         value = toLong(k.value)
         if value != None:
           if not value in e:

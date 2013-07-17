@@ -2840,6 +2840,200 @@ typedef void (GLAPIENTRY * PFNGLTESSELLATIONMODEAMDPROC) (GLenum mode);
 
 #endif /* GL_AMD_vertex_shader_viewport_index */
 
+/* ------------------------- GL_ANGLE_depth_texture ------------------------ */
+
+#ifndef GL_ANGLE_depth_texture
+#define GL_ANGLE_depth_texture 1
+
+#define GLEW_ANGLE_depth_texture GLEW_GET_VAR(__GLEW_ANGLE_depth_texture)
+
+#endif /* GL_ANGLE_depth_texture */
+
+/* ----------------------- GL_ANGLE_framebuffer_blit ----------------------- */
+
+#ifndef GL_ANGLE_framebuffer_blit
+#define GL_ANGLE_framebuffer_blit 1
+
+#define GL_DRAW_FRAMEBUFFER_BINDING_ANGLE 0x8CA6
+#define GL_READ_FRAMEBUFFER_ANGLE 0x8CA8
+#define GL_DRAW_FRAMEBUFFER_ANGLE 0x8CA9
+#define GL_READ_FRAMEBUFFER_BINDING_ANGLE 0x8CAA
+
+typedef void (GLAPIENTRY * PFNGLBLITFRAMEBUFFERANGLEPROC) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+
+#define glBlitFramebufferANGLE GLEW_GET_FUN(__glewBlitFramebufferANGLE)
+
+#define GLEW_ANGLE_framebuffer_blit GLEW_GET_VAR(__GLEW_ANGLE_framebuffer_blit)
+
+#endif /* GL_ANGLE_framebuffer_blit */
+
+/* -------------------- GL_ANGLE_framebuffer_multisample ------------------- */
+
+#ifndef GL_ANGLE_framebuffer_multisample
+#define GL_ANGLE_framebuffer_multisample 1
+
+#define GL_RENDERBUFFER_SAMPLES_ANGLE 0x8CAB
+#define GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE 0x8D56
+#define GL_MAX_SAMPLES_ANGLE 0x8D57
+
+typedef void (GLAPIENTRY * PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLEPROC) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+
+#define glRenderbufferStorageMultisampleANGLE GLEW_GET_FUN(__glewRenderbufferStorageMultisampleANGLE)
+
+#define GLEW_ANGLE_framebuffer_multisample GLEW_GET_VAR(__GLEW_ANGLE_framebuffer_multisample)
+
+#endif /* GL_ANGLE_framebuffer_multisample */
+
+/* ----------------------- GL_ANGLE_instanced_arrays ----------------------- */
+
+#ifndef GL_ANGLE_instanced_arrays
+#define GL_ANGLE_instanced_arrays 1
+
+#define GL_VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE 0x88FE
+
+typedef void (GLAPIENTRY * PFNGLDRAWARRAYSINSTANCEDANGLEPROC) (GLenum mode, GLint first, GLsizei count, GLsizei primcount);
+typedef void (GLAPIENTRY * PFNGLDRAWELEMENTSINSTANCEDANGLEPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
+typedef void (GLAPIENTRY * PFNGLVERTEXATTRIBDIVISORANGLEPROC) (GLuint index, GLuint divisor);
+
+#define glDrawArraysInstancedANGLE GLEW_GET_FUN(__glewDrawArraysInstancedANGLE)
+#define glDrawElementsInstancedANGLE GLEW_GET_FUN(__glewDrawElementsInstancedANGLE)
+#define glVertexAttribDivisorANGLE GLEW_GET_FUN(__glewVertexAttribDivisorANGLE)
+
+#define GLEW_ANGLE_instanced_arrays GLEW_GET_VAR(__GLEW_ANGLE_instanced_arrays)
+
+#endif /* GL_ANGLE_instanced_arrays */
+
+/* -------------------- GL_ANGLE_pack_reverse_row_order -------------------- */
+
+#ifndef GL_ANGLE_pack_reverse_row_order
+#define GL_ANGLE_pack_reverse_row_order 1
+
+#define GL_PACK_REVERSE_ROW_ORDER_ANGLE 0x93A4
+
+#define GLEW_ANGLE_pack_reverse_row_order GLEW_GET_VAR(__GLEW_ANGLE_pack_reverse_row_order)
+
+#endif /* GL_ANGLE_pack_reverse_row_order */
+
+/* ------------------------ GL_ANGLE_program_binary ------------------------ */
+
+#ifndef GL_ANGLE_program_binary
+#define GL_ANGLE_program_binary 1
+
+#define GL_PROGRAM_BINARY_ANGLE 0x93A6
+
+#define GLEW_ANGLE_program_binary GLEW_GET_VAR(__GLEW_ANGLE_program_binary)
+
+#endif /* GL_ANGLE_program_binary */
+
+/* ------------------- GL_ANGLE_texture_compression_dxt1 ------------------- */
+
+#ifndef GL_ANGLE_texture_compression_dxt1
+#define GL_ANGLE_texture_compression_dxt1 1
+
+#define GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE 0x83F0
+#define GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE 0x83F1
+#define GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE 0x83F2
+#define GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE 0x83F3
+
+#define GLEW_ANGLE_texture_compression_dxt1 GLEW_GET_VAR(__GLEW_ANGLE_texture_compression_dxt1)
+
+#endif /* GL_ANGLE_texture_compression_dxt1 */
+
+/* ------------------- GL_ANGLE_texture_compression_dxt3 ------------------- */
+
+#ifndef GL_ANGLE_texture_compression_dxt3
+#define GL_ANGLE_texture_compression_dxt3 1
+
+#define GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE 0x83F0
+#define GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE 0x83F1
+#define GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE 0x83F2
+#define GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE 0x83F3
+
+#define GLEW_ANGLE_texture_compression_dxt3 GLEW_GET_VAR(__GLEW_ANGLE_texture_compression_dxt3)
+
+#endif /* GL_ANGLE_texture_compression_dxt3 */
+
+/* ------------------- GL_ANGLE_texture_compression_dxt5 ------------------- */
+
+#ifndef GL_ANGLE_texture_compression_dxt5
+#define GL_ANGLE_texture_compression_dxt5 1
+
+#define GL_COMPRESSED_RGB_S3TC_DXT1_ANGLE 0x83F0
+#define GL_COMPRESSED_RGBA_S3TC_DXT1_ANGLE 0x83F1
+#define GL_COMPRESSED_RGBA_S3TC_DXT3_ANGLE 0x83F2
+#define GL_COMPRESSED_RGBA_S3TC_DXT5_ANGLE 0x83F3
+
+#define GLEW_ANGLE_texture_compression_dxt5 GLEW_GET_VAR(__GLEW_ANGLE_texture_compression_dxt5)
+
+#endif /* GL_ANGLE_texture_compression_dxt5 */
+
+/* ------------------------- GL_ANGLE_texture_usage ------------------------ */
+
+#ifndef GL_ANGLE_texture_usage
+#define GL_ANGLE_texture_usage 1
+
+#define GL_TEXTURE_USAGE_ANGLE 0x93A2
+#define GL_FRAMEBUFFER_ATTACHMENT_ANGLE 0x93A3
+
+#define GLEW_ANGLE_texture_usage GLEW_GET_VAR(__GLEW_ANGLE_texture_usage)
+
+#endif /* GL_ANGLE_texture_usage */
+
+/* -------------------------- GL_ANGLE_timer_query ------------------------- */
+
+#ifndef GL_ANGLE_timer_query
+#define GL_ANGLE_timer_query 1
+
+#define GL_QUERY_COUNTER_BITS_ANGLE 0x8864
+#define GL_CURRENT_QUERY_ANGLE 0x8865
+#define GL_QUERY_RESULT_ANGLE 0x8866
+#define GL_QUERY_RESULT_AVAILABLE_ANGLE 0x8867
+#define GL_TIME_ELAPSED_ANGLE 0x88BF
+#define GL_TIMESTAMP_ANGLE 0x8E28
+
+typedef void (GLAPIENTRY * PFNGLBEGINQUERYANGLEPROC) (GLenum target, GLuint id);
+typedef void (GLAPIENTRY * PFNGLDELETEQUERIESANGLEPROC) (GLsizei n, const GLuint* ids);
+typedef void (GLAPIENTRY * PFNGLENDQUERYANGLEPROC) (GLenum target);
+typedef void (GLAPIENTRY * PFNGLGENQUERIESANGLEPROC) (GLsizei n, GLuint* ids);
+typedef void (GLAPIENTRY * PFNGLGETQUERYOBJECTI64VANGLEPROC) (GLuint id, GLenum pname, GLint64* params);
+typedef void (GLAPIENTRY * PFNGLGETQUERYOBJECTIVANGLEPROC) (GLuint id, GLenum pname, GLint* params);
+typedef void (GLAPIENTRY * PFNGLGETQUERYOBJECTUI64VANGLEPROC) (GLuint id, GLenum pname, GLuint64* params);
+typedef void (GLAPIENTRY * PFNGLGETQUERYOBJECTUIVANGLEPROC) (GLuint id, GLenum pname, GLuint* params);
+typedef void (GLAPIENTRY * PFNGLGETQUERYIVANGLEPROC) (GLenum target, GLenum pname, GLint* params);
+typedef GLboolean (GLAPIENTRY * PFNGLISQUERYANGLEPROC) (GLuint id);
+typedef void (GLAPIENTRY * PFNGLQUERYCOUNTERANGLEPROC) (GLuint id, GLenum target);
+
+#define glBeginQueryANGLE GLEW_GET_FUN(__glewBeginQueryANGLE)
+#define glDeleteQueriesANGLE GLEW_GET_FUN(__glewDeleteQueriesANGLE)
+#define glEndQueryANGLE GLEW_GET_FUN(__glewEndQueryANGLE)
+#define glGenQueriesANGLE GLEW_GET_FUN(__glewGenQueriesANGLE)
+#define glGetQueryObjecti64vANGLE GLEW_GET_FUN(__glewGetQueryObjecti64vANGLE)
+#define glGetQueryObjectivANGLE GLEW_GET_FUN(__glewGetQueryObjectivANGLE)
+#define glGetQueryObjectui64vANGLE GLEW_GET_FUN(__glewGetQueryObjectui64vANGLE)
+#define glGetQueryObjectuivANGLE GLEW_GET_FUN(__glewGetQueryObjectuivANGLE)
+#define glGetQueryivANGLE GLEW_GET_FUN(__glewGetQueryivANGLE)
+#define glIsQueryANGLE GLEW_GET_FUN(__glewIsQueryANGLE)
+#define glQueryCounterANGLE GLEW_GET_FUN(__glewQueryCounterANGLE)
+
+#define GLEW_ANGLE_timer_query GLEW_GET_VAR(__GLEW_ANGLE_timer_query)
+
+#endif /* GL_ANGLE_timer_query */
+
+/* ------------------- GL_ANGLE_translated_shader_source ------------------- */
+
+#ifndef GL_ANGLE_translated_shader_source
+#define GL_ANGLE_translated_shader_source 1
+
+#define GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE 0x93A0
+
+typedef void (GLAPIENTRY * PFNGLGETTRANSLATEDSHADERSOURCEANGLEPROC) (GLuint shader, GLsizei bufsize, GLsizei* length, GLchar* source);
+
+#define glGetTranslatedShaderSourceANGLE GLEW_GET_FUN(__glewGetTranslatedShaderSourceANGLE)
+
+#define GLEW_ANGLE_translated_shader_source GLEW_GET_VAR(__GLEW_ANGLE_translated_shader_source)
+
+#endif /* GL_ANGLE_translated_shader_source */
+
 /* ----------------------- GL_APPLE_aux_depth_stencil ---------------------- */
 
 #ifndef GL_APPLE_aux_depth_stencil
@@ -3453,7 +3647,7 @@ typedef void (GLAPIENTRY * PFNGLCOPYIMAGESUBDATAPROC) (GLuint srcName, GLenum sr
 
 typedef void (APIENTRY *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
 
-typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKARBPROC) (GLDEBUGPROCARB callback, GLvoid *userParam);
+typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKARBPROC) (GLDEBUGPROCARB callback, const GLvoid *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECONTROLARBPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGEINSERTARBPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf);
 typedef GLuint (GLAPIENTRY * PFNGLGETDEBUGMESSAGELOGARBPROC) (GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog);
@@ -3561,10 +3755,10 @@ typedef void (GLAPIENTRY * PFNGLBLENDFUNCIARBPROC) (GLuint buf, GLenum src, GLen
 #ifndef GL_ARB_draw_elements_base_vertex
 #define GL_ARB_draw_elements_base_vertex 1
 
-typedef void (GLAPIENTRY * PFNGLDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex);
+typedef void (GLAPIENTRY * PFNGLDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
 typedef void (GLAPIENTRY * PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex);
-typedef void (GLAPIENTRY * PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, GLvoid *indices, GLint basevertex);
-typedef void (GLAPIENTRY * PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, GLsizei* count, GLenum type, GLvoid**indices, GLsizei primcount, GLint *basevertex);
+typedef void (GLAPIENTRY * PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex);
+typedef void (GLAPIENTRY * PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC) (GLenum mode, const GLsizei* count, GLenum type, const GLvoid* const *indices, GLsizei primcount, const GLint *basevertex);
 
 #define glDrawElementsBaseVertex GLEW_GET_FUN(__glewDrawElementsBaseVertex)
 #define glDrawElementsInstancedBaseVertex GLEW_GET_FUN(__glewDrawElementsInstancedBaseVertex)
@@ -5418,7 +5612,7 @@ typedef void (GLAPIENTRY * PFNGLUNIFORMSUBROUTINESUIVPROC) (GLenum shadertype, G
 #define GL_NAMED_STRING_LENGTH_ARB 0x8DE9
 #define GL_NAMED_STRING_TYPE_ARB 0x8DEA
 
-typedef void (GLAPIENTRY * PFNGLCOMPILESHADERINCLUDEARBPROC) (GLuint shader, GLsizei count, const GLchar ** path, const GLint *length);
+typedef void (GLAPIENTRY * PFNGLCOMPILESHADERINCLUDEARBPROC) (GLuint shader, GLsizei count, const GLchar* const *path, const GLint *length);
 typedef void (GLAPIENTRY * PFNGLDELETENAMEDSTRINGARBPROC) (GLint namelen, const GLchar* name);
 typedef void (GLAPIENTRY * PFNGLGETNAMEDSTRINGARBPROC) (GLint namelen, const GLchar* name, GLsizei bufSize, GLint *stringlen, GLchar *string);
 typedef void (GLAPIENTRY * PFNGLGETNAMEDSTRINGIVARBPROC) (GLint namelen, const GLchar* name, GLenum pname, GLint *params);
@@ -9922,7 +10116,7 @@ typedef void (GLAPIENTRY * PFNGLBINDBUFFEROFFSETEXTPROC) (GLenum target, GLuint 
 typedef void (GLAPIENTRY * PFNGLBINDBUFFERRANGEEXTPROC) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 typedef void (GLAPIENTRY * PFNGLENDTRANSFORMFEEDBACKEXTPROC) (void);
 typedef void (GLAPIENTRY * PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC) (GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei *size, GLenum *type, GLchar *name);
-typedef void (GLAPIENTRY * PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC) (GLuint program, GLsizei count, const GLchar ** varyings, GLenum bufferMode);
+typedef void (GLAPIENTRY * PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC) (GLuint program, GLsizei count, const GLchar * const* varyings, GLenum bufferMode);
 
 #define glBeginTransformFeedbackEXT GLEW_GET_FUN(__glewBeginTransformFeedbackEXT)
 #define glBindBufferBaseEXT GLEW_GET_FUN(__glewBindBufferBaseEXT)
@@ -13358,6 +13552,11 @@ typedef void (GLAPIENTRY * PFNGLTEXPARAMETERXVPROC) (GLenum target, GLenum pname
 #define GL_LOG_REGAL 0x9324
 #define GL_EMULATION_REGAL 0x9325
 #define GL_DRIVER_REGAL 0x9326
+#define GL_MISSING_REGAL 0x9360
+#define GL_TRACE_REGAL 0x9361
+#define GL_CACHE_REGAL 0x9362
+#define GL_CODE_REGAL 0x9363
+#define GL_STATISTICS_REGAL 0x9364
 
 #define GLEW_REGAL_enable GLEW_GET_VAR(__GLEW_REGAL_enable)
 
@@ -14808,6 +15007,28 @@ GLEW_FUN_EXPORT PFNGLSTENCILOPVALUEAMDPROC __glewStencilOpValueAMD;
 
 GLEW_FUN_EXPORT PFNGLTESSELLATIONFACTORAMDPROC __glewTessellationFactorAMD;
 GLEW_FUN_EXPORT PFNGLTESSELLATIONMODEAMDPROC __glewTessellationModeAMD;
+
+GLEW_FUN_EXPORT PFNGLBLITFRAMEBUFFERANGLEPROC __glewBlitFramebufferANGLE;
+
+GLEW_FUN_EXPORT PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLEPROC __glewRenderbufferStorageMultisampleANGLE;
+
+GLEW_FUN_EXPORT PFNGLDRAWARRAYSINSTANCEDANGLEPROC __glewDrawArraysInstancedANGLE;
+GLEW_FUN_EXPORT PFNGLDRAWELEMENTSINSTANCEDANGLEPROC __glewDrawElementsInstancedANGLE;
+GLEW_FUN_EXPORT PFNGLVERTEXATTRIBDIVISORANGLEPROC __glewVertexAttribDivisorANGLE;
+
+GLEW_FUN_EXPORT PFNGLBEGINQUERYANGLEPROC __glewBeginQueryANGLE;
+GLEW_FUN_EXPORT PFNGLDELETEQUERIESANGLEPROC __glewDeleteQueriesANGLE;
+GLEW_FUN_EXPORT PFNGLENDQUERYANGLEPROC __glewEndQueryANGLE;
+GLEW_FUN_EXPORT PFNGLGENQUERIESANGLEPROC __glewGenQueriesANGLE;
+GLEW_FUN_EXPORT PFNGLGETQUERYOBJECTI64VANGLEPROC __glewGetQueryObjecti64vANGLE;
+GLEW_FUN_EXPORT PFNGLGETQUERYOBJECTIVANGLEPROC __glewGetQueryObjectivANGLE;
+GLEW_FUN_EXPORT PFNGLGETQUERYOBJECTUI64VANGLEPROC __glewGetQueryObjectui64vANGLE;
+GLEW_FUN_EXPORT PFNGLGETQUERYOBJECTUIVANGLEPROC __glewGetQueryObjectuivANGLE;
+GLEW_FUN_EXPORT PFNGLGETQUERYIVANGLEPROC __glewGetQueryivANGLE;
+GLEW_FUN_EXPORT PFNGLISQUERYANGLEPROC __glewIsQueryANGLE;
+GLEW_FUN_EXPORT PFNGLQUERYCOUNTERANGLEPROC __glewQueryCounterANGLE;
+
+GLEW_FUN_EXPORT PFNGLGETTRANSLATEDSHADERSOURCEANGLEPROC __glewGetTranslatedShaderSourceANGLE;
 
 GLEW_FUN_EXPORT PFNGLDRAWELEMENTARRAYAPPLEPROC __glewDrawElementArrayAPPLE;
 GLEW_FUN_EXPORT PFNGLDRAWRANGEELEMENTARRAYAPPLEPROC __glewDrawRangeElementArrayAPPLE;
@@ -16873,6 +17094,18 @@ GLEW_VAR_EXPORT GLboolean __GLEW_AMD_transform_feedback3_lines_triangles;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_vertex_shader_layer;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_vertex_shader_tessellator;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_vertex_shader_viewport_index;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_depth_texture;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_framebuffer_blit;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_framebuffer_multisample;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_instanced_arrays;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_pack_reverse_row_order;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_program_binary;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_texture_compression_dxt1;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_texture_compression_dxt3;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_texture_compression_dxt5;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_texture_usage;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_timer_query;
+GLEW_VAR_EXPORT GLboolean __GLEW_ANGLE_translated_shader_source;
 GLEW_VAR_EXPORT GLboolean __GLEW_APPLE_aux_depth_stencil;
 GLEW_VAR_EXPORT GLboolean __GLEW_APPLE_client_storage;
 GLEW_VAR_EXPORT GLboolean __GLEW_APPLE_element_array;

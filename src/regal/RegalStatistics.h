@@ -115,6 +115,7 @@ struct Statistics
   GLuint gl_angle_texture_compression_dxt3;
   GLuint gl_angle_texture_compression_dxt5;
   GLuint gl_angle_texture_usage;
+  GLuint gl_angle_timer_query;
   GLuint gl_angle_translated_shader_source;
   GLuint gl_apple_aux_depth_stencil;
   GLuint gl_apple_client_storage;
@@ -391,6 +392,7 @@ struct Statistics
   GLuint gl_ingr_blend_func_separate;
   GLuint gl_ingr_color_clamp;
   GLuint gl_ingr_interlace_read;
+  GLuint gl_intel_map_texture;
   GLuint gl_intel_parallel_arrays;
   GLuint gl_intel_texture_scissor;
   GLuint gl_khr_debug;
@@ -3251,6 +3253,12 @@ struct Statistics
 
   GLuint glBlendFuncSeparateINGR;
 
+  /* GL_INTEL_map_texture */
+
+  GLuint glMapTexture2DINTEL;
+  GLuint glSyncTextureINTEL;
+  GLuint glUnmapTexture2DINTEL;
+
   /* GL_INTEL_parallel_arrays */
 
   GLuint glColorPointervINTEL;
@@ -4886,22 +4894,6 @@ struct Statistics
 #endif /* REGAL_SYS_EGL */
 
   GLuint enable_GL_BLEND;
-  GLuint enable_GL_COLOR_LOGIC_OP;
-  GLuint enable_GL_CULL_FACE;
-  GLuint enable_GL_DEPTH_TEST;
-  GLuint enable_GL_DITHER;
-  GLuint enable_GL_LINE_SMOOTH;
-  GLuint enable_GL_POLYGON_OFFSET_FILL;
-  GLuint enable_GL_POLYGON_OFFSET_LINE;
-  GLuint enable_GL_POLYGON_OFFSET_POINT;
-  GLuint enable_GL_POLYGON_SMOOTH;
-  GLuint enable_GL_SCISSOR_TEST;
-  GLuint enable_GL_STENCIL_TEST;
-  GLuint enable_GL_RESCALE_NORMAL;
-  GLuint enable_GL_MULTISAMPLE;
-  GLuint enable_GL_SAMPLE_ALPHA_TO_COVERAGE;
-  GLuint enable_GL_SAMPLE_ALPHA_TO_ONE;
-  GLuint enable_GL_SAMPLE_COVERAGE;
   GLuint enable_GL_CLIP_DISTANCE0;
   GLuint enable_GL_CLIP_DISTANCE1;
   GLuint enable_GL_CLIP_DISTANCE2;
@@ -4910,34 +4902,34 @@ struct Statistics
   GLuint enable_GL_CLIP_DISTANCE5;
   GLuint enable_GL_CLIP_DISTANCE6;
   GLuint enable_GL_CLIP_DISTANCE7;
-  GLuint enable_GL_PRIMITIVE_RESTART;
-  GLuint enable_GL_PROGRAM_POINT_SIZE;
-  GLuint enable_GL_PRIMITIVE_RESTART_FIXED_INDEX;
-  GLuint enable_GL_DEPTH_CLAMP;
-  GLuint enable_GL_FRAMEBUFFER_SRGB;
-  GLuint enable_GL_TEXTURE_2D;
-  GLuint enable_GL_TEXTURE_CUBE_MAP_SEAMLESS;
-  GLuint enable_GL_SAMPLE_MASK;
+  GLuint enable_GL_COLOR_LOGIC_OP;
+  GLuint enable_GL_CULL_FACE;
   GLuint enable_GL_DEBUG_OUTPUT;
   GLuint enable_GL_DEBUG_OUTPUT_SYNCHRONOUS;
+  GLuint enable_GL_DEPTH_CLAMP;
+  GLuint enable_GL_DEPTH_TEST;
+  GLuint enable_GL_DITHER;
+  GLuint enable_GL_FRAMEBUFFER_SRGB;
+  GLuint enable_GL_LINE_SMOOTH;
+  GLuint enable_GL_MULTISAMPLE;
+  GLuint enable_GL_POLYGON_OFFSET_FILL;
+  GLuint enable_GL_POLYGON_OFFSET_LINE;
+  GLuint enable_GL_POLYGON_OFFSET_POINT;
+  GLuint enable_GL_POLYGON_SMOOTH;
+  GLuint enable_GL_PRIMITIVE_RESTART;
+  GLuint enable_GL_PRIMITIVE_RESTART_FIXED_INDEX;
+  GLuint enable_GL_PROGRAM_POINT_SIZE;
+  GLuint enable_GL_RESCALE_NORMAL;
+  GLuint enable_GL_SAMPLE_ALPHA_TO_COVERAGE;
+  GLuint enable_GL_SAMPLE_ALPHA_TO_ONE;
+  GLuint enable_GL_SAMPLE_COVERAGE;
+  GLuint enable_GL_SAMPLE_MASK;
+  GLuint enable_GL_SCISSOR_TEST;
+  GLuint enable_GL_STENCIL_TEST;
+  GLuint enable_GL_TEXTURE_2D;
+  GLuint enable_GL_TEXTURE_CUBE_MAP_SEAMLESS;
 
   GLuint disable_GL_BLEND;
-  GLuint disable_GL_COLOR_LOGIC_OP;
-  GLuint disable_GL_CULL_FACE;
-  GLuint disable_GL_DEPTH_TEST;
-  GLuint disable_GL_DITHER;
-  GLuint disable_GL_LINE_SMOOTH;
-  GLuint disable_GL_POLYGON_OFFSET_FILL;
-  GLuint disable_GL_POLYGON_OFFSET_LINE;
-  GLuint disable_GL_POLYGON_OFFSET_POINT;
-  GLuint disable_GL_POLYGON_SMOOTH;
-  GLuint disable_GL_SCISSOR_TEST;
-  GLuint disable_GL_STENCIL_TEST;
-  GLuint disable_GL_RESCALE_NORMAL;
-  GLuint disable_GL_MULTISAMPLE;
-  GLuint disable_GL_SAMPLE_ALPHA_TO_COVERAGE;
-  GLuint disable_GL_SAMPLE_ALPHA_TO_ONE;
-  GLuint disable_GL_SAMPLE_COVERAGE;
   GLuint disable_GL_CLIP_DISTANCE0;
   GLuint disable_GL_CLIP_DISTANCE1;
   GLuint disable_GL_CLIP_DISTANCE2;
@@ -4946,16 +4938,32 @@ struct Statistics
   GLuint disable_GL_CLIP_DISTANCE5;
   GLuint disable_GL_CLIP_DISTANCE6;
   GLuint disable_GL_CLIP_DISTANCE7;
-  GLuint disable_GL_PRIMITIVE_RESTART;
-  GLuint disable_GL_PROGRAM_POINT_SIZE;
-  GLuint disable_GL_PRIMITIVE_RESTART_FIXED_INDEX;
-  GLuint disable_GL_DEPTH_CLAMP;
-  GLuint disable_GL_FRAMEBUFFER_SRGB;
-  GLuint disable_GL_TEXTURE_2D;
-  GLuint disable_GL_TEXTURE_CUBE_MAP_SEAMLESS;
-  GLuint disable_GL_SAMPLE_MASK;
+  GLuint disable_GL_COLOR_LOGIC_OP;
+  GLuint disable_GL_CULL_FACE;
   GLuint disable_GL_DEBUG_OUTPUT;
   GLuint disable_GL_DEBUG_OUTPUT_SYNCHRONOUS;
+  GLuint disable_GL_DEPTH_CLAMP;
+  GLuint disable_GL_DEPTH_TEST;
+  GLuint disable_GL_DITHER;
+  GLuint disable_GL_FRAMEBUFFER_SRGB;
+  GLuint disable_GL_LINE_SMOOTH;
+  GLuint disable_GL_MULTISAMPLE;
+  GLuint disable_GL_POLYGON_OFFSET_FILL;
+  GLuint disable_GL_POLYGON_OFFSET_LINE;
+  GLuint disable_GL_POLYGON_OFFSET_POINT;
+  GLuint disable_GL_POLYGON_SMOOTH;
+  GLuint disable_GL_PRIMITIVE_RESTART;
+  GLuint disable_GL_PRIMITIVE_RESTART_FIXED_INDEX;
+  GLuint disable_GL_PROGRAM_POINT_SIZE;
+  GLuint disable_GL_RESCALE_NORMAL;
+  GLuint disable_GL_SAMPLE_ALPHA_TO_COVERAGE;
+  GLuint disable_GL_SAMPLE_ALPHA_TO_ONE;
+  GLuint disable_GL_SAMPLE_COVERAGE;
+  GLuint disable_GL_SAMPLE_MASK;
+  GLuint disable_GL_SCISSOR_TEST;
+  GLuint disable_GL_STENCIL_TEST;
+  GLuint disable_GL_TEXTURE_2D;
+  GLuint disable_GL_TEXTURE_CUBE_MAP_SEAMLESS;
 
   bool dummy;
 };

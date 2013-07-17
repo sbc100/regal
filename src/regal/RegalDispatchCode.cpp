@@ -36653,6 +36653,61 @@ static void REGAL_CALL code_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum df
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static GLvoid *REGAL_CALL code_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    GLvoid * _ret = _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    size_t _retIndex = _context->codeOutputNext++;
+    _code << indent << "const GLvoid o" << _retIndex << " = glMapTexture2DINTEL(";
+                   _code << texture;
+    _code << ", "; _code << level;
+    _code << ", "; _code << access;
+    _code << ", "; _code << stride;
+    _code << ", "; _code << layout;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+    return _ret;
+}
+
+static void REGAL_CALL code_glSyncTextureINTEL(GLuint texture)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glSyncTextureINTEL)(texture);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glSyncTextureINTEL(";
+    _code << texture;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUnmapTexture2DINTEL(";
+                   _code << texture;
+    _code << ", "; _code << level;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static void REGAL_CALL code_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -51696,6 +51751,9 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glFramebufferTexture2DMultisampleIMG = code_glFramebufferTexture2DMultisampleIMG;
   tbl.glRenderbufferStorageMultisampleIMG = code_glRenderbufferStorageMultisampleIMG;
   tbl.glBlendFuncSeparateINGR = code_glBlendFuncSeparateINGR;
+  tbl.glMapTexture2DINTEL = code_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = code_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = code_glUnmapTexture2DINTEL;
   tbl.glColorPointervINTEL = code_glColorPointervINTEL;
   tbl.glNormalPointervINTEL = code_glNormalPointervINTEL;
   tbl.glTexCoordPointervINTEL = code_glTexCoordPointervINTEL;

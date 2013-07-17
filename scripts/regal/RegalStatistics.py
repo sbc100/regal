@@ -173,7 +173,7 @@ def versionDeclareCode(apis, args):
   for api in apis:
     for i in api.enums:
       if i.name=='defines':
-        for j in i.enumerants:
+        for j in i.enumerantsByName:
           if getattr(j,'enableCap',False) == True:
             enable  += '  GLuint enable_%s;\n'%(j.name)
             disable += '  GLuint disable_%s;\n'%(j.name)
@@ -241,7 +241,7 @@ def versionLogCode(apis, args):
   for api in apis:
     for i in api.enums:
       if i.name=='defines':
-        for j in i.enumerants:
+        for j in i.enumerantsByName:
           if getattr(j,'enableCap',False) == True:
             enable  += '  log("glEnable(%s)",enable_%s);\n'%(j.name,j.name)
             disable += '  log("glDisable(%s)",disable_%s);\n'%(j.name,j.name)

@@ -2475,6 +2475,12 @@ namespace Trace
 
   void  glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
 
+// GL_INTEL_map_texture
+
+  GLvoid * glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
+  void  glSyncTextureINTEL(GLuint texture);
+  void  glUnmapTexture2DINTEL(GLuint texture, GLint level);
+
 // GL_INTEL_parallel_arrays
 
   void  glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer);
@@ -2722,6 +2728,58 @@ namespace Trace
   void  glProgramBufferParametersIivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLint *params);
   void  glProgramBufferParametersIuivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLuint *params);
   void  glProgramBufferParametersfvNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLfloat *params);
+
+// GL_NV_path_rendering
+
+  void  glCopyPathNV(GLuint resultPath, GLuint srcPath);
+  void  glCoverFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
+  void  glCoverFillPathNV(GLuint path, GLenum coverMode);
+  void  glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
+  void  glCoverStrokePathNV(GLuint name, GLenum coverMode);
+  void  glDeletePathsNV(GLuint path, GLsizei range);
+  GLuint  glGenPathsNV(GLsizei range);
+  void  glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat *value);
+  void  glGetPathColorGenivNV(GLenum color, GLenum pname, GLint *value);
+  void  glGetPathCommandsNV(GLuint name, GLubyte *commands);
+  void  glGetPathCoordsNV(GLuint name, GLfloat *coords);
+  void  glGetPathDashArrayNV(GLuint name, GLfloat *dashArray);
+  GLfloat  glGetPathLengthNV(GLuint path, GLsizei startSegment, GLsizei numSegments);
+  void  glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics);
+  void  glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics);
+  void  glGetPathParameterfvNV(GLuint name, GLenum param, GLfloat *value);
+  void  glGetPathParameterivNV(GLuint name, GLenum param, GLint *value);
+  void  glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing);
+  void  glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GLfloat *value);
+  void  glGetPathTexGenivNV(GLenum texCoordSet, GLenum pname, GLint *value);
+  void  glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight);
+  GLboolean  glIsPathNV(GLuint path);
+  GLboolean  glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y);
+  GLboolean  glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y);
+  void  glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs);
+  void  glPathCommandsNV(GLuint path, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
+  void  glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
+  void  glPathCoverDepthFuncNV(GLenum zfunc);
+  void  glPathDashArrayNV(GLuint path, GLsizei dashCount, const GLfloat *dashArray);
+  void  glPathFogGenNV(GLenum genMode);
+  void  glPathGlyphRangeNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
+  void  glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
+  void  glPathParameterfNV(GLuint path, GLenum pname, GLfloat value);
+  void  glPathParameterfvNV(GLuint path, GLenum pname, const GLfloat *value);
+  void  glPathParameteriNV(GLuint path, GLenum pname, GLint value);
+  void  glPathParameterivNV(GLuint path, GLenum pname, const GLint *value);
+  void  glPathStencilDepthOffsetNV(GLfloat factor, GLfloat units);
+  void  glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask);
+  void  glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString);
+  void  glPathSubCommandsNV(GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
+  void  glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const GLvoid *coords);
+  void  glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs);
+  GLboolean  glPointAlongPathNV(GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY);
+  void  glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues);
+  void  glStencilFillPathNV(GLuint path, GLenum fillMode, GLuint mask);
+  void  glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues);
+  void  glStencilStrokePathNV(GLuint path, GLint reference, GLuint mask);
+  void  glTransformPathNV(GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues);
+  void  glWeightPathsNV(GLuint resultPath, GLsizei numPaths, const GLuint *paths, const GLfloat *weights);
 
 // GL_NV_pixel_data_range
 
@@ -3299,6 +3357,22 @@ namespace Trace
 
 #if REGAL_SYS_WGL
 
+// WGL_3DL_stereo_control
+
+  BOOL  wglSetStereoEmitterState3DL(HDC hDC, UINT uState);
+
+// WGL_AMD_gpu_association
+
+  VOID  wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+  HGLRC  wglCreateAssociatedContextAMD(UINT id);
+  HGLRC  wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int *attribList);
+  BOOL  wglDeleteAssociatedContextAMD(HGLRC hglrc);
+  UINT  wglGetContextGPUIDAMD(HGLRC hglrc);
+  HGLRC  wglGetCurrentAssociatedContextAMD(void);
+  UINT  wglGetGPUIDsAMD(UINT maxCount, UINT *ids);
+  INT  wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void *data);
+  BOOL  wglMakeAssociatedContextCurrentAMD(HGLRC hglrc);
+
 // WGL_ARB_buffer_region
 
   HANDLE  wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType);
@@ -3333,6 +3407,13 @@ namespace Trace
   BOOL  wglReleaseTexImageARB(HPBUFFERARB hPbuffer, int iBuffer);
   BOOL  wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const int *piAttribList);
 
+// WGL_EXT_display_color_table
+
+  GLboolean  wglBindDisplayColorTableEXT(GLushort id);
+  GLboolean  wglCreateDisplayColorTableEXT(GLushort id);
+  VOID  wglDestroyDisplayColorTableEXT(GLushort id);
+  GLboolean  wglLoadDisplayColorTableEXT(const GLushort *table, GLuint length);
+
 // WGL_EXT_extensions_string
 
   const char * wglGetExtensionsStringEXT(void);
@@ -3341,6 +3422,14 @@ namespace Trace
 
   HDC  wglGetCurrentReadDCEXT(void);
   BOOL  wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, HGLRC hglrc);
+
+// WGL_EXT_pbuffer
+
+  HPBUFFEREXT  wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList);
+  BOOL  wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer);
+  HDC  wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer);
+  BOOL  wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue);
+  int  wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC);
 
 // WGL_EXT_pixel_format
 
@@ -3359,10 +3448,121 @@ namespace Trace
   BOOL  wglSetPixelFormat(HDC hDC, int iPixelFormat, const PIXELFORMATDESCRIPTOR *ppfd);
   BOOL  wglSwapBuffers(HDC hDC);
 
+// WGL_I3D_digital_video_control
+
+  BOOL  wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int *piValue);
+  BOOL  wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int *piValue);
+
+// WGL_I3D_gamma
+
+  BOOL  wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue);
+  BOOL  wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int *piValue);
+  BOOL  wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue);
+  BOOL  wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int *piValue);
+
+// WGL_I3D_genlock
+
+  BOOL  wglDisableGenlockI3D(HDC hDC);
+  BOOL  wglEnableGenlockI3D(HDC hDC);
+  BOOL  wglGenlockSampleRateI3D(HDC hDC, UINT uRate);
+  BOOL  wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay);
+  BOOL  wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge);
+  BOOL  wglGenlockSourceI3D(HDC hDC, UINT uSource);
+  BOOL  wglGetGenlockSampleRateI3D(HDC hDC, UINT *uRate);
+  BOOL  wglGetGenlockSourceDelayI3D(HDC hDC, UINT *uDelay);
+  BOOL  wglGetGenlockSourceEdgeI3D(HDC hDC, UINT *uEdge);
+  BOOL  wglGetGenlockSourceI3D(HDC hDC, UINT *uSource);
+  BOOL  wglIsEnabledGenlockI3D(HDC hDC, BOOL *pFlag);
+  BOOL  wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay);
+
+// WGL_I3D_image_buffer
+
+  BOOL  wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count);
+  LPVOID  wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags);
+  BOOL  wglDestroyImageBufferI3D(HDC hDC, LPVOID pAddress);
+  BOOL  wglReleaseImageBufferEventsI3D(HDC hDC, const LPVOID *pAddress, UINT count);
+
+// WGL_I3D_swap_frame_lock
+
+  BOOL  wglDisableFrameLockI3D(void);
+  BOOL  wglEnableFrameLockI3D(void);
+  BOOL  wglIsEnabledFrameLockI3D(BOOL *pFlag);
+  BOOL  wglQueryFrameLockMasterI3D(BOOL *pFlag);
+
+// WGL_I3D_swap_frame_usage
+
+  BOOL  wglBeginFrameTrackingI3D(void);
+  BOOL  wglEndFrameTrackingI3D(void);
+  BOOL  wglGetFrameUsageI3D(float *pUsage);
+  BOOL  wglQueryFrameTrackingI3D(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage);
+
+// WGL_NV_DX_interop
+
+  BOOL  wglDXCloseDeviceNV(HANDLE hDevice);
+  BOOL  wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects);
+  BOOL  wglDXObjectAccessNV(HANDLE hObject, GLenum access);
+  HANDLE  wglDXOpenDeviceNV(GLvoid *dxDevice);
+  HANDLE  wglDXRegisterObjectNV(HANDLE hDevice, GLvoid *dxObject, GLuint name, GLenum type, GLenum access);
+  BOOL  wglDXSetResourceShareHandleNV(GLvoid *dxObject, HANDLE shareHandle);
+  BOOL  wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects);
+  BOOL  wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject);
+
+// WGL_NV_copy_image
+
+  BOOL  wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
+
+// WGL_NV_gpu_affinity
+
+  HDC  wglCreateAffinityDCNV(const HGPUNV *phGpuList);
+  BOOL  wglDeleteDCNV(HDC hAffinityDC);
+  BOOL  wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu);
+  BOOL  wglEnumGpusNV(UINT iGpuIndex, HGPUNV *phGpu);
+
+// WGL_NV_present_video
+
+  BOOL  wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList);
+  int  wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList);
+  BOOL  wglQueryCurrentContextNV(int iAttribute, int *piValue);
+
+// WGL_NV_swap_group
+
+  BOOL  wglBindSwapBarrierNV(GLuint group, GLuint barrier);
+  BOOL  wglJoinSwapGroupNV(HDC hDC, GLuint group);
+  BOOL  wglQueryFrameCountNV(HDC hDC, GLuint *count);
+  BOOL  wglQueryMaxSwapGroupsNV(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers);
+  BOOL  wglQuerySwapGroupNV(HDC hDC, GLuint *group, GLuint *barrier);
+  BOOL  wglResetFrameCountNV(HDC hDC);
+
 // WGL_NV_vertex_array_range
 
   void * wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority);
   void  wglFreeMemoryNV(void *pointer);
+
+// WGL_NV_video_capture
+
+  BOOL  wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice);
+  UINT  wglEnumerateVideoCaptureDevicesNV(HDC hDC, HVIDEOINPUTDEVICENV *phDeviceList);
+  BOOL  wglLockVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice);
+  BOOL  wglQueryVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue);
+  BOOL  wglReleaseVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice);
+
+// WGL_NV_video_output
+
+  BOOL  wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer);
+  BOOL  wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice);
+  BOOL  wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo);
+  BOOL  wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice);
+  BOOL  wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer);
+  BOOL  wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock);
+
+// WGL_OML_sync_control
+
+  BOOL  wglGetMscRateOML(HDC hDC, INT32 *numerator, INT32 *denominator);
+  BOOL  wglGetSyncValuesOML(HDC hDC, INT64 *ust, INT64 *msc, INT64 *sbc);
+  INT64  wglSwapBuffersMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder);
+  INT64  wglSwapLayerBuffersMscOML(HDC hDC, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder);
+  BOOL  wglWaitForMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc);
+  BOOL  wglWaitForSbcOML(HDC hDC, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc);
 
 // WGL_core
 
@@ -3495,6 +3695,11 @@ namespace Trace
 
   void  glXCopyImageSubDataNV(Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
 
+// GLX_NV_present_video
+
+  int  glXBindVideoDeviceNV(Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list);
+  unsigned int * glXEnumerateVideoDevicesNV(Display *dpy, int screen, int *nelements);
+
 // GLX_NV_swap_group
 
   Bool  glXBindSwapBarrierNV(Display *dpy, GLuint group, GLuint barrier);
@@ -3508,6 +3713,23 @@ namespace Trace
 
   void * glXAllocateMemoryNV(GLsizei size, GLfloat readFrequency, GLfloat writeFrequency, GLfloat priority);
   void  glXFreeMemoryNV(void *pointer);
+
+// GLX_NV_video_capture
+
+  int  glXBindVideoCaptureDeviceNV(Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device);
+  GLXVideoCaptureDeviceNV * glXEnumerateVideoCaptureDevicesNV(Display *dpy, int screen, int *nelements);
+  void  glXLockVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device);
+  int  glXQueryVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device, int attribute, int *value);
+  void  glXReleaseVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device);
+
+// GLX_NV_video_output
+
+  int  glXBindVideoImageNV(Display *dpy, GLXVideoDeviceNV VideoDevice, GLXPbuffer pbuf, int iVideoBuffer);
+  int  glXGetVideoDeviceNV(Display *dpy, int screen, int numVideoDevices, GLXVideoDeviceNV *pVideoDevice);
+  int  glXGetVideoInfoNV(Display *dpy, int screen, GLXVideoDeviceNV VideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo);
+  int  glXReleaseVideoDeviceNV(Display *dpy, int screen, GLXVideoDeviceNV VideoDevice);
+  int  glXReleaseVideoImageNV(Display *dpy, GLXPbuffer pbuf);
+  int  glXSendPbufferToVideoNV(Display *dpy, GLXPbuffer pbuf, int iBufferType, unsigned long *pulCounterPbuffer, GLboolean bBlock);
 
 // GLX_OML_sync_control
 
@@ -22948,6 +23170,39 @@ static void REGAL_CALL trace_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum d
   Trace::glBlendFuncSeparateINGR(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL trace_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+  Internal("trace_glMapTexture2DINTEL","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLvoid * ret = Trace::glMapTexture2DINTEL(texture, level, access, stride, layout);
+  return ret;
+}
+
+static void REGAL_CALL trace_glSyncTextureINTEL(GLuint texture)
+{
+  Internal("trace_glSyncTextureINTEL","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glSyncTextureINTEL(texture);
+}
+
+static void REGAL_CALL trace_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+  Internal("trace_glUnmapTexture2DINTEL","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glUnmapTexture2DINTEL(texture, level);
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL trace_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -24844,6 +25099,504 @@ static void REGAL_CALL trace_glProgramBufferParametersfvNV(GLenum target, GLuint
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glProgramBufferParametersfvNV(target, buffer, index, count, params);
+}
+
+// GL_NV_path_rendering
+
+static void REGAL_CALL trace_glCopyPathNV(GLuint resultPath, GLuint srcPath)
+{
+  Internal("trace_glCopyPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glCopyPathNV(resultPath, srcPath);
+}
+
+static void REGAL_CALL trace_glCoverFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
+{
+  Internal("trace_glCoverFillPathInstancedNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues);
+}
+
+static void REGAL_CALL trace_glCoverFillPathNV(GLuint path, GLenum coverMode)
+{
+  Internal("trace_glCoverFillPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glCoverFillPathNV(path, coverMode);
+}
+
+static void REGAL_CALL trace_glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
+{
+  Internal("trace_glCoverStrokePathInstancedNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues);
+}
+
+static void REGAL_CALL trace_glCoverStrokePathNV(GLuint name, GLenum coverMode)
+{
+  Internal("trace_glCoverStrokePathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glCoverStrokePathNV(name, coverMode);
+}
+
+static void REGAL_CALL trace_glDeletePathsNV(GLuint path, GLsizei range)
+{
+  Internal("trace_glDeletePathsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glDeletePathsNV(path, range);
+}
+
+static GLuint REGAL_CALL trace_glGenPathsNV(GLsizei range)
+{
+  Internal("trace_glGenPathsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLuint  ret = Trace::glGenPathsNV(range);
+  return ret;
+}
+
+static void REGAL_CALL trace_glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat *value)
+{
+  Internal("trace_glGetPathColorGenfvNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathColorGenfvNV(color, pname, value);
+}
+
+static void REGAL_CALL trace_glGetPathColorGenivNV(GLenum color, GLenum pname, GLint *value)
+{
+  Internal("trace_glGetPathColorGenivNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathColorGenivNV(color, pname, value);
+}
+
+static void REGAL_CALL trace_glGetPathCommandsNV(GLuint name, GLubyte *commands)
+{
+  Internal("trace_glGetPathCommandsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathCommandsNV(name, commands);
+}
+
+static void REGAL_CALL trace_glGetPathCoordsNV(GLuint name, GLfloat *coords)
+{
+  Internal("trace_glGetPathCoordsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathCoordsNV(name, coords);
+}
+
+static void REGAL_CALL trace_glGetPathDashArrayNV(GLuint name, GLfloat *dashArray)
+{
+  Internal("trace_glGetPathDashArrayNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathDashArrayNV(name, dashArray);
+}
+
+static GLfloat REGAL_CALL trace_glGetPathLengthNV(GLuint path, GLsizei startSegment, GLsizei numSegments)
+{
+  Internal("trace_glGetPathLengthNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLfloat  ret = Trace::glGetPathLengthNV(path, startSegment, numSegments);
+  return ret;
+}
+
+static void REGAL_CALL trace_glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics)
+{
+  Internal("trace_glGetPathMetricRangeNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathMetricRangeNV(metricQueryMask, fistPathName, numPaths, stride, metrics);
+}
+
+static void REGAL_CALL trace_glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics)
+{
+  Internal("trace_glGetPathMetricsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathMetricsNV(metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics);
+}
+
+static void REGAL_CALL trace_glGetPathParameterfvNV(GLuint name, GLenum param, GLfloat *value)
+{
+  Internal("trace_glGetPathParameterfvNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathParameterfvNV(name, param, value);
+}
+
+static void REGAL_CALL trace_glGetPathParameterivNV(GLuint name, GLenum param, GLint *value)
+{
+  Internal("trace_glGetPathParameterivNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathParameterivNV(name, param, value);
+}
+
+static void REGAL_CALL trace_glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing)
+{
+  Internal("trace_glGetPathSpacingNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathSpacingNV(pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale, transformType, returnedSpacing);
+}
+
+static void REGAL_CALL trace_glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GLfloat *value)
+{
+  Internal("trace_glGetPathTexGenfvNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathTexGenfvNV(texCoordSet, pname, value);
+}
+
+static void REGAL_CALL trace_glGetPathTexGenivNV(GLenum texCoordSet, GLenum pname, GLint *value)
+{
+  Internal("trace_glGetPathTexGenivNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPathTexGenivNV(texCoordSet, pname, value);
+}
+
+static void REGAL_CALL trace_glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight)
+{
+  Internal("trace_glInterpolatePathsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glInterpolatePathsNV(resultPath, pathA, pathB, weight);
+}
+
+static GLboolean REGAL_CALL trace_glIsPathNV(GLuint path)
+{
+  Internal("trace_glIsPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glIsPathNV(path);
+  return ret;
+}
+
+static GLboolean REGAL_CALL trace_glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y)
+{
+  Internal("trace_glIsPointInFillPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glIsPointInFillPathNV(path, mask, x, y);
+  return ret;
+}
+
+static GLboolean REGAL_CALL trace_glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y)
+{
+  Internal("trace_glIsPointInStrokePathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glIsPointInStrokePathNV(path, x, y);
+  return ret;
+}
+
+static void REGAL_CALL trace_glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs)
+{
+  Internal("trace_glPathColorGenNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathColorGenNV(color, genMode, colorFormat, coeffs);
+}
+
+static void REGAL_CALL trace_glPathCommandsNV(GLuint path, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+{
+  Internal("trace_glPathCommandsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords);
+}
+
+static void REGAL_CALL trace_glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+{
+  Internal("trace_glPathCoordsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathCoordsNV(path, numCoords, coordType, coords);
+}
+
+static void REGAL_CALL trace_glPathCoverDepthFuncNV(GLenum zfunc)
+{
+  Internal("trace_glPathCoverDepthFuncNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathCoverDepthFuncNV(zfunc);
+}
+
+static void REGAL_CALL trace_glPathDashArrayNV(GLuint path, GLsizei dashCount, const GLfloat *dashArray)
+{
+  Internal("trace_glPathDashArrayNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathDashArrayNV(path, dashCount, dashArray);
+}
+
+static void REGAL_CALL trace_glPathFogGenNV(GLenum genMode)
+{
+  Internal("trace_glPathFogGenNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathFogGenNV(genMode);
+}
+
+static void REGAL_CALL trace_glPathGlyphRangeNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
+{
+  Internal("trace_glPathGlyphRangeNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathGlyphRangeNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale);
+}
+
+static void REGAL_CALL trace_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
+{
+  Internal("trace_glPathGlyphsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathGlyphsNV(firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type, charcodes, handleMissingGlyphs, pathParameterTemplate, emScale);
+}
+
+static void REGAL_CALL trace_glPathParameterfNV(GLuint path, GLenum pname, GLfloat value)
+{
+  Internal("trace_glPathParameterfNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathParameterfNV(path, pname, value);
+}
+
+static void REGAL_CALL trace_glPathParameterfvNV(GLuint path, GLenum pname, const GLfloat *value)
+{
+  Internal("trace_glPathParameterfvNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathParameterfvNV(path, pname, value);
+}
+
+static void REGAL_CALL trace_glPathParameteriNV(GLuint path, GLenum pname, GLint value)
+{
+  Internal("trace_glPathParameteriNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathParameteriNV(path, pname, value);
+}
+
+static void REGAL_CALL trace_glPathParameterivNV(GLuint path, GLenum pname, const GLint *value)
+{
+  Internal("trace_glPathParameterivNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathParameterivNV(path, pname, value);
+}
+
+static void REGAL_CALL trace_glPathStencilDepthOffsetNV(GLfloat factor, GLfloat units)
+{
+  Internal("trace_glPathStencilDepthOffsetNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathStencilDepthOffsetNV(factor, units);
+}
+
+static void REGAL_CALL trace_glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask)
+{
+  Internal("trace_glPathStencilFuncNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathStencilFuncNV(func, ref, mask);
+}
+
+static void REGAL_CALL trace_glPathStringNV(GLuint path, GLenum format, GLsizei length, const GLvoid *pathString)
+{
+  Internal("trace_glPathStringNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathStringNV(path, format, length, pathString);
+}
+
+static void REGAL_CALL trace_glPathSubCommandsNV(GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte *commands, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+{
+  Internal("trace_glPathSubCommandsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathSubCommandsNV(path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords);
+}
+
+static void REGAL_CALL trace_glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
+{
+  Internal("trace_glPathSubCoordsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathSubCoordsNV(path, coordStart, numCoords, coordType, coords);
+}
+
+static void REGAL_CALL trace_glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs)
+{
+  Internal("trace_glPathTexGenNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glPathTexGenNV(texCoordSet, genMode, components, coeffs);
+}
+
+static GLboolean REGAL_CALL trace_glPointAlongPathNV(GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY)
+{
+  Internal("trace_glPointAlongPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glPointAlongPathNV(path, startSegment, numSegments, distance, x, y, tangentX, tangentY);
+  return ret;
+}
+
+static void REGAL_CALL trace_glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues)
+{
+  Internal("trace_glStencilFillPathInstancedNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glStencilFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType, transformValues);
+}
+
+static void REGAL_CALL trace_glStencilFillPathNV(GLuint path, GLenum fillMode, GLuint mask)
+{
+  Internal("trace_glStencilFillPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glStencilFillPathNV(path, fillMode, mask);
+}
+
+static void REGAL_CALL trace_glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues)
+{
+  Internal("trace_glStencilStrokePathInstancedNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glStencilStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, transformType, transformValues);
+}
+
+static void REGAL_CALL trace_glStencilStrokePathNV(GLuint path, GLint reference, GLuint mask)
+{
+  Internal("trace_glStencilStrokePathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glStencilStrokePathNV(path, reference, mask);
+}
+
+static void REGAL_CALL trace_glTransformPathNV(GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues)
+{
+  Internal("trace_glTransformPathNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glTransformPathNV(resultPath, srcPath, transformType, transformValues);
+}
+
+static void REGAL_CALL trace_glWeightPathsNV(GLuint resultPath, GLsizei numPaths, const GLuint *paths, const GLfloat *weights)
+{
+  Internal("trace_glWeightPathsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glWeightPathsNV(resultPath, numPaths, paths, weights);
 }
 
 // GL_NV_pixel_data_range
@@ -28983,6 +29736,109 @@ static void REGAL_CALL trace_glAddSwapHintRectWIN(GLint x, GLint y, GLsizei widt
 
 #if REGAL_SYS_WGL
 
+// WGL_3DL_stereo_control
+
+static BOOL REGAL_CALL trace_wglSetStereoEmitterState3DL(HDC hDC, UINT uState)
+{
+  Internal("trace_wglSetStereoEmitterState3DL","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglSetStereoEmitterState3DL(hDC, uState);
+  return ret;
+}
+
+// WGL_AMD_gpu_association
+
+static VOID REGAL_CALL trace_wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+{
+  Internal("trace_wglBlitContextFramebufferAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  Trace::wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+
+static HGLRC REGAL_CALL trace_wglCreateAssociatedContextAMD(UINT id)
+{
+  Internal("trace_wglCreateAssociatedContextAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HGLRC  ret = Trace::wglCreateAssociatedContextAMD(id);
+  return ret;
+}
+
+static HGLRC REGAL_CALL trace_wglCreateAssociatedContextAttribsAMD(UINT id, HGLRC hShareContext, const int *attribList)
+{
+  Internal("trace_wglCreateAssociatedContextAttribsAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HGLRC  ret = Trace::wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDeleteAssociatedContextAMD(HGLRC hglrc)
+{
+  Internal("trace_wglDeleteAssociatedContextAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDeleteAssociatedContextAMD(hglrc);
+  return ret;
+}
+
+static UINT REGAL_CALL trace_wglGetContextGPUIDAMD(HGLRC hglrc)
+{
+  Internal("trace_wglGetContextGPUIDAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  UINT  ret = Trace::wglGetContextGPUIDAMD(hglrc);
+  return ret;
+}
+
+static HGLRC REGAL_CALL trace_wglGetCurrentAssociatedContextAMD(void)
+{
+  Internal("trace_wglGetCurrentAssociatedContextAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HGLRC  ret = Trace::wglGetCurrentAssociatedContextAMD();
+  return ret;
+}
+
+static UINT REGAL_CALL trace_wglGetGPUIDsAMD(UINT maxCount, UINT *ids)
+{
+  Internal("trace_wglGetGPUIDsAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  UINT  ret = Trace::wglGetGPUIDsAMD(maxCount, ids);
+  return ret;
+}
+
+static INT REGAL_CALL trace_wglGetGPUInfoAMD(UINT id, int property, GLenum dataType, UINT size, void *data)
+{
+  Internal("trace_wglGetGPUInfoAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  INT  ret = Trace::wglGetGPUInfoAMD(id, property, dataType, size, data);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglMakeAssociatedContextCurrentAMD(HGLRC hglrc)
+{
+  Internal("trace_wglMakeAssociatedContextCurrentAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglMakeAssociatedContextCurrentAMD(hglrc);
+  return ret;
+}
+
 // WGL_ARB_buffer_region
 
 static HANDLE REGAL_CALL trace_wglCreateBufferRegionARB(HDC hDC, int iLayerPlane, UINT uType)
@@ -29154,6 +30010,47 @@ static BOOL REGAL_CALL trace_wglSetPbufferAttribARB(HPBUFFERARB hPbuffer, const 
   return ret;
 }
 
+// WGL_EXT_display_color_table
+
+static GLboolean REGAL_CALL trace_wglBindDisplayColorTableEXT(GLushort id)
+{
+  Internal("trace_wglBindDisplayColorTableEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  GLboolean  ret = Trace::wglBindDisplayColorTableEXT(id);
+  return ret;
+}
+
+static GLboolean REGAL_CALL trace_wglCreateDisplayColorTableEXT(GLushort id)
+{
+  Internal("trace_wglCreateDisplayColorTableEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  GLboolean  ret = Trace::wglCreateDisplayColorTableEXT(id);
+  return ret;
+}
+
+static VOID REGAL_CALL trace_wglDestroyDisplayColorTableEXT(GLushort id)
+{
+  Internal("trace_wglDestroyDisplayColorTableEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  Trace::wglDestroyDisplayColorTableEXT(id);
+}
+
+static GLboolean REGAL_CALL trace_wglLoadDisplayColorTableEXT(const GLushort *table, GLuint length)
+{
+  Internal("trace_wglLoadDisplayColorTableEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  GLboolean  ret = Trace::wglLoadDisplayColorTableEXT(table, length);
+  return ret;
+}
+
 // WGL_EXT_extensions_string
 
 static const char *REGAL_CALL trace_wglGetExtensionsStringEXT(void)
@@ -29185,6 +30082,58 @@ static BOOL REGAL_CALL trace_wglMakeContextCurrentEXT(HDC hDrawDC, HDC hReadDC, 
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   BOOL  ret = Trace::wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc);
+  return ret;
+}
+
+// WGL_EXT_pbuffer
+
+static HPBUFFEREXT REGAL_CALL trace_wglCreatePbufferEXT(HDC hDC, int iPixelFormat, int iWidth, int iHeight, const int *piAttribList)
+{
+  Internal("trace_wglCreatePbufferEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HPBUFFEREXT  ret = Trace::wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDestroyPbufferEXT(HPBUFFEREXT hPbuffer)
+{
+  Internal("trace_wglDestroyPbufferEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDestroyPbufferEXT(hPbuffer);
+  return ret;
+}
+
+static HDC REGAL_CALL trace_wglGetPbufferDCEXT(HPBUFFEREXT hPbuffer)
+{
+  Internal("trace_wglGetPbufferDCEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HDC  ret = Trace::wglGetPbufferDCEXT(hPbuffer);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryPbufferEXT(HPBUFFEREXT hPbuffer, int iAttribute, int *piValue)
+{
+  Internal("trace_wglQueryPbufferEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
+  return ret;
+}
+
+static int REGAL_CALL trace_wglReleasePbufferDCEXT(HPBUFFEREXT hPbuffer, HDC hDC)
+{
+  Internal("trace_wglReleasePbufferDCEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::wglReleasePbufferDCEXT(hPbuffer, hDC);
   return ret;
 }
 
@@ -29274,6 +30223,548 @@ static BOOL REGAL_CALL trace_wglSwapBuffers(HDC hDC)
   return ret;
 }
 
+// WGL_I3D_digital_video_control
+
+static BOOL REGAL_CALL trace_wglGetDigitalVideoParametersI3D(HDC hDC, int iAttribute, int *piValue)
+{
+  Internal("trace_wglGetDigitalVideoParametersI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglSetDigitalVideoParametersI3D(HDC hDC, int iAttribute, const int *piValue)
+{
+  Internal("trace_wglSetDigitalVideoParametersI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue);
+  return ret;
+}
+
+// WGL_I3D_gamma
+
+static BOOL REGAL_CALL trace_wglGetGammaTableI3D(HDC hDC, int iEntries, USHORT *puRed, USHORT *puGreen, USHORT *puBlue)
+{
+  Internal("trace_wglGetGammaTableI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetGammaTableParametersI3D(HDC hDC, int iAttribute, int *piValue)
+{
+  Internal("trace_wglGetGammaTableParametersI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetGammaTableParametersI3D(hDC, iAttribute, piValue);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglSetGammaTableI3D(HDC hDC, int iEntries, const USHORT *puRed, const USHORT *puGreen, const USHORT *puBlue)
+{
+  Internal("trace_wglSetGammaTableI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglSetGammaTableParametersI3D(HDC hDC, int iAttribute, const int *piValue)
+{
+  Internal("trace_wglSetGammaTableParametersI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglSetGammaTableParametersI3D(hDC, iAttribute, piValue);
+  return ret;
+}
+
+// WGL_I3D_genlock
+
+static BOOL REGAL_CALL trace_wglDisableGenlockI3D(HDC hDC)
+{
+  Internal("trace_wglDisableGenlockI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDisableGenlockI3D(hDC);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglEnableGenlockI3D(HDC hDC)
+{
+  Internal("trace_wglEnableGenlockI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglEnableGenlockI3D(hDC);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGenlockSampleRateI3D(HDC hDC, UINT uRate)
+{
+  Internal("trace_wglGenlockSampleRateI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGenlockSampleRateI3D(hDC, uRate);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGenlockSourceDelayI3D(HDC hDC, UINT uDelay)
+{
+  Internal("trace_wglGenlockSourceDelayI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGenlockSourceDelayI3D(hDC, uDelay);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGenlockSourceEdgeI3D(HDC hDC, UINT uEdge)
+{
+  Internal("trace_wglGenlockSourceEdgeI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGenlockSourceEdgeI3D(hDC, uEdge);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGenlockSourceI3D(HDC hDC, UINT uSource)
+{
+  Internal("trace_wglGenlockSourceI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGenlockSourceI3D(hDC, uSource);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetGenlockSampleRateI3D(HDC hDC, UINT *uRate)
+{
+  Internal("trace_wglGetGenlockSampleRateI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetGenlockSampleRateI3D(hDC, uRate);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetGenlockSourceDelayI3D(HDC hDC, UINT *uDelay)
+{
+  Internal("trace_wglGetGenlockSourceDelayI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetGenlockSourceDelayI3D(hDC, uDelay);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetGenlockSourceEdgeI3D(HDC hDC, UINT *uEdge)
+{
+  Internal("trace_wglGetGenlockSourceEdgeI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetGenlockSourceEdgeI3D(hDC, uEdge);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetGenlockSourceI3D(HDC hDC, UINT *uSource)
+{
+  Internal("trace_wglGetGenlockSourceI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetGenlockSourceI3D(hDC, uSource);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglIsEnabledGenlockI3D(HDC hDC, BOOL *pFlag)
+{
+  Internal("trace_wglIsEnabledGenlockI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglIsEnabledGenlockI3D(hDC, pFlag);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryGenlockMaxSourceDelayI3D(HDC hDC, UINT *uMaxLineDelay, UINT *uMaxPixelDelay)
+{
+  Internal("trace_wglQueryGenlockMaxSourceDelayI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay);
+  return ret;
+}
+
+// WGL_I3D_image_buffer
+
+static BOOL REGAL_CALL trace_wglAssociateImageBufferEventsI3D(HDC hDC, const HANDLE *pEvent, const LPVOID *pAddress, const DWORD *pSize, UINT count)
+{
+  Internal("trace_wglAssociateImageBufferEventsI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count);
+  return ret;
+}
+
+static LPVOID REGAL_CALL trace_wglCreateImageBufferI3D(HDC hDC, DWORD dwSize, UINT uFlags)
+{
+  Internal("trace_wglCreateImageBufferI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  LPVOID  ret = Trace::wglCreateImageBufferI3D(hDC, dwSize, uFlags);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDestroyImageBufferI3D(HDC hDC, LPVOID pAddress)
+{
+  Internal("trace_wglDestroyImageBufferI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDestroyImageBufferI3D(hDC, pAddress);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglReleaseImageBufferEventsI3D(HDC hDC, const LPVOID *pAddress, UINT count)
+{
+  Internal("trace_wglReleaseImageBufferEventsI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglReleaseImageBufferEventsI3D(hDC, pAddress, count);
+  return ret;
+}
+
+// WGL_I3D_swap_frame_lock
+
+static BOOL REGAL_CALL trace_wglDisableFrameLockI3D(void)
+{
+  Internal("trace_wglDisableFrameLockI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDisableFrameLockI3D();
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglEnableFrameLockI3D(void)
+{
+  Internal("trace_wglEnableFrameLockI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglEnableFrameLockI3D();
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglIsEnabledFrameLockI3D(BOOL *pFlag)
+{
+  Internal("trace_wglIsEnabledFrameLockI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglIsEnabledFrameLockI3D(pFlag);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryFrameLockMasterI3D(BOOL *pFlag)
+{
+  Internal("trace_wglQueryFrameLockMasterI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryFrameLockMasterI3D(pFlag);
+  return ret;
+}
+
+// WGL_I3D_swap_frame_usage
+
+static BOOL REGAL_CALL trace_wglBeginFrameTrackingI3D(void)
+{
+  Internal("trace_wglBeginFrameTrackingI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglBeginFrameTrackingI3D();
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglEndFrameTrackingI3D(void)
+{
+  Internal("trace_wglEndFrameTrackingI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglEndFrameTrackingI3D();
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetFrameUsageI3D(float *pUsage)
+{
+  Internal("trace_wglGetFrameUsageI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetFrameUsageI3D(pUsage);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryFrameTrackingI3D(DWORD *pFrameCount, DWORD *pMissedFrames, float *pLastMissedUsage)
+{
+  Internal("trace_wglQueryFrameTrackingI3D","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage);
+  return ret;
+}
+
+// WGL_NV_DX_interop
+
+static BOOL REGAL_CALL trace_wglDXCloseDeviceNV(HANDLE hDevice)
+{
+  Internal("trace_wglDXCloseDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDXCloseDeviceNV(hDevice);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDXLockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects)
+{
+  Internal("trace_wglDXLockObjectsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDXLockObjectsNV(hDevice, count, hObjects);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDXObjectAccessNV(HANDLE hObject, GLenum access)
+{
+  Internal("trace_wglDXObjectAccessNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDXObjectAccessNV(hObject, access);
+  return ret;
+}
+
+static HANDLE REGAL_CALL trace_wglDXOpenDeviceNV(GLvoid *dxDevice)
+{
+  Internal("trace_wglDXOpenDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HANDLE  ret = Trace::wglDXOpenDeviceNV(dxDevice);
+  return ret;
+}
+
+static HANDLE REGAL_CALL trace_wglDXRegisterObjectNV(HANDLE hDevice, GLvoid *dxObject, GLuint name, GLenum type, GLenum access)
+{
+  Internal("trace_wglDXRegisterObjectNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HANDLE  ret = Trace::wglDXRegisterObjectNV(hDevice, dxObject, name, type, access);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDXSetResourceShareHandleNV(GLvoid *dxObject, HANDLE shareHandle)
+{
+  Internal("trace_wglDXSetResourceShareHandleNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDXSetResourceShareHandleNV(dxObject, shareHandle);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDXUnlockObjectsNV(HANDLE hDevice, GLint count, HANDLE *hObjects)
+{
+  Internal("trace_wglDXUnlockObjectsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDXUnlockObjectsNV(hDevice, count, hObjects);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDXUnregisterObjectNV(HANDLE hDevice, HANDLE hObject)
+{
+  Internal("trace_wglDXUnregisterObjectNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDXUnregisterObjectNV(hDevice, hObject);
+  return ret;
+}
+
+// WGL_NV_copy_image
+
+static BOOL REGAL_CALL trace_wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
+{
+  Internal("trace_wglCopyImageSubDataNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
+  return ret;
+}
+
+// WGL_NV_gpu_affinity
+
+static HDC REGAL_CALL trace_wglCreateAffinityDCNV(const HGPUNV *phGpuList)
+{
+  Internal("trace_wglCreateAffinityDCNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  HDC  ret = Trace::wglCreateAffinityDCNV(phGpuList);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglDeleteDCNV(HDC hAffinityDC)
+{
+  Internal("trace_wglDeleteDCNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglDeleteDCNV(hAffinityDC);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglEnumGpusFromAffinityDCNV(HDC hAffinityDC, UINT iGpuIndex, HGPUNV *hGpu)
+{
+  Internal("trace_wglEnumGpusFromAffinityDCNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglEnumGpusNV(UINT iGpuIndex, HGPUNV *phGpu)
+{
+  Internal("trace_wglEnumGpusNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglEnumGpusNV(iGpuIndex, phGpu);
+  return ret;
+}
+
+// WGL_NV_present_video
+
+static BOOL REGAL_CALL trace_wglBindVideoDeviceNV(HDC hDC, unsigned int uVideoSlot, HVIDEOOUTPUTDEVICENV hVideoDevice, const int *piAttribList)
+{
+  Internal("trace_wglBindVideoDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglBindVideoDeviceNV(hDC, uVideoSlot, hVideoDevice, piAttribList);
+  return ret;
+}
+
+static int REGAL_CALL trace_wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPUTDEVICENV *phDeviceList)
+{
+  Internal("trace_wglEnumerateVideoDevicesNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::wglEnumerateVideoDevicesNV(hDC, phDeviceList);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryCurrentContextNV(int iAttribute, int *piValue)
+{
+  Internal("trace_wglQueryCurrentContextNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryCurrentContextNV(iAttribute, piValue);
+  return ret;
+}
+
+// WGL_NV_swap_group
+
+static BOOL REGAL_CALL trace_wglBindSwapBarrierNV(GLuint group, GLuint barrier)
+{
+  Internal("trace_wglBindSwapBarrierNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglBindSwapBarrierNV(group, barrier);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglJoinSwapGroupNV(HDC hDC, GLuint group)
+{
+  Internal("trace_wglJoinSwapGroupNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglJoinSwapGroupNV(hDC, group);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryFrameCountNV(HDC hDC, GLuint *count)
+{
+  Internal("trace_wglQueryFrameCountNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryFrameCountNV(hDC, count);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryMaxSwapGroupsNV(HDC hDC, GLuint *maxGroups, GLuint *maxBarriers)
+{
+  Internal("trace_wglQueryMaxSwapGroupsNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQuerySwapGroupNV(HDC hDC, GLuint *group, GLuint *barrier)
+{
+  Internal("trace_wglQuerySwapGroupNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQuerySwapGroupNV(hDC, group, barrier);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglResetFrameCountNV(HDC hDC)
+{
+  Internal("trace_wglResetFrameCountNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglResetFrameCountNV(hDC);
+  return ret;
+}
+
 // WGL_NV_vertex_array_range
 
 static void *REGAL_CALL trace_wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)
@@ -29293,6 +30784,182 @@ static void REGAL_CALL trace_wglFreeMemoryNV(void *pointer)
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::wglFreeMemoryNV(pointer);
+}
+
+// WGL_NV_video_capture
+
+static BOOL REGAL_CALL trace_wglBindVideoCaptureDeviceNV(UINT uVideoSlot, HVIDEOINPUTDEVICENV hDevice)
+{
+  Internal("trace_wglBindVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice);
+  return ret;
+}
+
+static UINT REGAL_CALL trace_wglEnumerateVideoCaptureDevicesNV(HDC hDC, HVIDEOINPUTDEVICENV *phDeviceList)
+{
+  Internal("trace_wglEnumerateVideoCaptureDevicesNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  UINT  ret = Trace::wglEnumerateVideoCaptureDevicesNV(hDC, phDeviceList);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglLockVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice)
+{
+  Internal("trace_wglLockVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglLockVideoCaptureDeviceNV(hDC, hDevice);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglQueryVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice, int iAttribute, int *piValue)
+{
+  Internal("trace_wglQueryVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglQueryVideoCaptureDeviceNV(hDC, hDevice, iAttribute, piValue);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglReleaseVideoCaptureDeviceNV(HDC hDC, HVIDEOINPUTDEVICENV hDevice)
+{
+  Internal("trace_wglReleaseVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglReleaseVideoCaptureDeviceNV(hDC, hDevice);
+  return ret;
+}
+
+// WGL_NV_video_output
+
+static BOOL REGAL_CALL trace_wglBindVideoImageNV(HPVIDEODEV hVideoDevice, HPBUFFERARB hPbuffer, int iVideoBuffer)
+{
+  Internal("trace_wglBindVideoImageNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetVideoDeviceNV(HDC hDC, int numDevices, HPVIDEODEV *hVideoDevice)
+{
+  Internal("trace_wglGetVideoDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetVideoInfoNV(HPVIDEODEV hpVideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo)
+{
+  Internal("trace_wglGetVideoInfoNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglReleaseVideoDeviceNV(HPVIDEODEV hVideoDevice)
+{
+  Internal("trace_wglReleaseVideoDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglReleaseVideoDeviceNV(hVideoDevice);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglReleaseVideoImageNV(HPBUFFERARB hPbuffer, int iVideoBuffer)
+{
+  Internal("trace_wglReleaseVideoImageNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglReleaseVideoImageNV(hPbuffer, iVideoBuffer);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglSendPbufferToVideoNV(HPBUFFERARB hPbuffer, int iBufferType, unsigned long *pulCounterPbuffer, BOOL bBlock)
+{
+  Internal("trace_wglSendPbufferToVideoNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock);
+  return ret;
+}
+
+// WGL_OML_sync_control
+
+static BOOL REGAL_CALL trace_wglGetMscRateOML(HDC hDC, INT32 *numerator, INT32 *denominator)
+{
+  Internal("trace_wglGetMscRateOML","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetMscRateOML(hDC, numerator, denominator);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglGetSyncValuesOML(HDC hDC, INT64 *ust, INT64 *msc, INT64 *sbc)
+{
+  Internal("trace_wglGetSyncValuesOML","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglGetSyncValuesOML(hDC, ust, msc, sbc);
+  return ret;
+}
+
+static INT64 REGAL_CALL trace_wglSwapBuffersMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder)
+{
+  Internal("trace_wglSwapBuffersMscOML","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  INT64  ret = Trace::wglSwapBuffersMscOML(hDC, target_msc, divisor, remainder);
+  return ret;
+}
+
+static INT64 REGAL_CALL trace_wglSwapLayerBuffersMscOML(HDC hDC, int fuPlanes, INT64 target_msc, INT64 divisor, INT64 remainder)
+{
+  Internal("trace_wglSwapLayerBuffersMscOML","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  INT64  ret = Trace::wglSwapLayerBuffersMscOML(hDC, fuPlanes, target_msc, divisor, remainder);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglWaitForMscOML(HDC hDC, INT64 target_msc, INT64 divisor, INT64 remainder, INT64 *ust, INT64 *msc, INT64 *sbc)
+{
+  Internal("trace_wglWaitForMscOML","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglWaitForMscOML(hDC, target_msc, divisor, remainder, ust, msc, sbc);
+  return ret;
+}
+
+static BOOL REGAL_CALL trace_wglWaitForSbcOML(HDC hDC, INT64 target_sbc, INT64 *ust, INT64 *msc, INT64 *sbc)
+{
+  Internal("trace_wglWaitForSbcOML","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  BOOL  ret = Trace::wglWaitForSbcOML(hDC, target_sbc, ust, msc, sbc);
+  return ret;
 }
 
 // WGL_core
@@ -30056,6 +31723,28 @@ static void REGAL_CALL trace_glXCopyImageSubDataNV(Display *dpy, GLXContext srcC
   Trace::glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth);
 }
 
+// GLX_NV_present_video
+
+static int REGAL_CALL trace_glXBindVideoDeviceNV(Display *dpy, unsigned int video_slot, unsigned int video_device, const int *attrib_list)
+{
+  Internal("trace_glXBindVideoDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list);
+  return ret;
+}
+
+static unsigned int *REGAL_CALL trace_glXEnumerateVideoDevicesNV(Display *dpy, int screen, int *nelements)
+{
+  Internal("trace_glXEnumerateVideoDevicesNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  unsigned int * ret = Trace::glXEnumerateVideoDevicesNV(dpy, screen, nelements);
+  return ret;
+}
+
 // GLX_NV_swap_group
 
 static Bool REGAL_CALL trace_glXBindSwapBarrierNV(Display *dpy, GLuint group, GLuint barrier)
@@ -30137,6 +31826,118 @@ static void REGAL_CALL trace_glXFreeMemoryNV(void *pointer)
   Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
   _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
   Trace::glXFreeMemoryNV(pointer);
+}
+
+// GLX_NV_video_capture
+
+static int REGAL_CALL trace_glXBindVideoCaptureDeviceNV(Display *dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device)
+{
+  Internal("trace_glXBindVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device);
+  return ret;
+}
+
+static GLXVideoCaptureDeviceNV *REGAL_CALL trace_glXEnumerateVideoCaptureDevicesNV(Display *dpy, int screen, int *nelements)
+{
+  Internal("trace_glXEnumerateVideoCaptureDevicesNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  GLXVideoCaptureDeviceNV * ret = Trace::glXEnumerateVideoCaptureDevicesNV(dpy, screen, nelements);
+  return ret;
+}
+
+static void REGAL_CALL trace_glXLockVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device)
+{
+  Internal("trace_glXLockVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  Trace::glXLockVideoCaptureDeviceNV(dpy, device);
+}
+
+static int REGAL_CALL trace_glXQueryVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device, int attribute, int *value)
+{
+  Internal("trace_glXQueryVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value);
+  return ret;
+}
+
+static void REGAL_CALL trace_glXReleaseVideoCaptureDeviceNV(Display *dpy, GLXVideoCaptureDeviceNV device)
+{
+  Internal("trace_glXReleaseVideoCaptureDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  Trace::glXReleaseVideoCaptureDeviceNV(dpy, device);
+}
+
+// GLX_NV_video_output
+
+static int REGAL_CALL trace_glXBindVideoImageNV(Display *dpy, GLXVideoDeviceNV VideoDevice, GLXPbuffer pbuf, int iVideoBuffer)
+{
+  Internal("trace_glXBindVideoImageNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer);
+  return ret;
+}
+
+static int REGAL_CALL trace_glXGetVideoDeviceNV(Display *dpy, int screen, int numVideoDevices, GLXVideoDeviceNV *pVideoDevice)
+{
+  Internal("trace_glXGetVideoDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice);
+  return ret;
+}
+
+static int REGAL_CALL trace_glXGetVideoInfoNV(Display *dpy, int screen, GLXVideoDeviceNV VideoDevice, unsigned long *pulCounterOutputPbuffer, unsigned long *pulCounterOutputVideo)
+{
+  Internal("trace_glXGetVideoInfoNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo);
+  return ret;
+}
+
+static int REGAL_CALL trace_glXReleaseVideoDeviceNV(Display *dpy, int screen, GLXVideoDeviceNV VideoDevice)
+{
+  Internal("trace_glXReleaseVideoDeviceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXReleaseVideoDeviceNV(dpy, screen, VideoDevice);
+  return ret;
+}
+
+static int REGAL_CALL trace_glXReleaseVideoImageNV(Display *dpy, GLXPbuffer pbuf)
+{
+  Internal("trace_glXReleaseVideoImageNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXReleaseVideoImageNV(dpy, pbuf);
+  return ret;
+}
+
+static int REGAL_CALL trace_glXSendPbufferToVideoNV(Display *dpy, GLXPbuffer pbuf, int iBufferType, unsigned long *pulCounterPbuffer, GLboolean bBlock)
+{
+  Internal("trace_glXSendPbufferToVideoNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  Push<DispatchTableGlobal *> _push(_instance.nextDispatchTableGlobal);
+  _instance.nextDispatchTableGlobal = dispatcherGlobal.trace.next();
+  int  ret = Trace::glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock);
+  return ret;
 }
 
 // GLX_OML_sync_control
@@ -33944,6 +35745,12 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
 
   tbl.glBlendFuncSeparateINGR = trace_glBlendFuncSeparateINGR;
 
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = trace_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = trace_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = trace_glUnmapTexture2DINTEL;
+
   // GL_INTEL_parallel_arrays
 
   tbl.glColorPointervINTEL = trace_glColorPointervINTEL;
@@ -34191,6 +35998,58 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glProgramBufferParametersIivNV = trace_glProgramBufferParametersIivNV;
   tbl.glProgramBufferParametersIuivNV = trace_glProgramBufferParametersIuivNV;
   tbl.glProgramBufferParametersfvNV = trace_glProgramBufferParametersfvNV;
+
+  // GL_NV_path_rendering
+
+  tbl.glCopyPathNV = trace_glCopyPathNV;
+  tbl.glCoverFillPathInstancedNV = trace_glCoverFillPathInstancedNV;
+  tbl.glCoverFillPathNV = trace_glCoverFillPathNV;
+  tbl.glCoverStrokePathInstancedNV = trace_glCoverStrokePathInstancedNV;
+  tbl.glCoverStrokePathNV = trace_glCoverStrokePathNV;
+  tbl.glDeletePathsNV = trace_glDeletePathsNV;
+  tbl.glGenPathsNV = trace_glGenPathsNV;
+  tbl.glGetPathColorGenfvNV = trace_glGetPathColorGenfvNV;
+  tbl.glGetPathColorGenivNV = trace_glGetPathColorGenivNV;
+  tbl.glGetPathCommandsNV = trace_glGetPathCommandsNV;
+  tbl.glGetPathCoordsNV = trace_glGetPathCoordsNV;
+  tbl.glGetPathDashArrayNV = trace_glGetPathDashArrayNV;
+  tbl.glGetPathLengthNV = trace_glGetPathLengthNV;
+  tbl.glGetPathMetricRangeNV = trace_glGetPathMetricRangeNV;
+  tbl.glGetPathMetricsNV = trace_glGetPathMetricsNV;
+  tbl.glGetPathParameterfvNV = trace_glGetPathParameterfvNV;
+  tbl.glGetPathParameterivNV = trace_glGetPathParameterivNV;
+  tbl.glGetPathSpacingNV = trace_glGetPathSpacingNV;
+  tbl.glGetPathTexGenfvNV = trace_glGetPathTexGenfvNV;
+  tbl.glGetPathTexGenivNV = trace_glGetPathTexGenivNV;
+  tbl.glInterpolatePathsNV = trace_glInterpolatePathsNV;
+  tbl.glIsPathNV = trace_glIsPathNV;
+  tbl.glIsPointInFillPathNV = trace_glIsPointInFillPathNV;
+  tbl.glIsPointInStrokePathNV = trace_glIsPointInStrokePathNV;
+  tbl.glPathColorGenNV = trace_glPathColorGenNV;
+  tbl.glPathCommandsNV = trace_glPathCommandsNV;
+  tbl.glPathCoordsNV = trace_glPathCoordsNV;
+  tbl.glPathCoverDepthFuncNV = trace_glPathCoverDepthFuncNV;
+  tbl.glPathDashArrayNV = trace_glPathDashArrayNV;
+  tbl.glPathFogGenNV = trace_glPathFogGenNV;
+  tbl.glPathGlyphRangeNV = trace_glPathGlyphRangeNV;
+  tbl.glPathGlyphsNV = trace_glPathGlyphsNV;
+  tbl.glPathParameterfNV = trace_glPathParameterfNV;
+  tbl.glPathParameterfvNV = trace_glPathParameterfvNV;
+  tbl.glPathParameteriNV = trace_glPathParameteriNV;
+  tbl.glPathParameterivNV = trace_glPathParameterivNV;
+  tbl.glPathStencilDepthOffsetNV = trace_glPathStencilDepthOffsetNV;
+  tbl.glPathStencilFuncNV = trace_glPathStencilFuncNV;
+  tbl.glPathStringNV = trace_glPathStringNV;
+  tbl.glPathSubCommandsNV = trace_glPathSubCommandsNV;
+  tbl.glPathSubCoordsNV = trace_glPathSubCoordsNV;
+  tbl.glPathTexGenNV = trace_glPathTexGenNV;
+  tbl.glPointAlongPathNV = trace_glPointAlongPathNV;
+  tbl.glStencilFillPathInstancedNV = trace_glStencilFillPathInstancedNV;
+  tbl.glStencilFillPathNV = trace_glStencilFillPathNV;
+  tbl.glStencilStrokePathInstancedNV = trace_glStencilStrokePathInstancedNV;
+  tbl.glStencilStrokePathNV = trace_glStencilStrokePathNV;
+  tbl.glTransformPathNV = trace_glTransformPathNV;
+  tbl.glWeightPathsNV = trace_glWeightPathsNV;
 
   // GL_NV_pixel_data_range
 
@@ -34772,6 +36631,22 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
 {
 
 #if REGAL_SYS_WGL
+  // WGL_3DL_stereo_control
+
+  tbl.wglSetStereoEmitterState3DL = trace_wglSetStereoEmitterState3DL;
+
+  // WGL_AMD_gpu_association
+
+  tbl.wglBlitContextFramebufferAMD = trace_wglBlitContextFramebufferAMD;
+  tbl.wglCreateAssociatedContextAMD = trace_wglCreateAssociatedContextAMD;
+  tbl.wglCreateAssociatedContextAttribsAMD = trace_wglCreateAssociatedContextAttribsAMD;
+  tbl.wglDeleteAssociatedContextAMD = trace_wglDeleteAssociatedContextAMD;
+  tbl.wglGetContextGPUIDAMD = trace_wglGetContextGPUIDAMD;
+  tbl.wglGetCurrentAssociatedContextAMD = trace_wglGetCurrentAssociatedContextAMD;
+  tbl.wglGetGPUIDsAMD = trace_wglGetGPUIDsAMD;
+  tbl.wglGetGPUInfoAMD = trace_wglGetGPUInfoAMD;
+  tbl.wglMakeAssociatedContextCurrentAMD = trace_wglMakeAssociatedContextCurrentAMD;
+
   // WGL_ARB_buffer_region
 
   tbl.wglCreateBufferRegionARB = trace_wglCreateBufferRegionARB;
@@ -34806,6 +36681,13 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
   tbl.wglReleaseTexImageARB = trace_wglReleaseTexImageARB;
   tbl.wglSetPbufferAttribARB = trace_wglSetPbufferAttribARB;
 
+  // WGL_EXT_display_color_table
+
+  tbl.wglBindDisplayColorTableEXT = trace_wglBindDisplayColorTableEXT;
+  tbl.wglCreateDisplayColorTableEXT = trace_wglCreateDisplayColorTableEXT;
+  tbl.wglDestroyDisplayColorTableEXT = trace_wglDestroyDisplayColorTableEXT;
+  tbl.wglLoadDisplayColorTableEXT = trace_wglLoadDisplayColorTableEXT;
+
   // WGL_EXT_extensions_string
 
   tbl.wglGetExtensionsStringEXT = trace_wglGetExtensionsStringEXT;
@@ -34814,6 +36696,14 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
 
   tbl.wglGetCurrentReadDCEXT = trace_wglGetCurrentReadDCEXT;
   tbl.wglMakeContextCurrentEXT = trace_wglMakeContextCurrentEXT;
+
+  // WGL_EXT_pbuffer
+
+  tbl.wglCreatePbufferEXT = trace_wglCreatePbufferEXT;
+  tbl.wglDestroyPbufferEXT = trace_wglDestroyPbufferEXT;
+  tbl.wglGetPbufferDCEXT = trace_wglGetPbufferDCEXT;
+  tbl.wglQueryPbufferEXT = trace_wglQueryPbufferEXT;
+  tbl.wglReleasePbufferDCEXT = trace_wglReleasePbufferDCEXT;
 
   // WGL_EXT_pixel_format
 
@@ -34832,10 +36722,121 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
   tbl.wglSetPixelFormat = trace_wglSetPixelFormat;
   tbl.wglSwapBuffers = trace_wglSwapBuffers;
 
+  // WGL_I3D_digital_video_control
+
+  tbl.wglGetDigitalVideoParametersI3D = trace_wglGetDigitalVideoParametersI3D;
+  tbl.wglSetDigitalVideoParametersI3D = trace_wglSetDigitalVideoParametersI3D;
+
+  // WGL_I3D_gamma
+
+  tbl.wglGetGammaTableI3D = trace_wglGetGammaTableI3D;
+  tbl.wglGetGammaTableParametersI3D = trace_wglGetGammaTableParametersI3D;
+  tbl.wglSetGammaTableI3D = trace_wglSetGammaTableI3D;
+  tbl.wglSetGammaTableParametersI3D = trace_wglSetGammaTableParametersI3D;
+
+  // WGL_I3D_genlock
+
+  tbl.wglDisableGenlockI3D = trace_wglDisableGenlockI3D;
+  tbl.wglEnableGenlockI3D = trace_wglEnableGenlockI3D;
+  tbl.wglGenlockSampleRateI3D = trace_wglGenlockSampleRateI3D;
+  tbl.wglGenlockSourceDelayI3D = trace_wglGenlockSourceDelayI3D;
+  tbl.wglGenlockSourceEdgeI3D = trace_wglGenlockSourceEdgeI3D;
+  tbl.wglGenlockSourceI3D = trace_wglGenlockSourceI3D;
+  tbl.wglGetGenlockSampleRateI3D = trace_wglGetGenlockSampleRateI3D;
+  tbl.wglGetGenlockSourceDelayI3D = trace_wglGetGenlockSourceDelayI3D;
+  tbl.wglGetGenlockSourceEdgeI3D = trace_wglGetGenlockSourceEdgeI3D;
+  tbl.wglGetGenlockSourceI3D = trace_wglGetGenlockSourceI3D;
+  tbl.wglIsEnabledGenlockI3D = trace_wglIsEnabledGenlockI3D;
+  tbl.wglQueryGenlockMaxSourceDelayI3D = trace_wglQueryGenlockMaxSourceDelayI3D;
+
+  // WGL_I3D_image_buffer
+
+  tbl.wglAssociateImageBufferEventsI3D = trace_wglAssociateImageBufferEventsI3D;
+  tbl.wglCreateImageBufferI3D = trace_wglCreateImageBufferI3D;
+  tbl.wglDestroyImageBufferI3D = trace_wglDestroyImageBufferI3D;
+  tbl.wglReleaseImageBufferEventsI3D = trace_wglReleaseImageBufferEventsI3D;
+
+  // WGL_I3D_swap_frame_lock
+
+  tbl.wglDisableFrameLockI3D = trace_wglDisableFrameLockI3D;
+  tbl.wglEnableFrameLockI3D = trace_wglEnableFrameLockI3D;
+  tbl.wglIsEnabledFrameLockI3D = trace_wglIsEnabledFrameLockI3D;
+  tbl.wglQueryFrameLockMasterI3D = trace_wglQueryFrameLockMasterI3D;
+
+  // WGL_I3D_swap_frame_usage
+
+  tbl.wglBeginFrameTrackingI3D = trace_wglBeginFrameTrackingI3D;
+  tbl.wglEndFrameTrackingI3D = trace_wglEndFrameTrackingI3D;
+  tbl.wglGetFrameUsageI3D = trace_wglGetFrameUsageI3D;
+  tbl.wglQueryFrameTrackingI3D = trace_wglQueryFrameTrackingI3D;
+
+  // WGL_NV_DX_interop
+
+  tbl.wglDXCloseDeviceNV = trace_wglDXCloseDeviceNV;
+  tbl.wglDXLockObjectsNV = trace_wglDXLockObjectsNV;
+  tbl.wglDXObjectAccessNV = trace_wglDXObjectAccessNV;
+  tbl.wglDXOpenDeviceNV = trace_wglDXOpenDeviceNV;
+  tbl.wglDXRegisterObjectNV = trace_wglDXRegisterObjectNV;
+  tbl.wglDXSetResourceShareHandleNV = trace_wglDXSetResourceShareHandleNV;
+  tbl.wglDXUnlockObjectsNV = trace_wglDXUnlockObjectsNV;
+  tbl.wglDXUnregisterObjectNV = trace_wglDXUnregisterObjectNV;
+
+  // WGL_NV_copy_image
+
+  tbl.wglCopyImageSubDataNV = trace_wglCopyImageSubDataNV;
+
+  // WGL_NV_gpu_affinity
+
+  tbl.wglCreateAffinityDCNV = trace_wglCreateAffinityDCNV;
+  tbl.wglDeleteDCNV = trace_wglDeleteDCNV;
+  tbl.wglEnumGpusFromAffinityDCNV = trace_wglEnumGpusFromAffinityDCNV;
+  tbl.wglEnumGpusNV = trace_wglEnumGpusNV;
+
+  // WGL_NV_present_video
+
+  tbl.wglBindVideoDeviceNV = trace_wglBindVideoDeviceNV;
+  tbl.wglEnumerateVideoDevicesNV = trace_wglEnumerateVideoDevicesNV;
+  tbl.wglQueryCurrentContextNV = trace_wglQueryCurrentContextNV;
+
+  // WGL_NV_swap_group
+
+  tbl.wglBindSwapBarrierNV = trace_wglBindSwapBarrierNV;
+  tbl.wglJoinSwapGroupNV = trace_wglJoinSwapGroupNV;
+  tbl.wglQueryFrameCountNV = trace_wglQueryFrameCountNV;
+  tbl.wglQueryMaxSwapGroupsNV = trace_wglQueryMaxSwapGroupsNV;
+  tbl.wglQuerySwapGroupNV = trace_wglQuerySwapGroupNV;
+  tbl.wglResetFrameCountNV = trace_wglResetFrameCountNV;
+
   // WGL_NV_vertex_array_range
 
   tbl.wglAllocateMemoryNV = trace_wglAllocateMemoryNV;
   tbl.wglFreeMemoryNV = trace_wglFreeMemoryNV;
+
+  // WGL_NV_video_capture
+
+  tbl.wglBindVideoCaptureDeviceNV = trace_wglBindVideoCaptureDeviceNV;
+  tbl.wglEnumerateVideoCaptureDevicesNV = trace_wglEnumerateVideoCaptureDevicesNV;
+  tbl.wglLockVideoCaptureDeviceNV = trace_wglLockVideoCaptureDeviceNV;
+  tbl.wglQueryVideoCaptureDeviceNV = trace_wglQueryVideoCaptureDeviceNV;
+  tbl.wglReleaseVideoCaptureDeviceNV = trace_wglReleaseVideoCaptureDeviceNV;
+
+  // WGL_NV_video_output
+
+  tbl.wglBindVideoImageNV = trace_wglBindVideoImageNV;
+  tbl.wglGetVideoDeviceNV = trace_wglGetVideoDeviceNV;
+  tbl.wglGetVideoInfoNV = trace_wglGetVideoInfoNV;
+  tbl.wglReleaseVideoDeviceNV = trace_wglReleaseVideoDeviceNV;
+  tbl.wglReleaseVideoImageNV = trace_wglReleaseVideoImageNV;
+  tbl.wglSendPbufferToVideoNV = trace_wglSendPbufferToVideoNV;
+
+  // WGL_OML_sync_control
+
+  tbl.wglGetMscRateOML = trace_wglGetMscRateOML;
+  tbl.wglGetSyncValuesOML = trace_wglGetSyncValuesOML;
+  tbl.wglSwapBuffersMscOML = trace_wglSwapBuffersMscOML;
+  tbl.wglSwapLayerBuffersMscOML = trace_wglSwapLayerBuffersMscOML;
+  tbl.wglWaitForMscOML = trace_wglWaitForMscOML;
+  tbl.wglWaitForSbcOML = trace_wglWaitForSbcOML;
 
   // WGL_core
 
@@ -34968,6 +36969,11 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
 
   tbl.glXCopyImageSubDataNV = trace_glXCopyImageSubDataNV;
 
+  // GLX_NV_present_video
+
+  tbl.glXBindVideoDeviceNV = trace_glXBindVideoDeviceNV;
+  tbl.glXEnumerateVideoDevicesNV = trace_glXEnumerateVideoDevicesNV;
+
   // GLX_NV_swap_group
 
   tbl.glXBindSwapBarrierNV = trace_glXBindSwapBarrierNV;
@@ -34981,6 +36987,23 @@ void InitDispatchTableGlobalTrace(DispatchTableGlobal &tbl)
 
   tbl.glXAllocateMemoryNV = trace_glXAllocateMemoryNV;
   tbl.glXFreeMemoryNV = trace_glXFreeMemoryNV;
+
+  // GLX_NV_video_capture
+
+  tbl.glXBindVideoCaptureDeviceNV = trace_glXBindVideoCaptureDeviceNV;
+  tbl.glXEnumerateVideoCaptureDevicesNV = trace_glXEnumerateVideoCaptureDevicesNV;
+  tbl.glXLockVideoCaptureDeviceNV = trace_glXLockVideoCaptureDeviceNV;
+  tbl.glXQueryVideoCaptureDeviceNV = trace_glXQueryVideoCaptureDeviceNV;
+  tbl.glXReleaseVideoCaptureDeviceNV = trace_glXReleaseVideoCaptureDeviceNV;
+
+  // GLX_NV_video_output
+
+  tbl.glXBindVideoImageNV = trace_glXBindVideoImageNV;
+  tbl.glXGetVideoDeviceNV = trace_glXGetVideoDeviceNV;
+  tbl.glXGetVideoInfoNV = trace_glXGetVideoInfoNV;
+  tbl.glXReleaseVideoDeviceNV = trace_glXReleaseVideoDeviceNV;
+  tbl.glXReleaseVideoImageNV = trace_glXReleaseVideoImageNV;
+  tbl.glXSendPbufferToVideoNV = trace_glXSendPbufferToVideoNV;
 
   // GLX_OML_sync_control
 

@@ -3237,12 +3237,12 @@ static void REGAL_CALL emu_glDisable(GLenum cap)
            case GL_CULL_FACE:
            case GL_DEPTH_TEST:
            case GL_DITHER:
+           case GL_FRAMEBUFFER_SRGB:
            case GL_POLYGON_OFFSET_FILL:
-           case GL_SCISSOR_TEST:
-           case GL_STENCIL_TEST:
            case GL_SAMPLE_ALPHA_TO_COVERAGE:
            case GL_SAMPLE_COVERAGE:
-           case GL_FRAMEBUFFER_SRGB:
+           case GL_SCISSOR_TEST:
+           case GL_STENCIL_TEST:
            case GL_TEXTURE_2D:
              break;
            default:
@@ -3602,12 +3602,12 @@ static void REGAL_CALL emu_glEnable(GLenum cap)
            case GL_CULL_FACE:
            case GL_DEPTH_TEST:
            case GL_DITHER:
+           case GL_FRAMEBUFFER_SRGB:
            case GL_POLYGON_OFFSET_FILL:
-           case GL_SCISSOR_TEST:
-           case GL_STENCIL_TEST:
            case GL_SAMPLE_ALPHA_TO_COVERAGE:
            case GL_SAMPLE_COVERAGE:
-           case GL_FRAMEBUFFER_SRGB:
+           case GL_SCISSOR_TEST:
+           case GL_STENCIL_TEST:
            case GL_TEXTURE_2D:
              break;
            default:
@@ -7001,12 +7001,12 @@ static GLboolean REGAL_CALL emu_glIsEnabled(GLenum cap)
            case GL_CULL_FACE:
            case GL_DEPTH_TEST:
            case GL_DITHER:
+           case GL_FRAMEBUFFER_SRGB:
            case GL_POLYGON_OFFSET_FILL:
-           case GL_SCISSOR_TEST:
-           case GL_STENCIL_TEST:
            case GL_SAMPLE_ALPHA_TO_COVERAGE:
            case GL_SAMPLE_COVERAGE:
-           case GL_FRAMEBUFFER_SRGB:
+           case GL_SCISSOR_TEST:
+           case GL_STENCIL_TEST:
            case GL_TEXTURE_2D:
              break;
            default:
@@ -19056,8 +19056,8 @@ static void REGAL_CALL emu_glBindTexture(GLenum target, GLuint texture)
        if (_context->isES2())
          switch (target)
          {
-           case GL_TEXTURE_CUBE_MAP:
            case GL_TEXTURE_2D:
+           case GL_TEXTURE_CUBE_MAP:
              break;
            default:
              Warning("glBindTexture does not support ",GLenumToString(target)," for ES 2.0.");
@@ -20438,13 +20438,13 @@ static void REGAL_CALL emu_glTexSubImage2D(GLenum target, GLint level, GLint xof
        if (_context->isES2())
          switch (target)
          {
+           case GL_TEXTURE_2D:
            case GL_TEXTURE_CUBE_MAP_NEGATIVE_X:
            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y:
            case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
            case GL_TEXTURE_CUBE_MAP_POSITIVE_X:
            case GL_TEXTURE_CUBE_MAP_POSITIVE_Y:
            case GL_TEXTURE_CUBE_MAP_POSITIVE_Z:
-           case GL_TEXTURE_2D:
              break;
            default:
              Warning("glTexSubImage2D does not support ",GLenumToString(target)," for ES 2.0.");
@@ -67751,6 +67751,8 @@ static void REGAL_CALL emu_glVertexPointerEXT(GLint size, GLenum type, GLsizei s
 // GL_IMG_multisampled_render_to_texture
 
 // GL_INGR_blend_func_separate
+
+// GL_INTEL_map_texture
 
 // GL_INTEL_parallel_arrays
 

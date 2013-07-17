@@ -1230,6 +1230,7 @@ EXPORTS
   rglMapObjectBufferATI
   rglMapParameterfvNV
   rglMapParameterivNV
+  rglMapTexture2DINTEL
   rglMapVertexAttrib1dAPPLE
   rglMapVertexAttrib1fAPPLE
   rglMapVertexAttrib2dAPPLE
@@ -1917,6 +1918,7 @@ EXPORTS
   rglStringMarkerGREMEDY
   rglSwapAPPLE
   rglSwizzleEXT
+  rglSyncTextureINTEL
   rglTagSampleBufferSGIX
   rglTangent3bEXT
   rglTangent3bvEXT
@@ -2213,6 +2215,7 @@ EXPORTS
   rglUnmapBufferOES
   rglUnmapNamedBufferEXT
   rglUnmapObjectBufferATI
+  rglUnmapTexture2DINTEL
   rglUpdateObjectBufferATI
   rglUseProgram
   rglUseProgramObjectARB

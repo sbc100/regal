@@ -1281,6 +1281,7 @@ _glMapNamedBufferRangeEXT
 _glMapObjectBufferATI
 _glMapParameterfvNV
 _glMapParameterivNV
+_glMapTexture2DINTEL
 _glMapVertexAttrib1dAPPLE
 _glMapVertexAttrib1fAPPLE
 _glMapVertexAttrib2dAPPLE
@@ -1968,6 +1969,7 @@ _glStopInstrumentsSGIX
 _glStringMarkerGREMEDY
 _glSwapAPPLE
 _glSwizzleEXT
+_glSyncTextureINTEL
 _glTagSampleBufferSGIX
 _glTangent3bEXT
 _glTangent3bvEXT
@@ -2264,6 +2266,7 @@ _glUnmapBufferARB
 _glUnmapBufferOES
 _glUnmapNamedBufferEXT
 _glUnmapObjectBufferATI
+_glUnmapTexture2DINTEL
 _glUpdateObjectBufferATI
 _glUseProgram
 _glUseProgramObjectARB

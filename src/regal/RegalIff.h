@@ -91,6 +91,8 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
+
+// lookup array, Must Be kept in sync with enum TexenvMode; TEM_* values
 const GLenum texenvModeGL[] = {
   GL_FALSE,
   GL_REPLACE,
@@ -99,6 +101,41 @@ const GLenum texenvModeGL[] = {
   GL_DECAL,
   GL_BLEND,
   GL_COMBINE
+};
+
+// lookup array, Must Be kept in sync with enum TexenvCombine; TEC_* values
+const GLenum texenvCombineGL[] = {
+  GL_FALSE,
+  GL_REPLACE,
+  GL_MODULATE,
+  GL_ADD,
+  GL_ADD_SIGNED,
+  GL_INTERPOLATE,
+  GL_SUBTRACT,
+  GL_DOT3_RGB,
+  GL_DOT3_RGBA
+};
+
+// lookup array, Must Be kept in sync with enum TexenvCombineSrc; TCS_* values
+const GLenum texenvCombineSrcGL[] = {
+  GL_FALSE,
+  GL_CONSTANT,
+  GL_PRIMARY_COLOR,
+  GL_PREVIOUS,
+  GL_TEXTURE,
+  GL_TEXTURE0,
+  GL_TEXTURE1,
+  GL_TEXTURE2,
+  GL_TEXTURE3
+};
+
+// lookup array, Must Be kept in sync with enum TexenvCombineOp; TCO_* values
+const GLenum texenvCombineOpGL[] = {
+  GL_FALSE,
+  GL_SRC_COLOR,
+  GL_ONE_MINUS_SRC_COLOR,
+  GL_SRC_ALPHA,
+  GL_ONE_MINUS_SRC_ALPHA
 };
 
 enum RegalFFUniformEnum {
@@ -990,6 +1027,7 @@ struct Iff
     CM_AmbientAndDiffuse = 5
   };
 
+  // enums must be in sync with look up array texenvModeGL
   enum TexenvMode {
     TEM_Invalid,
     TEM_Replace,
@@ -1001,6 +1039,7 @@ struct Iff
   };
 
 
+  // enums must be in sync with look up array texenvCombineGL
   enum TexenvCombine {
     TEC_Invalid,
     TEC_Replace,
@@ -1013,6 +1052,7 @@ struct Iff
     TEC_Dot3Rgba
   };
 
+  // enums must be in sync with look up array texenvCombineSrcGL
   enum TexenvCombineSrc {
     TCS_Invalid,
     TCS_Constant,
@@ -1025,6 +1065,7 @@ struct Iff
     TCS_Texture3,
   };
 
+  // enums must be in sync with look up array texenvCombineOpGL
   enum TexenvCombineOp {
     TCO_Invalid,
     TCO_Color,
@@ -1046,6 +1087,7 @@ struct Iff
       src1 = TCS_Previous;
       src2 = TCS_Constant;
       op0 = op1 = op2 = (isRgb ? TCO_Color : TCO_Alpha);
+      scale = 1.0f;
     }
 
     TexenvCombineState( const TexenvCombineState &other )
@@ -1067,6 +1109,7 @@ struct Iff
     TexenvCombineOp op0;
     TexenvCombineOp op1;
     TexenvCombineOp op2;
+    GLfloat scale;
   };
 
   struct TextureEnv
@@ -1736,7 +1779,78 @@ struct Iff
         params[3] = T( c.w );
         break;
       }
-
+      case GL_COMBINE_RGB:
+      case GL_COMBINE_ALPHA: {
+        RegalAssert(activeTextureIndex<REGAL_EMU_IFF_TEXTURE_UNITS);
+        TexenvCombineState & c = (pname == GL_COMBINE_RGB ?
+                                 textureUnit[ activeTextureIndex ].env.rgb :
+                                 textureUnit[ activeTextureIndex ].env.a);
+        *params = static_cast<T>(texenvCombineGL[ c.mode ]);
+        break;
+      }
+      case GL_SOURCE0_RGB:
+      case GL_SOURCE1_RGB:
+      case GL_SOURCE2_RGB:
+      case GL_SOURCE0_ALPHA:
+      case GL_SOURCE1_ALPHA:
+      case GL_SOURCE2_ALPHA: {
+        RegalAssert(activeTextureIndex<REGAL_EMU_IFF_TEXTURE_UNITS);
+        int idx = pname - GL_SOURCE0_RGB;
+        bool isRgb = true;
+        if ( idx > 3 ) {
+          isRgb = false;
+          idx = pname - GL_SOURCE0_ALPHA;
+        }
+        TexenvCombineState & c = (isRgb ?
+                                 textureUnit[ activeTextureIndex ].env.rgb :
+                                 textureUnit[ activeTextureIndex ].env.a);
+        TexenvCombineSrc src = c.src0;
+        switch ( idx )
+        {
+          case 0: src = c.src0; break;
+          case 1: src = c.src1; break;
+          case 2: src = c.src2; break;
+          default: break;
+        }
+        *params = static_cast<T>(texenvCombineSrcGL[ src ]);
+        break;
+      }
+      case GL_OPERAND0_RGB:
+      case GL_OPERAND1_RGB:
+      case GL_OPERAND2_RGB:
+      case GL_OPERAND0_ALPHA:
+      case GL_OPERAND1_ALPHA:
+      case GL_OPERAND2_ALPHA: {
+        RegalAssert(activeTextureIndex<REGAL_EMU_IFF_TEXTURE_UNITS);
+        int idx = pname - GL_OPERAND0_RGB;
+        bool isRgb = true;
+        if( idx > 3 ) {
+          isRgb = false;
+          idx = pname - GL_OPERAND0_ALPHA;
+        }
+        TexenvCombineState & c = (isRgb ?
+                                 textureUnit[ activeTextureIndex ].env.rgb :
+                                 textureUnit[ activeTextureIndex ].env.a);
+        TexenvCombineOp op = c.op0;
+        switch ( idx )
+        {
+          case 0: op = c.op0; break;
+          case 1: op = c.op1; break;
+          case 2: op = c.op2; break;
+          default: break;
+        }
+        *params = static_cast<T>(texenvCombineOpGL[ op ]);
+        break;
+      }
+      case GL_RGB_SCALE:
+      case GL_ALPHA_SCALE: {
+        RegalAssert(activeTextureIndex<REGAL_EMU_IFF_TEXTURE_UNITS);
+        TexenvCombineState & c = (pname == GL_RGB_SCALE ?
+                                 textureUnit[ activeTextureIndex ].env.rgb :
+                                 textureUnit[ activeTextureIndex ].env.a);
+        *params = static_cast<T>(c.scale);
+        break;
+      }
       default:
         break;
     }

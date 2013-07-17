@@ -92,6 +92,8 @@ regalLicense = '''
 emulatedExts = {
   'GL_ARB_draw_buffers':              { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 2) || info->gl_nv_draw_buffers'},
   'GL_ARB_multitexture':              { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_ARB_texture_env_combine':       { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
+  'GL_ARB_texture_env_dot3':          { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
   'GL_ARB_texture_storage':           { 'emulatedBy' : 'texsto', 'emulatedIf' : '' },
   'GL_ATI_draw_buffers':              { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 2) || info->gl_nv_draw_buffers'},
   'GL_EXT_blend_color':               { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
@@ -99,6 +101,9 @@ emulatedExts = {
   'GL_EXT_direct_state_access':       { 'emulatedBy' : 'dsa',    'emulatedIf' : '' },
   'GL_EXT_framebuffer_blit':          { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit' },
   'GL_EXT_framebuffer_object':        { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_texture_edge_clamp':        { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_texture_env_combine':       { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
+  'GL_EXT_texture_env_dot3':          { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
   'GL_IBM_texture_mirrored_repeat':   { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
   'GL_NV_blend_square':               { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
 }
@@ -139,6 +144,14 @@ def traverse(apis, args):
           for i in api.enums:
             if i.name=='defines':
               i.enumerants.sort(cmpCategoryName)
+
+        for i in api.enums:
+          if i.name=='defines':
+            i.enumerantsByName = sorted(i.enumerants,key=lambda k : k.name)
+
+        for i in api.enums:
+          if i.name=='defines':
+            i.enumerantsByName = sorted(i.enumerants,key=lambda k : k.name)
 
         for e in api.extensions:
           if e.name in emulatedExts:

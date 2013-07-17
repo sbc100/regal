@@ -37037,6 +37037,62 @@ static void REGAL_CALL loader_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum 
   _next->call(&_next->glBlendFuncSeparateINGR)(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL loader_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMapTexture2DINTEL, "glMapTexture2DINTEL");
+  RegalAssert(_driver.glMapTexture2DINTEL!=glMapTexture2DINTEL);
+  if (_driver.glMapTexture2DINTEL==glMapTexture2DINTEL)
+    _driver.glMapTexture2DINTEL = NULL;
+  if (_driver.glMapTexture2DINTEL)
+    return _driver.glMapTexture2DINTEL(texture, level, access, stride, layout);
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  return _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+}
+
+static void REGAL_CALL loader_glSyncTextureINTEL(GLuint texture)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glSyncTextureINTEL, "glSyncTextureINTEL");
+  RegalAssert(_driver.glSyncTextureINTEL!=glSyncTextureINTEL);
+  if (_driver.glSyncTextureINTEL==glSyncTextureINTEL)
+    _driver.glSyncTextureINTEL = NULL;
+  if (_driver.glSyncTextureINTEL)
+  {
+    _driver.glSyncTextureINTEL(texture);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glSyncTextureINTEL)(texture);
+}
+
+static void REGAL_CALL loader_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glUnmapTexture2DINTEL, "glUnmapTexture2DINTEL");
+  RegalAssert(_driver.glUnmapTexture2DINTEL!=glUnmapTexture2DINTEL);
+  if (_driver.glUnmapTexture2DINTEL==glUnmapTexture2DINTEL)
+    _driver.glUnmapTexture2DINTEL = NULL;
+  if (_driver.glUnmapTexture2DINTEL)
+  {
+    _driver.glUnmapTexture2DINTEL(texture, level);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL loader_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -58425,6 +58481,12 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = loader_glBlendFuncSeparateINGR;
+
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = loader_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = loader_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = loader_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

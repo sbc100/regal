@@ -772,6 +772,8 @@ static void AddTexEnvCombine( Iff::TextureEnv & env, string_list & s )
       s << "//ERROR: Unsupported tex env combine rgb mode\n"; break;
       break;
   }
+  if ( env.rgb.scale != 1.0 )
+    s << "        p.xyz = clamp(" << env.rgb.scale << " * p.xyz, 0.0, 1.0);\n";
   if( skipAlpha ) {
     s << "        p.w = p.x;\n";
   } else {
@@ -830,6 +832,8 @@ static void AddTexEnvCombine( Iff::TextureEnv & env, string_list & s )
         s << "//ERROR: Unsupported tex env combine alpha mode\n"; break;
         break;
     }
+    if ( env.a.scale != 1.0 )
+      s << "        p.w = clamp(" << env.a.scale << " * p.w, 0.0, 1.0);\n";
   }
   s << "    }\n";
 }
@@ -1902,6 +1906,20 @@ void Iff::TexEnv( GLenum texunit, GLenum target, GLenum pname, const GLint *v )
               default: return; // error?
             }
           }
+          ffstate.SetTexInfo( ver, activeTextureIndex, *tup );
+          break;
+        }
+        case GL_RGB_SCALE:
+        case GL_ALPHA_SCALE:
+        {
+          TextureUnit *tup = & textureUnit[ activeTextureIndex ];
+          TexenvCombineState & c = (pname == GL_RGB_SCALE ? tup->env.rgb : tup->env.a);
+          GLfloat pscale = static_cast<GLfloat>(v[0]);
+          if (pscale != 1.0 && pscale != 2.0 && pscale != 4.0) {
+              Warning("Invalid value set for TexEnv Scale %f - must be 1.0, 2.0, or 4.0\n", pscale);
+              return; // error
+          }
+          c.scale = pscale;
           ffstate.SetTexInfo( ver, activeTextureIndex, *tup );
           break;
         }

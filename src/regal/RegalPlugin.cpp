@@ -15960,6 +15960,32 @@ extern "C" {
     _next->call(&_next->glBlendFuncSeparateINGR)(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
   }
 
+  /* GL_INTEL_map_texture */
+
+  GLvoid *REGAL_CALL plugin_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    return _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+  }
+
+  void REGAL_CALL plugin_glSyncTextureINTEL(GLuint texture)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glSyncTextureINTEL)(texture);
+  }
+
+  void REGAL_CALL plugin_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+  }
+
   /* GL_INTEL_parallel_arrays */
 
   void REGAL_CALL plugin_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -24931,7 +24957,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Plugin {
 
-  const char * const lookup_gl_Name[2635] = {
+  const char * const lookup_gl_Name[2638] = {
     "glAccum",
     "glActiveProgramEXT",
     "glActiveShaderProgram",
@@ -26159,6 +26185,7 @@ namespace Plugin {
     "glMapObjectBufferATI",
     "glMapParameterfvNV",
     "glMapParameterivNV",
+    "glMapTexture2DINTEL",
     "glMapVertexAttrib1dAPPLE",
     "glMapVertexAttrib1fAPPLE",
     "glMapVertexAttrib2dAPPLE",
@@ -26846,6 +26873,7 @@ namespace Plugin {
     "glStringMarkerGREMEDY",
     "glSwapAPPLE",
     "glSwizzleEXT",
+    "glSyncTextureINTEL",
     "glTagSampleBufferSGIX",
     "glTangent3bEXT",
     "glTangent3bvEXT",
@@ -27142,6 +27170,7 @@ namespace Plugin {
     "glUnmapBufferOES",
     "glUnmapNamedBufferEXT",
     "glUnmapObjectBufferATI",
+    "glUnmapTexture2DINTEL",
     "glUpdateObjectBufferATI",
     "glUseProgram",
     "glUseProgramObjectARB",
@@ -27569,7 +27598,7 @@ namespace Plugin {
     NULL
   };
 
-  const void *lookup_gl_Value[2635] = {
+  const void *lookup_gl_Value[2638] = {
     (void *)(plugin_glAccum),
     (void *)(plugin_glActiveProgramEXT),
     (void *)(plugin_glActiveShaderProgram),
@@ -28797,6 +28826,7 @@ namespace Plugin {
     (void *)(plugin_glMapObjectBufferATI),
     (void *)(plugin_glMapParameterfvNV),
     (void *)(plugin_glMapParameterivNV),
+    (void *)(plugin_glMapTexture2DINTEL),
     (void *)(plugin_glMapVertexAttrib1dAPPLE),
     (void *)(plugin_glMapVertexAttrib1fAPPLE),
     (void *)(plugin_glMapVertexAttrib2dAPPLE),
@@ -29484,6 +29514,7 @@ namespace Plugin {
     (void *)(plugin_glStringMarkerGREMEDY),
     (void *)(plugin_glSwapAPPLE),
     (void *)(plugin_glSwizzleEXT),
+    (void *)(plugin_glSyncTextureINTEL),
     (void *)(plugin_glTagSampleBufferSGIX),
     (void *)(plugin_glTangent3bEXT),
     (void *)(plugin_glTangent3bvEXT),
@@ -29780,6 +29811,7 @@ namespace Plugin {
     (void *)(plugin_glUnmapBufferOES),
     (void *)(plugin_glUnmapNamedBufferEXT),
     (void *)(plugin_glUnmapObjectBufferATI),
+    (void *)(plugin_glUnmapTexture2DINTEL),
     (void *)(plugin_glUpdateObjectBufferATI),
     (void *)(plugin_glUseProgram),
     (void *)(plugin_glUseProgramObjectARB),
@@ -31023,7 +31055,7 @@ extern "C" {
   {
     const char **res;
 
-    res = (const char **) std::bsearch(&name, lookup_gl_Name, 2633, sizeof(const char *), NameCmp);
+    res = (const char **) std::bsearch(&name, lookup_gl_Name, 2636, sizeof(const char *), NameCmp);
     if (res) return const_cast<void *>(lookup_gl_Value[(size_t) (res - lookup_gl_Name)]);
 
 #if REGAL_SYS_WGL

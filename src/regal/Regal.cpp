@@ -20181,6 +20181,38 @@ extern "C" {
     _next->call(&_next->glBlendFuncSeparateINGR)(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
   }
 
+  /* GL_INTEL_map_texture */
+
+  REGAL_DECL GLvoid *REGAL_CALL glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glMapTexture2DINTEL","(", texture, ", ", level, ", ", access, ", ", boost::print::optional(stride,Logging::pointers), ", ", layout, ")");
+    if (!_context) return NULL;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    return _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+  }
+
+  REGAL_DECL void REGAL_CALL glSyncTextureINTEL(GLuint texture)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glSyncTextureINTEL","(", texture, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glSyncTextureINTEL)(texture);
+  }
+
+  REGAL_DECL void REGAL_CALL glUnmapTexture2DINTEL(GLuint texture, GLint level)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glUnmapTexture2DINTEL","(", texture, ", ", level, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+  }
+
   /* GL_INTEL_parallel_arrays */
 
   REGAL_DECL void REGAL_CALL glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -29720,6 +29752,7 @@ extern "C" {
   REGAL_DECL __GLXextFuncPtr REGAL_CALL glXGetProcAddressARB(const GLubyte *procName)
   {
     App("glXGetProcAddressARB","(", boost::print::quote(reinterpret_cast<const char *>(procName),'"'), ")");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     __GLXextFuncPtr ret = NULL;

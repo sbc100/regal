@@ -133,6 +133,7 @@ Statistics::log() const
   log("GL_ANGLE_TEXTURE_COMPRESSION_DXT3",gl_angle_texture_compression_dxt3);
   log("GL_ANGLE_TEXTURE_COMPRESSION_DXT5",gl_angle_texture_compression_dxt5);
   log("GL_ANGLE_TEXTURE_USAGE",gl_angle_texture_usage);
+  log("GL_ANGLE_TIMER_QUERY",gl_angle_timer_query);
   log("GL_ANGLE_TRANSLATED_SHADER_SOURCE",gl_angle_translated_shader_source);
   log("GL_APPLE_AUX_DEPTH_STENCIL",gl_apple_aux_depth_stencil);
   log("GL_APPLE_CLIENT_STORAGE",gl_apple_client_storage);
@@ -409,6 +410,7 @@ Statistics::log() const
   log("GL_INGR_BLEND_FUNC_SEPARATE",gl_ingr_blend_func_separate);
   log("GL_INGR_COLOR_CLAMP",gl_ingr_color_clamp);
   log("GL_INGR_INTERLACE_READ",gl_ingr_interlace_read);
+  log("GL_INTEL_MAP_TEXTURE",gl_intel_map_texture);
   log("GL_INTEL_PARALLEL_ARRAYS",gl_intel_parallel_arrays);
   log("GL_INTEL_TEXTURE_SCISSOR",gl_intel_texture_scissor);
   log("GL_KHR_DEBUG",gl_khr_debug);
@@ -3266,6 +3268,12 @@ Statistics::log() const
 
   log("glBlendFuncSeparateINGR",glBlendFuncSeparateINGR);
 
+/* GL_INTEL_map_texture */
+
+  log("glMapTexture2DINTEL",glMapTexture2DINTEL);
+  log("glSyncTextureINTEL",glSyncTextureINTEL);
+  log("glUnmapTexture2DINTEL",glUnmapTexture2DINTEL);
+
 /* GL_INTEL_parallel_arrays */
 
   log("glColorPointervINTEL",glColorPointervINTEL);
@@ -4901,22 +4909,6 @@ Statistics::log() const
 #endif /* REGAL_SYS_EGL */
 
   log("glEnable(GL_BLEND)",enable_GL_BLEND);
-  log("glEnable(GL_COLOR_LOGIC_OP)",enable_GL_COLOR_LOGIC_OP);
-  log("glEnable(GL_CULL_FACE)",enable_GL_CULL_FACE);
-  log("glEnable(GL_DEPTH_TEST)",enable_GL_DEPTH_TEST);
-  log("glEnable(GL_DITHER)",enable_GL_DITHER);
-  log("glEnable(GL_LINE_SMOOTH)",enable_GL_LINE_SMOOTH);
-  log("glEnable(GL_POLYGON_OFFSET_FILL)",enable_GL_POLYGON_OFFSET_FILL);
-  log("glEnable(GL_POLYGON_OFFSET_LINE)",enable_GL_POLYGON_OFFSET_LINE);
-  log("glEnable(GL_POLYGON_OFFSET_POINT)",enable_GL_POLYGON_OFFSET_POINT);
-  log("glEnable(GL_POLYGON_SMOOTH)",enable_GL_POLYGON_SMOOTH);
-  log("glEnable(GL_SCISSOR_TEST)",enable_GL_SCISSOR_TEST);
-  log("glEnable(GL_STENCIL_TEST)",enable_GL_STENCIL_TEST);
-  log("glEnable(GL_RESCALE_NORMAL)",enable_GL_RESCALE_NORMAL);
-  log("glEnable(GL_MULTISAMPLE)",enable_GL_MULTISAMPLE);
-  log("glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE)",enable_GL_SAMPLE_ALPHA_TO_COVERAGE);
-  log("glEnable(GL_SAMPLE_ALPHA_TO_ONE)",enable_GL_SAMPLE_ALPHA_TO_ONE);
-  log("glEnable(GL_SAMPLE_COVERAGE)",enable_GL_SAMPLE_COVERAGE);
   log("glEnable(GL_CLIP_DISTANCE0)",enable_GL_CLIP_DISTANCE0);
   log("glEnable(GL_CLIP_DISTANCE1)",enable_GL_CLIP_DISTANCE1);
   log("glEnable(GL_CLIP_DISTANCE2)",enable_GL_CLIP_DISTANCE2);
@@ -4925,34 +4917,34 @@ Statistics::log() const
   log("glEnable(GL_CLIP_DISTANCE5)",enable_GL_CLIP_DISTANCE5);
   log("glEnable(GL_CLIP_DISTANCE6)",enable_GL_CLIP_DISTANCE6);
   log("glEnable(GL_CLIP_DISTANCE7)",enable_GL_CLIP_DISTANCE7);
-  log("glEnable(GL_PRIMITIVE_RESTART)",enable_GL_PRIMITIVE_RESTART);
-  log("glEnable(GL_PROGRAM_POINT_SIZE)",enable_GL_PROGRAM_POINT_SIZE);
-  log("glEnable(GL_PRIMITIVE_RESTART_FIXED_INDEX)",enable_GL_PRIMITIVE_RESTART_FIXED_INDEX);
-  log("glEnable(GL_DEPTH_CLAMP)",enable_GL_DEPTH_CLAMP);
-  log("glEnable(GL_FRAMEBUFFER_SRGB)",enable_GL_FRAMEBUFFER_SRGB);
-  log("glEnable(GL_TEXTURE_2D)",enable_GL_TEXTURE_2D);
-  log("glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS)",enable_GL_TEXTURE_CUBE_MAP_SEAMLESS);
-  log("glEnable(GL_SAMPLE_MASK)",enable_GL_SAMPLE_MASK);
+  log("glEnable(GL_COLOR_LOGIC_OP)",enable_GL_COLOR_LOGIC_OP);
+  log("glEnable(GL_CULL_FACE)",enable_GL_CULL_FACE);
   log("glEnable(GL_DEBUG_OUTPUT)",enable_GL_DEBUG_OUTPUT);
   log("glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS)",enable_GL_DEBUG_OUTPUT_SYNCHRONOUS);
+  log("glEnable(GL_DEPTH_CLAMP)",enable_GL_DEPTH_CLAMP);
+  log("glEnable(GL_DEPTH_TEST)",enable_GL_DEPTH_TEST);
+  log("glEnable(GL_DITHER)",enable_GL_DITHER);
+  log("glEnable(GL_FRAMEBUFFER_SRGB)",enable_GL_FRAMEBUFFER_SRGB);
+  log("glEnable(GL_LINE_SMOOTH)",enable_GL_LINE_SMOOTH);
+  log("glEnable(GL_MULTISAMPLE)",enable_GL_MULTISAMPLE);
+  log("glEnable(GL_POLYGON_OFFSET_FILL)",enable_GL_POLYGON_OFFSET_FILL);
+  log("glEnable(GL_POLYGON_OFFSET_LINE)",enable_GL_POLYGON_OFFSET_LINE);
+  log("glEnable(GL_POLYGON_OFFSET_POINT)",enable_GL_POLYGON_OFFSET_POINT);
+  log("glEnable(GL_POLYGON_SMOOTH)",enable_GL_POLYGON_SMOOTH);
+  log("glEnable(GL_PRIMITIVE_RESTART)",enable_GL_PRIMITIVE_RESTART);
+  log("glEnable(GL_PRIMITIVE_RESTART_FIXED_INDEX)",enable_GL_PRIMITIVE_RESTART_FIXED_INDEX);
+  log("glEnable(GL_PROGRAM_POINT_SIZE)",enable_GL_PROGRAM_POINT_SIZE);
+  log("glEnable(GL_RESCALE_NORMAL)",enable_GL_RESCALE_NORMAL);
+  log("glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE)",enable_GL_SAMPLE_ALPHA_TO_COVERAGE);
+  log("glEnable(GL_SAMPLE_ALPHA_TO_ONE)",enable_GL_SAMPLE_ALPHA_TO_ONE);
+  log("glEnable(GL_SAMPLE_COVERAGE)",enable_GL_SAMPLE_COVERAGE);
+  log("glEnable(GL_SAMPLE_MASK)",enable_GL_SAMPLE_MASK);
+  log("glEnable(GL_SCISSOR_TEST)",enable_GL_SCISSOR_TEST);
+  log("glEnable(GL_STENCIL_TEST)",enable_GL_STENCIL_TEST);
+  log("glEnable(GL_TEXTURE_2D)",enable_GL_TEXTURE_2D);
+  log("glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS)",enable_GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
   log("glDisable(GL_BLEND)",disable_GL_BLEND);
-  log("glDisable(GL_COLOR_LOGIC_OP)",disable_GL_COLOR_LOGIC_OP);
-  log("glDisable(GL_CULL_FACE)",disable_GL_CULL_FACE);
-  log("glDisable(GL_DEPTH_TEST)",disable_GL_DEPTH_TEST);
-  log("glDisable(GL_DITHER)",disable_GL_DITHER);
-  log("glDisable(GL_LINE_SMOOTH)",disable_GL_LINE_SMOOTH);
-  log("glDisable(GL_POLYGON_OFFSET_FILL)",disable_GL_POLYGON_OFFSET_FILL);
-  log("glDisable(GL_POLYGON_OFFSET_LINE)",disable_GL_POLYGON_OFFSET_LINE);
-  log("glDisable(GL_POLYGON_OFFSET_POINT)",disable_GL_POLYGON_OFFSET_POINT);
-  log("glDisable(GL_POLYGON_SMOOTH)",disable_GL_POLYGON_SMOOTH);
-  log("glDisable(GL_SCISSOR_TEST)",disable_GL_SCISSOR_TEST);
-  log("glDisable(GL_STENCIL_TEST)",disable_GL_STENCIL_TEST);
-  log("glDisable(GL_RESCALE_NORMAL)",disable_GL_RESCALE_NORMAL);
-  log("glDisable(GL_MULTISAMPLE)",disable_GL_MULTISAMPLE);
-  log("glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE)",disable_GL_SAMPLE_ALPHA_TO_COVERAGE);
-  log("glDisable(GL_SAMPLE_ALPHA_TO_ONE)",disable_GL_SAMPLE_ALPHA_TO_ONE);
-  log("glDisable(GL_SAMPLE_COVERAGE)",disable_GL_SAMPLE_COVERAGE);
   log("glDisable(GL_CLIP_DISTANCE0)",disable_GL_CLIP_DISTANCE0);
   log("glDisable(GL_CLIP_DISTANCE1)",disable_GL_CLIP_DISTANCE1);
   log("glDisable(GL_CLIP_DISTANCE2)",disable_GL_CLIP_DISTANCE2);
@@ -4961,16 +4953,32 @@ Statistics::log() const
   log("glDisable(GL_CLIP_DISTANCE5)",disable_GL_CLIP_DISTANCE5);
   log("glDisable(GL_CLIP_DISTANCE6)",disable_GL_CLIP_DISTANCE6);
   log("glDisable(GL_CLIP_DISTANCE7)",disable_GL_CLIP_DISTANCE7);
-  log("glDisable(GL_PRIMITIVE_RESTART)",disable_GL_PRIMITIVE_RESTART);
-  log("glDisable(GL_PROGRAM_POINT_SIZE)",disable_GL_PROGRAM_POINT_SIZE);
-  log("glDisable(GL_PRIMITIVE_RESTART_FIXED_INDEX)",disable_GL_PRIMITIVE_RESTART_FIXED_INDEX);
-  log("glDisable(GL_DEPTH_CLAMP)",disable_GL_DEPTH_CLAMP);
-  log("glDisable(GL_FRAMEBUFFER_SRGB)",disable_GL_FRAMEBUFFER_SRGB);
-  log("glDisable(GL_TEXTURE_2D)",disable_GL_TEXTURE_2D);
-  log("glDisable(GL_TEXTURE_CUBE_MAP_SEAMLESS)",disable_GL_TEXTURE_CUBE_MAP_SEAMLESS);
-  log("glDisable(GL_SAMPLE_MASK)",disable_GL_SAMPLE_MASK);
+  log("glDisable(GL_COLOR_LOGIC_OP)",disable_GL_COLOR_LOGIC_OP);
+  log("glDisable(GL_CULL_FACE)",disable_GL_CULL_FACE);
   log("glDisable(GL_DEBUG_OUTPUT)",disable_GL_DEBUG_OUTPUT);
   log("glDisable(GL_DEBUG_OUTPUT_SYNCHRONOUS)",disable_GL_DEBUG_OUTPUT_SYNCHRONOUS);
+  log("glDisable(GL_DEPTH_CLAMP)",disable_GL_DEPTH_CLAMP);
+  log("glDisable(GL_DEPTH_TEST)",disable_GL_DEPTH_TEST);
+  log("glDisable(GL_DITHER)",disable_GL_DITHER);
+  log("glDisable(GL_FRAMEBUFFER_SRGB)",disable_GL_FRAMEBUFFER_SRGB);
+  log("glDisable(GL_LINE_SMOOTH)",disable_GL_LINE_SMOOTH);
+  log("glDisable(GL_MULTISAMPLE)",disable_GL_MULTISAMPLE);
+  log("glDisable(GL_POLYGON_OFFSET_FILL)",disable_GL_POLYGON_OFFSET_FILL);
+  log("glDisable(GL_POLYGON_OFFSET_LINE)",disable_GL_POLYGON_OFFSET_LINE);
+  log("glDisable(GL_POLYGON_OFFSET_POINT)",disable_GL_POLYGON_OFFSET_POINT);
+  log("glDisable(GL_POLYGON_SMOOTH)",disable_GL_POLYGON_SMOOTH);
+  log("glDisable(GL_PRIMITIVE_RESTART)",disable_GL_PRIMITIVE_RESTART);
+  log("glDisable(GL_PRIMITIVE_RESTART_FIXED_INDEX)",disable_GL_PRIMITIVE_RESTART_FIXED_INDEX);
+  log("glDisable(GL_PROGRAM_POINT_SIZE)",disable_GL_PROGRAM_POINT_SIZE);
+  log("glDisable(GL_RESCALE_NORMAL)",disable_GL_RESCALE_NORMAL);
+  log("glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE)",disable_GL_SAMPLE_ALPHA_TO_COVERAGE);
+  log("glDisable(GL_SAMPLE_ALPHA_TO_ONE)",disable_GL_SAMPLE_ALPHA_TO_ONE);
+  log("glDisable(GL_SAMPLE_COVERAGE)",disable_GL_SAMPLE_COVERAGE);
+  log("glDisable(GL_SAMPLE_MASK)",disable_GL_SAMPLE_MASK);
+  log("glDisable(GL_SCISSOR_TEST)",disable_GL_SCISSOR_TEST);
+  log("glDisable(GL_STENCIL_TEST)",disable_GL_STENCIL_TEST);
+  log("glDisable(GL_TEXTURE_2D)",disable_GL_TEXTURE_2D);
+  log("glDisable(GL_TEXTURE_CUBE_MAP_SEAMLESS)",disable_GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
 }
 

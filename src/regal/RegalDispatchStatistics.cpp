@@ -835,22 +835,6 @@ static void REGAL_CALL statistics_glDisable(GLenum cap)
   switch (cap)
   {
     case GL_BLEND:                                statistics.disable_GL_BLEND++;                               break;
-    case GL_COLOR_LOGIC_OP:                       statistics.disable_GL_COLOR_LOGIC_OP++;                      break;
-    case GL_CULL_FACE:                            statistics.disable_GL_CULL_FACE++;                           break;
-    case GL_DEPTH_TEST:                           statistics.disable_GL_DEPTH_TEST++;                          break;
-    case GL_DITHER:                               statistics.disable_GL_DITHER++;                              break;
-    case GL_LINE_SMOOTH:                          statistics.disable_GL_LINE_SMOOTH++;                         break;
-    case GL_POLYGON_OFFSET_FILL:                  statistics.disable_GL_POLYGON_OFFSET_FILL++;                 break;
-    case GL_POLYGON_OFFSET_LINE:                  statistics.disable_GL_POLYGON_OFFSET_LINE++;                 break;
-    case GL_POLYGON_OFFSET_POINT:                 statistics.disable_GL_POLYGON_OFFSET_POINT++;                break;
-    case GL_POLYGON_SMOOTH:                       statistics.disable_GL_POLYGON_SMOOTH++;                      break;
-    case GL_SCISSOR_TEST:                         statistics.disable_GL_SCISSOR_TEST++;                        break;
-    case GL_STENCIL_TEST:                         statistics.disable_GL_STENCIL_TEST++;                        break;
-    case GL_RESCALE_NORMAL:                       statistics.disable_GL_RESCALE_NORMAL++;                      break;
-    case GL_MULTISAMPLE:                          statistics.disable_GL_MULTISAMPLE++;                         break;
-    case GL_SAMPLE_ALPHA_TO_COVERAGE:             statistics.disable_GL_SAMPLE_ALPHA_TO_COVERAGE++;            break;
-    case GL_SAMPLE_ALPHA_TO_ONE:                  statistics.disable_GL_SAMPLE_ALPHA_TO_ONE++;                 break;
-    case GL_SAMPLE_COVERAGE:                      statistics.disable_GL_SAMPLE_COVERAGE++;                     break;
     case GL_CLIP_DISTANCE0:                       statistics.disable_GL_CLIP_DISTANCE0++;                      break;
     case GL_CLIP_DISTANCE1:                       statistics.disable_GL_CLIP_DISTANCE1++;                      break;
     case GL_CLIP_DISTANCE2:                       statistics.disable_GL_CLIP_DISTANCE2++;                      break;
@@ -859,16 +843,32 @@ static void REGAL_CALL statistics_glDisable(GLenum cap)
     case GL_CLIP_DISTANCE5:                       statistics.disable_GL_CLIP_DISTANCE5++;                      break;
     case GL_CLIP_DISTANCE6:                       statistics.disable_GL_CLIP_DISTANCE6++;                      break;
     case GL_CLIP_DISTANCE7:                       statistics.disable_GL_CLIP_DISTANCE7++;                      break;
-    case GL_PRIMITIVE_RESTART:                    statistics.disable_GL_PRIMITIVE_RESTART++;                   break;
-    case GL_PROGRAM_POINT_SIZE:                   statistics.disable_GL_PROGRAM_POINT_SIZE++;                  break;
-    case GL_PRIMITIVE_RESTART_FIXED_INDEX:        statistics.disable_GL_PRIMITIVE_RESTART_FIXED_INDEX++;       break;
-    case GL_DEPTH_CLAMP:                          statistics.disable_GL_DEPTH_CLAMP++;                         break;
-    case GL_FRAMEBUFFER_SRGB:                     statistics.disable_GL_FRAMEBUFFER_SRGB++;                    break;
-    case GL_TEXTURE_2D:                           statistics.disable_GL_TEXTURE_2D++;                          break;
-    case GL_TEXTURE_CUBE_MAP_SEAMLESS:            statistics.disable_GL_TEXTURE_CUBE_MAP_SEAMLESS++;           break;
-    case GL_SAMPLE_MASK:                          statistics.disable_GL_SAMPLE_MASK++;                         break;
+    case GL_COLOR_LOGIC_OP:                       statistics.disable_GL_COLOR_LOGIC_OP++;                      break;
+    case GL_CULL_FACE:                            statistics.disable_GL_CULL_FACE++;                           break;
     case GL_DEBUG_OUTPUT:                         statistics.disable_GL_DEBUG_OUTPUT++;                        break;
     case GL_DEBUG_OUTPUT_SYNCHRONOUS:             statistics.disable_GL_DEBUG_OUTPUT_SYNCHRONOUS++;            break;
+    case GL_DEPTH_CLAMP:                          statistics.disable_GL_DEPTH_CLAMP++;                         break;
+    case GL_DEPTH_TEST:                           statistics.disable_GL_DEPTH_TEST++;                          break;
+    case GL_DITHER:                               statistics.disable_GL_DITHER++;                              break;
+    case GL_FRAMEBUFFER_SRGB:                     statistics.disable_GL_FRAMEBUFFER_SRGB++;                    break;
+    case GL_LINE_SMOOTH:                          statistics.disable_GL_LINE_SMOOTH++;                         break;
+    case GL_MULTISAMPLE:                          statistics.disable_GL_MULTISAMPLE++;                         break;
+    case GL_POLYGON_OFFSET_FILL:                  statistics.disable_GL_POLYGON_OFFSET_FILL++;                 break;
+    case GL_POLYGON_OFFSET_LINE:                  statistics.disable_GL_POLYGON_OFFSET_LINE++;                 break;
+    case GL_POLYGON_OFFSET_POINT:                 statistics.disable_GL_POLYGON_OFFSET_POINT++;                break;
+    case GL_POLYGON_SMOOTH:                       statistics.disable_GL_POLYGON_SMOOTH++;                      break;
+    case GL_PRIMITIVE_RESTART:                    statistics.disable_GL_PRIMITIVE_RESTART++;                   break;
+    case GL_PRIMITIVE_RESTART_FIXED_INDEX:        statistics.disable_GL_PRIMITIVE_RESTART_FIXED_INDEX++;       break;
+    case GL_PROGRAM_POINT_SIZE:                   statistics.disable_GL_PROGRAM_POINT_SIZE++;                  break;
+    case GL_RESCALE_NORMAL:                       statistics.disable_GL_RESCALE_NORMAL++;                      break;
+    case GL_SAMPLE_ALPHA_TO_COVERAGE:             statistics.disable_GL_SAMPLE_ALPHA_TO_COVERAGE++;            break;
+    case GL_SAMPLE_ALPHA_TO_ONE:                  statistics.disable_GL_SAMPLE_ALPHA_TO_ONE++;                 break;
+    case GL_SAMPLE_COVERAGE:                      statistics.disable_GL_SAMPLE_COVERAGE++;                     break;
+    case GL_SAMPLE_MASK:                          statistics.disable_GL_SAMPLE_MASK++;                         break;
+    case GL_SCISSOR_TEST:                         statistics.disable_GL_SCISSOR_TEST++;                        break;
+    case GL_STENCIL_TEST:                         statistics.disable_GL_STENCIL_TEST++;                        break;
+    case GL_TEXTURE_2D:                           statistics.disable_GL_TEXTURE_2D++;                          break;
+    case GL_TEXTURE_CUBE_MAP_SEAMLESS:            statistics.disable_GL_TEXTURE_CUBE_MAP_SEAMLESS++;           break;
     default: break;
   }
 
@@ -945,22 +945,6 @@ static void REGAL_CALL statistics_glEnable(GLenum cap)
   switch (cap)
   {
     case GL_BLEND:                                statistics.enable_GL_BLEND++;                                break;
-    case GL_COLOR_LOGIC_OP:                       statistics.enable_GL_COLOR_LOGIC_OP++;                       break;
-    case GL_CULL_FACE:                            statistics.enable_GL_CULL_FACE++;                            break;
-    case GL_DEPTH_TEST:                           statistics.enable_GL_DEPTH_TEST++;                           break;
-    case GL_DITHER:                               statistics.enable_GL_DITHER++;                               break;
-    case GL_LINE_SMOOTH:                          statistics.enable_GL_LINE_SMOOTH++;                          break;
-    case GL_POLYGON_OFFSET_FILL:                  statistics.enable_GL_POLYGON_OFFSET_FILL++;                  break;
-    case GL_POLYGON_OFFSET_LINE:                  statistics.enable_GL_POLYGON_OFFSET_LINE++;                  break;
-    case GL_POLYGON_OFFSET_POINT:                 statistics.enable_GL_POLYGON_OFFSET_POINT++;                 break;
-    case GL_POLYGON_SMOOTH:                       statistics.enable_GL_POLYGON_SMOOTH++;                       break;
-    case GL_SCISSOR_TEST:                         statistics.enable_GL_SCISSOR_TEST++;                         break;
-    case GL_STENCIL_TEST:                         statistics.enable_GL_STENCIL_TEST++;                         break;
-    case GL_RESCALE_NORMAL:                       statistics.enable_GL_RESCALE_NORMAL++;                       break;
-    case GL_MULTISAMPLE:                          statistics.enable_GL_MULTISAMPLE++;                          break;
-    case GL_SAMPLE_ALPHA_TO_COVERAGE:             statistics.enable_GL_SAMPLE_ALPHA_TO_COVERAGE++;             break;
-    case GL_SAMPLE_ALPHA_TO_ONE:                  statistics.enable_GL_SAMPLE_ALPHA_TO_ONE++;                  break;
-    case GL_SAMPLE_COVERAGE:                      statistics.enable_GL_SAMPLE_COVERAGE++;                      break;
     case GL_CLIP_DISTANCE0:                       statistics.enable_GL_CLIP_DISTANCE0++;                       break;
     case GL_CLIP_DISTANCE1:                       statistics.enable_GL_CLIP_DISTANCE1++;                       break;
     case GL_CLIP_DISTANCE2:                       statistics.enable_GL_CLIP_DISTANCE2++;                       break;
@@ -969,16 +953,32 @@ static void REGAL_CALL statistics_glEnable(GLenum cap)
     case GL_CLIP_DISTANCE5:                       statistics.enable_GL_CLIP_DISTANCE5++;                       break;
     case GL_CLIP_DISTANCE6:                       statistics.enable_GL_CLIP_DISTANCE6++;                       break;
     case GL_CLIP_DISTANCE7:                       statistics.enable_GL_CLIP_DISTANCE7++;                       break;
-    case GL_PRIMITIVE_RESTART:                    statistics.enable_GL_PRIMITIVE_RESTART++;                    break;
-    case GL_PROGRAM_POINT_SIZE:                   statistics.enable_GL_PROGRAM_POINT_SIZE++;                   break;
-    case GL_PRIMITIVE_RESTART_FIXED_INDEX:        statistics.enable_GL_PRIMITIVE_RESTART_FIXED_INDEX++;        break;
-    case GL_DEPTH_CLAMP:                          statistics.enable_GL_DEPTH_CLAMP++;                          break;
-    case GL_FRAMEBUFFER_SRGB:                     statistics.enable_GL_FRAMEBUFFER_SRGB++;                     break;
-    case GL_TEXTURE_2D:                           statistics.enable_GL_TEXTURE_2D++;                           break;
-    case GL_TEXTURE_CUBE_MAP_SEAMLESS:            statistics.enable_GL_TEXTURE_CUBE_MAP_SEAMLESS++;            break;
-    case GL_SAMPLE_MASK:                          statistics.enable_GL_SAMPLE_MASK++;                          break;
+    case GL_COLOR_LOGIC_OP:                       statistics.enable_GL_COLOR_LOGIC_OP++;                       break;
+    case GL_CULL_FACE:                            statistics.enable_GL_CULL_FACE++;                            break;
     case GL_DEBUG_OUTPUT:                         statistics.enable_GL_DEBUG_OUTPUT++;                         break;
     case GL_DEBUG_OUTPUT_SYNCHRONOUS:             statistics.enable_GL_DEBUG_OUTPUT_SYNCHRONOUS++;             break;
+    case GL_DEPTH_CLAMP:                          statistics.enable_GL_DEPTH_CLAMP++;                          break;
+    case GL_DEPTH_TEST:                           statistics.enable_GL_DEPTH_TEST++;                           break;
+    case GL_DITHER:                               statistics.enable_GL_DITHER++;                               break;
+    case GL_FRAMEBUFFER_SRGB:                     statistics.enable_GL_FRAMEBUFFER_SRGB++;                     break;
+    case GL_LINE_SMOOTH:                          statistics.enable_GL_LINE_SMOOTH++;                          break;
+    case GL_MULTISAMPLE:                          statistics.enable_GL_MULTISAMPLE++;                          break;
+    case GL_POLYGON_OFFSET_FILL:                  statistics.enable_GL_POLYGON_OFFSET_FILL++;                  break;
+    case GL_POLYGON_OFFSET_LINE:                  statistics.enable_GL_POLYGON_OFFSET_LINE++;                  break;
+    case GL_POLYGON_OFFSET_POINT:                 statistics.enable_GL_POLYGON_OFFSET_POINT++;                 break;
+    case GL_POLYGON_SMOOTH:                       statistics.enable_GL_POLYGON_SMOOTH++;                       break;
+    case GL_PRIMITIVE_RESTART:                    statistics.enable_GL_PRIMITIVE_RESTART++;                    break;
+    case GL_PRIMITIVE_RESTART_FIXED_INDEX:        statistics.enable_GL_PRIMITIVE_RESTART_FIXED_INDEX++;        break;
+    case GL_PROGRAM_POINT_SIZE:                   statistics.enable_GL_PROGRAM_POINT_SIZE++;                   break;
+    case GL_RESCALE_NORMAL:                       statistics.enable_GL_RESCALE_NORMAL++;                       break;
+    case GL_SAMPLE_ALPHA_TO_COVERAGE:             statistics.enable_GL_SAMPLE_ALPHA_TO_COVERAGE++;             break;
+    case GL_SAMPLE_ALPHA_TO_ONE:                  statistics.enable_GL_SAMPLE_ALPHA_TO_ONE++;                  break;
+    case GL_SAMPLE_COVERAGE:                      statistics.enable_GL_SAMPLE_COVERAGE++;                      break;
+    case GL_SAMPLE_MASK:                          statistics.enable_GL_SAMPLE_MASK++;                          break;
+    case GL_SCISSOR_TEST:                         statistics.enable_GL_SCISSOR_TEST++;                         break;
+    case GL_STENCIL_TEST:                         statistics.enable_GL_STENCIL_TEST++;                         break;
+    case GL_TEXTURE_2D:                           statistics.enable_GL_TEXTURE_2D++;                           break;
+    case GL_TEXTURE_CUBE_MAP_SEAMLESS:            statistics.enable_GL_TEXTURE_CUBE_MAP_SEAMLESS++;            break;
     default: break;
   }
 
@@ -30284,6 +30284,61 @@ static void REGAL_CALL statistics_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLe
   _next->call(&_next->glBlendFuncSeparateINGR)(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL statistics_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glMapTexture2DINTEL++;
+
+  statistics.gl_intel_map_texture++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  GLvoid * ret = _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+  return ret;
+}
+
+static void REGAL_CALL statistics_glSyncTextureINTEL(GLuint texture)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glSyncTextureINTEL++;
+
+  statistics.gl_intel_map_texture++;
+
+  statistics.gl_intel_map_texture++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glSyncTextureINTEL)(texture);
+}
+
+static void REGAL_CALL statistics_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glUnmapTexture2DINTEL++;
+
+  statistics.gl_intel_map_texture++;
+
+  statistics.gl_intel_map_texture++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL statistics_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -43908,6 +43963,12 @@ void InitDispatchTableStatistics(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = statistics_glBlendFuncSeparateINGR;
+
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = statistics_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = statistics_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = statistics_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

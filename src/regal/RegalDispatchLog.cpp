@@ -19962,6 +19962,39 @@ static void REGAL_CALL log_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum dfa
     Driver("glBlendFuncSeparateINGR","(", toString(sfactorRGB), ", ", toString(dfactorRGB), ", ", toString(sfactorAlpha), ", ", toString(dfactorAlpha), ")");
 }
 
+// GL_INTEL_map_texture
+
+static GLvoid *REGAL_CALL log_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    GLvoid * ret = _next->call(&_next->glMapTexture2DINTEL)(texture, level, access, stride, layout);
+    Driver("glMapTexture2DINTEL","(", texture, ", ", level, ", ", access, ", ", boost::print::optional(stride,Logging::pointers), ", ", layout, ")", " returned ", boost::print::optional(ret,Logging::pointers));
+    return ret;
+}
+
+static void REGAL_CALL log_glSyncTextureINTEL(GLuint texture)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glSyncTextureINTEL)(texture);
+    Driver("glSyncTextureINTEL","(", texture, ")");
+}
+
+static void REGAL_CALL log_glUnmapTexture2DINTEL(GLuint texture, GLint level)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUnmapTexture2DINTEL)(texture, level);
+    Driver("glUnmapTexture2DINTEL","(", texture, ", ", level, ")");
+}
+
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL log_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -33201,6 +33234,12 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = log_glBlendFuncSeparateINGR;
+
+  // GL_INTEL_map_texture
+
+  tbl.glMapTexture2DINTEL = log_glMapTexture2DINTEL;
+  tbl.glSyncTextureINTEL = log_glSyncTextureINTEL;
+  tbl.glUnmapTexture2DINTEL = log_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

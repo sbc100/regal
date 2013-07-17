@@ -73,7 +73,7 @@ def apiDispatchFuncInitCode(apis, args, dispatchName, exclude=[], filter = lambd
       if getattr(function,'regalOnly',False)==True:
         continue
 
-      if function.name in exclude:
+      if function.name in exclude or function.category in exclude:
         continue
 
       name   = function.name
@@ -135,7 +135,7 @@ void InitDispatchTableGlobal%s%s(DispatchTableGlobal &tbl)
       if getattr(function,'regalOnly',False)==True:
         continue
 
-      if function.name in exclude:
+      if function.name in exclude or function.category in exclude:
         continue
 
       name   = function.name
