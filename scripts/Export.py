@@ -149,10 +149,6 @@ def traverse(apis, args):
           if i.name=='defines':
             i.enumerantsByName = sorted(i.enumerants,key=lambda k : k.name)
 
-        for i in api.enums:
-          if i.name=='defines':
-            i.enumerantsByName = sorted(i.enumerants,key=lambda k : k.name)
-
         for e in api.extensions:
           if e.name in emulatedExts:
             e.emulatedBy = emulatedExts[e.name]['emulatedBy']

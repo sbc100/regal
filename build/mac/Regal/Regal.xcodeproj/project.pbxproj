@@ -111,6 +111,65 @@
 		BCBF183C175EB49D00CB653A /* RegalMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBF1834175EB49D00CB653A /* RegalMutex.h */; };
 		BCBF183D175EB49D00CB653A /* RegalPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBF1835175EB49D00CB653A /* RegalPlugin.cpp */; };
 		BCBF183E175EB49D00CB653A /* RegalRect.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBF1836175EB49D00CB653A /* RegalRect.h */; };
+		BCDF6647178F0FC700EE9569 /* formatter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF661B178F0FC700EE9569 /* formatter.hpp */; };
+		BCDF6648178F0FC700EE9569 /* os_binary.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF661C178F0FC700EE9569 /* os_binary.hpp */; };
+		BCDF6649178F0FC700EE9569 /* os_dl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF661D178F0FC700EE9569 /* os_dl.hpp */; };
+		BCDF664A178F0FC700EE9569 /* os_memory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF661E178F0FC700EE9569 /* os_memory.hpp */; };
+		BCDF664B178F0FC700EE9569 /* os_posix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF661F178F0FC700EE9569 /* os_posix.cpp */; };
+		BCDF664C178F0FC700EE9569 /* os_process.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6620178F0FC700EE9569 /* os_process.hpp */; };
+		BCDF664D178F0FC700EE9569 /* os_string.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6621178F0FC700EE9569 /* os_string.hpp */; };
+		BCDF664E178F0FC700EE9569 /* os_thread.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6622178F0FC700EE9569 /* os_thread.hpp */; };
+		BCDF664F178F0FC700EE9569 /* os_time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6623178F0FC700EE9569 /* os_time.hpp */; };
+		BCDF6650178F0FC700EE9569 /* os_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6624178F0FC700EE9569 /* os_win32.cpp */; };
+		BCDF6651178F0FC700EE9569 /* os.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6625178F0FC700EE9569 /* os.hpp */; };
+		BCDF6652178F0FC700EE9569 /* trace_api.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6626178F0FC700EE9569 /* trace_api.hpp */; };
+		BCDF6653178F0FC700EE9569 /* trace_backtrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6627178F0FC700EE9569 /* trace_backtrace.cpp */; };
+		BCDF6654178F0FC700EE9569 /* trace_backtrace.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6628178F0FC700EE9569 /* trace_backtrace.hpp */; };
+		BCDF6655178F0FC700EE9569 /* trace_callset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6629178F0FC700EE9569 /* trace_callset.cpp */; };
+		BCDF6656178F0FC700EE9569 /* trace_callset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF662A178F0FC700EE9569 /* trace_callset.hpp */; };
+		BCDF6657178F0FC700EE9569 /* trace_dump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF662B178F0FC700EE9569 /* trace_dump.cpp */; };
+		BCDF6658178F0FC700EE9569 /* trace_dump.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF662C178F0FC700EE9569 /* trace_dump.hpp */; };
+		BCDF6659178F0FC700EE9569 /* trace_fast_callset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF662D178F0FC700EE9569 /* trace_fast_callset.cpp */; };
+		BCDF665A178F0FC700EE9569 /* trace_fast_callset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF662E178F0FC700EE9569 /* trace_fast_callset.hpp */; };
+		BCDF665B178F0FC700EE9569 /* trace_file_read.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF662F178F0FC700EE9569 /* trace_file_read.cpp */; };
+		BCDF665C178F0FC700EE9569 /* trace_file_snappy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6630178F0FC700EE9569 /* trace_file_snappy.cpp */; };
+		BCDF665D178F0FC700EE9569 /* trace_file_write.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6631178F0FC700EE9569 /* trace_file_write.cpp */; };
+		BCDF665F178F0FC700EE9569 /* trace_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6633178F0FC700EE9569 /* trace_file.cpp */; };
+		BCDF6660178F0FC700EE9569 /* trace_file.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6634178F0FC700EE9569 /* trace_file.hpp */; };
+		BCDF6661178F0FC700EE9569 /* trace_format.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6635178F0FC700EE9569 /* trace_format.hpp */; };
+		BCDF6662178F0FC700EE9569 /* trace_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6636178F0FC700EE9569 /* trace_loader.cpp */; };
+		BCDF6663178F0FC700EE9569 /* trace_loader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6637178F0FC700EE9569 /* trace_loader.hpp */; };
+		BCDF6664178F0FC700EE9569 /* trace_lookup.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6638178F0FC700EE9569 /* trace_lookup.hpp */; };
+		BCDF6665178F0FC700EE9569 /* trace_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6639178F0FC700EE9569 /* trace_model.cpp */; };
+		BCDF6666178F0FC700EE9569 /* trace_model.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF663A178F0FC700EE9569 /* trace_model.hpp */; };
+		BCDF6667178F0FC700EE9569 /* trace_option.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF663B178F0FC700EE9569 /* trace_option.cpp */; };
+		BCDF6668178F0FC700EE9569 /* trace_option.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF663C178F0FC700EE9569 /* trace_option.hpp */; };
+		BCDF6669178F0FC700EE9569 /* trace_parser_flags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF663D178F0FC700EE9569 /* trace_parser_flags.cpp */; };
+		BCDF666A178F0FC700EE9569 /* trace_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF663E178F0FC700EE9569 /* trace_parser.cpp */; };
+		BCDF666B178F0FC700EE9569 /* trace_parser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF663F178F0FC700EE9569 /* trace_parser.hpp */; };
+		BCDF666C178F0FC700EE9569 /* trace_profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6640178F0FC700EE9569 /* trace_profiler.cpp */; };
+		BCDF666D178F0FC700EE9569 /* trace_profiler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6641178F0FC700EE9569 /* trace_profiler.hpp */; };
+		BCDF666E178F0FC700EE9569 /* trace_writer_model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6642178F0FC700EE9569 /* trace_writer_model.cpp */; };
+		BCDF666F178F0FC700EE9569 /* trace_writer_regal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6643178F0FC700EE9569 /* trace_writer_regal.cpp */; };
+		BCDF6670178F0FC700EE9569 /* trace_writer_regal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6644178F0FC700EE9569 /* trace_writer_regal.hpp */; };
+		BCDF6671178F0FC700EE9569 /* trace_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6645178F0FC700EE9569 /* trace_writer.cpp */; };
+		BCDF6672178F0FC700EE9569 /* trace_writer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6646178F0FC700EE9569 /* trace_writer.hpp */; };
+		BCDF6675178F0FF200EE9569 /* glproc_regal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6673178F0FF200EE9569 /* glproc_regal.cpp */; };
+		BCDF6676178F0FF200EE9569 /* glproc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6674178F0FF200EE9569 /* glproc.hpp */; };
+		BCDF667C178F103E00EE9569 /* glcaps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6677178F103E00EE9569 /* glcaps.cpp */; };
+		BCDF667D178F103E00EE9569 /* gltrace_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6678178F103E00EE9569 /* gltrace_state.cpp */; };
+		BCDF667E178F103E00EE9569 /* regaltrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6679178F103E00EE9569 /* regaltrace.cpp */; };
+		BCDF667F178F103E00EE9569 /* trace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF667A178F103E00EE9569 /* trace.cpp */; };
+		BCDF6680178F103E00EE9569 /* trace.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF667B178F103E00EE9569 /* trace.hpp */; };
+		BCDF6684178F105C00EE9569 /* eglsize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6681178F105C00EE9569 /* eglsize.cpp */; };
+		BCDF6685178F105C00EE9569 /* eglsize.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6682178F105C00EE9569 /* eglsize.hpp */; };
+		BCDF6686178F105C00EE9569 /* glsize.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6683178F105C00EE9569 /* glsize.hpp */; };
+		BCDF668E178F14A400EE9569 /* snappy-c.cc in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6688178F14A400EE9569 /* snappy-c.cc */; };
+		BCDF668F178F14A400EE9569 /* snappy-c.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6689178F14A400EE9569 /* snappy-c.h */; };
+		BCDF6690178F14A400EE9569 /* snappy-sinksource.cc in Sources */ = {isa = PBXBuildFile; fileRef = BCDF668A178F14A400EE9569 /* snappy-sinksource.cc */; };
+		BCDF6691178F14A400EE9569 /* snappy-sinksource.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDF668B178F14A400EE9569 /* snappy-sinksource.h */; };
+		BCDF6692178F14A400EE9569 /* snappy.cc in Sources */ = {isa = PBXBuildFile; fileRef = BCDF668C178F14A400EE9569 /* snappy.cc */; };
+		BCDF6693178F14A400EE9569 /* snappy.h in Headers */ = {isa = PBXBuildFile; fileRef = BCDF668D178F14A400EE9569 /* snappy.h */; };
 		BCF889A715E079C20093B7D5 /* RegalDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF889A515E079C20093B7D5 /* RegalDispatcher.cpp */; };
 		BCF889A815E079C20093B7D5 /* RegalDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = BCF889A615E079C20093B7D5 /* RegalDispatcher.h */; };
 		BCF889AA15E079D80093B7D5 /* RegalDispatchStaticES2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF889A915E079D80093B7D5 /* RegalDispatchStaticES2.cpp */; };
@@ -224,6 +283,65 @@
 		BCBF1834175EB49D00CB653A /* RegalMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalMutex.h; path = ../../../src/regal/RegalMutex.h; sourceTree = "<group>"; };
 		BCBF1835175EB49D00CB653A /* RegalPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalPlugin.cpp; path = ../../../src/regal/RegalPlugin.cpp; sourceTree = "<group>"; };
 		BCBF1836175EB49D00CB653A /* RegalRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalRect.h; path = ../../../src/regal/RegalRect.h; sourceTree = "<group>"; };
+		BCDF661B178F0FC700EE9569 /* formatter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = formatter.hpp; path = ../../../src/apitrace/common/formatter.hpp; sourceTree = "<group>"; };
+		BCDF661C178F0FC700EE9569 /* os_binary.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_binary.hpp; path = ../../../src/apitrace/common/os_binary.hpp; sourceTree = "<group>"; };
+		BCDF661D178F0FC700EE9569 /* os_dl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_dl.hpp; path = ../../../src/apitrace/common/os_dl.hpp; sourceTree = "<group>"; };
+		BCDF661E178F0FC700EE9569 /* os_memory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_memory.hpp; path = ../../../src/apitrace/common/os_memory.hpp; sourceTree = "<group>"; };
+		BCDF661F178F0FC700EE9569 /* os_posix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = os_posix.cpp; path = ../../../src/apitrace/common/os_posix.cpp; sourceTree = "<group>"; };
+		BCDF6620178F0FC700EE9569 /* os_process.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_process.hpp; path = ../../../src/apitrace/common/os_process.hpp; sourceTree = "<group>"; };
+		BCDF6621178F0FC700EE9569 /* os_string.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_string.hpp; path = ../../../src/apitrace/common/os_string.hpp; sourceTree = "<group>"; };
+		BCDF6622178F0FC700EE9569 /* os_thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_thread.hpp; path = ../../../src/apitrace/common/os_thread.hpp; sourceTree = "<group>"; };
+		BCDF6623178F0FC700EE9569 /* os_time.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_time.hpp; path = ../../../src/apitrace/common/os_time.hpp; sourceTree = "<group>"; };
+		BCDF6624178F0FC700EE9569 /* os_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = os_win32.cpp; path = ../../../src/apitrace/common/os_win32.cpp; sourceTree = "<group>"; };
+		BCDF6625178F0FC700EE9569 /* os.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os.hpp; path = ../../../src/apitrace/common/os.hpp; sourceTree = "<group>"; };
+		BCDF6626178F0FC700EE9569 /* trace_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_api.hpp; path = ../../../src/apitrace/common/trace_api.hpp; sourceTree = "<group>"; };
+		BCDF6627178F0FC700EE9569 /* trace_backtrace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_backtrace.cpp; path = ../../../src/apitrace/common/trace_backtrace.cpp; sourceTree = "<group>"; };
+		BCDF6628178F0FC700EE9569 /* trace_backtrace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_backtrace.hpp; path = ../../../src/apitrace/common/trace_backtrace.hpp; sourceTree = "<group>"; };
+		BCDF6629178F0FC700EE9569 /* trace_callset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_callset.cpp; path = ../../../src/apitrace/common/trace_callset.cpp; sourceTree = "<group>"; };
+		BCDF662A178F0FC700EE9569 /* trace_callset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_callset.hpp; path = ../../../src/apitrace/common/trace_callset.hpp; sourceTree = "<group>"; };
+		BCDF662B178F0FC700EE9569 /* trace_dump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_dump.cpp; path = ../../../src/apitrace/common/trace_dump.cpp; sourceTree = "<group>"; };
+		BCDF662C178F0FC700EE9569 /* trace_dump.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_dump.hpp; path = ../../../src/apitrace/common/trace_dump.hpp; sourceTree = "<group>"; };
+		BCDF662D178F0FC700EE9569 /* trace_fast_callset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_fast_callset.cpp; path = ../../../src/apitrace/common/trace_fast_callset.cpp; sourceTree = "<group>"; };
+		BCDF662E178F0FC700EE9569 /* trace_fast_callset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_fast_callset.hpp; path = ../../../src/apitrace/common/trace_fast_callset.hpp; sourceTree = "<group>"; };
+		BCDF662F178F0FC700EE9569 /* trace_file_read.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_file_read.cpp; path = ../../../src/apitrace/common/trace_file_read.cpp; sourceTree = "<group>"; };
+		BCDF6630178F0FC700EE9569 /* trace_file_snappy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_file_snappy.cpp; path = ../../../src/apitrace/common/trace_file_snappy.cpp; sourceTree = "<group>"; };
+		BCDF6631178F0FC700EE9569 /* trace_file_write.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_file_write.cpp; path = ../../../src/apitrace/common/trace_file_write.cpp; sourceTree = "<group>"; };
+		BCDF6633178F0FC700EE9569 /* trace_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_file.cpp; path = ../../../src/apitrace/common/trace_file.cpp; sourceTree = "<group>"; };
+		BCDF6634178F0FC700EE9569 /* trace_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_file.hpp; path = ../../../src/apitrace/common/trace_file.hpp; sourceTree = "<group>"; };
+		BCDF6635178F0FC700EE9569 /* trace_format.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_format.hpp; path = ../../../src/apitrace/common/trace_format.hpp; sourceTree = "<group>"; };
+		BCDF6636178F0FC700EE9569 /* trace_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_loader.cpp; path = ../../../src/apitrace/common/trace_loader.cpp; sourceTree = "<group>"; };
+		BCDF6637178F0FC700EE9569 /* trace_loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_loader.hpp; path = ../../../src/apitrace/common/trace_loader.hpp; sourceTree = "<group>"; };
+		BCDF6638178F0FC700EE9569 /* trace_lookup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_lookup.hpp; path = ../../../src/apitrace/common/trace_lookup.hpp; sourceTree = "<group>"; };
+		BCDF6639178F0FC700EE9569 /* trace_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_model.cpp; path = ../../../src/apitrace/common/trace_model.cpp; sourceTree = "<group>"; };
+		BCDF663A178F0FC700EE9569 /* trace_model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_model.hpp; path = ../../../src/apitrace/common/trace_model.hpp; sourceTree = "<group>"; };
+		BCDF663B178F0FC700EE9569 /* trace_option.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_option.cpp; path = ../../../src/apitrace/common/trace_option.cpp; sourceTree = "<group>"; };
+		BCDF663C178F0FC700EE9569 /* trace_option.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_option.hpp; path = ../../../src/apitrace/common/trace_option.hpp; sourceTree = "<group>"; };
+		BCDF663D178F0FC700EE9569 /* trace_parser_flags.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_parser_flags.cpp; path = ../../../src/apitrace/common/trace_parser_flags.cpp; sourceTree = "<group>"; };
+		BCDF663E178F0FC700EE9569 /* trace_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_parser.cpp; path = ../../../src/apitrace/common/trace_parser.cpp; sourceTree = "<group>"; };
+		BCDF663F178F0FC700EE9569 /* trace_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_parser.hpp; path = ../../../src/apitrace/common/trace_parser.hpp; sourceTree = "<group>"; };
+		BCDF6640178F0FC700EE9569 /* trace_profiler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_profiler.cpp; path = ../../../src/apitrace/common/trace_profiler.cpp; sourceTree = "<group>"; };
+		BCDF6641178F0FC700EE9569 /* trace_profiler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_profiler.hpp; path = ../../../src/apitrace/common/trace_profiler.hpp; sourceTree = "<group>"; };
+		BCDF6642178F0FC700EE9569 /* trace_writer_model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_writer_model.cpp; path = ../../../src/apitrace/common/trace_writer_model.cpp; sourceTree = "<group>"; };
+		BCDF6643178F0FC700EE9569 /* trace_writer_regal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_writer_regal.cpp; path = ../../../src/apitrace/common/trace_writer_regal.cpp; sourceTree = "<group>"; };
+		BCDF6644178F0FC700EE9569 /* trace_writer_regal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_writer_regal.hpp; path = ../../../src/apitrace/common/trace_writer_regal.hpp; sourceTree = "<group>"; };
+		BCDF6645178F0FC700EE9569 /* trace_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_writer.cpp; path = ../../../src/apitrace/common/trace_writer.cpp; sourceTree = "<group>"; };
+		BCDF6646178F0FC700EE9569 /* trace_writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_writer.hpp; path = ../../../src/apitrace/common/trace_writer.hpp; sourceTree = "<group>"; };
+		BCDF6673178F0FF200EE9569 /* glproc_regal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glproc_regal.cpp; path = ../../../src/apitrace/dispatch/glproc_regal.cpp; sourceTree = "<group>"; };
+		BCDF6674178F0FF200EE9569 /* glproc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = glproc.hpp; path = ../../../src/apitrace/dispatch/glproc.hpp; sourceTree = "<group>"; };
+		BCDF6677178F103E00EE9569 /* glcaps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glcaps.cpp; path = ../../../src/apitrace/wrappers/glcaps.cpp; sourceTree = "<group>"; };
+		BCDF6678178F103E00EE9569 /* gltrace_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gltrace_state.cpp; path = ../../../src/apitrace/wrappers/gltrace_state.cpp; sourceTree = "<group>"; };
+		BCDF6679178F103E00EE9569 /* regaltrace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = regaltrace.cpp; path = ../../../src/apitrace/wrappers/regaltrace.cpp; sourceTree = "<group>"; };
+		BCDF667A178F103E00EE9569 /* trace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace.cpp; path = ../../../src/apitrace/wrappers/trace.cpp; sourceTree = "<group>"; };
+		BCDF667B178F103E00EE9569 /* trace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace.hpp; path = ../../../src/apitrace/wrappers/trace.hpp; sourceTree = "<group>"; };
+		BCDF6681178F105C00EE9569 /* eglsize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eglsize.cpp; path = ../../../src/apitrace/helpers/eglsize.cpp; sourceTree = "<group>"; };
+		BCDF6682178F105C00EE9569 /* eglsize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = eglsize.hpp; path = ../../../src/apitrace/helpers/eglsize.hpp; sourceTree = "<group>"; };
+		BCDF6683178F105C00EE9569 /* glsize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = glsize.hpp; path = ../../../src/apitrace/helpers/glsize.hpp; sourceTree = "<group>"; };
+		BCDF6688178F14A400EE9569 /* snappy-c.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "snappy-c.cc"; path = "../../../src/snappy/snappy-c.cc"; sourceTree = "<group>"; };
+		BCDF6689178F14A400EE9569 /* snappy-c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "snappy-c.h"; path = "../../../src/snappy/snappy-c.h"; sourceTree = "<group>"; };
+		BCDF668A178F14A400EE9569 /* snappy-sinksource.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "snappy-sinksource.cc"; path = "../../../src/snappy/snappy-sinksource.cc"; sourceTree = "<group>"; };
+		BCDF668B178F14A400EE9569 /* snappy-sinksource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "snappy-sinksource.h"; path = "../../../src/snappy/snappy-sinksource.h"; sourceTree = "<group>"; };
+		BCDF668C178F14A400EE9569 /* snappy.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snappy.cc; path = ../../../src/snappy/snappy.cc; sourceTree = "<group>"; };
+		BCDF668D178F14A400EE9569 /* snappy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = snappy.h; path = ../../../src/snappy/snappy.h; sourceTree = "<group>"; };
 		BCF889A515E079C20093B7D5 /* RegalDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalDispatcher.cpp; path = ../../../src/regal/RegalDispatcher.cpp; sourceTree = "<group>"; };
 		BCF889A615E079C20093B7D5 /* RegalDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalDispatcher.h; path = ../../../src/regal/RegalDispatcher.h; sourceTree = "<group>"; };
 		BCF889A915E079D80093B7D5 /* RegalDispatchStaticES2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalDispatchStaticES2.cpp; path = ../../../src/regal/RegalDispatchStaticES2.cpp; sourceTree = "<group>"; };
@@ -268,6 +386,8 @@
 		43A6C1D015C48CFA0063667E /* Regal */ = {
 			isa = PBXGroup;
 			children = (
+				BCDF6687178F146B00EE9569 /* snappy */,
+				BCDF661A178F0F7500EE9569 /* apitrace */,
 				436E18CB17020061005BE93E /* jsonsl */,
 				43A6C1D215C48D1F0063667E /* linear.h */,
 				BC020951160D1BD8003FAB99 /* md5 */,
@@ -396,6 +516,79 @@
 			name = md5;
 			sourceTree = "<group>";
 		};
+		BCDF661A178F0F7500EE9569 /* apitrace */ = {
+			isa = PBXGroup;
+			children = (
+				BCDF6681178F105C00EE9569 /* eglsize.cpp */,
+				BCDF6682178F105C00EE9569 /* eglsize.hpp */,
+				BCDF6683178F105C00EE9569 /* glsize.hpp */,
+				BCDF6677178F103E00EE9569 /* glcaps.cpp */,
+				BCDF6678178F103E00EE9569 /* gltrace_state.cpp */,
+				BCDF6679178F103E00EE9569 /* regaltrace.cpp */,
+				BCDF667A178F103E00EE9569 /* trace.cpp */,
+				BCDF667B178F103E00EE9569 /* trace.hpp */,
+				BCDF6673178F0FF200EE9569 /* glproc_regal.cpp */,
+				BCDF6674178F0FF200EE9569 /* glproc.hpp */,
+				BCDF661B178F0FC700EE9569 /* formatter.hpp */,
+				BCDF661C178F0FC700EE9569 /* os_binary.hpp */,
+				BCDF661D178F0FC700EE9569 /* os_dl.hpp */,
+				BCDF661E178F0FC700EE9569 /* os_memory.hpp */,
+				BCDF661F178F0FC700EE9569 /* os_posix.cpp */,
+				BCDF6620178F0FC700EE9569 /* os_process.hpp */,
+				BCDF6621178F0FC700EE9569 /* os_string.hpp */,
+				BCDF6622178F0FC700EE9569 /* os_thread.hpp */,
+				BCDF6623178F0FC700EE9569 /* os_time.hpp */,
+				BCDF6624178F0FC700EE9569 /* os_win32.cpp */,
+				BCDF6625178F0FC700EE9569 /* os.hpp */,
+				BCDF6626178F0FC700EE9569 /* trace_api.hpp */,
+				BCDF6627178F0FC700EE9569 /* trace_backtrace.cpp */,
+				BCDF6628178F0FC700EE9569 /* trace_backtrace.hpp */,
+				BCDF6629178F0FC700EE9569 /* trace_callset.cpp */,
+				BCDF662A178F0FC700EE9569 /* trace_callset.hpp */,
+				BCDF662B178F0FC700EE9569 /* trace_dump.cpp */,
+				BCDF662C178F0FC700EE9569 /* trace_dump.hpp */,
+				BCDF662D178F0FC700EE9569 /* trace_fast_callset.cpp */,
+				BCDF662E178F0FC700EE9569 /* trace_fast_callset.hpp */,
+				BCDF662F178F0FC700EE9569 /* trace_file_read.cpp */,
+				BCDF6630178F0FC700EE9569 /* trace_file_snappy.cpp */,
+				BCDF6631178F0FC700EE9569 /* trace_file_write.cpp */,
+				BCDF6633178F0FC700EE9569 /* trace_file.cpp */,
+				BCDF6634178F0FC700EE9569 /* trace_file.hpp */,
+				BCDF6635178F0FC700EE9569 /* trace_format.hpp */,
+				BCDF6636178F0FC700EE9569 /* trace_loader.cpp */,
+				BCDF6637178F0FC700EE9569 /* trace_loader.hpp */,
+				BCDF6638178F0FC700EE9569 /* trace_lookup.hpp */,
+				BCDF6639178F0FC700EE9569 /* trace_model.cpp */,
+				BCDF663A178F0FC700EE9569 /* trace_model.hpp */,
+				BCDF663B178F0FC700EE9569 /* trace_option.cpp */,
+				BCDF663C178F0FC700EE9569 /* trace_option.hpp */,
+				BCDF663D178F0FC700EE9569 /* trace_parser_flags.cpp */,
+				BCDF663E178F0FC700EE9569 /* trace_parser.cpp */,
+				BCDF663F178F0FC700EE9569 /* trace_parser.hpp */,
+				BCDF6640178F0FC700EE9569 /* trace_profiler.cpp */,
+				BCDF6641178F0FC700EE9569 /* trace_profiler.hpp */,
+				BCDF6642178F0FC700EE9569 /* trace_writer_model.cpp */,
+				BCDF6643178F0FC700EE9569 /* trace_writer_regal.cpp */,
+				BCDF6644178F0FC700EE9569 /* trace_writer_regal.hpp */,
+				BCDF6645178F0FC700EE9569 /* trace_writer.cpp */,
+				BCDF6646178F0FC700EE9569 /* trace_writer.hpp */,
+			);
+			name = apitrace;
+			sourceTree = "<group>";
+		};
+		BCDF6687178F146B00EE9569 /* snappy */ = {
+			isa = PBXGroup;
+			children = (
+				BCDF6688178F14A400EE9569 /* snappy-c.cc */,
+				BCDF6689178F14A400EE9569 /* snappy-c.h */,
+				BCDF668A178F14A400EE9569 /* snappy-sinksource.cc */,
+				BCDF668B178F14A400EE9569 /* snappy-sinksource.h */,
+				BCDF668C178F14A400EE9569 /* snappy.cc */,
+				BCDF668D178F14A400EE9569 /* snappy.h */,
+			);
+			name = snappy;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -462,6 +655,37 @@
 				BCBF183B175EB49D00CB653A /* RegalFloat4.h in Headers */,
 				BCBF183C175EB49D00CB653A /* RegalMutex.h in Headers */,
 				BCBF183E175EB49D00CB653A /* RegalRect.h in Headers */,
+				BCDF6647178F0FC700EE9569 /* formatter.hpp in Headers */,
+				BCDF6648178F0FC700EE9569 /* os_binary.hpp in Headers */,
+				BCDF6649178F0FC700EE9569 /* os_dl.hpp in Headers */,
+				BCDF664A178F0FC700EE9569 /* os_memory.hpp in Headers */,
+				BCDF664C178F0FC700EE9569 /* os_process.hpp in Headers */,
+				BCDF664D178F0FC700EE9569 /* os_string.hpp in Headers */,
+				BCDF664E178F0FC700EE9569 /* os_thread.hpp in Headers */,
+				BCDF664F178F0FC700EE9569 /* os_time.hpp in Headers */,
+				BCDF6651178F0FC700EE9569 /* os.hpp in Headers */,
+				BCDF6652178F0FC700EE9569 /* trace_api.hpp in Headers */,
+				BCDF6654178F0FC700EE9569 /* trace_backtrace.hpp in Headers */,
+				BCDF6656178F0FC700EE9569 /* trace_callset.hpp in Headers */,
+				BCDF6658178F0FC700EE9569 /* trace_dump.hpp in Headers */,
+				BCDF665A178F0FC700EE9569 /* trace_fast_callset.hpp in Headers */,
+				BCDF6660178F0FC700EE9569 /* trace_file.hpp in Headers */,
+				BCDF6661178F0FC700EE9569 /* trace_format.hpp in Headers */,
+				BCDF6663178F0FC700EE9569 /* trace_loader.hpp in Headers */,
+				BCDF6664178F0FC700EE9569 /* trace_lookup.hpp in Headers */,
+				BCDF6666178F0FC700EE9569 /* trace_model.hpp in Headers */,
+				BCDF6668178F0FC700EE9569 /* trace_option.hpp in Headers */,
+				BCDF666B178F0FC700EE9569 /* trace_parser.hpp in Headers */,
+				BCDF666D178F0FC700EE9569 /* trace_profiler.hpp in Headers */,
+				BCDF6670178F0FC700EE9569 /* trace_writer_regal.hpp in Headers */,
+				BCDF6672178F0FC700EE9569 /* trace_writer.hpp in Headers */,
+				BCDF6676178F0FF200EE9569 /* glproc.hpp in Headers */,
+				BCDF6680178F103E00EE9569 /* trace.hpp in Headers */,
+				BCDF6685178F105C00EE9569 /* eglsize.hpp in Headers */,
+				BCDF6686178F105C00EE9569 /* glsize.hpp in Headers */,
+				BCDF668F178F14A400EE9569 /* snappy-c.h in Headers */,
+				BCDF6691178F14A400EE9569 /* snappy-sinksource.h in Headers */,
+				BCDF6693178F14A400EE9569 /* snappy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +788,34 @@
 				BCBF1839175EB49D00CB653A /* RegalDispatchStatistics.cpp in Sources */,
 				BCBF183A175EB49D00CB653A /* RegalDispatchTrace.cpp in Sources */,
 				BCBF183D175EB49D00CB653A /* RegalPlugin.cpp in Sources */,
+				BCDF664B178F0FC700EE9569 /* os_posix.cpp in Sources */,
+				BCDF6650178F0FC700EE9569 /* os_win32.cpp in Sources */,
+				BCDF6653178F0FC700EE9569 /* trace_backtrace.cpp in Sources */,
+				BCDF6655178F0FC700EE9569 /* trace_callset.cpp in Sources */,
+				BCDF6657178F0FC700EE9569 /* trace_dump.cpp in Sources */,
+				BCDF6659178F0FC700EE9569 /* trace_fast_callset.cpp in Sources */,
+				BCDF665B178F0FC700EE9569 /* trace_file_read.cpp in Sources */,
+				BCDF665C178F0FC700EE9569 /* trace_file_snappy.cpp in Sources */,
+				BCDF665D178F0FC700EE9569 /* trace_file_write.cpp in Sources */,
+				BCDF665F178F0FC700EE9569 /* trace_file.cpp in Sources */,
+				BCDF6662178F0FC700EE9569 /* trace_loader.cpp in Sources */,
+				BCDF6665178F0FC700EE9569 /* trace_model.cpp in Sources */,
+				BCDF6667178F0FC700EE9569 /* trace_option.cpp in Sources */,
+				BCDF6669178F0FC700EE9569 /* trace_parser_flags.cpp in Sources */,
+				BCDF666A178F0FC700EE9569 /* trace_parser.cpp in Sources */,
+				BCDF666C178F0FC700EE9569 /* trace_profiler.cpp in Sources */,
+				BCDF666E178F0FC700EE9569 /* trace_writer_model.cpp in Sources */,
+				BCDF666F178F0FC700EE9569 /* trace_writer_regal.cpp in Sources */,
+				BCDF6671178F0FC700EE9569 /* trace_writer.cpp in Sources */,
+				BCDF6675178F0FF200EE9569 /* glproc_regal.cpp in Sources */,
+				BCDF667C178F103E00EE9569 /* glcaps.cpp in Sources */,
+				BCDF667D178F103E00EE9569 /* gltrace_state.cpp in Sources */,
+				BCDF667E178F103E00EE9569 /* regaltrace.cpp in Sources */,
+				BCDF667F178F103E00EE9569 /* trace.cpp in Sources */,
+				BCDF6684178F105C00EE9569 /* eglsize.cpp in Sources */,
+				BCDF668E178F14A400EE9569 /* snappy-c.cc in Sources */,
+				BCDF6690178F14A400EE9569 /* snappy-sinksource.cc in Sources */,
+				BCDF6692178F14A400EE9569 /* snappy.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +840,7 @@
 					"DEBUG=1",
 					"REGAL_NO_HTTP=1",
 					"REGAL_NO_PNG=1",
+					"TRACE_OS_LOG=0",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -602,6 +855,14 @@
 					../../../src/mongoose,
 					../../../src/lookup3,
 					../../../src/jsonsl,
+					../../../src/snappy,
+					../../../src/apitrace/common,
+					../../../src/apitrace/dispatch,
+					../../../src/apitrace/helpers,
+					../../../src/apitrace/wrappers,
+					../../../src/apitrace,
+					../../../src/apitrace/thirdparty/khronos,
+					../../../src/zlib/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -626,6 +887,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"REGAL_NO_HTTP=1",
 					"REGAL_NO_PNG=1",
+					"TRACE_OS_LOG=0"
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -638,6 +900,14 @@
 					../../../src/mongoose,
 					../../../src/lookup3,
 					../../../src/jsonsl,
+					../../../src/snappy,
+					../../../src/apitrace/common,
+					../../../src/apitrace/dispatch,
+					../../../src/apitrace/helpers,
+					../../../src/apitrace/wrappers,
+					../../../src/apitrace,
+					../../../src/apitrace/thirdparty/khronos,
+					../../../src/zlib/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx10.7;

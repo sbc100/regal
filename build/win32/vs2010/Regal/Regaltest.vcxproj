@@ -96,7 +96,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -137,7 +137,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -175,7 +175,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -215,7 +215,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;mongooselib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>

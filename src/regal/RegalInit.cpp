@@ -54,6 +54,10 @@ using namespace std;
 #include "RegalPpa.h"
 #include "RegalMutex.h"
 
+#if REGAL_TRACE
+namespace trace { extern const char *regalWriterFileName; }
+#endif
+
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
@@ -128,6 +132,10 @@ Init::Init()
     th2rcMutex = new Thread::Mutex();
     Logging::createLocks();
   }
+
+#if REGAL_TRACE
+  trace::regalWriterFileName = Config::traceFile.c_str();
+#endif
 
   Http::Init();
 

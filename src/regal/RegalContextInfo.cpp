@@ -837,6 +837,18 @@ ContextInfo::init(const RegalContext &context)
     }
   }
 
+  // We could get either form of the OpenGL ES string, so confirm version
+  if (!es1 && (gles_version_major == 1))
+  {
+    es1 = GL_TRUE;
+    es2 = GL_FALSE;
+  }
+  else if (!es2 && (gles_version_major == 2))
+  {
+    es1 = GL_FALSE;
+    es2 = GL_TRUE;
+  }
+
   // For Mesa3D EGL/ES 2.0 on desktop Linux the version string doesn't start with
   // "OpenGL ES" Is that a Mesa3D bug? Perhaps...
 

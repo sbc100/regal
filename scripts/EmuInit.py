@@ -33,7 +33,8 @@ formulaeGlobal = {
 
     'wglMakeCurrent' : {
         'entries' : [ 'wglMakeCurrent' ],
-        'init' : [ 'Init::makeCurrent(RegalSystemContext(hglrc));' ]
+        'init' : [ 'if (ret)',
+                   '    Init::makeCurrent(RegalSystemContext(hglrc));' ]
     },
 
     'wglDeleteContext' : {
@@ -45,12 +46,14 @@ formulaeGlobal = {
 
     'glXMakeCurrent' : {
         'entries' : [ 'glXMakeCurrent' ],
-        'init' : [ 'Init::makeCurrent(RegalSystemContext(ctx));' ]
+        'init' : [ 'if (ret)',
+                   '    Init::makeCurrent(RegalSystemContext(ctx));' ]
     },
 
     'glXMakeContextCurrent' : {
         'entries' : [ 'glXMakeContextCurrent' ],
-        'init' : [ 'Init::makeCurrent(RegalSystemContext(ctx));' ]
+        'init' : [ 'if (ret)',
+                   '    Init::makeCurrent(RegalSystemContext(ctx));' ]
     },
 
     'glXDestroyContext' : {
@@ -62,7 +65,8 @@ formulaeGlobal = {
 
     'eglMakeCurrent' : {
         'entries' : [ 'eglMakeCurrent' ],
-        'init' : [ 'Init::makeCurrent(ctx);' ]
+        'init' : [ 'if (ret)',
+                   '    Init::makeCurrent(ctx);' ]
     },
 
     'eglDestroyContext' : {
@@ -74,7 +78,8 @@ formulaeGlobal = {
 
     'CGLSetCurrentContext' : {
         'entries' : [ 'CGLSetCurrentContext' ],
-        'init' : [ 'Init::makeCurrent(ctx);' ]
+        'init' : [ 'if (ret == 0)',
+                   '    Init::makeCurrent(ctx);' ]
     },
 
     'CGLDestroyContext' : {

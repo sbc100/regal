@@ -164,4 +164,5 @@ exclude = [
   'glTextureImage1DEXT',
   'glTextureImage2DEXT',
   'glTextureImage3DEXT',
+  'GL_INTEL_map_texture',
 ]

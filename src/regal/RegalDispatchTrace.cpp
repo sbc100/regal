@@ -2475,12 +2475,6 @@ namespace Trace
 
   void  glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
 
-// GL_INTEL_map_texture
-
-  GLvoid * glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout);
-  void  glSyncTextureINTEL(GLuint texture);
-  void  glUnmapTexture2DINTEL(GLuint texture, GLint level);
-
 // GL_INTEL_parallel_arrays
 
   void  glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer);
@@ -23170,39 +23164,6 @@ static void REGAL_CALL trace_glBlendFuncSeparateINGR(GLenum sfactorRGB, GLenum d
   Trace::glBlendFuncSeparateINGR(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
 }
 
-// GL_INTEL_map_texture
-
-static GLvoid *REGAL_CALL trace_glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
-{
-  Internal("trace_glMapTexture2DINTEL","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
-  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  GLvoid * ret = Trace::glMapTexture2DINTEL(texture, level, access, stride, layout);
-  return ret;
-}
-
-static void REGAL_CALL trace_glSyncTextureINTEL(GLuint texture)
-{
-  Internal("trace_glSyncTextureINTEL","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
-  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glSyncTextureINTEL(texture);
-}
-
-static void REGAL_CALL trace_glUnmapTexture2DINTEL(GLuint texture, GLint level)
-{
-  Internal("trace_glUnmapTexture2DINTEL","()");
-  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
-  RegalAssert(_instance.currentContext);
-  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
-  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glUnmapTexture2DINTEL(texture, level);
-}
-
 // GL_INTEL_parallel_arrays
 
 static void REGAL_CALL trace_glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
@@ -35744,12 +35705,6 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   // GL_INGR_blend_func_separate
 
   tbl.glBlendFuncSeparateINGR = trace_glBlendFuncSeparateINGR;
-
-  // GL_INTEL_map_texture
-
-  tbl.glMapTexture2DINTEL = trace_glMapTexture2DINTEL;
-  tbl.glSyncTextureINTEL = trace_glSyncTextureINTEL;
-  tbl.glUnmapTexture2DINTEL = trace_glUnmapTexture2DINTEL;
 
   // GL_INTEL_parallel_arrays
 

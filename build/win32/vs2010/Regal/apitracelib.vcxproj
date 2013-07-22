@@ -78,8 +78,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/squish;../../../../src/apitrace/common;../../../../src/apitrace/gen/dispatch;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_PLUGIN_MODE=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APITRACE_TLS=0;NOMINMAX;TRACE_BACKTRACE=0;TRACE_OS_LOG=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -92,7 +92,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions> -wd4018 -wd4063 -wd4100 -wd4127 -wd4244 -wd4505 -wd4512 -wd4800  %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -117,8 +118,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/squish;../../../../src/apitrace/common;../../../../src/apitrace/gen/dispatch;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_PLUGIN_MODE=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APITRACE_TLS=0;NOMINMAX;TRACE_BACKTRACE=0;TRACE_OS_LOG=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -132,7 +133,8 @@
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions> -wd4018 -wd4063 -wd4100 -wd4127 -wd4244 -wd4505 -wd4512 -wd4800  %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -155,8 +157,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/squish;../../../../src/apitrace/common;../../../../src/apitrace/gen/dispatch;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_PLUGIN_MODE=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APITRACE_TLS=0;NOMINMAX;TRACE_BACKTRACE=0;TRACE_OS_LOG=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
@@ -169,7 +171,8 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions> -wd4018 -wd4063 -wd4100 -wd4127 -wd4244 -wd4505 -wd4512 -wd4800  %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,8 +197,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/squish;../../../../src/apitrace/common;../../../../src/apitrace/gen/dispatch;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_PLUGIN_MODE=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APITRACE_TLS=0;NOMINMAX;TRACE_BACKTRACE=0;TRACE_OS_LOG=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
@@ -208,7 +211,8 @@
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions> -wd4018 -wd4063 -wd4100 -wd4127 -wd4244 -wd4505 -wd4512 -wd4800  %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -231,8 +235,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\apitrace\common\os_posix.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\common\os_win32.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\common\trace_backtrace.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_callset.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_dump.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\common\trace_fast_callset.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_file.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_file_read.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_file_snappy.cpp" />
@@ -245,14 +252,13 @@
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_parser_flags.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_profiler.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_writer.cpp" />
-    <ClCompile Include="..\..\..\..\src\apitrace\common\trace_writer_local.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_writer_model.cpp" />
-    <ClCompile Include="..\..\..\..\src\apitrace\dispatch\glproc_egl.cpp" />
-    <ClCompile Include="..\..\..\..\src\apitrace\dispatch\glproc_gl.cpp" />
-    <ClCompile Include="..\..\..\..\src\apitrace\gen\wrappers\regaltrace.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\common\trace_writer_regal.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\dispatch\glproc_regal.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\helpers\eglsize.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\glcaps.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\gltrace_state.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\wrappers\regaltrace.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\trace.cpp" />
   </ItemGroup>
 

@@ -122,12 +122,15 @@
 #endif
 
 // Trace dispatch unsupported by default in
-// release mode - TODO revisit
+// release mode
 
 #ifndef REGAL_TRACE
-#define REGAL_TRACE 0
+# if defined(NDEBUG) || REGAL_SYS_PPAPI
+#   define REGAL_TRACE 0
+# else
+#   define REGAL_TRACE 1
+# endif
 #endif
-
 
 // Emulation dispatch supported by default
 

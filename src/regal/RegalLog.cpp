@@ -38,6 +38,7 @@ REGAL_GLOBAL_BEGIN
 #include <cstdarg>
 
 #include <boost/print/json.hpp>
+#include <boost/print/printf.hpp>
 #include <boost/print/string_list.hpp>
 
 #include "RegalLog.h"
@@ -655,3 +656,28 @@ namespace Logging {
 }
 
 REGAL_NAMESPACE_END
+
+REGAL_GLOBAL_BEGIN
+
+// Direct apitrace logging messages to Regal info log
+
+#if REGAL_TRACE
+namespace os {
+
+  void log(const char *format, ...);
+
+  void log(const char *format, ...)
+  {
+    va_list args;
+    va_start(args,format);
+
+    std::string message;
+    boost::print::printf(message,format,args);
+
+    Info(message);
+  }
+
+}
+#endif
+
+REGAL_GLOBAL_END

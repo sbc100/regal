@@ -29138,7 +29138,8 @@ extern "C" {
     RegalAssert(_next);
     BOOL ret = 0;
     ret = _next->call(&_next->wglMakeCurrent)(hDC, hglrc);
-    Init::makeCurrent(RegalSystemContext(hglrc));
+    if (ret)
+        Init::makeCurrent(RegalSystemContext(hglrc));
     return ret;
   }
 
@@ -29350,7 +29351,8 @@ extern "C" {
         _context->x11Drawable = drawable;
     }
     ret = _next->call(&_next->glXMakeCurrent)(dpy, drawable, ctx);
-    Init::makeCurrent(RegalSystemContext(ctx));
+    if (ret)
+        Init::makeCurrent(RegalSystemContext(ctx));
     return ret;
   }
 
@@ -29594,7 +29596,8 @@ extern "C" {
     RegalAssert(_next);
     Bool ret = (Bool) 0;
     ret = _next->call(&_next->glXMakeContextCurrent)(display, draw, read, ctx);
-    Init::makeCurrent(RegalSystemContext(ctx));
+    if (ret)
+        Init::makeCurrent(RegalSystemContext(ctx));
     return ret;
   }
 
@@ -31004,7 +31007,8 @@ extern "C" {
     RegalAssert(_next);
     CGLError ret = (CGLError) 0;
     ret = _next->call(&_next->CGLSetCurrentContext)(ctx);
-    Init::makeCurrent(ctx);
+    if (ret == 0)
+        Init::makeCurrent(ctx);
     return ret;
   }
 
@@ -31540,7 +31544,8 @@ extern "C" {
     RegalAssert(_next);
     EGLBoolean ret = 0;
     ret = _next->call(&_next->eglMakeCurrent)(dpy, draw, read, ctx);
-    Init::makeCurrent(ctx);
+    if (ret)
+        Init::makeCurrent(ctx);
     return ret;
   }
 
