@@ -915,6 +915,55 @@ REGAL_DECL void REGAL_CALL plugin_glBlendFuncSeparateIndexedAMD(GLuint buf, GLen
 #endif
 
 /**
+ ** GL_AMD_interleaved_elements
+ **/
+
+#if (defined(GL_AMD_INTERLEAVED_ELEMENTS) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_AMD_INTERLEAVED_ELEMENTS)) && !defined(REGAL_NO_ENUM_GL_AMD_INTERLEAVED_ELEMENTS)
+#define REGAL_NO_ENUM_GL_AMD_INTERLEAVED_ELEMENTS
+#endif
+
+#if (defined(GL_AMD_INTERLEAVED_ELEMENTS) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_AMD_INTERLEAVED_ELEMENTS)) && !defined(REGAL_NO_TYPEDEF_GL_AMD_INTERLEAVED_ELEMENTS)
+#define REGAL_NO_TYPEDEF_GL_AMD_INTERLEAVED_ELEMENTS
+#endif
+
+#if (defined(GL_AMD_INTERLEAVED_ELEMENTS) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_AMD_INTERLEAVED_ELEMENTS)) && !defined(REGAL_NO_NAMESPACE_GL_AMD_INTERLEAVED_ELEMENTS)
+#define REGAL_NO_NAMESPACE_GL_AMD_INTERLEAVED_ELEMENTS
+#endif
+
+#if (defined(GL_AMD_INTERLEAVED_ELEMENTS) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_AMD_INTERLEAVED_ELEMENTS)) && !defined(REGAL_NO_PLUGIN_GL_AMD_INTERLEAVED_ELEMENTS)
+#define REGAL_NO_PLUGIN_GL_AMD_INTERLEAVED_ELEMENTS
+#endif
+
+#if (defined(GL_AMD_INTERLEAVED_ELEMENTS) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_AMD_INTERLEAVED_ELEMENTS)) && !defined(REGAL_NO_DECLARATION_GL_AMD_INTERLEAVED_ELEMENTS)
+#define REGAL_NO_DECLARATION_GL_AMD_INTERLEAVED_ELEMENTS
+#endif
+
+#ifndef GL_AMD_interleaved_elements
+#define GL_AMD_interleaved_elements 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_AMD_INTERLEAVED_ELEMENTS
+#define GL_VERTEX_ELEMENT_SWIZZLE_AMD 0x91a4     /* 37284 */
+#define GL_VERTEX_ID_SWIZZLE_AMD      0x91a5     /* 37285 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_AMD_INTERLEAVED_ELEMENTS
+typedef void (REGAL_CALL *PFNGLVERTEXATTRIBPARAMETERIAMDPROC)(GLuint index, GLenum pname, GLint param);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_AMD_INTERLEAVED_ELEMENTS
+#define glVertexAttribParameteriAMD         rglVertexAttribParameteriAMD
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_AMD_INTERLEAVED_ELEMENTS
+REGAL_DECL void REGAL_CALL glVertexAttribParameteriAMD(GLuint index, GLenum pname, GLint param);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_AMD_INTERLEAVED_ELEMENTS
+REGAL_DECL void REGAL_CALL plugin_glVertexAttribParameteriAMD(GLuint index, GLenum pname, GLint param);
+#endif
+
+/**
  ** GL_AMD_multi_draw_indirect
  **/
 
@@ -1292,6 +1341,66 @@ REGAL_DECL void REGAL_CALL plugin_glSetMultisamplefvAMD(GLenum pname, GLuint ind
 
 #ifndef REGAL_NO_ENUM_GL_AMD_SEAMLESS_CUBEMAP_PER_TEXTURE
 #define GL_TEXTURE_CUBE_MAP_SEAMLESS_ARB 0x884f /* 34895 */
+#endif
+
+/**
+ ** GL_AMD_sparse_texture
+ **/
+
+#if (defined(GL_AMD_SPARSE_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_AMD_SPARSE_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_AMD_SPARSE_TEXTURE)
+#define REGAL_NO_ENUM_GL_AMD_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_AMD_SPARSE_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_AMD_SPARSE_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_AMD_SPARSE_TEXTURE)
+#define REGAL_NO_TYPEDEF_GL_AMD_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_AMD_SPARSE_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_AMD_SPARSE_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_AMD_SPARSE_TEXTURE)
+#define REGAL_NO_NAMESPACE_GL_AMD_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_AMD_SPARSE_TEXTURE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_AMD_SPARSE_TEXTURE)) && !defined(REGAL_NO_PLUGIN_GL_AMD_SPARSE_TEXTURE)
+#define REGAL_NO_PLUGIN_GL_AMD_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_AMD_SPARSE_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_AMD_SPARSE_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_AMD_SPARSE_TEXTURE)
+#define REGAL_NO_DECLARATION_GL_AMD_SPARSE_TEXTURE
+#endif
+
+#ifndef GL_AMD_sparse_texture
+#define GL_AMD_sparse_texture 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_AMD_SPARSE_TEXTURE
+#define GL_TEXTURE_STORAGE_SPARSE_BIT_AMD  0x1
+#define GL_VIRTUAL_PAGE_SIZE_X_AMD         0x9195     /* 37269 */
+#define GL_VIRTUAL_PAGE_SIZE_Y_AMD         0x9196     /* 37270 */
+#define GL_VIRTUAL_PAGE_SIZE_Z_AMD         0x9197     /* 37271 */
+#define GL_MAX_SPARSE_TEXTURE_SIZE_AMD     0x9198     /* 37272 */
+#define GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD  0x9199     /* 37273 */
+#define GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS 0x919a     /* 37274 */
+#define GL_MIN_SPARSE_LEVEL_AMD            0x919b     /* 37275 */
+#define GL_MIN_LOD_WARNING_AMD             0x919c     /* 37276 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_AMD_SPARSE_TEXTURE
+typedef void (REGAL_CALL *PFNGLTEXSTORAGESPARSEAMDPROC)(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+typedef void (REGAL_CALL *PFNGLTEXTURESTORAGESPARSEAMDPROC)(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_AMD_SPARSE_TEXTURE
+#define glTexStorageSparseAMD               rglTexStorageSparseAMD
+#define glTextureStorageSparseAMD           rglTextureStorageSparseAMD
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_AMD_SPARSE_TEXTURE
+REGAL_DECL void REGAL_CALL glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+REGAL_DECL void REGAL_CALL glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_AMD_SPARSE_TEXTURE
+REGAL_DECL void REGAL_CALL plugin_glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+REGAL_DECL void REGAL_CALL plugin_glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
 #endif
 
 /**
@@ -1750,7 +1859,6 @@ REGAL_DECL void REGAL_CALL plugin_glVertexAttribDivisorANGLE(GLuint index, GLuin
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_ANGLE_TEXTURE_USAGE
-#define GL_NONE                         0x0
 #define GL_TEXTURE_USAGE_ANGLE          0x93a2     /* 37794 */
 #define GL_FRAMEBUFFER_ATTACHMENT_ANGLE 0x93a3     /* 37795 */
 #endif
@@ -3109,6 +3217,114 @@ REGAL_DECL void REGAL_CALL plugin_glDrawElementsInstancedBaseVertexBaseInstance(
 #endif
 
 /**
+ ** GL_ARB_bindless_texture
+ **/
+
+#if (defined(GL_ARB_BINDLESS_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_BINDLESS_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_ARB_BINDLESS_TEXTURE)
+#define REGAL_NO_ENUM_GL_ARB_BINDLESS_TEXTURE
+#endif
+
+#if (defined(GL_ARB_BINDLESS_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_BINDLESS_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_BINDLESS_TEXTURE)
+#define REGAL_NO_TYPEDEF_GL_ARB_BINDLESS_TEXTURE
+#endif
+
+#if (defined(GL_ARB_BINDLESS_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_BINDLESS_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_BINDLESS_TEXTURE)
+#define REGAL_NO_NAMESPACE_GL_ARB_BINDLESS_TEXTURE
+#endif
+
+#if (defined(GL_ARB_BINDLESS_TEXTURE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_BINDLESS_TEXTURE)) && !defined(REGAL_NO_PLUGIN_GL_ARB_BINDLESS_TEXTURE)
+#define REGAL_NO_PLUGIN_GL_ARB_BINDLESS_TEXTURE
+#endif
+
+#if (defined(GL_ARB_BINDLESS_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_BINDLESS_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_ARB_BINDLESS_TEXTURE)
+#define REGAL_NO_DECLARATION_GL_ARB_BINDLESS_TEXTURE
+#endif
+
+#ifndef GL_ARB_bindless_texture
+#define GL_ARB_bindless_texture 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_BINDLESS_TEXTURE
+#define GL_UNSIGNED_INT64_ARB 0x140f /* 5135 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_BINDLESS_TEXTURE
+typedef GLboolean (REGAL_CALL *PFNGLISIMAGEHANDLERESIDENTARBPROC)(GLuint64 handle);
+typedef GLboolean (REGAL_CALL *PFNGLISTEXTUREHANDLERESIDENTARBPROC)(GLuint64 handle);
+typedef GLuint64 (REGAL_CALL *PFNGLGETIMAGEHANDLEARBPROC)(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format);
+typedef GLuint64 (REGAL_CALL *PFNGLGETTEXTUREHANDLEARBPROC)(GLuint texture);
+typedef GLuint64 (REGAL_CALL *PFNGLGETTEXTURESAMPLERHANDLEARBPROC)(GLuint texture, GLuint sampler);
+typedef void (REGAL_CALL *PFNGLGETVERTEXATTRIBLUI64VARBPROC)(GLuint index, GLenum pname, GLuint64EXT *params);
+typedef void (REGAL_CALL *PFNGLMAKEIMAGEHANDLENONRESIDENTARBPROC)(GLuint64 handle);
+typedef void (REGAL_CALL *PFNGLMAKEIMAGEHANDLERESIDENTARBPROC)(GLuint64 handle, GLenum access);
+typedef void (REGAL_CALL *PFNGLMAKETEXTUREHANDLENONRESIDENTARBPROC)(GLuint64 handle);
+typedef void (REGAL_CALL *PFNGLMAKETEXTUREHANDLERESIDENTARBPROC)(GLuint64 handle);
+typedef void (REGAL_CALL *PFNGLPROGRAMUNIFORMHANDLEUI64ARBPROC)(GLuint program, GLint location, GLuint64 value);
+typedef void (REGAL_CALL *PFNGLPROGRAMUNIFORMHANDLEUI64VARBPROC)(GLuint program, GLint location, GLsizei count, const GLuint64 *values);
+typedef void (REGAL_CALL *PFNGLUNIFORMHANDLEUI64ARBPROC)(GLint location, GLuint64 value);
+typedef void (REGAL_CALL *PFNGLUNIFORMHANDLEUI64VARBPROC)(GLint location, GLsizei count, const GLuint64 *value);
+typedef void (REGAL_CALL *PFNGLVERTEXATTRIBL1UI64ARBPROC)(GLuint index, GLuint64EXT x);
+typedef void (REGAL_CALL *PFNGLVERTEXATTRIBL1UI64VARBPROC)(GLuint index, const GLuint64EXT *v);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_BINDLESS_TEXTURE
+#define glGetImageHandleARB                 rglGetImageHandleARB
+#define glGetTextureHandleARB               rglGetTextureHandleARB
+#define glGetTextureSamplerHandleARB        rglGetTextureSamplerHandleARB
+#define glGetVertexAttribLui64vARB          rglGetVertexAttribLui64vARB
+#define glIsImageHandleResidentARB          rglIsImageHandleResidentARB
+#define glIsTextureHandleResidentARB        rglIsTextureHandleResidentARB
+#define glMakeImageHandleNonResidentARB     rglMakeImageHandleNonResidentARB
+#define glMakeImageHandleResidentARB        rglMakeImageHandleResidentARB
+#define glMakeTextureHandleNonResidentARB   rglMakeTextureHandleNonResidentARB
+#define glMakeTextureHandleResidentARB      rglMakeTextureHandleResidentARB
+#define glProgramUniformHandleui64ARB       rglProgramUniformHandleui64ARB
+#define glProgramUniformHandleui64vARB      rglProgramUniformHandleui64vARB
+#define glUniformHandleui64ARB              rglUniformHandleui64ARB
+#define glUniformHandleui64vARB             rglUniformHandleui64vARB
+#define glVertexAttribL1ui64ARB             rglVertexAttribL1ui64ARB
+#define glVertexAttribL1ui64vARB            rglVertexAttribL1ui64vARB
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_BINDLESS_TEXTURE
+REGAL_DECL GLboolean REGAL_CALL glIsImageHandleResidentARB(GLuint64 handle);
+REGAL_DECL GLboolean REGAL_CALL glIsTextureHandleResidentARB(GLuint64 handle);
+REGAL_DECL GLuint64 REGAL_CALL glGetImageHandleARB(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format);
+REGAL_DECL GLuint64 REGAL_CALL glGetTextureHandleARB(GLuint texture);
+REGAL_DECL GLuint64 REGAL_CALL glGetTextureSamplerHandleARB(GLuint texture, GLuint sampler);
+REGAL_DECL void REGAL_CALL glGetVertexAttribLui64vARB(GLuint index, GLenum pname, GLuint64EXT *params);
+REGAL_DECL void REGAL_CALL glMakeImageHandleNonResidentARB(GLuint64 handle);
+REGAL_DECL void REGAL_CALL glMakeImageHandleResidentARB(GLuint64 handle, GLenum access);
+REGAL_DECL void REGAL_CALL glMakeTextureHandleNonResidentARB(GLuint64 handle);
+REGAL_DECL void REGAL_CALL glMakeTextureHandleResidentARB(GLuint64 handle);
+REGAL_DECL void REGAL_CALL glProgramUniformHandleui64ARB(GLuint program, GLint location, GLuint64 value);
+REGAL_DECL void REGAL_CALL glProgramUniformHandleui64vARB(GLuint program, GLint location, GLsizei count, const GLuint64 *values);
+REGAL_DECL void REGAL_CALL glUniformHandleui64ARB(GLint location, GLuint64 value);
+REGAL_DECL void REGAL_CALL glUniformHandleui64vARB(GLint location, GLsizei count, const GLuint64 *value);
+REGAL_DECL void REGAL_CALL glVertexAttribL1ui64ARB(GLuint index, GLuint64EXT x);
+REGAL_DECL void REGAL_CALL glVertexAttribL1ui64vARB(GLuint index, const GLuint64EXT *v);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_BINDLESS_TEXTURE
+REGAL_DECL GLboolean REGAL_CALL plugin_glIsImageHandleResidentARB(GLuint64 handle);
+REGAL_DECL GLboolean REGAL_CALL plugin_glIsTextureHandleResidentARB(GLuint64 handle);
+REGAL_DECL GLuint64 REGAL_CALL plugin_glGetImageHandleARB(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format);
+REGAL_DECL GLuint64 REGAL_CALL plugin_glGetTextureHandleARB(GLuint texture);
+REGAL_DECL GLuint64 REGAL_CALL plugin_glGetTextureSamplerHandleARB(GLuint texture, GLuint sampler);
+REGAL_DECL void REGAL_CALL plugin_glGetVertexAttribLui64vARB(GLuint index, GLenum pname, GLuint64EXT *params);
+REGAL_DECL void REGAL_CALL plugin_glMakeImageHandleNonResidentARB(GLuint64 handle);
+REGAL_DECL void REGAL_CALL plugin_glMakeImageHandleResidentARB(GLuint64 handle, GLenum access);
+REGAL_DECL void REGAL_CALL plugin_glMakeTextureHandleNonResidentARB(GLuint64 handle);
+REGAL_DECL void REGAL_CALL plugin_glMakeTextureHandleResidentARB(GLuint64 handle);
+REGAL_DECL void REGAL_CALL plugin_glProgramUniformHandleui64ARB(GLuint program, GLint location, GLuint64 value);
+REGAL_DECL void REGAL_CALL plugin_glProgramUniformHandleui64vARB(GLuint program, GLint location, GLsizei count, const GLuint64 *values);
+REGAL_DECL void REGAL_CALL plugin_glUniformHandleui64ARB(GLint location, GLuint64 value);
+REGAL_DECL void REGAL_CALL plugin_glUniformHandleui64vARB(GLint location, GLsizei count, const GLuint64 *value);
+REGAL_DECL void REGAL_CALL plugin_glVertexAttribL1ui64ARB(GLuint index, GLuint64EXT x);
+REGAL_DECL void REGAL_CALL plugin_glVertexAttribL1ui64vARB(GLuint index, const GLuint64EXT *v);
+#endif
+
+/**
  ** GL_ARB_blend_func_extended
  **/
 
@@ -3161,6 +3377,60 @@ REGAL_DECL void REGAL_CALL glBindFragDataLocationIndexed(GLuint program, GLuint 
 #ifndef REGAL_NO_PLUGIN_GL_ARB_BLEND_FUNC_EXTENDED
 REGAL_DECL GLint REGAL_CALL plugin_glGetFragDataIndex(GLuint program, const GLchar *name);
 REGAL_DECL void REGAL_CALL plugin_glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name);
+#endif
+
+/**
+ ** GL_ARB_buffer_storage
+ **/
+
+#if (defined(GL_ARB_BUFFER_STORAGE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_BUFFER_STORAGE)) && !defined(REGAL_NO_ENUM_GL_ARB_BUFFER_STORAGE)
+#define REGAL_NO_ENUM_GL_ARB_BUFFER_STORAGE
+#endif
+
+#if (defined(GL_ARB_BUFFER_STORAGE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_BUFFER_STORAGE)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_BUFFER_STORAGE)
+#define REGAL_NO_TYPEDEF_GL_ARB_BUFFER_STORAGE
+#endif
+
+#if (defined(GL_ARB_BUFFER_STORAGE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_BUFFER_STORAGE)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_BUFFER_STORAGE)
+#define REGAL_NO_NAMESPACE_GL_ARB_BUFFER_STORAGE
+#endif
+
+#if (defined(GL_ARB_BUFFER_STORAGE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_BUFFER_STORAGE)) && !defined(REGAL_NO_PLUGIN_GL_ARB_BUFFER_STORAGE)
+#define REGAL_NO_PLUGIN_GL_ARB_BUFFER_STORAGE
+#endif
+
+#if (defined(GL_ARB_BUFFER_STORAGE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_BUFFER_STORAGE)) && !defined(REGAL_NO_DECLARATION_GL_ARB_BUFFER_STORAGE)
+#define REGAL_NO_DECLARATION_GL_ARB_BUFFER_STORAGE
+#endif
+
+#ifndef GL_ARB_buffer_storage
+#define GL_ARB_buffer_storage 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_BUFFER_STORAGE
+#define GL_DYNAMIC_STORAGE_BIT              0x100      /* 256 */
+#define GL_CLIENT_STORAGE_BIT               0x200      /* 512 */
+#define GL_MAP_PERSISTENT_BIT               0x40       /* 64 */
+#define GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT 0x4000     /* 16384 */
+#define GL_MAP_COHERENT_BIT                 0x80       /* 128 */
+#define GL_BUFFER_IMMUTABLE_STORAGE         0x821f     /* 33311 */
+#define GL_BUFFER_STORAGE_FLAGS             0x8220     /* 33312 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_BUFFER_STORAGE
+typedef void (REGAL_CALL *PFNGLBUFFERSTORAGEPROC)(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_BUFFER_STORAGE
+#define glBufferStorage                     rglBufferStorage
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_BUFFER_STORAGE
+REGAL_DECL void REGAL_CALL glBufferStorage(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_BUFFER_STORAGE
+REGAL_DECL void REGAL_CALL plugin_glBufferStorage(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags);
 #endif
 
 /**
@@ -3266,6 +3536,58 @@ REGAL_DECL void REGAL_CALL plugin_glClearBufferData(GLenum target, GLenum intern
 REGAL_DECL void REGAL_CALL plugin_glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
+#endif
+
+/**
+ ** GL_ARB_clear_texture
+ **/
+
+#if (defined(GL_ARB_CLEAR_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_CLEAR_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_ARB_CLEAR_TEXTURE)
+#define REGAL_NO_ENUM_GL_ARB_CLEAR_TEXTURE
+#endif
+
+#if (defined(GL_ARB_CLEAR_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_CLEAR_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_CLEAR_TEXTURE)
+#define REGAL_NO_TYPEDEF_GL_ARB_CLEAR_TEXTURE
+#endif
+
+#if (defined(GL_ARB_CLEAR_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_CLEAR_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_CLEAR_TEXTURE)
+#define REGAL_NO_NAMESPACE_GL_ARB_CLEAR_TEXTURE
+#endif
+
+#if (defined(GL_ARB_CLEAR_TEXTURE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_CLEAR_TEXTURE)) && !defined(REGAL_NO_PLUGIN_GL_ARB_CLEAR_TEXTURE)
+#define REGAL_NO_PLUGIN_GL_ARB_CLEAR_TEXTURE
+#endif
+
+#if (defined(GL_ARB_CLEAR_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_CLEAR_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_ARB_CLEAR_TEXTURE)
+#define REGAL_NO_DECLARATION_GL_ARB_CLEAR_TEXTURE
+#endif
+
+#ifndef GL_ARB_clear_texture
+#define GL_ARB_clear_texture 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_CLEAR_TEXTURE
+#define GL_CLEAR_TEXTURE 0x9365 /* 37733 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_CLEAR_TEXTURE
+typedef void (REGAL_CALL *PFNGLCLEARTEXIMAGEPROC)(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data);
+typedef void (REGAL_CALL *PFNGLCLEARTEXSUBIMAGEPROC)(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_CLEAR_TEXTURE
+#define glClearTexImage                     rglClearTexImage
+#define glClearTexSubImage                  rglClearTexSubImage
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_CLEAR_TEXTURE
+REGAL_DECL void REGAL_CALL glClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data);
+REGAL_DECL void REGAL_CALL glClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_CLEAR_TEXTURE
+REGAL_DECL void REGAL_CALL plugin_glClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data);
+REGAL_DECL void REGAL_CALL plugin_glClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data);
 #endif
 
 /**
@@ -3426,6 +3748,57 @@ REGAL_DECL void REGAL_CALL glDispatchComputeIndirect(GLintptr indirect);
 #ifndef REGAL_NO_PLUGIN_GL_ARB_COMPUTE_SHADER
 REGAL_DECL void REGAL_CALL plugin_glDispatchCompute(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z);
 REGAL_DECL void REGAL_CALL plugin_glDispatchComputeIndirect(GLintptr indirect);
+#endif
+
+/**
+ ** GL_ARB_compute_variable_group_size
+ **/
+
+#if (defined(GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)) && !defined(REGAL_NO_ENUM_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)
+#define REGAL_NO_ENUM_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#endif
+
+#if (defined(GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)
+#define REGAL_NO_TYPEDEF_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#endif
+
+#if (defined(GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)
+#define REGAL_NO_NAMESPACE_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#endif
+
+#if (defined(GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)) && !defined(REGAL_NO_PLUGIN_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)
+#define REGAL_NO_PLUGIN_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#endif
+
+#if (defined(GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)) && !defined(REGAL_NO_DECLARATION_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE)
+#define REGAL_NO_DECLARATION_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#endif
+
+#ifndef GL_ARB_compute_variable_group_size
+#define GL_ARB_compute_variable_group_size 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#define GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB    0x90eb     /* 37099 */
+#define GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB           0x91bf     /* 37311 */
+#define GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB 0x9344     /* 37700 */
+#define GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB        0x9345     /* 37701 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+typedef void (REGAL_CALL *PFNGLDISPATCHCOMPUTEGROUPSIZEARBPROC)(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+#define glDispatchComputeGroupSizeARB       rglDispatchComputeGroupSizeARB
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+REGAL_DECL void REGAL_CALL glDispatchComputeGroupSizeARB(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_COMPUTE_VARIABLE_GROUP_SIZE
+REGAL_DECL void REGAL_CALL plugin_glDispatchComputeGroupSizeARB(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z);
 #endif
 
 /**
@@ -3982,6 +4355,40 @@ REGAL_DECL void REGAL_CALL plugin_glDrawElementsInstancedARB(GLenum mode, GLsize
 #endif
 
 /**
+ ** GL_ARB_enhanced_layouts
+ **/
+
+#if (defined(GL_ARB_ENHANCED_LAYOUTS) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_ENHANCED_LAYOUTS)) && !defined(REGAL_NO_ENUM_GL_ARB_ENHANCED_LAYOUTS)
+#define REGAL_NO_ENUM_GL_ARB_ENHANCED_LAYOUTS
+#endif
+
+#if (defined(GL_ARB_ENHANCED_LAYOUTS) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_ENHANCED_LAYOUTS)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_ENHANCED_LAYOUTS)
+#define REGAL_NO_TYPEDEF_GL_ARB_ENHANCED_LAYOUTS
+#endif
+
+#if (defined(GL_ARB_ENHANCED_LAYOUTS) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_ENHANCED_LAYOUTS)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_ENHANCED_LAYOUTS)
+#define REGAL_NO_NAMESPACE_GL_ARB_ENHANCED_LAYOUTS
+#endif
+
+#if (defined(GL_ARB_ENHANCED_LAYOUTS) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_ENHANCED_LAYOUTS)) && !defined(REGAL_NO_PLUGIN_GL_ARB_ENHANCED_LAYOUTS)
+#define REGAL_NO_PLUGIN_GL_ARB_ENHANCED_LAYOUTS
+#endif
+
+#if (defined(GL_ARB_ENHANCED_LAYOUTS) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_ENHANCED_LAYOUTS)) && !defined(REGAL_NO_DECLARATION_GL_ARB_ENHANCED_LAYOUTS)
+#define REGAL_NO_DECLARATION_GL_ARB_ENHANCED_LAYOUTS
+#endif
+
+#ifndef GL_ARB_enhanced_layouts
+#define GL_ARB_enhanced_layouts 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_ENHANCED_LAYOUTS
+#define GL_LOCATION_COMPONENT               0x934a     /* 37706 */
+#define GL_TRANSFORM_FEEDBACK_BUFFER_INDEX  0x934b     /* 37707 */
+#define GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE 0x934c     /* 37708 */
+#endif
+
+/**
  ** GL_ARB_explicit_uniform_location
  **/
 
@@ -4220,6 +4627,7 @@ REGAL_DECL void REGAL_CALL plugin_glNamedFramebufferParameteriEXT(GLuint framebu
 #define GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME           0x8cd1     /* 36049 */
 #define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         0x8cd2     /* 36050 */
 #define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE 0x8cd3     /* 36051 */
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER         0x8cd4     /* 36052 */
 #define GL_FRAMEBUFFER_COMPLETE                         0x8cd5     /* 36053 */
 #define GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT            0x8cd6     /* 36054 */
 #define GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT    0x8cd7     /* 36055 */
@@ -4419,8 +4827,6 @@ REGAL_DECL void REGAL_CALL plugin_glRenderbufferStorageMultisample(GLenum target
 #ifndef REGAL_NO_ENUM_GL_ARB_GEOMETRY_SHADER4
 #define GL_PROGRAM_POINT_SIZE_ARB                   0x8642     /* 34370 */
 #define GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_ARB     0x8c29     /* 35881 */
-#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER     0x8cd4     /* 36052 */
-#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER     0x8cd4     /* 36052 */
 #define GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB       0x8da7     /* 36263 */
 #define GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB 0x8da8     /* 36264 */
 #define GL_FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_ARB   0x8da9     /* 36265 */
@@ -4556,15 +4962,11 @@ REGAL_DECL void REGAL_CALL plugin_glProgramParameteri(GLuint program, GLenum pna
 
 #ifndef REGAL_NO_ENUM_GL_ARB_GPU_SHADER5
 #define GL_GEOMETRY_SHADER_INVOCATIONS        0x887f     /* 34943 */
-#define GL_GEOMETRY_SHADER_INVOCATIONS        0x887f     /* 34943 */
-#define GL_MAX_GEOMETRY_SHADER_INVOCATIONS    0x8e5a     /* 36442 */
 #define GL_MAX_GEOMETRY_SHADER_INVOCATIONS    0x8e5a     /* 36442 */
 #define GL_MIN_FRAGMENT_INTERPOLATION_OFFSET  0x8e5b     /* 36443 */
-#define GL_MIN_FRAGMENT_INTERPOLATION_OFFSET  0x8e5b     /* 36443 */
-#define GL_MAX_FRAGMENT_INTERPOLATION_OFFSET  0x8e5c     /* 36444 */
 #define GL_MAX_FRAGMENT_INTERPOLATION_OFFSET  0x8e5c     /* 36444 */
 #define GL_FRAGMENT_INTERPOLATION_OFFSET_BITS 0x8e5d     /* 36445 */
-#define GL_FRAGMENT_INTERPOLATION_OFFSET_BITS 0x8e5d     /* 36445 */
+#define GL_MAX_VERTEX_STREAMS                 0x8e71     /* 36465 */
 #endif
 
 /**
@@ -5007,6 +5409,59 @@ REGAL_DECL void REGAL_CALL plugin_glSeparableFilter2D(GLenum target, GLenum inte
 #endif
 
 /**
+ ** GL_ARB_indirect_parameters
+ **/
+
+#if (defined(GL_ARB_INDIRECT_PARAMETERS) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_INDIRECT_PARAMETERS)) && !defined(REGAL_NO_ENUM_GL_ARB_INDIRECT_PARAMETERS)
+#define REGAL_NO_ENUM_GL_ARB_INDIRECT_PARAMETERS
+#endif
+
+#if (defined(GL_ARB_INDIRECT_PARAMETERS) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_INDIRECT_PARAMETERS)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_INDIRECT_PARAMETERS)
+#define REGAL_NO_TYPEDEF_GL_ARB_INDIRECT_PARAMETERS
+#endif
+
+#if (defined(GL_ARB_INDIRECT_PARAMETERS) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_INDIRECT_PARAMETERS)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_INDIRECT_PARAMETERS)
+#define REGAL_NO_NAMESPACE_GL_ARB_INDIRECT_PARAMETERS
+#endif
+
+#if (defined(GL_ARB_INDIRECT_PARAMETERS) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_INDIRECT_PARAMETERS)) && !defined(REGAL_NO_PLUGIN_GL_ARB_INDIRECT_PARAMETERS)
+#define REGAL_NO_PLUGIN_GL_ARB_INDIRECT_PARAMETERS
+#endif
+
+#if (defined(GL_ARB_INDIRECT_PARAMETERS) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_INDIRECT_PARAMETERS)) && !defined(REGAL_NO_DECLARATION_GL_ARB_INDIRECT_PARAMETERS)
+#define REGAL_NO_DECLARATION_GL_ARB_INDIRECT_PARAMETERS
+#endif
+
+#ifndef GL_ARB_indirect_parameters
+#define GL_ARB_indirect_parameters 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_INDIRECT_PARAMETERS
+#define GL_PARAMETER_BUFFER_ARB         0x80ee     /* 33006 */
+#define GL_PARAMETER_BUFFER_BINDING_ARB 0x80ef     /* 33007 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_INDIRECT_PARAMETERS
+typedef void (REGAL_CALL *PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROC)(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC)(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_INDIRECT_PARAMETERS
+#define glMultiDrawArraysIndirectCountARB   rglMultiDrawArraysIndirectCountARB
+#define glMultiDrawElementsIndirectCountARB rglMultiDrawElementsIndirectCountARB
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_INDIRECT_PARAMETERS
+REGAL_DECL void REGAL_CALL glMultiDrawArraysIndirectCountARB(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+REGAL_DECL void REGAL_CALL glMultiDrawElementsIndirectCountARB(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_INDIRECT_PARAMETERS
+REGAL_DECL void REGAL_CALL plugin_glMultiDrawArraysIndirectCountARB(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+REGAL_DECL void REGAL_CALL plugin_glMultiDrawElementsIndirectCountARB(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+#endif
+
+/**
  ** GL_ARB_instanced_arrays
  **/
 
@@ -5131,8 +5586,6 @@ REGAL_DECL void REGAL_CALL plugin_glGetInternalformativ(GLenum target, GLenum in
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_ARB_INTERNALFORMAT_QUERY2
-#define GL_TEXTURE_3D                             0x806f     /* 32879 */
-#define GL_SAMPLES                                0x80a9     /* 32937 */
 #define GL_INTERNALFORMAT_SUPPORTED               0x826f     /* 33391 */
 #define GL_INTERNALFORMAT_PREFERRED               0x8270     /* 33392 */
 #define GL_INTERNALFORMAT_RED_SIZE                0x8271     /* 33393 */
@@ -5232,17 +5685,6 @@ REGAL_DECL void REGAL_CALL plugin_glGetInternalformativ(GLenum target, GLenum in
 #define GL_VIEW_CLASS_RGTC2_RG                    0x82d1     /* 33489 */
 #define GL_VIEW_CLASS_BPTC_UNORM                  0x82d2     /* 33490 */
 #define GL_VIEW_CLASS_BPTC_FLOAT                  0x82d3     /* 33491 */
-#define GL_TEXTURE_RECTANGLE                      0x84f5     /* 34037 */
-#define GL_TEXTURE_1D_ARRAY                       0x8c18     /* 35864 */
-#define GL_TEXTURE_2D_ARRAY                       0x8c1a     /* 35866 */
-#define GL_TEXTURE_BUFFER                         0x8c2a     /* 35882 */
-#define GL_RENDERBUFFER                           0x8d41     /* 36161 */
-#define GL_TEXTURE_CUBE_MAP_ARRAY                 0x9009     /* 36873 */
-#define GL_TEXTURE_2D_MULTISAMPLE                 0x9100     /* 37120 */
-#define GL_TEXTURE_2D_MULTISAMPLE_ARRAY           0x9102     /* 37122 */
-#define GL_NUM_SAMPLE_COUNTS                      0x9380     /* 37760 */
-#define GL_TEXTURE_1D                             0xde0      /* 3552 */
-#define GL_TEXTURE_2D                             0xde1      /* 3553 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_INTERNALFORMAT_QUERY2
@@ -6206,6 +6648,41 @@ REGAL_DECL void REGAL_CALL plugin_glProvokingVertex(GLenum mode);
 #endif
 
 /**
+ ** GL_ARB_query_buffer_object
+ **/
+
+#if (defined(GL_ARB_QUERY_BUFFER_OBJECT) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_QUERY_BUFFER_OBJECT)) && !defined(REGAL_NO_ENUM_GL_ARB_QUERY_BUFFER_OBJECT)
+#define REGAL_NO_ENUM_GL_ARB_QUERY_BUFFER_OBJECT
+#endif
+
+#if (defined(GL_ARB_QUERY_BUFFER_OBJECT) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_QUERY_BUFFER_OBJECT)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_QUERY_BUFFER_OBJECT)
+#define REGAL_NO_TYPEDEF_GL_ARB_QUERY_BUFFER_OBJECT
+#endif
+
+#if (defined(GL_ARB_QUERY_BUFFER_OBJECT) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_QUERY_BUFFER_OBJECT)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_QUERY_BUFFER_OBJECT)
+#define REGAL_NO_NAMESPACE_GL_ARB_QUERY_BUFFER_OBJECT
+#endif
+
+#if (defined(GL_ARB_QUERY_BUFFER_OBJECT) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_QUERY_BUFFER_OBJECT)) && !defined(REGAL_NO_PLUGIN_GL_ARB_QUERY_BUFFER_OBJECT)
+#define REGAL_NO_PLUGIN_GL_ARB_QUERY_BUFFER_OBJECT
+#endif
+
+#if (defined(GL_ARB_QUERY_BUFFER_OBJECT) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_QUERY_BUFFER_OBJECT)) && !defined(REGAL_NO_DECLARATION_GL_ARB_QUERY_BUFFER_OBJECT)
+#define REGAL_NO_DECLARATION_GL_ARB_QUERY_BUFFER_OBJECT
+#endif
+
+#ifndef GL_ARB_query_buffer_object
+#define GL_ARB_query_buffer_object 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_QUERY_BUFFER_OBJECT
+#define GL_QUERY_BUFFER_BARRIER_BIT 0x8000     /* 32768 */
+#define GL_QUERY_BUFFER             0x9192     /* 37266 */
+#define GL_QUERY_BUFFER_BINDING     0x9193     /* 37267 */
+#define GL_QUERY_RESULT_NO_WAIT     0x9194     /* 37268 */
+#endif
+
+/**
  ** GL_ARB_robustness
  **/
 
@@ -7055,6 +7532,8 @@ REGAL_DECL void REGAL_CALL plugin_glMemoryBarrier(GLbitfield barriers);
 #define GL_SAMPLER_CUBE_ARB                     0x8b60     /* 35680 */
 #define GL_SAMPLER_1D_SHADOW_ARB                0x8b61     /* 35681 */
 #define GL_SAMPLER_2D_SHADOW_ARB                0x8b62     /* 35682 */
+#define GL_SAMPLER_2D_RECT_ARB                  0x8b63     /* 35683 */
+#define GL_SAMPLER_2D_RECT_SHADOW_ARB           0x8b64     /* 35684 */
 #define GL_OBJECT_DELETE_STATUS_ARB             0x8b80     /* 35712 */
 #define GL_OBJECT_COMPILE_STATUS_ARB            0x8b81     /* 35713 */
 #define GL_OBJECT_LINK_STATUS_ARB               0x8b82     /* 35714 */
@@ -7555,6 +8034,68 @@ REGAL_DECL void REGAL_CALL plugin_glNamedStringARB(GLenum type, GLint namelen, c
 
 #ifndef REGAL_NO_ENUM_GL_ARB_SHADOW_AMBIENT
 #define GL_TEXTURE_COMPARE_FAIL_VALUE_ARB 0x80bf /* 32959 */
+#endif
+
+/**
+ ** GL_ARB_sparse_texture
+ **/
+
+#if (defined(GL_ARB_SPARSE_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_SPARSE_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_ARB_SPARSE_TEXTURE)
+#define REGAL_NO_ENUM_GL_ARB_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_ARB_SPARSE_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_SPARSE_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_SPARSE_TEXTURE)
+#define REGAL_NO_TYPEDEF_GL_ARB_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_ARB_SPARSE_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_SPARSE_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_SPARSE_TEXTURE)
+#define REGAL_NO_NAMESPACE_GL_ARB_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_ARB_SPARSE_TEXTURE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_SPARSE_TEXTURE)) && !defined(REGAL_NO_PLUGIN_GL_ARB_SPARSE_TEXTURE)
+#define REGAL_NO_PLUGIN_GL_ARB_SPARSE_TEXTURE
+#endif
+
+#if (defined(GL_ARB_SPARSE_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_SPARSE_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_ARB_SPARSE_TEXTURE)
+#define REGAL_NO_DECLARATION_GL_ARB_SPARSE_TEXTURE
+#endif
+
+#ifndef GL_ARB_sparse_texture
+#define GL_ARB_sparse_texture 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_SPARSE_TEXTURE
+#define GL_VIRTUAL_PAGE_SIZE_X_ARB                    0x9195     /* 37269 */
+#define GL_VIRTUAL_PAGE_SIZE_Y_ARB                    0x9196     /* 37270 */
+#define GL_VIRTUAL_PAGE_SIZE_Z_ARB                    0x9197     /* 37271 */
+#define GL_MAX_SPARSE_TEXTURE_SIZE_ARB                0x9198     /* 37272 */
+#define GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB             0x9199     /* 37273 */
+#define GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB        0x919a     /* 37274 */
+#define GL_TEXTURE_SPARSE_ARB                         0x91a6     /* 37286 */
+#define GL_VIRTUAL_PAGE_SIZE_INDEX_ARB                0x91a7     /* 37287 */
+#define GL_NUM_VIRTUAL_PAGE_SIZES_ARB                 0x91a8     /* 37288 */
+#define GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB 0x91a9     /* 37289 */
+#define GL_NUM_SPARSE_LEVELS_ARB                      0x91aa     /* 37290 */
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_SPARSE_TEXTURE
+typedef void (REGAL_CALL *PFNGLTEXPAGECOMMITMENTARBPROC)(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+typedef void (REGAL_CALL *PFNGLTEXTUREPAGECOMMITMENTEXTPROC)(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_SPARSE_TEXTURE
+#define glTexPageCommitmentARB              rglTexPageCommitmentARB
+#define glTexturePageCommitmentEXT          rglTexturePageCommitmentEXT
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_SPARSE_TEXTURE
+REGAL_DECL void REGAL_CALL glTexPageCommitmentARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+REGAL_DECL void REGAL_CALL glTexturePageCommitmentEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_SPARSE_TEXTURE
+REGAL_DECL void REGAL_CALL plugin_glTexPageCommitmentARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+REGAL_DECL void REGAL_CALL plugin_glTexturePageCommitmentEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
 #endif
 
 /**
@@ -8079,6 +8620,7 @@ REGAL_DECL void REGAL_CALL plugin_glGetCompressedTexImageARB(GLenum target, GLin
 #ifndef REGAL_NO_ENUM_GL_ARB_TEXTURE_CUBE_MAP
 #define GL_NORMAL_MAP_ARB                  0x8511     /* 34065 */
 #define GL_REFLECTION_MAP_ARB              0x8512     /* 34066 */
+#define GL_TEXTURE_CUBE_MAP_ARB            0x8513     /* 34067 */
 #define GL_TEXTURE_BINDING_CUBE_MAP_ARB    0x8514     /* 34068 */
 #define GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB 0x8515     /* 34069 */
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB 0x8516     /* 34070 */
@@ -8086,6 +8628,7 @@ REGAL_DECL void REGAL_CALL plugin_glGetCompressedTexImageARB(GLenum target, GLin
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB 0x8518     /* 34072 */
 #define GL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB 0x8519     /* 34073 */
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB 0x851a     /* 34074 */
+#define GL_PROXY_TEXTURE_CUBE_MAP_ARB      0x851b     /* 34075 */
 #define GL_MAX_CUBE_MAP_TEXTURE_SIZE_ARB   0x851c     /* 34076 */
 #endif
 
@@ -8299,6 +8842,38 @@ REGAL_DECL void REGAL_CALL plugin_glGetCompressedTexImageARB(GLenum target, GLin
 #endif
 
 /**
+ ** GL_ARB_texture_mirror_clamp_to_edge
+ **/
+
+#if (defined(GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)) && !defined(REGAL_NO_ENUM_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)
+#define REGAL_NO_ENUM_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE
+#endif
+
+#if (defined(GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)
+#define REGAL_NO_TYPEDEF_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE
+#endif
+
+#if (defined(GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)
+#define REGAL_NO_NAMESPACE_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE
+#endif
+
+#if (defined(GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)) && !defined(REGAL_NO_PLUGIN_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)
+#define REGAL_NO_PLUGIN_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE
+#endif
+
+#if (defined(GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)) && !defined(REGAL_NO_DECLARATION_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE)
+#define REGAL_NO_DECLARATION_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE
+#endif
+
+#ifndef GL_ARB_texture_mirror_clamp_to_edge
+#define GL_ARB_texture_mirror_clamp_to_edge 1
+#endif
+
+#ifndef REGAL_NO_ENUM_GL_ARB_TEXTURE_MIRROR_CLAMP_TO_EDGE
+#define GL_MIRROR_CLAMP_TO_EDGE 0x8743 /* 34627 */
+#endif
+
+/**
  ** GL_ARB_texture_mirrored_repeat
  **/
 
@@ -8443,10 +9018,6 @@ REGAL_DECL void REGAL_CALL plugin_glTexImage3DMultisample(GLenum target, GLsizei
 #define GL_TEXTURE_BINDING_RECTANGLE_ARB  0x84f6     /* 34038 */
 #define GL_PROXY_TEXTURE_RECTANGLE_ARB    0x84f7     /* 34039 */
 #define GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB 0x84f8     /* 34040 */
-#define GL_SAMPLER_2D_RECT_ARB            0x8b63     /* 35683 */
-#define GL_SAMPLER_2D_RECT_ARB            0x8b63     /* 35683 */
-#define GL_SAMPLER_2D_RECT_SHADOW_ARB     0x8b64     /* 35684 */
-#define GL_SAMPLER_2D_RECT_SHADOW_ARB     0x8b64     /* 35684 */
 #endif
 
 /**
@@ -8909,9 +9480,7 @@ REGAL_DECL void REGAL_CALL plugin_glResumeTransformFeedback(void);
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_ARB_TRANSFORM_FEEDBACK3
-#define GL_MAX_TRANSFORM_FEEDBACK_BUFFERS 0x8e70     /* 36464 */
-#define GL_MAX_VERTEX_STREAMS             0x8e71     /* 36465 */
-#define GL_MAX_VERTEX_STREAMS             0x8e71     /* 36465 */
+#define GL_MAX_TRANSFORM_FEEDBACK_BUFFERS 0x8e70 /* 36464 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_TRANSFORM_FEEDBACK3
@@ -10087,9 +10656,7 @@ REGAL_DECL void REGAL_CALL plugin_glGetActiveAttribARB(GLhandleARB programObj, G
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_ARB_VERTEX_TYPE_2_10_10_10_REV
-#define GL_UNSIGNED_INT_2_10_10_10_REV 0x8368     /* 33640 */
-#define GL_UNSIGNED_INT_2_10_10_10_REV 0x8368     /* 33640 */
-#define GL_INT_2_10_10_10_REV          0x8d9f     /* 36255 */
+#define GL_INT_2_10_10_10_REV 0x8d9f /* 36255 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_VERTEX_TYPE_2_10_10_10_REV
@@ -13851,7 +14418,6 @@ REGAL_DECL void REGAL_CALL plugin_glDiscardFramebufferEXT(GLenum target, GLsizei
 
 #ifndef REGAL_NO_ENUM_GL_EXT_DISJOINT_TIMER_QUERY
 #define GL_QUERY_COUNTER_BITS_EXT 0x8864     /* 34916 */
-#define GL_TIME_ELAPSED_EXT       0x88bf     /* 35007 */
 #define GL_TIMESTAMP_EXT          0x8e28     /* 36392 */
 #define GL_GPU_DISJOINT_EXT       0x8fbb     /* 36795 */
 #endif
@@ -14325,8 +14891,6 @@ REGAL_DECL void REGAL_CALL plugin_glBlitFramebufferEXT(GLint srcX0, GLint srcY0,
 #ifndef REGAL_NO_ENUM_GL_EXT_FRAMEBUFFER_MULTISAMPLE
 #define GL_RENDERBUFFER_SAMPLES_EXT               0x8cab     /* 36011 */
 #define GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT 0x8d56     /* 36182 */
-#define GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT 0x8d56     /* 36182 */
-#define GL_MAX_SAMPLES_EXT                        0x8d57     /* 36183 */
 #define GL_MAX_SAMPLES_EXT                        0x8d57     /* 36183 */
 #endif
 
@@ -15352,10 +15916,7 @@ REGAL_DECL void REGAL_CALL plugin_glSamplePatternEXT(GLenum pattern);
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_EXT_MULTISAMPLED_RENDER_TO_TEXTURE
-#define GL_RENDERBUFFER_SAMPLES_EXT                   0x8cab     /* 36011 */
-#define GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT     0x8d56     /* 36182 */
-#define GL_MAX_SAMPLES_EXT                            0x8d57     /* 36183 */
-#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT 0x8d6c     /* 36204 */
+#define GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT 0x8d6c /* 36204 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_EXT_MULTISAMPLED_RENDER_TO_TEXTURE
@@ -15659,10 +16220,6 @@ REGAL_DECL void REGAL_CALL plugin_glGetQueryivEXT(GLenum target, GLenum pname, G
 #define GL_COLOR_INDEX12_EXT              0x80e6     /* 32998 */
 #define GL_COLOR_INDEX16_EXT              0x80e7     /* 32999 */
 #define GL_TEXTURE_INDEX_SIZE_EXT         0x80ed     /* 33005 */
-#define GL_TEXTURE_CUBE_MAP_ARB           0x8513     /* 34067 */
-#define GL_TEXTURE_CUBE_MAP_ARB           0x8513     /* 34067 */
-#define GL_PROXY_TEXTURE_CUBE_MAP_ARB     0x851b     /* 34075 */
-#define GL_PROXY_TEXTURE_CUBE_MAP_ARB     0x851b     /* 34075 */
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_EXT_PALETTED_TEXTURE
@@ -16054,7 +16611,6 @@ REGAL_DECL void REGAL_CALL plugin_glProvokingVertexEXT(GLenum mode);
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_EXT_ROBUSTNESS
-#define GL_NO_ERROR                        0x0
 #define GL_LOSE_CONTEXT_ON_RESET_EXT       0x8252     /* 33362 */
 #define GL_GUILTY_CONTEXT_RESET_EXT        0x8253     /* 33363 */
 #define GL_INNOCENT_CONTEXT_RESET_EXT      0x8254     /* 33364 */
@@ -16117,10 +16673,7 @@ REGAL_DECL void REGAL_CALL plugin_glReadnPixelsEXT(GLint x, GLint y, GLsizei wid
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_EXT_SRGB
-#define GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT 0x8210     /* 33296 */
-#define GL_SRGB_EXT                                  0x8c40     /* 35904 */
-#define GL_SRGB_ALPHA_EXT                            0x8c42     /* 35906 */
-#define GL_SRGB8_ALPHA8_EXT                          0x8c43     /* 35907 */
+#define GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT 0x8210 /* 33296 */
 #endif
 
 /**
@@ -17302,40 +17855,6 @@ REGAL_DECL void REGAL_CALL plugin_glTexBufferEXT(GLenum target, GLenum internalf
 #endif
 
 /**
- ** GL_EXT_texture_format_BGRA8888
- **/
-
-#if (defined(GL_EXT_TEXTURE_FORMAT_BGRA8888) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_EXT_TEXTURE_FORMAT_BGRA8888)) && !defined(REGAL_NO_ENUM_GL_EXT_TEXTURE_FORMAT_BGRA8888)
-#define REGAL_NO_ENUM_GL_EXT_TEXTURE_FORMAT_BGRA8888
-#endif
-
-#if (defined(GL_EXT_TEXTURE_FORMAT_BGRA8888) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_EXT_TEXTURE_FORMAT_BGRA8888)) && !defined(REGAL_NO_TYPEDEF_GL_EXT_TEXTURE_FORMAT_BGRA8888)
-#define REGAL_NO_TYPEDEF_GL_EXT_TEXTURE_FORMAT_BGRA8888
-#endif
-
-#if (defined(GL_EXT_TEXTURE_FORMAT_BGRA8888) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_EXT_TEXTURE_FORMAT_BGRA8888)) && !defined(REGAL_NO_NAMESPACE_GL_EXT_TEXTURE_FORMAT_BGRA8888)
-#define REGAL_NO_NAMESPACE_GL_EXT_TEXTURE_FORMAT_BGRA8888
-#endif
-
-#if (defined(GL_EXT_TEXTURE_FORMAT_BGRA8888) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_EXT_TEXTURE_FORMAT_BGRA8888)) && !defined(REGAL_NO_PLUGIN_GL_EXT_TEXTURE_FORMAT_BGRA8888)
-#define REGAL_NO_PLUGIN_GL_EXT_TEXTURE_FORMAT_BGRA8888
-#endif
-
-#if (defined(GL_EXT_TEXTURE_FORMAT_BGRA8888) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_EXT_TEXTURE_FORMAT_BGRA8888)) && !defined(REGAL_NO_DECLARATION_GL_EXT_TEXTURE_FORMAT_BGRA8888)
-#define REGAL_NO_DECLARATION_GL_EXT_TEXTURE_FORMAT_BGRA8888
-#endif
-
-#ifndef GL_EXT_texture_format_BGRA8888
-#define GL_EXT_texture_format_BGRA8888 1
-#endif
-
-#ifndef REGAL_NO_ENUM_GL_EXT_TEXTURE_FORMAT_BGRA8888
-#define GL_BGRA_EXT 0x80e1     /* 32993 */
-#define GL_BGRA_EXT 0x80e1     /* 32993 */
-#define GL_BGRA_EXT 0x80e1     /* 32993 */
-#endif
-
-/**
  ** GL_EXT_texture_integer
  **/
 
@@ -17851,30 +18370,17 @@ REGAL_DECL void REGAL_CALL plugin_glTextureNormalEXT(GLenum mode);
 
 #ifndef REGAL_NO_ENUM_GL_EXT_TEXTURE_SNORM
 #define GL_RED_SNORM                 0x8f90     /* 36752 */
-#define GL_RED_SNORM                 0x8f90     /* 36752 */
-#define GL_RG_SNORM                  0x8f91     /* 36753 */
 #define GL_RG_SNORM                  0x8f91     /* 36753 */
 #define GL_RGB_SNORM                 0x8f92     /* 36754 */
-#define GL_RGB_SNORM                 0x8f92     /* 36754 */
-#define GL_RGBA_SNORM                0x8f93     /* 36755 */
 #define GL_RGBA_SNORM                0x8f93     /* 36755 */
 #define GL_R8_SNORM                  0x8f94     /* 36756 */
-#define GL_R8_SNORM                  0x8f94     /* 36756 */
-#define GL_RG8_SNORM                 0x8f95     /* 36757 */
 #define GL_RG8_SNORM                 0x8f95     /* 36757 */
 #define GL_RGB8_SNORM                0x8f96     /* 36758 */
-#define GL_RGB8_SNORM                0x8f96     /* 36758 */
-#define GL_RGBA8_SNORM               0x8f97     /* 36759 */
 #define GL_RGBA8_SNORM               0x8f97     /* 36759 */
 #define GL_R16_SNORM                 0x8f98     /* 36760 */
-#define GL_R16_SNORM                 0x8f98     /* 36760 */
-#define GL_RG16_SNORM                0x8f99     /* 36761 */
 #define GL_RG16_SNORM                0x8f99     /* 36761 */
 #define GL_RGB16_SNORM               0x8f9a     /* 36762 */
-#define GL_RGB16_SNORM               0x8f9a     /* 36762 */
 #define GL_RGBA16_SNORM              0x8f9b     /* 36763 */
-#define GL_RGBA16_SNORM              0x8f9b     /* 36763 */
-#define GL_SIGNED_NORMALIZED         0x8f9c     /* 36764 */
 #define GL_SIGNED_NORMALIZED         0x8f9c     /* 36764 */
 #define GL_ALPHA_SNORM               0x9010     /* 36880 */
 #define GL_LUMINANCE_SNORM           0x9011     /* 36881 */
@@ -17919,17 +18425,10 @@ REGAL_DECL void REGAL_CALL plugin_glTextureNormalEXT(GLenum mode);
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_EXT_TEXTURE_STORAGE
-#define GL_ALPHA8_EXT                   0x803c     /* 32828 */
-#define GL_LUMINANCE8_EXT               0x8040     /* 32832 */
-#define GL_LUMINANCE8_ALPHA8_EXT        0x8045     /* 32837 */
-#define GL_R8_EXT                       0x8229     /* 33321 */
 #define GL_R8_EXT                       0x8229     /* 33321 */
 #define GL_RG8_EXT                      0x822b     /* 33323 */
-#define GL_RG8_EXT                      0x822b     /* 33323 */
-#define GL_R16F_EXT                     0x822d     /* 33325 */
 #define GL_R16F_EXT                     0x822d     /* 33325 */
 #define GL_R32F_EXT                     0x822e     /* 33326 */
-#define GL_RG16F_EXT                    0x822f     /* 33327 */
 #define GL_RG16F_EXT                    0x822f     /* 33327 */
 #define GL_RG32F_EXT                    0x8230     /* 33328 */
 #define GL_RGBA32F_EXT                  0x8814     /* 34836 */
@@ -17938,13 +18437,10 @@ REGAL_DECL void REGAL_CALL plugin_glTextureNormalEXT(GLenum mode);
 #define GL_LUMINANCE32F_EXT             0x8818     /* 34840 */
 #define GL_LUMINANCE_ALPHA32F_EXT       0x8819     /* 34841 */
 #define GL_RGBA16F_EXT                  0x881a     /* 34842 */
-#define GL_RGBA16F_EXT                  0x881a     /* 34842 */
-#define GL_RGB16F_EXT                   0x881b     /* 34843 */
 #define GL_RGB16F_EXT                   0x881b     /* 34843 */
 #define GL_ALPHA16F_EXT                 0x881c     /* 34844 */
 #define GL_LUMINANCE16F_EXT             0x881e     /* 34846 */
 #define GL_LUMINANCE_ALPHA16F_EXT       0x881f     /* 34847 */
-#define GL_RGB_422_APPLE                0x8a1f     /* 35359 */
 #define GL_TEXTURE_IMMUTABLE_FORMAT_EXT 0x912f     /* 37167 */
 #define GL_BGRA8_EXT                    0x93a1     /* 37793 */
 #endif
@@ -19976,8 +20472,6 @@ REGAL_DECL void REGAL_CALL plugin_glTexScissorINTEL(GLenum target, GLclampf tlow
 
 #ifndef REGAL_NO_ENUM_GL_KHR_DEBUG
 #define GL_CONTEXT_FLAG_DEBUG_BIT           0x2
-#define GL_STACK_OVERFLOW                   0x503      /* 1283 */
-#define GL_STACK_UNDERFLOW                  0x504      /* 1284 */
 #define GL_DEBUG_OUTPUT_SYNCHRONOUS         0x8242     /* 33346 */
 #define GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH 0x8243     /* 33347 */
 #define GL_DEBUG_CALLBACK_FUNCTION          0x8244     /* 33348 */
@@ -21452,36 +21946,20 @@ REGAL_DECL void REGAL_CALL plugin_glTexRenderbufferNV(GLenum target, GLuint rend
 #ifndef REGAL_NO_ENUM_GL_NV_FBO_COLOR_ATTACHMENTS
 #define GL_MAX_COLOR_ATTACHMENTS_NV 0x8cdf     /* 36063 */
 #define GL_COLOR_ATTACHMENT0_NV     0x8ce0     /* 36064 */
-#define GL_COLOR_ATTACHMENT0_NV     0x8ce0     /* 36064 */
-#define GL_COLOR_ATTACHMENT1_NV     0x8ce1     /* 36065 */
 #define GL_COLOR_ATTACHMENT1_NV     0x8ce1     /* 36065 */
 #define GL_COLOR_ATTACHMENT2_NV     0x8ce2     /* 36066 */
-#define GL_COLOR_ATTACHMENT2_NV     0x8ce2     /* 36066 */
-#define GL_COLOR_ATTACHMENT3_NV     0x8ce3     /* 36067 */
 #define GL_COLOR_ATTACHMENT3_NV     0x8ce3     /* 36067 */
 #define GL_COLOR_ATTACHMENT4_NV     0x8ce4     /* 36068 */
-#define GL_COLOR_ATTACHMENT4_NV     0x8ce4     /* 36068 */
-#define GL_COLOR_ATTACHMENT5_NV     0x8ce5     /* 36069 */
 #define GL_COLOR_ATTACHMENT5_NV     0x8ce5     /* 36069 */
 #define GL_COLOR_ATTACHMENT6_NV     0x8ce6     /* 36070 */
-#define GL_COLOR_ATTACHMENT6_NV     0x8ce6     /* 36070 */
-#define GL_COLOR_ATTACHMENT7_NV     0x8ce7     /* 36071 */
 #define GL_COLOR_ATTACHMENT7_NV     0x8ce7     /* 36071 */
 #define GL_COLOR_ATTACHMENT8_NV     0x8ce8     /* 36072 */
-#define GL_COLOR_ATTACHMENT8_NV     0x8ce8     /* 36072 */
-#define GL_COLOR_ATTACHMENT9_NV     0x8ce9     /* 36073 */
 #define GL_COLOR_ATTACHMENT9_NV     0x8ce9     /* 36073 */
 #define GL_COLOR_ATTACHMENT10_NV    0x8cea     /* 36074 */
-#define GL_COLOR_ATTACHMENT10_NV    0x8cea     /* 36074 */
-#define GL_COLOR_ATTACHMENT11_NV    0x8ceb     /* 36075 */
 #define GL_COLOR_ATTACHMENT11_NV    0x8ceb     /* 36075 */
 #define GL_COLOR_ATTACHMENT12_NV    0x8cec     /* 36076 */
-#define GL_COLOR_ATTACHMENT12_NV    0x8cec     /* 36076 */
-#define GL_COLOR_ATTACHMENT13_NV    0x8ced     /* 36077 */
 #define GL_COLOR_ATTACHMENT13_NV    0x8ced     /* 36077 */
 #define GL_COLOR_ATTACHMENT14_NV    0x8cee     /* 36078 */
-#define GL_COLOR_ATTACHMENT14_NV    0x8cee     /* 36078 */
-#define GL_COLOR_ATTACHMENT15_NV    0x8cef     /* 36079 */
 #define GL_COLOR_ATTACHMENT15_NV    0x8cef     /* 36079 */
 #endif
 
@@ -22606,7 +23084,6 @@ REGAL_DECL void REGAL_CALL plugin_glVertexWeighthvNV(const GLhalfNV *weight);
 
 #ifndef REGAL_NO_ENUM_GL_NV_MULTISAMPLE_COVERAGE
 #define GL_COVERAGE_SAMPLES_NV 0x80a9     /* 32937 */
-#define GL_COVERAGE_SAMPLES_NV 0x80a9     /* 32937 */
 #define GL_COLOR_SAMPLES_NV    0x8e20     /* 36384 */
 #endif
 
@@ -23620,8 +24097,7 @@ REGAL_DECL void REGAL_CALL plugin_glReadBufferNV(GLenum mode);
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_NV_READ_BUFFER_FRONT
-#define GL_READ_BUFFER_NV 0xc02     /* 3074 */
-#define GL_READ_BUFFER_NV 0xc02     /* 3074 */
+#define GL_READ_BUFFER_NV 0xc02 /* 3074 */
 #endif
 
 /**
@@ -24596,59 +25072,32 @@ REGAL_DECL void REGAL_CALL plugin_glTextureImage3DMultisampleNV(GLuint texture, 
 
 #ifndef REGAL_NO_ENUM_GL_NV_TEXTURE_SHADER2
 #define GL_UNSIGNED_INT_S8_S8_8_8_NV      0x86da     /* 34522 */
-#define GL_UNSIGNED_INT_S8_S8_8_8_NV      0x86da     /* 34522 */
 #define GL_UNSIGNED_INT_8_8_S8_S8_REV_NV  0x86db     /* 34523 */
-#define GL_UNSIGNED_INT_8_8_S8_S8_REV_NV  0x86db     /* 34523 */
-#define GL_DSDT_MAG_INTENSITY_NV          0x86dc     /* 34524 */
 #define GL_DSDT_MAG_INTENSITY_NV          0x86dc     /* 34524 */
 #define GL_DOT_PRODUCT_TEXTURE_3D_NV      0x86ef     /* 34543 */
 #define GL_HILO_NV                        0x86f4     /* 34548 */
-#define GL_HILO_NV                        0x86f4     /* 34548 */
-#define GL_DSDT_NV                        0x86f5     /* 34549 */
 #define GL_DSDT_NV                        0x86f5     /* 34549 */
 #define GL_DSDT_MAG_NV                    0x86f6     /* 34550 */
-#define GL_DSDT_MAG_NV                    0x86f6     /* 34550 */
-#define GL_DSDT_MAG_VIB_NV                0x86f7     /* 34551 */
 #define GL_DSDT_MAG_VIB_NV                0x86f7     /* 34551 */
 #define GL_HILO16_NV                      0x86f8     /* 34552 */
-#define GL_HILO16_NV                      0x86f8     /* 34552 */
-#define GL_SIGNED_HILO_NV                 0x86f9     /* 34553 */
 #define GL_SIGNED_HILO_NV                 0x86f9     /* 34553 */
 #define GL_SIGNED_HILO16_NV               0x86fa     /* 34554 */
-#define GL_SIGNED_HILO16_NV               0x86fa     /* 34554 */
-#define GL_SIGNED_RGBA_NV                 0x86fb     /* 34555 */
 #define GL_SIGNED_RGBA_NV                 0x86fb     /* 34555 */
 #define GL_SIGNED_RGBA8_NV                0x86fc     /* 34556 */
-#define GL_SIGNED_RGBA8_NV                0x86fc     /* 34556 */
-#define GL_SIGNED_RGB_NV                  0x86fe     /* 34558 */
 #define GL_SIGNED_RGB_NV                  0x86fe     /* 34558 */
 #define GL_SIGNED_RGB8_NV                 0x86ff     /* 34559 */
-#define GL_SIGNED_RGB8_NV                 0x86ff     /* 34559 */
-#define GL_SIGNED_LUMINANCE_NV            0x8701     /* 34561 */
 #define GL_SIGNED_LUMINANCE_NV            0x8701     /* 34561 */
 #define GL_SIGNED_LUMINANCE8_NV           0x8702     /* 34562 */
-#define GL_SIGNED_LUMINANCE8_NV           0x8702     /* 34562 */
-#define GL_SIGNED_LUMINANCE_ALPHA_NV      0x8703     /* 34563 */
 #define GL_SIGNED_LUMINANCE_ALPHA_NV      0x8703     /* 34563 */
 #define GL_SIGNED_LUMINANCE8_ALPHA8_NV    0x8704     /* 34564 */
-#define GL_SIGNED_LUMINANCE8_ALPHA8_NV    0x8704     /* 34564 */
-#define GL_SIGNED_ALPHA_NV                0x8705     /* 34565 */
 #define GL_SIGNED_ALPHA_NV                0x8705     /* 34565 */
 #define GL_SIGNED_ALPHA8_NV               0x8706     /* 34566 */
-#define GL_SIGNED_ALPHA8_NV               0x8706     /* 34566 */
-#define GL_SIGNED_INTENSITY_NV            0x8707     /* 34567 */
 #define GL_SIGNED_INTENSITY_NV            0x8707     /* 34567 */
 #define GL_SIGNED_INTENSITY8_NV           0x8708     /* 34568 */
-#define GL_SIGNED_INTENSITY8_NV           0x8708     /* 34568 */
-#define GL_DSDT8_NV                       0x8709     /* 34569 */
 #define GL_DSDT8_NV                       0x8709     /* 34569 */
 #define GL_DSDT8_MAG8_NV                  0x870a     /* 34570 */
-#define GL_DSDT8_MAG8_NV                  0x870a     /* 34570 */
-#define GL_DSDT8_MAG8_INTENSITY8_NV       0x870b     /* 34571 */
 #define GL_DSDT8_MAG8_INTENSITY8_NV       0x870b     /* 34571 */
 #define GL_SIGNED_RGB_UNSIGNED_ALPHA_NV   0x870c     /* 34572 */
-#define GL_SIGNED_RGB_UNSIGNED_ALPHA_NV   0x870c     /* 34572 */
-#define GL_SIGNED_RGB8_UNSIGNED_ALPHA8_NV 0x870d     /* 34573 */
 #define GL_SIGNED_RGB8_UNSIGNED_ALPHA8_NV 0x870d     /* 34573 */
 #endif
 
@@ -25092,8 +25541,6 @@ REGAL_DECL void REGAL_CALL plugin_glVertexArrayRangeNV(GLsizei size, const GLvoi
 
 #ifndef REGAL_NO_ENUM_GL_NV_VERTEX_ATTRIB_INTEGER_64BIT
 #define GL_INT64_NV          0x140e     /* 5134 */
-#define GL_INT64_NV          0x140e     /* 5134 */
-#define GL_UNSIGNED_INT64_NV 0x140f     /* 5135 */
 #define GL_UNSIGNED_INT64_NV 0x140f     /* 5135 */
 #endif
 
@@ -25713,8 +26160,6 @@ REGAL_DECL void REGAL_CALL plugin_glVertexAttribs4ubvNV(GLuint index, GLsizei n,
 
 #ifndef REGAL_NO_ENUM_GL_NV_VERTEX_PROGRAM2_OPTION
 #define GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV 0x88f4     /* 35060 */
-#define GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV 0x88f4     /* 35060 */
-#define GL_MAX_PROGRAM_CALL_DEPTH_NV        0x88f5     /* 35061 */
 #define GL_MAX_PROGRAM_CALL_DEPTH_NV        0x88f5     /* 35061 */
 #endif
 
@@ -26127,39 +26572,6 @@ REGAL_DECL void REGAL_CALL plugin_glBlendEquationOES(GLenum mode);
 #endif
 
 /**
- ** GL_OES_depth_texture
- **/
-
-#if (defined(GL_OES_DEPTH_TEXTURE) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_OES_DEPTH_TEXTURE)) && !defined(REGAL_NO_ENUM_GL_OES_DEPTH_TEXTURE)
-#define REGAL_NO_ENUM_GL_OES_DEPTH_TEXTURE
-#endif
-
-#if (defined(GL_OES_DEPTH_TEXTURE) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_OES_DEPTH_TEXTURE)) && !defined(REGAL_NO_TYPEDEF_GL_OES_DEPTH_TEXTURE)
-#define REGAL_NO_TYPEDEF_GL_OES_DEPTH_TEXTURE
-#endif
-
-#if (defined(GL_OES_DEPTH_TEXTURE) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_OES_DEPTH_TEXTURE)) && !defined(REGAL_NO_NAMESPACE_GL_OES_DEPTH_TEXTURE)
-#define REGAL_NO_NAMESPACE_GL_OES_DEPTH_TEXTURE
-#endif
-
-#if (defined(GL_OES_DEPTH_TEXTURE) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_OES_DEPTH_TEXTURE)) && !defined(REGAL_NO_PLUGIN_GL_OES_DEPTH_TEXTURE)
-#define REGAL_NO_PLUGIN_GL_OES_DEPTH_TEXTURE
-#endif
-
-#if (defined(GL_OES_DEPTH_TEXTURE) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_OES_DEPTH_TEXTURE)) && !defined(REGAL_NO_DECLARATION_GL_OES_DEPTH_TEXTURE)
-#define REGAL_NO_DECLARATION_GL_OES_DEPTH_TEXTURE
-#endif
-
-#ifndef GL_OES_depth_texture
-#define GL_OES_depth_texture 1
-#endif
-
-#ifndef REGAL_NO_ENUM_GL_OES_DEPTH_TEXTURE
-#define GL_UNSIGNED_SHORT  0x1403     /* 5123 */
-#define GL_DEPTH_COMPONENT 0x1902     /* 6402 */
-#endif
-
-/**
  ** GL_OES_draw_texture
  **/
 
@@ -26189,39 +26601,6 @@ REGAL_DECL void REGAL_CALL plugin_glBlendEquationOES(GLenum mode);
 
 #ifndef REGAL_NO_ENUM_GL_OES_DRAW_TEXTURE
 #define GL_TEXTURE_CROP_RECT_OES 0x8b9d /* 35741 */
-#endif
-
-/**
- ** GL_OES_element_index_uint
- **/
-
-#if (defined(GL_OES_ELEMENT_INDEX_UINT) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_OES_ELEMENT_INDEX_UINT)) && !defined(REGAL_NO_ENUM_GL_OES_ELEMENT_INDEX_UINT)
-#define REGAL_NO_ENUM_GL_OES_ELEMENT_INDEX_UINT
-#endif
-
-#if (defined(GL_OES_ELEMENT_INDEX_UINT) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_OES_ELEMENT_INDEX_UINT)) && !defined(REGAL_NO_TYPEDEF_GL_OES_ELEMENT_INDEX_UINT)
-#define REGAL_NO_TYPEDEF_GL_OES_ELEMENT_INDEX_UINT
-#endif
-
-#if (defined(GL_OES_ELEMENT_INDEX_UINT) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_OES_ELEMENT_INDEX_UINT)) && !defined(REGAL_NO_NAMESPACE_GL_OES_ELEMENT_INDEX_UINT)
-#define REGAL_NO_NAMESPACE_GL_OES_ELEMENT_INDEX_UINT
-#endif
-
-#if (defined(GL_OES_ELEMENT_INDEX_UINT) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_OES_ELEMENT_INDEX_UINT)) && !defined(REGAL_NO_PLUGIN_GL_OES_ELEMENT_INDEX_UINT)
-#define REGAL_NO_PLUGIN_GL_OES_ELEMENT_INDEX_UINT
-#endif
-
-#if (defined(GL_OES_ELEMENT_INDEX_UINT) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_OES_ELEMENT_INDEX_UINT)) && !defined(REGAL_NO_DECLARATION_GL_OES_ELEMENT_INDEX_UINT)
-#define REGAL_NO_DECLARATION_GL_OES_ELEMENT_INDEX_UINT
-#endif
-
-#ifndef GL_OES_element_index_uint
-#define GL_OES_element_index_uint 1
-#endif
-
-#ifndef REGAL_NO_ENUM_GL_OES_ELEMENT_INDEX_UINT
-#define GL_UNSIGNED_INT 0x1405     /* 5125 */
-#define GL_UNSIGNED_INT 0x1405     /* 5125 */
 #endif
 
 /**
@@ -26745,23 +27124,12 @@ REGAL_DECL void REGAL_CALL plugin_glWeightPointerOES(GLint size, GLenum type, GL
 #define GL_LUMINANCE8_OES        0x8040     /* 32832 */
 #define GL_LUMINANCE4_ALPHA4_OES 0x8043     /* 32835 */
 #define GL_LUMINANCE8_ALPHA8_OES 0x8045     /* 32837 */
-#define GL_RGB10_EXT             0x8052     /* 32850 */
-#define GL_RGB10_EXT             0x8052     /* 32850 */
-#define GL_RGBA4_OES             0x8056     /* 32854 */
 #define GL_RGBA4_OES             0x8056     /* 32854 */
 #define GL_RGB5_A1_OES           0x8057     /* 32855 */
-#define GL_RGB5_A1_OES           0x8057     /* 32855 */
-#define GL_RGB10_A2_EXT          0x8059     /* 32857 */
-#define GL_RGB10_A2_EXT          0x8059     /* 32857 */
-#define GL_DEPTH_COMPONENT16_OES 0x81a5     /* 33189 */
 #define GL_DEPTH_COMPONENT16_OES 0x81a5     /* 33189 */
 #define GL_DEPTH_COMPONENT24_OES 0x81a6     /* 33190 */
-#define GL_DEPTH_COMPONENT24_OES 0x81a6     /* 33190 */
-#define GL_DEPTH_COMPONENT32_OES 0x81a7     /* 33191 */
 #define GL_DEPTH_COMPONENT32_OES 0x81a7     /* 33191 */
 #define GL_DEPTH24_STENCIL8_OES  0x88f0     /* 35056 */
-#define GL_DEPTH24_STENCIL8_OES  0x88f0     /* 35056 */
-#define GL_RGB565_OES            0x8d62     /* 36194 */
 #define GL_RGB565_OES            0x8d62     /* 36194 */
 #endif
 
@@ -26795,9 +27163,6 @@ REGAL_DECL void REGAL_CALL plugin_glWeightPointerOES(GLint size, GLenum type, GL
 
 #ifndef REGAL_NO_ENUM_GL_OES_RGB8_RGBA8
 #define GL_RGB8_OES  0x8051     /* 32849 */
-#define GL_RGB8_OES  0x8051     /* 32849 */
-#define GL_RGBA8_OES 0x8058     /* 32856 */
-#define GL_RGBA8_OES 0x8058     /* 32856 */
 #define GL_RGBA8_OES 0x8058     /* 32856 */
 #endif
 
@@ -26926,8 +27291,7 @@ REGAL_DECL void REGAL_CALL plugin_glOrthofOES(GLfloat l, GLfloat r, GLfloat b, G
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_OES_STENCIL1
-#define GL_STENCIL_INDEX1_OES 0x8d46     /* 36166 */
-#define GL_STENCIL_INDEX1_OES 0x8d46     /* 36166 */
+#define GL_STENCIL_INDEX1_OES 0x8d46 /* 36166 */
 #endif
 
 /**
@@ -26959,8 +27323,7 @@ REGAL_DECL void REGAL_CALL plugin_glOrthofOES(GLfloat l, GLfloat r, GLfloat b, G
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_OES_STENCIL4
-#define GL_STENCIL_INDEX4_OES 0x8d47     /* 36167 */
-#define GL_STENCIL_INDEX4_OES 0x8d47     /* 36167 */
+#define GL_STENCIL_INDEX4_OES 0x8d47 /* 36167 */
 #endif
 
 /**
@@ -26992,8 +27355,7 @@ REGAL_DECL void REGAL_CALL plugin_glOrthofOES(GLfloat l, GLfloat r, GLfloat b, G
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_OES_STENCIL8
-#define GL_STENCIL_INDEX8_OES 0x8d48     /* 36168 */
-#define GL_STENCIL_INDEX8_OES 0x8d48     /* 36168 */
+#define GL_STENCIL_INDEX8_OES 0x8d48 /* 36168 */
 #endif
 
 /**
@@ -27189,38 +27551,6 @@ REGAL_DECL void REGAL_CALL plugin_glTexGeniOES(GLenum coord, GLenum pname, GLint
 REGAL_DECL void REGAL_CALL plugin_glTexGenivOES(GLenum coord, GLenum pname, const GLint *params);
 REGAL_DECL void REGAL_CALL plugin_glTexGenxOES(GLenum coord, GLenum pname, GLfixed param);
 REGAL_DECL void REGAL_CALL plugin_glTexGenxvOES(GLenum coord, GLenum pname, const GLfixed *params);
-#endif
-
-/**
- ** GL_OES_texture_mirrored_repeat
- **/
-
-#if (defined(GL_OES_TEXTURE_MIRRORED_REPEAT) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_OES_TEXTURE_MIRRORED_REPEAT)) && !defined(REGAL_NO_ENUM_GL_OES_TEXTURE_MIRRORED_REPEAT)
-#define REGAL_NO_ENUM_GL_OES_TEXTURE_MIRRORED_REPEAT
-#endif
-
-#if (defined(GL_OES_TEXTURE_MIRRORED_REPEAT) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_OES_TEXTURE_MIRRORED_REPEAT)) && !defined(REGAL_NO_TYPEDEF_GL_OES_TEXTURE_MIRRORED_REPEAT)
-#define REGAL_NO_TYPEDEF_GL_OES_TEXTURE_MIRRORED_REPEAT
-#endif
-
-#if (defined(GL_OES_TEXTURE_MIRRORED_REPEAT) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_OES_TEXTURE_MIRRORED_REPEAT)) && !defined(REGAL_NO_NAMESPACE_GL_OES_TEXTURE_MIRRORED_REPEAT)
-#define REGAL_NO_NAMESPACE_GL_OES_TEXTURE_MIRRORED_REPEAT
-#endif
-
-#if (defined(GL_OES_TEXTURE_MIRRORED_REPEAT) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_OES_TEXTURE_MIRRORED_REPEAT)) && !defined(REGAL_NO_PLUGIN_GL_OES_TEXTURE_MIRRORED_REPEAT)
-#define REGAL_NO_PLUGIN_GL_OES_TEXTURE_MIRRORED_REPEAT
-#endif
-
-#if (defined(GL_OES_TEXTURE_MIRRORED_REPEAT) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_OES_TEXTURE_MIRRORED_REPEAT)) && !defined(REGAL_NO_DECLARATION_GL_OES_TEXTURE_MIRRORED_REPEAT)
-#define REGAL_NO_DECLARATION_GL_OES_TEXTURE_MIRRORED_REPEAT
-#endif
-
-#ifndef GL_OES_texture_mirrored_repeat
-#define GL_OES_texture_mirrored_repeat 1
-#endif
-
-#ifndef REGAL_NO_ENUM_GL_OES_TEXTURE_MIRRORED_REPEAT
-#define GL_MIRRORED_REPEAT 0x8370 /* 33648 */
 #endif
 
 /**
@@ -27650,7 +27980,6 @@ REGAL_DECL void REGAL_CALL plugin_glAlphaFuncQCOM(GLenum func, GLclampf ref);
 #endif
 
 #ifndef REGAL_NO_ENUM_GL_QCOM_BINNING_CONTROL
-#define GL_DONT_CARE                         0x1100     /* 4352 */
 #define GL_BINNING_CONTROL_HINT_QCOM         0x8fb0     /* 36784 */
 #define GL_CPU_OPTIMIZED_QCOM                0x8fb1     /* 36785 */
 #define GL_GPU_OPTIMIZED_QCOM                0x8fb2     /* 36786 */
@@ -30514,8 +30843,6 @@ REGAL_DECL void REGAL_CALL plugin_glTagSampleBufferSGIX(void);
 
 #ifndef REGAL_NO_ENUM_GL_SGIX_VERTEX_PRECLIP_HINT
 #define GL_VERTEX_PRECLIP_SGIX      0x83ee     /* 33774 */
-#define GL_VERTEX_PRECLIP_SGIX      0x83ee     /* 33774 */
-#define GL_VERTEX_PRECLIP_HINT_SGIX 0x83ef     /* 33775 */
 #define GL_VERTEX_PRECLIP_HINT_SGIX 0x83ef     /* 33775 */
 #endif
 
@@ -33305,6 +33632,7 @@ REGAL_DECL void REGAL_CALL plugin_glVertexPointer(GLint size, GLenum type, GLsiz
 #define GL_UNSIGNED_SHORT_4_4_4_4_REV    0x8365     /* 33637 */
 #define GL_UNSIGNED_SHORT_1_5_5_5_REV    0x8366     /* 33638 */
 #define GL_UNSIGNED_INT_8_8_8_8_REV      0x8367     /* 33639 */
+#define GL_UNSIGNED_INT_2_10_10_10_REV   0x8368     /* 33640 */
 #define GL_ALIASED_POINT_SIZE_RANGE      0x846d     /* 33901 */
 #define GL_ALIASED_LINE_WIDTH_RANGE      0x846e     /* 33902 */
 #define GL_SMOOTH_POINT_SIZE_RANGE       0xb12      /* 2834 */
@@ -37793,7 +38121,6 @@ REGAL_DECL int REGAL_CALL plugin_wglEnumerateVideoDevicesNV(HDC hDC, HVIDEOOUTPU
 
 #ifndef REGAL_NO_ENUM_WGL_NV_RENDER_DEPTH_TEXTURE
 #define WGL_NO_TEXTURE_ARB                     0x2077     /* 8311 */
-#define WGL_NO_TEXTURE_ARB                     0x2077     /* 8311 */
 #define WGL_BIND_TO_TEXTURE_DEPTH_NV           0x20a3     /* 8355 */
 #define WGL_BIND_TO_TEXTURE_RECTANGLE_DEPTH_NV 0x20a4     /* 8356 */
 #define WGL_DEPTH_TEXTURE_FORMAT_NV            0x20a5     /* 8357 */
@@ -40277,7 +40604,6 @@ REGAL_DECL int64_t REGAL_CALL plugin_glXSwapBuffersMscOML(Display *dpy, GLXDrawa
 #define GLX_COLOR_INDEX_BIT_SGIX  0x2
 #define GLX_PIXMAP_BIT_SGIX       0x2
 #define GLX_SCREEN_EXT            0x800c     /* 32780 */
-#define GLX_SCREEN_EXT            0x800c     /* 32780 */
 #define GLX_DRAWABLE_TYPE_SGIX    0x8010     /* 32784 */
 #define GLX_RENDER_TYPE_SGIX      0x8011     /* 32785 */
 #define GLX_X_RENDERABLE_SGIX     0x8012     /* 32786 */
@@ -41998,8 +42324,7 @@ REGAL_DECL EGLBoolean REGAL_CALL plugin_eglQuerySurfacePointerANGLE(EGLDisplay d
 #endif
 
 #ifndef REGAL_NO_ENUM_EGL_ANGLE_SURFACE_D3D_TEXTURE_2D_SHARE_HANDLE
-#define EGL_D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE 0x3200     /* 12800 */
-#define EGL_D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE 0x3200     /* 12800 */
+#define EGL_D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE 0x3200 /* 12800 */
 #endif
 
 /**
@@ -42303,48 +42628,15 @@ REGAL_DECL EGLint REGAL_CALL plugin_eglClientWaitSyncKHR(EGLDisplay dpy, EGLSync
 
 #ifndef REGAL_NO_ENUM_EGL_KHR_GL_TEXTURE_CUBEMAP_IMAGE
 #define EGL_GL_TEXTURE_2D_KHR                  0x30b1     /* 12465 */
-#define EGL_GL_TEXTURE_2D_KHR                  0x30b1     /* 12465 */
-#define EGL_GL_TEXTURE_2D_KHR                  0x30b1     /* 12465 */
-#define EGL_GL_TEXTURE_2D_KHR                  0x30b1     /* 12465 */
-#define EGL_GL_TEXTURE_3D_KHR                  0x30b2     /* 12466 */
-#define EGL_GL_TEXTURE_3D_KHR                  0x30b2     /* 12466 */
-#define EGL_GL_TEXTURE_3D_KHR                  0x30b2     /* 12466 */
 #define EGL_GL_TEXTURE_3D_KHR                  0x30b2     /* 12466 */
 #define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_X_KHR 0x30b3     /* 12467 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_X_KHR 0x30b3     /* 12467 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_X_KHR 0x30b3     /* 12467 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_X_KHR 0x30b3     /* 12467 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR 0x30b4     /* 12468 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR 0x30b4     /* 12468 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR 0x30b4     /* 12468 */
 #define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR 0x30b4     /* 12468 */
 #define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y_KHR 0x30b5     /* 12469 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y_KHR 0x30b5     /* 12469 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y_KHR 0x30b5     /* 12469 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y_KHR 0x30b5     /* 12469 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_KHR 0x30b6     /* 12470 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_KHR 0x30b6     /* 12470 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_KHR 0x30b6     /* 12470 */
 #define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_KHR 0x30b6     /* 12470 */
 #define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z_KHR 0x30b7     /* 12471 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z_KHR 0x30b7     /* 12471 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z_KHR 0x30b7     /* 12471 */
-#define EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z_KHR 0x30b7     /* 12471 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR 0x30b8     /* 12472 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR 0x30b8     /* 12472 */
-#define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR 0x30b8     /* 12472 */
 #define EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR 0x30b8     /* 12472 */
 #define EGL_GL_RENDERBUFFER_KHR                0x30b9     /* 12473 */
-#define EGL_GL_RENDERBUFFER_KHR                0x30b9     /* 12473 */
-#define EGL_GL_RENDERBUFFER_KHR                0x30b9     /* 12473 */
-#define EGL_GL_RENDERBUFFER_KHR                0x30b9     /* 12473 */
 #define EGL_GL_TEXTURE_LEVEL_KHR               0x30bc     /* 12476 */
-#define EGL_GL_TEXTURE_LEVEL_KHR               0x30bc     /* 12476 */
-#define EGL_GL_TEXTURE_LEVEL_KHR               0x30bc     /* 12476 */
-#define EGL_GL_TEXTURE_LEVEL_KHR               0x30bc     /* 12476 */
-#define EGL_GL_TEXTURE_ZOFFSET_KHR             0x30bd     /* 12477 */
-#define EGL_GL_TEXTURE_ZOFFSET_KHR             0x30bd     /* 12477 */
-#define EGL_GL_TEXTURE_ZOFFSET_KHR             0x30bd     /* 12477 */
 #define EGL_GL_TEXTURE_ZOFFSET_KHR             0x30bd     /* 12477 */
 #endif
 
@@ -42510,47 +42802,26 @@ REGAL_DECL EGLBoolean REGAL_CALL plugin_eglUnlockSurfaceKHR(EGLDisplay display, 
 
 #ifndef REGAL_NO_ENUM_EGL_KHR_LOCK_SURFACE2
 #define EGL_READ_SURFACE_BIT_KHR              0x1
-#define EGL_READ_SURFACE_BIT_KHR              0x1
-#define EGL_OPTIMAL_FORMAT_BIT_KHR            0x100      /* 256 */
 #define EGL_OPTIMAL_FORMAT_BIT_KHR            0x100      /* 256 */
 #define EGL_WRITE_SURFACE_BIT_KHR             0x2
-#define EGL_WRITE_SURFACE_BIT_KHR             0x2
-#define EGL_MATCH_FORMAT_KHR                  0x3043     /* 12355 */
 #define EGL_MATCH_FORMAT_KHR                  0x3043     /* 12355 */
 #define EGL_FORMAT_RGB_565_EXACT_KHR          0x30c0     /* 12480 */
-#define EGL_FORMAT_RGB_565_EXACT_KHR          0x30c0     /* 12480 */
-#define EGL_FORMAT_RGB_565_KHR                0x30c1     /* 12481 */
 #define EGL_FORMAT_RGB_565_KHR                0x30c1     /* 12481 */
 #define EGL_FORMAT_RGBA_8888_EXACT_KHR        0x30c2     /* 12482 */
-#define EGL_FORMAT_RGBA_8888_EXACT_KHR        0x30c2     /* 12482 */
-#define EGL_FORMAT_RGBA_8888_KHR              0x30c3     /* 12483 */
 #define EGL_FORMAT_RGBA_8888_KHR              0x30c3     /* 12483 */
 #define EGL_MAP_PRESERVE_PIXELS_KHR           0x30c4     /* 12484 */
-#define EGL_MAP_PRESERVE_PIXELS_KHR           0x30c4     /* 12484 */
-#define EGL_LOCK_USAGE_HINT_KHR               0x30c5     /* 12485 */
 #define EGL_LOCK_USAGE_HINT_KHR               0x30c5     /* 12485 */
 #define EGL_BITMAP_POINTER_KHR                0x30c6     /* 12486 */
-#define EGL_BITMAP_POINTER_KHR                0x30c6     /* 12486 */
-#define EGL_BITMAP_PITCH_KHR                  0x30c7     /* 12487 */
 #define EGL_BITMAP_PITCH_KHR                  0x30c7     /* 12487 */
 #define EGL_BITMAP_ORIGIN_KHR                 0x30c8     /* 12488 */
-#define EGL_BITMAP_ORIGIN_KHR                 0x30c8     /* 12488 */
-#define EGL_BITMAP_PIXEL_RED_OFFSET_KHR       0x30c9     /* 12489 */
 #define EGL_BITMAP_PIXEL_RED_OFFSET_KHR       0x30c9     /* 12489 */
 #define EGL_BITMAP_PIXEL_GREEN_OFFSET_KHR     0x30ca     /* 12490 */
-#define EGL_BITMAP_PIXEL_GREEN_OFFSET_KHR     0x30ca     /* 12490 */
-#define EGL_BITMAP_PIXEL_BLUE_OFFSET_KHR      0x30cb     /* 12491 */
 #define EGL_BITMAP_PIXEL_BLUE_OFFSET_KHR      0x30cb     /* 12491 */
 #define EGL_BITMAP_PIXEL_ALPHA_OFFSET_KHR     0x30cc     /* 12492 */
-#define EGL_BITMAP_PIXEL_ALPHA_OFFSET_KHR     0x30cc     /* 12492 */
-#define EGL_BITMAP_PIXEL_LUMINANCE_OFFSET_KHR 0x30cd     /* 12493 */
 #define EGL_BITMAP_PIXEL_LUMINANCE_OFFSET_KHR 0x30cd     /* 12493 */
 #define EGL_LOWER_LEFT_KHR                    0x30ce     /* 12494 */
-#define EGL_LOWER_LEFT_KHR                    0x30ce     /* 12494 */
-#define EGL_UPPER_LEFT_KHR                    0x30cf     /* 12495 */
 #define EGL_UPPER_LEFT_KHR                    0x30cf     /* 12495 */
 #define EGL_BITMAP_PIXEL_SIZE_KHR             0x3110     /* 12560 */
-#define EGL_LOCK_SURFACE_BIT_KHR              0x80       /* 128 */
 #define EGL_LOCK_SURFACE_BIT_KHR              0x80       /* 128 */
 #endif
 
@@ -43506,12 +43777,8 @@ REGAL_DECL EGLenum REGAL_CALL plugin_eglQueryAPI(void);
 
 #ifndef REGAL_NO_ENUM_GL_NV_DEPTH_NONLINEAR
 #define EGL_DEPTH_ENCODING_NONE_NV        0x0
-#define EGL_DEPTH_ENCODING_NONE_NV        0x0
-#define EGL_DEPTH_ENCODING_NV             0x30e2     /* 12514 */
 #define EGL_DEPTH_ENCODING_NV             0x30e2     /* 12514 */
 #define EGL_DEPTH_ENCODING_NONLINEAR_NV   0x30e3     /* 12515 */
-#define EGL_DEPTH_ENCODING_NONLINEAR_NV   0x30e3     /* 12515 */
-#define GL_DEPTH_COMPONENT16_NONLINEAR_NV 0x8e2c     /* 36396 */
 #define GL_DEPTH_COMPONENT16_NONLINEAR_NV 0x8e2c     /* 36396 */
 #endif
 
@@ -43545,45 +43812,15 @@ REGAL_DECL EGLenum REGAL_CALL plugin_eglQueryAPI(void);
 
 #ifndef REGAL_NO_ENUM_GL_VG_KHR_EGL_SYNC
 #define EGL_SYNC_FLUSH_COMMANDS_BIT_KHR      0x1
-#define EGL_SYNC_FLUSH_COMMANDS_BIT_KHR      0x1
-#define EGL_SYNC_FLUSH_COMMANDS_BIT_KHR      0x1
-#define EGL_SYNC_FLUSH_COMMANDS_BIT_KHR      0x1
-#define EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR 0x30f0                 /* 12528 */
-#define EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR 0x30f0                 /* 12528 */
 #define EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR 0x30f0                 /* 12528 */
 #define EGL_SYNC_STATUS_KHR                  0x30f1                 /* 12529 */
-#define EGL_SYNC_STATUS_KHR                  0x30f1                 /* 12529 */
-#define EGL_SYNC_STATUS_KHR                  0x30f1                 /* 12529 */
-#define EGL_SYNC_STATUS_KHR                  0x30f1                 /* 12529 */
-#define EGL_SIGNALED_KHR                     0x30f2                 /* 12530 */
-#define EGL_SIGNALED_KHR                     0x30f2                 /* 12530 */
-#define EGL_SIGNALED_KHR                     0x30f2                 /* 12530 */
 #define EGL_SIGNALED_KHR                     0x30f2                 /* 12530 */
 #define EGL_UNSIGNALED_KHR                   0x30f3                 /* 12531 */
-#define EGL_UNSIGNALED_KHR                   0x30f3                 /* 12531 */
-#define EGL_UNSIGNALED_KHR                   0x30f3                 /* 12531 */
-#define EGL_UNSIGNALED_KHR                   0x30f3                 /* 12531 */
-#define EGL_TIMEOUT_EXPIRED_KHR              0x30f5                 /* 12533 */
-#define EGL_TIMEOUT_EXPIRED_KHR              0x30f5                 /* 12533 */
-#define EGL_TIMEOUT_EXPIRED_KHR              0x30f5                 /* 12533 */
 #define EGL_TIMEOUT_EXPIRED_KHR              0x30f5                 /* 12533 */
 #define EGL_CONDITION_SATISFIED_KHR          0x30f6                 /* 12534 */
-#define EGL_CONDITION_SATISFIED_KHR          0x30f6                 /* 12534 */
-#define EGL_CONDITION_SATISFIED_KHR          0x30f6                 /* 12534 */
-#define EGL_CONDITION_SATISFIED_KHR          0x30f6                 /* 12534 */
-#define EGL_SYNC_TYPE_KHR                    0x30f7                 /* 12535 */
-#define EGL_SYNC_TYPE_KHR                    0x30f7                 /* 12535 */
-#define EGL_SYNC_TYPE_KHR                    0x30f7                 /* 12535 */
 #define EGL_SYNC_TYPE_KHR                    0x30f7                 /* 12535 */
 #define EGL_SYNC_CONDITION_KHR               0x30f8                 /* 12536 */
-#define EGL_SYNC_CONDITION_KHR               0x30f8                 /* 12536 */
-#define EGL_SYNC_CONDITION_KHR               0x30f8                 /* 12536 */
 #define EGL_SYNC_FENCE_KHR                   0x30f9                 /* 12537 */
-#define EGL_SYNC_FENCE_KHR                   0x30f9                 /* 12537 */
-#define EGL_SYNC_FENCE_KHR                   0x30f9                 /* 12537 */
-#define EGL_FOREVER_KHR                      0xffffffffffffffff     /* 18446744073709551615 */
-#define EGL_FOREVER_KHR                      0xffffffffffffffff     /* 18446744073709551615 */
-#define EGL_FOREVER_KHR                      0xffffffffffffffff     /* 18446744073709551615 */
 #define EGL_FOREVER_KHR                      0xffffffffffffffff     /* 18446744073709551615 */
 #endif
 

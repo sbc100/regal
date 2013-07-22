@@ -4880,6 +4880,16 @@ static void REGAL_CALL missing_glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum 
   Warning( "glBlendFuncSeparateIndexedAMD not available." );
 }
 
+// GL_AMD_interleaved_elements
+
+static void REGAL_CALL missing_glVertexAttribParameteriAMD(GLuint index, GLenum pname, GLint param)
+{
+  UNUSED_PARAMETER(index);
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(param);
+  Warning( "glVertexAttribParameteriAMD not available." );
+}
+
 // GL_AMD_multi_draw_indirect
 
 static void REGAL_CALL missing_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -5029,6 +5039,33 @@ static void REGAL_CALL missing_glSetMultisamplefvAMD(GLenum pname, GLuint index,
   UNUSED_PARAMETER(index);
   UNUSED_PARAMETER(val);
   Warning( "glSetMultisamplefvAMD not available." );
+}
+
+// GL_AMD_sparse_texture
+
+static void REGAL_CALL missing_glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(internalFormat);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  UNUSED_PARAMETER(layers);
+  UNUSED_PARAMETER(flags);
+  Warning( "glTexStorageSparseAMD not available." );
+}
+
+static void REGAL_CALL missing_glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(internalFormat);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  UNUSED_PARAMETER(layers);
+  UNUSED_PARAMETER(flags);
+  Warning( "glTextureStorageSparseAMD not available." );
 }
 
 // GL_AMD_stencil_operation_extended
@@ -5599,6 +5636,127 @@ static void REGAL_CALL missing_glDrawElementsInstancedBaseVertexBaseInstance(GLe
   Warning( "glDrawElementsInstancedBaseVertexBaseInstance not available." );
 }
 
+// GL_ARB_bindless_texture
+
+static GLuint64 REGAL_CALL missing_glGetImageHandleARB(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(layered);
+  UNUSED_PARAMETER(layer);
+  UNUSED_PARAMETER(format);
+  Warning( "glGetImageHandleARB not available." );
+  return 0;
+}
+
+static GLuint64 REGAL_CALL missing_glGetTextureHandleARB(GLuint texture)
+{
+  UNUSED_PARAMETER(texture);
+  Warning( "glGetTextureHandleARB not available." );
+  return 0;
+}
+
+static GLuint64 REGAL_CALL missing_glGetTextureSamplerHandleARB(GLuint texture, GLuint sampler)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(sampler);
+  Warning( "glGetTextureSamplerHandleARB not available." );
+  return 0;
+}
+
+static void REGAL_CALL missing_glGetVertexAttribLui64vARB(GLuint index, GLenum pname, GLuint64EXT *params)
+{
+  UNUSED_PARAMETER(index);
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(params);
+  Warning( "glGetVertexAttribLui64vARB not available." );
+}
+
+static GLboolean REGAL_CALL missing_glIsImageHandleResidentARB(GLuint64 handle)
+{
+  UNUSED_PARAMETER(handle);
+  Warning( "glIsImageHandleResidentARB not available." );
+  return GL_FALSE;
+}
+
+static GLboolean REGAL_CALL missing_glIsTextureHandleResidentARB(GLuint64 handle)
+{
+  UNUSED_PARAMETER(handle);
+  Warning( "glIsTextureHandleResidentARB not available." );
+  return GL_FALSE;
+}
+
+static void REGAL_CALL missing_glMakeImageHandleNonResidentARB(GLuint64 handle)
+{
+  UNUSED_PARAMETER(handle);
+  Warning( "glMakeImageHandleNonResidentARB not available." );
+}
+
+static void REGAL_CALL missing_glMakeImageHandleResidentARB(GLuint64 handle, GLenum access)
+{
+  UNUSED_PARAMETER(handle);
+  UNUSED_PARAMETER(access);
+  Warning( "glMakeImageHandleResidentARB not available." );
+}
+
+static void REGAL_CALL missing_glMakeTextureHandleNonResidentARB(GLuint64 handle)
+{
+  UNUSED_PARAMETER(handle);
+  Warning( "glMakeTextureHandleNonResidentARB not available." );
+}
+
+static void REGAL_CALL missing_glMakeTextureHandleResidentARB(GLuint64 handle)
+{
+  UNUSED_PARAMETER(handle);
+  Warning( "glMakeTextureHandleResidentARB not available." );
+}
+
+static void REGAL_CALL missing_glProgramUniformHandleui64ARB(GLuint program, GLint location, GLuint64 value)
+{
+  UNUSED_PARAMETER(program);
+  UNUSED_PARAMETER(location);
+  UNUSED_PARAMETER(value);
+  Warning( "glProgramUniformHandleui64ARB not available." );
+}
+
+static void REGAL_CALL missing_glProgramUniformHandleui64vARB(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
+{
+  UNUSED_PARAMETER(program);
+  UNUSED_PARAMETER(location);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(values);
+  Warning( "glProgramUniformHandleui64vARB not available." );
+}
+
+static void REGAL_CALL missing_glUniformHandleui64ARB(GLint location, GLuint64 value)
+{
+  UNUSED_PARAMETER(location);
+  UNUSED_PARAMETER(value);
+  Warning( "glUniformHandleui64ARB not available." );
+}
+
+static void REGAL_CALL missing_glUniformHandleui64vARB(GLint location, GLsizei count, const GLuint64 *value)
+{
+  UNUSED_PARAMETER(location);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(value);
+  Warning( "glUniformHandleui64vARB not available." );
+}
+
+static void REGAL_CALL missing_glVertexAttribL1ui64ARB(GLuint index, GLuint64EXT x)
+{
+  UNUSED_PARAMETER(index);
+  UNUSED_PARAMETER(x);
+  Warning( "glVertexAttribL1ui64ARB not available." );
+}
+
+static void REGAL_CALL missing_glVertexAttribL1ui64vARB(GLuint index, const GLuint64EXT *v)
+{
+  UNUSED_PARAMETER(index);
+  UNUSED_PARAMETER(v);
+  Warning( "glVertexAttribL1ui64vARB not available." );
+}
+
 // GL_ARB_blend_func_extended
 
 static void REGAL_CALL missing_glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name)
@@ -5616,6 +5774,17 @@ static GLint REGAL_CALL missing_glGetFragDataIndex(GLuint program, const GLchar 
   UNUSED_PARAMETER(name);
   Warning( "glGetFragDataIndex not available." );
   return 0;
+}
+
+// GL_ARB_buffer_storage
+
+static void REGAL_CALL missing_glBufferStorage(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(size);
+  UNUSED_PARAMETER(data);
+  UNUSED_PARAMETER(flags);
+  Warning( "glBufferStorage not available." );
 }
 
 // GL_ARB_cl_event
@@ -5675,6 +5844,34 @@ static void REGAL_CALL missing_glClearNamedBufferSubDataEXT(GLuint buffer, GLenu
   Warning( "glClearNamedBufferSubDataEXT not available." );
 }
 
+// GL_ARB_clear_texture
+
+static void REGAL_CALL missing_glClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(format);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(data);
+  Warning( "glClearTexImage not available." );
+}
+
+static void REGAL_CALL missing_glClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(xoffset);
+  UNUSED_PARAMETER(yoffset);
+  UNUSED_PARAMETER(zoffset);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  UNUSED_PARAMETER(format);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(data);
+  Warning( "glClearTexSubImage not available." );
+}
+
 // GL_ARB_color_buffer_float
 
 static void REGAL_CALL missing_glClampColorARB(GLenum target, GLenum clamp)
@@ -5698,6 +5895,19 @@ static void REGAL_CALL missing_glDispatchComputeIndirect(GLintptr indirect)
 {
   UNUSED_PARAMETER(indirect);
   Warning( "glDispatchComputeIndirect not available." );
+}
+
+// GL_ARB_compute_variable_group_size
+
+static void REGAL_CALL missing_glDispatchComputeGroupSizeARB(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z)
+{
+  UNUSED_PARAMETER(num_groups_x);
+  UNUSED_PARAMETER(num_groups_y);
+  UNUSED_PARAMETER(num_groups_z);
+  UNUSED_PARAMETER(group_size_x);
+  UNUSED_PARAMETER(group_size_y);
+  UNUSED_PARAMETER(group_size_z);
+  Warning( "glDispatchComputeGroupSizeARB not available." );
 }
 
 // GL_ARB_copy_buffer
@@ -6627,6 +6837,29 @@ static void REGAL_CALL missing_glSeparableFilter2D(GLenum target, GLenum interna
   UNUSED_PARAMETER(row);
   UNUSED_PARAMETER(column);
   Warning( "glSeparableFilter2D not available." );
+}
+
+// GL_ARB_indirect_parameters
+
+static void REGAL_CALL missing_glMultiDrawArraysIndirectCountARB(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+{
+  UNUSED_PARAMETER(mode);
+  UNUSED_PARAMETER(indirect);
+  UNUSED_PARAMETER(drawcount);
+  UNUSED_PARAMETER(maxdrawcount);
+  UNUSED_PARAMETER(stride);
+  Warning( "glMultiDrawArraysIndirectCountARB not available." );
+}
+
+static void REGAL_CALL missing_glMultiDrawElementsIndirectCountARB(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+{
+  UNUSED_PARAMETER(mode);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(indirect);
+  UNUSED_PARAMETER(drawcount);
+  UNUSED_PARAMETER(maxdrawcount);
+  UNUSED_PARAMETER(stride);
+  Warning( "glMultiDrawElementsIndirectCountARB not available." );
 }
 
 // GL_ARB_instanced_arrays
@@ -8580,6 +8813,37 @@ static void REGAL_CALL missing_glNamedStringARB(GLenum type, GLint namelen, cons
   UNUSED_PARAMETER(stringlen);
   UNUSED_PARAMETER(string);
   Warning( "glNamedStringARB not available." );
+}
+
+// GL_ARB_sparse_texture
+
+static void REGAL_CALL missing_glTexPageCommitmentARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(xoffset);
+  UNUSED_PARAMETER(yoffset);
+  UNUSED_PARAMETER(zoffset);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  UNUSED_PARAMETER(commit);
+  Warning( "glTexPageCommitmentARB not available." );
+}
+
+static void REGAL_CALL missing_glTexturePageCommitmentEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
+{
+  UNUSED_PARAMETER(texture);
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(level);
+  UNUSED_PARAMETER(xoffset);
+  UNUSED_PARAMETER(yoffset);
+  UNUSED_PARAMETER(zoffset);
+  UNUSED_PARAMETER(width);
+  UNUSED_PARAMETER(height);
+  UNUSED_PARAMETER(depth);
+  UNUSED_PARAMETER(commit);
+  Warning( "glTexturePageCommitmentEXT not available." );
 }
 
 // GL_ARB_sync
@@ -26566,6 +26830,10 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glBlendFuncIndexedAMD = missing_glBlendFuncIndexedAMD;
   tbl.glBlendFuncSeparateIndexedAMD = missing_glBlendFuncSeparateIndexedAMD;
 
+  // GL_AMD_interleaved_elements
+
+  tbl.glVertexAttribParameteriAMD = missing_glVertexAttribParameteriAMD;
+
   // GL_AMD_multi_draw_indirect
 
   tbl.glMultiDrawArraysIndirectAMD = missing_glMultiDrawArraysIndirectAMD;
@@ -26594,6 +26862,11 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   // GL_AMD_sample_positions
 
   tbl.glSetMultisamplefvAMD = missing_glSetMultisamplefvAMD;
+
+  // GL_AMD_sparse_texture
+
+  tbl.glTexStorageSparseAMD = missing_glTexStorageSparseAMD;
+  tbl.glTextureStorageSparseAMD = missing_glTextureStorageSparseAMD;
 
   // GL_AMD_stencil_operation_extended
 
@@ -26719,10 +26992,33 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glDrawElementsInstancedBaseInstance = missing_glDrawElementsInstancedBaseInstance;
   tbl.glDrawElementsInstancedBaseVertexBaseInstance = missing_glDrawElementsInstancedBaseVertexBaseInstance;
 
+  // GL_ARB_bindless_texture
+
+  tbl.glGetImageHandleARB = missing_glGetImageHandleARB;
+  tbl.glGetTextureHandleARB = missing_glGetTextureHandleARB;
+  tbl.glGetTextureSamplerHandleARB = missing_glGetTextureSamplerHandleARB;
+  tbl.glGetVertexAttribLui64vARB = missing_glGetVertexAttribLui64vARB;
+  tbl.glIsImageHandleResidentARB = missing_glIsImageHandleResidentARB;
+  tbl.glIsTextureHandleResidentARB = missing_glIsTextureHandleResidentARB;
+  tbl.glMakeImageHandleNonResidentARB = missing_glMakeImageHandleNonResidentARB;
+  tbl.glMakeImageHandleResidentARB = missing_glMakeImageHandleResidentARB;
+  tbl.glMakeTextureHandleNonResidentARB = missing_glMakeTextureHandleNonResidentARB;
+  tbl.glMakeTextureHandleResidentARB = missing_glMakeTextureHandleResidentARB;
+  tbl.glProgramUniformHandleui64ARB = missing_glProgramUniformHandleui64ARB;
+  tbl.glProgramUniformHandleui64vARB = missing_glProgramUniformHandleui64vARB;
+  tbl.glUniformHandleui64ARB = missing_glUniformHandleui64ARB;
+  tbl.glUniformHandleui64vARB = missing_glUniformHandleui64vARB;
+  tbl.glVertexAttribL1ui64ARB = missing_glVertexAttribL1ui64ARB;
+  tbl.glVertexAttribL1ui64vARB = missing_glVertexAttribL1ui64vARB;
+
   // GL_ARB_blend_func_extended
 
   tbl.glBindFragDataLocationIndexed = missing_glBindFragDataLocationIndexed;
   tbl.glGetFragDataIndex = missing_glGetFragDataIndex;
+
+  // GL_ARB_buffer_storage
+
+  tbl.glBufferStorage = missing_glBufferStorage;
 
   // GL_ARB_cl_event
 
@@ -26735,6 +27031,11 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glClearNamedBufferDataEXT = missing_glClearNamedBufferDataEXT;
   tbl.glClearNamedBufferSubDataEXT = missing_glClearNamedBufferSubDataEXT;
 
+  // GL_ARB_clear_texture
+
+  tbl.glClearTexImage = missing_glClearTexImage;
+  tbl.glClearTexSubImage = missing_glClearTexSubImage;
+
   // GL_ARB_color_buffer_float
 
   tbl.glClampColorARB = missing_glClampColorARB;
@@ -26743,6 +27044,10 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
 
   tbl.glDispatchCompute = missing_glDispatchCompute;
   tbl.glDispatchComputeIndirect = missing_glDispatchComputeIndirect;
+
+  // GL_ARB_compute_variable_group_size
+
+  tbl.glDispatchComputeGroupSizeARB = missing_glDispatchComputeGroupSizeARB;
 
   // GL_ARB_copy_buffer
 
@@ -26885,6 +27190,11 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glResetHistogram = missing_glResetHistogram;
   tbl.glResetMinmax = missing_glResetMinmax;
   tbl.glSeparableFilter2D = missing_glSeparableFilter2D;
+
+  // GL_ARB_indirect_parameters
+
+  tbl.glMultiDrawArraysIndirectCountARB = missing_glMultiDrawArraysIndirectCountARB;
+  tbl.glMultiDrawElementsIndirectCountARB = missing_glMultiDrawElementsIndirectCountARB;
 
   // GL_ARB_instanced_arrays
 
@@ -27179,6 +27489,11 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glGetNamedStringivARB = missing_glGetNamedStringivARB;
   tbl.glIsNamedStringARB = missing_glIsNamedStringARB;
   tbl.glNamedStringARB = missing_glNamedStringARB;
+
+  // GL_ARB_sparse_texture
+
+  tbl.glTexPageCommitmentARB = missing_glTexPageCommitmentARB;
+  tbl.glTexturePageCommitmentEXT = missing_glTexturePageCommitmentEXT;
 
   // GL_ARB_sync
 

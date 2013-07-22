@@ -96,6 +96,7 @@ struct Statistics
   GLuint gl_amd_debug_output;
   GLuint gl_amd_depth_clamp_separate;
   GLuint gl_amd_draw_buffers_blend;
+  GLuint gl_amd_interleaved_elements;
   GLuint gl_amd_multi_draw_indirect;
   GLuint gl_amd_name_gen_delete;
   GLuint gl_amd_performance_monitor;
@@ -104,6 +105,7 @@ struct Statistics
   GLuint gl_amd_query_buffer_object;
   GLuint gl_amd_sample_positions;
   GLuint gl_amd_seamless_cubemap_per_texture;
+  GLuint gl_amd_sparse_texture;
   GLuint gl_amd_stencil_operation_extended;
   GLuint gl_amd_vertex_shader_tessellator;
   GLuint gl_angle_framebuffer_blit;
@@ -142,12 +144,16 @@ struct Statistics
   GLuint gl_arb_es2_compatibility;
   GLuint gl_arb_es3_compatibility;
   GLuint gl_arb_base_instance;
+  GLuint gl_arb_bindless_texture;
   GLuint gl_arb_blend_func_extended;
+  GLuint gl_arb_buffer_storage;
   GLuint gl_arb_cl_event;
   GLuint gl_arb_clear_buffer_object;
+  GLuint gl_arb_clear_texture;
   GLuint gl_arb_color_buffer_float;
   GLuint gl_arb_compressed_texture_pixel_storage;
   GLuint gl_arb_compute_shader;
+  GLuint gl_arb_compute_variable_group_size;
   GLuint gl_arb_copy_buffer;
   GLuint gl_arb_copy_image;
   GLuint gl_arb_debug_output;
@@ -159,6 +165,7 @@ struct Statistics
   GLuint gl_arb_draw_elements_base_vertex;
   GLuint gl_arb_draw_indirect;
   GLuint gl_arb_draw_instanced;
+  GLuint gl_arb_enhanced_layouts;
   GLuint gl_arb_explicit_uniform_location;
   GLuint gl_arb_fragment_program;
   GLuint gl_arb_fragment_shader;
@@ -172,6 +179,7 @@ struct Statistics
   GLuint gl_arb_half_float_pixel;
   GLuint gl_arb_half_float_vertex;
   GLuint gl_arb_imaging;
+  GLuint gl_arb_indirect_parameters;
   GLuint gl_arb_instanced_arrays;
   GLuint gl_arb_internalformat_query;
   GLuint gl_arb_internalformat_query2;
@@ -189,6 +197,7 @@ struct Statistics
   GLuint gl_arb_point_sprite;
   GLuint gl_arb_program_interface_query;
   GLuint gl_arb_provoking_vertex;
+  GLuint gl_arb_query_buffer_object;
   GLuint gl_arb_robustness;
   GLuint gl_arb_sample_shading;
   GLuint gl_arb_sampler_objects;
@@ -203,6 +212,7 @@ struct Statistics
   GLuint gl_arb_shading_language_include;
   GLuint gl_arb_shadow;
   GLuint gl_arb_shadow_ambient;
+  GLuint gl_arb_sparse_texture;
   GLuint gl_arb_stencil_texturing;
   GLuint gl_arb_sync;
   GLuint gl_arb_tessellation_shader;
@@ -218,6 +228,7 @@ struct Statistics
   GLuint gl_arb_texture_env_dot3;
   GLuint gl_arb_texture_float;
   GLuint gl_arb_texture_gather;
+  GLuint gl_arb_texture_mirror_clamp_to_edge;
   GLuint gl_arb_texture_mirrored_repeat;
   GLuint gl_arb_texture_multisample;
   GLuint gl_arb_texture_rectangle;
@@ -1421,6 +1432,10 @@ struct Statistics
   GLuint glBlendFuncIndexedAMD;
   GLuint glBlendFuncSeparateIndexedAMD;
 
+  /* GL_AMD_interleaved_elements */
+
+  GLuint glVertexAttribParameteriAMD;
+
   /* GL_AMD_multi_draw_indirect */
 
   GLuint glMultiDrawArraysIndirectAMD;
@@ -1449,6 +1464,11 @@ struct Statistics
   /* GL_AMD_sample_positions */
 
   GLuint glSetMultisamplefvAMD;
+
+  /* GL_AMD_sparse_texture */
+
+  GLuint glTexStorageSparseAMD;
+  GLuint glTextureStorageSparseAMD;
 
   /* GL_AMD_stencil_operation_extended */
 
@@ -1574,10 +1594,33 @@ struct Statistics
   GLuint glDrawElementsInstancedBaseInstance;
   GLuint glDrawElementsInstancedBaseVertexBaseInstance;
 
+  /* GL_ARB_bindless_texture */
+
+  GLuint glGetImageHandleARB;
+  GLuint glGetTextureHandleARB;
+  GLuint glGetTextureSamplerHandleARB;
+  GLuint glGetVertexAttribLui64vARB;
+  GLuint glIsImageHandleResidentARB;
+  GLuint glIsTextureHandleResidentARB;
+  GLuint glMakeImageHandleNonResidentARB;
+  GLuint glMakeImageHandleResidentARB;
+  GLuint glMakeTextureHandleNonResidentARB;
+  GLuint glMakeTextureHandleResidentARB;
+  GLuint glProgramUniformHandleui64ARB;
+  GLuint glProgramUniformHandleui64vARB;
+  GLuint glUniformHandleui64ARB;
+  GLuint glUniformHandleui64vARB;
+  GLuint glVertexAttribL1ui64ARB;
+  GLuint glVertexAttribL1ui64vARB;
+
   /* GL_ARB_blend_func_extended */
 
   GLuint glBindFragDataLocationIndexed;
   GLuint glGetFragDataIndex;
+
+  /* GL_ARB_buffer_storage */
+
+  GLuint glBufferStorage;
 
   /* GL_ARB_cl_event */
 
@@ -1590,6 +1633,11 @@ struct Statistics
   GLuint glClearNamedBufferDataEXT;
   GLuint glClearNamedBufferSubDataEXT;
 
+  /* GL_ARB_clear_texture */
+
+  GLuint glClearTexImage;
+  GLuint glClearTexSubImage;
+
   /* GL_ARB_color_buffer_float */
 
   GLuint glClampColorARB;
@@ -1598,6 +1646,10 @@ struct Statistics
 
   GLuint glDispatchCompute;
   GLuint glDispatchComputeIndirect;
+
+  /* GL_ARB_compute_variable_group_size */
+
+  GLuint glDispatchComputeGroupSizeARB;
 
   /* GL_ARB_copy_buffer */
 
@@ -1740,6 +1792,11 @@ struct Statistics
   GLuint glResetHistogram;
   GLuint glResetMinmax;
   GLuint glSeparableFilter2D;
+
+  /* GL_ARB_indirect_parameters */
+
+  GLuint glMultiDrawArraysIndirectCountARB;
+  GLuint glMultiDrawElementsIndirectCountARB;
 
   /* GL_ARB_instanced_arrays */
 
@@ -2034,6 +2091,11 @@ struct Statistics
   GLuint glGetNamedStringivARB;
   GLuint glIsNamedStringARB;
   GLuint glNamedStringARB;
+
+  /* GL_ARB_sparse_texture */
+
+  GLuint glTexPageCommitmentARB;
+  GLuint glTexturePageCommitmentEXT;
 
   /* GL_ARB_sync */
 

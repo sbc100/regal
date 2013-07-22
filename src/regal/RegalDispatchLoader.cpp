@@ -11963,6 +11963,27 @@ static void REGAL_CALL loader_glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum s
   _next->call(&_next->glBlendFuncSeparateIndexedAMD)(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
 }
 
+// GL_AMD_interleaved_elements
+
+static void REGAL_CALL loader_glVertexAttribParameteriAMD(GLuint index, GLenum pname, GLint param)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glVertexAttribParameteriAMD, "glVertexAttribParameteriAMD");
+  RegalAssert(_driver.glVertexAttribParameteriAMD!=glVertexAttribParameteriAMD);
+  if (_driver.glVertexAttribParameteriAMD==glVertexAttribParameteriAMD)
+    _driver.glVertexAttribParameteriAMD = NULL;
+  if (_driver.glVertexAttribParameteriAMD)
+  {
+    _driver.glVertexAttribParameteriAMD(index, pname, param);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glVertexAttribParameteriAMD)(index, pname, param);
+}
+
 // GL_AMD_multi_draw_indirect
 
 static void REGAL_CALL loader_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -12289,6 +12310,46 @@ static void REGAL_CALL loader_glSetMultisamplefvAMD(GLenum pname, GLuint index, 
   DispatchTableGL *_next = _driver.next();
   RegalAssert(_next);
   _next->call(&_next->glSetMultisamplefvAMD)(pname, index, val);
+}
+
+// GL_AMD_sparse_texture
+
+static void REGAL_CALL loader_glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glTexStorageSparseAMD, "glTexStorageSparseAMD");
+  RegalAssert(_driver.glTexStorageSparseAMD!=glTexStorageSparseAMD);
+  if (_driver.glTexStorageSparseAMD==glTexStorageSparseAMD)
+    _driver.glTexStorageSparseAMD = NULL;
+  if (_driver.glTexStorageSparseAMD)
+  {
+    _driver.glTexStorageSparseAMD(target, internalFormat, width, height, depth, layers, flags);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glTexStorageSparseAMD)(target, internalFormat, width, height, depth, layers, flags);
+}
+
+static void REGAL_CALL loader_glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glTextureStorageSparseAMD, "glTextureStorageSparseAMD");
+  RegalAssert(_driver.glTextureStorageSparseAMD!=glTextureStorageSparseAMD);
+  if (_driver.glTextureStorageSparseAMD==glTextureStorageSparseAMD)
+    _driver.glTextureStorageSparseAMD = NULL;
+  if (_driver.glTextureStorageSparseAMD)
+  {
+    _driver.glTextureStorageSparseAMD(texture, target, internalFormat, width, height, depth, layers, flags);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glTextureStorageSparseAMD)(texture, target, internalFormat, width, height, depth, layers, flags);
 }
 
 // GL_AMD_stencil_operation_extended
@@ -13517,6 +13578,297 @@ static void REGAL_CALL loader_glDrawElementsInstancedBaseVertexBaseInstance(GLen
   _next->call(&_next->glDrawElementsInstancedBaseVertexBaseInstance)(mode, count, type, indices, primcount, basevertex, baseinstance);
 }
 
+// GL_ARB_bindless_texture
+
+static GLuint64 REGAL_CALL loader_glGetImageHandleARB(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glGetImageHandleARB, "glGetImageHandleARB");
+  RegalAssert(_driver.glGetImageHandleARB!=glGetImageHandleARB);
+  if (_driver.glGetImageHandleARB==glGetImageHandleARB)
+    _driver.glGetImageHandleARB = NULL;
+  if (_driver.glGetImageHandleARB)
+    return _driver.glGetImageHandleARB(texture, level, layered, layer, format);
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  return _next->call(&_next->glGetImageHandleARB)(texture, level, layered, layer, format);
+}
+
+static GLuint64 REGAL_CALL loader_glGetTextureHandleARB(GLuint texture)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glGetTextureHandleARB, "glGetTextureHandleARB");
+  RegalAssert(_driver.glGetTextureHandleARB!=glGetTextureHandleARB);
+  if (_driver.glGetTextureHandleARB==glGetTextureHandleARB)
+    _driver.glGetTextureHandleARB = NULL;
+  if (_driver.glGetTextureHandleARB)
+    return _driver.glGetTextureHandleARB(texture);
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  return _next->call(&_next->glGetTextureHandleARB)(texture);
+}
+
+static GLuint64 REGAL_CALL loader_glGetTextureSamplerHandleARB(GLuint texture, GLuint sampler)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glGetTextureSamplerHandleARB, "glGetTextureSamplerHandleARB");
+  RegalAssert(_driver.glGetTextureSamplerHandleARB!=glGetTextureSamplerHandleARB);
+  if (_driver.glGetTextureSamplerHandleARB==glGetTextureSamplerHandleARB)
+    _driver.glGetTextureSamplerHandleARB = NULL;
+  if (_driver.glGetTextureSamplerHandleARB)
+    return _driver.glGetTextureSamplerHandleARB(texture, sampler);
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  return _next->call(&_next->glGetTextureSamplerHandleARB)(texture, sampler);
+}
+
+static void REGAL_CALL loader_glGetVertexAttribLui64vARB(GLuint index, GLenum pname, GLuint64EXT *params)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glGetVertexAttribLui64vARB, "glGetVertexAttribLui64vARB");
+  RegalAssert(_driver.glGetVertexAttribLui64vARB!=glGetVertexAttribLui64vARB);
+  if (_driver.glGetVertexAttribLui64vARB==glGetVertexAttribLui64vARB)
+    _driver.glGetVertexAttribLui64vARB = NULL;
+  if (_driver.glGetVertexAttribLui64vARB)
+  {
+    _driver.glGetVertexAttribLui64vARB(index, pname, params);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glGetVertexAttribLui64vARB)(index, pname, params);
+}
+
+static GLboolean REGAL_CALL loader_glIsImageHandleResidentARB(GLuint64 handle)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glIsImageHandleResidentARB, "glIsImageHandleResidentARB");
+  RegalAssert(_driver.glIsImageHandleResidentARB!=glIsImageHandleResidentARB);
+  if (_driver.glIsImageHandleResidentARB==glIsImageHandleResidentARB)
+    _driver.glIsImageHandleResidentARB = NULL;
+  if (_driver.glIsImageHandleResidentARB)
+    return _driver.glIsImageHandleResidentARB(handle);
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  return _next->call(&_next->glIsImageHandleResidentARB)(handle);
+}
+
+static GLboolean REGAL_CALL loader_glIsTextureHandleResidentARB(GLuint64 handle)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glIsTextureHandleResidentARB, "glIsTextureHandleResidentARB");
+  RegalAssert(_driver.glIsTextureHandleResidentARB!=glIsTextureHandleResidentARB);
+  if (_driver.glIsTextureHandleResidentARB==glIsTextureHandleResidentARB)
+    _driver.glIsTextureHandleResidentARB = NULL;
+  if (_driver.glIsTextureHandleResidentARB)
+    return _driver.glIsTextureHandleResidentARB(handle);
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  return _next->call(&_next->glIsTextureHandleResidentARB)(handle);
+}
+
+static void REGAL_CALL loader_glMakeImageHandleNonResidentARB(GLuint64 handle)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMakeImageHandleNonResidentARB, "glMakeImageHandleNonResidentARB");
+  RegalAssert(_driver.glMakeImageHandleNonResidentARB!=glMakeImageHandleNonResidentARB);
+  if (_driver.glMakeImageHandleNonResidentARB==glMakeImageHandleNonResidentARB)
+    _driver.glMakeImageHandleNonResidentARB = NULL;
+  if (_driver.glMakeImageHandleNonResidentARB)
+  {
+    _driver.glMakeImageHandleNonResidentARB(handle);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glMakeImageHandleNonResidentARB)(handle);
+}
+
+static void REGAL_CALL loader_glMakeImageHandleResidentARB(GLuint64 handle, GLenum access)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMakeImageHandleResidentARB, "glMakeImageHandleResidentARB");
+  RegalAssert(_driver.glMakeImageHandleResidentARB!=glMakeImageHandleResidentARB);
+  if (_driver.glMakeImageHandleResidentARB==glMakeImageHandleResidentARB)
+    _driver.glMakeImageHandleResidentARB = NULL;
+  if (_driver.glMakeImageHandleResidentARB)
+  {
+    _driver.glMakeImageHandleResidentARB(handle, access);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glMakeImageHandleResidentARB)(handle, access);
+}
+
+static void REGAL_CALL loader_glMakeTextureHandleNonResidentARB(GLuint64 handle)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMakeTextureHandleNonResidentARB, "glMakeTextureHandleNonResidentARB");
+  RegalAssert(_driver.glMakeTextureHandleNonResidentARB!=glMakeTextureHandleNonResidentARB);
+  if (_driver.glMakeTextureHandleNonResidentARB==glMakeTextureHandleNonResidentARB)
+    _driver.glMakeTextureHandleNonResidentARB = NULL;
+  if (_driver.glMakeTextureHandleNonResidentARB)
+  {
+    _driver.glMakeTextureHandleNonResidentARB(handle);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glMakeTextureHandleNonResidentARB)(handle);
+}
+
+static void REGAL_CALL loader_glMakeTextureHandleResidentARB(GLuint64 handle)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMakeTextureHandleResidentARB, "glMakeTextureHandleResidentARB");
+  RegalAssert(_driver.glMakeTextureHandleResidentARB!=glMakeTextureHandleResidentARB);
+  if (_driver.glMakeTextureHandleResidentARB==glMakeTextureHandleResidentARB)
+    _driver.glMakeTextureHandleResidentARB = NULL;
+  if (_driver.glMakeTextureHandleResidentARB)
+  {
+    _driver.glMakeTextureHandleResidentARB(handle);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glMakeTextureHandleResidentARB)(handle);
+}
+
+static void REGAL_CALL loader_glProgramUniformHandleui64ARB(GLuint program, GLint location, GLuint64 value)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glProgramUniformHandleui64ARB, "glProgramUniformHandleui64ARB");
+  RegalAssert(_driver.glProgramUniformHandleui64ARB!=glProgramUniformHandleui64ARB);
+  if (_driver.glProgramUniformHandleui64ARB==glProgramUniformHandleui64ARB)
+    _driver.glProgramUniformHandleui64ARB = NULL;
+  if (_driver.glProgramUniformHandleui64ARB)
+  {
+    _driver.glProgramUniformHandleui64ARB(program, location, value);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glProgramUniformHandleui64ARB)(program, location, value);
+}
+
+static void REGAL_CALL loader_glProgramUniformHandleui64vARB(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glProgramUniformHandleui64vARB, "glProgramUniformHandleui64vARB");
+  RegalAssert(_driver.glProgramUniformHandleui64vARB!=glProgramUniformHandleui64vARB);
+  if (_driver.glProgramUniformHandleui64vARB==glProgramUniformHandleui64vARB)
+    _driver.glProgramUniformHandleui64vARB = NULL;
+  if (_driver.glProgramUniformHandleui64vARB)
+  {
+    _driver.glProgramUniformHandleui64vARB(program, location, count, values);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glProgramUniformHandleui64vARB)(program, location, count, values);
+}
+
+static void REGAL_CALL loader_glUniformHandleui64ARB(GLint location, GLuint64 value)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glUniformHandleui64ARB, "glUniformHandleui64ARB");
+  RegalAssert(_driver.glUniformHandleui64ARB!=glUniformHandleui64ARB);
+  if (_driver.glUniformHandleui64ARB==glUniformHandleui64ARB)
+    _driver.glUniformHandleui64ARB = NULL;
+  if (_driver.glUniformHandleui64ARB)
+  {
+    _driver.glUniformHandleui64ARB(location, value);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glUniformHandleui64ARB)(location, value);
+}
+
+static void REGAL_CALL loader_glUniformHandleui64vARB(GLint location, GLsizei count, const GLuint64 *value)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glUniformHandleui64vARB, "glUniformHandleui64vARB");
+  RegalAssert(_driver.glUniformHandleui64vARB!=glUniformHandleui64vARB);
+  if (_driver.glUniformHandleui64vARB==glUniformHandleui64vARB)
+    _driver.glUniformHandleui64vARB = NULL;
+  if (_driver.glUniformHandleui64vARB)
+  {
+    _driver.glUniformHandleui64vARB(location, count, value);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glUniformHandleui64vARB)(location, count, value);
+}
+
+static void REGAL_CALL loader_glVertexAttribL1ui64ARB(GLuint index, GLuint64EXT x)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glVertexAttribL1ui64ARB, "glVertexAttribL1ui64ARB");
+  RegalAssert(_driver.glVertexAttribL1ui64ARB!=glVertexAttribL1ui64ARB);
+  if (_driver.glVertexAttribL1ui64ARB==glVertexAttribL1ui64ARB)
+    _driver.glVertexAttribL1ui64ARB = NULL;
+  if (_driver.glVertexAttribL1ui64ARB)
+  {
+    _driver.glVertexAttribL1ui64ARB(index, x);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glVertexAttribL1ui64ARB)(index, x);
+}
+
+static void REGAL_CALL loader_glVertexAttribL1ui64vARB(GLuint index, const GLuint64EXT *v)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glVertexAttribL1ui64vARB, "glVertexAttribL1ui64vARB");
+  RegalAssert(_driver.glVertexAttribL1ui64vARB!=glVertexAttribL1ui64vARB);
+  if (_driver.glVertexAttribL1ui64vARB==glVertexAttribL1ui64vARB)
+    _driver.glVertexAttribL1ui64vARB = NULL;
+  if (_driver.glVertexAttribL1ui64vARB)
+  {
+    _driver.glVertexAttribL1ui64vARB(index, v);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glVertexAttribL1ui64vARB)(index, v);
+}
+
 // GL_ARB_blend_func_extended
 
 static void REGAL_CALL loader_glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name)
@@ -13552,6 +13904,27 @@ static GLint REGAL_CALL loader_glGetFragDataIndex(GLuint program, const GLchar *
   DispatchTableGL *_next = _driver.next();
   RegalAssert(_next);
   return _next->call(&_next->glGetFragDataIndex)(program, name);
+}
+
+// GL_ARB_buffer_storage
+
+static void REGAL_CALL loader_glBufferStorage(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBufferStorage, "glBufferStorage");
+  RegalAssert(_driver.glBufferStorage!=glBufferStorage);
+  if (_driver.glBufferStorage==glBufferStorage)
+    _driver.glBufferStorage = NULL;
+  if (_driver.glBufferStorage)
+  {
+    _driver.glBufferStorage(target, size, data, flags);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBufferStorage)(target, size, data, flags);
 }
 
 // GL_ARB_cl_event
@@ -13650,6 +14023,46 @@ static void REGAL_CALL loader_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum
   _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
 }
 
+// GL_ARB_clear_texture
+
+static void REGAL_CALL loader_glClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glClearTexImage, "glClearTexImage");
+  RegalAssert(_driver.glClearTexImage!=glClearTexImage);
+  if (_driver.glClearTexImage==glClearTexImage)
+    _driver.glClearTexImage = NULL;
+  if (_driver.glClearTexImage)
+  {
+    _driver.glClearTexImage(texture, level, format, type, data);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glClearTexImage)(texture, level, format, type, data);
+}
+
+static void REGAL_CALL loader_glClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glClearTexSubImage, "glClearTexSubImage");
+  RegalAssert(_driver.glClearTexSubImage!=glClearTexSubImage);
+  if (_driver.glClearTexSubImage==glClearTexSubImage)
+    _driver.glClearTexSubImage = NULL;
+  if (_driver.glClearTexSubImage)
+  {
+    _driver.glClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glClearTexSubImage)(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+}
+
 // GL_ARB_color_buffer_float
 
 static void REGAL_CALL loader_glClampColorARB(GLenum target, GLenum clamp)
@@ -13709,6 +14122,27 @@ static void REGAL_CALL loader_glDispatchComputeIndirect(GLintptr indirect)
   DispatchTableGL *_next = _driver.next();
   RegalAssert(_next);
   _next->call(&_next->glDispatchComputeIndirect)(indirect);
+}
+
+// GL_ARB_compute_variable_group_size
+
+static void REGAL_CALL loader_glDispatchComputeGroupSizeARB(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glDispatchComputeGroupSizeARB, "glDispatchComputeGroupSizeARB");
+  RegalAssert(_driver.glDispatchComputeGroupSizeARB!=glDispatchComputeGroupSizeARB);
+  if (_driver.glDispatchComputeGroupSizeARB==glDispatchComputeGroupSizeARB)
+    _driver.glDispatchComputeGroupSizeARB = NULL;
+  if (_driver.glDispatchComputeGroupSizeARB)
+  {
+    _driver.glDispatchComputeGroupSizeARB(num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glDispatchComputeGroupSizeARB)(num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z);
 }
 
 // GL_ARB_copy_buffer
@@ -15625,6 +16059,46 @@ static void REGAL_CALL loader_glSeparableFilter2D(GLenum target, GLenum internal
   DispatchTableGL *_next = _driver.next();
   RegalAssert(_next);
   _next->call(&_next->glSeparableFilter2D)(target, internalformat, width, height, format, type, row, column);
+}
+
+// GL_ARB_indirect_parameters
+
+static void REGAL_CALL loader_glMultiDrawArraysIndirectCountARB(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMultiDrawArraysIndirectCountARB, "glMultiDrawArraysIndirectCountARB");
+  RegalAssert(_driver.glMultiDrawArraysIndirectCountARB!=glMultiDrawArraysIndirectCountARB);
+  if (_driver.glMultiDrawArraysIndirectCountARB==glMultiDrawArraysIndirectCountARB)
+    _driver.glMultiDrawArraysIndirectCountARB = NULL;
+  if (_driver.glMultiDrawArraysIndirectCountARB)
+  {
+    _driver.glMultiDrawArraysIndirectCountARB(mode, indirect, drawcount, maxdrawcount, stride);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glMultiDrawArraysIndirectCountARB)(mode, indirect, drawcount, maxdrawcount, stride);
+}
+
+static void REGAL_CALL loader_glMultiDrawElementsIndirectCountARB(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glMultiDrawElementsIndirectCountARB, "glMultiDrawElementsIndirectCountARB");
+  RegalAssert(_driver.glMultiDrawElementsIndirectCountARB!=glMultiDrawElementsIndirectCountARB);
+  if (_driver.glMultiDrawElementsIndirectCountARB==glMultiDrawElementsIndirectCountARB)
+    _driver.glMultiDrawElementsIndirectCountARB = NULL;
+  if (_driver.glMultiDrawElementsIndirectCountARB)
+  {
+    _driver.glMultiDrawElementsIndirectCountARB(mode, type, indirect, drawcount, maxdrawcount, stride);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glMultiDrawElementsIndirectCountARB)(mode, type, indirect, drawcount, maxdrawcount, stride);
 }
 
 // GL_ARB_instanced_arrays
@@ -19898,6 +20372,46 @@ static void REGAL_CALL loader_glNamedStringARB(GLenum type, GLint namelen, const
   DispatchTableGL *_next = _driver.next();
   RegalAssert(_next);
   _next->call(&_next->glNamedStringARB)(type, namelen, name, stringlen, string);
+}
+
+// GL_ARB_sparse_texture
+
+static void REGAL_CALL loader_glTexPageCommitmentARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glTexPageCommitmentARB, "glTexPageCommitmentARB");
+  RegalAssert(_driver.glTexPageCommitmentARB!=glTexPageCommitmentARB);
+  if (_driver.glTexPageCommitmentARB==glTexPageCommitmentARB)
+    _driver.glTexPageCommitmentARB = NULL;
+  if (_driver.glTexPageCommitmentARB)
+  {
+    _driver.glTexPageCommitmentARB(target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glTexPageCommitmentARB)(target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+}
+
+static void REGAL_CALL loader_glTexturePageCommitmentEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glTexturePageCommitmentEXT, "glTexturePageCommitmentEXT");
+  RegalAssert(_driver.glTexturePageCommitmentEXT!=glTexturePageCommitmentEXT);
+  if (_driver.glTexturePageCommitmentEXT==glTexturePageCommitmentEXT)
+    _driver.glTexturePageCommitmentEXT = NULL;
+  if (_driver.glTexturePageCommitmentEXT)
+  {
+    _driver.glTexturePageCommitmentEXT(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glTexturePageCommitmentEXT)(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
 }
 
 // GL_ARB_sync
@@ -56650,6 +57164,10 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   tbl.glBlendFuncIndexedAMD = loader_glBlendFuncIndexedAMD;
   tbl.glBlendFuncSeparateIndexedAMD = loader_glBlendFuncSeparateIndexedAMD;
 
+  // GL_AMD_interleaved_elements
+
+  tbl.glVertexAttribParameteriAMD = loader_glVertexAttribParameteriAMD;
+
   // GL_AMD_multi_draw_indirect
 
   tbl.glMultiDrawArraysIndirectAMD = loader_glMultiDrawArraysIndirectAMD;
@@ -56678,6 +57196,11 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   // GL_AMD_sample_positions
 
   tbl.glSetMultisamplefvAMD = loader_glSetMultisamplefvAMD;
+
+  // GL_AMD_sparse_texture
+
+  tbl.glTexStorageSparseAMD = loader_glTexStorageSparseAMD;
+  tbl.glTextureStorageSparseAMD = loader_glTextureStorageSparseAMD;
 
   // GL_AMD_stencil_operation_extended
 
@@ -56803,10 +57326,33 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   tbl.glDrawElementsInstancedBaseInstance = loader_glDrawElementsInstancedBaseInstance;
   tbl.glDrawElementsInstancedBaseVertexBaseInstance = loader_glDrawElementsInstancedBaseVertexBaseInstance;
 
+  // GL_ARB_bindless_texture
+
+  tbl.glGetImageHandleARB = loader_glGetImageHandleARB;
+  tbl.glGetTextureHandleARB = loader_glGetTextureHandleARB;
+  tbl.glGetTextureSamplerHandleARB = loader_glGetTextureSamplerHandleARB;
+  tbl.glGetVertexAttribLui64vARB = loader_glGetVertexAttribLui64vARB;
+  tbl.glIsImageHandleResidentARB = loader_glIsImageHandleResidentARB;
+  tbl.glIsTextureHandleResidentARB = loader_glIsTextureHandleResidentARB;
+  tbl.glMakeImageHandleNonResidentARB = loader_glMakeImageHandleNonResidentARB;
+  tbl.glMakeImageHandleResidentARB = loader_glMakeImageHandleResidentARB;
+  tbl.glMakeTextureHandleNonResidentARB = loader_glMakeTextureHandleNonResidentARB;
+  tbl.glMakeTextureHandleResidentARB = loader_glMakeTextureHandleResidentARB;
+  tbl.glProgramUniformHandleui64ARB = loader_glProgramUniformHandleui64ARB;
+  tbl.glProgramUniformHandleui64vARB = loader_glProgramUniformHandleui64vARB;
+  tbl.glUniformHandleui64ARB = loader_glUniformHandleui64ARB;
+  tbl.glUniformHandleui64vARB = loader_glUniformHandleui64vARB;
+  tbl.glVertexAttribL1ui64ARB = loader_glVertexAttribL1ui64ARB;
+  tbl.glVertexAttribL1ui64vARB = loader_glVertexAttribL1ui64vARB;
+
   // GL_ARB_blend_func_extended
 
   tbl.glBindFragDataLocationIndexed = loader_glBindFragDataLocationIndexed;
   tbl.glGetFragDataIndex = loader_glGetFragDataIndex;
+
+  // GL_ARB_buffer_storage
+
+  tbl.glBufferStorage = loader_glBufferStorage;
 
   // GL_ARB_cl_event
 
@@ -56819,6 +57365,11 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   tbl.glClearNamedBufferDataEXT = loader_glClearNamedBufferDataEXT;
   tbl.glClearNamedBufferSubDataEXT = loader_glClearNamedBufferSubDataEXT;
 
+  // GL_ARB_clear_texture
+
+  tbl.glClearTexImage = loader_glClearTexImage;
+  tbl.glClearTexSubImage = loader_glClearTexSubImage;
+
   // GL_ARB_color_buffer_float
 
   tbl.glClampColorARB = loader_glClampColorARB;
@@ -56827,6 +57378,10 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
 
   tbl.glDispatchCompute = loader_glDispatchCompute;
   tbl.glDispatchComputeIndirect = loader_glDispatchComputeIndirect;
+
+  // GL_ARB_compute_variable_group_size
+
+  tbl.glDispatchComputeGroupSizeARB = loader_glDispatchComputeGroupSizeARB;
 
   // GL_ARB_copy_buffer
 
@@ -56969,6 +57524,11 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   tbl.glResetHistogram = loader_glResetHistogram;
   tbl.glResetMinmax = loader_glResetMinmax;
   tbl.glSeparableFilter2D = loader_glSeparableFilter2D;
+
+  // GL_ARB_indirect_parameters
+
+  tbl.glMultiDrawArraysIndirectCountARB = loader_glMultiDrawArraysIndirectCountARB;
+  tbl.glMultiDrawElementsIndirectCountARB = loader_glMultiDrawElementsIndirectCountARB;
 
   // GL_ARB_instanced_arrays
 
@@ -57263,6 +57823,11 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   tbl.glGetNamedStringivARB = loader_glGetNamedStringivARB;
   tbl.glIsNamedStringARB = loader_glIsNamedStringARB;
   tbl.glNamedStringARB = loader_glNamedStringARB;
+
+  // GL_ARB_sparse_texture
+
+  tbl.glTexPageCommitmentARB = loader_glTexPageCommitmentARB;
+  tbl.glTexturePageCommitmentEXT = loader_glTexturePageCommitmentEXT;
 
   // GL_ARB_sync
 

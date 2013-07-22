@@ -32423,6 +32423,8 @@ static void REGAL_CALL emu_glBlendFunci(GLuint buf, GLenum src, GLenum dst)
 
 // GL_AMD_draw_buffers_blend
 
+// GL_AMD_interleaved_elements
+
 // GL_AMD_multi_draw_indirect
 
 static void REGAL_CALL emu_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -32560,6 +32562,8 @@ static void REGAL_CALL emu_glMultiDrawElementsIndirectAMD(GLenum mode, GLenum ty
 // GL_AMD_performance_monitor
 
 // GL_AMD_sample_positions
+
+// GL_AMD_sparse_texture
 
 // GL_AMD_stencil_operation_extended
 
@@ -33149,15 +33153,23 @@ static void REGAL_CALL emu_glDrawElementsInstancedBaseVertexBaseInstance(GLenum 
 
 }
 
+// GL_ARB_bindless_texture
+
 // GL_ARB_blend_func_extended
+
+// GL_ARB_buffer_storage
 
 // GL_ARB_cl_event
 
 // GL_ARB_clear_buffer_object
 
+// GL_ARB_clear_texture
+
 // GL_ARB_color_buffer_float
 
 // GL_ARB_compute_shader
+
+// GL_ARB_compute_variable_group_size
 
 // GL_ARB_copy_buffer
 
@@ -36154,6 +36166,8 @@ static void REGAL_CALL emu_glGetConvolutionParameteriv(GLenum target, GLenum pna
   }
 
 }
+
+// GL_ARB_indirect_parameters
 
 // GL_ARB_instanced_arrays
 
@@ -40368,6 +40382,8 @@ static void REGAL_CALL emu_glUniform1iARB(GLint location, GLint v0)
 // GL_ARB_shader_subroutine
 
 // GL_ARB_shading_language_include
+
+// GL_ARB_sparse_texture
 
 // GL_ARB_sync
 

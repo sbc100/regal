@@ -132,6 +132,7 @@ EXPORTS
   glBufferDataARB
   glBufferParameteriAPPLE
   glBufferRegionEnabled
+  glBufferStorage
   glBufferSubData
   glBufferSubDataARB
   glCallList
@@ -163,6 +164,8 @@ EXPORTS
   glClearNamedBufferDataEXT
   glClearNamedBufferSubDataEXT
   glClearStencil
+  glClearTexImage
+  glClearTexSubImage
   glClientActiveTexture
   glClientActiveTextureARB
   glClientActiveVertexStreamATI
@@ -424,6 +427,7 @@ EXPORTS
   glDisablei
   glDiscardFramebufferEXT
   glDispatchCompute
+  glDispatchComputeGroupSizeARB
   glDispatchComputeIndirect
   glDrawArrays
   glDrawArraysEXT
@@ -777,6 +781,7 @@ EXPORTS
   glGetHistogramParameterfvEXT
   glGetHistogramParameteriv
   glGetHistogramParameterivEXT
+  glGetImageHandleARB
   glGetImageHandleNV
   glGetImageTransformParameterfvHP
   glGetImageTransformParameterivHP
@@ -979,6 +984,7 @@ EXPORTS
   glGetTexParameterfv
   glGetTexParameteriv
   glGetTexParameterxv
+  glGetTextureHandleARB
   glGetTextureHandleNV
   glGetTextureImageEXT
   glGetTextureLevelParameterfvEXT
@@ -987,6 +993,7 @@ EXPORTS
   glGetTextureParameterIuivEXT
   glGetTextureParameterfvEXT
   glGetTextureParameterivEXT
+  glGetTextureSamplerHandleARB
   glGetTextureSamplerHandleNV
   glGetTrackMatrixivNV
   glGetTransformFeedbackVarying
@@ -1029,6 +1036,7 @@ EXPORTS
   glGetVertexAttribLdv
   glGetVertexAttribLdvEXT
   glGetVertexAttribLi64vNV
+  glGetVertexAttribLui64vARB
   glGetVertexAttribLui64vNV
   glGetVertexAttribPointerv
   glGetVertexAttribPointervARB
@@ -1129,6 +1137,7 @@ EXPORTS
   glIsFramebuffer
   glIsFramebufferEXT
   glIsFramebufferOES
+  glIsImageHandleResidentARB
   glIsImageHandleResidentNV
   glIsList
   glIsNameAMD
@@ -1156,6 +1165,7 @@ EXPORTS
   glIsSyncAPPLE
   glIsTexture
   glIsTextureEXT
+  glIsTextureHandleResidentARB
   glIsTextureHandleResidentNV
   glIsTransformFeedback
   glIsTransformFeedbackNV
@@ -1205,11 +1215,15 @@ EXPORTS
   glLogicOp
   glMakeBufferNonResidentNV
   glMakeBufferResidentNV
+  glMakeImageHandleNonResidentARB
   glMakeImageHandleNonResidentNV
+  glMakeImageHandleResidentARB
   glMakeImageHandleResidentNV
   glMakeNamedBufferNonResidentNV
   glMakeNamedBufferResidentNV
+  glMakeTextureHandleNonResidentARB
   glMakeTextureHandleNonResidentNV
+  glMakeTextureHandleResidentARB
   glMakeTextureHandleResidentNV
   glMap1d
   glMap1f
@@ -1283,12 +1297,14 @@ EXPORTS
   glMultiDrawArraysEXT
   glMultiDrawArraysIndirect
   glMultiDrawArraysIndirectAMD
+  glMultiDrawArraysIndirectCountARB
   glMultiDrawElementArrayAPPLE
   glMultiDrawElements
   glMultiDrawElementsBaseVertex
   glMultiDrawElementsEXT
   glMultiDrawElementsIndirect
   glMultiDrawElementsIndirectAMD
+  glMultiDrawElementsIndirectCountARB
   glMultiDrawRangeElementArrayAPPLE
   glMultiModeDrawArraysIBM
   glMultiModeDrawElementsIBM
@@ -1672,7 +1688,9 @@ EXPORTS
   glProgramUniform4uiEXT
   glProgramUniform4uiv
   glProgramUniform4uivEXT
+  glProgramUniformHandleui64ARB
   glProgramUniformHandleui64NV
+  glProgramUniformHandleui64vARB
   glProgramUniformHandleui64vNV
   glProgramUniformMatrix2dv
   glProgramUniformMatrix2dvEXT
@@ -2039,6 +2057,7 @@ EXPORTS
   glTexImage3DMultisampleCoverageNV
   glTexImage3DOES
   glTexImage4DSGIS
+  glTexPageCommitmentARB
   glTexParameterIiv
   glTexParameterIivEXT
   glTexParameterIuiv
@@ -2060,6 +2079,7 @@ EXPORTS
   glTexStorage3D
   glTexStorage3DEXT
   glTexStorage3DMultisample
+  glTexStorageSparseAMD
   glTexSubImage1D
   glTexSubImage1DEXT
   glTexSubImage2D
@@ -2083,6 +2103,7 @@ EXPORTS
   glTextureLightEXT
   glTextureMaterialEXT
   glTextureNormalEXT
+  glTexturePageCommitmentEXT
   glTextureParameterIivEXT
   glTextureParameterIuivEXT
   glTextureParameterfEXT
@@ -2096,6 +2117,7 @@ EXPORTS
   glTextureStorage2DMultisampleEXT
   glTextureStorage3DEXT
   glTextureStorage3DMultisampleEXT
+  glTextureStorageSparseAMD
   glTextureSubImage1DEXT
   glTextureSubImage2DEXT
   glTextureSubImage3DEXT
@@ -2183,7 +2205,9 @@ EXPORTS
   glUniform4uivEXT
   glUniformBlockBinding
   glUniformBufferEXT
+  glUniformHandleui64ARB
   glUniformHandleui64NV
+  glUniformHandleui64vARB
   glUniformHandleui64vNV
   glUniformMatrix2dv
   glUniformMatrix2fv
@@ -2452,7 +2476,9 @@ EXPORTS
   glVertexAttribL1dvEXT
   glVertexAttribL1i64NV
   glVertexAttribL1i64vNV
+  glVertexAttribL1ui64ARB
   glVertexAttribL1ui64NV
+  glVertexAttribL1ui64vARB
   glVertexAttribL1ui64vNV
   glVertexAttribL2d
   glVertexAttribL2dEXT
@@ -2490,6 +2516,7 @@ EXPORTS
   glVertexAttribP3uiv
   glVertexAttribP4ui
   glVertexAttribP4uiv
+  glVertexAttribParameteriAMD
   glVertexAttribPointer
   glVertexAttribPointerARB
   glVertexAttribPointerNV

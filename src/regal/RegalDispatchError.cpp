@@ -15805,6 +15805,33 @@ static void REGAL_CALL error_glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum sr
   }
 }
 
+// GL_AMD_interleaved_elements
+
+static void REGAL_CALL error_glVertexAttribParameteriAMD(GLuint index, GLenum pname, GLint param)
+{
+  Internal("error_glVertexAttribParameteriAMD","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glVertexAttribParameteriAMD)(index, pname, param);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glVertexAttribParameteriAMD : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_AMD_multi_draw_indirect
 
 static void REGAL_CALL error_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -16230,6 +16257,58 @@ static void REGAL_CALL error_glSetMultisamplefvAMD(GLenum pname, GLuint index, c
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {
       Error("glSetMultisamplefvAMD : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+// GL_AMD_sparse_texture
+
+static void REGAL_CALL error_glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  Internal("error_glTexStorageSparseAMD","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glTexStorageSparseAMD)(target, internalFormat, width, height, depth, layers, flags);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glTexStorageSparseAMD : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  Internal("error_glTextureStorageSparseAMD","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glTextureStorageSparseAMD)(texture, target, internalFormat, width, height, depth, layers, flags);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glTextureStorageSparseAMD : ",Token::GLerrorToString(_error));
       #if REGAL_BREAK
       Break::ErrorCB(_error);
       #endif
@@ -17889,6 +17968,413 @@ static void REGAL_CALL error_glDrawElementsInstancedBaseVertexBaseInstance(GLenu
   }
 }
 
+// GL_ARB_bindless_texture
+
+static GLuint64 REGAL_CALL error_glGetImageHandleARB(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format)
+{
+  Internal("error_glGetImageHandleARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  GLuint64  ret = _next->call(&_next->glGetImageHandleARB)(texture, level, layered, layer, format);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glGetImageHandleARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+return ret;
+}
+
+static GLuint64 REGAL_CALL error_glGetTextureHandleARB(GLuint texture)
+{
+  Internal("error_glGetTextureHandleARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  GLuint64  ret = _next->call(&_next->glGetTextureHandleARB)(texture);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glGetTextureHandleARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+return ret;
+}
+
+static GLuint64 REGAL_CALL error_glGetTextureSamplerHandleARB(GLuint texture, GLuint sampler)
+{
+  Internal("error_glGetTextureSamplerHandleARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  GLuint64  ret = _next->call(&_next->glGetTextureSamplerHandleARB)(texture, sampler);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glGetTextureSamplerHandleARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+return ret;
+}
+
+static void REGAL_CALL error_glGetVertexAttribLui64vARB(GLuint index, GLenum pname, GLuint64EXT *params)
+{
+  Internal("error_glGetVertexAttribLui64vARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glGetVertexAttribLui64vARB)(index, pname, params);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glGetVertexAttribLui64vARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static GLboolean REGAL_CALL error_glIsImageHandleResidentARB(GLuint64 handle)
+{
+  Internal("error_glIsImageHandleResidentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  GLboolean  ret = _next->call(&_next->glIsImageHandleResidentARB)(handle);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glIsImageHandleResidentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+return ret;
+}
+
+static GLboolean REGAL_CALL error_glIsTextureHandleResidentARB(GLuint64 handle)
+{
+  Internal("error_glIsTextureHandleResidentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  GLboolean  ret = _next->call(&_next->glIsTextureHandleResidentARB)(handle);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glIsTextureHandleResidentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+return ret;
+}
+
+static void REGAL_CALL error_glMakeImageHandleNonResidentARB(GLuint64 handle)
+{
+  Internal("error_glMakeImageHandleNonResidentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glMakeImageHandleNonResidentARB)(handle);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMakeImageHandleNonResidentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glMakeImageHandleResidentARB(GLuint64 handle, GLenum access)
+{
+  Internal("error_glMakeImageHandleResidentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glMakeImageHandleResidentARB)(handle, access);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMakeImageHandleResidentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glMakeTextureHandleNonResidentARB(GLuint64 handle)
+{
+  Internal("error_glMakeTextureHandleNonResidentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glMakeTextureHandleNonResidentARB)(handle);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMakeTextureHandleNonResidentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glMakeTextureHandleResidentARB(GLuint64 handle)
+{
+  Internal("error_glMakeTextureHandleResidentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glMakeTextureHandleResidentARB)(handle);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMakeTextureHandleResidentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glProgramUniformHandleui64ARB(GLuint program, GLint location, GLuint64 value)
+{
+  Internal("error_glProgramUniformHandleui64ARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glProgramUniformHandleui64ARB)(program, location, value);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glProgramUniformHandleui64ARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glProgramUniformHandleui64vARB(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
+{
+  Internal("error_glProgramUniformHandleui64vARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glProgramUniformHandleui64vARB)(program, location, count, values);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glProgramUniformHandleui64vARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glUniformHandleui64ARB(GLint location, GLuint64 value)
+{
+  Internal("error_glUniformHandleui64ARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glUniformHandleui64ARB)(location, value);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glUniformHandleui64ARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glUniformHandleui64vARB(GLint location, GLsizei count, const GLuint64 *value)
+{
+  Internal("error_glUniformHandleui64vARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glUniformHandleui64vARB)(location, count, value);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glUniformHandleui64vARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glVertexAttribL1ui64ARB(GLuint index, GLuint64EXT x)
+{
+  Internal("error_glVertexAttribL1ui64ARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glVertexAttribL1ui64ARB)(index, x);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glVertexAttribL1ui64ARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glVertexAttribL1ui64vARB(GLuint index, const GLuint64EXT *v)
+{
+  Internal("error_glVertexAttribL1ui64vARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glVertexAttribL1ui64vARB)(index, v);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glVertexAttribL1ui64vARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_ARB_blend_func_extended
 
 static void REGAL_CALL error_glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name)
@@ -17940,6 +18426,33 @@ static GLint REGAL_CALL error_glGetFragDataIndex(GLuint program, const GLchar *n
     }
   }
 return ret;
+}
+
+// GL_ARB_buffer_storage
+
+static void REGAL_CALL error_glBufferStorage(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags)
+{
+  Internal("error_glBufferStorage","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBufferStorage)(target, size, data, flags);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBufferStorage : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
 }
 
 // GL_ARB_cl_event
@@ -18072,6 +18585,58 @@ static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum 
   }
 }
 
+// GL_ARB_clear_texture
+
+static void REGAL_CALL error_glClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data)
+{
+  Internal("error_glClearTexImage","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glClearTexImage)(texture, level, format, type, data);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glClearTexImage : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data)
+{
+  Internal("error_glClearTexSubImage","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glClearTexSubImage)(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glClearTexSubImage : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_ARB_color_buffer_float
 
 static void REGAL_CALL error_glClampColorARB(GLenum target, GLenum clamp)
@@ -18142,6 +18707,33 @@ static void REGAL_CALL error_glDispatchComputeIndirect(GLintptr indirect)
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {
       Error("glDispatchComputeIndirect : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+// GL_ARB_compute_variable_group_size
+
+static void REGAL_CALL error_glDispatchComputeGroupSizeARB(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z)
+{
+  Internal("error_glDispatchComputeGroupSizeARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glDispatchComputeGroupSizeARB)(num_groups_x, num_groups_y, num_groups_z, group_size_x, group_size_y, group_size_z);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glDispatchComputeGroupSizeARB : ",Token::GLerrorToString(_error));
       #if REGAL_BREAK
       Break::ErrorCB(_error);
       #endif
@@ -20674,6 +21266,58 @@ static void REGAL_CALL error_glSeparableFilter2D(GLenum target, GLenum internalf
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {
       Error("glSeparableFilter2D : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+// GL_ARB_indirect_parameters
+
+static void REGAL_CALL error_glMultiDrawArraysIndirectCountARB(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+{
+  Internal("error_glMultiDrawArraysIndirectCountARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glMultiDrawArraysIndirectCountARB)(mode, indirect, drawcount, maxdrawcount, stride);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMultiDrawArraysIndirectCountARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glMultiDrawElementsIndirectCountARB(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride)
+{
+  Internal("error_glMultiDrawElementsIndirectCountARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glMultiDrawElementsIndirectCountARB)(mode, type, indirect, drawcount, maxdrawcount, stride);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glMultiDrawElementsIndirectCountARB : ",Token::GLerrorToString(_error));
       #if REGAL_BREAK
       Break::ErrorCB(_error);
       #endif
@@ -26361,6 +27005,58 @@ static void REGAL_CALL error_glNamedStringARB(GLenum type, GLint namelen, const 
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {
       Error("glNamedStringARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+// GL_ARB_sparse_texture
+
+static void REGAL_CALL error_glTexPageCommitmentARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
+{
+  Internal("error_glTexPageCommitmentARB","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glTexPageCommitmentARB)(target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glTexPageCommitmentARB : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glTexturePageCommitmentEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit)
+{
+  Internal("error_glTexturePageCommitmentEXT","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glTexturePageCommitmentEXT)(texture, target, level, xoffset, yoffset, zoffset, width, height, depth, commit);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glTexturePageCommitmentEXT : ",Token::GLerrorToString(_error));
       #if REGAL_BREAK
       Break::ErrorCB(_error);
       #endif
@@ -67361,6 +68057,10 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   tbl.glBlendFuncIndexedAMD = error_glBlendFuncIndexedAMD;
   tbl.glBlendFuncSeparateIndexedAMD = error_glBlendFuncSeparateIndexedAMD;
 
+  // GL_AMD_interleaved_elements
+
+  tbl.glVertexAttribParameteriAMD = error_glVertexAttribParameteriAMD;
+
   // GL_AMD_multi_draw_indirect
 
   tbl.glMultiDrawArraysIndirectAMD = error_glMultiDrawArraysIndirectAMD;
@@ -67389,6 +68089,11 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   // GL_AMD_sample_positions
 
   tbl.glSetMultisamplefvAMD = error_glSetMultisamplefvAMD;
+
+  // GL_AMD_sparse_texture
+
+  tbl.glTexStorageSparseAMD = error_glTexStorageSparseAMD;
+  tbl.glTextureStorageSparseAMD = error_glTextureStorageSparseAMD;
 
   // GL_AMD_stencil_operation_extended
 
@@ -67514,10 +68219,33 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   tbl.glDrawElementsInstancedBaseInstance = error_glDrawElementsInstancedBaseInstance;
   tbl.glDrawElementsInstancedBaseVertexBaseInstance = error_glDrawElementsInstancedBaseVertexBaseInstance;
 
+  // GL_ARB_bindless_texture
+
+  tbl.glGetImageHandleARB = error_glGetImageHandleARB;
+  tbl.glGetTextureHandleARB = error_glGetTextureHandleARB;
+  tbl.glGetTextureSamplerHandleARB = error_glGetTextureSamplerHandleARB;
+  tbl.glGetVertexAttribLui64vARB = error_glGetVertexAttribLui64vARB;
+  tbl.glIsImageHandleResidentARB = error_glIsImageHandleResidentARB;
+  tbl.glIsTextureHandleResidentARB = error_glIsTextureHandleResidentARB;
+  tbl.glMakeImageHandleNonResidentARB = error_glMakeImageHandleNonResidentARB;
+  tbl.glMakeImageHandleResidentARB = error_glMakeImageHandleResidentARB;
+  tbl.glMakeTextureHandleNonResidentARB = error_glMakeTextureHandleNonResidentARB;
+  tbl.glMakeTextureHandleResidentARB = error_glMakeTextureHandleResidentARB;
+  tbl.glProgramUniformHandleui64ARB = error_glProgramUniformHandleui64ARB;
+  tbl.glProgramUniformHandleui64vARB = error_glProgramUniformHandleui64vARB;
+  tbl.glUniformHandleui64ARB = error_glUniformHandleui64ARB;
+  tbl.glUniformHandleui64vARB = error_glUniformHandleui64vARB;
+  tbl.glVertexAttribL1ui64ARB = error_glVertexAttribL1ui64ARB;
+  tbl.glVertexAttribL1ui64vARB = error_glVertexAttribL1ui64vARB;
+
   // GL_ARB_blend_func_extended
 
   tbl.glBindFragDataLocationIndexed = error_glBindFragDataLocationIndexed;
   tbl.glGetFragDataIndex = error_glGetFragDataIndex;
+
+  // GL_ARB_buffer_storage
+
+  tbl.glBufferStorage = error_glBufferStorage;
 
   // GL_ARB_cl_event
 
@@ -67530,6 +68258,11 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   tbl.glClearNamedBufferDataEXT = error_glClearNamedBufferDataEXT;
   tbl.glClearNamedBufferSubDataEXT = error_glClearNamedBufferSubDataEXT;
 
+  // GL_ARB_clear_texture
+
+  tbl.glClearTexImage = error_glClearTexImage;
+  tbl.glClearTexSubImage = error_glClearTexSubImage;
+
   // GL_ARB_color_buffer_float
 
   tbl.glClampColorARB = error_glClampColorARB;
@@ -67538,6 +68271,10 @@ void InitDispatchTableError(DispatchTableGL &tbl)
 
   tbl.glDispatchCompute = error_glDispatchCompute;
   tbl.glDispatchComputeIndirect = error_glDispatchComputeIndirect;
+
+  // GL_ARB_compute_variable_group_size
+
+  tbl.glDispatchComputeGroupSizeARB = error_glDispatchComputeGroupSizeARB;
 
   // GL_ARB_copy_buffer
 
@@ -67680,6 +68417,11 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   tbl.glResetHistogram = error_glResetHistogram;
   tbl.glResetMinmax = error_glResetMinmax;
   tbl.glSeparableFilter2D = error_glSeparableFilter2D;
+
+  // GL_ARB_indirect_parameters
+
+  tbl.glMultiDrawArraysIndirectCountARB = error_glMultiDrawArraysIndirectCountARB;
+  tbl.glMultiDrawElementsIndirectCountARB = error_glMultiDrawElementsIndirectCountARB;
 
   // GL_ARB_instanced_arrays
 
@@ -67974,6 +68716,11 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   tbl.glGetNamedStringivARB = error_glGetNamedStringivARB;
   tbl.glIsNamedStringARB = error_glIsNamedStringARB;
   tbl.glNamedStringARB = error_glNamedStringARB;
+
+  // GL_ARB_sparse_texture
+
+  tbl.glTexPageCommitmentARB = error_glTexPageCommitmentARB;
+  tbl.glTexturePageCommitmentEXT = error_glTexturePageCommitmentEXT;
 
   // GL_ARB_sync
 

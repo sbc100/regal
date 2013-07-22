@@ -1400,6 +1400,10 @@ namespace Dispatch
     void (REGAL_CALL *glBlendFuncIndexedAMD)(GLuint buf, GLenum src, GLenum dst);
     void (REGAL_CALL *glBlendFuncSeparateIndexedAMD)(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
 
+    // GL_AMD_interleaved_elements
+
+    void (REGAL_CALL *glVertexAttribParameteriAMD)(GLuint index, GLenum pname, GLint param);
+
     // GL_AMD_multi_draw_indirect
 
     void (REGAL_CALL *glMultiDrawArraysIndirectAMD)(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride);
@@ -1428,6 +1432,11 @@ namespace Dispatch
     // GL_AMD_sample_positions
 
     void (REGAL_CALL *glSetMultisamplefvAMD)(GLenum pname, GLuint index, const GLfloat *val);
+
+    // GL_AMD_sparse_texture
+
+    void (REGAL_CALL *glTexStorageSparseAMD)(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+    void (REGAL_CALL *glTextureStorageSparseAMD)(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
 
     // GL_AMD_stencil_operation_extended
 
@@ -1553,10 +1562,33 @@ namespace Dispatch
     void (REGAL_CALL *glDrawElementsInstancedBaseInstance)(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLuint baseinstance);
     void (REGAL_CALL *glDrawElementsInstancedBaseVertexBaseInstance)(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance);
 
+    // GL_ARB_bindless_texture
+
+    GLuint64 (REGAL_CALL *glGetImageHandleARB)(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format);
+    GLuint64 (REGAL_CALL *glGetTextureHandleARB)(GLuint texture);
+    GLuint64 (REGAL_CALL *glGetTextureSamplerHandleARB)(GLuint texture, GLuint sampler);
+    void (REGAL_CALL *glGetVertexAttribLui64vARB)(GLuint index, GLenum pname, GLuint64EXT *params);
+    GLboolean (REGAL_CALL *glIsImageHandleResidentARB)(GLuint64 handle);
+    GLboolean (REGAL_CALL *glIsTextureHandleResidentARB)(GLuint64 handle);
+    void (REGAL_CALL *glMakeImageHandleNonResidentARB)(GLuint64 handle);
+    void (REGAL_CALL *glMakeImageHandleResidentARB)(GLuint64 handle, GLenum access);
+    void (REGAL_CALL *glMakeTextureHandleNonResidentARB)(GLuint64 handle);
+    void (REGAL_CALL *glMakeTextureHandleResidentARB)(GLuint64 handle);
+    void (REGAL_CALL *glProgramUniformHandleui64ARB)(GLuint program, GLint location, GLuint64 value);
+    void (REGAL_CALL *glProgramUniformHandleui64vARB)(GLuint program, GLint location, GLsizei count, const GLuint64 *values);
+    void (REGAL_CALL *glUniformHandleui64ARB)(GLint location, GLuint64 value);
+    void (REGAL_CALL *glUniformHandleui64vARB)(GLint location, GLsizei count, const GLuint64 *value);
+    void (REGAL_CALL *glVertexAttribL1ui64ARB)(GLuint index, GLuint64EXT x);
+    void (REGAL_CALL *glVertexAttribL1ui64vARB)(GLuint index, const GLuint64EXT *v);
+
     // GL_ARB_blend_func_extended
 
     void (REGAL_CALL *glBindFragDataLocationIndexed)(GLuint program, GLuint colorNumber, GLuint index, const GLchar *name);
     GLint (REGAL_CALL *glGetFragDataIndex)(GLuint program, const GLchar *name);
+
+    // GL_ARB_buffer_storage
+
+    void (REGAL_CALL *glBufferStorage)(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags);
 
     // GL_ARB_cl_event
 
@@ -1569,6 +1601,11 @@ namespace Dispatch
     void (REGAL_CALL *glClearNamedBufferDataEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
     void (REGAL_CALL *glClearNamedBufferSubDataEXT)(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 
+    // GL_ARB_clear_texture
+
+    void (REGAL_CALL *glClearTexImage)(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid *data);
+    void (REGAL_CALL *glClearTexSubImage)(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *data);
+
     // GL_ARB_color_buffer_float
 
     void (REGAL_CALL *glClampColorARB)(GLenum target, GLenum clamp);
@@ -1577,6 +1614,10 @@ namespace Dispatch
 
     void (REGAL_CALL *glDispatchCompute)(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z);
     void (REGAL_CALL *glDispatchComputeIndirect)(GLintptr indirect);
+
+    // GL_ARB_compute_variable_group_size
+
+    void (REGAL_CALL *glDispatchComputeGroupSizeARB)(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z);
 
     // GL_ARB_copy_buffer
 
@@ -1719,6 +1760,11 @@ namespace Dispatch
     void (REGAL_CALL *glResetHistogram)(GLenum target);
     void (REGAL_CALL *glResetMinmax)(GLenum target);
     void (REGAL_CALL *glSeparableFilter2D)(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column);
+
+    // GL_ARB_indirect_parameters
+
+    void (REGAL_CALL *glMultiDrawArraysIndirectCountARB)(GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
+    void (REGAL_CALL *glMultiDrawElementsIndirectCountARB)(GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride);
 
     // GL_ARB_instanced_arrays
 
@@ -2013,6 +2059,11 @@ namespace Dispatch
     void (REGAL_CALL *glGetNamedStringivARB)(GLint namelen, const GLchar *name, GLenum pname, GLint *params);
     GLboolean (REGAL_CALL *glIsNamedStringARB)(GLint namelen, const GLchar *name);
     void (REGAL_CALL *glNamedStringARB)(GLenum type, GLint namelen, const GLchar *name, GLint stringlen, const GLchar *string);
+
+    // GL_ARB_sparse_texture
+
+    void (REGAL_CALL *glTexPageCommitmentARB)(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
+    void (REGAL_CALL *glTexturePageCommitmentEXT)(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit);
 
     // GL_ARB_sync
 

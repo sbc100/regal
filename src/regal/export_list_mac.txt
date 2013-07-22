@@ -183,6 +183,7 @@ _glBufferData
 _glBufferDataARB
 _glBufferParameteriAPPLE
 _glBufferRegionEnabled
+_glBufferStorage
 _glBufferSubData
 _glBufferSubDataARB
 _glCallList
@@ -214,6 +215,8 @@ _glClearIndex
 _glClearNamedBufferDataEXT
 _glClearNamedBufferSubDataEXT
 _glClearStencil
+_glClearTexImage
+_glClearTexSubImage
 _glClientActiveTexture
 _glClientActiveTextureARB
 _glClientActiveVertexStreamATI
@@ -475,6 +478,7 @@ _glDisableVertexAttribArrayARB
 _glDisablei
 _glDiscardFramebufferEXT
 _glDispatchCompute
+_glDispatchComputeGroupSizeARB
 _glDispatchComputeIndirect
 _glDrawArrays
 _glDrawArraysEXT
@@ -828,6 +832,7 @@ _glGetHistogramParameterfv
 _glGetHistogramParameterfvEXT
 _glGetHistogramParameteriv
 _glGetHistogramParameterivEXT
+_glGetImageHandleARB
 _glGetImageHandleNV
 _glGetImageTransformParameterfvHP
 _glGetImageTransformParameterivHP
@@ -1030,6 +1035,7 @@ _glGetTexParameterPointervAPPLE
 _glGetTexParameterfv
 _glGetTexParameteriv
 _glGetTexParameterxv
+_glGetTextureHandleARB
 _glGetTextureHandleNV
 _glGetTextureImageEXT
 _glGetTextureLevelParameterfvEXT
@@ -1038,6 +1044,7 @@ _glGetTextureParameterIivEXT
 _glGetTextureParameterIuivEXT
 _glGetTextureParameterfvEXT
 _glGetTextureParameterivEXT
+_glGetTextureSamplerHandleARB
 _glGetTextureSamplerHandleNV
 _glGetTrackMatrixivNV
 _glGetTransformFeedbackVarying
@@ -1080,6 +1087,7 @@ _glGetVertexAttribIuivEXT
 _glGetVertexAttribLdv
 _glGetVertexAttribLdvEXT
 _glGetVertexAttribLi64vNV
+_glGetVertexAttribLui64vARB
 _glGetVertexAttribLui64vNV
 _glGetVertexAttribPointerv
 _glGetVertexAttribPointervARB
@@ -1180,6 +1188,7 @@ _glIsFenceNV
 _glIsFramebuffer
 _glIsFramebufferEXT
 _glIsFramebufferOES
+_glIsImageHandleResidentARB
 _glIsImageHandleResidentNV
 _glIsList
 _glIsNameAMD
@@ -1207,6 +1216,7 @@ _glIsSync
 _glIsSyncAPPLE
 _glIsTexture
 _glIsTextureEXT
+_glIsTextureHandleResidentARB
 _glIsTextureHandleResidentNV
 _glIsTransformFeedback
 _glIsTransformFeedbackNV
@@ -1256,11 +1266,15 @@ _glLogMessageCallbackREGAL
 _glLogicOp
 _glMakeBufferNonResidentNV
 _glMakeBufferResidentNV
+_glMakeImageHandleNonResidentARB
 _glMakeImageHandleNonResidentNV
+_glMakeImageHandleResidentARB
 _glMakeImageHandleResidentNV
 _glMakeNamedBufferNonResidentNV
 _glMakeNamedBufferResidentNV
+_glMakeTextureHandleNonResidentARB
 _glMakeTextureHandleNonResidentNV
+_glMakeTextureHandleResidentARB
 _glMakeTextureHandleResidentNV
 _glMap1d
 _glMap1f
@@ -1334,12 +1348,14 @@ _glMultiDrawArrays
 _glMultiDrawArraysEXT
 _glMultiDrawArraysIndirect
 _glMultiDrawArraysIndirectAMD
+_glMultiDrawArraysIndirectCountARB
 _glMultiDrawElementArrayAPPLE
 _glMultiDrawElements
 _glMultiDrawElementsBaseVertex
 _glMultiDrawElementsEXT
 _glMultiDrawElementsIndirect
 _glMultiDrawElementsIndirectAMD
+_glMultiDrawElementsIndirectCountARB
 _glMultiDrawRangeElementArrayAPPLE
 _glMultiModeDrawArraysIBM
 _glMultiModeDrawElementsIBM
@@ -1723,7 +1739,9 @@ _glProgramUniform4ui64vNV
 _glProgramUniform4uiEXT
 _glProgramUniform4uiv
 _glProgramUniform4uivEXT
+_glProgramUniformHandleui64ARB
 _glProgramUniformHandleui64NV
+_glProgramUniformHandleui64vARB
 _glProgramUniformHandleui64vNV
 _glProgramUniformMatrix2dv
 _glProgramUniformMatrix2dvEXT
@@ -2090,6 +2108,7 @@ _glTexImage3DMultisample
 _glTexImage3DMultisampleCoverageNV
 _glTexImage3DOES
 _glTexImage4DSGIS
+_glTexPageCommitmentARB
 _glTexParameterIiv
 _glTexParameterIivEXT
 _glTexParameterIuiv
@@ -2111,6 +2130,7 @@ _glTexStorage2DMultisample
 _glTexStorage3D
 _glTexStorage3DEXT
 _glTexStorage3DMultisample
+_glTexStorageSparseAMD
 _glTexSubImage1D
 _glTexSubImage1DEXT
 _glTexSubImage2D
@@ -2134,6 +2154,7 @@ _glTextureImage3DMultisampleNV
 _glTextureLightEXT
 _glTextureMaterialEXT
 _glTextureNormalEXT
+_glTexturePageCommitmentEXT
 _glTextureParameterIivEXT
 _glTextureParameterIuivEXT
 _glTextureParameterfEXT
@@ -2147,6 +2168,7 @@ _glTextureStorage2DEXT
 _glTextureStorage2DMultisampleEXT
 _glTextureStorage3DEXT
 _glTextureStorage3DMultisampleEXT
+_glTextureStorageSparseAMD
 _glTextureSubImage1DEXT
 _glTextureSubImage2DEXT
 _glTextureSubImage3DEXT
@@ -2234,7 +2256,9 @@ _glUniform4uiv
 _glUniform4uivEXT
 _glUniformBlockBinding
 _glUniformBufferEXT
+_glUniformHandleui64ARB
 _glUniformHandleui64NV
+_glUniformHandleui64vARB
 _glUniformHandleui64vNV
 _glUniformMatrix2dv
 _glUniformMatrix2fv
@@ -2503,7 +2527,9 @@ _glVertexAttribL1dv
 _glVertexAttribL1dvEXT
 _glVertexAttribL1i64NV
 _glVertexAttribL1i64vNV
+_glVertexAttribL1ui64ARB
 _glVertexAttribL1ui64NV
+_glVertexAttribL1ui64vARB
 _glVertexAttribL1ui64vNV
 _glVertexAttribL2d
 _glVertexAttribL2dEXT
@@ -2541,6 +2567,7 @@ _glVertexAttribP3ui
 _glVertexAttribP3uiv
 _glVertexAttribP4ui
 _glVertexAttribP4uiv
+_glVertexAttribParameteriAMD
 _glVertexAttribPointer
 _glVertexAttribPointerARB
 _glVertexAttribPointerNV
