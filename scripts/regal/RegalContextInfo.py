@@ -175,6 +175,9 @@ ContextInfo::init(const RegalContext &context)
     es2 = GL_TRUE;
   }
 
+  #if REGAL_SYS_EMSCRIPTEN
+  webgl = starts_with(version, "WebGL");
+  #endif
 
   // For Mesa3D EGL/ES 2.0 on desktop Linux the version string doesn't start with
   // "OpenGL ES" Is that a Mesa3D bug? Perhaps...
@@ -184,6 +187,7 @@ ContextInfo::init(const RegalContext &context)
   {
     es1 = false;
     es2 = true;
+    webgl = true;
     gles_version_major = 2;
     gles_version_minor = 0;
   }
@@ -199,7 +203,7 @@ ContextInfo::init(const RegalContext &context)
     core = flags & GL_CONTEXT_CORE_PROFILE_BIT ? GL_TRUE : GL_FALSE;
   }
 
-  compat = !core && !es1 && !es2;
+  compat = !core && !es1 && !es2 && !webgl;
 
   if (REGAL_FORCE_CORE_PROFILE || Config::forceCoreProfile)
   {
@@ -402,6 +406,7 @@ def versionDeclareCode(apis, args):
       code += '  GLboolean core   : 1;\n'
       code += '  GLboolean es1    : 1;\n'
       code += '  GLboolean es2    : 1;\n\n'
+      code += '  GLboolean webgl  : 1;\n\n'
 
     if name in ['gl', 'glx', 'egl']:
       code += '  GLint     %s_version_major;\n' % name
@@ -447,6 +452,7 @@ def versionInitCode(apis, args):
       code += '  core(false),\n'
       code += '  es1(false),\n'
       code += '  es2(false),\n'
+      code += '  webgl(false),\n'
 
     if name in ['gl', 'glx', 'egl']:
       code += '  %s_version_major(-1),\n' % name
