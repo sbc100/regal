@@ -58,14 +58,14 @@ def apiStaticEGLFuncInitCode(apis, args):
           name   = function.name
           code += '  tbl.r%s = ::%s;\n' % ( name, name )
 
-      code += "#if REGAL_SYS_EMSCRIPTEN == 0\n"
+      code += "\n#if !REGAL_SYS_EMSCRIPTEN\n"
 
       for function in api.functions:
         if "KHR" in function.name or "NV" in function.name or "MESA" in function.name or "ANGLE" in function.name:
           name   = function.name
           code += '  tbl.r%s = ::%s;\n' % ( name, name )
 
-      code += "#endif // REGAL_SYS_EMSCRIPTEN == 0\n"
+      code += "#endif // !REGAL_SYS_EMSCRIPTEN\n"
 
   return code
 
@@ -89,9 +89,9 @@ def generateStaticEGLSource(apis, args):
       code += '{\n'
 
       for function in api.functions:
-          params = paramsDefaultCode(function.parameters, True)
-          rType  = typeCode(function.ret.type)
-          code += '  extern %s REGAL_CALL %s(%s);\n' % (rType, function.name, params)
+        params = paramsDefaultCode(function.parameters, True)
+        rType  = typeCode(function.ret.type)
+        code += '  extern %s REGAL_CALL %s(%s);\n' % (rType, function.name, params)
 
       code += '}\n'
 

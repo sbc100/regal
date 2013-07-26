@@ -205,6 +205,7 @@ ContextInfo::ContextInfo()
   gl_arb_map_buffer_alignment(false),
   gl_arb_map_buffer_range(false),
   gl_arb_matrix_palette(false),
+  gl_arb_multi_bind(false),
   gl_arb_multi_draw_indirect(false),
   gl_arb_multisample(false),
   gl_arb_multitexture(false),
@@ -850,6 +851,8 @@ ContextInfo::init(const RegalContext &context)
   }
 
   // We could get either form of the OpenGL ES string, so confirm version
+
+  #if REGAL_SYS_ES1 || REGAL_SYS_ES2
   if (!es1 && (gles_version_major == 1))
   {
     es1 = GL_TRUE;
@@ -860,6 +863,7 @@ ContextInfo::init(const RegalContext &context)
     es1 = GL_FALSE;
     es2 = GL_TRUE;
   }
+  #endif
 
   #if REGAL_SYS_EMSCRIPTEN
   webgl = starts_with(version, "WebGL");
@@ -868,8 +872,18 @@ ContextInfo::init(const RegalContext &context)
   // For Mesa3D EGL/ES 2.0 on desktop Linux the version string doesn't start with
   // "OpenGL ES" Is that a Mesa3D bug? Perhaps...
 
-  #if (REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID) || REGAL_SYS_EMSCRIPTEN
+  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID && !REGAL_SYS_EMSCRIPTEN
   if (Regal::Config::sysEGL)
+  {
+    es1 = false;
+    es2 = true;
+    webgl = false;
+    gles_version_major = 2;
+    gles_version_minor = 0;
+  }
+  #endif
+
+  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && REGAL_SYS_EMSCRIPTEN
   {
     es1 = false;
     es2 = true;
@@ -1152,6 +1166,7 @@ ContextInfo::init(const RegalContext &context)
   gl_arb_map_buffer_alignment = e.find("GL_ARB_map_buffer_alignment")!=e.end();
   gl_arb_map_buffer_range = e.find("GL_ARB_map_buffer_range")!=e.end();
   gl_arb_matrix_palette = e.find("GL_ARB_matrix_palette")!=e.end();
+  gl_arb_multi_bind = e.find("GL_ARB_multi_bind")!=e.end();
   gl_arb_multi_draw_indirect = e.find("GL_ARB_multi_draw_indirect")!=e.end();
   gl_arb_multisample = e.find("GL_ARB_multisample")!=e.end();
   gl_arb_multitexture = e.find("GL_ARB_multitexture")!=e.end();
@@ -1722,7 +1737,12 @@ ContextInfo::init(const RegalContext &context)
 #endif
 
   RegalAssert(context.dispatcher.driver.glGetIntegerv);
-  if (!es1)
+  if (es1)
+  {
+    maxVertexAttribs = 8;
+    maxVaryings = 0;
+  }
+  else
   {
     context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&maxVertexAttribs));
     context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&maxVaryings));
@@ -1736,7 +1756,8 @@ ContextInfo::init(const RegalContext &context)
 
   // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs (n*16 is used
   // as the stride in RegalIFF).  WebGL (and Pepper) explicitly disallows stride > 255 as well.
-  if (vendor == "Qualcomm" || vendor == "Chromium" || version.find("WebGL") == 0)
+
+  if (vendor == "Qualcomm" || vendor == "Chromium" || webgl)
     maxVertexAttribs = 8;
 
   Info("Regal  v attribs : ",maxVertexAttribs);
@@ -1847,6 +1868,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_map_buffer_alignment")) return gl_arb_map_buffer_alignment;
   if (!strcmp(ext,"GL_ARB_map_buffer_range")) return gl_arb_map_buffer_range;
   if (!strcmp(ext,"GL_ARB_matrix_palette")) return gl_arb_matrix_palette;
+  if (!strcmp(ext,"GL_ARB_multi_bind")) return gl_arb_multi_bind;
   if (!strcmp(ext,"GL_ARB_multi_draw_indirect")) return gl_arb_multi_draw_indirect;
   if (!strcmp(ext,"GL_ARB_multisample")) return gl_arb_multisample;
   if (!strcmp(ext,"GL_ARB_multitexture")) return regal_arb_multitexture || gl_arb_multitexture;

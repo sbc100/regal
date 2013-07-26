@@ -36259,6 +36259,8 @@ static GLvoid *REGAL_CALL emu_glMapBufferRange(GLenum target, GLintptr offset, G
 
 // GL_ARB_matrix_palette
 
+// GL_ARB_multi_bind
+
 // GL_ARB_multi_draw_indirect
 
 static void REGAL_CALL emu_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)

@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2668] = {
+const char * const gl_Name[2674] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -107,6 +107,8 @@ const char * const gl_Name[2668] = {
   "glBindBufferRange",
   "glBindBufferRangeEXT",
   "glBindBufferRangeNV",
+  "glBindBuffersBase",
+  "glBindBuffersRange",
   "glBindFragDataLocation",
   "glBindFragDataLocationEXT",
   "glBindFragDataLocationIndexed",
@@ -116,6 +118,7 @@ const char * const gl_Name[2668] = {
   "glBindFramebufferOES",
   "glBindImageTexture",
   "glBindImageTextureEXT",
+  "glBindImageTextures",
   "glBindLightParameterEXT",
   "glBindMaterialParameterEXT",
   "glBindMultiTextureEXT",
@@ -127,16 +130,19 @@ const char * const gl_Name[2668] = {
   "glBindRenderbufferEXT",
   "glBindRenderbufferOES",
   "glBindSampler",
+  "glBindSamplers",
   "glBindTexGenParameterEXT",
   "glBindTexture",
   "glBindTextureEXT",
   "glBindTextureUnitParameterEXT",
+  "glBindTextures",
   "glBindTransformFeedback",
   "glBindTransformFeedbackNV",
   "glBindVertexArray",
   "glBindVertexArrayAPPLE",
   "glBindVertexArrayOES",
   "glBindVertexBuffer",
+  "glBindVertexBuffers",
   "glBindVertexShaderEXT",
   "glBindVideoCaptureStreamBufferNV",
   "glBindVideoCaptureStreamTextureNV",
@@ -2724,7 +2730,7 @@ const char * const gl_Name[2668] = {
   NULL
 };
 
-const void *gl_Value[2668] = {
+const void *gl_Value[2674] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -2778,6 +2784,8 @@ const void *gl_Value[2668] = {
   (void *)(glBindBufferRange),
   (void *)(glBindBufferRangeEXT),
   (void *)(glBindBufferRangeNV),
+  (void *)(glBindBuffersBase),
+  (void *)(glBindBuffersRange),
   (void *)(glBindFragDataLocation),
   (void *)(glBindFragDataLocationEXT),
   (void *)(glBindFragDataLocationIndexed),
@@ -2787,6 +2795,7 @@ const void *gl_Value[2668] = {
   (void *)(glBindFramebufferOES),
   (void *)(glBindImageTexture),
   (void *)(glBindImageTextureEXT),
+  (void *)(glBindImageTextures),
   (void *)(glBindLightParameterEXT),
   (void *)(glBindMaterialParameterEXT),
   (void *)(glBindMultiTextureEXT),
@@ -2798,16 +2807,19 @@ const void *gl_Value[2668] = {
   (void *)(glBindRenderbufferEXT),
   (void *)(glBindRenderbufferOES),
   (void *)(glBindSampler),
+  (void *)(glBindSamplers),
   (void *)(glBindTexGenParameterEXT),
   (void *)(glBindTexture),
   (void *)(glBindTextureEXT),
   (void *)(glBindTextureUnitParameterEXT),
+  (void *)(glBindTextures),
   (void *)(glBindTransformFeedback),
   (void *)(glBindTransformFeedbackNV),
   (void *)(glBindVertexArray),
   (void *)(glBindVertexArrayAPPLE),
   (void *)(glBindVertexArrayOES),
   (void *)(glBindVertexBuffer),
+  (void *)(glBindVertexBuffers),
   (void *)(glBindVertexShaderEXT),
   (void *)(glBindVideoCaptureStreamBufferNV),
   (void *)(glBindVideoCaptureStreamTextureNV),
@@ -5395,7 +5407,7 @@ const void *gl_Value[2668] = {
   NULL
 };
 
-const size_t gl_Offset[2668] = {
+const size_t gl_Offset[2674] = {
   offsetof(Dispatch::GL,glAccum)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveProgramEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveShaderProgram)/sizeof(void *),
@@ -5449,6 +5461,8 @@ const size_t gl_Offset[2668] = {
   offsetof(Dispatch::GL,glBindBufferRange)/sizeof(void *),
   offsetof(Dispatch::GL,glBindBufferRangeEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindBufferRangeNV)/sizeof(void *),
+  offsetof(Dispatch::GL,glBindBuffersBase)/sizeof(void *),
+  offsetof(Dispatch::GL,glBindBuffersRange)/sizeof(void *),
   offsetof(Dispatch::GL,glBindFragDataLocation)/sizeof(void *),
   offsetof(Dispatch::GL,glBindFragDataLocationEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindFragDataLocationIndexed)/sizeof(void *),
@@ -5458,6 +5472,7 @@ const size_t gl_Offset[2668] = {
   offsetof(Dispatch::GL,glBindFramebufferOES)/sizeof(void *),
   offsetof(Dispatch::GL,glBindImageTexture)/sizeof(void *),
   offsetof(Dispatch::GL,glBindImageTextureEXT)/sizeof(void *),
+  offsetof(Dispatch::GL,glBindImageTextures)/sizeof(void *),
   offsetof(Dispatch::GL,glBindLightParameterEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindMaterialParameterEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindMultiTextureEXT)/sizeof(void *),
@@ -5469,16 +5484,19 @@ const size_t gl_Offset[2668] = {
   offsetof(Dispatch::GL,glBindRenderbufferEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindRenderbufferOES)/sizeof(void *),
   offsetof(Dispatch::GL,glBindSampler)/sizeof(void *),
+  offsetof(Dispatch::GL,glBindSamplers)/sizeof(void *),
   offsetof(Dispatch::GL,glBindTexGenParameterEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindTexture)/sizeof(void *),
   offsetof(Dispatch::GL,glBindTextureEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindTextureUnitParameterEXT)/sizeof(void *),
+  offsetof(Dispatch::GL,glBindTextures)/sizeof(void *),
   offsetof(Dispatch::GL,glBindTransformFeedback)/sizeof(void *),
   offsetof(Dispatch::GL,glBindTransformFeedbackNV)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVertexArray)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVertexArrayAPPLE)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVertexArrayOES)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVertexBuffer)/sizeof(void *),
+  offsetof(Dispatch::GL,glBindVertexBuffers)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVertexShaderEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVideoCaptureStreamBufferNV)/sizeof(void *),
   offsetof(Dispatch::GL,glBindVideoCaptureStreamTextureNV)/sizeof(void *),

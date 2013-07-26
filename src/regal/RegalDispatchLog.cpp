@@ -8868,6 +8868,68 @@ static void REGAL_CALL log_glMatrixIndexusvARB(GLint size, const GLushort *indic
     Driver("glMatrixIndexusvARB","(", size, ", ", indices, ")");
 }
 
+// GL_ARB_multi_bind
+
+static void REGAL_CALL log_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+    Driver("glBindBuffersBase","(", toString(target), ", ", first, ", ", count, ", ", buffers, ")");
+}
+
+static void REGAL_CALL log_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+    Driver("glBindBuffersRange","(", toString(target), ", ", first, ", ", count, ", ", buffers, ", ", offsets, ", ", sizes, ")");
+}
+
+static void REGAL_CALL log_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindImageTextures)(first, count, textures);
+    Driver("glBindImageTextures","(", first, ", ", count, ", ", textures, ")");
+}
+
+static void REGAL_CALL log_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindSamplers)(first, count, samplers);
+    Driver("glBindSamplers","(", first, ", ", count, ", ", samplers, ")");
+}
+
+static void REGAL_CALL log_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindTextures)(first, count, textures);
+    Driver("glBindTextures","(", first, ", ", count, ", ", textures, ")");
+}
+
+static void REGAL_CALL log_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+    Driver("glBindVertexBuffers","(", first, ", ", count, ", ", buffers, ", ", offsets, ", ", strides, ")");
+}
+
 // GL_ARB_multi_draw_indirect
 
 static void REGAL_CALL log_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -32093,6 +32155,15 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   tbl.glMatrixIndexubvARB = log_glMatrixIndexubvARB;
   tbl.glMatrixIndexuivARB = log_glMatrixIndexuivARB;
   tbl.glMatrixIndexusvARB = log_glMatrixIndexusvARB;
+
+  // GL_ARB_multi_bind
+
+  tbl.glBindBuffersBase = log_glBindBuffersBase;
+  tbl.glBindBuffersRange = log_glBindBuffersRange;
+  tbl.glBindImageTextures = log_glBindImageTextures;
+  tbl.glBindSamplers = log_glBindSamplers;
+  tbl.glBindTextures = log_glBindTextures;
+  tbl.glBindVertexBuffers = log_glBindVertexBuffers;
 
   // GL_ARB_multi_draw_indirect
 

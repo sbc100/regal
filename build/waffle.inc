@@ -37,21 +37,21 @@ WAFFLE.C.MAC += src/waffle/src/cgl/WaffleGLView.m
 
 # GLX
 
-WAFFLE.C.GLX +=rc/waffle/src/glx/glx_window.c
-WAFFLE.C.GLX +=rc/waffle/src/glx/glx_context.c
-WAFFLE.C.GLX +=rc/waffle/src/glx/glx_display.c
-WAFFLE.C.GLX +=rc/waffle/src/glx/glx_platform.c
-WAFFLE.C.GLX +=rc/waffle/src/glx/glx_config.c
+WAFFLE.C.GLX += src/waffle/src/glx/glx_window.c
+WAFFLE.C.GLX += src/waffle/src/glx/glx_context.c
+WAFFLE.C.GLX += src/waffle/src/glx/glx_display.c
+WAFFLE.C.GLX += src/waffle/src/glx/glx_platform.c
+WAFFLE.C.GLX += src/waffle/src/glx/glx_config.c
 
 # X11
 
-WAFFLE.C.X11 +=rc/waffle/src/x11/x11_window.c
-WAFFLE.C.X11 +=rc/waffle/src/x11/x11_display.c
+WAFFLE.C.X11 += src/waffle/src/x11/x11_window.c
+WAFFLE.C.X11 += src/waffle/src/x11/x11_display.c
 
 # Linux
 
-WAFFLE.C.LINUX +=rc/waffle/src/linux/linux_platform.c
-WAFFLE.C.LINUX +=rc/waffle/src/linux/linux_dl.c
+WAFFLE.C.LINUX += src/waffle/src/linux/linux_platform.c
+WAFFLE.C.LINUX += src/waffle/src/linux/linux_dl.c
 
 # 
 

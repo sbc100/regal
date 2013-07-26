@@ -146,13 +146,25 @@ explicitFunctionsToMock = frozenset([
     'glBindVertexBuffer',
     'glClientActiveTexture',
     'glClientAttribDefaultEXT',
+    'glColorPointer',
+    'glDisableClientState',
+    'glDisableClientStateiEXT',
+    'glDisableVertexAttribArray',
+    'glEdgeFlagPointer',
+    'glEnableClientState',
+    'glEnableVertexAttribArray',
     'glFogCoordPointer',
+    'glIndexPointer',
+    'glMultiTexCoordPointerEXT',
+    'glNormalPointer',
     'glPrimitiveRestartIndex',
     'glSecondaryColorPointer',
     'glVertexAttribBinding',
     'glVertexAttribFormat',
     'glVertexAttribIFormat',
-    'glVertexBindingDivisor'])
+    'glVertexAttribLFormat',
+    'glVertexBindingDivisor',
+    'glVertexPointer'])
 
 
 def generateGMockFunctionApi(apis):

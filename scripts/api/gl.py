@@ -21644,6 +21644,80 @@ glMatrixIndexusvARB.trace = True
 glMatrixIndexusvARB.play = True
 gl.add(glMatrixIndexusvARB)
 
+# GL_ARB_multi_bind
+
+glBindBuffersBase = Function('glBindBuffersBase')
+glBindBuffersBase.ret = Return('void')
+glBindBuffersBase.add( Input( 'target','GLenum' ))
+glBindBuffersBase.add( Input( 'first','GLuint' ))
+glBindBuffersBase.add( Input( 'count','GLsizei' ))
+glBindBuffersBase.add( Input( 'buffers','const GLuint *' ))
+glBindBuffersBase.version = ''
+glBindBuffersBase.category = 'GL_ARB_multi_bind'
+glBindBuffersBase.trace = True
+glBindBuffersBase.play = True
+gl.add(glBindBuffersBase)
+
+glBindBuffersRange = Function('glBindBuffersRange')
+glBindBuffersRange.ret = Return('void')
+glBindBuffersRange.add( Input( 'target','GLenum' ))
+glBindBuffersRange.add( Input( 'first','GLuint' ))
+glBindBuffersRange.add( Input( 'count','GLsizei' ))
+glBindBuffersRange.add( Input( 'buffers','const GLuint *' ))
+glBindBuffersRange.add( Input( 'offsets','const GLintptr *' ))
+glBindBuffersRange.add( Input( 'sizes','const GLsizeiptr *' ))
+glBindBuffersRange.version = ''
+glBindBuffersRange.category = 'GL_ARB_multi_bind'
+glBindBuffersRange.trace = True
+glBindBuffersRange.play = True
+gl.add(glBindBuffersRange)
+
+glBindImageTextures = Function('glBindImageTextures')
+glBindImageTextures.ret = Return('void')
+glBindImageTextures.add( Input( 'first','GLuint' ))
+glBindImageTextures.add( Input( 'count','GLsizei' ))
+glBindImageTextures.add( Input( 'textures','const GLuint *' ))
+glBindImageTextures.version = ''
+glBindImageTextures.category = 'GL_ARB_multi_bind'
+glBindImageTextures.trace = True
+glBindImageTextures.play = True
+gl.add(glBindImageTextures)
+
+glBindSamplers = Function('glBindSamplers')
+glBindSamplers.ret = Return('void')
+glBindSamplers.add( Input( 'first','GLuint' ))
+glBindSamplers.add( Input( 'count','GLsizei' ))
+glBindSamplers.add( Input( 'samplers','const GLuint *' ))
+glBindSamplers.version = ''
+glBindSamplers.category = 'GL_ARB_multi_bind'
+glBindSamplers.trace = True
+glBindSamplers.play = True
+gl.add(glBindSamplers)
+
+glBindTextures = Function('glBindTextures')
+glBindTextures.ret = Return('void')
+glBindTextures.add( Input( 'first','GLuint' ))
+glBindTextures.add( Input( 'count','GLsizei' ))
+glBindTextures.add( Input( 'textures','const GLuint *' ))
+glBindTextures.version = ''
+glBindTextures.category = 'GL_ARB_multi_bind'
+glBindTextures.trace = True
+glBindTextures.play = True
+gl.add(glBindTextures)
+
+glBindVertexBuffers = Function('glBindVertexBuffers')
+glBindVertexBuffers.ret = Return('void')
+glBindVertexBuffers.add( Input( 'first','GLuint' ))
+glBindVertexBuffers.add( Input( 'count','GLsizei' ))
+glBindVertexBuffers.add( Input( 'buffers','const GLuint *' ))
+glBindVertexBuffers.add( Input( 'offsets','const GLintptr *' ))
+glBindVertexBuffers.add( Input( 'strides','const GLsizei *' ))
+glBindVertexBuffers.version = ''
+glBindVertexBuffers.category = 'GL_ARB_multi_bind'
+glBindVertexBuffers.trace = True
+glBindVertexBuffers.play = True
+gl.add(glBindVertexBuffers)
+
 # GL_ARB_multi_draw_indirect
 
 glMultiDrawArraysIndirect = Function('glMultiDrawArraysIndirect')
@@ -43252,6 +43326,11 @@ GL_ARB_matrix_palette.url = 'http://oss.sgi.com/projects/ogl-sample/registry/ARB
 GL_ARB_matrix_palette.enumerants = ['GL_CURRENT_MATRIX_INDEX_ARB','GL_CURRENT_PALETTE_MATRIX_ARB','GL_MATRIX_INDEX_ARRAY_ARB','GL_MATRIX_INDEX_ARRAY_POINTER_ARB','GL_MATRIX_INDEX_ARRAY_SIZE_ARB','GL_MATRIX_INDEX_ARRAY_STRIDE_ARB','GL_MATRIX_INDEX_ARRAY_TYPE_ARB','GL_MATRIX_PALETTE_ARB','GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB','GL_MAX_PALETTE_MATRICES_ARB']
 GL_ARB_matrix_palette.functions = ['glCurrentPaletteMatrixARB','glMatrixIndexPointerARB','glMatrixIndexubvARB','glMatrixIndexuivARB','glMatrixIndexusvARB']
 gl.add(GL_ARB_matrix_palette)
+
+GL_ARB_multi_bind = Extension('GL_ARB_multi_bind')
+GL_ARB_multi_bind.url = 'http://www.opengl.org/registry/specs/gl/ARB/multi_bind.txt'
+GL_ARB_multi_bind.functions = ['glBindBuffersBase','glBindBuffersRange','glBindImageTextures','glBindSamplers','glBindTextures','glBindVertexBuffers']
+gl.add(GL_ARB_multi_bind)
 
 GL_ARB_multi_draw_indirect = Extension('GL_ARB_multi_draw_indirect')
 GL_ARB_multi_draw_indirect.url = 'http://www.opengl.org/registry/specs/ARB/multi_draw_indirect.txt'

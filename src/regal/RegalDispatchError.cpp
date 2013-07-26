@@ -21740,6 +21740,158 @@ static void REGAL_CALL error_glMatrixIndexusvARB(GLint size, const GLushort *ind
   }
 }
 
+// GL_ARB_multi_bind
+
+static void REGAL_CALL error_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+{
+  Internal("error_glBindBuffersBase","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBindBuffersBase : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+{
+  Internal("error_glBindBuffersRange","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBindBuffersRange : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  Internal("error_glBindImageTextures","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBindImageTextures)(first, count, textures);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBindImageTextures : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+{
+  Internal("error_glBindSamplers","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBindSamplers)(first, count, samplers);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBindSamplers : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  Internal("error_glBindTextures","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBindTextures)(first, count, textures);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBindTextures : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
+static void REGAL_CALL error_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+{
+  Internal("error_glBindVertexBuffers","()");
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL *_next = _context->dispatcher.error.next();
+  RegalAssert(_next);
+  GLenum _error = GL_NO_ERROR;
+  if (!_context->err.inBeginEnd)
+    _error = _next->call(&_next->glGetError)();
+  RegalAssert(_error==GL_NO_ERROR);
+  _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+  if (!_context->err.inBeginEnd) {
+    _error = _next->call(&_next->glGetError)();
+    if (_error!=GL_NO_ERROR) {
+      Error("glBindVertexBuffers : ",Token::GLerrorToString(_error));
+      #if REGAL_BREAK
+      Break::ErrorCB(_error);
+      #endif
+      if (_context->err.callback)
+        _context->err.callback( _error );
+    }
+  }
+}
+
 // GL_ARB_multi_draw_indirect
 
 static void REGAL_CALL error_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -68456,6 +68608,15 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   tbl.glMatrixIndexubvARB = error_glMatrixIndexubvARB;
   tbl.glMatrixIndexuivARB = error_glMatrixIndexuivARB;
   tbl.glMatrixIndexusvARB = error_glMatrixIndexusvARB;
+
+  // GL_ARB_multi_bind
+
+  tbl.glBindBuffersBase = error_glBindBuffersBase;
+  tbl.glBindBuffersRange = error_glBindBuffersRange;
+  tbl.glBindImageTextures = error_glBindImageTextures;
+  tbl.glBindSamplers = error_glBindSamplers;
+  tbl.glBindTextures = error_glBindTextures;
+  tbl.glBindVertexBuffers = error_glBindVertexBuffers;
 
   // GL_ARB_multi_draw_indirect
 

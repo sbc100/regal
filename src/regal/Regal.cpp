@@ -9100,6 +9100,68 @@ extern "C" {
     _next->call(&_next->glMatrixIndexusvARB)(size, indices);
   }
 
+  /* GL_ARB_multi_bind */
+
+  REGAL_DECL void REGAL_CALL glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBindBuffersBase","(", toString(target), ", ", first, ", ", count, ", ", buffers, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+  }
+
+  REGAL_DECL void REGAL_CALL glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBindBuffersRange","(", toString(target), ", ", first, ", ", count, ", ", buffers, ", ", offsets, ", ", sizes, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+  }
+
+  REGAL_DECL void REGAL_CALL glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBindImageTextures","(", first, ", ", count, ", ", textures, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBindImageTextures)(first, count, textures);
+  }
+
+  REGAL_DECL void REGAL_CALL glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBindSamplers","(", first, ", ", count, ", ", samplers, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBindSamplers)(first, count, samplers);
+  }
+
+  REGAL_DECL void REGAL_CALL glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBindTextures","(", first, ", ", count, ", ", textures, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBindTextures)(first, count, textures);
+  }
+
+  REGAL_DECL void REGAL_CALL glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBindVertexBuffers","(", first, ", ", count, ", ", buffers, ", ", offsets, ", ", strides, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+  }
+
   /* GL_ARB_multi_draw_indirect */
 
   REGAL_DECL void REGAL_CALL glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)

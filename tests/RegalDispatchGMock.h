@@ -500,8 +500,11 @@ struct RegalGMockInterface
   MOCK_METHOD2(glVertexAttribBinding, void(GLuint, GLuint));
   MOCK_METHOD5(glVertexAttribFormat, void(GLuint, GLint, GLenum, GLboolean, GLuint));
   MOCK_METHOD4(glVertexAttribIFormat, void(GLuint, GLint, GLenum, GLuint));
+  MOCK_METHOD4(glVertexAttribLFormat, void(GLuint, GLint, GLenum, GLuint));
   MOCK_METHOD2(glVertexBindingDivisor, void(GLuint, GLuint));
   MOCK_METHOD1(glClientAttribDefaultEXT, void(GLbitfield));
+  MOCK_METHOD2(glDisableClientStateiEXT, void(GLenum, GLuint));
+  MOCK_METHOD5(glMultiTexCoordPointerEXT, void(GLenum, GLint, GLenum, GLsizei, const GLvoid *));
 };
 
 void InitDispatchTableGMock(DispatchTableGL &tbl);

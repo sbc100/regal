@@ -15937,6 +15937,120 @@ static void REGAL_CALL code_glMatrixIndexusvARB(GLint size, const GLushort *indi
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static void REGAL_CALL code_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBindBuffersBase(";
+                   _code << toString(target);
+    _code << ", "; _code << first;
+    _code << ", "; _code << count;
+    _code << ", "; _code << buffers;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBindBuffersRange(";
+                   _code << toString(target);
+    _code << ", "; _code << first;
+    _code << ", "; _code << count;
+    _code << ", "; _code << buffers;
+    _code << ", "; _code << offsets;
+    _code << ", "; _code << sizes;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindImageTextures)(first, count, textures);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBindImageTextures(";
+                   _code << first;
+    _code << ", "; _code << count;
+    _code << ", "; _code << textures;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindSamplers)(first, count, samplers);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBindSamplers(";
+                   _code << first;
+    _code << ", "; _code << count;
+    _code << ", "; _code << samplers;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindTextures)(first, count, textures);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBindTextures(";
+                   _code << first;
+    _code << ", "; _code << count;
+    _code << ", "; _code << textures;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBindVertexBuffers(";
+                   _code << first;
+    _code << ", "; _code << count;
+    _code << ", "; _code << buffers;
+    _code << ", "; _code << offsets;
+    _code << ", "; _code << strides;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static void REGAL_CALL code_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -51194,6 +51308,12 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glMatrixIndexubvARB = code_glMatrixIndexubvARB;
   tbl.glMatrixIndexuivARB = code_glMatrixIndexuivARB;
   tbl.glMatrixIndexusvARB = code_glMatrixIndexusvARB;
+  tbl.glBindBuffersBase = code_glBindBuffersBase;
+  tbl.glBindBuffersRange = code_glBindBuffersRange;
+  tbl.glBindImageTextures = code_glBindImageTextures;
+  tbl.glBindSamplers = code_glBindSamplers;
+  tbl.glBindTextures = code_glBindTextures;
+  tbl.glBindVertexBuffers = code_glBindVertexBuffers;
   tbl.glMultiDrawArraysIndirect = code_glMultiDrawArraysIndirect;
   tbl.glMultiDrawElementsIndirect = code_glMultiDrawElementsIndirect;
   tbl.glSampleCoverageARB = code_glSampleCoverageARB;

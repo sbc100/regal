@@ -5277,7 +5277,7 @@ static const trace::EnumValue _enumCGLError_values[] = {
 };
 
 static const trace::EnumSig _enumCGLError_sig = {
-    14, 19, _enumCGLError_values
+    17, 19, _enumCGLError_values
 };
 
 static const trace::EnumValue _enumCGLPixelFormatAttribute_values[] = {
@@ -5285,46 +5285,46 @@ static const trace::EnumValue _enumCGLPixelFormatAttribute_values[] = {
     {"kCGLPFADoubleBuffer", kCGLPFADoubleBuffer},
     {"kCGLPFAStereo", kCGLPFAStereo},
     {"kCGLPFAAuxBuffers", kCGLPFAAuxBuffers},
-    {"kCGLPFAColorSize", kCGLPFAColorSize},
-    {"kCGLPFAAlphaSize", kCGLPFAAlphaSize},
-    {"kCGLPFADepthSize", kCGLPFADepthSize},
-    {"kCGLPFAStencilSize", kCGLPFAStencilSize},
-    {"kCGLPFAAccumSize", kCGLPFAAccumSize},
     {"kCGLPFAMinimumPolicy", kCGLPFAMinimumPolicy},
     {"kCGLPFAMaximumPolicy", kCGLPFAMaximumPolicy},
     {"kCGLPFAOffScreen", kCGLPFAOffScreen},
     {"kCGLPFAFullScreen", kCGLPFAFullScreen},
-    {"kCGLPFASampleBuffers", kCGLPFASampleBuffers},
-    {"kCGLPFASamples", kCGLPFASamples},
     {"kCGLPFAAuxDepthStencil", kCGLPFAAuxDepthStencil},
     {"kCGLPFAColorFloat", kCGLPFAColorFloat},
     {"kCGLPFAMultisample", kCGLPFAMultisample},
     {"kCGLPFASupersample", kCGLPFASupersample},
     {"kCGLPFASampleAlpha", kCGLPFASampleAlpha},
-    {"kCGLPFARendererID", kCGLPFARendererID},
     {"kCGLPFASingleRenderer", kCGLPFASingleRenderer},
     {"kCGLPFANoRecovery", kCGLPFANoRecovery},
     {"kCGLPFAAccelerated", kCGLPFAAccelerated},
     {"kCGLPFAClosestPolicy", kCGLPFAClosestPolicy},
+    {"kCGLPFARobust", kCGLPFARobust},
     {"kCGLPFABackingStore", kCGLPFABackingStore},
+    {"kCGLPFAMPSafe", kCGLPFAMPSafe},
     {"kCGLPFAWindow", kCGLPFAWindow},
+    {"kCGLPFAMultiScreen", kCGLPFAMultiScreen},
     {"kCGLPFACompliant", kCGLPFACompliant},
-    {"kCGLPFADisplayMask", kCGLPFADisplayMask},
     {"kCGLPFAPBuffer", kCGLPFAPBuffer},
     {"kCGLPFARemotePBuffer", kCGLPFARemotePBuffer},
     {"kCGLPFAAllowOfflineRenderers", kCGLPFAAllowOfflineRenderers},
     {"kCGLPFAAcceleratedCompute", kCGLPFAAcceleratedCompute},
-    {"kCGLPFAOpenGLProfile", kCGLPFAOpenGLProfile},
-    {"kCGLPFAVirtualScreenCount", kCGLPFAVirtualScreenCount},
-    {"kCGLPFARobust", kCGLPFARobust},
-    {"kCGLPFAMPSafe", kCGLPFAMPSafe},
-    {"kCGLPFAMultiScreen", kCGLPFAMultiScreen},
     {"kCGLOGLPVersion_Legacy", kCGLOGLPVersion_Legacy},
     {"kCGLOGLPVersion_3_2_Core", kCGLOGLPVersion_3_2_Core},
+    {"kCGLPFAColorSize", kCGLPFAColorSize},
+    {"kCGLPFAAlphaSize", kCGLPFAAlphaSize},
+    {"kCGLPFADepthSize", kCGLPFADepthSize},
+    {"kCGLPFAStencilSize", kCGLPFAStencilSize},
+    {"kCGLPFAAccumSize", kCGLPFAAccumSize},
+    {"kCGLPFASampleBuffers", kCGLPFASampleBuffers},
+    {"kCGLPFASamples", kCGLPFASamples},
+    {"kCGLPFARendererID", kCGLPFARendererID},
+    {"kCGLPFADisplayMask", kCGLPFADisplayMask},
+    {"kCGLPFAOpenGLProfile", kCGLPFAOpenGLProfile},
+    {"kCGLPFAVirtualScreenCount", kCGLPFAVirtualScreenCount},
 };
 
 static const trace::EnumSig _enumCGLPixelFormatAttribute_sig = {
-    9, 40, _enumCGLPixelFormatAttribute_values
+    12, 40, _enumCGLPixelFormatAttribute_values
 };
 
 static const trace::EnumValue _enumCGLRendererProperty_values[] = {
@@ -5359,7 +5359,7 @@ static const trace::EnumValue _enumCGLRendererProperty_values[] = {
 };
 
 static const trace::EnumSig _enumCGLRendererProperty_sig = {
-    10, 28, _enumCGLRendererProperty_values
+    13, 28, _enumCGLRendererProperty_values
 };
 
 static const trace::EnumValue _enumCGLContextEnable_values[] = {
@@ -5373,7 +5373,7 @@ static const trace::EnumValue _enumCGLContextEnable_values[] = {
 };
 
 static const trace::EnumSig _enumCGLContextEnable_sig = {
-    11, 7, _enumCGLContextEnable_values
+    14, 7, _enumCGLContextEnable_values
 };
 
 static const trace::EnumValue _enumCGLContextParameter_values[] = {
@@ -5395,7 +5395,7 @@ static const trace::EnumValue _enumCGLContextParameter_values[] = {
 };
 
 static const trace::EnumSig _enumCGLContextParameter_sig = {
-    12, 15, _enumCGLContextParameter_values
+    15, 15, _enumCGLContextParameter_values
 };
 
 static const trace::EnumValue _enumCGLGlobalOption_values[] = {
@@ -5408,7 +5408,7 @@ static const trace::EnumValue _enumCGLGlobalOption_values[] = {
 };
 
 static const trace::EnumSig _enumCGLGlobalOption_sig = {
-    13, 6, _enumCGLGlobalOption_values
+    16, 6, _enumCGLGlobalOption_values
 };
 
 #endif // REGAL_SYS_OSX
@@ -5615,7 +5615,7 @@ static const trace::EnumValue _enumEGLenum_values[] = {
 };
 
 static const trace::EnumSig _enumEGLenum_sig = {
-    15, 197, _enumEGLenum_values
+    18, 197, _enumEGLenum_values
 };
 
 static const trace::EnumValue _enumEGLBoolean_values[] = {
@@ -5624,7 +5624,135 @@ static const trace::EnumValue _enumEGLBoolean_values[] = {
 };
 
 static const trace::EnumSig _enumEGLBoolean_sig = {
-    16, 2, _enumEGLBoolean_values
+    19, 2, _enumEGLBoolean_values
+};
+
+static const trace::EnumValue _enumint33_values[] = {
+    {"EGL_RGB_BUFFER", EGL_RGB_BUFFER},
+    {"EGL_LUMINANCE_BUFFER", EGL_LUMINANCE_BUFFER},
+};
+
+static const trace::EnumSig _enumint33_sig = {
+    24, 2, _enumint33_values
+};
+
+static const trace::EnumValue _enumint34_values[] = {
+    {"EGL_DONT_CARE", EGL_DONT_CARE},
+    {"EGL_NONE", EGL_NONE},
+    {"EGL_SLOW_CONFIG", EGL_SLOW_CONFIG},
+    {"EGL_NON_CONFORMANT_CONFIG", EGL_NON_CONFORMANT_CONFIG},
+};
+
+static const trace::EnumSig _enumint34_sig = {
+    25, 4, _enumint34_values
+};
+
+static const trace::BitmaskFlag _bitmaskint28_flags[] = {
+    {"EGL_OPENGL_BIT", EGL_OPENGL_BIT},
+    {"EGL_OPENGL_ES_BIT", EGL_OPENGL_ES_BIT},
+    {"EGL_OPENGL_ES2_BIT", EGL_OPENGL_ES2_BIT},
+    {"EGL_OPENVG_BIT", EGL_OPENVG_BIT},
+};
+
+static const trace::BitmaskSig _bitmaskint28_sig = {
+    13, 4, _bitmaskint28_flags
+};
+
+static const trace::EnumValue _enumint35_values[] = {
+    {"EGL_DONT_CARE", EGL_DONT_CARE},
+    {"EGL_TRUE", EGL_TRUE},
+    {"EGL_FALSE", EGL_FALSE},
+};
+
+static const trace::EnumSig _enumint35_sig = {
+    26, 3, _enumint35_values
+};
+
+static const trace::BitmaskFlag _bitmaskint27_flags[] = {
+    {"EGL_MULTISAMPLE_RESOLVE_BOX_BIT", EGL_MULTISAMPLE_RESOLVE_BOX_BIT},
+    {"EGL_PBUFFER_BIT", EGL_PBUFFER_BIT},
+    {"EGL_PIXMAP_BIT", EGL_PIXMAP_BIT},
+    {"EGL_SWAP_BEHAVIOR_PRESERVED_BIT", EGL_SWAP_BEHAVIOR_PRESERVED_BIT},
+    {"EGL_VG_ALPHA_FORMAT_PRE_BIT", EGL_VG_ALPHA_FORMAT_PRE_BIT},
+    {"EGL_VG_COLORSPACE_LINEAR_BIT", EGL_VG_COLORSPACE_LINEAR_BIT},
+    {"EGL_WINDOW_BIT", EGL_WINDOW_BIT},
+};
+
+static const trace::BitmaskSig _bitmaskint27_sig = {
+    12, 7, _bitmaskint27_flags
+};
+
+static const trace::EnumValue _enumint36_values[] = {
+    {"EGL_NONE", EGL_NONE},
+    {"EGL_TRANSPARENT_RGB", EGL_TRANSPARENT_RGB},
+};
+
+static const trace::EnumSig _enumint36_sig = {
+    27, 2, _enumint36_values
+};
+
+static const trace::EnumValue _enumint37_values[] = {
+    {"EGL_SINGLE_BUFFER", EGL_SINGLE_BUFFER},
+    {"EGL_BACK_BUFFER", EGL_BACK_BUFFER},
+};
+
+static const trace::EnumSig _enumint37_sig = {
+    28, 2, _enumint37_values
+};
+
+static const trace::EnumValue _enumint29_values[] = {
+    {"EGL_VG_ALPHA_FORMAT_NONPRE", EGL_VG_ALPHA_FORMAT_NONPRE},
+    {"EGL_VG_ALPHA_FORMAT_PRE", EGL_VG_ALPHA_FORMAT_PRE},
+};
+
+static const trace::EnumSig _enumint29_sig = {
+    20, 2, _enumint29_values
+};
+
+static const trace::EnumValue _enumint30_values[] = {
+    {"EGL_VG_COLORSPACE_sRGB", EGL_VG_COLORSPACE_sRGB},
+    {"EGL_VG_COLORSPACE_LINEAR", EGL_VG_COLORSPACE_LINEAR},
+};
+
+static const trace::EnumSig _enumint30_sig = {
+    21, 2, _enumint30_values
+};
+
+static const trace::EnumValue _enumint31_values[] = {
+    {"EGL_NO_TEXTURE", EGL_NO_TEXTURE},
+    {"EGL_TEXTURE_RGB", EGL_TEXTURE_RGB},
+    {"EGL_TEXTURE_RGBA", EGL_TEXTURE_RGBA},
+};
+
+static const trace::EnumSig _enumint31_sig = {
+    22, 3, _enumint31_values
+};
+
+static const trace::EnumValue _enumint32_values[] = {
+    {"EGL_TEXTURE_2D", EGL_TEXTURE_2D},
+    {"EGL_NO_TEXTURE", EGL_NO_TEXTURE},
+};
+
+static const trace::EnumSig _enumint32_sig = {
+    23, 2, _enumint32_values
+};
+
+static const trace::BitmaskFlag _bitmaskint40_flags[] = {
+    {"EGL_READ_SURFACE_BIT_KHR", EGL_READ_SURFACE_BIT_KHR},
+    {"EGL_WRITE_SURFACE_BIT_KHR", EGL_WRITE_SURFACE_BIT_KHR},
+};
+
+static const trace::BitmaskSig _bitmaskint40_sig = {
+    15, 2, _bitmaskint40_flags
+};
+
+static const trace::BitmaskFlag _bitmaskint41_flags[] = {
+    {"EGL_SIGNALED_NV", EGL_SIGNALED_NV},
+    {"EGL_UNSIGNALED_NV", EGL_UNSIGNALED_NV},
+};
+
+static const trace::BitmaskSig _bitmaskint41_sig = {
+    16, 2, _bitmaskint41_flags
 };
 
 static const char * _structstructEGLClientPixmapHI_members[4] = {
@@ -5637,9 +5765,51 @@ static const trace::StructSig _structstructEGLClientPixmapHI_sig = {
     1, "struct EGLClientPixmapHI", 4, _structstructEGLClientPixmapHI_members
 };
 
+static const trace::EnumValue _enumint38_values[] = {
+    {"EGL_DRM_BUFFER_FORMAT_ARGB32_MESA", EGL_DRM_BUFFER_FORMAT_ARGB32_MESA},
+};
+
+static const trace::EnumSig _enumint38_sig = {
+    29, 1, _enumint38_values
+};
+
+static const trace::BitmaskFlag _bitmaskint39_flags[] = {
+    {"EGL_DRM_BUFFER_USE_SCANOUT_MESA", EGL_DRM_BUFFER_USE_SCANOUT_MESA},
+    {"EGL_DRM_BUFFER_USE_SHARE_MESA", EGL_DRM_BUFFER_USE_SHARE_MESA},
+};
+
+static const trace::BitmaskSig _bitmaskint39_sig = {
+    14, 2, _bitmaskint39_flags
+};
+
 #endif // REGAL_SYS_EGL
 
 #if REGAL_SYS_GLX
+static const char * _structXVisualInfo_members[10] = {
+    "visual",
+    "visualid",
+    "screen",
+    "depth",
+    "c_class",
+    "red_mask",
+    "green_mask",
+    "blue_mask",
+    "colormap_size",
+    "bits_per_rgb",
+};
+static const trace::StructSig _structXVisualInfo_sig = {
+    0, "XVisualInfo", 10, _structXVisualInfo_members
+};
+
+static const trace::EnumValue _enumint1_values[] = {
+    {"False", False},
+    {"True", True},
+};
+
+static const trace::EnumSig _enumint1_sig = {
+    5, 2, _enumint1_values
+};
+
 static const trace::EnumValue _enumint2_values[] = {
     {"GLX_BUFFER_SIZE", GLX_BUFFER_SIZE},
     {"GLX_LEVEL", GLX_LEVEL},
@@ -5739,31 +5909,6 @@ static const trace::EnumSig _enumint2_sig = {
     6, 92, _enumint2_values
 };
 
-static const char * _structXVisualInfo_members[10] = {
-    "visual",
-    "visualid",
-    "screen",
-    "depth",
-    "c_class",
-    "red_mask",
-    "green_mask",
-    "blue_mask",
-    "colormap_size",
-    "bits_per_rgb",
-};
-static const trace::StructSig _structXVisualInfo_sig = {
-    0, "XVisualInfo", 10, _structXVisualInfo_members
-};
-
-static const trace::EnumValue _enumint1_values[] = {
-    {"False", False},
-    {"True", True},
-};
-
-static const trace::EnumSig _enumint1_sig = {
-    5, 2, _enumint1_values
-};
-
 static const trace::EnumValue _enumint3_values[] = {
     {"GLX_BAD_SCREEN", GLX_BAD_SCREEN},
     {"GLX_BAD_ATTRIBUTE", GLX_BAD_ATTRIBUTE},
@@ -5788,6 +5933,74 @@ static const trace::EnumSig _enumint4_sig = {
     8, 3, _enumint4_values
 };
 
+static const trace::BitmaskFlag _bitmaskint8_flags[] = {
+    {"GLX_RGBA_BIT", GLX_RGBA_BIT},
+    {"GLX_COLOR_INDEX_BIT", GLX_COLOR_INDEX_BIT},
+};
+
+static const trace::BitmaskSig _bitmaskint8_sig = {
+    8, 2, _bitmaskint8_flags
+};
+
+static const trace::BitmaskFlag _bitmaskint9_flags[] = {
+    {"GLX_WINDOW_BIT", GLX_WINDOW_BIT},
+    {"GLX_PIXMAP_BIT", GLX_PIXMAP_BIT},
+    {"GLX_PBUFFER_BIT", GLX_PBUFFER_BIT},
+};
+
+static const trace::BitmaskSig _bitmaskint9_sig = {
+    9, 3, _bitmaskint9_flags
+};
+
+static const trace::EnumValue _enumint10_values[] = {
+    {"GLX_TRUE_COLOR", GLX_TRUE_COLOR},
+    {"GLX_DIRECT_COLOR", GLX_DIRECT_COLOR},
+    {"GLX_PSEUDO_COLOR", GLX_PSEUDO_COLOR},
+    {"GLX_STATIC_COLOR", GLX_STATIC_COLOR},
+};
+
+static const trace::EnumSig _enumint10_sig = {
+    9, 4, _enumint10_values
+};
+
+static const trace::EnumValue _enumint11_values[] = {
+    {"GLX_NONE", GLX_NONE},
+    {"GLX_SLOW_CONFIG", GLX_SLOW_CONFIG},
+    {"GLX_NON_CONFORMANT_CONFIG", GLX_NON_CONFORMANT_CONFIG},
+};
+
+static const trace::EnumSig _enumint11_sig = {
+    10, 3, _enumint11_values
+};
+
+static const trace::EnumValue _enumint12_values[] = {
+    {"GLX_NONE", GLX_NONE},
+    {"GLX_TRANSPARENT_RGB", GLX_TRANSPARENT_RGB},
+    {"GLX_TRANSPARENT_INDEX", GLX_TRANSPARENT_INDEX},
+};
+
+static const trace::EnumSig _enumint12_sig = {
+    11, 3, _enumint12_values
+};
+
+static const trace::BitmaskFlag _bitmaskint14_flags[] = {
+    {"GLX_CONTEXT_DEBUG_BIT_ARB", GLX_CONTEXT_DEBUG_BIT_ARB},
+    {"GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB", GLX_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB},
+};
+
+static const trace::BitmaskSig _bitmaskint14_sig = {
+    10, 2, _bitmaskint14_flags
+};
+
+static const trace::BitmaskFlag _bitmaskint15_flags[] = {
+    {"GLX_CONTEXT_CORE_PROFILE_BIT_ARB", GLX_CONTEXT_CORE_PROFILE_BIT_ARB},
+    {"GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB", GLX_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB},
+};
+
+static const trace::BitmaskSig _bitmaskint15_sig = {
+    11, 2, _bitmaskint15_flags
+};
+
 #endif // REGAL_SYS_GLX
 
 #if REGAL_SYS_WGL
@@ -5797,7 +6010,7 @@ static const trace::EnumValue _enumBOOL_values[] = {
 };
 
 static const trace::EnumSig _enumBOOL_sig = {
-    17, 2, _enumBOOL_values
+    30, 2, _enumBOOL_values
 };
 
 static const trace::BitmaskFlag _bitmaskDWORD1_flags[] = {
@@ -5822,7 +6035,7 @@ static const trace::BitmaskFlag _bitmaskDWORD1_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskDWORD1_sig = {
-    8, 18, _bitmaskDWORD1_flags
+    17, 18, _bitmaskDWORD1_flags
 };
 
 static const char * _structPIXELFORMATDESCRIPTOR_members[26] = {
@@ -5914,7 +6127,7 @@ static const trace::StructSig _structGLYPHMETRICSFLOAT_sig = {
     16, "GLYPHMETRICSFLOAT", 5, _structGLYPHMETRICSFLOAT_members
 };
 
-static const trace::EnumValue _enumint20_values[] = {
+static const trace::EnumValue _enumint42_values[] = {
     {"WGL_NUMBER_PIXEL_FORMATS_ARB", WGL_NUMBER_PIXEL_FORMATS_ARB},
     {"WGL_DRAW_TO_WINDOW_ARB", WGL_DRAW_TO_WINDOW_ARB},
     {"WGL_DRAW_TO_BITMAP_ARB", WGL_DRAW_TO_BITMAP_ARB},
@@ -6084,8 +6297,68 @@ static const trace::EnumValue _enumint20_values[] = {
     {"WGL_GPU_NUM_SPI_AMD", WGL_GPU_NUM_SPI_AMD},
 };
 
-static const trace::EnumSig _enumint20_sig = {
-    19, 167, _enumint20_values
+static const trace::EnumSig _enumint42_sig = {
+    32, 167, _enumint42_values
+};
+
+static const trace::EnumValue _enumint45_values[] = {
+    {"WGL_NO_ACCELERATION_ARB", WGL_NO_ACCELERATION_ARB},
+    {"WGL_GENERIC_ACCELERATION_ARB", WGL_GENERIC_ACCELERATION_ARB},
+    {"WGL_FULL_ACCELERATION_ARB", WGL_FULL_ACCELERATION_ARB},
+};
+
+static const trace::EnumSig _enumint45_sig = {
+    33, 3, _enumint45_values
+};
+
+static const trace::EnumValue _enumint46_values[] = {
+    {"WGL_SWAP_EXCHANGE_ARB", WGL_SWAP_EXCHANGE_ARB},
+    {"WGL_SWAP_COPY_ARB", WGL_SWAP_COPY_ARB},
+    {"WGL_SWAP_UNDEFINED_ARB", WGL_SWAP_UNDEFINED_ARB},
+};
+
+static const trace::EnumSig _enumint46_sig = {
+    34, 3, _enumint46_values
+};
+
+static const trace::EnumValue _enumint47_values[] = {
+    {"WGL_TYPE_RGBA_ARB", WGL_TYPE_RGBA_ARB},
+    {"WGL_TYPE_COLORINDEX_ARB", WGL_TYPE_COLORINDEX_ARB},
+};
+
+static const trace::EnumSig _enumint47_sig = {
+    35, 2, _enumint47_values
+};
+
+static const trace::EnumValue _enumint48_values[] = {
+    {"WGL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB", WGL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB},
+    {"WGL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB", WGL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB},
+    {"WGL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB", WGL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB},
+    {"WGL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB", WGL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB},
+    {"WGL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB", WGL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB},
+    {"WGL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB", WGL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB},
+};
+
+static const trace::EnumSig _enumint48_sig = {
+    36, 6, _enumint48_values
+};
+
+static const trace::BitmaskFlag _bitmaskint43_flags[] = {
+    {"WGL_CONTEXT_DEBUG_BIT_ARB", WGL_CONTEXT_DEBUG_BIT_ARB},
+    {"WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB", WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB},
+};
+
+static const trace::BitmaskSig _bitmaskint43_sig = {
+    18, 2, _bitmaskint43_flags
+};
+
+static const trace::BitmaskFlag _bitmaskint44_flags[] = {
+    {"WGL_CONTEXT_CORE_PROFILE_BIT_ARB", WGL_CONTEXT_CORE_PROFILE_BIT_ARB},
+    {"WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB", WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB},
+};
+
+static const trace::BitmaskSig _bitmaskint44_sig = {
+    19, 2, _bitmaskint44_flags
 };
 
 static const char * _structRECT_members[4] = {
@@ -80482,17 +80755,148 @@ CGLError CGLChoosePixelFormat( const CGLPixelFormatAttribute * attribs, CGLPixel
     CGLError _result;
     unsigned _call = trace::localWriter.beginEnter(&_CGLChoosePixelFormat_sig);
     trace::localWriter.beginArg(0);
-    if (attribs) {
-        size_t _cCCGLPixelFormatAttribute = _AttribList_size(attribs) > 0 ? _AttribList_size(attribs) : 0;
-        trace::localWriter.beginArray(_cCCGLPixelFormatAttribute);
-        for (size_t _iCCGLPixelFormatAttribute = 0; _iCCGLPixelFormatAttribute < _cCCGLPixelFormatAttribute; ++_iCCGLPixelFormatAttribute) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumCGLPixelFormatAttribute_sig, (attribs)[_iCCGLPixelFormatAttribute]);
-            trace::localWriter.endElement();
+    {
+    int _cCCGLPixelFormatAttribute;
+    for (_cCCGLPixelFormatAttribute = 0; attribs && attribs[_cCCGLPixelFormatAttribute] != 0; _cCCGLPixelFormatAttribute += 2) {
+        switch (int(attribs[_cCCGLPixelFormatAttribute])) {
+        case kCGLPFAAllRenderers:
+        case kCGLPFADoubleBuffer:
+        case kCGLPFAStereo:
+        case kCGLPFAAuxBuffers:
+        case kCGLPFAMinimumPolicy:
+        case kCGLPFAMaximumPolicy:
+        case kCGLPFAOffScreen:
+        case kCGLPFAFullScreen:
+        case kCGLPFAAuxDepthStencil:
+        case kCGLPFAColorFloat:
+        case kCGLPFAMultisample:
+        case kCGLPFASupersample:
+        case kCGLPFASampleAlpha:
+        case kCGLPFASingleRenderer:
+        case kCGLPFANoRecovery:
+        case kCGLPFAAccelerated:
+        case kCGLPFAClosestPolicy:
+        case kCGLPFARobust:
+        case kCGLPFABackingStore:
+        case kCGLPFAMPSafe:
+        case kCGLPFAWindow:
+        case kCGLPFAMultiScreen:
+        case kCGLPFACompliant:
+        case kCGLPFAPBuffer:
+        case kCGLPFARemotePBuffer:
+        case kCGLPFAAllowOfflineRenderers:
+        case kCGLPFAAcceleratedCompute:
+        case kCGLOGLPVersion_Legacy:
+        case kCGLOGLPVersion_3_2_Core:
+            _cCCGLPixelFormatAttribute--;
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+    }
+    _cCCGLPixelFormatAttribute += attribs ? 1 : 0;
+    trace::localWriter.beginArray(_cCCGLPixelFormatAttribute);
+    for (int _iCCGLPixelFormatAttribute = 0; _iCCGLPixelFormatAttribute < _cCCGLPixelFormatAttribute; _iCCGLPixelFormatAttribute++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumCGLPixelFormatAttribute_sig, attribs[_iCCGLPixelFormatAttribute]);
+        trace::localWriter.endElement();
+        if (_iCCGLPixelFormatAttribute + 1 >= _cCCGLPixelFormatAttribute) {
+            break;
+        }
+        switch (int(attribs[_iCCGLPixelFormatAttribute++])) {
+        case kCGLPFAColorSize:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFAAlphaSize:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFADepthSize:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFAStencilSize:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFAAccumSize:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFASampleBuffers:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFASamples:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFARendererID:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFADisplayMask:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFAOpenGLProfile:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFAVirtualScreenCount:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribs)[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        case kCGLPFAAllRenderers:
+        case kCGLPFADoubleBuffer:
+        case kCGLPFAStereo:
+        case kCGLPFAAuxBuffers:
+        case kCGLPFAMinimumPolicy:
+        case kCGLPFAMaximumPolicy:
+        case kCGLPFAOffScreen:
+        case kCGLPFAFullScreen:
+        case kCGLPFAAuxDepthStencil:
+        case kCGLPFAColorFloat:
+        case kCGLPFAMultisample:
+        case kCGLPFASupersample:
+        case kCGLPFASampleAlpha:
+        case kCGLPFASingleRenderer:
+        case kCGLPFANoRecovery:
+        case kCGLPFAAccelerated:
+        case kCGLPFAClosestPolicy:
+        case kCGLPFARobust:
+        case kCGLPFABackingStore:
+        case kCGLPFAMPSafe:
+        case kCGLPFAWindow:
+        case kCGLPFAMultiScreen:
+        case kCGLPFACompliant:
+        case kCGLPFAPBuffer:
+        case kCGLPFARemotePBuffer:
+        case kCGLPFAAllowOfflineRenderers:
+        case kCGLPFAAcceleratedCompute:
+        case kCGLOGLPVersion_Legacy:
+        case kCGLOGLPVersion_3_2_Core:
+            _iCCGLPixelFormatAttribute--;
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribs[_iCCGLPixelFormatAttribute - 1]));
+            trace::localWriter.writeSInt(attribs[_iCCGLPixelFormatAttribute]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82095,17 +82499,169 @@ EGLBoolean eglChooseConfig( EGLDisplay dpy, const EGLint * attrib_list, EGLConfi
     trace::localWriter.writePointer((uintptr_t)dpy);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint1;
+    for (_cCEGLint1 = 0; attrib_list && attrib_list[_cCEGLint1] != EGL_NONE; _cCEGLint1 += 2) {
+    }
+    _cCEGLint1 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint1);
+    for (int _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; _iCEGLint1++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint1]);
+        trace::localWriter.endElement();
+        if (_iCEGLint1 + 1 >= _cCEGLint1) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint1++])) {
+        case EGL_ALPHA_MASK_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_BIND_TO_TEXTURE_RGB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLBoolean_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_BIND_TO_TEXTURE_RGBA:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLBoolean_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_BUFFER_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_COLOR_BUFFER_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint33_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_CONFIG_CAVEAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint34_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_CONFIG_ID:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_CONFORMANT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint28_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_DEPTH_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_LEVEL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_LUMINANCE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_MATCH_NATIVE_PIXMAP:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_NATIVE_RENDERABLE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint35_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_MAX_SWAP_INTERVAL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_MIN_SWAP_INTERVAL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_SAMPLE_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_SAMPLES:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_STENCIL_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_RENDERABLE_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint28_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_SURFACE_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint27_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TRANSPARENT_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint36_sig, (attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TRANSPARENT_RED_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TRANSPARENT_GREEN_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TRANSPARENT_BLUE_VALUE :
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint1 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint1]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
@@ -82196,17 +82752,44 @@ EGLSurface eglCreateWindowSurface( EGLDisplay dpy, EGLConfig config, EGLNativeWi
     trace::localWriter.writePointer((uintptr_t)win);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint11;
+    for (_cCEGLint11 = 0; attrib_list && attrib_list[_cCEGLint11] != EGL_NONE; _cCEGLint11 += 2) {
+    }
+    _cCEGLint11 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint11);
+    for (int _iCEGLint11 = 0; _iCEGLint11 < _cCEGLint11; _iCEGLint11++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint11]);
+        trace::localWriter.endElement();
+        if (_iCEGLint11 + 1 >= _cCEGLint11) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint11++])) {
+        case EGL_RENDER_BUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint37_sig, (attrib_list)[_iCEGLint11]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_VG_ALPHA_FORMAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint29_sig, (attrib_list)[_iCEGLint11]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_VG_COLORSPACE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint30_sig, (attrib_list)[_iCEGLint11]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint11 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint11]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82231,17 +82814,69 @@ EGLSurface eglCreatePbufferSurface( EGLDisplay dpy, EGLConfig config, const EGLi
     trace::localWriter.writePointer((uintptr_t)config);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint13;
+    for (_cCEGLint13 = 0; attrib_list && attrib_list[_cCEGLint13] != EGL_NONE; _cCEGLint13 += 2) {
+    }
+    _cCEGLint13 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint13);
+    for (int _iCEGLint13 = 0; _iCEGLint13 < _cCEGLint13; _iCEGLint13++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint13]);
+        trace::localWriter.endElement();
+        if (_iCEGLint13 + 1 >= _cCEGLint13) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint13++])) {
+        case EGL_HEIGHT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_LARGEST_PBUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLBoolean_sig, (attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_MIPMAP_TEXTURE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TEXTURE_FORMAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint31_sig, (attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TEXTURE_TARGET:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint32_sig, (attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_VG_ALPHA_FORMAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint29_sig, (attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_VG_COLORSPACE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint30_sig, (attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_WIDTH:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint13 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint13]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82269,17 +82904,39 @@ EGLSurface eglCreatePixmapSurface( EGLDisplay dpy, EGLConfig config, EGLNativePi
     trace::localWriter.writePointer((uintptr_t)pixmap);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint12;
+    for (_cCEGLint12 = 0; attrib_list && attrib_list[_cCEGLint12] != EGL_NONE; _cCEGLint12 += 2) {
+    }
+    _cCEGLint12 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint12);
+    for (int _iCEGLint12 = 0; _iCEGLint12 < _cCEGLint12; _iCEGLint12++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint12]);
+        trace::localWriter.endElement();
+        if (_iCEGLint12 + 1 >= _cCEGLint12) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint12++])) {
+        case EGL_VG_ALPHA_FORMAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint29_sig, (attrib_list)[_iCEGLint12]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_VG_COLORSPACE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint30_sig, (attrib_list)[_iCEGLint12]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint12 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint12]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82429,17 +83086,44 @@ EGLSurface eglCreatePbufferFromClientBuffer( EGLDisplay dpy, EGLenum buftype, EG
     trace::localWriter.writePointer((uintptr_t)config);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint14;
+    for (_cCEGLint14 = 0; attrib_list && attrib_list[_cCEGLint14] != EGL_NONE; _cCEGLint14 += 2) {
+    }
+    _cCEGLint14 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint14);
+    for (int _iCEGLint14 = 0; _iCEGLint14 < _cCEGLint14; _iCEGLint14++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint14]);
+        trace::localWriter.endElement();
+        if (_iCEGLint14 + 1 >= _cCEGLint14) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint14++])) {
+        case EGL_MIPMAP_TEXTURE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLBoolean_sig, (attrib_list)[_iCEGLint14]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TEXTURE_FORMAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint31_sig, (attrib_list)[_iCEGLint14]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_TEXTURE_TARGET:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint32_sig, (attrib_list)[_iCEGLint14]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint14 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint14]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82563,17 +83247,34 @@ EGLContext eglCreateContext( EGLDisplay dpy, EGLConfig config, EGLContext share_
     trace::localWriter.writePointer((uintptr_t)share_context);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint18;
+    for (_cCEGLint18 = 0; attrib_list && attrib_list[_cCEGLint18] != EGL_NONE; _cCEGLint18 += 2) {
+    }
+    _cCEGLint18 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint18);
+    for (int _iCEGLint18 = 0; _iCEGLint18 < _cCEGLint18; _iCEGLint18++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint18]);
+        trace::localWriter.endElement();
+        if (_iCEGLint18 + 1 >= _cCEGLint18) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint18++])) {
+        case EGL_CONTEXT_CLIENT_VERSION:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCEGLint18]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint18 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint18]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82825,17 +83526,39 @@ EGLBoolean eglLockSurfaceKHR( EGLDisplay display, EGLSurface surface, const EGLi
     trace::localWriter.writePointer((uintptr_t)surface);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint16;
+    for (_cCEGLint16 = 0; attrib_list && attrib_list[_cCEGLint16] != EGL_NONE; _cCEGLint16 += 2) {
+    }
+    _cCEGLint16 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint16);
+    for (int _iCEGLint16 = 0; _iCEGLint16 < _cCEGLint16; _iCEGLint16++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint16]);
+        trace::localWriter.endElement();
+        if (_iCEGLint16 + 1 >= _cCEGLint16) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint16++])) {
+        case EGL_MAP_PRESERVE_PIXELS_KHR:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLBoolean_sig, (attrib_list)[_iCEGLint16]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_LOCK_USAGE_HINT_KHR:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint40_sig, (attrib_list)[_iCEGLint16]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint16 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint16]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82887,17 +83610,34 @@ EGLImageKHR eglCreateImageKHR( EGLDisplay dpy, EGLContext ctx, EGLenum target, E
     trace::localWriter.writePointer((uintptr_t)buffer);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint19;
+    for (_cCEGLint19 = 0; attrib_list && attrib_list[_cCEGLint19] != EGL_NONE; _cCEGLint19 += 2) {
+    }
+    _cCEGLint19 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint19);
+    for (int _iCEGLint19 = 0; _iCEGLint19 < _cCEGLint19; _iCEGLint19++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint19]);
+        trace::localWriter.endElement();
+        if (_iCEGLint19 + 1 >= _cCEGLint19) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint19++])) {
+        case EGL_IMAGE_PRESERVED_KHR:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLBoolean_sig, (attrib_list)[_iCEGLint19]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint19 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint19]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -82943,17 +83683,29 @@ EGLSyncKHR eglCreateSyncKHR( EGLDisplay dpy, EGLenum type, const EGLint * attrib
     trace::localWriter.writeEnum(&_enumEGLenum_sig, type);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint110;
+    for (_cCEGLint110 = 0; attrib_list && attrib_list[_cCEGLint110] != EGL_NONE; _cCEGLint110 += 2) {
+    }
+    _cCEGLint110 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint110);
+    for (int _iCEGLint110 = 0; _iCEGLint110 < _cCEGLint110; _iCEGLint110++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint110]);
+        trace::localWriter.endElement();
+        if (_iCEGLint110 + 1 >= _cCEGLint110) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint110++])) {
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint110 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint110]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -83085,17 +83837,34 @@ EGLSyncNV eglCreateFenceSyncNV( EGLDisplay dpy, EGLenum condition, const EGLint 
     trace::localWriter.writeEnum(&_enumEGLenum_sig, condition);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint17;
+    for (_cCEGLint17 = 0; attrib_list && attrib_list[_cCEGLint17] != EGL_NONE; _cCEGLint17 += 2) {
+    }
+    _cCEGLint17 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint17);
+    for (int _iCEGLint17 = 0; _iCEGLint17 < _cCEGLint17; _iCEGLint17++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint17]);
+        trace::localWriter.endElement();
+        if (_iCEGLint17 + 1 >= _cCEGLint17) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint17++])) {
+        case EGL_SYNC_STATUS_NV:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint41_sig, (attrib_list)[_iCEGLint17]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint17 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint17]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -83267,17 +84036,39 @@ EGLImageKHR eglCreateDRMImageMESA( EGLDisplay dpy, const EGLint * attrib_list ) 
     trace::localWriter.writePointer((uintptr_t)dpy);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    if (attrib_list) {
-        size_t _cCEGLint1 = _AttribPairList_size(attrib_list, EGL_NONE) > 0 ? _AttribPairList_size(attrib_list, EGL_NONE) : 0;
-        trace::localWriter.beginArray(_cCEGLint1);
-        for (size_t _iCEGLint1 = 0; _iCEGLint1 < _cCEGLint1; ++_iCEGLint1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumEGLenum_sig, (attrib_list)[_iCEGLint1]);
-            trace::localWriter.endElement();
+    {
+    int _cCEGLint15;
+    for (_cCEGLint15 = 0; attrib_list && attrib_list[_cCEGLint15] != EGL_NONE; _cCEGLint15 += 2) {
+    }
+    _cCEGLint15 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCEGLint15);
+    for (int _iCEGLint15 = 0; _iCEGLint15 < _cCEGLint15; _iCEGLint15++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumEGLenum_sig, attrib_list[_iCEGLint15]);
+        trace::localWriter.endElement();
+        if (_iCEGLint15 + 1 >= _cCEGLint15) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCEGLint15++])) {
+        case EGL_DRM_BUFFER_FORMAT_MESA:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint38_sig, (attrib_list)[_iCEGLint15]);
+            trace::localWriter.endElement();
+            break;
+        case EGL_DRM_BUFFER_USE_MESA:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint39_sig, (attrib_list)[_iCEGLint15]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCEGLint15 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCEGLint15]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -83495,17 +84286,118 @@ XVisualInfo * glXChooseVisual( Display * dpy, int screen, int * attribList ) {
     trace::localWriter.writeSInt(screen);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attribList) {
-        size_t _cint2 = _AttribList_size(attribList) > 0 ? _AttribList_size(attribList) : 0;
-        trace::localWriter.beginArray(_cint2);
-        for (size_t _iint2 = 0; _iint2 < _cint2; ++_iint2) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attribList)[_iint2]);
-            trace::localWriter.endElement();
+    {
+    int _cint2;
+    for (_cint2 = 0; attribList && attribList[_cint2] != 0; _cint2 += 2) {
+        switch (int(attribList[_cint2])) {
+        case GLX_USE_GL:
+        case GLX_RGBA:
+        case GLX_DOUBLEBUFFER:
+        case GLX_STEREO:
+            _cint2--;
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+    }
+    _cint2 += attribList ? 1 : 0;
+    trace::localWriter.beginArray(_cint2);
+    for (int _iint2 = 0; _iint2 < _cint2; _iint2++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attribList[_iint2]);
+        trace::localWriter.endElement();
+        if (_iint2 + 1 >= _cint2) {
+            break;
+        }
+        switch (int(attribList[_iint2++])) {
+        case GLX_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DEPTH_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STENCIL_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BUFFER_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_LEVEL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_AUX_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLE_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLES:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_USE_GL:
+        case GLX_RGBA:
+        case GLX_DOUBLEBUFFER:
+        case GLX_STEREO:
+            _iint2--;
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribList[_iint2 - 1]));
+            trace::localWriter.writeSInt(attribList[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -84040,17 +84932,194 @@ GLXFBConfig * glXChooseFBConfig( Display * dpy, int screen, const int * attribLi
     trace::localWriter.writeSInt(screen);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attribList) {
-        size_t _cCint2 = _AttribPairList_size(attribList) > 0 ? _AttribPairList_size(attribList) : 0;
-        trace::localWriter.beginArray(_cCint2);
-        for (size_t _iCint2 = 0; _iCint2 < _cCint2; ++_iCint2) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attribList)[_iCint2]);
-            trace::localWriter.endElement();
+    {
+    int _cCint21;
+    for (_cCint21 = 0; attribList && attribList[_cCint21] != 0; _cCint21 += 2) {
+    }
+    _cCint21 += attribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint21);
+    for (int _iCint21 = 0; _iCint21 < _cCint21; _iCint21++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attribList[_iCint21]);
+        trace::localWriter.endElement();
+        if (_iCint21 + 1 >= _cCint21) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attribList[_iCint21++])) {
+        case GLX_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DEPTH_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STENCIL_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BUFFER_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_LEVEL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DOUBLEBUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STEREO:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_AUX_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLE_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLES:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_RENDER_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint8_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DRAWABLE_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint9_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_X_RENDERABLE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_X_VISUAL_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint10_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_CONFIG_CAVEAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint11_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint12_sig, (attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_INDEX_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_RED_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_GREEN_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_BLUE_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_ALPHA_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_FBCONFIG_ID:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_MAX_PBUFFER_WIDTH:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_MAX_PBUFFER_HEIGHT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_MAX_PBUFFER_PIXELS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_VISUAL_ID:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribList[_iCint21 - 1]));
+            trace::localWriter.writeSInt(attribList[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -84218,17 +85287,29 @@ GLXWindow glXCreateWindow( Display * dpy, GLXFBConfig config, Window win, const 
     trace::localWriter.writeUInt(win);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attribList) {
-        size_t _cCint21 = _AttribPairList_size(attribList) > 0 ? _AttribPairList_size(attribList) : 0;
-        trace::localWriter.beginArray(_cCint21);
-        for (size_t _iCint21 = 0; _iCint21 < _cCint21; ++_iCint21) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attribList)[_iCint21]);
-            trace::localWriter.endElement();
+    {
+    int _cCint2;
+    for (_cCint2 = 0; attribList && attribList[_cCint2] != 0; _cCint2 += 2) {
+    }
+    _cCint2 += attribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint2);
+    for (int _iCint2 = 0; _iCint2 < _cCint2; _iCint2++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attribList[_iCint2]);
+        trace::localWriter.endElement();
+        if (_iCint2 + 1 >= _cCint2) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attribList[_iCint2++])) {
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribList[_iCint2 - 1]));
+            trace::localWriter.writeSInt(attribList[_iCint2]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -84272,17 +85353,29 @@ GLXPixmap glXCreatePixmap( Display * dpy, GLXFBConfig config, Pixmap pixmap, con
     trace::localWriter.writeUInt(pixmap);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attribList) {
-        size_t _cCint22 = _AttribPairList_size(attribList) > 0 ? _AttribPairList_size(attribList) : 0;
-        trace::localWriter.beginArray(_cCint22);
-        for (size_t _iCint22 = 0; _iCint22 < _cCint22; ++_iCint22) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attribList)[_iCint22]);
-            trace::localWriter.endElement();
+    {
+    int _cCint2;
+    for (_cCint2 = 0; attribList && attribList[_cCint2] != 0; _cCint2 += 2) {
+    }
+    _cCint2 += attribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint2);
+    for (int _iCint2 = 0; _iCint2 < _cCint2; _iCint2++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attribList[_iCint2]);
+        trace::localWriter.endElement();
+        if (_iCint2 + 1 >= _cCint2) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attribList[_iCint2++])) {
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribList[_iCint2 - 1]));
+            trace::localWriter.writeSInt(attribList[_iCint2]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -84323,17 +85416,49 @@ GLXPbuffer glXCreatePbuffer( Display * dpy, GLXFBConfig config, const int * attr
     trace::localWriter.writePointer((uintptr_t)config);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attribList) {
-        size_t _cCint23 = _AttribPairList_size(attribList) > 0 ? _AttribPairList_size(attribList) : 0;
-        trace::localWriter.beginArray(_cCint23);
-        for (size_t _iCint23 = 0; _iCint23 < _cCint23; ++_iCint23) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attribList)[_iCint23]);
-            trace::localWriter.endElement();
+    {
+    int _cCint23;
+    for (_cCint23 = 0; attribList && attribList[_cCint23] != 0; _cCint23 += 2) {
+    }
+    _cCint23 += attribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint23);
+    for (int _iCint23 = 0; _iCint23 < _cCint23; _iCint23++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attribList[_iCint23]);
+        trace::localWriter.endElement();
+        if (_iCint23 + 1 >= _cCint23) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attribList[_iCint23++])) {
+        case GLX_PBUFFER_WIDTH:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint23]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_PBUFFER_HEIGHT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint23]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_LARGEST_PBUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attribList)[_iCint23]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_PRESERVED_CONTENTS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attribList)[_iCint23]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribList[_iCint23 - 1]));
+            trace::localWriter.writeSInt(attribList[_iCint23]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -84563,17 +85688,49 @@ GLXContext glXCreateContextAttribsARB( Display * dpy, GLXFBConfig config, GLXCon
     trace::localWriter.writeEnum(&_enumint1_sig, direct);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
-    if (attrib_list) {
-        size_t _cCint24 = _AttribPairList_size(attrib_list) > 0 ? _AttribPairList_size(attrib_list) : 0;
-        trace::localWriter.beginArray(_cCint24);
-        for (size_t _iCint24 = 0; _iCint24 < _cCint24; ++_iCint24) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attrib_list)[_iCint24]);
-            trace::localWriter.endElement();
+    {
+    int _cCint22;
+    for (_cCint22 = 0; attrib_list && attrib_list[_cCint22] != 0; _cCint22 += 2) {
+    }
+    _cCint22 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCint22);
+    for (int _iCint22 = 0; _iCint22 < _cCint22; _iCint22++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attrib_list[_iCint22]);
+        trace::localWriter.endElement();
+        if (_iCint22 + 1 >= _cCint22) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCint22++])) {
+        case GLX_CONTEXT_MAJOR_VERSION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint22]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_CONTEXT_MINOR_VERSION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint22]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_CONTEXT_FLAGS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint14_sig, (attrib_list)[_iCint22]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_CONTEXT_PROFILE_MASK_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint15_sig, (attrib_list)[_iCint22]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCint22 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCint22]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -84832,17 +85989,169 @@ GLXFBConfigSGIX * glXChooseFBConfigSGIX( Display * dpy, int screen, int * attrib
     trace::localWriter.writeSInt(screen);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attrib_list) {
-        size_t _cint2 = _AttribPairList_size(attrib_list) > 0 ? _AttribPairList_size(attrib_list) : 0;
-        trace::localWriter.beginArray(_cint2);
-        for (size_t _iint2 = 0; _iint2 < _cint2; ++_iint2) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attrib_list)[_iint2]);
-            trace::localWriter.endElement();
+    {
+    int _cint2;
+    for (_cint2 = 0; attrib_list && attrib_list[_cint2] != 0; _cint2 += 2) {
+    }
+    _cint2 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cint2);
+    for (int _iint2 = 0; _iint2 < _cint2; _iint2++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attrib_list[_iint2]);
+        trace::localWriter.endElement();
+        if (_iint2 + 1 >= _cint2) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iint2++])) {
+        case GLX_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DEPTH_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STENCIL_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BUFFER_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_LEVEL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DOUBLEBUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STEREO:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_AUX_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLE_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLES:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_RENDER_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint8_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DRAWABLE_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint9_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_X_RENDERABLE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_X_VISUAL_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint10_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_CONFIG_CAVEAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint11_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint12_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_INDEX_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_RED_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_GREEN_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_BLUE_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_ALPHA_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iint2 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -85018,17 +86327,44 @@ GLXPbufferSGIX glXCreateGLXPbufferSGIX( Display * dpy, GLXFBConfigSGIX config, u
     trace::localWriter.writeUInt(height);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
-    if (attrib_list) {
-        size_t _cint = _AttribPairList_size(attrib_list) > 0 ? _AttribPairList_size(attrib_list) : 0;
-        trace::localWriter.beginArray(_cint);
-        for (size_t _iint = 0; _iint < _cint; ++_iint) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeSInt((attrib_list)[_iint]);
-            trace::localWriter.endElement();
+    {
+    int _cint2;
+    for (_cint2 = 0; attrib_list && attrib_list[_cint2] != 0; _cint2 += 2) {
+    }
+    _cint2 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cint2);
+    for (int _iint2 = 0; _iint2 < _cint2; _iint2++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attrib_list[_iint2]);
+        trace::localWriter.endElement();
+        if (_iint2 + 1 >= _cint2) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iint2++])) {
+        case GLX_PRESERVED_CONTENTS_SGIX:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_LARGEST_PBUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DIGITAL_MEDIA_PBUFFER_SGIX:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iint2 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iint2]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -85718,17 +87054,194 @@ void glXBindTexImageEXT( Display * display, GLXDrawable drawable, int buffer, co
     trace::localWriter.writeEnum(&_enumint2_sig, buffer);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attrib_list) {
-        size_t _cCint25 = _AttribPairList_size(attrib_list) > 0 ? _AttribPairList_size(attrib_list) : 0;
-        trace::localWriter.beginArray(_cCint25);
-        for (size_t _iCint25 = 0; _iCint25 < _cCint25; ++_iCint25) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint2_sig, (attrib_list)[_iCint25]);
-            trace::localWriter.endElement();
+    {
+    int _cCint21;
+    for (_cCint21 = 0; attrib_list && attrib_list[_cCint21] != 0; _cCint21 += 2) {
+    }
+    _cCint21 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCint21);
+    for (int _iCint21 = 0; _iCint21 < _cCint21; _iCint21++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attrib_list[_iCint21]);
+        trace::localWriter.endElement();
+        if (_iCint21 + 1 >= _cCint21) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCint21++])) {
+        case GLX_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DEPTH_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STENCIL_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_RED_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_GREEN_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_BLUE_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_ACCUM_ALPHA_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_BUFFER_SIZE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_LEVEL:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DOUBLEBUFFER:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_STEREO:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_AUX_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLE_BUFFERS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_SAMPLES:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeUInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_RENDER_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint8_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_DRAWABLE_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint9_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_X_RENDERABLE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_X_VISUAL_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint10_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_CONFIG_CAVEAT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint11_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_TYPE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint12_sig, (attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_INDEX_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_RED_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_GREEN_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_BLUE_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_TRANSPARENT_ALPHA_VALUE:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_FBCONFIG_ID:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_MAX_PBUFFER_WIDTH:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_MAX_PBUFFER_HEIGHT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_MAX_PBUFFER_PIXELS:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        case GLX_VISUAL_ID:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attrib_list)[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCint21 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCint21]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -85814,17 +87327,29 @@ int glXBindVideoDeviceNV( Display * dpy, unsigned int video_slot, unsigned int v
     trace::localWriter.writeUInt(video_device);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    if (attrib_list) {
-        size_t _cCint = _AttribPairList_size(attrib_list) > 0 ? _AttribPairList_size(attrib_list) : 0;
-        trace::localWriter.beginArray(_cCint);
-        for (size_t _iCint = 0; _iCint < _cCint; ++_iCint) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeSInt((attrib_list)[_iCint]);
-            trace::localWriter.endElement();
+    {
+    int _cCint2;
+    for (_cCint2 = 0; attrib_list && attrib_list[_cCint2] != 0; _cCint2 += 2) {
+    }
+    _cCint2 += attrib_list ? 1 : 0;
+    trace::localWriter.beginArray(_cCint2);
+    for (int _iCint2 = 0; _iCint2 < _cCint2; _iCint2++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint2_sig, attrib_list[_iCint2]);
+        trace::localWriter.endElement();
+        if (_iCint2 + 1 >= _cCint2) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attrib_list[_iCint2++])) {
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attrib_list[_iCint2 - 1]));
+            trace::localWriter.writeSInt(attrib_list[_iCint2]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -87395,11 +88920,11 @@ BOOL wglGetPixelFormatAttribivARB( HDC hdc, int iPixelFormat, int iLayerPlane, U
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     if (piAttributes) {
-        size_t _cint20 = nAttributes > 0 ? nAttributes : 0;
-        trace::localWriter.beginArray(_cint20);
-        for (size_t _iint20 = 0; _iint20 < _cint20; ++_iint20) {
+        size_t _cint42 = nAttributes > 0 ? nAttributes : 0;
+        trace::localWriter.beginArray(_cint42);
+        for (size_t _iint42 = 0; _iint42 < _cint42; ++_iint42) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttributes)[_iint20]);
+    trace::localWriter.writeEnum(&_enumint42_sig, (piAttributes)[_iint42]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -87450,11 +88975,11 @@ BOOL wglGetPixelFormatAttribfvARB( HDC hdc, int iPixelFormat, int iLayerPlane, U
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     if (piAttributes) {
-        size_t _cint20 = nAttributes > 0 ? nAttributes : 0;
-        trace::localWriter.beginArray(_cint20);
-        for (size_t _iint20 = 0; _iint20 < _cint20; ++_iint20) {
+        size_t _cint42 = nAttributes > 0 ? nAttributes : 0;
+        trace::localWriter.beginArray(_cint42);
+        for (size_t _iint42 = 0; _iint42 < _cint42; ++_iint42) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttributes)[_iint20]);
+    trace::localWriter.writeEnum(&_enumint42_sig, (piAttributes)[_iint42]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -87495,31 +89020,435 @@ BOOL wglChoosePixelFormatARB( HDC hdc, const int * piAttribIList, const FLOAT * 
     trace::localWriter.writePointer((uintptr_t)hdc);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    if (piAttribIList) {
-        size_t _cCint20 = _AttribPairList_size(piAttribIList) > 0 ? _AttribPairList_size(piAttribIList) : 0;
-        trace::localWriter.beginArray(_cCint20);
-        for (size_t _iCint20 = 0; _iCint20 < _cCint20; ++_iCint20) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttribIList)[_iCint20]);
-            trace::localWriter.endElement();
+    {
+    int _cCint421;
+    for (_cCint421 = 0; piAttribIList && piAttribIList[_cCint421] != 0; _cCint421 += 2) {
+    }
+    _cCint421 += piAttribIList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint421);
+    for (int _iCint421 = 0; _iCint421 < _cCint421; _iCint421++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint42_sig, piAttribIList[_iCint421]);
+        trace::localWriter.endElement();
+        if (_iCint421 + 1 >= _cCint421) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(piAttribIList[_iCint421++])) {
+        case WGL_DRAW_TO_WINDOW_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DRAW_TO_BITMAP_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCELERATION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint45_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_SYSTEM_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_LAYER_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_METHOD_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint46_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_OVERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_UNDERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_VALUE_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_DEPTH_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_STENCIL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_ACCUM_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_GDI_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_OPENGL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DOUBLE_BUFFER_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STEREO_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_PIXEL_TYPE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint47_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_COLOR_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DEPTH_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STENCIL_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_AUX_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLE_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLES_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(piAttribIList[_iCint421 - 1]));
+            trace::localWriter.writeSInt(piAttribIList[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (pfAttribFList) {
-        size_t _cCFLOAT = _AttribPairList_size(pfAttribFList) > 0 ? _AttribPairList_size(pfAttribFList) : 0;
-        trace::localWriter.beginArray(_cCFLOAT);
-        for (size_t _iCFLOAT = 0; _iCFLOAT < _cCFLOAT; ++_iCFLOAT) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeFloat((pfAttribFList)[_iCFLOAT]);
-            trace::localWriter.endElement();
+    {
+    int _cCFLOAT;
+    for (_cCFLOAT = 0; pfAttribFList && pfAttribFList[_cCFLOAT] != 0; _cCFLOAT += 2) {
+    }
+    _cCFLOAT += pfAttribFList ? 1 : 0;
+    trace::localWriter.beginArray(_cCFLOAT);
+    for (int _iCFLOAT = 0; _iCFLOAT < _cCFLOAT; _iCFLOAT++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeFloat(pfAttribFList[_iCFLOAT]);
+        trace::localWriter.endElement();
+        if (_iCFLOAT + 1 >= _cCFLOAT) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(pfAttribFList[_iCFLOAT++])) {
+        case WGL_DRAW_TO_WINDOW_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DRAW_TO_BITMAP_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCELERATION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint45_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_SYSTEM_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_LAYER_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_METHOD_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint46_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_OVERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_UNDERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_VALUE_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_DEPTH_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_STENCIL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_ACCUM_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_GDI_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_OPENGL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DOUBLE_BUFFER_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STEREO_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_PIXEL_TYPE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint47_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_COLOR_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DEPTH_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STENCIL_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_AUX_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLE_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLES_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(pfAttribFList[_iCFLOAT - 1]));
+            trace::localWriter.writeSInt(pfAttribFList[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
@@ -87617,17 +89546,34 @@ HPBUFFERARB wglCreatePbufferARB( HDC hDC, int iPixelFormat, int iWidth, int iHei
     trace::localWriter.writeSInt(iHeight);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
-    if (piAttribList) {
-        size_t _cCint201 = _AttribPairList_size(piAttribList) > 0 ? _AttribPairList_size(piAttribList) : 0;
-        trace::localWriter.beginArray(_cCint201);
-        for (size_t _iCint201 = 0; _iCint201 < _cCint201; ++_iCint201) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttribList)[_iCint201]);
-            trace::localWriter.endElement();
+    {
+    int _cCint422;
+    for (_cCint422 = 0; piAttribList && piAttribList[_cCint422] != 0; _cCint422 += 2) {
+    }
+    _cCint422 += piAttribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint422);
+    for (int _iCint422 = 0; _iCint422 < _cCint422; _iCint422++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint42_sig, piAttribList[_iCint422]);
+        trace::localWriter.endElement();
+        if (_iCint422 + 1 >= _cCint422) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(piAttribList[_iCint422++])) {
+        case WGL_PBUFFER_LARGEST_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribList)[_iCint422]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(piAttribList[_iCint422 - 1]));
+            trace::localWriter.writeSInt(piAttribList[_iCint422]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -87706,7 +89652,7 @@ BOOL wglQueryPbufferARB( HPBUFFERARB hPbuffer, int iAttribute, int * piValue ) {
     trace::localWriter.writePointer((uintptr_t)hPbuffer);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    trace::localWriter.writeEnum(&_enumint20_sig, iAttribute);
+    trace::localWriter.writeEnum(&_enumint42_sig, iAttribute);
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
     _result = _wglQueryPbufferARB(hPbuffer, iAttribute, piValue);
@@ -87780,17 +89726,39 @@ BOOL wglSetPbufferAttribARB( HPBUFFERARB hPbuffer, const int * piAttribList ) {
     trace::localWriter.writePointer((uintptr_t)hPbuffer);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    if (piAttribList) {
-        size_t _cCint202 = _AttribPairList_size(piAttribList) > 0 ? _AttribPairList_size(piAttribList) : 0;
-        trace::localWriter.beginArray(_cCint202);
-        for (size_t _iCint202 = 0; _iCint202 < _cCint202; ++_iCint202) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttribList)[_iCint202]);
-            trace::localWriter.endElement();
+    {
+    int _cCint423;
+    for (_cCint423 = 0; piAttribList && piAttribList[_cCint423] != 0; _cCint423 += 2) {
+    }
+    _cCint423 += piAttribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint423);
+    for (int _iCint423 = 0; _iCint423 < _cCint423; _iCint423++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint42_sig, piAttribList[_iCint423]);
+        trace::localWriter.endElement();
+        if (_iCint423 + 1 >= _cCint423) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(piAttribList[_iCint423++])) {
+        case WGL_MIPMAP_LEVEL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribList)[_iCint423]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_CUBE_MAP_FACE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint48_sig, (piAttribList)[_iCint423]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(piAttribList[_iCint423 - 1]));
+            trace::localWriter.writeSInt(piAttribList[_iCint423]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -87815,17 +89783,54 @@ HGLRC wglCreateContextAttribsARB( HDC hDC, HGLRC hShareContext, const int * attr
     trace::localWriter.writePointer((uintptr_t)hShareContext);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (attribList) {
-        size_t _cCint203 = _AttribPairList_size(attribList) > 0 ? _AttribPairList_size(attribList) : 0;
-        trace::localWriter.beginArray(_cCint203);
-        for (size_t _iCint203 = 0; _iCint203 < _cCint203; ++_iCint203) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (attribList)[_iCint203]);
-            trace::localWriter.endElement();
+    {
+    int _cCint42;
+    for (_cCint42 = 0; attribList && attribList[_cCint42] != 0; _cCint42 += 2) {
+    }
+    _cCint42 += attribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint42);
+    for (int _iCint42 = 0; _iCint42 < _cCint42; _iCint42++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint42_sig, attribList[_iCint42]);
+        trace::localWriter.endElement();
+        if (_iCint42 + 1 >= _cCint42) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(attribList[_iCint42++])) {
+        case WGL_CONTEXT_MAJOR_VERSION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint42]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_CONTEXT_MINOR_VERSION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint42]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_CONTEXT_LAYER_PLANE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((attribList)[_iCint42]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_CONTEXT_FLAGS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint43_sig, (attribList)[_iCint42]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_CONTEXT_PROFILE_MASK_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeBitmask(&_bitmaskint44_sig, (attribList)[_iCint42]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(attribList[_iCint42 - 1]));
+            trace::localWriter.writeSInt(attribList[_iCint42]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -87991,17 +89996,34 @@ HPBUFFEREXT wglCreatePbufferEXT( HDC hDC, int iPixelFormat, int iWidth, int iHei
     trace::localWriter.writeSInt(iHeight);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
-    if (piAttribList) {
-        size_t _cCint204 = _AttribPairList_size(piAttribList) > 0 ? _AttribPairList_size(piAttribList) : 0;
-        trace::localWriter.beginArray(_cCint204);
-        for (size_t _iCint204 = 0; _iCint204 < _cCint204; ++_iCint204) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttribList)[_iCint204]);
-            trace::localWriter.endElement();
+    {
+    int _cCint422;
+    for (_cCint422 = 0; piAttribList && piAttribList[_cCint422] != 0; _cCint422 += 2) {
+    }
+    _cCint422 += piAttribList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint422);
+    for (int _iCint422 = 0; _iCint422 < _cCint422; _iCint422++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint42_sig, piAttribList[_iCint422]);
+        trace::localWriter.endElement();
+        if (_iCint422 + 1 >= _cCint422) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(piAttribList[_iCint422++])) {
+        case WGL_PBUFFER_LARGEST_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribList)[_iCint422]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(piAttribList[_iCint422 - 1]));
+            trace::localWriter.writeSInt(piAttribList[_iCint422]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
@@ -88080,7 +90102,7 @@ BOOL wglQueryPbufferEXT( HPBUFFEREXT hPbuffer, int iAttribute, int * piValue ) {
     trace::localWriter.writePointer((uintptr_t)hPbuffer);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    trace::localWriter.writeEnum(&_enumint20_sig, iAttribute);
+    trace::localWriter.writeEnum(&_enumint42_sig, iAttribute);
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
     _result = _wglQueryPbufferEXT(hPbuffer, iAttribute, piValue);
@@ -88122,11 +90144,11 @@ BOOL wglGetPixelFormatAttribivEXT( HDC hdc, int iPixelFormat, int iLayerPlane, U
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     if (piAttributes) {
-        size_t _cint20 = nAttributes > 0 ? nAttributes : 0;
-        trace::localWriter.beginArray(_cint20);
-        for (size_t _iint20 = 0; _iint20 < _cint20; ++_iint20) {
+        size_t _cint42 = nAttributes > 0 ? nAttributes : 0;
+        trace::localWriter.beginArray(_cint42);
+        for (size_t _iint42 = 0; _iint42 < _cint42; ++_iint42) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttributes)[_iint20]);
+    trace::localWriter.writeEnum(&_enumint42_sig, (piAttributes)[_iint42]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -88177,11 +90199,11 @@ BOOL wglGetPixelFormatAttribfvEXT( HDC hdc, int iPixelFormat, int iLayerPlane, U
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     if (piAttributes) {
-        size_t _cint20 = nAttributes > 0 ? nAttributes : 0;
-        trace::localWriter.beginArray(_cint20);
-        for (size_t _iint20 = 0; _iint20 < _cint20; ++_iint20) {
+        size_t _cint42 = nAttributes > 0 ? nAttributes : 0;
+        trace::localWriter.beginArray(_cint42);
+        for (size_t _iint42 = 0; _iint42 < _cint42; ++_iint42) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttributes)[_iint20]);
+    trace::localWriter.writeEnum(&_enumint42_sig, (piAttributes)[_iint42]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -88222,31 +90244,435 @@ BOOL wglChoosePixelFormatEXT( HDC hdc, const int * piAttribIList, const FLOAT * 
     trace::localWriter.writePointer((uintptr_t)hdc);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
-    if (piAttribIList) {
-        size_t _cCint205 = _AttribPairList_size(piAttribIList) > 0 ? _AttribPairList_size(piAttribIList) : 0;
-        trace::localWriter.beginArray(_cCint205);
-        for (size_t _iCint205 = 0; _iCint205 < _cCint205; ++_iCint205) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint20_sig, (piAttribIList)[_iCint205]);
-            trace::localWriter.endElement();
+    {
+    int _cCint421;
+    for (_cCint421 = 0; piAttribIList && piAttribIList[_cCint421] != 0; _cCint421 += 2) {
+    }
+    _cCint421 += piAttribIList ? 1 : 0;
+    trace::localWriter.beginArray(_cCint421);
+    for (int _iCint421 = 0; _iCint421 < _cCint421; _iCint421++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint42_sig, piAttribIList[_iCint421]);
+        trace::localWriter.endElement();
+        if (_iCint421 + 1 >= _cCint421) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(piAttribIList[_iCint421++])) {
+        case WGL_DRAW_TO_WINDOW_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DRAW_TO_BITMAP_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCELERATION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint45_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_SYSTEM_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_LAYER_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_METHOD_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint46_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_OVERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_UNDERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_VALUE_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_DEPTH_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_STENCIL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_ACCUM_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_GDI_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_OPENGL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DOUBLE_BUFFER_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STEREO_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_PIXEL_TYPE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint47_sig, (piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_COLOR_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DEPTH_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STENCIL_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_AUX_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLE_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLES_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((piAttribIList)[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(piAttribIList[_iCint421 - 1]));
+            trace::localWriter.writeSInt(piAttribIList[_iCint421]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    if (pfAttribFList) {
-        size_t _cCFLOAT1 = _AttribPairList_size(pfAttribFList) > 0 ? _AttribPairList_size(pfAttribFList) : 0;
-        trace::localWriter.beginArray(_cCFLOAT1);
-        for (size_t _iCFLOAT1 = 0; _iCFLOAT1 < _cCFLOAT1; ++_iCFLOAT1) {
-            trace::localWriter.beginElement();
-    trace::localWriter.writeFloat((pfAttribFList)[_iCFLOAT1]);
-            trace::localWriter.endElement();
+    {
+    int _cCFLOAT;
+    for (_cCFLOAT = 0; pfAttribFList && pfAttribFList[_cCFLOAT] != 0; _cCFLOAT += 2) {
+    }
+    _cCFLOAT += pfAttribFList ? 1 : 0;
+    trace::localWriter.beginArray(_cCFLOAT);
+    for (int _iCFLOAT = 0; _iCFLOAT < _cCFLOAT; _iCFLOAT++) {
+        trace::localWriter.beginElement();
+    trace::localWriter.writeFloat(pfAttribFList[_iCFLOAT]);
+        trace::localWriter.endElement();
+        if (_iCFLOAT + 1 >= _cCFLOAT) {
+            break;
         }
-        trace::localWriter.endArray();
-    } else {
-        trace::localWriter.writeNull();
+        switch (int(pfAttribFList[_iCFLOAT++])) {
+        case WGL_DRAW_TO_WINDOW_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DRAW_TO_BITMAP_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCELERATION_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint45_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NEED_SYSTEM_PALETTE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_LAYER_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SWAP_METHOD_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint46_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_OVERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_NUMBER_UNDERLAYS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_TRANSPARENT_VALUE_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_DEPTH_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_STENCIL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SHARE_ACCUM_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_GDI_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SUPPORT_OPENGL_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DOUBLE_BUFFER_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STEREO_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumBOOL_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_PIXEL_TYPE_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeEnum(&_enumint47_sig, (pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_COLOR_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_RED_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_GREEN_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_BLUE_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ALPHA_SHIFT_EXT:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_RED_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_GREEN_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_BLUE_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_ACCUM_ALPHA_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_DEPTH_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_STENCIL_BITS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_AUX_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLE_BUFFERS_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        case WGL_SAMPLES_ARB:
+            trace::localWriter.beginElement();
+    trace::localWriter.writeSInt((pfAttribFList)[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        default:
+            trace::localWriter.beginElement();
+            os::log("apitrace: warning: %s: unknown key 0x%04X, interpreting value as int\n", __FUNCTION__, int(pfAttribFList[_iCFLOAT - 1]));
+            trace::localWriter.writeSInt(pfAttribFList[_iCFLOAT]);
+            trace::localWriter.endElement();
+            break;
+        }
+    }
+    trace::localWriter.endArray();
     }
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);

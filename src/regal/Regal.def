@@ -53,6 +53,8 @@ EXPORTS
   glBindBufferRange
   glBindBufferRangeEXT
   glBindBufferRangeNV
+  glBindBuffersBase
+  glBindBuffersRange
   glBindFragDataLocation
   glBindFragDataLocationEXT
   glBindFragDataLocationIndexed
@@ -62,6 +64,7 @@ EXPORTS
   glBindFramebufferOES
   glBindImageTexture
   glBindImageTextureEXT
+  glBindImageTextures
   glBindLightParameterEXT
   glBindMaterialParameterEXT
   glBindMultiTextureEXT
@@ -73,16 +76,19 @@ EXPORTS
   glBindRenderbufferEXT
   glBindRenderbufferOES
   glBindSampler
+  glBindSamplers
   glBindTexGenParameterEXT
   glBindTexture
   glBindTextureEXT
   glBindTextureUnitParameterEXT
+  glBindTextures
   glBindTransformFeedback
   glBindTransformFeedbackNV
   glBindVertexArray
   glBindVertexArrayAPPLE
   glBindVertexArrayOES
   glBindVertexBuffer
+  glBindVertexBuffers
   glBindVertexShaderEXT
   glBindVideoCaptureStreamBufferNV
   glBindVideoCaptureStreamTextureNV

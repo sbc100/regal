@@ -53,6 +53,8 @@ EXPORTS
   rglBindBufferRange
   rglBindBufferRangeEXT
   rglBindBufferRangeNV
+  rglBindBuffersBase
+  rglBindBuffersRange
   rglBindFragDataLocation
   rglBindFragDataLocationEXT
   rglBindFragDataLocationIndexed
@@ -62,6 +64,7 @@ EXPORTS
   rglBindFramebufferOES
   rglBindImageTexture
   rglBindImageTextureEXT
+  rglBindImageTextures
   rglBindLightParameterEXT
   rglBindMaterialParameterEXT
   rglBindMultiTextureEXT
@@ -73,16 +76,19 @@ EXPORTS
   rglBindRenderbufferEXT
   rglBindRenderbufferOES
   rglBindSampler
+  rglBindSamplers
   rglBindTexGenParameterEXT
   rglBindTexture
   rglBindTextureEXT
   rglBindTextureUnitParameterEXT
+  rglBindTextures
   rglBindTransformFeedback
   rglBindTransformFeedbackNV
   rglBindVertexArray
   rglBindVertexArrayAPPLE
   rglBindVertexArrayOES
   rglBindVertexBuffer
+  rglBindVertexBuffers
   rglBindVertexShaderEXT
   rglBindVideoCaptureStreamBufferNV
   rglBindVideoCaptureStreamTextureNV

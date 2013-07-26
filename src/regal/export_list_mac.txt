@@ -104,6 +104,8 @@ _glBindBufferOffsetNV
 _glBindBufferRange
 _glBindBufferRangeEXT
 _glBindBufferRangeNV
+_glBindBuffersBase
+_glBindBuffersRange
 _glBindFragDataLocation
 _glBindFragDataLocationEXT
 _glBindFragDataLocationIndexed
@@ -113,6 +115,7 @@ _glBindFramebufferEXT
 _glBindFramebufferOES
 _glBindImageTexture
 _glBindImageTextureEXT
+_glBindImageTextures
 _glBindLightParameterEXT
 _glBindMaterialParameterEXT
 _glBindMultiTextureEXT
@@ -124,16 +127,19 @@ _glBindRenderbuffer
 _glBindRenderbufferEXT
 _glBindRenderbufferOES
 _glBindSampler
+_glBindSamplers
 _glBindTexGenParameterEXT
 _glBindTexture
 _glBindTextureEXT
 _glBindTextureUnitParameterEXT
+_glBindTextures
 _glBindTransformFeedback
 _glBindTransformFeedbackNV
 _glBindVertexArray
 _glBindVertexArrayAPPLE
 _glBindVertexArrayOES
 _glBindVertexBuffer
+_glBindVertexBuffers
 _glBindVertexShaderEXT
 _glBindVideoCaptureStreamBufferNV
 _glBindVideoCaptureStreamTextureNV

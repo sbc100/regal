@@ -5953,6 +5953,70 @@ REGAL_DECL void REGAL_CALL plugin_glMatrixIndexusvARB(GLint size, const GLushort
 #endif
 
 /**
+ ** GL_ARB_multi_bind
+ **/
+
+#if (defined(GL_ARB_MULTI_BIND) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_ARB_MULTI_BIND)) && !defined(REGAL_NO_ENUM_GL_ARB_MULTI_BIND)
+#define REGAL_NO_ENUM_GL_ARB_MULTI_BIND
+#endif
+
+#if (defined(GL_ARB_MULTI_BIND) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_ARB_MULTI_BIND)) && !defined(REGAL_NO_TYPEDEF_GL_ARB_MULTI_BIND)
+#define REGAL_NO_TYPEDEF_GL_ARB_MULTI_BIND
+#endif
+
+#if (defined(GL_ARB_MULTI_BIND) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_ARB_MULTI_BIND)) && !defined(REGAL_NO_NAMESPACE_GL_ARB_MULTI_BIND)
+#define REGAL_NO_NAMESPACE_GL_ARB_MULTI_BIND
+#endif
+
+#if (defined(GL_ARB_MULTI_BIND) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_ARB_MULTI_BIND)) && !defined(REGAL_NO_PLUGIN_GL_ARB_MULTI_BIND)
+#define REGAL_NO_PLUGIN_GL_ARB_MULTI_BIND
+#endif
+
+#if (defined(GL_ARB_MULTI_BIND) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_ARB_MULTI_BIND)) && !defined(REGAL_NO_DECLARATION_GL_ARB_MULTI_BIND)
+#define REGAL_NO_DECLARATION_GL_ARB_MULTI_BIND
+#endif
+
+#ifndef GL_ARB_multi_bind
+#define GL_ARB_multi_bind 1
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_ARB_MULTI_BIND
+typedef void (REGAL_CALL *PFNGLBINDBUFFERSBASEPROC)(GLenum target, GLuint first, GLsizei count, const GLuint *buffers);
+typedef void (REGAL_CALL *PFNGLBINDBUFFERSRANGEPROC)(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes);
+typedef void (REGAL_CALL *PFNGLBINDIMAGETEXTURESPROC)(GLuint first, GLsizei count, const GLuint *textures);
+typedef void (REGAL_CALL *PFNGLBINDSAMPLERSPROC)(GLuint first, GLsizei count, const GLuint *samplers);
+typedef void (REGAL_CALL *PFNGLBINDTEXTURESPROC)(GLuint first, GLsizei count, const GLuint *textures);
+typedef void (REGAL_CALL *PFNGLBINDVERTEXBUFFERSPROC)(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_ARB_MULTI_BIND
+#define glBindBuffersBase                   rglBindBuffersBase
+#define glBindBuffersRange                  rglBindBuffersRange
+#define glBindImageTextures                 rglBindImageTextures
+#define glBindSamplers                      rglBindSamplers
+#define glBindTextures                      rglBindTextures
+#define glBindVertexBuffers                 rglBindVertexBuffers
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_ARB_MULTI_BIND
+REGAL_DECL void REGAL_CALL glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers);
+REGAL_DECL void REGAL_CALL glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes);
+REGAL_DECL void REGAL_CALL glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures);
+REGAL_DECL void REGAL_CALL glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers);
+REGAL_DECL void REGAL_CALL glBindTextures(GLuint first, GLsizei count, const GLuint *textures);
+REGAL_DECL void REGAL_CALL glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_ARB_MULTI_BIND
+REGAL_DECL void REGAL_CALL plugin_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers);
+REGAL_DECL void REGAL_CALL plugin_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes);
+REGAL_DECL void REGAL_CALL plugin_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures);
+REGAL_DECL void REGAL_CALL plugin_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers);
+REGAL_DECL void REGAL_CALL plugin_glBindTextures(GLuint first, GLsizei count, const GLuint *textures);
+REGAL_DECL void REGAL_CALL plugin_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides);
+#endif
+
+/**
  ** GL_ARB_multi_draw_indirect
  **/
 

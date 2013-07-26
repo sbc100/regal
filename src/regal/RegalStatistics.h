@@ -187,6 +187,7 @@ struct Statistics
   GLuint gl_arb_map_buffer_alignment;
   GLuint gl_arb_map_buffer_range;
   GLuint gl_arb_matrix_palette;
+  GLuint gl_arb_multi_bind;
   GLuint gl_arb_multi_draw_indirect;
   GLuint gl_arb_multisample;
   GLuint gl_arb_multitexture;
@@ -1831,6 +1832,15 @@ struct Statistics
   GLuint glMatrixIndexubvARB;
   GLuint glMatrixIndexuivARB;
   GLuint glMatrixIndexusvARB;
+
+  /* GL_ARB_multi_bind */
+
+  GLuint glBindBuffersBase;
+  GLuint glBindBuffersRange;
+  GLuint glBindImageTextures;
+  GLuint glBindSamplers;
+  GLuint glBindTextures;
+  GLuint glBindVertexBuffers;
 
   /* GL_ARB_multi_draw_indirect */
 

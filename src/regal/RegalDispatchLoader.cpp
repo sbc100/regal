@@ -16414,6 +16414,122 @@ static void REGAL_CALL loader_glMatrixIndexusvARB(GLint size, const GLushort *in
   _next->call(&_next->glMatrixIndexusvARB)(size, indices);
 }
 
+// GL_ARB_multi_bind
+
+static void REGAL_CALL loader_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBindBuffersBase, "glBindBuffersBase");
+  RegalAssert(_driver.glBindBuffersBase!=glBindBuffersBase);
+  if (_driver.glBindBuffersBase==glBindBuffersBase)
+    _driver.glBindBuffersBase = NULL;
+  if (_driver.glBindBuffersBase)
+  {
+    _driver.glBindBuffersBase(target, first, count, buffers);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+}
+
+static void REGAL_CALL loader_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBindBuffersRange, "glBindBuffersRange");
+  RegalAssert(_driver.glBindBuffersRange!=glBindBuffersRange);
+  if (_driver.glBindBuffersRange==glBindBuffersRange)
+    _driver.glBindBuffersRange = NULL;
+  if (_driver.glBindBuffersRange)
+  {
+    _driver.glBindBuffersRange(target, first, count, buffers, offsets, sizes);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+}
+
+static void REGAL_CALL loader_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBindImageTextures, "glBindImageTextures");
+  RegalAssert(_driver.glBindImageTextures!=glBindImageTextures);
+  if (_driver.glBindImageTextures==glBindImageTextures)
+    _driver.glBindImageTextures = NULL;
+  if (_driver.glBindImageTextures)
+  {
+    _driver.glBindImageTextures(first, count, textures);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindImageTextures)(first, count, textures);
+}
+
+static void REGAL_CALL loader_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBindSamplers, "glBindSamplers");
+  RegalAssert(_driver.glBindSamplers!=glBindSamplers);
+  if (_driver.glBindSamplers==glBindSamplers)
+    _driver.glBindSamplers = NULL;
+  if (_driver.glBindSamplers)
+  {
+    _driver.glBindSamplers(first, count, samplers);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindSamplers)(first, count, samplers);
+}
+
+static void REGAL_CALL loader_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBindTextures, "glBindTextures");
+  RegalAssert(_driver.glBindTextures!=glBindTextures);
+  if (_driver.glBindTextures==glBindTextures)
+    _driver.glBindTextures = NULL;
+  if (_driver.glBindTextures)
+  {
+    _driver.glBindTextures(first, count, textures);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindTextures)(first, count, textures);
+}
+
+static void REGAL_CALL loader_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+{
+  RegalContext * _context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_driver = _context->dispatcher.driver;
+  GetProcAddress(_driver.glBindVertexBuffers, "glBindVertexBuffers");
+  RegalAssert(_driver.glBindVertexBuffers!=glBindVertexBuffers);
+  if (_driver.glBindVertexBuffers==glBindVertexBuffers)
+    _driver.glBindVertexBuffers = NULL;
+  if (_driver.glBindVertexBuffers)
+  {
+    _driver.glBindVertexBuffers(first, count, buffers, offsets, strides);
+    return;
+  }
+  DispatchTableGL *_next = _driver.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+}
+
 // GL_ARB_multi_draw_indirect
 
 static void REGAL_CALL loader_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -57563,6 +57679,15 @@ void InitDispatchTableLoader(DispatchTableGL &tbl)
   tbl.glMatrixIndexubvARB = loader_glMatrixIndexubvARB;
   tbl.glMatrixIndexuivARB = loader_glMatrixIndexuivARB;
   tbl.glMatrixIndexusvARB = loader_glMatrixIndexusvARB;
+
+  // GL_ARB_multi_bind
+
+  tbl.glBindBuffersBase = loader_glBindBuffersBase;
+  tbl.glBindBuffersRange = loader_glBindBuffersRange;
+  tbl.glBindImageTextures = loader_glBindImageTextures;
+  tbl.glBindSamplers = loader_glBindSamplers;
+  tbl.glBindTextures = loader_glBindTextures;
+  tbl.glBindVertexBuffers = loader_glBindVertexBuffers;
 
   // GL_ARB_multi_draw_indirect
 

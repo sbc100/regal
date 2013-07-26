@@ -82,8 +82,6 @@ Statistics::reset()
 void
 Statistics::log() const
 {
-// this large function exposes a bug in emscripten that causes a huge compilation time
-#if REGAL_SYS_EMSCRIPTEN == 0
   log("GL_VERSION_1_0",gl_version_1_0);
   log("GL_VERSION_1_1",gl_version_1_1);
   log("GL_VERSION_1_2",gl_version_1_2);
@@ -207,6 +205,7 @@ Statistics::log() const
   log("GL_ARB_MAP_BUFFER_ALIGNMENT",gl_arb_map_buffer_alignment);
   log("GL_ARB_MAP_BUFFER_RANGE",gl_arb_map_buffer_range);
   log("GL_ARB_MATRIX_PALETTE",gl_arb_matrix_palette);
+  log("GL_ARB_MULTI_BIND",gl_arb_multi_bind);
   log("GL_ARB_MULTI_DRAW_INDIRECT",gl_arb_multi_draw_indirect);
   log("GL_ARB_MULTISAMPLE",gl_arb_multisample);
   log("GL_ARB_MULTITEXTURE",gl_arb_multitexture);
@@ -1848,6 +1847,15 @@ Statistics::log() const
   log("glMatrixIndexubvARB",glMatrixIndexubvARB);
   log("glMatrixIndexuivARB",glMatrixIndexuivARB);
   log("glMatrixIndexusvARB",glMatrixIndexusvARB);
+
+/* GL_ARB_multi_bind */
+
+  log("glBindBuffersBase",glBindBuffersBase);
+  log("glBindBuffersRange",glBindBuffersRange);
+  log("glBindImageTextures",glBindImageTextures);
+  log("glBindSamplers",glBindSamplers);
+  log("glBindTextures",glBindTextures);
+  log("glBindVertexBuffers",glBindVertexBuffers);
 
 /* GL_ARB_multi_draw_indirect */
 
@@ -5044,7 +5052,6 @@ Statistics::log() const
   log("glDisable(GL_TEXTURE_2D)",disable_GL_TEXTURE_2D);
   log("glDisable(GL_TEXTURE_CUBE_MAP_SEAMLESS)",disable_GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-#endif
 }
 
 void

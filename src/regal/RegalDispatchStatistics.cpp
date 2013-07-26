@@ -12780,6 +12780,104 @@ static void REGAL_CALL statistics_glMatrixIndexusvARB(GLint size, const GLushort
   _next->call(&_next->glMatrixIndexusvARB)(size, indices);
 }
 
+// GL_ARB_multi_bind
+
+static void REGAL_CALL statistics_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glBindBuffersBase++;
+
+  statistics.gl_arb_multi_bind++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+}
+
+static void REGAL_CALL statistics_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glBindBuffersRange++;
+
+  statistics.gl_arb_multi_bind++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+}
+
+static void REGAL_CALL statistics_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glBindImageTextures++;
+
+  statistics.gl_arb_multi_bind++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindImageTextures)(first, count, textures);
+}
+
+static void REGAL_CALL statistics_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glBindSamplers++;
+
+  statistics.gl_arb_multi_bind++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindSamplers)(first, count, samplers);
+}
+
+static void REGAL_CALL statistics_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glBindTextures++;
+
+  statistics.gl_arb_multi_bind++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindTextures)(first, count, textures);
+}
+
+static void REGAL_CALL statistics_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+
+  RegalAssert(_context->statistics);
+  Statistics &statistics = *_context->statistics;
+  statistics.glBindVertexBuffers++;
+
+  statistics.gl_arb_multi_bind++;
+
+  DispatchTableGL *_next = _context->dispatcher.statistics.next();
+  RegalAssert(_next);
+  _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+}
+
 // GL_ARB_multi_draw_indirect
 
 static void REGAL_CALL statistics_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -42948,6 +43046,15 @@ void InitDispatchTableStatistics(DispatchTableGL &tbl)
   tbl.glMatrixIndexubvARB = statistics_glMatrixIndexubvARB;
   tbl.glMatrixIndexuivARB = statistics_glMatrixIndexuivARB;
   tbl.glMatrixIndexusvARB = statistics_glMatrixIndexusvARB;
+
+  // GL_ARB_multi_bind
+
+  tbl.glBindBuffersBase = statistics_glBindBuffersBase;
+  tbl.glBindBuffersRange = statistics_glBindBuffersRange;
+  tbl.glBindImageTextures = statistics_glBindImageTextures;
+  tbl.glBindSamplers = statistics_glBindSamplers;
+  tbl.glBindTextures = statistics_glBindTextures;
+  tbl.glBindVertexBuffers = statistics_glBindVertexBuffers;
 
   // GL_ARB_multi_draw_indirect
 

@@ -1800,6 +1800,15 @@ namespace Dispatch
     void (REGAL_CALL *glMatrixIndexuivARB)(GLint size, const GLuint *indices);
     void (REGAL_CALL *glMatrixIndexusvARB)(GLint size, const GLushort *indices);
 
+    // GL_ARB_multi_bind
+
+    void (REGAL_CALL *glBindBuffersBase)(GLenum target, GLuint first, GLsizei count, const GLuint *buffers);
+    void (REGAL_CALL *glBindBuffersRange)(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes);
+    void (REGAL_CALL *glBindImageTextures)(GLuint first, GLsizei count, const GLuint *textures);
+    void (REGAL_CALL *glBindSamplers)(GLuint first, GLsizei count, const GLuint *samplers);
+    void (REGAL_CALL *glBindTextures)(GLuint first, GLsizei count, const GLuint *textures);
+    void (REGAL_CALL *glBindVertexBuffers)(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides);
+
     // GL_ARB_multi_draw_indirect
 
     void (REGAL_CALL *glMultiDrawArraysIndirect)(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride);

@@ -89,8 +89,10 @@ all: regal.lib glew.lib regal.bin
 
 # GLU and GLUT for platforms other than NaCl and Mac
 
-ifneq ($(filter-out nacl% darwin% emscripten%,$(SYSTEM)),)
+ifneq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter darwin%,$(SYSTEM)),)
 all: glu.lib glut.lib
+endif
 endif
 
 #
@@ -98,7 +100,7 @@ endif
 #
 
 export:
-	python scripts/Export.py --api gl 4.2 --api wgl 4.0 --api glx 4.0 --api cgl 1.4 --api egl 1.0 --outdir .
+	scripts/Export.py --api gl 4.2 --api wgl 4.0 --api glx 4.0 --api cgl 1.4 --api egl 1.0 --outdir .
 
 #
 # zlib
@@ -245,7 +247,7 @@ APITRACE.CFLAGS     += -Isrc/apitrace/thirdparty/khronos
 APITRACE.CFLAGS     += -Isrc/regal -Isrc/snappy -Isrc/zlib/include -Isrc/zlib/src -Isrc/boost
 APITRACE.STATIC     := libapitrace.a
 
-APITRACE.CFLAGS     += -DTRACE_OS_LOG=0 -DTRACE_BACKTRACE=0
+APITRACE.CFLAGS     += -DTRACE_OS_LOG=0 -DTRACE_BACKTRACE=0 -DTRACE_ENABLED_CHECK=0
 
 ifneq ($(filter linux%,$(SYSTEM)),)
 APITRACE.CFLAGS    += -DHAVE_X11=1
@@ -297,9 +299,9 @@ endif
 
 LIB.SRCS           := $(REGAL.CXX)
 
-# Disable mongoose and Regal HTTP for NaCl and Emscripten build
+# Disable mongoose and Regal HTTP for NaCl build
 
-ifeq ($(filter nacl% emscripten,$(SYSTEM)),)
+ifeq ($(filter nacl%,$(SYSTEM)),)
 LIB.SRCS           += src/mongoose/mongoose.c
 endif
 
@@ -348,7 +350,7 @@ REGAL_ERROR        ?= 0
 REGAL_CACHE        ?= 0
 REGAL_DEBUG        ?= 0
 REGAL_EMULATION    ?= 1                      # 0 for "loader only"
-REGAL_NO_TLS       ?= 0                      # 1 for single threaded
+LIB.CFLAGS         += -DREGAL_NO_TLS=0       # 1 for single threaded
 endif
 
 #
@@ -380,10 +382,6 @@ ifneq ($(REGAL_EMULATION),)
 LIB.CFLAGS         += -DREGAL_EMULATION=$(REGAL_EMULATION)
 endif
 
-ifneq ($(REGAL_NO_TLS),)
-LIB.CFLAGS         += -DREGAL_NO_TLS=$(REGAL_NO_TLS)
-endif
-
 LIB.CFLAGS         += -fvisibility=hidden
 
 LIB.INCLUDE        += -Isrc/boost
@@ -406,7 +404,7 @@ LIB.SDEPS          := $(LIBS.SOBJS:.o=.d)
 -include $(LIB.DEPS) $(LIB.SDEPS)
 
 LIB.LIBS           += -Llib/$(SYSTEM)
-ifneq ($(filter-out nacl% emscripten%,$(SYSTEM)),)
+ifeq ($(filter nacl%,$(SYSTEM)),)
 LIB.LIBS           += -lapitrace -lsnappy
 endif
 LIB.LIBS           += -lpng -lz $(LDFLAGS.X11)
@@ -415,23 +413,19 @@ ifneq ($(filter darwin%,$(SYSTEM)),)
 LIB.LDFLAGS        += -Wl,-reexport-lGLU -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries
 endif
 
-ifneq ($(LIB.STATIC),)
 regal.lib: lib/$(SYSTEM)/$(LIB.STATIC)
 
-ifneq ($(filter-out nacl% emscripten%,$(SYSTEM)),)
+ifeq ($(filter nacl%,$(SYSTEM)),)
 lib/$(SYSTEM)/$(LIB.STATIC): lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
 endif
-endif # if building static lib
 
-ifneq ($(LIB.SHARED),)
 ifeq ($(filter nacl%,$(SYSTEM)),)
 regal.lib: lib/$(SYSTEM)/$(LIB.SHARED)
 else
- ifeq ($(NACL_LIBC),glibc)
+ifeq ($(NACL_LIBC),glibc)
 regal.lib: lib/$(SYSTEM)/$(LIB.SHARED)
- endif
 endif
-endif # if building shared lib
+endif
 
 lib/$(SYSTEM)/$(LIB.STATIC): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(LIB.OBJS)
 	@mkdir -p $(dir $@)
@@ -443,12 +437,15 @@ ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif
 
-ifneq ($(filter-out nacl% emscripten%,$(SYSTEM)),)
-lib/$(SYSTEM)/$(LIB.SHARED): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(LIB.SOBJS) lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
-	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.SO) -o $@ $(LDFLAGS.STARTGROUP) $(LIB.SOBJS) lib/$(SYSTEM)/$(APITRACE.STATIC) $(LDFLAGS.ENDGROUP) $(LIB.LIBS) $(LIB.LDFLAGS)
-else
+ifneq ($(filter nacl%,$(SYSTEM)),)
 lib/$(SYSTEM)/$(LIB.SHARED): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(LIB.SOBJS)
+else
+lib/$(SYSTEM)/$(LIB.SHARED): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(LIB.SOBJS) lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
+endif
+ifneq ($(filter nacl%,$(SYSTEM)),)
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.SO) -o $@ $(LIB.SOBJS) $(LIB.LIBS) $(LIB.LDFLAGS)
+else
+	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.SO) -o $@ $(LDFLAGS.STARTGROUP) $(LIB.SOBJS) lib/$(SYSTEM)/$(APITRACE.STATIC) $(LDFLAGS.ENDGROUP) $(LIB.LIBS) $(LIB.LDFLAGS)
 endif
 ifneq ($(LN),)
 	$(LN) $(LIB.SHARED) lib/$(SYSTEM)/$(LIB.SONAME)
@@ -509,9 +506,7 @@ GLEW.STATIC     := libRegalGLEW.a
 
 -include $(GLEW.DEPS)
 
-ifeq ($(filter emscripten%,%(SYSTEM)),)
 glew.lib: lib/$(SYSTEM)/$(GLEW.STATIC)
-endif
 
 ifeq ($(filter nacl%,$(SYSTEM)),)
 glew.lib: lib/$(SYSTEM)/$(GLEW.SHARED)
@@ -655,7 +650,7 @@ tmp/$(SYSTEM)/glewinfo/static/%.o: src/glew/src/%.c
 	@mkdir -p $(dir $@)
 	$(LOG_CC)$(CCACHE) $(CC) $(GLEWINFO.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-bin/$(SYSTEM)/glewinfo$(BIN.SUFFIX): $(GLEWINFO.OBJS) lib/$(SYSTEM)/$(LIB.SHARED) lib/$(SYSTEM)/$(GLEW.SHARED)
+bin/$(SYSTEM)/glewinfo: $(GLEWINFO.OBJS) lib/$(SYSTEM)/$(LIB.SHARED) lib/$(SYSTEM)/$(GLEW.SHARED)
 	@mkdir -p $(dir $@)
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(GLEWINFO.OBJS) $(GLEWINFO.LIBS) $(LIB.LDFLAGS)
 ifneq ($(STRIP),)
@@ -664,27 +659,18 @@ endif
 
 # GLUT and GLU dependency for non-Nacl, non-Mac
 
-ifneq ($(filter-out nacl% darwin% emscripten%,$(SYSTEM)),)
-bin/$(SYSTEM)/glewinfo$(BIN.SUFFIX):      lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+ifeq ($(filter nacl%,$(SYSTEM)),)
+ifeq ($(filter darwin%,$(SYSTEM)),)
+bin/$(SYSTEM)/glewinfo:      lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+endif
 endif
 
 # Examples
 
 ifneq ($(filter nacl%,$(SYSTEM)),)
-regal.bin: bin/$(SYSTEM)/nacl$(BIN.SUFFIX) examples/nacl/nacl.nmf
+regal.bin: bin/$(SYSTEM)/nacl$(BIN_EXTENSION) examples/nacl/nacl.nmf
 else
-regal.bin: bin/$(SYSTEM)/glewinfo$(BIN.SUFFIX) bin/$(SYSTEM)/dreamtorus$(BIN.SUFFIX) bin/$(SYSTEM)/tiger$(BIN.SUFFIX)
-ifeq ($(filter emscripten%,%(SYSTEM)),)
-regal.bin: bin/$(SYSTEM)/regaltest$(BIN.SUFFIX)
-endif
-endif
-
-# If we're not building a shared lib, then the binaries
-# should depend on the static lib
-ifneq ($(LIB.SHARED),)
-DEPEND_REGAL_LIB = lib/$(SYSTEM)/$(LIB.SHARED)
-else
-DEPEND_REGAL_LIB = lib/$(SYSTEM)/$(LIB.STATIC)
+regal.bin: bin/$(SYSTEM)/glewinfo bin/$(SYSTEM)/dreamtorus bin/$(SYSTEM)/tiger bin/$(SYSTEM)/regaltest$(BIN_EXTENSION)
 endif
 
 #
@@ -711,7 +697,7 @@ tmp/$(SYSTEM)/dreamtorus/static/%.o: examples/dreamtorus/glut/code/%.cpp
 	@mkdir -p $(dir $@)
 	$(LOG_CXX)$(CCACHE) $(CXX) $(DREAMTORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-bin/$(SYSTEM)/dreamtorus$(BIN.SUFFIX): $(DREAMTORUS.OBJS) $(DEPEND_REGAL_LIB)
+bin/$(SYSTEM)/dreamtorus: $(DREAMTORUS.OBJS) lib/$(SYSTEM)/$(LIB.SHARED)
 	@mkdir -p $(dir $@)
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(DREAMTORUS.OBJS) $(DREAMTORUS.LIBS) $(LIB.LDFLAGS)
 ifneq ($(STRIP),)
@@ -720,8 +706,10 @@ endif
 
 # dreamtorus GLUT and GLU dependency for non-Mac, non-Nacl builds
 
-ifneq ($(filter-out nacl% darwin% emscripten%,$(SYSTEM)),)
-bin/$(SYSTEM)/dreamtorus$(BIN.SUFFIX): lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+ifeq ($(filter nacl%,$(SYSTEM)),)
+ifeq ($(filter darwin%,$(SYSTEM)),)
+bin/$(SYSTEM)/dreamtorus: lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+endif
 endif
 
 #
@@ -740,14 +728,14 @@ tmp/$(SYSTEM)/nacl/static/%.o: examples/nacl/%.c
 	@mkdir -p $(dir $@)
 	$(LOG_CC)$(CC) $(CFLAGS) -std=gnu99 $(NACL.CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-bin/$(SYSTEM)/nacl$(BIN.SUFFIX): lib/$(SYSTEM)/$(LIB.STATIC) $(NACL.OBJS)
+bin/$(SYSTEM)/nacl$(BIN_EXTENSION): lib/$(SYSTEM)/$(LIB.STATIC) $(NACL.OBJS)
 	@mkdir -p $(dir $@)
 	$(LOG_LD)$(LD) $(LDFLAGS.EXTRA) -o $@ $(NACL.OBJS) $(NACL.LIBS)
 ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif
 
-examples/nacl/nacl.nmf: bin/$(SYSTEM)/nacl$(BIN.SUFFIX)
+examples/nacl/nacl.nmf: bin/$(SYSTEM)/nacl$(BIN_EXTENSION)
 	$(NACL_SDK_ROOT)/tools/create_nmf.py -Llib/$(SYSTEM) $(NMF_FLAGS) -o $@ bin/$(SYSTEM)/nacl*.nexe -s examples/nacl
 
 
@@ -772,7 +760,7 @@ tmp/$(SYSTEM)/tiger/static/%.o: examples/tiger/%.c
 	@mkdir -p $(dir $@)
 	$(LOG_CC)$(CCACHE) $(CC) $(TIGER.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-bin/$(SYSTEM)/tiger$(BIN.SUFFIX): $(TIGER.OBJS) lib/$(SYSTEM)/$(GLEW.SHARED) lib/$(SYSTEM)/$(LIB.SHARED) lib/$(SYSTEM)/$(GLEW.SHARED)
+bin/$(SYSTEM)/tiger: $(TIGER.OBJS) lib/$(SYSTEM)/$(GLEW.SHARED) lib/$(SYSTEM)/$(LIB.SHARED) lib/$(SYSTEM)/$(GLEW.SHARED)
 	@mkdir -p $(dir $@)
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(TIGER.OBJS) $(TIGER.LIBS)
 ifneq ($(STRIP),)
@@ -781,8 +769,10 @@ endif
 
 # GLUT and GLU dependency for non-Nacl, non-Mac
 
-ifneq ($(filter-out nacl% darwin% emscripten%,$(SYSTEM)),)
-bin/$(SYSTEM)/tiger$(BIN.SUFFIX):      lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+ifeq ($(filter nacl%,$(SYSTEM)),)
+ifeq ($(filter darwin%,$(SYSTEM)),)
+bin/$(SYSTEM)/tiger:      lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+endif
 endif
 
 ######################################
@@ -845,10 +835,10 @@ tmp/$(SYSTEM)/regaltest/static/%.o: tests/%.cpp
 	$(LOG_CXX)$(CCACHE) $(CXX) $(LIB.CFLAGS) $(REGALTEST.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
 ifneq ($(filter nacl%,$(SYSTEM)),)
-bin/$(SYSTEM)/regaltest$(BIN.SUFFIX): lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
+bin/$(SYSTEM)/regaltest$(BIN_EXTENSION): lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
 endif
 
-bin/$(SYSTEM)/regaltest$(BIN.SUFFIX): $(REGALTEST.OBJS) lib/$(SYSTEM)/$(GTEST.STATIC) lib/$(SYSTEM)/$(LIB.STATIC) lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC)
+bin/$(SYSTEM)/regaltest$(BIN_EXTENSION): $(REGALTEST.OBJS) lib/$(SYSTEM)/$(GTEST.STATIC) lib/$(SYSTEM)/$(LIB.STATIC) lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC)
 	@mkdir -p $(dir $@)
 ifeq ($(filter nacl%,$(SYSTEM)),)
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(REGALTEST.OBJS) $(REGALTEST.LIBS) $(LDFLAGS.STARTGROUP) lib/$(SYSTEM)/$(LIB.STATIC) lib/$(SYSTEM)/$(APITRACE.STATIC) $(LDFLAGS.ENDGROUP) $(LIB.LIBS) lib/$(SYSTEM)/$(GTEST.STATIC) $(LIB.LDFLAGS) 
@@ -860,7 +850,7 @@ ifneq ($(STRIP),)
 endif
 
 ifneq ($(NACL_ARCH),arm)
-test: bin/$(SYSTEM)/regaltest$(BIN.SUFFIX)
+test: bin/$(SYSTEM)/regaltest$(BIN_EXTENSION)
 	@echo Running tests: $^
 ifeq ($(filter nacl%,$(SYSTEM)),)
 	$^

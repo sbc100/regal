@@ -514,8 +514,12 @@ struct Vao
       {
         GLuint index = clientActiveTexture - GL_TEXTURE0;
         RegalAssert(index < REGAL_VAO_NUM_ARRAYS);
-        if ( index < ffAttrNumTex )
-          return ffAttrTexBegin + index;
+        if ( index >= ffAttrNumTex )
+        {
+          Warning("Texture unit out of range: ", index, " >= ", ffAttrNumTex, ". Clamping to supported maximum.");
+          index = ffAttrNumTex - 1;
+        }
+        return ffAttrTexBegin + index;
       }
       break;
       default:

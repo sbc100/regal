@@ -141,7 +141,7 @@
 // Statistics gathering disabled in release mode, or embedded
 
 #ifndef REGAL_STATISTICS
-# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID
+# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_SYS_EMSCRIPTEN
 #  define REGAL_STATISTICS 0
 # else
 #  define REGAL_STATISTICS 1

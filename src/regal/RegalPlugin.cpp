@@ -7078,6 +7078,56 @@ extern "C" {
     _next->call(&_next->glMatrixIndexusvARB)(size, indices);
   }
 
+  /* GL_ARB_multi_bind */
+
+  void REGAL_CALL plugin_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersBase)(target, first, count, buffers);
+  }
+
+  void REGAL_CALL plugin_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glBindBuffersRange)(target, first, count, buffers, offsets, sizes);
+  }
+
+  void REGAL_CALL plugin_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glBindImageTextures)(first, count, textures);
+  }
+
+  void REGAL_CALL plugin_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glBindSamplers)(first, count, samplers);
+  }
+
+  void REGAL_CALL plugin_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glBindTextures)(first, count, textures);
+  }
+
+  void REGAL_CALL plugin_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+  {
+    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
+    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
+    RegalAssert(_next);
+    _next->call(&_next->glBindVertexBuffers)(first, count, buffers, offsets, strides);
+  }
+
   /* GL_ARB_multi_draw_indirect */
 
   void REGAL_CALL plugin_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -25189,7 +25239,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Plugin {
 
-  const char * const lookup_gl_Name[2665] = {
+  const char * const lookup_gl_Name[2671] = {
     "glAccum",
     "glActiveProgramEXT",
     "glActiveShaderProgram",
@@ -25243,6 +25293,8 @@ namespace Plugin {
     "glBindBufferRange",
     "glBindBufferRangeEXT",
     "glBindBufferRangeNV",
+    "glBindBuffersBase",
+    "glBindBuffersRange",
     "glBindFragDataLocation",
     "glBindFragDataLocationEXT",
     "glBindFragDataLocationIndexed",
@@ -25252,6 +25304,7 @@ namespace Plugin {
     "glBindFramebufferOES",
     "glBindImageTexture",
     "glBindImageTextureEXT",
+    "glBindImageTextures",
     "glBindLightParameterEXT",
     "glBindMaterialParameterEXT",
     "glBindMultiTextureEXT",
@@ -25263,16 +25316,19 @@ namespace Plugin {
     "glBindRenderbufferEXT",
     "glBindRenderbufferOES",
     "glBindSampler",
+    "glBindSamplers",
     "glBindTexGenParameterEXT",
     "glBindTexture",
     "glBindTextureEXT",
     "glBindTextureUnitParameterEXT",
+    "glBindTextures",
     "glBindTransformFeedback",
     "glBindTransformFeedbackNV",
     "glBindVertexArray",
     "glBindVertexArrayAPPLE",
     "glBindVertexArrayOES",
     "glBindVertexBuffer",
+    "glBindVertexBuffers",
     "glBindVertexShaderEXT",
     "glBindVideoCaptureStreamBufferNV",
     "glBindVideoCaptureStreamTextureNV",
@@ -27857,7 +27913,7 @@ namespace Plugin {
     NULL
   };
 
-  const void *lookup_gl_Value[2665] = {
+  const void *lookup_gl_Value[2671] = {
     (void *)(plugin_glAccum),
     (void *)(plugin_glActiveProgramEXT),
     (void *)(plugin_glActiveShaderProgram),
@@ -27911,6 +27967,8 @@ namespace Plugin {
     (void *)(plugin_glBindBufferRange),
     (void *)(plugin_glBindBufferRangeEXT),
     (void *)(plugin_glBindBufferRangeNV),
+    (void *)(plugin_glBindBuffersBase),
+    (void *)(plugin_glBindBuffersRange),
     (void *)(plugin_glBindFragDataLocation),
     (void *)(plugin_glBindFragDataLocationEXT),
     (void *)(plugin_glBindFragDataLocationIndexed),
@@ -27920,6 +27978,7 @@ namespace Plugin {
     (void *)(plugin_glBindFramebufferOES),
     (void *)(plugin_glBindImageTexture),
     (void *)(plugin_glBindImageTextureEXT),
+    (void *)(plugin_glBindImageTextures),
     (void *)(plugin_glBindLightParameterEXT),
     (void *)(plugin_glBindMaterialParameterEXT),
     (void *)(plugin_glBindMultiTextureEXT),
@@ -27931,16 +27990,19 @@ namespace Plugin {
     (void *)(plugin_glBindRenderbufferEXT),
     (void *)(plugin_glBindRenderbufferOES),
     (void *)(plugin_glBindSampler),
+    (void *)(plugin_glBindSamplers),
     (void *)(plugin_glBindTexGenParameterEXT),
     (void *)(plugin_glBindTexture),
     (void *)(plugin_glBindTextureEXT),
     (void *)(plugin_glBindTextureUnitParameterEXT),
+    (void *)(plugin_glBindTextures),
     (void *)(plugin_glBindTransformFeedback),
     (void *)(plugin_glBindTransformFeedbackNV),
     (void *)(plugin_glBindVertexArray),
     (void *)(plugin_glBindVertexArrayAPPLE),
     (void *)(plugin_glBindVertexArrayOES),
     (void *)(plugin_glBindVertexBuffer),
+    (void *)(plugin_glBindVertexBuffers),
     (void *)(plugin_glBindVertexShaderEXT),
     (void *)(plugin_glBindVideoCaptureStreamBufferNV),
     (void *)(plugin_glBindVideoCaptureStreamTextureNV),
@@ -31341,7 +31403,7 @@ extern "C" {
   {
     const char **res;
 
-    res = (const char **) std::bsearch(&name, lookup_gl_Name, 2663, sizeof(const char *), NameCmp);
+    res = (const char **) std::bsearch(&name, lookup_gl_Name, 2669, sizeof(const char *), NameCmp);
     if (res) return const_cast<void *>(lookup_gl_Value[(size_t) (res - lookup_gl_Name)]);
 
 #if REGAL_SYS_WGL

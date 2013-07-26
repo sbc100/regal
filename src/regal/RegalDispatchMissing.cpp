@@ -7009,6 +7009,62 @@ static void REGAL_CALL missing_glMatrixIndexusvARB(GLint size, const GLushort *i
   Warning( "glMatrixIndexusvARB not available." );
 }
 
+// GL_ARB_multi_bind
+
+static void REGAL_CALL missing_glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(buffers);
+  Warning( "glBindBuffersBase not available." );
+}
+
+static void REGAL_CALL missing_glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
+{
+  UNUSED_PARAMETER(target);
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(buffers);
+  UNUSED_PARAMETER(offsets);
+  UNUSED_PARAMETER(sizes);
+  Warning( "glBindBuffersRange not available." );
+}
+
+static void REGAL_CALL missing_glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(textures);
+  Warning( "glBindImageTextures not available." );
+}
+
+static void REGAL_CALL missing_glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
+{
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(samplers);
+  Warning( "glBindSamplers not available." );
+}
+
+static void REGAL_CALL missing_glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
+{
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(textures);
+  Warning( "glBindTextures not available." );
+}
+
+static void REGAL_CALL missing_glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
+{
+  UNUSED_PARAMETER(first);
+  UNUSED_PARAMETER(count);
+  UNUSED_PARAMETER(buffers);
+  UNUSED_PARAMETER(offsets);
+  UNUSED_PARAMETER(strides);
+  Warning( "glBindVertexBuffers not available." );
+}
+
 // GL_ARB_multi_draw_indirect
 
 static void REGAL_CALL missing_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride)
@@ -27229,6 +27285,15 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glMatrixIndexubvARB = missing_glMatrixIndexubvARB;
   tbl.glMatrixIndexuivARB = missing_glMatrixIndexuivARB;
   tbl.glMatrixIndexusvARB = missing_glMatrixIndexusvARB;
+
+  // GL_ARB_multi_bind
+
+  tbl.glBindBuffersBase = missing_glBindBuffersBase;
+  tbl.glBindBuffersRange = missing_glBindBuffersRange;
+  tbl.glBindImageTextures = missing_glBindImageTextures;
+  tbl.glBindSamplers = missing_glBindSamplers;
+  tbl.glBindTextures = missing_glBindTextures;
+  tbl.glBindVertexBuffers = missing_glBindVertexBuffers;
 
   // GL_ARB_multi_draw_indirect
 

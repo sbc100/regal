@@ -27,7 +27,6 @@ from Emu       import emuFindEntry, emuCodeGen
 from EmuDsa    import dsaFormulae
 from EmuVao    import vaoFormulae
 from EmuSo     import soFormulae
-from EmuPpc    import ppcFormulae
 from EmuPpca   import ppcaFormulae
 from EmuPpa    import ppaFormulae
 from EmuIff    import iffFormulae
@@ -69,7 +68,6 @@ emuRegal = [
 emu = [
     { 'type' : 'Emu::Obj',        'include' : 'RegalObj.h',        'member' : 'obj',    'plugin' : False, 'conditional' : 'Config::enableEmuObj               || Config::forceEmuObj        || REGAL_FORCE_EMU_OBJ',        'ifdef' : 'REGAL_EMU_OBJ',        'formulae' : objFormulae        },
     { 'type' : 'Emu::Hint',       'include' : 'RegalHint.h',       'member' : 'hint',   'plugin' : False, 'conditional' : 'Config::enableEmuHint              || Config::forceEmuHint       || REGAL_FORCE_EMU_HINT',       'ifdef' : 'REGAL_EMU_HINT',       'formulae' : hintFormulae       },
-    #{ 'type' : 'RegalPpc',       'include' : 'RegalPpc.h',        'member' : 'ppc',    'plugin' : False, 'conditional' : None,                                                                                             'ifdef' : '',                     'formulae' : ppcFormulae        },
     { 'type' : 'Emu::Ppa',        'include' : 'RegalPpa.h',        'member' : 'ppa',    'plugin' : False, 'conditional' : 'Config::enableEmuPpa               || Config::forceEmuPpa        || REGAL_FORCE_EMU_PPA',        'ifdef' : 'REGAL_EMU_PPA',        'formulae' : ppaFormulae        },
     { 'type' : 'Emu::Ppca',       'include' : 'RegalPpca.h',       'member' : 'ppca',   'plugin' : False, 'conditional' : 'Config::enableEmuPpca              || Config::forceEmuPpca       || REGAL_FORCE_EMU_PPCA',       'ifdef' : 'REGAL_EMU_PPCA',       'formulae' : ppcaFormulae       },
     { 'type' : 'Emu::Bin',        'include' : 'RegalBin.h',        'member' : 'bin',    'plugin' : False, 'conditional' : 'Config::enableEmuBin               || Config::forceEmuBin        || REGAL_FORCE_EMU_BIN',        'ifdef' : 'REGAL_EMU_BIN',        'formulae' : binFormulae        },

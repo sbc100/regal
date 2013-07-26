@@ -90,7 +90,6 @@ struct ContextInfo
   GLboolean core   : 1;
   GLboolean es1    : 1;
   GLboolean es2    : 1;
-
   GLboolean webgl  : 1;
 
   GLint     gl_version_major;
@@ -234,6 +233,7 @@ struct ContextInfo
   GLboolean gl_arb_map_buffer_alignment : 1;
   GLboolean gl_arb_map_buffer_range : 1;
   GLboolean gl_arb_matrix_palette : 1;
+  GLboolean gl_arb_multi_bind : 1;
   GLboolean gl_arb_multi_draw_indirect : 1;
   GLboolean gl_arb_multisample : 1;
   GLboolean gl_arb_multitexture : 1;

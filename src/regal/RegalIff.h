@@ -1084,14 +1084,12 @@ struct Iff
     TexenvCombineState(bool isRgb)
     {
       memset( this, 0, sizeof(TexenvCombineState) );
-      mode = TEC_Invalid;
-      src0 = src1 = src2 = TCS_Invalid;
-      op0 = op1 = op2 = TCO_Invalid;
       mode = TEC_Modulate;
       src0 = TCS_Texture;
       src1 = TCS_Previous;
       src2 = TCS_Constant;
-      op0 = op1 = op2 = (isRgb ? TCO_Color : TCO_Alpha);
+      op0 = op1 = (isRgb ? TCO_Color : TCO_Alpha);
+      op2 = TCO_Alpha;
       scale = 1.0f;
     }
 
@@ -2251,7 +2249,8 @@ struct Iff
       }
       case GL_FOG_COLOR: {
         const GLfloat * p = &u.fog.params[1].x;
-        for( int i = 0; i < 4; i++ ) params[i] = static_cast<T>(p[i]);
+        for( int i = 0; i < 4; i++ )
+          params[i] = static_cast<T>(p[i]);
         break;
       }
       default:

@@ -295,15 +295,27 @@ void *GetProcAddress( const char *entry )
     // CGL entry points are in OpenGL framework
 
     if (!lib_OpenGL) {
-      lib_OpenGL = dlopen(lib_OpenGL_filename , RTLD_LAZY);
-      Info("Loading OpenGL from ",lib_OpenGL_filename,lib_OpenGL ? " succeeded." : " failed.");
+      char temp_filename[] = "/tmp/tmp.Regal.XXXX";
+      if (mktemp(temp_filename) != NULL ) {
+        if (symlink(lib_OpenGL_filename, temp_filename) == 0 ) {
+          lib_OpenGL = dlopen(temp_filename , RTLD_LOCAL | RTLD_NOW | RTLD_FIRST);
+          Info("Loading OpenGL from ",lib_OpenGL_filename,lib_OpenGL ? " succeeded." : " failed.");
+          remove( temp_filename );
+        }
+      }
     }
 
     // GL entry point are in libGL.dylib
 
     if (!lib_GL) {
-      lib_GL = dlopen(lib_GL_filename, RTLD_LAZY);
-      Info("Loading OpenGL from ",lib_GL_filename,lib_GL ? " succeeded." : " failed.");
+      char temp_filename[] = "/tmp/tmp.Regal.XXXX";
+      if (mktemp(temp_filename) != NULL ) {
+        if (symlink(lib_GL_filename, temp_filename) == 0 ) {
+          lib_GL = dlopen(temp_filename , RTLD_LOCAL | RTLD_NOW | RTLD_FIRST);
+          Info("Loading libGL from ",lib_GL_filename,lib_GL ? " succeeded." : " failed.");
+          remove( temp_filename );
+        }
+      }
     }
 
     chdir(oldCwd);
