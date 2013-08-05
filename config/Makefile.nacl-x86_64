@@ -18,6 +18,7 @@ NMF_FLAGS += -D$(OBJDUMP)
 NMF_FLAGS += -L$(NACL_TOOLCHAIN)/x86_64-nacl/lib64
 NMF_FLAGS += -L$(NACL_TOOLCHAIN)/x86_64-nacl/lib32
 
+PICFLAG = -fPIC
 WARN += -Wno-uninitialized -Wno-conversion-null
 BIN_EXTENSION = _64.nexe
 EXT.DYNAMIC = so

@@ -198,6 +198,7 @@ def traverse(apis, args):
 def generate(apis, args):
 
   traverse(apis, args)
+  generateTraceSource( apis, args )
   generatePublicHeader(apis, args)
   generatePluginSource(apis,args)
   generateDispatchStatistics( apis, args )
@@ -215,7 +216,6 @@ def generate(apis, args):
   generatePpapiSource( apis, args )
   generateStaticES2Source( apis, args )
   generateStaticEGLSource( apis, args )
-  generateTraceSource( apis, args )
   generateDispatchHeader(apis, args)
   generateContextHeader(apis, args)
   generateContextSource(apis, args)

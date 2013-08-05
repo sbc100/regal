@@ -21,3 +21,8 @@ ZLIB.C += src/zlib/src/gzread.c
 ZLIB.C += src/zlib/src/gzwrite.c
 ZLIB.C += src/zlib/src/gzclose.c
 
+#
+
+ZLIB.CFLAGS     := -Isrc/zlib/include
+
+ZLIB.STATIC     := libzlib.a

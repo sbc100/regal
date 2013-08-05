@@ -18,3 +18,8 @@ SNAPPY.H += src/snappy/snappy-stubs-public.h
 SNAPPY.H += src/snappy/snappy.h
 
 SNAPPY.H.OTHER := 
+
+#
+
+SNAPPY.CFLAGS     := -Isrc/snappy
+SNAPPY.STATIC     := libsnappy.a

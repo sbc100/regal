@@ -27,8 +27,3 @@ WARN = -Wall -Wno-uninitialized -Wno-unused-parameter
 CFLAGS.DEBUG   = -g
 CFLAGS.RELEASE = -O2
 BIN.SUFFIX =
-LIB.SONAME = lib$(NAME).so.$(SO_MAJOR)
-LIB.DEVLNK = lib$(NAME).so
-LIB.SHARED = lib$(NAME).so.$(SO_VERSION)
-LIB.STATIC = lib$(NAME).a
-LDFLAGS.SO = $(LDFLAGS.DYNAMIC) -Wl,-soname=$(LIB.SONAME)

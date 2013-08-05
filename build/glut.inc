@@ -59,3 +59,20 @@ GLUT.C += src/glut/src/glut_warp.c
 GLUT.C += src/glut/src/glut_win.c
 GLUT.C += src/glut/src/glut_winmisc.c
 GLUT.C += src/glut/src/glut_ppm.c
+
+#
+
+GLUT.CFLAGS     := -Isrc/glut/include -Isrc/glu/include -DBUILD_GLUT32 -DGLUT_BUILDING_LIB -DGLUT_STATIC
+
+GLUT.SHARED     := libRegalGLUT.so
+GLUT.STATIC     := libRegalGLUT.a
+
+ifneq ($(filter darwin%,$(SYSTEM)),)
+GLUT.SHARED     :=
+GLUT.STATIC     :=
+endif
+
+ifneq ($(filter nacl%,$(SYSTEM)),)
+GLUT.SHARED     :=
+GLUT.STATIC     :=
+endif

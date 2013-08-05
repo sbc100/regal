@@ -108,3 +108,7 @@ GLU.STATIC     := libRegalGLUlib.a
 ifneq ($(filter darwin%,$(SYSTEM)),)
 GLU.SHARED     := libRegalGLU.dylib
 endif
+
+ifneq ($(filter nacl%,$(SYSTEM)),)
+GLU.SHARED     :=
+endif

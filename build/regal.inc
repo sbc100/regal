@@ -116,3 +116,17 @@ REGAL.H += src/regal/pch.h
 
 REGAL.H.OTHER += include/GL/Regal.h
 REGAL.H.OTHER += src/lookup3/lookup3.h
+
+#
+
+REGAL.INCLUDE   := -Isrc/regal
+REGAL.INCLUDE   += -Isrc/zlib/include
+REGAL.INCLUDE   += -Isrc/libpng/include
+REGAL.INCLUDE   += -Isrc/mongoose
+REGAL.INCLUDE   += -Isrc/md5/include
+REGAL.INCLUDE   += -Isrc/lookup3
+REGAL.INCLUDE   += -Isrc/jsonsl
+REGAL.INCLUDE   += -Isrc/boost
+
+REGAL.STATIC    ?= libRegallib.a
+REGAL.SHARED    ?= libRegal.so

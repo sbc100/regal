@@ -21,3 +21,9 @@ LIBPNG.C += src/libpng/src/pngwrite.c
 LIBPNG.C += src/libpng/src/pngwtran.c
 LIBPNG.C += src/libpng/src/pngwutil.c
 
+#
+
+LIBPNG.STATIC     := libpnglib.a
+
+LIBPNG.CFLAGS     := -Isrc/zlib/include -Isrc/libpng/include
+

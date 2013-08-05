@@ -8,14 +8,20 @@ Regal
 =====
 
 | https://github.com/p3/regal
-| `Downloads <https://bitbucket.org/nigels_com/regal/downloads>`_
+| `Downloads <https://bitbucket.org/nigels_com/regal/downloads>`_, `Issues <https://github.com/p3/regal/issues>`_, `Commits <https://github.com/p3/regal/commits/master>`_.
 | Status: |status|
 
 .. |status| image:: https://travis-ci.org/nigels-com/regal.png?branch=master
    :target: https://travis-ci.org/nigels-com/regal
    :alt: Build Status
 
-.. contents::
+Recent News
+===========
+
+* July 30th 2013 - New binaries available for Windows and Mac.
+* July 26th 2013 - `Emscripten <https://github.com/kripken/emscripten>`_ support in progress.
+* July 22nd 2013 - `OpenGL 4.4 <http://www.opengl.org/registry/>`_ API support added.
+* July 21st 2013 - `apitrace <http://apitrace.github.io/>`_ support added.
 
 Summary
 =======
@@ -27,6 +33,8 @@ OpenGL portability layer for OpenGL 2.x, 3.x, 4.x, Core contexts and ES 2.0
 |               |  and to play with the examples.  Don't use it in your projects yet.  |
 |               |  You have been warned.                                               |
 +---------------+----------------------------------------------------------------------+
+
+.. contents::
 
 Goals
 =====
@@ -68,6 +76,21 @@ Deployment
 From an application developer's perspective, Regal just looks like an OpenGL implementation.
 You link with it instead of your platform's OpenGL library or framework, and that's really
 all you have to do to use Regal.  The rest of your code can remain unchanged.
+
+Downloads
+=========
+
+* `github.com sources <https://github.com/p3/regal>`_, `ZIP snapshot <https://github.com/p3/regal/archive/master.zip>`_.
+
+July 30th 2013
+
+* `Windows x86 Debug <https://bitbucket.org/nigels_com/regal/downloads/Regal_Windows_x86_Debug_20130730.zip>`_ | `Windows x86 Release <https://bitbucket.org/nigels_com/regal/downloads/Regal_Windows_x86_Release_20130730.zip>`_
+* `Windows AMD64 Debug <https://bitbucket.org/nigels_com/regal/downloads/Regal_Windows_x64_Debug_20130730.zip>`_ | `Windows AMD64 Release <https://bitbucket.org/nigels_com/regal/downloads/Regal_Windows_x64_Release_20130730.zip>`_
+* `Mac Universal Debug <https://bitbucket.org/nigels_com/regal/downloads/Regal_Mac_Debug_20130730.tgz>`_         | `Mac Universal Release <https://bitbucket.org/nigels_com/regal/downloads/Regal_Mac_Release_20130730.tgz>`_
+
+Archives
+
+* `Archived Downloads <https://bitbucket.org/nigels_com/regal/downloads>`_
 
 Features
 ========
