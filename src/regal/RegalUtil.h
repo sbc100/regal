@@ -424,7 +424,7 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-inline const char * GetEnv(const char * const varname)
+inline const char *getEnv(const char * const varname)
 {
 #ifdef _MSC_VER
 #pragma warning (push)
@@ -436,6 +436,76 @@ inline const char * GetEnv(const char * const varname)
 #ifdef _MSC_VER
 #pragma warning (pop)
 #endif
+}
+
+inline bool getEnv(const char * const varname, bool &var, const bool enable = true)
+{
+  if (enable)
+  {
+    const char * const val = getEnv(varname);
+    if (val)
+    {
+      var = atoi(val)!=0;
+      return true;
+    }
+  }
+  return false;
+}
+
+inline bool getEnv(const char * const varname, unsigned char &var, const bool enable = true)
+{
+  if (enable)
+  {
+    const char * const val = getEnv(varname);
+    if (val)
+    {
+      var = static_cast<unsigned char>( atoi(val) );
+      return true;
+    }
+  }
+  return false;
+}
+
+inline bool getEnv(const char * const varname, int &var, const bool enable = true)
+{
+  if (enable)
+  {
+    const char * const val = getEnv(varname);
+    if (val)
+    {
+      var = atoi(val);
+      return true;
+    }
+  }
+  return false;
+}
+
+inline bool getEnv(const char * const varname, size_t &var, const bool enable = true)
+{
+  if (enable)
+  {
+    const char * const val = getEnv(varname);
+    if (val)
+    {
+      var = static_cast<size_t>(atoi(val));
+      return true;
+    }
+  }
+  return false;
+}
+
+inline bool getEnv(const char * const varname, std::string &var, const bool enable = true)
+{
+  if (enable)
+  {
+    const char * const val = getEnv(varname);
+    if (val)
+    {
+      var = val;
+      return true;
+    }
+  }
+  return false;
 }
 
 //

@@ -149,29 +149,18 @@ namespace Config {
     Internal("Config::Init","()");
 
 #ifndef REGAL_NO_GETENV
+    getEnv( "REGAL_FORCE_ES1_PROFILE",  forceES1Profile,  !REGAL_FORCE_ES1_PROFILE  );
+    getEnv( "REGAL_FORCE_ES2_PROFILE",  forceES2Profile,  !REGAL_FORCE_ES2_PROFILE  );
+    getEnv( "REGAL_FORCE_CORE_PROFILE", forceCoreProfile, !REGAL_FORCE_CORE_PROFILE );
+
+    // With REGAL_SYS_GLX && REGAL_SYS_EGL
+    // we infer each from other, if specified,
+    // to behave as a toggle.
+
     const char *tmp;
 
-#if !REGAL_FORCE_ES1_PROFILE
-    tmp = GetEnv( "REGAL_FORCE_ES1_PROFILE" );
-    if (tmp) forceES1Profile = atoi(tmp)!=0;
-#endif
-
-#if !REGAL_FORCE_ES2_PROFILE
-    tmp = GetEnv( "REGAL_FORCE_ES2_PROFILE" );
-    if (tmp) forceES2Profile = atoi(tmp)!=0;
-#endif
-
-#if !REGAL_FORCE_CORE_PROFILE
-    tmp = GetEnv( "REGAL_FORCE_CORE_PROFILE" );
-    if (tmp) forceCoreProfile = atoi(tmp)!=0;
-#endif
-
-  // With REGAL_SYS_GLX && REGAL_SYS_EGL
-  // we infer each from other, if specified,
-  // to behave as a toggle.
-
 #if REGAL_SYS_GLX
-    tmp = GetEnv( "REGAL_SYS_GLX" );
+    tmp = getEnv( "REGAL_SYS_GLX" );
     if (tmp)
     {
       sysGLX = atoi(tmp)!=0;
@@ -182,7 +171,7 @@ namespace Config {
 #endif
 
 #if REGAL_SYS_EGL
-    tmp = GetEnv( "REGAL_SYS_EGL" );
+    tmp = getEnv( "REGAL_SYS_EGL" );
     if (tmp)
     {
       sysEGL = atoi(tmp)!=0;
@@ -206,314 +195,102 @@ namespace Config {
       sysES2 = false;
 #endif
 
-#if !REGAL_FORCE_EMULATION
-    tmp = GetEnv( "REGAL_FORCE_EMULATION" );
-    if (tmp) forceEmulation = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMULATION
-    tmp = GetEnv( "REGAL_EMULATION" );
-    if (tmp) enableEmulation = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_FORCE_EMULATION", forceEmulation, !REGAL_FORCE_EMULATION);
+    getEnv( "REGAL_EMULATION",       enableEmulation, REGAL_EMULATION);
 
     // Deprecated
 
-    tmp = GetEnv( "REGAL_NO_EMULATION" );
+    tmp = getEnv( "REGAL_NO_EMULATION" );
     if (tmp) enableEmulation = atoi(tmp)==0;
 
-#if REGAL_DEBUG
-    tmp = GetEnv( "REGAL_DEBUG" );
-    if (tmp) enableDebug = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_DEBUG",      enableDebug,      REGAL_DEBUG);
+    getEnv( "REGAL_TRACE",      enableTrace,      REGAL_TRACE);
+    getEnv( "REGAL_ERROR",      enableError,      REGAL_ERROR);
+    getEnv( "REGAL_CODE",       enableCode,       REGAL_CODE);
+    getEnv( "REGAL_STATISTICS", enableStatistics, REGAL_STATISTICS);
+    getEnv( "REGAL_LOG",        enableLog,        REGAL_LOG);
+    getEnv( "REGAL_DRIVER",     enableDriver,     REGAL_DRIVER);
 
-#if REGAL_TRACE
-    tmp = GetEnv( "REGAL_TRACE" );
-    if (tmp) enableTrace = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_EMU_HINT",       enableEmuHint,       REGAL_EMU_HINT);
+    getEnv( "REGAL_EMU_PPA",        enableEmuPpa,        REGAL_EMU_PPA);
+    getEnv( "REGAL_EMU_PPCA",       enableEmuPpca,       REGAL_EMU_PPCA);
+    getEnv( "REGAL_EMU_OBJ",        enableEmuObj,        REGAL_EMU_OBJ);
+    getEnv( "REGAL_EMU_BIN",        enableEmuBin,        REGAL_EMU_BIN);
+    getEnv( "REGAL_EMU_TEXSTO",     enableEmuTexSto,     REGAL_EMU_TEXSTO);
+    getEnv( "REGAL_EMU_XFER",       enableEmuXfer,       REGAL_EMU_XFER);
+    getEnv( "REGAL_EMU_DSA",        enableEmuDsa,        REGAL_EMU_DSA);
+    getEnv( "REGAL_EMU_PATH",       enableEmuPath,       REGAL_EMU_PATH);
+    getEnv( "REGAL_EMU_RECT",       enableEmuRect,       REGAL_EMU_RECT);
+    getEnv( "REGAL_EMU_BASEVERTEX", enableEmuBaseVertex, REGAL_EMU_BASEVERTEX );
+    getEnv( "REGAL_EMU_IFF",        enableEmuIff,        REGAL_EMU_IFF);
+    getEnv( "REGAL_EMU_SO",         enableEmuSo,         REGAL_EMU_SO);
+    getEnv( "REGAL_EMU_VAO",        enableEmuVao,        REGAL_EMU_VAO);
+    getEnv( "REGAL_EMU_TEXC",       enableEmuTexC,       REGAL_EMU_TEXC);
+    getEnv( "REGAL_EMU_FILTER",     enableEmuFilter,     REGAL_EMU_FILTER);
 
-#if REGAL_ERROR
-    tmp = GetEnv( "REGAL_ERROR" );
-    if (tmp) enableError = atoi(tmp)!=0;
-#endif
-
-#if REGAL_CODE
-    tmp = GetEnv( "REGAL_CODE" );
-    if (tmp) enableCode = atoi(tmp)!=0;
-#endif
-
-#if REGAL_STATISTICS
-    tmp = GetEnv( "REGAL_STATISTICS" );
-    if (tmp) enableStatistics = atoi(tmp)!=0;
-#endif
-
-#if REGAL_LOG
-    tmp = GetEnv( "REGAL_LOG" );
-    if (tmp) enableLog = atoi(tmp)!=0;
-#endif
-
-#if REGAL_DRIVER
-    tmp = GetEnv( "REGAL_DRIVER" );
-    if (tmp) enableDriver = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_HINT
-    tmp = GetEnv( "REGAL_EMU_HINT" );
-    if (tmp) enableEmuHint = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_PPA
-    tmp = GetEnv( "REGAL_EMU_PPA" );
-    if (tmp) enableEmuPpa = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_PPCA
-    tmp = GetEnv( "REGAL_EMU_PPCA" );
-    if (tmp) enableEmuPpca = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_OBJ
-    tmp = GetEnv( "REGAL_EMU_OBJ" );
-    if (tmp) enableEmuObj = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_BIN
-    tmp = GetEnv( "REGAL_EMU_BIN" );
-    if (tmp) enableEmuBin = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_TEXSTO
-    tmp = GetEnv( "REGAL_EMU_TEXSTO" );
-    if (tmp) enableEmuTexSto = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_XFER
-    tmp = GetEnv( "REGAL_EMU_XFER" );
-    if (tmp) enableEmuXfer = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_DSA
-    tmp = GetEnv( "REGAL_EMU_DSA" );
-    if (tmp) enableEmuDsa = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_PATH
-    tmp = GetEnv( "REGAL_EMU_PATH" );
-    if (tmp) enableEmuPath = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_RECT
-    tmp = GetEnv( "REGAL_EMU_RECT" );
-    if (tmp) enableEmuRect = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_BASEVERTEX
-    tmp = GetEnv( "REGAL_EMU_BASEVERTEX" );
-    if (tmp) enableEmuBaseVertex = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_IFF
-    tmp = GetEnv( "REGAL_EMU_IFF" );
-    if (tmp) enableEmuIff = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_SO
-    tmp = GetEnv( "REGAL_EMU_SO" );
-    if (tmp) enableEmuSo = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_VAO
-    tmp = GetEnv( "REGAL_EMU_VAO" );
-    if (tmp) enableEmuVao = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_TEXC
-    tmp = GetEnv( "REGAL_EMU_TEXC" );
-    if (tmp) enableEmuTexC = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_FILTER
-    tmp = GetEnv( "REGAL_EMU_FILTER" );
-    if (tmp) enableEmuFilter = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_FORCE_EMU_HINT",       forceEmuHint,        REGAL_EMU_HINT       && !REGAL_FORCE_EMU_HINT);
+    getEnv( "REGAL_FORCE_EMU_PPA",        forceEmuPpa,         REGAL_EMU_PPA        && !REGAL_FORCE_EMU_PPA);
+    getEnv( "REGAL_FORCE_EMU_PPCA",       forceEmuPpca,        REGAL_EMU_PPCA       && !REGAL_FORCE_EMU_PPCA);
+    getEnv( "REGAL_FORCE_EMU_OBJ",        forceEmuObj,         REGAL_EMU_OBJ        && !REGAL_FORCE_EMU_OBJ);
+    getEnv( "REGAL_FORCE_EMU_BIN",        forceEmuBin,         REGAL_EMU_BIN        && !REGAL_FORCE_EMU_BIN);
+    getEnv( "REGAL_FORCE_EMU_TEXSTO",     forceEmuTexSto,      REGAL_EMU_TEXSTO     && !REGAL_FORCE_EMU_TEXSTO);
+    getEnv( "REGAL_FORCE_EMU_XFER",       forceEmuXfer,        REGAL_EMU_XFER       && !REGAL_FORCE_EMU_XFER);
+    getEnv( "REGAL_FORCE_EMU_DSA",        forceEmuDsa,         REGAL_EMU_DSA        && !REGAL_FORCE_EMU_DSA);
+    getEnv( "REGAL_FORCE_EMU_PATH",       forceEmuPath,        REGAL_EMU_PATH       && !REGAL_FORCE_EMU_PATH);
+    getEnv( "REGAL_FORCE_EMU_RECT",       forceEmuRect,        REGAL_EMU_RECT       && !REGAL_FORCE_EMU_RECT);
+    getEnv( "REGAL_FORCE_EMU_BASEVERTEX", forceEmuBaseVertex,  REGAL_EMU_BASEVERTEX && !REGAL_FORCE_EMU_BASEVERTEX);
+    getEnv( "REGAL_FORCE_EMU_IFF",        forceEmuIff,         REGAL_EMU_IFF        && !REGAL_FORCE_EMU_IFF);
+    getEnv( "REGAL_FORCE_EMU_SO",         forceEmuSo,          REGAL_EMU_SO         && !REGAL_FORCE_EMU_SO);
+    getEnv( "REGAL_FORCE_EMU_VAO",        forceEmuVao,         REGAL_EMU_VAO        && !REGAL_FORCE_EMU_VAO);
+    getEnv( "REGAL_FORCE_EMU_TEXC",       forceEmuTexC,        REGAL_EMU_TEXC       && !REGAL_FORCE_EMU_TEXC);
+    getEnv( "REGAL_FORCE_EMU_FILTER",     forceEmuFilter,      REGAL_EMU_FILTER     && !REGAL_FORCE_EMU_FILTER);
 
     //
 
-#if REGAL_EMU_HINT
-    tmp = GetEnv( "REGAL_FORCE_EMU_HINT" );
-    if (tmp) forceEmuHint = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_PPA
-    tmp = GetEnv( "REGAL_FORCE_EMU_PPA" );
-    if (tmp) forceEmuPpa = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_PPCA
-    tmp = GetEnv( "REGAL_FORCE_EMU_PPCA" );
-    if (tmp) forceEmuPpca = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_OBJ
-    tmp = GetEnv( "REGAL_FORCE_EMU_OBJ" );
-    if (tmp) forceEmuObj = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_BIN
-    tmp = GetEnv( "REGAL_FORCE_EMU_BIN" );
-    if (tmp) forceEmuBin = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_TEXSTO
-    tmp = GetEnv( "REGAL_FORCE_EMU_TEXSTO" );
-    if (tmp) forceEmuTexSto = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_XFER
-    tmp = GetEnv( "REGAL_FORCE_EMU_XFER" );
-    if (tmp) forceEmuXfer = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_DSA
-    tmp = GetEnv( "REGAL_FORCE_EMU_DSA" );
-    if (tmp) forceEmuDsa = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_PATH
-    tmp = GetEnv( "REGAL_FORCE_EMU_PATH" );
-    if (tmp) forceEmuPath = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_RECT
-    tmp = GetEnv( "REGAL_FORCE_EMU_RECT" );
-    if (tmp) forceEmuRect = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_BASEVERTEX
-    tmp = GetEnv( "REGAL_FORCE_EMU_BASEVERTEX" );
-    if (tmp) forceEmuBaseVertex = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_IFF
-    tmp = GetEnv( "REGAL_FORCE_EMU_IFF" );
-    if (tmp) forceEmuIff = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_SO
-    tmp = GetEnv( "REGAL_FORCE_EMU_SO" );
-    if (tmp) forceEmuSo = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_VAO
-    tmp = GetEnv( "REGAL_FORCE_EMU_VAO" );
-    if (tmp) forceEmuVao = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_TEXC
-    tmp = GetEnv( "REGAL_FORCE_EMU_TEXC" );
-    if (tmp) forceEmuTexC = atoi(tmp)!=0;
-#endif
-
-#if REGAL_EMU_FILTER
-    tmp = GetEnv( "REGAL_FORCE_EMU_FILTER" );
-    if (tmp) forceEmuFilter = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_FRAME_LIMIT",      frameLimit);
 
     //
 
-    tmp = GetEnv( "REGAL_FRAME_LIMIT" );
-    if (tmp) frameLimit = atoi(tmp);
+    getEnv( "REGAL_MD5_COLOR",        frameMd5Color);
+    getEnv( "REGAL_MD5_STENCIL",      frameMd5Stencil);
+    getEnv( "REGAL_MD5_DEPTH",        frameMd5Depth);
+    getEnv( "REGAL_MD5_COLOR_MASK",   frameMd5ColorMask);
+    getEnv( "REGAL_MD5_STENCIL_MASK", frameMd5StencilMask);
+    getEnv( "REGAL_MD5_DEPTH_MASK",   frameMd5DepthMask);
 
     //
 
-    tmp = GetEnv( "REGAL_MD5_COLOR" );
-    if (tmp) frameMd5Color = atoi(tmp)!=0;
-
-    tmp = GetEnv( "REGAL_MD5_STENCIL" );
-    if (tmp) frameMd5Stencil = atoi(tmp)!=0;
-
-    tmp = GetEnv( "REGAL_MD5_DEPTH" );
-    if (tmp) frameMd5Depth = atoi(tmp)!=0;
-
-    tmp = GetEnv( "REGAL_MD5_COLOR_MASK" );
-    if (tmp) frameMd5ColorMask = static_cast<unsigned char>(atoi(tmp));
-
-    tmp = GetEnv( "REGAL_MD5_STENCIL_MASK" );
-    if (tmp) frameMd5StencilMask = static_cast<unsigned char>(atoi(tmp));
-
-    tmp = GetEnv( "REGAL_MD5_DEPTH_MASK" );
-    if (tmp) frameMd5DepthMask = atoi(tmp);
-
-    //
-
-    tmp = GetEnv( "REGAL_SAVE_COLOR" );
-    if (tmp) frameSaveColor = atoi(tmp)!=0;
-
-    tmp = GetEnv( "REGAL_SAVE_STENCIL" );
-    if (tmp) frameSaveStencil = atoi(tmp)!=0;
-
-    tmp = GetEnv( "REGAL_SAVE_DEPTH" );
-    if (tmp) frameSaveDepth = atoi(tmp)!=0;
+    getEnv( "REGAL_SAVE_COLOR",   frameSaveColor);
+    getEnv( "REGAL_SAVE_STENCIL", frameSaveStencil);
+    getEnv( "REGAL_SAVE_DEPTH",   frameSaveDepth);
 
     // Caching
 
 #if REGAL_CACHE
-    tmp = GetEnv( "REGAL_CACHE" );
-    if (tmp) cache = atoi(tmp)!=0;
+    getEnv( "REGAL_CACHE", cache );
 
     // GLSL shader caching
 
-#if REGAL_CACHE_SHADER
-    tmp = GetEnv( "REGAL_CACHE_SHADER" );
-    if (tmp) cacheShader = atoi(tmp)!=0;
-#endif
-
-#if REGAL_CACHE_SHADER_WRITE
-    tmp = GetEnv( "REGAL_CACHE_SHADER_WRITE" );
-    if (tmp) cacheShaderWrite = atoi(tmp)!=0;
-#endif
-
-#if REGAL_CACHE_SHADER_READ
-    tmp = GetEnv( "REGAL_CACHE_SHADER_READ" );
-    if (tmp) cacheShaderRead = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_CACHE_SHADER",       cacheShader,      REGAL_CACHE_SHADER);
+    getEnv( "REGAL_CACHE_SHADER_WRITE", cacheShaderWrite, REGAL_CACHE_SHADER_WRITE);
+    getEnv( "REGAL_CACHE_SHADER_READ",  cacheShaderRead,  REGAL_CACHE_SHADER_READ);
 
     // Teture caching
 
-#if REGAL_CACHE_TEXTURE
-    tmp = GetEnv( "REGAL_CACHE_TEXTURE" );
-    if (tmp) cacheTexture = atoi(tmp)!=0;
+    getEnv( "REGAL_CACHE_TEXTURE",       cacheTexture,      REGAL_CACHE_TEXTURE);
+    getEnv( "REGAL_CACHE_TEXTURE_WRITE", cacheTextureWrite, REGAL_CACHE_TEXTURE_WRITE);
+    getEnv( "REGAL_CACHE_TEXTURE_READ",  cacheTextureRead,  REGAL_CACHE_TEXTURE_READ);
+
+    getEnv( "REGAL_CACHE_DIRECTORY", cacheDirectory );
 #endif
 
-#if REGAL_CACHE_TEXTURE_WRITE
-    tmp = GetEnv( "REGAL_CACHE_TEXTURE_WRITE" );
-    if (tmp) cacheTextureWrite = atoi(tmp)!=0;
-#endif
+    getEnv( "REGAL_CODE_SOURCE", codeSourceFile, REGAL_CODE);
+    getEnv( "REGAL_CODE_HEADER", codeHeaderFile, REGAL_CODE);
 
-#if REGAL_CACHE_TEXTURE_READ
-    tmp = GetEnv( "REGAL_CACHE_TEXTURE_READ" );
-    if (tmp) cacheTextureRead = atoi(tmp)!=0;
-#endif
-
-    tmp = GetEnv( "REGAL_CACHE_DIRECTORY" );
-    if (tmp) cacheDirectory = tmp;
-#endif
-
-#if REGAL_CODE
-    tmp = GetEnv( "REGAL_CODE_SOURCE" );
-    if (tmp) codeSourceFile = tmp;
-
-    tmp = GetEnv( "REGAL_CODE_HEADER" );
-    if (tmp) codeHeaderFile = tmp;
-#endif
-
-#if REGAL_TRACE
-    tmp = GetEnv( "REGAL_TRACE_FILE" );
-    if (tmp) traceFile = tmp;
-#endif
+    getEnv( "REGAL_TRACE_FILE", traceFile, REGAL_TRACE);
 
 #if REGAL_THREAD_LOCKING
-    tmp = GetEnv( "REGAL_THREAD_LOCKING" );
-    if (tmp) enableThreadLocking = atoi(tmp)!=0;
+    getEnv( "REGAL_THREAD_LOCKING", enableThreadLocking );
 #else
     enableThreadLocking = false;
 #endif

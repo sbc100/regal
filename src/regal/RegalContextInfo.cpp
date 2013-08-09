@@ -633,6 +633,7 @@ ContextInfo::ContextInfo()
   gl_win_swap_hint(false),
   regal_arb_draw_buffers(false),
   regal_arb_multitexture(false),
+  regal_arb_texture_cube_map(false),
   regal_arb_texture_env_combine(false),
   regal_arb_texture_env_dot3(false),
   regal_arb_texture_storage(false),
@@ -642,6 +643,7 @@ ContextInfo::ContextInfo()
   regal_ext_direct_state_access(false),
   regal_ext_framebuffer_blit(false),
   regal_ext_framebuffer_object(false),
+  regal_ext_texture_cube_map(false),
   regal_ext_texture_edge_clamp(false),
   regal_ext_texture_env_combine(false),
   regal_ext_texture_env_dot3(false),
@@ -1003,16 +1005,11 @@ ContextInfo::init(const RegalContext &context)
 
 #ifndef REGAL_NO_GETENV
   {
-    const char *vendorEnv = GetEnv("REGAL_GL_VENDOR");
-    if (vendorEnv) regalVendor = vendorEnv;
+    getEnv("REGAL_GL_VENDOR",   regalVendor);
+    getEnv("REGAL_GL_RENDERER", regalRenderer);
+    getEnv("REGAL_GL_VERSION",  regalVersion);
 
-    const char *rendererEnv = GetEnv("REGAL_GL_RENDERER");
-    if (rendererEnv) regalRenderer = rendererEnv;
-
-    const char *versionEnv = GetEnv("REGAL_GL_VERSION");
-    if (versionEnv) regalVersion = versionEnv;
-
-    const char *extensionsEnv = GetEnv("REGAL_GL_EXTENSIONS");
+    const char *extensionsEnv = getEnv("REGAL_GL_EXTENSIONS");
     if (extensionsEnv)
     {
       string_list<string> extList;
@@ -1904,7 +1901,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_texture_compression")) return gl_arb_texture_compression;
   if (!strcmp(ext,"GL_ARB_texture_compression_bptc")) return gl_arb_texture_compression_bptc;
   if (!strcmp(ext,"GL_ARB_texture_compression_rgtc")) return gl_arb_texture_compression_rgtc;
-  if (!strcmp(ext,"GL_ARB_texture_cube_map")) return gl_arb_texture_cube_map;
+  if (!strcmp(ext,"GL_ARB_texture_cube_map")) return regal_arb_texture_cube_map || gl_arb_texture_cube_map;
   if (!strcmp(ext,"GL_ARB_texture_cube_map_array")) return gl_arb_texture_cube_map_array;
   if (!strcmp(ext,"GL_ARB_texture_env_combine")) return regal_arb_texture_env_combine || gl_arb_texture_env_combine;
   if (!strcmp(ext,"GL_ARB_texture_env_dot3")) return regal_arb_texture_env_dot3 || gl_arb_texture_env_dot3;
@@ -2035,7 +2032,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_texture_compression_latc")) return gl_ext_texture_compression_latc;
   if (!strcmp(ext,"GL_EXT_texture_compression_rgtc")) return gl_ext_texture_compression_rgtc;
   if (!strcmp(ext,"GL_EXT_texture_compression_s3tc")) return gl_ext_texture_compression_s3tc;
-  if (!strcmp(ext,"GL_EXT_texture_cube_map")) return gl_ext_texture_cube_map;
+  if (!strcmp(ext,"GL_EXT_texture_cube_map")) return regal_ext_texture_cube_map || gl_ext_texture_cube_map;
   if (!strcmp(ext,"GL_EXT_texture_edge_clamp")) return regal_ext_texture_edge_clamp || gl_ext_texture_edge_clamp;
   if (!strcmp(ext,"GL_EXT_texture_env_combine")) return regal_ext_texture_env_combine || gl_ext_texture_env_combine;
   if (!strcmp(ext,"GL_EXT_texture_env_dot3")) return regal_ext_texture_env_dot3 || gl_ext_texture_env_dot3;

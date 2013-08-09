@@ -1305,7 +1305,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   {
     UNUSED_PARAMETER(ctx);
 
-    if (target != GL_POINT_SPRITE && pname != GL_COORD_REPLACE)
+    if (target != GL_POINT_SPRITE || pname != GL_COORD_REPLACE)
       return false;
 
     GLint ii = texunit - GL_TEXTURE0;

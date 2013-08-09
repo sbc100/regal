@@ -202,6 +202,12 @@ RegalContext::Init()
         info->regal_arb_multitexture = true;
         info->regalExtensionsSet.insert("GL_ARB_multitexture");
       }
+      if (!info->gl_arb_texture_cube_map)
+      {
+        Internal("RegalContext::Init ","GL_ARB_texture_cube_map");
+        info->regal_arb_texture_cube_map = true;
+        info->regalExtensionsSet.insert("GL_ARB_texture_cube_map");
+      }
       if (!info->gl_ati_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
       {
         Internal("RegalContext::Init ","GL_ATI_draw_buffers");
@@ -231,6 +237,12 @@ RegalContext::Init()
         Internal("RegalContext::Init ","GL_EXT_framebuffer_object");
         info->regal_ext_framebuffer_object = true;
         info->regalExtensionsSet.insert("GL_EXT_framebuffer_object");
+      }
+      if (!info->gl_ext_texture_cube_map)
+      {
+        Internal("RegalContext::Init ","GL_EXT_texture_cube_map");
+        info->regal_ext_texture_cube_map = true;
+        info->regalExtensionsSet.insert("GL_EXT_texture_cube_map");
       }
       if (!info->gl_ext_texture_edge_clamp)
       {

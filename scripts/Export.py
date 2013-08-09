@@ -92,6 +92,7 @@ regalLicense = '''
 emulatedExts = {
   'GL_ARB_draw_buffers':              { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 2) || info->gl_nv_draw_buffers'},
   'GL_ARB_multitexture':              { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_ARB_texture_cube_map':          { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
   'GL_ARB_texture_env_combine':       { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
   'GL_ARB_texture_env_dot3':          { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
   'GL_ARB_texture_storage':           { 'emulatedBy' : 'texsto', 'emulatedIf' : '' },
@@ -101,6 +102,7 @@ emulatedExts = {
   'GL_EXT_direct_state_access':       { 'emulatedBy' : 'dsa',    'emulatedIf' : '' },
   'GL_EXT_framebuffer_blit':          { 'emulatedBy' : 'filt',   'emulatedIf' : '(info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit' },
   'GL_EXT_framebuffer_object':        { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_EXT_texture_cube_map':          { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
   'GL_EXT_texture_edge_clamp':        { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
   'GL_EXT_texture_env_combine':       { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
   'GL_EXT_texture_env_dot3':          { 'emulatedBy' : 'iff',    'emulatedIf' : '' },

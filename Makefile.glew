@@ -7,9 +7,10 @@ include build/common.inc
 
 include build/glew.inc
 
-# Not supported for NaCL, yet
+# Not supported for NaCL or emscripten, yet
 
-ifneq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+GLEW.STATIC     :=
 GLEW.SHARED     :=
 endif
 

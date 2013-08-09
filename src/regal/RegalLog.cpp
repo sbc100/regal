@@ -128,88 +128,43 @@ namespace Logging {
   void Init()
   {
 #ifndef REGAL_NO_GETENV
-    const char *tmp;
-
-    tmp = GetEnv("REGAL_LOG_ERROR");
-    if (tmp) enableError = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_WARNING");
-    if (tmp) enableWarning = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_INFO");
-    if (tmp) enableInfo = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_APP");
-    if (tmp) enableApp = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_DRIVER");
-    if (tmp) enableDriver = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_INTERNAL");
-    if (tmp) enableInternal = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_HTTP");
-    if (tmp) enableHttp = atoi(tmp)!=0;
+    getEnv("REGAL_LOG_ERROR",    enableError);
+    getEnv("REGAL_LOG_WARNING",  enableWarning);
+    getEnv("REGAL_LOG_INFO",     enableInfo);
+    getEnv("REGAL_LOG_APP",      enableApp);
+    getEnv("REGAL_LOG_DRIVER",   enableDriver);
+    getEnv("REGAL_LOG_INTERNAL", enableInternal);
+    getEnv("REGAL_LOG_HTTP",     enableHttp);
 
     //
 
-    tmp = GetEnv("REGAL_LOG_API");
+    const char *tmp;
+    tmp = getEnv("REGAL_LOG_API");
     if (tmp && atoi(tmp)) enableApp = enableDriver = true;
 
-    tmp = GetEnv("REGAL_LOG_ALL");
+    tmp = getEnv("REGAL_LOG_ALL");
     if (tmp && atoi(tmp)) enableError = enableWarning = enableInfo = enableApp = enableDriver = enableInternal = enableHttp = true;
 
     //
 
-    tmp = GetEnv("REGAL_LOG_MAX_LINES");
-    if (tmp) maxLines = atoi(tmp);
+    getEnv("REGAL_LOG_MAX_LINES", maxLines);
+    getEnv("REGAL_LOG_MAX_BYTES", maxBytes);
 
-    tmp = GetEnv("REGAL_LOG_MAX_BYTES");
-    if (tmp) maxBytes = atoi(tmp);
+    getEnv("REGAL_LOG_ONCE", once, REGAL_LOG_ONCE);
 
-#if REGAL_LOG_ONCE
-    tmp = GetEnv("REGAL_LOG_ONCE");
-    if (tmp) once = atoi(tmp)!=0;
-#endif
+    getEnv("REGAL_FRAME_TIME",       frameTime);
+    getEnv("REGAL_FRAME_STATISTICS", frameStatistics);
 
-    tmp = GetEnv("REGAL_FRAME_TIME");
-    if (tmp) frameTime = atoi(tmp)!=0;
+    getEnv("REGAL_LOG_POINTERS", pointers, REGAL_LOG_POINTERS);
+    getEnv("REGAL_LOG_THREAD",   thread,   REGAL_LOG_THREAD);
+    getEnv("REGAL_LOG_PROCESS",  process,  REGAL_LOG_PROCESS);
 
-    tmp = GetEnv("REGAL_FRAME_STATISTICS");
-    if (tmp) frameStatistics = atoi(tmp)!=0;
-
-#if REGAL_LOG_POINTERS
-    tmp = GetEnv("REGAL_LOG_POINTERS");
-    if (tmp) pointers = atoi(tmp)!=0;
-#endif
-
-#if REGAL_LOG_THREAD
-    tmp = GetEnv("REGAL_LOG_THREAD");
-    if (tmp) thread = atoi(tmp)!=0;
-#endif
-
-#if REGAL_LOG_PROCESS
-    tmp = GetEnv("REGAL_LOG_PROCESS");
-    if (tmp) process = atoi(tmp)!=0;
-#endif
-
-    tmp = GetEnv("REGAL_LOG_CALLBACK");
-    if (tmp) callback = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG");
-    if (tmp) log = atoi(tmp)!=0;
-
-    tmp =  GetEnv("REGAL_LOG_FILE");
-    if (tmp) logFilename = tmp;
-
-    tmp = GetEnv("REGAL_LOG_JSON");
-    if (tmp) json = atoi(tmp)!=0;
-
-    tmp = GetEnv("REGAL_LOG_JSON_FILE");
-    if (tmp) jsonFilename = tmp;
-
-    tmp = GetEnv("REGAL_HTTP_LOG_LIMIT");
-    if (tmp) bufferLimit = atoi(tmp);
+    getEnv("REGAL_LOG_CALLBACK",   callback);
+    getEnv("REGAL_LOG",            log);
+    getEnv("REGAL_LOG_FILE",       logFilename);
+    getEnv("REGAL_LOG_JSON",       json);
+    getEnv("REGAL_LOG_JSON_FILE",  jsonFilename);
+    getEnv("REGAL_HTTP_LOG_LIMIT", bufferLimit);
 #endif
 
 #ifdef REGAL_HTTP_LOG_LIMIT

@@ -56,10 +56,11 @@ DispatcherGlobal::DispatcherGlobal()
   push_back(logging,Config::enableLog);
   #endif
 
+  // have to check this early for the global dispatches, otherwise we'd use Config
+
   #if REGAL_TRACE
-  { // have to check this early for the global dispatches, otherwise we'd use Config
-    const char *tmp = GetEnv( "REGAL_TRACE" );
-    if (tmp) Config::enableTrace = atoi(tmp)!=0;
+  { 
+    getEnv( "REGAL_TRACE", Config::enableTrace);
     ::memset(&trace, 0, sizeof(trace) );
     InitDispatchTableGlobalTrace(trace);
     push_back(trace,Config::enableTrace);

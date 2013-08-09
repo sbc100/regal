@@ -5,9 +5,14 @@ MAKEFILE_APITRACE_INCLUDED := 1
 
 include build/common.inc
 
-ifeq ($(filter nacl%,$(SYSTEM)),)
-
 include build/apitrace.inc
+
+# Not supported for NaCL or emscripten, currently
+
+ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+APITRACE.STATIC :=
+APITRACE.SHARED :=
+endif
 
 #
 # apitrace
@@ -76,7 +81,6 @@ ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif
 
-endif
 endif
 endif
 

@@ -87,6 +87,7 @@ namespace Emu {
       return false;
     }
 
+    bool GetTexParameteriv(const RegalContext &ctx, GLenum target, GLenum pname, GLint *params);
     bool FilterTexParameter (const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam);
     bool FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment,
                               GLenum textarget, GLuint texture, GLint level);
@@ -98,6 +99,8 @@ namespace Emu {
     bool FramebufferAttachmentSupported(const RegalContext &ctx, GLenum attachment);
 
     bool FilterGet   (const RegalContext &ctx, GLenum pname, int &retVal);
+
+    bool TexImage2D  (const RegalContext &ctx, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid* data);
 
   private:
     GLuint fboID;

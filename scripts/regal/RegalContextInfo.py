@@ -316,16 +316,11 @@ ContextInfo::init(const RegalContext &context)
 
 #ifndef REGAL_NO_GETENV
   {
-    const char *vendorEnv = GetEnv("REGAL_GL_VENDOR");
-    if (vendorEnv) regalVendor = vendorEnv;
+    getEnv("REGAL_GL_VENDOR",   regalVendor);
+    getEnv("REGAL_GL_RENDERER", regalRenderer);
+    getEnv("REGAL_GL_VERSION",  regalVersion);
 
-    const char *rendererEnv = GetEnv("REGAL_GL_RENDERER");
-    if (rendererEnv) regalRenderer = rendererEnv;
-
-    const char *versionEnv = GetEnv("REGAL_GL_VERSION");
-    if (versionEnv) regalVersion = versionEnv;
-
-    const char *extensionsEnv = GetEnv("REGAL_GL_EXTENSIONS");
+    const char *extensionsEnv = getEnv("REGAL_GL_EXTENSIONS");
     if (extensionsEnv)
     {
       string_list<string> extList;

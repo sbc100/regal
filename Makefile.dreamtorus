@@ -5,9 +5,9 @@ MAKEFILE_DREAMTORUS_INCLUDED := 1
 
 include build/common.inc
 
-# Not supported for NaCL - Revisit
+# Not supported for NaCL or emscripten - Revisit
 
-ifeq ($(filter nacl%,$(SYSTEM)),)
+ifeq ($(filter nacl% emscripten%,$(SYSTEM)),)
 
 #
 # dreamtorus

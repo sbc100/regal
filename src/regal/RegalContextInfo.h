@@ -661,6 +661,7 @@ struct ContextInfo
   GLboolean gl_win_swap_hint : 1;
   GLboolean regal_arb_draw_buffers : 1;
   GLboolean regal_arb_multitexture : 1;
+  GLboolean regal_arb_texture_cube_map : 1;
   GLboolean regal_arb_texture_env_combine : 1;
   GLboolean regal_arb_texture_env_dot3 : 1;
   GLboolean regal_arb_texture_storage : 1;
@@ -670,6 +671,7 @@ struct ContextInfo
   GLboolean regal_ext_direct_state_access : 1;
   GLboolean regal_ext_framebuffer_blit : 1;
   GLboolean regal_ext_framebuffer_object : 1;
+  GLboolean regal_ext_texture_cube_map : 1;
   GLboolean regal_ext_texture_edge_clamp : 1;
   GLboolean regal_ext_texture_env_combine : 1;
   GLboolean regal_ext_texture_env_dot3 : 1;

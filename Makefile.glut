@@ -5,11 +5,14 @@ MAKEFILE_GLUT_INCLUDED := 1
 
 include build/common.inc
 
-# Not supported for Mac
-
-ifeq ($(filter darwin%,$(SYSTEM)),)
-
 include build/glut.inc
+
+# Not supported for Mac or emscripten
+
+ifneq ($(filter darwin% emscripten%,$(SYSTEM)),)
+GLUT.STATIC :=
+GLUT.SHARED :=
+endif
 
 #
 # RegalGLUT
@@ -78,6 +81,5 @@ ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif
 
-endif
 endif
 endif

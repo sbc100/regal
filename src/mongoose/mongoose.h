@@ -89,8 +89,8 @@ struct mg_callbacks {
   //          http://tools.ietf.org/html/rfc6455, section 5.2
   //    data, data_len: payload, with mask (if any) already applied.
   // Return value:
-  //    0:     keep this websocket connection opened.
-  //    non-0: close this websocket connection.
+  //    non-0: keep this websocket connection opened.
+  //    0:     close this websocket connection.
   int  (*websocket_data)(struct mg_connection *, int bits,
                          char *data, size_t data_len);
 
@@ -208,6 +208,28 @@ struct mg_request_info *mg_get_request_info(struct mg_connection *);
 int mg_write(struct mg_connection *, const void *buf, size_t len);
 
 
+// Send data to a websocket client wrapped in a websocket frame.
+// It is unsafe to read/write to this connection from another thread.
+// This function is available when mongoose is compiled with -DUSE_WEBSOCKET
+//
+// Return:
+//  0   when the connection has been closed
+//  -1  on error
+//  >0  number of bytes written on success
+int mg_websocket_write(struct mg_connection* conn, int opcode,
+                       const char *data, size_t data_len);
+
+// Opcodes, from http://tools.ietf.org/html/rfc6455
+enum {
+  WEBSOCKET_OPCODE_CONTINUATION = 0x0,
+  WEBSOCKET_OPCODE_TEXT = 0x1,
+  WEBSOCKET_OPCODE_BINARY = 0x2,
+  WEBSOCKET_OPCODE_CONNECTION_CLOSE = 0x8,
+  WEBSOCKET_OPCODE_PING = 0x9,
+  WEBSOCKET_OPCODE_PONG = 0xa
+};
+
+
 // Macros for enabling compiler-specific checks for printf-like arguments.
 #undef PRINTF_FORMAT_STRING
 #if defined(_MSC_VER) && _MSC_VER >= 1400
@@ -239,6 +261,10 @@ void mg_send_file(struct mg_connection *conn, const char *path);
 
 
 // Read data from the remote end, return number of bytes read.
+// Return:
+//   0     connection has been closed by peer. No more data could be read.
+//   < 0   read error. No more data could be read from the connection.
+//   > 0   number of bytes read into the buffer.
 int mg_read(struct mg_connection *, void *buf, size_t len);
 
 
@@ -333,6 +359,14 @@ const char *mg_get_builtin_mime_type(const char *file_name);
 // Return Mongoose version.
 const char *mg_version(void);
 
+// URL-decode input buffer into destination buffer.
+// 0-terminate the destination buffer.
+// form-url-encoded data differs from URI encoding in a way that it
+// uses '+' as character for space, see RFC 1866 section 8.2.1
+// http://ftp.ics.uci.edu/pub/ietf/html/rfc1866.txt
+// Return: length of the decoded data, or -1 if dst buffer is too small.
+int mg_url_decode(const char *src, int src_len, char *dst,
+                  int dst_len, int is_form_url_encoded);
 
 // MD5 hash given strings.
 // Buffer 'buf' must be 33 bytes long. Varargs is a NULL terminated list of

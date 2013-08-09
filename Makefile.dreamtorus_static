@@ -5,9 +5,17 @@ MAKEFILE_DREAMTORUS_STATIC_INCLUDED := 1
 
 include build/common.inc
 
-# Not supported for NaCL - Revisit
+DREAMTORUS_STATIC.EXE := dreamtorus
 
-ifeq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter emscripten%,$(SYSTEM)),)
+DREAMTORUS_STATIC.EXE := dreamtorus_static.html
+endif
+
+ifneq ($(filter nacl%,$(SYSTEM)),)
+DREAMTORUS_STATIC.EXE :=
+endif
+
+ifdef DREAMTORUS_STATIC.EXE
 
 #
 # dreamtorus
@@ -24,11 +32,11 @@ all:: dreamtorus_static.bin
 
 clean:: dreamtorus_static.clean
 
-dreamtorus_static.bin: bin/$(SYSTEM)/dreamtorus_static
+dreamtorus_static.bin: bin/$(SYSTEM)/$(DREAMTORUS_STATIC.EXE)
 
 dreamtorus_static.clean:
 	$(RM) -r tmp/$(SYSTEM)/dreamtorus_static/static
-	$(RM) -r bin/$(SYSTEM)/dreamtorus_static
+	$(RM) -r bin/$(SYSTEM)/$(DREAMTORUS_STATIC.EXE)
 
 DREAMTORUS_STATIC.SRCS       += examples/dreamtorus/src/render.cpp
 DREAMTORUS_STATIC.SRCS       += examples/dreamtorus/glut/code/main.cpp
@@ -65,7 +73,7 @@ ifdef GLUT.STATIC
 DREAMTORUS_STATIC.DEPEND += lib/$(SYSTEM)/$(GLUT.STATIC) lib/$(SYSTEM)/$(GLU.STATIC)
 endif
 
-bin/$(SYSTEM)/dreamtorus_static: $(DREAMTORUS_STATIC.OBJS) $(DREAMTORUS_STATIC.DEPEND)
+bin/$(SYSTEM)/$(DREAMTORUS_STATIC.EXE): $(DREAMTORUS_STATIC.OBJS) $(DREAMTORUS_STATIC.DEPEND)
 	@mkdir -p $(dir $@)
 ifdef APITRACE.STATIC
 	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(DREAMTORUS_STATIC.OBJS) $(LDFLAGS.STARTGROUP) lib/$(SYSTEM)/$(REGAL.STATIC) lib/$(SYSTEM)/$(APITRACE.STATIC) $(LDFLAGS.ENDGROUP) $(REGAL.SHARED.DEPEND) $(DREAMTORUS_STATIC.DEPEND) $(REGAL.LIBS) $(REGAL.LDFLAGS) $(DREAMTORUS_STATIC.LIBS) 
