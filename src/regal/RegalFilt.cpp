@@ -425,6 +425,8 @@ namespace Emu {
 
         case GL_DEPTH_BITS:                    retVal = 24;   break;
 
+        case GL_MAX_EVAL_ORDER:                retVal = 4;    break;
+
         case GL_RED_BITS:
         case GL_GREEN_BITS:
         case GL_BLUE_BITS:

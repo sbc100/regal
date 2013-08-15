@@ -182,6 +182,9 @@ namespace Config {
 #endif
 
     // Default to GLX, if necessary
+    //
+    // This situation can arise if REGAL_SYS_GLX and REGAL_SYS_EGL environment variables
+    // are unset, or via JSON settings.
 
 #if REGAL_SYS_GLX && REGAL_SYS_EGL
     if (sysGLX && sysEGL)
@@ -189,6 +192,9 @@ namespace Config {
 #endif
 
     // Default to GL, if necessary
+    //
+    // This situation can arise if REGAL_SYS_GL and REGAL_SYS_ES2 environment variables
+    // are unset, or via JSON settings.
 
 #if REGAL_SYS_GL && REGAL_SYS_ES2
     if (sysGL && sysES2)

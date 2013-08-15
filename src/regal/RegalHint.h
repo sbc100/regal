@@ -73,6 +73,7 @@ struct Hint
   void Init(RegalContext &ctx)
   {
     UNUSED_PARAMETER(ctx);
+
     lineSmooth               = GL_DONT_CARE;
     polygonSmooth            = GL_DONT_CARE;
     textureCompression       = GL_DONT_CARE;
