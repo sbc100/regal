@@ -102,7 +102,7 @@ static Iff::TextureTargetBitfield TargetToBitfield( GLenum target ) {
 
 static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & state, string_list & src )
 {
-  Internal("Regal::Iff::GenerateVertexShaderSource",rff);
+  Internal("Regal::Iff::GenerateVertexShaderSource", boost::print::optional(rff,Logging::pointers));
 
   const bool gles = rff->gles;
   const bool legacy = rff->legacy;
@@ -917,7 +917,7 @@ static string TextureFetchSwizzle( bool es, bool legacy, Iff::TextureTargetBitfi
 
 static void GenerateFragmentShaderSource( Iff * rff, string_list &src )
 {
-  Internal("Regal::Iff::GenerateFragmentShaderSource",rff);
+  Internal("Regal::Iff::GenerateFragmentShaderSource", boost::print::optional(rff,Logging::pointers));
 
   const Store & st = rff->ffstate.processed;
   if( rff->gles ) {
@@ -1346,7 +1346,7 @@ void State::SetTexgen( Iff * ffn, int coord, GLenum space, const GLfloat * param
 
 void State::GetTexgen( Iff * ffn, int coord, GLenum space, GLfloat * params )
 {
-  Internal("State::GetTexgen ",ffn," ",coord," ",toString(space));
+  Internal("State::GetTexgen ", boost::print::optional(ffn,Logging::pointers)," ",coord," ",toString(space));
 
   TexgenUniform & tgu = uniform.tex[ ffn->activeTextureIndex ].texgen[ coord ];
   switch( space ) {
@@ -1594,7 +1594,7 @@ void Iff::InitFixedFunction(RegalContext &ctx)
   currprog = NULL;
   for( int i = 0; i < REGAL_EMU_IFF_TEXTURE_UNITS; i++ ) {
     textureUnit[ i ] = TextureUnit();
-    textureEnvColor[i] = Float4( 0.0f, 0.0f, 0.0f, 1.0f );
+    textureEnvColor[i] = Float4( 0.0f, 0.0f, 0.0f, 0.0f );
     textureEnvColorVer[i] = 0;
   }
 
@@ -2005,7 +2005,7 @@ void Iff::State::Process( Iff * ffn )
 
 void Iff::UpdateUniforms( RegalContext * ctx )
 {
-  Internal("Regal::Iff::UpdateUniforms",ctx);
+  Internal("Regal::Iff::UpdateUniforms", boost::print::optional(ctx,Logging::pointers));
 
   Program & pgm = *currprog;
   DispatchTableGL & tbl = ctx->dispatcher.emulation;
@@ -2203,7 +2203,7 @@ std::vector<GLuint> evicthist(1 << ( REGAL_FIXED_FUNCTION_PROGRAM_CACHE_SIZE_BIT
 
 void Iff::UseFixedFunctionProgram( RegalContext * ctx )
 {
-  Internal("Regal::Iff::UseFixedFunctionProgram",ctx);
+  Internal("Regal::Iff::UseFixedFunctionProgram", boost::print::optional(ctx,Logging::pointers));
 
   if( currprog != NULL && currprog->ver == ver.Current() ) {
     return;
@@ -2272,7 +2272,7 @@ void Iff::UseFixedFunctionProgram( RegalContext * ctx )
 
 void Iff::UseShaderProgram( RegalContext * ctx )
 {
-  Internal("Regal::Iff::UseShaderProgram",ctx);
+  Internal("Regal::Iff::UseShaderProgram", boost::print::optional(ctx,Logging::pointers));
 
   if( currprog != NULL && currprog->ver == ver.Current() ) {
     return;

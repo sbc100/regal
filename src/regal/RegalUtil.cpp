@@ -92,7 +92,7 @@ inline const char * getEnvironment(const char * const var)
   const char *ret = NULL;
 
   if (var) {
-    ret = GetEnv(var);
+    ret = getEnv(var);
 
     /* Treat empty environment variable the same as non-existant */
     if (!ret || *ret=='\0')

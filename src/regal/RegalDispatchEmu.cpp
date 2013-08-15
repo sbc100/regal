@@ -6112,7 +6112,10 @@ static void REGAL_CALL emu_glGetTexEnvfv(GLenum target, GLenum pname, GLfloat *p
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->iff->GetTexEnv( target, pname, params );
+        _context->iff->RestoreVao( _context );
+        if ( ! _context->iff->GetTexEnv( target, pname, params ) ) {
+            _context->dispatcher.emulation.glGetTexEnvfv( target, pname, params );
+        }
         return;
       }
       #endif
@@ -6199,7 +6202,10 @@ static void REGAL_CALL emu_glGetTexEnviv(GLenum target, GLenum pname, GLint *par
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
-        _context->iff->GetTexEnv( target, pname, params );
+        _context->iff->RestoreVao( _context );
+        if ( ! _context->iff->GetTexEnv( target, pname, params ) ) {
+            _context->dispatcher.emulation.glGetTexEnviv( target, pname, params );
+        }
         return;
       }
       #endif
@@ -6767,7 +6773,12 @@ static void REGAL_CALL emu_glGetTexParameteriv(GLenum target, GLenum pname, GLin
         _context->dsa->RestoreActiveTexture( _context );
       }
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -6810,7 +6821,24 @@ static void REGAL_CALL emu_glGetTexParameteriv(GLenum target, GLenum pname, GLin
         return;
       }
       #endif
+    case 4 :
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (_context->filt->GetTexParameteriv(*_context, target, pname, params))
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
+        }
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();
@@ -16802,6 +16830,9 @@ static void REGAL_CALL emu_glTexImage2D(GLenum target, GLint level, GLint intern
       if (_context->texc) break;
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
@@ -16843,6 +16874,20 @@ static void REGAL_CALL emu_glTexImage2D(GLenum target, GLint level, GLint intern
       }
       #endif
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (_context->filt->TexImage2D(*_context, target, level, internalformat, width, height, border, format, type, pixels))
+        {
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
+        }
+      }
+      #endif
     default:
     {
       DispatchTableGL *_next = _dispatch.next();

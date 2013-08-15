@@ -2,14 +2,17 @@
 #include <string.h>
 #include "mongoose.h"
 
-static int begin_request(struct mg_connection *conn)
-{
+// This function will be called by mongoose on every new request.
+static int begin_request_handler(struct mg_connection *conn) {
   const struct mg_request_info *request_info = mg_get_request_info(conn);
+  char content[100];
 
-  char content[1024];
+  // Prepare the message we're going to send
   int content_length = snprintf(content, sizeof(content),
                                 "Hello from mongoose! Remote port: %d",
                                 request_info->remote_port);
+
+  // Send HTTP reply to the client
   mg_printf(conn,
             "HTTP/1.1 200 OK\r\n"
             "Content-Type: text/plain\r\n"
@@ -17,20 +20,31 @@ static int begin_request(struct mg_connection *conn)
             "\r\n"
             "%s",
             content_length, content);
-  // Mark as processed
+
+  // Returning non-zero tells mongoose that our function has replied to
+  // the client, and mongoose should not send client any more data.
   return 1;
 }
 
-int main(void)
-{
+int main(void) {
   struct mg_context *ctx;
   struct mg_callbacks callbacks;
+
+  // List of options. Last element must be NULL.
   const char *options[] = {"listening_ports", "8080", NULL};
 
-  memset(&callbacks,0,sizeof(callbacks));
-  callbacks.begin_request = begin_request;
+  // Prepare callbacks structure. We have only one callback, the rest are NULL.
+  memset(&callbacks, 0, sizeof(callbacks));
+  callbacks.begin_request = begin_request_handler;
+
+  // Start the web server.
   ctx = mg_start(&callbacks, NULL, options);
-  getchar();  // Wait until user hits "enter"
+
+  // Wait until user hits "enter". Server is running in separate thread.
+  // Navigating to http://localhost:8080 will invoke begin_request_handler().
+  getchar();
+
+  // Stop the server.
   mg_stop(ctx);
 
   return 0;

@@ -88,11 +88,8 @@ namespace Http
     // Environment variable HTTP configuration
 
     #ifndef REGAL_NO_GETENV
-    const char *n = GetEnv("REGAL_NO_HTTP");
-    if (n) enabled = !atoi(n);
-
-    const char *p = GetEnv("REGAL_HTTP_PORT");
-    if (p) port = atoi(p);
+    getEnv("REGAL_NO_HTTP", enabled);
+    getEnv("REGAL_HTTP_PORT", port);
     #endif
 
     // Compile-time HTTP configuration

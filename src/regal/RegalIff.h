@@ -1763,9 +1763,9 @@ struct Iff
   void TexEnv( GLenum target, GLenum pname, T v ) { TexEnv( GL_TEXTURE0 + shadowActiveTextureIndex, target, pname, v ); }
 
   template <typename T>
-  void GetTexEnv( GLenum target, GLenum pname, T * params ) {
+  bool GetTexEnv( GLenum target, GLenum pname, T * params ) {
     if( target != GL_TEXTURE_ENV ) {
-      return;
+      return false;
     }
     switch( pname ) {
       case GL_TEXTURE_ENV_MODE: {
@@ -1855,8 +1855,9 @@ struct Iff
         break;
       }
       default:
-        break;
+        return false;
     }
+    return true;
   }
 
   void ShadeModel( GLenum mode ) {

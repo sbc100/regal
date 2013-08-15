@@ -62,6 +62,7 @@ struct Xfer
   void Init( RegalContext &ctx )
   {
     UNUSED_PARAMETER(ctx);
+
     activeTextureIndex = 0;
     for( int i  = 0; i < REGAL_EMU_MAX_TEXTURE_UNITS; i++ ) {
       textureBinding2D[ i ] = 0;

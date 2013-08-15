@@ -1737,7 +1737,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMap1d(GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMap1d","(", toString(target), ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", points, ")");
+    App("glMap1d","(", toString(target), ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1747,7 +1747,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMap1f","(", toString(target), ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", points, ")");
+    App("glMap1f","(", toString(target), ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4320,7 +4320,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPointParameterfv(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPointParameterfv","(", toString(pname), ", ", params, ")");
+    App("glPointParameterfv","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -5923,7 +5923,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glClearBufferfv(GLenum buffer, GLint drawbuffer, const GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glClearBufferfv","(", toString(buffer), ", ", drawbuffer, ", ", value, ")");
+    App("glClearBufferfv","(", toString(buffer), ", ", drawbuffer, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -5943,7 +5943,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glClearBufferuiv(GLenum buffer, GLint drawbuffer, const GLuint *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glClearBufferuiv","(", toString(buffer), ", ", drawbuffer, ", ", value, ")");
+    App("glClearBufferuiv","(", toString(buffer), ", ", drawbuffer, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6585,7 +6585,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDebugMessageEnableAMD","(", toString(category), ", ", toString(severity), ", ", count, ", ", ids, ", ", toString(enabled), ")");
+    App("glDebugMessageEnableAMD","(", toString(category), ", ", toString(severity), ", ", count, ", ", boost::print::optional(ids,Logging::pointers), ", ", toString(enabled), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6612,7 +6612,7 @@ extern "C" {
   REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetDebugMessageLogAMD","(", count, ", ", bufsize, ", ", categories, ", ", severities, ", ", ids, ", ", lengths, ", ", boost::print::quote(message,'"'), ")");
+    App("glGetDebugMessageLogAMD","(", count, ", ", bufsize, ", ", boost::print::optional(categories,Logging::pointers), ", ", boost::print::optional(severities,Logging::pointers), ", ", boost::print::optional(ids,Logging::pointers), ", ", boost::print::optional(lengths,Logging::pointers), ", ", boost::print::quote(message,'"'), ")");
     if (!_context) return 0;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6700,7 +6700,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteNamesAMD(GLenum identifier, GLuint num, const GLuint *names)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteNamesAMD","(", toString(identifier), ", ", num, ", ", names, ")");
+    App("glDeleteNamesAMD","(", toString(identifier), ", ", num, ", ", boost::print::optional(names,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6710,7 +6710,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGenNamesAMD(GLenum identifier, GLuint num, GLuint *names)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGenNamesAMD","(", toString(identifier), ", ", num, ", ", names, ")");
+    App("glGenNamesAMD","(", toString(identifier), ", ", num, ", ", boost::print::optional(names,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6844,7 +6844,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSetMultisamplefvAMD(GLenum pname, GLuint index, const GLfloat *val)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSetMultisamplefvAMD","(", toString(pname), ", ", index, ", ", val, ")");
+    App("glSetMultisamplefvAMD","(", toString(pname), ", ", index, ", ", boost::print::optional(val,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6968,7 +6968,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetTranslatedShaderSourceANGLE","(", shader, ", ", bufsize, ", ", length, ", ", boost::print::quote(source,'"'), ")");
+    App("glGetTranslatedShaderSourceANGLE","(", shader, ", ", bufsize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::quote(source,'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7022,7 +7022,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiDrawElementArrayAPPLE(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiDrawElementArrayAPPLE","(", toString(mode), ", ", boost::print::optional(first,Logging::pointers), ", ", count, ", ", primcount, ")");
+    App("glMultiDrawElementArrayAPPLE","(", toString(mode), ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7032,7 +7032,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, const GLint *first, const GLsizei *count, GLsizei primcount)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiDrawRangeElementArrayAPPLE","(", toString(mode), ", ", start, ", ", end, ", ", boost::print::optional(first,Logging::pointers), ", ", count, ", ", primcount, ")");
+    App("glMultiDrawRangeElementArrayAPPLE","(", toString(mode), ", ", start, ", ", end, ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7044,7 +7044,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteFencesAPPLE(GLsizei n, const GLuint *fences)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteFencesAPPLE","(", n, ", ", fences, ")");
+    App("glDeleteFencesAPPLE","(", n, ", ", boost::print::optional(fences,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7264,7 +7264,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetInteger64vAPPLE(GLenum pname, GLint64 *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetInteger64vAPPLE","(", toString(pname), ", ", params, ")");
+    App("glGetInteger64vAPPLE","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7274,7 +7274,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetSyncivAPPLE(GLsync sync, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetSyncivAPPLE","(", sync, ", ", toString(pname), ", ", bufSize, ", ", length, ", ", boost::print::optional(values,Logging::pointers), ")");
+    App("glGetSyncivAPPLE","(", sync, ", ", toString(pname), ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::optional(values,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7338,7 +7338,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteVertexArraysAPPLE(GLsizei n, const GLuint *arrays)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteVertexArraysAPPLE","(", n, ", ", arrays, ")");
+    App("glDeleteVertexArraysAPPLE","(", n, ", ", boost::print::optional(arrays,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7432,7 +7432,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMapVertexAttrib1dAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", points, ")");
+    App("glMapVertexAttrib1dAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7442,7 +7442,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMapVertexAttrib1fAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", points, ")");
+    App("glMapVertexAttrib1fAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", stride, ", ", order, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7668,7 +7668,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glProgramUniformHandleui64vARB(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glProgramUniformHandleui64vARB","(", program, ", ", location, ", ", count, ", ", values, ")");
+    App("glProgramUniformHandleui64vARB","(", program, ", ", location, ", ", count, ", ", boost::print::optional(values,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7688,7 +7688,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glUniformHandleui64vARB(GLint location, GLsizei count, const GLuint64 *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glUniformHandleui64vARB","(", location, ", ", count, ", ", value, ")");
+    App("glUniformHandleui64vARB","(", location, ", ", count, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7708,7 +7708,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVertexAttribL1ui64vARB(GLuint index, const GLuint64EXT *v)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVertexAttribL1ui64vARB","(", index, ", ", v, ")");
+    App("glVertexAttribL1ui64vARB","(", index, ", ", boost::print::optional(v,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8609,7 +8609,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glColorTableParameterfv(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glColorTableParameterfv","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glColorTableParameterfv","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8659,7 +8659,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glConvolutionParameterfv(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glConvolutionParameterfv","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glConvolutionParameterfv","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8957,7 +8957,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetInternalformati64v","(", toString(target), ", ", toString(internalformat), ", ", toString(pname), ", ", bufSize, ", ", params, ")");
+    App("glGetInternalformati64v","(", toString(target), ", ", toString(internalformat), ", ", toString(pname), ", ", bufSize, ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9083,7 +9083,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMatrixIndexuivARB(GLint size, const GLuint *indices)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMatrixIndexuivARB","(", size, ", ", indices, ")");
+    App("glMatrixIndexuivARB","(", size, ", ", boost::print::optional(indices,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9093,7 +9093,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMatrixIndexusvARB(GLint size, const GLushort *indices)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMatrixIndexusvARB","(", size, ", ", indices, ")");
+    App("glMatrixIndexusvARB","(", size, ", ", boost::print::optional(indices,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9105,7 +9105,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint *buffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glBindBuffersBase","(", toString(target), ", ", first, ", ", count, ", ", buffers, ")");
+    App("glBindBuffersBase","(", toString(target), ", ", first, ", ", count, ", ", boost::print::optional(buffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9115,7 +9115,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizeiptr *sizes)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glBindBuffersRange","(", toString(target), ", ", first, ", ", count, ", ", buffers, ", ", offsets, ", ", sizes, ")");
+    App("glBindBuffersRange","(", toString(target), ", ", first, ", ", count, ", ", boost::print::optional(buffers,Logging::pointers), ", ", offsets, ", ", sizes, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9125,7 +9125,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glBindImageTextures(GLuint first, GLsizei count, const GLuint *textures)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glBindImageTextures","(", first, ", ", count, ", ", textures, ")");
+    App("glBindImageTextures","(", first, ", ", count, ", ", boost::print::optional(textures,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9135,7 +9135,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glBindSamplers(GLuint first, GLsizei count, const GLuint *samplers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glBindSamplers","(", first, ", ", count, ", ", samplers, ")");
+    App("glBindSamplers","(", first, ", ", count, ", ", boost::print::optional(samplers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9145,7 +9145,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glBindTextures(GLuint first, GLsizei count, const GLuint *textures)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glBindTextures","(", first, ", ", count, ", ", textures, ")");
+    App("glBindTextures","(", first, ", ", count, ", ", boost::print::optional(textures,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9155,7 +9155,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glBindVertexBuffers(GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glBindVertexBuffers","(", first, ", ", count, ", ", buffers, ", ", offsets, ", ", strides, ")");
+    App("glBindVertexBuffers","(", first, ", ", count, ", ", boost::print::optional(buffers,Logging::pointers), ", ", offsets, ", ", boost::print::optional(strides,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9635,7 +9635,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPointParameterfvARB(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPointParameterfvARB","(", toString(pname), ", ", params, ")");
+    App("glPointParameterfvARB","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9687,7 +9687,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei *length, GLchar *name)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetProgramResourceName","(", program, ", ", toString(programInterface), ", ", index, ", ", bufSize, ", ", length, ", ", boost::print::quote(name,'"'), ")");
+    App("glGetProgramResourceName","(", program, ", ", toString(programInterface), ", ", index, ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::quote(name,'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9697,7 +9697,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum *props, GLsizei bufSize, GLsizei *length, GLint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetProgramResourceiv","(", program, ", ", toString(programInterface), ", ", index, ", ", propCount, ", ", props, ", ", bufSize, ", ", length, ", ", boost::print::optional(params,Logging::pointers), ")");
+    App("glGetProgramResourceiv","(", program, ", ", toString(programInterface), ", ", index, ", ", propCount, ", ", props, ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10913,7 +10913,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glUniform1fvARB","(", location, ", ", count, ", ", value, ")");
+    App("glUniform1fvARB","(", location, ", ", count, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10953,7 +10953,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glUniform2fvARB(GLint location, GLsizei count, const GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glUniform2fvARB","(", location, ", ", count, ", ", value, ")");
+    App("glUniform2fvARB","(", location, ", ", count, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10993,7 +10993,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glUniform3fvARB(GLint location, GLsizei count, const GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glUniform3fvARB","(", location, ", ", count, ", ", value, ")");
+    App("glUniform3fvARB","(", location, ", ", count, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -11033,7 +11033,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glUniform4fvARB(GLint location, GLsizei count, const GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glUniform4fvARB","(", location, ", ", count, ", ", value, ")");
+    App("glUniform4fvARB","(", location, ", ", count, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -11931,7 +11931,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint *uniformIndices, GLenum pname, GLint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetActiveUniformsiv","(", program, ", ", uniformCount, ", ", uniformIndices, ", ", toString(pname), ")");
+    App("glGetActiveUniformsiv","(", program, ", ", uniformCount, ", ", boost::print::optional(uniformIndices,Logging::pointers), ", ", toString(pname), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12219,7 +12219,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glWeightdvARB(GLint size, const GLdouble *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glWeightdvARB","(", size, ", ", weights, ")");
+    App("glWeightdvARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12229,7 +12229,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glWeightfvARB(GLint size, const GLfloat *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glWeightfvARB","(", size, ", ", weights, ")");
+    App("glWeightfvARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12269,7 +12269,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glWeightuivARB(GLint size, const GLuint *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glWeightuivARB","(", size, ", ", weights, ")");
+    App("glWeightuivARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12279,7 +12279,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glWeightusvARB(GLint size, const GLushort *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glWeightusvARB","(", size, ", ", weights, ")");
+    App("glWeightusvARB","(", size, ", ", boost::print::optional(weights,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -13767,7 +13767,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTexBumpParameterfvATI(GLenum pname, const GLfloat *param)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTexBumpParameterfvATI","(", toString(pname), ", ", param, ")");
+    App("glTexBumpParameterfvATI","(", toString(pname), ", ", boost::print::optional(param,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -14757,7 +14757,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glConvolutionParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glConvolutionParameterfvEXT","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glConvolutionParameterfvEXT","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -15155,7 +15155,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei *length, GLchar *label)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetObjectLabelEXT","(", toString(type), ", ", object, ", ", bufSize, ", ", length, ", ", boost::print::quote(label,'"'), ")");
+    App("glGetObjectLabelEXT","(", toString(type), ", ", object, ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::quote(label,'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16305,7 +16305,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiTexEnvfvEXT","(", toString(texunit), ", ", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glMultiTexEnvfvEXT","(", toString(texunit), ", ", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16345,7 +16345,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLdouble *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiTexGendvEXT","(", toString(texunit), ", ", toString(coord), ", ", toString(pname), ", ", params, ")");
+    App("glMultiTexGendvEXT","(", toString(texunit), ", ", toString(coord), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16365,7 +16365,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiTexGenfvEXT","(", toString(texunit), ", ", toString(coord), ", ", toString(pname), ", ", params, ")");
+    App("glMultiTexGenfvEXT","(", toString(texunit), ", ", toString(coord), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16435,7 +16435,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, const GLuint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiTexParameterIuivEXT","(", toString(texunit), ", ", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glMultiTexParameterIuivEXT","(", toString(texunit), ", ", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17335,7 +17335,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, const GLuint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTextureParameterIuivEXT","(", texture, ", ", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glTextureParameterIuivEXT","(", texture, ", ", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17749,7 +17749,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFragmentLightModelfvEXT(GLenum pname, GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFragmentLightModelfvEXT","(", toString(pname), ", ", params, ")");
+    App("glFragmentLightModelfvEXT","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17789,7 +17789,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFragmentLightfvEXT","(", toString(light), ", ", toString(pname), ", ", params, ")");
+    App("glFragmentLightfvEXT","(", toString(light), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17829,7 +17829,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFragmentMaterialfvEXT","(", toString(face), ", ", toString(pname), ", ", params, ")");
+    App("glFragmentMaterialfvEXT","(", toString(face), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17859,7 +17859,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetFragmentLightfvEXT","(", toString(light), ", ", toString(pname), ", ", params, ")");
+    App("glGetFragmentLightfvEXT","(", toString(light), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17879,7 +17879,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetFragmentMaterialfvEXT","(", toString(face), ", ", toString(pname), ", ", params, ")");
+    App("glGetFragmentMaterialfvEXT","(", toString(face), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18693,7 +18693,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiDrawElementsEXT","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ")");
+    App("glMultiDrawElementsEXT","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18781,7 +18781,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteQueriesEXT(GLsizei n, const GLuint *ids)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteQueriesEXT","(", n, ", ", ids, ")");
+    App("glDeleteQueriesEXT","(", n, ", ", boost::print::optional(ids,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18801,7 +18801,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGenQueriesEXT(GLsizei n, GLuint *ids)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGenQueriesEXT","(", n, ", ", ids, ")");
+    App("glGenQueriesEXT","(", n, ", ", boost::print::optional(ids,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18811,7 +18811,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetQueryObjectuivEXT(GLuint id, GLenum pname, GLuint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetQueryObjectuivEXT","(", id, ", ", toString(pname), ", ", params, ")");
+    App("glGetQueryObjectuivEXT","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18885,7 +18885,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPixelTransformParameterfvEXT","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glGetPixelTransformParameterfvEXT","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18957,7 +18957,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPointParameterfvEXT(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPointParameterfvEXT","(", toString(pname), ", ", params, ")");
+    App("glPointParameterfvEXT","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18993,7 +18993,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetnUniformfvEXT(GLuint program, GLint location, GLsizei bufSize, GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetnUniformfvEXT","(", program, ", ", location, ", ", bufSize, ", ", params, ")");
+    App("glGetnUniformfvEXT","(", program, ", ", location, ", ", bufSize, ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19657,7 +19657,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glEdgeFlagPointerEXT(GLsizei stride, GLsizei count, const GLboolean *pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glEdgeFlagPointerEXT","(", stride, ", ", count, ", ", pointer, ")");
+    App("glEdgeFlagPointerEXT","(", stride, ", ", count, ", ", boost::print::optional(pointer,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20171,7 +20171,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVariantdvEXT(GLuint id, const GLdouble *addr)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVariantdvEXT","(", id, ", ", addr, ")");
+    App("glVariantdvEXT","(", id, ", ", boost::print::optional(addr,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20181,7 +20181,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVariantfvEXT(GLuint id, const GLfloat *addr)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVariantfvEXT","(", id, ", ", addr, ")");
+    App("glVariantfvEXT","(", id, ", ", boost::print::optional(addr,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20221,7 +20221,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVariantuivEXT(GLuint id, const GLuint *addr)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVariantuivEXT","(", id, ", ", addr, ")");
+    App("glVariantuivEXT","(", id, ", ", boost::print::optional(addr,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20231,7 +20231,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVariantusvEXT(GLuint id, const GLushort *addr)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVariantusvEXT","(", id, ", ", addr, ")");
+    App("glVariantusvEXT","(", id, ", ", boost::print::optional(addr,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20364,7 +20364,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glImageTransformParameterfvHP(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glImageTransformParameterfvHP","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glImageTransformParameterfvHP","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20396,7 +20396,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiModeDrawArraysIBM(const GLenum *mode, const GLint *first, const GLsizei *count, GLsizei primcount, GLint modestride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiModeDrawArraysIBM","(", mode, ", ", boost::print::optional(first,Logging::pointers), ", ", count, ", ", primcount, ", ", modestride, ")");
+    App("glMultiModeDrawArraysIBM","(", mode, ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ", ", modestride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20406,7 +20406,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMultiModeDrawElementsIBM(const GLenum *mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, GLint modestride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMultiModeDrawElementsIBM","(", mode, ", ", count, ", ", toString(type), ", ", indices, ", ", primcount, ", ", modestride, ")");
+    App("glMultiModeDrawElementsIBM","(", mode, ", ", boost::print::optional(count,Logging::pointers), ", ", toString(type), ", ", indices, ", ", primcount, ", ", modestride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20418,7 +20418,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glColorPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glColorPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20438,7 +20438,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFogCoordPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFogCoordPointerListIBM","(", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glFogCoordPointerListIBM","(", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20448,7 +20448,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glIndexPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glIndexPointerListIBM","(", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glIndexPointerListIBM","(", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20458,7 +20458,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glNormalPointerListIBM(GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glNormalPointerListIBM","(", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glNormalPointerListIBM","(", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20468,7 +20468,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSecondaryColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSecondaryColorPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glSecondaryColorPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20478,7 +20478,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTexCoordPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTexCoordPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glTexCoordPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20488,7 +20488,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVertexPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid **pointer, GLint ptrstride)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVertexPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", pointer, ", ", ptrstride, ")");
+    App("glVertexPointerListIBM","(", size, ", ", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ", ", ptrstride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20534,7 +20534,7 @@ extern "C" {
   REGAL_DECL GLvoid *REGAL_CALL glMapTexture2DINTEL(GLuint texture, GLint level, GLbitfield access, GLint *stride, GLenum *layout)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMapTexture2DINTEL","(", texture, ", ", level, ", ", access, ", ", boost::print::optional(stride,Logging::pointers), ", ", layout, ")");
+    App("glMapTexture2DINTEL","(", texture, ", ", level, ", ", access, ", ", boost::print::optional(stride,Logging::pointers), ", ", boost::print::optional(layout,Logging::pointers), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20566,7 +20566,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glColorPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glColorPointervINTEL","(", size, ", ", toString(type), ", ", pointer, ")");
+    App("glColorPointervINTEL","(", size, ", ", toString(type), ", ", boost::print::optional(pointer,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20576,7 +20576,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glNormalPointervINTEL(GLenum type, const GLvoid **pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glNormalPointervINTEL","(", toString(type), ", ", pointer, ")");
+    App("glNormalPointervINTEL","(", toString(type), ", ", boost::print::optional(pointer,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20586,7 +20586,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTexCoordPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTexCoordPointervINTEL","(", size, ", ", toString(type), ", ", pointer, ")");
+    App("glTexCoordPointervINTEL","(", size, ", ", toString(type), ", ", boost::print::optional(pointer,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20596,7 +20596,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVertexPointervINTEL(GLint size, GLenum type, const GLvoid **pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVertexPointervINTEL","(", size, ", ", toString(type), ", ", pointer, ")");
+    App("glVertexPointervINTEL","(", size, ", ", toString(type), ", ", boost::print::optional(pointer,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20640,7 +20640,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDebugMessageControl","(", toString(source), ", ", toString(type), ", ", toString(severity), ", ", count, ", ", ids, ", ", toString(enabled), ")");
+    App("glDebugMessageControl","(", toString(source), ", ", toString(type), ", ", toString(severity), ", ", count, ", ", boost::print::optional(ids,Logging::pointers), ", ", toString(enabled), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20667,7 +20667,7 @@ extern "C" {
   REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetDebugMessageLog","(", count, ", ", bufsize, ", ", sources, ", ", types, ", ", ids, ", ", severities, ", ", lengths, ", ", boost::print::quote(messageLog,'"'), ")");
+    App("glGetDebugMessageLog","(", count, ", ", bufsize, ", ", boost::print::optional(sources,Logging::pointers), ", ", boost::print::optional(types,Logging::pointers), ", ", boost::print::optional(ids,Logging::pointers), ", ", boost::print::optional(severities,Logging::pointers), ", ", boost::print::optional(lengths,Logging::pointers), ", ", boost::print::quote(messageLog,'"'), ")");
     if (!_context) return 0;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20677,7 +20677,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetObjectLabel","(", toString(identifier), ", ", name, ", ", bufSize, ", ", length, ", ", boost::print::quote(label,'"'), ")");
+    App("glGetObjectLabel","(", toString(identifier), ", ", name, ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::quote(label,'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20687,7 +20687,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetObjectPtrLabel(const GLvoid *ptr, GLsizei bufSize, GLsizei *length, GLchar *label)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetObjectPtrLabel","(", boost::print::optional(ptr,Logging::pointers), ", ", bufSize, ", ", length, ", ", boost::print::quote(label,'"'), ")");
+    App("glGetObjectPtrLabel","(", boost::print::optional(ptr,Logging::pointers), ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::quote(label,'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21180,7 +21180,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glProgramUniformHandleui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glProgramUniformHandleui64vNV","(", program, ", ", location, ", ", count, ", ", values, ")");
+    App("glProgramUniformHandleui64vNV","(", program, ", ", location, ", ", count, ", ", boost::print::optional(values,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21200,7 +21200,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glUniformHandleui64vNV(GLint location, GLsizei count, const GLuint64 *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glUniformHandleui64vNV","(", location, ", ", count, ", ", value, ")");
+    App("glUniformHandleui64vNV","(", location, ", ", count, ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21394,7 +21394,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glMapParameterfvNV(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glMapParameterfvNV","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glMapParameterfvNV","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22688,7 +22688,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glCoverFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glCoverFillPathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", toString(coverMode), ", ", toString(transformType), ", ", transformValues, ")");
+    App("glCoverFillPathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", toString(coverMode), ", ", toString(transformType), ", ", boost::print::optional(transformValues,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22708,7 +22708,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glCoverStrokePathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", toString(coverMode), ", ", toString(transformType), ", ", transformValues, ")");
+    App("glCoverStrokePathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", toString(coverMode), ", ", toString(transformType), ", ", boost::print::optional(transformValues,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22748,7 +22748,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathColorGenfvNV","(", toString(color), ", ", toString(pname), ", ", value, ")");
+    App("glGetPathColorGenfvNV","(", toString(color), ", ", toString(pname), ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22778,7 +22778,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathCoordsNV(GLuint name, GLfloat *coords)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathCoordsNV","(", name, ", ", coords, ")");
+    App("glGetPathCoordsNV","(", name, ", ", boost::print::optional(coords,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22788,7 +22788,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathDashArrayNV(GLuint name, GLfloat *dashArray)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathDashArrayNV","(", name, ", ", dashArray, ")");
+    App("glGetPathDashArrayNV","(", name, ", ", boost::print::optional(dashArray,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22808,7 +22808,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat *metrics)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathMetricRangeNV","(", metricQueryMask, ", ", fistPathName, ", ", numPaths, ", ", stride, ", ", metrics, ")");
+    App("glGetPathMetricRangeNV","(", metricQueryMask, ", ", fistPathName, ", ", numPaths, ", ", stride, ", ", boost::print::optional(metrics,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22818,7 +22818,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathMetricsNV","(", metricQueryMask, ", ", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", stride, ", ", metrics, ")");
+    App("glGetPathMetricsNV","(", metricQueryMask, ", ", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", stride, ", ", boost::print::optional(metrics,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22828,7 +22828,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathParameterfvNV(GLuint name, GLenum param, GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathParameterfvNV","(", name, ", ", toString(param), ", ", value, ")");
+    App("glGetPathParameterfvNV","(", name, ", ", toString(param), ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22848,7 +22848,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathSpacingNV","(", toString(pathListMode), ", ", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", advanceScale, ", ", kerningScale, ", ", toString(transformType), ", ", returnedSpacing, ")");
+    App("glGetPathSpacingNV","(", toString(pathListMode), ", ", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", advanceScale, ", ", kerningScale, ", ", toString(transformType), ", ", boost::print::optional(returnedSpacing,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22858,7 +22858,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetPathTexGenfvNV","(", toString(texCoordSet), ", ", toString(pname), ", ", value, ")");
+    App("glGetPathTexGenfvNV","(", toString(texCoordSet), ", ", toString(pname), ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22918,7 +22918,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat *coeffs)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPathColorGenNV","(", toString(color), ", ", toString(genMode), ", ", toString(colorFormat), ", ", coeffs, ")");
+    App("glPathColorGenNV","(", toString(color), ", ", toString(genMode), ", ", toString(colorFormat), ", ", boost::print::optional(coeffs,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22958,7 +22958,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPathDashArrayNV(GLuint path, GLsizei dashCount, const GLfloat *dashArray)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPathDashArrayNV","(", path, ", ", dashCount, ", ", dashArray, ")");
+    App("glPathDashArrayNV","(", path, ", ", dashCount, ", ", boost::print::optional(dashArray,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23008,7 +23008,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPathParameterfvNV(GLuint path, GLenum pname, const GLfloat *value)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPathParameterfvNV","(", path, ", ", toString(pname), ", ", value, ")");
+    App("glPathParameterfvNV","(", path, ", ", toString(pname), ", ", boost::print::optional(value,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23088,7 +23088,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPathTexGenNV","(", toString(texCoordSet), ", ", toString(genMode), ", ", components, ", ", coeffs, ")");
+    App("glPathTexGenNV","(", toString(texCoordSet), ", ", toString(genMode), ", ", components, ", ", boost::print::optional(coeffs,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23098,7 +23098,7 @@ extern "C" {
   REGAL_DECL GLboolean REGAL_CALL glPointAlongPathNV(GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat *x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPointAlongPathNV","(", path, ", ", startSegment, ", ", numSegments, ", ", distance, ", ", x, ", ", y, ", ", tangentX, ", ", tangentY, ")");
+    App("glPointAlongPathNV","(", path, ", ", startSegment, ", ", numSegments, ", ", distance, ", ", boost::print::optional(x,Logging::pointers), ", ", boost::print::optional(y,Logging::pointers), ", ", boost::print::optional(tangentX,Logging::pointers), ", ", boost::print::optional(tangentY,Logging::pointers), ")");
     if (!_context) return GL_FALSE;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23108,7 +23108,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilFillPathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", toString(fillMode), ", ", mask, ", ", toString(transformType), ", ", transformValues, ")");
+    App("glStencilFillPathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", toString(fillMode), ", ", mask, ", ", toString(transformType), ", ", boost::print::optional(transformValues,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23128,7 +23128,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const GLvoid *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glStencilStrokePathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", reference, ", ", mask, ", ", toString(transformType), ", ", transformValues, ")");
+    App("glStencilStrokePathInstancedNV","(", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", reference, ", ", mask, ", ", toString(transformType), ", ", boost::print::optional(transformValues,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23148,7 +23148,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTransformPathNV(GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat *transformValues)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTransformPathNV","(", resultPath, ", ", srcPath, ", ", toString(transformType), ", ", transformValues, ")");
+    App("glTransformPathNV","(", resultPath, ", ", srcPath, ", ", toString(transformType), ", ", boost::print::optional(transformValues,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23158,7 +23158,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glWeightPathsNV(GLuint resultPath, GLsizei numPaths, const GLuint *paths, const GLfloat *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glWeightPathsNV","(", resultPath, ", ", numPaths, ", ", paths, ", ", weights, ")");
+    App("glWeightPathsNV","(", resultPath, ", ", numPaths, ", ", boost::print::optional(paths,Logging::pointers), ", ", boost::print::optional(weights,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23340,7 +23340,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glCombinerParameterfvNV(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glCombinerParameterfvNV","(", toString(pname), ", ", params, ")");
+    App("glCombinerParameterfvNV","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23442,7 +23442,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glCombinerStageParameterfvNV(GLenum stage, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glCombinerStageParameterfvNV","(", toString(stage), ", ", toString(pname), ", ", params, ")");
+    App("glCombinerStageParameterfvNV","(", toString(stage), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25034,7 +25034,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVideoCaptureStreamParameterdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVideoCaptureStreamParameterdvNV","(", video_capture_slot, ", ", stream, ", ", toString(pname), ", ", params, ")");
+    App("glVideoCaptureStreamParameterdvNV","(", video_capture_slot, ", ", stream, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25044,7 +25044,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glVideoCaptureStreamParameterfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glVideoCaptureStreamParameterfvNV","(", video_capture_slot, ", ", stream, ", ", toString(pname), ", ", params, ")");
+    App("glVideoCaptureStreamParameterfvNV","(", video_capture_slot, ", ", stream, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25132,7 +25132,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteFramebuffersOES(GLsizei n, const GLuint *framebuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteFramebuffersOES","(", n, ", ", framebuffers, ")");
+    App("glDeleteFramebuffersOES","(", n, ", ", boost::print::optional(framebuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25142,7 +25142,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteRenderbuffersOES(GLsizei n, const GLuint *renderbuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteRenderbuffersOES","(", n, ", ", renderbuffers, ")");
+    App("glDeleteRenderbuffersOES","(", n, ", ", boost::print::optional(renderbuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25172,7 +25172,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGenFramebuffersOES(GLsizei n, GLuint *framebuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGenFramebuffersOES","(", n, ", ", framebuffers, ")");
+    App("glGenFramebuffersOES","(", n, ", ", boost::print::optional(framebuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25182,7 +25182,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGenRenderbuffersOES(GLsizei n, GLuint *renderbuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGenRenderbuffersOES","(", n, ", ", renderbuffers, ")");
+    App("glGenRenderbuffersOES","(", n, ", ", boost::print::optional(renderbuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25254,7 +25254,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetProgramBinaryOES(GLuint program, GLsizei bufSize, GLsizei *length, GLenum *binaryFormat, GLvoid *binary)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetProgramBinaryOES","(", program, ", ", bufSize, ", ", length, ", ", binaryFormat, ", ", boost::print::optional(binary,Logging::pointers), ")");
+    App("glGetProgramBinaryOES","(", program, ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::optional(binaryFormat,Logging::pointers), ", ", boost::print::optional(binary,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25276,7 +25276,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetBufferPointervOES(GLenum target, GLenum pname, GLvoid **params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetBufferPointervOES","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glGetBufferPointervOES","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25350,7 +25350,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glClipPlanefOES(GLenum plane, const GLfloat *equation)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glClipPlanefOES","(", toString(plane), ", ", equation, ")");
+    App("glClipPlanefOES","(", toString(plane), ", ", boost::print::optional(equation,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25464,7 +25464,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetTexGenfvOES(GLenum coord, GLenum pname, GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetTexGenfvOES","(", toString(coord), ", ", toString(pname), ", ", params, ")");
+    App("glGetTexGenfvOES","(", toString(coord), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25504,7 +25504,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTexGenfvOES(GLenum coord, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTexGenfvOES","(", toString(coord), ", ", toString(pname), ", ", params, ")");
+    App("glTexGenfvOES","(", toString(coord), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25566,7 +25566,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDeleteVertexArraysOES(GLsizei n, const GLuint *arrays)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDeleteVertexArraysOES","(", n, ", ", arrays, ")");
+    App("glDeleteVertexArraysOES","(", n, ", ", boost::print::optional(arrays,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25576,7 +25576,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGenVertexArraysOES(GLsizei n, GLuint *arrays)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGenVertexArraysOES","(", n, ", ", arrays, ")");
+    App("glGenVertexArraysOES","(", n, ", ", boost::print::optional(arrays,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25642,7 +25642,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetDriverControlStringQCOM(GLuint driverControl, GLsizei bufSize, GLsizei *length, GLchar *driverControlString)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetDriverControlStringQCOM","(", driverControl, ", ", bufSize, ", ", length, ", ", boost::print::quote(driverControlString,'"'), ")");
+    App("glGetDriverControlStringQCOM","(", driverControl, ", ", bufSize, ", ", boost::print::optional(length,Logging::pointers), ", ", boost::print::quote(driverControlString,'"'), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25652,7 +25652,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetDriverControlsQCOM(GLint *num, GLsizei size, GLuint *driverControls)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetDriverControlsQCOM","(", boost::print::optional(num,Logging::pointers), ", ", size, ", ", driverControls, ")");
+    App("glGetDriverControlsQCOM","(", boost::print::optional(num,Logging::pointers), ", ", size, ", ", boost::print::optional(driverControls,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25664,7 +25664,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetBufferPointervQCOM(GLenum target, GLvoid **params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetBufferPointervQCOM","(", toString(target), ", ", params, ")");
+    App("glExtGetBufferPointervQCOM","(", toString(target), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25674,7 +25674,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetBuffersQCOM(GLuint *buffers, GLint maxBuffers, GLint *numBuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetBuffersQCOM","(", buffers, ", ", maxBuffers, ", ", boost::print::optional(numBuffers,Logging::pointers), ")");
+    App("glExtGetBuffersQCOM","(", boost::print::optional(buffers,Logging::pointers), ", ", maxBuffers, ", ", boost::print::optional(numBuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25684,7 +25684,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetFramebuffersQCOM(GLuint *framebuffers, GLint maxFramebuffers, GLint *numFramebuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetFramebuffersQCOM","(", framebuffers, ", ", maxFramebuffers, ", ", boost::print::optional(numFramebuffers,Logging::pointers), ")");
+    App("glExtGetFramebuffersQCOM","(", boost::print::optional(framebuffers,Logging::pointers), ", ", maxFramebuffers, ", ", boost::print::optional(numFramebuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25694,7 +25694,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetRenderbuffersQCOM(GLuint *renderbuffers, GLint maxRenderbuffers, GLint *numRenderbuffers)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetRenderbuffersQCOM","(", renderbuffers, ", ", maxRenderbuffers, ", ", boost::print::optional(numRenderbuffers,Logging::pointers), ")");
+    App("glExtGetRenderbuffersQCOM","(", boost::print::optional(renderbuffers,Logging::pointers), ", ", maxRenderbuffers, ", ", boost::print::optional(numRenderbuffers,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25724,7 +25724,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetTexturesQCOM(GLuint *textures, GLint maxTextures, GLint *numTextures)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetTexturesQCOM","(", textures, ", ", maxTextures, ", ", boost::print::optional(numTextures,Logging::pointers), ")");
+    App("glExtGetTexturesQCOM","(", boost::print::optional(textures,Logging::pointers), ", ", maxTextures, ", ", boost::print::optional(numTextures,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25756,7 +25756,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetProgramsQCOM(GLuint *programs, GLint maxPrograms, GLint *numPrograms)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetProgramsQCOM","(", programs, ", ", maxPrograms, ", ", boost::print::optional(numPrograms,Logging::pointers), ")");
+    App("glExtGetProgramsQCOM","(", boost::print::optional(programs,Logging::pointers), ", ", maxPrograms, ", ", boost::print::optional(numPrograms,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25766,7 +25766,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glExtGetShadersQCOM(GLuint *shaders, GLint maxShaders, GLint *numShaders)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glExtGetShadersQCOM","(", shaders, ", ", maxShaders, ", ", boost::print::optional(numShaders,Logging::pointers), ")");
+    App("glExtGetShadersQCOM","(", boost::print::optional(shaders,Logging::pointers), ", ", maxShaders, ", ", boost::print::optional(numShaders,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26353,7 +26353,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glClipPlanef(GLenum plane, const GLfloat *equation)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glClipPlanef","(", toString(plane), ", ", equation, ")");
+    App("glClipPlanef","(", toString(plane), ", ", boost::print::optional(equation,Logging::pointers), ")");
     if (!_context) return;
     #if REGAL_SYS_ES1
     if (_context->isES1()) // Pass-through for ES1 only
@@ -26391,7 +26391,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glGetClipPlanef(GLenum pname, GLfloat *eqn)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glGetClipPlanef","(", toString(pname), ", ", eqn, ")");
+    App("glGetClipPlanef","(", toString(pname), ", ", boost::print::optional(eqn,Logging::pointers), ")");
     if (!_context) return;
     #if REGAL_SYS_ES1
     if (_context->isES1()) // Pass-through for ES1 only
@@ -26640,7 +26640,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDetailTexFuncSGIS(GLenum target, GLsizei n, const GLfloat *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glDetailTexFuncSGIS","(", toString(target), ", ", n, ", ", points, ")");
+    App("glDetailTexFuncSGIS","(", toString(target), ", ", n, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26662,7 +26662,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFogFuncSGIS(GLsizei n, const GLfloat *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFogFuncSGIS","(", n, ", ", points, ")");
+    App("glFogFuncSGIS","(", n, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26736,7 +26736,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPixelTexGenParameterfvSGIS(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPixelTexGenParameterfvSGIS","(", toString(pname), ", ", params, ")");
+    App("glPixelTexGenParameterfvSGIS","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26778,7 +26778,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPointParameterfvSGIS(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glPointParameterfvSGIS","(", toString(pname), ", ", params, ")");
+    App("glPointParameterfvSGIS","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26800,7 +26800,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSharpenTexFuncSGIS(GLenum target, GLsizei n, const GLfloat *points)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSharpenTexFuncSGIS","(", toString(target), ", ", n, ", ", points, ")");
+    App("glSharpenTexFuncSGIS","(", toString(target), ", ", n, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26856,7 +26856,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glTexFilterFuncSGIS(GLenum target, GLenum filter, GLsizei n, const GLfloat *weights)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glTexFilterFuncSGIS","(", toString(target), ", ", toString(filter), ", ", n, ", ", weights, ")");
+    App("glTexFilterFuncSGIS","(", toString(target), ", ", toString(filter), ", ", n, ", ", boost::print::optional(weights,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26974,7 +26974,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFragmentLightModelfvSGIX(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFragmentLightModelfvSGIX","(", toString(pname), ", ", params, ")");
+    App("glFragmentLightModelfvSGIX","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27014,7 +27014,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFragmentLightfvSGIX(GLenum light, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFragmentLightfvSGIX","(", toString(light), ", ", toString(pname), ", ", params, ")");
+    App("glFragmentLightfvSGIX","(", toString(light), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27054,7 +27054,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glFragmentMaterialfvSGIX(GLenum face, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glFragmentMaterialfvSGIX","(", toString(face), ", ", toString(pname), ", ", params, ")");
+    App("glFragmentMaterialfvSGIX","(", toString(face), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27252,7 +27252,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glListParameterfvSGIX(GLuint list, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glListParameterfvSGIX","(", list, ", ", toString(pname), ", ", params, ")");
+    App("glListParameterfvSGIX","(", list, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27360,7 +27360,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glSpriteParameterfvSGIX(GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glSpriteParameterfvSGIX","(", toString(pname), ", ", params, ")");
+    App("glSpriteParameterfvSGIX","(", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27404,7 +27404,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glColorTableParameterfvSGI(GLenum target, GLenum pname, const GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glColorTableParameterfvSGI","(", toString(target), ", ", toString(pname), ", ", params, ")");
+    App("glColorTableParameterfvSGI","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27594,7 +27594,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glReplacementCodePointerSUN(GLenum type, GLsizei stride, const GLvoid **pointer)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glReplacementCodePointerSUN","(", toString(type), ", ", stride, ", ", pointer, ")");
+    App("glReplacementCodePointerSUN","(", toString(type), ", ", stride, ", ", boost::print::optional(pointer,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27634,7 +27634,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glReplacementCodeuivSUN(const GLuint *code)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glReplacementCodeuivSUN","(", code, ")");
+    App("glReplacementCodeuivSUN","(", boost::print::optional(code,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27654,7 +27654,7 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glReplacementCodeusvSUN(const GLushort *code)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    App("glReplacementCodeusvSUN","(", code, ")");
+    App("glReplacementCodeusvSUN","(", boost::print::optional(code,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -31001,7 +31001,7 @@ extern "C" {
 
   REGAL_DECL CGLError REGAL_CALL CGLGetOffScreen(CGLContextObj ctx, GLsizei *width, GLsizei *height, GLsizei *rowbytes, void **baseaddr)
   {
-    App("CGLGetOffScreen","(", ctx, ", ", width, ", ", height, ", ", rowbytes, ", ", baseaddr, ")");
+    App("CGLGetOffScreen","(", ctx, ", ", boost::print::optional(width,Logging::pointers), ", ", boost::print::optional(height,Logging::pointers), ", ", boost::print::optional(rowbytes,Logging::pointers), ", ", boost::print::optional(baseaddr,Logging::pointers), ")");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     CGLError ret = (CGLError) 0;
@@ -31131,7 +31131,7 @@ extern "C" {
 
   REGAL_DECL CGLError REGAL_CALL CGLDescribePBuffer(CGLPBufferObj pbuffer, GLsizei *width, GLsizei *height, GLenum *target, GLenum *internalFormat, GLint *mipmap)
   {
-    App("CGLDescribePBuffer","(", pbuffer, ", ", width, ", ", height, ", ", target, ", ", internalFormat, ", ", boost::print::optional(mipmap,Logging::pointers), ")");
+    App("CGLDescribePBuffer","(", pbuffer, ", ", boost::print::optional(width,Logging::pointers), ", ", boost::print::optional(height,Logging::pointers), ", ", boost::print::optional(target,Logging::pointers), ", ", boost::print::optional(internalFormat,Logging::pointers), ", ", boost::print::optional(mipmap,Logging::pointers), ")");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     CGLError ret = (CGLError) 0;
@@ -31151,7 +31151,7 @@ extern "C" {
 
   REGAL_DECL CGLError REGAL_CALL CGLGetPBuffer(CGLContextObj ctx, CGLPBufferObj *pbuffer, GLenum *face, GLint *level, GLint *screen)
   {
-    App("CGLGetPBuffer","(", ctx, ", ", pbuffer, ", ", face, ", ", boost::print::optional(level,Logging::pointers), ", ", boost::print::optional(screen,Logging::pointers), ")");
+    App("CGLGetPBuffer","(", ctx, ", ", pbuffer, ", ", boost::print::optional(face,Logging::pointers), ", ", boost::print::optional(level,Logging::pointers), ", ", boost::print::optional(screen,Logging::pointers), ")");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     CGLError ret = (CGLError) 0;
@@ -31397,7 +31397,7 @@ extern "C" {
 
   REGAL_DECL EGLBoolean REGAL_CALL eglQuerySurfacePointerANGLE(EGLDisplay dpy, EGLSurface surface, EGLint attribute, GLvoid **value)
   {
-    App("eglQuerySurfacePointerANGLE","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ", ", value, ")");
+    App("eglQuerySurfacePointerANGLE","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(surface,Logging::pointers), ", ", attribute, ", ", boost::print::optional(value,Logging::pointers), ")");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     EGLBoolean ret = 0;

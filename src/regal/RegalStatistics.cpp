@@ -42,6 +42,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_STATISTICS
+
 REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
@@ -5062,3 +5064,5 @@ Statistics::log(const char *name, const GLuint count)
 }
 
 REGAL_NAMESPACE_END
+
+#endif // REGAL_STATISTICS

@@ -104,8 +104,7 @@ Init::Init()
   // If a JSON config file is to be used, parse it first
 
 #ifndef REGAL_NO_GETENV
-  const char *tmp = GetEnv( "REGAL_CONFIG_FILE" );
-  if (tmp) Config::configFile = tmp;
+  getEnv( "REGAL_CONFIG_FILE", Config::configFile);
 #endif
 
 #ifdef REGAL_CONFIG_FILE

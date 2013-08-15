@@ -88,10 +88,25 @@ def logParameter(function, parameter):
     return 'boost::print::raw(data,Logging::rawLimit(data ? size : 0))'
   elif n=='data' and (function.name=='glBufferSubData' or function.name=='glBufferSubDataARB'):
     return 'boost::print::raw(data,Logging::rawLimit(data ? size : 0))'
-  elif t in [ 'void *', 'const void *', 'GLvoid *', 'const GLvoid *', 'GLubyte *', 'const GLubyte *'] or \
-    t in [ 'int *', 'const int *', 'GLint *', 'const GLint *' ] or \
+  elif \
+    t in [ 'GLvoid *', 'const GLvoid *', 'void *', 'const void *'] or \
+    t in [ 'GLvoid **', 'const GLvoid **', 'void **', 'const void **'] or \
+    t in [ 'GLboolean *', 'const GLboolean *', 'bool *', 'const bool *'] or \
+    t in [ 'GLchar *', 'const GLchar *', 'char *', 'const char *'] or \
+    t in [ 'GLcharARB *', 'const GLcharARB *'] or \
+    t in [ 'GLdouble *', 'const GLdouble *', 'double *', 'const double *'] or \
+    t in [ 'GLenum *'] or \
+    t in [ 'GLfloat *', 'const GLfloat *', 'float *', 'const float *'] or \
+    t in [ 'GLhandleARB *', 'const GLhandleARB *'] or \
+    t in [ 'GLint *', 'const GLint *', 'int *', 'const int *'] or \
+    t in [ 'GLint64 *', 'const GLint64 *', 'GLint64EXT *', 'const GLint64EXT *'] or \
+    t in [ 'GLsizei *', 'const GLsizei *'] or \
+    t in [ 'GLubyte *', 'const GLubyte *'] or \
+    t in [ 'GLuint *', 'const GLuint *'] or \
+    t in [ 'GLuint64 *', 'const GLuint64 *', 'GLuint64EXT *', 'const GLuint64EXT *'] or \
+    t in [ 'GLushort *', 'const GLushort *'] or \
     t in [ 'XID', 'XVisualInfo *', 'Pixmap', 'Font', 'Display *'] or \
-    t in [ 'GLXDrawble', 'GLXPixmap', 'GLXContext', 'GLXVideoDeviceNV', 'GLXWindow', 'GLXPbuffer', 'GLXFBConfigID', '__GLXextFuncPtr'] or \
+    t in [ 'GLXDrawble', 'GLXPixmap', 'GLXContext', 'GLXVideoDeviceNV', 'GLXWindow', 'GLXPbuffer', 'GLXFBConfigID', '__GLXextFuncPtr', 'GLXFBConfig *'] or \
     t in [ 'PVOID', 'LPVOID', 'HDC', 'HGLRC', 'HPBUFFERARB', 'HPBUFFEREXT', 'HGPUNV', 'HPVIDEODEV', 'HVIDEOINPUTDEVICENV', 'HVIDEOOUTPUTDEVICENV', 'PGPU_DEVICE' ] or \
     t in [ 'LPIXELFORMATDESCRIPTOR', 'LPLAYERPLANEDESCRIPTOR','LPLAYERPLANEDESCRIPTOR', 'LPGLYPHMETRICSFLOAT' ] or \
     t in [ 'EGLNativeWindowType', 'EGLNativePixmapType', 'EGLNativeDisplayType', 'EGLConfig', 'EGLContext', 'EGLDisplay', 'EGLSurface', 'EGLClientBuffer', 'EGLSyncKHR', 'EGLImageKHR', 'EGLStreamKHR', 'EGLSyncNV']:

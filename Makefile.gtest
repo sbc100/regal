@@ -5,6 +5,8 @@ MAKEFILE_GTEST_INCLUDED := 1
 
 include build/common.inc
 
+ifeq ($(filter emscripten%,$(SYSTEM)),)
+
 #
 # googletest + googlemock
 #
@@ -49,3 +51,5 @@ ifneq ($(STRIP),)
 endif
 
 endif
+endif
+

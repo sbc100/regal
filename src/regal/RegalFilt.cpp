@@ -128,6 +128,29 @@ namespace Emu {
     return false;
   }
 
+   bool Filt::GetTexParameteriv(const RegalContext &ctx, GLenum target, GLenum pname, GLint *params)
+   {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+
+    if (!ctx.isES2())
+      return false;
+
+    switch(target)
+    {
+      case GL_PROXY_TEXTURE_CUBE_MAP:
+        Warning( "Regal does not support PROXY_TEXTURE_CUBE_MAP as target for ES 2.0 profile" );
+        // Regal does not have the infrastructure for generating GL errors. Hence, pass the error to the lower layer so that the application is notified of the error.
+        return false;
+      default:
+        break;
+    }
+
+    return false;
+  }
+
   bool Filt::FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment,
                                   GLenum textarget, GLuint texture, GLint level)
   {
@@ -402,6 +425,8 @@ namespace Emu {
 
         case GL_DEPTH_BITS:                    retVal = 24;   break;
 
+        case GL_MAX_EVAL_ORDER:                retVal = 4;    break;
+
         case GL_RED_BITS:
         case GL_GREEN_BITS:
         case GL_BLUE_BITS:
@@ -535,6 +560,34 @@ namespace Emu {
       {
         Warning( "Regal does not support ", GLenumToString(pname), " as pname for glGet for ES 2.0 profile - skipping." );
         return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool Filt::TexImage2D(const RegalContext &ctx, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid* data)
+  {
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(level);
+    UNUSED_PARAMETER(internalformat);
+    UNUSED_PARAMETER(width);
+    UNUSED_PARAMETER(height);
+    UNUSED_PARAMETER(border);
+    UNUSED_PARAMETER(format);
+    UNUSED_PARAMETER(type);
+    UNUSED_PARAMETER(data);
+
+    if (ctx.isES2())
+    {
+      switch( target )
+      {
+        case GL_PROXY_TEXTURE_CUBE_MAP:
+          Warning( "Regal does not support PROXY_TEXTURE_CUBE_MAP as target for TexImage2D for ES 2.0 profile" );
+          return true;
+        default:
+          break;
       }
     }
 

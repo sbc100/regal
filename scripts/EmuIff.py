@@ -152,7 +152,12 @@ iffFormulae = {
     },
     'FfnGetTexEnv' : {
         'entries' : [ 'glGetTexEnv(i|f)(v|)(EXT|)' ],
-        'impl' : [ '_context->iff->GetTexEnv( ${arg0plus} );', ],
+        'impl' : [
+            '_context->iff->RestoreVao( _context );',
+            'if ( ! _context->iff->GetTexEnv( ${arg0plus} ) ) {',
+            '    _context->dispatcher.emulation.glGetTexEnv${m1}${m2}${m3}( ${arg0plus} );',
+            '}',
+        ],
     },
     'FfnLightMatModel' : {
         'entries' : [ 'gl(Light|Material|GetMaterial|LightModel)(i|f)(v|)' ],

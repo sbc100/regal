@@ -108,9 +108,11 @@ formulae = {
       'gl(FramebufferTexture2D)',
       'gl(GenerateMipmap)',
       'gl(Get)(Boolean|Double|Float|Integer|Integer64)v',
+      'gl(GetTexParameteriv)',
       'gl(PixelStorei)',
       'gl(PolygonMode)',
       'gl(RenderMode)',
+      'gl(TexImage2D)',
       ],
     'impl' : [
        'if (_context->filt->${m1}(*_context, ${arg0plus}))',

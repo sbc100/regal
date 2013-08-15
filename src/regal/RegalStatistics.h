@@ -43,6 +43,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_STATISTICS
+
 REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
@@ -5042,4 +5044,5 @@ struct Statistics
 
 REGAL_NAMESPACE_END
 
+#endif // REGAL_STATISTICS
 #endif // __REGAL_STATISTICS_H__

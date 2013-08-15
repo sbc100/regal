@@ -11,9 +11,9 @@ include build/glu.inc
 # RegalGLU
 #
 
-# Not supported for NaCL, yet
+# Not supported for NaCL or emscripten, yet
 
-ifneq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
 GLU.SHARED     :=
 endif
 
