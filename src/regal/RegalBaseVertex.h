@@ -63,7 +63,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 
-struct BaseVertex : public Client::State::VertexArray
+struct BaseVertex : public ClientState::VertexArray
 {
   void Init(RegalContext &ctx)
   {
@@ -79,11 +79,11 @@ struct BaseVertex : public Client::State::VertexArray
   {
     UNUSED_PARAMETER(ctx);
 
-    GLuint currentVBO = Client::State::VertexArray::arrayBufferBinding;
+    GLuint currentVBO = ClientState::VertexArray::arrayBufferBinding;
 
-    for (GLuint ii=0; ii<Client::State::nNamedArrays; ii++)
+    for (GLuint ii=0; ii<ClientState::nNamedArrays; ii++)
     {
-      Client::State::NamedVertexArray &n = Client::State::VertexArray::named[ii];
+      ClientState::NamedVertexArray &n = ClientState::VertexArray::named[ii];
       if (n.enabled)
       {
         if (currentVBO != n.buffer)
@@ -96,25 +96,25 @@ struct BaseVertex : public Client::State::VertexArray
         {
           switch (ii)
           {
-            case Client::State::VERTEX:
+            case ClientState::VERTEX:
               dt.call(&dt.glVertexPointer)(n.size, n.type, n.stride, n.pointer);
               break;
-            case Client::State::NORMAL:
+            case ClientState::NORMAL:
               dt.call(&dt.glNormalPointer)(n.type, n.stride, n.pointer);
               break;
-            case Client::State::FOG_COORD:
+            case ClientState::FOG_COORD:
               dt.call(&dt.glFogCoordPointer)(n.type, n.stride, n.pointer);
               break;
-            case Client::State::COLOR:
+            case ClientState::COLOR:
               dt.call(&dt.glColorPointer)(n.size, n.type, n.stride, n.pointer);
               break;
-            case Client::State::SECONDARY_COLOR:
+            case ClientState::SECONDARY_COLOR:
               dt.call(&dt.glSecondaryColorPointer)(n.size, n.type, n.stride, n.pointer);
               break;
-            case Client::State::INDEX:
+            case ClientState::INDEX:
               dt.call(&dt.glIndexPointer)(n.type, n.stride, n.pointer);
               break;
-            case Client::State::EDGE_FLAG:
+            case ClientState::EDGE_FLAG:
               dt.call(&dt.glEdgeFlagPointer)(n.stride, n.pointer);
               break;
             default:
@@ -131,10 +131,10 @@ struct BaseVertex : public Client::State::VertexArray
 
     for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
     {
-      Client::State::GenericVertexArray &g = Client::State::VertexArray::generic[ii];
+      ClientState::GenericVertexArray &g = ClientState::VertexArray::generic[ii];
       if (g.enabled)
       {
-        Client::State::VertexBufferBindPoint &b = Client::State::VertexArray::bindings[g.bindingIndex];
+        ClientState::VertexBufferBindPoint &b = ClientState::VertexArray::bindings[g.bindingIndex];
         GLvoid *p = reinterpret_cast<GLvoid *>(b.offset + (b.stride*basevertex));
 
         if (currentVBO != b.buffer)
@@ -152,8 +152,8 @@ struct BaseVertex : public Client::State::VertexArray
       }
     }
 
-    if (currentVBO != Client::State::VertexArray::arrayBufferBinding)
-      dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, Client::State::VertexArray::arrayBufferBinding);
+    if (currentVBO != ClientState::VertexArray::arrayBufferBinding)
+      dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, ClientState::VertexArray::arrayBufferBinding);
   }
 
   bool glDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
