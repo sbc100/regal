@@ -5174,10 +5174,8 @@ static void REGAL_CALL emu_glGetBooleanv(GLenum pname, GLboolean *params)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        if ( ! _context->ppca->glGetv( _context, pname, params ) ) {
-          if (!_context->info->core && !_context->info->es1 && !_context->info->es2) {
-            _context->dispatcher.emulation.glGetBooleanv( pname, params );
-          }
+        if ( ! _context->ppca->glGetv( *_context, pname, params ) ) {
+          _context->dispatcher.emulation.glGetBooleanv( pname, params );
         }
         return;
       }
@@ -5321,10 +5319,8 @@ static void REGAL_CALL emu_glGetDoublev(GLenum pname, GLdouble *params)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        if ( ! _context->ppca->glGetv( _context, pname, params ) ) {
-          if (!_context->info->core && !_context->info->es1 && !_context->info->es2) {
-            _context->dispatcher.emulation.glGetDoublev( pname, params );
-          }
+        if ( ! _context->ppca->glGetv( *_context, pname, params ) ) {
+          _context->dispatcher.emulation.glGetDoublev( pname, params );
         }
         return;
       }
@@ -5491,10 +5487,8 @@ static void REGAL_CALL emu_glGetFloatv(GLenum pname, GLfloat *params)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        if ( ! _context->ppca->glGetv( _context, pname, params ) ) {
-          if (!_context->info->core && !_context->info->es1 && !_context->info->es2) {
-            _context->dispatcher.emulation.glGetFloatv( pname, params );
-          }
+        if ( ! _context->ppca->glGetv( *_context, pname, params ) ) {
+          _context->dispatcher.emulation.glGetFloatv( pname, params );
         }
         return;
       }
@@ -5661,10 +5655,8 @@ static void REGAL_CALL emu_glGetIntegerv(GLenum pname, GLint *params)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        if ( ! _context->ppca->glGetv( _context, pname, params ) ) {
-          if (!_context->info->core && !_context->info->es1 && !_context->info->es2) {
-            _context->dispatcher.emulation.glGetIntegerv( pname, params );
-          }
+        if ( ! _context->ppca->glGetv( *_context, pname, params ) ) {
+          _context->dispatcher.emulation.glGetIntegerv( pname, params );
         }
         return;
       }
@@ -20226,7 +20218,7 @@ static void REGAL_CALL emu_glPopClientAttrib(void)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        _context->ppca->glPopClientAttrib( _context );
+        _context->ppca->glPopClientAttrib( *_context );
         return;
       }
       #endif
@@ -20276,7 +20268,7 @@ static void REGAL_CALL emu_glPushClientAttrib(GLbitfield mask)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        _context->ppca->glPushClientAttrib( _context, mask );
+        _context->ppca->glPushClientAttrib( *_context, mask );
         return;
       }
       #endif
@@ -36536,6 +36528,14 @@ static void REGAL_CALL emu_glActiveTextureARB(GLenum texture)
     case 12 :
     case 11 :
     case 10 :
+      #if REGAL_EMU_XFER
+      if (_context->xfer)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 9;
+        _context->xfer->ShadowActiveTexture( texture );
+      }
+      #endif
     case 9 :
     case 8 :
     case 7 :
@@ -36544,7 +36544,13 @@ static void REGAL_CALL emu_glActiveTextureARB(GLenum texture)
       if (_context->iff) break;
       #endif
     case 5 :
+      #if REGAL_EMU_SO
+      if (_context->so) break;
+      #endif
     case 4 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
     case 3 :
     case 2 :
       #if REGAL_EMU_TEXC
@@ -36583,7 +36589,30 @@ static void REGAL_CALL emu_glActiveTextureARB(GLenum texture)
       }
       #endif
     case 5 :
+      #if REGAL_EMU_SO
+      if (_context->so)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 4;
+        RegalAssert(_context);
+        if ( !_context->so->ActiveTexture( *_context, texture ) ) {
+           _context->dispatcher.emulation.glActiveTexture( texture );
+        }
+        return;
+      }
+      #endif
     case 4 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 3;
+        if( false == _context->dsa->ShadowActiveTexture( texture ) ) {
+            _dispatch.call(&_dispatch.glActiveTexture)( texture );
+        }
+        return;
+      }
+      #endif
     case 3 :
     case 2 :
       #if REGAL_EMU_TEXC
@@ -36636,10 +36665,26 @@ static void REGAL_CALL emu_glClientActiveTextureARB(GLenum texture)
     case 14 :
     case 13 :
     case 12 :
+      #if REGAL_EMU_PPCA
+      if (_context->ppca)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 11;
+        _context->ppca->glClientActiveTexture( texture );
+      }
+      #endif
     case 11 :
     case 10 :
     case 9 :
     case 8 :
+      #if REGAL_EMU_BASEVERTEX
+      if (_context->bv)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 7;
+        _context->bv->glClientActiveTexture( texture );
+      }
+      #endif
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
@@ -36652,7 +36697,18 @@ static void REGAL_CALL emu_glClientActiveTextureARB(GLenum texture)
       #endif
     case 5 :
     case 4 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa) break;
+      #endif
     case 3 :
+      #if REGAL_EMU_VAO
+      if (_context->vao)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 2;
+        _context->vao->ClientActiveTexture( _context, texture );
+      }
+      #endif
     case 2 :
     case 1 :
       #if REGAL_EMU_FILTER
@@ -36677,6 +36733,17 @@ static void REGAL_CALL emu_glClientActiveTextureARB(GLenum texture)
     case 6 :
     case 5 :
     case 4 :
+      #if REGAL_EMU_DSA
+      if (_context->dsa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 3;
+        if (!_context->dsa->ShadowClientActiveTexture( texture )) {
+          _dispatch.call(&_dispatch.glClientActiveTexture)( texture );
+        }
+        return;
+      }
+      #endif
     case 3 :
     case 2 :
     case 1 :
@@ -47136,7 +47203,7 @@ static void REGAL_CALL emu_glClientAttribDefaultEXT(GLbitfield mask)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        _context->ppca->glClientAttribDefaultEXT( _context, mask );
+        _context->ppca->glClientAttribDefaultEXT( *_context, mask );
         return;
       }
       #endif
@@ -60867,7 +60934,7 @@ static void REGAL_CALL emu_glPushClientAttribDefaultEXT(GLbitfield mask)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 11;
-        _context->ppca->glPushClientAttribDefaultEXT( _context, mask );
+        _context->ppca->glPushClientAttribDefaultEXT( *_context, mask );
         return;
       }
       #endif
@@ -67913,6 +67980,8 @@ static void REGAL_CALL emu_glVertexPointerEXT(GLint size, GLenum type, GLsizei s
 // GL_NVX_conditional_render
 
 // GL_NV_bindless_texture
+
+// GL_NV_blend_equation_advanced
 
 // GL_NV_conditional_render
 

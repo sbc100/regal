@@ -70,6 +70,7 @@ namespace Config {
   bool enableStatistics    = false;
   bool enableLog           = REGAL_LOG;
   bool enableDriver        = REGAL_DRIVER;
+  bool enableMissing       = REGAL_MISSING;
 
   bool enableEmuHint       = REGAL_EMU_HINT;
   bool enableEmuPpa        = REGAL_EMU_PPA;
@@ -216,6 +217,7 @@ namespace Config {
     getEnv( "REGAL_STATISTICS", enableStatistics, REGAL_STATISTICS);
     getEnv( "REGAL_LOG",        enableLog,        REGAL_LOG);
     getEnv( "REGAL_DRIVER",     enableDriver,     REGAL_DRIVER);
+    getEnv( "REGAL_MISSING",    enableMissing,    REGAL_MISSING);
 
     getEnv( "REGAL_EMU_HINT",       enableEmuHint,       REGAL_EMU_HINT);
     getEnv( "REGAL_EMU_PPA",        enableEmuPpa,        REGAL_EMU_PPA);
@@ -354,6 +356,7 @@ namespace Config {
     Info("REGAL_EMULATION           ", enableEmulation     ? "enabled" : "disabled");
     Info("REGAL_LOG                 ", enableLog           ? "enabled" : "disabled");
     Info("REGAL_DRIVER              ", enableDriver        ? "enabled" : "disabled");
+    Info("REGAL_MISSING             ", enableMissing       ? "enabled" : "disabled");
 
     Info("REGAL_EMU_HINT            ", enableEmuHint       ? "enabled" : "disabled");
     Info("REGAL_EMU_PPA             ", enableEmuPpa        ? "enabled" : "disabled");
@@ -450,6 +453,7 @@ namespace Config {
           jo.member("trace",      enableTrace);
           jo.member("log",        enableLog);
           jo.member("driver",     enableDriver);
+          jo.member("missing",    enableMissing);
         jo.end();
 
         jo.object("force");

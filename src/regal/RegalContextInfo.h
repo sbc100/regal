@@ -466,6 +466,7 @@ struct ContextInfo
   GLboolean gl_nv_3dvision_settings : 1;
   GLboolean gl_nv_bgr : 1;
   GLboolean gl_nv_bindless_texture : 1;
+  GLboolean gl_nv_blend_equation_advanced : 1;
   GLboolean gl_nv_blend_square : 1;
   GLboolean gl_nv_compute_program5 : 1;
   GLboolean gl_nv_conditional_render : 1;

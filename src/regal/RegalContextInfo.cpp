@@ -438,6 +438,7 @@ ContextInfo::ContextInfo()
   gl_nv_3dvision_settings(false),
   gl_nv_bgr(false),
   gl_nv_bindless_texture(false),
+  gl_nv_blend_equation_advanced(false),
   gl_nv_blend_square(false),
   gl_nv_compute_program5(false),
   gl_nv_conditional_render(false),
@@ -1396,6 +1397,7 @@ ContextInfo::init(const RegalContext &context)
   gl_nv_3dvision_settings = e.find("GL_NV_3dvision_settings")!=e.end();
   gl_nv_bgr = e.find("GL_NV_bgr")!=e.end();
   gl_nv_bindless_texture = e.find("GL_NV_bindless_texture")!=e.end();
+  gl_nv_blend_equation_advanced = e.find("GL_NV_blend_equation_advanced")!=e.end();
   gl_nv_blend_square = e.find("GL_NV_blend_square")!=e.end();
   gl_nv_compute_program5 = e.find("GL_NV_compute_program5")!=e.end();
   gl_nv_conditional_render = e.find("GL_NV_conditional_render")!=e.end();
@@ -2098,6 +2100,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_3dvision_settings")) return gl_nv_3dvision_settings;
   if (!strcmp(ext,"GL_NV_bgr")) return gl_nv_bgr;
   if (!strcmp(ext,"GL_NV_bindless_texture")) return gl_nv_bindless_texture;
+  if (!strcmp(ext,"GL_NV_blend_equation_advanced")) return gl_nv_blend_equation_advanced;
   if (!strcmp(ext,"GL_NV_blend_square")) return regal_nv_blend_square || gl_nv_blend_square;
   if (!strcmp(ext,"GL_NV_compute_program5")) return gl_nv_compute_program5;
   if (!strcmp(ext,"GL_NV_conditional_render")) return gl_nv_conditional_render;

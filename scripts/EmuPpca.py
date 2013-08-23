@@ -6,26 +6,24 @@ ppcaFormulae = {
 
   'PushClientAttrib' : {
     'entries'  : [ 'glPushClientAttrib' ],
-    'impl'     : [ '_context->ppca->glPushClientAttrib( _context, ${arg0} );', ],
+    'impl'     : [ '_context->ppca->glPushClientAttrib( *_context, ${arg0} );', ],
   },
 
   'PopClientAttrib' : {
     'entries' : [ 'glPopClientAttrib' ],
-    'impl'    : [ '_context->ppca->glPopClientAttrib( _context );', ],
+    'impl'    : [ '_context->ppca->glPopClientAttrib( *_context );', ],
   },
 
   'PushClientAttribDefaultEXT' : {
     'entries'  : [ 'gl(Push|)ClientAttribDefaultEXT' ],
-    'impl'     : [ '_context->ppca->gl${m1}ClientAttribDefaultEXT( _context, ${arg0} );', ],
+    'impl'     : [ '_context->ppca->gl${m1}ClientAttribDefaultEXT( *_context, ${arg0} );', ],
   },
 
   'Get'       : {
     'entries' : [ 'glGet(Integer|Float|Double|Boolean)v(EXT|)' ],
     'impl'    : [
-      'if ( ! _context->ppca->glGetv( _context, ${arg0plus} ) ) {',
-      '  if (!_context->info->core && !_context->info->es1 && !_context->info->es2) {',
-      '    _context->dispatcher.emulation.glGet${m1}v${m2}( ${arg0plus} );',
-      '  }',
+      'if ( ! _context->ppca->glGetv( *_context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGet${m1}v${m2}( ${arg0plus} );',
       '}',
     ],
   },
@@ -56,7 +54,7 @@ ppcaFormulae = {
     'prefix'  : [ '_context->ppca->glMultiTexCoordPointerEXT( ${arg0plus} );', ],
   },
   'ClientActiveTexture' : {
-    'entries' : [ 'glClientActiveTexture' ],
+    'entries' : [ 'glClientActiveTexture(ARB|)' ],
     'prefix'  : [ '_context->ppca->glClientActiveTexture( ${arg0plus} );', ],
   },
   'PrimitiveRestartIndex' : {

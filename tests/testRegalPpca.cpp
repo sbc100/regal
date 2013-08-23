@@ -139,7 +139,7 @@ void checkPixelStoreDefaults(ClientState::PixelStore& ps)
 void checkPpcaDefaults(RegalContext& ctx, Ppca& ppca)
 {
   GLint clientAttribStackDepth = 666;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(0) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(0),               ppca.maskStack.size() );
@@ -162,20 +162,21 @@ TEST ( RegalPpca, Ppca_Defaults )
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   GLint maxClientAttribStackDepth = 0;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( &ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, &maxClientAttribStackDepth ) );
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, &maxClientAttribStackDepth ) );
   EXPECT_GE( maxClientAttribStackDepth, GLint(16) );
 
   const GLbitfield remainder = ~( GL_CLIENT_PIXEL_STORE_BIT | GL_CLIENT_VERTEX_ARRAY_BIT );
   EXPECT_CALL( mock, glPushClientAttrib( remainder ) );
 
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_ALL_ATTRIB_BITS );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
   Mock::VerifyAndClear( &mock );
 
   GLint clientAttribStackDepth = 666;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( GLint(1), clientAttribStackDepth );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(1),               ppca.maskStack.size() );
@@ -192,6 +193,7 @@ TEST ( RegalPpca, VertexArray_Defaults )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   ppca.VertexArray::elementArrayBufferBinding = GLuint(6);
@@ -242,6 +244,7 @@ TEST ( RegalPpca, PixelStore_Defaults )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   ppca.PixelStore::unpackSwapBytes = GL_TRUE;
@@ -428,19 +431,20 @@ TEST ( RegalPpca, PixelStore_PushPop )
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   EXPECT_EQ( GLint(4), ppca.PixelStore::unpackAlignment );
   EXPECT_EQ( std::vector<ClientState::PixelStore>::size_type(0),  ppca.pixelStoreStack.size() );
 
   ppca.glPixelStore( GL_UNPACK_ALIGNMENT, 100 );
-  ppca.glPushClientAttrib( &ctx, 0 );
+  ppca.glPushClientAttrib( ctx, 0 );
 
   EXPECT_EQ( GLint(100), ppca.PixelStore::unpackAlignment );
   EXPECT_EQ( std::vector<ClientState::PixelStore>::size_type(0),  ppca.pixelStoreStack.size() );
 
   ppca.glPixelStore( GL_UNPACK_ALIGNMENT, 101 );
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_PIXEL_STORE_BIT );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_PIXEL_STORE_BIT );
 
   EXPECT_EQ( GLint(101), ppca.PixelStore::unpackAlignment );
   EXPECT_EQ( std::vector<ClientState::PixelStore>::size_type(1),  ppca.pixelStoreStack.size() );
@@ -470,7 +474,7 @@ TEST ( RegalPpca, PixelStore_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glClientAttribDefaultEXT( &ctx, GL_CLIENT_PIXEL_STORE_BIT );
+  ppca.glClientAttribDefaultEXT( ctx, GL_CLIENT_PIXEL_STORE_BIT );
 
   Mock::VerifyAndClear( &mock );
 
@@ -506,7 +510,7 @@ TEST ( RegalPpca, PixelStore_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPushClientAttribDefaultEXT( &ctx, GL_CLIENT_PIXEL_STORE_BIT );
+  ppca.glPushClientAttribDefaultEXT( ctx, GL_CLIENT_PIXEL_STORE_BIT );
 
   Mock::VerifyAndClear( &mock );
 
@@ -538,7 +542,7 @@ TEST ( RegalPpca, PixelStore_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
@@ -570,7 +574,7 @@ TEST ( RegalPpca, PixelStore_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
@@ -602,7 +606,7 @@ TEST ( RegalPpca, PixelStore_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
@@ -634,7 +638,7 @@ TEST ( RegalPpca, PixelStore_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
   EXPECT_EQ( GLint(101), ppca.PixelStore::unpackAlignment );
@@ -651,19 +655,20 @@ TEST ( RegalPpca, VertexArray_PushPop )
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   EXPECT_EQ( GLint( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
   ppca.glColorPointer ( 4, GL_FLOAT, 100, NULL );
-  ppca.glPushClientAttrib( &ctx, 0 );
+  ppca.glPushClientAttrib( ctx, 0 );
 
   EXPECT_EQ( GLint( 100 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
   ppca.glColorPointer ( 4, GL_FLOAT, 101, NULL );
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
 
   EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(1), ppca.vertexArrayStack.size() );
@@ -695,7 +700,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glClientAttribDefaultEXT( &ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
+  ppca.glClientAttribDefaultEXT( ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
 
   Mock::VerifyAndClear( &mock );
 
@@ -731,7 +736,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPushClientAttribDefaultEXT( &ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
+  ppca.glPushClientAttribDefaultEXT( ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
 
   Mock::VerifyAndClear( &mock );
 
@@ -765,7 +770,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
@@ -799,21 +804,21 @@ TEST ( RegalPpca, VertexArray_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
   EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
   EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
@@ -833,30 +838,31 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   const GLbitfield remainder = ~( GL_CLIENT_PIXEL_STORE_BIT | GL_CLIENT_VERTEX_ARRAY_BIT );
 
   GLint clientAttribStackDepth = 666;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(0) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(0),               ppca.maskStack.size() );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
   EXPECT_EQ( std::vector<ClientState::PixelStore>::size_type(0),  ppca.pixelStoreStack.size() );
 
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_PIXEL_STORE_BIT );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_PIXEL_STORE_BIT );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(1) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(1),               ppca.maskStack.size() );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
   EXPECT_EQ( std::vector<ClientState::PixelStore>::size_type(1),  ppca.pixelStoreStack.size() );
 
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(2) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(2),               ppca.maskStack.size() );
@@ -865,10 +871,10 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
 
   EXPECT_CALL( mock, glPushClientAttrib( remainder ) );
 
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_ALL_ATTRIB_BITS );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(3) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(3),               ppca.maskStack.size() );
@@ -903,12 +909,12 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
   ctx.info->es2 = true;
-  ppca.glPushClientAttrib( &ctx, GL_CLIENT_ALL_ATTRIB_BITS );
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPushClientAttrib( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
+  ppca.glPopClientAttrib( ctx );
   ctx.info->es2 = false;
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(3) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(3),               ppca.maskStack.size() );
@@ -971,10 +977,10 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(2) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(2),               ppca.maskStack.size() );
@@ -1008,10 +1014,10 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(1) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(1),               ppca.maskStack.size() );
@@ -1045,10 +1051,10 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPopClientAttrib( &ctx );
+  ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(&ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(0) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(0),               ppca.maskStack.size() );
@@ -1083,7 +1089,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glClientAttribDefaultEXT( &ctx, GL_CLIENT_ALL_ATTRIB_BITS );
+  ppca.glClientAttribDefaultEXT( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
 
   Mock::VerifyAndClear( &mock );
 
@@ -1120,7 +1126,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
 
-  ppca.glPushClientAttribDefaultEXT( &ctx, GL_CLIENT_ALL_ATTRIB_BITS );
+  ppca.glPushClientAttribDefaultEXT( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
 
   Mock::VerifyAndClear( &mock );
 
@@ -1608,6 +1614,7 @@ TEST ( RegalPpca, VertexArray_Generic )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // VertexAttribFormat
@@ -1920,6 +1927,7 @@ TEST ( RegalPpca, VertexArray_Named )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   ppca.glEnableClientState( GL_COLOR_ARRAY );
@@ -2084,6 +2092,7 @@ TEST ( RegalPpca, glDeleteBuffers_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   GLuint buffers[ 2 ] = { 0, 123 };
@@ -2128,6 +2137,7 @@ TEST ( RegalPpca, glDeleteVertexArrays_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   GLuint buffers[ 2 ] = { 0, 123 };
@@ -2151,6 +2161,7 @@ TEST ( RegalPpca, glPrimitiveRestart_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   EXPECT_EQ( GLboolean(GL_FALSE), ppca.primitiveRestart );
@@ -2274,6 +2285,7 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // Do a comprehensive test on all settings for GL_T4F_C4F_N3F_V4F
@@ -2802,6 +2814,7 @@ TEST ( RegalPpca, glGet_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   GLint resulti[ 1 ] = { 123 };
@@ -2812,36 +2825,36 @@ TEST ( RegalPpca, glGet_Shadowing )
 
   // First ensure getting an unimplemented value works (does nothing).
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( &ctx, GL_FLOAT, resulti ) );
+  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resulti ) );
   EXPECT_EQ( 123, resulti[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( &ctx, GL_FLOAT, resulti64 ) );
+  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resulti64 ) );
   EXPECT_EQ( 123, resulti64[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( &ctx, GL_FLOAT, resultf ) );
+  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resultf ) );
   EXPECT_EQ( 123, resultf[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( &ctx, GL_FLOAT, resultd ) );
+  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resultd ) );
   EXPECT_EQ( 123, resultd[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( &ctx, GL_FLOAT, resultb ) );
+  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resultb ) );
   EXPECT_EQ( GLboolean(GL_FALSE), resultb[ 0 ] );
 
   // Next verify that getting an implemented value gets the value.
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( &ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti ) );
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( &ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti64 ) );
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti64 ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti64[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( &ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultf ) );
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultf ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultf[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( &ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultd ) );
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultd ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultd[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( &ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultb ) );
+  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultb ) );
   EXPECT_EQ( GLboolean(GL_TRUE), resultb[ 0 ] );
 }
 
@@ -2851,6 +2864,7 @@ TEST ( RegalPpca, glPixelStore_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // first test glPixelStorei
@@ -2948,6 +2962,7 @@ TEST ( RegalPpca, glBindBuffer_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   ppca.VertexArray::arrayBufferBinding = 0;
@@ -3046,6 +3061,7 @@ TEST ( RegalPpca, glClientActiveTexture_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   for (GLuint ii=0; ii<(REGAL_EMU_MAX_TEXTURE_COORDS * 2); ii++)
@@ -3090,6 +3106,7 @@ TEST ( RegalPpca, glEnableDisableClientState_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glEnableClientState & glDisableClientState with no vertex array bound
@@ -3311,6 +3328,7 @@ TEST ( RegalPpca, glBindVertexArray_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   ppca.glBindVertexArray( GLuint(13579) );
@@ -3326,6 +3344,7 @@ TEST ( RegalPpca, glEnableDisableVertexAttribArray_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glEnableVertexAttribArray & glDisableVertexAttribArray with no vertex array bound
@@ -3375,6 +3394,7 @@ TEST ( RegalPpca, glEnableDisableVertexArrayAttribEXT_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glEnableVertexArrayAttribEXT & glDisableVertexArrayAttribEXT with no vertex array bound
@@ -3419,6 +3439,7 @@ TEST ( RegalPpca, glEnableDisableVertexArrayEXT_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glEnableVertexArrayEXT & glDisableVertexArrayEXT with no vertex array object
@@ -3497,6 +3518,7 @@ TEST ( RegalPpca, glVertexAttribBinding_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glVertexAttribBinding with no vertex array bound
@@ -3536,6 +3558,7 @@ TEST ( RegalPpca, glVertexBindingDivisor_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glVertexBindingDivisor with no vertex array bound
@@ -3632,6 +3655,7 @@ TEST ( RegalPpca, glBindVertexBuffer_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glBindVertexBuffer with no vertex array bound
@@ -3685,6 +3709,7 @@ TEST ( RegalPpca, glBindVertexBuffers_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   GLuint    buffers[REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS];
@@ -4129,6 +4154,7 @@ TEST ( RegalPpca, glVertexAttribFormat_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glVertexAttrib(I|L|)Format with no vertex array bound
@@ -4331,6 +4357,7 @@ TEST ( RegalPpca, glVertexAttribPointer_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glVertexAttrib(I|L|)Pointer with no vertex array bound
@@ -4577,6 +4604,7 @@ TEST ( RegalPpca, glVertexArrayVertexAttribOffsetEXT_Shadowing )
   ctx.info = new ContextInfo();
 
   Ppca ppca;
+  ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
   // test glVertexArrayVertexAttrib(I|)OffsetEXT with no vertex array bound

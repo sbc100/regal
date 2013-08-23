@@ -664,7 +664,9 @@ extern "C" {
         return;
 
       case GL_MISSING_REGAL:
+        #if REGAL_MISSING
         _context->dispatcher.disable(_context->dispatcher.missing);
+        #endif
         return;
 
       case GL_TRACE_REGAL:
@@ -793,7 +795,9 @@ extern "C" {
         return;
 
       case GL_MISSING_REGAL:
+        #if REGAL_MISSING
         _context->dispatcher.enable(_context->dispatcher.missing);
+        #endif
         return;
 
       case GL_TRACE_REGAL:
@@ -1527,7 +1531,11 @@ extern "C" {
         #endif
 
       case GL_MISSING_REGAL:
+        #if REGAL_MISSING
         return _context->dispatcher.isEnabled(_context->dispatcher.missing) ? GL_TRUE : GL_FALSE;
+        #else
+        return GL_FALSE;
+        #endif
 
       case GL_TRACE_REGAL:
         #if REGAL_TRACE
@@ -21207,6 +21215,28 @@ extern "C" {
     _next->call(&_next->glUniformHandleui64vNV)(location, count, value);
   }
 
+  /* GL_NV_blend_equation_advanced */
+
+  REGAL_DECL void REGAL_CALL glBlendBarrierNV(void)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBlendBarrierNV","()");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBlendBarrierNV)();
+  }
+
+  REGAL_DECL void REGAL_CALL glBlendParameteriNV(GLenum pname, GLint value)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    App("glBlendParameteriNV","(", toString(pname), ", ", value, ")");
+    if (!_context) return;
+    DispatchTableGL *_next = &_context->dispatcher.front();
+    RegalAssert(_next);
+    _next->call(&_next->glBlendParameteriNV)(pname, value);
+  }
+
   /* GL_NV_conditional_render */
 
   REGAL_DECL void REGAL_CALL glBeginConditionalRenderNV(GLuint id, GLenum mode)
@@ -29670,7 +29700,7 @@ extern "C" {
     App("glXGetCurrentDrawable","()");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
-    GLXDrawable ret = (GLXDrawable) 0;
+    GLXDrawable ret = 0;
     ret = _next->call(&_next->glXGetCurrentDrawable)();
     return ret;
   }
@@ -29695,7 +29725,9 @@ extern "C" {
     RegalContext *_context = REGAL_GET_CONTEXT();
     if (_context)
     {
+        #if REGAL_SYS_X11
         _context->x11Display  = dpy;
+        #endif
         _context->x11Drawable = drawable;
     }
     ret = _next->call(&_next->glXMakeCurrent)(dpy, drawable, ctx);
@@ -29734,7 +29766,9 @@ extern "C" {
     RegalContext *_context = REGAL_GET_CONTEXT();
     if (_context)
     {
+        #if REGAL_SYS_X11
         _context->x11Display  = dpy;
+        #endif
         _context->x11Drawable = drawable;
     }
     // Notify Regal::Frame about the swap buffers event.
@@ -29894,7 +29928,7 @@ extern "C" {
     App("glXGetCurrentReadDrawable","()");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
-    GLXDrawable ret = (GLXDrawable) 0;
+    GLXDrawable ret = 0;
     ret = _next->call(&_next->glXGetCurrentReadDrawable)();
     return ret;
   }
@@ -30772,7 +30806,7 @@ extern "C" {
     App("glXGetCurrentReadDrawableSGI","()");
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
-    GLXDrawable ret = (GLXDrawable) 0;
+    GLXDrawable ret = 0;
     ret = _next->call(&_next->glXGetCurrentReadDrawableSGI)();
     return ret;
   }

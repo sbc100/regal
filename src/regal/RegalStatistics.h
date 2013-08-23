@@ -422,6 +422,7 @@ struct Statistics
   GLuint gl_nv_3dvision_settings;
   GLuint gl_nv_bgr;
   GLuint gl_nv_bindless_texture;
+  GLuint gl_nv_blend_equation_advanced;
   GLuint gl_nv_blend_square;
   GLuint gl_nv_compute_program5;
   GLuint gl_nv_conditional_render;
@@ -3417,6 +3418,11 @@ struct Statistics
   GLuint glProgramUniformHandleui64vNV;
   GLuint glUniformHandleui64NV;
   GLuint glUniformHandleui64vNV;
+
+  /* GL_NV_blend_equation_advanced */
+
+  GLuint glBlendBarrierNV;
+  GLuint glBlendParameteriNV;
 
   /* GL_NV_conditional_render */
 

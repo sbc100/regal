@@ -38445,6 +38445,37 @@ static void REGAL_CALL code_glUniformHandleui64vNV(GLint location, GLsizei count
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static void REGAL_CALL code_glBlendBarrierNV(void)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBlendBarrierNV)();
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBlendBarrierNV();\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glBlendParameteriNV(GLenum pname, GLint value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBlendParameteriNV)(pname, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBlendParameteriNV(";
+                   _code << toString(pname);
+    _code << ", "; _code << value;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static void REGAL_CALL code_glBeginConditionalRenderNV(GLuint id, GLenum mode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -52485,6 +52516,8 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glProgramUniformHandleui64vNV = code_glProgramUniformHandleui64vNV;
   tbl.glUniformHandleui64NV = code_glUniformHandleui64NV;
   tbl.glUniformHandleui64vNV = code_glUniformHandleui64vNV;
+  tbl.glBlendBarrierNV = code_glBlendBarrierNV;
+  tbl.glBlendParameteriNV = code_glBlendParameteriNV;
   tbl.glBeginConditionalRenderNV = code_glBeginConditionalRenderNV;
   tbl.glEndConditionalRenderNV = code_glEndConditionalRenderNV;
   tbl.glCopyImageSubDataNV = code_glCopyImageSubDataNV;

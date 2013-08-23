@@ -3383,6 +3383,11 @@ namespace Dispatch
     void (REGAL_CALL *glUniformHandleui64NV)(GLint location, GLuint64 value);
     void (REGAL_CALL *glUniformHandleui64vNV)(GLint location, GLsizei count, const GLuint64 *value);
 
+    // GL_NV_blend_equation_advanced
+
+    void (REGAL_CALL *glBlendBarrierNV)(void);
+    void (REGAL_CALL *glBlendParameteriNV)(GLenum pname, GLint value);
+
     // GL_NV_conditional_render
 
     void (REGAL_CALL *glBeginConditionalRenderNV)(GLuint id, GLenum mode);

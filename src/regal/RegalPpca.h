@@ -66,6 +66,11 @@ namespace Emu
 
 struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 {
+  Ppca()
+  : driverAllowsVertexAttributeArraysWithoutBoundBuffer(true)
+  {
+  }
+
   void Init(RegalContext &ctx)
   {
     Reset(ctx);
@@ -84,7 +89,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     // logs a message if a call is made to glVertexAttribPointer and no
     // GL_ARRAY_BUFFER is bound.
 
-    driverAllowsVertexAttributeArraysWithoutBoundBuffer = ( !ctx.info->es2 || ctx.info->vendor != "Chromium" );
+    driverAllowsVertexAttributeArraysWithoutBoundBuffer = ( !ctx.isES2() || ctx.info->vendor != "Chromium" );
   }
 
   void Cleanup(RegalContext &ctx)
@@ -92,14 +97,14 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     UNUSED_PARAMETER(ctx);
   }
 
-  void glPushClientAttrib(RegalContext *ctx, GLbitfield mask)
+  void glPushClientAttrib(RegalContext &ctx, GLbitfield mask)
   {
     // from glspec43.compatibility.20130214.withchanges.pdf Sec. 21.6, p. 622
     //
     // A STACK_OVERFLOW error is generated if PushClientAttrib is called
     // and the client attribute stack depth is equal to the value of
     // MAX_CLIENT_ATTRIB_STACK_DEPTH.
-    // 
+    //
     // TODO: set correct GL error here
 
     if (maskStack.size() >= REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH)
@@ -125,24 +130,20 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 
     // Pass the rest through, for now
 
-    RegalAssert(ctx);
-
-    if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
+    if (ctx.isCore() || ctx.isES1() || ctx.isES2())
       return;
 
     if (mask)
-      ctx->dispatcher.emulation.glPushClientAttrib(mask);
+      ctx.dispatcher.emulation.glPushClientAttrib(mask);
   }
 
-  void glPopClientAttrib(RegalContext *ctx)
+  void glPopClientAttrib(RegalContext &ctx)
   {
-    RegalAssert(ctx);
-
     // from glspec43.compatibility.20130214.withchanges.pdf Sec. 21.6, p. 622
     //
     // A STACK_UNDERFLOW error is generated if PopClientAttrib is called
     // and the client attribute stack depth is zero.
-    // 
+    //
     // TODO: set correct GL error here
 
     if (!maskStack.size())
@@ -154,7 +155,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     if (mask&GL_CLIENT_VERTEX_ARRAY_BIT)
     {
       RegalAssert(vertexArrayStack.size());
-      ClientState::VertexArray::transition(ctx->dispatcher.emulation, vertexArrayStack.back(), driverAllowsVertexAttributeArraysWithoutBoundBuffer);
+      ClientState::VertexArray::transition(ctx.dispatcher.emulation, vertexArrayStack.back(), driverAllowsVertexAttributeArraysWithoutBoundBuffer);
       vertexArrayStack.pop_back();
 
       Internal("Regal::Ppca::PopClientAttrib GL_CLIENT_VERTEX_ARRAY_BIT ",ClientState::VertexArray::toString());
@@ -165,7 +166,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     if (mask&GL_CLIENT_PIXEL_STORE_BIT)
     {
       RegalAssert(pixelStoreStack.size());
-      ClientState::PixelStore::transition(ctx->dispatcher.emulation, pixelStoreStack.back());
+      ClientState::PixelStore::transition(ctx.dispatcher.emulation, pixelStoreStack.back());
       pixelStoreStack.pop_back();
 
       Internal("Regal::Ppca::PopClientAttrib GL_CLIENT_PIXEL_STORE_BIT ",ClientState::PixelStore::toString());
@@ -175,14 +176,14 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 
     // Pass the rest through, for now
 
-    if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
+    if (ctx.isCore() || ctx.isES1() || ctx.isES2())
       return;
 
     if (mask)
-      ctx->dispatcher.emulation.glPopClientAttrib();
+      ctx.dispatcher.emulation.glPopClientAttrib();
   }
 
-  void glClientAttribDefaultEXT(RegalContext *ctx, GLbitfield mask)
+  void glClientAttribDefaultEXT(RegalContext &ctx, GLbitfield mask)
   {
     if (mask&GL_CLIENT_VERTEX_ARRAY_BIT)
     {
@@ -192,7 +193,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 
       // Ideally we'd only set the state that has changed - revisit
 
-      ClientState::VertexArray::set(ctx->dispatcher.emulation,driverAllowsVertexAttributeArraysWithoutBoundBuffer);
+      ClientState::VertexArray::set(ctx.dispatcher.emulation,driverAllowsVertexAttributeArraysWithoutBoundBuffer);
 
       mask &= ~GL_CLIENT_VERTEX_ARRAY_BIT;
     }
@@ -205,21 +206,21 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 
       // Ideally we'd only set the state that has changed - revisit
 
-      ClientState::PixelStore::set(ctx->dispatcher.emulation);
+      ClientState::PixelStore::set(ctx.dispatcher.emulation);
 
       mask &= ~GL_CLIENT_PIXEL_STORE_BIT;
     }
 
     // Pass the rest through, for now
 
-    if (ctx->info->core || ctx->info->es1 || ctx->info->es2)
+    if (ctx.isCore() || ctx.isES1() || ctx.isES2())
       return;
 
     if (mask)
-      ctx->dispatcher.emulation.glClientAttribDefaultEXT(mask);
+      ctx.dispatcher.emulation.glClientAttribDefaultEXT(mask);
   }
 
-  void glPushClientAttribDefaultEXT(RegalContext *ctx, GLbitfield mask)
+  void glPushClientAttribDefaultEXT(RegalContext &ctx, GLbitfield mask)
   {
     GLbitfield tmpMask = mask;
     glPushClientAttrib(ctx, tmpMask);
@@ -238,7 +239,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     ClientState::PixelStore::glDeleteBuffers(n,buffers);
   }
 
-  bool glGetv(RegalContext *ctx, GLenum pname, GLboolean *params)
+  bool glGetv(RegalContext &ctx, GLenum pname, GLboolean *params)
   {
     UNUSED_PARAMETER(ctx);
 
@@ -257,7 +258,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     return true;
   }
 
-  template <typename T> bool glGetv(RegalContext *ctx, GLenum pname, T *params)
+  template <typename T> bool glGetv(RegalContext &ctx, GLenum pname, T *params)
   {
     UNUSED_PARAMETER(ctx);
 

@@ -42,6 +42,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_MISSING
+
 REGAL_GLOBAL_BEGIN
 
 #include <string>
@@ -17299,6 +17301,20 @@ static void REGAL_CALL missing_glUniformHandleui64vNV(GLint location, GLsizei co
   Warning( "glUniformHandleui64vNV not available." );
 }
 
+// GL_NV_blend_equation_advanced
+
+static void REGAL_CALL missing_glBlendBarrierNV(void)
+{
+  Warning( "glBlendBarrierNV not available." );
+}
+
+static void REGAL_CALL missing_glBlendParameteriNV(GLenum pname, GLint value)
+{
+  UNUSED_PARAMETER(pname);
+  UNUSED_PARAMETER(value);
+  Warning( "glBlendParameteriNV not available." );
+}
+
 // GL_NV_conditional_render
 
 static void REGAL_CALL missing_glBeginConditionalRenderNV(GLuint id, GLenum mode)
@@ -24115,7 +24131,7 @@ static GLXContext REGAL_CALL missing_glXGetCurrentContext(void)
 static GLXDrawable REGAL_CALL missing_glXGetCurrentDrawable(void)
 {
   Warning( "glXGetCurrentDrawable not available." );
-  return (GLXDrawable) 0;
+  return 0;
 }
 
 static Bool REGAL_CALL missing_glXIsDirect(Display *dpy, GLXContext ctx)
@@ -24290,7 +24306,7 @@ static void REGAL_CALL missing_glXDestroyWindow(Display *dpy, GLXWindow win)
 static GLXDrawable REGAL_CALL missing_glXGetCurrentReadDrawable(void)
 {
   Warning( "glXGetCurrentReadDrawable not available." );
-  return (GLXDrawable) 0;
+  return 0;
 }
 
 static int REGAL_CALL missing_glXGetFBConfigAttrib(Display *dpy, GLXFBConfig config, int attribute, int *value)
@@ -25128,7 +25144,7 @@ static void REGAL_CALL missing_glXCushionSGI(Display *dpy, Window window, float 
 static GLXDrawable REGAL_CALL missing_glXGetCurrentReadDrawableSGI(void)
 {
   Warning( "glXGetCurrentReadDrawableSGI not available." );
-  return (GLXDrawable) 0;
+  return 0;
 }
 
 static Bool REGAL_CALL missing_glXMakeCurrentReadSGI(Display *dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx)
@@ -28869,6 +28885,11 @@ void InitDispatchTableMissing(DispatchTableGL &tbl)
   tbl.glUniformHandleui64NV = missing_glUniformHandleui64NV;
   tbl.glUniformHandleui64vNV = missing_glUniformHandleui64vNV;
 
+  // GL_NV_blend_equation_advanced
+
+  tbl.glBlendBarrierNV = missing_glBlendBarrierNV;
+  tbl.glBlendParameteriNV = missing_glBlendParameteriNV;
+
   // GL_NV_conditional_render
 
   tbl.glBeginConditionalRenderNV = missing_glBeginConditionalRenderNV;
@@ -30425,3 +30446,5 @@ void InitDispatchTableGlobalMissing(DispatchTableGlobal &tbl)
 }
 
 REGAL_NAMESPACE_END
+
+#endif

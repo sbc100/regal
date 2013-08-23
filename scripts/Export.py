@@ -42,6 +42,7 @@ from RegalDispatchDebug      import *
 from RegalDispatchError      import *
 from RegalDispatchEmu        import *
 from RegalDispatchGMock      import *
+from RegalDispatchGLX        import *
 from RegalDispatchLog        import *
 from RegalDispatchLoader     import *
 from RegalDispatchMissing    import *
@@ -200,6 +201,7 @@ def traverse(apis, args):
 def generate(apis, args):
 
   traverse(apis, args)
+  generateDispatchGLX(apis, args)
   generateTraceSource( apis, args )
   generatePublicHeader(apis, args)
   generatePluginSource(apis,args)
