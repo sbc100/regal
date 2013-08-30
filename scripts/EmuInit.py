@@ -14,7 +14,7 @@ formulae = {
   'EmuInit' : {
     'entries' : [ 
       'CGLChoosePixelFormat', 'CGLGetCurrentContext', 
-      'eglGetDisplay', 
+      'eglGetDisplay', 'eglGetCurrentContext',
       'glXGetProcAddress', 'glXQueryExtension', 'glXGetProcAddressARB'
  #     'glX.*' 
     ],

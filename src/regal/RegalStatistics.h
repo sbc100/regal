@@ -78,6 +78,8 @@ struct Statistics
   GLuint gl_version_4_0;
   GLuint gl_version_4_1;
   GLuint gl_version_4_2;
+  GLuint gl_version_4_3;
+  GLuint gl_version_4_4;
 
   GLuint glx_version_1_0;
   GLuint glx_version_1_1;

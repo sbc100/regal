@@ -43,7 +43,7 @@ regalSys = '''#if defined(_WIN32)
 #  define REGAL_SYS_EGL 1
 # endif
 # ifndef REGAL_SYS_GLX
-#  define REGAL_SYS_GLX 1
+#  define REGAL_SYS_GLX 0
 # endif
 #elif defined(EMSCRIPTEN)
 # ifndef REGAL_SYS_EMSCRIPTEN

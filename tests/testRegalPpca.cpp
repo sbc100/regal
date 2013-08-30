@@ -56,7 +56,7 @@ void checkNamedVertexArrayDefaults(ClientState::NamedVertexArray& nva, GLuint n)
   EXPECT_EQ( GLboolean(GL_FALSE),   nva.enabled );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>(NULL), nva.pointer );
   EXPECT_EQ( GLuint(0),             nva.buffer );
-  EXPECT_EQ( GLint(0),              nva.stride );
+  EXPECT_EQ( GLsizei(0),            nva.stride );
 
   if (n == ClientState::FOG_COORD ||
       n == ClientState::INDEX ||
@@ -139,7 +139,7 @@ void checkPixelStoreDefaults(ClientState::PixelStore& ps)
 void checkPpcaDefaults(RegalContext& ctx, Ppca& ppca)
 {
   GLint clientAttribStackDepth = 666;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(0) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(0),               ppca.maskStack.size() );
@@ -166,7 +166,7 @@ TEST ( RegalPpca, Ppca_Defaults )
   checkPpcaDefaults(ctx, ppca);
 
   GLint maxClientAttribStackDepth = 0;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, &maxClientAttribStackDepth ) );
+  EXPECT_EQ( true, ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, &maxClientAttribStackDepth ) );
   EXPECT_GE( maxClientAttribStackDepth, GLint(16) );
 
   const GLbitfield remainder = ~( GL_CLIENT_PIXEL_STORE_BIT | GL_CLIENT_VERTEX_ARRAY_BIT );
@@ -176,7 +176,7 @@ TEST ( RegalPpca, Ppca_Defaults )
   Mock::VerifyAndClear( &mock );
 
   GLint clientAttribStackDepth = 666;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( GLint(1), clientAttribStackDepth );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(1),               ppca.maskStack.size() );
@@ -211,7 +211,7 @@ TEST ( RegalPpca, VertexArray_Defaults )
     ppca.VertexArray::named[ii].buffer  = GLuint(77);
     ppca.VertexArray::named[ii].size    = GLint(77);
     ppca.VertexArray::named[ii].type    = GLenum(77);
-    ppca.VertexArray::named[ii].stride  = GLuint(77);
+    ppca.VertexArray::named[ii].stride  = GLsizei(77);
   }
 
   for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
@@ -293,7 +293,7 @@ TEST ( RegalPpca, VertexArray_Swap )
     state.VertexArray::named[ii].buffer  = GLuint(77);
     state.VertexArray::named[ii].size    = GLint(77);
     state.VertexArray::named[ii].type    = GLenum(77);
-    state.VertexArray::named[ii].stride  = GLuint(77);
+    state.VertexArray::named[ii].stride  = GLsizei(77);
   }
 
   for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
@@ -338,7 +338,7 @@ TEST ( RegalPpca, VertexArray_Swap )
     EXPECT_EQ( GLuint(77),         other.VertexArray::named[ii].buffer );
     EXPECT_EQ( GLint(77),          other.VertexArray::named[ii].size );
     EXPECT_EQ( GLenum(77),         other.VertexArray::named[ii].type );
-    EXPECT_EQ( GLuint(77),         other.VertexArray::named[ii].stride );
+    EXPECT_EQ( GLsizei(77),        other.VertexArray::named[ii].stride );
   }
 
   for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
@@ -658,19 +658,19 @@ TEST ( RegalPpca, VertexArray_PushPop )
   ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
 
-  EXPECT_EQ( GLint( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
   ppca.glColorPointer ( 4, GL_FLOAT, 100, NULL );
   ppca.glPushClientAttrib( ctx, 0 );
 
-  EXPECT_EQ( GLint( 100 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 100 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
   ppca.glColorPointer ( 4, GL_FLOAT, 101, NULL );
   ppca.glPushClientAttrib( ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
 
-  EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(1), ppca.vertexArrayStack.size() );
 
   EXPECT_CALL( mock, glBindBuffer(_,_) ).Times(AnyNumber());
@@ -704,7 +704,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
 
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLint( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(1), ppca.vertexArrayStack.size() );
 
   ppca.glColorPointer ( 4, GL_FLOAT, 102, NULL );
@@ -740,7 +740,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
 
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLint( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 0 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(2), ppca.vertexArrayStack.size() );
 
   EXPECT_CALL( mock, glBindBuffer(_,_) ).Times(AnyNumber());
@@ -774,7 +774,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
 
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLint( 102 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 102 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(1), ppca.vertexArrayStack.size() );
 
   EXPECT_CALL( mock, glBindBuffer(_,_) ).Times(AnyNumber());
@@ -808,21 +808,21 @@ TEST ( RegalPpca, VertexArray_PushPop )
 
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
   ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 
   ppca.glPopClientAttrib( ctx );
 
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLint( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 101 ), ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( std::vector<ClientState::VertexArray>::size_type(0), ppca.vertexArrayStack.size() );
 }
 
@@ -844,7 +844,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   const GLbitfield remainder = ~( GL_CLIENT_PIXEL_STORE_BIT | GL_CLIENT_VERTEX_ARRAY_BIT );
 
   GLint clientAttribStackDepth = 666;
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(0) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(0),               ppca.maskStack.size() );
@@ -853,7 +853,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
 
   ppca.glPushClientAttrib( ctx, GL_CLIENT_PIXEL_STORE_BIT );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(1) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(1),               ppca.maskStack.size() );
@@ -862,7 +862,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
 
   ppca.glPushClientAttrib( ctx, GL_CLIENT_VERTEX_ARRAY_BIT );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(2) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(2),               ppca.maskStack.size() );
@@ -874,7 +874,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   ppca.glPushClientAttrib( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(3) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(3),               ppca.maskStack.size() );
@@ -907,6 +907,8 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   EXPECT_CALL( mock, glVertexAttribLFormat(_,_,_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexBindingDivisor(_,_) ).Times(AnyNumber());
   EXPECT_CALL( mock, glVertexPointer(_,_,_,_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glPushClientAttrib(_) ).Times(AnyNumber());
+  EXPECT_CALL( mock, glPopClientAttrib() ).Times(AnyNumber());
 
   ctx.info->es2 = true;
   ppca.glPushClientAttrib( ctx, GL_CLIENT_ALL_ATTRIB_BITS );
@@ -914,7 +916,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   ctx.info->es2 = false;
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(3) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(3),               ppca.maskStack.size() );
@@ -980,7 +982,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(2) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(2),               ppca.maskStack.size() );
@@ -1017,7 +1019,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(1) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(1),               ppca.maskStack.size() );
@@ -1054,7 +1056,7 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   ppca.glPopClientAttrib( ctx );
   Mock::VerifyAndClear( &mock );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
+  EXPECT_EQ( true, ppca.glGetv(ctx, GL_CLIENT_ATTRIB_STACK_DEPTH, &clientAttribStackDepth));
   EXPECT_EQ( clientAttribStackDepth, GLint(0) );
 
   EXPECT_EQ( std::vector<GLbitfield>::size_type(0),               ppca.maskStack.size() );
@@ -1156,7 +1158,7 @@ TEST ( RegalPpca, VertexArray_Named_BasicOperations )
     state.VertexArray::named[ii].buffer  = GLuint(ii * 10 + 1);
     state.VertexArray::named[ii].size    = GLint( ii * 10 + 2);
     state.VertexArray::named[ii].type    = GLenum(ii * 10 + 3);
-    state.VertexArray::named[ii].stride  = GLuint(ii * 10 + 4);
+    state.VertexArray::named[ii].stride  = GLsizei(ii * 10 + 4);
   }
 
   // Calls with out-of-bound values should silently return as a no-op.
@@ -1199,7 +1201,7 @@ TEST ( RegalPpca, VertexArray_Named_BasicOperations )
     EXPECT_EQ( GLuint(ii * 10 + 1), other.VertexArray::named[ ii ].buffer );
     EXPECT_EQ( GLint( ii * 10 + 2), other.VertexArray::named[ ii ].size );
     EXPECT_EQ( GLenum(ii * 10 + 3), other.VertexArray::named[ ii ].type );
-    EXPECT_EQ( GLuint(ii * 10 + 4), other.VertexArray::named[ ii ].stride );
+    EXPECT_EQ( GLsizei(ii * 10 + 4), other.VertexArray::named[ ii ].stride );
   }
 }
 
@@ -1972,7 +1974,7 @@ TEST ( RegalPpca, VertexArray_Named )
     ppca.VertexArray::named[ii].buffer  = GLuint(ii);
     ppca.VertexArray::named[ii].size    = GLint(ii);
     ppca.VertexArray::named[ii].type    = GLenum(ii);
-    ppca.VertexArray::named[ii].stride  = GLuint(ii);
+    ppca.VertexArray::named[ii].stride  = GLsizei(ii);
   }
 
   ppca.VertexArray::arrayBufferBinding = 123;
@@ -1981,109 +1983,109 @@ TEST ( RegalPpca, VertexArray_Named )
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::VERTEX ].buffer );
   EXPECT_EQ( GLint(4),           ppca.VertexArray::named[ ClientState::VERTEX ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::VERTEX ].type );
-  EXPECT_EQ( GLint(1001),        ppca.VertexArray::named[ ClientState::VERTEX ].stride );
+  EXPECT_EQ( GLsizei(1001),      ppca.VertexArray::named[ ClientState::VERTEX ].stride );
 
   ppca.glNormalPointer( GL_FLOAT, 1002, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::NORMAL ].buffer );
   EXPECT_EQ( GLint(3),           ppca.VertexArray::named[ ClientState::NORMAL ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::NORMAL ].type );
-  EXPECT_EQ( GLint(1002),        ppca.VertexArray::named[ ClientState::NORMAL ].stride );
+  EXPECT_EQ( GLsizei(1002),      ppca.VertexArray::named[ ClientState::NORMAL ].stride );
 
   ppca.glColorPointer( 4, GL_FLOAT, 1003, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::COLOR ].buffer );
   EXPECT_EQ( GLint(4),           ppca.VertexArray::named[ ClientState::COLOR ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::COLOR ].type );
-  EXPECT_EQ( GLint(1003),        ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei(1003),      ppca.VertexArray::named[ ClientState::COLOR ].stride );
 
   ppca.glSecondaryColorPointer( 3, GL_FLOAT, 1004, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].buffer );
   EXPECT_EQ( GLint(3),           ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].type );
-  EXPECT_EQ( GLint(1004),        ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].stride );
+  EXPECT_EQ( GLsizei(1004),      ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].stride );
 
   ppca.glIndexPointer( GL_INT, 1005, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::INDEX ].buffer );
   EXPECT_EQ( GLint(1),           ppca.VertexArray::named[ ClientState::INDEX ].size );
   EXPECT_EQ( GLenum( GL_INT ),   ppca.VertexArray::named[ ClientState::INDEX ].type );
-  EXPECT_EQ( GLint(1005),        ppca.VertexArray::named[ ClientState::INDEX ].stride );
+  EXPECT_EQ( GLsizei(1005),      ppca.VertexArray::named[ ClientState::INDEX ].stride );
 
   ppca.glEdgeFlagPointer( 1006, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::EDGE_FLAG ].buffer );
   EXPECT_EQ( GLint(1),           ppca.VertexArray::named[ ClientState::EDGE_FLAG ].size );
   EXPECT_EQ( GLenum( GL_BOOL ),  ppca.VertexArray::named[ ClientState::EDGE_FLAG ].type );
-  EXPECT_EQ( GLint(1006),        ppca.VertexArray::named[ ClientState::EDGE_FLAG ].stride );
+  EXPECT_EQ( GLsizei(1006),      ppca.VertexArray::named[ ClientState::EDGE_FLAG ].stride );
 
   ppca.glFogCoordPointer( GL_FLOAT, 1007, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::FOG_COORD ].buffer );
   EXPECT_EQ( GLint(1),           ppca.VertexArray::named[ ClientState::FOG_COORD ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::FOG_COORD ].type );
-  EXPECT_EQ( GLint(1007),        ppca.VertexArray::named[ ClientState::FOG_COORD ].stride );
+  EXPECT_EQ( GLsizei(1007),      ppca.VertexArray::named[ ClientState::FOG_COORD ].stride );
 
   ppca.glTexCoordPointer( 2, GL_FLOAT, 1008, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::TEX_COORD + 2].buffer );
   EXPECT_EQ( GLint(2),           ppca.VertexArray::named[ ClientState::TEX_COORD + 2].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::TEX_COORD + 2].type );
-  EXPECT_EQ( GLint(1008),        ppca.VertexArray::named[ ClientState::TEX_COORD + 2].stride );
+  EXPECT_EQ( GLsizei(1008),      ppca.VertexArray::named[ ClientState::TEX_COORD + 2].stride );
 
   ppca.glMultiTexCoordPointerEXT( GL_TEXTURE5, 2, GL_FLOAT, 2005, NULL );
   EXPECT_EQ( GLuint(123),        ppca.VertexArray::named[ ClientState::TEX_COORD + 5].buffer );
   EXPECT_EQ( GLint(2),           ppca.VertexArray::named[ ClientState::TEX_COORD + 5].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::TEX_COORD + 5].type );
-  EXPECT_EQ( GLint(2005),        ppca.VertexArray::named[ ClientState::TEX_COORD + 5].stride );
+  EXPECT_EQ( GLsizei(2005),      ppca.VertexArray::named[ ClientState::TEX_COORD + 5].stride );
 
   ppca.glVertexArrayVertexOffsetEXT( 0, 3001, 3, GL_FLOAT, 3002, 0 );
   EXPECT_EQ( GLuint(3001),       ppca.VertexArray::named[ ClientState::VERTEX ].buffer );
   EXPECT_EQ( GLint(3),           ppca.VertexArray::named[ ClientState::VERTEX ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::VERTEX ].type );
-  EXPECT_EQ( GLint(3002),        ppca.VertexArray::named[ ClientState::VERTEX ].stride );
+  EXPECT_EQ( GLsizei(3002),      ppca.VertexArray::named[ ClientState::VERTEX ].stride );
 
   ppca.glVertexArrayColorOffsetEXT ( 0, 3003, 4, GL_FLOAT, 3004, 0 );
   EXPECT_EQ( GLuint(3003),       ppca.VertexArray::named[ ClientState::COLOR ].buffer );
   EXPECT_EQ( GLint(4),           ppca.VertexArray::named[ ClientState::COLOR ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::COLOR ].type );
-  EXPECT_EQ( GLint(3004),        ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei(3004),      ppca.VertexArray::named[ ClientState::COLOR ].stride );
 
   ppca.glVertexArrayEdgeFlagOffsetEXT ( 0, 3005, 3006, 0 );
   EXPECT_EQ( GLuint(3005),       ppca.VertexArray::named[ ClientState::EDGE_FLAG ].buffer );
   EXPECT_EQ( GLint(1),           ppca.VertexArray::named[ ClientState::EDGE_FLAG ].size );
   EXPECT_EQ( GLenum( GL_BOOL ),  ppca.VertexArray::named[ ClientState::EDGE_FLAG ].type );
-  EXPECT_EQ( GLint(3006),        ppca.VertexArray::named[ ClientState::EDGE_FLAG ].stride );
+  EXPECT_EQ( GLsizei(3006),      ppca.VertexArray::named[ ClientState::EDGE_FLAG ].stride );
 
   ppca.glVertexArrayIndexOffsetEXT ( 0, 3007, GL_INT, 3008, 0 );
   EXPECT_EQ( GLuint(3007),       ppca.VertexArray::named[ ClientState::INDEX ].buffer );
   EXPECT_EQ( GLint(1),           ppca.VertexArray::named[ ClientState::INDEX ].size );
   EXPECT_EQ( GLenum( GL_INT ),   ppca.VertexArray::named[ ClientState::INDEX ].type );
-  EXPECT_EQ( GLint(3008),        ppca.VertexArray::named[ ClientState::INDEX ].stride );
+  EXPECT_EQ( GLsizei(3008),      ppca.VertexArray::named[ ClientState::INDEX ].stride );
 
   ppca.glVertexArrayNormalOffsetEXT ( 0, 3009, GL_FLOAT, 3010, 0 );
   EXPECT_EQ( GLuint(3009),       ppca.VertexArray::named[ ClientState::NORMAL ].buffer );
   EXPECT_EQ( GLint(3),           ppca.VertexArray::named[ ClientState::NORMAL ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::NORMAL ].type );
-  EXPECT_EQ( GLint(3010),        ppca.VertexArray::named[ ClientState::NORMAL ].stride );
+  EXPECT_EQ( GLsizei(3010),      ppca.VertexArray::named[ ClientState::NORMAL ].stride );
 
   ppca.glVertexArrayTexCoordOffsetEXT( 0, 3011, 2, GL_FLOAT, 3012, 0 );
   EXPECT_EQ( GLuint(3011),       ppca.VertexArray::named[ ClientState::TEX_COORD + 2 ].buffer );
   EXPECT_EQ( GLint(2),           ppca.VertexArray::named[ ClientState::TEX_COORD + 2 ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::TEX_COORD + 2 ].type );
-  EXPECT_EQ( GLint(3012),        ppca.VertexArray::named[ ClientState::TEX_COORD + 2 ].stride );
+  EXPECT_EQ( GLsizei(3012),      ppca.VertexArray::named[ ClientState::TEX_COORD + 2 ].stride );
 
   ppca.glVertexArrayMultiTexCoordOffsetEXT( 0, 3013, GL_TEXTURE5, 2, GL_FLOAT, 3014, 0 );
   EXPECT_EQ( GLuint(3013),       ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].buffer );
   EXPECT_EQ( GLint(2),           ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].type );
-  EXPECT_EQ( GLint(3014),        ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].stride );
+  EXPECT_EQ( GLsizei(3014),      ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].stride );
 
   ppca.glVertexArrayFogCoordOffsetEXT ( 0, 3015, GL_FLOAT, 3016, 0 );
   EXPECT_EQ( GLuint(3015),       ppca.VertexArray::named[ ClientState::FOG_COORD ].buffer );
   EXPECT_EQ( GLint(1),           ppca.VertexArray::named[ ClientState::FOG_COORD ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::FOG_COORD ].type );
-  EXPECT_EQ( GLint(3016),        ppca.VertexArray::named[ ClientState::FOG_COORD ].stride );
+  EXPECT_EQ( GLsizei(3016),      ppca.VertexArray::named[ ClientState::FOG_COORD ].stride );
 
   ppca.glVertexArraySecondaryColorOffsetEXT ( 0, 3017, 3, GL_FLOAT, 3018, 0 );
   EXPECT_EQ( GLuint(3017),       ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].buffer );
   EXPECT_EQ( GLint(3),           ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ), ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].type );
-  EXPECT_EQ( GLint(3018),        ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].stride );
+  EXPECT_EQ( GLsizei(3018),      ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].stride );
 }
 
 TEST ( RegalPpca, glDeleteBuffers_Shadowing )
@@ -2295,7 +2297,7 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
     ppca.VertexArray::named[ ii ].enabled = GLboolean( ( ii & 1 ) == 0 );
     ppca.VertexArray::named[ ii ].size    = GLint( 987 );
     ppca.VertexArray::named[ ii ].type    = GLenum( 987 );
-    ppca.VertexArray::named[ ii ].stride  = GLint( 987 );
+    ppca.VertexArray::named[ ii ].stride  = GLsizei( 987 );
     ppca.VertexArray::named[ ii ].pointer = reinterpret_cast<const GLvoid*>( 987 );
   }
 
@@ -2305,25 +2307,25 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLboolean( GL_TRUE ),  ppca.VertexArray::named[ ClientState::VERTEX ].enabled );
   EXPECT_EQ( GLint( 4 ),            ppca.VertexArray::named[ ClientState::VERTEX ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::VERTEX ].type );
-  EXPECT_EQ( GLint( 60 ),           ppca.VertexArray::named[ ClientState::VERTEX ].stride );
+  EXPECT_EQ( GLsizei( 60 ),         ppca.VertexArray::named[ ClientState::VERTEX ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 44 ), ppca.VertexArray::named[ ClientState::VERTEX ].pointer );
 
   EXPECT_EQ( GLboolean( GL_TRUE ),  ppca.VertexArray::named[ ClientState::NORMAL ].enabled );
   EXPECT_EQ( GLint( 3 ),            ppca.VertexArray::named[ ClientState::NORMAL ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::NORMAL ].type );
-  EXPECT_EQ( GLint( 60 ),           ppca.VertexArray::named[ ClientState::NORMAL ].stride );
+  EXPECT_EQ( GLsizei( 60 ),         ppca.VertexArray::named[ ClientState::NORMAL ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 32 ), ppca.VertexArray::named[ ClientState::NORMAL ].pointer );
 
   EXPECT_EQ( GLboolean( GL_TRUE ),  ppca.VertexArray::named[ ClientState::COLOR ].enabled );
   EXPECT_EQ( GLint( 4 ),            ppca.VertexArray::named[ ClientState::COLOR ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR ].type );
-  EXPECT_EQ( GLint( 60 ),           ppca.VertexArray::named[ ClientState::COLOR ].stride );
+  EXPECT_EQ( GLsizei( 60 ),         ppca.VertexArray::named[ ClientState::COLOR ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 16 ), ppca.VertexArray::named[ ClientState::COLOR ].pointer );
 
   EXPECT_EQ( GLboolean( GL_TRUE ),  ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].enabled );
   EXPECT_EQ( GLint( 4 ),            ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].size );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].type );
-  EXPECT_EQ( GLint( 60 ),           ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].stride );
+  EXPECT_EQ( GLsizei( 60 ),         ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].pointer );
 
   // The other non-texture coordinate arrays should be disabled
@@ -2337,22 +2339,22 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
 
   EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::EDGE_FLAG       ].size );
   EXPECT_EQ( GLenum( 987 ),          ppca.VertexArray::named[ ClientState::EDGE_FLAG       ].type );
-  EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::EDGE_FLAG       ].stride );
+  EXPECT_EQ( GLsizei( 987 ),         ppca.VertexArray::named[ ClientState::EDGE_FLAG       ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 987 ), ppca.VertexArray::named[ ClientState::EDGE_FLAG       ].pointer );
 
   EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::FOG_COORD       ].size );
   EXPECT_EQ( GLenum( 987 ),          ppca.VertexArray::named[ ClientState::FOG_COORD       ].type );
-  EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::FOG_COORD       ].stride );
+  EXPECT_EQ( GLsizei( 987 ),         ppca.VertexArray::named[ ClientState::FOG_COORD       ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 987 ), ppca.VertexArray::named[ ClientState::FOG_COORD       ].pointer );
 
   EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::INDEX           ].size );
   EXPECT_EQ( GLenum( 987 ),          ppca.VertexArray::named[ ClientState::INDEX           ].type );
-  EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::INDEX           ].stride );
+  EXPECT_EQ( GLsizei( 987 ),         ppca.VertexArray::named[ ClientState::INDEX           ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 987 ), ppca.VertexArray::named[ ClientState::INDEX           ].pointer );
 
   EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].size );
   EXPECT_EQ( GLenum( 987 ),          ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].type );
-  EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].stride );
+  EXPECT_EQ( GLsizei( 987 ),         ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 987 ), ppca.VertexArray::named[ ClientState::SECONDARY_COLOR ].pointer );
 
   // Verify other texture coordinate settings unaffected.
@@ -2367,7 +2369,7 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
     EXPECT_EQ( GLboolean( b ),         ppca.VertexArray::named[ ClientState::TEX_COORD + ii ].enabled );
     EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::TEX_COORD + ii ].size );
     EXPECT_EQ( GLenum( 987 ),          ppca.VertexArray::named[ ClientState::TEX_COORD + ii ].type );
-    EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ClientState::TEX_COORD + ii ].stride );
+    EXPECT_EQ( GLsizei( 987 ),         ppca.VertexArray::named[ ClientState::TEX_COORD + ii ].stride );
     EXPECT_EQ( reinterpret_cast<const GLvoid*>( 987 ), ppca.VertexArray::named[ ClientState::TEX_COORD + ii ].pointer );
   }
 
@@ -2379,13 +2381,13 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   ppca.glClientActiveTexture( GL_TEXTURE5 );
   ppca.glInterleavedArrays( GL_T4F_C4F_N3F_V4F, 321, reinterpret_cast<GLvoid *>( 5000 ) );
 
-  EXPECT_EQ( GLint( 321 ),            ppca.VertexArray::named[ ClientState::VERTEX        ].stride );
+  EXPECT_EQ( GLsizei( 321 ),          ppca.VertexArray::named[ ClientState::VERTEX        ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 5044 ), ppca.VertexArray::named[ ClientState::VERTEX        ].pointer );
-  EXPECT_EQ( GLint( 321 ),            ppca.VertexArray::named[ ClientState::NORMAL        ].stride );
+  EXPECT_EQ( GLsizei( 321 ),          ppca.VertexArray::named[ ClientState::NORMAL        ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 5032 ), ppca.VertexArray::named[ ClientState::NORMAL        ].pointer );
-  EXPECT_EQ( GLint( 321 ),            ppca.VertexArray::named[ ClientState::COLOR         ].stride );
+  EXPECT_EQ( GLsizei( 321 ),          ppca.VertexArray::named[ ClientState::COLOR         ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 5016 ), ppca.VertexArray::named[ ClientState::COLOR         ].pointer );
-  EXPECT_EQ( GLint( 321 ),            ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].stride );
+  EXPECT_EQ( GLsizei( 321 ),          ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].stride );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 5000 ), ppca.VertexArray::named[ ClientState::TEX_COORD + 5 ].pointer );
 
   // Do a quick run through the remaining formats, and do some quick verifications.
@@ -2410,10 +2412,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 8 ),            ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 8 ),          ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2440,10 +2442,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 12 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 12 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2470,10 +2472,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_UNSIGNED_BYTE ), ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 12 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 12 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 12 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 12 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 4 ),  ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2500,10 +2502,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_UNSIGNED_BYTE ), ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 16 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 16 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 16 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 16 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 4 ),  ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2530,10 +2532,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 12 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2560,10 +2562,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 12 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2590,10 +2592,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 40 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 40 ),           ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 40 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 40 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 40 ),         ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 40 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 28 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 16 ), ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2620,10 +2622,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 20 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 20 ),           ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 20 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 20 ),         ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 8 ),  ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2650,10 +2652,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 16 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2680,10 +2682,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_UNSIGNED_BYTE ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 24 ),           ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 24 ),         ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 12 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2710,10 +2712,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 20 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 0 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2740,10 +2742,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 0 ),            ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 32 ),           ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 0 ),          ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 32 ),         ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 20 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 8 ),  ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2770,10 +2772,10 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::COLOR     ].type );
   EXPECT_EQ( GLenum( GL_FLOAT ),    ppca.VertexArray::named[ ClientState::TEX_COORD ].type );
 
-  EXPECT_EQ( GLint( 48 ),           ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
-  EXPECT_EQ( GLint( 48 ),           ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
-  EXPECT_EQ( GLint( 48 ),           ppca.VertexArray::named[ ClientState::COLOR     ].stride );
-  EXPECT_EQ( GLint( 48 ),           ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
+  EXPECT_EQ( GLsizei( 48 ),         ppca.VertexArray::named[ ClientState::VERTEX    ].stride );
+  EXPECT_EQ( GLsizei( 48 ),         ppca.VertexArray::named[ ClientState::NORMAL    ].stride );
+  EXPECT_EQ( GLsizei( 48 ),         ppca.VertexArray::named[ ClientState::COLOR     ].stride );
+  EXPECT_EQ( GLsizei( 48 ),         ppca.VertexArray::named[ ClientState::TEX_COORD ].stride );
 
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 36 ), ppca.VertexArray::named[ ClientState::VERTEX    ].pointer );
   EXPECT_EQ( reinterpret_cast<const GLvoid*>( 24 ), ppca.VertexArray::named[ ClientState::NORMAL    ].pointer );
@@ -2790,7 +2792,7 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
     ppca.VertexArray::named[ ii ].enabled = GLboolean( ( ii & 1 ) == 0 );
     ppca.VertexArray::named[ ii ].size    = GLint( 987 );
     ppca.VertexArray::named[ ii ].type    = GLenum( 987 );
-    ppca.VertexArray::named[ ii ].stride  = GLint( 987 );
+    ppca.VertexArray::named[ ii ].stride  = GLsizei( 987 );
     ppca.VertexArray::named[ ii ].pointer = reinterpret_cast<const GLvoid*>( 987 );
   }
 
@@ -2803,7 +2805,7 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
     EXPECT_EQ( GLboolean( b ),         ppca.VertexArray::named[ ii ].enabled );
     EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ii ].size );
     EXPECT_EQ( GLenum( 987 ),          ppca.VertexArray::named[ ii ].type );
-    EXPECT_EQ( GLint( 987 ),           ppca.VertexArray::named[ ii ].stride );
+    EXPECT_EQ( GLsizei( 987 ),         ppca.VertexArray::named[ ii ].stride );
     EXPECT_EQ( reinterpret_cast<const GLvoid*>( 987 ), ppca.VertexArray::named[ ii ].pointer );
   }
 }
@@ -2825,36 +2827,36 @@ TEST ( RegalPpca, glGet_Shadowing )
 
   // First ensure getting an unimplemented value works (does nothing).
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resulti ) );
+  EXPECT_EQ( false, ppca.glGetv( ctx, GL_FLOAT, resulti ) );
   EXPECT_EQ( 123, resulti[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resulti64 ) );
+  EXPECT_EQ( false, ppca.glGetv( ctx, GL_FLOAT, resulti64 ) );
   EXPECT_EQ( 123, resulti64[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resultf ) );
+  EXPECT_EQ( false, ppca.glGetv( ctx, GL_FLOAT, resultf ) );
   EXPECT_EQ( 123, resultf[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resultd ) );
+  EXPECT_EQ( false, ppca.glGetv( ctx, GL_FLOAT, resultd ) );
   EXPECT_EQ( 123, resultd[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_FALSE ), ppca.glGetv( ctx, GL_FLOAT, resultb ) );
+  EXPECT_EQ( false, ppca.glGetv( ctx, GL_FLOAT, resultb ) );
   EXPECT_EQ( GLboolean(GL_FALSE), resultb[ 0 ] );
 
   // Next verify that getting an implemented value gets the value.
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti ) );
+  EXPECT_EQ( true, ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti64 ) );
+  EXPECT_EQ( true, ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti64 ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resulti64[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultf ) );
+  EXPECT_EQ( true, ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultf ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultf[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultd ) );
+  EXPECT_EQ( true, ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultd ) );
   EXPECT_EQ( REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultd[ 0 ] );
 
-  EXPECT_EQ( GLboolean( GL_TRUE ), ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultb ) );
+  EXPECT_EQ( true, ppca.glGetv( ctx, GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, resultb ) );
   EXPECT_EQ( GLboolean(GL_TRUE), resultb[ 0 ] );
 }
 

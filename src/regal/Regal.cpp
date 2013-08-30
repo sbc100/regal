@@ -15188,6 +15188,7 @@ extern "C" {
     std::string _message = Marker::toStringEXT(length, marker);
     App("glInsertEventMarkerEXT","(", length, ", ", boost::print::quote(marker,'"'), ")");
     if (!_context) return;
+
     if (_context->marker)
       _context->marker->InsertEventMarker(*_context, _message);
     RegalAssert(_context->info);
@@ -15202,7 +15203,8 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPopGroupMarkerEXT(void)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    if (_context->marker)
+
+    if (_context && _context->marker)
       _context->marker->PopGroupMarker(*_context);
     App("glPopGroupMarkerEXT","()");
     if (!_context) return;
@@ -15228,6 +15230,7 @@ extern "C" {
         RegalAssert(_next);
         _next->call(&_next->glPushGroupMarkerEXT)(length, marker);
     }
+
     if (_context->marker)
       _context->marker->PushGroupMarker(*_context, _message);
   }
@@ -31845,6 +31848,7 @@ extern "C" {
   REGAL_DECL EGLContext REGAL_CALL eglGetCurrentContext(void)
   {
     App("eglGetCurrentContext","()");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     EGLContext ret = 0;

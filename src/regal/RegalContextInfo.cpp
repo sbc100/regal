@@ -89,6 +89,8 @@ ContextInfo::ContextInfo()
   gl_version_4_0(false),
   gl_version_4_1(false),
   gl_version_4_2(false),
+  gl_version_4_3(false),
+  gl_version_4_4(false),
   gles_version_major(-1),
   gles_version_minor(-1),
   glsl_version_major(-1),
@@ -650,6 +652,7 @@ ContextInfo::ContextInfo()
   regal_ext_texture_env_dot3(false),
   regal_ibm_texture_mirrored_repeat(false),
   regal_nv_blend_square(false),
+  regal_nv_path_rendering(false),
 #if REGAL_SYS_WGL
   wgl_3dl_stereo_control(false),
   wgl_amd_gpu_association(false),
@@ -1032,7 +1035,9 @@ ContextInfo::init(const RegalContext &context)
 
   if (!es1 && !es2)
   {
-    gl_version_4_2 = gl_version_major > 4 || (gl_version_major == 4 && gl_version_minor >= 2);
+    gl_version_4_4 = gl_version_major > 4 || (gl_version_major == 4 && gl_version_minor >= 4);
+    gl_version_4_3 = gl_version_4_4 || (gl_version_major == 4 && gl_version_minor == 3);
+    gl_version_4_2 = gl_version_4_3 || (gl_version_major == 4 && gl_version_minor == 2);
     gl_version_4_1 = gl_version_4_2 || (gl_version_major == 4 && gl_version_minor == 1);
     gl_version_4_0 = gl_version_4_1 || gl_version_major == 4;
     gl_version_3_3 = gl_version_4_0 || (gl_version_major == 3 && gl_version_minor == 3);
@@ -2139,7 +2144,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_packed_depth_stencil")) return gl_nv_packed_depth_stencil;
   if (!strcmp(ext,"GL_NV_packed_float_linear")) return gl_nv_packed_float_linear;
   if (!strcmp(ext,"GL_NV_parameter_buffer_object")) return gl_nv_parameter_buffer_object;
-  if (!strcmp(ext,"GL_NV_path_rendering")) return gl_nv_path_rendering;
+  if (!strcmp(ext,"GL_NV_path_rendering")) return regal_nv_path_rendering || gl_nv_path_rendering;
   if (!strcmp(ext,"GL_NV_pixel_buffer_object")) return gl_nv_pixel_buffer_object;
   if (!strcmp(ext,"GL_NV_pixel_data_range")) return gl_nv_pixel_data_range;
   if (!strcmp(ext,"GL_NV_platform_binary")) return gl_nv_platform_binary;

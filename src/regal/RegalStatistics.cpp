@@ -99,6 +99,8 @@ Statistics::log() const
   log("GL_VERSION_4_0",gl_version_4_0);
   log("GL_VERSION_4_1",gl_version_4_1);
   log("GL_VERSION_4_2",gl_version_4_2);
+  log("GL_VERSION_4_3",gl_version_4_3);
+  log("GL_VERSION_4_4",gl_version_4_4);
   log("GLX_VERSION_1_0",glx_version_1_0);
   log("GLX_VERSION_1_1",glx_version_1_1);
   log("GLX_VERSION_1_2",glx_version_1_2);

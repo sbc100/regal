@@ -109,6 +109,7 @@ emulatedExts = {
   'GL_EXT_texture_env_dot3':          { 'emulatedBy' : 'iff',    'emulatedIf' : '' },
   'GL_IBM_texture_mirrored_repeat':   { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
   'GL_NV_blend_square':               { 'emulatedBy' : 'filt',   'emulatedIf' : '' },
+  'GL_NV_path_rendering':             { 'emulatedBy' : 'path',   'emulatedIf' : '' },
 }
 
 
@@ -201,6 +202,8 @@ def traverse(apis, args):
 def generate(apis, args):
 
   traverse(apis, args)
+  generateContextHeader(apis, args)
+  generateContextSource(apis, args)
   generateDispatchGLX(apis, args)
   generateTraceSource( apis, args )
   generatePublicHeader(apis, args)
@@ -221,8 +224,6 @@ def generate(apis, args):
   generateStaticES2Source( apis, args )
   generateStaticEGLSource( apis, args )
   generateDispatchHeader(apis, args)
-  generateContextHeader(apis, args)
-  generateContextSource(apis, args)
   generateContextInfoHeader(apis, args)
   generateContextInfoSource(apis, args)
   generateLookupSource(apis, args)

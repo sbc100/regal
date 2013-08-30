@@ -13,7 +13,7 @@ ifndef REGAL_FORCE_REBUILD
   endif
 endif
 
-regal_cflags := -DANDROID=1 -DREGAL_NO_PNG=1 -Werror
+regal_cflags := -DANDROID=1 -DREGAL_NO_PNG=1 -DREGAL_CONFIG_FILE=/data/.regal -Werror
 
 regal_path   := $(LOCAL_PATH)/../../../..
 

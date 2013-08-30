@@ -110,6 +110,8 @@ struct ContextInfo
   GLboolean gl_version_4_0 : 1;
   GLboolean gl_version_4_1 : 1;
   GLboolean gl_version_4_2 : 1;
+  GLboolean gl_version_4_3 : 1;
+  GLboolean gl_version_4_4 : 1;
 
   GLint     gles_version_major;
   GLint     gles_version_minor;
@@ -678,6 +680,7 @@ struct ContextInfo
   GLboolean regal_ext_texture_env_dot3 : 1;
   GLboolean regal_ibm_texture_mirrored_repeat : 1;
   GLboolean regal_nv_blend_square : 1;
+  GLboolean regal_nv_path_rendering : 1;
 
 #if REGAL_SYS_WGL
   GLboolean wgl_3dl_stereo_control : 1;
