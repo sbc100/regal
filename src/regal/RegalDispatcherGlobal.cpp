@@ -65,7 +65,7 @@ DispatcherGlobal::DispatcherGlobal()
   // have to check this early for the global dispatches, otherwise we'd use Config
 
   #if REGAL_TRACE
-  {
+  { 
     getEnv( "REGAL_TRACE", Config::enableTrace);
     ::memset(&trace, 0, sizeof(trace) );
     InitDispatchTableGlobalTrace(trace);

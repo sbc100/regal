@@ -91,16 +91,13 @@ struct So
         UNUSED_PARAMETER(ctx);
     }
 
-    static GLenum TT_Index2Enum(size_t index)
+    static GLenum TT_Index2Enum(GLuint index)
     {
-      if (index < array_size( index2Enum ))
-      {
-        RegalAssertArrayIndex( index2Enum, index );
-        return index2Enum[index];
+      if( index > REGAL_NUM_TEXTURE_TARGETS ) {
+        Warning( "Unhandled texture target index: index = ", index);
+        index = REGAL_NUM_TEXTURE_TARGETS;
       }
-
-      Warning( "Unhandled texture target index: index = ", index);
-      return GL_TEXTURE_2D;
+      return index2Enum[index];
     }
 
     static GLuint TT_Enum2Index(GLenum texture)
@@ -216,10 +213,8 @@ struct So
         TextureUnit()
         : boundSamplerObject(NULL)
         {
-            size_t n = array_size( boundTextureObjects );
-            for (size_t tti = 0; tti < n; tti++)
+            for (int tti = 0; tti< REGAL_NUM_TEXTURE_TARGETS; tti++)
             {
-                RegalAssertArrayIndex( boundTextureObjects, tti );
                 boundTextureObjects[tti] = NULL;
             }
         }
@@ -417,13 +412,8 @@ struct So
         if (tti >= REGAL_NUM_TEXTURE_TARGETS)
             return false;
 
-        RegalAssertArrayIndex( textureUnits, activeTextureUnit );
-        if (activeTextureUnit >= array_size( textureUnits ))
-            return false;
-
         TextureUnit &tu = textureUnits[activeTextureUnit];
 
-        RegalAssertArrayIndex( tu.boundTextureObjects, tti );
         TextureState* ts = tu.boundTextureObjects[tti];
 
         SamplingState *as = NULL;
@@ -518,13 +508,8 @@ struct So
         if (tti >= REGAL_NUM_TEXTURE_TARGETS)
             return false;
 
-        RegalAssertArrayIndex( textureUnits, activeTextureUnit );
-        if (activeTextureUnit >= array_size( textureUnits ))
-            return false;
-
         TextureUnit &tu = textureUnits[activeTextureUnit];
 
-        RegalAssertArrayIndex( tu.boundTextureObjects, tti );
         TextureState* txs = tu.boundTextureObjects[tti];
 
         if (!txs)
@@ -539,18 +524,6 @@ struct So
 
         switch (pname)
         {
-            case GL_MAX_VERTEX_ATTRIBS:
-                *params = static_cast<T>(ctx.info->max_vertex_attribs);
-                break;
-            case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-                *params = static_cast<T>(ctx.info->max_combined_texture_image_units);
-                break;
-            case GL_MAX_TEXTURE_COORDS:
-                *params = static_cast<T>(ctx.info->max_texture_coords);
-                break;
-            case GL_MAX_TEXTURE_UNITS:
-                *params = static_cast<T>(ctx.info->max_texture_units);
-                break;
             case GL_TEXTURE_BORDER_COLOR:
                 params[0] = static_cast<T>(ts->BorderColor[0]);
                 params[1] = static_cast<T>(ts->BorderColor[1]);
@@ -634,9 +607,6 @@ struct So
 
             case GL_SAMPLER_BINDING:
                 {
-                    RegalAssertArrayIndex( textureUnits, activeTextureUnit );
-                    if (activeTextureUnit >= array_size( textureUnits ))
-                        return false;
                     SamplingState *pso = textureUnits[activeTextureUnit].boundSamplerObject;
                     *params = static_cast<T>(pso ? pso->name : 0);
                 }
@@ -689,15 +659,8 @@ struct So
         if (tti >= REGAL_NUM_TEXTURE_TARGETS)
             return false;
 
-        RegalAssertArrayIndex( textureUnits, activeTextureUnit );
-        if (activeTextureUnit >= array_size( textureUnits ))
-          return false;
-
         TextureUnit &tu = textureUnits[activeTextureUnit];
-
-        RegalAssertArrayIndex( tu.boundTextureObjects, tti );
         TextureState* ts = tu.boundTextureObjects[tti];
-
         *params = static_cast<T>(ts ? ts->name : 0);
 
         return true;
@@ -722,10 +685,10 @@ struct So
     GLuint nextSamplerObjectId;
     bool   supportSrgb;
     bool   noSamplersInUse;
-    TextureUnit textureUnits[REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS];
+    TextureUnit textureUnits[REGAL_EMU_MAX_TEXTURE_UNITS];
     std::map<GLuint, SamplingState*> samplerObjects;
     std::map<GLuint, TextureState*> textureObjects;
-    static const GLenum index2Enum[REGAL_NUM_TEXTURE_TARGETS];
+    static const GLenum index2Enum[17];
 };
 
 }

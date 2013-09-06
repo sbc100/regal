@@ -59,10 +59,8 @@ struct ContextInfo
 
 ${VERSION_DECLARE}
 
-  // Implementation dependent values
-
-${IMPL_DECLARE}
-
+  GLuint maxVertexAttribs;
+  GLuint maxVaryings;
 };
 
 REGAL_NAMESPACE_END
@@ -91,7 +89,7 @@ using namespace boost::print;
 #include "RegalToken.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
-#include "RegalEmu.h"
+#include "RegalIff.h"             // For REGAL_MAX_VERTEX_ATTRIBS
 
 REGAL_GLOBAL_END
 
@@ -103,7 +101,8 @@ using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 ContextInfo::ContextInfo()
 :
 ${VERSION_INIT}
-${IMPL_INIT}
+  maxVertexAttribs(0),
+  maxVaryings(0)
 {
    Internal("ContextInfo::ContextInfo","()");
 }
@@ -351,21 +350,30 @@ ${VERSION_DETECT}
 ${EXT_INIT}
 
   RegalAssert(context.dispatcher.driver.glGetIntegerv);
-${IMPL_GET}
+  if (es1)
+  {
+    maxVertexAttribs = 8;
+    maxVaryings = 0;
+  }
+  else
+  {
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&maxVertexAttribs));
+    context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&maxVaryings));
+  }
 
-  Info("OpenGL v attribs : ",gl_max_vertex_attribs);
-  Info("OpenGL varyings  : ",gl_max_varying_floats);
+  Info("OpenGL v attribs : ",maxVertexAttribs);
+  Info("OpenGL varyings  : ",maxVaryings);
 
-  if (gl_max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
-      gl_max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;
+  if (maxVertexAttribs > REGAL_EMU_IFF_VERTEX_ATTRIBS)
+      maxVertexAttribs = REGAL_EMU_IFF_VERTEX_ATTRIBS;
 
   // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs (n*16 is used
   // as the stride in RegalIFF).  WebGL (and Pepper) explicitly disallows stride > 255 as well.
 
   if (vendor == "Qualcomm" || vendor == "Chromium" || webgl)
-    gl_max_vertex_attribs = 8;
+    maxVertexAttribs = 8;
 
-  Info("Regal  v attribs : ",gl_max_vertex_attribs);
+  Info("Regal  v attribs : ",maxVertexAttribs);
 }
 
 ${EXT_CODE}
@@ -532,94 +540,6 @@ def versionDetectCode(apis, args):
 
   return code
 
-def implDeclareCode(apis, args):
-
-  code = ''
-  for api in apis:
-    name = api.name.lower()
-
-    if name == 'gl':
-      code += '\n'
-
-      states = []
-      for state in api.states:
-        states.append(state.getValue.lower())
-
-      for state in sorted(states):
-        code += '  GLuint gl_%s;\n' % (state)
-
-      code += '\n'
-      code += '  // Max values currently being used\n'
-      code += '\n'
-
-      for state in sorted(states):
-        code += '  GLuint %s;\n' % (state)
-
-      code += '\n'
-      code += '  GLuint gl_max_varying_floats;\n'
-
-  return code
-
-def implInitCode(apis, args):
-
-  code = ''
-  for api in apis:
-    name = api.name.lower()
-
-    if name == 'gl':
-
-      states = []
-      for state in api.states:
-        states.append(state.getValue.lower())
-
-      for state in sorted(states):
-        code += '  gl_%s(0),\n' % (state)
-
-      for state in sorted(states):
-        code += '  %s(0),\n' % (state)
-
-      code += '  gl_max_varying_floats(0)\n'
-
-  return code
-
-def implGetCode(apis, args):
-
-  code = ''
-  for api in apis:
-    name = api.name.lower()
-
-    if name == 'gl':
-
-      states = []
-      for state in api.states:
-        states.append(state.getValue)
-
-      code += '  if (es1)\n'
-      code += '  {\n'
-
-      for state in sorted(states):
-        code += '    gl_%s = 0;\n' % state.lower()
-
-      code += '\n'
-      code += '    gl_max_vertex_attribs = 8;\n'
-      code += '  }\n'
-      code += '  else\n'
-      code += '  {\n'
-
-      for state in sorted(states):
-        code += '    context.dispatcher.driver.glGetIntegerv( GL_%s, reinterpret_cast<GLint *>(&gl_%s));\n' % (state, state.lower())
-
-      code += '    context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&gl_max_varying_floats));\n'
-      code += '  }\n'
-      code += '\n'
-
-      for state in sorted(states):
-        code += '  %s = std::min( gl_%s, static_cast<GLuint>(REGAL_EMU_%s) );\n' % (state.lower(), state.lower(), state)
-
-      code += '\n'
-
-  return code
-
 def extensionStringCode(apis, args):
 
   code = ''
@@ -691,7 +611,6 @@ def generateContextInfoHeader(apis, args):
     substitute['COPYRIGHT']       = args.copyright
     substitute['HEADER_NAME']     = "REGAL_CONTEXT_INFO"
     substitute['VERSION_DECLARE'] = versionDeclareCode(apis,args)
-    substitute['IMPL_DECLARE']    = implDeclareCode(apis,args)
     outputCode( '%s/RegalContextInfo.h' % args.srcdir, contextInfoHeaderTemplate.substitute(substitute))
 
 def generateContextInfoSource(apis, args):
@@ -704,6 +623,4 @@ def generateContextInfoSource(apis, args):
     substitute['VERSION_DETECT'] = versionDetectCode(apis,args)
     substitute['EXT_INIT']       = extensionStringCode(apis,args)
     substitute['EXT_CODE']       = getExtensionCode(apis,args)
-    substitute['IMPL_INIT']      = implInitCode(apis,args)
-    substitute['IMPL_GET']       = implGetCode(apis,args)
     outputCode( '%s/RegalContextInfo.cpp' % args.srcdir, contextInfoSourceTemplate.substitute(substitute))

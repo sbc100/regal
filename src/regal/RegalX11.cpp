@@ -96,8 +96,8 @@ extern "C" {
   }
 
   static Colormap dummyColormap = 0;
-
-  REGAL_DECL Colormap
+  
+  REGAL_DECL Colormap 
   XCreateColormap(Display *display, Window w, Visual *visual, int alloc)
   {
     ::REGAL_NAMESPACE_INTERNAL::Init::init();
@@ -139,7 +139,7 @@ extern "C" {
     return True;
   }
 
-} // extern "C"
+} // extern "C" 
 
 REGAL_GLOBAL_END
 

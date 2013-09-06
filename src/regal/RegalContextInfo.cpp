@@ -56,7 +56,7 @@ using namespace boost::print;
 #include "RegalToken.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
-#include "RegalEmu.h"
+#include "RegalIff.h"             // For REGAL_MAX_VERTEX_ATTRIBS
 
 REGAL_GLOBAL_END
 
@@ -794,26 +794,8 @@ ContextInfo::ContextInfo()
   egl_nv_system_time(false),
 #endif
 
-  gl_max_attrib_stack_depth(0),
-  gl_max_client_attrib_stack_depth(0),
-  gl_max_combined_texture_image_units(0),
-  gl_max_draw_buffers(0),
-  gl_max_texture_coords(0),
-  gl_max_texture_units(0),
-  gl_max_vertex_attrib_bindings(0),
-  gl_max_vertex_attribs(0),
-  gl_max_viewports(0),
-  max_attrib_stack_depth(0),
-  max_client_attrib_stack_depth(0),
-  max_combined_texture_image_units(0),
-  max_draw_buffers(0),
-  max_texture_coords(0),
-  max_texture_units(0),
-  max_vertex_attrib_bindings(0),
-  max_vertex_attribs(0),
-  max_viewports(0),
-  gl_max_varying_floats(0)
-
+  maxVertexAttribs(0),
+  maxVaryings(0)
 {
    Internal("ContextInfo::ContextInfo","()");
 }
@@ -1761,55 +1743,28 @@ ContextInfo::init(const RegalContext &context)
   RegalAssert(context.dispatcher.driver.glGetIntegerv);
   if (es1)
   {
-    gl_max_attrib_stack_depth = 0;
-    gl_max_client_attrib_stack_depth = 0;
-    gl_max_combined_texture_image_units = 0;
-    gl_max_draw_buffers = 0;
-    gl_max_texture_coords = 0;
-    gl_max_texture_units = 0;
-    gl_max_vertex_attribs = 0;
-    gl_max_vertex_attrib_bindings = 0;
-    gl_max_viewports = 0;
-
-    gl_max_vertex_attribs = 8;
+    maxVertexAttribs = 8;
+    maxVaryings = 0;
   }
   else
   {
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>(&gl_max_attrib_stack_depth));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>(&gl_max_client_attrib_stack_depth));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, reinterpret_cast<GLint *>(&gl_max_combined_texture_image_units));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_DRAW_BUFFERS, reinterpret_cast<GLint *>(&gl_max_draw_buffers));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_TEXTURE_COORDS, reinterpret_cast<GLint *>(&gl_max_texture_coords));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_TEXTURE_UNITS, reinterpret_cast<GLint *>(&gl_max_texture_units));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&gl_max_vertex_attribs));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIB_BINDINGS, reinterpret_cast<GLint *>(&gl_max_vertex_attrib_bindings));
-    context.dispatcher.driver.glGetIntegerv( GL_MAX_VIEWPORTS, reinterpret_cast<GLint *>(&gl_max_viewports));
-    context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&gl_max_varying_floats));
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&maxVertexAttribs));
+    context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&maxVaryings));
   }
 
-  max_attrib_stack_depth = std::min( gl_max_attrib_stack_depth, static_cast<GLuint>(REGAL_EMU_MAX_ATTRIB_STACK_DEPTH) );
-  max_client_attrib_stack_depth = std::min( gl_max_client_attrib_stack_depth, static_cast<GLuint>(REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH) );
-  max_combined_texture_image_units = std::min( gl_max_combined_texture_image_units, static_cast<GLuint>(REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS) );
-  max_draw_buffers = std::min( gl_max_draw_buffers, static_cast<GLuint>(REGAL_EMU_MAX_DRAW_BUFFERS) );
-  max_texture_coords = std::min( gl_max_texture_coords, static_cast<GLuint>(REGAL_EMU_MAX_TEXTURE_COORDS) );
-  max_texture_units = std::min( gl_max_texture_units, static_cast<GLuint>(REGAL_EMU_MAX_TEXTURE_UNITS) );
-  max_vertex_attribs = std::min( gl_max_vertex_attribs, static_cast<GLuint>(REGAL_EMU_MAX_VERTEX_ATTRIBS) );
-  max_vertex_attrib_bindings = std::min( gl_max_vertex_attrib_bindings, static_cast<GLuint>(REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS) );
-  max_viewports = std::min( gl_max_viewports, static_cast<GLuint>(REGAL_EMU_MAX_VIEWPORTS) );
+  Info("OpenGL v attribs : ",maxVertexAttribs);
+  Info("OpenGL varyings  : ",maxVaryings);
 
-  Info("OpenGL v attribs : ",gl_max_vertex_attribs);
-  Info("OpenGL varyings  : ",gl_max_varying_floats);
-
-  if (gl_max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
-      gl_max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;
+  if (maxVertexAttribs > REGAL_EMU_IFF_VERTEX_ATTRIBS)
+      maxVertexAttribs = REGAL_EMU_IFF_VERTEX_ATTRIBS;
 
   // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs (n*16 is used
   // as the stride in RegalIFF).  WebGL (and Pepper) explicitly disallows stride > 255 as well.
 
   if (vendor == "Qualcomm" || vendor == "Chromium" || webgl)
-    gl_max_vertex_attribs = 8;
+    maxVertexAttribs = 8;
 
-  Info("Regal  v attribs : ",gl_max_vertex_attribs);
+  Info("Regal  v attribs : ",maxVertexAttribs);
 }
 
 bool

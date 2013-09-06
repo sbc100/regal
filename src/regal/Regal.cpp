@@ -31930,11 +31930,8 @@ extern "C" {
     RegalAssert(_next);
     EGLBoolean ret = 0;
     ret = _next->call(&_next->eglMakeCurrent)(dpy, draw, read, ctx);
-
-    #if !REGAL_SYS_PPAPI
     if (ret)
-      Init::makeCurrent(ctx);
-    #endif
+        Init::makeCurrent(ctx);
     return ret;
   }
 

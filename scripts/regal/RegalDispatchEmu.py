@@ -96,7 +96,8 @@ def apiEmuFuncDefineCode(apis, args):
                         code += '        _instance.nextDispatchTable = &_context->dispatcher.emulation;\n'
                         code += '        #endif\n'
 
-                      code += listToString(indent(e['prefix'],'        '))
+                      for j in e['prefix'] :
+                          code += '        %s\n' % j
                       if l['member'] :
                           code += '      }\n'
                   if e!= None and 'impl' in e and l['member']:
@@ -145,7 +146,8 @@ def apiEmuFuncDefineCode(apis, args):
                         code += '        _instance.nextDispatchTable = &_context->dispatcher.emulation;\n'
                         code += '        #endif\n'
 
-                      code += listToString(indent(e['impl'],'        '))
+                      for j in e['impl'] :
+                          code += '        %s\n' % j
                       if l['member'] :
                           if l['member'] != "filt" and typeIsVoid(rType):
                               code += '        return;\n'

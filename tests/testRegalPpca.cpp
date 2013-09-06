@@ -159,7 +159,6 @@ TEST ( RegalPpca, Ppca_Defaults )
   ctx.info->core = false;
   ctx.info->es1 = false;
   ctx.info->es2 = false;
-  ctx.info->max_client_attrib_stack_depth = 16;
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
@@ -429,7 +428,6 @@ TEST ( RegalPpca, PixelStore_PushPop )
 
   RegalContext ctx;
   ctx.info = new ContextInfo();
-  ctx.info->max_client_attrib_stack_depth = 16;
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
@@ -653,7 +651,7 @@ TEST ( RegalPpca, VertexArray_PushPop )
 
   RegalContext ctx;
   ctx.info = new ContextInfo();
-  ctx.info->max_client_attrib_stack_depth = 16;
+  ctx.info = new ContextInfo();
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
@@ -837,7 +835,6 @@ TEST ( RegalPpca, ClientAttrib_PushPop )
   ctx.info->core = false;
   ctx.info->es1 = false;
   ctx.info->es2 = false;
-  ctx.info->max_client_attrib_stack_depth = 16;
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Ppca ppca;
@@ -2817,7 +2814,6 @@ TEST ( RegalPpca, glGet_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
-  ctx.info->max_client_attrib_stack_depth = 16;
 
   Ppca ppca;
   ppca.Init(ctx);

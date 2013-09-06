@@ -107,7 +107,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     //
     // TODO: set correct GL error here
 
-    if (maskStack.size() >= ctx.info->max_client_attrib_stack_depth)
+    if (maskStack.size() >= REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH)
       return;
 
     maskStack.push_back(mask);
@@ -241,6 +241,8 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 
   bool glGetv(RegalContext &ctx, GLenum pname, GLboolean *params)
   {
+    UNUSED_PARAMETER(ctx);
+
     switch (pname)
     {
       case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
@@ -248,15 +250,6 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
         break;
       case GL_CLIENT_ATTRIB_STACK_DEPTH:
         params[0] = (maskStack.size() != 0);
-        break;
-     case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        params[0] = ctx.info->max_combined_texture_image_units != 0;
-        break;
-     case GL_MAX_TEXTURE_COORDS:
-        params[0] = ctx.info->max_texture_coords != 0;
-        break;
-     case GL_MAX_TEXTURE_UNITS:
-        params[0] = ctx.info->max_texture_units != 0;
         break;
 
       default:
@@ -267,25 +260,15 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
 
   template <typename T> bool glGetv(RegalContext &ctx, GLenum pname, T *params)
   {
+    UNUSED_PARAMETER(ctx);
+
     switch (pname)
     {
       case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
-        params[0] = static_cast<T>(ctx.info->max_client_attrib_stack_depth);
+        params[0] = static_cast<T>(REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH);
         break;
       case GL_CLIENT_ATTRIB_STACK_DEPTH:
         params[0] = static_cast<T>(maskStack.size());
-        break;
-      case GL_MAX_VERTEX_ATTRIBS:
-        params[0] = static_cast<T>(ctx.info->max_vertex_attribs);
-        break;
-      case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        params[0] = static_cast<T>(ctx.info->max_combined_texture_image_units);
-        break;
-      case GL_MAX_TEXTURE_COORDS:
-        params[0] = static_cast<T>(ctx.info->max_texture_coords);
-        break;
-      case GL_MAX_TEXTURE_UNITS:
-        params[0] = static_cast<T>(ctx.info->max_texture_units);
         break;
 
       default:

@@ -81,10 +81,8 @@ struct BaseVertex : public ClientState::VertexArray
 
     GLuint currentVBO = ClientState::VertexArray::arrayBufferBinding;
 
-    size_t num = array_size( ClientState::VertexArray::named );
-    for (size_t ii=0; ii<num; ii++)
+    for (GLuint ii=0; ii<ClientState::nNamedArrays; ii++)
     {
-      RegalAssertArrayIndex( ClientState::VertexArray::named, ii );
       ClientState::NamedVertexArray &n = ClientState::VertexArray::named[ii];
       if (n.enabled)
       {
@@ -131,14 +129,11 @@ struct BaseVertex : public ClientState::VertexArray
       }
     }
 
-    num = array_size( ClientState::VertexArray::generic );
-    for (size_t ii=0; ii<num; ii++)
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
     {
-      RegalAssertArrayIndex( ClientState::VertexArray::generic, ii );
       ClientState::GenericVertexArray &g = ClientState::VertexArray::generic[ii];
-      if (g.enabled && g.bindingIndex < array_size( ClientState::VertexArray::bindings ))
+      if (g.enabled)
       {
-        RegalAssertArrayIndex( ClientState::VertexArray::bindings, g.bindingIndex );
         ClientState::VertexBufferBindPoint &b = ClientState::VertexArray::bindings[g.bindingIndex];
         GLvoid *p = reinterpret_cast<GLvoid *>(b.offset + (b.stride*basevertex));
 
@@ -148,13 +143,12 @@ struct BaseVertex : public ClientState::VertexArray
           dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, currentVBO);
         }
 
-        GLsizei index = static_cast<GLsizei>(ii);
         if (g.isInteger)
-          dt.call(&dt.glVertexAttribIPointer)(index, g.size, g.type, b.stride, p);
+          dt.call(&dt.glVertexAttribIPointer)(ii, g.size, g.type, b.stride, p);
         else if (g.isLong)
-          dt.call(&dt.glVertexAttribLPointer)(index, g.size, g.type, b.stride, p);
+          dt.call(&dt.glVertexAttribLPointer)(ii, g.size, g.type, b.stride, p);
         else
-          dt.call(&dt.glVertexAttribPointer)(index, g.size, g.type, g.normalized, b.stride, p);
+          dt.call(&dt.glVertexAttribPointer)(ii, g.size, g.type, g.normalized, b.stride, p);
       }
     }
 

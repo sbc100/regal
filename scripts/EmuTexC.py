@@ -44,61 +44,79 @@ they are so as to convert the texture correctly."""
 texCFormulae = {
     'ShadowActiveTextureUnit' : {
         'entries' : [ 'glActiveTexture(ARB|)' ],
-        'prefix' : '_context->texc->ShadowActiveTexture( ${arg0plus} );',
+        'impl' : [
+            '_context->texc->ShadowActiveTexture( ${arg0plus} );',
+            '_context->dispatcher.emulation.glActiveTexture( ${arg0plus} );',
+        ],
     },
 
     'ShadowBindTexture' : {
         'entries' : [ 'glBindTexture(EXT|)' ],
-        'prefix' : '_context->texc->ShadowBindTexture( ${arg0plus} );',
+        'impl' : [
+            '_context->texc->ShadowBindTexture( ${arg0plus} );',
+            '_context->dispatcher.emulation.glBindTexture( ${arg0plus} );',
+        ],
     },
 
     'ShadowDeleteTexture' : {
         'entries' : [ 'glDeleteTextures(EXT|)' ],
-        'prefix' : '_context->texc->ShadowDeleteTextures( ${arg0plus} );',
+        'impl' : [
+            '_context->texc->ShadowDeleteTextures( ${arg0plus} );',
+            '_context->dispatcher.emulation.glDeleteTextures( ${arg0plus} );',
+        ],
     },
 
     'ShadowGenTextures' : {
         'entries' : [ 'glGenTextures(EXT|)' ],
-        'impl' :
-'''
-_context->dispatcher.emulation.glGenTextures( ${arg0plus} );
-_context->texc->ShadowGenTextures( ${arg0}, ${arg1} );'''
+        'impl' : [
+            '_context->dispatcher.emulation.glGenTextures( ${arg0plus} );',
+            '_context->texc->ShadowGenTextures( ${arg0}, ${arg1} );',
+        ],
     },
 
     'ShadowGenerateMipmap' : {
         'entries' : [ 'glGenerateMipmap(EXT|)' ],
-        'prefix' : '_context->texc->ShadowGenerateMipmap( ${arg0plus} );',
+        'impl' : [
+            '_context->texc->ShadowGenerateMipmap( ${arg0plus} );',
+            '_context->dispatcher.emulation.glGenerateMipmap( ${arg0plus} );',
+        ],
     },
 
     'ShadowPixelStorei' : {
         'entries' : [ 'glPixelStorei' ],
-        'prefix' : '_context->texc->ShadowPixelStore( ${arg0plus} );',
+        'impl' : [
+            '_context->texc->ShadowPixelStore( ${arg0plus} );',
+            '_context->dispatcher.emulation.glPixelStorei( ${arg0plus} );',
+        ],
     },
 
     'ShadowTexImage2D' : {
         'entries' : [ 'glTexImage2D' ],
-        'prefix' : '_context->texc->ShadowTexImage2D( ${arg0}, ${arg1}, ${arg6}, ${arg7} );',
+        'impl' : [
+            '_context->texc->ShadowTexImage2D( ${arg0}, ${arg1}, ${arg6}, ${arg7} );',
+            '_context->dispatcher.emulation.glTexImage2D( ${arg0plus} );',
+        ],
     },
 
     'ConvertTexSubImage2D' : {
         'entries' : [ 'glTexSubImage2D' ],
-        'impl' :
-'''
-GLenum targetFormat;
-GLenum targetType;
-_context->texc->GetFormatAndType( ${arg0}, ${arg1}, &targetFormat, &targetType );
-Emu::ConvertedBuffer _buffer( _context->texc->unpackPSS, targetFormat, targetType );
-if ( _buffer.ConvertFrom( ${arg4}, ${arg5}, ${arg6}, ${arg7}, ${arg8} ) )
-{
-  if (_context->texc->unpackPSS.alignment != 4)
-    _context->dispatcher.emulation.glPixelStorei( GL_UNPACK_ALIGNMENT, 4 );
-  _context->dispatcher.emulation.glTexSubImage2D( ${arg0}, ${arg1}, ${arg2}, ${arg3}, ${arg4}, ${arg5}, targetFormat, targetType, _buffer.Get() );
-  if (_context->texc->unpackPSS.alignment != 4)
-    _context->dispatcher.emulation.glPixelStorei( GL_UNPACK_ALIGNMENT, _context->texc->unpackPSS.alignment );
-}
-else
-{
-  _context->dispatcher.emulation.glTexSubImage2D( ${arg0plus} );
-}'''
+        'impl' : [
+            'GLenum targetFormat;',
+            'GLenum targetType;',
+            '_context->texc->GetFormatAndType( ${arg0}, ${arg1}, &targetFormat, &targetType );',
+            'Emu::ConvertedBuffer _buffer( _context->texc->unpackPSS, targetFormat, targetType );',
+            'if ( _buffer.ConvertFrom( ${arg4}, ${arg5}, ${arg6}, ${arg7}, ${arg8} ) )',
+            '{',
+            '  if (_context->texc->unpackPSS.alignment != 4)',
+            '    _context->dispatcher.emulation.glPixelStorei( GL_UNPACK_ALIGNMENT, 4 );',
+            '  _context->dispatcher.emulation.glTexSubImage2D( ${arg0}, ${arg1}, ${arg2}, ${arg3}, ${arg4}, ${arg5}, targetFormat, targetType, _buffer.Get() );',
+            '  if (_context->texc->unpackPSS.alignment != 4)',
+            '    _context->dispatcher.emulation.glPixelStorei( GL_UNPACK_ALIGNMENT, _context->texc->unpackPSS.alignment );',
+            '}',
+            'else',
+            '{',
+            '  _context->dispatcher.emulation.glTexSubImage2D( ${arg0plus} );',
+            '}',
+        ],
     },
 }

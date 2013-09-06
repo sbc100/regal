@@ -118,8 +118,7 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE := apitrace
 LOCAL_SRC_FILES := $(apitrace_src_files)
-LOCAL_CFLAGS := $(regal_cflags) -DAPITRACE_TLS=0 -DTRACE_OS_LOG=0 -DTRACE_BACKTRACE=0 -DTRACE_ENABLED_CHECK=0
-
+LOCAL_CFLAGS := $(regal_cflags) -DAPITRACE_TLS=0 -DTRACE_OS_LOG=0 -DTRACE_BACKTRACE=0
 LOCAL_C_INCLUDES := $(apitrace_c_includes)
 LOCAL_EXPORT_C_INCLUDES := $(apitrace_export_c_includes)
 LOCAL_EXPORT_LDLIBS :=

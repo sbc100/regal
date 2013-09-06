@@ -627,16 +627,10 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         case GL_MAX_NAME_STACK_DEPTH:
         case GL_MAX_LIST_NESTING:
         case GL_MAX_EVAL_ORDER:
+        case GL_MAX_ATTRIB_STACK_DEPTH:
+        case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
           if (params)
             params[0] = 0;
-          break;
-        case GL_ATTRIB_STACK_DEPTH:
-          if (params)
-            params[0] = static_cast<T>(maskStack.size());
-          break;
-        case GL_MAX_ATTRIB_STACK_DEPTH:
-          if (params)
-            params[0] = static_cast<T>(ctx->info->max_attrib_stack_depth);
           break;
         default:
           return false;
@@ -726,14 +720,9 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_DRAW_BUFFER14:
       case GL_DRAW_BUFFER15:
       {
-        GLuint index = static_cast<GLuint>(pname - GL_DRAW_BUFFER0);
-        if ( index < array_size( State::ColorBuffer::drawBuffers ))
-        {
-          if (!State::ColorBuffer::fullyDefined())
-            State::ColorBuffer::getUndefined(ctx->dispatcher.emulation);
-          RegalAssertArrayIndex( State::ColorBuffer::drawBuffers, index );
-          params[0] = static_cast<T>(State::ColorBuffer::drawBuffers[index]);
-        }
+        if (!State::ColorBuffer::fullyDefined())
+          State::ColorBuffer::getUndefined(ctx->dispatcher.emulation);
+        params[0] = static_cast<T>(State::ColorBuffer::drawBuffers[pname-GL_DRAW_BUFFER0]);
       }
       break;
       case GL_FOG_COLOR:
@@ -842,24 +831,6 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         break;
       case GL_MAP_COLOR:
         params[0] = static_cast<T>(State::PixelMode::mapColor);
-        break;
-      case GL_ATTRIB_STACK_DEPTH:
-        params[0] = static_cast<T>(maskStack.size());
-        break;
-      case GL_MAX_ATTRIB_STACK_DEPTH:
-        params[0] = static_cast<T>(ctx->info->max_attrib_stack_depth);
-        break;
-      case GL_MAX_VERTEX_ATTRIBS:
-        *params = static_cast<T>(ctx->info->max_vertex_attribs);
-        break;
-      case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        params[0] = static_cast<T>(ctx->info->max_combined_texture_image_units);
-        break;
-      case GL_MAX_TEXTURE_COORDS:
-        params[0] = static_cast<T>(ctx->info->max_texture_coords);
-        break;
-      case GL_MAX_TEXTURE_UNITS:
-        params[0] = static_cast<T>(ctx->info->max_texture_units);
         break;
       case GL_MAP_STENCIL:
         params[0] = static_cast<T>(State::PixelMode::mapStencil);
@@ -1046,49 +1017,31 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     switch (pname)
     {
       case GL_BLEND_DST_ALPHA:
-        if (index < array_size( State::ColorBuffer::blendDstAlpha ))
-        {
-          RegalAssertArrayIndex( State::ColorBuffer::blendDstAlpha, index );
+        if (index < REGAL_MAX_DRAW_BUFFERS)
           params[0] = static_cast<T>(State::ColorBuffer::blendDstAlpha[index]);
-        }
         break;
       case GL_BLEND_DST_RGB:
-        if (index < array_size( State::ColorBuffer::blendDstRgb ))
-        {
-          RegalAssertArrayIndex( State::ColorBuffer::blendDstRgb, index );
+        if (index < REGAL_MAX_DRAW_BUFFERS)
           params[0] = static_cast<T>(State::ColorBuffer::blendDstRgb[index]);
-        }
         break;
       case GL_BLEND_EQUATION_ALPHA:
-        if (index < array_size( State::ColorBuffer::blendEquationAlpha ))
-        {
-          RegalAssertArrayIndex( State::ColorBuffer::blendEquationAlpha, index );
+        if (index < REGAL_MAX_DRAW_BUFFERS)
           params[0] = static_cast<T>(State::ColorBuffer::blendEquationAlpha[index]);
-        }
         break;
       case GL_BLEND_EQUATION_RGB:
-        if (index < array_size( State::ColorBuffer::blendEquationRgb ))
-        {
-          RegalAssertArrayIndex( State::ColorBuffer::blendEquationRgb, index );
+        if (index < REGAL_MAX_DRAW_BUFFERS)
           params[0] = static_cast<T>(State::ColorBuffer::blendEquationRgb[index]);
-        }
         break;
       case GL_BLEND_SRC_ALPHA:
-        if (index < array_size( State::ColorBuffer::blendSrcAlpha ))
-        {
-          RegalAssertArrayIndex( State::ColorBuffer::blendSrcAlpha, index );
+        if (index < REGAL_MAX_DRAW_BUFFERS)
           params[0] = static_cast<T>(State::ColorBuffer::blendSrcAlpha[index]);
-        }
         break;
       case GL_BLEND_SRC_RGB:
-        if (index < array_size( State::ColorBuffer::blendSrcRgb ))
-        {
-          RegalAssertArrayIndex( State::ColorBuffer::blendSrcRgb, index );
+        if (index < REGAL_MAX_DRAW_BUFFERS)
           params[0] = static_cast<T>(State::ColorBuffer::blendSrcRgb[index]);
-        }
         break;
       case GL_COLOR_WRITEMASK:
-        if (index < ctx->info->max_draw_buffers)
+        if (index < REGAL_MAX_DRAW_BUFFERS)
         {
           params[0] = static_cast<T>(State::ColorBuffer::colorWritemask[index][0]);
           params[1] = static_cast<T>(State::ColorBuffer::colorWritemask[index][1]);
@@ -1097,14 +1050,14 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         }
         break;
       case GL_DEPTH_RANGE:
-        if (index < ctx->info->max_viewports)
+        if (index < REGAL_MAX_VIEWPORTS)
         {
           params[0] = static_cast<T>(State::Viewport::depthRange[index][0]);
           params[1] = static_cast<T>(State::Viewport::depthRange[index][1]);
         }
         break;
       case GL_SCISSOR_BOX:
-        if (index < ctx->info->max_viewports)
+        if (index < REGAL_MAX_VIEWPORTS)
         {
           if (!State::Scissor::fullyDefined())
             State::Scissor::getUndefined(ctx->dispatcher.emulation);
@@ -1115,7 +1068,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         }
         break;
       case GL_VIEWPORT:
-        if (index < ctx->info->max_viewports)
+        if (index < REGAL_MAX_VIEWPORTS)
         {
           if (!State::Viewport::fullyDefined())
             State::Viewport::getUndefined(ctx->dispatcher.emulation);
@@ -1242,10 +1195,9 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     UNUSED_PARAMETER(ctx);
 
     GLint ii = light - GL_LIGHT0;
-    if (ii < 0 || static_cast<size_t>(ii) >= array_size( State::Point::coordReplace ))
+    if (ii < 0 || ii >= REGAL_FIXED_FUNCTION_MAX_LIGHTS)
       return false;
 
-    RegalAssertArrayIndex( State::Lighting::lights, ii );
     State::LightingLight l = State::Lighting::lights[ii];
 
     GLuint num = 0;
@@ -1296,7 +1248,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         return false;
     }
 
-    for (size_t ii = 0; ii < num; ii++)
+    for (GLuint ii = 0; ii < num; ii++)
       params[ii] = static_cast<T>(p[ii]);
 
     return true;
@@ -1343,7 +1295,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         return false;
     }
 
-    for (size_t ii = 0; ii < num; ii++)
+    for (GLuint ii = 0; ii < num; ii++)
       params[ii] = static_cast<T>(p[ii]);
 
     return true;
@@ -1357,10 +1309,9 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       return false;
 
     GLint ii = texunit - GL_TEXTURE0;
-    if (ii < 0 || static_cast<size_t>(ii) >= array_size( State::Point::coordReplace ))
+    if (ii < 0 || ii >= REGAL_EMU_MAX_TEXTURE_UNITS)
       return false;
 
-    RegalAssertArrayIndex( State::Point::coordReplace, ii );
     *params = static_cast<T>(State::Point::coordReplace[ii]);
 
     return true;
@@ -1394,7 +1345,6 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
       case GL_CLIP_DISTANCE7:
-        RegalAssertArrayIndex( State::Enable::clipDistance, pname-GL_CLIP_DISTANCE0 );
         enabled = State::Enable::clipDistance[pname-GL_CLIP_DISTANCE0];
         break;
       case GL_COLOR_LOGIC_OP:
@@ -1447,7 +1397,6 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT5:
       case GL_LIGHT6:
       case GL_LIGHT7:
-        RegalAssertArrayIndex( State::Enable::light, pname-GL_LIGHT0 );
         enabled = State::Enable::light[pname-GL_LIGHT0];
         break;
       case GL_LIGHTING:
@@ -1577,39 +1526,27 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         enabled = State::Enable::stencilTest;
         break;
       case GL_TEXTURE_1D:
-        RegalAssertArrayIndex( State::Enable::texture1d, activeTextureUnit );
         enabled = State::Enable::texture1d[activeTextureUnit];
         break;
       case GL_TEXTURE_2D:
-        RegalAssertArrayIndex( State::Enable::texture2d, activeTextureUnit );
         enabled = State::Enable::texture2d[activeTextureUnit];
         break;
       case GL_TEXTURE_3D:
-        RegalAssertArrayIndex( State::Enable::texture3d, activeTextureUnit );
         enabled = State::Enable::texture3d[activeTextureUnit];
         break;
       case GL_TEXTURE_CUBE_MAP:
-        RegalAssertArrayIndex( State::Enable::textureCubeMap, activeTextureUnit );
         enabled = State::Enable::textureCubeMap[activeTextureUnit];
         break;
-      case GL_TEXTURE_RECTANGLE:
-        RegalAssertArrayIndex( State::Enable::textureRectangle, activeTextureUnit );
-        enabled = State::Enable::textureRectangle[activeTextureUnit];
-        break;
       case GL_TEXTURE_GEN_S:
-        RegalAssertArrayIndex( State::Enable::textureGenS, activeTextureUnit );
         enabled = State::Enable::textureGenS[activeTextureUnit];
         break;
       case GL_TEXTURE_GEN_T:
-        RegalAssertArrayIndex( State::Enable::textureGenT, activeTextureUnit );
         enabled = State::Enable::textureGenT[activeTextureUnit];
         break;
       case GL_TEXTURE_GEN_R:
-        RegalAssertArrayIndex( State::Enable::textureGenR, activeTextureUnit );
         enabled = State::Enable::textureGenR[activeTextureUnit];
         break;
       case GL_TEXTURE_GEN_Q:
-        RegalAssertArrayIndex( State::Enable::textureGenQ, activeTextureUnit );
         enabled = State::Enable::textureGenQ[activeTextureUnit];
         break;
       case GL_VERTEX_PROGRAM_TWO_SIDE:
@@ -1629,16 +1566,14 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     switch (pname)
     {
       case GL_BLEND:
-        if (index >= array_size( State::Enable::blend ))
+        if (index >= REGAL_MAX_DRAW_BUFFERS)
           return false;
-        RegalAssertArrayIndex( State::Enable::blend, index );
         enabled = State::Enable::blend[index];
         break;
 
       case GL_SCISSOR_TEST:
-        if (index >= array_size( State::Enable::scissorTest ))
+        if (index >= REGAL_MAX_VIEWPORTS)
           return false;
-        RegalAssertArrayIndex( State::Enable::scissorTest, index );
         enabled = State::Enable::scissorTest[index];
         break;
 
@@ -1657,14 +1592,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         break;
       case GL_BLEND:
       {
-        size_t n = array_size( State::Enable::blend );
-        RegalAssert( array_size( State::ColorBuffer::blend ) == n );
-        for (size_t ii=0; ii<n; ii++)
-        {
-          RegalAssertArrayIndex( State::Enable::blend, ii );
-          RegalAssertArrayIndex( State::ColorBuffer::blend, ii );
+        for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
           State::Enable::blend[ii] = State::ColorBuffer::blend[ii] = enabled;
-        }
       }
       break;
       case GL_AUTO_NORMAL:
@@ -1678,8 +1607,6 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
       case GL_CLIP_DISTANCE7:
-        RegalAssertArrayIndex( State::Enable::clipDistance, cap-GL_CLIP_DISTANCE0 );
-        RegalAssertArrayIndex( State::Transform::clipPlane, cap-GL_CLIP_DISTANCE0 );
         State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = State::Transform::clipPlane[cap-GL_CLIP_DISTANCE0].enabled = enabled;
         break;
       case GL_COLOR_LOGIC_OP:
@@ -1732,8 +1659,6 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT5:
       case GL_LIGHT6:
       case GL_LIGHT7:
-        RegalAssertArrayIndex( State::Enable::light, cap-GL_LIGHT0 );
-        RegalAssertArrayIndex( State::Lighting::lights, cap-GL_LIGHT0 );
         State::Enable::light[cap-GL_LIGHT0] = State::Lighting::lights[cap-GL_LIGHT0].enabled = enabled;
         break;
       case GL_LIGHTING:
@@ -1746,75 +1671,57 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         State::Enable::lineStipple = State::Line::stipple = enabled;
         break;
       case GL_MAP1_COLOR_4:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_INDEX:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1Index         = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_NORMAL:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1Normal        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_TEXTURE_COORD_1:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1TextureCoord1 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_TEXTURE_COORD_2:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1TextureCoord2 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_TEXTURE_COORD_3:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1TextureCoord3 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_TEXTURE_COORD_4:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1TextureCoord4 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_VERTEX_3:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1Vertex3       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP1_VERTEX_4:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
         State::Enable::map1Vertex4       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
         break;
       case GL_MAP2_COLOR_4:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2Color4        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_INDEX:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2Index         = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_NORMAL:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2Normal        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_TEXTURE_COORD_1:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2TextureCoord1 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_TEXTURE_COORD_2:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2TextureCoord2 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_TEXTURE_COORD_3:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2TextureCoord3 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_TEXTURE_COORD_4:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2TextureCoord4 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_VERTEX_3:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2Vertex3       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MAP2_VERTEX_4:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
         State::Enable::map2Vertex4       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
         break;
       case GL_MINMAX:
@@ -1873,14 +1780,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         break;
       case GL_SCISSOR_TEST:
       {
-        size_t n = array_size( State::Enable::scissorTest );
-        RegalAssert( array_size( State::Scissor::scissorTest ) == n );
-        for (size_t ii=0; ii<n; ii++)
-        {
-          RegalAssertArrayIndex( State::Enable::scissorTest, ii );
-          RegalAssertArrayIndex( State::Scissor::scissorTest, ii );
+        for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
           State::Enable::scissorTest[ii] = State::Scissor::scissorTest[ii] = enabled;
-        }
       }
       break;
       case GL_SEPARABLE_2D:
@@ -1890,39 +1791,27 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         State::Enable::stencilTest = State::Stencil::enable = enabled;
         break;
       case GL_TEXTURE_1D:
-        RegalAssertArrayIndex( State::Enable::texture1d, activeTextureUnit );
         State::Enable::texture1d[activeTextureUnit]      = enabled;
         break;
       case GL_TEXTURE_2D:
-        RegalAssertArrayIndex( State::Enable::texture2d, activeTextureUnit );
         State::Enable::texture2d[activeTextureUnit]      = enabled;
         break;
       case GL_TEXTURE_3D:
-        RegalAssertArrayIndex( State::Enable::texture3d, activeTextureUnit );
         State::Enable::texture3d[activeTextureUnit]      = enabled;
         break;
       case GL_TEXTURE_CUBE_MAP:
-        RegalAssertArrayIndex( State::Enable::textureCubeMap, activeTextureUnit );
         State::Enable::textureCubeMap[activeTextureUnit] = enabled;
         break;
-      case GL_TEXTURE_RECTANGLE:
-        RegalAssertArrayIndex( State::Enable::textureRectangle, activeTextureUnit );
-        State::Enable::textureRectangle[activeTextureUnit] = enabled;
-        break;
       case GL_TEXTURE_GEN_S:
-        RegalAssertArrayIndex( State::Enable::textureGenS, activeTextureUnit );
         State::Enable::textureGenS[activeTextureUnit]    = enabled;
         break;
       case GL_TEXTURE_GEN_T:
-        RegalAssertArrayIndex( State::Enable::textureGenT, activeTextureUnit );
         State::Enable::textureGenT[activeTextureUnit]    = enabled;
         break;
       case GL_TEXTURE_GEN_R:
-        RegalAssertArrayIndex( State::Enable::textureGenR, activeTextureUnit );
         State::Enable::textureGenR[activeTextureUnit]    = enabled;
         break;
       case GL_TEXTURE_GEN_Q:
-        RegalAssertArrayIndex( State::Enable::textureGenQ, activeTextureUnit );
         State::Enable::textureGenQ[activeTextureUnit]    = enabled;
         break;
       case GL_VERTEX_PROGRAM_TWO_SIDE:
@@ -1954,28 +1843,12 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     switch (cap)
     {
       case GL_BLEND:
-        {
-          size_t n = array_size( State::Enable::blend );
-          RegalAssert( array_size( State::ColorBuffer::blend ) == n );
-          if (index < n)
-          {
-            RegalAssertArrayIndex( State::Enable::blend, index );
-            RegalAssertArrayIndex( State::ColorBuffer::blend, index );
-            State::Enable::blend[index] = State::ColorBuffer::blend[index] = enabled;
-          }
-        }
+        if (index < REGAL_MAX_DRAW_BUFFERS)
+          State::Enable::blend[index] = State::ColorBuffer::blend[index] = enabled;
         break;
       case GL_SCISSOR_TEST:
-        {
-          size_t n = array_size( State::Enable::scissorTest );
-          RegalAssert( array_size( State::Scissor::scissorTest ) == n );
-          if (index < n)
-          {
-            RegalAssertArrayIndex( State::Enable::scissorTest, index );
-            RegalAssertArrayIndex( State::Scissor::scissorTest, index );
-            State::Enable::scissorTest[index] = State::Scissor::scissorTest[index] = enabled;
-          }
-        }
+        if (index < REGAL_MAX_VIEWPORTS)
+          State::Enable::scissorTest[index] = State::Scissor::scissorTest[index] = enabled;
         break;
 
       default:
@@ -2008,12 +1881,16 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     return SetEnablei(ctx, cap, index, GL_FALSE);
   }
 
-  void glActiveTexture( GLenum texture )
+  void glActiveTexture( GLenum tex )
   {
-    if ( texture >= GL_TEXTURE0 && texture < static_cast<GLenum>(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_UNITS) )
-      activeTextureUnit = texture - GL_TEXTURE0;
+    GLuint unit = tex - GL_TEXTURE0;
+    if (unit < REGAL_EMU_MAX_TEXTURE_UNITS)
+      activeTextureUnit = unit;
     else
-      Warning( "Active texture out of range: ", Token::GLtextureToString(texture), " > ", Token::GLtextureToString(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_UNITS - 1));
+    {
+      Warning( "Active texture out of range: ", Token::GLtextureToString(tex), " > ", Token::GLtextureToString(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_UNITS - 1));
+      return;
+    }
   }
 
   inline void glClampColor( GLenum target, GLenum clamp )

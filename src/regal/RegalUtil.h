@@ -553,15 +553,6 @@ inline bool getEnv(const char * const varname, std::string &var, const bool enab
 }
 
 //
-// Array size - the number of elements of a C array
-//
-// http://stackoverflow.com/questions/437150/can-someone-explain-this-template-code-that-gives-me-the-size-of-an-array
-//
-
-template <typename T, size_t N>
-inline size_t array_size(const T (&)[N]) { return N; }
-
-//
 // RegalCheckGLError
 //
 
@@ -594,6 +585,15 @@ inline size_t array_size(const T (&)[N]) { return N; }
 #if !REGAL_NO_ASSERT
 void AssertFunction(const char *file, const std::size_t line, const char *expr);
 #endif
+
+//
+// Array size - the number of elements of a C array
+//
+// http://stackoverflow.com/questions/437150/can-someone-explain-this-template-code-that-gives-me-the-size-of-an-array
+//
+
+template <typename T, size_t N>
+inline size_t array_size(const T (&)[N]) { return N; }
 
 //
 //

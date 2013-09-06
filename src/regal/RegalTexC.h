@@ -187,8 +187,7 @@ struct TexC
 
   void Reset_();
 
-  TextureState* GetBoundTexture_( GLenum textureEnum, GLenum target );
-  TextureState* GetBoundTextureUnit_( GLuint textureUnit, GLenum target );
+  TextureState* GetBoundTexture_( GLenum textureUnit, GLenum target );
   TextureState* GetTexture_( GLuint texture );
 
   void GetFormatAndType( GLenum target, GLint level, GLenum* format, GLenum* type );
@@ -218,8 +217,8 @@ struct TexC
 
   PixelStorageStateGLES20 unpackPSS;
 
-  GLuint currentTextureUnit;
-  TextureUnitState textureUnitArrayState[ REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS ];
+  GLenum currentTextureUnit;
+  TextureUnitState textureUnitArrayState[ REGAL_EMU_MAX_TEXTURE_UNITS ];
   TextureState textureZero;
 };
 

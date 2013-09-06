@@ -154,7 +154,7 @@ namespace ClientState
     GLuint     buffer;   // GL_x_ARRAY_BUFFER_BINDING
     GLint      size;     // GL_x_ARRAY_SIZE
     GLenum     type;     // GL_x_ARRAY_TYPE
-    GLsizei    stride;   // GL_x_ARRAY_STRIDE
+    GLint      stride;   // GL_x_ARRAY_STRIDE
 
     inline NamedVertexArray()
     {
@@ -672,15 +672,8 @@ namespace ClientState
       arrayBufferBinding = 0;
       vertexArrayBinding = 0;
 
-      size_t n = array_size( named );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<nNamedArrays; ii++)
         named[ii].Reset();
-
-      RegalAssertArrayIndex( named, NORMAL );
-      RegalAssertArrayIndex( named, FOG_COORD );
-      RegalAssertArrayIndex( named, SECONDARY_COLOR );
-      RegalAssertArrayIndex( named, INDEX );
-      RegalAssertArrayIndex( named, EDGE_FLAG );
 
       named[NORMAL].size = 3;
       named[FOG_COORD].size = 1;
@@ -689,25 +682,20 @@ namespace ClientState
       named[EDGE_FLAG].size = 1;
       named[EDGE_FLAG].type = GL_BOOL;
 
-      n = array_size( bindings );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
         bindings[ii].Reset();
 
-      n = array_size( generic );
-      for (GLuint ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
         generic[ii].Reset(ii);
     }
 
     VertexArray &swap(VertexArray &other)
     {
-      size_t n = array_size( named );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<nNamedArrays; ii++)
         named[ii].swap(other.named[ii]);
-      n = array_size( bindings );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
         bindings[ii].swap(other.bindings[ii]);
-      n = array_size( generic );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
         generic[ii].swap(other.generic[ii]);
       std::swap(elementArrayBufferBinding,other.elementArrayBufferBinding);
       std::swap(clientActiveTexture,other.clientActiveTexture);
@@ -724,15 +712,12 @@ namespace ClientState
       dt.call(&dt.glGetIntegerv)(GL_VERTEX_ARRAY_BINDING,reinterpret_cast<GLint*>(&vertexArrayBinding));
       if (vertexArrayBinding)
         dt.call(&dt.glBindVertexArray)(0);
-      size_t n = array_size( named );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<nNamedArrays; ii++)
         named[ii].get(dt,static_cast<vaName>(ii));
-      n = array_size( bindings );
-      for (size_t ii=0; ii<n; ii++)
-        bindings[ii].get(dt,static_cast<GLuint>(ii));
-      n = array_size( generic );
-      for (size_t ii=0; ii<n; ii++)
-        generic[ii].get(dt,static_cast<GLuint>(ii));
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
+        bindings[ii].get(dt,ii);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
+        generic[ii].get(dt,ii);
       dt.call(&dt.glGetIntegerv)(GL_ELEMENT_ARRAY_BUFFER_BINDING,reinterpret_cast<GLint*>(&elementArrayBufferBinding));
       dt.call(&dt.glGetIntegerv)(GL_CLIENT_ACTIVE_TEXTURE,reinterpret_cast<GLint*>(&clientActiveTexture));
       primitiveRestartFixedIndex = dt.call(&dt.glIsEnabled)(GL_PRIMITIVE_RESTART_FIXED_INDEX);
@@ -747,15 +732,12 @@ namespace ClientState
     const VertexArray &set(DispatchTableGL &dt, bool driverAllowsVertexAttributeArraysWithoutBoundBuffer) const
     {
       dt.call(&dt.glBindVertexArray)(0);
-      size_t n = array_size( named );
-      for (size_t ii=0; ii<n; ii++)
-        named[n-ii-1].set(dt,static_cast<vaName>(n-ii-1),driverAllowsVertexAttributeArraysWithoutBoundBuffer);
-      n = array_size( bindings );
-      for (size_t ii=0; ii<n; ii++)
-        bindings[ii].set(dt,static_cast<GLuint>(ii));
-      n = array_size( generic );
-      for (size_t ii=0; ii<n; ii++)
-        generic[n-ii-1].set(dt,static_cast<GLuint>(n-ii-1));
+      for (GLint ii=nNamedArrays-1; ii>=0; ii--)
+        named[ii].set(dt,static_cast<vaName>(ii),driverAllowsVertexAttributeArraysWithoutBoundBuffer);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
+        bindings[ii].set(dt,ii);
+      for (GLint ii=REGAL_EMU_MAX_VERTEX_ATTRIBS-1; ii>=0; ii--)
+        generic[ii].set(dt,ii);
       dt.call(&dt.glBindBuffer)(GL_ELEMENT_ARRAY_BUFFER,elementArrayBufferBinding);
       dt.call(&dt.glClientActiveTexture)(clientActiveTexture);
       if (primitiveRestartFixedIndex)
@@ -779,15 +761,12 @@ namespace ClientState
         vertexArrayBinding = 0;
         dt.call(&dt.glBindVertexArray)(vertexArrayBinding);
       }
-      size_t n = array_size( named );
-      for (size_t ii=0; ii<n; ii++)
-        named[n-ii-1].transition(dt,to.named[n-ii-1],static_cast<vaName>(n-ii-1),driverAllowsVertexAttributeArraysWithoutBoundBuffer);
-      n = array_size( bindings );
-      for (size_t ii=0; ii<n; ii++)
-        bindings[ii].transition(dt,to.bindings[ii],static_cast<GLuint>(ii));
-      n = array_size( generic );
-      for (size_t ii=0; ii<n; ii++)
-        generic[n-ii-1].transition(dt,to.generic[n-ii-1],static_cast<GLuint>(n-ii-1));
+      for (GLint ii=nNamedArrays-1; ii>=0; ii--)
+        named[ii].transition(dt,to.named[ii],static_cast<vaName>(ii),driverAllowsVertexAttributeArraysWithoutBoundBuffer);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
+        bindings[ii].transition(dt,to.bindings[ii],ii);
+      for (GLint ii=REGAL_EMU_MAX_VERTEX_ATTRIBS-1; ii>=0; ii--)
+        generic[ii].transition(dt,to.generic[ii],ii);
       if (elementArrayBufferBinding != to.elementArrayBufferBinding) {
         elementArrayBufferBinding = to.elementArrayBufferBinding;
         dt.call(&dt.glBindBuffer)(GL_ELEMENT_ARRAY_BUFFER,elementArrayBufferBinding);
@@ -827,18 +806,15 @@ namespace ClientState
     std::string toString(const char *delim = "\n") const
     {
       string_list tmp;
-      size_t n = array_size( named );
-      for (size_t ii=0; ii<n; ii++)
+      for (GLuint ii=0; ii<nNamedArrays; ii++)
         named[ii].toString(static_cast<vaName>(ii),delim);
-      n = array_size( bindings );
-      for (size_t ii=0; ii<n; ii++)
-        bindings[ii].toString(static_cast<GLuint>(ii),delim);
-      n = array_size( generic );
-      for (size_t ii=0; ii<n; ii++)
-        generic[ii].toString(static_cast<GLuint>(ii),delim);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; ii++)
+        bindings[ii].toString(ii,delim);
+      for (GLuint ii=0; ii<REGAL_EMU_MAX_VERTEX_ATTRIBS; ii++)
+        generic[ii].toString(ii,delim);
 
       tmp << print_string("glBindBuffer(GL_ELEMENT_ARRAY_BUFFER",elementArrayBufferBinding,");",delim);
-      tmp << print_string("glClientActiveTexture(",Token::GLtextureToString(clientActiveTexture),");",delim);
+      tmp << print_string("glClientActiveTexture(",clientActiveTexture,");",delim);
 
       if (primitiveRestartFixedIndex)
         tmp << print_string("glEnable(GL_PRIMITIVE_RESTART_FIXED_INDEX);",delim);
@@ -910,39 +886,29 @@ namespace ClientState
       switch (cap)
       {
         case GL_VERTEX_ARRAY:
-          RegalAssertArrayIndex( named, VERTEX );
           named[VERTEX].enabled = enabled;
           break;
         case GL_NORMAL_ARRAY:
-          RegalAssertArrayIndex( named, NORMAL );
           named[NORMAL].enabled = enabled;
           break;
         case GL_FOG_COORD_ARRAY:
-          RegalAssertArrayIndex( named, FOG_COORD );
           named[FOG_COORD].enabled = enabled;
           break;
         case GL_COLOR_ARRAY:
-          RegalAssertArrayIndex( named, COLOR );
           named[COLOR].enabled = enabled;
           break;
         case GL_SECONDARY_COLOR_ARRAY:
-          RegalAssertArrayIndex( named, SECONDARY_COLOR );
           named[SECONDARY_COLOR].enabled = enabled;
           break;
         case GL_INDEX_ARRAY:
-          RegalAssertArrayIndex( named, INDEX );
           named[INDEX].enabled = enabled;
           break;
         case GL_EDGE_FLAG_ARRAY:
-          RegalAssertArrayIndex( named, EDGE_FLAG );
           named[EDGE_FLAG].enabled = enabled;
           break;
         case GL_TEXTURE_COORD_ARRAY:
-          if ( (index+7) < array_size( named ) )
-          {
-            RegalAssertArrayIndex( named, index+7 );
+          if (index < REGAL_EMU_MAX_TEXTURE_COORDS)
             named[index+7].enabled = enabled;
-          }
           break;
         default:
           break;
@@ -1009,13 +975,9 @@ namespace ClientState
           arrayBufferBinding = 0;
         if (buffers[ii] == elementArrayBufferBinding)
           elementArrayBufferBinding = 0;
-        size_t nBindings = array_size( bindings );
-        for (size_t jj=0; jj<nBindings; jj++)
-        {
-          RegalAssertArrayIndex( bindings, jj );
+        for (GLsizei jj=0; jj<REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS; jj++)
           if (buffers[ii] == bindings[jj].buffer)
             bindings[jj].buffer = 0;
-        }
       }
     }
 
@@ -1117,24 +1079,24 @@ namespace ClientState
     inline void glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer)
     {
       if (!vertexArrayBinding &&
-          index < array_size( generic ) &&
-          index < array_size( bindings ))
+          index < REGAL_EMU_MAX_VERTEX_ATTRIBS &&
+          index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
         glVertexArrayVertexAttribOffsetEXT(vertexArrayBinding, arrayBufferBinding, index, size, type, normalized, stride, ((char *)pointer - (char *)NULL));
     }
 
     inline void glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
     {
       if (!vertexArrayBinding &&
-          index < array_size( generic ) &&
-          index < array_size( bindings ))
+          index < REGAL_EMU_MAX_VERTEX_ATTRIBS &&
+          index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
         glVertexArrayVertexAttribIOffsetEXT(vertexArrayBinding, arrayBufferBinding, index, size, type, stride, ((char *)pointer - (char *)NULL));
     }
 
     void glVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer)
     {
       if (!vertexArrayBinding &&
-          index < array_size( generic ) &&
-          index < array_size( bindings ))
+          index < REGAL_EMU_MAX_VERTEX_ATTRIBS &&
+          index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
       {
         glVertexAttribLFormat(index, size, type, 0);
         glVertexAttribBinding(index, index);
@@ -1145,12 +1107,11 @@ namespace ClientState
 
     void glBindVertexBuffers( GLuint first, GLsizei count, const GLuint *buffers, const GLintptr *offsets, const GLsizei *strides )
     {
-      if (!vertexArrayBinding && ((first + count) >= first) && (first + count) <= array_size( bindings ))
+      if (!vertexArrayBinding && ((first + count) >= first) && (first + count) <= REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
       {
         if (buffers)
           for (GLsizei ii = 0; ii < count; ii++)
           {
-            RegalAssertArrayIndex( bindings, first );
             bindings[first].buffer = buffers[ii];
             bindings[first].offset = offsets[ii];
             bindings[first].stride = strides[ii];
@@ -1159,7 +1120,6 @@ namespace ClientState
         else
           for (GLsizei ii = 0; ii < count; ii++)
           {
-            RegalAssertArrayIndex( bindings, first );
             bindings[first].buffer = 0;
             bindings[first].offset = 0;
             bindings[first].stride = 16;
@@ -1176,11 +1136,9 @@ namespace ClientState
     inline void glVertexAttribDivisor(GLuint index, GLuint divisor)
     {
       if (!vertexArrayBinding &&
-          index < array_size( generic ) &&
-          index < array_size( bindings ) )
+          index < REGAL_EMU_MAX_VERTEX_ATTRIBS &&
+          index < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
       {
-        RegalAssertArrayIndex( generic, index );
-        RegalAssertArrayIndex( bindings, index );
         generic[index].bindingIndex = index;
         bindings[index].divisor = divisor;
       }
@@ -1188,45 +1146,32 @@ namespace ClientState
 
     inline void glVertexBindingDivisor(GLuint bindingindex, GLuint divisor)
     {
-      if (!vertexArrayBinding && bindingindex < array_size( bindings ))
-      {
-        RegalAssertArrayIndex( bindings, bindingindex );
+      if (!vertexArrayBinding && bindingindex < REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS)
         bindings[bindingindex].divisor = divisor;
-      }
     }
 
     inline void glEnableVertexAttribArray(GLuint index)
     {
-      if (!vertexArrayBinding && index < array_size( generic ))
-      {
-        RegalAssertArrayIndex( generic, index );
+      if (!vertexArrayBinding && index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
         generic[index].enabled = GL_TRUE;
-      }
     }
 
     inline void glDisableVertexAttribArray(GLuint index)
     {
-      if (!vertexArrayBinding && index < array_size( generic ))
-      {
-        RegalAssertArrayIndex( generic, index );
+      if (!vertexArrayBinding && index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
         generic[index].enabled = GL_FALSE;
-      }
     }
 
     inline void glVertexAttribBinding(GLuint attribindex, GLuint bindingindex)
     {
-      if (!vertexArrayBinding && attribindex < array_size( generic ))
-      {
-        RegalAssertArrayIndex( generic, attribindex );
+      if (!vertexArrayBinding && attribindex < REGAL_EMU_MAX_VERTEX_ATTRIBS)
         generic[attribindex].bindingIndex = bindingindex;
-      }
     }
 
     inline void glVertexAttribIFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
     {
-      if (!vertexArrayBinding && attribindex < array_size( generic ))
+      if (!vertexArrayBinding && attribindex < REGAL_EMU_MAX_VERTEX_ATTRIBS)
       {
-        RegalAssertArrayIndex( generic, attribindex );
         generic[attribindex].size = size;
         generic[attribindex].type = type;
         generic[attribindex].relativeOffset = relativeoffset;
@@ -1238,9 +1183,8 @@ namespace ClientState
 
     inline void glVertexAttribLFormat(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
     {
-      if (!vertexArrayBinding && attribindex < array_size( generic ))
+      if (!vertexArrayBinding && attribindex < REGAL_EMU_MAX_VERTEX_ATTRIBS)
       {
-        RegalAssertArrayIndex( generic, attribindex );
         generic[attribindex].size = size;
         generic[attribindex].type = type;
         generic[attribindex].relativeOffset = relativeoffset;
@@ -1252,9 +1196,8 @@ namespace ClientState
 
     inline void glVertexAttribFormat(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
     {
-      if (!vertexArrayBinding && attribindex < array_size( generic ))
+      if (!vertexArrayBinding && attribindex < REGAL_EMU_MAX_VERTEX_ATTRIBS)
       {
-        RegalAssertArrayIndex( generic, attribindex );
         generic[attribindex].size = size;
         generic[attribindex].type = type;
         generic[attribindex].relativeOffset = relativeoffset;
@@ -1266,11 +1209,8 @@ namespace ClientState
 
     inline void glClientActiveTexture(GLenum texture)
     {
-      GLuint index = texture - GL_TEXTURE0;
-      if ( texture >= GL_TEXTURE0 && index < array_size( generic ))
+      if ( (texture - GL_TEXTURE0) < REGAL_EMU_MAX_TEXTURE_COORDS)
         clientActiveTexture = texture;
-      else
-        Warning( "Client active texture out of range: ", Token::GLtextureToString(texture), " > ", Token::GLtextureToString(static_cast<GLenum>(GL_TEXTURE0 + array_size( generic ) - 1)));
     }
 
     inline void glPrimitiveRestartIndex(GLuint index)
@@ -1314,13 +1254,13 @@ namespace ClientState
 
     inline void glEnableVertexArrayAttribEXT(GLuint vaobj, GLuint index)
     {
-      if (!vaobj && index < array_size( generic ))
+      if (!vaobj && index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
         generic[index].enabled = GL_TRUE;
     }
 
     inline void glDisableVertexArrayAttribEXT(GLuint vaobj, GLuint index)
     {
-      if (!vaobj && index < array_size( generic ))
+      if (!vaobj && index < REGAL_EMU_MAX_VERTEX_ATTRIBS)
         generic[index].enabled = GL_FALSE;
     }
 
@@ -1328,7 +1268,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, VERTEX );
         named[VERTEX].buffer = buffer;
         named[VERTEX].size = size;
         named[VERTEX].type = type;
@@ -1341,7 +1280,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, NORMAL );
         named[NORMAL].buffer = buffer;
         named[NORMAL].size = 3;
         named[NORMAL].type = type;
@@ -1354,7 +1292,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, COLOR );
         named[COLOR].buffer = buffer;
         named[COLOR].size = size;
         named[COLOR].type = type;
@@ -1367,7 +1304,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, SECONDARY_COLOR );
         named[SECONDARY_COLOR].buffer = buffer;
         named[SECONDARY_COLOR].size = size;
         named[SECONDARY_COLOR].type = type;
@@ -1380,7 +1316,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, INDEX );
         named[INDEX].buffer = buffer;
         named[INDEX].size = 1;
         named[INDEX].type = type;
@@ -1393,7 +1328,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, EDGE_FLAG );
         named[EDGE_FLAG].buffer = buffer;
         named[EDGE_FLAG].size = 1;
         named[EDGE_FLAG].type = GL_BOOL;
@@ -1406,7 +1340,6 @@ namespace ClientState
     {
       if (!vaobj)
       {
-        RegalAssertArrayIndex( named, FOG_COORD );
         named[FOG_COORD].buffer = buffer;
         named[FOG_COORD].size = 1;
         named[FOG_COORD].type = type;
@@ -1417,13 +1350,12 @@ namespace ClientState
 
     void glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum texture, GLint size, GLenum type, GLsizei stride, GLintptr offset)
     {
-      if (!vaobj && texture >= GL_TEXTURE0)
+      if (!vaobj)
       {
         GLuint index = texture - GL_TEXTURE0;
-        if ( (index+7) < array_size( named ) )
+        if (index < REGAL_EMU_MAX_TEXTURE_COORDS && index <= texture)
         {
           GLuint ii = 7 + index;
-          RegalAssertArrayIndex( named, ii );
           named[ii].buffer = buffer;
           named[ii].size = size;
           named[ii].type = type;

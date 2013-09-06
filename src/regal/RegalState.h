@@ -87,6 +87,14 @@ REGAL_NAMESPACE_BEGIN
 #define REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES 8
 #endif
 
+#ifndef REGAL_MAX_VIEWPORTS
+#define REGAL_MAX_VIEWPORTS 16
+#endif
+
+#ifndef REGAL_MAX_DRAW_BUFFERS
+#define REGAL_MAX_DRAW_BUFFERS 8
+#endif
+
 namespace State
 {
 
@@ -128,7 +136,7 @@ struct Enable
 {
   GLboolean   alphaTest;                 // GL_ALPHA_TEST
   GLboolean   autoNormal;                // GL_AUTO_NORMAL
-  GLboolean   blend[REGAL_EMU_MAX_DRAW_BUFFERS]; // GL_BLEND
+  GLboolean   blend[REGAL_MAX_DRAW_BUFFERS]; // GL_BLEND
   GLboolean   clipDistance[REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES]; // GL_CLIP_DISTANCEi
   GLenum      clampFragmentColor;        // GL_CLAMP_FRAGMENT_COLOR
   GLenum      clampReadColor;            // GL_CLAMP_READ_COLOR
@@ -188,17 +196,16 @@ struct Enable
   GLboolean   sampleCoverage;            // GL_SAMPLE_COVERAGE
   GLboolean   sampleShading;             // GL_SAMPLE_SHADING
   GLboolean   separable2d;               // GL_SEPARABLE_2D
-  GLboolean   scissorTest[REGAL_EMU_MAX_VIEWPORTS]; // GL_SCISSOR_TEST
+  GLboolean   scissorTest[REGAL_MAX_VIEWPORTS]; // GL_SCISSOR_TEST
   GLboolean   stencilTest;               // GL_STENCIL_TEST
-  GLboolean   texture1d[REGAL_EMU_MAX_TEXTURE_UNITS];        // GL_TEXTURE_1D
-  GLboolean   texture2d[REGAL_EMU_MAX_TEXTURE_UNITS];        // GL_TEXTURE_2D
-  GLboolean   texture3d[REGAL_EMU_MAX_TEXTURE_UNITS];        // GL_TEXTURE_3D
-  GLboolean   textureCubeMap[REGAL_EMU_MAX_TEXTURE_UNITS];   // GL_TEXTURE_CUBE_MAP
-  GLboolean   textureRectangle[REGAL_EMU_MAX_TEXTURE_UNITS]; // GL_TEXTURE_RECTANGLE
-  GLboolean   textureGenS[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_GEN_S
-  GLboolean   textureGenT[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_GEN_T
-  GLboolean   textureGenR[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_GEN_R
-  GLboolean   textureGenQ[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_GEN_Q
+  GLboolean   texture1d[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_1D
+  GLboolean   texture2d[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_2D
+  GLboolean   texture3d[REGAL_EMU_MAX_TEXTURE_UNITS];      // GL_TEXTURE_3D
+  GLboolean   textureCubeMap[REGAL_EMU_MAX_TEXTURE_UNITS]; // GL_TEXTURE_CUBE_MAP
+  GLboolean   textureGenS[REGAL_EMU_MAX_TEXTURE_UNITS];    // GL_TEXTURE_GEN_S
+  GLboolean   textureGenT[REGAL_EMU_MAX_TEXTURE_UNITS];    // GL_TEXTURE_GEN_T
+  GLboolean   textureGenR[REGAL_EMU_MAX_TEXTURE_UNITS];    // GL_TEXTURE_GEN_R
+  GLboolean   textureGenQ[REGAL_EMU_MAX_TEXTURE_UNITS];    // GL_TEXTURE_GEN_Q
   GLboolean   vertexProgramTwoSide;      // GL_VERTEX_PROGRAM_TWO_SIDE
 
   inline Enable()
@@ -264,46 +271,20 @@ struct Enable
     , stencilTest(GL_FALSE)
     , vertexProgramTwoSide(GL_FALSE)
   {
-    size_t n = array_size( blend );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       blend[ii] = GL_FALSE;
-    }
-    n = array_size( clipDistance );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( clipDistance, ii );
+    for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
       clipDistance[ii] = GL_FALSE;
-    }
-    n = array_size( light );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( light, ii );
+    for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
       light[ii] = GL_FALSE;
-    }
-    n = array_size( scissorTest );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( scissorTest, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       scissorTest[ii] = GL_FALSE;
-    }
-    n = array_size( texture1d );
-    RegalAssert( array_size( texture2d ) == n );
-    RegalAssert( array_size( texture3d ) == n );
-    RegalAssert( array_size( textureCubeMap ) == n );
-    RegalAssert( array_size( textureRectangle ) == n );
-    RegalAssert( array_size( textureGenQ ) == n );
-    RegalAssert( array_size( textureGenR ) == n );
-    RegalAssert( array_size( textureGenS ) == n );
-    RegalAssert( array_size( textureGenT ) == n );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
     {
       texture1d[ii] = GL_FALSE;
       texture2d[ii] = GL_FALSE;
       texture3d[ii] = GL_FALSE;
       textureCubeMap[ii] = GL_FALSE;
-      textureRectangle[ii] = GL_FALSE;
       textureGenQ[ii] = GL_FALSE;
       textureGenR[ii] = GL_FALSE;
       textureGenS[ii] = GL_FALSE;
@@ -321,7 +302,7 @@ struct Enable
   {
     std::swap(alphaTest,other.alphaTest);
     std::swap(autoNormal,other.autoNormal);
-    std::swap_ranges(blend,blend+REGAL_EMU_MAX_DRAW_BUFFERS,other.blend);
+    std::swap_ranges(blend,blend+REGAL_MAX_DRAW_BUFFERS,other.blend);
     std::swap(clampFragmentColor,other.clampFragmentColor);
     std::swap(clampReadColor,other.clampReadColor);
     std::swap(clampVertexColor,other.clampVertexColor);
@@ -380,14 +361,13 @@ struct Enable
     std::swap(sampleAlphaToOne,other.sampleAlphaToOne);
     std::swap(sampleCoverage,other.sampleCoverage);
     std::swap(sampleShading,other.sampleShading);
-    std::swap_ranges(scissorTest,scissorTest+REGAL_EMU_MAX_VIEWPORTS,other.scissorTest);
+    std::swap_ranges(scissorTest,scissorTest+REGAL_MAX_VIEWPORTS,other.scissorTest);
     std::swap(separable2d,other.separable2d);
     std::swap(stencilTest,other.stencilTest);
     std::swap_ranges(texture1d,texture1d+REGAL_EMU_MAX_TEXTURE_UNITS,other.texture1d);
     std::swap_ranges(texture2d,texture2d+REGAL_EMU_MAX_TEXTURE_UNITS,other.texture2d);
     std::swap_ranges(texture3d,texture3d+REGAL_EMU_MAX_TEXTURE_UNITS,other.texture3d);
     std::swap_ranges(textureCubeMap,textureCubeMap+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureCubeMap);
-    std::swap_ranges(textureRectangle,textureRectangle+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureRectangle);
     std::swap_ranges(textureGenQ,textureGenQ+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenQ);
     std::swap_ranges(textureGenR,textureGenR+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenR);
     std::swap_ranges(textureGenS,textureGenS+REGAL_EMU_MAX_TEXTURE_UNITS,other.textureGenS);
@@ -400,21 +380,13 @@ struct Enable
   {
     alphaTest = dt.call(&dt.glIsEnabled)(GL_ALPHA_TEST);
     autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
-    size_t n = array_size( blend );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
-      blend[ii] = dt.call(&dt.glIsEnabledi)(GL_BLEND, static_cast<GLuint>(ii));
-    }
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+      blend[ii] = dt.call(&dt.glIsEnabledi)(GL_BLEND, ii);
     dt.call(&dt.glGetIntegerv)(GL_CLAMP_FRAGMENT_COLOR,reinterpret_cast<GLint *>(&clampFragmentColor));
     dt.call(&dt.glGetIntegerv)(GL_CLAMP_READ_COLOR,reinterpret_cast<GLint *>(&clampReadColor));
     dt.call(&dt.glGetIntegerv)(GL_CLAMP_VERTEX_COLOR,reinterpret_cast<GLint *>(&clampVertexColor));
-    n = array_size( clipDistance );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( clipDistance, ii );
-      clipDistance[ii] = dt.call(&dt.glIsEnabled)(static_cast<GLenum>(GL_CLIP_DISTANCE0+ii));
-    }
+    for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
+      clipDistance[ii] = dt.call(&dt.glIsEnabled)(GL_CLIP_DISTANCE0+ii);
     colorLogicOp  = dt.call(&dt.glIsEnabled)(GL_COLOR_LOGIC_OP);
     colorMaterial = dt.call(&dt.glIsEnabled)(GL_COLOR_MATERIAL);
     colorSum = dt.call(&dt.glIsEnabled)(GL_COLOR_SUM);
@@ -429,12 +401,8 @@ struct Enable
     framebufferSRGB = dt.call(&dt.glIsEnabled)(GL_FRAMEBUFFER_SRGB);
     histogram = dt.call(&dt.glIsEnabled)(GL_HISTOGRAM);
     indexLogicOp = dt.call(&dt.glIsEnabled)(GL_INDEX_LOGIC_OP);
-    n = array_size( light );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( light, ii );
-      light[ii] = dt.call(&dt.glIsEnabled)(static_cast<GLenum>(GL_LIGHT0+ii));
-    }
+    for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+      light[ii] = dt.call(&dt.glIsEnabled)(GL_LIGHT0+ii);
     lighting = dt.call(&dt.glIsEnabled)(GL_LIGHTING);
     lineSmooth = dt.call(&dt.glIsEnabled)(GL_LINE_SMOOTH);
     lineStipple = dt.call(&dt.glIsEnabled)(GL_LINE_STIPPLE);
@@ -476,28 +444,14 @@ struct Enable
     sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
     separable2d = dt.call(&dt.glIsEnabled)(GL_SEPARABLE_2D);
     stencilTest = dt.call(&dt.glIsEnabled)(GL_STENCIL_TEST);
-    n = array_size( scissorTest );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( scissorTest, ii );
-      scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,static_cast<GLuint>(ii));
-    }
-    n = array_size( texture1d );
-    RegalAssert( array_size( texture2d ) == n );
-    RegalAssert( array_size( texture3d ) == n );
-    RegalAssert( array_size( textureCubeMap ) == n );
-    RegalAssert( array_size( textureRectangle ) == n );
-    RegalAssert( array_size( textureGenS ) == n );
-    RegalAssert( array_size( textureGenT ) == n );
-    RegalAssert( array_size( textureGenR ) == n );
-    RegalAssert( array_size( textureGenQ ) == n );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,ii);
+    for (int ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
     {
       texture1d[ii]      = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_1D,ii);
       texture2d[ii]      = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_2D,ii);
       texture3d[ii]      = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_3D,ii);
       textureCubeMap[ii] = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_CUBE_MAP,ii);
-      textureRectangle[ii] = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_RECTANGLE,ii);
       textureGenS[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_S,ii);
       textureGenT[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_T,ii);
       textureGenR[ii]    = dt.call(&dt.glIsEnabledi)(GL_TEXTURE_GEN_R,ii);
@@ -511,22 +465,14 @@ struct Enable
   {
     setEnable(dt,GL_ALPHA_TEST,alphaTest);
     setEnable(dt,GL_AUTO_NORMAL,autoNormal);
-    size_t n = array_size( blend );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
-      setEnablei(dt,GL_BLEND,static_cast<GLuint>(ii),blend[ii]);
-    }
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+      setEnablei(dt,GL_BLEND,ii,blend[ii]);
     setEnable(dt,GL_COLOR_LOGIC_OP,colorLogicOp);
     dt.call(&dt.glClampColor)(GL_CLAMP_FRAGMENT_COLOR,clampFragmentColor);
     dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
     dt.call(&dt.glClampColor)(GL_CLAMP_VERTEX_COLOR,clampVertexColor);
-    n = array_size( clipDistance );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( clipDistance, ii );
-      setEnable(dt,static_cast<GLenum>(GL_CLIP_DISTANCE0+ii),clipDistance[ii]);
-    }
+    for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
+      setEnable(dt,GL_CLIP_DISTANCE0+ii,clipDistance[ii]);
     setEnable(dt,GL_COLOR_MATERIAL,colorMaterial);
     setEnable(dt,GL_COLOR_SUM,colorSum);
     setEnable(dt,GL_COLOR_TABLE,colorTable);
@@ -540,12 +486,8 @@ struct Enable
     setEnable(dt,GL_FRAMEBUFFER_SRGB,framebufferSRGB);
     setEnable(dt,GL_HISTOGRAM,histogram);
     setEnable(dt,GL_INDEX_LOGIC_OP,indexLogicOp);
-    n = array_size( light );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( light, ii );
-      setEnable(dt,static_cast<GLenum>(GL_LIGHT0+ii),light[ii]);
-    }
+    for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
+      setEnable(dt,GL_LIGHT0+ii,light[ii]);
     setEnable(dt,GL_LIGHTING,lighting);
     setEnable(dt,GL_LINE_SMOOTH,lineSmooth);
     setEnable(dt,GL_LINE_STIPPLE,lineStipple);
@@ -587,28 +529,14 @@ struct Enable
     setEnable(dt,GL_SAMPLE_SHADING,sampleShading);
     setEnable(dt,GL_SEPARABLE_2D,separable2d);
     setEnable(dt,GL_STENCIL_TEST,stencilTest);
-    n = array_size( scissorTest );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( scissorTest, ii );
-      setEnablei(dt,GL_SCISSOR_TEST,static_cast<GLuint>(ii),scissorTest[ii]);
-    }
-    n = array_size( texture1d );
-    RegalAssert( array_size( texture2d ) == n );
-    RegalAssert( array_size( texture3d ) == n );
-    RegalAssert( array_size( textureCubeMap ) == n );
-    RegalAssert( array_size( textureRectangle ) == n );
-    RegalAssert( array_size( textureGenS ) == n );
-    RegalAssert( array_size( textureGenT ) == n );
-    RegalAssert( array_size( textureGenR ) == n );
-    RegalAssert( array_size( textureGenQ ) == n );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      setEnablei(dt,GL_SCISSOR_TEST,ii,scissorTest[ii]);
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
     {
       setEnablei(dt,GL_TEXTURE_1D,ii,texture1d[ii]);
       setEnablei(dt,GL_TEXTURE_2D,ii,texture2d[ii]);
       setEnablei(dt,GL_TEXTURE_3D,ii,texture3d[ii]);
       setEnablei(dt,GL_TEXTURE_CUBE_MAP,ii,textureCubeMap[ii]);
-      setEnablei(dt,GL_TEXTURE_RECTANGLE,ii,textureRectangle[ii]);
       setEnablei(dt,GL_TEXTURE_GEN_S,ii,textureGenS[ii]);
       setEnablei(dt,GL_TEXTURE_GEN_T,ii,textureGenT[ii]);
       setEnablei(dt,GL_TEXTURE_GEN_R,ii,textureGenR[ii]);
@@ -623,21 +551,13 @@ struct Enable
     string_list tmp;
     enableToString(tmp, alphaTest, "GL_ALPHA_TEST",delim);
     enableToString(tmp, autoNormal, "GL_AUTO_NORMAL",delim);
-    size_t n = array_size( blend );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
-      enableiToString(tmp, blend[ii], "GL_BLEND", static_cast<GLuint>(ii),delim);
-    }
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+      enableiToString(tmp, blend[ii], "GL_BLEND", ii,delim);
     tmp << print_string("glClampColor(GL_CLAMP_FRAGMENT_COLOR",Token::toString(clampFragmentColor),");",delim);
     tmp << print_string("glClampColor(GL_CLAMP_READ_COLOR",Token::toString(clampReadColor),");",delim);
     tmp << print_string("glClampColor(GL_CLAMP_VERTEX_COLOR",Token::toString(clampVertexColor),");",delim);
-    n = array_size( clipDistance );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( clipDistance, ii );
-      enableiToString(tmp, clipDistance[ii], "GL_CLIP_DISTANCE", static_cast<GLuint>(ii), delim);
-    }
+    for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_CLIP_DISTANCES; ii++)
+      enableiToString(tmp, clipDistance[ii], "GL_CLIP_DISTANCE", ii, delim);
     enableToString(tmp, colorLogicOp, "GL_COLOR_LOGIC_OP",delim);
     enableToString(tmp, colorMaterial, "GL_COLOR_MATERIAL",delim);
     enableToString(tmp, colorSum, "GL_COLOR_SUM",delim);
@@ -651,11 +571,9 @@ struct Enable
     enableToString(tmp, fog, "GL_FOG",delim);
     enableToString(tmp, framebufferSRGB, "GL_FRAMEBUFFER_SRGB",delim);
     enableToString(tmp, histogram, "GL_HISTOGRAM",delim);
-    n = array_size( light );
-    for (size_t ii=0; ii<n; ii++)
+    for (int ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
     {
-      GLenum lightx = static_cast<GLenum>(GL_LIGHT0 + ii);
-      RegalAssertArrayIndex( light, ii );
+      GLenum lightx = GL_LIGHT0 + ii;
       tmp << print_string(light[ii] ? "glEnable(" : "glDisable(",Token::toString(lightx),");",delim);
     }
     enableToString(tmp, lighting, "GL_LIGHTING",delim);
@@ -700,28 +618,14 @@ struct Enable
     enableToString(tmp, sampleShading, "GL_SAMPLE_SHADING",delim);
     enableToString(tmp, separable2d, "GL_SEPARABLE_2D",delim);
     enableToString(tmp, stencilTest, "GL_STENCIL_TEST",delim);
-    n = array_size( scissorTest );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( scissorTest, ii );
-      enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", static_cast<GLuint>(ii),delim);
-    }
-    n = array_size( texture1d );
-    RegalAssert( array_size( texture2d ) == n );
-    RegalAssert( array_size( texture3d ) == n );
-    RegalAssert( array_size( textureCubeMap ) == n );
-    RegalAssert( array_size( textureRectangle ) == n );
-    RegalAssert( array_size( textureGenS ) == n );
-    RegalAssert( array_size( textureGenT ) == n );
-    RegalAssert( array_size( textureGenR ) == n );
-    RegalAssert( array_size( textureGenQ ) == n );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", ii,delim);
+    for (int ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
     {
       enableiToString(tmp, texture1d[ii], "GL_TEXTURE_1D", ii, delim);
       enableiToString(tmp, texture2d[ii], "GL_TEXTURE_2D", ii, delim);
       enableiToString(tmp, texture3d[ii], "GL_TEXTURE_3D", ii, delim);
       enableiToString(tmp, textureCubeMap[ii], "GL_TEXTURE_CUBE_MAP", ii, delim);
-      enableiToString(tmp, textureRectangle[ii], "GL_TEXTURE_RECTANGLE", ii, delim);
       enableiToString(tmp, textureGenS[ii], "GL_TEXTURE_GEN_S", ii, delim);
       enableiToString(tmp, textureGenT[ii], "GL_TEXTURE_GEN_T", ii, delim);
       enableiToString(tmp, textureGenR[ii], "GL_TEXTURE_GEN_R", ii, delim);
@@ -1065,7 +969,7 @@ struct Polygon
     cullEnable = dt.call(&dt.glIsEnabled)(GL_CULL_FACE);
     dt.call(&dt.glGetIntegerv)(GL_CULL_FACE_MODE,reinterpret_cast<GLint *>(&cullFaceMode));
     dt.call(&dt.glGetIntegerv)(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
-    dt.call(&dt.glGetIntegerv)(GL_POLYGON_MODE,reinterpret_cast<GLint *>(mode));
+    dt.call(&dt.glGetIntegerv)(GL_POLYGON_MODE,reinterpret_cast<GLint *>(&mode));
     dt.call(&dt.glGetIntegerv)(GL_FRONT_FACE,reinterpret_cast<GLint *>(&frontFace));
     smoothEnable  = dt.call(&dt.glIsEnabled)(GL_POLYGON_SMOOTH);
     stippleEnable = dt.call(&dt.glIsEnabled)(GL_POLYGON_STIPPLE);
@@ -1196,12 +1100,6 @@ struct Transform
   inline Transform()
     : matrixMode(GL_MODELVIEW), normalize(GL_FALSE), rescaleNormal(GL_FALSE), depthClamp(GL_FALSE)
   {
-    size_t n = array_size( clipPlane );
-    for (size_t i = 0; i < n; i++)
-    {
-      RegalAssertArrayIndex( clipPlane, i );
-      clipPlane[i] = ClipPlane();
-    }
   }
 
   inline size_t maxPlanes() const
@@ -1221,15 +1119,13 @@ struct Transform
 
   inline const Transform &transition(DispatchTableGL &dt, Transform &current) const
   {
-    size_t n = array_size( clipPlane );
-    for (size_t i = 0; i < n; i++)
+    for (GLint i = 0; i < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES; i++)
     {
-      RegalAssertArrayIndex( clipPlane, i );
       if (current.clipPlane[i].enabled != clipPlane[i].enabled)
-        setEnable(dt, static_cast<GLenum>(GL_CLIP_PLANE0 + i), clipPlane[i].enabled);
+        setEnable(dt, GL_CLIP_PLANE0 + i, clipPlane[i].enabled);
 
       if (current.clipPlane[i].equation != clipPlane[i].equation)
-        dt.call(&dt.glClipPlane)(static_cast<GLenum>(GL_CLIP_PLANE0 + i), clipPlane[i].equation.data);
+        dt.call(&dt.glClipPlane)(GL_CLIP_PLANE0 + i, clipPlane[i].equation.data);
     }
 
     if (current.matrixMode != matrixMode)
@@ -1250,11 +1146,9 @@ struct Transform
   inline std::string toString(const char *delim = "\n") const
   {
     string_list tmp;
-    size_t n = array_size( clipPlane );
-    for (size_t i = 0; i < n; i++)
+    for (GLint i = 0; i < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES; i++)
     {
-      RegalAssertArrayIndex( clipPlane, i );
-      GLenum plane = static_cast<GLenum>(GL_CLIP_PLANE0 + i);
+      GLenum plane = GL_CLIP_PLANE0 + i;
       enableToString(tmp, clipPlane[i].enabled, Token::toString(plane), delim);
       tmp << print_string("glClipPlane(",Token::toString(plane),", [ ", clipPlane[i].equation.data[0],
                           ", ", clipPlane[i].equation.data[1],
@@ -1270,11 +1164,10 @@ struct Transform
 
   inline void glClipPlane(GLenum plane, const GLdouble *equation)
   {
-    GLint planeIndex = plane - GL_CLIP_PLANE0;
-    RegalAssert(planeIndex >= 0 && static_cast<size_t>(planeIndex) < array_size( clipPlane ));
-    if (planeIndex >= 0 && static_cast<size_t>(planeIndex) < array_size( clipPlane ))
+    GLuint planeIndex = plane - GL_CLIP_PLANE0;
+    RegalAssert(planeIndex < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES);
+    if (planeIndex < REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES)
     {
-      RegalAssertArrayIndex( clipPlane, planeIndex );
       clipPlane[planeIndex].equation.data[0] = equation[0];
       clipPlane[planeIndex].equation.data[1] = equation[1];
       clipPlane[planeIndex].equation.data[2] = equation[2];
@@ -1499,18 +1392,14 @@ struct AccumBuffer
 
 struct Scissor
 {
-  GLboolean   scissorTest[REGAL_EMU_MAX_VIEWPORTS];   // GL_SCISSOR_TEST
-  GLint       scissorBox[REGAL_EMU_MAX_VIEWPORTS][4]; // GL_SCISSOR_BOX
-  bool        valid[REGAL_EMU_MAX_VIEWPORTS];
+  GLboolean   scissorTest[REGAL_MAX_VIEWPORTS];   // GL_SCISSOR_TEST
+  GLint       scissorBox[REGAL_MAX_VIEWPORTS][4]; // GL_SCISSOR_BOX
+  bool        valid[REGAL_MAX_VIEWPORTS];
 
   inline Scissor()
   {
-    size_t n = array_size( scissorTest );
-    RegalAssert(array_size( valid ) == n);
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( scissorTest, ii );
-      RegalAssertArrayIndex( valid, ii );
       scissorTest[ii] = GL_FALSE;
       scissorBox[ii][0] = 0;
       scissorBox[ii][1] = 0;
@@ -1528,10 +1417,8 @@ struct Scissor
 
   bool fullyDefined() const
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
       if (!valid[ii])
         return false;
     }
@@ -1540,13 +1427,11 @@ struct Scissor
 
   void getUndefined(DispatchTableGL &dt)
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
       if (!valid[ii])
       {
-        dt.call(&dt.glGetIntegeri_v)(GL_SCISSOR_BOX, static_cast<GLuint>(ii), &scissorBox[ii][0]);
+        dt.call(&dt.glGetIntegeri_v)(GL_SCISSOR_BOX, ii, &scissorBox[ii][0]);
         valid[ii] = true;
       }
     }
@@ -1554,22 +1439,18 @@ struct Scissor
 
   inline Scissor &swap(Scissor &other)
   {
-    std::swap_ranges(scissorTest,scissorTest+REGAL_EMU_MAX_VIEWPORTS,other.scissorTest);
-    std::swap_ranges(&scissorBox[0][0],&scissorBox[0][0]+(REGAL_EMU_MAX_VIEWPORTS*4),&other.scissorBox[0][0]);
-    std::swap_ranges(valid,valid+REGAL_EMU_MAX_VIEWPORTS,other.valid);
+    std::swap_ranges(scissorTest,scissorTest+REGAL_MAX_VIEWPORTS,other.scissorTest);
+    std::swap_ranges(&scissorBox[0][0],&scissorBox[0][0]+(REGAL_MAX_VIEWPORTS*4),&other.scissorBox[0][0]);
+    std::swap_ranges(valid,valid+REGAL_MAX_VIEWPORTS,other.valid);
     return *this;
   }
 
   inline Scissor &get(DispatchTableGL &dt)
   {
-    size_t n = array_size( scissorTest );
-    RegalAssert(array_size( valid ) == n);
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( scissorTest, ii );
-      RegalAssertArrayIndex( valid, ii );
-      scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,static_cast<GLuint>(ii));
-      dt.call(&dt.glGetIntegeri_v)(GL_SCISSOR_BOX, static_cast<GLuint>(ii), &scissorBox[ii][0]);
+      scissorTest[ii] = dt.call(&dt.glIsEnabledi)(GL_SCISSOR_TEST,ii);
+      dt.call(&dt.glGetIntegeri_v)(GL_SCISSOR_BOX, ii, &scissorBox[ii][0]);
       valid[ii] = true;
     }
     return *this;
@@ -1577,15 +1458,11 @@ struct Scissor
 
   inline const Scissor &set(DispatchTableGL &dt) const
   {
-    size_t n = array_size( scissorTest );
-    RegalAssert(array_size( valid ) == n);
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( scissorTest, ii );
-      RegalAssertArrayIndex( valid, ii );
-      setEnablei(dt,GL_SCISSOR_TEST,static_cast<GLuint>(ii),scissorTest[ii]);
+      setEnablei(dt,GL_SCISSOR_TEST,ii,scissorTest[ii]);
       if (valid[ii])
-        dt.call(&dt.glScissorIndexedv)(static_cast<GLuint>(ii), &scissorBox[ii][0]);
+        dt.call(&dt.glScissorIndexedv)(ii, &scissorBox[ii][0]);
     }
     return *this;
   }
@@ -1593,30 +1470,20 @@ struct Scissor
   inline std::string toString(const char *delim = "\n") const
   {
     string_list tmp;
-    size_t n = array_size( scissorTest );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( scissorTest, ii );
-      enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", static_cast<GLuint>(ii), delim);
-    }
-    n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( valid, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
+      enableiToString(tmp, scissorTest[ii], "GL_SCISSOR_TEST", ii, delim);
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       if (valid[ii])
         tmp << print_string("glScissorIndexedv(",ii,", [ ",scissorBox[ii][0],",",scissorBox[ii][1],",",scissorBox[ii][2],",",scissorBox[ii][3]," ] );",delim);
       else
         tmp << print_string("glScissorIndexedv(",ii,", [ *not valid* ] );",delim);
-    }
     return tmp;
   }
 
   void glScissor( GLint left, GLint bottom, GLsizei width, GLsizei height )
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
       scissorBox[ii][0] = left;
       scissorBox[ii][1] = bottom;
       scissorBox[ii][2] = width;
@@ -1627,28 +1494,24 @@ struct Scissor
 
   void glScissorArrayv( GLuint first, GLsizei count, const GLint *v )
   {
-    size_t last = static_cast<size_t>(first + count);
-    size_t n = array_size( valid );
-    if (last < n)
+    GLuint last = first + count;
+    if (last > REGAL_MAX_VIEWPORTS)
+      last = REGAL_MAX_VIEWPORTS;
+    for (GLuint ii = first; ii < last; ii++)
     {
-      for (size_t ii=first; ii<last; ii++)
-      {
-        RegalAssertArrayIndex( valid, ii );
-        scissorBox[ii][0] = v[0];
-        scissorBox[ii][1] = v[1];
-        scissorBox[ii][2] = v[2];
-        scissorBox[ii][3] = v[3];
-        valid[ii] = true;
-        v += 4;
-      }
+      scissorBox[ii][0] = v[0];
+      scissorBox[ii][1] = v[1];
+      scissorBox[ii][2] = v[2];
+      scissorBox[ii][3] = v[3];
+      valid[ii] = true;
+      v += 4;
     }
   }
 
   void glScissorIndexed( GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height )
   {
-    if (static_cast<size_t>(index) < array_size( valid ))
+    if (index < REGAL_MAX_VIEWPORTS)
     {
-      RegalAssertArrayIndex( valid, index );
       scissorBox[index][0] = left;
       scissorBox[index][1] = bottom;
       scissorBox[index][2] = width;
@@ -1659,9 +1522,8 @@ struct Scissor
 
   void glScissorIndexedv( GLuint index, const GLint *v )
   {
-    if (static_cast<size_t>(index) < array_size( valid ))
+    if (index < REGAL_MAX_VIEWPORTS)
     {
-      RegalAssertArrayIndex( valid, index );
       scissorBox[index][0] = v[0];
       scissorBox[index][1] = v[1];
       scissorBox[index][2] = v[2];
@@ -1677,16 +1539,14 @@ struct Scissor
 
 struct Viewport
 {
-  GLfloat  viewport[REGAL_EMU_MAX_VIEWPORTS][4]; // GL_VIEWPORT
-  GLclampd depthRange[REGAL_EMU_MAX_VIEWPORTS][2]; // GL_DEPTH_RANGE
-  bool     valid[REGAL_EMU_MAX_VIEWPORTS];
+  GLfloat  viewport[REGAL_MAX_VIEWPORTS][4]; // GL_VIEWPORT
+  GLclampd depthRange[REGAL_MAX_VIEWPORTS][2]; // GL_DEPTH_RANGE
+  bool     valid[REGAL_MAX_VIEWPORTS];
 
   inline Viewport()
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
       viewport[ii][0] = 0.0f;
       viewport[ii][1] = 0.0f;
       viewport[ii][2] = 0.0f;
@@ -1699,10 +1559,8 @@ struct Viewport
 
   bool fullyDefined() const
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
       if (!valid[ii])
         return false;
     }
@@ -1711,31 +1569,27 @@ struct Viewport
 
   inline void getUndefined(DispatchTableGL &dt)
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
-      dt.call(&dt.glGetFloati_v)(GL_VIEWPORT, static_cast<GLuint>(ii), &viewport[ii][0]);
+      dt.call(&dt.glGetFloati_v)(GL_VIEWPORT, ii, &viewport[ii][0]);
       valid[ii] = true;
     }
   }
 
   inline Viewport &swap(Viewport &other)
   {
-    std::swap_ranges(&viewport[0][0],&viewport[0][0]+(REGAL_EMU_MAX_VIEWPORTS*4),&other.viewport[0][0]);
-    std::swap_ranges(&depthRange[0][0],&depthRange[0][0]+(REGAL_EMU_MAX_VIEWPORTS*2),&other.depthRange[0][0]);
-    std::swap_ranges(valid,valid+REGAL_EMU_MAX_VIEWPORTS,other.valid);
+    std::swap_ranges(&viewport[0][0],&viewport[0][0]+(REGAL_MAX_VIEWPORTS*4),&other.viewport[0][0]);
+    std::swap_ranges(&depthRange[0][0],&depthRange[0][0]+(REGAL_MAX_VIEWPORTS*2),&other.depthRange[0][0]);
+    std::swap_ranges(valid,valid+REGAL_MAX_VIEWPORTS,other.valid);
     return *this;
   }
 
   inline Viewport &get(DispatchTableGL &dt)
   {
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
-      RegalAssertArrayIndex( valid, ii );
-      dt.call(&dt.glGetFloati_v)(GL_VIEWPORT, static_cast<GLuint>(ii), &viewport[ii][0]);
-      dt.call(&dt.glGetDoublei_v)(GL_DEPTH_RANGE, static_cast<GLuint>(ii), &depthRange[ii][0]);
+      dt.call(&dt.glGetFloati_v)(GL_VIEWPORT, ii, &viewport[ii][0]);
+      dt.call(&dt.glGetDoublei_v)(GL_DEPTH_RANGE, ii, &depthRange[ii][0]);
       valid[ii] = true;
     }
     return *this;
@@ -1743,37 +1597,29 @@ struct Viewport
 
   inline const Viewport &set(DispatchTableGL &dt) const
   {
-    dt.call(&dt.glDepthRangeArrayv)(0, REGAL_EMU_MAX_VIEWPORTS, &depthRange[0][0] );
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( valid, ii );
+    dt.call(&dt.glDepthRangeArrayv)(0, REGAL_MAX_VIEWPORTS, &depthRange[0][0] );
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       if (valid[ii])
-        dt.call(&dt.glViewportIndexedfv)(static_cast<GLuint>(ii), &viewport[ii][0] );
-    }
+        dt.call(&dt.glViewportIndexedfv)(ii, &viewport[ii][0] );
     return *this;
   }
 
   inline std::string toString(const char *delim = "\n") const
   {
     string_list tmp;
-    size_t n = array_size( valid );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( valid, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       if (valid[ii])
         tmp << print_string("glViewportIndexedfv(",ii,", [ ",viewport[ii][0],",",viewport[ii][1],",",viewport[ii][2],",",viewport[ii][3]," ] );",delim);
       else
         tmp << print_string("glViewportIndexedfv(",ii,", [ *not valid* ] );",delim);
-    }
-    for (size_t ii=0; ii<REGAL_EMU_MAX_VIEWPORTS; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
       tmp << print_string("glDepthRangeIndexed(",ii,",",depthRange[ii][0],",",depthRange[ii][1],");",delim);
     return tmp;
   }
 
   template <typename T> void glDepthRange( T n, T f )
   {
-    for (size_t ii=0; ii<REGAL_EMU_MAX_VIEWPORTS; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
       depthRange[ii][0] = static_cast<GLdouble>(n);
       depthRange[ii][1] = static_cast<GLdouble>(f);
@@ -1783,9 +1629,9 @@ struct Viewport
   void glDepthRangeArrayv( GLuint first, GLsizei count, const GLdouble *v )
   {
     GLuint last = first + count;
-    if (last > REGAL_EMU_MAX_VIEWPORTS)
-      last = REGAL_EMU_MAX_VIEWPORTS;
-    for (size_t ii = first; ii < last; ii++)
+    if (last > REGAL_MAX_VIEWPORTS)
+      last = REGAL_MAX_VIEWPORTS;
+    for (GLuint ii = first; ii < last; ii++)
     {
       depthRange[ii][0] = v[0];
       depthRange[ii][1] = v[1];
@@ -1795,7 +1641,7 @@ struct Viewport
 
   void glDepthRangeIndexed( GLuint index, GLdouble n, GLdouble f )
   {
-    if (index < REGAL_EMU_MAX_VIEWPORTS)
+    if (index < REGAL_MAX_VIEWPORTS)
     {
       depthRange[index][0] = n;
       depthRange[index][1] = f;
@@ -1805,7 +1651,7 @@ struct Viewport
   void glViewport( GLint x, GLint y, GLsizei w, GLsizei h )
   {
     Internal("Regal::State::Viewport::glViewport( ",x,", ",y,", ",w,", ",h," )");
-    for (size_t ii=0; ii<REGAL_EMU_MAX_VIEWPORTS; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_VIEWPORTS; ii++)
     {
       viewport[ii][0] = static_cast<GLfloat>(x);
       viewport[ii][1] = static_cast<GLfloat>(y);
@@ -1817,28 +1663,24 @@ struct Viewport
 
   void glViewportArrayv( GLuint first, GLsizei count, const GLfloat *v )
   {
-    size_t n = array_size( valid );
-    size_t last = static_cast<size_t>(first + count);
-    if (last < n)
+    GLuint last = first + count;
+    if (last > REGAL_MAX_VIEWPORTS)
+      last = REGAL_MAX_VIEWPORTS;
+    for (GLuint ii = first; ii < last; ii++)
     {
-      for (size_t ii=first; ii<last; ii++)
-      {
-        RegalAssertArrayIndex( valid, ii );
-        viewport[ii][0] = v[0];
-        viewport[ii][1] = v[1];
-        viewport[ii][2] = v[2];
-        viewport[ii][3] = v[3];
-        valid[ii] = true;
-        v += 4;
-      }
+      viewport[ii][0] = v[0];
+      viewport[ii][1] = v[1];
+      viewport[ii][2] = v[2];
+      viewport[ii][3] = v[3];
+      valid[ii] = true;
+      v += 4;
     }
   }
 
   void glViewportIndexedf( GLuint index, GLfloat x, GLfloat y, GLfloat w, float h )
   {
-    if (static_cast<size_t>(index) < array_size( valid ))
+    if (index < REGAL_MAX_VIEWPORTS)
     {
-      RegalAssertArrayIndex( valid, index );
       viewport[index][0] = x;
       viewport[index][1] = y;
       viewport[index][2] = w;
@@ -1849,9 +1691,8 @@ struct Viewport
 
   void glViewportIndexedfv( GLuint index, const GLfloat *v )
   {
-    if (static_cast<size_t>(index) < array_size( valid ))
+    if (index < REGAL_MAX_VIEWPORTS)
     {
-      RegalAssertArrayIndex( valid, index );
       viewport[index][0] = v[0];
       viewport[index][1] = v[1];
       viewport[index][2] = v[2];
@@ -2044,7 +1885,7 @@ struct Eval
   {
     RegalAssert(static_cast<int>(GL_MAP1_VERTEX_4-GL_MAP1_COLOR_4) == 8);
     RegalAssert(static_cast<int>(GL_MAP2_VERTEX_4-GL_MAP2_COLOR_4) == 8);
-    for (size_t ii=0; ii<9; ii++)
+    for (GLuint ii=0; ii<9; ii++)
     {
       map1dEnables[ii] = GL_FALSE;
       map2dEnables[ii] = GL_FALSE;
@@ -2074,10 +1915,10 @@ struct Eval
   inline Eval &get(DispatchTableGL &dt)
   {
     autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
-    for (size_t ii=0; ii<9; ii++)
-      map1dEnables[ii] = dt.call(&dt.glIsEnabled)(static_cast<GLenum>(GL_MAP1_COLOR_4+ii));
-    for (size_t ii=0; ii<9; ii++)
-      map2dEnables[ii] = dt.call(&dt.glIsEnabled)(static_cast<GLenum>(GL_MAP2_COLOR_4+ii));
+    for (GLuint ii=0; ii<9; ii++)
+      map1dEnables[ii] = dt.call(&dt.glIsEnabled)(GL_MAP1_COLOR_4+ii);
+    for (GLuint ii=0; ii<9; ii++)
+      map2dEnables[ii] = dt.call(&dt.glIsEnabled)(GL_MAP2_COLOR_4+ii);
     dt.call(&dt.glGetDoublev)(GL_MAP1_GRID_DOMAIN, map1GridDomain);
     dt.call(&dt.glGetDoublev)(GL_MAP2_GRID_DOMAIN, map2GridDomain);
     dt.call(&dt.glGetIntegerv)(GL_MAP1_GRID_SEGMENTS,reinterpret_cast<GLint *>(&map1GridSegments));
@@ -2088,10 +1929,10 @@ struct Eval
   inline const Eval &set(DispatchTableGL &dt) const
   {
     setEnable(dt,GL_AUTO_NORMAL,autoNormal);
-    for (size_t ii=0; ii<9; ii++)
-      setEnable(dt,static_cast<GLenum>(GL_MAP1_COLOR_4+ii),map1dEnables[ii]);
-    for (size_t ii=0; ii<9; ii++)
-      setEnable(dt,static_cast<GLenum>(GL_MAP2_COLOR_4+ii),map2dEnables[ii]);
+    for (GLuint ii=0; ii<9; ii++)
+      setEnable(dt,GL_MAP1_COLOR_4+ii,map1dEnables[ii]);
+    for (GLuint ii=0; ii<9; ii++)
+      setEnable(dt,GL_MAP2_COLOR_4+ii,map1dEnables[ii]);
     dt.call(&dt.glMapGrid1d)(map1GridSegments, map1GridDomain[0], map1GridDomain[1]);
     dt.call(&dt.glMapGrid2d)(map2GridSegments[0], map2GridDomain[0], map2GridDomain[1],
                              map2GridSegments[1], map2GridDomain[2], map2GridDomain[3]);
@@ -2102,10 +1943,10 @@ struct Eval
   {
     string_list tmp;
     enableToString(tmp, autoNormal, "GL_AUTO_NORMAL",delim);
-    for (size_t ii=0; ii<9; ii++)
-      enableToString(tmp,map1dEnables[ii],Token::toString(static_cast<GLenum>(GL_MAP1_COLOR_4+ii)),delim);
-    for (size_t ii=0; ii<9; ii++)
-      enableToString(tmp,map2dEnables[ii],Token::toString(static_cast<GLenum>(GL_MAP2_COLOR_4+ii)),delim);
+    for (GLuint ii=0; ii<9; ii++)
+      enableToString(tmp,map1dEnables[ii],Token::toString(GL_MAP1_COLOR_4+ii),delim);
+    for (GLuint ii=0; ii<9; ii++)
+      enableToString(tmp,map2dEnables[ii],Token::toString(GL_MAP2_COLOR_4+ii),delim);
     tmp << print_string("glMapGrid1d(",map1GridSegments,",",map1GridDomain[0],",",map1GridDomain[1],");",delim);
     tmp << print_string("glMapGrid2d(",map2GridSegments[0],",",map2GridDomain[0],",",map2GridDomain[1],
                         map2GridSegments[1],",",map2GridDomain[2],",",map2GridDomain[3],");",delim);
@@ -2248,12 +2089,8 @@ struct Point
     distanceAttenuation[0] = 1.0f;
     distanceAttenuation[1] = 0.0f;
     distanceAttenuation[2] = 0.0f;
-    size_t n = array_size( coordReplace );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( coordReplace, ii );
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
       coordReplace[ii] = GL_FALSE;
-    }
   }
 
   inline Point &swap(Point &other)
@@ -2280,12 +2117,11 @@ struct Point
     dt.call(&dt.glGetFloatv)(GL_POINT_FADE_THRESHOLD_SIZE,&fadeThresholdSize);
     dt.call(&dt.glGetFloatv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
     dt.call(&dt.glGetIntegerv)(GL_POINT_SPRITE_COORD_ORIGIN,reinterpret_cast<GLint *>(&spriteCoordOrigin));
-    size_t n = array_size( coordReplace );
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
     {
       GLint coord;
-      dt.call(&dt.glGetMultiTexEnvivEXT)(static_cast<GLenum>(GL_TEXTURE0+ii),GL_POINT_SPRITE,GL_COORD_REPLACE,&coord);
-      RegalAssertArrayIndex( coordReplace, ii );
+
+      dt.call(&dt.glGetMultiTexEnvivEXT)(ii,GL_POINT_SPRITE,GL_COORD_REPLACE,&coord);
       coordReplace[ii] = static_cast<GLboolean>(coord);
     }
     return *this;
@@ -2301,12 +2137,8 @@ struct Point
     dt.call(&dt.glPointParameterf)(GL_POINT_FADE_THRESHOLD_SIZE,fadeThresholdSize);
     dt.call(&dt.glPointParameterfv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
     dt.call(&dt.glPointParameteri)(GL_POINT_SPRITE_COORD_ORIGIN,spriteCoordOrigin);
-    size_t n = array_size( coordReplace );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( coordReplace, ii );
-      dt.call(&dt.glMultiTexEnviEXT)(static_cast<GLenum>(GL_TEXTURE0+ii),GL_POINT_SPRITE,GL_COORD_REPLACE,coordReplace[ii]);
-    }
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+      dt.call(&dt.glMultiTexEnviEXT)(GL_TEXTURE0+ii,GL_POINT_SPRITE,GL_COORD_REPLACE,coordReplace[ii]);
     return *this;
   }
 
@@ -2323,30 +2155,28 @@ struct Point
                         distanceAttenuation[1],", ",
                         distanceAttenuation[2]," ]);",delim);
     tmp << print_string("glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN",Token::toString(spriteCoordOrigin),");",delim);
-    size_t n = array_size( coordReplace );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( coordReplace, ii );
-      tmp << print_string("glMultiTexEnviEXT(",Token::toString(static_cast<GLenum>(GL_TEXTURE0+ii)),",GL_POINT_SPRITE,GL_COORD_REPLACE,",coordReplace[ii],");",delim);
-    }
+    for (GLuint ii=0; ii<REGAL_EMU_MAX_TEXTURE_UNITS; ii++)
+      tmp << print_string("glMultiTexEnviEXT(",Token::toString(GL_TEXTURE0+ii),",GL_POINT_SPRITE,GL_COORD_REPLACE,",coordReplace[ii],");",delim);
     return tmp;
   }
 
   template <typename T> void glMultiTexEnv(GLenum texunit, GLenum target, GLenum pname, T param)
   {
-    glMultiTexEnvv(texunit, target, pname, &param);
+    if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
+    {
+      GLint unit = texunit = GL_TEXTURE0;
+      if ((unit >= 0) && (unit<REGAL_EMU_MAX_TEXTURE_UNITS))
+        coordReplace[unit] = static_cast<GLboolean>(param);
+    }
   }
 
   template <typename T> void glMultiTexEnvv(GLenum texunit, GLenum target, GLenum pname, const T *params)
   {
     if ((target == GL_POINT_SPRITE) && (pname == GL_COORD_REPLACE))
     {
-      GLint unit = texunit - GL_TEXTURE0;
-      if ((unit >= 0) && (static_cast<size_t>(unit) < array_size( coordReplace )))
-      {
-        RegalAssertArrayIndex( coordReplace, unit );
+      GLint unit = texunit = GL_TEXTURE0;
+      if ((unit >= 0) && (unit<REGAL_EMU_MAX_TEXTURE_UNITS))
         coordReplace[unit] = static_cast<GLboolean>(params[0]);
-      }
     }
   }
 
@@ -2426,7 +2256,7 @@ struct PolygonStipple
   {
     string_list tmp;
     tmp << print_string("glPolygonStipple([");
-    for (size_t ii=0; ii<(32*4)-1; ii++)
+    for (int ii=0; ii<(32*4)-1; ii++)
       tmp << print_string(" 0x",hex(pattern[ii]),",");
     tmp << print_string(" 0x",hex(pattern[(32*4)-1]),"]);",delim);
     return tmp;
@@ -2434,7 +2264,7 @@ struct PolygonStipple
 
   void glPolygonStipple( const GLubyte *p )
   {
-    for (size_t ii=0; ii<(32*4); ii++)
+    for (int ii=0; ii<(32*4); ii++)
       pattern[ii] = p[ii];
   }
 };
@@ -2450,13 +2280,13 @@ struct ColorBuffer
   GLboolean   alphaTest;                                  // GL_ALPHA_TEST
   GLenum      alphaTestFunc;                              // GL_ALPHA_TEST_FUNC
   GLclampf    alphaTestRef;                               // GL_ALPHA_TEST_REF
-  GLboolean   blend[REGAL_EMU_MAX_DRAW_BUFFERS];              // GL_BLEND
-  GLenum      blendSrcRgb[REGAL_EMU_MAX_DRAW_BUFFERS];        // GL_BLEND_SRC_RGB
-  GLenum      blendSrcAlpha[REGAL_EMU_MAX_DRAW_BUFFERS];      // GL_BLEND_SRC_ALPHA
-  GLenum      blendDstRgb[REGAL_EMU_MAX_DRAW_BUFFERS];        // GL_BLEND_DST_RGB
-  GLenum      blendDstAlpha[REGAL_EMU_MAX_DRAW_BUFFERS];      // GL_BLEND_DST_ALPHA
-  GLenum      blendEquationRgb[REGAL_EMU_MAX_DRAW_BUFFERS];   // GL_BLEND_EQUATION_RGB
-  GLenum      blendEquationAlpha[REGAL_EMU_MAX_DRAW_BUFFERS]; // GL_BLEND_EQUATION_ALPHA
+  GLboolean   blend[REGAL_MAX_DRAW_BUFFERS];              // GL_BLEND
+  GLenum      blendSrcRgb[REGAL_MAX_DRAW_BUFFERS];        // GL_BLEND_SRC_RGB
+  GLenum      blendSrcAlpha[REGAL_MAX_DRAW_BUFFERS];      // GL_BLEND_SRC_ALPHA
+  GLenum      blendDstRgb[REGAL_MAX_DRAW_BUFFERS];        // GL_BLEND_DST_RGB
+  GLenum      blendDstAlpha[REGAL_MAX_DRAW_BUFFERS];      // GL_BLEND_DST_ALPHA
+  GLenum      blendEquationRgb[REGAL_MAX_DRAW_BUFFERS];   // GL_BLEND_EQUATION_RGB
+  GLenum      blendEquationAlpha[REGAL_MAX_DRAW_BUFFERS]; // GL_BLEND_EQUATION_ALPHA
   GLclampf    blendColor[4];                              // GL_BLEND_COLOR
   GLboolean   framebufferSRGB;                            // GL_FRAMEBUFFER_SRGB
   GLboolean   dither;                                     // GL_DITHER
@@ -2464,10 +2294,10 @@ struct ColorBuffer
   GLboolean   colorLogicOp;                               // GL_COLOR_LOGIC_OP
   GLenum      logicOpMode;                                // GL_LOGIC_OP_MODE
   GLuint      indexWritemask;                             // GL_INDEX_WRITEMASK
-  GLboolean   colorWritemask[REGAL_EMU_MAX_DRAW_BUFFERS][4];  // GL_COLOR_WRITEMASK
+  GLboolean   colorWritemask[REGAL_MAX_DRAW_BUFFERS][4];  // GL_COLOR_WRITEMASK
   GLclampf    colorClearValue[4];                         // GL_COLOR_CLEAR_VALUE
   GLfloat     indexClearValue;                            // GL_INDEX_CLEAR_VALUE
-  GLenum      drawBuffers[REGAL_EMU_MAX_DRAW_BUFFERS];        // GL_DRAW_BUFERi
+  GLenum      drawBuffers[REGAL_MAX_DRAW_BUFFERS];        // GL_DRAW_BUFERi
   bool        valid;
 
   inline ColorBuffer()
@@ -2495,17 +2325,8 @@ struct ColorBuffer
     colorClearValue[2] = 0.0f;
     colorClearValue[3] = 0.0f;
 
-    size_t n = array_size( blend );
-    RegalAssert(array_size( blendSrcRgb ) == n);
-    RegalAssert(array_size( blendSrcAlpha ) == n);
-    RegalAssert(array_size( blendDstRgb ) == n);
-    RegalAssert(array_size( blendDstAlpha ) == n);
-    RegalAssert(array_size( blendEquationRgb ) == n);
-    RegalAssert(array_size( blendEquationAlpha ) == n);
-    RegalAssert(array_size( drawBuffers ) == n);
-    for (size_t ii=0; ii<n; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
     {
-      RegalAssertArrayIndex( blend, ii );
       blend[ii] = GL_FALSE;
       blendSrcRgb[ii] = GL_ONE;
       blendSrcAlpha[ii] = GL_ONE;
@@ -2530,12 +2351,8 @@ struct ColorBuffer
   {
     if (!valid)
     {
-      size_t n = array_size( drawBuffers );
-      for (size_t ii=0; ii<n; ii++)
-      {
-        RegalAssertArrayIndex( drawBuffers, ii );
-        dt.call(&dt.glGetIntegerv)(static_cast<GLenum>(GL_DRAW_BUFFER0+ii), reinterpret_cast<GLint *>(&drawBuffers[ii]));
-      }
+      for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+        dt.call(&dt.glGetIntegerv)(GL_DRAW_BUFFER0+ii, reinterpret_cast<GLint *>(&drawBuffers[ii]));
       valid = true;
     }
   }
@@ -2547,13 +2364,13 @@ struct ColorBuffer
     std::swap(alphaTest,other.alphaTest);
     std::swap(alphaTestFunc,other.alphaTestFunc);
     std::swap(alphaTestRef,other.alphaTestRef);
-    std::swap_ranges(blend,blend+REGAL_EMU_MAX_DRAW_BUFFERS,other.blend);
-    std::swap_ranges(blendSrcRgb,blendSrcRgb+REGAL_EMU_MAX_DRAW_BUFFERS,other.blendSrcRgb);
-    std::swap_ranges(blendSrcAlpha,blendSrcAlpha+REGAL_EMU_MAX_DRAW_BUFFERS,other.blendSrcAlpha);
-    std::swap_ranges(blendDstRgb,blendDstRgb+REGAL_EMU_MAX_DRAW_BUFFERS,other.blendDstRgb);
-    std::swap_ranges(blendDstAlpha,blendDstAlpha+REGAL_EMU_MAX_DRAW_BUFFERS,other.blendDstAlpha);
-    std::swap_ranges(blendEquationRgb,blendEquationRgb+REGAL_EMU_MAX_DRAW_BUFFERS,other.blendEquationRgb);
-    std::swap_ranges(blendEquationAlpha,blendEquationAlpha+REGAL_EMU_MAX_DRAW_BUFFERS,other.blendEquationAlpha);
+    std::swap_ranges(blend,blend+REGAL_MAX_DRAW_BUFFERS,other.blend);
+    std::swap_ranges(blendSrcRgb,blendSrcRgb+REGAL_MAX_DRAW_BUFFERS,other.blendSrcRgb);
+    std::swap_ranges(blendSrcAlpha,blendSrcAlpha+REGAL_MAX_DRAW_BUFFERS,other.blendSrcAlpha);
+    std::swap_ranges(blendDstRgb,blendDstRgb+REGAL_MAX_DRAW_BUFFERS,other.blendDstRgb);
+    std::swap_ranges(blendDstAlpha,blendDstAlpha+REGAL_MAX_DRAW_BUFFERS,other.blendDstAlpha);
+    std::swap_ranges(blendEquationRgb,blendEquationRgb+REGAL_MAX_DRAW_BUFFERS,other.blendEquationRgb);
+    std::swap_ranges(blendEquationAlpha,blendEquationAlpha+REGAL_MAX_DRAW_BUFFERS,other.blendEquationAlpha);
     std::swap_ranges(blendColor,blendColor+4,other.blendColor);
     std::swap(framebufferSRGB,other.framebufferSRGB);
     std::swap(dither,other.dither);
@@ -2561,10 +2378,10 @@ struct ColorBuffer
     std::swap(colorLogicOp,other.colorLogicOp);
     std::swap(logicOpMode,other.logicOpMode);
     std::swap(indexWritemask,other.indexWritemask);
-    std::swap_ranges(&colorWritemask[0][0],&colorWritemask[0][0]+(REGAL_EMU_MAX_DRAW_BUFFERS*4),&other.colorWritemask[0][0]);
+    std::swap_ranges(&colorWritemask[0][0],&colorWritemask[0][0]+(REGAL_MAX_DRAW_BUFFERS*4),&other.colorWritemask[0][0]);
     std::swap_ranges(colorClearValue,colorClearValue+4,other.colorClearValue);
     std::swap(indexClearValue,other.indexClearValue);
-    std::swap_ranges(drawBuffers,drawBuffers+REGAL_EMU_MAX_DRAW_BUFFERS,other.drawBuffers);
+    std::swap_ranges(drawBuffers,drawBuffers+REGAL_MAX_DRAW_BUFFERS,other.drawBuffers);
     return *this;
   }
 
@@ -2575,48 +2392,20 @@ struct ColorBuffer
     alphaTest = dt.call(&dt.glIsEnabled)(GL_ALPHA_TEST);
     dt.call(&dt.glGetIntegerv)(GL_ALPHA_TEST_FUNC,reinterpret_cast<GLint *>(&alphaTestFunc));
     dt.call(&dt.glGetFloatv)(GL_ALPHA_TEST_REF,&alphaTestRef);
-    size_t n = array_size( blend );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       blend[ii] = dt.call(&dt.glIsEnabledi)(GL_BLEND, ii);
-    }
-    n = array_size( blendSrcRgb );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendSrcRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetIntegeri_v)(GL_BLEND_SRC_RGB, ii, reinterpret_cast<GLint *>(&blendSrcRgb[ii]));
-    }
-    n = array_size( blendSrcAlpha );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendSrcAlpha, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetIntegeri_v)(GL_BLEND_SRC_ALPHA, ii, reinterpret_cast<GLint *>(&blendSrcAlpha[ii]));
-    }
-    n = array_size( blendDstRgb );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendDstRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetIntegeri_v)(GL_BLEND_DST_RGB, ii, reinterpret_cast<GLint *>(&blendDstRgb[ii]));
-    }
-    n = array_size( blendDstAlpha );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendDstAlpha, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetIntegeri_v)(GL_BLEND_DST_ALPHA, ii, reinterpret_cast<GLint *>(&blendDstAlpha[ii]));
-    }
-    n = array_size( blendEquationRgb );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendEquationRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetIntegeri_v)(GL_BLEND_EQUATION_RGB, ii, reinterpret_cast<GLint *>(&blendEquationRgb[ii]));
-    }
-    n = array_size( blendEquationAlpha );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendEquationAlpha, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetIntegeri_v)(GL_BLEND_EQUATION_ALPHA, ii, reinterpret_cast<GLint *>(&blendEquationAlpha[ii]));
-    }
     dt.call(&dt.glGetFloatv)(GL_BLEND_COLOR,blendColor);
     framebufferSRGB = dt.call(&dt.glIsEnabled)(GL_FRAMEBUFFER_SRGB);
     dither = dt.call(&dt.glIsEnabled)(GL_DITHER);
@@ -2624,16 +2413,12 @@ struct ColorBuffer
     colorLogicOp  = dt.call(&dt.glIsEnabled)(GL_COLOR_LOGIC_OP);
     dt.call(&dt.glGetIntegerv)(GL_LOGIC_OP_MODE, reinterpret_cast<GLint *>(&logicOpMode));
     dt.call(&dt.glGetIntegerv)(GL_INDEX_WRITEMASK, reinterpret_cast<GLint *>(&indexWritemask));
-    for (GLuint ii=0; ii<REGAL_EMU_MAX_DRAW_BUFFERS; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glGetBooleani_v)(GL_COLOR_WRITEMASK, ii, &colorWritemask[ii][0]);
     dt.call(&dt.glGetFloatv)(GL_COLOR_CLEAR_VALUE,colorClearValue);
     dt.call(&dt.glGetFloatv)(GL_INDEX_CLEAR_VALUE,&indexClearValue);
-    n = array_size( drawBuffers );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( drawBuffers, ii );
-      dt.call(&dt.glGetIntegerv)(static_cast<GLenum>(GL_DRAW_BUFFER0+ii), reinterpret_cast<GLint *>(&drawBuffers[ii]));
-    }
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+      dt.call(&dt.glGetIntegerv)(GL_DRAW_BUFFER0+ii, reinterpret_cast<GLint *>(&drawBuffers[ii]));
     return *this;
   }
 
@@ -2643,28 +2428,12 @@ struct ColorBuffer
     dt.call(&dt.glClampColor)(GL_CLAMP_READ_COLOR,clampReadColor);
     setEnable(dt,GL_ALPHA_TEST,alphaTest);
     dt.call(&dt.glAlphaFunc)(alphaTestFunc,alphaTestRef);
-    size_t n = array_size( blend );
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       setEnablei(dt,GL_BLEND,ii,blend[ii]);
-    }
-    n = array_size( blendSrcRgb );
-    RegalAssert(array_size( blendSrcAlpha ) == n);
-    RegalAssert(array_size( blendDstRgb ) == n);
-    RegalAssert(array_size( blendDstAlpha ) == n);
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendSrcRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glBlendFuncSeparatei)(ii,blendSrcRgb[ii],blendSrcAlpha[ii],blendDstRgb[ii],blendDstAlpha[ii]);
-    }
-    n = array_size( blendEquationRgb );
-    RegalAssert(array_size( blendEquationAlpha ) == n);
-    for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
-    {
-      RegalAssertArrayIndex( blendEquationRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glBlendEquationSeparatei)(ii,blendEquationRgb[ii],blendEquationAlpha[ii]);
-    }
     dt.call(&dt.glBlendColor)(blendColor[0],blendColor[1],blendColor[2],blendColor[3]);
     setEnable(dt,GL_FRAMEBUFFER_SRGB,framebufferSRGB);
     setEnable(dt,GL_DITHER,dither);
@@ -2672,15 +2441,12 @@ struct ColorBuffer
     setEnable(dt,GL_COLOR_LOGIC_OP,colorLogicOp);
     dt.call(&dt.glLogicOp)(logicOpMode);
     dt.call(&dt.glIndexMask)(indexWritemask);
-    for (GLuint ii=0; ii<REGAL_EMU_MAX_DRAW_BUFFERS; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       dt.call(&dt.glColorMaski)(ii, colorWritemask[ii][0], colorWritemask[ii][1], colorWritemask[ii][2], colorWritemask[ii][3]);
     dt.call(&dt.glClearColor)(colorClearValue[0],colorClearValue[1],colorClearValue[2],colorClearValue[3]);
     dt.call(&dt.glClearIndex)(indexClearValue);
     if (valid)
-    {
-      RegalAssert(array_size( drawBuffers ) >= REGAL_EMU_MAX_DRAW_BUFFERS);
-      dt.call(&dt.glDrawBuffers)(REGAL_EMU_MAX_DRAW_BUFFERS, drawBuffers);
-    }
+      dt.call(&dt.glDrawBuffers)(REGAL_MAX_DRAW_BUFFERS, drawBuffers);
     return *this;
   }
 
@@ -2691,28 +2457,12 @@ struct ColorBuffer
     tmp << print_string("glClampColor(GL_CLAMP_READ_COLOR",",",Token::toString(clampReadColor),");",delim);
     enableToString(tmp, alphaTest, "GL_ALPHA_TEST",delim);
     tmp << print_string("glAlphaFunc(",Token::toString(alphaTestFunc),",",alphaTestRef,");",delim);
-    size_t n = array_size( blend );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blend, ii );
-      enableiToString(tmp, blend[ii], "GL_BLEND", static_cast<GLuint>(ii),delim);
-    }
-    n = array_size( blendSrcRgb );
-    RegalAssert(array_size( blendSrcAlpha ) == n);
-    RegalAssert(array_size( blendDstRgb ) == n);
-    RegalAssert(array_size( blendDstAlpha ) == n);
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blendSrcRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
+      enableiToString(tmp, blend[ii], "GL_BLEND", ii,delim);
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       tmp << print_string("glBlendFuncSeparatei(",ii,",",Token::toString(blendSrcRgb[ii]),",",Token::toString(blendSrcAlpha[ii]),",",Token::toString(blendDstRgb[ii]),",",Token::toString(blendDstAlpha[ii]),");",delim);
-    }
-    n = array_size( blendEquationRgb );
-    RegalAssert(array_size( blendEquationAlpha ) == n);
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( blendEquationRgb, ii );
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       tmp << print_string("glBlendEquationSeparatei(",ii,",",Token::toString(blendEquationRgb[ii]),",",Token::toString(blendEquationAlpha[ii]),");",delim);
-    }
     tmp << print_string("glBlendColor(",blendColor[0],",",blendColor[1],",",blendColor[2],",",blendColor[3],");",delim);
     enableToString(tmp, framebufferSRGB, "GL_FRAMEBUFFER_SRGB",delim);
     enableToString(tmp, dither, "GL_DITHER",delim);
@@ -2720,24 +2470,19 @@ struct ColorBuffer
     enableToString(tmp, colorLogicOp, "GL_COLOR_LOGIC_OP",delim);
     tmp << print_string("glLogicOp(",Token::toString(logicOpMode),");",delim);
     tmp << print_string("glIndexMask(0x",hex(indexWritemask),");",delim);
-    for (size_t ii=0; ii<REGAL_EMU_MAX_DRAW_BUFFERS; ii++)
+    for (GLuint ii=0; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       tmp << print_string("glColorMaski(",ii,",", colorWritemask[ii][0],",",colorWritemask[ii][1],",",colorWritemask[ii][2],",",colorWritemask[ii][3],");",delim);
     tmp << print_string("glClearColor(",colorClearValue[0],",",colorClearValue[1],",",colorClearValue[2],",",colorClearValue[3],");",delim);
     tmp << print_string("glClearIndex(",indexClearValue,");",delim);
     if (valid)
     {
-      tmp << print_string("glDrawBuffers(",REGAL_EMU_MAX_DRAW_BUFFERS,", [");
-      RegalAssert( array_size( drawBuffers ) >= REGAL_EMU_MAX_DRAW_BUFFERS );
-      for (size_t ii=0; ii<REGAL_EMU_MAX_DRAW_BUFFERS-1; ii++)
-      {
-        RegalAssertArrayIndex( drawBuffers, ii );
+      tmp << print_string("glDrawBuffers(",REGAL_MAX_DRAW_BUFFERS,", [");
+      for (int ii=0; ii<REGAL_MAX_DRAW_BUFFERS-1; ii++)
         tmp << print_string(" ",Token::toString(drawBuffers[ii]),",");
-      }
-      RegalAssertArrayIndex( drawBuffers, REGAL_EMU_MAX_DRAW_BUFFERS-1 );
-      tmp << print_string(" ",Token::toString(drawBuffers[REGAL_EMU_MAX_DRAW_BUFFERS-1]),"]);",delim);
+      tmp << print_string(" ",Token::toString(drawBuffers[REGAL_MAX_DRAW_BUFFERS-1]),"]);",delim);
     }
     else
-      tmp << print_string("glDrawBuffers(",REGAL_EMU_MAX_DRAW_BUFFERS,", [ *not valid* ]);",delim);
+      tmp << print_string("glDrawBuffers(",REGAL_MAX_DRAW_BUFFERS,", [ *not valid* ]);",delim);
     return tmp;
   }
 
@@ -2757,36 +2502,26 @@ struct ColorBuffer
 
   void glBlendEquation(GLenum mode)
   {
-    for (GLuint buf=0; buf<REGAL_EMU_MAX_DRAW_BUFFERS; buf++)
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
       glBlendEquationi(buf, mode);
   }
 
   void glBlendEquationi(GLuint buf, GLenum mode)
   {
-    size_t n = array_size( blendEquationRgb );
-    RegalAssert( array_size( blendEquationAlpha ) == n );
-    if (buf < n)
-    {
-      RegalAssertArrayIndex( blendEquationRgb, buf );
-      RegalAssertArrayIndex( blendEquationAlpha, buf );
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
       blendEquationRgb[buf] = blendEquationAlpha[buf] = mode;
-    }
   }
 
   void glBlendEquationSeparate(GLenum modeRGB, GLenum modeAlpha)
   {
-    for (GLuint buf=0; buf<REGAL_EMU_MAX_DRAW_BUFFERS; buf++)
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
       glBlendEquationSeparatei(buf, modeRGB, modeAlpha);
   }
 
   void glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha)
   {
-    size_t n = array_size( blendEquationRgb );
-    RegalAssert( array_size( blendEquationAlpha ) == n );
-    if (buf < n)
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
     {
-      RegalAssertArrayIndex( blendEquationRgb, buf );
-      RegalAssertArrayIndex( blendEquationAlpha, buf );
       blendEquationRgb[buf]   = modeRGB;
       blendEquationAlpha[buf] = modeAlpha;
     }
@@ -2794,22 +2529,14 @@ struct ColorBuffer
 
   void glBlendFunc(GLenum src, GLenum dst)
   {
-    for (GLuint buf=0; buf<REGAL_EMU_MAX_DRAW_BUFFERS; buf++)
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
       glBlendFunci(buf, src, dst);
   }
 
   void glBlendFunci(GLuint buf, GLenum src, GLenum dst)
   {
-    size_t n = array_size( blendSrcRgb );
-    RegalAssert( array_size( blendSrcAlpha ) == n );
-    RegalAssert( array_size( blendDstRgb ) == n );
-    RegalAssert( array_size( blendDstAlpha ) == n );
-    if (buf < n)
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
     {
-      RegalAssertArrayIndex( blendSrcRgb, buf );
-      RegalAssertArrayIndex( blendSrcAlpha, buf );
-      RegalAssertArrayIndex( blendDstRgb, buf );
-      RegalAssertArrayIndex( blendDstAlpha, buf );
       blendSrcRgb[buf] = blendSrcAlpha[buf] = src;
       blendDstRgb[buf] = blendDstAlpha[buf] = dst;
     }
@@ -2817,22 +2544,14 @@ struct ColorBuffer
 
   void glBlendFuncSeparate(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
   {
-    for (GLuint buf=0; buf<REGAL_EMU_MAX_DRAW_BUFFERS; buf++)
+    for (int buf=0; buf<REGAL_MAX_DRAW_BUFFERS; buf++)
       glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
   }
 
   inline void glBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha)
   {
-    size_t n = array_size( blendSrcRgb );
-    RegalAssert( array_size( blendSrcAlpha ) == n );
-    RegalAssert( array_size( blendDstRgb ) == n );
-    RegalAssert( array_size( blendDstAlpha ) == n );
-    if (buf < n)
+    if (buf < REGAL_MAX_DRAW_BUFFERS)
     {
-      RegalAssertArrayIndex( blendSrcRgb, buf );
-      RegalAssertArrayIndex( blendSrcAlpha, buf );
-      RegalAssertArrayIndex( blendDstRgb, buf );
-      RegalAssertArrayIndex( blendDstAlpha, buf );
       blendSrcRgb[buf]   = srcRGB;
       blendDstRgb[buf]   = dstRGB;
       blendSrcAlpha[buf] = srcAlpha;
@@ -2854,13 +2573,13 @@ struct ColorBuffer
 
   void glColorMask(GLboolean r, GLboolean g, GLboolean b, GLboolean a)
   {
-    for (GLuint index=0; index<REGAL_EMU_MAX_DRAW_BUFFERS; index++)
+    for (int index=0; index<REGAL_MAX_DRAW_BUFFERS; index++)
       glColorMaski(index, r, g, b, a);
   }
 
   void glColorMaski(GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a)
   {
-    if (index < REGAL_EMU_MAX_DRAW_BUFFERS)
+    if (index < REGAL_MAX_DRAW_BUFFERS)
     {
       colorWritemask[index][0] = r;
       colorWritemask[index][1] = g;
@@ -2872,30 +2591,18 @@ struct ColorBuffer
   void glDrawBuffer(GLenum buf)
   {
     drawBuffers[0] = buf;
-    size_t n = array_size( drawBuffers );
-    for (size_t ii=1; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( drawBuffers, ii );
+    for (GLuint ii=1; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
       drawBuffers[ii] = GL_NONE;
-    }
   }
 
-  void glDrawBuffers(GLsizei stop, const GLenum *bufs)
+  void glDrawBuffers(GLsizei n, const GLenum *bufs)
   {
-    size_t s = static_cast<size_t>(stop);
-    size_t n = array_size( drawBuffers );
-    if (s < n)
+    if (n < REGAL_MAX_DRAW_BUFFERS)
     {
-      for (size_t ii=0; ii<s; ii++)
-      {
-        RegalAssertArrayIndex( drawBuffers, ii );
+      for (int ii=0; ii<n; ii++)
         drawBuffers[ii] = bufs[ii];
-      }
-      for (size_t ii=s; ii<n; ii++)
-      {
-        RegalAssertArrayIndex( drawBuffers, ii );
+      for (int ii=n; ii<REGAL_MAX_DRAW_BUFFERS; ii++)
         drawBuffers[ii] = GL_NONE;
-      }
     }
   }
 
@@ -3005,7 +2712,7 @@ struct PixelMode
     , zoomY(1)
     , valid(false)
   {
-    for (size_t ii=0; ii<4; ii++)
+    for (int ii=0; ii<4; ii++)
     {
       colorTableScale[0][ii] = 1.0f;
       colorTableScale[1][ii] = 1.0f;
@@ -3345,7 +3052,7 @@ struct PixelMode
         return;
     }
     RegalAssert(p);
-    for (size_t ii=0; ii<4; ii++)
+    for (int ii=0; ii<4; ii++)
       p[ii] = static_cast<GLfloat>(params[ii]);
   }
 
@@ -3403,7 +3110,7 @@ struct PixelMode
         return;
     }
     RegalAssert(p);
-    for (size_t ii=0; ii<4; ii++)
+    for (int ii=0; ii<4; ii++)
       p[ii] = static_cast<GLfloat>(params[ii]);
   }
 
@@ -3753,13 +3460,6 @@ struct Lighting
     lightModelAmbient[2] = 0.2f;
     lightModelAmbient[3] = 1.0f;
 
-    size_t n = array_size( lights );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( lights, ii );
-      lights[ii] = LightingLight();
-    }
-
     lights[0].diffuse[0] = 1.0f;
     lights[0].diffuse[1] = 1.0f;
     lights[0].diffuse[2] = 1.0f;
@@ -3784,12 +3484,8 @@ struct Lighting
     std::swap(lightModelLocalViewer,other.lightModelLocalViewer);
     std::swap(lightModelTwoSide,other.lightModelTwoSide);
     std::swap(lightModelColorControl,other.lightModelColorControl);
-    size_t n = array_size( lights );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( lights, ii );
+    for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
       lights[ii].swap(other.lights[ii]);
-    }
     return *this;
   }
 
@@ -3808,12 +3504,8 @@ struct Lighting
     dt.call(&dt.glGetBooleanv)(GL_LIGHT_MODEL_LOCAL_VIEWER,&lightModelLocalViewer);
     dt.call(&dt.glGetBooleanv)(GL_LIGHT_MODEL_TWO_SIDE,&lightModelTwoSide);
     dt.call(&dt.glGetIntegerv)(GL_LIGHT_MODEL_COLOR_CONTROL,reinterpret_cast<GLint *>(&lightModelColorControl));
-    size_t n = array_size( lights );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( lights, ii );
+    for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
       lights[ii].get(dt,static_cast<GLenum>(GL_LIGHT0+ii));
-    }
     return *this;
   }
 
@@ -3831,12 +3523,8 @@ struct Lighting
     dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_LOCAL_VIEWER,lightModelLocalViewer);
     dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_TWO_SIDE,lightModelTwoSide);
     dt.call(&dt.glLightModeli)(GL_LIGHT_MODEL_COLOR_CONTROL,lightModelColorControl);
-    size_t n = array_size( lights );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( lights, ii );
+    for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
       lights[ii].set(dt,static_cast<GLenum>(GL_LIGHT0+ii));
-    }
     return *this;
   }
 
@@ -3857,12 +3545,8 @@ struct Lighting
     tmp << print_string("glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,",lightModelLocalViewer,");",delim);
     tmp << print_string("glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,",lightModelTwoSide,");",delim);
     tmp << print_string("glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL,",Token::toString(lightModelColorControl),");",delim);
-    size_t n = array_size( lights );
-    for (size_t ii=0; ii<n; ii++)
-    {
-      RegalAssertArrayIndex( lights, ii );
+    for (GLuint ii=0; ii<REGAL_FIXED_FUNCTION_MAX_LIGHTS; ii++)
       lights[ii].toString(tmp,static_cast<GLenum>(GL_LIGHT0+ii),delim);
-    }
     return tmp;
   }
 
@@ -3876,13 +3560,10 @@ struct Lighting
   {
     GLint ii = static_cast<int>(light-GL_LIGHT0);
 
-    size_t n = array_size( lights );
-
-    if (ii < 0 || static_cast<size_t>(ii) >= n)
+    if (ii < 0 || ii >= REGAL_FIXED_FUNCTION_MAX_LIGHTS)
       return;
 
-    RegalAssertArrayIndex( lights, ii );
-    LightingLight &ll = lights[ii];
+    LightingLight &ll = State::Lighting::lights[ii];
 
     switch (pname)
     {
@@ -3908,15 +3589,12 @@ struct Lighting
 
   template <typename T> void glLightv( GLenum light, GLenum pname, const T *params )
   {
-    size_t ii = static_cast<size_t>(light-GL_LIGHT0);
+    GLint ii = static_cast<int>(light-GL_LIGHT0);
 
-    size_t n = array_size( lights );
-
-    if (light < GL_LIGHT0 || ii >= n)
+    if (ii < 0 || ii >= REGAL_FIXED_FUNCTION_MAX_LIGHTS)
       return;
 
-    RegalAssertArrayIndex( lights, ii );
-    LightingLight &ll = lights[ii];
+    LightingLight &ll = State::Lighting::lights[ii];
 
     GLfloat *p = NULL;
     switch (pname)
@@ -3941,7 +3619,7 @@ struct Lighting
     }
 
     GLuint stop = (pname == GL_SPOT_DIRECTION) ? 3 : 4;
-    for (ii=0; ii<stop; ii++)
+    for (GLuint ii=0; ii<stop; ii++)
       p[ii] = static_cast<GLfloat>(params[ii]);
   }
 
@@ -3981,13 +3659,13 @@ struct Lighting
       switch (face)
       {
         case GL_FRONT:
-          front.shininess = static_cast<GLboolean>(param);
+          State::Lighting::front.shininess = static_cast<GLboolean>(param);
           break;
         case GL_BACK:
-          back.shininess  = static_cast<GLboolean>(param);
+          State::Lighting::back.shininess  = static_cast<GLboolean>(param);
           break;
         case GL_FRONT_AND_BACK:
-          front.shininess = back.shininess = static_cast<GLboolean>(param);
+          State::Lighting::front.shininess = State::Lighting::back.shininess = static_cast<GLboolean>(param);
           break;
         default:
           break;
@@ -4015,7 +3693,7 @@ struct Lighting
         return;
     }
 
-    for (size_t ii=0; ii<2; ii++)
+    for (GLuint ii=0; ii<2; ii++)
     {
       if (f[ii])
       {
@@ -4052,7 +3730,7 @@ struct Lighting
         }
 
         if (p)
-          for (size_t jj=0; jj<n; jj++)
+          for (GLuint jj=0; jj<n; jj++)
             p[jj] = static_cast<GLfloat>(params[jj]);
       }
     }
