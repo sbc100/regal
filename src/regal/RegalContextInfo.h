@@ -825,8 +825,32 @@ struct ContextInfo
   GLboolean egl_nv_system_time : 1;
 #endif
 
-  GLuint maxVertexAttribs;
-  GLuint maxVaryings;
+  // Implementation dependent values
+
+  GLuint gl_max_attrib_stack_depth;
+  GLuint gl_max_client_attrib_stack_depth;
+  GLuint gl_max_combined_texture_image_units;
+  GLuint gl_max_draw_buffers;
+  GLuint gl_max_texture_coords;
+  GLuint gl_max_texture_units;
+  GLuint gl_max_vertex_attrib_bindings;
+  GLuint gl_max_vertex_attribs;
+  GLuint gl_max_viewports;
+
+  // Max values currently being used
+
+  GLuint max_attrib_stack_depth;
+  GLuint max_client_attrib_stack_depth;
+  GLuint max_combined_texture_image_units;
+  GLuint max_draw_buffers;
+  GLuint max_texture_coords;
+  GLuint max_texture_units;
+  GLuint max_vertex_attrib_bindings;
+  GLuint max_vertex_attribs;
+  GLuint max_viewports;
+
+  GLuint gl_max_varying_floats;
+
 };
 
 REGAL_NAMESPACE_END

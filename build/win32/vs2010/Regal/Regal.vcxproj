@@ -274,6 +274,7 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalDispatcherGlobal.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDllMain.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalDsa.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalEmu.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalEmu.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalEnum.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalFavicon.cpp" />

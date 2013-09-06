@@ -420,8 +420,8 @@ namespace Emu {
         case GL_MAX_PIXEL_MAP_TABLE:           retVal = 256;  break;
         case GL_MAX_NAME_STACK_DEPTH:          retVal = 128;  break;
         case GL_MAX_LIST_NESTING:              retVal = 64;   break;
-        case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
-        case GL_MAX_ATTRIB_STACK_DEPTH:        retVal = 16;   break;
+        case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH: retVal = ctx.info->max_client_attrib_stack_depth;   break;
+        case GL_MAX_ATTRIB_STACK_DEPTH:        retVal = ctx.info->max_attrib_stack_depth;          break;
 
         case GL_DEPTH_BITS:                    retVal = 24;   break;
 
