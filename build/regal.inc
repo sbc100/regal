@@ -12,6 +12,7 @@ REGAL.CXX += src/regal/RegalLog.cpp
 REGAL.CXX += src/regal/RegalInit.cpp
 REGAL.CXX += src/regal/RegalBreak.cpp
 REGAL.CXX += src/regal/RegalUtil.cpp
+REGAL.CXX += src/regal/RegalEmu.cpp
 REGAL.CXX += src/regal/RegalFrame.cpp
 REGAL.CXX += src/regal/RegalHelper.cpp
 REGAL.CXX += src/regal/RegalMarker.cpp
