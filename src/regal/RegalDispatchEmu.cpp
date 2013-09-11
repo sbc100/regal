@@ -28585,46 +28585,21 @@ static void REGAL_CALL emu_glVertexAttrib1d(GLuint index, GLdouble x)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, x );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1d)(index, x);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1d)(index, x);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1dv(GLuint index, const GLdouble *v)
@@ -28647,46 +28622,21 @@ static void REGAL_CALL emu_glVertexAttrib1dv(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1dv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1dv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1f(GLuint index, GLfloat x)
@@ -28709,46 +28659,21 @@ static void REGAL_CALL emu_glVertexAttrib1f(GLuint index, GLfloat x)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, x );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1f)(index, x);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1f)(index, x);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1fv(GLuint index, const GLfloat *v)
@@ -28771,46 +28696,21 @@ static void REGAL_CALL emu_glVertexAttrib1fv(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1fv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1fv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1s(GLuint index, GLshort x)
@@ -28833,46 +28733,21 @@ static void REGAL_CALL emu_glVertexAttrib1s(GLuint index, GLshort x)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, x );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1s)(index, x);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1s)(index, x);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1sv(GLuint index, const GLshort *v)
@@ -28895,46 +28770,21 @@ static void REGAL_CALL emu_glVertexAttrib1sv(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1sv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1sv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2d(GLuint index, GLdouble x, GLdouble y)
@@ -28957,46 +28807,21 @@ static void REGAL_CALL emu_glVertexAttrib2d(GLuint index, GLdouble x, GLdouble y
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, x, y );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2d)(index, x, y);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2d)(index, x, y);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2dv(GLuint index, const GLdouble *v)
@@ -29019,46 +28844,21 @@ static void REGAL_CALL emu_glVertexAttrib2dv(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2dv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2dv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y)
@@ -29081,46 +28881,21 @@ static void REGAL_CALL emu_glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, x, y );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2f)(index, x, y);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2f)(index, x, y);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2fv(GLuint index, const GLfloat *v)
@@ -29143,46 +28918,21 @@ static void REGAL_CALL emu_glVertexAttrib2fv(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2fv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2fv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2s(GLuint index, GLshort x, GLshort y)
@@ -29205,46 +28955,21 @@ static void REGAL_CALL emu_glVertexAttrib2s(GLuint index, GLshort x, GLshort y)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, x, y );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2s)(index, x, y);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2s)(index, x, y);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2sv(GLuint index, const GLshort *v)
@@ -29267,46 +28992,21 @@ static void REGAL_CALL emu_glVertexAttrib2sv(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2sv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2sv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3d(GLuint index, GLdouble x, GLdouble y, GLdouble z)
@@ -29329,46 +29029,21 @@ static void REGAL_CALL emu_glVertexAttrib3d(GLuint index, GLdouble x, GLdouble y
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, x, y, z );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3d)(index, x, y, z);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3d)(index, x, y, z);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3dv(GLuint index, const GLdouble *v)
@@ -29391,46 +29066,21 @@ static void REGAL_CALL emu_glVertexAttrib3dv(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3dv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3dv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLfloat z)
@@ -29453,46 +29103,21 @@ static void REGAL_CALL emu_glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, x, y, z );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3f)(index, x, y, z);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3f)(index, x, y, z);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3fv(GLuint index, const GLfloat *v)
@@ -29515,46 +29140,21 @@ static void REGAL_CALL emu_glVertexAttrib3fv(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3fv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3fv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3s(GLuint index, GLshort x, GLshort y, GLshort z)
@@ -29577,46 +29177,21 @@ static void REGAL_CALL emu_glVertexAttrib3s(GLuint index, GLshort x, GLshort y, 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, x, y, z );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3s)(index, x, y, z);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3s)(index, x, y, z);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3sv(GLuint index, const GLshort *v)
@@ -29639,46 +29214,21 @@ static void REGAL_CALL emu_glVertexAttrib3sv(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3sv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3sv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4Nbv(GLuint index, const GLbyte *v)
@@ -29701,46 +29251,21 @@ static void REGAL_CALL emu_glVertexAttrib4Nbv(GLuint index, const GLbyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4Nbv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4Nbv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4Niv(GLuint index, const GLint *v)
@@ -29763,46 +29288,21 @@ static void REGAL_CALL emu_glVertexAttrib4Niv(GLuint index, const GLint *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4Niv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4Niv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4Nsv(GLuint index, const GLshort *v)
@@ -29825,46 +29325,21 @@ static void REGAL_CALL emu_glVertexAttrib4Nsv(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4Nsv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4Nsv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4Nub(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
@@ -29887,46 +29362,21 @@ static void REGAL_CALL emu_glVertexAttrib4Nub(GLuint index, GLubyte x, GLubyte y
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4Nub)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4Nub)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4Nubv(GLuint index, const GLubyte *v)
@@ -29949,46 +29399,21 @@ static void REGAL_CALL emu_glVertexAttrib4Nubv(GLuint index, const GLubyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4Nubv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4Nubv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4Nusv(GLuint index, const GLushort *v)
@@ -30011,46 +29436,21 @@ static void REGAL_CALL emu_glVertexAttrib4Nusv(GLuint index, const GLushort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4Nusv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4Nusv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4bv(GLuint index, const GLbyte *v)
@@ -30073,46 +29473,21 @@ static void REGAL_CALL emu_glVertexAttrib4bv(GLuint index, const GLbyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4bv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4bv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
@@ -30135,46 +29510,21 @@ static void REGAL_CALL emu_glVertexAttrib4d(GLuint index, GLdouble x, GLdouble y
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4d)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4d)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4dv(GLuint index, const GLdouble *v)
@@ -30197,46 +29547,21 @@ static void REGAL_CALL emu_glVertexAttrib4dv(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4dv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4dv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
@@ -30259,46 +29584,21 @@ static void REGAL_CALL emu_glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4f)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4f)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4fv(GLuint index, const GLfloat *v)
@@ -30321,46 +29621,21 @@ static void REGAL_CALL emu_glVertexAttrib4fv(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4fv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4fv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4iv(GLuint index, const GLint *v)
@@ -30383,46 +29658,21 @@ static void REGAL_CALL emu_glVertexAttrib4iv(GLuint index, const GLint *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4iv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4iv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4s(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
@@ -30445,46 +29695,21 @@ static void REGAL_CALL emu_glVertexAttrib4s(GLuint index, GLshort x, GLshort y, 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4s)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4s)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4sv(GLuint index, const GLshort *v)
@@ -30507,46 +29732,21 @@ static void REGAL_CALL emu_glVertexAttrib4sv(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4sv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4sv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4ubv(GLuint index, const GLubyte *v)
@@ -30569,46 +29769,21 @@ static void REGAL_CALL emu_glVertexAttrib4ubv(GLuint index, const GLubyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4ubv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4ubv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4usv(GLuint index, const GLushort *v)
@@ -30631,46 +29806,21 @@ static void REGAL_CALL emu_glVertexAttrib4usv(GLuint index, const GLushort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4usv)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4usv)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
@@ -43933,46 +43083,21 @@ static void REGAL_CALL emu_glVertexAttrib1dARB(GLuint index, GLdouble x)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, x );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1dARB)(index, x);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1dARB)(index, x);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1dvARB(GLuint index, const GLdouble *v)
@@ -43995,46 +43120,21 @@ static void REGAL_CALL emu_glVertexAttrib1dvARB(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1dvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1dvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1fARB(GLuint index, GLfloat x)
@@ -44057,46 +43157,21 @@ static void REGAL_CALL emu_glVertexAttrib1fARB(GLuint index, GLfloat x)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, x );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1fARB)(index, x);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1fARB)(index, x);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1fvARB(GLuint index, const GLfloat *v)
@@ -44119,46 +43194,21 @@ static void REGAL_CALL emu_glVertexAttrib1fvARB(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1fvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1fvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1sARB(GLuint index, GLshort x)
@@ -44181,46 +43231,21 @@ static void REGAL_CALL emu_glVertexAttrib1sARB(GLuint index, GLshort x)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, x );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1sARB)(index, x);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1sARB)(index, x);
 }
 
 static void REGAL_CALL emu_glVertexAttrib1svARB(GLuint index, const GLshort *v)
@@ -44243,46 +43268,21 @@ static void REGAL_CALL emu_glVertexAttrib1svARB(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<1>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib1svARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib1svARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y)
@@ -44305,46 +43305,21 @@ static void REGAL_CALL emu_glVertexAttrib2dARB(GLuint index, GLdouble x, GLdoubl
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, x, y );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2dARB)(index, x, y);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2dARB)(index, x, y);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2dvARB(GLuint index, const GLdouble *v)
@@ -44367,46 +43342,21 @@ static void REGAL_CALL emu_glVertexAttrib2dvARB(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2dvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2dvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y)
@@ -44429,46 +43379,21 @@ static void REGAL_CALL emu_glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, x, y );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2fARB)(index, x, y);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2fARB)(index, x, y);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2fvARB(GLuint index, const GLfloat *v)
@@ -44491,46 +43416,21 @@ static void REGAL_CALL emu_glVertexAttrib2fvARB(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2fvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2fvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y)
@@ -44553,46 +43453,21 @@ static void REGAL_CALL emu_glVertexAttrib2sARB(GLuint index, GLshort x, GLshort 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, x, y );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2sARB)(index, x, y);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2sARB)(index, x, y);
 }
 
 static void REGAL_CALL emu_glVertexAttrib2svARB(GLuint index, const GLshort *v)
@@ -44615,46 +43490,21 @@ static void REGAL_CALL emu_glVertexAttrib2svARB(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<2>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib2svARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib2svARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z)
@@ -44677,46 +43527,21 @@ static void REGAL_CALL emu_glVertexAttrib3dARB(GLuint index, GLdouble x, GLdoubl
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, x, y, z );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3dARB)(index, x, y, z);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3dARB)(index, x, y, z);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3dvARB(GLuint index, const GLdouble *v)
@@ -44739,46 +43564,21 @@ static void REGAL_CALL emu_glVertexAttrib3dvARB(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3dvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3dvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z)
@@ -44801,46 +43601,21 @@ static void REGAL_CALL emu_glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, x, y, z );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3fARB)(index, x, y, z);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3fARB)(index, x, y, z);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3fvARB(GLuint index, const GLfloat *v)
@@ -44863,46 +43638,21 @@ static void REGAL_CALL emu_glVertexAttrib3fvARB(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3fvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3fvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z)
@@ -44925,46 +43675,21 @@ static void REGAL_CALL emu_glVertexAttrib3sARB(GLuint index, GLshort x, GLshort 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, x, y, z );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3sARB)(index, x, y, z);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3sARB)(index, x, y, z);
 }
 
 static void REGAL_CALL emu_glVertexAttrib3svARB(GLuint index, const GLshort *v)
@@ -44987,46 +43712,21 @@ static void REGAL_CALL emu_glVertexAttrib3svARB(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<3>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib3svARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib3svARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4NbvARB(GLuint index, const GLbyte *v)
@@ -45049,46 +43749,21 @@ static void REGAL_CALL emu_glVertexAttrib4NbvARB(GLuint index, const GLbyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4NbvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4NbvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4NivARB(GLuint index, const GLint *v)
@@ -45111,46 +43786,21 @@ static void REGAL_CALL emu_glVertexAttrib4NivARB(GLuint index, const GLint *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4NivARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4NivARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4NsvARB(GLuint index, const GLshort *v)
@@ -45173,46 +43823,21 @@ static void REGAL_CALL emu_glVertexAttrib4NsvARB(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4NsvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4NsvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)
@@ -45235,46 +43860,21 @@ static void REGAL_CALL emu_glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyt
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4NubARB)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4NubARB)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4NubvARB(GLuint index, const GLubyte *v)
@@ -45297,46 +43897,21 @@ static void REGAL_CALL emu_glVertexAttrib4NubvARB(GLuint index, const GLubyte *v
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4NubvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4NubvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4NusvARB(GLuint index, const GLushort *v)
@@ -45359,46 +43934,21 @@ static void REGAL_CALL emu_glVertexAttrib4NusvARB(GLuint index, const GLushort *
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->AttrN<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4NusvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4NusvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4bvARB(GLuint index, const GLbyte *v)
@@ -45421,46 +43971,21 @@ static void REGAL_CALL emu_glVertexAttrib4bvARB(GLuint index, const GLbyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4bvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4bvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
@@ -45483,46 +44008,21 @@ static void REGAL_CALL emu_glVertexAttrib4dARB(GLuint index, GLdouble x, GLdoubl
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4dARB)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4dARB)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4dvARB(GLuint index, const GLdouble *v)
@@ -45545,46 +44045,21 @@ static void REGAL_CALL emu_glVertexAttrib4dvARB(GLuint index, const GLdouble *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4dvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4dvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w)
@@ -45607,46 +44082,21 @@ static void REGAL_CALL emu_glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4fARB)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4fARB)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4fvARB(GLuint index, const GLfloat *v)
@@ -45669,46 +44119,21 @@ static void REGAL_CALL emu_glVertexAttrib4fvARB(GLuint index, const GLfloat *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4fvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4fvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4ivARB(GLuint index, const GLint *v)
@@ -45731,46 +44156,21 @@ static void REGAL_CALL emu_glVertexAttrib4ivARB(GLuint index, const GLint *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4ivARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4ivARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w)
@@ -45793,46 +44193,21 @@ static void REGAL_CALL emu_glVertexAttrib4sARB(GLuint index, GLshort x, GLshort 
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, x, y, z, w );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4sARB)(index, x, y, z, w);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4sARB)(index, x, y, z, w);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4svARB(GLuint index, const GLshort *v)
@@ -45855,46 +44230,21 @@ static void REGAL_CALL emu_glVertexAttrib4svARB(GLuint index, const GLshort *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4svARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4svARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4ubvARB(GLuint index, const GLubyte *v)
@@ -45917,46 +44267,21 @@ static void REGAL_CALL emu_glVertexAttrib4ubvARB(GLuint index, const GLubyte *v)
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4ubvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4ubvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttrib4usvARB(GLuint index, const GLushort *v)
@@ -45979,46 +44304,21 @@ static void REGAL_CALL emu_glVertexAttrib4usvARB(GLuint index, const GLushort *v
     case 7 :
     case 6 :
       #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  // impl
-  switch( _context->emuLevel )
-  {
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-      #if REGAL_EMU_IFF
       if (_context->iff)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 5;
         _context->iff->Attr<4>( _context, index, v );
-        return;
       }
       #endif
     case 1 :
     default:
-    {
-      DispatchTableGL *_next = _dispatch.next();
-      RegalAssert(_next);
-      _next->call(&_next->glVertexAttrib4usvARB)(index, v);
       break;
-    }
-
   }
 
+  DispatchTableGL *_next = _dispatch.next();
+  RegalAssert(_next);
+  _next->call(& _next->glVertexAttrib4usvARB)(index, v);
 }
 
 static void REGAL_CALL emu_glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer)
