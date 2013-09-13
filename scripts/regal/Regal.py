@@ -763,6 +763,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPrivate.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
+#include "RegalEmuInfo.h"
 #include "RegalCacheShader.h"
 #include "RegalCacheTexture.h"
 #include "RegalScopedPtr.h"

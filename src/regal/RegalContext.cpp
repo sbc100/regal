@@ -46,6 +46,7 @@ REGAL_GLOBAL_BEGIN
 
 #include "RegalConfig.h"
 #include "RegalContext.h"
+#include "RegalEmuInfo.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
 #include "RegalStatistics.h"
@@ -157,6 +158,13 @@ RegalContext::Init()
     info = new ContextInfo();
     RegalAssert(info);
     info->init(*this);
+  }
+
+  if (!emuInfo)
+  {
+    emuInfo = new EmuInfo();
+    RegalAssert(emuInfo);
+    emuInfo->init(*info);
   }
 
   if (!marker)
@@ -271,80 +279,80 @@ RegalContext::Init()
     #if REGAL_EMU_FILTER
     if (enableEmuFilt || forceEmuFilt)
     {
+      Info("Activating emulation layer REGAL_EMU_FILTER");
       if (!info->gl_arb_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
       {
-        Internal("RegalContext::Init ","GL_ARB_draw_buffers");
-        info->regal_arb_draw_buffers = true;
-        info->regalExtensionsSet.insert("GL_ARB_draw_buffers");
+        Info("Activating ARB_draw_buffers emulation.");
+        emuInfo->gl_arb_draw_buffers = true;
+        emuInfo->extensionsSet.insert("GL_ARB_draw_buffers");
       }
       if (!info->gl_arb_multitexture)
       {
-        Internal("RegalContext::Init ","GL_ARB_multitexture");
-        info->regal_arb_multitexture = true;
-        info->regalExtensionsSet.insert("GL_ARB_multitexture");
+        Info("Activating ARB_multitexture emulation.");
+        emuInfo->gl_arb_multitexture = true;
+        emuInfo->extensionsSet.insert("GL_ARB_multitexture");
       }
       if (!info->gl_arb_texture_cube_map)
       {
-        Internal("RegalContext::Init ","GL_ARB_texture_cube_map");
-        info->regal_arb_texture_cube_map = true;
-        info->regalExtensionsSet.insert("GL_ARB_texture_cube_map");
+        Info("Activating ARB_texture_cube_map emulation.");
+        emuInfo->gl_arb_texture_cube_map = true;
+        emuInfo->extensionsSet.insert("GL_ARB_texture_cube_map");
       }
       if (!info->gl_ati_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
       {
-        Internal("RegalContext::Init ","GL_ATI_draw_buffers");
-        info->regal_ati_draw_buffers = true;
-        info->regalExtensionsSet.insert("GL_ATI_draw_buffers");
+        Info("Activating ATI_draw_buffers emulation.");
+        emuInfo->gl_ati_draw_buffers = true;
+        emuInfo->extensionsSet.insert("GL_ATI_draw_buffers");
       }
       if (!info->gl_ext_blend_color)
       {
-        Internal("RegalContext::Init ","GL_EXT_blend_color");
-        info->regal_ext_blend_color = true;
-        info->regalExtensionsSet.insert("GL_EXT_blend_color");
+        Info("Activating EXT_blend_color emulation.");
+        emuInfo->gl_ext_blend_color = true;
+        emuInfo->extensionsSet.insert("GL_EXT_blend_color");
       }
       if (!info->gl_ext_blend_subtract)
       {
-        Internal("RegalContext::Init ","GL_EXT_blend_subtract");
-        info->regal_ext_blend_subtract = true;
-        info->regalExtensionsSet.insert("GL_EXT_blend_subtract");
+        Info("Activating EXT_blend_subtract emulation.");
+        emuInfo->gl_ext_blend_subtract = true;
+        emuInfo->extensionsSet.insert("GL_EXT_blend_subtract");
       }
       if (!info->gl_ext_framebuffer_blit && ((info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit))
       {
-        Internal("RegalContext::Init ","GL_EXT_framebuffer_blit");
-        info->regal_ext_framebuffer_blit = true;
-        info->regalExtensionsSet.insert("GL_EXT_framebuffer_blit");
+        Info("Activating EXT_framebuffer_blit emulation.");
+        emuInfo->gl_ext_framebuffer_blit = true;
+        emuInfo->extensionsSet.insert("GL_EXT_framebuffer_blit");
       }
       if (!info->gl_ext_framebuffer_object)
       {
-        Internal("RegalContext::Init ","GL_EXT_framebuffer_object");
-        info->regal_ext_framebuffer_object = true;
-        info->regalExtensionsSet.insert("GL_EXT_framebuffer_object");
+        Info("Activating EXT_framebuffer_object emulation.");
+        emuInfo->gl_ext_framebuffer_object = true;
+        emuInfo->extensionsSet.insert("GL_EXT_framebuffer_object");
       }
       if (!info->gl_ext_texture_cube_map)
       {
-        Internal("RegalContext::Init ","GL_EXT_texture_cube_map");
-        info->regal_ext_texture_cube_map = true;
-        info->regalExtensionsSet.insert("GL_EXT_texture_cube_map");
+        Info("Activating EXT_texture_cube_map emulation.");
+        emuInfo->gl_ext_texture_cube_map = true;
+        emuInfo->extensionsSet.insert("GL_EXT_texture_cube_map");
       }
       if (!info->gl_ext_texture_edge_clamp)
       {
-        Internal("RegalContext::Init ","GL_EXT_texture_edge_clamp");
-        info->regal_ext_texture_edge_clamp = true;
-        info->regalExtensionsSet.insert("GL_EXT_texture_edge_clamp");
+        Info("Activating EXT_texture_edge_clamp emulation.");
+        emuInfo->gl_ext_texture_edge_clamp = true;
+        emuInfo->extensionsSet.insert("GL_EXT_texture_edge_clamp");
       }
       if (!info->gl_ibm_texture_mirrored_repeat)
       {
-        Internal("RegalContext::Init ","GL_IBM_texture_mirrored_repeat");
-        info->regal_ibm_texture_mirrored_repeat = true;
-        info->regalExtensionsSet.insert("GL_IBM_texture_mirrored_repeat");
+        Info("Activating IBM_texture_mirrored_repeat emulation.");
+        emuInfo->gl_ibm_texture_mirrored_repeat = true;
+        emuInfo->extensionsSet.insert("GL_IBM_texture_mirrored_repeat");
       }
       if (!info->gl_nv_blend_square)
       {
-        Internal("RegalContext::Init ","GL_NV_blend_square");
-        info->regal_nv_blend_square = true;
-        info->regalExtensionsSet.insert("GL_NV_blend_square");
+        Info("Activating NV_blend_square emulation.");
+        emuInfo->gl_nv_blend_square = true;
+        emuInfo->extensionsSet.insert("GL_NV_blend_square");
       }
-      info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
-      Info("Activating emulation layer REGAL_EMU_FILTER");
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       filt = new Emu::Filt;
       emuLevel = 0;
       filt->Init(*this);
@@ -363,6 +371,13 @@ RegalContext::Init()
     if (enableEmuVao || forceEmuVao)
     {
       Info("Activating emulation layer REGAL_EMU_VAO");
+      if (!info->gl_arb_vertex_array_object)
+      {
+        Info("Activating ARB_vertex_array_object emulation.");
+        emuInfo->gl_arb_vertex_array_object = true;
+        emuInfo->extensionsSet.insert("GL_ARB_vertex_array_object");
+      }
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       vao = new Emu::Vao;
       emuLevel = 2;
       vao->Init(*this);
@@ -371,14 +386,14 @@ RegalContext::Init()
     #if REGAL_EMU_DSA
     if (enableEmuDsa || forceEmuDsa)
     {
+      Info("Activating emulation layer REGAL_EMU_DSA");
       if (!info->gl_ext_direct_state_access)
       {
-        Internal("RegalContext::Init ","GL_EXT_direct_state_access");
-        info->regal_ext_direct_state_access = true;
-        info->regalExtensionsSet.insert("GL_EXT_direct_state_access");
+        Info("Activating EXT_direct_state_access emulation.");
+        emuInfo->gl_ext_direct_state_access = true;
+        emuInfo->extensionsSet.insert("GL_EXT_direct_state_access");
       }
-      info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
-      Info("Activating emulation layer REGAL_EMU_DSA");
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       dsa = new Emu::Dsa;
       emuLevel = 3;
       dsa->Init(*this);
@@ -388,6 +403,13 @@ RegalContext::Init()
     if (enableEmuSo || forceEmuSo)
     {
       Info("Activating emulation layer REGAL_EMU_SO");
+      if (!info->gl_arb_sampler_objects)
+      {
+        Info("Activating ARB_sampler_objects emulation.");
+        emuInfo->gl_arb_sampler_objects = true;
+        emuInfo->extensionsSet.insert("GL_ARB_sampler_objects");
+      }
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       so = new Emu::So;
       emuLevel = 4;
       so->Init(*this);
@@ -396,32 +418,32 @@ RegalContext::Init()
     #if REGAL_EMU_IFF
     if (enableEmuIff || forceEmuIff)
     {
+      Info("Activating emulation layer REGAL_EMU_IFF");
       if (!info->gl_arb_texture_env_combine)
       {
-        Internal("RegalContext::Init ","GL_ARB_texture_env_combine");
-        info->regal_arb_texture_env_combine = true;
-        info->regalExtensionsSet.insert("GL_ARB_texture_env_combine");
+        Info("Activating ARB_texture_env_combine emulation.");
+        emuInfo->gl_arb_texture_env_combine = true;
+        emuInfo->extensionsSet.insert("GL_ARB_texture_env_combine");
       }
       if (!info->gl_arb_texture_env_dot3)
       {
-        Internal("RegalContext::Init ","GL_ARB_texture_env_dot3");
-        info->regal_arb_texture_env_dot3 = true;
-        info->regalExtensionsSet.insert("GL_ARB_texture_env_dot3");
+        Info("Activating ARB_texture_env_dot3 emulation.");
+        emuInfo->gl_arb_texture_env_dot3 = true;
+        emuInfo->extensionsSet.insert("GL_ARB_texture_env_dot3");
       }
       if (!info->gl_ext_texture_env_combine)
       {
-        Internal("RegalContext::Init ","GL_EXT_texture_env_combine");
-        info->regal_ext_texture_env_combine = true;
-        info->regalExtensionsSet.insert("GL_EXT_texture_env_combine");
+        Info("Activating EXT_texture_env_combine emulation.");
+        emuInfo->gl_ext_texture_env_combine = true;
+        emuInfo->extensionsSet.insert("GL_EXT_texture_env_combine");
       }
       if (!info->gl_ext_texture_env_dot3)
       {
-        Internal("RegalContext::Init ","GL_EXT_texture_env_dot3");
-        info->regal_ext_texture_env_dot3 = true;
-        info->regalExtensionsSet.insert("GL_EXT_texture_env_dot3");
+        Info("Activating EXT_texture_env_dot3 emulation.");
+        emuInfo->gl_ext_texture_env_dot3 = true;
+        emuInfo->extensionsSet.insert("GL_EXT_texture_env_dot3");
       }
-      info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
-      Info("Activating emulation layer REGAL_EMU_IFF");
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       iff = new Emu::Iff;
       emuLevel = 5;
       iff->Init(*this);
@@ -440,6 +462,13 @@ RegalContext::Init()
     if (enableEmuBv || forceEmuBv)
     {
       Info("Activating emulation layer REGAL_EMU_BASEVERTEX");
+      if (!info->gl_arb_draw_elements_base_vertex)
+      {
+        Info("Activating ARB_draw_elements_base_vertex emulation.");
+        emuInfo->gl_arb_draw_elements_base_vertex = true;
+        emuInfo->extensionsSet.insert("GL_ARB_draw_elements_base_vertex");
+      }
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       bv = new Emu::BaseVertex;
       emuLevel = 7;
       bv->Init(*this);
@@ -448,14 +477,14 @@ RegalContext::Init()
     #if REGAL_EMU_TEXSTO
     if (enableEmuTexsto || forceEmuTexsto)
     {
+      Info("Activating emulation layer REGAL_EMU_TEXSTO");
       if (!info->gl_arb_texture_storage)
       {
-        Internal("RegalContext::Init ","GL_ARB_texture_storage");
-        info->regal_arb_texture_storage = true;
-        info->regalExtensionsSet.insert("GL_ARB_texture_storage");
+        Info("Activating ARB_texture_storage emulation.");
+        emuInfo->gl_arb_texture_storage = true;
+        emuInfo->extensionsSet.insert("GL_ARB_texture_storage");
       }
-      info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));
-      Info("Activating emulation layer REGAL_EMU_TEXSTO");
+      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       texsto = new Emu::TexSto;
       emuLevel = 8;
       texsto->Init(*this);

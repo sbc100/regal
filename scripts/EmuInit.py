@@ -9,14 +9,15 @@
 # glXGetProcAddress is needed for Linux chromium
 # glXQueryExtension is needed for freeglut X11
 # glXGetProcAddressARB is needed for Linux Minecraft 1.6.1
+# wglCreateContext, wglGetCurrentContext, wglGetProcAddress for a start
 
 formulae = {
   'EmuInit' : {
     'entries' : [
       'CGLChoosePixelFormat', 'CGLGetCurrentContext',
       'eglGetDisplay', 'eglGetCurrentContext',
-      'glXGetProcAddress', 'glXQueryExtension', 'glXGetProcAddressARB'
- #     'glX.*'
+      'glXGetProcAddress', 'glXQueryExtension', 'glXGetProcAddressARB',
+      'wglCreateContext', 'wglGetCurrentContext', 'wglGetProcAddress'
     ],
     'prefix'  : [ 'Init::init();' ]
   }

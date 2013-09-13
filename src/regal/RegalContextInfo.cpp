@@ -634,25 +634,6 @@ ContextInfo::ContextInfo()
   gl_win_phong_shading(false),
   gl_win_specular_fog(false),
   gl_win_swap_hint(false),
-  regal_arb_draw_buffers(false),
-  regal_arb_multitexture(false),
-  regal_arb_texture_cube_map(false),
-  regal_arb_texture_env_combine(false),
-  regal_arb_texture_env_dot3(false),
-  regal_arb_texture_storage(false),
-  regal_ati_draw_buffers(false),
-  regal_ext_blend_color(false),
-  regal_ext_blend_subtract(false),
-  regal_ext_direct_state_access(false),
-  regal_ext_framebuffer_blit(false),
-  regal_ext_framebuffer_object(false),
-  regal_ext_texture_cube_map(false),
-  regal_ext_texture_edge_clamp(false),
-  regal_ext_texture_env_combine(false),
-  regal_ext_texture_env_dot3(false),
-  regal_ibm_texture_mirrored_repeat(false),
-  regal_nv_blend_square(false),
-  regal_nv_path_rendering(false),
 #if REGAL_SYS_WGL
   wgl_3dl_stereo_control(false),
   wgl_amd_gpu_association(false),
@@ -803,15 +784,6 @@ ContextInfo::ContextInfo()
   gl_max_vertex_attrib_bindings(0),
   gl_max_vertex_attribs(0),
   gl_max_viewports(0),
-  max_attrib_stack_depth(0),
-  max_client_attrib_stack_depth(0),
-  max_combined_texture_image_units(0),
-  max_draw_buffers(0),
-  max_texture_coords(0),
-  max_texture_units(0),
-  max_vertex_attrib_bindings(0),
-  max_vertex_attribs(0),
-  max_viewports(0),
   gl_max_varying_floats(0)
 
 {
@@ -979,77 +951,9 @@ ContextInfo::init(const RegalContext &context)
     driverExtensions.split(extensions,' ');
   }
 
-  regalExtensionsSet.insert(driverExtensions.begin(),driverExtensions.end());
+  extensionsSet.insert(driverExtensions.begin(),driverExtensions.end());
 
   Info("OpenGL extensions: ",extensions);
-
-  // TODO - filter out extensions Regal doesn't support?
-
-#ifdef REGAL_GL_VENDOR
-  regalVendor = REGAL_EQUOTE(REGAL_GL_VENDOR);
-#else
-  regalVendor = vendor;
-#endif
-
-#ifdef REGAL_GL_RENDERER
-  regalRenderer = REGAL_EQUOTE(REGAL_GL_RENDERER);
-#else
-  regalRenderer = renderer;
-#endif
-
-#ifdef REGAL_GL_VERSION
-  regalVersion = REGAL_EQUOTE(REGAL_GL_VERSION);
-#else
-  regalVersion = version;
-#endif
-
-#ifdef REGAL_GL_EXTENSIONS
-  {
-    string_list<string> extList;
-    extList.split(REGAL_EQUOTE(REGAL_GL_EXTENSIONS),' ');
-    regalExtensionsSet.clear();
-    regalExtensionsSet.insert(extList.begin(),extList.end());
-  }
-#else
-  static const char *ourExtensions[9] = {
-    "GL_REGAL_log",
-    "GL_REGAL_enable",
-    "GL_REGAL_error_string",
-    "GL_REGAL_extension_query",
-    "GL_REGAL_ES1_0_compatibility",
-    "GL_REGAL_ES1_1_compatibility",
-    "GL_EXT_debug_marker",
-    "GL_GREMEDY_string_marker",
-    "GL_GREMEDY_frame_terminator"
-  };
-  regalExtensionsSet.insert(&ourExtensions[0],&ourExtensions[9]);
-#endif
-
-#ifndef REGAL_NO_GETENV
-  {
-    getEnv("REGAL_GL_VENDOR",   regalVendor);
-    getEnv("REGAL_GL_RENDERER", regalRenderer);
-    getEnv("REGAL_GL_VERSION",  regalVersion);
-
-    const char *extensionsEnv = getEnv("REGAL_GL_EXTENSIONS");
-    if (extensionsEnv)
-    {
-      string_list<string> extList;
-      extList.split(extensionsEnv,' ');
-      regalExtensionsSet.clear();
-      regalExtensionsSet.insert(extList.begin(),extList.end());
-    }
-  }
-#endif
-
-  // Form Regal extension string from the set
-
-  regalExtensions = ::boost::print::detail::join(regalExtensionsSet,string(" "));
-
-  Info("Regal vendor     : ",regalVendor);
-  Info("Regal renderer   : ",regalRenderer);
-  Info("Regal version    : ",regalVersion);
-  Info("Regal extensions : ",regalExtensions);
 
   if (!es1 && !es2)
   {
@@ -1787,29 +1691,8 @@ ContextInfo::init(const RegalContext &context)
     context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&gl_max_varying_floats));
   }
 
-  max_attrib_stack_depth = std::min( gl_max_attrib_stack_depth, static_cast<GLuint>(REGAL_EMU_MAX_ATTRIB_STACK_DEPTH) );
-  max_client_attrib_stack_depth = std::min( gl_max_client_attrib_stack_depth, static_cast<GLuint>(REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH) );
-  max_combined_texture_image_units = std::min( gl_max_combined_texture_image_units, static_cast<GLuint>(REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS) );
-  max_draw_buffers = std::min( gl_max_draw_buffers, static_cast<GLuint>(REGAL_EMU_MAX_DRAW_BUFFERS) );
-  max_texture_coords = std::min( gl_max_texture_coords, static_cast<GLuint>(REGAL_EMU_MAX_TEXTURE_COORDS) );
-  max_texture_units = std::min( gl_max_texture_units, static_cast<GLuint>(REGAL_EMU_MAX_TEXTURE_UNITS) );
-  max_vertex_attribs = std::min( gl_max_vertex_attribs, static_cast<GLuint>(REGAL_EMU_MAX_VERTEX_ATTRIBS) );
-  max_vertex_attrib_bindings = std::min( gl_max_vertex_attrib_bindings, static_cast<GLuint>(REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS) );
-  max_viewports = std::min( gl_max_viewports, static_cast<GLuint>(REGAL_EMU_MAX_VIEWPORTS) );
-
   Info("OpenGL v attribs : ",gl_max_vertex_attribs);
   Info("OpenGL varyings  : ",gl_max_varying_floats);
-
-  if (gl_max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
-      gl_max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;
-
-  // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs (n*16 is used
-  // as the stride in RegalIFF).  WebGL (and Pepper) explicitly disallows stride > 255 as well.
-
-  if (vendor == "Qualcomm" || vendor == "Chromium" || webgl)
-    gl_max_vertex_attribs = 8;
-
-  Info("Regal  v attribs : ",gl_max_vertex_attribs);
 }
 
 bool
@@ -1890,7 +1773,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_depth_buffer_float")) return gl_arb_depth_buffer_float;
   if (!strcmp(ext,"GL_ARB_depth_clamp")) return gl_arb_depth_clamp;
   if (!strcmp(ext,"GL_ARB_depth_texture")) return gl_arb_depth_texture;
-  if (!strcmp(ext,"GL_ARB_draw_buffers")) return regal_arb_draw_buffers || gl_arb_draw_buffers;
+  if (!strcmp(ext,"GL_ARB_draw_buffers")) return gl_arb_draw_buffers;
   if (!strcmp(ext,"GL_ARB_draw_buffers_blend")) return gl_arb_draw_buffers_blend;
   if (!strcmp(ext,"GL_ARB_draw_elements_base_vertex")) return gl_arb_draw_elements_base_vertex;
   if (!strcmp(ext,"GL_ARB_draw_indirect")) return gl_arb_draw_indirect;
@@ -1920,7 +1803,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_multi_bind")) return gl_arb_multi_bind;
   if (!strcmp(ext,"GL_ARB_multi_draw_indirect")) return gl_arb_multi_draw_indirect;
   if (!strcmp(ext,"GL_ARB_multisample")) return gl_arb_multisample;
-  if (!strcmp(ext,"GL_ARB_multitexture")) return regal_arb_multitexture || gl_arb_multitexture;
+  if (!strcmp(ext,"GL_ARB_multitexture")) return gl_arb_multitexture;
   if (!strcmp(ext,"GL_ARB_occlusion_query")) return gl_arb_occlusion_query;
   if (!strcmp(ext,"GL_ARB_occlusion_query2")) return gl_arb_occlusion_query2;
   if (!strcmp(ext,"GL_ARB_pixel_buffer_object")) return gl_arb_pixel_buffer_object;
@@ -1953,10 +1836,10 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_texture_compression")) return gl_arb_texture_compression;
   if (!strcmp(ext,"GL_ARB_texture_compression_bptc")) return gl_arb_texture_compression_bptc;
   if (!strcmp(ext,"GL_ARB_texture_compression_rgtc")) return gl_arb_texture_compression_rgtc;
-  if (!strcmp(ext,"GL_ARB_texture_cube_map")) return regal_arb_texture_cube_map || gl_arb_texture_cube_map;
+  if (!strcmp(ext,"GL_ARB_texture_cube_map")) return gl_arb_texture_cube_map;
   if (!strcmp(ext,"GL_ARB_texture_cube_map_array")) return gl_arb_texture_cube_map_array;
-  if (!strcmp(ext,"GL_ARB_texture_env_combine")) return regal_arb_texture_env_combine || gl_arb_texture_env_combine;
-  if (!strcmp(ext,"GL_ARB_texture_env_dot3")) return regal_arb_texture_env_dot3 || gl_arb_texture_env_dot3;
+  if (!strcmp(ext,"GL_ARB_texture_env_combine")) return gl_arb_texture_env_combine;
+  if (!strcmp(ext,"GL_ARB_texture_env_dot3")) return gl_arb_texture_env_dot3;
   if (!strcmp(ext,"GL_ARB_texture_float")) return gl_arb_texture_float;
   if (!strcmp(ext,"GL_ARB_texture_gather")) return gl_arb_texture_gather;
   if (!strcmp(ext,"GL_ARB_texture_mirror_clamp_to_edge")) return gl_arb_texture_mirror_clamp_to_edge;
@@ -1965,7 +1848,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_texture_rectangle")) return gl_arb_texture_rectangle;
   if (!strcmp(ext,"GL_ARB_texture_rg")) return gl_arb_texture_rg;
   if (!strcmp(ext,"GL_ARB_texture_rgb10_a2ui")) return gl_arb_texture_rgb10_a2ui;
-  if (!strcmp(ext,"GL_ARB_texture_storage")) return regal_arb_texture_storage || gl_arb_texture_storage;
+  if (!strcmp(ext,"GL_ARB_texture_storage")) return gl_arb_texture_storage;
   if (!strcmp(ext,"GL_ARB_texture_storage_multisample")) return gl_arb_texture_storage_multisample;
   if (!strcmp(ext,"GL_ARB_texture_swizzle")) return gl_arb_texture_swizzle;
   if (!strcmp(ext,"GL_ARB_texture_view")) return gl_arb_texture_view;
@@ -1987,7 +1870,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_ARB_window_pos")) return gl_arb_window_pos;
   if (!strcmp(ext,"GL_ARM_mali_program_binary")) return gl_arm_mali_program_binary;
   if (!strcmp(ext,"GL_ARM_mali_shader_binary")) return gl_arm_mali_shader_binary;
-  if (!strcmp(ext,"GL_ATI_draw_buffers")) return regal_ati_draw_buffers || gl_ati_draw_buffers;
+  if (!strcmp(ext,"GL_ATI_draw_buffers")) return gl_ati_draw_buffers;
   if (!strcmp(ext,"GL_ATI_element_array")) return gl_ati_element_array;
   if (!strcmp(ext,"GL_ATI_envmap_bumpmap")) return gl_ati_envmap_bumpmap;
   if (!strcmp(ext,"GL_ATI_fragment_shader")) return gl_ati_fragment_shader;
@@ -2009,11 +1892,11 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_abgr")) return gl_ext_abgr;
   if (!strcmp(ext,"GL_EXT_bgra")) return gl_ext_bgra;
   if (!strcmp(ext,"GL_EXT_bindable_uniform")) return gl_ext_bindable_uniform;
-  if (!strcmp(ext,"GL_EXT_blend_color")) return regal_ext_blend_color || gl_ext_blend_color;
+  if (!strcmp(ext,"GL_EXT_blend_color")) return gl_ext_blend_color;
   if (!strcmp(ext,"GL_EXT_blend_equation_separate")) return gl_ext_blend_equation_separate;
   if (!strcmp(ext,"GL_EXT_blend_func_separate")) return gl_ext_blend_func_separate;
   if (!strcmp(ext,"GL_EXT_blend_minmax")) return gl_ext_blend_minmax;
-  if (!strcmp(ext,"GL_EXT_blend_subtract")) return regal_ext_blend_subtract || gl_ext_blend_subtract;
+  if (!strcmp(ext,"GL_EXT_blend_subtract")) return gl_ext_blend_subtract;
   if (!strcmp(ext,"GL_EXT_clip_volume_hint")) return gl_ext_clip_volume_hint;
   if (!strcmp(ext,"GL_EXT_cmyka")) return gl_ext_cmyka;
   if (!strcmp(ext,"GL_EXT_color_buffer_half_float")) return gl_ext_color_buffer_half_float;
@@ -2024,9 +1907,9 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_copy_texture")) return gl_ext_copy_texture;
   if (!strcmp(ext,"GL_EXT_cull_vertex")) return gl_ext_cull_vertex;
   if (!strcmp(ext,"GL_EXT_debug_label")) return gl_ext_debug_label;
-  if (!strcmp(ext,"GL_EXT_debug_marker")) return true;
+  if (!strcmp(ext,"GL_EXT_debug_marker")) return gl_ext_debug_marker;
   if (!strcmp(ext,"GL_EXT_depth_bounds_test")) return gl_ext_depth_bounds_test;
-  if (!strcmp(ext,"GL_EXT_direct_state_access")) return regal_ext_direct_state_access || gl_ext_direct_state_access;
+  if (!strcmp(ext,"GL_EXT_direct_state_access")) return gl_ext_direct_state_access;
   if (!strcmp(ext,"GL_EXT_discard_framebuffer")) return gl_ext_discard_framebuffer;
   if (!strcmp(ext,"GL_EXT_disjoint_timer_query")) return gl_ext_disjoint_timer_query;
   if (!strcmp(ext,"GL_EXT_draw_buffers2")) return gl_ext_draw_buffers2;
@@ -2034,10 +1917,10 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_draw_range_elements")) return gl_ext_draw_range_elements;
   if (!strcmp(ext,"GL_EXT_fog_coord")) return gl_ext_fog_coord;
   if (!strcmp(ext,"GL_EXT_fragment_lighting")) return gl_ext_fragment_lighting;
-  if (!strcmp(ext,"GL_EXT_framebuffer_blit")) return regal_ext_framebuffer_blit || gl_ext_framebuffer_blit;
+  if (!strcmp(ext,"GL_EXT_framebuffer_blit")) return gl_ext_framebuffer_blit;
   if (!strcmp(ext,"GL_EXT_framebuffer_multisample")) return gl_ext_framebuffer_multisample;
   if (!strcmp(ext,"GL_EXT_framebuffer_multisample_blit_scaled")) return gl_ext_framebuffer_multisample_blit_scaled;
-  if (!strcmp(ext,"GL_EXT_framebuffer_object")) return regal_ext_framebuffer_object || gl_ext_framebuffer_object;
+  if (!strcmp(ext,"GL_EXT_framebuffer_object")) return gl_ext_framebuffer_object;
   if (!strcmp(ext,"GL_EXT_framebuffer_sRGB")) return gl_ext_framebuffer_srgb;
   if (!strcmp(ext,"GL_EXT_geometry_shader4")) return gl_ext_geometry_shader4;
   if (!strcmp(ext,"GL_EXT_gpu_program_parameters")) return gl_ext_gpu_program_parameters;
@@ -2084,10 +1967,10 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_EXT_texture_compression_latc")) return gl_ext_texture_compression_latc;
   if (!strcmp(ext,"GL_EXT_texture_compression_rgtc")) return gl_ext_texture_compression_rgtc;
   if (!strcmp(ext,"GL_EXT_texture_compression_s3tc")) return gl_ext_texture_compression_s3tc;
-  if (!strcmp(ext,"GL_EXT_texture_cube_map")) return regal_ext_texture_cube_map || gl_ext_texture_cube_map;
-  if (!strcmp(ext,"GL_EXT_texture_edge_clamp")) return regal_ext_texture_edge_clamp || gl_ext_texture_edge_clamp;
-  if (!strcmp(ext,"GL_EXT_texture_env_combine")) return regal_ext_texture_env_combine || gl_ext_texture_env_combine;
-  if (!strcmp(ext,"GL_EXT_texture_env_dot3")) return regal_ext_texture_env_dot3 || gl_ext_texture_env_dot3;
+  if (!strcmp(ext,"GL_EXT_texture_cube_map")) return gl_ext_texture_cube_map;
+  if (!strcmp(ext,"GL_EXT_texture_edge_clamp")) return gl_ext_texture_edge_clamp;
+  if (!strcmp(ext,"GL_EXT_texture_env_combine")) return gl_ext_texture_env_combine;
+  if (!strcmp(ext,"GL_EXT_texture_env_dot3")) return gl_ext_texture_env_dot3;
   if (!strcmp(ext,"GL_EXT_texture_filter_anisotropic")) return gl_ext_texture_filter_anisotropic;
   if (!strcmp(ext,"GL_EXT_texture_format_BGRA8888")) return gl_ext_texture_format_bgra8888;
   if (!strcmp(ext,"GL_EXT_texture_integer")) return gl_ext_texture_integer;
@@ -2121,7 +2004,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_IBM_multimode_draw_arrays")) return gl_ibm_multimode_draw_arrays;
   if (!strcmp(ext,"GL_IBM_rasterpos_clip")) return gl_ibm_rasterpos_clip;
   if (!strcmp(ext,"GL_IBM_static_data")) return gl_ibm_static_data;
-  if (!strcmp(ext,"GL_IBM_texture_mirrored_repeat")) return regal_ibm_texture_mirrored_repeat || gl_ibm_texture_mirrored_repeat;
+  if (!strcmp(ext,"GL_IBM_texture_mirrored_repeat")) return gl_ibm_texture_mirrored_repeat;
   if (!strcmp(ext,"GL_IBM_vertex_array_lists")) return gl_ibm_vertex_array_lists;
   if (!strcmp(ext,"GL_IMG_multisampled_render_to_texture")) return gl_img_multisampled_render_to_texture;
   if (!strcmp(ext,"GL_IMG_program_binary")) return gl_img_program_binary;
@@ -2151,7 +2034,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_bgr")) return gl_nv_bgr;
   if (!strcmp(ext,"GL_NV_bindless_texture")) return gl_nv_bindless_texture;
   if (!strcmp(ext,"GL_NV_blend_equation_advanced")) return gl_nv_blend_equation_advanced;
-  if (!strcmp(ext,"GL_NV_blend_square")) return regal_nv_blend_square || gl_nv_blend_square;
+  if (!strcmp(ext,"GL_NV_blend_square")) return gl_nv_blend_square;
   if (!strcmp(ext,"GL_NV_compute_program5")) return gl_nv_compute_program5;
   if (!strcmp(ext,"GL_NV_conditional_render")) return gl_nv_conditional_render;
   if (!strcmp(ext,"GL_NV_copy_depth_to_color")) return gl_nv_copy_depth_to_color;
@@ -2189,7 +2072,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_NV_packed_depth_stencil")) return gl_nv_packed_depth_stencil;
   if (!strcmp(ext,"GL_NV_packed_float_linear")) return gl_nv_packed_float_linear;
   if (!strcmp(ext,"GL_NV_parameter_buffer_object")) return gl_nv_parameter_buffer_object;
-  if (!strcmp(ext,"GL_NV_path_rendering")) return regal_nv_path_rendering || gl_nv_path_rendering;
+  if (!strcmp(ext,"GL_NV_path_rendering")) return gl_nv_path_rendering;
   if (!strcmp(ext,"GL_NV_pixel_buffer_object")) return gl_nv_pixel_buffer_object;
   if (!strcmp(ext,"GL_NV_pixel_data_range")) return gl_nv_pixel_data_range;
   if (!strcmp(ext,"GL_NV_platform_binary")) return gl_nv_platform_binary;
@@ -2276,12 +2159,12 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_QCOM_perfmon_global_mode")) return gl_qcom_perfmon_global_mode;
   if (!strcmp(ext,"GL_QCOM_tiled_rendering")) return gl_qcom_tiled_rendering;
   if (!strcmp(ext,"GL_QCOM_writeonly_rendering")) return gl_qcom_writeonly_rendering;
-  if (!strcmp(ext,"GL_REGAL_ES1_0_compatibility")) return true;
-  if (!strcmp(ext,"GL_REGAL_ES1_1_compatibility")) return true;
-  if (!strcmp(ext,"GL_REGAL_enable")) return true;
-  if (!strcmp(ext,"GL_REGAL_error_string")) return true;
-  if (!strcmp(ext,"GL_REGAL_extension_query")) return true;
-  if (!strcmp(ext,"GL_REGAL_log")) return true;
+  if (!strcmp(ext,"GL_REGAL_ES1_0_compatibility")) return gl_regal_es1_0_compatibility;
+  if (!strcmp(ext,"GL_REGAL_ES1_1_compatibility")) return gl_regal_es1_1_compatibility;
+  if (!strcmp(ext,"GL_REGAL_enable")) return gl_regal_enable;
+  if (!strcmp(ext,"GL_REGAL_error_string")) return gl_regal_error_string;
+  if (!strcmp(ext,"GL_REGAL_extension_query")) return gl_regal_extension_query;
+  if (!strcmp(ext,"GL_REGAL_log")) return gl_regal_log;
   if (!strcmp(ext,"GL_REND_screen_coordinates")) return gl_rend_screen_coordinates;
   if (!strcmp(ext,"GL_S3_s3tc")) return gl_s3_s3tc;
   if (!strcmp(ext,"GL_SGIS_color_range")) return gl_sgis_color_range;
@@ -2489,18 +2372,6 @@ ContextInfo::getExtension(const char *ext) const
 #endif
 
 return false;
-}
-
-bool
-ContextInfo::isSupported(const char *ext) const
-{
-  Internal("ContextInfo::isSupported ",boost::print::quote(ext,'"'));
-
-  string_list<string> e;
-  e.split(ext,' ');
-  for (string_list<string>::const_iterator i=e.begin(); i!=e.end(); ++i)
-    if (i->length() && !getExtension(i->c_str())) return false;
-  return true;
 }
 
 REGAL_NAMESPACE_END

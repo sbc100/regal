@@ -166,7 +166,7 @@ void Frame::capture(RegalContext &context)
 
           MD5Context md5c;
           MD5Init(&md5c);
-          MD5Update(&md5c, buffer, bufferSize);
+          MD5Update(&md5c, reinterpret_cast<const unsigned char *>(buffer), bufferSize);
 
           unsigned char digest[16];
           MD5Final(digest, &md5c);

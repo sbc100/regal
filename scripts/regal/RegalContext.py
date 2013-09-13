@@ -112,6 +112,7 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
+struct EmuInfo;
 struct DebugInfo;
 struct Statistics;
 
@@ -137,6 +138,7 @@ struct RegalContext
   DispatchErrorState      err;
   scoped_ptr<DebugInfo>   dbg;
   scoped_ptr<ContextInfo> info;
+  scoped_ptr<EmuInfo>     emuInfo;
 
 #if REGAL_STATISTICS
   scoped_ptr<Statistics>  statistics;
@@ -218,6 +220,7 @@ REGAL_GLOBAL_BEGIN
 
 #include "RegalConfig.h"
 #include "RegalContext.h"
+#include "RegalEmuInfo.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
 #include "RegalStatistics.h"
@@ -294,6 +297,13 @@ RegalContext::Init()
     info = new ContextInfo();
     RegalAssert(info);
     info->init(*this);
+  }
+
+  if (!emuInfo)
+  {
+    emuInfo = new EmuInfo();
+    RegalAssert(emuInfo);
+    emuInfo->init(*info);
   }
 
 ${MEMBER_INIT}
@@ -518,9 +528,9 @@ def addEmulatedExtensions(extensions, emuLayer):
         # Strip 'GL_' prefix
         name = extension.name[3:]
 
-        emuStr += 'Internal("RegalContext::Init ","GL_%s");\n' % name
-        emuStr += 'info->regal_%s = true;\n' % name.lower()
-        emuStr += 'info->regalExtensionsSet.insert("GL_%s");\n' % name
+        emuStr += 'Info("Activating %s emulation.");\n' % name
+        emuStr += 'emuInfo->gl_%s = true;\n' % name.lower()
+        emuStr += 'emuInfo->extensionsSet.insert("GL_%s");\n' % name
 
         supportStr = '!info->gl_%s' % name.lower()
         if (len(extension.emulatedIf)):
@@ -529,7 +539,7 @@ def addEmulatedExtensions(extensions, emuLayer):
         str += wrapCIf(supportStr, emuStr)
 
     if str != '':
-      str += 'info->regalExtensions = ::boost::print::detail::join(info->regalExtensionsSet,std::string(" "));\n'
+      str += 'emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));\n'
 
     return str
 
@@ -591,14 +601,19 @@ def generateContextSource(apis, args):
 
       revi = len( emu ) - 2 - i;
       if emu[revi]['member']:
+
         init = ''
+        if len(emu[revi]['ifdef']):
+          init += 'Info("Activating emulation layer %s");\n'%(emu[revi]['ifdef'])
 
         init += addEmulatedExtensions(emulatedExtensions, emu[revi]['member'])
 
         # Info logging of activated emulation layers
 
-        if len(emu[revi]['ifdef']):
-          init += 'Info("Activating emulation layer %s");\n'%(emu[revi]['ifdef'])
+        found = False
+        for extension in emulatedExtensions:
+          if extension.emulatedBy == emu[revi]['member']:
+            found = True
 
         init += '%s = new %s;\n' % ( emu[revi]['member'], emu[revi]['type'] )
         init += 'emuLevel = %d;\n' % ( int(emu[revi]['level']) - 1)

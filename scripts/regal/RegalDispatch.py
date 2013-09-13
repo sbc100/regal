@@ -20,7 +20,7 @@ def apiDispatchTableDefineCode(apis, args, apiNames, structName):
   {
     inline void setFunction(const size_t offset, void *func)
     {
-      RegalAssert((offset*sizeof(void *))<sizeof(this));
+      RegalAssert((offset*sizeof(void *))<sizeof(*this));
       ((void **)(this))[offset] = func;
     }
 '''%(structName)

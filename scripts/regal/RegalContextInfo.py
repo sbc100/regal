@@ -34,10 +34,9 @@ struct ContextInfo
 
   void init(const RegalContext &context);
 
-  // glewGetExtension, glewIsSupported
+  // glewGetExtension
 
   bool getExtension(const char *ext) const;
-  bool isSupported(const char *ext) const;
 
   // As reported by OpenGL implementation
 
@@ -46,20 +45,15 @@ struct ContextInfo
   std::string version;
   std::string extensions;
 
-  // As reported by Regal
+  //
 
-  std::string regalVendor;
-  std::string regalRenderer;
-  std::string regalVersion;
-  std::string regalExtensions;
-
-  std::set<std::string> regalExtensionsSet;
+  std::set<std::string> extensionsSet;
 
   // As supported by the OpenGL implementation
 
 ${VERSION_DECLARE}
 
-  // Implementation dependent values
+  // Driver context limits
 
 ${IMPL_DECLARE}
 
@@ -269,77 +263,9 @@ ContextInfo::init(const RegalContext &context)
     driverExtensions.split(extensions,' ');
   }
 
-  regalExtensionsSet.insert(driverExtensions.begin(),driverExtensions.end());
+  extensionsSet.insert(driverExtensions.begin(),driverExtensions.end());
 
   Info("OpenGL extensions: ",extensions);
-
-  // TODO - filter out extensions Regal doesn't support?
-
-#ifdef REGAL_GL_VENDOR
-  regalVendor = REGAL_EQUOTE(REGAL_GL_VENDOR);
-#else
-  regalVendor = vendor;
-#endif
-
-#ifdef REGAL_GL_RENDERER
-  regalRenderer = REGAL_EQUOTE(REGAL_GL_RENDERER);
-#else
-  regalRenderer = renderer;
-#endif
-
-#ifdef REGAL_GL_VERSION
-  regalVersion = REGAL_EQUOTE(REGAL_GL_VERSION);
-#else
-  regalVersion = version;
-#endif
-
-#ifdef REGAL_GL_EXTENSIONS
-  {
-    string_list<string> extList;
-    extList.split(REGAL_EQUOTE(REGAL_GL_EXTENSIONS),' ');
-    regalExtensionsSet.clear();
-    regalExtensionsSet.insert(extList.begin(),extList.end());
-  }
-#else
-  static const char *ourExtensions[9] = {
-    "GL_REGAL_log",
-    "GL_REGAL_enable",
-    "GL_REGAL_error_string",
-    "GL_REGAL_extension_query",
-    "GL_REGAL_ES1_0_compatibility",
-    "GL_REGAL_ES1_1_compatibility",
-    "GL_EXT_debug_marker",
-    "GL_GREMEDY_string_marker",
-    "GL_GREMEDY_frame_terminator"
-  };
-  regalExtensionsSet.insert(&ourExtensions[0],&ourExtensions[9]);
-#endif
-
-#ifndef REGAL_NO_GETENV
-  {
-    getEnv("REGAL_GL_VENDOR",   regalVendor);
-    getEnv("REGAL_GL_RENDERER", regalRenderer);
-    getEnv("REGAL_GL_VERSION",  regalVersion);
-
-    const char *extensionsEnv = getEnv("REGAL_GL_EXTENSIONS");
-    if (extensionsEnv)
-    {
-      string_list<string> extList;
-      extList.split(extensionsEnv,' ');
-      regalExtensionsSet.clear();
-      regalExtensionsSet.insert(extList.begin(),extList.end());
-    }
-  }
-#endif
-
-  // Form Regal extension string from the set
-
-  regalExtensions = ::boost::print::detail::join(regalExtensionsSet,string(" "));
-
-  Info("Regal vendor     : ",regalVendor);
-  Info("Regal renderer   : ",regalRenderer);
-  Info("Regal version    : ",regalVersion);
-  Info("Regal extensions : ",regalExtensions);
 
 ${VERSION_DETECT}
 
@@ -355,17 +281,6 @@ ${IMPL_GET}
 
   Info("OpenGL v attribs : ",gl_max_vertex_attribs);
   Info("OpenGL varyings  : ",gl_max_varying_floats);
-
-  if (gl_max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
-      gl_max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;
-
-  // Qualcomm fails with float4 attribs with 256 byte stride, so artificially limit to 8 attribs (n*16 is used
-  // as the stride in RegalIFF).  WebGL (and Pepper) explicitly disallows stride > 255 as well.
-
-  if (vendor == "Qualcomm" || vendor == "Chromium" || webgl)
-    gl_max_vertex_attribs = 8;
-
-  Info("Regal  v attribs : ",gl_max_vertex_attribs);
 }
 
 ${EXT_CODE}
@@ -440,9 +355,6 @@ def versionDeclareCode(apis, args):
       code += '  GLboolean %s : 1;\n' % (c.lower())
     if name in cond:
       code += '#endif\n'
-    for ext in api.extensions:
-      if len(ext.emulatedBy):
-        code += '  GLboolean regal_%s : 1;\n' % (ext.name.lower()[3:])
     code += '\n'
 
   return code
@@ -482,9 +394,6 @@ def versionInitCode(apis, args):
       code += '  %s(false),\n' % (c.lower())
     if name in cond:
       code += '#endif\n'
-    for ext in api.extensions:
-      if len(ext.emulatedBy):
-        code += '  regal_%s(false),\n' % (ext.name.lower()[3:])
 
   return code
 
@@ -549,13 +458,6 @@ def implDeclareCode(apis, args):
         code += '  GLuint gl_%s;\n' % (state)
 
       code += '\n'
-      code += '  // Max values currently being used\n'
-      code += '\n'
-
-      for state in sorted(states):
-        code += '  GLuint %s;\n' % (state)
-
-      code += '\n'
       code += '  GLuint gl_max_varying_floats;\n'
 
   return code
@@ -574,9 +476,6 @@ def implInitCode(apis, args):
 
       for state in sorted(states):
         code += '  gl_%s(0),\n' % (state)
-
-      for state in sorted(states):
-        code += '  %s(0),\n' % (state)
 
       code += '  gl_max_varying_floats(0)\n'
 
@@ -613,9 +512,6 @@ def implGetCode(apis, args):
       code += '  }\n'
       code += '\n'
 
-      for state in sorted(states):
-        code += '  %s = std::min( gl_%s, static_cast<GLuint>(REGAL_EMU_%s) );\n' % (state.lower(), state.lower(), state)
-
       code += '\n'
 
   return code
@@ -646,40 +542,18 @@ def getExtensionCode(apis, args):
   code += '\n'
 
   for api in apis:
-    emulatedExtensions = []
-
-    for extension in api.extensions:
-      if len(extension.emulatedBy):
-        emulatedExtensions.append(extension.name)
 
     name = api.name.lower()
     if name in cond:
       code += '#if %s\n'%cond[name]
     for c in sorted(api.categories):
-      if c.startswith('GL_REGAL_') or c=='GL_EXT_debug_marker':
-        code += '  if (!strcmp(ext,"%s")) return true;\n' % (c)
-      elif c in emulatedExtensions:
-        code += '  if (!strcmp(ext,"%s")) return regal_%s || %s;\n' % (c,c.lower()[3:],c.lower())
-      else:
-        code += '  if (!strcmp(ext,"%s")) return %s;\n' % (c,c.lower())
+      code += '  if (!strcmp(ext,"%s")) return %s;\n' % (c,c.lower())
     if name in cond:
       code += '#endif\n'
     code += '\n'
 
   code += 'return false;\n'
   code += '}\n\n'
-
-  code += 'bool\n'
-  code += 'ContextInfo::isSupported(const char *ext) const\n'
-  code += '{\n'
-  code += '  Internal("ContextInfo::isSupported ",boost::print::quote(ext,\'"\'));\n'
-  code += '\n'
-  code += '  string_list<string> e;\n'
-  code += '  e.split(ext,\' \');\n'
-  code += '  for (string_list<string>::const_iterator i=e.begin(); i!=e.end(); ++i)\n'
-  code += '    if (i->length() && !getExtension(i->c_str())) return false;\n'
-  code += '  return true;\n'
-  code += '}\n'
 
   return code
 

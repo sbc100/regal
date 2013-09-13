@@ -73,6 +73,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalToken.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
+#include "RegalEmuInfo.h"
 #include "RegalSharedMap.h"
 #include "RegalFloat4.h"
 #include "linear.h"
@@ -448,7 +449,7 @@ struct Iff
 
   void InitVertexArray(RegalContext &ctx)
   {
-    max_vertex_attribs = ctx.info->gl_max_vertex_attribs;
+    max_vertex_attribs = ctx.emuInfo->gl_max_vertex_attribs;
 
     if (max_vertex_attribs >= 16)
     {
@@ -757,7 +758,7 @@ struct Iff
 
   bool IsEnabled( RegalContext * ctx, GLenum pname, GLboolean &enabled )
   {
-    if (activeTextureIndex >= ctx->info->max_texture_units)
+    if (activeTextureIndex >= ctx->emuInfo->gl_max_texture_units)
       return false;
 
     State::Store & st = ffstate.raw;
@@ -843,6 +844,7 @@ struct Iff
     // The initial texture coordinates are (s; t; r; q) = (0; 0; 0; 1)
     // for each texture coordinate set.
 
+    memset(&immVab, 0, sizeof(immVab));
     for (catIndex = 0; catIndex < REGAL_EMU_MAX_TEXTURE_UNITS; catIndex++)
       Attr<4>( &ctx, AttrIndex( RFF2A_TexCoord ), 0, 0, 0, 1 );
 
@@ -2437,16 +2439,16 @@ struct Iff
     switch( pname )
     {
       case GL_MAX_VERTEX_ATTRIBS:
-        *params = static_cast<T>(ctx->info->max_vertex_attribs);
+        *params = static_cast<T>(ctx->emuInfo->gl_max_vertex_attribs);
         break;
       case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        *params = static_cast<T>(ctx->info->max_combined_texture_image_units);
+        *params = static_cast<T>(ctx->emuInfo->gl_max_combined_texture_image_units);
         break;
       case GL_MAX_TEXTURE_COORDS:
-        *params = static_cast<T>(ctx->info->max_texture_coords);
+        *params = static_cast<T>(ctx->emuInfo->gl_max_texture_coords);
         break;
       case GL_MAX_TEXTURE_UNITS:
-        *params = static_cast<T>(ctx->info->max_texture_units);
+        *params = static_cast<T>(ctx->emuInfo->gl_max_texture_units);
         break;
       case GL_CURRENT_PROGRAM:
         *params = static_cast<T>(program);

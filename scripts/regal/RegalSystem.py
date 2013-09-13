@@ -28,7 +28,7 @@ regalSys = '''#if defined(_WIN32)
 #   define REGAL_SYS_OSX 1
 #  endif
 #  ifndef REGAL_SYS_GLX
-#   define REGAL_SYS_GLX 1
+#   define REGAL_SYS_GLX 0
 #  endif
 # endif
 #elif defined(__native_client__)

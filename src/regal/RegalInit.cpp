@@ -51,6 +51,7 @@ using namespace std;
 #include "RegalThread.h"
 #include "RegalDispatcher.h"
 #include "RegalContextInfo.h"
+#include "RegalEmuInfo.h"
 #include "RegalPpa.h"
 #include "RegalMutex.h"
 
@@ -505,10 +506,10 @@ Init::getContextListingHTML(std::string &text)
     {
       if (ctx->info)
       {
-        text += print_string("<b>Vendor     </b>:",ctx->info->regalVendor,br);
-        text += print_string("<b>Renderer   </b>:",ctx->info->regalRenderer,br);
-        text += print_string("<b>Version    </b>:",ctx->info->regalVersion,br);
-        text += print_string("<b>Extensions </b>:",ctx->info->regalExtensions,br);
+        text += print_string("<b>Vendor     </b>:",ctx->emuInfo->vendor,br);
+        text += print_string("<b>Renderer   </b>:",ctx->emuInfo->renderer,br);
+        text += print_string("<b>Version    </b>:",ctx->emuInfo->version,br);
+        text += print_string("<b>Extensions </b>:",ctx->emuInfo->extensions,br);
         text += br;
       }
 

@@ -276,6 +276,8 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalDsa.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalEmu.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalEmu.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalEmuInfo.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalEmuInfo.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalEnum.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalFavicon.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalFavicon.h" />

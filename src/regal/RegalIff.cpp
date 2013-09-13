@@ -1971,7 +1971,7 @@ void Iff::Cleanup( RegalContext &ctx )
 
   tbl.glBindBuffer(GL_ARRAY_BUFFER, 0);
   tbl.glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-  for (GLuint i=0; i<ctx.info->gl_max_vertex_attribs; ++i)
+  for (GLuint i=0; i<ctx.emuInfo->gl_max_vertex_attribs; ++i)
   {
     // Chromium/PepperAPI GLES generates an error (visible through glGetError)
     // and logs a message if a call is made to glVertexAttribPointer and no

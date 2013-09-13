@@ -66,7 +66,17 @@ typedef void *HMODULE;
 extern "C" {
   HMODULE __stdcall LoadLibraryA(const char *filename);
   void *  __stdcall GetProcAddress(HMODULE hModule, const char *proc);
+  UINT    __stdcall GetSystemDirectoryA(char *lpBuffer, UINT uSize);
 }
+
+// http://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
+// In the Windows API ... the maximum length for a path is MAX_PATH, which is
+// defined as 260 characters...
+
+#ifndef MAX_PATH
+#define MAX_PATH 260
+#endif
+
 #endif
 
 REGAL_GLOBAL_END
@@ -140,20 +150,23 @@ const char *libraryLocation(const Library &library)
 
       if (ret)
       {
-        // This string will be leaked, but needs to remain
-        // valid until we're completely shut down.
-
-        char *tmp = (char *) calloc(strlen(ret)+23,1);
-        assert(tmp);
-        if (tmp)
-        {
-          strcpy(tmp,ret);
-          strcat(tmp,"\\system32\\opengl32.dll");
-          return tmp;
-        }
-        else
-          return NULL;
+        static string opengl32;
+        if (!opengl32.length())
+          opengl32 = print_string(ret,"\\system32\\opengl32.dll");
+        return opengl32.c_str();
       }
+
+      char systemDirectory[MAX_PATH];
+      UINT n = GetSystemDirectoryA(systemDirectory,MAX_PATH);
+      if (n>0 && n<MAX_PATH)
+      {
+        static string opengl32;
+        if (!opengl32.length())
+          opengl32 = print_string(systemDirectory,"\\opengl32.dll");
+        return opengl32.c_str();
+      }
+
+      return "opengl32.dll";
 #endif
 
 #if REGAL_SYS_GLX

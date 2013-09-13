@@ -56,6 +56,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPrivate.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
+#include "RegalEmuInfo.h"
 #include "RegalCacheShader.h"
 #include "RegalCacheTexture.h"
 #include "RegalScopedPtr.h"
@@ -1250,14 +1251,15 @@ extern "C" {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetString","(", toString(name), ")");
     if (!_context) return NULL;
-    RegalAssert(_context->info);
+
     // Regal interceptions
+    RegalAssert(_context->emuInfo);
     switch (name)
     {
-      case GL_VENDOR:     return reinterpret_cast<const GLubyte *>(_context->info->regalVendor.c_str());
-      case GL_RENDERER:   return reinterpret_cast<const GLubyte *>(_context->info->regalRenderer.c_str());
-      case GL_VERSION:    return reinterpret_cast<const GLubyte *>(_context->info->regalVersion.c_str());
-      case GL_EXTENSIONS: return reinterpret_cast<const GLubyte *>(_context->info->regalExtensions.c_str());
+      case GL_VENDOR:     return reinterpret_cast<const GLubyte *>(_context->emuInfo->vendor.c_str());
+      case GL_RENDERER:   return reinterpret_cast<const GLubyte *>(_context->emuInfo->renderer.c_str());
+      case GL_VERSION:    return reinterpret_cast<const GLubyte *>(_context->emuInfo->version.c_str());
+      case GL_EXTENSIONS: return reinterpret_cast<const GLubyte *>(_context->emuInfo->extensions.c_str());
       default:
         break;
     }
@@ -26637,8 +26639,10 @@ extern "C" {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glGetExtensionREGAL","(", boost::print::quote(ext,'"'), ")");
     if (!_context) return GL_FALSE;
+
     RegalAssert(_context->info);
-    return _context->info->getExtension(ext) ? GL_TRUE : GL_FALSE;
+    RegalAssert(_context->emuInfo)
+    return _context->emuInfo->getExtension(*_context->info,ext) ? GL_TRUE : GL_FALSE;
   }
 
   REGAL_DECL GLboolean REGAL_CALL glIsSupportedREGAL(const GLchar *ext)
@@ -26646,8 +26650,10 @@ extern "C" {
     RegalContext *_context = REGAL_GET_CONTEXT();
     App("glIsSupportedREGAL","(", boost::print::quote(ext,'"'), ")");
     if (!_context) return GL_FALSE;
+
     RegalAssert(_context->info);
-    return _context->info->isSupported(ext) ? GL_TRUE : GL_FALSE;
+    RegalAssert(_context->emuInfo)
+    return _context->emuInfo->isSupported(*_context->info,ext) ? GL_TRUE : GL_FALSE;
   }
 
   /* GL_REGAL_log */
@@ -29415,6 +29421,7 @@ extern "C" {
   REGAL_DECL HGLRC REGAL_CALL wglCreateContext(HDC hDC)
   {
     App("wglCreateContext","(", boost::print::optional(hDC,Logging::pointers), ")");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     HGLRC ret = NULL;
@@ -29456,6 +29463,7 @@ extern "C" {
   REGAL_DECL HGLRC REGAL_CALL wglGetCurrentContext(void)
   {
     App("wglGetCurrentContext","()");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     HGLRC ret = NULL;
@@ -29496,6 +29504,7 @@ extern "C" {
   REGAL_DECL PROC REGAL_CALL wglGetProcAddress(LPCSTR lpszProc)
   {
     App("wglGetProcAddress","(", boost::print::quote(lpszProc,'"'), ")");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     PROC ret = NULL;

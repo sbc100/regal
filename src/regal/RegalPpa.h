@@ -50,6 +50,7 @@ REGAL_GLOBAL_BEGIN
 
 #include "RegalState.h"
 #include "RegalEmu.h"
+#include "RegalEmuInfo.h"
 #include "RegalLog.h"
 #include "RegalToken.h"
 #include "RegalContext.h"
@@ -636,7 +637,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
           break;
         case GL_MAX_ATTRIB_STACK_DEPTH:
           if (params)
-            params[0] = static_cast<T>(ctx->info->max_attrib_stack_depth);
+            params[0] = static_cast<T>(ctx->emuInfo->gl_max_attrib_stack_depth);
           break;
         default:
           return false;
@@ -847,19 +848,19 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         params[0] = static_cast<T>(maskStack.size());
         break;
       case GL_MAX_ATTRIB_STACK_DEPTH:
-        params[0] = static_cast<T>(ctx->info->max_attrib_stack_depth);
+        params[0] = static_cast<T>(ctx->emuInfo->gl_max_attrib_stack_depth);
         break;
       case GL_MAX_VERTEX_ATTRIBS:
-        *params = static_cast<T>(ctx->info->max_vertex_attribs);
+        *params = static_cast<T>(ctx->emuInfo->gl_max_vertex_attribs);
         break;
       case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        params[0] = static_cast<T>(ctx->info->max_combined_texture_image_units);
+        params[0] = static_cast<T>(ctx->emuInfo->gl_max_combined_texture_image_units);
         break;
       case GL_MAX_TEXTURE_COORDS:
-        params[0] = static_cast<T>(ctx->info->max_texture_coords);
+        params[0] = static_cast<T>(ctx->emuInfo->gl_max_texture_coords);
         break;
       case GL_MAX_TEXTURE_UNITS:
-        params[0] = static_cast<T>(ctx->info->max_texture_units);
+        params[0] = static_cast<T>(ctx->emuInfo->gl_max_texture_units);
         break;
       case GL_MAP_STENCIL:
         params[0] = static_cast<T>(State::PixelMode::mapStencil);
@@ -1088,7 +1089,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         }
         break;
       case GL_COLOR_WRITEMASK:
-        if (index < ctx->info->max_draw_buffers)
+        if (index < ctx->emuInfo->gl_max_draw_buffers)
         {
           params[0] = static_cast<T>(State::ColorBuffer::colorWritemask[index][0]);
           params[1] = static_cast<T>(State::ColorBuffer::colorWritemask[index][1]);
@@ -1097,14 +1098,14 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         }
         break;
       case GL_DEPTH_RANGE:
-        if (index < ctx->info->max_viewports)
+        if (index < ctx->emuInfo->gl_max_viewports)
         {
           params[0] = static_cast<T>(State::Viewport::depthRange[index][0]);
           params[1] = static_cast<T>(State::Viewport::depthRange[index][1]);
         }
         break;
       case GL_SCISSOR_BOX:
-        if (index < ctx->info->max_viewports)
+        if (index < ctx->emuInfo->gl_max_viewports)
         {
           if (!State::Scissor::fullyDefined())
             State::Scissor::getUndefined(ctx->dispatcher.emulation);
@@ -1115,7 +1116,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         }
         break;
       case GL_VIEWPORT:
-        if (index < ctx->info->max_viewports)
+        if (index < ctx->emuInfo->gl_max_viewports)
         {
           if (!State::Viewport::fullyDefined())
             State::Viewport::getUndefined(ctx->dispatcher.emulation);

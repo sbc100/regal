@@ -47,6 +47,7 @@ REGAL_GLOBAL_BEGIN
 #include <map>
 
 #include "RegalEmu.h"
+#include "RegalEmuInfo.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
 #include "RegalToken.h"
@@ -540,16 +541,16 @@ struct So
         switch (pname)
         {
             case GL_MAX_VERTEX_ATTRIBS:
-                *params = static_cast<T>(ctx.info->max_vertex_attribs);
+                *params = static_cast<T>(ctx.emuInfo->gl_max_vertex_attribs);
                 break;
             case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-                *params = static_cast<T>(ctx.info->max_combined_texture_image_units);
+                *params = static_cast<T>(ctx.emuInfo->gl_max_combined_texture_image_units);
                 break;
             case GL_MAX_TEXTURE_COORDS:
-                *params = static_cast<T>(ctx.info->max_texture_coords);
+                *params = static_cast<T>(ctx.emuInfo->gl_max_texture_coords);
                 break;
             case GL_MAX_TEXTURE_UNITS:
-                *params = static_cast<T>(ctx.info->max_texture_units);
+                *params = static_cast<T>(ctx.emuInfo->gl_max_texture_units);
                 break;
             case GL_TEXTURE_BORDER_COLOR:
                 params[0] = static_cast<T>(ts->BorderColor[0]);

@@ -45,6 +45,7 @@ REGAL_GLOBAL_BEGIN
 #include <string>
 
 #include "RegalEmu.h"
+#include "RegalEmuInfo.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
 #include "RegalSharedMap.h"
@@ -115,7 +116,7 @@ struct Vao
     maxName = 0;
     clientActiveTexture = GL_TEXTURE0;
 
-    max_vertex_attribs = ctx.info->gl_max_vertex_attribs;
+    max_vertex_attribs = ctx.emuInfo->gl_max_vertex_attribs;
     RegalAssert( max_vertex_attribs <= REGAL_EMU_MAX_VERTEX_ATTRIBS );
     if (max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
       max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;

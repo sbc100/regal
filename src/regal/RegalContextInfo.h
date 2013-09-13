@@ -63,10 +63,9 @@ struct ContextInfo
 
   void init(const RegalContext &context);
 
-  // glewGetExtension, glewIsSupported
+  // glewGetExtension
 
   bool getExtension(const char *ext) const;
-  bool isSupported(const char *ext) const;
 
   // As reported by OpenGL implementation
 
@@ -75,14 +74,9 @@ struct ContextInfo
   std::string version;
   std::string extensions;
 
-  // As reported by Regal
+  //
 
-  std::string regalVendor;
-  std::string regalRenderer;
-  std::string regalVersion;
-  std::string regalExtensions;
-
-  std::set<std::string> regalExtensionsSet;
+  std::set<std::string> extensionsSet;
 
   // As supported by the OpenGL implementation
 
@@ -662,25 +656,6 @@ struct ContextInfo
   GLboolean gl_win_phong_shading : 1;
   GLboolean gl_win_specular_fog : 1;
   GLboolean gl_win_swap_hint : 1;
-  GLboolean regal_arb_draw_buffers : 1;
-  GLboolean regal_arb_multitexture : 1;
-  GLboolean regal_arb_texture_cube_map : 1;
-  GLboolean regal_arb_texture_env_combine : 1;
-  GLboolean regal_arb_texture_env_dot3 : 1;
-  GLboolean regal_arb_texture_storage : 1;
-  GLboolean regal_ati_draw_buffers : 1;
-  GLboolean regal_ext_blend_color : 1;
-  GLboolean regal_ext_blend_subtract : 1;
-  GLboolean regal_ext_direct_state_access : 1;
-  GLboolean regal_ext_framebuffer_blit : 1;
-  GLboolean regal_ext_framebuffer_object : 1;
-  GLboolean regal_ext_texture_cube_map : 1;
-  GLboolean regal_ext_texture_edge_clamp : 1;
-  GLboolean regal_ext_texture_env_combine : 1;
-  GLboolean regal_ext_texture_env_dot3 : 1;
-  GLboolean regal_ibm_texture_mirrored_repeat : 1;
-  GLboolean regal_nv_blend_square : 1;
-  GLboolean regal_nv_path_rendering : 1;
 
 #if REGAL_SYS_WGL
   GLboolean wgl_3dl_stereo_control : 1;
@@ -825,7 +800,7 @@ struct ContextInfo
   GLboolean egl_nv_system_time : 1;
 #endif
 
-  // Implementation dependent values
+  // Driver context limits
 
   GLuint gl_max_attrib_stack_depth;
   GLuint gl_max_client_attrib_stack_depth;
@@ -836,18 +811,6 @@ struct ContextInfo
   GLuint gl_max_vertex_attrib_bindings;
   GLuint gl_max_vertex_attribs;
   GLuint gl_max_viewports;
-
-  // Max values currently being used
-
-  GLuint max_attrib_stack_depth;
-  GLuint max_client_attrib_stack_depth;
-  GLuint max_combined_texture_image_units;
-  GLuint max_draw_buffers;
-  GLuint max_texture_coords;
-  GLuint max_texture_units;
-  GLuint max_vertex_attrib_bindings;
-  GLuint max_vertex_attribs;
-  GLuint max_viewports;
 
   GLuint gl_max_varying_floats;
 

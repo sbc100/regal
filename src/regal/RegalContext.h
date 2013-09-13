@@ -63,6 +63,7 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
+struct EmuInfo;
 struct DebugInfo;
 struct Statistics;
 
@@ -106,6 +107,7 @@ struct RegalContext
   DispatchErrorState      err;
   scoped_ptr<DebugInfo>   dbg;
   scoped_ptr<ContextInfo> info;
+  scoped_ptr<EmuInfo>     emuInfo;
 
 #if REGAL_STATISTICS
   scoped_ptr<Statistics>  statistics;
