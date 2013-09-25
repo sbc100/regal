@@ -103,7 +103,10 @@ def apiDispatchFuncInitCode(apis, args, dispatchName, exclude=[], filter = lambd
 
       categoryPrev = category
 
-      code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
+      if dispatchName!=None:
+        code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
+      else:
+        code += '    tbl.%s = %s;\n' % ( name, name )
 
     if api.name in cond:
       code += '#endif // %s\n' % cond[api.name]
@@ -121,11 +124,17 @@ def apiDispatchGlobalFuncInitCode(apis, args, dispatchName, exclude=[], filter =
     cond = condDefault
 
   categoryPrev = None
-  code = '''
+  if dispatchName!= None:
+    code = '''
 void InitDispatchTableGlobal%s%s(DispatchTableGlobal &tbl)
 {
 '''%(dispatchName[0:1].upper(),dispatchName[1:])
-
+  else:
+    code = '''
+void Init(DispatchTableGlobal &tbl)
+{
+'''
+    
   for api in apis:
 
     code += '\n'
@@ -169,7 +178,10 @@ void InitDispatchTableGlobal%s%s(DispatchTableGlobal &tbl)
 
       categoryPrev = category
 
-      code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
+      if dispatchName!=None:
+        code += '  tbl.%s = %s_%s;\n' % ( name, dispatchName, name )
+      else:
+        code += '    tbl.%s = %s;\n' % ( name, name )
 
     if api.name in cond:
       code += '#endif // %s\n' % cond[api.name]

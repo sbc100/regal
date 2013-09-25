@@ -598,9 +598,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         case GL_ACCUM_BLUE_BITS:
         case GL_ACCUM_ALPHA_BITS:
           if (params)
-          {
             params[0] = 32;
-          }
           break;
 
         case GL_RED_BITS:
@@ -610,16 +608,12 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         case GL_INDEX_BITS:
         case GL_STENCIL_BITS:
           if (params)
-          {
             params[0] = 8;
-          }
           break;
 
         case GL_DEPTH_BITS:
           if (params)
-          {
             params[0] = 24;
-          }
           break;
 
         case GL_AUX_BUFFERS:
@@ -1243,7 +1237,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     UNUSED_PARAMETER(ctx);
 
     GLint ii = light - GL_LIGHT0;
-    if (ii < 0 || static_cast<size_t>(ii) >= array_size( State::Point::coordReplace ))
+    if (ii < 0 || static_cast<size_t>(ii) >= array_size( State::Lighting::lights ))
       return false;
 
     RegalAssertArrayIndex( State::Lighting::lights, ii );
@@ -1395,8 +1389,11 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
       case GL_CLIP_DISTANCE7:
-        RegalAssertArrayIndex( State::Enable::clipDistance, pname-GL_CLIP_DISTANCE0 );
-        enabled = State::Enable::clipDistance[pname-GL_CLIP_DISTANCE0];
+        if (pname-GL_CLIP_DISTANCE0 < array_size( State::Enable::clipDistance ))
+        {
+          RegalAssertArrayIndex( State::Enable::clipDistance, pname-GL_CLIP_DISTANCE0 );
+          enabled = State::Enable::clipDistance[pname-GL_CLIP_DISTANCE0];
+        }
         break;
       case GL_COLOR_LOGIC_OP:
         enabled = State::Enable::colorLogicOp;
@@ -1448,8 +1445,11 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT5:
       case GL_LIGHT6:
       case GL_LIGHT7:
-        RegalAssertArrayIndex( State::Enable::light, pname-GL_LIGHT0 );
-        enabled = State::Enable::light[pname-GL_LIGHT0];
+        if (pname-GL_LIGHT0 < array_size( State::Enable::light ))
+        {
+          RegalAssertArrayIndex( State::Enable::light, pname-GL_LIGHT0 );
+          enabled = State::Enable::light[pname-GL_LIGHT0];
+        }
         break;
       case GL_LIGHTING:
         enabled = State::Enable::lighting;
@@ -1578,41 +1578,81 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         enabled = State::Enable::stencilTest;
         break;
       case GL_TEXTURE_1D:
-        RegalAssertArrayIndex( State::Enable::texture1d, activeTextureUnit );
-        enabled = State::Enable::texture1d[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::texture1d))
+        {
+          RegalAssertArrayIndex( State::Enable::texture1d, activeTextureUnit );
+          enabled = State::Enable::texture1d[activeTextureUnit];
+        }
         break;
       case GL_TEXTURE_2D:
-        RegalAssertArrayIndex( State::Enable::texture2d, activeTextureUnit );
-        enabled = State::Enable::texture2d[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::texture2d))
+        {
+          RegalAssertArrayIndex( State::Enable::texture2d, activeTextureUnit );
+          enabled = State::Enable::texture2d[activeTextureUnit];
+        }
         break;
       case GL_TEXTURE_3D:
-        RegalAssertArrayIndex( State::Enable::texture3d, activeTextureUnit );
-        enabled = State::Enable::texture3d[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::texture3d))
+        {
+          RegalAssertArrayIndex( State::Enable::texture3d, activeTextureUnit );
+          enabled = State::Enable::texture3d[activeTextureUnit];
+        }
         break;
       case GL_TEXTURE_CUBE_MAP:
-        RegalAssertArrayIndex( State::Enable::textureCubeMap, activeTextureUnit );
-        enabled = State::Enable::textureCubeMap[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureCubeMap))
+        {
+          RegalAssertArrayIndex( State::Enable::textureCubeMap, activeTextureUnit );
+          enabled = State::Enable::textureCubeMap[activeTextureUnit];
+        }
         break;
       case GL_TEXTURE_RECTANGLE:
-        RegalAssertArrayIndex( State::Enable::textureRectangle, activeTextureUnit );
-        enabled = State::Enable::textureRectangle[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureRectangle))
+        {
+          RegalAssertArrayIndex( State::Enable::textureRectangle, activeTextureUnit );
+          enabled = State::Enable::textureRectangle[activeTextureUnit];
+        }
         break;
+
       case GL_TEXTURE_GEN_S:
-        RegalAssertArrayIndex( State::Enable::textureGenS, activeTextureUnit );
-        enabled = State::Enable::textureGenS[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenS))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenS, activeTextureUnit );
+          enabled = State::Enable::textureGenS[activeTextureUnit];
+        }
+        else
+          enabled = GL_FALSE;
         break;
+
       case GL_TEXTURE_GEN_T:
-        RegalAssertArrayIndex( State::Enable::textureGenT, activeTextureUnit );
-        enabled = State::Enable::textureGenT[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenT))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenT, activeTextureUnit );
+          enabled = State::Enable::textureGenT[activeTextureUnit];
+        }
+        else
+          enabled = GL_FALSE;
         break;
+
       case GL_TEXTURE_GEN_R:
-        RegalAssertArrayIndex( State::Enable::textureGenR, activeTextureUnit );
-        enabled = State::Enable::textureGenR[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenR))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenR, activeTextureUnit );
+          enabled = State::Enable::textureGenR[activeTextureUnit];
+        }
+        else
+          enabled = GL_FALSE;
         break;
+
       case GL_TEXTURE_GEN_Q:
-        RegalAssertArrayIndex( State::Enable::textureGenQ, activeTextureUnit );
-        enabled = State::Enable::textureGenQ[activeTextureUnit];
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenQ))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenQ, activeTextureUnit );
+          enabled = State::Enable::textureGenQ[activeTextureUnit];
+        }
+        else
+          enabled = GL_FALSE;
         break;
+
       case GL_VERTEX_PROGRAM_TWO_SIDE:
         enabled = State::Enable::vertexProgramTwoSide;
         break;
@@ -1679,9 +1719,13 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_CLIP_DISTANCE5:
       case GL_CLIP_DISTANCE6:
       case GL_CLIP_DISTANCE7:
-        RegalAssertArrayIndex( State::Enable::clipDistance, cap-GL_CLIP_DISTANCE0 );
-        RegalAssertArrayIndex( State::Transform::clipPlane, cap-GL_CLIP_DISTANCE0 );
-        State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = State::Transform::clipPlane[cap-GL_CLIP_DISTANCE0].enabled = enabled;
+        if ((cap-GL_CLIP_DISTANCE0 < array_size( State::Enable::clipDistance )) &&
+            (cap-GL_CLIP_DISTANCE0 < array_size( State::Transform::clipPlane )))
+        {
+          RegalAssertArrayIndex( State::Enable::clipDistance, cap-GL_CLIP_DISTANCE0 );
+          RegalAssertArrayIndex( State::Transform::clipPlane, cap-GL_CLIP_DISTANCE0 );
+          State::Enable::clipDistance[cap-GL_CLIP_DISTANCE0] = State::Transform::clipPlane[cap-GL_CLIP_DISTANCE0].enabled = enabled;
+        }
         break;
       case GL_COLOR_LOGIC_OP:
         State::Enable::colorLogicOp    = State::ColorBuffer::colorLogicOp = enabled;
@@ -1733,9 +1777,13 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
       case GL_LIGHT5:
       case GL_LIGHT6:
       case GL_LIGHT7:
-        RegalAssertArrayIndex( State::Enable::light, cap-GL_LIGHT0 );
-        RegalAssertArrayIndex( State::Lighting::lights, cap-GL_LIGHT0 );
-        State::Enable::light[cap-GL_LIGHT0] = State::Lighting::lights[cap-GL_LIGHT0].enabled = enabled;
+        if ((cap-GL_LIGHT0 < array_size( State::Enable::light )) &&
+            (cap-GL_LIGHT0 < array_size( State::Lighting::lights )))
+        {
+          RegalAssertArrayIndex( State::Enable::light, cap-GL_LIGHT0 );
+          RegalAssertArrayIndex( State::Lighting::lights, cap-GL_LIGHT0 );
+          State::Enable::light[cap-GL_LIGHT0] = State::Lighting::lights[cap-GL_LIGHT0].enabled = enabled;
+        }
         break;
       case GL_LIGHTING:
         State::Enable::lighting = State::Lighting::lighting = enabled;
@@ -1747,76 +1795,130 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         State::Enable::lineStipple = State::Line::stipple = enabled;
         break;
       case GL_MAP1_COLOR_4:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1Color4        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_INDEX:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1Index         = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1Index         = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_NORMAL:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1Normal        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1Normal        = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_TEXTURE_COORD_1:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1TextureCoord1 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1TextureCoord1 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_TEXTURE_COORD_2:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1TextureCoord2 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1TextureCoord2 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_TEXTURE_COORD_3:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1TextureCoord3 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1TextureCoord3 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_TEXTURE_COORD_4:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1TextureCoord4 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1TextureCoord4 = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_VERTEX_3:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1Vertex3       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1Vertex3       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP1_VERTEX_4:
-        RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
-        State::Enable::map1Vertex4       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        if (cap-GL_MAP1_COLOR_4 < array_size( State::Eval::map1dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map1dEnables, cap-GL_MAP1_COLOR_4 );
+          State::Enable::map1Vertex4       = State::Eval::map1dEnables[cap-GL_MAP1_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_COLOR_4:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2Color4        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2Color4        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_INDEX:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2Index         = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2Index         = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_NORMAL:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2Normal        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2Normal        = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_TEXTURE_COORD_1:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2TextureCoord1 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2TextureCoord1 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_TEXTURE_COORD_2:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2TextureCoord2 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2TextureCoord2 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_TEXTURE_COORD_3:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2TextureCoord3 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2TextureCoord3 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_TEXTURE_COORD_4:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2TextureCoord4 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2TextureCoord4 = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_VERTEX_3:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2Vertex3       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2Vertex3       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MAP2_VERTEX_4:
-        RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
-        State::Enable::map2Vertex4       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        if (cap-GL_MAP2_COLOR_4 < array_size( State::Eval::map2dEnables ))
+        {
+          RegalAssertArrayIndex( State::Eval::map2dEnables, cap-GL_MAP2_COLOR_4 );
+          State::Enable::map2Vertex4       = State::Eval::map2dEnables[cap-GL_MAP2_COLOR_4] = enabled;
+        }
         break;
       case GL_MINMAX:
         State::Enable::minmax = State::PixelMode::minmax = enabled;
@@ -1878,9 +1980,13 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         RegalAssert( array_size( State::Scissor::scissorTest ) == n );
         for (size_t ii=0; ii<n; ii++)
         {
-          RegalAssertArrayIndex( State::Enable::scissorTest, ii );
-          RegalAssertArrayIndex( State::Scissor::scissorTest, ii );
-          State::Enable::scissorTest[ii] = State::Scissor::scissorTest[ii] = enabled;
+          if ((ii < array_size( State::Enable::scissorTest )) &&
+              (ii < array_size( State::Scissor::scissorTest )))
+          {
+            RegalAssertArrayIndex( State::Enable::scissorTest, ii );
+            RegalAssertArrayIndex( State::Scissor::scissorTest, ii );
+            State::Enable::scissorTest[ii] = State::Scissor::scissorTest[ii] = enabled;
+          }
         }
       }
       break;
@@ -1891,40 +1997,67 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         State::Enable::stencilTest = State::Stencil::enable = enabled;
         break;
       case GL_TEXTURE_1D:
-        RegalAssertArrayIndex( State::Enable::texture1d, activeTextureUnit );
-        State::Enable::texture1d[activeTextureUnit]      = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::texture1d))
+        {
+          RegalAssertArrayIndex( State::Enable::texture1d, activeTextureUnit );
+          State::Enable::texture1d[activeTextureUnit]      = enabled;
+        }
         break;
       case GL_TEXTURE_2D:
-        RegalAssertArrayIndex( State::Enable::texture2d, activeTextureUnit );
-        State::Enable::texture2d[activeTextureUnit]      = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::texture2d))
+        {
+          RegalAssertArrayIndex( State::Enable::texture2d, activeTextureUnit );
+          State::Enable::texture2d[activeTextureUnit]      = enabled;
+        }
         break;
       case GL_TEXTURE_3D:
-        RegalAssertArrayIndex( State::Enable::texture3d, activeTextureUnit );
-        State::Enable::texture3d[activeTextureUnit]      = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::texture3d))
+        {
+          RegalAssertArrayIndex( State::Enable::texture3d, activeTextureUnit );
+          State::Enable::texture3d[activeTextureUnit]      = enabled;
+        }
         break;
       case GL_TEXTURE_CUBE_MAP:
-        RegalAssertArrayIndex( State::Enable::textureCubeMap, activeTextureUnit );
-        State::Enable::textureCubeMap[activeTextureUnit] = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureCubeMap))
+        {
+          RegalAssertArrayIndex( State::Enable::textureCubeMap, activeTextureUnit );
+          State::Enable::textureCubeMap[activeTextureUnit] = enabled;
+        }
         break;
       case GL_TEXTURE_RECTANGLE:
-        RegalAssertArrayIndex( State::Enable::textureRectangle, activeTextureUnit );
-        State::Enable::textureRectangle[activeTextureUnit] = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureRectangle))
+        {
+          RegalAssertArrayIndex( State::Enable::textureRectangle, activeTextureUnit );
+          State::Enable::textureRectangle[activeTextureUnit] = enabled;
+        }
         break;
       case GL_TEXTURE_GEN_S:
-        RegalAssertArrayIndex( State::Enable::textureGenS, activeTextureUnit );
-        State::Enable::textureGenS[activeTextureUnit]    = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenS))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenS, activeTextureUnit );
+          State::Enable::textureGenS[activeTextureUnit]    = enabled;
+        }
         break;
       case GL_TEXTURE_GEN_T:
-        RegalAssertArrayIndex( State::Enable::textureGenT, activeTextureUnit );
-        State::Enable::textureGenT[activeTextureUnit]    = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenT))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenT, activeTextureUnit );
+          State::Enable::textureGenT[activeTextureUnit]    = enabled;
+        }
         break;
       case GL_TEXTURE_GEN_R:
-        RegalAssertArrayIndex( State::Enable::textureGenR, activeTextureUnit );
-        State::Enable::textureGenR[activeTextureUnit]    = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenR))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenR, activeTextureUnit );
+          State::Enable::textureGenR[activeTextureUnit]    = enabled;
+        }
         break;
       case GL_TEXTURE_GEN_Q:
-        RegalAssertArrayIndex( State::Enable::textureGenQ, activeTextureUnit );
-        State::Enable::textureGenQ[activeTextureUnit]    = enabled;
+        if (static_cast<size_t>(activeTextureUnit) < array_size(State::Enable::textureGenQ))
+        {
+          RegalAssertArrayIndex( State::Enable::textureGenQ, activeTextureUnit );
+          State::Enable::textureGenQ[activeTextureUnit]    = enabled;
+        }
         break;
       case GL_VERTEX_PROGRAM_TWO_SIDE:
         State::Enable::vertexProgramTwoSide        = enabled;
@@ -2011,10 +2144,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
 
   void glActiveTexture( GLenum texture )
   {
-    if ( texture >= GL_TEXTURE0 && texture < static_cast<GLenum>(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_UNITS) )
+    if (validTextureEnum(texture))
       activeTextureUnit = texture - GL_TEXTURE0;
-    else
-      Warning( "Active texture out of range: ", Token::GLtextureToString(texture), " > ", Token::GLtextureToString(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_UNITS - 1));
   }
 
   inline void glClampColor( GLenum target, GLenum clamp )

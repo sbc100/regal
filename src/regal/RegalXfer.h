@@ -65,7 +65,9 @@ struct Xfer
     UNUSED_PARAMETER(ctx);
 
     activeTextureIndex = 0;
-    for( int i  = 0; i < REGAL_EMU_MAX_TEXTURE_UNITS; i++ ) {
+    size_t n = array_size( textureBinding2D );
+    for( size_t i  = 0; i < n; i++ ) {
+      RegalAssertArrayIndex( textureBinding2D, i );
       textureBinding2D[ i ] = 0;
     }
     unpackRowLength = 0;

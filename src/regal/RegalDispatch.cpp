@@ -29,71 +29,24 @@
   OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/*
+  Intended formatting conventions:
+  $ astyle --style=allman --indent=spaces=2 --indent-switches
+*/
+
 #include "pch.h" /* For MS precompiled header support */
 
 #include "RegalUtil.h"
 
 REGAL_GLOBAL_BEGIN
 
-#include <algorithm>
-
-#include "RegalConfig.h"
-#include "RegalDispatcherGlobal.h"
-
-using namespace ::std;
+#include "RegalDispatch.h"
 
 REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-DispatcherGlobal dispatcherGlobal;
-
-DispatcherGlobal::DispatcherGlobal()
-: Dispatcher()
-{
-  #if REGAL_LOG
-  InitDispatchTableGlobalLog(logging);
-  push_back(logging,Config::enableLog);
-  #endif
-
-  #if REGAL_SYS_GLX && !REGAL_SYS_X11
-  memset(&glx,0,sizeof(glx));
-  InitDispatchTableGlobalGLX(glx);
-  push_back(glx,true);
-  #endif
-
-  // have to check this early for the global dispatches, otherwise we'd use Config
-
-  #if REGAL_TRACE
-  {
-    getEnv( "REGAL_TRACE", Config::enableTrace);
-    ::memset(&trace, 0, sizeof(trace) );
-    InitDispatchTableGlobalTrace(trace);
-    push_back(trace,Config::enableTrace);
-  }
-  #endif
-
-  #if REGAL_DRIVER
-  memset(&driver,0,sizeof(driver));
-
-  #if REGAL_SYS_EGL && REGAL_STATIC_EGL
-  InitDispatchTableStaticEGL(driver);
-  #else
-  Loader::Init(driver);     // GLX/WGL/EGL lazy loader
-  #endif
-
-  push_back(driver,Config::enableDriver);
-  #endif
-
-  #if REGAL_MISSING
-  memset(&missing,0,sizeof(missing));
-  Missing::Init(missing);
-  push_back(missing,Config::enableMissing);
-  #endif
-}
-
-DispatcherGlobal::~DispatcherGlobal()
-{
-}
+void *DispatchTableGL::doCall    (void **func) { return reinterpret_cast<void *>(Dispatch::call(*this,reinterpret_cast<void (**)()>(func))); }
+void *DispatchTableGlobal::doCall(void **func) { return reinterpret_cast<void *>(Dispatch::call(*this,reinterpret_cast<void (**)()>(func))); }
 
 REGAL_NAMESPACE_END

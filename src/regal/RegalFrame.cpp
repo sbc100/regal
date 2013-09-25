@@ -66,7 +66,11 @@ void Frame::capture(RegalContext &context)
 
 #if REGAL_SYS_X11 && REGAL_SYS_GLX
     if (context.x11Display && context.x11Drawable)
-      Info("X11 window manager state: ",windowManagerStateDescription(context.x11Display,context.x11Drawable));
+    {
+      std::string description = windowManagerStateDescription(context.x11Display,context.x11Drawable);
+      if (description.length())
+        Info("X11 window manager state: ",description);
+    }
 #endif
   }
 

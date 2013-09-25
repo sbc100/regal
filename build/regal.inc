@@ -23,6 +23,7 @@ REGAL.CXX += src/regal/RegalCacheTexture.cpp
 REGAL.CXX += src/regal/RegalConfig.cpp
 REGAL.CXX += src/regal/RegalContext.cpp
 REGAL.CXX += src/regal/RegalContextInfo.cpp
+REGAL.CXX += src/regal/RegalDispatch.cpp
 REGAL.CXX += src/regal/RegalStatistics.cpp
 REGAL.CXX += src/regal/RegalLookup.cpp
 REGAL.CXX += src/regal/RegalPlugin.cpp

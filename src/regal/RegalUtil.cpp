@@ -84,6 +84,7 @@ REGAL_GLOBAL_END
 REGAL_NAMESPACE_BEGIN
 
 #if !REGAL_NO_ASSERT
+#if REGAL_ASSERT_VERBOSE
 void
 AssertFunction(const char *file, const size_t line, const char *expr)
 {
@@ -95,6 +96,17 @@ AssertFunction(const char *file, const size_t line, const char *expr)
   Error("Assertion Failed: ", message);
 #endif
 }
+#else
+void
+AssertFunction(const char *expr)
+{
+#ifdef REGAL_ASSERT_FUNCTION
+  REGAL_ASSERT_FUNCTION(expr ? expr : "");
+#else
+  Error("Assertion Failed: ", expr ? expr : "");
+#endif
+}
+#endif
 #endif
 
 inline const char * getEnvironment(const char * const var)
@@ -481,7 +493,12 @@ void *GetProcAddress(const char *entry)
     if (!lib_GL && lib_GL_filename)
     {
       Info("Loading OpenGL from ",lib_GL_filename);
-      lib_GL = dlopen( lib_GL_filename, RTLD_LAZY );
+
+      // We'd rather not use RTLD_GLOBAL, but the Linux Mesa
+      // GL implementation requires this for finding symbols
+      // in libglapi.so.0
+
+      lib_GL = dlopen( lib_GL_filename, RTLD_LAZY | RTLD_GLOBAL );
     }
   }
 #endif
@@ -537,7 +554,12 @@ void *GetProcAddress(const char *entry)
     if (!lib_GLX && lib_GLX_filename)
     {
       Info("Loading GL/GLX from: ",lib_GLX_filename);
-      lib_GLX = dlopen( lib_GLX_filename, RTLD_LAZY );
+
+      // We'd rather not use RTLD_GLOBAL, but the Linux Mesa
+      // GL implementation requires this for finding symbols
+      // in libglapi.so.0
+
+      lib_GLX = dlopen( lib_GLX_filename, RTLD_LAZY | RTLD_GLOBAL );
     }
   }
 #endif

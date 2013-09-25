@@ -102,8 +102,9 @@ extern void InitDispatchTableStaticEGL      (DispatchTableGlobal &tbl);
 extern void InitDispatchTableGlobalLog       (DispatchTableGlobal &tbl);
 extern void InitDispatchTableGlobalGLX       (DispatchTableGlobal &tbl);
 extern void InitDispatchTableGlobalTrace     (DispatchTableGlobal &tbl);
-extern void InitDispatchTableGlobalLoader    (DispatchTableGlobal &tbl);
-extern void InitDispatchTableGlobalMissing   (DispatchTableGlobal &tbl);
+
+namespace Loader  { extern void Init(DispatchTableGlobal &tbl); }
+namespace Missing { extern void Init(DispatchTableGlobal &tbl); }
 
 REGAL_NAMESPACE_END
 

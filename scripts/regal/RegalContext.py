@@ -407,6 +407,14 @@ RegalContext::~RegalContext()
 {
   Internal("RegalContext::~RegalContext","()");
 
+  #if REGAL_STATISTICS
+  if (statistics && !Logging::frameStatistics)
+  {
+    statistics->log();
+    statistics->reset();
+  }
+  #endif
+
   // Remove this context from the share group.
 
   shareGroup->remove(this);

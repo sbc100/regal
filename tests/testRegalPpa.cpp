@@ -92,7 +92,7 @@ TEST( RegalPpa, PushPopAttrib )
   RegalContext ctx;
   ctx.info = new ContextInfo();
   ctx.info->es2 = ctx.info->core = false;
-  InitDispatchTableMissing( ctx.dispatcher.emulation );
+  Missing::Init( ctx.dispatcher.emulation );
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Emu::Ppa ppa;
@@ -200,7 +200,7 @@ TEST( RegalPpa, PushPopDepthBufferBit )
   RegalContext ctx;
   ctx.info = new ContextInfo();
   ctx.info->es2 = ctx.info->core = false;
-  InitDispatchTableMissing( ctx.dispatcher.emulation );
+  Missing::Init( ctx.dispatcher.emulation );
   InitDispatchTableGMock( ctx.dispatcher.emulation );
 
   Emu::Ppa ppa;

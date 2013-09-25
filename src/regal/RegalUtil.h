@@ -105,11 +105,21 @@
 # endif
 #endif
 
+// Wrangler mode is driver and missing dispatch, only
+
+#ifndef REGAL_WRANGLER
+#define REGAL_WRANGLER 0
+#endif
+
 // Support for "plugin" dispatch or emulation layers by default.
 // Some features require this, otherwise: -DREGAL_PLUGIN=0
 
 #ifndef REGAL_PLUGIN
-#define REGAL_PLUGIN 1
+#  if REGAL_WRANGLER
+#    define REGAL_PLUGIN 0
+#  else
+#    define REGAL_PLUGIN 1
+#  endif
 #endif
 
 // Compile-time configuration
@@ -124,7 +134,7 @@
 // release mode
 
 #ifndef REGAL_DEBUG
-#ifdef NDEBUG
+#if defined(NDEBUG) || REGAL_WRANGLER
 #define REGAL_DEBUG 0
 #else
 #define REGAL_DEBUG 1
@@ -135,7 +145,7 @@
 // release mode
 
 #ifndef REGAL_ERROR
-#ifdef NDEBUG
+#if defined(NDEBUG) || REGAL_WRANGLER
 #define REGAL_ERROR 0
 #else
 #define REGAL_ERROR 1
@@ -146,7 +156,7 @@
 // release mode, or embedded
 
 #ifndef REGAL_CODE
-# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID
+# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_WRANGLER
 #  define REGAL_CODE 0
 # else
 #  define REGAL_CODE 1
@@ -157,7 +167,7 @@
 // release mode
 
 #ifndef REGAL_TRACE
-# if defined(NDEBUG) || REGAL_SYS_PPAPI
+# if defined(NDEBUG) || REGAL_SYS_PPAPI || REGAL_WRANGLER
 #   define REGAL_TRACE 0
 # else
 #   define REGAL_TRACE 1
@@ -167,13 +177,17 @@
 // Emulation dispatch supported by default
 
 #ifndef REGAL_EMULATION
-#define REGAL_EMULATION 1
+#  if REGAL_WRANGLER
+#    define REGAL_EMULATION 0
+#  else
+#    define REGAL_EMULATION 1
+#  endif
 #endif
 
 // Statistics gathering disabled in release mode, or embedded
 
 #ifndef REGAL_STATISTICS
-# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_SYS_EMSCRIPTEN
+# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_SYS_EMSCRIPTEN || REGAL_WRANGLER
 #  define REGAL_STATISTICS 0
 # else
 #  define REGAL_STATISTICS 1
@@ -199,7 +213,11 @@
 #endif
 
 #ifndef REGAL_LOG
-#define REGAL_LOG 1
+#  if REGAL_WRANGLER
+#    define REGAL_LOG 0
+#  else
+#    define REGAL_LOG 1
+#  endif
 #endif
 
 // Emulation layers supported by default
@@ -341,7 +359,7 @@
 // RegalBreak callbacks supported by default, except in release mode
 
 #ifndef REGAL_BREAK
-# if defined(NDEBUG)
+# if defined(NDEBUG) || REGAL_WRANGLER
 #  define REGAL_BREAK 0
 # else
 #  define REGAL_BREAK 1
@@ -352,7 +370,7 @@
 // ... except for release-mode and embedded platforms
 
 #ifndef REGAL_CACHE
-# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID
+# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_WRANGLER
 #  define REGAL_CACHE 0
 # else
 #  define REGAL_CACHE 1
@@ -435,8 +453,24 @@
 #  endif
 #endif
 
+// Enable file and line info for RegalAssert, by default
+
+#ifndef REGAL_ASSERT_VERBOSE
+#  if REGAL_WRANGLER
+#    define REGAL_ASSERT_VERBOSE 0
+#  else
+#    define REGAL_ASSERT_VERBOSE 1
+#  endif
+#endif
+
+// Defaults for REGAL_NO_...
+
 #ifndef REGAL_NO_PNG
-#  define REGAL_NO_PNG 0
+#  if REGAL_WRANGLER
+#    define REGAL_NO_PNG 1
+#  else
+#    define REGAL_NO_PNG 0
+#  endif
 #endif
 
 #ifndef REGAL_NO_SQUISH
@@ -577,8 +611,10 @@ inline size_t array_size(const T (&)[N]) { return N; }
 
 #if REGAL_NO_ASSERT
 #  define RegalAssert( foo )
-#else
+#elif REGAL_ASSERT_VERBOSE
 #  define RegalAssert( foo ) if (!(foo)) ::REGAL_NAMESPACE_INTERNAL::AssertFunction( __FILE__ , __LINE__ , #foo);
+#else
+#  define RegalAssert( foo ) if (!(foo)) ::REGAL_NAMESPACE_INTERNAL::AssertFunction( #foo);
 #endif
 
 //
@@ -592,7 +628,11 @@ inline size_t array_size(const T (&)[N]) { return N; }
 #endif
 
 #if !REGAL_NO_ASSERT
+#if REGAL_ASSERT_VERBOSE
 void AssertFunction(const char *file, const std::size_t line, const char *expr);
+#else
+void AssertFunction(const char *expr);
+#endif
 #endif
 
 //

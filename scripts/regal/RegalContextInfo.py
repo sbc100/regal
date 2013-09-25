@@ -505,8 +505,21 @@ def implGetCode(apis, args):
       code += '  else\n'
       code += '  {\n'
 
+
       for state in sorted(states):
-        code += '    context.dispatcher.driver.glGetIntegerv( GL_%s, reinterpret_cast<GLint *>(&gl_%s));\n' % (state, state.lower())
+        if state not in [ 'MAX_VERTEX_ATTRIB_BINDINGS', 'MAX_VIEWPORTS' ]:
+          code += '    context.dispatcher.driver.glGetIntegerv( GL_%s, reinterpret_cast<GLint *>(&gl_%s));\n' % (state, state.lower())
+
+      code += '''
+    if (gl_version_4_3 || gl_arb_vertex_attrib_binding) 
+      context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIB_BINDINGS, reinterpret_cast<GLint *>(&gl_max_vertex_attrib_bindings));
+    else
+      gl_max_vertex_attrib_bindings = 0;
+    if (gl_version_4_1 || gl_arb_viewport_array)
+      context.dispatcher.driver.glGetIntegerv( GL_MAX_VIEWPORTS, reinterpret_cast<GLint *>(&gl_max_viewports));
+    else
+      gl_max_viewports = 0;
+'''
 
       code += '    context.dispatcher.driver.glGetIntegerv( es2 ? GL_MAX_VARYING_VECTORS : GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&gl_max_varying_floats));\n'
       code += '  }\n'

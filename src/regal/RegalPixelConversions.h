@@ -41,6 +41,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_EMULATION
+
 REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
@@ -92,5 +94,7 @@ class IConversion
 IConversion *GetConversionInterface(GLenum format, GLenum type);
 
 REGAL_NAMESPACE_END
+
+#endif // REGAL_EMULATION
 
 #endif // ! __REGAL_PIXEL_CONVERSIONS_H__

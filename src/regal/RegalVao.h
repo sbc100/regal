@@ -1,9 +1,9 @@
 /*
   Copyright (c) 2011-2013 NVIDIA Corporation
   Copyright (c) 2011-2012 Cass Everitt
+  Copyright (c) 2012-2013 Nigel Stewart
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -177,7 +177,7 @@ struct Vao
 
     current = 9999999; // this is only to force the bind...
     currObject = NULL;
-    BindVertexArray( &ctx, 0 );
+    BindVertexArray( ctx, 0 );
   }
 
   void Cleanup( RegalContext &ctx )
@@ -198,7 +198,7 @@ struct Vao
     }
   }
 
-  void BindVertexArray( RegalContext *ctx, GLuint name )
+  void BindVertexArray( RegalContext &ctx, GLuint name )
   {
     if( name == current )
     {
@@ -213,7 +213,7 @@ struct Vao
     {
       maxName = current;
     }
-    DispatchTableGL &tbl = ctx->dispatcher.emulation;
+    DispatchTableGL &tbl = ctx.dispatcher.emulation;
     tbl.glBindBuffer( GL_ARRAY_BUFFER, vao.vertexBuffer );
     tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, vao.indexBuffer );
     GLuint lastBuffer = vao.vertexBuffer;
@@ -282,14 +282,14 @@ struct Vao
     return objects.count( name ) > 0 ? GL_TRUE : GL_FALSE;
   }
 
-  void EnableDisableVertexAttribArray( RegalContext *ctx, GLboolean enable, GLuint index )
+  void EnableDisableVertexAttribArray( RegalContext &ctx, GLboolean enable, GLuint index )
   {
     RegalAssert( index < REGAL_EMU_MAX_VERTEX_ATTRIBS );
     RegalAssert( index < max_vertex_attribs );
     if (index >= max_vertex_attribs || index >= REGAL_EMU_MAX_VERTEX_ATTRIBS)
       return;
 
-    DispatchTableGL &tbl = ctx->dispatcher.emulation;
+    DispatchTableGL &tbl = ctx.dispatcher.emulation;
     Array &a = objects[current].a[index];
     a.enabled = enable;
     if( a.enabled == GL_TRUE )
@@ -304,21 +304,21 @@ struct Vao
     }
   }
 
-  void EnableVertexAttribArray( RegalContext *ctx, GLuint index )
+  void EnableVertexAttribArray( RegalContext &ctx, GLuint index )
   {
     EnableDisableVertexAttribArray( ctx, GL_TRUE, index );
   }
 
-  void DisableVertexAttribArray( RegalContext *ctx, GLuint index )
+  void DisableVertexAttribArray( RegalContext &ctx, GLuint index )
   {
     EnableDisableVertexAttribArray( ctx, GL_FALSE, index );
   }
 
-  void AttribPointer( RegalContext *ctx, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer )
+  void AttribPointer( RegalContext &ctx, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer )
   {
     // do nothing for these various error conditions
 
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     RegalAssert( index < REGAL_EMU_MAX_VERTEX_ATTRIBS );
@@ -400,10 +400,10 @@ struct Vao
 
     RegalAssert( a.buffer == 0 || GLuint64( a.pointer ) < ( 1 << 22 ) );
 
-    ctx->dispatcher.emulation.glVertexAttribPointer( index, size, type, normalized, stride, pointer );
+    ctx.dispatcher.emulation.glVertexAttribPointer( index, size, type, normalized, stride, pointer );
   }
 
-  void Validate( RegalContext *ctx )
+  void Validate( RegalContext &ctx )
   {
     UNUSED_PARAMETER(ctx);
     RegalAssert( currObject != NULL );
@@ -541,7 +541,7 @@ struct Vao
     return GLuint(~0);
   }
 
-  void ShadowVertexArrayPointer( RegalContext *ctx, GLenum array, GLint size,
+  void ShadowVertexArrayPointer( RegalContext &ctx, GLenum array, GLint size,
                                  GLenum type, GLsizei stride, const GLvoid *pointer)
   {
     //<> if ( ( currentClientState.vertexArrayState.vertexArrayObject != 0 ) &&
@@ -554,9 +554,9 @@ struct Vao
     AttribPointer( ctx, index, size, type, GL_TRUE, stride, pointer );
   }
 
-  void ColorPointer(RegalContext *ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+  void ColorPointer(RegalContext &ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     switch (size)
@@ -589,9 +589,9 @@ struct Vao
     ShadowVertexArrayPointer(ctx, GL_COLOR_ARRAY, size, type, stride, pointer);
   }
 
-  void SecondaryColorPointer(RegalContext *ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+  void SecondaryColorPointer(RegalContext &ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     if (size != 3)
@@ -618,9 +618,9 @@ struct Vao
     ShadowVertexArrayPointer(ctx, GL_SECONDARY_COLOR_ARRAY, size, type, stride, pointer);
   }
 
-  void TexCoordPointer(RegalContext *ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+  void TexCoordPointer(RegalContext &ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     switch (size)
@@ -651,9 +651,9 @@ struct Vao
     ShadowVertexArrayPointer(ctx, GL_TEXTURE_COORD_ARRAY, size, type, stride, pointer);
   }
 
-  void VertexPointer(RegalContext *ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
+  void VertexPointer(RegalContext &ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     switch (size)
@@ -683,9 +683,9 @@ struct Vao
     ShadowVertexArrayPointer(ctx, GL_VERTEX_ARRAY, size, type, stride, pointer);
   }
 
-  void NormalPointer(RegalContext *ctx, GLenum type, GLsizei stride, const GLvoid *pointer)
+  void NormalPointer(RegalContext &ctx, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     switch (type)
@@ -706,9 +706,9 @@ struct Vao
     ShadowVertexArrayPointer(ctx, GL_NORMAL_ARRAY, 0, type, stride, pointer);
   }
 
-  void FogCoordPointer(RegalContext *ctx, GLenum type, GLsizei stride, const GLvoid *pointer)
+  void FogCoordPointer(RegalContext &ctx, GLenum type, GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     switch (type)
@@ -726,10 +726,9 @@ struct Vao
     ShadowVertexArrayPointer(ctx, GL_FOG_COORD_ARRAY, 0, type, stride, pointer);
   }
 
-  void ClientActiveTexture( RegalContext *ctx, GLenum _texture)
+  void ClientActiveTexture( RegalContext &ctx, GLenum _texture)
   {
-    UNUSED_PARAMETER(ctx);
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     GLint index = _texture - GL_TEXTURE0;
@@ -738,32 +737,32 @@ struct Vao
       clientActiveTexture = _texture;
   }
 
-  void ShadowEnableDisableClientState( RegalContext *ctx, GLenum array, GLboolean enable )
+  void ShadowEnableDisableClientState( RegalContext &ctx, GLenum array, GLboolean enable )
   {
     GLuint index = ClientStateToAttribIndex( array );
     EnableDisableVertexAttribArray( ctx, enable, index );
   }
 
-  void EnableClientState( RegalContext *ctx, GLenum array )
+  void EnableClientState( RegalContext &ctx, GLenum array )
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     ShadowEnableDisableClientState( ctx, array, GL_TRUE );
   }
 
-  void DisableClientState( RegalContext *ctx, GLenum array )
+  void DisableClientState( RegalContext &ctx, GLenum array )
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     ShadowEnableDisableClientState( ctx, array, GL_FALSE );
   }
 
-  void InterleavedArrays( RegalContext *ctx, GLenum format,
+  void InterleavedArrays( RegalContext &ctx, GLenum format,
                           GLsizei stride, const GLvoid *pointer)
   {
-    if ( ctx->depthBeginEnd )
+    if ( ctx.depthBeginEnd )
       return;
 
     //<> how can stride be invalid?

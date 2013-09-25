@@ -65,6 +65,8 @@ REGAL.SRCS           += src/jsonsl/jsonsl.c
 #
 
 ifeq ($(MODE),debug)
+#REGAL.CFLAGS += -DREGAL_ASSERT_VERBOSE=1
+#REGAL.CFLAGS  += -DREGAL_NO_ASSERT=1
 endif
 
 #
@@ -88,8 +90,8 @@ REGAL_LOG          ?= 0
 REGAL_ERROR        ?= 0
 REGAL_CACHE        ?= 0
 REGAL_DEBUG        ?= 0
-REGAL_EMULATION    ?= 1                      # 0 for "loader only"
-REGAL.CFLAGS       += -DREGAL_NO_TLS=0       # 1 for single threaded
+#REGAL_EMULATION    ?= 1                      # 0 for "loader only"
+#REGAL.CFLAGS       += -DREGAL_NO_TLS=0       # 1 for single threaded
 endif
 
 #
@@ -157,6 +159,14 @@ endif
 
 ifneq ($(REGAL_EMULATION),)
 REGAL.CFLAGS         += -DREGAL_EMULATION=$(REGAL_EMULATION)
+endif
+
+ifneq ($(REGAL_WRANGLER),)
+REGAL.CFLAGS         += -DREGAL_WRANGLER=$(REGAL_WRANGLER)
+endif
+
+ifneq ($(REGAL_NO_TLS),)
+REGAL.CFLAGS         += -DREGAL_NO_TLS=$(REGAL_NO_TLS)
 endif
 
 REGAL.CFLAGS         += -fvisibility=hidden

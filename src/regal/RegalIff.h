@@ -2454,11 +2454,7 @@ struct Iff
         *params = static_cast<T>(program);
         break;
       case GL_MAX_MODELVIEW_STACK_DEPTH:
-        *params = static_cast<T>(REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH);
-        break;
       case GL_MAX_PROJECTION_STACK_DEPTH:
-        *params = static_cast<T>(REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH);
-        break;
       case GL_MAX_TEXTURE_STACK_DEPTH:
         *params = static_cast<T>(REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH);
         break;

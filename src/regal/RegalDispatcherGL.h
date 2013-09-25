@@ -118,13 +118,14 @@ extern void InitDispatchTableDebug     (DispatchTableGL &tbl);
 extern void InitDispatchTableError     (DispatchTableGL &tbl);
 extern void InitDispatchTableEmu       (DispatchTableGL &tbl);
 extern void InitDispatchTableLog       (DispatchTableGL &tbl);
-extern void InitDispatchTableLoader    (DispatchTableGL &tbl);
 extern void InitDispatchTablePpapi     (DispatchTableGL &tbl);
 extern void InitDispatchTableStatistics(DispatchTableGL &tbl);
 extern void InitDispatchTableStaticES2 (DispatchTableGL &tbl);
-extern void InitDispatchTableMissing   (DispatchTableGL &tbl);
 extern void InitDispatchTableCache     (DispatchTableGL &tbl);
 extern void InitDispatchTableTrace     (DispatchTableGL &tbl);
+
+namespace Loader  { extern void Init(DispatchTableGL &tbl); }
+namespace Missing { extern void Init(DispatchTableGL &tbl); }
 
 REGAL_NAMESPACE_END
 

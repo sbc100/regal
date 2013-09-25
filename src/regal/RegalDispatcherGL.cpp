@@ -102,13 +102,13 @@ DispatcherGL::DispatcherGL()
   ::memset(&driver,0,sizeof(DispatchTableGL));
   InitDispatchTablePpapi(driver);               // ES 2.0 functions only
   #else
-  InitDispatchTableLoader(driver);              // Desktop/ES2.0 lazy loader
+  Loader::Init(driver);                         // Desktop/ES2.0 lazy loader
   #endif
   push_back(driver,Config::enableDriver);
   #endif
 
   #if REGAL_MISSING
-  InitDispatchTableMissing(missing);
+  Missing::Init(missing);
   push_back(missing,Config::enableMissing);
   #endif
 

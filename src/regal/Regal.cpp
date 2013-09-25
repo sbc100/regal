@@ -29633,6 +29633,7 @@ extern "C" {
   REGAL_DECL XVisualInfo *REGAL_CALL glXChooseVisual(Display *dpy, int screen, int *attribList)
   {
     App("glXChooseVisual","(", boost::print::optional(dpy,Logging::pointers), ", ", screen, ", ", boost::print::optional(attribList,Logging::pointers), ")");
+    Init::init();
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     XVisualInfo * ret = NULL;

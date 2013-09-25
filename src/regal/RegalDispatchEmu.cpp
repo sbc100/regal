@@ -19202,7 +19202,7 @@ static void REGAL_CALL emu_glColorPointer(GLint size, GLenum type, GLsizei strid
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->ColorPointer( _context, size, type, stride, pointer );
+        _context->vao->ColorPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -19435,7 +19435,7 @@ static void REGAL_CALL emu_glDisableClientState(GLenum cap)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->DisableClientState( _context, cap );
+        _context->vao->DisableClientState(*_context, cap );
         return;
       }
       #endif
@@ -19504,7 +19504,7 @@ static void REGAL_CALL emu_glDrawArrays(GLenum mode, GLint first, GLsizei count)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -19569,7 +19569,7 @@ static void REGAL_CALL emu_glDrawElements(GLenum mode, GLsizei count, GLenum typ
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -19748,7 +19748,7 @@ static void REGAL_CALL emu_glEnableClientState(GLenum cap)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->EnableClientState( _context, cap );
+        _context->vao->EnableClientState(*_context, cap );
         return;
       }
       #endif
@@ -19972,7 +19972,7 @@ static void REGAL_CALL emu_glInterleavedArrays(GLenum format, GLsizei stride, co
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->InterleavedArrays( _context, format, stride, pointer );
+        _context->vao->InterleavedArrays(*_context, format, stride, pointer );
         return;
       }
       #endif
@@ -20118,7 +20118,7 @@ static void REGAL_CALL emu_glNormalPointer(GLenum type, GLsizei stride, const GL
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->NormalPointer( _context, type, stride, pointer );
+        _context->vao->NormalPointer(*_context, type, stride, pointer );
         return;
       }
       #endif
@@ -20353,7 +20353,7 @@ static void REGAL_CALL emu_glTexCoordPointer(GLint size, GLenum type, GLsizei st
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->TexCoordPointer( _context, size, type, stride, pointer );
+        _context->vao->TexCoordPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -20573,7 +20573,7 @@ static void REGAL_CALL emu_glVertexPointer(GLint size, GLenum type, GLsizei stri
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->VertexPointer( _context, size, type, stride, pointer );
+        _context->vao->VertexPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -21000,7 +21000,7 @@ static void REGAL_CALL emu_glClientActiveTexture(GLenum texture)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->ClientActiveTexture( _context, texture );
+        _context->vao->ClientActiveTexture(*_context, texture );
       }
       #endif
     case 2 :
@@ -23589,7 +23589,7 @@ static void REGAL_CALL emu_glFogCoordPointer(GLenum type, GLsizei stride, const 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->FogCoordPointer( _context, type, stride, pointer );
+        _context->vao->FogCoordPointer(*_context, type, stride, pointer );
         return;
       }
       #endif
@@ -23658,7 +23658,7 @@ static void REGAL_CALL emu_glMultiDrawArrays(GLenum mode, const GLint *first, co
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -23723,7 +23723,7 @@ static void REGAL_CALL emu_glMultiDrawElements(GLenum mode, const GLsizei *count
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -24935,7 +24935,7 @@ static void REGAL_CALL emu_glSecondaryColorPointer(GLint size, GLenum type, GLsi
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->SecondaryColorPointer( _context, size, type, stride, pointer );
+        _context->vao->SecondaryColorPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -27016,7 +27016,7 @@ static void REGAL_CALL emu_glDisableVertexAttribArray(GLuint index)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        return _context->vao->DisableVertexAttribArray( _context, index );
+        return _context->vao->DisableVertexAttribArray(*_context, index );
       }
       #endif
     case 1 :
@@ -27208,7 +27208,7 @@ static void REGAL_CALL emu_glEnableVertexAttribArray(GLuint index)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        return _context->vao->EnableVertexAttribArray( _context, index );
+        return _context->vao->EnableVertexAttribArray(*_context, index );
       }
       #endif
     case 1 :
@@ -29898,7 +29898,7 @@ static void REGAL_CALL emu_glVertexAttribPointer(GLuint index, GLint size, GLenu
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        return _context->vao->AttribPointer( _context, index, size, type, normalized, stride, pointer );
+        return _context->vao->AttribPointer(*_context, index, size, type, normalized, stride, pointer );
       }
       #endif
     case 1 :
@@ -31204,7 +31204,7 @@ static void REGAL_CALL emu_glDrawArraysInstanced(GLenum mode, GLint start, GLsiz
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -31269,7 +31269,7 @@ static void REGAL_CALL emu_glDrawElementsInstanced(GLenum mode, GLsizei count, G
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -31674,7 +31674,7 @@ static void REGAL_CALL emu_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoi
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -31739,7 +31739,7 @@ static void REGAL_CALL emu_glMultiDrawElementsIndirectAMD(GLenum mode, GLenum ty
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -31904,7 +31904,7 @@ static void REGAL_CALL emu_glDrawElementArrayAPPLE(GLenum mode, GLint first, GLs
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -32016,7 +32016,7 @@ static void REGAL_CALL emu_glMultiDrawElementArrayAPPLE(GLenum mode, const GLint
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -32562,7 +32562,7 @@ static void REGAL_CALL emu_glDrawElementsBaseVertex(GLenum mode, GLsizei count, 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -32660,7 +32660,7 @@ static void REGAL_CALL emu_glDrawElementsInstancedBaseVertex(GLenum mode, GLsize
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -32871,7 +32871,7 @@ static void REGAL_CALL emu_glMultiDrawElementsBaseVertex(GLenum mode, const GLsi
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -32968,7 +32968,7 @@ static void REGAL_CALL emu_glDrawArraysIndirect(GLenum mode, const GLvoid *indir
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -33033,7 +33033,7 @@ static void REGAL_CALL emu_glDrawElementsIndirect(GLenum mode, GLenum type, cons
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -33100,7 +33100,7 @@ static void REGAL_CALL emu_glDrawArraysInstancedARB(GLenum mode, GLint start, GL
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -33165,7 +33165,7 @@ static void REGAL_CALL emu_glDrawElementsInstancedARB(GLenum mode, GLsizei count
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -35536,7 +35536,7 @@ static void REGAL_CALL emu_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -35601,7 +35601,7 @@ static void REGAL_CALL emu_glMultiDrawElementsIndirect(GLenum mode, GLenum type,
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -35808,7 +35808,7 @@ static void REGAL_CALL emu_glClientActiveTextureARB(GLenum texture)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->ClientActiveTexture( _context, texture );
+        _context->vao->ClientActiveTexture(*_context, texture );
       }
       #endif
     case 2 :
@@ -40757,7 +40757,7 @@ static void REGAL_CALL emu_glBindVertexArray(GLuint array)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->BindVertexArray( _context, array );
+        _context->vao->BindVertexArray(*_context, array );
         return;
       }
       #endif
@@ -41980,7 +41980,7 @@ static void REGAL_CALL emu_glDisableVertexAttribArrayARB(GLuint index)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        return _context->vao->DisableVertexAttribArray( _context, index );
+        return _context->vao->DisableVertexAttribArray(*_context, index );
       }
       #endif
     case 1 :
@@ -42056,7 +42056,7 @@ static void REGAL_CALL emu_glEnableVertexAttribArrayARB(GLuint index)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        return _context->vao->EnableVertexAttribArray( _context, index );
+        return _context->vao->EnableVertexAttribArray(*_context, index );
       }
       #endif
     case 1 :
@@ -44380,7 +44380,7 @@ static void REGAL_CALL emu_glVertexAttribPointerARB(GLuint index, GLint size, GL
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        return _context->vao->AttribPointer( _context, index, size, type, normalized, stride, pointer );
+        return _context->vao->AttribPointer(*_context, index, size, type, normalized, stride, pointer );
       }
       #endif
     case 1 :
@@ -45014,7 +45014,7 @@ static void REGAL_CALL emu_glDrawElementArrayATI(GLenum mode, GLsizei count)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -61778,7 +61778,7 @@ static void REGAL_CALL emu_glDrawArraysInstancedEXT(GLenum mode, GLint start, GL
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -61843,7 +61843,7 @@ static void REGAL_CALL emu_glDrawElementsInstancedEXT(GLenum mode, GLsizei count
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -61970,7 +61970,7 @@ static void REGAL_CALL emu_glFogCoordPointerEXT(GLenum type, GLsizei stride, con
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->FogCoordPointer( _context, type, stride, pointer );
+        _context->vao->FogCoordPointer(*_context, type, stride, pointer );
         return;
       }
       #endif
@@ -63768,7 +63768,7 @@ static void REGAL_CALL emu_glMultiDrawArraysEXT(GLenum mode, const GLint *first,
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -63833,7 +63833,7 @@ static void REGAL_CALL emu_glMultiDrawElementsEXT(GLenum mode, const GLsizei *co
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -65019,7 +65019,7 @@ static void REGAL_CALL emu_glSecondaryColorPointerEXT(GLint size, GLenum type, G
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->SecondaryColorPointer( _context, size, type, stride, pointer );
+        _context->vao->SecondaryColorPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -65768,7 +65768,7 @@ static void REGAL_CALL emu_glColorPointerEXT(GLint size, GLenum type, GLsizei st
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->ColorPointer( _context, size, type, stride, pointer );
+        _context->vao->ColorPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -65837,7 +65837,7 @@ static void REGAL_CALL emu_glDrawArraysEXT(GLenum mode, GLint first, GLsizei cou
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        // _context->vao->Validate( _context );
+        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -65975,7 +65975,7 @@ static void REGAL_CALL emu_glNormalPointerEXT(GLenum type, GLsizei stride, GLsiz
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->NormalPointer( _context, type, stride, pointer );
+        _context->vao->NormalPointer(*_context, type, stride, pointer );
         return;
       }
       #endif
@@ -66055,7 +66055,7 @@ static void REGAL_CALL emu_glTexCoordPointerEXT(GLint size, GLenum type, GLsizei
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->TexCoordPointer( _context, size, type, stride, pointer );
+        _context->vao->TexCoordPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
@@ -66135,7 +66135,7 @@ static void REGAL_CALL emu_glVertexPointerEXT(GLint size, GLenum type, GLsizei s
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->VertexPointer( _context, size, type, stride, pointer );
+        _context->vao->VertexPointer(*_context, size, type, stride, pointer );
         return;
       }
       #endif
