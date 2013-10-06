@@ -234,9 +234,9 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\apitrace\common\os_backtrace.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\os_posix.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\os_win32.cpp" />
-    <ClCompile Include="..\..\..\..\src\apitrace\common\trace_backtrace.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_callset.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_dump.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_fast_callset.cpp" />

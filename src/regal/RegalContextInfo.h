@@ -466,6 +466,7 @@ struct ContextInfo
   GLboolean gl_nv_blend_square : 1;
   GLboolean gl_nv_compute_program5 : 1;
   GLboolean gl_nv_conditional_render : 1;
+  GLboolean gl_nv_copy_buffer : 1;
   GLboolean gl_nv_copy_depth_to_color : 1;
   GLboolean gl_nv_copy_image : 1;
   GLboolean gl_nv_coverage_sample : 1;
@@ -496,6 +497,7 @@ struct ContextInfo
   GLboolean gl_nv_light_max_exponent : 1;
   GLboolean gl_nv_multisample_coverage : 1;
   GLboolean gl_nv_multisample_filter_hint : 1;
+  GLboolean gl_nv_non_square_matrices : 1;
   GLboolean gl_nv_occlusion_query : 1;
   GLboolean gl_nv_pack_subimage : 1;
   GLboolean gl_nv_packed_depth_stencil : 1;
@@ -543,6 +545,7 @@ struct ContextInfo
   GLboolean gl_nv_vertex_program3 : 1;
   GLboolean gl_nv_vertex_program4 : 1;
   GLboolean gl_nv_video_capture : 1;
+  GLboolean gl_oes_egl_image_external : 1;
   GLboolean gl_oes_blend_equation_separate : 1;
   GLboolean gl_oes_blend_func_separate : 1;
   GLboolean gl_oes_blend_subtract : 1;
@@ -814,6 +817,8 @@ struct ContextInfo
 
   GLuint gl_max_varying_floats;
 
+private:
+  static bool stringSetFind(const std::set<std::string> &stringSet, const std::string &val);
 };
 
 REGAL_NAMESPACE_END

@@ -32,6 +32,8 @@ using namespace std;
 #include "RegalHelper.h"
 #include "RegalPrivate.h"
 #include "RegalContext.h"
+#include "RegalDispatcherGL.h"
+#include "RegalDispatcherGlobal.h"
 ${LOCAL_INCLUDE}
 
 REGAL_GLOBAL_END

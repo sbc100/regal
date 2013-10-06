@@ -2880,6 +2880,12 @@ static void _glewInfo_GL_ARB_vertex_attrib_binding (void)
   glewPrintExt("GL_ARB_vertex_attrib_binding", GLEW_ARB_vertex_attrib_binding, glewIsSupported("GL_ARB_vertex_attrib_binding"), glewGetExtension("GL_ARB_vertex_attrib_binding"));
 
   glewInfoFunc("glBindVertexBuffer", glBindVertexBuffer == NULL);
+  glewInfoFunc("glVertexArrayBindVertexBufferEXT", glVertexArrayBindVertexBufferEXT == NULL);
+  glewInfoFunc("glVertexArrayVertexAttribBindingEXT", glVertexArrayVertexAttribBindingEXT == NULL);
+  glewInfoFunc("glVertexArrayVertexAttribFormatEXT", glVertexArrayVertexAttribFormatEXT == NULL);
+  glewInfoFunc("glVertexArrayVertexAttribIFormatEXT", glVertexArrayVertexAttribIFormatEXT == NULL);
+  glewInfoFunc("glVertexArrayVertexAttribLFormatEXT", glVertexArrayVertexAttribLFormatEXT == NULL);
+  glewInfoFunc("glVertexArrayVertexBindingDivisorEXT", glVertexArrayVertexBindingDivisorEXT == NULL);
   glewInfoFunc("glVertexAttribBinding", glVertexAttribBinding == NULL);
   glewInfoFunc("glVertexAttribFormat", glVertexAttribFormat == NULL);
   glewInfoFunc("glVertexAttribIFormat", glVertexAttribIFormat == NULL);
@@ -7646,6 +7652,17 @@ static void _glewInfo_WGL_NV_copy_image (void)
 
 #endif /* WGL_NV_copy_image */
 
+#ifdef WGL_NV_delay_before_swap
+
+static void _glewInfo_WGL_NV_delay_before_swap (void)
+{
+  glewPrintExt("WGL_NV_delay_before_swap", WGLEW_NV_delay_before_swap, wglewIsSupported("WGL_NV_delay_before_swap"), wglewGetExtension("WGL_NV_delay_before_swap"));
+
+  glewInfoFunc("wglDelayBeforeSwapNV", wglDelayBeforeSwapNV == NULL);
+}
+
+#endif /* WGL_NV_delay_before_swap */
+
 #ifdef WGL_NV_float_buffer
 
 static void _glewInfo_WGL_NV_float_buffer (void)
@@ -10180,6 +10197,9 @@ static void wglewInfo ()
 #ifdef WGL_NV_copy_image
   _glewInfo_WGL_NV_copy_image();
 #endif /* WGL_NV_copy_image */
+#ifdef WGL_NV_delay_before_swap
+  _glewInfo_WGL_NV_delay_before_swap();
+#endif /* WGL_NV_delay_before_swap */
 #ifdef WGL_NV_float_buffer
   _glewInfo_WGL_NV_float_buffer();
 #endif /* WGL_NV_float_buffer */

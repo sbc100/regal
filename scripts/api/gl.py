@@ -136,6 +136,10 @@ GLfixed.default = '0'
 GLclampx = Typedef('GLclampx','int')
 GLclampx.default = '0'
 
+eglImageOES = Typedef('eglImageOES','void *')
+eglImageOES.category = 'GL_OES_EGL_image_external'
+eglImageOES.default = 'NULL'
+
 gl.add(GLenum)
 gl.add(GLboolean)
 gl.add(GLbitfield)
@@ -173,6 +177,7 @@ gl.add(GLuint64EXT)
 gl.add(GLvdpauSurfaceNV)
 gl.add(GLfixed)
 gl.add(GLclampx)
+gl.add(eglImageOES)
 
 
 defines = Enum('defines')
@@ -2594,6 +2599,16 @@ GL_VERTEX_ATTRIB_ARRAY_LONG = Enumerant('GL_VERTEX_ATTRIB_ARRAY_LONG', 0x874e, '
 
 defines.add(GL_NUM_SHADING_LANGUAGE_VERSIONS)
 defines.add(GL_VERTEX_ATTRIB_ARRAY_LONG)
+
+# GL_VERSION_4_4
+
+GL_MAX_VERTEX_ATTRIB_STRIDE = Enumerant('GL_MAX_VERTEX_ATTRIB_STRIDE', 0x82e5, 'GL_VERSION_4_4')
+GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED = Enumerant('GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED', 0x8221, 'GL_VERSION_4_4')
+GL_TEXTURE_BUFFER_BINDING = Enumerant('GL_TEXTURE_BUFFER_BINDING', 0x8c2a, 'GL_VERSION_4_4')
+
+defines.add(GL_MAX_VERTEX_ATTRIB_STRIDE)
+defines.add(GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED)
+defines.add(GL_TEXTURE_BUFFER_BINDING)
 
 # GL_3DFX_multisample
 
@@ -9073,6 +9088,14 @@ defines.add(GL_QUERY_BY_REGION_WAIT_NV)
 defines.add(GL_QUERY_NO_WAIT_NV)
 defines.add(GL_QUERY_WAIT_NV)
 
+# GL_NV_copy_buffer
+
+GL_COPY_READ_BUFFER_NV = Enumerant('GL_COPY_READ_BUFFER_NV', 0x8f36, 'GL_NV_copy_buffer')
+GL_COPY_WRITE_BUFFER_NV = Enumerant('GL_COPY_WRITE_BUFFER_NV', 0x8f37, 'GL_NV_copy_buffer')
+
+defines.add(GL_COPY_READ_BUFFER_NV)
+defines.add(GL_COPY_WRITE_BUFFER_NV)
+
 # GL_NV_copy_depth_to_color
 
 GL_DEPTH_STENCIL_TO_BGRA_NV = Enumerant('GL_DEPTH_STENCIL_TO_BGRA_NV', 0x886f, 'GL_NV_copy_depth_to_color')
@@ -9554,6 +9577,22 @@ defines.add(GL_COVERAGE_SAMPLES_NV)
 GL_MULTISAMPLE_FILTER_HINT_NV = Enumerant('GL_MULTISAMPLE_FILTER_HINT_NV', 0x8534, 'GL_NV_multisample_filter_hint')
 
 defines.add(GL_MULTISAMPLE_FILTER_HINT_NV)
+
+# GL_NV_non_square_matrices
+
+GL_FLOAT_MAT2x3_NV = Enumerant('GL_FLOAT_MAT2x3_NV', 0x8b65, 'GL_NV_non_square_matrices')
+GL_FLOAT_MAT2x4_NV = Enumerant('GL_FLOAT_MAT2x4_NV', 0x8b66, 'GL_NV_non_square_matrices')
+GL_FLOAT_MAT3x2_NV = Enumerant('GL_FLOAT_MAT3x2_NV', 0x8b67, 'GL_NV_non_square_matrices')
+GL_FLOAT_MAT3x4_NV = Enumerant('GL_FLOAT_MAT3x4_NV', 0x8b68, 'GL_NV_non_square_matrices')
+GL_FLOAT_MAT4x2_NV = Enumerant('GL_FLOAT_MAT4x2_NV', 0x8b69, 'GL_NV_non_square_matrices')
+GL_FLOAT_MAT4x3_NV = Enumerant('GL_FLOAT_MAT4x3_NV', 0x8b6a, 'GL_NV_non_square_matrices')
+
+defines.add(GL_FLOAT_MAT2x3_NV)
+defines.add(GL_FLOAT_MAT2x4_NV)
+defines.add(GL_FLOAT_MAT3x2_NV)
+defines.add(GL_FLOAT_MAT3x4_NV)
+defines.add(GL_FLOAT_MAT4x2_NV)
+defines.add(GL_FLOAT_MAT4x3_NV)
 
 # GL_NV_occlusion_query
 
@@ -10824,6 +10863,18 @@ defines.add(GL_Z4Y12Z4CB12Z4CR12_444_NV)
 defines.add(GL_Z4Y12Z4CB12Z4Y12Z4CR12_422_NV)
 defines.add(GL_Z6Y10Z6CB10Z6A10Z6Y10Z6CR10Z6A10_4224_NV)
 defines.add(GL_Z6Y10Z6CB10Z6Y10Z6CR10_422_NV)
+
+# GL_OES_EGL_image_external
+
+GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES = Enumerant('GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES', 0x8d68, 'GL_OES_EGL_image_external')
+GL_SAMPLER_EXTERNAL_OES = Enumerant('GL_SAMPLER_EXTERNAL_OES', 0x8d66, 'GL_OES_EGL_image_external')
+GL_TEXTURE_BINDING_EXTERNAL_OES = Enumerant('GL_TEXTURE_BINDING_EXTERNAL_OES', 0x8d67, 'GL_OES_EGL_image_external')
+GL_TEXTURE_EXTERNAL_OES = Enumerant('GL_TEXTURE_EXTERNAL_OES', 0x8d65, 'GL_OES_EGL_image_external')
+
+defines.add(GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES)
+defines.add(GL_SAMPLER_EXTERNAL_OES)
+defines.add(GL_TEXTURE_BINDING_EXTERNAL_OES)
+defines.add(GL_TEXTURE_EXTERNAL_OES)
 
 # GL_OES_blend_equation_separate
 
@@ -19269,6 +19320,121 @@ glVertexAttribDivisorANGLE.trace = True
 glVertexAttribDivisorANGLE.play = True
 gl.add(glVertexAttribDivisorANGLE)
 
+# GL_ANGLE_timer_query
+
+glBeginQueryANGLE = Function('glBeginQueryANGLE')
+glBeginQueryANGLE.ret = Return('void')
+glBeginQueryANGLE.add( Input( 'target','GLenum' ))
+glBeginQueryANGLE.add( Input( 'id','GLuint' ))
+glBeginQueryANGLE.version = ''
+glBeginQueryANGLE.category = 'GL_ANGLE_timer_query'
+glBeginQueryANGLE.trace = True
+glBeginQueryANGLE.play = True
+gl.add(glBeginQueryANGLE)
+
+glDeleteQueriesANGLE = Function('glDeleteQueriesANGLE')
+glDeleteQueriesANGLE.ret = Return('void')
+glDeleteQueriesANGLE.add( Input( 'n','GLsizei' ))
+glDeleteQueriesANGLE.add( Input( 'ids','const GLuint *' ))
+glDeleteQueriesANGLE.version = ''
+glDeleteQueriesANGLE.category = 'GL_ANGLE_timer_query'
+glDeleteQueriesANGLE.trace = True
+glDeleteQueriesANGLE.play = True
+gl.add(glDeleteQueriesANGLE)
+
+glEndQueryANGLE = Function('glEndQueryANGLE')
+glEndQueryANGLE.ret = Return('void')
+glEndQueryANGLE.add( Input( 'target','GLenum' ))
+glEndQueryANGLE.version = ''
+glEndQueryANGLE.category = 'GL_ANGLE_timer_query'
+glEndQueryANGLE.trace = True
+glEndQueryANGLE.play = True
+gl.add(glEndQueryANGLE)
+
+glGenQueriesANGLE = Function('glGenQueriesANGLE')
+glGenQueriesANGLE.ret = Return('void')
+glGenQueriesANGLE.add( Input( 'n','GLsizei' ))
+glGenQueriesANGLE.add( Output( 'ids','GLuint *' ))
+glGenQueriesANGLE.version = ''
+glGenQueriesANGLE.category = 'GL_ANGLE_timer_query'
+glGenQueriesANGLE.trace = True
+glGenQueriesANGLE.play = True
+gl.add(glGenQueriesANGLE)
+
+glGetQueryObjecti64vANGLE = Function('glGetQueryObjecti64vANGLE')
+glGetQueryObjecti64vANGLE.ret = Return('void')
+glGetQueryObjecti64vANGLE.add( Input( 'id','GLuint' ))
+glGetQueryObjecti64vANGLE.add( Input( 'pname','GLenum' ))
+glGetQueryObjecti64vANGLE.add( Output( 'params','GLint64 *' ))
+glGetQueryObjecti64vANGLE.version = ''
+glGetQueryObjecti64vANGLE.category = 'GL_ANGLE_timer_query'
+glGetQueryObjecti64vANGLE.trace = True
+glGetQueryObjecti64vANGLE.play = True
+gl.add(glGetQueryObjecti64vANGLE)
+
+glGetQueryObjectivANGLE = Function('glGetQueryObjectivANGLE')
+glGetQueryObjectivANGLE.ret = Return('void')
+glGetQueryObjectivANGLE.add( Input( 'id','GLuint' ))
+glGetQueryObjectivANGLE.add( Input( 'pname','GLenum' ))
+glGetQueryObjectivANGLE.add( Output( 'params','GLint *' ))
+glGetQueryObjectivANGLE.version = ''
+glGetQueryObjectivANGLE.category = 'GL_ANGLE_timer_query'
+glGetQueryObjectivANGLE.trace = True
+glGetQueryObjectivANGLE.play = True
+gl.add(glGetQueryObjectivANGLE)
+
+glGetQueryObjectui64vANGLE = Function('glGetQueryObjectui64vANGLE')
+glGetQueryObjectui64vANGLE.ret = Return('void')
+glGetQueryObjectui64vANGLE.add( Input( 'id','GLuint' ))
+glGetQueryObjectui64vANGLE.add( Input( 'pname','GLenum' ))
+glGetQueryObjectui64vANGLE.add( Output( 'params','GLuint64 *' ))
+glGetQueryObjectui64vANGLE.version = ''
+glGetQueryObjectui64vANGLE.category = 'GL_ANGLE_timer_query'
+glGetQueryObjectui64vANGLE.trace = True
+glGetQueryObjectui64vANGLE.play = True
+gl.add(glGetQueryObjectui64vANGLE)
+
+glGetQueryObjectuivANGLE = Function('glGetQueryObjectuivANGLE')
+glGetQueryObjectuivANGLE.ret = Return('void')
+glGetQueryObjectuivANGLE.add( Input( 'id','GLuint' ))
+glGetQueryObjectuivANGLE.add( Input( 'pname','GLenum' ))
+glGetQueryObjectuivANGLE.add( Output( 'params','GLuint *' ))
+glGetQueryObjectuivANGLE.version = ''
+glGetQueryObjectuivANGLE.category = 'GL_ANGLE_timer_query'
+glGetQueryObjectuivANGLE.trace = True
+glGetQueryObjectuivANGLE.play = True
+gl.add(glGetQueryObjectuivANGLE)
+
+glGetQueryivANGLE = Function('glGetQueryivANGLE')
+glGetQueryivANGLE.ret = Return('void')
+glGetQueryivANGLE.add( Input( 'target','GLenum' ))
+glGetQueryivANGLE.add( Input( 'pname','GLenum' ))
+glGetQueryivANGLE.add( Output( 'params','GLint *' ))
+glGetQueryivANGLE.version = ''
+glGetQueryivANGLE.category = 'GL_ANGLE_timer_query'
+glGetQueryivANGLE.trace = True
+glGetQueryivANGLE.play = True
+gl.add(glGetQueryivANGLE)
+
+glIsQueryANGLE = Function('glIsQueryANGLE')
+glIsQueryANGLE.ret = Return('GLboolean')
+glIsQueryANGLE.add( Input( 'id','GLuint' ))
+glIsQueryANGLE.version = ''
+glIsQueryANGLE.category = 'GL_ANGLE_timer_query'
+glIsQueryANGLE.trace = True
+glIsQueryANGLE.play = True
+gl.add(glIsQueryANGLE)
+
+glQueryCounterANGLE = Function('glQueryCounterANGLE')
+glQueryCounterANGLE.ret = Return('void')
+glQueryCounterANGLE.add( Input( 'id','GLuint' ))
+glQueryCounterANGLE.add( Input( 'target','GLenum' ))
+glQueryCounterANGLE.version = ''
+glQueryCounterANGLE.category = 'GL_ANGLE_timer_query'
+glQueryCounterANGLE.trace = True
+glQueryCounterANGLE.play = True
+gl.add(glQueryCounterANGLE)
+
 # GL_ANGLE_translated_shader_source
 
 glGetTranslatedShaderSourceANGLE = Function('glGetTranslatedShaderSourceANGLE')
@@ -20121,6 +20287,18 @@ glBufferStorage.category = 'GL_ARB_buffer_storage'
 glBufferStorage.trace = True
 glBufferStorage.play = True
 gl.add(glBufferStorage)
+
+glNamedBufferStorageEXT = Function('glNamedBufferStorageEXT')
+glNamedBufferStorageEXT.ret = Return('void')
+glNamedBufferStorageEXT.add( Input( 'buffer','GLuint' ))
+glNamedBufferStorageEXT.add( Input( 'size','GLsizeiptr' ))
+glNamedBufferStorageEXT.add( Input( 'data','const GLvoid *' ))
+glNamedBufferStorageEXT.add( Input( 'flags','GLbitfield' ))
+glNamedBufferStorageEXT.version = ''
+glNamedBufferStorageEXT.category = 'GL_ARB_buffer_storage'
+glNamedBufferStorageEXT.trace = True
+glNamedBufferStorageEXT.play = True
+gl.add(glNamedBufferStorageEXT)
 
 # GL_ARB_cl_event
 
@@ -25232,6 +25410,81 @@ glBindVertexBuffer.category = 'GL_ARB_vertex_attrib_binding'
 glBindVertexBuffer.trace = True
 glBindVertexBuffer.play = True
 gl.add(glBindVertexBuffer)
+
+glVertexArrayBindVertexBufferEXT = Function('glVertexArrayBindVertexBufferEXT')
+glVertexArrayBindVertexBufferEXT.ret = Return('void')
+glVertexArrayBindVertexBufferEXT.add( Input( 'vaobj','GLuint' ))
+glVertexArrayBindVertexBufferEXT.add( Input( 'bindingindex','GLuint' ))
+glVertexArrayBindVertexBufferEXT.add( Input( 'buffer','GLuint' ))
+glVertexArrayBindVertexBufferEXT.add( Input( 'offset','GLintptr' ))
+glVertexArrayBindVertexBufferEXT.add( Input( 'stride','GLsizei' ))
+glVertexArrayBindVertexBufferEXT.version = ''
+glVertexArrayBindVertexBufferEXT.category = 'GL_ARB_vertex_attrib_binding'
+glVertexArrayBindVertexBufferEXT.trace = True
+glVertexArrayBindVertexBufferEXT.play = True
+gl.add(glVertexArrayBindVertexBufferEXT)
+
+glVertexArrayVertexAttribBindingEXT = Function('glVertexArrayVertexAttribBindingEXT')
+glVertexArrayVertexAttribBindingEXT.ret = Return('void')
+glVertexArrayVertexAttribBindingEXT.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexAttribBindingEXT.add( Input( 'attribindex','GLuint' ))
+glVertexArrayVertexAttribBindingEXT.add( Input( 'bindingindex','GLuint' ))
+glVertexArrayVertexAttribBindingEXT.version = ''
+glVertexArrayVertexAttribBindingEXT.category = 'GL_ARB_vertex_attrib_binding'
+glVertexArrayVertexAttribBindingEXT.trace = True
+glVertexArrayVertexAttribBindingEXT.play = True
+gl.add(glVertexArrayVertexAttribBindingEXT)
+
+glVertexArrayVertexAttribFormatEXT = Function('glVertexArrayVertexAttribFormatEXT')
+glVertexArrayVertexAttribFormatEXT.ret = Return('void')
+glVertexArrayVertexAttribFormatEXT.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexAttribFormatEXT.add( Input( 'attribindex','GLuint' ))
+glVertexArrayVertexAttribFormatEXT.add( Input( 'size','GLint' ))
+glVertexArrayVertexAttribFormatEXT.add( Input( 'type','GLenum' ))
+glVertexArrayVertexAttribFormatEXT.add( Input( 'normalized','GLboolean' ))
+glVertexArrayVertexAttribFormatEXT.add( Input( 'relativeoffset','GLuint' ))
+glVertexArrayVertexAttribFormatEXT.version = ''
+glVertexArrayVertexAttribFormatEXT.category = 'GL_ARB_vertex_attrib_binding'
+glVertexArrayVertexAttribFormatEXT.trace = True
+glVertexArrayVertexAttribFormatEXT.play = True
+gl.add(glVertexArrayVertexAttribFormatEXT)
+
+glVertexArrayVertexAttribIFormatEXT = Function('glVertexArrayVertexAttribIFormatEXT')
+glVertexArrayVertexAttribIFormatEXT.ret = Return('void')
+glVertexArrayVertexAttribIFormatEXT.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexAttribIFormatEXT.add( Input( 'attribindex','GLuint' ))
+glVertexArrayVertexAttribIFormatEXT.add( Input( 'size','GLint' ))
+glVertexArrayVertexAttribIFormatEXT.add( Input( 'type','GLenum' ))
+glVertexArrayVertexAttribIFormatEXT.add( Input( 'relativeoffset','GLuint' ))
+glVertexArrayVertexAttribIFormatEXT.version = ''
+glVertexArrayVertexAttribIFormatEXT.category = 'GL_ARB_vertex_attrib_binding'
+glVertexArrayVertexAttribIFormatEXT.trace = True
+glVertexArrayVertexAttribIFormatEXT.play = True
+gl.add(glVertexArrayVertexAttribIFormatEXT)
+
+glVertexArrayVertexAttribLFormatEXT = Function('glVertexArrayVertexAttribLFormatEXT')
+glVertexArrayVertexAttribLFormatEXT.ret = Return('void')
+glVertexArrayVertexAttribLFormatEXT.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexAttribLFormatEXT.add( Input( 'attribindex','GLuint' ))
+glVertexArrayVertexAttribLFormatEXT.add( Input( 'size','GLint' ))
+glVertexArrayVertexAttribLFormatEXT.add( Input( 'type','GLenum' ))
+glVertexArrayVertexAttribLFormatEXT.add( Input( 'relativeoffset','GLuint' ))
+glVertexArrayVertexAttribLFormatEXT.version = ''
+glVertexArrayVertexAttribLFormatEXT.category = 'GL_ARB_vertex_attrib_binding'
+glVertexArrayVertexAttribLFormatEXT.trace = True
+glVertexArrayVertexAttribLFormatEXT.play = True
+gl.add(glVertexArrayVertexAttribLFormatEXT)
+
+glVertexArrayVertexBindingDivisorEXT = Function('glVertexArrayVertexBindingDivisorEXT')
+glVertexArrayVertexBindingDivisorEXT.ret = Return('void')
+glVertexArrayVertexBindingDivisorEXT.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexBindingDivisorEXT.add( Input( 'bindingindex','GLuint' ))
+glVertexArrayVertexBindingDivisorEXT.add( Input( 'divisor','GLuint' ))
+glVertexArrayVertexBindingDivisorEXT.version = ''
+glVertexArrayVertexBindingDivisorEXT.category = 'GL_ARB_vertex_attrib_binding'
+glVertexArrayVertexBindingDivisorEXT.trace = True
+glVertexArrayVertexBindingDivisorEXT.play = True
+gl.add(glVertexArrayVertexBindingDivisorEXT)
 
 glVertexAttribBinding = Function('glVertexAttribBinding')
 glVertexAttribBinding.ret = Return('void')
@@ -35541,6 +35794,21 @@ glEndConditionalRenderNV.trace = True
 glEndConditionalRenderNV.play = True
 gl.add(glEndConditionalRenderNV)
 
+# GL_NV_copy_buffer
+
+glCopyBufferSubDataNV = Function('glCopyBufferSubDataNV')
+glCopyBufferSubDataNV.ret = Return('void')
+glCopyBufferSubDataNV.add( Input( 'readtarget','GLenum' ))
+glCopyBufferSubDataNV.add( Input( 'writetarget','GLenum' ))
+glCopyBufferSubDataNV.add( Input( 'readoffset','GLintptr' ))
+glCopyBufferSubDataNV.add( Input( 'writeoffset','GLintptr' ))
+glCopyBufferSubDataNV.add( Input( 'size','GLsizeiptr' ))
+glCopyBufferSubDataNV.version = ''
+glCopyBufferSubDataNV.category = 'GL_NV_copy_buffer'
+glCopyBufferSubDataNV.trace = True
+glCopyBufferSubDataNV.play = True
+gl.add(glCopyBufferSubDataNV)
+
 # GL_NV_copy_image
 
 glCopyImageSubDataNV = Function('glCopyImageSubDataNV')
@@ -37048,6 +37316,80 @@ glVertexWeighthvNV.category = 'GL_NV_half_float'
 glVertexWeighthvNV.trace = True
 glVertexWeighthvNV.play = True
 gl.add(glVertexWeighthvNV)
+
+# GL_NV_non_square_matrices
+
+glUniformMatrix2x3fvNV = Function('glUniformMatrix2x3fvNV')
+glUniformMatrix2x3fvNV.ret = Return('void')
+glUniformMatrix2x3fvNV.add( Input( 'location','GLint' ))
+glUniformMatrix2x3fvNV.add( Input( 'count','GLsizei' ))
+glUniformMatrix2x3fvNV.add( Input( 'transpose','GLboolean' ))
+glUniformMatrix2x3fvNV.add( Input( 'value','const GLfloat *' ))
+glUniformMatrix2x3fvNV.version = ''
+glUniformMatrix2x3fvNV.category = 'GL_NV_non_square_matrices'
+glUniformMatrix2x3fvNV.trace = True
+glUniformMatrix2x3fvNV.play = True
+gl.add(glUniformMatrix2x3fvNV)
+
+glUniformMatrix2x4fvNV = Function('glUniformMatrix2x4fvNV')
+glUniformMatrix2x4fvNV.ret = Return('void')
+glUniformMatrix2x4fvNV.add( Input( 'location','GLint' ))
+glUniformMatrix2x4fvNV.add( Input( 'count','GLsizei' ))
+glUniformMatrix2x4fvNV.add( Input( 'transpose','GLboolean' ))
+glUniformMatrix2x4fvNV.add( Input( 'value','const GLfloat *' ))
+glUniformMatrix2x4fvNV.version = ''
+glUniformMatrix2x4fvNV.category = 'GL_NV_non_square_matrices'
+glUniformMatrix2x4fvNV.trace = True
+glUniformMatrix2x4fvNV.play = True
+gl.add(glUniformMatrix2x4fvNV)
+
+glUniformMatrix3x2fvNV = Function('glUniformMatrix3x2fvNV')
+glUniformMatrix3x2fvNV.ret = Return('void')
+glUniformMatrix3x2fvNV.add( Input( 'location','GLint' ))
+glUniformMatrix3x2fvNV.add( Input( 'count','GLsizei' ))
+glUniformMatrix3x2fvNV.add( Input( 'transpose','GLboolean' ))
+glUniformMatrix3x2fvNV.add( Input( 'value','const GLfloat *' ))
+glUniformMatrix3x2fvNV.version = ''
+glUniformMatrix3x2fvNV.category = 'GL_NV_non_square_matrices'
+glUniformMatrix3x2fvNV.trace = True
+glUniformMatrix3x2fvNV.play = True
+gl.add(glUniformMatrix3x2fvNV)
+
+glUniformMatrix3x4fvNV = Function('glUniformMatrix3x4fvNV')
+glUniformMatrix3x4fvNV.ret = Return('void')
+glUniformMatrix3x4fvNV.add( Input( 'location','GLint' ))
+glUniformMatrix3x4fvNV.add( Input( 'count','GLsizei' ))
+glUniformMatrix3x4fvNV.add( Input( 'transpose','GLboolean' ))
+glUniformMatrix3x4fvNV.add( Input( 'value','const GLfloat *' ))
+glUniformMatrix3x4fvNV.version = ''
+glUniformMatrix3x4fvNV.category = 'GL_NV_non_square_matrices'
+glUniformMatrix3x4fvNV.trace = True
+glUniformMatrix3x4fvNV.play = True
+gl.add(glUniformMatrix3x4fvNV)
+
+glUniformMatrix4x2fvNV = Function('glUniformMatrix4x2fvNV')
+glUniformMatrix4x2fvNV.ret = Return('void')
+glUniformMatrix4x2fvNV.add( Input( 'location','GLint' ))
+glUniformMatrix4x2fvNV.add( Input( 'count','GLsizei' ))
+glUniformMatrix4x2fvNV.add( Input( 'transpose','GLboolean' ))
+glUniformMatrix4x2fvNV.add( Input( 'value','const GLfloat *' ))
+glUniformMatrix4x2fvNV.version = ''
+glUniformMatrix4x2fvNV.category = 'GL_NV_non_square_matrices'
+glUniformMatrix4x2fvNV.trace = True
+glUniformMatrix4x2fvNV.play = True
+gl.add(glUniformMatrix4x2fvNV)
+
+glUniformMatrix4x3fvNV = Function('glUniformMatrix4x3fvNV')
+glUniformMatrix4x3fvNV.ret = Return('void')
+glUniformMatrix4x3fvNV.add( Input( 'location','GLint' ))
+glUniformMatrix4x3fvNV.add( Input( 'count','GLsizei' ))
+glUniformMatrix4x3fvNV.add( Input( 'transpose','GLboolean' ))
+glUniformMatrix4x3fvNV.add( Input( 'value','const GLfloat *' ))
+glUniformMatrix4x3fvNV.version = ''
+glUniformMatrix4x3fvNV.category = 'GL_NV_non_square_matrices'
+glUniformMatrix4x3fvNV.trace = True
+glUniformMatrix4x3fvNV.play = True
+gl.add(glUniformMatrix4x3fvNV)
 
 # GL_NV_occlusion_query
 
@@ -43881,6 +44223,12 @@ GL_ARB_vertex_shader.enumerants = ['GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB','GL
 GL_ARB_vertex_shader.functions = ['glGetAttribLocationARB','glBindAttribLocationARB','glGetActiveAttribARB']
 gl.add(GL_ARB_vertex_shader)
 
+GL_ARB_vertex_type_10f_11f_11f_rev = Extension('GL_ARB_vertex_type_10f_11f_11f_rev')
+GL_ARB_vertex_type_10f_11f_11f_rev.url = 'http://www.opengl.org/registry/specs/ARB/vertex_type_10f_11f_11f_rev.txt'
+GL_ARB_vertex_type_10f_11f_11f_rev.enumerants = ['']
+GL_ARB_vertex_type_10f_11f_11f_rev.functions = ['']
+gl.add(GL_ARB_vertex_type_10f_11f_11f_rev)
+
 GL_ARB_vertex_type_2_10_10_10_rev = Extension('GL_ARB_vertex_type_2_10_10_10_rev')
 GL_ARB_vertex_type_2_10_10_10_rev.url = 'http://www.opengl.org/registry/specs/ARB/vertex_type_2_10_10_10_rev.txt'
 GL_ARB_vertex_type_2_10_10_10_rev.enumerants = ['GL_INT_2_10_10_10_REV']
@@ -44720,6 +45068,12 @@ GL_NV_conditional_render.enumerants = ['GL_QUERY_BY_REGION_NO_WAIT_NV','GL_QUERY
 GL_NV_conditional_render.functions = ['glBeginConditionalRenderNV','glEndConditionalRenderNV']
 gl.add(GL_NV_conditional_render)
 
+GL_NV_copy_buffer = Extension('GL_NV_copy_buffer')
+GL_NV_copy_buffer.url = 'http://www.khronos.org/registry/gles/extensions/NV/NV_copy_buffer.txt'
+GL_NV_copy_buffer.enumerants = ['GL_COPY_READ_BUFFER_NV','GL_COPY_WRITE_BUFFER_NV']
+GL_NV_copy_buffer.functions = ['glCopyBufferSubDataNV']
+gl.add(GL_NV_copy_buffer)
+
 GL_NV_copy_depth_to_color = Extension('GL_NV_copy_depth_to_color')
 GL_NV_copy_depth_to_color.url = 'http://www.opengl.org/registry/specs/NV/copy_depth_to_color.txt'
 GL_NV_copy_depth_to_color.enumerants = ['GL_DEPTH_STENCIL_TO_BGRA_NV','GL_DEPTH_STENCIL_TO_RGBA_NV']
@@ -44859,6 +45213,12 @@ GL_NV_multisample_filter_hint = Extension('GL_NV_multisample_filter_hint')
 GL_NV_multisample_filter_hint.url = 'http://www.opengl.org/registry/specs/NV/multisample_filter_hint.txt'
 GL_NV_multisample_filter_hint.enumerants = ['GL_MULTISAMPLE_FILTER_HINT_NV']
 gl.add(GL_NV_multisample_filter_hint)
+
+GL_NV_non_square_matrices = Extension('GL_NV_non_square_matrices')
+GL_NV_non_square_matrices.url = 'http://www.khronos.org/registry/gles/extensions/NV/NV_non_square_matrices.txt'
+GL_NV_non_square_matrices.enumerants = ['GL_FLOAT_MAT2x3_NV','GL_FLOAT_MAT2x4_NV','GL_FLOAT_MAT3x2_NV','GL_FLOAT_MAT3x4_NV','GL_FLOAT_MAT4x2_NV','GL_FLOAT_MAT4x3_NV']
+GL_NV_non_square_matrices.functions = ['glUniformMatrix2x3fvNV','glUniformMatrix2x4fvNV','glUniformMatrix3x2fvNV','glUniformMatrix3x4fvNV','glUniformMatrix4x2fvNV','glUniformMatrix4x3fvNV']
+gl.add(GL_NV_non_square_matrices)
 
 GL_NV_occlusion_query = Extension('GL_NV_occlusion_query')
 GL_NV_occlusion_query.url = 'http://www.opengl.org/registry/specs/NV/occlusion_query.txt'
@@ -45076,6 +45436,12 @@ GL_NV_video_capture.url = 'http://www.opengl.org/registry/specs/NV/video_capture
 GL_NV_video_capture.enumerants = ['GL_FAILURE_NV','GL_FIELD_LOWER_NV','GL_FIELD_UPPER_NV','GL_LAST_VIDEO_CAPTURE_STATUS_NV','GL_NEXT_VIDEO_CAPTURE_BUFFER_STATUS_NV','GL_NUM_VIDEO_CAPTURE_STREAMS_NV','GL_PARTIAL_SUCCESS_NV','GL_SUCCESS_NV','GL_VIDEO_BUFFER_BINDING_NV','GL_VIDEO_BUFFER_INTERNAL_FORMAT_NV','GL_VIDEO_BUFFER_NV','GL_VIDEO_BUFFER_PITCH_NV','GL_VIDEO_CAPTURE_FIELD_LOWER_HEIGHT_NV','GL_VIDEO_CAPTURE_FIELD_UPPER_HEIGHT_NV','GL_VIDEO_CAPTURE_FRAME_HEIGHT_NV','GL_VIDEO_CAPTURE_FRAME_WIDTH_NV','GL_VIDEO_CAPTURE_SURFACE_ORIGIN_NV','GL_VIDEO_CAPTURE_TO_422_SUPPORTED_NV','GL_VIDEO_COLOR_CONVERSION_MATRIX_NV','GL_VIDEO_COLOR_CONVERSION_MAX_NV','GL_VIDEO_COLOR_CONVERSION_MIN_NV','GL_VIDEO_COLOR_CONVERSION_OFFSET_NV','GL_YCBAYCR8A_4224_NV','GL_YCBYCR8_422_NV','GL_Z4Y12Z4CB12Z4A12Z4Y12Z4CR12Z4A12_4224_NV','GL_Z4Y12Z4CB12Z4CR12_444_NV','GL_Z4Y12Z4CB12Z4Y12Z4CR12_422_NV','GL_Z6Y10Z6CB10Z6A10Z6Y10Z6CR10Z6A10_4224_NV','GL_Z6Y10Z6CB10Z6Y10Z6CR10_422_NV']
 GL_NV_video_capture.functions = ['glVideoCaptureNV','glBeginVideoCaptureNV','glBindVideoCaptureStreamBufferNV','glBindVideoCaptureStreamTextureNV','glEndVideoCaptureNV','glGetVideoCaptureStreamdvNV','glGetVideoCaptureStreamfvNV','glGetVideoCaptureStreamivNV','glGetVideoCaptureivNV','glVideoCaptureStreamParameterdvNV','glVideoCaptureStreamParameterfvNV','glVideoCaptureStreamParameterivNV']
 gl.add(GL_NV_video_capture)
+
+GL_OES_EGL_image_external = Extension('GL_OES_EGL_image_external')
+GL_OES_EGL_image_external.url = 'http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image_external.txt'
+GL_OES_EGL_image_external.enumerants = ['GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES','GL_SAMPLER_EXTERNAL_OES','GL_TEXTURE_BINDING_EXTERNAL_OES','GL_TEXTURE_EXTERNAL_OES']
+GL_OES_EGL_image_external.functions = ['glEGLImageTargetTexture2DOES']
+gl.add(GL_OES_EGL_image_external)
 
 GL_OES_byte_coordinates = Extension('GL_OES_byte_coordinates')
 GL_OES_byte_coordinates.url = 'http://www.opengl.org/registry/specs/OES/OES_byte_coordinates.txt'

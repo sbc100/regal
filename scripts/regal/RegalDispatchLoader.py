@@ -32,6 +32,8 @@ using namespace std;
 #include "RegalHelper.h"
 #include "RegalPrivate.h"
 #include "RegalContext.h"
+#include "RegalDispatcherGL.h"
+#include "RegalDispatcherGlobal.h"
 ${LOCAL_INCLUDE}
 
 REGAL_GLOBAL_END
@@ -46,22 +48,14 @@ namespace Loader
 
 ${LOCAL_CODE}
 
-  static DispatchTableGL &getDispatchGL()
+  static DispatchTableGL &_getDispatchGL()
   {
     RegalContext * _context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     return _context->dispatcher.driver;
   }
   
-  static void getProcAddressGL(DispatchTableGL &driver, void (**func)(), void (*funcRegal)(), const char *name)
-  {
-    GetProcAddress(*func, name);
-    RegalAssert(*func!=funcRegal);
-    if (*func==funcRegal)
-      *func = NULL;
-  }
-
-  static void getProcAddressGlobal(DispatchTableGlobal &driver, void (**func)(), void (*funcRegal)(), const char *name)
+  static void _getProcAddress(void (**func)(), void (*funcRegal)(), const char *name)
   {
     GetProcAddress(*func, name);
     RegalAssert(*func!=funcRegal);
@@ -130,12 +124,11 @@ def apiLoaderFuncDefineCode(apis, args):
       # Get a reference to the appropriate dispatch table and attempt GetProcAddress
 
       if function.needsContext:
-        code += '    DispatchTableGL &_driver = getDispatchGL();\n'
-        code += '    getProcAddressGL(_driver,reinterpret_cast<void (**)()>(&_driver.%s),reinterpret_cast<void (*)()>(%s),"%s");\n'%(name,name,name)
+        code += '    DispatchTableGL &_driver = _getDispatchGL();\n'
       else:
         code += '    DispatchTableGlobal &_driver = dispatcherGlobal.driver;\n'
-        code += '    getProcAddressGlobal(_driver,reinterpret_cast<void (**)()>(&_driver.%s),reinterpret_cast<void (*)()>(%s),"%s");\n'%(name,name,name)
 
+      code += '    _getProcAddress(reinterpret_cast<void (**)()>(&_driver.%s),reinterpret_cast<void (*)()>(%s),"%s");\n'%(name,name,name)
       code += '    '
       if not typeIsVoid(rType):
         code += 'return '
@@ -167,7 +160,7 @@ def generateLoaderSource(apis, args):
   substitute['COPYRIGHT']       = args.copyright
   substitute['DISPATCH_NAME']   = 'Loader'
   substitute['LOCAL_CODE']      = ''
-  substitute['LOCAL_INCLUDE']   = '#include "RegalDispatcherGlobal.h"\n'
+  substitute['LOCAL_INCLUDE']   = ''
   substitute['API_DISPATCH_FUNC_DEFINE'] = funcDefine
   substitute['API_DISPATCH_FUNC_INIT'] = funcInit
   substitute['API_DISPATCH_GLOBAL_FUNC_INIT'] = globalFuncInit

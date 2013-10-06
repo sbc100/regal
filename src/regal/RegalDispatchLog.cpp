@@ -6716,6 +6716,119 @@ static void REGAL_CALL log_glVertexAttribDivisorANGLE(GLuint index, GLuint divis
     Driver("glVertexAttribDivisorANGLE","(", index, ", ", divisor, ")");
 }
 
+// GL_ANGLE_timer_query
+
+static void REGAL_CALL log_glBeginQueryANGLE(GLenum target, GLuint id)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBeginQueryANGLE)(target, id);
+    Driver("glBeginQueryANGLE","(", toString(target), ", ", id, ")");
+}
+
+static void REGAL_CALL log_glDeleteQueriesANGLE(GLsizei n, const GLuint *ids)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glDeleteQueriesANGLE)(n, ids);
+    Driver("glDeleteQueriesANGLE","(", n, ", ", boost::print::optional(ids,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glEndQueryANGLE(GLenum target)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glEndQueryANGLE)(target);
+    Driver("glEndQueryANGLE","(", toString(target), ")");
+}
+
+static void REGAL_CALL log_glGenQueriesANGLE(GLsizei n, GLuint *ids)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGenQueriesANGLE)(n, ids);
+    Driver("glGenQueriesANGLE","(", n, ", ", boost::print::optional(ids,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glGetQueryObjecti64vANGLE(GLuint id, GLenum pname, GLint64 *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjecti64vANGLE)(id, pname, params);
+    Driver("glGetQueryObjecti64vANGLE","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glGetQueryObjectivANGLE(GLuint id, GLenum pname, GLint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectivANGLE)(id, pname, params);
+    Driver("glGetQueryObjectivANGLE","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glGetQueryObjectui64vANGLE(GLuint id, GLenum pname, GLuint64 *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectui64vANGLE)(id, pname, params);
+    Driver("glGetQueryObjectui64vANGLE","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glGetQueryObjectuivANGLE(GLuint id, GLenum pname, GLuint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectuivANGLE)(id, pname, params);
+    Driver("glGetQueryObjectuivANGLE","(", id, ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glGetQueryivANGLE(GLenum target, GLenum pname, GLint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryivANGLE)(target, pname, params);
+    Driver("glGetQueryivANGLE","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+}
+
+static GLboolean REGAL_CALL log_glIsQueryANGLE(GLuint id)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    GLboolean  ret = _next->call(&_next->glIsQueryANGLE)(id);
+    Driver("glIsQueryANGLE","(", id, ")", " returned ", toString(ret));
+    return ret;
+}
+
+static void REGAL_CALL log_glQueryCounterANGLE(GLuint id, GLenum target)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glQueryCounterANGLE)(id, target);
+    Driver("glQueryCounterANGLE","(", id, ", ", toString(target), ")");
+}
+
 // GL_ANGLE_translated_shader_source
 
 static void REGAL_CALL log_glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source)
@@ -7516,6 +7629,16 @@ static void REGAL_CALL log_glBufferStorage(GLenum target, GLsizeiptr size, const
     RegalAssert(_next);
     _next->call(&_next->glBufferStorage)(target, size, data, flags);
     Driver("glBufferStorage","(", toString(target), ", ", size, ", ", boost::print::optional(data,Logging::pointers), ", ", flags, ")");
+}
+
+static void REGAL_CALL log_glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, const GLvoid *data, GLbitfield flags)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glNamedBufferStorageEXT)(buffer, size, data, flags);
+    Driver("glNamedBufferStorageEXT","(", buffer, ", ", size, ", ", boost::print::optional(data,Logging::pointers), ", ", flags, ")");
 }
 
 // GL_ARB_cl_event
@@ -11921,6 +12044,66 @@ static void REGAL_CALL log_glBindVertexBuffer(GLuint bindingindex, GLuint buffer
     RegalAssert(_next);
     _next->call(&_next->glBindVertexBuffer)(bindingindex, buffer, offset, stride);
     Driver("glBindVertexBuffer","(", bindingindex, ", ", buffer, ", ", offset, ", ", stride, ")");
+}
+
+static void REGAL_CALL log_glVertexArrayBindVertexBufferEXT(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayBindVertexBufferEXT)(vaobj, bindingindex, buffer, offset, stride);
+    Driver("glVertexArrayBindVertexBufferEXT","(", vaobj, ", ", bindingindex, ", ", buffer, ", ", offset, ", ", stride, ")");
+}
+
+static void REGAL_CALL log_glVertexArrayVertexAttribBindingEXT(GLuint vaobj, GLuint attribindex, GLuint bindingindex)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribBindingEXT)(vaobj, attribindex, bindingindex);
+    Driver("glVertexArrayVertexAttribBindingEXT","(", vaobj, ", ", attribindex, ", ", bindingindex, ")");
+}
+
+static void REGAL_CALL log_glVertexArrayVertexAttribFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribFormatEXT)(vaobj, attribindex, size, type, normalized, relativeoffset);
+    Driver("glVertexArrayVertexAttribFormatEXT","(", vaobj, ", ", attribindex, ", ", size, ", ", toString(type), ", ", toString(normalized), ", ", relativeoffset, ")");
+}
+
+static void REGAL_CALL log_glVertexArrayVertexAttribIFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribIFormatEXT)(vaobj, attribindex, size, type, relativeoffset);
+    Driver("glVertexArrayVertexAttribIFormatEXT","(", vaobj, ", ", attribindex, ", ", size, ", ", toString(type), ", ", relativeoffset, ")");
+}
+
+static void REGAL_CALL log_glVertexArrayVertexAttribLFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribLFormatEXT)(vaobj, attribindex, size, type, relativeoffset);
+    Driver("glVertexArrayVertexAttribLFormatEXT","(", vaobj, ", ", attribindex, ", ", size, ", ", toString(type), ", ", relativeoffset, ")");
+}
+
+static void REGAL_CALL log_glVertexArrayVertexBindingDivisorEXT(GLuint vaobj, GLuint bindingindex, GLuint divisor)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexBindingDivisorEXT)(vaobj, bindingindex, divisor);
+    Driver("glVertexArrayVertexBindingDivisorEXT","(", vaobj, ", ", bindingindex, ", ", divisor, ")");
 }
 
 static void REGAL_CALL log_glVertexAttribBinding(GLuint attribindex, GLuint bindingindex)
@@ -21026,6 +21209,18 @@ static void REGAL_CALL log_glEndConditionalRenderNV(void)
     Driver("glEndConditionalRenderNV","()");
 }
 
+// GL_NV_copy_buffer
+
+static void REGAL_CALL log_glCopyBufferSubDataNV(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glCopyBufferSubDataNV)(readtarget, writetarget, readoffset, writeoffset, size);
+    Driver("glCopyBufferSubDataNV","(", toString(readtarget), ", ", toString(writetarget), ", ", readoffset, ", ", writeoffset, ", ", size, ")");
+}
+
 // GL_NV_copy_image
 
 static void REGAL_CALL log_glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
@@ -22366,6 +22561,68 @@ static void REGAL_CALL log_glVertexWeighthvNV(const GLhalfNV *weight)
     RegalAssert(_next);
     _next->call(&_next->glVertexWeighthvNV)(weight);
     Driver("glVertexWeighthvNV","(", boost::print::array(weight,1), ")");
+}
+
+// GL_NV_non_square_matrices
+
+static void REGAL_CALL log_glUniformMatrix2x3fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix2x3fvNV)(location, count, transpose, value);
+    Driver("glUniformMatrix2x3fvNV","(", location, ", ", count, ", ", toString(transpose), ", ", boost::print::optional(value,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glUniformMatrix2x4fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix2x4fvNV)(location, count, transpose, value);
+    Driver("glUniformMatrix2x4fvNV","(", location, ", ", count, ", ", toString(transpose), ", ", boost::print::optional(value,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glUniformMatrix3x2fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix3x2fvNV)(location, count, transpose, value);
+    Driver("glUniformMatrix3x2fvNV","(", location, ", ", count, ", ", toString(transpose), ", ", boost::print::optional(value,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glUniformMatrix3x4fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix3x4fvNV)(location, count, transpose, value);
+    Driver("glUniformMatrix3x4fvNV","(", location, ", ", count, ", ", toString(transpose), ", ", boost::print::optional(value,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glUniformMatrix4x2fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix4x2fvNV)(location, count, transpose, value);
+    Driver("glUniformMatrix4x2fvNV","(", location, ", ", count, ", ", toString(transpose), ", ", boost::print::optional(value,Logging::pointers), ")");
+}
+
+static void REGAL_CALL log_glUniformMatrix4x3fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.logging.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix4x3fvNV)(location, count, transpose, value);
+    Driver("glUniformMatrix4x3fvNV","(", location, ", ", count, ", ", toString(transpose), ", ", boost::print::optional(value,Logging::pointers), ")");
 }
 
 // GL_NV_occlusion_query
@@ -31839,6 +32096,20 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   tbl.glDrawElementsInstancedANGLE = log_glDrawElementsInstancedANGLE;
   tbl.glVertexAttribDivisorANGLE = log_glVertexAttribDivisorANGLE;
 
+  // GL_ANGLE_timer_query
+
+  tbl.glBeginQueryANGLE = log_glBeginQueryANGLE;
+  tbl.glDeleteQueriesANGLE = log_glDeleteQueriesANGLE;
+  tbl.glEndQueryANGLE = log_glEndQueryANGLE;
+  tbl.glGenQueriesANGLE = log_glGenQueriesANGLE;
+  tbl.glGetQueryObjecti64vANGLE = log_glGetQueryObjecti64vANGLE;
+  tbl.glGetQueryObjectivANGLE = log_glGetQueryObjectivANGLE;
+  tbl.glGetQueryObjectui64vANGLE = log_glGetQueryObjectui64vANGLE;
+  tbl.glGetQueryObjectuivANGLE = log_glGetQueryObjectuivANGLE;
+  tbl.glGetQueryivANGLE = log_glGetQueryivANGLE;
+  tbl.glIsQueryANGLE = log_glIsQueryANGLE;
+  tbl.glQueryCounterANGLE = log_glQueryCounterANGLE;
+
   // GL_ANGLE_translated_shader_source
 
   tbl.glGetTranslatedShaderSourceANGLE = log_glGetTranslatedShaderSourceANGLE;
@@ -31967,6 +32238,7 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   // GL_ARB_buffer_storage
 
   tbl.glBufferStorage = log_glBufferStorage;
+  tbl.glNamedBufferStorageEXT = log_glNamedBufferStorageEXT;
 
   // GL_ARB_cl_event
 
@@ -32584,6 +32856,12 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   // GL_ARB_vertex_attrib_binding
 
   tbl.glBindVertexBuffer = log_glBindVertexBuffer;
+  tbl.glVertexArrayBindVertexBufferEXT = log_glVertexArrayBindVertexBufferEXT;
+  tbl.glVertexArrayVertexAttribBindingEXT = log_glVertexArrayVertexAttribBindingEXT;
+  tbl.glVertexArrayVertexAttribFormatEXT = log_glVertexArrayVertexAttribFormatEXT;
+  tbl.glVertexArrayVertexAttribIFormatEXT = log_glVertexArrayVertexAttribIFormatEXT;
+  tbl.glVertexArrayVertexAttribLFormatEXT = log_glVertexArrayVertexAttribLFormatEXT;
+  tbl.glVertexArrayVertexBindingDivisorEXT = log_glVertexArrayVertexBindingDivisorEXT;
   tbl.glVertexAttribBinding = log_glVertexAttribBinding;
   tbl.glVertexAttribFormat = log_glVertexAttribFormat;
   tbl.glVertexAttribIFormat = log_glVertexAttribIFormat;
@@ -33771,6 +34049,10 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   tbl.glBeginConditionalRenderNV = log_glBeginConditionalRenderNV;
   tbl.glEndConditionalRenderNV = log_glEndConditionalRenderNV;
 
+  // GL_NV_copy_buffer
+
+  tbl.glCopyBufferSubDataNV = log_glCopyBufferSubDataNV;
+
   // GL_NV_copy_image
 
   tbl.glCopyImageSubDataNV = log_glCopyImageSubDataNV;
@@ -33946,6 +34228,15 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   tbl.glVertexAttribs4hvNV = log_glVertexAttribs4hvNV;
   tbl.glVertexWeighthNV = log_glVertexWeighthNV;
   tbl.glVertexWeighthvNV = log_glVertexWeighthvNV;
+
+  // GL_NV_non_square_matrices
+
+  tbl.glUniformMatrix2x3fvNV = log_glUniformMatrix2x3fvNV;
+  tbl.glUniformMatrix2x4fvNV = log_glUniformMatrix2x4fvNV;
+  tbl.glUniformMatrix3x2fvNV = log_glUniformMatrix3x2fvNV;
+  tbl.glUniformMatrix3x4fvNV = log_glUniformMatrix3x4fvNV;
+  tbl.glUniformMatrix4x2fvNV = log_glUniformMatrix4x2fvNV;
+  tbl.glUniformMatrix4x3fvNV = log_glUniformMatrix4x3fvNV;
 
   // GL_NV_occlusion_query
 

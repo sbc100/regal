@@ -1066,6 +1066,7 @@ namespace Token {
       case 0x0000821e: return "GL_CONTEXT_FLAGS";
       case 0x0000821f: return "GL_BUFFER_IMMUTABLE_STORAGE";
       case 0x00008220: return "GL_BUFFER_STORAGE_FLAGS";
+      case 0x00008221: return "GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED";
       case 0x00008222: return "GL_INDEX";
       case 0x00008223: return "GL_DEPTH_BUFFER";
       case 0x00008224: return "GL_STENCIL_BUFFER";
@@ -1256,6 +1257,7 @@ namespace Token {
       case 0x000082e2: return "GL_PROGRAM";
       case 0x000082e3: return "GL_QUERY";
       case 0x000082e4: return "GL_PROGRAM_PIPELINE";
+      case 0x000082e5: return "GL_MAX_VERTEX_ATTRIB_STRIDE";
       case 0x000082e6: return "GL_SAMPLER";
       case 0x000082e7: return "GL_DISPLAY_LIST";
       case 0x000082e8: return "GL_MAX_LABEL_LENGTH";
@@ -2677,6 +2679,10 @@ namespace Token {
       case 0x00008d61: return "GL_HALF_FLOAT_OES";
       case 0x00008d62: return "GL_RGB565";
       case 0x00008d64: return "GL_ETC1_RGB8_OES";
+      case 0x00008d65: return "GL_TEXTURE_EXTERNAL_OES";
+      case 0x00008d66: return "GL_SAMPLER_EXTERNAL_OES";
+      case 0x00008d67: return "GL_TEXTURE_BINDING_EXTERNAL_OES";
+      case 0x00008d68: return "GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES";
       case 0x00008d69: return "GL_PRIMITIVE_RESTART_FIXED_INDEX";
       case 0x00008d6a: return "GL_ANY_SAMPLES_PASSED_CONSERVATIVE";
       case 0x00008d6b: return "GL_MAX_ELEMENT_INDEX";

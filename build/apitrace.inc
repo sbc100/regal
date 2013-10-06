@@ -8,6 +8,7 @@
 APITRACE.CXX :=
 APITRACE.CXX += src/apitrace/common/os_posix.cpp
 APITRACE.CXX += src/apitrace/common/os_win32.cpp
+APITRACE.CXX += src/apitrace/common/os_backtrace.cpp
 APITRACE.CXX += src/apitrace/common/trace_callset.cpp
 APITRACE.CXX += src/apitrace/common/trace_fast_callset.cpp
 APITRACE.CXX += src/apitrace/common/trace_dump.cpp
@@ -26,7 +27,6 @@ APITRACE.CXX += src/apitrace/common/trace_profiler.cpp
 APITRACE.CXX += src/apitrace/common/trace_writer_regal.cpp
 APITRACE.CXX += src/apitrace/common/trace_writer_model.cpp
 APITRACE.CXX += src/apitrace/common/trace_writer.cpp
-APITRACE.CXX += src/apitrace/common/trace_backtrace.cpp
 APITRACE.CXX += src/apitrace/dispatch/glproc_regal.cpp
 #APITRACE.CXX += src/apitrace/dispatch/glproc_egl.cpp
 #APITRACE.CXX += src/apitrace/dispatch/glproc_gl.cpp
@@ -41,6 +41,6 @@ APITRACE.CXX += src/apitrace/wrappers/regaltrace.cpp
 APITRACE.CFLAGS     := -Isrc/apitrace/common -Isrc/apitrace/dispatch -Isrc/apitrace/helpers -Isrc/apitrace/wrappers -Isrc/apitrace
 APITRACE.CFLAGS     += -Isrc/apitrace/thirdparty/khronos
 APITRACE.CFLAGS     += -Isrc/regal -Isrc/snappy -Isrc/zlib/include -Isrc/zlib/src -Isrc/boost
-APITRACE.CFLAGS     += -DTRACE_OS_LOG=0 -DTRACE_BACKTRACE=0 -DTRACE_ENABLED_CHECK=0
+APITRACE.CFLAGS     += -DTRACE_OS_LOG=0 -DHAVE_BACKTRACE=0 -DTRACE_ENABLED_CHECK=0
 
 APITRACE.STATIC     := libapitrace.a

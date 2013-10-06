@@ -12047,6 +12047,198 @@ static void REGAL_CALL code_glVertexAttribDivisorANGLE(GLuint index, GLuint divi
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static void REGAL_CALL code_glBeginQueryANGLE(GLenum target, GLuint id)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glBeginQueryANGLE)(target, id);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glBeginQueryANGLE(";
+                   _code << toString(target);
+    _code << ", "; _code << id;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glDeleteQueriesANGLE(GLsizei n, const GLuint *ids)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glDeleteQueriesANGLE)(n, ids);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glDeleteQueriesANGLE(";
+                   _code << n;
+    _code << ", "; _code << ids;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glEndQueryANGLE(GLenum target)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glEndQueryANGLE)(target);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glEndQueryANGLE(";
+    _code << toString(target);
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGenQueriesANGLE(GLsizei n, GLuint *ids)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGenQueriesANGLE)(n, ids);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGenQueriesANGLE(";
+                   _code << n;
+    _code << ", "; _code << ids;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGetQueryObjecti64vANGLE(GLuint id, GLenum pname, GLint64 *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjecti64vANGLE)(id, pname, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGetQueryObjecti64vANGLE(";
+                   _code << id;
+    _code << ", "; _code << toString(pname);
+    _code << ", "; _code << params;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGetQueryObjectivANGLE(GLuint id, GLenum pname, GLint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectivANGLE)(id, pname, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGetQueryObjectivANGLE(";
+                   _code << id;
+    _code << ", "; _code << toString(pname);
+    _code << ", "; _code << params;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGetQueryObjectui64vANGLE(GLuint id, GLenum pname, GLuint64 *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectui64vANGLE)(id, pname, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGetQueryObjectui64vANGLE(";
+                   _code << id;
+    _code << ", "; _code << toString(pname);
+    _code << ", "; _code << params;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGetQueryObjectuivANGLE(GLuint id, GLenum pname, GLuint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryObjectuivANGLE)(id, pname, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGetQueryObjectuivANGLE(";
+                   _code << id;
+    _code << ", "; _code << toString(pname);
+    _code << ", "; _code << params;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glGetQueryivANGLE(GLenum target, GLenum pname, GLint *params)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glGetQueryivANGLE)(target, pname, params);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glGetQueryivANGLE(";
+                   _code << toString(target);
+    _code << ", "; _code << toString(pname);
+    _code << ", "; _code << params;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static GLboolean REGAL_CALL code_glIsQueryANGLE(GLuint id)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    GLboolean  _ret = _next->call(&_next->glIsQueryANGLE)(id);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    size_t _retIndex = _context->codeOutputNext++;
+    _code << indent << "const GLboolean o" << _retIndex << " = glIsQueryANGLE(";
+    _code << id;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+    return _ret;
+}
+
+static void REGAL_CALL code_glQueryCounterANGLE(GLuint id, GLenum target)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glQueryCounterANGLE)(id, target);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glQueryCounterANGLE(";
+                   _code << id;
+    _code << ", "; _code << toString(target);
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static void REGAL_CALL code_glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -13409,6 +13601,25 @@ static void REGAL_CALL code_glBufferStorage(GLenum target, GLsizeiptr size, cons
     string_list< ::std::string > _code;
     _code << indent << "glBufferStorage(";
                    _code << toString(target);
+    _code << ", "; _code << size;
+    _code << ", "; _code << data;
+    _code << ", "; _code << flags;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, const GLvoid *data, GLbitfield flags)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glNamedBufferStorageEXT)(buffer, size, data, flags);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glNamedBufferStorageEXT(";
+                   _code << buffer;
     _code << ", "; _code << size;
     _code << ", "; _code << data;
     _code << ", "; _code << flags;
@@ -21630,6 +21841,123 @@ static void REGAL_CALL code_glBindVertexBuffer(GLuint bindingindex, GLuint buffe
     _code << ", "; _code << buffer;
     _code << ", "; _code << offset;
     _code << ", "; _code << stride;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glVertexArrayBindVertexBufferEXT(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayBindVertexBufferEXT)(vaobj, bindingindex, buffer, offset, stride);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glVertexArrayBindVertexBufferEXT(";
+                   _code << vaobj;
+    _code << ", "; _code << bindingindex;
+    _code << ", "; _code << buffer;
+    _code << ", "; _code << offset;
+    _code << ", "; _code << stride;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glVertexArrayVertexAttribBindingEXT(GLuint vaobj, GLuint attribindex, GLuint bindingindex)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribBindingEXT)(vaobj, attribindex, bindingindex);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glVertexArrayVertexAttribBindingEXT(";
+                   _code << vaobj;
+    _code << ", "; _code << attribindex;
+    _code << ", "; _code << bindingindex;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glVertexArrayVertexAttribFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribFormatEXT)(vaobj, attribindex, size, type, normalized, relativeoffset);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glVertexArrayVertexAttribFormatEXT(";
+                   _code << vaobj;
+    _code << ", "; _code << attribindex;
+    _code << ", "; _code << size;
+    _code << ", "; _code << toString(type);
+    _code << ", "; _code << toString(normalized);
+    _code << ", "; _code << relativeoffset;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glVertexArrayVertexAttribIFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribIFormatEXT)(vaobj, attribindex, size, type, relativeoffset);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glVertexArrayVertexAttribIFormatEXT(";
+                   _code << vaobj;
+    _code << ", "; _code << attribindex;
+    _code << ", "; _code << size;
+    _code << ", "; _code << toString(type);
+    _code << ", "; _code << relativeoffset;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glVertexArrayVertexAttribLFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexAttribLFormatEXT)(vaobj, attribindex, size, type, relativeoffset);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glVertexArrayVertexAttribLFormatEXT(";
+                   _code << vaobj;
+    _code << ", "; _code << attribindex;
+    _code << ", "; _code << size;
+    _code << ", "; _code << toString(type);
+    _code << ", "; _code << relativeoffset;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glVertexArrayVertexBindingDivisorEXT(GLuint vaobj, GLuint bindingindex, GLuint divisor)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glVertexArrayVertexBindingDivisorEXT)(vaobj, bindingindex, divisor);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glVertexArrayVertexBindingDivisorEXT(";
+                   _code << vaobj;
+    _code << ", "; _code << bindingindex;
+    _code << ", "; _code << divisor;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -38507,6 +38835,26 @@ static void REGAL_CALL code_glEndConditionalRenderNV(void)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
+static void REGAL_CALL code_glCopyBufferSubDataNV(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glCopyBufferSubDataNV)(readtarget, writetarget, readoffset, writeoffset, size);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glCopyBufferSubDataNV(";
+                   _code << toString(readtarget);
+    _code << ", "; _code << toString(writetarget);
+    _code << ", "; _code << readoffset;
+    _code << ", "; _code << writeoffset;
+    _code << ", "; _code << size;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
 static void REGAL_CALL code_glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -41033,6 +41381,120 @@ static void REGAL_CALL code_glVertexWeighthvNV(const GLhalfNV *weight)
     _code << indent << "const GLhalfNV i" << _weightIndex << "[" << 1 << "] = " << array<GLhalfNV,const char * const>(weight,1,"","{ "," };",", ") << "\n";
     _code << indent << "glVertexWeighthvNV(";
     _code << "i" << _weightIndex;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUniformMatrix2x3fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix2x3fvNV)(location, count, transpose, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUniformMatrix2x3fvNV(";
+                   _code << location;
+    _code << ", "; _code << count;
+    _code << ", "; _code << toString(transpose);
+    _code << ", "; _code << value;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUniformMatrix2x4fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix2x4fvNV)(location, count, transpose, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUniformMatrix2x4fvNV(";
+                   _code << location;
+    _code << ", "; _code << count;
+    _code << ", "; _code << toString(transpose);
+    _code << ", "; _code << value;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUniformMatrix3x2fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix3x2fvNV)(location, count, transpose, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUniformMatrix3x2fvNV(";
+                   _code << location;
+    _code << ", "; _code << count;
+    _code << ", "; _code << toString(transpose);
+    _code << ", "; _code << value;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUniformMatrix3x4fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix3x4fvNV)(location, count, transpose, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUniformMatrix3x4fvNV(";
+                   _code << location;
+    _code << ", "; _code << count;
+    _code << ", "; _code << toString(transpose);
+    _code << ", "; _code << value;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUniformMatrix4x2fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix4x2fvNV)(location, count, transpose, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUniformMatrix4x2fvNV(";
+                   _code << location;
+    _code << ", "; _code << count;
+    _code << ", "; _code << toString(transpose);
+    _code << ", "; _code << value;
+    _code << ");\n";
+    if (_context->codeSource)
+      fprintf(_context->codeSource,"%s",_code.str().c_str());
+}
+
+static void REGAL_CALL code_glUniformMatrix4x3fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(_context);
+    DispatchTableGL *_next = _context->dispatcher.code.next();
+    RegalAssert(_next);
+    _next->call(&_next->glUniformMatrix4x3fvNV)(location, count, transpose, value);
+    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
+    string_list< ::std::string > _code;
+    _code << indent << "glUniformMatrix4x3fvNV(";
+                   _code << location;
+    _code << ", "; _code << count;
+    _code << ", "; _code << toString(transpose);
+    _code << ", "; _code << value;
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -51135,6 +51597,17 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glDrawArraysInstancedANGLE = code_glDrawArraysInstancedANGLE;
   tbl.glDrawElementsInstancedANGLE = code_glDrawElementsInstancedANGLE;
   tbl.glVertexAttribDivisorANGLE = code_glVertexAttribDivisorANGLE;
+  tbl.glBeginQueryANGLE = code_glBeginQueryANGLE;
+  tbl.glDeleteQueriesANGLE = code_glDeleteQueriesANGLE;
+  tbl.glEndQueryANGLE = code_glEndQueryANGLE;
+  tbl.glGenQueriesANGLE = code_glGenQueriesANGLE;
+  tbl.glGetQueryObjecti64vANGLE = code_glGetQueryObjecti64vANGLE;
+  tbl.glGetQueryObjectivANGLE = code_glGetQueryObjectivANGLE;
+  tbl.glGetQueryObjectui64vANGLE = code_glGetQueryObjectui64vANGLE;
+  tbl.glGetQueryObjectuivANGLE = code_glGetQueryObjectuivANGLE;
+  tbl.glGetQueryivANGLE = code_glGetQueryivANGLE;
+  tbl.glIsQueryANGLE = code_glIsQueryANGLE;
+  tbl.glQueryCounterANGLE = code_glQueryCounterANGLE;
   tbl.glGetTranslatedShaderSourceANGLE = code_glGetTranslatedShaderSourceANGLE;
   tbl.glCopyTextureLevelsAPPLE = code_glCopyTextureLevelsAPPLE;
   tbl.glDrawElementArrayAPPLE = code_glDrawElementArrayAPPLE;
@@ -51210,6 +51683,7 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glBindFragDataLocationIndexed = code_glBindFragDataLocationIndexed;
   tbl.glGetFragDataIndex = code_glGetFragDataIndex;
   tbl.glBufferStorage = code_glBufferStorage;
+  tbl.glNamedBufferStorageEXT = code_glNamedBufferStorageEXT;
   tbl.glCreateSyncFromCLeventARB = code_glCreateSyncFromCLeventARB;
   tbl.glClearBufferData = code_glClearBufferData;
   tbl.glClearBufferSubData = code_glClearBufferSubData;
@@ -51634,6 +52108,12 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glVertexAttribL4dv = code_glVertexAttribL4dv;
   tbl.glVertexAttribLPointer = code_glVertexAttribLPointer;
   tbl.glBindVertexBuffer = code_glBindVertexBuffer;
+  tbl.glVertexArrayBindVertexBufferEXT = code_glVertexArrayBindVertexBufferEXT;
+  tbl.glVertexArrayVertexAttribBindingEXT = code_glVertexArrayVertexAttribBindingEXT;
+  tbl.glVertexArrayVertexAttribFormatEXT = code_glVertexArrayVertexAttribFormatEXT;
+  tbl.glVertexArrayVertexAttribIFormatEXT = code_glVertexArrayVertexAttribIFormatEXT;
+  tbl.glVertexArrayVertexAttribLFormatEXT = code_glVertexArrayVertexAttribLFormatEXT;
+  tbl.glVertexArrayVertexBindingDivisorEXT = code_glVertexArrayVertexBindingDivisorEXT;
   tbl.glVertexAttribBinding = code_glVertexAttribBinding;
   tbl.glVertexAttribFormat = code_glVertexAttribFormat;
   tbl.glVertexAttribIFormat = code_glVertexAttribIFormat;
@@ -52520,6 +53000,7 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glBlendParameteriNV = code_glBlendParameteriNV;
   tbl.glBeginConditionalRenderNV = code_glBeginConditionalRenderNV;
   tbl.glEndConditionalRenderNV = code_glEndConditionalRenderNV;
+  tbl.glCopyBufferSubDataNV = code_glCopyBufferSubDataNV;
   tbl.glCopyImageSubDataNV = code_glCopyImageSubDataNV;
   tbl.glCoverageMaskNV = code_glCoverageMaskNV;
   tbl.glCoverageOperationNV = code_glCoverageOperationNV;
@@ -52651,6 +53132,12 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glVertexAttribs4hvNV = code_glVertexAttribs4hvNV;
   tbl.glVertexWeighthNV = code_glVertexWeighthNV;
   tbl.glVertexWeighthvNV = code_glVertexWeighthvNV;
+  tbl.glUniformMatrix2x3fvNV = code_glUniformMatrix2x3fvNV;
+  tbl.glUniformMatrix2x4fvNV = code_glUniformMatrix2x4fvNV;
+  tbl.glUniformMatrix3x2fvNV = code_glUniformMatrix3x2fvNV;
+  tbl.glUniformMatrix3x4fvNV = code_glUniformMatrix3x4fvNV;
+  tbl.glUniformMatrix4x2fvNV = code_glUniformMatrix4x2fvNV;
+  tbl.glUniformMatrix4x3fvNV = code_glUniformMatrix4x3fvNV;
   tbl.glBeginOcclusionQueryNV = code_glBeginOcclusionQueryNV;
   tbl.glDeleteOcclusionQueriesNV = code_glDeleteOcclusionQueriesNV;
   tbl.glEndOcclusionQueryNV = code_glEndOcclusionQueryNV;

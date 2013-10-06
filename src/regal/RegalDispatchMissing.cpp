@@ -56,6 +56,8 @@ using namespace std;
 #include "RegalHelper.h"
 #include "RegalPrivate.h"
 #include "RegalContext.h"
+#include "RegalDispatcherGL.h"
+#include "RegalDispatcherGlobal.h"
 
 REGAL_GLOBAL_END
 
@@ -5153,6 +5155,89 @@ namespace Missing
     Warning( "glVertexAttribDivisorANGLE", " not available." );
   }
 
+// GL_ANGLE_timer_query
+
+  static void REGAL_CALL glBeginQueryANGLE(GLenum target, GLuint id)
+{
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(id);
+    Warning( "glBeginQueryANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glDeleteQueriesANGLE(GLsizei n, const GLuint *ids)
+{
+    UNUSED_PARAMETER(n);
+    UNUSED_PARAMETER(ids);
+    Warning( "glDeleteQueriesANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glEndQueryANGLE(GLenum target)
+{
+    UNUSED_PARAMETER(target);
+    Warning( "glEndQueryANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glGenQueriesANGLE(GLsizei n, GLuint *ids)
+{
+    UNUSED_PARAMETER(n);
+    UNUSED_PARAMETER(ids);
+    Warning( "glGenQueriesANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glGetQueryObjecti64vANGLE(GLuint id, GLenum pname, GLint64 *params)
+{
+    UNUSED_PARAMETER(id);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+    Warning( "glGetQueryObjecti64vANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glGetQueryObjectivANGLE(GLuint id, GLenum pname, GLint *params)
+{
+    UNUSED_PARAMETER(id);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+    Warning( "glGetQueryObjectivANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glGetQueryObjectui64vANGLE(GLuint id, GLenum pname, GLuint64 *params)
+{
+    UNUSED_PARAMETER(id);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+    Warning( "glGetQueryObjectui64vANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glGetQueryObjectuivANGLE(GLuint id, GLenum pname, GLuint *params)
+{
+    UNUSED_PARAMETER(id);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+    Warning( "glGetQueryObjectuivANGLE", " not available." );
+  }
+
+  static void REGAL_CALL glGetQueryivANGLE(GLenum target, GLenum pname, GLint *params)
+{
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+    Warning( "glGetQueryivANGLE", " not available." );
+  }
+
+  static GLboolean REGAL_CALL glIsQueryANGLE(GLuint id)
+{
+    UNUSED_PARAMETER(id);
+    Warning( "glIsQueryANGLE", " not available." );
+    return GL_FALSE;
+  }
+
+  static void REGAL_CALL glQueryCounterANGLE(GLuint id, GLenum target)
+{
+    UNUSED_PARAMETER(id);
+    UNUSED_PARAMETER(target);
+    Warning( "glQueryCounterANGLE", " not available." );
+  }
+
 // GL_ANGLE_translated_shader_source
 
   static void REGAL_CALL glGetTranslatedShaderSourceANGLE(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source)
@@ -5790,6 +5875,15 @@ namespace Missing
     UNUSED_PARAMETER(data);
     UNUSED_PARAMETER(flags);
     Warning( "glBufferStorage", " not available." );
+  }
+
+  static void REGAL_CALL glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, const GLvoid *data, GLbitfield flags)
+{
+    UNUSED_PARAMETER(buffer);
+    UNUSED_PARAMETER(size);
+    UNUSED_PARAMETER(data);
+    UNUSED_PARAMETER(flags);
+    Warning( "glNamedBufferStorageEXT", " not available." );
   }
 
 // GL_ARB_cl_event
@@ -9637,6 +9731,63 @@ namespace Missing
     UNUSED_PARAMETER(offset);
     UNUSED_PARAMETER(stride);
     Warning( "glBindVertexBuffer", " not available." );
+  }
+
+  static void REGAL_CALL glVertexArrayBindVertexBufferEXT(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride)
+{
+    UNUSED_PARAMETER(vaobj);
+    UNUSED_PARAMETER(bindingindex);
+    UNUSED_PARAMETER(buffer);
+    UNUSED_PARAMETER(offset);
+    UNUSED_PARAMETER(stride);
+    Warning( "glVertexArrayBindVertexBufferEXT", " not available." );
+  }
+
+  static void REGAL_CALL glVertexArrayVertexAttribBindingEXT(GLuint vaobj, GLuint attribindex, GLuint bindingindex)
+{
+    UNUSED_PARAMETER(vaobj);
+    UNUSED_PARAMETER(attribindex);
+    UNUSED_PARAMETER(bindingindex);
+    Warning( "glVertexArrayVertexAttribBindingEXT", " not available." );
+  }
+
+  static void REGAL_CALL glVertexArrayVertexAttribFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset)
+{
+    UNUSED_PARAMETER(vaobj);
+    UNUSED_PARAMETER(attribindex);
+    UNUSED_PARAMETER(size);
+    UNUSED_PARAMETER(type);
+    UNUSED_PARAMETER(normalized);
+    UNUSED_PARAMETER(relativeoffset);
+    Warning( "glVertexArrayVertexAttribFormatEXT", " not available." );
+  }
+
+  static void REGAL_CALL glVertexArrayVertexAttribIFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+{
+    UNUSED_PARAMETER(vaobj);
+    UNUSED_PARAMETER(attribindex);
+    UNUSED_PARAMETER(size);
+    UNUSED_PARAMETER(type);
+    UNUSED_PARAMETER(relativeoffset);
+    Warning( "glVertexArrayVertexAttribIFormatEXT", " not available." );
+  }
+
+  static void REGAL_CALL glVertexArrayVertexAttribLFormatEXT(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset)
+{
+    UNUSED_PARAMETER(vaobj);
+    UNUSED_PARAMETER(attribindex);
+    UNUSED_PARAMETER(size);
+    UNUSED_PARAMETER(type);
+    UNUSED_PARAMETER(relativeoffset);
+    Warning( "glVertexArrayVertexAttribLFormatEXT", " not available." );
+  }
+
+  static void REGAL_CALL glVertexArrayVertexBindingDivisorEXT(GLuint vaobj, GLuint bindingindex, GLuint divisor)
+{
+    UNUSED_PARAMETER(vaobj);
+    UNUSED_PARAMETER(bindingindex);
+    UNUSED_PARAMETER(divisor);
+    Warning( "glVertexArrayVertexBindingDivisorEXT", " not available." );
   }
 
   static void REGAL_CALL glVertexAttribBinding(GLuint attribindex, GLuint bindingindex)
@@ -17332,6 +17483,18 @@ namespace Missing
     Warning( "glEndConditionalRenderNV", " not available." );
   }
 
+// GL_NV_copy_buffer
+
+  static void REGAL_CALL glCopyBufferSubDataNV(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size)
+{
+    UNUSED_PARAMETER(readtarget);
+    UNUSED_PARAMETER(writetarget);
+    UNUSED_PARAMETER(readoffset);
+    UNUSED_PARAMETER(writeoffset);
+    UNUSED_PARAMETER(size);
+    Warning( "glCopyBufferSubDataNV", " not available." );
+  }
+
 // GL_NV_copy_image
 
   static void REGAL_CALL glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
@@ -18447,6 +18610,62 @@ namespace Missing
 {
     UNUSED_PARAMETER(weight);
     Warning( "glVertexWeighthvNV", " not available." );
+  }
+
+// GL_NV_non_square_matrices
+
+  static void REGAL_CALL glUniformMatrix2x3fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    UNUSED_PARAMETER(location);
+    UNUSED_PARAMETER(count);
+    UNUSED_PARAMETER(transpose);
+    UNUSED_PARAMETER(value);
+    Warning( "glUniformMatrix2x3fvNV", " not available." );
+  }
+
+  static void REGAL_CALL glUniformMatrix2x4fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    UNUSED_PARAMETER(location);
+    UNUSED_PARAMETER(count);
+    UNUSED_PARAMETER(transpose);
+    UNUSED_PARAMETER(value);
+    Warning( "glUniformMatrix2x4fvNV", " not available." );
+  }
+
+  static void REGAL_CALL glUniformMatrix3x2fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    UNUSED_PARAMETER(location);
+    UNUSED_PARAMETER(count);
+    UNUSED_PARAMETER(transpose);
+    UNUSED_PARAMETER(value);
+    Warning( "glUniformMatrix3x2fvNV", " not available." );
+  }
+
+  static void REGAL_CALL glUniformMatrix3x4fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    UNUSED_PARAMETER(location);
+    UNUSED_PARAMETER(count);
+    UNUSED_PARAMETER(transpose);
+    UNUSED_PARAMETER(value);
+    Warning( "glUniformMatrix3x4fvNV", " not available." );
+  }
+
+  static void REGAL_CALL glUniformMatrix4x2fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    UNUSED_PARAMETER(location);
+    UNUSED_PARAMETER(count);
+    UNUSED_PARAMETER(transpose);
+    UNUSED_PARAMETER(value);
+    Warning( "glUniformMatrix4x2fvNV", " not available." );
+  }
+
+  static void REGAL_CALL glUniformMatrix4x3fvNV(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    UNUSED_PARAMETER(location);
+    UNUSED_PARAMETER(count);
+    UNUSED_PARAMETER(transpose);
+    UNUSED_PARAMETER(value);
+    Warning( "glUniformMatrix4x3fvNV", " not available." );
   }
 
 // GL_NV_occlusion_query
@@ -26966,6 +27185,20 @@ namespace Missing
     tbl.glDrawElementsInstancedANGLE = glDrawElementsInstancedANGLE;
     tbl.glVertexAttribDivisorANGLE = glVertexAttribDivisorANGLE;
 
+  // GL_ANGLE_timer_query
+
+    tbl.glBeginQueryANGLE = glBeginQueryANGLE;
+    tbl.glDeleteQueriesANGLE = glDeleteQueriesANGLE;
+    tbl.glEndQueryANGLE = glEndQueryANGLE;
+    tbl.glGenQueriesANGLE = glGenQueriesANGLE;
+    tbl.glGetQueryObjecti64vANGLE = glGetQueryObjecti64vANGLE;
+    tbl.glGetQueryObjectivANGLE = glGetQueryObjectivANGLE;
+    tbl.glGetQueryObjectui64vANGLE = glGetQueryObjectui64vANGLE;
+    tbl.glGetQueryObjectuivANGLE = glGetQueryObjectuivANGLE;
+    tbl.glGetQueryivANGLE = glGetQueryivANGLE;
+    tbl.glIsQueryANGLE = glIsQueryANGLE;
+    tbl.glQueryCounterANGLE = glQueryCounterANGLE;
+
   // GL_ANGLE_translated_shader_source
 
     tbl.glGetTranslatedShaderSourceANGLE = glGetTranslatedShaderSourceANGLE;
@@ -27094,6 +27327,7 @@ namespace Missing
   // GL_ARB_buffer_storage
 
     tbl.glBufferStorage = glBufferStorage;
+    tbl.glNamedBufferStorageEXT = glNamedBufferStorageEXT;
 
   // GL_ARB_cl_event
 
@@ -27711,6 +27945,12 @@ namespace Missing
   // GL_ARB_vertex_attrib_binding
 
     tbl.glBindVertexBuffer = glBindVertexBuffer;
+    tbl.glVertexArrayBindVertexBufferEXT = glVertexArrayBindVertexBufferEXT;
+    tbl.glVertexArrayVertexAttribBindingEXT = glVertexArrayVertexAttribBindingEXT;
+    tbl.glVertexArrayVertexAttribFormatEXT = glVertexArrayVertexAttribFormatEXT;
+    tbl.glVertexArrayVertexAttribIFormatEXT = glVertexArrayVertexAttribIFormatEXT;
+    tbl.glVertexArrayVertexAttribLFormatEXT = glVertexArrayVertexAttribLFormatEXT;
+    tbl.glVertexArrayVertexBindingDivisorEXT = glVertexArrayVertexBindingDivisorEXT;
     tbl.glVertexAttribBinding = glVertexAttribBinding;
     tbl.glVertexAttribFormat = glVertexAttribFormat;
     tbl.glVertexAttribIFormat = glVertexAttribIFormat;
@@ -28898,6 +29138,10 @@ namespace Missing
     tbl.glBeginConditionalRenderNV = glBeginConditionalRenderNV;
     tbl.glEndConditionalRenderNV = glEndConditionalRenderNV;
 
+  // GL_NV_copy_buffer
+
+    tbl.glCopyBufferSubDataNV = glCopyBufferSubDataNV;
+
   // GL_NV_copy_image
 
     tbl.glCopyImageSubDataNV = glCopyImageSubDataNV;
@@ -29073,6 +29317,15 @@ namespace Missing
     tbl.glVertexAttribs4hvNV = glVertexAttribs4hvNV;
     tbl.glVertexWeighthNV = glVertexWeighthNV;
     tbl.glVertexWeighthvNV = glVertexWeighthvNV;
+
+  // GL_NV_non_square_matrices
+
+    tbl.glUniformMatrix2x3fvNV = glUniformMatrix2x3fvNV;
+    tbl.glUniformMatrix2x4fvNV = glUniformMatrix2x4fvNV;
+    tbl.glUniformMatrix3x2fvNV = glUniformMatrix3x2fvNV;
+    tbl.glUniformMatrix3x4fvNV = glUniformMatrix3x4fvNV;
+    tbl.glUniformMatrix4x2fvNV = glUniformMatrix4x2fvNV;
+    tbl.glUniformMatrix4x3fvNV = glUniformMatrix4x3fvNV;
 
   // GL_NV_occlusion_query
 

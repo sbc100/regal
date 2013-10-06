@@ -32,6 +32,7 @@ EXPORTS
   rglBeginOcclusionQueryNV
   rglBeginPerfMonitorAMD
   rglBeginQuery
+  rglBeginQueryANGLE
   rglBeginQueryARB
   rglBeginQueryEXT
   rglBeginQueryIndexed
@@ -303,6 +304,7 @@ EXPORTS
   rglConvolutionParameteriv
   rglConvolutionParameterivEXT
   rglCopyBufferSubData
+  rglCopyBufferSubDataNV
   rglCopyColorSubTable
   rglCopyColorSubTableEXT
   rglCopyColorTable
@@ -389,6 +391,7 @@ EXPORTS
   rglDeleteProgramsARB
   rglDeleteProgramsNV
   rglDeleteQueries
+  rglDeleteQueriesANGLE
   rglDeleteQueriesARB
   rglDeleteQueriesEXT
   rglDeleteRenderbuffers
@@ -507,6 +510,7 @@ EXPORTS
   rglEndOcclusionQueryNV
   rglEndPerfMonitorAMD
   rglEndQuery
+  rglEndQueryANGLE
   rglEndQueryARB
   rglEndQueryEXT
   rglEndQueryIndexed
@@ -665,6 +669,7 @@ EXPORTS
   rglGenProgramsARB
   rglGenProgramsNV
   rglGenQueries
+  rglGenQueriesANGLE
   rglGenQueriesARB
   rglGenQueriesEXT
   rglGenRenderbuffers
@@ -936,16 +941,21 @@ EXPORTS
   rglGetProgramivNV
   rglGetQueryIndexediv
   rglGetQueryObjecti64v
+  rglGetQueryObjecti64vANGLE
   rglGetQueryObjecti64vEXT
   rglGetQueryObjectiv
+  rglGetQueryObjectivANGLE
   rglGetQueryObjectivARB
   rglGetQueryObjectivEXT
   rglGetQueryObjectui64v
+  rglGetQueryObjectui64vANGLE
   rglGetQueryObjectui64vEXT
   rglGetQueryObjectuiv
+  rglGetQueryObjectuivANGLE
   rglGetQueryObjectuivARB
   rglGetQueryObjectuivEXT
   rglGetQueryiv
+  rglGetQueryivANGLE
   rglGetQueryivARB
   rglGetQueryivEXT
   rglGetRenderbufferParameteriv
@@ -1161,6 +1171,7 @@ EXPORTS
   rglIsProgramNV
   rglIsProgramPipeline
   rglIsQuery
+  rglIsQueryANGLE
   rglIsQueryARB
   rglIsQueryEXT
   rglIsRenderbuffer
@@ -1423,6 +1434,7 @@ EXPORTS
   rglMultiTexSubImage2DEXT
   rglMultiTexSubImage3DEXT
   rglNamedBufferDataEXT
+  rglNamedBufferStorageEXT
   rglNamedBufferSubDataEXT
   rglNamedCopyBufferSubDataEXT
   rglNamedFramebufferParameteriEXT
@@ -1749,6 +1761,7 @@ EXPORTS
   rglPushMatrix
   rglPushName
   rglQueryCounter
+  rglQueryCounterANGLE
   rglQueryCounterEXT
   rglRasterPos2d
   rglRasterPos2dv
@@ -2222,22 +2235,28 @@ EXPORTS
   rglUniformMatrix2fvARB
   rglUniformMatrix2x3dv
   rglUniformMatrix2x3fv
+  rglUniformMatrix2x3fvNV
   rglUniformMatrix2x4dv
   rglUniformMatrix2x4fv
+  rglUniformMatrix2x4fvNV
   rglUniformMatrix3dv
   rglUniformMatrix3fv
   rglUniformMatrix3fvARB
   rglUniformMatrix3x2dv
   rglUniformMatrix3x2fv
+  rglUniformMatrix3x2fvNV
   rglUniformMatrix3x4dv
   rglUniformMatrix3x4fv
+  rglUniformMatrix3x4fvNV
   rglUniformMatrix4dv
   rglUniformMatrix4fv
   rglUniformMatrix4fvARB
   rglUniformMatrix4x2dv
   rglUniformMatrix4x2fv
+  rglUniformMatrix4x2fvNV
   rglUniformMatrix4x3dv
   rglUniformMatrix4x3fv
+  rglUniformMatrix4x3fvNV
   rglUniformSubroutinesuiv
   rglUniformui64NV
   rglUniformui64vNV
@@ -2306,6 +2325,7 @@ EXPORTS
   rglVertex4iv
   rglVertex4s
   rglVertex4sv
+  rglVertexArrayBindVertexBufferEXT
   rglVertexArrayColorOffsetEXT
   rglVertexArrayEdgeFlagOffsetEXT
   rglVertexArrayFogCoordOffsetEXT
@@ -2317,9 +2337,14 @@ EXPORTS
   rglVertexArrayRangeNV
   rglVertexArraySecondaryColorOffsetEXT
   rglVertexArrayTexCoordOffsetEXT
+  rglVertexArrayVertexAttribBindingEXT
+  rglVertexArrayVertexAttribFormatEXT
+  rglVertexArrayVertexAttribIFormatEXT
   rglVertexArrayVertexAttribIOffsetEXT
+  rglVertexArrayVertexAttribLFormatEXT
   rglVertexArrayVertexAttribLOffsetEXT
   rglVertexArrayVertexAttribOffsetEXT
+  rglVertexArrayVertexBindingDivisorEXT
   rglVertexArrayVertexOffsetEXT
   rglVertexAttrib1d
   rglVertexAttrib1dARB

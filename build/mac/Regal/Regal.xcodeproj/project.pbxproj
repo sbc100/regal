@@ -80,6 +80,8 @@
 		BC456F1215D55F8E0080B420 /* RegalDispatchMissing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC456F1015D55F8E0080B420 /* RegalDispatchMissing.cpp */; };
 		BC456F1315D55F8E0080B420 /* RegalDispatchPpapi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC456F1115D55F8E0080B420 /* RegalDispatchPpapi.cpp */; };
 		BC60A6B217032F1A0055437B /* RegalJson.h in Headers */ = {isa = PBXBuildFile; fileRef = BC60A6B117032F1A0055437B /* RegalJson.h */; };
+		BC62F93E17F47D16007C5086 /* os_backtrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC62F93C17F47D16007C5086 /* os_backtrace.cpp */; };
+		BC62F93F17F47D16007C5086 /* os_backtrace.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BC62F93D17F47D16007C5086 /* os_backtrace.hpp */; };
 		BC640C9C16554A52007DEF69 /* RegalFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC640C9A16554A52007DEF69 /* RegalFrame.cpp */; };
 		BC640C9D16554A52007DEF69 /* RegalFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = BC640C9B16554A52007DEF69 /* RegalFrame.h */; };
 		BC6C911D15EE3CDF0056E4F7 /* RegalDispatchGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC6C911C15EE3CDF0056E4F7 /* RegalDispatchGlobal.cpp */; };
@@ -131,8 +133,6 @@
 		BCDF6650178F0FC700EE9569 /* os_win32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6624178F0FC700EE9569 /* os_win32.cpp */; };
 		BCDF6651178F0FC700EE9569 /* os.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6625178F0FC700EE9569 /* os.hpp */; };
 		BCDF6652178F0FC700EE9569 /* trace_api.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6626178F0FC700EE9569 /* trace_api.hpp */; };
-		BCDF6653178F0FC700EE9569 /* trace_backtrace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6627178F0FC700EE9569 /* trace_backtrace.cpp */; };
-		BCDF6654178F0FC700EE9569 /* trace_backtrace.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF6628178F0FC700EE9569 /* trace_backtrace.hpp */; };
 		BCDF6655178F0FC700EE9569 /* trace_callset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF6629178F0FC700EE9569 /* trace_callset.cpp */; };
 		BCDF6656178F0FC700EE9569 /* trace_callset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BCDF662A178F0FC700EE9569 /* trace_callset.hpp */; };
 		BCDF6657178F0FC700EE9569 /* trace_dump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDF662B178F0FC700EE9569 /* trace_dump.cpp */; };
@@ -260,6 +260,8 @@
 		BC456F1015D55F8E0080B420 /* RegalDispatchMissing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalDispatchMissing.cpp; path = ../../../src/regal/RegalDispatchMissing.cpp; sourceTree = "<group>"; };
 		BC456F1115D55F8E0080B420 /* RegalDispatchPpapi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalDispatchPpapi.cpp; path = ../../../src/regal/RegalDispatchPpapi.cpp; sourceTree = "<group>"; };
 		BC60A6B117032F1A0055437B /* RegalJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalJson.h; path = ../../../src/regal/RegalJson.h; sourceTree = "<group>"; };
+		BC62F93C17F47D16007C5086 /* os_backtrace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = os_backtrace.cpp; path = ../../../src/apitrace/common/os_backtrace.cpp; sourceTree = "<group>"; };
+		BC62F93D17F47D16007C5086 /* os_backtrace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os_backtrace.hpp; path = ../../../src/apitrace/common/os_backtrace.hpp; sourceTree = "<group>"; };
 		BC640C9A16554A52007DEF69 /* RegalFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalFrame.cpp; path = ../../../src/regal/RegalFrame.cpp; sourceTree = "<group>"; };
 		BC640C9B16554A52007DEF69 /* RegalFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalFrame.h; path = ../../../src/regal/RegalFrame.h; sourceTree = "<group>"; };
 		BC6C911C15EE3CDF0056E4F7 /* RegalDispatchGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalDispatchGlobal.cpp; path = ../../../src/regal/RegalDispatchGlobal.cpp; sourceTree = "<group>"; };
@@ -311,8 +313,6 @@
 		BCDF6624178F0FC700EE9569 /* os_win32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = os_win32.cpp; path = ../../../src/apitrace/common/os_win32.cpp; sourceTree = "<group>"; };
 		BCDF6625178F0FC700EE9569 /* os.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = os.hpp; path = ../../../src/apitrace/common/os.hpp; sourceTree = "<group>"; };
 		BCDF6626178F0FC700EE9569 /* trace_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_api.hpp; path = ../../../src/apitrace/common/trace_api.hpp; sourceTree = "<group>"; };
-		BCDF6627178F0FC700EE9569 /* trace_backtrace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_backtrace.cpp; path = ../../../src/apitrace/common/trace_backtrace.cpp; sourceTree = "<group>"; };
-		BCDF6628178F0FC700EE9569 /* trace_backtrace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_backtrace.hpp; path = ../../../src/apitrace/common/trace_backtrace.hpp; sourceTree = "<group>"; };
 		BCDF6629178F0FC700EE9569 /* trace_callset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_callset.cpp; path = ../../../src/apitrace/common/trace_callset.cpp; sourceTree = "<group>"; };
 		BCDF662A178F0FC700EE9569 /* trace_callset.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trace_callset.hpp; path = ../../../src/apitrace/common/trace_callset.hpp; sourceTree = "<group>"; };
 		BCDF662B178F0FC700EE9569 /* trace_dump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trace_dump.cpp; path = ../../../src/apitrace/common/trace_dump.cpp; sourceTree = "<group>"; };
@@ -545,15 +545,15 @@
 			children = (
 				BCDF6681178F105C00EE9569 /* eglsize.cpp */,
 				BCDF6682178F105C00EE9569 /* eglsize.hpp */,
-				BCDF6683178F105C00EE9569 /* glsize.hpp */,
-				BCDF6677178F103E00EE9569 /* glcaps.cpp */,
-				BCDF6678178F103E00EE9569 /* gltrace_state.cpp */,
-				BCDF6679178F103E00EE9569 /* regaltrace.cpp */,
-				BCDF667A178F103E00EE9569 /* trace.cpp */,
-				BCDF667B178F103E00EE9569 /* trace.hpp */,
-				BCDF6673178F0FF200EE9569 /* glproc_regal.cpp */,
-				BCDF6674178F0FF200EE9569 /* glproc.hpp */,
 				BCDF661B178F0FC700EE9569 /* formatter.hpp */,
+				BCDF6677178F103E00EE9569 /* glcaps.cpp */,
+				BCDF6674178F0FF200EE9569 /* glproc.hpp */,
+				BCDF6673178F0FF200EE9569 /* glproc_regal.cpp */,
+				BCDF6683178F105C00EE9569 /* glsize.hpp */,
+				BCDF6678178F103E00EE9569 /* gltrace_state.cpp */,
+				BCDF6625178F0FC700EE9569 /* os.hpp */,
+				BC62F93C17F47D16007C5086 /* os_backtrace.cpp */,
+				BC62F93D17F47D16007C5086 /* os_backtrace.hpp */,
 				BCDF661C178F0FC700EE9569 /* os_binary.hpp */,
 				BCDF661D178F0FC700EE9569 /* os_dl.hpp */,
 				BCDF661E178F0FC700EE9569 /* os_memory.hpp */,
@@ -563,21 +563,21 @@
 				BCDF6622178F0FC700EE9569 /* os_thread.hpp */,
 				BCDF6623178F0FC700EE9569 /* os_time.hpp */,
 				BCDF6624178F0FC700EE9569 /* os_win32.cpp */,
-				BCDF6625178F0FC700EE9569 /* os.hpp */,
+				BCDF6679178F103E00EE9569 /* regaltrace.cpp */,
+				BCDF667A178F103E00EE9569 /* trace.cpp */,
+				BCDF667B178F103E00EE9569 /* trace.hpp */,
 				BCDF6626178F0FC700EE9569 /* trace_api.hpp */,
-				BCDF6627178F0FC700EE9569 /* trace_backtrace.cpp */,
-				BCDF6628178F0FC700EE9569 /* trace_backtrace.hpp */,
 				BCDF6629178F0FC700EE9569 /* trace_callset.cpp */,
 				BCDF662A178F0FC700EE9569 /* trace_callset.hpp */,
 				BCDF662B178F0FC700EE9569 /* trace_dump.cpp */,
 				BCDF662C178F0FC700EE9569 /* trace_dump.hpp */,
 				BCDF662D178F0FC700EE9569 /* trace_fast_callset.cpp */,
 				BCDF662E178F0FC700EE9569 /* trace_fast_callset.hpp */,
+				BCDF6633178F0FC700EE9569 /* trace_file.cpp */,
+				BCDF6634178F0FC700EE9569 /* trace_file.hpp */,
 				BCDF662F178F0FC700EE9569 /* trace_file_read.cpp */,
 				BCDF6630178F0FC700EE9569 /* trace_file_snappy.cpp */,
 				BCDF6631178F0FC700EE9569 /* trace_file_write.cpp */,
-				BCDF6633178F0FC700EE9569 /* trace_file.cpp */,
-				BCDF6634178F0FC700EE9569 /* trace_file.hpp */,
 				BCDF6635178F0FC700EE9569 /* trace_format.hpp */,
 				BCDF6636178F0FC700EE9569 /* trace_loader.cpp */,
 				BCDF6637178F0FC700EE9569 /* trace_loader.hpp */,
@@ -586,16 +586,16 @@
 				BCDF663A178F0FC700EE9569 /* trace_model.hpp */,
 				BCDF663B178F0FC700EE9569 /* trace_option.cpp */,
 				BCDF663C178F0FC700EE9569 /* trace_option.hpp */,
-				BCDF663D178F0FC700EE9569 /* trace_parser_flags.cpp */,
 				BCDF663E178F0FC700EE9569 /* trace_parser.cpp */,
 				BCDF663F178F0FC700EE9569 /* trace_parser.hpp */,
+				BCDF663D178F0FC700EE9569 /* trace_parser_flags.cpp */,
 				BCDF6640178F0FC700EE9569 /* trace_profiler.cpp */,
 				BCDF6641178F0FC700EE9569 /* trace_profiler.hpp */,
+				BCDF6645178F0FC700EE9569 /* trace_writer.cpp */,
+				BCDF6646178F0FC700EE9569 /* trace_writer.hpp */,
 				BCDF6642178F0FC700EE9569 /* trace_writer_model.cpp */,
 				BCDF6643178F0FC700EE9569 /* trace_writer_regal.cpp */,
 				BCDF6644178F0FC700EE9569 /* trace_writer_regal.hpp */,
-				BCDF6645178F0FC700EE9569 /* trace_writer.cpp */,
-				BCDF6646178F0FC700EE9569 /* trace_writer.hpp */,
 			);
 			name = apitrace;
 			sourceTree = "<group>";
@@ -688,7 +688,6 @@
 				BCDF664F178F0FC700EE9569 /* os_time.hpp in Headers */,
 				BCDF6651178F0FC700EE9569 /* os.hpp in Headers */,
 				BCDF6652178F0FC700EE9569 /* trace_api.hpp in Headers */,
-				BCDF6654178F0FC700EE9569 /* trace_backtrace.hpp in Headers */,
 				BCDF6656178F0FC700EE9569 /* trace_callset.hpp in Headers */,
 				BCDF6658178F0FC700EE9569 /* trace_dump.hpp in Headers */,
 				BCDF665A178F0FC700EE9569 /* trace_fast_callset.hpp in Headers */,
@@ -713,6 +712,7 @@
 				BC8E9CC117C5AF880005C418 /* RegalNamespace.h in Headers */,
 				BC8E9CC217C5AF880005C418 /* RegalTexSto.h in Headers */,
 				BCBA1FCB17DF836700CB6E19 /* RegalEmuInfo.h in Headers */,
+				BC62F93F17F47D16007C5086 /* os_backtrace.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,7 +816,6 @@
 				BCBF183D175EB49D00CB653A /* RegalPlugin.cpp in Sources */,
 				BCDF664B178F0FC700EE9569 /* os_posix.cpp in Sources */,
 				BCDF6650178F0FC700EE9569 /* os_win32.cpp in Sources */,
-				BCDF6653178F0FC700EE9569 /* trace_backtrace.cpp in Sources */,
 				BCDF6655178F0FC700EE9569 /* trace_callset.cpp in Sources */,
 				BCDF6657178F0FC700EE9569 /* trace_dump.cpp in Sources */,
 				BCDF6659178F0FC700EE9569 /* trace_fast_callset.cpp in Sources */,
@@ -848,6 +847,7 @@
 				BCBA1FCA17DF836700CB6E19 /* RegalEmuInfo.cpp in Sources */,
 				BCBA1FCC17DF836700CB6E19 /* RegalEmu.cpp in Sources */,
 				BCB6107117F21E6500BA0A06 /* RegalDispatch.cpp in Sources */,
+				BC62F93E17F47D16007C5086 /* os_backtrace.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

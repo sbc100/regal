@@ -31846,6 +31846,8 @@ static void REGAL_CALL emu_glBlitFramebufferANGLE(GLint srcX0, GLint srcY0, GLin
 
 // GL_ANGLE_instanced_arrays
 
+// GL_ANGLE_timer_query
+
 // GL_ANGLE_translated_shader_source
 
 // GL_APPLE_copy_texture_levels
@@ -66196,6 +66198,8 @@ static void REGAL_CALL emu_glVertexPointerEXT(GLint size, GLenum type, GLsizei s
 
 // GL_NV_conditional_render
 
+// GL_NV_copy_buffer
+
 // GL_NV_copy_image
 
 // GL_NV_coverage_sample
@@ -66979,6 +66983,8 @@ static void REGAL_CALL emu_glProgramLocalParametersI4uivNV(GLenum target, GLuint
 // GL_NV_gpu_shader5
 
 // GL_NV_half_float
+
+// GL_NV_non_square_matrices
 
 // GL_NV_occlusion_query
 

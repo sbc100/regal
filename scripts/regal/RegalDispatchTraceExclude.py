@@ -28,7 +28,8 @@ exclude = [
   
   'GL_ANGLE_instanced_arrays',
   'GL_ANGLE_translated_shader_source',
-  
+  'GL_ANGLE_timer_query',
+
   'GL_APPLE_sync',
   'GL_APPLE_copy_texture_levels',
 
@@ -57,6 +58,11 @@ exclude = [
   'glGetPixelTransformParameterfvEXT',
   'glGetPixelTransformParameterivEXT',
 
+# ES
+
+  'GL_NV_non_square_matrices',
+  'GL_NV_copy_buffer',
+  
   'GL_REGAL_log',
   'GL_SGIX_fog_texture',
   'GL_SUN_read_video_pixels',

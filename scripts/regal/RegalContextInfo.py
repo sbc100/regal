@@ -57,6 +57,8 @@ ${VERSION_DECLARE}
 
 ${IMPL_DECLARE}
 
+private:
+  static bool stringSetFind(const std::set<std::string> &stringSet, const std::string &val);
 };
 
 REGAL_NAMESPACE_END
@@ -283,6 +285,12 @@ ${IMPL_GET}
   Info("OpenGL varyings  : ",gl_max_varying_floats);
 }
 
+bool
+ContextInfo::stringSetFind(const std::set<std::string> &stringSet, const std::string &val)
+{
+  return stringSet.find(val)!=stringSet.end();
+}
+
 ${EXT_CODE}
 
 REGAL_NAMESPACE_END
@@ -483,6 +491,71 @@ def implInitCode(apis, args):
 
 def implGetCode(apis, args):
 
+  code = '''
+  gl_max_attrib_stack_depth = 0;
+  gl_max_client_attrib_stack_depth = 0;
+  gl_max_combined_texture_image_units = 0;
+  gl_max_draw_buffers = 0;
+  gl_max_texture_coords = 0;
+  gl_max_texture_units = 0;
+  gl_max_vertex_attrib_bindings = 0;
+  gl_max_vertex_attribs = 0;
+  gl_max_viewports = 0;
+  gl_max_varying_floats = 0;
+
+  // Looking at the various specs and RegalEmu.h I came up with this table:
+  //
+  //                                        GL       Core  ES1  ES2  ES3  Regal
+  // GL_MAX_ATTRIB_STACK_DEPTH              16        rem  n/a  n/a  n/a    16
+  // GL_MAX_CLIENT_ATTRIB_STACK_DEPTH       16        rem  n/a  n/a  n/a    16
+  // GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS    96        96    -    8   32     96
+  // GL_MAX_DRAW_BUFFERS                     8         8    -    -    4      8
+  // GL_MAX_TEXTURE_COORDS                   8        rem   -    -    -     16
+  // GL_MAX_TEXTURE_UNITS                    2        rem   +    -    -      4
+  // GL_MAX_VARYING_VECTORS                 15        15    -    8   15      -
+  // GL_MAX_VARYING_FLOATS                  32 (2.0)  dep   -    -    -      -
+  // GL_MAX_VERTEX_ATTRIBS                  16        16    -    8   16     16
+  // GL_MAX_VERTEX_ATTRIB_BINDINGS          16        16    -    -    -     16
+  // GL_MAX_VIEWPORTS                       16        16    -    -    -     16
+
+  if (compat)
+  {
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>(&gl_max_attrib_stack_depth));
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>(&gl_max_client_attrib_stack_depth));
+  }
+  
+  if (!es1)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, reinterpret_cast<GLint *>(&gl_max_combined_texture_image_units));
+
+  if (core || compat)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_DRAW_BUFFERS, reinterpret_cast<GLint *>(&gl_max_draw_buffers));
+
+  if (compat)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_TEXTURE_COORDS, reinterpret_cast<GLint *>(&gl_max_texture_coords));
+
+  if (es1 || compat)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_TEXTURE_UNITS, reinterpret_cast<GLint *>(&gl_max_texture_units));
+
+  if (es2 || core)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VARYING_VECTORS, reinterpret_cast<GLint *>(&gl_max_varying_floats));
+  else if (compat)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VARYING_FLOATS, reinterpret_cast<GLint *>(&gl_max_varying_floats));
+
+  if (es1)
+    gl_max_vertex_attribs = 8;  //<> one of these things is not like the other...
+  else
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIBS, reinterpret_cast<GLint *>(&gl_max_vertex_attribs));
+
+  if ((core || compat) && (gl_version_4_3 || gl_arb_vertex_attrib_binding))
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIB_BINDINGS, reinterpret_cast<GLint *>(&gl_max_vertex_attrib_bindings));
+
+  if ((core || compat) && (gl_version_4_1 || gl_arb_viewport_array))
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_VIEWPORTS, reinterpret_cast<GLint *>(&gl_max_viewports));
+'''
+  return code
+
+def originalImplGetCode(apis, args):
+
   code = ''
   for api in apis:
     name = api.name.lower()
@@ -538,7 +611,7 @@ def extensionStringCode(apis, args):
     if name in cond:
       code += '#if %s\n'%cond[name]
     for c in sorted(api.categories):
-      code += '  %s = e.find("%s")!=e.end();\n' % (c.lower(),c)
+      code += '  %s = stringSetFind(e,"%s");\n' % (c.lower(),c)
     if name in cond:
       code += '#endif\n'
     code += '\n'

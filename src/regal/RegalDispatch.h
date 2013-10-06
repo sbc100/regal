@@ -1461,6 +1461,20 @@ namespace Dispatch
     void (REGAL_CALL *glDrawElementsInstancedANGLE)(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
     void (REGAL_CALL *glVertexAttribDivisorANGLE)(GLuint index, GLuint divisor);
 
+    // GL_ANGLE_timer_query
+
+    void (REGAL_CALL *glBeginQueryANGLE)(GLenum target, GLuint id);
+    void (REGAL_CALL *glDeleteQueriesANGLE)(GLsizei n, const GLuint *ids);
+    void (REGAL_CALL *glEndQueryANGLE)(GLenum target);
+    void (REGAL_CALL *glGenQueriesANGLE)(GLsizei n, GLuint *ids);
+    void (REGAL_CALL *glGetQueryObjecti64vANGLE)(GLuint id, GLenum pname, GLint64 *params);
+    void (REGAL_CALL *glGetQueryObjectivANGLE)(GLuint id, GLenum pname, GLint *params);
+    void (REGAL_CALL *glGetQueryObjectui64vANGLE)(GLuint id, GLenum pname, GLuint64 *params);
+    void (REGAL_CALL *glGetQueryObjectuivANGLE)(GLuint id, GLenum pname, GLuint *params);
+    void (REGAL_CALL *glGetQueryivANGLE)(GLenum target, GLenum pname, GLint *params);
+    GLboolean (REGAL_CALL *glIsQueryANGLE)(GLuint id);
+    void (REGAL_CALL *glQueryCounterANGLE)(GLuint id, GLenum target);
+
     // GL_ANGLE_translated_shader_source
 
     void (REGAL_CALL *glGetTranslatedShaderSourceANGLE)(GLuint shader, GLsizei bufsize, GLsizei *length, GLchar *source);
@@ -1589,6 +1603,7 @@ namespace Dispatch
     // GL_ARB_buffer_storage
 
     void (REGAL_CALL *glBufferStorage)(GLenum target, GLsizeiptr size, const GLvoid *data, GLbitfield flags);
+    void (REGAL_CALL *glNamedBufferStorageEXT)(GLuint buffer, GLsizeiptr size, const GLvoid *data, GLbitfield flags);
 
     // GL_ARB_cl_event
 
@@ -2206,6 +2221,12 @@ namespace Dispatch
     // GL_ARB_vertex_attrib_binding
 
     void (REGAL_CALL *glBindVertexBuffer)(GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride);
+    void (REGAL_CALL *glVertexArrayBindVertexBufferEXT)(GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride);
+    void (REGAL_CALL *glVertexArrayVertexAttribBindingEXT)(GLuint vaobj, GLuint attribindex, GLuint bindingindex);
+    void (REGAL_CALL *glVertexArrayVertexAttribFormatEXT)(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset);
+    void (REGAL_CALL *glVertexArrayVertexAttribIFormatEXT)(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset);
+    void (REGAL_CALL *glVertexArrayVertexAttribLFormatEXT)(GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset);
+    void (REGAL_CALL *glVertexArrayVertexBindingDivisorEXT)(GLuint vaobj, GLuint bindingindex, GLuint divisor);
     void (REGAL_CALL *glVertexAttribBinding)(GLuint attribindex, GLuint bindingindex);
     void (REGAL_CALL *glVertexAttribFormat)(GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset);
     void (REGAL_CALL *glVertexAttribIFormat)(GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset);
@@ -3393,6 +3414,10 @@ namespace Dispatch
     void (REGAL_CALL *glBeginConditionalRenderNV)(GLuint id, GLenum mode);
     void (REGAL_CALL *glEndConditionalRenderNV)(void);
 
+    // GL_NV_copy_buffer
+
+    void (REGAL_CALL *glCopyBufferSubDataNV)(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
+
     // GL_NV_copy_image
 
     void (REGAL_CALL *glCopyImageSubDataNV)(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
@@ -3568,6 +3593,15 @@ namespace Dispatch
     void (REGAL_CALL *glVertexAttribs4hvNV)(GLuint index, GLsizei count, const GLhalfNV *v);
     void (REGAL_CALL *glVertexWeighthNV)(GLhalfNV weight);
     void (REGAL_CALL *glVertexWeighthvNV)(const GLhalfNV *weight);
+
+    // GL_NV_non_square_matrices
+
+    void (REGAL_CALL *glUniformMatrix2x3fvNV)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+    void (REGAL_CALL *glUniformMatrix2x4fvNV)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+    void (REGAL_CALL *glUniformMatrix3x2fvNV)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+    void (REGAL_CALL *glUniformMatrix3x4fvNV)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+    void (REGAL_CALL *glUniformMatrix4x2fvNV)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+    void (REGAL_CALL *glUniformMatrix4x3fvNV)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
 
     // GL_NV_occlusion_query
 
