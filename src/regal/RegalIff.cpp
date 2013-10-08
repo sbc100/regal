@@ -1769,6 +1769,14 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
 {
   Internal("Regal::Iff::Program::Init","()");
 
+  // update emu info with the limits that this layer supports
+
+  RegalAssert(ctx);
+  RegalAssert(ctx->emuInfo);
+  ctx->emuInfo->gl_max_texture_coords = REGAL_EMU_MAX_TEXTURE_COORDS;
+  ctx->emuInfo->gl_max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;
+  ctx->emuInfo->gl_max_texture_units  = REGAL_EMU_MAX_TEXTURE_UNITS;
+
   ver = ::std::numeric_limits<GLuint64>::max();
   progcount = 0;
   RegalAssert(ctx);

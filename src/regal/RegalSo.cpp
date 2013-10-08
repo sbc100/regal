@@ -99,7 +99,7 @@ So::BindSampler(GLuint unit, GLuint so)
 {
     if (unit >= array_size( textureUnits ))
     {
-        Warning("Texture unit out of range: ", unit, " >= ", REGAL_EMU_MAX_TEXTURE_COORDS);
+        Warning("Texture unit out of range: ", unit, " >= ", REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS);
         return;
     }
 
@@ -186,7 +186,7 @@ So::BindTexture(RegalContext &ctx, GLuint unit, GLenum target, GLuint to)
 
     if (unit >= array_size( textureUnits ))
     {
-        Warning("Texture unit out of range: ", unit, " >= ", REGAL_EMU_MAX_TEXTURE_COORDS);
+        Warning("Texture unit out of range: ", unit, " >= ", REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS);
         return false;
     }
 

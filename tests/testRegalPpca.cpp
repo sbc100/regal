@@ -195,6 +195,9 @@ TEST ( RegalPpca, VertexArray_Defaults )
   RegalContext ctx;
   ctx.info = new ContextInfo();
 
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
+
   Ppca ppca;
   ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
@@ -246,6 +249,9 @@ TEST ( RegalPpca, PixelStore_Defaults )
   RegalContext ctx;
   ctx.info = new ContextInfo();
 
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
+
   Ppca ppca;
   ppca.Init(ctx);
   checkPpcaDefaults(ctx, ppca);
@@ -277,6 +283,9 @@ TEST ( RegalPpca, VertexArray_Swap )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca state;
   checkPpcaDefaults(ctx, state);
@@ -369,6 +378,9 @@ TEST ( RegalPpca, PixelStore_Swap )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca state;
   checkPpcaDefaults(ctx, state);
@@ -1351,6 +1363,9 @@ TEST ( RegalPpca, VertexArrayGenericState_Transition )
   RegalContext ctx;
   ctx.info = new ContextInfo();
 
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
+
   Ppca current;
   checkPpcaDefaults(ctx, current);
 
@@ -1456,6 +1471,9 @@ TEST ( RegalPpca, VertexArray_Transition )
 
   RegalContext ctx;
   ctx.info = new ContextInfo();
+
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca current;
   checkPpcaDefaults(ctx, current);
@@ -1564,6 +1582,8 @@ TEST ( RegalPpca, PixelStore_Transition )
 
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca current;
   checkPpcaDefaults(ctx, current);
@@ -1622,6 +1642,8 @@ TEST ( RegalPpca, VertexArray_Generic )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -1935,6 +1957,8 @@ TEST ( RegalPpca, VertexArray_Named )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -2100,6 +2124,8 @@ TEST ( RegalPpca, glDeleteBuffers_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -2145,6 +2171,8 @@ TEST ( RegalPpca, glDeleteVertexArrays_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -2169,6 +2197,8 @@ TEST ( RegalPpca, glPrimitiveRestart_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -2293,6 +2323,8 @@ TEST ( RegalPpca, glInterleavedArrays_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -2874,6 +2906,8 @@ TEST ( RegalPpca, glPixelStore_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -2972,6 +3006,8 @@ TEST ( RegalPpca, glBindBuffer_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3071,6 +3107,8 @@ TEST ( RegalPpca, glClientActiveTexture_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3116,6 +3154,8 @@ TEST ( RegalPpca, glEnableDisableClientState_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3338,6 +3378,8 @@ TEST ( RegalPpca, glBindVertexArray_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3354,6 +3396,8 @@ TEST ( RegalPpca, glEnableDisableVertexAttribArray_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3404,6 +3448,8 @@ TEST ( RegalPpca, glEnableDisableVertexArrayAttribEXT_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3449,6 +3495,8 @@ TEST ( RegalPpca, glEnableDisableVertexArrayEXT_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3528,6 +3576,8 @@ TEST ( RegalPpca, glVertexAttribBinding_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3568,6 +3618,8 @@ TEST ( RegalPpca, glVertexBindingDivisor_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3665,6 +3717,8 @@ TEST ( RegalPpca, glBindVertexBuffer_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -3719,6 +3773,8 @@ TEST ( RegalPpca, glBindVertexBuffers_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -4164,6 +4220,8 @@ TEST ( RegalPpca, glVertexAttribFormat_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -4367,6 +4425,8 @@ TEST ( RegalPpca, glVertexAttribPointer_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);
@@ -4614,6 +4674,8 @@ TEST ( RegalPpca, glVertexArrayVertexAttribOffsetEXT_Shadowing )
 {
   RegalContext ctx;
   ctx.info = new ContextInfo();
+  ctx.emuInfo = new EmuInfo();
+  ctx.emuInfo->init(*ctx.info.get());
 
   Ppca ppca;
   ppca.Init(ctx);

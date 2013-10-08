@@ -49,6 +49,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalToken.h"
 #include "RegalContextInfo.h"
+#include "RegalEmuInfo.h"
 
 #include <map>
 
@@ -63,6 +64,11 @@ struct Xfer
   void Init( RegalContext &ctx )
   {
     UNUSED_PARAMETER(ctx);
+
+    // update emu info with the limits that this layer supports
+
+    RegalAssert(ctx.emuInfo);
+    ctx.emuInfo->gl_max_combined_texture_image_units = REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS;
 
     activeTextureIndex = 0;
     size_t n = array_size( textureBinding2D );

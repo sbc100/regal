@@ -86,6 +86,13 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     vertexArrayStack.clear();
     pixelStoreStack.clear();
 
+    // update emu info with the limits that this layer supports
+
+    RegalAssert(ctx.emuInfo);
+    ctx.emuInfo->gl_max_vertex_attrib_bindings    = REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS;
+    ctx.emuInfo->gl_max_client_attrib_stack_depth = REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH;
+    ctx.emuInfo->gl_max_vertex_attribs            = REGAL_EMU_MAX_VERTEX_ATTRIBS;
+
     // Chromium/PepperAPI GLES generates an error (visible through glGetError) and
     // logs a message if a call is made to glVertexAttribPointer and no
     // GL_ARRAY_BUFFER is bound.
@@ -108,6 +115,7 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     //
     // TODO: set correct GL error here
 
+    RegalAssert(ctx.emuInfo);
     if (maskStack.size() >= ctx.emuInfo->gl_max_client_attrib_stack_depth)
       return;
 
@@ -244,20 +252,19 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
   {
     switch (pname)
     {
-      case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
-        params[0] = GL_TRUE;
-        break;
       case GL_CLIENT_ATTRIB_STACK_DEPTH:
         params[0] = (maskStack.size() != 0);
         break;
-     case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        params[0] = ctx.emuInfo->gl_max_combined_texture_image_units != 0;
+      case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
+        params[0] = (ctx.emuInfo->gl_max_client_attrib_stack_depth != 0);
         break;
-     case GL_MAX_TEXTURE_COORDS:
-        params[0] = ctx.emuInfo->gl_max_texture_coords != 0;
+      case GL_MAX_VERTEX_ATTRIB_BINDINGS:
+        RegalAssert(ctx.emuInfo);
+        params[0] = (ctx.emuInfo->gl_max_vertex_attrib_bindings != 0);
         break;
-     case GL_MAX_TEXTURE_UNITS:
-        params[0] = ctx.emuInfo->gl_max_texture_units != 0;
+      case GL_MAX_VERTEX_ATTRIBS:
+        RegalAssert(ctx.emuInfo);
+        params[0] = (ctx.emuInfo->gl_max_vertex_attribs != 0);
         break;
 
       default:
@@ -271,22 +278,19 @@ struct Ppca : public ClientState::VertexArray, ClientState::PixelStore
     switch (pname)
     {
       case GL_MAX_CLIENT_ATTRIB_STACK_DEPTH:
+        RegalAssert(ctx.emuInfo);
         params[0] = static_cast<T>(ctx.emuInfo->gl_max_client_attrib_stack_depth);
         break;
       case GL_CLIENT_ATTRIB_STACK_DEPTH:
         params[0] = static_cast<T>(maskStack.size());
         break;
+      case GL_MAX_VERTEX_ATTRIB_BINDINGS:
+        RegalAssert(ctx.emuInfo);
+        params[0] = static_cast<T>(ctx.emuInfo->gl_max_vertex_attrib_bindings);
+        break;
       case GL_MAX_VERTEX_ATTRIBS:
+        RegalAssert(ctx.emuInfo);
         params[0] = static_cast<T>(ctx.emuInfo->gl_max_vertex_attribs);
-        break;
-      case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        params[0] = static_cast<T>(ctx.emuInfo->gl_max_combined_texture_image_units);
-        break;
-      case GL_MAX_TEXTURE_COORDS:
-        params[0] = static_cast<T>(ctx.emuInfo->gl_max_texture_coords);
-        break;
-      case GL_MAX_TEXTURE_UNITS:
-        params[0] = static_cast<T>(ctx.emuInfo->gl_max_texture_units);
         break;
 
       default:

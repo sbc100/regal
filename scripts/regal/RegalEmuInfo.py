@@ -269,7 +269,7 @@ def emuInfoGetCode(apis, args):
 
       states = sorted([ state.getValue.lower() for state in api.states ])
       for state in states:
-        code += '  gl_%-34s = std::min<GLuint>( contextInfo.gl_%-34s REGAL_EMU_%s );\n' % (state.lower(), '%s,'%state.lower(), state.upper())
+        code += '  gl_%-34s = contextInfo.gl_%s;\n' % (state.lower(), state.lower())
 
       code += '\n'
 

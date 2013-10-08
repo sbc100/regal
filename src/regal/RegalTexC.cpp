@@ -45,6 +45,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalTexC.h"
 #include "RegalContext.h"
 #include "RegalToken.h"
+#include "RegalEmuInfo.h"
 #include "RegalPixelConversions.h"
 
 REGAL_GLOBAL_END
@@ -313,6 +314,11 @@ TexC::TexC()
 void
 TexC::Init( RegalContext& ctx )
 {
+  // update emu info with the limits that this layer supports
+
+  RegalAssert(ctx.emuInfo);
+  ctx.emuInfo->gl_max_combined_texture_image_units = REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS;
+
   RegalContext* sharingWith = ctx.groupInitializedContext();
   if ( sharingWith != NULL ) {
     mapTextureToTextureState = sharingWith->texc->mapTextureToTextureState;

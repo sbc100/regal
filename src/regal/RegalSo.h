@@ -78,6 +78,11 @@ struct So
         activeTextureUnit = 0;
         nextSamplerObjectId = 1;
 
+        // update emu info with the limits that this layer supports
+
+        RegalAssert(ctx.emuInfo);
+        ctx.emuInfo->gl_max_combined_texture_image_units = REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS;
+
         // Enable or disable emulation for SRGB textures.
         //
         // Desktop - http://www.opengl.org/registry/specs/EXT/texture_sRGB_decode.txt
@@ -540,17 +545,8 @@ struct So
 
         switch (pname)
         {
-            case GL_MAX_VERTEX_ATTRIBS:
-                *params = static_cast<T>(ctx.emuInfo->gl_max_vertex_attribs);
-                break;
             case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
                 *params = static_cast<T>(ctx.emuInfo->gl_max_combined_texture_image_units);
-                break;
-            case GL_MAX_TEXTURE_COORDS:
-                *params = static_cast<T>(ctx.emuInfo->gl_max_texture_coords);
-                break;
-            case GL_MAX_TEXTURE_UNITS:
-                *params = static_cast<T>(ctx.emuInfo->gl_max_texture_units);
                 break;
             case GL_TEXTURE_BORDER_COLOR:
                 params[0] = static_cast<T>(ts->BorderColor[0]);

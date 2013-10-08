@@ -214,15 +214,15 @@ EmuInfo::init(const ContextInfo &contextInfo)
   gl_nv_path_rendering                  = false;
 
   gl_max_vertex_attribs = 8;
-  gl_max_attrib_stack_depth             = std::min<GLuint>( contextInfo.gl_max_attrib_stack_depth,            REGAL_EMU_MAX_ATTRIB_STACK_DEPTH );
-  gl_max_client_attrib_stack_depth      = std::min<GLuint>( contextInfo.gl_max_client_attrib_stack_depth,     REGAL_EMU_MAX_CLIENT_ATTRIB_STACK_DEPTH );
-  gl_max_combined_texture_image_units   = std::min<GLuint>( contextInfo.gl_max_combined_texture_image_units,  REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS );
-  gl_max_draw_buffers                   = std::min<GLuint>( contextInfo.gl_max_draw_buffers,                  REGAL_EMU_MAX_DRAW_BUFFERS );
-  gl_max_texture_coords                 = std::min<GLuint>( contextInfo.gl_max_texture_coords,                REGAL_EMU_MAX_TEXTURE_COORDS );
-  gl_max_texture_units                  = std::min<GLuint>( contextInfo.gl_max_texture_units,                 REGAL_EMU_MAX_TEXTURE_UNITS );
-  gl_max_vertex_attrib_bindings         = std::min<GLuint>( contextInfo.gl_max_vertex_attrib_bindings,        REGAL_EMU_MAX_VERTEX_ATTRIB_BINDINGS );
-  gl_max_vertex_attribs                 = std::min<GLuint>( contextInfo.gl_max_vertex_attribs,                REGAL_EMU_MAX_VERTEX_ATTRIBS );
-  gl_max_viewports                      = std::min<GLuint>( contextInfo.gl_max_viewports,                     REGAL_EMU_MAX_VIEWPORTS );
+  gl_max_attrib_stack_depth             = contextInfo.gl_max_attrib_stack_depth;
+  gl_max_client_attrib_stack_depth      = contextInfo.gl_max_client_attrib_stack_depth;
+  gl_max_combined_texture_image_units   = contextInfo.gl_max_combined_texture_image_units;
+  gl_max_draw_buffers                   = contextInfo.gl_max_draw_buffers;
+  gl_max_texture_coords                 = contextInfo.gl_max_texture_coords;
+  gl_max_texture_units                  = contextInfo.gl_max_texture_units;
+  gl_max_vertex_attrib_bindings         = contextInfo.gl_max_vertex_attrib_bindings;
+  gl_max_vertex_attribs                 = contextInfo.gl_max_vertex_attribs;
+  gl_max_viewports                      = contextInfo.gl_max_viewports;
 
   if (gl_max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
       gl_max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;

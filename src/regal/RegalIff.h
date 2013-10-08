@@ -2441,9 +2441,6 @@ struct Iff
       case GL_MAX_VERTEX_ATTRIBS:
         *params = static_cast<T>(ctx->emuInfo->gl_max_vertex_attribs);
         break;
-      case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-        *params = static_cast<T>(ctx->emuInfo->gl_max_combined_texture_image_units);
-        break;
       case GL_MAX_TEXTURE_COORDS:
         *params = static_cast<T>(ctx->emuInfo->gl_max_texture_coords);
         break;

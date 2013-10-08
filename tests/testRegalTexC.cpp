@@ -43,7 +43,8 @@ using namespace Regal::Emu;
 // Emu::ConvertedBuffer
 // ====================================
 
-TEST( RegalTexC, RegalConvertedBuffer ) {
+TEST( RegalTexC, RegalConvertedBuffer )
+{
   PixelStorageStateGLES20 pss;
   pss.Reset();
 
@@ -79,7 +80,8 @@ TEST( RegalTexC, RegalConvertedBuffer ) {
   EXPECT_EQ( 0x00u, converted[ 15 ] );
 }
 
-TEST( RegalTexC, RegalConvertedBufferFailsFastOnIdentity ) {
+TEST( RegalTexC, RegalConvertedBufferFailsFastOnIdentity )
+{
   PixelStorageStateGLES20 pss;
   pss.Reset();
   uint8_t orig[ 12 ] = { 0 };
@@ -95,7 +97,8 @@ TEST( RegalTexC, RegalConvertedBufferFailsFastOnIdentity ) {
   }
 }
 
-TEST( RegalTexC, RegalConvertedBufferFailsFastOnError ) {
+TEST( RegalTexC, RegalConvertedBufferFailsFastOnError )
+{
   PixelStorageStateGLES20 pss;
   pss.Reset();
   uint8_t orig[ 12 ] = { 0 };
@@ -136,7 +139,8 @@ TEST( RegalTexC, RegalConvertedBufferFailsFastOnError ) {
 // TextureLevelState
 // ====================================
 
-TEST( RegalTexC, TextureLevelState ) {
+TEST( RegalTexC, TextureLevelState )
+{
   TextureLevelState state;
 
   // The default format and type of an TextureLevel should be GL_RGBA and
@@ -155,7 +159,8 @@ TEST( RegalTexC, TextureLevelState ) {
 // TextureState
 // ====================================
 
-TEST( RegalTexC, TextureStateBasicBinding ) {
+TEST( RegalTexC, TextureStateBasicBinding )
+{
   // Verify the texture state under a series of bind and unbind calls.
 
   TextureUnitState textureUnitOne;
@@ -217,7 +222,8 @@ TEST( RegalTexC, TextureStateBasicBinding ) {
   EXPECT_EQ( 0u, texture.boundTextureUnits.size() );
 }
 
-TEST( RegalTexC, TextureStateUnbindAll ) {
+TEST( RegalTexC, TextureStateUnbindAll )
+{
   // Verify the interaction between TextureState and TextureUnitState.
   TextureUnitState textureUnit;
   TextureState texture;
@@ -242,7 +248,8 @@ TEST( RegalTexC, TextureStateUnbindAll ) {
   EXPECT_EQ( 0u, texture.boundTextureUnits.size() );
 }
 
-TEST( RegalTexC, UnbindOnTextureStateDestructor ) {
+TEST( RegalTexC, UnbindOnTextureStateDestructor )
+{
   // The TextureState destructor should clear all bindings.
 
   TextureUnitState textureUnit;
@@ -257,7 +264,8 @@ TEST( RegalTexC, UnbindOnTextureStateDestructor ) {
   EXPECT_EQ( NULL, textureUnit.GetBinding( GL_TEXTURE_2D ) );
 }
 
-TEST( RegalTexC, TextureStateFormatTracked ) {
+TEST( RegalTexC, TextureStateFormatTracked )
+{
   TextureState texture;
   GLenum format;
   GLenum type;
@@ -348,7 +356,8 @@ TEST( RegalTexC, TextureStateFormatTracked ) {
 // TextureUnitState
 // ====================================
 
-TEST( RegalTexC, TextureUnitStateBasic ) {
+TEST( RegalTexC, TextureUnitStateBasic )
+{
   // Verify the texture unit state under a series of calls to bind and unbind
   // a single texture to various targets.
 
@@ -417,7 +426,8 @@ TEST( RegalTexC, TextureUnitStateBasic ) {
   EXPECT_EQ( 2u, texture.boundTextureUnits.size() );
 }
 
-TEST( RegalTexC, TextureUnitStateBindAllTargets ) {
+TEST( RegalTexC, TextureUnitStateBindAllTargets )
+{
   // Verify the texture unit state under a series of calls to bind textures to
   // each/all supported targets.
 
@@ -447,7 +457,8 @@ TEST( RegalTexC, TextureUnitStateBindAllTargets ) {
   EXPECT_EQ( 1u, textureThree.boundTextureUnits.size() );
 }
 
-TEST( RegalTexC, TextureUnitStateUnbind ) {
+TEST( RegalTexC, TextureUnitStateUnbind )
+{
   // Verify the texture unit state under a series of calls to bind and unbind
   // multiple textures.
 
@@ -513,7 +524,8 @@ TEST( RegalTexC, TextureUnitStateUnbind ) {
   EXPECT_EQ( 0u, textureTwo.boundTextureUnits.size() );
 }
 
-TEST( RegalTexC, TextureUnitStateUnbindAll ) {
+TEST( RegalTexC, TextureUnitStateUnbindAll )
+{
   // Calling TextureUnitState::UnbindAll() clears all bindings.
 
   TextureUnitState textureUnit;
@@ -534,7 +546,8 @@ TEST( RegalTexC, TextureUnitStateUnbindAll ) {
   EXPECT_EQ( NULL, textureUnit.GetBinding( GL_TEXTURE_RECTANGLE_ARB ) );
 }
 
-TEST( RegalTexC, TextureUnitStateUnbindAllInDestructor ) {
+TEST( RegalTexC, TextureUnitStateUnbindAllInDestructor )
+{
   // When a TextureUnitState instance is destroyed, it must clear all textures
   // bound to it.
 
@@ -555,7 +568,8 @@ TEST( RegalTexC, TextureUnitStateUnbindAllInDestructor ) {
 // Regal::Emu::TexC
 // ====================================
 
-TEST ( RegalTexC, ResetUnbindsTextureUnits ) {
+TEST ( RegalTexC, ResetUnbindsTextureUnits )
+{
   TexC texc;
 
   TextureState texture;
@@ -570,7 +584,8 @@ TEST ( RegalTexC, ResetUnbindsTextureUnits ) {
   EXPECT_EQ( NULL, texc.textureUnitArrayState[ 0 ].GetBinding( GL_TEXTURE_RECTANGLE_ARB ) );
 }
 
-TEST ( RegalTexC, GetBoundTexture ) {
+TEST ( RegalTexC, GetBoundTexture )
+{
   // Verify that the internal TexC::GetBoundTexture_() behaves as expected, as
   // it is used by other calls.
 
@@ -590,7 +605,8 @@ TEST ( RegalTexC, GetBoundTexture ) {
   EXPECT_EQ( NULL, texc.GetBoundTexture_( GL_TEXTURE0 - 1, GL_TEXTURE_2D ) );
 }
 
-TEST ( RegalTexC, GetTexture ) {
+TEST ( RegalTexC, GetTexture )
+{
   // Verify that the internal TexC::GetTexture_() behaves as expected, as
   // it is used by other calls.
 
@@ -610,7 +626,8 @@ TEST ( RegalTexC, GetTexture ) {
   EXPECT_EQ( knownTexture, texc.GetTexture_( 123 ) );
 }
 
-TEST ( RegalTexC, PixelStoreStateShadowing ) {
+TEST ( RegalTexC, PixelStoreStateShadowing )
+{
   TexC texc;
 
   // Verify that the initial state is as expected.
@@ -633,7 +650,8 @@ TEST ( RegalTexC, PixelStoreStateShadowing ) {
   EXPECT_EQ( 1, texc.unpackPSS.alignment );
 }
 
-TEST ( RegalTexC, GetFormatAndType ) {
+TEST ( RegalTexC, GetFormatAndType )
+{
   TexC texc;
   GLenum format;
   GLenum type;
@@ -661,7 +679,8 @@ TEST ( RegalTexC, GetFormatAndType ) {
   EXPECT_EQ( 103u, type );
 }
 
-TEST ( RegalTexC, ShadowTexImage2D ) {
+TEST ( RegalTexC, ShadowTexImage2D )
+{
   // Test TexC::ShadowTexImage2D (2x overloaded)
   // Note for simplicity we use TexC::GetFormatAndType for verification.
 
@@ -695,7 +714,8 @@ TEST ( RegalTexC, ShadowTexImage2D ) {
   texc.ShadowTexImage2D( GL_TEXTURE_2D, 15, 0, 0 );
 }
 
-TEST ( RegalTexC, ShadowGenTextures ) {
+TEST ( RegalTexC, ShadowGenTextures )
+{
   // Test TexC::ShadowGenTextures
 
   TexC texc;
@@ -745,7 +765,8 @@ TEST ( RegalTexC, ShadowGenTextures ) {
   EXPECT_EQ( texture, &texc.mapTextureToTextureState[ 11 ] );
 }
 
-TEST ( RegalTexC, ShadowDeleteTextures ) {
+TEST ( RegalTexC, ShadowDeleteTextures )
+{
   // Test TexC::ShadowDeleteTextures
 
   TexC texc;
@@ -773,7 +794,8 @@ TEST ( RegalTexC, ShadowDeleteTextures ) {
   EXPECT_TRUE( texc.mapTextureToTextureState.find( 13 ) == texc.mapTextureToTextureState.end() );
 }
 
-TEST ( RegalTexC, ShadowActiveTexture ) {
+TEST ( RegalTexC, ShadowActiveTexture )
+{
   // Test TexC::ShadowActiveTexture
 
   TexC texc;
@@ -796,7 +818,8 @@ TEST ( RegalTexC, ShadowActiveTexture ) {
   EXPECT_EQ( static_cast<GLenum>( 1 ), texc.currentTextureUnit );
 }
 
-TEST ( RegalTexC, ShadowBindTexture ) {
+TEST ( RegalTexC, ShadowBindTexture )
+{
   // Test TexC::ShadowBindTexture
 
   TexC texc;
@@ -831,7 +854,8 @@ TEST ( RegalTexC, ShadowBindTexture ) {
   texc.ShadowBindTexture( GL_TEXTURE_2D, 123 );
 }
 
-TEST ( RegalTexC, ShadowGenerateMipmap ) {
+TEST ( RegalTexC, ShadowGenerateMipmap )
+{
   // Test TexC::ShadowGenerateMipmap
 
   TexC texc;
