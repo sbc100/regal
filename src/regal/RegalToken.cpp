@@ -282,6 +282,7 @@ namespace Token {
   }
 
   const char * GLenumToString( GLenum e ) {
+    #if REGAL_ENUM_TO_STRING
     switch( e ) {
       case 0x00000000: return "GL_ZERO";
       case 0x00000001: return "GL_ONE";
@@ -3598,10 +3599,12 @@ namespace Token {
       case 0xffffffff: return "GL_INVALID_INDEX";
       default: break;
     }
-  return "unknown_gl_enum";
+    #endif // REGAL_ENUM_TO_STRING
+    return "unknown_gl_enum";
   }
 
   const char * GLerrorToString( GLenum e ) {
+    #if REGAL_ENUM_TO_STRING
     switch( e ) {
       case GL_INVALID_ENUM: return "invalid enumerant";
       case GL_INVALID_FRAMEBUFFER_OPERATION_EXT: return "invalid framebuffer operation";
@@ -3614,11 +3617,13 @@ namespace Token {
       case GL_TABLE_TOO_LARGE: return "table too large";
       default: break;
     }
-  return NULL;
+    #endif // REGAL_ENUM_TO_STRING
+    return NULL;
   }
 
 #if REGAL_SYS_GLX
   const char * GLXenumToString(int v) {
+    #if REGAL_ENUM_TO_STRING
     switch( v ) {
       case 0x00000000: return "GLX_SYNC_FRAME_SGIX";
       case 0x00000001: return "GLX_3DFX_WINDOW_MODE_MESA";
@@ -3814,12 +3819,14 @@ namespace Token {
       case 0xffffffff: return "GLX_DONT_CARE";
       default: break;
     }
+    #endif // REGAL_ENUM_TO_STRING
     return "unknown_glx_enum";
   }
 #endif // REGAL_SYS_GLX
 
 #if REGAL_SYS_EGL
   const char * EGLenumToString(int v) {
+    #if REGAL_ENUM_TO_STRING
     switch( v ) {
       case 0x00000000: return "EGL_FALSE";
       case 0x00000001: return "EGL_TRUE";
@@ -4041,6 +4048,7 @@ namespace Token {
       case 0x00008f73: return "EGL_COLOR_ARGB_HI";
       default: break;
     }
+    #endif // REGAL_ENUM_TO_STRING
     return "unknown_egl_enum";
   }
 #endif // REGAL_SYS_EGL

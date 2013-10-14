@@ -134,7 +134,7 @@ void InitDispatchTableGlobal%s%s(DispatchTableGlobal &tbl)
 void Init(DispatchTableGlobal &tbl)
 {
 '''
-    
+
   for api in apis:
 
     code += '\n'

@@ -396,8 +396,9 @@ struct Enable
     return *this;
   }
 
-  inline Enable &get(DispatchTableGL &dt)
+  inline Enable &get(RegalContext &ctx)
   {
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
     alphaTest = dt.call(&dt.glIsEnabled)(GL_ALPHA_TEST);
     autoNormal = dt.call(&dt.glIsEnabled)(GL_AUTO_NORMAL);
     size_t n = array_size( blend );
@@ -473,7 +474,8 @@ struct Enable
     sampleAlphaToCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_COVERAGE);
     sampleAlphaToOne = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_ONE);
     sampleCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE);
-    sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
+    if (ctx.info->gl_version_4_0 || ctx.info->gl_arb_sample_shading)
+      sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
     separable2d = dt.call(&dt.glIsEnabled)(GL_SEPARABLE_2D);
     stencilTest = dt.call(&dt.glIsEnabled)(GL_STENCIL_TEST);
     n = array_size( scissorTest );
@@ -507,8 +509,9 @@ struct Enable
     return *this;
   }
 
-  inline const Enable &set(DispatchTableGL &dt) const
+  inline const Enable &set(RegalContext &ctx) const
   {
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
     setEnable(dt,GL_ALPHA_TEST,alphaTest);
     setEnable(dt,GL_AUTO_NORMAL,autoNormal);
     size_t n = array_size( blend );
@@ -584,7 +587,8 @@ struct Enable
     setEnable(dt,GL_SAMPLE_ALPHA_TO_COVERAGE,sampleAlphaToCoverage);
     setEnable(dt,GL_SAMPLE_ALPHA_TO_ONE,sampleAlphaToOne);
     setEnable(dt,GL_SAMPLE_COVERAGE,sampleCoverage);
-    setEnable(dt,GL_SAMPLE_SHADING,sampleShading);
+    if (ctx.info->gl_version_4_0 || ctx.info->gl_arb_sample_shading)
+      setEnable(dt,GL_SAMPLE_SHADING,sampleShading);
     setEnable(dt,GL_SEPARABLE_2D,separable2d);
     setEnable(dt,GL_STENCIL_TEST,stencilTest);
     n = array_size( scissorTest );
@@ -1974,27 +1978,31 @@ struct Multisample
     return *this;
   }
 
-  inline Multisample &get(DispatchTableGL &dt)
+  inline Multisample &get(RegalContext &ctx)
   {
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
     multisample = dt.call(&dt.glIsEnabled)(GL_MULTISAMPLE);
     sampleAlphaToCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_COVERAGE);
     sampleAlphaToOne = dt.call(&dt.glIsEnabled)(GL_SAMPLE_ALPHA_TO_ONE);
     sampleCoverage = dt.call(&dt.glIsEnabled)(GL_SAMPLE_COVERAGE);
     dt.call(&dt.glGetFloatv)(GL_SAMPLE_COVERAGE_VALUE,&sampleCoverageValue);
     dt.call(&dt.glGetBooleanv)(GL_SAMPLE_COVERAGE_INVERT,&sampleCoverageInvert);
-    sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
+    if (ctx.info->gl_version_4_0 || ctx.info->gl_arb_sample_shading)
+      sampleShading = dt.call(&dt.glIsEnabled)(GL_SAMPLE_SHADING);
     dt.call(&dt.glGetFloatv)(GL_MIN_SAMPLE_SHADING_VALUE,&minSampleShadingValue);
     return *this;
   }
 
-  inline const Multisample &set(DispatchTableGL &dt) const
+  inline const Multisample &set(RegalContext &ctx) const
   {
+    DispatchTableGL &dt = ctx.dispatcher.emulation;
     setEnable(dt,GL_MULTISAMPLE,multisample);
     setEnable(dt,GL_SAMPLE_ALPHA_TO_COVERAGE,sampleAlphaToCoverage);
     setEnable(dt,GL_SAMPLE_ALPHA_TO_ONE,sampleAlphaToOne);
     setEnable(dt,GL_SAMPLE_COVERAGE,sampleCoverage);
     dt.call(&dt.glSampleCoverage)(sampleCoverageValue, sampleCoverageInvert);
-    setEnable(dt,GL_SAMPLE_SHADING,sampleShading);
+    if (ctx.info->gl_version_4_0 || ctx.info->gl_arb_sample_shading)
+      setEnable(dt,GL_SAMPLE_SHADING,sampleShading);
     dt.call(&dt.glMinSampleShading)(minSampleShadingValue);
     return *this;
   }

@@ -1485,8 +1485,8 @@ struct Iff
         }
       }
 
-      GLuint64  hash;
       GLuint64  ver;
+      GLuint    hash;
       Light     light[ REGAL_FIXED_FUNCTION_MAX_LIGHTS ];
       Texture   tex[ REGAL_EMU_MAX_TEXTURE_UNITS ];
       bool      clipPlaneEnabled[ REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES ];

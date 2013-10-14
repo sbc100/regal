@@ -54,7 +54,7 @@ REGAL_NAMESPACE_BEGIN
 
 void Frame::capture(RegalContext &context)
 {
-  Internal("Regal::Frame::capture ",&context);
+  Internal("Regal::Frame::capture context=",boost::print::optional(&context,Logging::pointers));
 
   ++frame;
 

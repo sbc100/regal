@@ -374,7 +374,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         // Ideally we'd only set the state that has changed
         // since the glPushAttrib() - revisit
 
-        State::Enable::set(ctx->dispatcher.emulation);
+        State::Enable::set(*ctx);
 
         mask &= ~GL_ENABLE_BIT;
       }
@@ -474,7 +474,7 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         // Ideally we'd only set the state that has changed
         // since the glPushAttrib() - revisit
 
-        State::Multisample::set(ctx->dispatcher.emulation);
+        State::Multisample::set(*ctx);
 
         mask &= ~GL_MULTISAMPLE_BIT;
       }

@@ -64,6 +64,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalBaseVertex.h"
 #include "RegalRect.h"
 #include "RegalIff.h"
+#include "RegalQuads.h"
 #include "RegalSo.h"
 #include "RegalDsa.h"
 #include "RegalVao.h"
@@ -99,6 +100,7 @@ RegalContext::RegalContext()
   bv(NULL),
   rect(NULL),
   iff(NULL),
+  quads(NULL),
   so(NULL),
   dsa(NULL),
   vao(NULL),
@@ -187,6 +189,7 @@ RegalContext::Init()
   const bool forceEmuBv      = Config::forceEmuBaseVertex || REGAL_FORCE_EMU_BASEVERTEX;
   const bool forceEmuRect    = Config::forceEmuRect       || REGAL_FORCE_EMU_RECT;
   const bool forceEmuIff     = Config::forceEmuIff        || REGAL_FORCE_EMU_IFF;
+  const bool forceEmuQuads   = Config::forceEmuQuads      || REGAL_FORCE_EMU_QUADS;
   const bool forceEmuSo      = Config::forceEmuSo         || REGAL_FORCE_EMU_SO;
   const bool forceEmuDsa     = Config::forceEmuDsa        || REGAL_FORCE_EMU_OBJ;
   const bool forceEmuVao     = Config::forceEmuVao        || REGAL_FORCE_EMU_DSA;
@@ -203,13 +206,14 @@ RegalContext::Init()
   bool enableEmuBv     = forceEmuBv      || (Config::enableEmuBaseVertex);
   bool enableEmuRect   = forceEmuRect    || (Config::enableEmuRect);
   bool enableEmuIff    = forceEmuIff     || (Config::enableEmuIff);
+  bool enableEmuQuads  = forceEmuQuads   || (Config::enableEmuQuads);
   bool enableEmuSo     = forceEmuSo      || (Config::enableEmuSo);
   bool enableEmuDsa    = forceEmuDsa     || (Config::enableEmuDsa);
   bool enableEmuVao    = forceEmuVao     || (Config::enableEmuVao);
   bool enableEmuTexc   = forceEmuTexc    || (Config::enableEmuTexC);
   bool enableEmuFilt   = forceEmuFilt    || (Config::enableEmuFilter);
 
-  const bool forceAnyEmu     = forceEmuObj || forceEmuHint || forceEmuPpa || forceEmuPpca || forceEmuBin || forceEmuXfer || forceEmuTexsto || forceEmuBv || forceEmuRect || forceEmuIff || forceEmuSo || forceEmuDsa || forceEmuVao || forceEmuTexc || forceEmuFilt || false;
+  const bool forceAnyEmu     = forceEmuObj || forceEmuHint || forceEmuPpa || forceEmuPpca || forceEmuBin || forceEmuXfer || forceEmuTexsto || forceEmuBv || forceEmuRect || forceEmuIff || forceEmuQuads || forceEmuSo || forceEmuDsa || forceEmuVao || forceEmuTexc || forceEmuFilt || false;
 
   if (!Config::forceEmulation)
   {
@@ -264,7 +268,7 @@ RegalContext::Init()
 
   }
 
-  bool enableAnyEmu    = enableEmuObj || enableEmuHint || enableEmuPpa || enableEmuPpca || enableEmuBin || enableEmuXfer || enableEmuTexsto || enableEmuBv || enableEmuRect || enableEmuIff || enableEmuSo || enableEmuDsa || enableEmuVao || enableEmuTexc || enableEmuFilt || false;
+  bool enableAnyEmu    = enableEmuObj || enableEmuHint || enableEmuPpa || enableEmuPpca || enableEmuBin || enableEmuXfer || enableEmuTexsto || enableEmuBv || enableEmuRect || enableEmuIff || enableEmuQuads || enableEmuSo || enableEmuDsa || enableEmuVao || enableEmuTexc || enableEmuFilt || false;
 
   // Enable emulation except for fully featured compatibility contexts
 
@@ -275,7 +279,7 @@ RegalContext::Init()
 #endif
   {
     // emu
-    emuLevel = 15;
+    emuLevel = 16;
     #if REGAL_EMU_FILTER
     if (enableEmuFilt || forceEmuFilt)
     {
@@ -415,6 +419,15 @@ RegalContext::Init()
       so->Init(*this);
     }
     #endif /* REGAL_EMU_SO */
+    #if REGAL_EMU_QUADS
+    if (enableEmuQuads || forceEmuQuads)
+    {
+      Info("Activating emulation layer REGAL_EMU_QUADS");
+      quads = new Emu::Quads;
+      emuLevel = 5;
+      quads->Init(*this);
+    }
+    #endif /* REGAL_EMU_QUADS */
     #if REGAL_EMU_IFF
     if (enableEmuIff || forceEmuIff)
     {
@@ -445,7 +458,7 @@ RegalContext::Init()
       }
       emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       iff = new Emu::Iff;
-      emuLevel = 5;
+      emuLevel = 6;
       iff->Init(*this);
     }
     #endif /* REGAL_EMU_IFF */
@@ -454,7 +467,7 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_RECT");
       rect = new Emu::Rect;
-      emuLevel = 6;
+      emuLevel = 7;
       rect->Init(*this);
     }
     #endif /* REGAL_EMU_RECT */
@@ -470,7 +483,7 @@ RegalContext::Init()
       }
       emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       bv = new Emu::BaseVertex;
-      emuLevel = 7;
+      emuLevel = 8;
       bv->Init(*this);
     }
     #endif /* REGAL_EMU_BASEVERTEX */
@@ -486,7 +499,7 @@ RegalContext::Init()
       }
       emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
       texsto = new Emu::TexSto;
-      emuLevel = 8;
+      emuLevel = 9;
       texsto->Init(*this);
     }
     #endif /* REGAL_EMU_TEXSTO */
@@ -495,7 +508,7 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_XFER");
       xfer = new Emu::Xfer;
-      emuLevel = 9;
+      emuLevel = 10;
       xfer->Init(*this);
     }
     #endif /* REGAL_EMU_XFER */
@@ -504,7 +517,7 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_BIN");
       bin = new Emu::Bin;
-      emuLevel = 10;
+      emuLevel = 11;
       bin->Init(*this);
     }
     #endif /* REGAL_EMU_BIN */
@@ -513,7 +526,7 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_PPCA");
       ppca = new Emu::Ppca;
-      emuLevel = 11;
+      emuLevel = 12;
       ppca->Init(*this);
     }
     #endif /* REGAL_EMU_PPCA */
@@ -522,7 +535,7 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_PPA");
       ppa = new Emu::Ppa;
-      emuLevel = 12;
+      emuLevel = 13;
       ppa->Init(*this);
     }
     #endif /* REGAL_EMU_PPA */
@@ -531,7 +544,7 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_HINT");
       hint = new Emu::Hint;
-      emuLevel = 13;
+      emuLevel = 14;
       hint->Init(*this);
     }
     #endif /* REGAL_EMU_HINT */
@@ -540,11 +553,11 @@ RegalContext::Init()
     {
       Info("Activating emulation layer REGAL_EMU_OBJ");
       obj = new Emu::Obj;
-      emuLevel = 14;
+      emuLevel = 15;
       obj->Init(*this);
     }
     #endif /* REGAL_EMU_OBJ */
-    emuLevel = 15;
+    emuLevel = 16;
 
   }
 #endif
@@ -613,7 +626,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_OBJ
   if (obj)
   {
-    emuLevel = 14;
+    emuLevel = 15;
     obj->Cleanup(*this);
     obj.reset(NULL);
   }
@@ -621,7 +634,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_HINT
   if (hint)
   {
-    emuLevel = 13;
+    emuLevel = 14;
     hint->Cleanup(*this);
     hint.reset(NULL);
   }
@@ -629,7 +642,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_PPA
   if (ppa)
   {
-    emuLevel = 12;
+    emuLevel = 13;
     ppa->Cleanup(*this);
     ppa.reset(NULL);
   }
@@ -637,7 +650,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_PPCA
   if (ppca)
   {
-    emuLevel = 11;
+    emuLevel = 12;
     ppca->Cleanup(*this);
     ppca.reset(NULL);
   }
@@ -645,7 +658,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_BIN
   if (bin)
   {
-    emuLevel = 10;
+    emuLevel = 11;
     bin->Cleanup(*this);
     bin.reset(NULL);
   }
@@ -653,7 +666,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_XFER
   if (xfer)
   {
-    emuLevel = 9;
+    emuLevel = 10;
     xfer->Cleanup(*this);
     xfer.reset(NULL);
   }
@@ -661,7 +674,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_TEXSTO
   if (texsto)
   {
-    emuLevel = 8;
+    emuLevel = 9;
     texsto->Cleanup(*this);
     texsto.reset(NULL);
   }
@@ -669,7 +682,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_BASEVERTEX
   if (bv)
   {
-    emuLevel = 7;
+    emuLevel = 8;
     bv->Cleanup(*this);
     bv.reset(NULL);
   }
@@ -677,7 +690,7 @@ RegalContext::Cleanup()
   #if REGAL_EMU_RECT
   if (rect)
   {
-    emuLevel = 6;
+    emuLevel = 7;
     rect->Cleanup(*this);
     rect.reset(NULL);
   }
@@ -685,11 +698,19 @@ RegalContext::Cleanup()
   #if REGAL_EMU_IFF
   if (iff)
   {
-    emuLevel = 5;
+    emuLevel = 6;
     iff->Cleanup(*this);
     iff.reset(NULL);
   }
   #endif /* REGAL_EMU_IFF */
+  #if REGAL_EMU_QUADS
+  if (quads)
+  {
+    emuLevel = 5;
+    quads->Cleanup(*this);
+    quads.reset(NULL);
+  }
+  #endif /* REGAL_EMU_QUADS */
   #if REGAL_EMU_SO
   if (so)
   {

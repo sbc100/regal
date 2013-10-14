@@ -17,6 +17,7 @@
 #define set_json_regal_config_dispatch_emulation_enable_path(value)      Config::enableEmuPath = value
 #define set_json_regal_config_dispatch_emulation_enable_ppa(value)       Config::enableEmuPpa = value
 #define set_json_regal_config_dispatch_emulation_enable_ppca(value)      Config::enableEmuPpca = value
+#define set_json_regal_config_dispatch_emulation_enable_quads(value)     Config::enableEmuQuads = value
 #define set_json_regal_config_dispatch_emulation_enable_rect(value)      Config::enableEmuRect = value
 #define set_json_regal_config_dispatch_emulation_enable_so(value)        Config::enableEmuSo = value
 #define set_json_regal_config_dispatch_emulation_enable_texc(value)      Config::enableEmuTexC = value
@@ -33,6 +34,7 @@
 #define set_json_regal_config_dispatch_emulation_force_path(value)       Config::forceEmuPath = value
 #define set_json_regal_config_dispatch_emulation_force_ppa(value)        Config::forceEmuPpa = value
 #define set_json_regal_config_dispatch_emulation_force_ppca(value)       Config::forceEmuPpca = value
+#define set_json_regal_config_dispatch_emulation_force_quads(value)      Config::forceEmuQuads = value
 #define set_json_regal_config_dispatch_emulation_force_rect(value)       Config::forceEmuRect = value
 #define set_json_regal_config_dispatch_emulation_force_so(value)         Config::forceEmuSo = value
 #define set_json_regal_config_dispatch_emulation_force_texc(value)       Config::forceEmuTexC = value

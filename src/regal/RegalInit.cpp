@@ -115,6 +115,7 @@ Init::Init()
 #if !REGAL_NO_JSON
   if (Config::configFile.length())
   {
+    Info("Reading Regal configuration from ",Config::configFile);
     bool ok = Json::Parser::parseFile(Config::configFile);
     if (!ok)
       Warning("Failed to parse configuration from ",Config::configFile);
@@ -215,12 +216,12 @@ Init::getContext(RegalSystemContext sysCtx)
   SC2RC::iterator i = sc2rc.find(sysCtx);
   if (i!=sc2rc.end())
   {
-    Internal("Init::context", "lookup for sysCtx=",sysCtx);
+    Internal("Init::context", "lookup for sysCtx=",boost::print::optional(sysCtx,Logging::pointers));
     return i->second;
   }
   else
   {
-    Internal("Init::context", "factory for sysCtx=",sysCtx);
+    Internal("Init::context", "factory for sysCtx=",boost::print::optional(sysCtx,Logging::pointers));
     RegalContext *context = new RegalContext();
     RegalAssert(context);
     sc2rc[sysCtx] = context;
@@ -234,7 +235,7 @@ Init::setContext(RegalContext *context)
 {
   Thread::Thread thread = Thread::Self();
 
-  Internal("Init::setContext","thread=",::boost::print::hex(Thread::threadId())," context=",context," ",context ? context->info->version : "");
+  Internal("Init::setContext","thread=",boost::print::optional(::boost::print::hex(Thread::threadId()),Logging::thread)," context=",boost::print::optional(context,Logging::pointers)," ",context ? context->info->version : "");
 
   // std::map lookup
 
@@ -337,7 +338,7 @@ ThreadLocalInit threadLocalInit;
 void
 Init::setContextTLS(RegalContext *context)
 {
-  Internal("Init::setContextTLS","thread=",::boost::print::hex(Thread::threadId())," context=",context);
+  Internal("Init::setContextTLS","thread=",boost::print::optional(::boost::print::hex(Thread::threadId()),Logging::thread)," context=",boost::print::optional(context,Logging::pointers));
 
   Thread::ThreadLocal &instance = Thread::ThreadLocal::instance();
   instance.currentContext = context;
@@ -415,7 +416,7 @@ Init::makeCurrent(RegalSystemContext sysCtx, PPB_OpenGLES2 *ppb_interface)
 Init::makeCurrent(RegalSystemContext sysCtx)
 #endif
 {
-  Internal("Init::makeCurrent","thread=",::boost::print::hex(Thread::threadId())," sysCtx=",sysCtx);
+  Internal("Init::makeCurrent","thread=",boost::print::optional(::boost::print::hex(Thread::threadId()),Logging::thread)," sysCtx=",boost::print::optional(sysCtx,Logging::pointers));
 
   if (sysCtx)
   {

@@ -54,7 +54,7 @@ ${LOCAL_CODE}
     RegalAssert(_context);
     return _context->dispatcher.driver;
   }
-  
+
   static void _getProcAddress(void (**func)(), void (*funcRegal)(), const char *name)
   {
     GetProcAddress(*func, name);

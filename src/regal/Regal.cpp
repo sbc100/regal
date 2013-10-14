@@ -6605,7 +6605,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringEXT(length, buf);
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringEXT(length,buf,maxLength);
     App("glDebugMessageInsertAMD","(", toString(category), ", ", toString(severity), ", ", id, ", ", length, ", ", boost::print::quote(buf,'"'), ")");
     if (!_context) return;
     if (_context->marker)
@@ -8052,7 +8054,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringEXT(length, buf);
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringEXT(length,buf,maxLength);
     App("glDebugMessageInsertARB","(", toString(source), ", ", toString(type), ", ", id, ", ", toString(severity), ", ", length, ", ", boost::print::quote(buf,'"'), ")");
     if (!_context) return;
     if (_context->marker)
@@ -15369,7 +15373,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glInsertEventMarkerEXT(GLsizei length, const GLchar *marker)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringEXT(length, marker);
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringEXT(length,marker,maxLength);
     App("glInsertEventMarkerEXT","(", length, ", ", boost::print::quote(marker,'"'), ")");
     if (!_context) return;
 
@@ -15404,7 +15410,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPushGroupMarkerEXT(GLsizei length, const GLchar *marker)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringEXT(length, marker);
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringEXT(length,marker,maxLength);
     App("glPushGroupMarkerEXT","(", length, ", ", boost::print::quote(marker,'"'), ")");
     if (!_context) return;
     RegalAssert(_context->info);
@@ -20510,7 +20518,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glStringMarkerGREMEDY(GLsizei len, const GLvoid *string)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringEXT(len, static_cast<const char *>(string));
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringEXT(len,static_cast<const char *>(string),maxLength);
     App("glStringMarkerGREMEDY","(", len, ", ", boost::print::optional(string,Logging::pointers), ")");
     if (!_context) return;
     if (_context->marker)
@@ -20845,7 +20855,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringKHR(length, buf);
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringKHR(length,buf,maxLength);
     App("glDebugMessageInsert","(", toString(source), ", ", toString(type), ", ", id, ", ", toString(severity), ", ", length, ", ", boost::print::quote(buf,'"'), ")");
     if (!_context) return;
     if (_context->marker)
@@ -20928,7 +20940,9 @@ extern "C" {
   REGAL_DECL void REGAL_CALL glPushDebugGroup(GLenum source, GLuint id, GLsizei length, const GLchar *message)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
-    std::string _message = Marker::toStringKHR(length, message);
+
+    const GLsizei maxLength = _context && _context->emuInfo ? _context->emuInfo->gl_max_debug_message_length : 1024;
+    const std::string _message = Marker::toStringKHR(length,message,maxLength);
     App("glPushDebugGroup","(", toString(source), ", ", id, ", ", length, ", ", boost::print::quote(message,'"'), ")");
     if (!_context) return;
     RegalAssert(_context->info);

@@ -330,6 +330,7 @@ def generateTokenSource(apis, args):
   code = []
 
   code.append('  const char * GLenumToString( GLenum e ) {')
+  code.append('    #if REGAL_ENUM_TO_STRING')
   code.append('    switch( e ) {')
 
   for i in apis:
@@ -366,13 +367,15 @@ def generateTokenSource(apis, args):
 
   code.append('      default: break;')
   code.append('    }')
-  code.append('  return "unknown_gl_enum";')
+  code.append('    #endif // REGAL_ENUM_TO_STRING')
+  code.append('    return "unknown_gl_enum";')
   code.append('  }')
 
   # GLerrorToString
 
   code.append('')
   code.append('  const char * GLerrorToString( GLenum e ) {')
+  code.append('    #if REGAL_ENUM_TO_STRING')
   code.append('    switch( e ) {')
   for i in apis:
     if i.name != 'gl':
@@ -385,7 +388,8 @@ def generateTokenSource(apis, args):
           code.append('      case %s: return "%s";'%(k.name,k.gluErrorString))
   code.append('      default: break;')
   code.append('    }')
-  code.append('  return NULL;')
+  code.append('    #endif // REGAL_ENUM_TO_STRING')
+  code.append('    return NULL;')
   code.append('  }')
 
   # GLX_VERSION
@@ -393,6 +397,7 @@ def generateTokenSource(apis, args):
   code.append('')
   code.append('#if REGAL_SYS_GLX')
   code.append('  const char * GLXenumToString(int v) {')
+  code.append('    #if REGAL_ENUM_TO_STRING')
   code.append('    switch( v ) {')
 
   for i in apis:
@@ -424,6 +429,7 @@ def generateTokenSource(apis, args):
 
   code.append('      default: break;')
   code.append('    }')
+  code.append('    #endif // REGAL_ENUM_TO_STRING')
   code.append('    return "unknown_glx_enum";')
   code.append('  }')
   code.append('#endif // REGAL_SYS_GLX')
@@ -433,6 +439,7 @@ def generateTokenSource(apis, args):
   code.append('')
   code.append('#if REGAL_SYS_EGL')
   code.append('  const char * EGLenumToString(int v) {')
+  code.append('    #if REGAL_ENUM_TO_STRING')
   code.append('    switch( v ) {')
 
   for i in apis:
@@ -469,6 +476,7 @@ def generateTokenSource(apis, args):
 
   code.append('      default: break;')
   code.append('    }')
+  code.append('    #endif // REGAL_ENUM_TO_STRING')
   code.append('    return "unknown_egl_enum";')
   code.append('  }')
   code.append('#endif // REGAL_SYS_EGL')

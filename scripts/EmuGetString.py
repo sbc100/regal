@@ -6,7 +6,7 @@ formulae = {
         'impl' : '''
 // Regal interceptions
 RegalAssert(_context->emuInfo);
-switch (name) 
+switch (name)
 {
   case GL_VENDOR:     return reinterpret_cast<const GLubyte *>(_context->emuInfo->vendor.c_str());
   case GL_RENDERER:   return reinterpret_cast<const GLubyte *>(_context->emuInfo->renderer.c_str());

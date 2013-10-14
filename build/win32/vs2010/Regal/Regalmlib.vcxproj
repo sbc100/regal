@@ -316,6 +316,8 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalPrecompile.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPrivate.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalPush.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalQuads.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalQuads.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalScopedPtr.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSharedList.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSharedMap.h" />

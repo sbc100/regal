@@ -84,10 +84,10 @@ using namespace std;
 #include <boost/print/string_list.hpp>
 using namespace boost::print;
 
+#include "RegalEmu.h"
 #include "RegalToken.h"
 #include "RegalContext.h"
 #include "RegalContextInfo.h"
-#include "RegalEmu.h"
 
 REGAL_GLOBAL_END
 
@@ -117,9 +117,20 @@ inline string getString(const RegalContext &context, const GLenum e)
   return str ? string(reinterpret_cast<const char *>(str)) : string();
 }
 
+inline void warnGLError(const RegalContext &context, const char *message)
+{
+  Internal("warnGLError ",message ? message : NULL);
+  RegalAssert(context.dispatcher.driver.glGetError);
+  GLenum err = context.dispatcher.driver.glGetError();
+  if (err!=GL_NO_ERROR)
+    Warning("glGetError returned ",GLerrorToString(err)," ",message ? message : NULL);
+}
+
 void
 ContextInfo::init(const RegalContext &context)
 {
+  warnGLError(context,"before Regal context initialization.");
+
   // OpenGL Version.
 
   vendor     = getString(context, GL_VENDOR);
@@ -203,9 +214,9 @@ ContextInfo::init(const RegalContext &context)
   }
   #endif
 
-  // Detect core context
+  // Detect core context for GL 3.2 onwards
 
-  if (!es1 && !es2 && gl_version_major>=3)
+  if (!es1 && !es2 && (gl_version_major>3 || gl_version_major==3 && gl_version_minor>=2))
   {
     GLint flags = 0;
     RegalAssert(context.dispatcher.driver.glGetIntegerv);
@@ -279,10 +290,13 @@ ${VERSION_DETECT}
 ${EXT_INIT}
 
   RegalAssert(context.dispatcher.driver.glGetIntegerv);
+  RegalAssert(context.dispatcher.driver.glGetBooleanv);
 ${IMPL_GET}
 
   Info("OpenGL v attribs : ",gl_max_vertex_attribs);
   Info("OpenGL varyings  : ",gl_max_varying_floats);
+
+  warnGLError(context,"querying context information.");
 }
 
 bool
@@ -467,6 +481,8 @@ def implDeclareCode(apis, args):
 
       code += '\n'
       code += '  GLuint gl_max_varying_floats;\n'
+      code += '\n'
+      code += '  GLboolean gl_quads_follow_provoking_vertex_convention;\n'
 
   return code
 
@@ -485,7 +501,8 @@ def implInitCode(apis, args):
       for state in sorted(states):
         code += '  gl_%s(0),\n' % (state)
 
-      code += '  gl_max_varying_floats(0)\n'
+      code += '  gl_max_varying_floats(0),\n'
+      code += '  gl_quads_follow_provoking_vertex_convention(GL_FALSE)\n'
 
   return code
 
@@ -495,6 +512,7 @@ def implGetCode(apis, args):
   gl_max_attrib_stack_depth = 0;
   gl_max_client_attrib_stack_depth = 0;
   gl_max_combined_texture_image_units = 0;
+  gl_max_debug_message_length = 1024;
   gl_max_draw_buffers = 0;
   gl_max_texture_coords = 0;
   gl_max_texture_units = 0;
@@ -523,7 +541,7 @@ def implGetCode(apis, args):
     context.dispatcher.driver.glGetIntegerv( GL_MAX_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>(&gl_max_attrib_stack_depth));
     context.dispatcher.driver.glGetIntegerv( GL_MAX_CLIENT_ATTRIB_STACK_DEPTH, reinterpret_cast<GLint *>(&gl_max_client_attrib_stack_depth));
   }
-  
+
   if (!es1)
     context.dispatcher.driver.glGetIntegerv( GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, reinterpret_cast<GLint *>(&gl_max_combined_texture_image_units));
 
@@ -551,6 +569,16 @@ def implGetCode(apis, args):
 
   if ((core || compat) && (gl_version_4_1 || gl_arb_viewport_array))
     context.dispatcher.driver.glGetIntegerv( GL_MAX_VIEWPORTS, reinterpret_cast<GLint *>(&gl_max_viewports));
+
+  if (gl_arb_debug_output)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_DEBUG_MESSAGE_LENGTH_ARB, reinterpret_cast<GLint *>(&gl_max_debug_message_length));
+  else if (gl_khr_debug)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_DEBUG_MESSAGE_LENGTH, reinterpret_cast<GLint *>(&gl_max_debug_message_length));
+  else if (gl_amd_debug_output)
+    context.dispatcher.driver.glGetIntegerv( GL_MAX_DEBUG_MESSAGE_LENGTH_AMD, reinterpret_cast<GLint *>(&gl_max_debug_message_length));
+
+  if ((compat) && (gl_version_3_2 || gl_arb_provoking_vertex || gl_ext_provoking_vertex))
+    context.dispatcher.driver.glGetBooleanv( GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION, &gl_quads_follow_provoking_vertex_convention);
 '''
   return code
 
@@ -584,7 +612,7 @@ def originalImplGetCode(apis, args):
           code += '    context.dispatcher.driver.glGetIntegerv( GL_%s, reinterpret_cast<GLint *>(&gl_%s));\n' % (state, state.lower())
 
       code += '''
-    if (gl_version_4_3 || gl_arb_vertex_attrib_binding) 
+    if (gl_version_4_3 || gl_arb_vertex_attrib_binding)
       context.dispatcher.driver.glGetIntegerv( GL_MAX_VERTEX_ATTRIB_BINDINGS, reinterpret_cast<GLint *>(&gl_max_vertex_attrib_bindings));
     else
       gl_max_vertex_attrib_bindings = 0;

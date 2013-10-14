@@ -49,13 +49,13 @@ REGAL_GLOBAL_BEGIN
 
 #include <boost/cstdint.hpp>
 
-REGAL_GLOBAL_END
-
-REGAL_NAMESPACE_BEGIN
-
 using ::boost::uint8_t;
 using ::boost::uint16_t;
 using ::boost::uint32_t;
+
+REGAL_GLOBAL_END
+
+REGAL_NAMESPACE_BEGIN
 
 // The IConversion interface hides the implementation details of the conversion
 // module behind a standard interface.

@@ -80,6 +80,7 @@ namespace Emu { struct TexSto; };
 namespace Emu { struct BaseVertex; };
 namespace Emu { struct Rect; };
 namespace Emu { struct Iff; };
+namespace Emu { struct Quads; };
 namespace Emu { struct So; };
 namespace Emu { struct Dsa; };
 namespace Emu { struct Vao; };
@@ -132,6 +133,7 @@ struct RegalContext
   scoped_ptr<Emu::BaseVertex   > bv;
   scoped_ptr<Emu::Rect         > rect;
   scoped_ptr<Emu::Iff          > iff;
+  scoped_ptr<Emu::Quads        > quads;
   scoped_ptr<Emu::So           > so;
   scoped_ptr<Emu::Dsa          > dsa;
   scoped_ptr<Emu::Vao          > vao;

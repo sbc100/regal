@@ -1672,7 +1672,7 @@ namespace ClientState
           s  = 15 * f;
           break;
         default:
-          RegalAssert( !"unhandled format value" );
+          Warning( "Unhandled format value. format = 0x", hex(format), " (", Token::GLenumToString(format), ")");
           return;
       }
 

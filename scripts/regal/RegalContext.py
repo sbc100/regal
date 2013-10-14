@@ -30,6 +30,7 @@ from EmuSo     import soFormulae
 from EmuPpca   import ppcaFormulae
 from EmuPpa    import ppaFormulae
 from EmuIff    import iffFormulae
+from EmuQuads  import quadsFormulae
 from EmuBin    import binFormulae
 from EmuObj    import objFormulae
 from EmuFilter import formulae as filterFormulae
@@ -76,6 +77,7 @@ emu = [
     { 'type' : 'Emu::BaseVertex', 'include' : 'RegalBaseVertex.h', 'member' : 'bv',     'plugin' : False, 'forced' : 'Config::forceEmuBaseVertex || REGAL_FORCE_EMU_BASEVERTEX', 'conditional' : 'Config::enableEmuBaseVertex', 'ifdef' : 'REGAL_EMU_BASEVERTEX', 'formulae' : baseVertexFormulae },
     { 'type' : 'Emu::Rect',       'include' : 'RegalRect.h',       'member' : 'rect',   'plugin' : False, 'forced' : 'Config::forceEmuRect       || REGAL_FORCE_EMU_RECT',       'conditional' : 'Config::enableEmuRect      ', 'ifdef' : 'REGAL_EMU_RECT',       'formulae' : rectFormulae       },
     { 'type' : 'Emu::Iff',        'include' : 'RegalIff.h',        'member' : 'iff',    'plugin' : False, 'forced' : 'Config::forceEmuIff        || REGAL_FORCE_EMU_IFF',        'conditional' : 'Config::enableEmuIff       ', 'ifdef' : 'REGAL_EMU_IFF',        'formulae' : iffFormulae        },
+    { 'type' : 'Emu::Quads',      'include' : 'RegalQuads.h',      'member' : 'quads',  'plugin' : False, 'forced' : 'Config::forceEmuQuads      || REGAL_FORCE_EMU_QUADS',      'conditional' : 'Config::enableEmuQuads     ', 'ifdef' : 'REGAL_EMU_QUADS',      'formulae' : quadsFormulae      },
     { 'type' : 'Emu::So',         'include' : 'RegalSo.h',         'member' : 'so',     'plugin' : False, 'forced' : 'Config::forceEmuSo         || REGAL_FORCE_EMU_SO',         'conditional' : 'Config::enableEmuSo        ', 'ifdef' : 'REGAL_EMU_SO',         'formulae' : soFormulae     },
     { 'type' : 'Emu::Dsa',        'include' : 'RegalDsa.h',        'member' : 'dsa',    'plugin' : False, 'forced' : 'Config::forceEmuDsa        || REGAL_FORCE_EMU_OBJ',        'conditional' : 'Config::enableEmuDsa       ', 'ifdef' : 'REGAL_EMU_DSA',        'formulae' : dsaFormulae        },
     { 'type' : 'Emu::Vao',        'include' : 'RegalVao.h',        'member' : 'vao',    'plugin' : False, 'forced' : 'Config::forceEmuVao        || REGAL_FORCE_EMU_DSA',        'conditional' : 'Config::enableEmuVao       ', 'ifdef' : 'REGAL_EMU_VAO',        'formulae' : vaoFormulae },
@@ -344,7 +346,7 @@ ${EMULATION_FORCED}
       enableEmuDsa = false;
 
     // Vao needs Iff
-  
+
     if (!enableEmuIff)
       enableEmuVao = false;
 
@@ -367,7 +369,7 @@ ${EMULATION_FORCED}
 ${EMULATION_ENABLED}
 
   // Enable emulation except for fully featured compatibility contexts
-  
+
   const bool enableEmulation = Config::enableEmulation && (isCore() || isES2() || (isCompat() && !info->gl_ext_direct_state_access));
 
 #if !REGAL_FORCE_EMULATION
@@ -627,7 +629,7 @@ def generateContextSource(apis, args):
         init += 'emuLevel = %d;\n' % ( int(emu[revi]['level']) - 1)
         init += '%s->Init(*this);\n' % emu[revi]['member']
         emuMemberInit += indent(wrapIf(emu[revi]['ifdef'],wrapCIf('enableEmu%s || forceEmu%s'%(capwords(emu[revi]['member']),capwords(emu[revi]['member'])),init)),'    ')
-      
+
     # Force emulation layers
 
     emuEmulationForced += '\n'
@@ -664,5 +666,5 @@ def generateContextSource(apis, args):
     substitute['EMU_MEMBER_CLEANUP']   = emuMemberCleanup
     substitute['EMULATION_FORCED']     = emuEmulationForced
     substitute['EMULATION_ENABLED']    = emuEmulationEnabled
-    
+
     outputCode( '%s/RegalContext.cpp' % args.srcdir, contextSourceTemplate.substitute(substitute))

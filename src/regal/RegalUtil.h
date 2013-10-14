@@ -194,6 +194,13 @@
 # endif
 #endif
 
+// Converting enum values to strings adds some footprint,
+// opt-out with -DREGAL_ENUM_TO_STRING=0
+
+#ifndef REGAL_ENUM_TO_STRING
+#define REGAL_ENUM_TO_STRING 1
+#endif
+
 // Driver dispatch supported by default
 
 #ifndef REGAL_DRIVER
@@ -270,6 +277,10 @@
 #define REGAL_EMU_IFF 1
 #endif
 
+#ifndef REGAL_EMU_QUADS
+#define REGAL_EMU_QUADS 0
+#endif
+
 #ifndef REGAL_EMU_SO
 #define REGAL_EMU_SO 1
 #endif
@@ -338,6 +349,10 @@
 
 #ifndef REGAL_FORCE_EMU_IFF
 #define REGAL_FORCE_EMU_IFF 0
+#endif
+
+#ifndef REGAL_FORCE_EMU_QUADS
+#define REGAL_FORCE_EMU_QUADS 0
 #endif
 
 #ifndef REGAL_FORCE_EMU_SO

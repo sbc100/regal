@@ -101,6 +101,7 @@ EmuInfo::EmuInfo()
   gl_max_attrib_stack_depth(0),
   gl_max_client_attrib_stack_depth(0),
   gl_max_combined_texture_image_units(0),
+  gl_max_debug_message_length(0),
   gl_max_draw_buffers(0),
   gl_max_texture_coords(0),
   gl_max_texture_units(0),
@@ -217,6 +218,7 @@ EmuInfo::init(const ContextInfo &contextInfo)
   gl_max_attrib_stack_depth             = contextInfo.gl_max_attrib_stack_depth;
   gl_max_client_attrib_stack_depth      = contextInfo.gl_max_client_attrib_stack_depth;
   gl_max_combined_texture_image_units   = contextInfo.gl_max_combined_texture_image_units;
+  gl_max_debug_message_length           = contextInfo.gl_max_debug_message_length;
   gl_max_draw_buffers                   = contextInfo.gl_max_draw_buffers;
   gl_max_texture_coords                 = contextInfo.gl_max_texture_coords;
   gl_max_texture_units                  = contextInfo.gl_max_texture_units;

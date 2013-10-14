@@ -45912,6 +45912,7 @@ MAX_TEXTURE_COORDS = State('MAX_TEXTURE_COORDS', 'Zplus', 'glGetIntegerv', '8', 
 MAX_COMBINED_TEXTURE_IMAGE_UNITS = State('MAX_COMBINED_TEXTURE_IMAGE_UNITS', 'Zplus', 'glGetIntegerv', '96', 'Total no. of texture units accessible by the GL', '11.1.3.5', '-')
 MAX_DRAW_BUFFERS = State('MAX_DRAW_BUFFERS', 'Zplus', 'glGetIntegerv', '8', 'Max no. of active draw buffers', '17.4.1', '-')
 MAX_VIEWPORTS = State('MAX_VIEWPORTS', 'Zplus', 'glGetIntegerv', '16', 'Max no. of active viewports', '13.6.1', '-')
+MAX_DEBUG_MESSAGE_LENGTH = State('MAX_DEBUG_MESSAGE_LENGTH', 'Zplus', 'glGetIntegerv', '1024', 'Maximum length of a debug output message', '5.5.1', '-')
 
 gl.add(MAX_ATTRIB_STACK_DEPTH)
 gl.add(MAX_CLIENT_ATTRIB_STACK_DEPTH)
@@ -45922,3 +45923,4 @@ gl.add(MAX_TEXTURE_COORDS)
 gl.add(MAX_COMBINED_TEXTURE_IMAGE_UNITS)
 gl.add(MAX_DRAW_BUFFERS)
 gl.add(MAX_VIEWPORTS)
+gl.add(MAX_DEBUG_MESSAGE_LENGTH)

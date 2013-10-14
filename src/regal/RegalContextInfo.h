@@ -808,6 +808,7 @@ struct ContextInfo
   GLuint gl_max_attrib_stack_depth;
   GLuint gl_max_client_attrib_stack_depth;
   GLuint gl_max_combined_texture_image_units;
+  GLuint gl_max_debug_message_length;
   GLuint gl_max_draw_buffers;
   GLuint gl_max_texture_coords;
   GLuint gl_max_texture_units;
@@ -816,6 +817,8 @@ struct ContextInfo
   GLuint gl_max_viewports;
 
   GLuint gl_max_varying_floats;
+
+  GLboolean gl_quads_follow_provoking_vertex_convention;
 
 private:
   static bool stringSetFind(const std::set<std::string> &stringSet, const std::string &val);

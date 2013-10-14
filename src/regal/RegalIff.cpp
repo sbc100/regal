@@ -2564,8 +2564,8 @@ void Iff::State::Process( Iff * ffn )
       }
     }
   }
-  p.hash = Lookup3::hashlittle(reinterpret_cast<const char *>(&p) + sizeof(p.hash) + sizeof(p.ver),
-                               sizeof(p)-sizeof(p.hash)-sizeof(p.ver), 0);
+  p.hash = Lookup3::hashlittle(reinterpret_cast<const char *>(&p.hash) + sizeof( p.hash ),
+                               reinterpret_cast<const char *>((&p)+1) - reinterpret_cast<const char *>(&p.hash) - sizeof( p.hash ), 0);
 }
 
 void Iff::UpdateUniforms( RegalContext * ctx )

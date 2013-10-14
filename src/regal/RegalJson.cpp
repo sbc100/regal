@@ -81,7 +81,9 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION,
+  JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
   JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE,
@@ -237,6 +239,7 @@ Parser::onPush(const string &name)
       if (name=="path"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PATH;  return; }
       if (name=="ppa"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPA;   return; }
       if (name=="ppca"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA;  return; }
+      if (name=="quads"       ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_QUADS; return; }
       if (name=="rect"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_RECT;  return; }
       if (name=="so"          ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_SO;    return; }
       if (name=="texc"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXC;  return; }
@@ -256,6 +259,7 @@ Parser::onPush(const string &name)
       if (name=="path"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PATH;   return; }
       if (name=="ppa"         ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPA;    return; }
       if (name=="ppca"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA;   return; }
+      if (name=="quads"       ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_QUADS;  return; }
       if (name=="rect"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_RECT;   return; }
       if (name=="so"          ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_SO;     return; }
       if (name=="texc"        ) { current = JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXC;   return; }
@@ -416,6 +420,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PATH  : { set_json_regal_config_dispatch_emulation_enable_path(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPA   : { set_json_regal_config_dispatch_emulation_enable_ppa(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_PPCA  : { set_json_regal_config_dispatch_emulation_enable_ppca(value); return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_QUADS : { set_json_regal_config_dispatch_emulation_enable_quads(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_RECT  : { set_json_regal_config_dispatch_emulation_enable_rect(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_SO    : { set_json_regal_config_dispatch_emulation_enable_so(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_ENABLE_TEXC  : { set_json_regal_config_dispatch_emulation_enable_texc(value); return; }
@@ -432,6 +437,7 @@ Parser::onValue(const bool value)
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PATH   : { set_json_regal_config_dispatch_emulation_force_path(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPA    : { set_json_regal_config_dispatch_emulation_force_ppa(value);   return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_PPCA   : { set_json_regal_config_dispatch_emulation_force_ppca(value);  return; }
+    case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_QUADS  : { set_json_regal_config_dispatch_emulation_force_quads(value); return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_RECT   : { set_json_regal_config_dispatch_emulation_force_rect(value);  return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_SO     : { set_json_regal_config_dispatch_emulation_force_so(value);    return; }
     case JSON_REGAL_CONFIG_DISPATCH_EMULATION_FORCE_TEXC   : { set_json_regal_config_dispatch_emulation_force_texc(value);  return; }

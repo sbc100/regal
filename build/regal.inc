@@ -7,6 +7,7 @@
 
 REGAL.CXX :=
 REGAL.CXX += src/regal/RegalIff.cpp
+REGAL.CXX += src/regal/RegalQuads.cpp
 REGAL.CXX += src/regal/Regal.cpp
 REGAL.CXX += src/regal/RegalLog.cpp
 REGAL.CXX += src/regal/RegalInit.cpp
@@ -87,6 +88,7 @@ REGAL.H += src/regal/RegalHttp.h
 REGAL.H += src/regal/RegalJson.h
 REGAL.H += src/regal/RegalJson.inl
 REGAL.H += src/regal/RegalIff.h
+REGAL.H += src/regal/RegalQuads.h
 REGAL.H += src/regal/RegalInit.h
 REGAL.H += src/regal/RegalLog.h
 REGAL.H += src/regal/RegalLookup.h

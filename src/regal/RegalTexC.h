@@ -54,13 +54,13 @@ REGAL_GLOBAL_BEGIN
 #include "RegalContext.h"
 #include "RegalSharedMap.h"
 
-REGAL_GLOBAL_END
-
-REGAL_NAMESPACE_BEGIN
-
 using ::boost::uint8_t;
 using ::boost::uint16_t;
 using ::boost::uint32_t;
+
+REGAL_GLOBAL_END
+
+REGAL_NAMESPACE_BEGIN
 
 namespace Emu {
 

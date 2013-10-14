@@ -84,6 +84,7 @@ namespace Config {
   bool enableEmuRect       = REGAL_EMU_RECT;
   bool enableEmuBaseVertex = REGAL_EMU_BASEVERTEX;
   bool enableEmuIff        = REGAL_EMU_IFF;
+  bool enableEmuQuads      = REGAL_EMU_QUADS;
   bool enableEmuSo         = REGAL_EMU_SO;
   bool enableEmuVao        = REGAL_EMU_VAO;
   bool enableEmuFilter     = REGAL_EMU_FILTER;
@@ -101,6 +102,7 @@ namespace Config {
   bool forceEmuRect        = REGAL_FORCE_EMU_RECT;
   bool forceEmuBaseVertex  = REGAL_FORCE_EMU_BASEVERTEX;
   bool forceEmuIff         = REGAL_FORCE_EMU_IFF;
+  bool forceEmuQuads       = REGAL_FORCE_EMU_QUADS;
   bool forceEmuSo          = REGAL_FORCE_EMU_SO;
   bool forceEmuVao         = REGAL_FORCE_EMU_VAO;
   bool forceEmuFilter      = REGAL_FORCE_EMU_FILTER;
@@ -231,6 +233,7 @@ namespace Config {
     getEnv( "REGAL_EMU_RECT",       enableEmuRect,       REGAL_EMU_RECT);
     getEnv( "REGAL_EMU_BASEVERTEX", enableEmuBaseVertex, REGAL_EMU_BASEVERTEX );
     getEnv( "REGAL_EMU_IFF",        enableEmuIff,        REGAL_EMU_IFF);
+    getEnv( "REGAL_EMU_QUADS",      enableEmuQuads,      REGAL_EMU_QUADS);
     getEnv( "REGAL_EMU_SO",         enableEmuSo,         REGAL_EMU_SO);
     getEnv( "REGAL_EMU_VAO",        enableEmuVao,        REGAL_EMU_VAO);
     getEnv( "REGAL_EMU_TEXC",       enableEmuTexC,       REGAL_EMU_TEXC);
@@ -248,6 +251,7 @@ namespace Config {
     getEnv( "REGAL_FORCE_EMU_RECT",       forceEmuRect,        REGAL_EMU_RECT       && !REGAL_FORCE_EMU_RECT);
     getEnv( "REGAL_FORCE_EMU_BASEVERTEX", forceEmuBaseVertex,  REGAL_EMU_BASEVERTEX && !REGAL_FORCE_EMU_BASEVERTEX);
     getEnv( "REGAL_FORCE_EMU_IFF",        forceEmuIff,         REGAL_EMU_IFF        && !REGAL_FORCE_EMU_IFF);
+    getEnv( "REGAL_FORCE_EMU_QUADS",      forceEmuQuads,       REGAL_EMU_QUADS      && !REGAL_FORCE_EMU_QUADS);
     getEnv( "REGAL_FORCE_EMU_SO",         forceEmuSo,          REGAL_EMU_SO         && !REGAL_FORCE_EMU_SO);
     getEnv( "REGAL_FORCE_EMU_VAO",        forceEmuVao,         REGAL_EMU_VAO        && !REGAL_FORCE_EMU_VAO);
     getEnv( "REGAL_FORCE_EMU_TEXC",       forceEmuTexC,        REGAL_EMU_TEXC       && !REGAL_FORCE_EMU_TEXC);
@@ -370,6 +374,7 @@ namespace Config {
     Info("REGAL_EMU_RECT            ", enableEmuRect       ? "enabled" : "disabled");
     Info("REGAL_EMU_BASEVERTEX      ", enableEmuBaseVertex ? "enabled" : "disabled");
     Info("REGAL_EMU_IFF             ", enableEmuIff        ? "enabled" : "disabled");
+    Info("REGAL_EMU_QUADS           ", enableEmuQuads      ? "enabled" : "disabled");
     Info("REGAL_EMU_SO              ", enableEmuSo         ? "enabled" : "disabled");
     Info("REGAL_EMU_VAO             ", enableEmuVao        ? "enabled" : "disabled");
     Info("REGAL_EMU_FILTER          ", enableEmuFilter     ? "enabled" : "disabled");
@@ -387,6 +392,7 @@ namespace Config {
     Info("REGAL_FORCE_EMU_RECT      ", forceEmuRect        ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_BASEVERTEX", forceEmuBaseVertex  ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_IFF       ", forceEmuIff         ? "enabled" : "disabled");
+    Info("REGAL_FORCE_EMU_QUADS     ", forceEmuQuads       ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_SO        ", forceEmuSo          ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_VAO       ", forceEmuVao         ? "enabled" : "disabled");
     Info("REGAL_FORCE_EMU_FILTER    ", forceEmuFilter      ? "enabled" : "disabled");
@@ -475,6 +481,7 @@ namespace Config {
             jo.member("rect",   enableEmuRect);
             jo.member("bv",     enableEmuBaseVertex);
             jo.member("iff",    enableEmuIff);
+            jo.member("quads",  enableEmuQuads);
             jo.member("so",     enableEmuSo);
             jo.member("vao",    enableEmuVao);
             jo.member("texc",   enableEmuTexC);
@@ -494,6 +501,7 @@ namespace Config {
             jo.member("rect",   forceEmuRect);
             jo.member("bv",     forceEmuBaseVertex);
             jo.member("iff",    forceEmuIff);
+            jo.member("quads",  forceEmuQuads);
             jo.member("so",     forceEmuSo);
             jo.member("vao",    forceEmuVao);
             jo.member("texc",   forceEmuTexC);
