@@ -108,7 +108,8 @@ def logParameter(function, parameter):
     t in [ 'XID', 'XVisualInfo *', 'Pixmap', 'Font', 'Display *'] or \
     t in [ 'GLXDrawble', 'GLXPixmap', 'GLXContext', 'GLXVideoDeviceNV', 'GLXWindow', 'GLXPbuffer', 'GLXFBConfigID', '__GLXextFuncPtr', 'GLXFBConfig *'] or \
     t in [ 'PVOID', 'LPVOID', 'HDC', 'HGLRC', 'HPBUFFERARB', 'HPBUFFEREXT', 'HGPUNV', 'HPVIDEODEV', 'HVIDEOINPUTDEVICENV', 'HVIDEOOUTPUTDEVICENV', 'PGPU_DEVICE' ] or \
-    t in [ 'LPIXELFORMATDESCRIPTOR', 'LPLAYERPLANEDESCRIPTOR','LPLAYERPLANEDESCRIPTOR', 'LPGLYPHMETRICSFLOAT' ] or \
+    t in [ 'LPPIXELFORMATDESCRIPTOR', 'LPLAYERPLANEDESCRIPTOR', 'LPGLYPHMETRICSFLOAT' ] or \
+    t in [ 'PROC', 'const PIXELFORMATDESCRIPTOR *' ] or \
     t in [ 'EGLNativeWindowType', 'EGLNativePixmapType', 'EGLNativeDisplayType', 'EGLConfig', 'EGLContext', 'EGLDisplay', 'EGLSurface', 'EGLClientBuffer', 'EGLSyncKHR', 'EGLImageKHR', 'EGLStreamKHR', 'EGLSyncNV']:
     return 'boost::print::optional(%s,Logging::pointers)'%n
 

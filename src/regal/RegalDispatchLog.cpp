@@ -3400,7 +3400,7 @@ static void REGAL_CALL log_glPushClientAttrib(GLbitfield mask)
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPushClientAttrib)(mask);
-    Driver("glPushClientAttrib","(", mask, ")");
+    Driver("glPushClientAttrib","(", GLpushClientAttribToString(mask), ")");
 }
 
 static void REGAL_CALL log_glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
@@ -23044,7 +23044,7 @@ static void REGAL_CALL log_glPathGlyphRangeNV(GLuint firstPathName, GLenum fontT
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPathGlyphRangeNV)(firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale);
-    Driver("glPathGlyphRangeNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::optional(fontName,Logging::pointers), ", ", fontStyle, ", ", firstGlyph, ", ", numGlyphs, ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ", ", emScale, ")");
+    Driver("glPathGlyphRangeNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::quote(reinterpret_cast<const char *>(fontName),'"'), ", ", fontStyle, ", ", firstGlyph, ", ", numGlyphs, ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ", ", emScale, ")");
 }
 
 static void REGAL_CALL log_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, const GLvoid *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid *charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale)
@@ -23054,7 +23054,7 @@ static void REGAL_CALL log_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarge
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPathGlyphsNV)(firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type, charcodes, handleMissingGlyphs, pathParameterTemplate, emScale);
-    Driver("glPathGlyphsNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::optional(fontName,Logging::pointers), ", ", fontStyle, ", ", numGlyphs, ", ", toString(type), ", ", boost::print::optional(charcodes,Logging::pointers), ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ")");
+    Driver("glPathGlyphsNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::quote(reinterpret_cast<const char *>(fontName),'"'), ", ", fontStyle, ", ", numGlyphs, ", ", toString(type), ", ", boost::print::optional(charcodes,Logging::pointers), ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ")");
 }
 
 static void REGAL_CALL log_glPathParameterfNV(GLuint path, GLenum pname, GLfloat value)
@@ -28237,7 +28237,7 @@ static int REGAL_CALL log_wglChoosePixelFormat(HDC hDC, const PIXELFORMATDESCRIP
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     int  ret = _next->call(&_next->wglChoosePixelFormat)(hDC, ppfd);
-    Driver("wglChoosePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", ppfd, ")", " returned ", ret);
+    Driver("wglChoosePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", boost::print::optional(ppfd,Logging::pointers), ")", " returned ", ret);
     return ret;
 }
 
@@ -28246,7 +28246,7 @@ static int REGAL_CALL log_wglDescribePixelFormat(HDC hDC, int iPixelFormat, UINT
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     int  ret = _next->call(&_next->wglDescribePixelFormat)(hDC, iPixelFormat, nBytes, ppfd);
-    Driver("wglDescribePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", nBytes, ", ", ppfd, ")", " returned ", ret);
+    Driver("wglDescribePixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", nBytes, ", ", boost::print::optional(ppfd,Logging::pointers), ")", " returned ", ret);
     return ret;
 }
 
@@ -28264,7 +28264,7 @@ static BOOL REGAL_CALL log_wglSetPixelFormat(HDC hDC, int iPixelFormat, const PI
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     BOOL  ret = _next->call(&_next->wglSetPixelFormat)(hDC, iPixelFormat, ppfd);
-    Driver("wglSetPixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", ppfd, ")", " returned ", ret);
+    Driver("wglSetPixelFormat","(", boost::print::optional(hDC,Logging::pointers), ", ", iPixelFormat, ", ", boost::print::optional(ppfd,Logging::pointers), ")", " returned ", ret);
     return ret;
 }
 
@@ -29024,7 +29024,7 @@ static PROC REGAL_CALL log_wglGetDefaultProcAddress(LPCSTR lpszProc)
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     PROC  ret = _next->call(&_next->wglGetDefaultProcAddress)(lpszProc);
-    Driver("wglGetDefaultProcAddress","(", boost::print::quote(lpszProc,'"'), ")", " returned ", ret);
+    Driver("wglGetDefaultProcAddress","(", boost::print::quote(lpszProc,'"'), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     return ret;
 }
 
@@ -29042,7 +29042,7 @@ static PROC REGAL_CALL log_wglGetProcAddress(LPCSTR lpszProc)
     DispatchTableGlobal *_next = dispatcherGlobal.logging.next();
     RegalAssert(_next);
     PROC  ret = _next->call(&_next->wglGetProcAddress)(lpszProc);
-    Driver("wglGetProcAddress","(", boost::print::quote(lpszProc,'"'), ")", " returned ", ret);
+    Driver("wglGetProcAddress","(", boost::print::quote(lpszProc,'"'), ")", " returned ", boost::print::optional(ret,Logging::pointers));
     return ret;
 }
 

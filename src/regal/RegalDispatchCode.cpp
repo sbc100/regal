@@ -5929,7 +5929,7 @@ static void REGAL_CALL code_glPushClientAttrib(GLbitfield mask)
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     _code << indent << "glPushClientAttrib(";
-    _code << mask;
+    _code << GLpushClientAttribToString(mask);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -42262,7 +42262,7 @@ static void REGAL_CALL code_glPathGlyphRangeNV(GLuint firstPathName, GLenum font
     _code << indent << "glPathGlyphRangeNV(";
                    _code << firstPathName;
     _code << ", "; _code << toString(fontTarget);
-    _code << ", "; _code << fontName;
+    _code << ", "; _code << boost::print::quote(reinterpret_cast<const char *>(fontName),'"');
     _code << ", "; _code << fontStyle;
     _code << ", "; _code << firstGlyph;
     _code << ", "; _code << numGlyphs;
@@ -42286,7 +42286,7 @@ static void REGAL_CALL code_glPathGlyphsNV(GLuint firstPathName, GLenum fontTarg
     _code << indent << "glPathGlyphsNV(";
                    _code << firstPathName;
     _code << ", "; _code << toString(fontTarget);
-    _code << ", "; _code << fontName;
+    _code << ", "; _code << boost::print::quote(reinterpret_cast<const char *>(fontName),'"');
     _code << ", "; _code << fontStyle;
     _code << ", "; _code << numGlyphs;
     _code << ", "; _code << toString(type);

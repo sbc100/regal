@@ -144,6 +144,8 @@ namespace Config
   extern ::std::string frameSaveStencilPrefix;
   extern ::std::string frameSaveDepthPrefix;
 
+  extern bool frameCapture;                   // Capture files and md5sums for other functions too
+
   // Caching
 
   extern bool          cache;

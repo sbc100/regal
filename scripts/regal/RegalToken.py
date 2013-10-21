@@ -116,6 +116,22 @@ namespace Token {
     return tmp.str();
   }
 
+  std::string GLpushClientAttribToString(GLbitfield v)
+  {
+    if (v == GL_CLIENT_ALL_ATTRIB_BITS)
+      return std::string("GL_CLIENT_ALL_ATTRIB_BITS");
+
+    const GLbitfield other = v & ~(GL_CLIENT_PIXEL_STORE_BIT | GL_CLIENT_VERTEX_ARRAY_BIT );
+
+    string_list<std::string> tmp;
+    if (v & GL_CLIENT_PIXEL_STORE_BIT)    { if (tmp.size()) tmp += " | "; tmp += "GL_CLIENT_PIXEL_STORE_BIT"; }
+    if (v & GL_CLIENT_VERTEX_ARRAY_BIT)   { if (tmp.size()) tmp += " | "; tmp += "GL_CLIENT_VERTEX_ARRAY_BIT"; }
+    if (other || v==0)                    { if (tmp.size()) tmp += " | "; tmp += size_t(other); }
+
+    return tmp.str();
+  }
+
+
   std::string GLTexParameterToString(GLenum pname, const GLfloat param)
   {
     switch (pname)
@@ -519,9 +535,11 @@ namespace Token {
 
   // Bitfield strings
 
-  std::string GLclearToString       (GLbitfield v);
-  std::string GLbufferAccessToString(GLbitfield v);
-  std::string GLpushAttribToString  (GLbitfield v);
+  std::string GLclearToString           (GLbitfield v);
+  std::string GLbufferAccessToString    (GLbitfield v);
+  std::string GLpushAttribToString      (GLbitfield v);
+  std::string GLpushClientAttribToString(GLbitfield v);
+
 
   std::string GLTexParameterToString(GLenum pname, const GLfloat  param );
   std::string GLTexParameterToString(GLenum pname, const GLint    param );

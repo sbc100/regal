@@ -213,7 +213,7 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   {
     src << "uniform vec4 rglAttrib[" << REGAL_EMU_MAX_VERTEX_ATTRIBS << "];\n";
   }
-  src << "uniform mat4 rglModelview;\n";
+  src << "uniform mat4 rglModelView;\n";
   src << "uniform mat4 rglProjection;\n";
   src << "in vec4 rglVertex;\n";
   n = array_size( st.tex );
@@ -241,7 +241,7 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   //src << "in vec4 rglWeight;\n";
   if ( st.lighting || hasNormalMap || hasSphereMap || hasReflectionMap )
   {
-    src << "uniform mat4 rglModelviewInverseTranspose;\n";
+    src << "uniform mat4 rglModelViewInverseTranspose;\n";
     src << "in vec3 rglNormal;\n";
   }
   if ( st.lighting )
@@ -372,18 +372,18 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   }
 
   src << "void main() {\n";
-  src << "    gl_Position = rglProjection * rglModelview * rglVertex;\n";
+  src << "    gl_Position = rglProjection * rglModelView * rglVertex;\n";
   if ( st.lighting || hasNormalMap || hasReflectionMap || hasEyeLinearTexGen ||
       hasClipPlanes || ( st.fog.enable && st.fog.useDepth ) || hasSphereMap )
   {
-    src << "    vec4 eh = rglModelview * rglVertex;\n";
+    src << "    vec4 eh = rglModelView * rglVertex;\n";
   }
 
   if ( st.lighting || hasNormalMap || hasReflectionMap || hasSphereMap )
   {
     src << "    vec4 ep = eh / eh.w;\n";
     src << "    vec3 ev = -normalize( ep.xyz );\n";
-    src << "    vec3 en = mat3( rglModelviewInverseTranspose ) * rglNormal;\n";
+    src << "    vec3 en = mat3( rglModelViewInverseTranspose ) * rglNormal;\n";
     if ( st.normalize )
     {
       src << "    en = normalize( en );\n";
@@ -686,8 +686,6 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   }
   src << "}\n";
 }
-
-
 
 static void AddTexEnv( size_t i, Iff::TexenvMode env, GLenum fmt,  string_list & s )
 {
@@ -1043,6 +1041,7 @@ static string TextureFetch( bool es, bool legacy, Iff::TextureTargetBitfield b )
   }
   return "texture";
 }
+
 static string TextureFetchSwizzle( bool es, bool legacy, Iff::TextureTargetBitfield b )
 {
   if ( es || legacy )
@@ -1514,6 +1513,15 @@ bool State::SetEnable( Iff * ffn, bool enable, GLenum cap )
   return true;
 }
 
+void State::SetTexInfo( Iff::Version & ver, GLuint activeTex, Iff::TextureUnit & unit )
+{
+  if (activeTex >= REGAL_EMU_MAX_TEXTURE_UNITS)
+    return;
+
+  raw.tex[ activeTex ].unit = unit;
+  raw.ver = ver.Update();
+}
+
 void State::SetLight( Iff * ffn, GLenum light, GLenum pname, const GLfloat * params )
 {
   Internal("Regal::Iff::State::SetLight",light,Token::GLenumToString(pname));
@@ -1765,6 +1773,26 @@ void State::SetClip( Iff * ffn, GLenum plane, const GLfloat * equation )
   uniform.clip[ idx ].ver = uniform.ver = ffn->ver.Update();
 }
 
+Iff::TextureTargetBitfield State::GetTextureEnable( size_t unit ) const
+{
+  return TextureTargetBitfield( ( processed.tex[unit].enables ) );
+}
+
+GLuint64 State::Ver() const
+{
+  return uniform.ver;
+}
+
+GLuint State::HighestPriorityTextureEnable( GLuint enables )
+{
+  for (int i = TP_CubeMap; i >= 0; i--)
+  {
+    if (enables & ( 1 << i ))
+      return static_cast<GLubyte>(1 << i);
+  }
+  return 0;
+}
+
 void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSrc, const GLchar *fsSrc )
 {
   Internal("Regal::Iff::Program::Init","()");
@@ -1946,6 +1974,57 @@ void Program::Uniforms( RegalContext * ctx, DispatchTableGL & tbl )
   }
 }
 
+Iff::Iff()
+: progcount(0)
+, catIndex(0)
+, ffAttrTexBegin(0)
+, ffAttrTexEnd(0)
+, ffAttrNumTex(0)
+, max_vertex_attribs(0)
+, immActive(false)
+, immProvoking(0)
+, immCurrent(0)
+, immPrim(GL_POINTS)
+, immVbo(0)
+, immVao(0)
+, immShadowVao(0)
+, shadowMatrixMode(GL_MODELVIEW)
+, shadowActiveTextureIndex(0)
+, activeTextureIndex(0)
+, programPipeline(0)
+, program(0)
+, currprog(NULL)
+, currMatrixStack(&modelview)
+, currVao(0)
+, gles(false)
+, legacy(false)
+{
+  memset(immArray,0,sizeof(immArray));
+
+  size_t n = array_size( ffAttrMap );
+  RegalAssert( array_size( ffAttrInvMap ) == n);
+  for (size_t i = 0; i < n; i++)
+  {
+    ffAttrMap[ i ] = 0;
+    ffAttrInvMap[ i ] = 0;
+  }
+
+  n = array_size( texture );
+  RegalAssert( array_size( textureUnit ) == n);
+  RegalAssert( array_size( textureEnvColor ) == n);
+  RegalAssert( array_size( textureEnvColorVer ) == n);
+  RegalAssert( array_size( textureBinding ) == n);
+  for (size_t i = 0; i < n; i++)
+  {
+    textureEnvColor[ i ] = Float4( 0.0f, 0.0f, 0.0f, 0.0f );
+    textureEnvColorVer[ i ] = 0;
+    textureBinding[ i ] = 0;
+  }
+  n = array_size( ffprogs );
+  for (size_t i = 0; i < n; ++i)
+    ffprogs[ i ] = Program();
+}
+
 void Iff::Cleanup( RegalContext &ctx )
 {
   Internal("Regal::Iff::Cleanup","()");
@@ -1954,7 +2033,6 @@ void Iff::Cleanup( RegalContext &ctx )
   DispatchTableGL &tbl = ctx.dispatcher.emulation;
 
   tbl.call(&tbl.glDeleteBuffers)(1, &immVbo);
-  tbl.call(&tbl.glDeleteBuffers)(1, &immQuadsVbo);
   tbl.call(&tbl.glDeleteVertexArrays)(1, &immVao);
 
   size_t n = array_size( ffprogs );
@@ -1988,6 +2066,427 @@ void Iff::Cleanup( RegalContext &ctx )
       tbl.glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, 0, NULL);
     tbl.glDisableVertexAttribArray(i);
   }
+}
+
+void Iff::InitVertexArray(RegalContext &ctx)
+{
+  Internal("Regal::Iff::InitVertexArray","()");
+  max_vertex_attribs = ctx.emuInfo->gl_max_vertex_attribs;
+
+  if (max_vertex_attribs >= 16)
+  {
+    RegalAssert( REGAL_EMU_MAX_VERTEX_ATTRIBS == 16);
+    //RegalOutput( "Setting up for %d Vertex Attribs\n", max_vertex_attribs );
+    for (size_t i = 0; i < 16; i++)
+    {
+      ffAttrMap[i] = RFF2AMap16[i];
+      ffAttrInvMap[i] = RFF2AInvMap16[i];
+    }
+    ffAttrTexBegin = RFF2ATexBegin16;
+    ffAttrTexEnd = RFF2ATexEnd16;
+  }
+  else
+  {
+    RegalAssert( max_vertex_attribs >= 8 );
+    //RegalOutput( "Setting up for 8 Vertex Attribs" );
+    for (size_t i = 0; i < 8; i++)
+    {
+      ffAttrMap[i] = RFF2AMap8[i];
+      ffAttrInvMap[i] = RFF2AInvMap8[i];
+    }
+    for (size_t i = 8; i < REGAL_EMU_MAX_VERTEX_ATTRIBS; i++)
+    {
+      ffAttrMap[i] = GLuint(-1);
+      ffAttrInvMap[i] = GLuint(-1);
+    }
+    ffAttrTexBegin = RFF2ATexBegin8;
+    ffAttrTexEnd = RFF2ATexEnd8;
+  }
+  ffAttrNumTex = ffAttrTexEnd - ffAttrTexBegin;
+  catIndex = 0;
+}
+
+GLuint Iff::ClientStateToIndex( GLenum state )
+{
+  switch( state )
+  {
+    case GL_VERTEX_ARRAY:
+      return ffAttrMap[ RFF2A_Vertex ];
+    case GL_NORMAL_ARRAY:
+      return ffAttrMap[ RFF2A_Normal ];
+    case GL_COLOR_ARRAY:
+      return ffAttrMap[ RFF2A_Color ];
+    case GL_SECONDARY_COLOR_ARRAY:
+      return ffAttrMap[ RFF2A_SecondaryColor ];
+    case GL_FOG_COORD_ARRAY:
+      return ffAttrMap[ RFF2A_FogCoord ];
+    case GL_EDGE_FLAG_ARRAY:
+      return ffAttrMap[ RFF2A_EdgeFlag ];
+    case GL_TEXTURE_COORD_ARRAY:
+      if (catIndex < ffAttrNumTex)
+        return ffAttrTexBegin + catIndex;
+      break;
+    default:
+      break;
+  }
+  return ~0u;
+}
+
+void Iff::EnableClientState( RegalContext * ctx, GLenum state )
+{
+  const GLuint idx = ClientStateToIndex( state );
+  if (idx == GLuint(~0))
+    return;
+  RestoreVao( ctx );
+  RegalAssert( idx < max_vertex_attribs );
+  if ( idx < max_vertex_attribs )
+  {
+    ctx->dispatcher.emulation.glEnableVertexAttribArray( idx );
+    EnableArray( ctx, idx ); // keep ffn up to date
+  }
+}
+
+void Iff::DisableClientState( RegalContext * ctx, GLenum state )
+{
+  const GLuint idx = ClientStateToIndex( state );
+  if (idx == GLuint(~0))
+    return;
+  RestoreVao( ctx );
+  RegalAssert( idx < max_vertex_attribs );
+  if ( idx < max_vertex_attribs )
+  {
+    ctx->dispatcher.emulation.glDisableVertexAttribArray( idx );
+    DisableArray( ctx, idx ); // keep ffn up to date
+  }
+}
+
+void Iff::VertexPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+  switch (size)
+  {
+    case 2:
+    case 3:
+    case 4:
+      break;
+    default:
+      return;
+  }
+
+  switch (type)
+  {
+    case GL_SHORT:
+    case GL_INT:
+    case GL_FLOAT:
+    case GL_DOUBLE:
+      break;
+    default:
+      return;
+  }
+
+  if (stride < 0)
+    return;
+
+  RestoreVao( ctx );
+  ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_Vertex ], size, type, GL_FALSE, stride, pointer );
+}
+
+void Iff::NormalPointer( RegalContext * ctx, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+  RestoreVao( ctx );
+  GLboolean n = type == GL_FLOAT ? GL_FALSE : GL_TRUE;
+  ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_Normal ], 3, type, n, stride, pointer );
+}
+
+void Iff::ColorPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+  RestoreVao( ctx );
+  GLboolean n = type == GL_FLOAT ? GL_FALSE : GL_TRUE;
+  ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_Color ], size, type, n, stride, pointer );
+}
+
+void Iff::SecondaryColorPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+  RestoreVao( ctx );
+  GLboolean n = type == GL_FLOAT ? GL_FALSE : GL_TRUE;
+  ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_SecondaryColor ], size, type, n, stride, pointer );
+}
+
+void Iff::FogCoordPointer( RegalContext * ctx, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+  RestoreVao( ctx );
+  ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_FogCoord ], 1, type, GL_FALSE, stride, pointer );
+}
+
+void Iff::EdgeFlagPointer( RegalContext * ctx, GLsizei stride, const GLvoid *pointer )
+{
+  RestoreVao( ctx );
+  GLuint index = ffAttrMap[ RFF2A_EdgeFlag ];
+  if (index == RFF2A_Invalid)
+    return;
+  ctx->dispatcher.emulation.glVertexAttribPointer( index, 1, GL_UNSIGNED_BYTE, GL_FALSE, stride, pointer );
+}
+
+void Iff::TexCoordPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
+{
+  if (catIndex >= ffAttrNumTex)
+  {
+    // FIXME: set an error here!
+    return;
+  }
+  RestoreVao( ctx );
+  ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrTexBegin + catIndex, size, type, GL_FALSE, stride, pointer );
+}
+
+void Iff::GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLdouble * d )
+{
+  ctx->dispatcher.emulation.glGetVertexAttribdv( index, pname, d );
+}
+
+void Iff::GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLfloat * f )
+{
+  ctx->dispatcher.emulation.glGetVertexAttribfv( index, pname, f );
+}
+
+void Iff::GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLint * i )
+{
+  ctx->dispatcher.emulation.glGetVertexAttribiv( index, pname, i );
+}
+
+bool Iff::IsEnabled( RegalContext * ctx, GLenum pname, GLboolean &enabled )
+{
+  if (activeTextureIndex >= ctx->emuInfo->gl_max_texture_units)
+    return false;
+
+  State::Store & st = ffstate.raw;
+  int idx = 0;
+  switch (pname)
+  {
+    case GL_TEXTURE_GEN_S:
+    case GL_TEXTURE_GEN_T:
+    case GL_TEXTURE_GEN_R:
+    case GL_TEXTURE_GEN_Q:
+      idx = pname - GL_TEXTURE_GEN_S;
+      enabled = st.tex[ activeTextureIndex ].texgen[ idx ].enable;
+      return true;
+    default:
+      break;
+  }
+
+  const GLuint index = ClientStateToIndex( pname );
+  if (index == GLuint(~0))
+    return false;
+
+  RegalAssert( index < max_vertex_attribs );
+  GLint ret;
+  GetAttrib( ctx, index, GL_VERTEX_ATTRIB_ARRAY_ENABLED, &ret );
+  enabled = static_cast<GLboolean>(ret);
+  return true;
+}
+
+void Iff::InitImmediate(RegalContext &ctx)
+{
+  DispatchTableGL &tbl = ctx.dispatcher.emulation;
+  tbl.glGenVertexArrays( 1, & immVao );
+  tbl.glBindVertexArray( immVao );
+  BindVertexArray( &ctx, immVao ); // to keep ffn current
+  tbl.glGenBuffers( 1, & immVbo );
+  tbl.glBindBuffer( GL_ARRAY_BUFFER, immVbo );
+
+#if REGAL_SYS_EMSCRIPTEN
+  // We need this to be an allocated buffer for WebGL, because a dangling VertexAttribPointer
+  // doesn't work.  XXX -- this might be a Firefox bug, check?
+  tbl.glBufferData( GL_ARRAY_BUFFER, sizeof( immArray ), NULL, GL_STATIC_DRAW );
+#endif
+
+  for (GLuint i = 0; i < max_vertex_attribs; i++)
+  {
+    EnableArray( &ctx, i ); // to keep ffn current
+    tbl.glEnableVertexAttribArray( i );
+    tbl.glVertexAttribPointer( i, 4, GL_FLOAT, GL_FALSE, max_vertex_attribs * sizeof(Float4), (GLubyte *)NULL + i * sizeof(Float4) );
+  }
+  tbl.glBindVertexArray( 0 );
+  BindVertexArray( &ctx, 0 ); // to keep ffn current
+
+  // The initial texture coordinates are (s; t; r; q) = (0; 0; 0; 1)
+  // for each texture coordinate set.
+
+  memset(&immVab, 0, sizeof(immVab));
+  for (catIndex = 0; catIndex < REGAL_EMU_MAX_TEXTURE_UNITS; catIndex++)
+    Attr<4>( &ctx, AttrIndex( RFF2A_TexCoord ), 0, 0, 0, 1 );
+
+  catIndex = 0;
+
+  // The initial current normal has coordinates (0; 0; 1).
+
+  Attr<3>( &ctx, AttrIndex( RFF2A_Normal ), 0, 0, 1 );
+
+  // The initial RGBA color is (R;G;B;A) = (1; 1; 1; 1) and
+  // the initial RGBA secondary color is (0; 0; 0; 1).
+
+  Attr<4>( &ctx, AttrIndex( RFF2A_Color ), 1, 1, 1, 1 );
+  Attr<4>( &ctx, AttrIndex( RFF2A_SecondaryColor ), 0, 0, 0, 1 );
+
+  // The initial fog coordinate is zero.
+
+  // ... so nothing to do for fog coordinate
+
+  // The initial color index is 1.
+  // The initial values for all generic vertex attributes are (0:0; 0:0; 0:0; 1:0).
+}
+
+void Iff::glDeleteVertexArrays( RegalContext * ctx, GLsizei n, const GLuint * arrays )
+{
+  RegalAssert( ctx != NULL );
+  for (GLsizei i = 0; i < n; i++)
+  {
+    GLuint name = arrays[ i ];
+    if (name != immVao)
+      ctx->dispatcher.emulation.glDeleteVertexArrays( 1, &name );
+  }
+}
+
+void Iff::glDeleteBuffers( RegalContext * ctx, GLsizei n, const GLuint * buffers )
+{
+  RegalAssert( ctx != NULL );
+  for (GLsizei i = 0; i < n; i++)
+  {
+    GLuint name = buffers[ i ];
+    if (name != immVbo)
+      ctx->dispatcher.emulation.glDeleteBuffers( 1, &name );
+  }
+}
+
+GLboolean Iff::IsVertexArray( RegalContext * ctx, GLuint name )
+{
+  RegalAssert( ctx != NULL );
+  if (name == immVao )
+    return GL_FALSE;
+  return ctx->dispatcher.emulation.glIsVertexArray( name );
+}
+
+void Iff::glBindVertexArray( RegalContext *ctx, GLuint vao )
+{
+  //<> glBindVertexArray is not allowed between a glBegin/glEnd pair so if immActive
+  //<> is true then I don't believe the shadow vao shouldn't be updated.
+  if (immActive == false)
+  {
+    immShadowVao = vao;
+    BindVertexArray( ctx, vao );
+  }
+}
+
+void Iff::ShadowClientActiveTexture( GLenum texture )
+{
+  if ( (texture - GL_TEXTURE0) < REGAL_EMU_MAX_TEXTURE_COORDS)
+    catIndex = texture - GL_TEXTURE0;
+  else
+    Warning( "Client active texture out of range: ", Token::GLtextureToString(texture), " > ", Token::GLtextureToString(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_COORDS - 1));
+}
+
+void Iff::Begin( RegalContext * ctx, GLenum mode )
+{
+  if (immActive == false)
+  {
+    immActive = true;
+    ctx->dispatcher.emulation.glBindVertexArray( immVao );
+    BindVertexArray( ctx, immVao );  // keep ffn current
+  }
+  PreDraw( ctx );
+  immCurrent = 0;
+  immPrim = mode;
+}
+
+void Iff::End( RegalContext * ctx )
+{
+  Flush( ctx );
+}
+
+void Iff::RestoreVao( RegalContext * ctx )
+{
+  if (immActive)
+  {
+    ctx->dispatcher.emulation.glBindVertexArray( immShadowVao );
+    BindVertexArray( ctx, immShadowVao );
+    immActive = false;
+  }
+}
+
+void Iff::Flush( RegalContext * ctx )
+{
+  if (immCurrent>0)   // Do nothing for empty buffer
+  {
+    DispatchTableGL &tbl = ctx->dispatcher.emulation;
+    tbl.glBufferData( GL_ARRAY_BUFFER, immCurrent * max_vertex_attribs * sizeof(Float4), immArray, GL_DYNAMIC_DRAW );
+
+    GLenum derivedPrim = immPrim;
+    if (( immPrim == GL_POLYGON ) && ( ctx->info->core == true || ctx->info->es2 ))
+      derivedPrim = GL_TRIANGLE_FAN;
+    tbl.glDrawArrays( derivedPrim, 0, immCurrent );
+  }
+}
+
+void Iff::Provoke( RegalContext * ctx )
+{
+  memcpy( immArray + immCurrent * max_vertex_attribs * sizeof(Float4), &immVab[0].x, max_vertex_attribs * sizeof(Float4) );
+  immCurrent++;
+
+  if ( immCurrent >= ((REGAL_IMMEDIATE_BUFFER_SIZE * REGAL_EMU_MAX_VERTEX_ATTRIBS) / max_vertex_attribs) )
+  {
+    Flush( ctx );
+    int restartVerts = 0;
+    switch( immPrim )
+    {
+      case GL_QUADS:
+        restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 4;
+        break;
+      case GL_TRIANGLES:
+        restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 3;
+        break;
+      case GL_LINES:
+        restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 2;
+        break;
+      case GL_QUAD_STRIP:
+        restartVerts = 2;
+        break;
+      case GL_TRIANGLE_STRIP:
+        restartVerts = 2;
+        break;
+      case GL_LINE_STRIP:
+        restartVerts = 1;
+        break;
+      default:
+        break;
+    }
+
+    // For triangle fan we need the first and last vertices
+    // for restarting.  All others concern the most recent n.
+
+    if (immPrim==GL_TRIANGLE_FAN)
+    {
+      memcpy( immArray + max_vertex_attribs * sizeof(Float4), immArray + (REGAL_IMMEDIATE_BUFFER_SIZE - 1) * max_vertex_attribs * sizeof(Float4), max_vertex_attribs * sizeof(Float4));
+      immCurrent = 2;
+    }
+    else
+    {
+      int offset = REGAL_IMMEDIATE_BUFFER_SIZE - restartVerts;
+      memcpy( immArray, immArray + offset * max_vertex_attribs * sizeof(Float4), restartVerts * max_vertex_attribs * sizeof(Float4));
+      immCurrent = restartVerts;
+    }
+  }
+}
+
+GLuint Iff::AttrIndex( RegalFixedFunctionAttrib attr, int cat ) const
+{
+  if (attr < RFF2A_TexCoord)
+  {
+    RegalAssertArrayIndex( ffAttrMap, attr );
+    return ffAttrMap[ attr ];
+  }
+  if (cat < 0)
+    cat = catIndex;
+  if (attr == RFF2A_TexCoord && GLuint(cat) < ffAttrNumTex)
+    return ffAttrTexBegin + cat;
+  return ~0u;
 }
 
 void Iff::InitFixedFunction(RegalContext &ctx)
@@ -2090,6 +2589,101 @@ void Iff::InitFixedFunction(RegalContext &ctx)
   fmtmap[ GL_RG32UI      ] = GL_RG;
 }
 
+void Iff::PreDraw( RegalContext * ctx )
+{
+  if (programPipeline)
+    return;    // FIXME: Eventually will need to handle empty or partially populated PPO
+
+  ver.Reset();
+  if  (program)
+    UseShaderProgram( ctx );
+  else
+    UseFixedFunctionProgram( ctx );
+}
+
+void Iff::SetCurrentMatrixStack( GLenum mode )
+{
+  switch( mode )
+  {
+    case GL_MODELVIEW:
+      currMatrixStack = &modelview;
+      break;
+    case GL_PROJECTION:
+      currMatrixStack = &projection;
+      break;
+    case GL_TEXTURE:
+      if (activeTextureIndex < GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
+        currMatrixStack = &texture[ activeTextureIndex ];
+      break;
+    case GL_TEXTURE0:
+    case GL_TEXTURE1:
+    case GL_TEXTURE2:
+    case GL_TEXTURE3:
+    {
+      GLuint idx = mode - GL_TEXTURE0;
+      if (idx > GLuint( REGAL_EMU_MAX_TEXTURE_UNITS - 1 ))
+        break;
+      currMatrixStack = &texture[ idx ];
+    }
+    break;
+    default:
+      RegalAssert( true && "WTF?" );
+      break;
+  }
+}
+
+bool Iff::ShadowMatrixMode( GLenum mode )
+{
+  shadowMatrixMode = mode;
+  return true;
+}
+
+void Iff::ShadowActiveTexture( GLenum texture )
+{
+  if (validTextureEnum(texture))
+    shadowActiveTextureIndex = texture - GL_TEXTURE0;
+}
+
+bool Iff::ShadowEnable( GLenum cap )
+{
+  return EnableIndexed( cap, shadowActiveTextureIndex );
+}
+
+bool Iff::ShadowDisable( GLenum cap )
+{
+  return DisableIndexed( cap, shadowActiveTextureIndex );
+}
+
+bool Iff::EnableIndexed( GLenum cap, GLuint index )
+{
+  if (index >= GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
+    return false;
+  activeTextureIndex = index;
+  bool ret = ffstate.SetEnable( this, true, cap );
+  return ret;
+}
+
+bool Iff::DisableIndexed( GLenum cap, GLuint index )
+{
+  if (index >= GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
+    return false;
+  activeTextureIndex = index;
+  bool ret = ffstate.SetEnable( this, false, cap );
+  return ret;
+}
+
+bool Iff::ShadowUseProgram( GLuint prog )
+{
+  program = prog;
+  return prog == 0;  // pass the call along only if it's non-zero
+}
+
+bool Iff::ShadowBindProgramPipeline( GLuint progPipeline )
+{
+  programPipeline = progPipeline;
+  return false;  // always pass this through since we're not emulating it
+}
+
 void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )
 {
   Internal("Regal::Iff::ShadowMultiTexBinding",toString(texunit)," ",toString(target)," ",obj);
@@ -2107,6 +2701,11 @@ void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )
   tu.fmt = fmt;
   tu.ttb = TargetToBitfield( target );
   ffstate.raw.ver = ver.Update();
+}
+
+void Iff::ShadowTexBinding( GLenum target, GLuint obj )
+{
+  ShadowMultiTexBinding( GL_TEXTURE0 + shadowActiveTextureIndex, target, obj );
 }
 
 void Iff::ShadowTextureInfo( GLuint obj, GLenum target, GLint internalFormat )
@@ -2478,6 +3077,301 @@ void Iff::TexEnv( GLenum texunit, GLenum target, GLenum pname, const GLint *v )
   }
 }
 
+void Iff::TexEnv( GLenum texunit, GLenum target, GLenum pname, GLfloat v )
+{
+  TexEnv( texunit, target, pname, &v );
+}
+
+void Iff::TexEnv( GLenum texunit, GLenum target, GLenum pname, GLint v )
+{
+  TexEnv( texunit, target, pname, &v );
+}
+
+void Iff::ShadeModel( GLenum mode )
+{
+  State::Store & r = ffstate.raw;
+  switch( mode )
+  {
+    case GL_FLAT:
+      if (!r.shadeModelFlat)
+      {
+        r.shadeModelFlat = true;
+        r.ver = ver.Update();
+      }
+      break;
+    case GL_SMOOTH:
+      if (r.shadeModelFlat)
+      {
+        r.shadeModelFlat = false;
+        r.ver = ver.Update();
+      }
+      break;
+  }
+}
+
+void Iff::ColorMaterial( GLenum face, GLenum mode )
+{
+  ColorMaterialMode m;
+  switch( mode )
+  {
+    case GL_EMISSION:
+      m = CM_Emission;
+      break;
+    case GL_AMBIENT:
+      m = CM_Ambient;
+      break;
+    case GL_DIFFUSE:
+      m = CM_Diffuse;
+      break;
+    case GL_SPECULAR:
+      m = CM_Specular;
+      break;
+    case GL_AMBIENT_AND_DIFFUSE:
+      m = CM_AmbientAndDiffuse;
+      break;
+    default:
+      return;
+  }
+  switch( face )
+  {
+    case GL_FRONT:
+      ffstate.raw.colorMaterialTarget0 = m;
+      ffstate.raw.colorMaterialTarget1 = CM_None;
+      break;
+    case GL_BACK:
+      ffstate.raw.colorMaterialTarget0 = CM_None;
+      ffstate.raw.colorMaterialTarget1 = m;
+      break;
+    case GL_FRONT_AND_BACK:
+      ffstate.raw.colorMaterialTarget0 = m;
+      ffstate.raw.colorMaterialTarget1 = m;
+      break;
+    default:
+      return;
+  }
+  ffstate.raw.ver = ver.Update();
+}
+
+void Iff::AlphaFunc( GLenum comp, const GLfloat ref )
+{
+  CompareFunc cf = CF_Always;
+  switch( comp )
+  {
+    case GL_NEVER:
+      cf = CF_Never;
+      break;
+    case GL_LESS:
+      cf = CF_Less;
+      break;
+    case GL_EQUAL:
+      cf = CF_Equal;
+      break;
+    case GL_LEQUAL:
+      cf = CF_Lequal;
+      break;
+    case GL_NOTEQUAL:
+      cf = CF_NotEqual;
+      break;
+    case GL_GREATER:
+      cf = CF_Greater;
+      break;
+    case GL_GEQUAL:
+      cf = CF_Gequal;
+      break;
+    case GL_ALWAYS:
+      cf = CF_Always;
+      break;
+    default:
+      break; // should be an error...
+  }
+  ffstate.SetAlphaFunc( this, cf, ref );
+}
+
+void Iff::ClipPlane( GLenum plane, const GLdouble * equation )
+{
+  Float4 eqn( equation[0], equation[1], equation[2], equation[3] );
+  ffstate.SetClip( this, plane, & eqn.x );
+}
+
+void Iff::MatrixPush( GLenum mode )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Push();
+}
+
+void Iff::MatrixPop( GLenum mode )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Pop();
+  UpdateMatrixVer();
+}
+
+void Iff::UpdateMatrixVer()
+{
+  currMatrixStack->Ver() = ffstate.uniform.ver = ver.Update();
+  if (currMatrixStack != &modelview && currMatrixStack != &projection)
+    ffstate.raw.ver = ffstate.uniform.ver;
+}
+
+void Iff::MatrixLoadIdentity( GLenum mode )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Top().MakeIdentity();
+  UpdateMatrixVer();
+}
+
+void Iff::MatrixLoad( GLenum mode, const r3::Matrix4f & m )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Top() = m;
+  UpdateMatrixVer();
+}
+
+void Iff::MatrixLoadTranspose( GLenum mode, const r3::Matrix4f & m )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Top() = m.Transpose();
+  UpdateMatrixVer();
+}
+
+void Iff::MatrixMult( GLenum mode, const r3::Matrix4f & m )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Top().MultRight( m );
+  UpdateMatrixVer();
+}
+
+void Iff::MatrixMultTranspose( GLenum mode, const r3::Matrix4f & m )
+{
+  SetCurrentMatrixStack( mode );
+  currMatrixStack->Top().MultRight( m.Transpose() );
+  UpdateMatrixVer();
+}
+
+void Iff::PushMatrix()
+{
+  MatrixPush( shadowMatrixMode );
+}
+
+void Iff::PopMatrix()
+{
+  MatrixPop( shadowMatrixMode );
+}
+
+void Iff::LoadIdentity()
+{
+  MatrixLoadIdentity( shadowMatrixMode );
+}
+
+void Iff::LoadMatrix( const r3::Matrix4f & m )
+{
+  MatrixLoad( shadowMatrixMode, m );
+}
+
+void Iff::LoadTransposeMatrix( const r3::Matrix4f & m )
+{
+  MatrixLoadTranspose( shadowMatrixMode, m );
+}
+
+void Iff::MultMatrix( const r3::Matrix4f & m )
+{
+  MatrixMult( shadowMatrixMode, m );
+}
+
+void Iff::MultTransposeMatrix( const r3::Matrix4f & m )
+{
+  MatrixMultTranspose( shadowMatrixMode, m );
+}
+
+void Iff::Viewport( GLint x, GLint y, GLsizei w, GLsizei h )
+{
+  viewport.x = x;
+  viewport.y = y;
+  viewport.w = w;
+  viewport.h = h;
+}
+
+void Iff::DepthRange( GLfloat znear, GLfloat zfar )
+{
+  viewport.zn = znear;
+  viewport.zf = zfar;
+}
+
+void Iff::RasterPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z )
+{
+  r3::Vec3f pos( x, y, z );
+  r3::Vec3f s( 0.5f * GLfloat(viewport.w), 0.5f * GLfloat(viewport.h), 0.5f * GLfloat( viewport.zf - viewport.zn ) );
+  r3::Vec3f b( GLfloat(viewport.x), GLfloat(viewport.y), 0.5f + GLfloat(viewport.zn) );
+  r3::Matrix4f sb;
+  sb.SetScale( s );
+  sb.SetTranslate( s + b );
+  r3::Matrix4f m = sb * projection.Top() * modelview.Top();
+  m.MultMatrixVec( pos );
+  WindowPos( ctx, pos.x, pos.y, pos.z );
+}
+
+void Iff::WindowPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z )
+{
+  if (ctx->isCore() || ctx->isCompat())
+  {
+    // todo - cache rasterpos and implement glDrawPixels and glBitmap
+    return;
+  }
+  ctx->dispatcher.emulation.glWindowPos3d( x, y, z );
+}
+
+void Iff::BindVertexArray( RegalContext * ctx, GLuint vao )
+{
+  UNUSED_PARAMETER(ctx);
+  vaoAttrMap[ currVao ] = ffstate.raw.attrArrayFlags;
+  currVao = vao;
+  ffstate.raw.attrArrayFlags = vaoAttrMap[ currVao ];
+  ffstate.uniform.vabVer = ver.Update();
+}
+
+void Iff::EnableArray( RegalContext * ctx, GLuint index )
+{
+  RestoreVao( ctx );
+  ffstate.raw.attrArrayFlags |= 1 << index;
+  ffstate.raw.ver = ffstate.uniform.vabVer = ver.Update();
+}
+
+void Iff::DisableArray( RegalContext * ctx, GLuint index )
+{
+  RestoreVao( ctx );
+  ffstate.raw.attrArrayFlags &= ~( 1 << index );
+  ffstate.raw.ver = ffstate.uniform.vabVer = ver.Update();
+}
+
+GLuint Iff::CreateShader( RegalContext *ctx, GLenum shaderType )
+{
+  GLuint sh = ctx->dispatcher.emulation.glCreateShader( shaderType );
+  shaderTypeMap[ sh ] = shaderType;
+  return sh;
+}
+
+void Iff::Init( RegalContext &ctx )
+{
+  shadowMatrixMode = GL_MODELVIEW;
+  shadowActiveTextureIndex = 0;
+  activeTextureIndex = 0;
+  programPipeline = 0;
+  program = 0;
+  currprog = NULL;
+  currMatrixStack = &modelview;
+  currVao = 0;
+  gles = false;
+  legacy = false;
+
+  RegalContext *sharingWith = ctx.groupInitializedContext();
+  if (sharingWith)
+    textureObjToFmt = sharingWith->iff->textureObjToFmt;
+
+  InitVertexArray(ctx);
+  InitFixedFunction(ctx);
+  InitImmediate(ctx);
+}
+
 void Iff::State::Process( Iff * ffn )
 {
   Internal("Iff::State::Process","()");
@@ -2584,7 +3478,7 @@ void Iff::UpdateUniforms( RegalContext * ctx )
       Program::UniformInfo & ui = (*i).second;
       switch( (*i).first )
       {
-        case FFU_ModelviewInverseTranspose:
+        case FFU_ModelViewInverseTranspose:
         {
           if ( ui.ver != modelview.Ver() )
           {
@@ -2598,7 +3492,7 @@ void Iff::UpdateUniforms( RegalContext * ctx )
           }
           break;
         }
-        case FFU_ModelviewInverse:
+        case FFU_ModelViewInverse:
         {
           if ( ui.ver != modelview.Ver() )
           {
@@ -2612,7 +3506,7 @@ void Iff::UpdateUniforms( RegalContext * ctx )
           }
           break;
         }
-        case FFU_Modelview:
+        case FFU_ModelView:
         {
           if ( ui.ver != modelview.Ver() )
           {
@@ -3338,21 +4232,21 @@ void Iff::ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const G
 
   if ( uses_ftransform  && gles )
   {
-    ss << "uniform mat4 rglModelview;\n";
+    ss << "uniform mat4 rglModelView;\n";
     ss << "uniform mat4 rglProjection;\n";
     // should be "in", but temporarily disabled due to register pressure concerns
     // ss << "in vec4 rglVertex;\n";
     ss << "vec4 rglVertex;\n";
   }
 
-  ss << "#define gl_Modelview rglModelview\n";
+  ss << "#define gl_ModelView rglModelView\n";
   ss << "#define gl_Projection rglProjection\n";
   ss << "#define gl_TextureMatrix0 rglTextureMatrix0\n";
   ss << "#define gl_Sampler0 rglSampler0\n\n";
 
   if ( uses_ftransform && gles )
   {
-    ss << "vec4 rgl_ftform() { return gl_Projection * gl_Modelview * rglVertex; }\n\n";
+    ss << "vec4 rgl_ftform() { return gl_Projection * gl_ModelView * rglVertex; }\n\n";
   }
   //Logging::Output( "foo:\n%s", ss.str().c_str() );
 

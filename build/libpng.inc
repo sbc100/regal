@@ -22,6 +22,9 @@ LIBPNG.C += src/libpng/src/pngwrite.c
 LIBPNG.C += src/libpng/src/pngwtran.c
 LIBPNG.C += src/libpng/src/pngwutil.c
 
+LIBPNG_ARM.C += src/libpng/src/arm/arm_init.c
+LIBPNG.S     += src/libpng/src/arm/filter_neon.S
+
 #
 
 LIBPNG.STATIC     := libpnglib.a

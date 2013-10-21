@@ -278,7 +278,7 @@
 #endif
 
 #ifndef REGAL_EMU_QUADS
-#define REGAL_EMU_QUADS 0
+#define REGAL_EMU_QUADS 1
 #endif
 
 #ifndef REGAL_EMU_SO

@@ -2,24 +2,24 @@
  "regal" : {
   "logging" : {
    "enable" : {
-    "error"    : true,
-    "warning"  : true,
-    "info"     : true,
+    "error"    : false,
+    "warning"  : false,
+    "info"     : false,
     "app"      : false,
     "driver"   : false,
     "internal" : false,
-    "http"     : true
+    "http"     : false
    },
    "maxLines"        : -1,
    "maxBytes"        : -1,
    "once"            : true,
-   "frameTime"       : false,
-   "frameStatistics" : false,
+   "frameTime"       : true,
+   "frameStatistics" : true,
    "pointers"        : true,
    "thread"          : false,
    "process"         : false,
    "callback"        : false,
-   "log"             : true
+   "log"             : false
   }
  }
 }

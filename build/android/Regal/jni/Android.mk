@@ -13,6 +13,8 @@ ifndef REGAL_FORCE_REBUILD
   endif
 endif
 
+# apitrace still needs -DANDROID=1 
+
 regal_cflags := -DANDROID=1 -DREGAL_NO_PNG=1 -DREGAL_CONFIG_FILE=/data/.regal -Werror
 
 regal_path   := $(LOCAL_PATH)/../../../..

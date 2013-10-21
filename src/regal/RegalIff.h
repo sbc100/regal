@@ -134,17 +134,165 @@ const GLenum texenvCombineOpGL[] =
   GL_SRC_ALPHA,
   GL_ONE_MINUS_SRC_ALPHA
 };
+  
+/*
+ From GLSLang spec 1.20.8:
+ 
+ //
+ // Matrix state. p. 31, 32, 37, 39, 40.
+ //
+ uniform mat4  gl_ModelViewMatrix;
+ uniform mat4  gl_ProjectionMatrix;
+ uniform mat4  gl_ModelViewProjectionMatrix;
+ uniform mat4  gl_TextureMatrix[gl_MaxTextureCoords];
+ 
+ //
+ // Derived matrix state that provides inverse and transposed versions
+ // of the matrices above.  Poorly conditioned matrices may result
+ // in unpredictable values in their inverse forms.
+ //
+ uniform mat3  gl_NormalMatrix; // transpose of the inverse of the
+                                // upper leftmost 3x3 of gl_ModelViewMatrix
+ 
+ uniform mat4  gl_ModelViewMatrixInverse;
+ uniform mat4  gl_ProjectionMatrixInverse;
+ uniform mat4  gl_ModelViewProjectionMatrixInverse;
+ uniform mat4  gl_TextureMatrixInverse[gl_MaxTextureCoords];
+ uniform mat4  gl_ModelViewMatrixTranspose;
+ uniform mat4  gl_ProjectionMatrixTranspose;
+ uniform mat4  gl_ModelViewProjectionMatrixTranspose;
+ uniform mat4  gl_TextureMatrixTranspose[gl_MaxTextureCoords];
+ uniform mat4  gl_ModelViewMatrixInverseTranspose;
+ uniform mat4  gl_ProjectionMatrixInverseTranspose;
+ uniform mat4  gl_ModelViewProjectionMatrixInverseTranspose;
+ uniform mat4  gl_TextureMatrixInverseTranspose[gl_MaxTextureCoords];
+ 
+ //
+ // Normal scaling p. 39.
+ //
+ uniform float gl_NormalScale;
+ 
+ //
+ // Depth range in window coordinates, p. 33
+ //
+ struct gl_DepthRangeParameters {
+   float near;   // n
+   float far;    // f
+   float diff;   // f - n
+ };
+ uniform gl_DepthRangeParameters gl_DepthRange;
+ 
+ //
+ // Clip planes p. 42.
+ //
+ uniform vec4  gl_ClipPlane[gl_MaxClipPlanes];
+ 
+ //
+ // Point Size, p. 66, 67.
+ //
+ struct gl_PointParameters {
+   float size;
+   float sizeMin;
+   float sizeMax;
+   float fadeThresholdSize;
+   float distanceConstantAttenuation;
+   float distanceLinearAttenuation;
+   float distanceQuadraticAttenuation;
+ };
+ uniform gl_PointParameters gl_Point;
+ 
+ //
+ // Material State p. 50, 55.
+ //
+ 
+ struct gl_MaterialParameters {
+   vec4  emission;   // Ecm
+   vec4  ambient;    // Acm
+   vec4  diffuse;    // Dcm
+   vec4  specular;   // Scm
+   float shininess;  // Srm
+ };
+ uniform gl_MaterialParameters  gl_FrontMaterial;
+ uniform gl_MaterialParameters  gl_BackMaterial;
+ 
+ //
+ // Light State p 50, 53, 55.
+ //
+ struct gl_LightSourceParameters {
+   vec4  ambient;        // Acli
+   vec4  diffuse;        // Dcli
+   vec4  specular;       // Scli
+   vec4  position;       // Ppli
+   vec4  halfVector;     // Hi
+   vec3  spotDirection;  // Sdli
+   float spotExponent;   // Srli
+   float spotCutoff;     // Crli (range: [0,90], 180)
+   float spotCosCutoff;  // cos(Crli) (range: [1,0], -1)
+   float constantAttenuation; // K0
+   float linearAttenuation;   // K1
+   float quadraticAttenuation;// K2
+ };
+ uniform gl_LightSourceParameters  gl_LightSource[gl_MaxLights];
+ 
+ struct gl_LightModelParameters {
+   vec4  ambient;       // Acs
+ };
+ uniform gl_LightModelParameters  gl_LightModel;
+ 
+ //
+ // Derived state from products of light and material.
+ //
+ struct gl_LightModelProducts {
+   vec4  sceneColor;     // Derived. Ecm + Acm * Acs
+ };
+ uniform gl_LightModelProducts gl_FrontLightModelProduct;
+ uniform gl_LightModelProducts gl_BackLightModelProduct;
+ 
+ struct gl_LightProducts {
+   vec4  ambient;   // Acm * Acli
+   vec4  diffuse;   // Dcm * Dcli
+   vec4  specular;  // Scm * Scli
+ };
+ uniform gl_LightProducts gl_FrontLightProduct[gl_MaxLights];
+ uniform gl_LightProducts gl_BackLightProduct[gl_MaxLights];
+ 
+ //
+ // Texture Environment and Generation, p. 152, p. 40-42.
+ //
+ uniform vec4  gl_TextureEnvColor[gl_MaxTextureUnits];
+ uniform vec4  gl_EyePlaneS[gl_MaxTextureCoords];
+ uniform vec4  gl_EyePlaneT[gl_MaxTextureCoords];
+ uniform vec4  gl_EyePlaneR[gl_MaxTextureCoords];
+ uniform vec4  gl_EyePlaneQ[gl_MaxTextureCoords];
+ uniform vec4  gl_ObjectPlaneS[gl_MaxTextureCoords];
+ uniform vec4  gl_ObjectPlaneT[gl_MaxTextureCoords];
+ uniform vec4  gl_ObjectPlaneR[gl_MaxTextureCoords];
+ uniform vec4  gl_ObjectPlaneQ[gl_MaxTextureCoords];
+ 
+ //
+ // Fog p. 161
+ //
+ struct gl_FogParameters {
+   vec4 color;
+   float density;
+   float start;
+   float end;
+   float scale;  // 1 / (end - start)
+ };
+ uniform gl_FogParameters gl_Fog;
+ */
 
+  
 enum RegalFFUniformEnum
 {
   FFU_foo = 0,
-  FFU_Modelview,
-  FFU_ModelviewInverse,
-  FFU_ModelviewInverseTranspose,
+  FFU_ModelView,
+  FFU_ModelViewInverse,
+  FFU_ModelViewInverseTranspose,
   FFU_Projection,
   FFU_ProjectionInverse,
-  FFU_ModelviewProjection,
-  FFU_ModelviewProjectionInverse,
+  FFU_ModelViewProjection,
+  FFU_ModelViewProjectionInverse,
   FFU_TextureMatrix0,
   FFU_TextureMatrix1,
   FFU_TextureMatrix2,
@@ -243,13 +391,13 @@ struct RegalFFUniformInfo
 static const RegalFFUniformInfo regalFFUniformInfo[] =
 {
   { FFU_foo, "foo" },
-  { FFU_Modelview, "rglModelview" },
-  { FFU_ModelviewInverse, "rglModelviewInverse" },
-  { FFU_ModelviewInverseTranspose, "rglModelviewInverseTranspose" },
+  { FFU_ModelView, "rglModelView" },
+  { FFU_ModelViewInverse, "rglModelViewInverse" },
+  { FFU_ModelViewInverseTranspose, "rglModelViewInverseTranspose" },
   { FFU_Projection, "rglProjection" },
   { FFU_ProjectionInverse, "rglProjectionInverse" },
-  { FFU_ModelviewProjection, "rglModelviewProjection" },
-  { FFU_ModelviewProjectionInverse, "rglModelviewProjectionInverse" },
+  { FFU_ModelViewProjection, "rglModelViewProjection" },
+  { FFU_ModelViewProjectionInverse, "rglModelViewProjectionInverse" },
   { FFU_TextureMatrix0, "rglTextureMatrix0" },
   { FFU_TextureMatrix1, "rglTextureMatrix1" },
   { FFU_TextureMatrix2, "rglTextureMatrix2" },
@@ -344,6 +492,7 @@ template <typename T> bool RFFIsVector( const T p )
   UNUSED_PARAMETER(p);
   return false;
 }
+
 template <typename T> bool RFFIsVector( const T * p )
 {
   UNUSED_PARAMETER(p);
@@ -355,86 +504,52 @@ template <typename T> GLfloat RFFToFloat( int i, const T p )
   UNUSED_PARAMETER(i);
   return GLfloat( p );
 }
+
 template <typename T> GLfloat RFFToFloat( int i, const T * p )
 {
   return GLfloat( p[i] );
 }
+
 template <typename T> GLfloat RFFToFloatN( int i, const T p )
 {
   UNUSED_PARAMETER(i);
   return GLfloat( p );
 }
+
 template <typename T> GLfloat RFFToFloatN( int i, const T * p )
 {
   return GLfloat( p[i] );
 }
+
 template <> inline GLfloat RFFToFloatN( int i, const GLint p )
 {
   UNUSED_PARAMETER(i);
   return GLfloat( double( p ) / double( INT_MAX ) );
 }
+
 template <> inline GLfloat RFFToFloatN( int i, const int * p )
 {
   return GLfloat( double( p[i] ) / double( INT_MAX ) );
 }
 
-
-
 struct Iff
 {
-  Iff()
-    : progcount(0)
-    , catIndex(0)
-    , ffAttrTexBegin(0)
-    , ffAttrTexEnd(0)
-    , ffAttrNumTex(0)
-    , max_vertex_attribs(0)
-    , immActive(false)
-    , immProvoking(0)
-    , immCurrent(0)
-    , immPrim(GL_POINTS)
-    , immVbo(0)
-    , immVao(0)
-    , immQuadsVbo(0)
-    , immShadowVao(0)
-    , shadowMatrixMode(GL_MODELVIEW)
-    , shadowActiveTextureIndex(0)
-    , activeTextureIndex(0)
-    , programPipeline(0)
-    , program(0)
-    , currprog(NULL)
-    , currMatrixStack(&modelview)
-    , currVao(0)
-    , gles(false)
-    , legacy(false)
-  {
-    memset(immArray,0,sizeof(immArray));
-
-    size_t n = array_size( ffAttrMap );
-    RegalAssert( array_size( ffAttrInvMap ) == n);
-    for (size_t i = 0; i < n; i++)
-    {
-      ffAttrMap[ i ] = 0;
-      ffAttrInvMap[ i ] = 0;
-    }
-
-    n = array_size( texture );
-    RegalAssert( array_size( textureUnit ) == n);
-    RegalAssert( array_size( textureEnvColor ) == n);
-    RegalAssert( array_size( textureEnvColorVer ) == n);
-    RegalAssert( array_size( textureBinding ) == n);
-    for (size_t i = 0; i < n; i++)
-    {
-      textureEnvColor[ i ] = Float4( 0.0f, 0.0f, 0.0f, 0.0f );
-      textureEnvColorVer[ i ] = 0;
-      textureBinding[ i ] = 0;
-    }
-    n = array_size( ffprogs );
-    for (size_t i = 0; i < n; ++i)
-      ffprogs[ i ] = Program();
-  }
-
-  void Cleanup( RegalContext &ctx );
+  Iff();
+  void Cleanup(RegalContext &ctx);
+  void InitVertexArray(RegalContext &ctx);
+  GLuint ClientStateToIndex(GLenum state);
+  void EnableClientState( RegalContext * ctx, GLenum state );
+  void DisableClientState( RegalContext * ctx, GLenum state );
+  void VertexPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer );
+  void NormalPointer( RegalContext * ctx, GLenum type, GLsizei stride, const GLvoid *pointer );
+  void ColorPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer );
+  void SecondaryColorPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer );
+  void FogCoordPointer( RegalContext * ctx, GLenum type, GLsizei stride, const GLvoid *pointer );
+  void EdgeFlagPointer( RegalContext * ctx, GLsizei stride, const GLvoid *pointer );
+  void TexCoordPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer );
+  void GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLdouble * d );
+  void GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLfloat * f );
+  void GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLint * i );
 
   int progcount;
 
@@ -446,189 +561,6 @@ struct Iff
   GLuint ffAttrTexEnd;
   GLuint ffAttrNumTex;
   GLuint max_vertex_attribs;
-
-  void InitVertexArray(RegalContext &ctx)
-  {
-    max_vertex_attribs = ctx.emuInfo->gl_max_vertex_attribs;
-
-    if (max_vertex_attribs >= 16)
-    {
-      RegalAssert( REGAL_EMU_MAX_VERTEX_ATTRIBS == 16);
-      //RegalOutput( "Setting up for %d Vertex Attribs\n", max_vertex_attribs );
-      for (size_t i = 0; i < 16; i++)
-      {
-        ffAttrMap[i] = RFF2AMap16[i];
-        ffAttrInvMap[i] = RFF2AInvMap16[i];
-      }
-      ffAttrTexBegin = RFF2ATexBegin16;
-      ffAttrTexEnd = RFF2ATexEnd16;
-    }
-    else
-    {
-      RegalAssert( max_vertex_attribs >= 8 );
-      //RegalOutput( "Setting up for 8 Vertex Attribs" );
-      for (size_t i = 0; i < 8; i++)
-      {
-        ffAttrMap[i] = RFF2AMap8[i];
-        ffAttrInvMap[i] = RFF2AInvMap8[i];
-      }
-      for (size_t i = 8; i < REGAL_EMU_MAX_VERTEX_ATTRIBS; i++)
-      {
-        ffAttrMap[i] = GLuint(-1);
-        ffAttrInvMap[i] = GLuint(-1);
-      }
-      ffAttrTexBegin = RFF2ATexBegin8;
-      ffAttrTexEnd = RFF2ATexEnd8;
-    }
-    ffAttrNumTex = ffAttrTexEnd - ffAttrTexBegin;
-    catIndex = 0;
-  }
-
-  GLuint ClientStateToIndex( GLenum state )
-  {
-    switch( state )
-    {
-      case GL_VERTEX_ARRAY:
-        return ffAttrMap[ RFF2A_Vertex ];
-      case GL_NORMAL_ARRAY:
-        return ffAttrMap[ RFF2A_Normal ];
-      case GL_COLOR_ARRAY:
-        return ffAttrMap[ RFF2A_Color ];
-      case GL_SECONDARY_COLOR_ARRAY:
-        return ffAttrMap[ RFF2A_SecondaryColor ];
-      case GL_FOG_COORD_ARRAY:
-        return ffAttrMap[ RFF2A_FogCoord ];
-      case GL_EDGE_FLAG_ARRAY:
-        return ffAttrMap[ RFF2A_EdgeFlag ];
-      case GL_TEXTURE_COORD_ARRAY:
-        if (catIndex < ffAttrNumTex)
-          return ffAttrTexBegin + catIndex;
-        break;
-      default:
-        break;
-    }
-    return ~0u;
-  }
-
-  void EnableClientState( RegalContext * ctx, GLenum state )
-  {
-    const GLuint idx = ClientStateToIndex( state );
-    if (idx == GLuint(~0))
-      return;
-    RestoreVao( ctx );
-    RegalAssert( idx < max_vertex_attribs );
-    if ( idx < max_vertex_attribs )
-    {
-      ctx->dispatcher.emulation.glEnableVertexAttribArray( idx );
-      EnableArray( ctx, idx ); // keep ffn up to date
-    }
-  }
-
-  void DisableClientState( RegalContext * ctx, GLenum state )
-  {
-    const GLuint idx = ClientStateToIndex( state );
-    if (idx == GLuint(~0))
-      return;
-    RestoreVao( ctx );
-    RegalAssert( idx < max_vertex_attribs );
-    if ( idx < max_vertex_attribs )
-    {
-      ctx->dispatcher.emulation.glDisableVertexAttribArray( idx );
-      DisableArray( ctx, idx ); // keep ffn up to date
-    }
-  }
-
-  void VertexPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
-  {
-    switch (size)
-    {
-      case 2:
-      case 3:
-      case 4:
-        break;
-      default:
-        return;
-    }
-
-    switch (type)
-    {
-      case GL_SHORT:
-      case GL_INT:
-      case GL_FLOAT:
-      case GL_DOUBLE:
-        break;
-      default:
-        return;
-    }
-
-    if (stride < 0)
-      return;
-
-    RestoreVao( ctx );
-    ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_Vertex ], size, type, GL_FALSE, stride, pointer );
-  }
-
-  void NormalPointer( RegalContext * ctx, GLenum type, GLsizei stride, const GLvoid *pointer )
-  {
-    RestoreVao( ctx );
-    GLboolean n = type == GL_FLOAT ? GL_FALSE : GL_TRUE;
-    ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_Normal ], 3, type, n, stride, pointer );
-  }
-
-  void ColorPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
-  {
-    RestoreVao( ctx );
-    GLboolean n = type == GL_FLOAT ? GL_FALSE : GL_TRUE;
-    ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_Color ], size, type, n, stride, pointer );
-  }
-
-  void SecondaryColorPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
-  {
-    RestoreVao( ctx );
-    GLboolean n = type == GL_FLOAT ? GL_FALSE : GL_TRUE;
-    ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_SecondaryColor ], size, type, n, stride, pointer );
-  }
-
-  void FogCoordPointer( RegalContext * ctx, GLenum type, GLsizei stride, const GLvoid *pointer )
-  {
-    RestoreVao( ctx );
-    ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrMap[ RFF2A_FogCoord ], 1, type, GL_FALSE, stride, pointer );
-  }
-
-  void EdgeFlagPointer( RegalContext * ctx, GLsizei stride, const GLvoid *pointer )
-  {
-    RestoreVao( ctx );
-    GLuint index = ffAttrMap[ RFF2A_EdgeFlag ];
-    if (index == RFF2A_Invalid)
-      return;
-    ctx->dispatcher.emulation.glVertexAttribPointer( index, 1, GL_UNSIGNED_BYTE, GL_FALSE, stride, pointer );
-  }
-
-  void TexCoordPointer( RegalContext * ctx, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer )
-  {
-    if (catIndex >= ffAttrNumTex)
-    {
-      // FIXME: set an error here!
-      return;
-    }
-    RestoreVao( ctx );
-    ctx->dispatcher.emulation.glVertexAttribPointer( ffAttrTexBegin + catIndex, size, type, GL_FALSE, stride, pointer );
-  }
-
-  void GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLdouble * d )
-  {
-    ctx->dispatcher.emulation.glGetVertexAttribdv( index, pname, d );
-  }
-
-  void GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLfloat * f )
-  {
-    ctx->dispatcher.emulation.glGetVertexAttribfv( index, pname, f );
-  }
-
-  void GetAttrib( RegalContext * ctx, GLuint index, GLenum pname, GLint * i )
-  {
-    ctx->dispatcher.emulation.glGetVertexAttribiv( index, pname, i );
-  }
 
   template <typename T> bool VaGet( RegalContext * ctx, GLenum pname, T * params )
   {
@@ -756,36 +688,7 @@ struct Iff
     return true;
   }
 
-  bool IsEnabled( RegalContext * ctx, GLenum pname, GLboolean &enabled )
-  {
-    if (activeTextureIndex >= ctx->emuInfo->gl_max_texture_units)
-      return false;
-
-    State::Store & st = ffstate.raw;
-    int idx = 0;
-    switch (pname)
-    {
-      case GL_TEXTURE_GEN_S:
-      case GL_TEXTURE_GEN_T:
-      case GL_TEXTURE_GEN_R:
-      case GL_TEXTURE_GEN_Q:
-        idx = pname - GL_TEXTURE_GEN_S;
-        enabled = st.tex[ activeTextureIndex ].texgen[ idx ].enable;
-        return true;
-      default:
-        break;
-    }
-
-    const GLuint index = ClientStateToIndex( pname );
-    if (index == GLuint(~0))
-      return false;
-
-    RegalAssert( index < max_vertex_attribs );
-    GLint ret;
-    GetAttrib( ctx, index, GL_VERTEX_ATTRIB_ARRAY_ENABLED, &ret );
-    enabled = static_cast<GLboolean>(ret);
-    return true;
-  }
+  bool IsEnabled( RegalContext * ctx, GLenum pname, GLboolean &enabled );
 
   // immediate mode
 
@@ -798,221 +701,19 @@ struct Iff
 
   GLuint  immVbo;
   GLuint  immVao;
-  GLuint  immQuadsVbo;
   GLuint  immShadowVao;
 
-  void InitImmediate(RegalContext &ctx)
-  {
-    DispatchTableGL &tbl = ctx.dispatcher.emulation;
-    tbl.glGenVertexArrays( 1, & immVao );
-    tbl.glBindVertexArray( immVao );
-    BindVertexArray( &ctx, immVao ); // to keep ffn current
-    tbl.glGenBuffers( 1, & immVbo );
-    tbl.glGenBuffers( 1, & immQuadsVbo );
-    tbl.glBindBuffer( GL_ARRAY_BUFFER, immVbo );
-
-#if REGAL_SYS_EMSCRIPTEN
-    // We need this to be an allocated buffer for WebGL, because a dangling VertexAttribPointer
-    // doesn't work.  XXX -- this might be a Firefox bug, check?
-    tbl.glBufferData( GL_ARRAY_BUFFER, sizeof( immArray ), NULL, GL_STATIC_DRAW );
-#endif
-
-    for (GLuint i = 0; i < max_vertex_attribs; i++)
-    {
-      EnableArray( &ctx, i ); // to keep ffn current
-      tbl.glEnableVertexAttribArray( i );
-      tbl.glVertexAttribPointer( i, 4, GL_FLOAT, GL_FALSE, max_vertex_attribs * sizeof(Float4), (GLubyte *)NULL + i * sizeof(Float4) );
-    }
-    tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, immQuadsVbo );
-    GLushort quadIndexes[ REGAL_IMMEDIATE_BUFFER_SIZE * 3 / 2 ];
-    const size_t n = array_size( quadIndexes );
-    RegalAssert( n == (REGAL_IMMEDIATE_BUFFER_SIZE * 3 / 2) );
-    for ( GLushort i = 0; i < static_cast<GLushort>(n / 6); i++ )
-    {
-      RegalAssertArrayIndex( quadIndexes, (i*6+5) );
-      quadIndexes[ i * 6 + 0 ] = i * 4 + 0;  // first triangle
-      quadIndexes[ i * 6 + 1 ] = i * 4 + 1;
-      quadIndexes[ i * 6 + 2 ] = i * 4 + 2;
-      quadIndexes[ i * 6 + 3 ] = i * 4 + 0;  // second triangle
-      quadIndexes[ i * 6 + 4 ] = i * 4 + 2;
-      quadIndexes[ i * 6 + 5 ] = i * 4 + 3;
-    }
-    tbl.glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( quadIndexes ), quadIndexes, GL_STATIC_DRAW );
-    tbl.glBindVertexArray( 0 );
-    BindVertexArray( &ctx, 0 ); // to keep ffn current
-
-    // The initial texture coordinates are (s; t; r; q) = (0; 0; 0; 1)
-    // for each texture coordinate set.
-
-    memset(&immVab, 0, sizeof(immVab));
-    for (catIndex = 0; catIndex < REGAL_EMU_MAX_TEXTURE_UNITS; catIndex++)
-      Attr<4>( &ctx, AttrIndex( RFF2A_TexCoord ), 0, 0, 0, 1 );
-
-    catIndex = 0;
-
-    // The initial current normal has coordinates (0; 0; 1).
-
-    Attr<3>( &ctx, AttrIndex( RFF2A_Normal ), 0, 0, 1 );
-
-    // The initial RGBA color is (R;G;B;A) = (1; 1; 1; 1) and
-    // the initial RGBA secondary color is (0; 0; 0; 1).
-
-    Attr<4>( &ctx, AttrIndex( RFF2A_Color ), 1, 1, 1, 1 );
-    Attr<4>( &ctx, AttrIndex( RFF2A_SecondaryColor ), 0, 0, 0, 1 );
-
-    // The initial fog coordinate is zero.
-
-    // ... so nothing to do for fog coordinate
-
-    // The initial color index is 1.
-    // The initial values for all generic vertex attributes are (0:0; 0:0; 0:0; 1:0).
-  }
-
-  void DeleteVertexArrays( RegalContext * ctx, GLsizei n, const GLuint * arrays )
-  {
-    RegalAssert( ctx != NULL );
-    for (GLsizei i = 0; i < n; i++)
-    {
-      GLuint name = arrays[ i ];
-      if (name != immVao)
-        ctx->dispatcher.emulation.glDeleteVertexArrays( 1, &name );
-    }
-  }
-
-  GLboolean IsVertexArray( RegalContext * ctx, GLuint name )
-  {
-    RegalAssert( ctx != NULL );
-    if (name == immVao )
-      return GL_FALSE;
-    return ctx->dispatcher.emulation.glIsVertexArray( name );
-  }
-
-  void ShadowVao( RegalContext *ctx, GLuint vao )
-  {
-    immShadowVao = vao;
-    if (immActive == false)
-      BindVertexArray( ctx, vao );
-  }
-
-  void ShadowClientActiveTexture( GLenum texture )
-  {
-    if ( (texture - GL_TEXTURE0) < REGAL_EMU_MAX_TEXTURE_COORDS)
-      catIndex = texture - GL_TEXTURE0;
-    else
-      Warning( "Client active texture out of range: ", Token::GLtextureToString(texture), " > ", Token::GLtextureToString(GL_TEXTURE0 + REGAL_EMU_MAX_TEXTURE_COORDS - 1));
-  }
-
-  void Begin( RegalContext * ctx, GLenum mode )
-  {
-    if (immActive == false)
-    {
-      immActive = true;
-      ctx->dispatcher.emulation.glBindVertexArray( immVao );
-      BindVertexArray( ctx, immVao );  // keep ffn current
-    }
-    PreDraw( ctx );
-    immCurrent = 0;
-    immPrim = mode;
-  }
-
-  void End( RegalContext * ctx )
-  {
-    Flush( ctx );
-  }
-
-  void RestoreVao( RegalContext * ctx )
-  {
-    if (immActive)
-    {
-      ctx->dispatcher.emulation.glBindVertexArray( immShadowVao );
-      BindVertexArray( ctx, immShadowVao );
-      immActive = false;
-    }
-  }
-
-  void Flush( RegalContext * ctx )
-  {
-    if (immCurrent>0)   // Do nothing for empty buffer
-    {
-      DispatchTableGL &tbl = ctx->dispatcher.emulation;
-      tbl.glBufferData( GL_ARRAY_BUFFER, immCurrent * max_vertex_attribs * sizeof(Float4), immArray, GL_DYNAMIC_DRAW );
-      if (( ctx->info->core == true || ctx->info->es2 ) && immPrim == GL_QUADS)
-      {
-        tbl.glDrawElements( GL_TRIANGLES, ( immCurrent / 4 ) * 6, GL_UNSIGNED_SHORT, 0 );
-      }
-      else
-      {
-        GLenum derivedPrim = immPrim;
-        GLsizei derivedCount = immCurrent;
-        if (( ctx->info->core == true || ctx->info->es2 ))
-        {
-          switch( immPrim )
-          {
-            case GL_POLYGON:
-              derivedPrim = GL_TRIANGLE_FAN;
-              break;
-            case GL_QUAD_STRIP:
-              derivedPrim = GL_TRIANGLE_STRIP;
-              derivedCount = derivedCount & ~GLsizei(1);
-              break;
-            default:
-              break;
-          }
-        }
-        tbl.glDrawArrays( derivedPrim, 0, derivedCount );
-      }
-    }
-  }
-
-  void Provoke( RegalContext * ctx )
-  {
-    memcpy( immArray + immCurrent * max_vertex_attribs * sizeof(Float4), &immVab[0].x, max_vertex_attribs * sizeof(Float4) );
-    immCurrent++;
-
-    if ( immCurrent >= ((REGAL_IMMEDIATE_BUFFER_SIZE * REGAL_EMU_MAX_VERTEX_ATTRIBS) / max_vertex_attribs) )
-    {
-      Flush( ctx );
-      int restartVerts = 0;
-      switch( immPrim )
-      {
-        case GL_QUADS:
-          restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 4;
-          break;
-        case GL_TRIANGLES:
-          restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 3;
-          break;
-        case GL_LINES:
-          restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 2;
-          break;
-        case GL_QUAD_STRIP:
-          restartVerts = 2;
-          break;
-        case GL_TRIANGLE_STRIP:
-          restartVerts = 2;
-          break;
-        case GL_LINE_STRIP:
-          restartVerts = 1;
-          break;
-        default:
-          break;
-      }
-
-      // For triangle fan we need the first and last vertices
-      // for restarting.  All others concern the most recent n.
-
-      if (immPrim==GL_TRIANGLE_FAN)
-      {
-        memcpy( immArray + max_vertex_attribs * sizeof(Float4), immArray + (REGAL_IMMEDIATE_BUFFER_SIZE - 1) * max_vertex_attribs * sizeof(Float4), max_vertex_attribs * sizeof(Float4));
-        immCurrent = 2;
-      }
-      else
-      {
-        int offset = REGAL_IMMEDIATE_BUFFER_SIZE - restartVerts;
-        memcpy( immArray, immArray + offset * max_vertex_attribs * sizeof(Float4), restartVerts * max_vertex_attribs * sizeof(Float4));
-        immCurrent = restartVerts;
-      }
-    }
-  }
+  void InitImmediate(RegalContext &ctx);
+  void glDeleteVertexArrays( RegalContext * ctx, GLsizei n, const GLuint * arrays );
+  void glDeleteBuffers( RegalContext * ctx, GLsizei n, const GLuint * buffers );
+  GLboolean IsVertexArray( RegalContext * ctx, GLuint name );
+  void glBindVertexArray( RegalContext *ctx, GLuint vao );
+  void ShadowClientActiveTexture( GLenum texture );
+  void Begin( RegalContext * ctx, GLenum mode );
+  void End( RegalContext * ctx );
+  void RestoreVao( RegalContext * ctx );
+  void Flush( RegalContext * ctx );
+  void Provoke( RegalContext * ctx );
 
   template <int N, bool Norm, typename T> void Attribute( RegalContext * ctx, GLuint idx, const T * v )
   {
@@ -1031,7 +732,6 @@ struct Iff
     if (idx == immProvoking)
       Provoke( ctx );
   }
-
 
   template <int N, typename T> void Attr( RegalContext *ctx, GLuint idx, T x, T y = 0, T z = 0, T w = 1 )
   {
@@ -1055,19 +755,7 @@ struct Iff
     Attribute<N,true>( ctx, idx, v );
   }
 
-  GLuint AttrIndex( RegalFixedFunctionAttrib attr, int cat = -1 ) const
-  {
-    if (attr < RFF2A_TexCoord)
-    {
-      RegalAssertArrayIndex( ffAttrMap, attr );
-      return ffAttrMap[ attr ];
-    }
-    if (cat < 0)
-      cat = catIndex;
-    if (attr == RFF2A_TexCoord && GLuint(cat) < ffAttrNumTex)
-      return ffAttrTexBegin + cat;
-    return ~0u;
-  }
+  GLuint AttrIndex( RegalFixedFunctionAttrib attr, int cat = -1 ) const;
 
   // fixed function
 
@@ -1235,13 +923,13 @@ struct Iff
 
   struct Version
   {
-    Version()
+    inline Version()
       : val( 0 )
       , updated( false )
     {
     }
 
-    GLuint64 Current() const
+    inline GLuint64 Current() const
     {
       return val;
     }
@@ -1256,7 +944,7 @@ struct Iff
       return val;
     }
 
-    void Reset()
+    inline void Reset()
     {
       updated = false;
     }
@@ -1546,16 +1234,7 @@ struct Iff
     StoreUniform uniform;
 
     bool SetEnable( Iff * ffn, bool enable, GLenum cap );
-
-    void SetTexInfo( Version & ver, GLuint activeTex, TextureUnit & unit )
-    {
-      if (activeTex >= REGAL_EMU_MAX_TEXTURE_UNITS)
-        return;
-
-      raw.tex[ activeTex ].unit = unit;
-      raw.ver = ver.Update();
-    }
-
+    void SetTexInfo( Iff::Version & ver, GLuint activeTex, Iff::TextureUnit & unit );
     void SetLight( Iff * ffn, GLenum light, GLenum pname, const GLfloat * params );
     void SetMaterial( Iff * ffn, GLenum face, GLenum pname, const GLfloat * params );
     void GetMaterial( Iff * ffn, GLenum face, GLenum pname, GLfloat * params );
@@ -1563,27 +1242,9 @@ struct Iff
     void GetTexgen( Iff * ffn, int coord, GLenum space, GLfloat * params );
     void SetAlphaFunc( Iff * ffn, CompareFunc comp, GLfloat ref );
     void SetClip( Iff * ffn, GLenum plane, const GLfloat * equation );
-
-    TextureTargetBitfield GetTextureEnable( size_t unit ) const
-    {
-      return TextureTargetBitfield( ( processed.tex[unit].enables ) );
-    }
-
-    inline GLuint64 Ver() const
-    {
-      return uniform.ver;
-    }
-
-    GLuint HighestPriorityTextureEnable( GLuint enables )
-    {
-      for (int i = TP_CubeMap; i >= 0; i--)
-      {
-        if (enables & ( 1 << i ))
-          return static_cast<GLubyte>(1 << i);
-      }
-      return 0;
-    }
-
+    TextureTargetBitfield GetTextureEnable( size_t unit ) const;
+    inline GLuint64 Ver() const;
+    GLuint HighestPriorityTextureEnable( GLuint enables );
     void Process( Iff * ffn );
   };
 
@@ -1600,19 +1261,19 @@ struct Iff
       r3::Matrix4f mat;
     };
 
-    MatrixStack()
+    inline MatrixStack()
     {
       stack.push_back( El() );
     }
 
-    void Push()
+    inline void Push()
     {
       RegalAssert( stack.size() < REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH );
       if (stack.size() < REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH)
         stack.push_back( stack.back() );
     }
 
-    void Pop()
+    inline void Pop()
     {
       /* The stack size warning messages ought to be the responsibility
        of the debug layer, rather than emulation.  (Opt-in only)
@@ -1623,39 +1284,42 @@ struct Iff
         stack.pop_back();
     }
 
-    r3::Matrix4f &Top()
-    {
-      RegalAssert( stack.size() );
-      return stack.back().mat;
-    }
-    const r3::Matrix4f &Top() const
+    inline r3::Matrix4f &Top()
     {
       RegalAssert( stack.size() );
       return stack.back().mat;
     }
 
-    GLuint64 &Ver()
+    inline const r3::Matrix4f &Top() const
     {
       RegalAssert( stack.size() );
-      return stack.back().ver;
+      return stack.back().mat;
     }
-    const GLuint64 &Ver() const
+
+    inline GLuint64 &Ver()
     {
       RegalAssert( stack.size() );
       return stack.back().ver;
     }
 
-    std::size_t size() const
+    inline const GLuint64 &Ver() const
+    {
+      RegalAssert( stack.size() );
+      return stack.back().ver;
+    }
+
+    inline std::size_t size() const
     {
       return stack.size();
     }
 
-    El &operator[](const std::size_t i)
+    inline El &operator[](const std::size_t i)
     {
       RegalAssert( stack.size() );
       return stack[i];
     }
-    const El &operator[](const std::size_t i) const
+
+    inline const El &operator[](const std::size_t i) const
     {
       RegalAssert( stack.size() );
       return stack[i];
@@ -1749,122 +1413,25 @@ struct Iff
   bool legacy; // 2.x mac
 
   void InitFixedFunction(RegalContext &ctx);
-
-  void PreDraw( RegalContext * ctx )
-  {
-    if (programPipeline)
-      return;    // FIXME: Eventually will need to handle empty or partially populated PPO
-
-    ver.Reset();
-    if  (program)
-      UseShaderProgram( ctx );
-    else
-      UseFixedFunctionProgram( ctx );
-  }
-
-  void SetCurrentMatrixStack( GLenum mode )
-  {
-    switch( mode )
-    {
-      case GL_MODELVIEW:
-        currMatrixStack = &modelview;
-        break;
-      case GL_PROJECTION:
-        currMatrixStack = &projection;
-        break;
-      case GL_TEXTURE:
-        if (activeTextureIndex < GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
-          currMatrixStack = &texture[ activeTextureIndex ];
-        break;
-      case GL_TEXTURE0:
-      case GL_TEXTURE1:
-      case GL_TEXTURE2:
-      case GL_TEXTURE3:
-      {
-        GLuint idx = mode - GL_TEXTURE0;
-        if (idx > GLuint( REGAL_EMU_MAX_TEXTURE_UNITS - 1 ))
-          break;
-        currMatrixStack = &texture[ idx ];
-      }
-      break;
-      default:
-        RegalAssert( true && "WTF?" );
-        break;
-    }
-  }
-
-  bool ShadowMatrixMode( GLenum mode )
-  {
-    shadowMatrixMode = mode;
-    return true;
-  }
-
-  void ShadowActiveTexture( GLenum texture )
-  {
-    if (validTextureEnum(texture))
-      shadowActiveTextureIndex = texture - GL_TEXTURE0;
-  }
-
-  bool ShadowEnable( GLenum cap )
-  {
-    return EnableIndexed( cap, shadowActiveTextureIndex );
-  }
-
-  bool ShadowDisable( GLenum cap )
-  {
-    return DisableIndexed( cap, shadowActiveTextureIndex );
-  }
-
-  bool EnableIndexed( GLenum cap, GLuint index )
-  {
-    if (index >= GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
-      return false;
-    activeTextureIndex = index;
-    bool ret = ffstate.SetEnable( this, true, cap );
-    return ret;
-  }
-
-  bool DisableIndexed( GLenum cap, GLuint index )
-  {
-    if (index >= GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
-      return false;
-    activeTextureIndex = index;
-    bool ret = ffstate.SetEnable( this, false, cap );
-    return ret;
-  }
-
-  bool ShadowUseProgram( GLuint prog )
-  {
-    program = prog;
-    return prog == 0;  // pass the call along only if it's non-zero
-  }
-
-  bool ShadowBindProgramPipeline( GLuint progPipeline )
-  {
-    programPipeline = progPipeline;
-    return false;  // always pass this through since we're not emulating it
-  }
-
+  void PreDraw( RegalContext * ctx );
+  void SetCurrentMatrixStack( GLenum mode );
+  bool ShadowMatrixMode( GLenum mode );
+  void ShadowActiveTexture( GLenum texture );
+  bool ShadowEnable( GLenum cap );
+  bool ShadowDisable( GLenum cap );
+  bool EnableIndexed( GLenum cap, GLuint index );
+  bool DisableIndexed( GLenum cap, GLuint index );
+  bool ShadowUseProgram( GLuint prog );
+  bool ShadowBindProgramPipeline( GLuint progPipeline );
   void ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj );
-  void ShadowTexBinding( GLenum target, GLuint obj )
-  {
-    ShadowMultiTexBinding( GL_TEXTURE0 + shadowActiveTextureIndex, target, obj );
-  }
-
+  void ShadowTexBinding( GLenum target, GLuint obj );
   void ShadowTextureInfo( GLuint obj, GLenum target, GLint internalFormat );
   void ShadowMultiTexInfo( GLenum texunit, GLenum target, GLint internalFormat );
   void ShadowTexInfo( GLenum target, GLint internalFormat );
-
   void TexEnv( GLenum texunit, GLenum target, GLenum pname, const GLfloat *v );
   void TexEnv( GLenum texunit, GLenum target, GLenum pname, const GLint *v );
-  void TexEnv( GLenum texunit, GLenum target, GLenum pname, GLfloat v )
-  {
-    TexEnv( texunit, target, pname, &v );
-  }
-  void TexEnv( GLenum texunit, GLenum target, GLenum pname, GLint v )
-  {
-    TexEnv( texunit, target, pname, &v );
-  }
+  void TexEnv( GLenum texunit, GLenum target, GLenum pname, GLfloat v );
+  void TexEnv( GLenum texunit, GLenum target, GLenum pname, GLint v );
 
   template <typename T>
   void TexEnv( GLenum target, GLenum pname, T v )
@@ -1998,27 +1565,7 @@ struct Iff
     return true;
   }
 
-  void ShadeModel( GLenum mode )
-  {
-    State::Store & r = ffstate.raw;
-    switch( mode )
-    {
-      case GL_FLAT:
-        if (!r.shadeModelFlat)
-        {
-          r.shadeModelFlat = true;
-          r.ver = ver.Update();
-        }
-        break;
-      case GL_SMOOTH:
-        if (r.shadeModelFlat)
-        {
-          r.shadeModelFlat = false;
-          r.ver = ver.Update();
-        }
-        break;
-    }
-  }
+  void ShadeModel( GLenum mode );
 
   template <typename T> void Light( GLenum light, GLenum pname, const T param )
   {
@@ -2122,48 +1669,7 @@ struct Iff
     u.ver = r.ver = ver.Update();
   }
 
-  void ColorMaterial( GLenum face, GLenum mode )
-  {
-    ColorMaterialMode m;
-    switch( mode )
-    {
-      case GL_EMISSION:
-        m = CM_Emission;
-        break;
-      case GL_AMBIENT:
-        m = CM_Ambient;
-        break;
-      case GL_DIFFUSE:
-        m = CM_Diffuse;
-        break;
-      case GL_SPECULAR:
-        m = CM_Specular;
-        break;
-      case GL_AMBIENT_AND_DIFFUSE:
-        m = CM_AmbientAndDiffuse;
-        break;
-      default:
-        return;
-    }
-    switch( face )
-    {
-      case GL_FRONT:
-        ffstate.raw.colorMaterialTarget0 = m;
-        ffstate.raw.colorMaterialTarget1 = CM_None;
-        break;
-      case GL_BACK:
-        ffstate.raw.colorMaterialTarget0 = CM_None;
-        ffstate.raw.colorMaterialTarget1 = m;
-        break;
-      case GL_FRONT_AND_BACK:
-        ffstate.raw.colorMaterialTarget0 = m;
-        ffstate.raw.colorMaterialTarget1 = m;
-        break;
-      default:
-        return;
-    }
-    ffstate.raw.ver = ver.Update();
-  }
+  void ColorMaterial( GLenum face, GLenum mode );
 
   template <typename T> bool TexGen( GLenum coord, GLenum pname, const T param )
   {
@@ -2239,46 +1745,8 @@ struct Iff
     return true;
   }
 
-  void AlphaFunc( GLenum comp, const GLfloat ref )
-  {
-    CompareFunc cf = CF_Always;
-    switch( comp )
-    {
-      case GL_NEVER:
-        cf = CF_Never;
-        break;
-      case GL_LESS:
-        cf = CF_Less;
-        break;
-      case GL_EQUAL:
-        cf = CF_Equal;
-        break;
-      case GL_LEQUAL:
-        cf = CF_Lequal;
-        break;
-      case GL_NOTEQUAL:
-        cf = CF_NotEqual;
-        break;
-      case GL_GREATER:
-        cf = CF_Greater;
-        break;
-      case GL_GEQUAL:
-        cf = CF_Gequal;
-        break;
-      case GL_ALWAYS:
-        cf = CF_Always;
-        break;
-      default:
-        break; // should be an error...
-    }
-    ffstate.SetAlphaFunc( this, cf, ref );
-  }
-
-  void ClipPlane( GLenum plane, const GLdouble * equation )
-  {
-    Float4 eqn( equation[0], equation[1], equation[2], equation[3] );
-    ffstate.SetClip( this, plane, & eqn.x );
-  }
+  void AlphaFunc( GLenum comp, const GLfloat ref );
+  void ClipPlane( GLenum plane, const GLdouble * equation );
 
   template <typename T> void Fog( GLenum pname, const T param )
   {
@@ -2529,60 +1997,14 @@ struct Iff
     return true;
   }
 
-  void MatrixPush( GLenum mode )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Push();
-  }
-
-  void MatrixPop( GLenum mode )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Pop();
-    UpdateMatrixVer();
-  }
-
-  void UpdateMatrixVer()
-  {
-    currMatrixStack->Ver() = ffstate.uniform.ver = ver.Update();
-    if (currMatrixStack != &modelview && currMatrixStack != &projection)
-      ffstate.raw.ver = ffstate.uniform.ver;
-  }
-
-  void MatrixLoadIdentity( GLenum mode )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Top().MakeIdentity();
-    UpdateMatrixVer();
-  }
-
-  void MatrixLoad( GLenum mode, const r3::Matrix4f & m )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Top() = m;
-    UpdateMatrixVer();
-  }
-
-  void MatrixLoadTranspose( GLenum mode, const r3::Matrix4f & m )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Top() = m.Transpose();
-    UpdateMatrixVer();
-  }
-
-  void MatrixMult( GLenum mode, const r3::Matrix4f & m )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Top().MultRight( m );
-    UpdateMatrixVer();
-  }
-
-  void MatrixMultTranspose( GLenum mode, const r3::Matrix4f & m )
-  {
-    SetCurrentMatrixStack( mode );
-    currMatrixStack->Top().MultRight( m.Transpose() );
-    UpdateMatrixVer();
-  }
+  void MatrixPush( GLenum mode );
+  void MatrixPop( GLenum mode );
+  void UpdateMatrixVer();
+  void MatrixLoadIdentity( GLenum mode );
+  void MatrixLoad( GLenum mode, const r3::Matrix4f & m );
+  void MatrixLoadTranspose( GLenum mode, const r3::Matrix4f & m );
+  void MatrixMult( GLenum mode, const r3::Matrix4f & m );
+  void MatrixMultTranspose( GLenum mode, const r3::Matrix4f & m );
 
   template <typename T> void MatrixRotate( GLenum mode, T angle, T x, T y, T z )
   {
@@ -2619,55 +2041,38 @@ struct Iff
     UpdateMatrixVer();
   }
 
-  void PushMatrix()
-  {
-    MatrixPush( shadowMatrixMode );
-  }
-  void PopMatrix()
-  {
-    MatrixPop( shadowMatrixMode );
-  }
-  void LoadIdentity()
-  {
-    MatrixLoadIdentity( shadowMatrixMode );
-  }
-  void LoadMatrix( const r3::Matrix4f & m )
-  {
-    MatrixLoad( shadowMatrixMode, m );
-  }
-  void LoadTransposeMatrix( const r3::Matrix4f & m )
-  {
-    MatrixLoadTranspose( shadowMatrixMode, m );
-  }
-  void MultMatrix( const r3::Matrix4f & m )
-  {
-    MatrixMult( shadowMatrixMode, m );
-  }
-  void MultTransposeMatrix( const r3::Matrix4f & m )
-  {
-    MatrixMultTranspose( shadowMatrixMode, m );
-  }
+  void PushMatrix();
+  void PopMatrix();
+  void LoadIdentity();
+  void LoadMatrix( const r3::Matrix4f & m );
+  void LoadTransposeMatrix( const r3::Matrix4f & m );
+  void MultMatrix( const r3::Matrix4f & m );
+  void MultTransposeMatrix( const r3::Matrix4f & m );
+
   template <typename T> void Rotate( T angle, T x, T y, T z )
   {
     MatrixRotate( shadowMatrixMode, angle, x, y, z );
   }
+
   template <typename T> void Translate( T x, T y, T z )
   {
     MatrixTranslate( shadowMatrixMode, x, y, z );
   }
+
   template <typename T> void Scale( T x, T y, T z )
   {
     MatrixScale( shadowMatrixMode, x, y, z );
   }
+
   template <typename T> void Frustum( T left, T right, T bottom, T top, T zNear, T zFar )
   {
     MatrixFrustum( shadowMatrixMode, left, right, bottom, top, zNear, zFar );
   }
+
   template <typename T> void Ortho( T left, T right, T bottom, T top, T zNear, T zFar )
   {
     MatrixOrtho( shadowMatrixMode, left, right, bottom, top, zNear, zFar );
   }
-
 
   // cache viewport
   struct Viewport
@@ -2689,19 +2094,8 @@ struct Iff
 
   Viewport viewport;
 
-  void Viewport( GLint x, GLint y, GLsizei w, GLsizei h )
-  {
-    viewport.x = x;
-    viewport.y = y;
-    viewport.w = w;
-    viewport.h = h;
-  }
-
-  void DepthRange( GLfloat znear, GLfloat zfar )
-  {
-    viewport.zn = znear;
-    viewport.zf = zfar;
-  }
+  void Viewport( GLint x, GLint y, GLsizei w, GLsizei h );
+  void DepthRange( GLfloat znear, GLfloat zfar );
 
   template <typename T> void RasterPosition( RegalContext * ctx, T x, T y, T z = 0 )
   {
@@ -2719,87 +2113,18 @@ struct Iff
     WindowPos( ctx, xd, yd, zd );
   }
 
-  void RasterPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z )
-  {
-    r3::Vec3f pos( x, y, z );
-    r3::Vec3f s( 0.5f * GLfloat(viewport.w), 0.5f * GLfloat(viewport.h), 0.5f * GLfloat( viewport.zf - viewport.zn ) );
-    r3::Vec3f b( GLfloat(viewport.x), GLfloat(viewport.y), 0.5f + GLfloat(viewport.zn) );
-    r3::Matrix4f sb;
-    sb.SetScale( s );
-    sb.SetTranslate( s + b );
-    r3::Matrix4f m = sb * projection.Top() * modelview.Top();
-    m.MultMatrixVec( pos );
-    WindowPos( ctx, pos.x, pos.y, pos.z );
-  }
-
-  void WindowPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z )
-  {
-    if (ctx->isCore() || ctx->isCompat())
-    {
-      // todo - cache rasterpos and implement glDrawPixels and glBitmap
-      return;
-    }
-    ctx->dispatcher.emulation.glWindowPos3d( x, y, z );
-  }
-
-  void BindVertexArray( RegalContext * ctx, GLuint vao )
-  {
-    UNUSED_PARAMETER(ctx);
-    vaoAttrMap[ currVao ] = ffstate.raw.attrArrayFlags;
-    currVao = vao;
-    ffstate.raw.attrArrayFlags = vaoAttrMap[ currVao ];
-    ffstate.uniform.vabVer = ver.Update();
-  }
-
-  void EnableArray( RegalContext * ctx, GLuint index )
-  {
-    RestoreVao( ctx );
-    ffstate.raw.attrArrayFlags |= 1 << index;
-    ffstate.raw.ver = ffstate.uniform.vabVer = ver.Update();
-  }
-
-  void DisableArray( RegalContext * ctx, GLuint index )
-  {
-    RestoreVao( ctx );
-    ffstate.raw.attrArrayFlags &= ~( 1 << index );
-    ffstate.raw.ver = ffstate.uniform.vabVer = ver.Update();
-  }
-
+  void RasterPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z );
+  void WindowPos( RegalContext * ctx, GLdouble x, GLdouble y, GLdouble z );
+  void BindVertexArray( RegalContext * ctx, GLuint vao );
+  void EnableArray( RegalContext * ctx, GLuint index );
+  void DisableArray( RegalContext * ctx, GLuint index );
   void UpdateUniforms( RegalContext * ctx );
   void UseFixedFunctionProgram( RegalContext * ctx );
   void UseShaderProgram( RegalContext * ctx );
-
   void ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar * const * string, const GLint *length);
   void LinkProgram( RegalContext *ctx, GLuint program );
-
-  GLuint CreateShader( RegalContext *ctx, GLenum shaderType )
-  {
-    GLuint sh = ctx->dispatcher.emulation.glCreateShader( shaderType );
-    shaderTypeMap[ sh ] = shaderType;
-    return sh;
-  }
-
-  void Init( RegalContext &ctx )
-  {
-    shadowMatrixMode = GL_MODELVIEW;
-    shadowActiveTextureIndex = 0;
-    activeTextureIndex = 0;
-    programPipeline = 0;
-    program = 0;
-    currprog = NULL;
-    currMatrixStack = &modelview;
-    currVao = 0;
-    gles = false;
-    legacy = false;
-
-    RegalContext *sharingWith = ctx.groupInitializedContext();
-    if (sharingWith)
-      textureObjToFmt = sharingWith->iff->textureObjToFmt;
-
-    InitVertexArray(ctx);
-    InitFixedFunction(ctx);
-    InitImmediate(ctx);
-  }
+  GLuint CreateShader( RegalContext *ctx, GLenum shaderType );
+  void Init( RegalContext &ctx );
 };
 
 }; // namespace Emu

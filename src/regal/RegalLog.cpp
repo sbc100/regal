@@ -574,6 +574,7 @@ namespace Logging {
 #if REGAL_SYS_WGL
       OutputDebugStringA(m.c_str());
 #elif REGAL_SYS_ANDROID
+      if (!logOutput)
       {
         android_LogPriority adrLog;
 

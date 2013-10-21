@@ -4,6 +4,8 @@ import os.path
 import re
 import sys
 
+from copy import deepcopy
+
 from inspect import isfunction
 
 from ApiUtil import validVersion
@@ -372,6 +374,26 @@ def stripAll(exp):
 #
 # CodeGen for:
 #
+#   '\n\n\nfoo\n\n\n' -> 'foo'
+#
+
+def stripVertical(exp):
+  if isinstance(exp,list):
+    tmp = deepcopy(exp)
+  else:
+    tmp = exp.split('\n')
+  while len(tmp)>0 and len(tmp[0].strip())==0:
+    tmp = tmp[1:]
+  while len(tmp)>0 and len(tmp[-1].strip())==0:
+    tmp = tmp[:-1]
+  if isinstance(exp,list):
+    return tmp
+  else:
+    return '\n'.join(tmp)
+
+#
+# CodeGen for:
+#
 #   #if FOO
 #   a
 #   #else /* FOO */
@@ -444,28 +466,28 @@ def wrapCIf(exp, a, b = None):
     if exp:
       tmp.append('if (%s)'%(exp))
       tmp.append('{')
-      tmp.extend(indent(a))
+      tmp.extend(indent(stripVertical(a)))
       tmp.append('}')
       if not b==None:
         tmp.append('else /* %s*/'%(exp))
         tmp.append('{')
-        tmp.extend(indent(b))
+        tmp.extend(indent(stripVertical(b)))
         tmp.append('}')
     else:
-      tmp.extend(a)
+      tmp.extend(stripVertical(a))
     return tmp
 
   tmp = ''
   if exp:
     tmp += 'if (%s)\n{\n'%(exp)
-    tmp += indent(a)
+    tmp += indent(stripVertical(a)) + '\n'
     tmp += '}\n'
     if not b==None:
       tmp += 'else /* %s*/\n{\n'%(exp)
-      tmp += indent(b)
+      tmp += indent(stripVertical(b)) + '\n'
       tmp += '}\n'
   else:
-    tmp += a
+    tmp += stripVertical(a) + '\n'
 
   return tmp
 

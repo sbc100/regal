@@ -2,6 +2,24 @@
 
 formulae = {
 
+  # glFinish
+
+  'glFinish' : {
+      'entries' : [ 'glFinish' ],
+      'post' : '''
+// Notify Regal::Frame about the glFinish() event
+_context->frame->glFinish(*_context);'''
+  }
+
+#  # Capture images or md5s for other functions too, such as glViewport
+#
+#  'glFinish' : {
+#      'entries' : [ 'glRectf' ],
+#      'post' : '''
+#if (Config::frameCapture)
+#  _context->frame->capture(*_context);'''
+#  }
+
 }
 
 formulaeGlobal = {

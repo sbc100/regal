@@ -365,7 +365,7 @@ def apiFuncDefineCode(apis, args):
 
       if function.needsContext:
         c += '  RegalContext *_context = REGAL_GET_CONTEXT();\n'
-        c += listToString(indent(emuCodeGen(emue,'prefix'),'  '))
+        c += listToString(indent(stripVertical(emuCodeGen(emue,'prefix')),'  '))
         c += '  %s\n' % logFunction( function, 'App' )
         c += '  if (!_context) return'
         if typeIsVoid(rType):
@@ -379,7 +379,7 @@ def apiFuncDefineCode(apis, args):
             else:
               c += ' (%s) 0;\n' % ( rTypes )
 
-        c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
+        c += listToString(indent(stripVertical(emuCodeGen(emue,'impl')),'  '))
 
         if getattr(function,'regalRemap',None)!=None and (isinstance(function.regalRemap, list) or isinstance(function.regalRemap, str) or isinstance(function.regalRemap, unicode)):
 
@@ -409,18 +409,18 @@ def apiFuncDefineCode(apis, args):
           else:
             c += '%s;\n'%(function.regalRemap)
         else:
-          if getattr(function,'regalOnly',False)==False:
+          if not getattr(function,'regalOnly',False):
             t = ''
             t += 'DispatchTableGL *_next = &_context->dispatcher.front();\n'
             t += 'RegalAssert(_next);\n'
 
-            t += listToString(indent(emuCodeGen(emue,'pre'),''))
+            t += listToString(indent(stripVertical(emuCodeGen(emue,'pre')),''))
 
             if not typeIsVoid(rType):
               t += 'return '
             t += '_next->call(&_next->%s)(%s);\n' % ( name, callParams )
 
-            t += listToString(indent(emuCodeGen(emue,'post'),''))
+            t += listToString(indent(stripVertical(emuCodeGen(emue,'post')),''))
 
             for i in emue:
               if i!=None and i['cond']!=None:
@@ -428,13 +428,13 @@ def apiFuncDefineCode(apis, args):
 
             c += indent(t)
 
-            c += listToString(indent(emuCodeGen(emue,'suffix'),'  '))
+            c += listToString(indent(stripVertical(emuCodeGen(emue,'suffix')),'  '))
 
       else:
         c += '  %s\n' % logFunction(function, 'App' )
-        c += listToString(indent(emuCodeGen(emue,'prefix'),'  '))
+        c += listToString(indent(stripVertical(emuCodeGen(emue,'prefix')),'  '))
 
-        if getattr(function,'regalOnly',False)==False:
+        if not getattr(function,'regalOnly',False):
           c += '  DispatchTableGlobal *_next = &dispatcherGlobal.front();\n'
           c += '  RegalAssert(_next);\n'
 
@@ -447,15 +447,15 @@ def apiFuncDefineCode(apis, args):
               else:
                 c += '  %s ret = (%s) 0;\n' % ( rTypes, rTypes )
 
-          c += listToString(indent(emuCodeGen(emue,'impl'),'  '))
+          c += listToString(indent(stripVertical(emuCodeGen(emue,'impl')),'  '))
           c += '  '
           if not typeIsVoid(rType):
             c += 'ret = '
           c += '_next->call(&_next->%s)(%s);\n' % ( name, callParams )
 
-        c += listToString(indent(emuCodeGen(emue,'init'),'  '))
+        c += listToString(indent(stripVertical(emuCodeGen(emue,'init')),'  '))
 
-        c += listToString(indent(emuCodeGen(emue,'suffix'),'  '))
+        c += listToString(indent(stripVertical(emuCodeGen(emue,'suffix')),'  '))
         if not typeIsVoid(rType):
           c += '  return ret;\n'
       c += '}\n\n'
@@ -558,6 +558,13 @@ def apiFuncDeclareCode(apis, args):
     for enum in api.enums:
       if enum.name == 'defines':
         for enumerant in enum.enumerants:
+
+          # Ignore enums that match category, a workaround
+          # for EGL_VERSION_1_3 and EGL_VERSION_1_4
+
+          if enumerant.name==enumerant.category:
+            continue
+
           value = toLong(enumerant.value)
           if value==None:
             value = enumerant.value
@@ -613,6 +620,11 @@ def apiFuncDeclareCode(apis, args):
       return '#ifndef REGAL_NO_DECLARATION_%s'%(upper(category).replace(' ','_'))
 
     categories = set()
+
+    if api.name=='egl':
+      categories.add('EGL_VERSION_1_3')
+      categories.add('EGL_VERSION_1_4')
+
     categories.update([ i[0] for i in e ])
     categories.update([ i[0] for i in t ])
     categories.update([ i[0] for i in m ])

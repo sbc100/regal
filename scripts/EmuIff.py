@@ -38,15 +38,15 @@ iffFormulae = {
     },
     'ImmShadowVao' : {
         'entries' : [ 'glBindVertexArray.*', ],
-        'prefix' : [ '_context->iff->ShadowVao( _context, ${arg0} ); ', ],
+        'prefix' : [ '_context->iff->glBindVertexArray( _context, ${arg0} ); ', ],
     },
    'IsVertexArray' : {
         'entries' : [ 'glIsVertexArray(ARB|)' ],
         'impl' : [ 'return _context->iff->IsVertexArray( _context, ${arg0} );' ],
     },
-   'DeleteVertexArrays' : {
-        'entries' : [ 'glDeleteVertexArrays(ARB|)' ],
-        'impl' : [ '_context->iff->DeleteVertexArrays( _context, ${arg0}, ${arg1} );' ],
+   'DeleteStuff' : {
+        'entries' : [ 'glDelete(Buffers|VertexArrays)(ARB|)' ],
+        'impl' : [ '_context->iff->glDelete${m1}( _context, ${arg0}, ${arg1} );' ],
     },
     'ImmShadowClientActiveTexture' : {
         'entries' : [ 'glClientActiveTexture(ARB|)', ],

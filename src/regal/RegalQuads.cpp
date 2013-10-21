@@ -35,10 +35,13 @@
 
  Limitations:
 
-  - Different front and back rendering modes aren't handled correctly.
-    Instead the "largest" of the two is always used. So if either mode
-    is FILL then triangles will be drawn.  Otherwise if either mode is
-    LINE then lines will be drawn.  Else points will be drawn.
+  - If either front or back rendering modes is FILL then triangles will
+    be drawn.  Otherwise if either mode is LINE then lines will be drawn.
+    Else points will be drawn.
+
+  - Some attempt is made to respect glCullFace when culling is enabled,
+    but lines and points are likely to be rendered when they otherwise
+    would if rendering quads using those glPolygonModes.
 
   - The colors of lines and points are probably going to be wrong when
     using flat shading, i.e. glShadeModel(GL_FLAT).
@@ -92,10 +95,13 @@ namespace Emu
 void Quads::Init(RegalContext &ctx)
 {
   UNUSED_PARAMETER(ctx);
+  windingMode = GL_CCW;
   frontFaceMode = backFaceMode = GL_FILL;
   shadeMode = GL_SMOOTH;
   provokeMode = GL_LAST_VERTEX_CONVENTION;
+  cullFace = GL_BACK;
   gl_quads_follow_provoking_vertex_convention = (ctx.info->gl_quads_follow_provoking_vertex_convention == GL_TRUE);
+  cullingFaces = false;
 }
 
 void Quads::Cleanup(RegalContext &ctx)
@@ -122,21 +128,65 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
   if ( count < 4 )
       return true;
 
+  // draw nothing if we're culling all faces
+
+  if (cullingFaces && cullFace == GL_FRONT_AND_BACK)
+    return true;
+
+  // else draw a surface, lines, or points.  The driver will cull
+  // surfaces, but we need to choose whether to send lines of points
+
+  bool drawQuads  = false;
+  bool drawLines  = false;
+  bool drawPoints = false;
+
+  if (!cullingFaces)
+  {
+    drawQuads  = (frontFaceMode == GL_FILL  || backFaceMode == GL_FILL);
+    drawLines  = (frontFaceMode == GL_LINE  || backFaceMode == GL_LINE);
+    drawPoints = (frontFaceMode == GL_POINT || backFaceMode == GL_POINT);
+  }
+  else
+  {
+    if (cullFace == GL_BACK)
+    {
+      drawQuads  = (frontFaceMode == GL_FILL );
+      drawLines  = (frontFaceMode == GL_LINE );
+      drawPoints = (frontFaceMode == GL_POINT);
+    }
+    else if (cullFace == GL_FRONT)
+    {
+      drawQuads  = (backFaceMode == GL_FILL );
+      drawLines  = (backFaceMode == GL_LINE);
+      drawPoints = (backFaceMode == GL_POINT);
+    }
+    else
+      return true;
+  }
+
+  Internal("Regal::Emu::Quads: shadeMode     =", Token::toString(shadeMode));
+  Internal("Regal::Emu::Quads: windingMode   =", Token::toString(windingMode));
+  Internal("Regal::Emu::Quads: provokeMode   =", Token::toString(provokeMode));
+  Internal("Regal::Emu::Quads: convention    =", gl_quads_follow_provoking_vertex_convention);
+  Internal("Regal::Emu::Quads: frontFaceMode =", Token::toString(frontFaceMode));
+  Internal("Regal::Emu::Quads: backFaceMode  =", Token::toString(backFaceMode));
+  Internal("Regal::Emu::Quads: cullingFaces  =", cullingFaces);
+  Internal("Regal::Emu::Quads: cullFace      =", Token::toString(cullFace));
+  Internal("Regal::Emu::Quads: drawQuads     =", drawQuads);
+  Internal("Regal::Emu::Quads: drawLines     =", drawLines);
+  Internal("Regal::Emu::Quads: drawPoints    =", drawPoints);
+
   DispatchTableGL &dt = ctx->dispatcher.emulation;
 
 #define EMU_QUADS_BUFFER_SIZE 1024
 
-  GLsizei myCount = count &= (~0x1);
-
-  if ( mode == GL_QUADS )
-    myCount &= (~0x3);
-
-  // either draw a surface, lines, or points
-
-  if (frontFaceMode == GL_FILL || backFaceMode == GL_FILL)
+  if (drawQuads)
   {
     if (frontFaceMode != GL_FILL || backFaceMode != GL_FILL)
       dt.call(&dt.glPolygonMode)(GL_FRONT_AND_BACK, GL_FILL);
+
+    GLsizei myCount = count &= (( mode == GL_QUADS ) ? (~0x3) : (~0x1));
+
     if ( mode == GL_QUAD_STRIP )
     {
       // convert quad strips into triangles
@@ -147,12 +197,39 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
       {
         for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
         {
+#if 1
+          // split 1
+          indices[ii * 6 + 0] = first + ii * 2 + 1;
+          indices[ii * 6 + 1] = first + ii * 2 + 3;
+          indices[ii * 6 + 2] = first + ii * 2 + 0;
+          indices[ii * 6 + 3] = first + ii * 2 + 2;
+          indices[ii * 6 + 4] = first + ii * 2 + 0;
+          indices[ii * 6 + 5] = first + ii * 2 + 3;
+#else
+          // split 1
           indices[ii * 6 + 0] = first + ii * 2 + 0;
           indices[ii * 6 + 1] = first + ii * 2 + 1;
           indices[ii * 6 + 2] = first + ii * 2 + 2;
           indices[ii * 6 + 3] = first + ii * 2 + 3;
           indices[ii * 6 + 4] = first + ii * 2 + 2;
           indices[ii * 6 + 5] = first + ii * 2 + 1;
+
+          // split 3
+          indices[ii * 6 + 0] = first + ii * 2 + 1;
+          indices[ii * 6 + 1] = first + ii * 2 + 0;
+          indices[ii * 6 + 2] = first + ii * 2 + 3;
+          indices[ii * 6 + 3] = first + ii * 2 + 2;
+          indices[ii * 6 + 4] = first + ii * 2 + 3;
+          indices[ii * 6 + 5] = first + ii * 2 + 0;
+
+          // split 4
+          indices[ii * 6 + 0] = first + ii * 2 + 0;
+          indices[ii * 6 + 1] = first + ii * 2 + 2;
+          indices[ii * 6 + 2] = first + ii * 2 + 1;
+          indices[ii * 6 + 3] = first + ii * 2 + 3;
+          indices[ii * 6 + 4] = first + ii * 2 + 1;
+          indices[ii * 6 + 5] = first + ii * 2 + 2;
+#endif
         }
       }
       else
@@ -257,31 +334,53 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
         }
       }
     }
+
     if (frontFaceMode != GL_FILL)
       dt.call(&dt.glPolygonMode)(GL_FRONT, frontFaceMode);
-    else if (backFaceMode != GL_FILL)
+    if (backFaceMode != GL_FILL)
       dt.call(&dt.glPolygonMode)(GL_BACK, backFaceMode);
   }
-  else if (frontFaceMode == GL_LINE || backFaceMode == GL_LINE)
+  else if (drawLines)
   {
     if (frontFaceMode != GL_LINE || backFaceMode != GL_LINE)
       dt.call(&dt.glPolygonMode)(GL_FRONT_AND_BACK, GL_LINE);
+
+    GLsizei myCount = count &= (( mode == GL_QUADS ) ? (~0x3) : (~0x1));
+
     if ( mode == GL_QUAD_STRIP )
     {
       // convert quad strips into quad outlines
 
       GLuint  indices[EMU_QUADS_BUFFER_SIZE * 6 + 2];
       GLsizei n = ((myCount/2-1) < EMU_QUADS_BUFFER_SIZE) ? (myCount/2-1) : EMU_QUADS_BUFFER_SIZE;
-      indices[0] = first + 1;
-      indices[1] = first + 0;
-      for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+
+      if (shadeMode == GL_FLAT && gl_quads_follow_provoking_vertex_convention && (provokeMode == GL_FIRST_VERTEX_CONVENTION))
       {
-        indices[ii * 6 + 2] = first + ii * 2 + 1;
-        indices[ii * 6 + 3] = first + ii * 2 + 3;
-        indices[ii * 6 + 4] = first + ii * 2 + 2;
-        indices[ii * 6 + 5] = first + ii * 2 + 0;
-        indices[ii * 6 + 6] = first + ii * 2 + 2;
-        indices[ii * 6 + 7] = first + ii * 2 + 3;
+        for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+        {
+          indices[ii * 6 + 0] = first + ii * 2 + 3;
+          indices[ii * 6 + 1] = first + ii * 2 + 1;
+          indices[ii * 6 + 2] = first + ii * 2 + 1;
+          indices[ii * 6 + 3] = first + ii * 2 + 0;
+          indices[ii * 6 + 4] = first + ii * 2 + 2;
+          indices[ii * 6 + 5] = first + ii * 2 + 0;
+        }
+        indices[n * 6 + 0] = first + n * 2 + 1;
+        indices[n * 6 + 1] = first + n * 2 + 0;
+      }
+      else
+      {
+        indices[0] = first + 0;
+        indices[1] = first + 1;
+        for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+        {
+          indices[ii * 6 + 2] = first + ii * 2 + 0;
+          indices[ii * 6 + 3] = first + ii * 2 + 2;
+          indices[ii * 6 + 4] = first + ii * 2 + 2;
+          indices[ii * 6 + 5] = first + ii * 2 + 3;
+          indices[ii * 6 + 6] = first + ii * 2 + 1;
+          indices[ii * 6 + 7] = first + ii * 2 + 3;
+        }
       }
 
       while (myCount >= 2)
@@ -304,16 +403,33 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
 
       GLuint  indices[EMU_QUADS_BUFFER_SIZE * 8];
       GLsizei n = ((myCount/4) < EMU_QUADS_BUFFER_SIZE) ? (myCount/4) : EMU_QUADS_BUFFER_SIZE;
-      for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+      if (shadeMode == GL_FLAT && gl_quads_follow_provoking_vertex_convention && (provokeMode == GL_FIRST_VERTEX_CONVENTION))
       {
-        indices[ii * 8 + 0] = first + ii * 4 + 0;
-        indices[ii * 8 + 1] = first + ii * 4 + 3;
-        indices[ii * 8 + 2] = first + ii * 4 + 2;
-        indices[ii * 8 + 3] = first + ii * 4 + 3;
-        indices[ii * 8 + 4] = first + ii * 4 + 1;
-        indices[ii * 8 + 5] = first + ii * 4 + 2;
-        indices[ii * 8 + 6] = first + ii * 4 + 1;
-        indices[ii * 8 + 7] = first + ii * 4 + 0;
+        for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+        {
+          indices[ii * 8 + 0] = first + ii * 4 + 0;
+          indices[ii * 8 + 1] = first + ii * 4 + 1;
+          indices[ii * 8 + 2] = first + ii * 4 + 0;
+          indices[ii * 8 + 3] = first + ii * 4 + 3;
+          indices[ii * 8 + 4] = first + ii * 4 + 1;
+          indices[ii * 8 + 5] = first + ii * 4 + 2;
+          indices[ii * 8 + 6] = first + ii * 4 + 3;
+          indices[ii * 8 + 7] = first + ii * 4 + 2;
+        }
+      }
+      else
+      {
+        for (GLuint ii=0; ii<static_cast<GLuint>(n); ii++)
+        {
+          indices[ii * 8 + 0] = first + ii * 4 + 1;
+          indices[ii * 8 + 1] = first + ii * 4 + 0;
+          indices[ii * 8 + 2] = first + ii * 4 + 0;
+          indices[ii * 8 + 3] = first + ii * 4 + 3;
+          indices[ii * 8 + 4] = first + ii * 4 + 1;
+          indices[ii * 8 + 5] = first + ii * 4 + 2;
+          indices[ii * 8 + 6] = first + ii * 4 + 2;
+          indices[ii * 8 + 7] = first + ii * 4 + 3;
+        }
       }
 
       while (myCount >= 4)
@@ -330,20 +446,46 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
         }
       }
     }
+
     if (frontFaceMode != GL_LINE)
       dt.call(&dt.glPolygonMode)(GL_FRONT, frontFaceMode);
-    else if (backFaceMode != GL_LINE)
+    if (backFaceMode != GL_LINE)
       dt.call(&dt.glPolygonMode)(GL_BACK, backFaceMode);
   }
-  else
+  else if (drawPoints)
   {
     // convert quad strips or quads into points
+
+    if (frontFaceMode != GL_POINT || backFaceMode != GL_POINT)
+      dt.call(&dt.glPolygonMode)(GL_FRONT_AND_BACK, GL_POINT);
+
+    GLsizei myCount = count &= (( mode == GL_QUADS ) ? (~0x3) : (~0x1));
+
     dt.call(&dt.glDrawArrays)(GL_POINTS, first, myCount);
+
+    if (frontFaceMode != GL_POINT)
+      dt.call(&dt.glPolygonMode)(GL_FRONT, frontFaceMode);
+    if (backFaceMode != GL_POINT)
+      dt.call(&dt.glPolygonMode)(GL_BACK, backFaceMode);
   }
 
   return true;
 }
 
+void Quads::glFrontFace(GLenum mode)
+{
+  //<> Internal("Regal::Emu::Quads::glFrontFace(", Token::toString(mode), ")");
+
+  switch (mode)
+  {
+    case GL_CW:
+    case GL_CCW:
+      windingMode = mode;
+      break;
+    default:
+      break;
+  }
+}
 void Quads::glPolygonMode(GLenum f, GLenum m)
 {
   //<> Internal("Regal::Emu::Quads::glPolygonMode(", Token::toString(f), ", ", Token::toString(m), ")");
@@ -378,6 +520,34 @@ void Quads::glProvokingVertex(GLenum mode)
     provokeMode = mode;
 }
 
+void Quads::glCullFace(GLenum face)
+{
+  //<> Internal("Regal::Emu::Quads::glCullFace(", Token::toString(face), ")");
+  switch (face)
+  {
+    case GL_FRONT:
+    case GL_BACK:
+    case GL_FRONT_AND_BACK:
+      cullFace = face;
+      break;
+    default:
+      break;
+  }
+}
+
+void Quads::glEnable(GLenum cap)
+{
+  //<> Internal("Regal::Emu::Quads::glEnable(", Token::toString(cap), ")");
+  if (cap == GL_CULL_FACE)
+    cullingFaces = true;
+}
+
+void Quads::glDisable(GLenum cap)
+{
+  //<> Internal("Regal::Emu::Quads::glDisable(", Token::toString(cap), ")");
+  if (cap == GL_CULL_FACE)
+    cullingFaces = false;
+}
 
 };
 

@@ -1,6 +1,14 @@
 #!/usr/bin/python -B
 
 quadsFormulae = {
+  'EnableDisable' : {
+    'entries' : [ 'gl(En|Dis)able' ],
+    'prefix'  : [ '_context->quads->gl${m1}able( ${arg0plus} );', ],
+  },
+  'CullFrontFace' : {
+    'entries'    : [ 'gl(Cull|Front)Face' ],
+    'prefix'     : [ '_context->quads->gl${m1}Face( ${arg0plus} );', ],
+  },
   'PolygonMode' : {
     'entries'    : [ 'glPolygonMode' ],
     'prefix'     : [ '_context->quads->glPolygonMode( ${arg0plus} );', ],

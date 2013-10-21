@@ -29,7 +29,7 @@
 #     }
 #  }
 
-from ApiCodeGen import typeCode
+from ApiCodeGen import typeCode, wrapCIf
 from ApiUtil import typeIsVoid
 import re
 from string import Template
@@ -52,17 +52,13 @@ def substitute(entry, formula, section, subs):
   if not section in formula:
     return
 
-  entry[section] = []
-
   # Turn a string into a list, if necessary
 
   tmp = formula[section]
   if isinstance(tmp,str) or isinstance(tmp,unicode):
-    tmp = [ tmp ]
+    tmp = tmp.split('\n')
 
-  for i in tmp:
-    j = Template(i)
-    entry[section].append(j.substitute(subs))
+  entry[section] = [ Template(i).substitute(subs) for i in tmp ]
 
 #
 # Add a substitution for string.Template.substitute purposes
@@ -203,11 +199,14 @@ def emuCodeGen(emue,section):
   tmp = []
   for i in emue:
     if i!=None and i.get(section)!=None:
+
+      code = i[section]
+      if not isinstance(code,list):
+        code = code.strip().split('\n')
+
       if i.get('member')!=None:
-        tmp.append('if (_context->%s)\n' % i['member'])
-        tmp.append('{\n')
-        tmp.extend(['  %s' % j for j in i[section] ])
-        tmp.append('}\n')
+        tmp.extend(wrapCIf('_context->%s'%i['member'],code))
       else:
-        tmp.extend(['%s' % j for j in i[section] ])
+        tmp.extend(code)
+
   return tmp

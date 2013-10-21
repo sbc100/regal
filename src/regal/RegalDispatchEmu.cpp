@@ -2954,6 +2954,22 @@ static void REGAL_CALL emu_glCullFace(GLenum mode)
         _context->ppa->glCullFace( mode );
       }
       #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_QUADS
+      if (_context->quads)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->quads->glCullFace( mode );
+      }
+      #endif
     case 1 :
     default:
       break;
@@ -3192,6 +3208,14 @@ static void REGAL_CALL emu_glDisable(GLenum cap)
       if (_context->iff) break;
       #endif
     case 6 :
+      #if REGAL_EMU_QUADS
+      if (_context->quads)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->quads->glDisable( cap );
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_DSA
@@ -3564,6 +3588,14 @@ static void REGAL_CALL emu_glEnable(GLenum cap)
       if (_context->iff) break;
       #endif
     case 6 :
+      #if REGAL_EMU_QUADS
+      if (_context->quads)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->quads->glEnable( cap );
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_DSA
@@ -4988,6 +5020,22 @@ static void REGAL_CALL emu_glFrontFace(GLenum mode)
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 13;
         _context->ppa->glFrontFace( mode );
+      }
+      #endif
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+      #if REGAL_EMU_QUADS
+      if (_context->quads)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->quads->glFrontFace( mode );
       }
       #endif
     case 1 :
@@ -26822,6 +26870,9 @@ static void REGAL_CALL emu_glDeleteBuffers(GLsizei n, const GLuint *buffers)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -26848,6 +26899,24 @@ static void REGAL_CALL emu_glDeleteBuffers(GLsizei n, const GLuint *buffers)
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 15;
         _context->obj->DeleteBuffers(*_context, n, buffers);
+        return;
+      }
+      #endif
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->iff->glDeleteBuffers( _context, n, buffers );
         return;
       }
       #endif
@@ -32532,7 +32601,7 @@ static void REGAL_CALL emu_glBindVertexArrayAPPLE(GLuint array)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        _context->iff->ShadowVao( _context, array );
+        _context->iff->glBindVertexArray( _context, array );
       }
       #endif
     case 1 :
@@ -41246,7 +41315,7 @@ static void REGAL_CALL emu_glBindVertexArray(GLuint array)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        _context->iff->ShadowVao( _context, array );
+        _context->iff->glBindVertexArray( _context, array );
       }
       #endif
     case 6 :
@@ -41403,7 +41472,7 @@ static void REGAL_CALL emu_glDeleteVertexArrays(GLsizei n, const GLuint *arrays)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        _context->iff->DeleteVertexArrays( _context, n, arrays );
+        _context->iff->glDeleteVertexArrays( _context, n, arrays );
         return;
       }
       #endif
@@ -42104,6 +42173,9 @@ static void REGAL_CALL emu_glDeleteBuffersARB(GLsizei n, const GLuint *buffers)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -42130,6 +42202,24 @@ static void REGAL_CALL emu_glDeleteBuffersARB(GLsizei n, const GLuint *buffers)
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 15;
         _context->obj->DeleteBuffers(*_context, n, buffers);
+        return;
+      }
+      #endif
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->iff->glDeleteBuffers( _context, n, buffers );
         return;
       }
       #endif
@@ -68675,7 +68765,7 @@ static void REGAL_CALL emu_glBindVertexArrayOES(GLuint array)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 6;
-        _context->iff->ShadowVao( _context, array );
+        _context->iff->glBindVertexArray( _context, array );
       }
       #endif
     case 1 :

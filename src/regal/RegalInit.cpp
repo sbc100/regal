@@ -3,7 +3,7 @@
   Copyright (c) 2011-2012 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012 Nigel Stewart
+  Copyright (c) 2012-2013 Nigel Stewart
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -186,6 +186,12 @@ Init::~Init()
   delete th2rcMutex;
   sc2rcMutex = NULL;
   th2rcMutex = NULL;
+}
+
+bool
+Init::isInitialized()
+{
+  return _init!=NULL;
 }
 
 void

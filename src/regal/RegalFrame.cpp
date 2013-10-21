@@ -52,37 +52,40 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-void Frame::capture(RegalContext &context)
+void Frame::capture(RegalContext &context,const bool frameTerminator)
 {
   Internal("Regal::Frame::capture context=",boost::print::optional(&context,Logging::pointers));
 
-  ++frame;
-
-  if (Logging::frameTime)
+  if (frameTerminator)
   {
-    Timer::Value REGAL_UNUSED elapsed = frameTimer.restart();
-    UNUSED_PARAMETER(elapsed); // Unused if info logging disabled at compile-time
-    Info("Frame ",frame,' ',elapsed/1000," msec, ",1000000.0/elapsed," FPS.");
+    ++frame;
+
+    if (Logging::frameTime)
+    {
+      Timer::Value REGAL_UNUSED elapsed = frameTimer.restart();
+      UNUSED_PARAMETER(elapsed); // Unused if info logging disabled at compile-time
+      Info("Frame ",frame,' ',elapsed/1000," msec, ",1000000.0/elapsed," FPS.");
 
 #if REGAL_SYS_X11 && REGAL_SYS_GLX
-    if (context.x11Display && context.x11Drawable)
-    {
-      std::string description = windowManagerStateDescription(context.x11Display,context.x11Drawable);
-      if (description.length())
-        Info("X11 window manager state: ",description);
-    }
+      if (context.x11Display && context.x11Drawable)
+      {
+        std::string description = windowManagerStateDescription(context.x11Display,context.x11Drawable);
+        if (description.length())
+          Info("X11 window manager state: ",description);
+      }
 #endif
-  }
-
-  if (Logging::frameStatistics)
-  {
-    #if REGAL_STATISTICS
-    if (context.statistics)
-    {
-      context.statistics->log();
-      context.statistics->reset();
     }
-    #endif
+
+    if (Logging::frameStatistics)
+    {
+      #if REGAL_STATISTICS
+      if (context.statistics)
+      {
+        context.statistics->log();
+        context.statistics->reset();
+      }
+      #endif
+    }
   }
 
   if
@@ -116,6 +119,7 @@ void Frame::capture(RegalContext &context)
         const GLint bufferSize = width*height*4*sizeof(GLbyte);
         GLbyte *buffer = (GLbyte *) calloc(bufferSize,1);
 
+//       _next->call(&_next->glReadBuffer)(GL_FRONT);
        _next->call(&_next->glReadPixels)(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
         // Do once we have the pixels, could we do the rest in another
@@ -189,10 +193,13 @@ void Frame::capture(RegalContext &context)
     }
   }
 
-  // Exit from the application if Config::frameLimit is reached.
+  if (frameTerminator)
+  {
+    // Exit from the application if Config::frameLimit is reached.
 
-  if ( Config::frameLimit>0 && frame>=size_t(Config::frameLimit))
-    exit(0);
+    if ( Config::frameLimit>0 && frame>=size_t(Config::frameLimit))
+      exit(0);
+  }
 }
 
 REGAL_NAMESPACE_END

@@ -839,24 +839,23 @@ ContextInfo::init(const RegalContext &context)
   gles_version_minor = 0;
 
   // Detect GL context version
+  //
+  // Note: We need to detect desktop ES contexts even if REGAL_SYS_ES1 or REGAL_SYS_ES2
+  //       are disabled.
 
-  #if REGAL_SYS_ES1
   es1 = starts_with(version, "OpenGL ES-CM");
   if (es1)
   {
     sscanf(version.c_str(), "OpenGL ES-CM %d.%d", &gles_version_major, &gles_version_minor);
   }
   else
-  #endif
   {
-    #if REGAL_SYS_ES2
     es2 = starts_with(version,"OpenGL ES ");
     if (es2)
     {
       sscanf(version.c_str(), "OpenGL ES %d.%d", &gles_version_major, &gles_version_minor);
     }
     else
-    #endif
     {
       sscanf(version.c_str(), "%d.%d", &gl_version_major, &gl_version_minor);
     }
@@ -907,7 +906,7 @@ ContextInfo::init(const RegalContext &context)
 
   // Detect core context for GL 3.2 onwards
 
-  if (!es1 && !es2 && (gl_version_major>3 || gl_version_major==3 && gl_version_minor>=2))
+  if (!es1 && !es2 && (gl_version_major>3 || (gl_version_major==3 && gl_version_minor>=2)))
   {
     GLint flags = 0;
     RegalAssert(context.dispatcher.driver.glGetIntegerv);

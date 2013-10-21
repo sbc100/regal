@@ -122,6 +122,8 @@ namespace Config {
   bool frameSaveStencil           = false;
   bool frameSaveDepth             = false;
 
+  bool frameCapture               = false;
+
   ::std::string frameSaveColorPrefix  ("color_");
   ::std::string frameSaveStencilPrefix("stencil_");
   ::std::string frameSaveDepthPrefix  ("depth_");
@@ -152,6 +154,9 @@ namespace Config {
     Internal("Config::Init","()");
 
 #ifndef REGAL_NO_GETENV
+    getEnv( "REGAL_SYS_ES2", sysES2, REGAL_SYS_ES2);
+    getEnv( "REGAL_SYS_GL",  sysGL,  REGAL_SYS_GL);
+
     getEnv( "REGAL_FORCE_ES1_PROFILE",  forceES1Profile,  !REGAL_FORCE_ES1_PROFILE  );
     getEnv( "REGAL_FORCE_ES2_PROFILE",  forceES2Profile,  !REGAL_FORCE_ES2_PROFILE  );
     getEnv( "REGAL_FORCE_CORE_PROFILE", forceCoreProfile, !REGAL_FORCE_CORE_PROFILE );
@@ -272,9 +277,11 @@ namespace Config {
 
     //
 
-    getEnv( "REGAL_SAVE_COLOR",   frameSaveColor);
-    getEnv( "REGAL_SAVE_STENCIL", frameSaveStencil);
-    getEnv( "REGAL_SAVE_DEPTH",   frameSaveDepth);
+    getEnv( "REGAL_SAVE_COLOR",    frameSaveColor);
+    getEnv( "REGAL_SAVE_STENCIL",  frameSaveStencil);
+    getEnv( "REGAL_SAVE_DEPTH",    frameSaveDepth);
+
+    getEnv( "REGAL_FRAME_CAPTURE", frameCapture);
 
     // Caching
 
