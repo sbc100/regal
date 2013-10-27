@@ -890,7 +890,7 @@ glXBlitContextFramebufferAMD.add( Input( 'dstX0','GLint' ))
 glXBlitContextFramebufferAMD.add( Input( 'dstY0','GLint' ))
 glXBlitContextFramebufferAMD.add( Input( 'dstX1','GLint' ))
 glXBlitContextFramebufferAMD.add( Input( 'dstY1','GLint' ))
-glXBlitContextFramebufferAMD.add( Input( 'mask','GLbitfield' ))
+glXBlitContextFramebufferAMD.add( Input( 'mask','GLbitfield' ,regalLog = 'GLblitFramebufferToString(mask)' ))
 glXBlitContextFramebufferAMD.add( Input( 'filter','GLenum' ))
 glXBlitContextFramebufferAMD.version = ''
 glXBlitContextFramebufferAMD.category = 'GLX_AMD_gpu_association'

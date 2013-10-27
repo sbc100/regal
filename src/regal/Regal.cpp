@@ -99,7 +99,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBegin","(", toString(mode), ")");
+    App("glBegin","(", GLmodeToString(mode), ")");
     if (!_context) return;
     RegalAssert(_context);
     _context->depthBeginEnd++;
@@ -596,7 +596,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glColorMaterial","(", toString(face), ", ", toString(mode), ")");
+    App("glColorMaterial","(", toString(face), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -618,7 +618,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCullFace","(", toString(mode), ")");
+    App("glCullFace","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1010,7 +1010,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glEvalMesh1","(", toString(mode), ", ", i1, ", ", i2, ")");
+    App("glEvalMesh1","(", GLmodeToString(mode), ", ", i1, ", ", i2, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1021,7 +1021,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glEvalMesh2","(", toString(mode), ", ", i1, ", ", i2, ", ", j1, ", ", j2, ")");
+    App("glEvalMesh2","(", GLmodeToString(mode), ", ", i1, ", ", i2, ", ", j1, ", ", j2, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1136,7 +1136,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFrontFace","(", toString(mode), ")");
+    App("glFrontFace","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1488,7 +1488,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glHint","(", toString(target), ", ", toString(mode), ")");
+    App("glHint","(", toString(target), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1915,7 +1915,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMap2d","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ")");
+    App("glMap2d","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -1926,7 +1926,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMap2f","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ")");
+    App("glMap2f","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -2025,7 +2025,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixMode","(", toString(mode), ")");
+    App("glMatrixMode","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -2058,7 +2058,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glNewList","(", list, ", ", toString(mode), ")");
+    App("glNewList","(", list, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     RegalAssert(_context);
     _context->depthNewList++;
@@ -2302,7 +2302,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPolygonMode","(", toString(face), ", ", toString(mode), ")");
+    App("glPolygonMode","(", toString(face), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -2662,7 +2662,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glReadBuffer","(", toString(mode), ")");
+    App("glReadBuffer","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -2772,7 +2772,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glRenderMode","(", toString(mode), ")");
+    App("glRenderMode","(", GLmodeToString(mode), ")");
     if (!_context) return 0;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -2849,7 +2849,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glShadeModel","(", toString(mode), ")");
+    App("glShadeModel","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -3835,7 +3835,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArrays","(", toString(mode), ", ", first, ", ", count, ")");
+    App("glDrawArrays","(", GLmodeToString(mode), ", ", first, ", ", count, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -3846,7 +3846,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElements","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(reinterpret_cast<const GLubyte *>(indices),Logging::pointers), ")");
+    App("glDrawElements","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(reinterpret_cast<const GLubyte *>(indices),Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4068,7 +4068,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquation","(", toString(mode), ")");
+    App("glBlendEquation","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4090,7 +4090,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawRangeElements","(", toString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ")");
+    App("glDrawRangeElements","(", GLmodeToString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4101,7 +4101,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexImage3D","(", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ")");
+    App("glTexImage3D","(", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(reinterpret_cast<const GLubyte *>(pixels),Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4112,7 +4112,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexSubImage3D","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glTexSubImage3D","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(reinterpret_cast<const GLubyte *>(pixels),Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4202,7 +4202,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedTexSubImage3D","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glCompressedTexSubImage3D","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4699,7 +4699,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawArrays","(", toString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
+    App("glMultiDrawArrays","(", GLmodeToString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -4710,7 +4710,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElements","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ")");
+    App("glMultiDrawElements","(", GLmodeToString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -5363,7 +5363,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationSeparate","(", toString(modeRGB), ", ", toString(modeAlpha), ")");
+    App("glBlendEquationSeparate","(", GLmodeToString(modeRGB), ", ", GLmodeToString(modeAlpha), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -6439,7 +6439,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBeginConditionalRender","(", id, ", ", toString(mode), ")");
+    App("glBeginConditionalRender","(", id, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7046,7 +7046,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysInstanced","(", toString(mode), ", ", start, ", ", count, ", ", primcount, ")");
+    App("glDrawArraysInstanced","(", GLmodeToString(mode), ", ", start, ", ", count, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7057,7 +7057,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstanced","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
+    App("glDrawElementsInstanced","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7151,7 +7151,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationSeparatei","(", buf, ", ", toString(modeRGB), ", ", toString(modeAlpha), ")");
+    App("glBlendEquationSeparatei","(", buf, ", ", GLmodeToString(modeRGB), ", ", GLmodeToString(modeAlpha), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7162,7 +7162,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationi","(", buf, ", ", toString(mode), ")");
+    App("glBlendEquationi","(", buf, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7265,7 +7265,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationIndexedAMD","(", buf, ", ", toString(mode), ")");
+    App("glBlendEquationIndexedAMD","(", buf, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7276,7 +7276,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationSeparateIndexedAMD","(", buf, ", ", toString(modeRGB), ", ", toString(modeAlpha), ")");
+    App("glBlendEquationSeparateIndexedAMD","(", buf, ", ", GLmodeToString(modeRGB), ", ", GLmodeToString(modeAlpha), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7324,7 +7324,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawArraysIndirectAMD","(", toString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
+    App("glMultiDrawArraysIndirectAMD","(", GLmodeToString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7335,7 +7335,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementsIndirectAMD","(", toString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
+    App("glMultiDrawElementsIndirectAMD","(", GLmodeToString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7519,7 +7519,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexStorageSparseAMD","(", toString(target), ", ", toString(internalFormat), ", ", width, ", ", height, ", ", depth, ", ", layers, ", ", flags, ")");
+    App("glTexStorageSparseAMD","(", toString(target), ", ", toString(internalFormat), ", ", width, ", ", height, ", ", depth, ", ", layers, ", ", GLtexStorageSparseAMDToString(flags), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7530,7 +7530,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureStorageSparseAMD","(", texture, ", ", toString(target), ", ", toString(internalFormat), ", ", width, ", ", height, ", ", depth, ", ", layers, ", ", flags, ")");
+    App("glTextureStorageSparseAMD","(", texture, ", ", toString(target), ", ", toString(internalFormat), ", ", width, ", ", height, ", ", depth, ", ", layers, ", ", GLtexStorageSparseAMDToString(flags), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7567,7 +7567,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTessellationModeAMD","(", toString(mode), ")");
+    App("glTessellationModeAMD","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7580,7 +7580,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlitFramebufferANGLE","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", mask, ")");
+    App("glBlitFramebufferANGLE","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", GLblitFramebufferToString(mask), ", ", toString(filter), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7606,7 +7606,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysInstancedANGLE","(", toString(mode), ", ", first, ", ", count, ", ", primcount, ")");
+    App("glDrawArraysInstancedANGLE","(", GLmodeToString(mode), ", ", first, ", ", count, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7617,7 +7617,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstancedANGLE","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
+    App("glDrawElementsInstancedANGLE","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7790,7 +7790,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementArrayAPPLE","(", toString(mode), ", ", first, ", ", count, ")");
+    App("glDrawElementArrayAPPLE","(", GLmodeToString(mode), ", ", first, ", ", count, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7801,7 +7801,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawRangeElementArrayAPPLE","(", toString(mode), ", ", start, ", ", end, ", ", first, ", ", count, ")");
+    App("glDrawRangeElementArrayAPPLE","(", GLmodeToString(mode), ", ", start, ", ", end, ", ", first, ", ", count, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7823,7 +7823,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementArrayAPPLE","(", toString(mode), ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ")");
+    App("glMultiDrawElementArrayAPPLE","(", GLmodeToString(mode), ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -7834,7 +7834,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawRangeElementArrayAPPLE","(", toString(mode), ", ", start, ", ", end, ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ")");
+    App("glMultiDrawRangeElementArrayAPPLE","(", GLmodeToString(mode), ", ", start, ", ", end, ", ", boost::print::optional(first,Logging::pointers), ", ", boost::print::optional(count,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8055,7 +8055,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glClientWaitSyncAPPLE","(", sync, ", ", flags, ", ", timeout, ")");
+    App("glClientWaitSyncAPPLE","(", sync, ", ", GLclientWaitSyncToString(flags), ", ", timeout, ")");
     if (!_context) return 0;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8077,7 +8077,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFenceSyncAPPLE","(", toString(condition), ", ", flags, ")");
+    App("glFenceSyncAPPLE","(", toString(condition), ", ", GLfenceSyncToString(flags), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8121,7 +8121,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glWaitSyncAPPLE","(", sync, ", ", flags, ", ", timeout, ")");
+    App("glWaitSyncAPPLE","(", sync, ", ", GLwaitSyncToString(flags), ", ", timeout, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8294,7 +8294,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMapVertexAttrib2dAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ")");
+    App("glMapVertexAttrib2dAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8305,7 +8305,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMapVertexAttrib2fAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ")");
+    App("glMapVertexAttrib2fAPPLE","(", index, ", ", size, ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8375,7 +8375,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysInstancedBaseInstance","(", toString(mode), ", ", first, ", ", count, ", ", primcount, ", ", baseinstance, ")");
+    App("glDrawArraysInstancedBaseInstance","(", GLmodeToString(mode), ", ", first, ", ", count, ", ", primcount, ", ", baseinstance, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8386,7 +8386,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstancedBaseInstance","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", baseinstance, ")");
+    App("glDrawElementsInstancedBaseInstance","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", baseinstance, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8397,7 +8397,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstancedBaseVertexBaseInstance","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", basevertex, ", ", baseinstance, ")");
+    App("glDrawElementsInstancedBaseVertexBaseInstance","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", basevertex, ", ", baseinstance, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8612,7 +8612,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBufferStorage","(", toString(target), ", ", size, ", ", boost::print::optional(data,Logging::pointers), ", ", flags, ")");
+    App("glBufferStorage","(", toString(target), ", ", size, ", ", boost::print::optional(data,Logging::pointers), ", ", GLbufferStorageToString(flags), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8623,7 +8623,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glNamedBufferStorageEXT","(", buffer, ", ", size, ", ", boost::print::optional(data,Logging::pointers), ", ", flags, ")");
+    App("glNamedBufferStorageEXT","(", buffer, ", ", size, ", ", boost::print::optional(data,Logging::pointers), ", ", GLbufferStorageToString(flags), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8636,7 +8636,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCreateSyncFromCLeventARB","(", context, ", ", event, ", ", flags, ")");
+    App("glCreateSyncFromCLeventARB","(", context, ", ", event, ", ", GLcreateSyncFromCLeventARBToString(flags), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8706,7 +8706,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glClearTexSubImage","(", texture, ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glClearTexSubImage","(", texture, ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8782,7 +8782,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCopyImageSubData","(", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", dstName, ", ", toString(dstTarget), ", ", dstLevel, ")");
+    App("glCopyImageSubData","(", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", dstName, ", ", toString(dstTarget), ", ", dstLevel, ", ", dstX, ", ", dstY, ", ", dstZ, ", ", srcWidth, ", ", srcHeight, ", ", srcDepth, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8863,7 +8863,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationSeparateiARB","(", buf, ", ", toString(modeRGB), ", ", toString(modeAlpha), ")");
+    App("glBlendEquationSeparateiARB","(", buf, ", ", GLmodeToString(modeRGB), ", ", GLmodeToString(modeAlpha), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8874,7 +8874,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationiARB","(", buf, ", ", toString(mode), ")");
+    App("glBlendEquationiARB","(", buf, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8909,7 +8909,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsBaseVertex","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
+    App("glDrawElementsBaseVertex","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8920,7 +8920,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstancedBaseVertex","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", basevertex, ")");
+    App("glDrawElementsInstancedBaseVertex","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ", ", basevertex, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8931,7 +8931,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawRangeElementsBaseVertex","(", toString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
+    App("glDrawRangeElementsBaseVertex","(", GLmodeToString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", basevertex, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8942,7 +8942,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementsBaseVertex","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ", ", boost::print::array(basevertex,primcount), ")");
+    App("glMultiDrawElementsBaseVertex","(", GLmodeToString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ", ", boost::print::array(basevertex,primcount), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8955,7 +8955,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysIndirect","(", toString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ")");
+    App("glDrawArraysIndirect","(", GLmodeToString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8966,7 +8966,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsIndirect","(", toString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ")");
+    App("glDrawElementsIndirect","(", GLmodeToString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8979,7 +8979,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysInstancedARB","(", toString(mode), ", ", start, ", ", count, ", ", primcount, ")");
+    App("glDrawArraysInstancedARB","(", GLmodeToString(mode), ", ", start, ", ", count, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -8990,7 +8990,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstancedARB","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
+    App("glDrawElementsInstancedARB","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9071,7 +9071,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlitFramebuffer","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", mask, ")");
+    App("glBlitFramebuffer","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", GLblitFramebufferToString(mask), ", ", toString(filter), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9906,7 +9906,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawArraysIndirectCountARB","(", toString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ", ", drawcount, ", ", maxdrawcount, ", ", stride, ")");
+    App("glMultiDrawArraysIndirectCountARB","(", GLmodeToString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ", ", drawcount, ", ", maxdrawcount, ", ", stride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -9917,7 +9917,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementsIndirectCountARB","(", toString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ", ", drawcount, ", ", maxdrawcount, ", ", stride, ")");
+    App("glMultiDrawElementsIndirectCountARB","(", GLmodeToString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ", ", drawcount, ", ", maxdrawcount, ", ", stride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10048,7 +10048,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMapBufferRange","(", toString(target), ", ", offset, ", ", length, ", ", GLbufferAccessToString(access), ")");
+    App("glMapBufferRange","(", toString(target), ", ", offset, ", ", length, ", ", GLmapBufferRangeToString(access), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10186,7 +10186,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawArraysIndirect","(", toString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
+    App("glMultiDrawArraysIndirect","(", GLmodeToString(mode), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10197,7 +10197,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementsIndirect","(", toString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
+    App("glMultiDrawElementsIndirect","(", GLmodeToString(mode), ", ", toString(type), ", ", boost::print::optional(indirect,Logging::pointers), ", ", primcount, ", ", stride, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -10781,7 +10781,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glProvokingVertex","(", toString(mode), ")");
+    App("glProvokingVertex","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -11834,7 +11834,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glUseProgramStages","(", pipeline, ", ", stages, ", ", program, ")");
+    App("glUseProgramStages","(", pipeline, ", ", GLuseProgramStagesToString(stages), ", ", program, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -11882,7 +11882,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMemoryBarrier","(", barriers, ")");
+    App("glMemoryBarrier","(", GLmemoryBarrierToString(barriers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12530,7 +12530,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexturePageCommitmentEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ")");
+    App("glTexturePageCommitmentEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(commit), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12543,7 +12543,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glClientWaitSync","(", boost::print::optional(reinterpret_cast<void *>(sync),Logging::pointers), ", ", flags, ", ", timeout, ")");
+    App("glClientWaitSync","(", boost::print::optional(reinterpret_cast<void *>(sync),Logging::pointers), ", ", GLclientWaitSyncToString(flags), ", ", timeout, ")");
     if (!_context) return 0;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12565,7 +12565,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFenceSync","(", toString(condition), ", ", flags, ")");
+    App("glFenceSync","(", toString(condition), ", ", GLfenceSyncToString(flags), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12609,7 +12609,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glWaitSync","(", boost::print::optional(reinterpret_cast<void *>(sync),Logging::pointers), ", ", flags, ", ", timeout, ")");
+    App("glWaitSync","(", boost::print::optional(reinterpret_cast<void *>(sync),Logging::pointers), ", ", GLwaitSyncToString(flags), ", ", timeout, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12738,7 +12738,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedTexSubImage3DARB","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glCompressedTexSubImage3DARB","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -12992,7 +12992,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawTransformFeedback","(", toString(mode), ", ", name, ")");
+    App("glDrawTransformFeedback","(", GLmodeToString(mode), ", ", name, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -13060,7 +13060,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawTransformFeedbackStream","(", toString(mode), ", ", id, ", ", stream, ")");
+    App("glDrawTransformFeedbackStream","(", GLmodeToString(mode), ", ", id, ", ", stream, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -13095,7 +13095,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawTransformFeedbackInstanced","(", toString(mode), ", ", id, ", ", primcount, ")");
+    App("glDrawTransformFeedbackInstanced","(", GLmodeToString(mode), ", ", id, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -13106,7 +13106,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawTransformFeedbackStreamInstanced","(", toString(mode), ", ", id, ", ", stream, ", ", primcount, ")");
+    App("glDrawTransformFeedbackStreamInstanced","(", GLmodeToString(mode), ", ", id, ", ", stream, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -15246,7 +15246,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementArrayATI","(", toString(mode), ", ", count, ")");
+    App("glDrawElementArrayATI","(", GLmodeToString(mode), ", ", count, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -15257,7 +15257,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawRangeElementArrayATI","(", toString(mode), ", ", start, ", ", end, ", ", count, ")");
+    App("glDrawRangeElementArrayATI","(", GLmodeToString(mode), ", ", start, ", ", end, ", ", count, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -15349,7 +15349,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glAlphaFragmentOp3ATI","(", toString(op), ", ", dst, ", ", dstMod, ", ", arg1, ", ", arg1Rep, ", ", arg1Mod, ", ", arg2, ", ", arg2Rep, ", ", arg2Mod, ")");
+    App("glAlphaFragmentOp3ATI","(", toString(op), ", ", dst, ", ", dstMod, ", ", arg1, ", ", arg1Rep, ", ", arg1Mod, ", ", arg2, ", ", arg2Rep, ", ", arg2Mod, ", ", arg3, ", ", arg3Rep, ", ", arg3Mod, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -15393,7 +15393,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glColorFragmentOp2ATI","(", toString(op), ", ", dst, ", ", dstMask, ", ", dstMod, ", ", arg1, ", ", arg1Rep, ", ", arg1Mod, ", ", arg2, ", ", arg2Rep, ")");
+    App("glColorFragmentOp2ATI","(", toString(op), ", ", dst, ", ", dstMask, ", ", dstMod, ", ", arg1, ", ", arg1Rep, ", ", arg1Mod, ", ", arg2, ", ", arg2Rep, ", ", arg2Mod, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -15404,7 +15404,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glColorFragmentOp3ATI","(", toString(op), ", ", dst, ", ", dstMask, ", ", dstMod, ", ", arg1, ", ", arg1Rep, ", ", arg1Mod, ", ", arg2, ", ", arg2Rep, ")");
+    App("glColorFragmentOp3ATI","(", toString(op), ", ", dst, ", ", dstMask, ", ", dstMod, ", ", arg1, ", ", arg1Rep, ", ", arg1Mod, ", ", arg2, ", ", arg2Rep, ", ", arg2Mod, ", ", arg3, ", ", arg3Rep, ", ", arg3Mod, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16269,7 +16269,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationSeparateEXT","(", toString(modeRGB), ", ", toString(modeAlpha), ")");
+    App("glBlendEquationSeparateEXT","(", GLmodeToString(modeRGB), ", ", GLmodeToString(modeAlpha), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16295,7 +16295,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationEXT","(", toString(mode), ")");
+    App("glBlendEquationEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16945,7 +16945,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glClientAttribDefaultEXT","(", mask, ")");
+    App("glClientAttribDefaultEXT","(", GLpushClientAttribToString(mask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -16978,7 +16978,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedMultiTexImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", toString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", imageSize, ")");
+    App("glCompressedMultiTexImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", toString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", imageSize, ", ", boost::print::optional(bits,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17000,7 +17000,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedMultiTexSubImage2DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", imageSize, ")");
+    App("glCompressedMultiTexSubImage2DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17011,7 +17011,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedMultiTexSubImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ")");
+    App("glCompressedMultiTexSubImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17044,7 +17044,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedTextureImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", toString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", imageSize, ")");
+    App("glCompressedTextureImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", toString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", imageSize, ", ", boost::print::optional(bits,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17066,7 +17066,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedTextureSubImage2DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", imageSize, ")");
+    App("glCompressedTextureSubImage2DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(bits,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17077,7 +17077,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedTextureSubImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ")");
+    App("glCompressedTextureSubImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(bits,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17132,7 +17132,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCopyMultiTexSubImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", x, ", ", y, ", ", width, ")");
+    App("glCopyMultiTexSubImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", x, ", ", y, ", ", width, ", ", height, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17187,7 +17187,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCopyTextureSubImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", x, ", ", y, ", ", width, ")");
+    App("glCopyTextureSubImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", x, ", ", y, ", ", width, ", ", height, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17297,7 +17297,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFramebufferDrawBufferEXT","(", framebuffer, ", ", toString(mode), ")");
+    App("glFramebufferDrawBufferEXT","(", framebuffer, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17319,7 +17319,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFramebufferReadBufferEXT","(", framebuffer, ", ", toString(mode), ")");
+    App("glFramebufferReadBufferEXT","(", framebuffer, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17836,7 +17836,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMapNamedBufferRangeEXT","(", buffer, ", ", offset, ", ", length, ", ", access, ")");
+    App("glMapNamedBufferRangeEXT","(", buffer, ", ", offset, ", ", length, ", ", GLmapBufferRangeToString(access), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17847,7 +17847,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixFrustumEXT","(", toString(mode), ", ", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
+    App("glMatrixFrustumEXT","(", GLmodeToString(mode), ", ", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17858,7 +17858,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixLoadIdentityEXT","(", toString(mode), ")");
+    App("glMatrixLoadIdentityEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17869,7 +17869,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixLoadTransposedEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixLoadTransposedEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17880,7 +17880,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixLoadTransposefEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixLoadTransposefEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17891,7 +17891,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixLoaddEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixLoaddEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17902,7 +17902,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixLoadfEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixLoadfEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17913,7 +17913,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixMultTransposedEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixMultTransposedEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17924,7 +17924,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixMultTransposefEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixMultTransposefEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17935,7 +17935,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixMultdEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixMultdEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17946,7 +17946,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixMultfEXT","(", toString(mode), ", ", boost::print::array(m,16), ")");
+    App("glMatrixMultfEXT","(", GLmodeToString(mode), ", ", boost::print::array(m,16), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17957,7 +17957,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixOrthoEXT","(", toString(mode), ", ", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
+    App("glMatrixOrthoEXT","(", GLmodeToString(mode), ", ", left, ", ", right, ", ", bottom, ", ", top, ", ", zNear, ", ", zFar, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17970,7 +17970,7 @@ extern "C" {
     RegalAssert(Init::isInitialized());
     if (_context)
       _context->depthPushMatrix--;
-    App("glMatrixPopEXT","(", toString(mode), ")");
+    App("glMatrixPopEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -17981,7 +17981,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixPushEXT","(", toString(mode), ")");
+    App("glMatrixPushEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     RegalAssert(_context);
     _context->depthPushMatrix++;
@@ -17994,7 +17994,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixRotatedEXT","(", toString(mode), ", ", angle, ", ", x, ", ", y, ", ", z, ")");
+    App("glMatrixRotatedEXT","(", GLmodeToString(mode), ", ", angle, ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18005,7 +18005,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixRotatefEXT","(", toString(mode), ", ", angle, ", ", x, ", ", y, ", ", z, ")");
+    App("glMatrixRotatefEXT","(", GLmodeToString(mode), ", ", angle, ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18016,7 +18016,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixScaledEXT","(", toString(mode), ", ", x, ", ", y, ", ", z, ")");
+    App("glMatrixScaledEXT","(", GLmodeToString(mode), ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18027,7 +18027,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixScalefEXT","(", toString(mode), ", ", x, ", ", y, ", ", z, ")");
+    App("glMatrixScalefEXT","(", GLmodeToString(mode), ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18038,7 +18038,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixTranslatedEXT","(", toString(mode), ", ", x, ", ", y, ", ", z, ")");
+    App("glMatrixTranslatedEXT","(", GLmodeToString(mode), ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18049,7 +18049,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMatrixTranslatefEXT","(", toString(mode), ", ", x, ", ", y, ", ", z, ")");
+    App("glMatrixTranslatefEXT","(", GLmodeToString(mode), ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18203,7 +18203,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiTexImage2DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", internalformat, ", ", width, ", ", height, ", ", border, ", ", toString(format), ", ", toString(type), ")");
+    App("glMultiTexImage2DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", internalformat, ", ", width, ", ", height, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18214,7 +18214,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiTexImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", internalformat, ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ")");
+    App("glMultiTexImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", internalformat, ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18313,7 +18313,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiTexSubImage2DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", toString(type), ")");
+    App("glMultiTexSubImage2DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -18324,7 +18324,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiTexSubImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ")");
+    App("glMultiTexSubImage3DEXT","(", toString(texunit), ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19160,7 +19160,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPushClientAttribDefaultEXT","(", mask, ")");
+    App("glPushClientAttribDefaultEXT","(", GLpushClientAttribToString(mask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19193,7 +19193,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureImage2DEXT","(", texture, ", ", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", border, ", ", toString(format), ", ", toString(type), ")");
+    App("glTextureImage2DEXT","(", texture, ", ", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19204,7 +19204,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ")");
+    App("glTextureImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19303,7 +19303,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureSubImage2DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", toString(type), ")");
+    App("glTextureSubImage2DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", width, ", ", height, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19314,7 +19314,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureSubImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ")");
+    App("glTextureSubImage3DEXT","(", texture, ", ", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19564,7 +19564,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysInstancedEXT","(", toString(mode), ", ", start, ", ", count, ", ", primcount, ")");
+    App("glDrawArraysInstancedEXT","(", GLmodeToString(mode), ", ", start, ", ", count, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19575,7 +19575,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawElementsInstancedEXT","(", toString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
+    App("glDrawElementsInstancedEXT","(", GLmodeToString(mode), ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19588,7 +19588,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawRangeElementsEXT","(", toString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ")");
+    App("glDrawRangeElementsEXT","(", GLmodeToString(mode), ", ", start, ", ", end, ", ", count, ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19658,7 +19658,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFragmentColorMaterialEXT","(", toString(face), ", ", toString(mode), ")");
+    App("glFragmentColorMaterialEXT","(", toString(face), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -19858,7 +19858,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlitFramebufferEXT","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", mask, ")");
+    App("glBlitFramebufferEXT","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", GLblitFramebufferToString(mask), ", ", toString(filter), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20633,7 +20633,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glIndexMaterialEXT","(", toString(face), ", ", toString(mode), ")");
+    App("glIndexMaterialEXT","(", toString(face), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20646,7 +20646,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glApplyTextureEXT","(", toString(mode), ")");
+    App("glApplyTextureEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20668,7 +20668,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureMaterialEXT","(", toString(face), ", ", toString(mode), ")");
+    App("glTextureMaterialEXT","(", toString(face), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20692,7 +20692,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMapBufferRangeEXT","(", toString(target), ", ", offset, ", ", length, ", ", GLbufferAccessToString(access), ")");
+    App("glMapBufferRangeEXT","(", toString(target), ", ", offset, ", ", length, ", ", GLmapBufferRangeToString(access), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20705,7 +20705,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawArraysEXT","(", toString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
+    App("glMultiDrawArraysEXT","(", GLmodeToString(mode), ", ", boost::print::array(first,primcount), ", ", boost::print::array(count,primcount), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20716,7 +20716,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementsEXT","(", toString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
+    App("glMultiDrawElementsEXT","(", GLmodeToString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21031,7 +21031,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glProvokingVertexEXT","(", toString(mode), ")");
+    App("glProvokingVertexEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21338,7 +21338,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMemoryBarrierEXT","(", barriers, ")");
+    App("glMemoryBarrierEXT","(", GLmemoryBarrierToString(barriers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21399,7 +21399,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexSubImage3DEXT","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glTexSubImage3DEXT","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(reinterpret_cast<const GLubyte *>(pixels),Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21412,7 +21412,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexImage3DEXT","(", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ")");
+    App("glTexImage3DEXT","(", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(reinterpret_cast<const GLubyte *>(pixels),Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21587,7 +21587,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTextureNormalEXT","(", toString(mode), ")");
+    App("glTextureNormalEXT","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21760,7 +21760,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawArraysEXT","(", toString(mode), ", ", first, ", ", count, ")");
+    App("glDrawArraysEXT","(", toString(mode), ", ", GLmodeToString(mode), ", ", count, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22461,7 +22461,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glImportSyncEXT","(", toString(external_sync_type), ", ", external_sync, ", ", flags, ")");
+    App("glImportSyncEXT","(", toString(external_sync_type), ", ", external_sync, ", ", GLimportSyncEXTToString(flags), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22734,7 +22734,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMapTexture2DINTEL","(", texture, ", ", level, ", ", access, ", ", boost::print::optional(stride,Logging::pointers), ", ", boost::print::optional(layout,Logging::pointers), ")");
+    App("glMapTexture2DINTEL","(", texture, ", ", level, ", ", GLmapTexture2DINTELToString(access), ", ", boost::print::optional(stride,Logging::pointers), ", ", boost::print::optional(layout,Logging::pointers), ")");
     if (!_context) return NULL;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23504,7 +23504,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBeginConditionalRenderNV","(", id, ", ", toString(mode), ")");
+    App("glBeginConditionalRenderNV","(", id, ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23541,7 +23541,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCopyImageSubDataNV","(", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", dstName, ", ", toString(dstTarget), ", ", dstLevel, ")");
+    App("glCopyImageSubDataNV","(", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", dstName, ", ", toString(dstTarget), ", ", dstLevel, ", ", dstX, ", ", dstY, ", ", dstZ, ", ", width, ", ", height, ", ", depth, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23626,7 +23626,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawTextureNV","(", texture, ", ", sampler, ", ", x0, ", ", y0, ", ", x1, ", ", y1, ", ", z, ", ", s0, ", ", t0, ")");
+    App("glDrawTextureNV","(", texture, ", ", sampler, ", ", x0, ", ", y0, ", ", x1, ", ", y1, ", ", z, ", ", s0, ", ", t0, ", ", s1, ", ", t1, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23639,7 +23639,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glEvalMapsNV","(", toString(target), ", ", toString(mode), ")");
+    App("glEvalMapsNV","(", toString(target), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -23922,7 +23922,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlitFramebufferNV","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", mask, ")");
+    App("glBlitFramebufferNV","(", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", GLblitFramebufferToString(mask), ", ", toString(filter), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25337,7 +25337,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glGetPathMetricRangeNV","(", metricQueryMask, ", ", fistPathName, ", ", numPaths, ", ", stride, ", ", boost::print::optional(metrics,Logging::pointers), ")");
+    App("glGetPathMetricRangeNV","(", GLgetPathMetricsNVToString(metricQueryMask), ", ", fistPathName, ", ", numPaths, ", ", stride, ", ", boost::print::optional(metrics,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25348,7 +25348,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glGetPathMetricsNV","(", metricQueryMask, ", ", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", stride, ", ", boost::print::optional(metrics,Logging::pointers), ")");
+    App("glGetPathMetricsNV","(", GLgetPathMetricsNVToString(metricQueryMask), ", ", numPaths, ", ", toString(pathNameType), ", ", boost::print::optional(paths,Logging::pointers), ", ", pathBase, ", ", stride, ", ", boost::print::optional(metrics,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25524,7 +25524,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPathGlyphRangeNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::quote(reinterpret_cast<const char *>(fontName),'"'), ", ", fontStyle, ", ", firstGlyph, ", ", numGlyphs, ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ", ", emScale, ")");
+    App("glPathGlyphRangeNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::quote(reinterpret_cast<const char *>(fontName),'"'), ", ", GLpathGlyphsNVToString(fontStyle), ", ", firstGlyph, ", ", numGlyphs, ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ", ", emScale, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25535,7 +25535,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPathGlyphsNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::quote(reinterpret_cast<const char *>(fontName),'"'), ", ", fontStyle, ", ", numGlyphs, ", ", toString(type), ", ", boost::print::optional(charcodes,Logging::pointers), ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ")");
+    App("glPathGlyphsNV","(", firstPathName, ", ", toString(fontTarget), ", ", boost::print::quote(reinterpret_cast<const char *>(fontName),'"'), ", ", GLpathGlyphsNVToString(fontStyle), ", ", numGlyphs, ", ", toString(type), ", ", boost::print::optional(charcodes,Logging::pointers), ", ", toString(handleMissingGlyphs), ", ", pathParameterTemplate, ", ", emScale, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25827,7 +25827,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPresentFrameDualFillNV","(", video_slot, ", ", minPresentTime, ", ", beginPresentTimeId, ", ", presentDurationId, ", ", toString(type), ", ", toString(target0), ", ", fill0, ", ", toString(target1), ", ", fill1, ")");
+    App("glPresentFrameDualFillNV","(", video_slot, ", ", minPresentTime, ", ", beginPresentTimeId, ", ", presentDurationId, ", ", toString(type), ", ", toString(target0), ", ", fill0, ", ", toString(target1), ", ", fill1, ", ", toString(target2), ", ", fill2, ", ", toString(target3), ", ", fill3, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25838,7 +25838,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPresentFrameKeyedNV","(", video_slot, ", ", minPresentTime, ", ", beginPresentTimeId, ", ", presentDurationId, ", ", toString(type), ", ", toString(target0), ", ", fill0, ", ", key0, ", ", toString(target1), ")");
+    App("glPresentFrameKeyedNV","(", video_slot, ", ", minPresentTime, ", ", beginPresentTimeId, ", ", presentDurationId, ", ", toString(type), ", ", toString(target0), ", ", fill0, ", ", key0, ", ", toString(target1), ", ", fill1, ", ", key1, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25899,7 +25899,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCombinerOutputNV","(", toString(stage), ", ", toString(portion), ", ", toString(abOutput), ", ", toString(cdOutput), ", ", toString(sumOutput), ", ", toString(scale), ", ", toString(bias), ", ", toString(abDotProduct), ", ", toString(cdDotProduct), ")");
+    App("glCombinerOutputNV","(", toString(stage), ", ", toString(portion), ", ", toString(abOutput), ", ", toString(cdOutput), ", ", toString(sumOutput), ", ", toString(scale), ", ", toString(bias), ", ", toString(abDotProduct), ", ", toString(cdDotProduct), ", ", toString(muxSum), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -26439,7 +26439,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawTransformFeedbackNV","(", toString(mode), ", ", name, ")");
+    App("glDrawTransformFeedbackNV","(", GLmodeToString(mode), ", ", name, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27817,7 +27817,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationSeparateOES","(", toString(modeRGB), ", ", toString(modeAlpha), ")");
+    App("glBlendEquationSeparateOES","(", GLmodeToString(modeRGB), ", ", GLmodeToString(modeAlpha), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -27843,7 +27843,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glBlendEquationOES","(", toString(mode), ")");
+    App("glBlendEquationOES","(", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -28196,7 +28196,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glCompressedTexSubImage3DOES","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glCompressedTexSubImage3DOES","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", imageSize, ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -28229,7 +28229,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexImage3DOES","(", toString(target), ", ", level, ", ", toString(internalFormat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ")");
+    App("glTexImage3DOES","(", toString(target), ", ", level, ", ", toString(internalFormat), ", ", width, ", ", height, ", ", depth, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -28240,7 +28240,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexSubImage3DOES","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glTexSubImage3DOES","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -28527,7 +28527,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glExtGetTexSubImageQCOM","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ")");
+    App("glExtGetTexSubImageQCOM","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", width, ", ", height, ", ", depth, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(texels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -28608,7 +28608,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glEndTilingQCOM","(", preserveMask, ")");
+    App("glEndTilingQCOM","(", GLstartTilingQCOMToString(preserveMask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -28619,7 +28619,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glStartTilingQCOM","(", x, ", ", y, ", ", width, ", ", height, ", ", preserveMask, ")");
+    App("glStartTilingQCOM","(", x, ", ", y, ", ", width, ", ", height, ", ", GLstartTilingQCOMToString(preserveMask), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -29700,7 +29700,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexImage4DSGIS","(", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", size4d, ", ", border, ", ", toString(format), ")");
+    App("glTexImage4DSGIS","(", toString(target), ", ", level, ", ", internalFormatToString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", size4d, ", ", border, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -29711,7 +29711,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexSubImage4DSGIS","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", woffset, ", ", width, ", ", height, ", ", depth, ")");
+    App("glTexSubImage4DSGIS","(", toString(target), ", ", level, ", ", xoffset, ", ", yoffset, ", ", zoffset, ", ", woffset, ", ", width, ", ", height, ", ", depth, ", ", size4d, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(pixels,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -29855,7 +29855,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glFragmentColorMaterialSGIX","(", toString(face), ", ", toString(mode), ")");
+    App("glFragmentColorMaterialSGIX","(", toString(face), ", ", GLmodeToString(mode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30241,7 +30241,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDeformationMap3dSGIX","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ")");
+    App("glDeformationMap3dSGIX","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ", ", w1, ", ", w2, ", ", wstride, ", ", worder, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30252,7 +30252,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDeformationMap3fSGIX","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ")");
+    App("glDeformationMap3fSGIX","(", toString(target), ", ", u1, ", ", u2, ", ", ustride, ", ", uorder, ", ", v1, ", ", v2, ", ", vstride, ", ", vorder, ", ", w1, ", ", w2, ", ", wstride, ", ", worder, ", ", boost::print::optional(points,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30530,7 +30530,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glDrawMeshArraysSUN","(", toString(mode), ", ", first, ", ", count, ", ", width, ")");
+    App("glDrawMeshArraysSUN","(", GLmodeToString(mode), ", ", first, ", ", count, ", ", width, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30657,7 +30657,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glColor4fNormal3fVertex3fSUN","(", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ", ", y, ")");
+    App("glColor4fNormal3fVertex3fSUN","(", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30767,7 +30767,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glReplacementCodeuiColor4fNormal3fVertex3fSUN","(", rc, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ")");
+    App("glReplacementCodeuiColor4fNormal3fVertex3fSUN","(", rc, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30833,7 +30833,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN","(", rc, ", ", s, ", ", t, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ")");
+    App("glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN","(", rc, ", ", s, ", ", t, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -30943,7 +30943,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexCoord2fColor4fNormal3fVertex3fSUN","(", s, ", ", t, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ")");
+    App("glTexCoord2fColor4fNormal3fVertex3fSUN","(", s, ", ", t, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ", ", y, ", ", z, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -31031,7 +31031,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexCoord4fColor4fNormal3fVertex4fSUN","(", s, ", ", t, ", ", p, ", ", q, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ")");
+    App("glTexCoord4fColor4fNormal3fVertex4fSUN","(", s, ", ", t, ", ", p, ", ", q, ", ", r, ", ", g, ", ", b, ", ", a, ", ", nx, ", ", ny, ", ", nz, ", ", x, ", ", y, ", ", z, ", ", w, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -31103,7 +31103,7 @@ extern "C" {
 
   REGAL_DECL VOID REGAL_CALL wglBlitContextFramebufferAMD(HGLRC dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
   {
-    App("wglBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ")");
+    App("wglBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", GLblitFramebufferToString(mask), ", ", toString(filter), ")");
     RegalAssert(Init::isInitialized());
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
@@ -32115,7 +32115,7 @@ extern "C" {
 
   REGAL_DECL BOOL REGAL_CALL wglCopyImageSubDataNV(HGLRC hSrcRC, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, HGLRC hDstRC, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
   {
-    App("wglCopyImageSubDataNV","(", boost::print::optional(hSrcRC,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(hDstRC,Logging::pointers), ", ", dstName, ")");
+    App("wglCopyImageSubDataNV","(", boost::print::optional(hSrcRC,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(hDstRC,Logging::pointers), ", ", dstName, ", ", toString(dstTarget), ", ", dstLevel, ", ", dstX, ", ", dstY, ", ", dstZ, ", ", width, ")");
     RegalAssert(Init::isInitialized());
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
@@ -33203,7 +33203,7 @@ extern "C" {
 
   REGAL_DECL void REGAL_CALL glXBlitContextFramebufferAMD(GLXContext dstCtx, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
   {
-    App("glXBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ")");
+    App("glXBlitContextFramebufferAMD","(", boost::print::optional(dstCtx,Logging::pointers), ", ", srcX0, ", ", srcY0, ", ", srcX1, ", ", srcY1, ", ", dstX0, ", ", dstY0, ", ", dstX1, ", ", dstY1, ", ", GLblitFramebufferToString(mask), ", ", toString(filter), ")");
     RegalAssert(Init::isInitialized());
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
@@ -33528,7 +33528,7 @@ extern "C" {
 
   REGAL_DECL void REGAL_CALL glXCopyImageSubDataNV(Display *dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth)
   {
-    App("glXCopyImageSubDataNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(srcCtx,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(dstCtx,Logging::pointers), ")");
+    App("glXCopyImageSubDataNV","(", boost::print::optional(dpy,Logging::pointers), ", ", boost::print::optional(srcCtx,Logging::pointers), ", ", srcName, ", ", toString(srcTarget), ", ", srcLevel, ", ", srcX, ", ", srcY, ", ", srcZ, ", ", boost::print::optional(dstCtx,Logging::pointers), ", ", dstName, ", ", toString(dstTarget), ", ", dstLevel, ", ", dstX, ", ", dstY, ", ", dstZ, ")");
     RegalAssert(Init::isInitialized());
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
@@ -34176,7 +34176,7 @@ extern "C" {
 
   REGAL_DECL CGLError REGAL_CALL CGLCopyContext(CGLContextObj src, CGLContextObj dst, GLbitfield mask)
   {
-    App("CGLCopyContext","(", src, ", ", dst, ", ", mask, ")");
+    App("CGLCopyContext","(", src, ", ", dst, ", ", GLpushAttribToString(mask), ")");
     RegalAssert(Init::isInitialized());
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);

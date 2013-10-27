@@ -17230,8 +17230,11 @@ static void REGAL_CALL emu_glTexParameterf(GLenum target, GLenum pname, GLfloat 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
+
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
+        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(param)))
+          return;
         GLfloat newparam;
         if (_context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(param), newparam))
           _next->call(&_next->glTexParameterf)(target, pname, newparam);
@@ -17332,8 +17335,11 @@ static void REGAL_CALL emu_glTexParameterfv(GLenum target, GLenum pname, const G
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
+
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
+        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(params[0])))
+          return;
         GLfloat newparam;
         if (params && _context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(params[0]), newparam))
           _next->call(&_next->glTexParameterf)(target, pname, newparam);
@@ -17434,8 +17440,11 @@ static void REGAL_CALL emu_glTexParameteri(GLenum target, GLenum pname, GLint pa
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
+
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
+        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(param)))
+          return;
         GLfloat newparam;
         if (_context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(param), newparam))
           _next->call(&_next->glTexParameterf)(target, pname, newparam);
@@ -17536,8 +17545,11 @@ static void REGAL_CALL emu_glTexParameteriv(GLenum target, GLenum pname, const G
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
+
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
+        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(params[0])))
+          return;
         GLfloat newparam;
         if (params && _context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(params[0]), newparam))
           _next->call(&_next->glTexParameterf)(target, pname, newparam);

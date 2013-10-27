@@ -188,6 +188,7 @@ const char *libraryLocation(const Library &library)
         "/usr/lib/amd64/libGL.so.1",                  // Solaris
         "/usr/lib64/nvidia/libGL.so.1",               // RedHat
         "/usr/lib64/libGL.so.1",                      // RedHat
+        "/lib64/libGL.so.1",                          // Fedora 18
         "/usr/lib/nvidia-current/libGL.so.1",         // Ubuntu NVIDIA
         "/usr/lib/libGL.so.1",                        // Ubuntu
         "/usr/lib/x86_64-linux-gnu/mesa/libGL.so.1",  // Ubuntu via VMWare on Windows
@@ -705,6 +706,14 @@ FILE *fileOpen(const char *filename, const char *mode)
     if (!f)
     {
       string message = print_string("Failed to open ",filename," due to errno ",errno," : ",strerror(errno));
+
+      // Helpful advice for Android .apk access to /sdcard
+
+#if REGAL_SYS_ANDROID
+      if (errno==EACCES && strstr(filename, "/sdcard/"))
+        message += " - Missing WRITE_EXTERNAL_STORAGE permission in AndroidManifest.xml?";
+#endif
+
       Warning(message);
     }
     return f;

@@ -883,6 +883,14 @@ namespace r3 {
       m[0][i] = v.x;  m[1][i] = v.y;  m[2][i] = v.z;
     }
 
+    T * Ptr() {
+      return &m[0][0];
+    }
+
+    const T * Ptr() const {
+      return &m[0][0];
+    }
+
     T & operator() ( int row, int col ) {
       return m[row][col];
     }

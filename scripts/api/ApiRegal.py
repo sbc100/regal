@@ -197,9 +197,9 @@ def logFunction(function, trace = 'ITrace', input = True, output = False, ret = 
     tmp.name = 'ret'
     r = logParameter(function,tmp)
 
-  args = args[:9]
+  args = args[:15]
   if ret==True:
-    args = args[:8]
+    args = args[:14]
 
   if len(args):
     c += '%s("%s","(", ' % (trace, function.name)
