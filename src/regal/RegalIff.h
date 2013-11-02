@@ -1894,6 +1894,141 @@ struct Iff
     return GetIndexedTexGenv( ctx, texunit - GL_TEXTURE0, coord, pname, params );
   }
 
+  bool glGetBooleanv( RegalContext * ctx, GLenum pname, GLboolean * param )
+  {
+    State::Store & r = ffstate.raw;
+    State::StoreUniform & u = ffstate.uniform;
+
+    // FIXME: implement all FF gets!
+
+    GLint p;
+    if (VaGet( ctx, pname, &p ))
+    {
+      *param = ((p == 0) ? GL_FALSE : GL_TRUE);
+      return true;
+    }
+
+    if (IsEnabled( ctx, pname, *param ))
+      return true;
+
+    switch( pname )
+    {
+      case GL_MAX_VERTEX_ATTRIBS:
+        *param = ((ctx->emuInfo->gl_max_vertex_attribs != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_MAX_TEXTURE_COORDS:
+        *param = ((ctx->emuInfo->gl_max_texture_coords != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_MAX_TEXTURE_UNITS:
+        *param = ((ctx->emuInfo->gl_max_texture_units != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_CURRENT_PROGRAM:
+        *param = ((program != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_MAX_MODELVIEW_STACK_DEPTH:
+      case GL_MAX_PROJECTION_STACK_DEPTH:
+      case GL_MAX_TEXTURE_STACK_DEPTH:
+        *param = ((REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_SMOOTH_POINT_SIZE_RANGE:
+      case GL_SMOOTH_LINE_WIDTH_RANGE:
+        // FIXME: Pass through actual GL's limit.
+        *param = GL_TRUE;
+        break;
+      case GL_MODELVIEW_STACK_DEPTH:
+        *param = ((modelview.size() != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_PROJECTION_STACK_DEPTH:
+        *param = ((projection.size() != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_TEXTURE_STACK_DEPTH:
+        RegalAssert(activeTextureIndex<REGAL_EMU_MAX_TEXTURE_UNITS);
+        *param = ((texture[activeTextureIndex].size() != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_MODELVIEW_MATRIX:
+        {
+          const GLfloat * p = modelview.Top().Ptr();
+          *param = GL_FALSE;
+          for (size_t i = 0; i < 16; i++)
+          {
+            if (p[i] != 0)
+            {
+              *param = GL_TRUE;
+              break;
+            }
+          }
+        }
+        break;
+      case GL_PROJECTION_MATRIX:
+        {
+          const GLfloat * p = projection.Top().Ptr();
+          *param = GL_FALSE;
+          for (size_t i = 0; i < 16; i++)
+          {
+            if (p[i] != 0)
+            {
+              *param = GL_TRUE;
+              break;
+            }
+          }
+        }
+        break;
+      case GL_TEXTURE_MATRIX:
+        {
+          RegalAssert(activeTextureIndex<REGAL_EMU_MAX_TEXTURE_UNITS);
+          const GLfloat * p = texture[ activeTextureIndex ].Top().Ptr();
+          *param = GL_FALSE;
+          for (size_t i = 0; i < 16; i++)
+          {
+            if (p[i] != 0)
+            {
+              *param = GL_TRUE;
+              break;
+            }
+          }
+        }
+        break;
+      case GL_MATRIX_MODE:
+        *param = ((shadowMatrixMode != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_MAX_LIGHTS:
+        *param = ((REGAL_FIXED_FUNCTION_MAX_LIGHTS != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_MAX_CLIP_PLANES:
+        *param = ((REGAL_FIXED_FUNCTION_MAX_CLIP_PLANES != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_FOG_MODE:
+        *param = ((r.fog.mode != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_FOG_DENSITY:
+        *param = ((u.fog.params[0].x != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_FOG_START:
+        *param = ((u.fog.params[0].y != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_FOG_END:
+        *param = ((u.fog.params[0].z != 0) ? GL_TRUE : GL_FALSE);
+        break;
+      case GL_FOG_COLOR:
+        {
+          const GLfloat * p = &u.fog.params[1].x;
+          *param = GL_FALSE;
+          for (size_t i = 0; i < 4; i++)
+          {
+            if (p[i] != 0)
+            {
+              *param = GL_TRUE;
+              break;
+            }
+          }
+        }
+        break;
+      default:
+        return false;
+    }
+    return true;
+  }
+
   template <typename T> bool Get( RegalContext * ctx, GLenum pname, T * params )
   {
     State::Store & r = ffstate.raw;
@@ -1903,6 +2038,13 @@ struct Iff
 
     if (VaGet( ctx, pname, params ))
       return true;
+
+    GLboolean enabled = GL_FALSE;
+    if (IsEnabled( ctx, pname, enabled ))
+    {
+      params[0] = static_cast<T>(enabled);
+      return true;
+    }
 
     switch( pname )
     {

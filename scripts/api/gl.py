@@ -20282,7 +20282,7 @@ glBufferStorage.add( Input( 'target','GLenum' ))
 glBufferStorage.add( Input( 'size','GLsizeiptr' ))
 glBufferStorage.add( Input( 'data','const GLvoid *' ))
 glBufferStorage.add( Input( 'flags','GLbitfield' ,regalLog = 'GLbufferStorageToString(flags)' ))
-glBufferStorage.version = ''
+glBufferStorage.version = '4.4'
 glBufferStorage.category = 'GL_ARB_buffer_storage'
 glBufferStorage.trace = True
 glBufferStorage.play = True
@@ -20380,7 +20380,7 @@ glClearTexImage.add( Input( 'level','GLint' ))
 glClearTexImage.add( Input( 'format','GLenum' ))
 glClearTexImage.add( Input( 'type','GLenum' ))
 glClearTexImage.add( Input( 'data','const GLvoid *' ))
-glClearTexImage.version = ''
+glClearTexImage.version = '4.4'
 glClearTexImage.category = 'GL_ARB_clear_texture'
 glClearTexImage.trace = True
 glClearTexImage.play = True
@@ -20399,7 +20399,7 @@ glClearTexSubImage.add( Input( 'depth','GLsizei' ))
 glClearTexSubImage.add( Input( 'format','GLenum' ))
 glClearTexSubImage.add( Input( 'type','GLenum' ))
 glClearTexSubImage.add( Input( 'data','const GLvoid *' ))
-glClearTexSubImage.version = ''
+glClearTexSubImage.version = '4.4'
 glClearTexSubImage.category = 'GL_ARB_clear_texture'
 glClearTexSubImage.trace = True
 glClearTexSubImage.play = True
@@ -21926,7 +21926,7 @@ glBindBuffersBase.add( Input( 'target','GLenum' ))
 glBindBuffersBase.add( Input( 'first','GLuint' ))
 glBindBuffersBase.add( Input( 'count','GLsizei' ))
 glBindBuffersBase.add( Input( 'buffers','const GLuint *' ))
-glBindBuffersBase.version = ''
+glBindBuffersBase.version = '4.4'
 glBindBuffersBase.category = 'GL_ARB_multi_bind'
 glBindBuffersBase.trace = True
 glBindBuffersBase.play = True
@@ -21940,7 +21940,7 @@ glBindBuffersRange.add( Input( 'count','GLsizei' ))
 glBindBuffersRange.add( Input( 'buffers','const GLuint *' ))
 glBindBuffersRange.add( Input( 'offsets','const GLintptr *' ))
 glBindBuffersRange.add( Input( 'sizes','const GLsizeiptr *' ))
-glBindBuffersRange.version = ''
+glBindBuffersRange.version = '4.4'
 glBindBuffersRange.category = 'GL_ARB_multi_bind'
 glBindBuffersRange.trace = True
 glBindBuffersRange.play = True
@@ -21951,7 +21951,7 @@ glBindImageTextures.ret = Return('void')
 glBindImageTextures.add( Input( 'first','GLuint' ))
 glBindImageTextures.add( Input( 'count','GLsizei' ))
 glBindImageTextures.add( Input( 'textures','const GLuint *' ))
-glBindImageTextures.version = ''
+glBindImageTextures.version = '4.4'
 glBindImageTextures.category = 'GL_ARB_multi_bind'
 glBindImageTextures.trace = True
 glBindImageTextures.play = True
@@ -21962,7 +21962,7 @@ glBindSamplers.ret = Return('void')
 glBindSamplers.add( Input( 'first','GLuint' ))
 glBindSamplers.add( Input( 'count','GLsizei' ))
 glBindSamplers.add( Input( 'samplers','const GLuint *' ))
-glBindSamplers.version = ''
+glBindSamplers.version = '4.4'
 glBindSamplers.category = 'GL_ARB_multi_bind'
 glBindSamplers.trace = True
 glBindSamplers.play = True
@@ -21973,7 +21973,7 @@ glBindTextures.ret = Return('void')
 glBindTextures.add( Input( 'first','GLuint' ))
 glBindTextures.add( Input( 'count','GLsizei' ))
 glBindTextures.add( Input( 'textures','const GLuint *' ))
-glBindTextures.version = ''
+glBindTextures.version = '4.4'
 glBindTextures.category = 'GL_ARB_multi_bind'
 glBindTextures.trace = True
 glBindTextures.play = True
@@ -21986,7 +21986,7 @@ glBindVertexBuffers.add( Input( 'count','GLsizei' ))
 glBindVertexBuffers.add( Input( 'buffers','const GLuint *' ))
 glBindVertexBuffers.add( Input( 'offsets','const GLintptr *' ))
 glBindVertexBuffers.add( Input( 'strides','const GLsizei *' ))
-glBindVertexBuffers.version = ''
+glBindVertexBuffers.version = '4.4'
 glBindVertexBuffers.category = 'GL_ARB_multi_bind'
 glBindVertexBuffers.trace = True
 glBindVertexBuffers.play = True

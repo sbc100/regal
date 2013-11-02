@@ -919,7 +919,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"REGAL_NO_PNG=1",
 					"REGAL_NO_JSON=1",
-					"TRACE_OS_LOG=0",
+					"HAVE_EXTERNAL_OS_LOG=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					../../../include,
@@ -951,7 +951,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"REGAL_NO_PNG=1",
 					"REGAL_NO_JSON=1",
-					"TRACE_OS_LOG=0",
+					"HAVE_EXTERNAL_OS_LOG=1",
 				);
 				HEADER_SEARCH_PATHS = (
 					../../../include,

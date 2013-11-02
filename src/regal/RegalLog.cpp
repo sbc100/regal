@@ -101,7 +101,16 @@ namespace Logging {
   bool callback        = (REGAL_LOG_CALLBACK);
 
   bool         log          = (REGAL_LOG);
+
+  // Default log output to Android log
+  // For other platforms, standard output
+
+#if REGAL_SYS_ANDROID
+  std::string  logFilename;
+#else
   std::string  logFilename  = "stdout";
+#endif
+
   FILE        *logOutput    = NULL;
 
   bool         json         = false;

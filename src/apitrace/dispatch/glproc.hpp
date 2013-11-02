@@ -24129,6 +24129,156 @@ static inline void APIENTRY _glTextureStorage3DMultisampleEXT(GLuint texture, GL
     _glTextureStorage3DMultisampleEXT_ptr(texture, target, samples, internalformat, width, height, depth, fixedsamplelocations);
 }
 
+typedef void (APIENTRY * PFN_GLBINDBUFFERSBASE)(GLenum target, GLuint first, GLsizei count, const GLuint * buffers);
+static PFN_GLBINDBUFFERSBASE _glBindBuffersBase_ptr = NULL;
+
+static inline void APIENTRY _glBindBuffersBase(GLenum target, GLuint first, GLsizei count, const GLuint * buffers) {
+    const char *_name = "glBindBuffersBase";
+    if (!_glBindBuffersBase_ptr) {
+        _glBindBuffersBase_ptr = (PFN_GLBINDBUFFERSBASE)_getPrivateProcAddress(_name);
+        if (!_glBindBuffersBase_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBindBuffersBase_ptr(target, first, count, buffers);
+}
+
+typedef void (APIENTRY * PFN_GLBINDBUFFERSRANGE)(GLenum target, GLuint first, GLsizei count, const GLuint * buffers, const GLintptr * offsets, const GLsizeiptr * sizes);
+static PFN_GLBINDBUFFERSRANGE _glBindBuffersRange_ptr = NULL;
+
+static inline void APIENTRY _glBindBuffersRange(GLenum target, GLuint first, GLsizei count, const GLuint * buffers, const GLintptr * offsets, const GLsizeiptr * sizes) {
+    const char *_name = "glBindBuffersRange";
+    if (!_glBindBuffersRange_ptr) {
+        _glBindBuffersRange_ptr = (PFN_GLBINDBUFFERSRANGE)_getPrivateProcAddress(_name);
+        if (!_glBindBuffersRange_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBindBuffersRange_ptr(target, first, count, buffers, offsets, sizes);
+}
+
+typedef void (APIENTRY * PFN_GLBINDIMAGETEXTURES)(GLuint first, GLsizei count, const GLuint * textures);
+static PFN_GLBINDIMAGETEXTURES _glBindImageTextures_ptr = NULL;
+
+static inline void APIENTRY _glBindImageTextures(GLuint first, GLsizei count, const GLuint * textures) {
+    const char *_name = "glBindImageTextures";
+    if (!_glBindImageTextures_ptr) {
+        _glBindImageTextures_ptr = (PFN_GLBINDIMAGETEXTURES)_getPrivateProcAddress(_name);
+        if (!_glBindImageTextures_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBindImageTextures_ptr(first, count, textures);
+}
+
+typedef void (APIENTRY * PFN_GLBINDSAMPLERS)(GLuint first, GLsizei count, const GLuint * samplers);
+static PFN_GLBINDSAMPLERS _glBindSamplers_ptr = NULL;
+
+static inline void APIENTRY _glBindSamplers(GLuint first, GLsizei count, const GLuint * samplers) {
+    const char *_name = "glBindSamplers";
+    if (!_glBindSamplers_ptr) {
+        _glBindSamplers_ptr = (PFN_GLBINDSAMPLERS)_getPrivateProcAddress(_name);
+        if (!_glBindSamplers_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBindSamplers_ptr(first, count, samplers);
+}
+
+typedef void (APIENTRY * PFN_GLBINDTEXTURES)(GLuint first, GLsizei count, const GLuint * textures);
+static PFN_GLBINDTEXTURES _glBindTextures_ptr = NULL;
+
+static inline void APIENTRY _glBindTextures(GLuint first, GLsizei count, const GLuint * textures) {
+    const char *_name = "glBindTextures";
+    if (!_glBindTextures_ptr) {
+        _glBindTextures_ptr = (PFN_GLBINDTEXTURES)_getPrivateProcAddress(_name);
+        if (!_glBindTextures_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBindTextures_ptr(first, count, textures);
+}
+
+typedef void (APIENTRY * PFN_GLBINDVERTEXBUFFERS)(GLuint first, GLsizei count, const GLuint * buffers, const GLintptr * offsets, const GLsizei * strides);
+static PFN_GLBINDVERTEXBUFFERS _glBindVertexBuffers_ptr = NULL;
+
+static inline void APIENTRY _glBindVertexBuffers(GLuint first, GLsizei count, const GLuint * buffers, const GLintptr * offsets, const GLsizei * strides) {
+    const char *_name = "glBindVertexBuffers";
+    if (!_glBindVertexBuffers_ptr) {
+        _glBindVertexBuffers_ptr = (PFN_GLBINDVERTEXBUFFERS)_getPrivateProcAddress(_name);
+        if (!_glBindVertexBuffers_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBindVertexBuffers_ptr(first, count, buffers, offsets, strides);
+}
+
+typedef void (APIENTRY * PFN_GLBUFFERSTORAGE)(GLenum target, GLsizeiptr size, const GLvoid * data, GLbitfield flags);
+static PFN_GLBUFFERSTORAGE _glBufferStorage_ptr = NULL;
+
+static inline void APIENTRY _glBufferStorage(GLenum target, GLsizeiptr size, const GLvoid * data, GLbitfield flags) {
+    const char *_name = "glBufferStorage";
+    if (!_glBufferStorage_ptr) {
+        _glBufferStorage_ptr = (PFN_GLBUFFERSTORAGE)_getPrivateProcAddress(_name);
+        if (!_glBufferStorage_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBufferStorage_ptr(target, size, data, flags);
+}
+
+typedef void (APIENTRY * PFN_GLNAMEDBUFFERSTORAGEEXT)(GLuint buffer, GLsizeiptr size, const GLvoid * data, GLbitfield flags);
+static PFN_GLNAMEDBUFFERSTORAGEEXT _glNamedBufferStorageEXT_ptr = NULL;
+
+static inline void APIENTRY _glNamedBufferStorageEXT(GLuint buffer, GLsizeiptr size, const GLvoid * data, GLbitfield flags) {
+    const char *_name = "glNamedBufferStorageEXT";
+    if (!_glNamedBufferStorageEXT_ptr) {
+        _glNamedBufferStorageEXT_ptr = (PFN_GLNAMEDBUFFERSTORAGEEXT)_getPrivateProcAddress(_name);
+        if (!_glNamedBufferStorageEXT_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glNamedBufferStorageEXT_ptr(buffer, size, data, flags);
+}
+
+typedef void (APIENTRY * PFN_GLCLEARTEXIMAGE)(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid * data);
+static PFN_GLCLEARTEXIMAGE _glClearTexImage_ptr = NULL;
+
+static inline void APIENTRY _glClearTexImage(GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid * data) {
+    const char *_name = "glClearTexImage";
+    if (!_glClearTexImage_ptr) {
+        _glClearTexImage_ptr = (PFN_GLCLEARTEXIMAGE)_getPrivateProcAddress(_name);
+        if (!_glClearTexImage_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glClearTexImage_ptr(texture, level, format, type, data);
+}
+
+typedef void (APIENTRY * PFN_GLCLEARTEXSUBIMAGE)(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid * data);
+static PFN_GLCLEARTEXSUBIMAGE _glClearTexSubImage_ptr = NULL;
+
+static inline void APIENTRY _glClearTexSubImage(GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid * data) {
+    const char *_name = "glClearTexSubImage";
+    if (!_glClearTexSubImage_ptr) {
+        _glClearTexSubImage_ptr = (PFN_GLCLEARTEXSUBIMAGE)_getPrivateProcAddress(_name);
+        if (!_glClearTexSubImage_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glClearTexSubImage_ptr(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
+}
+
 typedef void (APIENTRY * PFN_GLBLENDCOLOREXT)(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
 static PFN_GLBLENDCOLOREXT _glBlendColorEXT_ptr = NULL;
 
@@ -43848,6 +43998,16 @@ static inline void APIENTRY _glAddSwapHintRectWIN(GLint x, GLint y, GLsizei widt
 #define glTexStorage3DMultisample _glTexStorage3DMultisample
 #define glTextureStorage2DMultisampleEXT _glTextureStorage2DMultisampleEXT
 #define glTextureStorage3DMultisampleEXT _glTextureStorage3DMultisampleEXT
+#define glBindBuffersBase _glBindBuffersBase
+#define glBindBuffersRange _glBindBuffersRange
+#define glBindImageTextures _glBindImageTextures
+#define glBindSamplers _glBindSamplers
+#define glBindTextures _glBindTextures
+#define glBindVertexBuffers _glBindVertexBuffers
+#define glBufferStorage _glBufferStorage
+#define glNamedBufferStorageEXT _glNamedBufferStorageEXT
+#define glClearTexImage _glClearTexImage
+#define glClearTexSubImage _glClearTexSubImage
 #define glBlendColorEXT _glBlendColorEXT
 #define glPolygonOffsetEXT _glPolygonOffsetEXT
 #define glTexImage3DEXT _glTexImage3DEXT

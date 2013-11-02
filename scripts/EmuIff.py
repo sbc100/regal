@@ -183,6 +183,15 @@ iffFormulae = {
         'entries' : [ 'glFog(f|i)(v|)' ],
         'impl' : [ '_context->iff->Fog( ${arg0plus} );', ],
     },
+    'FfnGetBoolean' : {
+        'entries' : [ 'glGetBooleanv' ],
+        'impl' : [
+            '_context->iff->RestoreVao( _context );',
+            'if ( ! _context->iff->glGetBooleanv( _context, ${arg0plus} ) ) {',
+            '    _context->dispatcher.emulation.glGetBooleanv( ${arg0plus} );',
+            '}',
+        ],
+    },
     'FfnGet' : {
         'entries' : [ 'glGet(Integer|Float|Double)v' ],
         'impl' : [

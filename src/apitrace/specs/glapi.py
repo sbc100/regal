@@ -1306,10 +1306,10 @@ glapi.addFunctions([
     #GlFunction(GLsync, "glCreateSyncFromCLeventARB", [(OpaquePointer("struct _cl_context"), "context"), (OpaquePointer("struct _cl_event"), "event"), (GLbitfield, "flags")]),
 
     # GL_ARB_debug_output
-    GlFunction(Void, "glDebugMessageControlARB", [(GLenum, "source"), (GLenum, "type"), (GLenum, "severity"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "ids"), (GLboolean, "enabled")], sideeffects=False),
-    GlFunction(Void, "glDebugMessageInsertARB", [(GLenum, "source"), (GLenum, "type"), (GLuint, "id"), (GLenum, "severity"), (GLsizei, "length"), InGlString(GLchar, "length", "buf")], sideeffects=False),
+    GlFunction(Void, "glDebugMessageControlARB", [(GLenum, "source"), (GLenum, "type"), (GLenum, "severity"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "ids"), (GLboolean, "enabled")], sideeffects=True),
+    GlFunction(Void, "glDebugMessageInsertARB", [(GLenum, "source"), (GLenum, "type"), (GLuint, "id"), (GLenum, "severity"), (GLsizei, "length"), InGlString(GLchar, "length", "buf")], sideeffects=True),
     GlFunction(Void, "glDebugMessageCallbackARB", [(GLDEBUGPROCARB, "callback"), (GLpointerConst, "userParam")], sideeffects=False),
-    GlFunction(GLuint, "glGetDebugMessageLogARB", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "sources"), Out(Array(GLenum, "count"), "types"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLenum, "count"), "severities"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(messageLog, lengths, _result)"), "messageLog")], sideeffects=False),
+    GlFunction(GLuint, "glGetDebugMessageLogARB", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "sources"), Out(Array(GLenum, "count"), "types"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLenum, "count"), "severities"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(messageLog, lengths, _result)"), "messageLog")], sideeffects=False, fail=0),
 
     # GL_ARB_robustness
     GlFunction(GLenum, "glGetGraphicsResetStatusARB", [], sideeffects=False),
@@ -1361,15 +1361,15 @@ glapi.addFunctions([
     GlFunction(Void, "glTextureStorage3DEXT", [(GLtexture, "texture"), (GLenum, "target"), (GLsizei, "levels"), (GLenum, "internalformat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth")]),
 
     # GL_KHR_debug
-    GlFunction(Void, "glDebugMessageControl", [(GLenum, "source"), (GLenum, "type"), (GLenum, "severity"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "ids"), (GLboolean, "enabled")], sideeffects=False),
-    GlFunction(Void, "glDebugMessageInsert", [(GLenum, "source"), (GLenum, "type"), (GLuint, "id"), (GLenum, "severity"), (GLsizei, "length"), InGlString(GLchar, "length", "buf")], sideeffects=False),
+    GlFunction(Void, "glDebugMessageControl", [(GLenum, "source"), (GLenum, "type"), (GLenum, "severity"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "ids"), (GLboolean, "enabled")], sideeffects=True),
+    GlFunction(Void, "glDebugMessageInsert", [(GLenum, "source"), (GLenum, "type"), (GLuint, "id"), (GLenum, "severity"), (GLsizei, "length"), InGlString(GLchar, "length", "buf")], sideeffects=True),
     GlFunction(Void, "glDebugMessageCallback", [(GLDEBUGPROC, "callback"), (OpaquePointer(Const(Void)), "userParam")], sideeffects=False),
-    GlFunction(GLuint, "glGetDebugMessageLog", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "sources"), Out(Array(GLenum, "count"), "types"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLenum, "count"), "severities"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(messageLog, lengths, _result)"), "messageLog")], sideeffects=False),
-    GlFunction(Void, "glPushDebugGroup", [(GLenum, "source"), (GLuint, "id"), (GLsizei, "length"), InGlString(GLchar, "length", "message")], sideeffects=False),
-    GlFunction(Void, "glPopDebugGroup", [], sideeffects=False),
-    GlFunction(Void, "glObjectLabel", [(GLenum, "identifier"), (GLuint, "name"), (GLsizei, "length"), InGlString(GLchar, "length", "label")], sideeffects=False),
+    GlFunction(GLuint, "glGetDebugMessageLog", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "sources"), Out(Array(GLenum, "count"), "types"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLenum, "count"), "severities"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(messageLog, lengths, _result)"), "messageLog")], sideeffects=False, fail=0),
+    GlFunction(Void, "glPushDebugGroup", [(GLenum, "source"), (GLuint, "id"), (GLsizei, "length"), InGlString(GLchar, "length", "message")], sideeffects=True),
+    GlFunction(Void, "glPopDebugGroup", [], sideeffects=True),
+    GlFunction(Void, "glObjectLabel", [(GLenum, "identifier"), (GLuint, "name"), (GLsizei, "length"), InGlString(GLchar, "length", "label")], sideeffects=True),
     GlFunction(Void, "glGetObjectLabel", [(GLenum, "identifier"), (GLuint, "name"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), OutGlString(GLchar, "length", "label")], sideeffects=False),
-    GlFunction(Void, "glObjectPtrLabel", [(OpaquePointer(Const(Void)), "ptr"), (GLsizei, "length"), InGlString(GLchar, "length", "label")], sideeffects=False),
+    GlFunction(Void, "glObjectPtrLabel", [(OpaquePointer(Const(Void)), "ptr"), (GLsizei, "length"), InGlString(GLchar, "length", "label")], sideeffects=True),
     GlFunction(Void, "glGetObjectPtrLabel", [(OpaquePointer(Const(Void)), "ptr"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), OutGlString(GLchar, "length", "label")], sideeffects=False),
 
     # GL_ARB_clear_buffer_object
@@ -1443,6 +1443,23 @@ glapi.addFunctions([
     GlFunction(Void, "glTexStorage3DMultisample", [(GLenum, "target"), (GLsizei, "samples"), (GLenum, "internalformat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLboolean, "fixedsamplelocations")]),
     GlFunction(Void, "glTextureStorage2DMultisampleEXT", [(GLtexture, "texture"), (GLenum, "target"), (GLsizei, "samples"), (GLenum, "internalformat"), (GLsizei, "width"), (GLsizei, "height"), (GLboolean, "fixedsamplelocations")]),
     GlFunction(Void, "glTextureStorage3DMultisampleEXT", [(GLtexture, "texture"), (GLenum, "target"), (GLsizei, "samples"), (GLenum, "internalformat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLboolean, "fixedsamplelocations")]),
+
+    # GL_ARB_multi_bind
+    GlFunction(Void, "glBindBuffersBase", [(GLenum, "target"), (GLuint, "first"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "buffers")]),
+    GlFunction(Void, "glBindBuffersRange", [(GLenum, "target"), (GLuint, "first"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "buffers"), (Array(Const(GLintptr), "count"), "offsets"), (Array(Const(GLsizeiptr), "count"), "sizes")]),
+
+    GlFunction(Void, "glBindImageTextures", [ (GLuint, "first"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "textures")]),
+    GlFunction(Void, "glBindSamplers", [ (GLuint, "first"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "samplers")]),
+    GlFunction(Void, "glBindTextures", [ (GLuint, "first"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "textures")]),
+    GlFunction(Void, "glBindVertexBuffers", [ (GLuint, "first"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "buffers"), (Array(Const(GLintptr), "count"), "offsets"), (Array(Const(GLsizei), "count"), "strides")]),
+
+    # GL_ARB_buffer_storage
+    GlFunction(Void, "glBufferStorage", [ (GLenum, "target"), (GLsizeiptr, "size"), (Blob(Const(GLvoid), "size"), "data"), (GLbitfield_storage, "flags")]),
+    GlFunction(Void, "glNamedBufferStorageEXT", [ (GLuint, "buffer"), (GLsizeiptr, "size"), (Blob(Const(GLvoid), "size"), "data"), (GLbitfield_storage, "flags")]),
+
+    # GL_ARB_clear_texture
+    GlFunction(Void, "glClearTexImage", [ (GLuint, "texture"), (GLint, "level"), (GLenum, "format"), (GLenum, "type"), (Blob(Const(GLvoid), "_glClearBufferData_size(format, type)"), "data")]),
+    GlFunction(Void, "glClearTexSubImage", [ (GLuint, "texture"), (GLint, "level"), (GLint, "xoffset"), (GLint, "yoffset"), (GLint, "zoffset"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLenum, "format"), (GLenum, "type"), (Blob(Const(GLvoid), "_glClearBufferData_size(format, type)"), "data")]),
 
     # GL_EXT_blend_color
     GlFunction(Void, "glBlendColorEXT", [(GLfloat, "red"), (GLfloat, "green"), (GLfloat, "blue"), (GLfloat, "alpha")]),
@@ -2333,7 +2350,7 @@ glapi.addFunctions([
     GlFunction(Void, "glGenerateMipmapEXT", [(GLenum, "target")]),
 
     # GL_GREMEDY_string_marker
-    GlFunction(Void, "glStringMarkerGREMEDY", [(GLsizei, "len"), (String(Const(GLvoid), "len > 0 ? len : strlen((const char *)string)"), "string")], sideeffects=False),
+    GlFunction(Void, "glStringMarkerGREMEDY", [(GLsizei, "len"), (String(Const(GLvoid), "len > 0 ? len : strlen((const char *)string)"), "string")], sideeffects=True),
 
     # GL_EXT_stencil_clear_tag
     GlFunction(Void, "glStencilClearTagEXT", [(GLsizei, "stencilTagBits"), (GLuint, "stencilClearTag")]),
@@ -2928,10 +2945,10 @@ glapi.addFunctions([
     GlFunction(GLboolean, "glIsNameAMD", [(GLenum, "identifier"), (GLuint, "name")], sideeffects=False),
 
     # GL_AMD_debug_output
-    GlFunction(Void, "glDebugMessageEnableAMD", [(GLenum, "category"), (GLenum, "severity"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "ids"), (GLboolean, "enabled")], sideeffects=False),
-    GlFunction(Void, "glDebugMessageInsertAMD", [(GLenum, "category"), (GLenum, "severity"), (GLuint, "id"), (GLsizei, "length"), InGlString(GLchar, "length", "buf")], sideeffects=False),
+    GlFunction(Void, "glDebugMessageEnableAMD", [(GLenum, "category"), (GLenum, "severity"), (GLsizei, "count"), (Array(Const(GLuint), "count"), "ids"), (GLboolean, "enabled")], sideeffects=True),
+    GlFunction(Void, "glDebugMessageInsertAMD", [(GLenum, "category"), (GLenum, "severity"), (GLuint, "id"), (GLsizei, "length"), InGlString(GLchar, "length", "buf")], sideeffects=True),
     GlFunction(Void, "glDebugMessageCallbackAMD", [(GLDEBUGPROCAMD, "callback"), (GLpointer, "userParam")], sideeffects=False),
-    GlFunction(GLuint, "glGetDebugMessageLogAMD", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "categories"), Out(Array(GLuint, "count"), "severities"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(message, lengths, _result)"), "message")], sideeffects=False),
+    GlFunction(GLuint, "glGetDebugMessageLogAMD", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "categories"), Out(Array(GLuint, "count"), "severities"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(message, lengths, _result)"), "message")], sideeffects=False, fail=0),
 
     # GL_NV_vdpau_interop
     #GlFunction(Void, "glVDPAUInitNV", [(Pointer(Const(GLvoid)), "vdpDevice"), (Pointer(Const(GLvoid)), "getProcAddress")]),

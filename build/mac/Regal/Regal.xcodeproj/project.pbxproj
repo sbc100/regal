@@ -588,7 +588,6 @@
 					"DEBUG=1",
 					"REGAL_NO_HTTP=1",
 					"REGAL_NO_PNG=1",
-					"TRACE_OS_LOG=0",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -635,7 +634,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"REGAL_NO_HTTP=1",
 					"REGAL_NO_PNG=1",
-					"TRACE_OS_LOG=0",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

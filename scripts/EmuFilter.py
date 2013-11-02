@@ -132,7 +132,7 @@ formulae = {
     'impl' : '''
 DispatchTableGL *_next = _context->dispatcher.emulation.next();
 RegalAssert(_next);
-if (_context->filt->TexParameter(*_context, ${arg0}, ${arg1}, static_cast<GLfloat>(${arg2})))
+if (_context->filt->TexParameter(*_context, ${arg0}, ${arg1}))
   return;
 GLfloat newparam;
 if (_context->filt->FilterTexParameter(*_context, ${arg0}, ${arg1}, static_cast<GLfloat>(${arg2}), newparam))
@@ -149,7 +149,7 @@ return;'''
     'impl' : '''
 DispatchTableGL *_next = _context->dispatcher.emulation.next();
 RegalAssert(_next);
-if (_context->filt->TexParameter(*_context, ${arg0}, ${arg1}, static_cast<GLfloat>(${arg2}[0])))
+if (_context->filt->TexParameter(*_context, ${arg0}, ${arg1}))
   return;
 GLfloat newparam;
 if (${arg2} && _context->filt->FilterTexParameter(*_context, ${arg0}, ${arg1}, static_cast<GLfloat>(${arg2}[0]), newparam))
@@ -495,14 +495,14 @@ return;'''
 # http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt
 # Map to GL_OES_mapbuffer for ES 2.0
 
-  'glMapBufferARB' : {
-    'entries' : [ 'glMapBufferARB' ],
+  'MapUnmap' : {
+    'entries' : [ 'gl(Map|Unmap)Buffer(ARB|)' ],
     'impl' : [
        'if (_context->isES2())',
        '{',
        '  DispatchTableGL *_next = _context->dispatcher.emulation.next();',
        '  RegalAssert(_next);',
-       '  return _next->call(&_next->glMapBufferOES)(${arg0plus});',
+       '  return _next->call(&_next->gl${m1}BufferOES)(${arg0plus});',
        '}'
      ]
   },

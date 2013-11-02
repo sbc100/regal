@@ -110,12 +110,9 @@ exclude = [
 
   # GL 4.4 and new extensions not in apitrace yet
 
-  'GL_ARB_multi_bind',
   'GL_AMD_interleaved_elements',
   'GL_AMD_sparse_texture',
   'GL_ARB_bindless_texture',
-  'GL_ARB_buffer_storage',
-  'GL_ARB_clear_texture',
   'GL_ARB_compute_variable_group_size',
   'GL_ARB_indirect_parameters',
   'GL_ARB_sparse_texture',

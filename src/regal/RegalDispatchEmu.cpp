@@ -5215,6 +5215,9 @@ static void REGAL_CALL emu_glGetBooleanv(GLenum pname, GLboolean *params)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -5285,6 +5288,18 @@ static void REGAL_CALL emu_glGetBooleanv(GLenum pname, GLboolean *params)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->iff->RestoreVao( _context );
+        if ( ! _context->iff->glGetBooleanv( _context, pname, params ) ) {
+            _context->dispatcher.emulation.glGetBooleanv( pname, params );
+        }
+        return;
+      }
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -17233,7 +17248,7 @@ static void REGAL_CALL emu_glTexParameterf(GLenum target, GLenum pname, GLfloat 
 
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
-        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(param)))
+        if (_context->filt->TexParameter(*_context, target, pname))
           return;
         GLfloat newparam;
         if (_context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(param), newparam))
@@ -17338,7 +17353,7 @@ static void REGAL_CALL emu_glTexParameterfv(GLenum target, GLenum pname, const G
 
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
-        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(params[0])))
+        if (_context->filt->TexParameter(*_context, target, pname))
           return;
         GLfloat newparam;
         if (params && _context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(params[0]), newparam))
@@ -17443,7 +17458,7 @@ static void REGAL_CALL emu_glTexParameteri(GLenum target, GLenum pname, GLint pa
 
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
-        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(param)))
+        if (_context->filt->TexParameter(*_context, target, pname))
           return;
         GLfloat newparam;
         if (_context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(param), newparam))
@@ -17548,7 +17563,7 @@ static void REGAL_CALL emu_glTexParameteriv(GLenum target, GLenum pname, const G
 
         DispatchTableGL *_next = _context->dispatcher.emulation.next();
         RegalAssert(_next);
-        if (_context->filt->TexParameter(*_context, target, pname, static_cast<GLfloat>(params[0])))
+        if (_context->filt->TexParameter(*_context, target, pname))
           return;
         GLfloat newparam;
         if (params && _context->filt->FilterTexParameter(*_context, target, pname, static_cast<GLfloat>(params[0]), newparam))
@@ -27181,14 +27196,57 @@ static GLvoid *REGAL_CALL emu_glMapBuffer(GLenum target, GLenum access)
         _context->dsa->RestoreBuffer( _context );
       }
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  return _next->call(& _next->glMapBuffer)(target, access);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (_context->isES2())
+        {
+          DispatchTableGL *_next = _context->dispatcher.emulation.next();
+          RegalAssert(_next);
+          return _next->call(&_next->glMapBufferOES)(target, access);
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      return _next->call(&_next->glMapBuffer)(target, access);
+    }
+
+  }
+
 }
 
 static GLboolean REGAL_CALL emu_glUnmapBuffer(GLenum target)
@@ -27221,14 +27279,57 @@ static GLboolean REGAL_CALL emu_glUnmapBuffer(GLenum target)
         _context->dsa->RestoreBuffer( _context );
       }
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  return _next->call(& _next->glUnmapBuffer)(target);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (_context->isES2())
+        {
+          DispatchTableGL *_next = _context->dispatcher.emulation.next();
+          RegalAssert(_next);
+          return _next->call(&_next->glUnmapBufferOES)(target);
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      return _next->call(&_next->glUnmapBuffer)(target);
+    }
+
+  }
+
 }
 
 // GL_VERSION_2_0
@@ -42447,14 +42548,57 @@ static GLboolean REGAL_CALL emu_glUnmapBufferARB(GLenum target)
         _context->dsa->RestoreBuffer( _context );
       }
       #endif
+    case 3 :
+    case 2 :
     case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt) break;
+      #endif
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  return _next->call(& _next->glUnmapBufferARB)(target);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+    case 2 :
+    case 1 :
+      #if REGAL_EMU_FILTER
+      if (_context->filt)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 0;
+        if (_context->isES2())
+        {
+          DispatchTableGL *_next = _context->dispatcher.emulation.next();
+          RegalAssert(_next);
+          return _next->call(&_next->glUnmapBufferOES)(target);
+        }
+      }
+      #endif
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      return _next->call(&_next->glUnmapBufferARB)(target);
+    }
+
+  }
+
 }
 
 // GL_ARB_vertex_program

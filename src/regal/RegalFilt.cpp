@@ -102,10 +102,11 @@ namespace Emu {
     return false;
   }
 
-  bool Filt::TexParameter(const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param)
+  bool Filt::TexParameter(const RegalContext &ctx, GLenum target, GLenum pname)
   {
-    UNUSED_PARAMETER(ctx);
     UNUSED_PARAMETER(target);
+
+    RegalAssert(ctx.info.get());
 
     // ES 2.0 does not support GL_TEXTURE_WRAP_R, filter it out
     // See: http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml
@@ -118,6 +119,20 @@ namespace Emu {
         case GL_TEXTURE_WRAP_S:
         case GL_TEXTURE_WRAP_T:
           break;
+
+        // sRGB is supported for Tegra 4 onwards
+
+        case GL_TEXTURE_SRGB_DECODE_EXT:
+          if (ctx.info->gl_ext_texture_srgb_decode)
+            return false;
+
+        // GL_EXT_shadow_samplers for Tegra 4
+        // http://www.khronos.org/registry/gles/extensions/EXT/EXT_shadow_samplers.txt
+
+        case GL_TEXTURE_COMPARE_MODE_EXT:
+        case GL_TEXTURE_COMPARE_FUNC_EXT:
+          if (ctx.info->gl_ext_shadow_samplers)
+            return false;
 
         default:
           Warning("glTexParameter ",GLenumToString(pname)," not supported for ES 2.0.");

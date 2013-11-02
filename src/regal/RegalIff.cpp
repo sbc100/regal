@@ -1407,7 +1407,7 @@ bool State::SetEnable( Iff * ffn, bool enable, GLenum cap )
 
   Iff::Version & ver = ffn->ver;
   int activeTex = ffn->activeTextureIndex;
-  int shift;
+  int shift = 0;
   switch( cap )
   {
     case GL_TEXTURE_1D:
@@ -2258,28 +2258,83 @@ bool Iff::IsEnabled( RegalContext * ctx, GLenum pname, GLboolean &enabled )
     return false;
 
   State::Store & st = ffstate.raw;
-  int idx = 0;
+  int shift = 0;
   switch (pname)
   {
+    case GL_TEXTURE_1D:
+      shift = TP_1D;
+      break;
+    case GL_TEXTURE_2D:
+      shift = TP_2D;
+      break;
+    case GL_TEXTURE_RECTANGLE:
+      shift = TP_Rect;
+      break;
+    case GL_TEXTURE_3D:
+      shift = TP_3D;
+      break;
+    case GL_TEXTURE_CUBE_MAP:
+      shift = TP_CubeMap;
+      break;
+    case GL_COLOR_SUM:
+      enabled = (st.colorSum ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_FOG:
+      enabled = (st.fog.enable ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_LIGHTING:
+      enabled = (st.lighting ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_LIGHT0:
+    case GL_LIGHT1:
+    case GL_LIGHT2:
+    case GL_LIGHT3:
+    case GL_LIGHT4:
+    case GL_LIGHT5:
+    case GL_LIGHT6:
+    case GL_LIGHT7:
+      RegalAssertArrayIndex( st.light, pname - GL_LIGHT0 );
+      enabled = (st.light[ pname - GL_LIGHT0 ].enable ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_COLOR_MATERIAL:
+      enabled = (st.colorMaterial ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_RESCALE_NORMAL:
+      enabled = (st.rescaleNormal ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_NORMALIZE:
+      enabled = (st.normalize ? GL_TRUE : GL_FALSE);
+      return true;
     case GL_TEXTURE_GEN_S:
     case GL_TEXTURE_GEN_T:
     case GL_TEXTURE_GEN_R:
     case GL_TEXTURE_GEN_Q:
-      idx = pname - GL_TEXTURE_GEN_S;
-      enabled = st.tex[ activeTextureIndex ].texgen[ idx ].enable;
+      RegalAssertArrayIndex( st.tex, activeTextureIndex );
+      RegalAssertArrayIndex( st.tex[ activeTextureIndex ].texgen, pname - GL_TEXTURE_GEN_S );
+      enabled = (st.tex[ activeTextureIndex ].texgen[ pname - GL_TEXTURE_GEN_S ].enable ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_CLIP_PLANE0:
+    case GL_CLIP_PLANE1:
+    case GL_CLIP_PLANE2:
+    case GL_CLIP_PLANE3:
+    case GL_CLIP_PLANE4:
+    case GL_CLIP_PLANE5:
+    case GL_CLIP_PLANE0+6:
+    case GL_CLIP_PLANE0+7:
+      RegalAssertArrayIndex( st.clipPlaneEnabled, pname - GL_CLIP_PLANE0 );
+      enabled = (st.clipPlaneEnabled[ pname - GL_CLIP_PLANE0 ] ? GL_TRUE : GL_FALSE);
+      return true;
+    case GL_ALPHA_TEST:
+      enabled = (st.alphaTest.enable ? GL_TRUE : GL_FALSE);
       return true;
     default:
-      break;
+      return false;
   }
 
-  const GLuint index = ClientStateToIndex( pname );
-  if (index == GLuint(~0))
-    return false;
-
-  RegalAssert( index < max_vertex_attribs );
-  GLint ret;
-  GetAttrib( ctx, index, GL_VERTEX_ATTRIB_ARRAY_ENABLED, &ret );
-  enabled = static_cast<GLboolean>(ret);
+  RegalAssertArrayIndex( st.tex, activeTextureIndex );
+  Texture & t = st.tex[ activeTextureIndex ];
+  GLuint v = 1 << shift;
+  enabled = ((t.enables & v) ? GL_TRUE : GL_FALSE);
   return true;
 }
 

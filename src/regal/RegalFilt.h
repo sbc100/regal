@@ -88,7 +88,7 @@ namespace Emu {
     }
 
     bool GetTexParameteriv   (const RegalContext &ctx, GLenum target, GLenum pname, GLint *params);
-    bool TexParameter        (const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param);
+    bool TexParameter        (const RegalContext &ctx, GLenum target, GLenum pname);
     bool FilterTexParameter  (const RegalContext &ctx, GLenum target, GLenum pname, GLfloat param, GLfloat &newParam);
     bool FramebufferTexture2D(const RegalContext &ctx, GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
     bool GenerateMipmap(const RegalContext &ctx, GLenum target);
