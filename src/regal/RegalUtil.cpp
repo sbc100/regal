@@ -143,7 +143,9 @@ const char *libraryLocation(const Library &library)
 
   if (library==LIBRARY_GL || library==LIBRARY_WGL || library==LIBRARY_GLX)
   {
-    // First, try ... variable
+    // First, try configured variable
+
+    ret = Config::loadGL.length() ? Config::loadGL.c_str() : NULL;
 
     // Second, try default installation location
 
@@ -251,7 +253,9 @@ const char *libraryLocation(const Library &library)
 
   if (library==LIBRARY_ES2)
   {
-    // First, try ... variable
+    // First, try configured variable
+
+    ret = Config::loadES2.length() ? Config::loadES2.c_str() : NULL;
 
     // Second, try default installation location
 
@@ -273,7 +277,9 @@ const char *libraryLocation(const Library &library)
 
   if (library==LIBRARY_EGL)
   {
-    // First, try ... variable
+    // First, try configured variable
+
+    ret = Config::loadEGL.length() ? Config::loadEGL.c_str() : NULL;
 
     // Second, try default installation location
 

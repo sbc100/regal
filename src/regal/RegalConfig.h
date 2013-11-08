@@ -54,6 +54,12 @@ namespace Config
 
   extern ::std::string configFile;
 
+  extern ::std::string loadGL;       // REGAL_LOAD_GL
+  extern ::std::string loadES2;      // REGAL_LOAD_ES2
+//extern ::std::string loadGLX;      // REGAL_LOAD_GLX
+//extern ::std::string loadWGL;      // REGAL_LOAD_WGL
+  extern ::std::string loadEGL;      // REGAL_LOAD_EGL
+
   //
 
   extern bool forceES1Profile;

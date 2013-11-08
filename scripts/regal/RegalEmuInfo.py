@@ -277,15 +277,18 @@ def emuInfoGetCode(apis, args):
 
 def emuInfoGetExtensionCode(apis, args):
 
-  code = ''
-  code += 'bool\n'
-  code += 'EmuInfo::getExtension(const ContextInfo &contextInfo, const char *ext) const\n'
-  code += '{\n'
-  code += '  Internal("EmuInfo::getExtension ",boost::print::quote(ext,\'"\'));\n'
-  code += '\n'
-  code += '  if (contextInfo.getExtension(ext))\n'
-  code += '    return true;\n'
-  code += '\n'
+  code = '''
+bool
+EmuInfo::getExtension(const ContextInfo &contextInfo, const char *ext) const
+{
+  Internal("EmuInfo::getExtension ",boost::print::quote(ext,\'"\'));
+
+  // If the context supports it, we're done.
+
+  if (contextInfo.getExtension(ext))
+    return true;
+
+'''
 
   for api in apis:
 
@@ -303,20 +306,23 @@ def emuInfoGetExtensionCode(apis, args):
       code += '#endif\n'
     code += '\n'
 
-  code += 'return false;\n'
-  code += '}\n\n'
+  code += '''
+  return false;
+}
+'''
 
-  code += 'bool\n'
-  code += 'EmuInfo::isSupported(const ContextInfo &contextInfo, const char *ext) const\n'
-  code += '{\n'
-  code += '  Internal("EmuInfo::isSupported ",boost::print::quote(ext,\'"\'));\n'
-  code += '\n'
-  code += '  string_list<string> e;\n'
-  code += '  e.split(ext,\' \');\n'
-  code += '  for (string_list<string>::const_iterator i=e.begin(); i!=e.end(); ++i)\n'
-  code += '    if (i->length() && !getExtension(contextInfo, i->c_str())) return false;\n'
-  code += '  return true;\n'
-  code += '}\n'
+  code += '''
+bool
+EmuInfo::isSupported(const ContextInfo &contextInfo, const char *ext) const
+{
+  Internal("EmuInfo::isSupported ",boost::print::quote(ext,\'"\'));
+
+  string_list<string> e;
+  e.split(ext,\' \');
+  for (string_list<string>::const_iterator i=e.begin(); i!=e.end(); ++i)
+    if (i->length() && !getExtension(contextInfo, i->c_str())) return false;
+  return true;
+}'''
 
   return code
 

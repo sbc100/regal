@@ -1502,6 +1502,7 @@ _gl_param_size(GLenum pname) {
     case GL_TEXTURE_BINDING_BUFFER: return 1;
     case GL_TEXTURE_BUFFER_DATA_STORE_BINDING: return 1;
     case GL_TEXTURE_BUFFER_FORMAT: return 1;
+    case GL_ANY_SAMPLES_PASSED: return 1;
     case GL_TRANSFORM_FEEDBACK_BUFFER_START: return 1;
     case GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: return 1;
     case GL_RASTERIZER_DISCARD: return 1;
@@ -1530,6 +1531,7 @@ _gl_param_size(GLenum pname) {
     case GL_RENDERBUFFER_STENCIL_SIZE: return 1;
     case GL_MAX_SAMPLES: return 1;
     case GL_PRIMITIVE_RESTART_FIXED_INDEX: return 1;
+    case GL_ANY_SAMPLES_PASSED_CONSERVATIVE: return 1;
     case GL_MAX_ELEMENT_INDEX: return 1;
     case GL_RGBA_INTEGER_MODE_EXT: return 1;
     case GL_FRAMEBUFFER_ATTACHMENT_LAYERED: return 1;
@@ -3374,7 +3376,6 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_DOT3_RGB_EXT", GL_DOT3_RGB_EXT},
     {"GL_PROGRAM_BINARY_LENGTH", GL_PROGRAM_BINARY_LENGTH},
     {"GL_MIRROR_CLAMP_ATI", GL_MIRROR_CLAMP_ATI},
-    {"GL_MIRROR_CLAMP_TO_EDGE_ATI", GL_MIRROR_CLAMP_TO_EDGE_ATI},
     {"GL_MODULATE_ADD_ATI", GL_MODULATE_ADD_ATI},
     {"GL_MODULATE_SIGNED_ADD_ATI", GL_MODULATE_SIGNED_ADD_ATI},
     {"GL_MODULATE_SUBTRACT_ATI", GL_MODULATE_SUBTRACT_ATI},
@@ -4627,7 +4628,6 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_PATH_STROKE_COVER_MODE_NV", GL_PATH_STROKE_COVER_MODE_NV},
     {"GL_PATH_STROKE_MASK_NV", GL_PATH_STROKE_MASK_NV},
     {"GL_PATH_SAMPLE_QUALITY_NV", GL_PATH_SAMPLE_QUALITY_NV},
-    {"GL_PATH_STROKE_BOUND_NV", GL_PATH_STROKE_BOUND_NV},
     {"GL_PATH_STROKE_OVERSAMPLE_COUNT_NV", GL_PATH_STROKE_OVERSAMPLE_COUNT_NV},
     {"GL_COUNT_UP_NV", GL_COUNT_UP_NV},
     {"GL_COUNT_DOWN_NV", GL_COUNT_DOWN_NV},
@@ -4787,9 +4787,6 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_VERTEX_ARRAY_OBJECT_EXT", GL_VERTEX_ARRAY_OBJECT_EXT},
     {"GL_SAMPLER_OBJECT_AMD", GL_SAMPLER_OBJECT_AMD},
     {"GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD", GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD},
-    {"GL_QUERY_BUFFER_AMD", GL_QUERY_BUFFER_AMD},
-    {"GL_QUERY_BUFFER_BINDING_AMD", GL_QUERY_BUFFER_BINDING_AMD},
-    {"GL_QUERY_RESULT_NO_WAIT_AMD", GL_QUERY_RESULT_NO_WAIT_AMD},
     {"GL_TEXTURE_BUFFER_OFFSET", GL_TEXTURE_BUFFER_OFFSET},
     {"GL_TEXTURE_BUFFER_SIZE", GL_TEXTURE_BUFFER_SIZE},
     {"GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT", GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT},
@@ -4951,7 +4948,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
 };
 
 static const trace::EnumSig _enumGLenum_sig = {
-    1, 3236, _enumGLenum_values
+    1, 3231, _enumGLenum_values
 };
 
 static const trace::BitmaskFlag _bitmaskGLbitfield1_flags[] = {
@@ -5241,6 +5238,44 @@ static const trace::BitmaskFlag _bitmaskGLbitfield5_flags[] = {
 
 static const trace::BitmaskSig _bitmaskGLbitfield5_sig = {
     4, 6, _bitmaskGLbitfield5_flags
+};
+
+static const trace::BitmaskFlag _bitmaskGLbitfield9_flags[] = {
+    {"GL_BOLD_BIT_NV", GL_BOLD_BIT_NV},
+    {"GL_ITALIC_BIT_NV", GL_ITALIC_BIT_NV},
+};
+
+static const trace::BitmaskSig _bitmaskGLbitfield9_sig = {
+    8, 2, _bitmaskGLbitfield9_flags
+};
+
+static const trace::BitmaskFlag _bitmaskGLbitfield8_flags[] = {
+    {"GL_GLYPH_WIDTH_BIT_NV", GL_GLYPH_WIDTH_BIT_NV},
+    {"GL_GLYPH_HEIGHT_BIT_NV", GL_GLYPH_HEIGHT_BIT_NV},
+    {"GL_GLYPH_HORIZONTAL_BEARING_X_BIT_NV", GL_GLYPH_HORIZONTAL_BEARING_X_BIT_NV},
+    {"GL_GLYPH_HORIZONTAL_BEARING_Y_BIT_NV", GL_GLYPH_HORIZONTAL_BEARING_Y_BIT_NV},
+    {"GL_GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV", GL_GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV},
+    {"GL_GLYPH_VERTICAL_BEARING_X_BIT_NV", GL_GLYPH_VERTICAL_BEARING_X_BIT_NV},
+    {"GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV", GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV},
+    {"GL_GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV", GL_GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV},
+    {"GL_GLYPH_HAS_KERNING_BIT_NV", GL_GLYPH_HAS_KERNING_BIT_NV},
+    {"GL_FONT_X_MIN_BOUNDS_BIT_NV", GL_FONT_X_MIN_BOUNDS_BIT_NV},
+    {"GL_FONT_Y_MIN_BOUNDS_BIT_NV", GL_FONT_Y_MIN_BOUNDS_BIT_NV},
+    {"GL_FONT_X_MAX_BOUNDS_BIT_NV", GL_FONT_X_MAX_BOUNDS_BIT_NV},
+    {"GL_FONT_Y_MAX_BOUNDS_BIT_NV", GL_FONT_Y_MAX_BOUNDS_BIT_NV},
+    {"GL_FONT_UNITS_PER_EM_BIT_NV", GL_FONT_UNITS_PER_EM_BIT_NV},
+    {"GL_FONT_ASCENDER_BIT_NV", GL_FONT_ASCENDER_BIT_NV},
+    {"GL_FONT_DESCENDER_BIT_NV", GL_FONT_DESCENDER_BIT_NV},
+    {"GL_FONT_HEIGHT_BIT_NV", GL_FONT_HEIGHT_BIT_NV},
+    {"GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV", GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV},
+    {"GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV", GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV},
+    {"GL_FONT_UNDERLINE_POSITION_BIT_NV", GL_FONT_UNDERLINE_POSITION_BIT_NV},
+    {"GL_FONT_UNDERLINE_THICKNESS_BIT_NV", GL_FONT_UNDERLINE_THICKNESS_BIT_NV},
+    {"GL_FONT_HAS_KERNING_BIT_NV", GL_FONT_HAS_KERNING_BIT_NV},
+};
+
+static const trace::BitmaskSig _bitmaskGLbitfield8_sig = {
+    7, 22, _bitmaskGLbitfield8_flags
 };
 
 static void _write__GLvoid3(int selector, GLvoid * const & value) {
@@ -5827,7 +5862,7 @@ static const trace::BitmaskFlag _bitmaskint29_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint29_sig = {
-    15, 4, _bitmaskint29_flags
+    17, 4, _bitmaskint29_flags
 };
 
 static const trace::EnumValue _enumint36_values[] = {
@@ -5851,7 +5886,7 @@ static const trace::BitmaskFlag _bitmaskint28_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint28_sig = {
-    14, 7, _bitmaskint28_flags
+    16, 7, _bitmaskint28_flags
 };
 
 static const trace::EnumValue _enumint37_values[] = {
@@ -5915,7 +5950,7 @@ static const trace::BitmaskFlag _bitmaskint41_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint41_sig = {
-    17, 2, _bitmaskint41_flags
+    19, 2, _bitmaskint41_flags
 };
 
 static const trace::BitmaskFlag _bitmaskint42_flags[] = {
@@ -5924,7 +5959,7 @@ static const trace::BitmaskFlag _bitmaskint42_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint42_sig = {
-    18, 2, _bitmaskint42_flags
+    20, 2, _bitmaskint42_flags
 };
 
 static const char * _structstructEGLClientPixmapHI_members[4] = {
@@ -5951,7 +5986,7 @@ static const trace::BitmaskFlag _bitmaskint40_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint40_sig = {
-    16, 2, _bitmaskint40_flags
+    18, 2, _bitmaskint40_flags
 };
 
 #endif // REGAL_SYS_EGL
@@ -6113,7 +6148,7 @@ static const trace::BitmaskFlag _bitmaskint8_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint8_sig = {
-    9, 2, _bitmaskint8_flags
+    11, 2, _bitmaskint8_flags
 };
 
 static const trace::BitmaskFlag _bitmaskint9_flags[] = {
@@ -6123,7 +6158,7 @@ static const trace::BitmaskFlag _bitmaskint9_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint9_sig = {
-    10, 3, _bitmaskint9_flags
+    12, 3, _bitmaskint9_flags
 };
 
 static const trace::EnumValue _enumint10_values[] = {
@@ -6163,7 +6198,7 @@ static const trace::BitmaskFlag _bitmaskint14_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint14_sig = {
-    11, 2, _bitmaskint14_flags
+    13, 2, _bitmaskint14_flags
 };
 
 static const trace::BitmaskFlag _bitmaskint15_flags[] = {
@@ -6173,7 +6208,7 @@ static const trace::BitmaskFlag _bitmaskint15_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint15_sig = {
-    12, 3, _bitmaskint15_flags
+    14, 3, _bitmaskint15_flags
 };
 
 static const trace::BitmaskFlag _bitmaskint16_flags[] = {
@@ -6182,7 +6217,7 @@ static const trace::BitmaskFlag _bitmaskint16_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint16_sig = {
-    13, 2, _bitmaskint16_flags
+    15, 2, _bitmaskint16_flags
 };
 
 #endif // REGAL_SYS_GLX
@@ -6219,7 +6254,7 @@ static const trace::BitmaskFlag _bitmaskDWORD1_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskDWORD1_sig = {
-    19, 18, _bitmaskDWORD1_flags
+    21, 18, _bitmaskDWORD1_flags
 };
 
 static const char * _structPIXELFORMATDESCRIPTOR_members[26] = {
@@ -6533,7 +6568,7 @@ static const trace::BitmaskFlag _bitmaskint44_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint44_sig = {
-    20, 2, _bitmaskint44_flags
+    22, 2, _bitmaskint44_flags
 };
 
 static const trace::BitmaskFlag _bitmaskint45_flags[] = {
@@ -6542,7 +6577,7 @@ static const trace::BitmaskFlag _bitmaskint45_flags[] = {
 };
 
 static const trace::BitmaskSig _bitmaskint45_sig = {
-    21, 2, _bitmaskint45_flags
+    23, 2, _bitmaskint45_flags
 };
 
 static const char * _structRECT_members[4] = {
@@ -11083,7 +11118,7 @@ static const trace::FunctionSig _glDeletePathsNV_sig = {1507, "glDeletePathsNV",
 static const char * _glIsPathNV_args[1] = {"path"};
 static const trace::FunctionSig _glIsPathNV_sig = {1508, "glIsPathNV", 1, _glIsPathNV_args};
 
-static const char * _glPathCommandsNV_args[6] = {"path", "numCommands", "commands", "numCoords", "coordType", "coord"};
+static const char * _glPathCommandsNV_args[6] = {"path", "numCommands", "commands", "numCoords", "coordType", "coords"};
 static const trace::FunctionSig _glPathCommandsNV_sig = {1509, "glPathCommandsNV", 6, _glPathCommandsNV_args};
 
 static const char * _glPathCoordsNV_args[4] = {"path", "numCoords", "coordType", "coords"};
@@ -11149,7 +11184,7 @@ static const trace::FunctionSig _glStencilFillPathInstancedNV_sig = {1529, "glSt
 static const char * _glStencilStrokePathInstancedNV_args[8] = {"numPaths", "pathNameType", "paths", "pathBase", "reference", "mask", "transformType", "transformValues"};
 static const trace::FunctionSig _glStencilStrokePathInstancedNV_sig = {1530, "glStencilStrokePathInstancedNV", 8, _glStencilStrokePathInstancedNV_args};
 
-static const char * _glPathCoverDepthFuncNV_args[1] = {"func"};
+static const char * _glPathCoverDepthFuncNV_args[1] = {"zfunc"};
 static const trace::FunctionSig _glPathCoverDepthFuncNV_sig = {1531, "glPathCoverDepthFuncNV", 1, _glPathCoverDepthFuncNV_args};
 
 static const char * _glPathColorGenNV_args[4] = {"color", "genMode", "colorFormat", "coeffs"};
@@ -53508,7 +53543,7 @@ GLboolean glIsPathNV( GLuint path ) {
     return _result;
 }
 
-void glPathCommandsNV( GLuint path, GLsizei numCommands, const GLubyte * commands, GLsizei numCoords, GLenum coordType, const GLvoid * coord ) {
+void glPathCommandsNV( GLuint path, GLsizei numCommands, const GLubyte * commands, GLsizei numCoords, GLenum coordType, const GLvoid * coords ) {
     unsigned _call = trace::localWriter.beginEnter(&_glPathCommandsNV_sig);
     trace::localWriter.beginArg(0);
     trace::localWriter.writeUInt(path);
@@ -53537,10 +53572,10 @@ void glPathCommandsNV( GLuint path, GLsizei numCommands, const GLubyte * command
     trace::localWriter.writeEnum(&_enumGLenum_sig, coordType);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(5);
-    trace::localWriter.writeBlob(coord, _glPath_coords_size(numCoords, coordType));
+    trace::localWriter.writeBlob(coords, _glPath_coords_size(numCoords, coordType));
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
-    _glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coord);
+    _glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords);
     trace::localWriter.beginLeave(_call);
     if (true) {
     }
@@ -53673,7 +53708,7 @@ void glPathGlyphsNV( GLuint firstPathName, GLenum fontTarget, const GLvoid * fon
     trace::localWriter.writeBlob(fontName, _glPath_fontName_size(fontTarget, fontName));
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    trace::localWriter.writeUInt(fontStyle);
+    trace::localWriter.writeBitmask(&_bitmaskGLbitfield9_sig, fontStyle);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     trace::localWriter.writeSInt(numGlyphs);
@@ -53713,7 +53748,7 @@ void glPathGlyphRangeNV( GLuint firstPathName, GLenum fontTarget, const GLvoid *
     trace::localWriter.writeBlob(fontName, _glPath_fontName_size(fontTarget, fontName));
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
-    trace::localWriter.writeUInt(fontStyle);
+    trace::localWriter.writeBitmask(&_bitmaskGLbitfield9_sig, fontStyle);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     trace::localWriter.writeUInt(firstGlyph);
@@ -54144,13 +54179,13 @@ void glStencilStrokePathInstancedNV( GLsizei numPaths, GLenum pathNameType, cons
     trace::localWriter.endLeave();
 }
 
-void glPathCoverDepthFuncNV( GLenum func ) {
+void glPathCoverDepthFuncNV( GLenum zfunc ) {
     unsigned _call = trace::localWriter.beginEnter(&_glPathCoverDepthFuncNV_sig);
     trace::localWriter.beginArg(0);
-    trace::localWriter.writeEnum(&_enumGLenum_sig, func);
+    trace::localWriter.writeEnum(&_enumGLenum_sig, zfunc);
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
-    _glPathCoverDepthFuncNV(func);
+    _glPathCoverDepthFuncNV(zfunc);
     trace::localWriter.beginLeave(_call);
     if (true) {
     }
@@ -54487,7 +54522,7 @@ void glGetPathDashArrayNV( GLuint path, GLfloat * dashArray ) {
 void glGetPathMetricsNV( GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const GLvoid * paths, GLuint pathBase, GLsizei stride, GLfloat * metrics ) {
     unsigned _call = trace::localWriter.beginEnter(&_glGetPathMetricsNV_sig);
     trace::localWriter.beginArg(0);
-    trace::localWriter.writeUInt(metricQueryMask);
+    trace::localWriter.writeBitmask(&_bitmaskGLbitfield8_sig, metricQueryMask);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     trace::localWriter.writeSInt(numPaths);
@@ -54526,7 +54561,7 @@ void glGetPathMetricsNV( GLbitfield metricQueryMask, GLsizei numPaths, GLenum pa
 void glGetPathMetricRangeNV( GLbitfield metricQueryMask, GLuint firstPathName, GLsizei numPaths, GLsizei stride, GLfloat * metrics ) {
     unsigned _call = trace::localWriter.beginEnter(&_glGetPathMetricRangeNV_sig);
     trace::localWriter.beginArg(0);
-    trace::localWriter.writeUInt(metricQueryMask);
+    trace::localWriter.writeBitmask(&_bitmaskGLbitfield8_sig, metricQueryMask);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     trace::localWriter.writeUInt(firstPathName);

@@ -8607,8 +8607,7 @@ const size_t wgl_Offset[144] = {
   0
 };
 
-#endif
-
+#endif /* REGAL_SYS_WGL */
 #if REGAL_SYS_GLX
 const char * const glx_Name[123] = {
   "glXAllocateMemoryNV",
@@ -8988,8 +8987,7 @@ const size_t glx_Offset[123] = {
   0
 };
 
-#endif
-
+#endif /* REGAL_SYS_GLX */
 #if REGAL_SYS_OSX
 const char * const cgl_Name[53] = {
   "CGLChoosePixelFormat",
@@ -9159,8 +9157,7 @@ const size_t cgl_Offset[53] = {
   0
 };
 
-#endif
-
+#endif /* REGAL_SYS_OSX */
 #if REGAL_SYS_EGL
 const char * const egl_Name[64] = {
   "eglBindAPI",
@@ -9363,7 +9360,7 @@ const size_t egl_Offset[64] = {
   0
 };
 
-#endif
+#endif /* REGAL_SYS_EGL */
 
 }
 

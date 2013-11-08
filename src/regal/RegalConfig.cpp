@@ -53,6 +53,12 @@ namespace Config {
 
   ::std::string configFile("");  // Don't read/write configuration by default
 
+  ::std::string loadGL  ("");    // Default to auto-detect
+  ::std::string loadES2 ("");    // Default to auto-detect
+//::std::string loadGLX ("");    // Default to auto-detect
+//::std::string loadWGL ("");    // Default to auto-detect
+  ::std::string loadEGL ("");    // Default to auto-detect
+
   bool forceES1Profile     = REGAL_FORCE_ES1_PROFILE;
   bool forceES2Profile     = REGAL_FORCE_ES2_PROFILE;
   bool forceCoreProfile    = REGAL_FORCE_CORE_PROFILE;
@@ -154,6 +160,12 @@ namespace Config {
     Internal("Config::Init","()");
 
 #ifndef REGAL_NO_GETENV
+    getEnv( "REGAL_LOAD_GL",  loadGL);
+    getEnv( "REGAL_LOAD_ES2", loadES2);
+//  getEnv( "REGAL_LOAD_GLX", loadGLX);
+//  getEnv( "REGAL_LOAD_WGL", loadWGL);
+    getEnv( "REGAL_LOAD_EGL", loadEGL);
+
     getEnv( "REGAL_SYS_ES2", sysES2, REGAL_SYS_ES2);
     getEnv( "REGAL_SYS_GL",  sysGL,  REGAL_SYS_GL);
 
@@ -440,6 +452,14 @@ namespace Config {
     jo.object("config");
 
       jo.member("configFile", configFile);
+
+      jo.object("load");
+        jo.member("GL",  loadGL);
+        jo.member("ES2", loadES2);
+//      jo.member("GLX", loadGLX);
+//      jo.member("WGL", loadWGL);
+        jo.member("EGL", loadEGL);
+      jo.end();
 
       jo.object("system");
         jo.member("ES1", sysES1);

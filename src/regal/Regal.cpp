@@ -32611,15 +32611,42 @@ extern "C" {
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     PROC ret = NULL;
+    //
+    // wglGetProcAddress returns NULL for unsupported
+    // entry points.  Here we need Regal to behave
+    // similarly depending on what's emulated.
+    //
+
+    // Regal-only and ES 1.0 aliased functions are
+    // always provided by Regal
+
+    // ret = Lookup::regal_Lookup<PROC>(lpszProc);
+    // if (ret)
+    //  return ret;
+
+    // Ask the back-end driver if the entry point
+    // is available.  If not, return NULL
+    //
+    // TODO - we need to query ContextInfo and
+    //        EmulationInfo here instead.
+
     ret = _next->call(&_next->wglGetProcAddress)(lpszProc);
     if (!ret)
       return NULL;
+
+    // Return the Regal implementation of the entry
+    // point, either GL or WGL
+
     ret = Lookup::gl_Lookup<PROC>(lpszProc);
     if (ret)
       return ret;
+
     ret = Lookup::wgl_Lookup<PROC>(lpszProc);
     if (ret)
       return ret;
+
+    // As a last resort, dispatch the lookup to
+    // the global dispatch stack...
     ret = _next->call(&_next->wglGetProcAddress)(lpszProc);
     return ret;
   }

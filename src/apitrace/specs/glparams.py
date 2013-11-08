@@ -1730,7 +1730,6 @@ parameters = [
     # XXX: GL_DOT3_RGBA_EXT == GL_PROGRAM_BINARY_LENGTH, but you can't glGet GL_DOT3_RGBA_EXT
     ("glGetProgram",	I,	1,	"GL_PROGRAM_BINARY_LENGTH"),	# 0x8741,
     ("",	X,	1,	"GL_MIRROR_CLAMP_ATI"),	# 0x8742
-    ("",	X,	1,	"GL_MIRROR_CLAMP_TO_EDGE_ATI"),	# 0x8743
     ("",	X,	1,	"GL_MODULATE_ADD_ATI"),	# 0x8744
     ("",	X,	1,	"GL_MODULATE_SIGNED_ADD_ATI"),	# 0x8745
     ("",	X,	1,	"GL_MODULATE_SUBTRACT_ATI"),	# 0x8746
@@ -2447,7 +2446,7 @@ parameters = [
     ("glGet",	I,	1,	"GL_TEXTURE_BINDING_BUFFER"),	# 0x8C2C
     ("glGet",	I,	1,	"GL_TEXTURE_BUFFER_DATA_STORE_BINDING"),	# 0x8C2D
     ("glGet",	E,	1,	"GL_TEXTURE_BUFFER_FORMAT"),	# 0x8C2E
-    ("",	X,	1,	"GL_ANY_SAMPLES_PASSED"),	# 0x8C2F
+    ("",	B,	1,	"GL_ANY_SAMPLES_PASSED"),	# 0x8C2F
     ("",	X,	1,	"GL_SAMPLE_SHADING"),	# 0x8C36
     ("",	X,	1,	"GL_MIN_SAMPLE_SHADING_VALUE"),	# 0x8C37
     ("",	X,	1,	"GL_R11F_G11F_B10F"),	# 0x8C3A
@@ -2577,8 +2576,8 @@ parameters = [
     ("",	X,	1,	"GL_SAMPLER_EXTERNAL_OES"),	# 0x8D66
     ("",	X,	1,	"GL_TEXTURE_BINDING_EXTERNAL_OES"),	# 0x8D67
     ("",	X,	1,	"GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES"),	# 0x8D68
-    ("",	B,	1,	"GL_PRIMITIVE_RESTART_FIXED_INDEX"),	# 0x8D69
-    ("",	X,	1,	"GL_ANY_SAMPLES_PASSED_CONSERVATIVE"),	# 0x8D6A
+    ("glGet",	B,	1,	"GL_PRIMITIVE_RESTART_FIXED_INDEX"),	# 0x8D69
+    ("",	B,	1,	"GL_ANY_SAMPLES_PASSED_CONSERVATIVE"),	# 0x8D6A
     ("glGet",	I,	1,	"GL_MAX_ELEMENT_INDEX"),	# 0x8D6B
     ("",	X,	1,	"GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT"),	# 0x8D6C
     ("",	X,	1,	"GL_RGBA32UI"),	# 0x8D70
@@ -3022,7 +3021,6 @@ parameters = [
     ("",	X,	1,	"GL_PATH_STROKE_COVER_MODE_NV"),	# 0x9083
     ("",	X,	1,	"GL_PATH_STROKE_MASK_NV"),	# 0x9084
     ("",	X,	1,	"GL_PATH_SAMPLE_QUALITY_NV"),	# 0x9085
-    ("",	X,	1,	"GL_PATH_STROKE_BOUND_NV"),	# 0x9086
     ("",	X,	1,	"GL_PATH_STROKE_OVERSAMPLE_COUNT_NV"),	# 0x9087
     ("",	X,	1,	"GL_COUNT_UP_NV"),	# 0x9088
     ("",	X,	1,	"GL_COUNT_DOWN_NV"),	# 0x9089
@@ -3182,9 +3180,6 @@ parameters = [
     ("",	X,	1,	"GL_VERTEX_ARRAY_OBJECT_EXT"),	# 0x9154
     ("",	X,	1,	"GL_SAMPLER_OBJECT_AMD"),	# 0x9155
     ("",	X,	1,	"GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD"),	# 0x9160
-    ("",	X,	1,	"GL_QUERY_BUFFER_AMD"),	# 0x9192
-    ("",	X,	1,	"GL_QUERY_BUFFER_BINDING_AMD"),	# 0x9193
-    ("",	X,	1,	"GL_QUERY_RESULT_NO_WAIT_AMD"),	# 0x9194
     ("glGetTexLevelParameter",	I,	1,	"GL_TEXTURE_BUFFER_OFFSET"),	# 0x919D
     ("glGetTexLevelParameter",	I,	1,	"GL_TEXTURE_BUFFER_SIZE"),	# 0x919E
     ("glGet",	I,	1,	"GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT"),	# 0x919F

@@ -2,7 +2,8 @@
 
 from string import Template, upper, replace
 
-from ApiUtil import outputCode
+from ApiUtil    import outputCode
+from ApiCodeGen import wrapIf
 
 cond = { 'wgl' : 'REGAL_SYS_WGL', 'glx' : 'REGAL_SYS_GLX', 'cgl' : 'REGAL_SYS_OSX', 'egl' : 'REGAL_SYS_EGL' }
 
@@ -369,14 +370,10 @@ def versionDeclareCode(apis, args):
       code += '\n'
 
   for api in apis:
-    name = api.name.lower()
-    if name in cond:
-      code += '#if %s\n'%cond[name]
+    tmp = ''
     for c in sorted(api.categories):
-      code += '  GLboolean %s : 1;\n' % (c.lower())
-    if name in cond:
-      code += '#endif\n'
-    code += '\n'
+      tmp += '  GLboolean %s : 1;\n' % (c.lower())
+    code += wrapIf(cond.get(api.name.lower()),tmp) + '\n'
 
   return code
 
@@ -408,13 +405,10 @@ def versionInitCode(apis, args):
       code += '  glsl_version_minor(-1),\n'
 
   for api in apis:
-    name = api.name.lower()
-    if name in cond:
-      code += '#if %s\n'%cond[name]
+    tmp = ''
     for c in sorted(api.categories):
-      code += '  %s(false),\n' % (c.lower())
-    if name in cond:
-      code += '#endif\n'
+      tmp += '  %s(false),\n' % (c.lower())
+    code += wrapIf(cond.get(api.name.lower()),tmp)
 
   return code
 
@@ -634,14 +628,13 @@ def extensionStringCode(apis, args):
   code = ''
 
   for api in apis:
-    name = api.name.lower()
-    if name in cond:
-      code += '#if %s\n'%cond[name]
+    tmp = ''
     for c in sorted(api.categories):
-      code += '  %s = stringSetFind(e,"%s");\n' % (c.lower(),c)
-    if name in cond:
-      code += '#endif\n'
-    code += '\n'
+      tmp += '  %-50s = stringSetFind(e,"%s");\n' % (c.lower(),c)
+
+    tmp = wrapIf(cond.get(api.name.lower()),tmp)
+
+    code += tmp + '\n'
 
   return code
 
@@ -656,16 +649,15 @@ def getExtensionCode(apis, args):
 
   for api in apis:
 
-    name = api.name.lower()
-    if name in cond:
-      code += '#if %s\n'%cond[name]
+    tmp = ''
     for c in sorted(api.categories):
-      code += '  if (!strcmp(ext,"%s")) return %s;\n' % (c,c.lower())
-    if name in cond:
-      code += '#endif\n'
-    code += '\n'
+      tmp += '  %-60s %s;\n'%('if (!strcmp(ext,"%s"))'%c,'return %s'%c.lower())
 
-  code += 'return false;\n'
+    tmp = wrapIf(cond.get(api.name.lower()),tmp)
+
+    code += tmp + '\n'
+
+  code += '  return false;\n'
   code += '}\n\n'
 
   return code

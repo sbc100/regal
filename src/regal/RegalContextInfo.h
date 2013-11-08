@@ -710,7 +710,7 @@ struct ContextInfo
   GLboolean wgl_nv_video_capture : 1;
   GLboolean wgl_nv_video_output : 1;
   GLboolean wgl_oml_sync_control : 1;
-#endif
+#endif /* REGAL_SYS_WGL */
 
 #if REGAL_SYS_GLX
   GLboolean glx_3dfx_multisample : 1;
@@ -770,7 +770,7 @@ struct ContextInfo
   GLboolean glx_sgi_video_sync : 1;
   GLboolean glx_sun_get_transparent_index : 1;
   GLboolean glx_sun_video_resize : 1;
-#endif
+#endif /* REGAL_SYS_GLX */
 
 #if REGAL_SYS_EGL
   GLboolean egl_angle_query_surface_pointer : 1;
@@ -801,7 +801,7 @@ struct ContextInfo
   GLboolean egl_nv_post_sub_buffer : 1;
   GLboolean egl_nv_sync : 1;
   GLboolean egl_nv_system_time : 1;
-#endif
+#endif /* REGAL_SYS_EGL */
 
   // Driver context limits
 

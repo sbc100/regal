@@ -136,6 +136,10 @@ const Object parent[JSON_UNDEFINED+1] =
   JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX,
   JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX,
   JSON_REGAL_CONFIG,
+  JSON_REGAL_CONFIG_LOAD,
+  JSON_REGAL_CONFIG_LOAD,
+  JSON_REGAL_CONFIG_LOAD,
+  JSON_REGAL_CONFIG,
   JSON_REGAL_CONFIG_SYSTEM,
   JSON_REGAL_CONFIG_SYSTEM,
   JSON_REGAL_CONFIG_SYSTEM,
@@ -202,6 +206,7 @@ Parser::onPush(const string &name)
       if (name=="dispatch"    ) { current = JSON_REGAL_CONFIG_DISPATCH;                        return; }
       if (name=="force"       ) { current = JSON_REGAL_CONFIG_FORCE;                           return; }
       if (name=="frame"       ) { current = JSON_REGAL_CONFIG_FRAME;                           return; }
+      if (name=="load"        ) { current = JSON_REGAL_CONFIG_LOAD;                            return; }
       if (name=="system"      ) { current = JSON_REGAL_CONFIG_SYSTEM;                          return; }
       if (name=="trace"       ) { current = JSON_REGAL_CONFIG_TRACE;                           return; }
       break;
@@ -324,6 +329,12 @@ Parser::onPush(const string &name)
       if (name=="color"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_COLOR;         return; }
       if (name=="depth"       ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_DEPTH;         return; }
       if (name=="stencil"     ) { current = JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_STENCIL;       return; }
+      break;
+
+    case JSON_REGAL_CONFIG_LOAD:
+      if (name=="EGL"         ) { current = JSON_REGAL_CONFIG_LOAD_EGL;                        return; }
+      if (name=="ES2"         ) { current = JSON_REGAL_CONFIG_LOAD_ES2;                        return; }
+      if (name=="GL"          ) { current = JSON_REGAL_CONFIG_LOAD_GL;                         return; }
       break;
 
     case JSON_REGAL_CONFIG_SYSTEM:
@@ -522,6 +533,9 @@ Parser::onValue(const string &value)
     case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_COLOR         : { set_json_regal_config_frame_save_prefix_color(value);        return; }
     case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_DEPTH         : { set_json_regal_config_frame_save_prefix_depth(value);        return; }
     case JSON_REGAL_CONFIG_FRAME_SAVE_PREFIX_STENCIL       : { set_json_regal_config_frame_save_prefix_stencil(value);      return; }
+    case JSON_REGAL_CONFIG_LOAD_EGL                        : { set_json_regal_config_load_egl(value);                       return; }
+    case JSON_REGAL_CONFIG_LOAD_ES2                        : { set_json_regal_config_load_es2(value);                       return; }
+    case JSON_REGAL_CONFIG_LOAD_GL                         : { set_json_regal_config_load_gl(value);                        return; }
     case JSON_REGAL_CONFIG_TRACE_FILE                      : { set_json_regal_config_trace_file(value);                     return; }
     case JSON_REGAL_LOGGING_FILENAME                       : { set_json_regal_logging_filename(value);                      return; }
     case JSON_REGAL_LOGGING_JSONFILE                       : { set_json_regal_logging_jsonfile(value);                      return; }

@@ -67,6 +67,9 @@
 #define set_json_regal_config_frame_save_prefix_color(value)             Config::frameSaveColorPrefix = value
 #define set_json_regal_config_frame_save_prefix_depth(value)             Config::frameSaveDepthPrefix = value
 #define set_json_regal_config_frame_save_prefix_stencil(value)           Config::frameSaveStencilPrefix = value
+#define set_json_regal_config_load_egl(value)                            Config::loadEGL = value
+#define set_json_regal_config_load_es2(value)                            Config::loadES2 = value
+#define set_json_regal_config_load_gl(value)                             Config::loadGL = value
 #define set_json_regal_config_system_egl(value)                          Config::sysEGL = value
 #define set_json_regal_config_system_es1(value)                          Config::sysES1 = value
 #define set_json_regal_config_system_es2(value)                          Config::sysES2 = value

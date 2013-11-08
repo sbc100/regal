@@ -15,6 +15,15 @@
 		431D3C0E15C9B6F0009DD04F /* RegalFavicon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 431D3C0A15C9B6F0009DD04F /* RegalFavicon.cpp */; };
 		431D3C0F15C9B6F0009DD04F /* RegalFavicon.h in Headers */ = {isa = PBXBuildFile; fileRef = 431D3C0B15C9B6F0009DD04F /* RegalFavicon.h */; };
 		431D3C1015C9B6F0009DD04F /* RegalMac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 431D3C0C15C9B6F0009DD04F /* RegalMac.cpp */; };
+		4359147D18293B32002CB92C /* libapitrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359144B18293A5C002CB92C /* libapitrace.a */; };
+		4359147E18293B32002CB92C /* libjsonsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359145118293A68002CB92C /* libjsonsl.a */; };
+		4359147F18293B32002CB92C /* libmd5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359145718293A74002CB92C /* libmd5.a */; };
+		4359148018293B32002CB92C /* libmongoose.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359145D18293A7D002CB92C /* libmongoose.a */; };
+		4359148118293B32002CB92C /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359146318293A8B002CB92C /* libpcre.a */; };
+		4359148218293B32002CB92C /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359146918293A94002CB92C /* libpng.a */; };
+		4359148318293B32002CB92C /* libsnappy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359146F18293A9C002CB92C /* libsnappy.a */; };
+		4359148418293B32002CB92C /* libsquish.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359147518293AAA002CB92C /* libsquish.a */; };
+		4359148518293B32002CB92C /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359147B18293AB2002CB92C /* libzlib.a */; };
 		438D2C2B16DE668A005E03F6 /* RegalJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 438D2C1F16DE668A005E03F6 /* RegalJson.cpp */; };
 		438D2C2D16DE668A005E03F6 /* RegalPixelConversions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 438D2C2116DE668A005E03F6 /* RegalPixelConversions.cpp */; };
 		438D2C2E16DE668A005E03F6 /* RegalPixelConversions.h in Headers */ = {isa = PBXBuildFile; fileRef = 438D2C2216DE668A005E03F6 /* RegalPixelConversions.h */; };
@@ -122,6 +131,72 @@
 		BCF889AA15E079D80093B7D5 /* RegalDispatchStaticES2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF889A915E079D80093B7D5 /* RegalDispatchStaticES2.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4359144A18293A5C002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359144618293A5B002CB92C /* apitrace.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 433667A917C56F3500D45AD9;
+			remoteInfo = apitrace;
+		};
+		4359145018293A68002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359144C18293A68002CB92C /* jsonsl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336679417C56EF900D45AD9;
+			remoteInfo = jsonsl;
+		};
+		4359145618293A74002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359145218293A73002CB92C /* md5.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336678117C56DFD00D45AD9;
+			remoteInfo = md5;
+		};
+		4359145C18293A7D002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359145818293A7C002CB92C /* mongoose.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336676E17C56DC700D45AD9;
+			remoteInfo = mongoose;
+		};
+		4359146218293A8B002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359145E18293A8A002CB92C /* pcre.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 433666B917C56BC000D45AD9;
+			remoteInfo = pcre;
+		};
+		4359146818293A94002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359146418293A93002CB92C /* png.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 433665D517C5632600D45AD9;
+			remoteInfo = png;
+		};
+		4359146E18293A9C002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359146A18293A9C002CB92C /* snappy.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336665817C56AA300D45AD9;
+			remoteInfo = snappy;
+		};
+		4359147418293AAA002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359147018293AAA002CB92C /* squish.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336667917C56B5200D45AD9;
+			remoteInfo = squish;
+		};
+		4359147A18293AB2002CB92C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4359147618293AB1002CB92C /* zlib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336661617C56A0800D45AD9;
+			remoteInfo = zlib;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		430443EE16F1656A0078C0F9 /* RegalXfer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalXfer.cpp; path = ../../../src/regal/RegalXfer.cpp; sourceTree = "<group>"; };
 		430443EF16F1656A0078C0F9 /* RegalXfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalXfer.h; path = ../../../src/regal/RegalXfer.h; sourceTree = "<group>"; };
@@ -131,6 +206,15 @@
 		431D3C0A15C9B6F0009DD04F /* RegalFavicon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalFavicon.cpp; path = ../../../src/regal/RegalFavicon.cpp; sourceTree = "<group>"; };
 		431D3C0B15C9B6F0009DD04F /* RegalFavicon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalFavicon.h; path = ../../../src/regal/RegalFavicon.h; sourceTree = "<group>"; };
 		431D3C0C15C9B6F0009DD04F /* RegalMac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalMac.cpp; path = ../../../src/regal/RegalMac.cpp; sourceTree = "<group>"; };
+		4359144618293A5B002CB92C /* apitrace.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = apitrace.xcodeproj; path = ../apitrace/apitrace.xcodeproj; sourceTree = "<group>"; };
+		4359144C18293A68002CB92C /* jsonsl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = jsonsl.xcodeproj; path = ../jsonsl/jsonsl.xcodeproj; sourceTree = "<group>"; };
+		4359145218293A73002CB92C /* md5.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = md5.xcodeproj; path = ../md5/md5.xcodeproj; sourceTree = "<group>"; };
+		4359145818293A7C002CB92C /* mongoose.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mongoose.xcodeproj; path = ../mongoose/mongoose.xcodeproj; sourceTree = "<group>"; };
+		4359145E18293A8A002CB92C /* pcre.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pcre.xcodeproj; path = ../pcre/pcre.xcodeproj; sourceTree = "<group>"; };
+		4359146418293A93002CB92C /* png.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = png.xcodeproj; path = ../png/png.xcodeproj; sourceTree = "<group>"; };
+		4359146A18293A9C002CB92C /* snappy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = snappy.xcodeproj; path = ../snappy/snappy.xcodeproj; sourceTree = "<group>"; };
+		4359147018293AAA002CB92C /* squish.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = squish.xcodeproj; path = ../squish/squish.xcodeproj; sourceTree = "<group>"; };
+		4359147618293AB1002CB92C /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../zlib/zlib.xcodeproj; sourceTree = "<group>"; };
 		436E18CA17020027005BE93E /* RegalJson.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = RegalJson.inl; path = ../../../src/regal/RegalJson.inl; sourceTree = "<group>"; };
 		438D2C1F16DE668A005E03F6 /* RegalJson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalJson.cpp; path = ../../../src/regal/RegalJson.cpp; sourceTree = "<group>"; };
 		438D2C2116DE668A005E03F6 /* RegalPixelConversions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalPixelConversions.cpp; path = ../../../src/regal/RegalPixelConversions.cpp; sourceTree = "<group>"; };
@@ -246,17 +330,115 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4359147D18293B32002CB92C /* libapitrace.a in Frameworks */,
+				4359147E18293B32002CB92C /* libjsonsl.a in Frameworks */,
+				4359147F18293B32002CB92C /* libmd5.a in Frameworks */,
+				4359148018293B32002CB92C /* libmongoose.a in Frameworks */,
+				4359148118293B32002CB92C /* libpcre.a in Frameworks */,
+				4359148218293B32002CB92C /* libpng.a in Frameworks */,
+				4359148318293B32002CB92C /* libsnappy.a in Frameworks */,
+				4359148418293B32002CB92C /* libsquish.a in Frameworks */,
+				4359148518293B32002CB92C /* libzlib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4359144718293A5B002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359144B18293A5C002CB92C /* libapitrace.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359144D18293A68002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359145118293A68002CB92C /* libjsonsl.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359145318293A73002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359145718293A74002CB92C /* libmd5.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359145918293A7C002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359145D18293A7D002CB92C /* libmongoose.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359145F18293A8A002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359146318293A8B002CB92C /* libpcre.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359146518293A93002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359146918293A94002CB92C /* libpng.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359146B18293A9C002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359146F18293A9C002CB92C /* libsnappy.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359147118293AAA002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359147518293AAA002CB92C /* libsquish.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359147718293AB1002CB92C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4359147B18293AB2002CB92C /* libzlib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4359147C18293AF6002CB92C /* subprojects */ = {
+			isa = PBXGroup;
+			children = (
+				4359144618293A5B002CB92C /* apitrace.xcodeproj */,
+				4359144C18293A68002CB92C /* jsonsl.xcodeproj */,
+				4359145218293A73002CB92C /* md5.xcodeproj */,
+				4359145818293A7C002CB92C /* mongoose.xcodeproj */,
+				4359145E18293A8A002CB92C /* pcre.xcodeproj */,
+				4359146418293A93002CB92C /* png.xcodeproj */,
+				4359146A18293A9C002CB92C /* snappy.xcodeproj */,
+				4359147018293AAA002CB92C /* squish.xcodeproj */,
+				4359147618293AB1002CB92C /* zlib.xcodeproj */,
+			);
+			name = subprojects;
+			sourceTree = "<group>";
+		};
 		43A6C1BB15C48CD90063667E = {
 			isa = PBXGroup;
 			children = (
-				43A6C1C715C48CD90063667E /* Products */,
 				43A6C1D015C48CFA0063667E /* Regal */,
+				43A6C1C715C48CD90063667E /* Products */,
+				4359147C18293AF6002CB92C /* subprojects */,
 			);
 			sourceTree = "<group>";
 		};
@@ -501,12 +683,116 @@
 			mainGroup = 43A6C1BB15C48CD90063667E;
 			productRefGroup = 43A6C1C715C48CD90063667E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4359144718293A5B002CB92C /* Products */;
+					ProjectRef = 4359144618293A5B002CB92C /* apitrace.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359144D18293A68002CB92C /* Products */;
+					ProjectRef = 4359144C18293A68002CB92C /* jsonsl.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359145318293A73002CB92C /* Products */;
+					ProjectRef = 4359145218293A73002CB92C /* md5.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359145918293A7C002CB92C /* Products */;
+					ProjectRef = 4359145818293A7C002CB92C /* mongoose.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359145F18293A8A002CB92C /* Products */;
+					ProjectRef = 4359145E18293A8A002CB92C /* pcre.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359146518293A93002CB92C /* Products */;
+					ProjectRef = 4359146418293A93002CB92C /* png.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359146B18293A9C002CB92C /* Products */;
+					ProjectRef = 4359146A18293A9C002CB92C /* snappy.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359147118293AAA002CB92C /* Products */;
+					ProjectRef = 4359147018293AAA002CB92C /* squish.xcodeproj */;
+				},
+				{
+					ProductGroup = 4359147718293AB1002CB92C /* Products */;
+					ProjectRef = 4359147618293AB1002CB92C /* zlib.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				43A6C1C515C48CD90063667E /* Regal */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4359144B18293A5C002CB92C /* libapitrace.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libapitrace.a;
+			remoteRef = 4359144A18293A5C002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359145118293A68002CB92C /* libjsonsl.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsonsl.a;
+			remoteRef = 4359145018293A68002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359145718293A74002CB92C /* libmd5.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmd5.a;
+			remoteRef = 4359145618293A74002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359145D18293A7D002CB92C /* libmongoose.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmongoose.a;
+			remoteRef = 4359145C18293A7D002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359146318293A8B002CB92C /* libpcre.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libpcre.a;
+			remoteRef = 4359146218293A8B002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359146918293A94002CB92C /* libpng.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libpng.a;
+			remoteRef = 4359146818293A94002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359146F18293A9C002CB92C /* libsnappy.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsnappy.a;
+			remoteRef = 4359146E18293A9C002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359147518293AAA002CB92C /* libsquish.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsquish.a;
+			remoteRef = 4359147418293AAA002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4359147B18293AB2002CB92C /* libzlib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libzlib.a;
+			remoteRef = 4359147A18293AB2002CB92C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		43A6C1C215C48CD90063667E /* Sources */ = {
@@ -613,7 +899,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "../../../src/mongoose ../../../src/md5/include";
 			};
 			name = Debug;
@@ -656,7 +942,7 @@
 					../../../src/zlib/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "../../../src/mongoose ../../../src/md5/include";
 			};
 			name = Release;

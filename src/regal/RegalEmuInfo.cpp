@@ -243,6 +243,8 @@ EmuInfo::getExtension(const ContextInfo &contextInfo, const char *ext) const
 {
   Internal("EmuInfo::getExtension ",boost::print::quote(ext,'"'));
 
+  // If the context supports it, we're done.
+
   if (contextInfo.getExtension(ext))
     return true;
 
@@ -276,7 +278,7 @@ EmuInfo::getExtension(const ContextInfo &contextInfo, const char *ext) const
   if (!strcmp(ext,"GL_REGAL_extension_query"))          return true;
   if (!strcmp(ext,"GL_REGAL_log"))                      return true;
 
-return false;
+  return false;
 }
 
 bool
