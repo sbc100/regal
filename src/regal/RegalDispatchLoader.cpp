@@ -4383,13 +4383,6 @@ namespace Loader
     _driver.call(&_driver.glFramebufferTexture)(target, attachment, texture, level);
   }
 
-  static void REGAL_CALL glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-  {
-    DispatchTableGL &_driver = _getDispatchGL();
-    _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glFramebufferTextureFace),reinterpret_cast<void (*)()>(glFramebufferTextureFace),"glFramebufferTextureFace");
-    _driver.call(&_driver.glFramebufferTextureFace)(target, attachment, texture, level, face);
-  }
-
   static void REGAL_CALL glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
   {
     DispatchTableGL &_driver = _getDispatchGL();
@@ -13263,14 +13256,14 @@ namespace Loader
 
 // GL_EXT_pixel_transform
 
-  static void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+  static void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glGetPixelTransformParameterfvEXT),reinterpret_cast<void (*)()>(glGetPixelTransformParameterfvEXT),"glGetPixelTransformParameterfvEXT");
     _driver.call(&_driver.glGetPixelTransformParameterfvEXT)(target, pname, params);
   }
 
-  static void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+  static void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glGetPixelTransformParameterivEXT),reinterpret_cast<void (*)()>(glGetPixelTransformParameterivEXT),"glGetPixelTransformParameterivEXT");
@@ -23057,7 +23050,6 @@ namespace Loader
   // GL_VERSION_3_2
 
     tbl.glFramebufferTexture = glFramebufferTexture;
-    tbl.glFramebufferTextureFace = glFramebufferTextureFace;
     tbl.glGetBufferParameteri64v = glGetBufferParameteri64v;
     tbl.glGetInteger64i_v = glGetInteger64i_v;
 

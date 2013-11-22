@@ -32,6 +32,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_FRAME
+
 REGAL_GLOBAL_BEGIN
 
 #include "md5.h"
@@ -203,3 +205,5 @@ void Frame::capture(RegalContext &context,const bool frameTerminator)
 }
 
 REGAL_NAMESPACE_END
+
+#endif // REGAL_FRAME

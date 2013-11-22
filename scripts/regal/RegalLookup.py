@@ -175,7 +175,7 @@ def generateLookupHeader(apis, args, offsetLookup = True, ifFunction = lambda i 
       names = [ j.name for j in i.functions if getattr(j,'regalOnly',False)==True or j.category=='GL_REGAL_ES1_0_compatibility']
 #      code.extend(pointerLookupHeader('regal',names))
 #      code.extend(offsetLookupHeader('regal',names))
-    
+
     names = [ j.name for j in i.functions ]
     conditional = None
     if i.name in cond:

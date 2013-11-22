@@ -3626,6 +3626,18 @@ static void _glewInfo_GL_EXT_cull_vertex (void)
 
 #endif /* GL_EXT_cull_vertex */
 
+#ifdef GL_EXT_debug_label
+
+static void _glewInfo_GL_EXT_debug_label (void)
+{
+  glewPrintExt("GL_EXT_debug_label", GLEW_EXT_debug_label, glewIsSupported("GL_EXT_debug_label"), glewGetExtension("GL_EXT_debug_label"));
+
+  glewInfoFunc("glGetObjectLabelEXT", glGetObjectLabelEXT == NULL);
+  glewInfoFunc("glLabelObjectEXT", glLabelObjectEXT == NULL);
+}
+
+#endif /* GL_EXT_debug_label */
+
 #ifdef GL_EXT_debug_marker
 
 static void _glewInfo_GL_EXT_debug_marker (void)
@@ -4388,6 +4400,15 @@ static void _glewInfo_GL_EXT_shader_image_load_store (void)
 
 #endif /* GL_EXT_shader_image_load_store */
 
+#ifdef GL_EXT_shader_integer_mix
+
+static void _glewInfo_GL_EXT_shader_integer_mix (void)
+{
+  glewPrintExt("GL_EXT_shader_integer_mix", GLEW_EXT_shader_integer_mix, glewIsSupported("GL_EXT_shader_integer_mix"), glewGetExtension("GL_EXT_shader_integer_mix"));
+}
+
+#endif /* GL_EXT_shader_integer_mix */
+
 #ifdef GL_EXT_shadow_funcs
 
 static void _glewInfo_GL_EXT_shadow_funcs (void)
@@ -5006,6 +5027,15 @@ static void _glewInfo_GL_INGR_interlace_read (void)
 
 #endif /* GL_INGR_interlace_read */
 
+#ifdef GL_INTEL_fragment_shader_ordering
+
+static void _glewInfo_GL_INTEL_fragment_shader_ordering (void)
+{
+  glewPrintExt("GL_INTEL_fragment_shader_ordering", GLEW_INTEL_fragment_shader_ordering, glewIsSupported("GL_INTEL_fragment_shader_ordering"), glewGetExtension("GL_INTEL_fragment_shader_ordering"));
+}
+
+#endif /* GL_INTEL_fragment_shader_ordering */
+
 #ifdef GL_INTEL_map_texture
 
 static void _glewInfo_GL_INTEL_map_texture (void)
@@ -5064,6 +5094,15 @@ static void _glewInfo_GL_KHR_debug (void)
 }
 
 #endif /* GL_KHR_debug */
+
+#ifdef GL_KHR_texture_compression_astc_hdr
+
+static void _glewInfo_GL_KHR_texture_compression_astc_hdr (void)
+{
+  glewPrintExt("GL_KHR_texture_compression_astc_hdr", GLEW_KHR_texture_compression_astc_hdr, glewIsSupported("GL_KHR_texture_compression_astc_hdr"), glewGetExtension("GL_KHR_texture_compression_astc_hdr"));
+}
+
+#endif /* GL_KHR_texture_compression_astc_hdr */
 
 #ifdef GL_KHR_texture_compression_astc_ldr
 
@@ -9283,6 +9322,9 @@ static void glewInfo (void)
 #ifdef GL_EXT_cull_vertex
   _glewInfo_GL_EXT_cull_vertex();
 #endif /* GL_EXT_cull_vertex */
+#ifdef GL_EXT_debug_label
+  _glewInfo_GL_EXT_debug_label();
+#endif /* GL_EXT_debug_label */
 #ifdef GL_EXT_debug_marker
   _glewInfo_GL_EXT_debug_marker();
 #endif /* GL_EXT_debug_marker */
@@ -9406,6 +9448,9 @@ static void glewInfo (void)
 #ifdef GL_EXT_shader_image_load_store
   _glewInfo_GL_EXT_shader_image_load_store();
 #endif /* GL_EXT_shader_image_load_store */
+#ifdef GL_EXT_shader_integer_mix
+  _glewInfo_GL_EXT_shader_integer_mix();
+#endif /* GL_EXT_shader_integer_mix */
 #ifdef GL_EXT_shadow_funcs
   _glewInfo_GL_EXT_shadow_funcs();
 #endif /* GL_EXT_shadow_funcs */
@@ -9568,6 +9613,9 @@ static void glewInfo (void)
 #ifdef GL_INGR_interlace_read
   _glewInfo_GL_INGR_interlace_read();
 #endif /* GL_INGR_interlace_read */
+#ifdef GL_INTEL_fragment_shader_ordering
+  _glewInfo_GL_INTEL_fragment_shader_ordering();
+#endif /* GL_INTEL_fragment_shader_ordering */
 #ifdef GL_INTEL_map_texture
   _glewInfo_GL_INTEL_map_texture();
 #endif /* GL_INTEL_map_texture */
@@ -9580,6 +9628,9 @@ static void glewInfo (void)
 #ifdef GL_KHR_debug
   _glewInfo_GL_KHR_debug();
 #endif /* GL_KHR_debug */
+#ifdef GL_KHR_texture_compression_astc_hdr
+  _glewInfo_GL_KHR_texture_compression_astc_hdr();
+#endif /* GL_KHR_texture_compression_astc_hdr */
 #ifdef GL_KHR_texture_compression_astc_ldr
   _glewInfo_GL_KHR_texture_compression_astc_ldr();
 #endif /* GL_KHR_texture_compression_astc_ldr */

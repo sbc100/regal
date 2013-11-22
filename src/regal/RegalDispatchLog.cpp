@@ -6232,16 +6232,6 @@ static void REGAL_CALL log_glFramebufferTexture(GLenum target, GLenum attachment
     Driver("glFramebufferTexture","(", toString(target), ", ", toString(attachment), ", ", texture, ", ", level, ")");
 }
 
-static void REGAL_CALL log_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-{
-    RegalContext *_context = REGAL_GET_CONTEXT();
-    RegalAssert(_context);
-    DispatchTableGL *_next = _context->dispatcher.logging.next();
-    RegalAssert(_next);
-    _next->call(&_next->glFramebufferTextureFace)(target, attachment, texture, level, face);
-    Driver("glFramebufferTextureFace","(", toString(target), ", ", toString(attachment), ", ", texture, ", ", level, ", ", toString(face), ")");
-}
-
 static void REGAL_CALL log_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -18852,7 +18842,7 @@ static void REGAL_CALL log_glGetColorTableParameterivEXT(GLenum target, GLenum p
 
 // GL_EXT_pixel_transform
 
-static void REGAL_CALL log_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL log_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -18862,7 +18852,7 @@ static void REGAL_CALL log_glGetPixelTransformParameterfvEXT(GLenum target, GLen
     Driver("glGetPixelTransformParameterfvEXT","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
 }
 
-static void REGAL_CALL log_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL log_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -32002,7 +31992,6 @@ void InitDispatchTableLog(DispatchTableGL &tbl)
   // GL_VERSION_3_2
 
   tbl.glFramebufferTexture = log_glFramebufferTexture;
-  tbl.glFramebufferTextureFace = log_glFramebufferTextureFace;
   tbl.glGetBufferParameteri64v = log_glGetBufferParameteri64v;
   tbl.glGetInteger64i_v = log_glGetInteger64i_v;
 

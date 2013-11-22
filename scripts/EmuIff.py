@@ -270,14 +270,5 @@ iffFormulae = {
     'CreateShader' : {
         'entries' : [ 'glCreateShader(ObjectARB)?', ],
         'impl' : [ 'return _context->iff->CreateShader( _context, ${arg0} );', ],
-    },
-    'Hint' : {
-        'entries' : [ 'glHint' ],
-        'impl' : [ ],
-    },
-    'TexSubImage' : {
-        'entries' : [ 'glTexSubImage2D' ],
-        'impl' : [ ],
     }
 }
-

@@ -18751,19 +18751,6 @@ glFramebufferTexture.trace = True
 glFramebufferTexture.play = True
 gl.add(glFramebufferTexture)
 
-glFramebufferTextureFace = Function('glFramebufferTextureFace')
-glFramebufferTextureFace.ret = Return('void')
-glFramebufferTextureFace.add( Input( 'target','GLenum' ))
-glFramebufferTextureFace.add( Input( 'attachment','GLenum' ))
-glFramebufferTextureFace.add( Input( 'texture','GLuint' ))
-glFramebufferTextureFace.add( Input( 'level','GLint' ))
-glFramebufferTextureFace.add( Input( 'face','GLenum' ))
-glFramebufferTextureFace.version = '3.2'
-glFramebufferTextureFace.category = 'GL_VERSION_3_2'
-glFramebufferTextureFace.trace = True
-glFramebufferTextureFace.play = True
-gl.add(glFramebufferTextureFace)
-
 glGetBufferParameteri64v = Function('glGetBufferParameteri64v')
 glGetBufferParameteri64v.ret = Return('void')
 glGetBufferParameteri64v.add( Input( 'target','GLenum' ))
@@ -33268,7 +33255,7 @@ glGetPixelTransformParameterfvEXT = Function('glGetPixelTransformParameterfvEXT'
 glGetPixelTransformParameterfvEXT.ret = Return('void')
 glGetPixelTransformParameterfvEXT.add( Input( 'target','GLenum' ))
 glGetPixelTransformParameterfvEXT.add( Input( 'pname','GLenum' ))
-glGetPixelTransformParameterfvEXT.add( Input( 'params','const GLfloat *' ))
+glGetPixelTransformParameterfvEXT.add( Output( 'params','GLfloat *' ))
 glGetPixelTransformParameterfvEXT.version = ''
 glGetPixelTransformParameterfvEXT.category = 'GL_EXT_pixel_transform'
 glGetPixelTransformParameterfvEXT.trace = True
@@ -33279,7 +33266,7 @@ glGetPixelTransformParameterivEXT = Function('glGetPixelTransformParameterivEXT'
 glGetPixelTransformParameterivEXT.ret = Return('void')
 glGetPixelTransformParameterivEXT.add( Input( 'target','GLenum' ))
 glGetPixelTransformParameterivEXT.add( Input( 'pname','GLenum' ))
-glGetPixelTransformParameterivEXT.add( Input( 'params','const GLint *' ))
+glGetPixelTransformParameterivEXT.add( Output( 'params','GLint *' ))
 glGetPixelTransformParameterivEXT.version = ''
 glGetPixelTransformParameterivEXT.category = 'GL_EXT_pixel_transform'
 glGetPixelTransformParameterivEXT.trace = True

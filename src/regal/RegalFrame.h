@@ -40,6 +40,8 @@
 
 #include "RegalUtil.h"
 
+#if REGAL_FRAME
+
 REGAL_GLOBAL_BEGIN
 
 #include "RegalTimer.h"
@@ -101,5 +103,7 @@ private:
 };
 
 REGAL_NAMESPACE_END
+
+#endif // REGAL_FRAME
 
 #endif

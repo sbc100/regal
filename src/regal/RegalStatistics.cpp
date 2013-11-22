@@ -1423,7 +1423,6 @@ Statistics::log() const
 /* GL_VERSION_3_2 */
 
   log("glFramebufferTexture",glFramebufferTexture);
-  log("glFramebufferTextureFace",glFramebufferTextureFace);
   log("glGetBufferParameteri64v",glGetBufferParameteri64v);
   log("glGetInteger64i_v",glGetInteger64i_v);
 

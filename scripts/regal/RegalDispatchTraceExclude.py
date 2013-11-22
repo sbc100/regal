@@ -1,21 +1,8 @@
 # we need to exclude these functions from the dispatch becuse they do not exist in apitrace
 exclude = [
-  'glFramebufferTextureFace',
-  'glClearNamedBufferSubDataEXT',
 
   'glMatrixIndexPointerOES',
   'glWeightPointerOES',
-
-  # DSA
-
-  'glDisableClientStateiEXT',
-  'glEnableClientStateiEXT',
-  'glGetDoublei_vEXT',
-  'glGetFloati_vEXT',
-  'glGetPointeri_vEXT',
-  'glMultiTexImage1DEXT',
-  'glMultiTexImage2DEXT',
-  'glMultiTexImage3DEXT',
 
   'GL_AMD_stencil_operation_extended',
   'GL_ARB_cl_event',
@@ -33,9 +20,6 @@ exclude = [
   'GL_APPLE_sync',
   'GL_APPLE_copy_texture_levels',
 
-  'GL_NV_bindless_texture',
-  'GL_NV_draw_texture',
-
   'GL_EXT_fragment_lighting',
   'GL_EXT_map_buffer_range',
   'GL_EXT_multiview_draw_buffers',
@@ -47,18 +31,12 @@ exclude = [
 
   'GL_INTEL_texture_scissor',
 
-  'GL_NVX_conditional_render',
-
   'GL_NV_framebuffer_blit',
   'GL_NV_vdpau_interop',
 
   'GL_OES_single_precision',
 
-# 'GL_EXT_pixel_transform',
-  'glGetPixelTransformParameterfvEXT',
-  'glGetPixelTransformParameterivEXT',
-
-# ES
+  # ES
 
   'GL_NV_non_square_matrices',
   'GL_NV_copy_buffer',
@@ -102,16 +80,9 @@ exclude = [
   'wglGetPixelFormatAttribivEXT',
   'wglEnumGpuDevicesNV',
 
-  # https://github.com/apitrace/apitrace/pull/130
-
-  'glTextureImage1DEXT',
-  'glTextureImage2DEXT',
-  'glTextureImage3DEXT',
-
   # GL 4.4 and new extensions not in apitrace yet
 
   'GL_AMD_interleaved_elements',
-  'GL_AMD_sparse_texture',
   'GL_ARB_bindless_texture',
   'GL_ARB_compute_variable_group_size',
   'GL_ARB_indirect_parameters',

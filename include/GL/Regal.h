@@ -16631,8 +16631,8 @@ REGAL_DECL void REGAL_CALL plugin_glGetColorTableParameterivEXT(GLenum target, G
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_EXT_PIXEL_TRANSFORM
-typedef void (REGAL_CALL *PFNGLGETPIXELTRANSFORMPARAMETERFVEXTPROC)(GLenum target, GLenum pname, const GLfloat *params);
-typedef void (REGAL_CALL *PFNGLGETPIXELTRANSFORMPARAMETERIVEXTPROC)(GLenum target, GLenum pname, const GLint *params);
+typedef void (REGAL_CALL *PFNGLGETPIXELTRANSFORMPARAMETERFVEXTPROC)(GLenum target, GLenum pname, GLfloat *params);
+typedef void (REGAL_CALL *PFNGLGETPIXELTRANSFORMPARAMETERIVEXTPROC)(GLenum target, GLenum pname, GLint *params);
 typedef void (REGAL_CALL *PFNGLPIXELTRANSFORMPARAMETERFEXTPROC)(GLenum target, GLenum pname, const GLfloat param);
 typedef void (REGAL_CALL *PFNGLPIXELTRANSFORMPARAMETERFVEXTPROC)(GLenum target, GLenum pname, const GLfloat *params);
 typedef void (REGAL_CALL *PFNGLPIXELTRANSFORMPARAMETERIEXTPROC)(GLenum target, GLenum pname, const GLint param);
@@ -16649,8 +16649,8 @@ typedef void (REGAL_CALL *PFNGLPIXELTRANSFORMPARAMETERIVEXTPROC)(GLenum target, 
 #endif
 
 #ifndef REGAL_NO_DECLARATION_GL_EXT_PIXEL_TRANSFORM
-REGAL_DECL void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params);
-REGAL_DECL void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params);
+REGAL_DECL void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params);
+REGAL_DECL void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params);
 REGAL_DECL void REGAL_CALL glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param);
 REGAL_DECL void REGAL_CALL glPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params);
 REGAL_DECL void REGAL_CALL glPixelTransformParameteriEXT(GLenum target, GLenum pname, const GLint param);
@@ -16658,8 +16658,8 @@ REGAL_DECL void REGAL_CALL glPixelTransformParameterivEXT(GLenum target, GLenum 
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_EXT_PIXEL_TRANSFORM
-REGAL_DECL void REGAL_CALL plugin_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params);
-REGAL_DECL void REGAL_CALL plugin_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params);
+REGAL_DECL void REGAL_CALL plugin_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params);
+REGAL_DECL void REGAL_CALL plugin_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params);
 REGAL_DECL void REGAL_CALL plugin_glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param);
 REGAL_DECL void REGAL_CALL plugin_glPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params);
 REGAL_DECL void REGAL_CALL plugin_glPixelTransformParameteriEXT(GLenum target, GLenum pname, const GLint param);
@@ -36083,7 +36083,6 @@ REGAL_DECL void REGAL_CALL plugin_glTexBuffer(GLenum target, GLenum internalform
 #endif
 
 #ifndef REGAL_NO_TYPEDEF_GL_VERSION_3_2
-typedef void (REGAL_CALL *PFNGLFRAMEBUFFERTEXTUREFACEPROC)(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
 typedef void (REGAL_CALL *PFNGLFRAMEBUFFERTEXTUREPROC)(GLenum target, GLenum attachment, GLuint texture, GLint level);
 typedef void (REGAL_CALL *PFNGLGETBUFFERPARAMETERI64VPROC)(GLenum target, GLenum pname, GLint64 *params);
 typedef void (REGAL_CALL *PFNGLGETINTEGER64I_VPROC)(GLenum target, GLuint index, GLint64 *data);
@@ -36091,21 +36090,18 @@ typedef void (REGAL_CALL *PFNGLGETINTEGER64I_VPROC)(GLenum target, GLuint index,
 
 #ifndef REGAL_NO_NAMESPACE_GL_VERSION_3_2
 #define glFramebufferTexture                rglFramebufferTexture
-#define glFramebufferTextureFace            rglFramebufferTextureFace
 #define glGetBufferParameteri64v            rglGetBufferParameteri64v
 #define glGetInteger64i_v                   rglGetInteger64i_v
 #endif
 
 #ifndef REGAL_NO_DECLARATION_GL_VERSION_3_2
 REGAL_DECL void REGAL_CALL glFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level);
-REGAL_DECL void REGAL_CALL glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
 REGAL_DECL void REGAL_CALL glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params);
 REGAL_DECL void REGAL_CALL glGetInteger64i_v(GLenum target, GLuint index, GLint64 *data);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_VERSION_3_2
 REGAL_DECL void REGAL_CALL plugin_glFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level);
-REGAL_DECL void REGAL_CALL plugin_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
 REGAL_DECL void REGAL_CALL plugin_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params);
 REGAL_DECL void REGAL_CALL plugin_glGetInteger64i_v(GLenum target, GLuint index, GLint64 *data);
 #endif

@@ -776,6 +776,11 @@ namespace Trace
 
   void  glSetMultisamplefvAMD(GLenum pname, GLuint index, const GLfloat *val);
 
+// GL_AMD_sparse_texture
+
+  void  glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+  void  glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags);
+
 // GL_AMD_vertex_shader_tessellator
 
   void  glTessellationFactorAMD(GLfloat factor);
@@ -887,6 +892,7 @@ namespace Trace
   void  glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
   void  glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
   void  glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
+  void  glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 
 // GL_ARB_clear_texture
 
@@ -1909,9 +1915,11 @@ namespace Trace
   void  glCopyTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
   void  glCopyTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
   void  glDisableClientStateIndexedEXT(GLenum array, GLuint index);
+  void  glDisableClientStateiEXT(GLenum array, GLuint index);
   void  glDisableVertexArrayAttribEXT(GLuint vaobj, GLenum array);
   void  glDisableVertexArrayEXT(GLuint vaobj, GLenum array);
   void  glEnableClientStateIndexedEXT(GLenum array, GLuint index);
+  void  glEnableClientStateiEXT(GLenum array, GLuint index);
   void  glEnableVertexArrayAttribEXT(GLuint vaobj, GLenum array);
   void  glEnableVertexArrayEXT(GLuint vaobj, GLenum array);
   void  glFlushMappedNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length);
@@ -1923,7 +1931,9 @@ namespace Trace
   void  glGetCompressedMultiTexImageEXT(GLenum texunit, GLenum target, GLint lod, GLvoid *img);
   void  glGetCompressedTextureImageEXT(GLuint texture, GLenum target, GLint lod, GLvoid *img);
   void  glGetDoubleIndexedvEXT(GLenum target, GLuint index, GLdouble *data);
+  void  glGetDoublei_vEXT(GLenum target, GLuint index, GLdouble *data);
   void  glGetFloatIndexedvEXT(GLenum target, GLuint index, GLfloat *data);
+  void  glGetFloati_vEXT(GLenum target, GLuint index, GLfloat *data);
   void  glGetFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint *params);
   void  glGetMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat *params);
   void  glGetMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, GLint *params);
@@ -1949,6 +1959,7 @@ namespace Trace
   void  glGetNamedProgramivEXT(GLuint program, GLenum target, GLenum pname, GLint *params);
   void  glGetNamedRenderbufferParameterivEXT(GLuint renderbuffer, GLenum pname, GLint *params);
   void  glGetPointerIndexedvEXT(GLenum target, GLuint index, GLvoid **data);
+  void  glGetPointeri_vEXT(GLenum pname, GLuint index, GLvoid **params);
   void  glGetTextureImageEXT(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels);
   void  glGetTextureLevelParameterfvEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat *params);
   void  glGetTextureLevelParameterivEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLint *params);
@@ -1993,6 +2004,9 @@ namespace Trace
   void  glMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLfloat *params);
   void  glMultiTexGeniEXT(GLenum texunit, GLenum coord, GLenum pname, GLint param);
   void  glMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, const GLint *params);
+  void  glMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+  void  glMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+  void  glMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
   void  glMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *params);
   void  glMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, const GLuint *params);
   void  glMultiTexParameterfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param);
@@ -2080,6 +2094,9 @@ namespace Trace
   void  glProgramUniformMatrix4x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
   void  glPushClientAttribDefaultEXT(GLbitfield mask);
   void  glTextureBufferEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer);
+  void  glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+  void  glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+  void  glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
   void  glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *params);
   void  glTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, const GLuint *params);
   void  glTextureParameterfEXT(GLuint texture, GLenum target, GLenum pname, GLfloat param);
@@ -2265,6 +2282,8 @@ namespace Trace
 
 // GL_EXT_pixel_transform
 
+  void  glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params);
+  void  glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params);
   void  glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param);
   void  glPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params);
   void  glPixelTransformParameteriEXT(GLenum target, GLenum pname, const GLint param);
@@ -2559,6 +2578,27 @@ namespace Trace
   void  glWindowPos4sMESA(GLshort x, GLshort y, GLshort z, GLshort w);
   void  glWindowPos4svMESA(const GLshort *v);
 
+// GL_NVX_conditional_render
+
+  void  glBeginConditionalRenderNVX(GLuint id);
+  void  glEndConditionalRenderNVX(void);
+
+// GL_NV_bindless_texture
+
+  GLuint64  glGetImageHandleNV(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format);
+  GLuint64  glGetTextureHandleNV(GLuint texture);
+  GLuint64  glGetTextureSamplerHandleNV(GLuint texture, GLuint sampler);
+  GLboolean  glIsImageHandleResidentNV(GLuint64 handle);
+  GLboolean  glIsTextureHandleResidentNV(GLuint64 handle);
+  void  glMakeImageHandleNonResidentNV(GLuint64 handle);
+  void  glMakeImageHandleResidentNV(GLuint64 handle, GLenum access);
+  void  glMakeTextureHandleNonResidentNV(GLuint64 handle);
+  void  glMakeTextureHandleResidentNV(GLuint64 handle);
+  void  glProgramUniformHandleui64NV(GLuint program, GLint location, GLuint64 value);
+  void  glProgramUniformHandleui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64 *values);
+  void  glUniformHandleui64NV(GLint location, GLuint64 value);
+  void  glUniformHandleui64vNV(GLint location, GLsizei count, const GLuint64 *value);
+
 // GL_NV_conditional_render
 
   void  glBeginConditionalRenderNV(GLuint id, GLenum mode);
@@ -2582,6 +2622,10 @@ namespace Trace
 // GL_NV_draw_buffers
 
   void  glDrawBuffersNV(GLsizei n, const GLenum *bufs);
+
+// GL_NV_draw_texture
+
+  void  glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1);
 
 // GL_NV_evaluators
 
@@ -10472,6 +10516,28 @@ static void REGAL_CALL trace_glSetMultisamplefvAMD(GLenum pname, GLuint index, c
   Trace::glSetMultisamplefvAMD(pname, index, val);
 }
 
+// GL_AMD_sparse_texture
+
+static void REGAL_CALL trace_glTexStorageSparseAMD(GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  Internal("trace_glTexStorageSparseAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glTexStorageSparseAMD(target, internalFormat, width, height, depth, layers, flags);
+}
+
+static void REGAL_CALL trace_glTextureStorageSparseAMD(GLuint texture, GLenum target, GLenum internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLsizei layers, GLbitfield flags)
+{
+  Internal("trace_glTextureStorageSparseAMD","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glTextureStorageSparseAMD(texture, target, internalFormat, width, height, depth, layers, flags);
+}
+
 // GL_AMD_vertex_shader_tessellator
 
 static void REGAL_CALL trace_glTessellationFactorAMD(GLfloat factor)
@@ -11094,6 +11160,16 @@ static void REGAL_CALL trace_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glClearNamedBufferDataEXT(buffer, internalformat, format, type, data);
+}
+
+static void REGAL_CALL trace_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+{
+  Internal("trace_glClearNamedBufferSubDataEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, data);
 }
 
 // GL_ARB_clear_texture
@@ -18806,6 +18882,16 @@ static void REGAL_CALL trace_glDisableClientStateIndexedEXT(GLenum array, GLuint
   Trace::glDisableClientStateIndexedEXT(array, index);
 }
 
+static void REGAL_CALL trace_glDisableClientStateiEXT(GLenum array, GLuint index)
+{
+  Internal("trace_glDisableClientStateiEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glDisableClientStateiEXT(array, index);
+}
+
 static void REGAL_CALL trace_glDisableVertexArrayAttribEXT(GLuint vaobj, GLenum array)
 {
   Internal("trace_glDisableVertexArrayAttribEXT","()");
@@ -18834,6 +18920,16 @@ static void REGAL_CALL trace_glEnableClientStateIndexedEXT(GLenum array, GLuint 
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glEnableClientStateIndexedEXT(array, index);
+}
+
+static void REGAL_CALL trace_glEnableClientStateiEXT(GLenum array, GLuint index)
+{
+  Internal("trace_glEnableClientStateiEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glEnableClientStateiEXT(array, index);
 }
 
 static void REGAL_CALL trace_glEnableVertexArrayAttribEXT(GLuint vaobj, GLenum array)
@@ -18946,6 +19042,16 @@ static void REGAL_CALL trace_glGetDoubleIndexedvEXT(GLenum target, GLuint index,
   Trace::glGetDoubleIndexedvEXT(target, index, data);
 }
 
+static void REGAL_CALL trace_glGetDoublei_vEXT(GLenum target, GLuint index, GLdouble *data)
+{
+  Internal("trace_glGetDoublei_vEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetDoublei_vEXT(target, index, data);
+}
+
 static void REGAL_CALL trace_glGetFloatIndexedvEXT(GLenum target, GLuint index, GLfloat *data)
 {
   Internal("trace_glGetFloatIndexedvEXT","()");
@@ -18954,6 +19060,16 @@ static void REGAL_CALL trace_glGetFloatIndexedvEXT(GLenum target, GLuint index, 
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glGetFloatIndexedvEXT(target, index, data);
+}
+
+static void REGAL_CALL trace_glGetFloati_vEXT(GLenum target, GLuint index, GLfloat *data)
+{
+  Internal("trace_glGetFloati_vEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetFloati_vEXT(target, index, data);
 }
 
 static void REGAL_CALL trace_glGetFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint *params)
@@ -19204,6 +19320,16 @@ static void REGAL_CALL trace_glGetPointerIndexedvEXT(GLenum target, GLuint index
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glGetPointerIndexedvEXT(target, index, data);
+}
+
+static void REGAL_CALL trace_glGetPointeri_vEXT(GLenum pname, GLuint index, GLvoid **params)
+{
+  Internal("trace_glGetPointeri_vEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPointeri_vEXT(pname, index, params);
 }
 
 static void REGAL_CALL trace_glGetTextureImageEXT(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels)
@@ -19646,6 +19772,36 @@ static void REGAL_CALL trace_glMultiTexGenivEXT(GLenum texunit, GLenum coord, GL
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glMultiTexGenivEXT(texunit, coord, pname, params);
+}
+
+static void REGAL_CALL trace_glMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+{
+  Internal("trace_glMultiTexImage1DEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMultiTexImage1DEXT(texunit, target, level, internalformat, width, border, format, type, pixels);
+}
+
+static void REGAL_CALL trace_glMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+{
+  Internal("trace_glMultiTexImage2DEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMultiTexImage2DEXT(texunit, target, level, internalformat, width, height, border, format, type, pixels);
+}
+
+static void REGAL_CALL trace_glMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+{
+  Internal("trace_glMultiTexImage3DEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMultiTexImage3DEXT(texunit, target, level, internalformat, width, height, depth, border, format, type, pixels);
 }
 
 static void REGAL_CALL trace_glMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint *params)
@@ -20516,6 +20672,36 @@ static void REGAL_CALL trace_glTextureBufferEXT(GLuint texture, GLenum target, G
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glTextureBufferEXT(texture, target, internalformat, buffer);
+}
+
+static void REGAL_CALL trace_glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+{
+  Internal("trace_glTextureImage1DEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glTextureImage1DEXT(texture, target, level, internalformat, width, border, format, type, pixels);
+}
+
+static void REGAL_CALL trace_glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+{
+  Internal("trace_glTextureImage2DEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glTextureImage2DEXT(texture, target, level, internalformat, width, height, border, format, type, pixels);
+}
+
+static void REGAL_CALL trace_glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
+{
+  Internal("trace_glTextureImage3DEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glTextureImage3DEXT(texture, target, level, internalformat, width, height, depth, border, format, type, pixels);
 }
 
 static void REGAL_CALL trace_glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint *params)
@@ -21814,6 +22000,26 @@ static void REGAL_CALL trace_glGetColorTableParameterivEXT(GLenum target, GLenum
 }
 
 // GL_EXT_pixel_transform
+
+static void REGAL_CALL trace_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
+{
+  Internal("trace_glGetPixelTransformParameterfvEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPixelTransformParameterfvEXT(target, pname, params);
+}
+
+static void REGAL_CALL trace_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
+{
+  Internal("trace_glGetPixelTransformParameterivEXT","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glGetPixelTransformParameterivEXT(target, pname, params);
+}
 
 static void REGAL_CALL trace_glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param)
 {
@@ -23808,6 +24014,165 @@ static void REGAL_CALL trace_glWindowPos4svMESA(const GLshort *v)
   Trace::glWindowPos4svMESA(v);
 }
 
+// GL_NVX_conditional_render
+
+static void REGAL_CALL trace_glBeginConditionalRenderNVX(GLuint id)
+{
+  Internal("trace_glBeginConditionalRenderNVX","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glBeginConditionalRenderNVX(id);
+}
+
+static void REGAL_CALL trace_glEndConditionalRenderNVX(void)
+{
+  Internal("trace_glEndConditionalRenderNVX","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glEndConditionalRenderNVX();
+}
+
+// GL_NV_bindless_texture
+
+static GLuint64 REGAL_CALL trace_glGetImageHandleNV(GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format)
+{
+  Internal("trace_glGetImageHandleNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLuint64  ret = Trace::glGetImageHandleNV(texture, level, layered, layer, format);
+  return ret;
+}
+
+static GLuint64 REGAL_CALL trace_glGetTextureHandleNV(GLuint texture)
+{
+  Internal("trace_glGetTextureHandleNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLuint64  ret = Trace::glGetTextureHandleNV(texture);
+  return ret;
+}
+
+static GLuint64 REGAL_CALL trace_glGetTextureSamplerHandleNV(GLuint texture, GLuint sampler)
+{
+  Internal("trace_glGetTextureSamplerHandleNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLuint64  ret = Trace::glGetTextureSamplerHandleNV(texture, sampler);
+  return ret;
+}
+
+static GLboolean REGAL_CALL trace_glIsImageHandleResidentNV(GLuint64 handle)
+{
+  Internal("trace_glIsImageHandleResidentNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glIsImageHandleResidentNV(handle);
+  return ret;
+}
+
+static GLboolean REGAL_CALL trace_glIsTextureHandleResidentNV(GLuint64 handle)
+{
+  Internal("trace_glIsTextureHandleResidentNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glIsTextureHandleResidentNV(handle);
+  return ret;
+}
+
+static void REGAL_CALL trace_glMakeImageHandleNonResidentNV(GLuint64 handle)
+{
+  Internal("trace_glMakeImageHandleNonResidentNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMakeImageHandleNonResidentNV(handle);
+}
+
+static void REGAL_CALL trace_glMakeImageHandleResidentNV(GLuint64 handle, GLenum access)
+{
+  Internal("trace_glMakeImageHandleResidentNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMakeImageHandleResidentNV(handle, access);
+}
+
+static void REGAL_CALL trace_glMakeTextureHandleNonResidentNV(GLuint64 handle)
+{
+  Internal("trace_glMakeTextureHandleNonResidentNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMakeTextureHandleNonResidentNV(handle);
+}
+
+static void REGAL_CALL trace_glMakeTextureHandleResidentNV(GLuint64 handle)
+{
+  Internal("trace_glMakeTextureHandleResidentNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glMakeTextureHandleResidentNV(handle);
+}
+
+static void REGAL_CALL trace_glProgramUniformHandleui64NV(GLuint program, GLint location, GLuint64 value)
+{
+  Internal("trace_glProgramUniformHandleui64NV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glProgramUniformHandleui64NV(program, location, value);
+}
+
+static void REGAL_CALL trace_glProgramUniformHandleui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64 *values)
+{
+  Internal("trace_glProgramUniformHandleui64vNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glProgramUniformHandleui64vNV(program, location, count, values);
+}
+
+static void REGAL_CALL trace_glUniformHandleui64NV(GLint location, GLuint64 value)
+{
+  Internal("trace_glUniformHandleui64NV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glUniformHandleui64NV(location, value);
+}
+
+static void REGAL_CALL trace_glUniformHandleui64vNV(GLint location, GLsizei count, const GLuint64 *value)
+{
+  Internal("trace_glUniformHandleui64vNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glUniformHandleui64vNV(location, count, value);
+}
+
 // GL_NV_conditional_render
 
 static void REGAL_CALL trace_glBeginConditionalRenderNV(GLuint id, GLenum mode)
@@ -23906,6 +24271,18 @@ static void REGAL_CALL trace_glDrawBuffersNV(GLsizei n, const GLenum *bufs)
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
   Trace::glDrawBuffersNV(n, bufs);
+}
+
+// GL_NV_draw_texture
+
+static void REGAL_CALL trace_glDrawTextureNV(GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1)
+{
+  Internal("trace_glDrawTextureNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glDrawTextureNV(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
 }
 
 // GL_NV_evaluators
@@ -34198,6 +34575,11 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
 
   tbl.glSetMultisamplefvAMD = trace_glSetMultisamplefvAMD;
 
+  // GL_AMD_sparse_texture
+
+  tbl.glTexStorageSparseAMD = trace_glTexStorageSparseAMD;
+  tbl.glTextureStorageSparseAMD = trace_glTextureStorageSparseAMD;
+
   // GL_AMD_vertex_shader_tessellator
 
   tbl.glTessellationFactorAMD = trace_glTessellationFactorAMD;
@@ -34309,6 +34691,7 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glClearBufferData = trace_glClearBufferData;
   tbl.glClearBufferSubData = trace_glClearBufferSubData;
   tbl.glClearNamedBufferDataEXT = trace_glClearNamedBufferDataEXT;
+  tbl.glClearNamedBufferSubDataEXT = trace_glClearNamedBufferSubDataEXT;
 
   // GL_ARB_clear_texture
 
@@ -35331,9 +35714,11 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glCopyTextureSubImage2DEXT = trace_glCopyTextureSubImage2DEXT;
   tbl.glCopyTextureSubImage3DEXT = trace_glCopyTextureSubImage3DEXT;
   tbl.glDisableClientStateIndexedEXT = trace_glDisableClientStateIndexedEXT;
+  tbl.glDisableClientStateiEXT = trace_glDisableClientStateiEXT;
   tbl.glDisableVertexArrayAttribEXT = trace_glDisableVertexArrayAttribEXT;
   tbl.glDisableVertexArrayEXT = trace_glDisableVertexArrayEXT;
   tbl.glEnableClientStateIndexedEXT = trace_glEnableClientStateIndexedEXT;
+  tbl.glEnableClientStateiEXT = trace_glEnableClientStateiEXT;
   tbl.glEnableVertexArrayAttribEXT = trace_glEnableVertexArrayAttribEXT;
   tbl.glEnableVertexArrayEXT = trace_glEnableVertexArrayEXT;
   tbl.glFlushMappedNamedBufferRangeEXT = trace_glFlushMappedNamedBufferRangeEXT;
@@ -35345,7 +35730,9 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glGetCompressedMultiTexImageEXT = trace_glGetCompressedMultiTexImageEXT;
   tbl.glGetCompressedTextureImageEXT = trace_glGetCompressedTextureImageEXT;
   tbl.glGetDoubleIndexedvEXT = trace_glGetDoubleIndexedvEXT;
+  tbl.glGetDoublei_vEXT = trace_glGetDoublei_vEXT;
   tbl.glGetFloatIndexedvEXT = trace_glGetFloatIndexedvEXT;
+  tbl.glGetFloati_vEXT = trace_glGetFloati_vEXT;
   tbl.glGetFramebufferParameterivEXT = trace_glGetFramebufferParameterivEXT;
   tbl.glGetMultiTexEnvfvEXT = trace_glGetMultiTexEnvfvEXT;
   tbl.glGetMultiTexEnvivEXT = trace_glGetMultiTexEnvivEXT;
@@ -35371,6 +35758,7 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glGetNamedProgramivEXT = trace_glGetNamedProgramivEXT;
   tbl.glGetNamedRenderbufferParameterivEXT = trace_glGetNamedRenderbufferParameterivEXT;
   tbl.glGetPointerIndexedvEXT = trace_glGetPointerIndexedvEXT;
+  tbl.glGetPointeri_vEXT = trace_glGetPointeri_vEXT;
   tbl.glGetTextureImageEXT = trace_glGetTextureImageEXT;
   tbl.glGetTextureLevelParameterfvEXT = trace_glGetTextureLevelParameterfvEXT;
   tbl.glGetTextureLevelParameterivEXT = trace_glGetTextureLevelParameterivEXT;
@@ -35415,6 +35803,9 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glMultiTexGenfvEXT = trace_glMultiTexGenfvEXT;
   tbl.glMultiTexGeniEXT = trace_glMultiTexGeniEXT;
   tbl.glMultiTexGenivEXT = trace_glMultiTexGenivEXT;
+  tbl.glMultiTexImage1DEXT = trace_glMultiTexImage1DEXT;
+  tbl.glMultiTexImage2DEXT = trace_glMultiTexImage2DEXT;
+  tbl.glMultiTexImage3DEXT = trace_glMultiTexImage3DEXT;
   tbl.glMultiTexParameterIivEXT = trace_glMultiTexParameterIivEXT;
   tbl.glMultiTexParameterIuivEXT = trace_glMultiTexParameterIuivEXT;
   tbl.glMultiTexParameterfEXT = trace_glMultiTexParameterfEXT;
@@ -35502,6 +35893,9 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glProgramUniformMatrix4x3fvEXT = trace_glProgramUniformMatrix4x3fvEXT;
   tbl.glPushClientAttribDefaultEXT = trace_glPushClientAttribDefaultEXT;
   tbl.glTextureBufferEXT = trace_glTextureBufferEXT;
+  tbl.glTextureImage1DEXT = trace_glTextureImage1DEXT;
+  tbl.glTextureImage2DEXT = trace_glTextureImage2DEXT;
+  tbl.glTextureImage3DEXT = trace_glTextureImage3DEXT;
   tbl.glTextureParameterIivEXT = trace_glTextureParameterIivEXT;
   tbl.glTextureParameterIuivEXT = trace_glTextureParameterIuivEXT;
   tbl.glTextureParameterfEXT = trace_glTextureParameterfEXT;
@@ -35687,6 +36081,8 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
 
   // GL_EXT_pixel_transform
 
+  tbl.glGetPixelTransformParameterfvEXT = trace_glGetPixelTransformParameterfvEXT;
+  tbl.glGetPixelTransformParameterivEXT = trace_glGetPixelTransformParameterivEXT;
   tbl.glPixelTransformParameterfEXT = trace_glPixelTransformParameterfEXT;
   tbl.glPixelTransformParameterfvEXT = trace_glPixelTransformParameterfvEXT;
   tbl.glPixelTransformParameteriEXT = trace_glPixelTransformParameteriEXT;
@@ -35981,6 +36377,27 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glWindowPos4sMESA = trace_glWindowPos4sMESA;
   tbl.glWindowPos4svMESA = trace_glWindowPos4svMESA;
 
+  // GL_NVX_conditional_render
+
+  tbl.glBeginConditionalRenderNVX = trace_glBeginConditionalRenderNVX;
+  tbl.glEndConditionalRenderNVX = trace_glEndConditionalRenderNVX;
+
+  // GL_NV_bindless_texture
+
+  tbl.glGetImageHandleNV = trace_glGetImageHandleNV;
+  tbl.glGetTextureHandleNV = trace_glGetTextureHandleNV;
+  tbl.glGetTextureSamplerHandleNV = trace_glGetTextureSamplerHandleNV;
+  tbl.glIsImageHandleResidentNV = trace_glIsImageHandleResidentNV;
+  tbl.glIsTextureHandleResidentNV = trace_glIsTextureHandleResidentNV;
+  tbl.glMakeImageHandleNonResidentNV = trace_glMakeImageHandleNonResidentNV;
+  tbl.glMakeImageHandleResidentNV = trace_glMakeImageHandleResidentNV;
+  tbl.glMakeTextureHandleNonResidentNV = trace_glMakeTextureHandleNonResidentNV;
+  tbl.glMakeTextureHandleResidentNV = trace_glMakeTextureHandleResidentNV;
+  tbl.glProgramUniformHandleui64NV = trace_glProgramUniformHandleui64NV;
+  tbl.glProgramUniformHandleui64vNV = trace_glProgramUniformHandleui64vNV;
+  tbl.glUniformHandleui64NV = trace_glUniformHandleui64NV;
+  tbl.glUniformHandleui64vNV = trace_glUniformHandleui64vNV;
+
   // GL_NV_conditional_render
 
   tbl.glBeginConditionalRenderNV = trace_glBeginConditionalRenderNV;
@@ -36004,6 +36421,10 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   // GL_NV_draw_buffers
 
   tbl.glDrawBuffersNV = trace_glDrawBuffersNV;
+
+  // GL_NV_draw_texture
+
+  tbl.glDrawTextureNV = trace_glDrawTextureNV;
 
   // GL_NV_evaluators
 

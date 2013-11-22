@@ -119,7 +119,9 @@ struct RegalContext
   //
 
   scoped_ptr<Marker            > marker;
+#if REGAL_FRAME
   scoped_ptr<Frame             > frame;
+#endif /* REGAL_FRAME */
 #if REGAL_EMULATION
   // Fixed function emulation
   int emuLevel;

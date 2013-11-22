@@ -35,7 +35,7 @@ tiger.clean:
 	$(RM) -r tmp/$(SYSTEM)/tiger/static
 	$(RM) -r bin/$(SYSTEM)/tiger
 
-TIGER.SRCS       += examples/tiger/nvpr_tiger.c	
+TIGER.SRCS       += examples/tiger/nvpr_tiger.c
 TIGER.SRCS       += examples/tiger/tiger.c
 TIGER.SRCS       += examples/tiger/xform.c
 TIGER.SRCS.NAMES := $(notdir $(TIGER.SRCS))
@@ -53,8 +53,8 @@ tmp/$(SYSTEM)/tiger/static/%.o: examples/tiger/%.c
 	@mkdir -p $(dir $@)
 	$(LOG_CC)$(CCACHE) $(CC) $(TIGER.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
 
-TIGER.DEPEND :=  
-TIGER.DEPEND += lib/$(SYSTEM)/$(REGAL.SHARED) 
+TIGER.DEPEND :=
+TIGER.DEPEND += lib/$(SYSTEM)/$(REGAL.SHARED)
 
 ifdef GLUT.SHARED
 bin/$(SYSTEM)/tiger: lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)

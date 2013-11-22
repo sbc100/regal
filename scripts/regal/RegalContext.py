@@ -54,8 +54,8 @@ emuRegal = [
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : lookupFormulae },
     { 'type' : 'Marker',   'include' : 'RegalMarker.h', 'member' : 'marker', 'conditional' : None,  'ifdef' : None,  'formulae' : markerFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : markerFormulaeGlobal },
-    { 'type' : 'Frame',    'include' : 'RegalFrame.h',  'member' : 'frame',  'conditional' : None,  'ifdef' : None,  'formulae' : frameFormulae },
-    { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : frameFormulaeGlobal },
+    { 'type' : 'Frame',    'include' : 'RegalFrame.h',  'member' : 'frame',  'conditional' : None,  'ifdef' : 'REGAL_FRAME',  'formulae' : frameFormulae },
+    { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : 'REGAL_FRAME',  'formulae' : frameFormulaeGlobal },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : extensionQueryFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : errorStringFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : logFormulae    },
@@ -64,7 +64,7 @@ emuRegal = [
 ]
 
 
-# RegalDispathEmu.cpp fixed-function emulation
+# RegalDispatchEmu.cpp fixed-function emulation
 
 emu = [
     { 'type' : 'Emu::Obj',        'include' : 'RegalObj.h',        'member' : 'obj',    'plugin' : False, 'forced' : 'Config::forceEmuObj        || REGAL_FORCE_EMU_OBJ',        'conditional' : 'Config::enableEmuObj       ', 'ifdef' : 'REGAL_EMU_OBJ',        'formulae' : objFormulae        },
@@ -494,7 +494,7 @@ def generateContextHeader(apis, args):
     for i in emuRegal:
       if i.get('member')!=None:
         emuForwardDeclare += 'struct %s;\n' % i['type']
-        emuMemberDeclare  += '  scoped_ptr<%-18s> %s;\n' % ( i['type'], i['member'] )
+        emuMemberDeclare  += wrapIf(i['ifdef'],'  scoped_ptr<%-18s> %s;\n' % ( i['type'], i['member'] ))
 
     emuForwardDeclare += '#if REGAL_EMULATION\n'
     emuMemberDeclare  += '#if REGAL_EMULATION\n'
@@ -563,7 +563,6 @@ def generateContextSource(apis, args):
     emuMemberConstruct = ''
     emuMemberInit      = ''
     emuMemberCleanup   = ''
-    emuMemberDestruct  = ''
     emulatedExtensions = []
     emuEmulationForced = ''
     emuEmulationEnabled = ''
@@ -572,15 +571,14 @@ def generateContextSource(apis, args):
       if i['include']:
         includes        += '#include "%s"\n' % i['include']
       if i['member']:
-        memberConstruct += '  %s(NULL),\n' % ( i['member'] )
-        memberInit      += indent(wrapCIf('!%s' % i['member'],'%s = new %s;\n'%(i['member'],i['type'])),'  ')
+        memberConstruct += wrapIf(i['ifdef'],'  %s(NULL),\n' %i['member'])
+        memberInit      += indent(wrapIf(i['ifdef'],wrapCIf('!%s' % i['member'],'%s = new %s;\n'%(i['member'],i['type']))),'  ')
 
     emuMemberConstruct += '  emuLevel(0),\n'
 
     emuMemberInit += '    // emu\n'
     emuMemberInit += '    emuLevel = %d;\n' % ( len( emu ) - 1 )
     emuMemberCleanup  += '  // emu\n'
-    emuMemberDestruct += '  // emu\n'
 
     for api in apis:
       for extension in api.extensions:

@@ -4732,16 +4732,6 @@ namespace Missing
     Warning( "glFramebufferTexture", " not available." );
   }
 
-  static void REGAL_CALL glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-{
-    UNUSED_PARAMETER(target);
-    UNUSED_PARAMETER(attachment);
-    UNUSED_PARAMETER(texture);
-    UNUSED_PARAMETER(level);
-    UNUSED_PARAMETER(face);
-    Warning( "glFramebufferTextureFace", " not available." );
-  }
-
   static void REGAL_CALL glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
 {
     UNUSED_PARAMETER(target);
@@ -15607,7 +15597,7 @@ namespace Missing
 
 // GL_EXT_pixel_transform
 
-  static void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+  static void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
     UNUSED_PARAMETER(target);
     UNUSED_PARAMETER(pname);
@@ -15615,7 +15605,7 @@ namespace Missing
     Warning( "glGetPixelTransformParameterfvEXT", " not available." );
   }
 
-  static void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+  static void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
     UNUSED_PARAMETER(target);
     UNUSED_PARAMETER(pname);
@@ -27091,7 +27081,6 @@ namespace Missing
   // GL_VERSION_3_2
 
     tbl.glFramebufferTexture = glFramebufferTexture;
-    tbl.glFramebufferTextureFace = glFramebufferTextureFace;
     tbl.glGetBufferParameteri64v = glGetBufferParameteri64v;
     tbl.glGetInteger64i_v = glGetInteger64i_v;
 

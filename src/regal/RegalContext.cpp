@@ -87,7 +87,9 @@ RegalContext::RegalContext()
   statistics(new Statistics()),
 #endif
   marker(NULL),
+#if REGAL_FRAME
   frame(NULL),
+#endif /* REGAL_FRAME */
 #if REGAL_EMULATION
   emuLevel(0),
   obj(NULL),
@@ -173,10 +175,12 @@ RegalContext::Init()
   {
     marker = new Marker;
   }
+  #if REGAL_FRAME
   if (!frame)
   {
     frame = new Frame;
   }
+  #endif /* REGAL_FRAME */
 
 #if REGAL_EMULATION
   const bool forceEmuObj     = Config::forceEmuObj        || REGAL_FORCE_EMU_OBJ;

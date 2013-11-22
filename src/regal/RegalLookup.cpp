@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2701] = {
+const char * const gl_Name[2700] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -693,7 +693,6 @@ const char * const gl_Name[2701] = {
   "glFramebufferTexture3DOES",
   "glFramebufferTextureARB",
   "glFramebufferTextureEXT",
-  "glFramebufferTextureFace",
   "glFramebufferTextureFaceARB",
   "glFramebufferTextureFaceEXT",
   "glFramebufferTextureLayer",
@@ -2757,7 +2756,7 @@ const char * const gl_Name[2701] = {
   NULL
 };
 
-const void *gl_Value[2701] = {
+const void *gl_Value[2700] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -3397,7 +3396,6 @@ const void *gl_Value[2701] = {
   (void *)(glFramebufferTexture3DOES),
   (void *)(glFramebufferTextureARB),
   (void *)(glFramebufferTextureEXT),
-  (void *)(glFramebufferTextureFace),
   (void *)(glFramebufferTextureFaceARB),
   (void *)(glFramebufferTextureFaceEXT),
   (void *)(glFramebufferTextureLayer),
@@ -5461,7 +5459,7 @@ const void *gl_Value[2701] = {
   NULL
 };
 
-const size_t gl_Offset[2701] = {
+const size_t gl_Offset[2700] = {
   offsetof(Dispatch::GL,glAccum)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveProgramEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveShaderProgram)/sizeof(void *),
@@ -6101,7 +6099,6 @@ const size_t gl_Offset[2701] = {
   offsetof(Dispatch::GL,glFramebufferTexture3DOES)/sizeof(void *),
   offsetof(Dispatch::GL,glFramebufferTextureARB)/sizeof(void *),
   offsetof(Dispatch::GL,glFramebufferTextureEXT)/sizeof(void *),
-  offsetof(Dispatch::GL,glFramebufferTextureFace)/sizeof(void *),
   offsetof(Dispatch::GL,glFramebufferTextureFaceARB)/sizeof(void *),
   offsetof(Dispatch::GL,glFramebufferTextureFaceEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glFramebufferTextureLayer)/sizeof(void *),

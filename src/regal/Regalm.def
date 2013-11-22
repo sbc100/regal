@@ -639,7 +639,6 @@ EXPORTS
   rglFramebufferTexture3DOES
   rglFramebufferTextureARB
   rglFramebufferTextureEXT
-  rglFramebufferTextureFace
   rglFramebufferTextureFaceARB
   rglFramebufferTextureFaceEXT
   rglFramebufferTextureLayer

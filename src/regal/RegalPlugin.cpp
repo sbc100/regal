@@ -4964,14 +4964,6 @@ extern "C" {
     _next->call(&_next->glFramebufferTexture)(target, attachment, texture, level);
   }
 
-  void REGAL_CALL plugin_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-  {
-    ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
-    ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
-    RegalAssert(_next);
-    _next->call(&_next->glFramebufferTextureFace)(target, attachment, texture, level, face);
-  }
-
   void REGAL_CALL plugin_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
@@ -15068,7 +15060,7 @@ extern "C" {
 
   /* GL_EXT_pixel_transform */
 
-  void REGAL_CALL plugin_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+  void REGAL_CALL plugin_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -15076,7 +15068,7 @@ extern "C" {
     _next->call(&_next->glGetPixelTransformParameterfvEXT)(target, pname, params);
   }
 
-  void REGAL_CALL plugin_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+  void REGAL_CALL plugin_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -25463,7 +25455,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Plugin {
 
-  const char * const lookup_gl_Name[2698] = {
+  const char * const lookup_gl_Name[2697] = {
     "glAccum",
     "glActiveProgramEXT",
     "glActiveShaderProgram",
@@ -26102,7 +26094,6 @@ namespace Plugin {
     "glFramebufferTexture3DOES",
     "glFramebufferTextureARB",
     "glFramebufferTextureEXT",
-    "glFramebufferTextureFace",
     "glFramebufferTextureFaceARB",
     "glFramebufferTextureFaceEXT",
     "glFramebufferTextureLayer",
@@ -28164,7 +28155,7 @@ namespace Plugin {
     NULL
   };
 
-  const void *lookup_gl_Value[2698] = {
+  const void *lookup_gl_Value[2697] = {
     (void *)(plugin_glAccum),
     (void *)(plugin_glActiveProgramEXT),
     (void *)(plugin_glActiveShaderProgram),
@@ -28803,7 +28794,6 @@ namespace Plugin {
     (void *)(plugin_glFramebufferTexture3DOES),
     (void *)(plugin_glFramebufferTextureARB),
     (void *)(plugin_glFramebufferTextureEXT),
-    (void *)(plugin_glFramebufferTextureFace),
     (void *)(plugin_glFramebufferTextureFaceARB),
     (void *)(plugin_glFramebufferTextureFaceEXT),
     (void *)(plugin_glFramebufferTextureLayer),
@@ -31681,7 +31671,7 @@ extern "C" {
   {
     const char **res;
 
-    res = (const char **) std::bsearch(&name, lookup_gl_Name, 2696, sizeof(const char *), NameCmp);
+    res = (const char **) std::bsearch(&name, lookup_gl_Name, 2695, sizeof(const char *), NameCmp);
     if (res) return const_cast<void *>(lookup_gl_Value[(size_t) (res - lookup_gl_Name)]);
 
 #if REGAL_SYS_WGL

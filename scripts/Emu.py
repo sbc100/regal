@@ -29,7 +29,7 @@
 #     }
 #  }
 
-from ApiCodeGen import typeCode, wrapCIf
+from ApiCodeGen import typeCode, wrapIf, wrapCIf
 from ApiUtil import typeIsVoid
 import re
 from string import Template
@@ -107,7 +107,7 @@ def addSubstitution(name, formula, subs):
 #   A dictionary of stuff, the "emue"
 #   { 'name' : name, 'member' : member, 'impl' : { ... }, ... }
 
-def emuFindEntry(func, emuFormulae, member):
+def emuFindEntry(func, emuFormulae, member, ifdef = None):
 
   if emuFormulae==None:
     return None
@@ -161,7 +161,7 @@ def emuFindEntry(func, emuFormulae, member):
     dummyRetVal = ''
     if not typeIsVoid(rType):
       dummyRetVal = '(( %s )0)' % rType
-    emue = { 'name' : name, 'member' : member, 'dummyretval' : dummyRetVal }
+    emue = { 'name' : name, 'member' : member, 'ifdef' : ifdef, 'dummyretval' : dummyRetVal }
     subs = deepcopy(arg)
     for l in range( len(match.groups()) + 1):
       subs['m%d' % l] = match.group( l )
@@ -205,7 +205,7 @@ def emuCodeGen(emue,section):
         code = code.strip().split('\n')
 
       if i.get('member')!=None:
-        tmp.extend(wrapCIf('_context->%s'%i['member'],code))
+        tmp.extend(wrapIf(i.get('ifdef'),wrapCIf('_context->%s'%i['member'],code)))
       else:
         tmp.extend(code)
 

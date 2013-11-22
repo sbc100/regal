@@ -1367,7 +1367,6 @@ namespace Dispatch
     // GL_VERSION_3_2
 
     void (REGAL_CALL *glFramebufferTexture)(GLenum target, GLenum attachment, GLuint texture, GLint level);
-    void (REGAL_CALL *glFramebufferTextureFace)(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
     void (REGAL_CALL *glGetBufferParameteri64v)(GLenum target, GLenum pname, GLint64 *params);
     void (REGAL_CALL *glGetInteger64i_v)(GLenum target, GLuint index, GLint64 *data);
 
@@ -3059,8 +3058,8 @@ namespace Dispatch
 
     // GL_EXT_pixel_transform
 
-    void (REGAL_CALL *glGetPixelTransformParameterfvEXT)(GLenum target, GLenum pname, const GLfloat *params);
-    void (REGAL_CALL *glGetPixelTransformParameterivEXT)(GLenum target, GLenum pname, const GLint *params);
+    void (REGAL_CALL *glGetPixelTransformParameterfvEXT)(GLenum target, GLenum pname, GLfloat *params);
+    void (REGAL_CALL *glGetPixelTransformParameterivEXT)(GLenum target, GLenum pname, GLint *params);
     void (REGAL_CALL *glPixelTransformParameterfEXT)(GLenum target, GLenum pname, const GLfloat param);
     void (REGAL_CALL *glPixelTransformParameterfvEXT)(GLenum target, GLenum pname, const GLfloat *params);
     void (REGAL_CALL *glPixelTransformParameteriEXT)(GLenum target, GLenum pname, const GLint param);

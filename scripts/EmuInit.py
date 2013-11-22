@@ -2,7 +2,7 @@
 
 formulae = {
 
-  # For all of GL API, check that Regal is initialized either via 
+  # For all of GL API, check that Regal is initialized either via
   # RegalMakeCurrent,  or via the selective CGL/EGL/GLX/WGL functions
   # in the global scope below.
 
@@ -11,7 +11,7 @@ formulae = {
     'entries' : [ '.*' ],
     'prefix'  : 'RegalAssert(Init::isInitialized());'
   }
-  
+
 }
 
 #
@@ -32,7 +32,7 @@ formulaeGlobal = {
   # glXChooseVisual is needed for Linux eihort Minecraft world viewer
   # wglCreateContext, wglGetCurrentContext, wglGetProcAddress for a start
 
-  'init' : 
+  'init' :
   {
     'entries' : [
       'CGLChoosePixelFormat', 'CGLGetCurrentContext',
@@ -42,7 +42,7 @@ formulaeGlobal = {
     ],
     'prefix'  : 'Init::init();'
   },
-  
+
   # WGL
 
   'wglMakeCurrent' : {

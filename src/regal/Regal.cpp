@@ -1070,11 +1070,13 @@ extern "C" {
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glFinish)();
+    #if REGAL_FRAME
     if (_context->frame)
     {
       // Notify Regal::Frame about the glFinish() event
       _context->frame->glFinish(*_context);
     }
+    #endif /* REGAL_FRAME */
   }
 
   REGAL_DECL void REGAL_CALL glFlush(void)
@@ -7097,17 +7099,6 @@ extern "C" {
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glFramebufferTexture)(target, attachment, texture, level);
-  }
-
-  REGAL_DECL void REGAL_CALL glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-  {
-    RegalContext *_context = REGAL_GET_CONTEXT();
-    RegalAssert(Init::isInitialized());
-    App("glFramebufferTextureFace","(", toString(target), ", ", toString(attachment), ", ", texture, ", ", level, ", ", toString(face), ")");
-    if (!_context) return;
-    DispatchTableGL *_next = &_context->dispatcher.front();
-    RegalAssert(_next);
-    _next->call(&_next->glFramebufferTextureFace)(target, attachment, texture, level, face);
   }
 
   REGAL_DECL void REGAL_CALL glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
@@ -20922,22 +20913,22 @@ extern "C" {
 
   /* GL_EXT_pixel_transform */
 
-  REGAL_DECL void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+  REGAL_DECL void REGAL_CALL glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glGetPixelTransformParameterfvEXT","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+    App("glGetPixelTransformParameterfvEXT","(", toString(target), ", ", toString(pname), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetPixelTransformParameterfvEXT)(target, pname, params);
   }
 
-  REGAL_DECL void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+  REGAL_DECL void REGAL_CALL glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glGetPixelTransformParameterivEXT","(", toString(target), ", ", toString(pname), ", ", boost::print::optional(params,Logging::pointers), ")");
+    App("glGetPixelTransformParameterivEXT","(", toString(target), ", ", toString(pname), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22476,9 +22467,11 @@ extern "C" {
     RegalAssert(Init::isInitialized());
     App("glFrameTerminatorGREMEDY","()");
     if (!_context) return;
+    #if REGAL_FRAME
     // Notify Regal::Frame about the frame terminator event.
     if (_context && _context->frame)
       _context->frame->glFrameTerminatorGREMEDY(*_context);
+    #endif
     RegalAssert(_context->info);
     // Return to application unless GL_GREMEDY_frame_terminator is supported by the driver.
     if (!_context->info->gl_gremedy_frame_terminator) return;
@@ -31671,10 +31664,12 @@ extern "C" {
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     BOOL ret = 0;
+    #if REGAL_FRAME
     RegalContext *_context = REGAL_GET_CONTEXT();
     // Notify Regal::Frame about the swap buffers event.
     if (_context && _context->frame)
         _context->frame->wglSwapBuffers(*_context);
+    #endif
     ret = _next->call(&_next->wglSwapBuffers)(hDC);
     return ret;
   }
@@ -32941,9 +32936,11 @@ extern "C" {
         #endif
         _context->x11Drawable = drawable;
     }
+    #if REGAL_FRAME
     // Notify Regal::Frame about the swap buffers event.
     if (_context && _context->frame)
         _context->frame->glXSwapBuffers(*_context);
+    #endif
     _next->call(&_next->glXSwapBuffers)(dpy, drawable);
   }
 
@@ -34319,10 +34316,12 @@ extern "C" {
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     CGLError ret = (CGLError) 0;
+    #if REGAL_FRAME
     RegalContext *_context = REGAL_GET_CONTEXT();
     // Notify Regal::Frame about the flush drawable event.
     if (_context && _context->frame)
         _context->frame->CGLFlushDrawable(*_context);
+    #endif
     ret = _next->call(&_next->CGLFlushDrawable)(ctx);
     return ret;
   }
@@ -35360,10 +35359,12 @@ extern "C" {
     DispatchTableGlobal *_next = &dispatcherGlobal.front();
     RegalAssert(_next);
     EGLBoolean ret = 0;
+    #if REGAL_FRAME
     RegalContext *_context = REGAL_GET_CONTEXT();
     // Notify Regal::Frame about the swap buffers event.
     if (_context && _context->frame)
         _context->frame->eglSwapBuffers(*_context);
+    #endif
     ret = _next->call(&_next->eglSwapBuffers)(dpy, surface);
     return ret;
   }

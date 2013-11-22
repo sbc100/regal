@@ -690,7 +690,6 @@ _glFramebufferTexture3DEXT
 _glFramebufferTexture3DOES
 _glFramebufferTextureARB
 _glFramebufferTextureEXT
-_glFramebufferTextureFace
 _glFramebufferTextureFaceARB
 _glFramebufferTextureFaceEXT
 _glFramebufferTextureLayer

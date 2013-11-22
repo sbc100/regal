@@ -15369,31 +15369,6 @@ static void REGAL_CALL error_glFramebufferTexture(GLenum target, GLenum attachme
   }
 }
 
-static void REGAL_CALL error_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-{
-  Internal("error_glFramebufferTextureFace","()");
-  RegalContext *_context = REGAL_GET_CONTEXT();
-  RegalAssert(_context);
-  DispatchTableGL *_next = _context->dispatcher.error.next();
-  RegalAssert(_next);
-  GLenum _error = GL_NO_ERROR;
-  if (!_context->err.inBeginEnd)
-    _error = _next->call(&_next->glGetError)();
-  RegalAssert(_error==GL_NO_ERROR);
-  _next->call(&_next->glFramebufferTextureFace)(target, attachment, texture, level, face);
-  if (!_context->err.inBeginEnd) {
-    _error = _next->call(&_next->glGetError)();
-    if (_error!=GL_NO_ERROR) {
-      Error("glFramebufferTextureFace : ",Token::GLerrorToString(_error));
-      #if REGAL_BREAK
-      Break::ErrorCB(_error);
-      #endif
-      if (_context->err.callback)
-        _context->err.callback( _error );
-    }
-  }
-}
-
 static void REGAL_CALL error_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
 {
   Internal("error_glGetBufferParameteri64v","()");
@@ -46349,7 +46324,7 @@ static void REGAL_CALL error_glGetColorTableParameterivEXT(GLenum target, GLenum
 
 // GL_EXT_pixel_transform
 
-static void REGAL_CALL error_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL error_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
   Internal("error_glGetPixelTransformParameterfvEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -46374,7 +46349,7 @@ static void REGAL_CALL error_glGetPixelTransformParameterfvEXT(GLenum target, GL
   }
 }
 
-static void REGAL_CALL error_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL error_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
   Internal("error_glGetPixelTransformParameterivEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -68860,7 +68835,6 @@ void InitDispatchTableError(DispatchTableGL &tbl)
   // GL_VERSION_3_2
 
   tbl.glFramebufferTexture = error_glFramebufferTexture;
-  tbl.glFramebufferTextureFace = error_glFramebufferTextureFace;
   tbl.glGetBufferParameteri64v = error_glGetBufferParameteri64v;
   tbl.glGetInteger64i_v = error_glGetInteger64i_v;
 

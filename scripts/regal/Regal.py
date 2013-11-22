@@ -361,7 +361,7 @@ def apiFuncDefineCode(apis, args):
       c = ''
       c += 'REGAL_DECL %sREGAL_CALL %s(%s) \n{\n' % (rType, name, params)
 
-      emue = [ emuFindEntry( function, i['formulae'], i['member'] ) for i in emuRegal ]
+      emue = [ emuFindEntry( function, i['formulae'], i['member'], i['ifdef'] ) for i in emuRegal ]
 
       if function.needsContext:
         c += '  RegalContext *_context = REGAL_GET_CONTEXT();\n'

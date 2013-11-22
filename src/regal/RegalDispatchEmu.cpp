@@ -6999,16 +6999,6 @@ static void REGAL_CALL emu_glHint(GLenum target, GLenum mode)
         _context->ppa->glHint( target, mode );
       }
       #endif
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-      #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
     case 1 :
     default:
       break;
@@ -20744,9 +20734,6 @@ static void REGAL_CALL emu_glTexSubImage2D(GLenum target, GLint level, GLint xof
     case 9 :
     case 8 :
     case 7 :
-      #if REGAL_EMU_IFF
-      if (_context->iff) break;
-      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31991,46 +31978,6 @@ static void REGAL_CALL emu_glFramebufferTexture(GLenum target, GLenum attachment
   DispatchTableGL *_next = _dispatch.next();
   RegalAssert(_next);
   _next->call(& _next->glFramebufferTexture)(target, attachment, texture, level);
-}
-
-static void REGAL_CALL emu_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-{
-  RegalContext *_context = REGAL_GET_CONTEXT();
-  RegalAssert(_context);
-  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
-
-  // prefix
-  switch( _context->emuLevel )
-  {
-    case 16 :
-    case 15 :
-    case 14 :
-    case 13 :
-    case 12 :
-    case 11 :
-    case 10 :
-    case 9 :
-    case 8 :
-    case 7 :
-    case 6 :
-    case 5 :
-    case 4 :
-      #if REGAL_EMU_DSA
-      if (_context->dsa)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 3;
-        _context->dsa->RestoreFramebuffer( _context );
-      }
-      #endif
-    case 1 :
-    default:
-      break;
-  }
-
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glFramebufferTextureFace)(target, attachment, texture, level, face);
 }
 
 // GL_VERSION_3_3
@@ -69900,7 +69847,6 @@ void InitDispatchTableEmu(DispatchTableGL &tbl)
 // GL_VERSION_3_2
 
    tbl.glFramebufferTexture = emu_glFramebufferTexture;
-   tbl.glFramebufferTextureFace = emu_glFramebufferTextureFace;
 
 // GL_VERSION_3_3
 

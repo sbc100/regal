@@ -192,20 +192,20 @@ REGAL.SDEPS          := $(LIBS.SOBJS:.o=.d)
 REGAL.LIBS           += $(LDFLAGS.X11)
 
 ifneq ($(filter linux%,$(SYSTEM)),)
-REGAL.SONAME := lib$(NAME).so.$(SO_MAJOR)
-REGAL.DEVLNK := lib$(NAME).so
-REGAL.SHARED := lib$(NAME).so.$(SO_VERSION)
-LDFLAGS.SO   := $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
+REGAL.SONAME     := lib$(NAME).so.$(SO_MAJOR)
+REGAL.DEVLNK     := lib$(NAME).so
+REGAL.SHARED     := lib$(NAME).so.$(SO_VERSION)
+REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
 endif
 
 ifneq ($(filter darwin%,$(SYSTEM)),)
-REGAL.SONAME    := lib$(NAME).$(SO_MAJOR).dylib
-REGAL.DEVLNK    := lib$(NAME).dylib
-REGAL.SHARED    := lib$(NAME).$(SO_VERSION).dylib
-REGAL.FRAMEWORK := $(NAME)
-LDFLAGS.SO      := $(LDFLAGS.DYNAMIC) -current_version $(SO_VERSION) -compatibility_version $(SO_MAJOR)
-#LDFLAGS.SO     += -install_name $(REGAL_DEST)/lib/$(REGAL.SHARED) 
-REGAL.LDFLAGS   += -Wl,-reexport-lGLU -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries
+REGAL.SONAME     := lib$(NAME).$(SO_MAJOR).dylib
+REGAL.DEVLNK     := lib$(NAME).dylib
+REGAL.SHARED     := lib$(NAME).$(SO_VERSION).dylib
+REGAL.FRAMEWORK  := $(NAME)
+REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -current_version $(SO_VERSION) -compatibility_version $(SO_MAJOR)
+#LDFLAGS.SO     += -install_name $(REGAL_DEST)/lib/$(REGAL.SHARED)
+REGAL.LDFLAGS    += -Wl,-reexport-lGLU -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries
 endif
 
 ifdef REGAL.STATIC
@@ -246,8 +246,8 @@ ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif
 
-REGAL.SHARED.DEPEND :=  
-REGAL.SHARED.DEPEND += lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) 
+REGAL.SHARED.DEPEND :=
+REGAL.SHARED.DEPEND += lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC)
 
 ifdef APITRACE.STATIC
 REGAL.SHARED.DEPEND += lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
@@ -256,9 +256,9 @@ endif
 ifdef REGAL.SHARED
 lib/$(SYSTEM)/$(REGAL.SHARED): $(REGAL.SHARED.DEPEND) $(REGAL.SOBJS)
 ifdef APITRACE.STATIC
-	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.SO) -o $@ $(LDFLAGS.STARTGROUP) $(REGAL.SOBJS) lib/$(SYSTEM)/$(APITRACE.STATIC) $(LDFLAGS.ENDGROUP) $(REGAL.SHARED.DEPEND) $(REGAL.LIBS) $(REGAL.LDFLAGS)
+	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(REGAL.LDFLAGS.SO) -o $@ $(LDFLAGS.STARTGROUP) $(REGAL.SOBJS) lib/$(SYSTEM)/$(APITRACE.STATIC) $(LDFLAGS.ENDGROUP) $(REGAL.SHARED.DEPEND) $(REGAL.LIBS) $(REGAL.LDFLAGS)
 else
-	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.SO) -o $@ $(REGAL.SOBJS) $(REGAL.SHARED.DEPEND) $(REGAL.LIBS) $(REGAL.LDFLAGS)
+	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(REGAL.LDFLAGS.SO) -o $@ $(REGAL.SOBJS) $(REGAL.SHARED.DEPEND) $(REGAL.LIBS) $(REGAL.LDFLAGS)
 endif
 ifneq ($(LN),)
 	$(LN) $(REGAL.SHARED) lib/$(SYSTEM)/$(REGAL.SONAME)

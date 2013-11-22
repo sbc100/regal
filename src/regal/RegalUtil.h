@@ -122,6 +122,16 @@
 #  endif
 #endif
 
+// Support for per-frame capture, etc
+
+#ifndef REGAL_FRAME
+#  if REGAL_WRANGLER
+#    define REGAL_FRAME 0
+#  else
+#    define REGAL_FRAME 1
+#  endif
+#endif
+
 // Compile-time configuration
 // - Emulation not forced by default
 // - All emulation layers enabled by default

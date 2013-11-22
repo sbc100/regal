@@ -11192,26 +11192,6 @@ static void REGAL_CALL code_glFramebufferTexture(GLenum target, GLenum attachmen
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glFramebufferTextureFace(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face)
-{
-    RegalContext *_context = REGAL_GET_CONTEXT();
-    RegalAssert(_context);
-    DispatchTableGL *_next = _context->dispatcher.code.next();
-    RegalAssert(_next);
-    _next->call(&_next->glFramebufferTextureFace)(target, attachment, texture, level, face);
-    std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
-    string_list< ::std::string > _code;
-    _code << indent << "glFramebufferTextureFace(";
-                   _code << toString(target);
-    _code << ", "; _code << toString(attachment);
-    _code << ", "; _code << texture;
-    _code << ", "; _code << level;
-    _code << ", "; _code << toString(face);
-    _code << ");\n";
-    if (_context->codeSource)
-      fprintf(_context->codeSource,"%s",_code.str().c_str());
-}
-
 static void REGAL_CALL code_glGetBufferParameteri64v(GLenum target, GLenum pname, GLint64 *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
@@ -34692,7 +34672,7 @@ static void REGAL_CALL code_glGetColorTableParameterivEXT(GLenum target, GLenum 
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat *params)
+static void REGAL_CALL code_glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, GLfloat *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -34710,7 +34690,7 @@ static void REGAL_CALL code_glGetPixelTransformParameterfvEXT(GLenum target, GLe
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint *params)
+static void REGAL_CALL code_glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, GLint *params)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -51552,7 +51532,6 @@ void InitDispatchTableCode(DispatchTableGL &tbl)
   tbl.glPrimitiveRestartIndex = code_glPrimitiveRestartIndex;
   tbl.glTexBuffer = code_glTexBuffer;
   tbl.glFramebufferTexture = code_glFramebufferTexture;
-  tbl.glFramebufferTextureFace = code_glFramebufferTextureFace;
   tbl.glGetBufferParameteri64v = code_glGetBufferParameteri64v;
   tbl.glGetInteger64i_v = code_glGetInteger64i_v;
   tbl.glVertexAttribDivisor = code_glVertexAttribDivisor;

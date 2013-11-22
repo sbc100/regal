@@ -1408,7 +1408,6 @@ struct Statistics
   /* GL_VERSION_3_2 */
 
   GLuint glFramebufferTexture;
-  GLuint glFramebufferTextureFace;
   GLuint glGetBufferParameteri64v;
   GLuint glGetInteger64i_v;
 
