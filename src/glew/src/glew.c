@@ -1,5 +1,6 @@
 /*
 ** The OpenGL Extension Wrangler Library
+** Copyright (C) 2008-2013, Nigel Stewart <nigels[]users sourceforge net>
 ** Copyright (C) 2002-2008, Milan Ikits <milan ikits[]ieee org>
 ** Copyright (C) 2002-2008, Marcelo E. Magallon <mmagallo[]debian org>
 ** Copyright (C) 2002, Lev Povalahev
@@ -33,7 +34,7 @@
 
 #if defined(_WIN32)
 #  include <GL/wglew.h>
-#elif !defined(__ANDROID__) && !defined(__native_client__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
+#elif !defined(__ANDROID__) && !defined(__native_client__) && !defined(__HAIKU__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
 #  include <GL/glxew.h>
 #endif
 
@@ -66,7 +67,7 @@
 #  define GLXEW_CONTEXT_ARG_DEF_LIST void
 #endif /* GLEW_MX */
 
-#if defined(__sgi) || defined (__sun) || defined(GLEW_APPLE_GLX)
+#if defined(__sgi) || defined (__sun) || defined(__HAIKU__) || defined(GLEW_APPLE_GLX)
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -162,7 +163,7 @@ void* NSGLGetProcAddress (const GLubyte *name)
 #  define glewGetProcAddress(name) wglGetProcAddress((LPCSTR)name)
 #elif defined(__APPLE__) && !defined(GLEW_APPLE_GLX)
 #  define glewGetProcAddress(name) NSGLGetProcAddress(name)
-#elif defined(__sgi) || defined(__sun)
+#elif defined(__sgi) || defined(__sun) || defined(__HAIKU__)
 #  define glewGetProcAddress(name) dlGetProcAddress(name)
 #elif defined(__ANDROID__)
 #  define glewGetProcAddress(name) NULL /* TODO */
@@ -595,6 +596,8 @@ PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROC __glewMultiDrawElementsIndirectAMD = NULL;
 PFNGLDELETENAMESAMDPROC __glewDeleteNamesAMD = NULL;
 PFNGLGENNAMESAMDPROC __glewGenNamesAMD = NULL;
 PFNGLISNAMEAMDPROC __glewIsNameAMD = NULL;
+
+PFNGLQUERYOBJECTPARAMETERUIAMDPROC __glewQueryObjectParameteruiAMD = NULL;
 
 PFNGLBEGINPERFMONITORAMDPROC __glewBeginPerfMonitorAMD = NULL;
 PFNGLDELETEPERFMONITORSAMDPROC __glewDeletePerfMonitorsAMD = NULL;
@@ -2743,6 +2746,7 @@ GLboolean __GLEW_AMD_draw_buffers_blend = GL_FALSE;
 GLboolean __GLEW_AMD_interleaved_elements = GL_FALSE;
 GLboolean __GLEW_AMD_multi_draw_indirect = GL_FALSE;
 GLboolean __GLEW_AMD_name_gen_delete = GL_FALSE;
+GLboolean __GLEW_AMD_occlusion_query_event = GL_FALSE;
 GLboolean __GLEW_AMD_performance_monitor = GL_FALSE;
 GLboolean __GLEW_AMD_pinned_memory = GL_FALSE;
 GLboolean __GLEW_AMD_query_buffer_object = GL_FALSE;
@@ -3779,6 +3783,19 @@ static GLboolean _glewInit_GL_AMD_name_gen_delete (GLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GL_AMD_name_gen_delete */
+
+#ifdef GL_AMD_occlusion_query_event
+
+static GLboolean _glewInit_GL_AMD_occlusion_query_event (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((glQueryObjectParameteruiAMD = (PFNGLQUERYOBJECTPARAMETERUIAMDPROC)glewGetProcAddress((const GLubyte*)"glQueryObjectParameteruiAMD")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_AMD_occlusion_query_event */
 
 #ifdef GL_AMD_performance_monitor
 
@@ -9670,6 +9687,10 @@ GLenum GLEWAPIENTRY glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_AMD_name_gen_delete) = _glewSearchExtension("GL_AMD_name_gen_delete", extStart, extEnd);
   if (glewExperimental || GLEW_AMD_name_gen_delete) CONST_CAST(GLEW_AMD_name_gen_delete) = !_glewInit_GL_AMD_name_gen_delete(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_AMD_name_gen_delete */
+#ifdef GL_AMD_occlusion_query_event
+  CONST_CAST(GLEW_AMD_occlusion_query_event) = _glewSearchExtension("GL_AMD_occlusion_query_event", extStart, extEnd);
+  if (glewExperimental || GLEW_AMD_occlusion_query_event) CONST_CAST(GLEW_AMD_occlusion_query_event) = !_glewInit_GL_AMD_occlusion_query_event(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_AMD_occlusion_query_event */
 #ifdef GL_AMD_performance_monitor
   CONST_CAST(GLEW_AMD_performance_monitor) = _glewSearchExtension("GL_AMD_performance_monitor", extStart, extEnd);
   if (glewExperimental || GLEW_AMD_performance_monitor) CONST_CAST(GLEW_AMD_performance_monitor) = !_glewInit_GL_AMD_performance_monitor(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12410,7 +12431,7 @@ GLenum GLEWAPIENTRY wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
   return GLEW_OK;
 }
 
-#elif !defined(__ANDROID__) && !defined(__native_client__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
+#elif !defined(__ANDROID__) && !defined(__native_client__) && !defined(__HAIKU__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
 
 PFNGLXGETCURRENTDISPLAYPROC __glewXGetCurrentDisplay = NULL;
 
@@ -13518,7 +13539,7 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   return GLEW_OK;
 }
 
-#endif /* !defined(__ANDROID__) && !defined(__native_client__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX)) */
+#endif /* !defined(__ANDROID__) && !defined(__native_client__) && !defined(__HAIKU__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX)) */
 
 /* ------------------------------------------------------------------------ */
 
@@ -13558,7 +13579,7 @@ GLboolean glewExperimental = GL_FALSE;
 
 #if defined(_WIN32)
 extern GLenum GLEWAPIENTRY wglewContextInit (void);
-#elif !defined(__ANDROID__) && !defined(__native_client__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
+#elif !defined(__ANDROID__) && !defined(__native_client__) && !defined(__HAIKU__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
 extern GLenum GLEWAPIENTRY glxewContextInit (void);
 #endif /* _WIN32 */
 
@@ -13569,7 +13590,7 @@ GLenum GLEWAPIENTRY glewInit (void)
   if ( r != 0 ) return r;
 #if defined(_WIN32)
   return wglewContextInit();
-#elif !defined(__ANDROID__) && !defined(__native_client__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX)) /* _UNIX */
+#elif !defined(__ANDROID__) && !defined(__native_client__) && !defined(__HAIKU__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX)) /* _UNIX */
   return glxewContextInit();
 #else
   return r;
@@ -13784,6 +13805,13 @@ GLboolean GLEWAPIENTRY glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"name_gen_delete", 15))
         {
           ret = GLEW_AMD_name_gen_delete;
+          continue;
+        }
+#endif
+#ifdef GL_AMD_occlusion_query_event
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"occlusion_query_event", 21))
+        {
+          ret = GLEW_AMD_occlusion_query_event;
           continue;
         }
 #endif
@@ -17744,7 +17772,7 @@ GLboolean GLEWAPIENTRY wglewIsSupported (const char* name)
   return ret;
 }
 
-#elif !defined(__ANDROID__) && !defined(__native_client__) && !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__ANDROID__) && !defined(__native_client__) && !defined(__HAIKU__) && !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
 
 #if defined(GLEW_MX)
 GLboolean glxewContextIsSupported (const GLXEWContext* ctx, const char* name)

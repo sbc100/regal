@@ -11334,7 +11334,7 @@ static void REGAL_CALL code_glTbufferMask3DFX(GLuint mask)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+static void REGAL_CALL code_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -13690,22 +13690,22 @@ static void REGAL_CALL code_glClearNamedBufferDataEXT(GLuint buffer, GLenum inte
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL code_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     DispatchTableGL *_next = _context->dispatcher.code.next();
     RegalAssert(_next);
-    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
+    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     _code << indent << "glClearNamedBufferSubDataEXT(";
                    _code << buffer;
     _code << ", "; _code << toString(internalformat);
-    _code << ", "; _code << offset;
-    _code << ", "; _code << size;
     _code << ", "; _code << toString(format);
     _code << ", "; _code << toString(type);
+    _code << ", "; _code << offset;
+    _code << ", "; _code << size;
     _code << ", "; _code << data;
     _code << ");\n";
     if (_context->codeSource)
@@ -13880,7 +13880,7 @@ static void REGAL_CALL code_glCopyImageSubData(GLuint srcName, GLenum srcTarget,
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+static void REGAL_CALL code_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20133,7 +20133,7 @@ static void REGAL_CALL code_glUniformSubroutinesuiv(GLenum shaderType, GLsizei c
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+static void REGAL_CALL code_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20721,7 +20721,7 @@ static void REGAL_CALL code_glSampleMaski(GLuint index, GLbitfield mask)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL code_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20733,7 +20733,7 @@ static void REGAL_CALL code_glTexImage2DMultisample(GLenum target, GLsizei sampl
     _code << indent << "glTexImage2DMultisample(";
                    _code << toString(target);
     _code << ", "; _code << samples;
-    _code << ", "; _code << internalformat;
+    _code << ", "; _code << toString(internalformat);
     _code << ", "; _code << width;
     _code << ", "; _code << height;
     _code << ", "; _code << toString(fixedsamplelocations);
@@ -20742,7 +20742,7 @@ static void REGAL_CALL code_glTexImage2DMultisample(GLenum target, GLsizei sampl
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL code_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -20754,7 +20754,7 @@ static void REGAL_CALL code_glTexImage3DMultisample(GLenum target, GLsizei sampl
     _code << indent << "glTexImage3DMultisample(";
                    _code << toString(target);
     _code << ", "; _code << samples;
-    _code << ", "; _code << internalformat;
+    _code << ", "; _code << toString(internalformat);
     _code << ", "; _code << width;
     _code << ", "; _code << height;
     _code << ", "; _code << depth;
@@ -34346,7 +34346,7 @@ static void REGAL_CALL code_glMultiDrawArraysEXT(GLenum mode, const GLint *first
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL code_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -35981,7 +35981,7 @@ static void REGAL_CALL code_glGetTransformFeedbackVaryingEXT(GLuint program, GLu
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+static void REGAL_CALL code_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
@@ -37760,7 +37760,7 @@ static void REGAL_CALL code_glTexScissorINTEL(GLenum target, GLclampf tlow, GLcl
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+static void REGAL_CALL code_glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);

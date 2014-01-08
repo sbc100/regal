@@ -543,9 +543,9 @@ REGAL_DECL int      XFreePixmap(Display *display, Pixmap pixmap);
 
 /* TODO: make this automatic? */
 
-typedef void (REGAL_CALL *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar *message, GLvoid *userParam);
-typedef void (REGAL_CALL *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, GLvoid *userParam);
-typedef void (REGAL_CALL *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, GLvoid *userParam);
+typedef void (REGAL_CALL *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar *message, void *userParam);
+typedef void (REGAL_CALL *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam);
+typedef void (REGAL_CALL *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam);
 
 typedef void (*GLLOGPROCREGAL)(GLenum stream, GLsizei length, const GLchar *message, GLvoid *context);
 
@@ -956,7 +956,7 @@ REGAL_DECL void REGAL_CALL plugin_glTbufferMask3DFX(GLuint mask);
 
 #ifndef REGAL_NO_TYPEDEF_GL_AMD_DEBUG_OUTPUT
 typedef GLuint (REGAL_CALL *PFNGLGETDEBUGMESSAGELOGAMDPROC)(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
-typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKAMDPROC)(GLDEBUGPROCAMD callback, GLvoid *userParam);
+typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKAMDPROC)(GLDEBUGPROCAMD callback, void *userParam);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEENABLEAMDPROC)(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTAMDPROC)(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf);
 #endif
@@ -970,14 +970,14 @@ typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTAMDPROC)(GLenum category, GLenu
 
 #ifndef REGAL_NO_DECLARATION_GL_AMD_DEBUG_OUTPUT
 REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
-REGAL_DECL void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam);
+REGAL_DECL void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam);
 REGAL_DECL void REGAL_CALL glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_AMD_DEBUG_OUTPUT
 REGAL_DECL GLuint REGAL_CALL plugin_glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
-REGAL_DECL void REGAL_CALL plugin_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam);
+REGAL_DECL void REGAL_CALL plugin_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam);
 REGAL_DECL void REGAL_CALL plugin_glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL plugin_glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf);
 #endif
@@ -3731,7 +3731,7 @@ REGAL_DECL GLsync REGAL_CALL plugin_glCreateSyncFromCLeventARB(cl_context contex
 typedef void (REGAL_CALL *PFNGLCLEARBUFFERDATAPROC)(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 typedef void (REGAL_CALL *PFNGLCLEARBUFFERSUBDATAPROC)(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERDATAEXTPROC)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
+typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ARB_CLEAR_BUFFER_OBJECT
@@ -3745,14 +3745,14 @@ typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)(GLuint buffer, GL
 REGAL_DECL void REGAL_CALL glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
+REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_ARB_CLEAR_BUFFER_OBJECT
 REGAL_DECL void REGAL_CALL plugin_glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL plugin_glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
+REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
 #endif
 
 /**
@@ -4166,7 +4166,7 @@ REGAL_DECL void REGAL_CALL plugin_glCopyImageSubData(GLuint srcName, GLenum srcT
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_DEBUG_OUTPUT
 typedef GLuint (REGAL_CALL *PFNGLGETDEBUGMESSAGELOGARBPROC)(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKARBPROC)(GLDEBUGPROCARB callback, const GLvoid *userParam);
+typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKARBPROC)(GLDEBUGPROCARB callback, const void *userParam);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECONTROLARBPROC)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTARBPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 #endif
@@ -4180,14 +4180,14 @@ typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTARBPROC)(GLenum source, GLenum 
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_DEBUG_OUTPUT
 REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam);
+REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam);
 REGAL_DECL void REGAL_CALL glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_ARB_DEBUG_OUTPUT
 REGAL_DECL GLuint REGAL_CALL plugin_glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-REGAL_DECL void REGAL_CALL plugin_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam);
+REGAL_DECL void REGAL_CALL plugin_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam);
 REGAL_DECL void REGAL_CALL plugin_glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL plugin_glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 #endif
@@ -8217,7 +8217,7 @@ REGAL_DECL void REGAL_CALL plugin_glUniformSubroutinesuiv(GLenum shaderType, GLs
 
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_SHADING_LANGUAGE_INCLUDE
 typedef GLboolean (REGAL_CALL *PFNGLISNAMEDSTRINGARBPROC)(GLint namelen, const GLchar *name);
-typedef void (REGAL_CALL *PFNGLCOMPILESHADERINCLUDEARBPROC)(GLuint shader, GLsizei count, const GLchar **path, const GLint *length);
+typedef void (REGAL_CALL *PFNGLCOMPILESHADERINCLUDEARBPROC)(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length);
 typedef void (REGAL_CALL *PFNGLDELETENAMEDSTRINGARBPROC)(GLint namelen, const GLchar *name);
 typedef void (REGAL_CALL *PFNGLGETNAMEDSTRINGARBPROC)(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
 typedef void (REGAL_CALL *PFNGLGETNAMEDSTRINGIVARBPROC)(GLint namelen, const GLchar *name, GLenum pname, GLint *params);
@@ -8235,7 +8235,7 @@ typedef void (REGAL_CALL *PFNGLNAMEDSTRINGARBPROC)(GLenum type, GLint namelen, c
 
 #ifndef REGAL_NO_DECLARATION_GL_ARB_SHADING_LANGUAGE_INCLUDE
 REGAL_DECL GLboolean REGAL_CALL glIsNamedStringARB(GLint namelen, const GLchar *name);
-REGAL_DECL void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length);
+REGAL_DECL void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length);
 REGAL_DECL void REGAL_CALL glDeleteNamedStringARB(GLint namelen, const GLchar *name);
 REGAL_DECL void REGAL_CALL glGetNamedStringARB(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
 REGAL_DECL void REGAL_CALL glGetNamedStringivARB(GLint namelen, const GLchar *name, GLenum pname, GLint *params);
@@ -8244,7 +8244,7 @@ REGAL_DECL void REGAL_CALL glNamedStringARB(GLenum type, GLint namelen, const GL
 
 #ifndef REGAL_NO_PLUGIN_GL_ARB_SHADING_LANGUAGE_INCLUDE
 REGAL_DECL GLboolean REGAL_CALL plugin_glIsNamedStringARB(GLint namelen, const GLchar *name);
-REGAL_DECL void REGAL_CALL plugin_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length);
+REGAL_DECL void REGAL_CALL plugin_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length);
 REGAL_DECL void REGAL_CALL plugin_glDeleteNamedStringARB(GLint namelen, const GLchar *name);
 REGAL_DECL void REGAL_CALL plugin_glGetNamedStringARB(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
 REGAL_DECL void REGAL_CALL plugin_glGetNamedStringivARB(GLint namelen, const GLchar *name, GLenum pname, GLint *params);
@@ -9241,8 +9241,8 @@ REGAL_DECL void REGAL_CALL plugin_glGetCompressedTexImageARB(GLenum target, GLin
 #ifndef REGAL_NO_TYPEDEF_GL_ARB_TEXTURE_MULTISAMPLE
 typedef void (REGAL_CALL *PFNGLGETMULTISAMPLEFVPROC)(GLenum pname, GLuint index, GLfloat *val);
 typedef void (REGAL_CALL *PFNGLSAMPLEMASKIPROC)(GLuint index, GLbitfield mask);
-typedef void (REGAL_CALL *PFNGLTEXIMAGE2DMULTISAMPLEPROC)(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-typedef void (REGAL_CALL *PFNGLTEXIMAGE3DMULTISAMPLEPROC)(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+typedef void (REGAL_CALL *PFNGLTEXIMAGE2DMULTISAMPLEPROC)(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+typedef void (REGAL_CALL *PFNGLTEXIMAGE3DMULTISAMPLEPROC)(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ARB_TEXTURE_MULTISAMPLE
@@ -9255,15 +9255,15 @@ typedef void (REGAL_CALL *PFNGLTEXIMAGE3DMULTISAMPLEPROC)(GLenum target, GLsizei
 #ifndef REGAL_NO_DECLARATION_GL_ARB_TEXTURE_MULTISAMPLE
 REGAL_DECL void REGAL_CALL glGetMultisamplefv(GLenum pname, GLuint index, GLfloat *val);
 REGAL_DECL void REGAL_CALL glSampleMaski(GLuint index, GLbitfield mask);
-REGAL_DECL void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-REGAL_DECL void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+REGAL_DECL void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+REGAL_DECL void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_ARB_TEXTURE_MULTISAMPLE
 REGAL_DECL void REGAL_CALL plugin_glGetMultisamplefv(GLenum pname, GLuint index, GLfloat *val);
 REGAL_DECL void REGAL_CALL plugin_glSampleMaski(GLuint index, GLbitfield mask);
-REGAL_DECL void REGAL_CALL plugin_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-REGAL_DECL void REGAL_CALL plugin_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+REGAL_DECL void REGAL_CALL plugin_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+REGAL_DECL void REGAL_CALL plugin_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 #endif
 
 /**
@@ -16106,7 +16106,7 @@ REGAL_DECL void REGAL_CALL plugin_glFlushMappedBufferRangeEXT(GLenum target, GLi
 
 #ifndef REGAL_NO_TYPEDEF_GL_EXT_MULTI_DRAW_ARRAYS
 typedef void (REGAL_CALL *PFNGLMULTIDRAWARRAYSEXTPROC)(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSEXTPROC)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSEXTPROC)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_EXT_MULTI_DRAW_ARRAYS
@@ -16116,12 +16116,12 @@ typedef void (REGAL_CALL *PFNGLMULTIDRAWELEMENTSEXTPROC)(GLenum mode, const GLsi
 
 #ifndef REGAL_NO_DECLARATION_GL_EXT_MULTI_DRAW_ARRAYS
 REGAL_DECL void REGAL_CALL glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_EXT_MULTI_DRAW_ARRAYS
 REGAL_DECL void REGAL_CALL plugin_glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-REGAL_DECL void REGAL_CALL plugin_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+REGAL_DECL void REGAL_CALL plugin_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 #endif
 
 /**
@@ -18947,7 +18947,7 @@ typedef void (REGAL_CALL *PFNGLBINDBUFFEROFFSETEXTPROC)(GLenum target, GLuint in
 typedef void (REGAL_CALL *PFNGLBINDBUFFERRANGEEXTPROC)(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 typedef void (REGAL_CALL *PFNGLENDTRANSFORMFEEDBACKEXTPROC)(void);
 typedef void (REGAL_CALL *PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC)(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-typedef void (REGAL_CALL *PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC)(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
+typedef void (REGAL_CALL *PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC)(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_EXT_TRANSFORM_FEEDBACK
@@ -18967,7 +18967,7 @@ REGAL_DECL void REGAL_CALL glBindBufferOffsetEXT(GLenum target, GLuint index, GL
 REGAL_DECL void REGAL_CALL glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 REGAL_DECL void REGAL_CALL glEndTransformFeedbackEXT(void);
 REGAL_DECL void REGAL_CALL glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
+REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_EXT_TRANSFORM_FEEDBACK
@@ -18977,7 +18977,7 @@ REGAL_DECL void REGAL_CALL plugin_glBindBufferOffsetEXT(GLenum target, GLuint in
 REGAL_DECL void REGAL_CALL plugin_glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
 REGAL_DECL void REGAL_CALL plugin_glEndTransformFeedbackEXT(void);
 REGAL_DECL void REGAL_CALL plugin_glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-REGAL_DECL void REGAL_CALL plugin_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
+REGAL_DECL void REGAL_CALL plugin_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 #endif
 
 /**
@@ -20818,7 +20818,7 @@ REGAL_DECL void REGAL_CALL plugin_glTexScissorINTEL(GLenum target, GLclampf tlow
 
 #ifndef REGAL_NO_TYPEDEF_GL_KHR_DEBUG
 typedef GLuint (REGAL_CALL *PFNGLGETDEBUGMESSAGELOGPROC)(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKPROC)(GLDEBUGPROC callback, const GLvoid *userParam);
+typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECALLBACKPROC)(GLDEBUGPROC callback, const void *userParam);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGECONTROLPROC)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 typedef void (REGAL_CALL *PFNGLDEBUGMESSAGEINSERTPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 typedef void (REGAL_CALL *PFNGLGETOBJECTLABELPROC)(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
@@ -20844,7 +20844,7 @@ typedef void (REGAL_CALL *PFNGLPUSHDEBUGGROUPPROC)(GLenum source, GLuint id, GLs
 
 #ifndef REGAL_NO_DECLARATION_GL_KHR_DEBUG
 REGAL_DECL GLuint REGAL_CALL glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam);
+REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam);
 REGAL_DECL void REGAL_CALL glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 REGAL_DECL void REGAL_CALL glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);
@@ -20857,7 +20857,7 @@ REGAL_DECL void REGAL_CALL glPushDebugGroup(GLenum source, GLuint id, GLsizei le
 
 #ifndef REGAL_NO_PLUGIN_GL_KHR_DEBUG
 REGAL_DECL GLuint REGAL_CALL plugin_glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
-REGAL_DECL void REGAL_CALL plugin_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam);
+REGAL_DECL void REGAL_CALL plugin_glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam);
 REGAL_DECL void REGAL_CALL plugin_glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
 REGAL_DECL void REGAL_CALL plugin_glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
 REGAL_DECL void REGAL_CALL plugin_glGetObjectLabel(GLenum identifier, GLuint name, GLsizei bufSize, GLsizei *length, GLchar *label);

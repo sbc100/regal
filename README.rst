@@ -334,12 +334,15 @@ Linux
 
  * 32-bit:
 
-  ``$ sudo yum install zlib-devel libpng-devel``
+  ``$ sudo yum install zlib-devel libpng-devel libXmu-devel libXi-devel``
 
  * 64-bit
 
   ``$ sudo yum install zlib-devel.i686   libpng-devel.i686``
+
   ``$ sudo yum install zlib-devel.x86_64 libpng-devel.x86_64``
+
+  ``$ sudo yum install libXmu-devel libXi-devel``
 
 * Ubuntu/Debian/Mint recommended packages:
 

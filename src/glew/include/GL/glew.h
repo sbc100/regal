@@ -1,5 +1,6 @@
 /*
 ** The OpenGL Extension Wrangler Library
+** Copyright (C) 2008-2013, Nigel Stewart <nigels[]users sourceforge net>
 ** Copyright (C) 2002-2008, Milan Ikits <milan ikits[]ieee org>
 ** Copyright (C) 2002-2008, Marcelo E. Magallon <mmagallo[]debian org>
 ** Copyright (C) 2002, Lev Povalahev
@@ -1512,7 +1513,7 @@ typedef void (GLAPIENTRY * PFNGLFOGCOORDDVPROC) (const GLdouble *coord);
 typedef void (GLAPIENTRY * PFNGLFOGCOORDFPROC) (GLfloat coord);
 typedef void (GLAPIENTRY * PFNGLFOGCOORDFVPROC) (const GLfloat *coord);
 typedef void (GLAPIENTRY * PFNGLMULTIDRAWARRAYSPROC) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount);
-typedef void (GLAPIENTRY * PFNGLMULTIDRAWELEMENTSPROC) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei drawcount);
+typedef void (GLAPIENTRY * PFNGLMULTIDRAWELEMENTSPROC) (GLenum mode, const GLsizei *count, GLenum type, const void *const* indices, GLsizei drawcount);
 typedef void (GLAPIENTRY * PFNGLPOINTPARAMETERFPROC) (GLenum pname, GLfloat param);
 typedef void (GLAPIENTRY * PFNGLPOINTPARAMETERFVPROC) (GLenum pname, const GLfloat *params);
 typedef void (GLAPIENTRY * PFNGLPOINTPARAMETERIPROC) (GLenum pname, GLint param);
@@ -1827,7 +1828,7 @@ typedef void (GLAPIENTRY * PFNGLGETVERTEXATTRIBIVPROC) (GLuint, GLenum, GLint*);
 typedef GLboolean (GLAPIENTRY * PFNGLISPROGRAMPROC) (GLuint program);
 typedef GLboolean (GLAPIENTRY * PFNGLISSHADERPROC) (GLuint shader);
 typedef void (GLAPIENTRY * PFNGLLINKPROGRAMPROC) (GLuint program);
-typedef void (GLAPIENTRY * PFNGLSHADERSOURCEPROC) (GLuint shader, GLsizei count, const GLchar** strings, const GLint* lengths);
+typedef void (GLAPIENTRY * PFNGLSHADERSOURCEPROC) (GLuint shader, GLsizei count, const GLchar *const* string, const GLint* length);
 typedef void (GLAPIENTRY * PFNGLSTENCILFUNCSEPARATEPROC) (GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
 typedef void (GLAPIENTRY * PFNGLSTENCILMASKSEPARATEPROC) (GLenum, GLuint);
 typedef void (GLAPIENTRY * PFNGLSTENCILOPSEPARATEPROC) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
@@ -2171,7 +2172,7 @@ typedef void (GLAPIENTRY * PFNGLGETVERTEXATTRIBIUIVPROC) (GLuint, GLenum, GLuint
 typedef GLboolean (GLAPIENTRY * PFNGLISENABLEDIPROC) (GLenum, GLuint);
 typedef void (GLAPIENTRY * PFNGLTEXPARAMETERIIVPROC) (GLenum, GLenum, const GLint*);
 typedef void (GLAPIENTRY * PFNGLTEXPARAMETERIUIVPROC) (GLenum, GLenum, const GLuint*);
-typedef void (GLAPIENTRY * PFNGLTRANSFORMFEEDBACKVARYINGSPROC) (GLuint, GLsizei, const GLchar **, GLenum);
+typedef void (GLAPIENTRY * PFNGLTRANSFORMFEEDBACKVARYINGSPROC) (GLuint, GLsizei, const GLchar *const*, GLenum);
 typedef void (GLAPIENTRY * PFNGLUNIFORM1UIPROC) (GLint, GLuint);
 typedef void (GLAPIENTRY * PFNGLUNIFORM1UIVPROC) (GLint, GLsizei, const GLuint*);
 typedef void (GLAPIENTRY * PFNGLUNIFORM2UIPROC) (GLint, GLuint, GLuint);
@@ -2534,7 +2535,7 @@ typedef void (GLAPIENTRY * PFNGLTBUFFERMASK3DFXPROC) (GLuint mask);
 #define GL_DEBUG_CATEGORY_APPLICATION_AMD 0x914F
 #define GL_DEBUG_CATEGORY_OTHER_AMD 0x9150
 
-typedef void (APIENTRY *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+typedef void (APIENTRY *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam);
 
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKAMDPROC) (GLDEBUGPROCAMD callback, GLvoid *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGEENABLEAMDPROC) (GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
@@ -2641,6 +2642,26 @@ typedef GLboolean (GLAPIENTRY * PFNGLISNAMEAMDPROC) (GLenum identifier, GLuint n
 #define GLEW_AMD_name_gen_delete GLEW_GET_VAR(__GLEW_AMD_name_gen_delete)
 
 #endif /* GL_AMD_name_gen_delete */
+
+/* ---------------------- GL_AMD_occlusion_query_event --------------------- */
+
+#ifndef GL_AMD_occlusion_query_event
+#define GL_AMD_occlusion_query_event 1
+
+#define GL_QUERY_DEPTH_PASS_EVENT_BIT_AMD 0x00000001
+#define GL_QUERY_DEPTH_FAIL_EVENT_BIT_AMD 0x00000002
+#define GL_QUERY_STENCIL_FAIL_EVENT_BIT_AMD 0x00000004
+#define GL_QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD 0x00000008
+#define GL_OCCLUSION_QUERY_EVENT_MASK_AMD 0x874F
+#define GL_QUERY_ALL_EVENT_BITS_AMD 0xFFFFFFFF
+
+typedef void (GLAPIENTRY * PFNGLQUERYOBJECTPARAMETERUIAMDPROC) (GLenum target, GLuint id, GLenum pname, GLuint param);
+
+#define glQueryObjectParameteruiAMD GLEW_GET_FUN(__glewQueryObjectParameteruiAMD)
+
+#define GLEW_AMD_occlusion_query_event GLEW_GET_VAR(__GLEW_AMD_occlusion_query_event)
+
+#endif /* GL_AMD_occlusion_query_event */
 
 /* ----------------------- GL_AMD_performance_monitor ---------------------- */
 
@@ -3773,7 +3794,7 @@ typedef void (GLAPIENTRY * PFNGLCOPYIMAGESUBDATAPROC) (GLuint srcName, GLenum sr
 #define GL_DEBUG_SEVERITY_MEDIUM_ARB 0x9147
 #define GL_DEBUG_SEVERITY_LOW_ARB 0x9148
 
-typedef void (APIENTRY *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+typedef void (APIENTRY *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKARBPROC) (GLDEBUGPROCARB callback, const GLvoid *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECONTROLARBPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
@@ -5304,7 +5325,7 @@ typedef void (GLAPIENTRY * PFNGLSAMPLERPARAMETERIVPROC) (GLuint sampler, GLenum 
 
 typedef void (GLAPIENTRY * PFNGLACTIVESHADERPROGRAMPROC) (GLuint pipeline, GLuint program);
 typedef void (GLAPIENTRY * PFNGLBINDPROGRAMPIPELINEPROC) (GLuint pipeline);
-typedef GLuint (GLAPIENTRY * PFNGLCREATESHADERPROGRAMVPROC) (GLenum type, GLsizei count, const GLchar ** strings);
+typedef GLuint (GLAPIENTRY * PFNGLCREATESHADERPROGRAMVPROC) (GLenum type, GLsizei count, const GLchar * const * strings);
 typedef void (GLAPIENTRY * PFNGLDELETEPROGRAMPIPELINESPROC) (GLsizei n, const GLuint* pipelines);
 typedef void (GLAPIENTRY * PFNGLGENPROGRAMPIPELINESPROC) (GLsizei n, GLuint* pipelines);
 typedef void (GLAPIENTRY * PFNGLGETPROGRAMPIPELINEINFOLOGPROC) (GLuint pipeline, GLsizei bufSize, GLsizei* length, GLchar *infoLog);
@@ -11155,16 +11176,16 @@ typedef void (GLAPIENTRY * PFNGLTEXSCISSORINTELPROC) (GLenum target, GLclampf tl
 #define GL_DEBUG_SEVERITY_LOW 0x9148
 #define GL_DEBUG_OUTPUT 0x92E0
 
-typedef void (APIENTRY *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+typedef void (APIENTRY *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKPROC) (GLDEBUGPROC callback, const GLvoid *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECONTROLPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGEINSERTPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf);
 typedef GLuint (GLAPIENTRY * PFNGLGETDEBUGMESSAGELOGPROC) (GLuint count, GLsizei bufSize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog);
 typedef void (GLAPIENTRY * PFNGLGETOBJECTLABELPROC) (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei* length, GLchar *label);
-typedef void (GLAPIENTRY * PFNGLGETOBJECTPTRLABELPROC) (void* ptr, GLsizei bufSize, GLsizei* length, GLchar *label);
+typedef void (GLAPIENTRY * PFNGLGETOBJECTPTRLABELPROC) (const GLvoid *ptr, GLsizei bufSize, GLsizei* length, GLchar *label);
 typedef void (GLAPIENTRY * PFNGLOBJECTLABELPROC) (GLenum identifier, GLuint name, GLsizei length, const GLchar* label);
-typedef void (GLAPIENTRY * PFNGLOBJECTPTRLABELPROC) (void* ptr, GLsizei length, const GLchar* label);
+typedef void (GLAPIENTRY * PFNGLOBJECTPTRLABELPROC) (const GLvoid *ptr, GLsizei length, const GLchar* label);
 typedef void (GLAPIENTRY * PFNGLPOPDEBUGGROUPPROC) (void);
 typedef void (GLAPIENTRY * PFNGLPUSHDEBUGGROUPPROC) (GLenum source, GLuint id, GLsizei length, const GLchar * message);
 
@@ -15461,6 +15482,8 @@ GLEW_FUN_EXPORT PFNGLDELETENAMESAMDPROC __glewDeleteNamesAMD;
 GLEW_FUN_EXPORT PFNGLGENNAMESAMDPROC __glewGenNamesAMD;
 GLEW_FUN_EXPORT PFNGLISNAMEAMDPROC __glewIsNameAMD;
 
+GLEW_FUN_EXPORT PFNGLQUERYOBJECTPARAMETERUIAMDPROC __glewQueryObjectParameteruiAMD;
+
 GLEW_FUN_EXPORT PFNGLBEGINPERFMONITORAMDPROC __glewBeginPerfMonitorAMD;
 GLEW_FUN_EXPORT PFNGLDELETEPERFMONITORSAMDPROC __glewDeletePerfMonitorsAMD;
 GLEW_FUN_EXPORT PFNGLENDPERFMONITORAMDPROC __glewEndPerfMonitorAMD;
@@ -17609,6 +17632,7 @@ GLEW_VAR_EXPORT GLboolean __GLEW_AMD_draw_buffers_blend;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_interleaved_elements;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_multi_draw_indirect;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_name_gen_delete;
+GLEW_VAR_EXPORT GLboolean __GLEW_AMD_occlusion_query_event;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_performance_monitor;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_pinned_memory;
 GLEW_VAR_EXPORT GLboolean __GLEW_AMD_query_buffer_object;

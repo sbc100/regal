@@ -4802,7 +4802,7 @@ namespace Missing
 
 // GL_AMD_debug_output
 
-  static void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+  static void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
 {
     UNUSED_PARAMETER(callback);
     UNUSED_PARAMETER(userParam);
@@ -5921,14 +5921,14 @@ namespace Missing
     Warning( "glClearNamedBufferDataEXT", " not available." );
   }
 
-  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
     UNUSED_PARAMETER(buffer);
     UNUSED_PARAMETER(internalformat);
-    UNUSED_PARAMETER(offset);
-    UNUSED_PARAMETER(size);
     UNUSED_PARAMETER(format);
     UNUSED_PARAMETER(type);
+    UNUSED_PARAMETER(offset);
+    UNUSED_PARAMETER(size);
     UNUSED_PARAMETER(data);
     Warning( "glClearNamedBufferSubDataEXT", " not available." );
   }
@@ -6035,7 +6035,7 @@ namespace Missing
 
 // GL_ARB_debug_output
 
-  static void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+  static void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
 {
     UNUSED_PARAMETER(callback);
     UNUSED_PARAMETER(userParam);
@@ -8907,7 +8907,7 @@ namespace Missing
 
 // GL_ARB_shading_language_include
 
-  static void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+  static void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
 {
     UNUSED_PARAMETER(shader);
     UNUSED_PARAMETER(count);
@@ -9205,7 +9205,7 @@ namespace Missing
     Warning( "glSampleMaski", " not available." );
   }
 
-  static void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+  static void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
     UNUSED_PARAMETER(target);
     UNUSED_PARAMETER(samples);
@@ -9216,7 +9216,7 @@ namespace Missing
     Warning( "glTexImage2DMultisample", " not available." );
   }
 
-  static void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+  static void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
     UNUSED_PARAMETER(target);
     UNUSED_PARAMETER(samples);
@@ -15442,7 +15442,7 @@ namespace Missing
     Warning( "glMultiDrawArraysEXT", " not available." );
   }
 
-  static void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+  static void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
     UNUSED_PARAMETER(mode);
     UNUSED_PARAMETER(count);
@@ -16198,7 +16198,7 @@ namespace Missing
     Warning( "glGetTransformFeedbackVaryingEXT", " not available." );
   }
 
-  static void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+  static void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
     UNUSED_PARAMETER(program);
     UNUSED_PARAMETER(count);
@@ -17020,7 +17020,7 @@ namespace Missing
 
 // GL_KHR_debug
 
-  static void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+  static void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
 {
     UNUSED_PARAMETER(callback);
     UNUSED_PARAMETER(userParam);

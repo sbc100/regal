@@ -494,7 +494,7 @@ is_symbolic_pname(GLenum pname) {
     case GL_TEXTURE_LUMINANCE_TYPE:
     case GL_TEXTURE_INTENSITY_TYPE:
     case GL_TEXTURE_DEPTH_TYPE:
-    case GL_TEXTURE_BUFFER_FORMAT:
+    case GL_TEXTURE_BUFFER_FORMAT_ARB:
     case GL_POINT_SPRITE_COORD_ORIGIN:
     case GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:
     case GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE:
@@ -1501,7 +1501,7 @@ _gl_param_size(GLenum pname) {
     case GL_MAX_TEXTURE_BUFFER_SIZE: return 1;
     case GL_TEXTURE_BINDING_BUFFER: return 1;
     case GL_TEXTURE_BUFFER_DATA_STORE_BINDING: return 1;
-    case GL_TEXTURE_BUFFER_FORMAT: return 1;
+    case GL_TEXTURE_BUFFER_FORMAT_ARB: return 1;
     case GL_ANY_SAMPLES_PASSED: return 1;
     case GL_TRANSFORM_FEEDBACK_BUFFER_START: return 1;
     case GL_TRANSFORM_FEEDBACK_BUFFER_SIZE: return 1;
@@ -1627,7 +1627,7 @@ _gl_param_size(GLenum pname) {
     case GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS: return 1;
     case GL_MAX_SHADER_STORAGE_BLOCK_SIZE: return 1;
     case GL_DEPTH_STENCIL_TEXTURE_MODE: return 1;
-    case GL_MAX_COMPUTE_LOCAL_INVOCATIONS: return 1;
+    case GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS: return 1;
     case GL_DISPATCH_INDIRECT_BUFFER_BINDING: return 1;
     case GL_TEXTURE_BINDING_2D_MULTISAMPLE: return 1;
     case GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY: return 1;
@@ -2588,6 +2588,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_MINOR_VERSION", GL_MINOR_VERSION},
     {"GL_NUM_EXTENSIONS", GL_NUM_EXTENSIONS},
     {"GL_CONTEXT_FLAGS", GL_CONTEXT_FLAGS},
+    {"GL_BUFFER_IMMUTABLE_STORAGE", GL_BUFFER_IMMUTABLE_STORAGE},
     {"GL_INDEX", GL_INDEX},
     {"GL_COMPRESSED_RED", GL_COMPRESSED_RED},
     {"GL_COMPRESSED_RG", GL_COMPRESSED_RG},
@@ -2652,7 +2653,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS", GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS},
     {"GL_MAX_COMPUTE_ATOMIC_COUNTERS", GL_MAX_COMPUTE_ATOMIC_COUNTERS},
     {"GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS", GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS},
-    {"GL_COMPUTE_LOCAL_WORK_SIZE", GL_COMPUTE_LOCAL_WORK_SIZE},
+    {"GL_COMPUTE_WORK_GROUP_SIZE", GL_COMPUTE_WORK_GROUP_SIZE},
     {"GL_DEBUG_TYPE_MARKER", GL_DEBUG_TYPE_MARKER},
     {"GL_DEBUG_TYPE_PUSH_GROUP", GL_DEBUG_TYPE_PUSH_GROUP},
     {"GL_DEBUG_TYPE_POP_GROUP", GL_DEBUG_TYPE_POP_GROUP},
@@ -3376,6 +3377,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_DOT3_RGB_EXT", GL_DOT3_RGB_EXT},
     {"GL_PROGRAM_BINARY_LENGTH", GL_PROGRAM_BINARY_LENGTH},
     {"GL_MIRROR_CLAMP_ATI", GL_MIRROR_CLAMP_ATI},
+    {"GL_MIRROR_CLAMP_TO_EDGE", GL_MIRROR_CLAMP_TO_EDGE},
     {"GL_MODULATE_ADD_ATI", GL_MODULATE_ADD_ATI},
     {"GL_MODULATE_SIGNED_ADD_ATI", GL_MODULATE_SIGNED_ADD_ATI},
     {"GL_MODULATE_SUBTRACT_ATI", GL_MODULATE_SUBTRACT_ATI},
@@ -4061,7 +4063,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_MAX_TEXTURE_BUFFER_SIZE", GL_MAX_TEXTURE_BUFFER_SIZE},
     {"GL_TEXTURE_BINDING_BUFFER", GL_TEXTURE_BINDING_BUFFER},
     {"GL_TEXTURE_BUFFER_DATA_STORE_BINDING", GL_TEXTURE_BUFFER_DATA_STORE_BINDING},
-    {"GL_TEXTURE_BUFFER_FORMAT", GL_TEXTURE_BUFFER_FORMAT},
+    {"GL_TEXTURE_BUFFER_FORMAT_ARB", GL_TEXTURE_BUFFER_FORMAT_ARB},
     {"GL_ANY_SAMPLES_PASSED", GL_ANY_SAMPLES_PASSED},
     {"GL_SAMPLE_SHADING", GL_SAMPLE_SHADING},
     {"GL_MIN_SAMPLE_SHADING_VALUE", GL_MIN_SAMPLE_SHADING_VALUE},
@@ -4473,6 +4475,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_SIGNED_NORMALIZED", GL_SIGNED_NORMALIZED},
     {"GL_PRIMITIVE_RESTART", GL_PRIMITIVE_RESTART},
     {"GL_PRIMITIVE_RESTART_INDEX", GL_PRIMITIVE_RESTART_INDEX},
+    {"GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB", GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB},
     {"GL_PERFMON_GLOBAL_MODE_QCOM", GL_PERFMON_GLOBAL_MODE_QCOM},
     {"GL_SHADER_BINARY_VIV", GL_SHADER_BINARY_VIV},
     {"GL_INT8_NV", GL_INT8_NV},
@@ -4694,6 +4697,8 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_MAX_GEOMETRY_IMAGE_UNIFORMS", GL_MAX_GEOMETRY_IMAGE_UNIFORMS},
     {"GL_MAX_FRAGMENT_IMAGE_UNIFORMS", GL_MAX_FRAGMENT_IMAGE_UNIFORMS},
     {"GL_MAX_COMBINED_IMAGE_UNIFORMS", GL_MAX_COMBINED_IMAGE_UNIFORMS},
+    {"GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV", GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV},
+    {"GL_MAX_DEEP_3D_TEXTURE_DEPTH_NV", GL_MAX_DEEP_3D_TEXTURE_DEPTH_NV},
     {"GL_SHADER_STORAGE_BUFFER", GL_SHADER_STORAGE_BUFFER},
     {"GL_SHADER_STORAGE_BUFFER_BINDING", GL_SHADER_STORAGE_BUFFER_BINDING},
     {"GL_SHADER_STORAGE_BUFFER_START", GL_SHADER_STORAGE_BUFFER_START},
@@ -4710,7 +4715,7 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT", GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT},
     {"GL_SYNC_X11_FENCE_EXT", GL_SYNC_X11_FENCE_EXT},
     {"GL_DEPTH_STENCIL_TEXTURE_MODE", GL_DEPTH_STENCIL_TEXTURE_MODE},
-    {"GL_MAX_COMPUTE_LOCAL_INVOCATIONS", GL_MAX_COMPUTE_LOCAL_INVOCATIONS},
+    {"GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS", GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS},
     {"GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER", GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER},
     {"GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER", GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER},
     {"GL_DISPATCH_INDIRECT_BUFFER", GL_DISPATCH_INDIRECT_BUFFER},
@@ -4787,6 +4792,17 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_VERTEX_ARRAY_OBJECT_EXT", GL_VERTEX_ARRAY_OBJECT_EXT},
     {"GL_SAMPLER_OBJECT_AMD", GL_SAMPLER_OBJECT_AMD},
     {"GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD", GL_EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD},
+    {"GL_QUERY_BUFFER", GL_QUERY_BUFFER},
+    {"GL_QUERY_BUFFER_BINDING", GL_QUERY_BUFFER_BINDING},
+    {"GL_QUERY_RESULT_NO_WAIT", GL_QUERY_RESULT_NO_WAIT},
+    {"GL_VIRTUAL_PAGE_SIZE_X_AMD", GL_VIRTUAL_PAGE_SIZE_X_AMD},
+    {"GL_VIRTUAL_PAGE_SIZE_Y_AMD", GL_VIRTUAL_PAGE_SIZE_Y_AMD},
+    {"GL_VIRTUAL_PAGE_SIZE_Z_AMD", GL_VIRTUAL_PAGE_SIZE_Z_AMD},
+    {"GL_MAX_SPARSE_TEXTURE_SIZE_AMD", GL_MAX_SPARSE_TEXTURE_SIZE_AMD},
+    {"GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD", GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD},
+    {"GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS", GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS},
+    {"GL_MIN_SPARSE_LEVEL_AMD", GL_MIN_SPARSE_LEVEL_AMD},
+    {"GL_MIN_LOD_WARNING_AMD", GL_MIN_LOD_WARNING_AMD},
     {"GL_TEXTURE_BUFFER_OFFSET", GL_TEXTURE_BUFFER_OFFSET},
     {"GL_TEXTURE_BUFFER_SIZE", GL_TEXTURE_BUFFER_SIZE},
     {"GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT", GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT},
@@ -4893,11 +4909,16 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_MAX_FRAMEBUFFER_HEIGHT", GL_MAX_FRAMEBUFFER_HEIGHT},
     {"GL_MAX_FRAMEBUFFER_LAYERS", GL_MAX_FRAMEBUFFER_LAYERS},
     {"GL_MAX_FRAMEBUFFER_SAMPLES", GL_MAX_FRAMEBUFFER_SAMPLES},
+    {"GL_LOCATION_COMPONENT", GL_LOCATION_COMPONENT},
+    {"GL_TRANSFORM_FEEDBACK_BUFFER_INDEX", GL_TRANSFORM_FEEDBACK_BUFFER_INDEX},
+    {"GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE", GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE},
+    {"GL_CLEAR_TEXTURE", GL_CLEAR_TEXTURE},
     {"GL_NUM_SAMPLE_COUNTS", GL_NUM_SAMPLE_COUNTS},
     {"GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE", GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE},
     {"GL_TEXTURE_USAGE_ANGLE", GL_TEXTURE_USAGE_ANGLE},
     {"GL_FRAMEBUFFER_ATTACHMENT_ANGLE", GL_FRAMEBUFFER_ATTACHMENT_ANGLE},
     {"GL_PACK_REVERSE_ROW_ORDER_ANGLE", GL_PACK_REVERSE_ROW_ORDER_ANGLE},
+    {"GL_PROGRAM_BINARY_ANGLE", GL_PROGRAM_BINARY_ANGLE},
     {"GL_COMPRESSED_RGBA_ASTC_4x4_KHR", GL_COMPRESSED_RGBA_ASTC_4x4_KHR},
     {"GL_COMPRESSED_RGBA_ASTC_5x4_KHR", GL_COMPRESSED_RGBA_ASTC_5x4_KHR},
     {"GL_COMPRESSED_RGBA_ASTC_5x5_KHR", GL_COMPRESSED_RGBA_ASTC_5x5_KHR},
@@ -4934,21 +4955,11 @@ static const trace::EnumValue _enumGLenum_values[] = {
     {"GL_CIRCULAR_CW_ARC_TO_NV", GL_CIRCULAR_CW_ARC_TO_NV},
     {"GL_CIRCULAR_TANGENT_ARC_TO_NV", GL_CIRCULAR_TANGENT_ARC_TO_NV},
     {"GL_ARC_TO_NV", GL_ARC_TO_NV},
-    {"GL_BUFFER_IMMUTABLE_STORAGE", GL_BUFFER_IMMUTABLE_STORAGE},
-    {"GL_BUFFER_STORAGE_FLAGS", GL_BUFFER_STORAGE_FLAGS},
-    {"GL_CLEAR_TEXTURE", GL_CLEAR_TEXTURE},
-    {"GL_LOCATION_COMPONENT", GL_LOCATION_COMPONENT},
-    {"GL_TRANSFORM_FEEDBACK_BUFFER_INDEX", GL_TRANSFORM_FEEDBACK_BUFFER_INDEX},
-    {"GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE", GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE},
-    {"GL_QUERY_RESULT_NO_WAIT", GL_QUERY_RESULT_NO_WAIT},
-    {"GL_QUERY_BUFFER", GL_QUERY_BUFFER},
-    {"GL_QUERY_BUFFER_BINDING", GL_QUERY_BUFFER_BINDING},
-    {"GL_MIRROR_CLAMP_TO_EDGE", GL_MIRROR_CLAMP_TO_EDGE},
     {"GL_INVALID_INDEX", GL_INVALID_INDEX},
 };
 
 static const trace::EnumSig _enumGLenum_sig = {
-    1, 3231, _enumGLenum_values
+    1, 3242, _enumGLenum_values
 };
 
 static const trace::BitmaskFlag _bitmaskGLbitfield1_flags[] = {
@@ -6411,9 +6422,9 @@ static const trace::EnumValue _enumint43_values[] = {
     {"WGL_SAMPLE_BUFFERS_ARB", WGL_SAMPLE_BUFFERS_ARB},
     {"WGL_SAMPLES_ARB", WGL_SAMPLES_ARB},
     {"WGL_GENLOCK_SOURCE_MULTIVIEW_I3D", WGL_GENLOCK_SOURCE_MULTIVIEW_I3D},
-    {"WGL_GENLOCK_SOURCE_EXTENAL_SYNC_I3D", WGL_GENLOCK_SOURCE_EXTENAL_SYNC_I3D},
-    {"WGL_GENLOCK_SOURCE_EXTENAL_FIELD_I3D", WGL_GENLOCK_SOURCE_EXTENAL_FIELD_I3D},
-    {"WGL_GENLOCK_SOURCE_EXTENAL_TTL_I3D", WGL_GENLOCK_SOURCE_EXTENAL_TTL_I3D},
+    {"WGL_GENLOCK_SOURCE_EXTERNAL_SYNC_I3D", WGL_GENLOCK_SOURCE_EXTERNAL_SYNC_I3D},
+    {"WGL_GENLOCK_SOURCE_EXTERNAL_FIELD_I3D", WGL_GENLOCK_SOURCE_EXTERNAL_FIELD_I3D},
+    {"WGL_GENLOCK_SOURCE_EXTERNAL_TTL_I3D", WGL_GENLOCK_SOURCE_EXTERNAL_TTL_I3D},
     {"WGL_GENLOCK_SOURCE_DIGITAL_SYNC_I3D", WGL_GENLOCK_SOURCE_DIGITAL_SYNC_I3D},
     {"WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D", WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D},
     {"WGL_GENLOCK_SOURCE_EDGE_FALLING_I3D", WGL_GENLOCK_SOURCE_EDGE_FALLING_I3D},
@@ -6503,8 +6514,8 @@ static const trace::EnumValue _enumint43_values[] = {
     {"WGL_VIDEO_OUT_STACKED_FIELDS_2_1", WGL_VIDEO_OUT_STACKED_FIELDS_2_1},
     {"WGL_UNIQUE_ID_NV", WGL_UNIQUE_ID_NV},
     {"WGL_NUM_VIDEO_CAPTURE_SLOTS_NV", WGL_NUM_VIDEO_CAPTURE_SLOTS_NV},
-    {"WGL_ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV", WGL_ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV},
-    {"WGL_ERROR_MISSING_AFFINITY_MASK_NV", WGL_ERROR_MISSING_AFFINITY_MASK_NV},
+    {"ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV", ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV},
+    {"ERROR_MISSING_AFFINITY_MASK_NV", ERROR_MISSING_AFFINITY_MASK_NV},
     {"WGL_NUM_VIDEO_SLOTS_NV", WGL_NUM_VIDEO_SLOTS_NV},
     {"WGL_TYPE_RGBA_FLOAT_ARB", WGL_TYPE_RGBA_FLOAT_ARB},
     {"WGL_GPU_FASTEST_TARGET_GPUS_AMD", WGL_GPU_FASTEST_TARGET_GPUS_AMD},
@@ -6590,15 +6601,15 @@ static const trace::StructSig _structRECT_sig = {
     7, "RECT", 4, _structRECT_members
 };
 
-static const char * _structGPU_DEVICE_members[5] = {
+static const char * _struct_GPU_DEVICE_members[5] = {
     "cb",
     "DeviceName",
     "DeviceString",
     "Flags",
     "rcVirtualScreen",
 };
-static const trace::StructSig _structGPU_DEVICE_sig = {
-    19, "GPU_DEVICE", 5, _structGPU_DEVICE_members
+static const trace::StructSig _struct_GPU_DEVICE_sig = {
+    19, "_GPU_DEVICE", 5, _struct_GPU_DEVICE_members
 };
 
 #endif // REGAL_SYS_WGL
@@ -10098,7 +10109,7 @@ static const trace::FunctionSig _glClearBufferSubData_sig = {1167, "glClearBuffe
 static const char * _glClearNamedBufferDataEXT_args[5] = {"buffer", "internalformat", "format", "type", "data"};
 static const trace::FunctionSig _glClearNamedBufferDataEXT_sig = {1168, "glClearNamedBufferDataEXT", 5, _glClearNamedBufferDataEXT_args};
 
-static const char * _glClearNamedBufferSubDataEXT_args[7] = {"buffer", "internalformat", "offset", "size", "format", "type", "data"};
+static const char * _glClearNamedBufferSubDataEXT_args[7] = {"buffer", "internalformat", "format", "type", "offset", "size", "data"};
 static const trace::FunctionSig _glClearNamedBufferSubDataEXT_sig = {1169, "glClearNamedBufferSubDataEXT", 7, _glClearNamedBufferSubDataEXT_args};
 
 static const char * _glDispatchCompute_args[3] = {"num_groups_x", "num_groups_y", "num_groups_z"};
@@ -37639,7 +37650,7 @@ void glGetSynciv( GLsync sync, GLenum pname, GLsizei bufSize, GLsizei * length, 
     trace::localWriter.endLeave();
 }
 
-void glTexImage2DMultisample( GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations ) {
+void glTexImage2DMultisample( GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations ) {
     unsigned _call = trace::localWriter.beginEnter(&_glTexImage2DMultisample_sig);
     trace::localWriter.beginArg(0);
     trace::localWriter.writeEnum(&_enumGLenum_sig, target);
@@ -37648,7 +37659,7 @@ void glTexImage2DMultisample( GLenum target, GLsizei samples, GLint internalform
     trace::localWriter.writeSInt(samples);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    trace::localWriter.writeSInt(internalformat);
+    trace::localWriter.writeEnum(&_enumGLenum_sig, internalformat);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     trace::localWriter.writeSInt(width);
@@ -37667,7 +37678,7 @@ void glTexImage2DMultisample( GLenum target, GLsizei samples, GLint internalform
     trace::localWriter.endLeave();
 }
 
-void glTexImage3DMultisample( GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations ) {
+void glTexImage3DMultisample( GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations ) {
     unsigned _call = trace::localWriter.beginEnter(&_glTexImage3DMultisample_sig);
     trace::localWriter.beginArg(0);
     trace::localWriter.writeEnum(&_enumGLenum_sig, target);
@@ -37676,7 +37687,7 @@ void glTexImage3DMultisample( GLenum target, GLsizei samples, GLint internalform
     trace::localWriter.writeSInt(samples);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    trace::localWriter.writeSInt(internalformat);
+    trace::localWriter.writeEnum(&_enumGLenum_sig, internalformat);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     trace::localWriter.writeSInt(width);
@@ -37877,7 +37888,7 @@ void glDeleteNamedStringARB( GLint namelen, const GLchar * name ) {
     trace::localWriter.endLeave();
 }
 
-void glCompileShaderIncludeARB( GLuint shader, GLsizei count, const GLchar * * path, const GLint * length ) {
+void glCompileShaderIncludeARB( GLuint shader, GLsizei count, const GLchar * const * path, const GLint * length ) {
     unsigned _call = trace::localWriter.beginEnter(&_glCompileShaderIncludeARB_sig);
     trace::localWriter.beginArg(0);
     trace::localWriter.writeUInt(shader);
@@ -37887,11 +37898,11 @@ void glCompileShaderIncludeARB( GLuint shader, GLsizei count, const GLchar * * p
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (path) {
-        size_t _cconstGLchar5 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cconstGLchar5);
-        for (size_t _iconstGLchar5 = 0; _iconstGLchar5 < _cconstGLchar5; ++_iconstGLchar5) {
+        size_t _cCconstGLchar5 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCconstGLchar5);
+        for (size_t _iCconstGLchar5 = 0; _iCconstGLchar5 < _cCconstGLchar5; ++_iCconstGLchar5) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeString(reinterpret_cast<const char *>((path)[_iconstGLchar5]), _glShaderSource_length(path, length, _iconstGLchar5));
+    trace::localWriter.writeString(reinterpret_cast<const char *>((path)[_iCconstGLchar5]), _glShaderSource_length(path, length, _iCconstGLchar5));
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -44443,7 +44454,7 @@ void glClearNamedBufferDataEXT( GLuint buffer, GLenum internalformat, GLenum for
     trace::localWriter.endLeave();
 }
 
-void glClearNamedBufferSubDataEXT( GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void * data ) {
+void glClearNamedBufferSubDataEXT( GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLsizeiptr offset, GLsizeiptr size, const void * data ) {
     unsigned _call = trace::localWriter.beginEnter(&_glClearNamedBufferSubDataEXT_sig);
     trace::localWriter.beginArg(0);
     trace::localWriter.writeUInt(buffer);
@@ -44452,22 +44463,22 @@ void glClearNamedBufferSubDataEXT( GLuint buffer, GLenum internalformat, GLintpt
     trace::localWriter.writeEnum(&_enumGLenum_sig, internalformat);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
-    trace::localWriter.writeSInt(offset);
-    trace::localWriter.endArg();
-    trace::localWriter.beginArg(3);
-    trace::localWriter.writeSInt(size);
-    trace::localWriter.endArg();
-    trace::localWriter.beginArg(4);
     trace::localWriter.writeEnum(&_enumGLenum_sig, format);
     trace::localWriter.endArg();
-    trace::localWriter.beginArg(5);
+    trace::localWriter.beginArg(3);
     trace::localWriter.writeEnum(&_enumGLenum_sig, type);
+    trace::localWriter.endArg();
+    trace::localWriter.beginArg(4);
+    trace::localWriter.writeSInt(offset);
+    trace::localWriter.endArg();
+    trace::localWriter.beginArg(5);
+    trace::localWriter.writeSInt(size);
     trace::localWriter.endArg();
     trace::localWriter.beginArg(6);
     trace::localWriter.writeBlob(data, _glClearBufferData_size(format, type));
     trace::localWriter.endArg();
     trace::localWriter.endEnter();
-    _glClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, data);
+    _glClearNamedBufferSubDataEXT(buffer, internalformat, format, type, offset, size, data);
     trace::localWriter.beginLeave(_call);
     if (true) {
     }
@@ -45624,11 +45635,11 @@ void glBindBuffersBase( GLenum target, GLuint first, GLsizei count, const GLuint
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (buffers) {
-        size_t _cCGLuint50 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint50);
-        for (size_t _iCGLuint50 = 0; _iCGLuint50 < _cCGLuint50; ++_iCGLuint50) {
+        size_t _cCPGLuint22 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCPGLuint22);
+        for (size_t _iCPGLuint22 = 0; _iCPGLuint22 < _cCPGLuint22; ++_iCPGLuint22) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((buffers)[_iCGLuint50]);
+    trace::localWriter.writeUInt((buffers)[_iCPGLuint22]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -45657,11 +45668,11 @@ void glBindBuffersRange( GLenum target, GLuint first, GLsizei count, const GLuin
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (buffers) {
-        size_t _cCGLuint51 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint51);
-        for (size_t _iCGLuint51 = 0; _iCGLuint51 < _cCGLuint51; ++_iCGLuint51) {
+        size_t _cCPGLuint23 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCPGLuint23);
+        for (size_t _iCPGLuint23 = 0; _iCPGLuint23 < _cCPGLuint23; ++_iCPGLuint23) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((buffers)[_iCGLuint51]);
+    trace::localWriter.writeUInt((buffers)[_iCPGLuint23]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -45715,11 +45726,11 @@ void glBindImageTextures( GLuint first, GLsizei count, const GLuint * textures )
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (textures) {
-        size_t _cCGLuint52 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint52);
-        for (size_t _iCGLuint52 = 0; _iCGLuint52 < _cCGLuint52; ++_iCGLuint52) {
+        size_t _cCPGLuint13 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCPGLuint13);
+        for (size_t _iCPGLuint13 = 0; _iCPGLuint13 < _cCPGLuint13; ++_iCPGLuint13) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((textures)[_iCGLuint52]);
+    trace::localWriter.writeUInt((textures)[_iCPGLuint13]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -45745,11 +45756,11 @@ void glBindSamplers( GLuint first, GLsizei count, const GLuint * samplers ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (samplers) {
-        size_t _cCGLuint53 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint53);
-        for (size_t _iCGLuint53 = 0; _iCGLuint53 < _cCGLuint53; ++_iCGLuint53) {
+        size_t _cCPGLuint151 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCPGLuint151);
+        for (size_t _iCPGLuint151 = 0; _iCPGLuint151 < _cCPGLuint151; ++_iCPGLuint151) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((samplers)[_iCGLuint53]);
+    trace::localWriter.writeUInt((samplers)[_iCPGLuint151]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -45775,11 +45786,11 @@ void glBindTextures( GLuint first, GLsizei count, const GLuint * textures ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (textures) {
-        size_t _cCGLuint54 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint54);
-        for (size_t _iCGLuint54 = 0; _iCGLuint54 < _cCGLuint54; ++_iCGLuint54) {
+        size_t _cCPGLuint14 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCPGLuint14);
+        for (size_t _iCPGLuint14 = 0; _iCPGLuint14 < _cCPGLuint14; ++_iCPGLuint14) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((textures)[_iCGLuint54]);
+    trace::localWriter.writeUInt((textures)[_iCPGLuint14]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -45805,11 +45816,11 @@ void glBindVertexBuffers( GLuint first, GLsizei count, const GLuint * buffers, c
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (buffers) {
-        size_t _cCGLuint55 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint55);
-        for (size_t _iCGLuint55 = 0; _iCGLuint55 < _cCGLuint55; ++_iCGLuint55) {
+        size_t _cCPGLuint24 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCPGLuint24);
+        for (size_t _iCPGLuint24 = 0; _iCPGLuint24 < _cCPGLuint24; ++_iCPGLuint24) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((buffers)[_iCGLuint55]);
+    trace::localWriter.writeUInt((buffers)[_iCPGLuint24]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -47457,11 +47468,11 @@ GLboolean glAreTexturesResidentEXT( GLsizei n, const GLuint * textures, GLboolea
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (textures) {
-        size_t _cCPGLuint13 = n > 0 ? n : 0;
-        trace::localWriter.beginArray(_cCPGLuint13);
-        for (size_t _iCPGLuint13 = 0; _iCPGLuint13 < _cCPGLuint13; ++_iCPGLuint13) {
+        size_t _cCPGLuint17 = n > 0 ? n : 0;
+        trace::localWriter.beginArray(_cCPGLuint17);
+        for (size_t _iCPGLuint17 = 0; _iCPGLuint17 < _cCPGLuint17; ++_iCPGLuint17) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((textures)[_iCPGLuint13]);
+    trace::localWriter.writeUInt((textures)[_iCPGLuint17]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -47518,11 +47529,11 @@ void glDeleteTexturesEXT( GLsizei n, const GLuint * textures ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (textures) {
-        size_t _cCPGLuint14 = n > 0 ? n : 0;
-        trace::localWriter.beginArray(_cCPGLuint14);
-        for (size_t _iCPGLuint14 = 0; _iCPGLuint14 < _cCPGLuint14; ++_iCPGLuint14) {
+        size_t _cCPGLuint18 = n > 0 ? n : 0;
+        trace::localWriter.beginArray(_cCPGLuint18);
+        for (size_t _iCPGLuint18 = 0; _iCPGLuint18 < _cCPGLuint18; ++_iCPGLuint18) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((textures)[_iCPGLuint14]);
+    trace::localWriter.writeUInt((textures)[_iCPGLuint18]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -47590,11 +47601,11 @@ void glPrioritizeTexturesEXT( GLsizei n, const GLuint * textures, const GLclampf
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (textures) {
-        size_t _cCPGLuint17 = n > 0 ? n : 0;
-        trace::localWriter.beginArray(_cCPGLuint17);
-        for (size_t _iCPGLuint17 = 0; _iCPGLuint17 < _cCPGLuint17; ++_iCPGLuint17) {
+        size_t _cCPGLuint19 = n > 0 ? n : 0;
+        trace::localWriter.beginArray(_cCPGLuint19);
+        for (size_t _iCPGLuint19 = 0; _iCPGLuint19 < _cCPGLuint19; ++_iCPGLuint19) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((textures)[_iCPGLuint17]);
+    trace::localWriter.writeUInt((textures)[_iCPGLuint19]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -50309,11 +50320,11 @@ void glSecondaryColor3uivEXT( const GLuint * v ) {
     unsigned _call = trace::localWriter.beginEnter(&_glSecondaryColor3uivEXT_sig);
     trace::localWriter.beginArg(0);
     if (v) {
-        size_t _cCGLuint56 = 3 > 0 ? 3 : 0;
-        trace::localWriter.beginArray(_cCGLuint56);
-        for (size_t _iCGLuint56 = 0; _iCGLuint56 < _cCGLuint56; ++_iCGLuint56) {
+        size_t _cCGLuint50 = 3 > 0 ? 3 : 0;
+        trace::localWriter.beginArray(_cCGLuint50);
+        for (size_t _iCGLuint50 = 0; _iCGLuint50 < _cCGLuint50; ++_iCGLuint50) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((v)[_iCGLuint56]);
+    trace::localWriter.writeUInt((v)[_iCGLuint50]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -50463,7 +50474,7 @@ void glMultiDrawArraysEXT( GLenum mode, const GLint * first, const GLsizei * cou
     trace::localWriter.endLeave();
 }
 
-void glMultiDrawElementsEXT( GLenum mode, const GLsizei * count, GLenum type, const GLvoid * * indices, GLsizei primcount ) {
+void glMultiDrawElementsEXT( GLenum mode, const GLsizei * count, GLenum type, const GLvoid * const * indices, GLsizei primcount ) {
     if (_need_user_arrays()) {
         GLuint _count = _glMultiDrawElementsEXT_count(count, type, indices, primcount);
         _trace_user_arrays(_count);
@@ -50491,16 +50502,16 @@ void glMultiDrawElementsEXT( GLenum mode, const GLsizei * count, GLenum type, co
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (indices) {
-        size_t _cconstGLvoid92 = primcount > 0 ? primcount : 0;
-        trace::localWriter.beginArray(_cconstGLvoid92);
-        for (size_t _iconstGLvoid92 = 0; _iconstGLvoid92 < _cconstGLvoid92; ++_iconstGLvoid92) {
+        size_t _cCconstGLvoid92 = primcount > 0 ? primcount : 0;
+        trace::localWriter.beginArray(_cCconstGLvoid92);
+        for (size_t _iCconstGLvoid92 = 0; _iCconstGLvoid92 < _cCconstGLvoid92; ++_iCconstGLvoid92) {
             trace::localWriter.beginElement();
     switch (_element_array_buffer_binding()) {
     default:
-    trace::localWriter.writePointer((uintptr_t)static_cast<const GLvoid *>((indices)[_iconstGLvoid92]));
+    trace::localWriter.writePointer((uintptr_t)static_cast<const GLvoid *>((indices)[_iCconstGLvoid92]));
         break;
     case 0:
-    trace::localWriter.writeBlob(static_cast<const GLvoid *>((indices)[_iconstGLvoid92]), count[_iconstGLvoid92]*_gl_type_size(type));
+    trace::localWriter.writeBlob(static_cast<const GLvoid *>((indices)[_iCconstGLvoid92]), count[_iCconstGLvoid92]*_gl_type_size(type));
         break;
     }
             trace::localWriter.endElement();
@@ -53792,11 +53803,11 @@ void glWeightPathsNV( GLuint resultPath, GLsizei numPaths, const GLuint * paths,
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (paths) {
-        size_t _cCGLuint66 = numPaths > 0 ? numPaths : 0;
-        trace::localWriter.beginArray(_cCGLuint66);
-        for (size_t _iCGLuint66 = 0; _iCGLuint66 < _cCGLuint66; ++_iCGLuint66) {
+        size_t _cCGLuint60 = numPaths > 0 ? numPaths : 0;
+        trace::localWriter.beginArray(_cCGLuint60);
+        for (size_t _iCGLuint60 = 0; _iCGLuint60 < _cCGLuint60; ++_iCGLuint60) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((paths)[_iCGLuint66]);
+    trace::localWriter.writeUInt((paths)[_iCGLuint60]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -55541,16 +55552,16 @@ void glMultiModeDrawElementsIBM( const GLenum * mode, const GLsizei * count, GLe
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (indices) {
-        size_t _cCconstGLvoid111 = primcount > 0 ? primcount : 0;
-        trace::localWriter.beginArray(_cCconstGLvoid111);
-        for (size_t _iCconstGLvoid111 = 0; _iCconstGLvoid111 < _cCconstGLvoid111; ++_iCconstGLvoid111) {
+        size_t _cCconstGLvoid110 = primcount > 0 ? primcount : 0;
+        trace::localWriter.beginArray(_cCconstGLvoid110);
+        for (size_t _iCconstGLvoid110 = 0; _iCconstGLvoid110 < _cCconstGLvoid110; ++_iCconstGLvoid110) {
             trace::localWriter.beginElement();
     switch (_element_array_buffer_binding()) {
     default:
-    trace::localWriter.writePointer((uintptr_t)static_cast<const GLvoid *>((indices)[_iCconstGLvoid111]));
+    trace::localWriter.writePointer((uintptr_t)static_cast<const GLvoid *>((indices)[_iCconstGLvoid110]));
         break;
     case 0:
-    trace::localWriter.writeBlob(static_cast<const GLvoid *>((indices)[_iCconstGLvoid111]), count[_iCconstGLvoid111]*_gl_type_size(type));
+    trace::localWriter.writeBlob(static_cast<const GLvoid *>((indices)[_iCconstGLvoid110]), count[_iCconstGLvoid110]*_gl_type_size(type));
         break;
     }
             trace::localWriter.endElement();
@@ -63705,11 +63716,11 @@ void glProgramLocalParameterI4uivNV( GLenum target, GLuint index, const GLuint *
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (params) {
-        size_t _cCGLuint68 = 4 > 0 ? 4 : 0;
-        trace::localWriter.beginArray(_cCGLuint68);
-        for (size_t _iCGLuint68 = 0; _iCGLuint68 < _cCGLuint68; ++_iCGLuint68) {
+        size_t _cCGLuint62 = 4 > 0 ? 4 : 0;
+        trace::localWriter.beginArray(_cCGLuint62);
+        for (size_t _iCGLuint62 = 0; _iCGLuint62 < _cCGLuint62; ++_iCGLuint62) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint68]);
+    trace::localWriter.writeUInt((params)[_iCGLuint62]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -63738,11 +63749,11 @@ void glProgramLocalParametersI4uivNV( GLenum target, GLuint index, GLsizei count
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (params) {
-        size_t _cCGLuint69 = count*4 > 0 ? count*4 : 0;
-        trace::localWriter.beginArray(_cCGLuint69);
-        for (size_t _iCGLuint69 = 0; _iCGLuint69 < _cCGLuint69; ++_iCGLuint69) {
+        size_t _cCGLuint63 = count*4 > 0 ? count*4 : 0;
+        trace::localWriter.beginArray(_cCGLuint63);
+        for (size_t _iCGLuint63 = 0; _iCGLuint63 < _cCGLuint63; ++_iCGLuint63) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint69]);
+    trace::localWriter.writeUInt((params)[_iCGLuint63]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -63887,11 +63898,11 @@ void glProgramEnvParameterI4uivNV( GLenum target, GLuint index, const GLuint * p
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (params) {
-        size_t _cCGLuint70 = 4 > 0 ? 4 : 0;
-        trace::localWriter.beginArray(_cCGLuint70);
-        for (size_t _iCGLuint70 = 0; _iCGLuint70 < _cCGLuint70; ++_iCGLuint70) {
+        size_t _cCGLuint64 = 4 > 0 ? 4 : 0;
+        trace::localWriter.beginArray(_cCGLuint64);
+        for (size_t _iCGLuint64 = 0; _iCGLuint64 < _cCGLuint64; ++_iCGLuint64) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint70]);
+    trace::localWriter.writeUInt((params)[_iCGLuint64]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -63920,11 +63931,11 @@ void glProgramEnvParametersI4uivNV( GLenum target, GLuint index, GLsizei count, 
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (params) {
-        size_t _cCGLuint71 = count*4 > 0 ? count*4 : 0;
-        trace::localWriter.beginArray(_cCGLuint71);
-        for (size_t _iCGLuint71 = 0; _iCGLuint71 < _cCGLuint71; ++_iCGLuint71) {
+        size_t _cCGLuint65 = count*4 > 0 ? count*4 : 0;
+        trace::localWriter.beginArray(_cCGLuint65);
+        for (size_t _iCGLuint65 = 0; _iCGLuint65 < _cCGLuint65; ++_iCGLuint65) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint71]);
+    trace::localWriter.writeUInt((params)[_iCGLuint65]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64467,11 +64478,11 @@ void glVertexAttribI2uivEXT( GLuint index, const GLuint * v ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (v) {
-        size_t _cCGLuint73 = 2 > 0 ? 2 : 0;
-        trace::localWriter.beginArray(_cCGLuint73);
-        for (size_t _iCGLuint73 = 0; _iCGLuint73 < _cCGLuint73; ++_iCGLuint73) {
+        size_t _cCGLuint67 = 2 > 0 ? 2 : 0;
+        trace::localWriter.beginArray(_cCGLuint67);
+        for (size_t _iCGLuint67 = 0; _iCGLuint67 < _cCGLuint67; ++_iCGLuint67) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((v)[_iCGLuint73]);
+    trace::localWriter.writeUInt((v)[_iCGLuint67]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64494,11 +64505,11 @@ void glVertexAttribI3uivEXT( GLuint index, const GLuint * v ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (v) {
-        size_t _cCGLuint74 = 3 > 0 ? 3 : 0;
-        trace::localWriter.beginArray(_cCGLuint74);
-        for (size_t _iCGLuint74 = 0; _iCGLuint74 < _cCGLuint74; ++_iCGLuint74) {
+        size_t _cCGLuint68 = 3 > 0 ? 3 : 0;
+        trace::localWriter.beginArray(_cCGLuint68);
+        for (size_t _iCGLuint68 = 0; _iCGLuint68 < _cCGLuint68; ++_iCGLuint68) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((v)[_iCGLuint74]);
+    trace::localWriter.writeUInt((v)[_iCGLuint68]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64521,11 +64532,11 @@ void glVertexAttribI4uivEXT( GLuint index, const GLuint * v ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (v) {
-        size_t _cCGLuint75 = 4 > 0 ? 4 : 0;
-        trace::localWriter.beginArray(_cCGLuint75);
-        for (size_t _iCGLuint75 = 0; _iCGLuint75 < _cCGLuint75; ++_iCGLuint75) {
+        size_t _cCGLuint69 = 4 > 0 ? 4 : 0;
+        trace::localWriter.beginArray(_cCGLuint69);
+        for (size_t _iCGLuint69 = 0; _iCGLuint69 < _cCGLuint69; ++_iCGLuint69) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((v)[_iCGLuint75]);
+    trace::localWriter.writeUInt((v)[_iCGLuint69]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64887,11 +64898,11 @@ void glUniform1uivEXT( GLint location, GLsizei count, const GLuint * value ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (value) {
-        size_t _cCGLuint76 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint76);
-        for (size_t _iCGLuint76 = 0; _iCGLuint76 < _cCGLuint76; ++_iCGLuint76) {
+        size_t _cCGLuint70 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCGLuint70);
+        for (size_t _iCGLuint70 = 0; _iCGLuint70 < _cCGLuint70; ++_iCGLuint70) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint76]);
+    trace::localWriter.writeUInt((value)[_iCGLuint70]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64917,11 +64928,11 @@ void glUniform2uivEXT( GLint location, GLsizei count, const GLuint * value ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (value) {
-        size_t _cCGLuint77 = count*2 > 0 ? count*2 : 0;
-        trace::localWriter.beginArray(_cCGLuint77);
-        for (size_t _iCGLuint77 = 0; _iCGLuint77 < _cCGLuint77; ++_iCGLuint77) {
+        size_t _cCGLuint71 = count*2 > 0 ? count*2 : 0;
+        trace::localWriter.beginArray(_cCGLuint71);
+        for (size_t _iCGLuint71 = 0; _iCGLuint71 < _cCGLuint71; ++_iCGLuint71) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint77]);
+    trace::localWriter.writeUInt((value)[_iCGLuint71]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64947,11 +64958,11 @@ void glUniform3uivEXT( GLint location, GLsizei count, const GLuint * value ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (value) {
-        size_t _cCGLuint78 = count*3 > 0 ? count*3 : 0;
-        trace::localWriter.beginArray(_cCGLuint78);
-        for (size_t _iCGLuint78 = 0; _iCGLuint78 < _cCGLuint78; ++_iCGLuint78) {
+        size_t _cCGLuint72 = count*3 > 0 ? count*3 : 0;
+        trace::localWriter.beginArray(_cCGLuint72);
+        for (size_t _iCGLuint72 = 0; _iCGLuint72 < _cCGLuint72; ++_iCGLuint72) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint78]);
+    trace::localWriter.writeUInt((value)[_iCGLuint72]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -64977,11 +64988,11 @@ void glUniform4uivEXT( GLint location, GLsizei count, const GLuint * value ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (value) {
-        size_t _cCGLuint79 = count*4 > 0 ? count*4 : 0;
-        trace::localWriter.beginArray(_cCGLuint79);
-        for (size_t _iCGLuint79 = 0; _iCGLuint79 < _cCGLuint79; ++_iCGLuint79) {
+        size_t _cCGLuint73 = count*4 > 0 ? count*4 : 0;
+        trace::localWriter.beginArray(_cCGLuint73);
+        for (size_t _iCGLuint73 = 0; _iCGLuint73 < _cCGLuint73; ++_iCGLuint73) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint79]);
+    trace::localWriter.writeUInt((value)[_iCGLuint73]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -65239,11 +65250,11 @@ void glProgramBufferParametersIuivNV( GLenum target, GLuint buffer, GLuint index
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     if (params) {
-        size_t _cCGLuint80 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint80);
-        for (size_t _iCGLuint80 = 0; _iCGLuint80 < _cCGLuint80; ++_iCGLuint80) {
+        size_t _cCGLuint74 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCGLuint74);
+        for (size_t _iCGLuint74 = 0; _iCGLuint74 < _cCGLuint74; ++_iCGLuint74) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint80]);
+    trace::localWriter.writeUInt((params)[_iCGLuint74]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -65816,11 +65827,11 @@ void glTexParameterIuivEXT( GLenum target, GLenum pname, const GLuint * params )
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (params) {
-        size_t _cCGLuint81 = _gl_param_size(pname) > 0 ? _gl_param_size(pname) : 0;
-        trace::localWriter.beginArray(_cCGLuint81);
-        for (size_t _iCGLuint81 = 0; _iCGLuint81 < _cCGLuint81; ++_iCGLuint81) {
+        size_t _cCGLuint75 = _gl_param_size(pname) > 0 ? _gl_param_size(pname) : 0;
+        trace::localWriter.beginArray(_cCGLuint75);
+        for (size_t _iCGLuint75 = 0; _iCGLuint75 < _cCGLuint75; ++_iCGLuint75) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint81]);
+    trace::localWriter.writeUInt((params)[_iCGLuint75]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -66277,7 +66288,7 @@ void glBindBufferBaseEXT( GLenum target, GLuint index, GLuint buffer ) {
     trace::localWriter.endLeave();
 }
 
-void glTransformFeedbackVaryingsEXT( GLuint program, GLsizei count, const GLchar * * const varyings, GLenum bufferMode ) {
+void glTransformFeedbackVaryingsEXT( GLuint program, GLsizei count, const GLchar * const * varyings, GLenum bufferMode ) {
     unsigned _call = trace::localWriter.beginEnter(&_glTransformFeedbackVaryingsEXT_sig);
     trace::localWriter.beginArg(0);
     trace::localWriter.writeUInt(program);
@@ -66287,11 +66298,11 @@ void glTransformFeedbackVaryingsEXT( GLuint program, GLsizei count, const GLchar
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (varyings) {
-        size_t _cconstGLchar = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cconstGLchar);
-        for (size_t _iconstGLchar = 0; _iconstGLchar < _cconstGLchar; ++_iconstGLchar) {
+        size_t _cCconstGLchar4 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCconstGLchar4);
+        for (size_t _iCconstGLchar4 = 0; _iCconstGLchar4 < _cCconstGLchar4; ++_iCconstGLchar4) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeString(reinterpret_cast<const char *>((varyings)[_iconstGLchar]));
+    trace::localWriter.writeString(reinterpret_cast<const char *>((varyings)[_iCconstGLchar4]));
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -70197,11 +70208,11 @@ void glNamedProgramLocalParameterI4uivEXT( GLuint program, GLenum target, GLuint
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (params) {
-        size_t _cCGLuint82 = 4 > 0 ? 4 : 0;
-        trace::localWriter.beginArray(_cCGLuint82);
-        for (size_t _iCGLuint82 = 0; _iCGLuint82 < _cCGLuint82; ++_iCGLuint82) {
+        size_t _cCGLuint76 = 4 > 0 ? 4 : 0;
+        trace::localWriter.beginArray(_cCGLuint76);
+        for (size_t _iCGLuint76 = 0; _iCGLuint76 < _cCGLuint76; ++_iCGLuint76) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint82]);
+    trace::localWriter.writeUInt((params)[_iCGLuint76]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -70233,11 +70244,11 @@ void glNamedProgramLocalParametersI4uivEXT( GLuint program, GLenum target, GLuin
     trace::localWriter.endArg();
     trace::localWriter.beginArg(4);
     if (params) {
-        size_t _cCGLuint83 = count*4 > 0 ? count*4 : 0;
-        trace::localWriter.beginArray(_cCGLuint83);
-        for (size_t _iCGLuint83 = 0; _iCGLuint83 < _cCGLuint83; ++_iCGLuint83) {
+        size_t _cCGLuint77 = count*4 > 0 ? count*4 : 0;
+        trace::localWriter.beginArray(_cCGLuint77);
+        for (size_t _iCGLuint77 = 0; _iCGLuint77 < _cCGLuint77; ++_iCGLuint77) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint83]);
+    trace::localWriter.writeUInt((params)[_iCGLuint77]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -70365,11 +70376,11 @@ void glTextureParameterIuivEXT( GLuint texture, GLenum target, GLenum pname, con
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (params) {
-        size_t _cCGLuint84 = _gl_param_size(pname) > 0 ? _gl_param_size(pname) : 0;
-        trace::localWriter.beginArray(_cCGLuint84);
-        for (size_t _iCGLuint84 = 0; _iCGLuint84 < _cCGLuint84; ++_iCGLuint84) {
+        size_t _cCGLuint78 = _gl_param_size(pname) > 0 ? _gl_param_size(pname) : 0;
+        trace::localWriter.beginArray(_cCGLuint78);
+        for (size_t _iCGLuint78 = 0; _iCGLuint78 < _cCGLuint78; ++_iCGLuint78) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint84]);
+    trace::localWriter.writeUInt((params)[_iCGLuint78]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -70497,11 +70508,11 @@ void glMultiTexParameterIuivEXT( GLenum texunit, GLenum target, GLenum pname, co
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (params) {
-        size_t _cCGLuint85 = _gl_param_size(pname) > 0 ? _gl_param_size(pname) : 0;
-        trace::localWriter.beginArray(_cCGLuint85);
-        for (size_t _iCGLuint85 = 0; _iCGLuint85 < _cCGLuint85; ++_iCGLuint85) {
+        size_t _cCGLuint79 = _gl_param_size(pname) > 0 ? _gl_param_size(pname) : 0;
+        trace::localWriter.beginArray(_cCGLuint79);
+        for (size_t _iCGLuint79 = 0; _iCGLuint79 < _cCGLuint79; ++_iCGLuint79) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint85]);
+    trace::localWriter.writeUInt((params)[_iCGLuint79]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -71466,11 +71477,11 @@ void glProgramUniform1uivEXT( GLuint program, GLint location, GLsizei count, con
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (value) {
-        size_t _cCGLuint86 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint86);
-        for (size_t _iCGLuint86 = 0; _iCGLuint86 < _cCGLuint86; ++_iCGLuint86) {
+        size_t _cCGLuint80 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCGLuint80);
+        for (size_t _iCGLuint80 = 0; _iCGLuint80 < _cCGLuint80; ++_iCGLuint80) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint86]);
+    trace::localWriter.writeUInt((value)[_iCGLuint80]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -71499,11 +71510,11 @@ void glProgramUniform2uivEXT( GLuint program, GLint location, GLsizei count, con
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (value) {
-        size_t _cCGLuint87 = count*2 > 0 ? count*2 : 0;
-        trace::localWriter.beginArray(_cCGLuint87);
-        for (size_t _iCGLuint87 = 0; _iCGLuint87 < _cCGLuint87; ++_iCGLuint87) {
+        size_t _cCGLuint81 = count*2 > 0 ? count*2 : 0;
+        trace::localWriter.beginArray(_cCGLuint81);
+        for (size_t _iCGLuint81 = 0; _iCGLuint81 < _cCGLuint81; ++_iCGLuint81) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint87]);
+    trace::localWriter.writeUInt((value)[_iCGLuint81]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -71532,11 +71543,11 @@ void glProgramUniform3uivEXT( GLuint program, GLint location, GLsizei count, con
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (value) {
-        size_t _cCGLuint88 = count*3 > 0 ? count*3 : 0;
-        trace::localWriter.beginArray(_cCGLuint88);
-        for (size_t _iCGLuint88 = 0; _iCGLuint88 < _cCGLuint88; ++_iCGLuint88) {
+        size_t _cCGLuint82 = count*3 > 0 ? count*3 : 0;
+        trace::localWriter.beginArray(_cCGLuint82);
+        for (size_t _iCGLuint82 = 0; _iCGLuint82 < _cCGLuint82; ++_iCGLuint82) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint88]);
+    trace::localWriter.writeUInt((value)[_iCGLuint82]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -71565,11 +71576,11 @@ void glProgramUniform4uivEXT( GLuint program, GLint location, GLsizei count, con
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (value) {
-        size_t _cCGLuint89 = count*4 > 0 ? count*4 : 0;
-        trace::localWriter.beginArray(_cCGLuint89);
-        for (size_t _iCGLuint89 = 0; _iCGLuint89 < _cCGLuint89; ++_iCGLuint89) {
+        size_t _cCGLuint83 = count*4 > 0 ? count*4 : 0;
+        trace::localWriter.beginArray(_cCGLuint83);
+        for (size_t _iCGLuint83 = 0; _iCGLuint83 < _cCGLuint83; ++_iCGLuint83) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((value)[_iCGLuint89]);
+    trace::localWriter.writeUInt((value)[_iCGLuint83]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -75720,11 +75731,11 @@ void glProgramSubroutineParametersuivNV( GLenum target, GLsizei count, const GLu
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (params) {
-        size_t _cCGLuint90 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint90);
-        for (size_t _iCGLuint90 = 0; _iCGLuint90 < _cCGLuint90; ++_iCGLuint90) {
+        size_t _cCGLuint84 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCGLuint84);
+        for (size_t _iCGLuint84 = 0; _iCGLuint84 < _cCGLuint84; ++_iCGLuint84) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((params)[_iCGLuint90]);
+    trace::localWriter.writeUInt((params)[_iCGLuint84]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -77138,11 +77149,11 @@ void glDeleteNamesAMD( GLenum identifier, GLuint num, const GLuint * names ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(2);
     if (names) {
-        size_t _cCGLuint91 = num > 0 ? num : 0;
-        trace::localWriter.beginArray(_cCGLuint91);
-        for (size_t _iCGLuint91 = 0; _iCGLuint91 < _cCGLuint91; ++_iCGLuint91) {
+        size_t _cCGLuint85 = num > 0 ? num : 0;
+        trace::localWriter.beginArray(_cCGLuint85);
+        for (size_t _iCGLuint85 = 0; _iCGLuint85 < _cCGLuint85; ++_iCGLuint85) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((names)[_iCGLuint91]);
+    trace::localWriter.writeUInt((names)[_iCGLuint85]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -77192,11 +77203,11 @@ void glDebugMessageEnableAMD( GLenum category, GLenum severity, GLsizei count, c
     trace::localWriter.endArg();
     trace::localWriter.beginArg(3);
     if (ids) {
-        size_t _cCGLuint92 = count > 0 ? count : 0;
-        trace::localWriter.beginArray(_cCGLuint92);
-        for (size_t _iCGLuint92 = 0; _iCGLuint92 < _cCGLuint92; ++_iCGLuint92) {
+        size_t _cCGLuint86 = count > 0 ? count : 0;
+        trace::localWriter.beginArray(_cCGLuint86);
+        for (size_t _iCGLuint86 = 0; _iCGLuint86 < _cCGLuint86; ++_iCGLuint86) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((ids)[_iCGLuint92]);
+    trace::localWriter.writeUInt((ids)[_iCGLuint86]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -81149,11 +81160,11 @@ void glDeleteProgramPipelinesEXT( GLsizei n, const GLuint * pipelines ) {
     trace::localWriter.endArg();
     trace::localWriter.beginArg(1);
     if (pipelines) {
-        size_t _cCGLuint93 = n > 0 ? n : 0;
-        trace::localWriter.beginArray(_cCGLuint93);
-        for (size_t _iCGLuint93 = 0; _iCGLuint93 < _cCGLuint93; ++_iCGLuint93) {
+        size_t _cCGLuint87 = n > 0 ? n : 0;
+        trace::localWriter.beginArray(_cCGLuint87);
+        for (size_t _iCGLuint87 = 0; _iCGLuint87 < _cCGLuint87; ++_iCGLuint87) {
             trace::localWriter.beginElement();
-    trace::localWriter.writeUInt((pipelines)[_iCGLuint93]);
+    trace::localWriter.writeUInt((pipelines)[_iCGLuint87]);
             trace::localWriter.endElement();
         }
         trace::localWriter.endArray();
@@ -87046,11 +87057,6 @@ GLXPbufferSGIX glXCreateGLXPbufferSGIX( Display * dpy, GLXFBConfigSGIX config, u
             trace::localWriter.endElement();
             break;
         case GLX_LARGEST_PBUFFER:
-            trace::localWriter.beginElement();
-    trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
-            trace::localWriter.endElement();
-            break;
-        case GLX_DIGITAL_MEDIA_PBUFFER_SGIX:
             trace::localWriter.beginElement();
     trace::localWriter.writeEnum(&_enumint1_sig, (attrib_list)[_iint2]);
             trace::localWriter.endElement();
@@ -93063,7 +93069,7 @@ BOOL wglEnumGpusNV( UINT iGpuIndex, HGPUNV * phGpu ) {
     return _result;
 }
 
-BOOL wglEnumGpuDevicesNV( HGPUNV hGpu, UINT iDeviceIndex, GPU_DEVICE * lpGpuDevice ) {
+BOOL wglEnumGpuDevicesNV( HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice ) {
     BOOL _result;
     unsigned _call = trace::localWriter.beginEnter(&_wglEnumGpuDevicesNV_sig);
     trace::localWriter.beginArg(0);
@@ -93080,7 +93086,7 @@ BOOL wglEnumGpuDevicesNV( HGPUNV hGpu, UINT iDeviceIndex, GPU_DEVICE * lpGpuDevi
     if (lpGpuDevice) {
         trace::localWriter.beginArray(1);
         trace::localWriter.beginElement();
-    trace::localWriter.beginStruct(&_structGPU_DEVICE_sig);
+    trace::localWriter.beginStruct(&_struct_GPU_DEVICE_sig);
     trace::localWriter.writeUInt((*lpGpuDevice).cb);
     trace::localWriter.writeString(reinterpret_cast<const char *>((*lpGpuDevice).DeviceName));
     trace::localWriter.writeString(reinterpret_cast<const char *>((*lpGpuDevice).DeviceString));

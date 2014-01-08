@@ -5036,7 +5036,7 @@ extern "C" {
 
   /* GL_AMD_debug_output */
 
-  void REGAL_CALL plugin_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+  void REGAL_CALL plugin_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -6118,12 +6118,12 @@ extern "C" {
     _next->call(&_next->glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
   }
 
-  void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+  void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
     RegalAssert(_next);
-    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
+    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
   }
 
   /* GL_ARB_clear_texture */
@@ -6204,7 +6204,7 @@ extern "C" {
 
   /* GL_ARB_debug_output */
 
-  void REGAL_CALL plugin_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+  void REGAL_CALL plugin_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -8876,7 +8876,7 @@ extern "C" {
 
   /* GL_ARB_shading_language_include */
 
-  void REGAL_CALL plugin_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+  void REGAL_CALL plugin_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -9122,7 +9122,7 @@ extern "C" {
     _next->call(&_next->glSampleMaski)(index, mask);
   }
 
-  void REGAL_CALL plugin_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+  void REGAL_CALL plugin_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -9130,7 +9130,7 @@ extern "C" {
     _next->call(&_next->glTexImage2DMultisample)(target, samples, internalformat, width, height, fixedsamplelocations);
   }
 
-  void REGAL_CALL plugin_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+  void REGAL_CALL plugin_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -14904,7 +14904,7 @@ extern "C" {
     _next->call(&_next->glMultiDrawArraysEXT)(mode, first, count, primcount);
   }
 
-  void REGAL_CALL plugin_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+  void REGAL_CALL plugin_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -15652,7 +15652,7 @@ extern "C" {
     _next->call(&_next->glGetTransformFeedbackVaryingEXT)(program, index, bufSize, length, size, type, name);
   }
 
-  void REGAL_CALL plugin_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+  void REGAL_CALL plugin_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
@@ -16460,7 +16460,7 @@ extern "C" {
 
   /* GL_KHR_debug */
 
-  void REGAL_CALL plugin_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+  void REGAL_CALL plugin_glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;

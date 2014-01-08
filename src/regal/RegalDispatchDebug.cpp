@@ -5691,7 +5691,7 @@ static void REGAL_CALL debug_glTbufferMask3DFX(GLuint mask)
 
 // GL_AMD_debug_output
 
-static void REGAL_CALL debug_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+static void REGAL_CALL debug_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -6920,13 +6920,13 @@ static void REGAL_CALL debug_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   _next->call(&_next->glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
 }
 
-static void REGAL_CALL debug_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL debug_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
   DispatchTableGL *_next = _context->dispatcher.debug.next();
   RegalAssert(_next);
-  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
+  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
 }
 
 // GL_ARB_clear_texture
@@ -7015,7 +7015,7 @@ static void REGAL_CALL debug_glCopyImageSubData(GLuint srcName, GLenum srcTarget
 
 // GL_ARB_debug_output
 
-static void REGAL_CALL debug_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+static void REGAL_CALL debug_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -10033,7 +10033,7 @@ static void REGAL_CALL debug_glUniformSubroutinesuiv(GLenum shaderType, GLsizei 
 
 // GL_ARB_shading_language_include
 
-static void REGAL_CALL debug_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+static void REGAL_CALL debug_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -10312,7 +10312,7 @@ static void REGAL_CALL debug_glSampleMaski(GLuint index, GLbitfield mask)
   _next->call(&_next->glSampleMaski)(index, mask);
 }
 
-static void REGAL_CALL debug_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL debug_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -10321,7 +10321,7 @@ static void REGAL_CALL debug_glTexImage2DMultisample(GLenum target, GLsizei samp
   _next->call(&_next->glTexImage2DMultisample)(target, samples, internalformat, width, height, fixedsamplelocations);
 }
 
-static void REGAL_CALL debug_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL debug_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -16825,7 +16825,7 @@ static void REGAL_CALL debug_glMultiDrawArraysEXT(GLenum mode, const GLint *firs
   _next->call(&_next->glMultiDrawArraysEXT)(mode, first, count, primcount);
 }
 
-static void REGAL_CALL debug_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL debug_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -17664,7 +17664,7 @@ static void REGAL_CALL debug_glGetTransformFeedbackVaryingEXT(GLuint program, GL
   _next->call(&_next->glGetTransformFeedbackVaryingEXT)(program, index, bufSize, length, size, type, name);
 }
 
-static void REGAL_CALL debug_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+static void REGAL_CALL debug_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -18579,7 +18579,7 @@ static void REGAL_CALL debug_glTexScissorINTEL(GLenum target, GLclampf tlow, GLc
 
 // GL_KHR_debug
 
-static void REGAL_CALL debug_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+static void REGAL_CALL debug_glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);

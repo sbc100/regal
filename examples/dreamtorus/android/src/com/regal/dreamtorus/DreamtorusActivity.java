@@ -23,24 +23,26 @@ import android.view.WindowManager;
 
 import java.io.File;
 
+public class DreamtorusActivity extends Activity
+{
+  DreamtorusView mView;
 
-public class DreamtorusActivity extends Activity {
+  @Override protected void onCreate(Bundle icicle)
+  {
+    super.onCreate(icicle);
+    mView = new DreamtorusView(getApplication());
+    setContentView(mView);
+  }
 
-    DreamtorusView mView;
+  @Override protected void onPause()
+  {
+    super.onPause();
+    mView.onPause();
+  }
 
-    @Override protected void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        mView = new DreamtorusView(getApplication());
-	setContentView(mView);
-    }
-
-    @Override protected void onPause() {
-        super.onPause();
-        mView.onPause();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        mView.onResume();
-    }
+  @Override protected void onResume()
+  {
+    super.onResume();
+    mView.onResume();
+  }
 }

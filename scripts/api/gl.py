@@ -18861,7 +18861,7 @@ gl.add(glTbufferMask3DFX)
 glDebugMessageCallbackAMD = Function('glDebugMessageCallbackAMD')
 glDebugMessageCallbackAMD.ret = Return('void')
 glDebugMessageCallbackAMD.add( Input( 'callback','GLDEBUGPROCAMD' ))
-glDebugMessageCallbackAMD.add( Input( 'userParam','GLvoid *' ))
+glDebugMessageCallbackAMD.add( Input( 'userParam','void *' ))
 glDebugMessageCallbackAMD.version = ''
 glDebugMessageCallbackAMD.category = 'GL_AMD_debug_output'
 glDebugMessageCallbackAMD.trace = True
@@ -20347,10 +20347,10 @@ glClearNamedBufferSubDataEXT = Function('glClearNamedBufferSubDataEXT')
 glClearNamedBufferSubDataEXT.ret = Return('void')
 glClearNamedBufferSubDataEXT.add( Input( 'buffer','GLuint' ))
 glClearNamedBufferSubDataEXT.add( Input( 'internalformat','GLenum' ))
-glClearNamedBufferSubDataEXT.add( Input( 'offset','GLintptr' ))
-glClearNamedBufferSubDataEXT.add( Input( 'size','GLsizeiptr' ))
 glClearNamedBufferSubDataEXT.add( Input( 'format','GLenum' ))
 glClearNamedBufferSubDataEXT.add( Input( 'type','GLenum' ))
+glClearNamedBufferSubDataEXT.add( Input( 'offset','GLintptr' ))
+glClearNamedBufferSubDataEXT.add( Input( 'size','GLsizeiptr' ))
 glClearNamedBufferSubDataEXT.add( Input( 'data','const GLvoid *' ))
 glClearNamedBufferSubDataEXT.version = ''
 glClearNamedBufferSubDataEXT.category = 'GL_ARB_clear_buffer_object'
@@ -20487,7 +20487,7 @@ gl.add(glCopyImageSubData)
 glDebugMessageCallbackARB = Function('glDebugMessageCallbackARB')
 glDebugMessageCallbackARB.ret = Return('void')
 glDebugMessageCallbackARB.add( Input( 'callback','GLDEBUGPROCARB' ))
-glDebugMessageCallbackARB.add( Input( 'userParam','const GLvoid *' ))
+glDebugMessageCallbackARB.add( Input( 'userParam','const void *' ))
 glDebugMessageCallbackARB.version = '4.1'
 glDebugMessageCallbackARB.category = 'GL_ARB_debug_output'
 glDebugMessageCallbackARB.trace = True
@@ -24331,7 +24331,7 @@ glCompileShaderIncludeARB = Function('glCompileShaderIncludeARB')
 glCompileShaderIncludeARB.ret = Return('void')
 glCompileShaderIncludeARB.add( Input( 'shader','GLuint' ))
 glCompileShaderIncludeARB.add( Input( 'count','GLsizei' ))
-glCompileShaderIncludeARB.add( Input( 'path','const GLchar **' ,size = 'count' ))
+glCompileShaderIncludeARB.add( Input( 'path','const GLchar * const *' ,size = 'count' ))
 glCompileShaderIncludeARB.add( Input( 'length','const GLint *' ,size = 'count' ))
 glCompileShaderIncludeARB.version = '4.0'
 glCompileShaderIncludeARB.category = 'GL_ARB_shading_language_include'
@@ -24713,7 +24713,7 @@ glTexImage2DMultisample = Function('glTexImage2DMultisample')
 glTexImage2DMultisample.ret = Return('void')
 glTexImage2DMultisample.add( Input( 'target','GLenum' ))
 glTexImage2DMultisample.add( Input( 'samples','GLsizei' ))
-glTexImage2DMultisample.add( Input( 'internalformat','GLint' ))
+glTexImage2DMultisample.add( Input( 'internalformat','GLenum' ))
 glTexImage2DMultisample.add( Input( 'width','GLsizei' ))
 glTexImage2DMultisample.add( Input( 'height','GLsizei' ))
 glTexImage2DMultisample.add( Input( 'fixedsamplelocations','GLboolean' ))
@@ -24727,7 +24727,7 @@ glTexImage3DMultisample = Function('glTexImage3DMultisample')
 glTexImage3DMultisample.ret = Return('void')
 glTexImage3DMultisample.add( Input( 'target','GLenum' ))
 glTexImage3DMultisample.add( Input( 'samples','GLsizei' ))
-glTexImage3DMultisample.add( Input( 'internalformat','GLint' ))
+glTexImage3DMultisample.add( Input( 'internalformat','GLenum' ))
 glTexImage3DMultisample.add( Input( 'width','GLsizei' ))
 glTexImage3DMultisample.add( Input( 'height','GLsizei' ))
 glTexImage3DMultisample.add( Input( 'depth','GLsizei' ))
@@ -33048,7 +33048,7 @@ glMultiDrawElementsEXT.ret = Return('void')
 glMultiDrawElementsEXT.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
 glMultiDrawElementsEXT.add( Input( 'count','const GLsizei *' ,size = 'primcount' ))
 glMultiDrawElementsEXT.add( Input( 'type','GLenum' ))
-glMultiDrawElementsEXT.add( Input( 'indices','const GLvoid **' ,size = 'primcount' ))
+glMultiDrawElementsEXT.add( Input( 'indices','const GLvoid * const *' ,size = 'primcount' ))
 glMultiDrawElementsEXT.add( Input( 'primcount','GLsizei' ))
 glMultiDrawElementsEXT.version = '1.1'
 glMultiDrawElementsEXT.category = 'GL_EXT_multi_draw_arrays'
@@ -34060,7 +34060,7 @@ glTransformFeedbackVaryingsEXT = Function('glTransformFeedbackVaryingsEXT')
 glTransformFeedbackVaryingsEXT.ret = Return('void')
 glTransformFeedbackVaryingsEXT.add( Input( 'program','GLuint' ))
 glTransformFeedbackVaryingsEXT.add( Input( 'count','GLsizei' ))
-glTransformFeedbackVaryingsEXT.add( Input( 'varyings','const GLchar ** const' ,size = 'count' ))
+glTransformFeedbackVaryingsEXT.add( Input( 'varyings','const GLchar * const *' ,size = 'count' ))
 glTransformFeedbackVaryingsEXT.add( Input( 'bufferMode','GLenum' ))
 glTransformFeedbackVaryingsEXT.version = '2.0'
 glTransformFeedbackVaryingsEXT.category = 'GL_EXT_transform_feedback'
@@ -35162,7 +35162,7 @@ gl.add(glTexScissorINTEL)
 glDebugMessageCallback = Function('glDebugMessageCallback')
 glDebugMessageCallback.ret = Return('void')
 glDebugMessageCallback.add( Input( 'callback','GLDEBUGPROC' ))
-glDebugMessageCallback.add( Input( 'userParam','const GLvoid *' ))
+glDebugMessageCallback.add( Input( 'userParam','const void *' ))
 glDebugMessageCallback.version = ''
 glDebugMessageCallback.category = 'GL_KHR_debug'
 glDebugMessageCallback.trace = True

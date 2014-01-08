@@ -195,7 +195,9 @@ ifneq ($(filter linux%,$(SYSTEM)),)
 REGAL.SONAME     := lib$(NAME).so.$(SO_MAJOR)
 REGAL.DEVLNK     := lib$(NAME).so
 REGAL.SHARED     := lib$(NAME).so.$(SO_VERSION)
+ifeq ($(filter linux-arm,$(SYSTEM)),)
 REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
+endif
 endif
 
 ifneq ($(filter darwin%,$(SYSTEM)),)

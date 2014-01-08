@@ -15,6 +15,7 @@
  */
 
 package com.regal.dreamtorus;
+
 /*
  * Copyright (C) 2008 The Android Open Source Project
  *
@@ -30,7 +31,6 @@ package com.regal.dreamtorus;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -64,28 +64,33 @@ import javax.microedition.khronos.opengles.GL10;
  *   that matches it exactly (with regards to red/green/blue/alpha channels
  *   bit depths). Failure to do so would result in an EGL_BAD_MATCH error.
  */
-class DreamtorusView extends GLSurfaceView {
+
+class DreamtorusView extends GLSurfaceView
+{
     private static String TAG = "DreamtorusView";
     private static final boolean DEBUG = false;
 
-    public DreamtorusView(Context context) {
+    public DreamtorusView(Context context)
+    {
         super(context);
         init(false, 0, 0);
     }
 
-    public DreamtorusView(Context context, boolean translucent, int depth, int stencil) {
+    public DreamtorusView(Context context, boolean translucent, int depth, int stencil)
+    {
         super(context);
         init(translucent, depth, stencil);
     }
 
-    private void init(boolean translucent, int depth, int stencil) {
-
+    private void init(boolean translucent, int depth, int stencil)
+    {
         /* By default, GLSurfaceView() creates a RGB_565 opaque surface.
          * If we want a translucent one, we should change the surface's
          * format here, using PixelFormat.TRANSLUCENT for GL Surfaces
          * is interpreted as any 32-bit surface with alpha by SurfaceFlinger.
          */
-        if (translucent) {
+        if (translucent)
+        {
             this.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         }
 
@@ -107,9 +112,11 @@ class DreamtorusView extends GLSurfaceView {
         setRenderer(new Renderer());
     }
 
-    private static class ContextFactory implements GLSurfaceView.EGLContextFactory {
+    private static class ContextFactory implements GLSurfaceView.EGLContextFactory
+    {
         private static int EGL_CONTEXT_CLIENT_VERSION = 0x3098;
-        public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig) {
+        public EGLContext createContext(EGL10 egl, EGLDisplay display, EGLConfig eglConfig)
+        {
             Log.w(TAG, "creating OpenGL ES 2.0 context");
             checkEglError("Before eglCreateContext", egl);
             int[] attrib_list = {EGL_CONTEXT_CLIENT_VERSION, 2, EGL10.EGL_NONE };
@@ -118,21 +125,25 @@ class DreamtorusView extends GLSurfaceView {
             return context;
         }
 
-        public void destroyContext(EGL10 egl, EGLDisplay display, EGLContext context) {
+        public void destroyContext(EGL10 egl, EGLDisplay display, EGLContext context)
+        {
             egl.eglDestroyContext(display, context);
         }
     }
 
-    private static void checkEglError(String prompt, EGL10 egl) {
+    private static void checkEglError(String prompt, EGL10 egl)
+    {
         int error;
-        while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS) {
+        while ((error = egl.eglGetError()) != EGL10.EGL_SUCCESS)
+        {
             Log.e(TAG, String.format("%s: EGL error: 0x%x", prompt, error));
         }
     }
 
-    private static class ConfigChooser implements GLSurfaceView.EGLConfigChooser {
-
-        public ConfigChooser(int r, int g, int b, int a, int depth, int stencil) {
+    private static class ConfigChooser implements GLSurfaceView.EGLConfigChooser
+    {
+        public ConfigChooser(int r, int g, int b, int a, int depth, int stencil)
+        {
             mRedSize = r;
             mGreenSize = g;
             mBlueSize = b;
@@ -155,8 +166,8 @@ class DreamtorusView extends GLSurfaceView {
             EGL10.EGL_NONE
         };
 
-        public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display) {
-
+        public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display)
+        {
             /* Get the number of minimally matching EGL configurations
              */
             int[] num_config = new int[1];
@@ -164,7 +175,8 @@ class DreamtorusView extends GLSurfaceView {
 
             int numConfigs = num_config[0];
 
-            if (numConfigs <= 0) {
+            if (numConfigs <= 0)
+            {
                 throw new IllegalArgumentException("No configs match configSpec");
             }
 
@@ -173,7 +185,8 @@ class DreamtorusView extends GLSurfaceView {
             EGLConfig[] configs = new EGLConfig[numConfigs];
             egl.eglChooseConfig(display, s_configAttribs2, configs, numConfigs, num_config);
 
-            if (DEBUG) {
+            if (DEBUG)
+            {
                  printConfigs(egl, display, configs);
             }
             /* Now return the "best" one
@@ -181,9 +194,10 @@ class DreamtorusView extends GLSurfaceView {
             return chooseConfig(egl, display, configs);
         }
 
-        public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display,
-                EGLConfig[] configs) {
-            for(EGLConfig config : configs) {
+        public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display, EGLConfig[] configs)
+        {
+            for(EGLConfig config : configs)
+            {
                 int d = findConfigAttrib(egl, display, config,
                         EGL10.EGL_DEPTH_SIZE, 0);
                 int s = findConfigAttrib(egl, display, config,
@@ -209,17 +223,17 @@ class DreamtorusView extends GLSurfaceView {
             return null;
         }
 
-        private int findConfigAttrib(EGL10 egl, EGLDisplay display,
-                EGLConfig config, int attribute, int defaultValue) {
-
-            if (egl.eglGetConfigAttrib(display, config, attribute, mValue)) {
+        private int findConfigAttrib(EGL10 egl, EGLDisplay display, EGLConfig config, int attribute, int defaultValue)
+        {
+            if (egl.eglGetConfigAttrib(display, config, attribute, mValue))
+            {
                 return mValue[0];
             }
             return defaultValue;
         }
 
-        private void printConfigs(EGL10 egl, EGLDisplay display,
-            EGLConfig[] configs) {
+        private void printConfigs(EGL10 egl, EGLDisplay display, EGLConfig[] configs)
+        {
             int numConfigs = configs.length;
             Log.w(TAG, String.format("%d configurations", numConfigs));
             for (int i = 0; i < numConfigs; i++) {
@@ -228,9 +242,10 @@ class DreamtorusView extends GLSurfaceView {
             }
         }
 
-        private void printConfig(EGL10 egl, EGLDisplay display,
-                EGLConfig config) {
-            int[] attributes = {
+        private void printConfig(EGL10 egl, EGLDisplay display, EGLConfig config)
+        {
+            int[] attributes =
+            {
                     EGL10.EGL_BUFFER_SIZE,
                     EGL10.EGL_ALPHA_SIZE,
                     EGL10.EGL_BLUE_SIZE,
@@ -265,7 +280,8 @@ class DreamtorusView extends GLSurfaceView {
                     EGL10.EGL_RENDERABLE_TYPE,
                     0x3042 // EGL10.EGL_CONFORMANT
             };
-            String[] names = {
+            String[] names =
+            {
                     "EGL_BUFFER_SIZE",
                     "EGL_ALPHA_SIZE",
                     "EGL_BLUE_SIZE",
@@ -301,12 +317,15 @@ class DreamtorusView extends GLSurfaceView {
                     "EGL_CONFORMANT"
             };
             int[] value = new int[1];
-            for (int i = 0; i < attributes.length; i++) {
+            for (int i = 0; i < attributes.length; i++)
+            {
                 int attribute = attributes[i];
                 String name = names[i];
-                if ( egl.eglGetConfigAttrib(display, config, attribute, value)) {
+                if ( egl.eglGetConfigAttrib(display, config, attribute, value))
+                {
                     Log.w(TAG, String.format("  %s: %d\n", name, value[0]));
-                } else {
+                } else
+                {
                     // Log.w(TAG, String.format("  %s: failed\n", name));
                     while (egl.eglGetError() != EGL10.EGL_SUCCESS);
                 }
@@ -323,16 +342,20 @@ class DreamtorusView extends GLSurfaceView {
         private int[] mValue = new int[1];
     }
 
-    private static class Renderer implements GLSurfaceView.Renderer {
-        public void onDrawFrame(GL10 gl) {
+    private static class Renderer implements GLSurfaceView.Renderer
+    {
+        public void onDrawFrame(GL10 gl)
+        {
             DreamtorusLib.step();
         }
 
-        public void onSurfaceChanged(GL10 gl, int width, int height) {
+        public void onSurfaceChanged(GL10 gl, int width, int height)
+        {
             DreamtorusLib.init(width, height);
         }
 
-        public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        public void onSurfaceCreated(GL10 gl, EGLConfig config)
+        {
             // Do nothing.
         }
     }

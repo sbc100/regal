@@ -735,7 +735,7 @@ namespace Trace
 
 // GL_AMD_debug_output
 
-  void  glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam);
+  void  glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam);
   void  glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
   void  glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf);
   GLuint  glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
@@ -892,7 +892,7 @@ namespace Trace
   void  glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
   void  glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
   void  glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-  void  glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
+  void  glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
 
 // GL_ARB_clear_texture
 
@@ -918,7 +918,7 @@ namespace Trace
 
 // GL_ARB_debug_output
 
-  void  glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam);
+  void  glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam);
   void  glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
   void  glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
   GLuint  glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
@@ -1346,7 +1346,7 @@ namespace Trace
 
 // GL_ARB_shading_language_include
 
-  void  glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length);
+  void  glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length);
   void  glDeleteNamedStringARB(GLint namelen, const GLchar *name);
   void  glGetNamedStringARB(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
   void  glGetNamedStringivARB(GLint namelen, const GLchar *name, GLenum pname, GLint *params);
@@ -1391,8 +1391,8 @@ namespace Trace
 
   void  glGetMultisamplefv(GLenum pname, GLuint index, GLfloat *val);
   void  glSampleMaski(GLuint index, GLbitfield mask);
-  void  glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-  void  glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+  void  glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+  void  glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 
 // GL_ARB_texture_storage
 
@@ -2256,7 +2256,7 @@ namespace Trace
 // GL_EXT_multi_draw_arrays
 
   void  glMultiDrawArraysEXT(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-  void  glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+  void  glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 
 // GL_EXT_multisample
 
@@ -2394,7 +2394,7 @@ namespace Trace
   void  glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
   void  glEndTransformFeedbackEXT(void);
   void  glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-  void  glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
+  void  glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 
 // GL_EXT_vertex_array
 
@@ -2528,7 +2528,7 @@ namespace Trace
 
 // GL_KHR_debug
 
-  void  glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam);
+  void  glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam);
   void  glDebugMessageControl(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
   void  glDebugMessageInsert(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
   GLuint  glGetDebugMessageLog(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
@@ -10254,7 +10254,7 @@ static void REGAL_CALL trace_glTbufferMask3DFX(GLuint mask)
 
 // GL_AMD_debug_output
 
-static void REGAL_CALL trace_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+static void REGAL_CALL trace_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
 {
   Internal("trace_glDebugMessageCallbackAMD","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -11162,14 +11162,14 @@ static void REGAL_CALL trace_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   Trace::glClearNamedBufferDataEXT(buffer, internalformat, format, type, data);
 }
 
-static void REGAL_CALL trace_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL trace_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
   Internal("trace_glClearNamedBufferSubDataEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
   RegalAssert(_instance.currentContext);
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, data);
+  Trace::glClearNamedBufferSubDataEXT(buffer, internalformat, format, type, offset, size, data);
 }
 
 // GL_ARB_clear_texture
@@ -11254,7 +11254,7 @@ static void REGAL_CALL trace_glCopyImageSubData(GLuint srcName, GLenum srcTarget
 
 // GL_ARB_debug_output
 
-static void REGAL_CALL trace_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+static void REGAL_CALL trace_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
 {
   Internal("trace_glDebugMessageCallbackARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -14573,7 +14573,7 @@ static void REGAL_CALL trace_glUniformSubroutinesuiv(GLenum shaderType, GLsizei 
 
 // GL_ARB_shading_language_include
 
-static void REGAL_CALL trace_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+static void REGAL_CALL trace_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
 {
   Internal("trace_glCompileShaderIncludeARB","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -14859,7 +14859,7 @@ static void REGAL_CALL trace_glSampleMaski(GLuint index, GLbitfield mask)
   Trace::glSampleMaski(index, mask);
 }
 
-static void REGAL_CALL trace_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL trace_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   Internal("trace_glTexImage2DMultisample","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -14869,7 +14869,7 @@ static void REGAL_CALL trace_glTexImage2DMultisample(GLenum target, GLsizei samp
   Trace::glTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
 }
 
-static void REGAL_CALL trace_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL trace_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   Internal("trace_glTexImage3DMultisample","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -21852,7 +21852,7 @@ static void REGAL_CALL trace_glMultiDrawArraysEXT(GLenum mode, const GLint *firs
   Trace::glMultiDrawArraysEXT(mode, first, count, primcount);
 }
 
-static void REGAL_CALL trace_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL trace_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
   Internal("trace_glMultiDrawElementsEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -22648,7 +22648,7 @@ static void REGAL_CALL trace_glGetTransformFeedbackVaryingEXT(GLuint program, GL
   Trace::glGetTransformFeedbackVaryingEXT(program, index, bufSize, length, size, type, name);
 }
 
-static void REGAL_CALL trace_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+static void REGAL_CALL trace_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
   Internal("trace_glTransformFeedbackVaryingsEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
@@ -23605,7 +23605,7 @@ static void REGAL_CALL trace_glVertexPointervINTEL(GLint size, GLenum type, cons
 
 // GL_KHR_debug
 
-static void REGAL_CALL trace_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+static void REGAL_CALL trace_glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
 {
   Internal("trace_glDebugMessageCallback","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();

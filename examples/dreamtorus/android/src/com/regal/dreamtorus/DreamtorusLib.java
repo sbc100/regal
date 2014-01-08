@@ -18,16 +18,17 @@ package com.regal.dreamtorus;
 
 // Wrapper for native library
 
-public class DreamtorusLib {
+public class DreamtorusLib
+{
+  static
+  {
+    System.loadLibrary("dreamtorus");
+  }
 
-     static {
-         System.loadLibrary("dreamtorus");
-     }
-
-    /**
-     * @param width the current view width
-     * @param height the current view height
-     */
-     public static native void init(int width, int height);
-     public static native void step();
+  /**
+  * @param width the current view width
+  * @param height the current view height
+  */
+  public static native void init(int width, int height);
+  public static native void step();
 }

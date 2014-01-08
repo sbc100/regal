@@ -15577,7 +15577,7 @@ static void REGAL_CALL error_glTbufferMask3DFX(GLuint mask)
 
 // GL_AMD_debug_output
 
-static void REGAL_CALL error_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+static void REGAL_CALL error_glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
 {
   Internal("error_glDebugMessageCallbackAMD","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -18838,7 +18838,7 @@ static void REGAL_CALL error_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   }
 }
 
-static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
 {
   Internal("error_glClearNamedBufferSubDataEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -18849,7 +18849,7 @@ static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum 
   if (!_context->err.inBeginEnd)
     _error = _next->call(&_next->glGetError)();
   RegalAssert(_error==GL_NO_ERROR);
-  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
+  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
   if (!_context->err.inBeginEnd) {
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {
@@ -19077,7 +19077,7 @@ static void REGAL_CALL error_glCopyImageSubData(GLuint srcName, GLenum srcTarget
 
 // GL_ARB_debug_output
 
-static void REGAL_CALL error_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+static void REGAL_CALL error_glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
 {
   Internal("error_glDebugMessageCallbackARB","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -27293,7 +27293,7 @@ static void REGAL_CALL error_glUniformSubroutinesuiv(GLenum shaderType, GLsizei 
 
 // GL_ARB_shading_language_include
 
-static void REGAL_CALL error_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+static void REGAL_CALL error_glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
 {
   Internal("error_glCompileShaderIncludeARB","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -28036,7 +28036,7 @@ static void REGAL_CALL error_glSampleMaski(GLuint index, GLbitfield mask)
   }
 }
 
-static void REGAL_CALL error_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL error_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   Internal("error_glTexImage2DMultisample","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -28061,7 +28061,7 @@ static void REGAL_CALL error_glTexImage2DMultisample(GLenum target, GLsizei samp
   }
 }
 
-static void REGAL_CALL error_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL error_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   Internal("error_glTexImage3DMultisample","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -45861,7 +45861,7 @@ static void REGAL_CALL error_glMultiDrawArraysEXT(GLenum mode, const GLint *firs
   }
 }
 
-static void REGAL_CALL error_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL error_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
   Internal("error_glMultiDrawElementsEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -48092,7 +48092,7 @@ static void REGAL_CALL error_glGetTransformFeedbackVaryingEXT(GLuint program, GL
   }
 }
 
-static void REGAL_CALL error_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+static void REGAL_CALL error_glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
 {
   Internal("error_glTransformFeedbackVaryingsEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -50559,7 +50559,7 @@ static void REGAL_CALL error_glTexScissorINTEL(GLenum target, GLclampf tlow, GLc
 
 // GL_KHR_debug
 
-static void REGAL_CALL error_glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+static void REGAL_CALL error_glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
 {
   Internal("error_glDebugMessageCallback","()");
   RegalContext *_context = REGAL_GET_CONTEXT();

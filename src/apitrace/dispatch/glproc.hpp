@@ -2676,10 +2676,10 @@ static inline BOOL __stdcall _wglEnumGpusNV(UINT iGpuIndex, HGPUNV * phGpu) {
     return _wglEnumGpusNV_ptr(iGpuIndex, phGpu);
 }
 
-typedef BOOL (__stdcall * PFN_WGLENUMGPUDEVICESNV)(HGPUNV hGpu, UINT iDeviceIndex, GPU_DEVICE * lpGpuDevice);
+typedef BOOL (__stdcall * PFN_WGLENUMGPUDEVICESNV)(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice);
 static PFN_WGLENUMGPUDEVICESNV _wglEnumGpuDevicesNV_ptr = NULL;
 
-static inline BOOL __stdcall _wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, GPU_DEVICE * lpGpuDevice) {
+static inline BOOL __stdcall _wglEnumGpuDevicesNV(HGPUNV hGpu, UINT iDeviceIndex, _GPU_DEVICE * lpGpuDevice) {
     const char *_name = "wglEnumGpuDevicesNV";
     if (!_wglEnumGpuDevicesNV_ptr) {
         _wglEnumGpuDevicesNV_ptr = (PFN_WGLENUMGPUDEVICESNV)_getPrivateProcAddress(_name);
@@ -19689,10 +19689,10 @@ static inline void APIENTRY _glGetSynciv(GLsync sync, GLenum pname, GLsizei bufS
     _glGetSynciv_ptr(sync, pname, bufSize, length, values);
 }
 
-typedef void (APIENTRY * PFN_GLTEXIMAGE2DMULTISAMPLE)(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+typedef void (APIENTRY * PFN_GLTEXIMAGE2DMULTISAMPLE)(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
 static PFN_GLTEXIMAGE2DMULTISAMPLE _glTexImage2DMultisample_ptr = NULL;
 
-static inline void APIENTRY _glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) {
+static inline void APIENTRY _glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) {
     const char *_name = "glTexImage2DMultisample";
     if (!_glTexImage2DMultisample_ptr) {
         _glTexImage2DMultisample_ptr = (PFN_GLTEXIMAGE2DMULTISAMPLE)_getPrivateProcAddress(_name);
@@ -19704,10 +19704,10 @@ static inline void APIENTRY _glTexImage2DMultisample(GLenum target, GLsizei samp
     _glTexImage2DMultisample_ptr(target, samples, internalformat, width, height, fixedsamplelocations);
 }
 
-typedef void (APIENTRY * PFN_GLTEXIMAGE3DMULTISAMPLE)(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+typedef void (APIENTRY * PFN_GLTEXIMAGE3DMULTISAMPLE)(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 static PFN_GLTEXIMAGE3DMULTISAMPLE _glTexImage3DMultisample_ptr = NULL;
 
-static inline void APIENTRY _glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) {
+static inline void APIENTRY _glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) {
     const char *_name = "glTexImage3DMultisample";
     if (!_glTexImage3DMultisample_ptr) {
         _glTexImage3DMultisample_ptr = (PFN_GLTEXIMAGE3DMULTISAMPLE)_getPrivateProcAddress(_name);
@@ -19854,10 +19854,10 @@ static inline void APIENTRY _glDeleteNamedStringARB(GLint namelen, const GLchar 
     _glDeleteNamedStringARB_ptr(namelen, name);
 }
 
-typedef void (APIENTRY * PFN_GLCOMPILESHADERINCLUDEARB)(GLuint shader, GLsizei count, const GLchar * * path, const GLint * length);
+typedef void (APIENTRY * PFN_GLCOMPILESHADERINCLUDEARB)(GLuint shader, GLsizei count, const GLchar * const * path, const GLint * length);
 static PFN_GLCOMPILESHADERINCLUDEARB _glCompileShaderIncludeARB_ptr = NULL;
 
-static inline void APIENTRY _glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * * path, const GLint * length) {
+static inline void APIENTRY _glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const * path, const GLint * length) {
     const char *_name = "glCompileShaderIncludeARB";
     if (!_glCompileShaderIncludeARB_ptr) {
         _glCompileShaderIncludeARB_ptr = (PFN_GLCOMPILESHADERINCLUDEARB)_getPrivateProcAddress(_name);
@@ -23492,10 +23492,10 @@ static inline void APIENTRY _glClearNamedBufferDataEXT(GLuint buffer, GLenum int
     _glClearNamedBufferDataEXT_ptr(buffer, internalformat, format, type, data);
 }
 
-typedef void (APIENTRY * PFN_GLCLEARNAMEDBUFFERSUBDATAEXT)(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void * data);
+typedef void (APIENTRY * PFN_GLCLEARNAMEDBUFFERSUBDATAEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLsizeiptr offset, GLsizeiptr size, const void * data);
 static PFN_GLCLEARNAMEDBUFFERSUBDATAEXT _glClearNamedBufferSubDataEXT_ptr = NULL;
 
-static inline void APIENTRY _glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void * data) {
+static inline void APIENTRY _glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLsizeiptr offset, GLsizeiptr size, const void * data) {
     const char *_name = "glClearNamedBufferSubDataEXT";
     if (!_glClearNamedBufferSubDataEXT_ptr) {
         _glClearNamedBufferSubDataEXT_ptr = (PFN_GLCLEARNAMEDBUFFERSUBDATAEXT)_getPrivateProcAddress(_name);
@@ -23504,7 +23504,7 @@ static inline void APIENTRY _glClearNamedBufferSubDataEXT(GLuint buffer, GLenum 
             return;
         }
     }
-    _glClearNamedBufferSubDataEXT_ptr(buffer, internalformat, offset, size, format, type, data);
+    _glClearNamedBufferSubDataEXT_ptr(buffer, internalformat, format, type, offset, size, data);
 }
 
 typedef void (APIENTRY * PFN_GLDISPATCHCOMPUTE)(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z);
@@ -26987,10 +26987,10 @@ static inline void APIENTRY _glMultiDrawArraysEXT(GLenum mode, const GLint * fir
     _glMultiDrawArraysEXT_ptr(mode, first, count, primcount);
 }
 
-typedef void (APIENTRY * PFN_GLMULTIDRAWELEMENTSEXT)(GLenum mode, const GLsizei * count, GLenum type, const GLvoid * * indices, GLsizei primcount);
+typedef void (APIENTRY * PFN_GLMULTIDRAWELEMENTSEXT)(GLenum mode, const GLsizei * count, GLenum type, const GLvoid * const * indices, GLsizei primcount);
 static PFN_GLMULTIDRAWELEMENTSEXT _glMultiDrawElementsEXT_ptr = NULL;
 
-static inline void APIENTRY _glMultiDrawElementsEXT(GLenum mode, const GLsizei * count, GLenum type, const GLvoid * * indices, GLsizei primcount) {
+static inline void APIENTRY _glMultiDrawElementsEXT(GLenum mode, const GLsizei * count, GLenum type, const GLvoid * const * indices, GLsizei primcount) {
     const char *_name = "glMultiDrawElementsEXT";
     if (!_glMultiDrawElementsEXT_ptr) {
         _glMultiDrawElementsEXT_ptr = (PFN_GLMULTIDRAWELEMENTSEXT)_getPrivateProcAddress(_name);
@@ -36437,10 +36437,10 @@ static inline void APIENTRY _glBindBufferBaseEXT(GLenum target, GLuint index, GL
     _glBindBufferBaseEXT_ptr(target, index, buffer);
 }
 
-typedef void (APIENTRY * PFN_GLTRANSFORMFEEDBACKVARYINGSEXT)(GLuint program, GLsizei count, const GLchar * * const varyings, GLenum bufferMode);
+typedef void (APIENTRY * PFN_GLTRANSFORMFEEDBACKVARYINGSEXT)(GLuint program, GLsizei count, const GLchar * const * varyings, GLenum bufferMode);
 static PFN_GLTRANSFORMFEEDBACKVARYINGSEXT _glTransformFeedbackVaryingsEXT_ptr = NULL;
 
-static inline void APIENTRY _glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * * const varyings, GLenum bufferMode) {
+static inline void APIENTRY _glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const * varyings, GLenum bufferMode) {
     const char *_name = "glTransformFeedbackVaryingsEXT";
     if (!_glTransformFeedbackVaryingsEXT_ptr) {
         _glTransformFeedbackVaryingsEXT_ptr = (PFN_GLTRANSFORMFEEDBACKVARYINGSEXT)_getPrivateProcAddress(_name);

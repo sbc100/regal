@@ -1387,7 +1387,7 @@ namespace Dispatch
 
     // GL_AMD_debug_output
 
-    void (REGAL_CALL *glDebugMessageCallbackAMD)(GLDEBUGPROCAMD callback, GLvoid *userParam);
+    void (REGAL_CALL *glDebugMessageCallbackAMD)(GLDEBUGPROCAMD callback, void *userParam);
     void (REGAL_CALL *glDebugMessageEnableAMD)(GLenum category, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
     void (REGAL_CALL *glDebugMessageInsertAMD)(GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar *buf);
     GLuint (REGAL_CALL *glGetDebugMessageLogAMD)(GLuint count, GLsizei bufsize, GLenum *categories, GLuint *severities, GLuint *ids, GLsizei *lengths, GLchar *message);
@@ -1613,7 +1613,7 @@ namespace Dispatch
     void (REGAL_CALL *glClearBufferData)(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
     void (REGAL_CALL *glClearBufferSubData)(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
     void (REGAL_CALL *glClearNamedBufferDataEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-    void (REGAL_CALL *glClearNamedBufferSubDataEXT)(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
+    void (REGAL_CALL *glClearNamedBufferSubDataEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
 
     // GL_ARB_clear_texture
 
@@ -1643,7 +1643,7 @@ namespace Dispatch
 
     // GL_ARB_debug_output
 
-    void (REGAL_CALL *glDebugMessageCallbackARB)(GLDEBUGPROCARB callback, const GLvoid *userParam);
+    void (REGAL_CALL *glDebugMessageCallbackARB)(GLDEBUGPROCARB callback, const void *userParam);
     void (REGAL_CALL *glDebugMessageControlARB)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
     void (REGAL_CALL *glDebugMessageInsertARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
     GLuint (REGAL_CALL *glGetDebugMessageLogARB)(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);
@@ -2076,7 +2076,7 @@ namespace Dispatch
 
     // GL_ARB_shading_language_include
 
-    void (REGAL_CALL *glCompileShaderIncludeARB)(GLuint shader, GLsizei count, const GLchar **path, const GLint *length);
+    void (REGAL_CALL *glCompileShaderIncludeARB)(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length);
     void (REGAL_CALL *glDeleteNamedStringARB)(GLint namelen, const GLchar *name);
     void (REGAL_CALL *glGetNamedStringARB)(GLint namelen, const GLchar *name, GLsizei bufSize, GLint *stringlen, GLchar *string);
     void (REGAL_CALL *glGetNamedStringivARB)(GLint namelen, const GLchar *name, GLenum pname, GLint *params);
@@ -2126,8 +2126,8 @@ namespace Dispatch
 
     void (REGAL_CALL *glGetMultisamplefv)(GLenum pname, GLuint index, GLfloat *val);
     void (REGAL_CALL *glSampleMaski)(GLuint index, GLbitfield mask);
-    void (REGAL_CALL *glTexImage2DMultisample)(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-    void (REGAL_CALL *glTexImage3DMultisample)(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+    void (REGAL_CALL *glTexImage2DMultisample)(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+    void (REGAL_CALL *glTexImage3DMultisample)(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
 
     // GL_ARB_texture_storage
 
@@ -3022,7 +3022,7 @@ namespace Dispatch
     // GL_EXT_multi_draw_arrays
 
     void (REGAL_CALL *glMultiDrawArraysEXT)(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-    void (REGAL_CALL *glMultiDrawElementsEXT)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+    void (REGAL_CALL *glMultiDrawElementsEXT)(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount);
 
     // GL_EXT_multisample
 
@@ -3187,7 +3187,7 @@ namespace Dispatch
     void (REGAL_CALL *glBindBufferRangeEXT)(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
     void (REGAL_CALL *glEndTransformFeedbackEXT)(void);
     void (REGAL_CALL *glGetTransformFeedbackVaryingEXT)(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-    void (REGAL_CALL *glTransformFeedbackVaryingsEXT)(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode);
+    void (REGAL_CALL *glTransformFeedbackVaryingsEXT)(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode);
 
     // GL_EXT_vertex_array
 
@@ -3332,7 +3332,7 @@ namespace Dispatch
 
     // GL_KHR_debug
 
-    void (REGAL_CALL *glDebugMessageCallback)(GLDEBUGPROC callback, const GLvoid *userParam);
+    void (REGAL_CALL *glDebugMessageCallback)(GLDEBUGPROC callback, const void *userParam);
     void (REGAL_CALL *glDebugMessageControl)(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint *ids, GLboolean enabled);
     void (REGAL_CALL *glDebugMessageInsert)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *buf);
     GLuint (REGAL_CALL *glGetDebugMessageLog)(GLuint count, GLsizei bufsize, GLenum *sources, GLenum *types, GLuint *ids, GLenum *severities, GLsizei *lengths, GLchar *messageLog);

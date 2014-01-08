@@ -40565,7 +40565,7 @@ static void REGAL_CALL emu_glCompressedTexSubImage2DARB(GLenum target, GLint lev
 
 // GL_ARB_texture_multisample
 
-static void REGAL_CALL emu_glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+static void REGAL_CALL emu_glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -40602,7 +40602,7 @@ static void REGAL_CALL emu_glTexImage2DMultisample(GLenum target, GLsizei sample
   _next->call(& _next->glTexImage2DMultisample)(target, samples, internalformat, width, height, fixedsamplelocations);
 }
 
-static void REGAL_CALL emu_glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+static void REGAL_CALL emu_glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
@@ -65095,7 +65095,7 @@ static void REGAL_CALL emu_glMultiDrawArraysEXT(GLenum mode, const GLint *first,
   _next->call(& _next->glMultiDrawArraysEXT)(mode, first, count, primcount);
 }
 
-static void REGAL_CALL emu_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+static void REGAL_CALL emu_glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);

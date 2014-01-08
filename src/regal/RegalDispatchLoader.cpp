@@ -4447,7 +4447,7 @@ namespace Loader
 
 // GL_AMD_debug_output
 
-  static void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+  static void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glDebugMessageCallbackAMD),reinterpret_cast<void (*)()>(glDebugMessageCallbackAMD),"glDebugMessageCallbackAMD");
@@ -5402,11 +5402,11 @@ namespace Loader
     _driver.call(&_driver.glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
   }
 
-  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glClearNamedBufferSubDataEXT),reinterpret_cast<void (*)()>(glClearNamedBufferSubDataEXT),"glClearNamedBufferSubDataEXT");
-    _driver.call(&_driver.glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
+    _driver.call(&_driver.glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
   }
 
 // GL_ARB_clear_texture
@@ -5479,7 +5479,7 @@ namespace Loader
 
 // GL_ARB_debug_output
 
-  static void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+  static void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glDebugMessageCallbackARB),reinterpret_cast<void (*)()>(glDebugMessageCallbackARB),"glDebugMessageCallbackARB");
@@ -7826,7 +7826,7 @@ namespace Loader
 
 // GL_ARB_shading_language_include
 
-  static void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+  static void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glCompileShaderIncludeARB),reinterpret_cast<void (*)()>(glCompileShaderIncludeARB),"glCompileShaderIncludeARB");
@@ -8043,14 +8043,14 @@ namespace Loader
     _driver.call(&_driver.glSampleMaski)(index, mask);
   }
 
-  static void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+  static void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glTexImage2DMultisample),reinterpret_cast<void (*)()>(glTexImage2DMultisample),"glTexImage2DMultisample");
     _driver.call(&_driver.glTexImage2DMultisample)(target, samples, internalformat, width, height, fixedsamplelocations);
   }
 
-  static void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+  static void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glTexImage3DMultisample),reinterpret_cast<void (*)()>(glTexImage3DMultisample),"glTexImage3DMultisample");
@@ -13118,7 +13118,7 @@ namespace Loader
     _driver.call(&_driver.glMultiDrawArraysEXT)(mode, first, count, primcount);
   }
 
-  static void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+  static void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glMultiDrawElementsEXT),reinterpret_cast<void (*)()>(glMultiDrawElementsEXT),"glMultiDrawElementsEXT");
@@ -13779,7 +13779,7 @@ namespace Loader
     _driver.call(&_driver.glGetTransformFeedbackVaryingEXT)(program, index, bufSize, length, size, type, name);
   }
 
-  static void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+  static void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glTransformFeedbackVaryingsEXT),reinterpret_cast<void (*)()>(glTransformFeedbackVaryingsEXT),"glTransformFeedbackVaryingsEXT");
@@ -14490,7 +14490,7 @@ namespace Loader
 
 // GL_KHR_debug
 
-  static void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+  static void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glDebugMessageCallback),reinterpret_cast<void (*)()>(glDebugMessageCallback),"glDebugMessageCallback");

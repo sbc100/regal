@@ -7197,7 +7197,7 @@ extern "C" {
 
   /* GL_AMD_debug_output */
 
-  REGAL_DECL void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, GLvoid *userParam)
+  REGAL_DECL void REGAL_CALL glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void *userParam)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
@@ -8669,15 +8669,15 @@ extern "C" {
     _next->call(&_next->glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
   }
 
-  REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
+  REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glClearNamedBufferSubDataEXT","(", buffer, ", ", toString(internalformat), ", ", offset, ", ", size, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(data,Logging::pointers), ")");
+    App("glClearNamedBufferSubDataEXT","(", buffer, ", ", toString(internalformat), ", ", toString(format), ", ", toString(type), ", ", offset, ", ", size, ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
-    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
+    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
   }
 
   /* GL_ARB_clear_texture */
@@ -8782,7 +8782,7 @@ extern "C" {
 
   /* GL_ARB_debug_output */
 
-  REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const GLvoid *userParam)
+  REGAL_DECL void REGAL_CALL glDebugMessageCallbackARB(GLDEBUGPROCARB callback, const void *userParam)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
@@ -12438,7 +12438,7 @@ extern "C" {
 
   /* GL_ARB_shading_language_include */
 
-  REGAL_DECL void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar **path, const GLint *length)
+  REGAL_DECL void REGAL_CALL glCompileShaderIncludeARB(GLuint shader, GLsizei count, const GLchar * const *path, const GLint *length)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
@@ -12771,22 +12771,22 @@ extern "C" {
     _next->call(&_next->glSampleMaski)(index, mask);
   }
 
-  REGAL_DECL void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
+  REGAL_DECL void REGAL_CALL glTexImage2DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexImage2DMultisample","(", toString(target), ", ", samples, ", ", internalformat, ", ", width, ", ", height, ", ", toString(fixedsamplelocations), ")");
+    App("glTexImage2DMultisample","(", toString(target), ", ", samples, ", ", toString(internalformat), ", ", width, ", ", height, ", ", toString(fixedsamplelocations), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glTexImage2DMultisample)(target, samples, internalformat, width, height, fixedsamplelocations);
   }
 
-  REGAL_DECL void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
+  REGAL_DECL void REGAL_CALL glTexImage3DMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTexImage3DMultisample","(", toString(target), ", ", samples, ", ", internalformat, ", ", width, ", ", height, ", ", depth, ", ", toString(fixedsamplelocations), ")");
+    App("glTexImage3DMultisample","(", toString(target), ", ", samples, ", ", toString(internalformat), ", ", width, ", ", height, ", ", depth, ", ", toString(fixedsamplelocations), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -20703,11 +20703,11 @@ extern "C" {
     _next->call(&_next->glMultiDrawArraysEXT)(mode, first, count, primcount);
   }
 
-  REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount)
+  REGAL_DECL void REGAL_CALL glMultiDrawElementsEXT(GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glMultiDrawElementsEXT","(", GLmodeToString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", boost::print::optional(indices,Logging::pointers), ", ", primcount, ")");
+    App("glMultiDrawElementsEXT","(", GLmodeToString(mode), ", ", boost::print::array(count,primcount), ", ", toString(type), ", ", indices, ", ", primcount, ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -21712,11 +21712,11 @@ extern "C" {
     _next->call(&_next->glGetTransformFeedbackVaryingEXT)(program, index, bufSize, length, size, type, name);
   }
 
-  REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar ** const varyings, GLenum bufferMode)
+  REGAL_DECL void REGAL_CALL glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const GLchar * const *varyings, GLenum bufferMode)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glTransformFeedbackVaryingsEXT","(", program, ", ", count, ", ", boost::print::array(varyings,count), ", ", toString(bufferMode), ")");
+    App("glTransformFeedbackVaryingsEXT","(", program, ", ", count, ", ", boost::print::array(varyings,count,"\""), ", ", toString(bufferMode), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -22828,7 +22828,7 @@ extern "C" {
 
   /* GL_KHR_debug */
 
-  REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const GLvoid *userParam)
+  REGAL_DECL void REGAL_CALL glDebugMessageCallback(GLDEBUGPROC callback, const void *userParam)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());

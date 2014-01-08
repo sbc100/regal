@@ -1,5 +1,6 @@
 /*
 ** The OpenGL Extension Wrangler Library
+** Copyright (C) 2008-2013, Nigel Stewart <nigels[]users sourceforge net>
 ** Copyright (C) 2002-2008, Milan Ikits <milan ikits[]ieee org>
 ** Copyright (C) 2002-2008, Marcelo E. Magallon <mmagallo[]debian org>
 ** Copyright (C) 2002, Lev Povalahev
@@ -35,7 +36,7 @@
 #include <GL/glew.h>
 #if defined(_WIN32)
 #include <GL/wglew.h>
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__APPLE__) && !defined(__HAIKU__) || defined(GLEW_APPLE_GLX)
 #include <GL/glxew.h>
 #endif
 
@@ -51,7 +52,7 @@ GLEWContext _glewctx;
 #ifdef _WIN32
 WGLEWContext _wglewctx;
 #define wglewGetContext() (&_wglewctx)
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__APPLE__) && !defined(__HAIKU__) || defined(GLEW_APPLE_GLX)
 GLXEWContext _glxewctx;
 #define glxewGetContext() (&_glxewctx)
 #endif
@@ -59,7 +60,7 @@ GLXEWContext _glxewctx;
 
 #if defined(_WIN32)
 GLboolean glewCreateContext (int* pixelformat);
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__APPLE__) && !defined(__HAIKU__) || defined(GLEW_APPLE_GLX)
 GLboolean glewCreateContext (const char* display, int* visual);
 #else
 GLboolean glewCreateContext ();
@@ -667,6 +668,17 @@ static void _glewInfo_GL_AMD_name_gen_delete (void)
 }
 
 #endif /* GL_AMD_name_gen_delete */
+
+#ifdef GL_AMD_occlusion_query_event
+
+static void _glewInfo_GL_AMD_occlusion_query_event (void)
+{
+  glewPrintExt("GL_AMD_occlusion_query_event", GLEW_AMD_occlusion_query_event, glewIsSupported("GL_AMD_occlusion_query_event"), glewGetExtension("GL_AMD_occlusion_query_event"));
+
+  glewInfoFunc("glQueryObjectParameteruiAMD", glQueryObjectParameteruiAMD == NULL);
+}
+
+#endif /* GL_AMD_occlusion_query_event */
 
 #ifdef GL_AMD_performance_monitor
 
@@ -8641,6 +8653,9 @@ static void glewInfo (void)
 #ifdef GL_AMD_name_gen_delete
   _glewInfo_GL_AMD_name_gen_delete();
 #endif /* GL_AMD_name_gen_delete */
+#ifdef GL_AMD_occlusion_query_event
+  _glewInfo_GL_AMD_occlusion_query_event();
+#endif /* GL_AMD_occlusion_query_event */
 #ifdef GL_AMD_performance_monitor
   _glewInfo_GL_AMD_performance_monitor();
 #endif /* GL_AMD_performance_monitor */
@@ -10539,7 +10554,12 @@ int main (void)
     return 1;
   }
 #if defined(_WIN32)
+#if defined(_MSC_VER) && (_MSC_VER >= 1400)
+  if (fopen_s(&f, "glewinfo.txt", "w") != 0)
+    f = stdout;
+#else
   f = fopen("glewinfo.txt", "w");
+#endif
   if (f == NULL) f = stdout;
 #else
   f = stdout;
@@ -10692,6 +10712,21 @@ void glewDestroyContext ()
 {
   aglSetCurrentContext(octx);
   if (NULL != ctx) aglDestroyContext(ctx);
+}
+
+/* ------------------------------------------------------------------------ */
+
+#elif defined(__HAIKU__)
+
+GLboolean glewCreateContext ()
+{
+  /* TODO: Haiku: We need to call C++ code here */
+  return GL_FALSE;
+}
+
+void glewDestroyContext ()
+{
+  /* TODO: Haiku: We need to call C++ code here */
 }
 
 /* ------------------------------------------------------------------------ */
