@@ -101,6 +101,10 @@ defines = Enum('defines')
       else:
         print >>file, '0x%04x,'%(value),
       print >>file, '\'%s\')'%(j.category)
+      if len(j.group):
+        print >>file, '%s.group = [\'%s\']'%(j.name,'\',\''.join(j.group))
+      if len(j.alias):
+        print >>file, '%s.alias = [\'%s\']'%(j.name,'\',\''.join(j.alias))
 #      if len(j.extension):
 #        print >>file, '%s.extension = \'%s\''%(j.name,j.extension)
       if getattr(j,'esVersions',None) != None:

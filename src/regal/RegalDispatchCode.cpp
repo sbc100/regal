@@ -42152,10 +42152,10 @@ static void REGAL_CALL code_glPathCommandsNV(GLuint path, GLsizei numCommands, c
     _code << indent << "glPathCommandsNV(";
                    _code << path;
     _code << ", "; _code << numCommands;
-    _code << ", "; _code << commands;
+    _code << ", "; _code << Token::GLpathCommandToString(numCommands,commands);
     _code << ", "; _code << numCoords;
-    _code << ", "; _code << toString(coordType);
-    _code << ", "; _code << coords;
+    _code << ", "; _code << Token::GLpathCoordToString(coordType);
+    _code << ", "; _code << Token::GLpathCoordToString(numCoords,coordType,coords);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -42419,10 +42419,10 @@ static void REGAL_CALL code_glPathSubCommandsNV(GLuint path, GLsizei commandStar
     _code << ", "; _code << commandStart;
     _code << ", "; _code << commandsToDelete;
     _code << ", "; _code << numCommands;
-    _code << ", "; _code << commands;
+    _code << ", "; _code << Token::GLpathCommandToString(numCommands,commands);
     _code << ", "; _code << numCoords;
-    _code << ", "; _code << toString(coordType);
-    _code << ", "; _code << coords;
+    _code << ", "; _code << Token::GLpathCoordToString(coordType);
+    _code << ", "; _code << Token::GLpathCoordToString(numCoords,coordType,coords);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());
@@ -42441,8 +42441,8 @@ static void REGAL_CALL code_glPathSubCoordsNV(GLuint path, GLsizei coordStart, G
                    _code << path;
     _code << ", "; _code << coordStart;
     _code << ", "; _code << numCoords;
-    _code << ", "; _code << toString(coordType);
-    _code << ", "; _code << coords;
+    _code << ", "; _code << Token::GLpathCoordToString(coordType);
+    _code << ", "; _code << Token::GLpathCoordToString(numCoords,coordType,coords);
     _code << ");\n";
     if (_context->codeSource)
       fprintf(_context->codeSource,"%s",_code.str().c_str());

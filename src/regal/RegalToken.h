@@ -63,6 +63,12 @@ namespace Token {
   std::string  GLtextureToString     (GLenum     v); // GL_TEXTUREi or 0xaaaa
   std::string  GLmodeToString        (GLenum     v); // GL_PRIMITIVE or 0xaaaa
 
+  const char * GLpathCommandToString (GLubyte    v);                 // glPathCommandsNV etc
+  std::string  GLpathCommandToString (GLuint num, const GLubyte *v); // glPathCommandsNV etc
+
+  const char * GLpathCoordToString  (GLenum     v);                        // glPathCommandsNV etc
+  std::string  GLpathCoordToString  (GLuint num, GLenum t, const void *v); // glPathCommandsNV etc
+
   // Bitfield strings
 
   std::string GLblitFramebufferToString (GLbitfield v);

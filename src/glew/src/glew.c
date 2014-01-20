@@ -67,7 +67,23 @@
 #  define GLXEW_CONTEXT_ARG_DEF_LIST void
 #endif /* GLEW_MX */
 
-#if defined(__sgi) || defined (__sun) || defined(__HAIKU__) || defined(GLEW_APPLE_GLX)
+#if defined(GLEW_REGAL)
+
+/* In GLEW_REGAL mode we call direcly into the linked
+   libRegal.so glGetProcAddressREGAL for looking up
+   the GL function pointers. */
+
+#  undef glGetProcAddressREGAL
+#  ifdef WIN32
+extern void *  __stdcall glGetProcAddressREGAL(const GLchar *name);
+static void * (__stdcall * regalGetProcAddress) (const GLchar *) = glGetProcAddressREGAL;
+#    else
+extern void * glGetProcAddressREGAL(const GLchar *name);
+static void * (*regalGetProcAddress) (const GLchar *) = glGetProcAddressREGAL;
+#  endif
+#  define glGetProcAddressREGAL GLEW_GET_FUN(__glewGetProcAddressREGAL)
+
+#elif defined(__sgi) || defined (__sun) || defined(__HAIKU__) || defined(GLEW_APPLE_GLX)
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -105,11 +121,7 @@ void* NSGLGetProcAddress (const GLubyte *name)
   void* addr;
   if (NULL == image) 
   {
-#ifdef GLEW_REGAL
-    image = dlopen("libRegal.dylib", RTLD_LAZY);
-#else
     image = dlopen("/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL", RTLD_LAZY);
-#endif
   }
   if( !image ) return NULL;
   addr = dlsym(image, (const char*)name);
@@ -131,11 +143,7 @@ void* NSGLGetProcAddress (const GLubyte *name)
   char* symbolName;
   if (NULL == image)
   {
-#ifdef GLEW_REGAL
-    image = NSAddImage("libRegal.dylib", NSADDIMAGE_OPTION_RETURN_ON_ERROR);
-#else
     image = NSAddImage("/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL", NSADDIMAGE_OPTION_RETURN_ON_ERROR);
-#endif
   }
   /* prepend a '_' for the Unix C symbol mangling convention */
   symbolName = malloc(strlen((const char*)name) + 2);
@@ -159,7 +167,9 @@ void* NSGLGetProcAddress (const GLubyte *name)
 /*
  * Define glewGetProcAddress.
  */
-#if defined(_WIN32)
+#if defined(GLEW_REGAL)
+#  define glewGetProcAddress(name) regalGetProcAddress((const GLchar *) name)
+#elif defined(_WIN32)
 #  define glewGetProcAddress(name) wglGetProcAddress((LPCSTR)name)
 #elif defined(__APPLE__) && !defined(GLEW_APPLE_GLX)
 #  define glewGetProcAddress(name) NSGLGetProcAddress(name)
@@ -2050,6 +2060,17 @@ PFNGLNORMALPOINTERVINTELPROC __glewNormalPointervINTEL = NULL;
 PFNGLTEXCOORDPOINTERVINTELPROC __glewTexCoordPointervINTEL = NULL;
 PFNGLVERTEXPOINTERVINTELPROC __glewVertexPointervINTEL = NULL;
 
+PFNGLBEGINPERFQUERYINTELPROC __glewBeginPerfQueryINTEL = NULL;
+PFNGLCREATEPERFQUERYINTELPROC __glewCreatePerfQueryINTEL = NULL;
+PFNGLDELETEPERFQUERYINTELPROC __glewDeletePerfQueryINTEL = NULL;
+PFNGLENDPERFQUERYINTELPROC __glewEndPerfQueryINTEL = NULL;
+PFNGLGETFIRSTPERFQUERYIDINTELPROC __glewGetFirstPerfQueryIdINTEL = NULL;
+PFNGLGETNEXTPERFQUERYIDINTELPROC __glewGetNextPerfQueryIdINTEL = NULL;
+PFNGLGETPERFCOUNTERINFOINTELPROC __glewGetPerfCounterInfoINTEL = NULL;
+PFNGLGETPERFQUERYDATAINTELPROC __glewGetPerfQueryDataINTEL = NULL;
+PFNGLGETPERFQUERYIDBYNAMEINTELPROC __glewGetPerfQueryIdByNameINTEL = NULL;
+PFNGLGETPERFQUERYINFOINTELPROC __glewGetPerfQueryInfoINTEL = NULL;
+
 PFNGLTEXSCISSORFUNCINTELPROC __glewTexScissorFuncINTEL = NULL;
 PFNGLTEXSCISSORINTELPROC __glewTexScissorINTEL = NULL;
 
@@ -2582,6 +2603,8 @@ PFNGLISSUPPORTEDREGALPROC __glewIsSupportedREGAL = NULL;
 
 PFNGLLOGMESSAGECALLBACKREGALPROC __glewLogMessageCallbackREGAL = NULL;
 
+PFNGLGETPROCADDRESSREGALPROC __glewGetProcAddressREGAL = NULL;
+
 PFNGLDETAILTEXFUNCSGISPROC __glewDetailTexFuncSGIS = NULL;
 PFNGLGETDETAILTEXFUNCSGISPROC __glewGetDetailTexFuncSGIS = NULL;
 
@@ -2754,6 +2777,7 @@ GLboolean __GLEW_AMD_sample_positions = GL_FALSE;
 GLboolean __GLEW_AMD_seamless_cubemap_per_texture = GL_FALSE;
 GLboolean __GLEW_AMD_shader_atomic_counter_ops = GL_FALSE;
 GLboolean __GLEW_AMD_shader_stencil_export = GL_FALSE;
+GLboolean __GLEW_AMD_shader_stencil_value_export = GL_FALSE;
 GLboolean __GLEW_AMD_shader_trinary_minmax = GL_FALSE;
 GLboolean __GLEW_AMD_sparse_texture = GL_FALSE;
 GLboolean __GLEW_AMD_stencil_operation_extended = GL_FALSE;
@@ -3074,6 +3098,7 @@ GLboolean __GLEW_INGR_interlace_read = GL_FALSE;
 GLboolean __GLEW_INTEL_fragment_shader_ordering = GL_FALSE;
 GLboolean __GLEW_INTEL_map_texture = GL_FALSE;
 GLboolean __GLEW_INTEL_parallel_arrays = GL_FALSE;
+GLboolean __GLEW_INTEL_performance_query = GL_FALSE;
 GLboolean __GLEW_INTEL_texture_scissor = GL_FALSE;
 GLboolean __GLEW_KHR_debug = GL_FALSE;
 GLboolean __GLEW_KHR_texture_compression_astc_hdr = GL_FALSE;
@@ -3177,6 +3202,7 @@ GLboolean __GLEW_REGAL_enable = GL_FALSE;
 GLboolean __GLEW_REGAL_error_string = GL_FALSE;
 GLboolean __GLEW_REGAL_extension_query = GL_FALSE;
 GLboolean __GLEW_REGAL_log = GL_FALSE;
+GLboolean __GLEW_REGAL_proc_address = GL_FALSE;
 GLboolean __GLEW_REND_screen_coordinates = GL_FALSE;
 GLboolean __GLEW_S3_s3tc = GL_FALSE;
 GLboolean __GLEW_SGIS_color_range = GL_FALSE;
@@ -3852,6 +3878,10 @@ static GLboolean _glewInit_GL_AMD_sample_positions (GLEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GL_AMD_shader_stencil_export
 
 #endif /* GL_AMD_shader_stencil_export */
+
+#ifdef GL_AMD_shader_stencil_value_export
+
+#endif /* GL_AMD_shader_stencil_value_export */
 
 #ifdef GL_AMD_shader_trinary_minmax
 
@@ -7719,6 +7749,28 @@ static GLboolean _glewInit_GL_INTEL_parallel_arrays (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_INTEL_parallel_arrays */
 
+#ifdef GL_INTEL_performance_query
+
+static GLboolean _glewInit_GL_INTEL_performance_query (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((glBeginPerfQueryINTEL = (PFNGLBEGINPERFQUERYINTELPROC)glewGetProcAddress((const GLubyte*)"glBeginPerfQueryINTEL")) == NULL) || r;
+  r = ((glCreatePerfQueryINTEL = (PFNGLCREATEPERFQUERYINTELPROC)glewGetProcAddress((const GLubyte*)"glCreatePerfQueryINTEL")) == NULL) || r;
+  r = ((glDeletePerfQueryINTEL = (PFNGLDELETEPERFQUERYINTELPROC)glewGetProcAddress((const GLubyte*)"glDeletePerfQueryINTEL")) == NULL) || r;
+  r = ((glEndPerfQueryINTEL = (PFNGLENDPERFQUERYINTELPROC)glewGetProcAddress((const GLubyte*)"glEndPerfQueryINTEL")) == NULL) || r;
+  r = ((glGetFirstPerfQueryIdINTEL = (PFNGLGETFIRSTPERFQUERYIDINTELPROC)glewGetProcAddress((const GLubyte*)"glGetFirstPerfQueryIdINTEL")) == NULL) || r;
+  r = ((glGetNextPerfQueryIdINTEL = (PFNGLGETNEXTPERFQUERYIDINTELPROC)glewGetProcAddress((const GLubyte*)"glGetNextPerfQueryIdINTEL")) == NULL) || r;
+  r = ((glGetPerfCounterInfoINTEL = (PFNGLGETPERFCOUNTERINFOINTELPROC)glewGetProcAddress((const GLubyte*)"glGetPerfCounterInfoINTEL")) == NULL) || r;
+  r = ((glGetPerfQueryDataINTEL = (PFNGLGETPERFQUERYDATAINTELPROC)glewGetProcAddress((const GLubyte*)"glGetPerfQueryDataINTEL")) == NULL) || r;
+  r = ((glGetPerfQueryIdByNameINTEL = (PFNGLGETPERFQUERYIDBYNAMEINTELPROC)glewGetProcAddress((const GLubyte*)"glGetPerfQueryIdByNameINTEL")) == NULL) || r;
+  r = ((glGetPerfQueryInfoINTEL = (PFNGLGETPERFQUERYINFOINTELPROC)glewGetProcAddress((const GLubyte*)"glGetPerfQueryInfoINTEL")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_INTEL_performance_query */
+
 #ifdef GL_INTEL_texture_scissor
 
 static GLboolean _glewInit_GL_INTEL_texture_scissor (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -8999,6 +9051,19 @@ static GLboolean _glewInit_GL_REGAL_log (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_REGAL_log */
 
+#ifdef GL_REGAL_proc_address
+
+static GLboolean _glewInit_GL_REGAL_proc_address (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((glGetProcAddressREGAL = (PFNGLGETPROCADDRESSREGALPROC)glewGetProcAddress((const GLubyte*)"glGetProcAddressREGAL")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_REGAL_proc_address */
+
 #ifdef GL_REND_screen_coordinates
 
 #endif /* GL_REND_screen_coordinates */
@@ -9714,6 +9779,9 @@ GLenum GLEWAPIENTRY glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_AMD_shader_stencil_export
   CONST_CAST(GLEW_AMD_shader_stencil_export) = _glewSearchExtension("GL_AMD_shader_stencil_export", extStart, extEnd);
 #endif /* GL_AMD_shader_stencil_export */
+#ifdef GL_AMD_shader_stencil_value_export
+  CONST_CAST(GLEW_AMD_shader_stencil_value_export) = _glewSearchExtension("GL_AMD_shader_stencil_value_export", extStart, extEnd);
+#endif /* GL_AMD_shader_stencil_value_export */
 #ifdef GL_AMD_shader_trinary_minmax
   CONST_CAST(GLEW_AMD_shader_trinary_minmax) = _glewSearchExtension("GL_AMD_shader_trinary_minmax", extStart, extEnd);
 #endif /* GL_AMD_shader_trinary_minmax */
@@ -10838,6 +10906,10 @@ GLenum GLEWAPIENTRY glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_INTEL_parallel_arrays) = _glewSearchExtension("GL_INTEL_parallel_arrays", extStart, extEnd);
   if (glewExperimental || GLEW_INTEL_parallel_arrays) CONST_CAST(GLEW_INTEL_parallel_arrays) = !_glewInit_GL_INTEL_parallel_arrays(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_INTEL_parallel_arrays */
+#ifdef GL_INTEL_performance_query
+  CONST_CAST(GLEW_INTEL_performance_query) = _glewSearchExtension("GL_INTEL_performance_query", extStart, extEnd);
+  if (glewExperimental || GLEW_INTEL_performance_query) CONST_CAST(GLEW_INTEL_performance_query) = !_glewInit_GL_INTEL_performance_query(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_INTEL_performance_query */
 #ifdef GL_INTEL_texture_scissor
   CONST_CAST(GLEW_INTEL_texture_scissor) = _glewSearchExtension("GL_INTEL_texture_scissor", extStart, extEnd);
   if (glewExperimental || GLEW_INTEL_texture_scissor) CONST_CAST(GLEW_INTEL_texture_scissor) = !_glewInit_GL_INTEL_texture_scissor(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11195,6 +11267,10 @@ GLenum GLEWAPIENTRY glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_REGAL_log) = _glewSearchExtension("GL_REGAL_log", extStart, extEnd);
   if (glewExperimental || GLEW_REGAL_log) CONST_CAST(GLEW_REGAL_log) = !_glewInit_GL_REGAL_log(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_REGAL_log */
+#ifdef GL_REGAL_proc_address
+  CONST_CAST(GLEW_REGAL_proc_address) = _glewSearchExtension("GL_REGAL_proc_address", extStart, extEnd);
+  if (glewExperimental || GLEW_REGAL_proc_address) CONST_CAST(GLEW_REGAL_proc_address) = !_glewInit_GL_REGAL_proc_address(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_REGAL_proc_address */
 #ifdef GL_REND_screen_coordinates
   CONST_CAST(GLEW_REND_screen_coordinates) = _glewSearchExtension("GL_REND_screen_coordinates", extStart, extEnd);
 #endif /* GL_REND_screen_coordinates */
@@ -13864,6 +13940,13 @@ GLboolean GLEWAPIENTRY glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_AMD_shader_stencil_value_export
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_stencil_value_export", 27))
+        {
+          ret = GLEW_AMD_shader_stencil_value_export;
+          continue;
+        }
+#endif
 #ifdef GL_AMD_shader_trinary_minmax
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_trinary_minmax", 21))
         {
@@ -16137,6 +16220,13 @@ GLboolean GLEWAPIENTRY glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_INTEL_performance_query
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"performance_query", 17))
+        {
+          ret = GLEW_INTEL_performance_query;
+          continue;
+        }
+#endif
 #ifdef GL_INTEL_texture_scissor
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_scissor", 15))
         {
@@ -16885,6 +16975,13 @@ GLboolean GLEWAPIENTRY glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"log", 3))
         {
           ret = GLEW_REGAL_log;
+          continue;
+        }
+#endif
+#ifdef GL_REGAL_proc_address
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"proc_address", 12))
+        {
+          ret = GLEW_REGAL_proc_address;
           continue;
         }
 #endif

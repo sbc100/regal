@@ -209,7 +209,6 @@ static void menu(int choice)
 int main(int argc, char **argv)
 {
   GLenum status;
-  GLboolean hasDSA;
   int samples = 0;
   int i;
 
@@ -247,7 +246,7 @@ int main(int argc, char **argv)
 
   glutCreateWindow("Classic PostScript tiger NV_path_rendering example");
 
-  // Regal workaround for OSX GLUT
+  // Regal workaround for Mac OS X GLUT
 
   #ifdef __APPLE__
   extern void *CGLGetCurrentContext(void);
@@ -265,12 +264,6 @@ int main(int argc, char **argv)
   printf("samples per pixel = %d\n", glutGet(GLUT_WINDOW_NUM_SAMPLES));
   printf("Executable: %d bit\n", (int)(8*sizeof(int *)));
   printf("\n");
-  printf("Use left mouse button to scale/zoom (vertical, up/down) and rotate (right=clockwise, left=ccw)\n");
-  printf("Rotate and zooming is centered where you first left mouse click\n");
-  printf("Hold down Ctrl at left mouse click to JUST SCALE\n");
-  printf("Hold down Shift at left mouse click to JUST ROTATE\n");
-  printf("\n");
-  printf("Use middle mouse button to slide (translate)\n");
 
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);
@@ -293,14 +286,18 @@ int main(int argc, char **argv)
   if (!glewIsSupported("GL_EXT_debug_marker"))
     printf("GL_EXT_debug_marker is not supported.\n");
 
-  hasDSA = glewIsSupported("GL_EXT_direct_state_access");
-  if (!hasDSA) {
-    fatalError("OpenGL implementation doesn't support GL_EXT_direct_state_access (you should be using NVIDIA GPUs...)");
-  }
+  if (!glewIsSupported("GL_EXT_direct_state_access"))
+    fatalError("required GL_EXT_direct_state_access OpenGL extension is not present.");
 
-  if (!glewIsSupported("GL_NV_path_rendering")) {
-    fatalError("required NV_path_rendering OpenGL extension is not present");
-  }
+  if (!glewIsSupported("GL_NV_path_rendering")) 
+    fatalError("required NV_path_rendering OpenGL extension is not present.");
+
+  printf("Use left mouse button to scale/zoom (vertical, up/down) and rotate (right=clockwise, left=ccw)\n");
+  printf("Rotate and zooming is centered where you first left mouse click\n");
+  printf("Hold down Ctrl at left mouse click to JUST SCALE\n");
+  printf("Hold down Shift at left mouse click to JUST ROTATE\n");
+  printf("\n");
+  printf("Use middle mouse button to slide (translate)\n");
 
   initGraphics();
 

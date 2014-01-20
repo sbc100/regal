@@ -559,6 +559,7 @@ struct Statistics
   GLuint gl_regal_error_string;
   GLuint gl_regal_extension_query;
   GLuint gl_regal_log;
+  GLuint gl_regal_proc_address;
   GLuint gl_rend_screen_coordinates;
   GLuint gl_s3_s3tc;
   GLuint gl_sgis_color_range;

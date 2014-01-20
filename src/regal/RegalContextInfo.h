@@ -597,6 +597,7 @@ struct ContextInfo
   GLboolean gl_regal_error_string : 1;
   GLboolean gl_regal_extension_query : 1;
   GLboolean gl_regal_log : 1;
+  GLboolean gl_regal_proc_address : 1;
   GLboolean gl_rend_screen_coordinates : 1;
   GLboolean gl_s3_s3tc : 1;
   GLboolean gl_sgis_color_range : 1;

@@ -577,6 +577,7 @@ Statistics::log() const
   log("GL_REGAL_ERROR_STRING",gl_regal_error_string);
   log("GL_REGAL_EXTENSION_QUERY",gl_regal_extension_query);
   log("GL_REGAL_LOG",gl_regal_log);
+  log("GL_REGAL_PROC_ADDRESS",gl_regal_proc_address);
   log("GL_REND_SCREEN_COORDINATES",gl_rend_screen_coordinates);
   log("GL_S3_S3TC",gl_s3_s3tc);
   log("GL_SGIS_COLOR_RANGE",gl_sgis_color_range);

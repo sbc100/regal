@@ -908,6 +908,7 @@ EXPORTS
   rglGetPointerv
   rglGetPointervEXT
   rglGetPolygonStipple
+  rglGetProcAddressREGAL
   rglGetProgramBinary
   rglGetProgramBinaryOES
   rglGetProgramEnvParameterIivNV

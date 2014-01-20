@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2010-2012 NVIDIA Corporation
- * Copyright (c) 2010-2012 Nigel Stewart
+ * Copyright (c) 2010-2014 NVIDIA Corporation
+ * Copyright (c) 2010-2014 Nigel Stewart
  * All rights reserved.
  *
  * Distributed under the Boost Software License, Version 1.0.

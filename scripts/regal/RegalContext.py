@@ -17,6 +17,7 @@ from EmuMarker         import formulaeGlobal as markerFormulaeGlobal
 from EmuFrame          import formulae       as frameFormulae
 from EmuFrame          import formulaeGlobal as frameFormulaeGlobal
 from EmuExtensionQuery import formulae       as extensionQueryFormulae
+from EmuProcAddress    import formulae       as procAddressFormulae
 from EmuErrorString    import formulae       as errorStringFormulae
 from EmuEnable         import formulae       as enableFormulae
 from EmuCache          import formulaeGlobal as cacheFormulaeGlobal
@@ -57,6 +58,7 @@ emuRegal = [
     { 'type' : 'Frame',    'include' : 'RegalFrame.h',  'member' : 'frame',  'conditional' : None,  'ifdef' : 'REGAL_FRAME',  'formulae' : frameFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : 'REGAL_FRAME',  'formulae' : frameFormulaeGlobal },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : extensionQueryFormulae },
+    { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : procAddressFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : errorStringFormulae },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : logFormulae    },
     { 'type' : None,       'include' : None,            'member' : None,     'conditional' : None,  'ifdef' : None,  'formulae' : enableFormulae },

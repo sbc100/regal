@@ -213,6 +213,30 @@ namespace Token {
     }
   }
 
+  std::string GLpathCommandToString(GLuint num, const GLubyte *v)
+  {
+    std::vector<const char *> tmp(num);
+    for (GLuint i=0; i<num; ++i)
+      tmp[i] = GLpathCommandToString(v[i]);
+    return boost::print::print_string(boost::print::iterator(tmp.begin(),tmp.end()));
+  }
+
+  std::string GLpathCoordToString (GLuint num, GLenum t, const void *v)
+  {
+    switch (t)
+    {
+      case GL_BYTE:           return boost::print::print_string(boost::print::array(reinterpret_cast<const GLbyte *>(v),num));
+      case GL_UNSIGNED_BYTE:  return boost::print::print_string(boost::print::array(reinterpret_cast<const GLubyte *>(v),num));
+      case GL_SHORT:          return boost::print::print_string(boost::print::array(reinterpret_cast<const GLshort *>(v),num));
+      case GL_UNSIGNED_SHORT: return boost::print::print_string(boost::print::array(reinterpret_cast<const GLushort *>(v),num));
+      case GL_FLOAT:          return boost::print::print_string(boost::print::array(reinterpret_cast<const GLfloat *>(v),num));
+      default:
+        break;
+    }
+
+    return std::string();
+  }
+
   std::string GLblitFramebufferToString(GLbitfield v)
   {
     const GLbitfield other = v & ~(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -4029,6 +4053,83 @@ namespace Token {
     }
     #endif // REGAL_ENUM_TO_STRING
     return "unknown_gl_enum";
+  }
+
+  const char * GLpathCoordToString( GLenum v ) {
+    #if REGAL_ENUM_TO_STRING
+    switch( v ) {
+      case 0x1400: return "GL_BYTE";
+      case 0x1401: return "GL_UNSIGNED_BYTE";
+      case 0x1402: return "GL_SHORT";
+      case 0x1403: return "GL_UNSIGNED_SHORT";
+      case 0x1406: return "GL_FLOAT";
+      default: break;
+    }
+    #endif // REGAL_ENUM_TO_STRING
+    return "unknown";
+  }
+
+  const char * GLpathCommandToString( GLubyte v ) {
+    #if REGAL_ENUM_TO_STRING
+    switch( v ) {
+      case 'z':
+      case 'Z':
+      case 0x00: return "GL_CLOSE_PATH_NV";
+      case 'M':
+      case 0x02: return "GL_MOVE_TO_NV";
+      case 'm':
+      case 0x03: return "GL_RELATIVE_MOVE_TO_NV";
+      case 'L':
+      case 0x04: return "GL_LINE_TO_NV";
+      case 'l':
+      case 0x05: return "GL_RELATIVE_LINE_TO_NV";
+      case 'H':
+      case 0x06: return "GL_HORIZONTAL_LINE_TO_NV";
+      case 'h':
+      case 0x07: return "GL_RELATIVE_HORIZONTAL_LINE_TO_NV";
+      case 'V':
+      case 0x08: return "GL_VERTICAL_LINE_TO_NV";
+      case 'v':
+      case 0x09: return "GL_RELATIVE_VERTICAL_LINE_TO_NV";
+      case 'Q':
+      case 0x0a: return "GL_QUADRATIC_CURVE_TO_NV";
+      case 'q':
+      case 0x0b: return "GL_RELATIVE_QUADRATIC_CURVE_TO_NV";
+      case 'C':
+      case 0x0c: return "GL_CUBIC_CURVE_TO_NV";
+      case 'c':
+      case 0x0d: return "GL_RELATIVE_CUBIC_CURVE_TO_NV";
+      case 'T':
+      case 0x0e: return "GL_SMOOTH_QUADRATIC_CURVE_TO_NV";
+      case 't':
+      case 0x0f: return "GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV";
+      case 'S':
+      case 0x10: return "GL_SMOOTH_CUBIC_CURVE_TO_NV";
+      case 's':
+      case 0x11: return "GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV";
+      case 0x12: return "GL_SMALL_CCW_ARC_TO_NV";
+      case 0x13: return "GL_RELATIVE_SMALL_CCW_ARC_TO_NV";
+      case 0x14: return "GL_SMALL_CW_ARC_TO_NV";
+      case 0x15: return "GL_RELATIVE_SMALL_CW_ARC_TO_NV";
+      case 0x16: return "GL_LARGE_CCW_ARC_TO_NV";
+      case 0x17: return "GL_RELATIVE_LARGE_CCW_ARC_TO_NV";
+      case 0x18: return "GL_LARGE_CW_ARC_TO_NV";
+      case 0x19: return "GL_RELATIVE_LARGE_CW_ARC_TO_NV";
+      case 0xf0: return "GL_RESTART_PATH_NV";
+      case 0xf2: return "GL_DUP_FIRST_CUBIC_CURVE_TO_NV";
+      case 0xf4: return "GL_DUP_LAST_CUBIC_CURVE_TO_NV";
+      case 0xf6: return "GL_RECT_NV";
+      case 0xf8: return "GL_CIRCULAR_CCW_ARC_TO_NV";
+      case 0xfa: return "GL_CIRCULAR_CW_ARC_TO_NV";
+      case 0xfc: return "GL_CIRCULAR_TANGENT_ARC_TO_NV";
+      case 'A':
+      case 0xfe: return "GL_ARC_TO_NV";
+      case 'a':
+      case 0xff: return "GL_RELATIVE_ARC_TO_NV";
+      default: break;
+    }
+    #endif // REGAL_ENUM_TO_STRING
+    return "unknown";
   }
 
   const char * GLerrorToString( GLenum e ) {

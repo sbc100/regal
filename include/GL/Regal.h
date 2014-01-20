@@ -29336,6 +29336,50 @@ REGAL_DECL void REGAL_CALL plugin_glLogMessageCallbackREGAL(GLLOGPROCREGAL callb
 #endif
 
 /**
+ ** GL_REGAL_proc_address
+ **/
+
+#if (defined(GL_REGAL_PROC_ADDRESS) || defined(REGAL_NO_ENUM) || defined(REGAL_NO_GL_REGAL_PROC_ADDRESS)) && !defined(REGAL_NO_ENUM_GL_REGAL_PROC_ADDRESS)
+#define REGAL_NO_ENUM_GL_REGAL_PROC_ADDRESS
+#endif
+
+#if (defined(GL_REGAL_PROC_ADDRESS) || defined(REGAL_NO_TYPEDEF) || defined(REGAL_NO_GL_REGAL_PROC_ADDRESS)) && !defined(REGAL_NO_TYPEDEF_GL_REGAL_PROC_ADDRESS)
+#define REGAL_NO_TYPEDEF_GL_REGAL_PROC_ADDRESS
+#endif
+
+#if (defined(GL_REGAL_PROC_ADDRESS) || !defined(REGAL_NAMESPACE) || defined(REGAL_NO_GL_REGAL_PROC_ADDRESS)) && !defined(REGAL_NO_NAMESPACE_GL_REGAL_PROC_ADDRESS)
+#define REGAL_NO_NAMESPACE_GL_REGAL_PROC_ADDRESS
+#endif
+
+#if (defined(GL_REGAL_PROC_ADDRESS) || !defined(REGAL_PLUGIN_MODE) || defined(REGAL_NO_GL_REGAL_PROC_ADDRESS)) && !defined(REGAL_NO_PLUGIN_GL_REGAL_PROC_ADDRESS)
+#define REGAL_NO_PLUGIN_GL_REGAL_PROC_ADDRESS
+#endif
+
+#if (defined(GL_REGAL_PROC_ADDRESS) || defined(REGAL_NO_DECLARATION) || defined(REGAL_NO_GL_REGAL_PROC_ADDRESS)) && !defined(REGAL_NO_DECLARATION_GL_REGAL_PROC_ADDRESS)
+#define REGAL_NO_DECLARATION_GL_REGAL_PROC_ADDRESS
+#endif
+
+#ifndef GL_REGAL_proc_address
+#define GL_REGAL_proc_address 1
+#endif
+
+#ifndef REGAL_NO_TYPEDEF_GL_REGAL_PROC_ADDRESS
+typedef void *(REGAL_CALL *PFNGLGETPROCADDRESSREGALPROC)(const GLchar *name);
+#endif
+
+#ifndef REGAL_NO_NAMESPACE_GL_REGAL_PROC_ADDRESS
+#define glGetProcAddressREGAL               rglGetProcAddressREGAL
+#endif
+
+#ifndef REGAL_NO_DECLARATION_GL_REGAL_PROC_ADDRESS
+REGAL_DECL void *REGAL_CALL glGetProcAddressREGAL(const GLchar *name);
+#endif
+
+#ifndef REGAL_NO_PLUGIN_GL_REGAL_PROC_ADDRESS
+REGAL_DECL void *REGAL_CALL plugin_glGetProcAddressREGAL(const GLchar *name);
+#endif
+
+/**
  ** GL_REND_screen_coordinates
  **/
 

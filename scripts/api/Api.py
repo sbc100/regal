@@ -168,14 +168,16 @@ class Enum:
 
 class Enumerant:
 
-  def __init__(self, name = '', value = '', category = ''):
+  def __init__(self, name = '', value = '', category = '', group = []):
 
     self.name       = name
     self.value      = value
     self.version    = ''
     self.extension  = ''
     self.deprecated = ''
-    self.category   = category
+    self.category   = category    # Usually the GL extension name
+    self.group      = group       # For grouping enums orthogonally to extensions
+    self.alias      = []
     self.public     = True
 
 class StateType:

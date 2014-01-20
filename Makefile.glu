@@ -36,6 +36,7 @@ GLU.OBJS       := $(GLU.OBJS:.c=.o) $(GLU.OBJS:.cc=.o)
 GLU.OBJS       := $(filter %.o,$(GLU.OBJS))
 GLU.DEPS       := $(GLU.OBJS:.o=.d)
 GLU.LIBS       := -Llib/$(SYSTEM) -lRegal
+GLU.LIBS       += -lstdc++
 GLU.LIBS       += -pthread -lm
 
 -include $(GLU.DEPS)
@@ -80,7 +81,7 @@ tmp/$(SYSTEM)/glu/shared/%.o: src/glu/libnurbs/nurbtess/%.cc
 ifdef GLU.SHARED
 lib/$(SYSTEM)/$(GLU.SHARED): $(GLU.OBJS) lib/$(SYSTEM)/$(REGAL.SHARED)
 	@mkdir -p $(dir $@)
-	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.DYNAMIC) $(GLU.LIBS) $(REGAL.LDFLAGS) -o $@ $(GLU.OBJS)
+	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) $(LDFLAGS.DYNAMIC) $(REGAL.LDFLAGS) -o $@ $(GLU.OBJS) $(GLU.LIBS)
 ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif

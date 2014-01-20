@@ -25462,7 +25462,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPathCommandsNV","(", path, ", ", numCommands, ", ", boost::print::optional(commands,Logging::pointers), ", ", numCoords, ", ", toString(coordType), ", ", boost::print::optional(coords,Logging::pointers), ")");
+    App("glPathCommandsNV","(", path, ", ", numCommands, ", ", Token::GLpathCommandToString(numCommands,commands), ", ", numCoords, ", ", Token::GLpathCoordToString(coordType), ", ", Token::GLpathCoordToString(numCoords,coordType,coords), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25616,7 +25616,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPathSubCommandsNV","(", path, ", ", commandStart, ", ", commandsToDelete, ", ", numCommands, ", ", boost::print::optional(commands,Logging::pointers), ", ", numCoords, ", ", toString(coordType), ", ", boost::print::optional(coords,Logging::pointers), ")");
+    App("glPathSubCommandsNV","(", path, ", ", commandStart, ", ", commandsToDelete, ", ", numCommands, ", ", Token::GLpathCommandToString(numCommands,commands), ", ", numCoords, ", ", Token::GLpathCoordToString(coordType), ", ", Token::GLpathCoordToString(numCoords,coordType,coords), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -25627,7 +25627,7 @@ extern "C" {
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glPathSubCoordsNV","(", path, ", ", coordStart, ", ", numCoords, ", ", toString(coordType), ", ", boost::print::optional(coords,Logging::pointers), ")");
+    App("glPathSubCoordsNV","(", path, ", ", coordStart, ", ", numCoords, ", ", Token::GLpathCoordToString(coordType), ", ", Token::GLpathCoordToString(numCoords,coordType,coords), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
@@ -29497,6 +29497,47 @@ extern "C" {
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glLogMessageCallbackREGAL)(callback);
+  }
+
+  /* GL_REGAL_proc_address */
+
+  REGAL_DECL void *REGAL_CALL glGetProcAddressREGAL(const GLchar *name)
+  {
+    RegalContext *_context = REGAL_GET_CONTEXT();
+    RegalAssert(Init::isInitialized());
+    App("glGetProcAddressREGAL","(", boost::print::quote(name,'"'), ")");
+    if (!_context) return NULL;
+    void *ret;
+
+    ret = Lookup::gl_Lookup<void *>(name);
+    if (ret)
+      return ret;
+
+    #if REGAL_SYS_WGL
+    ret = Lookup::wgl_Lookup<void *>(name);
+    if (ret)
+      return ret;
+    #endif
+
+    #if REGAL_SYS_GLX
+    ret = Lookup::glx_Lookup<void *>(name);
+    if (ret)
+      return ret;
+    #endif
+
+    #if REGAL_SYS_EGL
+    ret = Lookup::egl_Lookup<void *>(name);
+    if (ret)
+      return ret;
+    #endif
+
+    #if REGAL_SYS_OSX
+    ret = Lookup::cgl_Lookup<void *>(name);
+    if (ret)
+      return ret;
+    #endif
+
+    return NULL;
   }
 
   /* GL_SGIS_detail_texture */

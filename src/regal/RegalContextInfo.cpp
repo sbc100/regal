@@ -575,6 +575,7 @@ ContextInfo::ContextInfo()
   gl_regal_error_string(false),
   gl_regal_extension_query(false),
   gl_regal_log(false),
+  gl_regal_proc_address(false),
   gl_rend_screen_coordinates(false),
   gl_s3_s3tc(false),
   gl_sgis_color_range(false),
@@ -1474,6 +1475,7 @@ ContextInfo::init(const RegalContext &context)
   gl_regal_error_string                              = stringSetFind(e,"GL_REGAL_error_string");
   gl_regal_extension_query                           = stringSetFind(e,"GL_REGAL_extension_query");
   gl_regal_log                                       = stringSetFind(e,"GL_REGAL_log");
+  gl_regal_proc_address                              = stringSetFind(e,"GL_REGAL_proc_address");
   gl_rend_screen_coordinates                         = stringSetFind(e,"GL_REND_screen_coordinates");
   gl_s3_s3tc                                         = stringSetFind(e,"GL_S3_s3tc");
   gl_sgis_color_range                                = stringSetFind(e,"GL_SGIS_color_range");
@@ -2239,6 +2241,7 @@ ContextInfo::getExtension(const char *ext) const
   if (!strcmp(ext,"GL_REGAL_error_string"))                    return gl_regal_error_string;
   if (!strcmp(ext,"GL_REGAL_extension_query"))                 return gl_regal_extension_query;
   if (!strcmp(ext,"GL_REGAL_log"))                             return gl_regal_log;
+  if (!strcmp(ext,"GL_REGAL_proc_address"))                    return gl_regal_proc_address;
   if (!strcmp(ext,"GL_REND_screen_coordinates"))               return gl_rend_screen_coordinates;
   if (!strcmp(ext,"GL_S3_s3tc"))                               return gl_s3_s3tc;
   if (!strcmp(ext,"GL_SGIS_color_range"))                      return gl_sgis_color_range;

@@ -757,6 +757,15 @@ static void _glewInfo_GL_AMD_shader_stencil_export (void)
 
 #endif /* GL_AMD_shader_stencil_export */
 
+#ifdef GL_AMD_shader_stencil_value_export
+
+static void _glewInfo_GL_AMD_shader_stencil_value_export (void)
+{
+  glewPrintExt("GL_AMD_shader_stencil_value_export", GLEW_AMD_shader_stencil_value_export, glewIsSupported("GL_AMD_shader_stencil_value_export"), glewGetExtension("GL_AMD_shader_stencil_value_export"));
+}
+
+#endif /* GL_AMD_shader_stencil_value_export */
+
 #ifdef GL_AMD_shader_trinary_minmax
 
 static void _glewInfo_GL_AMD_shader_trinary_minmax (void)
@@ -5075,6 +5084,26 @@ static void _glewInfo_GL_INTEL_parallel_arrays (void)
 
 #endif /* GL_INTEL_parallel_arrays */
 
+#ifdef GL_INTEL_performance_query
+
+static void _glewInfo_GL_INTEL_performance_query (void)
+{
+  glewPrintExt("GL_INTEL_performance_query", GLEW_INTEL_performance_query, glewIsSupported("GL_INTEL_performance_query"), glewGetExtension("GL_INTEL_performance_query"));
+
+  glewInfoFunc("glBeginPerfQueryINTEL", glBeginPerfQueryINTEL == NULL);
+  glewInfoFunc("glCreatePerfQueryINTEL", glCreatePerfQueryINTEL == NULL);
+  glewInfoFunc("glDeletePerfQueryINTEL", glDeletePerfQueryINTEL == NULL);
+  glewInfoFunc("glEndPerfQueryINTEL", glEndPerfQueryINTEL == NULL);
+  glewInfoFunc("glGetFirstPerfQueryIdINTEL", glGetFirstPerfQueryIdINTEL == NULL);
+  glewInfoFunc("glGetNextPerfQueryIdINTEL", glGetNextPerfQueryIdINTEL == NULL);
+  glewInfoFunc("glGetPerfCounterInfoINTEL", glGetPerfCounterInfoINTEL == NULL);
+  glewInfoFunc("glGetPerfQueryDataINTEL", glGetPerfQueryDataINTEL == NULL);
+  glewInfoFunc("glGetPerfQueryIdByNameINTEL", glGetPerfQueryIdByNameINTEL == NULL);
+  glewInfoFunc("glGetPerfQueryInfoINTEL", glGetPerfQueryInfoINTEL == NULL);
+}
+
+#endif /* GL_INTEL_performance_query */
+
 #ifdef GL_INTEL_texture_scissor
 
 static void _glewInfo_GL_INTEL_texture_scissor (void)
@@ -6533,6 +6562,17 @@ static void _glewInfo_GL_REGAL_log (void)
 }
 
 #endif /* GL_REGAL_log */
+
+#ifdef GL_REGAL_proc_address
+
+static void _glewInfo_GL_REGAL_proc_address (void)
+{
+  glewPrintExt("GL_REGAL_proc_address", GLEW_REGAL_proc_address, glewIsSupported("GL_REGAL_proc_address"), glewGetExtension("GL_REGAL_proc_address"));
+
+  glewInfoFunc("glGetProcAddressREGAL", glGetProcAddressREGAL == NULL);
+}
+
+#endif /* GL_REGAL_proc_address */
 
 #ifdef GL_REND_screen_coordinates
 
@@ -8677,6 +8717,9 @@ static void glewInfo (void)
 #ifdef GL_AMD_shader_stencil_export
   _glewInfo_GL_AMD_shader_stencil_export();
 #endif /* GL_AMD_shader_stencil_export */
+#ifdef GL_AMD_shader_stencil_value_export
+  _glewInfo_GL_AMD_shader_stencil_value_export();
+#endif /* GL_AMD_shader_stencil_value_export */
 #ifdef GL_AMD_shader_trinary_minmax
   _glewInfo_GL_AMD_shader_trinary_minmax();
 #endif /* GL_AMD_shader_trinary_minmax */
@@ -9637,6 +9680,9 @@ static void glewInfo (void)
 #ifdef GL_INTEL_parallel_arrays
   _glewInfo_GL_INTEL_parallel_arrays();
 #endif /* GL_INTEL_parallel_arrays */
+#ifdef GL_INTEL_performance_query
+  _glewInfo_GL_INTEL_performance_query();
+#endif /* GL_INTEL_performance_query */
 #ifdef GL_INTEL_texture_scissor
   _glewInfo_GL_INTEL_texture_scissor();
 #endif /* GL_INTEL_texture_scissor */
@@ -9946,6 +9992,9 @@ static void glewInfo (void)
 #ifdef GL_REGAL_log
   _glewInfo_GL_REGAL_log();
 #endif /* GL_REGAL_log */
+#ifdef GL_REGAL_proc_address
+  _glewInfo_GL_REGAL_proc_address();
+#endif /* GL_REGAL_proc_address */
 #ifdef GL_REND_screen_coordinates
   _glewInfo_GL_REND_screen_coordinates();
 #endif /* GL_REND_screen_coordinates */
@@ -10703,7 +10752,7 @@ GLboolean glewCreateContext ()
   if (GL_FALSE == aglSetCurrentContext(ctx)) return GL_TRUE;
   /* Needed for Regal on the Mac */
   #if defined(GLEW_REGAL) && defined(__APPLE__)
-  RegalMakeCurrent(octx);
+  RegalMakeCurrent(ctx);
   #endif
   return GL_FALSE;
 }

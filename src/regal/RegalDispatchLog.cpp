@@ -22984,7 +22984,7 @@ static void REGAL_CALL log_glPathCommandsNV(GLuint path, GLsizei numCommands, co
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPathCommandsNV)(path, numCommands, commands, numCoords, coordType, coords);
-    Driver("glPathCommandsNV","(", path, ", ", numCommands, ", ", boost::print::optional(commands,Logging::pointers), ", ", numCoords, ", ", toString(coordType), ", ", boost::print::optional(coords,Logging::pointers), ")");
+    Driver("glPathCommandsNV","(", path, ", ", numCommands, ", ", Token::GLpathCommandToString(numCommands,commands), ", ", numCoords, ", ", Token::GLpathCoordToString(coordType), ", ", Token::GLpathCoordToString(numCoords,coordType,coords), ")");
 }
 
 static void REGAL_CALL log_glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
@@ -23124,7 +23124,7 @@ static void REGAL_CALL log_glPathSubCommandsNV(GLuint path, GLsizei commandStart
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPathSubCommandsNV)(path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords);
-    Driver("glPathSubCommandsNV","(", path, ", ", commandStart, ", ", commandsToDelete, ", ", numCommands, ", ", boost::print::optional(commands,Logging::pointers), ", ", numCoords, ", ", toString(coordType), ", ", boost::print::optional(coords,Logging::pointers), ")");
+    Driver("glPathSubCommandsNV","(", path, ", ", commandStart, ", ", commandsToDelete, ", ", numCommands, ", ", Token::GLpathCommandToString(numCommands,commands), ", ", numCoords, ", ", Token::GLpathCoordToString(coordType), ", ", Token::GLpathCoordToString(numCoords,coordType,coords), ")");
 }
 
 static void REGAL_CALL log_glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const GLvoid *coords)
@@ -23134,7 +23134,7 @@ static void REGAL_CALL log_glPathSubCoordsNV(GLuint path, GLsizei coordStart, GL
     DispatchTableGL *_next = _context->dispatcher.logging.next();
     RegalAssert(_next);
     _next->call(&_next->glPathSubCoordsNV)(path, coordStart, numCoords, coordType, coords);
-    Driver("glPathSubCoordsNV","(", path, ", ", coordStart, ", ", numCoords, ", ", toString(coordType), ", ", boost::print::optional(coords,Logging::pointers), ")");
+    Driver("glPathSubCoordsNV","(", path, ", ", coordStart, ", ", numCoords, ", ", Token::GLpathCoordToString(coordType), ", ", Token::GLpathCoordToString(numCoords,coordType,coords), ")");
 }
 
 static void REGAL_CALL log_glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat *coeffs)

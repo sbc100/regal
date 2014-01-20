@@ -43,9 +43,18 @@ TIGER.OBJS       := $(addprefix tmp/$(SYSTEM)/tiger/static/,$(TIGER.SRCS.NAMES))
 TIGER.OBJS       := $(TIGER.OBJS:.c=.o)
 TIGER.DEPS       := $(TIGER.DEPS:.o=.d)
 TIGER.CFLAGS     := -Iinclude -Iexamples/tiger -DGLEW_NO_GLU=1
-TIGER.LIBS       += -Llib/$(SYSTEM) $(LDFLAGS.GLUT) $(LDFLAGS.GLU) $(LDFLAGS.X11)
-TIGER.LIBS       += -lRegalGLEW
-TIGER.LIBS       += -lm -pthread
+TIGER.LIBS       += -Llib/$(SYSTEM)
+
+# use RegalGLUT, if possible
+
+ifdef GLUT.SHARED
+TIGER.LIBS       += -lRegalGLUT -lRegalGLU
+else
+TIGER.LIBS       +=  $(LDFLAGS.GLUT) $(LDFLAGS.GLU) $(LDFLAGS.X11)
+endif
+
+TIGER.LIBS       += -lRegalGLEW -lRegal
+TIGER.LIBS       += -lm
 
 -include $(TIGER.DEPS)
 
@@ -60,13 +69,11 @@ ifdef GLUT.SHARED
 bin/$(SYSTEM)/tiger: lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
 endif
 
-ifdef GLEW.SHARED
-bin/$(SYSTEM)/tiger: lib/$(SYSTEM)/$(GLEW.SHARED)
-endif
+bin/$(SYSTEM)/tiger: lib/$(SYSTEM)/$(GLEW.SHARED) lib/$(SYSTEM)/$(REGAL.SHARED)
 
-bin/$(SYSTEM)/tiger: $(TIGER.OBJS) lib/$(SYSTEM)/$(REGAL.SHARED)
+bin/$(SYSTEM)/tiger: $(TIGER.OBJS)
 	@mkdir -p $(dir $@)
-	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(TIGER.OBJS) lib/$(SYSTEM)/$(REGAL.SHARED) $(TIGER.LIBS) $(REGAL.LDFLAGS)
+	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(TIGER.OBJS) $(TIGER.LIBS)
 ifneq ($(STRIP),)
 	$(LOG_STRIP)$(STRIP) -x $@
 endif

@@ -959,6 +959,7 @@ _glGetPointeri_vEXT
 _glGetPointerv
 _glGetPointervEXT
 _glGetPolygonStipple
+_glGetProcAddressREGAL
 _glGetProgramBinary
 _glGetProgramBinaryOES
 _glGetProgramEnvParameterIivNV

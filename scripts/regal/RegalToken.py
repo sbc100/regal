@@ -184,6 +184,30 @@ namespace Token {
     }
   }
 
+  std::string GLpathCommandToString(GLuint num, const GLubyte *v)
+  {
+    std::vector<const char *> tmp(num);
+    for (GLuint i=0; i<num; ++i)
+      tmp[i] = GLpathCommandToString(v[i]);
+    return boost::print::print_string(boost::print::iterator(tmp.begin(),tmp.end()));
+  }
+
+  std::string GLpathCoordToString (GLuint num, GLenum t, const void *v)
+  {
+    switch (t)
+    {
+      case GL_BYTE:           return boost::print::print_string(boost::print::array(reinterpret_cast<const GLbyte *>(v),num));
+      case GL_UNSIGNED_BYTE:  return boost::print::print_string(boost::print::array(reinterpret_cast<const GLubyte *>(v),num));
+      case GL_SHORT:          return boost::print::print_string(boost::print::array(reinterpret_cast<const GLshort *>(v),num));
+      case GL_UNSIGNED_SHORT: return boost::print::print_string(boost::print::array(reinterpret_cast<const GLushort *>(v),num));
+      case GL_FLOAT:          return boost::print::print_string(boost::print::array(reinterpret_cast<const GLfloat *>(v),num));
+      default:
+        break;
+    }
+
+    return std::string();
+  }
+
   std::string GLblitFramebufferToString(GLbitfield v)
   {
     const GLbitfield other = v & ~(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -697,7 +721,7 @@ def filterTokens(tokens):
 
   def suffixCompare(i,j):
 
-    # Prefer anything to _BIT, _BITS
+    # Prefer anything to _BIT, _BITS, etc
 
     im = [ 1 for k in suffixes2 if i.endswith(k) ]
     jm = [ 1 for k in suffixes2 if j.endswith(k) ]
@@ -753,6 +777,33 @@ def filterTokens(tokens):
 
   return [ (tokens[i][0], u[i][1], tokens[i][1]) for i in xrange(len(tokens)) ]
 
+def groupToStringCodeGen(apis, group, name, default = 'NULL', type = 'GLenum', format = '0x%04x'):
+  tmp = []
+
+  tmp.append('')
+  tmp.append('  const char * %s( %s v ) {'%(name,type))
+  tmp.append('    #if REGAL_ENUM_TO_STRING')
+  tmp.append('    switch( v ) {')
+  for i in apis:
+    if i.name != 'gl':
+      continue
+    for j in i.enums:
+      if j.name != 'defines':
+        continue
+      enums = [k for k in j.enumerantsByName if group in k.group ]
+      enums = sorted(enums,key=lambda k : k.value)
+      for k in enums:
+        for l in k.alias:
+          tmp.append('      case \'%s\':'%(l))            
+        tmp.append('      case %s: return "%s";'%(hexValue(k.value,format),k.name))
+  tmp.append('      default: break;')
+  tmp.append('    }')
+  tmp.append('    #endif // REGAL_ENUM_TO_STRING')
+  tmp.append('    return "%s";'%(default))
+  tmp.append('  }')
+
+  return tmp
+
 def generateTokenSource(apis, args):
 
   code = []
@@ -798,6 +849,11 @@ def generateTokenSource(apis, args):
   code.append('    #endif // REGAL_ENUM_TO_STRING')
   code.append('    return "unknown_gl_enum";')
   code.append('  }')
+
+  # NV_path_rendering related
+
+  code.extend(groupToStringCodeGen(apis,'pathCoord',   'GLpathCoordToString',   'unknown'))  
+  code.extend(groupToStringCodeGen(apis,'pathCommand', 'GLpathCommandToString', 'unknown', 'GLubyte', '0x%02x'))
 
   # GLerrorToString
 
@@ -945,6 +1001,12 @@ namespace Token {
 
   std::string  GLtextureToString     (GLenum     v); // GL_TEXTUREi or 0xaaaa
   std::string  GLmodeToString        (GLenum     v); // GL_PRIMITIVE or 0xaaaa
+
+  const char * GLpathCommandToString (GLubyte    v);                 // glPathCommandsNV etc
+  std::string  GLpathCommandToString (GLuint num, const GLubyte *v); // glPathCommandsNV etc
+
+  const char * GLpathCoordToString  (GLenum     v);                        // glPathCommandsNV etc
+  std::string  GLpathCoordToString  (GLuint num, GLenum t, const void *v); // glPathCommandsNV etc
 
   // Bitfield strings
 

@@ -53,7 +53,7 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Lookup {
 
-const char * const gl_Name[2700] = {
+const char * const gl_Name[2701] = {
   "glAccum",
   "glActiveProgramEXT",
   "glActiveShaderProgram",
@@ -962,6 +962,7 @@ const char * const gl_Name[2700] = {
   "glGetPointerv",
   "glGetPointervEXT",
   "glGetPolygonStipple",
+  "glGetProcAddressREGAL",
   "glGetProgramBinary",
   "glGetProgramBinaryOES",
   "glGetProgramEnvParameterIivNV",
@@ -2756,7 +2757,7 @@ const char * const gl_Name[2700] = {
   NULL
 };
 
-const void *gl_Value[2700] = {
+const void *gl_Value[2701] = {
   (void *)(glAccum),
   (void *)(glActiveProgramEXT),
   (void *)(glActiveShaderProgram),
@@ -3665,6 +3666,7 @@ const void *gl_Value[2700] = {
   (void *)(glGetPointerv),
   (void *)(glGetPointervEXT),
   (void *)(glGetPolygonStipple),
+  (void *)(glGetProcAddressREGAL),
   (void *)(glGetProgramBinary),
   (void *)(glGetProgramBinaryOES),
   (void *)(glGetProgramEnvParameterIivNV),
@@ -5459,7 +5461,7 @@ const void *gl_Value[2700] = {
   NULL
 };
 
-const size_t gl_Offset[2700] = {
+const size_t gl_Offset[2701] = {
   offsetof(Dispatch::GL,glAccum)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveProgramEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glActiveShaderProgram)/sizeof(void *),
@@ -6368,6 +6370,7 @@ const size_t gl_Offset[2700] = {
   offsetof(Dispatch::GL,glGetPointerv)/sizeof(void *),
   offsetof(Dispatch::GL,glGetPointervEXT)/sizeof(void *),
   offsetof(Dispatch::GL,glGetPolygonStipple)/sizeof(void *),
+  0,
   offsetof(Dispatch::GL,glGetProgramBinary)/sizeof(void *),
   offsetof(Dispatch::GL,glGetProgramBinaryOES)/sizeof(void *),
   offsetof(Dispatch::GL,glGetProgramEnvParameterIivNV)/sizeof(void *),

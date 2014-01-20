@@ -247,6 +247,7 @@ GL_BLUE_BITS = Enumerant('GL_BLUE_BITS', 0x0d54, 'GL_VERSION_1_1')
 GL_BLUE_BITS.esVersions = [2.0]
 GL_BLUE_SCALE = Enumerant('GL_BLUE_SCALE', 0x0d1a, 'GL_VERSION_1_1')
 GL_BYTE = Enumerant('GL_BYTE', 0x1400, 'GL_VERSION_1_1')
+GL_BYTE.group = ['pathCoord']
 GL_BYTE.esVersions = [2.0]
 GL_C3F_V3F = Enumerant('GL_C3F_V3F', 0x2a24, 'GL_VERSION_1_1')
 GL_C4F_N3F_V3F = Enumerant('GL_C4F_N3F_V3F', 0x2a26, 'GL_VERSION_1_1')
@@ -377,6 +378,7 @@ GL_FEEDBACK_BUFFER_TYPE = Enumerant('GL_FEEDBACK_BUFFER_TYPE', 0x0df2, 'GL_VERSI
 GL_FILL = Enumerant('GL_FILL', 0x1b02, 'GL_VERSION_1_1')
 GL_FLAT = Enumerant('GL_FLAT', 0x1d00, 'GL_VERSION_1_1')
 GL_FLOAT = Enumerant('GL_FLOAT', 0x1406, 'GL_VERSION_1_1')
+GL_FLOAT.group = ['pathCoord']
 GL_FLOAT.esVersions = [2.0]
 GL_FOG = Enumerant('GL_FOG', 0x0b60, 'GL_VERSION_1_1')
 GL_FOG_BIT = Enumerant('GL_FOG_BIT', 0x0080, 'GL_VERSION_1_1')
@@ -721,6 +723,7 @@ GL_SET = Enumerant('GL_SET', 0x150f, 'GL_VERSION_1_1')
 GL_SHADE_MODEL = Enumerant('GL_SHADE_MODEL', 0x0b54, 'GL_VERSION_1_1')
 GL_SHININESS = Enumerant('GL_SHININESS', 0x1601, 'GL_VERSION_1_1')
 GL_SHORT = Enumerant('GL_SHORT', 0x1402, 'GL_VERSION_1_1')
+GL_SHORT.group = ['pathCoord']
 GL_SHORT.esVersions = [2.0]
 GL_SMOOTH = Enumerant('GL_SMOOTH', 0x1d01, 'GL_VERSION_1_1')
 GL_SPECULAR = Enumerant('GL_SPECULAR', 0x1202, 'GL_VERSION_1_1')
@@ -840,10 +843,12 @@ GL_UNPACK_SKIP_PIXELS = Enumerant('GL_UNPACK_SKIP_PIXELS', 0x0cf4, 'GL_VERSION_1
 GL_UNPACK_SKIP_ROWS = Enumerant('GL_UNPACK_SKIP_ROWS', 0x0cf3, 'GL_VERSION_1_1')
 GL_UNPACK_SWAP_BYTES = Enumerant('GL_UNPACK_SWAP_BYTES', 0x0cf0, 'GL_VERSION_1_1')
 GL_UNSIGNED_BYTE = Enumerant('GL_UNSIGNED_BYTE', 0x1401, 'GL_VERSION_1_1')
+GL_UNSIGNED_BYTE.group = ['pathCoord']
 GL_UNSIGNED_BYTE.esVersions = [2.0]
 GL_UNSIGNED_INT = Enumerant('GL_UNSIGNED_INT', 0x1405, 'GL_VERSION_1_1')
 GL_UNSIGNED_INT.esVersions = [2.0]
 GL_UNSIGNED_SHORT = Enumerant('GL_UNSIGNED_SHORT', 0x1403, 'GL_VERSION_1_1')
+GL_UNSIGNED_SHORT.group = ['pathCoord']
 GL_UNSIGNED_SHORT.esVersions = [2.0]
 GL_V2F = Enumerant('GL_V2F', 0x2a20, 'GL_VERSION_1_1')
 GL_V3F = Enumerant('GL_V3F', 0x2a21, 'GL_VERSION_1_1')
@@ -9653,20 +9658,31 @@ GL_ADJACENT_PAIRS_NV = Enumerant('GL_ADJACENT_PAIRS_NV', 0x90ae, 'GL_NV_path_ren
 GL_AFFINE_2D_NV = Enumerant('GL_AFFINE_2D_NV', 0x9092, 'GL_NV_path_rendering')
 GL_AFFINE_3D_NV = Enumerant('GL_AFFINE_3D_NV', 0x9094, 'GL_NV_path_rendering')
 GL_ARC_TO_NV = Enumerant('GL_ARC_TO_NV', 0x00fe, 'GL_NV_path_rendering')
+GL_ARC_TO_NV.group = ['pathCommand']
+GL_ARC_TO_NV.alias = ['A']
 GL_BEVEL_NV = Enumerant('GL_BEVEL_NV', 0x90a6, 'GL_NV_path_rendering')
 GL_BOLD_BIT_NV = Enumerant('GL_BOLD_BIT_NV', 0x0001, 'GL_NV_path_rendering')
 GL_BOUNDING_BOX_NV = Enumerant('GL_BOUNDING_BOX_NV', 0x908d, 'GL_NV_path_rendering')
 GL_BOUNDING_BOX_OF_BOUNDING_BOXES_NV = Enumerant('GL_BOUNDING_BOX_OF_BOUNDING_BOXES_NV', 0x909c, 'GL_NV_path_rendering')
 GL_CIRCULAR_CCW_ARC_TO_NV = Enumerant('GL_CIRCULAR_CCW_ARC_TO_NV', 0x00f8, 'GL_NV_path_rendering')
+GL_CIRCULAR_CCW_ARC_TO_NV.group = ['pathCommand']
 GL_CIRCULAR_CW_ARC_TO_NV = Enumerant('GL_CIRCULAR_CW_ARC_TO_NV', 0x00fa, 'GL_NV_path_rendering')
+GL_CIRCULAR_CW_ARC_TO_NV.group = ['pathCommand']
 GL_CIRCULAR_TANGENT_ARC_TO_NV = Enumerant('GL_CIRCULAR_TANGENT_ARC_TO_NV', 0x00fc, 'GL_NV_path_rendering')
+GL_CIRCULAR_TANGENT_ARC_TO_NV.group = ['pathCommand']
 GL_CLOSE_PATH_NV = Enumerant('GL_CLOSE_PATH_NV', 0x0000, 'GL_NV_path_rendering')
+GL_CLOSE_PATH_NV.group = ['pathCommand']
+GL_CLOSE_PATH_NV.alias = ['z','Z']
 GL_CONVEX_HULL_NV = Enumerant('GL_CONVEX_HULL_NV', 0x908b, 'GL_NV_path_rendering')
 GL_COUNT_DOWN_NV = Enumerant('GL_COUNT_DOWN_NV', 0x9089, 'GL_NV_path_rendering')
 GL_COUNT_UP_NV = Enumerant('GL_COUNT_UP_NV', 0x9088, 'GL_NV_path_rendering')
 GL_CUBIC_CURVE_TO_NV = Enumerant('GL_CUBIC_CURVE_TO_NV', 0x000c, 'GL_NV_path_rendering')
+GL_CUBIC_CURVE_TO_NV.group = ['pathCommand']
+GL_CUBIC_CURVE_TO_NV.alias = ['C']
 GL_DUP_FIRST_CUBIC_CURVE_TO_NV = Enumerant('GL_DUP_FIRST_CUBIC_CURVE_TO_NV', 0x00f2, 'GL_NV_path_rendering')
+GL_DUP_FIRST_CUBIC_CURVE_TO_NV.group = ['pathCommand']
 GL_DUP_LAST_CUBIC_CURVE_TO_NV = Enumerant('GL_DUP_LAST_CUBIC_CURVE_TO_NV', 0x00f4, 'GL_NV_path_rendering')
+GL_DUP_LAST_CUBIC_CURVE_TO_NV.group = ['pathCommand']
 GL_FILE_NAME_NV = Enumerant('GL_FILE_NAME_NV', 0x9074, 'GL_NV_path_rendering')
 GL_FIRST_TO_REST_NV = Enumerant('GL_FIRST_TO_REST_NV', 0x90af, 'GL_NV_path_rendering')
 GL_FONT_ASCENDER_BIT_NV = Enumerant('GL_FONT_ASCENDER_BIT_NV', 0x200000, 'GL_NV_path_rendering')
@@ -9692,14 +9708,22 @@ GL_GLYPH_VERTICAL_BEARING_X_BIT_NV = Enumerant('GL_GLYPH_VERTICAL_BEARING_X_BIT_
 GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV = Enumerant('GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV', 0x0040, 'GL_NV_path_rendering')
 GL_GLYPH_WIDTH_BIT_NV = Enumerant('GL_GLYPH_WIDTH_BIT_NV', 0x0001, 'GL_NV_path_rendering')
 GL_HORIZONTAL_LINE_TO_NV = Enumerant('GL_HORIZONTAL_LINE_TO_NV', 0x0006, 'GL_NV_path_rendering')
+GL_HORIZONTAL_LINE_TO_NV.group = ['pathCommand']
+GL_HORIZONTAL_LINE_TO_NV.alias = ['H']
 GL_ITALIC_BIT_NV = Enumerant('GL_ITALIC_BIT_NV', 0x0002, 'GL_NV_path_rendering')
 GL_LARGE_CCW_ARC_TO_NV = Enumerant('GL_LARGE_CCW_ARC_TO_NV', 0x0016, 'GL_NV_path_rendering')
+GL_LARGE_CCW_ARC_TO_NV.group = ['pathCommand']
 GL_LARGE_CW_ARC_TO_NV = Enumerant('GL_LARGE_CW_ARC_TO_NV', 0x0018, 'GL_NV_path_rendering')
+GL_LARGE_CW_ARC_TO_NV.group = ['pathCommand']
 GL_LINE_TO_NV = Enumerant('GL_LINE_TO_NV', 0x0004, 'GL_NV_path_rendering')
+GL_LINE_TO_NV.group = ['pathCommand']
+GL_LINE_TO_NV.alias = ['L']
 GL_MITER_REVERT_NV = Enumerant('GL_MITER_REVERT_NV', 0x90a7, 'GL_NV_path_rendering')
 GL_MITER_TRUNCATE_NV = Enumerant('GL_MITER_TRUNCATE_NV', 0x90a8, 'GL_NV_path_rendering')
 GL_MOVE_TO_CONTINUES_NV = Enumerant('GL_MOVE_TO_CONTINUES_NV', 0x90b6, 'GL_NV_path_rendering')
 GL_MOVE_TO_NV = Enumerant('GL_MOVE_TO_NV', 0x0002, 'GL_NV_path_rendering')
+GL_MOVE_TO_NV.group = ['pathCommand']
+GL_MOVE_TO_NV.alias = ['M']
 GL_MOVE_TO_RESETS_NV = Enumerant('GL_MOVE_TO_RESETS_NV', 0x90b5, 'GL_NV_path_rendering')
 GL_PATH_CLIENT_LENGTH_NV = Enumerant('GL_PATH_CLIENT_LENGTH_NV', 0x907f, 'GL_NV_path_rendering')
 GL_PATH_COMMAND_COUNT_NV = Enumerant('GL_PATH_COMMAND_COUNT_NV', 0x909d, 'GL_NV_path_rendering')
@@ -9740,27 +9764,59 @@ GL_PATH_STROKE_WIDTH_NV = Enumerant('GL_PATH_STROKE_WIDTH_NV', 0x9075, 'GL_NV_pa
 GL_PATH_TERMINAL_DASH_CAP_NV = Enumerant('GL_PATH_TERMINAL_DASH_CAP_NV', 0x907d, 'GL_NV_path_rendering')
 GL_PATH_TERMINAL_END_CAP_NV = Enumerant('GL_PATH_TERMINAL_END_CAP_NV', 0x9078, 'GL_NV_path_rendering')
 GL_QUADRATIC_CURVE_TO_NV = Enumerant('GL_QUADRATIC_CURVE_TO_NV', 0x000a, 'GL_NV_path_rendering')
+GL_QUADRATIC_CURVE_TO_NV.group = ['pathCommand']
+GL_QUADRATIC_CURVE_TO_NV.alias = ['Q']
 GL_RECT_NV = Enumerant('GL_RECT_NV', 0x00f6, 'GL_NV_path_rendering')
+GL_RECT_NV.group = ['pathCommand']
 GL_RELATIVE_ARC_TO_NV = Enumerant('GL_RELATIVE_ARC_TO_NV', 0x00ff, 'GL_NV_path_rendering')
+GL_RELATIVE_ARC_TO_NV.group = ['pathCommand']
+GL_RELATIVE_ARC_TO_NV.alias = ['a']
 GL_RELATIVE_CUBIC_CURVE_TO_NV = Enumerant('GL_RELATIVE_CUBIC_CURVE_TO_NV', 0x000d, 'GL_NV_path_rendering')
+GL_RELATIVE_CUBIC_CURVE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_CUBIC_CURVE_TO_NV.alias = ['c']
 GL_RELATIVE_HORIZONTAL_LINE_TO_NV = Enumerant('GL_RELATIVE_HORIZONTAL_LINE_TO_NV', 0x0007, 'GL_NV_path_rendering')
+GL_RELATIVE_HORIZONTAL_LINE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_HORIZONTAL_LINE_TO_NV.alias = ['h']
 GL_RELATIVE_LARGE_CCW_ARC_TO_NV = Enumerant('GL_RELATIVE_LARGE_CCW_ARC_TO_NV', 0x0017, 'GL_NV_path_rendering')
+GL_RELATIVE_LARGE_CCW_ARC_TO_NV.group = ['pathCommand']
 GL_RELATIVE_LARGE_CW_ARC_TO_NV = Enumerant('GL_RELATIVE_LARGE_CW_ARC_TO_NV', 0x0019, 'GL_NV_path_rendering')
+GL_RELATIVE_LARGE_CW_ARC_TO_NV.group = ['pathCommand']
 GL_RELATIVE_LINE_TO_NV = Enumerant('GL_RELATIVE_LINE_TO_NV', 0x0005, 'GL_NV_path_rendering')
+GL_RELATIVE_LINE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_LINE_TO_NV.alias = ['l']
 GL_RELATIVE_MOVE_TO_NV = Enumerant('GL_RELATIVE_MOVE_TO_NV', 0x0003, 'GL_NV_path_rendering')
+GL_RELATIVE_MOVE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_MOVE_TO_NV.alias = ['m']
 GL_RELATIVE_QUADRATIC_CURVE_TO_NV = Enumerant('GL_RELATIVE_QUADRATIC_CURVE_TO_NV', 0x000b, 'GL_NV_path_rendering')
+GL_RELATIVE_QUADRATIC_CURVE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_QUADRATIC_CURVE_TO_NV.alias = ['q']
 GL_RELATIVE_SMALL_CCW_ARC_TO_NV = Enumerant('GL_RELATIVE_SMALL_CCW_ARC_TO_NV', 0x0013, 'GL_NV_path_rendering')
+GL_RELATIVE_SMALL_CCW_ARC_TO_NV.group = ['pathCommand']
 GL_RELATIVE_SMALL_CW_ARC_TO_NV = Enumerant('GL_RELATIVE_SMALL_CW_ARC_TO_NV', 0x0015, 'GL_NV_path_rendering')
+GL_RELATIVE_SMALL_CW_ARC_TO_NV.group = ['pathCommand']
 GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV = Enumerant('GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV', 0x0011, 'GL_NV_path_rendering')
+GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV.alias = ['s']
 GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV = Enumerant('GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV', 0x000f, 'GL_NV_path_rendering')
+GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV.alias = ['t']
 GL_RELATIVE_VERTICAL_LINE_TO_NV = Enumerant('GL_RELATIVE_VERTICAL_LINE_TO_NV', 0x0009, 'GL_NV_path_rendering')
+GL_RELATIVE_VERTICAL_LINE_TO_NV.group = ['pathCommand']
+GL_RELATIVE_VERTICAL_LINE_TO_NV.alias = ['v']
 GL_RESTART_PATH_NV = Enumerant('GL_RESTART_PATH_NV', 0x00f0, 'GL_NV_path_rendering')
+GL_RESTART_PATH_NV.group = ['pathCommand']
 GL_ROUND_NV = Enumerant('GL_ROUND_NV', 0x90a4, 'GL_NV_path_rendering')
 GL_SKIP_MISSING_GLYPH_NV = Enumerant('GL_SKIP_MISSING_GLYPH_NV', 0x90a9, 'GL_NV_path_rendering')
 GL_SMALL_CCW_ARC_TO_NV = Enumerant('GL_SMALL_CCW_ARC_TO_NV', 0x0012, 'GL_NV_path_rendering')
+GL_SMALL_CCW_ARC_TO_NV.group = ['pathCommand']
 GL_SMALL_CW_ARC_TO_NV = Enumerant('GL_SMALL_CW_ARC_TO_NV', 0x0014, 'GL_NV_path_rendering')
+GL_SMALL_CW_ARC_TO_NV.group = ['pathCommand']
 GL_SMOOTH_CUBIC_CURVE_TO_NV = Enumerant('GL_SMOOTH_CUBIC_CURVE_TO_NV', 0x0010, 'GL_NV_path_rendering')
+GL_SMOOTH_CUBIC_CURVE_TO_NV.group = ['pathCommand']
+GL_SMOOTH_CUBIC_CURVE_TO_NV.alias = ['S']
 GL_SMOOTH_QUADRATIC_CURVE_TO_NV = Enumerant('GL_SMOOTH_QUADRATIC_CURVE_TO_NV', 0x000e, 'GL_NV_path_rendering')
+GL_SMOOTH_QUADRATIC_CURVE_TO_NV.group = ['pathCommand']
+GL_SMOOTH_QUADRATIC_CURVE_TO_NV.alias = ['T']
 GL_SQUARE_NV = Enumerant('GL_SQUARE_NV', 0x90a3, 'GL_NV_path_rendering')
 GL_STANDARD_FONT_NAME_NV = Enumerant('GL_STANDARD_FONT_NAME_NV', 0x9072, 'GL_NV_path_rendering')
 GL_SYSTEM_FONT_NAME_NV = Enumerant('GL_SYSTEM_FONT_NAME_NV', 0x9073, 'GL_NV_path_rendering')
@@ -9775,6 +9831,8 @@ GL_USE_MISSING_GLYPH_NV = Enumerant('GL_USE_MISSING_GLYPH_NV', 0x90aa, 'GL_NV_pa
 GL_UTF16_NV = Enumerant('GL_UTF16_NV', 0x909b, 'GL_NV_path_rendering')
 GL_UTF8_NV = Enumerant('GL_UTF8_NV', 0x909a, 'GL_NV_path_rendering')
 GL_VERTICAL_LINE_TO_NV = Enumerant('GL_VERTICAL_LINE_TO_NV', 0x0008, 'GL_NV_path_rendering')
+GL_VERTICAL_LINE_TO_NV.group = ['pathCommand']
+GL_VERTICAL_LINE_TO_NV.alias = ['V']
 
 defines.add(GL_ACCUM_ADJACENT_PAIRS_NV)
 defines.add(GL_ADJACENT_PAIRS_NV)
@@ -37782,10 +37840,10 @@ glPathCommandsNV = Function('glPathCommandsNV')
 glPathCommandsNV.ret = Return('void')
 glPathCommandsNV.add( Input( 'path','GLuint' ))
 glPathCommandsNV.add( Input( 'numCommands','GLsizei' ))
-glPathCommandsNV.add( Input( 'commands','const GLubyte *' ))
+glPathCommandsNV.add( Input( 'commands','const GLubyte *' ,regalLog = 'Token::GLpathCommandToString(numCommands,commands)' ))
 glPathCommandsNV.add( Input( 'numCoords','GLsizei' ))
-glPathCommandsNV.add( Input( 'coordType','GLenum' ))
-glPathCommandsNV.add( Input( 'coords','const GLvoid *' ))
+glPathCommandsNV.add( Input( 'coordType','GLenum' ,regalLog = 'Token::GLpathCoordToString(coordType)' ))
+glPathCommandsNV.add( Input( 'coords','const GLvoid *' ,regalLog = 'Token::GLpathCoordToString(numCoords,coordType,coords)' ))
 glPathCommandsNV.version = ''
 glPathCommandsNV.category = 'GL_NV_path_rendering'
 glPathCommandsNV.trace = True
@@ -37951,10 +38009,10 @@ glPathSubCommandsNV.add( Input( 'path','GLuint' ))
 glPathSubCommandsNV.add( Input( 'commandStart','GLsizei' ))
 glPathSubCommandsNV.add( Input( 'commandsToDelete','GLsizei' ))
 glPathSubCommandsNV.add( Input( 'numCommands','GLsizei' ))
-glPathSubCommandsNV.add( Input( 'commands','const GLubyte *' ))
+glPathSubCommandsNV.add( Input( 'commands','const GLubyte *' ,regalLog = 'Token::GLpathCommandToString(numCommands,commands)' ))
 glPathSubCommandsNV.add( Input( 'numCoords','GLsizei' ))
-glPathSubCommandsNV.add( Input( 'coordType','GLenum' ))
-glPathSubCommandsNV.add( Input( 'coords','const GLvoid *' ))
+glPathSubCommandsNV.add( Input( 'coordType','GLenum' ,regalLog = 'Token::GLpathCoordToString(coordType)' ))
+glPathSubCommandsNV.add( Input( 'coords','const GLvoid *' ,regalLog = 'Token::GLpathCoordToString(numCoords,coordType,coords)' ))
 glPathSubCommandsNV.version = ''
 glPathSubCommandsNV.category = 'GL_NV_path_rendering'
 glPathSubCommandsNV.trace = True
@@ -37966,8 +38024,8 @@ glPathSubCoordsNV.ret = Return('void')
 glPathSubCoordsNV.add( Input( 'path','GLuint' ))
 glPathSubCoordsNV.add( Input( 'coordStart','GLsizei' ))
 glPathSubCoordsNV.add( Input( 'numCoords','GLsizei' ))
-glPathSubCoordsNV.add( Input( 'coordType','GLenum' ))
-glPathSubCoordsNV.add( Input( 'coords','const GLvoid *' ))
+glPathSubCoordsNV.add( Input( 'coordType','GLenum' ,regalLog = 'Token::GLpathCoordToString(coordType)' ))
+glPathSubCoordsNV.add( Input( 'coords','const GLvoid *' ,regalLog = 'Token::GLpathCoordToString(numCoords,coordType,coords)' ))
 glPathSubCoordsNV.version = ''
 glPathSubCoordsNV.category = 'GL_NV_path_rendering'
 glPathSubCoordsNV.trace = True
@@ -41631,6 +41689,18 @@ glLogMessageCallbackREGAL.category = 'GL_REGAL_log'
 glLogMessageCallbackREGAL.trace = True
 glLogMessageCallbackREGAL.play = True
 gl.add(glLogMessageCallbackREGAL)
+
+# GL_REGAL_proc_address
+
+glGetProcAddressREGAL = Function('glGetProcAddressREGAL')
+glGetProcAddressREGAL.ret = Return('void *')
+glGetProcAddressREGAL.add( Input( 'name','const GLchar *' ))
+glGetProcAddressREGAL.version = '4.1'
+glGetProcAddressREGAL.category = 'GL_REGAL_proc_address'
+glGetProcAddressREGAL.regalOnly = True
+glGetProcAddressREGAL.trace = True
+glGetProcAddressREGAL.play = True
+gl.add(glGetProcAddressREGAL)
 
 # GL_SGIS_detail_texture
 

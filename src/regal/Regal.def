@@ -908,6 +908,7 @@ EXPORTS
   glGetPointerv
   glGetPointervEXT
   glGetPolygonStipple
+  glGetProcAddressREGAL
   glGetProgramBinary
   glGetProgramBinaryOES
   glGetProgramEnvParameterIivNV

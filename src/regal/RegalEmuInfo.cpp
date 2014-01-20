@@ -277,6 +277,7 @@ EmuInfo::getExtension(const ContextInfo &contextInfo, const char *ext) const
   if (!strcmp(ext,"GL_REGAL_error_string"))             return true;
   if (!strcmp(ext,"GL_REGAL_extension_query"))          return true;
   if (!strcmp(ext,"GL_REGAL_log"))                      return true;
+  if (!strcmp(ext,"GL_REGAL_proc_address"))             return true;
 
   return false;
 }
