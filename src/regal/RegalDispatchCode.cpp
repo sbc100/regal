@@ -13690,22 +13690,22 @@ static void REGAL_CALL code_glClearNamedBufferDataEXT(GLuint buffer, GLenum inte
       fprintf(_context->codeSource,"%s",_code.str().c_str());
 }
 
-static void REGAL_CALL code_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+static void REGAL_CALL code_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(_context);
     DispatchTableGL *_next = _context->dispatcher.code.next();
     RegalAssert(_next);
-    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
+    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
     std::string indent((_context->depthBeginEnd + _context->depthPushAttrib + 1)*2,' ');
     string_list< ::std::string > _code;
     _code << indent << "glClearNamedBufferSubDataEXT(";
                    _code << buffer;
     _code << ", "; _code << toString(internalformat);
-    _code << ", "; _code << toString(format);
-    _code << ", "; _code << toString(type);
     _code << ", "; _code << offset;
     _code << ", "; _code << size;
+    _code << ", "; _code << toString(format);
+    _code << ", "; _code << toString(type);
     _code << ", "; _code << data;
     _code << ");\n";
     if (_context->codeSource)

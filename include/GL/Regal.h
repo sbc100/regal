@@ -3731,7 +3731,7 @@ REGAL_DECL GLsync REGAL_CALL plugin_glCreateSyncFromCLeventARB(cl_context contex
 typedef void (REGAL_CALL *PFNGLCLEARBUFFERDATAPROC)(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 typedef void (REGAL_CALL *PFNGLCLEARBUFFERSUBDATAPROC)(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERDATAEXTPROC)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
+typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 #endif
 
 #ifndef REGAL_NO_NAMESPACE_GL_ARB_CLEAR_BUFFER_OBJECT
@@ -3745,14 +3745,14 @@ typedef void (REGAL_CALL *PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)(GLuint buffer, GL
 REGAL_DECL void REGAL_CALL glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
+REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 #endif
 
 #ifndef REGAL_NO_PLUGIN_GL_ARB_CLEAR_BUFFER_OBJECT
 REGAL_DECL void REGAL_CALL plugin_glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL plugin_glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
+REGAL_DECL void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 #endif
 
 /**

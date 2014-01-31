@@ -60,7 +60,7 @@
 		43FC5FA215C4619B00D0177C /* RegalUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43FC5F7515C4619B00D0177C /* RegalUtil.cpp */; };
 		43FC5FA315C4619B00D0177C /* RegalUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FC5F7615C4619B00D0177C /* RegalUtil.h */; };
 		43FC5FA415C4619B00D0177C /* RegalVao.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FC5F7715C4619B00D0177C /* RegalVao.h */; };
-		43FC5FA715C461AC00D0177C /* mongoose.c in Sources */ = {isa = PBXBuildFile; fileRef = 43FC5FA615C461AC00D0177C /* mongoose.c */; };
+		43FC5FA715C461AC00D0177C /* civetweb.c in Sources */ = {isa = PBXBuildFile; fileRef = 43FC5FA615C461AC00D0177C /* civetweb.c */; };
 		754D3C9517CFFD7200E4C0E0 /* RegalEmu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 754D3C9417CFFD7200E4C0E0 /* RegalEmu.cpp */; };
 		75694C8E17EB913B00B8AD9D /* RegalQuads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75694C8C17EB913B00B8AD9D /* RegalQuads.cpp */; };
 		75694C8F17EB913B00B8AD9D /* RegalQuads.h in Headers */ = {isa = PBXBuildFile; fileRef = 75694C8D17EB913B00B8AD9D /* RegalQuads.h */; };
@@ -236,7 +236,7 @@
 		43FC5F7515C4619B00D0177C /* RegalUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalUtil.cpp; path = ../../../src/regal/RegalUtil.cpp; sourceTree = "<group>"; };
 		43FC5F7615C4619B00D0177C /* RegalUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalUtil.h; path = ../../../src/regal/RegalUtil.h; sourceTree = "<group>"; };
 		43FC5F7715C4619B00D0177C /* RegalVao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalVao.h; path = ../../../src/regal/RegalVao.h; sourceTree = "<group>"; };
-		43FC5FA615C461AC00D0177C /* mongoose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mongoose.c; path = ../../../src/mongoose/mongoose.c; sourceTree = "<group>"; };
+		43FC5FA615C461AC00D0177C /* civetweb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = civetweb.c; path = ../../../src/civetweb/civetweb.c; sourceTree = "<group>"; };
 		754D3C9417CFFD7200E4C0E0 /* RegalEmu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalEmu.cpp; path = ../../../src/regal/RegalEmu.cpp; sourceTree = "<group>"; };
 		75694C8C17EB913B00B8AD9D /* RegalQuads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalQuads.cpp; path = ../../../src/regal/RegalQuads.cpp; sourceTree = "<group>"; };
 		75694C8D17EB913B00B8AD9D /* RegalQuads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalQuads.h; path = ../../../src/regal/RegalQuads.h; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 				BCDF6697178F16E100EE9569 /* apitrace */,
 				43FC5F4B15C4619B00D0177C /* linear.h */,
 				BC020956160D1C65003FAB99 /* md5 */,
-				43FC5FA515C461A100D0177C /* mongoose */,
+				43FC5FA515C461A100D0177C /* civetweb */,
 				43FC5F4C15C4619B00D0177C /* Regal.cpp */,
 				BC59F9CA174809EE004BC2AC /* RegalBaseVertex.h */,
 				43FC5F4D15C4619B00D0177C /* RegalBin.h */,
@@ -524,12 +524,12 @@
 			name = Regal;
 			sourceTree = "<group>";
 		};
-		43FC5FA515C461A100D0177C /* mongoose */ = {
+		43FC5FA515C461A100D0177C /* civetweb */ = {
 			isa = PBXGroup;
 			children = (
-				43FC5FA615C461AC00D0177C /* mongoose.c */,
+				43FC5FA615C461AC00D0177C /* civetweb.c */,
 			);
-			name = mongoose;
+			name = civetweb;
 			sourceTree = "<group>";
 		};
 		BC020956160D1C65003FAB99 /* md5 */ = {
@@ -790,7 +790,7 @@
 				43FC5F9715C4619B00D0177C /* RegalLookup.cpp in Sources */,
 				43FC5FA015C4619B00D0177C /* RegalToken.cpp in Sources */,
 				43FC5FA215C4619B00D0177C /* RegalUtil.cpp in Sources */,
-				43FC5FA715C461AC00D0177C /* mongoose.c in Sources */,
+				43FC5FA715C461AC00D0177C /* civetweb.c in Sources */,
 				4366EEEF15C9B54E00211205 /* RegalFavicon.cpp in Sources */,
 				4366EEF115C9B54E00211205 /* RegalMac.cpp in Sources */,
 				BC921A5E15D5624600E52C91 /* RegalDispatchMissing.cpp in Sources */,
@@ -925,7 +925,7 @@
 					../../../include,
 					../../../src/boost,
 					../../../src/md5/include,
-					../../../src/mongoose,
+					../../../src/civetweb,
 					../../../src/lookup3,
 					../../../src/apitrace/common,
 					../../../src/apitrace/dispatch,
@@ -957,7 +957,7 @@
 					../../../include,
 					../../../src/boost,
 					../../../src/md5/include,
-					../../../src/mongoose,
+					../../../src/civetweb,
 					../../../src/lookup3,
 					../../../src/apitrace/common,
 					../../../src/apitrace/dispatch,

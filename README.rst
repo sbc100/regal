@@ -334,9 +334,11 @@ Linux
 
  * 32-bit:
 
-  ``$ sudo yum install zlib-devel libpng-devel libXmu-devel libXi-devel``
+  ``$ sudo yum install gcc-c++ zlib-devel libpng-devel libXmu-devel libXi-devel``
 
  * 64-bit
+
+  ``$ sudo yum install gcc-c++``
 
   ``$ sudo yum install zlib-devel.i686   libpng-devel.i686``
 

@@ -25,7 +25,7 @@ Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "Regalglewlib", "Regalglewli
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "mongooselib", "mongooselib.vcxproj", "{256E64B8-F766-061C-45F8-25B51B7CA24E}"
+Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "civetweblib", "civetweblib.vcxproj", "{DF066256-E0AD-E016-6F07-52E868F96C02}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -123,14 +123,14 @@ Global
 		{EB036E23-0C3C-CD7C-5456-A9C5E6209A4C}.Release|Win32.ActiveCfg = Release|Win32
 		{EB036E23-0C3C-CD7C-5456-A9C5E6209A4C}.Release|x64.Build.0 = Release|x64
 		{EB036E23-0C3C-CD7C-5456-A9C5E6209A4C}.Release|x64.ActiveCfg = Release|x64
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Debug|Win32.Build.0 = Debug|Win32
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Debug|x64.Build.0 = Debug|x64
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Debug|x64.ActiveCfg = Debug|x64
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Release|Win32.Build.0 = Release|Win32
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Release|Win32.ActiveCfg = Release|Win32
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Release|x64.Build.0 = Release|x64
-		{256E64B8-F766-061C-45F8-25B51B7CA24E}.Release|x64.ActiveCfg = Release|x64
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Debug|Win32.Build.0 = Debug|Win32
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Debug|x64.Build.0 = Debug|x64
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Debug|x64.ActiveCfg = Debug|x64
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Release|Win32.Build.0 = Release|Win32
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Release|Win32.ActiveCfg = Release|Win32
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Release|x64.Build.0 = Release|x64
+		{DF066256-E0AD-E016-6F07-52E868F96C02}.Release|x64.ActiveCfg = Release|x64
 		{EF516F6A-1965-7089-C2CA-65778D394F08}.Debug|Win32.Build.0 = Debug|Win32
 		{EF516F6A-1965-7089-C2CA-65778D394F08}.Debug|Win32.ActiveCfg = Debug|Win32
 		{EF516F6A-1965-7089-C2CA-65778D394F08}.Debug|x64.Build.0 = Debug|x64

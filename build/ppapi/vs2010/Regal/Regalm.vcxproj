@@ -66,7 +66,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>REGAL_WIN_TLS=1;REGAL_NAMESPACE;REGAL_DECL_EXPORT;REGAL_SYS_WGL_DECLARE_WGL;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -82,7 +82,7 @@
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>civetweblib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Release\Win32\regalm32.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -104,7 +104,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>REGAL_WIN_TLS=1;REGAL_NAMESPACE;REGAL_DECL_EXPORT;REGAL_SYS_WGL_DECLARE_WGL;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -120,7 +120,7 @@
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>civetweblib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Debug\Win32\regalm32.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -142,12 +142,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">
     <Link>
-      <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ppapi_cpp.lib;ppapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
+      <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;civetweblib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ppapi_cpp.lib;ppapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
       <ModuleDefinitionFile>../../../../src/regal/RegalPPAPI.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>win\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>PPAPI;REGAL_NO_TLS;REGAL_WIN_TLS=0;REGAL_DECL_EXPORT;REGAL_SYS_WGL_DECLARE_WGL;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
@@ -155,12 +155,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">
     <Link>
-      <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;mongooselib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
+      <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;civetweblib.lib;md5lib.lib;pnglib.lib;zlib.lib;ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
       <ModuleDefinitionFile>../../../../src/regal/RegalPPAPI.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>win\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>PPAPI;REGAL_NO_TLS;REGAL_WIN_TLS=0;REGAL_DECL_EXPORT;REGAL_SYS_WGL_DECLARE_WGL;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

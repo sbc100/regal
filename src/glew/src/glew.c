@@ -12570,6 +12570,8 @@ PFNGLXSWAPINTERVALMESAPROC __glewXSwapIntervalMESA = NULL;
 
 PFNGLXCOPYIMAGESUBDATANVPROC __glewXCopyImageSubDataNV = NULL;
 
+PFNGLXDELAYBEFORESWAPNVPROC __glewXDelayBeforeSwapNV = NULL;
+
 PFNGLXBINDVIDEODEVICENVPROC __glewXBindVideoDeviceNV = NULL;
 PFNGLXENUMERATEVIDEODEVICESNVPROC __glewXEnumerateVideoDevicesNV = NULL;
 
@@ -12691,6 +12693,7 @@ GLboolean __GLXEW_MESA_release_buffers = GL_FALSE;
 GLboolean __GLXEW_MESA_set_3dfx_mode = GL_FALSE;
 GLboolean __GLXEW_MESA_swap_control = GL_FALSE;
 GLboolean __GLXEW_NV_copy_image = GL_FALSE;
+GLboolean __GLXEW_NV_delay_before_swap = GL_FALSE;
 GLboolean __GLXEW_NV_float_buffer = GL_FALSE;
 GLboolean __GLXEW_NV_multisample_coverage = GL_FALSE;
 GLboolean __GLXEW_NV_present_video = GL_FALSE;
@@ -13033,6 +13036,19 @@ static GLboolean _glewInit_GLX_NV_copy_image (GLXEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GLX_NV_copy_image */
+
+#ifdef GLX_NV_delay_before_swap
+
+static GLboolean _glewInit_GLX_NV_delay_before_swap (GLXEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((glXDelayBeforeSwapNV = (PFNGLXDELAYBEFORESWAPNVPROC)glewGetProcAddress((const GLubyte*)"glXDelayBeforeSwapNV")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GLX_NV_delay_before_swap */
 
 #ifdef GLX_NV_float_buffer
 
@@ -13515,6 +13531,10 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLXEW_NV_copy_image) = _glewSearchExtension("GLX_NV_copy_image", extStart, extEnd);
   if (glewExperimental || GLXEW_NV_copy_image) CONST_CAST(GLXEW_NV_copy_image) = !_glewInit_GLX_NV_copy_image(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GLX_NV_copy_image */
+#ifdef GLX_NV_delay_before_swap
+  CONST_CAST(GLXEW_NV_delay_before_swap) = _glewSearchExtension("GLX_NV_delay_before_swap", extStart, extEnd);
+  if (glewExperimental || GLXEW_NV_delay_before_swap) CONST_CAST(GLXEW_NV_delay_before_swap) = !_glewInit_GLX_NV_delay_before_swap(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GLX_NV_delay_before_swap */
 #ifdef GLX_NV_float_buffer
   CONST_CAST(GLXEW_NV_float_buffer) = _glewSearchExtension("GLX_NV_float_buffer", extStart, extEnd);
 #endif /* GLX_NV_float_buffer */
@@ -18166,6 +18186,13 @@ GLboolean glxewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"copy_image", 10))
         {
           ret = GLXEW_NV_copy_image;
+          continue;
+        }
+#endif
+#ifdef GLX_NV_delay_before_swap
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"delay_before_swap", 17))
+        {
+          ret = GLXEW_NV_delay_before_swap;
           continue;
         }
 #endif

@@ -49,7 +49,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Regalmlib", "Regalmlib.vcxp
 		{12EBE7B9-A6BF-51C2-BC7A-A743E21C7B99} = {12EBE7B9-A6BF-51C2-BC7A-A743E21C7B99}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mongooselib", "mongooselib.vcxproj", "{256E64B8-F766-061C-45F8-25B51B7CA24E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "civetweblib", "civetweblib.vcxproj", "{256E64B8-F766-061C-45F8-25B51B7CA24E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "md5lib", "md5lib.vcxproj", "{EF516F6A-1965-7089-C2CA-65778D394F08}"
 EndProject

@@ -6920,13 +6920,13 @@ static void REGAL_CALL debug_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   _next->call(&_next->glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
 }
 
-static void REGAL_CALL debug_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+static void REGAL_CALL debug_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
   RegalAssert(_context);
   DispatchTableGL *_next = _context->dispatcher.debug.next();
   RegalAssert(_next);
-  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
+  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
 }
 
 // GL_ARB_clear_texture

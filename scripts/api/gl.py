@@ -20405,10 +20405,10 @@ glClearNamedBufferSubDataEXT = Function('glClearNamedBufferSubDataEXT')
 glClearNamedBufferSubDataEXT.ret = Return('void')
 glClearNamedBufferSubDataEXT.add( Input( 'buffer','GLuint' ))
 glClearNamedBufferSubDataEXT.add( Input( 'internalformat','GLenum' ))
-glClearNamedBufferSubDataEXT.add( Input( 'format','GLenum' ))
-glClearNamedBufferSubDataEXT.add( Input( 'type','GLenum' ))
 glClearNamedBufferSubDataEXT.add( Input( 'offset','GLintptr' ))
 glClearNamedBufferSubDataEXT.add( Input( 'size','GLsizeiptr' ))
+glClearNamedBufferSubDataEXT.add( Input( 'format','GLenum' ))
+glClearNamedBufferSubDataEXT.add( Input( 'type','GLenum' ))
 glClearNamedBufferSubDataEXT.add( Input( 'data','const GLvoid *' ))
 glClearNamedBufferSubDataEXT.version = ''
 glClearNamedBufferSubDataEXT.category = 'GL_ARB_clear_buffer_object'

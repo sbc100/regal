@@ -8289,6 +8289,17 @@ static void _glewInfo_GLX_NV_copy_image (void)
 
 #endif /* GLX_NV_copy_image */
 
+#ifdef GLX_NV_delay_before_swap
+
+static void _glewInfo_GLX_NV_delay_before_swap (void)
+{
+  glewPrintExt("GLX_NV_delay_before_swap", GLXEW_NV_delay_before_swap, glxewIsSupported("GLX_NV_delay_before_swap"), glxewGetExtension("GLX_NV_delay_before_swap"));
+
+  glewInfoFunc("glXDelayBeforeSwapNV", glXDelayBeforeSwapNV == NULL);
+}
+
+#endif /* GLX_NV_delay_before_swap */
+
 #ifdef GLX_NV_float_buffer
 
 static void _glewInfo_GLX_NV_float_buffer (void)
@@ -10465,6 +10476,9 @@ static void glxewInfo ()
 #ifdef GLX_NV_copy_image
   _glewInfo_GLX_NV_copy_image();
 #endif /* GLX_NV_copy_image */
+#ifdef GLX_NV_delay_before_swap
+  _glewInfo_GLX_NV_delay_before_swap();
+#endif /* GLX_NV_delay_before_swap */
 #ifdef GLX_NV_float_buffer
   _glewInfo_GLX_NV_float_buffer();
 #endif /* GLX_NV_float_buffer */

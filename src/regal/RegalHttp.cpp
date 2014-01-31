@@ -67,7 +67,7 @@ using namespace std;
 #include <boost/print/print_string.hpp>
 using boost::print::print_string;
 
-#include "mongoose.h"
+#include "civetweb.h"
 
 REGAL_GLOBAL_END
 
@@ -79,7 +79,7 @@ namespace Http
   int  port    = REGAL_HTTP_PORT; // HTTP listening port - 8080 by default
 
   mg_callbacks callbacks;         // Callbacks
-  mg_context   *ctx = NULL;       // Mongoose context
+  mg_context   *ctx = NULL;       // civetweb context
 
   void Init()
   {
@@ -198,7 +198,7 @@ namespace Http
               html);
 
     mg_write(conn,http.c_str(),http.length());
-    return 1;  // Mark as handled for Mongoose
+    return 1;  // Mark as handled for civetweb
   }
 
   void Start()
@@ -246,7 +246,7 @@ namespace Http
     {
       HTrace("Closing HTTP connections.");
 
-      // Currently there is a problem with shutting down mongoose
+      // Currently there is a problem with shutting down civetweb
       // on Windows - so just skip the cleanup for now.
 
       #if !REGAL_SYS_WGL

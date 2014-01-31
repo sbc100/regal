@@ -892,7 +892,7 @@ namespace Trace
   void  glClearBufferData(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
   void  glClearBufferSubData(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
   void  glClearNamedBufferDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-  void  glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
+  void  glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 
 // GL_ARB_clear_texture
 
@@ -2663,6 +2663,10 @@ namespace Trace
   void  glProgramNamedParameter4dvNV(GLuint id, GLsizei len, const GLubyte *name, const GLdouble *v);
   void  glProgramNamedParameter4fNV(GLuint id, GLsizei len, const GLubyte *name, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
   void  glProgramNamedParameter4fvNV(GLuint id, GLsizei len, const GLubyte *name, const GLfloat *v);
+
+// GL_NV_framebuffer_blit
+
+  void  glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
 
 // GL_NV_framebuffer_multisample_coverage
 
@@ -11162,14 +11166,14 @@ static void REGAL_CALL trace_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   Trace::glClearNamedBufferDataEXT(buffer, internalformat, format, type, data);
 }
 
-static void REGAL_CALL trace_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+static void REGAL_CALL trace_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
   Internal("trace_glClearNamedBufferSubDataEXT","()");
   Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
   RegalAssert(_instance.currentContext);
   Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
   _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
-  Trace::glClearNamedBufferSubDataEXT(buffer, internalformat, format, type, offset, size, data);
+  Trace::glClearNamedBufferSubDataEXT(buffer, internalformat, offset, size, format, type, data);
 }
 
 // GL_ARB_clear_texture
@@ -24545,6 +24549,18 @@ static void REGAL_CALL trace_glProgramNamedParameter4fvNV(GLuint id, GLsizei len
   Trace::glProgramNamedParameter4fvNV(id, len, name, v);
 }
 
+// GL_NV_framebuffer_blit
+
+static void REGAL_CALL trace_glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter)
+{
+  Internal("trace_glBlitFramebufferNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glBlitFramebufferNV(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+
 // GL_NV_framebuffer_multisample_coverage
 
 static void REGAL_CALL trace_glRenderbufferStorageMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height)
@@ -36462,6 +36478,10 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glProgramNamedParameter4dvNV = trace_glProgramNamedParameter4dvNV;
   tbl.glProgramNamedParameter4fNV = trace_glProgramNamedParameter4fNV;
   tbl.glProgramNamedParameter4fvNV = trace_glProgramNamedParameter4fvNV;
+
+  // GL_NV_framebuffer_blit
+
+  tbl.glBlitFramebufferNV = trace_glBlitFramebufferNV;
 
   // GL_NV_framebuffer_multisample_coverage
 

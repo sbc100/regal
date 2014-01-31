@@ -1613,7 +1613,7 @@ namespace Dispatch
     void (REGAL_CALL *glClearBufferData)(GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
     void (REGAL_CALL *glClearBufferSubData)(GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
     void (REGAL_CALL *glClearNamedBufferDataEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid *data);
-    void (REGAL_CALL *glClearNamedBufferSubDataEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data);
+    void (REGAL_CALL *glClearNamedBufferSubDataEXT)(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data);
 
     // GL_ARB_clear_texture
 

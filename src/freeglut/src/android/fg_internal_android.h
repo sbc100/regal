@@ -31,8 +31,6 @@
 /* Android OpenGL ES is accessed through EGL */
 #include "egl/fg_internal_egl.h"
 
-#include <stdbool.h>
-
 /* -- GLOBAL TYPE DEFINITIONS ---------------------------------------------- */
 /* The structure used by display initialization in freeglut_init.c */
 typedef struct tagSFG_PlatformDisplay SFG_PlatformDisplay;

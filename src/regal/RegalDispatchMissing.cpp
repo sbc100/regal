@@ -5921,14 +5921,14 @@ namespace Missing
     Warning( "glClearNamedBufferDataEXT", " not available." );
   }
 
-  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
     UNUSED_PARAMETER(buffer);
     UNUSED_PARAMETER(internalformat);
-    UNUSED_PARAMETER(format);
-    UNUSED_PARAMETER(type);
     UNUSED_PARAMETER(offset);
     UNUSED_PARAMETER(size);
+    UNUSED_PARAMETER(format);
+    UNUSED_PARAMETER(type);
     UNUSED_PARAMETER(data);
     Warning( "glClearNamedBufferSubDataEXT", " not available." );
   }

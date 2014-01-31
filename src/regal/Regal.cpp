@@ -8669,15 +8669,15 @@ extern "C" {
     _next->call(&_next->glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
   }
 
-  REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+  REGAL_DECL void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
   {
     RegalContext *_context = REGAL_GET_CONTEXT();
     RegalAssert(Init::isInitialized());
-    App("glClearNamedBufferSubDataEXT","(", buffer, ", ", toString(internalformat), ", ", toString(format), ", ", toString(type), ", ", offset, ", ", size, ", ", boost::print::optional(data,Logging::pointers), ")");
+    App("glClearNamedBufferSubDataEXT","(", buffer, ", ", toString(internalformat), ", ", offset, ", ", size, ", ", toString(format), ", ", toString(type), ", ", boost::print::optional(data,Logging::pointers), ")");
     if (!_context) return;
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
-    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
+    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
   }
 
   /* GL_ARB_clear_texture */

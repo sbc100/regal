@@ -20,7 +20,7 @@
 		BC3A59B31804680000992687 /* libapitrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ABB1804648500C68C71 /* libapitrace.a */; };
 		BC3A59BA1804680400992687 /* libjsonsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8AC2180464A200C68C71 /* libjsonsl.a */; };
 		BC3A59BB1804680800992687 /* libmd5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8AC8180464B200C68C71 /* libmd5.a */; };
-		BC3A59BC1804680B00992687 /* libmongoose.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ACE180464C500C68C71 /* libmongoose.a */; };
+		BC3A59BC1804680B00992687 /* libcivetweb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ACE180464C500C68C71 /* libcivetweb.a */; };
 		BC3A59BD1804680E00992687 /* libsnappy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8AD4180464D700C68C71 /* libsnappy.a */; };
 		BC3A59BE1804681100992687 /* libsquish.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ADA180464F400C68C71 /* libsquish.a */; };
 /* End PBXBuildFile section */
@@ -56,10 +56,10 @@
 		};
 		BC9F8ACD180464C500C68C71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */;
+			containerPortal = BC9F8AC9180464C500C68C71 /* civetweb.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4336676E17C56DC700D45AD9;
-			remoteInfo = mongoose;
+			remoteInfo = civetweb;
 		};
 		BC9F8AD3180464D700C68C71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -101,7 +101,7 @@
 		BC9F8AB61804648400C68C71 /* apitrace.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = apitrace.xcodeproj; path = ../../../build/mac/apitrace/apitrace.xcodeproj; sourceTree = "<group>"; };
 		BC9F8ABD180464A200C68C71 /* jsonsl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = jsonsl.xcodeproj; path = ../../../build/mac/jsonsl/jsonsl.xcodeproj; sourceTree = "<group>"; };
 		BC9F8AC3180464B100C68C71 /* md5.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = md5.xcodeproj; path = ../../../build/mac/md5/md5.xcodeproj; sourceTree = "<group>"; };
-		BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mongoose.xcodeproj; path = ../../../build/mac/mongoose/mongoose.xcodeproj; sourceTree = "<group>"; };
+		BC9F8AC9180464C500C68C71 /* civetweb.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = civetweb.xcodeproj; path = ../../../build/mac/civetweb/civetweb.xcodeproj; sourceTree = "<group>"; };
 		BC9F8ACF180464D700C68C71 /* snappy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = snappy.xcodeproj; path = ../../../build/mac/snappy/snappy.xcodeproj; sourceTree = "<group>"; };
 		BC9F8AD5180464F400C68C71 /* squish.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = squish.xcodeproj; path = ../../../build/mac/squish/squish.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,7 +113,7 @@
 			files = (
 				BC3A59BE1804681100992687 /* libsquish.a in Frameworks */,
 				BC3A59BD1804680E00992687 /* libsnappy.a in Frameworks */,
-				BC3A59BC1804680B00992687 /* libmongoose.a in Frameworks */,
+				BC3A59BC1804680B00992687 /* libcivetweb.a in Frameworks */,
 				BC3A59BB1804680800992687 /* libmd5.a in Frameworks */,
 				BC3A59BA1804680400992687 /* libjsonsl.a in Frameworks */,
 				BC3A59B31804680000992687 /* libapitrace.a in Frameworks */,
@@ -157,7 +157,7 @@
 				431D3BFF15C9B635009DD04F /* Regal.xcodeproj */,
 				BC9F8AD5180464F400C68C71 /* squish.xcodeproj */,
 				BC9F8ACF180464D700C68C71 /* snappy.xcodeproj */,
-				BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */,
+				BC9F8AC9180464C500C68C71 /* civetweb.xcodeproj */,
 				BC9F8AC3180464B100C68C71 /* md5.xcodeproj */,
 				BC9F8ABD180464A200C68C71 /* jsonsl.xcodeproj */,
 				BC9F8AB61804648400C68C71 /* apitrace.xcodeproj */,
@@ -241,7 +241,7 @@
 		BC9F8ACA180464C500C68C71 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BC9F8ACE180464C500C68C71 /* libmongoose.a */,
+				BC9F8ACE180464C500C68C71 /* libcivetweb.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,7 +318,7 @@
 				},
 				{
 					ProductGroup = BC9F8ACA180464C500C68C71 /* Products */;
-					ProjectRef = BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */;
+					ProjectRef = BC9F8AC9180464C500C68C71 /* civetweb.xcodeproj */;
 				},
 				{
 					ProductGroup = 431D3C0015C9B635009DD04F /* Products */;
@@ -369,10 +369,10 @@
 			remoteRef = BC9F8AC7180464B200C68C71 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		BC9F8ACE180464C500C68C71 /* libmongoose.a */ = {
+		BC9F8ACE180464C500C68C71 /* libcivetweb.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libmongoose.a;
+			path = libcivetweb.a;
 			remoteRef = BC9F8ACD180464C500C68C71 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

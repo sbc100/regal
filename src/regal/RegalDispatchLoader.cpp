@@ -5402,11 +5402,11 @@ namespace Loader
     _driver.call(&_driver.glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
   }
 
-  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+  static void REGAL_CALL glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
   {
     DispatchTableGL &_driver = _getDispatchGL();
     _getProcAddress(reinterpret_cast<void (**)()>(&_driver.glClearNamedBufferSubDataEXT),reinterpret_cast<void (*)()>(glClearNamedBufferSubDataEXT),"glClearNamedBufferSubDataEXT");
-    _driver.call(&_driver.glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
+    _driver.call(&_driver.glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
   }
 
 // GL_ARB_clear_texture

@@ -18,7 +18,6 @@
 		4359147D18293B32002CB92C /* libapitrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359144B18293A5C002CB92C /* libapitrace.a */; };
 		4359147E18293B32002CB92C /* libjsonsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359145118293A68002CB92C /* libjsonsl.a */; };
 		4359147F18293B32002CB92C /* libmd5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359145718293A74002CB92C /* libmd5.a */; };
-		4359148018293B32002CB92C /* libmongoose.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359145D18293A7D002CB92C /* libmongoose.a */; };
 		4359148118293B32002CB92C /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359146318293A8B002CB92C /* libpcre.a */; };
 		4359148218293B32002CB92C /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359146918293A94002CB92C /* libpng.a */; };
 		4359148318293B32002CB92C /* libsnappy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4359146F18293A9C002CB92C /* libsnappy.a */; };
@@ -153,13 +152,6 @@
 			remoteGlobalIDString = 4336678117C56DFD00D45AD9;
 			remoteInfo = md5;
 		};
-		4359145C18293A7D002CB92C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4359145818293A7C002CB92C /* mongoose.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4336676E17C56DC700D45AD9;
-			remoteInfo = mongoose;
-		};
 		4359146218293A8B002CB92C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4359145E18293A8A002CB92C /* pcre.xcodeproj */;
@@ -209,7 +201,6 @@
 		4359144618293A5B002CB92C /* apitrace.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = apitrace.xcodeproj; path = ../apitrace/apitrace.xcodeproj; sourceTree = "<group>"; };
 		4359144C18293A68002CB92C /* jsonsl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = jsonsl.xcodeproj; path = ../jsonsl/jsonsl.xcodeproj; sourceTree = "<group>"; };
 		4359145218293A73002CB92C /* md5.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = md5.xcodeproj; path = ../md5/md5.xcodeproj; sourceTree = "<group>"; };
-		4359145818293A7C002CB92C /* mongoose.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mongoose.xcodeproj; path = ../mongoose/mongoose.xcodeproj; sourceTree = "<group>"; };
 		4359145E18293A8A002CB92C /* pcre.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pcre.xcodeproj; path = ../pcre/pcre.xcodeproj; sourceTree = "<group>"; };
 		4359146418293A93002CB92C /* png.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = png.xcodeproj; path = ../png/png.xcodeproj; sourceTree = "<group>"; };
 		4359146A18293A9C002CB92C /* snappy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = snappy.xcodeproj; path = ../snappy/snappy.xcodeproj; sourceTree = "<group>"; };
@@ -333,7 +324,6 @@
 				4359147D18293B32002CB92C /* libapitrace.a in Frameworks */,
 				4359147E18293B32002CB92C /* libjsonsl.a in Frameworks */,
 				4359147F18293B32002CB92C /* libmd5.a in Frameworks */,
-				4359148018293B32002CB92C /* libmongoose.a in Frameworks */,
 				4359148118293B32002CB92C /* libpcre.a in Frameworks */,
 				4359148218293B32002CB92C /* libpng.a in Frameworks */,
 				4359148318293B32002CB92C /* libsnappy.a in Frameworks */,
@@ -365,14 +355,6 @@
 			isa = PBXGroup;
 			children = (
 				4359145718293A74002CB92C /* libmd5.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4359145918293A7C002CB92C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4359145D18293A7D002CB92C /* libmongoose.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -423,7 +405,6 @@
 				4359144618293A5B002CB92C /* apitrace.xcodeproj */,
 				4359144C18293A68002CB92C /* jsonsl.xcodeproj */,
 				4359145218293A73002CB92C /* md5.xcodeproj */,
-				4359145818293A7C002CB92C /* mongoose.xcodeproj */,
 				4359145E18293A8A002CB92C /* pcre.xcodeproj */,
 				4359146418293A93002CB92C /* png.xcodeproj */,
 				4359146A18293A9C002CB92C /* snappy.xcodeproj */,
@@ -697,10 +678,6 @@
 					ProjectRef = 4359145218293A73002CB92C /* md5.xcodeproj */;
 				},
 				{
-					ProductGroup = 4359145918293A7C002CB92C /* Products */;
-					ProjectRef = 4359145818293A7C002CB92C /* mongoose.xcodeproj */;
-				},
-				{
 					ProductGroup = 4359145F18293A8A002CB92C /* Products */;
 					ProjectRef = 4359145E18293A8A002CB92C /* pcre.xcodeproj */;
 				},
@@ -748,13 +725,6 @@
 			fileType = archive.ar;
 			path = libmd5.a;
 			remoteRef = 4359145618293A74002CB92C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4359145D18293A7D002CB92C /* libmongoose.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libmongoose.a;
-			remoteRef = 4359145C18293A7D002CB92C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4359146318293A8B002CB92C /* libpcre.a */ = {
@@ -885,7 +855,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../../include,
 					../../../src/boost,
-					../../../src/mongoose,
+					../../../src/civetweb,
 					../../../src/lookup3,
 					../../../src/jsonsl,
 					../../../src/snappy,
@@ -899,8 +869,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "../../../src/mongoose ../../../src/md5/include";
+				SDKROOT = "";
+				USER_HEADER_SEARCH_PATHS = "../../../src/civetweb ../../../src/md5/include";
 			};
 			name = Debug;
 		};
@@ -929,7 +899,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../../include,
 					../../../src/boost,
-					../../../src/mongoose,
+					../../../src/civetweb,
 					../../../src/lookup3,
 					../../../src/jsonsl,
 					../../../src/snappy,
@@ -942,8 +912,8 @@
 					../../../src/zlib/src,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "../../../src/mongoose ../../../src/md5/include";
+				SDKROOT = "";
+				USER_HEADER_SEARCH_PATHS = "../../../src/civetweb ../../../src/md5/include";
 			};
 			name = Release;
 		};

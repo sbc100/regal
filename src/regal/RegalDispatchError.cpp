@@ -18838,7 +18838,7 @@ static void REGAL_CALL error_glClearNamedBufferDataEXT(GLuint buffer, GLenum int
   }
 }
 
-static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
 {
   Internal("error_glClearNamedBufferSubDataEXT","()");
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -18849,7 +18849,7 @@ static void REGAL_CALL error_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum 
   if (!_context->err.inBeginEnd)
     _error = _next->call(&_next->glGetError)();
   RegalAssert(_error==GL_NO_ERROR);
-  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
+  _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
   if (!_context->err.inBeginEnd) {
     _error = _next->call(&_next->glGetError)();
     if (_error!=GL_NO_ERROR) {

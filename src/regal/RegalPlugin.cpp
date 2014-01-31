@@ -6118,12 +6118,12 @@ extern "C" {
     _next->call(&_next->glClearNamedBufferDataEXT)(buffer, internalformat, format, type, data);
   }
 
-  void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLintptr offset, GLsizeiptr size, const GLvoid *data)
+  void REGAL_CALL plugin_glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid *data)
   {
     ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal &_instance = ::REGAL_NAMESPACE_INTERNAL::Thread::ThreadLocal::instance();
     ::REGAL_NAMESPACE_INTERNAL::DispatchTableGL *_next = _instance.nextDispatchTable;
     RegalAssert(_next);
-    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, format, type, offset, size, data);
+    _next->call(&_next->glClearNamedBufferSubDataEXT)(buffer, internalformat, offset, size, format, type, data);
   }
 
   /* GL_ARB_clear_texture */

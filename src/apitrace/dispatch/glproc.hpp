@@ -23492,10 +23492,10 @@ static inline void APIENTRY _glClearNamedBufferDataEXT(GLuint buffer, GLenum int
     _glClearNamedBufferDataEXT_ptr(buffer, internalformat, format, type, data);
 }
 
-typedef void (APIENTRY * PFN_GLCLEARNAMEDBUFFERSUBDATAEXT)(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLsizeiptr offset, GLsizeiptr size, const void * data);
+typedef void (APIENTRY * PFN_GLCLEARNAMEDBUFFERSUBDATAEXT)(GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void * data);
 static PFN_GLCLEARNAMEDBUFFERSUBDATAEXT _glClearNamedBufferSubDataEXT_ptr = NULL;
 
-static inline void APIENTRY _glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLenum format, GLenum type, GLsizeiptr offset, GLsizeiptr size, const void * data) {
+static inline void APIENTRY _glClearNamedBufferSubDataEXT(GLuint buffer, GLenum internalformat, GLsizeiptr offset, GLsizeiptr size, GLenum format, GLenum type, const void * data) {
     const char *_name = "glClearNamedBufferSubDataEXT";
     if (!_glClearNamedBufferSubDataEXT_ptr) {
         _glClearNamedBufferSubDataEXT_ptr = (PFN_GLCLEARNAMEDBUFFERSUBDATAEXT)_getPrivateProcAddress(_name);
@@ -23504,7 +23504,7 @@ static inline void APIENTRY _glClearNamedBufferSubDataEXT(GLuint buffer, GLenum 
             return;
         }
     }
-    _glClearNamedBufferSubDataEXT_ptr(buffer, internalformat, format, type, offset, size, data);
+    _glClearNamedBufferSubDataEXT_ptr(buffer, internalformat, offset, size, format, type, data);
 }
 
 typedef void (APIENTRY * PFN_GLDISPATCHCOMPUTE)(GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z);
@@ -42710,6 +42710,21 @@ static inline void APIENTRY _glDrawTextureNV(GLuint texture, GLuint sampler, GLf
     _glDrawTextureNV_ptr(texture, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1);
 }
 
+typedef void (APIENTRY * PFN_GLBLITFRAMEBUFFERNV)(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+static PFN_GLBLITFRAMEBUFFERNV _glBlitFramebufferNV_ptr = NULL;
+
+static inline void APIENTRY _glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) {
+    const char *_name = "glBlitFramebufferNV";
+    if (!_glBlitFramebufferNV_ptr) {
+        _glBlitFramebufferNV_ptr = (PFN_GLBLITFRAMEBUFFERNV)_getPrivateProcAddress(_name);
+        if (!_glBlitFramebufferNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBlitFramebufferNV_ptr(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+
 typedef GLuint (APIENTRY * PFN_GLNEWBUFFERREGION)(GLenum type);
 static PFN_GLNEWBUFFERREGION _glNewBufferRegion_ptr = NULL;
 
@@ -45247,6 +45262,7 @@ static inline void APIENTRY _glAddSwapHintRectWIN(GLint x, GLint y, GLsizei widt
 #define glTexStorageSparseAMD _glTexStorageSparseAMD
 #define glTextureStorageSparseAMD _glTextureStorageSparseAMD
 #define glDrawTextureNV _glDrawTextureNV
+#define glBlitFramebufferNV _glBlitFramebufferNV
 #define glNewBufferRegion _glNewBufferRegion
 #define glDeleteBufferRegion _glDeleteBufferRegion
 #define glReadBufferRegion _glReadBufferRegion

@@ -78,7 +78,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>REGAL_DECL_EXPORT;REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -118,7 +118,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>REGAL_DECL_EXPORT;REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -157,7 +157,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>REGAL_DECL_EXPORT;REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -197,7 +197,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/mongoose;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>REGAL_DECL_EXPORT;REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>

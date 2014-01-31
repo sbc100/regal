@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>mongooselib</ProjectName>
+    <ProjectName>civetweblib</ProjectName>
     <ProjectGuid>{256E64B8-F766-061C-45F8-25B51B7CA24E}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -52,9 +52,9 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\Win32\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\Win32\mongooselib\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\Win32\civetweblib\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\Win32\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\Win32\mongooselib\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\Win32\civetweblib\</IntDir>
     <NaClAddInVersion Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">1</NaClAddInVersion>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(VSNaClSDKRoot)include;$(VSNaClSDKRoot)include\win;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(VSNaClSDKRoot)lib\win_x86_32_host\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
@@ -63,8 +63,8 @@
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VSNaClSDKRoot)include;$(VSNaClSDKRoot)include\win;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VSNaClSDKRoot)lib\win_x86_32_host\$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
     <ExecutablePath Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(VCInstallDir)bin;$(WindowsSdkDir)bin\NETFX 4.0 Tools;$(WindowsSdkDir)bin;$(VSInstallDir)Common7\Tools\bin;$(VSInstallDir)Common7\tools;$(VSInstallDir)Common7\ide;$(ProgramFiles)\HTML Help Workshop;$(FrameworkSDKDir)\bin;$(MSBuildToolsPath32);$(VSInstallDir);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">win\$(Configuration)\mongooselib\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">win\$(Configuration)\mongooselib\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">win\$(Configuration)\civetweblib\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">win\$(Configuration)\civetweblib\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|PPAPI'">$(ProjectDir)..\..\..\..\lib\</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|PPAPI'">$(ProjectDir)..\..\..\..\lib\</OutDir>
   </PropertyGroup>
@@ -72,16 +72,16 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/mongoose;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/civetweb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <AssemblerListingLocation>Release\Win32\mongooselib\</AssemblerListingLocation>
-      <ObjectFileName>Release\Win32\mongooselib\</ObjectFileName>
-      <ProgramDataBaseFileName>Release\Win32\mongooselib.pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>Release\Win32\civetweblib\</AssemblerListingLocation>
+      <ObjectFileName>Release\Win32\civetweblib\</ObjectFileName>
+      <ProgramDataBaseFileName>Release\Win32\civetweblib.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
@@ -89,15 +89,15 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>Release\Win32\mongooselib.lib</OutputFile>
+      <OutputFile>Release\Win32\civetweblib.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
-      <ProgramDatabaseFile>Release\Win32\mongooselib.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>Release\Win32\civetweblib.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <ImportLibrary>Release\Win32\mongooselib.lib</ImportLibrary>
+      <ImportLibrary>Release\Win32\civetweblib.lib</ImportLibrary>
     </Link>
     <Midl>
       <HeaderFileName>
@@ -111,15 +111,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/mongoose;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/civetweb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <AssemblerListingLocation>Debug\Win32\mongooselib\</AssemblerListingLocation>
-      <ObjectFileName>Debug\Win32\mongooselib\</ObjectFileName>
-      <ProgramDataBaseFileName>Debug\Win32\mongooselib.pdb</ProgramDataBaseFileName>
+      <AssemblerListingLocation>Debug\Win32\civetweblib\</AssemblerListingLocation>
+      <ObjectFileName>Debug\Win32\civetweblib\</ObjectFileName>
+      <ProgramDataBaseFileName>Debug\Win32\civetweblib.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -128,16 +128,16 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>Debug\Win32\mongooselib.lib</OutputFile>
+      <OutputFile>Debug\Win32\civetweblib.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>Debug\Win32\mongooselib.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>Debug\Win32\civetweblib.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <ImportLibrary>Debug\Win32\mongooselib.lib</ImportLibrary>
+      <ImportLibrary>Debug\Win32\civetweblib.lib</ImportLibrary>
     </Link>
     <Midl>
       <HeaderFileName>
@@ -153,7 +153,7 @@
       <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../../src/mongoose;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/civetweb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -166,7 +166,7 @@
       <AdditionalDependencies>ppapi_cpp.lib;ppapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>../../../../src/mongoose;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../src/civetweb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -178,7 +178,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\mongoose\mongoose.c" />
+    <ClCompile Include="..\..\..\..\src\civetweb\civetweb.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

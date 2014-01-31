@@ -60,7 +60,7 @@ apitrace_src_files := $(patsubst $(LOCAL_PATH)/%,%,$(apitrace_src_files))
 apitrace_c_includes := $(regal_path)/include $(regal_path)/src/apitrace/common $(regal_path)/src/apitrace/gen/dispatch $(regal_path)/src/apitrace/dispatch $(regal_path)/src/apitrace/helpers $(regal_path)/src/apitrace/wrappers $(regal_path)/src/apitrace
 apitrace_c_includes += $(regal_path)/src/zlib/include $(regal_path)/src/zlib/src $(regal_path)/src/snappy
 apitrace_c_includes += $(regal_path)/src/apitrace/thirdparty/khronos
-apitrace_c_includes += $(regal_path)/src/regal $(regal_path)/src/mongoose $(regal_path)/src/squish
+apitrace_c_includes += $(regal_path)/src/regal $(regal_path)/src/civetweb $(regal_path)/src/squish
 apitrace_c_includes := $(patsubst $(LOCAL_PATH)/../%,%,$(apitrace_c_includes))
 
 apitrace_export_c_includes := $(regal_path)/include
@@ -79,10 +79,10 @@ glslopt_c_includes := $(patsubst -I%,$(regal_path)/%,$(GLSLOPT.INCLUDE))
 #
 
 regal_src_files := $(patsubst %,$(regal_path)/%,$(REGAL.CXX))
-regal_src_files += $(regal_path)/src/mongoose/mongoose.c $(regal_path)/src/md5/src/md5.c $(regal_path)/src/jsonsl/jsonsl.c
+regal_src_files += $(regal_path)/src/civetweb/civetweb.c $(regal_path)/src/md5/src/md5.c $(regal_path)/src/jsonsl/jsonsl.c
 regal_src_files := $(patsubst $(LOCAL_PATH)/%,%,$(regal_src_files))
 
-regal_c_includes := $(regal_path)/include $(regal_path)/src/regal $(regal_path)/src/boost $(regal_path)/src/mongoose $(regal_path)/src/md5/include $(regal_path)/src/lookup3 $(regal_path)/src/jsonsl
+regal_c_includes := $(regal_path)/include $(regal_path)/src/regal $(regal_path)/src/boost $(regal_path)/src/civetweb $(regal_path)/src/md5/include $(regal_path)/src/lookup3 $(regal_path)/src/jsonsl
 regal_c_includes := $(patsubst $(LOCAL_PATH)/../%,%,$(regal_c_includes))
 
 regal_export_c_includes := $(regal_path)/include

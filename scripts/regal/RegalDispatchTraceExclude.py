@@ -67,7 +67,6 @@ exclude = [
   'GL_NV_blend_equation_advanced',
   'GL_NV_blend_equation_advanced_coherent',
   'GL_NV_copy_buffer',
-  'GL_NV_framebuffer_blit',
   'GL_NV_non_square_matrices',
   'GL_NV_vdpau_interop',
 

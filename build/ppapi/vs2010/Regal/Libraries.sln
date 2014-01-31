@@ -25,7 +25,7 @@ Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "Regalglewlib", "Regalglewli
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "mongooselib", "mongooselib.vcxproj", "{256E64B8-F766-061C-45F8-25B51B7CA24E}"
+Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "civetweblib", "civetweblib.vcxproj", "{256E64B8-F766-061C-45F8-25B51B7CA24E}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject

@@ -367,9 +367,9 @@
 					../../../src/apitrace/thirdparty/khronos,
 					../../../src/regal,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -410,8 +410,8 @@
 					../../../src/apitrace/thirdparty/khronos,
 					../../../src/regal,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				SDKROOT = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
