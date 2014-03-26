@@ -117,13 +117,24 @@
  * GL needs GLAPI and GLAPIENTRY, GLU needs APIENTRY, CALLBACK, and wchar_t
  * defined properly.
  */
-/* <windef.h> */
-#ifndef APIENTRY
+/* <windef.h> and <gl.h>*/
+#ifdef APIENTRY
+#  ifndef GLAPIENTRY
+#    define GLAPIENTRY APIENTRY
+#  endif
+#  ifndef GLEWAPIENTRY
+#    define GLEWAPIENTRY APIENTRY
+#  endif
+#else
 #define GLEW_APIENTRY_DEFINED
-#  if defined(__MINGW32__) || defined(__CYGWIN__)
+#  if defined(__MINGW32__) || defined(__CYGWIN__) || (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__)
 #    define APIENTRY __stdcall
-#  elif (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED) || defined(__BORLANDC__)
-#    define APIENTRY __stdcall
+#    ifndef GLAPIENTRY
+#      define GLAPIENTRY __stdcall
+#    endif
+#    ifndef GLEWAPIENTRY
+#      define GLEWAPIENTRY __stdcall
+#    endif
 #  else
 #    define APIENTRY
 #  endif
@@ -178,14 +189,6 @@ typedef _W64 int ptrdiff_t;
 #  else
 #    define GLAPI WINGDIAPI
 #  endif
-#endif
-
-#ifndef GLAPIENTRY
-#define GLAPIENTRY APIENTRY
-#endif
-
-#ifndef GLEWAPIENTRY
-#define GLEWAPIENTRY APIENTRY
 #endif
 
 /*
@@ -249,6 +252,8 @@ typedef _W64 int ptrdiff_t;
 #define GLAPI extern
 #endif
 
+#endif /* _WIN32 */
+
 #ifndef GLAPIENTRY
 #define GLAPIENTRY
 #endif
@@ -256,8 +261,6 @@ typedef _W64 int ptrdiff_t;
 #ifndef GLEWAPIENTRY
 #define GLEWAPIENTRY
 #endif
-
-#endif /* _WIN32 */
 
 #ifdef __cplusplus
 extern "C" {
@@ -2535,7 +2538,7 @@ typedef void (GLAPIENTRY * PFNGLTBUFFERMASK3DFXPROC) (GLuint mask);
 #define GL_DEBUG_CATEGORY_APPLICATION_AMD 0x914F
 #define GL_DEBUG_CATEGORY_OTHER_AMD 0x9150
 
-typedef void (APIENTRY *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam);
+typedef void (GLAPIENTRY *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam);
 
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKAMDPROC) (GLDEBUGPROCAMD callback, void *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGEENABLEAMDPROC) (GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
@@ -3803,7 +3806,7 @@ typedef void (GLAPIENTRY * PFNGLCOPYIMAGESUBDATAPROC) (GLuint srcName, GLenum sr
 #define GL_DEBUG_SEVERITY_MEDIUM_ARB 0x9147
 #define GL_DEBUG_SEVERITY_LOW_ARB 0x9148
 
-typedef void (APIENTRY *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+typedef void (GLAPIENTRY *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKARBPROC) (GLDEBUGPROCARB callback, const void *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECONTROLARBPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
@@ -8582,6 +8585,7 @@ typedef void (GLAPIENTRY * PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC) (GLuint v
 typedef void (GLAPIENTRY * PFNGLVERTEXARRAYNORMALOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
 typedef void (GLAPIENTRY * PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
 typedef void (GLAPIENTRY * PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+typedef void (GLAPIENTRY * PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC) (GLuint vaobj, GLuint index, GLuint divisor);
 typedef void (GLAPIENTRY * PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset);
 typedef void (GLAPIENTRY * PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset);
 typedef void (GLAPIENTRY * PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
@@ -8796,6 +8800,7 @@ typedef void (GLAPIENTRY * PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC) (GLuint vaobj, G
 #define glVertexArrayNormalOffsetEXT GLEW_GET_FUN(__glewVertexArrayNormalOffsetEXT)
 #define glVertexArraySecondaryColorOffsetEXT GLEW_GET_FUN(__glewVertexArraySecondaryColorOffsetEXT)
 #define glVertexArrayTexCoordOffsetEXT GLEW_GET_FUN(__glewVertexArrayTexCoordOffsetEXT)
+#define glVertexArrayVertexAttribDivisorEXT GLEW_GET_FUN(__glewVertexArrayVertexAttribDivisorEXT)
 #define glVertexArrayVertexAttribIOffsetEXT GLEW_GET_FUN(__glewVertexArrayVertexAttribIOffsetEXT)
 #define glVertexArrayVertexAttribOffsetEXT GLEW_GET_FUN(__glewVertexArrayVertexAttribOffsetEXT)
 #define glVertexArrayVertexOffsetEXT GLEW_GET_FUN(__glewVertexArrayVertexOffsetEXT)
@@ -11237,7 +11242,7 @@ typedef void (GLAPIENTRY * PFNGLTEXSCISSORINTELPROC) (GLenum target, GLclampf tl
 #define GL_DEBUG_SEVERITY_LOW 0x9148
 #define GL_DEBUG_OUTPUT 0x92E0
 
-typedef void (APIENTRY *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+typedef void (GLAPIENTRY *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECALLBACKPROC) (GLDEBUGPROC callback, const void *userParam);
 typedef void (GLAPIENTRY * PFNGLDEBUGMESSAGECONTROLPROC) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
@@ -16691,6 +16696,7 @@ GLEW_FUN_EXPORT PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC __glewVertexArrayMult
 GLEW_FUN_EXPORT PFNGLVERTEXARRAYNORMALOFFSETEXTPROC __glewVertexArrayNormalOffsetEXT;
 GLEW_FUN_EXPORT PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC __glewVertexArraySecondaryColorOffsetEXT;
 GLEW_FUN_EXPORT PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC __glewVertexArrayTexCoordOffsetEXT;
+GLEW_FUN_EXPORT PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC __glewVertexArrayVertexAttribDivisorEXT;
 GLEW_FUN_EXPORT PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC __glewVertexArrayVertexAttribIOffsetEXT;
 GLEW_FUN_EXPORT PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC __glewVertexArrayVertexAttribOffsetEXT;
 GLEW_FUN_EXPORT PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC __glewVertexArrayVertexOffsetEXT;
@@ -18276,8 +18282,6 @@ GLEWAPI const GLubyte * GLEWAPIENTRY glewGetString (GLenum name);
 #ifdef GLEW_APIENTRY_DEFINED
 #undef GLEW_APIENTRY_DEFINED
 #undef APIENTRY
-#undef GLAPIENTRY
-#define GLAPIENTRY
 #endif
 
 #ifdef GLEW_CALLBACK_DEFINED

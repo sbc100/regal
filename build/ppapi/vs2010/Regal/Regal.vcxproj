@@ -172,7 +172,7 @@
       <AdditionalIncludeDirectories>../../../../src/jsonsl;../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <WarningLevel>Level4</WarningLevel>
-      <PreprocessorDefinitions>PPAPI;REGAL_NO_TLS=1;REGAL_WIN_TLS=0;REGAL_DECL_EXPORT;REGAL_SYS_WGL_DECLARE_WGL;JSONSL_STATE_GENERIC=1;DNDEBUG;REGAL_DECL_EXPORT=1;REGAL_LOG=0;REGAL_LOG_ALL=0;REGAL_LOG_ONCE=0;REGAL_LOG_JSON=0;REGAL_NO_HTTP=1;REGAL_NO_ASSERT=1;REGAL_NO_PNG=1;REGAL_ERROR=0;REGAL_DEBUG=0;REGAL_CACHE=0;REGAL_EMULATION=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PPAPI;REGAL_NO_TLS=1;REGAL_WIN_TLS=0;REGAL_DECL_EXPORT;REGAL_SYS_WGL_DECLARE_WGL;JSONSL_STATE_GENERIC=1;DNDEBUG;REGAL_DECL_EXPORT=1;REGAL_LOG=0;REGAL_LOG_ALL=0;REGAL_LOG_ONCE=0;REGAL_LOG_JSON=0;REGAL_HTTP=0;REGAL_NO_ASSERT=1;REGAL_NO_PNG=1;REGAL_ERROR=0;REGAL_DEBUG=0;REGAL_CACHE=0;REGAL_EMULATION=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>

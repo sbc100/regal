@@ -1037,10 +1037,10 @@ glapi.addFunctions([
     GlFunction(Void, "glGetUniformIndices", [(GLprogram, "program"), (GLsizei, "uniformCount"), (Array(Const(GLstringConst), "uniformCount"), "uniformNames"), Out(Array(GLuint, "uniformCount"), "uniformIndices")], sideeffects=False),
     GlFunction(Void, "glGetActiveUniformsiv", [(GLprogram, "program"), (GLsizei, "uniformCount"), (Array(Const(GLuint), "uniformCount"), "uniformIndices"), (GLenum, "pname"), Out(OpaqueArray(GLint, "_glGetActiveUniformsiv_size(pname)"), "params")], sideeffects=False),
     GlFunction(Void, "glGetActiveUniformName", [(GLprogram, "program"), (GLuint, "uniformIndex"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), OutGlString(GLchar, "length", "uniformName")], sideeffects=False),
-    GlFunction(GLuint, "glGetUniformBlockIndex", [(GLprogram, "program"), (GLstringConst, "uniformBlockName")]),
-    GlFunction(Void, "glGetActiveUniformBlockiv", [(GLprogram, "program"), (GLuint, "uniformBlockIndex"), (GLenum, "pname"), Out(OpaqueArray(GLint, "_glGetActiveUniformBlockiv_size(pname)"), "params")], sideeffects=False),
-    GlFunction(Void, "glGetActiveUniformBlockName", [(GLprogram, "program"), (GLuint, "uniformBlockIndex"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), OutGlString(GLchar, "length", "uniformBlockName")], sideeffects=False),
-    GlFunction(Void, "glUniformBlockBinding", [(GLprogram, "program"), (GLuint, "uniformBlockIndex"), (GLuint, "uniformBlockBinding")]),
+    GlFunction(GLuniformBlock, "glGetUniformBlockIndex", [(GLprogram, "program"), (GLstringConst, "uniformBlockName")]),
+    GlFunction(Void, "glGetActiveUniformBlockiv", [(GLprogram, "program"), (GLuniformBlock, "uniformBlockIndex"), (GLenum, "pname"), Out(OpaqueArray(GLint, "_glGetActiveUniformBlockiv_size(pname)"), "params")], sideeffects=False),
+    GlFunction(Void, "glGetActiveUniformBlockName", [(GLprogram, "program"), (GLuniformBlock, "uniformBlockIndex"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), OutGlString(GLchar, "length", "uniformBlockName")], sideeffects=False),
+    GlFunction(Void, "glUniformBlockBinding", [(GLprogram, "program"), (GLuniformBlock, "uniformBlockIndex"), (GLuint, "uniformBlockBinding")]),
 
     # GL_ARB_copy_buffer
     GlFunction(Void, "glCopyBufferSubData", [(GLenum, "readTarget"), (GLenum, "writeTarget"), (GLintptr, "readOffset"), (GLintptr, "writeOffset"), (GLsizeiptr, "size")]),
@@ -2951,16 +2951,16 @@ glapi.addFunctions([
     GlFunction(GLuint, "glGetDebugMessageLogAMD", [(GLuint, "count"), (GLsizei, "bufsize"), Out(Array(GLenum, "count"), "categories"), Out(Array(GLuint, "count"), "severities"), Out(Array(GLuint, "count"), "ids"), Out(Array(GLsizei, "count"), "lengths"), Out(String(GLchar, "_glGetDebugMessageLog_length(message, lengths, _result)"), "message")], sideeffects=False, fail=0),
 
     # GL_NV_vdpau_interop
-    #GlFunction(Void, "glVDPAUInitNV", [(Pointer(Const(GLvoid)), "vdpDevice"), (Pointer(Const(GLvoid)), "getProcAddress")]),
-    #GlFunction(Void, "glVDPAUFiniNV", []),
-    #GlFunction(GLvdpauSurfaceNV, "glVDPAURegisterVideoSurfaceNV", [(Pointer(Const(GLvoid)), "vdpSurface"), (GLenum, "target"), (GLsizei, "numTextureNames"), (Array(Const(GLtexture), "numTextureNames"), "textureNames")]),
-    #GlFunction(GLvdpauSurfaceNV, "glVDPAURegisterOutputSurfaceNV", [Out(Pointer(GLvoid), "vdpSurface"), (GLenum, "target"), (GLsizei, "numTextureNames"), (Array(Const(GLtexture), "numTextureNames"), "textureNames")]),
-    #GlFunction(Void, "glVDPAUIsSurfaceNV", [(GLvdpauSurfaceNV, "surface")]),
-    #GlFunction(Void, "glVDPAUUnregisterSurfaceNV", [(GLvdpauSurfaceNV, "surface")]),
-    #GlFunction(Void, "glVDPAUGetSurfaceivNV", [(GLvdpauSurfaceNV, "surface"), (GLenum, "pname"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), Out(Array(GLint, "length"), "values")]),
-    #GlFunction(Void, "glVDPAUSurfaceAccessNV", [(GLvdpauSurfaceNV, "surface"), (GLenum, "access")]),
-    #GlFunction(Void, "glVDPAUMapSurfacesNV", [(GLsizei, "numSurfaces"), (Array(Const(GLvdpauSurfaceNV), "numSurfaces"), "surfaces")]),
-    #GlFunction(Void, "glVDPAUUnmapSurfacesNV", [(GLsizei, "numSurface"), (Array(Const(GLvdpauSurfaceNV), "numSurface"), "surfaces")]),
+    GlFunction(Void, "glVDPAUInitNV", [(OpaquePointer(Const(GLvoid)), "vdpDevice"), (OpaquePointer(Const(GLvoid)), "getProcAddress")]),
+    GlFunction(Void, "glVDPAUFiniNV", []),
+    GlFunction(GLvdpauSurfaceNV, "glVDPAURegisterVideoSurfaceNV", [(OpaquePointer(Const(GLvoid)), "vdpSurface"), (GLenum, "target"), (GLsizei, "numTextureNames"), (Array(Const(GLtexture), "numTextureNames"), "textureNames")]),
+    GlFunction(GLvdpauSurfaceNV, "glVDPAURegisterOutputSurfaceNV", [(OpaquePointer(Const(GLvoid)), "vdpSurface"), (GLenum, "target"), (GLsizei, "numTextureNames"), (Array(Const(GLtexture), "numTextureNames"), "textureNames")]),
+    GlFunction(GLboolean, "glVDPAUIsSurfaceNV", [(GLvdpauSurfaceNV, "surface")], sideeffects=False),
+    GlFunction(Void, "glVDPAUUnregisterSurfaceNV", [(GLvdpauSurfaceNV, "surface")]),
+    GlFunction(Void, "glVDPAUGetSurfaceivNV", [(GLvdpauSurfaceNV, "surface"), (GLenum, "pname"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), Out(Array(GLint, "bufSize"), "values")]),
+    GlFunction(Void, "glVDPAUSurfaceAccessNV", [(GLvdpauSurfaceNV, "surface"), (GLenum, "access")]),
+    GlFunction(Void, "glVDPAUMapSurfacesNV", [(GLsizei, "numSurfaces"), (Array(Const(GLvdpauSurfaceNV), "numSurfaces"), "surfaces")]),
+    GlFunction(Void, "glVDPAUUnmapSurfacesNV", [(GLsizei, "numSurface"), (Array(Const(GLvdpauSurfaceNV), "numSurface"), "surfaces")]),
 
     # GL_NV_texture_multisample
     GlFunction(Void, "glTexImage2DMultisampleCoverageNV", [(GLenum, "target"), (GLsizei, "coverageSamples"), (GLsizei, "colorSamples"), (GLint, "internalFormat"), (GLsizei, "width"), (GLsizei, "height"), (GLboolean, "fixedSampleLocations")]),
@@ -3003,8 +3003,8 @@ glapi.addFunctions([
     GlFunction(Void, "glEndConditionalRenderNVX", []),
 
     # GL_AMD_sparse_texture
-    GlFunction(Void, "glTexStorageSparseAMD", [(GLenum, "target"), (GLenum, "internalFormat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLsizei, "layers"), (GLbitfield, "flags")]),
-    GlFunction(Void, "glTextureStorageSparseAMD", [(GLtexture, "texture"), (GLenum, "target"), (GLenum, "internalFormat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLsizei, "layers"), (GLbitfield, "flags")]),
+    GlFunction(Void, "glTexStorageSparseAMD", [(GLenum, "target"), (GLenum, "internalFormat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLsizei, "layers"), (GLbitfield_texStorageSparse, "flags")]),
+    GlFunction(Void, "glTextureStorageSparseAMD", [(GLtexture, "texture"), (GLenum, "target"), (GLenum, "internalFormat"), (GLsizei, "width"), (GLsizei, "height"), (GLsizei, "depth"), (GLsizei, "layers"), (GLbitfield_texStorageSparse, "flags")]),
 
     # GL_INTEL_map_texture
     # XXX: glMapTexture2DINTEL prototype in glext.h is busted
@@ -3017,6 +3017,19 @@ glapi.addFunctions([
 
     # GL_NV_framebuffer_blit
     GlFunction(Void, "glBlitFramebufferNV", [(GLint, "srcX0"), (GLint, "srcY0"), (GLint, "srcX1"), (GLint, "srcY1"), (GLint, "dstX0"), (GLint, "dstY0"), (GLint, "dstX1"), (GLint, "dstY1"), (GLbitfield_attrib, "mask"), (GLenum, "filter")]),
+
+    # GL_NV_blend_equation_advanced
+    GlFunction(Void, "glBlendParameteriNV", [(GLenum, "pname"), (GLint, "value")]),
+    GlFunction(Void, "glBlendBarrierNV", []),
+
+    # GL_EXT_debug_label
+    GlFunction(Void, "glLabelObjectEXT", [(GLenum, "type"), (GLuint, "object"), (GLsizei, "length"), (GLstringConst, "label")]),
+    GlFunction(Void, "glGetObjectLabelEXT", [(GLenum, "type"), (GLuint, "object"), (GLsizei, "bufSize"), Out(Pointer(GLsizei), "length"), Out(GLstring, "label")], sideeffects=False),
+
+    # GL_EXT_debug_marker
+    GlFunction(Void, "glInsertEventMarkerEXT", [(GLsizei, "length"), (String(Const(GLchar), "length ? length : strlen(marker)"), "marker")], sideeffects=True),
+    GlFunction(Void, "glPushGroupMarkerEXT", [(GLsizei, "length"), (String(Const(GLchar), "length ? length : strlen(marker)"), "marker")], sideeffects=True),
+    GlFunction(Void, "glPopGroupMarkerEXT", [], sideeffects=True),
 
     # GL_KTX_buffer_region
     # XXX: http://www.west.net/~brittain/3dsmax2.htm does not mention EXT suffix

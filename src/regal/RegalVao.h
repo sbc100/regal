@@ -121,7 +121,7 @@ struct Vao
     if (max_vertex_attribs > REGAL_EMU_MAX_VERTEX_ATTRIBS)
       max_vertex_attribs = REGAL_EMU_MAX_VERTEX_ATTRIBS;
 
-    RegalContext *sharingWith = ctx.groupInitializedContext();
+    RegalContext *sharingWith = ctx.shareGroup->front();
     if (sharingWith)
       objects = sharingWith->vao->objects;
 
@@ -178,6 +178,15 @@ struct Vao
     current = 9999999; // this is only to force the bind...
     currObject = NULL;
     BindVertexArray( ctx, 0 );
+
+    if( ctx.info->gl_arb_vertex_array_object == false ) {
+      ctx.info->gl_arb_vertex_array_object = true;
+    }
+
+    if( ctx.emuInfo->extensionsSet.count( "GL_ARB_vertex_array_object" ) == 0 ) {
+      ctx.emuInfo->extensionsSet.insert( "GL_ARB_vertex_array_object" );
+    }
+
   }
 
   void Cleanup( RegalContext &ctx )

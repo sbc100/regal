@@ -94,7 +94,9 @@ namespace Emu
 
 void Quads::Init(RegalContext &ctx)
 {
-  UNUSED_PARAMETER(ctx);
+  elementArrayBuffer = 0;
+  DispatchTableGL & d = *ctx.dispatcher.emulation.next();
+  d.call(&d.glGenBuffers)(1, &quadIndexBuffer);
   windingMode = GL_CCW;
   frontFaceMode = backFaceMode = GL_FILL;
   shadeMode = GL_SMOOTH;
@@ -320,10 +322,13 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
         }
       }
 
+
+      dt.call(&dt.glBindBuffer)( GL_ELEMENT_ARRAY_BUFFER, quadIndexBuffer);
       while (myCount >= 4)
       {
+        dt.call(&dt.glBufferData)( GL_ELEMENT_ARRAY_BUFFER, n * 6 * sizeof( GLuint ), indices, GL_STATIC_DRAW );
         Internal("Regal::Emu::Quads::glDrawArrays","glDrawElements(GL_TRIANGLES,",n*6,",GL_UNSIGNED_INT, [])");
-        dt.call(&dt.glDrawElements)(GL_TRIANGLES, n*6, GL_UNSIGNED_INT, indices);
+        dt.call(&dt.glDrawElements)(GL_TRIANGLES, n*6, GL_UNSIGNED_INT, 0);
         myCount -= (EMU_QUADS_BUFFER_SIZE * 4);
 
         if (myCount >= 4)
@@ -333,6 +338,8 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
             indices[ii] += (EMU_QUADS_BUFFER_SIZE * 4);
         }
       }
+      dt.call(&dt.glBindBuffer)( GL_ELEMENT_ARRAY_BUFFER, elementArrayBuffer );
+
     }
 
     if (frontFaceMode != GL_FILL)
@@ -470,6 +477,12 @@ bool Quads::glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei co
   }
 
   return true;
+}
+
+void Quads::glBindBuffer( GLenum target, GLuint buffer ) {
+  if( target == GL_ELEMENT_ARRAY_BUFFER ) {
+    elementArrayBuffer = buffer;
+  }
 }
 
 void Quads::glFrontFace(GLenum mode)

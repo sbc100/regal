@@ -41,7 +41,7 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-#if !REGAL_NO_HTTP
+#if REGAL_HTTP
 extern unsigned char favicon[2238];
 #endif
 

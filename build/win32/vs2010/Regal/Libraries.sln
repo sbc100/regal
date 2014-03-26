@@ -51,6 +51,10 @@ Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "png", "png.vcxproj", "{6446
 		{C04D78E5-3A59-67AE-8832-C03CE8DFF0B7} = {C04D78E5-3A59-67AE-8832-C03CE8DFF0B7}
 	EndProjectSection
 EndProject
+Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "pcrelib", "pcrelib.vcxproj", "{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "jsonsllib", "jsonsllib.vcxproj", "{B2F73D1B-8FA3-518D-0F85-9AAD20EF1E1C}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -60,6 +64,10 @@ Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "squishlib", "squishlib.vcxp
 	EndProjectSection
 EndProject
 Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "apitracelib", "apitracelib.vcxproj", "{A996811D-4FA1-5874-A99B-81B8A0F3AA21}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "glsloptlib", "glsloptlib.vcxproj", "{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -171,6 +179,14 @@ Global
 		{6446D860-DBBF-E540-E9E2-CBAB5F98F1E3}.Release|Win32.ActiveCfg = Release|Win32
 		{6446D860-DBBF-E540-E9E2-CBAB5F98F1E3}.Release|x64.Build.0 = Release|x64
 		{6446D860-DBBF-E540-E9E2-CBAB5F98F1E3}.Release|x64.ActiveCfg = Release|x64
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Debug|Win32.Build.0 = Debug|Win32
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Debug|x64.Build.0 = Debug|x64
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Debug|x64.ActiveCfg = Debug|x64
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Release|Win32.Build.0 = Release|Win32
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Release|Win32.ActiveCfg = Release|Win32
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Release|x64.Build.0 = Release|x64
+		{F429E8BA-6BB6-211C-2C88-BD0EA55CF9FD}.Release|x64.ActiveCfg = Release|x64
 		{B2F73D1B-8FA3-518D-0F85-9AAD20EF1E1C}.Debug|Win32.Build.0 = Debug|Win32
 		{B2F73D1B-8FA3-518D-0F85-9AAD20EF1E1C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{B2F73D1B-8FA3-518D-0F85-9AAD20EF1E1C}.Debug|x64.Build.0 = Debug|x64
@@ -195,6 +211,14 @@ Global
 		{A996811D-4FA1-5874-A99B-81B8A0F3AA21}.Release|Win32.ActiveCfg = Release|Win32
 		{A996811D-4FA1-5874-A99B-81B8A0F3AA21}.Release|x64.Build.0 = Release|x64
 		{A996811D-4FA1-5874-A99B-81B8A0F3AA21}.Release|x64.ActiveCfg = Release|x64
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Debug|Win32.Build.0 = Debug|Win32
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Debug|x64.Build.0 = Debug|x64
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Debug|x64.ActiveCfg = Debug|x64
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Release|Win32.Build.0 = Release|Win32
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Release|Win32.ActiveCfg = Release|Win32
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Release|x64.Build.0 = Release|x64
+		{1BC6E4FA-5DF0-05C0-9F6A-582B10E2F55B}.Release|x64.ActiveCfg = Release|x64
 		{E3BB0211-87AF-58EF-3C65-999758F666FD}.Debug|Win32.Build.0 = Debug|Win32
 		{E3BB0211-87AF-58EF-3C65-999758F666FD}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E3BB0211-87AF-58EF-3C65-999758F666FD}.Debug|x64.Build.0 = Debug|x64

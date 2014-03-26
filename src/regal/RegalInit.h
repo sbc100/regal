@@ -98,6 +98,8 @@ public:
   static void              destroyContext(RegalSystemContext sysCtx);
 
   static void              getContextListingHTML(std::string &text);
+  static size_t            getNumContexts();
+  static RegalContext *    getContextByIndex( size_t index );
 };
 
 REGAL_NAMESPACE_END

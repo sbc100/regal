@@ -60,6 +60,7 @@ struct Quads
   void Cleanup(RegalContext &ctx);
   bool glDrawArrays(RegalContext *ctx, GLenum mode, GLint first, GLsizei count);
 
+  void glBindBuffer(GLenum target, GLuint buffer );
   void glFrontFace(GLenum mode);
   void glPolygonMode(GLenum face, GLenum mode);
   void glShadeModel(GLenum mode);
@@ -68,13 +69,14 @@ struct Quads
   void glEnable(GLenum cap);
   void glDisable(GLenum cap);
 
-
   GLenum windingMode;
   GLenum frontFaceMode;
   GLenum backFaceMode;
   GLenum shadeMode;
   GLenum provokeMode;
   GLenum cullFace;
+  GLuint elementArrayBuffer;
+  GLuint quadIndexBuffer;
   bool   gl_quads_follow_provoking_vertex_convention : 1;
   bool   cullingFaces : 1;
 };

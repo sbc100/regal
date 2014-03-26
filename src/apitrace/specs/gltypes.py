@@ -100,6 +100,9 @@ GLshader = Handle("shader", GLuint)
 GLlocation = Handle("location", GLint, key=('program', GLhandleARB))
 GLlocationARB = Handle("location", GLint, key=('programObj', GLhandleARB))
 
+# TODO: Symbolic representation of GL_INVALID_INDEX
+GLuniformBlock = Handle("location", GLuint, key=('program', GLprogram))
+
 contextKey = ('reinterpret_cast<uintptr_t>(glretrace::getCurrentContext())', UIntPtr)
 
 GLprogramARB = Handle("programARB", GLuint)
@@ -338,3 +341,11 @@ GLperfMonitorCounterInfoAMD = Polymorphic('pname', [
     ],
     OpaquePointer(GLvoid),
 )
+
+# GL_AMD_sparse_texture
+GLbitfield_texStorageSparse = Flags(GLbitfield, [
+    'GL_TEXTURE_STORAGE_SPARSE_BIT_AMD', # 0x00000001
+])
+
+# GL_NV_vdpau_interop
+GLvdpauSurfaceNV = Alias('GLvdpauSurfaceNV', GLintptr)

@@ -1,9 +1,11 @@
+
 /*
   Copyright (c) 2011-2013 NVIDIA Corporation
-  Copyright (c) 2011-2012 Cass Everitt
+  Copyright (c) 2011-2013 Cass Everitt
   Copyright (c) 2012 Scott Nations
   Copyright (c) 2012 Mathias Schott
   Copyright (c) 2012 Nigel Stewart
+  Copyright (c) 2013 Seth Williams
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification,
@@ -48,6 +50,7 @@ typedef boost::print::string_list<string> string_list;
 #include "RegalLog.h"
 #include "RegalToken.h"
 #include "RegalHelper.h"
+#include "RegalShader.h"
 
 REGAL_GLOBAL_END
 
@@ -57,6 +60,7 @@ namespace Emu
 {
 
 using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
+using namespace ::REGAL_NAMESPACE_INTERNAL::Shader;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
 
 typedef Iff::State State;
@@ -213,8 +217,8 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   {
     src << "uniform vec4 rglAttrib[" << REGAL_EMU_MAX_VERTEX_ATTRIBS << "];\n";
   }
-  src << "uniform mat4 rglModelView;\n";
-  src << "uniform mat4 rglProjection;\n";
+  src << "uniform mat4 rglModelViewMatrix;\n";
+  src << "uniform mat4 rglProjectionMatrix;\n";
   src << "in vec4 rglVertex;\n";
   n = array_size( st.tex );
   for ( size_t i = 0; i < n; i++ )
@@ -241,7 +245,7 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   //src << "in vec4 rglWeight;\n";
   if ( st.lighting || hasNormalMap || hasSphereMap || hasReflectionMap )
   {
-    src << "uniform mat4 rglModelViewInverseTranspose;\n";
+    src << "uniform mat3 rglNormalMatrix;\n";
     src << "in vec3 rglNormal;\n";
   }
   if ( st.lighting )
@@ -372,18 +376,18 @@ static void GenerateVertexShaderSource( const Iff * rff, const Iff::State & stat
   }
 
   src << "void main() {\n";
-  src << "    gl_Position = rglProjection * rglModelView * rglVertex;\n";
+  src << "    gl_Position = rglProjectionMatrix * rglModelViewMatrix * rglVertex;\n";
   if ( st.lighting || hasNormalMap || hasReflectionMap || hasEyeLinearTexGen ||
       hasClipPlanes || ( st.fog.enable && st.fog.useDepth ) || hasSphereMap )
   {
-    src << "    vec4 eh = rglModelView * rglVertex;\n";
+    src << "    vec4 eh = rglModelViewMatrix * rglVertex;\n";
   }
 
   if ( st.lighting || hasNormalMap || hasReflectionMap || hasSphereMap )
   {
     src << "    vec4 ep = eh / eh.w;\n";
     src << "    vec3 ev = -normalize( ep.xyz );\n";
-    src << "    vec3 en = mat3( rglModelViewInverseTranspose ) * rglNormal;\n";
+    src << "    vec3 en = rglNormalMatrix * rglNormal;\n";
     if ( st.normalize )
     {
       src << "    en = normalize( en );\n";
@@ -1191,7 +1195,7 @@ static void GenerateFragmentShaderSource( Iff * rff, string_list &src )
   {
     if (st.alphaTest.comp != Iff::CF_Never && st.alphaTest.comp != Iff::CF_Always )
     {
-      src << "uniform float rglAlphaRef;\n";
+      src << "uniform vec2 rglAlphaRef;\n";
     }
   }
   src << "void main() {\n";
@@ -1320,22 +1324,22 @@ static void GenerateFragmentShaderSource( Iff * rff, string_list &src )
         src << "    discard;\n";
         break;
       case Iff::CF_Less:
-        src << "    if( rglFragColor.w >= rglAlphaRef ) discard;\n";
+        src << "    if( rglFragColor.w >= rglAlphaRef.x ) discard;\n";
         break;
       case Iff::CF_Greater:
-        src << "    if( rglFragColor.w <= rglAlphaRef ) discard;\n";
+        src << "    if( rglFragColor.w <= rglAlphaRef.x ) discard;\n";
         break;
       case Iff::CF_Lequal:
-        src << "    if( rglFragColor.w > rglAlphaRef ) discard;\n";
+        src << "    if( rglFragColor.w > rglAlphaRef.x ) discard;\n";
         break;
       case Iff::CF_Gequal:
-        src << "    if( rglFragColor.w < rglAlphaRef ) discard;\n";
+        src << "    if( rglFragColor.w < rglAlphaRef.x ) discard;\n";
         break;
       case Iff::CF_Equal:
-        src << "    if( rglFragColor.w != rglAlphaRef ) discard;\n";
+        src << "    if( rglFragColor.w != rglAlphaRef.x ) discard;\n";
         break;
       case Iff::CF_NotEqual:
-        src << "    if( rglFragColor.w == rglAlphaRef ) discard;\n";
+        src << "    if( rglFragColor.w == rglAlphaRef.x ) discard;\n";
         break;
       case Iff::CF_Always:
         break;
@@ -1406,7 +1410,6 @@ bool State::SetEnable( Iff * ffn, bool enable, GLenum cap )
   Internal("Regal::Iff::State::SetEnable",enable," ",Token::GLenumToString(cap));
 
   Iff::Version & ver = ffn->ver;
-  int activeTex = ffn->activeTextureIndex;
   int shift = 0;
   switch( cap )
   {
@@ -1466,11 +1469,15 @@ bool State::SetEnable( Iff * ffn, bool enable, GLenum cap )
     case GL_TEXTURE_GEN_R:
     case GL_TEXTURE_GEN_Q:
     {
-      raw.ver = ver.Update();
-      int idx = cap - GL_TEXTURE_GEN_S;
-      RegalAssertArrayIndex( raw.tex, ffn->activeTextureIndex );
-      RegalAssertArrayIndex( raw.tex[ ffn->activeTextureIndex ].texgen, idx );
-      raw.tex[ ffn->activeTextureIndex ].texgen[ idx ].enable = enable;
+      int activeTex = ffn->activeTextureIndex;
+      if ( activeTex < REGAL_EMU_MAX_TEXTURE_UNITS )
+      {
+        raw.ver = ver.Update();
+        int idx = cap - GL_TEXTURE_GEN_S;
+        RegalAssertArrayIndex( raw.tex, activeTex );
+        RegalAssertArrayIndex( raw.tex[ activeTex ].texgen, idx );
+        raw.tex[ activeTex ].texgen[ idx ].enable = enable;
+      }
       return true;
     }
     case GL_CLIP_PLANE0:
@@ -1484,17 +1491,20 @@ bool State::SetEnable( Iff * ffn, bool enable, GLenum cap )
       raw.ver = ver.Update();
       RegalAssertArrayIndex( raw.clipPlaneEnabled, cap - GL_CLIP_PLANE0 );
       raw.clipPlaneEnabled[ cap - GL_CLIP_PLANE0 ] = enable;
-      return false;
+      return true;
     case GL_ALPHA_TEST:
-      raw.ver = ver.Update();
+      uniform.alphaTest.alphaTestEnable = enable ? GLfloat(1) : GLfloat(0);
+      uniform.alphaTest.ver = uniform.ver = raw.ver = ver.Update();
       raw.alphaTest.enable = enable;
       return true;
     default:
       return false;
   }
+  int activeTex = ffn->activeTextureIndex;
   if ( activeTex >= REGAL_EMU_MAX_TEXTURE_UNITS )
   {
-    Warning( "Active texture index is too large: ", activeTex, " >= ", REGAL_EMU_MAX_TEXTURE_UNITS );
+    // track state for all texture units, but bail before fixed function
+    // texture unit tracking
     return true;
   }
   RegalAssertArrayIndex( raw.tex, activeTex );
@@ -1793,7 +1803,7 @@ GLuint State::HighestPriorityTextureEnable( GLuint enables )
   return 0;
 }
 
-void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSrc, const GLchar *fsSrc )
+void Program::Init( RegalContext * ctx, const Store & sstore, GLuint vshd, GLuint fshd )
 {
   Internal("Regal::Iff::Program::Init","()");
 
@@ -1811,8 +1821,10 @@ void Program::Init( RegalContext * ctx, const Store & sstore, const GLchar *vsSr
   DispatchTableGL & tbl = ctx->dispatcher.emulation;
   store = sstore;
   pg = tbl.call(&tbl.glCreateProgram)();
-  Shader( ctx, tbl, GL_VERTEX_SHADER, vs, vsSrc );
-  Shader( ctx, tbl, GL_FRAGMENT_SHADER, fs, fsSrc );
+  vs = vshd;
+  tbl.call(&tbl.glAttachShader)(pg, vs );
+  fs = fshd;
+  tbl.call(&tbl.glAttachShader)(pg, fs );
   Attribs( ctx );
   tbl.call(&tbl.glLinkProgram)( pg );
 
@@ -1857,7 +1869,6 @@ void Program::Shader( RegalContext * ctx, DispatchTableGL & tbl, GLenum type, GL
   }
 #endif
 
-  tbl.call(&tbl.glAttachShader)( pg, shader );
 }
 
 void Program::Attribs( RegalContext * ctx )
@@ -1931,13 +1942,10 @@ void Program::UserShaderModeAttribs( RegalContext * ctx )
   for ( GLuint i = 0; i < units; i++ )
   {
     RegalAssertArrayIndex( store.tex, i );
-    if ( store.tex[i].enables == 0 )
-    {
-      continue;
-    }
-    string_list ss;
-    ss << "rglMultiTexCoord" << i;
-    tbl.call(&tbl.glBindAttribLocation)( pg, ctx->iff->ffAttrTexBegin + i, ss.str().c_str() );
+    string s( "rglMultiTexCoord" );
+    const char *nums = "0123456789abcdefghijklmnop";
+    s += string( nums + i, 1 );
+    tbl.call(&tbl.glBindAttribLocation)( pg, ctx->iff->ffAttrTexBegin + i, s.c_str() );
   }
 }
 
@@ -1954,6 +1962,22 @@ void Program::Samplers( RegalContext * ctx, DispatchTableGL & tbl )
     GLint slot = tbl.call(&tbl.glGetUniformLocation)( pg, samplerName.c_str() );
     if ( slot >= 0 )
       tbl.call(&tbl.glUniform1i)( slot, ii );
+  }
+}
+
+void Iff::UserProgramInstance::LocateUniforms( RegalContext * ctx, DispatchTableGL & tbl ) {
+  Internal("Regal::Iff::UserProgramInstance::LocateUniforms","()");
+
+  UNUSED_PARAMETER(ctx);
+
+  size_t n = array_size( regalFFUniformInfo );
+  for ( size_t i = 1; i < n; i++ )
+  {
+    RegalAssertArrayIndex( regalFFUniformInfo, i );
+    const RegalFFUniformInfo & ri = regalFFUniformInfo[i];
+    GLint slot = tbl.call(&tbl.glGetUniformLocation)( inst.prog, ri.name );
+    if (slot > -1)
+      ffuniforms[ ri.val ] = UniformInfo(~GLuint64(0), slot);
   }
 }
 
@@ -2013,7 +2037,7 @@ Iff::Iff()
   RegalAssert( array_size( textureUnit ) == n);
   RegalAssert( array_size( textureEnvColor ) == n);
   RegalAssert( array_size( textureEnvColorVer ) == n);
-  RegalAssert( array_size( textureBinding ) == n);
+  RegalAssert( array_size( textureBinding ) >= n);
   for (size_t i = 0; i < n; i++)
   {
     textureEnvColor[ i ] = Float4( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -2711,8 +2735,6 @@ bool Iff::ShadowDisable( GLenum cap )
 
 bool Iff::EnableIndexed( GLenum cap, GLuint index )
 {
-  if (index >= GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
-    return false;
   activeTextureIndex = index;
   bool ret = ffstate.SetEnable( this, true, cap );
   return ret;
@@ -2720,8 +2742,6 @@ bool Iff::EnableIndexed( GLenum cap, GLuint index )
 
 bool Iff::DisableIndexed( GLenum cap, GLuint index )
 {
-  if (index >= GLuint( REGAL_EMU_MAX_TEXTURE_UNITS ))
-    return false;
   activeTextureIndex = index;
   bool ret = ffstate.SetEnable( this, false, cap );
   return ret;
@@ -2730,7 +2750,18 @@ bool Iff::DisableIndexed( GLenum cap, GLuint index )
 bool Iff::ShadowUseProgram( GLuint prog )
 {
   program = prog;
-  return prog == 0;  // pass the call along only if it's non-zero
+
+  // ensure program bind when program changes
+  if( currinst ) {
+    currinst->prevInstance = NULL;
+  }
+
+  if( prog && inst.count( prog ) ) {
+    currinst = & inst[prog];
+  } else {
+    currinst = NULL;
+  }
+  return prog == 0 || currinst != NULL;  // pass the call along only if it's non-zero and not instanced
 }
 
 bool Iff::ShadowBindProgramPipeline( GLuint progPipeline )
@@ -2743,7 +2774,8 @@ void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )
 {
   Internal("Regal::Iff::ShadowMultiTexBinding",toString(texunit)," ",toString(target)," ",obj);
 
-  if ( texunit - GL_TEXTURE0 > ( REGAL_EMU_MAX_TEXTURE_COORDS - 1 ) )
+  // texture unit state is only set when the active texture index is <4 (for fixed function)
+  if ( texunit - GL_TEXTURE0 > ( REGAL_EMU_MAX_TEXTURE_UNITS - 1 ) )
     return;
 
   activeTextureIndex = texunit - GL_TEXTURE0;
@@ -2768,7 +2800,7 @@ void Iff::ShadowTextureInfo( GLuint obj, GLenum target, GLint internalFormat )
   Internal("Regal::Iff::ShadowTextureInfo",obj," ",GLenumToString(target)," ",GLenumToString(internalFormat));
 
   UNUSED_PARAMETER(target);
-  // assert( target == tip->tgt );
+
   if ( fmtmap.count( internalFormat ) == 0 )
   {
     Warning( "Unknown internal format: ", GLenumToString(internalFormat) );
@@ -2792,6 +2824,7 @@ void Iff::ShadowMultiTexInfo( GLenum texunit, GLenum target, GLint internalForma
 
 void Iff::ShadowTexInfo( GLenum target, GLint internalFormat )
 {
+  // texture unit state is only set when the active texture index <4 (for fixed function)
   if ( shadowActiveTextureIndex > ( REGAL_EMU_MAX_TEXTURE_UNITS - 1 ) )
   {
     return;
@@ -3413,12 +3446,13 @@ void Iff::Init( RegalContext &ctx )
   programPipeline = 0;
   program = 0;
   currprog = NULL;
+  currinst = NULL;
   currMatrixStack = &modelview;
   currVao = 0;
   gles = false;
   legacy = false;
 
-  RegalContext *sharingWith = ctx.groupInitializedContext();
+  RegalContext *sharingWith = ctx.shareGroup->front();
   if (sharingWith)
     textureObjToFmt = sharingWith->iff->textureObjToFmt;
 
@@ -3517,262 +3551,348 @@ void Iff::State::Process( Iff * ffn )
                                reinterpret_cast<const char *>((&p)+1) - reinterpret_cast<const char *>(&p.hash) - sizeof( p.hash ), 0);
 }
 
+
 void Iff::UpdateUniforms( RegalContext * ctx )
 {
   Internal("Regal::Iff::UpdateUniforms", boost::print::optional(ctx,Logging::pointers));
 
-  Program & pgm = *currprog;
   DispatchTableGL & tbl = ctx->dispatcher.emulation;
-  if ( pgm.ver != ffstate.Ver() )
-  {
-    pgm.ver = ffstate.Ver();
-    const State::Store & p = ffstate.processed;
-    const State::StoreUniform & u = ffstate.uniform;
-    for ( std::map< RegalFFUniformEnum, Program::UniformInfo>::iterator i = pgm.uniforms.begin(); i != pgm.uniforms.end(); ++i )
-    {
-      Program::UniformInfo & ui = (*i).second;
-      switch( (*i).first )
-      {
-        case FFU_ModelViewInverseTranspose:
-        {
-          if ( ui.ver != modelview.Ver() )
-          {
-            ui.ver = modelview.Ver();
-            r3::Matrix4f mvi = modelview.Top().Inverse();
-            if ( p.rescaleNormal )
-            {
-              mvi = RescaleNormal( mvi );
-            }
-            tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, mvi.Transpose().m );
-          }
-          break;
-        }
-        case FFU_ModelViewInverse:
-        {
-          if ( ui.ver != modelview.Ver() )
-          {
-            ui.ver = modelview.Ver();
-            r3::Matrix4f mvi = modelview.Top().Inverse();
-            if ( p.rescaleNormal )
-            {
-              mvi = RescaleNormal( mvi );
-            }
-            tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, mvi.Ptr() );
-          }
-          break;
-        }
-        case FFU_ModelView:
-        {
-          if ( ui.ver != modelview.Ver() )
-          {
-            ui.ver = modelview.Ver();
-            tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, modelview.Top().m );
-          }
-          break;
-        }
-        case FFU_Projection:
-        {
-          if ( ui.ver != projection.Ver() )
-          {
-            ui.ver = projection.Ver();
-            tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, projection.Top().m );
-          }
-          break;
-        }
-        case FFU_TextureMatrix0:
-        case FFU_TextureMatrix1:
-        case FFU_TextureMatrix2:
-        case FFU_TextureMatrix3:
-        case FFU_TextureMatrix4:
-        case FFU_TextureMatrix5:
-        case FFU_TextureMatrix6:
-        case FFU_TextureMatrix7:
-        case FFU_TextureMatrix8:
-        case FFU_TextureMatrix9:
-        case FFU_TextureMatrix10:
-        case FFU_TextureMatrix11:
-        case FFU_TextureMatrix12:
-        case FFU_TextureMatrix13:
-        case FFU_TextureMatrix14:
-        case FFU_TextureMatrix15:
-        {
-          int idx = ( ((*i).first) - FFU_TextureMatrix0 );
-          RegalAssertArrayIndex( texture, idx );
-          if ( ui.ver != texture[ idx ].Ver() )
-          {
-            ui.ver = texture[ idx ].Ver();
-            r3::Matrix4f m = texture[ idx ].Top();
-            tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, m.m );
-          }
-          break;
-        }
-        case FFU_TextureEnvColor0:
-        case FFU_TextureEnvColor1:
-        case FFU_TextureEnvColor2:
-        case FFU_TextureEnvColor3:
-        case FFU_TextureEnvColor4:
-        case FFU_TextureEnvColor5:
-        case FFU_TextureEnvColor6:
-        case FFU_TextureEnvColor7:
-        case FFU_TextureEnvColor8:
-        case FFU_TextureEnvColor9:
-        case FFU_TextureEnvColor10:
-        case FFU_TextureEnvColor11:
-        case FFU_TextureEnvColor12:
-        case FFU_TextureEnvColor13:
-        case FFU_TextureEnvColor14:
-        case FFU_TextureEnvColor15:
-        {
-          int idx = ( ((*i).first) - FFU_TextureEnvColor0 );
-          RegalAssertArrayIndex( textureEnvColorVer, idx );
-          if ( ui.ver != textureEnvColorVer[ idx ] )
-          {
-            ui.ver = textureEnvColorVer[ idx ];
-            tbl.glUniform4fv( ui.slot, 1, &textureEnvColor[ idx ].x);
-          }
-          break;
-        }
-        case FFU_Light0:
-        case FFU_Light1:
-        case FFU_Light2:
-        case FFU_Light3:
-        case FFU_Light4:
-        case FFU_Light5:
-        case FFU_Light6:
-        case FFU_Light7:
-        {
-          int idx = ( ((*i).first) - FFU_Light0 );
-          RegalAssertArrayIndex( u.light, idx );
-          if ( ui.ver != u.light[ idx ].ver )
-          {
-            ui.ver = u.light[ idx ].ver;
-            tbl.glUniform4fv( ui.slot, LE_Elements, &u.light[ idx ].ambient.x);
-          }
-          break;
-        }
-        case FFU_MaterialFront:
-        case FFU_MaterialBack:
-        {
-          int idx = ( ((*i).first) - FFU_MaterialFront );
-          RegalAssertArrayIndex( u.mat, idx );
-          if ( ui.ver != u.mat[ idx ].ver )
-          {
-            ui.ver = u.mat[ idx ].ver;
-            tbl.glUniform4fv( ui.slot, ME_Elements, &u.mat[ idx ].ambient.x);
-          }
-          break;
-        }
-        case FFU_LightModelAmbient:
-        {
-          tbl.glUniform4fv( ui.slot, 1, &u.lightModelAmbient.x);
-          break;
-        }
-        case FFU_Texgen0ObjS:
-        case FFU_Texgen0ObjT:
-        case FFU_Texgen0ObjR:
-        case FFU_Texgen0ObjQ:
-        case FFU_Texgen0EyeS:
-        case FFU_Texgen0EyeT:
-        case FFU_Texgen0EyeR:
-        case FFU_Texgen0EyeQ:
-        case FFU_Texgen1ObjS:
-        case FFU_Texgen1ObjT:
-        case FFU_Texgen1ObjR:
-        case FFU_Texgen1ObjQ:
-        case FFU_Texgen1EyeS:
-        case FFU_Texgen1EyeT:
-        case FFU_Texgen1EyeR:
-        case FFU_Texgen1EyeQ:
-        case FFU_Texgen2ObjS:
-        case FFU_Texgen2ObjT:
-        case FFU_Texgen2ObjR:
-        case FFU_Texgen2ObjQ:
-        case FFU_Texgen2EyeS:
-        case FFU_Texgen2EyeT:
-        case FFU_Texgen2EyeR:
-        case FFU_Texgen2EyeQ:
-        case FFU_Texgen3ObjS:
-        case FFU_Texgen3ObjT:
-        case FFU_Texgen3ObjR:
-        case FFU_Texgen3ObjQ:
-        case FFU_Texgen3EyeS:
-        case FFU_Texgen3EyeT:
-        case FFU_Texgen3EyeR:
-        case FFU_Texgen3EyeQ:
-        {
-          int idx = ( (*i).first ) - FFU_Texgen0ObjS;
-          int comp = idx % 4;
-          int unit = idx >> 3;
-          RegalAssertArrayIndex( u.tex, unit );
-          RegalAssertArrayIndex( u.tex[unit].texgen, comp );
-          const State::TexgenUniform & tg = u.tex[unit].texgen[comp];
-          if ( idx & 4 )
-          {
-            if ( ui.ver != tg.eyeVer )
-            {
-              ui.ver = tg.eyeVer;
-              tbl.glUniform4fv( ui.slot, 1, & tg.eye.x );
-            }
-          }
-          else
-          {
-            if ( ui.ver != tg.objVer )
-            {
-              ui.ver = tg.objVer;
-              tbl.glUniform4fv( ui.slot, 1, & tg.obj.x );
-            }
-          }
-          break;
-        }
-        case FFU_ClipPlane0:
-        case FFU_ClipPlane1:
-        case FFU_ClipPlane2:
-        case FFU_ClipPlane3:
-        case FFU_ClipPlane4:
-        case FFU_ClipPlane5:
-        case FFU_ClipPlane6:
-        case FFU_ClipPlane7:
-        {
-          int idx = ( (*i).first ) - FFU_ClipPlane0;
-          RegalAssertArrayIndex( u.clip, idx );
-          if ( ui.ver != u.clip[idx].ver )
-          {
-            ui.ver = u.clip[idx].ver;
-            tbl.glUniform4fv( ui.slot, 1, & u.clip[idx].plane.x );
-          }
-          break;
-        }
-        case FFU_Fog:
-        {
-          if ( ui.ver != u.fog.ver )
-          {
-            ui.ver = u.fog.ver;
-            tbl.glUniform4fv( ui.slot, 2, &u.fog.params[0].x);
-          }
-          break;
-        }
-        case FFU_AlphaRef:
-        {
-          if ( ui.ver != u.alphaTest.ver )
-          {
-            ui.ver = u.alphaTest.ver;
-            tbl.glUniform1f( ui.slot, u.alphaTest.alphaRef );
-          }
-          break;
-        }
-        case FFU_Attrib:
-        {
-          if ( ui.ver != u.vabVer )
-          {
-            ui.ver = u.vabVer;
-            tbl.glUniform4fv( ui.slot, REGAL_EMU_MAX_VERTEX_ATTRIBS, & immVab[0].x );
-          }
-          break;
-        }
-        default:
-          break;
-      }
+  UniformMap * umap = NULL;
+  if( currinst ) {
+    if( currinst->prevInstance == NULL ) {
+      return;
     }
+
+    UserProgramInstance & upi = *currinst->prevInstance;
+
+    if ( upi.ffver == ffstate.Ver() ) {
+      return;
+    }
+    upi.ffver = ffstate.Ver();
+    umap = & upi.ffuniforms;
+  } else {
+    Program & pgm = *currprog;
+    if ( pgm.ver == ffstate.Ver() ) {
+      return;
+    }
+    pgm.ver = ffstate.Ver();
+    umap = & pgm.uniforms;
+  }
+
+  const State::Store & p = ffstate.processed;
+  const State::StoreUniform & u = ffstate.uniform;
+  for ( UniformMap::iterator i = umap->begin(); i != umap->end(); ++i )
+  {
+    UniformInfo & ui = (*i).second;
+    bool inverse = false;
+    bool transpose = false;
+
+    RegalFFUniformEnum ue = (*i).first;
+
+    if( FFU_ModelViewMatrixInverse <= ue && ue <= FFU_TextureMatrix15Inverse ) {
+      inverse = true;
+      ue = RegalFFUniformEnum( FFU_ModelViewMatrix + ( ue - FFU_ModelViewMatrixInverse ) );
+    } else if( FFU_ModelViewMatrixTranspose <= ue && ue <= FFU_TextureMatrix15Transpose ) {
+      transpose = true;
+      ue = RegalFFUniformEnum( FFU_ModelViewMatrix + ( ue - FFU_ModelViewMatrixTranspose ) );
+    } else if( FFU_ModelViewMatrixInverseTranspose <= ue && ue <= FFU_TextureMatrix15InverseTranspose ) {
+      inverse = true;
+      transpose = true;
+      ue = RegalFFUniformEnum( FFU_ModelViewMatrix + ( ue - FFU_ModelViewMatrixInverseTranspose ) );
+    }
+
+    switch( ue )
+    {
+      case FFU_NormalMatrix:
+      {
+        if( ui.ver != modelview.Ver() ) {
+          ui.ver = modelview.Ver();
+          r3::Matrix4f m = modelview.Top().Inverse().Transpose();
+          if ( p.rescaleNormal )
+          {
+            m = RescaleNormal( m );
+          }
+          r3::Matrix3f m3 = r3::ToMatrix3( m ).Transpose(); // FIXME: r3::Matrix3f should be column major like Matrix4...
+          tbl.glUniformMatrix3fv( ui.slot, 1, GL_FALSE, m3.Ptr() );
+        }
+        break;
+      }
+      case FFU_ModelViewMatrix:
+      {
+        if ( ui.ver != modelview.Ver() )
+        {
+          ui.ver = modelview.Ver();
+          r3::Matrix4f m = modelview.Top();
+          if( inverse ) {
+            m = m.Inverse();
+          }
+          if( transpose ) {
+            m = m.Transpose();
+          }
+          tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, m.Ptr() );
+        }
+        break;
+      }
+      case FFU_ProjectionMatrix:
+      {
+        if ( ui.ver != projection.Ver() )
+        {
+          ui.ver = projection.Ver();
+          r3::Matrix4f m = projection.Top();
+          if( inverse ) {
+            m = m.Inverse();
+          }
+          if( transpose ) {
+            m = m.Transpose();
+          }
+          tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, m.Ptr() );
+        }
+        break;
+      }
+      case FFU_ModelViewProjectionMatrix:
+      {
+        GLuint64 mvpVer = std::max( modelview.Ver(), projection.Ver() );
+        if ( ui.ver != mvpVer )
+        {
+          ui.ver = mvpVer;
+          r3::Matrix4f m = projection.Top() * modelview.Top();
+          if( inverse ) {
+            m = m.Inverse();
+          }
+          if( transpose ) {
+            m = m.Transpose();
+          }
+          tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, m.Ptr() );
+        }
+        break;
+      }
+      case FFU_TextureMatrix0:
+      case FFU_TextureMatrix1:
+      case FFU_TextureMatrix2:
+      case FFU_TextureMatrix3:
+      case FFU_TextureMatrix4:
+      case FFU_TextureMatrix5:
+      case FFU_TextureMatrix6:
+      case FFU_TextureMatrix7:
+      case FFU_TextureMatrix8:
+      case FFU_TextureMatrix9:
+      case FFU_TextureMatrix10:
+      case FFU_TextureMatrix11:
+      case FFU_TextureMatrix12:
+      case FFU_TextureMatrix13:
+      case FFU_TextureMatrix14:
+      case FFU_TextureMatrix15:
+      {
+        int idx = ( ue - FFU_TextureMatrix0 );
+        RegalAssertArrayIndex( texture, idx );
+        if ( ui.ver != texture[ idx ].Ver() )
+        {
+          ui.ver = texture[ idx ].Ver();
+          r3::Matrix4f m = texture[ idx ].Top();
+          if( inverse ) {
+            m = m.Inverse();
+          }
+          if( transpose ) {
+            m = m.Transpose();
+          }
+          tbl.glUniformMatrix4fv( ui.slot, 1, GL_FALSE, m.Ptr() );
+        }
+        break;
+      }
+      case FFU_TextureEnvColor0:
+      case FFU_TextureEnvColor1:
+      case FFU_TextureEnvColor2:
+      case FFU_TextureEnvColor3:
+      case FFU_TextureEnvColor4:
+      case FFU_TextureEnvColor5:
+      case FFU_TextureEnvColor6:
+      case FFU_TextureEnvColor7:
+      case FFU_TextureEnvColor8:
+      case FFU_TextureEnvColor9:
+      case FFU_TextureEnvColor10:
+      case FFU_TextureEnvColor11:
+      case FFU_TextureEnvColor12:
+      case FFU_TextureEnvColor13:
+      case FFU_TextureEnvColor14:
+      case FFU_TextureEnvColor15:
+      {
+        int idx = ( ((*i).first) - FFU_TextureEnvColor0 );
+        RegalAssertArrayIndex( textureEnvColorVer, idx );
+        if ( ui.ver != textureEnvColorVer[ idx ] )
+        {
+          ui.ver = textureEnvColorVer[ idx ];
+          tbl.glUniform4fv( ui.slot, 1, &textureEnvColor[ idx ].x);
+        }
+        break;
+      }
+      case FFU_Light0:
+      case FFU_Light1:
+      case FFU_Light2:
+      case FFU_Light3:
+      case FFU_Light4:
+      case FFU_Light5:
+      case FFU_Light6:
+      case FFU_Light7:
+      {
+        int idx = ( ((*i).first) - FFU_Light0 );
+        RegalAssertArrayIndex( u.light, idx );
+        if ( ui.ver != u.light[ idx ].ver )
+        {
+          ui.ver = u.light[ idx ].ver;
+          tbl.glUniform4fv( ui.slot, LE_Elements, &u.light[ idx ].ambient.x);
+        }
+        break;
+      }
+      case FFU_MaterialFront:
+      case FFU_MaterialBack:
+      {
+        int idx = ( ((*i).first) - FFU_MaterialFront );
+        RegalAssertArrayIndex( u.mat, idx );
+        if ( ui.ver != u.mat[ idx ].ver )
+        {
+          ui.ver = u.mat[ idx ].ver;
+          tbl.glUniform4fv( ui.slot, ME_Elements, &u.mat[ idx ].ambient.x);
+        }
+        break;
+      }
+      case FFU_LightModelAmbient:
+      {
+        tbl.glUniform4fv( ui.slot, 1, &u.lightModelAmbient.x);
+        break;
+      }
+      case FFU_Texgen0ObjS:
+      case FFU_Texgen0ObjT:
+      case FFU_Texgen0ObjR:
+      case FFU_Texgen0ObjQ:
+      case FFU_Texgen0EyeS:
+      case FFU_Texgen0EyeT:
+      case FFU_Texgen0EyeR:
+      case FFU_Texgen0EyeQ:
+      case FFU_Texgen1ObjS:
+      case FFU_Texgen1ObjT:
+      case FFU_Texgen1ObjR:
+      case FFU_Texgen1ObjQ:
+      case FFU_Texgen1EyeS:
+      case FFU_Texgen1EyeT:
+      case FFU_Texgen1EyeR:
+      case FFU_Texgen1EyeQ:
+      case FFU_Texgen2ObjS:
+      case FFU_Texgen2ObjT:
+      case FFU_Texgen2ObjR:
+      case FFU_Texgen2ObjQ:
+      case FFU_Texgen2EyeS:
+      case FFU_Texgen2EyeT:
+      case FFU_Texgen2EyeR:
+      case FFU_Texgen2EyeQ:
+      case FFU_Texgen3ObjS:
+      case FFU_Texgen3ObjT:
+      case FFU_Texgen3ObjR:
+      case FFU_Texgen3ObjQ:
+      case FFU_Texgen3EyeS:
+      case FFU_Texgen3EyeT:
+      case FFU_Texgen3EyeR:
+      case FFU_Texgen3EyeQ:
+      {
+        int idx = ( (*i).first ) - FFU_Texgen0ObjS;
+        int comp = idx % 4;
+        int unit = idx >> 3;
+        RegalAssertArrayIndex( u.tex, unit );
+        RegalAssertArrayIndex( u.tex[unit].texgen, comp );
+        const State::TexgenUniform & tg = u.tex[unit].texgen[comp];
+        if ( idx & 4 )
+        {
+          if ( ui.ver != tg.eyeVer )
+          {
+            ui.ver = tg.eyeVer;
+            tbl.glUniform4fv( ui.slot, 1, & tg.eye.x );
+          }
+        }
+        else
+        {
+          if ( ui.ver != tg.objVer )
+          {
+            ui.ver = tg.objVer;
+            tbl.glUniform4fv( ui.slot, 1, & tg.obj.x );
+          }
+        }
+        break;
+      }
+      case FFU_ClipPlane0:
+      case FFU_ClipPlane1:
+      case FFU_ClipPlane2:
+      case FFU_ClipPlane3:
+      case FFU_ClipPlane4:
+      case FFU_ClipPlane5:
+      case FFU_ClipPlane6:
+      case FFU_ClipPlane7:
+      {
+        int idx = ( (*i).first ) - FFU_ClipPlane0;
+        RegalAssertArrayIndex( u.clip, idx );
+        if ( ui.ver != u.clip[idx].ver )
+        {
+          ui.ver = u.clip[idx].ver;
+          tbl.glUniform4fv( ui.slot, 1, & u.clip[idx].plane.x );
+        }
+        break;
+      }
+      case FFU_Fog:
+      {
+        if ( ui.ver != u.fog.ver )
+        {
+          ui.ver = u.fog.ver;
+          tbl.glUniform4fv( ui.slot, 2, &u.fog.params[0].x);
+        }
+        break;
+      }
+      case FFU_AlphaRef:
+      {
+        if ( ui.ver != u.alphaTest.ver )
+        {
+          ui.ver = u.alphaTest.ver;
+          tbl.glUniform2f( ui.slot, u.alphaTest.alphaRef, u.alphaTest.alphaTestEnable );
+        }
+        break;
+      }
+      case FFU_Attrib:
+      {
+        if ( ui.ver != u.vabVer )
+        {
+          ui.ver = u.vabVer;
+          tbl.glUniform4fv( ui.slot, REGAL_EMU_MAX_VERTEX_ATTRIBS, & immVab[0].x );
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  }
+}
+
+// a debug routine for forcing instanced program's uniforms to be updated
+void Iff::ClearVersionsForProgram( RegalContext * ctx )
+{
+  Internal("Regal::Iff::UpdateUniforms", boost::print::optional(ctx,Logging::pointers));
+
+  UniformMap * umap = NULL;
+  if( currinst && currinst->prevInstance) {
+    UserProgramInstanceInfo & ii = *currinst;
+    UserProgramInstance & upi = *ii.prevInstance;
+
+    upi.ffver = ~GLuint64(0);
+    umap = & upi.ffuniforms;
+  } else {
+    if( currprog == NULL ) {
+      return;
+    }
+    Program & pgm = *currprog;
+    pgm.ver = ~GLuint64(0);
+    umap = & pgm.uniforms;
+  }
+
+  for ( UniformMap::iterator i = umap->begin(); i != umap->end(); ++i )
+  {
+    UniformInfo & ui = (*i).second;
+    ui.ver = ~GLuint64(0);
   }
 }
 
@@ -3921,6 +4041,12 @@ inline bool operator == ( const Iff::State::Store & lhs, const Iff::State::Store
   return true;
 }
 
+
+GLuint Iff::GetFixedFunctionStateHash() {
+  ffstate.Process( this );  // this early outs if version numbers match between raw and processed
+  return ffstate.processed.hash;
+}
+
 void Iff::UseFixedFunctionProgram( RegalContext * ctx )
 {
   Internal("Regal::Iff::UseFixedFunctionProgram", boost::print::optional(ctx,Logging::pointers));
@@ -3969,11 +4095,9 @@ void Iff::UseFixedFunctionProgram( RegalContext * ctx )
       tbl.call(&tbl.glDeleteProgram)( p->pg );
       *p = Program();
     }
-    string_list vsSrc;
-    GenerateVertexShaderSource( this, ffstate, vsSrc );
-    string_list fsSrc;
-    GenerateFragmentShaderSource( this, fsSrc );
-    p->Init( ctx, ffstate.processed, vsSrc.str().c_str(), fsSrc.str().c_str() );
+    GLuint vs = CreateFixedFunctionVertexShader( ctx );
+    GLuint fs = CreateFixedFunctionFragmentShader( ctx );
+    p->Init( ctx, ffstate.processed, vs, fs );
     p->progcount = progcount;
   }
   RegalAssertArrayIndex( ffprogs, base + match );
@@ -3982,211 +4106,229 @@ void Iff::UseFixedFunctionProgram( RegalContext * ctx )
   UpdateUniforms( ctx );
 }
 
+GLuint Iff::CreateFixedFunctionVertexShader( RegalContext * ctx ) {
+  ffstate.Process( this );
+  string_list vsSrc;
+  GenerateVertexShaderSource( this, ffstate, vsSrc );
+  GLuint vs;
+  Program::Shader( ctx, ctx->dispatcher.emulation, GL_VERTEX_SHADER, vs, vsSrc.str().c_str() );
+  return vs;
+}
+
+GLuint Iff::CreateFixedFunctionFragmentShader( RegalContext * ctx ) {
+  ffstate.Process( this );
+  string_list fsSrc;
+  GenerateFragmentShaderSource( this, fsSrc );
+  GLuint fs;
+  Program::Shader( ctx, ctx->dispatcher.emulation, GL_FRAGMENT_SHADER, fs, fsSrc.str().c_str() );
+  return fs;
+}
+
+bool NeedsUserShaderProgramInstance( State::Store & st ) {
+  return st.alphaTest.enable && st.alphaTest.comp != Iff::CF_Always;
+}
+
 void Iff::UseShaderProgram( RegalContext * ctx )
 {
   Internal("Regal::Iff::UseShaderProgram", boost::print::optional(ctx,Logging::pointers));
 
-  if ( currprog != NULL && currprog->ver == ver.Current() )
-  {
+  ffstate.Process( this );
+
+  // update currprog if necessary
+  if ( (currprog == NULL) || (currprog->pg != program) ) {
+    RegalAssert( shprogmap.count( program ) != 0 );
+    currprog = & shprogmap[ program ];
+  }
+
+  if ( currprog->pg == 0 ) {
+    Warning( "The program is 0. That can't be right.\n" );
     return;
   }
-  ffstate.Process( this );
-  RegalAssert( shprogmap.count( program ) != 0 );
-  currprog = & shprogmap[ program ];
-  if ( currprog->pg == 0 )
-  {
-    Warning( "The program is 0. That can't be right.\n" );
+
+  if ( currprog->ver == ver.Current() ) {
+    // no updates necessary
+    return;
   }
+
+  // determine if instancing is required
+  if( (currprog->instanced == false) && NeedsUserShaderProgramInstance( ffstate.raw ) ) {
+      currprog->instanced = true;
+  }
+
+  // if instanced, update per-instance uniforms if necessary
+  DispatchTableGL & tbl = ctx->dispatcher.emulation;
+  if( currprog->instanced ) {
+    if( currinst == NULL ) {
+      currinst = & inst[ currprog->pg ];
+    }
+
+    // create the primary program object, and make it the "vanilla" version the first instance
+    if( currinst->instances.size() == 0 ) {
+      ShaderInstance::InitProgram( tbl, currprog->pg, currinst->program );
+      UserProgramInstanceKey k;
+      ShaderInstance::InitProgramInstance( tbl, currinst->program, currprog->pg, currinst->instances[ k ].inst );
+      currinst->prevKey = k;
+      currinst->prevInstance = &currinst->instances[ k ];
+      currinst->prevInstance->LocateUniforms( ctx, tbl );
+    }
+
+    UserProgramInstanceKey k( ffstate.processed );
+    if( currinst->prevInstance == NULL || k != currinst->prevKey ) {
+      currinst->prevKey = k;
+      currinst->prevInstance = & currinst->instances[ k ];
+      if( currinst->prevInstance->inst.prog != 0 ) {
+        tbl.call(&tbl.glUseProgram)( currinst->prevInstance->inst.prog );
+      }
+    }
+    UserProgramInstance & upi = * currinst->prevInstance;
+
+    // create this instance of the program
+    if( upi.inst.prog == 0 ) {
+      std::vector<ShaderInstance::ShaderSource> sources;
+      // alter the original sources as necessary, use a fetched or cached copy as preferred
+      ShaderInstance::GetProgramSources( tbl, currinst->program.prog, sources);
+      for( size_t i = 0; i < sources.size(); i++ ) {
+        ShaderInstance::ShaderSource & ss = sources[i];
+        string output_src;
+        // If a tranformation or optimization failed should we optionally fallback
+        // to a passthru shader if it's a fragment shader?
+        // For now, blame glsl parse and fall back to existing source string.
+        if ( OptimizeGLSL( gles, ss.type, ss.src, output_src, k.alphaFunc ) ) {
+          ss.src = output_src;
+        }
+      }
+
+      ShaderInstance::CreateProgramInstance( tbl, currinst->program, sources, upi.inst );
+      upi.LocateUniforms( ctx, tbl );
+      tbl.call(&tbl.glUseProgram)( upi.inst.prog );
+    }
+
+    if( upi.inst.ver != currinst->program.ver ) {
+      upi.inst.UpdateUniforms( tbl, currinst->program );
+      upi.inst.ver = currinst->program.ver;
+    }
+  }
+
   UpdateUniforms( ctx );
 }
 
-static int remove_version(GLchar *str)
-{
-  GLchar version[4];
-
-  if (!str)
+static int remove_version( string &str) {
+  if( str.size() == 0 ) {
     return -1;
+  }
+  size_t pos = 0;
+  while( (pos = str.find( "#version ", pos ) ) != string::npos ) {
+    if( pos == 0 || str[pos-1] == '\n' ) { // at beginning of line
+      str[ pos + 0 ] = '/';
+      str[ pos + 1 ] = '/';
 
-  GLchar *i = str;
-  while ((i = strstr(i,"#version ")))
-  {
-    if (i==str || i[-1]=='\n')
-    {
-      i[0] = '/';
-      i[1] = '/';
-
-      // return version number
-      i+=9;
-      while (*i == ' ') i++;
-      for (int j=0; j<3; i++,j++)
-        version[j] = *i;
-      version[3] = '\0';
-      return atoi(version);
+      string ver = str.substr( pos + 9, 3 );
+      return atoi( ver.c_str() );
     }
-    ++i;
+    pos += 9;
   }
   return -1;
 }
 
-static void remove_precision(GLchar *str)
-{
-  if (!str)
+static void remove_precision( string & str ) {
+  if( str.size() == 0 ) {
     return;
-
-  GLchar *i = str;
-  while ((i = strstr(i,"precision ")))
-  {
-    if (i==str || i[-1]=='\n')
-    {
-      i[0] = '/';
-      i[1] = '/';
+  }
+  size_t pos = 0;
+  while( (pos = str.find( "precision ", pos ) ) != string::npos ) {
+    if( pos == 0 || str[pos-1] == '\n' ) { // at beginning of line
+      str[ pos + 0 ] = '/';
+      str[ pos + 1 ] = '/';
     }
-    i+=9;
+    pos += 10;
   }
 }
 
 // replace ftransform with "rgl_ftform" in order to avoid conflict with possibly deprecated ftransform
-static void replace_ftransform(GLchar *str)
-{
-  if (!str)
-    return;
-
-  GLchar *i = str;
-  const GLchar *replacement = "rgl_ftform";
-  while ((i = strstr(i,"ftransform()")))
-  {
-    memcpy( i, replacement, 10 );
-    i+=10;
+static bool replace_ftransform( string & str ) {
+  if( str.size() == 0 ) {
+    return false;
   }
-}
+  size_t pos = 0;
+  while ( (pos = str.find( "ftransform", pos ) ) != string::npos ) {
+    int i = 0;
 
-static bool uses_string( const char * str, int count, const GLchar * const * srcstr, const GLint *length )
-{
-  for ( int i = 0; i < count; i++ )
-  {
-    const size_t len = (length && length[i] >= 0) ? length[i] : strlen(srcstr[i]);
-    std::string seg(srcstr[i],len);
-    if ( seg.find( str ) != std::string::npos )
-    {
-      return true;
-    }
+    // make sure ftransform is followed by "("
+    while ( (str[ pos + 10 + i ] == ' ') && (pos != string::npos) )
+      i++;
+
+    if ( str[ pos + 10 + i ] != '(' )
+      break;
+
+    str.replace( pos, 10, "rgl_ftform", 10 );
+    pos += 10;
+    return true;
   }
   return false;
 }
 
 void Iff::ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar * const * srcstr, const GLint *length)
 {
-  bool uses_ftransform = false;
-  for ( int i = 0; i < count && uses_ftransform == false; i++ )
-  {
-    std::string seg;
-    if ( length != NULL )
-    {
-      seg = std::string( srcstr[i], length[i] );
-    }
-    else
-    {
-      seg = std::string( srcstr[i] );
-    }
-    if ( seg.find( "ftransform()" ) != std::string::npos )
-    {
-      uses_ftransform = true;
-    }
-  }
-  //uses_ftransform = false; // hack
-  if ( srcstr[0][0] == '#' && srcstr[0][1] == 'v' )
-  {
-    ctx->dispatcher.emulation.glShaderSource( shader, count, srcstr, length );
-    return;
+  string src;
+  for ( int i = 0; i < count; i++ ) {
+    src += length != NULL ? string( srcstr[i], length[i] ) : string( srcstr[i] );
   }
 
-  // Make room for Regal preamble
-
-  std::vector<GLchar *> s(count + 1);
-  std::vector<GLint   > l(count + 1);
-
-  // Copy the input shader code so we can change it in-place
+  // comment out version in-place
   int version = -1;
-  for (GLsizei i=0; i<count; ++i)
-  {
-    l[i+1] = length ? length[i] : static_cast<GLint>(strlen(static_cast<const char *>(srcstr[i])));
-    if (srcstr)
-      s[i+1] = strndup(srcstr[i],l[i+1]);
-    if (version<0)
-      version = remove_version(s[i+1]);
-    if (uses_ftransform && gles )
-      replace_ftransform(s[i+1]);
-    if ( legacy )
-      remove_precision(s[i+1]);
-  }
+  version = remove_version( src );
 
+  // if used, replace ftransform with rgl_ftform
+  bool uses_ftransform = replace_ftransform( src );
+
+  if ( legacy ) {
+   remove_precision( src );
+  }
 
   // Preamble
 
   string_list ss;
-  if (gles)
-  {
+  if (gles) {
     // hack around #version 100 on x86 failing compilation
-    if ( ctx->info->gl_version_major >= 3 )
-    {
+    if ( ctx->info->gl_version_major >= 3 ) {
       ss << "#version 120\n";
       ss << "#define precision\n";
-    }
-    else
-    {
+    } else {
 #if REGAL_FORCE_DESKTOP_GLSL
       ss << "#version 140\n";
 #else
       ss << "#version 100\n";
+      ss << "#extension GL_EXT_shadow_samplers : enable\n";
+      ss << "#define shadow2D(a,b) vec4(shadow2DEXT(a,b))\n";
 #endif
     }
-  }
-  else if (legacy)
-  {
+  } else if (legacy) {
     ss << "#version 120\n";
     ss << "#define precision\n";
-  }
-  else
-  {
-    if (version > 0)
-    {
+  } else {
+    if (version > 0) {
       // We should honor the version in the original shader if we can, but leave out for now.
       //ss << "#version " << version << "\n";
-      if (shaderTypeMap[ shader ] == GL_VERTEX_SHADER)
-      {
+      if (shaderTypeMap[ shader ] == GL_VERTEX_SHADER) {
         ss << "#define in attribute\n";
         ss << "#define out varying\n";
-      }
-      else
-      {
+      } else {
         ss << "#define in varying\n";
       }
-    }
-    else
-    {
+    } else {
       ss << "#version 140\n";
     }
   }
-  if (gles || legacy)
-  {
-    if (shaderTypeMap[ shader ] == GL_VERTEX_SHADER)
-    {
+  if (gles || legacy) {
+    if (shaderTypeMap[ shader ] == GL_VERTEX_SHADER) {
       ss << "#define in attribute\n";
       ss << "#define out varying\n";
-    }
-    else
-    {
+    } else {
       ss << "#define in varying\n";
     }
-  }
-  else
-  {
-    if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER )
-    {
-
-    }
-    else
-    {
+  } else {
+    if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER ) {
+    } else {
       ss << "#define gl_FragColor           rglFragColor\n";
       ss << "out vec4 rglFragColor;\n";
       ss << "#define texture1D texture\n";
@@ -4194,76 +4336,74 @@ void Iff::ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const G
       ss << "#define textureCube texture\n";
     }
   }
-  if ( gles )
-  {
+  if ( gles ) {
     ss << "precision highp float;\n";
   }
 
   ss << "#define centroid                              \n";
   ss << "#define gl_FogFragCoord        rglFogFragCoord\n";
-  if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER )
-  {
+  if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER ) {
+    ss << "#define gl_Vertex              rglVertex\n";
     ss << "#define gl_Color               rglColor\n";
-  }
-  else
-  {
+    ss << "#define gl_Normal              rglNormal\n";
+  } else {
     ss << "#define gl_Color               rglFrontColor\n";
   }
   ss << "#define gl_FrontColor          rglFrontColor\n";
-  if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER )
-  {
+  if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER ) {
     ss << "#define gl_SecondaryColor               rglSecondaryColor\n";
-  }
-  else
-  {
+  } else {
     ss << "#define gl_SecondaryColor               rglFrontSecondaryColor\n";
   }
 
   ss << "#define gl_FrontSecondaryColor rglFrontSecondaryColor\n";
   ss << "#define gl_ClipVertex          rglClipVertex\n";
   ss << "#define gl_FragDepth           rglFragDepth\n";
-  if ( gles )
-  {
+  if ( gles ) {
     ss << "#define texture3d              texture2d\n";
     ss << "#define texture3D(a,b)         texture2D(a,b.xy)\n";
     ss << "#define sampler3D              sampler2D\n";
   }
 
-  if ( uses_string( "gl_FogFragCoord", count, srcstr, length ) )
-  {
+  if ( src.find( "gl_FogFragCoord" ) != string::npos ) {
     ss << "out float rglFogFragCoord;\n";
   }
 
 // NOTE: ES 2.0 does not support gl_FragDepth, so we just discard it, for now
 // See: http://www.khronos.org/registry/gles/specs/2.0/GLSL_ES_Specification_1.0.17.pdf
 
-  if ( uses_string( "gl_FragDepth", count, srcstr, length ) )
-  {
+  if ( src.find( "gl_FragDepth" ) != string::npos ) {
     ss << (shaderTypeMap[shader]==GL_VERTEX_SHADER ? "out" : " ") <<  " float rglFragDepth;\n";
   }
 
-
-  if ( uses_string( "gl_Color", count, srcstr, length ) )
-  {
-    if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER )
-    {
-      ss << "in vec4 rglColor;\n";
+  if ( uses_ftransform || (src.find( "gl_Vertex" ) != string::npos) ) {
+    if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER ) {
+      ss << "in vec4 rglVertex;\n";
     }
-    else
-    {
+  }
+
+  if ( src.find( "gl_Normal" ) != string::npos ) {
+    if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER ) {
+      ss << "in vec3 rglNormal;\n";
+    }
+  }
+
+  if ( src.find( "gl_Color" ) != string::npos ) {
+    if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER ) {
+      ss << "in vec4 rglColor;\n";
+    } else {
       ss << "in vec4 rglFrontColor;\n";
     }
   }
-  if ( uses_string( "gl_FrontColor", count, srcstr, length ) )
-  {
+
+  if ( src.find( "gl_FrontColor" ) != string::npos ) {
     ss << "out vec4 rglFrontColor;\n";
   }
 
 // NOTE: gl_SecondaryColor can be a vertex shader output, or a fragment shader input.
 // See: http://www.opengl.org/registry/doc/GLSLangSpec.4.30.7.pdf
 
-  if ( uses_string( "gl_SecondaryColor", count, srcstr, length ) )
-  {
+  if ( src.find( "gl_SecondaryColor" ) != string::npos ) {
     if ( shaderTypeMap[ shader ] == GL_VERTEX_SHADER )
     {
       ss << "in vec4 rglSecondaryColor;\n";
@@ -4274,41 +4414,69 @@ void Iff::ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const G
     }
   }
 
-  if ( uses_string( "gl_FrontSecondaryColor", count, srcstr, length ) )
-  {
+  if ( src.find( "gl_FrontSecondaryColor" ) != string::npos ) {
     ss << "out vec4 rglFrontSecondaryColor;\n";
   }
-  if ( uses_string( "gl_ClipVertex", count, srcstr, length ) )
-  {
+  if ( src.find( "gl_ClipVertex" ) != string::npos ) {
     // should be "out", but temporarily disabled due to register pressure concerns
     // ss << "out vec4 rglClipVertex;\n";
     ss << "vec4 rglClipVertex;\n";
   }
 
-  if ( uses_ftransform  && gles )
-  {
-    ss << "uniform mat4 rglModelView;\n";
-    ss << "uniform mat4 rglProjection;\n";
-    // should be "in", but temporarily disabled due to register pressure concerns
-    // ss << "in vec4 rglVertex;\n";
-    ss << "vec4 rglVertex;\n";
+  // the below needs to be automated instead of done ad hoc like this - Cass
+  // and it needs to handle "Inverse", "Transpose", and "InverseTranspose".
+
+  if ( src.find( "gl_NormalMatrix" ) != string::npos ) {
+    ss << "uniform mat3 rglNormalMatrix;\n";
   }
 
-  ss << "#define gl_ModelView rglModelView\n";
-  ss << "#define gl_Projection rglProjection\n";
-  ss << "#define gl_TextureMatrix0 rglTextureMatrix0\n";
+  if( src.find( "gl_ModelViewMatrix" ) != string::npos || uses_ftransform ) {
+    ss << "uniform mat4 rglModelViewMatrix;\n";
+  }
+
+  if( src.find( "gl_ProjectionMatrix" ) != string::npos || uses_ftransform ) {
+    ss << "uniform mat4 rglProjectionMatrix;\n";
+  }
+
+  if( src.find( "gl_ModelViewProjectionMatrix" ) != string::npos ) {
+    ss << "uniform mat4 rglModelViewProjectionMatrix;\n";
+  }
+
+  const char *nums = "01234567";
+  for( int i = 0; i < 8; i++ ) {
+    if( src.find( string("gl_MultiTexCoord") + string( nums + i, 1 )) != string::npos ) {
+      ss << "#define gl_MultiTexCoord" << i << " rglMultiTexCoord" << i << "\n";
+      ss << "in vec4 rglMultiTexCoord" << i << ";\n";
+    }
+  }
+
+
+  const char * matrixSuffix[] = { "", "Inverse", "Transpose", "InverseTranspose" };
+
+  for( int i = 0; i < 4; i++ ) {
+    ss << "#define gl_ModelViewMatrix" << matrixSuffix[i] << " rglModelViewMatrix" << matrixSuffix[i] << "\n";
+    ss << "#define gl_ProjectionMatrix" << matrixSuffix[i] << " rglProjectionMatrix" << matrixSuffix[i] << "\n";
+    ss << "#define gl_ModelViewProjectionMatrix" << matrixSuffix[i] << " rglModelViewProjectionMatrix" << matrixSuffix[i] << "\n";
+    ss << "#define gl_TextureMatrix0" << matrixSuffix[i] << " rglTextureMatrix0" << matrixSuffix[i] << "\n";
+    ss << "\n";
+  }
+
+  ss << "#define gl_NormalMatrix rglNormalMatrix\n";
+
+
   ss << "#define gl_Sampler0 rglSampler0\n\n";
 
-  if ( uses_ftransform && gles )
+  if ( uses_ftransform )
   {
-    ss << "vec4 rgl_ftform() { return gl_Projection * gl_ModelView * rglVertex; }\n\n";
+    ss << "vec4 rgl_ftform() { return gl_ProjectionMatrix * gl_ModelViewMatrix * rglVertex; }\n\n";
   }
-  //Logging::Output( "foo:\n%s", ss.str().c_str() );
 
   string preamble = ss.str();
-  s[0] = const_cast<char *>(preamble.c_str());
-  l[0] = (int)preamble.length();
-  ctx->dispatcher.emulation.glShaderSource( shader, count + 1, const_cast<const GLchar**>(&s[0]), &l[0] );
+  src = preamble + src;
+
+  const GLchar * dumb = static_cast<const GLchar *>( src.c_str() );
+  const GLchar ** dumber = & dumb;
+  ctx->dispatcher.emulation.glShaderSource( shader, 1, dumber, NULL );
 }
 
 void Iff::LinkProgram( RegalContext *ctx, GLuint program )
@@ -4319,17 +4487,45 @@ void Iff::LinkProgram( RegalContext *ctx, GLuint program )
     if ( shprogmap.count( program ) == 0 )
     {
       ffstate.Process( this );
+      ver.Reset();
       Program & p = shprogmap[ program ];
       p.pg = program;
       p.UserShaderModeAttribs(ctx);
     }
   }
-  ctx->dispatcher.emulation.glLinkProgram( program );
-  Program & p = shprogmap[ program ];
   DispatchTableGL & tbl = ctx->dispatcher.emulation;
+  tbl.glLinkProgram( program );
+  Program & p = shprogmap[ program ];
+
+  tbl.call(&tbl.glUseProgram)( program );
   p.Samplers( ctx, tbl );
   p.Uniforms( ctx, tbl );
+  if( this->program != 0 ) {
+    tbl.call(&tbl.glUseProgram)( this->program );
+  }
+
 }
+
+void Iff::Uniform( RegalContext *ctx, GLenum type, int vecSize, GLint loc, GLsizei count, const void * data ) {
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(vecSize);
+  ShaderInstance::Program & p = currinst->program;
+  p.UpdateUniformStore( loc, count, data );
+}
+
+void Iff::Uniform( RegalContext *ctx, GLenum type, int cols, int rows, GLint loc, GLsizei count, const void * data ) {
+  UNUSED_PARAMETER(ctx);
+  UNUSED_PARAMETER(type);
+  UNUSED_PARAMETER(cols);
+  UNUSED_PARAMETER(rows);
+  ShaderInstance::Program & p = currinst->program;
+  p.UpdateUniformStore( loc, count, data );
+}
+
+
+
+
 
 }; // namespace Emu
 

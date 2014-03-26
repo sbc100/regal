@@ -42275,6 +42275,156 @@ static inline GLuint APIENTRY _glGetDebugMessageLogAMD(GLuint count, GLsizei buf
     return _glGetDebugMessageLogAMD_ptr(count, bufsize, categories, severities, ids, lengths, message);
 }
 
+typedef void (APIENTRY * PFN_GLVDPAUINITNV)(const GLvoid * vdpDevice, const GLvoid * getProcAddress);
+static PFN_GLVDPAUINITNV _glVDPAUInitNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUInitNV(const GLvoid * vdpDevice, const GLvoid * getProcAddress) {
+    const char *_name = "glVDPAUInitNV";
+    if (!_glVDPAUInitNV_ptr) {
+        _glVDPAUInitNV_ptr = (PFN_GLVDPAUINITNV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUInitNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUInitNV_ptr(vdpDevice, getProcAddress);
+}
+
+typedef void (APIENTRY * PFN_GLVDPAUFININV)(void);
+static PFN_GLVDPAUFININV _glVDPAUFiniNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUFiniNV(void) {
+    const char *_name = "glVDPAUFiniNV";
+    if (!_glVDPAUFiniNV_ptr) {
+        _glVDPAUFiniNV_ptr = (PFN_GLVDPAUFININV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUFiniNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUFiniNV_ptr();
+}
+
+typedef GLvdpauSurfaceNV (APIENTRY * PFN_GLVDPAUREGISTERVIDEOSURFACENV)(const GLvoid * vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint * textureNames);
+static PFN_GLVDPAUREGISTERVIDEOSURFACENV _glVDPAURegisterVideoSurfaceNV_ptr = NULL;
+
+static inline GLvdpauSurfaceNV APIENTRY _glVDPAURegisterVideoSurfaceNV(const GLvoid * vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint * textureNames) {
+    const char *_name = "glVDPAURegisterVideoSurfaceNV";
+    if (!_glVDPAURegisterVideoSurfaceNV_ptr) {
+        _glVDPAURegisterVideoSurfaceNV_ptr = (PFN_GLVDPAUREGISTERVIDEOSURFACENV)_getPrivateProcAddress(_name);
+        if (!_glVDPAURegisterVideoSurfaceNV_ptr) {
+            os::log("error: unavailable function %s\n", _name);
+            os::abort();
+        }
+    }
+    return _glVDPAURegisterVideoSurfaceNV_ptr(vdpSurface, target, numTextureNames, textureNames);
+}
+
+typedef GLvdpauSurfaceNV (APIENTRY * PFN_GLVDPAUREGISTEROUTPUTSURFACENV)(const GLvoid * vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint * textureNames);
+static PFN_GLVDPAUREGISTEROUTPUTSURFACENV _glVDPAURegisterOutputSurfaceNV_ptr = NULL;
+
+static inline GLvdpauSurfaceNV APIENTRY _glVDPAURegisterOutputSurfaceNV(const GLvoid * vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint * textureNames) {
+    const char *_name = "glVDPAURegisterOutputSurfaceNV";
+    if (!_glVDPAURegisterOutputSurfaceNV_ptr) {
+        _glVDPAURegisterOutputSurfaceNV_ptr = (PFN_GLVDPAUREGISTEROUTPUTSURFACENV)_getPrivateProcAddress(_name);
+        if (!_glVDPAURegisterOutputSurfaceNV_ptr) {
+            os::log("error: unavailable function %s\n", _name);
+            os::abort();
+        }
+    }
+    return _glVDPAURegisterOutputSurfaceNV_ptr(vdpSurface, target, numTextureNames, textureNames);
+}
+
+typedef GLboolean (APIENTRY * PFN_GLVDPAUISSURFACENV)(GLvdpauSurfaceNV surface);
+static PFN_GLVDPAUISSURFACENV _glVDPAUIsSurfaceNV_ptr = NULL;
+
+static inline GLboolean APIENTRY _glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface) {
+    const char *_name = "glVDPAUIsSurfaceNV";
+    if (!_glVDPAUIsSurfaceNV_ptr) {
+        _glVDPAUIsSurfaceNV_ptr = (PFN_GLVDPAUISSURFACENV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUIsSurfaceNV_ptr) {
+            os::log("error: unavailable function %s\n", _name);
+            os::abort();
+        }
+    }
+    return _glVDPAUIsSurfaceNV_ptr(surface);
+}
+
+typedef void (APIENTRY * PFN_GLVDPAUUNREGISTERSURFACENV)(GLvdpauSurfaceNV surface);
+static PFN_GLVDPAUUNREGISTERSURFACENV _glVDPAUUnregisterSurfaceNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface) {
+    const char *_name = "glVDPAUUnregisterSurfaceNV";
+    if (!_glVDPAUUnregisterSurfaceNV_ptr) {
+        _glVDPAUUnregisterSurfaceNV_ptr = (PFN_GLVDPAUUNREGISTERSURFACENV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUUnregisterSurfaceNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUUnregisterSurfaceNV_ptr(surface);
+}
+
+typedef void (APIENTRY * PFN_GLVDPAUGETSURFACEIVNV)(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei * length, GLint * values);
+static PFN_GLVDPAUGETSURFACEIVNV _glVDPAUGetSurfaceivNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei * length, GLint * values) {
+    const char *_name = "glVDPAUGetSurfaceivNV";
+    if (!_glVDPAUGetSurfaceivNV_ptr) {
+        _glVDPAUGetSurfaceivNV_ptr = (PFN_GLVDPAUGETSURFACEIVNV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUGetSurfaceivNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUGetSurfaceivNV_ptr(surface, pname, bufSize, length, values);
+}
+
+typedef void (APIENTRY * PFN_GLVDPAUSURFACEACCESSNV)(GLvdpauSurfaceNV surface, GLenum access);
+static PFN_GLVDPAUSURFACEACCESSNV _glVDPAUSurfaceAccessNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access) {
+    const char *_name = "glVDPAUSurfaceAccessNV";
+    if (!_glVDPAUSurfaceAccessNV_ptr) {
+        _glVDPAUSurfaceAccessNV_ptr = (PFN_GLVDPAUSURFACEACCESSNV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUSurfaceAccessNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUSurfaceAccessNV_ptr(surface, access);
+}
+
+typedef void (APIENTRY * PFN_GLVDPAUMAPSURFACESNV)(GLsizei numSurfaces, const GLvdpauSurfaceNV * surfaces);
+static PFN_GLVDPAUMAPSURFACESNV _glVDPAUMapSurfacesNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV * surfaces) {
+    const char *_name = "glVDPAUMapSurfacesNV";
+    if (!_glVDPAUMapSurfacesNV_ptr) {
+        _glVDPAUMapSurfacesNV_ptr = (PFN_GLVDPAUMAPSURFACESNV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUMapSurfacesNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUMapSurfacesNV_ptr(numSurfaces, surfaces);
+}
+
+typedef void (APIENTRY * PFN_GLVDPAUUNMAPSURFACESNV)(GLsizei numSurface, const GLvdpauSurfaceNV * surfaces);
+static PFN_GLVDPAUUNMAPSURFACESNV _glVDPAUUnmapSurfacesNV_ptr = NULL;
+
+static inline void APIENTRY _glVDPAUUnmapSurfacesNV(GLsizei numSurface, const GLvdpauSurfaceNV * surfaces) {
+    const char *_name = "glVDPAUUnmapSurfacesNV";
+    if (!_glVDPAUUnmapSurfacesNV_ptr) {
+        _glVDPAUUnmapSurfacesNV_ptr = (PFN_GLVDPAUUNMAPSURFACESNV)_getPrivateProcAddress(_name);
+        if (!_glVDPAUUnmapSurfacesNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glVDPAUUnmapSurfacesNV_ptr(numSurface, surfaces);
+}
+
 typedef void (APIENTRY * PFN_GLTEXIMAGE2DMULTISAMPLECOVERAGENV)(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
 static PFN_GLTEXIMAGE2DMULTISAMPLECOVERAGENV _glTexImage2DMultisampleCoverageNV_ptr = NULL;
 
@@ -42723,6 +42873,111 @@ static inline void APIENTRY _glBlitFramebufferNV(GLint srcX0, GLint srcY0, GLint
         }
     }
     _glBlitFramebufferNV_ptr(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+}
+
+typedef void (APIENTRY * PFN_GLBLENDPARAMETERINV)(GLenum pname, GLint value);
+static PFN_GLBLENDPARAMETERINV _glBlendParameteriNV_ptr = NULL;
+
+static inline void APIENTRY _glBlendParameteriNV(GLenum pname, GLint value) {
+    const char *_name = "glBlendParameteriNV";
+    if (!_glBlendParameteriNV_ptr) {
+        _glBlendParameteriNV_ptr = (PFN_GLBLENDPARAMETERINV)_getPrivateProcAddress(_name);
+        if (!_glBlendParameteriNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBlendParameteriNV_ptr(pname, value);
+}
+
+typedef void (APIENTRY * PFN_GLBLENDBARRIERNV)(void);
+static PFN_GLBLENDBARRIERNV _glBlendBarrierNV_ptr = NULL;
+
+static inline void APIENTRY _glBlendBarrierNV(void) {
+    const char *_name = "glBlendBarrierNV";
+    if (!_glBlendBarrierNV_ptr) {
+        _glBlendBarrierNV_ptr = (PFN_GLBLENDBARRIERNV)_getPrivateProcAddress(_name);
+        if (!_glBlendBarrierNV_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glBlendBarrierNV_ptr();
+}
+
+typedef void (APIENTRY * PFN_GLLABELOBJECTEXT)(GLenum type, GLuint object, GLsizei length, const GLchar * label);
+static PFN_GLLABELOBJECTEXT _glLabelObjectEXT_ptr = NULL;
+
+static inline void APIENTRY _glLabelObjectEXT(GLenum type, GLuint object, GLsizei length, const GLchar * label) {
+    const char *_name = "glLabelObjectEXT";
+    if (!_glLabelObjectEXT_ptr) {
+        _glLabelObjectEXT_ptr = (PFN_GLLABELOBJECTEXT)_getPrivateProcAddress(_name);
+        if (!_glLabelObjectEXT_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glLabelObjectEXT_ptr(type, object, length, label);
+}
+
+typedef void (APIENTRY * PFN_GLGETOBJECTLABELEXT)(GLenum type, GLuint object, GLsizei bufSize, GLsizei * length, GLchar * label);
+static PFN_GLGETOBJECTLABELEXT _glGetObjectLabelEXT_ptr = NULL;
+
+static inline void APIENTRY _glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei * length, GLchar * label) {
+    const char *_name = "glGetObjectLabelEXT";
+    if (!_glGetObjectLabelEXT_ptr) {
+        _glGetObjectLabelEXT_ptr = (PFN_GLGETOBJECTLABELEXT)_getPrivateProcAddress(_name);
+        if (!_glGetObjectLabelEXT_ptr) {
+    if (length != 0) *length = 0;
+    if (label != 0 && bufSize > 0) *label = 0;
+        }
+    }
+    _glGetObjectLabelEXT_ptr(type, object, bufSize, length, label);
+}
+
+typedef void (APIENTRY * PFN_GLINSERTEVENTMARKEREXT)(GLsizei length, const GLchar * marker);
+static PFN_GLINSERTEVENTMARKEREXT _glInsertEventMarkerEXT_ptr = NULL;
+
+static inline void APIENTRY _glInsertEventMarkerEXT(GLsizei length, const GLchar * marker) {
+    const char *_name = "glInsertEventMarkerEXT";
+    if (!_glInsertEventMarkerEXT_ptr) {
+        _glInsertEventMarkerEXT_ptr = (PFN_GLINSERTEVENTMARKEREXT)_getPrivateProcAddress(_name);
+        if (!_glInsertEventMarkerEXT_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glInsertEventMarkerEXT_ptr(length, marker);
+}
+
+typedef void (APIENTRY * PFN_GLPUSHGROUPMARKEREXT)(GLsizei length, const GLchar * marker);
+static PFN_GLPUSHGROUPMARKEREXT _glPushGroupMarkerEXT_ptr = NULL;
+
+static inline void APIENTRY _glPushGroupMarkerEXT(GLsizei length, const GLchar * marker) {
+    const char *_name = "glPushGroupMarkerEXT";
+    if (!_glPushGroupMarkerEXT_ptr) {
+        _glPushGroupMarkerEXT_ptr = (PFN_GLPUSHGROUPMARKEREXT)_getPrivateProcAddress(_name);
+        if (!_glPushGroupMarkerEXT_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glPushGroupMarkerEXT_ptr(length, marker);
+}
+
+typedef void (APIENTRY * PFN_GLPOPGROUPMARKEREXT)(void);
+static PFN_GLPOPGROUPMARKEREXT _glPopGroupMarkerEXT_ptr = NULL;
+
+static inline void APIENTRY _glPopGroupMarkerEXT(void) {
+    const char *_name = "glPopGroupMarkerEXT";
+    if (!_glPopGroupMarkerEXT_ptr) {
+        _glPopGroupMarkerEXT_ptr = (PFN_GLPOPGROUPMARKEREXT)_getPrivateProcAddress(_name);
+        if (!_glPopGroupMarkerEXT_ptr) {
+            os::log("warning: ignoring call to unavailable function %s\n", _name);
+            return;
+        }
+    }
+    _glPopGroupMarkerEXT_ptr();
 }
 
 typedef GLuint (APIENTRY * PFN_GLNEWBUFFERREGION)(GLenum type);
@@ -45233,6 +45488,16 @@ static inline void APIENTRY _glAddSwapHintRectWIN(GLint x, GLint y, GLsizei widt
 #define glDebugMessageInsertAMD _glDebugMessageInsertAMD
 #define glDebugMessageCallbackAMD _glDebugMessageCallbackAMD
 #define glGetDebugMessageLogAMD _glGetDebugMessageLogAMD
+#define glVDPAUInitNV _glVDPAUInitNV
+#define glVDPAUFiniNV _glVDPAUFiniNV
+#define glVDPAURegisterVideoSurfaceNV _glVDPAURegisterVideoSurfaceNV
+#define glVDPAURegisterOutputSurfaceNV _glVDPAURegisterOutputSurfaceNV
+#define glVDPAUIsSurfaceNV _glVDPAUIsSurfaceNV
+#define glVDPAUUnregisterSurfaceNV _glVDPAUUnregisterSurfaceNV
+#define glVDPAUGetSurfaceivNV _glVDPAUGetSurfaceivNV
+#define glVDPAUSurfaceAccessNV _glVDPAUSurfaceAccessNV
+#define glVDPAUMapSurfacesNV _glVDPAUMapSurfacesNV
+#define glVDPAUUnmapSurfacesNV _glVDPAUUnmapSurfacesNV
 #define glTexImage2DMultisampleCoverageNV _glTexImage2DMultisampleCoverageNV
 #define glTexImage3DMultisampleCoverageNV _glTexImage3DMultisampleCoverageNV
 #define glTextureImage2DMultisampleNV _glTextureImage2DMultisampleNV
@@ -45263,6 +45528,13 @@ static inline void APIENTRY _glAddSwapHintRectWIN(GLint x, GLint y, GLsizei widt
 #define glTextureStorageSparseAMD _glTextureStorageSparseAMD
 #define glDrawTextureNV _glDrawTextureNV
 #define glBlitFramebufferNV _glBlitFramebufferNV
+#define glBlendParameteriNV _glBlendParameteriNV
+#define glBlendBarrierNV _glBlendBarrierNV
+#define glLabelObjectEXT _glLabelObjectEXT
+#define glGetObjectLabelEXT _glGetObjectLabelEXT
+#define glInsertEventMarkerEXT _glInsertEventMarkerEXT
+#define glPushGroupMarkerEXT _glPushGroupMarkerEXT
+#define glPopGroupMarkerEXT _glPopGroupMarkerEXT
 #define glNewBufferRegion _glNewBufferRegion
 #define glDeleteBufferRegion _glDeleteBufferRegion
 #define glReadBufferRegion _glReadBufferRegion
@@ -46892,81 +47164,6 @@ static inline void GL_APIENTRY _glReadBufferNV(GLenum mode) {
     _glReadBufferNV_ptr(mode);
 }
 
-typedef void (GL_APIENTRY * PFN_GLLABELOBJECTEXT)(GLenum type, GLuint object, GLsizei length, const GLchar * label);
-static PFN_GLLABELOBJECTEXT _glLabelObjectEXT_ptr = NULL;
-
-static inline void GL_APIENTRY _glLabelObjectEXT(GLenum type, GLuint object, GLsizei length, const GLchar * label) {
-    const char *_name = "glLabelObjectEXT";
-    if (!_glLabelObjectEXT_ptr) {
-        _glLabelObjectEXT_ptr = (PFN_GLLABELOBJECTEXT)_getPrivateProcAddress(_name);
-        if (!_glLabelObjectEXT_ptr) {
-            os::log("warning: ignoring call to unavailable function %s\n", _name);
-            return;
-        }
-    }
-    _glLabelObjectEXT_ptr(type, object, length, label);
-}
-
-typedef void (GL_APIENTRY * PFN_GLGETOBJECTLABELEXT)(GLenum type, GLuint object, GLsizei bufSize, GLsizei * length, GLchar * label);
-static PFN_GLGETOBJECTLABELEXT _glGetObjectLabelEXT_ptr = NULL;
-
-static inline void GL_APIENTRY _glGetObjectLabelEXT(GLenum type, GLuint object, GLsizei bufSize, GLsizei * length, GLchar * label) {
-    const char *_name = "glGetObjectLabelEXT";
-    if (!_glGetObjectLabelEXT_ptr) {
-        _glGetObjectLabelEXT_ptr = (PFN_GLGETOBJECTLABELEXT)_getPrivateProcAddress(_name);
-        if (!_glGetObjectLabelEXT_ptr) {
-            os::log("warning: ignoring call to unavailable function %s\n", _name);
-            return;
-        }
-    }
-    _glGetObjectLabelEXT_ptr(type, object, bufSize, length, label);
-}
-
-typedef void (GL_APIENTRY * PFN_GLINSERTEVENTMARKEREXT)(GLsizei length, const GLchar * marker);
-static PFN_GLINSERTEVENTMARKEREXT _glInsertEventMarkerEXT_ptr = NULL;
-
-static inline void GL_APIENTRY _glInsertEventMarkerEXT(GLsizei length, const GLchar * marker) {
-    const char *_name = "glInsertEventMarkerEXT";
-    if (!_glInsertEventMarkerEXT_ptr) {
-        _glInsertEventMarkerEXT_ptr = (PFN_GLINSERTEVENTMARKEREXT)_getPrivateProcAddress(_name);
-        if (!_glInsertEventMarkerEXT_ptr) {
-            os::log("warning: ignoring call to unavailable function %s\n", _name);
-            return;
-        }
-    }
-    _glInsertEventMarkerEXT_ptr(length, marker);
-}
-
-typedef void (GL_APIENTRY * PFN_GLPUSHGROUPMARKEREXT)(GLsizei length, const GLchar * marker);
-static PFN_GLPUSHGROUPMARKEREXT _glPushGroupMarkerEXT_ptr = NULL;
-
-static inline void GL_APIENTRY _glPushGroupMarkerEXT(GLsizei length, const GLchar * marker) {
-    const char *_name = "glPushGroupMarkerEXT";
-    if (!_glPushGroupMarkerEXT_ptr) {
-        _glPushGroupMarkerEXT_ptr = (PFN_GLPUSHGROUPMARKEREXT)_getPrivateProcAddress(_name);
-        if (!_glPushGroupMarkerEXT_ptr) {
-            os::log("warning: ignoring call to unavailable function %s\n", _name);
-            return;
-        }
-    }
-    _glPushGroupMarkerEXT_ptr(length, marker);
-}
-
-typedef void (GL_APIENTRY * PFN_GLPOPGROUPMARKEREXT)(void);
-static PFN_GLPOPGROUPMARKEREXT _glPopGroupMarkerEXT_ptr = NULL;
-
-static inline void GL_APIENTRY _glPopGroupMarkerEXT(void) {
-    const char *_name = "glPopGroupMarkerEXT";
-    if (!_glPopGroupMarkerEXT_ptr) {
-        _glPopGroupMarkerEXT_ptr = (PFN_GLPOPGROUPMARKEREXT)_getPrivateProcAddress(_name);
-        if (!_glPopGroupMarkerEXT_ptr) {
-            os::log("warning: ignoring call to unavailable function %s\n", _name);
-            return;
-        }
-    }
-    _glPopGroupMarkerEXT_ptr();
-}
-
 typedef void (GL_APIENTRY * PFN_GLGENQUERIESEXT)(GLsizei n, GLuint * ids);
 static PFN_GLGENQUERIESEXT _glGenQueriesEXT_ptr = NULL;
 
@@ -47391,11 +47588,6 @@ static inline void GL_APIENTRY _glTexStorage3DEXT(GLenum target, GLsizei levels,
 #define glRenderbufferStorageMultisampleANGLE _glRenderbufferStorageMultisampleANGLE
 #define glDrawBuffersNV _glDrawBuffersNV
 #define glReadBufferNV _glReadBufferNV
-#define glLabelObjectEXT _glLabelObjectEXT
-#define glGetObjectLabelEXT _glGetObjectLabelEXT
-#define glInsertEventMarkerEXT _glInsertEventMarkerEXT
-#define glPushGroupMarkerEXT _glPushGroupMarkerEXT
-#define glPopGroupMarkerEXT _glPopGroupMarkerEXT
 #define glGenQueriesEXT _glGenQueriesEXT
 #define glDeleteQueriesEXT _glDeleteQueriesEXT
 #define glIsQueryEXT _glIsQueryEXT

@@ -47,6 +47,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalConfig.h"
 #include "RegalContext.h"
 #include "RegalEmuInfo.h"
+#include "RegalLayerInfo.h"
 #include "RegalDebugInfo.h"
 #include "RegalContextInfo.h"
 #include "RegalStatistics.h"
@@ -123,6 +124,10 @@ RegalContext::RegalContext()
 #if REGAL_SYS_GLX
   x11Drawable(0),
 #endif
+#if REGAL_SYS_WGL
+  hdc(0),
+  hglrc(0),
+#endif
   logCallback(NULL),
 #if REGAL_CODE
   codeSource(NULL),
@@ -183,384 +188,285 @@ RegalContext::Init()
   #endif /* REGAL_FRAME */
 
 #if REGAL_EMULATION
-  const bool forceEmuObj     = Config::forceEmuObj        || REGAL_FORCE_EMU_OBJ;
-  const bool forceEmuHint    = Config::forceEmuHint       || REGAL_FORCE_EMU_HINT;
-  const bool forceEmuPpa     = Config::forceEmuPpa        || REGAL_FORCE_EMU_PPA;
-  const bool forceEmuPpca    = Config::forceEmuPpca       || REGAL_FORCE_EMU_PPCA;
-  const bool forceEmuBin     = Config::forceEmuBin        || REGAL_FORCE_EMU_BIN;
-  const bool forceEmuXfer    = Config::forceEmuXfer       || REGAL_FORCE_EMU_XFER;
-  const bool forceEmuTexsto  = Config::forceEmuTexSto     || REGAL_FORCE_EMU_TEXSTO;
-  const bool forceEmuBv      = Config::forceEmuBaseVertex || REGAL_FORCE_EMU_BASEVERTEX;
-  const bool forceEmuRect    = Config::forceEmuRect       || REGAL_FORCE_EMU_RECT;
-  const bool forceEmuIff     = Config::forceEmuIff        || REGAL_FORCE_EMU_IFF;
-  const bool forceEmuQuads   = Config::forceEmuQuads      || REGAL_FORCE_EMU_QUADS;
-  const bool forceEmuSo      = Config::forceEmuSo         || REGAL_FORCE_EMU_SO;
-  const bool forceEmuDsa     = Config::forceEmuDsa        || REGAL_FORCE_EMU_OBJ;
-  const bool forceEmuVao     = Config::forceEmuVao        || REGAL_FORCE_EMU_DSA;
-  const bool forceEmuTexc    = Config::forceEmuTexC       || REGAL_FORCE_EMU_TEXC;
-  const bool forceEmuFilt    = Config::forceEmuFilter     || REGAL_FORCE_EMU_FILTER;
-
-  bool enableEmuObj    = forceEmuObj     || (Config::enableEmuObj);
-  bool enableEmuHint   = forceEmuHint    || (Config::enableEmuHint);
-  bool enableEmuPpa    = forceEmuPpa     || (Config::enableEmuPpa);
-  bool enableEmuPpca   = forceEmuPpca    || (Config::enableEmuPpca);
-  bool enableEmuBin    = forceEmuBin     || (Config::enableEmuBin);
-  bool enableEmuXfer   = forceEmuXfer    || (Config::enableEmuXfer);
-  bool enableEmuTexsto = forceEmuTexsto  || (Config::enableEmuTexSto);
-  bool enableEmuBv     = forceEmuBv      || (Config::enableEmuBaseVertex);
-  bool enableEmuRect   = forceEmuRect    || (Config::enableEmuRect);
-  bool enableEmuIff    = forceEmuIff     || (Config::enableEmuIff);
-  bool enableEmuQuads  = forceEmuQuads   || (Config::enableEmuQuads);
-  bool enableEmuSo     = forceEmuSo      || (Config::enableEmuSo);
-  bool enableEmuDsa    = forceEmuDsa     || (Config::enableEmuDsa);
-  bool enableEmuVao    = forceEmuVao     || (Config::enableEmuVao);
-  bool enableEmuTexc   = forceEmuTexc    || (Config::enableEmuTexC);
-  bool enableEmuFilt   = forceEmuFilt    || (Config::enableEmuFilter);
-
-  const bool forceAnyEmu     = forceEmuObj || forceEmuHint || forceEmuPpa || forceEmuPpca || forceEmuBin || forceEmuXfer || forceEmuTexsto || forceEmuBv || forceEmuRect || forceEmuIff || forceEmuQuads || forceEmuSo || forceEmuDsa || forceEmuVao || forceEmuTexc || forceEmuFilt || false;
-
-  if (!Config::forceEmulation)
-  {
-    // Disable ES 2.0 - specific layers, as necessary
-
-    if (!isES2())
-    {
-      enableEmuXfer = false;
-      enableEmuTexc = false;
-    }
-
-    // Disable emulated sampler objects, if possible
-
-    if (info->gl_arb_sampler_objects)
-      enableEmuSo = false;
-
-#if REGAL_EMU_PATH
-    // Path rendering needs gp4 or gp5, for now
-
-    if (!info->gl_nv_gpu_program4 && !info->gl_nv_gpu_program5)
-      enableEmuPath = false;
-
-    // Disable emulated path rendering, if possible
-
-    if (info->gl_nv_path_rendering)
-      enableEmuPath = false;
-#endif
-
-    // Disable emulated DSA, if possible
-
-    if (info->gl_ext_direct_state_access)
-      enableEmuDsa = false;
-
-    // Vao needs Iff
-
-    if (!enableEmuIff)
-      enableEmuVao = false;
-
-    // Disable emulated fixed-function, etc, for compatibility contexts
-
-    if (isCompat())
-    {
-      enableEmuObj  = false;
-      enableEmuHint = false;
-      enableEmuPpa  = false;
-      enableEmuPpca = false;
-      enableEmuBin  = false;
-      enableEmuXfer = false;
-      enableEmuRect = false;
-      enableEmuIff  = false;
-    }
-
-  }
-
-  bool enableAnyEmu    = enableEmuObj || enableEmuHint || enableEmuPpa || enableEmuPpca || enableEmuBin || enableEmuXfer || enableEmuTexsto || enableEmuBv || enableEmuRect || enableEmuIff || enableEmuQuads || enableEmuSo || enableEmuDsa || enableEmuVao || enableEmuTexc || enableEmuFilt || false;
-
-  // Enable emulation except for fully featured compatibility contexts
-
-  const bool enableEmulation = Config::enableEmulation && (isCore() || isES2() || (isCompat() && !info->gl_ext_direct_state_access));
 
 #if !REGAL_FORCE_EMULATION
-  if (Config::forceEmulation || (enableEmulation && enableAnyEmu) || forceAnyEmu)
+  if (Config::enableEmulation || Config::forceEmulation)
 #endif
   {
     // emu
     emuLevel = 16;
-    #if REGAL_EMU_FILTER
-    if (enableEmuFilt || forceEmuFilt)
     {
-      Info("Activating emulation layer REGAL_EMU_FILTER");
-      if (!info->gl_arb_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
-      {
-        Info("Activating ARB_draw_buffers emulation.");
-        emuInfo->gl_arb_draw_buffers = true;
-        emuInfo->extensionsSet.insert("GL_ARB_draw_buffers");
+      Emu::LayerInfo layer;
+      Emu::GetFilterLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_FILTER
+      if( Config::enableEmuFilter ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuFilter );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_FILTER");
+          filt = new Emu::Filt;
+          emuLevel = 0;
+          filt->Init(*this);
+        }
       }
-      if (!info->gl_arb_multitexture)
-      {
-        Info("Activating ARB_multitexture emulation.");
-        emuInfo->gl_arb_multitexture = true;
-        emuInfo->extensionsSet.insert("GL_ARB_multitexture");
-      }
-      if (!info->gl_arb_texture_cube_map)
-      {
-        Info("Activating ARB_texture_cube_map emulation.");
-        emuInfo->gl_arb_texture_cube_map = true;
-        emuInfo->extensionsSet.insert("GL_ARB_texture_cube_map");
-      }
-      if (!info->gl_ati_draw_buffers && ((info->gl_version_major >= 2) || info->gl_nv_draw_buffers))
-      {
-        Info("Activating ATI_draw_buffers emulation.");
-        emuInfo->gl_ati_draw_buffers = true;
-        emuInfo->extensionsSet.insert("GL_ATI_draw_buffers");
-      }
-      if (!info->gl_ext_blend_color)
-      {
-        Info("Activating EXT_blend_color emulation.");
-        emuInfo->gl_ext_blend_color = true;
-        emuInfo->extensionsSet.insert("GL_EXT_blend_color");
-      }
-      if (!info->gl_ext_blend_subtract)
-      {
-        Info("Activating EXT_blend_subtract emulation.");
-        emuInfo->gl_ext_blend_subtract = true;
-        emuInfo->extensionsSet.insert("GL_EXT_blend_subtract");
-      }
-      if (!info->gl_ext_framebuffer_blit && ((info->gl_version_major >= 3) || info->gl_nv_framebuffer_blit))
-      {
-        Info("Activating EXT_framebuffer_blit emulation.");
-        emuInfo->gl_ext_framebuffer_blit = true;
-        emuInfo->extensionsSet.insert("GL_EXT_framebuffer_blit");
-      }
-      if (!info->gl_ext_framebuffer_object)
-      {
-        Info("Activating EXT_framebuffer_object emulation.");
-        emuInfo->gl_ext_framebuffer_object = true;
-        emuInfo->extensionsSet.insert("GL_EXT_framebuffer_object");
-      }
-      if (!info->gl_ext_texture_cube_map)
-      {
-        Info("Activating EXT_texture_cube_map emulation.");
-        emuInfo->gl_ext_texture_cube_map = true;
-        emuInfo->extensionsSet.insert("GL_EXT_texture_cube_map");
-      }
-      if (!info->gl_ext_texture_edge_clamp)
-      {
-        Info("Activating EXT_texture_edge_clamp emulation.");
-        emuInfo->gl_ext_texture_edge_clamp = true;
-        emuInfo->extensionsSet.insert("GL_EXT_texture_edge_clamp");
-      }
-      if (!info->gl_ibm_texture_mirrored_repeat)
-      {
-        Info("Activating IBM_texture_mirrored_repeat emulation.");
-        emuInfo->gl_ibm_texture_mirrored_repeat = true;
-        emuInfo->extensionsSet.insert("GL_IBM_texture_mirrored_repeat");
-      }
-      if (!info->gl_nv_blend_square)
-      {
-        Info("Activating NV_blend_square emulation.");
-        emuInfo->gl_nv_blend_square = true;
-        emuInfo->extensionsSet.insert("GL_NV_blend_square");
-      }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      filt = new Emu::Filt;
-      emuLevel = 0;
-      filt->Init(*this);
+      #endif /* REGAL_EMU_FILTER */
+      Emu::SetFilterEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_FILTER */
-    #if REGAL_EMU_TEXC
-    if (enableEmuTexc || forceEmuTexc)
     {
-      Info("Activating emulation layer REGAL_EMU_TEXC");
-      texc = new Emu::TexC;
-      emuLevel = 1;
-      texc->Init(*this);
-    }
-    #endif /* REGAL_EMU_TEXC */
-    #if REGAL_EMU_VAO
-    if (enableEmuVao || forceEmuVao)
-    {
-      Info("Activating emulation layer REGAL_EMU_VAO");
-      if (!info->gl_arb_vertex_array_object)
-      {
-        Info("Activating ARB_vertex_array_object emulation.");
-        emuInfo->gl_arb_vertex_array_object = true;
-        emuInfo->extensionsSet.insert("GL_ARB_vertex_array_object");
+      Emu::LayerInfo layer;
+      Emu::GetTexCLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_TEXC
+      if( Config::enableEmuTexC ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuTexC );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_TEXC");
+          texc = new Emu::TexC;
+          emuLevel = 1;
+          texc->Init(*this);
+        }
       }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      vao = new Emu::Vao;
-      emuLevel = 2;
-      vao->Init(*this);
+      #endif /* REGAL_EMU_TEXC */
+      Emu::SetTexCEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_VAO */
-    #if REGAL_EMU_DSA
-    if (enableEmuDsa || forceEmuDsa)
     {
-      Info("Activating emulation layer REGAL_EMU_DSA");
-      if (!info->gl_ext_direct_state_access)
-      {
-        Info("Activating EXT_direct_state_access emulation.");
-        emuInfo->gl_ext_direct_state_access = true;
-        emuInfo->extensionsSet.insert("GL_EXT_direct_state_access");
+      Emu::LayerInfo layer;
+      Emu::GetVaoLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_VAO
+      if( Config::enableEmuVao ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuVao );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_VAO");
+          vao = new Emu::Vao;
+          emuLevel = 2;
+          vao->Init(*this);
+        }
       }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      dsa = new Emu::Dsa;
-      emuLevel = 3;
-      dsa->Init(*this);
+      #endif /* REGAL_EMU_VAO */
+      Emu::SetVaoEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_DSA */
-    #if REGAL_EMU_SO
-    if (enableEmuSo || forceEmuSo)
     {
-      Info("Activating emulation layer REGAL_EMU_SO");
-      if (!info->gl_arb_sampler_objects)
-      {
-        Info("Activating ARB_sampler_objects emulation.");
-        emuInfo->gl_arb_sampler_objects = true;
-        emuInfo->extensionsSet.insert("GL_ARB_sampler_objects");
+      Emu::LayerInfo layer;
+      Emu::GetDsaLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_DSA
+      if( Config::enableEmuDsa ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuDsa );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_DSA");
+          dsa = new Emu::Dsa;
+          emuLevel = 3;
+          dsa->Init(*this);
+        }
       }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      so = new Emu::So;
-      emuLevel = 4;
-      so->Init(*this);
+      #endif /* REGAL_EMU_DSA */
+      Emu::SetDsaEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_SO */
-    #if REGAL_EMU_QUADS
-    if (enableEmuQuads || forceEmuQuads)
     {
-      Info("Activating emulation layer REGAL_EMU_QUADS");
-      quads = new Emu::Quads;
-      emuLevel = 5;
-      quads->Init(*this);
-    }
-    #endif /* REGAL_EMU_QUADS */
-    #if REGAL_EMU_IFF
-    if (enableEmuIff || forceEmuIff)
-    {
-      Info("Activating emulation layer REGAL_EMU_IFF");
-      if (!info->gl_arb_texture_env_combine)
-      {
-        Info("Activating ARB_texture_env_combine emulation.");
-        emuInfo->gl_arb_texture_env_combine = true;
-        emuInfo->extensionsSet.insert("GL_ARB_texture_env_combine");
+      Emu::LayerInfo layer;
+      Emu::GetSoLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_SO
+      if( Config::enableEmuSo ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuSo );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_SO");
+          so = new Emu::So;
+          emuLevel = 4;
+          so->Init(*this);
+        }
       }
-      if (!info->gl_arb_texture_env_dot3)
-      {
-        Info("Activating ARB_texture_env_dot3 emulation.");
-        emuInfo->gl_arb_texture_env_dot3 = true;
-        emuInfo->extensionsSet.insert("GL_ARB_texture_env_dot3");
+      #endif /* REGAL_EMU_SO */
+      Emu::SetSoEmuInfo( enable, this->emuInfo, layer );
+    }
+    {
+      Emu::LayerInfo layer;
+      Emu::GetQuadsLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_QUADS
+      if( Config::enableEmuQuads ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuQuads );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_QUADS");
+          quads = new Emu::Quads;
+          emuLevel = 5;
+          quads->Init(*this);
+        }
       }
-      if (!info->gl_ext_texture_env_combine)
-      {
-        Info("Activating EXT_texture_env_combine emulation.");
-        emuInfo->gl_ext_texture_env_combine = true;
-        emuInfo->extensionsSet.insert("GL_EXT_texture_env_combine");
+      #endif /* REGAL_EMU_QUADS */
+      Emu::SetQuadsEmuInfo( enable, this->emuInfo, layer );
+    }
+    {
+      Emu::LayerInfo layer;
+      Emu::GetIffLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_IFF
+      if( Config::enableEmuIff ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuIff );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_IFF");
+          iff = new Emu::Iff;
+          emuLevel = 6;
+          iff->Init(*this);
+        }
       }
-      if (!info->gl_ext_texture_env_dot3)
-      {
-        Info("Activating EXT_texture_env_dot3 emulation.");
-        emuInfo->gl_ext_texture_env_dot3 = true;
-        emuInfo->extensionsSet.insert("GL_EXT_texture_env_dot3");
+      #endif /* REGAL_EMU_IFF */
+      Emu::SetIffEmuInfo( enable, this->emuInfo, layer );
+    }
+    {
+      Emu::LayerInfo layer;
+      Emu::GetRectLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_RECT
+      if( Config::enableEmuRect ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuRect );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_RECT");
+          rect = new Emu::Rect;
+          emuLevel = 7;
+          rect->Init(*this);
+        }
       }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      iff = new Emu::Iff;
-      emuLevel = 6;
-      iff->Init(*this);
+      #endif /* REGAL_EMU_RECT */
+      Emu::SetRectEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_IFF */
-    #if REGAL_EMU_RECT
-    if (enableEmuRect || forceEmuRect)
     {
-      Info("Activating emulation layer REGAL_EMU_RECT");
-      rect = new Emu::Rect;
-      emuLevel = 7;
-      rect->Init(*this);
-    }
-    #endif /* REGAL_EMU_RECT */
-    #if REGAL_EMU_BASEVERTEX
-    if (enableEmuBv || forceEmuBv)
-    {
-      Info("Activating emulation layer REGAL_EMU_BASEVERTEX");
-      if (!info->gl_arb_draw_elements_base_vertex)
-      {
-        Info("Activating ARB_draw_elements_base_vertex emulation.");
-        emuInfo->gl_arb_draw_elements_base_vertex = true;
-        emuInfo->extensionsSet.insert("GL_ARB_draw_elements_base_vertex");
+      Emu::LayerInfo layer;
+      Emu::GetBaseVertexLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_BASEVERTEX
+      if( Config::enableEmuBaseVertex ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuBaseVertex );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_BASEVERTEX");
+          bv = new Emu::BaseVertex;
+          emuLevel = 8;
+          bv->Init(*this);
+        }
       }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      bv = new Emu::BaseVertex;
-      emuLevel = 8;
-      bv->Init(*this);
+      #endif /* REGAL_EMU_BASEVERTEX */
+      Emu::SetBaseVertexEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_BASEVERTEX */
-    #if REGAL_EMU_TEXSTO
-    if (enableEmuTexsto || forceEmuTexsto)
     {
-      Info("Activating emulation layer REGAL_EMU_TEXSTO");
-      if (!info->gl_arb_texture_storage)
-      {
-        Info("Activating ARB_texture_storage emulation.");
-        emuInfo->gl_arb_texture_storage = true;
-        emuInfo->extensionsSet.insert("GL_ARB_texture_storage");
+      Emu::LayerInfo layer;
+      Emu::GetTexStoLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_TEXSTO
+      if( Config::enableEmuTexSto ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuTexSto );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_TEXSTO");
+          texsto = new Emu::TexSto;
+          emuLevel = 9;
+          texsto->Init(*this);
+        }
       }
-      emuInfo->extensions = ::boost::print::detail::join(emuInfo->extensionsSet,std::string(" "));
-      texsto = new Emu::TexSto;
-      emuLevel = 9;
-      texsto->Init(*this);
+      #endif /* REGAL_EMU_TEXSTO */
+      Emu::SetTexStoEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_TEXSTO */
-    #if REGAL_EMU_XFER
-    if (enableEmuXfer || forceEmuXfer)
     {
-      Info("Activating emulation layer REGAL_EMU_XFER");
-      xfer = new Emu::Xfer;
-      emuLevel = 10;
-      xfer->Init(*this);
+      Emu::LayerInfo layer;
+      Emu::GetXferLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_XFER
+      if( Config::enableEmuXfer ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuXfer );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_XFER");
+          xfer = new Emu::Xfer;
+          emuLevel = 10;
+          xfer->Init(*this);
+        }
+      }
+      #endif /* REGAL_EMU_XFER */
+      Emu::SetXferEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_XFER */
-    #if REGAL_EMU_BIN
-    if (enableEmuBin || forceEmuBin)
     {
-      Info("Activating emulation layer REGAL_EMU_BIN");
-      bin = new Emu::Bin;
-      emuLevel = 11;
-      bin->Init(*this);
+      Emu::LayerInfo layer;
+      Emu::GetBinLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_BIN
+      if( Config::enableEmuBin ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuBin );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_BIN");
+          bin = new Emu::Bin;
+          emuLevel = 11;
+          bin->Init(*this);
+        }
+      }
+      #endif /* REGAL_EMU_BIN */
+      Emu::SetBinEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_BIN */
-    #if REGAL_EMU_PPCA
-    if (enableEmuPpca || forceEmuPpca)
     {
-      Info("Activating emulation layer REGAL_EMU_PPCA");
-      ppca = new Emu::Ppca;
-      emuLevel = 12;
-      ppca->Init(*this);
+      Emu::LayerInfo layer;
+      Emu::GetPpcaLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_PPCA
+      if( Config::enableEmuPpca ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuPpca );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_PPCA");
+          ppca = new Emu::Ppca;
+          emuLevel = 12;
+          ppca->Init(*this);
+        }
+      }
+      #endif /* REGAL_EMU_PPCA */
+      Emu::SetPpcaEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_PPCA */
-    #if REGAL_EMU_PPA
-    if (enableEmuPpa || forceEmuPpa)
     {
-      Info("Activating emulation layer REGAL_EMU_PPA");
-      ppa = new Emu::Ppa;
-      emuLevel = 13;
-      ppa->Init(*this);
+      Emu::LayerInfo layer;
+      Emu::GetPpaLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_PPA
+      if( Config::enableEmuPpa ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuPpa );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_PPA");
+          ppa = new Emu::Ppa;
+          emuLevel = 13;
+          ppa->Init(*this);
+        }
+      }
+      #endif /* REGAL_EMU_PPA */
+      Emu::SetPpaEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_PPA */
-    #if REGAL_EMU_HINT
-    if (enableEmuHint || forceEmuHint)
     {
-      Info("Activating emulation layer REGAL_EMU_HINT");
-      hint = new Emu::Hint;
-      emuLevel = 14;
-      hint->Init(*this);
+      Emu::LayerInfo layer;
+      Emu::GetHintLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_HINT
+      if( Config::enableEmuHint ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuHint );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_HINT");
+          hint = new Emu::Hint;
+          emuLevel = 14;
+          hint->Init(*this);
+        }
+      }
+      #endif /* REGAL_EMU_HINT */
+      Emu::SetHintEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_HINT */
-    #if REGAL_EMU_OBJ
-    if (enableEmuObj || forceEmuObj)
     {
-      Info("Activating emulation layer REGAL_EMU_OBJ");
-      obj = new Emu::Obj;
-      emuLevel = 15;
-      obj->Init(*this);
+      Emu::LayerInfo layer;
+      Emu::GetObjLayerInfo( *this, layer );
+      bool enable = false;
+      #if REGAL_EMU_OBJ
+      if( Config::enableEmuObj ) {
+        enable = layer.emulationSupported && ( layer.emulationNeeded || Config::forceEmuObj );
+        if( enable ) {
+          Info("Activating emulation layer REGAL_EMU_OBJ");
+          obj = new Emu::Obj;
+          emuLevel = 15;
+          obj->Init(*this);
+        }
+      }
+      #endif /* REGAL_EMU_OBJ */
+      Emu::SetObjEmuInfo( enable, this->emuInfo, layer );
     }
-    #endif /* REGAL_EMU_OBJ */
     emuLevel = 16;
 
   }
@@ -585,6 +491,10 @@ RegalContext::Init()
         Warning("Failed to open file ",Config::codeHeaderFile," for writing code header.");
     }
   }
+#endif
+
+#if REGAL_HTTP
+  http.Init( this );
 #endif
 
   initialized = true;
@@ -765,37 +675,38 @@ RegalContext::groupInitialized() const
 {
   Internal("RegalContext::groupInitialized","()");
 
-  for (shared_list<RegalContext *>::const_iterator i = shareGroup.begin(); i!=shareGroup.end(); ++i)
-  {
-    RegalAssert(*i);
-    if ((*i)->initialized)
-      return true;
-  }
-
-  return false;
+  // The first context is always the first initialized context in the group.
+  return shareGroup->front()->initialized;
 }
 
-RegalContext *
-RegalContext::groupInitializedContext()
+void RegalContext::parkContext( DispatchTableGlobal & tbl )
 {
-  Internal("RegalContext::groupInitializedContext","()");
+  #if REGAL_SYS_OSX
+  tbl.call(&tbl.CGLSetCurrentContext)( NULL );
+  #else
+  UNUSED_PARAMETER(tbl);
+  //<> # error "Implement me!"
+  #endif
+#if REGAL_SYS_PPAPI
+  Init::makeCurrent(NULL,NULL);
+#else
+  Init::makeCurrent(NULL);
+#endif
+}
 
-  // Look for any initialized context in the share group.
-  // The only way this would be expected to fail is if none
-  // of the contexts have been made current, triggering
-  // initialization.
-  //
-  // Note - linear search, but shouldn't need to look at too many
-  // contexts in the share group.
-
-  for (shared_list<RegalContext *>::iterator i = shareGroup.begin(); i!=shareGroup.end(); ++i)
-  {
-    RegalAssert(*i);
-    if ((*i)->initialized)
-      return *i;
-  }
-
-  return NULL;
+void RegalContext::unparkContext( DispatchTableGlobal & tbl )
+{
+  #if REGAL_SYS_OSX
+  tbl.call(&tbl.CGLSetCurrentContext)( reinterpret_cast<CGLContextObj>(sysCtx) );
+  #else
+  UNUSED_PARAMETER(tbl);
+  //<> # error "Implement me!"
+  #endif
+#if REGAL_SYS_PPAPI
+  Init::makeCurrent(sysCtx,ppapiES2);
+#else
+  Init::makeCurrent(sysCtx);
+#endif
 }
 
 REGAL_NAMESPACE_END

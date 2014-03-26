@@ -96,6 +96,7 @@ Several tools take `CALLSET` arguments, e.g:
 
     apitrace dump --calls=CALLSET foo.trace
     apitrace dump-images --calls=CALLSET foo.trace
+    apitrace trim --calls=CALLSET1 --calls=CALLSET2 foo.trace
 
 The call syntax is very flexible. Here are a few examples:
 
@@ -233,6 +234,10 @@ through the following extensions:
 * [`GL_KHR_debug`](http://www.opengl.org/registry/specs/KHR/debug.txt)
 
 * [`GL_ARB_debug_output`](http://www.opengl.org/registry/specs/ARB/debug_output.txt)
+
+* [`GL_EXT_debug_marker`](http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt)
+
+* [`GL_EXT_debug_label`](http://www.opengl.org/registry/specs/EXT/EXT_debug_label.txt)
 
 * [`GL_AMD_debug_output`](http://www.opengl.org/registry/specs/AMD/debug_output.txt)
 

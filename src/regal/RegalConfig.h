@@ -82,6 +82,7 @@ namespace Config
   extern bool forceEmulation;
   extern bool enableEmulation;
   extern bool enableTrace;
+  extern bool enableHttp;
   extern bool enableDebug;
   extern bool enableError;
   extern bool enableCode;

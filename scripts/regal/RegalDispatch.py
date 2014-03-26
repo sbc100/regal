@@ -8,7 +8,7 @@ from ApiUtil import typeIsVoid
 from ApiCodeGen import *
 
 from RegalDispatchShared import dispatchSourceTemplate
-from RegalDispatchLog import apiDispatchFuncInitCode
+#from RegalDispatchLog import apiDispatchFuncInitCode
 from RegalDispatchEmu import dispatchSourceTemplate
 from RegalContextInfo import cond
 

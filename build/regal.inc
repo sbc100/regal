@@ -6,6 +6,7 @@
 # Regal Sources
 
 REGAL.CXX :=
+REGAL.CXX += src/regal/RegalShaderInstance.cpp
 REGAL.CXX += src/regal/RegalIff.cpp
 REGAL.CXX += src/regal/RegalQuads.cpp
 REGAL.CXX += src/regal/Regal.cpp
@@ -28,6 +29,7 @@ REGAL.CXX += src/regal/RegalDispatch.cpp
 REGAL.CXX += src/regal/RegalStatistics.cpp
 REGAL.CXX += src/regal/RegalLookup.cpp
 REGAL.CXX += src/regal/RegalPlugin.cpp
+REGAL.CXX += src/regal/RegalShader.cpp
 REGAL.CXX += src/regal/RegalToken.cpp
 REGAL.CXX += src/regal/RegalDispatchGlobal.cpp
 REGAL.CXX += src/regal/RegalDispatcher.cpp
@@ -49,6 +51,7 @@ REGAL.CXX += src/regal/RegalDispatchTrace.cpp
 REGAL.CXX += src/regal/RegalDispatchMissing.cpp
 REGAL.CXX += src/regal/RegalPixelConversions.cpp
 REGAL.CXX += src/regal/RegalHttp.cpp
+REGAL.CXX += src/regal/RegalDispatchHttp.cpp
 REGAL.CXX += src/regal/RegalJson.cpp
 REGAL.CXX += src/regal/RegalFavicon.cpp
 REGAL.CXX += src/regal/RegalMac.cpp
@@ -85,6 +88,7 @@ REGAL.H += src/regal/RegalXfer.h
 REGAL.H += src/regal/RegalFrame.h
 REGAL.H += src/regal/RegalHelper.h
 REGAL.H += src/regal/RegalHttp.h
+REGAL.H += src/regal/RegalDispatchHttp.h
 REGAL.H += src/regal/RegalJson.h
 REGAL.H += src/regal/RegalJson.inl
 REGAL.H += src/regal/RegalIff.h
@@ -94,6 +98,7 @@ REGAL.H += src/regal/RegalLog.h
 REGAL.H += src/regal/RegalLookup.h
 REGAL.H += src/regal/RegalMarker.h
 REGAL.H += src/regal/RegalNamespace.h
+REGAL.H += src/regal/RegalShader.h
 REGAL.H += src/regal/RegalTexC.h
 REGAL.H += src/regal/RegalTexSto.h
 REGAL.H += src/regal/RegalMac.h
@@ -128,6 +133,7 @@ REGAL.H.OTHER += src/lookup3/lookup3.h
 
 #
 
+
 REGAL.INCLUDE   :=
 REGAL.INCLUDE   += -Isrc/regal
 REGAL.INCLUDE   += -Isrc/zlib/include
@@ -135,8 +141,17 @@ REGAL.INCLUDE   += -Isrc/libpng/include
 REGAL.INCLUDE   += -Isrc/civetweb
 REGAL.INCLUDE   += -Isrc/md5/include
 REGAL.INCLUDE   += -Isrc/lookup3
+REGAL.INCLUDE   += -Isrc/pcre
 REGAL.INCLUDE   += -Isrc/jsonsl
 REGAL.INCLUDE   += -Isrc/boost
+
+REGAL.INCLUDE   += -Isrc/glsl/include
+REGAL.INCLUDE   += -Isrc/glsl/src/glsl
+REGAL.INCLUDE   += -Isrc/glsl/src/mesa
+
+ifeq ($(PROFILE_OS),Windows)
+REGAL.INCLUDE   += -Isrc/glsl/include/c99
+endif
 
 REGAL.STATIC    ?= libRegallib.a
 REGAL.SHARED    ?= libRegal.so

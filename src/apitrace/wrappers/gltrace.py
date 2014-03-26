@@ -577,7 +577,8 @@ class GlTracer(Tracer):
             print '                _glGetBufferParameteriv(target, GL_BUFFER_ACCESS_FLAGS, &access_flags);'
             print '                flush = flush && !(access_flags & GL_MAP_FLUSH_EXPLICIT_BIT);'
             print '                if (length == -1) {'
-            print '                    // Mesa drivers refuse GL_BUFFER_MAP_LENGTH without GL 3.0'
+            print '                    // Mesa drivers refuse GL_BUFFER_MAP_LENGTH without GL 3.0 up-to'
+            print '                    // http://cgit.freedesktop.org/mesa/mesa/commit/?id=ffee498fb848b253a7833373fe5430f8c7ca0c5f'
             print '                    static bool warned = false;'
             print '                    if (!warned) {'
             print '                        os::log("apitrace: warning: glGetBufferParameteriv%s(GL_BUFFER_MAP_LENGTH) failed\\n");' % suffix
@@ -849,11 +850,17 @@ class GlTracer(Tracer):
         'glCompressedMultiTexSubImage2DEXT',
         'glCompressedMultiTexSubImage3DEXT',
         'glCompressedTexImage1D',
+        'glCompressedTexImage1DARB',
         'glCompressedTexImage2D',
+        'glCompressedTexImage2DARB',
         'glCompressedTexImage3D',
+        'glCompressedTexImage3DARB',
         'glCompressedTexSubImage1D',
+        'glCompressedTexSubImage1DARB',
         'glCompressedTexSubImage2D',
+        'glCompressedTexSubImage2DARB',
         'glCompressedTexSubImage3D',
+        'glCompressedTexSubImage3DARB',
         'glCompressedTextureImage1DEXT',
         'glCompressedTextureImage2DEXT',
         'glCompressedTextureImage3DEXT',
@@ -938,6 +945,15 @@ class GlTracer(Tracer):
         print 'static void _trace_user_arrays(GLuint count)'
         print '{'
         print '    gltrace::Context *ctx = gltrace::getContext();'
+        print
+
+        # Temporarily unbind the array buffer
+        print '    GLint _array_buffer = 0;'
+        print '    _glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &_array_buffer);'
+        print '    if (_array_buffer) {'
+        self.fake_glBindBuffer(api, 'GL_ARRAY_BUFFER', '0')
+        print '    }'
+        print
 
         for camelcase_name, uppercase_name in self.arrays:
             # in which profile is the array available?
@@ -1068,6 +1084,12 @@ class GlTracer(Tracer):
             print '    }'
             print
 
+        # Restore the original array_buffer
+        print '    if (_array_buffer) {'
+        self.fake_glBindBuffer(api, 'GL_ARRAY_BUFFER', '_array_buffer')
+        print '    }'
+        print
+
         print '}'
         print
 
@@ -1114,6 +1136,10 @@ class GlTracer(Tracer):
             print '    if (client_active_texture_dirty) {'
             self.fake_glClientActiveTexture_call(api, "client_active_texture");
             print '    }'
+
+    def fake_glBindBuffer(self, api, target, buffer):
+        function = api.getFunctionByName('glBindBuffer')
+        self.fake_call(function, [target, buffer])
 
     def fake_glClientActiveTexture_call(self, api, texture):
         function = api.getFunctionByName('glClientActiveTexture')

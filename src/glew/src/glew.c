@@ -1742,6 +1742,7 @@ PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC __glewVertexArrayMultiTexCoordOffsetE
 PFNGLVERTEXARRAYNORMALOFFSETEXTPROC __glewVertexArrayNormalOffsetEXT = NULL;
 PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC __glewVertexArraySecondaryColorOffsetEXT = NULL;
 PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC __glewVertexArrayTexCoordOffsetEXT = NULL;
+PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC __glewVertexArrayVertexAttribDivisorEXT = NULL;
 PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC __glewVertexArrayVertexAttribIOffsetEXT = NULL;
 PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC __glewVertexArrayVertexAttribOffsetEXT = NULL;
 PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC __glewVertexArrayVertexOffsetEXT = NULL;
@@ -6706,6 +6707,7 @@ static GLboolean _glewInit_GL_EXT_direct_state_access (GLEW_CONTEXT_ARG_DEF_INIT
   r = ((glVertexArrayNormalOffsetEXT = (PFNGLVERTEXARRAYNORMALOFFSETEXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArrayNormalOffsetEXT")) == NULL) || r;
   r = ((glVertexArraySecondaryColorOffsetEXT = (PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArraySecondaryColorOffsetEXT")) == NULL) || r;
   r = ((glVertexArrayTexCoordOffsetEXT = (PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArrayTexCoordOffsetEXT")) == NULL) || r;
+  r = ((glVertexArrayVertexAttribDivisorEXT = (PFNGLVERTEXARRAYVERTEXATTRIBDIVISOREXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArrayVertexAttribDivisorEXT")) == NULL) || r;
   r = ((glVertexArrayVertexAttribIOffsetEXT = (PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArrayVertexAttribIOffsetEXT")) == NULL) || r;
   r = ((glVertexArrayVertexAttribOffsetEXT = (PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArrayVertexAttribOffsetEXT")) == NULL) || r;
   r = ((glVertexArrayVertexOffsetEXT = (PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC)glewGetProcAddress((const GLubyte*)"glVertexArrayVertexOffsetEXT")) == NULL) || r;
@@ -12561,6 +12563,11 @@ PFNGLXCOPYSUBBUFFERMESAPROC __glewXCopySubBufferMESA = NULL;
 
 PFNGLXCREATEGLXPIXMAPMESAPROC __glewXCreateGLXPixmapMESA = NULL;
 
+PFNGLXQUERYCURRENTRENDERERINTEGERMESAPROC __glewXQueryCurrentRendererIntegerMESA = NULL;
+PFNGLXQUERYCURRENTRENDERERSTRINGMESAPROC __glewXQueryCurrentRendererStringMESA = NULL;
+PFNGLXQUERYRENDERERINTEGERMESAPROC __glewXQueryRendererIntegerMESA = NULL;
+PFNGLXQUERYRENDERERSTRINGMESAPROC __glewXQueryRendererStringMESA = NULL;
+
 PFNGLXRELEASEBUFFERSMESAPROC __glewXReleaseBuffersMESA = NULL;
 
 PFNGLXSET3DFXMODEMESAPROC __glewXSet3DfxModeMESA = NULL;
@@ -12689,6 +12696,7 @@ GLboolean __GLXEW_INTEL_swap_event = GL_FALSE;
 GLboolean __GLXEW_MESA_agp_offset = GL_FALSE;
 GLboolean __GLXEW_MESA_copy_sub_buffer = GL_FALSE;
 GLboolean __GLXEW_MESA_pixmap_colormap = GL_FALSE;
+GLboolean __GLXEW_MESA_query_renderer = GL_FALSE;
 GLboolean __GLXEW_MESA_release_buffers = GL_FALSE;
 GLboolean __GLXEW_MESA_set_3dfx_mode = GL_FALSE;
 GLboolean __GLXEW_MESA_swap_control = GL_FALSE;
@@ -12983,6 +12991,22 @@ static GLboolean _glewInit_GLX_MESA_pixmap_colormap (GLXEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GLX_MESA_pixmap_colormap */
+
+#ifdef GLX_MESA_query_renderer
+
+static GLboolean _glewInit_GLX_MESA_query_renderer (GLXEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((glXQueryCurrentRendererIntegerMESA = (PFNGLXQUERYCURRENTRENDERERINTEGERMESAPROC)glewGetProcAddress((const GLubyte*)"glXQueryCurrentRendererIntegerMESA")) == NULL) || r;
+  r = ((glXQueryCurrentRendererStringMESA = (PFNGLXQUERYCURRENTRENDERERSTRINGMESAPROC)glewGetProcAddress((const GLubyte*)"glXQueryCurrentRendererStringMESA")) == NULL) || r;
+  r = ((glXQueryRendererIntegerMESA = (PFNGLXQUERYRENDERERINTEGERMESAPROC)glewGetProcAddress((const GLubyte*)"glXQueryRendererIntegerMESA")) == NULL) || r;
+  r = ((glXQueryRendererStringMESA = (PFNGLXQUERYRENDERERSTRINGMESAPROC)glewGetProcAddress((const GLubyte*)"glXQueryRendererStringMESA")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GLX_MESA_query_renderer */
 
 #ifdef GLX_MESA_release_buffers
 
@@ -13515,6 +13539,10 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLXEW_MESA_pixmap_colormap) = _glewSearchExtension("GLX_MESA_pixmap_colormap", extStart, extEnd);
   if (glewExperimental || GLXEW_MESA_pixmap_colormap) CONST_CAST(GLXEW_MESA_pixmap_colormap) = !_glewInit_GLX_MESA_pixmap_colormap(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GLX_MESA_pixmap_colormap */
+#ifdef GLX_MESA_query_renderer
+  CONST_CAST(GLXEW_MESA_query_renderer) = _glewSearchExtension("GLX_MESA_query_renderer", extStart, extEnd);
+  if (glewExperimental || GLXEW_MESA_query_renderer) CONST_CAST(GLXEW_MESA_query_renderer) = !_glewInit_GLX_MESA_query_renderer(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GLX_MESA_query_renderer */
 #ifdef GLX_MESA_release_buffers
   CONST_CAST(GLXEW_MESA_release_buffers) = _glewSearchExtension("GLX_MESA_release_buffers", extStart, extEnd);
   if (glewExperimental || GLXEW_MESA_release_buffers) CONST_CAST(GLXEW_MESA_release_buffers) = !_glewInit_GLX_MESA_release_buffers(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -18155,6 +18183,13 @@ GLboolean glxewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"pixmap_colormap", 15))
         {
           ret = GLXEW_MESA_pixmap_colormap;
+          continue;
+        }
+#endif
+#ifdef GLX_MESA_query_renderer
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"query_renderer", 14))
+        {
+          ret = GLXEW_MESA_query_renderer;
           continue;
         }
 #endif

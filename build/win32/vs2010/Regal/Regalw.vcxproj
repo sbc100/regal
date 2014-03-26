@@ -78,8 +78,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/pcre;../../../../src/jsonsl;../../../../src/glsl/include;../../../../src/glsl/src/glsl;../../../../src/glsl/src/mesa;../../../../src/glsl/include/c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -118,8 +118,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/pcre;../../../../src/jsonsl;../../../../src/glsl/include;../../../../src/glsl/src/glsl;../../../../src/glsl/src/mesa;../../../../src/glsl/include/c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -133,7 +133,7 @@
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>  /bigobj %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -157,8 +157,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/pcre;../../../../src/jsonsl;../../../../src/glsl/include;../../../../src/glsl/src/glsl;../../../../src/glsl/src/mesa;../../../../src/glsl/include/c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
@@ -197,8 +197,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/jsonsl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/boost;../../../../include;../../../../src/civetweb;../../../../src/lookup3;../../../../src/md5/include;../../../../src/libpng/include;../../../../src/zlib/include;../../../../src/squish;../../../../src/pcre;../../../../src/jsonsl;../../../../src/glsl/include;../../../../src/glsl/src/glsl;../../../../src/glsl/src/mesa;../../../../src/glsl/include/c99;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>REGAL_NO_SQUISH=1;REGAL_SYS_WGL_DECLARE_WGL;REGAL_WIN_TLS=1;REGAL_WRANGLER=1;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
@@ -211,7 +211,7 @@
       <CompileAs>Default</CompileAs>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>  /bigobj %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -259,6 +259,8 @@
     <ClInclude Include="..\..\..\..\src\regal\RegalDispatchError.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchGLX.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchGlobal.cpp" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalDispatchHttp.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalDispatchHttp.h" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchLoader.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchLog.cpp" />
     <ClCompile Include="..\..\..\..\src\regal\RegalDispatchMissing.cpp" />
@@ -319,6 +321,9 @@
     <ClCompile Include="..\..\..\..\src\regal\RegalQuads.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalQuads.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalScopedPtr.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalShader.cpp" />
+    <ClInclude Include="..\..\..\..\src\regal\RegalShader.h" />
+    <ClCompile Include="..\..\..\..\src\regal\RegalShaderInstance.cpp" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSharedList.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSharedMap.h" />
     <ClInclude Include="..\..\..\..\src\regal\RegalSharedPtr.h" />

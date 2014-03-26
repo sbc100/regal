@@ -49,7 +49,9 @@ REGAL_GLOBAL_BEGIN
 #include "RegalPrivate.h"
 #include "RegalContextInfo.h"
 #include "RegalDispatcherGL.h"
+#include "RegalDispatcherGlobal.h"
 #include "RegalDispatchError.h"
+#include "RegalDispatchHttp.h"
 #include "RegalScopedPtr.h"
 #include "RegalSharedList.h"
 
@@ -106,6 +108,11 @@ struct RegalContext
   bool                    initialized;
   DispatcherGL            dispatcher;
   DispatchErrorState      err;
+
+#if REGAL_HTTP
+  DispatchHttpState       http;
+#endif
+
   scoped_ptr<DebugInfo>   dbg;
   scoped_ptr<ContextInfo> info;
   scoped_ptr<EmuInfo>     emuInfo;
@@ -159,6 +166,11 @@ struct RegalContext
   GLXDrawable         x11Drawable;
   #endif
 
+  #if REGAL_SYS_WGL
+  HDC                 hdc;
+  HGLRC               hglrc;
+  #endif
+
   GLLOGPROCREGAL      logCallback;
 
   //
@@ -172,10 +184,12 @@ struct RegalContext
 
   bool groupInitialized() const;
 
-  // Get any context in the share group that is
-  // already initialized
+  // The http and perhaps other threads need to be able brief, temporary access the context.
+  // parkContext() makes the calling thread release the context
+  // unparkContext() makes it current to the calling thread
 
-  RegalContext *groupInitializedContext();
+  void parkContext( DispatchTableGlobal & tbl );
+  void unparkContext( DispatchTableGlobal & tbl );
 
   // For RegalDispatchCode
 

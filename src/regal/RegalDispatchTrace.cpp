@@ -2951,6 +2951,19 @@ namespace Trace
   void  glPauseTransformFeedbackNV(void);
   void  glResumeTransformFeedbackNV(void);
 
+// GL_NV_vdpau_interop
+
+  void  glVDPAUFiniNV(void);
+  void  glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values);
+  void  glVDPAUInitNV(const GLvoid *vdpDevice, const GLvoid *getProcAddress);
+  GLboolean  glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface);
+  void  glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces);
+  GLvdpauSurfaceNV  glVDPAURegisterOutputSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
+  GLvdpauSurfaceNV  glVDPAURegisterVideoSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
+  void  glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access);
+  void  glVDPAUUnmapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces);
+  void  glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface);
+
 // GL_NV_vertex_array_range
 
   void  glFlushVertexArrayRangeNV(void);
@@ -26842,6 +26855,111 @@ static void REGAL_CALL trace_glResumeTransformFeedbackNV(void)
   Trace::glResumeTransformFeedbackNV();
 }
 
+// GL_NV_vdpau_interop
+
+static void REGAL_CALL trace_glVDPAUFiniNV(void)
+{
+  Internal("trace_glVDPAUFiniNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUFiniNV();
+}
+
+static void REGAL_CALL trace_glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei *length, GLint *values)
+{
+  Internal("trace_glVDPAUGetSurfaceivNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUGetSurfaceivNV(surface, pname, bufSize, length, values);
+}
+
+static void REGAL_CALL trace_glVDPAUInitNV(const GLvoid *vdpDevice, const GLvoid *getProcAddress)
+{
+  Internal("trace_glVDPAUInitNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUInitNV(vdpDevice, getProcAddress);
+}
+
+static GLboolean REGAL_CALL trace_glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface)
+{
+  Internal("trace_glVDPAUIsSurfaceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLboolean  ret = Trace::glVDPAUIsSurfaceNV(surface);
+  return ret;
+}
+
+static void REGAL_CALL trace_glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
+{
+  Internal("trace_glVDPAUMapSurfacesNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUMapSurfacesNV(numSurfaces, surfaces);
+}
+
+static GLvdpauSurfaceNV REGAL_CALL trace_glVDPAURegisterOutputSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
+{
+  Internal("trace_glVDPAURegisterOutputSurfaceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLvdpauSurfaceNV  ret = Trace::glVDPAURegisterOutputSurfaceNV(vdpSurface, target, numTextureNames, textureNames);
+  return ret;
+}
+
+static GLvdpauSurfaceNV REGAL_CALL trace_glVDPAURegisterVideoSurfaceNV(const GLvoid *vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames)
+{
+  Internal("trace_glVDPAURegisterVideoSurfaceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  GLvdpauSurfaceNV  ret = Trace::glVDPAURegisterVideoSurfaceNV(vdpSurface, target, numTextureNames, textureNames);
+  return ret;
+}
+
+static void REGAL_CALL trace_glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access)
+{
+  Internal("trace_glVDPAUSurfaceAccessNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUSurfaceAccessNV(surface, access);
+}
+
+static void REGAL_CALL trace_glVDPAUUnmapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV *surfaces)
+{
+  Internal("trace_glVDPAUUnmapSurfacesNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUUnmapSurfacesNV(numSurfaces, surfaces);
+}
+
+static void REGAL_CALL trace_glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface)
+{
+  Internal("trace_glVDPAUUnregisterSurfaceNV","()");
+  Thread::ThreadLocal &_instance = Thread::ThreadLocal::instance();
+  RegalAssert(_instance.currentContext);
+  Push<DispatchTableGL *> _push(_instance.nextDispatchTable);
+  _instance.nextDispatchTable = _instance.currentContext->dispatcher.trace.next();
+  Trace::glVDPAUUnregisterSurfaceNV(surface);
+}
+
 // GL_NV_vertex_array_range
 
 static void REGAL_CALL trace_glFlushVertexArrayRangeNV(void)
@@ -36765,6 +36883,19 @@ void InitDispatchTableTrace(DispatchTableGL &tbl)
   tbl.glIsTransformFeedbackNV = trace_glIsTransformFeedbackNV;
   tbl.glPauseTransformFeedbackNV = trace_glPauseTransformFeedbackNV;
   tbl.glResumeTransformFeedbackNV = trace_glResumeTransformFeedbackNV;
+
+  // GL_NV_vdpau_interop
+
+  tbl.glVDPAUFiniNV = trace_glVDPAUFiniNV;
+  tbl.glVDPAUGetSurfaceivNV = trace_glVDPAUGetSurfaceivNV;
+  tbl.glVDPAUInitNV = trace_glVDPAUInitNV;
+  tbl.glVDPAUIsSurfaceNV = trace_glVDPAUIsSurfaceNV;
+  tbl.glVDPAUMapSurfacesNV = trace_glVDPAUMapSurfacesNV;
+  tbl.glVDPAURegisterOutputSurfaceNV = trace_glVDPAURegisterOutputSurfaceNV;
+  tbl.glVDPAURegisterVideoSurfaceNV = trace_glVDPAURegisterVideoSurfaceNV;
+  tbl.glVDPAUSurfaceAccessNV = trace_glVDPAUSurfaceAccessNV;
+  tbl.glVDPAUUnmapSurfacesNV = trace_glVDPAUUnmapSurfacesNV;
+  tbl.glVDPAUUnregisterSurfaceNV = trace_glVDPAUUnregisterSurfaceNV;
 
   // GL_NV_vertex_array_range
 

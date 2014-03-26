@@ -52,6 +52,10 @@ if (ret)
 {
   Init::init();
   Init::makeCurrent(RegalSystemContext(hglrc));
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  _context->hglrc = hglrc;
+  _context->hdc = hDC;
 }'''
     },
 

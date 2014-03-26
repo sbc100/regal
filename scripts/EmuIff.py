@@ -111,7 +111,15 @@ iffFormulae = {
           ],
     },
     'FfnShadow' : {
-        'entries' : [ 'gl(MatrixMode|BindProgramPipeline|UseProgram|Enable|Disable)' ],
+        'entries' : [ 'gl(MatrixMode|BindProgramPipeline|Enable|Disable)' ],
+        'impl' : [
+            'if( ! _context->iff->Shadow${m1}( ${arg0plus} ) ) {',
+            '    _context->dispatcher.emulation.gl${m1}( ${arg0plus} );',
+            '}',
+            ],
+    },
+    'FfnShadowProgram' : {
+        'entries' : [ 'gl(UseProgram)(ObjectARB|)' ],
         'impl' : [
             'if( ! _context->iff->Shadow${m1}( ${arg0plus} ) ) {',
             '    _context->dispatcher.emulation.gl${m1}( ${arg0plus} );',
@@ -270,5 +278,45 @@ iffFormulae = {
     'CreateShader' : {
         'entries' : [ 'glCreateShader(ObjectARB)?', ],
         'impl' : [ 'return _context->iff->CreateShader( _context, ${arg0} );', ],
-    }
+    },
+    'Uniform' : {
+        'entries' : [ 'glUniform(1|2|3|4)(d|f|i|ui)(ARB|)', ],
+        'impl' : [ 
+          'if( _context->iff->currinst ) {',
+          '  _context->iff->Uniform( _context, ${m1}, ${arg0}, 1, ${arg1plus} );',
+          '} else {',
+          '  _context->dispatcher.emulation.${m0}( ${arg0plus} );',
+          '}',
+        ],
+    },
+    'Uniformv' : {
+        'entries' : [ 'glUniform(1|2|3|4)(d|f|i|ui)v(ARB|)', ],
+        'impl' : [ 
+          'if( _context->iff->currinst ) {',
+          '  _context->iff->Uniform( _context, ${m1}, ${arg0plus} );',
+          '} else {',
+          '  _context->dispatcher.emulation.${m0}( ${arg0plus} );',
+          '}',
+        ],
+    },
+    'UniformMatrix' : {
+        'entries' : [ 'glUniformMatrix(2|3|4)(d|f)v(ARB|)', ],
+        'impl' : [ 
+          'if( _context->iff->currinst ) {',
+          '  _context->iff->UniformMatrix( _context, ${m1}, ${m1}, ${arg0plus} );',
+          '} else {',
+          '  _context->dispatcher.emulation.${m0}( ${arg0plus} );',
+          '}',
+        ],
+    },
+    'UniformMatrixNonSquare' : {
+        'entries' : [ 'glUniformMatrix(2|3|4)x(2|3|4)(d|f)v(ARB|)', ],
+        'impl' : [ 
+          'if( _context->iff->currinst ) {',
+          '  _context->iff->UniformMatrix( _context, ${m1}, ${m2}, ${arg0plus} );',
+          '} else {',
+          '  _context->dispatcher.emulation.${m0}( ${arg0plus} );',
+          '}',
+        ],
+    },
 }

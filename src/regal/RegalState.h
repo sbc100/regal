@@ -2243,6 +2243,7 @@ struct Point
   GLfloat    distanceAttenuation[3];                    // GL_POINT_DISTANCE_ATTENUATION
   GLenum     spriteCoordOrigin;                         // GL_POINT_SPRITE_COORD_ORIGIN
   GLboolean  coordReplace[REGAL_EMU_MAX_TEXTURE_UNITS]; // GL_COORD_REPLACE
+  bool       valid;
 
   inline Point()
     : size(1)
@@ -2252,6 +2253,7 @@ struct Point
     , sizeMax(1)        // Max of the impl. dependent max. aliased and smooth point sizes.
     , fadeThresholdSize(1)
     , spriteCoordOrigin(GL_UPPER_LEFT)
+    , valid(false)
   {
     distanceAttenuation[0] = 1.0f;
     distanceAttenuation[1] = 0.0f;
@@ -2261,6 +2263,21 @@ struct Point
     {
       RegalAssertArrayIndex( coordReplace, ii );
       coordReplace[ii] = GL_FALSE;
+    }
+  }
+
+  inline bool fullyDefined() const
+  {
+    return valid;
+  }
+
+  void getUndefined(DispatchTableGL &dt)
+  {
+    if (!valid)
+    {
+      // GL_POINT_SIZE_MAX is implementation dependent and not know til runtime
+      dt.call(&dt.glGetFloatv)(GL_POINT_SIZE_MAX,&sizeMax);
+      valid = true;
     }
   }
 
@@ -2284,7 +2301,7 @@ struct Point
     smooth = dt.call(&dt.glIsEnabled)(GL_POINT_SMOOTH);
     sprite = dt.call(&dt.glIsEnabled)(GL_POINT_SPRITE);
     dt.call(&dt.glGetFloatv)(GL_POINT_SIZE_MIN,&sizeMin);
-    dt.call(&dt.glGetFloatv)(GL_POINT_SIZE_MAX,&sizeMin);
+    dt.call(&dt.glGetFloatv)(GL_POINT_SIZE_MAX,&sizeMax);
     dt.call(&dt.glGetFloatv)(GL_POINT_FADE_THRESHOLD_SIZE,&fadeThresholdSize);
     dt.call(&dt.glGetFloatv)(GL_POINT_DISTANCE_ATTENUATION,distanceAttenuation);
     dt.call(&dt.glGetIntegerv)(GL_POINT_SPRITE_COORD_ORIGIN,reinterpret_cast<GLint *>(&spriteCoordOrigin));
@@ -2389,6 +2406,7 @@ struct Point
         distanceAttenuation[2] = static_cast<GLfloat>(params[2]);
         break;
       default:
+        glPointParameter(pname,params[0]);
         break;
     }
   }

@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		256AC3DA0F4B6AC300CF3369 /* alphatorusAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* alphatorusAppDelegate.mm */; };
+		43085426148B0F3400AE231A /* RGLOpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 43085425148B0F3400AE231A /* RGLOpenGLContext.m */; };
+		431D3C0815C9B648009DD04F /* libRegal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 431D3C0715C9B636009DD04F /* libRegal.a */; };
+		4344FC911332A8BA006F07E8 /* nv.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4344FC901332A8BA006F07E8 /* nv.icns */; };
+		43787F5014E8512400636639 /* render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43787F4E14E8512400636639 /* render.cpp */; };
+		43E244C6133066AF0040E20D /* RegalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43E244C5133066AF0040E20D /* RegalView.mm */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		BC3A59B31804680000992687 /* libapitrace.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ABB1804648500C68C71 /* libapitrace.a */; };
+		BC3A59BA1804680400992687 /* libjsonsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8AC2180464A200C68C71 /* libjsonsl.a */; };
+		BC3A59BB1804680800992687 /* libmd5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8AC8180464B200C68C71 /* libmd5.a */; };
+		BC3A59BC1804680B00992687 /* libmongoose.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ACE180464C500C68C71 /* libmongoose.a */; };
+		BC3A59BD1804680E00992687 /* libsnappy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8AD4180464D700C68C71 /* libsnappy.a */; };
+		BC3A59BE1804681100992687 /* libsquish.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9F8ADA180464F400C68C71 /* libsquish.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		431D3C0615C9B636009DD04F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431D3BFF15C9B635009DD04F /* Regal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 43A6C1C615C48CD90063667E;
+			remoteInfo = Regal;
+		};
+		439EB69A183D2AF800842DA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431D3BFF15C9B635009DD04F /* Regal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4359158318367621002CB92C;
+			remoteInfo = RegalDynamic;
+		};
+		439EB69C183D2AF800842DA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431D3BFF15C9B635009DD04F /* Regal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 435916DA18367DEE002CB92C;
+			remoteInfo = RegalWrangler;
+		};
+		439EB69E183D2AF800842DA0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 431D3BFF15C9B635009DD04F /* Regal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4359176F18367E05002CB92C;
+			remoteInfo = RegalWranglerDynamic;
+		};
+		BC9F8ABA1804648500C68C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9F8AB61804648400C68C71 /* apitrace.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 433667A917C56F3500D45AD9;
+			remoteInfo = apitrace;
+		};
+		BC9F8AC1180464A200C68C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9F8ABD180464A200C68C71 /* jsonsl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336679417C56EF900D45AD9;
+			remoteInfo = jsonsl;
+		};
+		BC9F8AC7180464B200C68C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9F8AC3180464B100C68C71 /* md5.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336678117C56DFD00D45AD9;
+			remoteInfo = md5;
+		};
+		BC9F8ACD180464C500C68C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336676E17C56DC700D45AD9;
+			remoteInfo = mongoose;
+		};
+		BC9F8AD3180464D700C68C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9F8ACF180464D700C68C71 /* snappy.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336665817C56AA300D45AD9;
+			remoteInfo = snappy;
+		};
+		BC9F8AD9180464F400C68C71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC9F8AD5180464F400C68C71 /* squish.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4336667917C56B5200D45AD9;
+			remoteInfo = squish;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		256AC3D80F4B6AC300CF3369 /* alphatorusAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alphatorusAppDelegate.h; sourceTree = "<group>"; };
+		256AC3D90F4B6AC300CF3369 /* alphatorusAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = alphatorusAppDelegate.mm; sourceTree = "<group>"; };
+		256AC3F00F4B6AF500CF3369 /* alphatorus_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alphatorus_Prefix.pch; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		43085424148B0F3400AE231A /* RGLOpenGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGLOpenGLContext.h; sourceTree = "<group>"; };
+		43085425148B0F3400AE231A /* RGLOpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGLOpenGLContext.m; sourceTree = "<group>"; };
+		431D3BFF15C9B635009DD04F /* Regal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Regal.xcodeproj; path = ../../../build/mac/Regal/Regal.xcodeproj; sourceTree = "<group>"; };
+		4344FC901332A8BA006F07E8 /* nv.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nv.icns; sourceTree = "<group>"; };
+		43787F4E14E8512400636639 /* render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render.cpp; path = ../src/render.cpp; sourceTree = "<group>"; };
+		43787F4F14E8512400636639 /* render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = render.h; path = ../src/render.h; sourceTree = "<group>"; };
+		43E244C4133066AF0040E20D /* RegalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegalView.h; sourceTree = "<group>"; };
+		43E244C5133066AF0040E20D /* RegalView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RegalView.mm; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* alphatorus-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "alphatorus-Info.plist"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* alphatorus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alphatorus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC9F8AB61804648400C68C71 /* apitrace.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = apitrace.xcodeproj; path = ../../../build/mac/apitrace/apitrace.xcodeproj; sourceTree = "<group>"; };
+		BC9F8ABD180464A200C68C71 /* jsonsl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = jsonsl.xcodeproj; path = ../../../build/mac/jsonsl/jsonsl.xcodeproj; sourceTree = "<group>"; };
+		BC9F8AC3180464B100C68C71 /* md5.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = md5.xcodeproj; path = ../../../build/mac/md5/md5.xcodeproj; sourceTree = "<group>"; };
+		BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mongoose.xcodeproj; path = ../../../build/mac/mongoose/mongoose.xcodeproj; sourceTree = "<group>"; };
+		BC9F8ACF180464D700C68C71 /* snappy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = snappy.xcodeproj; path = ../../../build/mac/snappy/snappy.xcodeproj; sourceTree = "<group>"; };
+		BC9F8AD5180464F400C68C71 /* squish.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = squish.xcodeproj; path = ../../../build/mac/squish/squish.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC3A59BE1804681100992687 /* libsquish.a in Frameworks */,
+				BC3A59BD1804680E00992687 /* libsnappy.a in Frameworks */,
+				BC3A59BC1804680B00992687 /* libmongoose.a in Frameworks */,
+				BC3A59BB1804680800992687 /* libmd5.a in Frameworks */,
+				BC3A59BA1804680400992687 /* libjsonsl.a in Frameworks */,
+				BC3A59B31804680000992687 /* libapitrace.a in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				431D3C0815C9B648009DD04F /* libRegal.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* alphatorus.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* alphatorus */ = {
+			isa = PBXGroup;
+			children = (
+				431D3BFF15C9B635009DD04F /* Regal.xcodeproj */,
+				BC9F8AD5180464F400C68C71 /* squish.xcodeproj */,
+				BC9F8ACF180464D700C68C71 /* snappy.xcodeproj */,
+				BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */,
+				BC9F8AC3180464B100C68C71 /* md5.xcodeproj */,
+				BC9F8ABD180464A200C68C71 /* jsonsl.xcodeproj */,
+				BC9F8AB61804648400C68C71 /* apitrace.xcodeproj */,
+				29B97315FDCFA39411CA2CEA /* code */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = alphatorus;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* code */ = {
+			isa = PBXGroup;
+			children = (
+				43787F4E14E8512400636639 /* render.cpp */,
+				43787F4F14E8512400636639 /* render.h */,
+				43085424148B0F3400AE231A /* RGLOpenGLContext.h */,
+				43085425148B0F3400AE231A /* RGLOpenGLContext.m */,
+				256AC3D80F4B6AC300CF3369 /* alphatorusAppDelegate.h */,
+				256AC3D90F4B6AC300CF3369 /* alphatorusAppDelegate.mm */,
+				43E244C4133066AF0040E20D /* RegalView.h */,
+				43E244C5133066AF0040E20D /* RegalView.mm */,
+				256AC3F00F4B6AF500CF3369 /* alphatorus_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.mm */,
+			);
+			name = code;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4344FC901332A8BA006F07E8 /* nv.icns */,
+				8D1107310486CEB800E47090 /* alphatorus-Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		431D3C0015C9B635009DD04F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				431D3C0715C9B636009DD04F /* libRegal.a */,
+				439EB69B183D2AF800842DA0 /* libRegal.dylib */,
+				439EB69D183D2AF800842DA0 /* libRegalW.a */,
+				439EB69F183D2AF800842DA0 /* libRegalW.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9F8AB71804648400C68C71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F8ABB1804648500C68C71 /* libapitrace.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9F8ABE180464A200C68C71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F8AC2180464A200C68C71 /* libjsonsl.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9F8AC4180464B100C68C71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F8AC8180464B200C68C71 /* libmd5.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9F8ACA180464C500C68C71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F8ACE180464C500C68C71 /* libmongoose.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9F8AD0180464D700C68C71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F8AD4180464D700C68C71 /* libsnappy.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC9F8AD6180464F400C68C71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC9F8ADA180464F400C68C71 /* libsquish.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* alphatorus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "alphatorus" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = alphatorus;
+			productInstallPath = "$(HOME)/Applications";
+			productName = alphatorus;
+			productReference = 8D1107320486CEB800E47090 /* alphatorus.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "alphatorus" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* alphatorus */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BC9F8AB71804648400C68C71 /* Products */;
+					ProjectRef = BC9F8AB61804648400C68C71 /* apitrace.xcodeproj */;
+				},
+				{
+					ProductGroup = BC9F8ABE180464A200C68C71 /* Products */;
+					ProjectRef = BC9F8ABD180464A200C68C71 /* jsonsl.xcodeproj */;
+				},
+				{
+					ProductGroup = BC9F8AC4180464B100C68C71 /* Products */;
+					ProjectRef = BC9F8AC3180464B100C68C71 /* md5.xcodeproj */;
+				},
+				{
+					ProductGroup = BC9F8ACA180464C500C68C71 /* Products */;
+					ProjectRef = BC9F8AC9180464C500C68C71 /* mongoose.xcodeproj */;
+				},
+				{
+					ProductGroup = 431D3C0015C9B635009DD04F /* Products */;
+					ProjectRef = 431D3BFF15C9B635009DD04F /* Regal.xcodeproj */;
+				},
+				{
+					ProductGroup = BC9F8AD0180464D700C68C71 /* Products */;
+					ProjectRef = BC9F8ACF180464D700C68C71 /* snappy.xcodeproj */;
+				},
+				{
+					ProductGroup = BC9F8AD6180464F400C68C71 /* Products */;
+					ProjectRef = BC9F8AD5180464F400C68C71 /* squish.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* alphatorus */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		431D3C0715C9B636009DD04F /* libRegal.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRegal.a;
+			remoteRef = 431D3C0615C9B636009DD04F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		439EB69B183D2AF800842DA0 /* libRegal.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libRegal.dylib;
+			remoteRef = 439EB69A183D2AF800842DA0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		439EB69D183D2AF800842DA0 /* libRegalW.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRegalW.a;
+			remoteRef = 439EB69C183D2AF800842DA0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		439EB69F183D2AF800842DA0 /* libRegalW.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libRegalW.dylib;
+			remoteRef = 439EB69E183D2AF800842DA0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BC9F8ABB1804648500C68C71 /* libapitrace.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libapitrace.a;
+			remoteRef = BC9F8ABA1804648500C68C71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BC9F8AC2180464A200C68C71 /* libjsonsl.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsonsl.a;
+			remoteRef = BC9F8AC1180464A200C68C71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BC9F8AC8180464B200C68C71 /* libmd5.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmd5.a;
+			remoteRef = BC9F8AC7180464B200C68C71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BC9F8ACE180464C500C68C71 /* libmongoose.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libmongoose.a;
+			remoteRef = BC9F8ACD180464C500C68C71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BC9F8AD4180464D700C68C71 /* libsnappy.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsnappy.a;
+			remoteRef = BC9F8AD3180464D700C68C71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BC9F8ADA180464F400C68C71 /* libsquish.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsquish.a;
+			remoteRef = BC9F8AD9180464F400C68C71 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				4344FC911332A8BA006F07E8 /* nv.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.mm in Sources */,
+				256AC3DA0F4B6AC300CF3369 /* alphatorusAppDelegate.mm in Sources */,
+				43E244C6133066AF0040E20D /* RegalView.mm in Sources */,
+				43085426148B0F3400AE231A /* RGLOpenGLContext.m in Sources */,
+				43787F5014E8512400636639 /* render.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = alphatorus_Prefix.pch;
+				INFOPLIST_FILE = "alphatorus-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = alphatorus;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = alphatorus_Prefix.pch;
+				INFOPLIST_FILE = "alphatorus-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = alphatorus;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../../include;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../../include;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "alphatorus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "alphatorus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

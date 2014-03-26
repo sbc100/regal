@@ -259,7 +259,6 @@
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\glcaps.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\gltrace_state.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\regaltrace.cpp" />
-    <ClCompile Include="..\..\..\..\src\apitrace\wrappers\trace.cpp" />
   </ItemGroup>
 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

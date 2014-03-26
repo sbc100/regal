@@ -49,6 +49,14 @@ ppaFormulae = {
       '}',
     ],
   },
+  'GetTexParam' : {
+    'entries' : [ 'glGet(Tex|Texture)(Level|)Parameter(f|i)v(EXT|)' ],
+    'impl'    : [
+      'if( ! _context->ppa->glGet${m1}${m2}Parameter( _context, ${arg0plus} ) ) {',
+      '  _context->dispatcher.emulation.glGet${m1}${m2}Parameter${m3}v${m4}( ${arg0plus} );',
+      '}',
+    ],
+  },
   'IsEnabled'       : {
     'entries' : [ 'glIsEnabled(i|)' ],
     'impl'    : [

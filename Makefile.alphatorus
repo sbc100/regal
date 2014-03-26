@@ -1,0 +1,68 @@
+ifndef MAKEFILE_ALPHATORUS_INCLUDED
+MAKEFILE_ALPHATORUS_INCLUDED := 1
+
+.PHONY: alphatorus.bin alphatorus.clean
+
+include build/common.inc
+
+# Not supported for NaCL or emscripten - Revisit
+
+ifeq ($(filter nacl% emscripten%,$(SYSTEM)),)
+
+#
+# alphatorus
+#
+
+include Makefile.regal
+include Makefile.glut
+
+ifndef REGAL.STATIC
+$(error alphatorus needs Regal.)
+endif
+
+all:: alphatorus.bin
+
+clean:: alphatorus.clean
+
+alphatorus.bin: bin/$(SYSTEM)/alphatorus
+
+alphatorus.clean:
+	$(RM) -r tmp/$(SYSTEM)/alphatorus/static
+	$(RM) -r bin/$(SYSTEM)/alphatorus
+
+ALPHATORUS.SRCS       += examples/alphatorus/src/render.cpp
+ALPHATORUS.SRCS       += examples/alphatorus/glut/code/main.cpp
+ALPHATORUS.SRCS.NAMES := $(notdir $(ALPHATORUS.SRCS))
+ALPHATORUS.OBJS       := $(addprefix tmp/$(SYSTEM)/alphatorus/static/,$(ALPHATORUS.SRCS.NAMES))
+ALPHATORUS.OBJS       := $(ALPHATORUS.OBJS:.cpp=.o)
+ALPHATORUS.DEPS       := $(ALPHATORUS.DEPS:.o=.d)
+ALPHATORUS.CFLAGS     := -Iinclude -Iexamples/alphatorus/src
+ALPHATORUS.LIBS       += -Llib/$(SYSTEM) $(LDFLAGS.GLUT) $(LDFLAGS.GLU) $(LDFLAGS.X11)
+ALPHATORUS.LIBS       += -lm -pthread
+
+-include $(ALPHATORUS.DEPS)
+
+tmp/$(SYSTEM)/alphatorus/static/%.o: examples/alphatorus/src/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(ALPHATORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+
+tmp/$(SYSTEM)/alphatorus/static/%.o: examples/alphatorus/glut/code/%.cpp
+	@mkdir -p $(dir $@)
+	$(LOG_CXX)$(CCACHE) $(CXX) $(ALPHATORUS.CFLAGS) $(CFLAGS) $(CFLAGS.SO) -o $@ -c $<
+
+ALPHATORUS.DEPEND :=
+ALPHATORUS.DEPEND += lib/$(SYSTEM)/$(REGAL.SHARED)
+
+ifdef GLUT.SHARED
+bin/$(SYSTEM)/alphatorus: lib/$(SYSTEM)/$(GLUT.SHARED) lib/$(SYSTEM)/$(GLU.SHARED)
+endif
+
+bin/$(SYSTEM)/alphatorus: $(ALPHATORUS.OBJS) lib/$(SYSTEM)/$(REGAL.SHARED)
+	@mkdir -p $(dir $@)
+	$(LOG_LD)$(CCACHE) $(LD) $(LDFLAGS.EXTRA) -o $@ $(ALPHATORUS.OBJS) lib/$(SYSTEM)/$(REGAL.SHARED) $(ALPHATORUS.LIBS) $(REGAL.LDFLAGS)
+ifneq ($(STRIP),)
+	$(LOG_STRIP)$(STRIP) -x $@
+endif
+
+endif
+endif

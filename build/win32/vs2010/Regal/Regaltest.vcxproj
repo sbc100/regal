@@ -78,8 +78,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../src/pcre;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;PCRE_STATIC=1;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -96,7 +96,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;pcrelib.lib;glsloptlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -118,8 +118,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../src/pcre;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;PCRE_STATIC=1;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -137,7 +137,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;pcrelib.lib;glsloptlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Release\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -157,8 +157,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../src/pcre;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;PCRE_STATIC=1;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
@@ -175,7 +175,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;pcrelib.lib;glsloptlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\Win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>
@@ -197,8 +197,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../../../src/googletest/include;../../../../src/googlemock/include;../../../../src/googlemock;../../../../src/boost;../../../../src/regal;../../../../src/lookup3;../../../../src/pcre;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GTEST_HAS_RTTI=0;PCRE_STATIC=1;REGAL_SYS_WGL_DECLARE_WGL;_ITERATOR_DEBUG_LEVEL=0;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>
@@ -215,7 +215,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestlib.lib;regallib.lib;civetweblib.lib;md5lib.lib;jsonsllib.lib;squishlib.lib;apitracelib.lib;pcrelib.lib;glsloptlib.lib;snappylib.lib;pnglib.lib;zlib.lib;advapi32.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>Debug\x64\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile></ModuleDefinitionFile>

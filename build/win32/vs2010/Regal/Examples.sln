@@ -8,6 +8,10 @@ Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "dreamtorus", "dreamtorus.vc
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "alphatorus", "alphatorus.vcxproj", "{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Project("{CF05FE22-B763-D96E-C64D-312608111C07}") = "tiger", "tiger.vcxproj", "{CC6D2AA2-765F-3405-4DF6-DC537EE16992}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -45,6 +49,14 @@ Global
 		{55D3AA5A-E8FE-2AC9-A665-77FC920A8658}.Release|Win32.ActiveCfg = Release|Win32
 		{55D3AA5A-E8FE-2AC9-A665-77FC920A8658}.Release|x64.Build.0 = Release|x64
 		{55D3AA5A-E8FE-2AC9-A665-77FC920A8658}.Release|x64.ActiveCfg = Release|x64
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Debug|x64.Build.0 = Debug|x64
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Debug|x64.ActiveCfg = Debug|x64
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Release|Win32.Build.0 = Release|Win32
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Release|x64.Build.0 = Release|x64
+		{B16811C6-F61E-8CD5-E8A4-94D84F05D7A3}.Release|x64.ActiveCfg = Release|x64
 		{CC6D2AA2-765F-3405-4DF6-DC537EE16992}.Debug|Win32.Build.0 = Debug|Win32
 		{CC6D2AA2-765F-3405-4DF6-DC537EE16992}.Debug|Win32.ActiveCfg = Debug|Win32
 		{CC6D2AA2-765F-3405-4DF6-DC537EE16992}.Debug|x64.Build.0 = Debug|x64

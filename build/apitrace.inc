@@ -33,7 +33,6 @@ APITRACE.CXX += src/apitrace/dispatch/glproc_regal.cpp
 APITRACE.CXX += src/apitrace/helpers/eglsize.cpp
 APITRACE.CXX += src/apitrace/wrappers/glcaps.cpp
 APITRACE.CXX += src/apitrace/wrappers/gltrace_state.cpp
-APITRACE.CXX += src/apitrace/wrappers/trace.cpp
 APITRACE.CXX += src/apitrace/wrappers/regaltrace.cpp
 
 #

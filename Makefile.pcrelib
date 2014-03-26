@@ -1,0 +1,61 @@
+#
+# Makefile for the GLSL Optimizer component of the Regal runtime.
+# The GLSL Optimizer is always build into Regal, but you can build
+# just this target static library with:
+# make -f Makefile.pcrelib
+#
+
+ifndef MAKEFILE_PCRE_INCLUDED
+MAKEFILE_PCRE_INCLUDED := 1
+
+.PHONY: pcre.lib pcre.clean
+
+include build/common.inc
+
+include build/pcre.inc
+
+ifdef PCRE.STATIC
+
+all:: pcre.lib
+
+clean:: pcre.clean
+
+PCRE.SRCS       := $(PCRE.C)
+PCRE.SRCS       := $(filter %.c,$(PCRE.SRCS)) $(filter %.cc,$(PCRE.SRCS)) $(filter %.cpp,$(PCRE.SRCS))
+PCRE.SRCS.NAMES := $(notdir $(PCRE.SRCS))
+PCRE.OBJS       := $(addprefix tmp/$(SYSTEM)/pcre/static/,$(PCRE.SRCS.NAMES))
+PCRE.OBJS       := $(PCRE.OBJS:.c=.o) $(PCRE.OBJS:.cpp=.o)
+PCRE.OBJS       := $(filter %.o,$(PCRE.OBJS))
+PCRE.DEPS       := $(PCRE.OBJS:.o=.d)
+PCRE.CFLAGS     := $(PCRE.INCLUDE)
+PCRE.CFLAGS     += -DHAVE_CONFIG_H
+
+ifeq ($(MODE),release)
+PCRE.CFLAGS  += -DNDEBUG
+PCRE.CFLAGS  += -DREGAL_NO_ASSERT=1
+endif
+
+-include $(PCRE.DEPS)
+
+pcre.lib: lib/$(SYSTEM)/$(PCRE.STATIC)
+
+pcre.clean:
+	$(RM) -r tmp/$(SYSTEM)/pcre/static
+	$(RM) -r lib/$(SYSTEM)/$(PCRE.STATIC)
+
+tmp/$(SYSTEM)/pcre/static/%.o: src/pcre/%.c
+	@mkdir -p $(dir $@)
+	$(LOG_CC)$(CCACHE) $(CC) $(CFLAGS) $(PCRE.CFLAGS) $(PICFLAG) -o $@ -c $<
+
+lib/$(SYSTEM)/$(PCRE.STATIC): $(PCRE.OBJS)
+	@mkdir -p $(dir $@)
+	$(LOG_AR)$(CCACHE) $(AR) cr $@ $(PCRE.OBJS)
+ifneq ($(RANLIB),)
+	$(LOG_RANLIB)$(RANLIB) $@
+endif
+ifneq ($(STRIP),)
+	$(LOG_STRIP)$(STRIP) -x $@
+endif
+
+endif
+endif

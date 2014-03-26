@@ -70,6 +70,7 @@ namespace Config {
   bool forceEmulation      = REGAL_FORCE_EMULATION;
   bool enableEmulation     = REGAL_EMULATION;
   bool enableTrace         = false;
+  bool enableHttp          = REGAL_HTTP;
   bool enableDebug         = false;
   bool enableError         = false;
   bool enableCode          = false;
@@ -231,6 +232,7 @@ namespace Config {
 
     getEnv( "REGAL_DEBUG",      enableDebug,      REGAL_DEBUG);
     getEnv( "REGAL_TRACE",      enableTrace,      REGAL_TRACE);
+    getEnv( "REGAL_HTTP",       enableHttp,       REGAL_HTTP );
     getEnv( "REGAL_ERROR",      enableError,      REGAL_ERROR);
     getEnv( "REGAL_CODE",       enableCode,       REGAL_CODE);
     getEnv( "REGAL_STATISTICS", enableStatistics, REGAL_STATISTICS);
@@ -368,6 +370,9 @@ namespace Config {
 #if REGAL_TRACE
     Info("REGAL_TRACE               ", enableTrace         ? "enabled" : "disabled");
 #endif
+#if REGAL_HTTP
+    Info("REGAL_HTTP                ", enableHttp          ? "enabled" : "disabled");
+#endif
     Info("REGAL_DEBUG               ", enableDebug         ? "enabled" : "disabled");
     Info("REGAL_ERROR               ", enableError         ? "enabled" : "disabled");
 #if REGAL_CODE
@@ -484,6 +489,7 @@ namespace Config {
           jo.member("statistics", enableStatistics);
           jo.member("emulation",  enableEmulation);
           jo.member("trace",      enableTrace);
+          jo.member("http",       enableHttp);
           jo.member("log",        enableLog);
           jo.member("driver",     enableDriver);
           jo.member("missing",    enableMissing);

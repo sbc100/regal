@@ -1,0 +1,260 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		433CA18314D9E709007E13F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA18214D9E709007E13F5 /* main.cpp */; };
+		433CA18514D9F6AF007E13F5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433CA18414D9F6AF007E13F5 /* GLUT.framework */; };
+		433CA18914D9FAF9007E13F5 /* render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA18814D9FAF9007E13F5 /* render.cpp */; };
+		433CA19514DA0DF3007E13F5 /* RegalFixedFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA19114DA0DF3007E13F5 /* RegalFixedFunction.cpp */; };
+		433CA19C14DA0F7A007E13F5 /* Regal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA19614DA0F7A007E13F5 /* Regal.cpp */; };
+		433CA19D14DA0F7A007E13F5 /* RegalEmuDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA19814DA0F7A007E13F5 /* RegalEmuDispatch.cpp */; };
+		433CA19E14DA0F7A007E13F5 /* RegalErrorDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA19914DA0F7A007E13F5 /* RegalErrorDispatch.cpp */; };
+		433CA19F14DA0F7A007E13F5 /* RegalLoaderDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433CA19A14DA0F7A007E13F5 /* RegalLoaderDispatch.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		433CA17014D9E566007E13F5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		433CA17214D9E566007E13F5 /* minimal_glut */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = minimal_glut; sourceTree = BUILT_PRODUCTS_DIR; };
+		433CA18214D9E709007E13F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = code/main.cpp; sourceTree = "<group>"; };
+		433CA18414D9F6AF007E13F5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		433CA18814D9FAF9007E13F5 /* render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = render.cpp; path = code/render.cpp; sourceTree = "<group>"; };
+		433CA18E14DA0DF3007E13F5 /* linear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linear.h; path = ../../src/linear.h; sourceTree = "<group>"; };
+		433CA18F14DA0DF3007E13F5 /* RegalDsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalDsa.h; path = ../../src/RegalDsa.h; sourceTree = "<group>"; };
+		433CA19014DA0DF3007E13F5 /* RegalEmu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalEmu.h; path = ../../src/RegalEmu.h; sourceTree = "<group>"; };
+		433CA19114DA0DF3007E13F5 /* RegalFixedFunction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalFixedFunction.cpp; path = ../../src/RegalFixedFunction.cpp; sourceTree = "<group>"; };
+		433CA19214DA0DF3007E13F5 /* RegalFixedFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalFixedFunction.h; path = ../../src/RegalFixedFunction.h; sourceTree = "<group>"; };
+		433CA19314DA0DF3007E13F5 /* RegalImmediate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalImmediate.h; path = ../../src/RegalImmediate.h; sourceTree = "<group>"; };
+		433CA19414DA0DF3007E13F5 /* RegalVao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalVao.h; path = ../../src/RegalVao.h; sourceTree = "<group>"; };
+		433CA19614DA0F7A007E13F5 /* Regal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Regal.cpp; path = ../../gen/Regal.cpp; sourceTree = "<group>"; };
+		433CA19714DA0F7A007E13F5 /* Regal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Regal.h; path = ../../gen/Regal.h; sourceTree = "<group>"; };
+		433CA19814DA0F7A007E13F5 /* RegalEmuDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalEmuDispatch.cpp; path = ../../gen/RegalEmuDispatch.cpp; sourceTree = "<group>"; };
+		433CA19914DA0F7A007E13F5 /* RegalErrorDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalErrorDispatch.cpp; path = ../../gen/RegalErrorDispatch.cpp; sourceTree = "<group>"; };
+		433CA19A14DA0F7A007E13F5 /* RegalLoaderDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RegalLoaderDispatch.cpp; path = ../../gen/RegalLoaderDispatch.cpp; sourceTree = "<group>"; };
+		433CA19B14DA0F7A007E13F5 /* RegalPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegalPrivate.h; path = ../../gen/RegalPrivate.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		433CA16F14D9E566007E13F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				433CA18514D9F6AF007E13F5 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		433CA16714D9E566007E13F5 = {
+			isa = PBXGroup;
+			children = (
+				435A392514D9E6B3006D7F44 /* code */,
+				433CA18414D9F6AF007E13F5 /* GLUT.framework */,
+				433CA17314D9E566007E13F5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		433CA17314D9E566007E13F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				433CA17214D9E566007E13F5 /* minimal_glut */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		433CA18D14DA0DB8007E13F5 /* Regal */ = {
+			isa = PBXGroup;
+			children = (
+				433CA19614DA0F7A007E13F5 /* Regal.cpp */,
+				433CA19714DA0F7A007E13F5 /* Regal.h */,
+				433CA19814DA0F7A007E13F5 /* RegalEmuDispatch.cpp */,
+				433CA19914DA0F7A007E13F5 /* RegalErrorDispatch.cpp */,
+				433CA19A14DA0F7A007E13F5 /* RegalLoaderDispatch.cpp */,
+				433CA19B14DA0F7A007E13F5 /* RegalPrivate.h */,
+				433CA18E14DA0DF3007E13F5 /* linear.h */,
+				433CA18F14DA0DF3007E13F5 /* RegalDsa.h */,
+				433CA19014DA0DF3007E13F5 /* RegalEmu.h */,
+				433CA19114DA0DF3007E13F5 /* RegalFixedFunction.cpp */,
+				433CA19214DA0DF3007E13F5 /* RegalFixedFunction.h */,
+				433CA19314DA0DF3007E13F5 /* RegalImmediate.h */,
+				433CA19414DA0DF3007E13F5 /* RegalVao.h */,
+			);
+			name = Regal;
+			sourceTree = "<group>";
+		};
+		435A392514D9E6B3006D7F44 /* code */ = {
+			isa = PBXGroup;
+			children = (
+				433CA18D14DA0DB8007E13F5 /* Regal */,
+				433CA18214D9E709007E13F5 /* main.cpp */,
+				433CA18814D9FAF9007E13F5 /* render.cpp */,
+			);
+			name = code;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		433CA17114D9E566007E13F5 /* minimal_glut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 433CA17C14D9E566007E13F5 /* Build configuration list for PBXNativeTarget "minimal_glut" */;
+			buildPhases = (
+				433CA16E14D9E566007E13F5 /* Sources */,
+				433CA16F14D9E566007E13F5 /* Frameworks */,
+				433CA17014D9E566007E13F5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = minimal_glut;
+			productName = minimal_glut;
+			productReference = 433CA17214D9E566007E13F5 /* minimal_glut */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		433CA16914D9E566007E13F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = n/a;
+			};
+			buildConfigurationList = 433CA16C14D9E566007E13F5 /* Build configuration list for PBXProject "minimal_glut" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 433CA16714D9E566007E13F5;
+			productRefGroup = 433CA17314D9E566007E13F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				433CA17114D9E566007E13F5 /* minimal_glut */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		433CA16E14D9E566007E13F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				433CA18314D9E709007E13F5 /* main.cpp in Sources */,
+				433CA18914D9FAF9007E13F5 /* render.cpp in Sources */,
+				433CA19514DA0DF3007E13F5 /* RegalFixedFunction.cpp in Sources */,
+				433CA19C14DA0F7A007E13F5 /* Regal.cpp in Sources */,
+				433CA19D14DA0F7A007E13F5 /* RegalEmuDispatch.cpp in Sources */,
+				433CA19E14DA0F7A007E13F5 /* RegalErrorDispatch.cpp in Sources */,
+				433CA19F14DA0F7A007E13F5 /* RegalLoaderDispatch.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		433CA17A14D9E566007E13F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		433CA17B14D9E566007E13F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		433CA17D14D9E566007E13F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		433CA17E14D9E566007E13F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		433CA16C14D9E566007E13F5 /* Build configuration list for PBXProject "minimal_glut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				433CA17A14D9E566007E13F5 /* Debug */,
+				433CA17B14D9E566007E13F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		433CA17C14D9E566007E13F5 /* Build configuration list for PBXNativeTarget "minimal_glut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				433CA17D14D9E566007E13F5 /* Debug */,
+				433CA17E14D9E566007E13F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 433CA16914D9E566007E13F5 /* Project object */;
+}

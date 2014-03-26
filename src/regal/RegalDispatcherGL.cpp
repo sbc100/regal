@@ -55,6 +55,12 @@ DispatcherGL::DispatcherGL()
   push_back(trace,Config::enableTrace);
   #endif
 
+  #if REGAL_HTTP
+  ::memset(&http,0,sizeof(DispatchTableGL));
+  InitDispatchTableHttp(http);
+  push_back(http,Config::enableHttp);
+  #endif
+
   #if REGAL_DEBUG
   InitDispatchTableDebug(debug);
   push_back(debug,Config::enableDebug);
@@ -84,7 +90,7 @@ DispatcherGL::DispatcherGL()
   #endif
 
   #if REGAL_STATISTICS
-  ::memset(&code,0,sizeof(DispatchTableGL));
+  ::memset(&statistics,0,sizeof(DispatchTableGL));
   InitDispatchTableStatistics(statistics);
   push_back(statistics,Config::enableStatistics);
   #endif

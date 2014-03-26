@@ -76,6 +76,7 @@ REGAL_GLOBAL_BEGIN
 #include "RegalEmuInfo.h"
 #include "RegalSharedMap.h"
 #include "RegalFloat4.h"
+#include "RegalShaderInstance.h"
 #include "linear.h"
 
 REGAL_GLOBAL_END
@@ -84,6 +85,12 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Emu
 {
+
+  template <typename T> struct TypeTraits {};
+  template <> struct TypeTraits<GLdouble> { static const GLenum glTypeEnum = GL_DOUBLE; };
+  template <> struct TypeTraits<GLfloat> { static const GLenum glTypeEnum = GL_FLOAT; };
+  template <> struct TypeTraits<GLint> { static const GLenum glTypeEnum = GL_INT; };
+  template <> struct TypeTraits<GLuint> { static const GLenum glTypeEnum = GL_UNSIGNED_INT; };
 
 // lookup array, Must Be kept in sync with enum TexenvMode; TEM_* values
 const GLenum texenvModeGL[] =
@@ -286,13 +293,11 @@ const GLenum texenvCombineOpGL[] =
 enum RegalFFUniformEnum
 {
   FFU_foo = 0,
-  FFU_ModelView,
-  FFU_ModelViewInverse,
-  FFU_ModelViewInverseTranspose,
-  FFU_Projection,
-  FFU_ProjectionInverse,
-  FFU_ModelViewProjection,
-  FFU_ModelViewProjectionInverse,
+  FFU_NormalMatrix,
+
+  FFU_ModelViewMatrix,
+  FFU_ProjectionMatrix,
+  FFU_ModelViewProjectionMatrix,
   FFU_TextureMatrix0,
   FFU_TextureMatrix1,
   FFU_TextureMatrix2,
@@ -309,6 +314,67 @@ enum RegalFFUniformEnum
   FFU_TextureMatrix13,
   FFU_TextureMatrix14,
   FFU_TextureMatrix15,
+
+  FFU_ModelViewMatrixInverse,
+  FFU_ProjectionMatrixInverse,
+  FFU_ModelViewProjectionMatrixInverse,
+  FFU_TextureMatrix0Inverse,
+  FFU_TextureMatrix1Inverse,
+  FFU_TextureMatrix2Inverse,
+  FFU_TextureMatrix3Inverse,
+  FFU_TextureMatrix4Inverse,
+  FFU_TextureMatrix5Inverse,
+  FFU_TextureMatrix6Inverse,
+  FFU_TextureMatrix7Inverse,
+  FFU_TextureMatrix8Inverse,
+  FFU_TextureMatrix9Inverse,
+  FFU_TextureMatrix10Inverse,
+  FFU_TextureMatrix11Inverse,
+  FFU_TextureMatrix12Inverse,
+  FFU_TextureMatrix13Inverse,
+  FFU_TextureMatrix14Inverse,
+  FFU_TextureMatrix15Inverse,
+
+  FFU_ModelViewMatrixTranspose,
+  FFU_ProjectionMatrixTranspose,
+  FFU_ModelViewProjectionMatrixTranspose,
+  FFU_TextureMatrix0Transpose,
+  FFU_TextureMatrix1Transpose,
+  FFU_TextureMatrix2Transpose,
+  FFU_TextureMatrix3Transpose,
+  FFU_TextureMatrix4Transpose,
+  FFU_TextureMatrix5Transpose,
+  FFU_TextureMatrix6Transpose,
+  FFU_TextureMatrix7Transpose,
+  FFU_TextureMatrix8Transpose,
+  FFU_TextureMatrix9Transpose,
+  FFU_TextureMatrix10Transpose,
+  FFU_TextureMatrix11Transpose,
+  FFU_TextureMatrix12Transpose,
+  FFU_TextureMatrix13Transpose,
+  FFU_TextureMatrix14Transpose,
+  FFU_TextureMatrix15Transpose,
+
+  FFU_ModelViewMatrixInverseTranspose,
+  FFU_ProjectionMatrixInverseTranspose,
+  FFU_ModelViewProjectionMatrixInverseTranspose,
+  FFU_TextureMatrix0InverseTranspose,
+  FFU_TextureMatrix1InverseTranspose,
+  FFU_TextureMatrix2InverseTranspose,
+  FFU_TextureMatrix3InverseTranspose,
+  FFU_TextureMatrix4InverseTranspose,
+  FFU_TextureMatrix5InverseTranspose,
+  FFU_TextureMatrix6InverseTranspose,
+  FFU_TextureMatrix7InverseTranspose,
+  FFU_TextureMatrix8InverseTranspose,
+  FFU_TextureMatrix9InverseTranspose,
+  FFU_TextureMatrix10InverseTranspose,
+  FFU_TextureMatrix11InverseTranspose,
+  FFU_TextureMatrix12InverseTranspose,
+  FFU_TextureMatrix13InverseTranspose,
+  FFU_TextureMatrix14InverseTranspose,
+  FFU_TextureMatrix15InverseTranspose,
+
   FFU_TextureEnvColor0,
   FFU_TextureEnvColor1,
   FFU_TextureEnvColor2,
@@ -391,13 +457,10 @@ struct RegalFFUniformInfo
 static const RegalFFUniformInfo regalFFUniformInfo[] =
 {
   { FFU_foo, "foo" },
-  { FFU_ModelView, "rglModelView" },
-  { FFU_ModelViewInverse, "rglModelViewInverse" },
-  { FFU_ModelViewInverseTranspose, "rglModelViewInverseTranspose" },
-  { FFU_Projection, "rglProjection" },
-  { FFU_ProjectionInverse, "rglProjectionInverse" },
-  { FFU_ModelViewProjection, "rglModelViewProjection" },
-  { FFU_ModelViewProjectionInverse, "rglModelViewProjectionInverse" },
+  { FFU_NormalMatrix, "rglNormalMatrix" },
+  { FFU_ModelViewMatrix, "rglModelViewMatrix" },
+  { FFU_ProjectionMatrix, "rglProjectionMatrix" },
+  { FFU_ModelViewProjectionMatrix, "rglModelViewProjectionMatrix" },
   { FFU_TextureMatrix0, "rglTextureMatrix0" },
   { FFU_TextureMatrix1, "rglTextureMatrix1" },
   { FFU_TextureMatrix2, "rglTextureMatrix2" },
@@ -414,6 +477,63 @@ static const RegalFFUniformInfo regalFFUniformInfo[] =
   { FFU_TextureMatrix13, "rglTextureMatrix13" },
   { FFU_TextureMatrix14, "rglTextureMatrix14" },
   { FFU_TextureMatrix15, "rglTextureMatrix15" },
+  { FFU_ModelViewMatrixInverse, "rglModelViewMatrixInverse" },
+  { FFU_ProjectionMatrixInverse, "rglProjectionMatrixInverse" },
+  { FFU_ModelViewProjectionMatrixInverse, "rglModelViewProjectionMatrixInverse" },
+  { FFU_TextureMatrix0Inverse, "rglTextureMatrix0Inverse" },
+  { FFU_TextureMatrix1Inverse, "rglTextureMatrix1Inverse" },
+  { FFU_TextureMatrix2Inverse, "rglTextureMatrix2Inverse" },
+  { FFU_TextureMatrix3Inverse, "rglTextureMatrix3Inverse" },
+  { FFU_TextureMatrix4Inverse, "rglTextureMatrix4Inverse" },
+  { FFU_TextureMatrix5Inverse, "rglTextureMatrix5Inverse" },
+  { FFU_TextureMatrix6Inverse, "rglTextureMatrix6Inverse" },
+  { FFU_TextureMatrix7Inverse, "rglTextureMatrix7Inverse" },
+  { FFU_TextureMatrix8Inverse, "rglTextureMatrix8Inverse" },
+  { FFU_TextureMatrix9Inverse, "rglTextureMatrix9Inverse" },
+  { FFU_TextureMatrix10Inverse, "rglTextureMatrix10Inverse" },
+  { FFU_TextureMatrix11Inverse, "rglTextureMatrix11Inverse" },
+  { FFU_TextureMatrix12Inverse, "rglTextureMatrix12Inverse" },
+  { FFU_TextureMatrix13Inverse, "rglTextureMatrix13Inverse" },
+  { FFU_TextureMatrix14Inverse, "rglTextureMatrix14Inverse" },
+  { FFU_TextureMatrix15Inverse, "rglTextureMatrix15Inverse" },
+  { FFU_ModelViewMatrixTranspose, "rglModelViewMatrixTranspose" },
+  { FFU_ProjectionMatrixTranspose, "rglProjectionMatrixTranspose" },
+  { FFU_ModelViewProjectionMatrixTranspose, "rglModelViewProjectionMatrixTranspose" },
+  { FFU_TextureMatrix0Transpose, "rglTextureMatrix0Transpose" },
+  { FFU_TextureMatrix1Transpose, "rglTextureMatrix1Transpose" },
+  { FFU_TextureMatrix2Transpose, "rglTextureMatrix2Transpose" },
+  { FFU_TextureMatrix3Transpose, "rglTextureMatrix3Transpose" },
+  { FFU_TextureMatrix4Transpose, "rglTextureMatrix4Transpose" },
+  { FFU_TextureMatrix5Transpose, "rglTextureMatrix5Transpose" },
+  { FFU_TextureMatrix6Transpose, "rglTextureMatrix6Transpose" },
+  { FFU_TextureMatrix7Transpose, "rglTextureMatrix7Transpose" },
+  { FFU_TextureMatrix8Transpose, "rglTextureMatrix8Transpose" },
+  { FFU_TextureMatrix9Transpose, "rglTextureMatrix9Transpose" },
+  { FFU_TextureMatrix10Transpose, "rglTextureMatrix10Transpose" },
+  { FFU_TextureMatrix11Transpose, "rglTextureMatrix11Transpose" },
+  { FFU_TextureMatrix12Transpose, "rglTextureMatrix12Transpose" },
+  { FFU_TextureMatrix13Transpose, "rglTextureMatrix13Transpose" },
+  { FFU_TextureMatrix14Transpose, "rglTextureMatrix14Transpose" },
+  { FFU_TextureMatrix15Transpose, "rglTextureMatrix15Transpose" },
+  { FFU_ModelViewMatrixInverseTranspose, "rglModelViewMatrixInverseTranspose" },
+  { FFU_ProjectionMatrixInverseTranspose, "rglProjectionMatrixInverseTranspose" },
+  { FFU_ModelViewProjectionMatrixInverseTranspose, "rglModelViewProjectionMatrixInverseTranspose" },
+  { FFU_TextureMatrix0InverseTranspose, "rglTextureMatrix0InverseTranspose" },
+  { FFU_TextureMatrix1InverseTranspose, "rglTextureMatrix1InverseTranspose" },
+  { FFU_TextureMatrix2InverseTranspose, "rglTextureMatrix2InverseTranspose" },
+  { FFU_TextureMatrix3InverseTranspose, "rglTextureMatrix3InverseTranspose" },
+  { FFU_TextureMatrix4InverseTranspose, "rglTextureMatrix4InverseTranspose" },
+  { FFU_TextureMatrix5InverseTranspose, "rglTextureMatrix5InverseTranspose" },
+  { FFU_TextureMatrix6InverseTranspose, "rglTextureMatrix6InverseTranspose" },
+  { FFU_TextureMatrix7InverseTranspose, "rglTextureMatrix7InverseTranspose" },
+  { FFU_TextureMatrix8InverseTranspose, "rglTextureMatrix8InverseTranspose" },
+  { FFU_TextureMatrix9InverseTranspose, "rglTextureMatrix9InverseTranspose" },
+  { FFU_TextureMatrix10InverseTranspose, "rglTextureMatrix10InverseTranspose" },
+  { FFU_TextureMatrix11InverseTranspose, "rglTextureMatrix11InverseTranspose" },
+  { FFU_TextureMatrix12InverseTranspose, "rglTextureMatrix12InverseTranspose" },
+  { FFU_TextureMatrix13InverseTranspose, "rglTextureMatrix13InverseTranspose" },
+  { FFU_TextureMatrix14InverseTranspose, "rglTextureMatrix14InverseTranspose" },
+  { FFU_TextureMatrix15InverseTranspose, "rglTextureMatrix15InverseTranspose" },
   { FFU_TextureEnvColor0, "rglTexEnvColor0" },
   { FFU_TextureEnvColor1, "rglTexEnvColor1" },
   { FFU_TextureEnvColor2, "rglTexEnvColor2" },
@@ -1036,6 +1156,7 @@ struct Iff
 
       GLuint64 ver;
       GLfloat alphaRef;
+      GLfloat alphaTestEnable;
     };
 
     struct ClipUniform
@@ -1329,23 +1450,53 @@ struct Iff
     std::vector<El> stack;
   };
 
+
+  struct UserProgramInstanceKey {
+    UserProgramInstanceKey( CompareFunc a = CF_Always ) : alphaFunc( a ) {}
+    UserProgramInstanceKey( const State::Store & s ) : alphaFunc( s.alphaTest.enable ? s.alphaTest.comp : CF_Always ) {}
+    CompareFunc alphaFunc;
+    bool operator < ( const UserProgramInstanceKey & rhs ) const {
+      return alphaFunc < rhs.alphaFunc;
+    }
+    bool operator != ( const UserProgramInstanceKey & rhs ) const {
+      return alphaFunc != rhs.alphaFunc;
+    }
+  };
+
+  // Iff::UniformInfo
+
+  struct UniformInfo
+  {
+    UniformInfo(GLuint64 v = 0, GLint s = -1)
+    : ver(v)
+    , slot(s)
+    {
+    }
+
+    GLuint64 ver;
+    GLint    slot;
+  };
+
+  typedef std::map< RegalFFUniformEnum, UniformInfo> UniformMap;
+
+  struct UserProgramInstance {
+    ShaderInstance::ProgramInstance inst;
+    GLuint64 ffver;
+    UniformMap ffuniforms;
+    void LocateUniforms( RegalContext * ctx, DispatchTableGL & tbl );
+  };
+
+  struct UserProgramInstanceInfo {
+    ShaderInstance::Program program;
+    std::map<UserProgramInstanceKey,UserProgramInstance> instances;
+    UserProgramInstanceKey prevKey;
+    UserProgramInstance * prevInstance;
+  };
+
   // Iff::Program
 
   struct Program
   {
-    // Iff::Program::UniformInfo
-
-    struct UniformInfo
-    {
-      UniformInfo(GLuint64 v = 0, GLint s = -1)
-        : ver(v)
-        , slot(s)
-      {
-      }
-
-      GLuint64 ver;
-      GLint    slot;
-    };
 
     // Iff::Program
 
@@ -1354,6 +1505,8 @@ struct Iff
       , pg(0)
       , vs(0)
       , fs(0)
+      , pginst(0)
+      , instanced(false)
       , progcount(0)
     {
     }
@@ -1362,13 +1515,15 @@ struct Iff
     GLuint   pg;
     GLuint   vs;
     GLuint   fs;
+    GLuint   pginst;
+    bool     instanced;
     int      progcount;
 
-    std::map< RegalFFUniformEnum, UniformInfo> uniforms;
+    UniformMap uniforms;
     State::Store store;
 
-    void Init( RegalContext * ctx, const State::Store & sstore, const GLchar *vsSrc, const GLchar *fsSrc );
-    void Shader( RegalContext * ctx, DispatchTableGL & tbl, GLenum type, GLuint & shader, const GLchar *src );
+    void Init( RegalContext * ctx, const State::Store & sstore, GLuint vshd, GLuint fshd );
+    static void Shader( RegalContext * ctx, DispatchTableGL & tbl, GLenum type, GLuint & shader, const GLchar *src );
     void Attribs( RegalContext * ctx );
     void UserShaderModeAttribs( RegalContext * ctx );
     void Samplers( RegalContext * ctx, DispatchTableGL & tbl );
@@ -1383,7 +1538,7 @@ struct Iff
   TextureUnit textureUnit[ REGAL_EMU_MAX_TEXTURE_UNITS ];
   Float4 textureEnvColor[ REGAL_EMU_MAX_TEXTURE_UNITS ];
   GLuint64 textureEnvColorVer[ REGAL_EMU_MAX_TEXTURE_UNITS ];
-  GLuint textureBinding[ REGAL_EMU_MAX_TEXTURE_UNITS];
+  GLuint textureBinding[ REGAL_EMU_MAX_TEXTURE_COORDS ];
   GLuint shadowActiveTextureIndex;
   GLuint activeTextureIndex;
   GLuint programPipeline;
@@ -1405,6 +1560,8 @@ struct Iff
   std::map<GLenum, GLenum>  fmtmap;
   std::map<GLuint, GLenum>  shaderTypeMap;
   std::map<GLuint, Program> shprogmap;
+  std::map<GLuint, UserProgramInstanceInfo> inst;
+  UserProgramInstanceInfo * currinst;
 
   GLuint currVao;
   std::map<GLuint, GLuint> vaoAttrMap;
@@ -1930,11 +2087,6 @@ struct Iff
       case GL_MAX_TEXTURE_STACK_DEPTH:
         *param = ((REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH != 0) ? GL_TRUE : GL_FALSE);
         break;
-      case GL_SMOOTH_POINT_SIZE_RANGE:
-      case GL_SMOOTH_LINE_WIDTH_RANGE:
-        // FIXME: Pass through actual GL's limit.
-        *param = GL_TRUE;
-        break;
       case GL_MODELVIEW_STACK_DEPTH:
         *param = ((modelview.size() != 0) ? GL_TRUE : GL_FALSE);
         break;
@@ -2064,14 +2216,6 @@ struct Iff
       case GL_MAX_PROJECTION_STACK_DEPTH:
       case GL_MAX_TEXTURE_STACK_DEPTH:
         *params = static_cast<T>(REGAL_FIXED_FUNCTION_MATRIX_STACK_DEPTH);
-        break;
-      case GL_SMOOTH_POINT_SIZE_RANGE:
-        // FIXME: Pass through actual GL's limit.
-        *params = static_cast<T>(1);
-        break;
-      case GL_SMOOTH_LINE_WIDTH_RANGE:
-        // FIXME: Pass through actual GL's limit.
-        *params = static_cast<T>(1);
         break;
       case GL_MODELVIEW_STACK_DEPTH:
         *params = static_cast<T>(modelview.size());
@@ -2261,11 +2405,43 @@ struct Iff
   void EnableArray( RegalContext * ctx, GLuint index );
   void DisableArray( RegalContext * ctx, GLuint index );
   void UpdateUniforms( RegalContext * ctx );
+  void ClearVersionsForProgram( RegalContext *ctx );
+  GLuint GetFixedFunctionStateHash();
+  GLuint CreateFixedFunctionVertexShader( RegalContext * ctx );
+  GLuint CreateFixedFunctionFragmentShader( RegalContext * ctx );
   void UseFixedFunctionProgram( RegalContext * ctx );
   void UseShaderProgram( RegalContext * ctx );
   void ShaderSource( RegalContext *ctx, GLuint shader, GLsizei count, const GLchar * const * string, const GLint *length);
   void LinkProgram( RegalContext *ctx, GLuint program );
   GLuint CreateShader( RegalContext *ctx, GLenum shaderType );
+  void Uniform( RegalContext *ctx, GLenum type, int vecSize, GLint loc, GLsizei count, const void * data );
+  void Uniform( RegalContext *ctx, GLenum type, int cols, int rows, GLint loc, GLsizei count, const void * data );
+
+  template <typename T> void Uniform( RegalContext *ctx, int vecSize, GLint loc, GLsizei count, T v0, T v1 = 0, T v2 = 0, T v3 = 0 ) {
+    T v[] = { v0, v1, v2, v3 };
+    Uniform( ctx, TypeTraits<T>::glTypeEnum, vecSize, loc, count, v );
+  }
+  template <typename T> void Uniform( RegalContext *ctx, int vecSize, GLint loc, GLsizei count, const T * v ) {
+    Uniform( ctx, TypeTraits<T>::glTypeEnum, vecSize, loc, count, v );
+  }
+
+  template <typename T> void UniformMatrix( RegalContext *ctx, int cols, int rows, GLint loc, GLsizei count, GLboolean transpose, const T * m ) {
+    if( transpose ) {
+      T mat[16];
+      int elements = rows * cols;
+      for( int i = 0; i < count; i++ ) {
+        const T * mm = m + elements * i;
+        for( int c = 0; c < cols; c++ ) {
+          for( int r = 0; r < rows; r++ ) {
+            mat[ c * rows + r ] = mm[ r * cols + c ];
+          }
+        }
+        Uniform( ctx, TypeTraits<T>::glTypeEnum, cols, rows, loc + i, 1, mat );
+      }
+    }
+    Uniform( ctx, TypeTraits<T>::glTypeEnum, rows, cols, loc, count, m );
+  }
+
   void Init( RegalContext &ctx );
 };
 

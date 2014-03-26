@@ -62,7 +62,6 @@ GLSLOPT.CXX += src/glsl/src/glsl/lower_variable_index_to_cond_assign.cpp
 GLSLOPT.CXX += src/glsl/src/glsl/lower_vec_index_to_cond_assign.cpp
 GLSLOPT.CXX += src/glsl/src/glsl/lower_vec_index_to_swizzle.cpp
 GLSLOPT.CXX += src/glsl/src/glsl/lower_vector.cpp
-#GLSLOPT.CXX += src/glsl/src/glsl/main.cpp
 GLSLOPT.CXX += src/glsl/src/glsl/opt_algebraic.cpp
 GLSLOPT.CXX += src/glsl/src/glsl/opt_array_splitting.cpp
 GLSLOPT.CXX += src/glsl/src/glsl/opt_constant_folding.cpp
@@ -102,10 +101,15 @@ GLSLOPT.H :=
 GLSLOPT.H.OTHER :=
 
 #
+# Includes 
 
 GLSLOPT.INCLUDE :=
 GLSLOPT.INCLUDE += -Isrc/glsl/include
 GLSLOPT.INCLUDE += -Isrc/glsl/src/glsl
 GLSLOPT.INCLUDE += -Isrc/glsl/src/mesa
+
+ifeq ($(PROFILE_OS),Windows)
+GLSLOPT.INCLUDES += -Isrc/glsl/include/c99
+endif
 
 GLSLOPT.STATIC ?= libglslopt.a

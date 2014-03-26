@@ -319,7 +319,7 @@ TexC::Init( RegalContext& ctx )
   RegalAssert(ctx.emuInfo);
   ctx.emuInfo->gl_max_combined_texture_image_units = REGAL_EMU_MAX_COMBINED_TEXTURE_IMAGE_UNITS;
 
-  RegalContext* sharingWith = ctx.groupInitializedContext();
+  RegalContext* sharingWith = ctx.shareGroup->front();
   if ( sharingWith != NULL ) {
     mapTextureToTextureState = sharingWith->texc->mapTextureToTextureState;
   }

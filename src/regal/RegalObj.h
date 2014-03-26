@@ -141,7 +141,7 @@ struct Obj
 
   void Init( RegalContext &ctx )
   {
-    RegalContext *sharingWith = ctx.groupInitializedContext();
+    RegalContext *sharingWith = ctx.shareGroup->front();
     if (sharingWith)
     {
       bufferNames.app2drv  = sharingWith->obj->bufferNames.app2drv;

@@ -33,6 +33,7 @@ formulae = {
       'glGenSamplers',                                   # Sampler object emulation
       'glGetTexImage',
       'glTexImage(1|3)D',
+      'glGetTexLevelParameter(f|i)v',
       'glBlitFramebufferANGLE'                           # Emulate glBlitFramebuffer?
     ],
     'impl' : [
@@ -76,7 +77,6 @@ formulae = {
       'glEvalMesh(1|2)',
       'glEvalPoint(1|2)',
       'glGenLists',
-      'glGetTexLevelParameter(f|i)v',
       'glLineStipple',
       'glMap(1|2)(d|f)',
       'glMapGrid(1|2)(d|f)',

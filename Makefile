@@ -24,7 +24,8 @@ include Makefile.zlib
 include Makefile.libpng
 include Makefile.snappy
 include Makefile.apitrace
-# include Makefile.glslopt
+include Makefile.glsloptlib
+include Makefile.pcrelib
 include Makefile.regal
 include Makefile.regalw
 include Makefile.glu
@@ -36,6 +37,7 @@ include Makefile.glewinfo
 
 include Makefile.dreamtorus
 include Makefile.dreamtorus_static
+include Makefile.alphatorus
 include Makefile.tiger
 
 # Testing
@@ -55,5 +57,10 @@ clobber:
 	$(RM) -r tmp
 	$(RM) -r lib
 	$(RM) -r bin
+
+# Disable the built-in yacc & lex rules
+
+%.c: %.y
+%.c: %.l
 
 .PHONY: all clean clobber

@@ -184,6 +184,18 @@
 # endif
 #endif
 
+// Http dispatch unsupported by default in
+// release mode
+
+#ifndef REGAL_HTTP
+# if defined(NDEBUG) || REGAL_SYS_PPAPI || REGAL_WRANGLER
+#   define REGAL_HTTP 0
+# else
+#   define REGAL_HTTP 1
+# endif
+#endif
+
+
 // Emulation dispatch supported by default
 
 #ifndef REGAL_EMULATION
@@ -456,6 +468,10 @@
 
 #ifndef REGAL_FORCE_DESKTOP_GLSL
 #define REGAL_FORCE_DESKTOP_GLSL 0
+#endif
+
+#ifndef REGAL_GLSL_OPTIMIZER
+#define REGAL_GLSL_OPTIMIZER 1
 #endif
 
 //

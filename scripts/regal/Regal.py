@@ -366,6 +366,9 @@ def apiFuncDefineCode(apis, args):
       if function.needsContext:
         c += '  RegalContext *_context = REGAL_GET_CONTEXT();\n'
         c += listToString(indent(stripVertical(emuCodeGen(emue,'prefix')),'  '))
+        c += '  #if REGAL_HTTP\n'
+        c += '  _context->http.callString = %s;\n' % logFunction( function, 'print_string' )
+        c += '  #endif\n'
         c += '  %s\n' % logFunction( function, 'App' )
         c += '  if (!_context) return'
         if typeIsVoid(rType):
@@ -431,7 +434,18 @@ def apiFuncDefineCode(apis, args):
             c += listToString(indent(stripVertical(emuCodeGen(emue,'suffix')),'  '))
 
       else:
+        c += '  #if REGAL_HTTP\n'
+        c += '  {\n'
+        c += '    RegalContext *_context = REGAL_GET_CONTEXT();\n'
+        c += '    std::string params = %s\n' % logFunction( function, 'print_string', True, False, False, True)
+        c += '    if( _context ) {\n'
+        c += '      _context->http.callString = print_string( "%s", %s );\n' % ( function.name, 'params' )
+        c += '    }\n'
+        c += '    App( "%s", %s );\n' % (function.name, 'params')
+        c += '  }\n'
+        c += '  #else\n'
         c += '  %s\n' % logFunction(function, 'App' )
+        c += '  #endif\n'
         c += listToString(indent(stripVertical(emuCodeGen(emue,'prefix')),'  '))
 
         if not getattr(function,'regalOnly',False):
@@ -787,6 +801,7 @@ REGAL_GLOBAL_BEGIN
 using namespace REGAL_NAMESPACE_INTERNAL;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Logging;
 using namespace ::REGAL_NAMESPACE_INTERNAL::Token;
+using namespace boost::print;
 
 extern "C" {
 

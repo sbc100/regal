@@ -28,6 +28,8 @@ ifdef REGAL.STATIC
 
 include Makefile.apitrace
 include Makefile.libpng
+include Makefile.glsloptlib
+include Makefile.pcrelib
 
 all:: regal.lib
 
@@ -66,7 +68,7 @@ REGAL.SRCS           += src/jsonsl/jsonsl.c
 
 ifeq ($(MODE),debug)
 #REGAL.CFLAGS += -DREGAL_ASSERT_VERBOSE=1
-#REGAL.CFLAGS  += -DREGAL_NO_ASSERT=1
+#REGAL.CFLAGS += -DREGAL_NO_ASSERT=1
 endif
 
 #
@@ -80,7 +82,7 @@ REGAL.CFLAGS       += -DREGAL_DECL_EXPORT=1
 REGAL.CFLAGS       += -DREGAL_LOG_ALL=0
 REGAL.CFLAGS       += -DREGAL_LOG_ONCE=0
 REGAL.CFLAGS       += -DREGAL_LOG_JSON=0
-REGAL.CFLAGS       += -DREGAL_NO_HTTP=1
+REGAL.CFLAGS       += -DREGAL_HTTP=0
 REGAL.CFLAGS       += -DREGAL_NO_ASSERT=1
 REGAL.CFLAGS       += -DREGAL_NO_PNG=1
 REGAL.CFLAGS       += -DREGAL_STATISTICS=0
@@ -105,7 +107,7 @@ endif
 
 ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
 REGAL.CFLAGS  += -DREGAL_SYS_EMSCRIPTEN=1 -DREGAL_SYS_EGL=1 -DREGAL_SYS_ES2=1
-REGAL.CFLAGS  += -DREGAL_NO_HTTP=1
+REGAL.CFLAGS  += -DREGAL_HTTP=0
 REGAL.CFLAGS  += -DREGAL_STATISTICS=0
 REGAL.CFLAGS  += -Wno-constant-logical-operand
 REGAL.CFLAGS  += -DREGAL_PLUGIN=0
@@ -128,7 +130,7 @@ endif
 
 ifneq ($(filter emscripten%,$(SYSTEM)),)
 REGAL.CFLAGS  += -DREGAL_SYS_EMSCRIPTEN=1 -DREGAL_SYS_EGL=1 -DREGAL_SYS_ES2=1
-REGAL.CFLAGS  += -DREGAL_NO_HTTP=1
+REGAL.CFLAGS  += -DREGAL_HTTP=0
 REGAL.CFLAGS  += -Wno-constant-logical-operand
 REGAL.CFLAGS  += -DREGAL_PLUGIN=0
 REGAL.CFLAGS  += -DREGAL_TRACE=0
@@ -236,7 +238,7 @@ regal.lib: lib/$(SYSTEM)/$(REGAL.SHARED)
 endif
 endif
 
-lib/$(SYSTEM)/$(REGAL.STATIC): lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(REGAL.OBJS)
+lib/$(SYSTEM)/$(REGAL.STATIC): lib/$(SYSTEM)/$(GLSLOPT.STATIC) lib/$(SYSTEM)/$(PCRE.STATIC) lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(REGAL.OBJS)
 	@mkdir -p $(dir $@)
 	$(LOG_AR)$(CCACHE) $(AR) cr $@ $(REGAL.OBJS)
 ifneq ($(RANLIB),)
@@ -247,7 +249,7 @@ ifneq ($(STRIP),)
 endif
 
 REGAL.SHARED.DEPEND :=
-REGAL.SHARED.DEPEND += lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC)
+REGAL.SHARED.DEPEND += lib/$(SYSTEM)/$(GLSLOPT.STATIC) lib/$(SYSTEM)/$(PCRE.STATIC) lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC)
 
 ifdef APITRACE.STATIC
 REGAL.SHARED.DEPEND += lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
@@ -274,11 +276,11 @@ endif
 
 tmp/$(SYSTEM)/regal/static/%.o: src/regal/%.cpp $(REGAL.HEADERS)
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CXX) $(REGAL.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(REGAL.INCLUDE) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(REGAL.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(GLSLOPT.INCLUDE) $(REGAL.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/shared/%.o: src/regal/%.cpp $(REGAL.HEADERS)
 	@mkdir -p $(dir $@)
-	$(LOG_CXX)$(CCACHE) $(CXX) $(REGAL.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(REGAL.INCLUDE) -o $@ -c $<
+	$(LOG_CXX)$(CCACHE) $(CXX) $(REGAL.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(GLSLOPT.INCLUDE) $(REGAL.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/static/%.o: src/civetweb/%.c $(REGAL.HEADERS)
 	@mkdir -p $(dir $@)

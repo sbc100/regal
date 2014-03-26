@@ -1,4 +1,5 @@
-/* Copyright (c) 2004-2013 Sergey Lyubka
+/* Copyright (c) 2013-2014 the Civetweb developers
+ * Copyright (c) 2004-2013 Sergey Lyubka
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +28,18 @@
 #ifdef __linux__
 #define _XOPEN_SOURCE 600     /* For flockfile() on Linux */
 #endif
+#ifndef _LARGEFILE_SOURCE
 #define _LARGEFILE_SOURCE     /* For fseeko(), ftello() */
+#endif
+#ifndef _FILE_OFFSET_BITS
 #define _FILE_OFFSET_BITS 64  /* Use 64-bit file offsets by default */
+#endif
+#ifndef __STDC_FORMAT_MACROS
 #define __STDC_FORMAT_MACROS  /* <inttypes.h> wants this for C++ */
+#endif
+#ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS   /* C++ wants that for INT64_MAX */
+#endif
 #endif
 
 #if defined (_MSC_VER)
@@ -80,7 +89,9 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#ifndef MAX_WORKER_THREADS
 #define MAX_WORKER_THREADS 1024
+#endif
 
 #if defined(_WIN32) && !defined(__SYMBIAN32__) /* Windows specific */
 #if defined(_MSC_VER) && _MSC_VER <= 1400
@@ -187,14 +198,22 @@ typedef struct {
     pthread_t *waitingthreadhdls;  /* The thread handles. */
 } pthread_cond_t;
 
+#ifndef __clockid_t_defined
 typedef DWORD clockid_t;
+#endif
+#ifndef CLOCK_MONOTONIC
 #define CLOCK_MONOTONIC (1)
+#endif
+#ifndef CLOCK_REALTIME
 #define CLOCK_REALTIME  (2)
+#endif
 
+#ifndef _TIMESPEC_DEFINED
 struct timespec {
     time_t   tv_sec;        /* seconds */
     long     tv_nsec;       /* nanoseconds */
 };
+#endif
 
 #define pid_t HANDLE /* MINGW typedefs pid_t to int. Using #define here. */
 
@@ -248,6 +267,7 @@ struct pollfd {
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/time.h>
+#include <sys/utsname.h>
 #include <stdint.h>
 #include <inttypes.h>
 #include <netdb.h>
@@ -300,6 +320,145 @@ typedef int SOCKET;
 #endif
 #define ARRAY_SIZE(array) (sizeof(array) / sizeof(array[0]))
 
+#ifdef DEBUG_TRACE
+#undef DEBUG_TRACE
+#define DEBUG_TRACE(x)
+#else
+#if defined(DEBUG)
+#define DEBUG_TRACE(x) do { \
+  flockfile(stdout); \
+  printf("*** %lu.%p.%s.%d: ", \
+         (unsigned long) time(NULL), (void *) pthread_self(), \
+         __func__, __LINE__); \
+  printf x; \
+  putchar('\n'); \
+  fflush(stdout); \
+  funlockfile(stdout); \
+} while (0)
+#else
+#define DEBUG_TRACE(x)
+#endif /* DEBUG */
+#endif /* DEBUG_TRACE */
+
+#if defined(MEMORY_DEBUGGING)
+static unsigned long blockCount = 0;
+static unsigned long totalMemUsed = 0;
+
+static void * mg_malloc_ex(size_t size, const char * file, unsigned line) {
+
+    void * data = malloc(size + sizeof(size_t));
+    void * memory = 0;
+    char mallocStr[256];
+
+    if (data) {
+        *(size_t*)data = size;
+        totalMemUsed += size;
+        blockCount++;
+        memory = (void *)(((char*)data)+sizeof(size_t));
+    }
+
+    sprintf(mallocStr, "MEM: %p %5u alloc   %7u %4u --- %s:%u\n", memory, size, totalMemUsed, blockCount, file, line);
+#if defined(_WIN32)
+    OutputDebugStringA(mallocStr);
+#else
+    DEBUG_TRACE("%s", mallocStr);
+#endif
+
+    return memory;
+}
+
+static void * mg_calloc_ex(size_t count, size_t size, const char * file, unsigned line) {
+
+    void * data = mg_malloc_ex(size*count, file, line);
+    if (data) memset(data, 0, size);
+
+    return data;
+}
+
+static void mg_free_ex(void * memory, const char * file, unsigned line) {
+
+    char mallocStr[256];
+    void * data = (void *)(((char*)memory)-sizeof(size_t));
+    size_t size;
+
+    if (memory) {
+        size = *(size_t*)data;
+        totalMemUsed -= size;
+        blockCount--;
+        sprintf(mallocStr, "MEM: %p %5u free    %7u %4u --- %s:%u\n", memory, size, totalMemUsed, blockCount, file, line);
+#if defined(_WIN32)
+        OutputDebugStringA(mallocStr);
+#else
+        DEBUG_TRACE("%s", mallocStr);
+#endif
+
+        free(data);
+    }
+}
+
+static void * mg_realloc_ex(void * memory, size_t newsize, const char * file, unsigned line) {
+
+    char mallocStr[256];
+    void * data;
+    size_t oldsize;
+
+    if (newsize) {
+        if (memory) {
+            data = (void *)(((char*)memory)-sizeof(size_t));
+            oldsize = *(size_t*)data;
+            data = realloc(data, newsize+sizeof(size_t));
+            if (data) {
+                totalMemUsed -= oldsize;
+                sprintf(mallocStr, "MEM: %p %5u r-free  %7u %4u --- %s:%u\n", memory, oldsize, totalMemUsed, blockCount, file, line);
+#if defined(_WIN32)
+                OutputDebugStringA(mallocStr);
+#else
+                DEBUG_TRACE("%s", mallocStr);
+#endif
+                totalMemUsed += newsize;
+                sprintf(mallocStr, "MEM: %p %5u r-alloc %7u %4u --- %s:%u\n", memory, newsize, totalMemUsed, blockCount, file, line);
+#if defined(_WIN32)
+                OutputDebugStringA(mallocStr);
+#else
+                DEBUG_TRACE("%s", mallocStr);
+#endif
+                *(size_t*)data = newsize;
+                data = (void *)(((char*)data)+sizeof(size_t));
+            } else {
+#if defined(_WIN32)
+                OutputDebugStringA("MEM: realloc failed\n");
+#else
+                DEBUG_TRACE("MEM: realloc failed\n");
+#endif
+            }
+        } else {
+            data = mg_malloc_ex(newsize, file, line);
+        }
+    } else {
+        data = 0;
+        mg_free_ex(memory, file, line);
+    }
+
+    return data;
+}
+
+#define mg_malloc(a)      mg_malloc_ex(a, __FILE__, __LINE__)
+#define mg_calloc(a,b)    mg_calloc_ex(a, b, __FILE__, __LINE__)
+#define mg_realloc(a, b)  mg_realloc_ex(a, b, __FILE__, __LINE__)
+#define mg_free(a)        mg_free_ex(a, __FILE__, __LINE__)
+
+#else
+static __inline void * mg_malloc(size_t a)             {return malloc(a);}
+static __inline void * mg_calloc(size_t a, size_t b)   {return calloc(a, b);}
+static __inline void * mg_realloc(void * a, size_t b)  {return realloc(a, b);}
+static __inline void   mg_free(void * a)               {free(a);}
+#endif
+
+#define malloc  DO_NOT_USE_THIS_FUNCTION__USE_mg_malloc
+#define calloc  DO_NOT_USE_THIS_FUNCTION__USE_mg_calloc
+#define realloc DO_NOT_USE_THIS_FUNCTION__USE_mg_realloc
+#define free    DO_NOT_USE_THIS_FUNCTION__USE_mg_free
+
 #ifdef _WIN32
 static CRITICAL_SECTION global_log_file_lock;
 static DWORD pthread_self(void)
@@ -335,26 +494,6 @@ void *pthread_getspecific(pthread_key_t key)
 
 #define MD5_STATIC static
 #include "md5.inl"
-
-#ifdef DEBUG_TRACE
-#undef DEBUG_TRACE
-#define DEBUG_TRACE(x)
-#else
-#if defined(DEBUG)
-#define DEBUG_TRACE(x) do { \
-  flockfile(stdout); \
-  printf("*** %lu.%p.%s.%d: ", \
-         (unsigned long) time(NULL), (void *) pthread_self(), \
-         __func__, __LINE__); \
-  printf x; \
-  putchar('\n'); \
-  fflush(stdout); \
-  funlockfile(stdout); \
-} while (0)
-#else
-#define DEBUG_TRACE(x)
-#endif /* DEBUG */
-#endif /* DEBUG_TRACE */
 
 /* Darwin prior to 7.0 and Win32 do not have socklen_t */
 #ifdef NO_SOCKLEN_T
@@ -539,54 +678,57 @@ enum {
 #if defined(USE_LUA) && defined(USE_WEBSOCKET)
     LUA_WEBSOCKET_EXTENSIONS,
 #endif
+    ACCESS_CONTROL_ALLOW_ORIGIN,
 
     NUM_OPTIONS
 };
 
-static const char *config_options[] = {
-    "cgi_pattern", "**.cgi$|**.pl$|**.php$",
-    "cgi_environment", NULL,
-    "put_delete_auth_file", NULL,
-    "cgi_interpreter", NULL,
-    "protect_uri", NULL,
-    "authentication_domain", "mydomain.com",
-    "ssi_pattern", "**.shtml$|**.shtm$",
-    "throttle", NULL,
-    "access_log_file", NULL,
-    "enable_directory_listing", "yes",
-    "error_log_file", NULL,
-    "global_auth_file", NULL,
-    "index_files",
+/* TODO: replace 12345 by proper config types */
+static struct mg_option config_options[] = {
+    {"cgi_pattern",                 CONFIG_TYPE_EXT_PATTERN,   "**.cgi$|**.pl$|**.php$"},
+    {"cgi_environment",             CONFIG_TYPE_STRING,        NULL},
+    {"put_delete_auth_file",        CONFIG_TYPE_FILE,          NULL},
+    {"cgi_interpreter",             CONFIG_TYPE_FILE,          NULL},
+    {"protect_uri",                 12345,                     NULL},
+    {"authentication_domain",       CONFIG_TYPE_STRING,        "mydomain.com"},
+    {"ssi_pattern",                 CONFIG_TYPE_EXT_PATTERN,   "**.shtml$|**.shtm$"},
+    {"throttle",                    12345,                     NULL},
+    {"access_log_file",             CONFIG_TYPE_FILE,          NULL},
+    {"enable_directory_listing",    CONFIG_TYPE_BOOLEAN,       "yes"},
+    {"error_log_file",              CONFIG_TYPE_FILE,          NULL},
+    {"global_auth_file",            CONFIG_TYPE_FILE,          NULL},
+    {"index_files",                 12345,
 #ifdef USE_LUA
-    "index.html,index.htm,index.lp,index.lsp,index.lua,index.cgi,index.shtml,index.php",
+    "index.html,index.htm,index.lp,index.lsp,index.lua,index.cgi,index.shtml,index.php"},
 #else
-    "index.html,index.htm,index.cgi,index.shtml,index.php",
+    "index.html,index.htm,index.cgi,index.shtml,index.php"},
 #endif
-    "enable_keep_alive", "no",
-    "access_control_list", NULL,
-    "extra_mime_types", NULL,
-    "listening_ports", "8080",
-    "document_root",  NULL,
-    "ssl_certificate", NULL,
-    "num_threads", "50",
-    "run_as_user", NULL,
-    "url_rewrite_patterns", NULL,
-    "hide_files_patterns", NULL,
-    "request_timeout_ms", "30000",
+    {"enable_keep_alive",           CONFIG_TYPE_BOOLEAN,       "no"},
+    {"access_control_list",         12345,                     NULL},
+    {"extra_mime_types",            12345,                     NULL},
+    {"listening_ports",             12345,                     "8080"},
+    {"document_root",               CONFIG_TYPE_DIRECTORY,     NULL},
+    {"ssl_certificate",             CONFIG_TYPE_FILE,          NULL},
+    {"num_threads",                 CONFIG_TYPE_NUMBER,        "50"},
+    {"run_as_user",                 CONFIG_TYPE_STRING,        NULL},
+    {"url_rewrite_patterns",        12345,                     NULL},
+    {"hide_files_patterns",         12345,                     NULL},
+    {"request_timeout_ms",          CONFIG_TYPE_NUMBER,        "30000"},
 
 #if defined(USE_LUA)
-    "lua_preload_file", NULL,
-    "lua_script_pattern", "**.lua$",
-    "lua_server_page_pattern", "**.lp$|**.lsp$",
+    {"lua_preload_file",            CONFIG_TYPE_FILE,          NULL},
+    {"lua_script_pattern",          CONFIG_TYPE_EXT_PATTERN,   "**.lua$"},
+    {"lua_server_page_pattern",     CONFIG_TYPE_EXT_PATTERN,   "**.lp$|**.lsp$"},
 #endif
 #if defined(USE_WEBSOCKET)
-    "websocket_root", NULL,
+    {"websocket_root",              CONFIG_TYPE_DIRECTORY,     NULL},
 #endif
 #if defined(USE_LUA) && defined(USE_WEBSOCKET)
-    "lua_websocket_pattern", "**.lua$",
+    {"lua_websocket_pattern",       CONFIG_TYPE_EXT_PATTERN,   "**.lua$"},
 #endif
+    {"access_control_allow_origin", CONFIG_TYPE_STRING,        "*"},
 
-    NULL
+    {NULL, CONFIG_TYPE_UNKNOWN, NULL}
 };
 
 struct mg_request_handler_info {
@@ -626,8 +768,15 @@ struct mg_context {
     unsigned long start_time;  /* Server start time, used for authentication */
     unsigned long nonce_count; /* Used nonces, used for authentication */
 
+    char *systemName;          /* What operating system is running */
+
     /* linked list of uri handlers */
     struct mg_request_handler_info *request_handlers;
+
+#if defined(USE_LUA) && defined(USE_WEBSOCKET)
+    /* linked list of shared lua websockets */
+    struct mg_shared_lua_websocket *shared_lua_websockets;
+#endif
 };
 
 struct mg_connection {
@@ -679,10 +828,26 @@ struct de {
 static int is_websocket_request(const struct mg_connection *conn);
 #endif
 
+#if defined(MG_LEGACY_INTERFACE)
 const char **mg_get_valid_option_names(void)
+{
+    static const char * data[2 * sizeof(config_options) / sizeof(config_options[0])] = {0};
+    int i;
+
+    for (i=0; config_options[i].name != NULL; i++) {
+        data[i * 2] = config_options[i].name;
+        data[i * 2 + 1] = config_options[i].default_value;
+    }
+
+    return data;
+}
+#endif
+
+const struct mg_option *mg_get_valid_options(void)
 {
     return config_options;
 }
+
 
 static int is_file_in_memory(struct mg_connection *conn, const char *path,
                              struct file *filep)
@@ -730,8 +895,8 @@ static int get_option_index(const char *name)
 {
     int i;
 
-    for (i = 0; config_options[i * 2] != NULL; i++) {
-        if (strcmp(config_options[i * 2], name) == 0) {
+    for (i = 0; config_options[i].name != NULL; i++) {
+        if (strcmp(config_options[i].name, name) == 0) {
             return i;
         }
     }
@@ -891,7 +1056,7 @@ static char * mg_strndup(const char *ptr, size_t len)
 {
     char *p;
 
-    if ((p = (char *) malloc(len + 1)) != NULL) {
+    if ((p = (char *) mg_malloc(len + 1)) != NULL) {
         mg_strlcpy(p, ptr, len + 1);
     }
 
@@ -1125,7 +1290,7 @@ static int should_keep_alive(const struct mg_connection *conn)
         conn->status_code == 401 ||
         mg_strcasecmp(conn->ctx->config[ENABLE_KEEP_ALIVE], "yes") != 0 ||
         (header != NULL && mg_strcasecmp(header, "keep-alive") != 0) ||
-        (header == NULL && http_version && strcmp(http_version, "1.1"))) {
+        (header == NULL && http_version && 0!=strcmp(http_version, "1.1"))) {
         return 0;
     }
     return 1;
@@ -1201,6 +1366,7 @@ static int pthread_mutex_unlock(pthread_mutex_t *mutex)
     return ReleaseMutex(*mutex) == 0 ? -1 : 0;
 }
 
+#ifndef WIN_PTHREADS_TIME_H
 static int clock_gettime(clockid_t clk_id, struct timespec *tp)
 {
     FILETIME ft;
@@ -1219,11 +1385,11 @@ static int clock_gettime(clockid_t clk_id, struct timespec *tp)
             tp->tv_nsec = (long)(li.QuadPart % 10000000) * 100;
             ok = TRUE;
         } else if (clk_id == CLOCK_MONOTONIC) {
-            if (perfcnt_per_sec==0) {
+            if (perfcnt_per_sec == 0.0) {
                 QueryPerformanceFrequency((LARGE_INTEGER *) &li);
                 perfcnt_per_sec = 1.0 / li.QuadPart;
             }
-            if (perfcnt_per_sec!=0) {
+            if (perfcnt_per_sec != 0.0) {
                 QueryPerformanceCounter((LARGE_INTEGER *) &li);
                 d = li.QuadPart * perfcnt_per_sec;
                 tp->tv_sec = (time_t)d;
@@ -1236,13 +1402,14 @@ static int clock_gettime(clockid_t clk_id, struct timespec *tp)
 
     return ok ? 0 : -1;
 }
+#endif
 
 static int pthread_cond_init(pthread_cond_t *cv, const void *unused)
 {
     (void) unused;
     InitializeCriticalSection(&cv->threadIdSec);
     cv->waitingthreadcount = 0;
-    cv->waitingthreadhdls = calloc(MAX_WORKER_THREADS, sizeof(pthread_t));
+    cv->waitingthreadhdls = mg_calloc(MAX_WORKER_THREADS, sizeof(pthread_t));
     return (cv->waitingthreadhdls!=NULL) ? 0 : -1;
 }
 
@@ -1321,8 +1488,8 @@ static int pthread_cond_destroy(pthread_cond_t *cv)
 {
     EnterCriticalSection(&cv->threadIdSec);
     assert(cv->waitingthreadcount==0);
+    mg_free(cv->waitingthreadhdls);
     cv->waitingthreadhdls = 0;
-    free(cv->waitingthreadhdls);
     LeaveCriticalSection(&cv->threadIdSec);
     DeleteCriticalSection(&cv->threadIdSec);
 
@@ -1493,7 +1660,7 @@ static DIR * opendir(const char *name)
 
     if (name == NULL) {
         SetLastError(ERROR_BAD_ARGUMENTS);
-    } else if ((dir = (DIR *) malloc(sizeof(*dir))) == NULL) {
+    } else if ((dir = (DIR *) mg_malloc(sizeof(*dir))) == NULL) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
     } else {
         to_unicode(name, wpath, ARRAY_SIZE(wpath));
@@ -1504,7 +1671,7 @@ static DIR * opendir(const char *name)
             dir->handle = FindFirstFileW(wpath, &dir->info);
             dir->result.d_name[0] = '\0';
         } else {
-            free(dir);
+            mg_free(dir);
             dir = NULL;
         }
     }
@@ -1520,7 +1687,7 @@ static int closedir(DIR *dir)
         if (dir->handle != INVALID_HANDLE_VALUE)
             result = FindClose(dir->handle) ? 0 : -1;
 
-        free(dir);
+        mg_free(dir);
     } else {
         result = -1;
         SetLastError(ERROR_BAD_ARGUMENTS);
@@ -1598,9 +1765,9 @@ int mg_start_thread(mg_thread_func_t f, void *p)
 {
 #if defined(USE_STACK_SIZE) && (USE_STACK_SIZE > 1)
     /* Compile-time option to control stack size, e.g. -DUSE_STACK_SIZE=16384 */
-    return (long)_beginthread((void (__cdecl *)(void *)) f, USE_STACK_SIZE, p) == -1L ? -1 : 0;
+    return ((_beginthread((void (__cdecl *)(void *)) f, USE_STACK_SIZE, p) == ((uintptr_t)(-1L))) ? -1 : 0);
 #else
-    return (long)_beginthread((void (__cdecl *)(void *)) f, 0, p) == -1L ? -1 : 0;
+    return ((_beginthread((void (__cdecl *)(void *)) f, 0, p) == ((uintptr_t)(-1L))) ? -1 : 0);
 #endif /* defined(USE_STACK_SIZE) && (USE_STACK_SIZE > 1) */
 }
 
@@ -1611,15 +1778,15 @@ static int mg_start_thread_with_id(unsigned (__stdcall *f)(void *), void *p,
 {
     uintptr_t uip;
     HANDLE threadhandle;
-    int result;
+    int result = 0;
 
     uip = _beginthreadex(NULL, 0, (unsigned (__stdcall *)(void *)) f, p, 0,
                          NULL);
     threadhandle = (HANDLE) uip;
-    if (threadidptr != NULL) {
+    if ((uip != (uintptr_t)(-1L)) && (threadidptr != NULL)) {
         *threadidptr = threadhandle;
+        result = 1;
     }
-    result = (threadhandle == NULL) ? -1 : 0;
 
     return result;
 }
@@ -2080,8 +2247,8 @@ static int alloc_vprintf2(char **buf, const char *fmt, va_list ap)
 
     *buf = NULL;
     while (len == -1) {
-        if (*buf) free(*buf);
-        *buf = (char *)malloc(size *= 4);
+        if (*buf) mg_free(*buf);
+        *buf = (char *)mg_malloc(size *= 4);
         if (!*buf) break;
         va_copy(ap_copy, ap);
         len = vsnprintf(*buf, size, fmt, ap_copy);
@@ -2118,7 +2285,7 @@ static int alloc_vprintf(char **buf, size_t size, const char *fmt, va_list ap)
         va_end(ap_copy);
     } else if (len > (int) size &&
                (size = len + 1) > 0 &&
-               (*buf = (char *) malloc(size)) == NULL) {
+               (*buf = (char *) mg_malloc(size)) == NULL) {
         len = -1;  /* Allocation failed, mark failure */
     } else {
         va_copy(ap_copy, ap);
@@ -2140,7 +2307,7 @@ int mg_vprintf(struct mg_connection *conn, const char *fmt, va_list ap)
         len = mg_write(conn, buf, (size_t) len);
     }
     if (buf != mem && buf != NULL) {
-        free(buf);
+        mg_free(buf);
     }
 
     return len;
@@ -2486,21 +2653,23 @@ static time_t parse_date_string(const char *datetime)
     int second, minute, hour, day, month, year, leap_days, days;
     time_t result = (time_t) 0;
 
-    if (((sscanf(datetime, "%d/%3s/%d %d:%d:%d",
-                 &day, month_str, &year, &hour, &minute, &second) == 6) ||
-         (sscanf(datetime, "%d %3s %d %d:%d:%d",
-                 &day, month_str, &year, &hour, &minute, &second) == 6) ||
-         (sscanf(datetime, "%*3s, %d %3s %d %d:%d:%d",
-                 &day, month_str, &year, &hour, &minute, &second) == 6) ||
-         (sscanf(datetime, "%d-%3s-%d %d:%d:%d",
-                 &day, month_str, &year, &hour, &minute, &second) == 6)) &&
-        year > 1970 &&
-        (month = get_month_index(month_str)) != -1) {
-        leap_days = num_leap_years(year) - num_leap_years(1970);
-        year -= 1970;
-        days = year * 365 + days_before_month[month] + (day - 1) + leap_days;
-        result = (time_t) days * 24 * 3600 + (time_t) hour * 3600 +
-                 minute * 60 + second;
+    if ((sscanf(datetime, "%d/%3s/%d %d:%d:%d",
+                &day, month_str, &year, &hour, &minute, &second) == 6) ||
+        (sscanf(datetime, "%d %3s %d %d:%d:%d",
+                &day, month_str, &year, &hour, &minute, &second) == 6) ||
+        (sscanf(datetime, "%*3s, %d %3s %d %d:%d:%d",
+                &day, month_str, &year, &hour, &minute, &second) == 6) ||
+        (sscanf(datetime, "%d-%3s-%d %d:%d:%d",
+                &day, month_str, &year, &hour, &minute, &second) == 6)) {
+
+        month = get_month_index(month_str);
+        if ((month >= 0) && (year > 1970)) {
+            leap_days = num_leap_years(year) - num_leap_years(1970);
+            year -= 1970;
+            days = year * 365 + days_before_month[month] + (day - 1) + leap_days;
+            result = (time_t) days * 24 * 3600 + (time_t) hour * 3600 +
+                     minute * 60 + second;
+        }
     }
 
     return result;
@@ -3289,9 +3458,9 @@ struct dir_scan_data {
 /* Behaves like realloc(), but frees original pointer on failure */
 static void *realloc2(void *ptr, size_t size)
 {
-    void *new_ptr = realloc(ptr, size);
+    void *new_ptr = mg_realloc(ptr, size);
     if (new_ptr == NULL) {
-        free(ptr);
+        mg_free(ptr);
     }
     return new_ptr;
 }
@@ -3365,9 +3534,9 @@ static void handle_directory_request(struct mg_connection *conn,
               sizeof(data.entries[0]), compare_dir_entries);
         for (i = 0; i < data.num_entries; i++) {
             print_dir_entry(&data.entries[i]);
-            free(data.entries[i].file_name);
+            mg_free(data.entries[i].file_name);
         }
-        free(data.entries);
+        mg_free(data.entries);
     }
 
     conn->num_bytes_sent += mg_printf(conn, "%s", "</table></body></html>");
@@ -3454,7 +3623,8 @@ static void handle_file_request(struct mg_connection *conn, const char *path,
     struct vec mime_vec;
     int n;
     char gz_path[PATH_MAX];
-    char const* encoding = "";
+    const char *encoding = "";
+    const char *cors1, *cors2, *cors3;
 
     get_mime_type(conn->ctx, path, &mime_vec);
     cl = filep->size;
@@ -3491,13 +3661,24 @@ static void handle_file_request(struct mg_connection *conn, const char *path,
             return;
         }
         conn->status_code = 206;
-cl = n == 2 ? (r2 > cl ? cl : r2) - r1 + 1: cl - r1;
+        cl = n == 2 ? (r2 > cl ? cl : r2) - r1 + 1: cl - r1;
         mg_snprintf(conn, range, sizeof(range),
                     "Content-Range: bytes "
                     "%" INT64_FMT "-%"
                     INT64_FMT "/%" INT64_FMT "\r\n",
                     r1, r1 + cl - 1, filep->size);
         msg = "Partial Content";
+    }
+
+    hdr = mg_get_header(conn, "Origin");
+    if (hdr) {
+        /* Cross-origin resource sharing (CORS), see http://www.html5rocks.com/en/tutorials/cors/,
+           http://www.html5rocks.com/static/images/cors_server_flowchart.png - preflight is not supported for files. */
+        cors1 = "Access-Control-Allow-Origin: ";
+        cors2 = conn->ctx->config[ACCESS_CONTROL_ALLOW_ORIGIN];
+        cors3 = "\r\n";
+    } else {
+        cors1 = cors2 = cors3 = "";
     }
 
     /* Prepare Etag, Date, Last-Modified headers. Must be in UTC, according to
@@ -3508,6 +3689,7 @@ cl = n == 2 ? (r2 > cl ? cl : r2) - r1 + 1: cl - r1;
 
     (void) mg_printf(conn,
                      "HTTP/1.1 %d %s\r\n"
+                     "%s%s%s"
                      "Date: %s\r\n"
                      "Last-Modified: %s\r\n"
                      "Etag: %s\r\n"
@@ -3516,7 +3698,9 @@ cl = n == 2 ? (r2 > cl ? cl : r2) - r1 + 1: cl - r1;
                      "Connection: %s\r\n"
                      "Accept-Ranges: bytes\r\n"
                      "%s%s\r\n",
-                     conn->status_code, msg, date, lm, etag, (int) mime_vec.len,
+                     conn->status_code, msg,
+                     cors1, cors2, cors3,
+                     date, lm, etag, (int) mime_vec.len,
                      mime_vec.ptr, cl, suggest_connection_header(conn), range, encoding);
 
     if (strcmp(conn->request_info.request_method, "HEAD") != 0) {
@@ -3992,7 +4176,7 @@ static void handle_cgi_request(struct mg_connection *conn, const char *prog)
        Do not send anything back to client, until we buffer in all
        HTTP headers. */
     data_len = 0;
-    buf = malloc(buflen);
+    buf = mg_malloc(buflen);
     if (buf == NULL) {
         send_http_error(conn, 500, http_500_error,
                         "Not enough memory for buffer (%u bytes)",
@@ -4075,7 +4259,7 @@ done:
         close(fdout[0]);
     }
     if (buf != NULL) {
-        free(buf);
+        mg_free(buf);
     }
 }
 #endif /* !NO_CGI */
@@ -4212,6 +4396,7 @@ static void do_ssi_include(struct mg_connection *conn, const char *ssi,
 {
     char file_name[MG_BUF_LEN], path[PATH_MAX], *p;
     struct file file = STRUCT_FILE_INITIALIZER;
+    size_t len;
 
     /* sscanf() is safe here, since send_ssi_file() also uses buffer
        of size MG_BUF_LEN to get the tag. So strlen(tag) is
@@ -4231,8 +4416,8 @@ static void do_ssi_include(struct mg_connection *conn, const char *ssi,
         if ((p = strrchr(path, '/')) != NULL) {
             p[1] = '\0';
         }
-        (void) mg_snprintf(conn, path + strlen(path),
-                           sizeof(path) - strlen(path), "%s", file_name);
+        len = strlen(path);
+        (void) mg_snprintf(conn, path + len, sizeof(path) - len, "%s", file_name);
     } else {
         mg_cry(conn, "Bad SSI #include: [%s]", tag);
         return;
@@ -4351,6 +4536,16 @@ static void handle_ssi_file_request(struct mg_connection *conn,
     struct file file = STRUCT_FILE_INITIALIZER;
     char date[64];
     time_t curtime = time(NULL);
+    const char *cors1, *cors2, *cors3;
+
+    if (mg_get_header(conn, "Origin")) {
+        /* Cross-origin resource sharing (CORS). */
+        cors1 = "Access-Control-Allow-Origin: ";
+        cors2 = conn->ctx->config[ACCESS_CONTROL_ALLOW_ORIGIN];
+        cors3 = "\r\n";
+    } else {
+        cors1 = cors2 = cors3 = "";
+    }
 
     if (!mg_fopen(conn, path, "rb", &file)) {
         send_http_error(conn, 500, http_500_error, "fopen(%s): %s", path,
@@ -4360,10 +4555,12 @@ static void handle_ssi_file_request(struct mg_connection *conn,
         gmt_time_string(date, sizeof(date), &curtime);
         fclose_on_exec(&file, conn);
         mg_printf(conn, "HTTP/1.1 200 OK\r\n"
+                        "%s%s%s"
                         "Date: %s\r\n"
                         "Content-Type: text/html\r\n"
                         "Connection: %s\r\n\r\n",
-                  date, suggest_connection_header(conn));
+                        cors1, cors2, cors3,
+                        date, suggest_connection_header(conn));
         send_ssi_file(conn, path, &file, 0);
         mg_fclose(&file);
     }
@@ -4742,11 +4939,11 @@ static void read_websocket(struct mg_connection *conn)
             /* Allocate space to hold websocket payload */
             data = mem;
             if (data_len > sizeof(mem)) {
-                data = (char *)malloc(data_len);
+                data = (char *)mg_malloc(data_len);
                 if (data == NULL) {
                     /* Allocation failed, exit the loop and then close the
                        connection */
-                    mg_cry(conn, "websocket malloc() failed; closing connection");
+                    mg_cry(conn, "websocket out of memory; closing connection");
                     break;
                 }
             }
@@ -4769,7 +4966,7 @@ static void read_websocket(struct mg_connection *conn)
                 error = 0;
                 while (len < data_len) {
                     int n = pull(NULL, conn, data + len, (int)(data_len - len));
-                    if (n < 0) {
+                    if (n <= 0) {
                         error = 1;
                         break;
                     }
@@ -4820,7 +5017,7 @@ static void read_websocket(struct mg_connection *conn)
             }
 
             if (data != mem) {
-                free(data);
+                mg_free(data);
             }
             /* Not breaking the loop, process next websocket frame. */
         } else {
@@ -4899,6 +5096,7 @@ static void handle_websocket_request(struct mg_connection *conn, const char *pat
                                        path) : 0;
 
         if (lua_websock || shared_lua_websock) {
+            /* TODO */ shared_lua_websock = 0;
             conn->lua_websocket_state = lua_websocket_new(path, conn, !!shared_lua_websock);
             if (conn->lua_websocket_state) {
                 send_websocket_handshake(conn);
@@ -5162,7 +5360,7 @@ void mg_set_request_handler(struct mg_context *ctx, const char *uri, mg_request_
 
     /* first see it the uri exists */
     for (tmp_rh = ctx->request_handlers;
-         tmp_rh != NULL && strcmp(uri, tmp_rh->uri);
+         tmp_rh != NULL && 0!=strcmp(uri, tmp_rh->uri);
          lastref = tmp_rh, tmp_rh = tmp_rh->next) {
         /* first try for an exact match */
         if (urilen == tmp_rh->uri_len && !strcmp(tmp_rh->uri,uri)) {
@@ -5178,8 +5376,8 @@ void mg_set_request_handler(struct mg_context *ctx, const char *uri, mg_request_
                     lastref->next = tmp_rh->next;
                 else
                     ctx->request_handlers = tmp_rh->next;
-                free(tmp_rh->uri);
-                free(tmp_rh);
+                mg_free(tmp_rh->uri);
+                mg_free(tmp_rh);
             }
             return;
         }
@@ -5200,13 +5398,13 @@ void mg_set_request_handler(struct mg_context *ctx, const char *uri, mg_request_
         return;
     }
 
-    tmp_rh = (struct mg_request_handler_info *)malloc(sizeof(struct mg_request_handler_info));
+    tmp_rh = (struct mg_request_handler_info *)mg_malloc(sizeof(struct mg_request_handler_info));
     if (tmp_rh == NULL) {
         mg_cry(fc(ctx), "%s", "Cannot create new request handler struct, OOM");
         return;
     }
     tmp_rh->uri = mg_strdup(uri);
-    tmp_rh->uri_len = strlen(uri);
+    tmp_rh->uri_len = urilen;
     tmp_rh->handler = handler;
     tmp_rh->cbdata = cbdata;
 
@@ -5298,6 +5496,8 @@ static void handle_request(struct mg_connection *conn)
                use_request_handler(conn)) {
         /* Do nothing, callback has served the request */
     } else if (!is_script_resource && !strcmp(ri->request_method, "OPTIONS")) {
+        /* Scripts should support the OPTIONS method themselves, to allow a maximum flexibility.
+           Lua and CGI scripts may fully support CORS this way (including preflights). */
         send_options(conn);
     } else if (conn->ctx->config[DOCUMENT_ROOT] == NULL) {
         send_http_error(conn, 404, "Not Found", "Not Found");
@@ -5366,15 +5566,7 @@ static void handle_request(struct mg_connection *conn)
     } else if (match_prefix(conn->ctx->config[CGI_EXTENSIONS],
                             (int)strlen(conn->ctx->config[CGI_EXTENSIONS]),
                             path) > 0) {
-        /* TODO: check unsupported methods -> 501
-        if (strcmp(ri->request_method, "POST") &&
-            strcmp(ri->request_method, "HEAD") &&
-            strcmp(ri->request_method, "GET")) {
-            send_http_error(conn, 501, "Not Implemented",
-                            "Method %s is not implemented", ri->request_method);
-        } else {
-            handle_cgi_request(conn, path);
-        } */
+        /* CGI scripts may support all HTTP methods */
         handle_cgi_request(conn, path);
 #endif /* !NO_CGI */
     } else if (match_prefix(conn->ctx->config[SSI_EXTENSIONS],
@@ -5394,7 +5586,10 @@ static void close_all_listening_sockets(struct mg_context *ctx)
     for (i = 0; i < ctx->num_listening_sockets; i++) {
         closesocket(ctx->listening_sockets[i].sock);
     }
-    free(ctx->listening_sockets);
+    mg_free(ctx->listening_sockets);
+    ctx->listening_sockets=0;
+    mg_free(ctx->listening_ports);
+    ctx->listening_ports=0;
 }
 
 static int is_valid_port(unsigned int port)
@@ -5457,11 +5652,11 @@ static int set_ports_option(struct mg_context *ctx)
     struct socket so, *ptr;
 
     in_port_t *portPtr;
-    struct sockaddr_in sin;
+    union usa usa;
     socklen_t len;
 
-    memset(&sin, 0, sizeof(sin));
-    len = sizeof(sin);
+    memset(&usa, 0, sizeof(usa));
+    len = sizeof(usa);
 
     while (success && (list = next_option(list, &vec, NULL)) != NULL) {
         if (!parse_port_string(&vec, &so)) {
@@ -5485,19 +5680,19 @@ static int set_ports_option(struct mg_context *ctx)
                    bind(so.sock, &so.lsa.sa, so.lsa.sa.sa_family == AF_INET ?
                         sizeof(so.lsa.sin) : sizeof(so.lsa)) != 0 ||
                    listen(so.sock, SOMAXCONN) != 0 ||
-                   getsockname(so.sock, (struct sockaddr *)&sin, &len) != 0) {
+                   getsockname(so.sock, &(usa.sa), &len) != 0) {
             mg_cry(fc(ctx), "%s: cannot bind to %.*s: %d (%s)", __func__,
                    (int) vec.len, vec.ptr, ERRNO, strerror(errno));
             if (so.sock != INVALID_SOCKET) {
                 closesocket(so.sock);
             }
             success = 0;
-        } else if ((ptr = (struct socket *) realloc(ctx->listening_sockets,
+        } else if ((ptr = (struct socket *) mg_realloc(ctx->listening_sockets,
                           (ctx->num_listening_sockets + 1) *
                           sizeof(ctx->listening_sockets[0]))) == NULL) {
             closesocket(so.sock);
             success = 0;
-        } else if ((portPtr = (in_port_t*) realloc(ctx->listening_ports,
+        } else if ((portPtr = (in_port_t*) mg_realloc(ctx->listening_ports,
                           (ctx->num_listening_sockets + 1) *
                           sizeof(ctx->listening_ports[0]))) == NULL) {
             closesocket(so.sock);
@@ -5508,7 +5703,7 @@ static int set_ports_option(struct mg_context *ctx)
             ctx->listening_sockets = ptr;
             ctx->listening_sockets[ctx->num_listening_sockets] = so;
             ctx->listening_ports = portPtr;
-            ctx->listening_ports[ctx->num_listening_sockets] = ntohs(sin.sin_port);
+            ctx->listening_ports[ctx->num_listening_sockets] = ntohs(usa.sin.sin_port);
             ctx->num_listening_sockets++;
         }
     }
@@ -5746,7 +5941,7 @@ static int set_ssl_option(struct mg_context *ctx)
     /* Initialize locking callbacks, needed for thread safety.
        http://www.openssl.org/support/faq.html#PROG1 */
     size = sizeof(pthread_mutex_t) * CRYPTO_num_locks();
-    if ((ssl_mutexes = (pthread_mutex_t *) malloc((size_t)size)) == NULL) {
+    if ((ssl_mutexes = (pthread_mutex_t *) mg_malloc((size_t)size)) == NULL) {
         mg_cry(fc(ctx), "%s: cannot allocate mutexes: %s", __func__, ssl_error());
         return 0;
     }
@@ -5877,11 +6072,8 @@ void mg_close_connection(struct mg_connection *conn)
 #endif
     close_connection(conn);
     (void) pthread_mutex_destroy(&conn->mutex);
-    free(conn);
+    mg_free(conn);
 }
-
-struct mg_connection *mg_connect(const char *host, int port, int use_ssl,
-                                 char *ebuf, size_t ebuf_len);
 
 struct mg_connection *mg_connect(const char *host, int port, int use_ssl,
                                  char *ebuf, size_t ebuf_len)
@@ -5893,7 +6085,7 @@ struct mg_connection *mg_connect(const char *host, int port, int use_ssl,
     if ((sock = conn2(&fake_ctx, host, port, use_ssl, ebuf,
                       ebuf_len)) == INVALID_SOCKET) {
     } else if ((conn = (struct mg_connection *)
-                       calloc(1, sizeof(*conn) + MAX_REQUEST_SIZE)) == NULL) {
+                       mg_calloc(1, sizeof(*conn) + MAX_REQUEST_SIZE)) == NULL) {
         snprintf(ebuf, ebuf_len, "calloc(): %s", strerror(ERRNO));
         closesocket(sock);
 #ifndef NO_SSL
@@ -5901,7 +6093,7 @@ struct mg_connection *mg_connect(const char *host, int port, int use_ssl,
                                SSL_CTX_new(SSLv23_client_method())) == NULL) {
         snprintf(ebuf, ebuf_len, "SSL_CTX_new error");
         closesocket(sock);
-        free(conn);
+        mg_free(conn);
         conn = NULL;
 #endif /* NO_SSL */
     } else {
@@ -6027,7 +6219,7 @@ static void process_new_connection(struct mg_connection *conn)
             log_access(conn);
         }
         if (ri->remote_user != NULL) {
-            free((void *) ri->remote_user);
+            mg_free((void *) ri->remote_user);
             /* Important! When having connections with and without auth
                would cause double free and then crash */
             ri->remote_user = NULL;
@@ -6094,7 +6286,7 @@ static void *worker_thread_run(void *thread_func_param)
     tls.pthread_cond_helper_mutex = CreateEvent(NULL, FALSE, FALSE, NULL);
 #endif
 
-    conn = (struct mg_connection *) calloc(1, sizeof(*conn) + MAX_REQUEST_SIZE);
+    conn = (struct mg_connection *) mg_calloc(1, sizeof(*conn) + MAX_REQUEST_SIZE);
     if (conn == NULL) {
         mg_cry(fc(ctx), "%s", "Cannot create new connection struct, OOM");
     } else {
@@ -6146,7 +6338,7 @@ static void *worker_thread_run(void *thread_func_param)
 #if defined(_WIN32) && !defined(__SYMBIAN32__)
     CloseHandle(tls.pthread_cond_helper_mutex);
 #endif
-    free(conn);
+    mg_free(conn);
 
     DEBUG_TRACE(("exiting"));
     return NULL;
@@ -6278,7 +6470,7 @@ static void master_thread_run(void *thread_func_param)
     ctx->start_time = (unsigned long)time(NULL);
 
     /* Allocate memory for the listening sockets, and start the server */
-    pfd = (struct pollfd *) calloc(ctx->num_listening_sockets, sizeof(pfd[0]));
+    pfd = (struct pollfd *) mg_calloc(ctx->num_listening_sockets, sizeof(pfd[0]));
     while (pfd != NULL && ctx->stop_flag == 0) {
         for (i = 0; i < ctx->num_listening_sockets; i++) {
             pfd[i].fd = ctx->listening_sockets[i].sock;
@@ -6298,7 +6490,7 @@ static void master_thread_run(void *thread_func_param)
             }
         }
     }
-    free(pfd);
+    mg_free(pfd);
     DEBUG_TRACE(("stopping workers"));
 
     /* Stop signal received: somebody called mg_stop. Quit. */
@@ -6372,15 +6564,15 @@ static void free_context(struct mg_context *ctx)
 #ifdef WIN32
 #pragma warning(suppress: 6001)
 #endif
-            free(ctx->config[i]);
+            mg_free(ctx->config[i]);
     }
 
     /* Deallocate request handlers */
     while (ctx->request_handlers) {
         tmp_rh = ctx->request_handlers;
         ctx->request_handlers = tmp_rh->next;
-        free(tmp_rh->uri);
-        free(tmp_rh);
+        mg_free(tmp_rh->uri);
+        mg_free(tmp_rh);
     }
 
 #ifndef NO_SSL
@@ -6389,14 +6581,14 @@ static void free_context(struct mg_context *ctx)
         SSL_CTX_free(ctx->ssl_ctx);
     }
     if (ssl_mutexes != NULL) {
-        free(ssl_mutexes);
+        mg_free(ssl_mutexes);
         ssl_mutexes = NULL;
     }
 #endif /* !NO_SSL */
 
     /* Deallocate worker thread ID array */
     if (ctx->workerthreadids != NULL) {
-        free(ctx->workerthreadids);
+        mg_free(ctx->workerthreadids);
     }
 
     /* Deallocate the tls variable */
@@ -6405,8 +6597,11 @@ static void free_context(struct mg_context *ctx)
         pthread_key_delete(sTlsKey);
     }
 
+    /* deallocate system name string */
+    mg_free(ctx->systemName);
+
     /* Deallocate context itself */
-    free(ctx);
+    mg_free(ctx);
 }
 
 void mg_stop(struct mg_context *ctx)
@@ -6423,6 +6618,35 @@ void mg_stop(struct mg_context *ctx)
 #if defined(_WIN32) && !defined(__SYMBIAN32__)
     (void) WSACleanup();
 #endif /* _WIN32 && !__SYMBIAN32__ */
+}
+
+void get_system_name(char **sysName)
+{
+#if defined(_WIN32)
+#if !defined(__SYMBIAN32__)
+    char name[128];
+    DWORD dwVersion = 0;
+    DWORD dwMajorVersion = 0;
+    DWORD dwMinorVersion = 0;
+    DWORD dwBuild = 0;
+
+    dwVersion = GetVersion();
+
+    dwMajorVersion = (DWORD)(LOBYTE(LOWORD(dwVersion)));
+    dwMinorVersion = (DWORD)(HIBYTE(LOWORD(dwVersion)));
+    dwBuild = ((dwVersion < 0x80000000) ? (DWORD)(HIWORD(dwVersion)) : 0);
+
+    sprintf(name, "Windows %d.%d", dwMajorVersion, dwMinorVersion);
+    *sysName = mg_strdup(name);
+#else
+    *sysName = mg_strdup("Symbian");
+#endif
+#else
+    struct utsname name;
+    memset(&name, 0, sizeof(name));
+    uname(&name);
+    *sysName = mg_strdup(name.sysname);
+#endif
 }
 
 struct mg_context *mg_start(const struct mg_callbacks *callbacks,
@@ -6443,18 +6667,18 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
 
     /* Check if the config_options and the corresponding enum have compatible sizes. */
     /* Could use static_assert, once it is verified that all compilers support this. */
-    assert(sizeof(config_options)/sizeof(config_options[0]) == NUM_OPTIONS*2+1);
+    assert(sizeof(config_options)/sizeof(config_options[0]) == NUM_OPTIONS+1);
 
     /* Allocate context and initialize reasonable general case defaults.
        TODO(lsm): do proper error handling here. */
-    if ((ctx = (struct mg_context *) calloc(1, sizeof(*ctx))) == NULL) {
+    if ((ctx = (struct mg_context *) mg_calloc(1, sizeof(*ctx))) == NULL) {
         return NULL;
     }
 
     if (sTlsInit==0) {
         if (0 != pthread_key_create(&sTlsKey, NULL)) {
             mg_cry(fc(ctx), "Cannot initialize thread local storage");
-            free(ctx);
+            mg_free(ctx);
             return NULL;
         }
         sTlsInit++;
@@ -6463,6 +6687,10 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
     ctx->callbacks = *callbacks;
     ctx->user_data = user_data;
     ctx->request_handlers = 0;
+
+#if defined(USE_LUA) && defined(USE_WEBSOCKET)
+    ctx->shared_lua_websockets = 0;
+#endif
 
     while (options && (name = *options++) != NULL) {
         if ((i = get_option_index(name)) == -1) {
@@ -6476,19 +6704,21 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
         }
         if (ctx->config[i] != NULL) {
             mg_cry(fc(ctx), "warning: %s: duplicate option", name);
-            free(ctx->config[i]);
+            mg_free(ctx->config[i]);
         }
         ctx->config[i] = mg_strdup(value);
         DEBUG_TRACE(("[%s] -> [%s]", name, value));
     }
 
     /* Set default value if needed */
-    for (i = 0; config_options[i * 2] != NULL; i++) {
-        default_value = config_options[i * 2 + 1];
+    for (i = 0; config_options[i].name != NULL; i++) {
+        default_value = config_options[i].default_value;
         if (ctx->config[i] == NULL && default_value != NULL) {
             ctx->config[i] = mg_strdup(default_value);
         }
     }
+
+    get_system_name(&ctx->systemName);
 
     /* NOTE(lsm): order is important here. SSL certificates must
        be initialized before listening ports. UID must be set last. */
@@ -6526,7 +6756,7 @@ struct mg_context *mg_start(const struct mg_callbacks *callbacks,
 
     if (workerthreadcount > 0) {
         ctx->workerthreadcount = workerthreadcount;
-        ctx->workerthreadids = calloc(workerthreadcount, sizeof(pthread_t));
+        ctx->workerthreadids = mg_calloc(workerthreadcount, sizeof(pthread_t));
         if (ctx->workerthreadids == NULL) {
             mg_cry(fc(ctx), "Not enough memory for worker thread ID array");
             free_context(ctx);

@@ -46,6 +46,10 @@ struct DispatcherGlobal : public Dispatcher
 {
 public:
 
+  #if REGAL_HTTP
+  DispatchTableGlobal http;
+  #endif
+
   #if REGAL_LOG
   DispatchTableGlobal logging;
   #endif
@@ -99,6 +103,7 @@ extern DispatcherGlobal dispatcherGlobal;
 extern void InitDispatchTableStaticEGL      (DispatchTableGlobal &tbl);
 #endif
 
+extern void InitDispatchTableGlobalHttp      (DispatchTableGlobal &tbl);
 extern void InitDispatchTableGlobalLog       (DispatchTableGlobal &tbl);
 extern void InitDispatchTableGlobalGLX       (DispatchTableGlobal &tbl);
 extern void InitDispatchTableGlobalTrace     (DispatchTableGlobal &tbl);

@@ -794,7 +794,7 @@ def groupToStringCodeGen(apis, group, name, default = 'NULL', type = 'GLenum', f
       enums = sorted(enums,key=lambda k : k.value)
       for k in enums:
         for l in k.alias:
-          tmp.append('      case \'%s\':'%(l))            
+          tmp.append('      case \'%s\':'%(l))
         tmp.append('      case %s: return "%s";'%(hexValue(k.value,format),k.name))
   tmp.append('      default: break;')
   tmp.append('    }')
@@ -852,7 +852,7 @@ def generateTokenSource(apis, args):
 
   # NV_path_rendering related
 
-  code.extend(groupToStringCodeGen(apis,'pathCoord',   'GLpathCoordToString',   'unknown'))  
+  code.extend(groupToStringCodeGen(apis,'pathCoord',   'GLpathCoordToString',   'unknown'))
   code.extend(groupToStringCodeGen(apis,'pathCommand', 'GLpathCommandToString', 'unknown', 'GLubyte', '0x%02x'))
 
   # GLerrorToString

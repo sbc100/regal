@@ -46,6 +46,10 @@ struct DispatcherGL : public Dispatcher
 {
 public:
 
+#if REGAL_HTTP
+  DispatchTableGL http;
+#endif
+
 #if REGAL_DEBUG
    DispatchTableGL debug;
 #endif
@@ -123,6 +127,7 @@ extern void InitDispatchTableStatistics(DispatchTableGL &tbl);
 extern void InitDispatchTableStaticES2 (DispatchTableGL &tbl);
 extern void InitDispatchTableCache     (DispatchTableGL &tbl);
 extern void InitDispatchTableTrace     (DispatchTableGL &tbl);
+extern void InitDispatchTableHttp     (DispatchTableGL &tbl);
 
 namespace Loader  { extern void Init(DispatchTableGL &tbl); }
 namespace Missing { extern void Init(DispatchTableGL &tbl); }

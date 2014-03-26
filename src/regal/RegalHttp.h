@@ -43,19 +43,19 @@ REGAL_GLOBAL_END
 
 REGAL_NAMESPACE_BEGIN
 
-#ifndef REGAL_NO_HTTP
+#ifndef REGAL_HTTP
 #  if REGAL_WRANGLER
-#    define REGAL_NO_HTTP 1
+#    define REGAL_HTTP 0
 #  else
-#    define REGAL_NO_HTTP 0
+#    define REGAL_HTTP 1
 #  endif
 #endif
 
 // Http is disabled for NaCL, for now
 
 #if REGAL_SYS_PPAPI
-#undef REGAL_NO_HTTP
-#define REGAL_NO_HTTP 1
+#undef REGAL_HTTP
+#define REGAL_HTTP 0
 #endif
 
 #ifndef REGAL_HTTP_PORT
@@ -64,13 +64,15 @@ REGAL_NAMESPACE_BEGIN
 
 namespace Http
 {
-  extern void Init();
+  void Init();
+  void Cleanup();
 
-  extern void Start();
-  extern void Stop();
+  void Start();
+  void Stop();
 
   extern bool enabled;
   extern int  port;
+
 }
 
 REGAL_NAMESPACE_END

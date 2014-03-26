@@ -242,7 +242,7 @@ Browser-based interface
 
 - Enabled by default.
 
-- **REGAL_NO_HTTP**         --- Build-time and environment variable enable/disable.
+- **REGAL_HTTP**            --- Build-time and environment variable enable/disable.
 - **REGAL_HTTP_PORT**       --- Port for HTTP connections (8080 by default)
 - **REGAL_HTTP_LOG_LIMIT**  --- Number of lines of logging buffered
 

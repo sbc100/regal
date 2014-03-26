@@ -42,8 +42,43 @@ REGAL_GLOBAL_BEGIN
 
 #include <GL/Regal.h>
 
-#if !REGAL_SYS_WIN32
+#if REGAL_SYS_WIN32
+
+#define INFINITE            0xFFFFFFFF  // Infinite timeout
+
+#define CreateSemaphore  CreateSemaphoreA
+
+typedef long             *LPLONG;
+
+typedef struct _SECURITY_ATTRIBUTES {
+    DWORD nLength;
+    LPVOID lpSecurityDescriptor;
+    BOOL bInheritHandle;
+} SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+
+extern "C"
+{
+  __declspec(dllimport) __out_opt HANDLE __stdcall CreateSemaphoreA(
+                             __in_opt LPSECURITY_ATTRIBUTES lpSemaphoreAttributes,
+                             __in     LONG lInitialCount,
+                             __in     LONG lMaximumCount,
+                             __in_opt LPCSTR lpName);
+
+  __declspec(dllimport) BOOL __stdcall CloseHandle(__in HANDLE hObject);
+
+  __declspec(dllimport) DWORD __stdcall WaitForSingleObject(__in HANDLE hHandle,
+                                                            __in DWORD dwMilliseconds);
+
+  __declspec(dllimport) BOOL __stdcall ReleaseSemaphore(__in      HANDLE hSemaphore,
+                                                        __in      LONG lReleaseCount,
+                                                        __out_opt LPLONG lpPreviousCount);
+
+}
+
+#else
+
 #include <pthread.h>
+
 #endif
 
 #if (REGAL_SYS_WGL && defined(REGAL_SYS_WGL_DECLARE_WGL)) || (REGAL_SYS_PPAPI && REGAL_SYS_WIN32)
@@ -83,16 +118,28 @@ namespace Thread
   // Mutex
   //
 
+  enum MutexType {
+    MT_Normal,
+    MT_Recursive
+  };
+
   struct Mutex
   {
   public:
-    inline Mutex()
+    inline Mutex( MutexType mt = MT_Recursive )
     {
 #if REGAL_SYS_WIN32
       InitializeCriticalSection(&_cs);
+      if( mt == MT_Normal ) {
+        _handle = CreateSemaphore( NULL, 1, 1, NULL );
+      } else {
+        _handle = NULL;
+      }
 #else
       pthread_mutexattr_init(&_mutexattr);
-      pthread_mutexattr_settype(&_mutexattr, PTHREAD_MUTEX_RECURSIVE);
+      if( mt == MT_Recursive ) {
+        pthread_mutexattr_settype(&_mutexattr, PTHREAD_MUTEX_RECURSIVE);
+      }
       pthread_mutex_init(&_mutex, &_mutexattr);
 #endif
     }
@@ -101,6 +148,9 @@ namespace Thread
     {
 #if REGAL_SYS_WIN32
       DeleteCriticalSection(&_cs);
+      if( _handle ) {
+        CloseHandle( _handle );
+      }
 #else
       pthread_mutex_destroy(&_mutex);
       pthread_mutexattr_destroy(&_mutexattr);
@@ -110,7 +160,11 @@ namespace Thread
     inline void acquire()
     {
 #if REGAL_SYS_WIN32
-      EnterCriticalSection(&_cs);
+      if( _handle ) {
+        WaitForSingleObject( _handle, INFINITE );
+      } else {
+        EnterCriticalSection(&_cs);
+      }
 #else
       pthread_mutex_lock(&_mutex);
 #endif
@@ -119,7 +173,11 @@ namespace Thread
     inline void release()
     {
 #if REGAL_SYS_WIN32
-      LeaveCriticalSection(&_cs);
+      if( _handle ) {
+        ReleaseSemaphore( _handle, 1, NULL );
+      } else {
+        LeaveCriticalSection(&_cs);
+      }
 #else
       pthread_mutex_unlock(&_mutex);
 #endif
@@ -129,6 +187,7 @@ namespace Thread
 
 #if REGAL_SYS_WIN32
     CRITICAL_SECTION _cs;
+    HANDLE _handle;
 #else
     pthread_mutex_t _mutex;
     pthread_mutexattr_t _mutexattr;

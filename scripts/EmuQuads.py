@@ -21,6 +21,10 @@ quadsFormulae = {
     'entries'    : [ 'glProvokingVertex(EXT|)' ],
     'prefix'     : [ '_context->quads->glProvokingVertex( ${arg0plus} );', ],
   },
+  'BindBuffer' : {
+    'entries'    : [ 'glBindBuffer(EXT|)' ],
+    'prefix'     : [ '_context->quads->glBindBuffer( ${arg0plus} );', ],
+  },
   'quads'       : {
     'entries' : [ 'glDrawArrays(EXT|)' ],
     'impl'    : [

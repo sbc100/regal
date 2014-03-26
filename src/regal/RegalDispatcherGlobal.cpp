@@ -51,6 +51,11 @@ DispatcherGlobal dispatcherGlobal;
 DispatcherGlobal::DispatcherGlobal()
 : Dispatcher()
 {
+  #if REGAL_HTTP
+  InitDispatchTableGlobalHttp(http);
+  push_back(http,Config::enableHttp);
+  #endif
+
   #if REGAL_LOG
   InitDispatchTableGlobalLog(logging);
   push_back(logging,Config::enableLog);

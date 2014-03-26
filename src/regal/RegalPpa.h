@@ -224,6 +224,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
     if (mask&GL_POINT_BIT)
     {
       Internal("Regal::Ppa::PushAttrib GL_POINT_BIT ",State::Point::toString());
+      if (!State::Point::fullyDefined())
+        State::Point::getUndefined(ctx->dispatcher.emulation);
       pointStack.push_back(State::Point());
       pointStack.back() = *this;
       mask &= ~GL_POINT_BIT;
@@ -522,6 +524,8 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
         // Ideally we'd only set the state that has changed
         // since the glPushAttrib() - revisit
 
+        if (!State::Point::fullyDefined())
+          State::Point::getUndefined(ctx->dispatcher.emulation);
         State::Point::set(ctx->dispatcher.emulation);
 
         mask &= ~GL_POINT_BIT;
@@ -1393,6 +1397,72 @@ struct Ppa : public State::Stencil, State::Depth, State::Polygon, State::Transfo
   template <typename T> bool glGetTexEnvv(RegalContext *ctx, GLenum target, GLenum pname, T *params)
   {
     return glGetMultiTexEnvv(ctx, GL_TEXTURE0+activeTextureUnit, target, pname, params);
+  }
+
+  template <typename T> bool glGetTexParameter( RegalContext *ctx, GLenum target, GLenum pname, T * params )
+  {
+    UNUSED_PARAMETER(target);
+    switch( pname ) {
+      case GL_DEPTH_STENCIL_TEXTURE_MODE:
+        if( ctx->info->es2 || ! ctx->info->gl_arb_stencil_texturing ) {
+          params[0] = GL_DEPTH_COMPONENT;
+          return true;
+        } break;
+      case GL_TEXTURE_SWIZZLE_R:
+        if( ctx->info->es2 || ! ctx->info->gl_ext_texture_swizzle ) {
+          params[0] = GL_RED;
+          return true;
+        } break;
+      case GL_TEXTURE_SWIZZLE_G:
+        if( ctx->info->es2 || ! ctx->info->gl_ext_texture_swizzle ) {
+          params[0] = GL_GREEN;
+          return true;
+        } break;
+      case GL_TEXTURE_SWIZZLE_B:
+        if( ctx->info->es2 || ! ctx->info->gl_ext_texture_swizzle ) {
+          params[0] = GL_BLUE;
+          return true;
+        } break;
+      case GL_TEXTURE_SWIZZLE_A:
+        if( ctx->info->es2 || ! ctx->info->gl_ext_texture_swizzle ) {
+          params[0] = GL_ALPHA;
+          return true;
+        } break;
+      case GL_TEXTURE_SWIZZLE_RGBA:
+        if( ctx->info->es2 || ! ctx->info->gl_ext_texture_swizzle ) {
+          params[0] = GL_RED;
+          params[1] = GL_GREEN;
+          params[2] = GL_BLUE;
+          params[3] = GL_ALPHA;
+          return true;
+        } break;
+      default:
+        break;
+    }
+    return false;
+  }
+
+  template <typename T> bool glGetTextureParameter( RegalContext *ctx, GLuint texture, GLenum target, GLenum pname, T * params )
+  {
+    UNUSED_PARAMETER(texture);
+    return glGetTexParameter( ctx, target, pname, params );
+  }
+
+  template <typename T> bool glGetTexLevelParameter( RegalContext *ctx, GLenum target, GLint level, GLenum pname, T * params )
+  {
+    //<> why is this function empty?
+    UNUSED_PARAMETER(ctx);
+    UNUSED_PARAMETER(target);
+    UNUSED_PARAMETER(level);
+    UNUSED_PARAMETER(pname);
+    UNUSED_PARAMETER(params);
+    return false;
+  }
+
+  template <typename T> bool glGetTextureLevelParameter( RegalContext *ctx, GLuint texture, GLenum target, GLint level, GLenum pname, T * params )
+  {
+    UNUSED_PARAMETER(texture);
+    return glGetTexLevelParameter( ctx, target, level, pname, params );
   }
 
   bool glIsEnabled(RegalContext *ctx, GLboolean &enabled, GLenum pname)

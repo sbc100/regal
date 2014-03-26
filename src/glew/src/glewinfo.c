@@ -3899,6 +3899,7 @@ static void _glewInfo_GL_EXT_direct_state_access (void)
   glewInfoFunc("glVertexArrayNormalOffsetEXT", glVertexArrayNormalOffsetEXT == NULL);
   glewInfoFunc("glVertexArraySecondaryColorOffsetEXT", glVertexArraySecondaryColorOffsetEXT == NULL);
   glewInfoFunc("glVertexArrayTexCoordOffsetEXT", glVertexArrayTexCoordOffsetEXT == NULL);
+  glewInfoFunc("glVertexArrayVertexAttribDivisorEXT", glVertexArrayVertexAttribDivisorEXT == NULL);
   glewInfoFunc("glVertexArrayVertexAttribIOffsetEXT", glVertexArrayVertexAttribIOffsetEXT == NULL);
   glewInfoFunc("glVertexArrayVertexAttribOffsetEXT", glVertexArrayVertexAttribOffsetEXT == NULL);
   glewInfoFunc("glVertexArrayVertexOffsetEXT", glVertexArrayVertexOffsetEXT == NULL);
@@ -8244,6 +8245,20 @@ static void _glewInfo_GLX_MESA_pixmap_colormap (void)
 
 #endif /* GLX_MESA_pixmap_colormap */
 
+#ifdef GLX_MESA_query_renderer
+
+static void _glewInfo_GLX_MESA_query_renderer (void)
+{
+  glewPrintExt("GLX_MESA_query_renderer", GLXEW_MESA_query_renderer, glxewIsSupported("GLX_MESA_query_renderer"), glxewGetExtension("GLX_MESA_query_renderer"));
+
+  glewInfoFunc("glXQueryCurrentRendererIntegerMESA", glXQueryCurrentRendererIntegerMESA == NULL);
+  glewInfoFunc("glXQueryCurrentRendererStringMESA", glXQueryCurrentRendererStringMESA == NULL);
+  glewInfoFunc("glXQueryRendererIntegerMESA", glXQueryRendererIntegerMESA == NULL);
+  glewInfoFunc("glXQueryRendererStringMESA", glXQueryRendererStringMESA == NULL);
+}
+
+#endif /* GLX_MESA_query_renderer */
+
 #ifdef GLX_MESA_release_buffers
 
 static void _glewInfo_GLX_MESA_release_buffers (void)
@@ -10464,6 +10479,9 @@ static void glxewInfo ()
 #ifdef GLX_MESA_pixmap_colormap
   _glewInfo_GLX_MESA_pixmap_colormap();
 #endif /* GLX_MESA_pixmap_colormap */
+#ifdef GLX_MESA_query_renderer
+  _glewInfo_GLX_MESA_query_renderer();
+#endif /* GLX_MESA_query_renderer */
 #ifdef GLX_MESA_release_buffers
   _glewInfo_GLX_MESA_release_buffers();
 #endif /* GLX_MESA_release_buffers */

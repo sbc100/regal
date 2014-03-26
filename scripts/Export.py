@@ -45,6 +45,7 @@ from RegalDispatchEmu        import *
 from RegalDispatchGMock      import *
 from RegalDispatchGLX        import *
 from RegalDispatchLog        import *
+from RegalDispatchHttp       import *
 from RegalDispatchLoader     import *
 from RegalDispatchMissing    import *
 from RegalDispatchPpapi      import *
@@ -225,6 +226,7 @@ def generate(apis, args):
   generateSystemHeader(apis, args)
   generateEmuSource( apis, args )
   generateDispatchLog( apis, args )
+  generateDispatchHttp( apis, args )
   generateDispatchCode( apis, args )
   generateErrorSource( apis, args )
   generateDebugSource( apis, args )

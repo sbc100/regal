@@ -522,7 +522,22 @@ namespace Logging {
     {
       string m = message(prefix,delim,name,str);
 
-      // TODO - optional Regal source line numbers.
+      string full_prefix = string(prefix) + string(delim);
+      size_t p = m.find( full_prefix, 0 );
+      int count = 0;
+      if( m.find( full_prefix, full_prefix.size() ) != string::npos )
+      {
+        while( p != string::npos && count < 1000 )
+        {
+          std::string lineNumber;
+          boost::print::printf(lineNumber, "%03i ", count);
+          p += full_prefix.size();
+          m.insert( p, lineNumber.c_str(), lineNumber.size() );
+          p = m.find( full_prefix, p );
+          count++;
+        }
+      }
+
 #if 1
       UNUSED_PARAMETER(file);
       UNUSED_PARAMETER(line);

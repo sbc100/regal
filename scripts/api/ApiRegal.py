@@ -176,7 +176,7 @@ def cCodeParameter(function, parameter):
 # ret    - return value
 #
 
-def logFunction(function, trace = 'ITrace', input = True, output = False, ret = False):
+def logFunction(function, trace = 'ITrace', input = True, output = False, ret = False, paramsOnly = False):
   c =  ''
   args = []
   for i in function.parameters:
@@ -202,14 +202,20 @@ def logFunction(function, trace = 'ITrace', input = True, output = False, ret = 
     args = args[:14]
 
   if len(args):
-    c += '%s("%s","(", ' % (trace, function.name)
+    if paramsOnly:
+      c += '%s("(", ' % trace
+    else:
+      c += '%s("%s","(", ' % (trace, function.name)
     c += ', ", ", '.join(args)
     c += ', ")"'
     if r != None:
       c += ', " returned ", %s'%(r)
     c += ');'
   else:
-    c += '%s("%s","()"' % (trace, function.name)
+    if paramsOnly:
+      c += '%s("()"' % trace
+    else:
+      c += '%s("%s","()"' % (trace, function.name)
     if r != None:
       c += ', " returned ", %s'%(r)
     c += ');'

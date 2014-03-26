@@ -6622,6 +6622,9 @@ static void REGAL_CALL emu_glGetTexLevelParameterfv(GLenum target, GLint level, 
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6648,6 +6651,17 @@ static void REGAL_CALL emu_glGetTexLevelParameterfv(GLenum target, GLint level, 
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTexLevelParameter( _context, target, level, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTexLevelParameterfv( target, level, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6666,13 +6680,13 @@ static void REGAL_CALL emu_glGetTexLevelParameterfv(GLenum target, GLint level, 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        if (_context->isES2() || _context->isCore())
+        if (_context->isES2())
         {
-           Warning("Regal does not support glGetTexLevelParameterfv for core or ES2 profiles - skipping.");
-           #if REGAL_BREAK
-           Break::Filter();
-           #endif
-           return ;
+          Warning("Regal does not support glGetTexLevelParameterfv for ES 2.0 - skipping.");
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
         }
       }
       #endif
@@ -6700,6 +6714,9 @@ static void REGAL_CALL emu_glGetTexLevelParameteriv(GLenum target, GLint level, 
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6726,6 +6743,17 @@ static void REGAL_CALL emu_glGetTexLevelParameteriv(GLenum target, GLint level, 
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTexLevelParameter( _context, target, level, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTexLevelParameteriv( target, level, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6744,13 +6772,13 @@ static void REGAL_CALL emu_glGetTexLevelParameteriv(GLenum target, GLint level, 
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        if (_context->isES2() || _context->isCore())
+        if (_context->isES2())
         {
-           Warning("Regal does not support glGetTexLevelParameteriv for core or ES2 profiles - skipping.");
-           #if REGAL_BREAK
-           Break::Filter();
-           #endif
-           return ;
+          Warning("Regal does not support glGetTexLevelParameteriv for ES 2.0 - skipping.");
+          #if REGAL_BREAK
+          Break::Filter();
+          #endif
+          return ;
         }
       }
       #endif
@@ -6778,6 +6806,9 @@ static void REGAL_CALL emu_glGetTexParameterfv(GLenum target, GLenum pname, GLfl
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6814,6 +6845,17 @@ static void REGAL_CALL emu_glGetTexParameterfv(GLenum target, GLenum pname, GLfl
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTexParameter( _context, target, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTexParameterfv( target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6872,6 +6914,9 @@ static void REGAL_CALL emu_glGetTexParameteriv(GLenum target, GLenum pname, GLin
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -6913,6 +6958,17 @@ static void REGAL_CALL emu_glGetTexParameteriv(GLenum target, GLenum pname, GLin
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTexParameter( _context, target, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTexParameteriv( target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -26706,6 +26762,14 @@ static void REGAL_CALL emu_glBindBuffer(GLenum target, GLuint buffer)
       }
       #endif
     case 6 :
+      #if REGAL_EMU_QUADS
+      if (_context->quads)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 5;
+        _context->quads->glBindBuffer( target, buffer );
+      }
+      #endif
     case 5 :
     case 4 :
       #if REGAL_EMU_DSA
@@ -28286,6 +28350,9 @@ static void REGAL_CALL emu_glUniform1f(GLint location, GLfloat v0)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28302,9 +28369,43 @@ static void REGAL_CALL emu_glUniform1f(GLint location, GLfloat v0)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1f)(location, v0);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, 1, v0 );
+        } else {
+          _context->dispatcher.emulation.glUniform1f( location, v0 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1f)(location, v0);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform1fv(GLint location, GLsizei count, const GLfloat *value)
@@ -28326,6 +28427,9 @@ static void REGAL_CALL emu_glUniform1fv(GLint location, GLsizei count, const GLf
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28342,9 +28446,43 @@ static void REGAL_CALL emu_glUniform1fv(GLint location, GLsizei count, const GLf
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1fv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform1fv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1fv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform1i(GLint location, GLint v0)
@@ -28366,6 +28504,9 @@ static void REGAL_CALL emu_glUniform1i(GLint location, GLint v0)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28382,9 +28523,43 @@ static void REGAL_CALL emu_glUniform1i(GLint location, GLint v0)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1i)(location, v0);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, 1, v0 );
+        } else {
+          _context->dispatcher.emulation.glUniform1i( location, v0 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1i)(location, v0);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform1iv(GLint location, GLsizei count, const GLint *value)
@@ -28406,6 +28581,9 @@ static void REGAL_CALL emu_glUniform1iv(GLint location, GLsizei count, const GLi
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28422,9 +28600,43 @@ static void REGAL_CALL emu_glUniform1iv(GLint location, GLsizei count, const GLi
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1iv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform1iv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1iv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2f(GLint location, GLfloat v0, GLfloat v1)
@@ -28446,6 +28658,9 @@ static void REGAL_CALL emu_glUniform2f(GLint location, GLfloat v0, GLfloat v1)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28462,9 +28677,43 @@ static void REGAL_CALL emu_glUniform2f(GLint location, GLfloat v0, GLfloat v1)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2f)(location, v0, v1);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, 1, v0, v1 );
+        } else {
+          _context->dispatcher.emulation.glUniform2f( location, v0, v1 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2f)(location, v0, v1);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2fv(GLint location, GLsizei count, const GLfloat *value)
@@ -28486,6 +28735,9 @@ static void REGAL_CALL emu_glUniform2fv(GLint location, GLsizei count, const GLf
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28502,9 +28754,43 @@ static void REGAL_CALL emu_glUniform2fv(GLint location, GLsizei count, const GLf
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2fv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform2fv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2fv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2i(GLint location, GLint v0, GLint v1)
@@ -28526,6 +28812,9 @@ static void REGAL_CALL emu_glUniform2i(GLint location, GLint v0, GLint v1)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28542,9 +28831,43 @@ static void REGAL_CALL emu_glUniform2i(GLint location, GLint v0, GLint v1)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2i)(location, v0, v1);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, 1, v0, v1 );
+        } else {
+          _context->dispatcher.emulation.glUniform2i( location, v0, v1 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2i)(location, v0, v1);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2iv(GLint location, GLsizei count, const GLint *value)
@@ -28566,6 +28889,9 @@ static void REGAL_CALL emu_glUniform2iv(GLint location, GLsizei count, const GLi
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28582,9 +28908,43 @@ static void REGAL_CALL emu_glUniform2iv(GLint location, GLsizei count, const GLi
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2iv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform2iv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2iv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
@@ -28606,6 +28966,9 @@ static void REGAL_CALL emu_glUniform3f(GLint location, GLfloat v0, GLfloat v1, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28622,9 +28985,43 @@ static void REGAL_CALL emu_glUniform3f(GLint location, GLfloat v0, GLfloat v1, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3f)(location, v0, v1, v2);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, 1, v0, v1, v2 );
+        } else {
+          _context->dispatcher.emulation.glUniform3f( location, v0, v1, v2 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3f)(location, v0, v1, v2);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3fv(GLint location, GLsizei count, const GLfloat *value)
@@ -28646,6 +29043,9 @@ static void REGAL_CALL emu_glUniform3fv(GLint location, GLsizei count, const GLf
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28662,9 +29062,43 @@ static void REGAL_CALL emu_glUniform3fv(GLint location, GLsizei count, const GLf
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3fv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform3fv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3fv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3i(GLint location, GLint v0, GLint v1, GLint v2)
@@ -28686,6 +29120,9 @@ static void REGAL_CALL emu_glUniform3i(GLint location, GLint v0, GLint v1, GLint
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28702,9 +29139,43 @@ static void REGAL_CALL emu_glUniform3i(GLint location, GLint v0, GLint v1, GLint
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3i)(location, v0, v1, v2);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, 1, v0, v1, v2 );
+        } else {
+          _context->dispatcher.emulation.glUniform3i( location, v0, v1, v2 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3i)(location, v0, v1, v2);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3iv(GLint location, GLsizei count, const GLint *value)
@@ -28726,6 +29197,9 @@ static void REGAL_CALL emu_glUniform3iv(GLint location, GLsizei count, const GLi
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28742,9 +29216,43 @@ static void REGAL_CALL emu_glUniform3iv(GLint location, GLsizei count, const GLi
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3iv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform3iv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3iv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
@@ -28766,6 +29274,9 @@ static void REGAL_CALL emu_glUniform4f(GLint location, GLfloat v0, GLfloat v1, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28782,9 +29293,43 @@ static void REGAL_CALL emu_glUniform4f(GLint location, GLfloat v0, GLfloat v1, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4f)(location, v0, v1, v2, v3);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, 1, v0, v1, v2, v3 );
+        } else {
+          _context->dispatcher.emulation.glUniform4f( location, v0, v1, v2, v3 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4f)(location, v0, v1, v2, v3);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4fv(GLint location, GLsizei count, const GLfloat *value)
@@ -28806,6 +29351,9 @@ static void REGAL_CALL emu_glUniform4fv(GLint location, GLsizei count, const GLf
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28822,9 +29370,43 @@ static void REGAL_CALL emu_glUniform4fv(GLint location, GLsizei count, const GLf
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4fv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform4fv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4fv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4i(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
@@ -28846,6 +29428,9 @@ static void REGAL_CALL emu_glUniform4i(GLint location, GLint v0, GLint v1, GLint
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28862,9 +29447,43 @@ static void REGAL_CALL emu_glUniform4i(GLint location, GLint v0, GLint v1, GLint
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4i)(location, v0, v1, v2, v3);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, 1, v0, v1, v2, v3 );
+        } else {
+          _context->dispatcher.emulation.glUniform4i( location, v0, v1, v2, v3 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4i)(location, v0, v1, v2, v3);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4iv(GLint location, GLsizei count, const GLint *value)
@@ -28886,6 +29505,9 @@ static void REGAL_CALL emu_glUniform4iv(GLint location, GLsizei count, const GLi
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28902,9 +29524,43 @@ static void REGAL_CALL emu_glUniform4iv(GLint location, GLsizei count, const GLi
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4iv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform4iv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4iv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -28926,6 +29582,9 @@ static void REGAL_CALL emu_glUniformMatrix2fv(GLint location, GLsizei count, GLb
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28942,9 +29601,43 @@ static void REGAL_CALL emu_glUniformMatrix2fv(GLint location, GLsizei count, GLb
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix2fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -28966,6 +29659,9 @@ static void REGAL_CALL emu_glUniformMatrix3fv(GLint location, GLsizei count, GLb
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -28982,9 +29678,43 @@ static void REGAL_CALL emu_glUniformMatrix3fv(GLint location, GLsizei count, GLb
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix3fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -29006,6 +29736,9 @@ static void REGAL_CALL emu_glUniformMatrix4fv(GLint location, GLsizei count, GLb
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -29022,9 +29755,43 @@ static void REGAL_CALL emu_glUniformMatrix4fv(GLint location, GLsizei count, GLb
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix4fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUseProgram(GLuint program)
@@ -30483,6 +31250,9 @@ static void REGAL_CALL emu_glUniformMatrix2x3fv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -30499,9 +31269,43 @@ static void REGAL_CALL emu_glUniformMatrix2x3fv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix2x3fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2x3fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2x3fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -30523,6 +31327,9 @@ static void REGAL_CALL emu_glUniformMatrix2x4fv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -30539,9 +31346,43 @@ static void REGAL_CALL emu_glUniformMatrix2x4fv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix2x4fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2x4fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2x4fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -30563,6 +31404,9 @@ static void REGAL_CALL emu_glUniformMatrix3x2fv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -30579,9 +31423,43 @@ static void REGAL_CALL emu_glUniformMatrix3x2fv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix3x2fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3x2fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3x2fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -30603,6 +31481,9 @@ static void REGAL_CALL emu_glUniformMatrix3x4fv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -30619,9 +31500,43 @@ static void REGAL_CALL emu_glUniformMatrix3x4fv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix3x4fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3x4fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3x4fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -30643,6 +31558,9 @@ static void REGAL_CALL emu_glUniformMatrix4x2fv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -30659,9 +31577,43 @@ static void REGAL_CALL emu_glUniformMatrix4x2fv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix4x2fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4x2fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4x2fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
@@ -30683,6 +31635,9 @@ static void REGAL_CALL emu_glUniformMatrix4x3fv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -30699,9 +31654,43 @@ static void REGAL_CALL emu_glUniformMatrix4x3fv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix4x3fv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4x3fv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4x3fv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 // GL_VERSION_3_0
@@ -31376,6 +32365,9 @@ static void REGAL_CALL emu_glUniform1ui(GLint location, GLuint v0)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31392,9 +32384,43 @@ static void REGAL_CALL emu_glUniform1ui(GLint location, GLuint v0)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1ui)(location, v0);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, 1, v0 );
+        } else {
+          _context->dispatcher.emulation.glUniform1ui( location, v0 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1ui)(location, v0);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform1uiv(GLint location, GLsizei count, const GLuint *value)
@@ -31416,6 +32442,9 @@ static void REGAL_CALL emu_glUniform1uiv(GLint location, GLsizei count, const GL
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31432,9 +32461,43 @@ static void REGAL_CALL emu_glUniform1uiv(GLint location, GLsizei count, const GL
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1uiv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform1uiv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1uiv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2ui(GLint location, GLuint v0, GLuint v1)
@@ -31456,6 +32519,9 @@ static void REGAL_CALL emu_glUniform2ui(GLint location, GLuint v0, GLuint v1)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31472,9 +32538,43 @@ static void REGAL_CALL emu_glUniform2ui(GLint location, GLuint v0, GLuint v1)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2ui)(location, v0, v1);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, 1, v0, v1 );
+        } else {
+          _context->dispatcher.emulation.glUniform2ui( location, v0, v1 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2ui)(location, v0, v1);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2uiv(GLint location, GLsizei count, const GLuint *value)
@@ -31496,6 +32596,9 @@ static void REGAL_CALL emu_glUniform2uiv(GLint location, GLsizei count, const GL
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31512,9 +32615,43 @@ static void REGAL_CALL emu_glUniform2uiv(GLint location, GLsizei count, const GL
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2uiv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform2uiv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2uiv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3ui(GLint location, GLuint v0, GLuint v1, GLuint v2)
@@ -31536,6 +32673,9 @@ static void REGAL_CALL emu_glUniform3ui(GLint location, GLuint v0, GLuint v1, GL
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31552,9 +32692,43 @@ static void REGAL_CALL emu_glUniform3ui(GLint location, GLuint v0, GLuint v1, GL
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3ui)(location, v0, v1, v2);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, 1, v0, v1, v2 );
+        } else {
+          _context->dispatcher.emulation.glUniform3ui( location, v0, v1, v2 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3ui)(location, v0, v1, v2);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3uiv(GLint location, GLsizei count, const GLuint *value)
@@ -31576,6 +32750,9 @@ static void REGAL_CALL emu_glUniform3uiv(GLint location, GLsizei count, const GL
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31592,9 +32769,43 @@ static void REGAL_CALL emu_glUniform3uiv(GLint location, GLsizei count, const GL
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3uiv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform3uiv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3uiv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4ui(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3)
@@ -31616,6 +32827,9 @@ static void REGAL_CALL emu_glUniform4ui(GLint location, GLuint v0, GLuint v1, GL
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31632,9 +32846,43 @@ static void REGAL_CALL emu_glUniform4ui(GLint location, GLuint v0, GLuint v1, GL
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4ui)(location, v0, v1, v2, v3);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, 1, v0, v1, v2, v3 );
+        } else {
+          _context->dispatcher.emulation.glUniform4ui( location, v0, v1, v2, v3 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4ui)(location, v0, v1, v2, v3);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4uiv(GLint location, GLsizei count, const GLuint *value)
@@ -31656,6 +32904,9 @@ static void REGAL_CALL emu_glUniform4uiv(GLint location, GLsizei count, const GL
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -31672,9 +32923,43 @@ static void REGAL_CALL emu_glUniform4uiv(GLint location, GLsizei count, const GL
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4uiv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform4uiv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4uiv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer)
@@ -34916,6 +36201,9 @@ static void REGAL_CALL emu_glUniform1d(GLint location, GLdouble x)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -34932,9 +36220,43 @@ static void REGAL_CALL emu_glUniform1d(GLint location, GLdouble x)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1d)(location, x);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, 1, x );
+        } else {
+          _context->dispatcher.emulation.glUniform1d( location, x );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1d)(location, x);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform1dv(GLint location, GLsizei count, const GLdouble *value)
@@ -34956,6 +36278,9 @@ static void REGAL_CALL emu_glUniform1dv(GLint location, GLsizei count, const GLd
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -34972,9 +36297,43 @@ static void REGAL_CALL emu_glUniform1dv(GLint location, GLsizei count, const GLd
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform1dv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform1dv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1dv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2d(GLint location, GLdouble x, GLdouble y)
@@ -34996,6 +36355,9 @@ static void REGAL_CALL emu_glUniform2d(GLint location, GLdouble x, GLdouble y)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35012,9 +36374,43 @@ static void REGAL_CALL emu_glUniform2d(GLint location, GLdouble x, GLdouble y)
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2d)(location, x, y);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, 1, x, y );
+        } else {
+          _context->dispatcher.emulation.glUniform2d( location, x, y );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2d)(location, x, y);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform2dv(GLint location, GLsizei count, const GLdouble *value)
@@ -35036,6 +36432,9 @@ static void REGAL_CALL emu_glUniform2dv(GLint location, GLsizei count, const GLd
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35052,9 +36451,43 @@ static void REGAL_CALL emu_glUniform2dv(GLint location, GLsizei count, const GLd
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform2dv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform2dv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2dv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3d(GLint location, GLdouble x, GLdouble y, GLdouble z)
@@ -35076,6 +36509,9 @@ static void REGAL_CALL emu_glUniform3d(GLint location, GLdouble x, GLdouble y, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35092,9 +36528,43 @@ static void REGAL_CALL emu_glUniform3d(GLint location, GLdouble x, GLdouble y, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3d)(location, x, y, z);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, 1, x, y, z );
+        } else {
+          _context->dispatcher.emulation.glUniform3d( location, x, y, z );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3d)(location, x, y, z);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform3dv(GLint location, GLsizei count, const GLdouble *value)
@@ -35116,6 +36586,9 @@ static void REGAL_CALL emu_glUniform3dv(GLint location, GLsizei count, const GLd
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35132,9 +36605,43 @@ static void REGAL_CALL emu_glUniform3dv(GLint location, GLsizei count, const GLd
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform3dv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform3dv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3dv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4d(GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w)
@@ -35156,6 +36663,9 @@ static void REGAL_CALL emu_glUniform4d(GLint location, GLdouble x, GLdouble y, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35172,9 +36682,43 @@ static void REGAL_CALL emu_glUniform4d(GLint location, GLdouble x, GLdouble y, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4d)(location, x, y, z, w);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, 1, x, y, z, w );
+        } else {
+          _context->dispatcher.emulation.glUniform4d( location, x, y, z, w );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4d)(location, x, y, z, w);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniform4dv(GLint location, GLsizei count, const GLdouble *value)
@@ -35196,6 +36740,9 @@ static void REGAL_CALL emu_glUniform4dv(GLint location, GLsizei count, const GLd
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35212,9 +36759,43 @@ static void REGAL_CALL emu_glUniform4dv(GLint location, GLsizei count, const GLd
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniform4dv)(location, count, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform4dv( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4dv)(location, count, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35236,6 +36817,9 @@ static void REGAL_CALL emu_glUniformMatrix2dv(GLint location, GLsizei count, GLb
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35252,9 +36836,43 @@ static void REGAL_CALL emu_glUniformMatrix2dv(GLint location, GLsizei count, GLb
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix2dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix2x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35276,6 +36894,9 @@ static void REGAL_CALL emu_glUniformMatrix2x3dv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35292,9 +36913,43 @@ static void REGAL_CALL emu_glUniformMatrix2x3dv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix2x3dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2x3dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2x3dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix2x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35316,6 +36971,9 @@ static void REGAL_CALL emu_glUniformMatrix2x4dv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35332,9 +36990,43 @@ static void REGAL_CALL emu_glUniformMatrix2x4dv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix2x4dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2x4dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2x4dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35356,6 +37048,9 @@ static void REGAL_CALL emu_glUniformMatrix3dv(GLint location, GLsizei count, GLb
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35372,9 +37067,43 @@ static void REGAL_CALL emu_glUniformMatrix3dv(GLint location, GLsizei count, GLb
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix3dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix3x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35396,6 +37125,9 @@ static void REGAL_CALL emu_glUniformMatrix3x2dv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35412,9 +37144,43 @@ static void REGAL_CALL emu_glUniformMatrix3x2dv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix3x2dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3x2dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3x2dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix3x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35436,6 +37202,9 @@ static void REGAL_CALL emu_glUniformMatrix3x4dv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35452,9 +37221,43 @@ static void REGAL_CALL emu_glUniformMatrix3x4dv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix3x4dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3x4dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3x4dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35476,6 +37279,9 @@ static void REGAL_CALL emu_glUniformMatrix4dv(GLint location, GLsizei count, GLb
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35492,9 +37298,43 @@ static void REGAL_CALL emu_glUniformMatrix4dv(GLint location, GLsizei count, GLb
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix4dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix4x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35516,6 +37356,9 @@ static void REGAL_CALL emu_glUniformMatrix4x2dv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35532,9 +37375,43 @@ static void REGAL_CALL emu_glUniformMatrix4x2dv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix4x2dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4x2dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4x2dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 static void REGAL_CALL emu_glUniformMatrix4x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble *value)
@@ -35556,6 +37433,9 @@ static void REGAL_CALL emu_glUniformMatrix4x3dv(GLint location, GLsizei count, G
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -35572,9 +37452,43 @@ static void REGAL_CALL emu_glUniformMatrix4x3dv(GLint location, GLsizei count, G
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glUniformMatrix4x3dv)(location, count, transpose, value);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4x3dv( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4x3dv)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
 }
 
 // GL_ARB_imaging
@@ -40255,6 +42169,138 @@ static void REGAL_CALL emu_glShaderSourceARB(GLhandleARB shaderObj, GLsizei coun
 
 }
 
+static void REGAL_CALL emu_glUniform1fARB(GLint location, GLfloat v0)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, 1, v0 );
+        } else {
+          _context->dispatcher.emulation.glUniform1fARB( location, v0 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1fARB)(location, v0);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform1fvARB(GLint location, GLsizei count, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform1fvARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1fvARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
 static void REGAL_CALL emu_glUniform1iARB(GLint location, GLint v0)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -40274,6 +42320,9 @@ static void REGAL_CALL emu_glUniform1iARB(GLint location, GLint v0)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -40300,6 +42349,19 @@ static void REGAL_CALL emu_glUniform1iARB(GLint location, GLint v0)
     case 9 :
     case 8 :
     case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, 1, v0 );
+        } else {
+          _context->dispatcher.emulation.glUniform1iARB( location, v0 );
+        }
+        return;
+      }
+      #endif
     case 6 :
     case 5 :
     case 4 :
@@ -40325,6 +42387,1126 @@ static void REGAL_CALL emu_glUniform1iARB(GLint location, GLint v0)
       DispatchTableGL *_next = _dispatch.next();
       RegalAssert(_next);
       _next->call(&_next->glUniform1iARB)(location, v0);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform1ivARB(GLint location, GLsizei count, const GLint *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 1, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform1ivARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform1ivARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform2fARB(GLint location, GLfloat v0, GLfloat v1)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, 1, v0, v1 );
+        } else {
+          _context->dispatcher.emulation.glUniform2fARB( location, v0, v1 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2fARB)(location, v0, v1);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform2fvARB(GLint location, GLsizei count, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform2fvARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2fvARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform2iARB(GLint location, GLint v0, GLint v1)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, 1, v0, v1 );
+        } else {
+          _context->dispatcher.emulation.glUniform2iARB( location, v0, v1 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2iARB)(location, v0, v1);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform2ivARB(GLint location, GLsizei count, const GLint *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 2, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform2ivARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform2ivARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform3fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, 1, v0, v1, v2 );
+        } else {
+          _context->dispatcher.emulation.glUniform3fARB( location, v0, v1, v2 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3fARB)(location, v0, v1, v2);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform3fvARB(GLint location, GLsizei count, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform3fvARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3fvARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform3iARB(GLint location, GLint v0, GLint v1, GLint v2)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, 1, v0, v1, v2 );
+        } else {
+          _context->dispatcher.emulation.glUniform3iARB( location, v0, v1, v2 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3iARB)(location, v0, v1, v2);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform3ivARB(GLint location, GLsizei count, const GLint *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 3, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform3ivARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform3ivARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform4fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, 1, v0, v1, v2, v3 );
+        } else {
+          _context->dispatcher.emulation.glUniform4fARB( location, v0, v1, v2, v3 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4fARB)(location, v0, v1, v2, v3);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform4fvARB(GLint location, GLsizei count, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform4fvARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4fvARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform4iARB(GLint location, GLint v0, GLint v1, GLint v2, GLint v3)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, 1, v0, v1, v2, v3 );
+        } else {
+          _context->dispatcher.emulation.glUniform4iARB( location, v0, v1, v2, v3 );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4iARB)(location, v0, v1, v2, v3);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniform4ivARB(GLint location, GLsizei count, const GLint *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->Uniform( _context, 4, location, count, value );
+        } else {
+          _context->dispatcher.emulation.glUniform4ivARB( location, count, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniform4ivARB)(location, count, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniformMatrix2fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 2, 2, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix2fvARB( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix2fvARB)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniformMatrix3fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 3, 3, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix3fvARB( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix3fvARB)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUniformMatrix4fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( _context->iff->currinst ) {
+          _context->iff->UniformMatrix( _context, 4, 4, location, count, transpose, value );
+        } else {
+          _context->dispatcher.emulation.glUniformMatrix4fvARB( location, count, transpose, value );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUniformMatrix4fvARB)(location, count, transpose, value);
+      break;
+    }
+
+  }
+
+}
+
+static void REGAL_CALL emu_glUseProgramObjectARB(GLhandleARB programObj)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        if( ! _context->iff->ShadowUseProgram( programObj ) ) {
+            _context->dispatcher.emulation.glUseProgram( programObj );
+        }
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glUseProgramObjectARB)(programObj);
       break;
     }
 
@@ -51248,6 +54430,9 @@ static void REGAL_CALL emu_glGetTextureLevelParameterfvEXT(GLuint texture, GLenu
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51272,6 +54457,17 @@ static void REGAL_CALL emu_glGetTextureLevelParameterfvEXT(GLuint texture, GLenu
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTextureLevelParameter( _context, texture, target, level, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTextureLevelParameterfvEXT( texture, target, level, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51317,6 +54513,9 @@ static void REGAL_CALL emu_glGetTextureLevelParameterivEXT(GLuint texture, GLenu
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51341,6 +54540,17 @@ static void REGAL_CALL emu_glGetTextureLevelParameterivEXT(GLuint texture, GLenu
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTextureLevelParameter( _context, texture, target, level, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTextureLevelParameterivEXT( texture, target, level, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51524,6 +54734,9 @@ static void REGAL_CALL emu_glGetTextureParameterfvEXT(GLuint texture, GLenum tar
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51548,6 +54761,17 @@ static void REGAL_CALL emu_glGetTextureParameterfvEXT(GLuint texture, GLenum tar
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTextureParameter( _context, texture, target, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTextureParameterfvEXT( texture, target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51593,6 +54817,9 @@ static void REGAL_CALL emu_glGetTextureParameterivEXT(GLuint texture, GLenum tar
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa) break;
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -51617,6 +54844,17 @@ static void REGAL_CALL emu_glGetTextureParameterivEXT(GLuint texture, GLenum tar
     case 16 :
     case 15 :
     case 14 :
+      #if REGAL_EMU_PPA
+      if (_context->ppa)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 13;
+        if( ! _context->ppa->glGetTextureParameter( _context, texture, target, pname, params ) ) {
+          _context->dispatcher.emulation.glGetTextureParameterivEXT( texture, target, pname, params );
+        }
+        return;
+      }
+      #endif
     case 13 :
     case 12 :
     case 11 :
@@ -70063,7 +73301,26 @@ void InitDispatchTableEmu(DispatchTableGL &tbl)
    tbl.glGetUniformLocationARB = emu_glGetUniformLocationARB;
    tbl.glLinkProgramARB = emu_glLinkProgramARB;
    tbl.glShaderSourceARB = emu_glShaderSourceARB;
+   tbl.glUniform1fARB = emu_glUniform1fARB;
+   tbl.glUniform1fvARB = emu_glUniform1fvARB;
    tbl.glUniform1iARB = emu_glUniform1iARB;
+   tbl.glUniform1ivARB = emu_glUniform1ivARB;
+   tbl.glUniform2fARB = emu_glUniform2fARB;
+   tbl.glUniform2fvARB = emu_glUniform2fvARB;
+   tbl.glUniform2iARB = emu_glUniform2iARB;
+   tbl.glUniform2ivARB = emu_glUniform2ivARB;
+   tbl.glUniform3fARB = emu_glUniform3fARB;
+   tbl.glUniform3fvARB = emu_glUniform3fvARB;
+   tbl.glUniform3iARB = emu_glUniform3iARB;
+   tbl.glUniform3ivARB = emu_glUniform3ivARB;
+   tbl.glUniform4fARB = emu_glUniform4fARB;
+   tbl.glUniform4fvARB = emu_glUniform4fvARB;
+   tbl.glUniform4iARB = emu_glUniform4iARB;
+   tbl.glUniform4ivARB = emu_glUniform4ivARB;
+   tbl.glUniformMatrix2fvARB = emu_glUniformMatrix2fvARB;
+   tbl.glUniformMatrix3fvARB = emu_glUniformMatrix3fvARB;
+   tbl.glUniformMatrix4fvARB = emu_glUniformMatrix4fvARB;
+   tbl.glUseProgramObjectARB = emu_glUseProgramObjectARB;
 
 // GL_ARB_sync
 

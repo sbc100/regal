@@ -33,7 +33,7 @@
 #include "RegalUtil.h"
 #include "RegalHttp.h"
 
-#if !REGAL_NO_HTTP
+#if REGAL_HTTP
 
 REGAL_NAMESPACE_BEGIN
 

@@ -46,14 +46,17 @@ on 1 byte), but shoehorning those bytes into integers efficiently is messy.
 
 #ifdef _WIN32
 # if defined(_MSC_VER) && _MSC_VER>=1600
-#else
+# else
+#  if defined(_MSC_VER) && ! MSC_INT_TYPES_DEFINED
 typedef          __int8  int8_t;
 typedef unsigned __int8  uint8_t;
 typedef          __int16 int16_t;
 typedef unsigned __int16 uint16_t;
 typedef          __int32 int32_t;
 typedef unsigned __int32 uint32_t;
-#endif
+#define MSC_INT_TYPES_DEFINED 1
+#  endif
+# endif
 #else
 #include <stdint.h>     /* defines uint32_t etc */
 #include <sys/param.h>  /* attempt to define endianness */
