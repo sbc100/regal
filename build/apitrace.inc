@@ -6,6 +6,7 @@
 # apitrace sources
 
 APITRACE.CXX :=
+APITRACE.CXX += src/apitrace/common/highlight.cpp
 APITRACE.CXX += src/apitrace/common/os_posix.cpp
 APITRACE.CXX += src/apitrace/common/os_win32.cpp
 APITRACE.CXX += src/apitrace/common/os_backtrace.cpp
@@ -31,6 +32,7 @@ APITRACE.CXX += src/apitrace/dispatch/glproc_regal.cpp
 #APITRACE.CXX += src/apitrace/dispatch/glproc_egl.cpp
 #APITRACE.CXX += src/apitrace/dispatch/glproc_gl.cpp
 APITRACE.CXX += src/apitrace/helpers/eglsize.cpp
+APITRACE.CXX += src/apitrace/wrappers/dlsym.cpp
 APITRACE.CXX += src/apitrace/wrappers/glcaps.cpp
 APITRACE.CXX += src/apitrace/wrappers/gltrace_state.cpp
 APITRACE.CXX += src/apitrace/wrappers/regaltrace.cpp

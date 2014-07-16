@@ -78,7 +78,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>APITRACE_TLS=0;HAVE_BACKTRACE=0;HAVE_EXTERNAL_OS_LOG=1;NOMINMAX;TRACE_ENABLED_CHECK=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -118,7 +118,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>APITRACE_TLS=0;HAVE_BACKTRACE=0;HAVE_EXTERNAL_OS_LOG=1;NOMINMAX;TRACE_ENABLED_CHECK=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -157,7 +157,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>APITRACE_TLS=0;HAVE_BACKTRACE=0;HAVE_EXTERNAL_OS_LOG=1;NOMINMAX;TRACE_ENABLED_CHECK=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -197,7 +197,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;../../../../src/apitrace/thirdparty/msinttypes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../../include;../../../../src/apitrace/common;../../../../src/apitrace/dispatch;../../../../src/apitrace/helpers;../../../../src/apitrace/wrappers;../../../../src/apitrace;../../../../src/snappy;../../../../src/zlib/include;../../../../src/zlib/src;../../../../src/apitrace/thirdparty/khronos;../../../../src/regal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>APITRACE_TLS=0;HAVE_BACKTRACE=0;HAVE_EXTERNAL_OS_LOG=1;NOMINMAX;TRACE_ENABLED_CHECK=0;_ITERATOR_DEBUG_LEVEL=0;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS=1;WIN32;_WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -234,6 +234,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\apitrace\common\highlight.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\os_backtrace.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\os_posix.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\common\os_win32.cpp" />
@@ -256,6 +257,7 @@
     <ClCompile Include="..\..\..\..\src\apitrace\common\trace_writer_regal.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\dispatch\glproc_regal.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\helpers\eglsize.cpp" />
+    <ClCompile Include="..\..\..\..\src\apitrace\wrappers\dlsym.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\glcaps.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\gltrace_state.cpp" />
     <ClCompile Include="..\..\..\..\src\apitrace\wrappers\regaltrace.cpp" />
