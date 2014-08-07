@@ -162,60 +162,215 @@ struct BaseVertex : public ClientState::VertexArray
       dt.call(&dt.glBindBuffer)(GL_ARRAY_BUFFER, ClientState::VertexArray::arrayBufferBinding);
   }
 
+  template<typename T>
+  GLvoid* adjust_indices(GLsizei count, const GLvoid *indices, GLint basevertex)
+  {
+      T* ptr = (T*)malloc(count * sizeof(T));
+      if(!ptr) return 0;
+      for(GLsizei i = 0; i < count; i++) ptr[i] = ((T*)indices)[i] + (T) basevertex;
+      return (GLvoid*) ptr;
+  }
+
+  GLvoid* adjust_indices(GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
+  {
+      switch(type)
+      {
+          case GL_UNSIGNED_BYTE:
+              return adjust_indices<GLubyte>(count, indices, basevertex);
+          case GL_UNSIGNED_SHORT:
+              return adjust_indices<GLushort>(count, indices, basevertex);
+          case GL_UNSIGNED_INT:
+              return adjust_indices<GLuint>(count, indices, basevertex);
+          default:
+              RegalAssert( "Unknown <type> in for adjust_indices." );
+              return 0;
+      }
+  }
+
   bool glDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
   {
+    if (ClientState::VertexArray::vertexArrayBinding)
+        return false;
+
     DispatchTableGL &dt = ctx.dispatcher.emulation;
+
+    GLvoid* adjusted_indices = 0;
     if (basevertex)
-      adjust(ctx, dt, basevertex);
-    dt.call(&dt.glDrawElements)(mode, count, type, indices);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+        {
+            adjust(ctx, dt, basevertex);
+        }
+        else
+        {
+            adjusted_indices = adjust_indices(count, type, indices, basevertex);
+            if (!adjusted_indices)
+                return false;
+        }
+    }
+
+    if (basevertex && adjusted_indices)
+        dt.call(&dt.glDrawElements)(mode, count, type, adjusted_indices);
+    else
+        dt.call(&dt.glDrawElements)(mode, count, type, indices);
+
     if (basevertex)
-      adjust(ctx, dt, 0);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+            adjust(ctx, dt, 0);
+        else
+            free(adjusted_indices);
+    }
     return true;
   }
 
   bool glDrawRangeElementsBaseVertex(RegalContext &ctx, GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex)
   {
+    if (ClientState::VertexArray::vertexArrayBinding)
+        return false;
+
     DispatchTableGL &dt = ctx.dispatcher.emulation;
+
+    GLvoid* adjusted_indices = 0;
     if (basevertex)
-      adjust(ctx, dt, basevertex);
-    dt.call(&dt.glDrawRangeElements)(mode, start, end, count, type, indices);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+        {
+            adjust(ctx, dt, basevertex);
+        }
+        else
+        {
+            adjusted_indices = adjust_indices(count, type, indices, basevertex);
+            if (!adjusted_indices)
+                return false;
+        }
+    }
+
+    if (basevertex && adjusted_indices)
+        dt.call(&dt.glDrawRangeElements)(mode, start, end, count, type, adjusted_indices);
+    else
+        dt.call(&dt.glDrawRangeElements)(mode, start, end, count, type, indices);
+
     if (basevertex)
-      adjust(ctx, dt, 0);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+            adjust(ctx, dt, 0);
+        else
+            free(adjusted_indices);
+    }
     return true;
   }
 
   bool glDrawElementsInstancedBaseVertex(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex)
   {
+    if (ClientState::VertexArray::vertexArrayBinding)
+        return false;
+
     DispatchTableGL &dt = ctx.dispatcher.emulation;
+
+    GLvoid* adjusted_indices = 0;
     if (basevertex)
-      adjust(ctx, dt, basevertex);
-    dt.call(&dt.glDrawElementsInstanced)(mode, count, type, indices, primcount);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+        {
+            adjust(ctx, dt, basevertex);
+        }
+        else
+        {
+            adjusted_indices = adjust_indices(count, type, indices, basevertex);
+            if (!adjusted_indices)
+                return false;
+        }
+    }
+
+    if (basevertex && adjusted_indices)
+        dt.call(&dt.glDrawElementsInstanced)(mode, count, type, adjusted_indices, primcount);
+    else
+        dt.call(&dt.glDrawElementsInstanced)(mode, count, type, indices, primcount);
+
     if (basevertex)
-      adjust(ctx, dt, 0);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+            adjust(ctx, dt, 0);
+        else
+            free(adjusted_indices);
+    }
     return true;
   }
 
   bool glDrawElementsInstancedBaseVertexBaseInstance(RegalContext &ctx, GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance)
   {
+    if (ClientState::VertexArray::vertexArrayBinding)
+        return false;
+
     DispatchTableGL &dt = ctx.dispatcher.emulation;
+
+    GLvoid* adjusted_indices = 0;
     if (basevertex)
-      adjust(ctx, dt, basevertex);
-    dt.call(&dt.glDrawElementsInstancedBaseInstance)(mode, count, type, indices, primcount, baseinstance);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+        {
+            adjust(ctx, dt, basevertex);
+        }
+        else
+        {
+            adjusted_indices = adjust_indices(count, type, indices, basevertex);
+            if (!adjusted_indices)
+                return false;
+        }
+    }
+
+    if (basevertex && adjusted_indices)
+        dt.call(&dt.glDrawElementsInstancedBaseInstance)(mode, count, type, adjusted_indices, primcount, baseinstance);
+    else
+        dt.call(&dt.glDrawElementsInstancedBaseInstance)(mode, count, type, indices, primcount, baseinstance);
+
     if (basevertex)
-      adjust(ctx, dt, 0);
+    {
+        if (ClientState::VertexArray::elementArrayBufferBinding)
+            adjust(ctx, dt, 0);
+        else
+            free(adjusted_indices);
+    }
     return true;
   }
 
   bool glMultiDrawElementsBaseVertex(RegalContext &ctx, GLenum mode, const GLsizei *count, GLenum type, const GLvoid * const* indices, GLsizei primcount, const GLint *basevertex)
   {
+    if (ClientState::VertexArray::vertexArrayBinding)
+        return false;
+
     DispatchTableGL &dt = ctx.dispatcher.emulation;
+
     for (GLsizei ii=0; ii<primcount; ii++)
     {
+      GLvoid* adjusted_indices = 0;
       if (basevertex[ii])
-        adjust(ctx, dt, basevertex[ii]);
-      dt.call(&dt.glDrawElements)(mode, count[ii], type, indices[ii]);
+      {
+          if (ClientState::VertexArray::elementArrayBufferBinding)
+          {
+              adjust(ctx, dt, basevertex[ii]);
+          }
+          else
+          {
+              adjusted_indices = adjust_indices(count[ii], type, indices[ii], basevertex[ii]);
+              if (!adjusted_indices)
+                  return false;
+          }
+      }
+
+      if (basevertex[ii] && adjusted_indices)
+          dt.call(&dt.glDrawElements)(mode, count[ii], type, adjusted_indices);
+      else
+          dt.call(&dt.glDrawElements)(mode, count[ii], type, indices[ii]);
+
       if (basevertex[ii])
-        adjust(ctx, dt, 0);
+      {
+          if (ClientState::VertexArray::elementArrayBufferBinding)
+              adjust(ctx, dt, 0);
+          else
+              free(adjusted_indices);
+      }
     }
     return true;
   }

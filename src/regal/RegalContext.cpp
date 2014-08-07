@@ -3,11 +3,11 @@
 */
 
 /*
-  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2014 NVIDIA Corporation
+  Copyright (c) 2012-2014 Scott Nations
+  Copyright (c) 2012-2014 Nigel Stewart
   Copyright (c) 2011-2013 Cass Everitt
-  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012-2013 Nigel Stewart
   Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
@@ -41,6 +41,9 @@
 #include "pch.h" /* For MS precompiled header support */
 
 #include "RegalUtil.h"
+
+#include <boost/print/string_list.hpp>
+using namespace boost::print;
 
 REGAL_GLOBAL_BEGIN
 
@@ -496,6 +499,13 @@ RegalContext::Init()
 #if REGAL_HTTP
   http.Init( this );
 #endif
+
+  if (info && emuInfo)
+  {
+    extensionsSet.insert(info->extensionsSet.begin(), info->extensionsSet.end());
+    extensionsSet.insert(emuInfo->extensionsSet.begin(), emuInfo->extensionsSet.end());
+    extensions = ::boost::print::detail::join(extensionsSet,std::string(" "));
+  }
 
   initialized = true;
 }

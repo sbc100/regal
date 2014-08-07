@@ -27,6 +27,9 @@ REGAL_GLOBAL_BEGIN
 
 #include <set>
 #include <string>
+#include <algorithm>
+#include <sstream>
+#include <iterator>
 
 REGAL_GLOBAL_END
 

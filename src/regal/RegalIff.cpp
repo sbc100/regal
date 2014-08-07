@@ -2010,6 +2010,7 @@ Iff::Iff()
 , immCurrent(0)
 , immPrim(GL_POINTS)
 , immVbo(0)
+, immVboElement(0)
 , immVao(0)
 , immShadowVao(0)
 , shadowMatrixMode(GL_MODELVIEW)
@@ -2057,6 +2058,7 @@ void Iff::Cleanup( RegalContext &ctx )
   DispatchTableGL &tbl = ctx.dispatcher.emulation;
 
   tbl.call(&tbl.glDeleteBuffers)(1, &immVbo);
+  tbl.call(&tbl.glDeleteBuffers)(1, &immVboElement);
   tbl.call(&tbl.glDeleteVertexArrays)(1, &immVao);
 
   size_t n = array_size( ffprogs );
@@ -2370,11 +2372,14 @@ void Iff::InitImmediate(RegalContext &ctx)
   BindVertexArray( &ctx, immVao ); // to keep ffn current
   tbl.glGenBuffers( 1, & immVbo );
   tbl.glBindBuffer( GL_ARRAY_BUFFER, immVbo );
+  tbl.glGenBuffers( 1, & immVboElement );
+  tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, immVboElement );
 
 #if REGAL_SYS_EMSCRIPTEN
   // We need this to be an allocated buffer for WebGL, because a dangling VertexAttribPointer
   // doesn't work.  XXX -- this might be a Firefox bug, check?
   tbl.glBufferData( GL_ARRAY_BUFFER, sizeof( immArray ), NULL, GL_STATIC_DRAW );
+  tbl.glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( immArrayElement ), NULL, GL_STATIC_DRAW );
 #endif
 
   for (GLuint i = 0; i < max_vertex_attribs; i++)
@@ -2430,7 +2435,7 @@ void Iff::glDeleteBuffers( RegalContext * ctx, GLsizei n, const GLuint * buffers
   for (GLsizei i = 0; i < n; i++)
   {
     GLuint name = buffers[ i ];
-    if (name != immVbo)
+    if (name != immVbo && name != immVboElement)
       ctx->dispatcher.emulation.glDeleteBuffers( 1, &name );
   }
 }
@@ -2472,12 +2477,14 @@ void Iff::Begin( RegalContext * ctx, GLenum mode )
   }
   PreDraw( ctx );
   immCurrent = 0;
+  immCurrentElement = 0;
   immPrim = mode;
 }
 
 void Iff::End( RegalContext * ctx )
 {
   Flush( ctx );
+  RestoreVao( ctx );
 }
 
 void Iff::RestoreVao( RegalContext * ctx )
@@ -2501,6 +2508,35 @@ void Iff::Flush( RegalContext * ctx )
     if (( immPrim == GL_POLYGON ) && ( ctx->info->core == true || ctx->info->es2 ))
       derivedPrim = GL_TRIANGLE_FAN;
     tbl.glDrawArrays( derivedPrim, 0, immCurrent );
+  }
+
+  if (immCurrentElement > 0)
+  {
+    DispatchTableGL &tbl = ctx->dispatcher.emulation;
+
+    if(immShadowVao != immVao)
+    {
+      tbl.glBindVertexArray( immShadowVao );
+      BindVertexArray( ctx, immShadowVao );
+    }
+
+    GLuint immShadowVboElement = 0;
+    ctx->dispatcher.emulation.glGetIntegerv( GL_ELEMENT_ARRAY_BUFFER_BINDING, reinterpret_cast<GLint*>(&immShadowVboElement) );
+    if(immShadowVboElement != immVboElement) tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, immVboElement );
+    tbl.glBufferData( GL_ELEMENT_ARRAY_BUFFER, immCurrentElement * sizeof(GLint), immArrayElement, GL_DYNAMIC_DRAW );
+
+    GLenum derivedPrim = immPrim;
+    if (( immPrim == GL_POLYGON ) && ( ctx->info->core == true || ctx->info->es2 ))
+      derivedPrim = GL_TRIANGLE_FAN;
+    tbl.glDrawElements( derivedPrim, immCurrentElement, GL_UNSIGNED_INT, 0 );
+
+    if(immShadowVboElement != immVboElement) tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, immShadowVboElement );
+
+    if(immShadowVao != immVao)
+    {
+      tbl.glBindVertexArray( immVao );
+      BindVertexArray( ctx, immVao );
+    }
   }
 }
 
@@ -2550,6 +2586,55 @@ void Iff::Provoke( RegalContext * ctx )
       int offset = REGAL_IMMEDIATE_BUFFER_SIZE - restartVerts;
       memcpy( immArray, immArray + offset * max_vertex_attribs * sizeof(Float4), restartVerts * max_vertex_attribs * sizeof(Float4));
       immCurrent = restartVerts;
+    }
+  }
+}
+
+void Iff::ProvokeElement( RegalContext * ctx, GLint i )
+{
+  immArrayElement[immCurrentElement++] = i;
+
+  if ( immCurrentElement >= REGAL_IMMEDIATE_BUFFER_SIZE )
+  {
+    Flush( ctx );
+    int restartVerts = 0;
+    switch( immPrim )
+    {
+      case GL_QUADS:
+        restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 4;
+        break;
+      case GL_TRIANGLES:
+        restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 3;
+        break;
+      case GL_LINES:
+        restartVerts = REGAL_IMMEDIATE_BUFFER_SIZE % 2;
+        break;
+      case GL_QUAD_STRIP:
+        restartVerts = 2;
+        break;
+      case GL_TRIANGLE_STRIP:
+        restartVerts = 2;
+        break;
+      case GL_LINE_STRIP:
+        restartVerts = 1;
+        break;
+      default:
+        break;
+    }
+
+    // For triangle fan we need the first and last vertices
+    // for restarting.  All others concern the most recent n.
+
+    if (immPrim==GL_TRIANGLE_FAN)
+    {
+      immArrayElement[1] = immArrayElement[REGAL_IMMEDIATE_BUFFER_SIZE - 1];
+      immCurrentElement = 2;
+    }
+    else
+    {
+      int offset = REGAL_IMMEDIATE_BUFFER_SIZE - restartVerts;
+      memcpy( immArrayElement, immArrayElement + offset * sizeof(GLint), restartVerts * sizeof(GLint));
+      immCurrentElement = restartVerts;
     }
   }
 }
@@ -2775,7 +2860,8 @@ void Iff::ShadowMultiTexBinding( GLenum texunit, GLenum target, GLuint obj )
   Internal("Regal::Iff::ShadowMultiTexBinding",toString(texunit)," ",toString(target)," ",obj);
 
   // texture unit state is only set when the active texture index is <4 (for fixed function)
-  if ( texunit - GL_TEXTURE0 > ( REGAL_EMU_MAX_TEXTURE_UNITS - 1 ) )
+  if ( texunit - GL_TEXTURE0 >= REGAL_EMU_MAX_TEXTURE_COORDS
+    || texunit - GL_TEXTURE0 >= REGAL_EMU_MAX_TEXTURE_UNITS )
     return;
 
   activeTextureIndex = texunit - GL_TEXTURE0;

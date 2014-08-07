@@ -379,10 +379,14 @@ struct Dsa
     bool NotVao( GLuint vao ) const {
         return vao != ( dsa.vao != REGAL_DSA_INVALID ? dsa.vao : drv.vao );
     }
-    bool ShadowVao( GLuint vao ) {
+    void ShadowVao( RegalContext * ctx, GLuint vao ) {
         drv.vao = vao;
-        return dsa.vao != REGAL_DSA_INVALID;
+        if(dsa.vao == REGAL_DSA_INVALID) {
+            ctx->dispatcher.emulation.glBindVertexArray( vao );
+            ctx->dispatcher.emulation.glGetIntegerv(GL_ARRAY_BUFFER_BINDING, reinterpret_cast<GLint*>(&drv.buffer));
+        }
     }
+
     void DsaVao( RegalContext * ctx, GLuint vao ) {
         if( NotVao( vao ) ) {
             dsa.vao = vao;

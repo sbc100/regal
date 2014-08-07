@@ -227,7 +227,18 @@ const char *libraryLocation(const Library &library)
     if (!ret)
     {
 #if REGAL_SYS_ANDROID
-      return "/System/lib/libGLESv1_CM.so";
+      const char * const candidates[] = {
+        "/vendor/lib/egl/libGLESv1_CM.so.1",
+        "/system/lib/egl/libGLESv1_CM.so.1",
+        "/system/lib/libGLESv1_CM.so.1",
+        "/vendor/lib/libGLESv1_CM.so.1",
+        "/System/lib/libGLESv1_CM.so.1",
+        NULL
+      };
+      for (const char * const *i = candidates; *i; ++i) {
+        if (fileExists(*i))
+          return *i;
+      }
 #elif REGAL_SYS_EGL || REGAL_SYS_GLX
       // TODO - ES1 for Linux?
 #endif
@@ -263,7 +274,18 @@ const char *libraryLocation(const Library &library)
     {
 #if REGAL_SYS_EGL || REGAL_SYS_GLX
 #if defined(__arm__)
-      return "/usr/lib/libGLESv2.so";
+      const char * const candidates[] = {
+        "/vendor/lib/egl/libGLESv2.so",
+        "/system/lib/egl/libGLESv2.so",
+        "/system/lib/libGLESv2.so",
+        "/vendor/lib/libGLESv2.so",
+        "/usr/lib/libGLESv2.so",
+        NULL
+      };
+      for (const char * const *i = candidates; *i; ++i) {
+        if (fileExists(*i))
+          return *i;
+      }
 #elif defined(__x86_64__) || defined(__x86_64)
       return "/usr/lib/x86_64-linux-gnu/mesa-egl/libGLESv2.so.2";
 #else
@@ -287,7 +309,18 @@ const char *libraryLocation(const Library &library)
     {
 #if REGAL_SYS_EGL
 #if defined(__arm__)
-      return "/usr/lib/libEGL.so";
+      const char * const candidates[] = {
+        "/vendor/lib/egl/libEGL.so",
+        "/system/lib/egl/libEGL.so",
+        "/system/lib/libEGL.so",
+        "/vendor/lib/libEGL.so",
+        "/usr/lib/libEGL.so",
+        NULL
+      };
+      for (const char * const *i = candidates; *i; ++i) {
+        if (fileExists(*i))
+          return *i;
+      }
 #elif defined(__x86_64__) || defined(__x86_64)
       return "/usr/lib/x86_64-linux-gnu/mesa-egl/libEGL.so";
 #else

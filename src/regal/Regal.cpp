@@ -3,11 +3,11 @@
 */
 
 /*
-  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2014 NVIDIA Corporation
+  Copyright (c) 2012-2014 Scott Nations
+  Copyright (c) 2012-2014 Nigel Stewart
   Copyright (c) 2011-2013 Cass Everitt
-  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012-2013 Nigel Stewart
   Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
@@ -1429,6 +1429,16 @@ extern "C" {
     #endif
     App("glGetBooleanv","(", toString(pname), ")");
     if (!_context) return;
+    // Regal interceptions
+    switch (pname)
+    {
+      case GL_NUM_EXTENSIONS:
+        _context->numExtensions( params );
+        return;
+
+      default:
+        break;
+    }
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetBooleanv)(pname, params);
@@ -1457,6 +1467,16 @@ extern "C" {
     #endif
     App("glGetDoublev","(", toString(pname), ")");
     if (!_context) return;
+    // Regal interceptions
+    switch (pname)
+    {
+      case GL_NUM_EXTENSIONS:
+        _context->numExtensions( params );
+        return;
+
+      default:
+        break;
+    }
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetDoublev)(pname, params);
@@ -1485,6 +1505,16 @@ extern "C" {
     #endif
     App("glGetFloatv","(", toString(pname), ")");
     if (!_context) return;
+    // Regal interceptions
+    switch (pname)
+    {
+      case GL_NUM_EXTENSIONS:
+        _context->numExtensions( params );
+        return;
+
+      default:
+        break;
+    }
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetFloatv)(pname, params);
@@ -1499,6 +1529,16 @@ extern "C" {
     #endif
     App("glGetIntegerv","(", toString(pname), ")");
     if (!_context) return;
+    // Regal interceptions
+    switch (pname)
+    {
+      case GL_NUM_EXTENSIONS:
+        _context->numExtensions( params );
+        return;
+
+      default:
+        break;
+    }
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetIntegerv)(pname, params);
@@ -1674,7 +1714,7 @@ extern "C" {
       case GL_VENDOR:     return reinterpret_cast<const GLubyte *>(_context->emuInfo->vendor.c_str());
       case GL_RENDERER:   return reinterpret_cast<const GLubyte *>(_context->emuInfo->renderer.c_str());
       case GL_VERSION:    return reinterpret_cast<const GLubyte *>(_context->emuInfo->version.c_str());
-      case GL_EXTENSIONS: return reinterpret_cast<const GLubyte *>(_context->emuInfo->extensions.c_str());
+      case GL_EXTENSIONS: return reinterpret_cast<const GLubyte *>(_context->extensions.c_str());
       default:
         break;
     }
@@ -8310,6 +8350,18 @@ extern "C" {
     #endif
     App("glGetStringi","(", toString(name), ", ", index, ")");
     if (!_context) return NULL;
+    // Regal interceptions
+    switch (name)
+    {
+      case GL_EXTENSIONS:
+      {
+        std::set<std::string>::iterator it = _context->extensionsSet.begin();
+        std::advance(it, index);
+        return reinterpret_cast<const GLubyte *>(it->c_str());
+      };
+      default:
+        break;
+    }
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     return _next->call(&_next->glGetStringi)(name, index);
@@ -15846,6 +15898,16 @@ extern "C" {
     #endif
     App("glGetInteger64v","(", toString(pname), ")");
     if (!_context) return;
+    // Regal interceptions
+    switch (pname)
+    {
+      case GL_NUM_EXTENSIONS:
+        _context->numExtensions( params );
+        return;
+
+      default:
+        break;
+    }
     DispatchTableGL *_next = &_context->dispatcher.front();
     RegalAssert(_next);
     _next->call(&_next->glGetInteger64v)(pname, params);

@@ -76,6 +76,10 @@ iffFormulae = {
         'entries' : [ 'gl(SecondaryColor|Color|Normal)(2|3|4)(b|i|s|ub|ui|us)(v|)(EXT|)?' ],
         'impl' : [ '_context->iff->AttrN<${m2}>( _context, _context->iff->AttrIndex( RFF2A_${m1} ), ${arg0plus} );', ],
     },
+    'ImmArrayElement' : {
+        'entries' : [ 'glArrayElement(EXT|)' ],
+        'impl' : [ '_context->iff->ProvokeElement( _context, ${arg0} );', ],
+    },
     'ImmTexCoord' : {
         'entries' : [ 'glTexCoord(1|2|3|4)(d|f|i|s)(v|)' ],
         'impl' : [ '_context->iff->Attr<${m1}>( _context, _context->iff->AttrIndex( RFF2A_TexCoord ), ${arg0plus} );', ],

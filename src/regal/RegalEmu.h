@@ -54,6 +54,9 @@ namespace Emu
 // In ES2 mode, 16 texture units only?
 
 // No. of fixed function texture units. 2 minimum.
+// Note that this should never be greater than 4 as described here:
+//
+//   http://www.nvidia.com/object/General_FAQ.html#t6
 
 #ifndef REGAL_EMU_MAX_TEXTURE_UNITS
 #define REGAL_EMU_MAX_TEXTURE_UNITS 4

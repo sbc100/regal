@@ -212,7 +212,12 @@ return;'''
   'glDrawRangeElementsBaseVertex' : {
     'entries' : [ 'glDrawRangeElementsBaseVertex' ],
     'impl' : [
-       'if (REGAL_FORCE_ES2_PROFILE || !_context->info->gl_arb_draw_elements_base_vertex)',
+       '// WAR: Our Tegra driver GL 4 core profile supports DrawRangeElementsBaseVertex but does not',
+       '// advertise ARB_draw_elements_base_vertex in the extension list so here we check whether the',
+       '// driver has glDrawRangeElementsBaseVertex instead of looking for the extension flag.',
+       '//   (leaving original line here, just commented out)',
+       '//   if (REGAL_FORCE_ES2_PROFILE || !_context->info->gl_arb_draw_elements_base_vertex)',
+       'if (REGAL_FORCE_ES2_PROFILE || !_context->dispatcher.driver.glDrawRangeElementsBaseVertex)',
        '{',
        '  if (basevertex==0)',
        '  {',
@@ -222,7 +227,7 @@ return;'''
        '  }',
        '  else',
        '  {',
-       '    Warning("Regal does not support ${name} (GL_ARB_draw_elements_base_vertex extension not available) for basevertex!=0 for ES 2.0 - skipping.");',
+       '    Warning("Regal does not support ${name} (GL_ARB_draw_elements_base_vertex extension not available) for basevertex!=0 - skipping.");',
        '    return;',
        '  }',
        '}'
@@ -284,7 +289,7 @@ return;'''
   # ARB assembly programs not supported or emulated for ES 2.0 (yet)
 
   'GL_ARB_vertex_program' : {
-    'entries' : [ 'glGenProgramsARB', 'glBindProgramARB', 'glProgramStringARB', 'glGetProgramivARB' ],
+    'entries' : [ 'glGenProgramsARB', 'glBindProgramARB', 'glGetProgramivARB' ],
     'impl' : [
       'if (_context->isES2())',
       '{',
@@ -292,6 +297,20 @@ return;'''
       '  return;',
       '}'
      ]
+  },
+
+  'glProgramStringARB' : {
+  'entries' : [ 'glProgramStringARB' ],
+  'impl' : [
+      '// nothing to do if len <= 0 so just return',
+      'if (${arg2} <= 0)',
+      '  return;',
+      'if (_context->isES2())',
+      '{',
+      '  Warning("Regal does not support ${name} (GL_ARB_vertex_program) for ES 2.0 context - skipping.");',
+      '  return;',
+      '}'
+      ]
   },
 
   # Remap GL_ARB_shader_objects to GL 2.0 API

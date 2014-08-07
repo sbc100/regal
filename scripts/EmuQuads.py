@@ -30,9 +30,7 @@ quadsFormulae = {
     'impl'    : [
 '''
 if ( ! _context->quads->glDrawArrays( _context, ${arg0plus} ) ) {
-  DispatchTableGL *_next = _context->dispatcher.emulation.next();
-  RegalAssert(_next);
-  return _next->call(&_next->glDrawArrays)( ${arg0plus} );
+  _context->dispatcher.emulation.glDrawArrays( ${arg0plus} );
 }
 '''
     ],

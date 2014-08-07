@@ -815,11 +815,14 @@ struct Iff
   bool    immActive;
   GLuint  immProvoking;
   GLuint  immCurrent;
+  GLuint  immCurrentElement;
   GLenum  immPrim;
   Float4  immVab[ REGAL_EMU_MAX_VERTEX_ATTRIBS ];
   GLubyte immArray[ REGAL_IMMEDIATE_BUFFER_SIZE * REGAL_EMU_MAX_VERTEX_ATTRIBS * sizeof(Float4) ];
+  GLint   immArrayElement[ REGAL_IMMEDIATE_BUFFER_SIZE ];
 
   GLuint  immVbo;
+  GLuint  immVboElement;
   GLuint  immVao;
   GLuint  immShadowVao;
 
@@ -834,6 +837,7 @@ struct Iff
   void RestoreVao( RegalContext * ctx );
   void Flush( RegalContext * ctx );
   void Provoke( RegalContext * ctx );
+  void ProvokeElement( RegalContext * ctx, GLint i );
 
   template <int N, bool Norm, typename T> void Attribute( RegalContext * ctx, GLuint idx, const T * v )
   {

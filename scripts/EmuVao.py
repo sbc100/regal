@@ -2,10 +2,6 @@
 
 vaoFormulae = {
     # TODO - GL_ARB_base_instance ?
-    'Validate' : {
-        'entries' : [ 'gl(Multi|)Draw(Arrays|Element|Elements)(Instanced|Indirect|BaseVertex|InstancedBaseVertex|Array|)(ARB|EXT|AMD|ATI|APPLE|)' ],
-        'prefix' : [  '// _context->vao->Validate(*_context );' ],
-    },
     'BufferBinding' : {
         'entries' : [ 'glBindBuffer(ARB|)' ],
         'prefix' : [ '_context->vao->ShadowBufferBinding( ${arg0}, ${arg1} );' ],
@@ -20,7 +16,7 @@ vaoFormulae = {
     },
    'DeleteVertexArrays' : {
         'entries' : [ 'glDeleteVertexArrays(ARB|)' ],
-        'impl' : [ '_context->vao->DeleteVertexArrays( ${arg0}, ${arg1} );' ],
+        'impl' : [ '_context->vao->DeleteVertexArrays( *_context, ${arg0}, ${arg1} );' ],
     },
    'IsVertexArray' : {
         'entries' : [ 'glIsVertexArray(ARB|)' ],
@@ -37,6 +33,10 @@ vaoFormulae = {
    'AttribPointer' : {
         'entries' : [ 'glVertexAttribPointer(ARB|)' ],
         'impl' : [ 'return _context->vao->AttribPointer(*_context, ${arg0}, ${arg1plus} );' ],
+    },
+    'AttribIPointer' : {
+        'entries' : [ 'glVertexAttribIPointer(ARB|)' ],
+        'impl' : [ 'return _context->vao->AttribPointer(*_context, ${arg0}, ${arg1}, ${arg2}, GL_FALSE, ${arg3plus} );' ],
     },
     'GetAttrib' : {
         'entries' : [ 'glGetVertexAttrib(d|f|i|Pointer)v(ARB|)' ],

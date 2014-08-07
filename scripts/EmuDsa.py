@@ -365,11 +365,7 @@ dsaFormulae = {
     },
     'BindVertexArray' : {
         'entries' : [ 'glBindVertexArray' ],
-        'impl' : [
-            'if (!_context->dsa->ShadowVao( ${arg0} )) {',
-            '    _dispatch.call(&_dispatch.glBindVertexArray)( ${arg0} );',
-            '}',
-        ],
+        'impl' : [ '_context->dsa->ShadowVao( _context, ${arg0} ); '],
     },
     # TODO - GL_ARB_base_instance ?
     'RestoreEverything' : {

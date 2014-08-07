@@ -150,6 +150,19 @@ struct RegalContext
   scoped_ptr<DebugInfo>   dbg;
   scoped_ptr<ContextInfo> info;
   scoped_ptr<EmuInfo>     emuInfo;
+  std::set<std::string>   extensionsSet;
+  std::string             extensions;
+
+
+  inline void numExtensions(GLboolean *params)
+  {
+    *params = !!extensionsSet.size();
+  }
+
+  template <typename T> inline void numExtensions(T *params)
+  {
+    *params = static_cast<T>(extensionsSet.size());
+  }
 
 #if REGAL_STATISTICS
   scoped_ptr<Statistics>  statistics;
@@ -234,6 +247,9 @@ ${LICENSE}
 #include "pch.h" /* For MS precompiled header support */
 
 #include "RegalUtil.h"
+
+#include <boost/print/string_list.hpp>
+using namespace boost::print;
 
 REGAL_GLOBAL_BEGIN
 
@@ -369,6 +385,13 @@ ${EMU_MEMBER_INIT}
 #if REGAL_HTTP
   http.Init( this );
 #endif
+
+  if (info && emuInfo)
+  {
+    extensionsSet.insert(info->extensionsSet.begin(), info->extensionsSet.end());
+    extensionsSet.insert(emuInfo->extensionsSet.begin(), emuInfo->extensionsSet.end());
+    extensions = ::boost::print::detail::join(extensionsSet,std::string(" "));
+  }
 
   initialized = true;
 }

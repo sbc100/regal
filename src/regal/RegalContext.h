@@ -3,11 +3,11 @@
 */
 
 /*
-  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2014 NVIDIA Corporation
+  Copyright (c) 2012-2014 Scott Nations
+  Copyright (c) 2012-2014 Nigel Stewart
   Copyright (c) 2011-2013 Cass Everitt
-  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012-2013 Nigel Stewart
   Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
@@ -116,6 +116,18 @@ struct RegalContext
   scoped_ptr<DebugInfo>   dbg;
   scoped_ptr<ContextInfo> info;
   scoped_ptr<EmuInfo>     emuInfo;
+  std::set<std::string>   extensionsSet;
+  std::string             extensions;
+
+  inline void numExtensions(GLboolean *params)
+  {
+    *params = !!extensionsSet.size();
+  }
+
+  template <typename T> inline void numExtensions(T *params)
+  {
+    *params = static_cast<T>(extensionsSet.size());
+  }
 
 #if REGAL_STATISTICS
   scoped_ptr<Statistics>  statistics;

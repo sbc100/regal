@@ -3,11 +3,11 @@
 */
 
 /*
-  Copyright (c) 2011-2013 NVIDIA Corporation
+  Copyright (c) 2011-2014 NVIDIA Corporation
+  Copyright (c) 2012-2014 Scott Nations
+  Copyright (c) 2012-2014 Nigel Stewart
   Copyright (c) 2011-2013 Cass Everitt
-  Copyright (c) 2012-2013 Scott Nations
   Copyright (c) 2012 Mathias Schott
-  Copyright (c) 2012-2013 Nigel Stewart
   Copyright (c) 2012-2013 Google Inc.
   All rights reserved.
 
@@ -19312,6 +19312,68 @@ static void REGAL_CALL emu_glViewport(GLint x, GLint y, GLsizei width, GLsizei h
 
 // GL_VERSION_1_1
 
+static void REGAL_CALL emu_glArrayElement(GLint index)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->iff->ProvokeElement( _context, index );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glArrayElement)(index);
+      break;
+    }
+
+  }
+
+}
+
 static void REGAL_CALL emu_glBindTexture(GLenum target, GLuint texture)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -19848,15 +19910,6 @@ static void REGAL_CALL emu_glDrawArrays(GLenum mode, GLint first, GLsizei count)
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -19883,9 +19936,7 @@ static void REGAL_CALL emu_glDrawArrays(GLenum mode, GLint first, GLsizei count)
         _context->emuLevel = 5;
 
         if ( ! _context->quads->glDrawArrays( _context, mode, first, count ) ) {
-          DispatchTableGL *_next = _context->dispatcher.emulation.next();
-          RegalAssert(_next);
-          return _next->call(&_next->glDrawArrays)( mode, first, count );
+          _context->dispatcher.emulation.glDrawArrays( mode, first, count );
         }
 
         return;
@@ -19949,15 +20000,6 @@ static void REGAL_CALL emu_glDrawElements(GLenum mode, GLsizei count, GLenum typ
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -24066,15 +24108,6 @@ static void REGAL_CALL emu_glMultiDrawArrays(GLenum mode, const GLint *first, co
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -24130,15 +24163,6 @@ static void REGAL_CALL emu_glMultiDrawElements(GLenum mode, const GLsizei *count
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -32995,14 +33019,56 @@ static void REGAL_CALL emu_glVertexAttribIPointer(GLuint index, GLint size, GLen
         _context->bv->glVertexAttribIPointer( index, size, type, stride, pointer );
       }
       #endif
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+      #if REGAL_EMU_VAO
+      if (_context->vao) break;
+      #endif
     case 1 :
     default:
       break;
   }
 
-  DispatchTableGL *_next = _dispatch.next();
-  RegalAssert(_next);
-  _next->call(& _next->glVertexAttribIPointer)(index, size, type, stride, pointer);
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+    case 6 :
+    case 5 :
+    case 4 :
+    case 3 :
+      #if REGAL_EMU_VAO
+      if (_context->vao)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 2;
+        return _context->vao->AttribPointer(*_context, index, size, type, GL_FALSE, stride, pointer );
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glVertexAttribIPointer)(index, size, type, stride, pointer);
+      break;
+    }
+
+  }
+
 }
 
 // GL_VERSION_3_1
@@ -33052,15 +33118,6 @@ static void REGAL_CALL emu_glDrawArraysInstanced(GLenum mode, GLint start, GLsiz
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -33118,15 +33175,6 @@ static void REGAL_CALL emu_glDrawElementsInstanced(GLenum mode, GLsizei count, G
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -33489,15 +33537,6 @@ static void REGAL_CALL emu_glMultiDrawArraysIndirectAMD(GLenum mode, const GLvoi
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -33553,15 +33592,6 @@ static void REGAL_CALL emu_glMultiDrawElementsIndirectAMD(GLenum mode, GLenum ty
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -33725,15 +33755,6 @@ static void REGAL_CALL emu_glDrawElementArrayAPPLE(GLenum mode, GLint first, GLs
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -33837,15 +33858,6 @@ static void REGAL_CALL emu_glMultiDrawElementArrayAPPLE(GLenum mode, const GLint
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -34391,15 +34403,6 @@ static void REGAL_CALL emu_glDrawElementsBaseVertex(GLenum mode, GLsizei count, 
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -34488,15 +34491,6 @@ static void REGAL_CALL emu_glDrawElementsInstancedBaseVertex(GLenum mode, GLsize
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -34626,7 +34620,12 @@ static void REGAL_CALL emu_glDrawRangeElementsBaseVertex(GLenum mode, GLuint sta
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
-        if (REGAL_FORCE_ES2_PROFILE || !_context->info->gl_arb_draw_elements_base_vertex)
+        // WAR: Our Tegra driver GL 4 core profile supports DrawRangeElementsBaseVertex but does not
+        // advertise ARB_draw_elements_base_vertex in the extension list so here we check whether the
+        // driver has glDrawRangeElementsBaseVertex instead of looking for the extension flag.
+        //   (leaving original line here, just commented out)
+        //   if (REGAL_FORCE_ES2_PROFILE || !_context->info->gl_arb_draw_elements_base_vertex)
+        if (REGAL_FORCE_ES2_PROFILE || !_context->dispatcher.driver.glDrawRangeElementsBaseVertex)
         {
           if (basevertex==0)
           {
@@ -34636,7 +34635,7 @@ static void REGAL_CALL emu_glDrawRangeElementsBaseVertex(GLenum mode, GLuint sta
           }
           else
           {
-            Warning("Regal does not support glDrawRangeElementsBaseVertex (GL_ARB_draw_elements_base_vertex extension not available) for basevertex!=0 for ES 2.0 - skipping.");
+            Warning("Regal does not support glDrawRangeElementsBaseVertex (GL_ARB_draw_elements_base_vertex extension not available) for basevertex!=0 - skipping.");
             return;
           }
         }
@@ -34702,15 +34701,6 @@ static void REGAL_CALL emu_glMultiDrawElementsBaseVertex(GLenum mode, const GLsi
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -34802,15 +34792,6 @@ static void REGAL_CALL emu_glDrawArraysIndirect(GLenum mode, const GLvoid *indir
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -34866,15 +34847,6 @@ static void REGAL_CALL emu_glDrawElementsIndirect(GLenum mode, GLenum type, cons
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -34936,15 +34908,6 @@ static void REGAL_CALL emu_glDrawArraysInstancedARB(GLenum mode, GLint start, GL
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -35000,15 +34963,6 @@ static void REGAL_CALL emu_glDrawElementsInstancedARB(GLenum mode, GLsizei count
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -38049,15 +38003,6 @@ static void REGAL_CALL emu_glMultiDrawArraysIndirect(GLenum mode, const GLvoid *
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -38113,15 +38058,6 @@ static void REGAL_CALL emu_glMultiDrawElementsIndirect(GLenum mode, GLenum type,
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -44605,9 +44541,7 @@ static void REGAL_CALL emu_glBindVertexArray(GLuint array)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
-        if (!_context->dsa->ShadowVao( array )) {
-            _dispatch.call(&_dispatch.glBindVertexArray)( array );
-        }
+        _context->dsa->ShadowVao( _context, array );
         return;
       }
       #endif
@@ -44727,7 +44661,7 @@ static void REGAL_CALL emu_glDeleteVertexArrays(GLsizei n, const GLuint *arrays)
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 2;
-        _context->vao->DeleteVertexArrays( n, arrays );
+        _context->vao->DeleteVertexArrays( *_context, n, arrays );
         return;
       }
       #endif
@@ -47015,6 +46949,9 @@ static void REGAL_CALL emu_glProgramStringARB(GLenum target, GLenum format, GLsi
       {
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 0;
+        // nothing to do if len <= 0 so just return
+        if (len <= 0)
+          return;
         if (_context->isES2())
         {
           Warning("Regal does not support glProgramStringARB (GL_ARB_vertex_program) for ES 2.0 context - skipping.");
@@ -48988,15 +48925,6 @@ static void REGAL_CALL emu_glDrawElementArrayATI(GLenum mode, GLsizei count)
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -66278,15 +66206,6 @@ static void REGAL_CALL emu_glDrawArraysInstancedEXT(GLenum mode, GLint start, GL
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -66342,15 +66261,6 @@ static void REGAL_CALL emu_glDrawElementsInstancedEXT(GLenum mode, GLsizei count
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -68314,15 +68224,6 @@ static void REGAL_CALL emu_glMultiDrawArraysEXT(GLenum mode, const GLint *first,
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -68378,15 +68279,6 @@ static void REGAL_CALL emu_glMultiDrawElementsEXT(GLenum mode, const GLsizei *co
         Push<int> pushLevel(_context->emuLevel);
         _context->emuLevel = 3;
         _context->dsa->Restore( _context );
-      }
-      #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
       }
       #endif
     case 1 :
@@ -70308,6 +70200,68 @@ static void REGAL_CALL emu_glTexStorage3DEXT(GLenum target, GLsizei levels, GLen
 
 // GL_EXT_vertex_array
 
+static void REGAL_CALL emu_glArrayElementEXT(GLint i)
+{
+  RegalContext *_context = REGAL_GET_CONTEXT();
+  RegalAssert(_context);
+  DispatchTableGL &_dispatch = _context->dispatcher.emulation;
+
+  // prefix
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff) break;
+      #endif
+    case 1 :
+    default:
+      break;
+  }
+
+  // impl
+  switch( _context->emuLevel )
+  {
+    case 16 :
+    case 15 :
+    case 14 :
+    case 13 :
+    case 12 :
+    case 11 :
+    case 10 :
+    case 9 :
+    case 8 :
+    case 7 :
+      #if REGAL_EMU_IFF
+      if (_context->iff)
+      {
+        Push<int> pushLevel(_context->emuLevel);
+        _context->emuLevel = 6;
+        _context->iff->ProvokeElement( _context, i );
+        return;
+      }
+      #endif
+    case 1 :
+    default:
+    {
+      DispatchTableGL *_next = _dispatch.next();
+      RegalAssert(_next);
+      _next->call(&_next->glArrayElementEXT)(i);
+      break;
+    }
+
+  }
+
+}
+
 static void REGAL_CALL emu_glColorPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer)
 {
   RegalContext *_context = REGAL_GET_CONTEXT();
@@ -70440,15 +70394,6 @@ static void REGAL_CALL emu_glDrawArraysEXT(GLenum mode, GLint first, GLsizei cou
         _context->dsa->Restore( _context );
       }
       #endif
-    case 3 :
-      #if REGAL_EMU_VAO
-      if (_context->vao)
-      {
-        Push<int> pushLevel(_context->emuLevel);
-        _context->emuLevel = 2;
-        // _context->vao->Validate(*_context );
-      }
-      #endif
     case 1 :
     default:
       break;
@@ -70475,9 +70420,7 @@ static void REGAL_CALL emu_glDrawArraysEXT(GLenum mode, GLint first, GLsizei cou
         _context->emuLevel = 5;
 
         if ( ! _context->quads->glDrawArrays( _context, mode, first, count ) ) {
-          DispatchTableGL *_next = _context->dispatcher.emulation.next();
-          RegalAssert(_next);
-          return _next->call(&_next->glDrawArrays)( mode, first, count );
+          _context->dispatcher.emulation.glDrawArrays( mode, first, count );
         }
 
         return;
@@ -72841,6 +72784,7 @@ void InitDispatchTableEmu(DispatchTableGL &tbl)
 
 // GL_VERSION_1_1
 
+   tbl.glArrayElement = emu_glArrayElement;
    tbl.glBindTexture = emu_glBindTexture;
    tbl.glColorPointer = emu_glColorPointer;
    tbl.glCopyTexImage2D = emu_glCopyTexImage2D;
@@ -73837,6 +73781,7 @@ void InitDispatchTableEmu(DispatchTableGL &tbl)
 
 // GL_EXT_vertex_array
 
+   tbl.glArrayElementEXT = emu_glArrayElementEXT;
    tbl.glColorPointerEXT = emu_glColorPointerEXT;
    tbl.glDrawArraysEXT = emu_glDrawArraysEXT;
    tbl.glEdgeFlagPointerEXT = emu_glEdgeFlagPointerEXT;
