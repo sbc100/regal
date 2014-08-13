@@ -35,6 +35,8 @@ all:: regal.lib
 
 clean:: regal.clean
 
+framework:: regal.framework
+
 REGAL.LDFLAGS        := 
 
 ifeq ($(filter nacl%,$(SYSTEM)),)
@@ -210,13 +212,17 @@ REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
 endif
 
 ifneq ($(filter darwin%,$(SYSTEM)),)
+OPENGL_NAME      := OpenGL
+OPENGL_FRAMEWORK := $(OPENGL_NAME).framework
+OPENGL           := $(OPENGL_FRAMEWORK)/Versions/A/$(OPENGL_NAME)
 REGAL.SONAME     := lib$(NAME).$(SO_MAJOR).dylib
 REGAL.DEVLNK     := lib$(NAME).dylib
 REGAL.SHARED     := lib$(NAME).$(SO_VERSION).dylib
 REGAL.FRAMEWORK  := $(NAME)
 REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -current_version $(SO_VERSION) -compatibility_version $(SO_MAJOR)
 #LDFLAGS.SO     += -install_name $(REGAL_DEST)/lib/$(REGAL.SHARED)
-REGAL.LDFLAGS    += -Wl,-reexport-lGLU -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries
+REGAL.LDFLAGS    += -Wl,-reexport-lGLU -L/System/Library/Frameworks/$(OPENGL_FRAMEWORK)/Versions/A/Libraries
+INFO_PLIST       := build/mac/Info.plist
 endif
 
 ifdef REGAL.STATIC
@@ -235,6 +241,23 @@ ifdef REGAL.STATIC
 endif
 ifdef REGAL.SHARED
 	$(RM) -r bin/$(SYSTEM)/$(REGAL.SHARED)
+endif
+
+ifneq ($(filter darwin%,$(SYSTEM)),)
+regal.framework:
+	$(RM) -r $(OPENGL_FRAMEWORK)
+	$(MKDIR) $(OPENGL_FRAMEWORK)/Versions/A/Resources
+	$(MKDIR) $(OPENGL_FRAMEWORK)/Versions/A/Libraries	
+	$(LN) A $(OPENGL_FRAMEWORK)/Versions/Current
+	$(LN) Versions/Current/Resources $(OPENGL_FRAMEWORK)/Resources
+	$(LN) Versions/Current/Headers $(OPENGL_FRAMEWORK)/Headers
+	$(LN) Versions/Current/Libraries $(OPENGL_FRAMEWORK)/Libraries
+	$(LN) Versions/Current/$(OPENGL_NAME) $(OPENGL_FRAMEWORK)/$(OPENGL_NAME)
+	$(CP) $(INFO_PLIST) $(OPENGL_FRAMEWORK)/Resources
+ifdef REGAL.SHARED
+	$(CP) lib/$(SYSTEM)/$(REGAL.SHARED) $(OPENGL_FRAMEWORK)/Versions/A/Libraries/$(OPENGL_NAME)
+endif
+	$(LN) Libraries/$(OPENGL_NAME) $(OPENGL_FRAMEWORK)/Versions/A/$(OPENGL_NAME)
 endif
 
 ifdef APITRACE.STATIC

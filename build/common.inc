@@ -34,6 +34,8 @@ STRIP   ?= strip
 RM      ?= rm -f
 LN      ?= ln -sf
 CXX     ?= $(CC)
+CP      ?= cp -f
+MKDIR   ?= mkdir -p
 
 # Release mode is the default
 
@@ -57,6 +59,9 @@ LOG_LD     ?= @echo " [LD]     $@";
 LOG_AR     ?= @echo " [AR]     $@";
 LOG_RANLIB ?= @echo " [RANLIB] $@";
 LOG_STRIP  ?= @echo " [STRIP]  $@";
+LOG_LN     ?= @echo " [LN]     $@";
+LOG_CP     ?= @echo " [CP]     $@";
+LOG_MKDIR  ?= @echo " [MKDIR]  $@";
 endif
 
 INCLUDE ?= -Iinclude
