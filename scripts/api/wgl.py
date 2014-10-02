@@ -1793,6 +1793,18 @@ wglCopyImageSubDataNV.trace = True
 wglCopyImageSubDataNV.play = True
 wgl.add(wglCopyImageSubDataNV)
 
+# WGL_NV_delay_before_swap
+
+wglDelayBeforeSwapNV = Function('wglDelayBeforeSwapNV')
+wglDelayBeforeSwapNV.ret = Return('BOOL')
+wglDelayBeforeSwapNV.add( Input( 'hDC','HDC' ))
+wglDelayBeforeSwapNV.add( Input( 'seconds','GLfloat' ))
+wglDelayBeforeSwapNV.version = ''
+wglDelayBeforeSwapNV.category = 'WGL_NV_delay_before_swap'
+wglDelayBeforeSwapNV.trace = True
+wglDelayBeforeSwapNV.play = True
+wgl.add(wglDelayBeforeSwapNV)
+
 # WGL_NV_gpu_affinity
 
 wglCreateAffinityDCNV = Function('wglCreateAffinityDCNV')
@@ -2384,25 +2396,6 @@ wglUseFontOutlinesW.trace = True
 wglUseFontOutlinesW.play = True
 wgl.add(wglUseFontOutlinesW)
 
-########### OpenGL 4.5
-
-# WGL_ARB_robustness_application_isolation
-
-WGL_CONTEXT_RESET_ISOLATION_BIT_ARB = Enumerant('WGL_CONTEXT_RESET_ISOLATION_BIT_ARB', 0x0008, 'WGL_ARB_robustness_application_isolation')
-
-defines.add(WGL_CONTEXT_RESET_ISOLATION_BIT_ARB)
-
-# WGL_NV_delay_before_swap
-
-wglDelayBeforeSwapNV = Function('wglDelayBeforeSwapNV')
-wglDelayBeforeSwapNV.ret = Return('BOOL')
-wglDelayBeforeSwapNV.add( Input( 'hDC','HDC' ))
-wglDelayBeforeSwapNV.add( Input( 'seconds','GLfloat' ))
-wglDelayBeforeSwapNV.category = 'WGL_NV_delay_before_swap'
-wglDelayBeforeSwapNV.trace = True
-wglDelayBeforeSwapNV.play = True
-wgl.add(wglDelayBeforeSwapNV)
-
 WGL_3DFX_multisample = Extension('WGL_3DFX_multisample')
 WGL_3DFX_multisample.url = 'http://www.opengl.org/registry/specs/3DFX/3dfx_multisample.txt'
 WGL_3DFX_multisample.enumerants = ['WGL_SAMPLES_3DFX','WGL_SAMPLE_BUFFERS_3DFX']
@@ -2684,3 +2677,4 @@ WGL_OML_sync_control = Extension('WGL_OML_sync_control')
 WGL_OML_sync_control.url = 'http://www.opengl.org/registry/specs/OML/wgl_sync_control.txt'
 WGL_OML_sync_control.functions = ['wglGetMscRateOML','wglGetSyncValuesOML','wglSwapBuffersMscOML','wglSwapLayerBuffersMscOML','wglWaitForMscOML','wglWaitForSbcOML']
 wgl.add(WGL_OML_sync_control)
+

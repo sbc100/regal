@@ -275,6 +275,12 @@ defines.add(GLX_TEXTURE_RGBA_ATI)
 defines.add(GLX_TEXTURE_RGB_ATI)
 defines.add(GLX_TEXTURE_TARGET_ATI)
 
+# GLX_EXT_buffer_age
+
+GLX_BACK_BUFFER_AGE_EXT = Enumerant('GLX_BACK_BUFFER_AGE_EXT', 0x20f4, 'GLX_EXT_buffer_age')
+
+defines.add(GLX_BACK_BUFFER_AGE_EXT)
+
 # GLX_EXT_create_context_es2_profile
 
 GLX_CONTEXT_ES2_PROFILE_BIT_EXT = Enumerant('GLX_CONTEXT_ES2_PROFILE_BIT_EXT', 0x0004, 'GLX_EXT_create_context_es2_profile')
@@ -308,6 +314,16 @@ GLX_VISUAL_ID_EXT = Enumerant('GLX_VISUAL_ID_EXT', 0x800b, 'GLX_EXT_import_conte
 
 defines.add(GLX_SHARE_CONTEXT_EXT)
 defines.add(GLX_VISUAL_ID_EXT)
+
+# GLX_EXT_stereo_tree
+
+GLX_STEREO_NOTIFY_EXT = Enumerant('GLX_STEREO_NOTIFY_EXT', 0x0000, 'GLX_EXT_stereo_tree')
+GLX_STEREO_NOTIFY_MASK_EXT = Enumerant('GLX_STEREO_NOTIFY_MASK_EXT', 0x0001, 'GLX_EXT_stereo_tree')
+GLX_STEREO_TREE_EXT = Enumerant('GLX_STEREO_TREE_EXT', 0x20f5, 'GLX_EXT_stereo_tree')
+
+defines.add(GLX_STEREO_NOTIFY_EXT)
+defines.add(GLX_STEREO_NOTIFY_MASK_EXT)
+defines.add(GLX_STEREO_TREE_EXT)
 
 # GLX_EXT_swap_control
 
@@ -446,6 +462,34 @@ defines.add(GLX_BUFFER_SWAP_COMPLETE_INTEL_MASK)
 defines.add(GLX_COPY_COMPLETE_INTEL)
 defines.add(GLX_EXCHANGE_COMPLETE_INTEL)
 defines.add(GLX_FLIP_COMPLETE_INTEL)
+
+# GLX_MESA_query_renderer
+
+GLX_RENDERER_ACCELERATED_MESA = Enumerant('GLX_RENDERER_ACCELERATED_MESA', 0x8186, 'GLX_MESA_query_renderer')
+GLX_RENDERER_DEVICE_ID_MESA = Enumerant('GLX_RENDERER_DEVICE_ID_MESA', 0x8184, 'GLX_MESA_query_renderer')
+GLX_RENDERER_ID_MESA = Enumerant('GLX_RENDERER_ID_MESA', 0x818e, 'GLX_MESA_query_renderer')
+GLX_RENDERER_OPENGL_COMPATIBILITY_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_COMPATIBILITY_PROFILE_VERSION_MESA', 0x818b, 'GLX_MESA_query_renderer')
+GLX_RENDERER_OPENGL_CORE_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_CORE_PROFILE_VERSION_MESA', 0x818a, 'GLX_MESA_query_renderer')
+GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA', 0x818d, 'GLX_MESA_query_renderer')
+GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA', 0x818c, 'GLX_MESA_query_renderer')
+GLX_RENDERER_PREFERRED_PROFILE_MESA = Enumerant('GLX_RENDERER_PREFERRED_PROFILE_MESA', 0x8189, 'GLX_MESA_query_renderer')
+GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA = Enumerant('GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA', 0x8188, 'GLX_MESA_query_renderer')
+GLX_RENDERER_VENDOR_ID_MESA = Enumerant('GLX_RENDERER_VENDOR_ID_MESA', 0x8183, 'GLX_MESA_query_renderer')
+GLX_RENDERER_VERSION_MESA = Enumerant('GLX_RENDERER_VERSION_MESA', 0x8185, 'GLX_MESA_query_renderer')
+GLX_RENDERER_VIDEO_MEMORY_MESA = Enumerant('GLX_RENDERER_VIDEO_MEMORY_MESA', 0x8187, 'GLX_MESA_query_renderer')
+
+defines.add(GLX_RENDERER_ACCELERATED_MESA)
+defines.add(GLX_RENDERER_DEVICE_ID_MESA)
+defines.add(GLX_RENDERER_ID_MESA)
+defines.add(GLX_RENDERER_OPENGL_COMPATIBILITY_PROFILE_VERSION_MESA)
+defines.add(GLX_RENDERER_OPENGL_CORE_PROFILE_VERSION_MESA)
+defines.add(GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA)
+defines.add(GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA)
+defines.add(GLX_RENDERER_PREFERRED_PROFILE_MESA)
+defines.add(GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA)
+defines.add(GLX_RENDERER_VENDOR_ID_MESA)
+defines.add(GLX_RENDERER_VERSION_MESA)
+defines.add(GLX_RENDERER_VIDEO_MEMORY_MESA)
 
 # GLX_MESA_set_3dfx_mode
 
@@ -1160,6 +1204,52 @@ glXCreateGLXPixmapMESA.trace = True
 glXCreateGLXPixmapMESA.play = True
 glx.add(glXCreateGLXPixmapMESA)
 
+# GLX_MESA_query_renderer
+
+glXQueryCurrentRendererIntegerMESA = Function('glXQueryCurrentRendererIntegerMESA')
+glXQueryCurrentRendererIntegerMESA.ret = Return('Bool')
+glXQueryCurrentRendererIntegerMESA.add( Input( 'attribute','int' ))
+glXQueryCurrentRendererIntegerMESA.add( Input( 'value','unsigned int *' ))
+glXQueryCurrentRendererIntegerMESA.version = ''
+glXQueryCurrentRendererIntegerMESA.category = 'GLX_MESA_query_renderer'
+glXQueryCurrentRendererIntegerMESA.trace = True
+glXQueryCurrentRendererIntegerMESA.play = True
+glx.add(glXQueryCurrentRendererIntegerMESA)
+
+glXQueryCurrentRendererStringMESA = Function('glXQueryCurrentRendererStringMESA')
+glXQueryCurrentRendererStringMESA.ret = Return('const char *')
+glXQueryCurrentRendererStringMESA.add( Input( 'attribute','int' ))
+glXQueryCurrentRendererStringMESA.version = ''
+glXQueryCurrentRendererStringMESA.category = 'GLX_MESA_query_renderer'
+glXQueryCurrentRendererStringMESA.trace = True
+glXQueryCurrentRendererStringMESA.play = True
+glx.add(glXQueryCurrentRendererStringMESA)
+
+glXQueryRendererIntegerMESA = Function('glXQueryRendererIntegerMESA')
+glXQueryRendererIntegerMESA.ret = Return('Bool')
+glXQueryRendererIntegerMESA.add( Input( 'dpy','Display *' ))
+glXQueryRendererIntegerMESA.add( Input( 'screen','int' ))
+glXQueryRendererIntegerMESA.add( Input( 'renderer','int' ))
+glXQueryRendererIntegerMESA.add( Input( 'attribute','int' ))
+glXQueryRendererIntegerMESA.add( Input( 'value','unsigned int *' ))
+glXQueryRendererIntegerMESA.version = ''
+glXQueryRendererIntegerMESA.category = 'GLX_MESA_query_renderer'
+glXQueryRendererIntegerMESA.trace = True
+glXQueryRendererIntegerMESA.play = True
+glx.add(glXQueryRendererIntegerMESA)
+
+glXQueryRendererStringMESA = Function('glXQueryRendererStringMESA')
+glXQueryRendererStringMESA.ret = Return('const char *')
+glXQueryRendererStringMESA.add( Input( 'dpy','Display *' ))
+glXQueryRendererStringMESA.add( Input( 'screen','int' ))
+glXQueryRendererStringMESA.add( Input( 'renderer','int' ))
+glXQueryRendererStringMESA.add( Input( 'attribute','int' ))
+glXQueryRendererStringMESA.version = ''
+glXQueryRendererStringMESA.category = 'GLX_MESA_query_renderer'
+glXQueryRendererStringMESA.trace = True
+glXQueryRendererStringMESA.play = True
+glx.add(glXQueryRendererStringMESA)
+
 # GLX_MESA_release_buffers
 
 glXReleaseBuffersMESA = Function('glXReleaseBuffersMESA')
@@ -1202,6 +1292,40 @@ glXSwapIntervalMESA.trace = True
 glXSwapIntervalMESA.play = True
 glx.add(glXSwapIntervalMESA)
 
+# GLX_NV_copy_buffer
+
+glXCopyBufferSubDataNV = Function('glXCopyBufferSubDataNV')
+glXCopyBufferSubDataNV.ret = Return('void')
+glXCopyBufferSubDataNV.add( Input( 'dpy','Display *' ))
+glXCopyBufferSubDataNV.add( Input( 'readCtx','GLXContext' ))
+glXCopyBufferSubDataNV.add( Input( 'writeCtx','GLXContext' ))
+glXCopyBufferSubDataNV.add( Input( 'readTarget','GLenum' ))
+glXCopyBufferSubDataNV.add( Input( 'writeTarget','GLenum' ))
+glXCopyBufferSubDataNV.add( Input( 'readOffset','GLintptr' ))
+glXCopyBufferSubDataNV.add( Input( 'writeOffset','GLintptr' ))
+glXCopyBufferSubDataNV.add( Input( 'size','GLsizeiptr' ))
+glXCopyBufferSubDataNV.version = ''
+glXCopyBufferSubDataNV.category = 'GLX_NV_copy_buffer'
+glXCopyBufferSubDataNV.trace = True
+glXCopyBufferSubDataNV.play = True
+glx.add(glXCopyBufferSubDataNV)
+
+glXNamedCopyBufferSubDataNV = Function('glXNamedCopyBufferSubDataNV')
+glXNamedCopyBufferSubDataNV.ret = Return('void')
+glXNamedCopyBufferSubDataNV.add( Input( 'dpy','Display *' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'readCtx','GLXContext' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'writeCtx','GLXContext' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'readBuffer','GLuint' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'writeBuffer','GLuint' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'readOffset','GLintptr' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'writeOffset','GLintptr' ))
+glXNamedCopyBufferSubDataNV.add( Input( 'size','GLsizeiptr' ))
+glXNamedCopyBufferSubDataNV.version = ''
+glXNamedCopyBufferSubDataNV.category = 'GLX_NV_copy_buffer'
+glXNamedCopyBufferSubDataNV.trace = True
+glXNamedCopyBufferSubDataNV.play = True
+glx.add(glXNamedCopyBufferSubDataNV)
+
 # GLX_NV_copy_image
 
 glXCopyImageSubDataNV = Function('glXCopyImageSubDataNV')
@@ -1229,6 +1353,19 @@ glXCopyImageSubDataNV.category = 'GLX_NV_copy_image'
 glXCopyImageSubDataNV.trace = True
 glXCopyImageSubDataNV.play = True
 glx.add(glXCopyImageSubDataNV)
+
+# GLX_NV_delay_before_swap
+
+glXDelayBeforeSwapNV = Function('glXDelayBeforeSwapNV')
+glXDelayBeforeSwapNV.ret = Return('Bool')
+glXDelayBeforeSwapNV.add( Input( 'dpy','Display *' ))
+glXDelayBeforeSwapNV.add( Input( 'drawable','GLXDrawable' ))
+glXDelayBeforeSwapNV.add( Input( 'seconds','GLfloat' ))
+glXDelayBeforeSwapNV.version = ''
+glXDelayBeforeSwapNV.category = 'GLX_NV_delay_before_swap'
+glXDelayBeforeSwapNV.trace = True
+glXDelayBeforeSwapNV.play = True
+glx.add(glXDelayBeforeSwapNV)
 
 # GLX_NV_present_video
 
@@ -2415,140 +2552,3 @@ glXGetProcAddress.trace = True
 glXGetProcAddress.play = True
 glx.add(glXGetProcAddress)
 
-############################## OpenGL 4.5
-
-# GLX_ARB_robustness_application_isolation
-
-GLX_CONTEXT_RESET_ISOLATION_BIT_ARB = Enumerant('GLX_CONTEXT_RESET_ISOLATION_BIT_ARB', 0x0008, 'GLX_ARB_robustness_application_isolation')
-
-defines.add(GLX_CONTEXT_RESET_ISOLATION_BIT_ARB)
-
-# GLX_EXT_buffer_age
-
-GLX_BACK_BUFFER_AGE_EXT = Enumerant('GLX_BACK_BUFFER_AGE_EXT', 0x20f4, 'GLX_EXT_buffer_age')
-
-defines.add(GLX_BACK_BUFFER_AGE_EXT)
-
-# GLX_EXT_stereo_tree
-
-GLX_STEREO_NOTIFY_EXT = Enumerant('GLX_STEREO_NOTIFY_EXT', 0x0000, 'GLX_EXT_stereo_tree')
-GLX_STEREO_NOTIFY_MASK_EXT = Enumerant('GLX_STEREO_NOTIFY_MASK_EXT', 0x0001, 'GLX_EXT_stereo_tree')
-GLX_STEREO_TREE_EXT = Enumerant('GLX_STEREO_TREE_EXT', 0x20f5, 'GLX_EXT_stereo_tree')
-
-defines.add(GLX_STEREO_NOTIFY_EXT)
-defines.add(GLX_STEREO_NOTIFY_MASK_EXT)
-defines.add(GLX_STEREO_TREE_EXT)
-
-# GLX_MESA_query_renderer
-
-GLX_RENDERER_ACCELERATED_MESA = Enumerant('GLX_RENDERER_ACCELERATED_MESA', 0x8186, 'GLX_MESA_query_renderer')
-GLX_RENDERER_DEVICE_ID_MESA = Enumerant('GLX_RENDERER_DEVICE_ID_MESA', 0x8184, 'GLX_MESA_query_renderer')
-GLX_RENDERER_ID_MESA = Enumerant('GLX_RENDERER_ID_MESA', 0x818e, 'GLX_MESA_query_renderer')
-GLX_RENDERER_OPENGL_COMPATIBILITY_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_COMPATIBILITY_PROFILE_VERSION_MESA', 0x818b, 'GLX_MESA_query_renderer')
-GLX_RENDERER_OPENGL_CORE_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_CORE_PROFILE_VERSION_MESA', 0x818a, 'GLX_MESA_query_renderer')
-GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA', 0x818d, 'GLX_MESA_query_renderer')
-GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA = Enumerant('GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA', 0x818c, 'GLX_MESA_query_renderer')
-GLX_RENDERER_PREFERRED_PROFILE_MESA = Enumerant('GLX_RENDERER_PREFERRED_PROFILE_MESA', 0x8189, 'GLX_MESA_query_renderer')
-GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA = Enumerant('GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA', 0x8188, 'GLX_MESA_query_renderer')
-GLX_RENDERER_VENDOR_ID_MESA = Enumerant('GLX_RENDERER_VENDOR_ID_MESA', 0x8183, 'GLX_MESA_query_renderer')
-GLX_RENDERER_VERSION_MESA = Enumerant('GLX_RENDERER_VERSION_MESA', 0x8185, 'GLX_MESA_query_renderer')
-GLX_RENDERER_VIDEO_MEMORY_MESA = Enumerant('GLX_RENDERER_VIDEO_MEMORY_MESA', 0x8187, 'GLX_MESA_query_renderer')
-
-defines.add(GLX_RENDERER_ACCELERATED_MESA)
-defines.add(GLX_RENDERER_DEVICE_ID_MESA)
-defines.add(GLX_RENDERER_ID_MESA)
-defines.add(GLX_RENDERER_OPENGL_COMPATIBILITY_PROFILE_VERSION_MESA)
-defines.add(GLX_RENDERER_OPENGL_CORE_PROFILE_VERSION_MESA)
-defines.add(GLX_RENDERER_OPENGL_ES2_PROFILE_VERSION_MESA)
-defines.add(GLX_RENDERER_OPENGL_ES_PROFILE_VERSION_MESA)
-defines.add(GLX_RENDERER_PREFERRED_PROFILE_MESA)
-defines.add(GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA)
-defines.add(GLX_RENDERER_VENDOR_ID_MESA)
-defines.add(GLX_RENDERER_VERSION_MESA)
-defines.add(GLX_RENDERER_VIDEO_MEMORY_MESA)
-
-# GLX_MESA_query_renderer
-
-glXQueryCurrentRendererIntegerMESA = Function('glXQueryCurrentRendererIntegerMESA')
-glXQueryCurrentRendererIntegerMESA.ret = Return('Bool')
-glXQueryCurrentRendererIntegerMESA.add( Input( 'attribute','int' ))
-glXQueryCurrentRendererIntegerMESA.add( Input( 'value','unsigned int *' ))
-glXQueryCurrentRendererIntegerMESA.category = 'GLX_MESA_query_renderer'
-glXQueryCurrentRendererIntegerMESA.trace = True
-glXQueryCurrentRendererIntegerMESA.play = True
-glx.add(glXQueryCurrentRendererIntegerMESA)
-
-glXQueryRendererIntegerMESA = Function('glXQueryRendererIntegerMESA')
-glXQueryRendererIntegerMESA.ret = Return('Bool')
-glXQueryRendererIntegerMESA.add( Input( 'dpy','Display *' ))
-glXQueryRendererIntegerMESA.add( Input( 'screen','int' ))
-glXQueryRendererIntegerMESA.add( Input( 'renderer','int' ))
-glXQueryRendererIntegerMESA.add( Input( 'attribute','int' ))
-glXQueryRendererIntegerMESA.add( Input( 'value','unsigned int *' ))
-glXQueryRendererIntegerMESA.category = 'GLX_MESA_query_renderer'
-glXQueryRendererIntegerMESA.trace = True
-glXQueryRendererIntegerMESA.play = True
-glx.add(glXQueryRendererIntegerMESA)
-
-glXQueryCurrentRendererStringMESA = Function('glXQueryCurrentRendererStringMESA')
-glXQueryCurrentRendererStringMESA.ret = Return('const char *')
-glXQueryCurrentRendererStringMESA.add( Input( 'attribute','int' ))
-glXQueryCurrentRendererStringMESA.category = 'GLX_MESA_query_renderer'
-glXQueryCurrentRendererStringMESA.trace = True
-glXQueryCurrentRendererStringMESA.play = True
-glx.add(glXQueryCurrentRendererStringMESA)
-
-glXQueryRendererStringMESA = Function('glXQueryRendererStringMESA')
-glXQueryRendererStringMESA.ret = Return('const char *')
-glXQueryRendererStringMESA.add( Input( 'dpy','Display *' ))
-glXQueryRendererStringMESA.add( Input( 'screen','int' ))
-glXQueryRendererStringMESA.add( Input( 'renderer','int' ))
-glXQueryRendererStringMESA.add( Input( 'attribute','int' ))
-glXQueryRendererStringMESA.category = 'GLX_MESA_query_renderer'
-glXQueryRendererStringMESA.trace = True
-glXQueryRendererStringMESA.play = True
-glx.add(glXQueryRendererStringMESA)
-
-# GLX_NV_copy_buffer
-
-glXCopyBufferSubDataNV = Function('glXCopyBufferSubDataNV')
-glXCopyBufferSubDataNV.ret = Return('void')
-glXCopyBufferSubDataNV.add( Input( 'dpy','Display *' ))
-glXCopyBufferSubDataNV.add( Input( 'readCtx','GLXContext' ))
-glXCopyBufferSubDataNV.add( Input( 'writeCtx','GLXContext' ))
-glXCopyBufferSubDataNV.add( Input( 'readTarget','GLenum' ))
-glXCopyBufferSubDataNV.add( Input( 'writeTarget','GLenum' ))
-glXCopyBufferSubDataNV.add( Input( 'readOffset','GLintptr' ))
-glXCopyBufferSubDataNV.add( Input( 'writeOffset','GLintptr' ))
-glXCopyBufferSubDataNV.add( Input( 'size','GLsizeiptr' ))
-glXCopyBufferSubDataNV.category = 'GLX_NV_copy_buffer'
-glXCopyBufferSubDataNV.trace = True
-glXCopyBufferSubDataNV.play = True
-glx.add(glXCopyBufferSubDataNV)
-
-glXNamedCopyBufferSubDataNV = Function('glXNamedCopyBufferSubDataNV')
-glXNamedCopyBufferSubDataNV.ret = Return('void')
-glXNamedCopyBufferSubDataNV.add( Input( 'dpy','Display *' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'readCtx','GLXContext' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'writeCtx','GLXContext' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'readBuffer','GLuint' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'writeBuffer','GLuint' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'readOffset','GLintptr' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'writeOffset','GLintptr' ))
-glXNamedCopyBufferSubDataNV.add( Input( 'size','GLsizeiptr' ))
-glXNamedCopyBufferSubDataNV.category = 'GLX_NV_copy_buffer'
-glXNamedCopyBufferSubDataNV.trace = True
-glXNamedCopyBufferSubDataNV.play = True
-glx.add(glXNamedCopyBufferSubDataNV)
-
-# GLX_NV_delay_before_swap
-
-glXDelayBeforeSwapNV = Function('glXDelayBeforeSwapNV')
-glXDelayBeforeSwapNV.ret = Return('Bool')
-glXDelayBeforeSwapNV.add( Input( 'dpy','Display *' ))
-glXDelayBeforeSwapNV.add( Input( 'drawable','GLXDrawable' ))
-glXDelayBeforeSwapNV.add( Input( 'seconds','GLfloat' ))
-glXDelayBeforeSwapNV.category = 'GLX_NV_delay_before_swap'
-glXDelayBeforeSwapNV.trace = True
-glXDelayBeforeSwapNV.play = True
-glx.add(glXDelayBeforeSwapNV)

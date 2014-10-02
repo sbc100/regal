@@ -9,7 +9,7 @@
 #   glew2py.py -help
 #
 # Example usage:
-#   private/glew2py.py -a gl -o gl.py ~/dev/glew/auto/extensions/gles/*
+#   scripts/glew2py.py -a gl -o gl.py ~/dev/glew/auto/extensions/gles/*
 
 import sys
 sys.path.insert(0,'scripts/api')

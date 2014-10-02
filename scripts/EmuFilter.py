@@ -677,7 +677,7 @@ return;'''
     'impl' : [
        'if (REGAL_FORCE_ES2_PROFILE || !_context->info->gl_ext_draw_buffers2)',
        '{',
-       '  if (!buf)'
+       '  if (!index)'
        '  {',
        '    DispatchTableGL *_next = _context->dispatcher.emulation.next();',
        '    RegalAssert(_next);',

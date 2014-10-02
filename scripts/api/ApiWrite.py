@@ -209,9 +209,9 @@ def writeExtensions(file,name,extensions):
     if getattr(i,'category') != None and len(i.category):
       print >>file, '%s.category = \'%s\''%(i.name,i.category)
     if len(i.enumerants):
-      print >>file, '%s.enumerants = [\'%s\']'%(i.name,'\',\''.join(i.enumerants))
+      print >>file, '%s.enumerants = [\'%s\']'%(i.name,'\',\''.join(sorted(i.enumerants)))
     if len(i.functions):
-      print >>file, '%s.functions = [\'%s\']'%(i.name,'\',\''.join(i.functions))
+      print >>file, '%s.functions = [\'%s\']'%(i.name,'\',\''.join(sorted(i.functions)))
     if len(i.emulatedBy):
       print >>file, '%s.emulatedBy = \'%s\''%(i.name,i.emulatedBy)
     if len(i.emulatedIf):

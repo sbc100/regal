@@ -228,11 +228,19 @@ const char *libraryLocation(const Library &library)
     {
 #if REGAL_SYS_ANDROID
       const char * const candidates[] = {
-        "/vendor/lib/egl/libGLESv1_CM.so.1",
-        "/system/lib/egl/libGLESv1_CM.so.1",
-        "/system/lib/libGLESv1_CM.so.1",
-        "/vendor/lib/libGLESv1_CM.so.1",
-        "/System/lib/libGLESv1_CM.so.1",
+#if defined(__aarch64__)
+        "/vendor/lib64/egl/libGLESv1_CM.so",
+        "/system/lib64/egl/libGLESv1_CM.so",
+        "/system/lib64/libGLESv1_CM.so",
+        "/vendor/lib64/libGLESv1_CM.so",
+        "/System/lib64/libGLESv1_CM.so",
+#else
+        "/vendor/lib/egl/libGLESv1_CM.so",
+        "/system/lib/egl/libGLESv1_CM.so",
+        "/system/lib/libGLESv1_CM.so",
+        "/vendor/lib/libGLESv1_CM.so",
+        "/System/lib/libGLESv1_CM.so",
+#endif
         NULL
       };
       for (const char * const *i = candidates; *i; ++i) {
@@ -273,13 +281,21 @@ const char *libraryLocation(const Library &library)
     if (!ret)
     {
 #if REGAL_SYS_EGL || REGAL_SYS_GLX
-#if defined(__arm__)
+#if defined(__arm__) || defined(__aarch64__)
       const char * const candidates[] = {
+#if defined(__aarch64__)
+        "/vendor/lib64/egl/libGLESv2.so",
+        "/system/lib64/egl/libGLESv2.so",
+        "/system/lib64/libGLESv2.so",
+        "/vendor/lib64l/ibGLESv2.so",
+        "/usr/lib64/libGLESv2.so",
+#else
         "/vendor/lib/egl/libGLESv2.so",
         "/system/lib/egl/libGLESv2.so",
         "/system/lib/libGLESv2.so",
         "/vendor/lib/libGLESv2.so",
         "/usr/lib/libGLESv2.so",
+#endif
         NULL
       };
       for (const char * const *i = candidates; *i; ++i) {
@@ -308,13 +324,21 @@ const char *libraryLocation(const Library &library)
     if (!ret)
     {
 #if REGAL_SYS_EGL
-#if defined(__arm__)
+#if defined(__arm__) || defined(__aarch64__)
       const char * const candidates[] = {
+#if defined(__aarch64__)
+        "/vendor/lib64/egl/libEGL.so",
+        "/system/lib64/egl/libEGL.so",
+        "/system/lib64/libEGL.so",
+        "/vendor/lib64/libEGL.so",
+        "/usr/lib64/libEGL.so",
+#else
         "/vendor/lib/egl/libEGL.so",
         "/system/lib/egl/libEGL.so",
         "/system/lib/libEGL.so",
         "/vendor/lib/libEGL.so",
         "/usr/lib/libEGL.so",
+#endif
         NULL
       };
       for (const char * const *i = candidates; *i; ++i) {

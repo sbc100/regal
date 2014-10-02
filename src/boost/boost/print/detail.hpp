@@ -34,12 +34,6 @@
 #include <stdio.h>
 #endif
 
-// for __ARM_ARCH__
-
-#if defined(__ANDROID__) && !defined(__i386__)
-#include <machine/cpu-features.h>
-#endif
-
 //
 // boost::print::detail namespace for internal implementation purposes
 //

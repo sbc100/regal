@@ -89,7 +89,7 @@ class Typedef:
 
 class Return:
 
-  def __init__(self, type = '', default = '', cast = None, binary = False, size = None, maxSize = None, intercept = None, trace = True, play = True, filter = None, regalLog = None):
+  def __init__(self, type = 'void', default = '', cast = None, binary = False, size = None, maxSize = None, intercept = None, trace = True, play = True, filter = None, regalLog = None):
 
     self.type      = type           # Type string, e.g. int
     self.default   = default        # Default value, e.g. 0

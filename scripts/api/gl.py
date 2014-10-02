@@ -3300,6 +3300,18 @@ GL_CLEAR_TEXTURE = Enumerant('GL_CLEAR_TEXTURE', 0x9365, 'GL_ARB_clear_texture')
 
 defines.add(GL_CLEAR_TEXTURE)
 
+# GL_ARB_clip_control
+
+GL_CLIP_DEPTH_MODE = Enumerant('GL_CLIP_DEPTH_MODE', 0x935d, 'GL_ARB_clip_control')
+GL_CLIP_ORIGIN = Enumerant('GL_CLIP_ORIGIN', 0x935c, 'GL_ARB_clip_control')
+GL_NEGATIVE_ONE_TO_ONE = Enumerant('GL_NEGATIVE_ONE_TO_ONE', 0x935e, 'GL_ARB_clip_control')
+GL_ZERO_TO_ONE = Enumerant('GL_ZERO_TO_ONE', 0x935f, 'GL_ARB_clip_control')
+
+defines.add(GL_CLIP_DEPTH_MODE)
+defines.add(GL_CLIP_ORIGIN)
+defines.add(GL_NEGATIVE_ONE_TO_ONE)
+defines.add(GL_ZERO_TO_ONE)
+
 # GL_ARB_color_buffer_float
 
 GL_CLAMP_FRAGMENT_COLOR_ARB = Enumerant('GL_CLAMP_FRAGMENT_COLOR_ARB', 0x891b, 'GL_ARB_color_buffer_float')
@@ -3386,6 +3398,18 @@ defines.add(GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB)
 defines.add(GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB)
 defines.add(GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB)
 
+# GL_ARB_conditional_render_inverted
+
+GL_QUERY_BY_REGION_NO_WAIT_INVERTED = Enumerant('GL_QUERY_BY_REGION_NO_WAIT_INVERTED', 0x8e1a, 'GL_ARB_conditional_render_inverted')
+GL_QUERY_BY_REGION_WAIT_INVERTED = Enumerant('GL_QUERY_BY_REGION_WAIT_INVERTED', 0x8e19, 'GL_ARB_conditional_render_inverted')
+GL_QUERY_NO_WAIT_INVERTED = Enumerant('GL_QUERY_NO_WAIT_INVERTED', 0x8e18, 'GL_ARB_conditional_render_inverted')
+GL_QUERY_WAIT_INVERTED = Enumerant('GL_QUERY_WAIT_INVERTED', 0x8e17, 'GL_ARB_conditional_render_inverted')
+
+defines.add(GL_QUERY_BY_REGION_NO_WAIT_INVERTED)
+defines.add(GL_QUERY_BY_REGION_WAIT_INVERTED)
+defines.add(GL_QUERY_NO_WAIT_INVERTED)
+defines.add(GL_QUERY_WAIT_INVERTED)
+
 # GL_ARB_copy_buffer
 
 GL_COPY_READ_BUFFER = Enumerant('GL_COPY_READ_BUFFER', 0x8f36, 'GL_ARB_copy_buffer')
@@ -3393,6 +3417,14 @@ GL_COPY_WRITE_BUFFER = Enumerant('GL_COPY_WRITE_BUFFER', 0x8f37, 'GL_ARB_copy_bu
 
 defines.add(GL_COPY_READ_BUFFER)
 defines.add(GL_COPY_WRITE_BUFFER)
+
+# GL_ARB_cull_distance
+
+GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES = Enumerant('GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES', 0x82fa, 'GL_ARB_cull_distance')
+GL_MAX_CULL_DISTANCES = Enumerant('GL_MAX_CULL_DISTANCES', 0x82f9, 'GL_ARB_cull_distance')
+
+defines.add(GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES)
+defines.add(GL_MAX_CULL_DISTANCES)
 
 # GL_ARB_debug_output
 
@@ -3472,6 +3504,16 @@ defines.add(GL_DEPTH_COMPONENT24_ARB)
 defines.add(GL_DEPTH_COMPONENT32_ARB)
 defines.add(GL_DEPTH_TEXTURE_MODE_ARB)
 defines.add(GL_TEXTURE_DEPTH_SIZE_ARB)
+
+# GL_ARB_direct_state_access
+
+GL_QUERY_TARGET = Enumerant('GL_QUERY_TARGET', 0x82ea, 'GL_ARB_direct_state_access')
+GL_TEXTURE_BINDING = Enumerant('GL_TEXTURE_BINDING', 0x82eb, 'GL_ARB_direct_state_access')
+GL_TEXTURE_TARGET = Enumerant('GL_TEXTURE_TARGET', 0x1006, 'GL_ARB_direct_state_access')
+
+defines.add(GL_QUERY_TARGET)
+defines.add(GL_TEXTURE_BINDING)
+defines.add(GL_TEXTURE_TARGET)
 
 # GL_ARB_draw_buffers
 
@@ -4446,6 +4488,30 @@ GL_ANY_SAMPLES_PASSED = Enumerant('GL_ANY_SAMPLES_PASSED', 0x8c2f, 'GL_ARB_occlu
 
 defines.add(GL_ANY_SAMPLES_PASSED)
 
+# GL_ARB_pipeline_statistics_query
+
+GL_CLIPPING_INPUT_PRIMITIVES_ARB = Enumerant('GL_CLIPPING_INPUT_PRIMITIVES_ARB', 0x82f6, 'GL_ARB_pipeline_statistics_query')
+GL_CLIPPING_OUTPUT_PRIMITIVES_ARB = Enumerant('GL_CLIPPING_OUTPUT_PRIMITIVES_ARB', 0x82f7, 'GL_ARB_pipeline_statistics_query')
+GL_COMPUTE_SHADER_INVOCATIONS_ARB = Enumerant('GL_COMPUTE_SHADER_INVOCATIONS_ARB', 0x82f5, 'GL_ARB_pipeline_statistics_query')
+GL_FRAGMENT_SHADER_INVOCATIONS_ARB = Enumerant('GL_FRAGMENT_SHADER_INVOCATIONS_ARB', 0x82f4, 'GL_ARB_pipeline_statistics_query')
+GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB = Enumerant('GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB', 0x82f3, 'GL_ARB_pipeline_statistics_query')
+GL_PRIMITIVES_SUBMITTED_ARB = Enumerant('GL_PRIMITIVES_SUBMITTED_ARB', 0x82ef, 'GL_ARB_pipeline_statistics_query')
+GL_TESS_CONTROL_SHADER_PATCHES_ARB = Enumerant('GL_TESS_CONTROL_SHADER_PATCHES_ARB', 0x82f1, 'GL_ARB_pipeline_statistics_query')
+GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB = Enumerant('GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB', 0x82f2, 'GL_ARB_pipeline_statistics_query')
+GL_VERTEX_SHADER_INVOCATIONS_ARB = Enumerant('GL_VERTEX_SHADER_INVOCATIONS_ARB', 0x82f0, 'GL_ARB_pipeline_statistics_query')
+GL_VERTICES_SUBMITTED_ARB = Enumerant('GL_VERTICES_SUBMITTED_ARB', 0x82ee, 'GL_ARB_pipeline_statistics_query')
+
+defines.add(GL_CLIPPING_INPUT_PRIMITIVES_ARB)
+defines.add(GL_CLIPPING_OUTPUT_PRIMITIVES_ARB)
+defines.add(GL_COMPUTE_SHADER_INVOCATIONS_ARB)
+defines.add(GL_FRAGMENT_SHADER_INVOCATIONS_ARB)
+defines.add(GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB)
+defines.add(GL_PRIMITIVES_SUBMITTED_ARB)
+defines.add(GL_TESS_CONTROL_SHADER_PATCHES_ARB)
+defines.add(GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB)
+defines.add(GL_VERTEX_SHADER_INVOCATIONS_ARB)
+defines.add(GL_VERTICES_SUBMITTED_ARB)
+
 # GL_ARB_pixel_buffer_object
 
 GL_PIXEL_PACK_BUFFER_ARB = Enumerant('GL_PIXEL_PACK_BUFFER_ARB', 0x88eb, 'GL_ARB_pixel_buffer_object')
@@ -5017,6 +5083,14 @@ GL_TEXTURE_COMPARE_FAIL_VALUE_ARB = Enumerant('GL_TEXTURE_COMPARE_FAIL_VALUE_ARB
 
 defines.add(GL_TEXTURE_COMPARE_FAIL_VALUE_ARB)
 
+# GL_ARB_sparse_buffer
+
+GL_SPARSE_BUFFER_PAGE_SIZE_ARB = Enumerant('GL_SPARSE_BUFFER_PAGE_SIZE_ARB', 0x82f8, 'GL_ARB_sparse_buffer')
+GL_SPARSE_STORAGE_BIT_ARB = Enumerant('GL_SPARSE_STORAGE_BIT_ARB', 0x0400, 'GL_ARB_sparse_buffer')
+
+defines.add(GL_SPARSE_BUFFER_PAGE_SIZE_ARB)
+defines.add(GL_SPARSE_STORAGE_BIT_ARB)
+
 # GL_ARB_sparse_texture
 
 GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB = Enumerant('GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB', 0x9199, 'GL_ARB_sparse_texture')
@@ -5575,6 +5649,14 @@ defines.add(GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED)
 GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = Enumerant('GL_MAX_TRANSFORM_FEEDBACK_BUFFERS', 0x8e70, 'GL_ARB_transform_feedback3')
 
 defines.add(GL_MAX_TRANSFORM_FEEDBACK_BUFFERS)
+
+# GL_ARB_transform_feedback_overflow_query
+
+GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB = Enumerant('GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB', 0x82ec, 'GL_ARB_transform_feedback_overflow_query')
+GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB = Enumerant('GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB', 0x82ed, 'GL_ARB_transform_feedback_overflow_query')
+
+defines.add(GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB)
+defines.add(GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB)
 
 # GL_ARB_transpose_matrix
 
@@ -6355,15 +6437,15 @@ defines.add(GL_STATIC_ATI)
 # GL_ATI_vertex_streams
 
 GL_MAX_VERTEX_STREAMS_ATI = Enumerant('GL_MAX_VERTEX_STREAMS_ATI', 0x876b, 'GL_ATI_vertex_streams')
-GL_VERTEX_SOURCE_ATI = Enumerant('GL_VERTEX_SOURCE_ATI', 0x876c, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM0_ATI = Enumerant('GL_VERTEX_STREAM0_ATI', 0x876d, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM1_ATI = Enumerant('GL_VERTEX_STREAM1_ATI', 0x876e, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM2_ATI = Enumerant('GL_VERTEX_STREAM2_ATI', 0x876f, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM3_ATI = Enumerant('GL_VERTEX_STREAM3_ATI', 0x8770, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM4_ATI = Enumerant('GL_VERTEX_STREAM4_ATI', 0x8771, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM5_ATI = Enumerant('GL_VERTEX_STREAM5_ATI', 0x8772, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM6_ATI = Enumerant('GL_VERTEX_STREAM6_ATI', 0x8773, 'GL_ATI_vertex_streams')
-GL_VERTEX_STREAM7_ATI = Enumerant('GL_VERTEX_STREAM7_ATI', 0x8774, 'GL_ATI_vertex_streams')
+GL_VERTEX_SOURCE_ATI = Enumerant('GL_VERTEX_SOURCE_ATI', 0x8774, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM0_ATI = Enumerant('GL_VERTEX_STREAM0_ATI', 0x876c, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM1_ATI = Enumerant('GL_VERTEX_STREAM1_ATI', 0x876d, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM2_ATI = Enumerant('GL_VERTEX_STREAM2_ATI', 0x876e, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM3_ATI = Enumerant('GL_VERTEX_STREAM3_ATI', 0x876f, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM4_ATI = Enumerant('GL_VERTEX_STREAM4_ATI', 0x8770, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM5_ATI = Enumerant('GL_VERTEX_STREAM5_ATI', 0x8771, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM6_ATI = Enumerant('GL_VERTEX_STREAM6_ATI', 0x8772, 'GL_ATI_vertex_streams')
+GL_VERTEX_STREAM7_ATI = Enumerant('GL_VERTEX_STREAM7_ATI', 0x8773, 'GL_ATI_vertex_streams')
 
 defines.add(GL_MAX_VERTEX_STREAMS_ATI)
 defines.add(GL_VERTEX_SOURCE_ATI)
@@ -7533,6 +7615,7 @@ GL_TEXTURE_GREEN_SIZE_EXT = Enumerant('GL_TEXTURE_GREEN_SIZE_EXT', 0x805d, 'GL_E
 GL_TEXTURE_INTENSITY_SIZE_EXT = Enumerant('GL_TEXTURE_INTENSITY_SIZE_EXT', 0x8061, 'GL_EXT_texture')
 GL_TEXTURE_LUMINANCE_SIZE_EXT = Enumerant('GL_TEXTURE_LUMINANCE_SIZE_EXT', 0x8060, 'GL_EXT_texture')
 GL_TEXTURE_RED_SIZE_EXT = Enumerant('GL_TEXTURE_RED_SIZE_EXT', 0x805c, 'GL_EXT_texture')
+GL_TEXTURE_TOO_LARGE_EXT = Enumerant('GL_TEXTURE_TOO_LARGE_EXT', 0x8065, 'GL_EXT_texture')
 
 defines.add(GL_ALPHA12_EXT)
 defines.add(GL_ALPHA16_EXT)
@@ -7576,6 +7659,7 @@ defines.add(GL_TEXTURE_GREEN_SIZE_EXT)
 defines.add(GL_TEXTURE_INTENSITY_SIZE_EXT)
 defines.add(GL_TEXTURE_LUMINANCE_SIZE_EXT)
 defines.add(GL_TEXTURE_RED_SIZE_EXT)
+defines.add(GL_TEXTURE_TOO_LARGE_EXT)
 
 # GL_EXT_texture3D
 
@@ -8256,9 +8340,9 @@ GL_LOCAL_CONSTANT_VALUE_EXT = Enumerant('GL_LOCAL_CONSTANT_VALUE_EXT', 0x87ec, '
 GL_LOCAL_EXT = Enumerant('GL_LOCAL_EXT', 0x87c4, 'GL_EXT_vertex_shader')
 GL_MATRIX_EXT = Enumerant('GL_MATRIX_EXT', 0x87c0, 'GL_EXT_vertex_shader')
 GL_MAX_OPTIMIZED_VERTEX_SHADER_INSTRUCTIONS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_INSTRUCTIONS_EXT', 0x87ca, 'GL_EXT_vertex_shader')
-GL_MAX_OPTIMIZED_VERTEX_SHADER_INVARIANTS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_INVARIANTS_EXT', 0x87cc, 'GL_EXT_vertex_shader')
+GL_MAX_OPTIMIZED_VERTEX_SHADER_INVARIANTS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_INVARIANTS_EXT', 0x87cd, 'GL_EXT_vertex_shader')
 GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCALS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCALS_EXT', 0x87ce, 'GL_EXT_vertex_shader')
-GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT', 0x87cd, 'GL_EXT_vertex_shader')
+GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT', 0x87cc, 'GL_EXT_vertex_shader')
 GL_MAX_OPTIMIZED_VERTEX_SHADER_VARIANTS_EXT = Enumerant('GL_MAX_OPTIMIZED_VERTEX_SHADER_VARIANTS_EXT', 0x87cb, 'GL_EXT_vertex_shader')
 GL_MAX_VERTEX_SHADER_INSTRUCTIONS_EXT = Enumerant('GL_MAX_VERTEX_SHADER_INSTRUCTIONS_EXT', 0x87c5, 'GL_EXT_vertex_shader')
 GL_MAX_VERTEX_SHADER_INVARIANTS_EXT = Enumerant('GL_MAX_VERTEX_SHADER_INVARIANTS_EXT', 0x87c7, 'GL_EXT_vertex_shader')
@@ -8753,6 +8837,42 @@ defines.add(GL_PARALLEL_ARRAYS_INTEL)
 defines.add(GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL)
 defines.add(GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL)
 
+# GL_KHR_blend_equation_advanced
+
+GL_BLEND_ADVANCED_COHERENT_KHR = Enumerant('GL_BLEND_ADVANCED_COHERENT_KHR', 0x9285, 'GL_KHR_blend_equation_advanced')
+GL_COLORBURN_KHR = Enumerant('GL_COLORBURN_KHR', 0x929a, 'GL_KHR_blend_equation_advanced')
+GL_COLORDODGE_KHR = Enumerant('GL_COLORDODGE_KHR', 0x9299, 'GL_KHR_blend_equation_advanced')
+GL_DARKEN_KHR = Enumerant('GL_DARKEN_KHR', 0x9297, 'GL_KHR_blend_equation_advanced')
+GL_DIFFERENCE_KHR = Enumerant('GL_DIFFERENCE_KHR', 0x929e, 'GL_KHR_blend_equation_advanced')
+GL_EXCLUSION_KHR = Enumerant('GL_EXCLUSION_KHR', 0x92a0, 'GL_KHR_blend_equation_advanced')
+GL_HARDLIGHT_KHR = Enumerant('GL_HARDLIGHT_KHR', 0x929b, 'GL_KHR_blend_equation_advanced')
+GL_HSL_COLOR_KHR = Enumerant('GL_HSL_COLOR_KHR', 0x92af, 'GL_KHR_blend_equation_advanced')
+GL_HSL_HUE_KHR = Enumerant('GL_HSL_HUE_KHR', 0x92ad, 'GL_KHR_blend_equation_advanced')
+GL_HSL_LUMINOSITY_KHR = Enumerant('GL_HSL_LUMINOSITY_KHR', 0x92b0, 'GL_KHR_blend_equation_advanced')
+GL_HSL_SATURATION_KHR = Enumerant('GL_HSL_SATURATION_KHR', 0x92ae, 'GL_KHR_blend_equation_advanced')
+GL_LIGHTEN_KHR = Enumerant('GL_LIGHTEN_KHR', 0x9298, 'GL_KHR_blend_equation_advanced')
+GL_MULTIPLY_KHR = Enumerant('GL_MULTIPLY_KHR', 0x9294, 'GL_KHR_blend_equation_advanced')
+GL_OVERLAY_KHR = Enumerant('GL_OVERLAY_KHR', 0x9296, 'GL_KHR_blend_equation_advanced')
+GL_SCREEN_KHR = Enumerant('GL_SCREEN_KHR', 0x9295, 'GL_KHR_blend_equation_advanced')
+GL_SOFTLIGHT_KHR = Enumerant('GL_SOFTLIGHT_KHR', 0x929c, 'GL_KHR_blend_equation_advanced')
+
+defines.add(GL_BLEND_ADVANCED_COHERENT_KHR)
+defines.add(GL_COLORBURN_KHR)
+defines.add(GL_COLORDODGE_KHR)
+defines.add(GL_DARKEN_KHR)
+defines.add(GL_DIFFERENCE_KHR)
+defines.add(GL_EXCLUSION_KHR)
+defines.add(GL_HARDLIGHT_KHR)
+defines.add(GL_HSL_COLOR_KHR)
+defines.add(GL_HSL_HUE_KHR)
+defines.add(GL_HSL_LUMINOSITY_KHR)
+defines.add(GL_HSL_SATURATION_KHR)
+defines.add(GL_LIGHTEN_KHR)
+defines.add(GL_MULTIPLY_KHR)
+defines.add(GL_OVERLAY_KHR)
+defines.add(GL_SCREEN_KHR)
+defines.add(GL_SOFTLIGHT_KHR)
+
 # GL_KHR_debug
 
 GL_BUFFER = Enumerant('GL_BUFFER', 0x82e0, 'GL_KHR_debug')
@@ -8834,6 +8954,26 @@ defines.add(GL_PROGRAM_PIPELINE)
 defines.add(GL_QUERY)
 defines.add(GL_SAMPLER)
 defines.add(GL_SHADER)
+
+# GL_KHR_robustness
+
+GL_CONTEXT_LOST = Enumerant('GL_CONTEXT_LOST', 0x0507, 'GL_KHR_robustness')
+GL_CONTEXT_ROBUST_ACCESS = Enumerant('GL_CONTEXT_ROBUST_ACCESS', 0x90f3, 'GL_KHR_robustness')
+GL_GUILTY_CONTEXT_RESET = Enumerant('GL_GUILTY_CONTEXT_RESET', 0x8253, 'GL_KHR_robustness')
+GL_INNOCENT_CONTEXT_RESET = Enumerant('GL_INNOCENT_CONTEXT_RESET', 0x8254, 'GL_KHR_robustness')
+GL_LOSE_CONTEXT_ON_RESET = Enumerant('GL_LOSE_CONTEXT_ON_RESET', 0x8252, 'GL_KHR_robustness')
+GL_NO_RESET_NOTIFICATION = Enumerant('GL_NO_RESET_NOTIFICATION', 0x8261, 'GL_KHR_robustness')
+GL_RESET_NOTIFICATION_STRATEGY = Enumerant('GL_RESET_NOTIFICATION_STRATEGY', 0x8256, 'GL_KHR_robustness')
+GL_UNKNOWN_CONTEXT_RESET = Enumerant('GL_UNKNOWN_CONTEXT_RESET', 0x8255, 'GL_KHR_robustness')
+
+defines.add(GL_CONTEXT_LOST)
+defines.add(GL_CONTEXT_ROBUST_ACCESS)
+defines.add(GL_GUILTY_CONTEXT_RESET)
+defines.add(GL_INNOCENT_CONTEXT_RESET)
+defines.add(GL_LOSE_CONTEXT_ON_RESET)
+defines.add(GL_NO_RESET_NOTIFICATION)
+defines.add(GL_RESET_NOTIFICATION_STRATEGY)
+defines.add(GL_UNKNOWN_CONTEXT_RESET)
 
 # GL_KHR_texture_compression_astc_ldr
 
@@ -10030,9 +10170,9 @@ GL_PRIMITIVE_RESTART_NV = Enumerant('GL_PRIMITIVE_RESTART_NV', 0x8558, 'GL_NV_pr
 defines.add(GL_PRIMITIVE_RESTART_INDEX_NV)
 defines.add(GL_PRIMITIVE_RESTART_NV)
 
-# GL_NV_read_buffer_front
+# GL_NV_read_buffer
 
-GL_READ_BUFFER_NV = Enumerant('GL_READ_BUFFER_NV', 0x0c02, 'GL_NV_read_buffer_front')
+GL_READ_BUFFER_NV = Enumerant('GL_READ_BUFFER_NV', 0x0c02, 'GL_NV_read_buffer')
 
 defines.add(GL_READ_BUFFER_NV)
 
@@ -11094,9 +11234,9 @@ defines.add(GL_WRITE_ONLY_OES)
 
 # GL_OES_matrix_get
 
-GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES = Enumerant('GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES', 0x0898, 'GL_OES_matrix_get')
-GL_PROJECTION_MATRIX_FLOAT_AS_INT_BITS_OES = Enumerant('GL_PROJECTION_MATRIX_FLOAT_AS_INT_BITS_OES', 0x0898, 'GL_OES_matrix_get')
-GL_TEXTURE_MATRIX_FLOAT_AS_INT_BITS_OES = Enumerant('GL_TEXTURE_MATRIX_FLOAT_AS_INT_BITS_OES', 0x0898, 'GL_OES_matrix_get')
+GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES = Enumerant('GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES', 0x898d, 'GL_OES_matrix_get')
+GL_PROJECTION_MATRIX_FLOAT_AS_INT_BITS_OES = Enumerant('GL_PROJECTION_MATRIX_FLOAT_AS_INT_BITS_OES', 0x898e, 'GL_OES_matrix_get')
+GL_TEXTURE_MATRIX_FLOAT_AS_INT_BITS_OES = Enumerant('GL_TEXTURE_MATRIX_FLOAT_AS_INT_BITS_OES', 0x898f, 'GL_OES_matrix_get')
 
 defines.add(GL_MODELVIEW_MATRIX_FLOAT_AS_INT_BITS_OES)
 defines.add(GL_PROJECTION_MATRIX_FLOAT_AS_INT_BITS_OES)
@@ -11826,28 +11966,28 @@ defines.add(GL_FOG_PATCHY_FACTOR_SGIX)
 defines.add(GL_FRAGMENT_FOG_SGIX)
 defines.add(GL_TEXTURE_FOG_SGIX)
 
-# GL_SGIX_fragment_specular_lighting
+# GL_SGIX_fragment_lighting
 
-GL_CURRENT_RASTER_NORMAL_SGIX = Enumerant('GL_CURRENT_RASTER_NORMAL_SGIX', 0x8406, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX = Enumerant('GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX', 0x8402, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX = Enumerant('GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX', 0x8403, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_COLOR_MATERIAL_SGIX = Enumerant('GL_FRAGMENT_COLOR_MATERIAL_SGIX', 0x8401, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT0_SGIX = Enumerant('GL_FRAGMENT_LIGHT0_SGIX', 0x840c, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT1_SGIX = Enumerant('GL_FRAGMENT_LIGHT1_SGIX', 0x840d, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT2_SGIX = Enumerant('GL_FRAGMENT_LIGHT2_SGIX', 0x840e, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT3_SGIX = Enumerant('GL_FRAGMENT_LIGHT3_SGIX', 0x840f, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT4_SGIX = Enumerant('GL_FRAGMENT_LIGHT4_SGIX', 0x8410, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT5_SGIX = Enumerant('GL_FRAGMENT_LIGHT5_SGIX', 0x8411, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT6_SGIX = Enumerant('GL_FRAGMENT_LIGHT6_SGIX', 0x8412, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT7_SGIX = Enumerant('GL_FRAGMENT_LIGHT7_SGIX', 0x8413, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHTING_SGIX = Enumerant('GL_FRAGMENT_LIGHTING_SGIX', 0x8400, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX', 0x840a, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX', 0x8408, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX', 0x840b, 'GL_SGIX_fragment_specular_lighting')
-GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX', 0x8409, 'GL_SGIX_fragment_specular_lighting')
-GL_LIGHT_ENV_MODE_SGIX = Enumerant('GL_LIGHT_ENV_MODE_SGIX', 0x8407, 'GL_SGIX_fragment_specular_lighting')
-GL_MAX_ACTIVE_LIGHTS_SGIX = Enumerant('GL_MAX_ACTIVE_LIGHTS_SGIX', 0x8405, 'GL_SGIX_fragment_specular_lighting')
-GL_MAX_FRAGMENT_LIGHTS_SGIX = Enumerant('GL_MAX_FRAGMENT_LIGHTS_SGIX', 0x8404, 'GL_SGIX_fragment_specular_lighting')
+GL_CURRENT_RASTER_NORMAL_SGIX = Enumerant('GL_CURRENT_RASTER_NORMAL_SGIX', 0x8406, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX = Enumerant('GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX', 0x8402, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX = Enumerant('GL_FRAGMENT_COLOR_MATERIAL_PARAMETER_SGIX', 0x8403, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_COLOR_MATERIAL_SGIX = Enumerant('GL_FRAGMENT_COLOR_MATERIAL_SGIX', 0x8401, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT0_SGIX = Enumerant('GL_FRAGMENT_LIGHT0_SGIX', 0x840c, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT1_SGIX = Enumerant('GL_FRAGMENT_LIGHT1_SGIX', 0x840d, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT2_SGIX = Enumerant('GL_FRAGMENT_LIGHT2_SGIX', 0x840e, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT3_SGIX = Enumerant('GL_FRAGMENT_LIGHT3_SGIX', 0x840f, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT4_SGIX = Enumerant('GL_FRAGMENT_LIGHT4_SGIX', 0x8410, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT5_SGIX = Enumerant('GL_FRAGMENT_LIGHT5_SGIX', 0x8411, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT6_SGIX = Enumerant('GL_FRAGMENT_LIGHT6_SGIX', 0x8412, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT7_SGIX = Enumerant('GL_FRAGMENT_LIGHT7_SGIX', 0x8413, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHTING_SGIX = Enumerant('GL_FRAGMENT_LIGHTING_SGIX', 0x8400, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_AMBIENT_SGIX', 0x840a, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_LOCAL_VIEWER_SGIX', 0x8408, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_NORMAL_INTERPOLATION_SGIX', 0x840b, 'GL_SGIX_fragment_lighting')
+GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX = Enumerant('GL_FRAGMENT_LIGHT_MODEL_TWO_SIDE_SGIX', 0x8409, 'GL_SGIX_fragment_lighting')
+GL_LIGHT_ENV_MODE_SGIX = Enumerant('GL_LIGHT_ENV_MODE_SGIX', 0x8407, 'GL_SGIX_fragment_lighting')
+GL_MAX_ACTIVE_LIGHTS_SGIX = Enumerant('GL_MAX_ACTIVE_LIGHTS_SGIX', 0x8405, 'GL_SGIX_fragment_lighting')
+GL_MAX_FRAGMENT_LIGHTS_SGIX = Enumerant('GL_MAX_FRAGMENT_LIGHTS_SGIX', 0x8404, 'GL_SGIX_fragment_lighting')
 
 defines.add(GL_CURRENT_RASTER_NORMAL_SGIX)
 defines.add(GL_FRAGMENT_COLOR_MATERIAL_FACE_SGIX)
@@ -11996,10 +12136,10 @@ defines.add(GL_POST_TEXTURE_FILTER_BIAS_SGIX)
 defines.add(GL_POST_TEXTURE_FILTER_SCALE_RANGE_SGIX)
 defines.add(GL_POST_TEXTURE_FILTER_SCALE_SGIX)
 
-# GL_SGIX_vertex_preclip_hint
+# GL_SGIX_vertex_preclip
 
-GL_VERTEX_PRECLIP_HINT_SGIX = Enumerant('GL_VERTEX_PRECLIP_HINT_SGIX', 0x83ef, 'GL_SGIX_vertex_preclip_hint')
-GL_VERTEX_PRECLIP_SGIX = Enumerant('GL_VERTEX_PRECLIP_SGIX', 0x83ee, 'GL_SGIX_vertex_preclip_hint')
+GL_VERTEX_PRECLIP_HINT_SGIX = Enumerant('GL_VERTEX_PRECLIP_HINT_SGIX', 0x83ef, 'GL_SGIX_vertex_preclip')
+GL_VERTEX_PRECLIP_SGIX = Enumerant('GL_VERTEX_PRECLIP_SGIX', 0x83ee, 'GL_SGIX_vertex_preclip')
 
 defines.add(GL_VERTEX_PRECLIP_HINT_SGIX)
 defines.add(GL_VERTEX_PRECLIP_SGIX)
@@ -12736,11 +12876,11 @@ gl.add(glDepthMask)
 
 glDepthRange = Function('glDepthRange')
 glDepthRange.ret = Return('void')
-glDepthRange.add( Input( 'zNear','GLclampd' ))
-glDepthRange.add( Input( 'zFar','GLclampd' ))
+glDepthRange.add( Input( 'near','GLclampd' ))
+glDepthRange.add( Input( 'far','GLclampd' ))
 glDepthRange.version = '1.0'
 glDepthRange.category = 'GL_VERSION_1_0'
-glDepthRange.regalRemap = {'ES2.0': 'glDepthRangef((GLclampf)zNear,(GLclampf)zFar)'}
+glDepthRange.regalRemap = {'ES2.0': 'glDepthRangef((GLclampf)near,(GLclampf)far)'}
 glDepthRange.trace = True
 glDepthRange.play = True
 gl.add(glDepthRange)
@@ -12757,7 +12897,7 @@ gl.add(glDisable)
 
 glDrawBuffer = Function('glDrawBuffer')
 glDrawBuffer.ret = Return('void')
-glDrawBuffer.add( Input( 'mode','GLenum' ))
+glDrawBuffer.add( Input( 'buf','GLenum' ))
 glDrawBuffer.version = '1.0'
 glDrawBuffer.category = 'GL_VERSION_1_0'
 glDrawBuffer.trace = True
@@ -13045,7 +13185,7 @@ gl.add(glGenLists)
 glGetBooleanv = Function('glGetBooleanv')
 glGetBooleanv.ret = Return('void')
 glGetBooleanv.add( Input( 'pname','GLenum' ))
-glGetBooleanv.add( Output( 'params','GLboolean *' ))
+glGetBooleanv.add( Output( 'data','GLboolean *' ))
 glGetBooleanv.version = '1.0'
 glGetBooleanv.category = 'GL_VERSION_1_0'
 glGetBooleanv.esVersions = [1.1, 2.0]
@@ -13066,7 +13206,7 @@ gl.add(glGetClipPlane)
 glGetDoublev = Function('glGetDoublev')
 glGetDoublev.ret = Return('void')
 glGetDoublev.add( Input( 'pname','GLenum' ))
-glGetDoublev.add( Output( 'params','GLdouble *' ))
+glGetDoublev.add( Output( 'data','GLdouble *' ))
 glGetDoublev.version = '1.0'
 glGetDoublev.category = 'GL_VERSION_1_0'
 glGetDoublev.trace = True
@@ -13085,7 +13225,7 @@ gl.add(glGetError)
 glGetFloatv = Function('glGetFloatv')
 glGetFloatv.ret = Return('void')
 glGetFloatv.add( Input( 'pname','GLenum' ))
-glGetFloatv.add( Output( 'params','GLfloat *' ,size = 'helperGLGetSize(pname)' ))
+glGetFloatv.add( Output( 'data','GLfloat *' ,size = 'helperGLGetSize(pname)' ))
 glGetFloatv.version = '1.0'
 glGetFloatv.category = 'GL_VERSION_1_0'
 glGetFloatv.esVersions = [1.1, 2.0]
@@ -13096,7 +13236,7 @@ gl.add(glGetFloatv)
 glGetIntegerv = Function('glGetIntegerv')
 glGetIntegerv.ret = Return('void')
 glGetIntegerv.add( Input( 'pname','GLenum' ))
-glGetIntegerv.add( Output( 'params','GLint *' ,size = 'helperGLGetSize(pname)' ))
+glGetIntegerv.add( Output( 'data','GLint *' ,size = 'helperGLGetSize(pname)' ))
 glGetIntegerv.version = '1.0'
 glGetIntegerv.category = 'GL_VERSION_1_0'
 glGetIntegerv.esVersions = [1.0, 1.1, 2.0]
@@ -15398,7 +15538,7 @@ gl.add(glAreTexturesResident)
 
 glArrayElement = Function('glArrayElement')
 glArrayElement.ret = Return('void')
-glArrayElement.add( Input( 'index','GLint' ))
+glArrayElement.add( Input( 'i','GLint' ))
 glArrayElement.version = '1.1'
 glArrayElement.category = 'GL_VERSION_1_1'
 glArrayElement.trace = True
@@ -15505,7 +15645,7 @@ gl.add(glDeleteTextures)
 
 glDisableClientState = Function('glDisableClientState')
 glDisableClientState.ret = Return('void')
-glDisableClientState.add( Input( 'cap','GLenum' ))
+glDisableClientState.add( Input( 'array','GLenum' ))
 glDisableClientState.version = '1.1'
 glDisableClientState.category = 'GL_VERSION_1_1'
 glDisableClientState.esVersions = [1.0, 1.1]
@@ -15550,7 +15690,7 @@ gl.add(glEdgeFlagPointer)
 
 glEnableClientState = Function('glEnableClientState')
 glEnableClientState.ret = Return('void')
-glEnableClientState.add( Input( 'cap','GLenum' ))
+glEnableClientState.add( Input( 'array','GLenum' ))
 glEnableClientState.version = '1.1'
 glEnableClientState.category = 'GL_VERSION_1_1'
 glEnableClientState.esVersions = [1.0, 1.1]
@@ -15741,29 +15881,6 @@ glVertexPointer.play = False
 gl.add(glVertexPointer)
 
 # GL_VERSION_1_2
-
-glBlendColor = Function('glBlendColor')
-glBlendColor.ret = Return('void')
-glBlendColor.add( Input( 'red','GLclampf' ))
-glBlendColor.add( Input( 'green','GLclampf' ))
-glBlendColor.add( Input( 'blue','GLclampf' ))
-glBlendColor.add( Input( 'alpha','GLclampf' ))
-glBlendColor.version = '1.2'
-glBlendColor.category = 'GL_VERSION_1_2'
-glBlendColor.esVersions = [2.0]
-glBlendColor.trace = True
-glBlendColor.play = True
-gl.add(glBlendColor)
-
-glBlendEquation = Function('glBlendEquation')
-glBlendEquation.ret = Return('void')
-glBlendEquation.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glBlendEquation.version = '1.2'
-glBlendEquation.category = 'GL_VERSION_1_2'
-glBlendEquation.esVersions = [2.0]
-glBlendEquation.trace = True
-glBlendEquation.play = True
-gl.add(glBlendEquation)
 
 glCopyTexSubImage3D = Function('glCopyTexSubImage3D')
 glCopyTexSubImage3D.ret = Return('void')
@@ -15959,7 +16076,7 @@ gl.add(glCompressedTexSubImage3D)
 glGetCompressedTexImage = Function('glGetCompressedTexImage')
 glGetCompressedTexImage.ret = Return('void')
 glGetCompressedTexImage.add( Input( 'target','GLenum' ))
-glGetCompressedTexImage.add( Input( 'lod','GLint' ))
+glGetCompressedTexImage.add( Input( 'level','GLint' ))
 glGetCompressedTexImage.add( Output( 'img','GLvoid *' ))
 glGetCompressedTexImage.version = '1.3'
 glGetCompressedTexImage.category = 'GL_VERSION_1_3'
@@ -16350,6 +16467,29 @@ gl.add(glMultiTexCoord4sv)
 
 # GL_VERSION_1_4
 
+glBlendColor = Function('glBlendColor')
+glBlendColor.ret = Return('void')
+glBlendColor.add( Input( 'red','GLclampf' ))
+glBlendColor.add( Input( 'green','GLclampf' ))
+glBlendColor.add( Input( 'blue','GLclampf' ))
+glBlendColor.add( Input( 'alpha','GLclampf' ))
+glBlendColor.version = '1.4'
+glBlendColor.category = 'GL_VERSION_1_4'
+glBlendColor.esVersions = [2.0]
+glBlendColor.trace = True
+glBlendColor.play = True
+gl.add(glBlendColor)
+
+glBlendEquation = Function('glBlendEquation')
+glBlendEquation.ret = Return('void')
+glBlendEquation.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
+glBlendEquation.version = '1.4'
+glBlendEquation.category = 'GL_VERSION_1_4'
+glBlendEquation.esVersions = [2.0]
+glBlendEquation.trace = True
+glBlendEquation.play = True
+gl.add(glBlendEquation)
+
 glBlendFuncSeparate = Function('glBlendFuncSeparate')
 glBlendFuncSeparate.ret = Return('void')
 glBlendFuncSeparate.add( Input( 'sfactorRGB','GLenum' ))
@@ -16413,9 +16553,9 @@ gl.add(glFogCoordfv)
 glMultiDrawArrays = Function('glMultiDrawArrays')
 glMultiDrawArrays.ret = Return('void')
 glMultiDrawArrays.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glMultiDrawArrays.add( Input( 'first','const GLint *' ,size = 'primcount' ))
-glMultiDrawArrays.add( Input( 'count','const GLsizei *' ,size = 'primcount' ))
-glMultiDrawArrays.add( Input( 'primcount','GLsizei' ))
+glMultiDrawArrays.add( Input( 'first','const GLint *' ,size = 'drawcount' ))
+glMultiDrawArrays.add( Input( 'count','const GLsizei *' ,size = 'drawcount' ))
+glMultiDrawArrays.add( Input( 'drawcount','GLsizei' ))
 glMultiDrawArrays.version = '1.4'
 glMultiDrawArrays.category = 'GL_VERSION_1_4'
 glMultiDrawArrays.trace = True
@@ -16425,10 +16565,10 @@ gl.add(glMultiDrawArrays)
 glMultiDrawElements = Function('glMultiDrawElements')
 glMultiDrawElements.ret = Return('void')
 glMultiDrawElements.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glMultiDrawElements.add( Input( 'count','const GLsizei *' ,size = 'primcount' ))
+glMultiDrawElements.add( Input( 'count','const GLsizei *' ,size = 'drawcount' ))
 glMultiDrawElements.add( Input( 'type','GLenum' ))
-glMultiDrawElements.add( Input( 'indices','const GLvoid * const *' ,size = 'primcount' ))
-glMultiDrawElements.add( Input( 'primcount','GLsizei' ))
+glMultiDrawElements.add( Input( 'indices','const GLvoid * const *' ,size = 'drawcount' ))
+glMultiDrawElements.add( Input( 'drawcount','GLsizei' ))
 glMultiDrawElements.version = '1.4'
 glMultiDrawElements.category = 'GL_VERSION_1_4'
 glMultiDrawElements.trace = True
@@ -16993,7 +17133,7 @@ glIsQuery.play = True
 gl.add(glIsQuery)
 
 glMapBuffer = Function('glMapBuffer')
-glMapBuffer.ret = Return('GLvoid *')
+glMapBuffer.ret = Return('void *')
 glMapBuffer.add( Input( 'target','GLenum' ))
 glMapBuffer.add( Input( 'access','GLenum' ))
 glMapBuffer.version = '1.5'
@@ -17408,9 +17548,9 @@ gl.add(glStencilMaskSeparate)
 glStencilOpSeparate = Function('glStencilOpSeparate')
 glStencilOpSeparate.ret = Return('void')
 glStencilOpSeparate.add( Input( 'face','GLenum' ))
-glStencilOpSeparate.add( Input( 'fail','GLenum' ))
-glStencilOpSeparate.add( Input( 'zfail','GLenum' ))
-glStencilOpSeparate.add( Input( 'zpass','GLenum' ))
+glStencilOpSeparate.add( Input( 'sfail','GLenum' ))
+glStencilOpSeparate.add( Input( 'dpfail','GLenum' ))
+glStencilOpSeparate.add( Input( 'dppass','GLenum' ))
 glStencilOpSeparate.version = '2.0'
 glStencilOpSeparate.category = 'GL_VERSION_2_0'
 glStencilOpSeparate.esVersions = [2.0]
@@ -18253,7 +18393,7 @@ gl.add(glColorMaski)
 
 glDisablei = Function('glDisablei')
 glDisablei.ret = Return('void')
-glDisablei.add( Input( 'cap','GLenum' ))
+glDisablei.add( Input( 'target','GLenum' ))
 glDisablei.add( Input( 'index','GLuint' ))
 glDisablei.version = '3.0'
 glDisablei.category = 'GL_VERSION_3_0'
@@ -18263,7 +18403,7 @@ gl.add(glDisablei)
 
 glEnablei = Function('glEnablei')
 glEnablei.ret = Return('void')
-glEnablei.add( Input( 'cap','GLenum' ))
+glEnablei.add( Input( 'target','GLenum' ))
 glEnablei.add( Input( 'index','GLuint' ))
 glEnablei.version = '3.0'
 glEnablei.category = 'GL_VERSION_3_0'
@@ -18753,9 +18893,9 @@ gl.add(glVertexAttribIPointer)
 glDrawArraysInstanced = Function('glDrawArraysInstanced')
 glDrawArraysInstanced.ret = Return('void')
 glDrawArraysInstanced.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glDrawArraysInstanced.add( Input( 'start','GLint' ))
+glDrawArraysInstanced.add( Input( 'first','GLint' ))
 glDrawArraysInstanced.add( Input( 'count','GLsizei' ))
-glDrawArraysInstanced.add( Input( 'primcount','GLsizei' ))
+glDrawArraysInstanced.add( Input( 'instancecount','GLsizei' ))
 glDrawArraysInstanced.version = '3.1'
 glDrawArraysInstanced.category = 'GL_VERSION_3_1'
 glDrawArraysInstanced.trace = True
@@ -18768,7 +18908,7 @@ glDrawElementsInstanced.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(
 glDrawElementsInstanced.add( Input( 'count','GLsizei' ))
 glDrawElementsInstanced.add( Input( 'type','GLenum' ))
 glDrawElementsInstanced.add( Input( 'indices','const GLvoid *' ))
-glDrawElementsInstanced.add( Input( 'primcount','GLsizei' ))
+glDrawElementsInstanced.add( Input( 'instancecount','GLsizei' ))
 glDrawElementsInstanced.version = '3.1'
 glDrawElementsInstanced.category = 'GL_VERSION_3_1'
 glDrawElementsInstanced.trace = True
@@ -18889,6 +19029,36 @@ glBlendFunci.category = 'GL_VERSION_4_0'
 glBlendFunci.trace = True
 glBlendFunci.play = True
 gl.add(glBlendFunci)
+
+glDrawArraysIndirect = Function('glDrawArraysIndirect')
+glDrawArraysIndirect.ret = Return('void')
+glDrawArraysIndirect.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
+glDrawArraysIndirect.add( Input( 'indirect','const GLvoid *' ))
+glDrawArraysIndirect.version = '4.0'
+glDrawArraysIndirect.category = 'GL_VERSION_4_0'
+glDrawArraysIndirect.trace = True
+glDrawArraysIndirect.play = True
+gl.add(glDrawArraysIndirect)
+
+glDrawElementsIndirect = Function('glDrawElementsIndirect')
+glDrawElementsIndirect.ret = Return('void')
+glDrawElementsIndirect.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
+glDrawElementsIndirect.add( Input( 'type','GLenum' ))
+glDrawElementsIndirect.add( Input( 'indirect','const GLvoid *' ))
+glDrawElementsIndirect.version = '4.0'
+glDrawElementsIndirect.category = 'GL_VERSION_4_0'
+glDrawElementsIndirect.trace = True
+glDrawElementsIndirect.play = True
+gl.add(glDrawElementsIndirect)
+
+glMinSampleShading = Function('glMinSampleShading')
+glMinSampleShading.ret = Return('void')
+glMinSampleShading.add( Input( 'value','GLclampf' ))
+glMinSampleShading.version = '4.0'
+glMinSampleShading.category = 'GL_VERSION_4_0'
+glMinSampleShading.trace = True
+glMinSampleShading.play = True
+gl.add(glMinSampleShading)
 
 #
 
@@ -19171,7 +19341,7 @@ glGetPerfMonitorCountersAMD.ret = Return('void')
 glGetPerfMonitorCountersAMD.add( Input( 'group','GLuint' ))
 glGetPerfMonitorCountersAMD.add( Output( 'numCounters','GLint *' ,size = 1 ))
 glGetPerfMonitorCountersAMD.add( Output( 'maxActiveCounters','GLint *' ,size = 1 ))
-glGetPerfMonitorCountersAMD.add( Input( 'countersSize','GLsizei' ))
+glGetPerfMonitorCountersAMD.add( Input( 'counterSize','GLsizei' ))
 glGetPerfMonitorCountersAMD.add( Output( 'counters','GLuint *' ))
 glGetPerfMonitorCountersAMD.version = '1.2'
 glGetPerfMonitorCountersAMD.category = 'GL_AMD_performance_monitor'
@@ -20087,6 +20257,17 @@ glShaderBinary.trace = True
 glShaderBinary.play = True
 gl.add(glShaderBinary)
 
+# GL_ARB_ES3_1_compatibility
+
+glMemoryBarrierByRegion = Function('glMemoryBarrierByRegion')
+glMemoryBarrierByRegion.ret = Return('void')
+glMemoryBarrierByRegion.add( Input( 'barriers','GLbitfield' ))
+glMemoryBarrierByRegion.version = ''
+glMemoryBarrierByRegion.category = 'GL_ARB_ES3_1_compatibility'
+glMemoryBarrierByRegion.trace = True
+glMemoryBarrierByRegion.play = True
+gl.add(glMemoryBarrierByRegion)
+
 # GL_ARB_base_instance
 
 glDrawArraysInstancedBaseInstance = Function('glDrawArraysInstancedBaseInstance')
@@ -20450,6 +20631,18 @@ glClearTexSubImage.trace = True
 glClearTexSubImage.play = True
 gl.add(glClearTexSubImage)
 
+# GL_ARB_clip_control
+
+glClipControl = Function('glClipControl')
+glClipControl.ret = Return('void')
+glClipControl.add( Input( 'origin','GLenum' ))
+glClipControl.add( Input( 'depth','GLenum' ))
+glClipControl.version = ''
+glClipControl.category = 'GL_ARB_clip_control'
+glClipControl.trace = True
+glClipControl.play = True
+gl.add(glClipControl)
+
 # GL_ARB_color_buffer_float
 
 glClampColorARB = Function('glClampColorARB')
@@ -20583,7 +20776,7 @@ gl.add(glDebugMessageInsertARB)
 glGetDebugMessageLogARB = Function('glGetDebugMessageLogARB')
 glGetDebugMessageLogARB.ret = Return('GLuint')
 glGetDebugMessageLogARB.add( Input( 'count','GLuint' ))
-glGetDebugMessageLogARB.add( Input( 'bufsize','GLsizei' ))
+glGetDebugMessageLogARB.add( Input( 'bufSize','GLsizei' ))
 glGetDebugMessageLogARB.add( Output( 'sources','GLenum *' ,size = 'ret' ,maxSize = 'count' ))
 glGetDebugMessageLogARB.add( Output( 'types','GLenum *' ,size = 'ret' ,maxSize = 'count' ))
 glGetDebugMessageLogARB.add( Output( 'ids','GLuint *' ,size = 'ret' ,maxSize = 'count' ))
@@ -20595,6 +20788,1139 @@ glGetDebugMessageLogARB.category = 'GL_ARB_debug_output'
 glGetDebugMessageLogARB.trace = True
 glGetDebugMessageLogARB.play = False
 gl.add(glGetDebugMessageLogARB)
+
+# GL_ARB_direct_state_access
+
+glBindTextureUnit = Function('glBindTextureUnit')
+glBindTextureUnit.ret = Return('void')
+glBindTextureUnit.add( Input( 'unit','GLuint' ))
+glBindTextureUnit.add( Input( 'texture','GLuint' ))
+glBindTextureUnit.version = ''
+glBindTextureUnit.category = 'GL_ARB_direct_state_access'
+glBindTextureUnit.trace = True
+glBindTextureUnit.play = True
+gl.add(glBindTextureUnit)
+
+glBlitNamedFramebuffer = Function('glBlitNamedFramebuffer')
+glBlitNamedFramebuffer.ret = Return('void')
+glBlitNamedFramebuffer.add( Input( 'readFramebuffer','GLuint' ))
+glBlitNamedFramebuffer.add( Input( 'drawFramebuffer','GLuint' ))
+glBlitNamedFramebuffer.add( Input( 'srcX0','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'srcY0','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'srcX1','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'srcY1','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'dstX0','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'dstY0','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'dstX1','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'dstY1','GLint' ))
+glBlitNamedFramebuffer.add( Input( 'mask','GLbitfield' ))
+glBlitNamedFramebuffer.add( Input( 'filter','GLenum' ))
+glBlitNamedFramebuffer.version = ''
+glBlitNamedFramebuffer.category = 'GL_ARB_direct_state_access'
+glBlitNamedFramebuffer.trace = True
+glBlitNamedFramebuffer.play = True
+gl.add(glBlitNamedFramebuffer)
+
+glCheckNamedFramebufferStatus = Function('glCheckNamedFramebufferStatus')
+glCheckNamedFramebufferStatus.ret = Return('GLenum')
+glCheckNamedFramebufferStatus.add( Input( 'framebuffer','GLuint' ))
+glCheckNamedFramebufferStatus.add( Input( 'target','GLenum' ))
+glCheckNamedFramebufferStatus.version = ''
+glCheckNamedFramebufferStatus.category = 'GL_ARB_direct_state_access'
+glCheckNamedFramebufferStatus.trace = True
+glCheckNamedFramebufferStatus.play = True
+gl.add(glCheckNamedFramebufferStatus)
+
+glClearNamedBufferData = Function('glClearNamedBufferData')
+glClearNamedBufferData.ret = Return('void')
+glClearNamedBufferData.add( Input( 'buffer','GLuint' ))
+glClearNamedBufferData.add( Input( 'internalformat','GLenum' ))
+glClearNamedBufferData.add( Input( 'format','GLenum' ))
+glClearNamedBufferData.add( Input( 'type','GLenum' ))
+glClearNamedBufferData.add( Input( 'data','const GLvoid *' ))
+glClearNamedBufferData.version = ''
+glClearNamedBufferData.category = 'GL_ARB_direct_state_access'
+glClearNamedBufferData.trace = True
+glClearNamedBufferData.play = True
+gl.add(glClearNamedBufferData)
+
+glClearNamedBufferSubData = Function('glClearNamedBufferSubData')
+glClearNamedBufferSubData.ret = Return('void')
+glClearNamedBufferSubData.add( Input( 'buffer','GLuint' ))
+glClearNamedBufferSubData.add( Input( 'internalformat','GLenum' ))
+glClearNamedBufferSubData.add( Input( 'offset','GLintptr' ))
+glClearNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
+glClearNamedBufferSubData.add( Input( 'format','GLenum' ))
+glClearNamedBufferSubData.add( Input( 'type','GLenum' ))
+glClearNamedBufferSubData.add( Input( 'data','const GLvoid *' ))
+glClearNamedBufferSubData.version = ''
+glClearNamedBufferSubData.category = 'GL_ARB_direct_state_access'
+glClearNamedBufferSubData.trace = True
+glClearNamedBufferSubData.play = True
+gl.add(glClearNamedBufferSubData)
+
+glClearNamedFramebufferfi = Function('glClearNamedFramebufferfi')
+glClearNamedFramebufferfi.ret = Return('void')
+glClearNamedFramebufferfi.add( Input( 'framebuffer','GLuint' ))
+glClearNamedFramebufferfi.add( Input( 'buffer','GLenum' ))
+glClearNamedFramebufferfi.add( Input( 'depth','GLfloat' ))
+glClearNamedFramebufferfi.add( Input( 'stencil','GLint' ))
+glClearNamedFramebufferfi.version = ''
+glClearNamedFramebufferfi.category = 'GL_ARB_direct_state_access'
+glClearNamedFramebufferfi.trace = True
+glClearNamedFramebufferfi.play = True
+gl.add(glClearNamedFramebufferfi)
+
+glClearNamedFramebufferfv = Function('glClearNamedFramebufferfv')
+glClearNamedFramebufferfv.ret = Return('void')
+glClearNamedFramebufferfv.add( Input( 'framebuffer','GLuint' ))
+glClearNamedFramebufferfv.add( Input( 'buffer','GLenum' ))
+glClearNamedFramebufferfv.add( Input( 'drawbuffer','GLint' ))
+glClearNamedFramebufferfv.add( Input( 'value','const GLfloat *' ))
+glClearNamedFramebufferfv.version = ''
+glClearNamedFramebufferfv.category = 'GL_ARB_direct_state_access'
+glClearNamedFramebufferfv.trace = True
+glClearNamedFramebufferfv.play = True
+gl.add(glClearNamedFramebufferfv)
+
+glClearNamedFramebufferiv = Function('glClearNamedFramebufferiv')
+glClearNamedFramebufferiv.ret = Return('void')
+glClearNamedFramebufferiv.add( Input( 'framebuffer','GLuint' ))
+glClearNamedFramebufferiv.add( Input( 'buffer','GLenum' ))
+glClearNamedFramebufferiv.add( Input( 'drawbuffer','GLint' ))
+glClearNamedFramebufferiv.add( Input( 'value','const GLint *' ))
+glClearNamedFramebufferiv.version = ''
+glClearNamedFramebufferiv.category = 'GL_ARB_direct_state_access'
+glClearNamedFramebufferiv.trace = True
+glClearNamedFramebufferiv.play = True
+gl.add(glClearNamedFramebufferiv)
+
+glClearNamedFramebufferuiv = Function('glClearNamedFramebufferuiv')
+glClearNamedFramebufferuiv.ret = Return('void')
+glClearNamedFramebufferuiv.add( Input( 'framebuffer','GLuint' ))
+glClearNamedFramebufferuiv.add( Input( 'buffer','GLenum' ))
+glClearNamedFramebufferuiv.add( Input( 'drawbuffer','GLint' ))
+glClearNamedFramebufferuiv.add( Input( 'value','const GLuint *' ))
+glClearNamedFramebufferuiv.version = ''
+glClearNamedFramebufferuiv.category = 'GL_ARB_direct_state_access'
+glClearNamedFramebufferuiv.trace = True
+glClearNamedFramebufferuiv.play = True
+gl.add(glClearNamedFramebufferuiv)
+
+glCompressedTextureSubImage1D = Function('glCompressedTextureSubImage1D')
+glCompressedTextureSubImage1D.ret = Return('void')
+glCompressedTextureSubImage1D.add( Input( 'texture','GLuint' ))
+glCompressedTextureSubImage1D.add( Input( 'level','GLint' ))
+glCompressedTextureSubImage1D.add( Input( 'xoffset','GLint' ))
+glCompressedTextureSubImage1D.add( Input( 'width','GLsizei' ))
+glCompressedTextureSubImage1D.add( Input( 'format','GLenum' ))
+glCompressedTextureSubImage1D.add( Input( 'imageSize','GLsizei' ))
+glCompressedTextureSubImage1D.add( Input( 'data','const GLvoid *' ))
+glCompressedTextureSubImage1D.version = ''
+glCompressedTextureSubImage1D.category = 'GL_ARB_direct_state_access'
+glCompressedTextureSubImage1D.trace = True
+glCompressedTextureSubImage1D.play = True
+gl.add(glCompressedTextureSubImage1D)
+
+glCompressedTextureSubImage2D = Function('glCompressedTextureSubImage2D')
+glCompressedTextureSubImage2D.ret = Return('void')
+glCompressedTextureSubImage2D.add( Input( 'texture','GLuint' ))
+glCompressedTextureSubImage2D.add( Input( 'level','GLint' ))
+glCompressedTextureSubImage2D.add( Input( 'xoffset','GLint' ))
+glCompressedTextureSubImage2D.add( Input( 'yoffset','GLint' ))
+glCompressedTextureSubImage2D.add( Input( 'width','GLsizei' ))
+glCompressedTextureSubImage2D.add( Input( 'height','GLsizei' ))
+glCompressedTextureSubImage2D.add( Input( 'format','GLenum' ))
+glCompressedTextureSubImage2D.add( Input( 'imageSize','GLsizei' ))
+glCompressedTextureSubImage2D.add( Input( 'data','const GLvoid *' ))
+glCompressedTextureSubImage2D.version = ''
+glCompressedTextureSubImage2D.category = 'GL_ARB_direct_state_access'
+glCompressedTextureSubImage2D.trace = True
+glCompressedTextureSubImage2D.play = True
+gl.add(glCompressedTextureSubImage2D)
+
+glCompressedTextureSubImage3D = Function('glCompressedTextureSubImage3D')
+glCompressedTextureSubImage3D.ret = Return('void')
+glCompressedTextureSubImage3D.add( Input( 'texture','GLuint' ))
+glCompressedTextureSubImage3D.add( Input( 'level','GLint' ))
+glCompressedTextureSubImage3D.add( Input( 'xoffset','GLint' ))
+glCompressedTextureSubImage3D.add( Input( 'yoffset','GLint' ))
+glCompressedTextureSubImage3D.add( Input( 'zoffset','GLint' ))
+glCompressedTextureSubImage3D.add( Input( 'width','GLsizei' ))
+glCompressedTextureSubImage3D.add( Input( 'height','GLsizei' ))
+glCompressedTextureSubImage3D.add( Input( 'depth','GLsizei' ))
+glCompressedTextureSubImage3D.add( Input( 'format','GLenum' ))
+glCompressedTextureSubImage3D.add( Input( 'imageSize','GLsizei' ))
+glCompressedTextureSubImage3D.add( Input( 'data','const GLvoid *' ))
+glCompressedTextureSubImage3D.version = ''
+glCompressedTextureSubImage3D.category = 'GL_ARB_direct_state_access'
+glCompressedTextureSubImage3D.trace = True
+glCompressedTextureSubImage3D.play = True
+gl.add(glCompressedTextureSubImage3D)
+
+glCopyNamedBufferSubData = Function('glCopyNamedBufferSubData')
+glCopyNamedBufferSubData.ret = Return('void')
+glCopyNamedBufferSubData.add( Input( 'readBuffer','GLuint' ))
+glCopyNamedBufferSubData.add( Input( 'writeBuffer','GLuint' ))
+glCopyNamedBufferSubData.add( Input( 'readOffset','GLintptr' ))
+glCopyNamedBufferSubData.add( Input( 'writeOffset','GLintptr' ))
+glCopyNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
+glCopyNamedBufferSubData.version = ''
+glCopyNamedBufferSubData.category = 'GL_ARB_direct_state_access'
+glCopyNamedBufferSubData.trace = True
+glCopyNamedBufferSubData.play = True
+gl.add(glCopyNamedBufferSubData)
+
+glCopyTextureSubImage1D = Function('glCopyTextureSubImage1D')
+glCopyTextureSubImage1D.ret = Return('void')
+glCopyTextureSubImage1D.add( Input( 'texture','GLuint' ))
+glCopyTextureSubImage1D.add( Input( 'level','GLint' ))
+glCopyTextureSubImage1D.add( Input( 'xoffset','GLint' ))
+glCopyTextureSubImage1D.add( Input( 'x','GLint' ))
+glCopyTextureSubImage1D.add( Input( 'y','GLint' ))
+glCopyTextureSubImage1D.add( Input( 'width','GLsizei' ))
+glCopyTextureSubImage1D.version = ''
+glCopyTextureSubImage1D.category = 'GL_ARB_direct_state_access'
+glCopyTextureSubImage1D.trace = True
+glCopyTextureSubImage1D.play = True
+gl.add(glCopyTextureSubImage1D)
+
+glCopyTextureSubImage2D = Function('glCopyTextureSubImage2D')
+glCopyTextureSubImage2D.ret = Return('void')
+glCopyTextureSubImage2D.add( Input( 'texture','GLuint' ))
+glCopyTextureSubImage2D.add( Input( 'level','GLint' ))
+glCopyTextureSubImage2D.add( Input( 'xoffset','GLint' ))
+glCopyTextureSubImage2D.add( Input( 'yoffset','GLint' ))
+glCopyTextureSubImage2D.add( Input( 'x','GLint' ))
+glCopyTextureSubImage2D.add( Input( 'y','GLint' ))
+glCopyTextureSubImage2D.add( Input( 'width','GLsizei' ))
+glCopyTextureSubImage2D.add( Input( 'height','GLsizei' ))
+glCopyTextureSubImage2D.version = ''
+glCopyTextureSubImage2D.category = 'GL_ARB_direct_state_access'
+glCopyTextureSubImage2D.trace = True
+glCopyTextureSubImage2D.play = True
+gl.add(glCopyTextureSubImage2D)
+
+glCopyTextureSubImage3D = Function('glCopyTextureSubImage3D')
+glCopyTextureSubImage3D.ret = Return('void')
+glCopyTextureSubImage3D.add( Input( 'texture','GLuint' ))
+glCopyTextureSubImage3D.add( Input( 'level','GLint' ))
+glCopyTextureSubImage3D.add( Input( 'xoffset','GLint' ))
+glCopyTextureSubImage3D.add( Input( 'yoffset','GLint' ))
+glCopyTextureSubImage3D.add( Input( 'zoffset','GLint' ))
+glCopyTextureSubImage3D.add( Input( 'x','GLint' ))
+glCopyTextureSubImage3D.add( Input( 'y','GLint' ))
+glCopyTextureSubImage3D.add( Input( 'width','GLsizei' ))
+glCopyTextureSubImage3D.add( Input( 'height','GLsizei' ))
+glCopyTextureSubImage3D.version = ''
+glCopyTextureSubImage3D.category = 'GL_ARB_direct_state_access'
+glCopyTextureSubImage3D.trace = True
+glCopyTextureSubImage3D.play = True
+gl.add(glCopyTextureSubImage3D)
+
+glCreateBuffers = Function('glCreateBuffers')
+glCreateBuffers.ret = Return('void')
+glCreateBuffers.add( Input( 'n','GLsizei' ))
+glCreateBuffers.add( Input( 'buffers','GLuint *' ))
+glCreateBuffers.version = ''
+glCreateBuffers.category = 'GL_ARB_direct_state_access'
+glCreateBuffers.trace = True
+glCreateBuffers.play = True
+gl.add(glCreateBuffers)
+
+glCreateFramebuffers = Function('glCreateFramebuffers')
+glCreateFramebuffers.ret = Return('void')
+glCreateFramebuffers.add( Input( 'n','GLsizei' ))
+glCreateFramebuffers.add( Input( 'framebuffers','GLuint *' ))
+glCreateFramebuffers.version = ''
+glCreateFramebuffers.category = 'GL_ARB_direct_state_access'
+glCreateFramebuffers.trace = True
+glCreateFramebuffers.play = True
+gl.add(glCreateFramebuffers)
+
+glCreateProgramPipelines = Function('glCreateProgramPipelines')
+glCreateProgramPipelines.ret = Return('void')
+glCreateProgramPipelines.add( Input( 'n','GLsizei' ))
+glCreateProgramPipelines.add( Input( 'pipelines','GLuint *' ))
+glCreateProgramPipelines.version = ''
+glCreateProgramPipelines.category = 'GL_ARB_direct_state_access'
+glCreateProgramPipelines.trace = True
+glCreateProgramPipelines.play = True
+gl.add(glCreateProgramPipelines)
+
+glCreateQueries = Function('glCreateQueries')
+glCreateQueries.ret = Return('void')
+glCreateQueries.add( Input( 'target','GLenum' ))
+glCreateQueries.add( Input( 'n','GLsizei' ))
+glCreateQueries.add( Input( 'ids','GLuint *' ))
+glCreateQueries.version = ''
+glCreateQueries.category = 'GL_ARB_direct_state_access'
+glCreateQueries.trace = True
+glCreateQueries.play = True
+gl.add(glCreateQueries)
+
+glCreateRenderbuffers = Function('glCreateRenderbuffers')
+glCreateRenderbuffers.ret = Return('void')
+glCreateRenderbuffers.add( Input( 'n','GLsizei' ))
+glCreateRenderbuffers.add( Input( 'renderbuffers','GLuint *' ))
+glCreateRenderbuffers.version = ''
+glCreateRenderbuffers.category = 'GL_ARB_direct_state_access'
+glCreateRenderbuffers.trace = True
+glCreateRenderbuffers.play = True
+gl.add(glCreateRenderbuffers)
+
+glCreateSamplers = Function('glCreateSamplers')
+glCreateSamplers.ret = Return('void')
+glCreateSamplers.add( Input( 'n','GLsizei' ))
+glCreateSamplers.add( Input( 'samplers','GLuint *' ))
+glCreateSamplers.version = ''
+glCreateSamplers.category = 'GL_ARB_direct_state_access'
+glCreateSamplers.trace = True
+glCreateSamplers.play = True
+gl.add(glCreateSamplers)
+
+glCreateTextures = Function('glCreateTextures')
+glCreateTextures.ret = Return('void')
+glCreateTextures.add( Input( 'target','GLenum' ))
+glCreateTextures.add( Input( 'n','GLsizei' ))
+glCreateTextures.add( Input( 'textures','GLuint *' ))
+glCreateTextures.version = ''
+glCreateTextures.category = 'GL_ARB_direct_state_access'
+glCreateTextures.trace = True
+glCreateTextures.play = True
+gl.add(glCreateTextures)
+
+glCreateTransformFeedbacks = Function('glCreateTransformFeedbacks')
+glCreateTransformFeedbacks.ret = Return('void')
+glCreateTransformFeedbacks.add( Input( 'n','GLsizei' ))
+glCreateTransformFeedbacks.add( Input( 'ids','GLuint *' ))
+glCreateTransformFeedbacks.version = ''
+glCreateTransformFeedbacks.category = 'GL_ARB_direct_state_access'
+glCreateTransformFeedbacks.trace = True
+glCreateTransformFeedbacks.play = True
+gl.add(glCreateTransformFeedbacks)
+
+glCreateVertexArrays = Function('glCreateVertexArrays')
+glCreateVertexArrays.ret = Return('void')
+glCreateVertexArrays.add( Input( 'n','GLsizei' ))
+glCreateVertexArrays.add( Input( 'arrays','GLuint *' ))
+glCreateVertexArrays.version = ''
+glCreateVertexArrays.category = 'GL_ARB_direct_state_access'
+glCreateVertexArrays.trace = True
+glCreateVertexArrays.play = True
+gl.add(glCreateVertexArrays)
+
+glDisableVertexArrayAttrib = Function('glDisableVertexArrayAttrib')
+glDisableVertexArrayAttrib.ret = Return('void')
+glDisableVertexArrayAttrib.add( Input( 'vaobj','GLuint' ))
+glDisableVertexArrayAttrib.add( Input( 'index','GLuint' ))
+glDisableVertexArrayAttrib.version = ''
+glDisableVertexArrayAttrib.category = 'GL_ARB_direct_state_access'
+glDisableVertexArrayAttrib.trace = True
+glDisableVertexArrayAttrib.play = True
+gl.add(glDisableVertexArrayAttrib)
+
+glEnableVertexArrayAttrib = Function('glEnableVertexArrayAttrib')
+glEnableVertexArrayAttrib.ret = Return('void')
+glEnableVertexArrayAttrib.add( Input( 'vaobj','GLuint' ))
+glEnableVertexArrayAttrib.add( Input( 'index','GLuint' ))
+glEnableVertexArrayAttrib.version = ''
+glEnableVertexArrayAttrib.category = 'GL_ARB_direct_state_access'
+glEnableVertexArrayAttrib.trace = True
+glEnableVertexArrayAttrib.play = True
+gl.add(glEnableVertexArrayAttrib)
+
+glFlushMappedNamedBufferRange = Function('glFlushMappedNamedBufferRange')
+glFlushMappedNamedBufferRange.ret = Return('void')
+glFlushMappedNamedBufferRange.add( Input( 'buffer','GLuint' ))
+glFlushMappedNamedBufferRange.add( Input( 'offset','GLintptr' ))
+glFlushMappedNamedBufferRange.add( Input( 'length','GLsizeiptr' ))
+glFlushMappedNamedBufferRange.version = ''
+glFlushMappedNamedBufferRange.category = 'GL_ARB_direct_state_access'
+glFlushMappedNamedBufferRange.trace = True
+glFlushMappedNamedBufferRange.play = True
+gl.add(glFlushMappedNamedBufferRange)
+
+glGenerateTextureMipmap = Function('glGenerateTextureMipmap')
+glGenerateTextureMipmap.ret = Return('void')
+glGenerateTextureMipmap.add( Input( 'texture','GLuint' ))
+glGenerateTextureMipmap.version = ''
+glGenerateTextureMipmap.category = 'GL_ARB_direct_state_access'
+glGenerateTextureMipmap.trace = True
+glGenerateTextureMipmap.play = True
+gl.add(glGenerateTextureMipmap)
+
+glGetCompressedTextureImage = Function('glGetCompressedTextureImage')
+glGetCompressedTextureImage.ret = Return('void')
+glGetCompressedTextureImage.add( Input( 'texture','GLuint' ))
+glGetCompressedTextureImage.add( Input( 'level','GLint' ))
+glGetCompressedTextureImage.add( Input( 'bufSize','GLsizei' ))
+glGetCompressedTextureImage.add( Input( 'pixels','GLvoid *' ))
+glGetCompressedTextureImage.version = ''
+glGetCompressedTextureImage.category = 'GL_ARB_direct_state_access'
+glGetCompressedTextureImage.trace = True
+glGetCompressedTextureImage.play = True
+gl.add(glGetCompressedTextureImage)
+
+glGetNamedBufferParameteri64v = Function('glGetNamedBufferParameteri64v')
+glGetNamedBufferParameteri64v.ret = Return('void')
+glGetNamedBufferParameteri64v.add( Input( 'buffer','GLuint' ))
+glGetNamedBufferParameteri64v.add( Input( 'pname','GLenum' ))
+glGetNamedBufferParameteri64v.add( Input( 'params','GLint64 *' ))
+glGetNamedBufferParameteri64v.version = ''
+glGetNamedBufferParameteri64v.category = 'GL_ARB_direct_state_access'
+glGetNamedBufferParameteri64v.trace = True
+glGetNamedBufferParameteri64v.play = True
+gl.add(glGetNamedBufferParameteri64v)
+
+glGetNamedBufferParameteriv = Function('glGetNamedBufferParameteriv')
+glGetNamedBufferParameteriv.ret = Return('void')
+glGetNamedBufferParameteriv.add( Input( 'buffer','GLuint' ))
+glGetNamedBufferParameteriv.add( Input( 'pname','GLenum' ))
+glGetNamedBufferParameteriv.add( Input( 'params','GLint *' ))
+glGetNamedBufferParameteriv.version = ''
+glGetNamedBufferParameteriv.category = 'GL_ARB_direct_state_access'
+glGetNamedBufferParameteriv.trace = True
+glGetNamedBufferParameteriv.play = True
+gl.add(glGetNamedBufferParameteriv)
+
+glGetNamedBufferPointerv = Function('glGetNamedBufferPointerv')
+glGetNamedBufferPointerv.ret = Return('void')
+glGetNamedBufferPointerv.add( Input( 'buffer','GLuint' ))
+glGetNamedBufferPointerv.add( Input( 'pname','GLenum' ))
+glGetNamedBufferPointerv.add( Input( 'params','GLvoid **' ))
+glGetNamedBufferPointerv.version = ''
+glGetNamedBufferPointerv.category = 'GL_ARB_direct_state_access'
+glGetNamedBufferPointerv.trace = True
+glGetNamedBufferPointerv.play = True
+gl.add(glGetNamedBufferPointerv)
+
+glGetNamedBufferSubData = Function('glGetNamedBufferSubData')
+glGetNamedBufferSubData.ret = Return('void')
+glGetNamedBufferSubData.add( Input( 'buffer','GLuint' ))
+glGetNamedBufferSubData.add( Input( 'offset','GLintptr' ))
+glGetNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
+glGetNamedBufferSubData.add( Input( 'data','GLvoid *' ))
+glGetNamedBufferSubData.version = ''
+glGetNamedBufferSubData.category = 'GL_ARB_direct_state_access'
+glGetNamedBufferSubData.trace = True
+glGetNamedBufferSubData.play = True
+gl.add(glGetNamedBufferSubData)
+
+glGetNamedFramebufferAttachmentParameteriv = Function('glGetNamedFramebufferAttachmentParameteriv')
+glGetNamedFramebufferAttachmentParameteriv.ret = Return('void')
+glGetNamedFramebufferAttachmentParameteriv.add( Input( 'framebuffer','GLuint' ))
+glGetNamedFramebufferAttachmentParameteriv.add( Input( 'attachment','GLenum' ))
+glGetNamedFramebufferAttachmentParameteriv.add( Input( 'pname','GLenum' ))
+glGetNamedFramebufferAttachmentParameteriv.add( Input( 'params','GLint *' ))
+glGetNamedFramebufferAttachmentParameteriv.version = ''
+glGetNamedFramebufferAttachmentParameteriv.category = 'GL_ARB_direct_state_access'
+glGetNamedFramebufferAttachmentParameteriv.trace = True
+glGetNamedFramebufferAttachmentParameteriv.play = True
+gl.add(glGetNamedFramebufferAttachmentParameteriv)
+
+glGetNamedFramebufferParameteriv = Function('glGetNamedFramebufferParameteriv')
+glGetNamedFramebufferParameteriv.ret = Return('void')
+glGetNamedFramebufferParameteriv.add( Input( 'framebuffer','GLuint' ))
+glGetNamedFramebufferParameteriv.add( Input( 'pname','GLenum' ))
+glGetNamedFramebufferParameteriv.add( Input( 'param','GLint *' ))
+glGetNamedFramebufferParameteriv.version = ''
+glGetNamedFramebufferParameteriv.category = 'GL_ARB_direct_state_access'
+glGetNamedFramebufferParameteriv.trace = True
+glGetNamedFramebufferParameteriv.play = True
+gl.add(glGetNamedFramebufferParameteriv)
+
+glGetNamedRenderbufferParameteriv = Function('glGetNamedRenderbufferParameteriv')
+glGetNamedRenderbufferParameteriv.ret = Return('void')
+glGetNamedRenderbufferParameteriv.add( Input( 'renderbuffer','GLuint' ))
+glGetNamedRenderbufferParameteriv.add( Input( 'pname','GLenum' ))
+glGetNamedRenderbufferParameteriv.add( Input( 'params','GLint *' ))
+glGetNamedRenderbufferParameteriv.version = ''
+glGetNamedRenderbufferParameteriv.category = 'GL_ARB_direct_state_access'
+glGetNamedRenderbufferParameteriv.trace = True
+glGetNamedRenderbufferParameteriv.play = True
+gl.add(glGetNamedRenderbufferParameteriv)
+
+glGetTextureImage = Function('glGetTextureImage')
+glGetTextureImage.ret = Return('void')
+glGetTextureImage.add( Input( 'texture','GLuint' ))
+glGetTextureImage.add( Input( 'level','GLint' ))
+glGetTextureImage.add( Input( 'format','GLenum' ))
+glGetTextureImage.add( Input( 'type','GLenum' ))
+glGetTextureImage.add( Input( 'bufSize','GLsizei' ))
+glGetTextureImage.add( Input( 'pixels','GLvoid *' ))
+glGetTextureImage.version = ''
+glGetTextureImage.category = 'GL_ARB_direct_state_access'
+glGetTextureImage.trace = True
+glGetTextureImage.play = True
+gl.add(glGetTextureImage)
+
+glGetTextureLevelParameterfv = Function('glGetTextureLevelParameterfv')
+glGetTextureLevelParameterfv.ret = Return('void')
+glGetTextureLevelParameterfv.add( Input( 'texture','GLuint' ))
+glGetTextureLevelParameterfv.add( Input( 'level','GLint' ))
+glGetTextureLevelParameterfv.add( Input( 'pname','GLenum' ))
+glGetTextureLevelParameterfv.add( Input( 'params','GLfloat *' ))
+glGetTextureLevelParameterfv.version = ''
+glGetTextureLevelParameterfv.category = 'GL_ARB_direct_state_access'
+glGetTextureLevelParameterfv.trace = True
+glGetTextureLevelParameterfv.play = True
+gl.add(glGetTextureLevelParameterfv)
+
+glGetTextureLevelParameteriv = Function('glGetTextureLevelParameteriv')
+glGetTextureLevelParameteriv.ret = Return('void')
+glGetTextureLevelParameteriv.add( Input( 'texture','GLuint' ))
+glGetTextureLevelParameteriv.add( Input( 'level','GLint' ))
+glGetTextureLevelParameteriv.add( Input( 'pname','GLenum' ))
+glGetTextureLevelParameteriv.add( Input( 'params','GLint *' ))
+glGetTextureLevelParameteriv.version = ''
+glGetTextureLevelParameteriv.category = 'GL_ARB_direct_state_access'
+glGetTextureLevelParameteriv.trace = True
+glGetTextureLevelParameteriv.play = True
+gl.add(glGetTextureLevelParameteriv)
+
+glGetTextureParameterIiv = Function('glGetTextureParameterIiv')
+glGetTextureParameterIiv.ret = Return('void')
+glGetTextureParameterIiv.add( Input( 'texture','GLuint' ))
+glGetTextureParameterIiv.add( Input( 'pname','GLenum' ))
+glGetTextureParameterIiv.add( Input( 'params','GLint *' ))
+glGetTextureParameterIiv.version = ''
+glGetTextureParameterIiv.category = 'GL_ARB_direct_state_access'
+glGetTextureParameterIiv.trace = True
+glGetTextureParameterIiv.play = True
+gl.add(glGetTextureParameterIiv)
+
+glGetTextureParameterIuiv = Function('glGetTextureParameterIuiv')
+glGetTextureParameterIuiv.ret = Return('void')
+glGetTextureParameterIuiv.add( Input( 'texture','GLuint' ))
+glGetTextureParameterIuiv.add( Input( 'pname','GLenum' ))
+glGetTextureParameterIuiv.add( Input( 'params','GLuint *' ))
+glGetTextureParameterIuiv.version = ''
+glGetTextureParameterIuiv.category = 'GL_ARB_direct_state_access'
+glGetTextureParameterIuiv.trace = True
+glGetTextureParameterIuiv.play = True
+gl.add(glGetTextureParameterIuiv)
+
+glGetTextureParameterfv = Function('glGetTextureParameterfv')
+glGetTextureParameterfv.ret = Return('void')
+glGetTextureParameterfv.add( Input( 'texture','GLuint' ))
+glGetTextureParameterfv.add( Input( 'pname','GLenum' ))
+glGetTextureParameterfv.add( Input( 'params','GLfloat *' ))
+glGetTextureParameterfv.version = ''
+glGetTextureParameterfv.category = 'GL_ARB_direct_state_access'
+glGetTextureParameterfv.trace = True
+glGetTextureParameterfv.play = True
+gl.add(glGetTextureParameterfv)
+
+glGetTextureParameteriv = Function('glGetTextureParameteriv')
+glGetTextureParameteriv.ret = Return('void')
+glGetTextureParameteriv.add( Input( 'texture','GLuint' ))
+glGetTextureParameteriv.add( Input( 'pname','GLenum' ))
+glGetTextureParameteriv.add( Input( 'params','GLint *' ))
+glGetTextureParameteriv.version = ''
+glGetTextureParameteriv.category = 'GL_ARB_direct_state_access'
+glGetTextureParameteriv.trace = True
+glGetTextureParameteriv.play = True
+gl.add(glGetTextureParameteriv)
+
+glGetTransformFeedbacki64_v = Function('glGetTransformFeedbacki64_v')
+glGetTransformFeedbacki64_v.ret = Return('void')
+glGetTransformFeedbacki64_v.add( Input( 'xfb','GLuint' ))
+glGetTransformFeedbacki64_v.add( Input( 'pname','GLenum' ))
+glGetTransformFeedbacki64_v.add( Input( 'index','GLuint' ))
+glGetTransformFeedbacki64_v.add( Input( 'param','GLint64 *' ))
+glGetTransformFeedbacki64_v.version = ''
+glGetTransformFeedbacki64_v.category = 'GL_ARB_direct_state_access'
+glGetTransformFeedbacki64_v.trace = True
+glGetTransformFeedbacki64_v.play = True
+gl.add(glGetTransformFeedbacki64_v)
+
+glGetTransformFeedbacki_v = Function('glGetTransformFeedbacki_v')
+glGetTransformFeedbacki_v.ret = Return('void')
+glGetTransformFeedbacki_v.add( Input( 'xfb','GLuint' ))
+glGetTransformFeedbacki_v.add( Input( 'pname','GLenum' ))
+glGetTransformFeedbacki_v.add( Input( 'index','GLuint' ))
+glGetTransformFeedbacki_v.add( Input( 'param','GLint *' ))
+glGetTransformFeedbacki_v.version = ''
+glGetTransformFeedbacki_v.category = 'GL_ARB_direct_state_access'
+glGetTransformFeedbacki_v.trace = True
+glGetTransformFeedbacki_v.play = True
+gl.add(glGetTransformFeedbacki_v)
+
+glGetTransformFeedbackiv = Function('glGetTransformFeedbackiv')
+glGetTransformFeedbackiv.ret = Return('void')
+glGetTransformFeedbackiv.add( Input( 'xfb','GLuint' ))
+glGetTransformFeedbackiv.add( Input( 'pname','GLenum' ))
+glGetTransformFeedbackiv.add( Input( 'param','GLint *' ))
+glGetTransformFeedbackiv.version = ''
+glGetTransformFeedbackiv.category = 'GL_ARB_direct_state_access'
+glGetTransformFeedbackiv.trace = True
+glGetTransformFeedbackiv.play = True
+gl.add(glGetTransformFeedbackiv)
+
+glGetVertexArrayIndexed64iv = Function('glGetVertexArrayIndexed64iv')
+glGetVertexArrayIndexed64iv.ret = Return('void')
+glGetVertexArrayIndexed64iv.add( Input( 'vaobj','GLuint' ))
+glGetVertexArrayIndexed64iv.add( Input( 'index','GLuint' ))
+glGetVertexArrayIndexed64iv.add( Input( 'pname','GLenum' ))
+glGetVertexArrayIndexed64iv.add( Input( 'param','GLint64 *' ))
+glGetVertexArrayIndexed64iv.version = ''
+glGetVertexArrayIndexed64iv.category = 'GL_ARB_direct_state_access'
+glGetVertexArrayIndexed64iv.trace = True
+glGetVertexArrayIndexed64iv.play = True
+gl.add(glGetVertexArrayIndexed64iv)
+
+glGetVertexArrayIndexediv = Function('glGetVertexArrayIndexediv')
+glGetVertexArrayIndexediv.ret = Return('void')
+glGetVertexArrayIndexediv.add( Input( 'vaobj','GLuint' ))
+glGetVertexArrayIndexediv.add( Input( 'index','GLuint' ))
+glGetVertexArrayIndexediv.add( Input( 'pname','GLenum' ))
+glGetVertexArrayIndexediv.add( Input( 'param','GLint *' ))
+glGetVertexArrayIndexediv.version = ''
+glGetVertexArrayIndexediv.category = 'GL_ARB_direct_state_access'
+glGetVertexArrayIndexediv.trace = True
+glGetVertexArrayIndexediv.play = True
+gl.add(glGetVertexArrayIndexediv)
+
+glGetVertexArrayiv = Function('glGetVertexArrayiv')
+glGetVertexArrayiv.ret = Return('void')
+glGetVertexArrayiv.add( Input( 'vaobj','GLuint' ))
+glGetVertexArrayiv.add( Input( 'pname','GLenum' ))
+glGetVertexArrayiv.add( Input( 'param','GLint *' ))
+glGetVertexArrayiv.version = ''
+glGetVertexArrayiv.category = 'GL_ARB_direct_state_access'
+glGetVertexArrayiv.trace = True
+glGetVertexArrayiv.play = True
+gl.add(glGetVertexArrayiv)
+
+glInvalidateNamedFramebufferData = Function('glInvalidateNamedFramebufferData')
+glInvalidateNamedFramebufferData.ret = Return('void')
+glInvalidateNamedFramebufferData.add( Input( 'framebuffer','GLuint' ))
+glInvalidateNamedFramebufferData.add( Input( 'numAttachments','GLsizei' ))
+glInvalidateNamedFramebufferData.add( Input( 'attachments','const GLenum *' ))
+glInvalidateNamedFramebufferData.version = ''
+glInvalidateNamedFramebufferData.category = 'GL_ARB_direct_state_access'
+glInvalidateNamedFramebufferData.trace = True
+glInvalidateNamedFramebufferData.play = True
+gl.add(glInvalidateNamedFramebufferData)
+
+glInvalidateNamedFramebufferSubData = Function('glInvalidateNamedFramebufferSubData')
+glInvalidateNamedFramebufferSubData.ret = Return('void')
+glInvalidateNamedFramebufferSubData.add( Input( 'framebuffer','GLuint' ))
+glInvalidateNamedFramebufferSubData.add( Input( 'numAttachments','GLsizei' ))
+glInvalidateNamedFramebufferSubData.add( Input( 'attachments','const GLenum *' ))
+glInvalidateNamedFramebufferSubData.add( Input( 'x','GLint' ))
+glInvalidateNamedFramebufferSubData.add( Input( 'y','GLint' ))
+glInvalidateNamedFramebufferSubData.add( Input( 'width','GLsizei' ))
+glInvalidateNamedFramebufferSubData.add( Input( 'height','GLsizei' ))
+glInvalidateNamedFramebufferSubData.version = ''
+glInvalidateNamedFramebufferSubData.category = 'GL_ARB_direct_state_access'
+glInvalidateNamedFramebufferSubData.trace = True
+glInvalidateNamedFramebufferSubData.play = True
+gl.add(glInvalidateNamedFramebufferSubData)
+
+glMapNamedBuffer = Function('glMapNamedBuffer')
+glMapNamedBuffer.ret = Return('GLvoid *')
+glMapNamedBuffer.add( Input( 'buffer','GLuint' ))
+glMapNamedBuffer.add( Input( 'access','GLenum' ))
+glMapNamedBuffer.version = ''
+glMapNamedBuffer.category = 'GL_ARB_direct_state_access'
+glMapNamedBuffer.trace = True
+glMapNamedBuffer.play = True
+gl.add(glMapNamedBuffer)
+
+glMapNamedBufferRange = Function('glMapNamedBufferRange')
+glMapNamedBufferRange.ret = Return('GLvoid *')
+glMapNamedBufferRange.add( Input( 'buffer','GLuint' ))
+glMapNamedBufferRange.add( Input( 'offset','GLintptr' ))
+glMapNamedBufferRange.add( Input( 'length','GLsizeiptr' ))
+glMapNamedBufferRange.add( Input( 'access','GLbitfield' ))
+glMapNamedBufferRange.version = ''
+glMapNamedBufferRange.category = 'GL_ARB_direct_state_access'
+glMapNamedBufferRange.trace = True
+glMapNamedBufferRange.play = True
+gl.add(glMapNamedBufferRange)
+
+glNamedBufferData = Function('glNamedBufferData')
+glNamedBufferData.ret = Return('void')
+glNamedBufferData.add( Input( 'buffer','GLuint' ))
+glNamedBufferData.add( Input( 'size','GLsizeiptr' ))
+glNamedBufferData.add( Input( 'data','const GLvoid *' ))
+glNamedBufferData.add( Input( 'usage','GLenum' ))
+glNamedBufferData.version = ''
+glNamedBufferData.category = 'GL_ARB_direct_state_access'
+glNamedBufferData.trace = True
+glNamedBufferData.play = True
+gl.add(glNamedBufferData)
+
+glNamedBufferStorage = Function('glNamedBufferStorage')
+glNamedBufferStorage.ret = Return('void')
+glNamedBufferStorage.add( Input( 'buffer','GLuint' ))
+glNamedBufferStorage.add( Input( 'size','GLsizeiptr' ))
+glNamedBufferStorage.add( Input( 'data','const GLvoid *' ))
+glNamedBufferStorage.add( Input( 'flags','GLbitfield' ))
+glNamedBufferStorage.version = ''
+glNamedBufferStorage.category = 'GL_ARB_direct_state_access'
+glNamedBufferStorage.trace = True
+glNamedBufferStorage.play = True
+gl.add(glNamedBufferStorage)
+
+glNamedBufferSubData = Function('glNamedBufferSubData')
+glNamedBufferSubData.ret = Return('void')
+glNamedBufferSubData.add( Input( 'buffer','GLuint' ))
+glNamedBufferSubData.add( Input( 'offset','GLintptr' ))
+glNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
+glNamedBufferSubData.add( Input( 'data','const GLvoid *' ))
+glNamedBufferSubData.version = ''
+glNamedBufferSubData.category = 'GL_ARB_direct_state_access'
+glNamedBufferSubData.trace = True
+glNamedBufferSubData.play = True
+gl.add(glNamedBufferSubData)
+
+glNamedFramebufferDrawBuffer = Function('glNamedFramebufferDrawBuffer')
+glNamedFramebufferDrawBuffer.ret = Return('void')
+glNamedFramebufferDrawBuffer.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferDrawBuffer.add( Input( 'mode','GLenum' ))
+glNamedFramebufferDrawBuffer.version = ''
+glNamedFramebufferDrawBuffer.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferDrawBuffer.trace = True
+glNamedFramebufferDrawBuffer.play = True
+gl.add(glNamedFramebufferDrawBuffer)
+
+glNamedFramebufferDrawBuffers = Function('glNamedFramebufferDrawBuffers')
+glNamedFramebufferDrawBuffers.ret = Return('void')
+glNamedFramebufferDrawBuffers.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferDrawBuffers.add( Input( 'n','GLsizei' ))
+glNamedFramebufferDrawBuffers.add( Input( 'bufs','const GLenum *' ))
+glNamedFramebufferDrawBuffers.version = ''
+glNamedFramebufferDrawBuffers.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferDrawBuffers.trace = True
+glNamedFramebufferDrawBuffers.play = True
+gl.add(glNamedFramebufferDrawBuffers)
+
+glNamedFramebufferParameteri = Function('glNamedFramebufferParameteri')
+glNamedFramebufferParameteri.ret = Return('void')
+glNamedFramebufferParameteri.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferParameteri.add( Input( 'pname','GLenum' ))
+glNamedFramebufferParameteri.add( Input( 'param','GLint' ))
+glNamedFramebufferParameteri.version = ''
+glNamedFramebufferParameteri.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferParameteri.trace = True
+glNamedFramebufferParameteri.play = True
+gl.add(glNamedFramebufferParameteri)
+
+glNamedFramebufferReadBuffer = Function('glNamedFramebufferReadBuffer')
+glNamedFramebufferReadBuffer.ret = Return('void')
+glNamedFramebufferReadBuffer.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferReadBuffer.add( Input( 'mode','GLenum' ))
+glNamedFramebufferReadBuffer.version = ''
+glNamedFramebufferReadBuffer.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferReadBuffer.trace = True
+glNamedFramebufferReadBuffer.play = True
+gl.add(glNamedFramebufferReadBuffer)
+
+glNamedFramebufferRenderbuffer = Function('glNamedFramebufferRenderbuffer')
+glNamedFramebufferRenderbuffer.ret = Return('void')
+glNamedFramebufferRenderbuffer.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferRenderbuffer.add( Input( 'attachment','GLenum' ))
+glNamedFramebufferRenderbuffer.add( Input( 'renderbuffertarget','GLenum' ))
+glNamedFramebufferRenderbuffer.add( Input( 'renderbuffer','GLuint' ))
+glNamedFramebufferRenderbuffer.version = ''
+glNamedFramebufferRenderbuffer.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferRenderbuffer.trace = True
+glNamedFramebufferRenderbuffer.play = True
+gl.add(glNamedFramebufferRenderbuffer)
+
+glNamedFramebufferTexture = Function('glNamedFramebufferTexture')
+glNamedFramebufferTexture.ret = Return('void')
+glNamedFramebufferTexture.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferTexture.add( Input( 'attachment','GLenum' ))
+glNamedFramebufferTexture.add( Input( 'texture','GLuint' ))
+glNamedFramebufferTexture.add( Input( 'level','GLint' ))
+glNamedFramebufferTexture.version = ''
+glNamedFramebufferTexture.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferTexture.trace = True
+glNamedFramebufferTexture.play = True
+gl.add(glNamedFramebufferTexture)
+
+glNamedFramebufferTextureLayer = Function('glNamedFramebufferTextureLayer')
+glNamedFramebufferTextureLayer.ret = Return('void')
+glNamedFramebufferTextureLayer.add( Input( 'framebuffer','GLuint' ))
+glNamedFramebufferTextureLayer.add( Input( 'attachment','GLenum' ))
+glNamedFramebufferTextureLayer.add( Input( 'texture','GLuint' ))
+glNamedFramebufferTextureLayer.add( Input( 'level','GLint' ))
+glNamedFramebufferTextureLayer.add( Input( 'layer','GLint' ))
+glNamedFramebufferTextureLayer.version = ''
+glNamedFramebufferTextureLayer.category = 'GL_ARB_direct_state_access'
+glNamedFramebufferTextureLayer.trace = True
+glNamedFramebufferTextureLayer.play = True
+gl.add(glNamedFramebufferTextureLayer)
+
+glNamedRenderbufferStorage = Function('glNamedRenderbufferStorage')
+glNamedRenderbufferStorage.ret = Return('void')
+glNamedRenderbufferStorage.add( Input( 'renderbuffer','GLuint' ))
+glNamedRenderbufferStorage.add( Input( 'internalformat','GLenum' ))
+glNamedRenderbufferStorage.add( Input( 'width','GLsizei' ))
+glNamedRenderbufferStorage.add( Input( 'height','GLsizei' ))
+glNamedRenderbufferStorage.version = ''
+glNamedRenderbufferStorage.category = 'GL_ARB_direct_state_access'
+glNamedRenderbufferStorage.trace = True
+glNamedRenderbufferStorage.play = True
+gl.add(glNamedRenderbufferStorage)
+
+glNamedRenderbufferStorageMultisample = Function('glNamedRenderbufferStorageMultisample')
+glNamedRenderbufferStorageMultisample.ret = Return('void')
+glNamedRenderbufferStorageMultisample.add( Input( 'renderbuffer','GLuint' ))
+glNamedRenderbufferStorageMultisample.add( Input( 'samples','GLsizei' ))
+glNamedRenderbufferStorageMultisample.add( Input( 'internalformat','GLenum' ))
+glNamedRenderbufferStorageMultisample.add( Input( 'width','GLsizei' ))
+glNamedRenderbufferStorageMultisample.add( Input( 'height','GLsizei' ))
+glNamedRenderbufferStorageMultisample.version = ''
+glNamedRenderbufferStorageMultisample.category = 'GL_ARB_direct_state_access'
+glNamedRenderbufferStorageMultisample.trace = True
+glNamedRenderbufferStorageMultisample.play = True
+gl.add(glNamedRenderbufferStorageMultisample)
+
+glTextureBuffer = Function('glTextureBuffer')
+glTextureBuffer.ret = Return('void')
+glTextureBuffer.add( Input( 'texture','GLuint' ))
+glTextureBuffer.add( Input( 'internalformat','GLenum' ))
+glTextureBuffer.add( Input( 'buffer','GLuint' ))
+glTextureBuffer.version = ''
+glTextureBuffer.category = 'GL_ARB_direct_state_access'
+glTextureBuffer.trace = True
+glTextureBuffer.play = True
+gl.add(glTextureBuffer)
+
+glTextureBufferRange = Function('glTextureBufferRange')
+glTextureBufferRange.ret = Return('void')
+glTextureBufferRange.add( Input( 'texture','GLuint' ))
+glTextureBufferRange.add( Input( 'internalformat','GLenum' ))
+glTextureBufferRange.add( Input( 'buffer','GLuint' ))
+glTextureBufferRange.add( Input( 'offset','GLintptr' ))
+glTextureBufferRange.add( Input( 'size','GLsizeiptr' ))
+glTextureBufferRange.version = ''
+glTextureBufferRange.category = 'GL_ARB_direct_state_access'
+glTextureBufferRange.trace = True
+glTextureBufferRange.play = True
+gl.add(glTextureBufferRange)
+
+glTextureParameterIiv = Function('glTextureParameterIiv')
+glTextureParameterIiv.ret = Return('void')
+glTextureParameterIiv.add( Input( 'texture','GLuint' ))
+glTextureParameterIiv.add( Input( 'pname','GLenum' ))
+glTextureParameterIiv.add( Input( 'params','const GLint *' ))
+glTextureParameterIiv.version = ''
+glTextureParameterIiv.category = 'GL_ARB_direct_state_access'
+glTextureParameterIiv.trace = True
+glTextureParameterIiv.play = True
+gl.add(glTextureParameterIiv)
+
+glTextureParameterIuiv = Function('glTextureParameterIuiv')
+glTextureParameterIuiv.ret = Return('void')
+glTextureParameterIuiv.add( Input( 'texture','GLuint' ))
+glTextureParameterIuiv.add( Input( 'pname','GLenum' ))
+glTextureParameterIuiv.add( Input( 'params','const GLuint *' ))
+glTextureParameterIuiv.version = ''
+glTextureParameterIuiv.category = 'GL_ARB_direct_state_access'
+glTextureParameterIuiv.trace = True
+glTextureParameterIuiv.play = True
+gl.add(glTextureParameterIuiv)
+
+glTextureParameterf = Function('glTextureParameterf')
+glTextureParameterf.ret = Return('void')
+glTextureParameterf.add( Input( 'texture','GLuint' ))
+glTextureParameterf.add( Input( 'pname','GLenum' ))
+glTextureParameterf.add( Input( 'param','GLfloat' ))
+glTextureParameterf.version = ''
+glTextureParameterf.category = 'GL_ARB_direct_state_access'
+glTextureParameterf.trace = True
+glTextureParameterf.play = True
+gl.add(glTextureParameterf)
+
+glTextureParameterfv = Function('glTextureParameterfv')
+glTextureParameterfv.ret = Return('void')
+glTextureParameterfv.add( Input( 'texture','GLuint' ))
+glTextureParameterfv.add( Input( 'pname','GLenum' ))
+glTextureParameterfv.add( Input( 'param','const GLfloat *' ))
+glTextureParameterfv.version = ''
+glTextureParameterfv.category = 'GL_ARB_direct_state_access'
+glTextureParameterfv.trace = True
+glTextureParameterfv.play = True
+gl.add(glTextureParameterfv)
+
+glTextureParameteri = Function('glTextureParameteri')
+glTextureParameteri.ret = Return('void')
+glTextureParameteri.add( Input( 'texture','GLuint' ))
+glTextureParameteri.add( Input( 'pname','GLenum' ))
+glTextureParameteri.add( Input( 'param','GLint' ))
+glTextureParameteri.version = ''
+glTextureParameteri.category = 'GL_ARB_direct_state_access'
+glTextureParameteri.trace = True
+glTextureParameteri.play = True
+gl.add(glTextureParameteri)
+
+glTextureParameteriv = Function('glTextureParameteriv')
+glTextureParameteriv.ret = Return('void')
+glTextureParameteriv.add( Input( 'texture','GLuint' ))
+glTextureParameteriv.add( Input( 'pname','GLenum' ))
+glTextureParameteriv.add( Input( 'param','const GLint *' ))
+glTextureParameteriv.version = ''
+glTextureParameteriv.category = 'GL_ARB_direct_state_access'
+glTextureParameteriv.trace = True
+glTextureParameteriv.play = True
+gl.add(glTextureParameteriv)
+
+glTextureStorage1D = Function('glTextureStorage1D')
+glTextureStorage1D.ret = Return('void')
+glTextureStorage1D.add( Input( 'texture','GLuint' ))
+glTextureStorage1D.add( Input( 'levels','GLsizei' ))
+glTextureStorage1D.add( Input( 'internalformat','GLenum' ))
+glTextureStorage1D.add( Input( 'width','GLsizei' ))
+glTextureStorage1D.version = ''
+glTextureStorage1D.category = 'GL_ARB_direct_state_access'
+glTextureStorage1D.trace = True
+glTextureStorage1D.play = True
+gl.add(glTextureStorage1D)
+
+glTextureStorage2D = Function('glTextureStorage2D')
+glTextureStorage2D.ret = Return('void')
+glTextureStorage2D.add( Input( 'texture','GLuint' ))
+glTextureStorage2D.add( Input( 'levels','GLsizei' ))
+glTextureStorage2D.add( Input( 'internalformat','GLenum' ))
+glTextureStorage2D.add( Input( 'width','GLsizei' ))
+glTextureStorage2D.add( Input( 'height','GLsizei' ))
+glTextureStorage2D.version = ''
+glTextureStorage2D.category = 'GL_ARB_direct_state_access'
+glTextureStorage2D.trace = True
+glTextureStorage2D.play = True
+gl.add(glTextureStorage2D)
+
+glTextureStorage2DMultisample = Function('glTextureStorage2DMultisample')
+glTextureStorage2DMultisample.ret = Return('void')
+glTextureStorage2DMultisample.add( Input( 'texture','GLuint' ))
+glTextureStorage2DMultisample.add( Input( 'samples','GLsizei' ))
+glTextureStorage2DMultisample.add( Input( 'internalformat','GLenum' ))
+glTextureStorage2DMultisample.add( Input( 'width','GLsizei' ))
+glTextureStorage2DMultisample.add( Input( 'height','GLsizei' ))
+glTextureStorage2DMultisample.add( Input( 'fixedsamplelocations','GLboolean' ))
+glTextureStorage2DMultisample.version = ''
+glTextureStorage2DMultisample.category = 'GL_ARB_direct_state_access'
+glTextureStorage2DMultisample.trace = True
+glTextureStorage2DMultisample.play = True
+gl.add(glTextureStorage2DMultisample)
+
+glTextureStorage3D = Function('glTextureStorage3D')
+glTextureStorage3D.ret = Return('void')
+glTextureStorage3D.add( Input( 'texture','GLuint' ))
+glTextureStorage3D.add( Input( 'levels','GLsizei' ))
+glTextureStorage3D.add( Input( 'internalformat','GLenum' ))
+glTextureStorage3D.add( Input( 'width','GLsizei' ))
+glTextureStorage3D.add( Input( 'height','GLsizei' ))
+glTextureStorage3D.add( Input( 'depth','GLsizei' ))
+glTextureStorage3D.version = ''
+glTextureStorage3D.category = 'GL_ARB_direct_state_access'
+glTextureStorage3D.trace = True
+glTextureStorage3D.play = True
+gl.add(glTextureStorage3D)
+
+glTextureStorage3DMultisample = Function('glTextureStorage3DMultisample')
+glTextureStorage3DMultisample.ret = Return('void')
+glTextureStorage3DMultisample.add( Input( 'texture','GLuint' ))
+glTextureStorage3DMultisample.add( Input( 'samples','GLsizei' ))
+glTextureStorage3DMultisample.add( Input( 'internalformat','GLenum' ))
+glTextureStorage3DMultisample.add( Input( 'width','GLsizei' ))
+glTextureStorage3DMultisample.add( Input( 'height','GLsizei' ))
+glTextureStorage3DMultisample.add( Input( 'depth','GLsizei' ))
+glTextureStorage3DMultisample.add( Input( 'fixedsamplelocations','GLboolean' ))
+glTextureStorage3DMultisample.version = ''
+glTextureStorage3DMultisample.category = 'GL_ARB_direct_state_access'
+glTextureStorage3DMultisample.trace = True
+glTextureStorage3DMultisample.play = True
+gl.add(glTextureStorage3DMultisample)
+
+glTextureSubImage1D = Function('glTextureSubImage1D')
+glTextureSubImage1D.ret = Return('void')
+glTextureSubImage1D.add( Input( 'texture','GLuint' ))
+glTextureSubImage1D.add( Input( 'level','GLint' ))
+glTextureSubImage1D.add( Input( 'xoffset','GLint' ))
+glTextureSubImage1D.add( Input( 'width','GLsizei' ))
+glTextureSubImage1D.add( Input( 'format','GLenum' ))
+glTextureSubImage1D.add( Input( 'type','GLenum' ))
+glTextureSubImage1D.add( Input( 'pixels','const GLvoid *' ))
+glTextureSubImage1D.version = ''
+glTextureSubImage1D.category = 'GL_ARB_direct_state_access'
+glTextureSubImage1D.trace = True
+glTextureSubImage1D.play = True
+gl.add(glTextureSubImage1D)
+
+glTextureSubImage2D = Function('glTextureSubImage2D')
+glTextureSubImage2D.ret = Return('void')
+glTextureSubImage2D.add( Input( 'texture','GLuint' ))
+glTextureSubImage2D.add( Input( 'level','GLint' ))
+glTextureSubImage2D.add( Input( 'xoffset','GLint' ))
+glTextureSubImage2D.add( Input( 'yoffset','GLint' ))
+glTextureSubImage2D.add( Input( 'width','GLsizei' ))
+glTextureSubImage2D.add( Input( 'height','GLsizei' ))
+glTextureSubImage2D.add( Input( 'format','GLenum' ))
+glTextureSubImage2D.add( Input( 'type','GLenum' ))
+glTextureSubImage2D.add( Input( 'pixels','const GLvoid *' ))
+glTextureSubImage2D.version = ''
+glTextureSubImage2D.category = 'GL_ARB_direct_state_access'
+glTextureSubImage2D.trace = True
+glTextureSubImage2D.play = True
+gl.add(glTextureSubImage2D)
+
+glTextureSubImage3D = Function('glTextureSubImage3D')
+glTextureSubImage3D.ret = Return('void')
+glTextureSubImage3D.add( Input( 'texture','GLuint' ))
+glTextureSubImage3D.add( Input( 'level','GLint' ))
+glTextureSubImage3D.add( Input( 'xoffset','GLint' ))
+glTextureSubImage3D.add( Input( 'yoffset','GLint' ))
+glTextureSubImage3D.add( Input( 'zoffset','GLint' ))
+glTextureSubImage3D.add( Input( 'width','GLsizei' ))
+glTextureSubImage3D.add( Input( 'height','GLsizei' ))
+glTextureSubImage3D.add( Input( 'depth','GLsizei' ))
+glTextureSubImage3D.add( Input( 'format','GLenum' ))
+glTextureSubImage3D.add( Input( 'type','GLenum' ))
+glTextureSubImage3D.add( Input( 'pixels','const GLvoid *' ))
+glTextureSubImage3D.version = ''
+glTextureSubImage3D.category = 'GL_ARB_direct_state_access'
+glTextureSubImage3D.trace = True
+glTextureSubImage3D.play = True
+gl.add(glTextureSubImage3D)
+
+glTransformFeedbackBufferBase = Function('glTransformFeedbackBufferBase')
+glTransformFeedbackBufferBase.ret = Return('void')
+glTransformFeedbackBufferBase.add( Input( 'xfb','GLuint' ))
+glTransformFeedbackBufferBase.add( Input( 'index','GLuint' ))
+glTransformFeedbackBufferBase.add( Input( 'buffer','GLuint' ))
+glTransformFeedbackBufferBase.version = ''
+glTransformFeedbackBufferBase.category = 'GL_ARB_direct_state_access'
+glTransformFeedbackBufferBase.trace = True
+glTransformFeedbackBufferBase.play = True
+gl.add(glTransformFeedbackBufferBase)
+
+glTransformFeedbackBufferRange = Function('glTransformFeedbackBufferRange')
+glTransformFeedbackBufferRange.ret = Return('void')
+glTransformFeedbackBufferRange.add( Input( 'xfb','GLuint' ))
+glTransformFeedbackBufferRange.add( Input( 'index','GLuint' ))
+glTransformFeedbackBufferRange.add( Input( 'buffer','GLuint' ))
+glTransformFeedbackBufferRange.add( Input( 'offset','GLintptr' ))
+glTransformFeedbackBufferRange.add( Input( 'size','GLsizeiptr' ))
+glTransformFeedbackBufferRange.version = ''
+glTransformFeedbackBufferRange.category = 'GL_ARB_direct_state_access'
+glTransformFeedbackBufferRange.trace = True
+glTransformFeedbackBufferRange.play = True
+gl.add(glTransformFeedbackBufferRange)
+
+glUnmapNamedBuffer = Function('glUnmapNamedBuffer')
+glUnmapNamedBuffer.ret = Return('GLboolean')
+glUnmapNamedBuffer.add( Input( 'buffer','GLuint' ))
+glUnmapNamedBuffer.version = ''
+glUnmapNamedBuffer.category = 'GL_ARB_direct_state_access'
+glUnmapNamedBuffer.trace = True
+glUnmapNamedBuffer.play = True
+gl.add(glUnmapNamedBuffer)
+
+glVertexArrayAttribBinding = Function('glVertexArrayAttribBinding')
+glVertexArrayAttribBinding.ret = Return('void')
+glVertexArrayAttribBinding.add( Input( 'vaobj','GLuint' ))
+glVertexArrayAttribBinding.add( Input( 'attribindex','GLuint' ))
+glVertexArrayAttribBinding.add( Input( 'bindingindex','GLuint' ))
+glVertexArrayAttribBinding.version = ''
+glVertexArrayAttribBinding.category = 'GL_ARB_direct_state_access'
+glVertexArrayAttribBinding.trace = True
+glVertexArrayAttribBinding.play = True
+gl.add(glVertexArrayAttribBinding)
+
+glVertexArrayAttribFormat = Function('glVertexArrayAttribFormat')
+glVertexArrayAttribFormat.ret = Return('void')
+glVertexArrayAttribFormat.add( Input( 'vaobj','GLuint' ))
+glVertexArrayAttribFormat.add( Input( 'attribindex','GLuint' ))
+glVertexArrayAttribFormat.add( Input( 'size','GLint' ))
+glVertexArrayAttribFormat.add( Input( 'type','GLenum' ))
+glVertexArrayAttribFormat.add( Input( 'normalized','GLboolean' ))
+glVertexArrayAttribFormat.add( Input( 'relativeoffset','GLuint' ))
+glVertexArrayAttribFormat.version = ''
+glVertexArrayAttribFormat.category = 'GL_ARB_direct_state_access'
+glVertexArrayAttribFormat.trace = True
+glVertexArrayAttribFormat.play = True
+gl.add(glVertexArrayAttribFormat)
+
+glVertexArrayAttribIFormat = Function('glVertexArrayAttribIFormat')
+glVertexArrayAttribIFormat.ret = Return('void')
+glVertexArrayAttribIFormat.add( Input( 'vaobj','GLuint' ))
+glVertexArrayAttribIFormat.add( Input( 'attribindex','GLuint' ))
+glVertexArrayAttribIFormat.add( Input( 'size','GLint' ))
+glVertexArrayAttribIFormat.add( Input( 'type','GLenum' ))
+glVertexArrayAttribIFormat.add( Input( 'relativeoffset','GLuint' ))
+glVertexArrayAttribIFormat.version = ''
+glVertexArrayAttribIFormat.category = 'GL_ARB_direct_state_access'
+glVertexArrayAttribIFormat.trace = True
+glVertexArrayAttribIFormat.play = True
+gl.add(glVertexArrayAttribIFormat)
+
+glVertexArrayAttribLFormat = Function('glVertexArrayAttribLFormat')
+glVertexArrayAttribLFormat.ret = Return('void')
+glVertexArrayAttribLFormat.add( Input( 'vaobj','GLuint' ))
+glVertexArrayAttribLFormat.add( Input( 'attribindex','GLuint' ))
+glVertexArrayAttribLFormat.add( Input( 'size','GLint' ))
+glVertexArrayAttribLFormat.add( Input( 'type','GLenum' ))
+glVertexArrayAttribLFormat.add( Input( 'relativeoffset','GLuint' ))
+glVertexArrayAttribLFormat.version = ''
+glVertexArrayAttribLFormat.category = 'GL_ARB_direct_state_access'
+glVertexArrayAttribLFormat.trace = True
+glVertexArrayAttribLFormat.play = True
+gl.add(glVertexArrayAttribLFormat)
+
+glVertexArrayBindingDivisor = Function('glVertexArrayBindingDivisor')
+glVertexArrayBindingDivisor.ret = Return('void')
+glVertexArrayBindingDivisor.add( Input( 'vaobj','GLuint' ))
+glVertexArrayBindingDivisor.add( Input( 'bindingindex','GLuint' ))
+glVertexArrayBindingDivisor.add( Input( 'divisor','GLuint' ))
+glVertexArrayBindingDivisor.version = ''
+glVertexArrayBindingDivisor.category = 'GL_ARB_direct_state_access'
+glVertexArrayBindingDivisor.trace = True
+glVertexArrayBindingDivisor.play = True
+gl.add(glVertexArrayBindingDivisor)
+
+glVertexArrayElementBuffer = Function('glVertexArrayElementBuffer')
+glVertexArrayElementBuffer.ret = Return('void')
+glVertexArrayElementBuffer.add( Input( 'vaobj','GLuint' ))
+glVertexArrayElementBuffer.add( Input( 'buffer','GLuint' ))
+glVertexArrayElementBuffer.version = ''
+glVertexArrayElementBuffer.category = 'GL_ARB_direct_state_access'
+glVertexArrayElementBuffer.trace = True
+glVertexArrayElementBuffer.play = True
+gl.add(glVertexArrayElementBuffer)
+
+glVertexArrayVertexBuffer = Function('glVertexArrayVertexBuffer')
+glVertexArrayVertexBuffer.ret = Return('void')
+glVertexArrayVertexBuffer.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexBuffer.add( Input( 'bindingindex','GLuint' ))
+glVertexArrayVertexBuffer.add( Input( 'buffer','GLuint' ))
+glVertexArrayVertexBuffer.add( Input( 'offset','GLintptr' ))
+glVertexArrayVertexBuffer.add( Input( 'stride','GLsizei' ))
+glVertexArrayVertexBuffer.version = ''
+glVertexArrayVertexBuffer.category = 'GL_ARB_direct_state_access'
+glVertexArrayVertexBuffer.trace = True
+glVertexArrayVertexBuffer.play = True
+gl.add(glVertexArrayVertexBuffer)
+
+glVertexArrayVertexBuffers = Function('glVertexArrayVertexBuffers')
+glVertexArrayVertexBuffers.ret = Return('void')
+glVertexArrayVertexBuffers.add( Input( 'vaobj','GLuint' ))
+glVertexArrayVertexBuffers.add( Input( 'first','GLuint' ))
+glVertexArrayVertexBuffers.add( Input( 'count','GLsizei' ))
+glVertexArrayVertexBuffers.add( Input( 'buffers','const GLuint *' ))
+glVertexArrayVertexBuffers.add( Input( 'offsets','const GLintptr *' ))
+glVertexArrayVertexBuffers.add( Input( 'strides','const GLsizei *' ))
+glVertexArrayVertexBuffers.version = ''
+glVertexArrayVertexBuffers.category = 'GL_ARB_direct_state_access'
+glVertexArrayVertexBuffers.trace = True
+glVertexArrayVertexBuffers.play = True
+gl.add(glVertexArrayVertexBuffers)
 
 # GL_ARB_draw_buffers
 
@@ -20713,35 +22039,12 @@ glMultiDrawElementsBaseVertex.trace = True
 glMultiDrawElementsBaseVertex.play = False
 gl.add(glMultiDrawElementsBaseVertex)
 
-# GL_ARB_draw_indirect
-
-glDrawArraysIndirect = Function('glDrawArraysIndirect')
-glDrawArraysIndirect.ret = Return('void')
-glDrawArraysIndirect.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glDrawArraysIndirect.add( Input( 'indirect','const GLvoid *' ))
-glDrawArraysIndirect.version = '4.0'
-glDrawArraysIndirect.category = 'GL_ARB_draw_indirect'
-glDrawArraysIndirect.trace = True
-glDrawArraysIndirect.play = True
-gl.add(glDrawArraysIndirect)
-
-glDrawElementsIndirect = Function('glDrawElementsIndirect')
-glDrawElementsIndirect.ret = Return('void')
-glDrawElementsIndirect.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glDrawElementsIndirect.add( Input( 'type','GLenum' ))
-glDrawElementsIndirect.add( Input( 'indirect','const GLvoid *' ))
-glDrawElementsIndirect.version = '4.0'
-glDrawElementsIndirect.category = 'GL_ARB_draw_indirect'
-glDrawElementsIndirect.trace = True
-glDrawElementsIndirect.play = True
-gl.add(glDrawElementsIndirect)
-
 # GL_ARB_draw_instanced
 
 glDrawArraysInstancedARB = Function('glDrawArraysInstancedARB')
 glDrawArraysInstancedARB.ret = Return('void')
 glDrawArraysInstancedARB.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glDrawArraysInstancedARB.add( Input( 'start','GLint' ))
+glDrawArraysInstancedARB.add( Input( 'first','GLint' ))
 glDrawArraysInstancedARB.add( Input( 'count','GLsizei' ))
 glDrawArraysInstancedARB.add( Input( 'primcount','GLsizei' ))
 glDrawArraysInstancedARB.version = '2.0'
@@ -21141,6 +22444,46 @@ glProgramParameteri.category = 'GL_ARB_get_program_binary'
 glProgramParameteri.trace = True
 glProgramParameteri.play = True
 gl.add(glProgramParameteri)
+
+# GL_ARB_get_texture_sub_image
+
+glGetCompressedTextureSubImage = Function('glGetCompressedTextureSubImage')
+glGetCompressedTextureSubImage.ret = Return('void')
+glGetCompressedTextureSubImage.add( Input( 'texture','GLuint' ))
+glGetCompressedTextureSubImage.add( Input( 'level','GLint' ))
+glGetCompressedTextureSubImage.add( Input( 'xoffset','GLint' ))
+glGetCompressedTextureSubImage.add( Input( 'yoffset','GLint' ))
+glGetCompressedTextureSubImage.add( Input( 'zoffset','GLint' ))
+glGetCompressedTextureSubImage.add( Input( 'width','GLsizei' ))
+glGetCompressedTextureSubImage.add( Input( 'height','GLsizei' ))
+glGetCompressedTextureSubImage.add( Input( 'depth','GLsizei' ))
+glGetCompressedTextureSubImage.add( Input( 'bufSize','GLsizei' ))
+glGetCompressedTextureSubImage.add( Input( 'pixels','GLvoid *' ))
+glGetCompressedTextureSubImage.version = ''
+glGetCompressedTextureSubImage.category = 'GL_ARB_get_texture_sub_image'
+glGetCompressedTextureSubImage.trace = True
+glGetCompressedTextureSubImage.play = True
+gl.add(glGetCompressedTextureSubImage)
+
+glGetTextureSubImage = Function('glGetTextureSubImage')
+glGetTextureSubImage.ret = Return('void')
+glGetTextureSubImage.add( Input( 'texture','GLuint' ))
+glGetTextureSubImage.add( Input( 'level','GLint' ))
+glGetTextureSubImage.add( Input( 'xoffset','GLint' ))
+glGetTextureSubImage.add( Input( 'yoffset','GLint' ))
+glGetTextureSubImage.add( Input( 'zoffset','GLint' ))
+glGetTextureSubImage.add( Input( 'width','GLsizei' ))
+glGetTextureSubImage.add( Input( 'height','GLsizei' ))
+glGetTextureSubImage.add( Input( 'depth','GLsizei' ))
+glGetTextureSubImage.add( Input( 'format','GLenum' ))
+glGetTextureSubImage.add( Input( 'type','GLenum' ))
+glGetTextureSubImage.add( Input( 'bufSize','GLsizei' ))
+glGetTextureSubImage.add( Input( 'pixels','GLvoid *' ))
+glGetTextureSubImage.version = ''
+glGetTextureSubImage.category = 'GL_ARB_get_texture_sub_image'
+glGetTextureSubImage.trace = True
+glGetTextureSubImage.play = True
+gl.add(glGetTextureSubImage)
 
 # GL_ARB_gpu_shader_fp64
 
@@ -21639,7 +22982,7 @@ glGetMinmax.ret = Return('void')
 glGetMinmax.add( Input( 'target','GLenum' ))
 glGetMinmax.add( Input( 'reset','GLboolean' ))
 glGetMinmax.add( Input( 'format','GLenum' ))
-glGetMinmax.add( Input( 'types','GLenum' ))
+glGetMinmax.add( Input( 'type','GLenum' ))
 glGetMinmax.add( Output( 'values','GLvoid *' ))
 glGetMinmax.version = '1.2'
 glGetMinmax.category = 'GL_ARB_imaging'
@@ -22883,15 +24226,6 @@ glReadnPixelsARB.play = True
 gl.add(glReadnPixelsARB)
 
 # GL_ARB_sample_shading
-
-glMinSampleShading = Function('glMinSampleShading')
-glMinSampleShading.ret = Return('void')
-glMinSampleShading.add( Input( 'value','GLclampf' ))
-glMinSampleShading.version = '4.0'
-glMinSampleShading.category = 'GL_ARB_sample_shading'
-glMinSampleShading.trace = True
-glMinSampleShading.play = True
-gl.add(glMinSampleShading)
 
 glMinSampleShadingARB = Function('glMinSampleShadingARB')
 glMinSampleShadingARB.ret = Return('void')
@@ -24455,6 +25789,20 @@ glNamedStringARB.trace = True
 glNamedStringARB.play = True
 gl.add(glNamedStringARB)
 
+# GL_ARB_sparse_buffer
+
+glBufferPageCommitmentARB = Function('glBufferPageCommitmentARB')
+glBufferPageCommitmentARB.ret = Return('void')
+glBufferPageCommitmentARB.add( Input( 'target','GLenum' ))
+glBufferPageCommitmentARB.add( Input( 'offset','GLintptr' ))
+glBufferPageCommitmentARB.add( Input( 'size','GLsizeiptr' ))
+glBufferPageCommitmentARB.add( Input( 'commit','GLboolean' ))
+glBufferPageCommitmentARB.version = ''
+glBufferPageCommitmentARB.category = 'GL_ARB_sparse_buffer'
+glBufferPageCommitmentARB.trace = True
+glBufferPageCommitmentARB.play = True
+gl.add(glBufferPageCommitmentARB)
+
 # GL_ARB_sparse_texture
 
 glTexPageCommitmentARB = Function('glTexPageCommitmentARB')
@@ -24467,7 +25815,7 @@ glTexPageCommitmentARB.add( Input( 'zoffset','GLint' ))
 glTexPageCommitmentARB.add( Input( 'width','GLsizei' ))
 glTexPageCommitmentARB.add( Input( 'height','GLsizei' ))
 glTexPageCommitmentARB.add( Input( 'depth','GLsizei' ))
-glTexPageCommitmentARB.add( Input( 'commit','GLboolean' ))
+glTexPageCommitmentARB.add( Input( 'resident','GLboolean' ))
 glTexPageCommitmentARB.version = ''
 glTexPageCommitmentARB.category = 'GL_ARB_sparse_texture'
 glTexPageCommitmentARB.trace = True
@@ -24589,6 +25937,16 @@ glPatchParameteri.category = 'GL_ARB_tessellation_shader'
 glPatchParameteri.trace = True
 glPatchParameteri.play = True
 gl.add(glPatchParameteri)
+
+# GL_ARB_texture_barrier
+
+glTextureBarrier = Function('glTextureBarrier')
+glTextureBarrier.ret = Return('void')
+glTextureBarrier.version = ''
+glTextureBarrier.category = 'GL_ARB_texture_barrier'
+glTextureBarrier.trace = True
+glTextureBarrier.play = True
+gl.add(glTextureBarrier)
 
 # GL_ARB_texture_buffer_object
 
@@ -24736,7 +26094,7 @@ gl.add(glCompressedTexSubImage3DARB)
 glGetCompressedTexImageARB = Function('glGetCompressedTexImageARB')
 glGetCompressedTexImageARB.ret = Return('void')
 glGetCompressedTexImageARB.add( Input( 'target','GLenum' ))
-glGetCompressedTexImageARB.add( Input( 'lod','GLint' ))
+glGetCompressedTexImageARB.add( Input( 'level','GLint' ))
 glGetCompressedTexImageARB.add( Output( 'img','GLvoid *' ))
 glGetCompressedTexImageARB.version = '1.1'
 glGetCompressedTexImageARB.category = 'GL_ARB_texture_compression'
@@ -25791,7 +27149,7 @@ glIsBufferARB.play = True
 gl.add(glIsBufferARB)
 
 glMapBufferARB = Function('glMapBufferARB')
-glMapBufferARB.ret = Return('GLvoid *')
+glMapBufferARB.ret = Return('void *')
 glMapBufferARB.add( Input( 'target','GLenum' ))
 glMapBufferARB.add( Input( 'access','GLenum' ))
 glMapBufferARB.version = '1.1'
@@ -27474,7 +28832,7 @@ gl.add(glSetFragmentShaderConstantATI)
 # GL_ATI_map_object_buffer
 
 glMapObjectBufferATI = Function('glMapObjectBufferATI')
-glMapObjectBufferATI.ret = Return('GLvoid *')
+glMapObjectBufferATI.ret = Return('void *')
 glMapObjectBufferATI.add( Input( 'buffer','GLuint' ))
 glMapObjectBufferATI.version = '1.2'
 glMapObjectBufferATI.category = 'GL_ATI_map_object_buffer'
@@ -27729,9 +29087,9 @@ gl.add(glClientActiveVertexStreamATI)
 glNormalStream3bATI = Function('glNormalStream3bATI')
 glNormalStream3bATI.ret = Return('void')
 glNormalStream3bATI.add( Input( 'stream','GLenum' ))
-glNormalStream3bATI.add( Input( 'x','GLbyte' ))
-glNormalStream3bATI.add( Input( 'y','GLbyte' ))
-glNormalStream3bATI.add( Input( 'z','GLbyte' ))
+glNormalStream3bATI.add( Input( 'nx','GLbyte' ))
+glNormalStream3bATI.add( Input( 'ny','GLbyte' ))
+glNormalStream3bATI.add( Input( 'nz','GLbyte' ))
 glNormalStream3bATI.version = '1.2'
 glNormalStream3bATI.category = 'GL_ATI_vertex_streams'
 glNormalStream3bATI.trace = True
@@ -27751,9 +29109,9 @@ gl.add(glNormalStream3bvATI)
 glNormalStream3dATI = Function('glNormalStream3dATI')
 glNormalStream3dATI.ret = Return('void')
 glNormalStream3dATI.add( Input( 'stream','GLenum' ))
-glNormalStream3dATI.add( Input( 'x','GLdouble' ))
-glNormalStream3dATI.add( Input( 'y','GLdouble' ))
-glNormalStream3dATI.add( Input( 'z','GLdouble' ))
+glNormalStream3dATI.add( Input( 'nx','GLdouble' ))
+glNormalStream3dATI.add( Input( 'ny','GLdouble' ))
+glNormalStream3dATI.add( Input( 'nz','GLdouble' ))
 glNormalStream3dATI.version = '1.2'
 glNormalStream3dATI.category = 'GL_ATI_vertex_streams'
 glNormalStream3dATI.trace = True
@@ -27773,9 +29131,9 @@ gl.add(glNormalStream3dvATI)
 glNormalStream3fATI = Function('glNormalStream3fATI')
 glNormalStream3fATI.ret = Return('void')
 glNormalStream3fATI.add( Input( 'stream','GLenum' ))
-glNormalStream3fATI.add( Input( 'x','GLfloat' ))
-glNormalStream3fATI.add( Input( 'y','GLfloat' ))
-glNormalStream3fATI.add( Input( 'z','GLfloat' ))
+glNormalStream3fATI.add( Input( 'nx','GLfloat' ))
+glNormalStream3fATI.add( Input( 'ny','GLfloat' ))
+glNormalStream3fATI.add( Input( 'nz','GLfloat' ))
 glNormalStream3fATI.version = '1.2'
 glNormalStream3fATI.category = 'GL_ATI_vertex_streams'
 glNormalStream3fATI.trace = True
@@ -27795,9 +29153,9 @@ gl.add(glNormalStream3fvATI)
 glNormalStream3iATI = Function('glNormalStream3iATI')
 glNormalStream3iATI.ret = Return('void')
 glNormalStream3iATI.add( Input( 'stream','GLenum' ))
-glNormalStream3iATI.add( Input( 'x','GLint' ))
-glNormalStream3iATI.add( Input( 'y','GLint' ))
-glNormalStream3iATI.add( Input( 'z','GLint' ))
+glNormalStream3iATI.add( Input( 'nx','GLint' ))
+glNormalStream3iATI.add( Input( 'ny','GLint' ))
+glNormalStream3iATI.add( Input( 'nz','GLint' ))
 glNormalStream3iATI.version = '1.2'
 glNormalStream3iATI.category = 'GL_ATI_vertex_streams'
 glNormalStream3iATI.trace = True
@@ -27817,9 +29175,9 @@ gl.add(glNormalStream3ivATI)
 glNormalStream3sATI = Function('glNormalStream3sATI')
 glNormalStream3sATI.ret = Return('void')
 glNormalStream3sATI.add( Input( 'stream','GLenum' ))
-glNormalStream3sATI.add( Input( 'x','GLshort' ))
-glNormalStream3sATI.add( Input( 'y','GLshort' ))
-glNormalStream3sATI.add( Input( 'z','GLshort' ))
+glNormalStream3sATI.add( Input( 'nx','GLshort' ))
+glNormalStream3sATI.add( Input( 'ny','GLshort' ))
+glNormalStream3sATI.add( Input( 'nz','GLshort' ))
 glNormalStream3sATI.version = '1.2'
 glNormalStream3sATI.category = 'GL_ATI_vertex_streams'
 glNormalStream3sATI.trace = True
@@ -28368,7 +29726,7 @@ glConvolutionParameterfEXT = Function('glConvolutionParameterfEXT')
 glConvolutionParameterfEXT.ret = Return('void')
 glConvolutionParameterfEXT.add( Input( 'target','GLenum' ))
 glConvolutionParameterfEXT.add( Input( 'pname','GLenum' ))
-glConvolutionParameterfEXT.add( Input( 'param','GLfloat' ))
+glConvolutionParameterfEXT.add( Input( 'params','GLfloat' ))
 glConvolutionParameterfEXT.version = '1.0'
 glConvolutionParameterfEXT.category = 'GL_EXT_convolution'
 glConvolutionParameterfEXT.trace = True
@@ -28390,7 +29748,7 @@ glConvolutionParameteriEXT = Function('glConvolutionParameteriEXT')
 glConvolutionParameteriEXT.ret = Return('void')
 glConvolutionParameteriEXT.add( Input( 'target','GLenum' ))
 glConvolutionParameteriEXT.add( Input( 'pname','GLenum' ))
-glConvolutionParameteriEXT.add( Input( 'param','GLint' ))
+glConvolutionParameteriEXT.add( Input( 'params','GLint' ))
 glConvolutionParameteriEXT.version = '1.0'
 glConvolutionParameteriEXT.category = 'GL_EXT_convolution'
 glConvolutionParameteriEXT.trace = True
@@ -29325,7 +30683,7 @@ gl.add(glDisableClientStateiEXT)
 glDisableVertexArrayAttribEXT = Function('glDisableVertexArrayAttribEXT')
 glDisableVertexArrayAttribEXT.ret = Return('void')
 glDisableVertexArrayAttribEXT.add( Input( 'vaobj','GLuint' ))
-glDisableVertexArrayAttribEXT.add( Input( 'array','GLenum' ))
+glDisableVertexArrayAttribEXT.add( Input( 'index','GLuint' ))
 glDisableVertexArrayAttribEXT.version = '3.0'
 glDisableVertexArrayAttribEXT.category = 'GL_EXT_direct_state_access'
 glDisableVertexArrayAttribEXT.trace = True
@@ -29365,7 +30723,7 @@ gl.add(glEnableClientStateiEXT)
 glEnableVertexArrayAttribEXT = Function('glEnableVertexArrayAttribEXT')
 glEnableVertexArrayAttribEXT.ret = Return('void')
 glEnableVertexArrayAttribEXT.add( Input( 'vaobj','GLuint' ))
-glEnableVertexArrayAttribEXT.add( Input( 'array','GLenum' ))
+glEnableVertexArrayAttribEXT.add( Input( 'index','GLuint' ))
 glEnableVertexArrayAttribEXT.version = '3.0'
 glEnableVertexArrayAttribEXT.category = 'GL_EXT_direct_state_access'
 glEnableVertexArrayAttribEXT.trace = True
@@ -29481,9 +30839,9 @@ gl.add(glGetDoubleIndexedvEXT)
 
 glGetDoublei_vEXT = Function('glGetDoublei_vEXT')
 glGetDoublei_vEXT.ret = Return('void')
-glGetDoublei_vEXT.add( Input( 'target','GLenum' ))
+glGetDoublei_vEXT.add( Input( 'pname','GLenum' ))
 glGetDoublei_vEXT.add( Input( 'index','GLuint' ))
-glGetDoublei_vEXT.add( Output( 'data','GLdouble *' ))
+glGetDoublei_vEXT.add( Output( 'params','GLdouble *' ))
 glGetDoublei_vEXT.version = '2.0'
 glGetDoublei_vEXT.category = 'GL_EXT_direct_state_access'
 glGetDoublei_vEXT.trace = True
@@ -29503,9 +30861,9 @@ gl.add(glGetFloatIndexedvEXT)
 
 glGetFloati_vEXT = Function('glGetFloati_vEXT')
 glGetFloati_vEXT.ret = Return('void')
-glGetFloati_vEXT.add( Input( 'target','GLenum' ))
+glGetFloati_vEXT.add( Input( 'pname','GLenum' ))
 glGetFloati_vEXT.add( Input( 'index','GLuint' ))
-glGetFloati_vEXT.add( Output( 'data','GLfloat *' ))
+glGetFloati_vEXT.add( Output( 'params','GLfloat *' ))
 glGetFloati_vEXT.version = '2.0'
 glGetFloati_vEXT.category = 'GL_EXT_direct_state_access'
 glGetFloati_vEXT.trace = True
@@ -29957,7 +31315,7 @@ glGetVertexArrayPointervEXT.play = True
 gl.add(glGetVertexArrayPointervEXT)
 
 glMapNamedBufferEXT = Function('glMapNamedBufferEXT')
-glMapNamedBufferEXT.ret = Return('GLvoid *')
+glMapNamedBufferEXT.ret = Return('void *')
 glMapNamedBufferEXT.add( Input( 'buffer','GLuint' ))
 glMapNamedBufferEXT.add( Input( 'access','GLenum' ))
 glMapNamedBufferEXT.version = '1.5'
@@ -29967,7 +31325,7 @@ glMapNamedBufferEXT.play = True
 gl.add(glMapNamedBufferEXT)
 
 glMapNamedBufferRangeEXT = Function('glMapNamedBufferRangeEXT')
-glMapNamedBufferRangeEXT.ret = Return('GLvoid *')
+glMapNamedBufferRangeEXT.ret = Return('void *')
 glMapNamedBufferRangeEXT.add( Input( 'buffer','GLuint' ))
 glMapNamedBufferRangeEXT.add( Input( 'offset','GLintptr' ))
 glMapNamedBufferRangeEXT.add( Input( 'length','GLsizeiptr' ))
@@ -30429,7 +31787,7 @@ glMultiTexParameterfvEXT.ret = Return('void')
 glMultiTexParameterfvEXT.add( Input( 'texunit','GLenum' ))
 glMultiTexParameterfvEXT.add( Input( 'target','GLenum' ))
 glMultiTexParameterfvEXT.add( Input( 'pname','GLenum' ))
-glMultiTexParameterfvEXT.add( Input( 'param','const GLfloat *' ,size = 'helperGLTexParametervSize(pname)' ))
+glMultiTexParameterfvEXT.add( Input( 'params','const GLfloat *' ,size = 'helperGLTexParametervSize(pname)' ))
 glMultiTexParameterfvEXT.version = '1.1'
 glMultiTexParameterfvEXT.category = 'GL_EXT_direct_state_access'
 glMultiTexParameterfvEXT.trace = True
@@ -30453,7 +31811,7 @@ glMultiTexParameterivEXT.ret = Return('void')
 glMultiTexParameterivEXT.add( Input( 'texunit','GLenum' ))
 glMultiTexParameterivEXT.add( Input( 'target','GLenum' ))
 glMultiTexParameterivEXT.add( Input( 'pname','GLenum' ))
-glMultiTexParameterivEXT.add( Input( 'param','const GLint *' ,size = 'helperGLTexParametervSize(pname)' ))
+glMultiTexParameterivEXT.add( Input( 'params','const GLint *' ,size = 'helperGLTexParametervSize(pname)' ))
 glMultiTexParameterivEXT.version = '1.1'
 glMultiTexParameterivEXT.category = 'GL_EXT_direct_state_access'
 glMultiTexParameterivEXT.trace = True
@@ -31593,7 +32951,7 @@ glTextureParameterfvEXT.ret = Return('void')
 glTextureParameterfvEXT.add( Input( 'texture','GLuint' ))
 glTextureParameterfvEXT.add( Input( 'target','GLenum' ))
 glTextureParameterfvEXT.add( Input( 'pname','GLenum' ))
-glTextureParameterfvEXT.add( Input( 'param','const GLfloat *' ,size = 'helperGLTexParametervSize(pname)' ))
+glTextureParameterfvEXT.add( Input( 'params','const GLfloat *' ,size = 'helperGLTexParametervSize(pname)' ))
 glTextureParameterfvEXT.version = '1.1'
 glTextureParameterfvEXT.category = 'GL_EXT_direct_state_access'
 glTextureParameterfvEXT.trace = True
@@ -31617,7 +32975,7 @@ glTextureParameterivEXT.ret = Return('void')
 glTextureParameterivEXT.add( Input( 'texture','GLuint' ))
 glTextureParameterivEXT.add( Input( 'target','GLenum' ))
 glTextureParameterivEXT.add( Input( 'pname','GLenum' ))
-glTextureParameterivEXT.add( Input( 'param','const GLint *' ,size = 'helperGLTexParametervSize(pname)' ))
+glTextureParameterivEXT.add( Input( 'params','const GLint *' ,size = 'helperGLTexParametervSize(pname)' ))
 glTextureParameterivEXT.version = '1.1'
 glTextureParameterivEXT.category = 'GL_EXT_direct_state_access'
 glTextureParameterivEXT.trace = True
@@ -31891,7 +33249,7 @@ gl.add(glQueryCounterEXT)
 
 glColorMaskIndexedEXT = Function('glColorMaskIndexedEXT')
 glColorMaskIndexedEXT.ret = Return('void')
-glColorMaskIndexedEXT.add( Input( 'buf','GLuint' ))
+glColorMaskIndexedEXT.add( Input( 'index','GLuint' ))
 glColorMaskIndexedEXT.add( Input( 'r','GLboolean' ))
 glColorMaskIndexedEXT.add( Input( 'g','GLboolean' ))
 glColorMaskIndexedEXT.add( Input( 'b','GLboolean' ))
@@ -33013,7 +34371,7 @@ gl.add(glResetMinmaxEXT)
 glIndexFuncEXT = Function('glIndexFuncEXT')
 glIndexFuncEXT.ret = Return('void')
 glIndexFuncEXT.add( Input( 'func','GLenum' ))
-glIndexFuncEXT.add( Input( 'ref','GLfloat' ))
+glIndexFuncEXT.add( Input( 'ref','GLclampf' ))
 glIndexFuncEXT.version = '1.1'
 glIndexFuncEXT.category = 'GL_EXT_index_func'
 glIndexFuncEXT.trace = True
@@ -33076,7 +34434,7 @@ glFlushMappedBufferRangeEXT.play = True
 gl.add(glFlushMappedBufferRangeEXT)
 
 glMapBufferRangeEXT = Function('glMapBufferRangeEXT')
-glMapBufferRangeEXT.ret = Return('GLvoid *')
+glMapBufferRangeEXT.ret = Return('void *')
 glMapBufferRangeEXT.add( Input( 'target','GLenum' ))
 glMapBufferRangeEXT.add( Input( 'offset','GLintptr' ))
 glMapBufferRangeEXT.add( Input( 'length','GLsizeiptr' ))
@@ -34808,7 +36166,7 @@ gl.add(glWriteMaskEXT)
 
 glVertexWeightPointerEXT = Function('glVertexWeightPointerEXT')
 glVertexWeightPointerEXT.ret = Return('void')
-glVertexWeightPointerEXT.add( Input( 'size','GLsizei' ))
+glVertexWeightPointerEXT.add( Input( 'size','GLint' ))
 glVertexWeightPointerEXT.add( Input( 'type','GLenum' ))
 glVertexWeightPointerEXT.add( Input( 'stride','GLsizei' ))
 glVertexWeightPointerEXT.add( Input( 'pointer','const GLvoid *' ))
@@ -35115,7 +36473,7 @@ gl.add(glBlendFuncSeparateINGR)
 # GL_INTEL_map_texture
 
 glMapTexture2DINTEL = Function('glMapTexture2DINTEL')
-glMapTexture2DINTEL.ret = Return('GLvoid *')
+glMapTexture2DINTEL.ret = Return('void *')
 glMapTexture2DINTEL.add( Input( 'texture','GLuint' ))
 glMapTexture2DINTEL.add( Input( 'level','GLint' ))
 glMapTexture2DINTEL.add( Input( 'access','GLbitfield' ,regalLog = 'GLmapTexture2DINTELToString(access)' ))
@@ -35214,6 +36572,16 @@ glTexScissorINTEL.category = 'GL_INTEL_texture_scissor'
 glTexScissorINTEL.trace = True
 glTexScissorINTEL.play = True
 gl.add(glTexScissorINTEL)
+
+# GL_KHR_blend_equation_advanced
+
+glBlendBarrierKHR = Function('glBlendBarrierKHR')
+glBlendBarrierKHR.ret = Return('void')
+glBlendBarrierKHR.version = ''
+glBlendBarrierKHR.category = 'GL_KHR_blend_equation_advanced'
+glBlendBarrierKHR.trace = True
+glBlendBarrierKHR.play = True
+gl.add(glBlendBarrierKHR)
 
 # GL_KHR_debug
 
@@ -35338,6 +36706,60 @@ glPushDebugGroup.category = 'GL_KHR_debug'
 glPushDebugGroup.trace = True
 glPushDebugGroup.play = True
 gl.add(glPushDebugGroup)
+
+# GL_KHR_robustness
+
+glGetnUniformfv = Function('glGetnUniformfv')
+glGetnUniformfv.ret = Return('void')
+glGetnUniformfv.add( Input( 'program','GLuint' ))
+glGetnUniformfv.add( Input( 'location','GLint' ))
+glGetnUniformfv.add( Input( 'bufSize','GLsizei' ))
+glGetnUniformfv.add( Input( 'params','GLfloat *' ))
+glGetnUniformfv.version = ''
+glGetnUniformfv.category = 'GL_KHR_robustness'
+glGetnUniformfv.trace = True
+glGetnUniformfv.play = True
+gl.add(glGetnUniformfv)
+
+glGetnUniformiv = Function('glGetnUniformiv')
+glGetnUniformiv.ret = Return('void')
+glGetnUniformiv.add( Input( 'program','GLuint' ))
+glGetnUniformiv.add( Input( 'location','GLint' ))
+glGetnUniformiv.add( Input( 'bufSize','GLsizei' ))
+glGetnUniformiv.add( Input( 'params','GLint *' ))
+glGetnUniformiv.version = ''
+glGetnUniformiv.category = 'GL_KHR_robustness'
+glGetnUniformiv.trace = True
+glGetnUniformiv.play = True
+gl.add(glGetnUniformiv)
+
+glGetnUniformuiv = Function('glGetnUniformuiv')
+glGetnUniformuiv.ret = Return('void')
+glGetnUniformuiv.add( Input( 'program','GLuint' ))
+glGetnUniformuiv.add( Input( 'location','GLint' ))
+glGetnUniformuiv.add( Input( 'bufSize','GLsizei' ))
+glGetnUniformuiv.add( Input( 'params','GLuint *' ))
+glGetnUniformuiv.version = ''
+glGetnUniformuiv.category = 'GL_KHR_robustness'
+glGetnUniformuiv.trace = True
+glGetnUniformuiv.play = True
+gl.add(glGetnUniformuiv)
+
+glReadnPixels = Function('glReadnPixels')
+glReadnPixels.ret = Return('void')
+glReadnPixels.add( Input( 'x','GLint' ))
+glReadnPixels.add( Input( 'y','GLint' ))
+glReadnPixels.add( Input( 'width','GLsizei' ))
+glReadnPixels.add( Input( 'height','GLsizei' ))
+glReadnPixels.add( Input( 'format','GLenum' ))
+glReadnPixels.add( Input( 'type','GLenum' ))
+glReadnPixels.add( Input( 'bufSize','GLsizei' ))
+glReadnPixels.add( Input( 'data','GLvoid *' ))
+glReadnPixels.version = ''
+glReadnPixels.category = 'GL_KHR_robustness'
+glReadnPixels.trace = True
+glReadnPixels.play = True
+gl.add(glReadnPixels)
 
 # GL_KTX_buffer_region
 
@@ -35843,10 +37265,10 @@ gl.add(glEndConditionalRenderNV)
 
 glCopyBufferSubDataNV = Function('glCopyBufferSubDataNV')
 glCopyBufferSubDataNV.ret = Return('void')
-glCopyBufferSubDataNV.add( Input( 'readtarget','GLenum' ))
-glCopyBufferSubDataNV.add( Input( 'writetarget','GLenum' ))
-glCopyBufferSubDataNV.add( Input( 'readoffset','GLintptr' ))
-glCopyBufferSubDataNV.add( Input( 'writeoffset','GLintptr' ))
+glCopyBufferSubDataNV.add( Input( 'readTarget','GLenum' ))
+glCopyBufferSubDataNV.add( Input( 'writeTarget','GLenum' ))
+glCopyBufferSubDataNV.add( Input( 'readOffset','GLintptr' ))
+glCopyBufferSubDataNV.add( Input( 'writeOffset','GLintptr' ))
 glCopyBufferSubDataNV.add( Input( 'size','GLsizeiptr' ))
 glCopyBufferSubDataNV.version = ''
 glCopyBufferSubDataNV.category = 'GL_NV_copy_buffer'
@@ -36934,7 +38356,7 @@ gl.add(glColor4hvNV)
 
 glFogCoordhNV = Function('glFogCoordhNV')
 glFogCoordhNV.ret = Return('void')
-glFogCoordhNV.add( Input( 'coord','GLhalfNV' ))
+glFogCoordhNV.add( Input( 'fog','GLhalfNV' ))
 glFogCoordhNV.version = '1.3'
 glFogCoordhNV.category = 'GL_NV_half_float'
 glFogCoordhNV.trace = True
@@ -37303,8 +38725,8 @@ gl.add(glVertexAttrib4hvNV)
 glVertexAttribs1hvNV = Function('glVertexAttribs1hvNV')
 glVertexAttribs1hvNV.ret = Return('void')
 glVertexAttribs1hvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs1hvNV.add( Input( 'count','GLsizei' ))
-glVertexAttribs1hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'count' ))
+glVertexAttribs1hvNV.add( Input( 'n','GLsizei' ))
+glVertexAttribs1hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'n' ))
 glVertexAttribs1hvNV.version = '1.3'
 glVertexAttribs1hvNV.category = 'GL_NV_half_float'
 glVertexAttribs1hvNV.trace = True
@@ -37314,8 +38736,8 @@ gl.add(glVertexAttribs1hvNV)
 glVertexAttribs2hvNV = Function('glVertexAttribs2hvNV')
 glVertexAttribs2hvNV.ret = Return('void')
 glVertexAttribs2hvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs2hvNV.add( Input( 'count','GLsizei' ))
-glVertexAttribs2hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'count * 2' ))
+glVertexAttribs2hvNV.add( Input( 'n','GLsizei' ))
+glVertexAttribs2hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'n * 2' ))
 glVertexAttribs2hvNV.version = '1.3'
 glVertexAttribs2hvNV.category = 'GL_NV_half_float'
 glVertexAttribs2hvNV.trace = True
@@ -37325,8 +38747,8 @@ gl.add(glVertexAttribs2hvNV)
 glVertexAttribs3hvNV = Function('glVertexAttribs3hvNV')
 glVertexAttribs3hvNV.ret = Return('void')
 glVertexAttribs3hvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs3hvNV.add( Input( 'count','GLsizei' ))
-glVertexAttribs3hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'count * 3' ))
+glVertexAttribs3hvNV.add( Input( 'n','GLsizei' ))
+glVertexAttribs3hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'n * 3' ))
 glVertexAttribs3hvNV.version = '1.3'
 glVertexAttribs3hvNV.category = 'GL_NV_half_float'
 glVertexAttribs3hvNV.trace = True
@@ -37336,8 +38758,8 @@ gl.add(glVertexAttribs3hvNV)
 glVertexAttribs4hvNV = Function('glVertexAttribs4hvNV')
 glVertexAttribs4hvNV.ret = Return('void')
 glVertexAttribs4hvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs4hvNV.add( Input( 'count','GLsizei' ))
-glVertexAttribs4hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'count * 4' ))
+glVertexAttribs4hvNV.add( Input( 'n','GLsizei' ))
+glVertexAttribs4hvNV.add( Input( 'v','const GLhalfNV *' ,size = 'n * 4' ))
 glVertexAttribs4hvNV.version = '1.3'
 glVertexAttribs4hvNV.category = 'GL_NV_half_float'
 glVertexAttribs4hvNV.trace = True
@@ -37511,8 +38933,8 @@ gl.add(glIsOcclusionQueryNV)
 glProgramBufferParametersIivNV = Function('glProgramBufferParametersIivNV')
 glProgramBufferParametersIivNV.ret = Return('void')
 glProgramBufferParametersIivNV.add( Input( 'target','GLenum' ))
-glProgramBufferParametersIivNV.add( Input( 'buffer','GLuint' ))
-glProgramBufferParametersIivNV.add( Input( 'index','GLuint' ))
+glProgramBufferParametersIivNV.add( Input( 'bindingIndex','GLuint' ))
+glProgramBufferParametersIivNV.add( Input( 'wordIndex','GLuint' ))
 glProgramBufferParametersIivNV.add( Input( 'count','GLsizei' ))
 glProgramBufferParametersIivNV.add( Input( 'params','const GLint *' ,size = 'count' ))
 glProgramBufferParametersIivNV.version = '1.2'
@@ -37524,8 +38946,8 @@ gl.add(glProgramBufferParametersIivNV)
 glProgramBufferParametersIuivNV = Function('glProgramBufferParametersIuivNV')
 glProgramBufferParametersIuivNV.ret = Return('void')
 glProgramBufferParametersIuivNV.add( Input( 'target','GLenum' ))
-glProgramBufferParametersIuivNV.add( Input( 'buffer','GLuint' ))
-glProgramBufferParametersIuivNV.add( Input( 'index','GLuint' ))
+glProgramBufferParametersIuivNV.add( Input( 'bindingIndex','GLuint' ))
+glProgramBufferParametersIuivNV.add( Input( 'wordIndex','GLuint' ))
 glProgramBufferParametersIuivNV.add( Input( 'count','GLsizei' ))
 glProgramBufferParametersIuivNV.add( Input( 'params','const GLuint *' ,size = 'count' ))
 glProgramBufferParametersIuivNV.version = '1.2'
@@ -37537,8 +38959,8 @@ gl.add(glProgramBufferParametersIuivNV)
 glProgramBufferParametersfvNV = Function('glProgramBufferParametersfvNV')
 glProgramBufferParametersfvNV.ret = Return('void')
 glProgramBufferParametersfvNV.add( Input( 'target','GLenum' ))
-glProgramBufferParametersfvNV.add( Input( 'buffer','GLuint' ))
-glProgramBufferParametersfvNV.add( Input( 'index','GLuint' ))
+glProgramBufferParametersfvNV.add( Input( 'bindingIndex','GLuint' ))
+glProgramBufferParametersfvNV.add( Input( 'wordIndex','GLuint' ))
 glProgramBufferParametersfvNV.add( Input( 'count','GLsizei' ))
 glProgramBufferParametersfvNV.add( Input( 'params','const GLfloat *' ,size = 'count' ))
 glProgramBufferParametersfvNV.version = '1.2'
@@ -37601,7 +39023,7 @@ gl.add(glCoverStrokePathInstancedNV)
 
 glCoverStrokePathNV = Function('glCoverStrokePathNV')
 glCoverStrokePathNV.ret = Return('void')
-glCoverStrokePathNV.add( Input( 'name','GLuint' ))
+glCoverStrokePathNV.add( Input( 'path','GLuint' ))
 glCoverStrokePathNV.add( Input( 'coverMode','GLenum' ))
 glCoverStrokePathNV.version = ''
 glCoverStrokePathNV.category = 'GL_NV_path_rendering'
@@ -37652,7 +39074,7 @@ gl.add(glGetPathColorGenivNV)
 
 glGetPathCommandsNV = Function('glGetPathCommandsNV')
 glGetPathCommandsNV.ret = Return('void')
-glGetPathCommandsNV.add( Input( 'name','GLuint' ))
+glGetPathCommandsNV.add( Input( 'path','GLuint' ))
 glGetPathCommandsNV.add( Output( 'commands','GLubyte *' ))
 glGetPathCommandsNV.version = ''
 glGetPathCommandsNV.category = 'GL_NV_path_rendering'
@@ -37662,7 +39084,7 @@ gl.add(glGetPathCommandsNV)
 
 glGetPathCoordsNV = Function('glGetPathCoordsNV')
 glGetPathCoordsNV.ret = Return('void')
-glGetPathCoordsNV.add( Input( 'name','GLuint' ))
+glGetPathCoordsNV.add( Input( 'path','GLuint' ))
 glGetPathCoordsNV.add( Input( 'coords','GLfloat *' ))
 glGetPathCoordsNV.version = ''
 glGetPathCoordsNV.category = 'GL_NV_path_rendering'
@@ -37672,7 +39094,7 @@ gl.add(glGetPathCoordsNV)
 
 glGetPathDashArrayNV = Function('glGetPathDashArrayNV')
 glGetPathDashArrayNV.ret = Return('void')
-glGetPathDashArrayNV.add( Input( 'name','GLuint' ))
+glGetPathDashArrayNV.add( Input( 'path','GLuint' ))
 glGetPathDashArrayNV.add( Input( 'dashArray','GLfloat *' ))
 glGetPathDashArrayNV.version = ''
 glGetPathDashArrayNV.category = 'GL_NV_path_rendering'
@@ -37694,7 +39116,7 @@ gl.add(glGetPathLengthNV)
 glGetPathMetricRangeNV = Function('glGetPathMetricRangeNV')
 glGetPathMetricRangeNV.ret = Return('void')
 glGetPathMetricRangeNV.add( Input( 'metricQueryMask','GLbitfield' ,regalLog = 'GLgetPathMetricsNVToString(metricQueryMask)' ))
-glGetPathMetricRangeNV.add( Input( 'fistPathName','GLuint' ))
+glGetPathMetricRangeNV.add( Input( 'firstPathName','GLuint' ))
 glGetPathMetricRangeNV.add( Input( 'numPaths','GLsizei' ))
 glGetPathMetricRangeNV.add( Input( 'stride','GLsizei' ))
 glGetPathMetricRangeNV.add( Input( 'metrics','GLfloat *' ))
@@ -37721,8 +39143,8 @@ gl.add(glGetPathMetricsNV)
 
 glGetPathParameterfvNV = Function('glGetPathParameterfvNV')
 glGetPathParameterfvNV.ret = Return('void')
-glGetPathParameterfvNV.add( Input( 'name','GLuint' ))
-glGetPathParameterfvNV.add( Input( 'param','GLenum' ))
+glGetPathParameterfvNV.add( Input( 'path','GLuint' ))
+glGetPathParameterfvNV.add( Input( 'pname','GLenum' ))
 glGetPathParameterfvNV.add( Input( 'value','GLfloat *' ))
 glGetPathParameterfvNV.version = ''
 glGetPathParameterfvNV.category = 'GL_NV_path_rendering'
@@ -37732,8 +39154,8 @@ gl.add(glGetPathParameterfvNV)
 
 glGetPathParameterivNV = Function('glGetPathParameterivNV')
 glGetPathParameterivNV.ret = Return('void')
-glGetPathParameterivNV.add( Input( 'name','GLuint' ))
-glGetPathParameterivNV.add( Input( 'param','GLenum' ))
+glGetPathParameterivNV.add( Input( 'path','GLuint' ))
+glGetPathParameterivNV.add( Input( 'pname','GLenum' ))
 glGetPathParameterivNV.add( Input( 'value','GLint *' ))
 glGetPathParameterivNV.version = ''
 glGetPathParameterivNV.category = 'GL_NV_path_rendering'
@@ -37864,7 +39286,7 @@ gl.add(glPathCoordsNV)
 
 glPathCoverDepthFuncNV = Function('glPathCoverDepthFuncNV')
 glPathCoverDepthFuncNV.ret = Return('void')
-glPathCoverDepthFuncNV.add( Input( 'zfunc','GLenum' ))
+glPathCoverDepthFuncNV.add( Input( 'func','GLenum' ))
 glPathCoverDepthFuncNV.version = ''
 glPathCoverDepthFuncNV.category = 'GL_NV_path_rendering'
 glPathCoverDepthFuncNV.trace = True
@@ -38152,7 +39574,7 @@ gl.add(glFlushPixelDataRangeNV)
 glPixelDataRangeNV = Function('glPixelDataRangeNV')
 glPixelDataRangeNV.ret = Return('void')
 glPixelDataRangeNV.add( Input( 'target','GLenum' ))
-glPixelDataRangeNV.add( Input( 'size','GLsizei' ))
+glPixelDataRangeNV.add( Input( 'length','GLsizei' ))
 glPixelDataRangeNV.add( Input( 'pointer','const GLvoid *' ))
 glPixelDataRangeNV.version = '1.2'
 glPixelDataRangeNV.category = 'GL_NV_pixel_data_range'
@@ -38495,8 +39917,8 @@ gl.add(glGetBufferParameterui64vNV)
 
 glGetIntegerui64vNV = Function('glGetIntegerui64vNV')
 glGetIntegerui64vNV.ret = Return('void')
-glGetIntegerui64vNV.add( Input( 'target','GLenum' ))
-glGetIntegerui64vNV.add( Output( 'data','GLuint64EXT *' ))
+glGetIntegerui64vNV.add( Input( 'value','GLenum' ))
+glGetIntegerui64vNV.add( Output( 'result','GLuint64EXT *' ))
 glGetIntegerui64vNV.version = '2.0'
 glGetIntegerui64vNV.category = 'GL_NV_shader_buffer_load'
 glGetIntegerui64vNV.trace = True
@@ -38585,7 +40007,7 @@ glProgramUniformui64NV = Function('glProgramUniformui64NV')
 glProgramUniformui64NV.ret = Return('void')
 glProgramUniformui64NV.add( Input( 'program','GLuint' ))
 glProgramUniformui64NV.add( Input( 'location','GLint' ))
-glProgramUniformui64NV.add( Input( 'v0','GLuint64EXT' ))
+glProgramUniformui64NV.add( Input( 'value','GLuint64EXT' ))
 glProgramUniformui64NV.version = '2.0'
 glProgramUniformui64NV.category = 'GL_NV_shader_buffer_load'
 glProgramUniformui64NV.trace = True
@@ -38607,7 +40029,7 @@ gl.add(glProgramUniformui64vNV)
 glUniformui64NV = Function('glUniformui64NV')
 glUniformui64NV.ret = Return('void')
 glUniformui64NV.add( Input( 'location','GLint' ))
-glUniformui64NV.add( Input( 'v0','GLuint64EXT' ))
+glUniformui64NV.add( Input( 'value','GLuint64EXT' ))
 glUniformui64NV.version = '2.0'
 glUniformui64NV.category = 'GL_NV_shader_buffer_load'
 glUniformui64NV.trace = True
@@ -38835,7 +40257,7 @@ gl.add(glGetVaryingLocationNV)
 
 glTransformFeedbackAttribsNV = Function('glTransformFeedbackAttribsNV')
 glTransformFeedbackAttribsNV.ret = Return('void')
-glTransformFeedbackAttribsNV.add( Input( 'count','GLuint' ))
+glTransformFeedbackAttribsNV.add( Input( 'count','GLsizei' ))
 glTransformFeedbackAttribsNV.add( Input( 'attribs','const GLint *' ))
 glTransformFeedbackAttribsNV.add( Input( 'bufferMode','GLenum' ))
 glTransformFeedbackAttribsNV.version = '1.5'
@@ -38881,7 +40303,7 @@ gl.add(glDeleteTransformFeedbacksNV)
 glDrawTransformFeedbackNV = Function('glDrawTransformFeedbackNV')
 glDrawTransformFeedbackNV.ret = Return('void')
 glDrawTransformFeedbackNV.add( Input( 'mode','GLenum' ,regalLog = 'GLmodeToString(mode)' ))
-glDrawTransformFeedbackNV.add( Input( 'name','GLuint' ))
+glDrawTransformFeedbackNV.add( Input( 'id','GLuint' ))
 glDrawTransformFeedbackNV.version = '2.0'
 glDrawTransformFeedbackNV.category = 'GL_NV_transform_feedback2'
 glDrawTransformFeedbackNV.trace = True
@@ -39011,8 +40433,8 @@ gl.add(glVDPAUSurfaceAccessNV)
 
 glVDPAUUnmapSurfacesNV = Function('glVDPAUUnmapSurfacesNV')
 glVDPAUUnmapSurfacesNV.ret = Return('void')
-glVDPAUUnmapSurfacesNV.add( Input( 'numSurfaces','GLsizei' ))
-glVDPAUUnmapSurfacesNV.add( Input( 'surfaces','const GLvdpauSurfaceNV *' ,size = 'numSurfaces' ))
+glVDPAUUnmapSurfacesNV.add( Input( 'numSurface','GLsizei' ))
+glVDPAUUnmapSurfacesNV.add( Input( 'surfaces','const GLvdpauSurfaceNV *' ,size = 'numSurface' ))
 glVDPAUUnmapSurfacesNV.version = '3.2'
 glVDPAUUnmapSurfacesNV.category = 'GL_NV_vdpau_interop'
 glVDPAUUnmapSurfacesNV.trace = True
@@ -39040,7 +40462,7 @@ gl.add(glFlushVertexArrayRangeNV)
 
 glVertexArrayRangeNV = Function('glVertexArrayRangeNV')
 glVertexArrayRangeNV.ret = Return('void')
-glVertexArrayRangeNV.add( Input( 'size','GLsizei' ))
+glVertexArrayRangeNV.add( Input( 'length','GLsizei' ))
 glVertexArrayRangeNV.add( Input( 'pointer','const GLvoid *' ))
 glVertexArrayRangeNV.version = '1.1'
 glVertexArrayRangeNV.category = 'GL_NV_vertex_array_range'
@@ -39302,9 +40724,9 @@ gl.add(glFogCoordFormatNV)
 
 glGetIntegerui64i_vNV = Function('glGetIntegerui64i_vNV')
 glGetIntegerui64i_vNV.ret = Return('void')
-glGetIntegerui64i_vNV.add( Input( 'target','GLenum' ))
+glGetIntegerui64i_vNV.add( Input( 'value','GLenum' ))
 glGetIntegerui64i_vNV.add( Input( 'index','GLuint' ))
-glGetIntegerui64i_vNV.add( Output( 'data','GLuint64EXT *' ))
+glGetIntegerui64i_vNV.add( Output( 'result','GLuint64EXT *' ))
 glGetIntegerui64i_vNV.version = '2.0'
 glGetIntegerui64i_vNV.category = 'GL_NV_vertex_buffer_unified_memory'
 glGetIntegerui64i_vNV.trace = True
@@ -39959,8 +41381,8 @@ gl.add(glVertexAttribPointerNV)
 glVertexAttribs1dvNV = Function('glVertexAttribs1dvNV')
 glVertexAttribs1dvNV.ret = Return('void')
 glVertexAttribs1dvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs1dvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs1dvNV.add( Input( 'v','const GLdouble *' ,size = 'n' ))
+glVertexAttribs1dvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs1dvNV.add( Input( 'v','const GLdouble *' ,size = 'count' ))
 glVertexAttribs1dvNV.version = '1.2'
 glVertexAttribs1dvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs1dvNV.trace = True
@@ -39970,8 +41392,8 @@ gl.add(glVertexAttribs1dvNV)
 glVertexAttribs1fvNV = Function('glVertexAttribs1fvNV')
 glVertexAttribs1fvNV.ret = Return('void')
 glVertexAttribs1fvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs1fvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs1fvNV.add( Input( 'v','const GLfloat *' ,size = 'n' ))
+glVertexAttribs1fvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs1fvNV.add( Input( 'v','const GLfloat *' ,size = 'count' ))
 glVertexAttribs1fvNV.version = '1.2'
 glVertexAttribs1fvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs1fvNV.trace = True
@@ -39981,8 +41403,8 @@ gl.add(glVertexAttribs1fvNV)
 glVertexAttribs1svNV = Function('glVertexAttribs1svNV')
 glVertexAttribs1svNV.ret = Return('void')
 glVertexAttribs1svNV.add( Input( 'index','GLuint' ))
-glVertexAttribs1svNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs1svNV.add( Input( 'v','const GLshort *' ,size = 'n' ))
+glVertexAttribs1svNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs1svNV.add( Input( 'v','const GLshort *' ,size = 'count' ))
 glVertexAttribs1svNV.version = '1.2'
 glVertexAttribs1svNV.category = 'GL_NV_vertex_program'
 glVertexAttribs1svNV.trace = True
@@ -39992,8 +41414,8 @@ gl.add(glVertexAttribs1svNV)
 glVertexAttribs2dvNV = Function('glVertexAttribs2dvNV')
 glVertexAttribs2dvNV.ret = Return('void')
 glVertexAttribs2dvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs2dvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs2dvNV.add( Input( 'v','const GLdouble *' ,size = 'n * 2' ))
+glVertexAttribs2dvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs2dvNV.add( Input( 'v','const GLdouble *' ,size = 'count * 2' ))
 glVertexAttribs2dvNV.version = '1.2'
 glVertexAttribs2dvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs2dvNV.trace = True
@@ -40003,8 +41425,8 @@ gl.add(glVertexAttribs2dvNV)
 glVertexAttribs2fvNV = Function('glVertexAttribs2fvNV')
 glVertexAttribs2fvNV.ret = Return('void')
 glVertexAttribs2fvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs2fvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs2fvNV.add( Input( 'v','const GLfloat *' ,size = 'n * 2' ))
+glVertexAttribs2fvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs2fvNV.add( Input( 'v','const GLfloat *' ,size = 'count * 2' ))
 glVertexAttribs2fvNV.version = '1.2'
 glVertexAttribs2fvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs2fvNV.trace = True
@@ -40014,8 +41436,8 @@ gl.add(glVertexAttribs2fvNV)
 glVertexAttribs2svNV = Function('glVertexAttribs2svNV')
 glVertexAttribs2svNV.ret = Return('void')
 glVertexAttribs2svNV.add( Input( 'index','GLuint' ))
-glVertexAttribs2svNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs2svNV.add( Input( 'v','const GLshort *' ,size = 'n * 2' ))
+glVertexAttribs2svNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs2svNV.add( Input( 'v','const GLshort *' ,size = 'count * 2' ))
 glVertexAttribs2svNV.version = '1.2'
 glVertexAttribs2svNV.category = 'GL_NV_vertex_program'
 glVertexAttribs2svNV.trace = True
@@ -40025,8 +41447,8 @@ gl.add(glVertexAttribs2svNV)
 glVertexAttribs3dvNV = Function('glVertexAttribs3dvNV')
 glVertexAttribs3dvNV.ret = Return('void')
 glVertexAttribs3dvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs3dvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs3dvNV.add( Input( 'v','const GLdouble *' ,size = 'n * 3' ))
+glVertexAttribs3dvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs3dvNV.add( Input( 'v','const GLdouble *' ,size = 'count * 3' ))
 glVertexAttribs3dvNV.version = '1.2'
 glVertexAttribs3dvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs3dvNV.trace = True
@@ -40036,8 +41458,8 @@ gl.add(glVertexAttribs3dvNV)
 glVertexAttribs3fvNV = Function('glVertexAttribs3fvNV')
 glVertexAttribs3fvNV.ret = Return('void')
 glVertexAttribs3fvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs3fvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs3fvNV.add( Input( 'v','const GLfloat *' ,size = 'n * 3' ))
+glVertexAttribs3fvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs3fvNV.add( Input( 'v','const GLfloat *' ,size = 'count * 3' ))
 glVertexAttribs3fvNV.version = '1.2'
 glVertexAttribs3fvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs3fvNV.trace = True
@@ -40047,8 +41469,8 @@ gl.add(glVertexAttribs3fvNV)
 glVertexAttribs3svNV = Function('glVertexAttribs3svNV')
 glVertexAttribs3svNV.ret = Return('void')
 glVertexAttribs3svNV.add( Input( 'index','GLuint' ))
-glVertexAttribs3svNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs3svNV.add( Input( 'v','const GLshort *' ,size = 'n * 3' ))
+glVertexAttribs3svNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs3svNV.add( Input( 'v','const GLshort *' ,size = 'count * 3' ))
 glVertexAttribs3svNV.version = '1.2'
 glVertexAttribs3svNV.category = 'GL_NV_vertex_program'
 glVertexAttribs3svNV.trace = True
@@ -40058,8 +41480,8 @@ gl.add(glVertexAttribs3svNV)
 glVertexAttribs4dvNV = Function('glVertexAttribs4dvNV')
 glVertexAttribs4dvNV.ret = Return('void')
 glVertexAttribs4dvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs4dvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs4dvNV.add( Input( 'v','const GLdouble *' ,size = 'n * 4' ))
+glVertexAttribs4dvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs4dvNV.add( Input( 'v','const GLdouble *' ,size = 'count * 4' ))
 glVertexAttribs4dvNV.version = '1.2'
 glVertexAttribs4dvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs4dvNV.trace = True
@@ -40069,8 +41491,8 @@ gl.add(glVertexAttribs4dvNV)
 glVertexAttribs4fvNV = Function('glVertexAttribs4fvNV')
 glVertexAttribs4fvNV.ret = Return('void')
 glVertexAttribs4fvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs4fvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs4fvNV.add( Input( 'v','const GLfloat *' ,size = 'n * 4' ))
+glVertexAttribs4fvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs4fvNV.add( Input( 'v','const GLfloat *' ,size = 'count * 4' ))
 glVertexAttribs4fvNV.version = '1.2'
 glVertexAttribs4fvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs4fvNV.trace = True
@@ -40080,8 +41502,8 @@ gl.add(glVertexAttribs4fvNV)
 glVertexAttribs4svNV = Function('glVertexAttribs4svNV')
 glVertexAttribs4svNV.ret = Return('void')
 glVertexAttribs4svNV.add( Input( 'index','GLuint' ))
-glVertexAttribs4svNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs4svNV.add( Input( 'v','const GLshort *' ,size = 'n * 4' ))
+glVertexAttribs4svNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs4svNV.add( Input( 'v','const GLshort *' ,size = 'count * 4' ))
 glVertexAttribs4svNV.version = '1.2'
 glVertexAttribs4svNV.category = 'GL_NV_vertex_program'
 glVertexAttribs4svNV.trace = True
@@ -40091,8 +41513,8 @@ gl.add(glVertexAttribs4svNV)
 glVertexAttribs4ubvNV = Function('glVertexAttribs4ubvNV')
 glVertexAttribs4ubvNV.ret = Return('void')
 glVertexAttribs4ubvNV.add( Input( 'index','GLuint' ))
-glVertexAttribs4ubvNV.add( Input( 'n','GLsizei' ))
-glVertexAttribs4ubvNV.add( Input( 'v','const GLubyte *' ,size = 'n * 4' ))
+glVertexAttribs4ubvNV.add( Input( 'count','GLsizei' ))
+glVertexAttribs4ubvNV.add( Input( 'v','const GLubyte *' ,size = 'count * 4' ))
 glVertexAttribs4ubvNV.version = '1.2'
 glVertexAttribs4ubvNV.category = 'GL_NV_vertex_program'
 glVertexAttribs4ubvNV.trace = True
@@ -40115,7 +41537,7 @@ glBindVideoCaptureStreamBufferNV.ret = Return('void')
 glBindVideoCaptureStreamBufferNV.add( Input( 'video_capture_slot','GLuint' ))
 glBindVideoCaptureStreamBufferNV.add( Input( 'stream','GLuint' ))
 glBindVideoCaptureStreamBufferNV.add( Input( 'frame_region','GLenum' ))
-glBindVideoCaptureStreamBufferNV.add( Input( 'offset','GLintptr' ))
+glBindVideoCaptureStreamBufferNV.add( Input( 'offset','GLintptrARB' ))
 glBindVideoCaptureStreamBufferNV.version = '1.1'
 glBindVideoCaptureStreamBufferNV.category = 'GL_NV_video_capture'
 glBindVideoCaptureStreamBufferNV.trace = True
@@ -40254,10 +41676,10 @@ gl.add(glBlendEquationSeparateOES)
 
 glBlendFuncSeparateOES = Function('glBlendFuncSeparateOES')
 glBlendFuncSeparateOES.ret = Return('void')
-glBlendFuncSeparateOES.add( Input( 'sfactorRGB','GLenum' ))
-glBlendFuncSeparateOES.add( Input( 'dfactorRGB','GLenum' ))
-glBlendFuncSeparateOES.add( Input( 'sfactorAlpha','GLenum' ))
-glBlendFuncSeparateOES.add( Input( 'dfactorAlpha','GLenum' ))
+glBlendFuncSeparateOES.add( Input( 'srcRGB','GLenum' ))
+glBlendFuncSeparateOES.add( Input( 'dstRGB','GLenum' ))
+glBlendFuncSeparateOES.add( Input( 'srcAlpha','GLenum' ))
+glBlendFuncSeparateOES.add( Input( 'dstAlpha','GLenum' ))
 glBlendFuncSeparateOES.version = ''
 glBlendFuncSeparateOES.category = 'GL_OES_blend_func_separate'
 glBlendFuncSeparateOES.trace = True
@@ -40474,7 +41896,7 @@ glGetBufferPointervOES.play = True
 gl.add(glGetBufferPointervOES)
 
 glMapBufferOES = Function('glMapBufferOES')
-glMapBufferOES.ret = Return('GLvoid *')
+glMapBufferOES.ret = Return('void *')
 glMapBufferOES.add( Input( 'target','GLenum' ))
 glMapBufferOES.add( Input( 'access','GLenum' ))
 glMapBufferOES.version = ''
@@ -40496,7 +41918,7 @@ gl.add(glUnmapBufferOES)
 
 glCurrentPaletteMatrixOES = Function('glCurrentPaletteMatrixOES')
 glCurrentPaletteMatrixOES.ret = Return('void')
-glCurrentPaletteMatrixOES.add( Input( 'index','GLuint' ))
+glCurrentPaletteMatrixOES.add( Input( 'matrixpaletteindex','GLuint' ))
 glCurrentPaletteMatrixOES.version = ''
 glCurrentPaletteMatrixOES.category = 'GL_OES_matrix_palette'
 glCurrentPaletteMatrixOES.trace = True
@@ -40669,7 +42091,7 @@ glTexImage3DOES = Function('glTexImage3DOES')
 glTexImage3DOES.ret = Return('void')
 glTexImage3DOES.add( Input( 'target','GLenum' ))
 glTexImage3DOES.add( Input( 'level','GLint' ))
-glTexImage3DOES.add( Input( 'internalFormat','GLenum' ))
+glTexImage3DOES.add( Input( 'internalformat','GLenum' ))
 glTexImage3DOES.add( Input( 'width','GLsizei' ))
 glTexImage3DOES.add( Input( 'height','GLsizei' ))
 glTexImage3DOES.add( Input( 'depth','GLsizei' ))
@@ -41133,12 +42555,12 @@ gl.add(glColor4x)
 
 glDepthRangex = Function('glDepthRangex')
 glDepthRangex.ret = Return('void')
-glDepthRangex.add( Input( 'zNear','GLclampx' ))
-glDepthRangex.add( Input( 'zFar','GLclampx' ))
+glDepthRangex.add( Input( 'n','GLclampx' ))
+glDepthRangex.add( Input( 'f','GLclampx' ))
 glDepthRangex.version = ''
 glDepthRangex.category = 'GL_REGAL_ES1_0_compatibility'
 glDepthRangex.esVersions = [1.0, 1.1]
-glDepthRangex.regalRemap = 'glDepthRange(fixedToFloat(zNear), fixedToFloat(zFar))'
+glDepthRangex.regalRemap = 'glDepthRange(fixedToFloat(n), fixedToFloat(f))'
 glDepthRangex.trace = True
 glDepthRangex.play = True
 gl.add(glDepthRangex)
@@ -41158,43 +42580,43 @@ gl.add(glFogx)
 glFogxv = Function('glFogxv')
 glFogxv.ret = Return('void')
 glFogxv.add( Input( 'pname','GLenum' ))
-glFogxv.add( Input( 'params','const GLfixed *' ))
+glFogxv.add( Input( 'param','const GLfixed *' ))
 glFogxv.version = ''
 glFogxv.category = 'GL_REGAL_ES1_0_compatibility'
 glFogxv.esVersions = [1.0, 1.1]
-glFogxv.regalRemap = ['GLfloat tmp[4];', 'fixedToFloat(tmp,params,pname==GL_FOG_COLOR ? 4 : 1);', 'glFogfv(pname,tmp);']
+glFogxv.regalRemap = ['GLfloat tmp[4];', 'fixedToFloat(tmp,param,pname==GL_FOG_COLOR ? 4 : 1);', 'glFogfv(pname,tmp);']
 glFogxv.trace = True
 glFogxv.play = True
 gl.add(glFogxv)
 
 glFrustumf = Function('glFrustumf')
 glFrustumf.ret = Return('void')
-glFrustumf.add( Input( 'left','GLfloat' ))
-glFrustumf.add( Input( 'right','GLfloat' ))
-glFrustumf.add( Input( 'bottom','GLfloat' ))
-glFrustumf.add( Input( 'top','GLfloat' ))
-glFrustumf.add( Input( 'zNear','GLfloat' ))
-glFrustumf.add( Input( 'zFar','GLfloat' ))
+glFrustumf.add( Input( 'l','GLfloat' ))
+glFrustumf.add( Input( 'r','GLfloat' ))
+glFrustumf.add( Input( 'b','GLfloat' ))
+glFrustumf.add( Input( 't','GLfloat' ))
+glFrustumf.add( Input( 'n','GLfloat' ))
+glFrustumf.add( Input( 'f','GLfloat' ))
 glFrustumf.version = ''
 glFrustumf.category = 'GL_REGAL_ES1_0_compatibility'
 glFrustumf.esVersions = [1.0, 1.1]
-glFrustumf.regalRemap = 'glFrustum(left,right,bottom,top,zNear,zFar)'
+glFrustumf.regalRemap = 'glFrustum(l,r,b,t,n,f)'
 glFrustumf.trace = True
 glFrustumf.play = True
 gl.add(glFrustumf)
 
 glFrustumx = Function('glFrustumx')
 glFrustumx.ret = Return('void')
-glFrustumx.add( Input( 'left','GLfixed' ))
-glFrustumx.add( Input( 'right','GLfixed' ))
-glFrustumx.add( Input( 'bottom','GLfixed' ))
-glFrustumx.add( Input( 'top','GLfixed' ))
-glFrustumx.add( Input( 'zNear','GLfixed' ))
-glFrustumx.add( Input( 'zFar','GLfixed' ))
+glFrustumx.add( Input( 'l','GLfixed' ))
+glFrustumx.add( Input( 'r','GLfixed' ))
+glFrustumx.add( Input( 'b','GLfixed' ))
+glFrustumx.add( Input( 't','GLfixed' ))
+glFrustumx.add( Input( 'n','GLfixed' ))
+glFrustumx.add( Input( 'f','GLfixed' ))
 glFrustumx.version = ''
 glFrustumx.category = 'GL_REGAL_ES1_0_compatibility'
 glFrustumx.esVersions = [1.0, 1.1]
-glFrustumx.regalRemap = 'glFrustumf(fixedToFloat(left), fixedToFloat(right), fixedToFloat(bottom), fixedToFloat(top), fixedToFloat(zNear), fixedToFloat(zFar))'
+glFrustumx.regalRemap = 'glFrustumf(fixedToFloat(l), fixedToFloat(r), fixedToFloat(b), fixedToFloat(t), fixedToFloat(n), fixedToFloat(f))'
 glFrustumx.trace = True
 glFrustumx.play = True
 gl.add(glFrustumx)
@@ -41214,11 +42636,11 @@ gl.add(glLightModelx)
 glLightModelxv = Function('glLightModelxv')
 glLightModelxv.ret = Return('void')
 glLightModelxv.add( Input( 'pname','GLenum' ))
-glLightModelxv.add( Input( 'params','const GLfixed *' ))
+glLightModelxv.add( Input( 'param','const GLfixed *' ))
 glLightModelxv.version = ''
 glLightModelxv.category = 'GL_REGAL_ES1_0_compatibility'
 glLightModelxv.esVersions = [1.0, 1.1]
-glLightModelxv.regalRemap = ['GLfloat tmp[4];', 'fixedToFloat(tmp,params,pname==GL_LIGHT_MODEL_AMBIENT ? 4 : 1);', 'glLightModelfv(pname,tmp);']
+glLightModelxv.regalRemap = ['GLfloat tmp[4];', 'fixedToFloat(tmp,param,pname==GL_LIGHT_MODEL_AMBIENT ? 4 : 1);', 'glLightModelfv(pname,tmp);']
 glLightModelxv.trace = True
 glLightModelxv.play = True
 gl.add(glLightModelxv)
@@ -41288,11 +42710,11 @@ glMaterialxv = Function('glMaterialxv')
 glMaterialxv.ret = Return('void')
 glMaterialxv.add( Input( 'face','GLenum' ))
 glMaterialxv.add( Input( 'pname','GLenum' ))
-glMaterialxv.add( Input( 'params','const GLfixed *' ))
+glMaterialxv.add( Input( 'param','const GLfixed *' ))
 glMaterialxv.version = ''
 glMaterialxv.category = 'GL_REGAL_ES1_0_compatibility'
 glMaterialxv.esVersions = [1.0, 1.1]
-glMaterialxv.regalRemap = ['GLfloat tmp[16];', 'fixedToFloat(tmp,params,pname==GL_SHININESS ? 1 : 4);', 'glMaterialfv(face,pname,tmp);']
+glMaterialxv.regalRemap = ['GLfloat tmp[16];', 'fixedToFloat(tmp,param,pname==GL_SHININESS ? 1 : 4);', 'glMaterialfv(face,pname,tmp);']
 glMaterialxv.trace = True
 glMaterialxv.play = True
 gl.add(glMaterialxv)
@@ -41310,7 +42732,7 @@ gl.add(glMultMatrixx)
 
 glMultiTexCoord4x = Function('glMultiTexCoord4x')
 glMultiTexCoord4x.ret = Return('void')
-glMultiTexCoord4x.add( Input( 'target','GLenum' ))
+glMultiTexCoord4x.add( Input( 'texture','GLenum' ))
 glMultiTexCoord4x.add( Input( 's','GLfixed' ))
 glMultiTexCoord4x.add( Input( 't','GLfixed' ))
 glMultiTexCoord4x.add( Input( 'r','GLfixed' ))
@@ -41318,7 +42740,7 @@ glMultiTexCoord4x.add( Input( 'q','GLfixed' ))
 glMultiTexCoord4x.version = ''
 glMultiTexCoord4x.category = 'GL_REGAL_ES1_0_compatibility'
 glMultiTexCoord4x.esVersions = [1.0, 1.1]
-glMultiTexCoord4x.regalRemap = 'glMultiTexCoord4f(target,fixedToFloat(s),fixedToFloat(t),fixedToFloat(r),fixedToFloat(q))'
+glMultiTexCoord4x.regalRemap = 'glMultiTexCoord4f(texture,fixedToFloat(s),fixedToFloat(t),fixedToFloat(r),fixedToFloat(q))'
 glMultiTexCoord4x.trace = True
 glMultiTexCoord4x.play = True
 gl.add(glMultiTexCoord4x)
@@ -41338,32 +42760,32 @@ gl.add(glNormal3x)
 
 glOrthof = Function('glOrthof')
 glOrthof.ret = Return('void')
-glOrthof.add( Input( 'left','GLfloat' ))
-glOrthof.add( Input( 'right','GLfloat' ))
-glOrthof.add( Input( 'bottom','GLfloat' ))
-glOrthof.add( Input( 'top','GLfloat' ))
-glOrthof.add( Input( 'zNear','GLfloat' ))
-glOrthof.add( Input( 'zFar','GLfloat' ))
+glOrthof.add( Input( 'l','GLfloat' ))
+glOrthof.add( Input( 'r','GLfloat' ))
+glOrthof.add( Input( 'b','GLfloat' ))
+glOrthof.add( Input( 't','GLfloat' ))
+glOrthof.add( Input( 'n','GLfloat' ))
+glOrthof.add( Input( 'f','GLfloat' ))
 glOrthof.version = ''
 glOrthof.category = 'GL_REGAL_ES1_0_compatibility'
 glOrthof.esVersions = [1.0, 1.1]
-glOrthof.regalRemap = 'glOrtho(left,right,bottom,top,zNear,zFar)'
+glOrthof.regalRemap = 'glOrtho(l,r,b,t,n,f)'
 glOrthof.trace = True
 glOrthof.play = True
 gl.add(glOrthof)
 
 glOrthox = Function('glOrthox')
 glOrthox.ret = Return('void')
-glOrthox.add( Input( 'left','GLfixed' ))
-glOrthox.add( Input( 'right','GLfixed' ))
-glOrthox.add( Input( 'bottom','GLfixed' ))
-glOrthox.add( Input( 'top','GLfixed' ))
-glOrthox.add( Input( 'zNear','GLfixed' ))
-glOrthox.add( Input( 'zFar','GLfixed' ))
+glOrthox.add( Input( 'l','GLfixed' ))
+glOrthox.add( Input( 'r','GLfixed' ))
+glOrthox.add( Input( 'b','GLfixed' ))
+glOrthox.add( Input( 't','GLfixed' ))
+glOrthox.add( Input( 'n','GLfixed' ))
+glOrthox.add( Input( 'f','GLfixed' ))
 glOrthox.version = ''
 glOrthox.category = 'GL_REGAL_ES1_0_compatibility'
 glOrthox.esVersions = [1.0, 1.1]
-glOrthox.regalRemap = 'glOrthof(fixedToFloat(left),fixedToFloat(right),fixedToFloat(bottom),fixedToFloat(top),fixedToFloat(zNear),fixedToFloat(zFar))'
+glOrthox.regalRemap = 'glOrthof(fixedToFloat(l),fixedToFloat(r),fixedToFloat(b),fixedToFloat(t),fixedToFloat(n),fixedToFloat(f))'
 glOrthox.trace = True
 glOrthox.play = True
 gl.add(glOrthox)
@@ -41486,12 +42908,12 @@ gl.add(glTranslatex)
 
 glClipPlanef = Function('glClipPlanef')
 glClipPlanef.ret = Return('void')
-glClipPlanef.add( Input( 'plane','GLenum' ))
-glClipPlanef.add( Input( 'equation','const GLfloat *' ))
+glClipPlanef.add( Input( 'p','GLenum' ))
+glClipPlanef.add( Input( 'eqn','const GLfloat *' ))
 glClipPlanef.version = ''
 glClipPlanef.category = 'GL_REGAL_ES1_1_compatibility'
 glClipPlanef.esVersions = [1.1]
-glClipPlanef.regalRemap = ['GLdouble tmp[4];', 'floatToDouble(tmp,equation,4);', 'glClipPlane(plane,tmp);']
+glClipPlanef.regalRemap = ['GLdouble tmp[4];', 'floatToDouble(tmp,eqn,4);', 'glClipPlane(p,tmp);']
 glClipPlanef.trace = True
 glClipPlanef.play = True
 gl.add(glClipPlanef)
@@ -41510,24 +42932,24 @@ gl.add(glClipPlanex)
 
 glGetClipPlanef = Function('glGetClipPlanef')
 glGetClipPlanef.ret = Return('void')
-glGetClipPlanef.add( Input( 'pname','GLenum' ))
-glGetClipPlanef.add( Input( 'eqn','GLfloat *' ))
+glGetClipPlanef.add( Input( 'plane','GLenum' ))
+glGetClipPlanef.add( Input( 'equation','GLfloat *' ))
 glGetClipPlanef.version = ''
 glGetClipPlanef.category = 'GL_REGAL_ES1_1_compatibility'
 glGetClipPlanef.esVersions = [1.1]
-glGetClipPlanef.regalRemap = ['GLdouble tmp[4];', 'glGetClipPlane(pname,tmp);', 'doubleToFloat(eqn,tmp,4);']
+glGetClipPlanef.regalRemap = ['GLdouble tmp[4];', 'glGetClipPlane(plane,tmp);', 'doubleToFloat(equation,tmp,4);']
 glGetClipPlanef.trace = True
 glGetClipPlanef.play = True
 gl.add(glGetClipPlanef)
 
 glGetClipPlanex = Function('glGetClipPlanex')
 glGetClipPlanex.ret = Return('void')
-glGetClipPlanex.add( Input( 'pname','GLenum' ))
-glGetClipPlanex.add( Input( 'eqn','GLfixed *' ))
+glGetClipPlanex.add( Input( 'plane','GLenum' ))
+glGetClipPlanex.add( Input( 'equation','GLfixed *' ))
 glGetClipPlanex.version = ''
 glGetClipPlanex.category = 'GL_REGAL_ES1_1_compatibility'
 glGetClipPlanex.esVersions = [1.1]
-glGetClipPlanex.regalRemap = ['GLdouble tmp[4];', 'glGetClipPlane(pname,tmp);', 'doubleToFixed(eqn,tmp,4);']
+glGetClipPlanex.regalRemap = ['GLdouble tmp[4];', 'glGetClipPlane(plane,tmp);', 'doubleToFixed(equation,tmp,4);']
 glGetClipPlanex.trace = True
 glGetClipPlanex.play = True
 gl.add(glGetClipPlanex)
@@ -41572,13 +42994,13 @@ gl.add(glGetMaterialxv)
 
 glGetTexEnvxv = Function('glGetTexEnvxv')
 glGetTexEnvxv.ret = Return('void')
-glGetTexEnvxv.add( Input( 'env','GLenum' ))
+glGetTexEnvxv.add( Input( 'target','GLenum' ))
 glGetTexEnvxv.add( Input( 'pname','GLenum' ))
 glGetTexEnvxv.add( Input( 'params','GLfixed *' ))
 glGetTexEnvxv.version = ''
 glGetTexEnvxv.category = 'GL_REGAL_ES1_1_compatibility'
 glGetTexEnvxv.esVersions = [1.1]
-glGetTexEnvxv.regalRemap = ['GLfloat tmp[4];', 'glGetTexEnvfv(env,pname,tmp);', 'floatToFixed(params,tmp,helper::size::texEnvv(env,pname));']
+glGetTexEnvxv.regalRemap = ['GLfloat tmp[4];', 'glGetTexEnvfv(target,pname,tmp);', 'floatToFixed(params,tmp,helper::size::texEnvv(target,pname));']
 glGetTexEnvxv.trace = True
 glGetTexEnvxv.play = True
 gl.add(glGetTexEnvxv)
@@ -43338,1421 +44760,6 @@ glAddSwapHintRectWIN.trace = True
 glAddSwapHintRectWIN.play = True
 gl.add(glAddSwapHintRectWIN)
 
-#
-# OpenGL 4.5 additions
-#
-
-# GL_ARB_clip_control
-
-GL_CLIP_DEPTH_MODE = Enumerant('GL_CLIP_DEPTH_MODE', 0x935d, 'GL_ARB_clip_control')
-GL_CLIP_ORIGIN = Enumerant('GL_CLIP_ORIGIN', 0x935c, 'GL_ARB_clip_control')
-GL_LOWER_LEFT = Enumerant('GL_LOWER_LEFT', 0x8ca1, 'GL_ARB_clip_control')
-GL_NEGATIVE_ONE_TO_ONE = Enumerant('GL_NEGATIVE_ONE_TO_ONE', 0x935e, 'GL_ARB_clip_control')
-GL_UPPER_LEFT = Enumerant('GL_UPPER_LEFT', 0x8ca2, 'GL_ARB_clip_control')
-GL_ZERO_TO_ONE = Enumerant('GL_ZERO_TO_ONE', 0x935f, 'GL_ARB_clip_control')
-
-defines.add(GL_CLIP_DEPTH_MODE)
-defines.add(GL_CLIP_ORIGIN)
-defines.add(GL_LOWER_LEFT)
-defines.add(GL_NEGATIVE_ONE_TO_ONE)
-defines.add(GL_UPPER_LEFT)
-defines.add(GL_ZERO_TO_ONE)
-
-# GL_ARB_conditional_render_inverted
-
-GL_QUERY_BY_REGION_NO_WAIT_INVERTED = Enumerant('GL_QUERY_BY_REGION_NO_WAIT_INVERTED', 0x8e1a, 'GL_ARB_conditional_render_inverted')
-GL_QUERY_BY_REGION_WAIT_INVERTED = Enumerant('GL_QUERY_BY_REGION_WAIT_INVERTED', 0x8e19, 'GL_ARB_conditional_render_inverted')
-GL_QUERY_NO_WAIT_INVERTED = Enumerant('GL_QUERY_NO_WAIT_INVERTED', 0x8e18, 'GL_ARB_conditional_render_inverted')
-GL_QUERY_WAIT_INVERTED = Enumerant('GL_QUERY_WAIT_INVERTED', 0x8e17, 'GL_ARB_conditional_render_inverted')
-
-defines.add(GL_QUERY_BY_REGION_NO_WAIT_INVERTED)
-defines.add(GL_QUERY_BY_REGION_WAIT_INVERTED)
-defines.add(GL_QUERY_NO_WAIT_INVERTED)
-defines.add(GL_QUERY_WAIT_INVERTED)
-
-# GL_ARB_cull_distance
-
-GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES = Enumerant('GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES', 0x82fa, 'GL_ARB_cull_distance')
-GL_MAX_CULL_DISTANCES = Enumerant('GL_MAX_CULL_DISTANCES', 0x82f9, 'GL_ARB_cull_distance')
-
-defines.add(GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES)
-defines.add(GL_MAX_CULL_DISTANCES)
-
-# GL_ARB_direct_state_access
-
-GL_QUERY_TARGET = Enumerant('GL_QUERY_TARGET', 0x82ea, 'GL_ARB_direct_state_access')
-GL_TEXTURE_BINDING = Enumerant('GL_TEXTURE_BINDING', 0x82eb, 'GL_ARB_direct_state_access')
-GL_TEXTURE_TARGET = Enumerant('GL_TEXTURE_TARGET', 0x1006, 'GL_ARB_direct_state_access')
-
-defines.add(GL_QUERY_TARGET)
-defines.add(GL_TEXTURE_BINDING)
-defines.add(GL_TEXTURE_TARGET)
-
-# GL_ARB_pipeline_statistics_query
-
-GL_CLIPPING_INPUT_PRIMITIVES_ARB = Enumerant('GL_CLIPPING_INPUT_PRIMITIVES_ARB', 0x82f6, 'GL_ARB_pipeline_statistics_query')
-GL_CLIPPING_OUTPUT_PRIMITIVES_ARB = Enumerant('GL_CLIPPING_OUTPUT_PRIMITIVES_ARB', 0x82f7, 'GL_ARB_pipeline_statistics_query')
-GL_COMPUTE_SHADER_INVOCATIONS_ARB = Enumerant('GL_COMPUTE_SHADER_INVOCATIONS_ARB', 0x82f5, 'GL_ARB_pipeline_statistics_query')
-GL_FRAGMENT_SHADER_INVOCATIONS_ARB = Enumerant('GL_FRAGMENT_SHADER_INVOCATIONS_ARB', 0x82f4, 'GL_ARB_pipeline_statistics_query')
-GL_GEOMETRY_SHADER_INVOCATIONS = Enumerant('GL_GEOMETRY_SHADER_INVOCATIONS', 0x887f, 'GL_ARB_pipeline_statistics_query')
-GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB = Enumerant('GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB', 0x82f3, 'GL_ARB_pipeline_statistics_query')
-GL_PRIMITIVES_SUBMITTED_ARB = Enumerant('GL_PRIMITIVES_SUBMITTED_ARB', 0x82ef, 'GL_ARB_pipeline_statistics_query')
-GL_TESS_CONTROL_SHADER_PATCHES_ARB = Enumerant('GL_TESS_CONTROL_SHADER_PATCHES_ARB', 0x82f1, 'GL_ARB_pipeline_statistics_query')
-GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB = Enumerant('GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB', 0x82f2, 'GL_ARB_pipeline_statistics_query')
-GL_VERTEX_SHADER_INVOCATIONS_ARB = Enumerant('GL_VERTEX_SHADER_INVOCATIONS_ARB', 0x82f0, 'GL_ARB_pipeline_statistics_query')
-GL_VERTICES_SUBMITTED_ARB = Enumerant('GL_VERTICES_SUBMITTED_ARB', 0x82ee, 'GL_ARB_pipeline_statistics_query')
-
-defines.add(GL_CLIPPING_INPUT_PRIMITIVES_ARB)
-defines.add(GL_CLIPPING_OUTPUT_PRIMITIVES_ARB)
-defines.add(GL_COMPUTE_SHADER_INVOCATIONS_ARB)
-defines.add(GL_FRAGMENT_SHADER_INVOCATIONS_ARB)
-defines.add(GL_GEOMETRY_SHADER_INVOCATIONS)
-defines.add(GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB)
-defines.add(GL_PRIMITIVES_SUBMITTED_ARB)
-defines.add(GL_TESS_CONTROL_SHADER_PATCHES_ARB)
-defines.add(GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB)
-defines.add(GL_VERTEX_SHADER_INVOCATIONS_ARB)
-defines.add(GL_VERTICES_SUBMITTED_ARB)
-
-# GL_ARB_sparse_buffer
-
-GL_SPARSE_BUFFER_PAGE_SIZE_ARB = Enumerant('GL_SPARSE_BUFFER_PAGE_SIZE_ARB', 0x82f8, 'GL_ARB_sparse_buffer')
-GL_SPARSE_STORAGE_BIT_ARB = Enumerant('GL_SPARSE_STORAGE_BIT_ARB', 0x0400, 'GL_ARB_sparse_buffer')
-
-defines.add(GL_SPARSE_BUFFER_PAGE_SIZE_ARB)
-defines.add(GL_SPARSE_STORAGE_BIT_ARB)
-
-# GL_ARB_transform_feedback_overflow_query
-
-GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB = Enumerant('GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB', 0x82ec, 'GL_ARB_transform_feedback_overflow_query')
-GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB = Enumerant('GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB', 0x82ed, 'GL_ARB_transform_feedback_overflow_query')
-
-defines.add(GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB)
-defines.add(GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB)
-
-# GL_KHR_blend_equation_advanced
-
-GL_BLEND_ADVANCED_COHERENT_KHR = Enumerant('GL_BLEND_ADVANCED_COHERENT_KHR', 0x9285, 'GL_KHR_blend_equation_advanced')
-GL_COLORBURN_KHR = Enumerant('GL_COLORBURN_KHR', 0x929a, 'GL_KHR_blend_equation_advanced')
-GL_COLORDODGE_KHR = Enumerant('GL_COLORDODGE_KHR', 0x9299, 'GL_KHR_blend_equation_advanced')
-GL_DARKEN_KHR = Enumerant('GL_DARKEN_KHR', 0x9297, 'GL_KHR_blend_equation_advanced')
-GL_DIFFERENCE_KHR = Enumerant('GL_DIFFERENCE_KHR', 0x929e, 'GL_KHR_blend_equation_advanced')
-GL_EXCLUSION_KHR = Enumerant('GL_EXCLUSION_KHR', 0x92a0, 'GL_KHR_blend_equation_advanced')
-GL_HARDLIGHT_KHR = Enumerant('GL_HARDLIGHT_KHR', 0x929b, 'GL_KHR_blend_equation_advanced')
-GL_HSL_COLOR_KHR = Enumerant('GL_HSL_COLOR_KHR', 0x92af, 'GL_KHR_blend_equation_advanced')
-GL_HSL_HUE_KHR = Enumerant('GL_HSL_HUE_KHR', 0x92ad, 'GL_KHR_blend_equation_advanced')
-GL_HSL_LUMINOSITY_KHR = Enumerant('GL_HSL_LUMINOSITY_KHR', 0x92b0, 'GL_KHR_blend_equation_advanced')
-GL_HSL_SATURATION_KHR = Enumerant('GL_HSL_SATURATION_KHR', 0x92ae, 'GL_KHR_blend_equation_advanced')
-GL_LIGHTEN_KHR = Enumerant('GL_LIGHTEN_KHR', 0x9298, 'GL_KHR_blend_equation_advanced')
-GL_MULTIPLY_KHR = Enumerant('GL_MULTIPLY_KHR', 0x9294, 'GL_KHR_blend_equation_advanced')
-GL_OVERLAY_KHR = Enumerant('GL_OVERLAY_KHR', 0x9296, 'GL_KHR_blend_equation_advanced')
-GL_SCREEN_KHR = Enumerant('GL_SCREEN_KHR', 0x9295, 'GL_KHR_blend_equation_advanced')
-GL_SOFTLIGHT_KHR = Enumerant('GL_SOFTLIGHT_KHR', 0x929c, 'GL_KHR_blend_equation_advanced')
-
-defines.add(GL_BLEND_ADVANCED_COHERENT_KHR)
-defines.add(GL_COLORBURN_KHR)
-defines.add(GL_COLORDODGE_KHR)
-defines.add(GL_DARKEN_KHR)
-defines.add(GL_DIFFERENCE_KHR)
-defines.add(GL_EXCLUSION_KHR)
-defines.add(GL_HARDLIGHT_KHR)
-defines.add(GL_HSL_COLOR_KHR)
-defines.add(GL_HSL_HUE_KHR)
-defines.add(GL_HSL_LUMINOSITY_KHR)
-defines.add(GL_HSL_SATURATION_KHR)
-defines.add(GL_LIGHTEN_KHR)
-defines.add(GL_MULTIPLY_KHR)
-defines.add(GL_OVERLAY_KHR)
-defines.add(GL_SCREEN_KHR)
-defines.add(GL_SOFTLIGHT_KHR)
-
-# GL_KHR_robustness
-
-GL_CONTEXT_LOST = Enumerant('GL_CONTEXT_LOST', 0x0507, 'GL_KHR_robustness')
-GL_CONTEXT_ROBUST_ACCESS = Enumerant('GL_CONTEXT_ROBUST_ACCESS', 0x90f3, 'GL_KHR_robustness')
-GL_GUILTY_CONTEXT_RESET = Enumerant('GL_GUILTY_CONTEXT_RESET', 0x8253, 'GL_KHR_robustness')
-GL_INNOCENT_CONTEXT_RESET = Enumerant('GL_INNOCENT_CONTEXT_RESET', 0x8254, 'GL_KHR_robustness')
-GL_LOSE_CONTEXT_ON_RESET = Enumerant('GL_LOSE_CONTEXT_ON_RESET', 0x8252, 'GL_KHR_robustness')
-GL_NO_RESET_NOTIFICATION = Enumerant('GL_NO_RESET_NOTIFICATION', 0x8261, 'GL_KHR_robustness')
-GL_RESET_NOTIFICATION_STRATEGY = Enumerant('GL_RESET_NOTIFICATION_STRATEGY', 0x8256, 'GL_KHR_robustness')
-GL_UNKNOWN_CONTEXT_RESET = Enumerant('GL_UNKNOWN_CONTEXT_RESET', 0x8255, 'GL_KHR_robustness')
-
-defines.add(GL_CONTEXT_LOST)
-defines.add(GL_CONTEXT_ROBUST_ACCESS)
-defines.add(GL_GUILTY_CONTEXT_RESET)
-defines.add(GL_INNOCENT_CONTEXT_RESET)
-defines.add(GL_LOSE_CONTEXT_ON_RESET)
-defines.add(GL_NO_RESET_NOTIFICATION)
-defines.add(GL_RESET_NOTIFICATION_STRATEGY)
-defines.add(GL_UNKNOWN_CONTEXT_RESET)
-
-# GL_ARB_ES3_1_compatibility
-
-glMemoryBarrierByRegion = Function('glMemoryBarrierByRegion')
-glMemoryBarrierByRegion.ret = Return('void')
-glMemoryBarrierByRegion.add( Input( 'barriers','GLbitfield' ))
-glMemoryBarrierByRegion.category = 'GL_ARB_ES3_1_compatibility'
-glMemoryBarrierByRegion.trace = True
-glMemoryBarrierByRegion.play = True
-gl.add(glMemoryBarrierByRegion)
-
-# GL_ARB_clip_control
-
-glClipControl = Function('glClipControl')
-glClipControl.ret = Return('void')
-glClipControl.add( Input( 'origin','GLenum' ))
-glClipControl.add( Input( 'depth','GLenum' ))
-glClipControl.category = 'GL_ARB_clip_control'
-glClipControl.trace = True
-glClipControl.play = True
-gl.add(glClipControl)
-
-# GL_ARB_direct_state_access
-
-glUnmapNamedBuffer = Function('glUnmapNamedBuffer')
-glUnmapNamedBuffer.ret = Return('GLboolean')
-glUnmapNamedBuffer.add( Input( 'buffer','GLuint' ))
-glUnmapNamedBuffer.category = 'GL_ARB_direct_state_access'
-glUnmapNamedBuffer.trace = True
-glUnmapNamedBuffer.play = True
-gl.add(glUnmapNamedBuffer)
-
-glCheckNamedFramebufferStatus = Function('glCheckNamedFramebufferStatus')
-glCheckNamedFramebufferStatus.ret = Return('GLenum')
-glCheckNamedFramebufferStatus.add( Input( 'framebuffer','GLuint' ))
-glCheckNamedFramebufferStatus.add( Input( 'target','GLenum' ))
-glCheckNamedFramebufferStatus.category = 'GL_ARB_direct_state_access'
-glCheckNamedFramebufferStatus.trace = True
-glCheckNamedFramebufferStatus.play = True
-gl.add(glCheckNamedFramebufferStatus)
-
-glMapNamedBuffer = Function('glMapNamedBuffer')
-glMapNamedBuffer.ret = Return('GLvoid *')
-glMapNamedBuffer.add( Input( 'buffer','GLuint' ))
-glMapNamedBuffer.add( Input( 'access','GLenum' ))
-glMapNamedBuffer.category = 'GL_ARB_direct_state_access'
-glMapNamedBuffer.trace = True
-glMapNamedBuffer.play = True
-gl.add(glMapNamedBuffer)
-
-glMapNamedBufferRange = Function('glMapNamedBufferRange')
-glMapNamedBufferRange.ret = Return('GLvoid *')
-glMapNamedBufferRange.add( Input( 'buffer','GLuint' ))
-glMapNamedBufferRange.add( Input( 'offset','GLintptr' ))
-glMapNamedBufferRange.add( Input( 'length','GLsizeiptr' ))
-glMapNamedBufferRange.add( Input( 'access','GLbitfield' ))
-glMapNamedBufferRange.category = 'GL_ARB_direct_state_access'
-glMapNamedBufferRange.trace = True
-glMapNamedBufferRange.play = True
-gl.add(glMapNamedBufferRange)
-
-glBindTextureUnit = Function('glBindTextureUnit')
-glBindTextureUnit.ret = Return('void')
-glBindTextureUnit.add( Input( 'unit','GLuint' ))
-glBindTextureUnit.add( Input( 'texture','GLuint' ))
-glBindTextureUnit.category = 'GL_ARB_direct_state_access'
-glBindTextureUnit.trace = True
-glBindTextureUnit.play = True
-gl.add(glBindTextureUnit)
-
-glBlitNamedFramebuffer = Function('glBlitNamedFramebuffer')
-glBlitNamedFramebuffer.ret = Return('void')
-glBlitNamedFramebuffer.add( Input( 'readFramebuffer','GLuint' ))
-glBlitNamedFramebuffer.add( Input( 'drawFramebuffer','GLuint' ))
-glBlitNamedFramebuffer.add( Input( 'srcX0','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'srcY0','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'srcX1','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'srcY1','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'dstX0','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'dstY0','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'dstX1','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'dstY1','GLint' ))
-glBlitNamedFramebuffer.add( Input( 'mask','GLbitfield' ))
-glBlitNamedFramebuffer.add( Input( 'filter','GLenum' ))
-glBlitNamedFramebuffer.category = 'GL_ARB_direct_state_access'
-glBlitNamedFramebuffer.trace = True
-glBlitNamedFramebuffer.play = True
-gl.add(glBlitNamedFramebuffer)
-
-glClearNamedBufferData = Function('glClearNamedBufferData')
-glClearNamedBufferData.ret = Return('void')
-glClearNamedBufferData.add( Input( 'buffer','GLuint' ))
-glClearNamedBufferData.add( Input( 'internalformat','GLenum' ))
-glClearNamedBufferData.add( Input( 'format','GLenum' ))
-glClearNamedBufferData.add( Input( 'type','GLenum' ))
-glClearNamedBufferData.add( Input( 'data','const GLvoid *' ))
-glClearNamedBufferData.category = 'GL_ARB_direct_state_access'
-glClearNamedBufferData.trace = True
-glClearNamedBufferData.play = True
-gl.add(glClearNamedBufferData)
-
-glClearNamedBufferSubData = Function('glClearNamedBufferSubData')
-glClearNamedBufferSubData.ret = Return('void')
-glClearNamedBufferSubData.add( Input( 'buffer','GLuint' ))
-glClearNamedBufferSubData.add( Input( 'internalformat','GLenum' ))
-glClearNamedBufferSubData.add( Input( 'offset','GLintptr' ))
-glClearNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
-glClearNamedBufferSubData.add( Input( 'format','GLenum' ))
-glClearNamedBufferSubData.add( Input( 'type','GLenum' ))
-glClearNamedBufferSubData.add( Input( 'data','const GLvoid *' ))
-glClearNamedBufferSubData.category = 'GL_ARB_direct_state_access'
-glClearNamedBufferSubData.trace = True
-glClearNamedBufferSubData.play = True
-gl.add(glClearNamedBufferSubData)
-
-glClearNamedFramebufferfi = Function('glClearNamedFramebufferfi')
-glClearNamedFramebufferfi.ret = Return('void')
-glClearNamedFramebufferfi.add( Input( 'framebuffer','GLuint' ))
-glClearNamedFramebufferfi.add( Input( 'buffer','GLenum' ))
-glClearNamedFramebufferfi.add( Input( 'depth','GLfloat' ))
-glClearNamedFramebufferfi.add( Input( 'stencil','GLint' ))
-glClearNamedFramebufferfi.category = 'GL_ARB_direct_state_access'
-glClearNamedFramebufferfi.trace = True
-glClearNamedFramebufferfi.play = True
-gl.add(glClearNamedFramebufferfi)
-
-glClearNamedFramebufferfv = Function('glClearNamedFramebufferfv')
-glClearNamedFramebufferfv.ret = Return('void')
-glClearNamedFramebufferfv.add( Input( 'framebuffer','GLuint' ))
-glClearNamedFramebufferfv.add( Input( 'buffer','GLenum' ))
-glClearNamedFramebufferfv.add( Input( 'drawbuffer','GLint' ))
-glClearNamedFramebufferfv.add( Input( 'value','const GLfloat *' ))
-glClearNamedFramebufferfv.category = 'GL_ARB_direct_state_access'
-glClearNamedFramebufferfv.trace = True
-glClearNamedFramebufferfv.play = True
-gl.add(glClearNamedFramebufferfv)
-
-glClearNamedFramebufferiv = Function('glClearNamedFramebufferiv')
-glClearNamedFramebufferiv.ret = Return('void')
-glClearNamedFramebufferiv.add( Input( 'framebuffer','GLuint' ))
-glClearNamedFramebufferiv.add( Input( 'buffer','GLenum' ))
-glClearNamedFramebufferiv.add( Input( 'drawbuffer','GLint' ))
-glClearNamedFramebufferiv.add( Input( 'value','const GLint *' ))
-glClearNamedFramebufferiv.category = 'GL_ARB_direct_state_access'
-glClearNamedFramebufferiv.trace = True
-glClearNamedFramebufferiv.play = True
-gl.add(glClearNamedFramebufferiv)
-
-glClearNamedFramebufferuiv = Function('glClearNamedFramebufferuiv')
-glClearNamedFramebufferuiv.ret = Return('void')
-glClearNamedFramebufferuiv.add( Input( 'framebuffer','GLuint' ))
-glClearNamedFramebufferuiv.add( Input( 'buffer','GLenum' ))
-glClearNamedFramebufferuiv.add( Input( 'drawbuffer','GLint' ))
-glClearNamedFramebufferuiv.add( Input( 'value','const GLuint *' ))
-glClearNamedFramebufferuiv.category = 'GL_ARB_direct_state_access'
-glClearNamedFramebufferuiv.trace = True
-glClearNamedFramebufferuiv.play = True
-gl.add(glClearNamedFramebufferuiv)
-
-glCompressedTextureSubImage1D = Function('glCompressedTextureSubImage1D')
-glCompressedTextureSubImage1D.ret = Return('void')
-glCompressedTextureSubImage1D.add( Input( 'texture','GLuint' ))
-glCompressedTextureSubImage1D.add( Input( 'level','GLint' ))
-glCompressedTextureSubImage1D.add( Input( 'xoffset','GLint' ))
-glCompressedTextureSubImage1D.add( Input( 'width','GLsizei' ))
-glCompressedTextureSubImage1D.add( Input( 'format','GLenum' ))
-glCompressedTextureSubImage1D.add( Input( 'imageSize','GLsizei' ))
-glCompressedTextureSubImage1D.add( Input( 'data','const GLvoid *' ))
-glCompressedTextureSubImage1D.category = 'GL_ARB_direct_state_access'
-glCompressedTextureSubImage1D.trace = True
-glCompressedTextureSubImage1D.play = True
-gl.add(glCompressedTextureSubImage1D)
-
-glCompressedTextureSubImage2D = Function('glCompressedTextureSubImage2D')
-glCompressedTextureSubImage2D.ret = Return('void')
-glCompressedTextureSubImage2D.add( Input( 'texture','GLuint' ))
-glCompressedTextureSubImage2D.add( Input( 'level','GLint' ))
-glCompressedTextureSubImage2D.add( Input( 'xoffset','GLint' ))
-glCompressedTextureSubImage2D.add( Input( 'yoffset','GLint' ))
-glCompressedTextureSubImage2D.add( Input( 'width','GLsizei' ))
-glCompressedTextureSubImage2D.add( Input( 'height','GLsizei' ))
-glCompressedTextureSubImage2D.add( Input( 'format','GLenum' ))
-glCompressedTextureSubImage2D.add( Input( 'imageSize','GLsizei' ))
-glCompressedTextureSubImage2D.add( Input( 'data','const GLvoid *' ))
-glCompressedTextureSubImage2D.category = 'GL_ARB_direct_state_access'
-glCompressedTextureSubImage2D.trace = True
-glCompressedTextureSubImage2D.play = True
-gl.add(glCompressedTextureSubImage2D)
-
-glCompressedTextureSubImage3D = Function('glCompressedTextureSubImage3D')
-glCompressedTextureSubImage3D.ret = Return('void')
-glCompressedTextureSubImage3D.add( Input( 'texture','GLuint' ))
-glCompressedTextureSubImage3D.add( Input( 'level','GLint' ))
-glCompressedTextureSubImage3D.add( Input( 'xoffset','GLint' ))
-glCompressedTextureSubImage3D.add( Input( 'yoffset','GLint' ))
-glCompressedTextureSubImage3D.add( Input( 'zoffset','GLint' ))
-glCompressedTextureSubImage3D.add( Input( 'width','GLsizei' ))
-glCompressedTextureSubImage3D.add( Input( 'height','GLsizei' ))
-glCompressedTextureSubImage3D.add( Input( 'depth','GLsizei' ))
-glCompressedTextureSubImage3D.add( Input( 'format','GLenum' ))
-glCompressedTextureSubImage3D.add( Input( 'imageSize','GLsizei' ))
-glCompressedTextureSubImage3D.add( Input( 'data','const GLvoid *' ))
-glCompressedTextureSubImage3D.category = 'GL_ARB_direct_state_access'
-glCompressedTextureSubImage3D.trace = True
-glCompressedTextureSubImage3D.play = True
-gl.add(glCompressedTextureSubImage3D)
-
-glCopyNamedBufferSubData = Function('glCopyNamedBufferSubData')
-glCopyNamedBufferSubData.ret = Return('void')
-glCopyNamedBufferSubData.add( Input( 'readBuffer','GLuint' ))
-glCopyNamedBufferSubData.add( Input( 'writeBuffer','GLuint' ))
-glCopyNamedBufferSubData.add( Input( 'readOffset','GLintptr' ))
-glCopyNamedBufferSubData.add( Input( 'writeOffset','GLintptr' ))
-glCopyNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
-glCopyNamedBufferSubData.category = 'GL_ARB_direct_state_access'
-glCopyNamedBufferSubData.trace = True
-glCopyNamedBufferSubData.play = True
-gl.add(glCopyNamedBufferSubData)
-
-glCopyTextureSubImage1D = Function('glCopyTextureSubImage1D')
-glCopyTextureSubImage1D.ret = Return('void')
-glCopyTextureSubImage1D.add( Input( 'texture','GLuint' ))
-glCopyTextureSubImage1D.add( Input( 'level','GLint' ))
-glCopyTextureSubImage1D.add( Input( 'xoffset','GLint' ))
-glCopyTextureSubImage1D.add( Input( 'x','GLint' ))
-glCopyTextureSubImage1D.add( Input( 'y','GLint' ))
-glCopyTextureSubImage1D.add( Input( 'width','GLsizei' ))
-glCopyTextureSubImage1D.category = 'GL_ARB_direct_state_access'
-glCopyTextureSubImage1D.trace = True
-glCopyTextureSubImage1D.play = True
-gl.add(glCopyTextureSubImage1D)
-
-glCopyTextureSubImage2D = Function('glCopyTextureSubImage2D')
-glCopyTextureSubImage2D.ret = Return('void')
-glCopyTextureSubImage2D.add( Input( 'texture','GLuint' ))
-glCopyTextureSubImage2D.add( Input( 'level','GLint' ))
-glCopyTextureSubImage2D.add( Input( 'xoffset','GLint' ))
-glCopyTextureSubImage2D.add( Input( 'yoffset','GLint' ))
-glCopyTextureSubImage2D.add( Input( 'x','GLint' ))
-glCopyTextureSubImage2D.add( Input( 'y','GLint' ))
-glCopyTextureSubImage2D.add( Input( 'width','GLsizei' ))
-glCopyTextureSubImage2D.add( Input( 'height','GLsizei' ))
-glCopyTextureSubImage2D.category = 'GL_ARB_direct_state_access'
-glCopyTextureSubImage2D.trace = True
-glCopyTextureSubImage2D.play = True
-gl.add(glCopyTextureSubImage2D)
-
-glCopyTextureSubImage3D = Function('glCopyTextureSubImage3D')
-glCopyTextureSubImage3D.ret = Return('void')
-glCopyTextureSubImage3D.add( Input( 'texture','GLuint' ))
-glCopyTextureSubImage3D.add( Input( 'level','GLint' ))
-glCopyTextureSubImage3D.add( Input( 'xoffset','GLint' ))
-glCopyTextureSubImage3D.add( Input( 'yoffset','GLint' ))
-glCopyTextureSubImage3D.add( Input( 'zoffset','GLint' ))
-glCopyTextureSubImage3D.add( Input( 'x','GLint' ))
-glCopyTextureSubImage3D.add( Input( 'y','GLint' ))
-glCopyTextureSubImage3D.add( Input( 'width','GLsizei' ))
-glCopyTextureSubImage3D.add( Input( 'height','GLsizei' ))
-glCopyTextureSubImage3D.category = 'GL_ARB_direct_state_access'
-glCopyTextureSubImage3D.trace = True
-glCopyTextureSubImage3D.play = True
-gl.add(glCopyTextureSubImage3D)
-
-glCreateBuffers = Function('glCreateBuffers')
-glCreateBuffers.ret = Return('void')
-glCreateBuffers.add( Input( 'n','GLsizei' ))
-glCreateBuffers.add( Input( 'buffers','GLuint *' ))
-glCreateBuffers.category = 'GL_ARB_direct_state_access'
-glCreateBuffers.trace = True
-glCreateBuffers.play = True
-gl.add(glCreateBuffers)
-
-glCreateFramebuffers = Function('glCreateFramebuffers')
-glCreateFramebuffers.ret = Return('void')
-glCreateFramebuffers.add( Input( 'n','GLsizei' ))
-glCreateFramebuffers.add( Input( 'framebuffers','GLuint *' ))
-glCreateFramebuffers.category = 'GL_ARB_direct_state_access'
-glCreateFramebuffers.trace = True
-glCreateFramebuffers.play = True
-gl.add(glCreateFramebuffers)
-
-glCreateProgramPipelines = Function('glCreateProgramPipelines')
-glCreateProgramPipelines.ret = Return('void')
-glCreateProgramPipelines.add( Input( 'n','GLsizei' ))
-glCreateProgramPipelines.add( Input( 'pipelines','GLuint *' ))
-glCreateProgramPipelines.category = 'GL_ARB_direct_state_access'
-glCreateProgramPipelines.trace = True
-glCreateProgramPipelines.play = True
-gl.add(glCreateProgramPipelines)
-
-glCreateQueries = Function('glCreateQueries')
-glCreateQueries.ret = Return('void')
-glCreateQueries.add( Input( 'target','GLenum' ))
-glCreateQueries.add( Input( 'n','GLsizei' ))
-glCreateQueries.add( Input( 'ids','GLuint *' ))
-glCreateQueries.category = 'GL_ARB_direct_state_access'
-glCreateQueries.trace = True
-glCreateQueries.play = True
-gl.add(glCreateQueries)
-
-glCreateRenderbuffers = Function('glCreateRenderbuffers')
-glCreateRenderbuffers.ret = Return('void')
-glCreateRenderbuffers.add( Input( 'n','GLsizei' ))
-glCreateRenderbuffers.add( Input( 'renderbuffers','GLuint *' ))
-glCreateRenderbuffers.category = 'GL_ARB_direct_state_access'
-glCreateRenderbuffers.trace = True
-glCreateRenderbuffers.play = True
-gl.add(glCreateRenderbuffers)
-
-glCreateSamplers = Function('glCreateSamplers')
-glCreateSamplers.ret = Return('void')
-glCreateSamplers.add( Input( 'n','GLsizei' ))
-glCreateSamplers.add( Input( 'samplers','GLuint *' ))
-glCreateSamplers.category = 'GL_ARB_direct_state_access'
-glCreateSamplers.trace = True
-glCreateSamplers.play = True
-gl.add(glCreateSamplers)
-
-glCreateTextures = Function('glCreateTextures')
-glCreateTextures.ret = Return('void')
-glCreateTextures.add( Input( 'target','GLenum' ))
-glCreateTextures.add( Input( 'n','GLsizei' ))
-glCreateTextures.add( Input( 'textures','GLuint *' ))
-glCreateTextures.category = 'GL_ARB_direct_state_access'
-glCreateTextures.trace = True
-glCreateTextures.play = True
-gl.add(glCreateTextures)
-
-glCreateTransformFeedbacks = Function('glCreateTransformFeedbacks')
-glCreateTransformFeedbacks.ret = Return('void')
-glCreateTransformFeedbacks.add( Input( 'n','GLsizei' ))
-glCreateTransformFeedbacks.add( Input( 'ids','GLuint *' ))
-glCreateTransformFeedbacks.category = 'GL_ARB_direct_state_access'
-glCreateTransformFeedbacks.trace = True
-glCreateTransformFeedbacks.play = True
-gl.add(glCreateTransformFeedbacks)
-
-glCreateVertexArrays = Function('glCreateVertexArrays')
-glCreateVertexArrays.ret = Return('void')
-glCreateVertexArrays.add( Input( 'n','GLsizei' ))
-glCreateVertexArrays.add( Input( 'arrays','GLuint *' ))
-glCreateVertexArrays.category = 'GL_ARB_direct_state_access'
-glCreateVertexArrays.trace = True
-glCreateVertexArrays.play = True
-gl.add(glCreateVertexArrays)
-
-glDisableVertexArrayAttrib = Function('glDisableVertexArrayAttrib')
-glDisableVertexArrayAttrib.ret = Return('void')
-glDisableVertexArrayAttrib.add( Input( 'vaobj','GLuint' ))
-glDisableVertexArrayAttrib.add( Input( 'index','GLuint' ))
-glDisableVertexArrayAttrib.category = 'GL_ARB_direct_state_access'
-glDisableVertexArrayAttrib.trace = True
-glDisableVertexArrayAttrib.play = True
-gl.add(glDisableVertexArrayAttrib)
-
-glEnableVertexArrayAttrib = Function('glEnableVertexArrayAttrib')
-glEnableVertexArrayAttrib.ret = Return('void')
-glEnableVertexArrayAttrib.add( Input( 'vaobj','GLuint' ))
-glEnableVertexArrayAttrib.add( Input( 'index','GLuint' ))
-glEnableVertexArrayAttrib.category = 'GL_ARB_direct_state_access'
-glEnableVertexArrayAttrib.trace = True
-glEnableVertexArrayAttrib.play = True
-gl.add(glEnableVertexArrayAttrib)
-
-glFlushMappedNamedBufferRange = Function('glFlushMappedNamedBufferRange')
-glFlushMappedNamedBufferRange.ret = Return('void')
-glFlushMappedNamedBufferRange.add( Input( 'buffer','GLuint' ))
-glFlushMappedNamedBufferRange.add( Input( 'offset','GLintptr' ))
-glFlushMappedNamedBufferRange.add( Input( 'length','GLsizeiptr' ))
-glFlushMappedNamedBufferRange.category = 'GL_ARB_direct_state_access'
-glFlushMappedNamedBufferRange.trace = True
-glFlushMappedNamedBufferRange.play = True
-gl.add(glFlushMappedNamedBufferRange)
-
-glGenerateTextureMipmap = Function('glGenerateTextureMipmap')
-glGenerateTextureMipmap.ret = Return('void')
-glGenerateTextureMipmap.add( Input( 'texture','GLuint' ))
-glGenerateTextureMipmap.category = 'GL_ARB_direct_state_access'
-glGenerateTextureMipmap.trace = True
-glGenerateTextureMipmap.play = True
-gl.add(glGenerateTextureMipmap)
-
-glGetCompressedTextureImage = Function('glGetCompressedTextureImage')
-glGetCompressedTextureImage.ret = Return('void')
-glGetCompressedTextureImage.add( Input( 'texture','GLuint' ))
-glGetCompressedTextureImage.add( Input( 'level','GLint' ))
-glGetCompressedTextureImage.add( Input( 'bufSize','GLsizei' ))
-glGetCompressedTextureImage.add( Input( 'pixels','GLvoid *' ))
-glGetCompressedTextureImage.category = 'GL_ARB_direct_state_access'
-glGetCompressedTextureImage.trace = True
-glGetCompressedTextureImage.play = True
-gl.add(glGetCompressedTextureImage)
-
-glGetNamedBufferParameteri64v = Function('glGetNamedBufferParameteri64v')
-glGetNamedBufferParameteri64v.ret = Return('void')
-glGetNamedBufferParameteri64v.add( Input( 'buffer','GLuint' ))
-glGetNamedBufferParameteri64v.add( Input( 'pname','GLenum' ))
-glGetNamedBufferParameteri64v.add( Input( 'params','GLint64 *' ))
-glGetNamedBufferParameteri64v.category = 'GL_ARB_direct_state_access'
-glGetNamedBufferParameteri64v.trace = True
-glGetNamedBufferParameteri64v.play = True
-gl.add(glGetNamedBufferParameteri64v)
-
-glGetNamedBufferParameteriv = Function('glGetNamedBufferParameteriv')
-glGetNamedBufferParameteriv.ret = Return('void')
-glGetNamedBufferParameteriv.add( Input( 'buffer','GLuint' ))
-glGetNamedBufferParameteriv.add( Input( 'pname','GLenum' ))
-glGetNamedBufferParameteriv.add( Input( 'params','GLint *' ))
-glGetNamedBufferParameteriv.category = 'GL_ARB_direct_state_access'
-glGetNamedBufferParameteriv.trace = True
-glGetNamedBufferParameteriv.play = True
-gl.add(glGetNamedBufferParameteriv)
-
-glGetNamedBufferPointerv = Function('glGetNamedBufferPointerv')
-glGetNamedBufferPointerv.ret = Return('void')
-glGetNamedBufferPointerv.add( Input( 'buffer','GLuint' ))
-glGetNamedBufferPointerv.add( Input( 'pname','GLenum' ))
-glGetNamedBufferPointerv.add( Input( 'params','GLvoid **' ))
-glGetNamedBufferPointerv.category = 'GL_ARB_direct_state_access'
-glGetNamedBufferPointerv.trace = True
-glGetNamedBufferPointerv.play = True
-gl.add(glGetNamedBufferPointerv)
-
-glGetNamedBufferSubData = Function('glGetNamedBufferSubData')
-glGetNamedBufferSubData.ret = Return('void')
-glGetNamedBufferSubData.add( Input( 'buffer','GLuint' ))
-glGetNamedBufferSubData.add( Input( 'offset','GLintptr' ))
-glGetNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
-glGetNamedBufferSubData.add( Input( 'data','GLvoid *' ))
-glGetNamedBufferSubData.category = 'GL_ARB_direct_state_access'
-glGetNamedBufferSubData.trace = True
-glGetNamedBufferSubData.play = True
-gl.add(glGetNamedBufferSubData)
-
-glGetNamedFramebufferAttachmentParameteriv = Function('glGetNamedFramebufferAttachmentParameteriv')
-glGetNamedFramebufferAttachmentParameteriv.ret = Return('void')
-glGetNamedFramebufferAttachmentParameteriv.add( Input( 'framebuffer','GLuint' ))
-glGetNamedFramebufferAttachmentParameteriv.add( Input( 'attachment','GLenum' ))
-glGetNamedFramebufferAttachmentParameteriv.add( Input( 'pname','GLenum' ))
-glGetNamedFramebufferAttachmentParameteriv.add( Input( 'params','GLint *' ))
-glGetNamedFramebufferAttachmentParameteriv.category = 'GL_ARB_direct_state_access'
-glGetNamedFramebufferAttachmentParameteriv.trace = True
-glGetNamedFramebufferAttachmentParameteriv.play = True
-gl.add(glGetNamedFramebufferAttachmentParameteriv)
-
-glGetNamedFramebufferParameteriv = Function('glGetNamedFramebufferParameteriv')
-glGetNamedFramebufferParameteriv.ret = Return('void')
-glGetNamedFramebufferParameteriv.add( Input( 'framebuffer','GLuint' ))
-glGetNamedFramebufferParameteriv.add( Input( 'pname','GLenum' ))
-glGetNamedFramebufferParameteriv.add( Input( 'param','GLint *' ))
-glGetNamedFramebufferParameteriv.category = 'GL_ARB_direct_state_access'
-glGetNamedFramebufferParameteriv.trace = True
-glGetNamedFramebufferParameteriv.play = True
-gl.add(glGetNamedFramebufferParameteriv)
-
-glGetNamedRenderbufferParameteriv = Function('glGetNamedRenderbufferParameteriv')
-glGetNamedRenderbufferParameteriv.ret = Return('void')
-glGetNamedRenderbufferParameteriv.add( Input( 'renderbuffer','GLuint' ))
-glGetNamedRenderbufferParameteriv.add( Input( 'pname','GLenum' ))
-glGetNamedRenderbufferParameteriv.add( Input( 'params','GLint *' ))
-glGetNamedRenderbufferParameteriv.category = 'GL_ARB_direct_state_access'
-glGetNamedRenderbufferParameteriv.trace = True
-glGetNamedRenderbufferParameteriv.play = True
-gl.add(glGetNamedRenderbufferParameteriv)
-
-glGetTextureImage = Function('glGetTextureImage')
-glGetTextureImage.ret = Return('void')
-glGetTextureImage.add( Input( 'texture','GLuint' ))
-glGetTextureImage.add( Input( 'level','GLint' ))
-glGetTextureImage.add( Input( 'format','GLenum' ))
-glGetTextureImage.add( Input( 'type','GLenum' ))
-glGetTextureImage.add( Input( 'bufSize','GLsizei' ))
-glGetTextureImage.add( Input( 'pixels','GLvoid *' ))
-glGetTextureImage.category = 'GL_ARB_direct_state_access'
-glGetTextureImage.trace = True
-glGetTextureImage.play = True
-gl.add(glGetTextureImage)
-
-glGetTextureLevelParameterfv = Function('glGetTextureLevelParameterfv')
-glGetTextureLevelParameterfv.ret = Return('void')
-glGetTextureLevelParameterfv.add( Input( 'texture','GLuint' ))
-glGetTextureLevelParameterfv.add( Input( 'level','GLint' ))
-glGetTextureLevelParameterfv.add( Input( 'pname','GLenum' ))
-glGetTextureLevelParameterfv.add( Input( 'params','GLfloat *' ))
-glGetTextureLevelParameterfv.category = 'GL_ARB_direct_state_access'
-glGetTextureLevelParameterfv.trace = True
-glGetTextureLevelParameterfv.play = True
-gl.add(glGetTextureLevelParameterfv)
-
-glGetTextureLevelParameteriv = Function('glGetTextureLevelParameteriv')
-glGetTextureLevelParameteriv.ret = Return('void')
-glGetTextureLevelParameteriv.add( Input( 'texture','GLuint' ))
-glGetTextureLevelParameteriv.add( Input( 'level','GLint' ))
-glGetTextureLevelParameteriv.add( Input( 'pname','GLenum' ))
-glGetTextureLevelParameteriv.add( Input( 'params','GLint *' ))
-glGetTextureLevelParameteriv.category = 'GL_ARB_direct_state_access'
-glGetTextureLevelParameteriv.trace = True
-glGetTextureLevelParameteriv.play = True
-gl.add(glGetTextureLevelParameteriv)
-
-glGetTextureParameterIiv = Function('glGetTextureParameterIiv')
-glGetTextureParameterIiv.ret = Return('void')
-glGetTextureParameterIiv.add( Input( 'texture','GLuint' ))
-glGetTextureParameterIiv.add( Input( 'pname','GLenum' ))
-glGetTextureParameterIiv.add( Input( 'params','GLint *' ))
-glGetTextureParameterIiv.category = 'GL_ARB_direct_state_access'
-glGetTextureParameterIiv.trace = True
-glGetTextureParameterIiv.play = True
-gl.add(glGetTextureParameterIiv)
-
-glGetTextureParameterIuiv = Function('glGetTextureParameterIuiv')
-glGetTextureParameterIuiv.ret = Return('void')
-glGetTextureParameterIuiv.add( Input( 'texture','GLuint' ))
-glGetTextureParameterIuiv.add( Input( 'pname','GLenum' ))
-glGetTextureParameterIuiv.add( Input( 'params','GLuint *' ))
-glGetTextureParameterIuiv.category = 'GL_ARB_direct_state_access'
-glGetTextureParameterIuiv.trace = True
-glGetTextureParameterIuiv.play = True
-gl.add(glGetTextureParameterIuiv)
-
-glGetTextureParameterfv = Function('glGetTextureParameterfv')
-glGetTextureParameterfv.ret = Return('void')
-glGetTextureParameterfv.add( Input( 'texture','GLuint' ))
-glGetTextureParameterfv.add( Input( 'pname','GLenum' ))
-glGetTextureParameterfv.add( Input( 'params','GLfloat *' ))
-glGetTextureParameterfv.category = 'GL_ARB_direct_state_access'
-glGetTextureParameterfv.trace = True
-glGetTextureParameterfv.play = True
-gl.add(glGetTextureParameterfv)
-
-glGetTextureParameteriv = Function('glGetTextureParameteriv')
-glGetTextureParameteriv.ret = Return('void')
-glGetTextureParameteriv.add( Input( 'texture','GLuint' ))
-glGetTextureParameteriv.add( Input( 'pname','GLenum' ))
-glGetTextureParameteriv.add( Input( 'params','GLint *' ))
-glGetTextureParameteriv.category = 'GL_ARB_direct_state_access'
-glGetTextureParameteriv.trace = True
-glGetTextureParameteriv.play = True
-gl.add(glGetTextureParameteriv)
-
-glGetTransformFeedbacki64_v = Function('glGetTransformFeedbacki64_v')
-glGetTransformFeedbacki64_v.ret = Return('void')
-glGetTransformFeedbacki64_v.add( Input( 'xfb','GLuint' ))
-glGetTransformFeedbacki64_v.add( Input( 'pname','GLenum' ))
-glGetTransformFeedbacki64_v.add( Input( 'index','GLuint' ))
-glGetTransformFeedbacki64_v.add( Input( 'param','GLint64 *' ))
-glGetTransformFeedbacki64_v.category = 'GL_ARB_direct_state_access'
-glGetTransformFeedbacki64_v.trace = True
-glGetTransformFeedbacki64_v.play = True
-gl.add(glGetTransformFeedbacki64_v)
-
-glGetTransformFeedbacki_v = Function('glGetTransformFeedbacki_v')
-glGetTransformFeedbacki_v.ret = Return('void')
-glGetTransformFeedbacki_v.add( Input( 'xfb','GLuint' ))
-glGetTransformFeedbacki_v.add( Input( 'pname','GLenum' ))
-glGetTransformFeedbacki_v.add( Input( 'index','GLuint' ))
-glGetTransformFeedbacki_v.add( Input( 'param','GLint *' ))
-glGetTransformFeedbacki_v.category = 'GL_ARB_direct_state_access'
-glGetTransformFeedbacki_v.trace = True
-glGetTransformFeedbacki_v.play = True
-gl.add(glGetTransformFeedbacki_v)
-
-glGetTransformFeedbackiv = Function('glGetTransformFeedbackiv')
-glGetTransformFeedbackiv.ret = Return('void')
-glGetTransformFeedbackiv.add( Input( 'xfb','GLuint' ))
-glGetTransformFeedbackiv.add( Input( 'pname','GLenum' ))
-glGetTransformFeedbackiv.add( Input( 'param','GLint *' ))
-glGetTransformFeedbackiv.category = 'GL_ARB_direct_state_access'
-glGetTransformFeedbackiv.trace = True
-glGetTransformFeedbackiv.play = True
-gl.add(glGetTransformFeedbackiv)
-
-glGetVertexArrayIndexed64iv = Function('glGetVertexArrayIndexed64iv')
-glGetVertexArrayIndexed64iv.ret = Return('void')
-glGetVertexArrayIndexed64iv.add( Input( 'vaobj','GLuint' ))
-glGetVertexArrayIndexed64iv.add( Input( 'index','GLuint' ))
-glGetVertexArrayIndexed64iv.add( Input( 'pname','GLenum' ))
-glGetVertexArrayIndexed64iv.add( Input( 'param','GLint64 *' ))
-glGetVertexArrayIndexed64iv.category = 'GL_ARB_direct_state_access'
-glGetVertexArrayIndexed64iv.trace = True
-glGetVertexArrayIndexed64iv.play = True
-gl.add(glGetVertexArrayIndexed64iv)
-
-glGetVertexArrayIndexediv = Function('glGetVertexArrayIndexediv')
-glGetVertexArrayIndexediv.ret = Return('void')
-glGetVertexArrayIndexediv.add( Input( 'vaobj','GLuint' ))
-glGetVertexArrayIndexediv.add( Input( 'index','GLuint' ))
-glGetVertexArrayIndexediv.add( Input( 'pname','GLenum' ))
-glGetVertexArrayIndexediv.add( Input( 'param','GLint *' ))
-glGetVertexArrayIndexediv.category = 'GL_ARB_direct_state_access'
-glGetVertexArrayIndexediv.trace = True
-glGetVertexArrayIndexediv.play = True
-gl.add(glGetVertexArrayIndexediv)
-
-glGetVertexArrayiv = Function('glGetVertexArrayiv')
-glGetVertexArrayiv.ret = Return('void')
-glGetVertexArrayiv.add( Input( 'vaobj','GLuint' ))
-glGetVertexArrayiv.add( Input( 'pname','GLenum' ))
-glGetVertexArrayiv.add( Input( 'param','GLint *' ))
-glGetVertexArrayiv.category = 'GL_ARB_direct_state_access'
-glGetVertexArrayiv.trace = True
-glGetVertexArrayiv.play = True
-gl.add(glGetVertexArrayiv)
-
-glInvalidateNamedFramebufferData = Function('glInvalidateNamedFramebufferData')
-glInvalidateNamedFramebufferData.ret = Return('void')
-glInvalidateNamedFramebufferData.add( Input( 'framebuffer','GLuint' ))
-glInvalidateNamedFramebufferData.add( Input( 'numAttachments','GLsizei' ))
-glInvalidateNamedFramebufferData.add( Input( 'attachments','const GLenum *' ))
-glInvalidateNamedFramebufferData.category = 'GL_ARB_direct_state_access'
-glInvalidateNamedFramebufferData.trace = True
-glInvalidateNamedFramebufferData.play = True
-gl.add(glInvalidateNamedFramebufferData)
-
-glInvalidateNamedFramebufferSubData = Function('glInvalidateNamedFramebufferSubData')
-glInvalidateNamedFramebufferSubData.ret = Return('void')
-glInvalidateNamedFramebufferSubData.add( Input( 'framebuffer','GLuint' ))
-glInvalidateNamedFramebufferSubData.add( Input( 'numAttachments','GLsizei' ))
-glInvalidateNamedFramebufferSubData.add( Input( 'attachments','const GLenum *' ))
-glInvalidateNamedFramebufferSubData.add( Input( 'x','GLint' ))
-glInvalidateNamedFramebufferSubData.add( Input( 'y','GLint' ))
-glInvalidateNamedFramebufferSubData.add( Input( 'width','GLsizei' ))
-glInvalidateNamedFramebufferSubData.add( Input( 'height','GLsizei' ))
-glInvalidateNamedFramebufferSubData.category = 'GL_ARB_direct_state_access'
-glInvalidateNamedFramebufferSubData.trace = True
-glInvalidateNamedFramebufferSubData.play = True
-gl.add(glInvalidateNamedFramebufferSubData)
-
-glNamedBufferData = Function('glNamedBufferData')
-glNamedBufferData.ret = Return('void')
-glNamedBufferData.add( Input( 'buffer','GLuint' ))
-glNamedBufferData.add( Input( 'size','GLsizeiptr' ))
-glNamedBufferData.add( Input( 'data','const GLvoid *' ))
-glNamedBufferData.add( Input( 'usage','GLenum' ))
-glNamedBufferData.category = 'GL_ARB_direct_state_access'
-glNamedBufferData.trace = True
-glNamedBufferData.play = True
-gl.add(glNamedBufferData)
-
-glNamedBufferStorage = Function('glNamedBufferStorage')
-glNamedBufferStorage.ret = Return('void')
-glNamedBufferStorage.add( Input( 'buffer','GLuint' ))
-glNamedBufferStorage.add( Input( 'size','GLsizeiptr' ))
-glNamedBufferStorage.add( Input( 'data','const GLvoid *' ))
-glNamedBufferStorage.add( Input( 'flags','GLbitfield' ))
-glNamedBufferStorage.category = 'GL_ARB_direct_state_access'
-glNamedBufferStorage.trace = True
-glNamedBufferStorage.play = True
-gl.add(glNamedBufferStorage)
-
-glNamedBufferSubData = Function('glNamedBufferSubData')
-glNamedBufferSubData.ret = Return('void')
-glNamedBufferSubData.add( Input( 'buffer','GLuint' ))
-glNamedBufferSubData.add( Input( 'offset','GLintptr' ))
-glNamedBufferSubData.add( Input( 'size','GLsizeiptr' ))
-glNamedBufferSubData.add( Input( 'data','const GLvoid *' ))
-glNamedBufferSubData.category = 'GL_ARB_direct_state_access'
-glNamedBufferSubData.trace = True
-glNamedBufferSubData.play = True
-gl.add(glNamedBufferSubData)
-
-glNamedFramebufferDrawBuffer = Function('glNamedFramebufferDrawBuffer')
-glNamedFramebufferDrawBuffer.ret = Return('void')
-glNamedFramebufferDrawBuffer.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferDrawBuffer.add( Input( 'mode','GLenum' ))
-glNamedFramebufferDrawBuffer.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferDrawBuffer.trace = True
-glNamedFramebufferDrawBuffer.play = True
-gl.add(glNamedFramebufferDrawBuffer)
-
-glNamedFramebufferDrawBuffers = Function('glNamedFramebufferDrawBuffers')
-glNamedFramebufferDrawBuffers.ret = Return('void')
-glNamedFramebufferDrawBuffers.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferDrawBuffers.add( Input( 'n','GLsizei' ))
-glNamedFramebufferDrawBuffers.add( Input( 'bufs','const GLenum *' ))
-glNamedFramebufferDrawBuffers.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferDrawBuffers.trace = True
-glNamedFramebufferDrawBuffers.play = True
-gl.add(glNamedFramebufferDrawBuffers)
-
-glNamedFramebufferParameteri = Function('glNamedFramebufferParameteri')
-glNamedFramebufferParameteri.ret = Return('void')
-glNamedFramebufferParameteri.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferParameteri.add( Input( 'pname','GLenum' ))
-glNamedFramebufferParameteri.add( Input( 'param','GLint' ))
-glNamedFramebufferParameteri.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferParameteri.trace = True
-glNamedFramebufferParameteri.play = True
-gl.add(glNamedFramebufferParameteri)
-
-glNamedFramebufferReadBuffer = Function('glNamedFramebufferReadBuffer')
-glNamedFramebufferReadBuffer.ret = Return('void')
-glNamedFramebufferReadBuffer.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferReadBuffer.add( Input( 'mode','GLenum' ))
-glNamedFramebufferReadBuffer.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferReadBuffer.trace = True
-glNamedFramebufferReadBuffer.play = True
-gl.add(glNamedFramebufferReadBuffer)
-
-glNamedFramebufferRenderbuffer = Function('glNamedFramebufferRenderbuffer')
-glNamedFramebufferRenderbuffer.ret = Return('void')
-glNamedFramebufferRenderbuffer.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferRenderbuffer.add( Input( 'attachment','GLenum' ))
-glNamedFramebufferRenderbuffer.add( Input( 'renderbuffertarget','GLenum' ))
-glNamedFramebufferRenderbuffer.add( Input( 'renderbuffer','GLuint' ))
-glNamedFramebufferRenderbuffer.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferRenderbuffer.trace = True
-glNamedFramebufferRenderbuffer.play = True
-gl.add(glNamedFramebufferRenderbuffer)
-
-glNamedFramebufferTexture = Function('glNamedFramebufferTexture')
-glNamedFramebufferTexture.ret = Return('void')
-glNamedFramebufferTexture.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferTexture.add( Input( 'attachment','GLenum' ))
-glNamedFramebufferTexture.add( Input( 'texture','GLuint' ))
-glNamedFramebufferTexture.add( Input( 'level','GLint' ))
-glNamedFramebufferTexture.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferTexture.trace = True
-glNamedFramebufferTexture.play = True
-gl.add(glNamedFramebufferTexture)
-
-glNamedFramebufferTextureLayer = Function('glNamedFramebufferTextureLayer')
-glNamedFramebufferTextureLayer.ret = Return('void')
-glNamedFramebufferTextureLayer.add( Input( 'framebuffer','GLuint' ))
-glNamedFramebufferTextureLayer.add( Input( 'attachment','GLenum' ))
-glNamedFramebufferTextureLayer.add( Input( 'texture','GLuint' ))
-glNamedFramebufferTextureLayer.add( Input( 'level','GLint' ))
-glNamedFramebufferTextureLayer.add( Input( 'layer','GLint' ))
-glNamedFramebufferTextureLayer.category = 'GL_ARB_direct_state_access'
-glNamedFramebufferTextureLayer.trace = True
-glNamedFramebufferTextureLayer.play = True
-gl.add(glNamedFramebufferTextureLayer)
-
-glNamedRenderbufferStorage = Function('glNamedRenderbufferStorage')
-glNamedRenderbufferStorage.ret = Return('void')
-glNamedRenderbufferStorage.add( Input( 'renderbuffer','GLuint' ))
-glNamedRenderbufferStorage.add( Input( 'internalformat','GLenum' ))
-glNamedRenderbufferStorage.add( Input( 'width','GLsizei' ))
-glNamedRenderbufferStorage.add( Input( 'height','GLsizei' ))
-glNamedRenderbufferStorage.category = 'GL_ARB_direct_state_access'
-glNamedRenderbufferStorage.trace = True
-glNamedRenderbufferStorage.play = True
-gl.add(glNamedRenderbufferStorage)
-
-glNamedRenderbufferStorageMultisample = Function('glNamedRenderbufferStorageMultisample')
-glNamedRenderbufferStorageMultisample.ret = Return('void')
-glNamedRenderbufferStorageMultisample.add( Input( 'renderbuffer','GLuint' ))
-glNamedRenderbufferStorageMultisample.add( Input( 'samples','GLsizei' ))
-glNamedRenderbufferStorageMultisample.add( Input( 'internalformat','GLenum' ))
-glNamedRenderbufferStorageMultisample.add( Input( 'width','GLsizei' ))
-glNamedRenderbufferStorageMultisample.add( Input( 'height','GLsizei' ))
-glNamedRenderbufferStorageMultisample.category = 'GL_ARB_direct_state_access'
-glNamedRenderbufferStorageMultisample.trace = True
-glNamedRenderbufferStorageMultisample.play = True
-gl.add(glNamedRenderbufferStorageMultisample)
-
-glTextureBuffer = Function('glTextureBuffer')
-glTextureBuffer.ret = Return('void')
-glTextureBuffer.add( Input( 'texture','GLuint' ))
-glTextureBuffer.add( Input( 'internalformat','GLenum' ))
-glTextureBuffer.add( Input( 'buffer','GLuint' ))
-glTextureBuffer.category = 'GL_ARB_direct_state_access'
-glTextureBuffer.trace = True
-glTextureBuffer.play = True
-gl.add(glTextureBuffer)
-
-glTextureBufferRange = Function('glTextureBufferRange')
-glTextureBufferRange.ret = Return('void')
-glTextureBufferRange.add( Input( 'texture','GLuint' ))
-glTextureBufferRange.add( Input( 'internalformat','GLenum' ))
-glTextureBufferRange.add( Input( 'buffer','GLuint' ))
-glTextureBufferRange.add( Input( 'offset','GLintptr' ))
-glTextureBufferRange.add( Input( 'size','GLsizeiptr' ))
-glTextureBufferRange.category = 'GL_ARB_direct_state_access'
-glTextureBufferRange.trace = True
-glTextureBufferRange.play = True
-gl.add(glTextureBufferRange)
-
-glTextureParameterIiv = Function('glTextureParameterIiv')
-glTextureParameterIiv.ret = Return('void')
-glTextureParameterIiv.add( Input( 'texture','GLuint' ))
-glTextureParameterIiv.add( Input( 'pname','GLenum' ))
-glTextureParameterIiv.add( Input( 'params','const GLint *' ))
-glTextureParameterIiv.category = 'GL_ARB_direct_state_access'
-glTextureParameterIiv.trace = True
-glTextureParameterIiv.play = True
-gl.add(glTextureParameterIiv)
-
-glTextureParameterIuiv = Function('glTextureParameterIuiv')
-glTextureParameterIuiv.ret = Return('void')
-glTextureParameterIuiv.add( Input( 'texture','GLuint' ))
-glTextureParameterIuiv.add( Input( 'pname','GLenum' ))
-glTextureParameterIuiv.add( Input( 'params','const GLuint *' ))
-glTextureParameterIuiv.category = 'GL_ARB_direct_state_access'
-glTextureParameterIuiv.trace = True
-glTextureParameterIuiv.play = True
-gl.add(glTextureParameterIuiv)
-
-glTextureParameterf = Function('glTextureParameterf')
-glTextureParameterf.ret = Return('void')
-glTextureParameterf.add( Input( 'texture','GLuint' ))
-glTextureParameterf.add( Input( 'pname','GLenum' ))
-glTextureParameterf.add( Input( 'param','GLfloat' ))
-glTextureParameterf.category = 'GL_ARB_direct_state_access'
-glTextureParameterf.trace = True
-glTextureParameterf.play = True
-gl.add(glTextureParameterf)
-
-glTextureParameterfv = Function('glTextureParameterfv')
-glTextureParameterfv.ret = Return('void')
-glTextureParameterfv.add( Input( 'texture','GLuint' ))
-glTextureParameterfv.add( Input( 'pname','GLenum' ))
-glTextureParameterfv.add( Input( 'param','const GLfloat *' ))
-glTextureParameterfv.category = 'GL_ARB_direct_state_access'
-glTextureParameterfv.trace = True
-glTextureParameterfv.play = True
-gl.add(glTextureParameterfv)
-
-glTextureParameteri = Function('glTextureParameteri')
-glTextureParameteri.ret = Return('void')
-glTextureParameteri.add( Input( 'texture','GLuint' ))
-glTextureParameteri.add( Input( 'pname','GLenum' ))
-glTextureParameteri.add( Input( 'param','GLint' ))
-glTextureParameteri.category = 'GL_ARB_direct_state_access'
-glTextureParameteri.trace = True
-glTextureParameteri.play = True
-gl.add(glTextureParameteri)
-
-glTextureParameteriv = Function('glTextureParameteriv')
-glTextureParameteriv.ret = Return('void')
-glTextureParameteriv.add( Input( 'texture','GLuint' ))
-glTextureParameteriv.add( Input( 'pname','GLenum' ))
-glTextureParameteriv.add( Input( 'param','const GLint *' ))
-glTextureParameteriv.category = 'GL_ARB_direct_state_access'
-glTextureParameteriv.trace = True
-glTextureParameteriv.play = True
-gl.add(glTextureParameteriv)
-
-glTextureStorage1D = Function('glTextureStorage1D')
-glTextureStorage1D.ret = Return('void')
-glTextureStorage1D.add( Input( 'texture','GLuint' ))
-glTextureStorage1D.add( Input( 'levels','GLsizei' ))
-glTextureStorage1D.add( Input( 'internalformat','GLenum' ))
-glTextureStorage1D.add( Input( 'width','GLsizei' ))
-glTextureStorage1D.category = 'GL_ARB_direct_state_access'
-glTextureStorage1D.trace = True
-glTextureStorage1D.play = True
-gl.add(glTextureStorage1D)
-
-glTextureStorage2D = Function('glTextureStorage2D')
-glTextureStorage2D.ret = Return('void')
-glTextureStorage2D.add( Input( 'texture','GLuint' ))
-glTextureStorage2D.add( Input( 'levels','GLsizei' ))
-glTextureStorage2D.add( Input( 'internalformat','GLenum' ))
-glTextureStorage2D.add( Input( 'width','GLsizei' ))
-glTextureStorage2D.add( Input( 'height','GLsizei' ))
-glTextureStorage2D.category = 'GL_ARB_direct_state_access'
-glTextureStorage2D.trace = True
-glTextureStorage2D.play = True
-gl.add(glTextureStorage2D)
-
-glTextureStorage2DMultisample = Function('glTextureStorage2DMultisample')
-glTextureStorage2DMultisample.ret = Return('void')
-glTextureStorage2DMultisample.add( Input( 'texture','GLuint' ))
-glTextureStorage2DMultisample.add( Input( 'samples','GLsizei' ))
-glTextureStorage2DMultisample.add( Input( 'internalformat','GLenum' ))
-glTextureStorage2DMultisample.add( Input( 'width','GLsizei' ))
-glTextureStorage2DMultisample.add( Input( 'height','GLsizei' ))
-glTextureStorage2DMultisample.add( Input( 'fixedsamplelocations','GLboolean' ))
-glTextureStorage2DMultisample.category = 'GL_ARB_direct_state_access'
-glTextureStorage2DMultisample.trace = True
-glTextureStorage2DMultisample.play = True
-gl.add(glTextureStorage2DMultisample)
-
-glTextureStorage3D = Function('glTextureStorage3D')
-glTextureStorage3D.ret = Return('void')
-glTextureStorage3D.add( Input( 'texture','GLuint' ))
-glTextureStorage3D.add( Input( 'levels','GLsizei' ))
-glTextureStorage3D.add( Input( 'internalformat','GLenum' ))
-glTextureStorage3D.add( Input( 'width','GLsizei' ))
-glTextureStorage3D.add( Input( 'height','GLsizei' ))
-glTextureStorage3D.add( Input( 'depth','GLsizei' ))
-glTextureStorage3D.category = 'GL_ARB_direct_state_access'
-glTextureStorage3D.trace = True
-glTextureStorage3D.play = True
-gl.add(glTextureStorage3D)
-
-glTextureStorage3DMultisample = Function('glTextureStorage3DMultisample')
-glTextureStorage3DMultisample.ret = Return('void')
-glTextureStorage3DMultisample.add( Input( 'texture','GLuint' ))
-glTextureStorage3DMultisample.add( Input( 'samples','GLsizei' ))
-glTextureStorage3DMultisample.add( Input( 'internalformat','GLenum' ))
-glTextureStorage3DMultisample.add( Input( 'width','GLsizei' ))
-glTextureStorage3DMultisample.add( Input( 'height','GLsizei' ))
-glTextureStorage3DMultisample.add( Input( 'depth','GLsizei' ))
-glTextureStorage3DMultisample.add( Input( 'fixedsamplelocations','GLboolean' ))
-glTextureStorage3DMultisample.category = 'GL_ARB_direct_state_access'
-glTextureStorage3DMultisample.trace = True
-glTextureStorage3DMultisample.play = True
-gl.add(glTextureStorage3DMultisample)
-
-glTextureSubImage1D = Function('glTextureSubImage1D')
-glTextureSubImage1D.ret = Return('void')
-glTextureSubImage1D.add( Input( 'texture','GLuint' ))
-glTextureSubImage1D.add( Input( 'level','GLint' ))
-glTextureSubImage1D.add( Input( 'xoffset','GLint' ))
-glTextureSubImage1D.add( Input( 'width','GLsizei' ))
-glTextureSubImage1D.add( Input( 'format','GLenum' ))
-glTextureSubImage1D.add( Input( 'type','GLenum' ))
-glTextureSubImage1D.add( Input( 'pixels','const GLvoid *' ))
-glTextureSubImage1D.category = 'GL_ARB_direct_state_access'
-glTextureSubImage1D.trace = True
-glTextureSubImage1D.play = True
-gl.add(glTextureSubImage1D)
-
-glTextureSubImage2D = Function('glTextureSubImage2D')
-glTextureSubImage2D.ret = Return('void')
-glTextureSubImage2D.add( Input( 'texture','GLuint' ))
-glTextureSubImage2D.add( Input( 'level','GLint' ))
-glTextureSubImage2D.add( Input( 'xoffset','GLint' ))
-glTextureSubImage2D.add( Input( 'yoffset','GLint' ))
-glTextureSubImage2D.add( Input( 'width','GLsizei' ))
-glTextureSubImage2D.add( Input( 'height','GLsizei' ))
-glTextureSubImage2D.add( Input( 'format','GLenum' ))
-glTextureSubImage2D.add( Input( 'type','GLenum' ))
-glTextureSubImage2D.add( Input( 'pixels','const GLvoid *' ))
-glTextureSubImage2D.category = 'GL_ARB_direct_state_access'
-glTextureSubImage2D.trace = True
-glTextureSubImage2D.play = True
-gl.add(glTextureSubImage2D)
-
-glTextureSubImage3D = Function('glTextureSubImage3D')
-glTextureSubImage3D.ret = Return('void')
-glTextureSubImage3D.add( Input( 'texture','GLuint' ))
-glTextureSubImage3D.add( Input( 'level','GLint' ))
-glTextureSubImage3D.add( Input( 'xoffset','GLint' ))
-glTextureSubImage3D.add( Input( 'yoffset','GLint' ))
-glTextureSubImage3D.add( Input( 'zoffset','GLint' ))
-glTextureSubImage3D.add( Input( 'width','GLsizei' ))
-glTextureSubImage3D.add( Input( 'height','GLsizei' ))
-glTextureSubImage3D.add( Input( 'depth','GLsizei' ))
-glTextureSubImage3D.add( Input( 'format','GLenum' ))
-glTextureSubImage3D.add( Input( 'type','GLenum' ))
-glTextureSubImage3D.add( Input( 'pixels','const GLvoid *' ))
-glTextureSubImage3D.category = 'GL_ARB_direct_state_access'
-glTextureSubImage3D.trace = True
-glTextureSubImage3D.play = True
-gl.add(glTextureSubImage3D)
-
-glTransformFeedbackBufferBase = Function('glTransformFeedbackBufferBase')
-glTransformFeedbackBufferBase.ret = Return('void')
-glTransformFeedbackBufferBase.add( Input( 'xfb','GLuint' ))
-glTransformFeedbackBufferBase.add( Input( 'index','GLuint' ))
-glTransformFeedbackBufferBase.add( Input( 'buffer','GLuint' ))
-glTransformFeedbackBufferBase.category = 'GL_ARB_direct_state_access'
-glTransformFeedbackBufferBase.trace = True
-glTransformFeedbackBufferBase.play = True
-gl.add(glTransformFeedbackBufferBase)
-
-glTransformFeedbackBufferRange = Function('glTransformFeedbackBufferRange')
-glTransformFeedbackBufferRange.ret = Return('void')
-glTransformFeedbackBufferRange.add( Input( 'xfb','GLuint' ))
-glTransformFeedbackBufferRange.add( Input( 'index','GLuint' ))
-glTransformFeedbackBufferRange.add( Input( 'buffer','GLuint' ))
-glTransformFeedbackBufferRange.add( Input( 'offset','GLintptr' ))
-glTransformFeedbackBufferRange.add( Input( 'size','GLsizeiptr' ))
-glTransformFeedbackBufferRange.category = 'GL_ARB_direct_state_access'
-glTransformFeedbackBufferRange.trace = True
-glTransformFeedbackBufferRange.play = True
-gl.add(glTransformFeedbackBufferRange)
-
-glVertexArrayAttribBinding = Function('glVertexArrayAttribBinding')
-glVertexArrayAttribBinding.ret = Return('void')
-glVertexArrayAttribBinding.add( Input( 'vaobj','GLuint' ))
-glVertexArrayAttribBinding.add( Input( 'attribindex','GLuint' ))
-glVertexArrayAttribBinding.add( Input( 'bindingindex','GLuint' ))
-glVertexArrayAttribBinding.category = 'GL_ARB_direct_state_access'
-glVertexArrayAttribBinding.trace = True
-glVertexArrayAttribBinding.play = True
-gl.add(glVertexArrayAttribBinding)
-
-glVertexArrayAttribFormat = Function('glVertexArrayAttribFormat')
-glVertexArrayAttribFormat.ret = Return('void')
-glVertexArrayAttribFormat.add( Input( 'vaobj','GLuint' ))
-glVertexArrayAttribFormat.add( Input( 'attribindex','GLuint' ))
-glVertexArrayAttribFormat.add( Input( 'size','GLint' ))
-glVertexArrayAttribFormat.add( Input( 'type','GLenum' ))
-glVertexArrayAttribFormat.add( Input( 'normalized','GLboolean' ))
-glVertexArrayAttribFormat.add( Input( 'relativeoffset','GLuint' ))
-glVertexArrayAttribFormat.category = 'GL_ARB_direct_state_access'
-glVertexArrayAttribFormat.trace = True
-glVertexArrayAttribFormat.play = True
-gl.add(glVertexArrayAttribFormat)
-
-glVertexArrayAttribIFormat = Function('glVertexArrayAttribIFormat')
-glVertexArrayAttribIFormat.ret = Return('void')
-glVertexArrayAttribIFormat.add( Input( 'vaobj','GLuint' ))
-glVertexArrayAttribIFormat.add( Input( 'attribindex','GLuint' ))
-glVertexArrayAttribIFormat.add( Input( 'size','GLint' ))
-glVertexArrayAttribIFormat.add( Input( 'type','GLenum' ))
-glVertexArrayAttribIFormat.add( Input( 'relativeoffset','GLuint' ))
-glVertexArrayAttribIFormat.category = 'GL_ARB_direct_state_access'
-glVertexArrayAttribIFormat.trace = True
-glVertexArrayAttribIFormat.play = True
-gl.add(glVertexArrayAttribIFormat)
-
-glVertexArrayAttribLFormat = Function('glVertexArrayAttribLFormat')
-glVertexArrayAttribLFormat.ret = Return('void')
-glVertexArrayAttribLFormat.add( Input( 'vaobj','GLuint' ))
-glVertexArrayAttribLFormat.add( Input( 'attribindex','GLuint' ))
-glVertexArrayAttribLFormat.add( Input( 'size','GLint' ))
-glVertexArrayAttribLFormat.add( Input( 'type','GLenum' ))
-glVertexArrayAttribLFormat.add( Input( 'relativeoffset','GLuint' ))
-glVertexArrayAttribLFormat.category = 'GL_ARB_direct_state_access'
-glVertexArrayAttribLFormat.trace = True
-glVertexArrayAttribLFormat.play = True
-gl.add(glVertexArrayAttribLFormat)
-
-glVertexArrayBindingDivisor = Function('glVertexArrayBindingDivisor')
-glVertexArrayBindingDivisor.ret = Return('void')
-glVertexArrayBindingDivisor.add( Input( 'vaobj','GLuint' ))
-glVertexArrayBindingDivisor.add( Input( 'bindingindex','GLuint' ))
-glVertexArrayBindingDivisor.add( Input( 'divisor','GLuint' ))
-glVertexArrayBindingDivisor.category = 'GL_ARB_direct_state_access'
-glVertexArrayBindingDivisor.trace = True
-glVertexArrayBindingDivisor.play = True
-gl.add(glVertexArrayBindingDivisor)
-
-glVertexArrayElementBuffer = Function('glVertexArrayElementBuffer')
-glVertexArrayElementBuffer.ret = Return('void')
-glVertexArrayElementBuffer.add( Input( 'vaobj','GLuint' ))
-glVertexArrayElementBuffer.add( Input( 'buffer','GLuint' ))
-glVertexArrayElementBuffer.category = 'GL_ARB_direct_state_access'
-glVertexArrayElementBuffer.trace = True
-glVertexArrayElementBuffer.play = True
-gl.add(glVertexArrayElementBuffer)
-
-glVertexArrayVertexBuffer = Function('glVertexArrayVertexBuffer')
-glVertexArrayVertexBuffer.ret = Return('void')
-glVertexArrayVertexBuffer.add( Input( 'vaobj','GLuint' ))
-glVertexArrayVertexBuffer.add( Input( 'bindingindex','GLuint' ))
-glVertexArrayVertexBuffer.add( Input( 'buffer','GLuint' ))
-glVertexArrayVertexBuffer.add( Input( 'offset','GLintptr' ))
-glVertexArrayVertexBuffer.add( Input( 'stride','GLsizei' ))
-glVertexArrayVertexBuffer.category = 'GL_ARB_direct_state_access'
-glVertexArrayVertexBuffer.trace = True
-glVertexArrayVertexBuffer.play = True
-gl.add(glVertexArrayVertexBuffer)
-
-glVertexArrayVertexBuffers = Function('glVertexArrayVertexBuffers')
-glVertexArrayVertexBuffers.ret = Return('void')
-glVertexArrayVertexBuffers.add( Input( 'vaobj','GLuint' ))
-glVertexArrayVertexBuffers.add( Input( 'first','GLuint' ))
-glVertexArrayVertexBuffers.add( Input( 'count','GLsizei' ))
-glVertexArrayVertexBuffers.add( Input( 'buffers','const GLuint *' ))
-glVertexArrayVertexBuffers.add( Input( 'offsets','const GLintptr *' ))
-glVertexArrayVertexBuffers.add( Input( 'strides','const GLsizei *' ))
-glVertexArrayVertexBuffers.category = 'GL_ARB_direct_state_access'
-glVertexArrayVertexBuffers.trace = True
-glVertexArrayVertexBuffers.play = True
-gl.add(glVertexArrayVertexBuffers)
-
-# GL_ARB_get_texture_sub_image
-
-glGetCompressedTextureSubImage = Function('glGetCompressedTextureSubImage')
-glGetCompressedTextureSubImage.ret = Return('void')
-glGetCompressedTextureSubImage.add( Input( 'texture','GLuint' ))
-glGetCompressedTextureSubImage.add( Input( 'level','GLint' ))
-glGetCompressedTextureSubImage.add( Input( 'xoffset','GLint' ))
-glGetCompressedTextureSubImage.add( Input( 'yoffset','GLint' ))
-glGetCompressedTextureSubImage.add( Input( 'zoffset','GLint' ))
-glGetCompressedTextureSubImage.add( Input( 'width','GLsizei' ))
-glGetCompressedTextureSubImage.add( Input( 'height','GLsizei' ))
-glGetCompressedTextureSubImage.add( Input( 'depth','GLsizei' ))
-glGetCompressedTextureSubImage.add( Input( 'bufSize','GLsizei' ))
-glGetCompressedTextureSubImage.add( Input( 'pixels','GLvoid *' ))
-glGetCompressedTextureSubImage.category = 'GL_ARB_get_texture_sub_image'
-glGetCompressedTextureSubImage.trace = True
-glGetCompressedTextureSubImage.play = True
-gl.add(glGetCompressedTextureSubImage)
-
-glGetTextureSubImage = Function('glGetTextureSubImage')
-glGetTextureSubImage.ret = Return('void')
-glGetTextureSubImage.add( Input( 'texture','GLuint' ))
-glGetTextureSubImage.add( Input( 'level','GLint' ))
-glGetTextureSubImage.add( Input( 'xoffset','GLint' ))
-glGetTextureSubImage.add( Input( 'yoffset','GLint' ))
-glGetTextureSubImage.add( Input( 'zoffset','GLint' ))
-glGetTextureSubImage.add( Input( 'width','GLsizei' ))
-glGetTextureSubImage.add( Input( 'height','GLsizei' ))
-glGetTextureSubImage.add( Input( 'depth','GLsizei' ))
-glGetTextureSubImage.add( Input( 'format','GLenum' ))
-glGetTextureSubImage.add( Input( 'type','GLenum' ))
-glGetTextureSubImage.add( Input( 'bufSize','GLsizei' ))
-glGetTextureSubImage.add( Input( 'pixels','GLvoid *' ))
-glGetTextureSubImage.category = 'GL_ARB_get_texture_sub_image'
-glGetTextureSubImage.trace = True
-glGetTextureSubImage.play = True
-gl.add(glGetTextureSubImage)
-
-# GL_ARB_sparse_buffer
-
-glBufferPageCommitmentARB = Function('glBufferPageCommitmentARB')
-glBufferPageCommitmentARB.ret = Return('void')
-glBufferPageCommitmentARB.add( Input( 'target','GLenum' ))
-glBufferPageCommitmentARB.add( Input( 'offset','GLintptr' ))
-glBufferPageCommitmentARB.add( Input( 'size','GLsizeiptr' ))
-glBufferPageCommitmentARB.add( Input( 'commit','GLboolean' ))
-glBufferPageCommitmentARB.category = 'GL_ARB_sparse_buffer'
-glBufferPageCommitmentARB.trace = True
-glBufferPageCommitmentARB.play = True
-gl.add(glBufferPageCommitmentARB)
-
-# GL_ARB_texture_barrier
-
-glTextureBarrier = Function('glTextureBarrier')
-glTextureBarrier.ret = Return('void')
-glTextureBarrier.category = 'GL_ARB_texture_barrier'
-glTextureBarrier.trace = True
-glTextureBarrier.play = True
-gl.add(glTextureBarrier)
-
-# GL_KHR_blend_equation_advanced
-
-glBlendBarrierKHR = Function('glBlendBarrierKHR')
-glBlendBarrierKHR.ret = Return('void')
-glBlendBarrierKHR.category = 'GL_KHR_blend_equation_advanced'
-glBlendBarrierKHR.trace = True
-glBlendBarrierKHR.play = True
-gl.add(glBlendBarrierKHR)
-
-# GL_KHR_robustness
-
-glGetnUniformfv = Function('glGetnUniformfv')
-glGetnUniformfv.ret = Return('void')
-glGetnUniformfv.add( Input( 'program','GLuint' ))
-glGetnUniformfv.add( Input( 'location','GLint' ))
-glGetnUniformfv.add( Input( 'bufSize','GLsizei' ))
-glGetnUniformfv.add( Input( 'params','GLfloat *' ))
-glGetnUniformfv.category = 'GL_KHR_robustness'
-glGetnUniformfv.trace = True
-glGetnUniformfv.play = True
-gl.add(glGetnUniformfv)
-
-glGetnUniformiv = Function('glGetnUniformiv')
-glGetnUniformiv.ret = Return('void')
-glGetnUniformiv.add( Input( 'program','GLuint' ))
-glGetnUniformiv.add( Input( 'location','GLint' ))
-glGetnUniformiv.add( Input( 'bufSize','GLsizei' ))
-glGetnUniformiv.add( Input( 'params','GLint *' ))
-glGetnUniformiv.category = 'GL_KHR_robustness'
-glGetnUniformiv.trace = True
-glGetnUniformiv.play = True
-gl.add(glGetnUniformiv)
-
-glGetnUniformuiv = Function('glGetnUniformuiv')
-glGetnUniformuiv.ret = Return('void')
-glGetnUniformuiv.add( Input( 'program','GLuint' ))
-glGetnUniformuiv.add( Input( 'location','GLint' ))
-glGetnUniformuiv.add( Input( 'bufSize','GLsizei' ))
-glGetnUniformuiv.add( Input( 'params','GLuint *' ))
-glGetnUniformuiv.category = 'GL_KHR_robustness'
-glGetnUniformuiv.trace = True
-glGetnUniformuiv.play = True
-gl.add(glGetnUniformuiv)
-
-glReadnPixels = Function('glReadnPixels')
-glReadnPixels.ret = Return('void')
-glReadnPixels.add( Input( 'x','GLint' ))
-glReadnPixels.add( Input( 'y','GLint' ))
-glReadnPixels.add( Input( 'width','GLsizei' ))
-glReadnPixels.add( Input( 'height','GLsizei' ))
-glReadnPixels.add( Input( 'format','GLenum' ))
-glReadnPixels.add( Input( 'type','GLenum' ))
-glReadnPixels.add( Input( 'bufSize','GLsizei' ))
-glReadnPixels.add( Input( 'data','GLvoid *' ))
-glReadnPixels.category = 'GL_KHR_robustness'
-glReadnPixels.trace = True
-glReadnPixels.play = True
-gl.add(glReadnPixels)
-
-GL_ARB_ES3_1_compatibility = Extension('GL_ARB_ES3_1_compatibility')
-GL_ARB_ES3_1_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/ES3_1_compatibility.txt'
-GL_ARB_ES3_1_compatibility.functions = ['glMemoryBarrierByRegion']
-gl.add(GL_ARB_ES3_1_compatibility)
-
-GL_ARB_clip_control = Extension('GL_ARB_clip_control')
-GL_ARB_clip_control.url = 'http://www.opengl.org/registry/specs/ARB/clip_control.txt'
-GL_ARB_clip_control.enumerants = ['GL_CLIP_DEPTH_MODE','GL_CLIP_ORIGIN','GL_LOWER_LEFT','GL_NEGATIVE_ONE_TO_ONE','GL_UPPER_LEFT','GL_ZERO_TO_ONE']
-GL_ARB_clip_control.functions = ['glClipControl']
-gl.add(GL_ARB_clip_control)
-
-GL_ARB_conditional_render_inverted = Extension('GL_ARB_conditional_render_inverted')
-GL_ARB_conditional_render_inverted.url = 'http://www.opengl.org/registry/specs/ARB/conditional_render_inverted.txt'
-GL_ARB_conditional_render_inverted.enumerants = ['GL_QUERY_BY_REGION_NO_WAIT_INVERTED','GL_QUERY_BY_REGION_WAIT_INVERTED','GL_QUERY_NO_WAIT_INVERTED','GL_QUERY_WAIT_INVERTED']
-gl.add(GL_ARB_conditional_render_inverted)
-
-GL_ARB_context_flush_control = Extension('GL_ARB_context_flush_control')
-GL_ARB_context_flush_control.url = 'http://www.opengl.org/registry/specs/ARB/wgl_context_flush_control.txt'
-gl.add(GL_ARB_context_flush_control)
-
-GL_ARB_cull_distance = Extension('GL_ARB_cull_distance')
-GL_ARB_cull_distance.url = 'http://www.opengl.org/registry/specs/ARB/cull_distance.txt'
-GL_ARB_cull_distance.enumerants = ['GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES','GL_MAX_CULL_DISTANCES']
-gl.add(GL_ARB_cull_distance)
-
-GL_ARB_derivative_control = Extension('GL_ARB_derivative_control')
-GL_ARB_derivative_control.url = 'http://www.opengl.org/registry/specs/ARB/derivative_control.txt'
-gl.add(GL_ARB_derivative_control)
-
-GL_ARB_direct_state_access = Extension('GL_ARB_direct_state_access')
-GL_ARB_direct_state_access.url = 'http://www.opengl.org/registry/specs/ARB/direct_state_access.txt'
-GL_ARB_direct_state_access.enumerants = ['GL_QUERY_TARGET','GL_TEXTURE_BINDING','GL_TEXTURE_TARGET']
-GL_ARB_direct_state_access.functions = ['glUnmapNamedBuffer','glCheckNamedFramebufferStatus','*','*','glBindTextureUnit','glBlitNamedFramebuffer','glClearNamedBufferData','glClearNamedBufferSubData','glClearNamedFramebufferfi','glClearNamedFramebufferfv','glClearNamedFramebufferiv','glClearNamedFramebufferuiv','glCompressedTextureSubImage1D','glCompressedTextureSubImage2D','glCompressedTextureSubImage3D','glCopyNamedBufferSubData','glCopyTextureSubImage1D','glCopyTextureSubImage2D','glCopyTextureSubImage3D','glCreateBuffers','glCreateFramebuffers','glCreateProgramPipelines','glCreateQueries','glCreateRenderbuffers','glCreateSamplers','glCreateTextures','glCreateTransformFeedbacks','glCreateVertexArrays','glDisableVertexArrayAttrib','glEnableVertexArrayAttrib','glFlushMappedNamedBufferRange','glGenerateTextureMipmap','glGetCompressedTextureImage','glGetNamedBufferParameteri64v','glGetNamedBufferParameteriv','glGetNamedBufferPointerv','glGetNamedBufferSubData','glGetNamedFramebufferAttachmentParameteriv','glGetNamedFramebufferParameteriv','glGetNamedRenderbufferParameteriv','glGetTextureImage','glGetTextureLevelParameterfv','glGetTextureLevelParameteriv','glGetTextureParameterIiv','glGetTextureParameterIuiv','glGetTextureParameterfv','glGetTextureParameteriv','glGetTransformFeedbacki64_v','glGetTransformFeedbacki_v','glGetTransformFeedbackiv','glGetVertexArrayIndexed64iv','glGetVertexArrayIndexediv','glGetVertexArrayiv','glInvalidateNamedFramebufferData','glInvalidateNamedFramebufferSubData','glNamedBufferData','glNamedBufferStorage','glNamedBufferSubData','glNamedFramebufferDrawBuffer','glNamedFramebufferDrawBuffers','glNamedFramebufferParameteri','glNamedFramebufferReadBuffer','glNamedFramebufferRenderbuffer','glNamedFramebufferTexture','glNamedFramebufferTextureLayer','glNamedRenderbufferStorage','glNamedRenderbufferStorageMultisample','glTextureBuffer','glTextureBufferRange','glTextureParameterIiv','glTextureParameterIuiv','glTextureParameterf','glTextureParameterfv','glTextureParameteri','glTextureParameteriv','glTextureStorage1D','glTextureStorage2D','glTextureStorage2DMultisample','glTextureStorage3D','glTextureStorage3DMultisample','glTextureSubImage1D','glTextureSubImage2D','glTextureSubImage3D','glTransformFeedbackBufferBase','glTransformFeedbackBufferRange','glVertexArrayAttribBinding','glVertexArrayAttribFormat','glVertexArrayAttribIFormat','glVertexArrayAttribLFormat','glVertexArrayBindingDivisor','glVertexArrayElementBuffer','glVertexArrayVertexBuffer','glVertexArrayVertexBuffers']
-gl.add(GL_ARB_direct_state_access)
-
-GL_ARB_get_texture_sub_image = Extension('GL_ARB_get_texture_sub_image')
-GL_ARB_get_texture_sub_image.url = 'http://www.opengl.org/registry/specs/ARB/get_texture_sub_image.txt'
-GL_ARB_get_texture_sub_image.functions = ['glGetCompressedTextureSubImage','glGetTextureSubImage']
-gl.add(GL_ARB_get_texture_sub_image)
-
-GL_ARB_pipeline_statistics_query = Extension('GL_ARB_pipeline_statistics_query')
-GL_ARB_pipeline_statistics_query.url = 'http://www.opengl.org/registry/specs/ARB/pipeline_statistics_query.txt'
-GL_ARB_pipeline_statistics_query.enumerants = ['GL_CLIPPING_INPUT_PRIMITIVES_ARB','GL_CLIPPING_OUTPUT_PRIMITIVES_ARB','GL_COMPUTE_SHADER_INVOCATIONS_ARB','GL_FRAGMENT_SHADER_INVOCATIONS_ARB','GL_GEOMETRY_SHADER_INVOCATIONS','GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB','GL_PRIMITIVES_SUBMITTED_ARB','GL_TESS_CONTROL_SHADER_PATCHES_ARB','GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB','GL_VERTEX_SHADER_INVOCATIONS_ARB','GL_VERTICES_SUBMITTED_ARB']
-gl.add(GL_ARB_pipeline_statistics_query)
-
-GL_ARB_shader_texture_image_samples = Extension('GL_ARB_shader_texture_image_samples')
-GL_ARB_shader_texture_image_samples.url = 'http://www.opengl.org/registry/specs/ARB/shader_texture_image_samples.txt'
-gl.add(GL_ARB_shader_texture_image_samples)
-
-GL_ARB_sparse_buffer = Extension('GL_ARB_sparse_buffer')
-GL_ARB_sparse_buffer.url = 'http://www.opengl.org/registry/specs/ARB/sparse_buffer.txt'
-GL_ARB_sparse_buffer.enumerants = ['GL_SPARSE_BUFFER_PAGE_SIZE_ARB','GL_SPARSE_STORAGE_BIT_ARB']
-GL_ARB_sparse_buffer.functions = ['glBufferPageCommitmentARB']
-gl.add(GL_ARB_sparse_buffer)
-
-GL_ARB_texture_barrier = Extension('GL_ARB_texture_barrier')
-GL_ARB_texture_barrier.url = 'http://www.opengl.org/registry/specs/ARB/texture_barrier.txt'
-GL_ARB_texture_barrier.functions = ['glTextureBarrier']
-gl.add(GL_ARB_texture_barrier)
-
-GL_ARB_transform_feedback_overflow_query = Extension('GL_ARB_transform_feedback_overflow_query')
-GL_ARB_transform_feedback_overflow_query.url = 'http://www.opengl.org/registry/specs/ARB/transform_feedback_overflow_query.txt'
-GL_ARB_transform_feedback_overflow_query.enumerants = ['GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB','GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB']
-gl.add(GL_ARB_transform_feedback_overflow_query)
-
-GL_KHR_blend_equation_advanced = Extension('GL_KHR_blend_equation_advanced')
-GL_KHR_blend_equation_advanced.url = 'http://www.opengl.org/registry/specs/KHR/blend_equation_advanced.txt'
-GL_KHR_blend_equation_advanced.enumerants = ['GL_BLEND_ADVANCED_COHERENT_KHR','GL_COLORBURN_KHR','GL_COLORDODGE_KHR','GL_DARKEN_KHR','GL_DIFFERENCE_KHR','GL_EXCLUSION_KHR','GL_HARDLIGHT_KHR','GL_HSL_COLOR_KHR','GL_HSL_HUE_KHR','GL_HSL_LUMINOSITY_KHR','GL_HSL_SATURATION_KHR','GL_LIGHTEN_KHR','GL_MULTIPLY_KHR','GL_OVERLAY_KHR','GL_SCREEN_KHR','GL_SOFTLIGHT_KHR']
-GL_KHR_blend_equation_advanced.functions = ['glBlendBarrierKHR']
-gl.add(GL_KHR_blend_equation_advanced)
-
-GL_KHR_blend_equation_advanced_coherent = Extension('GL_KHR_blend_equation_advanced_coherent')
-GL_KHR_blend_equation_advanced_coherent.url = 'http://www.opengl.org/registry/specs/KHR/blend_equation_advanced.txt'
-gl.add(GL_KHR_blend_equation_advanced_coherent)
-
-GL_KHR_robust_buffer_access_behavior = Extension('GL_KHR_robust_buffer_access_behavior')
-GL_KHR_robust_buffer_access_behavior.url = 'http://www.opengl.org/registry/specs/KHR/robust_buffer_access_behavior.txt'
-gl.add(GL_KHR_robust_buffer_access_behavior)
-
-GL_KHR_robustness = Extension('GL_KHR_robustness')
-GL_KHR_robustness.url = 'http://www.opengl.org/registry/specs/KHR/robustness.txt'
-GL_KHR_robustness.enumerants = ['GL_CONTEXT_LOST','GL_CONTEXT_ROBUST_ACCESS','GL_GUILTY_CONTEXT_RESET','GL_INNOCENT_CONTEXT_RESET','GL_LOSE_CONTEXT_ON_RESET','GL_NO_RESET_NOTIFICATION','GL_RESET_NOTIFICATION_STRATEGY','GL_UNKNOWN_CONTEXT_RESET']
-GL_KHR_robustness.functions = ['glGetnUniformfv','glGetnUniformiv','glGetnUniformuiv','glReadnPixels']
-gl.add(GL_KHR_robustness)
-
-################
-
 GL_3DFX_multisample = Extension('GL_3DFX_multisample')
 GL_3DFX_multisample.url = 'http://www.opengl.org/registry/specs/3DFX/3dfx_multisample.txt'
 GL_3DFX_multisample.enumerants = ['GL_MULTISAMPLE_3DFX','GL_MULTISAMPLE_BIT_3DFX','GL_SAMPLES_3DFX','GL_SAMPLE_BUFFERS_3DFX']
@@ -44780,7 +44787,7 @@ gl.add(GL_AMD_conservative_depth)
 GL_AMD_debug_output = Extension('GL_AMD_debug_output')
 GL_AMD_debug_output.url = 'http://www.opengl.org/registry/specs/AMD/debug_output.txt'
 GL_AMD_debug_output.enumerants = ['GL_DEBUG_CATEGORY_API_ERROR_AMD','GL_DEBUG_CATEGORY_APPLICATION_AMD','GL_DEBUG_CATEGORY_DEPRECATION_AMD','GL_DEBUG_CATEGORY_OTHER_AMD','GL_DEBUG_CATEGORY_PERFORMANCE_AMD','GL_DEBUG_CATEGORY_SHADER_COMPILER_AMD','GL_DEBUG_CATEGORY_UNDEFINED_BEHAVIOR_AMD','GL_DEBUG_CATEGORY_WINDOW_SYSTEM_AMD','GL_DEBUG_LOGGED_MESSAGES_AMD','GL_DEBUG_SEVERITY_HIGH_AMD','GL_DEBUG_SEVERITY_LOW_AMD','GL_DEBUG_SEVERITY_MEDIUM_AMD','GL_MAX_DEBUG_LOGGED_MESSAGES_AMD','GL_MAX_DEBUG_MESSAGE_LENGTH_AMD']
-GL_AMD_debug_output.functions = ['glGetDebugMessageLogAMD','glDebugMessageCallbackAMD','glDebugMessageEnableAMD','glDebugMessageInsertAMD']
+GL_AMD_debug_output.functions = ['glDebugMessageCallbackAMD','glDebugMessageEnableAMD','glDebugMessageInsertAMD','glGetDebugMessageLogAMD']
 gl.add(GL_AMD_debug_output)
 
 GL_AMD_depth_clamp_separate = Extension('GL_AMD_depth_clamp_separate')
@@ -44795,7 +44802,7 @@ gl.add(GL_AMD_draw_buffers_blend)
 
 GL_AMD_interleaved_elements = Extension('GL_AMD_interleaved_elements')
 GL_AMD_interleaved_elements.url = 'http://www.opengl.org/registry/specs/AMD/interleaved_elements.txt'
-GL_AMD_interleaved_elements.enumerants = ['GL_VERTEX_ELEMENT_SWIZZLE_AMD','GL_VERTEX_ID_SWIZZLE_AMD']
+GL_AMD_interleaved_elements.enumerants = ['GL_ALPHA','GL_BLUE','GL_GREEN','GL_RED','GL_RG16UI','GL_RG8UI','GL_RGBA8UI','GL_VERTEX_ELEMENT_SWIZZLE_AMD','GL_VERTEX_ID_SWIZZLE_AMD']
 GL_AMD_interleaved_elements.functions = ['glVertexAttribParameteriAMD']
 gl.add(GL_AMD_interleaved_elements)
 
@@ -44807,7 +44814,7 @@ gl.add(GL_AMD_multi_draw_indirect)
 GL_AMD_name_gen_delete = Extension('GL_AMD_name_gen_delete')
 GL_AMD_name_gen_delete.url = 'http://www.opengl.org/registry/specs/AMD/name_gen_delete.txt'
 GL_AMD_name_gen_delete.enumerants = ['GL_DATA_BUFFER_AMD','GL_PERFORMANCE_MONITOR_AMD','GL_QUERY_OBJECT_AMD','GL_SAMPLER_OBJECT_AMD','GL_VERTEX_ARRAY_OBJECT_AMD']
-GL_AMD_name_gen_delete.functions = ['glIsNameAMD','glDeleteNamesAMD','glGenNamesAMD']
+GL_AMD_name_gen_delete.functions = ['glDeleteNamesAMD','glGenNamesAMD','glIsNameAMD']
 gl.add(GL_AMD_name_gen_delete)
 
 GL_AMD_performance_monitor = Extension('GL_AMD_performance_monitor')
@@ -44837,10 +44844,6 @@ GL_AMD_seamless_cubemap_per_texture.url = 'http://www.opengl.org/registry/specs/
 GL_AMD_seamless_cubemap_per_texture.enumerants = ['GL_TEXTURE_CUBE_MAP_SEAMLESS_ARB']
 gl.add(GL_AMD_seamless_cubemap_per_texture)
 
-GL_AMD_seamless_cubemap_per_texture = Extension('GL_AMD_seamless_cubemap_per_texture')
-GL_AMD_seamless_cubemap_per_texture.category = 'GL_AMD_seamless_cubemap_per_texture'
-gl.add(GL_AMD_seamless_cubemap_per_texture)
-
 GL_AMD_shader_stencil_export = Extension('GL_AMD_shader_stencil_export')
 GL_AMD_shader_stencil_export.url = 'http://www.opengl.org/registry/specs/AMD/shader_stencil_export.txt'
 gl.add(GL_AMD_shader_stencil_export)
@@ -44851,7 +44854,7 @@ gl.add(GL_AMD_shader_trinary_minmax)
 
 GL_AMD_sparse_texture = Extension('GL_AMD_sparse_texture')
 GL_AMD_sparse_texture.url = 'http://www.opengl.org/registry/specs/AMD/sparse_texture.txt'
-GL_AMD_sparse_texture.enumerants = ['GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD','GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS','GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS','GL_MAX_SPARSE_TEXTURE_SIZE_AMD','GL_MIN_LOD_WARNING_AMD','GL_MIN_SPARSE_LEVEL_AMD','GL_TEXTURE_STORAGE_SPARSE_BIT_AMD','GL_VIRTUAL_PAGE_SIZE_X_AMD','GL_VIRTUAL_PAGE_SIZE_Y_AMD','GL_VIRTUAL_PAGE_SIZE_Z_AMD']
+GL_AMD_sparse_texture.enumerants = ['GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD','GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS','GL_MAX_SPARSE_TEXTURE_SIZE_AMD','GL_MIN_LOD_WARNING_AMD','GL_MIN_SPARSE_LEVEL_AMD','GL_TEXTURE_STORAGE_SPARSE_BIT_AMD','GL_VIRTUAL_PAGE_SIZE_X_AMD','GL_VIRTUAL_PAGE_SIZE_Y_AMD','GL_VIRTUAL_PAGE_SIZE_Z_AMD']
 GL_AMD_sparse_texture.functions = ['glTexStorageSparseAMD','glTextureStorageSparseAMD']
 gl.add(GL_AMD_sparse_texture)
 
@@ -44902,7 +44905,7 @@ gl.add(GL_APPLE_element_array)
 GL_APPLE_fence = Extension('GL_APPLE_fence')
 GL_APPLE_fence.url = 'http://www.opengl.org/registry/specs/APPLE/fence.txt'
 GL_APPLE_fence.enumerants = ['GL_DRAW_PIXELS_APPLE','GL_FENCE_APPLE']
-GL_APPLE_fence.functions = ['glIsFenceAPPLE','glTestFenceAPPLE','glTestObjectAPPLE','glDeleteFencesAPPLE','glFinishFenceAPPLE','glFinishObjectAPPLE','glGenFencesAPPLE','glSetFenceAPPLE']
+GL_APPLE_fence.functions = ['glDeleteFencesAPPLE','glFinishFenceAPPLE','glFinishObjectAPPLE','glGenFencesAPPLE','glIsFenceAPPLE','glSetFenceAPPLE','glTestFenceAPPLE','glTestObjectAPPLE']
 gl.add(GL_APPLE_fence)
 
 GL_APPLE_float_pixels = Extension('GL_APPLE_float_pixels')
@@ -44919,7 +44922,7 @@ gl.add(GL_APPLE_flush_buffer_range)
 GL_APPLE_object_purgeable = Extension('GL_APPLE_object_purgeable')
 GL_APPLE_object_purgeable.url = 'http://www.opengl.org/registry/specs/APPLE/object_purgeable.txt'
 GL_APPLE_object_purgeable.enumerants = ['GL_BUFFER_OBJECT_APPLE','GL_PURGEABLE_APPLE','GL_RELEASED_APPLE','GL_RETAINED_APPLE','GL_UNDEFINED_APPLE','GL_VOLATILE_APPLE']
-GL_APPLE_object_purgeable.functions = ['glObjectPurgeableAPPLE','glObjectUnpurgeableAPPLE','glGetObjectParameterivAPPLE']
+GL_APPLE_object_purgeable.functions = ['glGetObjectParameterivAPPLE','glObjectPurgeableAPPLE','glObjectUnpurgeableAPPLE']
 gl.add(GL_APPLE_object_purgeable)
 
 GL_APPLE_pixel_buffer = Extension('GL_APPLE_pixel_buffer')
@@ -44955,7 +44958,7 @@ gl.add(GL_APPLE_transform_hint)
 GL_APPLE_vertex_array_object = Extension('GL_APPLE_vertex_array_object')
 GL_APPLE_vertex_array_object.url = 'http://www.opengl.org/registry/specs/APPLE/vertex_array_object.txt'
 GL_APPLE_vertex_array_object.enumerants = ['GL_VERTEX_ARRAY_BINDING_APPLE']
-GL_APPLE_vertex_array_object.functions = ['glIsVertexArrayAPPLE','glBindVertexArrayAPPLE','glDeleteVertexArraysAPPLE','glGenVertexArraysAPPLE']
+GL_APPLE_vertex_array_object.functions = ['glBindVertexArrayAPPLE','glDeleteVertexArraysAPPLE','glGenVertexArraysAPPLE','glIsVertexArrayAPPLE']
 gl.add(GL_APPLE_vertex_array_object)
 
 GL_APPLE_vertex_array_range = Extension('GL_APPLE_vertex_array_range')
@@ -44967,7 +44970,7 @@ gl.add(GL_APPLE_vertex_array_range)
 GL_APPLE_vertex_program_evaluators = Extension('GL_APPLE_vertex_program_evaluators')
 GL_APPLE_vertex_program_evaluators.url = 'http://www.opengl.org/registry/specs/APPLE/vertex_program_evaluators.txt'
 GL_APPLE_vertex_program_evaluators.enumerants = ['GL_VERTEX_ATTRIB_MAP1_APPLE','GL_VERTEX_ATTRIB_MAP1_COEFF_APPLE','GL_VERTEX_ATTRIB_MAP1_DOMAIN_APPLE','GL_VERTEX_ATTRIB_MAP1_ORDER_APPLE','GL_VERTEX_ATTRIB_MAP1_SIZE_APPLE','GL_VERTEX_ATTRIB_MAP2_APPLE','GL_VERTEX_ATTRIB_MAP2_COEFF_APPLE','GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE','GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE','GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE']
-GL_APPLE_vertex_program_evaluators.functions = ['glIsVertexAttribEnabledAPPLE','glDisableVertexAttribAPPLE','glEnableVertexAttribAPPLE','glMapVertexAttrib1dAPPLE','glMapVertexAttrib1fAPPLE','glMapVertexAttrib2dAPPLE','glMapVertexAttrib2fAPPLE']
+GL_APPLE_vertex_program_evaluators.functions = ['glDisableVertexAttribAPPLE','glEnableVertexAttribAPPLE','glIsVertexAttribEnabledAPPLE','glMapVertexAttrib1dAPPLE','glMapVertexAttrib1fAPPLE','glMapVertexAttrib2dAPPLE','glMapVertexAttrib2fAPPLE']
 gl.add(GL_APPLE_vertex_program_evaluators)
 
 GL_APPLE_ycbcr_422 = Extension('GL_APPLE_ycbcr_422')
@@ -44980,6 +44983,11 @@ GL_ARB_ES2_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/ES2_com
 GL_ARB_ES2_compatibility.enumerants = ['GL_FIXED','GL_HIGH_FLOAT','GL_HIGH_INT','GL_IMPLEMENTATION_COLOR_READ_FORMAT','GL_IMPLEMENTATION_COLOR_READ_TYPE','GL_LOW_FLOAT','GL_LOW_INT','GL_MAX_FRAGMENT_UNIFORM_VECTORS','GL_MAX_VARYING_VECTORS','GL_MAX_VERTEX_UNIFORM_VECTORS','GL_MEDIUM_FLOAT','GL_MEDIUM_INT','GL_NUM_SHADER_BINARY_FORMATS','GL_RGB565','GL_SHADER_BINARY_FORMATS','GL_SHADER_COMPILER']
 GL_ARB_ES2_compatibility.functions = ['glClearDepthf','glDepthRangef','glGetShaderPrecisionFormat','glReleaseShaderCompiler','glShaderBinary']
 gl.add(GL_ARB_ES2_compatibility)
+
+GL_ARB_ES3_1_compatibility = Extension('GL_ARB_ES3_1_compatibility')
+GL_ARB_ES3_1_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/ES3_1_compatibility.txt'
+GL_ARB_ES3_1_compatibility.functions = ['glMemoryBarrierByRegion']
+gl.add(GL_ARB_ES3_1_compatibility)
 
 GL_ARB_ES3_compatibility = Extension('GL_ARB_ES3_compatibility')
 GL_ARB_ES3_compatibility.url = 'http://www.opengl.org/registry/specs/ARB/ES3_compatibility.txt'
@@ -44998,20 +45006,20 @@ gl.add(GL_ARB_base_instance)
 GL_ARB_bindless_texture = Extension('GL_ARB_bindless_texture')
 GL_ARB_bindless_texture.url = 'http://www.opengl.org/registry/specs/ARB/bindless_texture.txt'
 GL_ARB_bindless_texture.enumerants = ['GL_UNSIGNED_INT64_ARB']
-GL_ARB_bindless_texture.functions = ['']
-gl.add(GL_ARB_bindless_texture)
-
-GL_ARB_bindless_texture = Extension('GL_ARB_bindless_texture')
-GL_ARB_bindless_texture.url = 'http://www.opengl.org/registry/specs/ARB/buffer_storage.txt'
-GL_ARB_bindless_texture.enumerants = ['GL_BUFFER_IMMUTABLE_STORAGE','GL_BUFFER_STORAGE_FLAGS','GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT','GL_CLIENT_STORAGE_BIT','GL_DYNAMIC_STORAGE_BIT','GL_MAP_COHERENT_BIT','GL_MAP_PERSISTENT_BIT']
-GL_ARB_bindless_texture.functions = ['']
+GL_ARB_bindless_texture.functions = ['glGetImageHandleARB','glGetTextureHandleARB','glGetTextureSamplerHandleARB','glGetVertexAttribLui64vARB','glIsImageHandleResidentARB','glIsTextureHandleResidentARB','glMakeImageHandleNonResidentARB','glMakeImageHandleResidentARB','glMakeTextureHandleNonResidentARB','glMakeTextureHandleResidentARB','glProgramUniformHandleui64ARB','glProgramUniformHandleui64vARB','glUniformHandleui64ARB','glUniformHandleui64vARB','glVertexAttribL1ui64ARB','glVertexAttribL1ui64vARB']
 gl.add(GL_ARB_bindless_texture)
 
 GL_ARB_blend_func_extended = Extension('GL_ARB_blend_func_extended')
 GL_ARB_blend_func_extended.url = 'http://www.opengl.org/registry/specs/ARB/blend_func_extended.txt'
 GL_ARB_blend_func_extended.enumerants = ['GL_MAX_DUAL_SOURCE_DRAW_BUFFERS','GL_ONE_MINUS_SRC1_ALPHA','GL_ONE_MINUS_SRC1_COLOR','GL_SRC1_COLOR']
-GL_ARB_blend_func_extended.functions = ['glGetFragDataIndex','glBindFragDataLocationIndexed']
+GL_ARB_blend_func_extended.functions = ['glBindFragDataLocationIndexed','glGetFragDataIndex']
 gl.add(GL_ARB_blend_func_extended)
+
+GL_ARB_buffer_storage = Extension('GL_ARB_buffer_storage')
+GL_ARB_buffer_storage.url = 'http://www.opengl.org/registry/specs/ARB/buffer_storage.txt'
+GL_ARB_buffer_storage.enumerants = ['GL_BUFFER_IMMUTABLE_STORAGE','GL_BUFFER_STORAGE_FLAGS','GL_CLIENT_MAPPED_BUFFER_BARRIER_BIT','GL_CLIENT_STORAGE_BIT','GL_DYNAMIC_STORAGE_BIT','GL_MAP_COHERENT_BIT','GL_MAP_PERSISTENT_BIT','GL_MAP_READ_BIT','GL_MAP_WRITE_BIT']
+GL_ARB_buffer_storage.functions = ['glBufferStorage']
+gl.add(GL_ARB_buffer_storage)
 
 GL_ARB_cl_event = Extension('GL_ARB_cl_event')
 GL_ARB_cl_event.url = 'http://www.opengl.org/registry/specs/ARB/cl_event.txt'
@@ -45029,6 +45037,12 @@ GL_ARB_clear_texture.url = 'http://www.opengl.org/registry/specs/ARB/clear_textu
 GL_ARB_clear_texture.enumerants = ['GL_CLEAR_TEXTURE']
 GL_ARB_clear_texture.functions = ['glClearTexImage','glClearTexSubImage']
 gl.add(GL_ARB_clear_texture)
+
+GL_ARB_clip_control = Extension('GL_ARB_clip_control')
+GL_ARB_clip_control.url = 'http://www.opengl.org/registry/specs/ARB/clip_control.txt'
+GL_ARB_clip_control.enumerants = ['GL_CLIP_DEPTH_MODE','GL_CLIP_ORIGIN','GL_LOWER_LEFT','GL_NEGATIVE_ONE_TO_ONE','GL_UPPER_LEFT','GL_ZERO_TO_ONE']
+GL_ARB_clip_control.functions = ['glClipControl']
+gl.add(GL_ARB_clip_control)
 
 GL_ARB_color_buffer_float = Extension('GL_ARB_color_buffer_float')
 GL_ARB_color_buffer_float.url = 'http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt'
@@ -45054,12 +45068,21 @@ gl.add(GL_ARB_compute_shader)
 GL_ARB_compute_variable_group_size = Extension('GL_ARB_compute_variable_group_size')
 GL_ARB_compute_variable_group_size.url = 'http://www.opengl.org/registry/specs/ARB/compute_variable_group_size.txt'
 GL_ARB_compute_variable_group_size.enumerants = ['GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB','GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB','GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB','GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB']
-GL_ARB_compute_variable_group_size.functions = ['']
+GL_ARB_compute_variable_group_size.functions = ['glDispatchComputeGroupSizeARB']
 gl.add(GL_ARB_compute_variable_group_size)
+
+GL_ARB_conditional_render_inverted = Extension('GL_ARB_conditional_render_inverted')
+GL_ARB_conditional_render_inverted.url = 'http://www.opengl.org/registry/specs/ARB/conditional_render_inverted.txt'
+GL_ARB_conditional_render_inverted.enumerants = ['GL_QUERY_BY_REGION_NO_WAIT_INVERTED','GL_QUERY_BY_REGION_WAIT_INVERTED','GL_QUERY_NO_WAIT_INVERTED','GL_QUERY_WAIT_INVERTED']
+gl.add(GL_ARB_conditional_render_inverted)
 
 GL_ARB_conservative_depth = Extension('GL_ARB_conservative_depth')
 GL_ARB_conservative_depth.url = 'http://www.opengl.org/registry/specs/ARB/conservative_depth.txt'
 gl.add(GL_ARB_conservative_depth)
+
+GL_ARB_context_flush_control = Extension('GL_ARB_context_flush_control')
+GL_ARB_context_flush_control.url = 'http://www.opengl.org/registry/specs/ARB/wgl_context_flush_control.txt'
+gl.add(GL_ARB_context_flush_control)
 
 GL_ARB_copy_buffer = Extension('GL_ARB_copy_buffer')
 GL_ARB_copy_buffer.url = 'http://www.opengl.org/registry/specs/ARB/copy_buffer.txt'
@@ -45072,10 +45095,15 @@ GL_ARB_copy_image.url = 'http://www.opengl.org/registry/specs/ARB/copy_image.txt
 GL_ARB_copy_image.functions = ['glCopyImageSubData']
 gl.add(GL_ARB_copy_image)
 
+GL_ARB_cull_distance = Extension('GL_ARB_cull_distance')
+GL_ARB_cull_distance.url = 'http://www.opengl.org/registry/specs/ARB/cull_distance.txt'
+GL_ARB_cull_distance.enumerants = ['GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES','GL_MAX_CULL_DISTANCES']
+gl.add(GL_ARB_cull_distance)
+
 GL_ARB_debug_output = Extension('GL_ARB_debug_output')
 GL_ARB_debug_output.url = 'http://www.opengl.org/registry/specs/ARB/debug_output.txt'
 GL_ARB_debug_output.enumerants = ['GL_DEBUG_CALLBACK_FUNCTION_ARB','GL_DEBUG_CALLBACK_USER_PARAM_ARB','GL_DEBUG_LOGGED_MESSAGES_ARB','GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB','GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB','GL_DEBUG_SEVERITY_HIGH_ARB','GL_DEBUG_SEVERITY_LOW_ARB','GL_DEBUG_SEVERITY_MEDIUM_ARB','GL_DEBUG_SOURCE_API_ARB','GL_DEBUG_SOURCE_APPLICATION_ARB','GL_DEBUG_SOURCE_OTHER_ARB','GL_DEBUG_SOURCE_SHADER_COMPILER_ARB','GL_DEBUG_SOURCE_THIRD_PARTY_ARB','GL_DEBUG_SOURCE_WINDOW_SYSTEM_ARB','GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB','GL_DEBUG_TYPE_ERROR_ARB','GL_DEBUG_TYPE_OTHER_ARB','GL_DEBUG_TYPE_PERFORMANCE_ARB','GL_DEBUG_TYPE_PORTABILITY_ARB','GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB','GL_MAX_DEBUG_LOGGED_MESSAGES_ARB','GL_MAX_DEBUG_MESSAGE_LENGTH_ARB']
-GL_ARB_debug_output.functions = ['glGetDebugMessageLogARB','glDebugMessageCallbackARB','glDebugMessageControlARB','glDebugMessageInsertARB']
+GL_ARB_debug_output.functions = ['glDebugMessageCallbackARB','glDebugMessageControlARB','glDebugMessageInsertARB','glGetDebugMessageLogARB']
 gl.add(GL_ARB_debug_output)
 
 GL_ARB_depth_buffer_float = Extension('GL_ARB_depth_buffer_float')
@@ -45092,6 +45120,16 @@ GL_ARB_depth_texture = Extension('GL_ARB_depth_texture')
 GL_ARB_depth_texture.url = 'http://www.opengl.org/registry/specs/ARB/depth_texture.txt'
 GL_ARB_depth_texture.enumerants = ['GL_DEPTH_COMPONENT16_ARB','GL_DEPTH_COMPONENT24_ARB','GL_DEPTH_COMPONENT32_ARB','GL_DEPTH_TEXTURE_MODE_ARB','GL_TEXTURE_DEPTH_SIZE_ARB']
 gl.add(GL_ARB_depth_texture)
+
+GL_ARB_derivative_control = Extension('GL_ARB_derivative_control')
+GL_ARB_derivative_control.url = 'http://www.opengl.org/registry/specs/ARB/derivative_control.txt'
+gl.add(GL_ARB_derivative_control)
+
+GL_ARB_direct_state_access = Extension('GL_ARB_direct_state_access')
+GL_ARB_direct_state_access.url = 'http://www.opengl.org/registry/specs/ARB/direct_state_access.txt'
+GL_ARB_direct_state_access.enumerants = ['GL_QUERY_TARGET','GL_TEXTURE_BINDING','GL_TEXTURE_TARGET']
+GL_ARB_direct_state_access.functions = ['*','*','glBindTextureUnit','glBlitNamedFramebuffer','glCheckNamedFramebufferStatus','glClearNamedBufferData','glClearNamedBufferSubData','glClearNamedFramebufferfi','glClearNamedFramebufferfv','glClearNamedFramebufferiv','glClearNamedFramebufferuiv','glCompressedTextureSubImage1D','glCompressedTextureSubImage2D','glCompressedTextureSubImage3D','glCopyNamedBufferSubData','glCopyTextureSubImage1D','glCopyTextureSubImage2D','glCopyTextureSubImage3D','glCreateBuffers','glCreateFramebuffers','glCreateProgramPipelines','glCreateQueries','glCreateRenderbuffers','glCreateSamplers','glCreateTextures','glCreateTransformFeedbacks','glCreateVertexArrays','glDisableVertexArrayAttrib','glEnableVertexArrayAttrib','glFlushMappedNamedBufferRange','glGenerateTextureMipmap','glGetCompressedTextureImage','glGetNamedBufferParameteri64v','glGetNamedBufferParameteriv','glGetNamedBufferPointerv','glGetNamedBufferSubData','glGetNamedFramebufferAttachmentParameteriv','glGetNamedFramebufferParameteriv','glGetNamedRenderbufferParameteriv','glGetTextureImage','glGetTextureLevelParameterfv','glGetTextureLevelParameteriv','glGetTextureParameterIiv','glGetTextureParameterIuiv','glGetTextureParameterfv','glGetTextureParameteriv','glGetTransformFeedbacki64_v','glGetTransformFeedbacki_v','glGetTransformFeedbackiv','glGetVertexArrayIndexed64iv','glGetVertexArrayIndexediv','glGetVertexArrayiv','glInvalidateNamedFramebufferData','glInvalidateNamedFramebufferSubData','glNamedBufferData','glNamedBufferStorage','glNamedBufferSubData','glNamedFramebufferDrawBuffer','glNamedFramebufferDrawBuffers','glNamedFramebufferParameteri','glNamedFramebufferReadBuffer','glNamedFramebufferRenderbuffer','glNamedFramebufferTexture','glNamedFramebufferTextureLayer','glNamedRenderbufferStorage','glNamedRenderbufferStorageMultisample','glTextureBuffer','glTextureBufferRange','glTextureParameterIiv','glTextureParameterIuiv','glTextureParameterf','glTextureParameterfv','glTextureParameteri','glTextureParameteriv','glTextureStorage1D','glTextureStorage2D','glTextureStorage2DMultisample','glTextureStorage3D','glTextureStorage3DMultisample','glTextureSubImage1D','glTextureSubImage2D','glTextureSubImage3D','glTransformFeedbackBufferBase','glTransformFeedbackBufferRange','glUnmapNamedBuffer','glVertexArrayAttribBinding','glVertexArrayAttribFormat','glVertexArrayAttribIFormat','glVertexArrayAttribLFormat','glVertexArrayBindingDivisor','glVertexArrayElementBuffer','glVertexArrayVertexBuffer','glVertexArrayVertexBuffers']
+gl.add(GL_ARB_direct_state_access)
 
 GL_ARB_draw_buffers = Extension('GL_ARB_draw_buffers')
 GL_ARB_draw_buffers.url = 'http://www.opengl.org/registry/specs/ARB/draw_buffers.txt'
@@ -45117,12 +45155,12 @@ gl.add(GL_ARB_draw_indirect)
 
 GL_ARB_draw_instanced = Extension('GL_ARB_draw_instanced')
 GL_ARB_draw_instanced.url = 'http://www.opengl.org/registry/specs/ARB/draw_instanced.txt'
+GL_ARB_draw_instanced.functions = ['glDrawArraysInstancedARB','glDrawElementsInstancedARB']
 gl.add(GL_ARB_draw_instanced)
 
 GL_ARB_enhanced_layouts = Extension('GL_ARB_enhanced_layouts')
 GL_ARB_enhanced_layouts.url = 'http://www.opengl.org/registry/specs/ARB/enhanced_layouts.txt'
-GL_ARB_enhanced_layouts.enumerants = ['GL_LOCATION_COMPONENT','GL_TRANSFORM_FEEDBACK_BUFFER_INDEX','GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE']
-GL_ARB_enhanced_layouts.functions = ['']
+GL_ARB_enhanced_layouts.enumerants = ['GL_LOCATION_COMPONENT','GL_TRANSFORM_FEEDBACK_BUFFER','GL_TRANSFORM_FEEDBACK_BUFFER_INDEX','GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE']
 gl.add(GL_ARB_enhanced_layouts)
 
 GL_ARB_explicit_attrib_location = Extension('GL_ARB_explicit_attrib_location')
@@ -45165,7 +45203,7 @@ gl.add(GL_ARB_framebuffer_no_attachments)
 GL_ARB_framebuffer_object = Extension('GL_ARB_framebuffer_object')
 GL_ARB_framebuffer_object.url = 'http://www.opengl.org/registry/specs/ARB/framebuffer_object.txt'
 GL_ARB_framebuffer_object.enumerants = ['GL_COLOR_ATTACHMENT0','GL_COLOR_ATTACHMENT1','GL_COLOR_ATTACHMENT10','GL_COLOR_ATTACHMENT11','GL_COLOR_ATTACHMENT12','GL_COLOR_ATTACHMENT13','GL_COLOR_ATTACHMENT14','GL_COLOR_ATTACHMENT15','GL_COLOR_ATTACHMENT2','GL_COLOR_ATTACHMENT3','GL_COLOR_ATTACHMENT4','GL_COLOR_ATTACHMENT5','GL_COLOR_ATTACHMENT6','GL_COLOR_ATTACHMENT7','GL_COLOR_ATTACHMENT8','GL_COLOR_ATTACHMENT9','GL_DEPTH24_STENCIL8','GL_DEPTH_ATTACHMENT','GL_DEPTH_STENCIL','GL_DEPTH_STENCIL_ATTACHMENT','GL_DRAW_FRAMEBUFFER','GL_DRAW_FRAMEBUFFER_BINDING','GL_FRAMEBUFFER','GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE','GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE','GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING','GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE','GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE','GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE','GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE','GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL','GL_FRAMEBUFFER_BINDING','GL_FRAMEBUFFER_COMPLETE','GL_FRAMEBUFFER_DEFAULT','GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT','GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER','GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT','GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE','GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER','GL_FRAMEBUFFER_UNDEFINED','GL_FRAMEBUFFER_UNSUPPORTED','GL_INDEX','GL_INVALID_FRAMEBUFFER_OPERATION','GL_MAX_COLOR_ATTACHMENTS','GL_MAX_RENDERBUFFER_SIZE','GL_MAX_SAMPLES','GL_READ_FRAMEBUFFER','GL_READ_FRAMEBUFFER_BINDING','GL_RENDERBUFFER','GL_RENDERBUFFER_ALPHA_SIZE','GL_RENDERBUFFER_BINDING','GL_RENDERBUFFER_BLUE_SIZE','GL_RENDERBUFFER_DEPTH_SIZE','GL_RENDERBUFFER_GREEN_SIZE','GL_RENDERBUFFER_HEIGHT','GL_RENDERBUFFER_INTERNAL_FORMAT','GL_RENDERBUFFER_RED_SIZE','GL_RENDERBUFFER_SAMPLES','GL_RENDERBUFFER_STENCIL_SIZE','GL_RENDERBUFFER_WIDTH','GL_SRGB','GL_STENCIL_ATTACHMENT','GL_STENCIL_INDEX1','GL_STENCIL_INDEX16','GL_STENCIL_INDEX4','GL_STENCIL_INDEX8','GL_TEXTURE_STENCIL_SIZE','GL_UNSIGNED_INT_24_8','GL_UNSIGNED_NORMALIZED']
-GL_ARB_framebuffer_object.functions = ['glIsFramebuffer','glIsRenderbuffer','glCheckFramebufferStatus','glBindFramebuffer','glBindRenderbuffer','glBlitFramebuffer','glDeleteFramebuffers','glDeleteRenderbuffers','glFramebufferRenderbuffer','glFramebufferTexture1D','glFramebufferTexture2D','glFramebufferTexture3D','glFramebufferTextureLayer','glGenFramebuffers','glGenRenderbuffers','glGenerateMipmap','glGetFramebufferAttachmentParameteriv','glGetRenderbufferParameteriv','glRenderbufferStorage','glRenderbufferStorageMultisample']
+GL_ARB_framebuffer_object.functions = ['glBindFramebuffer','glBindRenderbuffer','glBlitFramebuffer','glCheckFramebufferStatus','glDeleteFramebuffers','glDeleteRenderbuffers','glFramebufferRenderbuffer','glFramebufferTexture1D','glFramebufferTexture2D','glFramebufferTexture3D','glFramebufferTextureLayer','glGenFramebuffers','glGenRenderbuffers','glGenerateMipmap','glGetFramebufferAttachmentParameteriv','glGetRenderbufferParameteriv','glIsFramebuffer','glIsRenderbuffer','glRenderbufferStorage','glRenderbufferStorageMultisample']
 gl.add(GL_ARB_framebuffer_object)
 
 GL_ARB_framebuffer_sRGB = Extension('GL_ARB_framebuffer_sRGB')
@@ -45185,6 +45223,11 @@ GL_ARB_get_program_binary.enumerants = ['GL_NUM_PROGRAM_BINARY_FORMATS','GL_PROG
 GL_ARB_get_program_binary.functions = ['glGetProgramBinary','glProgramBinary','glProgramParameteri']
 gl.add(GL_ARB_get_program_binary)
 
+GL_ARB_get_texture_sub_image = Extension('GL_ARB_get_texture_sub_image')
+GL_ARB_get_texture_sub_image.url = 'http://www.opengl.org/registry/specs/ARB/get_texture_sub_image.txt'
+GL_ARB_get_texture_sub_image.functions = ['glGetCompressedTextureSubImage','glGetTextureSubImage']
+gl.add(GL_ARB_get_texture_sub_image)
+
 GL_ARB_gpu_shader5 = Extension('GL_ARB_gpu_shader5')
 GL_ARB_gpu_shader5.url = 'http://www.opengl.org/registry/specs/ARB/gpu_shader5.txt'
 GL_ARB_gpu_shader5.enumerants = ['GL_FRAGMENT_INTERPOLATION_OFFSET_BITS','GL_GEOMETRY_SHADER_INVOCATIONS','GL_MAX_FRAGMENT_INTERPOLATION_OFFSET','GL_MAX_GEOMETRY_SHADER_INVOCATIONS','GL_MAX_VERTEX_STREAMS','GL_MIN_FRAGMENT_INTERPOLATION_OFFSET']
@@ -45192,7 +45235,7 @@ gl.add(GL_ARB_gpu_shader5)
 
 GL_ARB_gpu_shader_fp64 = Extension('GL_ARB_gpu_shader_fp64')
 GL_ARB_gpu_shader_fp64.url = 'http://www.opengl.org/registry/specs/ARB/gpu_shader_fp64.txt'
-GL_ARB_gpu_shader_fp64.enumerants = ['GL_DOUBLE_MAT2','GL_DOUBLE_MAT2x3','GL_DOUBLE_MAT2x4','GL_DOUBLE_MAT3','GL_DOUBLE_MAT3x2','GL_DOUBLE_MAT3x4','GL_DOUBLE_MAT4','GL_DOUBLE_MAT4x2','GL_DOUBLE_MAT4x3','GL_DOUBLE_VEC2','GL_DOUBLE_VEC3','GL_DOUBLE_VEC4']
+GL_ARB_gpu_shader_fp64.enumerants = ['GL_DOUBLE','GL_DOUBLE_MAT2','GL_DOUBLE_MAT2x3','GL_DOUBLE_MAT2x4','GL_DOUBLE_MAT3','GL_DOUBLE_MAT3x2','GL_DOUBLE_MAT3x4','GL_DOUBLE_MAT4','GL_DOUBLE_MAT4x2','GL_DOUBLE_MAT4x3','GL_DOUBLE_VEC2','GL_DOUBLE_VEC3','GL_DOUBLE_VEC4']
 GL_ARB_gpu_shader_fp64.functions = ['glGetUniformdv','glUniform1d','glUniform1dv','glUniform2d','glUniform2dv','glUniform3d','glUniform3dv','glUniform4d','glUniform4dv','glUniformMatrix2dv','glUniformMatrix2x3dv','glUniformMatrix2x4dv','glUniformMatrix3dv','glUniformMatrix3x2dv','glUniformMatrix3x4dv','glUniformMatrix4dv','glUniformMatrix4x2dv','glUniformMatrix4x3dv']
 gl.add(GL_ARB_gpu_shader_fp64)
 
@@ -45248,11 +45291,11 @@ gl.add(GL_ARB_map_buffer_alignment)
 GL_ARB_map_buffer_range = Extension('GL_ARB_map_buffer_range')
 GL_ARB_map_buffer_range.url = 'http://www.opengl.org/registry/specs/ARB/map_buffer_range.txt'
 GL_ARB_map_buffer_range.enumerants = ['GL_MAP_FLUSH_EXPLICIT_BIT','GL_MAP_INVALIDATE_BUFFER_BIT','GL_MAP_INVALIDATE_RANGE_BIT','GL_MAP_READ_BIT','GL_MAP_UNSYNCHRONIZED_BIT','GL_MAP_WRITE_BIT']
-GL_ARB_map_buffer_range.functions = ['*','glFlushMappedBufferRange']
+GL_ARB_map_buffer_range.functions = ['glFlushMappedBufferRange','glMapBufferRange']
 gl.add(GL_ARB_map_buffer_range)
 
 GL_ARB_matrix_palette = Extension('GL_ARB_matrix_palette')
-GL_ARB_matrix_palette.url = 'http://oss.sgi.com/projects/ogl-sample/registry/ARB/matrix_palette.txt'
+GL_ARB_matrix_palette.url = 'https://www.opengl.org/registry/specs/ARB/matrix_palette.txt'
 GL_ARB_matrix_palette.enumerants = ['GL_CURRENT_MATRIX_INDEX_ARB','GL_CURRENT_PALETTE_MATRIX_ARB','GL_MATRIX_INDEX_ARRAY_ARB','GL_MATRIX_INDEX_ARRAY_POINTER_ARB','GL_MATRIX_INDEX_ARRAY_SIZE_ARB','GL_MATRIX_INDEX_ARRAY_STRIDE_ARB','GL_MATRIX_INDEX_ARRAY_TYPE_ARB','GL_MATRIX_PALETTE_ARB','GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB','GL_MAX_PALETTE_MATRICES_ARB']
 GL_ARB_matrix_palette.functions = ['glCurrentPaletteMatrixARB','glMatrixIndexPointerARB','glMatrixIndexubvARB','glMatrixIndexuivARB','glMatrixIndexusvARB']
 gl.add(GL_ARB_matrix_palette)
@@ -45274,7 +45317,7 @@ GL_ARB_multisample.functions = ['glSampleCoverageARB']
 gl.add(GL_ARB_multisample)
 
 GL_ARB_multitexture = Extension('GL_ARB_multitexture')
-GL_ARB_multitexture.url = 'http://oss.sgi.com/projects/ogl-sample/registry/ARB/multitexture.txt'
+GL_ARB_multitexture.url = 'http://www.opengl.org/registry/specs/ARB/multitexture.txt'
 GL_ARB_multitexture.enumerants = ['GL_ACTIVE_TEXTURE_ARB','GL_CLIENT_ACTIVE_TEXTURE_ARB','GL_MAX_TEXTURE_UNITS_ARB','GL_TEXTURE0_ARB','GL_TEXTURE10_ARB','GL_TEXTURE11_ARB','GL_TEXTURE12_ARB','GL_TEXTURE13_ARB','GL_TEXTURE14_ARB','GL_TEXTURE15_ARB','GL_TEXTURE16_ARB','GL_TEXTURE17_ARB','GL_TEXTURE18_ARB','GL_TEXTURE19_ARB','GL_TEXTURE1_ARB','GL_TEXTURE20_ARB','GL_TEXTURE21_ARB','GL_TEXTURE22_ARB','GL_TEXTURE23_ARB','GL_TEXTURE24_ARB','GL_TEXTURE25_ARB','GL_TEXTURE26_ARB','GL_TEXTURE27_ARB','GL_TEXTURE28_ARB','GL_TEXTURE29_ARB','GL_TEXTURE2_ARB','GL_TEXTURE30_ARB','GL_TEXTURE31_ARB','GL_TEXTURE3_ARB','GL_TEXTURE4_ARB','GL_TEXTURE5_ARB','GL_TEXTURE6_ARB','GL_TEXTURE7_ARB','GL_TEXTURE8_ARB','GL_TEXTURE9_ARB']
 GL_ARB_multitexture.functions = ['glActiveTextureARB','glClientActiveTextureARB','glMultiTexCoord1dARB','glMultiTexCoord1dvARB','glMultiTexCoord1fARB','glMultiTexCoord1fvARB','glMultiTexCoord1iARB','glMultiTexCoord1ivARB','glMultiTexCoord1sARB','glMultiTexCoord1svARB','glMultiTexCoord2dARB','glMultiTexCoord2dvARB','glMultiTexCoord2fARB','glMultiTexCoord2fvARB','glMultiTexCoord2iARB','glMultiTexCoord2ivARB','glMultiTexCoord2sARB','glMultiTexCoord2svARB','glMultiTexCoord3dARB','glMultiTexCoord3dvARB','glMultiTexCoord3fARB','glMultiTexCoord3fvARB','glMultiTexCoord3iARB','glMultiTexCoord3ivARB','glMultiTexCoord3sARB','glMultiTexCoord3svARB','glMultiTexCoord4dARB','glMultiTexCoord4dvARB','glMultiTexCoord4fARB','glMultiTexCoord4fvARB','glMultiTexCoord4iARB','glMultiTexCoord4ivARB','glMultiTexCoord4sARB','glMultiTexCoord4svARB']
 gl.add(GL_ARB_multitexture)
@@ -45282,13 +45325,18 @@ gl.add(GL_ARB_multitexture)
 GL_ARB_occlusion_query = Extension('GL_ARB_occlusion_query')
 GL_ARB_occlusion_query.url = 'http://www.opengl.org/registry/specs/ARB/occlusion_query.txt'
 GL_ARB_occlusion_query.enumerants = ['GL_CURRENT_QUERY_ARB','GL_QUERY_COUNTER_BITS_ARB','GL_QUERY_RESULT_ARB','GL_QUERY_RESULT_AVAILABLE_ARB','GL_SAMPLES_PASSED_ARB']
-GL_ARB_occlusion_query.functions = ['glIsQueryARB','glBeginQueryARB','glDeleteQueriesARB','glEndQueryARB','glGenQueriesARB','glGetQueryObjectivARB','glGetQueryObjectuivARB','glGetQueryivARB']
+GL_ARB_occlusion_query.functions = ['glBeginQueryARB','glDeleteQueriesARB','glEndQueryARB','glGenQueriesARB','glGetQueryObjectivARB','glGetQueryObjectuivARB','glGetQueryivARB','glIsQueryARB']
 gl.add(GL_ARB_occlusion_query)
 
 GL_ARB_occlusion_query2 = Extension('GL_ARB_occlusion_query2')
 GL_ARB_occlusion_query2.url = 'http://www.opengl.org/registry/specs/ARB/occlusion_query2.txt'
 GL_ARB_occlusion_query2.enumerants = ['GL_ANY_SAMPLES_PASSED']
 gl.add(GL_ARB_occlusion_query2)
+
+GL_ARB_pipeline_statistics_query = Extension('GL_ARB_pipeline_statistics_query')
+GL_ARB_pipeline_statistics_query.url = 'http://www.opengl.org/registry/specs/ARB/pipeline_statistics_query.txt'
+GL_ARB_pipeline_statistics_query.enumerants = ['GL_CLIPPING_INPUT_PRIMITIVES_ARB','GL_CLIPPING_OUTPUT_PRIMITIVES_ARB','GL_COMPUTE_SHADER_INVOCATIONS_ARB','GL_FRAGMENT_SHADER_INVOCATIONS_ARB','GL_GEOMETRY_SHADER_INVOCATIONS','GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB','GL_PRIMITIVES_SUBMITTED_ARB','GL_TESS_CONTROL_SHADER_PATCHES_ARB','GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB','GL_VERTEX_SHADER_INVOCATIONS_ARB','GL_VERTICES_SUBMITTED_ARB']
+gl.add(GL_ARB_pipeline_statistics_query)
 
 GL_ARB_pixel_buffer_object = Extension('GL_ARB_pixel_buffer_object')
 GL_ARB_pixel_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/pixel_buffer_object.txt'
@@ -45309,7 +45357,7 @@ gl.add(GL_ARB_point_sprite)
 GL_ARB_program_interface_query = Extension('GL_ARB_program_interface_query')
 GL_ARB_program_interface_query.url = 'http://www.opengl.org/registry/specs/ARB/program_interface_query.txt'
 GL_ARB_program_interface_query.enumerants = ['GL_ACTIVE_RESOURCES','GL_ACTIVE_VARIABLES','GL_ARRAY_SIZE','GL_ARRAY_STRIDE','GL_ATOMIC_COUNTER_BUFFER_INDEX','GL_BLOCK_INDEX','GL_BUFFER_BINDING','GL_BUFFER_DATA_SIZE','GL_BUFFER_VARIABLE','GL_COMPUTE_SUBROUTINE','GL_COMPUTE_SUBROUTINE_UNIFORM','GL_FRAGMENT_SUBROUTINE','GL_FRAGMENT_SUBROUTINE_UNIFORM','GL_GEOMETRY_SUBROUTINE','GL_GEOMETRY_SUBROUTINE_UNIFORM','GL_IS_PER_PATCH','GL_IS_ROW_MAJOR','GL_LOCATION','GL_LOCATION_INDEX','GL_MATRIX_STRIDE','GL_MAX_NAME_LENGTH','GL_MAX_NUM_ACTIVE_VARIABLES','GL_MAX_NUM_COMPATIBLE_SUBROUTINES','GL_NAME_LENGTH','GL_NUM_ACTIVE_VARIABLES','GL_OFFSET','GL_PROGRAM_INPUT','GL_PROGRAM_OUTPUT','GL_REFERENCED_BY_COMPUTE_SHADER','GL_REFERENCED_BY_FRAGMENT_SHADER','GL_REFERENCED_BY_GEOMETRY_SHADER','GL_REFERENCED_BY_TESS_CONTROL_SHADER','GL_REFERENCED_BY_TESS_EVALUATION_SHADER','GL_REFERENCED_BY_VERTEX_SHADER','GL_SHADER_STORAGE_BLOCK','GL_TESS_CONTROL_SUBROUTINE','GL_TESS_CONTROL_SUBROUTINE_UNIFORM','GL_TESS_EVALUATION_SUBROUTINE','GL_TESS_EVALUATION_SUBROUTINE_UNIFORM','GL_TOP_LEVEL_ARRAY_SIZE','GL_TOP_LEVEL_ARRAY_STRIDE','GL_TRANSFORM_FEEDBACK_VARYING','GL_TYPE','GL_UNIFORM','GL_UNIFORM_BLOCK','GL_VERTEX_SUBROUTINE','GL_VERTEX_SUBROUTINE_UNIFORM']
-GL_ARB_program_interface_query.functions = ['glGetProgramResourceLocation','glGetProgramResourceLocationIndex','glGetProgramResourceIndex','glGetProgramInterfaceiv','glGetProgramResourceName','glGetProgramResourceiv']
+GL_ARB_program_interface_query.functions = ['glGetProgramInterfaceiv','glGetProgramResourceIndex','glGetProgramResourceLocation','glGetProgramResourceLocationIndex','glGetProgramResourceName','glGetProgramResourceiv']
 gl.add(GL_ARB_program_interface_query)
 
 GL_ARB_provoking_vertex = Extension('GL_ARB_provoking_vertex')
@@ -45321,7 +45369,6 @@ gl.add(GL_ARB_provoking_vertex)
 GL_ARB_query_buffer_object = Extension('GL_ARB_query_buffer_object')
 GL_ARB_query_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/query_buffer_object.txt'
 GL_ARB_query_buffer_object.enumerants = ['GL_QUERY_BUFFER','GL_QUERY_BUFFER_BARRIER_BIT','GL_QUERY_BUFFER_BINDING','GL_QUERY_RESULT_NO_WAIT']
-GL_ARB_query_buffer_object.functions = ['']
 gl.add(GL_ARB_query_buffer_object)
 
 GL_ARB_robust_buffer_access_behavior = Extension('GL_ARB_robust_buffer_access_behavior')
@@ -45351,7 +45398,7 @@ gl.add(GL_ARB_sample_shading)
 GL_ARB_sampler_objects = Extension('GL_ARB_sampler_objects')
 GL_ARB_sampler_objects.url = 'http://www.opengl.org/registry/specs/ARB/sampler_objects.txt'
 GL_ARB_sampler_objects.enumerants = ['GL_SAMPLER_BINDING']
-GL_ARB_sampler_objects.functions = ['glIsSampler','glBindSampler','glDeleteSamplers','glGenSamplers','glGetSamplerParameterIiv','glGetSamplerParameterIuiv','glGetSamplerParameterfv','glGetSamplerParameteriv','glSamplerParameterIiv','glSamplerParameterIuiv','glSamplerParameterf','glSamplerParameterfv','glSamplerParameteri','glSamplerParameteriv']
+GL_ARB_sampler_objects.functions = ['glBindSampler','glDeleteSamplers','glGenSamplers','glGetSamplerParameterIiv','glGetSamplerParameterIuiv','glGetSamplerParameterfv','glGetSamplerParameteriv','glIsSampler','glSamplerParameterIiv','glSamplerParameterIuiv','glSamplerParameterf','glSamplerParameterfv','glSamplerParameteri','glSamplerParameteriv']
 gl.add(GL_ARB_sampler_objects)
 
 GL_ARB_seamless_cube_map = Extension('GL_ARB_seamless_cube_map')
@@ -45362,7 +45409,7 @@ gl.add(GL_ARB_seamless_cube_map)
 GL_ARB_separate_shader_objects = Extension('GL_ARB_separate_shader_objects')
 GL_ARB_separate_shader_objects.url = 'http://www.opengl.org/registry/specs/ARB/separate_shader_objects.txt'
 GL_ARB_separate_shader_objects.enumerants = ['GL_ACTIVE_PROGRAM','GL_ALL_SHADER_BITS','GL_FRAGMENT_SHADER_BIT','GL_GEOMETRY_SHADER_BIT','GL_PROGRAM_PIPELINE_BINDING','GL_PROGRAM_SEPARABLE','GL_TESS_CONTROL_SHADER_BIT','GL_TESS_EVALUATION_SHADER_BIT','GL_VERTEX_SHADER_BIT']
-GL_ARB_separate_shader_objects.functions = ['glIsProgramPipeline','glCreateShaderProgramv','glActiveShaderProgram','glBindProgramPipeline','glDeleteProgramPipelines','glGenProgramPipelines','glGetProgramPipelineInfoLog','glGetProgramPipelineiv','glProgramUniform1d','glProgramUniform1dv','glProgramUniform1f','glProgramUniform1fv','glProgramUniform1i','glProgramUniform1iv','glProgramUniform1ui','glProgramUniform1uiv','glProgramUniform2d','glProgramUniform2dv','glProgramUniform2f','glProgramUniform2fv','glProgramUniform2i','glProgramUniform2iv','glProgramUniform2ui','glProgramUniform2uiv','glProgramUniform3d','glProgramUniform3dv','glProgramUniform3f','glProgramUniform3fv','glProgramUniform3i','glProgramUniform3iv','glProgramUniform3ui','glProgramUniform3uiv','glProgramUniform4d','glProgramUniform4dv','glProgramUniform4f','glProgramUniform4fv','glProgramUniform4i','glProgramUniform4iv','glProgramUniform4ui','glProgramUniform4uiv','glProgramUniformMatrix2dv','glProgramUniformMatrix2fv','glProgramUniformMatrix2x3dv','glProgramUniformMatrix2x3fv','glProgramUniformMatrix2x4dv','glProgramUniformMatrix2x4fv','glProgramUniformMatrix3dv','glProgramUniformMatrix3fv','glProgramUniformMatrix3x2dv','glProgramUniformMatrix3x2fv','glProgramUniformMatrix3x4dv','glProgramUniformMatrix3x4fv','glProgramUniformMatrix4dv','glProgramUniformMatrix4fv','glProgramUniformMatrix4x2dv','glProgramUniformMatrix4x2fv','glProgramUniformMatrix4x3dv','glProgramUniformMatrix4x3fv','glUseProgramStages','glValidateProgramPipeline']
+GL_ARB_separate_shader_objects.functions = ['glActiveShaderProgram','glBindProgramPipeline','glCreateShaderProgramv','glDeleteProgramPipelines','glGenProgramPipelines','glGetProgramPipelineInfoLog','glGetProgramPipelineiv','glIsProgramPipeline','glProgramUniform1d','glProgramUniform1dv','glProgramUniform1f','glProgramUniform1fv','glProgramUniform1i','glProgramUniform1iv','glProgramUniform1ui','glProgramUniform1uiv','glProgramUniform2d','glProgramUniform2dv','glProgramUniform2f','glProgramUniform2fv','glProgramUniform2i','glProgramUniform2iv','glProgramUniform2ui','glProgramUniform2uiv','glProgramUniform3d','glProgramUniform3dv','glProgramUniform3f','glProgramUniform3fv','glProgramUniform3i','glProgramUniform3iv','glProgramUniform3ui','glProgramUniform3uiv','glProgramUniform4d','glProgramUniform4dv','glProgramUniform4f','glProgramUniform4fv','glProgramUniform4i','glProgramUniform4iv','glProgramUniform4ui','glProgramUniform4uiv','glProgramUniformMatrix2dv','glProgramUniformMatrix2fv','glProgramUniformMatrix2x3dv','glProgramUniformMatrix2x3fv','glProgramUniformMatrix2x4dv','glProgramUniformMatrix2x4fv','glProgramUniformMatrix3dv','glProgramUniformMatrix3fv','glProgramUniformMatrix3x2dv','glProgramUniformMatrix3x2fv','glProgramUniformMatrix3x4dv','glProgramUniformMatrix3x4fv','glProgramUniformMatrix4dv','glProgramUniformMatrix4fv','glProgramUniformMatrix4x2dv','glProgramUniformMatrix4x2fv','glProgramUniformMatrix4x3dv','glProgramUniformMatrix4x3fv','glUseProgramStages','glValidateProgramPipeline']
 gl.add(GL_ARB_separate_shader_objects)
 
 GL_ARB_shader_atomic_counters = Extension('GL_ARB_shader_atomic_counters')
@@ -45388,7 +45435,7 @@ gl.add(GL_ARB_shader_image_size)
 GL_ARB_shader_objects = Extension('GL_ARB_shader_objects')
 GL_ARB_shader_objects.url = 'http://www.opengl.org/registry/specs/ARB/shader_objects.txt'
 GL_ARB_shader_objects.enumerants = ['GL_BOOL_ARB','GL_BOOL_VEC2_ARB','GL_BOOL_VEC3_ARB','GL_BOOL_VEC4_ARB','GL_FLOAT_MAT2_ARB','GL_FLOAT_MAT3_ARB','GL_FLOAT_MAT4_ARB','GL_FLOAT_VEC2_ARB','GL_FLOAT_VEC3_ARB','GL_FLOAT_VEC4_ARB','GL_INT_VEC2_ARB','GL_INT_VEC3_ARB','GL_INT_VEC4_ARB','GL_OBJECT_ACTIVE_UNIFORMS_ARB','GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB','GL_OBJECT_ATTACHED_OBJECTS_ARB','GL_OBJECT_COMPILE_STATUS_ARB','GL_OBJECT_DELETE_STATUS_ARB','GL_OBJECT_INFO_LOG_LENGTH_ARB','GL_OBJECT_LINK_STATUS_ARB','GL_OBJECT_SHADER_SOURCE_LENGTH_ARB','GL_OBJECT_SUBTYPE_ARB','GL_OBJECT_TYPE_ARB','GL_OBJECT_VALIDATE_STATUS_ARB','GL_PROGRAM_OBJECT_ARB','GL_SAMPLER_1D_ARB','GL_SAMPLER_1D_SHADOW_ARB','GL_SAMPLER_2D_ARB','GL_SAMPLER_2D_RECT_ARB','GL_SAMPLER_2D_RECT_SHADOW_ARB','GL_SAMPLER_2D_SHADOW_ARB','GL_SAMPLER_3D_ARB','GL_SAMPLER_CUBE_ARB','GL_SHADER_OBJECT_ARB']
-GL_ARB_shader_objects.functions = ['glCreateProgramObjectARB','glCreateShaderObjectARB','glGetHandleARB','glGetUniformLocationARB','glAttachObjectARB','glCompileShaderARB','glDeleteObjectARB','glDetachObjectARB','glGetActiveUniformARB','glGetAttachedObjectsARB','glGetInfoLogARB','glGetObjectParameterfvARB','glGetObjectParameterivARB','glGetShaderSourceARB','glGetUniformfvARB','glGetUniformivARB','glLinkProgramARB','glShaderSourceARB','glUniform1fARB','glUniform1fvARB','glUniform1iARB','glUniform1ivARB','glUniform2fARB','glUniform2fvARB','glUniform2iARB','glUniform2ivARB','glUniform3fARB','glUniform3fvARB','glUniform3iARB','glUniform3ivARB','glUniform4fARB','glUniform4fvARB','glUniform4iARB','glUniform4ivARB','glUniformMatrix2fvARB','glUniformMatrix3fvARB','glUniformMatrix4fvARB','glUseProgramObjectARB','glValidateProgramARB']
+GL_ARB_shader_objects.functions = ['glAttachObjectARB','glCompileShaderARB','glCreateProgramObjectARB','glCreateShaderObjectARB','glDeleteObjectARB','glDetachObjectARB','glGetActiveUniformARB','glGetAttachedObjectsARB','glGetHandleARB','glGetInfoLogARB','glGetObjectParameterfvARB','glGetObjectParameterivARB','glGetShaderSourceARB','glGetUniformLocationARB','glGetUniformfvARB','glGetUniformivARB','glLinkProgramARB','glShaderSourceARB','glUniform1fARB','glUniform1fvARB','glUniform1iARB','glUniform1ivARB','glUniform2fARB','glUniform2fvARB','glUniform2iARB','glUniform2ivARB','glUniform3fARB','glUniform3fvARB','glUniform3iARB','glUniform3ivARB','glUniform4fARB','glUniform4fvARB','glUniform4iARB','glUniform4ivARB','glUniformMatrix2fvARB','glUniformMatrix3fvARB','glUniformMatrix4fvARB','glUseProgramObjectARB','glValidateProgramARB']
 gl.add(GL_ARB_shader_objects)
 
 GL_ARB_shader_precision = Extension('GL_ARB_shader_precision')
@@ -45408,8 +45455,12 @@ gl.add(GL_ARB_shader_storage_buffer_object)
 GL_ARB_shader_subroutine = Extension('GL_ARB_shader_subroutine')
 GL_ARB_shader_subroutine.url = 'http://www.opengl.org/registry/specs/ARB/shader_subroutine.txt'
 GL_ARB_shader_subroutine.enumerants = ['GL_ACTIVE_SUBROUTINES','GL_ACTIVE_SUBROUTINE_MAX_LENGTH','GL_ACTIVE_SUBROUTINE_UNIFORMS','GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS','GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH','GL_COMPATIBLE_SUBROUTINES','GL_MAX_SUBROUTINES','GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS','GL_NUM_COMPATIBLE_SUBROUTINES']
-GL_ARB_shader_subroutine.functions = ['glGetSubroutineUniformLocation','glGetSubroutineIndex','glGetActiveSubroutineName','glGetActiveSubroutineUniformName','glGetActiveSubroutineUniformiv','glGetProgramStageiv','glGetUniformSubroutineuiv','glUniformSubroutinesuiv']
+GL_ARB_shader_subroutine.functions = ['glGetActiveSubroutineName','glGetActiveSubroutineUniformName','glGetActiveSubroutineUniformiv','glGetProgramStageiv','glGetSubroutineIndex','glGetSubroutineUniformLocation','glGetUniformSubroutineuiv','glUniformSubroutinesuiv']
 gl.add(GL_ARB_shader_subroutine)
+
+GL_ARB_shader_texture_image_samples = Extension('GL_ARB_shader_texture_image_samples')
+GL_ARB_shader_texture_image_samples.url = 'http://www.opengl.org/registry/specs/ARB/shader_texture_image_samples.txt'
+gl.add(GL_ARB_shader_texture_image_samples)
 
 GL_ARB_shader_texture_lod = Extension('GL_ARB_shader_texture_lod')
 GL_ARB_shader_texture_lod.url = 'http://www.opengl.org/registry/specs/ARB/shader_texture_lod.txt'
@@ -45427,7 +45478,7 @@ gl.add(GL_ARB_shading_language_420pack)
 GL_ARB_shading_language_include = Extension('GL_ARB_shading_language_include')
 GL_ARB_shading_language_include.url = 'http://www.opengl.org/registry/specs/ARB/shading_language_include.txt'
 GL_ARB_shading_language_include.enumerants = ['GL_NAMED_STRING_LENGTH_ARB','GL_NAMED_STRING_TYPE_ARB','GL_SHADER_INCLUDE_ARB']
-GL_ARB_shading_language_include.functions = ['glIsNamedStringARB','glCompileShaderIncludeARB','glDeleteNamedStringARB','glGetNamedStringARB','glGetNamedStringivARB','glNamedStringARB']
+GL_ARB_shading_language_include.functions = ['glCompileShaderIncludeARB','glDeleteNamedStringARB','glGetNamedStringARB','glGetNamedStringivARB','glIsNamedStringARB','glNamedStringARB']
 gl.add(GL_ARB_shading_language_include)
 
 GL_ARB_shading_language_packing = Extension('GL_ARB_shading_language_packing')
@@ -45444,6 +45495,12 @@ GL_ARB_shadow_ambient.url = 'http://www.opengl.org/registry/specs/ARB/shadow_amb
 GL_ARB_shadow_ambient.enumerants = ['GL_TEXTURE_COMPARE_FAIL_VALUE_ARB']
 gl.add(GL_ARB_shadow_ambient)
 
+GL_ARB_sparse_buffer = Extension('GL_ARB_sparse_buffer')
+GL_ARB_sparse_buffer.url = 'http://www.opengl.org/registry/specs/ARB/sparse_buffer.txt'
+GL_ARB_sparse_buffer.enumerants = ['GL_SPARSE_BUFFER_PAGE_SIZE_ARB','GL_SPARSE_STORAGE_BIT_ARB']
+GL_ARB_sparse_buffer.functions = ['glBufferPageCommitmentARB']
+gl.add(GL_ARB_sparse_buffer)
+
 GL_ARB_sparse_texture = Extension('GL_ARB_sparse_texture')
 GL_ARB_sparse_texture.url = 'http://www.opengl.org/registry/specs/ARB/sparse_texture.txt'
 GL_ARB_sparse_texture.enumerants = ['GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB','GL_MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB','GL_MAX_SPARSE_TEXTURE_SIZE_ARB','GL_NUM_SPARSE_LEVELS_ARB','GL_NUM_VIRTUAL_PAGE_SIZES_ARB','GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB','GL_TEXTURE_SPARSE_ARB','GL_VIRTUAL_PAGE_SIZE_INDEX_ARB','GL_VIRTUAL_PAGE_SIZE_X_ARB','GL_VIRTUAL_PAGE_SIZE_Y_ARB','GL_VIRTUAL_PAGE_SIZE_Z_ARB']
@@ -45458,7 +45515,7 @@ gl.add(GL_ARB_stencil_texturing)
 GL_ARB_sync = Extension('GL_ARB_sync')
 GL_ARB_sync.url = 'http://www.opengl.org/registry/specs/ARB/sync.txt'
 GL_ARB_sync.enumerants = ['GL_ALREADY_SIGNALED','GL_CONDITION_SATISFIED','GL_MAX_SERVER_WAIT_TIMEOUT','GL_OBJECT_TYPE','GL_SIGNALED','GL_SYNC_CONDITION','GL_SYNC_FENCE','GL_SYNC_FLAGS','GL_SYNC_FLUSH_COMMANDS_BIT','GL_SYNC_GPU_COMMANDS_COMPLETE','GL_SYNC_STATUS','GL_TIMEOUT_EXPIRED','GL_TIMEOUT_IGNORED','GL_UNSIGNALED','GL_WAIT_FAILED']
-GL_ARB_sync.functions = ['glIsSync','glClientWaitSync','glFenceSync','glDeleteSync','glGetInteger64v','glGetSynciv','glWaitSync']
+GL_ARB_sync.functions = ['glClientWaitSync','glDeleteSync','glFenceSync','glGetInteger64v','glGetSynciv','glIsSync','glWaitSync']
 gl.add(GL_ARB_sync)
 
 GL_ARB_tessellation_shader = Extension('GL_ARB_tessellation_shader')
@@ -45466,6 +45523,11 @@ GL_ARB_tessellation_shader.url = 'http://www.opengl.org/registry/specs/ARB/tesse
 GL_ARB_tessellation_shader.enumerants = ['GL_FRACTIONAL_EVEN','GL_FRACTIONAL_ODD','GL_ISOLINES','GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS','GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS','GL_MAX_PATCH_VERTICES','GL_MAX_TESS_CONTROL_INPUT_COMPONENTS','GL_MAX_TESS_CONTROL_OUTPUT_COMPONENTS','GL_MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS','GL_MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS','GL_MAX_TESS_CONTROL_UNIFORM_BLOCKS','GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS','GL_MAX_TESS_EVALUATION_INPUT_COMPONENTS','GL_MAX_TESS_EVALUATION_OUTPUT_COMPONENTS','GL_MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS','GL_MAX_TESS_EVALUATION_UNIFORM_BLOCKS','GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS','GL_MAX_TESS_GEN_LEVEL','GL_MAX_TESS_PATCH_COMPONENTS','GL_PATCHES','GL_PATCH_DEFAULT_INNER_LEVEL','GL_PATCH_DEFAULT_OUTER_LEVEL','GL_PATCH_VERTICES','GL_TESS_CONTROL_OUTPUT_VERTICES','GL_TESS_CONTROL_SHADER','GL_TESS_EVALUATION_SHADER','GL_TESS_GEN_MODE','GL_TESS_GEN_POINT_MODE','GL_TESS_GEN_SPACING','GL_TESS_GEN_VERTEX_ORDER','GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER','GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER']
 GL_ARB_tessellation_shader.functions = ['glPatchParameterfv','glPatchParameteri']
 gl.add(GL_ARB_tessellation_shader)
+
+GL_ARB_texture_barrier = Extension('GL_ARB_texture_barrier')
+GL_ARB_texture_barrier.url = 'http://www.opengl.org/registry/specs/ARB/texture_barrier.txt'
+GL_ARB_texture_barrier.functions = ['glTextureBarrier']
+gl.add(GL_ARB_texture_barrier)
 
 GL_ARB_texture_border_clamp = Extension('GL_ARB_texture_border_clamp')
 GL_ARB_texture_border_clamp.url = 'http://www.opengl.org/registry/specs/ARB/texture_border_clamp.txt'
@@ -45545,7 +45607,6 @@ gl.add(GL_ARB_texture_gather)
 GL_ARB_texture_mirror_clamp_to_edge = Extension('GL_ARB_texture_mirror_clamp_to_edge')
 GL_ARB_texture_mirror_clamp_to_edge.url = 'http://www.opengl.org/registry/specs/ARB/texture_mirror_clamp_to_edge.txt'
 GL_ARB_texture_mirror_clamp_to_edge.enumerants = ['GL_MIRROR_CLAMP_TO_EDGE']
-GL_ARB_texture_mirror_clamp_to_edge.functions = ['']
 gl.add(GL_ARB_texture_mirror_clamp_to_edge)
 
 GL_ARB_texture_mirrored_repeat = Extension('GL_ARB_texture_mirrored_repeat')
@@ -45589,7 +45650,6 @@ gl.add(GL_ARB_texture_rgb10_a2ui)
 GL_ARB_texture_stencil8 = Extension('GL_ARB_texture_stencil8')
 GL_ARB_texture_stencil8.url = 'http://www.opengl.org/registry/specs/ARB/texture_stencil8.txt'
 GL_ARB_texture_stencil8.enumerants = ['GL_STENCIL_INDEX8']
-GL_ARB_texture_stencil8.functions = ['']
 gl.add(GL_ARB_texture_stencil8)
 
 GL_ARB_texture_storage = Extension('GL_ARB_texture_storage')
@@ -45623,7 +45683,7 @@ gl.add(GL_ARB_timer_query)
 GL_ARB_transform_feedback2 = Extension('GL_ARB_transform_feedback2')
 GL_ARB_transform_feedback2.url = 'http://www.opengl.org/registry/specs/ARB/transform_feedback2.txt'
 GL_ARB_transform_feedback2.enumerants = ['GL_TRANSFORM_FEEDBACK','GL_TRANSFORM_FEEDBACK_BINDING','GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE','GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED']
-GL_ARB_transform_feedback2.functions = ['glIsTransformFeedback','glBindTransformFeedback','glDeleteTransformFeedbacks','glDrawTransformFeedback','glGenTransformFeedbacks','glPauseTransformFeedback','glResumeTransformFeedback']
+GL_ARB_transform_feedback2.functions = ['glBindTransformFeedback','glDeleteTransformFeedbacks','glDrawTransformFeedback','glGenTransformFeedbacks','glIsTransformFeedback','glPauseTransformFeedback','glResumeTransformFeedback']
 gl.add(GL_ARB_transform_feedback2)
 
 GL_ARB_transform_feedback3 = Extension('GL_ARB_transform_feedback3')
@@ -45637,6 +45697,11 @@ GL_ARB_transform_feedback_instanced.url = 'http://www.opengl.org/registry/specs/
 GL_ARB_transform_feedback_instanced.functions = ['glDrawTransformFeedbackInstanced','glDrawTransformFeedbackStreamInstanced']
 gl.add(GL_ARB_transform_feedback_instanced)
 
+GL_ARB_transform_feedback_overflow_query = Extension('GL_ARB_transform_feedback_overflow_query')
+GL_ARB_transform_feedback_overflow_query.url = 'http://www.opengl.org/registry/specs/ARB/transform_feedback_overflow_query.txt'
+GL_ARB_transform_feedback_overflow_query.enumerants = ['GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB','GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB']
+gl.add(GL_ARB_transform_feedback_overflow_query)
+
 GL_ARB_transpose_matrix = Extension('GL_ARB_transpose_matrix')
 GL_ARB_transpose_matrix.url = 'http://www.opengl.org/registry/specs/ARB/transpose_matrix.txt'
 GL_ARB_transpose_matrix.enumerants = ['GL_TRANSPOSE_COLOR_MATRIX_ARB','GL_TRANSPOSE_MODELVIEW_MATRIX_ARB','GL_TRANSPOSE_PROJECTION_MATRIX_ARB','GL_TRANSPOSE_TEXTURE_MATRIX_ARB']
@@ -45646,7 +45711,7 @@ gl.add(GL_ARB_transpose_matrix)
 GL_ARB_uniform_buffer_object = Extension('GL_ARB_uniform_buffer_object')
 GL_ARB_uniform_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/uniform_buffer_object.txt'
 GL_ARB_uniform_buffer_object.enumerants = ['GL_ACTIVE_UNIFORM_BLOCKS','GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH','GL_INVALID_INDEX','GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS','GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS','GL_MAX_COMBINED_UNIFORM_BLOCKS','GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS','GL_MAX_FRAGMENT_UNIFORM_BLOCKS','GL_MAX_GEOMETRY_UNIFORM_BLOCKS','GL_MAX_UNIFORM_BLOCK_SIZE','GL_MAX_UNIFORM_BUFFER_BINDINGS','GL_MAX_VERTEX_UNIFORM_BLOCKS','GL_UNIFORM_ARRAY_STRIDE','GL_UNIFORM_BLOCK_ACTIVE_UNIFORMS','GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES','GL_UNIFORM_BLOCK_BINDING','GL_UNIFORM_BLOCK_DATA_SIZE','GL_UNIFORM_BLOCK_INDEX','GL_UNIFORM_BLOCK_NAME_LENGTH','GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER','GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER','GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER','GL_UNIFORM_BUFFER','GL_UNIFORM_BUFFER_BINDING','GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT','GL_UNIFORM_BUFFER_SIZE','GL_UNIFORM_BUFFER_START','GL_UNIFORM_IS_ROW_MAJOR','GL_UNIFORM_MATRIX_STRIDE','GL_UNIFORM_NAME_LENGTH','GL_UNIFORM_OFFSET','GL_UNIFORM_SIZE','GL_UNIFORM_TYPE']
-GL_ARB_uniform_buffer_object.functions = ['glGetUniformBlockIndex','glBindBufferBase','glBindBufferRange','glGetActiveUniformBlockName','glGetActiveUniformBlockiv','glGetActiveUniformName','glGetActiveUniformsiv','glGetIntegeri_v','glGetUniformIndices','glUniformBlockBinding']
+GL_ARB_uniform_buffer_object.functions = ['glBindBufferBase','glBindBufferRange','glGetActiveUniformBlockName','glGetActiveUniformBlockiv','glGetActiveUniformName','glGetActiveUniformsiv','glGetIntegeri_v','glGetUniformBlockIndex','glGetUniformIndices','glUniformBlockBinding']
 gl.add(GL_ARB_uniform_buffer_object)
 
 GL_ARB_vertex_array_bgra = Extension('GL_ARB_vertex_array_bgra')
@@ -45657,7 +45722,7 @@ gl.add(GL_ARB_vertex_array_bgra)
 GL_ARB_vertex_array_object = Extension('GL_ARB_vertex_array_object')
 GL_ARB_vertex_array_object.url = 'http://www.opengl.org/registry/specs/ARB/vertex_array_object.txt'
 GL_ARB_vertex_array_object.enumerants = ['GL_VERTEX_ARRAY_BINDING']
-GL_ARB_vertex_array_object.functions = ['glIsVertexArray','glBindVertexArray','glDeleteVertexArrays','glGenVertexArrays']
+GL_ARB_vertex_array_object.functions = ['glBindVertexArray','glDeleteVertexArrays','glGenVertexArrays','glIsVertexArray']
 gl.add(GL_ARB_vertex_array_object)
 
 GL_ARB_vertex_attrib_64bit = Extension('GL_ARB_vertex_attrib_64bit')
@@ -45672,7 +45737,7 @@ GL_ARB_vertex_attrib_binding.functions = ['glBindVertexBuffer','glVertexAttribBi
 gl.add(GL_ARB_vertex_attrib_binding)
 
 GL_ARB_vertex_blend = Extension('GL_ARB_vertex_blend')
-GL_ARB_vertex_blend.url = 'http://oss.sgi.com/projects/ogl-sample/registry/ARB/vertex_blend.txt'
+GL_ARB_vertex_blend.url = 'http://www.opengl.org/registry/specs/ARB/vertex_blend.txt'
 GL_ARB_vertex_blend.enumerants = ['GL_ACTIVE_VERTEX_UNITS_ARB','GL_CURRENT_WEIGHT_ARB','GL_MAX_VERTEX_UNITS_ARB','GL_MODELVIEW0_ARB','GL_MODELVIEW10_ARB','GL_MODELVIEW11_ARB','GL_MODELVIEW12_ARB','GL_MODELVIEW13_ARB','GL_MODELVIEW14_ARB','GL_MODELVIEW15_ARB','GL_MODELVIEW16_ARB','GL_MODELVIEW17_ARB','GL_MODELVIEW18_ARB','GL_MODELVIEW19_ARB','GL_MODELVIEW1_ARB','GL_MODELVIEW20_ARB','GL_MODELVIEW21_ARB','GL_MODELVIEW22_ARB','GL_MODELVIEW23_ARB','GL_MODELVIEW24_ARB','GL_MODELVIEW25_ARB','GL_MODELVIEW26_ARB','GL_MODELVIEW27_ARB','GL_MODELVIEW28_ARB','GL_MODELVIEW29_ARB','GL_MODELVIEW2_ARB','GL_MODELVIEW30_ARB','GL_MODELVIEW31_ARB','GL_MODELVIEW3_ARB','GL_MODELVIEW4_ARB','GL_MODELVIEW5_ARB','GL_MODELVIEW6_ARB','GL_MODELVIEW7_ARB','GL_MODELVIEW8_ARB','GL_MODELVIEW9_ARB','GL_VERTEX_BLEND_ARB','GL_WEIGHT_ARRAY_ARB','GL_WEIGHT_ARRAY_POINTER_ARB','GL_WEIGHT_ARRAY_SIZE_ARB','GL_WEIGHT_ARRAY_STRIDE_ARB','GL_WEIGHT_ARRAY_TYPE_ARB','GL_WEIGHT_SUM_UNITY_ARB']
 GL_ARB_vertex_blend.functions = ['glVertexBlendARB','glWeightPointerARB','glWeightbvARB','glWeightdvARB','glWeightfvARB','glWeightivARB','glWeightsvARB','glWeightubvARB','glWeightuivARB','glWeightusvARB']
 gl.add(GL_ARB_vertex_blend)
@@ -45680,25 +45745,23 @@ gl.add(GL_ARB_vertex_blend)
 GL_ARB_vertex_buffer_object = Extension('GL_ARB_vertex_buffer_object')
 GL_ARB_vertex_buffer_object.url = 'http://www.opengl.org/registry/specs/ARB/vertex_buffer_object.txt'
 GL_ARB_vertex_buffer_object.enumerants = ['GL_ARRAY_BUFFER_ARB','GL_ARRAY_BUFFER_BINDING_ARB','GL_BUFFER_ACCESS_ARB','GL_BUFFER_MAPPED_ARB','GL_BUFFER_MAP_POINTER_ARB','GL_BUFFER_SIZE_ARB','GL_BUFFER_USAGE_ARB','GL_COLOR_ARRAY_BUFFER_BINDING_ARB','GL_DYNAMIC_COPY_ARB','GL_DYNAMIC_DRAW_ARB','GL_DYNAMIC_READ_ARB','GL_EDGE_FLAG_ARRAY_BUFFER_BINDING_ARB','GL_ELEMENT_ARRAY_BUFFER_ARB','GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB','GL_FOG_COORDINATE_ARRAY_BUFFER_BINDING_ARB','GL_INDEX_ARRAY_BUFFER_BINDING_ARB','GL_NORMAL_ARRAY_BUFFER_BINDING_ARB','GL_READ_ONLY_ARB','GL_READ_WRITE_ARB','GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB','GL_STATIC_COPY_ARB','GL_STATIC_DRAW_ARB','GL_STATIC_READ_ARB','GL_STREAM_COPY_ARB','GL_STREAM_DRAW_ARB','GL_STREAM_READ_ARB','GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB','GL_VERTEX_ARRAY_BUFFER_BINDING_ARB','GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB','GL_WEIGHT_ARRAY_BUFFER_BINDING_ARB','GL_WRITE_ONLY_ARB']
-GL_ARB_vertex_buffer_object.functions = ['glIsBufferARB','glUnmapBufferARB','*','glBindBufferARB','glBufferDataARB','glBufferSubDataARB','glDeleteBuffersARB','glGenBuffersARB','glGetBufferParameterivARB','glGetBufferPointervARB','glGetBufferSubDataARB']
+GL_ARB_vertex_buffer_object.functions = ['*','glBindBufferARB','glBufferDataARB','glBufferSubDataARB','glDeleteBuffersARB','glGenBuffersARB','glGetBufferParameterivARB','glGetBufferPointervARB','glGetBufferSubDataARB','glIsBufferARB','glUnmapBufferARB']
 gl.add(GL_ARB_vertex_buffer_object)
 
 GL_ARB_vertex_program = Extension('GL_ARB_vertex_program')
 GL_ARB_vertex_program.url = 'http://www.opengl.org/registry/specs/ARB/vertex_program.txt'
 GL_ARB_vertex_program.enumerants = ['GL_COLOR_SUM_ARB','GL_CURRENT_MATRIX_ARB','GL_CURRENT_MATRIX_STACK_DEPTH_ARB','GL_CURRENT_VERTEX_ATTRIB_ARB','GL_MATRIX0_ARB','GL_MATRIX10_ARB','GL_MATRIX11_ARB','GL_MATRIX12_ARB','GL_MATRIX13_ARB','GL_MATRIX14_ARB','GL_MATRIX15_ARB','GL_MATRIX16_ARB','GL_MATRIX17_ARB','GL_MATRIX18_ARB','GL_MATRIX19_ARB','GL_MATRIX1_ARB','GL_MATRIX20_ARB','GL_MATRIX21_ARB','GL_MATRIX22_ARB','GL_MATRIX23_ARB','GL_MATRIX24_ARB','GL_MATRIX25_ARB','GL_MATRIX26_ARB','GL_MATRIX27_ARB','GL_MATRIX28_ARB','GL_MATRIX29_ARB','GL_MATRIX2_ARB','GL_MATRIX30_ARB','GL_MATRIX31_ARB','GL_MATRIX3_ARB','GL_MATRIX4_ARB','GL_MATRIX5_ARB','GL_MATRIX6_ARB','GL_MATRIX7_ARB','GL_MATRIX8_ARB','GL_MATRIX9_ARB','GL_MAX_PROGRAM_ADDRESS_REGISTERS_ARB','GL_MAX_PROGRAM_ATTRIBS_ARB','GL_MAX_PROGRAM_ENV_PARAMETERS_ARB','GL_MAX_PROGRAM_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_LOCAL_PARAMETERS_ARB','GL_MAX_PROGRAM_MATRICES_ARB','GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB','GL_MAX_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB','GL_MAX_PROGRAM_NATIVE_ATTRIBS_ARB','GL_MAX_PROGRAM_NATIVE_INSTRUCTIONS_ARB','GL_MAX_PROGRAM_NATIVE_PARAMETERS_ARB','GL_MAX_PROGRAM_NATIVE_TEMPORARIES_ARB','GL_MAX_PROGRAM_PARAMETERS_ARB','GL_MAX_PROGRAM_TEMPORARIES_ARB','GL_MAX_VERTEX_ATTRIBS_ARB','GL_PROGRAM_ADDRESS_REGISTERS_ARB','GL_PROGRAM_ATTRIBS_ARB','GL_PROGRAM_BINDING_ARB','GL_PROGRAM_ERROR_POSITION_ARB','GL_PROGRAM_ERROR_STRING_ARB','GL_PROGRAM_FORMAT_ARB','GL_PROGRAM_FORMAT_ASCII_ARB','GL_PROGRAM_INSTRUCTIONS_ARB','GL_PROGRAM_LENGTH_ARB','GL_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB','GL_PROGRAM_NATIVE_ATTRIBS_ARB','GL_PROGRAM_NATIVE_INSTRUCTIONS_ARB','GL_PROGRAM_NATIVE_PARAMETERS_ARB','GL_PROGRAM_NATIVE_TEMPORARIES_ARB','GL_PROGRAM_PARAMETERS_ARB','GL_PROGRAM_STRING_ARB','GL_PROGRAM_TEMPORARIES_ARB','GL_PROGRAM_UNDER_NATIVE_LIMITS_ARB','GL_TRANSPOSE_CURRENT_MATRIX_ARB','GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB','GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB','GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB','GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB','GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB','GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB','GL_VERTEX_PROGRAM_ARB','GL_VERTEX_PROGRAM_POINT_SIZE_ARB','GL_VERTEX_PROGRAM_TWO_SIDE_ARB']
-GL_ARB_vertex_program.functions = ['glIsProgramARB','glBindProgramARB','glDeleteProgramsARB','glDisableVertexAttribArrayARB','glEnableVertexAttribArrayARB','glGenProgramsARB','glGetProgramEnvParameterdvARB','glGetProgramEnvParameterfvARB','glGetProgramLocalParameterdvARB','glGetProgramLocalParameterfvARB','glGetProgramStringARB','glGetProgramivARB','glGetVertexAttribPointervARB','glGetVertexAttribdvARB','glGetVertexAttribfvARB','glGetVertexAttribivARB','glProgramEnvParameter4dARB','glProgramEnvParameter4dvARB','glProgramEnvParameter4fARB','glProgramEnvParameter4fvARB','glProgramLocalParameter4dARB','glProgramLocalParameter4dvARB','glProgramLocalParameter4fARB','glProgramLocalParameter4fvARB','glProgramStringARB','glVertexAttrib1dARB','glVertexAttrib1dvARB','glVertexAttrib1fARB','glVertexAttrib1fvARB','glVertexAttrib1sARB','glVertexAttrib1svARB','glVertexAttrib2dARB','glVertexAttrib2dvARB','glVertexAttrib2fARB','glVertexAttrib2fvARB','glVertexAttrib2sARB','glVertexAttrib2svARB','glVertexAttrib3dARB','glVertexAttrib3dvARB','glVertexAttrib3fARB','glVertexAttrib3fvARB','glVertexAttrib3sARB','glVertexAttrib3svARB','glVertexAttrib4NbvARB','glVertexAttrib4NivARB','glVertexAttrib4NsvARB','glVertexAttrib4NubARB','glVertexAttrib4NubvARB','glVertexAttrib4NuivARB','glVertexAttrib4NusvARB','glVertexAttrib4bvARB','glVertexAttrib4dARB','glVertexAttrib4dvARB','glVertexAttrib4fARB','glVertexAttrib4fvARB','glVertexAttrib4ivARB','glVertexAttrib4sARB','glVertexAttrib4svARB','glVertexAttrib4ubvARB','glVertexAttrib4uivARB','glVertexAttrib4usvARB','glVertexAttribPointerARB']
+GL_ARB_vertex_program.functions = ['glBindProgramARB','glDeleteProgramsARB','glDisableVertexAttribArrayARB','glEnableVertexAttribArrayARB','glGenProgramsARB','glGetProgramEnvParameterdvARB','glGetProgramEnvParameterfvARB','glGetProgramLocalParameterdvARB','glGetProgramLocalParameterfvARB','glGetProgramStringARB','glGetProgramivARB','glGetVertexAttribPointervARB','glGetVertexAttribdvARB','glGetVertexAttribfvARB','glGetVertexAttribivARB','glIsProgramARB','glProgramEnvParameter4dARB','glProgramEnvParameter4dvARB','glProgramEnvParameter4fARB','glProgramEnvParameter4fvARB','glProgramLocalParameter4dARB','glProgramLocalParameter4dvARB','glProgramLocalParameter4fARB','glProgramLocalParameter4fvARB','glProgramStringARB','glVertexAttrib1dARB','glVertexAttrib1dvARB','glVertexAttrib1fARB','glVertexAttrib1fvARB','glVertexAttrib1sARB','glVertexAttrib1svARB','glVertexAttrib2dARB','glVertexAttrib2dvARB','glVertexAttrib2fARB','glVertexAttrib2fvARB','glVertexAttrib2sARB','glVertexAttrib2svARB','glVertexAttrib3dARB','glVertexAttrib3dvARB','glVertexAttrib3fARB','glVertexAttrib3fvARB','glVertexAttrib3sARB','glVertexAttrib3svARB','glVertexAttrib4NbvARB','glVertexAttrib4NivARB','glVertexAttrib4NsvARB','glVertexAttrib4NubARB','glVertexAttrib4NubvARB','glVertexAttrib4NuivARB','glVertexAttrib4NusvARB','glVertexAttrib4bvARB','glVertexAttrib4dARB','glVertexAttrib4dvARB','glVertexAttrib4fARB','glVertexAttrib4fvARB','glVertexAttrib4ivARB','glVertexAttrib4sARB','glVertexAttrib4svARB','glVertexAttrib4ubvARB','glVertexAttrib4uivARB','glVertexAttrib4usvARB','glVertexAttribPointerARB']
 gl.add(GL_ARB_vertex_program)
 
 GL_ARB_vertex_shader = Extension('GL_ARB_vertex_shader')
 GL_ARB_vertex_shader.url = 'http://www.opengl.org/registry/specs/ARB/vertex_shader.txt'
 GL_ARB_vertex_shader.enumerants = ['GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB','GL_MAX_VARYING_FLOATS_ARB','GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS_ARB','GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB','GL_OBJECT_ACTIVE_ATTRIBUTES_ARB','GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB','GL_VERTEX_SHADER_ARB']
-GL_ARB_vertex_shader.functions = ['glGetAttribLocationARB','glBindAttribLocationARB','glGetActiveAttribARB']
+GL_ARB_vertex_shader.functions = ['glBindAttribLocationARB','glGetActiveAttribARB','glGetAttribLocationARB']
 gl.add(GL_ARB_vertex_shader)
 
 GL_ARB_vertex_type_10f_11f_11f_rev = Extension('GL_ARB_vertex_type_10f_11f_11f_rev')
 GL_ARB_vertex_type_10f_11f_11f_rev.url = 'http://www.opengl.org/registry/specs/ARB/vertex_type_10f_11f_11f_rev.txt'
-GL_ARB_vertex_type_10f_11f_11f_rev.enumerants = ['']
-GL_ARB_vertex_type_10f_11f_11f_rev.functions = ['']
 gl.add(GL_ARB_vertex_type_10f_11f_11f_rev)
 
 GL_ARB_vertex_type_2_10_10_10_rev = Extension('GL_ARB_vertex_type_2_10_10_10_rev')
@@ -45751,7 +45814,7 @@ GL_ATI_element_array.functions = ['glDrawElementArrayATI','glDrawRangeElementArr
 gl.add(GL_ATI_element_array)
 
 GL_ATI_envmap_bumpmap = Extension('GL_ATI_envmap_bumpmap')
-GL_ATI_envmap_bumpmap.url = 'http://oss.sgi.com/projects/ogl-sample/registry/ATI/envmap_bumpmap.txt'
+GL_ATI_envmap_bumpmap.url = 'https://www.opengl.org/registry/specs/ATI/envmap_bumpmap.txt'
 GL_ATI_envmap_bumpmap.enumerants = ['GL_BUMP_ENVMAP_ATI','GL_BUMP_NUM_TEX_UNITS_ATI','GL_BUMP_ROT_MATRIX_ATI','GL_BUMP_ROT_MATRIX_SIZE_ATI','GL_BUMP_TARGET_ATI','GL_BUMP_TEX_UNITS_ATI','GL_DU8DV8_ATI','GL_DUDV_ATI']
 GL_ATI_envmap_bumpmap.functions = ['glGetTexBumpParameterfvATI','glGetTexBumpParameterivATI','glTexBumpParameterfvATI','glTexBumpParameterivATI']
 gl.add(GL_ATI_envmap_bumpmap)
@@ -45759,7 +45822,7 @@ gl.add(GL_ATI_envmap_bumpmap)
 GL_ATI_fragment_shader = Extension('GL_ATI_fragment_shader')
 GL_ATI_fragment_shader.url = 'http://www.opengl.org/registry/specs/ATI/fragment_shader.txt'
 GL_ATI_fragment_shader.enumerants = ['GL_2X_BIT_ATI','GL_4X_BIT_ATI','GL_8X_BIT_ATI','GL_ADD_ATI','GL_BIAS_BIT_ATI','GL_BLUE_BIT_ATI','GL_CND0_ATI','GL_CND_ATI','GL_COLOR_ALPHA_PAIRING_ATI','GL_COMP_BIT_ATI','GL_CON_0_ATI','GL_CON_1_ATI','GL_CON_2_ATI','GL_CON_3_ATI','GL_CON_4_ATI','GL_CON_5_ATI','GL_CON_6_ATI','GL_CON_7_ATI','GL_DOT2_ADD_ATI','GL_DOT3_ATI','GL_DOT4_ATI','GL_EIGHTH_BIT_ATI','GL_FRAGMENT_SHADER_ATI','GL_GREEN_BIT_ATI','GL_HALF_BIT_ATI','GL_LERP_ATI','GL_MAD_ATI','GL_MOV_ATI','GL_MUL_ATI','GL_NEGATE_BIT_ATI','GL_NUM_FRAGMENT_CONSTANTS_ATI','GL_NUM_FRAGMENT_REGISTERS_ATI','GL_NUM_INPUT_INTERPOLATOR_COMPONENTS_ATI','GL_NUM_INSTRUCTIONS_PER_PASS_ATI','GL_NUM_INSTRUCTIONS_TOTAL_ATI','GL_NUM_LOOPBACK_COMPONENTS_ATI','GL_NUM_PASSES_ATI','GL_QUARTER_BIT_ATI','GL_RED_BIT_ATI','GL_REG_0_ATI','GL_REG_1_ATI','GL_REG_2_ATI','GL_REG_3_ATI','GL_REG_4_ATI','GL_REG_5_ATI','GL_SATURATE_BIT_ATI','GL_SECONDARY_INTERPOLATOR_ATI','GL_SUB_ATI','GL_SWIZZLE_STQ_ATI','GL_SWIZZLE_STQ_DQ_ATI','GL_SWIZZLE_STRQ_ATI','GL_SWIZZLE_STRQ_DQ_ATI','GL_SWIZZLE_STR_ATI','GL_SWIZZLE_STR_DR_ATI']
-GL_ATI_fragment_shader.functions = ['glGenFragmentShadersATI','glAlphaFragmentOp1ATI','glAlphaFragmentOp2ATI','glAlphaFragmentOp3ATI','glBeginFragmentShaderATI','glBindFragmentShaderATI','glColorFragmentOp1ATI','glColorFragmentOp2ATI','glColorFragmentOp3ATI','glDeleteFragmentShaderATI','glEndFragmentShaderATI','glPassTexCoordATI','glSampleMapATI','glSetFragmentShaderConstantATI']
+GL_ATI_fragment_shader.functions = ['glAlphaFragmentOp1ATI','glAlphaFragmentOp2ATI','glAlphaFragmentOp3ATI','glBeginFragmentShaderATI','glBindFragmentShaderATI','glColorFragmentOp1ATI','glColorFragmentOp2ATI','glColorFragmentOp3ATI','glDeleteFragmentShaderATI','glEndFragmentShaderATI','glGenFragmentShadersATI','glPassTexCoordATI','glSampleMapATI','glSetFragmentShaderConstantATI']
 gl.add(GL_ATI_fragment_shader)
 
 GL_ATI_map_object_buffer = Extension('GL_ATI_map_object_buffer')
@@ -45814,7 +45877,7 @@ gl.add(GL_ATI_texture_mirror_once)
 GL_ATI_vertex_array_object = Extension('GL_ATI_vertex_array_object')
 GL_ATI_vertex_array_object.url = 'http://www.opengl.org/registry/specs/ATI/vertex_array_object.txt'
 GL_ATI_vertex_array_object.enumerants = ['GL_ARRAY_OBJECT_BUFFER_ATI','GL_ARRAY_OBJECT_OFFSET_ATI','GL_DISCARD_ATI','GL_DYNAMIC_ATI','GL_OBJECT_BUFFER_SIZE_ATI','GL_OBJECT_BUFFER_USAGE_ATI','GL_PRESERVE_ATI','GL_STATIC_ATI']
-GL_ATI_vertex_array_object.functions = ['glIsObjectBufferATI','glNewObjectBufferATI','glArrayObjectATI','glFreeObjectBufferATI','glGetArrayObjectfvATI','glGetArrayObjectivATI','glGetObjectBufferfvATI','glGetObjectBufferivATI','glGetVariantArrayObjectfvATI','glGetVariantArrayObjectivATI','glUpdateObjectBufferATI','glVariantArrayObjectATI']
+GL_ATI_vertex_array_object.functions = ['glArrayObjectATI','glFreeObjectBufferATI','glGetArrayObjectfvATI','glGetArrayObjectivATI','glGetObjectBufferfvATI','glGetObjectBufferivATI','glGetVariantArrayObjectfvATI','glGetVariantArrayObjectivATI','glIsObjectBufferATI','glNewObjectBufferATI','glUpdateObjectBufferATI','glVariantArrayObjectATI']
 gl.add(GL_ATI_vertex_array_object)
 
 GL_ATI_vertex_attrib_array_object = Extension('GL_ATI_vertex_attrib_array_object')
@@ -45945,12 +46008,12 @@ gl.add(GL_EXT_depth_bounds_test)
 GL_EXT_direct_state_access = Extension('GL_EXT_direct_state_access')
 GL_EXT_direct_state_access.url = 'http://www.opengl.org/registry/specs/EXT/direct_state_access.txt'
 GL_EXT_direct_state_access.enumerants = ['GL_PROGRAM_MATRIX_EXT','GL_PROGRAM_MATRIX_STACK_DEPTH_EXT','GL_TRANSPOSE_PROGRAM_MATRIX_EXT']
-GL_EXT_direct_state_access.functions = ['glUnmapNamedBufferEXT','glCheckNamedFramebufferStatusEXT','*','*','glBindMultiTextureEXT','glClientAttribDefaultEXT','glCompressedMultiTexImage1DEXT','glCompressedMultiTexImage2DEXT','glCompressedMultiTexImage3DEXT','glCompressedMultiTexSubImage1DEXT','glCompressedMultiTexSubImage2DEXT','glCompressedMultiTexSubImage3DEXT','glCompressedTextureImage1DEXT','glCompressedTextureImage2DEXT','glCompressedTextureImage3DEXT','glCompressedTextureSubImage1DEXT','glCompressedTextureSubImage2DEXT','glCompressedTextureSubImage3DEXT','glCopyMultiTexImage1DEXT','glCopyMultiTexImage2DEXT','glCopyMultiTexSubImage1DEXT','glCopyMultiTexSubImage2DEXT','glCopyMultiTexSubImage3DEXT','glCopyTextureImage1DEXT','glCopyTextureImage2DEXT','glCopyTextureSubImage1DEXT','glCopyTextureSubImage2DEXT','glCopyTextureSubImage3DEXT','glDisableClientStateIndexedEXT','glDisableClientStateiEXT','glDisableVertexArrayAttribEXT','glDisableVertexArrayEXT','glEnableClientStateIndexedEXT','glEnableClientStateiEXT','glEnableVertexArrayAttribEXT','glEnableVertexArrayEXT','glFlushMappedNamedBufferRangeEXT','glFramebufferDrawBufferEXT','glFramebufferDrawBuffersEXT','glFramebufferReadBufferEXT','glGenerateMultiTexMipmapEXT','glGenerateTextureMipmapEXT','glGetCompressedMultiTexImageEXT','glGetCompressedTextureImageEXT','glGetDoubleIndexedvEXT','glGetDoublei_vEXT','glGetFloatIndexedvEXT','glGetFloati_vEXT','glGetFramebufferParameterivEXT','glGetMultiTexEnvfvEXT','glGetMultiTexEnvivEXT','glGetMultiTexGendvEXT','glGetMultiTexGenfvEXT','glGetMultiTexGenivEXT','glGetMultiTexImageEXT','glGetMultiTexLevelParameterfvEXT','glGetMultiTexLevelParameterivEXT','glGetMultiTexParameterIivEXT','glGetMultiTexParameterIuivEXT','glGetMultiTexParameterfvEXT','glGetMultiTexParameterivEXT','glGetNamedBufferParameterivEXT','glGetNamedBufferPointervEXT','glGetNamedBufferSubDataEXT','glGetNamedFramebufferAttachmentParameterivEXT','glGetNamedProgramLocalParameterIivEXT','glGetNamedProgramLocalParameterIuivEXT','glGetNamedProgramLocalParameterdvEXT','glGetNamedProgramLocalParameterfvEXT','glGetNamedProgramStringEXT','glGetNamedProgramivEXT','glGetNamedRenderbufferParameterivEXT','glGetPointerIndexedvEXT','glGetPointeri_vEXT','glGetTextureImageEXT','glGetTextureLevelParameterfvEXT','glGetTextureLevelParameterivEXT','glGetTextureParameterIivEXT','glGetTextureParameterIuivEXT','glGetTextureParameterfvEXT','glGetTextureParameterivEXT','glGetVertexArrayIntegeri_vEXT','glGetVertexArrayIntegervEXT','glGetVertexArrayPointeri_vEXT','glGetVertexArrayPointervEXT','glMatrixFrustumEXT','glMatrixLoadIdentityEXT','glMatrixLoadTransposedEXT','glMatrixLoadTransposefEXT','glMatrixLoaddEXT','glMatrixLoadfEXT','glMatrixMultTransposedEXT','glMatrixMultTransposefEXT','glMatrixMultdEXT','glMatrixMultfEXT','glMatrixOrthoEXT','glMatrixPopEXT','glMatrixPushEXT','glMatrixRotatedEXT','glMatrixRotatefEXT','glMatrixScaledEXT','glMatrixScalefEXT','glMatrixTranslatedEXT','glMatrixTranslatefEXT','glMultiTexBufferEXT','glMultiTexCoordPointerEXT','glMultiTexEnvfEXT','glMultiTexEnvfvEXT','glMultiTexEnviEXT','glMultiTexEnvivEXT','glMultiTexGendEXT','glMultiTexGendvEXT','glMultiTexGenfEXT','glMultiTexGenfvEXT','glMultiTexGeniEXT','glMultiTexGenivEXT','glMultiTexImage1DEXT','glMultiTexImage2DEXT','glMultiTexImage3DEXT','glMultiTexParameterIivEXT','glMultiTexParameterIuivEXT','glMultiTexParameterfEXT','glMultiTexParameterfvEXT','glMultiTexParameteriEXT','glMultiTexParameterivEXT','glMultiTexRenderbufferEXT','glMultiTexSubImage1DEXT','glMultiTexSubImage2DEXT','glMultiTexSubImage3DEXT','glNamedBufferDataEXT','glNamedBufferSubDataEXT','glNamedCopyBufferSubDataEXT','glNamedFramebufferRenderbufferEXT','glNamedFramebufferTexture1DEXT','glNamedFramebufferTexture2DEXT','glNamedFramebufferTexture3DEXT','glNamedFramebufferTextureEXT','glNamedFramebufferTextureFaceEXT','glNamedFramebufferTextureLayerEXT','glNamedProgramLocalParameter4dEXT','glNamedProgramLocalParameter4dvEXT','glNamedProgramLocalParameter4fEXT','glNamedProgramLocalParameter4fvEXT','glNamedProgramLocalParameterI4iEXT','glNamedProgramLocalParameterI4ivEXT','glNamedProgramLocalParameterI4uiEXT','glNamedProgramLocalParameterI4uivEXT','glNamedProgramLocalParameters4fvEXT','glNamedProgramLocalParametersI4ivEXT','glNamedProgramLocalParametersI4uivEXT','glNamedProgramStringEXT','glNamedRenderbufferStorageEXT','glNamedRenderbufferStorageMultisampleCoverageEXT','glNamedRenderbufferStorageMultisampleEXT','glProgramUniform1dEXT','glProgramUniform1dvEXT','glProgramUniform1fEXT','glProgramUniform1fvEXT','glProgramUniform1iEXT','glProgramUniform1ivEXT','glProgramUniform1uiEXT','glProgramUniform1uivEXT','glProgramUniform2dEXT','glProgramUniform2dvEXT','glProgramUniform2fEXT','glProgramUniform2fvEXT','glProgramUniform2iEXT','glProgramUniform2ivEXT','glProgramUniform2uiEXT','glProgramUniform2uivEXT','glProgramUniform3dEXT','glProgramUniform3dvEXT','glProgramUniform3fEXT','glProgramUniform3fvEXT','glProgramUniform3iEXT','glProgramUniform3ivEXT','glProgramUniform3uiEXT','glProgramUniform3uivEXT','glProgramUniform4dEXT','glProgramUniform4dvEXT','glProgramUniform4fEXT','glProgramUniform4fvEXT','glProgramUniform4iEXT','glProgramUniform4ivEXT','glProgramUniform4uiEXT','glProgramUniform4uivEXT','glProgramUniformMatrix2dvEXT','glProgramUniformMatrix2fvEXT','glProgramUniformMatrix2x3dvEXT','glProgramUniformMatrix2x3fvEXT','glProgramUniformMatrix2x4dvEXT','glProgramUniformMatrix2x4fvEXT','glProgramUniformMatrix3dvEXT','glProgramUniformMatrix3fvEXT','glProgramUniformMatrix3x2dvEXT','glProgramUniformMatrix3x2fvEXT','glProgramUniformMatrix3x4dvEXT','glProgramUniformMatrix3x4fvEXT','glProgramUniformMatrix4dvEXT','glProgramUniformMatrix4fvEXT','glProgramUniformMatrix4x2dvEXT','glProgramUniformMatrix4x2fvEXT','glProgramUniformMatrix4x3dvEXT','glProgramUniformMatrix4x3fvEXT','glPushClientAttribDefaultEXT','glTextureBufferEXT','glTextureImage1DEXT','glTextureImage2DEXT','glTextureImage3DEXT','glTextureParameterIivEXT','glTextureParameterIuivEXT','glTextureParameterfEXT','glTextureParameterfvEXT','glTextureParameteriEXT','glTextureParameterivEXT','glTextureRenderbufferEXT','glTextureSubImage1DEXT','glTextureSubImage2DEXT','glTextureSubImage3DEXT','glVertexArrayColorOffsetEXT','glVertexArrayEdgeFlagOffsetEXT','glVertexArrayFogCoordOffsetEXT','glVertexArrayIndexOffsetEXT','glVertexArrayMultiTexCoordOffsetEXT','glVertexArrayNormalOffsetEXT','glVertexArraySecondaryColorOffsetEXT','glVertexArrayTexCoordOffsetEXT','glVertexArrayVertexAttribIOffsetEXT','glVertexArrayVertexAttribOffsetEXT','glVertexArrayVertexOffsetEXT']
+GL_EXT_direct_state_access.functions = ['*','*','glBindMultiTextureEXT','glCheckNamedFramebufferStatusEXT','glClientAttribDefaultEXT','glCompressedMultiTexImage1DEXT','glCompressedMultiTexImage2DEXT','glCompressedMultiTexImage3DEXT','glCompressedMultiTexSubImage1DEXT','glCompressedMultiTexSubImage2DEXT','glCompressedMultiTexSubImage3DEXT','glCompressedTextureImage1DEXT','glCompressedTextureImage2DEXT','glCompressedTextureImage3DEXT','glCompressedTextureSubImage1DEXT','glCompressedTextureSubImage2DEXT','glCompressedTextureSubImage3DEXT','glCopyMultiTexImage1DEXT','glCopyMultiTexImage2DEXT','glCopyMultiTexSubImage1DEXT','glCopyMultiTexSubImage2DEXT','glCopyMultiTexSubImage3DEXT','glCopyTextureImage1DEXT','glCopyTextureImage2DEXT','glCopyTextureSubImage1DEXT','glCopyTextureSubImage2DEXT','glCopyTextureSubImage3DEXT','glDisableClientStateIndexedEXT','glDisableClientStateiEXT','glDisableVertexArrayAttribEXT','glDisableVertexArrayEXT','glEnableClientStateIndexedEXT','glEnableClientStateiEXT','glEnableVertexArrayAttribEXT','glEnableVertexArrayEXT','glFlushMappedNamedBufferRangeEXT','glFramebufferDrawBufferEXT','glFramebufferDrawBuffersEXT','glFramebufferReadBufferEXT','glGenerateMultiTexMipmapEXT','glGenerateTextureMipmapEXT','glGetCompressedMultiTexImageEXT','glGetCompressedTextureImageEXT','glGetDoubleIndexedvEXT','glGetDoublei_vEXT','glGetFloatIndexedvEXT','glGetFloati_vEXT','glGetFramebufferParameterivEXT','glGetMultiTexEnvfvEXT','glGetMultiTexEnvivEXT','glGetMultiTexGendvEXT','glGetMultiTexGenfvEXT','glGetMultiTexGenivEXT','glGetMultiTexImageEXT','glGetMultiTexLevelParameterfvEXT','glGetMultiTexLevelParameterivEXT','glGetMultiTexParameterIivEXT','glGetMultiTexParameterIuivEXT','glGetMultiTexParameterfvEXT','glGetMultiTexParameterivEXT','glGetNamedBufferParameterivEXT','glGetNamedBufferPointervEXT','glGetNamedBufferSubDataEXT','glGetNamedFramebufferAttachmentParameterivEXT','glGetNamedProgramLocalParameterIivEXT','glGetNamedProgramLocalParameterIuivEXT','glGetNamedProgramLocalParameterdvEXT','glGetNamedProgramLocalParameterfvEXT','glGetNamedProgramStringEXT','glGetNamedProgramivEXT','glGetNamedRenderbufferParameterivEXT','glGetPointerIndexedvEXT','glGetPointeri_vEXT','glGetTextureImageEXT','glGetTextureLevelParameterfvEXT','glGetTextureLevelParameterivEXT','glGetTextureParameterIivEXT','glGetTextureParameterIuivEXT','glGetTextureParameterfvEXT','glGetTextureParameterivEXT','glGetVertexArrayIntegeri_vEXT','glGetVertexArrayIntegervEXT','glGetVertexArrayPointeri_vEXT','glGetVertexArrayPointervEXT','glMatrixFrustumEXT','glMatrixLoadIdentityEXT','glMatrixLoadTransposedEXT','glMatrixLoadTransposefEXT','glMatrixLoaddEXT','glMatrixLoadfEXT','glMatrixMultTransposedEXT','glMatrixMultTransposefEXT','glMatrixMultdEXT','glMatrixMultfEXT','glMatrixOrthoEXT','glMatrixPopEXT','glMatrixPushEXT','glMatrixRotatedEXT','glMatrixRotatefEXT','glMatrixScaledEXT','glMatrixScalefEXT','glMatrixTranslatedEXT','glMatrixTranslatefEXT','glMultiTexBufferEXT','glMultiTexCoordPointerEXT','glMultiTexEnvfEXT','glMultiTexEnvfvEXT','glMultiTexEnviEXT','glMultiTexEnvivEXT','glMultiTexGendEXT','glMultiTexGendvEXT','glMultiTexGenfEXT','glMultiTexGenfvEXT','glMultiTexGeniEXT','glMultiTexGenivEXT','glMultiTexImage1DEXT','glMultiTexImage2DEXT','glMultiTexImage3DEXT','glMultiTexParameterIivEXT','glMultiTexParameterIuivEXT','glMultiTexParameterfEXT','glMultiTexParameterfvEXT','glMultiTexParameteriEXT','glMultiTexParameterivEXT','glMultiTexRenderbufferEXT','glMultiTexSubImage1DEXT','glMultiTexSubImage2DEXT','glMultiTexSubImage3DEXT','glNamedBufferDataEXT','glNamedBufferSubDataEXT','glNamedCopyBufferSubDataEXT','glNamedFramebufferRenderbufferEXT','glNamedFramebufferTexture1DEXT','glNamedFramebufferTexture2DEXT','glNamedFramebufferTexture3DEXT','glNamedFramebufferTextureEXT','glNamedFramebufferTextureFaceEXT','glNamedFramebufferTextureLayerEXT','glNamedProgramLocalParameter4dEXT','glNamedProgramLocalParameter4dvEXT','glNamedProgramLocalParameter4fEXT','glNamedProgramLocalParameter4fvEXT','glNamedProgramLocalParameterI4iEXT','glNamedProgramLocalParameterI4ivEXT','glNamedProgramLocalParameterI4uiEXT','glNamedProgramLocalParameterI4uivEXT','glNamedProgramLocalParameters4fvEXT','glNamedProgramLocalParametersI4ivEXT','glNamedProgramLocalParametersI4uivEXT','glNamedProgramStringEXT','glNamedRenderbufferStorageEXT','glNamedRenderbufferStorageMultisampleCoverageEXT','glNamedRenderbufferStorageMultisampleEXT','glProgramUniform1dEXT','glProgramUniform1dvEXT','glProgramUniform1fEXT','glProgramUniform1fvEXT','glProgramUniform1iEXT','glProgramUniform1ivEXT','glProgramUniform1uiEXT','glProgramUniform1uivEXT','glProgramUniform2dEXT','glProgramUniform2dvEXT','glProgramUniform2fEXT','glProgramUniform2fvEXT','glProgramUniform2iEXT','glProgramUniform2ivEXT','glProgramUniform2uiEXT','glProgramUniform2uivEXT','glProgramUniform3dEXT','glProgramUniform3dvEXT','glProgramUniform3fEXT','glProgramUniform3fvEXT','glProgramUniform3iEXT','glProgramUniform3ivEXT','glProgramUniform3uiEXT','glProgramUniform3uivEXT','glProgramUniform4dEXT','glProgramUniform4dvEXT','glProgramUniform4fEXT','glProgramUniform4fvEXT','glProgramUniform4iEXT','glProgramUniform4ivEXT','glProgramUniform4uiEXT','glProgramUniform4uivEXT','glProgramUniformMatrix2dvEXT','glProgramUniformMatrix2fvEXT','glProgramUniformMatrix2x3dvEXT','glProgramUniformMatrix2x3fvEXT','glProgramUniformMatrix2x4dvEXT','glProgramUniformMatrix2x4fvEXT','glProgramUniformMatrix3dvEXT','glProgramUniformMatrix3fvEXT','glProgramUniformMatrix3x2dvEXT','glProgramUniformMatrix3x2fvEXT','glProgramUniformMatrix3x4dvEXT','glProgramUniformMatrix3x4fvEXT','glProgramUniformMatrix4dvEXT','glProgramUniformMatrix4fvEXT','glProgramUniformMatrix4x2dvEXT','glProgramUniformMatrix4x2fvEXT','glProgramUniformMatrix4x3dvEXT','glProgramUniformMatrix4x3fvEXT','glPushClientAttribDefaultEXT','glTextureBufferEXT','glTextureImage1DEXT','glTextureImage2DEXT','glTextureImage3DEXT','glTextureParameterIivEXT','glTextureParameterIuivEXT','glTextureParameterfEXT','glTextureParameterfvEXT','glTextureParameteriEXT','glTextureParameterivEXT','glTextureRenderbufferEXT','glTextureSubImage1DEXT','glTextureSubImage2DEXT','glTextureSubImage3DEXT','glUnmapNamedBufferEXT','glVertexArrayColorOffsetEXT','glVertexArrayEdgeFlagOffsetEXT','glVertexArrayFogCoordOffsetEXT','glVertexArrayIndexOffsetEXT','glVertexArrayMultiTexCoordOffsetEXT','glVertexArrayNormalOffsetEXT','glVertexArraySecondaryColorOffsetEXT','glVertexArrayTexCoordOffsetEXT','glVertexArrayVertexAttribIOffsetEXT','glVertexArrayVertexAttribOffsetEXT','glVertexArrayVertexOffsetEXT']
 gl.add(GL_EXT_direct_state_access)
 
 GL_EXT_draw_buffers2 = Extension('GL_EXT_draw_buffers2')
 GL_EXT_draw_buffers2.url = 'http://www.opengl.org/registry/specs/EXT/draw_buffers2.txt'
-GL_EXT_draw_buffers2.functions = ['glIsEnabledIndexedEXT','glColorMaskIndexedEXT','glDisableIndexedEXT','glEnableIndexedEXT','glGetBooleanIndexedvEXT','glGetIntegerIndexedvEXT']
+GL_EXT_draw_buffers2.functions = ['glColorMaskIndexedEXT','glDisableIndexedEXT','glEnableIndexedEXT','glGetBooleanIndexedvEXT','glGetIntegerIndexedvEXT','glIsEnabledIndexedEXT']
 gl.add(GL_EXT_draw_buffers2)
 
 GL_EXT_draw_instanced = Extension('GL_EXT_draw_instanced')
@@ -45959,13 +46022,13 @@ GL_EXT_draw_instanced.functions = ['glDrawArraysInstancedEXT','glDrawElementsIns
 gl.add(GL_EXT_draw_instanced)
 
 GL_EXT_draw_range_elements = Extension('GL_EXT_draw_range_elements')
-GL_EXT_draw_range_elements.url = 'http://oss.sgi.com/projects/ogl-sample/registry/EXT/draw_range_elements.txt'
+GL_EXT_draw_range_elements.url = 'https://www.opengl.org/registry/specs/EXT/draw_range_elements.txt'
 GL_EXT_draw_range_elements.enumerants = ['GL_MAX_ELEMENTS_INDICES_EXT','GL_MAX_ELEMENTS_VERTICES_EXT']
 GL_EXT_draw_range_elements.functions = ['glDrawRangeElementsEXT']
 gl.add(GL_EXT_draw_range_elements)
 
 GL_EXT_fog_coord = Extension('GL_EXT_fog_coord')
-GL_EXT_fog_coord.url = 'http://oss.sgi.com/projects/ogl-sample/registry/EXT/fog_coord.txt'
+GL_EXT_fog_coord.url = 'http://www.opengl.org/registry/specs/EXT/fog_coord.txt'
 GL_EXT_fog_coord.enumerants = ['GL_CURRENT_FOG_COORDINATE_EXT','GL_FOG_COORDINATE_ARRAY_EXT','GL_FOG_COORDINATE_ARRAY_POINTER_EXT','GL_FOG_COORDINATE_ARRAY_STRIDE_EXT','GL_FOG_COORDINATE_ARRAY_TYPE_EXT','GL_FOG_COORDINATE_EXT','GL_FOG_COORDINATE_SOURCE_EXT','GL_FRAGMENT_DEPTH_EXT']
 GL_EXT_fog_coord.functions = ['glFogCoordPointerEXT','glFogCoorddEXT','glFogCoorddvEXT','glFogCoordfEXT','glFogCoordfvEXT']
 gl.add(GL_EXT_fog_coord)
@@ -45996,7 +46059,7 @@ gl.add(GL_EXT_framebuffer_multisample_blit_scaled)
 GL_EXT_framebuffer_object = Extension('GL_EXT_framebuffer_object')
 GL_EXT_framebuffer_object.url = 'http://www.opengl.org/registry/specs/EXT/framebuffer_object.txt'
 GL_EXT_framebuffer_object.enumerants = ['GL_COLOR_ATTACHMENT0_EXT','GL_COLOR_ATTACHMENT10_EXT','GL_COLOR_ATTACHMENT11_EXT','GL_COLOR_ATTACHMENT12_EXT','GL_COLOR_ATTACHMENT13_EXT','GL_COLOR_ATTACHMENT14_EXT','GL_COLOR_ATTACHMENT15_EXT','GL_COLOR_ATTACHMENT1_EXT','GL_COLOR_ATTACHMENT2_EXT','GL_COLOR_ATTACHMENT3_EXT','GL_COLOR_ATTACHMENT4_EXT','GL_COLOR_ATTACHMENT5_EXT','GL_COLOR_ATTACHMENT6_EXT','GL_COLOR_ATTACHMENT7_EXT','GL_COLOR_ATTACHMENT8_EXT','GL_COLOR_ATTACHMENT9_EXT','GL_DEPTH_ATTACHMENT_EXT','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT','GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT','GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT','GL_FRAMEBUFFER_BINDING_EXT','GL_FRAMEBUFFER_COMPLETE_EXT','GL_FRAMEBUFFER_EXT','GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT','GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT','GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT','GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT','GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT','GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT','GL_FRAMEBUFFER_UNSUPPORTED_EXT','GL_INVALID_FRAMEBUFFER_OPERATION_EXT','GL_MAX_COLOR_ATTACHMENTS_EXT','GL_MAX_RENDERBUFFER_SIZE_EXT','GL_RENDERBUFFER_ALPHA_SIZE_EXT','GL_RENDERBUFFER_BINDING_EXT','GL_RENDERBUFFER_BLUE_SIZE_EXT','GL_RENDERBUFFER_DEPTH_SIZE_EXT','GL_RENDERBUFFER_EXT','GL_RENDERBUFFER_GREEN_SIZE_EXT','GL_RENDERBUFFER_HEIGHT_EXT','GL_RENDERBUFFER_INTERNAL_FORMAT_EXT','GL_RENDERBUFFER_RED_SIZE_EXT','GL_RENDERBUFFER_STENCIL_SIZE_EXT','GL_RENDERBUFFER_WIDTH_EXT','GL_STENCIL_ATTACHMENT_EXT','GL_STENCIL_INDEX16_EXT','GL_STENCIL_INDEX1_EXT','GL_STENCIL_INDEX4_EXT','GL_STENCIL_INDEX8_EXT']
-GL_EXT_framebuffer_object.functions = ['glIsFramebufferEXT','glIsRenderbufferEXT','glCheckFramebufferStatusEXT','glBindFramebufferEXT','glBindRenderbufferEXT','glDeleteFramebuffersEXT','glDeleteRenderbuffersEXT','glFramebufferRenderbufferEXT','glFramebufferTexture1DEXT','glFramebufferTexture2DEXT','glFramebufferTexture3DEXT','glGenFramebuffersEXT','glGenRenderbuffersEXT','glGenerateMipmapEXT','glGetFramebufferAttachmentParameterivEXT','glGetRenderbufferParameterivEXT','glRenderbufferStorageEXT']
+GL_EXT_framebuffer_object.functions = ['glBindFramebufferEXT','glBindRenderbufferEXT','glCheckFramebufferStatusEXT','glDeleteFramebuffersEXT','glDeleteRenderbuffersEXT','glFramebufferRenderbufferEXT','glFramebufferTexture1DEXT','glFramebufferTexture2DEXT','glFramebufferTexture3DEXT','glGenFramebuffersEXT','glGenRenderbuffersEXT','glGenerateMipmapEXT','glGetFramebufferAttachmentParameterivEXT','glGetRenderbufferParameterivEXT','glIsFramebufferEXT','glIsRenderbufferEXT','glRenderbufferStorageEXT']
 gl.add(GL_EXT_framebuffer_object)
 
 GL_EXT_framebuffer_sRGB = Extension('GL_EXT_framebuffer_sRGB')
@@ -46018,7 +46081,7 @@ gl.add(GL_EXT_gpu_program_parameters)
 GL_EXT_gpu_shader4 = Extension('GL_EXT_gpu_shader4')
 GL_EXT_gpu_shader4.url = 'http://developer.download.nvidia.com/opengl/specs/GL_EXT_gpu_shader4.txt'
 GL_EXT_gpu_shader4.enumerants = ['GL_INT_SAMPLER_1D_ARRAY_EXT','GL_INT_SAMPLER_1D_EXT','GL_INT_SAMPLER_2D_ARRAY_EXT','GL_INT_SAMPLER_2D_EXT','GL_INT_SAMPLER_2D_RECT_EXT','GL_INT_SAMPLER_3D_EXT','GL_INT_SAMPLER_BUFFER_EXT','GL_INT_SAMPLER_CUBE_EXT','GL_SAMPLER_1D_ARRAY_EXT','GL_SAMPLER_1D_ARRAY_SHADOW_EXT','GL_SAMPLER_2D_ARRAY_EXT','GL_SAMPLER_2D_ARRAY_SHADOW_EXT','GL_SAMPLER_BUFFER_EXT','GL_SAMPLER_CUBE_SHADOW_EXT','GL_UNSIGNED_INT_SAMPLER_1D_ARRAY_EXT','GL_UNSIGNED_INT_SAMPLER_1D_EXT','GL_UNSIGNED_INT_SAMPLER_2D_ARRAY_EXT','GL_UNSIGNED_INT_SAMPLER_2D_EXT','GL_UNSIGNED_INT_SAMPLER_2D_RECT_EXT','GL_UNSIGNED_INT_SAMPLER_3D_EXT','GL_UNSIGNED_INT_SAMPLER_BUFFER_EXT','GL_UNSIGNED_INT_SAMPLER_CUBE_EXT','GL_UNSIGNED_INT_VEC2_EXT','GL_UNSIGNED_INT_VEC3_EXT','GL_UNSIGNED_INT_VEC4_EXT','GL_VERTEX_ATTRIB_ARRAY_INTEGER_EXT']
-GL_EXT_gpu_shader4.functions = ['glGetFragDataLocationEXT','glBindFragDataLocationEXT','glGetUniformuivEXT','glGetVertexAttribIivEXT','glGetVertexAttribIuivEXT','glUniform1uiEXT','glUniform1uivEXT','glUniform2uiEXT','glUniform2uivEXT','glUniform3uiEXT','glUniform3uivEXT','glUniform4uiEXT','glUniform4uivEXT','glVertexAttribI1iEXT','glVertexAttribI1ivEXT','glVertexAttribI1uiEXT','glVertexAttribI1uivEXT','glVertexAttribI2iEXT','glVertexAttribI2ivEXT','glVertexAttribI2uiEXT','glVertexAttribI2uivEXT','glVertexAttribI3iEXT','glVertexAttribI3ivEXT','glVertexAttribI3uiEXT','glVertexAttribI3uivEXT','glVertexAttribI4bvEXT','glVertexAttribI4iEXT','glVertexAttribI4ivEXT','glVertexAttribI4svEXT','glVertexAttribI4ubvEXT','glVertexAttribI4uiEXT','glVertexAttribI4uivEXT','glVertexAttribI4usvEXT','glVertexAttribIPointerEXT']
+GL_EXT_gpu_shader4.functions = ['glBindFragDataLocationEXT','glGetFragDataLocationEXT','glGetUniformuivEXT','glGetVertexAttribIivEXT','glGetVertexAttribIuivEXT','glUniform1uiEXT','glUniform1uivEXT','glUniform2uiEXT','glUniform2uivEXT','glUniform3uiEXT','glUniform3uivEXT','glUniform4uiEXT','glUniform4uivEXT','glVertexAttribI1iEXT','glVertexAttribI1ivEXT','glVertexAttribI1uiEXT','glVertexAttribI1uivEXT','glVertexAttribI2iEXT','glVertexAttribI2ivEXT','glVertexAttribI2uiEXT','glVertexAttribI2uivEXT','glVertexAttribI3iEXT','glVertexAttribI3ivEXT','glVertexAttribI3uiEXT','glVertexAttribI3uivEXT','glVertexAttribI4bvEXT','glVertexAttribI4iEXT','glVertexAttribI4ivEXT','glVertexAttribI4svEXT','glVertexAttribI4ubvEXT','glVertexAttribI4uiEXT','glVertexAttribI4uivEXT','glVertexAttribI4usvEXT','glVertexAttribIPointerEXT']
 gl.add(GL_EXT_gpu_shader4)
 
 GL_EXT_histogram = Extension('GL_EXT_histogram')
@@ -46131,7 +46194,7 @@ GL_EXT_scene_marker.functions = ['glBeginSceneEXT','glEndSceneEXT']
 gl.add(GL_EXT_scene_marker)
 
 GL_EXT_secondary_color = Extension('GL_EXT_secondary_color')
-GL_EXT_secondary_color.url = 'http://oss.sgi.com/projects/ogl-sample/registry/EXT/secondary_color.txt'
+GL_EXT_secondary_color.url = 'http://www.opengl.org/registry/specs/EXT/secondary_color.txt'
 GL_EXT_secondary_color.enumerants = ['GL_COLOR_SUM_EXT','GL_CURRENT_SECONDARY_COLOR_EXT','GL_SECONDARY_COLOR_ARRAY_EXT','GL_SECONDARY_COLOR_ARRAY_POINTER_EXT','GL_SECONDARY_COLOR_ARRAY_SIZE_EXT','GL_SECONDARY_COLOR_ARRAY_STRIDE_EXT','GL_SECONDARY_COLOR_ARRAY_TYPE_EXT']
 GL_EXT_secondary_color.functions = ['glSecondaryColor3bEXT','glSecondaryColor3bvEXT','glSecondaryColor3dEXT','glSecondaryColor3dvEXT','glSecondaryColor3fEXT','glSecondaryColor3fvEXT','glSecondaryColor3iEXT','glSecondaryColor3ivEXT','glSecondaryColor3sEXT','glSecondaryColor3svEXT','glSecondaryColor3ubEXT','glSecondaryColor3ubvEXT','glSecondaryColor3uiEXT','glSecondaryColor3uivEXT','glSecondaryColor3usEXT','glSecondaryColor3usvEXT','glSecondaryColorPointerEXT']
 gl.add(GL_EXT_secondary_color)
@@ -46139,7 +46202,7 @@ gl.add(GL_EXT_secondary_color)
 GL_EXT_separate_shader_objects = Extension('GL_EXT_separate_shader_objects')
 GL_EXT_separate_shader_objects.url = 'http://www.opengl.org/registry/specs/EXT/separate_shader_objects.txt'
 GL_EXT_separate_shader_objects.enumerants = ['GL_ACTIVE_PROGRAM_EXT']
-GL_EXT_separate_shader_objects.functions = ['glCreateShaderProgramEXT','glActiveProgramEXT','glUseShaderProgramEXT']
+GL_EXT_separate_shader_objects.functions = ['glActiveProgramEXT','glCreateShaderProgramEXT','glUseShaderProgramEXT']
 gl.add(GL_EXT_separate_shader_objects)
 
 GL_EXT_separate_specular_color = Extension('GL_EXT_separate_specular_color')
@@ -46185,7 +46248,7 @@ gl.add(GL_EXT_subtexture)
 
 GL_EXT_texture = Extension('GL_EXT_texture')
 GL_EXT_texture.url = 'http://www.opengl.org/registry/specs/EXT/texture.txt'
-GL_EXT_texture.enumerants = ['GL_ALPHA12_EXT','GL_ALPHA16_EXT','GL_ALPHA4_EXT','GL_ALPHA8_EXT','GL_INTENSITY12_EXT','GL_INTENSITY16_EXT','GL_INTENSITY4_EXT','GL_INTENSITY8_EXT','GL_INTENSITY_EXT','GL_LUMINANCE12_ALPHA12_EXT','GL_LUMINANCE12_ALPHA4_EXT','GL_LUMINANCE12_EXT','GL_LUMINANCE16_ALPHA16_EXT','GL_LUMINANCE16_EXT','GL_LUMINANCE4_ALPHA4_EXT','GL_LUMINANCE4_EXT','GL_LUMINANCE6_ALPHA2_EXT','GL_LUMINANCE8_ALPHA8_EXT','GL_LUMINANCE8_EXT','GL_PROXY_TEXTURE_1D_EXT','GL_PROXY_TEXTURE_2D_EXT','GL_REPLACE_EXT','GL_RGB10_A2_EXT','GL_RGB10_EXT','GL_RGB12_EXT','GL_RGB16_EXT','GL_RGB2_EXT','GL_RGB4_EXT','GL_RGB5_A1_EXT','GL_RGB5_EXT','GL_RGB8_EXT','GL_RGBA12_EXT','GL_RGBA16_EXT','GL_RGBA2_EXT','GL_RGBA4_EXT','GL_RGBA8_EXT','GL_TEXTURE_ALPHA_SIZE_EXT','GL_TEXTURE_BLUE_SIZE_EXT','GL_TEXTURE_GREEN_SIZE_EXT','GL_TEXTURE_INTENSITY_SIZE_EXT','GL_TEXTURE_LUMINANCE_SIZE_EXT','GL_TEXTURE_RED_SIZE_EXT']
+GL_EXT_texture.enumerants = ['GL_ALPHA12_EXT','GL_ALPHA16_EXT','GL_ALPHA4_EXT','GL_ALPHA8_EXT','GL_INTENSITY12_EXT','GL_INTENSITY16_EXT','GL_INTENSITY4_EXT','GL_INTENSITY8_EXT','GL_INTENSITY_EXT','GL_LUMINANCE12_ALPHA12_EXT','GL_LUMINANCE12_ALPHA4_EXT','GL_LUMINANCE12_EXT','GL_LUMINANCE16_ALPHA16_EXT','GL_LUMINANCE16_EXT','GL_LUMINANCE4_ALPHA4_EXT','GL_LUMINANCE4_EXT','GL_LUMINANCE6_ALPHA2_EXT','GL_LUMINANCE8_ALPHA8_EXT','GL_LUMINANCE8_EXT','GL_PROXY_TEXTURE_1D_EXT','GL_PROXY_TEXTURE_2D_EXT','GL_REPLACE_EXT','GL_RGB10_A2_EXT','GL_RGB10_EXT','GL_RGB12_EXT','GL_RGB16_EXT','GL_RGB2_EXT','GL_RGB4_EXT','GL_RGB5_A1_EXT','GL_RGB5_EXT','GL_RGB8_EXT','GL_RGBA12_EXT','GL_RGBA16_EXT','GL_RGBA2_EXT','GL_RGBA4_EXT','GL_RGBA8_EXT','GL_TEXTURE_ALPHA_SIZE_EXT','GL_TEXTURE_BLUE_SIZE_EXT','GL_TEXTURE_GREEN_SIZE_EXT','GL_TEXTURE_INTENSITY_SIZE_EXT','GL_TEXTURE_LUMINANCE_SIZE_EXT','GL_TEXTURE_RED_SIZE_EXT','GL_TEXTURE_TOO_LARGE_EXT']
 gl.add(GL_EXT_texture)
 
 GL_EXT_texture3D = Extension('GL_EXT_texture3D')
@@ -46281,7 +46344,7 @@ gl.add(GL_EXT_texture_mirror_clamp)
 GL_EXT_texture_object = Extension('GL_EXT_texture_object')
 GL_EXT_texture_object.url = 'http://www.opengl.org/registry/specs/EXT/texture_object.txt'
 GL_EXT_texture_object.enumerants = ['GL_TEXTURE_1D_BINDING_EXT','GL_TEXTURE_2D_BINDING_EXT','GL_TEXTURE_3D_BINDING_EXT','GL_TEXTURE_PRIORITY_EXT','GL_TEXTURE_RESIDENT_EXT']
-GL_EXT_texture_object.functions = ['glAreTexturesResidentEXT','glIsTextureEXT','glBindTextureEXT','glDeleteTexturesEXT','glGenTexturesEXT','glPrioritizeTexturesEXT']
+GL_EXT_texture_object.functions = ['glAreTexturesResidentEXT','glBindTextureEXT','glDeleteTexturesEXT','glGenTexturesEXT','glIsTextureEXT','glPrioritizeTexturesEXT']
 gl.add(GL_EXT_texture_object)
 
 GL_EXT_texture_perturb_normal = Extension('GL_EXT_texture_perturb_normal')
@@ -46350,9 +46413,9 @@ GL_EXT_vertex_attrib_64bit.functions = ['glGetVertexAttribLdvEXT','glVertexArray
 gl.add(GL_EXT_vertex_attrib_64bit)
 
 GL_EXT_vertex_shader = Extension('GL_EXT_vertex_shader')
-GL_EXT_vertex_shader.url = 'http://oss.sgi.com/projects/ogl-sample/registry/EXT/vertex_shader.txt'
+GL_EXT_vertex_shader.url = 'http://www.opengl.org/registry/specs/EXT/vertex_shader.txt'
 GL_EXT_vertex_shader.enumerants = ['GL_CURRENT_VERTEX_EXT','GL_FULL_RANGE_EXT','GL_INVARIANT_DATATYPE_EXT','GL_INVARIANT_EXT','GL_INVARIANT_VALUE_EXT','GL_LOCAL_CONSTANT_DATATYPE_EXT','GL_LOCAL_CONSTANT_EXT','GL_LOCAL_CONSTANT_VALUE_EXT','GL_LOCAL_EXT','GL_MATRIX_EXT','GL_MAX_OPTIMIZED_VERTEX_SHADER_INSTRUCTIONS_EXT','GL_MAX_OPTIMIZED_VERTEX_SHADER_INVARIANTS_EXT','GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCALS_EXT','GL_MAX_OPTIMIZED_VERTEX_SHADER_LOCAL_CONSTANTS_EXT','GL_MAX_OPTIMIZED_VERTEX_SHADER_VARIANTS_EXT','GL_MAX_VERTEX_SHADER_INSTRUCTIONS_EXT','GL_MAX_VERTEX_SHADER_INVARIANTS_EXT','GL_MAX_VERTEX_SHADER_LOCALS_EXT','GL_MAX_VERTEX_SHADER_LOCAL_CONSTANTS_EXT','GL_MAX_VERTEX_SHADER_VARIANTS_EXT','GL_MVP_MATRIX_EXT','GL_NEGATIVE_ONE_EXT','GL_NEGATIVE_W_EXT','GL_NEGATIVE_X_EXT','GL_NEGATIVE_Y_EXT','GL_NEGATIVE_Z_EXT','GL_NORMALIZED_RANGE_EXT','GL_ONE_EXT','GL_OP_ADD_EXT','GL_OP_CLAMP_EXT','GL_OP_CROSS_PRODUCT_EXT','GL_OP_DOT3_EXT','GL_OP_DOT4_EXT','GL_OP_EXP_BASE_2_EXT','GL_OP_FLOOR_EXT','GL_OP_FRAC_EXT','GL_OP_INDEX_EXT','GL_OP_LOG_BASE_2_EXT','GL_OP_MADD_EXT','GL_OP_MAX_EXT','GL_OP_MIN_EXT','GL_OP_MOV_EXT','GL_OP_MULTIPLY_MATRIX_EXT','GL_OP_MUL_EXT','GL_OP_NEGATE_EXT','GL_OP_POWER_EXT','GL_OP_RECIP_EXT','GL_OP_RECIP_SQRT_EXT','GL_OP_ROUND_EXT','GL_OP_SET_GE_EXT','GL_OP_SET_LT_EXT','GL_OP_SUB_EXT','GL_OUTPUT_COLOR0_EXT','GL_OUTPUT_COLOR1_EXT','GL_OUTPUT_FOG_EXT','GL_OUTPUT_TEXTURE_COORD0_EXT','GL_OUTPUT_TEXTURE_COORD10_EXT','GL_OUTPUT_TEXTURE_COORD11_EXT','GL_OUTPUT_TEXTURE_COORD12_EXT','GL_OUTPUT_TEXTURE_COORD13_EXT','GL_OUTPUT_TEXTURE_COORD14_EXT','GL_OUTPUT_TEXTURE_COORD15_EXT','GL_OUTPUT_TEXTURE_COORD16_EXT','GL_OUTPUT_TEXTURE_COORD17_EXT','GL_OUTPUT_TEXTURE_COORD18_EXT','GL_OUTPUT_TEXTURE_COORD19_EXT','GL_OUTPUT_TEXTURE_COORD1_EXT','GL_OUTPUT_TEXTURE_COORD20_EXT','GL_OUTPUT_TEXTURE_COORD21_EXT','GL_OUTPUT_TEXTURE_COORD22_EXT','GL_OUTPUT_TEXTURE_COORD23_EXT','GL_OUTPUT_TEXTURE_COORD24_EXT','GL_OUTPUT_TEXTURE_COORD25_EXT','GL_OUTPUT_TEXTURE_COORD26_EXT','GL_OUTPUT_TEXTURE_COORD27_EXT','GL_OUTPUT_TEXTURE_COORD28_EXT','GL_OUTPUT_TEXTURE_COORD29_EXT','GL_OUTPUT_TEXTURE_COORD2_EXT','GL_OUTPUT_TEXTURE_COORD30_EXT','GL_OUTPUT_TEXTURE_COORD31_EXT','GL_OUTPUT_TEXTURE_COORD3_EXT','GL_OUTPUT_TEXTURE_COORD4_EXT','GL_OUTPUT_TEXTURE_COORD5_EXT','GL_OUTPUT_TEXTURE_COORD6_EXT','GL_OUTPUT_TEXTURE_COORD7_EXT','GL_OUTPUT_TEXTURE_COORD8_EXT','GL_OUTPUT_TEXTURE_COORD9_EXT','GL_OUTPUT_VERTEX_EXT','GL_SCALAR_EXT','GL_VARIANT_ARRAY_EXT','GL_VARIANT_ARRAY_POINTER_EXT','GL_VARIANT_ARRAY_STRIDE_EXT','GL_VARIANT_ARRAY_TYPE_EXT','GL_VARIANT_DATATYPE_EXT','GL_VARIANT_EXT','GL_VARIANT_VALUE_EXT','GL_VECTOR_EXT','GL_VERTEX_SHADER_BINDING_EXT','GL_VERTEX_SHADER_EXT','GL_VERTEX_SHADER_INSTRUCTIONS_EXT','GL_VERTEX_SHADER_INVARIANTS_EXT','GL_VERTEX_SHADER_LOCALS_EXT','GL_VERTEX_SHADER_LOCAL_CONSTANTS_EXT','GL_VERTEX_SHADER_OPTIMIZED_EXT','GL_VERTEX_SHADER_VARIANTS_EXT','GL_W_EXT','GL_X_EXT','GL_Y_EXT','GL_ZERO_EXT','GL_Z_EXT']
-GL_EXT_vertex_shader.functions = ['glIsVariantEnabledEXT','glBindLightParameterEXT','glBindMaterialParameterEXT','glBindParameterEXT','glBindTexGenParameterEXT','glBindTextureUnitParameterEXT','glGenSymbolsEXT','glGenVertexShadersEXT','glBeginVertexShaderEXT','glBindVertexShaderEXT','glDeleteVertexShaderEXT','glDisableVariantClientStateEXT','glEnableVariantClientStateEXT','glEndVertexShaderEXT','glExtractComponentEXT','glGetInvariantBooleanvEXT','glGetInvariantFloatvEXT','glGetInvariantIntegervEXT','glGetLocalConstantBooleanvEXT','glGetLocalConstantFloatvEXT','glGetLocalConstantIntegervEXT','glGetVariantBooleanvEXT','glGetVariantFloatvEXT','glGetVariantIntegervEXT','glGetVariantPointervEXT','glInsertComponentEXT','glSetInvariantEXT','glSetLocalConstantEXT','glShaderOp1EXT','glShaderOp2EXT','glShaderOp3EXT','glSwizzleEXT','glVariantPointerEXT','glVariantbvEXT','glVariantdvEXT','glVariantfvEXT','glVariantivEXT','glVariantsvEXT','glVariantubvEXT','glVariantuivEXT','glVariantusvEXT','glWriteMaskEXT']
+GL_EXT_vertex_shader.functions = ['glBeginVertexShaderEXT','glBindLightParameterEXT','glBindMaterialParameterEXT','glBindParameterEXT','glBindTexGenParameterEXT','glBindTextureUnitParameterEXT','glBindVertexShaderEXT','glDeleteVertexShaderEXT','glDisableVariantClientStateEXT','glEnableVariantClientStateEXT','glEndVertexShaderEXT','glExtractComponentEXT','glGenSymbolsEXT','glGenVertexShadersEXT','glGetInvariantBooleanvEXT','glGetInvariantFloatvEXT','glGetInvariantIntegervEXT','glGetLocalConstantBooleanvEXT','glGetLocalConstantFloatvEXT','glGetLocalConstantIntegervEXT','glGetVariantBooleanvEXT','glGetVariantFloatvEXT','glGetVariantIntegervEXT','glGetVariantPointervEXT','glInsertComponentEXT','glIsVariantEnabledEXT','glSetInvariantEXT','glSetLocalConstantEXT','glShaderOp1EXT','glShaderOp2EXT','glShaderOp3EXT','glSwizzleEXT','glVariantPointerEXT','glVariantbvEXT','glVariantdvEXT','glVariantfvEXT','glVariantivEXT','glVariantsvEXT','glVariantubvEXT','glVariantuivEXT','glVariantusvEXT','glWriteMaskEXT']
 gl.add(GL_EXT_vertex_shader)
 
 GL_EXT_vertex_weighting = Extension('GL_EXT_vertex_weighting')
@@ -46458,11 +46521,31 @@ GL_INTEL_texture_scissor.url = 'http://www.opengl.org/registry/specs/INTEL/textu
 GL_INTEL_texture_scissor.functions = ['glTexScissorFuncINTEL','glTexScissorINTEL']
 gl.add(GL_INTEL_texture_scissor)
 
+GL_KHR_blend_equation_advanced = Extension('GL_KHR_blend_equation_advanced')
+GL_KHR_blend_equation_advanced.url = 'http://www.opengl.org/registry/specs/KHR/blend_equation_advanced.txt'
+GL_KHR_blend_equation_advanced.enumerants = ['GL_BLEND_ADVANCED_COHERENT_KHR','GL_COLORBURN_KHR','GL_COLORDODGE_KHR','GL_DARKEN_KHR','GL_DIFFERENCE_KHR','GL_EXCLUSION_KHR','GL_HARDLIGHT_KHR','GL_HSL_COLOR_KHR','GL_HSL_HUE_KHR','GL_HSL_LUMINOSITY_KHR','GL_HSL_SATURATION_KHR','GL_LIGHTEN_KHR','GL_MULTIPLY_KHR','GL_OVERLAY_KHR','GL_SCREEN_KHR','GL_SOFTLIGHT_KHR']
+GL_KHR_blend_equation_advanced.functions = ['glBlendBarrierKHR']
+gl.add(GL_KHR_blend_equation_advanced)
+
+GL_KHR_blend_equation_advanced_coherent = Extension('GL_KHR_blend_equation_advanced_coherent')
+GL_KHR_blend_equation_advanced_coherent.url = 'http://www.opengl.org/registry/specs/KHR/blend_equation_advanced.txt'
+gl.add(GL_KHR_blend_equation_advanced_coherent)
+
 GL_KHR_debug = Extension('GL_KHR_debug')
 GL_KHR_debug.url = 'http://www.opengl.org/registry/specs/KHR/debug.txt'
 GL_KHR_debug.enumerants = ['GL_BUFFER','GL_CONTEXT_FLAG_DEBUG_BIT','GL_DEBUG_CALLBACK_FUNCTION','GL_DEBUG_CALLBACK_USER_PARAM','GL_DEBUG_GROUP_STACK_DEPTH','GL_DEBUG_LOGGED_MESSAGES','GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH','GL_DEBUG_OUTPUT','GL_DEBUG_OUTPUT_SYNCHRONOUS','GL_DEBUG_SEVERITY_HIGH','GL_DEBUG_SEVERITY_LOW','GL_DEBUG_SEVERITY_MEDIUM','GL_DEBUG_SEVERITY_NOTIFICATION','GL_DEBUG_SOURCE_API','GL_DEBUG_SOURCE_APPLICATION','GL_DEBUG_SOURCE_OTHER','GL_DEBUG_SOURCE_SHADER_COMPILER','GL_DEBUG_SOURCE_THIRD_PARTY','GL_DEBUG_SOURCE_WINDOW_SYSTEM','GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR','GL_DEBUG_TYPE_ERROR','GL_DEBUG_TYPE_MARKER','GL_DEBUG_TYPE_OTHER','GL_DEBUG_TYPE_PERFORMANCE','GL_DEBUG_TYPE_POP_GROUP','GL_DEBUG_TYPE_PORTABILITY','GL_DEBUG_TYPE_PUSH_GROUP','GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR','GL_DISPLAY_LIST','GL_MAX_DEBUG_GROUP_STACK_DEPTH','GL_MAX_DEBUG_LOGGED_MESSAGES','GL_MAX_DEBUG_MESSAGE_LENGTH','GL_MAX_LABEL_LENGTH','GL_PROGRAM','GL_PROGRAM_PIPELINE','GL_QUERY','GL_SAMPLER','GL_SHADER']
-GL_KHR_debug.functions = ['glGetDebugMessageLog','glDebugMessageCallback','glDebugMessageControl','glDebugMessageInsert','glGetObjectLabel','glGetObjectPtrLabel','glObjectLabel','glObjectPtrLabel','glPopDebugGroup','glPushDebugGroup']
+GL_KHR_debug.functions = ['glDebugMessageCallback','glDebugMessageControl','glDebugMessageInsert','glGetDebugMessageLog','glGetObjectLabel','glGetObjectPtrLabel','glObjectLabel','glObjectPtrLabel','glPopDebugGroup','glPushDebugGroup']
 gl.add(GL_KHR_debug)
+
+GL_KHR_robust_buffer_access_behavior = Extension('GL_KHR_robust_buffer_access_behavior')
+GL_KHR_robust_buffer_access_behavior.url = 'http://www.opengl.org/registry/specs/KHR/robust_buffer_access_behavior.txt'
+gl.add(GL_KHR_robust_buffer_access_behavior)
+
+GL_KHR_robustness = Extension('GL_KHR_robustness')
+GL_KHR_robustness.url = 'http://www.opengl.org/registry/specs/KHR/robustness.txt'
+GL_KHR_robustness.enumerants = ['GL_CONTEXT_LOST','GL_CONTEXT_ROBUST_ACCESS','GL_GUILTY_CONTEXT_RESET','GL_INNOCENT_CONTEXT_RESET','GL_LOSE_CONTEXT_ON_RESET','GL_NO_RESET_NOTIFICATION','GL_RESET_NOTIFICATION_STRATEGY','GL_UNKNOWN_CONTEXT_RESET']
+GL_KHR_robustness.functions = ['glGetnUniformfv','glGetnUniformiv','glGetnUniformuiv','glReadnPixels']
+gl.add(GL_KHR_robustness)
 
 GL_KHR_texture_compression_astc_ldr = Extension('GL_KHR_texture_compression_astc_ldr')
 GL_KHR_texture_compression_astc_ldr.url = 'http://www.opengl.org/registry/specs/KHR/texture_compression_astc_ldr.txt'
@@ -46471,7 +46554,7 @@ gl.add(GL_KHR_texture_compression_astc_ldr)
 
 GL_KTX_buffer_region = Extension('GL_KTX_buffer_region')
 GL_KTX_buffer_region.enumerants = ['GL_KTX_BACK_REGION','GL_KTX_FRONT_REGION','GL_KTX_STENCIL_REGION','GL_KTX_Z_REGION']
-GL_KTX_buffer_region.functions = ['glBufferRegionEnabled','glNewBufferRegion','glDeleteBufferRegion','glDrawBufferRegion','glReadBufferRegion']
+GL_KTX_buffer_region.functions = ['glBufferRegionEnabled','glDeleteBufferRegion','glDrawBufferRegion','glNewBufferRegion','glReadBufferRegion']
 gl.add(GL_KTX_buffer_region)
 
 GL_MESAX_texture_stack = Extension('GL_MESAX_texture_stack')
@@ -46511,7 +46594,7 @@ gl.add(GL_NVX_gpu_memory_info)
 
 GL_NV_bindless_texture = Extension('GL_NV_bindless_texture')
 GL_NV_bindless_texture.url = 'http://www.opengl.org/registry/specs/NV/bindless_texture.txt'
-GL_NV_bindless_texture.functions = ['glIsImageHandleResidentNV','glIsTextureHandleResidentNV','glGetImageHandleNV','glGetTextureHandleNV','glGetTextureSamplerHandleNV','glMakeImageHandleNonResidentNV','glMakeImageHandleResidentNV','glMakeTextureHandleNonResidentNV','glMakeTextureHandleResidentNV','glProgramUniformHandleui64NV','glProgramUniformHandleui64vNV','glUniformHandleui64NV','glUniformHandleui64vNV']
+GL_NV_bindless_texture.functions = ['glGetImageHandleNV','glGetTextureHandleNV','glGetTextureSamplerHandleNV','glIsImageHandleResidentNV','glIsTextureHandleResidentNV','glMakeImageHandleNonResidentNV','glMakeImageHandleResidentNV','glMakeTextureHandleNonResidentNV','glMakeTextureHandleResidentNV','glProgramUniformHandleui64NV','glProgramUniformHandleui64vNV','glUniformHandleui64NV','glUniformHandleui64vNV']
 gl.add(GL_NV_bindless_texture)
 
 GL_NV_blend_equation_advanced = Extension('GL_NV_blend_equation_advanced')
@@ -46596,7 +46679,7 @@ gl.add(GL_NV_explicit_multisample)
 GL_NV_fence = Extension('GL_NV_fence')
 GL_NV_fence.url = 'http://www.opengl.org/registry/specs/NV/fence.txt'
 GL_NV_fence.enumerants = ['GL_ALL_COMPLETED_NV','GL_FENCE_CONDITION_NV','GL_FENCE_STATUS_NV']
-GL_NV_fence.functions = ['glIsFenceNV','glTestFenceNV','glDeleteFencesNV','glFinishFenceNV','glGenFencesNV','glGetFenceivNV','glSetFenceNV']
+GL_NV_fence.functions = ['glDeleteFencesNV','glFinishFenceNV','glGenFencesNV','glGetFenceivNV','glIsFenceNV','glSetFenceNV','glTestFenceNV']
 gl.add(GL_NV_fence)
 
 GL_NV_float_buffer = Extension('GL_NV_float_buffer')
@@ -46695,7 +46778,7 @@ gl.add(GL_NV_non_square_matrices)
 GL_NV_occlusion_query = Extension('GL_NV_occlusion_query')
 GL_NV_occlusion_query.url = 'http://www.opengl.org/registry/specs/NV/occlusion_query.txt'
 GL_NV_occlusion_query.enumerants = ['GL_CURRENT_OCCLUSION_QUERY_ID_NV','GL_PIXEL_COUNTER_BITS_NV','GL_PIXEL_COUNT_AVAILABLE_NV','GL_PIXEL_COUNT_NV']
-GL_NV_occlusion_query.functions = ['glIsOcclusionQueryNV','glBeginOcclusionQueryNV','glDeleteOcclusionQueriesNV','glEndOcclusionQueryNV','glGenOcclusionQueriesNV','glGetOcclusionQueryivNV','glGetOcclusionQueryuivNV']
+GL_NV_occlusion_query.functions = ['glBeginOcclusionQueryNV','glDeleteOcclusionQueriesNV','glEndOcclusionQueryNV','glGenOcclusionQueriesNV','glGetOcclusionQueryivNV','glGetOcclusionQueryuivNV','glIsOcclusionQueryNV']
 gl.add(GL_NV_occlusion_query)
 
 GL_NV_packed_depth_stencil = Extension('GL_NV_packed_depth_stencil')
@@ -46716,7 +46799,7 @@ gl.add(GL_NV_parameter_buffer_object2)
 GL_NV_path_rendering = Extension('GL_NV_path_rendering')
 GL_NV_path_rendering.url = 'http://www.opengl.org/registry/specs/NV/path_rendering.txt'
 GL_NV_path_rendering.enumerants = ['GL_ACCUM_ADJACENT_PAIRS_NV','GL_ADJACENT_PAIRS_NV','GL_AFFINE_2D_NV','GL_AFFINE_3D_NV','GL_ARC_TO_NV','GL_BEVEL_NV','GL_BOLD_BIT_NV','GL_BOUNDING_BOX_NV','GL_BOUNDING_BOX_OF_BOUNDING_BOXES_NV','GL_CIRCULAR_CCW_ARC_TO_NV','GL_CIRCULAR_CW_ARC_TO_NV','GL_CIRCULAR_TANGENT_ARC_TO_NV','GL_CLOSE_PATH_NV','GL_CONVEX_HULL_NV','GL_COUNT_DOWN_NV','GL_COUNT_UP_NV','GL_CUBIC_CURVE_TO_NV','GL_DUP_FIRST_CUBIC_CURVE_TO_NV','GL_DUP_LAST_CUBIC_CURVE_TO_NV','GL_FILE_NAME_NV','GL_FIRST_TO_REST_NV','GL_FONT_ASCENDER_BIT_NV','GL_FONT_DESCENDER_BIT_NV','GL_FONT_HAS_KERNING_BIT_NV','GL_FONT_HEIGHT_BIT_NV','GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV','GL_FONT_MAX_ADVANCE_WIDTH_BIT_NV','GL_FONT_UNDERLINE_POSITION_BIT_NV','GL_FONT_UNDERLINE_THICKNESS_BIT_NV','GL_FONT_UNITS_PER_EM_BIT_NV','GL_FONT_X_MAX_BOUNDS_BIT_NV','GL_FONT_X_MIN_BOUNDS_BIT_NV','GL_FONT_Y_MAX_BOUNDS_BIT_NV','GL_FONT_Y_MIN_BOUNDS_BIT_NV','GL_GLYPH_HAS_KERNING_BIT_NV','GL_GLYPH_HEIGHT_BIT_NV','GL_GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV','GL_GLYPH_HORIZONTAL_BEARING_X_BIT_NV','GL_GLYPH_HORIZONTAL_BEARING_Y_BIT_NV','GL_GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV','GL_GLYPH_VERTICAL_BEARING_X_BIT_NV','GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV','GL_GLYPH_WIDTH_BIT_NV','GL_HORIZONTAL_LINE_TO_NV','GL_ITALIC_BIT_NV','GL_LARGE_CCW_ARC_TO_NV','GL_LARGE_CW_ARC_TO_NV','GL_LINE_TO_NV','GL_MITER_REVERT_NV','GL_MITER_TRUNCATE_NV','GL_MOVE_TO_CONTINUES_NV','GL_MOVE_TO_NV','GL_MOVE_TO_RESETS_NV','GL_PATH_CLIENT_LENGTH_NV','GL_PATH_COMMAND_COUNT_NV','GL_PATH_COMPUTED_LENGTH_NV','GL_PATH_COORD_COUNT_NV','GL_PATH_COVER_DEPTH_FUNC_NV','GL_PATH_DASH_ARRAY_COUNT_NV','GL_PATH_DASH_CAPS_NV','GL_PATH_DASH_OFFSET_NV','GL_PATH_DASH_OFFSET_RESET_NV','GL_PATH_END_CAPS_NV','GL_PATH_ERROR_POSITION_NV','GL_PATH_FILL_BOUNDING_BOX_NV','GL_PATH_FILL_COVER_MODE_NV','GL_PATH_FILL_MASK_NV','GL_PATH_FILL_MODE_NV','GL_PATH_FOG_GEN_MODE_NV','GL_PATH_FORMAT_PS_NV','GL_PATH_FORMAT_SVG_NV','GL_PATH_GEN_COEFF_NV','GL_PATH_GEN_COLOR_FORMAT_NV','GL_PATH_GEN_COMPONENTS_NV','GL_PATH_GEN_MODE_NV','GL_PATH_INITIAL_DASH_CAP_NV','GL_PATH_INITIAL_END_CAP_NV','GL_PATH_JOIN_STYLE_NV','GL_PATH_MITER_LIMIT_NV','GL_PATH_OBJECT_BOUNDING_BOX_NV','GL_PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV','GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV','GL_PATH_STENCIL_FUNC_NV','GL_PATH_STENCIL_REF_NV','GL_PATH_STENCIL_VALUE_MASK_NV','GL_PATH_STROKE_BOUNDING_BOX_NV','GL_PATH_STROKE_COVER_MODE_NV','GL_PATH_STROKE_MASK_NV','GL_PATH_STROKE_WIDTH_NV','GL_PATH_TERMINAL_DASH_CAP_NV','GL_PATH_TERMINAL_END_CAP_NV','GL_PRIMARY_COLOR','GL_QUADRATIC_CURVE_TO_NV','GL_RECT_NV','GL_RELATIVE_ARC_TO_NV','GL_RELATIVE_CUBIC_CURVE_TO_NV','GL_RELATIVE_HORIZONTAL_LINE_TO_NV','GL_RELATIVE_LARGE_CCW_ARC_TO_NV','GL_RELATIVE_LARGE_CW_ARC_TO_NV','GL_RELATIVE_LINE_TO_NV','GL_RELATIVE_MOVE_TO_NV','GL_RELATIVE_QUADRATIC_CURVE_TO_NV','GL_RELATIVE_SMALL_CCW_ARC_TO_NV','GL_RELATIVE_SMALL_CW_ARC_TO_NV','GL_RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV','GL_RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV','GL_RELATIVE_VERTICAL_LINE_TO_NV','GL_RESTART_PATH_NV','GL_ROUND_NV','GL_SKIP_MISSING_GLYPH_NV','GL_SMALL_CCW_ARC_TO_NV','GL_SMALL_CW_ARC_TO_NV','GL_SMOOTH_CUBIC_CURVE_TO_NV','GL_SMOOTH_QUADRATIC_CURVE_TO_NV','GL_SQUARE_NV','GL_STANDARD_FONT_NAME_NV','GL_SYSTEM_FONT_NAME_NV','GL_TRANSLATE_2D_NV','GL_TRANSLATE_3D_NV','GL_TRANSLATE_X_NV','GL_TRANSLATE_Y_NV','GL_TRANSPOSE_AFFINE_2D_NV','GL_TRANSPOSE_AFFINE_3D_NV','GL_TRIANGULAR_NV','GL_USE_MISSING_GLYPH_NV','GL_UTF16_NV','GL_UTF8_NV','GL_VERTICAL_LINE_TO_NV']
-GL_NV_path_rendering.functions = ['glIsPathNV','glIsPointInFillPathNV','glIsPointInStrokePathNV','glPointAlongPathNV','glGetPathLengthNV','glGenPathsNV','glCopyPathNV','glCoverFillPathInstancedNV','glCoverFillPathNV','glCoverStrokePathInstancedNV','glCoverStrokePathNV','glDeletePathsNV','glGetPathColorGenfvNV','glGetPathColorGenivNV','glGetPathCommandsNV','glGetPathCoordsNV','glGetPathDashArrayNV','glGetPathMetricRangeNV','glGetPathMetricsNV','glGetPathParameterfvNV','glGetPathParameterivNV','glGetPathSpacingNV','glGetPathTexGenfvNV','glGetPathTexGenivNV','glInterpolatePathsNV','glPathColorGenNV','glPathCommandsNV','glPathCoordsNV','glPathCoverDepthFuncNV','glPathDashArrayNV','glPathFogGenNV','glPathGlyphRangeNV','glPathGlyphsNV','glPathParameterfNV','glPathParameterfvNV','glPathParameteriNV','glPathParameterivNV','glPathStencilDepthOffsetNV','glPathStencilFuncNV','glPathStringNV','glPathSubCommandsNV','glPathSubCoordsNV','glPathTexGenNV','glStencilFillPathInstancedNV','glStencilFillPathNV','glStencilStrokePathInstancedNV','glStencilStrokePathNV','glTransformPathNV','glWeightPathsNV']
+GL_NV_path_rendering.functions = ['glCopyPathNV','glCoverFillPathInstancedNV','glCoverFillPathNV','glCoverStrokePathInstancedNV','glCoverStrokePathNV','glDeletePathsNV','glGenPathsNV','glGetPathColorGenfvNV','glGetPathColorGenivNV','glGetPathCommandsNV','glGetPathCoordsNV','glGetPathDashArrayNV','glGetPathLengthNV','glGetPathMetricRangeNV','glGetPathMetricsNV','glGetPathParameterfvNV','glGetPathParameterivNV','glGetPathSpacingNV','glGetPathTexGenfvNV','glGetPathTexGenivNV','glInterpolatePathsNV','glIsPathNV','glIsPointInFillPathNV','glIsPointInStrokePathNV','glPathColorGenNV','glPathCommandsNV','glPathCoordsNV','glPathCoverDepthFuncNV','glPathDashArrayNV','glPathFogGenNV','glPathGlyphRangeNV','glPathGlyphsNV','glPathParameterfNV','glPathParameterfvNV','glPathParameteriNV','glPathParameterivNV','glPathStencilDepthOffsetNV','glPathStencilFuncNV','glPathStringNV','glPathSubCommandsNV','glPathSubCoordsNV','glPathTexGenNV','glPointAlongPathNV','glStencilFillPathInstancedNV','glStencilFillPathNV','glStencilStrokePathInstancedNV','glStencilStrokePathNV','glTransformPathNV','glWeightPathsNV']
 gl.add(GL_NV_path_rendering)
 
 GL_NV_pixel_data_range = Extension('GL_NV_pixel_data_range')
@@ -46743,6 +46826,20 @@ GL_NV_primitive_restart.enumerants = ['GL_PRIMITIVE_RESTART_INDEX_NV','GL_PRIMIT
 GL_NV_primitive_restart.functions = ['glPrimitiveRestartIndexNV','glPrimitiveRestartNV']
 gl.add(GL_NV_primitive_restart)
 
+GL_NV_read_buffer = Extension('GL_NV_read_buffer')
+GL_NV_read_buffer.url = 'https://www.khronos.org/registry/gles/extensions/NV/NV_read_buffer.txt'
+GL_NV_read_buffer.category = 'GL_NV_read_buffer'
+GL_NV_read_buffer.enumerants = ['GL_READ_BUFFER_NV']
+GL_NV_read_buffer.functions = ['glReadBufferNV']
+gl.add(GL_NV_read_buffer)
+
+GL_NV_read_buffer_front = Extension('GL_NV_read_buffer_front')
+GL_NV_read_buffer_front.url = 'https://www.khronos.org/registry/gles/extensions/NV/NV_read_buffer.txt'
+GL_NV_read_buffer_front.category = 'GL_NV_read_buffer_front'
+GL_NV_read_buffer_front.enumerants = ['GL_READ_BUFFER_NV']
+GL_NV_read_buffer_front.functions = ['glReadBufferNV']
+gl.add(GL_NV_read_buffer_front)
+
 GL_NV_register_combiners = Extension('GL_NV_register_combiners')
 GL_NV_register_combiners.url = 'http://www.opengl.org/registry/specs/NV/register_combiners.txt'
 GL_NV_register_combiners.enumerants = ['GL_BIAS_BY_NEGATIVE_ONE_HALF_NV','GL_COLOR_SUM_CLAMP_NV','GL_COMBINER0_NV','GL_COMBINER1_NV','GL_COMBINER2_NV','GL_COMBINER3_NV','GL_COMBINER4_NV','GL_COMBINER5_NV','GL_COMBINER6_NV','GL_COMBINER7_NV','GL_COMBINER_AB_DOT_PRODUCT_NV','GL_COMBINER_AB_OUTPUT_NV','GL_COMBINER_BIAS_NV','GL_COMBINER_CD_DOT_PRODUCT_NV','GL_COMBINER_CD_OUTPUT_NV','GL_COMBINER_COMPONENT_USAGE_NV','GL_COMBINER_INPUT_NV','GL_COMBINER_MAPPING_NV','GL_COMBINER_MUX_SUM_NV','GL_COMBINER_SCALE_NV','GL_COMBINER_SUM_OUTPUT_NV','GL_CONSTANT_COLOR0_NV','GL_CONSTANT_COLOR1_NV','GL_DISCARD_NV','GL_EXPAND_NEGATE_NV','GL_EXPAND_NORMAL_NV','GL_E_TIMES_F_NV','GL_HALF_BIAS_NEGATE_NV','GL_HALF_BIAS_NORMAL_NV','GL_MAX_GENERAL_COMBINERS_NV','GL_NUM_GENERAL_COMBINERS_NV','GL_PRIMARY_COLOR_NV','GL_REGISTER_COMBINERS_NV','GL_SCALE_BY_FOUR_NV','GL_SCALE_BY_ONE_HALF_NV','GL_SCALE_BY_TWO_NV','GL_SECONDARY_COLOR_NV','GL_SIGNED_IDENTITY_NV','GL_SIGNED_NEGATE_NV','GL_SPARE0_NV','GL_SPARE0_PLUS_SECONDARY_COLOR_NV','GL_SPARE1_NV','GL_UNSIGNED_IDENTITY_NV','GL_UNSIGNED_INVERT_NV','GL_VARIABLE_A_NV','GL_VARIABLE_B_NV','GL_VARIABLE_C_NV','GL_VARIABLE_D_NV','GL_VARIABLE_E_NV','GL_VARIABLE_F_NV','GL_VARIABLE_G_NV']
@@ -46766,7 +46863,7 @@ gl.add(GL_NV_shader_atomic_float)
 GL_NV_shader_buffer_load = Extension('GL_NV_shader_buffer_load')
 GL_NV_shader_buffer_load.url = 'http://www.opengl.org/registry/specs/NV/shader_buffer_load.txt'
 GL_NV_shader_buffer_load.enumerants = ['GL_BUFFER_GPU_ADDRESS_NV','GL_GPU_ADDRESS_NV','GL_MAX_SHADER_BUFFER_ADDRESS_NV']
-GL_NV_shader_buffer_load.functions = ['glIsBufferResidentNV','glIsNamedBufferResidentNV','glGetBufferParameterui64vNV','glGetIntegerui64vNV','glGetNamedBufferParameterui64vNV','glMakeBufferNonResidentNV','glMakeBufferResidentNV','glMakeNamedBufferNonResidentNV','glMakeNamedBufferResidentNV','glProgramUniformui64NV','glProgramUniformui64vNV','glUniformui64NV','glUniformui64vNV']
+GL_NV_shader_buffer_load.functions = ['glGetBufferParameterui64vNV','glGetIntegerui64vNV','glGetNamedBufferParameterui64vNV','glIsBufferResidentNV','glIsNamedBufferResidentNV','glMakeBufferNonResidentNV','glMakeBufferResidentNV','glMakeNamedBufferNonResidentNV','glMakeNamedBufferResidentNV','glProgramUniformui64NV','glProgramUniformui64vNV','glUniformui64NV','glUniformui64vNV']
 gl.add(GL_NV_shader_buffer_load)
 
 GL_NV_shader_storage_buffer_object = Extension('GL_NV_shader_storage_buffer_object')
@@ -46836,19 +46933,19 @@ gl.add(GL_NV_texture_shader3)
 GL_NV_transform_feedback = Extension('GL_NV_transform_feedback')
 GL_NV_transform_feedback.url = 'http://developer.download.nvidia.com/opengl/specs/GL_NV_transform_feedback.txt'
 GL_NV_transform_feedback.enumerants = ['GL_ACTIVE_VARYINGS_NV','GL_ACTIVE_VARYING_MAX_LENGTH_NV','GL_BACK_PRIMARY_COLOR_NV','GL_BACK_SECONDARY_COLOR_NV','GL_CLIP_DISTANCE_NV','GL_GENERIC_ATTRIB_NV','GL_INTERLEAVED_ATTRIBS_NV','GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_NV','GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_NV','GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_NV','GL_PRIMITIVES_GENERATED_NV','GL_PRIMITIVE_ID_NV','GL_RASTERIZER_DISCARD_NV','GL_SEPARATE_ATTRIBS_NV','GL_TEXTURE_COORD_NV','GL_TRANSFORM_FEEDBACK_ATTRIBS_NV','GL_TRANSFORM_FEEDBACK_BUFFER_BINDING_NV','GL_TRANSFORM_FEEDBACK_BUFFER_MODE_NV','GL_TRANSFORM_FEEDBACK_BUFFER_NV','GL_TRANSFORM_FEEDBACK_BUFFER_SIZE_NV','GL_TRANSFORM_FEEDBACK_BUFFER_START_NV','GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_NV','GL_TRANSFORM_FEEDBACK_RECORD_NV','GL_TRANSFORM_FEEDBACK_VARYINGS_NV','GL_VERTEX_ID_NV']
-GL_NV_transform_feedback.functions = ['glGetVaryingLocationNV','glActiveVaryingNV','glBeginTransformFeedbackNV','glBindBufferBaseNV','glBindBufferOffsetNV','glBindBufferRangeNV','glEndTransformFeedbackNV','glGetActiveVaryingNV','glGetTransformFeedbackVaryingNV','glTransformFeedbackAttribsNV','glTransformFeedbackVaryingsNV']
+GL_NV_transform_feedback.functions = ['glActiveVaryingNV','glBeginTransformFeedbackNV','glBindBufferBaseNV','glBindBufferOffsetNV','glBindBufferRangeNV','glEndTransformFeedbackNV','glGetActiveVaryingNV','glGetTransformFeedbackVaryingNV','glGetVaryingLocationNV','glTransformFeedbackAttribsNV','glTransformFeedbackVaryingsNV']
 gl.add(GL_NV_transform_feedback)
 
 GL_NV_transform_feedback2 = Extension('GL_NV_transform_feedback2')
 GL_NV_transform_feedback2.url = 'http://www.opengl.org/registry/specs/NV/transform_feedback2.txt'
 GL_NV_transform_feedback2.enumerants = ['GL_TRANSFORM_FEEDBACK_BINDING_NV','GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV','GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV','GL_TRANSFORM_FEEDBACK_NV']
-GL_NV_transform_feedback2.functions = ['glIsTransformFeedbackNV','glBindTransformFeedbackNV','glDeleteTransformFeedbacksNV','glDrawTransformFeedbackNV','glGenTransformFeedbacksNV','glPauseTransformFeedbackNV','glResumeTransformFeedbackNV']
+GL_NV_transform_feedback2.functions = ['glBindTransformFeedbackNV','glDeleteTransformFeedbacksNV','glDrawTransformFeedbackNV','glGenTransformFeedbacksNV','glIsTransformFeedbackNV','glPauseTransformFeedbackNV','glResumeTransformFeedbackNV']
 gl.add(GL_NV_transform_feedback2)
 
 GL_NV_vdpau_interop = Extension('GL_NV_vdpau_interop')
 GL_NV_vdpau_interop.url = 'http://www.opengl.org/registry/specs/NV/vdpau_interop.txt'
 GL_NV_vdpau_interop.enumerants = ['GL_SURFACE_MAPPED_NV','GL_SURFACE_REGISTERED_NV','GL_SURFACE_STATE_NV','GL_WRITE_DISCARD_NV']
-GL_NV_vdpau_interop.functions = ['glVDPAURegisterOutputSurfaceNV','glVDPAURegisterVideoSurfaceNV','glVDPAUFiniNV','glVDPAUGetSurfaceivNV','glVDPAUInitNV','glVDPAUIsSurfaceNV','glVDPAUMapSurfacesNV','glVDPAUSurfaceAccessNV','glVDPAUUnmapSurfacesNV','glVDPAUUnregisterSurfaceNV']
+GL_NV_vdpau_interop.functions = ['glVDPAUFiniNV','glVDPAUGetSurfaceivNV','glVDPAUInitNV','glVDPAUIsSurfaceNV','glVDPAUMapSurfacesNV','glVDPAURegisterOutputSurfaceNV','glVDPAURegisterVideoSurfaceNV','glVDPAUSurfaceAccessNV','glVDPAUUnmapSurfacesNV','glVDPAUUnregisterSurfaceNV']
 gl.add(GL_NV_vdpau_interop)
 
 GL_NV_vertex_array_range = Extension('GL_NV_vertex_array_range')
@@ -46877,7 +46974,7 @@ gl.add(GL_NV_vertex_buffer_unified_memory)
 GL_NV_vertex_program = Extension('GL_NV_vertex_program')
 GL_NV_vertex_program.url = 'http://www.opengl.org/registry/specs/NV/vertex_program.txt'
 GL_NV_vertex_program.enumerants = ['GL_ATTRIB_ARRAY_POINTER_NV','GL_ATTRIB_ARRAY_SIZE_NV','GL_ATTRIB_ARRAY_STRIDE_NV','GL_ATTRIB_ARRAY_TYPE_NV','GL_CURRENT_ATTRIB_NV','GL_CURRENT_MATRIX_NV','GL_CURRENT_MATRIX_STACK_DEPTH_NV','GL_IDENTITY_NV','GL_INVERSE_NV','GL_INVERSE_TRANSPOSE_NV','GL_MAP1_VERTEX_ATTRIB0_4_NV','GL_MAP1_VERTEX_ATTRIB10_4_NV','GL_MAP1_VERTEX_ATTRIB11_4_NV','GL_MAP1_VERTEX_ATTRIB12_4_NV','GL_MAP1_VERTEX_ATTRIB13_4_NV','GL_MAP1_VERTEX_ATTRIB14_4_NV','GL_MAP1_VERTEX_ATTRIB15_4_NV','GL_MAP1_VERTEX_ATTRIB1_4_NV','GL_MAP1_VERTEX_ATTRIB2_4_NV','GL_MAP1_VERTEX_ATTRIB3_4_NV','GL_MAP1_VERTEX_ATTRIB4_4_NV','GL_MAP1_VERTEX_ATTRIB5_4_NV','GL_MAP1_VERTEX_ATTRIB6_4_NV','GL_MAP1_VERTEX_ATTRIB7_4_NV','GL_MAP1_VERTEX_ATTRIB8_4_NV','GL_MAP1_VERTEX_ATTRIB9_4_NV','GL_MAP2_VERTEX_ATTRIB0_4_NV','GL_MAP2_VERTEX_ATTRIB10_4_NV','GL_MAP2_VERTEX_ATTRIB11_4_NV','GL_MAP2_VERTEX_ATTRIB12_4_NV','GL_MAP2_VERTEX_ATTRIB13_4_NV','GL_MAP2_VERTEX_ATTRIB14_4_NV','GL_MAP2_VERTEX_ATTRIB15_4_NV','GL_MAP2_VERTEX_ATTRIB1_4_NV','GL_MAP2_VERTEX_ATTRIB2_4_NV','GL_MAP2_VERTEX_ATTRIB3_4_NV','GL_MAP2_VERTEX_ATTRIB4_4_NV','GL_MAP2_VERTEX_ATTRIB5_4_NV','GL_MAP2_VERTEX_ATTRIB6_4_NV','GL_MAP2_VERTEX_ATTRIB7_4_NV','GL_MAP2_VERTEX_ATTRIB8_4_NV','GL_MAP2_VERTEX_ATTRIB9_4_NV','GL_MATRIX0_NV','GL_MATRIX1_NV','GL_MATRIX2_NV','GL_MATRIX3_NV','GL_MATRIX4_NV','GL_MATRIX5_NV','GL_MATRIX6_NV','GL_MATRIX7_NV','GL_MAX_TRACK_MATRICES_NV','GL_MAX_TRACK_MATRIX_STACK_DEPTH_NV','GL_MODELVIEW_PROJECTION_NV','GL_PROGRAM_ERROR_POSITION_NV','GL_PROGRAM_LENGTH_NV','GL_PROGRAM_PARAMETER_NV','GL_PROGRAM_RESIDENT_NV','GL_PROGRAM_STRING_NV','GL_PROGRAM_TARGET_NV','GL_TRACK_MATRIX_NV','GL_TRACK_MATRIX_TRANSFORM_NV','GL_TRANSPOSE_NV','GL_VERTEX_ATTRIB_ARRAY0_NV','GL_VERTEX_ATTRIB_ARRAY10_NV','GL_VERTEX_ATTRIB_ARRAY11_NV','GL_VERTEX_ATTRIB_ARRAY12_NV','GL_VERTEX_ATTRIB_ARRAY13_NV','GL_VERTEX_ATTRIB_ARRAY14_NV','GL_VERTEX_ATTRIB_ARRAY15_NV','GL_VERTEX_ATTRIB_ARRAY1_NV','GL_VERTEX_ATTRIB_ARRAY2_NV','GL_VERTEX_ATTRIB_ARRAY3_NV','GL_VERTEX_ATTRIB_ARRAY4_NV','GL_VERTEX_ATTRIB_ARRAY5_NV','GL_VERTEX_ATTRIB_ARRAY6_NV','GL_VERTEX_ATTRIB_ARRAY7_NV','GL_VERTEX_ATTRIB_ARRAY8_NV','GL_VERTEX_ATTRIB_ARRAY9_NV','GL_VERTEX_PROGRAM_BINDING_NV','GL_VERTEX_PROGRAM_NV','GL_VERTEX_PROGRAM_POINT_SIZE_NV','GL_VERTEX_PROGRAM_TWO_SIDE_NV','GL_VERTEX_STATE_PROGRAM_NV']
-GL_NV_vertex_program.functions = ['glAreProgramsResidentNV','glIsProgramNV','glBindProgramNV','glDeleteProgramsNV','glExecuteProgramNV','glGenProgramsNV','glGetProgramParameterdvNV','glGetProgramParameterfvNV','glGetProgramStringNV','glGetProgramivNV','glGetTrackMatrixivNV','glGetVertexAttribPointervNV','glGetVertexAttribdvNV','glGetVertexAttribfvNV','glGetVertexAttribivNV','glLoadProgramNV','glProgramParameter4dNV','glProgramParameter4dvNV','glProgramParameter4fNV','glProgramParameter4fvNV','glProgramParameters4dvNV','glProgramParameters4fvNV','glRequestResidentProgramsNV','glTrackMatrixNV','glVertexAttrib1dNV','glVertexAttrib1dvNV','glVertexAttrib1fNV','glVertexAttrib1fvNV','glVertexAttrib1sNV','glVertexAttrib1svNV','glVertexAttrib2dNV','glVertexAttrib2dvNV','glVertexAttrib2fNV','glVertexAttrib2fvNV','glVertexAttrib2sNV','glVertexAttrib2svNV','glVertexAttrib3dNV','glVertexAttrib3dvNV','glVertexAttrib3fNV','glVertexAttrib3fvNV','glVertexAttrib3sNV','glVertexAttrib3svNV','glVertexAttrib4dNV','glVertexAttrib4dvNV','glVertexAttrib4fNV','glVertexAttrib4fvNV','glVertexAttrib4sNV','glVertexAttrib4svNV','glVertexAttrib4ubNV','glVertexAttrib4ubvNV','glVertexAttribPointerNV','glVertexAttribs1dvNV','glVertexAttribs1fvNV','glVertexAttribs1svNV','glVertexAttribs2dvNV','glVertexAttribs2fvNV','glVertexAttribs2svNV','glVertexAttribs3dvNV','glVertexAttribs3fvNV','glVertexAttribs3svNV','glVertexAttribs4dvNV','glVertexAttribs4fvNV','glVertexAttribs4svNV','glVertexAttribs4ubvNV']
+GL_NV_vertex_program.functions = ['glAreProgramsResidentNV','glBindProgramNV','glDeleteProgramsNV','glExecuteProgramNV','glGenProgramsNV','glGetProgramParameterdvNV','glGetProgramParameterfvNV','glGetProgramStringNV','glGetProgramivNV','glGetTrackMatrixivNV','glGetVertexAttribPointervNV','glGetVertexAttribdvNV','glGetVertexAttribfvNV','glGetVertexAttribivNV','glIsProgramNV','glLoadProgramNV','glProgramParameter4dNV','glProgramParameter4dvNV','glProgramParameter4fNV','glProgramParameter4fvNV','glProgramParameters4dvNV','glProgramParameters4fvNV','glRequestResidentProgramsNV','glTrackMatrixNV','glVertexAttrib1dNV','glVertexAttrib1dvNV','glVertexAttrib1fNV','glVertexAttrib1fvNV','glVertexAttrib1sNV','glVertexAttrib1svNV','glVertexAttrib2dNV','glVertexAttrib2dvNV','glVertexAttrib2fNV','glVertexAttrib2fvNV','glVertexAttrib2sNV','glVertexAttrib2svNV','glVertexAttrib3dNV','glVertexAttrib3dvNV','glVertexAttrib3fNV','glVertexAttrib3fvNV','glVertexAttrib3sNV','glVertexAttrib3svNV','glVertexAttrib4dNV','glVertexAttrib4dvNV','glVertexAttrib4fNV','glVertexAttrib4fvNV','glVertexAttrib4sNV','glVertexAttrib4svNV','glVertexAttrib4ubNV','glVertexAttrib4ubvNV','glVertexAttribPointerNV','glVertexAttribs1dvNV','glVertexAttribs1fvNV','glVertexAttribs1svNV','glVertexAttribs2dvNV','glVertexAttribs2fvNV','glVertexAttribs2svNV','glVertexAttribs3dvNV','glVertexAttribs3fvNV','glVertexAttribs3svNV','glVertexAttribs4dvNV','glVertexAttribs4fvNV','glVertexAttribs4svNV','glVertexAttribs4ubvNV']
 gl.add(GL_NV_vertex_program)
 
 GL_NV_vertex_program1_1 = Extension('GL_NV_vertex_program1_1')
@@ -46906,7 +47003,7 @@ gl.add(GL_NV_vertex_program4)
 GL_NV_video_capture = Extension('GL_NV_video_capture')
 GL_NV_video_capture.url = 'http://www.opengl.org/registry/specs/NV/video_capture.txt'
 GL_NV_video_capture.enumerants = ['GL_FAILURE_NV','GL_FIELD_LOWER_NV','GL_FIELD_UPPER_NV','GL_LAST_VIDEO_CAPTURE_STATUS_NV','GL_NEXT_VIDEO_CAPTURE_BUFFER_STATUS_NV','GL_NUM_VIDEO_CAPTURE_STREAMS_NV','GL_PARTIAL_SUCCESS_NV','GL_SUCCESS_NV','GL_VIDEO_BUFFER_BINDING_NV','GL_VIDEO_BUFFER_INTERNAL_FORMAT_NV','GL_VIDEO_BUFFER_NV','GL_VIDEO_BUFFER_PITCH_NV','GL_VIDEO_CAPTURE_FIELD_LOWER_HEIGHT_NV','GL_VIDEO_CAPTURE_FIELD_UPPER_HEIGHT_NV','GL_VIDEO_CAPTURE_FRAME_HEIGHT_NV','GL_VIDEO_CAPTURE_FRAME_WIDTH_NV','GL_VIDEO_CAPTURE_SURFACE_ORIGIN_NV','GL_VIDEO_CAPTURE_TO_422_SUPPORTED_NV','GL_VIDEO_COLOR_CONVERSION_MATRIX_NV','GL_VIDEO_COLOR_CONVERSION_MAX_NV','GL_VIDEO_COLOR_CONVERSION_MIN_NV','GL_VIDEO_COLOR_CONVERSION_OFFSET_NV','GL_YCBAYCR8A_4224_NV','GL_YCBYCR8_422_NV','GL_Z4Y12Z4CB12Z4A12Z4Y12Z4CR12Z4A12_4224_NV','GL_Z4Y12Z4CB12Z4CR12_444_NV','GL_Z4Y12Z4CB12Z4Y12Z4CR12_422_NV','GL_Z6Y10Z6CB10Z6A10Z6Y10Z6CR10Z6A10_4224_NV','GL_Z6Y10Z6CB10Z6Y10Z6CR10_422_NV']
-GL_NV_video_capture.functions = ['glVideoCaptureNV','glBeginVideoCaptureNV','glBindVideoCaptureStreamBufferNV','glBindVideoCaptureStreamTextureNV','glEndVideoCaptureNV','glGetVideoCaptureStreamdvNV','glGetVideoCaptureStreamfvNV','glGetVideoCaptureStreamivNV','glGetVideoCaptureivNV','glVideoCaptureStreamParameterdvNV','glVideoCaptureStreamParameterfvNV','glVideoCaptureStreamParameterivNV']
+GL_NV_video_capture.functions = ['glBeginVideoCaptureNV','glBindVideoCaptureStreamBufferNV','glBindVideoCaptureStreamTextureNV','glEndVideoCaptureNV','glGetVideoCaptureStreamdvNV','glGetVideoCaptureStreamfvNV','glGetVideoCaptureStreamivNV','glGetVideoCaptureivNV','glVideoCaptureNV','glVideoCaptureStreamParameterdvNV','glVideoCaptureStreamParameterfvNV','glVideoCaptureStreamParameterivNV']
 gl.add(GL_NV_video_capture)
 
 GL_OES_EGL_image_external = Extension('GL_OES_EGL_image_external')
@@ -46997,7 +47094,7 @@ gl.add(GL_REGAL_enable)
 
 GL_REGAL_error_string = Extension('GL_REGAL_error_string')
 GL_REGAL_error_string.url = 'https://github.com/p3/regal/blob/master/doc/extensions/GL_REGAL_error_string.txt'
-GL_REGAL_error_string.functions = ['GLchar*']
+GL_REGAL_error_string.functions = ['glErrorStringREGAL']
 gl.add(GL_REGAL_error_string)
 
 GL_REGAL_extension_query = Extension('GL_REGAL_extension_query')
@@ -47093,7 +47190,7 @@ gl.add(GL_SGIS_texture_select)
 GL_SGIX_async = Extension('GL_SGIX_async')
 GL_SGIX_async.url = 'http://www.opengl.org/registry/specs/SGIX/async.txt'
 GL_SGIX_async.enumerants = ['GL_ASYNC_MARKER_SGIX']
-GL_SGIX_async.functions = ['glIsAsyncMarkerSGIX','glFinishAsyncSGIX','glPollAsyncSGIX','glGenAsyncMarkersSGIX','glAsyncMarkerSGIX','glDeleteAsyncMarkersSGIX']
+GL_SGIX_async.functions = ['glAsyncMarkerSGIX','glDeleteAsyncMarkersSGIX','glFinishAsyncSGIX','glGenAsyncMarkersSGIX','glIsAsyncMarkerSGIX','glPollAsyncSGIX']
 gl.add(GL_SGIX_async)
 
 GL_SGIX_async_histogram = Extension('GL_SGIX_async_histogram')
@@ -47141,10 +47238,10 @@ GL_SGIX_fog_texture.enumerants = ['GL_FOG_PATCHY_FACTOR_SGIX','GL_FRAGMENT_FOG_S
 GL_SGIX_fog_texture.functions = ['glTextureFogSGIX']
 gl.add(GL_SGIX_fog_texture)
 
-GL_SGIX_fragment_specular_lighting = Extension('GL_SGIX_fragment_specular_lighting')
-GL_SGIX_fragment_specular_lighting.url = 'http://www.opengl.org/registry/specs/SGIX/fragment_specular_lighting.txt'
-GL_SGIX_fragment_specular_lighting.functions = ['glFragmentColorMaterialSGIX','glFragmentLightModelfSGIX','glFragmentLightModelfvSGIX','glFragmentLightModeliSGIX','glFragmentLightModelivSGIX','glFragmentLightfSGIX','glFragmentLightfvSGIX','glFragmentLightiSGIX','glFragmentLightivSGIX','glFragmentMaterialfSGIX','glFragmentMaterialfvSGIX','glFragmentMaterialiSGIX','glFragmentMaterialivSGIX','glGetFragmentLightfvSGIX','glGetFragmentLightivSGIX','glGetFragmentMaterialfvSGIX','glGetFragmentMaterialivSGIX']
-gl.add(GL_SGIX_fragment_specular_lighting)
+GL_SGIX_fragment_lighting = Extension('GL_SGIX_fragment_lighting')
+GL_SGIX_fragment_lighting.url = 'http://www.opengl.org/registry/specs/SGIX/fragment_specular_lighting.txt'
+GL_SGIX_fragment_lighting.functions = ['glFragmentColorMaterialSGIX','glFragmentLightModelfSGIX','glFragmentLightModelfvSGIX','glFragmentLightModeliSGIX','glFragmentLightModelivSGIX','glFragmentLightfSGIX','glFragmentLightfvSGIX','glFragmentLightiSGIX','glFragmentLightivSGIX','glFragmentMaterialfSGIX','glFragmentMaterialfvSGIX','glFragmentMaterialiSGIX','glFragmentMaterialivSGIX','glGetFragmentLightfvSGIX','glGetFragmentLightivSGIX','glGetFragmentMaterialfvSGIX','glGetFragmentMaterialivSGIX']
+gl.add(GL_SGIX_fragment_lighting)
 
 GL_SGIX_framezoom = Extension('GL_SGIX_framezoom')
 GL_SGIX_framezoom.url = 'http://www.opengl.org/registry/specs/SGIX/framezoom.txt'
@@ -47184,7 +47281,7 @@ GL_SGIX_resample.enumerants = ['GL_PACK_RESAMPLE_SGIX','GL_RESAMPLE_DECIMATE_SGI
 gl.add(GL_SGIX_resample)
 
 GL_SGIX_shadow = Extension('GL_SGIX_shadow')
-GL_SGIX_shadow.url = 'http://oss.sgi.com/projects/ogl-sample/registry/SGIX/shadow.txt'
+GL_SGIX_shadow.url = 'http://www.opengl.org/registry/specs/SGIX/shadow.txt'
 GL_SGIX_shadow.enumerants = ['GL_TEXTURE_COMPARE_OPERATOR_SGIX','GL_TEXTURE_COMPARE_SGIX','GL_TEXTURE_GEQUAL_R_SGIX','GL_TEXTURE_LEQUAL_R_SGIX']
 gl.add(GL_SGIX_shadow)
 
@@ -47243,6 +47340,7 @@ gl.add(GL_SGIX_vertex_preclip_hint)
 
 GL_SGIX_ycrcb = Extension('GL_SGIX_ycrcb')
 GL_SGIX_ycrcb.url = 'http://www.opengl.org/registry/specs/SGIX/ycrcb.txt'
+GL_SGIX_ycrcb.enumerants = ['GL_YCRCB_422_SGIX','GL_YCRCB_444_SGIX']
 gl.add(GL_SGIX_ycrcb)
 
 GL_SGI_color_matrix = Extension('GL_SGI_color_matrix')
@@ -47281,6 +47379,7 @@ gl.add(GL_SUN_global_alpha)
 GL_SUN_mesh_array = Extension('GL_SUN_mesh_array')
 GL_SUN_mesh_array.url = 'http://www.opengl.org/registry/specs/SUN/mesh_array.txt'
 GL_SUN_mesh_array.enumerants = ['GL_QUAD_MESH_SUN','GL_TRIANGLE_MESH_SUN']
+GL_SUN_mesh_array.functions = ['glDrawMeshArraysSUN']
 gl.add(GL_SUN_mesh_array)
 
 GL_SUN_read_video_pixels = Extension('GL_SUN_read_video_pixels')
