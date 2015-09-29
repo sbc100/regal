@@ -24,6 +24,12 @@ ifneq ($(filter emscripten%,$(SYSTEM)),)
 REGAL.SHARED :=
 endif
 
+ifneq ($(filter nacl%,$(SYSTEM)),)
+ifeq ($(TOOLCHAIN),newlib)
+REGAL.SHARED :=
+endif
+endif
+
 ifdef REGAL.STATIC
 
 include Makefile.apitrace
@@ -199,12 +205,10 @@ REGAL.SDEPS          := $(LIBS.SOBJS:.o=.d)
 REGAL.LIBS           += $(LDFLAGS.X11)
 
 ifneq ($(filter nacl% linux%,$(SYSTEM)),)
-ifeq ($(NACL_LIBC),newlib)
-REGAL.SHARED     :=
-else
-REGAL.SONAME     := lib$(NAME).so.$(SO_MAJOR)
-REGAL.DEVLNK     := lib$(NAME).so
-REGAL.SHARED     := lib$(NAME).so.$(SO_VERSION)
+ifneq ($(TOOLCHAIN),newlib)
+REGAL.SONAME     := libxxx$(NAME).so.$(SO_MAJOR)
+REGAL.DEVLNK     := libxxx$(NAME).so
+REGAL.SHARED     := libxxx$(NAME).so.$(SO_VERSION)
 REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
 endif
 endif

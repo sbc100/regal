@@ -24,6 +24,11 @@ ifneq ($(filter emscripten%,$(SYSTEM)),)
 REGALW.SHARED :=
 endif
 
+ifneq ($(filter nacl%,$(SYSTEM)),)
+ifeq ($(TOOLCHAIN),newlib)
+REGALW.SHARED :=
+endif
+endif
 
 ifdef REGALW.SHARED
 

@@ -380,7 +380,8 @@ PPAPI and NaCl
 
 * NACL_SDK_ROOT needs to be set
 
-* NACL_LIBC=newlib is the default, specify glibc or pnacl as alternatives
+* TOOLCHAIN=newlib is the default, specify glibc/pnacl/clang-newlib as
+  alternatives
 
 Questions and Answers
 =====================

@@ -2,7 +2,7 @@ NACL_ARCH := arm
 
 include config/nacl.inc
 
-NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_arm_$(NACL_LIBC)
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_arm_$(TOOLCHAIN)
 
 CC     := $(NACL_TOOLCHAIN)/bin/arm-nacl-gcc
 CXX    := $(NACL_TOOLCHAIN)/bin/arm-nacl-g++

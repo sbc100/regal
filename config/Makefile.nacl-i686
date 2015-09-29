@@ -2,7 +2,7 @@ NACL_ARCH := i686
 
 include config/nacl.inc
 
-NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_x86_$(NACL_LIBC)
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_x86_$(TOOLCHAIN)
 NACL_SEL_LDR   := $(NACL_SDK_ROOT)/tools/sel_ldr_x86_32
 NACL_IRT       := $(NACL_SDK_ROOT)/tools/irt_core_x86_32.nexe
 
