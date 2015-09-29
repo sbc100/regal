@@ -18,9 +18,9 @@ REGALW.SHARED    ?= libRegal.so
 
 REGALW.STATIC :=
 
-# Shared library target not currently supported for NaCL or emscripten
+# Shared library target not currently supported for emscripten
 
-ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifneq ($(filter emscripten%,$(SYSTEM)),)
 REGALW.SHARED :=
 endif
 
@@ -31,7 +31,7 @@ all:: regalw.lib
 
 clean:: regalw.clean
 
-REGALW.LDFLAGS        := -lstdc++ -pthread -lm
+REGALW.LDFLAGS        := -pthread -lm
 REGALW.LIBS           :=
 
 REGALW.SRCS           := $(REGAL.CXX)

@@ -56,7 +56,7 @@
 #endif
 
 #ifndef REGAL_UNUSED
-#if defined(__GNUC__) && !defined(__clang__)
+#if defined(__GNUC__)
 #define REGAL_UNUSED __attribute__((unused))
 #else
 #define REGAL_UNUSED

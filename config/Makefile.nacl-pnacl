@@ -4,12 +4,14 @@ include config/nacl.inc
 
 NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_pnacl
 
-CC     := $(NACL_TOOLCHAIN)/bin/pnacl-clang
-CXX    := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
-LD     := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
-AR     := $(NACL_TOOLCHAIN)/bin/pnacl-ar
-RANLIB :=
-STRIP  ?=
+CC        := $(NACL_TOOLCHAIN)/bin/pnacl-clang
+CXX       := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
+LD        := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
+AR        := $(NACL_TOOLCHAIN)/bin/pnacl-ar
+FINALIZE  := $(NACL_TOOLCHAIN)/bin/pnacl-finalize
+TRANSLATE := $(NACL_TOOLCHAIN)/bin/pnacl-translate
+RANLIB    := $(NACL_TOOLCHAIN)/bin/pnacl-ranlib
+STRIP     ?=
 
 BIN_EXTENSION = .pexe
 EXT.DYNAMIC = so
