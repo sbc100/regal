@@ -206,9 +206,9 @@ REGAL.LIBS           += $(LDFLAGS.X11)
 
 ifneq ($(filter nacl% linux%,$(SYSTEM)),)
 ifneq ($(TOOLCHAIN),newlib)
-REGAL.SONAME     := libxxx$(NAME).so.$(SO_MAJOR)
-REGAL.DEVLNK     := libxxx$(NAME).so
-REGAL.SHARED     := libxxx$(NAME).so.$(SO_VERSION)
+REGAL.SONAME     := lib$(NAME).so.$(SO_MAJOR)
+REGAL.DEVLNK     := lib$(NAME).so
+REGAL.SHARED     := lib$(NAME).so.$(SO_VERSION)
 REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
 endif
 endif

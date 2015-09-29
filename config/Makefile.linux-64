@@ -1,7 +1,7 @@
 NAME = $(REGAL_NAME)
 CC = cc
 CXX = c++
-LD = cc
+LD = c++
 RANLIB :=
 EXT.DYNAMIC = so
 PICFLAG = -fPIC
