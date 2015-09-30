@@ -1,29 +1,26 @@
 NACL_ARCH := pnacl
+TOOLCHAIN := pnacl
 
 include config/nacl.inc
 
 NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_pnacl
 
-CC     := $(NACL_TOOLCHAIN)/bin/pnacl-clang
-CXX    := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
-LD     := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
-AR     := $(NACL_TOOLCHAIN)/bin/pnacl-ar
-RANLIB :=
-STRIP  ?=
+CC        := $(NACL_TOOLCHAIN)/bin/pnacl-clang
+CXX       := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
+LD        := $(NACL_TOOLCHAIN)/bin/pnacl-clang++
+AR        := $(NACL_TOOLCHAIN)/bin/pnacl-ar
+FINALIZE  := $(NACL_TOOLCHAIN)/bin/pnacl-finalize
+TRANSLATE := $(NACL_TOOLCHAIN)/bin/pnacl-translate
+RANLIB    := $(NACL_TOOLCHAIN)/bin/pnacl-ranlib
+STRIP     ?=
 
 BIN_EXTENSION = .pexe
-EXT.DYNAMIC = so
 LIBDIR =
-CFLAGS.EXTRA +=
+CFLAGS.EXTRA += -Wno-tautological-undefined-compare -Wno-unused-function
 LDFLAGS.EXTRA +=
 LDFLAGS.GL =
 LDFLAGS.GLU = -lRegalGLU
 LDFLAGS.GLUT = -lRegalGLUT
 LDFLAGS.STATIC =
-LDFLAGS.DYNAMIC = -shared
 BIN.SUFFIX =
-LIB.SONAME = lib$(NAME).so.$(SO_MAJOR)
-LIB.DEVLNK = lib$(NAME).so
-LIB.SHARED = lib$(NAME).so.$(SO_VERSION)
 LIB.STATIC = lib$(NAME).a
-LDFLAGS.SO = $(LDFLAGS.DYNAMIC) -Wl,-soname=$(LIB.SONAME)

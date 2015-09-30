@@ -2,27 +2,36 @@ NACL_ARCH := arm
 
 include config/nacl.inc
 
-NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_arm_$(NACL_LIBC)
-
+ifeq ($(TOOLCHAIN),clang-newlib)
+CC     := $(NACL_TOOLCHAIN)/bin/arm-nacl-clang
+CXX    := $(NACL_TOOLCHAIN)/bin/arm-nacl-clang++
+LD     := $(NACL_TOOLCHAIN)/bin/arm-nacl-clang++
+AR     := $(NACL_TOOLCHAIN)/bin/arm-nacl-ar
+OBJDUMP:= $(NACL_TOOLCHAIN)/bin/arm-nacl-objdump
+else
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/$(NACL_OS)_arm_$(TOOLCHAIN)
 CC     := $(NACL_TOOLCHAIN)/bin/arm-nacl-gcc
 CXX    := $(NACL_TOOLCHAIN)/bin/arm-nacl-g++
 LD     := $(NACL_TOOLCHAIN)/bin/arm-nacl-g++
 AR     := $(NACL_TOOLCHAIN)/bin/arm-nacl-ar
 OBJDUMP:= $(NACL_TOOLCHAIN)/bin/arm-nacl-objdump
+endif
 RANLIB :=
 STRIP  ?=
 
-#WARN += -Wno-unused-but-set-variable -Wno-maybe-uninitialized
 BIN_EXTENSION = _arm.nexe
 EXT.DYNAMIC = so
 LIBDIR =
+CFLAGS.EXTRA += -Wno-sizeof-pointer-memaccess
 LDFLAGS.GL =
 LDFLAGS.GLU = -lRegalGLU
 LDFLAGS.GLUT = -lRegalGLUT
 LDFLAGS.STATIC =
+LDFLAGS.DYNAMIC = -shared
 CFLAGS.EXTRA += -mfpu=vfp
 BIN.SUFFIX =
 LIB.SONAME = lib$(NAME).so.$(SO_MAJOR)
 LIB.DEVLNK = lib$(NAME).so
 LIB.SHARED = lib$(NAME).so.$(SO_VERSION)
 LIB.STATIC = lib$(NAME).a
+LDFLAGS.SO = $(LDFLAGS.DYNAMIC) -Wl,-soname=$(LIB.SONAME)

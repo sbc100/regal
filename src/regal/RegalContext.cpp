@@ -698,7 +698,7 @@ void RegalContext::parkContext( DispatchTableGlobal & tbl )
   //<> # error "Implement me!"
   #endif
 #if REGAL_SYS_PPAPI
-  Init::makeCurrent(NULL,NULL);
+  Init::makeCurrent(0,NULL);
 #else
   Init::makeCurrent(NULL);
 #endif

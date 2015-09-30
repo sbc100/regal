@@ -36,7 +36,6 @@ GLU.OBJS       := $(GLU.OBJS:.c=.o) $(GLU.OBJS:.cc=.o)
 GLU.OBJS       := $(filter %.o,$(GLU.OBJS))
 GLU.DEPS       := $(GLU.OBJS:.o=.d)
 GLU.LIBS       := -Llib/$(SYSTEM) -lRegal
-GLU.LIBS       += -lstdc++
 GLU.LIBS       += -pthread -lm
 
 -include $(GLU.DEPS)

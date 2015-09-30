@@ -153,5 +153,5 @@ ifeq ($(PROFILE_OS),Windows)
 REGAL.INCLUDE   += -Isrc/glsl/include/c99
 endif
 
-REGAL.STATIC    ?= libRegallib.a
+REGAL.STATIC    ?= libRegal.a
 REGAL.SHARED    ?= libRegal.so

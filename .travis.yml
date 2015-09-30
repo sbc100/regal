@@ -21,10 +21,14 @@ install:
 
 env:
  - SYSTEM=linux
- - SYSTEM=nacl-i686
+ - SYSTEM=nacl-x86_64 TOOLCHAIN=clang-newlib
+ - SYSTEM=nacl-x86_64 TOOLCHAIN=glibc
  - SYSTEM=nacl-x86_64
+ - SYSTEM=nacl-i686
  - SYSTEM=nacl-arm
+ - SYSTEM=nacl-pnacl
  - MODE=debug SYSTEM=linux
- - MODE=debug SYSTEM=nacl-i686
  - MODE=debug SYSTEM=nacl-x86_64
+ - MODE=debug SYSTEM=nacl-i686
  - MODE=debug SYSTEM=nacl-arm
+ - MODE=debug SYSTEM=nacl-pnacl

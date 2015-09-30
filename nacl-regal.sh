@@ -10,22 +10,24 @@
 #   - Pepper 25 is needed for the ARM build.
 #   - Makefile needs to be specified for branches that have GNUmakefiles
 #   - MODE=debug for debug-mode build
-#   - NACL_LIBC=glibc on the command-line for glibc rather than newlib
+#   - TOOLCHAIN=glibc or clang-newlib to use and alternative to the default
+#     newlib toolchain.
 #   - CCACHE=ccache is supported (and recommended)
 
 set -e
 
 echo "Building x86_64"
 make -f Makefile SYSTEM=nacl-x86_64 $*
+make -f Makefile SYSTEM=nacl-x86_64 $* test
 
 echo "Building i686"
 make -f Makefile SYSTEM=nacl-i686 $*
+make -f Makefile SYSTEM=nacl-i686 $* test
 
-if [ "$NACL_LIBC" != "glibc" ]; then
-    # No glibc support as yet on ARM
-    echo "Building ARM"
-    make -f Makefile SYSTEM=nacl-arm $*
-fi
+echo "Building ARM"
+make -f Makefile SYSTEM=nacl-arm $*
+make -f Makefile SYSTEM=nacl-arm $* test
 
 echo "Building pnacl"
 make -f Makefile SYSTEM=nacl-pnacl $*
+make -f Makefile SYSTEM=nacl-pnacl $* test

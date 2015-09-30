@@ -12,18 +12,23 @@ include build/regal.inc
 #
 
 REGALW.STATIC    ?= libRegalW.a
-REGALW.SHARED    ?= libRegal.so
+REGALW.SHARED    ?= libRegalW.so
 
 # Static library target not yet supported
 
 REGALW.STATIC :=
 
-# Shared library target not currently supported for NaCL or emscripten
+# Shared library target not currently supported for emscripten
 
-ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifneq ($(filter emscripten%,$(SYSTEM)),)
 REGALW.SHARED :=
 endif
 
+ifneq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter pnacl% newlib% clang-newlib%,$(TOOLCHAIN)),)
+REGALW.SHARED :=
+endif
+endif
 
 ifdef REGALW.SHARED
 
@@ -31,7 +36,7 @@ all:: regalw.lib
 
 clean:: regalw.clean
 
-REGALW.LDFLAGS        := -lstdc++ -pthread -lm
+REGALW.LDFLAGS        := -pthread -lm
 REGALW.LIBS           :=
 
 REGALW.SRCS           := $(REGAL.CXX)
@@ -78,7 +83,7 @@ REGALW.SDEPS          := $(LIBS.SOBJS:.o=.d)
 
 REGALW.LIBS           += $(LDFLAGS.X11)
 
-ifneq ($(filter linux%,$(SYSTEM)),)
+ifneq ($(filter linux% nacl%,$(SYSTEM)),)
 REGALW.SONAME     := libRegalW.so.$(SO_MAJOR)
 REGALW.DEVLNK     := libRegalW.so
 REGALW.SHARED     := libRegalW.so.$(SO_VERSION)

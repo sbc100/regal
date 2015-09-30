@@ -233,7 +233,7 @@ namespace Shader {
     bool	status;
   };
 
-  static inline void debug_print_ir (const char* name, exec_list* ir, _mesa_glsl_parse_state* state, void* memctx)
+  static inline void REGAL_UNUSED debug_print_ir (const char* name, exec_list* ir, _mesa_glsl_parse_state* state, void* memctx)
   {
     //_mesa_print_ir (ir, state);
     Error( "GLSLOptimize debug **** ", name, ":",

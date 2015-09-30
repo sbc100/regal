@@ -38,8 +38,8 @@ NACL.OBJS       := $(addprefix tmp/$(SYSTEM)/nacl/static/,$(NACL.SRCS.NAMES))
 NACL.OBJS       := $(NACL.OBJS:.c=.o)
 NACL.CFLAGS     := -Iinclude
 NACL.CFLAGS     += -DREGAL_NAMESPACE=1
-NACL.LIBS       += -Llib/$(SYSTEM) -lRegallib -lglslopt -lpnglib -lzlib
-NACL.LIBS       += -lm -pthread -lppapi -lppapi_gles2 -lstdc++
+NACL.LIBS       += -Llib/$(SYSTEM) -lRegal -lglslopt -lpnglib -lzlib
+NACL.LIBS       += -lm -pthread -lppapi -lppapi_gles2
 
 -include $(NACL.DEPS)
 

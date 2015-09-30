@@ -18,10 +18,16 @@ include build/regal.inc
 export:
 	python scripts/Export.py --api gl 4.5 --api wgl 4.5 --api glx 4.5 --api cgl 1.4 --api egl 1.0 --outdir .
 
-# Shared library target not currently supported for NaCL or emscripten
+# Shared library target not currently supported for emscripten
 
-ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifneq ($(filter emscripten%,$(SYSTEM)),)
 REGAL.SHARED :=
+endif
+
+ifneq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter pnacl% newlib% clang-newlib%,$(TOOLCHAIN)),)
+REGAL.SHARED :=
+endif
 endif
 
 ifdef REGAL.STATIC
@@ -37,13 +43,7 @@ clean:: regal.clean
 
 framework:: regal.framework
 
-REGAL.LDFLAGS        := 
-
-ifeq ($(filter nacl%,$(SYSTEM)),)
-REGAL.LDFLAGS        += -lstdc++
-endif
-
-REGAL.LDFLAGS        += -pthread -lm
+REGAL.LDFLAGS        := -pthread -lm
 REGAL.LIBS           :=
 
 ifeq ($(filter nacl%,$(SYSTEM)),)
@@ -204,11 +204,13 @@ REGAL.SDEPS          := $(LIBS.SOBJS:.o=.d)
 
 REGAL.LIBS           += $(LDFLAGS.X11)
 
-ifneq ($(filter linux%,$(SYSTEM)),)
+ifneq ($(filter nacl% linux%,$(SYSTEM)),)
+ifeq ($(filter newlib% pnacl% clang-newlib%,$(TOOLCHAIN)),)
 REGAL.SONAME     := lib$(NAME).so.$(SO_MAJOR)
 REGAL.DEVLNK     := lib$(NAME).so
 REGAL.SHARED     := lib$(NAME).so.$(SO_VERSION)
 REGAL.LDFLAGS.SO := $(LDFLAGS.SO) $(LDFLAGS.DYNAMIC) -Wl,-soname=$(REGAL.SONAME)
+endif
 endif
 
 ifneq ($(filter darwin%,$(SYSTEM)),)
@@ -262,12 +264,6 @@ endif
 
 ifdef APITRACE.STATIC
 lib/$(SYSTEM)/$(REGAL.STATIC): lib/$(SYSTEM)/$(APITRACE.STATIC) lib/$(SYSTEM)/$(SNAPPY.STATIC)
-endif
-
-ifneq ($(filter nacl%,$(SYSTEM)),)
-ifeq ($(NACL_LIBC),glibc)
-regal.lib: lib/$(SYSTEM)/$(REGAL.SHARED)
-endif
 endif
 
 lib/$(SYSTEM)/$(REGAL.STATIC): lib/$(SYSTEM)/$(GLSLOPT.STATIC) lib/$(SYSTEM)/$(PCRE.STATIC) lib/$(SYSTEM)/$(LIBPNG.STATIC) lib/$(SYSTEM)/$(ZLIB.STATIC) $(REGAL.OBJS)

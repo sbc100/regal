@@ -6,14 +6,18 @@ endif
 
 #
 # Specify on the command-line:
-#    NACL_LIBC=newlib
-# or NACL_LIBC=glibc
+#    TOOLCHAIN=newlib
+# or TOOLCHAIN=glibc
 #
 
-NACL_LIBC ?= newlib
+TOOLCHAIN ?= newlib
 
-ifeq ($(NACL_LIBC),glibc)
+ifeq ($(TOOLCHAIN),glibc)
 PICFLAG = -fPIC
+endif
+
+ifeq ($(TOOLCHAIN),clang-newlib)
+NACL_TOOLCHAIN := $(NACL_SDK_ROOT)/toolchain/linux_pnacl
 endif
 
 #
@@ -40,18 +44,18 @@ endif
 # -rwxr-xr-x  2 user  user  384 Oct  1 09:21 pepper_25/toolchain/mac_x86_glibc/bin/i686-nacl-g++
 # -rwxr-xr-x  2 user  user  384 Oct  1 09:21 pepper_25/toolchain/mac_x86_newlib/bin/i686-nacl-g++
 #
-# We catenate the SYSTEM variable, NACL_LIBC and NACL_SDK_ROOT for keeping
+# We catenate the SYSTEM variable, TOOLCHAIN and NACL_SDK_ROOT for keeping
 # the glibc and newlib outputs separate, and per-sdk-version separate.
 
-export CCACHE_COMPILERCHECK=echo $(SYSTEM)$(NACL_LIBC)$(NACL_SDK_ROOT)
+export CCACHE_COMPILERCHECK=echo $(SYSTEM)$(TOOLCHAIN)$(NACL_SDK_ROOT)
 
 ifeq ($(NACL_ARCH),i686)
-NACL_LIBTYPE=$(NACL_LIBC)_x86_32
+NACL_LIBTYPE=$(TOOLCHAIN)_x86_32
 else
 ifeq ($(NACL_ARCH),pnacl)
 NACL_LIBTYPE=$(NACL_ARCH)
 else
-NACL_LIBTYPE=$(NACL_LIBC)_$(NACL_ARCH)
+NACL_LIBTYPE=$(TOOLCHAIN)_$(NACL_ARCH)
 endif
 endif
 
@@ -68,6 +72,6 @@ NMF_FLAGS += -L$(NACL_SDK_ROOT)/lib/$(NACL_LIBTYPE)/Release
 
 CFLAGS.EXTRA += -I$(NACL_SDK_ROOT)/include -MMD
 WARN = -Wall -Wno-unused-parameter -Wno-char-subscripts -Wno-strict-aliasing
-# WARN += -Werror
+#WARN += -Werror
 CFLAGS.DEBUG = -g
 CFLAGS.RELEASE = -O2
